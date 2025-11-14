@@ -1,0 +1,74 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Trashes
+.VolumeIcon.icns
+
+# Swift / Xcode
+/.build
+/Packages
+/*.xcodeproj
+xcuserdata/
+DerivedData/
+.swiftpm/config/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
+*.xcworkspace
+!*.xcworkspace/contents.xcworkspacedata
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+timeline.xctimeline
+playground.xcworkspace
+
+# Build artifacts
+build/
+dist/
+*.app
+*.dmg
+*.pkg
+*.dSYM.zip
+*.dSYM
+
+# ICP Backend (local development)
+icp-backend/.dfx/
+icp-backend/node_modules/
+icp-backend/.ic-assets.json
+icp-backend/*.log
+
+# Logs
+*.log
+/tmp/
+*.tmp
+nohup.out
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+venv/
+ENV/
+.venv
+
+# Environment & Secrets
+.env
+.env.local
+*.pem
+*.key
+*.cert
+
+# Temporary files
+*.swp
+*.swo
+*~
+.tmp/
+
+# Editor configs
+.vscode/
+.idea/
+
+*.dylib

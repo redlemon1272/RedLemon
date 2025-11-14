@@ -1,0 +1,120 @@
+# RedLemon
+
+A native macOS media streaming app with watch party features.
+
+**Current Version:** v1.0.8 (build 8)
+**Status:** ✅ Production Ready
+
+## 🚀 For AI Assistants & Developers
+
+**START HERE:** Read **[INDEX.md](INDEX.md)** for complete documentation navigation.
+
+**Quick Links:**
+- **[HANDOFF.md](HANDOFF.md)** - Current project status (v1.0.8)
+- **[docs/ICP_MAINNET_GUIDE.md](docs/ICP_MAINNET_GUIDE.md)** - Watch party backend guide
+- **[ROADMAP.md](ROADMAP.md)** - Product roadmap
+
+## ✨ Features
+
+- 🎬 Browse and search movies/TV shows
+- 📺 Season and episode selection
+- 💬 Automatic subtitle fetching and syncing
+- ⚡ High-performance MPV player with hardware acceleration
+- 🔗 Real-Debrid integration for premium streaming
+- 👥 **Watch Parties** - Synchronized viewing with friends (Supabase-powered)
+- 🔐 **Username System** - Persistent usernames in database
+- 🔄 **Auto-Updates** - Sparkle framework with GitHub releases
+- 🎯 **4-Character Room Codes** - Easy sharing (e.g., "K7M2")
+- 👤 **MySpace Tom Feature** - Every user gets `lemontom` as first friend
+
+## Project Structure
+
+```
+RedLemon-Native/
+├── Sources/
+│   ├── App/                    # Main app and state management
+│   ├── Features/
+│   │   ├── Auth/              # Username-based authentication
+│   │   ├── Browse/            # Media browsing
+│   │   ├── Player/            # MPV video player
+│   │   ├── Rooms/             # Watch party rooms
+│   │   ├── Search/            # Media search
+│   │   └── Settings/          # App settings
+│   ├── Models/                # Data models
+│   ├── Networking/            # API clients (Supabase)
+│   └── Server/                # Backend Vapor server
+└── Frameworks/                # libmpv and Sparkle.framework
+```
+
+## Quick Start
+
+### 1. Download & Install
+Download the latest DMG from [GitHub Releases](https://github.com/orangeapple1272/Redlemon/releases):
+- Open `RedLemon-Installer.dmg`
+- Drag RedLemon.app to Applications
+- Launch from Applications folder
+
+**No additional setup required** - ICP proxy auto-starts on launch!
+
+### 2. Build from Source (Developers)
+```bash
+./build-app-debug.sh
+```
+
+This will:
+- Build the Swift app with Sparkle framework
+- Code sign with ad-hoc signature (required for Sparkle)
+- Create RedLemon.app in `build/`
+
+### 3. Configure
+- Go to **Settings**
+- Add your RealDebrid API token
+- Create a username (stored in Supabase database)
+
+## Watch Parties
+
+Watch parties allow synchronized viewing with friends:
+
+1. **Create a room** from any media detail page
+2. **Share** the 4-character room code (e.g., `K7M2`)
+3. **Watch** together - host controls playback for all guests
+
+Each guest uses their own RealDebrid key to unlock the same file, ensuring perfect synchronization.
+
+### MySpace Tom Feature 👤
+Every new user automatically gets `lemontom` as their first friend (inspired by MySpace's Tom Anderson). No friend request needed - instant connection!
+
+## Development
+
+### Requirements
+- macOS 12.0+
+- Swift 5.9+
+- Xcode Command Line Tools
+
+### Architecture
+- **Frontend**: Swift + SwiftUI
+- **Video Player**: libmpv with hardware acceleration
+- **Backend Server**: Vapor (HTTP server for metadata/streaming)
+- **Database**: Supabase PostgreSQL (watch parties, users, friends)
+- **Authentication**: Username-based
+- **Auto-Updates**: Sparkle framework with GitHub releases
+
+## Auto-Updates 🔄
+
+RedLemon uses the industry-standard **Sparkle framework** for auto-updates:
+- **Check:** App checks for updates on launch (24hr interval)
+- **Download:** DMG files hosted on GitHub Releases
+- **Verify:** Code signing validation (ad-hoc for development, Developer ID for production)
+- **Install:** Automatic replacement and relaunch
+
+Appcast feed: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml`
+
+## Documentation
+
+- [Supabase Setup](docs/SUPABASE_SETUP.md) - Database configuration
+- [Migration Notes](MIGRATION_COMPLETE.md) - Swift migration from Node.js
+
+## License
+
+TBD
+

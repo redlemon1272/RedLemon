@@ -1,0 +1,3 @@
+# David wrote this prompt (11/07/2025)
+
+Let's create a Auth.md under docs/ to add Internet Identity to the application. Under Settings, there should be a button to login using Internet Computer's Internet Identity and persist the user's principal. This will be the user that joins the watch party room. Think about the plan and create the file to have steps that can be handed off to an AI agent to follow, use context7

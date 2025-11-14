@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "RedLemon-Native"
+    }
+  ],
+  "settings": {
+    // Override workspace settings for better performance
+    "files.watcherExclude": {
+      "**/.build/**": true,
+      "**/build/**": true,
+      "**/Frameworks/**": true,
+      "**/.git/**": true,
+      "**/icp-backend/.dfx/**": true,
+      "**/icp-backend/node_modules/**": true
+    },
+    "search.exclude": {
+      "**/.build/**": true,
+      "**/build/**": true,
+      "**/Frameworks/**": true,
+      "**/icp-backend/.dfx/**": true,
+      "**/icp-backend/node_modules/**": true
+    },
+    // Memory optimization
+    "workbench.editor.limit.enabled": true,
+    "workbench.editor.limit.value": 5,
+    "workbench.editor.limit.perEditorGroup": true,
+    // Disable auto-save
+    "files.autoSave": "off"
+  },
+  "extensions": {
+    "recommendations": [
+      "sswg.swift-lang"
+    ]
+  }
+}

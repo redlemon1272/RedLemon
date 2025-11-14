@@ -251,27 +251,27 @@ struct SimpleSearchResultItem: View {
                     image
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 50, height: 75)
+                        .frame(width: 80, height: 120)
                 case .failure, .empty:
                     Rectangle()
                         .fill(Color.gray.opacity(0.2))
-                        .frame(width: 50, height: 75)
+                        .frame(width: 80, height: 120)
                 @unknown default:
                     Rectangle()
                         .fill(Color.gray.opacity(0.2))
-                        .frame(width: 50, height: 75)
+                        .frame(width: 80, height: 120)
                 }
             }
-            .frame(width: 50, height: 75)
+            .frame(width: 80, height: 120)
 
             // Simple text - NO complex modifiers
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(item.name)
-                    .font(.system(size: 13))
-                    .lineLimit(1)
+                    .font(.system(size: 16))
+                    .lineLimit(2)
 
                 Text(item.type == "series" ? "TV Show" : "Movie")
-                    .font(.system(size: 11))
+                    .font(.system(size: 13))
                     .foregroundColor(.secondary)
             }
 

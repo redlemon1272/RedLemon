@@ -244,10 +244,25 @@ struct SimpleSearchResultItem: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            // Fixed size rectangle - NO aspectRatio, NO overlay, NO complex modifiers
-            Rectangle()
-                .fill(Color.gray.opacity(0.2))
-                .frame(width: 50, height: 75)
+            // Simple AsyncImage poster - minimal modifiers, fixed size
+            AsyncImage(url: URL(string: item.poster ?? "")) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 75)
+                case .failure, .empty:
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(width: 50, height: 75)
+                @unknown default:
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.2))
+                        .frame(width: 50, height: 75)
+                }
+            }
+            .frame(width: 50, height: 75)
 
             // Simple text - NO complex modifiers
             VStack(alignment: .leading, spacing: 2) {

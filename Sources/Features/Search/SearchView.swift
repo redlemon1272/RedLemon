@@ -127,21 +127,9 @@ struct SearchView: View {
 
         // Check for known problematic queries first
         let normalizedQuery = searchQuery.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        let isProblematic = isKnownProblematicQuery(normalizedQuery)
 
-        if isKnownProblematicQuery(normalizedQuery) {
-            print("🔍 [SMART] Detected problematic query: '\(normalizedQuery)', using intelligent fallback")
-
-            let fallbackResults = createIntelligentFallbackResults(for: searchQuery, queryType: detectQueryType(normalizedQuery))
-
-            DispatchQueue.main.async {
-                appState.searchResults = fallbackResults
-                isSearching = false
-                print("🔍 [SMART] UI updated with intelligent fallback results")
-            }
-            return
-        }
-
-        // Perform API search for normal queries
+        // Perform API search for all queries
         Task {
             do {
                 print("🔍 [SMART] Starting API search for: '\(searchQuery)'")
@@ -151,15 +139,27 @@ struct SearchView: View {
                 let series = try await apiClient.searchMedia(query: searchQuery, type: "series")
 
                 // Combine and limit results
-                let allResults = Array((movies + series).prefix(12))
+                var allResults = Array((movies + series).prefix(12))
 
                 print("🔍 [SMART] API search completed: \(allResults.count) results")
                 print("🔍 [SMART] Movies: \(movies.count), Series: \(series.count)")
 
+                // If this is a problematic query, add intelligent fallback results
+                if isProblematic {
+                    print("🔍 [SMART] Detected problematic query: '\(normalizedQuery)', adding intelligent fallback results")
+
+                    let fallbackResults = createIntelligentFallbackResults(for: searchQuery, queryType: detectQueryType(normalizedQuery))
+
+                    // Combine API results with fallback results, prioritizing fallbacks at the top
+                    allResults = fallbackResults + allResults
+
+                    print("🔍 [SMART] Combined results: \(allResults.count) total (\(fallbackResults.count) fallback + \(movies.count + series.count) API)")
+                }
+
                 await MainActor.run {
                     appState.searchResults = allResults
                     isSearching = false
-                    print("🔍 [SMART] UI updated with real API results")
+                    print("🔍 [SMART] UI updated with combined results")
                 }
 
             } catch {
@@ -239,7 +239,7 @@ struct SearchView: View {
                 id: "got_main",
                 type: "series",
                 name: "Game of Thrones",
-                poster: nil,
+                poster: "https://images.justwatch.com/poster/244511095/s332",
                 background: nil,
                 logo: nil,
                 description: "Nine noble families fight for control over the lands of Westeros, while an ancient enemy returns.",
@@ -253,7 +253,7 @@ struct SearchView: View {
                 id: "got_s1",
                 type: "series",
                 name: "Game of Thrones - Season 1",
-                poster: nil,
+                poster: "https://images.justwatch.com/poster/244511095/s332",
                 background: nil,
                 logo: nil,
                 description: "Season 1 of the epic fantasy series",
@@ -267,7 +267,7 @@ struct SearchView: View {
                 id: "got_house_dragon",
                 type: "series",
                 name: "House of the Dragon",
-                poster: nil,
+                poster: "https://images.justwatch.com/poster/266979907/s332",
                 background: nil,
                 logo: nil,
                 description: "The story of the Targaryen civil war that took place about 200 years before the events of Game of Thrones.",

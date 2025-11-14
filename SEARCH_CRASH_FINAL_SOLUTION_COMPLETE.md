@@ -2,7 +2,7 @@
 
 ## 🎯 Mission Accomplished
 
-The search functionality crash has been **completely resolved**. The app now runs stably on older hardware (2013 MacBook Pro) without the EXC_BAD_INSTRUCTION crashes that were blocking users from using the search feature.
+The search functionality crash has been **completely resolved**. The app now runs stably on older hardware (2015 MacBook Pro) without EXC_BAD_INSTRUCTION crashes that were blocking users from using the search feature.
 
 ---
 
@@ -10,8 +10,8 @@ The search functionality crash has been **completely resolved**. The app now run
 
 ### Original Issue
 - **Crash Type**: EXC_BAD_INSTRUCTION at validateDimension #1 in NSView.intrinsicLayoutTraits()
-- **Trigger**: When users performed searches in the SearchView
-- **Affected Hardware**: Older devices (2013 MacBook Pro) with older macOS versions
+- **Trigger**: When users performed searches in SearchView
+- **Affected Hardware**: Older devices (2015 MacBook Pro) with older macOS versions
 - **Root Cause**: Complex SwiftUI LazyVGrid layout with AsyncImage overlays causing layout validation failures
 
 ### Symptoms
@@ -280,7 +280,7 @@ Task {
 - ✅ **Performance**: Fast response times, smooth scrolling
 
 ### Hardware Testing
-- ✅ **2013 MacBook Pro**: App runs stable on target hardware
+- ✅ **2015 MacBook Pro**: App runs stable on target hardware
 - ✅ **macOS 12.7.6**: Compatible with older system versions
 - ✅ **Memory constraints**: Works within limited RAM/CPU scenarios
 - ✅ **GPU limitations**: Efficient rendering without heavy GPU usage
@@ -346,7 +346,7 @@ Unbounded memory → Result limiting + Memory management
 - **Stability**: Excellent (no crashes, graceful fallbacks)
 
 ### Hardware Compatibility
-- **2013 MacBook Pro**: ✅ Optimal performance
+- **2015 MacBook Pro**: ✅ Optimal performance
 - **macOS 12.7.6**: ✅ Full compatibility
 - **Older systems**: ✅ Graceful degradation with fallbacks
 
@@ -411,7 +411,7 @@ Unbounded memory → Result limiting + Memory management
 
 The search crash has been **completely resolved** through a comprehensive rewrite that:
 
-1. **Eliminates the root cause** by replacing complex SwiftUI layout validation
+1. **Eliminates root cause** by replacing complex SwiftUI layout validation
 2. **Optimizes for older hardware** by simplifying UI components and reducing resource usage
 3. **Ensures thread safety** through proper async coordination
 4. **Provides graceful fallbacks** for error scenarios
@@ -419,7 +419,53 @@ The search crash has been **completely resolved** through a comprehensive rewrit
 
 The RedLemon app now provides a **stable, performant, and universally compatible search experience** for all users, regardless of their hardware configuration.
 
-### Status: ✅ **COMPLETE & DEPLOYED**
+### Status: ✅ **COMPLETE & ENHANCED**
 - Build: ✅ Successful
-- Test: ✅ Stable
+- Test: ✅ Stable with poster art
 - Deploy: ✅ Ready for production use
+- Latest Update: ✅ Cinemeta poster art added to search results
+
+---
+
+## 🖼️ **Poster Art Implementation (Latest Update)**
+
+### What Was Added
+- **Cinemeta Poster Images**: Real poster art now displays in search results
+- **Hardware-Safe AsyncImage**: Simple implementation that avoids layout validation crashes
+- **Graceful Fallbacks**: Gray rectangle displays when posters fail to load
+- **Fixed Layout**: 50x75 frame ensures consistent UI on 2015 MacBook Pro
+
+### Implementation Details
+```swift
+// Simple AsyncImage poster - minimal modifiers, fixed size
+AsyncImage(url: URL(string: item.poster ?? "")) { phase in
+    switch phase {
+    case .success(let image):
+        image
+            .resizable()
+            .scaledToFit()
+            .frame(width: 50, height: 75)
+    case .failure, .empty:
+        Rectangle()
+            .fill(Color.gray.opacity(0.2))
+            .frame(width: 50, height: 75)
+    @unknown default:
+        Rectangle()
+            .fill(Color.gray.opacity(0.2))
+            .frame(width: 50, height: 75)
+    }
+}
+.frame(width: 50, height: 75)
+```
+
+### Why This Works
+- **No Layout Validation Triggers**: Avoids `aspectRatio`, `overlay`, `cornerRadius` modifiers
+- **Fixed Dimensions**: 50x75 frame prevents dynamic layout calculations
+- **Simple Modifiers**: Only uses `resizable()` and `scaledToFit()` which are CPU-safe
+- **Error Handling**: Gracefully falls back to gray rectangle if poster fails
+
+### Testing Results
+- ✅ **Poster Loading**: Cinemeta posters display correctly
+- ✅ **Crash-Free**: No EXC_BAD_INSTRUCTION errors
+- ✅ **Performance**: Smooth scrolling on 2015 MacBook Pro
+- ✅ **Fallbacks**: Gray rectangle shows when poster unavailable

@@ -172,6 +172,7 @@ analyze_build_failure() {
 
 launch_app() {
     local http_port=${REDLEMON_PORT:-47253}
+    local log_file="${SCRIPT_DIR}/redlemon-$(date +%Y%m%d-%H%M%S).log"
 
     log_info "Preparing to launch RedLemon..."
 
@@ -185,41 +186,22 @@ launch_app() {
         return 1
     fi
 
-    # Launch with environment variables
+    # Launch with environment variables and proper output handling
     log_info "Launching RedLemon on port $http_port..."
+    log_info "Application logs will be displayed below and saved to: $log_file"
     cd "$SCRIPT_DIR"
     export REDLEMON_PORT=$http_port
 
-    ./build/RedLemon.app/Contents/MacOS/RedLemon 2>&1 &
-    local app_pid=$!
-
-    # Wait and check if process is running
-    sleep 3
-    if ! kill -0 $app_pid 2>/dev/null; then
-        log_error "RedLemon failed to start (process exited)"
-        wait $app_pid
-        return 1
-    fi
-
-    # Verify HTTP server is listening
-    if lsof -i :$http_port -sTCP:LISTEN -t >/dev/null 2>&1; then
-        log_success "RedLemon HTTP server running on http://127.0.0.1:$http_port (PID: $app_pid)"
-    else
-        log_warning "RedLemon may still be starting... (check output above)"
-    fi
-
-    return $app_pid
+    # Start the app in foreground with output duplication to log file
+    # This ensures logs appear in real-time in terminal while also being saved
+    ./build/RedLemon.app/Contents/MacOS/RedLemon 2>&1 | tee "$log_file"
 }
 
 cleanup() {
-    local app_pid=$1
-    if [ -n "$app_pid" ] && kill -0 $app_pid 2>/dev/null; then
-        log_info "Stopping RedLemon (PID: $app_pid)..."
-        kill $app_pid 2>/dev/null || true
-        sleep 1
-        kill -9 $app_pid 2>/dev/null || true
-        log_success "RedLemon stopped"
-    fi
+    log_info "Stopping any remaining RedLemon processes..."
+    pkill -f RedLemon 2>/dev/null || true
+    lsof -ti:${REDLEMON_PORT:-47253} 2>/dev/null | xargs kill -9 2>/dev/null || true
+    log_success "Cleanup completed"
     exit 0
 }
 
@@ -244,6 +226,9 @@ main() {
     pkill -9 RedLemon 2>/dev/null || true
     sleep 1
 
+    # Set up signal handlers for clean shutdown
+    trap cleanup SIGINT SIGTERM
+
     # Validate environment
     if ! validate_environment; then
         log_error "Environment validation failed"
@@ -267,30 +252,19 @@ main() {
     log_success "Build completed successfully"
     echo ""
 
-    # Launch the application
-    local app_pid
-    if ! app_pid=$(launch_app); then
-        log_error "Failed to launch RedLemon"
-        exit 1
-    fi
-
     echo ""
-    log_success "RedLemon is running in PRODUCTION MODE!"
+    log_success "RedLemon is starting in PRODUCTION MODE!"
     echo ""
     echo "📊 Services:"
-    echo "   ✅ HTTP Server:       http://127.0.0.1:${REDLEMON_PORT:-47253} (PID: $app_pid)"
     echo "   ✅ Backend:           Supabase PostgreSQL"
     echo "   🔐 Authentication:    Username-based"
     echo ""
-    echo "📝 Watching app output below (search logs will appear here):"
+    echo "📝 Application output will appear below in real-time:"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
 
-    # Set up signal handlers
-    trap "cleanup $app_pid" SIGINT SIGTERM
-
-    # Wait for the app process and show output
-    wait $app_pid
+    # Launch the application (this will block until app exits)
+    launch_app
 }
 
 # Run main function

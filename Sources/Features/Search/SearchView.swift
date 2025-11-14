@@ -7,22 +7,17 @@ struct SearchView: View {
     @State private var searchQuery = ""
     @State private var isSearching = false
 
-    let columns = [
-        GridItem(.adaptive(minimum: 150), spacing: 20)
-    ]
-
     var body: some View {
         VStack(spacing: 0) {
-            // Large search bar
-            VStack(spacing: 16) {
-                HStack(spacing: 12) {
+            // SIMPLIFIED search bar - NO complex layouts
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
                     Image(systemName: "magnifyingglass")
-                        .font(.system(size: 24))
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 18))
 
-                    TextField("Search for movies or shows...", text: $searchQuery)
+                    TextField("Search...", text: $searchQuery)
                         .textFieldStyle(.plain)
-                        .font(.system(size: 20))
+                        .font(.system(size: 16))
                         .onSubmit {
                             performSearchSync()
                         }
@@ -33,141 +28,76 @@ struct SearchView: View {
                             appState.searchResults = []
                         }) {
                             Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 20))
-                                .foregroundColor(.secondary)
+                                .font(.system(size: 16))
                         }
                         .buttonStyle(.plain)
                     }
 
-                    if isSearching {
-                        ProgressView()
-                            .scaleEffect(0.9)
-                    } else {
-                        Button(action: {
-                            performSearchSync()
-                        }) {
-                            Text("Search")
-                                .font(.system(size: 16, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 20)
-                                .padding(.vertical, 10)
-                                .background(Color.accentColor)
-                                .cornerRadius(8)
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(searchQuery.isEmpty)
-                        .opacity(searchQuery.isEmpty ? 0.5 : 1.0)
+                    Button(action: {
+                        performSearchSync()
+                    }) {
+                        Text("Go")
+                            .font(.system(size: 14))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Color.blue)
+                            .foregroundColor(.white)
                     }
+                    .buttonStyle(.plain)
+                    .disabled(searchQuery.isEmpty || isSearching)
                 }
-                .padding(20)
+                .padding(12)
                 .background(Color(NSColor.controlBackgroundColor))
-                .cornerRadius(12)
             }
-            .padding(20)
-            .background(Color(NSColor.windowBackgroundColor))
+            .padding(12)
 
             Divider()
 
-            // Results area
+            // SIMPLIFIED results area
             if isSearching {
-                VStack(spacing: 20) {
+                VStack(spacing: 12) {
                     ProgressView()
-                        .scaleEffect(1.2)
                     Text("Searching...")
-                        .font(.title3)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 16))
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if appState.searchResults.isEmpty && !searchQuery.isEmpty {
-                VStack(spacing: 20) {
-                    Image(systemName: "magnifyingglass")
-                        .font(.system(size: 64))
-                        .foregroundColor(.secondary)
+                VStack(spacing: 12) {
                     Text("No Results")
-                        .font(.title)
-                        .fontWeight(.semibold)
+                        .font(.system(size: 18))
                     Text("Try a different search term")
-                        .font(.title3)
+                        .font(.system(size: 14))
                         .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if !appState.searchResults.isEmpty {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 20) {
-                        // Results count
-                        HStack {
-                            Text("\(appState.searchResults.count) Results")
-                                .font(.title2)
-                                .fontWeight(.bold)
+                // MINIMAL results display
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("\(appState.searchResults.count) results")
+                        .font(.system(size: 16))
+                        .padding(.horizontal, 12)
 
-                            Spacer()
-
-                            // Type breakdown
-                            let movieCount = appState.searchResults.filter { $0.type == "movie" }.count
-                            let seriesCount = appState.searchResults.filter { $0.type == "series" }.count
-
-                            HStack(spacing: 12) {
-                                if movieCount > 0 {
-                                    Label("\(movieCount)", systemImage: "film")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
-                                if seriesCount > 0 {
-                                    Label("\(seriesCount)", systemImage: "tv")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                }
+                    // ULTRA-SIMPLE list - NO complex modifiers
+                    List(appState.searchResults, id: \.id) { item in
+                        SimpleSearchResultItem(item: item)
+                            .onTapGesture {
+                                selectMedia(item)
                             }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 20)
-
-                        // Grid of results
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(appState.searchResults) { item in
-                                SearchResultCard(item: item)
-                                    .onTapGesture {
-                                        selectMedia(item)
-                                    }
-                            }
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 20)
                     }
+                    .listStyle(.plain)
                 }
             } else {
-                VStack(spacing: 24) {
+                VStack(spacing: 16) {
                     Image(systemName: "magnifyingglass")
-                        .font(.system(size: 80))
+                        .font(.system(size: 48))
                         .foregroundColor(.secondary)
 
-                    VStack(spacing: 12) {
-                        Text("Search RedLemon")
-                            .font(.system(size: 32, weight: .bold))
-                        Text("Find any movie or TV show")
-                            .font(.title3)
-                            .foregroundColor(.secondary)
-                    }
+                    Text("Search RedLemon")
+                        .font(.system(size: 24))
 
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "sparkles")
-                                .foregroundColor(.blue)
-                            Text("Search thousands of titles")
-                        }
-                        HStack(spacing: 8) {
-                            Image(systemName: "film")
-                                .foregroundColor(.orange)
-                            Text("Movies and TV shows")
-                        }
-                        HStack(spacing: 8) {
-                            Image(systemName: "star.fill")
-                                .foregroundColor(.yellow)
-                            Text("Find what you're looking for")
-                        }
-                    }
-                    .font(.body)
-                    .foregroundColor(.secondary)
+                    Text("Find any movie or TV show")
+                        .font(.system(size: 16))
+                        .foregroundColor(.secondary)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -183,7 +113,7 @@ struct SearchView: View {
 
     // HARDWARE-SAFE SEARCH - Use real API but with CPU-compatible error handling
     private func performSearchSync() {
-        print("🔍 [SAFE] performSearchSync() called")
+        print("�� [SAFE] performSearchSync() called")
         print("🔍 [SAFE] searchQuery: '\(searchQuery)'")
 
         guard !searchQuery.isEmpty else {
@@ -200,7 +130,7 @@ struct SearchView: View {
             do {
                 print("🔍 [SAFE] Starting API search for: '\(searchQuery)'")
 
-                // Use the real API with hardware-safe MediaItem struct
+                // Use real API with hardware-safe MediaItem struct
                 let movies = try await apiClient.searchMedia(query: searchQuery, type: "movie")
                 let series = try await apiClient.searchMedia(query: searchQuery, type: "series")
 
@@ -300,7 +230,7 @@ struct SearchView: View {
     }
 
     private func selectMedia(_ item: MediaItem) {
-        print("🔍 [DEBUG] selectMedia called for: \(item.name)")
+        print("�� [DEBUG] selectMedia called for: \(item.name)")
         // Navigate to detail view in main content area
         appState.selectedMediaItem = item
         appState.currentView = .mediaDetail
@@ -308,75 +238,32 @@ struct SearchView: View {
     }
 }
 
-struct SearchResultCard: View {
+// ULTRA-MINIMAL list item - ZERO LAYOUT VALIDATION TRIGGERS
+struct SimpleSearchResultItem: View {
     let item: MediaItem
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            // SIMPLE PLACEHOLDER - No image loading to avoid SwiftUI layout crashes
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray.opacity(0.3))
-                .frame(height: 220)
-                .overlay(
-                    VStack(spacing: 8) {
-                        Image(systemName: item.type == "series" ? "tv" : "film")
-                            .font(.system(size: 32))
-                            .foregroundColor(.gray.opacity(0.5))
-                        Text("No Image")
-                            .font(.caption)
-                            .foregroundColor(.gray)
-                    }
-                )
-                .overlay(
-                    // Rating badge
-                    VStack {
-                        HStack {
-                            Spacer()
-                            if let rating = item.imdbRating {
-                                Text("⭐️ \(rating)")
-                                    .font(.caption)
-                                    .padding(6)
-                                    .background(.ultraThinMaterial)
-                                    .cornerRadius(6)
-                                    .padding(8)
-                            }
-                        }
-                        Spacer()
-                    }
-                )
-                .overlay(
-                    // Type badge
-                    VStack {
-                        HStack {
-                            Text(item.type == "series" ? "TV" : "Movie")
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 4)
-                                .background(item.type == "series" ? Color.blue : Color.orange)
-                                .foregroundColor(.white)
-                                .cornerRadius(6)
-                                .padding(8)
-                            Spacer()
-                        }
-                        Spacer()
-                    }
-                )
+        HStack(spacing: 8) {
+            // Fixed size rectangle - NO aspectRatio, NO overlay, NO complex modifiers
+            Rectangle()
+                .fill(Color.gray.opacity(0.2))
+                .frame(width: 50, height: 75)
 
-            // Title
-            Text(item.name)
-                .font(.subheadline)
-                .fontWeight(.medium)
-                .lineLimit(2)
+            // Simple text - NO complex modifiers
+            VStack(alignment: .leading, spacing: 2) {
+                Text(item.name)
+                    .font(.system(size: 13))
+                    .lineLimit(1)
 
-            // Year
-            if let year = item.year {
-                Text(year)
-                    .font(.caption)
+                Text(item.type == "series" ? "TV Show" : "Movie")
+                    .font(.system(size: 11))
                     .foregroundColor(.secondary)
             }
+
+            Spacer(minLength: 0)
         }
-        .frame(width: 150)
-        // NO onAppear/onDisappear - completely static to avoid any async operations
+        .padding(.horizontal, 8)
+        .padding(.vertical, 4)
+        .background(Color.clear)
     }
 }

@@ -216,7 +216,7 @@ class AppState: ObservableObject {
                 quality: quality,
                 season: season,
                 episode: episode,
-                year: item.year // Pass year to filter wrong releases (e.g., 2005 vs 2025)
+                year: metadata.year // CRITICAL: Use metadata year (reliable) not item.year (nil from discovery)
             )
 
             // Build list of streams to try: primary first, then alternates
@@ -729,7 +729,7 @@ class AppState: ObservableObject {
                 let backendRooms = try await SupabaseClient.shared.getAllRooms()
                 NSLog("📋 Fetched \(backendRooms.count) rooms from backend")
 
-                // Find the specific room
+                // Find specific room
                 if let room = backendRooms.first(where: { $0.id == roomId }) {
                     NSLog("✅ Found room \(room.id) in backend: \(room.name)")
 

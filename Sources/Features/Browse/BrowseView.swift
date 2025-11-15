@@ -147,7 +147,7 @@ struct BrowseView: View {
         .task {
             // Wait for server to be ready before loading content
             while !appState.isServerReady {
-                try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+                try? await Task.sleep(nanoseconds: 100_000_000) //100ms
             }
             print("✅ BrowseView: Server is ready, loading content...")
             await loadContent()
@@ -324,7 +324,7 @@ struct BrowseView: View {
     private func fetchCatalogWithFallback(from urlString: String, serviceKey: String) async -> [MediaItem] {
         print("🔍 Starting catalog fetch for \(serviceKey) from: \(urlString)")
 
-        // First try the primary external service with retry logic
+        // First try: primary external service with retry logic
         let items = await fetchCatalogWithRetry(from: urlString, serviceKey: serviceKey)
 
         if !items.isEmpty {
@@ -346,7 +346,7 @@ struct BrowseView: View {
             return cachedItems
         }
 
-        // Fallback 3: Return empty array but log the failure for debugging
+        // Fallback 3: Return empty array but log failure for debugging
         print("❌ All fallback mechanisms failed for \(serviceKey)")
         await logServiceFailure(serviceKey: serviceKey, urlString: urlString)
 
@@ -441,8 +441,6 @@ struct BrowseView: View {
 
         // Log to console for now - could be extended to send to monitoring service
         print("🚨 SERVICE FAILURE LOG: \(logEntry)")
-
-        // No special logging needed for removed services
     }
 
     private func selectMedia(_ item: MediaItem) async {
@@ -504,9 +502,9 @@ struct BrowseView: View {
     /// Get streaming service keys based on current tab
     private func getStreamingServiceKeys() -> [String] {
         if selectedTab == .movies {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu"]
+            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "crunchyroll"]
         } else {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "anime"]
+            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "discovery", "crunchyroll"]
         }
     }
 
@@ -520,7 +518,11 @@ struct BrowseView: View {
         case "appleTv": return "Apple TV+"
         case "paramount": return "Paramount+"
         case "hulu": return "Hulu"
-        case "anime": return "Anime"
+        case "peacock": return "Peacock"
+        case "starz": return "Starz"
+        case "showtime": return "Showtime"
+        case "discovery": return "Discovery+"
+        case "crunchyroll": return "Crunchyroll"
         default: return key.capitalized
         }
     }
@@ -586,27 +588,9 @@ struct BrowseView: View {
 
     /// Progressive loading for streaming service content
     private func loadStreamingServiceProgressively(key: String) async {
-        let baseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club"
+        let baseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
+
         let mediaType = selectedTab == .movies ? "movie" : "series"
-
-        if key == "anime" {
-            // Special handling for anime with progressive loading
-            let animeURL = "https://anime-kitsu.strem.fun/catalog/anime/kitsu-anime-trending.json"
-
-            // Quick batch first
-            let quickAnimeItems = await fetchAnimeCatalogWithLimit(from: animeURL, limit: 7)
-            let filteredQuickItems = Array(quickAnimeItems.filter { $0.type == "series" })
-            streamingCatalogs[key] = filteredQuickItems
-            print("🚀 Quick anime batch loaded: \(filteredQuickItems.count) items")
-
-            // Then full batch
-            let fullAnimeItems = await fetchAnimeCatalog(from: animeURL)
-            let fixedSize = 15
-            let filteredFullItems = Array(fullAnimeItems.filter { $0.type == "series" }.prefix(fixedSize))
-            streamingCatalogs[key] = filteredFullItems
-            print("📦 Full anime batch loaded: \(filteredFullItems.count) items")
-            return
-        }
 
         let serviceKey: String
         switch key {
@@ -617,6 +601,11 @@ struct BrowseView: View {
         case "appleTv": serviceKey = "atp"
         case "paramount": serviceKey = "pmp"
         case "hulu": serviceKey = "hlu"
+        case "peacock": serviceKey = "pcp"
+        case "starz": serviceKey = "stz"
+        case "showtime": serviceKey = "sst"
+        case "discovery": serviceKey = "dpe"
+        case "crunchyroll": serviceKey = "cru"
         default: serviceKey = key
         }
 
@@ -673,48 +662,6 @@ struct BrowseView: View {
             return Array(items)
         } catch {
             print("Failed to fetch quick catalog from \(urlString): \(error)")
-            return []
-        }
-    }
-
-    /// Fetch anime catalog with limit for progressive loading
-    private func fetchAnimeCatalogWithLimit(from urlString: String, limit: Int) async -> [MediaItem] {
-        guard let url = URL(string: urlString) else { return [] }
-
-        let pathComponents = url.pathComponents.suffix(2).joined(separator: "_")
-        let cacheKey = "quick_anime_\(pathComponents)_\(limit)"
-
-        // Check cache first
-        if let cached = await CacheManager.shared.getCatalog(key: cacheKey) {
-            return Array(cached.prefix(limit))
-        }
-
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(StremioMetaResponse.self, from: data)
-
-            let items = response.metas.prefix(limit).compactMap { meta in
-                MediaItem(
-                    id: meta.id,
-                    type: meta.type,
-                    name: meta.name,
-                    poster: meta.poster,
-                    background: nil,
-                    logo: nil,
-                    description: nil,
-                    releaseInfo: meta.releaseInfo,
-                    year: meta.releaseInfo,
-                    imdbRating: meta.imdbRating,
-                    genres: nil,
-                    runtime: nil
-                )
-            }
-
-            // Cache quick batch with shorter TTL
-            await CacheManager.shared.setCatalog(key: cacheKey, value: Array(items))
-            return Array(items)
-        } catch {
-            print("Failed to fetch quick anime catalog from \(urlString): \(error)")
             return []
         }
     }
@@ -849,6 +796,11 @@ struct BrowseView: View {
         case "appleTv": return "atp"
         case "paramount": return "pmp"
         case "hulu": return "hlu"
+        case "peacock": return "pcp"
+        case "starz": return "stz"
+        case "showtime": return "sst"
+        case "discovery": return "dpe"
+        case "crunchyroll": return "cru"
         default: return serviceKey
         }
     }
@@ -1295,16 +1247,10 @@ struct MediaCard: View {
 }
 
 // Streaming service grid section with title
-// Dynamic streaming service row that adapts based on performance mode
 struct StreamingServiceRow: View {
     let title: String
     let items: [MediaItem]
     let onTap: (MediaItem) async -> Void
-
-    // Fixed: use conservative behavior for all devices
-    private var isPerformanceMode: Bool {
-        true // Previously: AppState.effectivePerformanceProfile == .low
-    }
 
     var body: some View {
         if !items.isEmpty {
@@ -1314,54 +1260,18 @@ struct StreamingServiceRow: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
 
-                if isPerformanceMode {
-                    // Best Performance: 1 row of 7 items
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            ForEach(Array(items.prefix(7))) { item in
-                                MediaCard(item: item)
-                                    .onTapGesture {
-                                        Task {
-                                            await onTap(item)
-                                        }
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(Array(items.prefix(7))) { item in
+                            MediaCard(item: item)
+                                .onTapGesture {
+                                    Task {
+                                        await onTap(item)
                                     }
-                            }
-                        }
-                        .padding(.horizontal, 8)
-                    }
-                } else {
-                    // Best Quality: 2 rows of 14 items
-                    // First row - 7 items
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            ForEach(Array(items.prefix(7))) { item in
-                                MediaCard(item: item)
-                                    .onTapGesture {
-                                        Task {
-                                            await onTap(item)
-                                        }
-                                    }
-                            }
-                        }
-                        .padding(.horizontal, 8)  // Reduced from default padding
-                    }
-
-                    // Second row - 7 items
-                    if items.count > 7 {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(Array(items.dropFirst(7).prefix(7))) { item in
-                                    MediaCard(item: item)
-                                        .onTapGesture {
-                                            Task {
-                                                await onTap(item)
-                                            }
-                                        }
                                 }
-                            }
-                            .padding(.horizontal, 8)  // Reduced from default padding
                         }
                     }
+                    .padding(.horizontal, 8)
                 }
             }
         }
@@ -1466,7 +1376,7 @@ struct LazyStreamingServiceRow: View {
                 }
             }
 
-            // Update the last known item count
+            // Update: last known item count
             lastKnownItemCount = items.count
         }
         .onChange(of: items.count) { newCount in

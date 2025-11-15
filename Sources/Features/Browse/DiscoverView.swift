@@ -26,6 +26,11 @@ struct DiscoverView: View {
         case appleTv = "Apple TV+"
         case paramount = "Paramount+"
         case hulu = "Hulu"
+        case peacock = "Peacock"
+        case starz = "Starz"
+        case showtime = "Showtime"
+        case discovery = "Discovery+"
+        case crunchyroll = "Crunchyroll"
         case anime = "Anime (Kitsu)"
 
         var catalogId: String {
@@ -38,6 +43,11 @@ struct DiscoverView: View {
             case .appleTv: return "atp"
             case .paramount: return "pmp"
             case .hulu: return "hlu"
+            case .peacock: return "pcp"
+            case .starz: return "stz"
+            case .showtime: return "sst"
+            case .discovery: return "dpe"
+            case .crunchyroll: return "cru"
             case .anime: return "kitsu-anime-trending"
             }
         }
@@ -49,7 +59,8 @@ struct DiscoverView: View {
             case .anime:
                 return "https://anime-kitsu.strem.fun"
             default:
-                return "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club"
+                // Use the configured addon URL with all services enabled
+                return "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
             }
         }
     }

@@ -88,30 +88,34 @@ func registerStreamRoutes(_ app: Application) {
             streamsWithSubtitles = streamsWithSubtitles.filter { stream in
                 let title = stream.title
 
-                // More specific year patterns that match actual release year positions
-                let yearPatterns = [
-                    "\\((\\d{4})\\)",           // (2025)
-                    "\\.(\\d{4})\\.",           // .2025.
-                    " (\\d{4}) ",               //  2025
-                    " (\\d{4})$",               //  2025 at end
-                    "^(\\d{4})",                 // 2025 at start
-                    "\\.(\\d{4})$"              // .2025 at end
+                // Strict year patterns that match ONLY the exact target year
+                // Use explicit boundaries: space, dot, paren, bracket, underscore, dash, start/end of string
+                let exactYearPatterns = [
+                    "\\(\(year)\\)",               // (1991)
+                    "\\.\(year)\\.",               // .1991.
+                    " \(year) ",                   //  1991  (space-year-space)
+                    " \(year)$",                   //  1991 at end (space-year-end)
+                    "^\(year) ",                  // 1991 at start (year-space)
+                    "\\.\(year)$",                 // .1991 at end (dot-year-end)
+                    " \(year)\\.",                 //  1991. (space-year-dot)
+                    "_\(year)_",                   // _1991_ (underscore-year-underscore)
+                    "-\(year)-",                   // -1991- (dash-year-dash)
+                    "\\[\(year)\\]",               // [1991] (brackets-year)
+                    "^\(year)$",                  // 1991 as entire string
                 ]
 
-                for pattern in yearPatterns {
-                    if let regex = try? NSRegularExpression(pattern: pattern),
-                       let match = regex.firstMatch(in: title, range: NSRange(title.startIndex..., in: title)),
-                       let yearRange = Range(match.range(at: 1), in: title) {
-                        let extractedYear = String(title[yearRange])
-                        // Additional validation: reasonable year range (1900-2030)
-                        if let yearInt = Int(extractedYear), yearInt >= 1900 && yearInt <= 2030 {
-                            return extractedYear == year
+                // Check for exact year match first
+                for pattern in exactYearPatterns {
+                    if let regex = try? NSRegularExpression(pattern: pattern) {
+                        let range = NSRange(location: 0, length: title.utf16.count)
+                        if regex.firstMatch(in: title, range: range) != nil {
+                            return true
                         }
                     }
                 }
 
-                // If no year pattern matches, keep it (might be correct)
-                return true
+                // If no exact year match, exclude this stream
+                return false
             }
             let afterCount = streamsWithSubtitles.count
             print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
@@ -236,10 +240,10 @@ func registerStreamRoutes(_ app: Application) {
 
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
         let qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["4K"] ?? [], minSeeders: 1, quality: "4K"),
-            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p"),
-            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p"),
-            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p")
+            uhd4k: processBucket(buckets["4K"] ?? [], minSeeders: 1, quality: "4K", year: year),
+            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year),
+            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year),
+            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year)
         )
 
         print("   📦 Bucket counts (after processBucket/seeder filter):")
@@ -658,7 +662,7 @@ private func determineQualityBucket(_ quality: String) -> String {
     }
 }
 
-private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String) -> QualityBucket {
+private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String, year: String?) -> QualityBucket {
     print("🔥🔥🔥 processBucket CALLED for \(quality) with \(streams.count) streams")
 
     // Parse size from string like "15 GB" to bytes
@@ -694,11 +698,99 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
         maxSize = nil
     }
 
-    // Filter by seeder threshold and size limit
-    // EXCEPT: Skip seeder filter for RD-cached streams (instant availability)
+    // CRITICAL: Apply year and codec filtering BEFORE seeder filtering
+    // This ensures year-matching streams get priority even if they have fewer seeders
+    print("  🎯 Year/Codec filter (\(quality)):")
+
+    var yearAndCodecFiltered = streams
+
+    // COMPLETELY REMOVE x265/HEVC streams (terrible quality) - CHECK TITLE
+    let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
+    let beforeX265Filter = yearAndCodecFiltered.count
+    yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
+        let titleLower = stream.title.lowercased()
+        let hasBadCodec = badCodecs.contains { codec in
+            titleLower.contains(codec)
+        }
+        if hasBadCodec {
+            print("  ⏭️ BLOCKING x265/HEVC: \(stream.title)")
+        }
+        return !hasBadCodec  // Only keep x264 and other good codecs
+    }
+
+    if beforeX265Filter > yearAndCodecFiltered.count {
+        print("  ✅ BLOCKED \(beforeX265Filter - yearAndCodecFiltered.count) x265 streams for \(quality)")
+    }
+
+    // Size filtering
+    if let maxSize = maxSize {
+        yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
+            if let size = parseSize(stream.size) {
+                return size <= maxSize
+            }
+            // If we can't parse size, include it (benefit of the doubt)
+            return true
+        }
+    }
+
+    // CRITICAL: Sort by YEAR MATCH first (before any seeder filtering)
+    // This ensures year-matching streams get priority regardless of seeder count
+    func yearMatchPriority(_ stream: Stream) -> Int {
+        guard let year = year else { return 0 }
+        return streamTitleContainsYear(stream.title, targetYear: year) ? 1000 : 0
+    }
+
+    func codecRank(_ stream: Stream) -> Int {
+        let title = stream.title.lowercased()
+        let badCodecs = ["x265", "hevc", "h.265", "h265"]
+        let hasBadCodec = badCodecs.contains { codec in
+            title.contains(codec)
+        }
+        return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
+    }
+
+    // Sort by: year match (ABSOLUTE PRIORITY), then codec, then seeders, then extension
+    let yearSorted = yearAndCodecFiltered.sorted { a, b in
+        // PRIMARY: Year match is ABSOLUTE PRIORITY
+        let yearPriorityA = yearMatchPriority(a)
+        let yearPriorityB = yearMatchPriority(b)
+
+        if yearPriorityA != yearPriorityB {
+            return yearPriorityA > yearPriorityB // A matches year, B doesn't = A wins
+        }
+
+        // SECONDARY: Codec sort key - x264 always wins over x265
+        let codecA = codecRank(a)
+        let codecB = codecRank(b)
+
+        if codecA != codecB {
+            return codecA > codecB
+        }
+
+        // TERTIARY: Seeders (but only within same year match tier)
+        let seedersA = a.seeders ?? 0
+        let seedersB = b.seeders ?? 0
+
+        if seedersA != seedersB {
+            return seedersA > seedersB // More seeders = better
+        }
+
+        // QUATERNARY: Extension rank
+        func extRank(_ ext: String?) -> Int {
+            guard let ext = ext?.lowercased() else { return 0 }
+            if ext == "mkv" { return 3 }
+            if ext == "mp4" { return 2 }
+            if ext == "avi" { return 1 }
+            return 0
+        }
+
+        return extRank(a.ext) > extRank(b.ext)
+    }
+
+    // NOW apply seeder filter, but preserve year priority ordering
     print("  🌱 Seeder filter (\(quality)): minSeeders=\(minSeeders)")
-    let beforeSeederFilter = streams.count
-    var filtered = streams.filter { stream in
+    let beforeSeederFilter = yearSorted.count
+    var filtered = yearSorted.filter { stream in
         // RD-cached streams (from Comet, etc.) are marked with [RD⚡] or similar
         let isCached = stream.title.contains("[RD⚡]") ||
                        stream.title.contains("⚡") ||
@@ -718,79 +810,12 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
     }
     print("  🌱 After seeder filter: \(beforeSeederFilter) → \(filtered.count) streams")
 
-    // COMPLETELY REMOVE x265/HEVC streams (terrible quality) - CHECK TITLE
-    let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-    let beforeX265Filter = filtered.count
-    filtered = filtered.filter { stream in
-        let titleLower = stream.title.lowercased()
-        let hasBadCodec = badCodecs.contains { codec in
-            titleLower.contains(codec)
-        }
-        if hasBadCodec {
-            print("  ⏭️ BLOCKING x265/HEVC: \(stream.title)")
-        }
-        return !hasBadCodec  // Only keep x264 and other good codecs
-    }
-
-    if beforeX265Filter > filtered.count {
-        print("  ✅ BLOCKED \(beforeX265Filter - filtered.count) x265 streams for \(quality)")
-    }
-
-    if let maxSize = maxSize {
-        filtered = filtered.filter { stream in
-            if let size = parseSize(stream.size) {
-                return size <= maxSize
-            }
-            // If we can't parse size, include it (benefit of the doubt)
-            return true
-        }
-    }
-
     if filtered.isEmpty {
         return QualityBucket(primary: nil, alternates: nil)
     }
 
-    // Extension ranking (mkv/mp4 > avi)
-    func extRank(_ ext: String?) -> Int {
-        guard let ext = ext?.lowercased() else { return 0 }
-        if ext == "mkv" { return 3 }
-        if ext == "mp4" { return 2 }
-        if ext == "avi" { return 1 }
-        return 0
-    }
-
-    // Codec ranking (x264 >> x265 as absolute last resort)
-    func codecRank(_ stream: Stream) -> Int {
-        let title = stream.title.lowercased()
-        let badCodecs = ["x265", "hevc", "h.265", "h265"]
-        let hasBadCodec = badCodecs.contains { codec in
-            title.contains(codec)
-        }
-        return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
-    }
-
-    // Sort by: codec (x264 first), then seeders (most), then extension rank (highest)
-    // x265 is absolute last resort - only after all x264 exhausted
-    let sorted = filtered.sorted { a, b in
-        let codecA = codecRank(a)
-        let codecB = codecRank(b)
-
-        // Codec is PRIMARY sort key - x264 always wins over x265
-        if codecA != codecB {
-            return codecA > codecB
-        }
-
-        // Within same codec tier, sort by seeders
-        let seedersA = a.seeders ?? 0
-        let seedersB = b.seeders ?? 0
-
-        if seedersA != seedersB {
-            return seedersA > seedersB // More seeders = better
-        }
-
-        // If same seeders, use extension rank
-        return extRank(a.ext) > extRank(b.ext)
-    }
+    // The sorted order is already preserved from yearSorted
+    let sorted = filtered
 
     // Primary stream + up to 4 alternates
     let primary = sorted.first
@@ -827,6 +852,34 @@ private func extractReleaseGroup(_ title: String) -> String? {
     }
 
     return nil
+}
+
+// Helper function to check if stream title contains target year
+private func streamTitleContainsYear(_ title: String, targetYear: String) -> Bool {
+    // Comprehensive year patterns that match actual release year positions
+    let yearPatterns = [
+        "\\((\(targetYear))\\)",           // (1991)
+        "\\.\(targetYear)\\.",           // .1991.
+        " \(targetYear) ",               //  1991  (space-year-space)
+        " \(targetYear)$",               //  1991 at end (space-year-end)
+        "^\(targetYear) ",               // 1991 at start (year-space)
+        "\\.\(targetYear)$",              // .1991 at end (dot-year-end)
+        " \(targetYear)\\.",             //  1991. (space-year-dot)
+        "_\(targetYear)_",               // _1991_ (underscore-year-underscore)
+        "-\(targetYear)-",               // -1991- (dash-year-dash)
+        "[\(targetYear)]",               // [1991] (brackets-year)
+    ]
+
+    for pattern in yearPatterns {
+        if let regex = try? NSRegularExpression(pattern: pattern) {
+            let range = NSRange(location: 0, length: title.utf16.count)
+            if regex.firstMatch(in: title, range: range) != nil {
+                return true
+            }
+        }
+    }
+
+    return false
 }
 
 private func extractReleaseInfo(_ title: String) -> String {

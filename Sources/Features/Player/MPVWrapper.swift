@@ -3,6 +3,7 @@
 //  RedLemon
 //
 //  Embedded libmpv for integrated video + chat overlay
+//  Memory Leak Fixes Applied - Smooth Playback Edition
 //
 
 import Foundation
@@ -24,9 +25,11 @@ class MPVWrapper: ObservableObject {
     private var isInitialized = false
     private var eventPollingTask: Task<Void, Never>?
     private var timeUpdateTimer: Timer?
+    private var memoryMonitorTimer: Timer?
 
-// Memory pressure monitoring
-private var memoryPressureSource: DispatchSourceMemoryPressure?
+    // Memory pressure monitoring
+    private var memoryPressureSource: DispatchSourceMemoryPressure?
+    private var lastMemoryCheck: Date = .distantPast
 
     init() {
         print("🎬 MPVWrapper: Creating embedded MPV with render context...")
@@ -38,6 +41,9 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         }
 
         print("✅ MPV handle created")
+
+        // Start memory monitoring
+        startMemoryMonitoring()
     }
 
     func setupVideo(in view: NSView) {
@@ -89,6 +95,65 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         // Start event polling and time updates
         eventPollingTask = Task { [weak self] in await self?.pollEvents() }
         startTimeUpdates()
+    }
+
+    // MARK: - Smart Memory Monitoring (No Stutter)
+
+    private func startMemoryMonitoring() {
+        memoryMonitorTimer = Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { [weak self] _ in
+            guard let strongSelf = self else { return }
+
+            // Only check memory during natural breaks
+            if strongSelf.shouldCheckMemory() {
+                strongSelf.performBackgroundMemoryCheck()
+            }
+        }
+    }
+
+    private func shouldCheckMemory() -> Bool {
+        // Only check every 2 minutes OR during pauses/seek
+        let timeSinceLastCheck = Date().timeIntervalSince(lastMemoryCheck)
+        return !isPlaying || timeSinceLastCheck > 120
+    }
+
+    private func performBackgroundMemoryCheck() {
+        guard let handle = mpvHandle, isInitialized else { return }
+
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+
+        if kerr == KERN_SUCCESS {
+            let usedMB = Double(info.resident_size) / 1024.0 / 1024.0
+            print("📊 MPV Memory: \(String(format: "%.1f", usedMB))MB")
+
+            // Only cleanup during natural pauses
+            if usedMB > 250.0 && !isPlaying {
+                print("⚠️ High memory usage detected during pause - gentle cleanup")
+                performGentleCleanup()
+            }
+
+            lastMemoryCheck = Date()
+        }
+    }
+
+    private func performGentleCleanup() {
+        guard let handle = mpvHandle, isInitialized, !isPlaying else { return }
+
+        print("🧹 Gentle MPV buffer cleanup (no playback interruption)...")
+
+        // Gentle cache adjustment - NO buffer cycling during playback
+        mpv_command_string(handle, "set cache-secs 3")
+
+        // Small delay to let changes take effect
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            mpv_command_string(handle, "set cache-secs 5")
+        }
     }
 
     // MARK: - Render Context Setup (IINA Implementation)
@@ -151,31 +216,84 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         CGLUnlockContext(context)
     }
 
+    // MARK: - Smart Event Polling (Playback-Aware)
+
     private func pollEvents() async {
         guard let handle = mpvHandle else { return }
 
         while !Task.isCancelled {
-            let event = mpv_wait_event(handle, 0.5)
+            // Adaptive timeout based on playback state
+            let timeout = isPlaying ? 0.5 : 0.1
+            let event = mpv_wait_event(handle, timeout)
             guard let eventPtr = event else { continue }
+
+            // Check cancellation after each event
+            if Task.isCancelled { break }
+
             let eventId = eventPtr.pointee.event_id
             await MainActor.run { self.handleMPVEvent(eventId: eventId, eventPtr: eventPtr) }
         }
+
+        print("🛑 Event polling task cancelled cleanly")
     }
 
     private func handleMPVEvent(eventId: mpv_event_id, eventPtr: UnsafePointer<mpv_event>) {
         switch eventId {
         case MPV_EVENT_NONE: break
-        case MPV_EVENT_START_FILE: isBuffering = true
-        case MPV_EVENT_FILE_LOADED: updateDuration()
-        case MPV_EVENT_PLAYBACK_RESTART: isBuffering = false; isPlaying = true
-        case MPV_EVENT_END_FILE: isPlaying = false
-        case MPV_EVENT_IDLE: isBuffering = false
+        case MPV_EVENT_START_FILE:
+            isBuffering = true
+            // Natural cleanup point - video starting
+            if memoryUsage > 200 {
+                performGentleCleanup()
+            }
+        case MPV_EVENT_FILE_LOADED:
+            updateDuration()
+        case MPV_EVENT_PLAYBACK_RESTART:
+            isBuffering = false
+            isPlaying = true
+        case MPV_EVENT_END_FILE:
+            isPlaying = false
+            // Perfect time for cleanup - video ended naturally
+            performNaturalCleanup()
+        case MPV_EVENT_IDLE:
+            isBuffering = false
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {
                 print(" MPV Event: \(eventId.rawValue)")
             }
         }
     }
+
+    private var memoryUsage: Double {
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), $0, &count)
+            }
+        }
+
+        if kerr == KERN_SUCCESS {
+            return Double(info.resident_size) / 1024.0 / 1024.0
+        }
+        return 0.0
+    }
+
+    private func performNaturalCleanup() {
+        guard let handle = mpvHandle, isInitialized else { return }
+
+        print("🧹 Natural cleanup - optimizing after video end...")
+
+        // More thorough cleanup during natural breaks
+        mpv_command_string(handle, "set cache-secs 2")
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            mpv_command_string(handle, "set cache-secs 5")
+        }
+    }
+
+    // MARK: - Enhanced Timer Management
 
     private func startTimeUpdates() {
         timeUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
@@ -295,6 +413,11 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         var flag: Int64 = 1
         mpv_set_property(handle, "pause", MPV_FORMAT_FLAG, &flag)
         isPlaying = false
+
+        // Safe cleanup point during pause
+        if memoryUsage > 150 {
+            performGentleCleanup()
+        }
     }
 
     func togglePlayPause() { isPlaying ? pause() : play() }
@@ -303,6 +426,13 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         guard let handle = mpvHandle, isInitialized else { return }
         var t = seconds
         mpv_set_property(handle, "time-pos", MPV_FORMAT_DOUBLE, &t)
+
+        // Natural cleanup point during seek
+        if memoryUsage > 180 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.performGentleCleanup()
+            }
+        }
     }
 
     func seekRelative(seconds: Double) {
@@ -672,6 +802,9 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         // Stop playback
         _ = mpv_command_string(handle, "stop")
         isPlaying = false
+
+        // Natural cleanup point when stopping
+        performNaturalCleanup()
     }
 
     /// Get cache buffering percentage (0-100) for large seek validation
@@ -742,11 +875,46 @@ private var memoryPressureSource: DispatchSourceMemoryPressure?
         mpv_render_context_report_swap(context)
     }
 
+    // MARK: - Enhanced Cleanup (Smooth Playback)
+
     deinit {
+        print("🗑️ MPVWrapper deinit - cleaning up...")
+
+        // Cancel event polling FIRST with immediate effect
         eventPollingTask?.cancel()
+        eventPollingTask = nil
+
+        // Cancel memory monitoring
+        memoryMonitorTimer?.invalidate()
+        memoryMonitorTimer = nil
+
+        // Cancel time update timer
         timeUpdateTimer?.invalidate()
-        if let handle = mpvHandle {
-            if isInitialized { mpv_terminate_destroy(handle) } else { mpv_destroy(handle) }
+        timeUpdateTimer = nil
+
+        // Wait a moment for cancellation to propagate
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+            semaphore.signal()
         }
+        semaphore.wait()
+
+        // Clean up MPV resources
+        if let handle = mpvHandle {
+            if isInitialized {
+                print("🗑️ Terminating MPV instance...")
+                mpv_terminate_destroy(handle)
+            } else {
+                print("🗑️ Destroying MPV instance...")
+                mpv_destroy(handle)
+            }
+            mpvHandle = nil
+        }
+
+        // Clean up memory pressure monitoring
+        memoryPressureSource?.cancel()
+        memoryPressureSource = nil
+
+        print("✅ MPVWrapper cleanup complete")
     }
 }

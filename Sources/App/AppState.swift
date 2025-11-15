@@ -865,7 +865,13 @@ class AppState: ObservableObject {
     /// Generate a 4-character alphanumeric room code (e.g., A3H9, K7M2)
     private func generateRoomCode() -> String {
         let characters = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789" // Exclude confusing chars: I,O,1,0
-        return String((0..<4).map { _ in characters.randomElement()! })
+        var result = ""
+        for _ in 0..<4 {
+            if let char = characters.randomElement() {
+                result.append(char)
+            }
+        }
+        return result
     }
 }
 

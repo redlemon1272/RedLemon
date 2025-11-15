@@ -737,10 +737,12 @@ struct BrowseView: View {
         await CacheManager.shared.clearExpired()
 
         // Fixed: use conservative behavior for all devices
-        if false { // Previously: AppState.isLowMemoryDevice
-            await CacheManager.shared.clearAll()
-            print("🗑️ Aggressive cache clear for low memory device")
-        }
+        // Note: Performance-based cache clearing has been disabled for stability
+        // Previously: AppState.isLowMemoryDevice
+        // if AppState.isLowMemoryDevice {
+        //     await CacheManager.shared.clearAll()
+        //     print("🗑️ Aggressive cache clear for low memory device")
+        // }
 
         // Log memory usage
         let stats = await CacheManager.shared.getCacheStats()
@@ -893,23 +895,52 @@ struct WatchModeSelectionView: View {
 
                 // Watch mode buttons
                 VStack(spacing: 16) {
-                    // Solo button
-                    Button(action: {
-                        Task {
-                            await resumePlayback(mode: .solo)
+                    // Solo options
+                    VStack(spacing: 12) {
+                        Text("Solo Options")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+
+                        HStack(spacing: 12) {
+                            // Continue button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .solo, shouldResume: true)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "play.fill")
+                                    Text("Continue")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.accentColor)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
+
+                            // Start from beginning button
+                            Button(action: {
+                                Task {
+                                    await resumePlayback(mode: .solo, shouldResume: false)
+                                }
+                            }) {
+                                VStack(spacing: 4) {
+                                    Image(systemName: "play.circle.fill")
+                                    Text("Start from Beginning")
+                                        .font(.caption)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .foregroundColor(.white)
+                                .cornerRadius(12)
+                            }
+                            .buttonStyle(.plain)
                         }
-                    }) {
-                        HStack {
-                            Image(systemName: "play.fill")
-                            Text("Continue Solo")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.accentColor)
-                        .foregroundColor(.white)
-                        .cornerRadius(12)
                     }
-                    .buttonStyle(.plain)
 
                     // Watch Party options
                     VStack(spacing: 12) {
@@ -957,6 +988,22 @@ struct WatchModeSelectionView: View {
                             .buttonStyle(.plain)
                         }
                     }
+
+                    // Go to Detail Page button
+                    Button(action: {
+                        goToDetailPage()
+                    }) {
+                        HStack {
+                            Image(systemName: "info.circle")
+                            Text("Go to Detail Page")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.8))
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                    }
+                    .buttonStyle(.plain)
                 }
                 .padding(.horizontal, 32)
 
@@ -968,7 +1015,7 @@ struct WatchModeSelectionView: View {
                 }
                 .padding(.bottom, 24)
             }
-            .frame(width: 450, height: 450)
+            .frame(width: 450, height: 550) // Increased height to accommodate new buttons
             .disabled(isCreatingRoom)
 
             // Loading overlay
@@ -1050,6 +1097,25 @@ struct WatchModeSelectionView: View {
                 quality: quality,
                 watchMode: .solo
             )
+        }
+    }
+
+    private func goToDetailPage() {
+        Task { @MainActor in
+            // Set media item and navigation state
+            appState.selectedMediaItem = historyItem.mediaItem
+
+            // If it's a TV show, set the season and episode context
+            if let season = historyItem.season, let episode = historyItem.episode {
+                appState.selectedSeason = season
+                appState.selectedEpisode = episode
+            }
+
+            // Navigate to detail page
+            appState.currentView = .mediaDetail
+
+            // Dismiss popup
+            dismiss()
         }
     }
 

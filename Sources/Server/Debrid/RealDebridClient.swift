@@ -293,12 +293,28 @@ actor RealDebridClient {
         // List all files first for debugging
         for (index, file) in files.enumerated() {
             let fileId = file.id ?? (index + 1)
-            NSLog("   [%d] %@", fileId, file.path ?? "unknown")
+            let sizeStr = formatFileSize(file.bytes ?? 0)
+            let sampleIndicator = isSampleFile(file) ? " [SAMPLE]" : ""
+            NSLog("   [%d] %@ (%@)%@", fileId, file.path ?? "unknown", sizeStr, sampleIndicator)
+        }
+
+        // CRITICAL: Filter out sample files FIRST
+        let nonSampleFiles = files.filter { file in
+            if isSampleFile(file) {
+                NSLog("   🚫 SAMPLE FILTER: Blocking sample file: %@", file.path ?? "unknown")
+                return false
+            }
+            return true
+        }
+
+        let filesToSearch = nonSampleFiles.isEmpty ? files : nonSampleFiles
+        if nonSampleFiles.count < files.count {
+            NSLog("   🚫 SAMPLE FILTER: Blocked %d sample files, %d files remain", files.count - nonSampleFiles.count, nonSampleFiles.count)
         }
 
         // CRITICAL: Filter out x265/HEVC files FIRST
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-        let x264Files = files.filter { file in
+        let x264Files = filesToSearch.filter { file in
             guard let path = file.path else { return true } // Keep files with no path (safety)
             let pathLower = path.lowercased()
             let hasBadCodec = badCodecs.contains { codec in
@@ -310,13 +326,13 @@ actor RealDebridClient {
             return !hasBadCodec
         }
 
-        let filesToSearch = x264Files.isEmpty ? files : x264Files
-        if x264Files.count < files.count {
-            NSLog("   🚫 UNLOCK FILTER: Blocked %d x265 files, %d x264 files remain", files.count - x264Files.count, x264Files.count)
+        let finalFiles = x264Files.isEmpty ? filesToSearch : x264Files
+        if x264Files.count < filesToSearch.count {
+            NSLog("   🚫 UNLOCK FILTER: Blocked %d x265 files, %d x264 files remain", filesToSearch.count - x264Files.count, x264Files.count)
         }
 
         // Try to find file matching episode pattern
-        for (index, file) in filesToSearch.enumerated() {
+        for (index, file) in finalFiles.enumerated() {
             guard let path = file.path else { continue }
 
             let pathLower = path.lowercased()
@@ -326,8 +342,15 @@ actor RealDebridClient {
 
             if matchesPattern {
                 let fileId = file.id ?? (index + 1)
-                NSLog("✅ MATCH FOUND: %@ → file ID: %d", path, fileId)
-                return (fileId, path)
+                let sizeStr = formatFileSize(file.bytes ?? 0)
+
+                // Additional validation: check if file size is reasonable for a TV episode
+                if isValidEpisodeSize(file.bytes ?? 0, quality: extractQualityFromPath(path)) {
+                    NSLog("✅ MATCH FOUND: %@ → file ID: %d (%@)", path, fileId, sizeStr)
+                    return (fileId, path)
+                } else {
+                    NSLog("⚠️ MATCH FOUND but size too small for episode: %@ → file ID: %d (%@) - POSSIBLE SAMPLE", path, fileId, sizeStr)
+                }
             }
         }
 
@@ -335,27 +358,40 @@ actor RealDebridClient {
         // For season packs, episodes are usually sorted in order
         NSLog("⚠️ No pattern match found, attempting fallback by episode position")
 
-        // Filter video files only
+        // Filter video files only (excluding samples)
         let videoExtensions = ["mkv", "mp4", "avi", "mov", "m4v", "webm"]
-        let videoFiles = filesToSearch.filter { file in
+        let videoFiles = finalFiles.filter { file in
             guard let path = file.path?.lowercased() else { return false }
             return videoExtensions.contains(where: { ext in path.hasSuffix(".\(ext)") })
         }
 
-        if videoFiles.count >= episode {
-            let targetFile = videoFiles[episode - 1]
+        // Sort by size (prefer larger files for episodes)
+        let sortedVideoFiles = videoFiles.sorted { ($0.bytes ?? 0) > ($1.bytes ?? 0) }
+
+        if sortedVideoFiles.count >= episode {
+            let targetFile = sortedVideoFiles[episode - 1]
             let fileId = targetFile.id ?? episode
-            NSLog("📍 Fallback: Selected file at position %d → %@ (ID: %d)", episode, targetFile.path ?? "unknown", fileId)
-            return (fileId, targetFile.path)
+            let sizeStr = formatFileSize(targetFile.bytes ?? 0)
+
+            // Validate the selected file size
+            if isValidEpisodeSize(targetFile.bytes ?? 0, quality: extractQualityFromPath(targetFile.path ?? "")) {
+                NSLog("📍 Fallback: Selected file at position %d → %@ (ID: %@, %@)", episode, targetFile.path ?? "unknown", fileId, sizeStr)
+                return (fileId, targetFile.path)
+            } else {
+                NSLog("❌ Fallback file too small: %@ (ID: %@, %@) - POSSIBLE SAMPLE", targetFile.path ?? "unknown", fileId, sizeStr)
+            }
         }
 
-        // Last resort: first video file
-        if let firstVideo = videoFiles.first, let fileId = firstVideo.id {
-            NSLog("🎲 Last resort: Using first video file → %@ (ID: %d)", firstVideo.path ?? "unknown", fileId)
-            return (fileId, firstVideo.path)
+        // Last resort: largest valid video file
+        if let largestVideo = sortedVideoFiles.first,
+           isValidEpisodeSize(largestVideo.bytes ?? 0, quality: extractQualityFromPath(largestVideo.path ?? "")),
+           let fileId = largestVideo.id {
+            let sizeStr = formatFileSize(largestVideo.bytes ?? 0)
+            NSLog("🎲 Last resort: Using largest valid video file → %@ (ID: %@, %@)", largestVideo.path ?? "unknown", fileId, sizeStr)
+            return (fileId, largestVideo.path)
         }
 
-        NSLog("⚠️ All fallbacks failed, defaulting to file ID 1")
+        NSLog("⚠️ All fallbacks failed or files too small, defaulting to file ID 1")
         return (1, nil)
     }
 
@@ -469,5 +505,57 @@ actor RealDebridClient {
             return String(filename[range])
         }
         return "mp4" // Default fallback
+    }
+
+    // MARK: - Sample File Detection
+
+    private func isSampleFile(_ file: TorrentInfo.TorrentFile) -> Bool {
+        guard let path = file.path?.lowercased() else { return false }
+        let size = file.bytes ?? 0
+
+        // Check filename for sample indicators
+        let sampleKeywords = ["sample", "trailer", "preview", "promo", "teaser"]
+        let containsSampleKeyword = sampleKeywords.contains { keyword in
+            path.contains(keyword)
+        }
+
+        // Check if file is too small to be a full episode
+        let isTooSmall = size < 100 * 1024 * 1024 // 100MB minimum for any episode
+
+        // Check for typical sample patterns
+        let hasSamplePattern = path.contains("-sample") ||
+                               path.contains("_sample") ||
+                               path.contains(".sample") ||
+                               path.contains("sample.")
+
+        return containsSampleKeyword || hasSamplePattern || isTooSmall
+    }
+
+    private func formatFileSize(_ bytes: Int) -> String {
+        let formatter = ByteCountFormatter()
+        formatter.countStyle = .file
+        return formatter.string(fromByteCount: Int64(bytes))
+    }
+
+    private func isValidEpisodeSize(_ bytes: Int, quality: String) -> Bool {
+        let sizeMB = Double(bytes) / (1024 * 1024)
+
+        // Minimum sizes based on quality
+        switch quality.lowercased() {
+        case let q where q.contains("1080p") || q.contains("720p"):
+            return sizeMB >= 200 // 200MB minimum for HD episodes
+        case let q where q.contains("480p"):
+            return sizeMB >= 100 // 100MB minimum for SD episodes
+        default:
+            return sizeMB >= 150 // 150MB minimum for unknown quality
+        }
+    }
+
+    private func extractQualityFromPath(_ path: String) -> String {
+        let pathLower = path.lowercased()
+        if pathLower.contains("1080p") { return "1080p" }
+        if pathLower.contains("720p") { return "720p" }
+        if pathLower.contains("480p") { return "480p" }
+        return "unknown"
     }
 }

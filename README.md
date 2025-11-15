@@ -116,5 +116,5 @@ Appcast feed: `https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/a
 
 ## License
 
-TBD
+TBDv2
 

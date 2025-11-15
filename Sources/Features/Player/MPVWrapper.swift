@@ -117,7 +117,7 @@ class MPVWrapper: ObservableObject {
     }
 
     private func performBackgroundMemoryCheck() {
-        guard let handle = mpvHandle, isInitialized else { return }
+        guard let _ = mpvHandle, isInitialized else { return }
 
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4

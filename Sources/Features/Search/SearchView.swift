@@ -7,6 +7,11 @@ struct SearchView: View {
     @State private var searchQuery = ""
     @State private var isSearching = false
 
+    // Grid layout columns - same as DiscoverView
+    let columns = [
+        GridItem(.adaptive(minimum: 150), spacing: 20)
+    ]
+
     var body: some View {
         VStack(spacing: 0) {
             // SIMPLIFIED search bar - NO complex layouts
@@ -53,7 +58,7 @@ struct SearchView: View {
 
             Divider()
 
-            // SIMPLIFIED results area
+            // Grid-based results area - like DiscoverView
             if isSearching {
                 VStack(spacing: 12) {
                     ProgressView()
@@ -71,20 +76,25 @@ struct SearchView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if !appState.searchResults.isEmpty {
-                // MINIMAL results display
+                // Grid-based results display - like DiscoverView
                 VStack(alignment: .leading, spacing: 12) {
                     Text("\(appState.searchResults.count) results")
                         .font(.system(size: 16))
                         .padding(.horizontal, 12)
 
-                    // ULTRA-SIMPLE list - NO complex modifiers
-                    List(appState.searchResults, id: \.id) { item in
-                        SimpleSearchResultItem(item: item)
-                            .onTapGesture {
-                                selectMedia(item)
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(appState.searchResults, id: \.id) { item in
+                                Button(action: {
+                                    selectMedia(item)
+                                }) {
+                                    SearchMediaCard(item: item)
+                                }
+                                .buttonStyle(.plain)
                             }
+                        }
+                        .padding()
                     }
-                    .listStyle(.plain)
                 }
             } else {
                 VStack(spacing: 16) {
@@ -138,8 +148,8 @@ struct SearchView: View {
                 let movies = try await apiClient.searchMedia(query: searchQuery, type: "movie")
                 let series = try await apiClient.searchMedia(query: searchQuery, type: "series")
 
-                // Combine and limit results
-                var allResults = Array((movies + series).prefix(12))
+                // Combine all results - no artificial limit
+                var allResults = movies + series
 
                 print("🔍 [SMART] API search completed: \(allResults.count) results")
                 print("🔍 [SMART] Movies: \(movies.count), Series: \(series.count)")
@@ -157,9 +167,23 @@ struct SearchView: View {
                 }
 
                 await MainActor.run {
-                    appState.searchResults = allResults
+                    // Sort results to prioritize items with poster art
+                    let sortedResults = allResults.sorted { item1, item2 in
+                        // Items with posters come first
+                        let hasPoster1 = item1.poster != nil
+                        let hasPoster2 = item2.poster != nil
+
+                        if hasPoster1 != hasPoster2 {
+                            return hasPoster1 && !hasPoster2
+                        }
+
+                        // If both have posters or both don't, maintain current order
+                        return false
+                    }
+
+                    appState.searchResults = sortedResults
                     isSearching = false
-                    print("🔍 [SMART] UI updated with combined results")
+                    print("🔍 [SMART] UI updated with sorted results (poster-first)")
                 }
 
             } catch {
@@ -170,9 +194,23 @@ struct SearchView: View {
                 let fallbackResults = createIntelligentFallbackResults(for: searchQuery, queryType: detectQueryType(normalizedQuery))
 
                 await MainActor.run {
-                    appState.searchResults = fallbackResults
+                    // Sort fallback results to prioritize items with poster art
+                    let sortedFallbackResults = fallbackResults.sorted { item1, item2 in
+                        // Items with posters come first
+                        let hasPoster1 = item1.poster != nil
+                        let hasPoster2 = item2.poster != nil
+
+                        if hasPoster1 != hasPoster2 {
+                            return hasPoster1 && !hasPoster2
+                        }
+
+                        // If both have posters or both don't, maintain current order
+                        return false
+                    }
+
+                    appState.searchResults = sortedFallbackResults
                     isSearching = false
-                    print("🔍 [SMART] UI updated with intelligent fallback results")
+                    print("🔍 [SMART] UI updated with sorted fallback results (poster-first)")
                 }
             }
         }
@@ -185,7 +223,8 @@ struct SearchView: View {
             "game of throne",
             "got",
             "gameofthrones",
-            "game thrones"
+            "game thrones",
+            "barry"
         ]
 
         return problematics.contains(query)
@@ -457,7 +496,7 @@ struct SearchView: View {
     }
 
     private func selectMedia(_ item: MediaItem) {
-        print("�� [DEBUG] selectMedia called for: \(item.name)")
+        print("🔍 [DEBUG] selectMedia called for: \(item.name)")
         // Navigate to detail view in main content area
         appState.selectedMediaItem = item
         appState.currentView = .mediaDetail
@@ -465,47 +504,70 @@ struct SearchView: View {
     }
 }
 
-// ULTRA-MINIMAL list item - ZERO LAYOUT VALIDATION TRIGGERS
-struct SimpleSearchResultItem: View {
+// Search Media Card - based on DiscoverMediaCard from DiscoverView
+struct SearchMediaCard: View {
     let item: MediaItem
 
     var body: some View {
-        HStack(spacing: 8) {
-            // Simple AsyncImage poster - minimal modifiers, fixed size
-            AsyncImage(url: URL(string: item.poster ?? "")) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 80, height: 120)
-                case .failure, .empty:
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(width: 80, height: 120)
-                @unknown default:
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.2))
-                        .frame(width: 80, height: 120)
+        VStack(spacing: 12) {  // Increased spacing for clear separation
+            // Poster image - clean and separate
+            if let posterURL = item.poster {
+                AsyncImage(url: URL(string: posterURL)) { phase in
+                    switch phase {
+                    case .empty:
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .aspectRatio(2/3, contentMode: .fit)
+                            .overlay(
+                                ProgressView()
+                            )
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .aspectRatio(2/3, contentMode: .fit)
+                            .clipped()
+                    case .failure:
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .aspectRatio(2/3, contentMode: .fit)
+                            .overlay(
+                                Image(systemName: "photo")
+                                    .foregroundColor(.gray)
+                            )
+                    @unknown default:
+                        EmptyView()
+                    }
                 }
+                .cornerRadius(8)
+            } else {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+                    .aspectRatio(2/3, contentMode: .fit)
+                    .cornerRadius(8)
+                    .overlay(
+                        Image(systemName: "photo")
+                            .foregroundColor(.gray)
+                    )
             }
-            .frame(width: 80, height: 120)
 
-            // Simple text - NO complex modifiers
-            VStack(alignment: .leading, spacing: 4) {
-                Text(item.name)
-                    .font(.system(size: 16))
-                    .lineLimit(2)
+            // Title text - clearly separated and centered
+            Text(item.name)
+                .font(.caption)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.primary)
 
-                Text(item.type == "series" ? "TV Show" : "Movie")
-                    .font(.system(size: 13))
+            // Optional genres - below title
+            if let genres = item.genres, !genres.isEmpty {
+                Text(genres.prefix(2).joined(separator: ", "))
+                    .font(.caption2)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.center)
             }
-
-            Spacer(minLength: 0)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(Color.clear)
+        .frame(width: 150, height: 260)  // Fixed height AND width to prevent overlap
+        .clipped()  // Prevent content from spilling out
     }
 }

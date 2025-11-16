@@ -252,6 +252,70 @@ func registerStreamRoutes(_ app: Application) {
         print("      720p: \(qualityBuckets.hd?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.hd?.alternates?.count ?? 0) alts")
         print("      480p: \(qualityBuckets.sd?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.sd?.alternates?.count ?? 0) alts")
 
+        // CRITICAL FIX: Build streams array respecting server's ordering
+        var finalStreams: [Stream] = []
+
+        // Add 4K bucket if available
+        if let uhd4k = qualityBuckets.uhd4k {
+            if let primary = uhd4k.primary {
+                finalStreams.append(primary)
+                print("📦 Adding 4K primary: \(primary.title)")
+            }
+            if let alternates = uhd4k.alternates {
+                for alt in alternates {
+                    finalStreams.append(alt)
+                    print("📦 Adding 4K alternate: \(alt.title)")
+                }
+            }
+        }
+
+        // Add 1080p bucket if available (highest priority for most users)
+        if let fullHD = qualityBuckets.fullHD {
+            if let primary = fullHD.primary {
+                finalStreams.append(primary)
+                print("📦 Adding 1080p primary: \(primary.title)")
+            }
+            if let alternates = fullHD.alternates {
+                for alt in alternates {
+                    finalStreams.append(alt)
+                    print("📦 Adding 1080p alternate: \(alt.title)")
+                }
+            }
+        }
+
+        // Add 720p bucket if available
+        if let hd = qualityBuckets.hd {
+            if let primary = hd.primary {
+                finalStreams.append(primary)
+                print("📦 Adding 720p primary: \(primary.title)")
+            }
+            if let alternates = hd.alternates {
+                for alt in alternates {
+                    finalStreams.append(alt)
+                    print("📦 Adding 720p alternate: \(alt.title)")
+                }
+            }
+        }
+
+        // Add 480p bucket if available
+        if let sd = qualityBuckets.sd {
+            if let primary = sd.primary {
+                finalStreams.append(primary)
+                print("📦 Adding 480p primary: \(primary.title)")
+            }
+            if let alternates = sd.alternates {
+                for alt in alternates {
+                    finalStreams.append(alt)
+                    print("📦 Adding 480p alternate: \(alt.title)")
+                }
+            }
+        }
+
+        print("🏆 FINAL SERVER ORDER SENT TO CLIENT:")
+        for (idx, stream) in finalStreams.prefix(10).enumerated() {
+            print("   [\(idx + 1)] \(stream.title)")
+        }
+
         let response = QualityBucketsResponse(buckets: qualityBuckets)
 
         let jsonData = try JSONEncoder().encode(response)
@@ -562,7 +626,15 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
 
 private func sortStreams(_ streams: [Stream]) -> [Stream] {
     return streams.sorted { s1, s2 in
-        // 1. Sort by quality (4K > 2160p > 1080p > 720p > 480p)
+        // 1. Enhanced source quality ranking
+        let sourceScore1 = sourceQualityRank(s1)
+        let sourceScore2 = sourceQualityRank(s2)
+
+        if sourceScore1 != sourceScore2 {
+            return sourceScore1 > sourceScore2
+        }
+
+        // 2. Sort by quality (4K > 2160p > 1080p > 720p > 480p)
         let q1 = qualityRank(s1.quality ?? "Unknown")
         let q2 = qualityRank(s2.quality ?? "Unknown")
 
@@ -570,7 +642,23 @@ private func sortStreams(_ streams: [Stream]) -> [Stream] {
             return q1 > q2
         }
 
-        // 2. Sort by seeders
+        // 3. Sort by codec quality (x264 preferred over others)
+        let codecScore1 = codecQualityRank(s1)
+        let codecScore2 = codecQualityRank(s2)
+
+        if codecScore1 != codecScore2 {
+            return codecScore1 > codecScore2
+        }
+
+        // 4. Sort by provider reputation
+        let providerScore1 = providerReputationRank(s1.provider.lowercased())
+        let providerScore2 = providerReputationRank(s2.provider.lowercased())
+
+        if providerScore1 != providerScore2 {
+            return providerScore1 > providerScore2
+        }
+
+        // 5. Sort by seeders (but with reduced priority)
         let seeders1 = s1.seeders ?? 0
         let seeders2 = s2.seeders ?? 0
 
@@ -578,11 +666,84 @@ private func sortStreams(_ streams: [Stream]) -> [Stream] {
             return seeders1 > seeders2
         }
 
-        // 3. Sort by size (prefer larger files = better quality)
+        // 6. Sort by size (prefer larger files = better quality)
         let size1 = parseSizeInBytes(s1.size)
         let size2 = parseSizeInBytes(s2.size)
 
         return size1 > size2
+    }
+}
+// MARK: - Enhanced Quality Ranking Functions
+
+private func sourceQualityRank(_ stream: Stream) -> Int {
+    let title = stream.title.lowercased()
+
+    // Premium sources with highest priority
+    if title.contains("nf ") || title.contains("nf ") || title.contains("netflix") || title.contains("amazon") || title.contains("hbo max") || title.contains("disney+") {
+        return 100 // Premium streaming sources
+    }
+
+    // High quality physical media
+    if title.contains("blu-ray") || title.contains("bluray") || title.contains("bdrip") || title.contains("bd-rip") {
+        return 90 // BluRay sources
+    }
+
+    // Web downloads with good quality
+    if title.contains("web-dl") || title.contains("webdl") || title.contains("web dl") {
+        return 85 // WEB-DL sources
+    }
+
+    // Web rips
+    if title.contains("webrip") || title.contains("web-rip") {
+        return 75 // WEBRip sources
+    }
+
+    // Broadcast TV
+    if title.contains("hdtv") {
+        return 70 // HDTV sources
+    }
+
+    // DVD sources
+    if title.contains("dvdrip") || title.contains("dvd-rip") {
+        return 60 // DVD sources
+    }
+
+    // Unknown/Low quality
+    return 50 // Unknown sources
+}
+
+private func codecQualityRank(_ stream: Stream) -> Int {
+    let title = stream.title.lowercased()
+
+    // Prefer x264/AVC for compatibility
+    if title.contains("x264") || title.contains("avc") || title.contains("h.264") || title.contains("h264") {
+        return 100 // x264 preferred
+    }
+
+    // Acceptable codecs
+    if title.contains("xvid") {
+        return 80 // XVID acceptable
+    }
+
+    // Lower priority codecs
+    if title.contains("divx") {
+        return 60 // DIVX lower priority
+    }
+
+    return 50 // Unknown codec
+}
+
+private func providerReputationRank(_ provider: String) -> Int {
+    // Known high-quality providers
+    switch provider {
+    case "zilean", "mediafusion", "torrentio":
+        return 100 // Premium providers
+    case "comet":
+        return 95 // Cached/premium
+    case "jackettio":
+        return 85 // Good secondary
+    default:
+        return 70 // Unknown provider
     }
 }
 
@@ -749,7 +910,7 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
         return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
     }
 
-    // Sort by: year match (ABSOLUTE PRIORITY), then codec, then seeders, then extension
+    // Sort by: year match (ABSOLUTE PRIORITY), then source quality, then provider, then codec, then seeders, then extension
     let yearSorted = yearAndCodecFiltered.sorted { a, b in
         // PRIMARY: Year match is ABSOLUTE PRIORITY
         let yearPriorityA = yearMatchPriority(a)
@@ -759,7 +920,24 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
             return yearPriorityA > yearPriorityB // A matches year, B doesn't = A wins
         }
 
-        // SECONDARY: Codec sort key - x264 always wins over x265
+        // SECONDARY: Enhanced source quality ranking (Netflix > BluRay > WEB-DL > WEBRip)
+        let sourceScoreA = sourceQualityRank(a)
+        let sourceScoreB = sourceQualityRank(b)
+
+        if sourceScoreA != sourceScoreB {
+            print("  🎯 Source Quality: \(a.title) (\(sourceScoreA)) vs \(b.title) (\(sourceScoreB))")
+            return sourceScoreA > sourceScoreB
+        }
+
+        // TERTIARY: Provider reputation ranking
+        let providerScoreA = providerReputationRank(a.provider.lowercased())
+        let providerScoreB = providerReputationRank(b.provider.lowercased())
+
+        if providerScoreA != providerScoreB {
+            return providerScoreA > providerScoreB
+        }
+
+        // QUATERNARY: Codec quality (x264 preferred)
         let codecA = codecRank(a)
         let codecB = codecRank(b)
 
@@ -767,7 +945,7 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
             return codecA > codecB
         }
 
-        // TERTIARY: Seeders (but only within same year match tier)
+        // QUINARY: Seeders (reduced priority)
         let seedersA = a.seeders ?? 0
         let seedersB = b.seeders ?? 0
 
@@ -775,7 +953,7 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
             return seedersA > seedersB // More seeders = better
         }
 
-        // QUATERNARY: Extension rank
+        // SENARY: Extension rank
         func extRank(_ ext: String?) -> Int {
             guard let ext = ext?.lowercased() else { return 0 }
             if ext == "mkv" { return 3 }
@@ -790,7 +968,7 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
     // NOW apply seeder filter, but preserve year priority ordering
     print("  🌱 Seeder filter (\(quality)): minSeeders=\(minSeeders)")
     let beforeSeederFilter = yearSorted.count
-    var filtered = yearSorted.filter { stream in
+    let filtered = yearSorted.filter { stream in
         // RD-cached streams (from Comet, etc.) are marked with [RD⚡] or similar
         let isCached = stream.title.contains("[RD⚡]") ||
                        stream.title.contains("⚡") ||
@@ -817,9 +995,21 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
     // The sorted order is already preserved from yearSorted
     let sorted = filtered
 
-    // Primary stream + up to 4 alternates
+    // Debug: Show final sorted order before primary selection
+    print("🏆 FINAL SORTED ORDER for bucket (top 5):")
+    for (index, stream) in sorted.prefix(5).enumerated() {
+        let score = sourceQualityRank(stream)
+        print("   [\(index + 1)] \(stream.title) (source score: \(score))")
+    }
+
     let primary = sorted.first
     let alternates = Array(sorted.dropFirst().prefix(4))
+
+    // Debug: Show what's being assigned as primary
+    if let primary = primary {
+        let score = sourceQualityRank(primary)
+        print("👑 ASSIGNED AS PRIMARY: \(primary.title) (source score: \(score))")
+    }
 
     if let primary = primary {
         let sizeStr = primary.size ?? "unknown"

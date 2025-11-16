@@ -452,44 +452,34 @@ class LocalAPIClient: ObservableObject {
         )
     }
 
-    /// Filters a single quality bucket and re-sorts by quality score
+    /// Filters a single quality bucket while preserving server's Netflix-first ordering
     private func filterBucket(_ bucket: QualityBucket?) -> QualityBucket? {
         guard let bucket = bucket else { return nil }
 
-        // Filter and score all streams (primary + alternates)
-        var allStreams: [Stream] = []
+        // CRITICAL FIX: Preserve server's ordering - NO re-sorting!
+        // Server already handles Netflix priority, quality ranking, and source selection
+        // Client should only filter out terrible quality (CAM/TS) and preserve order
+
+        // Filter streams for quality only, NO re-sorting to preserve server's Netflix priority
+        var filteredPrimary: Stream?
+        var filteredAlternates: [Stream] = []
+
+        // Check primary stream
         if let primary = bucket.primary, isGoodQuality(primary) {
-            allStreams.append(primary)
+            filteredPrimary = primary
         }
+
+        // Filter alternate streams (preserve server's order)
         if let alternates = bucket.alternates {
-            allStreams += alternates.filter { isGoodQuality($0) }
+            filteredAlternates = alternates.filter { isGoodQuality($0) }
         }
 
-        // Sort by quality score (best first)
-        let sortedStreams = allStreams.sorted { scoreStream($0) > scoreStream($1) }
-
-        // If primary passed quality check and scored highest, keep structure
-        if let primary = bucket.primary,
-           isGoodQuality(primary),
-           sortedStreams.first?.title == primary.title {
-            let filteredAlternates = Array(sortedStreams.dropFirst())
-            return QualityBucket(
-                primary: primary,
-                alternates: filteredAlternates.isEmpty ? nil : filteredAlternates
-            )
-        }
-
-        // Otherwise, promote best scored stream as primary
-        if let newPrimary = sortedStreams.first {
-            let remainingAlternates = Array(sortedStreams.dropFirst())
-            return QualityBucket(
-                primary: newPrimary,
-                alternates: remainingAlternates.isEmpty ? nil : remainingAlternates
-            )
-        }
-
-        // No good quality streams in this quality bucket
-        return nil
+        // Return bucket with preserved server ordering
+        // Netflix will stay first because server ranked it as primary (score 100)
+        return QualityBucket(
+            primary: filteredPrimary,
+            alternates: filteredAlternates.isEmpty ? nil : filteredAlternates
+        )
     }
 
     // MARK: - Smart Stream Selection (ColorFruit logic ported)
@@ -662,25 +652,15 @@ struct MediaItem: Identifiable, Codable {
         print("🔍 [DEBUG] Successfully created MediaItem from meta: \(self.name)")
     }
 
-    // HARDWARE-SAFE computed properties - add error handling
+    // FIXED: Removed unnecessary do-catch blocks - URL(string:) returns nil, doesn't throw
     var posterURL: URL? {
-        do {
-            guard let poster = poster else { return nil }
-            return URL(string: poster)
-        } catch {
-            print("🔍 [DEBUG] Failed to create poster URL: \(error)")
-            return nil
-        }
+        guard let poster = poster else { return nil }
+        return URL(string: poster)
     }
 
     var backgroundURL: URL? {
-        do {
-            guard let background = background else { return nil }
-            return URL(string: background)
-        } catch {
-            print("🔍 [DEBUG] Failed to create background URL: \(error)")
-            return nil
-        }
+        guard let background = background else { return nil }
+        return URL(string: background)
     }
 }
 

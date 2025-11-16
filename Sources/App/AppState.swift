@@ -237,82 +237,41 @@ class AppState: ObservableObject {
                 print("   [\(idx + 1)] \(stream.title)")
             }
 
-            // Pre-filter for TV shows: only try streams with correct episode pattern
-            // CRITICAL: Only apply episode filtering to TV series, not movies
-            if item.type == "series", let season = selectedSeason, let episode = selectedEpisode {
-                let originalCount = streamsToTry.count
+            // CRITICAL FIX: Selective filtering that preserves server order AND blocks x265
+            // Server handles most filtering, but we need safety net for x265 variants
+            print("🎯 PRESERVING SERVER ORDER + x265 SAFETY NET")
+            print("   Server handled: episode patterns, quality ranking, primary selection")
+            print("   Client adds: x265 safety filter (without reordering)")
 
-                let episodePatterns = [
-                    String(format: "s%02de%02d", season, episode),  // s01e02 (specific episode)
-                    String(format: "s%de%d", season, episode),      // s1e2 (specific episode)
-                    String(format: "s%02d e%02d", season, episode), // s01 e02 (specific episode with space)
-                    String(format: "%dx%02d", season, episode),     // 1x02 (specific episode)
-                    String(format: "season %d episode %d", season, episode) // season 1 episode 2 (specific episode)
-                ]
+            // Apply ONLY x265 filtering as safety net - preserve server's ordering
+            print("🔥 x265 SAFETY FILTER - BEFORE: \(streamsToTry.count) streams")
+            let beforeX265Filter = streamsToTry.count
+            let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
 
-                let seasonOnlyPatterns = [
-                    String(format: " s%02d ", season),    // " s01 " (season pack with spaces)
-                    String(format: ".s%02d.", season),    // ".s01." (season pack with dots)
-                    String(format: " s%d ", season),      // " s1 " (season pack variant)
-                    String(format: ".s%d.", season),      // ".s1." (season pack variant)
-                    String(format: "season.%d.", season), // "season.1." (season pack)
-                    String(format: "season %d ", season)  // "season 1 " (season pack)
-                ]
-
-                streamsToTry = streamsToTry.filter { stream in
-                    let titleLower = stream.title.lowercased()
-
-                    // Match specific episode patterns
-                    let matchesEpisode = episodePatterns.contains { pattern in
-                        titleLower.contains(pattern)
-                    }
-
-                    // Match season pack patterns (for shows like Breaking Bad)
-                    let matchesSeasonPack = seasonOnlyPatterns.contains { pattern in
-                        titleLower.contains(pattern)
-                    }
-
-                    let matches = matchesEpisode || matchesSeasonPack
-
-                    if !matches {
-                        print("⏭️  Skipping \(stream.title) - doesn't match S\(String(format: "%02d", season))E\(String(format: "%02d", episode)) or season pack")
-                    }
-
-                    return matches
-                }
-
-                print("✅ Pre-filtered TV streams: \(originalCount) → \(streamsToTry.count) matching S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
-
-                guard !streamsToTry.isEmpty else {
-                    print("❌ No streams match the requested episode pattern")
-                    throw APIError.noStreamsFound
-                }
-            }
-
-            // CRITICAL: Filter x265/HEVC for TV shows too (they were skipped above)
-            print("🔥 FILTERING x265 - BEFORE: \(streamsToTry.count) streams")
-            let beforeCodecFilter = streamsToTry.count
-            let badCodecs = ["x265", "hevc", "h.265", "h265"]
-
-            streamsToTry = streamsToTry.filter { stream in
+            // CRITICAL: Use compactMap to preserve order while removing x265
+            let filteredStreams = streamsToTry.compactMap { stream -> Stream? in
                 let titleLower = stream.title.lowercased()
                 let hasBadCodec = badCodecs.contains { codec in
                     titleLower.contains(codec)
                 }
                 if hasBadCodec {
-                    print("🚫 BLOCKING x265/HEVC: \(stream.title)")
+                    print("🚫 CLIENT BLOCKING x265/HEVC: \(stream.title)")
+                    return nil  // Remove but keep order of remaining streams
                 }
-                return !hasBadCodec
+                return stream  // Keep stream in original position
             }
 
-            let afterCodecFilter = streamsToTry.count
-            print("🔥 AFTER x265 FILTER: \(streamsToTry.count) streams")
-            if afterCodecFilter < beforeCodecFilter {
-                print("🚫 BLOCKED \(beforeCodecFilter - afterCodecFilter) x265 streams (\(beforeCodecFilter) → \(afterCodecFilter))")
+            streamsToTry = filteredStreams
+            let afterX265Filter = streamsToTry.count
+
+            print("🔥 x265 SAFETY FILTER - AFTER: \(streamsToTry.count) streams")
+            if afterX265Filter < beforeX265Filter {
+                print("🚫 CLIENT BLOCKED \(beforeX265Filter - afterX265Filter) x265 streams")
+                print("   Netflix priority preserved: server's primary still #1")
             }
 
             guard !streamsToTry.isEmpty else {
-                print("❌ ERROR: No x264 streams available after filtering x265")
+                print("❌ ERROR: No streams available after x265 safety filter")
                 throw APIError.noStreamsFound
             }
 

@@ -434,7 +434,7 @@ func registerStreamRoutes(_ app: Application) {
         // Only remove streams that are:
         // 1. Have no infoHash AND no URL (can't be played)
         // 2. AND have generic/placeholder titles like "[RD⚡] Comet..."
-        var validStreams = streamsWithSubtitles.filter { stream in
+        let validStreams = streamsWithSubtitles.filter { stream in
             let hasHash = stream.infoHash != nil
             let hasUrl = stream.url != nil
             let hasRealTitle = !stream.title.contains("Comet") || (stream.title.count > 20 && !stream.title.contains("[RD⚡]"))

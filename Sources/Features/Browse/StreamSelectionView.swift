@@ -1,5 +1,126 @@
 import SwiftUI
 
+// MARK: - Badge Components
+
+struct SourceQualityBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Text(stream.sourceQualityEmoji)
+            Text(stream.sourceQuality)
+                .font(.caption)
+                .fontWeight(.medium)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(stream.sourceQualityBadgeColor.opacity(0.2))
+        .foregroundColor(stream.sourceQualityBadgeColor)
+        .cornerRadius(4)
+    }
+}
+
+struct SeederBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Text(stream.seederEmoji)
+            if let seeders = stream.seeders {
+                Text("\(seeders)")
+                    .font(.caption)
+                    .fontWeight(.medium)
+            } else {
+                Text("No seeders")
+                    .font(.caption)
+                    .fontWeight(.medium)
+            }
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(stream.seederBadgeColor.opacity(0.2))
+        .foregroundColor(stream.seederBadgeColor)
+        .cornerRadius(4)
+    }
+}
+
+struct SizeBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Text("💾")
+            Text(stream.formattedSize)
+                .font(.caption)
+                .fontWeight(.medium)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(Color.gray.opacity(0.2))
+        .foregroundColor(.secondary)
+        .cornerRadius(4)
+    }
+}
+
+struct ProviderBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Text(stream.providerEmoji)
+            Text(stream.provider)
+                .font(.caption)
+                .fontWeight(.medium)
+                .textCase(.uppercase)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(Color.purple.opacity(0.2))
+        .foregroundColor(.purple)
+        .cornerRadius(4)
+    }
+}
+
+struct VideoCodecBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        HStack(spacing: 2) {
+            Text(stream.videoCodecEmoji)
+            Text(stream.videoCodec)
+                .font(.caption)
+                .fontWeight(.medium)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(stream.videoCodecBadgeColor.opacity(0.2))
+        .foregroundColor(stream.videoCodecBadgeColor)
+        .cornerRadius(4)
+    }
+}
+
+struct QualityResolutionBadge: View {
+    let stream: Stream
+
+    var body: some View {
+        if let quality = stream.quality {
+            HStack(spacing: 2) {
+                Text("📺")
+                Text(quality)
+                    .font(.caption)
+                    .fontWeight(.medium)
+            }
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(Color.blue.opacity(0.2))
+            .foregroundColor(.blue)
+            .cornerRadius(4)
+        }
+    }
+}
+
+// MARK: - Main Views
+
 struct StreamSelectionView: View {
     let mediaItem: MediaItem
     let selectedQuality: VideoQuality
@@ -87,7 +208,8 @@ struct StreamSelectionView: View {
                     type: mediaItem.type,
                     quality: selectedQuality.rawValue,
                     season: nil, // TODO: Get from appState if available
-                    episode: nil  // TODO: Get from appState if available
+                    episode: nil, // TODO: Get from appState if available
+                    year: mediaItem.year
                 )
 
                 await MainActor.run {
@@ -111,42 +233,30 @@ struct StreamRow: View {
     var body: some View {
         Button(action: onTap) {
             HStack {
-                VStack(alignment: .leading, spacing: 4) {
+                VStack(alignment: .leading, spacing: 6) {
+                    // Title
                     Text(stream.title)
                         .font(.headline)
                         .multilineTextAlignment(.leading)
                         .lineLimit(2)
 
-                    HStack {
-                        if let quality = stream.quality {
-                            Text(quality)
-                                .font(.caption)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 2)
-                                .background(Color.blue.opacity(0.2))
-                                .cornerRadius(4)
-                        }
+                    // Badges row 1 - Quality, Source, and Codec
+                    HStack(spacing: 6) {
+                        QualityResolutionBadge(stream: stream)
+                        SourceQualityBadge(stream: stream)
+                        VideoCodecBadge(stream: stream)
 
-                        if let seeders = stream.seeders {
-                            HStack(spacing: 2) {
-                                Image(systemName: "arrow.up.circle.fill")
-                                    .font(.caption2)
-                                Text("\(seeders)")
-                                    .font(.caption)
-                            }
-                            .foregroundColor(.green)
-                        }
-
-                        if let size = stream.size {
-                            Text(size)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+                        Spacer()
                     }
 
-                    Text("Provider: \(stream.provider)")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)
+                    // Badges row 2 - Seeders, Size, Provider
+                    HStack(spacing: 6) {
+                        SeederBadge(stream: stream)
+                        SizeBadge(stream: stream)
+                        ProviderBadge(stream: stream)
+
+                        Spacer()
+                    }
                 }
 
                 Spacer()
@@ -156,6 +266,7 @@ struct StreamRow: View {
                     .foregroundColor(.secondary)
             }
             .padding(.vertical, 8)
+            .padding(.horizontal, 4)
         }
         .buttonStyle(PlainButtonStyle())
     }

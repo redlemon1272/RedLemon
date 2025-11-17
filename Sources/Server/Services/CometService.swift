@@ -19,13 +19,13 @@ private struct CometFullConfig: Codable {
     let debridService: String
     let debridApiKey: String
     let debridStreamProxyPassword: String
-    
+
     struct Languages: Codable {
         let exclude: [String]
         let preferred: [String]
     }
     let languages: Languages
-    
+
     struct Options: Codable {
         let remove_ranks_under: Int
         let allow_english_in_languages: Bool
@@ -62,12 +62,12 @@ class CometService: ProviderService {
                 ),
                 resolutions: [:]
             )
-            
+
             guard let jsonData = try? JSONEncoder().encode(configData),
                   let jsonString = String(data: jsonData, encoding: .utf8) else {
                 fatalError("Failed to encode Comet config")
             }
-            
+
             let base64String = Data(jsonString.utf8).base64EncodedString()
             self.config = base64String
                 .replacingOccurrences(of: "+", with: "-")
@@ -85,7 +85,7 @@ class CometService: ProviderService {
         episode: Int? = nil
     ) async throws -> [Stream] {
         let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode)
-        
+
         print("🔍 Comet: Fetching \(url.absoluteString.prefix(100))...")
 
         let (data, response) = try await URLSession.shared.data(from: url)
@@ -97,9 +97,9 @@ class CometService: ProviderService {
 
         let decoder = JSONDecoder()
         let result = try decoder.decode(CometResponse.self, from: data)
-        
+
         print("✅ Comet: Got \(result.streams?.count ?? 0) streams")
-        
+
         return parseStreams(result.streams ?? [])
     }
 
@@ -110,7 +110,7 @@ class CometService: ProviderService {
         } else {
             streamPath = imdbId
         }
-        
+
         if !config.isEmpty {
             return URL(string: "\(baseUrl)/\(config)/stream/\(type)/\(streamPath).json")!
         } else {
@@ -126,18 +126,18 @@ class CometService: ProviderService {
             // 2. RealDebrid instant streams with direct URL
             let infoHash = stream.infoHash
             let url = stream.url
-            
+
             // Need at least one of them
             guard infoHash != nil || url != nil else {
                 print("⚠️ Comet: Skipping stream with no infoHash or URL: \(stream.name ?? "unknown")")
                 return nil
             }
-            
+
             let title = stream.name ?? ""
             let quality = extractQuality(from: title) ?? extractQuality(from: stream.description ?? "")
             let seeders = extractSeeders(from: stream.description ?? "")
             let size = extractSize(from: stream.description ?? "")
-            
+
             return Stream(
                 url: url,  // Use direct URL if available (RD instant streams)
                 title: title,
@@ -157,10 +157,10 @@ class CometService: ProviderService {
     }
 
     private func extractQuality(from text: String) -> String? {
-        let qualities = ["2160p", "1080p", "720p", "480p", "4K"]
+        let qualities = ["2160p", "1080p", "720p", "480p"]
         for quality in qualities {
             if text.contains(quality) {
-                return quality == "4K" ? "2160p" : quality
+                return quality
             }
         }
         return nil

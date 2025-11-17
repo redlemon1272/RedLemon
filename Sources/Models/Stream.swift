@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Stream: Codable {
     let url: String?
@@ -95,6 +96,127 @@ struct Stream: Codable {
         case "CAM", "TS": return "red"
         case "HDTV", "DVDRip": return "orange"
         default: return "gray"
+        }
+    }
+
+    /// Emoji for source quality
+    var sourceQualityEmoji: String {
+        switch sourceQuality {
+        case "BluRay": return "💎"
+        case "WEB-DL": return "🌐"
+        case "WEBRip": return "🌍"
+        case "CAM": return "🎬"
+        case "TS": return "📽️"
+        case "HDTV": return "📺"
+        case "DVDRip": return "💿"
+        default: return "❓"
+        }
+    }
+
+    /// SwiftUI Color for source quality badge
+    var sourceQualityBadgeColor: Color {
+        switch sourceQuality {
+        case "BluRay": return .blue
+        case "WEB-DL", "WEBRip": return .green
+        case "CAM", "TS": return .red
+        case "HDTV", "DVDRip": return .orange
+        default: return .gray
+        }
+    }
+
+    // MARK: - Codec Detection
+
+    /// Extract the video codec from title (x264, x265, H.264, H.265, HEVC, AVC)
+    var videoCodec: String {
+        let titleUpper = title.uppercased()
+
+        // Check for x265/HEVC/H.265 first (more specific)
+        if titleUpper.contains("X265") || titleUpper.contains("H.265") || titleUpper.contains("HEVC") {
+            return "x265"
+        }
+        // Then check for x264/H.264/AVC
+        else if titleUpper.contains("X264") || titleUpper.contains("H.264") || titleUpper.contains("AVC") {
+            return "x264"
+        }
+
+        return "Unknown"
+    }
+
+    /// Emoji for video codec
+    var videoCodecEmoji: String {
+        switch videoCodec {
+        case "x265": return "🔥"
+        case "x264": return "⚡"
+        default: return "❓"
+        }
+    }
+
+    /// SwiftUI Color for video codec badge
+    var videoCodecBadgeColor: Color {
+        switch videoCodec {
+        case "x265": return .orange
+        case "x264": return .blue
+        default: return .gray
+        }
+    }
+
+    /// Seeder tier for display purposes
+    var seederTier: String {
+        guard let seeders = seeders else { return "none" }
+        if seeders >= 100 { return "high" }
+        if seeders >= 20 { return "medium" }
+        if seeders >= 1 { return "low" }
+        return "none"
+    }
+
+    /// Emoji for seeder count
+    var seederEmoji: String {
+        switch seederTier {
+        case "high": return "🌳"
+        case "medium": return "🌿"
+        case "low": return "🌱"
+        default: return "🔻"
+        }
+    }
+
+    /// SwiftUI Color for seeder badge
+    var seederBadgeColor: Color {
+        switch seederTier {
+        case "high": return .green
+        case "medium": return .yellow
+        case "low": return .orange
+        default: return .red
+        }
+    }
+
+    /// Formatted size display
+    var formattedSize: String {
+        guard let size = size else { return "Unknown" }
+
+        // Extract numeric value and unit
+        let components = size.components(separatedBy: CharacterSet.decimalDigits.inverted)
+        let numbers = components.filter { !$0.isEmpty }
+
+        if let numberString = numbers.first, let number = Double(numberString) {
+            if size.uppercased().contains("GB") {
+                return String(format: "%.1f GB", number)
+            } else if size.uppercased().contains("MB") {
+                return String(format: "%.0f MB", number)
+            }
+        }
+
+        return size
+    }
+
+    /// Emoji for provider
+    var providerEmoji: String {
+        switch provider.lowercased() {
+        case "torrentio": return "🚀"
+        case "mediafusion": return "🔮"
+        case "comet": return "☄️"
+        case "zilean": return "📡"
+        case "jackettio": return "🧥"
+        default: return "📡"
         }
     }
 }

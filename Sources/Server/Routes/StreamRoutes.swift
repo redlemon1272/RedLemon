@@ -221,7 +221,7 @@ func registerStreamRoutes(_ app: Application) {
 
         // Partition into quality buckets (ColorFruit logic)
         var buckets: [String: [Stream]] = [
-            "4K": [],
+            "2160p": [],
             "1080p": [],
             "720p": [],
             "480p": []
@@ -233,21 +233,21 @@ func registerStreamRoutes(_ app: Application) {
         }
 
         print("   📦 Bucket counts (before processBucket):")
-        print("      4K: \(buckets["4K"]?.count ?? 0)")
+        print("      2160p: \(buckets["2160p"]?.count ?? 0)")
         print("      1080p: \(buckets["1080p"]?.count ?? 0)")
         print("      720p: \(buckets["720p"]?.count ?? 0)")
         print("      480p: \(buckets["480p"]?.count ?? 0)")
 
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
         let qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["4K"] ?? [], minSeeders: 1, quality: "4K", year: year),
+            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year),
             fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year),
             hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year),
             sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year)
         )
 
         print("   📦 Bucket counts (after processBucket/seeder filter):")
-        print("      4K: \(qualityBuckets.uhd4k?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.uhd4k?.alternates?.count ?? 0) alts")
+        print("      2160p: \(qualityBuckets.uhd4k?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.uhd4k?.alternates?.count ?? 0) alts")
         print("      1080p: \(qualityBuckets.fullHD?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.fullHD?.alternates?.count ?? 0) alts")
         print("      720p: \(qualityBuckets.hd?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.hd?.alternates?.count ?? 0) alts")
         print("      480p: \(qualityBuckets.sd?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.sd?.alternates?.count ?? 0) alts")
@@ -255,16 +255,16 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL FIX: Build streams array respecting server's ordering
         var finalStreams: [Stream] = []
 
-        // Add 4K bucket if available
+        // Add 2160p bucket if available
         if let uhd4k = qualityBuckets.uhd4k {
             if let primary = uhd4k.primary {
                 finalStreams.append(primary)
-                print("📦 Adding 4K primary: \(primary.title)")
+                print("📦 Adding 2160p primary: \(primary.title)")
             }
             if let alternates = uhd4k.alternates {
                 for alt in alternates {
                     finalStreams.append(alt)
-                    print("📦 Adding 4K alternate: \(alt.title)")
+                    print("📦 Adding 2160p alternate: \(alt.title)")
                 }
             }
         }
@@ -343,8 +343,12 @@ func registerStreamRoutes(_ app: Application) {
         let type = req.query[String.self, at: "type"] ?? "movie"
         let season = req.query[Int.self, at: "season"]
         let episode = req.query[Int.self, at: "episode"]
+        let year = req.query[String.self, at: "year"] // e.g., "2025"
 
         print("🔍 Resolving ALL streams for: \(imdbId) (\(quality)) (S\(season ?? 0)E\(episode ?? 0))")
+        if let year = year {
+            print("   📅 Filtering by year: \(year)")
+        }
 
         // Fetch all streams from providers
         let streams = try await ProviderManager.shared.fetchStreams(
@@ -388,7 +392,29 @@ func registerStreamRoutes(_ app: Application) {
             print("   [\(idx)] \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
         }
 
-        // WILD WEST MODE: NO CODEC FILTERING
+        // FILTER BY YEAR (if provided) to ensure correct release matching
+        if let year = year {
+            let beforeYearFilter = streamsWithSubtitles.count
+
+            // Providers that naturally include year in title (torrent releases)
+            let titleBasedProviders = ["torrentio", "zilean"]
+
+            streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+                // For providers that include year in title, require year match
+                if titleBasedProviders.contains(stream.provider) {
+                    return stream.title.contains(year)
+                }
+
+                // For P2P/cached providers (MediaFusion, Comet, Jackettio), skip year filter
+                // These don't include year in their titles but fetch correct content by IMDB ID
+                return true
+            }
+
+            let afterYearFilter = streamsWithSubtitles.count
+            if afterYearFilter < beforeYearFilter {
+                print("   📅 Year filter (\(year)): \(beforeYearFilter) → \(afterYearFilter) streams")
+            }
+        }        // WILD WEST MODE: NO CODEC FILTERING
         // Let users decide if they want x265/HEVC - remove codec filter
         print("   🌵 WILD WEST: Skipping codec filtering - users choose their own codecs")
 
@@ -802,7 +828,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 }
 
                 // Bonus for resolution match (720p, 1080p, etc)
-                let resolutions = ["480p", "720p", "1080p", "2160p", "4k"]
+                let resolutions = ["480p", "720p", "1080p", "2160p"]
                 for res in resolutions {
                     if streamTitleLower.contains(res) && subReleaseLower.contains(res) {
                         score += 100
@@ -889,7 +915,7 @@ private func sortStreams(_ streams: [Stream]) -> [Stream] {
             return sourceScore1 > sourceScore2
         }
 
-        // 2. Sort by quality (4K > 2160p > 1080p > 720p > 480p)
+        // 2. Sort by quality (2160p > 1080p > 720p > 480p)
         let q1 = qualityRank(s1.quality ?? "Unknown")
         let q2 = qualityRank(s2.quality ?? "Unknown")
 
@@ -1020,7 +1046,7 @@ private func filterByQuality(_ streams: [Stream], preferredQuality: String?) -> 
 
 private func qualityRank(_ quality: String) -> Int {
     let q = quality.lowercased()
-    if q.contains("4k") || q.contains("2160p") {
+    if q.contains("2160p") {
         return 5
     } else if q.contains("1080p") {
         return 4
@@ -1067,8 +1093,8 @@ private func parseSizeInBytes(_ size: String?) -> Int64 {
 
 private func determineQualityBucket(_ quality: String) -> String {
     let q = quality.lowercased()
-    if q.contains("4k") || q.contains("2160p") {
-        return "4K"
+    if q.contains("2160p") {
+        return "2160p"
     } else if q.contains("1080p") {
         return "1080p"
     } else if q.contains("720p") {
@@ -1104,7 +1130,7 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
     // Size limits for better playback performance
     let maxSize: Int64?
     switch quality {
-    case "4K":
+    case "2160p":
         maxSize = 32_212_254_720 // 30 GB
     case "1080p", "720p":
         maxSize = 10_737_418_240 // 10 GB
@@ -1331,7 +1357,7 @@ private func extractReleaseInfo(_ title: String) -> String {
     // Extract resolution and codec info for matching
     var info = ""
 
-    let resolutions = ["480p", "720p", "1080p", "2160p", "4k"]
+    let resolutions = ["480p", "720p", "1080p", "2160p"]
     for res in resolutions {
         if title.contains(res) {
             info += res

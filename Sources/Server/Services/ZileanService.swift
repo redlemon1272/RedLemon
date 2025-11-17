@@ -13,11 +13,11 @@ import Vapor
 class ZileanService: ProviderService {
     let name = "zilean"
     private let baseUrl: String
-    
+
     init(url: String = "https://zilean.elfhosted.com") {
         self.baseUrl = url
     }
-    
+
     func fetchStreams(
         imdbId: String,
         type: String,
@@ -29,48 +29,48 @@ class ZileanService: ProviderService {
             print("⚠️ Zilean: Could not get metadata for \(imdbId)")
             return []
         }
-        
+
         let title = metadata.title
         print("🔍 Zilean: Searching for \"\(title)\"")
-        
+
         // URL encode the title
         guard let encodedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             return []
         }
-        
+
         // Build URL: /dmm/filtered?Query={title}
         let urlString = "\(baseUrl)/dmm/filtered?Query=\(encodedTitle)"
         guard let url = URL(string: urlString) else {
             return []
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
             throw ProviderError.httpError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0)
         }
-        
+
         // Zilean returns JSON array directly, not {streams: []}
         let results = try JSONDecoder().decode([ZileanResult].self, from: data)
-        
+
         print("✅ Zilean: Got \(results.count) results")
-        
+
         // Filter by season/episode if needed
         let filtered: [ZileanResult]
         if let season = season, let episode = episode {
             filtered = results.filter { result in
                 let rawTitle = result.raw_title ?? ""
-                
+
                 // Check if it's a season pack that includes this season
                 if let seasons = result.seasons, seasons.contains(season) {
                     return true
                 }
-                
+
                 // Check if filename matches S01E01 pattern
                 let pattern = "S\\d{1,2}E\\d{1,2}"
                 let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive)
@@ -84,32 +84,32 @@ class ZileanService: ProviderService {
                         return matchSeason == season && matchEpisode == episode
                     }
                 }
-                
+
                 return false
             }
         } else {
             filtered = results
         }
-        
+
         print("🔍 Zilean: Filtered to \(filtered.count) streams")
-        
+
         return parseStreams(filtered)
     }
-    
+
     private func parseStreams(_ zileanResults: [ZileanResult]) -> [Stream] {
         return zileanResults.compactMap { result -> Stream? in
             guard let hash = result.info_hash else {
                 return nil
             }
-            
+
             let title = result.raw_title ?? "Unknown"
-            
+
             // Parse quality
             let quality = extractQuality(from: title)
-            
+
             // Parse size (Zilean returns bytes as string or int)
             let size = result.size
-            
+
             return Stream(
                 url: nil,
                 title: title,
@@ -125,9 +125,9 @@ class ZileanService: ProviderService {
             )
         }
     }
-    
+
     private func extractQuality(from text: String) -> String {
-        let qualityPatterns = ["2160p", "1080p", "720p", "480p", "4K"]
+        let qualityPatterns = ["2160p", "1080p", "720p", "480p"]
         for pattern in qualityPatterns {
             if text.contains(pattern) {
                 return pattern
@@ -135,7 +135,7 @@ class ZileanService: ProviderService {
         }
         return "Unknown"
     }
-    
+
     private func extractExtension(from filename: String) -> String? {
         let extensions = ["mkv", "mp4", "avi", "mov"]
         let lower = filename.lowercased()

@@ -320,8 +320,8 @@ class LocalAPIClient: ObservableObject {
 
     // MARK: - Stream Resolution
 
-    func resolveAllStreams(imdbId: String, type: String, quality: String, season: Int? = nil, episode: Int? = nil) async throws -> [Stream] {
-        NSLog("🔍 CLIENT: Resolving ALL streams - imdbId=%@, type=%@, quality=%@", imdbId, type, quality)
+    func resolveAllStreams(imdbId: String, type: String, quality: String, season: Int? = nil, episode: Int? = nil, year: String? = nil) async throws -> [Stream] {
+        NSLog("🔍 CLIENT: Resolving ALL streams - imdbId=%@, type=%@, quality=%@, year=%@", imdbId, type, quality, year ?? "nil")
 
         var components = URLComponents(string: "\(baseURL)/api/streams/resolveAll")!
         var queryItems = [
@@ -335,6 +335,9 @@ class LocalAPIClient: ObservableObject {
         }
         if let episode = episode {
             queryItems.append(URLQueryItem(name: "episode", value: "\(episode)"))
+        }
+        if let year = year {
+            queryItems.append(URLQueryItem(name: "year", value: year))
         }
 
         components.queryItems = queryItems
@@ -699,7 +702,7 @@ struct MediaItem: Identifiable, Codable {
 }
 
 enum VideoQuality: String, CaseIterable, Identifiable {
-    case uhd4k = "4K"
+    case uhd4k = "2160p"
     case fullHD = "1080p"
     case hd = "720p"
     case sd = "480p"
@@ -708,7 +711,7 @@ enum VideoQuality: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .uhd4k: return "4K Ultra HD"
+        case .uhd4k: return "2160p Ultra HD"
         case .fullHD: return "1080p Full HD"
         case .hd: return "720p HD"
         case .sd: return "480p SD"

@@ -90,7 +90,7 @@ class TorrentioService: ProviderService {
     }
 
     private func extractQuality(from title: String) -> String {
-        let qualityPatterns = ["2160p", "1080p", "720p", "480p", "4K"]
+        let qualityPatterns = ["2160p", "1080p", "720p", "480p"]
         for pattern in qualityPatterns {
             if title.contains(pattern) {
                 return pattern

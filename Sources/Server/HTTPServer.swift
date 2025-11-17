@@ -72,17 +72,14 @@ class HTTPServer {
         let torrentio = TorrentioService(rdConfig: rdApiKey != nil ? "realdebrid" : "")
         let comet = CometService(debridApiKey: rdApiKey)
         let zilean = ZileanService()
-        let jackettio = JackettioService()
-
         let mediafusion = MediaFusionService()
 
         await ProviderManager.shared.register(provider: torrentio)
         await ProviderManager.shared.register(provider: comet)
         await ProviderManager.shared.register(provider: zilean)
-        await ProviderManager.shared.register(provider: jackettio)
         await ProviderManager.shared.register(provider: mediafusion)
 
-        print("✅ Providers initialized: torrentio, comet, zilean, jackettio, mediafusion")
+        print("✅ Providers initialized: torrentio, comet, zilean, mediafusion")
     }
 
     func routes(_ app: Application) throws {
@@ -110,7 +107,7 @@ class HTTPServer {
                 "port": port,
                 "version": "1.0.14",
                 "phase": "Foundation + Credentials + RealDebrid + All Providers",
-                "providers": ["torrentio", "comet", "zilean", "jackettio", "mediafusion"],
+                "providers": ["torrentio", "comet", "zilean", "mediafusion"],
                 "endpoints": [
                     "GET  /health",
                     "GET  /status",

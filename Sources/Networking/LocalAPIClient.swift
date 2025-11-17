@@ -318,6 +318,35 @@ class LocalAPIClient: ObservableObject {
         return metadata
     }
 
+    // MARK: - Stream Resolution
+
+    func resolveAllStreams(imdbId: String, type: String, quality: String, season: Int? = nil, episode: Int? = nil) async throws -> [Stream] {
+        NSLog("🔍 CLIENT: Resolving ALL streams - imdbId=%@, type=%@, quality=%@", imdbId, type, quality)
+
+        var components = URLComponents(string: "\(baseURL)/api/streams/resolveAll")!
+        var queryItems = [
+            URLQueryItem(name: "imdbId", value: imdbId),
+            URLQueryItem(name: "type", value: type),
+            URLQueryItem(name: "quality", value: quality)
+        ]
+
+        if let season = season {
+            queryItems.append(URLQueryItem(name: "season", value: "\(season)"))
+        }
+        if let episode = episode {
+            queryItems.append(URLQueryItem(name: "episode", value: "\(episode)"))
+        }
+
+        components.queryItems = queryItems
+
+        let request = URLRequest(url: components.url!)
+        let (data, _) = try await session.data(for: request)
+        let response = try JSONDecoder().decode(AllStreamsResponse.self, from: data)
+
+        NSLog("✅ CLIENT: Received %d streams from resolveAll endpoint", response.streams.count)
+        return response.streams
+    }
+
     // MARK: - Stream Resolution with Quality Buckets
 
     func resolveStreamsByQuality(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, year: String? = nil) async throws -> QualityBuckets {
@@ -569,6 +598,11 @@ class LocalAPIClient: ObservableObject {
 
 struct StreamResponse: Codable {
     let streams: [Stream]
+}
+
+struct AllStreamsResponse: Codable {
+    let streams: [Stream]
+    let count: Int
 }
 
 struct MediaItem: Identifiable, Codable {

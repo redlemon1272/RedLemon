@@ -451,6 +451,160 @@ class AppState: ObservableObject {
         NSLog("🏁 playMedia() completed")
     }
 
+    func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
+        guard let mediaItem = selectedMediaItem else {
+            streamError = "No media item selected"
+            return
+        }
+
+        streamError = nil
+
+        do {
+            print("🎬 Starting playback with selected stream: \(stream.title)")
+            NSLog("   Provider: \(stream.provider)")
+            NSLog("   Mode: \(watchMode)")
+
+            // Step 1: Load metadata if not already loaded
+            var metadata = selectedMetadata
+            if metadata == nil {
+                NSLog("📡 Fetching metadata for \(mediaItem.id)...")
+                metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+                selectedMetadata = metadata
+            }
+
+            // Step 2: Switch to player view
+            currentView = .player
+            NSLog("🎬 Player view opened...")
+
+            // Step 3: Unlock the selected stream
+            await MainActor.run {
+                isResolvingStream = true
+            }
+
+            guard let infoHash = stream.infoHash else {
+                throw APIError.noStreamsFound
+            }
+
+            print("🔓 Unlocking selected stream with infoHash: \(infoHash.prefix(12))...")
+
+            let fileIndex = stream.fileIdx ?? 0
+            let unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")!
+            var request = URLRequest(url: unlockURL)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            var unlockBody: [String: Any] = [
+                "infoHash": infoHash,
+                "fileIdx": fileIndex,
+                "service": "realdebrid"
+            ]
+
+            // Add season/episode for TV shows ONLY
+            if mediaItem.type == "series" {
+                if let season = selectedSeason {
+                    unlockBody["season"] = season
+                }
+                if let episode = selectedEpisode {
+                    unlockBody["episode"] = episode
+                }
+            }
+
+            request.httpBody = try JSONSerialization.data(withJSONObject: unlockBody)
+
+            let (data, response) = try await URLSession.shared.data(for: request)
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw APIError.invalidResponse
+            }
+
+            if httpResponse.statusCode != 200 {
+                let errorMessage: String
+                if let errorBody = String(data: data, encoding: .utf8) {
+                    errorMessage = errorBody
+                } else {
+                    errorMessage = "HTTP \(httpResponse.statusCode)"
+                }
+                throw APIError.networkError(NSError(domain: "UnlockError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage]))
+            }
+
+            struct UnlockResponse: Codable {
+                let url: String
+                let filename: String
+            }
+
+            let unlockResult = try JSONDecoder().decode(UnlockResponse.self, from: data)
+
+            print("✅ Stream unlocked successfully!")
+            print("   URL: \(unlockResult.url.prefix(60))...")
+            print("   File: \(unlockResult.filename)")
+
+            // Create unlocked stream
+            var unlockedStream = Stream(
+                url: unlockResult.url,
+                title: stream.title,
+                quality: stream.quality,
+                seeders: stream.seeders,
+                size: stream.size,
+                provider: stream.provider,
+                infoHash: stream.infoHash,
+                fileIdx: stream.fileIdx,
+                ext: stream.ext,
+                behaviorHints: stream.behaviorHints,
+                subtitles: stream.subtitles
+            )
+
+            // Step 4: Download subtitles if available
+            if let subtitles = unlockedStream.subtitles, !subtitles.isEmpty {
+                NSLog("✅ Stream has %d subtitle option(s) available", subtitles.count)
+
+                // Pre-download subtitles
+                NSLog("📥 Pre-downloading subtitles...")
+                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: subtitles)
+                NSLog("✅ Pre-downloaded %d/%d subtitles", downloadedSubs.count, subtitles.count)
+
+                // Update stream with downloaded local subtitle paths
+                unlockedStream.subtitles = downloadedSubs
+            }
+
+            // Step 5: Set up playback state
+            await MainActor.run {
+                selectedStream = unlockedStream
+                selectedMediaItem = mediaItem
+                selectedQuality = selectedQuality
+                currentWatchMode = watchMode
+                isWatchPartyHost = isHost
+            }
+
+            // Step 6: Set room ID if provided or create for watch party
+            if let roomId = roomId {
+                currentRoomId = roomId
+                print(" Using provided room ID: \(roomId)")
+            } else if watchMode == .watchParty {
+                currentRoomId = "room_\(UUID().uuidString.prefix(8))" // Placeholder
+                print(" Created room ID: \(currentRoomId ?? "none")")
+            } else {
+                currentRoomId = nil
+                print(" Solo playback - no room created")
+            }
+
+            // Step 7: Enter fullscreen
+            enterFullscreen()
+
+            print("✅ Selected stream ready for playback!")
+
+        } catch {
+            print("❌ Playback error: \(error)")
+            await MainActor.run {
+                streamError = error.localizedDescription
+            }
+        }
+
+        await MainActor.run {
+            isResolvingStream = false
+        }
+        NSLog("🏁 playSelectedStream() completed")
+    }
+
     func navigateToPlayer(stream: Stream) {
         selectedStream = stream
         currentView = .player

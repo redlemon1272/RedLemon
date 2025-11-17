@@ -7,6 +7,7 @@ struct QualitySelectionView: View {
 
     @State private var selectedQuality: VideoQuality = .fullHD
     @State private var watchMode: WatchMode = .solo
+    @State private var showingStreamSelection = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -73,11 +74,30 @@ struct QualitySelectionView: View {
                                 .buttonStyle(.plain)
                             }
                         }
+                        .frame(width: 280)
+
+                        // Show All Streams button
+                        Button(action: {
+                            showingStreamSelection = true
+                        }) {
+                            HStack {
+                                Image(systemName: "list.bullet")
+                                    .font(.system(size: 12))
+                                Text("Show All Streams")
+                                    .font(.system(size: 12, weight: .medium))
+                            }
+                            .foregroundColor(.accentColor)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Color.accentColor.opacity(0.1))
+                            .cornerRadius(6)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.top, 8)
                     }
-                    .frame(width: 280)
 
                     Divider()
-                        .frame(height: 200)
+                        .frame(height: 240)
 
                     // Watch Mode Selection
                     VStack(alignment: .leading, spacing: 16) {
@@ -98,8 +118,9 @@ struct QualitySelectionView: View {
                             }
                             .buttonStyle(.plain)
                             .frame(width: 180, height: 120)
+                        }
 
-                            Button(action: {
+                        Button(action: {
                                 watchMode = .watchParty
                             }) {
                                 WatchModeButton(
@@ -156,6 +177,19 @@ struct QualitySelectionView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
+            .sheet(isPresented: $showingStreamSelection) {
+            StreamSelectionView(
+                mediaItem: mediaItem,
+                selectedQuality: selectedQuality,
+                watchMode: watchMode,
+                onStreamSelected: { stream in
+                    // Handle manual stream selection
+                    Task {
+                        await appState.playSelectedStream(stream, watchMode: watchMode)
+                    }
+                    showingStreamSelection = false
+                }
+            )
         }
     }
 

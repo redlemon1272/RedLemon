@@ -328,14 +328,261 @@ func registerStreamRoutes(_ app: Application) {
         return httpResponse
     }
 
+    // GET /api/streams/resolveAll - Returns ALL streams for specific quality (wild west mode)
+    app.get("api", "streams", "resolveAll") { req async throws -> Response in
+        print("🔥🔥🔥 RESOLVE ALL STREAMS ENDPOINT HIT!")
+
+        guard let imdbId = req.query[String.self, at: "imdbId"] else {
+            throw Abort(.badRequest, reason: "Missing imdbId")
+        }
+
+        guard let quality = req.query[String.self, at: "quality"] else {
+            throw Abort(.badRequest, reason: "Missing quality")
+        }
+
+        let type = req.query[String.self, at: "type"] ?? "movie"
+        let season = req.query[Int.self, at: "season"]
+        let episode = req.query[Int.self, at: "episode"]
+
+        print("🔍 Resolving ALL streams for: \(imdbId) (\(quality)) (S\(season ?? 0)E\(episode ?? 0))")
+
+        // Fetch all streams from providers
+        let streams = try await ProviderManager.shared.fetchStreams(
+            imdbId: imdbId,
+            type: type,
+            season: season,
+            episode: episode,
+            providerNames: nil
+        )
+
+        print("📦 Received \(streams.count) raw streams for quality: \(quality)")
+
+        // CRITICAL DEBUG: Log all raw streams to identify duplicates
+        print("🔍 DEBUG: Raw streams from providers:")
+        for (idx, stream) in streams.enumerated() {
+            print("   [\(idx)] \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider) | Seeders: \(stream.seeders ?? 0)")
+        }
+
+        // Attach subtitles to all streams
+        var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode)
+
+        // CRITICAL DEBUG: Log after subtitle attachment
+        print("🔍 DEBUG: Streams after subtitle attachment: \(streamsWithSubtitles.count)")
+        for (idx, stream) in streamsWithSubtitles.enumerated() {
+            print("   [\(idx)] \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
+        }
+
+        // CRITICAL: Filter by the requested quality ONLY
+        // Remove all the complex filtering from resolveByQuality
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            guard let streamQuality = stream.quality else { return false }
+            return streamQuality.lowercased().contains(quality.lowercased()) ||
+                   quality.lowercased().contains(streamQuality.lowercased())
+        }
+
+        print("   🎯 Quality filter (\(quality)): \(streams.count) → \(streamsWithSubtitles.count) streams")
+
+        // CRITICAL DEBUG: Log after quality filter
+        print("🔍 DEBUG: Streams after quality filter: \(streamsWithSubtitles.count)")
+        for (idx, stream) in streamsWithSubtitles.enumerated() {
+            print("   [\(idx)] \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
+        }
+
+        // WILD WEST MODE: NO CODEC FILTERING
+        // Let users decide if they want x265/HEVC - remove codec filter
+        print("   🌵 WILD WEST: Skipping codec filtering - users choose their own codecs")
+
+        // CRITICAL: Filter by episode pattern for TV shows ONLY (basic filtering only)
+        if type == "series" && season != nil && episode != nil {
+            let beforeEpisodeFilter = streamsWithSubtitles.count
+
+            let episodePatterns = [
+                String(format: "s%02de%02d", season!, episode!),  // s01e01
+                String(format: "s%de%d", season!, episode!),      // s1e1
+                String(format: "s%02d e%02d", season!, episode!), // s01 e01
+                String(format: "%dx%02d", season!, episode!),     // 1x01
+                String(format: "season %d episode %d", season!, episode!) // season 1 episode 1
+            ]
+
+            streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+                let titleLower = stream.title.lowercased()
+                let matchesEpisode = episodePatterns.contains { pattern in
+                    titleLower.contains(pattern)
+                }
+
+                if !matchesEpisode {
+                    print("   ⏭️  Skipping \(stream.title) - doesn't match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!))")
+                }
+                return matchesEpisode
+            }
+
+            let afterEpisodeFilter = streamsWithSubtitles.count
+            print("   📺 Episode filter (S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!)): \(beforeEpisodeFilter) → \(afterEpisodeFilter) streams")
+
+            guard afterEpisodeFilter > 0 else {
+                print("   ❌ No streams match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!)) pattern")
+                throw Abort(.notFound, reason: "No streams match requested episode")
+            }
+        }
+
+        // WILD WEST MODE: SMART DEDUPLICATION BY INFOHASH FIRST
+        // CRITICAL: Deduplicate by infoHash (same source), not by title
+        // Different torrents with same quality/name are UNIQUE sources and should be preserved
+        let beforeDedup = streamsWithSubtitles.count
+
+        // FILTER OUT GARBAGE STREAMS (Comet placeholders with no real identifier)
+        // Only remove streams that are:
+        // 1. Have no infoHash AND no URL (can't be played)
+        // 2. AND have generic/placeholder titles like "[RD⚡] Comet..."
+        var validStreams = streamsWithSubtitles.filter { stream in
+            let hasHash = stream.infoHash != nil
+            let hasUrl = stream.url != nil
+            let hasRealTitle = !stream.title.contains("Comet") || (stream.title.count > 20 && !stream.title.contains("[RD⚡]"))
+
+            // Skip ONLY if: no hash AND no url AND (title is generic OR title is comet placeholder)
+            if !hasHash && !hasUrl && !hasRealTitle {
+                print("      ⏭️  Skipping garbage stream: \(stream.title)")
+                return false
+            }
+
+            // Keep all other streams - even if no hash/url, if they have real titles they might be playable
+            return true
+        }
+
+        let removedCount = beforeDedup - validStreams.count
+        if removedCount > 0 {
+            print("      🗑️  Removed \(removedCount) garbage streams (bare Comet entries, etc.)")
+        }
+
+        // GROUP BY INFOHASH FIRST - True duplicates (same torrent from different providers)
+        var infoHashGroups: [String: [Stream]] = [:]
+        var urlGroups: [String: [Stream]] = [:]
+        var uncategorized: [Stream] = []
+
+        for stream in validStreams {
+            if let infoHash = stream.infoHash {
+                if infoHashGroups[infoHash] == nil {
+                    infoHashGroups[infoHash] = []
+                }
+                infoHashGroups[infoHash]?.append(stream)
+            } else if let url = stream.url {
+                if urlGroups[url] == nil {
+                    urlGroups[url] = []
+                }
+                urlGroups[url]?.append(stream)
+            } else {
+                uncategorized.append(stream)
+            }
+        }
+
+        print("   🔍 Deduplication analysis:")
+        print("      InfoHash groups: \(infoHashGroups.count)")
+        print("      URL groups: \(urlGroups.count)")
+        print("      Uncategorized (no hash/url): \(uncategorized.count)")
+
+        var deduplicatedStreams: [Stream] = []
+
+        // From each infoHash group, keep only the ONE with best seeders
+        for (infoHash, streams) in infoHashGroups {
+            if streams.count > 1 {
+                print("      🚨 DUPLICATE SOURCE: InfoHash '\(infoHash.prefix(8))...' has \(streams.count) copies from \(Set(streams.map { $0.provider }).joined(separator: ", "))")
+            }
+            let bestStream = streams.max { s1, s2 in
+                (s1.seeders ?? 0) < (s2.seeders ?? 0)
+            } ?? streams.first!
+            deduplicatedStreams.append(bestStream)
+        }
+
+        // From each URL group, keep only the ONE with best seeders
+        for (url, streams) in urlGroups {
+            if streams.count > 1 {
+                print("      🚨 DUPLICATE SOURCE: URL '\(url.prefix(30))...' has \(streams.count) copies from \(Set(streams.map { $0.provider }).joined(separator: ", "))")
+            }
+            let bestStream = streams.max { s1, s2 in
+                (s1.seeders ?? 0) < (s2.seeders ?? 0)
+            } ?? streams.first!
+            deduplicatedStreams.append(bestStream)
+        }
+
+        // Add uncategorized streams (no duplicates possible)
+        deduplicatedStreams.append(contentsOf: uncategorized)
+
+        print("   🔄 DEDUPLICATION: \(beforeDedup) → \(deduplicatedStreams.count) unique sources")
+
+        // SECOND PASS: Remove streams with IDENTICAL titles (still duplicates even with different hashes)
+        // Example: Multiple "MediaFusion | ElfHosted P2P 1080P ⏳" streams with different but functionally identical content
+        let beforeTitleDedup = deduplicatedStreams.count
+        var titleGroups: [String: [Stream]] = [:]
+
+        for stream in deduplicatedStreams {
+            if titleGroups[stream.title] == nil {
+                titleGroups[stream.title] = []
+            }
+            titleGroups[stream.title]?.append(stream)
+        }
+
+        var finalStreams: [Stream] = []
+        for (title, streams) in titleGroups {
+            if streams.count > 1 {
+                print("      ℹ️  Title group '\(title)' has \(streams.count) entries, keeping best")
+            }
+            // From streams with same title, keep the one with most seeders
+            let bestStream = streams.max { s1, s2 in
+                (s1.seeders ?? 0) < (s2.seeders ?? 0)
+            } ?? streams.first!
+            finalStreams.append(bestStream)
+        }
+
+        let removedByTitle = beforeTitleDedup - finalStreams.count
+        if removedByTitle > 0 {
+            print("   🏷️  TITLE DEDUP: Removed \(removedByTitle) duplicate titles")
+        }
+
+        // NOW sort final deduplicated streams by seeders
+        let sortedStreams = finalStreams.sorted { s1, s2 in
+            let seeders1 = s1.seeders ?? 0
+            let seeders2 = s2.seeders ?? 0
+            return seeders1 > seeders2
+        }
+
+        print("🌵 WILD WEST MODE: Returning \(sortedStreams.count) deduplicated streams (sorted by seeders only)")
+
+        // Simple response model for all streams
+        struct AllStreamsResponse: Codable {
+            let streams: [Stream]
+            let count: Int
+        }
+
+        let response = AllStreamsResponse(
+            streams: sortedStreams,
+            count: sortedStreams.count
+        )
+
+        let jsonData = try JSONEncoder().encode(response)
+        let httpResponse = Response(status: .ok)
+        httpResponse.body = .init(data: jsonData)
+        httpResponse.headers.contentType = .json
+
+        print("✅ All streams response ready")
+
+        return httpResponse
+    }
+
     print("✅ Stream routes registered:")
     print("   POST /api/streams/resolve")
     print("   GET  /api/streams/resolveByQuality")
+    print("   GET  /api/streams/resolveAll")
 }
 
 // MARK: - Subtitle Attachment
 
 private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil) async -> [Stream] {
+
+    // CRITICAL DEBUG: Log input to attachSubtitles
+    NSLog("🔍 DEBUG: attachSubtitles INPUT - streams.count: \(streams.count)")
+    for (idx, stream) in streams.enumerated() {
+        NSLog("   INPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider)")
+    }
 
     // Get SubDL API key from Keychain
     guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
@@ -441,6 +688,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
             let episodePatterns = [
                 String(format: "s%02de%02d", season, episode),  // s05e14
                 String(format: "s%de%d", season, episode),      // s5e14
+                String(format: "s%02d e%02d", season, episode), // s05 e14
                 String(format: "%dx%02d", season, episode),     // 5x14
                 String(format: "%d%02d", season, episode),      // 514
                 String(format: "episode %d", episode)           // episode 14
@@ -519,7 +767,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
 
         // Match subtitles to streams by release name compatibility
         // This ensures video and subtitle files are from same release format
-        return streams.map { stream in
+        let result = streams.map { stream in
             // Find best matching subtitle for this stream
             var bestSubtitles: [Subtitle] = []
 
@@ -615,6 +863,13 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 subtitles: bestSubtitles
             )
         }
+
+        NSLog("🔍 DEBUG: attachSubtitles OUTPUT - streams.count: \(result.count)")
+        for (idx, stream) in result.enumerated() {
+            NSLog("   OUTPUT[\(idx)]: \(stream.title) | \(stream.quality ?? "unknown") | \(stream.provider) | Subtitles: \(stream.subtitles?.count ?? 0)")
+        }
+
+        return result
 
     } catch {
         NSLog("❌ Failed to fetch subtitles: %@", error.localizedDescription)
@@ -902,10 +1157,10 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
     }
 
     func codecRank(_ stream: Stream) -> Int {
-        let title = stream.title.lowercased()
-        let badCodecs = ["x265", "hevc", "h.265", "h265"]
+        let titleLower = stream.title.lowercased()
+        let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
         let hasBadCodec = badCodecs.contains { codec in
-            title.contains(codec)
+            titleLower.contains(codec)
         }
         return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
     }
@@ -1051,10 +1306,10 @@ private func streamTitleContainsYear(_ title: String, targetYear: String) -> Boo
         "\\((\(targetYear))\\)",           // (1991)
         "\\.\(targetYear)\\.",           // .1991.
         " \(targetYear) ",               //  1991  (space-year-space)
-        " \(targetYear)$",               //  1991 at end (space-year-end)
+        " \(targetYear)$",               // 1991 at end (space-year-end)
         "^\(targetYear) ",               // 1991 at start (year-space)
         "\\.\(targetYear)$",              // .1991 at end (dot-year-end)
-        " \(targetYear)\\.",             //  1991. (space-year-dot)
+        " \(targetYear)\\.",             // 1991. (space-year-dot)
         "_\(targetYear)_",               // _1991_ (underscore-year-underscore)
         "-\(targetYear)-",               // -1991- (dash-year-dash)
         "[\(targetYear)]",               // [1991] (brackets-year)

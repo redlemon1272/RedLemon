@@ -44,6 +44,21 @@ struct Stream: Codable {
         self.subtitles = subtitles
     }
 
+    // MARK: - Computed Properties
+
+    /// Unique ID for SwiftUI List identification
+    /// Uses infoHash if available, otherwise uses URL, otherwise uses title+provider combination
+    var id: String {
+        if let hash = infoHash {
+            return hash
+        } else if let streamUrl = url {
+            return streamUrl
+        } else {
+            // For streams without hash or URL (like MediaFusion P2P), use title + provider
+            return "\(title)-\(provider)"
+        }
+    }
+
     // MARK: - Source Quality Detection
 
     /// Extract the source quality from title (CAM, WEB-DL, BluRay, etc.)

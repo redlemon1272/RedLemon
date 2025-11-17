@@ -77,8 +77,8 @@ func registerUnlockRoutes(_ app: Application) {
         } catch RDError.timeout {
             NSLog("❌ RealDebrid: timeout - treating as not cached to try next stream")
             throw Abort(.badGateway, reason: "RealDebrid timeout - trying next stream")
-        } catch RDError.addMagnetFailed(let status, let _) { // FIXED: Use _ for unused parameter
-            NSLog("❌ RealDebrid: invalid torrent (status \(status)) - trying next stream")
+        } catch RDError.addMagnetFailed(let status, let message) { // FIXED: Use both parameters properly
+            NSLog("❌ RealDebrid: invalid torrent (status \(status)): \(message) - trying next stream")
             throw Abort(.badGateway, reason: "Invalid torrent - trying next stream")
         } catch {
             NSLog("❌ Unlock error: \(error)")

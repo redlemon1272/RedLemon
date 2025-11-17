@@ -50,6 +50,155 @@ func registerStreamRoutes(_ app: Application) {
         return httpResponse
     }
 
+    // POST /api/streams/episodes - Get available episodes from a season pack torrent
+    app.post("api", "streams", "episodes") { (req: Request) async throws -> Response in
+        struct EpisodesRequest: Codable {
+            let infoHash: String
+        }
+
+        struct EpisodeInfo: Codable {
+            let season: Int
+            let episode: Int
+            let fileId: Int
+            let filename: String
+            let displayLabel: String // Format: "S01E05"
+        }
+
+        struct TorrentFile: Codable {
+            let id: Int?
+            let path: String?
+            let bytes: Int?
+            let selected: Int?
+        }
+
+        struct TorrentInfo: Codable {
+            let files: [TorrentFile]?
+            let status: String?
+        }
+
+        let body = try req.content.decode(EpisodesRequest.self)
+        let keychain = KeychainManager.shared
+
+        guard let token = await keychain.get(service: "realdebrid") else {
+            throw Abort(.badRequest, reason: "No RealDebrid token stored")
+        }
+
+        NSLog("📺 Fetching episodes for torrent: \(body.infoHash.prefix(12))...")
+
+        // Create a temporary task to fetch torrent info
+        // Note: We don't have the torrentId, so we need to add the magnet first
+        let trackers = [
+            "udp://tracker.opentrackr.org:1337/announce",
+            "udp://open.stealth.si:80/announce",
+            "udp://tracker.openbittorrent.com:6969/announce",
+            "udp://tracker.coppersurfer.tk:6969/announce"
+        ]
+        let trParams = trackers.map { "tr=\($0.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")" }.joined(separator: "&")
+        let magnet = "magnet:?xt=urn:btih:\(body.infoHash)&dn=\(body.infoHash)&\(trParams)"
+
+        do {
+            // Add magnet to get torrentId
+            let addURL = URL(string: "https://api.real-debrid.com/rest/1.0/torrents/addMagnet")!
+            var addRequest = URLRequest(url: addURL)
+            addRequest.httpMethod = "POST"
+            addRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            addRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            addRequest.httpBody = "magnet=\(magnet.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")".data(using: .utf8)
+
+            let (addData, addResponse) = try await URLSession.shared.data(for: addRequest)
+
+            guard let httpResponse = addResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                NSLog("❌ Failed to add magnet: HTTP \((addResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                throw Abort(.badGateway, reason: "Failed to add torrent to RealDebrid")
+            }
+
+            guard let addResult = try? JSONDecoder().decode([String: String].self, from: addData),
+                  let torrentId = addResult["id"] else {
+                NSLog("❌ Invalid magnet response")
+                throw Abort(.badGateway, reason: "Invalid RealDebrid response")
+            }
+
+            // Get torrent info
+            let infoURL = URL(string: "https://api.real-debrid.com/rest/1.0/torrents/info/\(torrentId)")!
+            var infoRequest = URLRequest(url: infoURL)
+            infoRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+            let (infoData, infoResponse) = try await URLSession.shared.data(for: infoRequest)
+
+            guard let httpResponse = infoResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                NSLog("❌ Failed to get torrent info: HTTP \((infoResponse as? HTTPURLResponse)?.statusCode ?? 0)")
+                throw Abort(.badGateway, reason: "Failed to fetch torrent information")
+            }
+
+            let torrentInfo = try JSONDecoder().decode(TorrentInfo.self, from: infoData)
+
+            guard let files = torrentInfo.files, !files.isEmpty else {
+                NSLog("⚠️ No files in torrent")
+                throw Abort(.badGateway, reason: "Torrent has no files")
+            }
+
+            // Log torrent status for debugging
+            // Status: "waiting_files_selection", "queued", "downloading", "downloaded", "error", "virus", "dead"
+            if let status = torrentInfo.status {
+                NSLog("📺 Torrent status: \(status)")
+            }
+
+            // Parse episodes from filenames
+            var episodes: [EpisodeInfo] = []
+
+            for file in files {
+                guard let path = file.path, let fileId = file.id else { continue }
+
+                let pathLower = path.lowercased()
+
+                // Try to extract S##E## pattern
+                if let (season, episode) = extractSeasonEpisode(from: pathLower) {
+                    let label = String(format: "S%02dE%02d", season, episode)
+                    let episodeInfo = EpisodeInfo(
+                        season: season,
+                        episode: episode,
+                        fileId: fileId,
+                        filename: path,
+                        displayLabel: label
+                    )
+                    episodes.append(episodeInfo)
+                }
+            }
+
+            // Remove duplicates (same season/episode), keeping first occurrence
+            var seen = Set<String>()
+            let uniqueEpisodes = episodes.filter { episode in
+                let key = "\(episode.season)-\(episode.episode)"
+                if seen.contains(key) {
+                    return false
+                }
+                seen.insert(key)
+                return true
+            }
+
+            // Sort by season, then episode
+            let sortedEpisodes = uniqueEpisodes.sorted { a, b in
+                if a.season != b.season {
+                    return a.season < b.season
+                }
+                return a.episode < b.episode
+            }
+
+            NSLog("✅ Found \(sortedEpisodes.count) episodes")
+
+            let jsonData = try JSONEncoder().encode(sortedEpisodes)
+            let episodesResponse = Response(status: .ok)
+            episodesResponse.body = .init(data: jsonData)
+            episodesResponse.headers.contentType = .json
+
+            return episodesResponse
+
+        } catch {
+            NSLog("❌ Episodes endpoint error: \(error)")
+            throw Abort(.badGateway, reason: "Failed to fetch episodes: \(error)")
+        }
+    }
+
     // GET /api/streams/resolveByQuality - ColorFruit bucket logic
     app.get("api", "streams", "resolveByQuality") { req async throws -> Response in
         print("🔥🔥🔥 RESOLVEBY QUALITY ENDPOINT HIT!")
@@ -1372,4 +1521,39 @@ private func extractReleaseInfo(_ title: String) -> String {
     }
 
     return info
+}
+
+// Helper function to extract season and episode numbers from file path
+func extractSeasonEpisode(from pathLower: String) -> (season: Int, episode: Int)? {
+    // Pattern 1: S##E## (case-insensitive)
+    if let regex = try? NSRegularExpression(pattern: "s(\\d{1,2})e(\\d{1,2})", options: []) {
+        let nsString = pathLower as NSString
+        let range = NSRange(location: 0, length: nsString.length)
+        if let match = regex.firstMatch(in: pathLower, options: [], range: range) {
+            if match.numberOfRanges >= 3,
+               let seasonRange = Range(match.range(at: 1), in: pathLower),
+               let episodeRange = Range(match.range(at: 2), in: pathLower),
+               let season = Int(String(pathLower[seasonRange])),
+               let episode = Int(String(pathLower[episodeRange])) {
+                return (season: season, episode: episode)
+            }
+        }
+    }
+
+    // Pattern 2: Season ##, Episode ## (with variations)
+    if let regex = try? NSRegularExpression(pattern: "season\\s+(\\d{1,2}).*episode\\s+(\\d{1,2})", options: []) {
+        let nsString = pathLower as NSString
+        let range = NSRange(location: 0, length: nsString.length)
+        if let match = regex.firstMatch(in: pathLower, options: [], range: range) {
+            if match.numberOfRanges >= 3,
+               let seasonRange = Range(match.range(at: 1), in: pathLower),
+               let episodeRange = Range(match.range(at: 2), in: pathLower),
+               let season = Int(String(pathLower[seasonRange])),
+               let episode = Int(String(pathLower[episodeRange])) {
+                return (season: season, episode: episode)
+            }
+        }
+    }
+
+    return nil
 }

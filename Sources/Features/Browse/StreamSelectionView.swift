@@ -119,6 +119,22 @@ struct QualityResolutionBadge: View {
     }
 }
 
+struct PackBadge: View {
+    var body: some View {
+        HStack(spacing: 2) {
+            Text("📦")
+            Text("PACK")
+                .font(.caption)
+                .fontWeight(.medium)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .background(Color.orange.opacity(0.2))
+        .foregroundColor(.orange)
+        .cornerRadius(4)
+    }
+}
+
 // MARK: - Main Views
 
 struct StreamSelectionView: View {
@@ -127,10 +143,12 @@ struct StreamSelectionView: View {
     let watchMode: WatchMode
     let onStreamSelected: (Stream) -> Void
 
+    @EnvironmentObject var appState: AppState
     @Environment(\.dismiss) private var dismiss
     @State private var streams: [Stream] = []
     @State private var isLoading = true
     @State private var error: String?
+    @State private var selectedPackStream: Stream?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -184,9 +202,15 @@ struct StreamSelectionView: View {
                 .padding()
             } else {
                 List(streams, id: \.id) { stream in
-                    StreamRow(stream: stream) {
-                        onStreamSelected(stream)
-                    }
+                    StreamRow(
+                        stream: stream,
+                        onTap: {
+                            onStreamSelected(stream)
+                        },
+                        onPackTap: stream.isPack ? {
+                            selectedPackStream = stream
+                        } : nil
+                    )
                 }
                 .listStyle(PlainListStyle())
             }
@@ -194,6 +218,18 @@ struct StreamSelectionView: View {
         .frame(minWidth: 600, minHeight: 500)
         .onAppear {
             loadStreams()
+        }
+        .sheet(item: $selectedPackStream) { packStream in
+            PackEpisodeSelectionView(
+                packStream: packStream,
+                onEpisodeSelected: { season, episode in
+                    // Store season/episode in appState so playSelectedStream will pass them to backend
+                    appState.selectedSeason = season
+                    appState.selectedEpisode = episode
+                    selectedPackStream = nil
+                    onStreamSelected(packStream)
+                }
+            )
         }
     }
 
@@ -207,8 +243,8 @@ struct StreamSelectionView: View {
                     imdbId: mediaItem.id,
                     type: mediaItem.type,
                     quality: selectedQuality.rawValue,
-                    season: nil, // TODO: Get from appState if available
-                    episode: nil, // TODO: Get from appState if available
+                    season: appState.selectedSeason,
+                    episode: appState.selectedEpisode,
                     year: mediaItem.year
                 )
 
@@ -229,9 +265,16 @@ struct StreamSelectionView: View {
 struct StreamRow: View {
     let stream: Stream
     let onTap: () -> Void
+    let onPackTap: (() -> Void)?
 
     var body: some View {
-        Button(action: onTap) {
+        Button(action: {
+            if stream.isPack, let onPackTap = onPackTap {
+                onPackTap()
+            } else {
+                onTap()
+            }
+        }) {
             HStack {
                 VStack(alignment: .leading, spacing: 6) {
                     // Title
@@ -249,8 +292,11 @@ struct StreamRow: View {
                         Spacer()
                     }
 
-                    // Badges row 2 - Seeders, Size, Provider
+                    // Badges row 2 - Seeders, Size, Provider, and Pack (if applicable)
                     HStack(spacing: 6) {
+                        if stream.isPack {
+                            PackBadge()
+                        }
                         SeederBadge(stream: stream)
                         SizeBadge(stream: stream)
                         ProviderBadge(stream: stream)

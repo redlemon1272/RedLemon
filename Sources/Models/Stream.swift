@@ -6,7 +6,7 @@
 import Foundation
 import SwiftUI
 
-struct Stream: Codable {
+struct Stream: Codable, Identifiable {
     let url: String?
     let title: String
     let quality: String?
@@ -218,6 +218,48 @@ struct Stream: Codable {
         case "jackettio": return "🧥"
         default: return "📡"
         }
+    }
+
+    /// Detect if this is a season/multi-episode pack
+    var isPack: Bool {
+        let titleUpper = title.uppercased()
+
+        // Check for season-only indicators (S01, S05, S1, S2, etc. without E##)
+        // "Breaking Bad (2008) S05" → has S05 but no E## = pack
+        if let regex = try? NSRegularExpression(pattern: "\\bS\\d{1,2}\\b", options: []) {
+            let nsString = titleUpper as NSString
+            let range = NSRange(location: 0, length: nsString.length)
+            if regex.firstMatch(in: titleUpper, options: [], range: range) != nil {
+                // Make sure it's not "S##E##" format (that's a single episode)
+                if !titleUpper.contains("E") || !titleUpper.contains("EPISODE") {
+                    return true
+                }
+            }
+        }
+
+        // Check for explicit range indicators (S01-S05, S1-5, etc.)
+        if titleUpper.contains("S01-") || titleUpper.contains("S02-") || titleUpper.contains("S03-") ||
+            titleUpper.contains("S04-") || titleUpper.contains("S05-") || titleUpper.contains("S06-") ||
+            titleUpper.contains("S07-") || titleUpper.contains("S08-") || titleUpper.contains("S09-") ||
+            titleUpper.contains("S10-") || titleUpper.contains("S1-") || titleUpper.contains("S2-") ||
+            titleUpper.contains("S3-") || titleUpper.contains("S4-") || titleUpper.contains("S5-") ||
+            titleUpper.contains("S6-") || titleUpper.contains("S7-") || titleUpper.contains("S8-") ||
+            titleUpper.contains("S9-") {
+            return true
+        }
+
+        // Check for "Season X" without episode number
+        if titleUpper.contains("SEASON") && !titleUpper.contains("E") && !titleUpper.contains("EPISODE") {
+            return true
+        }
+
+        // Check for complete series
+        if titleUpper.contains("COMPLETE SERIES") || titleUpper.contains("ALL SEASONS") ||
+            titleUpper.contains("SEASONS 1") || titleUpper.contains("FULL SERIES") {
+            return true
+        }
+
+        return false
     }
 }
 

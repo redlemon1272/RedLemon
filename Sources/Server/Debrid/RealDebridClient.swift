@@ -375,10 +375,10 @@ actor RealDebridClient {
 
             // Validate the selected file size
             if isValidEpisodeSize(targetFile.bytes ?? 0, quality: extractQualityFromPath(targetFile.path ?? "")) {
-                NSLog("📍 Fallback: Selected file at position %d → %@ (ID: %@, %@)", episode, targetFile.path ?? "unknown", fileId, sizeStr)
+                NSLog("📍 Fallback: Selected file at position %d → %@ (ID: %d, %@)", episode, targetFile.path ?? "unknown", fileId, sizeStr)
                 return (fileId, targetFile.path)
             } else {
-                NSLog("❌ Fallback file too small: %@ (ID: %@, %@) - POSSIBLE SAMPLE", targetFile.path ?? "unknown", fileId, sizeStr)
+                NSLog("❌ Fallback file too small: %@ (ID: %d, %@) - POSSIBLE SAMPLE", targetFile.path ?? "unknown", fileId, sizeStr)
             }
         }
 

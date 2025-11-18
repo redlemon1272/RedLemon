@@ -361,7 +361,7 @@ func registerStreamRoutes(_ app: Application) {
 
             guard afterEpisodeFilter > 0 else {
                 print("   ❌ No streams match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!)) pattern")
-                throw Abort(.notFound, reason: "No streams match the requested episode")
+                throw Abort(.notFound, reason: "No streams match requested episode")
             }
         } else if type == "movie" && (season != nil || episode != nil) {
             // SAFETY: Log if episode data is being passed for a movie (shouldn't happen after AppState fix)
@@ -545,25 +545,53 @@ func registerStreamRoutes(_ app: Application) {
         if let year = year {
             let beforeYearFilter = streamsWithSubtitles.count
 
-            // Providers that naturally include year in title (torrent releases)
-            let titleBasedProviders = ["torrentio", "zilean"]
+            // For movies: Apply strict year filtering to prevent remakes/reboots conflicts
+            if type == "movie" {
+                // Strict year patterns that match ONLY the exact target year
+                let exactYearPatterns = [
+                    "\\(\(year)\\)",               // (1991)
+                    "\\.\(year)\\.",               // .1991.
+                    " \(year) ",                   //  1991  (space-year-space)
+                    " \(year)$",                   //  1991 at end (space-year-end)
+                    "^\(year) ",                  // 1991 at start (year-space)
+                    "\\.\(year)$",                 // .1991 at end (dot-year-end)
+                    " \(year)\\.",                 //  1991. (space-year-dot)
+                    "_\(year)_",                   // _1991_ (underscore-year-underscore)
+                    "-\(year)-",                   // -1991- (dash-year-dash)
+                    "\\[\(year)\\]",               // [1991] (brackets-year)
+                    "^\(year)$",                  // 1991 as entire string
+                ]
 
-            streamsWithSubtitles = streamsWithSubtitles.filter { stream in
-                // For providers that include year in title, require year match
-                if titleBasedProviders.contains(stream.provider) {
-                    return stream.title.contains(year)
+                streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+                    let title = stream.title
+
+                    // Check for exact year match first
+                    for pattern in exactYearPatterns {
+                        if let regex = try? NSRegularExpression(pattern: pattern) {
+                            let range = NSRange(location: 0, length: title.utf16.count)
+                            if regex.firstMatch(in: title, range: range) != nil {
+                                return true
+                            }
+                        }
+                    }
+
+                    // If no exact year match, exclude this stream
+                    return false
                 }
-
-                // For P2P/cached providers (MediaFusion, Comet, Jackettio), skip year filter
-                // These don't include year in their titles but fetch correct content by IMDB ID
-                return true
+            } else {
+                // For TV shows: Skip year filtering entirely
+                // Season/episode + IMDB ID is sufficient for unique identification
+                // Torrent releases rarely include year in episode titles
+                print("   📺 SKIPPING year filter for TV show: IMDB ID + season/episode provides unique identification")
             }
 
             let afterYearFilter = streamsWithSubtitles.count
-            if afterYearFilter < beforeYearFilter {
-                print("   📅 Year filter (\(year)): \(beforeYearFilter) → \(afterYearFilter) streams")
+            if afterYearFilter < beforeYearFilter && type == "movie" {
+                print("   📅 Year filter (\(year)) for movies: \(beforeYearFilter) → \(afterYearFilter) streams")
             }
-        }        // WILD WEST MODE: NO CODEC FILTERING
+        }
+
+        // WILD WEST MODE: NO CODEC FILTERING
         // Let users decide if they want x265/HEVC - remove codec filter
         print("   🌵 WILD WEST: Skipping codec filtering - users choose their own codecs")
 
@@ -581,14 +609,35 @@ func registerStreamRoutes(_ app: Application) {
 
             streamsWithSubtitles = streamsWithSubtitles.filter { stream in
                 let titleLower = stream.title.lowercased()
+
+                // Check for Comet cached streams first - they're pre-verified and should be trusted
+                let isCometCached = stream.provider.lowercased() == "comet" &&
+                                  (stream.title.contains("[RD⚡]") || stream.title.contains("⚡"))
+
+                if isCometCached {
+                    // For Comet cached streams, be more lenient - they're pre-verified content
+                    // Just check if it's a reasonable season/episode match, not exact naming
+                    let seasonInTitle = titleLower.contains("s\(season!)") || titleLower.contains("season \(season!)")
+                    let episodeInTitle = titleLower.contains("e\(episode!)") || titleLower.contains("episode \(episode!)")
+
+                    if seasonInTitle && episodeInTitle {
+                        print("   ✅ TRUSTED Comet cached stream: \(stream.title)")
+                        return true
+                    } else {
+                        print("   ⏭️  Skipping Comet stream (wrong season/episode): \(stream.title)")
+                        return false
+                    }
+                }
+
+                // For non-Comet streams, use strict pattern matching
                 let matchesEpisode = episodePatterns.contains { pattern in
                     titleLower.contains(pattern)
                 }
 
-                if !matchesEpisode {
+                if !matchesEpisode && !isCometCached {
                     print("   ⏭️  Skipping \(stream.title) - doesn't match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!))")
                 }
-                return matchesEpisode
+                return matchesEpisode || isCometCached
             }
 
             let afterEpisodeFilter = streamsWithSubtitles.count
@@ -941,7 +990,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
         }
 
         // Match subtitles to streams by release name compatibility
-        // This ensures video and subtitle files are from same release format
+        // This ensures video and subtitle files are from the same release format
         let result = streams.map { stream in
             // Find best matching subtitle for this stream
             var bestSubtitles: [Subtitle] = []

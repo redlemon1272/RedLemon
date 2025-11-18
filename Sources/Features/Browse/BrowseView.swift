@@ -456,31 +456,7 @@ struct BrowseView: View {
         }
 
         // Enhanced deduplication: Remove duplicates based on media ID and episode info
-        // Sanitize: movies should not carry season/episode info
-        let sanitized = history.map { item -> WatchHistoryItem in
-            if item.mediaItem.type == "series" {
-                return item
-            } else {
-                return WatchHistoryItem(
-                    id: item.mediaItem.id,
-                    mediaItem: item.mediaItem,
-                    timestamp: item.timestamp,
-                    duration: item.duration,
-                    lastWatched: item.lastWatched,
-                    quality: item.quality,
-                    season: nil,
-                    episode: nil
-                )
-            }
-        }
-
-        let deduplicatedHistory = removeDuplicates(from: sanitized)
-
-        // Persist sanitized history back to storage to prevent stale season/episode
-        if let data = try? JSONEncoder().encode(deduplicatedHistory) {
-            UserDefaults.standard.set(data, forKey: "watchHistory")
-        }
-
+        let deduplicatedHistory = removeDuplicates(from: history)
         recentlyWatched = Array(deduplicatedHistory.prefix(10)) // Show last 10 unique items
     }
 
@@ -856,9 +832,7 @@ struct WatchModeSelectionView: View {
                             .font(.subheadline)
                             .foregroundColor(.secondary)
 
-                        if historyItem.mediaItem.type == "series",
-                           let season = historyItem.season,
-                           let episode = historyItem.episode {
+                        if let season = historyItem.season, let episode = historyItem.episode {
                             Text("•")
                                 .foregroundColor(.secondary)
                             Text("S\(season) E\(episode)")

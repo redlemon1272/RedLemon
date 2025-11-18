@@ -182,11 +182,6 @@ class AppState: ObservableObject {
 
             // CRITICAL: Update UI state on main thread
             await MainActor.run {
-                // Clear season/episode for movies to avoid persisting stale TV values
-                if item.type == "movie" {
-                    selectedSeason = nil
-                    selectedEpisode = nil
-                }
                 selectedMetadata = metadata
                 selectedMediaItem = item
                 selectedQuality = quality
@@ -951,20 +946,16 @@ class AppState: ObservableObject {
             history = decoded
         }
 
-        // Only persist season/episode for series
-        let historySeason = mediaItem.type == "series" ? selectedSeason : nil
-        let historyEpisode = mediaItem.type == "series" ? selectedEpisode : nil
-
         // Create new history item
         let historyItem = WatchHistoryItem(
-            id: "\(mediaItem.id)_\(historySeason ?? 0)_\(historyEpisode ?? 0)",
+            id: "\(mediaItem.id)_\(selectedSeason ?? 0)_\(selectedEpisode ?? 0)",
             mediaItem: mediaItem,
             timestamp: timestamp,
             duration: duration,
             lastWatched: Date(),
             quality: selectedQuality.rawValue,
-            season: historySeason,
-            episode: historyEpisode
+            season: selectedSeason,
+            episode: selectedEpisode
         )
 
         // Remove if already exists (to move to front)

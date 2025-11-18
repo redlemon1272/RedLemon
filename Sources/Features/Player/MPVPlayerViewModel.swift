@@ -74,16 +74,28 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Initialization
 
     func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)]) async {
-        NSLog("🎬🎬🎬 LOADSTREAM CALLED - streamTitle: %@", streamTitle)
+        // For movies, strip any accidental episode markers in the stream title (e.g., "S01E01")
+        func sanitizedTitle(_ title: String) -> String {
+            let moviePattern = try? NSRegularExpression(pattern: "s\\d{1,2}e\\d{1,2}", options: [.caseInsensitive])
+            let range = NSRange(location: 0, length: title.utf16.count)
+            if let regex = moviePattern, regex.firstMatch(in: title, options: [], range: range) != nil {
+                return regex.stringByReplacingMatches(in: title, options: [], range: range, withTemplate: "").trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+            return title
+        }
+
+        let cleanStreamTitle = sanitizedTitle(streamTitle)
+
+        NSLog("🎬🎬🎬 LOADSTREAM CALLED - streamTitle: %@", cleanStreamTitle)
         NSLog("🎬🎬🎬 streamURL: %@", streamURL.prefix(60) as CVarArg)
         NSLog("🎬🎬🎬 subtitles: %d", subtitles.count)
-        print("🎬 Loading stream: \(streamTitle)")
+        print("🎬 Loading stream: \(cleanStreamTitle)")
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
 
         self.videoURL = streamURL
         self.imdbId = imdbId
-        self.streamTitle = streamTitle
+        self.streamTitle = cleanStreamTitle
         let isBreakingBad = imdbId == "tt0903747"
 
         // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn’t contain S01-S05)
@@ -581,8 +593,8 @@ class MPVPlayerViewModel: ObservableObject {
         print("🔍 Analyzing subtitle compatibility...")
 
         // Check for version mismatches between video and subtitles
-        let videoIsBluRay = streamTitle.lowercased().contains("bluray") || streamTitle.lowercased().contains("bd")
-        let videoIsWEBDL = streamTitle.lowercased().contains("web-dl") || streamTitle.lowercased().contains("webdl")
+        let videoIsBluRay = cleanStreamTitle.lowercased().contains("bluray") || cleanStreamTitle.lowercased().contains("bd")
+        let videoIsWEBDL = cleanStreamTitle.lowercased().contains("web-dl") || cleanStreamTitle.lowercased().contains("webdl")
 
         for subtitle in subtitles {
             let subtitleIsWEBDL = subtitle.label.lowercased().contains("web-dl") || subtitle.label.lowercased().contains("webdl")

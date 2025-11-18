@@ -424,6 +424,89 @@ func registerStreamRoutes(_ app: Application) {
             buckets[bucket, default: []].append(stream)
         }
 
+        // Prefer strong season packs for TV (auto-primaries similar to Breaking Bad)
+        if type == "series", let seasonNumber = season {
+            func promoteBestPack(_ input: [Stream]) -> [Stream] {
+                guard !input.isEmpty else { return input }
+
+                // Simple size parser (GB/MB) for sanity checks
+                func parseSizeToBytes(_ size: String?) -> Int64? {
+                    guard let size = size?.lowercased() else { return nil }
+                    let comps = size.components(separatedBy: CharacterSet.decimalDigits.inverted)
+                    guard let numStr = comps.first(where: { !$0.isEmpty }), let value = Double(numStr) else { return nil }
+                    if size.contains("gb") { return Int64(value * 1_073_741_824) }
+                    if size.contains("mb") { return Int64(value * 1_048_576) }
+                    return nil
+                }
+
+                func packScore(_ stream: Stream) -> Int {
+                    var score = 0
+                    guard stream.isPack else { return 0 }
+                    let titleLower = stream.title.lowercased()
+
+                    // Target season present
+                    if titleLower.contains(String(format: "s%02d", seasonNumber)) || titleLower.contains("season \(seasonNumber)") {
+                        score += 60
+                    }
+
+                    // Season range / complete hints
+                    if titleLower.contains("s01-") || titleLower.contains("s02-") || titleLower.contains("complete") || titleLower.contains("s0\(seasonNumber)-") {
+                        score += 20
+                    }
+
+                    // Good source tags
+                    if titleLower.contains("web-dl") || titleLower.contains("webdl") || titleLower.contains("nf") || titleLower.contains("amzn") || titleLower.contains("hmax") {
+                        score += 50
+                    } else if titleLower.contains("webrip") {
+                        score += 30
+                    }
+
+                    // Embedded subs hint
+                    if titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi ") {
+                        score += 30
+                    }
+
+                    // Size sanity (prefer 1–4 GB per ep, but allow up to ~4 GB)
+                    if let bytes = parseSizeToBytes(stream.size) {
+                        // Rough lower bound: 0.5 GB per ep for packs
+                        let minBytesPerEp: Int64 = 500_000_000
+                        let maxBytesPerEp: Int64 = 4_500_000_000
+                        if bytes >= minBytesPerEp && bytes <= maxBytesPerEp * 100 { // allow full-season totals
+                            score += 15
+                        }
+                    }
+
+                    // Seeder bonus (light)
+                    score += min(stream.seeders ?? 0, 50)
+
+                    // Hash presence
+                    if stream.infoHash != nil { score += 10 }
+
+                    return score
+                }
+
+                let packs = input.filter { $0.isPack }
+                guard !packs.isEmpty else { return input }
+
+                let scoredPacks = packs.map { ($0, packScore($0)) }.sorted { $0.1 > $1.1 }
+                guard let bestPack = scoredPacks.first, bestPack.1 >= 80 else { return input }
+
+                // Move best pack to front, keep order of others
+                var reordered: [Stream] = []
+                reordered.append(bestPack.0)
+                for stream in input where stream.id != bestPack.0.id {
+                    reordered.append(stream)
+                }
+                print("👑 Auto-promoting season pack as primary: \(bestPack.0.title) (score \(bestPack.1))")
+                return reordered
+            }
+
+            buckets["2160p"] = buckets["2160p"].map(promoteBestPack)
+            buckets["1080p"] = buckets["1080p"].map(promoteBestPack)
+            buckets["720p"] = buckets["720p"].map(promoteBestPack)
+            buckets["480p"] = buckets["480p"].map(promoteBestPack)
+        }
+
         print("   📦 Bucket counts (before processBucket):")
         print("      2160p: \(buckets["2160p"]?.count ?? 0)")
         print("      1080p: \(buckets["1080p"]?.count ?? 0)")
@@ -431,11 +514,13 @@ func registerStreamRoutes(_ app: Application) {
         print("      480p: \(buckets["480p"]?.count ?? 0)")
 
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
+        let preferPackPrimary = (type == "series")
+
         var qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle),
-            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle),
-            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle),
-            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle)
+            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
+            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
+            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
+            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary)
         )
 
         // If we found our trusted Breaking Bad pack, force it as primary for 1080p while keeping prior choices as alternates
@@ -1378,7 +1463,14 @@ private func determineQualityBucket(_ quality: String) -> String {
     }
 }
 
-private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String, year: String?, targetTitle: String?) -> QualityBucket {
+private func processBucket(
+    _ streams: [Stream],
+    minSeeders: Int,
+    quality: String,
+    year: String?,
+    targetTitle: String?,
+    preferMultiSubPacksFirst: Bool = false
+) -> QualityBucket {
     print("🔥🔥🔥 processBucket CALLED for \(quality) with \(streams.count) streams")
 
     // Parse size from string like "15 GB" to bytes
@@ -1557,8 +1649,43 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
         return QualityBucket(primary: nil, alternates: nil)
     }
 
-    // The sorted order is already preserved from yearSorted
+    // Preserve sorted order from yearSorted
     let sorted = filtered
+
+    // Pack-first option: push a good multisub pack to primary if present
+    var primary: Stream?
+    var alternates: [Stream] = []
+
+    if preferMultiSubPacksFirst {
+        let packCandidate = sorted.first { stream in
+            guard stream.isPack else { return false }
+            let titleLower = stream.title.lowercased()
+            let hasMultiSub = titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi")
+
+            // Size sanity: prefer packs that aren't tiny (>= ~700MB) or absurdly huge per ep (> ~4.5GB)
+            let sizeOk: Bool = {
+                guard let size = parseSize(stream.size) else { return true } // if unknown, allow
+                return size >= 700_000_000 && size <= 4_824_372_736 // ~0.7GB to 4.5GB
+            }()
+
+            // Source tag sanity
+            let goodSource = titleLower.contains("web-dl") || titleLower.contains("webdl") || titleLower.contains("nf") || titleLower.contains("amzn") || titleLower.contains("hmax")
+
+            return hasMultiSub && sizeOk && goodSource
+        }
+
+        if let pack = packCandidate {
+            primary = pack
+            alternates = sorted.filter { $0.id != pack.id }
+            print("👑 Pack-first: Selecting multisub season pack as primary: \(pack.title)")
+        }
+    }
+
+    if primary == nil {
+        // Default path: top of sorted
+        primary = sorted.first
+        alternates = Array(sorted.dropFirst().prefix(4))
+    }
 
     // Debug: Show final sorted order before primary selection
     print("🏆 FINAL SORTED ORDER for bucket (top 5):")
@@ -1566,9 +1693,6 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
         let score = sourceQualityRank(stream)
         print("   [\(index + 1)] \(stream.title) (source score: \(score))")
     }
-
-    let primary = sorted.first
-    let alternates = Array(sorted.dropFirst().prefix(4))
 
     // Debug: Show what's being assigned as primary
     if let primary = primary {

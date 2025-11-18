@@ -113,6 +113,29 @@ class MPVPlayerViewModel: ObservableObject {
             mpvWrapper.loadVideo(url: streamURL, autoplay: true)
         }
 
+        // If no external subtitles are provided, scan for embedded tracks after load
+        if subtitles.isEmpty {
+            Task { [weak self] in
+                guard let self = self else { return }
+
+                // Poll a few times to give MPV a chance to parse embedded tracks
+                for attempt in 1...6 {
+                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s between checks
+
+                    let tracks = self.mpvWrapper.getSubtitleTracks()
+                    let embeddedSubs = tracks.filter { $0.id != 0 }
+                    if !embeddedSubs.isEmpty {
+                        print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
+                        await MainActor.run {
+                            self.availableSubtitleTracks = tracks
+                        }
+                        _ = self.selectEnglishDefaults()
+                        break
+                    }
+                }
+            }
+        }
+
         // Load subtitles immediately if they're already downloaded (local paths)
         // Otherwise download them in background
         let areSubtitlesLocal = subtitles.allSatisfy { $0.url.starts(with: "/") }

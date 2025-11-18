@@ -239,12 +239,16 @@ struct StreamSelectionView: View {
 
         Task {
             do {
+                // Only pass season/episode for series. Avoid leaking TV filters into movie requests.
+                let season = mediaItem.type == "series" ? appState.selectedSeason : nil
+                let episode = mediaItem.type == "series" ? appState.selectedEpisode : nil
+
                 let allStreams = try await LocalAPIClient.shared.resolveAllStreams(
                     imdbId: mediaItem.id,
                     type: mediaItem.type,
                     quality: selectedQuality.rawValue,
-                    season: appState.selectedSeason,
-                    episode: appState.selectedEpisode,
+                    season: season,
+                    episode: episode,
                     year: mediaItem.year
                 )
 

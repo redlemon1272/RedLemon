@@ -177,6 +177,17 @@ struct MPVPlayerView: View {
                             .zIndex(98)
                     }
                 }
+                // Close subtitle menu on click anywhere when open
+                .contentShape(Rectangle())
+                .simultaneousGesture(
+                    TapGesture().onEnded {
+                        if showSubtitleMenu {
+                            withAnimation(.easeInOut(duration: 0.15)) {
+                                showSubtitleMenu = false
+                            }
+                        }
+                    }
+                )
                 .frame(width: viewModel.showChat ? geometry.size.width * 0.68 : geometry.size.width)
                 .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)  // Faster, simpler animation
 
@@ -352,7 +363,6 @@ struct MPVPlayerView: View {
         controlsTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
             withAnimation(.easeInOut(duration: 0.1)) {
                 showControls = false
-                showSubtitleMenu = false // Force close if extended timer expires
             }
         }
     }
@@ -937,16 +947,6 @@ struct MPVPlayerView: View {
         .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
-        .onHover { isHovering in
-            if !isHovering {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    if !showSubtitleMenu { return } // Menu already closed
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        showSubtitleMenu = false
-                    }
-                }
-            }
-        }
     }
 
     private var chatToggleButton: some View {

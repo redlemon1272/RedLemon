@@ -516,11 +516,13 @@ func registerStreamRoutes(_ app: Application) {
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
         let preferPackPrimary = (type == "series")
 
+        let preferMultiSubMovies = (type == "movie")
+
         var qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
-            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
-            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary),
-            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary)
+            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
+            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
+            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
+            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
         )
 
         // If we found our trusted Breaking Bad pack, force it as primary for 1080p while keeping prior choices as alternates
@@ -1469,7 +1471,8 @@ private func processBucket(
     quality: String,
     year: String?,
     targetTitle: String?,
-    preferMultiSubPacksFirst: Bool = false
+    preferMultiSubPacksFirst: Bool = false,
+    preferMultiSubMovies: Bool = false
 ) -> QualityBucket {
     print("🔥🔥🔥 processBucket CALLED for \(quality) with \(streams.count) streams")
 
@@ -1678,6 +1681,23 @@ private func processBucket(
             primary = pack
             alternates = sorted.filter { $0.id != pack.id }
             print("👑 Pack-first: Selecting multisub season pack as primary: \(pack.title)")
+        }
+    }
+
+    // Movie multisub-first: prefer multisub WEB-DL/NF sources as primary if requested
+    if preferMultiSubMovies && primary == nil {
+        let movieCandidate = sorted.first { stream in
+            let titleLower = stream.title.lowercased()
+            let hasMultiSub = titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi")
+            let hasEng = titleLower.contains("eng") || titleLower.contains("english") || titleLower.contains(" en ") || titleLower.contains("(en)")
+            let goodSource = titleLower.contains("web-dl") || titleLower.contains("webdl") || titleLower.contains("nf") || titleLower.contains("amzn") || titleLower.contains("hmax")
+            return hasMultiSub && hasEng && goodSource
+        }
+
+        if let moviePrimary = movieCandidate {
+            primary = moviePrimary
+            alternates = sorted.filter { $0.id != moviePrimary.id }
+            print("👑 Movie multisub-first: Selecting multisub WEB-DL/NF as primary: \(moviePrimary.title)")
         }
     }
 

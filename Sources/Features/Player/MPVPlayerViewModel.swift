@@ -593,8 +593,9 @@ class MPVPlayerViewModel: ObservableObject {
         print("🔍 Analyzing subtitle compatibility...")
 
         // Check for version mismatches between video and subtitles
-        let videoIsBluRay = cleanStreamTitle.lowercased().contains("bluray") || cleanStreamTitle.lowercased().contains("bd")
-        let videoIsWEBDL = cleanStreamTitle.lowercased().contains("web-dl") || cleanStreamTitle.lowercased().contains("webdl")
+        let lowerTitle = streamTitle.lowercased()
+        let videoIsBluRay = lowerTitle.contains("bluray") || lowerTitle.contains("bd")
+        let videoIsWEBDL = lowerTitle.contains("web-dl") || lowerTitle.contains("webdl")
 
         for subtitle in subtitles {
             let subtitleIsWEBDL = subtitle.label.lowercased().contains("web-dl") || subtitle.label.lowercased().contains("webdl")

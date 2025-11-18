@@ -461,8 +461,8 @@ func registerStreamRoutes(_ app: Application) {
                         score += 30
                     }
 
-                    // Embedded subs hint
-                    if titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi ") {
+                    // Embedded subs hint (only explicit multisub)
+                    if titleLower.contains("multisub") || titleLower.contains("multi sub") {
                         score += 30
                     }
 
@@ -1659,11 +1659,26 @@ private func processBucket(
     var primary: Stream?
     var alternates: [Stream] = []
 
+    // Helper: explicit multisub tag only
+    func hasMultiSubTag(_ lower: String) -> Bool {
+        return lower.contains("multisub") || lower.contains("multi sub")
+    }
+
+    // Baseline (current top) for closeness checks
+    let baseline = sorted.first
+    let baselineSource = baseline.map(sourceQualityRank) ?? 0
+    let baselineSize = parseSize(baseline?.size)
+
+    func notMuchSmallerThanBaseline(_ stream: Stream) -> Bool {
+        guard let base = baselineSize, let mine = parseSize(stream.size) else { return true }
+        return mine >= Int64(Double(base) * 0.85)
+    }
+
     if preferMultiSubPacksFirst {
-        let packCandidate = sorted.first { stream in
+        let packCandidate = sorted.prefix(3).first { stream in
             guard stream.isPack else { return false }
             let titleLower = stream.title.lowercased()
-            let hasMultiSub = titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi")
+            guard hasMultiSubTag(titleLower) else { return false }
 
             // Size sanity: prefer packs that aren't tiny (>= ~700MB) or absurdly huge per ep (> ~4.5GB)
             let sizeOk: Bool = {
@@ -1674,7 +1689,10 @@ private func processBucket(
             // Source tag sanity
             let goodSource = titleLower.contains("web-dl") || titleLower.contains("webdl") || titleLower.contains("nf") || titleLower.contains("amzn") || titleLower.contains("hmax")
 
-            return hasMultiSub && sizeOk && goodSource
+            // Only allow swap if near the current best
+            let sourceClose = sourceQualityRank(stream) >= baselineSource - 10
+
+            return sizeOk && goodSource && sourceClose && notMuchSmallerThanBaseline(stream)
         }
 
         if let pack = packCandidate {
@@ -1686,12 +1704,21 @@ private func processBucket(
 
     // Movie multisub-first: prefer multisub WEB-DL/NF sources as primary if requested
     if preferMultiSubMovies && primary == nil {
-        let movieCandidate = sorted.first { stream in
+        let movieCandidate = sorted.prefix(3).first { stream in
             let titleLower = stream.title.lowercased()
-            let hasMultiSub = titleLower.contains("multisub") || titleLower.contains("multi sub") || titleLower.contains("multi")
-            let hasEng = titleLower.contains("eng") || titleLower.contains("english") || titleLower.contains(" en ") || titleLower.contains("(en)")
+            guard hasMultiSubTag(titleLower) else { return false }
+            let hasEng = titleLower.contains(" eng") || titleLower.contains("english") || titleLower.contains(" en ") || titleLower.contains("(en)")
             let goodSource = titleLower.contains("web-dl") || titleLower.contains("webdl") || titleLower.contains("nf") || titleLower.contains("amzn") || titleLower.contains("hmax")
-            return hasMultiSub && hasEng && goodSource
+
+            // Size sanity for movies: avoid tiny encodes (~3.5 GB floor as sanity)
+            let sizeOk: Bool = {
+                guard let size = parseSize(stream.size) else { return true }
+                return size >= 3_758_096_384 // ~3.5 GB
+            }()
+
+            let sourceClose = sourceQualityRank(stream) >= baselineSource - 10
+
+            return hasEng && goodSource && sizeOk && sourceClose && notMuchSmallerThanBaseline(stream)
         }
 
         if let moviePrimary = movieCandidate {

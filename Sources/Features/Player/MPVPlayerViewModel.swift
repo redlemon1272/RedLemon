@@ -73,9 +73,10 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)]) async {
+    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool) async {
         // For movies, strip any accidental episode markers in the stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
+            guard !isSeries else { return title }
             let moviePattern = try? NSRegularExpression(pattern: "s\\d{1,2}e\\d{1,2}", options: [.caseInsensitive])
             let range = NSRange(location: 0, length: title.utf16.count)
             if let regex = moviePattern, regex.firstMatch(in: title, options: [], range: range) != nil {

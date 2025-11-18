@@ -78,14 +78,16 @@ struct MPVPlayerView: View {
     let subtitles: [(url: String, label: String)]
     let streamQuality: String
     let sourceQuality: String
+    let isSeries: Bool
 
-    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "") {
+    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "", isSeries: Bool = false) {
         self.streamURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = streamTitle
         self.subtitles = subtitles
         self.streamQuality = streamQuality
         self.sourceQuality = sourceQuality
+        self.isSeries = isSeries
         NSLog("🎬🎬🎬 MPVPlayerView INIT called - streamURL: %@, subtitles: %d", streamURL.prefix(60) as CVarArg, subtitles.count)
     }
 
@@ -322,7 +324,8 @@ struct MPVPlayerView: View {
                 streamURL: streamURL,
                 imdbId: imdbId,
                 streamTitle: streamTitle,
-                subtitles: subtitles
+                subtitles: subtitles,
+                isSeries: isSeries
             )
 
             // Start watch party sync if needed
@@ -1127,7 +1130,8 @@ struct MPVPlayerView_Previews: PreviewProvider {
             streamTitle: "The Matrix 1999 2160p BluRay",
             subtitles: [],
             streamQuality: "4K",
-            sourceQuality: "BluRay"
+            sourceQuality: "BluRay",
+            isSeries: false
         )
         .frame(width: 1280, height: 720)
     }

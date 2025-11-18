@@ -307,7 +307,8 @@ struct StablePlayerContainer: View, Equatable {
             streamTitle: displayTitle,
             subtitles: subtitles,
             streamQuality: quality,
-            sourceQuality: sourceQuality
+            sourceQuality: sourceQuality,
+            isSeries: metadata.type == "series"
         )
     }
 

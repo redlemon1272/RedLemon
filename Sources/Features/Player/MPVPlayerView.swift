@@ -156,10 +156,22 @@ struct MPVPlayerView: View {
                         .transition(.opacity)
                     }
 
-                    // Player controls (bottom bar) - hide when subtitle menu is open
-                    if showControls && !viewModel.isLoading && !showSubtitleMenu {
+                    // Player controls (bottom bar)
+                    if showControls && !viewModel.isLoading {
                         playerControlsBar
                             .zIndex(99)
+                    }
+
+                    // Tap shield to close subtitle menu when open
+                    if showSubtitleMenu {
+                        Color.black.opacity(0.001)
+                            .ignoresSafeArea()
+                            .zIndex(101)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.15)) {
+                                    showSubtitleMenu = false
+                                }
+                            }
                     }
 
                     // Full subtitle menu (appears when player controls are hidden)
@@ -231,8 +243,8 @@ struct MPVPlayerView: View {
                     if location.y <= bottomThreshold {
                         showControls = true
 
-                        // Use extended timer if subtitle menu is open, normal timer otherwise
-                        showControlsTemporarily(extended: showSubtitleMenu)
+                        // Keep controls visible briefly after hover
+                        showControlsTemporarily()
                     }
 
                     // Show chat button when mouse is in right 25% of screen (independent of controls)
@@ -357,10 +369,9 @@ struct MPVPlayerView: View {
 
     // MARK: - Timer Management
 
-    private func showControlsTemporarily(extended: Bool = false) {
+    private func showControlsTemporarily() {
         controlsTimer?.invalidate()
-        let duration = extended ? 8.0 : 1.5 // 8 seconds for subtitle adjustments
-        controlsTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { _ in
+        controlsTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
             withAnimation(.easeInOut(duration: 0.1)) {
                 showControls = false
             }
@@ -756,7 +767,7 @@ struct MPVPlayerView: View {
 
                 Spacer()
 
-                Text("Move mouse outside to close")
+                Text("Click outside to close")
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.secondary)
             }

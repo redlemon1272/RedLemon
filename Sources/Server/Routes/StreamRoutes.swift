@@ -228,6 +228,18 @@ func registerStreamRoutes(_ app: Application) {
 
         print("📦 Received \(streams.count) raw streams, bucketing by quality...")
 
+        // For movies only, pull canonical title to prioritize correct matches (avoid wrong same-year titles)
+        let targetTitle: String?
+        if type == "movie" {
+            let metadata = await MetadataService.shared.getMetadata(imdbId: imdbId, type: type)
+            targetTitle = metadata?.title
+            if let title = targetTitle {
+                print("🎯 Target title for matching: \(title)")
+            }
+        } else {
+            targetTitle = nil
+        }
+
         // Attach subtitles to all streams
         var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode)
 
@@ -389,10 +401,10 @@ func registerStreamRoutes(_ app: Application) {
 
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
         let qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year),
-            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year),
-            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year),
-            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year)
+            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle),
+            fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle),
+            hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle),
+            sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle)
         )
 
         print("   📦 Bucket counts (after processBucket/seeder filter):")
@@ -1302,7 +1314,7 @@ private func determineQualityBucket(_ quality: String) -> String {
     }
 }
 
-private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String, year: String?) -> QualityBucket {
+private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String, year: String?, targetTitle: String?) -> QualityBucket {
     print("🔥🔥🔥 processBucket CALLED for \(quality) with \(streams.count) streams")
 
     // Parse size from string like "15 GB" to bytes
@@ -1389,8 +1401,18 @@ private func processBucket(_ streams: [Stream], minSeeders: Int, quality: String
         return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
     }
 
-    // Sort by: year match (ABSOLUTE PRIORITY), then source quality, then provider, then codec, then seeders, then extension
+    // Sort by: title match (movies only) > year match > source quality > provider > codec > seeders > extension
     let yearSorted = yearAndCodecFiltered.sorted { a, b in
+        // MOVIES ONLY: prioritize titles that best match metadata title
+        if let targetTitle = targetTitle {
+            let titleScoreA = streamTitleMatchScore(a.title, targetTitle: targetTitle)
+            let titleScoreB = streamTitleMatchScore(b.title, targetTitle: targetTitle)
+
+            if titleScoreA != titleScoreB {
+                return titleScoreA > titleScoreB
+            }
+        }
+
         // PRIMARY: Year match is ABSOLUTE PRIORITY
         let yearPriorityA = yearMatchPriority(a)
         let yearPriorityB = yearMatchPriority(b)
@@ -1549,6 +1571,35 @@ private func streamTitleContainsYear(_ title: String, targetYear: String) -> Boo
     }
 
     return false
+}
+
+// Helper: score how well a stream title matches the canonical metadata title (movies only)
+// Simple, fast heuristic: exact match > starts/contains > word overlap
+private func streamTitleMatchScore(_ title: String, targetTitle: String) -> Int {
+    let normalize: (String) -> String = { str in
+        let lowered = str.lowercased()
+        let allowed = lowered.filter { $0.isLetter || $0.isNumber || $0 == " " }
+        return allowed.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression).trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    let normTitle = normalize(title)
+    let normTarget = normalize(targetTitle)
+
+    if normTitle == normTarget {
+        return 2000  // perfect match
+    }
+
+    if normTitle.hasPrefix(normTarget) || normTitle.hasSuffix(normTarget) || normTitle.contains(normTarget) {
+        return 1500  // strong contains
+    }
+
+    // Token overlap score
+    let titleWords = Set(normTitle.split(separator: " "))
+    let targetWords = Set(normTarget.split(separator: " "))
+    let intersection = titleWords.intersection(targetWords)
+    let overlapScore = intersection.count * 100
+
+    return overlapScore
 }
 
 private func extractReleaseInfo(_ title: String) -> String {

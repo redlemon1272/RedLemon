@@ -466,7 +466,8 @@ class AppState: ObservableObject {
 
             // Step 1: Load metadata if not already loaded
             var metadata = selectedMetadata
-            if metadata == nil {
+            let needsFreshMetadata = metadata == nil || metadata?.id != mediaItem.id
+            if needsFreshMetadata {
                 NSLog("📡 Fetching metadata for \(mediaItem.id)...")
                 metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
                 selectedMetadata = metadata

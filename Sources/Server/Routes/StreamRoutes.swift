@@ -217,6 +217,34 @@ func registerStreamRoutes(_ app: Application) {
             print("   📅 Filtering by year: \(year)")
         }
 
+        let isBreakingBad = imdbId == "tt0903747" // Breaking Bad
+        // Trusted Breaking Bad pack (covers all seasons); match by hash first, then by title fragments as backup
+        let knownBreakingBadPackHashes = [
+            "71feec966a66" // prefix of hash seen in logs; match is done via hasPrefix
+        ]
+
+        let preferredBreakingBadInfoHashPrefix = "71feec966a66"
+
+        let knownBreakingBadPackFragments = [
+            "breaking bad s01-s05 1080p nf web-dl av1 eac3 multisub",
+            "breaking.bad.s01e01.pilot.1080p.nf.web-dl.av1.eac3"
+        ]
+
+        let isKnownBreakingBadPack: (Stream) -> Bool = { stream in
+            guard isBreakingBad else { return false }
+            let titleLower = stream.title.lowercased()
+
+            // Prefer hash prefix match (more reliable across episodes/providers)
+            if let hash = stream.infoHash?.lowercased(),
+               knownBreakingBadPackHashes.contains(where: { hash.hasPrefix($0) }) {
+                return true
+            }
+
+            return knownBreakingBadPackFragments.contains { fragment in
+                titleLower.contains(fragment)
+            }
+        }
+
         // Fetch all streams from providers
         let streams = try await ProviderManager.shared.fetchStreams(
             imdbId: imdbId,
@@ -354,12 +382,15 @@ func registerStreamRoutes(_ app: Application) {
                     titleLower.contains(pattern)
                 }
 
-                // Match season pack patterns (e.g., "S01 Complete")
+                // Match season pack patterns (e.g., "S01 Complete") or broad Sxx-Syy ranges
                 let matchesSeasonPack = seasonOnlyPatterns.contains { pattern in
                     titleLower.contains(pattern)
-                }
+                } || titleLower.contains("s01-s") || titleLower.contains("s02-s") || titleLower.contains("s03-s") || titleLower.contains("s04-s") || titleLower.contains("s05-s") || titleLower.contains("s06-s") || titleLower.contains("s07-s") || titleLower.contains("s08-s") || titleLower.contains("s09-s") || titleLower.contains("s10-s") || titleLower.range(of: "s\\d{2}-s\\d{2}", options: .regularExpression) != nil
 
-                let matches = matchesEpisode || matchesSeasonPack
+                // SPECIAL-CASE: Allow our known good Breaking Bad pack through, even if naming doesn't match strict filters
+                let matchesKnownPack = isKnownBreakingBadPack(stream)
+
+                let matches = matchesEpisode || matchesSeasonPack || matchesKnownPack
 
                 if !matches && !isCometCached {
                     print("   ⏭️  Skipping \(stream.title) - doesn't match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!))")
@@ -400,12 +431,45 @@ func registerStreamRoutes(_ app: Application) {
         print("      480p: \(buckets["480p"]?.count ?? 0)")
 
         // Filter and sort each bucket (1 seeder minimum - Real-Debrid handles the rest)
-        let qualityBuckets = QualityBuckets(
+        var qualityBuckets = QualityBuckets(
             uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle),
             fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle),
             hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle),
             sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle)
         )
+
+        // If we found our trusted Breaking Bad pack, force it as primary for 1080p while keeping prior choices as alternates
+        if isBreakingBad {
+            func prioritizeKnownPack(_ bucket: QualityBucket?) -> QualityBucket? {
+                guard let bucket = bucket else { return nil }
+
+                var candidates: [Stream] = []
+                if let primary = bucket.primary { candidates.append(primary) }
+                if let alternates = bucket.alternates { candidates.append(contentsOf: alternates) }
+
+                // Prefer exact/prefix hash match; then fallback to title fragments
+                guard let pack = candidates.first(where: { stream in isKnownBreakingBadPack(stream) }) else {
+                    return bucket
+                }
+
+                // Keep other streams as alternates (excluding the chosen pack)
+                let packId = pack.id
+                let newAlternates = candidates.filter { stream in
+                    // Keep all non-pack streams as alternates
+                    stream.id != packId
+                }
+
+                print("👑 Using trusted Breaking Bad pack as primary (1080p): \(pack.title)")
+                return QualityBucket(primary: pack, alternates: newAlternates.isEmpty ? nil : newAlternates)
+            }
+
+            qualityBuckets = QualityBuckets(
+                uhd4k: qualityBuckets.uhd4k,
+                fullHD: prioritizeKnownPack(qualityBuckets.fullHD),
+                hd: qualityBuckets.hd,
+                sd: qualityBuckets.sd
+            )
+        }
 
         print("   📦 Bucket counts (after processBucket/seeder filter):")
         print("      2160p: \(qualityBuckets.uhd4k?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.uhd4k?.alternates?.count ?? 0) alts")

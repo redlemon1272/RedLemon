@@ -84,7 +84,18 @@ class MPVPlayerViewModel: ObservableObject {
         self.videoURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = streamTitle
-        self.subtitles = subtitles
+        let isBreakingBad = imdbId == "tt0903747"
+
+        // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn’t contain S01-S05)
+        let effectiveSubtitles: [(url: String, label: String)] = {
+            if isBreakingBad {
+                print("📝 Breaking Bad detected - skipping external subtitles to prefer embedded multisubs")
+                return []
+            }
+            return subtitles
+        }()
+
+        self.subtitles = effectiveSubtitles
         self.isLoading = true
         self.showPoster = true
 
@@ -113,14 +124,16 @@ class MPVPlayerViewModel: ObservableObject {
             mpvWrapper.loadVideo(url: streamURL, autoplay: true)
         }
 
-        // If no external subtitles are provided, scan for embedded tracks after load
-        if subtitles.isEmpty {
+        func startEmbeddedSubtitleScan() {
             Task { [weak self] in
                 guard let self = self else { return }
 
+                // Give playback more head start before polling to avoid startup stutter
+                try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s initial delay
+
                 // Poll a few times to give MPV a chance to parse embedded tracks
-                for attempt in 1...6 {
-                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s between checks
+                for attempt in 1...3 {
+                    try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s between checks
 
                     let tracks = self.mpvWrapper.getSubtitleTracks()
                     let embeddedSubs = tracks.filter { $0.id != 0 }
@@ -129,22 +142,35 @@ class MPVPlayerViewModel: ObservableObject {
                         await MainActor.run {
                             self.availableSubtitleTracks = tracks
                         }
-                        _ = self.selectEnglishDefaults()
+                        // Only switch if no subtitle is currently active to avoid stutter
+                        let currentSid = self.mpvWrapper.getCurrentSubtitleTrack()
+                        if currentSid == 0 {
+                            _ = self.selectEnglishDefaults()
+                        } else {
+                            print("ℹ️ Embedded subs found but current sid=\(currentSid), not switching to avoid stutter")
+                        }
                         break
+                    } else if attempt == 3 {
+                        print("⏳ No embedded subtitles detected after \(attempt) attempts")
+                    } else {
+                        print("⏳ No embedded subtitles detected yet (attempt \(attempt)), retrying...")
                     }
                 }
             }
         }
 
+        // Always scan for embedded subtitles to prefer them when available
+        startEmbeddedSubtitleScan()
+
         // Load subtitles immediately if they're already downloaded (local paths)
         // Otherwise download them in background
-        let areSubtitlesLocal = subtitles.allSatisfy { $0.url.starts(with: "/") }
+        let areSubtitlesLocal = effectiveSubtitles.allSatisfy { $0.url.starts(with: "/") }
 
-        if areSubtitlesLocal && !subtitles.isEmpty {
+        if areSubtitlesLocal && !effectiveSubtitles.isEmpty {
             NSLog("✅ Subtitles already downloaded, loading immediately...")
             // Load them right away (no delay needed)
             Task {
-                for (index, subtitle) in subtitles.enumerated() {
+                for (index, subtitle) in effectiveSubtitles.enumerated() {
                     NSLog("📝 Loading pre-downloaded subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
                     mpvWrapper.loadSubtitle(url: subtitle.url, title: subtitle.label)
                 }
@@ -153,7 +179,7 @@ class MPVPlayerViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
                 selectEnglishDefaults()
             }
-        } else if !subtitles.isEmpty {
+        } else if !effectiveSubtitles.isEmpty {
             // Subtitles need to be downloaded (fallback for older code paths)
             NSLog("⚠️ Subtitles not pre-downloaded, downloading in background...")
             Task.detached(priority: .background) {
@@ -161,7 +187,7 @@ class MPVPlayerViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds - let playback stabilize
 
                 // Download and load all subtitle files with their labels
-                for (index, subtitle) in subtitles.enumerated() {
+                for (index, subtitle) in effectiveSubtitles.enumerated() {
                     NSLog("📝 RedLemon: Downloading subtitle %d (%@) from: %@", index + 1, subtitle.label, subtitle.url)
 
                     // Download subtitle file locally first
@@ -633,8 +659,13 @@ class MPVPlayerViewModel: ObservableObject {
         }) ?? englishSubs.first
 
         if let englishSub = preferredSub {
-            print("✅ Found English subtitle track: \(englishSub.displayName) (ID: \(englishSub.id))")
-            mpvWrapper.setSubtitleTrack(englishSub.id)
+            let currentSid = mpvWrapper.getCurrentSubtitleTrack()
+            if currentSid != englishSub.id {
+                print("✅ Found English subtitle track: \(englishSub.displayName) (ID: \(englishSub.id))")
+                mpvWrapper.setSubtitleTrack(englishSub.id)
+            } else {
+                print("ℹ️ English subtitle already active (ID: \(currentSid)), no switch needed")
+            }
 
             // Update our state
             updateSubtitleTracks()
@@ -644,8 +675,13 @@ class MPVPlayerViewModel: ObservableObject {
 
             return true
         } else if let firstSub = actualSubtitles.first {
-            print("⚠️ No English subtitles found, using first available: \(firstSub.displayName)")
-            mpvWrapper.setSubtitleTrack(firstSub.id)
+            let currentSid = mpvWrapper.getCurrentSubtitleTrack()
+            if currentSid != firstSub.id {
+                print("⚠️ No English subtitles found, using first available: \(firstSub.displayName)")
+                mpvWrapper.setSubtitleTrack(firstSub.id)
+            } else {
+                print("ℹ️ First available subtitle already active (ID: \(currentSid)), no switch needed")
+            }
 
             // Update our state
             updateSubtitleTracks()

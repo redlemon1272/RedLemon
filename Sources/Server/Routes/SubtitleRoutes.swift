@@ -27,7 +27,7 @@ func registerSubtitleRoutes(_ app: Application) {
         print("🔍 Subtitle search request: \(imdbId) (\(type))")
 
         // Get SubDL API key from Keychain
-        guard let subdlKey = try await KeychainManager.shared.get(service: "subdl") else {
+        guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
             print("⚠️ No SubDL API key found - cannot search subtitles")
             return []
         }
@@ -60,7 +60,7 @@ func registerSubtitleRoutes(_ app: Application) {
         print("📄 Subtitle request: \(encodedPath.prefix(20))... (offset: \(offset)ms)")
 
         // Get SubDL API key from Keychain
-        guard let subdlKey = try await KeychainManager.shared.get(service: "subdl") else {
+        guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
             throw Abort(.unauthorized, reason: "No SubDL API key found")
         }
 

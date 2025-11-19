@@ -191,17 +191,6 @@ struct MPVPlayerView: View {
                             .zIndex(98)
                     }
                 }
-                // Close subtitle menu on click anywhere when open
-                .contentShape(Rectangle())
-                .simultaneousGesture(
-                    TapGesture().onEnded {
-                        if showSubtitleMenu {
-                            withAnimation(.easeInOut(duration: 0.15)) {
-                                showSubtitleMenu = false
-                            }
-                        }
-                    }
-                )
                 .frame(width: viewModel.showChat ? geometry.size.width * 0.68 : geometry.size.width)
                 .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)  // Faster, simpler animation
 

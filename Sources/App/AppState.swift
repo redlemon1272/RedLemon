@@ -412,6 +412,53 @@ class AppState: ObservableObject {
                 // Use provided room ID for watch parties
                 currentRoomId = roomId
                 print(" Using provided room ID: \(roomId)")
+
+                // GUESTS: Check if host has provided stream info to use
+                if !isHost, let watchPartyRoom = currentWatchPartyRoom,
+                   let hostStreamHash = watchPartyRoom.selectedStreamHash,
+                   let hostQuality = watchPartyRoom.selectedQuality {
+
+                    NSLog("🎬 GUEST: Using host's stream selection")
+                    NSLog("   Host InfoHash: \(hostStreamHash)")
+                    NSLog("   Host FileIdx: \(watchPartyRoom.selectedFileIdx ?? -1)")
+                    NSLog("   Host Quality: \(hostQuality)")
+                    NSLog("   Host UnlockedURL: \(watchPartyRoom.unlockedStreamURL ?? "none")")
+
+                    // Bypass stream resolution and use host's stream directly
+                    if let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+                        // Create stream with host's unlocked URL
+                        var hostStream = Stream(
+                            url: hostUnlockedURL,
+                            title: "Host Stream (\(hostQuality))",
+                            quality: hostQuality,
+                            seeders: nil,
+                            size: nil,
+                            provider: "realdebrid",
+                            infoHash: hostStreamHash,
+                            fileIdx: watchPartyRoom.selectedFileIdx,
+                            ext: nil,
+                            behaviorHints: nil,
+                            subtitles: [] // Subtitles will be added separately if needed
+                        )
+
+                        // Download subtitles for host's stream if available
+                        if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
+                            NSLog("📥 Downloading subtitles for host's stream...")
+                            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: subtitles)
+                            hostStream.subtitles = downloadedSubs
+                        }
+
+                        await MainActor.run {
+                            selectedStream = hostStream
+                        }
+
+                        NSLog("✅ GUEST: Using host's unlocked stream directly")
+                        enterFullscreen()
+
+                        // Skip the rest of stream resolution
+                        return
+                    }
+                }
             } else if watchMode == .watchParty {
                 // Create room for watch party mode when no specific room provided
                 let roomVisibility: RoomVisibility = .friendsCanJoin
@@ -477,7 +524,7 @@ class AppState: ObservableObject {
             currentView = .player
             NSLog("🎬 Player view opened...")
 
-            // Step 3: Unlock the selected stream
+            // Step 3: Unlock selected stream
             await MainActor.run {
                 isResolvingStream = true
             }
@@ -588,7 +635,7 @@ class AppState: ObservableObject {
                 print(" Solo playback - no room created")
             }
 
-            // Step 7: Enter fullscreen
+            // Step7: Enter fullscreen
             enterFullscreen()
 
             print("✅ Selected stream ready for playback!")
@@ -616,12 +663,12 @@ class AppState: ObservableObject {
     }
 
     func exitPlayer() async {
-        // Leave the room (always, even for solo watching)
+        // Leave room (always, even for solo watching)
         if let roomId = currentRoomId {
             print("👋 Leaving room: \(roomId)")
             print("   Mode was: \(currentWatchMode)")
 
-            // TODO: Notify ICP canister that user is leaving room
+            // TODO: Notify ICP that user is leaving room
             // This updates friend feeds, removes from active rooms list, etc.
             // await leaveICPRoom(roomId: roomId, mode: currentWatchMode)
 

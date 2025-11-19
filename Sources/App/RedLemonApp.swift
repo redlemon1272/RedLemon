@@ -1,4 +1,5 @@
 import SwiftUI
+import Foundation
 
 // MARK: - Testing Support
 
@@ -56,6 +57,9 @@ struct RedLemonApp: App {
                 .environmentObject(appState)
                 .environmentObject(updateManager)
                 .task {
+                    // Check if username setup should be forced (after user reset)
+                    await checkForcedUsernameSetup()
+
                     // Reset state to prevent automatic playback of last watched content
                     await resetPlaybackState()
 
@@ -228,5 +232,17 @@ struct RedLemonApp: App {
             appState.isLoadingRoom = false
         }
         NSLog("✅ Playback state reset complete - starting in browse view")
+    }
+
+    /// Check if username setup should be forced after user reset
+    func checkForcedUsernameSetup() async {
+        let shouldForce = await UserResetManager.shared.shouldForceUsernameSetup()
+        if shouldForce {
+            NSLog("🔄 Forced username setup detected, showing setup dialog")
+            await MainActor.run {
+                appState.showUsernameSetup = true
+            }
+            await UserResetManager.shared.clearForceUsernameSetupFlag()
+        }
     }
 }

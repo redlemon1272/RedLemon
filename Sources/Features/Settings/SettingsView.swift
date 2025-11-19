@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct SettingsView: View {
 
@@ -29,6 +30,11 @@ struct SettingsView: View {
     // Username State
     @State private var currentUsername: String = ""
 
+    // Reset State
+    @State private var isResetting = false
+    @State private var resetMessage: String?
+    @State private var showingResetConfirmation = false
+
     enum MessageType {
         case success
         case error
@@ -47,6 +53,8 @@ struct SettingsView: View {
                 credentialsSection
 
                 usernameSection
+
+                resetSection
 
                 aboutSection
 
@@ -69,6 +77,16 @@ struct SettingsView: View {
         .onChange(of: appState.currentUsername) { newUsername in
             // Sync when AppState changes
             currentUsername = newUsername
+        }
+        .alert("Reset User Data", isPresented: $showingResetConfirmation) {
+            Button("Cancel", role: .cancel) { }
+            Button("Reset Everything", role: .destructive) {
+                Task {
+                    await resetUserData()
+                }
+            }
+        } message: {
+            Text("This will permanently erase your username '@\(currentUsername)' and all local data. You'll need to create a new username to continue using the app. This action cannot be undone.")
         }
     }
 
@@ -318,6 +336,96 @@ struct SettingsView: View {
         }
     }
 
+    private var resetSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Reset User Data")
+                .font(.system(size: 28, weight: .semibold))
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "trash.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.red)
+                    Text("Erase Username & Start Fresh")
+                        .font(.title3.weight(.semibold))
+
+                    Spacer()
+                }
+
+                Text("Permanently erase your current username '@\(currentUsername)' and all local app data. You'll be able to create a completely new username and start fresh.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+
+                // Warning box
+                HStack(spacing: 12) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .font(.title3)
+                        .foregroundColor(.orange)
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Warning: This action cannot be undone!")
+                            .font(.body.weight(.medium))
+                            .foregroundColor(.orange)
+                        Text("Your current username and all local data will be permanently erased.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+                }
+                .padding(16)
+                .background(Color.orange.opacity(0.1))
+                .cornerRadius(12)
+
+                // Reset status message
+                if let message = resetMessage {
+                    HStack(spacing: 12) {
+                        Image(systemName: isResetting ? "hourglass" : "checkmark.circle.fill")
+                            .font(.title3)
+                            .foregroundColor(isResetting ? .orange : .green)
+                        Text(message)
+                            .font(.body)
+                    }
+                    .padding(16)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(isResetting ? Color.orange.opacity(0.1) : Color.green.opacity(0.1))
+                    .cornerRadius(12)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                }
+
+                // Reset button
+                HStack {
+                    Spacer()
+
+                    Button(action: {
+                        showingResetConfirmation = true
+                    }) {
+                        HStack(spacing: 8) {
+                            if isResetting {
+                                ProgressView()
+                                    .scaleEffect(0.9)
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Image(systemName: "trash.fill")
+                                    .font(.body)
+                            }
+                            Text(isResetting ? "Resetting..." : "Erase All Data")
+                                .font(.body.weight(.medium))
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 16)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.red)
+                    .disabled(isResetting || currentUsername.isEmpty)
+                }
+            }
+            .padding(24)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(16)
+        }
+    }
+
     private var updateBanner: some View {
         Button(action: {
             updateManager.checkForUpdates()
@@ -430,6 +538,49 @@ struct SettingsView: View {
                     messageType = .error
                     saveMessage = "❌ Failed to save credentials: \(error.localizedDescription)"
                     isLoading = false
+                }
+            }
+        }
+    }
+
+    private func resetUserData() async {
+        isResetting = true
+        resetMessage = "Erasing user data..."
+
+        do {
+            try await UserResetManager.shared.resetAllUserData(deleteRemoteUser: false)
+            await UserResetManager.shared.forceUsernameSetup()
+
+            await MainActor.run {
+                resetMessage = "✅ User data erased! The app will now show the username setup screen."
+                currentUsername = ""
+                appState.currentUsername = ""
+                appState.currentUserId = nil
+
+                // Clear message after 3 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    withAnimation {
+                        resetMessage = nil
+                    }
+                }
+            }
+
+            // Stop resetting after a delay
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            await MainActor.run {
+                isResetting = false
+            }
+
+        } catch {
+            await MainActor.run {
+                resetMessage = "❌ Failed to reset user data: \(error.localizedDescription)"
+                isResetting = false
+
+                // Clear error message after 5 seconds
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    withAnimation {
+                        resetMessage = nil
+                    }
                 }
             }
         }

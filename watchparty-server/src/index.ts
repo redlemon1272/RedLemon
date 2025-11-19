@@ -23,7 +23,7 @@ type Room = {
   };
 };
 
-const PORT = Number(process.env.PORT || 8080);
+const PORT = Number(process.env.WATCHPARTY_PORT || 18081);
 const MAX_MESSAGE_BYTES = Number(process.env.MAX_MESSAGE_BYTES || 8192);
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
 const AUTH_BYPASS = process.env.AUTH_BYPASS === 'true'; // default false for security

@@ -172,9 +172,40 @@ analyze_build_failure() {
 
 launch_app() {
     local http_port=${REDLEMON_PORT:-47253}
+    local watchparty_port=18081
     local log_file="${SCRIPT_DIR}/redlemon-$(date +%Y%m%d-%H%M%S).log"
 
-    log_info "Preparing to launch RedLemon..."
+    log_info "Preparing to launch RedLemon with watchparty server..."
+
+    # Start watchparty server first
+    log_info "Building and starting watchparty server..."
+    cd "$SCRIPT_DIR/watchparty-server"
+
+    # Build TypeScript if needed
+    if [ ! -d "dist" ] || [ "src/index.ts" -nt "dist/index.js" ]; then
+        log_info "Building watchparty server..."
+        if ! npm run build; then
+            log_error "Failed to build watchparty server"
+            return 1
+        fi
+    fi
+
+    # Start watchparty server in background
+    export WATCHPARTY_PORT=$watchparty_port
+    export SUPABASE_URL=$SUPABASE_URL
+    export SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY
+    npm start &
+    WATCHPARTY_PID=$!
+
+    # Verify watchparty server started
+    sleep 3
+    if ! curl -s "http://localhost:$watchparty_port/healthz" > /dev/null; then
+        log_error "Watchparty server failed to start on port $watchparty_port"
+        return 1
+    fi
+
+    log_success "Watchparty server started on port $watchparty_port (PID: $WATCHPARTY_PID)"
+    cd "$SCRIPT_DIR"
 
     # Remove quarantine flag
     log_info "Removing quarantine flag..."
@@ -188,19 +219,25 @@ launch_app() {
 
     # Launch with environment variables and proper output handling
     log_info "Launching RedLemon on port $http_port..."
+    log_info "Watchparty server running on port $watchparty_port"
     log_info "Application logs will be displayed below and saved to: $log_file"
     cd "$SCRIPT_DIR"
     export REDLEMON_PORT=$http_port
+    export WATCHPARTY_PORT=$watchparty_port
 
-    # Start the app in foreground with output duplication to log file
+    # Start app in foreground with output duplication to log file
     # This ensures logs appear in real-time in terminal while also being saved
     ./build/RedLemon.app/Contents/MacOS/RedLemon 2>&1 | tee "$log_file"
 }
 
 cleanup() {
-    log_info "Stopping any remaining RedLemon processes..."
+    log_info "Stopping any remaining RedLemon and WatchParty processes..."
     pkill -f RedLemon 2>/dev/null || true
+    pkill -f "npm start" 2>/dev/null || true
     lsof -ti:${REDLEMON_PORT:-47253} 2>/dev/null | xargs kill -9 2>/dev/null || true
+    lsof -ti:18081 2>/dev/null | xargs kill -9 2>/dev/null || true
+    lsof -ti:8080 2>/dev/null | xargs kill -9 2>/dev/null || true
+    lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null || true
     log_success "Cleanup completed"
     exit 0
 }
@@ -257,6 +294,7 @@ main() {
     echo ""
     echo "📊 Services:"
     echo "   ✅ Backend:           Supabase PostgreSQL"
+    echo "   ✅ WatchParty Server:  Port 18081 (WebSocket)"
     echo "   🔐 Authentication:    Username-based"
     echo ""
     echo "📝 Application output will appear below in real-time:"

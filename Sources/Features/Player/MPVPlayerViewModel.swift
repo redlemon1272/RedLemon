@@ -577,13 +577,15 @@ class MPVPlayerViewModel: ObservableObject {
     /// Select subtitle track by ID
     /// - Parameter trackId: Track ID (0 = off, or valid track ID)
     func selectSubtitleTrack(_ trackId: Int) {
-        mpvWrapper.setSubtitleTrack(trackId)
-        updateSubtitleTracks()
+        mpvWrapper.setSubtitleTrack(trackId) { [weak self] in
+            guard let self = self else { return }
+            self.updateSubtitleTracks()
 
-        if let track = currentSubtitleTrack {
-            print("📝 Selected subtitle track: \(track.displayName)")
-        } else {
-            print("🔇 Subtitles disabled")
+            if let track = self.currentSubtitleTrack {
+                print("📝 Selected subtitle track: \(track.displayName)")
+            } else {
+                print("🔇 Subtitles disabled")
+            }
         }
     }
 

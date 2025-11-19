@@ -795,8 +795,9 @@ struct MPVPlayerView: View {
                             // Available tracks (MPVWrapper already provides "Off" when needed)
                             ForEach(viewModel.availableSubtitleTracks, id: \.id) { track in
                                 Button(action: {
-                                    viewModel.mpvWrapper.setSubtitleTrack(track.id)
-                                    viewModel.updateSubtitleTracks()
+                                    viewModel.mpvWrapper.setSubtitleTrack(track.id) {
+                                        viewModel.updateSubtitleTracks()
+                                    }
                                 }) {
                                     HStack {
                                         Text(track.displayName)

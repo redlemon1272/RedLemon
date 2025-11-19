@@ -64,9 +64,9 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "audio-display", "no")
 
         // Performance
-        mpv_set_option_string(handle, "cache-secs", "5")
-        mpv_set_option_string(handle, "demuxer-max-bytes", "25M")
-        mpv_set_option_string(handle, "vd-lavc-threads", "2")
+        mpv_set_option_string(handle, "cache-secs", "30")
+        mpv_set_option_string(handle, "demuxer-max-bytes", "200M")
+        mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // UI
         mpv_set_option_string(handle, "keep-open", "yes")
@@ -148,11 +148,11 @@ class MPVWrapper: ObservableObject {
         print("🧹 Gentle MPV buffer cleanup (no playback interruption)...")
 
         // Gentle cache adjustment - NO buffer cycling during playback
-        mpv_command_string(handle, "set cache-secs 3")
+        mpv_command_string(handle, "set cache-secs 10")
 
         // Small delay to let changes take effect
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            mpv_command_string(handle, "set cache-secs 5")
+            mpv_command_string(handle, "set cache-secs 30")
         }
     }
 
@@ -286,10 +286,10 @@ class MPVWrapper: ObservableObject {
         print("🧹 Natural cleanup - optimizing after video end...")
 
         // More thorough cleanup during natural breaks
-        mpv_command_string(handle, "set cache-secs 2")
+        mpv_command_string(handle, "set cache-secs 5")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            mpv_command_string(handle, "set cache-secs 5")
+            mpv_command_string(handle, "set cache-secs 30")
         }
     }
 
@@ -690,29 +690,29 @@ class MPVWrapper: ObservableObject {
         _ = mpv_command_string(handle, "cycle audio")
     }
 
-    func setSubtitleTrack(_ id: Int) {
+    func setSubtitleTrack(_ id: Int, completion: @escaping () -> Void = {}) {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        // Store current pause state
-        let wasPaused = !isPlaying
-
-        // Set subtitle track (use "no" string for disabling, or track ID)
-        if id <= 0 {
-            // Disable subtitles
-            let noStr = "no".cString(using: .utf8)
-            var noPtr = noStr?.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }
-            mpv_set_property(handle, "sid", MPV_FORMAT_STRING, &noPtr)
-            print("🔇 Disabled subtitles")
-        } else {
-            // Enable specific subtitle track
-            var trackId = Int64(id)
-            mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-            print("📝 Set subtitle track to: \(id)")
-        }
-
-        // Restore pause state if it was paused
-        if wasPaused && isPlaying {
-            pause()
+        // Run on background queue to prevent main thread blocking (UI stutter)
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Set subtitle track (use "no" string for disabling, or track ID)
+            if id <= 0 {
+                // Disable subtitles
+                let noStr = "no".cString(using: .utf8)
+                var noPtr = noStr?.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }
+                mpv_set_property(handle, "sid", MPV_FORMAT_STRING, &noPtr)
+                print("🔇 Disabled subtitles (async)")
+            } else {
+                // Enable specific subtitle track
+                var trackId = Int64(id)
+                mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
+                print("📝 Set subtitle track to: \(id) (async)")
+            }
+            
+            // Notify completion on main thread
+            DispatchQueue.main.async {
+                completion()
+            }
         }
     }
 

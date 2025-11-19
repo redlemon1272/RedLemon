@@ -742,22 +742,8 @@ class MPVPlayerViewModel: ObservableObject {
         trimChatMessages()
         print("💬 Sent: \(text)")
 
-        // Save to Supabase database (primary method)
-        Task {
-            do {
-                try await SupabaseClient.shared.sendChatMessage(
-                    roomId: roomId,
-                    userId: userId,
-                    username: username,
-                    message: text
-                )
-                NSLog("✅ Chat message saved to database")
-            } catch {
-                NSLog("❌ Failed to save chat message: \(error)")
-            }
-        }
-
-        // Also send via WebRTC for low-latency (backup method)
+        // Watch party chat: Send via Realtime ONLY (no database)
+        // Watch party rooms don't exist in the database, only in Realtime
         if isInWatchParty {
             Task {
                 let syncMessage = SyncMessage(
@@ -1191,6 +1177,12 @@ extension MPVPlayerViewModel {
 
         case .chat:
             // Receive chat message from other participants
+            // CRITICAL: Skip messages from self (already added locally when sent)
+            if message.senderId == currentUserId {
+                print("💬 Skipping own message (already displayed locally)")
+                return
+            }
+            
             if let text = message.chatText, let username = message.chatUsername {
                 let chatMessage = ChatMessage(
                     id: UUID().uuidString,

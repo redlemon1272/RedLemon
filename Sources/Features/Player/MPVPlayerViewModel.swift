@@ -1124,19 +1124,34 @@ extension MPVPlayerViewModel {
             let absDrift = abs(drift)
 
             // Syncplay-inspired tiered sync approach (optimized for weaker hardware)
-            if absDrift < 0.15 {
-                // Perfect sync (<150ms), do nothing
-                // Increased from 50ms to reduce unnecessary corrections on weaker hardware
+            // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
+            if absDrift < 0.3 {
+                // Perfect sync (<300ms), do nothing
+                // Increased from 150ms to further reduce corrections on weaker hardware
                 print("✅ Perfect sync: \(Int(absDrift * 1000))ms drift")
-            } else if absDrift < 0.5 {
-                // Small drift (150-500ms) - use gentle speed adjustment
-                // Reduced speed change from ±2% to ±1% for smoother playback
-                if absDrift > 0.2 {
-                    let speedFactor = drift > 0 ? 0.99 : 1.01  // Gentler: 1% instead of 2%
+            } else if absDrift < 5.0 {
+                // Small/Medium drift (300ms-5s) - ONLY use speed adjustment, NO SEEKING
+                // Seeking causes video pipeline stalls on weaker hardware (MacBook Air 2015)
+                if absDrift > 0.5 {
+                    // More aggressive speed adjustment for larger drifts
+                    let speedFactor = drift > 0 ? 0.95 : 1.05  // ±5% for faster correction
+                    mpvWrapper.setSpeed(speedFactor)
+                    print("⚡ Speed sync: \(speedFactor)x to fix \(String(format: "%.1f", absDrift))s drift (NO SEEK)")
+
+                    // Reset speed after 3 seconds
+                    Task {
+                        try? await Task.sleep(nanoseconds: 3_000_000_000)
+                        await MainActor.run {
+                            mpvWrapper.setSpeed(1.0)
+                        }
+                    }
+                } else {
+                    // Gentle correction for smaller drifts
+                    let speedFactor = drift > 0 ? 0.99 : 1.01
                     mpvWrapper.setSpeed(speedFactor)
                     print("⚡ Gentle speed sync: \(speedFactor)x to fix \(Int(absDrift * 1000))ms drift")
 
-                    // Reset speed after 2 seconds (increased from 1s for smoother correction)
+                    // Reset speed after 2 seconds
                     Task {
                         try? await Task.sleep(nanoseconds: 2_000_000_000)
                         await MainActor.run {
@@ -1144,19 +1159,17 @@ extension MPVPlayerViewModel {
                         }
                     }
                 }
-            } else if absDrift < 2.0 {
-                // Medium drift (500ms-2s) - soft seek
-                print("🔄 Medium drift (\(String(format: "%.1f", absDrift))s) - seeking to sync")
-                seek(to: timestamp)
             } else {
-                // Large drift (>2s) - hard seek and sync play state
-                print("⚠️ Large drift (\(String(format: "%.1f", absDrift))s) - hard resync")
+                // Large drift (>5s) - seek required
+                print("🔄 Large drift (\(String(format: "%.1f", absDrift))s) - seeking to sync")
                 seek(to: timestamp)
-                if isPlaying && !mpvWrapper.isPlaying {
-                    togglePlayPause()
-                } else if !isPlaying && mpvWrapper.isPlaying {
-                    togglePlayPause()
-                }
+            }
+
+            // Sync play/pause state
+            if isPlaying && !mpvWrapper.isPlaying {
+                togglePlayPause()
+            } else if !isPlaying && mpvWrapper.isPlaying {
+                togglePlayPause()
             }
 
         case .play:

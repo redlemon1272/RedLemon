@@ -737,6 +737,7 @@ class MPVPlayerViewModel: ObservableObject {
         )
 
         messages.append(message)
+        trimChatMessages()
         print("💬 Sent: \(text)")
 
         // Save to Supabase database (primary method)
@@ -787,9 +788,22 @@ class MPVPlayerViewModel: ObservableObject {
     }
 
     private func invalidateAllTimers() {
+        watchHistoryTimer?.invalidate()
+        watchHistoryTimer = nil
+        syncBroadcastTimer?.invalidate()
+        syncBroadcastTimer = nil
+        chatPollingTimer?.invalidate()
+        chatPollingTimer = nil
         activeTimers.forEach { $0.invalidate() }
         activeTimers.removeAll()
         print("🗑️ Invalidated all active timers")
+    }
+
+    /// Keep chat list bounded to avoid long-session memory bloat
+    private func trimChatMessages(maxCount: Int = 500) {
+        if messages.count > maxCount {
+            messages.removeFirst(messages.count - maxCount)
+        }
     }
 
     // MARK: - Cleanup
@@ -820,8 +834,13 @@ class MPVPlayerViewModel: ObservableObject {
 
     deinit {
         print("🗑️ MPVPlayerViewModel deinit")
-        // Stop playback synchronously - it's safe since we're just sending a command
-        mpvWrapper.stop()
+        Task { [weak self] in
+            guard let self else { return }
+            await MainActor.run {
+                invalidateAllTimers()
+                mpvWrapper.stop()
+            }
+        }
     }
 
     // MARK: - Subtitle Download
@@ -1062,6 +1081,7 @@ extension MPVPlayerViewModel {
                     timestamp: msg.createdAt
                 )
                 messages.append(chatMsg)
+                trimChatMessages()
                 lastChatMessageId = msg.id.uuidString
 
                 NSLog("💬 New chat message from \(msg.username): \(msg.message)")
@@ -1164,6 +1184,7 @@ extension MPVPlayerViewModel {
                 )
                 await MainActor.run {
                     messages.append(chatMessage)
+                    trimChatMessages()
                 }
                 print("💬 Received chat from \(username): \(text)")
             }
@@ -1328,6 +1349,7 @@ extension MPVPlayerViewModel {
             text: "👋 Left watch party",
             timestamp: Date()
         ))
+        trimChatMessages()
 
         print("✅ Watch party sync stopped, returned to solo mode")
     }

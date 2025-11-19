@@ -72,6 +72,20 @@ class LobbyViewModel: ObservableObject {
         }
     }
 
+    deinit {
+        // Ensure all timers and realtime resources are released when the view model goes away
+        Task { [weak self] in
+            guard let self else { return }
+            await MainActor.run {
+                countdownTimer?.invalidate()
+                stopPolling()
+                watchPartyManager?.delegate = nil
+            }
+            await self.realtimeManager?.disconnect()
+        }
+        countdownTimer = nil
+    }
+
     func connect() {
         print("🎭 Lobby: Connecting to room \(room.id)...")
 
@@ -496,6 +510,7 @@ class LobbyViewModel: ObservableObject {
         )
 
         messages.append(message)
+        trimLobbyMessages()
     }
 
     // MARK: - Realtime Message Handling
@@ -635,7 +650,18 @@ class LobbyViewModel: ObservableObject {
                 timestamp: Date(timeIntervalSince1970: syncMessage.timestamp)
             )
             chatMessages.append(chatMessage)
+            trimLobbyMessages()
             print("💬 Lobby chat received: [\(syncMessage.chatUsername ?? "Unknown")] \(chatText)")
+        }
+    }
+
+    /// Keep lobby chat/messages bounded to avoid unbounded memory growth during long sessions
+    private func trimLobbyMessages(maxCount: Int = 300) {
+        if messages.count > maxCount {
+            messages.removeFirst(messages.count - maxCount)
+        }
+        if chatMessages.count > maxCount {
+            chatMessages.removeFirst(chatMessages.count - maxCount)
         }
     }
 

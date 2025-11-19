@@ -265,6 +265,17 @@ class LobbyViewModel: ObservableObject {
         // Clear input immediately for better UX
         chatInput = ""
 
+        // Add message locally for instant feedback (optimistic UI)
+        let localMessage = ChatMessage(
+            id: UUID().uuidString,
+            username: username,
+            text: messageText,
+            timestamp: Date()
+        )
+        chatMessages.append(localMessage)
+        trimLobbyMessages()
+        NSLog("💬 Added own message locally: '\(messageText)'")
+
         // Send via Realtime only (no database involvement)
         Task { [weak self] in
             guard let self = self else { return }
@@ -643,6 +654,12 @@ class LobbyViewModel: ObservableObject {
             }
         } else {
             // Regular chat message - add to chat UI
+            // CRITICAL: Skip messages from self (already added locally when sent)
+            if syncMessage.senderId == participantId {
+                NSLog("💬 Skipping own message (already displayed locally): '\(chatText)'")
+                return
+            }
+            
             let chatMessage = ChatMessage(
                 id: UUID().uuidString,
                 username: syncMessage.chatUsername ?? "Unknown",

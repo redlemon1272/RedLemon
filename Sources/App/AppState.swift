@@ -344,6 +344,11 @@ class AppState: ObservableObject {
             )
             
             NSLog("✅ Room created: \(roomId)")
+
+            // CRITICAL: Host must join the room in the database immediately
+            // Otherwise polling will think the host "left" because they aren't in the participants table
+            try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: true)
+            NSLog("✅ Host joined room in database")
             
             // Create host participant
             let hostParticipant = Participant(

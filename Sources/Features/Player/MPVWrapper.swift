@@ -54,9 +54,18 @@ class MPVWrapper: ObservableObject {
 
         NSLog("🖼️ Setting up MPV with native macOS video output...")
 
-        // Use libmpv render API (IINA's exact settings)
+        // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
-        mpv_set_option_string(handle, "hwdec", "auto-safe")
+        
+        // Hardware decoding: 'auto' is more aggressive than 'auto-safe'
+        // Falls back to software if HW fails, but tries harder to use GPU
+        mpv_set_option_string(handle, "hwdec", "auto")
+        
+        // Explicit VideoToolbox support for macOS (better for Intel Macs)
+        mpv_set_option_string(handle, "hwdec-codecs", "all")
+        
+        // OpenGL for better compatibility with older Intel graphics
+        mpv_set_option_string(handle, "gpu-api", "opengl")
         mpv_set_option_string(handle, "gpu-hwdec-interop", "auto")
         mpv_set_option_string(handle, "keep-open", "yes")
 

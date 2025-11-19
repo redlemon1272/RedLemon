@@ -74,7 +74,7 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Initialization
 
     func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool) async {
-        // For movies, strip any accidental episode markers in the stream title (e.g., "S01E01")
+        // For movies, strip any accidental episode markers in stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
             guard !isSeries else { return title }
             let moviePattern = try? NSRegularExpression(pattern: "s\\d{1,2}e\\d{1,2}", options: [.caseInsensitive])
@@ -1180,7 +1180,7 @@ extension MPVPlayerViewModel {
                 print("   File Index: \(message.fileIdx ?? -1)")
 
                 // Update local stream information
-                // Note: Guests might need to reload the stream with the new URL
+                // Note: Guests might need to reload stream with new URL
                 if videoURL != unlockedURL {
                     print("🔄 Stream URL changed, reloading...")
                     videoURL = unlockedURL
@@ -1199,7 +1199,7 @@ extension MPVPlayerViewModel {
             if isWatchPartyHost {
                 print("📤 Guest requested stream info, sending current stream details")
 
-                // Send current stream information back to the requesting guest
+                // Send current stream information back to requesting guest
                 let streamInfoMessage = SyncMessage(
                     type: .streamSelected,
                     timestamp: Date().timeIntervalSince1970,
@@ -1229,10 +1229,6 @@ extension MPVPlayerViewModel {
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
-
-        default:
-            // Handle any future enum cases that might be added
-            print("⚠️ Unknown SyncMessageType received: \(message.type)")
         }
     }
 

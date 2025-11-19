@@ -99,7 +99,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.streamTitle = cleanStreamTitle
         let isBreakingBad = imdbId == "tt0903747"
 
-        // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn’t contain S01-S05)
+        // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn't contain S01-S05)
         let effectiveSubtitles: [(url: String, label: String)] = {
             if isBreakingBad {
                 print("📝 Breaking Bad detected - skipping external subtitles to prefer embedded multisubs")
@@ -878,7 +878,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     private func extractSRTFromZip(data: Data) throws -> String {
         // Use libz to extract (7z format uses zlib internally)
-        // First, try to find .srt file in the archive
+        // First, try to find .srt file in archive
 
         // For now, use a simple approach: Look for SRT content markers
         // The file appears to be a 7z archive with an en.sdh.srt file inside
@@ -1168,9 +1168,71 @@ extension MPVPlayerViewModel {
                 print("💬 Received chat from \(username): \(text)")
             }
 
+        case .streamSelected:
+            // Host selected a new stream - guests should update their stream info
+            if let infoHash = message.infoHash,
+               let quality = message.quality,
+               let unlockedURL = message.unlockedURL {
+
+                print("🎬 Host selected new stream:")
+                print("   InfoHash: \(infoHash)")
+                print("   Quality: \(quality)")
+                print("   File Index: \(message.fileIdx ?? -1)")
+
+                // Update local stream information
+                // Note: Guests might need to reload the stream with the new URL
+                if videoURL != unlockedURL {
+                    print("🔄 Stream URL changed, reloading...")
+                    videoURL = unlockedURL
+
+                    // If currently playing, reload with new stream
+                    if mpvWrapper.isPlaying {
+                        mpvWrapper.loadVideo(url: unlockedURL, autoplay: true)
+                    }
+                }
+            } else {
+                print("⚠️ Received streamSelected message with incomplete data")
+            }
+
+        case .requestStream:
+            // Guest requested current stream info - only host should handle this
+            if isWatchPartyHost {
+                print("📤 Guest requested stream info, sending current stream details")
+
+                // Send current stream information back to the requesting guest
+                let streamInfoMessage = SyncMessage(
+                    type: .streamSelected,
+                    timestamp: Date().timeIntervalSince1970,
+                    position: currentTime,
+                    isPlaying: isPlaying,
+                    senderId: currentUserId,
+                    chatText: nil,
+                    chatUsername: nil,
+                    infoHash: nil, // Could be extracted from current videoURL if needed
+                    fileIdx: nil,
+                    quality: nil,
+                    unlockedURL: videoURL.isEmpty ? nil : videoURL
+                )
+
+                Task {
+                    do {
+                        try await realtimeManager?.sendSyncMessage(streamInfoMessage)
+                        print("✅ Sent stream info to requesting guest")
+                    } catch {
+                        print("❌ Failed to send stream info: \(error)")
+                    }
+                }
+            } else {
+                print("⚠️ Non-host received requestStream message, ignoring")
+            }
+
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
+
+        default:
+            // Handle any future enum cases that might be added
+            print("⚠️ Unknown SyncMessageType received: \(message.type)")
         }
     }
 
@@ -1258,7 +1320,7 @@ extension MPVPlayerViewModel {
         currentUserId = nil
         isWatchPartyHost = false
         isInWatchParty = false
-        isResumingInWatchParty = false  // Reset the resume flag when leaving watch party
+        isResumingInWatchParty = false  // Reset resume flag when leaving watch party
 
         // Hide chat when leaving watch party
         showChat = false

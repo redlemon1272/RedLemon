@@ -892,15 +892,11 @@ class MPVWrapper: ObservableObject {
         timeUpdateTimer?.invalidate()
         timeUpdateTimer = nil
 
-        // Wait a moment for cancellation to propagate
-        let semaphore = DispatchSemaphore(value: 0)
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
-            semaphore.signal()
-        }
-        semaphore.wait()
-
         // Clean up MPV resources
         if let handle = mpvHandle {
+            // Explicitly clear render context pointer to prevent any further access
+            renderContext = nil
+            
             if isInitialized {
                 print("🗑️ Terminating MPV instance...")
                 mpv_terminate_destroy(handle)

@@ -38,6 +38,10 @@ class MPVViewLayer: CAOpenGLLayer {
     /// When true, drawing proceeds even if mpv indicates nothing needs to be done
     @Atomic private var forceDraw = false
 
+    /// Flag to prevent flooding main thread with setNeedsDisplay calls
+    @Atomic private var isMainThreadUpdatePending = false
+
+
     /// Indicates whether view is being resized
     @Atomic var inLiveResize: Bool = false {
         didSet {
@@ -206,6 +210,9 @@ class MPVViewLayer: CAOpenGLLayer {
         glGetIntegerv(GLenum(GL_VIEWPORT), &dims)
 
         // Render MPV frame directly (thread-safe per MPV docs)
+        renderLock.lock()
+        defer { renderLock.unlock() }
+        
         guard let renderContext = wrapper.renderContext else { return }
 
         var flip: CInt = 1
@@ -283,15 +290,27 @@ class MPVViewLayer: CAOpenGLLayer {
             
             // Force main thread update to wake up run loop and ensure window compositor picks up the frame
             // This fixes the "black screen until mouse move" issue
-            DispatchQueue.main.async {
-                self.setNeedsDisplay()
+            // Coalesce updates to prevent flooding the main thread during animations
+            if !isMainThreadUpdatePending {
+                isMainThreadUpdatePending = true
+                DispatchQueue.main.async {
+                    self.setNeedsDisplay()
+                    self.isMainThreadUpdatePending = false
+                }
             }
         }
     }
 
     // MARK: - Cleanup
 
+    // MARK: - Cleanup
+
+    private let renderLock = NSLock()
+
     func uninit() {
+        renderLock.lock()
+        defer { renderLock.unlock() }
+        
         guard !isUninited else { return }
         isUninited = true
         print("🎬 MPVViewLayer uniniting...")
@@ -309,6 +328,10 @@ class MPVViewLayer: CAOpenGLLayer {
 
     deinit {
         print("🗑️ MPVViewLayer deinit")
+        // We can't take the lock in deinit if we are calling uninit which takes it
+        // But uninit handles the lock.
+        // However, calling uninit() directly from deinit is fine as long as we don't deadlock.
+        // uninit takes the lock.
         uninit()
     }
 }// MARK: - Atomic Property Wrapper

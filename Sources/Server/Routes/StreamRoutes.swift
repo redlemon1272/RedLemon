@@ -1568,6 +1568,42 @@ private func detectAudioLanguage(_ title: String) -> (String, Bool, Bool, Int) {
     return (primaryLanguage, hasEnglish, isMultiAudio, languageScore)
 }
 
+/// Returns: (hasEnglishSubtitles, subtitleScore)
+private func detectSubtitleLanguage(_ title: String) -> (Bool, Int) {
+    let titleLower = title.lowercased()
+    
+    // English subtitle indicators
+    let englishSubPatterns = ["sub.eng", "eng.sub", "english.sub", "sub.english", "engsub", "eng-sub", "english-sub"]
+    
+    // Multi-sub indicators (usually include English)
+    let multiSubPatterns = ["multisub", "multi.sub", "multi-sub", "subs"]
+    
+    var hasEnglish = false
+    var score = 0
+    
+    // Check for explicit English subs
+    for pattern in englishSubPatterns {
+        if titleLower.contains(pattern) {
+            hasEnglish = true
+            score = 20 // Explicit English subs get a nice boost
+            break
+        }
+    }
+    
+    // Check for multi-subs (if no explicit English found yet)
+    if !hasEnglish {
+        for pattern in multiSubPatterns {
+            if titleLower.contains(pattern) {
+                hasEnglish = true // Assume multi-sub includes English
+                score = 10 // Multi-subs get a smaller boost
+                break
+            }
+        }
+    }
+    
+    return (hasEnglish, score)
+}
+
 /// Check if a stream has acceptable audio language
 /// Returns true if English or multi-audio, false for non-English only
 private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
@@ -1731,6 +1767,16 @@ private func processBucket(
             let audioDescB = getAudioLanguageDescription(b.title)
             print("  🎵 Audio Language: \(a.title) (\(audioDescA)) vs \(b.title) (\(audioDescB))")
             return audioScoreA > audioScoreB
+        }
+
+        // NEW: SUBTITLE PRIORITY - Prefer streams with English subtitles (tie-breaker)
+        let subScoreA = detectSubtitleLanguage(a.title).1
+        let subScoreB = detectSubtitleLanguage(b.title).1
+        
+        if subScoreA != subScoreB {
+            // Only log if it makes a difference
+            // print("  📝 Subtitle Score: \(a.title) (\(subScoreA)) vs \(b.title) (\(subScoreB))")
+            return subScoreA > subScoreB
         }
 
         // SECONDARY: Enhanced source quality ranking (Netflix > BluRay > WEB-DL > WEBRip)

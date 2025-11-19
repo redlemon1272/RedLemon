@@ -25,7 +25,6 @@ type Room = {
 const PORT = Number(process.env.WATCHPARTY_PORT || 18081);
 const MAX_MESSAGE_BYTES = Number(process.env.MAX_MESSAGE_BYTES || 8192);
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
-const AUTH_BYPASS = process.env.AUTH_BYPASS === 'true'; // default false for security
 
 // Performance optimization: Use Map for O(1) lookups
 const rooms = new Map<string, Room>();
@@ -119,12 +118,6 @@ function getJWKS() {
 }
 
 async function verifyToken(token: string): Promise<{ valid: boolean; userId?: string; error?: string }> {
-  // Bypass mode for development
-  if (AUTH_BYPASS) {
-    debug('Auth bypass enabled - accepting token');
-    return { valid: true, userId: `user-${Math.random().toString(36).slice(2)}` };
-  }
-
   if (!token) {
     return { valid: false, error: 'No token provided' };
   }
@@ -390,7 +383,13 @@ app.ws('/ws', {
           event: parsed.type,
           seq: room.seq,
           userId: userData.userId,
+          timestamp: Date.now(),
         };
+
+        // Echo back client timestamp for latency measurement
+        if (typeof parsed.clientTimestamp === 'number') {
+          (payload as any).clientTimestamp = parsed.clientTimestamp;
+        }
 
         // Performance optimization: Cache last state for snapshots
         if (parsed.type === 'play') {
@@ -412,8 +411,13 @@ app.ws('/ws', {
           event: parsed.type,
           seq: room.seq,
           userId: userData.userId,
+          timestamp: Date.now(),
         };
 
+        // Echo back client timestamp for latency measurement
+        if (typeof parsed.clientTimestamp === 'number') {
+          (payload as any).clientTimestamp = parsed.clientTimestamp;
+        }
         if (typeof parsed.positionMs === 'number') payload.positionMs = parsed.positionMs;
         if (typeof parsed.playing === 'boolean') payload.playing = parsed.playing;
         room.lastState = {

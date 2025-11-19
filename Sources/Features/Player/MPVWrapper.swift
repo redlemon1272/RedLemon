@@ -77,6 +77,12 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "demuxer-max-bytes", "200M")
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
+        // Audio buffering for watch party sync (prevents crackling during speed changes)
+        mpv_set_option_string(handle, "audio-buffer", "1.0")  // 1 second audio buffer
+        mpv_set_option_string(handle, "audio-samplerate", "48000")  // Standard sample rate
+        mpv_set_option_string(handle, "audio-pitch-correction", "yes")  // Maintain pitch during speed changes
+        mpv_set_option_string(handle, "af", "scaletempo2")  // Better audio resampling for speed changes
+
         // UI
         mpv_set_option_string(handle, "keep-open", "yes")
         mpv_set_option_string(handle, "input-default-bindings", "no")

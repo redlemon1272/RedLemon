@@ -1178,7 +1178,7 @@ extension MPVPlayerViewModel {
         case .chat:
             // Receive chat message from other participants
             // CRITICAL: Skip messages from self (already added locally when sent)
-            if message.senderId == currentUserId?.uuidString {
+            if message.senderId == currentUserId {
                 print("💬 Skipping own message (already displayed locally)")
                 return
             }

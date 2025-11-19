@@ -76,3 +76,4 @@ ENV/
 .idea/
 
 *.dylib
+.modulecache/

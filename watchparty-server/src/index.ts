@@ -1,5 +1,7 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { createServer } from 'http';
+import { jwtVerify, createRemoteJWKSet } from 'jose';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 type JsonObject = Record<string, unknown>;
 
@@ -24,11 +26,20 @@ type Room = {
 const PORT = Number(process.env.PORT || 8080);
 const MAX_MESSAGE_BYTES = Number(process.env.MAX_MESSAGE_BYTES || 8192);
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
-const AUTH_BYPASS = process.env.AUTH_BYPASS !== 'false'; // default true for dev
+const AUTH_BYPASS = process.env.AUTH_BYPASS === 'true'; // default false for security
 
 // Performance optimization: Use Map for O(1) lookups
 const rooms = new Map<string, Room>();
 const socketData = new WeakMap<WebSocket, UserData>();
+
+// Rate limiting and abuse prevention
+const rateLimiter = new Map<WebSocket, { count: number; resetTime: number }>();
+const PING_TIMEOUT = 60000; // 60 seconds
+const RATE_LIMIT = 10; // 10 messages per second
+const EVENT_BUFFER_SIZE = 100; // Keep last 100 events for reconnection
+
+// Event buffer for reconnection support
+const eventBuffers = new Map<string, Array<{ seq: number; event: any; timestamp: number }>>();
 
 // Performance optimization: Pre-allocate common message templates
 const AUTH_REQUIRED_MSG = JSON.stringify({ type: 'error', code: 4001, message: 'auth_required' });
@@ -74,67 +85,35 @@ interface JWTPayload {
   iss?: string;
 }
 
-// Cache for JWKS and decoded tokens
-let jwksCache: JWKSResponse | null = null;
-let jwksCacheExpiry: number = 0;
-const JWKS_CACHE_DURATION = 3600000; // 1 hour in milliseconds
+// Initialize Supabase client
+let supabase: SupabaseClient | null = null;
 
-async function fetchJWKS(): Promise<JWKSResponse> {
-  const now = Date.now();
+function getSupabaseClient(): SupabaseClient {
+  if (!supabase) {
+    const supabaseUrl = process.env.SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  // Return cached JWKS if still valid
-  if (jwksCache && now < jwksCacheExpiry) {
-    return jwksCache;
-  }
-
-  const jwksUrl = process.env.SUPABASE_JWKS_URL;
-  if (!jwksUrl) {
-    throw new Error('SUPABASE_JWKS_URL environment variable is required');
-  }
-
-  debug('Fetching JWKS from:', jwksUrl);
-
-  try {
-    const response = await fetch(jwksUrl);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch JWKS: ${response.status} ${response.statusText}`);
+    if (!supabaseUrl || !supabaseServiceKey) {
+      throw new Error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required');
     }
 
-    jwksCache = await response.json() as JWKSResponse;
-    jwksCacheExpiry = now + JWKS_CACHE_DURATION;
-
-    debug('JWKS fetched and cached successfully');
-    return jwksCache;
-  } catch (error) {
-    log('Error fetching JWKS:', error);
-    throw error;
+    supabase = createClient(supabaseUrl, supabaseServiceKey);
   }
+  return supabase;
 }
 
-function base64UrlDecode(base64Url: string): string {
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const paddedBase64 = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
-  return Buffer.from(paddedBase64, 'base64').toString('utf-8');
-}
+// JWT verification using jose library with proper JWKS caching
+let jwks: ReturnType<typeof createRemoteJWKSet> | null = null;
 
-function verifyJWTSignature(token: string, publicKey: string): boolean {
-  try {
-    // This is a simplified verification - in production, use a proper JWT library
-    // For now, we'll do basic structure validation
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      return false;
+function getJWKS() {
+  if (!jwks) {
+    const jwksUrl = process.env.SUPABASE_JWKS_URL;
+    if (!jwksUrl) {
+      throw new Error('SUPABASE_JWKS_URL environment variable is required');
     }
-
-    const header = JSON.parse(base64UrlDecode(parts[0]));
-    const payload = JSON.parse(base64UrlDecode(parts[1]));
-
-    // Basic validation
-    return !!(payload.exp && payload.exp > Date.now() / 1000);
-  } catch (error) {
-    debug('JWT verification error:', error);
-    return false;
+    jwks = createRemoteJWKSet(new URL(jwksUrl));
   }
+  return jwks;
 }
 
 async function verifyToken(token: string): Promise<{ valid: boolean; userId?: string; error?: string }> {
@@ -149,56 +128,58 @@ async function verifyToken(token: string): Promise<{ valid: boolean; userId?: st
   }
 
   try {
-    // Extract the key ID from the JWT header
-    const [headerB64] = token.split('.');
-    const header = JSON.parse(base64UrlDecode(headerB64));
-    const keyId = header.kid;
+    const JWKS = getJWKS();
 
-    if (!keyId) {
-      return { valid: false, error: 'No key ID in JWT header' };
-    }
-
-    // Fetch JWKS and find the matching key
-    const jwks = await fetchJWKS();
-    const key = jwks.keys.find(k => k.kid === keyId);
-
-    if (!key) {
-      return { valid: false, error: `Key ID ${keyId} not found in JWKS` };
-    }
-
-    // Verify the JWT signature and structure
-    const isValid = verifyJWTSignature(token, key.n);
-    if (!isValid) {
-      return { valid: false, error: 'Invalid JWT signature or expired token' };
-    }
-
-    // Decode and validate the payload
-    const [, payloadB64] = token.split('.');
-    const payload = JSON.parse(base64UrlDecode(payloadB64)) as JWTPayload;
-
-    // Validate expiration
-    if (payload.exp && payload.exp <= Date.now() / 1000) {
-      return { valid: false, error: 'Token expired' };
-    }
-
-    // Validate audience (should match your Supabase project)
-    const expectedAudience = process.env.SUPABASE_PROJECT_ID;
-    if (expectedAudience && payload.aud !== expectedAudience) {
-      return { valid: false, error: 'Invalid audience' };
-    }
-
-    // Validate issuer
-    const expectedIssuer = process.env.SUPABASE_ISSUER;
-    if (expectedIssuer && payload.iss !== expectedIssuer) {
-      return { valid: false, error: 'Invalid issuer' };
-    }
+    // Verify JWT signature with proper JWKS
+    const { payload } = await jwtVerify(token, JWKS, {
+      issuer: process.env.SUPABASE_ISSUER,
+      audience: process.env.SUPABASE_PROJECT_ID
+    });
 
     debug('JWT verified successfully for user:', payload.sub);
-    return { valid: true, userId: payload.sub };
+    return { valid: true, userId: payload.sub as string };
 
   } catch (error) {
     debug('Token verification error:', error);
     return { valid: false, error: 'Token verification failed' };
+  }
+}
+
+// Room authorization with Supabase validation
+async function validateRoomAccess(userId: string, roomId: string, role: string): Promise<{ valid: boolean; error?: string }> {
+  try {
+    const supabase = getSupabaseClient();
+
+    // Check if room exists and user is a participant
+    const { data: participant, error } = await supabase
+      .from('room_participants')
+      .select('*')
+      .eq('room_id', roomId)
+      .eq('user_id', userId)
+      .eq('role', role)
+      .single();
+
+    if (error || !participant) {
+      debug(`Room access denied for user ${userId} to room ${roomId} as ${role}`);
+      return { valid: false, error: 'Room access denied' };
+    }
+
+    // Check if room exists
+    const { data: room, error: roomError } = await supabase
+      .from('rooms')
+      .select('*')
+      .eq('id', roomId)
+      .single();
+
+    if (roomError || !room) {
+      debug(`Room ${roomId} not found`);
+      return { valid: false, error: 'Room not found' };
+    }
+
+    return { valid: true };
+  } catch (error) {
+    debug('Room validation error:', error);
+    return { valid: false, error: 'Room validation failed' };
   }
 }
 
@@ -215,6 +196,11 @@ function getRoom(roomId: string): Room {
 function broadcast(room: Room, payload: JsonObject) {
   const data = JSON.stringify(payload);
   const deadClients: WebSocket[] = [];
+
+  // Add to event buffer for reconnection support
+  if (payload.seq) {
+    addToEventBuffer(roomIdFromMap(rooms, room), payload.seq as number, payload);
+  }
 
   for (const client of room.clients) {
     if (client.readyState === WebSocket.OPEN) {
@@ -235,6 +221,53 @@ function broadcast(room: Room, payload: JsonObject) {
   }
 }
 
+// Helper function to find room ID from room object
+function roomIdFromMap(roomMap: Map<string, Room>, room: Room): string {
+  for (const [id, r] of roomMap.entries()) {
+    if (r === room) return id;
+  }
+  return 'unknown';
+}
+
+// Rate limiting function
+function checkRateLimit(ws: WebSocket): boolean {
+  const now = Date.now();
+  const rateData = rateLimiter.get(ws) || { count: 0, resetTime: now + 1000 };
+
+  if (now > rateData.resetTime) {
+    rateData.count = 0;
+    rateData.resetTime = now + 1000;
+  }
+
+  rateData.count++;
+  rateLimiter.set(ws, rateData);
+
+  if (rateData.count > RATE_LIMIT) {
+    debug(`Rate limit exceeded for connection`);
+    return false;
+  }
+
+  return true;
+}
+
+// Event buffer management
+function addToEventBuffer(roomId: string, seq: number, event: any) {
+  const buffer = eventBuffers.get(roomId) || [];
+  buffer.push({ seq, event, timestamp: Date.now() });
+
+  // Keep only the last EVENT_BUFFER_SIZE events
+  if (buffer.length > EVENT_BUFFER_SIZE) {
+    buffer.splice(0, buffer.length - EVENT_BUFFER_SIZE);
+  }
+
+  eventBuffers.set(roomId, buffer);
+}
+
+function getEventBufferSnapshot(roomId: string, fromSeq: number): any[] {
+  const buffer = eventBuffers.get(roomId) || [];
+  return buffer.filter(item => item.seq > fromSeq).map(item => item.event);
+}
+
 function closeWithCode(ws: WebSocket, code: number, message: string) {
   try {
     ws.close(code, message);
@@ -243,14 +276,19 @@ function closeWithCode(ws: WebSocket, code: number, message: string) {
   }
 }
 
-// Create HTTP server for health checks
+// Create HTTP server for health checks with proper validation
 const server = createServer((req, res) => {
+  // Only allow WebSocket upgrades on /ws and health checks
   if (req.url === '/healthz') {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('ok');
+  } else if (req.url === '/ws') {
+    // Let WebSocket server handle upgrade
+    res.writeHead(426, { 'Content-Type': 'text/plain' });
+    res.end('Upgrade Required');
   } else {
-    res.writeHead(404);
-    res.end();
+    res.writeHead(404, { 'Content-Type': 'text/plain' });
+    res.end('Not Found');
   }
 });
 
@@ -272,7 +310,44 @@ wss.on('connection', (ws) => {
   // Initialize user data
   socketData.set(ws, {});
 
+  // Set up ping/pong timeout for connection health
+  const pingInterval = setInterval(() => {
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.ping();
+    } else {
+      clearInterval(pingInterval);
+    }
+  }, PING_TIMEOUT);
+
+  let pongReceived = true;
+  ws.on('pong', () => {
+    pongReceived = true;
+  });
+
+  // Monitor pong responses
+  const pongTimeout = setInterval(() => {
+    if (!pongReceived && ws.readyState === WebSocket.OPEN) {
+      debug('Connection timeout - no pong received');
+      closeWithCode(ws, 1000, 'connection_timeout');
+      clearInterval(pongTimeout);
+      clearInterval(pingInterval);
+    }
+    pongReceived = false;
+  }, PING_TIMEOUT);
+
   ws.on('message', async (message) => {
+    // Rate limiting check
+    if (!checkRateLimit(ws)) {
+      ws.send(JSON.stringify({ type: 'error', code: 4006, message: 'Rate limit exceeded' }));
+      return;
+    }
+
+    // Message size validation
+    if (Buffer.byteLength(message.toString()) > MAX_MESSAGE_BYTES) {
+      ws.send(JSON.stringify({ type: 'error', code: 4007, message: 'Message too large' }));
+      return;
+    }
+
     let parsed: any;
     try {
       parsed = JSON.parse(message.toString());
@@ -302,9 +377,19 @@ wss.on('connection', (ws) => {
         closeWithCode(ws, 4003, 'auth_failed');
         return;
       }
+
+      // Validate room access with Supabase
+      const normalizedRole = role === 'host' ? 'host' : 'guest';
+      const roomAccess = await validateRoomAccess(result.userId, roomId, normalizedRole);
+      if (!roomAccess.valid) {
+        ws.send(JSON.stringify({ type: 'error', code: 4004, message: roomAccess.error || 'Room access denied' }));
+        closeWithCode(ws, 4004, 'room_access_denied');
+        return;
+      }
+
       userData.userId = result.userId;
       userData.roomId = roomId;
-      userData.role = role === 'host' ? 'host' : 'guest';
+      userData.role = normalizedRole;
       userData.lastSeq = lastSeq;
       socketData.set(ws, userData);
 
@@ -318,9 +403,15 @@ wss.on('connection', (ws) => {
       room.seq += 1;
       broadcast(room, { type: 'presence', event: 'join', userId: userData.userId, seq: room.seq });
 
-      // If client provided lastSeq, send snapshot (basic)
+      // If client provided lastSeq, send snapshot with missed events
       if (lastSeq < room.seq) {
-        ws.send(JSON.stringify({ type: 'state_snapshot', seq: room.seq }));
+        const missedEvents = getEventBufferSnapshot(roomId, lastSeq);
+        ws.send(JSON.stringify({
+          type: 'state_snapshot',
+          seq: room.seq,
+          lastState: room.lastState,
+          events: missedEvents
+        }));
       }
       return;
     }
@@ -331,8 +422,12 @@ wss.on('connection', (ws) => {
     switch (parsed?.type) {
       case 'play':
       case 'pause':
-      case 'seek':
-      case 'heartbeat': {
+      case 'seek': {
+        // Host-only operations
+        if (userData.role !== 'host') {
+          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }));
+          return;
+        }
         room.seq += 1;
         const payload: JsonObject = {
           type: 'state',
@@ -349,14 +444,26 @@ wss.on('connection', (ws) => {
         } else if (parsed.type === 'seek' && typeof parsed.positionMs === 'number') {
           payload.positionMs = parsed.positionMs;
           room.lastState = { playing: room.lastState?.playing ?? false, positionMs: parsed.positionMs };
-        } else if (parsed.type === 'heartbeat') {
-          if (typeof parsed.positionMs === 'number') payload.positionMs = parsed.positionMs;
-          if (typeof parsed.playing === 'boolean') payload.playing = parsed.playing;
-          room.lastState = {
-            playing: parsed.playing ?? room.lastState?.playing ?? false,
-            positionMs: parsed.positionMs ?? room.lastState?.positionMs
-          };
         }
+
+        broadcast(room, payload);
+        break;
+      }
+      case 'heartbeat': {
+        room.seq += 1;
+        const payload: JsonObject = {
+          type: 'state',
+          event: parsed.type,
+          seq: room.seq,
+          userId: userData.userId,
+        };
+
+        if (typeof parsed.positionMs === 'number') payload.positionMs = parsed.positionMs;
+        if (typeof parsed.playing === 'boolean') payload.playing = parsed.playing;
+        room.lastState = {
+          playing: parsed.playing ?? room.lastState?.playing ?? false,
+          positionMs: parsed.positionMs ?? room.lastState?.positionMs
+        };
 
         broadcast(room, payload);
         break;
@@ -379,6 +486,13 @@ wss.on('connection', (ws) => {
   });
 
   ws.on('close', (code, reason) => {
+    // Clean up ping/pong intervals
+    clearInterval(pingInterval);
+    clearInterval(pongTimeout);
+
+    // Clean up rate limiter
+    rateLimiter.delete(ws);
+
     const userData = socketData.get(ws) || {};
     const roomId = userData.roomId;
     if (!roomId) return;
@@ -392,6 +506,7 @@ wss.on('connection', (ws) => {
     // Performance optimization: Clean up empty rooms
     if (room.clients.size === 0) {
       rooms.delete(roomId);
+      eventBuffers.delete(roomId);
       debug('Cleaned up empty room:', roomId);
     }
   });

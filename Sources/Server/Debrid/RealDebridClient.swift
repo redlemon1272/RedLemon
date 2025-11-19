@@ -175,7 +175,7 @@ actor RealDebridClient {
             // TV show: match episode pattern in filename
             let (fileIdx, filePath) = selectEpisodeFile(files: initialInfo.files, season: season, episode: episode)
             actualFileIdx = fileIdx
-            NSLog("📺 TV Show: Selected episode S%02dE%02d → file ID: %d, path: %@", season, episode, actualFileIdx, filePath ?? "unknown")
+            print("📺 TV Show: Selected episode S\(String(format: "%02d", season))E\(String(format: "%02d", episode)) → file ID: \(actualFileIdx), path: \(filePath ?? "unknown")")
 
             // Validate that the selected file actually contains the requested episode
             if let path = filePath {
@@ -295,13 +295,13 @@ actor RealDebridClient {
             let fileId = file.id ?? (index + 1)
             let sizeStr = formatFileSize(file.bytes ?? 0)
             let sampleIndicator = isSampleFile(file) ? " [SAMPLE]" : ""
-            NSLog("   [%d] %@ (%@)%@", fileId, file.path ?? "unknown", sizeStr, sampleIndicator)
+            print("   [\(fileId)] \(file.path ?? "unknown") (\(sizeStr))\(sampleIndicator)")
         }
 
         // CRITICAL: Filter out sample files FIRST
         let nonSampleFiles = files.filter { file in
             if isSampleFile(file) {
-                NSLog("   🚫 SAMPLE FILTER: Blocking sample file: %@", file.path ?? "unknown")
+                print("   🚫 SAMPLE FILTER: Blocking sample file: \(file.path ?? "unknown")")
                 return false
             }
             return true
@@ -375,10 +375,10 @@ actor RealDebridClient {
 
             // Validate the selected file size
             if isValidEpisodeSize(targetFile.bytes ?? 0, quality: extractQualityFromPath(targetFile.path ?? "")) {
-                NSLog("📍 Fallback: Selected file at position %d → %@ (ID: %d, %@)", episode, targetFile.path ?? "unknown", fileId, sizeStr)
+                print("📍 Fallback: Selected file at position \(episode) → \(targetFile.path ?? "unknown") (ID: \(fileId), \(sizeStr))")
                 return (fileId, targetFile.path)
             } else {
-                NSLog("❌ Fallback file too small: %@ (ID: %d, %@) - POSSIBLE SAMPLE", targetFile.path ?? "unknown", fileId, sizeStr)
+                print("❌ Fallback file too small: \(targetFile.path ?? "unknown") (ID: \(fileId), \(sizeStr)) - POSSIBLE SAMPLE")
             }
         }
 
@@ -387,7 +387,7 @@ actor RealDebridClient {
            isValidEpisodeSize(largestVideo.bytes ?? 0, quality: extractQualityFromPath(largestVideo.path ?? "")),
            let fileId = largestVideo.id {
             let sizeStr = formatFileSize(largestVideo.bytes ?? 0)
-            NSLog("🎲 Last resort: Using largest valid video file → %@ (ID: %@, %@)", largestVideo.path ?? "unknown", fileId, sizeStr)
+            print("🎲 Last resort: Using largest valid video file → \(largestVideo.path ?? "unknown") (ID: \(fileId), \(sizeStr))")
             return (fileId, largestVideo.path)
         }
 

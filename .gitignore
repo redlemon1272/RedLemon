@@ -34,6 +34,10 @@ dist/
 *.dSYM.zip
 *.dSYM
 
+# Node.js
+node_modules/
+/modulecache/
+
 # ICP Backend (local development)
 icp-backend/.dfx/
 icp-backend/node_modules/

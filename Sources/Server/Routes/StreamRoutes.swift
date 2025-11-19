@@ -223,8 +223,6 @@ func registerStreamRoutes(_ app: Application) {
             "71feec966a66" // prefix of hash seen in logs; match is done via hasPrefix
         ]
 
-        let preferredBreakingBadInfoHashPrefix = "71feec966a66"
-
         let knownBreakingBadPackFragments = [
             "breaking bad s01-s05 1080p nf web-dl av1 eac3 multisub",
             "breaking.bad.s01e01.pilot.1080p.nf.web-dl.av1.eac3"

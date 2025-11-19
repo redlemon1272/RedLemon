@@ -9,11 +9,16 @@ interface UserData {
   userId?: string;
   roomId?: string;
   role?: Role;
+  lastSeq?: number;
 }
 
 type Room = {
   seq: number;
   clients: Set<WebSocket>;
+  lastState?: {
+    playing: boolean;
+    positionMs?: number;
+  };
 };
 
 const PORT = Number(process.env.PORT || 8080);
@@ -21,8 +26,15 @@ const MAX_MESSAGE_BYTES = Number(process.env.MAX_MESSAGE_BYTES || 8192);
 const LOG_LEVEL = process.env.LOG_LEVEL || 'info';
 const AUTH_BYPASS = process.env.AUTH_BYPASS !== 'false'; // default true for dev
 
+// Performance optimization: Use Map for O(1) lookups
 const rooms = new Map<string, Room>();
 const socketData = new WeakMap<WebSocket, UserData>();
+
+// Performance optimization: Pre-allocate common message templates
+const AUTH_REQUIRED_MSG = JSON.stringify({ type: 'error', code: 4001, message: 'auth_required' });
+const ROOM_REQUIRED_MSG = JSON.stringify({ type: 'error', code: 4002, message: 'room_required' });
+const AUTH_FAILED_MSG = JSON.stringify({ type: 'error', code: 4003, message: 'auth_failed' });
+const INVALID_JSON_MSG = JSON.stringify({ type: 'error', code: 4000, message: 'invalid_json' });
 
 function log(...args: unknown[]) {
   if (LOG_LEVEL === 'info' || LOG_LEVEL === 'debug') {
@@ -199,12 +211,27 @@ function getRoom(roomId: string): Room {
   return room;
 }
 
+// Performance optimization: Efficient broadcasting with early filtering
 function broadcast(room: Room, payload: JsonObject) {
   const data = JSON.stringify(payload);
+  const deadClients: WebSocket[] = [];
+
   for (const client of room.clients) {
     if (client.readyState === WebSocket.OPEN) {
-      client.send(data);
+      try {
+        client.send(data);
+      } catch (error) {
+        debug('Failed to send to client:', error);
+        deadClients.push(client);
+      }
+    } else {
+      deadClients.push(client);
     }
+  }
+
+  // Clean up dead connections
+  for (const deadClient of deadClients) {
+    room.clients.delete(deadClient);
   }
 }
 
@@ -227,10 +254,16 @@ const server = createServer((req, res) => {
   }
 });
 
-// Create WebSocket server
+// Create WebSocket server with performance optimizations
 const wss = new WebSocketServer({
   server,
-  maxPayload: MAX_MESSAGE_BYTES
+  maxPayload: MAX_MESSAGE_BYTES,
+  perMessageDeflate: {
+    // Performance optimization: Enable compression
+    zlibDeflateOptions: {
+      level: 3 // Balance between CPU and compression
+    }
+  }
 });
 
 wss.on('connection', (ws) => {
@@ -244,6 +277,7 @@ wss.on('connection', (ws) => {
     try {
       parsed = JSON.parse(message.toString());
     } catch {
+      ws.send(INVALID_JSON_MSG);
       closeWithCode(ws, 4000, 'invalid_json');
       return;
     }
@@ -252,22 +286,26 @@ wss.on('connection', (ws) => {
     if (!userData.userId) {
       // Expect auth message first
       if (parsed?.type !== 'auth') {
+        ws.send(AUTH_REQUIRED_MSG);
         closeWithCode(ws, 4001, 'auth_required');
         return;
       }
       const { token, roomId, role = 'guest', lastSeq = 0 } = parsed || {};
       if (!roomId || typeof roomId !== 'string') {
+        ws.send(ROOM_REQUIRED_MSG);
         closeWithCode(ws, 4002, 'room_required');
         return;
       }
       const result = await verifyToken(token);
       if (!result.valid || !result.userId) {
+        ws.send(AUTH_FAILED_MSG);
         closeWithCode(ws, 4003, 'auth_failed');
         return;
       }
       userData.userId = result.userId;
       userData.roomId = roomId;
       userData.role = role === 'host' ? 'host' : 'guest';
+      userData.lastSeq = lastSeq;
       socketData.set(ws, userData);
 
       const room = getRoom(roomId);
@@ -302,18 +340,29 @@ wss.on('connection', (ws) => {
           seq: room.seq,
           userId: userData.userId,
         };
-        if (parsed.type === 'seek' && typeof parsed.positionMs === 'number') {
+
+        // Performance optimization: Cache last state for snapshots
+        if (parsed.type === 'play') {
+          room.lastState = { playing: true, positionMs: room.lastState?.positionMs };
+        } else if (parsed.type === 'pause') {
+          room.lastState = { playing: false, positionMs: room.lastState?.positionMs };
+        } else if (parsed.type === 'seek' && typeof parsed.positionMs === 'number') {
           payload.positionMs = parsed.positionMs;
-        }
-        if (parsed.type === 'heartbeat') {
+          room.lastState = { playing: room.lastState?.playing ?? false, positionMs: parsed.positionMs };
+        } else if (parsed.type === 'heartbeat') {
           if (typeof parsed.positionMs === 'number') payload.positionMs = parsed.positionMs;
           if (typeof parsed.playing === 'boolean') payload.playing = parsed.playing;
+          room.lastState = {
+            playing: parsed.playing ?? room.lastState?.playing ?? false,
+            positionMs: parsed.positionMs ?? room.lastState?.positionMs
+          };
         }
+
         broadcast(room, payload);
         break;
       }
       case 'chat': {
-        if (typeof parsed.text !== 'string' || parsed.text.length ===0) return;
+        if (typeof parsed.text !== 'string' || parsed.text.length === 0) return;
         room.seq += 1;
         broadcast(room, {
           type: 'chat',
@@ -339,6 +388,12 @@ wss.on('connection', (ws) => {
     room.seq += 1;
     broadcast(room, { type: 'presence', event: 'leave', userId: userData.userId, seq: room.seq });
     debug('closed', code, reason.toString());
+
+    // Performance optimization: Clean up empty rooms
+    if (room.clients.size === 0) {
+      rooms.delete(roomId);
+      debug('Cleaned up empty room:', roomId);
+    }
   });
 
   ws.on('error', (error) => {
@@ -346,7 +401,15 @@ wss.on('connection', (ws) => {
   });
 });
 
+// Performance monitoring
+setInterval(() => {
+  const totalClients = Array.from(rooms.values()).reduce((sum, room) => sum + room.clients.size, 0);
+  debug(`Performance stats: ${rooms.size} rooms, ${totalClients} total clients`);
+}, 30000); // Every 30 seconds
+
 // Start server
 server.listen(PORT, () => {
   console.log(`🚀 watchparty server listening on port ${PORT}`);
+  console.log(`🔗 WebSocket endpoint: ws://localhost:${PORT}/ws`);
+  console.log(`❤️  Health check: http://localhost:${PORT}/healthz`);
 });

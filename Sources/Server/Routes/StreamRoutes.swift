@@ -293,7 +293,7 @@ func registerStreamRoutes(_ app: Application) {
 
                 let hasAllowedYear = yearsInTitle.contains { allowedYears.contains($0) }
                 if !hasAllowedYear {
-                    print("   🚫 SERVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: \",\")))")
+                    print("   🚫 SERVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: ",")))")
                 }
                 return hasAllowedYear
             }

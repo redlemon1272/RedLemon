@@ -47,6 +47,9 @@ const ROOM_REQUIRED_MSG = JSON.stringify({ type: 'error', code: 4002, message: '
 const AUTH_FAILED_MSG = JSON.stringify({ type: 'error', code: 4003, message: 'auth_failed' });
 const INVALID_JSON_MSG = JSON.stringify({ type: 'error', code: 4000, message: 'invalid_json' });
 
+// Stream synchronization state for each room
+const roomStreamStates = new Map<string, { infoHash?: string; fileIdx?: number; quality?: string; unlockedURL?: string }>();
+
 function log(...args: unknown[]) {
   if (LOG_LEVEL === 'info' || LOG_LEVEL === 'debug') {
     console.log(...args);
@@ -478,6 +481,61 @@ wss.on('connection', (ws) => {
           text: parsed.text.slice(0, 2000),
           ts: Date.now(),
         });
+        break;
+      }
+      case 'stream_selected': {
+        // Host-only operation - broadcast stream info to guests
+        if (userData.role !== 'host') {
+          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }));
+          return;
+        }
+
+        const { infoHash, fileIdx, quality, unlockedURL } = parsed;
+        if (!infoHash || !quality) {
+          ws.send(JSON.stringify({ type: 'error', code: 4008, message: 'Missing stream data' }));
+          return;
+        }
+
+        // Store stream state for this room
+        roomStreamStates.set(roomId, { infoHash, fileIdx, quality, unlockedURL });
+
+        room.seq += 1;
+        broadcast(room, {
+          type: 'stream_selected',
+          seq: room.seq,
+          userId: userData.userId,
+          infoHash,
+          fileIdx,
+          quality,
+          unlockedURL
+        });
+
+        debug(`Stream selected for room ${roomId}: ${infoHash} (file: ${fileIdx}, quality: ${quality})`);
+        break;
+      }
+      case 'request_stream': {
+        // Guest-only operation - send current stream state if available
+        if (userData.role !== 'guest') {
+          ws.send(JSON.stringify({ type: 'error', code: 4009, message: 'Guest-only operation' }));
+          return;
+        }
+
+        const streamState = roomStreamStates.get(roomId);
+        if (streamState && streamState.infoHash) {
+          room.seq += 1;
+          ws.send(JSON.stringify({
+            type: 'stream_selected',
+            seq: room.seq,
+            userId: 'host',
+            infoHash: streamState.infoHash,
+            fileIdx: streamState.fileIdx,
+            quality: streamState.quality,
+            unlockedURL: streamState.unlockedURL
+          }));
+          debug(`Sent stream info to guest in room ${roomId}`);
+        } else {
+          ws.send(JSON.stringify({ type: 'error', code: 4010, message: 'No stream selected yet' }));
+        }
         break;
       }
       default:

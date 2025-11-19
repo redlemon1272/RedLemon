@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 /// Manages watch party coordination with configurable transport
-/// Bridges the gap between existing SyncMessage format and new uWS protocol
+/// Bridges gap between existing SyncMessage format and new uWS protocol
 @MainActor
 class WatchPartyManager: ObservableObject {
 
@@ -23,11 +23,16 @@ class WatchPartyManager: ObservableObject {
     private var syncCallback: ((SyncMessage) -> Void)?
     private var presenceCallback: ((PresenceAction, String) -> Void)?
     private var connectionStateCallback: ((RealtimeConnectionState) -> Void)?
+    weak var delegate: WatchPartyManagerDelegate?
 
     // Sync state
     private var lastKnownPosition: TimeInterval = 0
     private var lastKnownPlayingState: Bool = false
     private var currentUser: UUID = UUID()
+
+    // Room and role state
+    private var currentRoom: WatchPartyRoom?
+    private var isHost: Bool = false
 
     // MARK: - Initialization
 
@@ -46,6 +51,11 @@ class WatchPartyManager: ObservableObject {
 
         currentTransport = type
         setupTransport()
+    }
+
+    func setRoom(_ room: WatchPartyRoom, isHost: Bool) {
+        self.currentRoom = room
+        self.isHost = isHost
     }
 
     func connect(roomId: String, userId: String, isHost: Bool) async throws {
@@ -116,6 +126,43 @@ class WatchPartyManager: ObservableObject {
         lastKnownPlayingState = playing
     }
 
+    // MARK: - Stream Synchronization
+
+    func sendStreamSelection(infoHash: String, fileIdx: Int?, quality: String, unlockedURL: String?) async {
+        guard isConnected else {
+            print("⚠️ Cannot send stream selection - not connected")
+            return
+        }
+
+        // Update local room state
+        if var room = currentRoom {
+            room.selectedStreamHash = infoHash
+            room.selectedFileIdx = fileIdx
+            room.selectedQuality = quality
+            room.unlockedStreamURL = unlockedURL
+            currentRoom = room
+        }
+
+        await transport?.send(.streamSelected(
+            infoHash: infoHash,
+            fileIdx: fileIdx,
+            quality: quality,
+            unlockedURL: unlockedURL
+        ))
+
+        print("🎬 Sent stream selection: \(infoHash) (file: \(fileIdx ?? -1), quality: \(quality))")
+    }
+
+    func requestStream() async {
+        guard isConnected else {
+            print("⚠️ Cannot request stream - not connected")
+            return
+        }
+
+        await transport?.send(.requestStream)
+        print("🎬 Sent stream request")
+    }
+
     // MARK: - Callbacks
 
     func onSync(_ callback: @escaping (SyncMessage) -> Void) {
@@ -173,8 +220,8 @@ class WatchPartyManager: ObservableObject {
         case .chat:
             // This should be handled separately
             return .heartbeat(positionMs: 0, playing: false)
-        case .ping, .pong:
-            // Not used in new protocol
+        case .ping, .pong, .streamSelected, .requestStream:
+            // Not used in new protocol for outgoing messages
             return .heartbeat(positionMs: 0, playing: false)
         }
     }
@@ -242,8 +289,48 @@ extension WatchPartyManager: WatchPartyTransportDelegate {
     }
 
     func transportDidRequestReconnect() {
-        DispatchQueue.main.async {
-            self.updateConnectionState(.failed)
+        print("🔄 Transport requested reconnect")
+        // TODO: Implement reconnection logic
+    }
+
+    func transportDidReceiveStreamSelected(infoHash: String, fileIdx: Int?, quality: String, unlockedURL: String?) {
+        print("🎬 Received stream selection: \(infoHash) (file: \(fileIdx ?? -1), quality: \(quality))")
+
+        // Update room state with stream information
+        if var room = currentRoom {
+            room.selectedStreamHash = infoHash
+            room.selectedFileIdx = fileIdx
+            room.selectedQuality = quality
+            room.unlockedStreamURL = unlockedURL
+            currentRoom = room
+        }
+
+        // Notify delegates of stream update
+        delegate?.watchPartyManager(self, didUpdateStream: StreamInfo(
+            infoHash: infoHash,
+            fileIdx: fileIdx,
+            quality: quality,
+            unlockedURL: unlockedURL
+        ))
+    }
+
+    func transportDidReceiveStreamRequest() {
+        print("🎬 Received stream request")
+
+        // If host, send current stream info
+        if isHost, let room = currentRoom,
+           let streamHash = room.selectedStreamHash,
+           let quality = room.selectedQuality {
+
+            Task {
+                await transport?.send(.streamSelected(
+                    infoHash: streamHash,
+                    fileIdx: room.selectedFileIdx,
+                    quality: quality,
+                    unlockedURL: room.unlockedStreamURL
+                ))
+                print("🎬 Sent stream info to requesting guest")
+            }
         }
     }
 }
@@ -262,7 +349,7 @@ extension WatchPartyManager {
         return lastKnownPosition + timeSinceLastUpdate
     }
 
-    /// Check if connected to the transport
+    /// Check if connected to transport
     func isTransportConnected() -> Bool {
         return isConnected
     }

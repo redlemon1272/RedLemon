@@ -22,6 +22,8 @@ enum OutgoingMessage {
     case seek(positionMs: Int)
     case chat(text: String)
     case heartbeat(positionMs: Int, playing: Bool)
+    case streamSelected(infoHash: String, fileIdx: Int?, quality: String, unlockedURL: String?)
+    case requestStream
 }
 
 struct StateUpdate {
@@ -43,6 +45,8 @@ protocol WatchPartyTransportDelegate: AnyObject {
     func transportDidReceiveChat(_ message: ChatMessageWire)
     func transportDidUpdatePresence(userId: UUID, event: PresenceEvent)
     func transportDidRequestReconnect()
+    func transportDidReceiveStreamSelected(infoHash: String, fileIdx: Int?, quality: String, unlockedURL: String?)
+    func transportDidReceiveStreamRequest()
 }
 
 enum PresenceEvent {
@@ -91,6 +95,15 @@ final class LocalLoopbackTransport: WatchPartyTransport {
             self.positionMs = positionMs
             self.playing = playing
             emitState()
+        case .streamSelected(let infoHash, let fileIdx, let quality, let unlockedURL):
+            // Handle stream selection in loopback (for development)
+            print("🎬 Loopback: Stream selected \(infoHash) (file: \(fileIdx ?? -1), quality: \(quality))")
+            _ = (infoHash, fileIdx, quality, unlockedURL) // Suppress unused warnings
+            break
+        case .requestStream:
+            // Handle stream request in loopback (for development)
+            print("🎬 Loopback: Stream request received")
+            break
         }
     }
 

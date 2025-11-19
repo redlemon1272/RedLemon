@@ -17,6 +17,12 @@ struct WatchPartyRoom: Identifiable {
     var state: RoomState
     var createdAt: Date
 
+    // MARK: - Stream Synchronization
+    var selectedStreamHash: String? // Host's selected stream infoHash
+    var selectedFileIdx: Int? // Host's selected file index
+    var selectedQuality: String? // Host's selected quality
+    var unlockedStreamURL: String? // Host's unlocked stream URL
+
     enum RoomState: String {
         case lobby // Waiting for host to start
         case playing // Video is playing
@@ -161,6 +167,8 @@ enum SyncMessageType: String, Codable {
     case pause
     case play
     case chat  // Chat messages
+    case streamSelected  // Host selected a stream
+    case requestStream  // Guest requests current stream
 }
 
 /// Sync message for watch party coordination
@@ -173,6 +181,12 @@ struct SyncMessage: Codable {
     let chatText: String?  // For chat messages
     let chatUsername: String?  // For chat messages
 
+    // MARK: - Stream Synchronization
+    let infoHash: String?  // Selected stream infoHash
+    let fileIdx: Int?  // Selected stream file index
+    let quality: String?  // Selected stream quality
+    let unlockedURL: String?  // Unlocked stream URL
+
     init(
         type: SyncMessageType,
         timestamp: TimeInterval = Date().timeIntervalSince1970,
@@ -180,7 +194,11 @@ struct SyncMessage: Codable {
         isPlaying: Bool? = nil,
         senderId: String? = nil,
         chatText: String? = nil,
-        chatUsername: String? = nil
+        chatUsername: String? = nil,
+        infoHash: String? = nil,
+        fileIdx: Int? = nil,
+        quality: String? = nil,
+        unlockedURL: String? = nil
     ) {
         self.type = type
         self.timestamp = timestamp
@@ -189,6 +207,10 @@ struct SyncMessage: Codable {
         self.senderId = senderId
         self.chatText = chatText
         self.chatUsername = chatUsername
+        self.infoHash = infoHash
+        self.fileIdx = fileIdx
+        self.quality = quality
+        self.unlockedURL = unlockedURL
     }
 }
 
@@ -200,9 +222,28 @@ enum SyncAction {
     case hardSeek(to: TimeInterval)  // Jump to position (for large drift)
 }
 
+// MARK: - Stream Information
+
+struct StreamInfo {
+    let infoHash: String
+    let fileIdx: Int?
+    let quality: String
+    let unlockedURL: String?
+}
+
 // MARK: - Presence Actions
 
 enum PresenceAction {
     case join
     case leave
+}
+
+// MARK: - Watch Party Manager Delegate
+
+protocol WatchPartyManagerDelegate: AnyObject {
+    func watchPartyManager(_ manager: WatchPartyManager, didUpdateStream streamInfo: StreamInfo)
+    func watchPartyManager(_ manager: WatchPartyManager, didChangeConnectionState state: RealtimeConnectionState)
+    func watchPartyManager(_ manager: WatchPartyManager, didReceiveSyncMessage message: SyncMessage)
+    func watchPartyManager(_ manager: WatchPartyManager, didUpdatePresence participants: [String: String])
+    func watchPartyManager(_ manager: WatchPartyManager, didReceiveChatMessage message: SyncMessage)
 }

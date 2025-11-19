@@ -230,6 +230,8 @@ final class WebSocketTransport: WatchPartyTransport {
             await handlePresenceUpdate(message)
         case "state_snapshot":
             await handleStateSnapshot(message)
+        case "stream_selected":
+            await handleStreamSelected(message)
         default:
             print("⚠️ Unknown message type: \(type)")
         }
@@ -342,6 +344,29 @@ final class WebSocketTransport: WatchPartyTransport {
         print("📸 Received state snapshot, updated lastSeq to \(lastSeq)")
     }
 
+    private func handleStreamSelected(_ message: [String: Any]) async {
+        guard let seq = message["seq"] as? Int,
+              let infoHash = message["infoHash"] as? String,
+              let quality = message["quality"] as? String else {
+            print("⚠️ Invalid stream selected message: \(message)")
+            return
+        }
+
+        lastSeq = seq
+
+        let fileIdx = message["fileIdx"] as? Int
+        let unlockedURL = message["unlockedURL"] as? String
+
+        delegate?.transportDidReceiveStreamSelected(
+            infoHash: infoHash,
+            fileIdx: fileIdx,
+            quality: quality,
+            unlockedURL: unlockedURL
+        )
+
+        print("🎬 Received stream selection: \(infoHash) (file: \(fileIdx ?? -1), quality: \(quality))")
+    }
+
     private func encodeMessage(_ message: OutgoingMessage) throws -> String {
         var dict: [String: Any] = [:]
 
@@ -360,6 +385,14 @@ final class WebSocketTransport: WatchPartyTransport {
             dict["type"] = "heartbeat"
             dict["positionMs"] = positionMs
             dict["playing"] = playing
+        case .streamSelected(let infoHash, let fileIdx, let quality, let unlockedURL):
+            dict["type"] = "stream_selected"
+            dict["infoHash"] = infoHash
+            dict["fileIdx"] = fileIdx
+            dict["quality"] = quality
+            dict["unlockedURL"] = unlockedURL
+        case .requestStream:
+            dict["type"] = "request_stream"
         }
 
         let data = try JSONSerialization.data(withJSONObject: dict)

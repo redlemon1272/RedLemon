@@ -1,5 +1,4 @@
-import { WebSocketServer, WebSocket } from 'ws';
-import { createServer } from 'http';
+import uWS from 'uWebSockets.js';
 import { jwtVerify, createRemoteJWKSet } from 'jose';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
@@ -16,7 +15,7 @@ interface UserData {
 
 type Room = {
   seq: number;
-  clients: Set<WebSocket>;
+  clients: Set<uWS.WebSocket<UserData>>;
   lastState?: {
     playing: boolean;
     positionMs?: number;
@@ -30,10 +29,10 @@ const AUTH_BYPASS = process.env.AUTH_BYPASS === 'true'; // default false for sec
 
 // Performance optimization: Use Map for O(1) lookups
 const rooms = new Map<string, Room>();
-const socketData = new WeakMap<WebSocket, UserData>();
+const socketData = new WeakMap<uWS.WebSocket<UserData>, UserData>();
 
 // Rate limiting and abuse prevention
-const rateLimiter = new Map<WebSocket, { count: number; resetTime: number }>();
+const rateLimiter = new Map<uWS.WebSocket<UserData>, { count: number; resetTime: number }>();
 const PING_TIMEOUT = 60000; // 60 seconds
 const RATE_LIMIT = 10; // 10 messages per second
 const EVENT_BUFFER_SIZE = 100; // Keep last 100 events for reconnection
@@ -198,7 +197,7 @@ function getRoom(roomId: string): Room {
 // Performance optimization: Efficient broadcasting with early filtering
 function broadcast(room: Room, payload: JsonObject) {
   const data = JSON.stringify(payload);
-  const deadClients: WebSocket[] = [];
+  const deadClients: uWS.WebSocket<UserData>[] = [];
 
   // Add to event buffer for reconnection support
   if (payload.seq) {
@@ -206,14 +205,10 @@ function broadcast(room: Room, payload: JsonObject) {
   }
 
   for (const client of room.clients) {
-    if (client.readyState === WebSocket.OPEN) {
-      try {
-        client.send(data);
-      } catch (error) {
-        debug('Failed to send to client:', error);
-        deadClients.push(client);
-      }
-    } else {
+    try {
+      client.send(data, false);
+    } catch (error) {
+      debug('Failed to send to client:', error);
       deadClients.push(client);
     }
   }
@@ -233,7 +228,7 @@ function roomIdFromMap(roomMap: Map<string, Room>, room: Room): string {
 }
 
 // Rate limiting function
-function checkRateLimit(ws: WebSocket): boolean {
+function checkRateLimit(ws: uWS.WebSocket<UserData>): boolean {
   const now = Date.now();
   const rateData = rateLimiter.get(ws) || { count: 0, resetTime: now + 1000 };
 
@@ -271,91 +266,49 @@ function getEventBufferSnapshot(roomId: string, fromSeq: number): any[] {
   return buffer.filter(item => item.seq > fromSeq).map(item => item.event);
 }
 
-function closeWithCode(ws: WebSocket, code: number, message: string) {
+function closeWithCode(ws: uWS.WebSocket<UserData>, code: number, message: string) {
   try {
-    ws.close(code, message);
+    ws.end(code, message);
   } catch {
     /* ignore */
   }
 }
 
-// Create HTTP server for health checks with proper validation
-const server = createServer((req, res) => {
-  // Only allow WebSocket upgrades on /ws and health checks
-  if (req.url === '/healthz') {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('ok');
-  } else if (req.url === '/ws') {
-    // Let WebSocket server handle upgrade
-    res.writeHead(426, { 'Content-Type': 'text/plain' });
-    res.end('Upgrade Required');
-  } else {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Not Found');
-  }
+const app = uWS.App();
+
+app.get('/healthz', (res) => {
+  res.writeStatus('200 OK').writeHeader('Content-Type', 'text/plain').end('ok');
 });
 
-// Create WebSocket server with performance optimizations
-const wss = new WebSocketServer({
-  server,
-  maxPayload: MAX_MESSAGE_BYTES,
-  perMessageDeflate: {
-    // Performance optimization: Enable compression
-    zlibDeflateOptions: {
-      level: 3 // Balance between CPU and compression
-    }
-  }
-});
-
-wss.on('connection', (ws) => {
-  debug('open connection');
-
-  // Initialize user data
-  socketData.set(ws, {});
-
-  // Set up ping/pong timeout for connection health
-  const pingInterval = setInterval(() => {
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.ping();
-    } else {
-      clearInterval(pingInterval);
-    }
-  }, PING_TIMEOUT);
-
-  let pongReceived = true;
-  ws.on('pong', () => {
-    pongReceived = true;
-  });
-
-  // Monitor pong responses
-  const pongTimeout = setInterval(() => {
-    if (!pongReceived && ws.readyState === WebSocket.OPEN) {
-      debug('Connection timeout - no pong received');
-      closeWithCode(ws, 1000, 'connection_timeout');
-      clearInterval(pongTimeout);
-      clearInterval(pingInterval);
-    }
-    pongReceived = false;
-  }, PING_TIMEOUT);
-
-  ws.on('message', async (message) => {
+app.ws('/ws', {
+  compression: uWS.DEDICATED_COMPRESSOR_3KB,
+  maxPayloadLength: MAX_MESSAGE_BYTES,
+  idleTimeout: Math.max(10, Math.ceil(PING_TIMEOUT / 1000)),
+  sendPingsAutomatically: true,
+  open: (ws) => {
+    debug('open connection');
+    socketData.set(ws, {});
+  },
+  message: async (ws, message, isBinary) => {
     // Rate limiting check
     if (!checkRateLimit(ws)) {
-      ws.send(JSON.stringify({ type: 'error', code: 4006, message: 'Rate limit exceeded' }));
+      ws.send(JSON.stringify({ type: 'error', code: 4006, message: 'Rate limit exceeded' }), isBinary);
       return;
     }
 
+    const messageStr = isBinary ? Buffer.from(message).toString('utf8') : Buffer.from(message).toString('utf8');
+
     // Message size validation
-    if (Buffer.byteLength(message.toString()) > MAX_MESSAGE_BYTES) {
-      ws.send(JSON.stringify({ type: 'error', code: 4007, message: 'Message too large' }));
+    if (Buffer.byteLength(messageStr) > MAX_MESSAGE_BYTES) {
+      ws.send(JSON.stringify({ type: 'error', code: 4007, message: 'Message too large' }), isBinary);
       return;
     }
 
     let parsed: any;
     try {
-      parsed = JSON.parse(message.toString());
+      parsed = JSON.parse(messageStr);
     } catch {
-      ws.send(INVALID_JSON_MSG);
+      ws.send(INVALID_JSON_MSG, isBinary);
       closeWithCode(ws, 4000, 'invalid_json');
       return;
     }
@@ -364,19 +317,19 @@ wss.on('connection', (ws) => {
     if (!userData.userId) {
       // Expect auth message first
       if (parsed?.type !== 'auth') {
-        ws.send(AUTH_REQUIRED_MSG);
+        ws.send(AUTH_REQUIRED_MSG, isBinary);
         closeWithCode(ws, 4001, 'auth_required');
         return;
       }
       const { token, roomId, role = 'guest', lastSeq = 0 } = parsed || {};
       if (!roomId || typeof roomId !== 'string') {
-        ws.send(ROOM_REQUIRED_MSG);
+        ws.send(ROOM_REQUIRED_MSG, isBinary);
         closeWithCode(ws, 4002, 'room_required');
         return;
       }
       const result = await verifyToken(token);
       if (!result.valid || !result.userId) {
-        ws.send(AUTH_FAILED_MSG);
+        ws.send(AUTH_FAILED_MSG, isBinary);
         closeWithCode(ws, 4003, 'auth_failed');
         return;
       }
@@ -385,7 +338,7 @@ wss.on('connection', (ws) => {
       const normalizedRole = role === 'host' ? 'host' : 'guest';
       const roomAccess = await validateRoomAccess(result.userId, roomId, normalizedRole);
       if (!roomAccess.valid) {
-        ws.send(JSON.stringify({ type: 'error', code: 4004, message: roomAccess.error || 'Room access denied' }));
+        ws.send(JSON.stringify({ type: 'error', code: 4004, message: roomAccess.error || 'Room access denied' }), isBinary);
         closeWithCode(ws, 4004, 'room_access_denied');
         return;
       }
@@ -400,7 +353,7 @@ wss.on('connection', (ws) => {
       room.clients.add(ws);
 
       // Send auth_ok with current seq
-      ws.send(JSON.stringify({ type: 'auth_ok', seq: room.seq }));
+      ws.send(JSON.stringify({ type: 'auth_ok', seq: room.seq }), isBinary);
 
       // Presence join
       room.seq += 1;
@@ -414,7 +367,7 @@ wss.on('connection', (ws) => {
           seq: room.seq,
           lastState: room.lastState,
           events: missedEvents
-        }));
+        }), isBinary);
       }
       return;
     }
@@ -428,7 +381,7 @@ wss.on('connection', (ws) => {
       case 'seek': {
         // Host-only operations
         if (userData.role !== 'host') {
-          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }));
+          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }), isBinary);
           return;
         }
         room.seq += 1;
@@ -486,13 +439,13 @@ wss.on('connection', (ws) => {
       case 'stream_selected': {
         // Host-only operation - broadcast stream info to guests
         if (userData.role !== 'host') {
-          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }));
+          ws.send(JSON.stringify({ type: 'error', code: 4005, message: 'Host-only operation' }), isBinary);
           return;
         }
 
         const { infoHash, fileIdx, quality, unlockedURL } = parsed;
         if (!infoHash || !quality) {
-          ws.send(JSON.stringify({ type: 'error', code: 4008, message: 'Missing stream data' }));
+          ws.send(JSON.stringify({ type: 'error', code: 4008, message: 'Missing stream data' }), isBinary);
           return;
         }
 
@@ -516,7 +469,7 @@ wss.on('connection', (ws) => {
       case 'request_stream': {
         // Guest-only operation - send current stream state if available
         if (userData.role !== 'guest') {
-          ws.send(JSON.stringify({ type: 'error', code: 4009, message: 'Guest-only operation' }));
+          ws.send(JSON.stringify({ type: 'error', code: 4009, message: 'Guest-only operation' }), isBinary);
           return;
         }
 
@@ -531,23 +484,18 @@ wss.on('connection', (ws) => {
             fileIdx: streamState.fileIdx,
             quality: streamState.quality,
             unlockedURL: streamState.unlockedURL
-          }));
+          }), isBinary);
           debug(`Sent stream info to guest in room ${roomId}`);
         } else {
-          ws.send(JSON.stringify({ type: 'error', code: 4010, message: 'No stream selected yet' }));
+          ws.send(JSON.stringify({ type: 'error', code: 4010, message: 'No stream selected yet' }), isBinary);
         }
         break;
       }
       default:
         debug('unknown message', parsed?.type);
     }
-  });
-
-  ws.on('close', (code, reason) => {
-    // Clean up ping/pong intervals
-    clearInterval(pingInterval);
-    clearInterval(pongTimeout);
-
+  },
+  close: (ws, code, message) => {
     // Clean up rate limiter
     rateLimiter.delete(ws);
 
@@ -559,7 +507,7 @@ wss.on('connection', (ws) => {
     room.clients.delete(ws);
     room.seq += 1;
     broadcast(room, { type: 'presence', event: 'leave', userId: userData.userId, seq: room.seq });
-    debug('closed', code, reason.toString());
+    debug('closed', code, Buffer.from(message).toString());
 
     // Performance optimization: Clean up empty rooms
     if (room.clients.size === 0) {
@@ -567,11 +515,7 @@ wss.on('connection', (ws) => {
       eventBuffers.delete(roomId);
       debug('Cleaned up empty room:', roomId);
     }
-  });
-
-  ws.on('error', (error) => {
-    debug('WebSocket error:', error);
-  });
+  }
 });
 
 // Performance monitoring
@@ -581,7 +525,11 @@ setInterval(() => {
 }, 30000); // Every 30 seconds
 
 // Start server
-server.listen(PORT, () => {
+app.listen(PORT, (token) => {
+  if (!token) {
+    console.error('❌ Failed to listen on port', PORT);
+    return;
+  }
   console.log(`🚀 watchparty server listening on port ${PORT}`);
   console.log(`🔗 WebSocket endpoint: ws://localhost:${PORT}/ws`);
   console.log(`❤️  Health check: http://localhost:${PORT}/healthz`);

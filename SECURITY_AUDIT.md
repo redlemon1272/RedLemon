@@ -130,7 +130,7 @@ Comprehensive security audit of RedLemon codebase completed. **No personal data,
 
 ### ✅ Network Security
 - **HTTPS only:** All external API calls use HTTPS
-- **WebSocket TLS:** Supabase Realtime uses `wss://` (encrypted)
+- **WebSocket TLS:** Production uWebSockets.js uses `wss://` (encrypted via Caddy + Let's Encrypt)
 - **Local server:** HTTP server on localhost only (127.0.0.1)
 
 ### ✅ Code Signing & Updates

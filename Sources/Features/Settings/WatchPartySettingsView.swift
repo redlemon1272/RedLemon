@@ -4,7 +4,7 @@ import SwiftUI
 struct WatchPartySettingsView: View {
     @StateObject private var watchPartyManager = WatchPartyManager()
     @State private var useWebSocket: Bool = false
-    @State private var webSocketURL: String = "ws://151.243.109.217:8080"
+    @State private var webSocketURL: String = "wss://151.243.109.217.nip.io/ws"
     @State private var customURL: String = ""
     @State private var useCustomURL: Bool = false
     @State private var showingConnectionTest = false

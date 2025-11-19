@@ -63,25 +63,92 @@ docker run -p 8080:8080 \
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PORT` | `8080` | Server port |
+| `PORT` | `18081` | Server port (production) |
 | `MAX_MESSAGE_BYTES` | `8192` | Maximum WebSocket message size |
 | `LOG_LEVEL` | `info` | Logging level (`debug`, `info`) |
-| `AUTH_BYPASS` | `true` | Development auth bypass |
+| `AUTH_BYPASS` | `false` | Development auth bypass (production: false) |
 | `SUPABASE_JWKS_URL` | Required | Supabase JWKS endpoint |
 | `SUPABASE_PROJECT_ID` | Required | Supabase project ID |
 | `SUPABASE_ISSUER` | Required | Supabase token issuer |
 
+**Production Note**: The server runs in a Docker container with Caddy providing SSL termination. Caddy automatically obtains Let's Encrypt certificates for the nip.io domain.
+
 ## API
 
-### WebSocket Endpoint
+### Production WebSocket Endpoint (WSS)
 ```
-ws://localhost:8080/ws
+wss://151.243.109.217.nip.io/ws
+```
+
+**Deployment Details:**
+- **Server**: anonvm (151.243.109.217)
+- **SSL/TLS**: Automatic via Caddy + Let's Encrypt
+- **Domain**: 151.243.109.217.nip.io (wildcard DNS for IP-based SSL)
+- **Container**: Docker with Debian-slim base (glibc for uWebSockets.js)
+- **Port**: 18081 (internal), 443 (external via Caddy)
+
+### Local Development Endpoint
+```
+ws://localhost:18081/ws
 ```
 
 ### Health Check
 ```
-GET /healthz
+# Production
+GET https://151.243.109.217.nip.io/healthz
 Response: "ok"
+
+# Local
+GET http://localhost:18081/healthz
+Response: "ok"
+```
+
+## Deployment
+
+### Production Deployment (Docker + Caddy)
+
+The server is deployed on anonvm using Docker for containerization and Caddy for automatic SSL/WSS support.
+
+```bash
+# Deploy to production server
+./deploy-watchparty.sh deploy
+
+# Check status
+./deploy-watchparty.sh status
+
+# View logs
+./deploy-watchparty.sh logs
+
+# Restart service
+./deploy-watchparty.sh restart
+```
+
+**Deployment Architecture:**
+```
+Internet → Caddy (443) → Docker Container (18081) → uWebSockets.js
+         ↓
+    Let's Encrypt SSL
+```
+
+### Manual Docker Deployment
+```bash
+# Build image
+docker build -t watchparty .
+
+# Run container
+docker run -d \
+  --name watchparty \
+  --restart unless-stopped \
+  -p 18081:18081 \
+  --env-file .env \
+  watchparty
+```
+
+### Caddy Configuration
+```
+151.243.109.217.nip.io {
+    reverse_proxy localhost:18081
+}
 ```
 
 ## WebSocket Protocol
@@ -174,16 +241,18 @@ type Room = {
 - **Compression**: Reduces bandwidth usage
 - **Pre-allocated Templates**: Reduces JSON serialization overhead
 
-## Migration Notes
+## Implementation Notes
 
-This server replaces the original uWebSockets.js implementation with an optimized `ws` library version due to package deprecation. The implementation maintains 100% protocol compatibility while adding:
+This server uses **µWebSockets.js** (uWebSockets) for high-performance WebSocket handling. The implementation includes:
 
-- Better error handling and logging
-- Performance optimizations
-- Comprehensive testing suite
-- Improved Docker configuration
+- **Docker Base Image**: Debian-slim (node:20-slim) for glibc compatibility
+- **uWebSockets.js**: Requires glibc (not musl/Alpine)
+- **Production Deployment**: Docker + Caddy for automatic SSL/WSS
+- **Performance**: Sub-5ms latency, 30+ concurrent users per room
+- **SSL**: Automatic Let's Encrypt certificates via Caddy
 
-Future migration to native uWebSockets.js can be done seamlessly when package distribution is stable.
+**Why Debian-slim?**
+uWebSockets.js requires glibc, which is not available in Alpine Linux (uses musl). The Debian-slim base image provides glibc while maintaining a small container size.
 
 ## Monitoring
 

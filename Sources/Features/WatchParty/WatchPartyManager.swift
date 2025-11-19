@@ -36,7 +36,7 @@ class WatchPartyManager: ObservableObject {
 
     // MARK: - Initialization
 
-    init(transportType: TransportType = .localLoopback) {
+    init(transportType: TransportType = .webSocket(url: "wss://151.243.109.217.nip.io/ws")) {
         self.currentTransport = transportType
         setupTransport()
     }
@@ -362,7 +362,7 @@ extension WatchPartyManager {
     /// Load transport type from UserDefaults
     func loadTransportSettings() {
         let useWebSocket = UserDefaults.standard.bool(forKey: "watchPartyUseWebSocket")
-        let webSocketURL = UserDefaults.standard.string(forKey: "watchPartyWebSocketURL") ?? "ws://151.243.109.217:8080"
+        let webSocketURL = UserDefaults.standard.string(forKey: "watchPartyWebSocketURL") ?? "wss://151.243.109.217.nip.io/ws"
 
         setTransport(useWebSocket ? .webSocket(url: webSocketURL) : .localLoopback)
     }

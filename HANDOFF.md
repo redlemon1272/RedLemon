@@ -21,8 +21,7 @@
 - **Code Signing**: Ad-hoc signatures for Sparkle compatibility
 
 ### In Progress 🔄
-- **WebRTC Integration**: Framework installation and MPVPlayerViewModel integration needed
-- **Watch Party UI**: Room creation, join flow, guest list (designed, not implemented)
+- **Watch Party Testing**: Production uWebSockets.js server deployed, client integration complete
 
 ### Critical Information 🔑
 - **Current Version**: v1.0.8 (build 8)

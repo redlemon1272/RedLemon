@@ -40,7 +40,7 @@ RedLemon is a **native macOS streaming app** (Swift/SwiftUI) that:
 │  ├─ Users table (usernames, IDs)           │
 │  ├─ Friendships table (bidirectional)      │
 │  ├─ Watch party rooms                      │
-│  ├─ Realtime WebSocket (Phoenix protocol)  │
+│  ├─ URLSession WebSocket (uWebSockets.js)  │
 │  └─ Row Level Security (RLS) policies      │
 └─────────────────────────────────────────────┘
 
@@ -81,7 +81,8 @@ Real-Debrid unrestricts torrent → direct HTTP link
     ↓
 MPV plays video from HTTP stream
     ↓
-(Optional) Watch party: URLSession WebSocket → Supabase Realtime
+(Optional) Watch party: URLSession WebSocket → Production uWebSockets.js Server
+                                                  (wss://151.243.109.217.nip.io/ws)
 ```
 
 ---
@@ -90,9 +91,9 @@ MPV plays video from HTTP stream
 
 ### **No Supabase SDK**
 - ❌ We **removed** the Supabase Swift SDK (requires Swift 5.10, we're on 5.7.2)
-- ✅ We use **native URLSession WebSocketTask** instead
-- ✅ Manually implement **Phoenix protocol** for Supabase Realtime
-- ✅ Direct REST API calls for database operations
+- ✅ We use **native URLSession WebSocketTask** for watch parties
+- ✅ Connect to production **uWebSockets.js server** (wss://151.243.109.217.nip.io/ws)
+- ✅ Direct REST API calls for database operations (users, friends)
 
 ### **No ICP/Blockchain**
 - ❌ ICP (Internet Computer) was **completely removed** (November 2025)
@@ -106,9 +107,12 @@ MPV plays video from HTTP stream
 - **Episode matching** - Server-side filtering for TV shows (S01E01 patterns)
 
 ### **Real-Time Sync**
-- **Protocol:** Phoenix (Supabase Realtime standard)
-- **Messages:** `phx_join`, `phx_leave`, `broadcast`, `presence_state`, `presence_diff`
-- **Heartbeat:** Every 30 seconds to keep connection alive
+- **Server:** Production uWebSockets.js server (wss://151.243.109.217.nip.io/ws)
+- **Protocol:** Custom WebSocket protocol (optimized for watch parties)
+- **Messages:** `auth`, `play`, `pause`, `seek`, `heartbeat`, `chat`, `state`, `presence`
+- **Deployment:** Docker + Caddy on anonvm (151.243.109.217)
+- **SSL:** Automatic Let's Encrypt certificates via Caddy
+- **Performance:** Sub-5ms latency, 30+ concurrent users per room
 - **Disconnect:** Properly cancels WebSocket before setting flags (fixed after 4 iterations)
 
 ---
@@ -287,8 +291,10 @@ log stream --predicate 'processImagePath contains "RedLemon"' --level default
 - Quality bucketing, seeder filtering, episode matching
 
 ### **WebSocket/Real-Time**
-- `Sources/Networking/SupabaseRealtimeClient.swift` (400 lines, URLSession implementation)
-- `Sources/Features/WatchParty/RealtimeChannelManager.swift` (Phoenix protocol wrapper)
+- `Sources/Networking/SupabaseRealtimeClient.swift` (URLSession WebSocket, legacy for lobby chat)
+- `Sources/Features/WatchParty/RealtimeChannelManager.swift` (Lobby chat manager)
+- `Sources/Features/WatchParty/WebSocketTransport.swift` (uWebSockets.js client)
+- `Sources/Features/WatchParty/WatchPartyManager.swift` (Main watch party coordinator)
 
 ### **Player**
 - `Sources/Features/Player/MPVPlayerViewModel.swift` (1000+ lines, main logic)
@@ -324,7 +330,7 @@ log stream --predicate 'processImagePath contains "RedLemon"' | grep "ERROR\|Web
 
 ### **Key Test Scenarios**
 1. **Stream Resolution** - Search "Game of Thrones", play S01E01
-2. **WebSocket Connect** - Join watch party room, verify "Connected to Supabase Realtime"
+2. **WebSocket Connect** - Join watch party room, verify "Connected to uWebSockets.js server"
 3. **WebSocket Disconnect** - Exit room, verify messages stop immediately
 4. **Friend Request** - Send friend request, verify bidirectional friendship created
 5. **Auto-Update** - Check for updates, verify appcast.xml fetch
@@ -351,7 +357,7 @@ Read in this order:
 - **UI Framework:** SwiftUI
 - **HTTP Server:** Vapor 4.96 (localhost:47253)
 - **Database:** Supabase PostgreSQL (cloud-hosted)
-- **Real-Time:** URLSession WebSocket (Phoenix protocol)
+- **Real-Time:** URLSession WebSocket (uWebSockets.js production server)
 - **Updates:** Sparkle 2.8.0 (GitHub Releases)
 - **Video Player:** MPV (libmpv)
 - **Debrid Service:** Real-Debrid (required for streaming)

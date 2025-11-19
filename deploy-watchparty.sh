@@ -13,6 +13,7 @@ DEPLOY_PATH="/opt/watchparty-server"
 SERVICE_NAME="watchparty"
 REPO_URL="https://github.com/orangeapple1272/Redlemon.git"
 LOCAL_REPO_PATH="$(pwd)"
+DOMAIN="151.243.109.217.nip.io"
 
 # Colors for output
 RED='\033[0;31m'
@@ -111,6 +112,21 @@ setup_server() {
             sudo usermod -aG docker root
         fi
 
+        # Install Caddy
+        if ! command -v caddy &> /dev/null; then
+            echo "Installing Caddy..."
+            sudo apt-get install -y debian-keyring debian-archive-keyring apt-transport-https curl
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+            curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+            sudo apt-get update
+            sudo apt-get install -y caddy
+        fi
+        
+        # Ensure Caddy directory exists and service is enabled
+        sudo mkdir -p /etc/caddy
+        sudo systemctl enable caddy
+        sudo systemctl start caddy || true
+
         # Create systemd service directory
         sudo mkdir -p /etc/systemd/system
 
@@ -142,7 +158,7 @@ deploy_app() {
     # Create environment file
     cat > "${temp_dir}/.env" << EOL
 # Watch Party Server Configuration
-PORT=8080
+PORT=18081
 MAX_MESSAGE_BYTES=8192
 LOG_LEVEL=info
 AUTH_BYPASS=false
@@ -163,12 +179,34 @@ EOL
     # Cleanup temporary directory
     rm -rf "${temp_dir}"
 
-    # Set permissions and install dependencies
+    # Build and run Docker container
     ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" << EOF
         cd "${DEPLOY_PATH}"
-        chown -R root:root "${DEPLOY_PATH}"
-        npm install
-        npm run build
+        
+        # Stop existing container if running
+        docker stop ${SERVICE_NAME} 2>/dev/null || true
+        docker rm ${SERVICE_NAME} 2>/dev/null || true
+        
+        # Build image
+        docker build -t ${SERVICE_NAME} .
+        
+        # Run container
+        docker run -d \
+            --name ${SERVICE_NAME} \
+            --restart unless-stopped \
+            -p 18081:18081 \
+            --env-file .env \
+            ${SERVICE_NAME}
+            
+        # Configure Caddy
+        cat > /etc/caddy/Caddyfile << CADDY
+${DOMAIN} {
+    reverse_proxy localhost:18081
+}
+CADDY
+
+        # Reload Caddy
+        systemctl reload caddy
 EOF
 
     if [ $? -eq 0 ]; then
@@ -179,51 +217,15 @@ EOF
     fi
 }
 
-# Create systemd service
+# Create systemd service (Legacy - now using Docker)
 create_service() {
-    log_info "Creating systemd service..."
-
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" << EOF
-        cat > /etc/systemd/system/${SERVICE_NAME}.service << 'EOL'
-[Unit]
-Description=RedLemon Watch Party WebSocket Server
-After=network.target
-
-[Service]
-Type=simple
-User=root
-WorkingDirectory=${DEPLOY_PATH}
-Environment=NODE_ENV=production
-EnvironmentFile=${DEPLOY_PATH}/.env
-ExecStart=/usr/bin/node dist/index.js
-Restart=always
-RestartSec=10
-StandardOutput=journal
-StandardError=journal
-SyslogIdentifier=${SERVICE_NAME}
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-        # Reload systemd and enable service
-        systemctl daemon-reload
-        systemctl enable ${SERVICE_NAME}
-        systemctl status ${SERVICE_NAME} --no-pager
-EOF
-
-    if [ $? -eq 0 ]; then
-        log_success "Systemd service created"
-    else
-        log_error "Failed to create systemd service"
-        return 1
-    fi
+    log_info "Skipping systemd service creation (using Docker)"
 }
 
 # Service management functions
 start_service() {
     log_info "Starting ${SERVICE_NAME} service..."
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "systemctl start ${SERVICE_NAME}"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker start ${SERVICE_NAME}"
 
     if [ $? -eq 0 ]; then
         log_success "Service started successfully"
@@ -237,7 +239,7 @@ start_service() {
 
 stop_service() {
     log_info "Stopping ${SERVICE_NAME} service..."
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "systemctl stop ${SERVICE_NAME}"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker stop ${SERVICE_NAME}"
 
     if [ $? -eq 0 ]; then
         log_success "Service stopped successfully"
@@ -249,7 +251,7 @@ stop_service() {
 
 restart_service() {
     log_info "Restarting ${SERVICE_NAME} service..."
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "systemctl restart ${SERVICE_NAME}"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker restart ${SERVICE_NAME}"
 
     if [ $? -eq 0 ]; then
         log_success "Service restarted successfully"
@@ -263,26 +265,26 @@ restart_service() {
 
 show_status() {
     log_info "Service status:"
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "systemctl status ${SERVICE_NAME} --no-pager"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker ps -f name=${SERVICE_NAME}"
 
     log_info "Recent logs:"
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "journalctl -u ${SERVICE_NAME} -n 20 --no-pager"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker logs --tail 20 ${SERVICE_NAME}"
 }
 
 show_logs() {
     local lines=${1:-50}
     log_info "Showing last ${lines} log lines:"
-    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "journalctl -u ${SERVICE_NAME} -n ${lines} -f --no-pager"
+    ssh -i "${SSH_KEY}" "${SERVER_USER}@${SERVER_HOST}" "docker logs --tail ${lines} -f ${SERVICE_NAME}"
 }
 
 health_check() {
     log_info "Performing health check..."
 
     # Test HTTP health endpoint
-    if curl -f -s "http://${SERVER_HOST}:8080/healthz" > /dev/null; then
-        log_success "HTTP health check passed"
+    if curl -f -s "https://${DOMAIN}/healthz" > /dev/null; then
+        log_success "HTTP health check passed (https://${DOMAIN}/healthz)"
     else
-        log_error "HTTP health check failed"
+        log_error "HTTP health check failed (https://${DOMAIN}/healthz)"
         return 1
     fi
 
@@ -290,7 +292,7 @@ health_check() {
     log_info "Testing WebSocket connection..."
     timeout 10 node -e "
         const WebSocket = require('ws');
-        const ws = new WebSocket('ws://${SERVER_HOST}:8080');
+        const ws = new WebSocket('wss://${DOMAIN}');
 
         ws.on('open', () => {
             console.log('WebSocket connection successful');

@@ -281,10 +281,10 @@ func registerStreamRoutes(_ app: Application) {
                     "\\(\(year)\\)",               // (1991)
                     "\\.\(year)\\.",               // .1991.
                     " \(year) ",                   //  1991  (space-year-space)
-                    " \(year)$",                   //  1991 at end (space-year-end)
+                    " \(year)$",                   // 1991 at end (space-year-end)
                     "^\(year) ",                  // 1991 at start (year-space)
                     "\\.\(year)$",                 // .1991 at end (dot-year-end)
-                    " \(year)\\.",                 //  1991. (space-year-dot)
+                    " \(year)\\.",                 // 1991. (space-year-dot)
                     "_\(year)_",                   // _1991_ (underscore-year-underscore)
                     "-\(year)-",                   // -1991- (dash-year-dash)
                     "\\[\(year)\\]",               // [1991] (brackets-year)
@@ -326,9 +326,25 @@ func registerStreamRoutes(_ app: Application) {
             print("   🚫 SERVER FILTERED x265: \(beforeCodecFilter) → \(afterCodecFilter) streams")
         }
 
-        print("   📊 After x265 filter: \(streamsWithSubtitles.count) streams remaining")
+        // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
+        let beforeAudioFilter = streamsWithSubtitles.count
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let hasAcceptableAudio = hasAcceptableAudioLanguage(stream.title)
+            if !hasAcceptableAudio {
+                let audioDesc = getAudioLanguageDescription(stream.title)
+                print("   🚫 SERVER BLOCKING non-English audio: \(stream.title) (\(audioDesc))")
+            }
+            return hasAcceptableAudio
+        }
+        let afterAudioFilter = streamsWithSubtitles.count
+        if afterAudioFilter < beforeAudioFilter {
+            print("   🎵 SERVER FILTERED audio language: \(beforeAudioFilter) → \(afterAudioFilter) streams (English/Multi only)")
+        }
+
+        print("   📊 After x265 + audio filter: \(streamsWithSubtitles.count) streams remaining")
         for (idx, stream) in streamsWithSubtitles.prefix(5).enumerated() {
-            print("      [\(idx)] \(stream.title)")
+            let audioDesc = getAudioLanguageDescription(stream.title)
+            print("      [\(idx)] \(stream.title) (\(audioDesc))")
         }
 
         // CRITICAL: Filter by episode pattern for TV shows ONLY (before bucketing!)
@@ -713,10 +729,10 @@ func registerStreamRoutes(_ app: Application) {
                     "\\(\(year)\\)",               // (1991)
                     "\\.\(year)\\.",               // .1991.
                     " \(year) ",                   //  1991  (space-year-space)
-                    " \(year)$",                   //  1991 at end (space-year-end)
+                    " \(year)$",                   // 1991 at end (space-year-end)
                     "^\(year) ",                  // 1991 at start (year-space)
                     "\\.\(year)$",                 // .1991 at end (dot-year-end)
-                    " \(year)\\.",                 //  1991. (space-year-dot)
+                    " \(year)\\.",                 // 1991. (space-year-dot)
                     "_\(year)_",                   // _1991_ (underscore-year-underscore)
                     "-\(year)-",                   // -1991- (dash-year-dash)
                     "\\[\(year)\\]",               // [1991] (brackets-year)
@@ -808,6 +824,27 @@ func registerStreamRoutes(_ app: Application) {
                 print("   ❌ No streams match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!)) pattern")
                 throw Abort(.notFound, reason: "No streams match requested episode")
             }
+        }
+
+        // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only (wild west mode applies)
+        let beforeAudioFilter = streamsWithSubtitles.count
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let hasAcceptableAudio = hasAcceptableAudioLanguage(stream.title)
+            if !hasAcceptableAudio {
+                let audioDesc = getAudioLanguageDescription(stream.title)
+                print("   🚫 SERVER BLOCKING non-English audio: \(stream.title) (\(audioDesc))")
+            }
+            return hasAcceptableAudio
+        }
+        let afterAudioFilter = streamsWithSubtitles.count
+        if afterAudioFilter < beforeAudioFilter {
+            print("   🎵 SERVER FILTERED audio language: \(beforeAudioFilter) → \(afterAudioFilter) streams (English/Multi only)")
+        }
+
+        print("   📊 After x265 + audio filter: \(streamsWithSubtitles.count) streams remaining")
+        for (idx, stream) in streamsWithSubtitles.prefix(5).enumerated() {
+            let audioDesc = getAudioLanguageDescription(stream.title)
+            print("      [\(idx)] \(stream.title) (\(audioDesc))")
         }
 
         // WILD WEST MODE: SMART DEDUPLICATION BY INFOHASH FIRST
@@ -1448,6 +1485,112 @@ private func parseSizeInBytes(_ size: String?) -> Int64 {
     return Int64(number * Double(multiplier))
 }
 
+// MARK: - Audio Language Detection and Filtering
+
+/// Detect audio languages from stream title
+/// Returns: (primaryLanguage, hasEnglish, isMultiAudio, languageScore)
+private func detectAudioLanguage(_ title: String) -> (String, Bool, Bool, Int) {
+    let titleLower = title.lowercased()
+    let tokens = titleLower.split(whereSeparator: { !$0.isLetter && !$0.isNumber })
+
+    // Common audio language patterns in torrent titles
+    let englishPatterns = ["english", "eng", "en", "englisch"]
+    let frenchPatterns = ["french", "fr", "français", "francais", "vf", "vff", "truefrench"]
+    let germanPatterns = ["german", "de", "deu", "deutsch"]
+    let spanishPatterns = ["spanish", "es", "esp", "español", "castellano"]
+    let italianPatterns = ["italian", "it", "ita", "italiano"]
+
+    // Multi-audio indicators
+    let multiPatterns = ["multi", "multiaudio", "dual", "dual.audio", "multisub", "multi.sub"]
+
+    var detectedLanguages: [String] = []
+    var isMultiAudio = false
+
+    // Check for multi-audio first
+    for pattern in multiPatterns {
+        if titleLower.contains(pattern) {
+            isMultiAudio = true
+            break
+        }
+    }
+
+    func containsLanguagePattern(_ patterns: [String]) -> Bool {
+        for pattern in patterns {
+            if pattern.count <= 3 {
+                if tokens.contains(where: { $0 == pattern }) {
+                    return true
+                }
+            } else if titleLower.contains(pattern) {
+                return true
+            }
+        }
+        return false
+    }
+
+    // Detect specific languages
+    if containsLanguagePattern(englishPatterns) {
+        detectedLanguages.append("english")
+    }
+    if containsLanguagePattern(frenchPatterns) {
+        detectedLanguages.append("french")
+    }
+    if containsLanguagePattern(germanPatterns) {
+        detectedLanguages.append("german")
+    }
+    if containsLanguagePattern(spanishPatterns) {
+        detectedLanguages.append("spanish")
+    }
+    if containsLanguagePattern(italianPatterns) {
+        detectedLanguages.append("italian")
+    }
+
+    // If no explicit language found, assume English (most common default)
+    if detectedLanguages.isEmpty {
+        detectedLanguages.append("english")
+    }
+
+    let hasEnglish = detectedLanguages.contains("english")
+    let primaryLanguage = detectedLanguages.first ?? "unknown"
+
+    // Score audio language for filtering
+    let languageScore: Int
+    if hasEnglish {
+        if isMultiAudio {
+            languageScore = 80  // Multi-audio with English is good
+        } else {
+            languageScore = 100 // English-only is best
+        }
+    } else if isMultiAudio {
+        languageScore = 40  // Multi-audio without English is acceptable as fallback
+    } else {
+        languageScore = -200 // Non-English single audio is heavily penalized
+    }
+
+    return (primaryLanguage, hasEnglish, isMultiAudio, languageScore)
+}
+
+/// Check if a stream has acceptable audio language
+/// Returns true if English or multi-audio, false for non-English only
+private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
+    let (_, hasEnglish, isMultiAudio, _) = detectAudioLanguage(title)
+    return hasEnglish || isMultiAudio
+}
+
+/// Get audio language description for logging
+private func getAudioLanguageDescription(_ title: String) -> String {
+    let (primary, hasEnglish, isMulti, _) = detectAudioLanguage(title)
+    var description = primary.capitalized
+
+    if isMulti {
+        description += " (Multi)"
+    }
+    if hasEnglish {
+        description += " ✓"
+    }
+
+    return description
+}
+
 // MARK: - Quality Bucket Helpers (ColorFruit logic)
 
 private func determineQualityBucket(_ quality: String) -> String {
@@ -1558,7 +1701,7 @@ private func processBucket(
         return hasBadCodec ? 0 : 100  // x264 gets +100, x265 gets 0
     }
 
-    // Sort by: title match (movies only) > year match > source quality > provider > codec > seeders > extension
+    // Sort by: title match (movies only) > year match > AUDIO LANGUAGE > source quality > provider > codec > seeders > extension
     let yearSorted = yearAndCodecFiltered.sorted { a, b in
         // MOVIES ONLY: prioritize titles that best match metadata title
         if let targetTitle = targetTitle {
@@ -1576,6 +1719,17 @@ private func processBucket(
 
         if yearPriorityA != yearPriorityB {
             return yearPriorityA > yearPriorityB // A matches year, B doesn't = A wins
+        }
+
+        // NEW: AUDIO LANGUAGE PRIORITY - English/Multi preferred over foreign-only
+        let audioScoreA = detectAudioLanguage(a.title).3
+        let audioScoreB = detectAudioLanguage(b.title).3
+
+        if audioScoreA != audioScoreB {
+            let audioDescA = getAudioLanguageDescription(a.title)
+            let audioDescB = getAudioLanguageDescription(b.title)
+            print("  🎵 Audio Language: \(a.title) (\(audioDescA)) vs \(b.title) (\(audioDescB))")
+            return audioScoreA > audioScoreB
         }
 
         // SECONDARY: Enhanced source quality ranking (Netflix > BluRay > WEB-DL > WEBRip)
@@ -1716,7 +1870,7 @@ private func processBucket(
 
             let sourceClose = sourceQualityRank(stream) >= baselineSource - 10
 
-            return hasEng && goodSource && sizeOk && sourceClose && notMuchSmallerThanBaseline(stream)
+            return hasEng && goodSource && sourceClose && sizeOk
         }
 
         if let moviePrimary = movieCandidate {
@@ -1783,15 +1937,16 @@ private func streamTitleContainsYear(_ title: String, targetYear: String) -> Boo
     // Comprehensive year patterns that match actual release year positions
     let yearPatterns = [
         "\\((\(targetYear))\\)",           // (1991)
-        "\\.\(targetYear)\\.",           // .1991.
+        "\\.\(targetYear)\\.",               // .1991.
         " \(targetYear) ",               //  1991  (space-year-space)
         " \(targetYear)$",               // 1991 at end (space-year-end)
-        "^\(targetYear) ",               // 1991 at start (year-space)
-        "\\.\(targetYear)$",              // .1991 at end (dot-year-end)
-        " \(targetYear)\\.",             // 1991. (space-year-dot)
+        "^\(targetYear) ",                  // 1991 at start (year-space)
+        "\\.\(targetYear)$",                 // .1991 at end (dot-year-end)
+        " \(targetYear)\\.",                 // 1991. (space-year-dot)
         "_\(targetYear)_",               // _1991_ (underscore-year-underscore)
         "-\(targetYear)-",               // -1991- (dash-year-dash)
         "[\(targetYear)]",               // [1991] (brackets-year)
+        "^\(targetYear)$",                  // 1991 as entire string
     ]
 
     for pattern in yearPatterns {
@@ -1806,7 +1961,7 @@ private func streamTitleContainsYear(_ title: String, targetYear: String) -> Boo
     return false
 }
 
-// Helper: score how well a stream title matches the canonical metadata title (movies only)
+// Helper: score how well a stream title matches canonical metadata title (movies only)
 // Simple, fast heuristic: exact match > starts/contains > word overlap
 private func streamTitleMatchScore(_ title: String, targetTitle: String) -> Int {
     let normalize: (String) -> String = { str in

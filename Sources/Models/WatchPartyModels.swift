@@ -85,7 +85,7 @@ enum RealtimeConnectionStatus: String, CaseIterable {
         case .connecting:
             return "Connecting to channel..."
         case .connected:
-            return "Connected via Realtime"
+            return "Connected"
         case .failed:
             return "Connection failed - using database"
         }

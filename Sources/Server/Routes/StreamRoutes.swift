@@ -270,42 +270,41 @@ func registerStreamRoutes(_ app: Application) {
         var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode)
 
         // Filter by year if provided (removes wrong releases like 2005 version when looking for 2025)
-        if let year = year, type == "movie" {
+        if let year = year {
+            let allowedYears = parseAllowedYears(year)
+            if allowedYears.isEmpty {
+                print("   ⚠️ Year string '\(year)' could not be parsed; skipping year filter")
+            }
+
             let beforeCount = streamsWithSubtitles.count
             streamsWithSubtitles = streamsWithSubtitles.filter { stream in
-                let title = stream.title
-
-                // Strict year patterns that match ONLY the exact target year
-                // Use explicit boundaries: space, dot, paren, bracket, underscore, dash, start/end of string
-                let exactYearPatterns = [
-                    "\\(\(year)\\)",               // (1991)
-                    "\\.\(year)\\.",               // .1991.
-                    " \(year) ",                   //  1991  (space-year-space)
-                    " \(year)$",                   // 1991 at end (space-year-end)
-                    "^\(year) ",                  // 1991 at start (year-space)
-                    "\\.\(year)$",                 // .1991 at end (dot-year-end)
-                    " \(year)\\.",                 // 1991. (space-year-dot)
-                    "_\(year)_",                   // _1991_ (underscore-year-underscore)
-                    "-\(year)-",                   // -1991- (dash-year-dash)
-                    "\\[\(year)\\]",               // [1991] (brackets-year)
-                    "^\(year)$",                  // 1991 as entire string
-                ]
-
-                // Check for exact year match first
-                for pattern in exactYearPatterns {
-                    if let regex = try? NSRegularExpression(pattern: pattern) {
-                        let range = NSRange(location: 0, length: title.utf16.count)
-                        if regex.firstMatch(in: title, range: range) != nil {
-                            return true
-                        }
-                    }
+                // Movies: keep only streams whose titles include the exact year (or range member)
+                if type == "movie" {
+                    guard let targetYear = allowedYears.first else { return true }
+                    return streamTitleContainsYear(stream.title, targetYears: [targetYear])
                 }
 
-                // If no exact year match, exclude this stream
-                return false
+                // Series: drop streams that explicitly mention a conflicting year (e.g., 1959)
+                if allowedYears.isEmpty { return true }
+                let yearsInTitle = extractYearsFromTitle(stream.title)
+
+                // If no year is present, keep it (common for TV episode releases)
+                guard !yearsInTitle.isEmpty else { return true }
+
+                let hasAllowedYear = yearsInTitle.contains { allowedYears.contains($0) }
+                if !hasAllowedYear {
+                    print("   🚫 SERVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: \",\")))")
+                }
+                return hasAllowedYear
             }
             let afterCount = streamsWithSubtitles.count
-            print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
+            if type == "movie" {
+                print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
+            } else {
+                if afterCount < beforeCount {
+                    print("   📺 Year filter (series \(year)): \(beforeCount) → \(afterCount) streams")
+                }
+            }
         }
 
         // CRITICAL: Filter x265/HEVC streams (server-side, ALWAYS runs)
@@ -1687,9 +1686,11 @@ private func processBucket(
 
     // CRITICAL: Sort by YEAR MATCH first (before any seeder filtering)
     // This ensures year-matching streams get priority regardless of seeder count
+    let allowedYears = year.flatMap { parseAllowedYears($0) } ?? []
+
     func yearMatchPriority(_ stream: Stream) -> Int {
-        guard let year = year else { return 0 }
-        return streamTitleContainsYear(stream.title, targetYear: year) ? 1000 : 0
+        guard !allowedYears.isEmpty else { return 0 }
+        return streamTitleContainsYear(stream.title, targetYears: allowedYears) ? 1000 : 0
     }
 
     func codecRank(_ stream: Stream) -> Int {
@@ -1932,28 +1933,70 @@ private func extractReleaseGroup(_ title: String) -> String? {
     return nil
 }
 
-// Helper function to check if stream title contains target year
-private func streamTitleContainsYear(_ title: String, targetYear: String) -> Bool {
-    // Comprehensive year patterns that match actual release year positions
-    let yearPatterns = [
-        "\\((\(targetYear))\\)",           // (1991)
-        "\\.\(targetYear)\\.",               // .1991.
-        " \(targetYear) ",               //  1991  (space-year-space)
-        " \(targetYear)$",               // 1991 at end (space-year-end)
-        "^\(targetYear) ",                  // 1991 at start (year-space)
-        "\\.\(targetYear)$",                 // .1991 at end (dot-year-end)
-        " \(targetYear)\\.",                 // 1991. (space-year-dot)
-        "_\(targetYear)_",               // _1991_ (underscore-year-underscore)
-        "-\(targetYear)-",               // -1991- (dash-year-dash)
-        "[\(targetYear)]",               // [1991] (brackets-year)
-        "^\(targetYear)$",                  // 1991 as entire string
-    ]
+// Helper: parse allowed years from a string like "2019" or "2019-2020" or "2019–2020"
+private func parseAllowedYears(_ yearString: String) -> [String] {
+    let separators = CharacterSet(charactersIn: "-–—")
 
-    for pattern in yearPatterns {
-        if let regex = try? NSRegularExpression(pattern: pattern) {
-            let range = NSRange(location: 0, length: title.utf16.count)
-            if regex.firstMatch(in: title, range: range) != nil {
-                return true
+    // Extract 4-digit years from the string
+    let regex = try? NSRegularExpression(pattern: "(19|20)\\d{2}")
+    let range = NSRange(location: 0, length: yearString.utf16.count)
+    let matches = regex?.matches(in: yearString, range: range) ?? []
+    let years = matches.compactMap { match -> Int? in
+        guard let r = Range(match.range, in: yearString) else { return nil }
+        return Int(yearString[r])
+    }
+
+    if years.count >= 2 && yearString.rangeOfCharacter(from: separators) != nil {
+        let start = years.first!
+        let end = years.dropFirst().first ?? start
+        return Array(start...end).map { String($0) }
+    } else if let single = years.first {
+        return [String(single)]
+    }
+
+    // Fallback: split by separators and use any 4-digit tokens
+    let parts = yearString.split(whereSeparator: { separators.contains($0.unicodeScalars.first!) })
+    let tokens = parts.compactMap { Int($0) }
+    return tokens.map { String($0) }
+}
+
+// Helper: extract all 4-digit years from a stream title
+private func extractYearsFromTitle(_ title: String) -> [String] {
+    let regex = try? NSRegularExpression(pattern: "(19|20)\\d{2}")
+    let range = NSRange(location: 0, length: title.utf16.count)
+    let matches = regex?.matches(in: title, range: range) ?? []
+    return matches.compactMap { match in
+        guard let r = Range(match.range, in: title) else { return nil }
+        return String(title[r])
+    }
+}
+
+// Helper function to check if stream title contains any of the target years
+private func streamTitleContainsYear(_ title: String, targetYears: [String]) -> Bool {
+    guard !targetYears.isEmpty else { return false }
+
+    for targetYear in targetYears {
+        // Comprehensive year patterns that match actual release year positions
+        let yearPatterns = [
+            "\\((\(targetYear))\\)",           // (1991)
+            "\\.\(targetYear)\\.",               // .1991.
+            " \(targetYear) ",               //  1991  (space-year-space)
+            " \(targetYear)$",               // 1991 at end (space-year-end)
+            "^\(targetYear) ",                  // 1991 at start (year-space)
+            "\\.\(targetYear)$",                 // .1991 at end (dot-year-end)
+            " \(targetYear)\\.",                 // 1991. (space-year-dot)
+            "_\(targetYear)_",               // _1991_ (underscore-year-underscore)
+            "-\(targetYear)-",               // -1991- (dash-year-dash)
+            "\\[\(targetYear)\\]",               // [1991] (brackets-year)
+            "^\(targetYear)$",                  // 1991 as entire string
+        ]
+
+        for pattern in yearPatterns {
+            if let regex = try? NSRegularExpression(pattern: pattern) {
+                let range = NSRange(location: 0, length: title.utf16.count)
+                if regex.firstMatch(in: title, range: range) != nil {
+                    return true
+                }
             }
         }
     }

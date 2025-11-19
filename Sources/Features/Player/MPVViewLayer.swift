@@ -280,7 +280,12 @@ class MPVViewLayer: CAOpenGLLayer {
 
             // CRITICAL: Tell Core Animation we need to redraw
             setNeedsDisplay()
-            display()
+            
+            // Force main thread update to wake up run loop and ensure window compositor picks up the frame
+            // This fixes the "black screen until mouse move" issue
+            DispatchQueue.main.async {
+                self.setNeedsDisplay()
+            }
         }
     }
 

@@ -655,11 +655,14 @@ class LobbyViewModel: ObservableObject {
         } else {
             // Regular chat message - add to chat UI
             // CRITICAL: Skip messages from self (already added locally when sent)
+            NSLog("🔍 Chat message received - senderId: '\(syncMessage.senderId ?? "nil")', participantId: '\(participantId)'")
+            
             if syncMessage.senderId == participantId {
                 NSLog("💬 Skipping own message (already displayed locally): '\(chatText)'")
                 return
             }
             
+            NSLog("💬 Adding received message from other participant: '\(chatText)'")
             let chatMessage = ChatMessage(
                 id: UUID().uuidString,
                 username: syncMessage.chatUsername ?? "Unknown",

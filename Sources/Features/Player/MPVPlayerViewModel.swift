@@ -40,6 +40,15 @@ class MPVPlayerViewModel: ObservableObject {
     // Syncplay-inspired: Ignore echoed state changes (prevent jitter)
     private var ignoringRemoteUpdates: Int = 0  // Counter for ignoring remote updates after local actions
     private var lastLocalActionTime: Date?
+    
+    // Advanced smoothness optimization (network-aware sync)
+    private var driftHistory: [Double] = []  // Rolling window of drift measurements
+    private let driftHistorySize = 5  // Number of samples to average
+    private var lastSpeedAdjustmentTime: Date?
+    private var currentSpeedAdjustment: Double = 1.0
+    private var networkLatency: Double = 0.05  // Estimated one-way latency (50ms default)
+    private var lastSyncMessageTime: Date?
+    private var isCurrentlyAdjustingSpeed: Bool = false
 
     // Player state
     @Published var videoURL: String = ""
@@ -1101,54 +1110,96 @@ extension MPVPlayerViewModel {
 
         switch message.type {
         case .playbackState:
-            // Guest syncs to host's playback state
-            let timestamp = message.timestamp
+            // Guest syncs to host's playback state with advanced smoothness optimization
+            let hostTimestamp = message.timestamp
             guard let isPlaying = message.isPlaying else { return }
-
-            // Calculate drift
-            let drift = currentTime - timestamp
-            let absDrift = abs(drift)
-
-            // Syncplay-inspired tiered sync approach (optimized for weaker hardware)
+            
+            // Update network latency estimate
+            updateNetworkLatency()
+            
+            // Predictive compensation: Account for network latency
+            // By the time we receive this message, the host has moved forward
+            let predictedHostPosition = hostTimestamp + networkLatency
+            
+            // Calculate drift with latency compensation
+            let rawDrift = currentTime - predictedHostPosition
+            let absDrift = abs(rawDrift)
+            
+            // Add to drift history for smoothing
+            driftHistory.append(rawDrift)
+            if driftHistory.count > driftHistorySize {
+                driftHistory.removeFirst()
+            }
+            
+            // Calculate smoothed drift (moving average)
+            let smoothedDrift = driftHistory.reduce(0.0, +) / Double(driftHistory.count)
+            let absSmoothedDrift = abs(smoothedDrift)
+            
+            // Advanced tiered sync with hysteresis and adaptive thresholds
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
-            if absDrift < 0.3 {
-                // Perfect sync (<300ms), do nothing
-                // Increased from 150ms to further reduce corrections on weaker hardware
-                print("✅ Perfect sync: \(Int(absDrift * 1000))ms drift")
-            } else if absDrift < 5.0 {
-                // Small/Medium drift (300ms-5s) - ONLY use speed adjustment, NO SEEKING
-                // Seeking causes video pipeline stalls on weaker hardware (MacBook Air 2015)
-                if absDrift > 0.5 {
-                    // More aggressive speed adjustment for larger drifts
-                    let speedFactor = drift > 0 ? 0.95 : 1.05  // ±5% for faster correction
-                    mpvWrapper.setSpeed(speedFactor)
-                    print("⚡ Speed sync: \(speedFactor)x to fix \(String(format: "%.1f", absDrift))s drift (NO SEEK)")
-
-                    // Reset speed after 3 seconds
-                    Task {
-                        try? await Task.sleep(nanoseconds: 3_000_000_000)
-                        await MainActor.run {
-                            mpvWrapper.setSpeed(1.0)
-                        }
+            
+            if absSmoothedDrift < 0.2 {
+                // Perfect sync (<200ms smoothed drift)
+                // If we're currently adjusting speed, reset to normal
+                if isCurrentlyAdjustingSpeed {
+                    mpvWrapper.setSpeed(1.0)
+                    isCurrentlyAdjustingSpeed = false
+                    currentSpeedAdjustment = 1.0
+                    print("✅ Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
+                }
+            } else if absSmoothedDrift < 5.0 {
+                // Small/Medium drift (200ms-5s) - Use ultra-smooth speed adjustment
+                // Hysteresis: Only adjust if enough time has passed since last adjustment
+                let timeSinceLastAdjustment = lastSpeedAdjustmentTime.map { Date().timeIntervalSince($0) } ?? 1.0
+                
+                // Only adjust every 500ms to prevent micro-stutters
+                if timeSinceLastAdjustment >= 0.5 {
+                    // Calculate adaptive speed factor based on smoothed drift
+                    let speedFactor: Double
+                    
+                    if absSmoothedDrift > 1.0 {
+                        // Larger drift (1-5s): More aggressive correction
+                        // Use proportional correction: more drift = faster correction
+                        let correctionRate = min(absSmoothedDrift * 0.02, 0.05)  // Cap at 5%
+                        speedFactor = smoothedDrift > 0 ? (1.0 - correctionRate) : (1.0 + correctionRate)
+                        print("⚡ Adaptive speed sync: \(String(format: "%.3f", speedFactor))x to fix \(String(format: "%.1f", absSmoothedDrift))s drift")
+                    } else if absSmoothedDrift > 0.4 {
+                        // Medium drift (400ms-1s): Gentle correction
+                        speedFactor = smoothedDrift > 0 ? 0.99 : 1.01  // ±1%
+                        print("⚡ Gentle speed sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
+                    } else {
+                        // Small drift (200-400ms): Ultra-gentle correction
+                        speedFactor = smoothedDrift > 0 ? 0.995 : 1.005  // ±0.5%
+                        print("⚡ Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     }
-                } else {
-                    // Gentle correction for smaller drifts
-                    let speedFactor = drift > 0 ? 0.99 : 1.01
+                    
                     mpvWrapper.setSpeed(speedFactor)
-                    print("⚡ Gentle speed sync: \(speedFactor)x to fix \(Int(absDrift * 1000))ms drift")
-
-                    // Reset speed after 2 seconds
+                    currentSpeedAdjustment = speedFactor
+                    isCurrentlyAdjustingSpeed = true
+                    lastSpeedAdjustmentTime = Date()
+                    
+                    // Auto-reset speed after correction period (proportional to drift)
+                    let resetDelay = min(max(absSmoothedDrift * 2.0, 2.0), 5.0)  // 2-5 seconds
                     Task {
-                        try? await Task.sleep(nanoseconds: 2_000_000_000)
+                        try? await Task.sleep(nanoseconds: UInt64(resetDelay * 1_000_000_000))
                         await MainActor.run {
-                            mpvWrapper.setSpeed(1.0)
+                            // Only reset if we haven't made another adjustment
+                            if self.currentSpeedAdjustment == speedFactor {
+                                self.mpvWrapper.setSpeed(1.0)
+                                self.isCurrentlyAdjustingSpeed = false
+                                self.currentSpeedAdjustment = 1.0
+                            }
                         }
                     }
                 }
             } else {
                 // Large drift (>5s) - seek required
-                print("🔄 Large drift (\(String(format: "%.1f", absDrift))s) - seeking to sync")
-                seek(to: timestamp)
+                print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to sync")
+                seek(to: predictedHostPosition)
+                // Reset drift history after seek
+                driftHistory.removeAll()
+                isCurrentlyAdjustingSpeed = false
+                currentSpeedAdjustment = 1.0
             }
 
             // Sync play/pause state
@@ -1323,6 +1374,28 @@ extension MPVPlayerViewModel {
         }
 
         return false
+    }
+    
+    /// Update network latency estimate based on message timing
+    private func updateNetworkLatency() {
+        guard let lastTime = lastSyncMessageTime else {
+            lastSyncMessageTime = Date()
+            return
+        }
+        
+        let now = Date()
+        let messageInterval = now.timeIntervalSince(lastTime)
+        lastSyncMessageTime = now
+        
+        // Expected interval is 100ms (10 Hz broadcast)
+        // Any excess is likely network jitter
+        if messageInterval > 0.1 {
+            let measuredLatency = (messageInterval - 0.1) / 2.0  // Half of excess is one-way latency
+            // Smooth the latency estimate (exponential moving average)
+            networkLatency = networkLatency * 0.8 + measuredLatency * 0.2
+            // Clamp to reasonable bounds (10ms - 500ms)
+            networkLatency = max(0.01, min(networkLatency, 0.5))
+        }
     }
 
     /// Stop watch party sync

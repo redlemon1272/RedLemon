@@ -49,6 +49,10 @@ class MPVPlayerViewModel: ObservableObject {
     private var networkLatency: Double = 0.05  // Estimated one-way latency (50ms default)
     private var lastSyncMessageTime: Date?
     private var isCurrentlyAdjustingSpeed: Bool = false
+    
+    // Startup synchronization: Give guest time to spin up video pipeline
+    private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
+    private var pendingPlayTask: Task<Void, Never>?
 
     // Player state
     @Published var videoURL: String = ""
@@ -485,6 +489,55 @@ class MPVPlayerViewModel: ObservableObject {
 
 
     func togglePlayPause() {
+        // Special handling for watch party host: Add startup delay when transitioning to play
+        if isInWatchParty && isWatchPartyHost && !mpvWrapper.isPlaying {
+            // Cancel any pending play task
+            pendingPlayTask?.cancel()
+            
+            // Host is about to play - add brief delay for guest synchronization
+            print("🏁 Host initiating play with \(Int(hostStartupDelay * 1000))ms startup delay for guest sync")
+            
+            // Send play message FIRST (before actually playing)
+            let syncMessage = SyncMessage(
+                type: .play,
+                timestamp: Date().timeIntervalSince1970,
+                position: currentTime,
+                isPlaying: true,
+                senderId: currentUserId,
+                chatText: nil,
+                chatUsername: nil
+            )
+            
+            Task {
+                do {
+                    try await realtimeManager?.sendSyncMessage(syncMessage)
+                    NSLog("📡 Sent play message to guests (pre-delay)")
+                } catch {
+                    NSLog("⚠️ Failed to send play sync message: \(error)")
+                }
+            }
+            
+            // Mark local action to prevent echo
+            markLocalAction()
+            
+            // Then delay before actually starting playback
+            pendingPlayTask = Task { @MainActor in
+                try? await Task.sleep(nanoseconds: UInt64(hostStartupDelay * 1_000_000_000))
+                
+                // Check if task wasn't cancelled
+                guard !Task.isCancelled else {
+                    print("⏹️ Startup delay cancelled")
+                    return
+                }
+                
+                print("▶️ Host starting playback after startup delay")
+                mpvWrapper.togglePlayPause()
+            }
+            
+            return
+        }
+        
+        // Normal toggle for non-watch-party or pause operations
         mpvWrapper.togglePlayPause()
         let isNowPlaying = mpvWrapper.isPlaying
         print(isNowPlaying ? "▶️ Playing" : "⏸️ Paused")
@@ -492,7 +545,7 @@ class MPVPlayerViewModel: ObservableObject {
         // Mark that we initiated this action (ignore echo from remote)
         markLocalAction()
 
-        // Send explicit sync message if host in watch party
+        // Send explicit sync message if host in watch party (for pause or non-startup play)
         if isInWatchParty && isWatchPartyHost {
             let messageType: SyncMessageType = isNowPlaying ? .play : .pause
             let syncMessage = SyncMessage(

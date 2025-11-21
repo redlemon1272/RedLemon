@@ -363,163 +363,6 @@ class SupabaseClient {
         return rooms.first
     }
 
-    // MARK: - Friends System
-
-    /// Send friend request
-    func sendFriendRequest(fromUserId: UUID, toUsername: String) async throws {
-        // Get target user ID
-        let userData = try await makeRequest(
-            path: "/users",
-            query: ["username": "eq.\(toUsername)", "select": "*"]
-        )
-
-        let users = try jsonDecoder.decode([SupabaseUser].self, from: userData)
-        guard let toUser = users.first else {
-            throw SupabaseError.userNotFound
-        }
-
-        _ = try await makeRequest(
-            path: "/friend_requests",
-            method: "POST",
-            body: [
-                "from_user_id": fromUserId.uuidString,
-                "to_user_id": toUser.id.uuidString,
-                "status": "pending"
-            ]
-        )
-    }
-
-    /// Get friends list
-    func getFriends(userId: UUID) async throws -> [SupabaseUser] {
-        NSLog("📡 SupabaseClient: Fetching friendships for user \(userId)")
-
-        let data = try await makeRequest(
-            path: "/friendships",
-            query: [
-                "user_id": "eq.\(userId.uuidString)",
-                "select": "user_id,friend_id,created_at"
-            ]
-        )
-
-        NSLog("✅ SupabaseClient: Friendships response received (\(data.count) bytes)")
-
-        let friendships = try jsonDecoder.decode([SupabaseFriendship].self, from: data)
-        NSLog("✅ SupabaseClient: Decoded \(friendships.count) friendships")
-
-        let friendIds = friendships.map { $0.friendId.uuidString }
-        NSLog("   Friend IDs: \(friendIds)")
-
-        guard !friendIds.isEmpty else {
-            NSLog("   No friends found for user")
-            return []
-        }
-
-        NSLog("📡 SupabaseClient: Fetching user details for friends...")
-        let friendsData = try await makeRequest(
-            path: "/users",
-            query: [
-                "id": "in.(\(friendIds.joined(separator: ",")))",
-                "select": "*"
-            ]
-        )
-
-        NSLog("✅ SupabaseClient: Friends data received (\(friendsData.count) bytes)")
-
-        return try jsonDecoder.decode([SupabaseUser].self, from: friendsData)
-    }
-
-    /// Create friendship directly (bypasses friend request system)
-    /// Used for auto-friending lemontom (MySpace Tom style)
-    func createFriendship(userId1: UUID, userId2: UUID) async throws {
-        // Create friendship both ways (bidirectional)
-        _ = try await makeRequest(
-            path: "/friendships",
-            method: "POST",
-            body: [
-                "user_id": userId1.uuidString,
-                "friend_id": userId2.uuidString
-            ]
-        )
-
-        _ = try await makeRequest(
-            path: "/friendships",
-            method: "POST",
-            body: [
-                "user_id": userId2.uuidString,
-                "friend_id": userId1.uuidString
-            ]
-        )
-    }
-
-    /// Get incoming friend requests for a user
-    func getFriendRequests(userId: UUID) async throws -> [SupabaseFriendRequest] {
-        NSLog("📡 SupabaseClient: Fetching friend requests for user ID: \(userId)")
-
-        let query = [
-            "to_user_id": "eq.\(userId.uuidString)",
-            "status": "eq.pending",
-            "select": "*,from_user:from_user_id(id,username)"
-        ]
-
-        NSLog("   Query parameters: \(query)")
-
-        let data = try await makeRequest(
-            path: "/friend_requests",
-            query: query
-        )
-
-        NSLog("✅ SupabaseClient: Friend requests response received (\(data.count) bytes)")
-
-        do {
-            let requests = try jsonDecoder.decode([SupabaseFriendRequest].self, from: data)
-            NSLog("✅ SupabaseClient: Decoded \(requests.count) friend requests")
-
-            for request in requests {
-                NSLog("   📨 Request from: \(request.fromUserId) → \(request.toUserId)")
-                NSLog("      Status: \(request.status)")
-                NSLog("      Created: \(request.createdAt)")
-                if let fromUser = request.fromUser {
-                    NSLog("      From user: \(fromUser.username)")
-                } else {
-                    NSLog("      ⚠️ No from user data included")
-                }
-            }
-
-            return requests
-        } catch {
-            NSLog("❌ SupabaseClient: Failed to decode friend requests: \(error)")
-            if let responseString = String(data: data, encoding: .utf8) {
-                NSLog("   Raw response: \(responseString)")
-            }
-            throw error
-        }
-    }
-
-    /// Accept friend request
-    func acceptFriendRequest(requestId: UUID, userId: UUID, friendId: UUID) async throws {
-        // Update request status
-        _ = try await makeRequest(
-            path: "/friend_requests",
-            method: "PATCH",
-            body: ["status": "accepted"],
-            query: ["id": "eq.\(requestId.uuidString)"]
-        )
-
-        // Create bidirectional friendship
-        try await createFriendship(userId1: userId, userId2: friendId)
-    }
-
-    /// Decline friend request
-    func declineFriendRequest(requestId: UUID) async throws {
-        _ = try await makeRequest(
-            path: "/friend_requests",
-            method: "PATCH",
-            body: ["status": "rejected"],
-            query: ["id": "eq.\(requestId.uuidString)"]
-        )
-    }
-
-
     // MARK: - Chat
 
     /// Send chat message
@@ -722,6 +565,7 @@ enum SupabaseError: Error {
     case invalidURL
     case invalidResponse
     case httpError(Int, String)
+    case serverError(String)
 }
 // MARK: - Social Features Models
 
@@ -767,8 +611,7 @@ extension SupabaseClient {
     func getFriends(userId: UUID) async throws -> [SupabaseUser] {
         // 1. Get all accepted friendships involving this user
         let path = "/friendships?or=(user_id_1.eq.\(userId),user_id_2.eq.\(userId))&status=eq.accepted&select=*"
-        let request = try makeRequest(path: path, method: "GET")
-        let (data, _) = try await session.data(for: request)
+        let data = try await makeRequest(path: path, method: "GET")
         let friendships = try jsonDecoder.decode([Friendship].self, from: data)
         
         // 2. Extract friend IDs
@@ -782,9 +625,9 @@ extension SupabaseClient {
         
         // 3. Fetch profiles for these IDs from 'users' table
         let idsString = friendIds.map { $0.uuidString }.joined(separator: ",")
+
         let usersPath = "/users?id=in.(\(idsString))"
-        let usersRequest = try makeRequest(path: usersPath, method: "GET")
-        let (usersData, _) = try await session.data(for: usersRequest)
+        let usersData = try await makeRequest(path: usersPath, method: "GET")
         
         return try jsonDecoder.decode([SupabaseUser].self, from: usersData)
     }
@@ -793,8 +636,7 @@ extension SupabaseClient {
     func getFriendRequests(userId: UUID) async throws -> [Friendship] {
         // Fetch pending requests where user is receiver (user_id_2)
         let path = "/friendships?user_id_2=eq.\(userId)&status=eq.pending"
-        let request = try makeRequest(path: path, method: "GET")
-        let (data, _) = try await session.data(for: request)
+        let data = try await makeRequest(path: path, method: "GET")
         var friendships = try jsonDecoder.decode([Friendship].self, from: data)
         
         // Fetch profiles for senders from 'users' table
@@ -802,8 +644,7 @@ extension SupabaseClient {
         if !senderIds.isEmpty {
             let idsString = senderIds.map { $0.uuidString }.joined(separator: ",")
             let usersPath = "/users?id=in.(\(idsString))"
-            let usersRequest = try makeRequest(path: usersPath, method: "GET")
-            let (usersData, _) = try await session.data(for: usersRequest)
+            let usersData = try await makeRequest(path: usersPath, method: "GET")
             let profiles = try? jsonDecoder.decode([SupabaseUser].self, from: usersData)
             
             // Reconstruct friendships with profiles
@@ -846,13 +687,9 @@ extension SupabaseClient {
     func declineFriendRequest(requestId: UUID) async throws {
         // Delete the row
         let path = "/friendships?id=eq.\(requestId)"
-        let request = try makeRequest(path: path, method: "DELETE")
-        let (_, response) = try await session.data(for: request)
+        _ = try await makeRequest(path: path, method: "DELETE")
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw SupabaseError.serverError("Failed to decline request")
-        }
+
     }
     
     // Removed duplicate searchUsers (already exists in SupabaseClient)
@@ -867,38 +704,50 @@ extension SupabaseClient {
             "status": "pending"
         ]
         
-        let request = try makeRequest(path: path, method: "POST", body: body)
-        let (_, response) = try await session.data(for: request)
+        _ = try await makeRequest(path: path, method: "POST", body: body)
         
-        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 409 {
-             throw SupabaseError.httpError(409, "Request already exists")
-        }
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw SupabaseError.serverError("Failed to send friend request")
-        }
+
     }
     
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {
         let path = "/friendships?id=eq.\(id)"
         let body = ["status": status.rawValue]
-        let request = try makeRequest(path: path, method: "PATCH", body: body)
-        let (_, response) = try await session.data(for: request)
+        _ = try await makeRequest(path: path, method: "PATCH", body: body)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw SupabaseError.serverError("Failed to update friendship")
-        }
+
     }
     
     // MARK: - Direct Messages
     
+    /// Create friendship directly (bypasses friend request system)
+    /// Used for auto-friending lemontom (MySpace Tom style)
+    func createFriendship(userId1: UUID, userId2: UUID) async throws {
+        // Create friendship both ways (bidirectional)
+        _ = try await makeRequest(
+            path: "/friendships",
+            method: "POST",
+            body: [
+                "user_id_1": userId1.uuidString,
+                "user_id_2": userId2.uuidString,
+                "status": "accepted"
+            ]
+        )
+
+        _ = try await makeRequest(
+            path: "/friendships",
+            method: "POST",
+            body: [
+                "user_id_1": userId2.uuidString,
+                "user_id_2": userId1.uuidString,
+                "status": "accepted"
+            ]
+        )
+    }
+    
     func getDirectMessages(userId: UUID, with friendId: UUID) async throws -> [DirectMessage] {
         let query = "or=(and(sender_id.eq.\(userId),receiver_id.eq.\(friendId)),and(sender_id.eq.\(friendId),receiver_id.eq.\(userId)))&order=created_at.asc"
         let path = "/direct_messages?\(query)"
-        let request = try makeRequest(path: path, method: "GET")
-        let (data, _) = try await session.data(for: request)
+        let data = try await makeRequest(path: path, method: "GET")
         return try jsonDecoder.decode([DirectMessage].self, from: data)
     }
     
@@ -910,12 +759,8 @@ extension SupabaseClient {
             "content": content
         ]
         
-        let request = try makeRequest(path: path, method: "POST", body: body)
-        let (_, response) = try await session.data(for: request)
+        _ = try await makeRequest(path: path, method: "POST", body: body)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw SupabaseError.serverError("Failed to send message")
-        }
+
     }
 }

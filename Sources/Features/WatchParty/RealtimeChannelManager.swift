@@ -232,7 +232,7 @@ actor RealtimeChannelManager {
 
     // MARK: - Cleanup
 
-    func cleanup() async {
+    func cleanup(disconnectClient: Bool = true) async {
         print("🧹 Cleaning up Realtime channel for room: \(roomId ?? "unknown")")
 
         do {
@@ -244,9 +244,13 @@ actor RealtimeChannelManager {
             try await realtimeClient.leaveChannel()
             print("✅ Channel left")
 
-            print("🔄 Disconnecting WebSocket...")
-            await realtimeClient.disconnect()
-            print("✅ WebSocket disconnected")
+            if disconnectClient {
+                print("🔄 Disconnecting WebSocket...")
+                await realtimeClient.disconnect()
+                print("✅ WebSocket disconnected")
+            } else {
+                print("ℹ️ Keeping WebSocket connected (disconnectClient=false)")
+            }
         } catch {
             print("⚠️ Error during cleanup: \(error)")
         }
@@ -262,8 +266,8 @@ actor RealtimeChannelManager {
     }
 
     /// Disconnect from the realtime channel
-    func disconnect() async {
-        await cleanup()
+    func disconnect(disconnectClient: Bool = true) async {
+        await cleanup(disconnectClient: disconnectClient)
     }
 
     /// Check if realtime is connected

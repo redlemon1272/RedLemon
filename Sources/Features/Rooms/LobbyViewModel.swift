@@ -239,7 +239,9 @@ class LobbyViewModel: ObservableObject {
             }
 
             // Disconnect Realtime channel
-            await realtimeManager?.disconnect()
+            // If we are starting the movie, keep the socket open for the player
+            let shouldDisconnectClient = !isStarting
+            await realtimeManager?.disconnect(disconnectClient: shouldDisconnectClient)
         }
         countdownTimer?.invalidate()
 

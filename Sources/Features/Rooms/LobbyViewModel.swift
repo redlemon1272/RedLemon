@@ -498,10 +498,21 @@ class LobbyViewModel: ObservableObject {
             }
         }
 
-        // Countdown
+        // Countdown with drift correction
+        let startTime = Date()
         for i in (1...3).reversed() {
             countdown = i
-            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+            
+            // Calculate how much time has passed since we started
+            let elapsed = Date().timeIntervalSince(startTime)
+            // Calculate how much time we should have waited by now (3 - i + 1 seconds)
+            let targetDelay = Double(3 - i + 1)
+            
+            // Sleep for the remaining time to hit the target
+            let sleepDuration = max(0, targetDelay - elapsed)
+            if sleepDuration > 0 {
+                try? await Task.sleep(nanoseconds: UInt64(sleepDuration * 1_000_000_000))
+            }
         }
 
         // Start playback for everyone (only if media is selected)
@@ -655,6 +666,7 @@ class LobbyViewModel: ObservableObject {
                         
                         // CRITICAL: Fetch fresh room state BEFORE countdown
                         // This ensures we have correct season/episode AND don't delay playback start
+                        let fetchStartTime = Date()
                         guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
                             NSLog("⚠️ Guest: Failed to fetch room state, using local state")
                             // Fallback to local state
@@ -709,8 +721,15 @@ class LobbyViewModel: ObservableObject {
                         }
                         
                         // NOW wait for countdown (DB fetch already done, so timing is accurate)
-                        NSLog("🎬 Guest: Waiting for countdown...")
-                        try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
+                        // Compensate for fetch time to ensure we start exactly 3s after signal
+                        let fetchDuration = Date().timeIntervalSince(fetchStartTime)
+                        let remainingWait = max(0, 3.0 - fetchDuration)
+                        
+                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s")
+                        
+                        if remainingWait > 0 {
+                            try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))
+                        }
 
                         NSLog("🎬 Guest: Starting playback after countdown")
 

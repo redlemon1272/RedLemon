@@ -668,6 +668,16 @@ class LobbyViewModel: ObservableObject {
                         }
 
                         NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
+                        
+                        // CRITICAL: Set season/episode from room BEFORE playMedia()
+                        // This ensures the guest resolves the correct episode for subtitles and metadata
+                        if let season = room.season, let episode = room.episode {
+                            await MainActor.run {
+                                appState.selectedSeason = season
+                                appState.selectedEpisode = episode
+                            }
+                            NSLog("📺 Guest: Set season/episode from room: S\(season)E\(episode)")
+                        }
 
                         await appState.playMedia(
                             mediaItem,
@@ -676,6 +686,7 @@ class LobbyViewModel: ObservableObject {
                             roomId: room.id,
                             isHost: false
                         )
+
                     }
                 }
             } else {
@@ -889,6 +900,16 @@ class LobbyViewModel: ObservableObject {
                     }
 
                     NSLog("🎬 Guest: Launching player for \(mediaItem.name) via database fallback")
+                    
+                    // CRITICAL: Set season/episode from room BEFORE playMedia()
+                    // This ensures the guest resolves the correct episode for subtitles and metadata
+                    if let season = room.season, let episode = room.episode {
+                        await MainActor.run {
+                            appState.selectedSeason = season
+                            appState.selectedEpisode = episode
+                        }
+                        NSLog("📺 Guest: Set season/episode from room: S\(season)E\(episode)")
+                    }
 
                     await appState.playMedia(
                         mediaItem,

@@ -865,6 +865,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Start countdown and playback
                 isStarting = true
+                transitionState.isStarting = true
                 countdown = 3
 
                 Task { @MainActor in

@@ -74,6 +74,10 @@ class LobbyViewModel: ObservableObject {
 
     deinit {
         // Ensure all timers and realtime resources are released when the view model goes away
+        // Capture values needed for cleanup
+        let manager = realtimeManager
+        let starting = isStarting
+        
         Task { [weak self] in
             guard let self else { return }
             await MainActor.run {
@@ -81,7 +85,11 @@ class LobbyViewModel: ObservableObject {
                 stopPolling()
                 watchPartyManager?.delegate = nil
             }
-            await self.realtimeManager?.disconnect()
+            
+            // Only disconnect if we're NOT starting the movie
+            // If starting, we keep the connection alive for the player
+            let shouldDisconnect = !starting
+            await manager?.disconnect(leaveChannel: shouldDisconnect, disconnectClient: shouldDisconnect)
         }
         countdownTimer = nil
     }

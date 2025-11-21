@@ -722,11 +722,11 @@ class LobbyViewModel: ObservableObject {
                         
                         // NOW wait for countdown (DB fetch already done, so timing is accurate)
                         // Compensate for fetch time to ensure we start exactly 3s after signal
-                        // PLUS add 0.5s buffer to match Host's UI/processing overhead
+                        // PLUS add 0.25s buffer to match Host's UI/processing overhead
                         let fetchDuration = Date().timeIntervalSince(fetchStartTime)
-                        let remainingWait = max(0, 3.5 - fetchDuration)
+                        let remainingWait = max(0, 3.25 - fetchDuration)
                         
-                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.5s sync buffer)")
+                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.25s sync buffer)")
                         
                         if remainingWait > 0 {
                             try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))

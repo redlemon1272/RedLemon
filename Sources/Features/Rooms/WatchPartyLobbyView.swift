@@ -337,8 +337,13 @@ struct WatchPartyLobbyView: View {
                             HStack {
                                 ProgressView()
                                     .scaleEffect(0.8)
-                                Text("Starting in \(viewModel.countdown)...")
-                                    .foregroundColor(.white)
+                                if viewModel.startingStatusMessage == "Starting in" {
+                                    Text("Starting in \(viewModel.countdown)...")
+                                        .foregroundColor(.white)
+                                } else {
+                                    Text(viewModel.startingStatusMessage)
+                                        .foregroundColor(.white)
+                                }
                             }
                             .padding()
                         }

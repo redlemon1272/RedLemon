@@ -11,6 +11,7 @@ class LobbyViewModel: ObservableObject {
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
     @Published var countdown: Int = 3
+    @Published var startingStatusMessage: String = ""
     @Published var didCopyRoomID: Bool = false
     @Published var posterURL: String?
     @Published var backdropURL: String?
@@ -435,6 +436,7 @@ class LobbyViewModel: ObservableObject {
         isStarting = true
         transitionState.isStarting = true
         waitingForReady = true
+        startingStatusMessage = "Waiting for guests to load..."
         addMessage(.hostStarting, userName: "Host")
         
         // Initialize ready status for all guests (host is always ready)
@@ -515,6 +517,7 @@ class LobbyViewModel: ObservableObject {
         
         // Countdown before starting (both host and guest will see this)
         NSLog("🎬 Host: All guests ready, starting countdown...")
+        startingStatusMessage = "Starting in"
         countdown = 3
         
         for i in (1...3).reversed() {

@@ -234,7 +234,7 @@ actor CacheManager {
         imageCache.removeAll(keepingCapacity: false)
 
         // Clear expired items from other caches
-        await clearExpired()
+        clearExpired()
 
         // Log cleanup results
         let stats = getCacheStats()

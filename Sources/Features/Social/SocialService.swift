@@ -18,8 +18,8 @@ class SocialService: ObservableObject {
     
     // MARK: - Internal
     private let client = SupabaseClient.shared
-    private var presenceChannel: RealtimeChannel?
-    private var dmChannel: RealtimeChannel?
+    private var presenceClient: SupabaseRealtimeClient?
+    private var dmClient: SupabaseRealtimeClient?
     private var currentUserId: String?
     private var currentUsername: String?
     
@@ -42,13 +42,13 @@ class SocialService: ObservableObject {
     }
     
     func disconnect() async {
-        if let channel = presenceChannel {
-            await channel.unsubscribe()
-            presenceChannel = nil
+        if let client = presenceClient {
+            await client.disconnect()
+            presenceClient = nil
         }
-        if let channel = dmChannel {
-            await channel.unsubscribe()
-            dmChannel = nil
+        if let client = dmClient {
+            await client.disconnect()
+            dmClient = nil
         }
         isConnected = false
         onlineUserIds.removeAll()
@@ -60,35 +60,30 @@ class SocialService: ObservableObject {
     private func setupPresenceChannel(userId: String, username: String) async {
         print("🔌 SocialService: Connecting to global presence...")
         
-        // Use a global channel name
-        let channel = client.realtimeClient.channel("global-presence")
-        self.presenceChannel = channel
+        // Create a dedicated client for presence
+        let client = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        self.presenceClient = client
         
-        // Subscribe to presence sync
-        channel.onPresenceSync { [weak self] in
+        // Subscribe to presence events
+        await client.onPresence { [weak self] action, userId, metadata in
             Task { @MainActor [weak self] in
-                self?.handlePresenceSync()
-            }
-        }
-        
-        channel.onPresenceJoin { [weak self] key, presences in
-            Task { @MainActor [weak self] in
-                self?.handlePresenceJoin(key: key, presences: presences)
-            }
-        }
-        
-        channel.onPresenceLeave { [weak self] key, presences in
-            Task { @MainActor [weak self] in
-                self?.handlePresenceLeave(key: key, presences: presences)
+                if action == .join {
+                    self?.handlePresenceJoin(userId: userId, metadata: metadata)
+                } else {
+                    self?.handlePresenceLeave(userId: userId)
+                }
             }
         }
         
         do {
-            try await channel.subscribe()
+            try await client.connect()
+            try await client.joinChannel("global-presence")
             
             // Track my initial status
-            try await channel.track(state: [
-                "user_id": userId,
+            try await client.track(userId: userId, metadata: [
                 "username": username,
                 "status": "online",
                 "last_seen": ISO8601DateFormatter().string(from: Date())
@@ -103,25 +98,24 @@ class SocialService: ObservableObject {
     }
     
     func updateWatchingStatus(mediaTitle: String?, mediaType: String?, imdbId: String?, roomId: String?) async {
-        guard let channel = presenceChannel, let userId = currentUserId, let username = currentUsername else { return }
+        guard let client = presenceClient, let userId = currentUserId, let username = currentUsername else { return }
         
-        var state: [String: Any] = [
-            "user_id": userId,
+        var metadata: [String: Any] = [
             "username": username,
             "status": "online",
             "last_seen": ISO8601DateFormatter().string(from: Date())
         ]
         
         if let title = mediaTitle {
-            state["watching_title"] = title
-            state["watching_type"] = mediaType
-            state["watching_id"] = imdbId
-            state["room_id"] = roomId
-            state["started_at"] = ISO8601DateFormatter().string(from: Date())
+            metadata["watching_title"] = title
+            metadata["watching_type"] = mediaType
+            metadata["watching_id"] = imdbId
+            metadata["room_id"] = roomId
+            metadata["started_at"] = ISO8601DateFormatter().string(from: Date())
         }
         
         do {
-            try await channel.track(state: state)
+            try await client.track(userId: userId, metadata: metadata)
             print("📡 SocialService: Updated status - Watching: \(mediaTitle ?? "Nothing")")
         } catch {
             print("❌ SocialService: Failed to update status: \(error)")
@@ -130,69 +124,40 @@ class SocialService: ObservableObject {
     
     // MARK: - Presence Handlers
     
-    private func handlePresenceSync() {
-        guard let channel = presenceChannel else { return }
+    private func handlePresenceJoin(userId: String, metadata: [String: Any]?) {
+        // Ignore myself
+        if userId == currentUserId { return }
         
-        let state = channel.presenceState()
-        // state is [String: [Presence]] where String is the presence key (usually UUID)
+        onlineUserIds.insert(userId)
         
-        var newOnlineIds = Set<String>()
-        var newActivity = [String: FriendActivity]()
-        
-        for (_, presences) in state {
-            // Get the most recent presence for this user
-            if let presence = presences.last,
-               let userId = presence.state["user_id"] as? String,
-               let username = presence.state["username"] as? String {
-                
-                // Ignore myself
-                if userId == currentUserId { continue }
-                
-                newOnlineIds.insert(userId)
-                
-                // Parse watching info
-                var watchingInfo: FriendActivity.WatchingInfo?
-                if let title = presence.state["watching_title"] as? String,
-                   let type = presence.state["watching_type"] as? String,
-                   let id = presence.state["watching_id"] as? String {
-                    
-                    let roomId = presence.state["room_id"] as? String
-                    let startedAtStr = presence.state["started_at"] as? String
-                    let startedAt = ISO8601DateFormatter().date(from: startedAtStr ?? "") ?? Date()
-                    
-                    watchingInfo = FriendActivity.WatchingInfo(
-                        mediaTitle: title,
-                        mediaType: type,
-                        imdbId: id,
-                        startedAt: startedAt,
-                        roomId: roomId
-                    )
-                }
-                
-                let activity = FriendActivity(
-                    id: userId,
-                    username: username,
-                    currentlyWatching: watchingInfo,
-                    lastSeen: Date() // Approximate
+        // Parse activity from metadata
+        if let meta = metadata {
+            var watchingInfo: FriendActivity.WatchingInfo?
+            
+            if let title = meta["watching_title"] as? String {
+                watchingInfo = FriendActivity.WatchingInfo(
+                    mediaTitle: title,
+                    mediaType: meta["watching_type"] as? String ?? "movie",
+                    imdbId: meta["watching_id"] as? String ?? "",
+                    startedAt: Date(), // Simplified
+                    roomId: meta["room_id"] as? String
                 )
-                
-                newActivity[userId] = activity
             }
+            
+            let activity = FriendActivity(
+                id: userId,
+                username: meta["username"] as? String ?? "Unknown",
+                currentlyWatching: watchingInfo,
+                lastSeen: Date()
+            )
+            
+            friendActivity[userId] = activity
         }
-        
-        self.onlineUserIds = newOnlineIds
-        self.friendActivity = newActivity
-        
-        print("👥 SocialService: Sync - \(newOnlineIds.count) users online")
     }
     
-    private func handlePresenceJoin(key: String, presences: [Presence]) {
-        // Incremental update could be done here, but sync usually covers it
-        print("👤 SocialService: User joined - \(key)")
-    }
-    
-    private func handlePresenceLeave(key: String, presences: [Presence]) {
-        print("👤 SocialService: User left - \(key)")
+    private func handlePresenceLeave(userId: String) {
+        onlineUserIds.remove(userId)
+        friendActivity.removeValue(forKey: userId)
     }
     
     // MARK: - Data Loading (Friends)
@@ -216,14 +181,14 @@ class SocialService: ObservableObject {
             
             // 2. Get Requests
             let supabaseRequests = try await client.getFriendRequests(userId: userId)
-            self.friendRequests = supabaseRequests.compactMap { request in
-                guard let fromUser = request.fromUser else { return nil }
+            self.friendRequests = supabaseRequests.compactMap { req -> FriendRequest? in
+                guard let fromUser = req.fromUser else { return nil }
                 return FriendRequest(
-                    id: request.id.uuidString,
-                    fromPrincipal: fromUser.id.uuidString,
+                    id: req.id.uuidString,
+                    fromPrincipal: req.userId1.uuidString,
                     fromUsername: fromUser.username,
                     toPrincipal: userIdStr,
-                    requestDate: request.createdAt,
+                    requestDate: req.createdAt,
                     status: .pending
                 )
             }
@@ -236,7 +201,7 @@ class SocialService: ObservableObject {
     
     // MARK: - Actions
     
-    func sendFriendRequest(to username: String) async -> String? {
+    func sendRequest(username: String) async -> String? {
         guard let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr) else { return "Not logged in" }
         
         do {
@@ -299,49 +264,88 @@ class SocialService: ObservableObject {
     private func setupDMChannel(userId: String) async {
         print("🔌 SocialService: Connecting to DM channel...")
         
-        // Listen to changes in direct_messages table where receiver_id or sender_id is me
-        // Note: Supabase Realtime RLS should handle the filtering, but we can also filter client-side if needed
-        let channel = client.realtimeClient.channel("direct-messages")
-        self.dmChannel = channel
+        let client = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        self.dmClient = client
         
-        channel.onPostgresChange(AnyAction.self, schema: "public", table: "direct_messages", filter: "receiver_id=eq.\(userId)") { [weak self] change in
+        // Subscribe to Postgres Changes on direct_messages table
+        await client.onPostgresChange { [weak self] payload in
             Task { @MainActor [weak self] in
-                self?.handleIncomingMessage(change)
+                self?.handleIncomingMessage(payload)
             }
         }
         
-        // Also listen for my own sent messages to update UI immediately (if not optimistic)
-        channel.onPostgresChange(AnyAction.self, schema: "public", table: "direct_messages", filter: "sender_id=eq.\(userId)") { [weak self] change in
-             Task { @MainActor [weak self] in
-                 self?.handleIncomingMessage(change)
-             }
-         }
-        
         do {
-            try await channel.subscribe()
+            try await client.connect()
+            
+            // Listen for INSERTs on direct_messages where I am the receiver OR sender
+            // Note: Supabase Realtime filters are limited. We'll listen to all inserts and filter locally if needed,
+            // or try to use a filter string if the custom client supports it (it passes it to config).
+            // The custom client passes 'postgres_changes' config array.
+            
+            let changesConfig: [[String: Any]] = [
+                [
+                    "event": "INSERT",
+                    "schema": "public",
+                    "table": "direct_messages",
+                    "filter": "receiver_id=eq.\(userId)"
+                ],
+                [
+                    "event": "INSERT",
+                    "schema": "public",
+                    "table": "direct_messages",
+                    "filter": "sender_id=eq.\(userId)"
+                ]
+            ]
+            
+            try await client.joinChannel("direct_messages", postgresChanges: changesConfig)
             print("✅ SocialService: Connected to DM channel")
         } catch {
             print("❌ SocialService: Failed to subscribe to DMs: \(error)")
         }
     }
     
-    private func handleIncomingMessage(_ change: AnyAction) {
-        // Decode the new record
-        // Note: Supabase Realtime returns a dictionary, we need to decode it manually or use a helper
-        // For simplicity, we'll trigger a reload for the specific conversation if we can identify it
-        // Or just reload all messages for now (less efficient but safer)
+    private func handleIncomingMessage(_ payload: [String: Any]) {
+        // Payload structure: { "new": { ... }, "eventType": "INSERT", ... }
+        guard let newRecord = payload["new"] as? [String: Any],
+              let idStr = newRecord["id"] as? String,
+              let id = UUID(uuidString: idStr),
+              let senderIdStr = newRecord["sender_id"] as? String,
+              let senderId = UUID(uuidString: senderIdStr),
+              let receiverIdStr = newRecord["receiver_id"] as? String,
+              let receiverId = UUID(uuidString: receiverIdStr),
+              let content = newRecord["content"] as? String,
+              let createdAtStr = newRecord["created_at"] as? String else {
+            return
+        }
         
-        // Ideally we parse the record to find the other user ID
-        // let record = change.record
-        // let senderId = record["sender_id"]
-        // let receiverId = record["receiver_id"]
+        // Parse date
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let createdAt = formatter.date(from: createdAtStr) ?? Date()
         
-        // For now, let's just log it. A full implementation would decode and append.
-        print("📩 SocialService: New message received")
+        let message = DirectMessage(
+            id: id,
+            senderId: senderId,
+            receiverId: receiverId,
+            content: content,
+            isRead: newRecord["is_read"] as? Bool ?? false,
+            createdAt: createdAt
+        )
         
-        // TODO: Optimize this to only append the new message
-        // For now, we can't easily know WHICH friend to reload without parsing the payload
-        // We will rely on the UI calling loadMessages or implement full parsing later
+        // Determine which friend conversation this belongs to
+        let friendId = (senderIdStr == currentUserId) ? receiverIdStr : senderIdStr
+        
+        var currentMsgs = self.messages[friendId] ?? []
+        
+        // Check for duplicates (optimistic updates might cause this)
+        if !currentMsgs.contains(where: { $0.id == id }) {
+            currentMsgs.append(message)
+            self.messages[friendId] = currentMsgs
+            print("📨 SocialService: New message from/to \(friendId)")
+        }
     }
     
     func loadMessages(friendId: String) async {
@@ -349,7 +353,7 @@ class SocialService: ObservableObject {
               let friendUUID = UUID(uuidString: friendId) else { return }
         
         do {
-            let msgs = try await client.getDirectMessages(userId: userId, friendId: friendUUID)
+            let msgs = try await client.getDirectMessages(userId: userId, with: friendUUID)
             self.messages[friendId] = msgs
         } catch {
             print("❌ Failed to load messages: \(error)")
@@ -376,9 +380,15 @@ class SocialService: ObservableObject {
         self.messages[friendId] = currentMsgs
         
         do {
-            try await client.sendDirectMessage(fromUserId: userId, toFriendId: friendUUID, content: content)
+            try await client.sendDirectMessage(from: userId, to: friendUUID, content: content)
             // Reload to get the real ID and timestamp
-            await loadMessages(friendId: friendId)
+            // We can wait for the realtime event to confirm it, or reload.
+            // Reloading ensures we have the correct ID.
+            // But realtime event might arrive first.
+            // Let's just let realtime handle the confirmation.
+            // Actually, we should replace the optimistic message with the real one when it arrives.
+            // For now, reloading is safer to sync state.
+            // await loadMessages(friendId: friendId) 
         } catch {
             print("❌ Failed to send message: \(error)")
             // Revert optimistic update

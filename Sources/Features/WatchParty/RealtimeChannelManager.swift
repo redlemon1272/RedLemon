@@ -109,9 +109,9 @@ actor RealtimeChannelManager {
         }
 
         // Handle presence changes
-        await realtimeClient.onPresence { action, userId in
-            Task { [weak self] in
-                await self?.handlePresenceChange(action, userId: userId)
+        await realtimeClient.onPresence { action, userId, _ in
+            Task { @MainActor in
+                await self.handlePresenceUpdate(action: action, userId: userId)
             }
         }
 
@@ -121,6 +121,10 @@ actor RealtimeChannelManager {
                 await self?.handleConnectionChange(connected)
             }
         }
+    }
+
+    private func handlePresenceUpdate(action: PresenceAction, userId: String) {
+        presenceCallback?(action, userId)
     }
 
     private func handleBroadcastMessage(_ payload: [String: Any]) async {

@@ -14,7 +14,7 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Message Handling
     private var messageHandlers: [String: (String, [String: Any]) -> Void] = [:]
-    private var presenceHandlers: [(PresenceAction, String) -> Void] = []
+    private var presenceHandlers: [(PresenceAction, String, [String: Any]?) -> Void] = []
     private var connectionHandlers: [(Bool) -> Void] = []
 
     // MARK: - Channel State
@@ -120,7 +120,7 @@ actor SupabaseRealtimeClient {
 
     // MARK: - Channel Management
 
-    func joinChannel(_ channelName: String) async throws {
+    func joinChannel(_ channelName: String, postgresChanges: [[String: Any]]? = nil) async throws {
         guard isConnected else {
             throw RealtimeError.notConnected
         }
@@ -132,14 +132,20 @@ actor SupabaseRealtimeClient {
         let topic = channelName.hasPrefix("realtime:") ? channelName : "realtime:\(channelName)"
         self.realtimeTopic = topic
 
+        var config: [String: Any] = [
+            "broadcast": ["self": true],
+            "presence": ["key": ""]
+        ]
+        
+        if let changes = postgresChanges {
+            config["postgres_changes"] = changes
+        }
+
         let message: [String: Any] = [
             "topic": topic,
             "event": "phx_join",
             "payload": [
-                "config": [
-                    "broadcast": ["self": true],
-                    "presence": ["key": ""]
-                ]
+                "config": config
             ],
             "ref": joinRef!
         ]
@@ -237,7 +243,7 @@ actor SupabaseRealtimeClient {
         messageHandlers[event] = handler
     }
 
-    func onPresence(handler: @escaping (PresenceAction, String) -> Void) {
+    func onPresence(handler: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         presenceHandlers.append(handler)
     }
 
@@ -327,9 +333,24 @@ actor SupabaseRealtimeClient {
             // Heartbeat response
             break
 
+        case "postgres_changes":
+            if let payload = json["payload"] as? [String: Any],
+               let _ = payload["data"] as? [String: Any] {
+                // Notify postgres handlers
+                for handler in postgresHandlers {
+                    handler(payload)
+                }
+            }
+
         default:
             print("📨 Unknown event: \(event)")
         }
+    }
+
+    private var postgresHandlers: [([String: Any]) -> Void] = []
+
+    func onPostgresChange(handler: @escaping ([String: Any]) -> Void) {
+        postgresHandlers.append(handler)
     }
 
     private func handlePresenceEvent(_ json: [String: Any]) {
@@ -339,26 +360,32 @@ actor SupabaseRealtimeClient {
         if event == "presence_diff" {
             // Handle joins
             if let joins = payload["joins"] as? [String: Any] {
-                for (userId, _) in joins {
+                for (userId, data) in joins {
+                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
+                    let metadata = metas?.first
                     for handler in presenceHandlers {
-                        handler(.join, userId)
+                        handler(.join, userId, metadata)
                     }
                 }
             }
 
             // Handle leaves
             if let leaves = payload["leaves"] as? [String: Any] {
-                for (userId, _) in leaves {
+                for (userId, data) in leaves {
+                    let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
+                    let metadata = metas?.first
                     for handler in presenceHandlers {
-                        handler(.leave, userId)
+                        handler(.leave, userId, metadata)
                     }
                 }
             }
         } else if event == "presence_state" {
             // Initial state - treat all as joins
-            for (userId, _) in payload {
+            for (userId, data) in payload {
+                let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
+                let metadata = metas?.first
                 for handler in presenceHandlers {
-                    handler(.join, userId)
+                    handler(.join, userId, metadata)
                 }
             }
         }

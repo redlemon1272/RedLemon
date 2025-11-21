@@ -903,12 +903,22 @@ class LobbyViewModel: ObservableObject {
                     
                     // CRITICAL: Set season/episode from room BEFORE playMedia()
                     // This ensures the guest resolves the correct episode for subtitles and metadata
-                    if let season = room.season, let episode = room.episode {
+                    // Use roomState (fresh from DB) instead of room (local state) to ensure we have latest data
+                    let season = roomState.season ?? room.season
+                    let episode = roomState.episode ?? room.episode
+                    
+                    if let season = season, let episode = episode {
                         await MainActor.run {
                             appState.selectedSeason = season
                             appState.selectedEpisode = episode
+                            
+                            // Also update local room state
+                            self.room.season = season
+                            self.room.episode = episode
                         }
-                        NSLog("📺 Guest: Set season/episode from room: S\(season)E\(episode)")
+                        NSLog("📺 Guest: Set season/episode from DB: S\(season)E\(episode)")
+                    } else {
+                        NSLog("⚠️ Guest: No season/episode found in DB or local state")
                     }
 
                     await appState.playMedia(

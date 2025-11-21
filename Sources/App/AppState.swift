@@ -461,6 +461,12 @@ class AppState: ObservableObject {
                 state: .lobby,
                 createdAt: room.createdAt
             )
+            
+            if let season = room.season, let episode = room.episode {
+                NSLog("✅ Guest: Initialized room with S\(season)E\(episode)")
+            } else {
+                NSLog("⚠️ Guest: Initialized room with missing season/episode (DB returned nil)")
+            }
 
             // Set state
             self.currentRoomId = roomId

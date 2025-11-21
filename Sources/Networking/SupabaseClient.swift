@@ -109,6 +109,13 @@ class SupabaseClient {
         }
 
         let (data, response) = try await session.data(for: request)
+        
+        // DEBUG: Print raw JSON for room requests to verify season/episode
+        if path.contains("/rooms") {
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("🔍 Supabase Response for \(path): \(jsonString)")
+            }
+        }
 
         guard let httpResponse = response as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse

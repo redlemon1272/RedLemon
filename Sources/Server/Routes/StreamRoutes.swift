@@ -328,6 +328,12 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
         let beforeAudioFilter = streamsWithSubtitles.count
         streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            // SPECIAL-CASE: Exempt known Breaking Bad pack from audio filtering
+            if isKnownBreakingBadPack(stream) {
+                print("   ✅ EXEMPTING Breaking Bad pack from audio filter: \(stream.title)")
+                return true
+            }
+            
             let hasAcceptableAudio = hasAcceptableAudioLanguage(stream.title)
             if !hasAcceptableAudio {
                 let audioDesc = getAudioLanguageDescription(stream.title)
@@ -1499,8 +1505,8 @@ private func detectAudioLanguage(_ title: String) -> (String, Bool, Bool, Int) {
     let spanishPatterns = ["spanish", "es", "esp", "español", "castellano"]
     let italianPatterns = ["italian", "it", "ita", "italiano"]
 
-    // Multi-audio indicators
-    let multiPatterns = ["multi", "multiaudio", "dual", "dual.audio", "multisub", "multi.sub"]
+    // Multi-audio indicators (NOTE: multisub/multi.sub removed - those are subtitle indicators, not audio)
+    let multiPatterns = ["multi", "multiaudio", "dual", "dual.audio"]
 
     var detectedLanguages: [String] = []
     var isMultiAudio = false

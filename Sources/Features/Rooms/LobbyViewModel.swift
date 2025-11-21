@@ -665,15 +665,11 @@ class LobbyViewModel: ObservableObject {
                                 }
                                 NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
                             }
-                            // Continue with countdown and playback
-                            try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
-                            
+                            // Continue with playback even if we couldn't fetch fresh state
                             guard let mediaItem = room.mediaItem, let appState = appState else {
                                 NSLog("❌ Guest: Cannot start playback - missing media or appState")
                                 return
                             }
-                            
-                            NSLog("🎬 Guest: Starting playback after countdown (fallback path)")
                             await appState.playMedia(
                                 mediaItem,
                                 quality: room.quality,
@@ -683,16 +679,26 @@ class LobbyViewModel: ObservableObject {
                             )
                             return
                         }
+
+                        // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
+                        // This fixes the "Mirror" vs "Breaking Bad" issue
+                        await self.updateMediaItemFromRoomState(roomState)
                         
+                        // Re-fetch mediaItem as it might have changed
+                        guard let currentMediaItem = self.room.mediaItem else {
+                             NSLog("❌ Guest: Media item missing after update check")
+                             return
+                        }
+
                         // Use fresh DB state (same logic as database fallback path)
                         let season = roomState.season ?? room.season
                         let episode = roomState.episode ?? room.episode
-                        
+
                         if let season = season, let episode = episode {
                             await MainActor.run {
                                 appState?.selectedSeason = season
                                 appState?.selectedEpisode = episode
-                                
+
                                 // Also update local room state
                                 self.room.season = season
                                 self.room.episode = episode
@@ -941,7 +947,16 @@ class LobbyViewModel: ObservableObject {
                         return
                     }
 
-                    NSLog("🎬 Guest: Launching player for \(mediaItem.name) via database fallback")
+                    // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
+                    await self.updateMediaItemFromRoomState(roomState)
+                    
+                    // Re-fetch mediaItem as it might have changed
+                    guard let currentMediaItem = self.room.mediaItem else {
+                         NSLog("❌ Guest: Media item missing after update check")
+                         return
+                    }
+
+                    NSLog("🎬 Guest: Launching player for \(currentMediaItem.name) via database fallback")
                     
                     // CRITICAL: Set season/episode from room BEFORE playMedia()
                     // This ensures the guest resolves the correct episode for subtitles and metadata
@@ -964,7 +979,7 @@ class LobbyViewModel: ObservableObject {
                     }
 
                     await appState.playMedia(
-                        mediaItem,
+                        currentMediaItem,
                         quality: room.quality,
                         watchMode: .watchParty,
                         roomId: room.id,
@@ -998,6 +1013,42 @@ class LobbyViewModel: ObservableObject {
 
         // Offer to restart signaling when guests join
         print("💡 Host: Realtime signaling is persistent, no restart needed")
+    }
+    
+    /// Check if media item needs update based on room state
+    private func updateMediaItemFromRoomState(_ roomState: SupabaseRoom) async {
+        // Check if IMDB ID matches
+        guard let newImdbId = roomState.imdbId else { return }
+        
+        // If we have no media item, or ID is different, we need to update
+        if room.mediaItem?.id != newImdbId {
+            NSLog("🔄 Guest: Detected media change via DB (Local: \(room.mediaItem?.id ?? "nil") -> Remote: \(newImdbId))")
+            
+            // Infer type from season/episode presence
+            // If season/episode are present, it's likely a series
+            let type = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+            
+            do {
+                // Fetch fresh metadata
+                let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: newImdbId, type: type)
+                
+                await MainActor.run {
+                    self.room.mediaItem = mediaItem
+                    // Also update poster/backdrop
+                    self.posterURL = mediaItem.posterURL?.absoluteString
+                    self.backdropURL = mediaItem.backgroundURL?.absoluteString
+                    self.logoURL = mediaItem.logoURL?.absoluteString
+                }
+                
+                NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(type))")
+                
+                // Trigger metadata load to ensure everything is fresh
+                loadMetadata()
+                
+            } catch {
+                NSLog("❌ Guest: Failed to fetch metadata for new media item: \(error)")
+            }
+        }
     }
 
     /// Handle timeout when guests are present but no answer received

@@ -31,6 +31,12 @@ class LobbyViewModel: ObservableObject {
     private var isDisconnecting: Bool = false
     weak var appState: AppState?  // Weak reference to avoid retain cycle
 
+    // Helper to track state safely across actor boundaries (specifically for deinit)
+    private class TransitionState {
+        var isStarting: Bool = false
+    }
+    private let transitionState = TransitionState()
+
     init(room: WatchPartyRoom, isHost: Bool) {
         self.room = room
         self.isHost = isHost
@@ -77,22 +83,19 @@ class LobbyViewModel: ObservableObject {
         // Ensure all timers and realtime resources are released when the view model goes away
         // Capture values needed for cleanup
         let manager = realtimeManager
-        let starting = isStarting
+        let starting = transitionState.isStarting
         
-        Task { [weak self] in
-            guard let self else { return }
-            await MainActor.run {
-                countdownTimer?.invalidate()
-                stopPolling()
-                watchPartyManager?.delegate = nil
-            }
-            
+        // Invalidate timers synchronously (safe if deinit is on main, best effort otherwise)
+        countdownTimer?.invalidate()
+        participantsPollingTimer?.invalidate()
+        roomStatePollingTimer?.invalidate()
+        
+        Task {
             // Only disconnect if we're NOT starting the movie
             // If starting, we keep the connection alive for the player
             let shouldDisconnect = !starting
             await manager?.disconnect(leaveChannel: shouldDisconnect, disconnectClient: shouldDisconnect)
         }
-        countdownTimer = nil
     }
 
     func connect() {
@@ -419,6 +422,7 @@ class LobbyViewModel: ObservableObject {
 
         NSLog("🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
+        transitionState.isStarting = true
         addMessage(.hostStarting, userName: "Host")
 
         var realtimeSuccess = false
@@ -634,6 +638,7 @@ class LobbyViewModel: ObservableObject {
                 if !isHost {
                     NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
                     isStarting = true
+                    transitionState.isStarting = true
                     countdown = Int(syncMessage.timestamp)
                     addMessage(.hostStarting, userName: "Host")
 

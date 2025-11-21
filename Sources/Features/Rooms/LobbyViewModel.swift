@@ -1020,17 +1020,27 @@ class LobbyViewModel: ObservableObject {
         // Check if IMDB ID matches
         guard let newImdbId = roomState.imdbId else { return }
         
-        // If we have no media item, or ID is different, we need to update
-        if room.mediaItem?.id != newImdbId {
-            NSLog("🔄 Guest: Detected media change via DB (Local: \(room.mediaItem?.id ?? "nil") -> Remote: \(newImdbId))")
-            
-            // Infer type from season/episode presence
-            // If season/episode are present, it's likely a series
-            let type = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+        // Infer expected type from season/episode presence
+        // If season/episode are present, it MUST be a series
+        let expectedType = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+        
+        // Check for mismatch in either ID OR Type
+        // This fixes the issue where ID is correct (e.g. Breaking Bad) but Type is wrong (Movie -> "Mirror")
+        let idMismatch = room.mediaItem?.id != newImdbId
+        let typeMismatch = room.mediaItem?.type != expectedType
+        
+        if idMismatch || typeMismatch {
+            NSLog("🔄 Guest: Detected media change via DB")
+            if idMismatch {
+                NSLog("   ID Mismatch: Local \(room.mediaItem?.id ?? "nil") -> Remote \(newImdbId)")
+            }
+            if typeMismatch {
+                NSLog("   Type Mismatch: Local \(room.mediaItem?.type ?? "nil") -> Expected \(expectedType)")
+            }
             
             do {
-                // Fetch fresh metadata
-                let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: newImdbId, type: type)
+                // Fetch fresh metadata with the CORRECT type
+                let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: newImdbId, type: expectedType)
                 
                 await MainActor.run {
                     self.room.mediaItem = mediaItem
@@ -1040,7 +1050,7 @@ class LobbyViewModel: ObservableObject {
                     self.logoURL = mediaItem.logo
                 }
                 
-                NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(type))")
+                NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(expectedType))")
                 
                 // Trigger metadata load to ensure everything is fresh
                 loadMetadata()

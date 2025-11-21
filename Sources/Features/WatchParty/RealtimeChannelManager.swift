@@ -77,8 +77,13 @@ actor RealtimeChannelManager {
         await notifyConnectionStateChange(.connecting)
         try await realtimeClient.connect()
 
-        // Join the channel
-        try await realtimeClient.joinChannel(channelName)
+        // Check if already joined
+        if await realtimeClient.isJoined(to: channelName) {
+            print("ℹ️ Already joined channel \(channelName), skipping join")
+        } else {
+            // Join the channel
+            try await realtimeClient.joinChannel(channelName)
+        }
 
         // Track presence
         try await realtimeClient.track(userId: userId, metadata: [

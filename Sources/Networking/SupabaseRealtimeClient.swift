@@ -164,6 +164,11 @@ actor SupabaseRealtimeClient {
         self.joinRef = nil
     }
 
+    func isJoined(to channel: String) -> Bool {
+        let topic = channel.hasPrefix("realtime:") ? channel : "realtime:\(channel)"
+        return isConnected && realtimeTopic == topic
+    }
+
     // MARK: - Broadcasting
 
     func broadcast(event: String, payload: [String: Any]) async throws {

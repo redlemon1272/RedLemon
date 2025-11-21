@@ -93,8 +93,9 @@ class LobbyViewModel: ObservableObject {
         Task {
             // Only disconnect if we're NOT starting the movie
             // If starting, we keep the connection alive for the player
-            let shouldDisconnect = !starting
-            await manager?.disconnect(leaveChannel: shouldDisconnect, disconnectClient: shouldDisconnect)
+            if !starting {
+                await manager?.disconnect()
+            }
         }
     }
 
@@ -237,6 +238,14 @@ class LobbyViewModel: ObservableObject {
         stopPolling()
 
         Task {
+            // If we are starting the movie, DO NOT leave the room or disconnect
+            // This ensures the player can take over the existing connection and DB presence
+            if isStarting {
+                print("🎬 Lobby: Starting movie - skipping disconnect to preserve connection and presence")
+                isDisconnecting = false
+                return
+            }
+
             // Leave Supabase room (use current user ID, not just host ID)
             if isHost {
                 do {
@@ -255,9 +264,7 @@ class LobbyViewModel: ObservableObject {
             }
 
             // Disconnect Realtime channel
-            // If we are starting the movie, keep the socket open for the player
-            let shouldDisconnectClient = !isStarting
-            await realtimeManager?.disconnect(leaveChannel: shouldDisconnectClient, disconnectClient: shouldDisconnectClient)
+            await realtimeManager?.disconnect()
             
             // Reset flag after completion (though we likely won't use this instance again)
             isDisconnecting = false

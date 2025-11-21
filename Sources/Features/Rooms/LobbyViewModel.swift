@@ -651,7 +651,59 @@ class LobbyViewModel: ObservableObject {
 
                     // Guest automatically starts playback after countdown
                     Task { @MainActor in
-                        // Wait for countdown (same duration as host)
+                        NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
+                        
+                        // CRITICAL: Fetch fresh room state BEFORE countdown
+                        // This ensures we have correct season/episode AND don't delay playback start
+                        guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
+                            NSLog("⚠️ Guest: Failed to fetch room state, using local state")
+                            // Fallback to local state
+                            if let season = room.season, let episode = room.episode {
+                                await MainActor.run {
+                                    appState?.selectedSeason = season
+                                    appState?.selectedEpisode = episode
+                                }
+                                NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
+                            }
+                            // Continue with countdown and playback
+                            try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
+                            
+                            guard let mediaItem = room.mediaItem, let appState = appState else {
+                                NSLog("❌ Guest: Cannot start playback - missing media or appState")
+                                return
+                            }
+                            
+                            NSLog("🎬 Guest: Starting playback after countdown (fallback path)")
+                            await appState.playMedia(
+                                mediaItem,
+                                quality: room.quality,
+                                watchMode: .watchParty,
+                                roomId: room.id,
+                                isHost: false
+                            )
+                            return
+                        }
+                        
+                        // Use fresh DB state (same logic as database fallback path)
+                        let season = roomState.season ?? room.season
+                        let episode = roomState.episode ?? room.episode
+                        
+                        if let season = season, let episode = episode {
+                            await MainActor.run {
+                                appState?.selectedSeason = season
+                                appState?.selectedEpisode = episode
+                                
+                                // Also update local room state
+                                self.room.season = season
+                                self.room.episode = episode
+                            }
+                            NSLog("📺 Guest: Set season/episode from DB (Realtime path): S\(season)E\(episode)")
+                        } else {
+                            NSLog("⚠️ Guest: No season/episode found in DB or local state")
+                        }
+                        
+                        // NOW wait for countdown (DB fetch already done, so timing is accurate)
+                        NSLog("🎬 Guest: Waiting for countdown...")
                         try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
 
                         NSLog("🎬 Guest: Starting playback after countdown")
@@ -669,47 +721,6 @@ class LobbyViewModel: ObservableObject {
 
                         NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
                         
-                        // CRITICAL: Set season/episode from room BEFORE playMedia()
-                        // Fetch fresh room state from DB to ensure we have latest season/episode
-                        guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
-                            NSLog("⚠️ Guest: Failed to fetch room state, using local state")
-                            // Fallback to local state
-                            if let season = room.season, let episode = room.episode {
-                                await MainActor.run {
-                                    appState.selectedSeason = season
-                                    appState.selectedEpisode = episode
-                                }
-                                NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
-                            }
-                            // Continue with playback even if we couldn't fetch fresh state
-                            await appState.playMedia(
-                                mediaItem,
-                                quality: room.quality,
-                                watchMode: .watchParty,
-                                roomId: room.id,
-                                isHost: false
-                            )
-                            return
-                        }
-                        
-                        // Use fresh DB state (same logic as database fallback path)
-                        let season = roomState.season ?? room.season
-                        let episode = roomState.episode ?? room.episode
-                        
-                        if let season = season, let episode = episode {
-                            await MainActor.run {
-                                appState.selectedSeason = season
-                                appState.selectedEpisode = episode
-                                
-                                // Also update local room state
-                                self.room.season = season
-                                self.room.episode = episode
-                            }
-                            NSLog("📺 Guest: Set season/episode from DB (Realtime path): S\(season)E\(episode)")
-                        } else {
-                            NSLog("⚠️ Guest: No season/episode found in DB or local state")
-                        }
-
                         await appState.playMedia(
                             mediaItem,
                             quality: room.quality,

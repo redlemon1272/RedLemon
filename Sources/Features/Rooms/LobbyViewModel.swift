@@ -937,7 +937,7 @@ class LobbyViewModel: ObservableObject {
                     NSLog("🎬 Guest: Starting playback after database fallback detection")
 
                     // Start playback
-                    guard let mediaItem = room.mediaItem else {
+                    guard room.mediaItem != nil else {
                         NSLog("❌ Guest: Cannot start playback - no media selected")
                         return
                     }
@@ -1037,7 +1037,7 @@ class LobbyViewModel: ObservableObject {
                     // Also update poster/backdrop
                     self.posterURL = mediaItem.posterURL?.absoluteString
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString
-                    self.logoURL = mediaItem.logoURL?.absoluteString
+                    self.logoURL = mediaItem.logo
                 }
                 
                 NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(type))")

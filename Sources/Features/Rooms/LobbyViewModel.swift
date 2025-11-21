@@ -30,6 +30,10 @@ class LobbyViewModel: ObservableObject {
     private var lastRoomPlayingState: Bool = false
     private var isDisconnecting: Bool = false
     weak var appState: AppState?  // Weak reference to avoid retain cycle
+    
+    // Two-Phase Start: Track which guests are ready
+    @Published var participantReadyStatus: [String: Bool] = [:]
+    @Published var waitingForReady: Bool = false
 
     // Helper to track state safely across actor boundaries (specifically for deinit)
     private class TransitionState {
@@ -427,109 +431,109 @@ class LobbyViewModel: ObservableObject {
     func startMovie(appState: AppState) async {
         guard isHost else { return }
 
-        NSLog("🎬 Host: Starting movie for \(participants.count) participants")
+        NSLog("🎬 Host: Starting TWO-PHASE START for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
+        waitingForReady = true
         addMessage(.hostStarting, userName: "Host")
+        
+        // Initialize ready status for all guests (host is always ready)
+        participantReadyStatus = [:]
+        for participant in participants where !participant.isHost {
+            participantReadyStatus[participant.id] = false
+        }
+        
+        NSLog("📊 Waiting for \(participantReadyStatus.count) guests to become ready")
 
-        var realtimeSuccess = false
-
-        // Broadcast via Realtime with error handling
+        // Send PRELOAD signal via Realtime
         Task {
-            let syncMsg = SyncMessage(
-                type: .chat,
-                timestamp: Double(countdown),
+            let preloadMsg = SyncMessage(
+                type: .preload,
+                timestamp: Date().timeIntervalSince1970,
                 isPlaying: nil,
                 senderId: participantId,
-                chatText: "LOBBY_START_COUNTDOWN",
-                chatUsername: "Host"
+                chatText: nil,
+                chatUsername: nil
             )
             do {
-                try await realtimeManager?.sendSyncMessage(syncMsg)
-                realtimeSuccess = true
-                NSLog("✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime")
-                NSLog("📡 Realtime delivery confirmed for \(participants.count) guests")
-            } catch RealtimeError.channelNotReady {
-                NSLog("⚠️ Host: Realtime channel not ready - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime not ready)",
-                    "reason": "Channel not ready"
-                ])
-            } catch RealtimeError.connectionTimeout {
-                NSLog("⏰ Host: Realtime connection timeout - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime timeout)",
-                    "reason": "Connection timeout"
-                ])
-            } catch RealtimeError.connectionFailed {
-                NSLog("❌ Host: Realtime connection failed - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime failed)",
-                    "reason": "Connection failed"
-                ])
+                try await realtimeManager?.sendSyncMessage(preloadMsg)
+                NSLog("✅ Host: Successfully broadcast PRELOAD signal via Realtime")
             } catch {
-                NSLog("⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime error)",
-                    "error": "\(error.localizedDescription)"
-                ])
+                NSLog("⚠️ Host: Failed to send PRELOAD via Realtime: \(error)")
             }
         }
-
-        // Database fallback: Update room state to indicate playback starting
+        
+        // Database fallback: Update room state
         Task {
             do {
                 try await SupabaseClient.shared.startRoomPlayback(roomId: room.id)
                 NSLog("✅ Host: Set room playback state in database as fallback")
-                NSLog("💾 Database delivery confirmed for start signal")
-
-                if !realtimeSuccess {
-                    addMessage(.systemInfo, userName: "System", data: [
-                        "message": "✅ Start signal sent via database (Realtime unavailable)",
-                        "guestCount": "\(participants.count)"
-                    ])
-                }
             } catch {
                 NSLog("❌ Host: Failed to update room state in database: \(error)")
-                addMessage(.systemError, userName: "System", data: [
-                    "message": "⚠️ Warning: Both Realtime and database fallback failed for start signal",
-                    "error": "\(error.localizedDescription)"
-                ])
             }
         }
 
-        // Countdown with drift correction
-        let startTime = Date()
-        for i in (1...3).reversed() {
-            countdown = i
-            
-            // Calculate how much time has passed since we started
-            let elapsed = Date().timeIntervalSince(startTime)
-            // Calculate how much time we should have waited by now (3 - i + 1 seconds)
-            let targetDelay = Double(3 - i + 1)
-            
-            // Sleep for the remaining time to hit the target
-            let sleepDuration = max(0, targetDelay - elapsed)
-            if sleepDuration > 0 {
-                try? await Task.sleep(nanoseconds: UInt64(sleepDuration * 1_000_000_000))
-            }
-        }
-
-        // Start playback for everyone (only if media is selected)
+        // Host also preloads (but doesn't wait for self)
         guard let mediaItem = room.mediaItem else {
             NSLog("❌ Host: Cannot start playback - no media selected")
             return
         }
 
-        NSLog("🎬 Host: Launching player for \(mediaItem.name)")
-
-        await appState.playMedia(
+        NSLog("🎬 Host: Preloading \(mediaItem.name)")
+        await appState.preloadMedia(
             mediaItem,
             quality: room.quality,
             watchMode: .watchParty,
             roomId: room.id,
             isHost: true
         )
+        
+        // Wait for all guests to be ready (with timeout)
+        let maxWaitTime: TimeInterval = 30.0 // 30 second timeout
+        let startWait = Date()
+        
+        while waitingForReady {
+            let allReady = participantReadyStatus.values.allSatisfy { $0 == true }
+            let timedOut = Date().timeIntervalSince(startWait) > maxWaitTime
+            
+            if allReady || timedOut {
+                if timedOut {
+                    let readyCount = participantReadyStatus.values.filter { $0 }.count
+                    NSLog("⏰ Host: Timeout waiting for guests (\(readyCount)/\(participantReadyStatus.count) ready)")
+                    addMessage(.systemInfo, userName: "System", data: [
+                        "message": "Starting anyway - some guests may not be ready"
+                    ])
+                } else {
+                    NSLog("✅ Host: All guests ready! Starting playback...")
+                }
+                waitingForReady = false
+                break
+            }
+            
+            try? await Task.sleep(nanoseconds: 100_000_000) // Check every 100ms
+        }
+        
+        // Send PLAY signal
+        Task {
+            let playMsg = SyncMessage(
+                type: .play,
+                timestamp: Date().timeIntervalSince1970,
+                position: 0,
+                isPlaying: true,
+                senderId: participantId,
+                chatText: nil,
+                chatUsername: nil
+            )
+            do {
+                try await realtimeManager?.sendSyncMessage(playMsg)
+                NSLog("✅ Host: Sent PLAY signal to all guests")
+            } catch {
+                NSLog("⚠️ Host: Failed to send PLAY signal: \(error)")
+            }
+        }
+        
+        // Host starts playing
+        appState.startPreloadedPlayback()
 
         // After host starts playback, send stream info to guests via WatchPartyManager
         if let streamHash = room.selectedStreamHash,
@@ -651,7 +655,100 @@ class LobbyViewModel: ObservableObject {
                     disconnect()
                     // Navigation handled by disconnect() or parent view
                 }
-            } else if chatText == "LOBBY_START_COUNTDOWN" {
+            }
+        }
+        
+        // Handle SyncMessage types (new protocol)
+        switch syncMessage.type {
+        case .preload:
+            // Guest: Preload media but don't start playing
+            if !isHost {
+                NSLog("🎬 Guest: Received PRELOAD signal")
+                isStarting = true
+                transitionState.isStarting = true
+                
+                Task { @MainActor in
+                    // Fetch fresh room state
+                    guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
+                        NSLog("⚠️ Guest: Failed to fetch room state for preload")
+                        return
+                    }
+                    
+                    // Check for media mismatch
+                    await self.updateMediaItemFromRoomState(roomState)
+                    
+                    guard let mediaItem = self.room.mediaItem else {
+                        NSLog("❌ Guest: Media item missing after update check")
+                        return
+                    }
+                    
+                    // Set season/episode
+                    let season = roomState.season ?? room.season
+                    let episode = roomState.episode ?? room.episode
+                    
+                    if let season = season, let episode = episode {
+                        await MainActor.run {
+                            appState?.selectedSeason = season
+                            appState?.selectedEpisode = episode
+                            self.room.season = season
+                            self.room.episode = episode
+                        }
+                        NSLog("📺 Guest: Set season/episode for preload: S\(season)E\(episode)")
+                    }
+                    
+                    // Preload the media
+                    guard let appState = appState else {
+                        NSLog("❌ Guest: Cannot preload - no appState")
+                        return
+                    }
+                    
+                    NSLog("🎬 Guest: Preloading media...")
+                    await appState.preloadMedia(
+                        mediaItem,
+                        quality: room.quality,
+                        watchMode: .watchParty,
+                        roomId: room.id,
+                        isHost: false
+                    )
+                    
+                    // Send READY signal to host
+                    NSLog("✅ Guest: Preload complete, sending READY signal")
+                    let readyMsg = SyncMessage(
+                        type: .ready,
+                        timestamp: Date().timeIntervalSince1970,
+                        isPlaying: nil,
+                        senderId: participantId,
+                        chatText: nil,
+                        chatUsername: nil
+                    )
+                    try? await realtimeManager?.sendSyncMessage(readyMsg)
+                }
+            }
+            
+        case .ready:
+            // Host: Guest reported ready
+            if isHost {
+                if let senderId = syncMessage.senderId {
+                    participantReadyStatus[senderId] = true
+                    let readyCount = participantReadyStatus.values.filter { $0 }.count
+                    NSLog("✅ Host: Guest \(senderId.prefix(8)) is READY (\(readyCount)/\(participantReadyStatus.count))")
+                }
+            }
+            
+        case .play:
+            // Guest: Start playing preloaded media
+            if !isHost {
+                NSLog("▶️ Guest: Received PLAY signal, starting playback")
+                appState?.startPreloadedPlayback()
+            }
+            
+        default:
+            break
+        }
+        
+        // Handle legacy chat-based commands
+        if chatText.starts(with: "LOBBY_") {
+            if chatText == "LOBBY_START_COUNTDOWN" {
                 // Host started countdown
                 if !isHost {
                     NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
@@ -822,6 +919,7 @@ class LobbyViewModel: ObservableObject {
             }
         }
     }
+
 
     // MARK: - Database Polling
 

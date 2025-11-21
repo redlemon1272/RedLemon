@@ -51,6 +51,7 @@ class AppState: ObservableObject {
     @Published var resumeFromTimestamp: Double? = nil  // When resuming playback, seek to this position
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
     @Published var showUsernameSetup: Bool = false  // Show username setup dialog
+    @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
 
     // User authentication (simple username)
     @Published var currentUsername: String = ""
@@ -192,6 +193,112 @@ class AppState: ObservableObject {
                 currentView = .player // Show player view to display error
             }
         }
+
+    func preloadMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
+        streamError = nil
+
+        do {
+            print("🎬 Preloading playback for: \(item.name)")
+            NSLog("   Quality: \(quality.rawValue)")
+            
+            // Step 1: Fetch metadata immediately
+            let metadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
+            
+            // Update UI immediately
+            await MainActor.run {
+                selectedMetadata = metadata
+                selectedMediaItem = item
+                isResolvingStream = true
+                currentWatchMode = watchMode
+                isWatchPartyHost = isHost
+                selectedQuality = quality
+                isPreloading = true // Set preloading flag
+                
+                // Switch to player view
+                currentView = .player
+            }
+            
+            // Only pass season/episode for TV series
+            let season = item.type == "series" ? selectedSeason : nil
+            let episode = item.type == "series" ? selectedEpisode : nil
+            
+            // Step 2: Resolve stream
+            let result = try await StreamService.shared.resolveStream(
+                item: item,
+                quality: quality,
+                season: season,
+                episode: episode,
+                metadata: metadata
+            )
+            
+            // Step 3: Update UI with resolved data
+            await MainActor.run {
+                selectedStream = result.stream
+                
+                // Set room ID logic (same as playMedia)
+                if let roomId = roomId {
+                    currentRoomId = roomId
+                    
+                    // GUEST LOGIC: Check if we should use host's stream
+                    if !isHost, let watchPartyRoom = currentWatchPartyRoom,
+                       let hostStreamHash = watchPartyRoom.selectedStreamHash,
+                       let hostQuality = watchPartyRoom.selectedQuality,
+                       let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+                        
+                        NSLog("🎬 GUEST: Using host's stream selection for preload")
+                        var hostStream = Stream(
+                            url: hostUnlockedURL,
+                            title: "Host Stream (\(hostQuality))",
+                            quality: hostQuality,
+                            seeders: nil,
+                            size: nil,
+                            provider: "realdebrid",
+                            infoHash: hostStreamHash,
+                            fileIdx: watchPartyRoom.selectedFileIdx,
+                            ext: nil,
+                            behaviorHints: nil,
+                            subtitles: [] 
+                        )
+                        
+                        if let subtitles = result.stream.subtitles {
+                            hostStream.subtitles = subtitles
+                        }
+                        
+                        selectedStream = hostStream
+                    }
+                    
+                } else if watchMode == .watchParty {
+                    currentRoomId = "room_\(UUID().uuidString.prefix(8))"
+                } else {
+                    currentRoomId = nil
+                }
+                
+                currentView = .player
+                isResolvingStream = false
+            }
+            
+            NSLog("✅ Stream preloaded, waiting for play signal...")
+            // Do NOT call enterFullscreen() yet? Or maybe yes so they see the loading screen?
+            // Let's enter fullscreen so they are ready
+            enterFullscreen()
+            
+        } catch {
+            print("❌ Preload error: \(error)")
+            await MainActor.run {
+                streamError = error.localizedDescription
+                isResolvingStream = false
+                isPreloading = false
+                currentView = .player
+            }
+        }
+    }
+
+    func startPreloadedPlayback() {
+        guard isPreloading else { return }
+        print("▶️ Starting preloaded playback")
+        isPreloading = false
+        // The PlayerView should observe this change and start playing
+    }
     }
 
     func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {

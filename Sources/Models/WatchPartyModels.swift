@@ -169,6 +169,8 @@ enum SyncMessageType: String, Codable {
     case chat  // Chat messages
     case streamSelected  // Host selected a stream
     case requestStream  // Guest requests current stream
+    case preload        // Host instructs guests to load stream but stay paused
+    case ready          // Guest reports they are buffered and ready to play
 }
 
 /// Sync message for watch party coordination

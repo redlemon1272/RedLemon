@@ -220,7 +220,7 @@ class WatchPartyManager: ObservableObject {
         case .chat:
             // This should be handled separately
             return .heartbeat(positionMs: 0, playing: false)
-        case .ping, .pong, .streamSelected, .requestStream:
+        case .ping, .pong, .streamSelected, .requestStream, .preload, .ready:
             // Not used in new protocol for outgoing messages
             return .heartbeat(positionMs: 0, playing: false)
         }

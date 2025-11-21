@@ -247,6 +247,8 @@ class SupabaseClient {
         imdbId: String? = nil,
         posterUrl: String? = nil,
         backdropUrl: String? = nil,
+        season: Int? = nil,
+        episode: Int? = nil,
         isPublic: Bool = true
     ) async throws -> SupabaseRoom {
         var roomData: [String: Any] = [
@@ -261,6 +263,8 @@ class SupabaseClient {
         if let imdbId = imdbId { roomData["imdb_id"] = imdbId }
         if let posterUrl = posterUrl { roomData["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { roomData["backdrop_url"] = backdropUrl }
+        if let season = season { roomData["season"] = season }
+        if let episode = episode { roomData["episode"] = episode }
 
         let data = try await makeRequest(
             path: "/rooms",
@@ -574,6 +578,8 @@ struct SupabaseRoom: Codable {
     let isPublic: Bool
     let createdAt: Date
     let lastActivity: Date
+    let season: Int?  // Season number for TV shows
+    let episode: Int?  // Episode number for TV shows
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -590,6 +596,8 @@ struct SupabaseRoom: Codable {
         case isPublic = "is_public"
         case createdAt = "created_at"
         case lastActivity = "last_activity"
+        case season
+        case episode
     }
 }
 

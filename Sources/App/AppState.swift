@@ -340,6 +340,8 @@ class AppState: ObservableObject {
                 imdbId: mediaItem.id,
                 posterUrl: mediaItem.poster,
                 backdropUrl: mediaItem.background,
+                season: season,
+                episode: episode,
                 isPublic: true
             )
             
@@ -449,8 +451,8 @@ class AppState: ObservableObject {
                 hostId: room.hostUserId.uuidString,
                 hostName: room.hostUsername,
                 mediaItem: nil, // Will be set below
-                season: nil, // TODO: Add season/episode to SupabaseRoom
-                episode: nil,
+                season: room.season,
+                episode: room.episode,
                 quality: .fullHD,
                 sourceQuality: nil,
                 description: nil,

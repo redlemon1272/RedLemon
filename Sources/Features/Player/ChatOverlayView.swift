@@ -167,8 +167,8 @@ struct ChatOverlayView: View {
         }
     }
     
-    private var dmMessagesList: some View {
-        return ScrollViewReader { proxy in
+    private func dmMessagesList(friend: Friend) -> some View {
+        ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     if case .dm(let friend) = chatMode, let messages = socialService.messages[friend.id] {

@@ -56,7 +56,7 @@ struct FriendsView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .sheet(isPresented: $showingAddFriend) {
             AddFriendSheet(isPresented: $showingAddFriend, onAdd: { principal, username in
-                await socialService.sendFriendRequest(to: username)
+                await socialService.sendRequest(username: username)
             })
         }
         .task {

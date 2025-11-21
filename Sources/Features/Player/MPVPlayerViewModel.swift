@@ -110,6 +110,16 @@ class MPVPlayerViewModel: ObservableObject {
         self.videoURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = cleanStreamTitle
+        
+        // Broadcast watching status
+        Task {
+            await SocialService.shared.updateWatchingStatus(
+                mediaTitle: cleanStreamTitle,
+                mediaType: isSeries ? "series" : "movie",
+                imdbId: imdbId,
+                roomId: self.currentRoomId
+            )
+        }
         let isBreakingBad = imdbId == "tt0903747"
 
         // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn't contain S01-S05)
@@ -867,6 +877,14 @@ class MPVPlayerViewModel: ObservableObject {
         hasCleanedUp = true
 
         print("🧹 Cleaning up MPV player...")
+        
+        // Clear watching status
+        await SocialService.shared.updateWatchingStatus(
+            mediaTitle: nil,
+            mediaType: nil,
+            imdbId: nil,
+            roomId: nil
+        )
 
         // Stop all timers first to prevent any more sync messages
         invalidateAllTimers()

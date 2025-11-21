@@ -62,3 +62,21 @@ struct FriendActivity: Codable, Identifiable {
         let roomId: String? // If in a watch party
     }
 }
+
+struct DirectMessage: Codable, Identifiable {
+    let id: UUID
+    let senderId: UUID
+    let receiverId: UUID
+    let content: String
+    let isRead: Bool
+    let createdAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case senderId = "sender_id"
+        case receiverId = "receiver_id"
+        case content
+        case isRead = "is_read"
+        case createdAt = "created_at"
+    }
+}

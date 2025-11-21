@@ -185,6 +185,9 @@ struct ContentView: View {
                 if let user = try? await SupabaseClient.shared.createOrGetUser(username: username) {
                     appState.currentUserId = user.id
                     NSLog("✅ Loaded user: \(username) (ID: \(user.id))")
+                    
+                    // Connect to Social Service (Presence)
+                    await SocialService.shared.connect(userId: user.id.uuidString, username: username)
                 }
             } else {
                 // Show username setup if no username found

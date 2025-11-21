@@ -131,6 +131,9 @@ struct UsernameSetupView: View {
                     isCreating = false
                     dismiss()
                 }
+                
+                // Connect to Social Service (Presence)
+                await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
 
                 NSLog("✅ User logged in: \(trimmed) (ID: \(user.id))")
             } catch {

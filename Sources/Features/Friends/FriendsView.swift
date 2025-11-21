@@ -9,10 +9,8 @@ import SwiftUI
 
 struct FriendsView: View {
     @EnvironmentObject var appState: AppState
-    @State private var friends: [Friend] = []
-    @State private var friendRequests: [FriendRequest] = []
-    @State private var friendActivity: [FriendActivity] = []
-    @State private var isLoading = false
+    @ObservedObject var socialService = SocialService.shared
+    
     @State private var showingAddFriend = false
     @State private var searchText = ""
     @State private var selectedTab: FriendTab = .all
@@ -38,7 +36,7 @@ struct FriendsView: View {
             // Friend list
             ScrollView {
                 LazyVStack(spacing: 12) {
-                    if isLoading {
+                    if socialService.isLoading && socialService.friends.isEmpty {
                         ProgressView()
                             .padding(40)
                     } else if filteredFriends.isEmpty && selectedTab != .requests {
@@ -58,11 +56,12 @@ struct FriendsView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .sheet(isPresented: $showingAddFriend) {
             AddFriendSheet(isPresented: $showingAddFriend, onAdd: { principal, username in
-                await sendFriendRequest(to: principal, username: username)
+                await socialService.sendFriendRequest(to: username)
             })
         }
         .task {
-            await loadFriends()
+            // Refresh friends on view appear
+            await socialService.loadFriends()
         }
     }
 
@@ -74,7 +73,7 @@ struct FriendsView: View {
                 Text("Friends")
                     .font(.system(size: 32, weight: .bold))
 
-                Text("\(friends.filter { $0.status == .accepted }.count) friends")
+                Text("\(socialService.friends.filter { $0.status == .accepted }.count) friends")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -117,10 +116,10 @@ struct FriendsView: View {
 
     private var tabSelector: some View {
         HStack(spacing: 4) {
-            tabButton(title: "All", count: friends.filter { $0.status == .accepted }.count, tab: .all)
+            tabButton(title: "All", count: socialService.friends.filter { $0.status == .accepted }.count, tab: .all)
             tabButton(title: "Online", count: onlineFriends.count, tab: .online)
-            tabButton(title: "Favorites", count: friends.filter { $0.isFavorite }.count, tab: .favorites)
-            tabButton(title: "Requests", count: friendRequests.filter { $0.status == .pending }.count, tab: .requests)
+            tabButton(title: "Favorites", count: socialService.friends.filter { $0.isFavorite }.count, tab: .favorites)
+            tabButton(title: "Requests", count: socialService.friendRequests.filter { $0.status == .pending }.count, tab: .requests)
         }
         .padding()
     }
@@ -151,13 +150,16 @@ struct FriendsView: View {
 
     private var friendsList: some View {
         ForEach(filteredFriends) { friend in
-            FriendRow(
-                friend: friend,
-                activity: friendActivity.first { $0.id == friend.id },
-                onToggleFavorite: { await toggleFavorite(friend) },
-                onRemove: { await removeFriend(friend) },
-                onInvite: { inviteToWatchParty(friend) }
-            )
+            NavigationLink(destination: ChatView(friend: friend)) {
+                FriendRow(
+                    friend: friend,
+                    activity: socialService.friendActivity[friend.id],
+                    onToggleFavorite: { await toggleFavorite(friend) },
+                    onRemove: { await removeFriend(friend) },
+                    onInvite: { inviteToWatchParty(friend) }
+                )
+            }
+            .buttonStyle(.plain)
         }
     }
 
@@ -165,11 +167,11 @@ struct FriendsView: View {
 
     private var requestsList: some View {
         Group {
-            if friendRequests.filter({ $0.status == .pending }).isEmpty {
+            if socialService.friendRequests.filter({ $0.status == .pending }).isEmpty {
                 VStack(spacing: 12) {
                     Image(systemName: "envelope.open")
-                        .font(.system(size: 50))
-                        .foregroundColor(.secondary)
+                    .font(.system(size: 50))
+                    .foregroundColor(.secondary)
                     Text("No pending requests")
                         .font(.title3)
                         .foregroundColor(.secondary)
@@ -177,11 +179,11 @@ struct FriendsView: View {
                 .frame(maxWidth: .infinity)
                 .padding(40)
             } else {
-                ForEach(friendRequests.filter { $0.status == .pending }) { request in
+                ForEach(socialService.friendRequests.filter { $0.status == .pending }) { request in
                     FriendRequestRow(
                         request: request,
-                        onAccept: { await acceptFriendRequest(request) },
-                        onDecline: { await declineFriendRequest(request) }
+                        onAccept: { await socialService.acceptRequest(request) },
+                        onDecline: { await socialService.declineRequest(request) }
                     )
                 }
             }
@@ -219,7 +221,7 @@ struct FriendsView: View {
     // MARK: - Filtered Friends
 
     private var filteredFriends: [Friend] {
-        var result = friends.filter { $0.status == .accepted }
+        var result = socialService.friends.filter { $0.status == .accepted }
 
         // Filter by tab
         switch selectedTab {
@@ -227,10 +229,10 @@ struct FriendsView: View {
             break
         case .online:
             result = result.filter { friend in
-                if let activity = friendActivity.first(where: { $0.id == friend.id }) {
-                    return activity.currentlyWatching != nil
+                if let activity = socialService.friendActivity[friend.id] {
+                    return activity.currentlyWatching != nil || socialService.onlineUserIds.contains(friend.id)
                 }
-                return false
+                return socialService.onlineUserIds.contains(friend.id)
             }
         case .favorites:
             result = result.filter { $0.isFavorite }
@@ -256,168 +258,16 @@ struct FriendsView: View {
     }
 
     private var onlineFriends: [Friend] {
-        friends.filter { friend in
-            if let activity = friendActivity.first(where: { $0.id == friend.id }) {
-                return activity.currentlyWatching != nil
-            }
-            return false
+        socialService.friends.filter { friend in
+            socialService.onlineUserIds.contains(friend.id)
         }
     }
 
     // MARK: - Actions
 
-    private func loadFriends() async {
-        NSLog("🚀 FriendsView: loadFriends() called")
-        NSLog("   Current username: \(appState.currentUsername)")
-        NSLog("   Current user ID: \(appState.currentUserId?.uuidString ?? "nil")")
-
-        isLoading = true
-
-        guard let userId = appState.currentUserId else {
-            NSLog("❌ FriendsView: No currentUserId - cannot load friends")
-            NSLog("   This means authentication failed or user is not logged in")
-            isLoading = false
-            return
-        }
-
-        NSLog("✅ FriendsView: Got user ID - proceeding to load friends: \(userId)")
-
-        do {
-            NSLog("📡 Supabase: Fetching friends for user \(userId)...")
-            // Load friends from Supabase
-            let supabaseFriends = try await SupabaseClient.shared.getFriends(userId: userId)
-            NSLog("✅ Supabase: Retrieved \(supabaseFriends.count) friends from database")
-
-            friends = supabaseFriends.map { user in
-                NSLog("   Friend: \(user.username) (ID: \(user.id))")
-                return Friend(
-                    id: user.id.uuidString,
-                    username: user.username,
-                    addedDate: Date(), // Could track this in DB if needed
-                    isFavorite: false,
-                    status: .accepted
-                )
-            }
-
-            NSLog("📡 Supabase: Fetching friend requests for user \(userId)...")
-            // Load friend requests
-            let supabaseRequests = try await SupabaseClient.shared.getFriendRequests(userId: userId)
-            NSLog("✅ Supabase: Retrieved \(supabaseRequests.count) friend requests from database")
-
-            friendRequests = supabaseRequests.compactMap { request in
-                guard let fromUser = request.fromUser else {
-                    NSLog("   ⚠️ Request \(request.id) has no fromUser - skipping")
-                    return nil
-                }
-                NSLog("   📨 Request from: \(fromUser.username) (ID: \(fromUser.id))")
-                NSLog("      Created: \(request.createdAt)")
-                return FriendRequest(
-                    id: request.id.uuidString,
-                    fromPrincipal: fromUser.id.uuidString,
-                    fromUsername: fromUser.username,
-                    toPrincipal: userId.uuidString,
-                    requestDate: request.createdAt,
-                    status: .pending
-                )
-            }
-
-            NSLog("🎉 FriendsView: SUCCESS - Loaded \(friends.count) friends and \(friendRequests.count) friend requests")
-
-            // Check for pending requests specifically
-            let pendingRequests = friendRequests.filter { $0.status == .pending }
-            NSLog("   Pending requests: \(pendingRequests.count)")
-            for request in pendingRequests {
-                NSLog("   📨 From: \(request.fromUsername) at \(request.requestDate)")
-            }
-
-        } catch {
-            NSLog("❌ FriendsView: FAILED to load friends: \(error)")
-            NSLog("   Error type: \(type(of: error))")
-            NSLog("   Error details: \(error.localizedDescription)")
-        }
-
-        isLoading = false
-        NSLog("🏁 FriendsView: loadFriends() completed")
-    }
-
-    private func sendFriendRequest(to principal: String, username: String) async -> String? {
-        print("📤 Sending friend request to \(username)")
-
-        guard let fromUserId = appState.currentUserId else {
-            print("❌ Cannot send friend request: not authenticated")
-            return "Not authenticated"
-        }
-
-        do {
-            try await SupabaseClient.shared.sendFriendRequest(
-                fromUserId: fromUserId,
-                toUsername: username
-            )
-            print("✅ Friend request sent to \(username)")
-
-            // Refresh friend list
-            await loadFriends()
-            return nil // Success
-        } catch let error as SupabaseError {
-            // Handle specific Supabase errors
-            switch error {
-            case .httpError(409, _):
-                return "Friend request already sent or you're already friends"
-            case .userNotFound:
-                return "User not found"
-            default:
-                print("❌ Failed to send friend request: \(error)")
-                return "Failed to send request: \(error.localizedDescription)"
-            }
-        } catch {
-            print("❌ Failed to send friend request: \(error)")
-            return "Failed to send request: \(error.localizedDescription)"
-        }
-    }
-
-    private func acceptFriendRequest(_ request: FriendRequest) async {
-        print("✅ Accepting friend request from \(request.fromUsername)")
-
-        guard let userId = appState.currentUserId,
-              let requestId = UUID(uuidString: request.id),
-              let friendId = UUID(uuidString: request.fromPrincipal) else {
-            print("❌ Invalid UUIDs")
-            return
-        }
-
-        do {
-            try await SupabaseClient.shared.acceptFriendRequest(
-                requestId: requestId,
-                userId: userId,
-                friendId: friendId
-            )
-            print("✅ Friend request accepted!")
-            await loadFriends()
-        } catch {
-            print("❌ Failed to accept friend request: \(error)")
-        }
-    }
-
-    private func declineFriendRequest(_ request: FriendRequest) async {
-        print("❌ Declining friend request from \(request.fromUsername)")
-
-        guard let requestId = UUID(uuidString: request.id) else {
-            print("❌ Invalid request ID")
-            return
-        }
-
-        do {
-            try await SupabaseClient.shared.declineFriendRequest(requestId: requestId)
-            print("✅ Friend request declined")
-            await loadFriends()
-        } catch {
-            print("❌ Failed to decline friend request: \(error)")
-        }
-    }
-
     private func toggleFavorite(_ friend: Friend) async {
         print("⭐️ Toggling favorite for \(friend.username)")
-        // FUTURE: Persist favorite state in Supabase user preferences
+        socialService.toggleFavorite(friendId: friend.id)
     }
 
     private func removeFriend(_ friend: Friend) async {
@@ -456,7 +306,10 @@ struct FriendRow: View {
                     .foregroundColor(friend.isFavorite ? .yellow : .blue)
 
                 // Online indicator
-                if activity?.currentlyWatching != nil {
+                if activity != nil || activity?.currentlyWatching != nil { // Check if online or watching
+                     // We need to know if they are just online (no activity object might mean offline if we use map)
+                     // But activity object is created for online users.
+                     // So if activity exists, they are online.
                     Circle()
                         .fill(Color.green)
                         .frame(width: 12, height: 12)
@@ -500,12 +353,12 @@ struct FriendRow: View {
             Spacer()
 
             // Action buttons
-            if activity?.currentlyWatching != nil {
+            if let activity = activity, activity.currentlyWatching != nil {
                 Button(action: onInvite) {
-                    Label("Invite", systemImage: "person.crop.circle.badge.plus")
+                    Label("Join", systemImage: "play.fill") // Changed to Join if watching
                         .font(.caption)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
                 .controlSize(.small)
             }
 

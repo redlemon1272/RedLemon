@@ -723,3 +723,199 @@ enum SupabaseError: Error {
     case invalidResponse
     case httpError(Int, String)
 }
+// MARK: - Social Features Models
+
+// MARK: - Social Features Models
+
+struct Friendship: Codable, Identifiable {
+    let id: UUID
+    let userId1: UUID
+    let userId2: UUID
+    let status: FriendshipStatus
+    let createdAt: Date
+    
+    // Joined data (optional)
+    let fromUser: SupabaseUser?
+    let toUser: SupabaseUser?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userId1 = "user_id_1"
+        case userId2 = "user_id_2"
+        case status
+        case createdAt = "created_at"
+        case fromUser = "user_id_1_profile" // Alias for joined data
+        case toUser = "user_id_2_profile"   // Alias for joined data
+    }
+}
+
+enum FriendshipStatus: String, Codable {
+    case pending
+    case accepted
+    case blocked
+}
+
+
+
+// MARK: - Social Features Extensions
+
+extension SupabaseClient {
+    
+    // MARK: - Friendships
+    
+    /// Get list of accepted friends (Profiles)
+    func getFriends(userId: UUID) async throws -> [SupabaseUser] {
+        // 1. Get all accepted friendships involving this user
+        let path = "/friendships?or=(user_id_1.eq.\(userId),user_id_2.eq.\(userId))&status=eq.accepted&select=*"
+        let request = try makeRequest(path: path, method: "GET")
+        let (data, _) = try await session.data(for: request)
+        let friendships = try jsonDecoder.decode([Friendship].self, from: data)
+        
+        // 2. Extract friend IDs
+        let friendIds = friendships.compactMap { friendship -> UUID? in
+            if friendship.userId1 == userId { return friendship.userId2 }
+            if friendship.userId2 == userId { return friendship.userId1 }
+            return nil
+        }
+        
+        if friendIds.isEmpty { return [] }
+        
+        // 3. Fetch profiles for these IDs from 'users' table
+        let idsString = friendIds.map { $0.uuidString }.joined(separator: ",")
+        let usersPath = "/users?id=in.(\(idsString))"
+        let usersRequest = try makeRequest(path: usersPath, method: "GET")
+        let (usersData, _) = try await session.data(for: usersRequest)
+        
+        return try jsonDecoder.decode([SupabaseUser].self, from: usersData)
+    }
+    
+    /// Get pending friend requests received by user
+    func getFriendRequests(userId: UUID) async throws -> [Friendship] {
+        // Fetch pending requests where user is receiver (user_id_2)
+        let path = "/friendships?user_id_2=eq.\(userId)&status=eq.pending"
+        let request = try makeRequest(path: path, method: "GET")
+        let (data, _) = try await session.data(for: request)
+        var friendships = try jsonDecoder.decode([Friendship].self, from: data)
+        
+        // Fetch profiles for senders from 'users' table
+        let senderIds = friendships.map { $0.userId1 }
+        if !senderIds.isEmpty {
+            let idsString = senderIds.map { $0.uuidString }.joined(separator: ",")
+            let usersPath = "/users?id=in.(\(idsString))"
+            let usersRequest = try makeRequest(path: usersPath, method: "GET")
+            let (usersData, _) = try await session.data(for: usersRequest)
+            let profiles = try? jsonDecoder.decode([SupabaseUser].self, from: usersData)
+            
+            // Reconstruct friendships with profiles
+            friendships = friendships.map { friendship in
+                let profile = profiles?.first(where: { $0.id == friendship.userId1 })
+                return Friendship(
+                    id: friendship.id,
+                    userId1: friendship.userId1,
+                    userId2: friendship.userId2,
+                    status: friendship.status,
+                    createdAt: friendship.createdAt,
+                    fromUser: profile,
+                    toUser: nil
+                )
+            }
+        }
+        
+        return friendships
+    }
+    
+    func sendFriendRequest(fromUserId: UUID, toUsername: String) async throws {
+        // 1. Find user by username
+        let users = try await searchUsers(username: toUsername)
+        guard let targetUser = users.first else {
+            throw SupabaseError.userNotFound
+        }
+        
+        if targetUser.id == fromUserId {
+            throw SupabaseError.httpError(400, "Cannot add yourself")
+        }
+        
+        // 2. Send request
+        try await sendFriendRequest(from: fromUserId, to: targetUser.id)
+    }
+    
+    func acceptFriendRequest(requestId: UUID, userId: UUID, friendId: UUID) async throws {
+        try await updateFriendshipStatus(id: requestId, status: .accepted)
+    }
+    
+    func declineFriendRequest(requestId: UUID) async throws {
+        // Delete the row
+        let path = "/friendships?id=eq.\(requestId)"
+        let request = try makeRequest(path: path, method: "DELETE")
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw SupabaseError.serverError("Failed to decline request")
+        }
+    }
+    
+    // Removed duplicate searchUsers (already exists in SupabaseClient)
+    
+    // Internal helpers
+    
+    func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
+        let path = "/friendships"
+        let body: [String: Any] = [
+            "user_id_1": senderId.uuidString,
+            "user_id_2": receiverId.uuidString,
+            "status": "pending"
+        ]
+        
+        let request = try makeRequest(path: path, method: "POST", body: body)
+        let (_, response) = try await session.data(for: request)
+        
+        if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 409 {
+             throw SupabaseError.httpError(409, "Request already exists")
+        }
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw SupabaseError.serverError("Failed to send friend request")
+        }
+    }
+    
+    func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {
+        let path = "/friendships?id=eq.\(id)"
+        let body = ["status": status.rawValue]
+        let request = try makeRequest(path: path, method: "PATCH", body: body)
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw SupabaseError.serverError("Failed to update friendship")
+        }
+    }
+    
+    // MARK: - Direct Messages
+    
+    func getDirectMessages(userId: UUID, with friendId: UUID) async throws -> [DirectMessage] {
+        let query = "or=(and(sender_id.eq.\(userId),receiver_id.eq.\(friendId)),and(sender_id.eq.\(friendId),receiver_id.eq.\(userId)))&order=created_at.asc"
+        let path = "/direct_messages?\(query)"
+        let request = try makeRequest(path: path, method: "GET")
+        let (data, _) = try await session.data(for: request)
+        return try jsonDecoder.decode([DirectMessage].self, from: data)
+    }
+    
+    func sendDirectMessage(from senderId: UUID, to receiverId: UUID, content: String) async throws {
+        let path = "/direct_messages"
+        let body: [String: Any] = [
+            "sender_id": senderId.uuidString,
+            "receiver_id": receiverId.uuidString,
+            "content": content
+        ]
+        
+        let request = try makeRequest(path: path, method: "POST", body: body)
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw SupabaseError.serverError("Failed to send message")
+        }
+    }
+}

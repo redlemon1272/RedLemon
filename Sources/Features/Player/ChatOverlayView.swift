@@ -9,9 +9,18 @@ import SwiftUI
 
 struct ChatOverlayView: View {
     @ObservedObject var viewModel: MPVPlayerViewModel
+    @ObservedObject private var socialService = SocialService.shared
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
+    
+    // Chat Modes
+    enum ChatMode {
+        case room
+        case friends
+        case dm(Friend)
+    }
+    @State private var chatMode: ChatMode = .room
 
     // Common emojis for quick access
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
@@ -19,8 +28,21 @@ struct ChatOverlayView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-            messagesList
-            inputArea
+            
+            switch chatMode {
+            case .room:
+                messagesList
+            case .friends:
+                friendsList
+            case .dm(let friend):
+                dmMessagesList(friend: friend)
+            }
+            
+            if case .friends = chatMode {
+                // No input area for friend list
+            } else {
+                inputArea
+            }
         }
         .frame(width: 350)
         .background(.ultraThinMaterial)
@@ -46,20 +68,47 @@ struct ChatOverlayView: View {
     }
 
     private var header: some View {
-        HStack {
-            Text("💬 Chat")
-                .font(.headline)
-                .foregroundColor(.white)
-            Spacer()
-            Button(action: { viewModel.toggleChat() }) {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(.white.opacity(0.7))
+        VStack(spacing: 0) {
+            HStack {
+                if case .dm(let friend) = chatMode {
+                    Button(action: { chatMode = .friends }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    Text(friend.displayName)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                } else {
+                    Picker("Chat Mode", selection: Binding(
+                        get: {
+                            if case .room = chatMode { return 0 }
+                            return 1
+                        },
+                        set: { newValue in
+                            chatMode = newValue == 0 ? .room : .friends
+                        }
+                    )) {
+                        Text("Room").tag(0)
+                        Text("Friends").tag(1)
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 150)
+                }
+                
+                Spacer()
+                
+                Button(action: { viewModel.toggleChat() }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.white.opacity(0.7))
+                }
+                .buttonStyle(.plain)
             }
-            .buttonStyle(.plain)
+            .padding()
+            .background(Color.black.opacity(0.3))
         }
-        .padding()
-        .background(Color.black.opacity(0.3))
     }
 
     private var messagesList: some View {
@@ -84,12 +133,85 @@ struct ChatOverlayView: View {
                 .padding()
             }
             .onChange(of: viewModel.messages.count) { _ in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    if let lastMessage = viewModel.messages.last {
-                        withAnimation {
-                            proxy.scrollTo(lastMessage.id, anchor: .bottom)
+                scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
+            }
+        }
+    }
+    
+    private var friendsList: some View {
+        ScrollView {
+            LazyVStack(spacing: 8) {
+                // Online Friends
+                if !socialService.onlineUserIds.isEmpty {
+                    Section(header: Text("Online").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
+                        ForEach(socialService.friends.filter { socialService.onlineUserIds.contains($0.id) }) { friend in
+                            FriendRowButton(friend: friend) {
+                                chatMode = .dm(friend)
+                                Task { await socialService.loadMessages(friendId: friend.id) }
+                            }
                         }
                     }
+                }
+                
+                // All Friends
+                Section(header: Text("All Friends").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
+                    ForEach(socialService.friends) { friend in
+                        FriendRowButton(friend: friend) {
+                            chatMode = .dm(friend)
+                            Task { await socialService.loadMessages(friendId: friend.id) }
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+    }
+    
+    private var dmMessagesList: some View {
+        return ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 12) {
+                    if case .dm(let friend) = chatMode, let messages = socialService.messages[friend.id] {
+                        ForEach(messages) { message in
+                            let isMe = message.senderId.uuidString != friend.id
+                            HStack {
+                                if isMe { Spacer() }
+                                VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+                                    Text(message.content)
+                                        .font(.body)
+                                        .foregroundColor(.white)
+                                        .padding(10)
+                                        .background(isMe ? Color.blue : Color.white.opacity(0.2))
+                                        .cornerRadius(12)
+                                }
+                                if !isMe { Spacer() }
+                            }
+                            .id(message.id)
+                        }
+                    }
+                }
+                .padding()
+            }
+            .onChange(of: getMessageCount()) { _ in
+                if case .dm(let friend) = chatMode {
+                    scrollToBottom(proxy: proxy, lastId: socialService.messages[friend.id]?.last?.id)
+                }
+            }
+        }
+    }
+    
+    private func getMessageCount() -> Int {
+        if case .dm(let friend) = chatMode {
+            return socialService.messages[friend.id]?.count ?? 0
+        }
+        return 0
+    }
+    
+    private func scrollToBottom(proxy: ScrollViewProxy, lastId: AnyHashable?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            if let id = lastId {
+                withAnimation {
+                    proxy.scrollTo(id, anchor: .bottom)
                 }
             }
         }
@@ -162,7 +284,49 @@ struct ChatOverlayView: View {
 
     private func sendMessage() {
         guard !inputText.isEmpty else { return }
-        viewModel.sendMessage(inputText)
+        
+        switch chatMode {
+        case .room:
+            viewModel.sendMessage(inputText)
+        case .friends:
+            break
+        case .dm(let friend):
+            Task {
+                await socialService.sendMessage(to: friend.id, content: inputText)
+            }
+        }
+        
         inputText = ""
+    }
+}
+
+struct FriendRowButton: View {
+    let friend: Friend
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            HStack {
+                Circle()
+                    .fill(Color.blue.opacity(0.3))
+                    .frame(width: 32, height: 32)
+                    .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
+                
+                Text(friend.displayName)
+                    .foregroundColor(.white)
+                
+                Spacer()
+                
+                if SocialService.shared.onlineUserIds.contains(friend.id) {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 8, height: 8)
+                }
+            }
+            .padding(8)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(8)
+        }
+        .buttonStyle(.plain)
     }
 }

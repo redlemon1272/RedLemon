@@ -1,3470 +1,3815 @@
-default	18:36:24.860285-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:24.860390-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:24.860444-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:24.862055-0500	runningboardd	Invalidating assertion 173-114-2953 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:25.008128-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:25.008220-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:25.008315-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:25.403575-0500	runningboardd	Assertion did invalidate due to timeout: 173-140-2948 (target:[anon<RedLemon>(501):20526])
-default	18:36:25.448519-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "frontmost:20526" ID:173-140-2959 target:20526 attributes:[
+default	13:18:44.187747-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "frontmost:18244" ID:173-140-1093 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"RoleUserInteractiveFocal" sourceEnvironment:"(null)">
 	]>
-default	18:36:25.449027-0500	runningboardd	Assertion 173-140-2959 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:25.472088-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "notification:20526" ID:173-140-2960 target:20526 attributes:[
+default	13:18:44.189879-0500	runningboardd	Assertion 173-140-1093 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:44.197678-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:44.197738-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:44.199501-0500	runningboardd	[anon<RedLemon>(501):18244] Set darwin role to: UserInteractiveFocal
+default	13:18:44.201255-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:44.202255-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "notification:18244" ID:173-140-1094 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"LSNotification" sourceEnvironment:"(null)">
 	]>
-default	18:36:25.474241-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:25.475233-0500	runningboardd	Assertion 173-140-2960 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:25.478234-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:25.482157-0500	runningboardd	[anon<RedLemon>(501):20526] Set darwin role to: UserInteractiveFocal
-default	18:36:25.502239-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:25.506076-0500	runningboardd	Invalidating assertion 173-140-2948 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
-default	18:36:26.687779-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:26.687833-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:26.691286-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0ABC776F-FEAF-4854-8A26-1F4D1DAFB727] (reporting strategy default)> on Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> was not selected for reporting
-default	18:36:26.691368-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [538951BA-116A-4CCF-ACF2-B9EA2C9EF077] (reporting strategy default)> on Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> was not selected for reporting
-default	18:36:26.692187-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:26.692667-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:26.692986-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> now using Connection 2
-default	18:36:26.695116-0500	RedLemon	Connection 51: enabling TLS
-default	18:36:26.695506-0500	RedLemon	Connection 51: starting, TC(0x0)
-default	18:36:26.695579-0500	RedLemon	[C51 6F7E026D-E2FB-4B9A-AC9A-F416A48EB4B4 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{69053DCF-04F2-4770-8AEF-405B95986C1C}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:26.696352-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:26.696774-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E4FD3746-CDDD-4198-9134-3EEA4A46B739] (reporting strategy default)> on Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> was not selected for reporting
-default	18:36:26.696717-0500	RedLemon	[C51 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.001s
-default	18:36:26.697407-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:26.697403-0500	RedLemon	[C51 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: 6E048695-C7C3-4D42-9E9E-A9EA3764A9B0
-default	18:36:26.697904-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.002s
-default	18:36:26.698120-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state preparing
-default	18:36:26.698357-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EB7A4BC7-EDF6-4305-ADD0-0D4309B05AB0] (reporting strategy default)> on Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> was not selected for reporting
-default	18:36:26.699191-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> setting up Connection 51
-default	18:36:26.699553-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:26.699786-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> now using Connection 50
-default	18:36:26.699923-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:26.700093-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> now using Connection 50
-default	18:36:26.700794-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> sent request, body S 83
-default	18:36:26.701106-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> sent request, body N 0
-default	18:36:26.701216-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> sent request, body N 0
-default	18:36:26.700480-0500	mDNSResponder	[R2203] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:26.711831-0500	mDNSResponder	[R2203] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:26.712512-0500	RedLemon	nw_endpoint_resolver_update [C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:26.712753-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.017s
-default	18:36:26.714047-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.018s
-default	18:36:26.714557-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.018s, uuid: 2A82D612-C3BD-40F8-BD28-DD2243B3EAC1
-default	18:36:26.714826-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.019s
-default	18:36:26.716398-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.020s
-default	18:36:26.718605-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.022s
-default	18:36:26.720917-0500	RedLemon	tcp_output [C51.1:3] flags=[S] seq=874207733, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=874207733
-default	18:36:26.722049-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> received response, status 200 content K
-default	18:36:26.754399-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> received response, status 200 content K
-default	18:36:26.785861-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> done using Connection 50
-default	18:36:26.786319-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> received response, status 201 content U
-default	18:36:26.786525-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> done using Connection 2
-default	18:36:26.786715-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> response ended
-default	18:36:26.788048-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> response ended
-default	18:36:26.788149-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> summary for task success {transaction_duration_ms=89, response_status=200, connection=50, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=55, response_duration_ms=32, request_bytes=37, response_bytes=236687, cache_hit=false}
-default	18:36:26.788336-0500	RedLemon	Task <0A81204A-3F54-404C-BBEE-48E8CA372CD5>.<472> finished successfully
-default	18:36:26.788409-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> summary for task success {transaction_duration_ms=96, response_status=201, connection=2, reused=1, request_start_ms=1, request_duration_ms=7, response_start_ms=94, response_duration_ms=2, request_bytes=309, response_bytes=535, cache_hit=false}
-default	18:36:26.789587-0500	RedLemon	Task <3473B57F-B206-498D-8DEE-BC5ED3DE3515>.<470> finished successfully
-default	18:36:26.789972-0500	RedLemon	✅ Guest joined room T948 in database
-default	18:36:26.791800-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:26.792773-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [44FCF1B0-F5DE-4394-9C78-6AA7D8708A7F] (reporting strategy default)> on Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> was not selected for reporting
-default	18:36:26.795773-0500	RedLemon	Connection 52: enabling TLS
-default	18:36:26.795820-0500	RedLemon	Connection 52: starting, TC(0x0)
-default	18:36:26.795888-0500	RedLemon	[C52 036C0EFF-9110-44CD-B435-86B95CED0170 Hostname#d7069d94:443 tcp, url hash: 74dfb3cc, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{8D5A13B2-835D-4BC2-817F-8541EFE1472B}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:26.796004-0500	RedLemon	[C52 Hostname#d7069d94:443 initial path ((null))] event: path:start @0.000s
-default	18:36:26.796438-0500	RedLemon	[C52 Hostname#d7069d94:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: CA1C75FA-CA4B-4C9D-8FC4-1735C28FC48E
-default	18:36:26.796864-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	18:36:26.796909-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C52] reporting state preparing
-default	18:36:26.797171-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> setting up Connection 52
-default	18:36:26.797364-0500	mDNSResponder	[R2204] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'EwQ2Kg6N6s5/DUwhe5VppQ=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:26.835453-0500	mDNSResponder	[R2204] getaddrinfo stop -- hostname: <mask.hash: 'EwQ2Kg6N6s5/DUwhe5VppQ=='>, client pid: 20526 (RedLemon)
-default	18:36:26.836595-0500	RedLemon	nw_endpoint_resolver_update [C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#07b0ba20:443
-default	18:36:26.836715-0500	RedLemon	nw_endpoint_resolver_update [C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#1b12ec90:443
-default	18:36:26.836849-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.040s
-default	18:36:26.837094-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 initial path ((null))] event: path:start @0.041s
-default	18:36:26.837673-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.041s, uuid: CAB08E91-5B1F-4D3A-BE24-60848C160A49
-default	18:36:26.837832-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.041s
-default	18:36:26.838568-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.042s
-default	18:36:26.839536-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.043s
-default	18:36:26.839693-0500	RedLemon	tcp_output [C52.1:3] flags=[S] seq=3544451910, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3544451910
-default	18:36:26.848330-0500	RedLemon	tcp_input [C51.1:3] flags=[S.] seq=1644622864, ack=874207734, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=874207733
-default	18:36:26.848511-0500	RedLemon	nw_flow_connected [C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:26.849138-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.153s
-default	18:36:26.849234-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.153s
-default	18:36:26.851123-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C51.1:2][0x7f99cfa492f0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:26.851454-0500	RedLemon	boringssl_context_info_handler(2028) [C51.1:2][0x7f99cfa492f0] Client handshake started
-default	18:36:26.851710-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS client enter_early_data
-default	18:36:26.851890-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS client read_server_hello
-default	18:36:26.859512-0500	RedLemon	tcp_input [C52.1:3] flags=[S.] seq=3875904633, ack=3544451911, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3544451910
-default	18:36:26.859720-0500	RedLemon	nw_flow_connected [C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:26.859954-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.063s
-default	18:36:26.860054-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.064s
-default	18:36:26.860666-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C52.1:2][0x7f99d0dcf790] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:26.860857-0500	RedLemon	boringssl_context_info_handler(2028) [C52.1:2][0x7f99d0dcf790] Client handshake started
-default	18:36:26.861167-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS client enter_early_data
-default	18:36:26.861339-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS client read_server_hello
-default	18:36:26.878716-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:26.878899-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:26.879306-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:26.881166-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:26.881428-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:26.881593-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:26.884093-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C52.1:2][0x7f99d0dcf790] Performing external trust evaluation
-default	18:36:26.884541-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C52.1:2][0x7f99d0dcf790] Asyncing for external verify block
-default	18:36:26.885689-0500	RedLemon	Connection 52: asked to evaluate TLS Trust
-default	18:36:26.887075-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> auth completion disp=1 cred=0x0
-default	18:36:26.892472-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> done using Connection 50
-default	18:36:26.892628-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> response ended
-default	18:36:26.893614-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> summary for task success {transaction_duration_ms=196, response_status=200, connection=50, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=24, response_duration_ms=170, request_bytes=41, response_bytes=900821, cache_hit=false}
-default	18:36:26.893774-0500	RedLemon	Task <AED854BC-1E28-4642-BD18-E273FBF13827>.<471> finished successfully
-default	18:36:26.907386-0500	RedLemon	Connection 52: TLS Trust result 0
-default	18:36:26.907439-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C52.1:2][0x7f99d0dcf790] Returning from external verify block with result: true
-default	18:36:26.907524-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C52.1:2][0x7f99d0dcf790] Certificate verification result: OK
-default	18:36:26.908204-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:26.908344-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:26.908384-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:26.908420-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:26.908453-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:26.908586-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS 1.3 client done
-default	18:36:26.908881-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS client finish_client_handshake
-default	18:36:26.908936-0500	RedLemon	boringssl_context_info_handler(2045) [C52.1:2][0x7f99d0dcf790] Client handshake state: TLS client done
-default	18:36:26.908977-0500	RedLemon	boringssl_context_info_handler(2034) [C52.1:2][0x7f99d0dcf790] Client handshake done
-default	18:36:26.909816-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C52.1:2][0x7f99d0dcf790] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(49ms) flight_time(20ms) rtt(17ms) write_stalls(0) read_stalls(7)]
-default	18:36:26.910038-0500	RedLemon	nw_flow_connected [C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:26.910348-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.114s
-default	18:36:26.910614-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C52] reporting state ready
-default	18:36:26.910691-0500	RedLemon	[C52 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.114s
-default	18:36:26.910820-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.114s
-default	18:36:26.910886-0500	RedLemon	[C52 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.114s
-default	18:36:26.911221-0500	RedLemon	Connection 52: connected successfully
-default	18:36:26.911283-0500	RedLemon	Connection 52: TLS handshake complete
-default	18:36:26.911637-0500	RedLemon	Connection 52: ready C(N) E(N)
-default	18:36:26.911919-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> now using Connection 52
-default	18:36:26.912025-0500	RedLemon	Connection 52: received viability advisory(Y)
-default	18:36:26.912386-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> sent request, body N 0
-default	18:36:26.982481-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:26.982573-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:26.982928-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:26.983381-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:26.984338-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:26.984452-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:26.985637-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C51.1:2][0x7f99cfa492f0] Performing external trust evaluation
-default	18:36:26.985956-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C51.1:2][0x7f99cfa492f0] Asyncing for external verify block
-default	18:36:26.986280-0500	RedLemon	Connection 51: asked to evaluate TLS Trust
-default	18:36:26.986702-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> auth completion disp=1 cred=0x0
-default	18:36:26.993927-0500	RedLemon	Connection 51: TLS Trust result 0
-default	18:36:26.994020-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C51.1:2][0x7f99cfa492f0] Returning from external verify block with result: true
-default	18:36:26.994080-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C51.1:2][0x7f99cfa492f0] Certificate verification result: OK
-default	18:36:26.994525-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:26.994817-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:26.994858-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:26.994898-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:26.994934-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:26.995093-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS 1.3 client done
-default	18:36:26.995414-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS client finish_client_handshake
-default	18:36:26.995467-0500	RedLemon	boringssl_context_info_handler(2045) [C51.1:2][0x7f99cfa492f0] Client handshake state: TLS client done
-default	18:36:26.995524-0500	RedLemon	boringssl_context_info_handler(2034) [C51.1:2][0x7f99cfa492f0] Client handshake done
-default	18:36:26.996190-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C51.1:2][0x7f99cfa492f0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(144ms) flight_time(132ms) rtt(131ms) write_stalls(0) read_stalls(6)]
-default	18:36:26.996360-0500	RedLemon	nw_flow_connected [C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:26.996628-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.300s
-default	18:36:26.996917-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state ready
-default	18:36:26.997086-0500	RedLemon	[C51 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.301s
-default	18:36:26.997239-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.301s
-default	18:36:26.997307-0500	RedLemon	[C51 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.301s
-default	18:36:26.998140-0500	RedLemon	Connection 51: connected successfully
-default	18:36:26.998192-0500	RedLemon	Connection 51: TLS handshake complete
-default	18:36:26.998462-0500	RedLemon	Connection 51: ready C(N) E(N)
-default	18:36:26.998668-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> now using Connection 51
-default	18:36:26.998754-0500	RedLemon	Connection 51: received viability advisory(Y)
-default	18:36:26.999001-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> sent request, body N 0
-default	18:36:27.057259-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> received response, status 101 content U
-default	18:36:27.057756-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> response ended
-default	18:36:27.057851-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> done using Connection 52
-default	18:36:27.059668-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.263s
-default	18:36:27.059747-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C52] reporting state preparing
-default	18:36:27.059870-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.263s
-default	18:36:27.060254-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.264s
-default	18:36:27.060369-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.264s
-default	18:36:27.060517-0500	RedLemon	nw_flow_connected [C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:27.061062-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.265s
-default	18:36:27.061433-0500	RedLemon	[C52 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.265s
-default	18:36:27.061794-0500	RedLemon	nw_flow_connected [C52.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:27.062380-0500	RedLemon	[C52.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.266s
-default	18:36:27.062458-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C52] reporting state ready
-default	18:36:27.062585-0500	RedLemon	[C52 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.266s
-default	18:36:27.083194-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:27.083894-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [23055FA8-0CD2-47CB-9FEC-6B971A721ED4] (reporting strategy default)> on Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> was not selected for reporting
-default	18:36:27.084790-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:27.085062-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> now using Connection 2
-default	18:36:27.085396-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> sent request, body N 0
-default	18:36:27.109072-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from misterchief in room T948
-default	18:36:27.109314-0500	RedLemon	👋 Received: Guest 'misterchief' joined room T948
-default	18:36:27.125195-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> received response, status 101 content U
-default	18:36:27.125677-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> response ended
-default	18:36:27.125786-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> done using Connection 51
-default	18:36:27.127505-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.431s
-default	18:36:27.127561-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state preparing
-default	18:36:27.127644-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.431s
-default	18:36:27.127872-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.432s
-default	18:36:27.127988-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.432s
-default	18:36:27.128787-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2961 target:20526 attributes:[
+default	13:18:44.204744-0500	runningboardd	Assertion 173-140-1094 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:44.210275-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:44.210328-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:44.210376-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:45.268194-0500	RedLemon	Task <23BE09FB-17AC-418A-A493-F6E953D61907>.<590> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:45.268587-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CB763451-56EC-42DE-A73E-D98203522E67] (reporting strategy default)> on Task <23BE09FB-17AC-418A-A493-F6E953D61907>.<590> was not selected for reporting
+default	13:18:45.271806-0500	RedLemon	Task <23BE09FB-17AC-418A-A493-F6E953D61907>.<590> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:45.271941-0500	RedLemon	Task <23BE09FB-17AC-418A-A493-F6E953D61907>.<590> finished successfully
+default	13:18:45.411063-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.411493-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [692F2B7D-561D-4ECC-BE9E-E1696E2A2891] (reporting strategy default)> on Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> was not selected for reporting
+default	13:18:45.412434-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.414154-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> now using Connection 9
+default	13:18:45.416416-0500	RedLemon	0x7f90aa3a9bd8 ID=528 Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> sent request, body N 0
+default	13:18:45.513365-0500	RedLemon	0x7f90aa3a9bd8 ID=528 Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> received response, status 200 content U
+default	13:18:45.514746-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> response ended
+default	13:18:45.516381-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1098 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:27.128087-0500	RedLemon	nw_flow_connected [C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:27.128314-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.432s
-default	18:36:27.128587-0500	RedLemon	[C51 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.432s
-default	18:36:27.129234-0500	runningboardd	Assertion 173-20526-2961 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:27.128808-0500	RedLemon	nw_flow_connected [C51.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:27.129138-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.433s
-default	18:36:27.129189-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state ready
-default	18:36:27.129327-0500	RedLemon	[C51 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.433s
-default	18:36:27.130652-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:27.130700-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:27.130745-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:27.134133-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2962 target:20526 attributes:[
+default	13:18:45.516702-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> done using Connection 9
+default	13:18:45.517059-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> summary for task success {transaction_duration_ms=105, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=2, response_start_ms=101, response_duration_ms=3, request_bytes=522, response_bytes=1278, cache_hit=true}
+default	13:18:45.517443-0500	RedLemon	Task <08AA2CFA-73F8-4F9D-8AC4-B0733ECDAAD9>.<591> finished successfully
+default	13:18:45.517530-0500	runningboardd	Assertion 173-18244-1098 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:45.520613-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:45.520689-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:45.520761-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:45.525990-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:45.527167-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1099 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:27.134324-0500	runningboardd	Assertion 173-114-2962 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:27.135232-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:27.135286-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:27.135334-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:27.140342-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> received response, status 200 content U
-default	18:36:27.140512-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> done using Connection 2
-default	18:36:27.141027-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> response ended
-default	18:36:27.141201-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> summary for task success {transaction_duration_ms=56, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=55, response_duration_ms=0, request_bytes=231, response_bytes=729, cache_hit=false}
-default	18:36:27.141410-0500	RedLemon	Task <A6A0AA44-2C1E-4E7F-AC50-ED2EF0FB0E58>.<473> finished successfully
-default	18:36:27.144124-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:27.144465-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8588A0E7-61CB-497F-8726-9A1EE3C6D1B0] (reporting strategy default)> on Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> was not selected for reporting
-default	18:36:27.145191-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:27.145358-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> now using Connection 2
-default	18:36:27.145558-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> sent request, body N 0
-default	18:36:27.217325-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> received response, status 200 content U
-default	18:36:27.217576-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> done using Connection 2
-default	18:36:27.218508-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> response ended
-default	18:36:27.218874-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> summary for task success {transaction_duration_ms=74, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=72, response_duration_ms=1, request_bytes=244, response_bytes=540, cache_hit=true}
-default	18:36:27.219261-0500	RedLemon	Task <DCB29261-9870-4CFF-A0B1-5C3DA1149063>.<474> finished successfully
-default	18:36:27.222743-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:27.223370-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D7ADA2AB-C994-4907-A6FC-95BE472B061A] (reporting strategy default)> on Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> was not selected for reporting
-default	18:36:27.224733-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:27.225030-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> now using Connection 2
-default	18:36:27.225452-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> sent request, body N 0
-default	18:36:27.264955-0500	RedLemon	nw_flow_disconnected [C51.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:27.265558-0500	RedLemon	nw_protocol_tcp_log_summary [C51.1:3]
-	[740A92D8-4D86-4A7A-B1A3-E2ED3C7C5974 <private>:55401<-><private>:443]
-	Init: 1, Conn_Time: 127.596ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 4, rtt: 127.500ms, rtt_var: 5.625ms rtt_nc: 128.968ms, rtt_var_nc: 29.312ms base rtt: 127ms
+default	13:18:45.527662-0500	runningboardd	Assertion 173-114-1099 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:45.530374-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:45.530424-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:45.530469-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:45.533340-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.533817-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A3130C70-F40B-40BB-8464-3E72D5C88291] (reporting strategy default)> on Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> was not selected for reporting
+default	13:18:45.534962-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.535192-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> now using Connection 9
+default	13:18:45.536186-0500	RedLemon	0x7f90adce2e18 ID=532 Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> sent request, body N 0
+default	13:18:45.615423-0500	RedLemon	0x7f90adce2e18 ID=532 Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> received response, status 200 content U
+default	13:18:45.616122-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> response ended
+default	13:18:45.616620-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> done using Connection 9
+default	13:18:45.616813-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> summary for task success {transaction_duration_ms=82, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=81, response_duration_ms=1, request_bytes=511, response_bytes=788, cache_hit=false}
+default	13:18:45.617250-0500	RedLemon	Task <CFDAD841-71EB-4E11-AB14-D6D5C6058111>.<592> finished successfully
+default	13:18:45.618454-0500	RedLemon	📋 Found 1 participants in room B82K
+default	13:18:45.618830-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.619601-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EEED7422-1A9C-4D9C-8FD6-52945D54CD57] (reporting strategy default)> on Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> was not selected for reporting
+default	13:18:45.620548-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.620845-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> now using Connection 9
+default	13:18:45.622196-0500	RedLemon	0x7f90acbb5558 ID=536 Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> sent request, body N 0
+default	13:18:45.627722-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:45.688365-0500	RedLemon	0x7f90acbb5558 ID=536 Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> received response, status 200 content U
+default	13:18:45.689630-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> response ended
+default	13:18:45.690227-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> done using Connection 9
+default	13:18:45.690512-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> summary for task success {transaction_duration_ms=70, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=68, response_duration_ms=2, request_bytes=512, response_bytes=836, cache_hit=true}
+default	13:18:45.691148-0500	RedLemon	Task <33E671F0-C792-4F4E-B1FD-58AA9FF7EBCE>.<593> finished successfully
+default	13:18:45.693713-0500	RedLemon	📋 Found 2 participants in room LQUX
+default	13:18:45.694319-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.694866-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DD7533FD-E665-46AE-801E-5F0D6F1CD788] (reporting strategy default)> on Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> was not selected for reporting
+default	13:18:45.696273-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.696691-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> now using Connection 9
+default	13:18:45.697889-0500	RedLemon	0x7f90adce2e18 ID=540 Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> sent request, body N 0
+default	13:18:45.703263-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:45.762783-0500	RedLemon	0x7f90adce2e18 ID=540 Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> received response, status 200 content U
+default	13:18:45.763808-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> response ended
+default	13:18:45.765014-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> done using Connection 9
+default	13:18:45.765588-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> summary for task success {transaction_duration_ms=70, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=66, response_duration_ms=2, request_bytes=524, response_bytes=823, cache_hit=true}
+default	13:18:45.766194-0500	RedLemon	Task <FD2B4CF6-1904-4F2C-A071-F41397BAD331>.<594> finished successfully
+default	13:18:45.771307-0500	RedLemon	   - misterchief (guest)
+default	13:18:45.771780-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.772310-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E4C42B15-12EF-418E-B166-DC8222F72E3F] (reporting strategy default)> on Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> was not selected for reporting
+default	13:18:45.773395-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.773778-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> now using Connection 9
+default	13:18:45.774842-0500	RedLemon	0x7f90aa028c88 ID=544 Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> sent request, body N 0
+default	13:18:45.788682-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:45.860574-0500	RedLemon	0x7f90aa028c88 ID=544 Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> received response, status 200 content U
+default	13:18:45.861290-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> response ended
+default	13:18:45.861824-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> done using Connection 9
+default	13:18:45.862097-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> summary for task success {transaction_duration_ms=89, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=87, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	13:18:45.863765-0500	RedLemon	Task <B56AFD7C-2EB9-4564-A349-EE587303E6D6>.<595> finished successfully
+default	13:18:45.867391-0500	RedLemon	📋 Found 2 participants in room 3MNA
+default	13:18:45.867938-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.868676-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BA914AEB-EBCD-4344-B47E-FCC307F93163] (reporting strategy default)> on Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> was not selected for reporting
+default	13:18:45.869788-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.870104-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> now using Connection 9
+default	13:18:45.871170-0500	RedLemon	0x7f90adce2e18 ID=548 Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> sent request, body N 0
+default	13:18:45.884067-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:45.937393-0500	RedLemon	0x7f90adce2e18 ID=548 Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> received response, status 200 content U
+default	13:18:45.938824-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> response ended
+default	13:18:45.939452-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> done using Connection 9
+default	13:18:45.939840-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> summary for task success {transaction_duration_ms=70, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=67, response_duration_ms=2, request_bytes=524, response_bytes=824, cache_hit=true}
+default	13:18:45.941987-0500	RedLemon	Task <39D88068-B86B-4E0A-B3E8-7AA1101E4188>.<596> finished successfully
+default	13:18:45.945131-0500	RedLemon	   - misterchief (guest)
+default	13:18:45.945657-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:45.946096-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [07223993-B7A0-46D6-A214-D61775DFE0F0] (reporting strategy default)> on Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> was not selected for reporting
+default	13:18:45.947305-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:45.947614-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> now using Connection 9
+default	13:18:45.948601-0500	RedLemon	0x7f90adce2e18 ID=552 Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> sent request, body N 0
+default	13:18:45.961010-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.031337-0500	RedLemon	0x7f90adce2e18 ID=552 Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> received response, status 200 content U
+default	13:18:46.032416-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> response ended
+default	13:18:46.033176-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> done using Connection 9
+default	13:18:46.033546-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> summary for task success {transaction_duration_ms=86, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=84, response_duration_ms=2, request_bytes=512, response_bytes=837, cache_hit=true}
+default	13:18:46.034264-0500	RedLemon	Task <46A4913A-D5B7-4754-A4BD-41E65823DCF7>.<597> finished successfully
+default	13:18:46.036601-0500	RedLemon	📋 Found 2 participants in room XGGC
+default	13:18:46.037193-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.038008-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E78C2039-01E2-42DA-BC58-FC2D46A40D13] (reporting strategy default)> on Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> was not selected for reporting
+default	13:18:46.039239-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.039622-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> now using Connection 9
+default	13:18:46.041609-0500	RedLemon	0x7f90acbb5558 ID=556 Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> sent request, body N 0
+default	13:18:46.052685-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.107542-0500	RedLemon	0x7f90acbb5558 ID=556 Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> received response, status 200 content U
+default	13:18:46.109085-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> response ended
+default	13:18:46.109951-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> done using Connection 9
+default	13:18:46.110301-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> summary for task success {transaction_duration_ms=71, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=68, response_duration_ms=2, request_bytes=524, response_bytes=825, cache_hit=true}
+default	13:18:46.110708-0500	RedLemon	Task <B0F4D573-316D-4661-831F-7350755F20F3>.<598> finished successfully
+default	13:18:46.114480-0500	RedLemon	   - misterchief (guest)
+default	13:18:46.114994-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.115432-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5138FA74-9C2A-4D57-A21A-0F7646D894B5] (reporting strategy default)> on Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> was not selected for reporting
+default	13:18:46.118290-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.118547-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> now using Connection 9
+default	13:18:46.119640-0500	RedLemon	0x7f90adce2e18 ID=560 Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> sent request, body N 0
+default	13:18:46.119770-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.178695-0500	RedLemon	0x7f90adce2e18 ID=560 Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> received response, status 200 content U
+default	13:18:46.179442-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> response ended
+default	13:18:46.179970-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> done using Connection 9
+default	13:18:46.180322-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> summary for task success {transaction_duration_ms=64, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=62, response_duration_ms=1, request_bytes=511, response_bytes=838, cache_hit=true}
+default	13:18:46.180908-0500	RedLemon	Task <A30F5FF3-77CD-4D8E-9B83-89DB021968B7>.<599> finished successfully
+default	13:18:46.182890-0500	RedLemon	📋 Found 2 participants in room BN67
+default	13:18:46.183470-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.183959-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B3588FDD-78B8-4705-B074-B95B218AAACD] (reporting strategy default)> on Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> was not selected for reporting
+default	13:18:46.185084-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.185437-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> now using Connection 9
+default	13:18:46.186431-0500	RedLemon	0x7f90aa028c88 ID=564 Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> sent request, body N 0
+default	13:18:46.199636-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.250068-0500	RedLemon	0x7f90aa028c88 ID=564 Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> received response, status 200 content U
+default	13:18:46.251002-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> response ended
+default	13:18:46.251684-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> done using Connection 9
+default	13:18:46.251991-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> summary for task success {transaction_duration_ms=67, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=65, response_duration_ms=1, request_bytes=524, response_bytes=824, cache_hit=true}
+default	13:18:46.252880-0500	RedLemon	Task <8847A65E-028D-4E86-8142-EAD39A20B7E9>.<600> finished successfully
+default	13:18:46.255911-0500	RedLemon	   - misterchief (guest)
+default	13:18:46.256767-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.257551-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2BA8DFB1-75F8-4283-9D8A-E9B84D603294] (reporting strategy default)> on Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> was not selected for reporting
+default	13:18:46.258819-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.259181-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> now using Connection 9
+default	13:18:46.260318-0500	RedLemon	0x7f90aa028c88 ID=568 Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> sent request, body N 0
+default	13:18:46.271805-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.318265-0500	RedLemon	0x7f90aa028c88 ID=568 Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> received response, status 200 content U
+default	13:18:46.318980-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> response ended
+default	13:18:46.319516-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> done using Connection 9
+default	13:18:46.319788-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> summary for task success {transaction_duration_ms=61, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=59, response_duration_ms=1, request_bytes=512, response_bytes=836, cache_hit=true}
+default	13:18:46.320553-0500	RedLemon	Task <E908F22A-6A07-4115-A22C-5A2FE3A9DE3B>.<601> finished successfully
+default	13:18:46.323326-0500	RedLemon	📋 Found 2 participants in room XHHQ
+default	13:18:46.324049-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.324846-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A584029C-857D-4C3D-BF36-61E0E3355551] (reporting strategy default)> on Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> was not selected for reporting
+default	13:18:46.326286-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.326596-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> now using Connection 9
+default	13:18:46.327780-0500	RedLemon	0x7f90acbb5558 ID=572 Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> sent request, body N 0
+default	13:18:46.340250-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.393522-0500	RedLemon	0x7f90acbb5558 ID=572 Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> received response, status 200 content U
+default	13:18:46.394237-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> response ended
+default	13:18:46.394772-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> done using Connection 9
+default	13:18:46.395133-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> summary for task success {transaction_duration_ms=69, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=822, cache_hit=true}
+default	13:18:46.395836-0500	RedLemon	Task <46DF41FA-B16F-4A4F-960D-89E362E4DB3F>.<602> finished successfully
+default	13:18:46.398936-0500	RedLemon	   - misterchief (guest)
+default	13:18:46.399460-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.400007-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [04D21C45-CA7A-4438-A9FA-AC8311DD054C] (reporting strategy default)> on Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> was not selected for reporting
+default	13:18:46.400973-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.401221-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> now using Connection 9
+default	13:18:46.402168-0500	RedLemon	0x7f90acbb5558 ID=576 Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> sent request, body N 0
+default	13:18:46.412033-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.477005-0500	RedLemon	0x7f90acbb5558 ID=576 Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> received response, status 200 content U
+default	13:18:46.478363-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> response ended
+default	13:18:46.479522-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> done using Connection 9
+default	13:18:46.479899-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> summary for task success {transaction_duration_ms=79, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=76, response_duration_ms=3, request_bytes=511, response_bytes=835, cache_hit=true}
+default	13:18:46.481024-0500	RedLemon	Task <EB3B5939-3561-4891-ACE4-9CC8D1822B22>.<603> finished successfully
+default	13:18:46.483372-0500	RedLemon	📋 Found 2 participants in room QEF9
+default	13:18:46.483867-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:46.484215-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5E4880C9-4762-46E3-9544-F98B0B9A47A6] (reporting strategy default)> on Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> was not selected for reporting
+default	13:18:46.485235-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.485584-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> now using Connection 9
+default	13:18:46.487158-0500	RedLemon	0x7f90aa3a9bd8 ID=580 Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> sent request, body N 0
+default	13:18:46.498938-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.558660-0500	RedLemon	0x7f90aa3a9bd8 ID=580 Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> received response, status 200 content U
+default	13:18:46.559911-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> response ended
+default	13:18:46.560451-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> done using Connection 9
+default	13:18:46.560739-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> summary for task success {transaction_duration_ms=76, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=73, response_duration_ms=2, request_bytes=524, response_bytes=824, cache_hit=true}
+default	13:18:46.561489-0500	RedLemon	Task <3AF2057D-B0B8-4473-990D-39A55D96CD82>.<604> finished successfully
+default	13:18:46.563414-0500	runningboardd	Invalidating assertion 173-18244-1098 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:46.564796-0500	RedLemon	   - misterchief (guest)
+default	13:18:46.594803-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:46.637011-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.637485-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BC79B0FE-D160-469C-A204-B856C942EC52] (reporting strategy default)> on Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> was not selected for reporting
+default	13:18:46.638196-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.638484-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> now using Connection 11
+default	13:18:46.641088-0500	RedLemon	0x7f90ad03a6f8 ID=40 Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> sent request, body N 0
+default	13:18:46.658797-0500	RedLemon	0x7f90ad03a6f8 ID=40 Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> received response, status 200 content K
+default	13:18:46.660554-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> response ended
+default	13:18:46.661617-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> done using Connection 11
+default	13:18:46.662549-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> summary for task success {transaction_duration_ms=24, response_status=200, connection=11, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=20, response_duration_ms=3, request_bytes=167, response_bytes=28740, cache_hit=false}
+default	13:18:46.662852-0500	RedLemon	Task <72C2692F-0653-4188-B098-E7A95C339434>.<605> finished successfully
+default	13:18:46.665781-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1100 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:18:46.666393-0500	runningboardd	Assertion 173-18244-1100 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:46.673182-0500	runningboardd	Attempting to rename power assertion 33629 for target anon<RedLemon>(501) to anon<RedLemon>(501);173-18244-1098:com.apple.CFNetwork.StorageDB;173-18244-1100:com.apple.CFNetwork.StorageDB
+default	13:18:46.686096-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:46.686340-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:46.686614-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:46.688836-0500	runningboardd	Attempting to rename power assertion 33629 for target anon<RedLemon>(501) to anon<RedLemon>(501)173-18244-1100:com.apple.CFNetwork.StorageDB
+default	13:18:46.691404-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:46.691669-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:46.691862-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:46.766047-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.766432-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6791C856-5D76-4D31-A4C2-B648591B43CF] (reporting strategy default)> on Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> was not selected for reporting
+default	13:18:46.767141-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.767194-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.767405-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> now using Connection 11
+default	13:18:46.767805-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [28270356-6EB8-4ED3-AA52-BD1C20DD56B8] (reporting strategy default)> on Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> was not selected for reporting
+default	13:18:46.768543-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.769283-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9258340D-0552-4DDF-BC04-A71137077D1F] (reporting strategy default)> on Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> was not selected for reporting
+default	13:18:46.769727-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.770015-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> now using Connection 11
+default	13:18:46.770066-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.771162-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EB739D60-F640-4980-AB76-4FF9AD8267E0] (reporting strategy default)> on Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> was not selected for reporting
+default	13:18:46.772258-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.772505-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> now using Connection 11
+default	13:18:46.773672-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.773880-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> now using Connection 11
+default	13:18:46.776717-0500	RedLemon	0x7f90ade2c988 ID=44 Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> sent request, body N 0
+default	13:18:46.777772-0500	RedLemon	0x7f90aa37e278 ID=48 Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> sent request, body N 0
+default	13:18:46.777916-0500	RedLemon	0x7f90aa3661d8 ID=52 Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> sent request, body N 0
+default	13:18:46.778052-0500	RedLemon	0x7f90aa3cf958 ID=56 Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> sent request, body N 0
+default	13:18:46.787802-0500	RedLemon	0x7f90ade2c988 ID=44 Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> received response, status 200 content K
+default	13:18:46.788944-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> response ended
+default	13:18:46.791273-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> done using Connection 11
+default	13:18:46.791944-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> summary for task success {transaction_duration_ms=25, response_status=200, connection=11, reused=1, request_start_ms=0, request_duration_ms=9, response_start_ms=20, response_duration_ms=4, request_bytes=167, response_bytes=28737, cache_hit=false}
+default	13:18:46.792043-0500	RedLemon	Task <163E3793-C95E-48E7-BDF5-0C4D28B0F20B>.<606> finished successfully
+default	13:18:46.793397-0500	RedLemon	0x7f90aa37e278 ID=48 Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> received response, status 200 content K
+default	13:18:46.794831-0500	RedLemon	0x7f90aa3cf958 ID=56 Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> received response, status 200 content K
+default	13:18:46.795382-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> response ended
+default	13:18:46.796241-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> done using Connection 11
+default	13:18:46.796724-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> summary for task success {transaction_duration_ms=25, response_status=200, connection=11, reused=1, request_start_ms=2, request_duration_ms=4, response_start_ms=23, response_duration_ms=1, request_bytes=167, response_bytes=33170, cache_hit=false}
+default	13:18:46.796961-0500	RedLemon	Task <47B630E2-798B-4FB0-AFC1-48EEFC82A90E>.<609> finished successfully
+default	13:18:46.797863-0500	RedLemon	0x7f90aa3661d8 ID=52 Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> received response, status 200 content K
+default	13:18:46.798661-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> response ended
+default	13:18:46.799417-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> done using Connection 11
+default	13:18:46.799972-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> summary for task success {transaction_duration_ms=30, response_status=200, connection=11, reused=1, request_start_ms=2, request_duration_ms=5, response_start_ms=27, response_duration_ms=2, request_bytes=167, response_bytes=33170, cache_hit=false}
+default	13:18:46.800081-0500	RedLemon	Task <979F5366-2690-4CD3-952A-6AE3FC948B9A>.<608> finished successfully
+default	13:18:46.800760-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> response ended
+default	13:18:46.801387-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> done using Connection 11
+default	13:18:46.802306-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> summary for task success {transaction_duration_ms=34, response_status=200, connection=11, reused=1, request_start_ms=1, request_duration_ms=7, response_start_ms=25, response_duration_ms=8, request_bytes=167, response_bytes=28738, cache_hit=false}
+default	13:18:46.802421-0500	RedLemon	Task <90719536-81BA-41CD-8CA8-7AE6531B9846>.<607> finished successfully
+default	13:18:46.802937-0500	RedLemon	Connection 11: encountered bidirectional stream limit updated event
+default	13:18:46.836976-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.837373-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8253E1F8-9388-4C04-93C8-4467D951BB85] (reporting strategy default)> on Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> was not selected for reporting
+default	13:18:46.837500-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.838123-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.838393-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [30FAC65F-4CA5-4AB4-9CAC-A870E3F226FC] (reporting strategy default)> on Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> was not selected for reporting
+default	13:18:46.838706-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.839476-0500	RedLemon	Connection 71: enabling TLS
+default	13:18:46.839662-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [58540F28-1A49-41FF-B5C0-133DE89B3355] (reporting strategy default)> on Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> was not selected for reporting
+default	13:18:46.839715-0500	RedLemon	Connection 71: starting, TC(0x0)
+default	13:18:46.839878-0500	RedLemon	[C71 DE9002CC-D49A-49B0-8EFE-510497E55442 Hostname#6fcf37f3:443 tcp, url hash: 1b603788, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.839978-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.840308-0500	RedLemon	[C71 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.841002-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DC8705F5-C26A-4E86-9B38-F84E9849E2D8] (reporting strategy default)> on Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> was not selected for reporting
+default	13:18:46.841200-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.841276-0500	RedLemon	[C71 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.001s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.842122-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [144376F0-7398-4E76-A8A4-36032A5676FB] (reporting strategy default)> on Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> was not selected for reporting
+default	13:18:46.842360-0500	RedLemon	[C71 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.002s
+default	13:18:46.842456-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.842519-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C71] reporting state preparing
+default	13:18:46.843116-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> setting up Connection 71
+default	13:18:46.843605-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5D26F871-2513-4046-AED2-9A80002A0FE7] (reporting strategy default)> on Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> was not selected for reporting
+default	13:18:46.843534-0500	mDNSResponder	[R1067] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.843977-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.844077-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:46.844481-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.844752-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.845345-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.846249-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.846440-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3ADE8806-B5EB-4416-8EA4-E7FEC28ADEE1] (reporting strategy default)> on Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> was not selected for reporting
+default	13:18:46.847281-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:46.848118-0500	RedLemon	Connection 72: enabling TLS
+default	13:18:46.848159-0500	RedLemon	Connection 72: starting, TC(0x0)
+default	13:18:46.848248-0500	RedLemon	[C72 5BB03D58-46C0-45FD-80AB-53EF896269C6 Hostname#6fcf37f3:443 tcp, url hash: 1b603788, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.848395-0500	RedLemon	[C72 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.848685-0500	RedLemon	[C72 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.848889-0500	RedLemon	[C72 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:46.848931-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C72] reporting state preparing
+default	13:18:46.849123-0500	mDNSResponder	[R1068] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.849154-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> setting up Connection 72
+default	13:18:46.849616-0500	RedLemon	Connection 73: enabling TLS
+default	13:18:46.849656-0500	RedLemon	Connection 73: starting, TC(0x0)
+default	13:18:46.849708-0500	RedLemon	[C73 72345E0B-80FA-45BB-ADD9-04D410AD7F3A Hostname#6fcf37f3:443 tcp, url hash: 87f73228, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.849802-0500	RedLemon	[C73 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.850055-0500	RedLemon	[C73 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.850385-0500	RedLemon	[C73 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:46.851078-0500	mDNSResponder	[R1069] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.850502-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C73] reporting state preparing
+default	13:18:46.851099-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> setting up Connection 73
+default	13:18:46.851517-0500	RedLemon	Connection 74: enabling TLS
+default	13:18:46.851560-0500	RedLemon	Connection 74: starting, TC(0x0)
+default	13:18:46.851784-0500	RedLemon	[C74 1286FB24-1861-48F1-B47F-9D128AA07169 Hostname#6fcf37f3:443 tcp, url hash: 87f73228, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.852112-0500	RedLemon	[C74 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.852473-0500	RedLemon	[C74 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.853110-0500	mDNSResponder	[R1070] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.852826-0500	RedLemon	[C74 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:46.852874-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C74] reporting state preparing
+default	13:18:46.853096-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> setting up Connection 74
+default	13:18:46.853697-0500	RedLemon	Connection 75: enabling TLS
+default	13:18:46.853826-0500	RedLemon	Connection 75: starting, TC(0x0)
+default	13:18:46.853965-0500	RedLemon	[C75 D11C2923-56ED-4808-A1DC-CAAA1F36B372 Hostname#6fcf37f3:443 tcp, url hash: 87f73228, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.854732-0500	RedLemon	[C75 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.855292-0500	RedLemon	[C75 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.001s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.855880-0500	mDNSResponder	[R1071] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.855496-0500	RedLemon	[C75 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.001s
+default	13:18:46.855540-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C75] reporting state preparing
+default	13:18:46.855783-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> setting up Connection 75
+default	13:18:46.856354-0500	RedLemon	Connection 76: enabling TLS
+default	13:18:46.856451-0500	RedLemon	Connection 76: starting, TC(0x0)
+default	13:18:46.856940-0500	RedLemon	[C76 FCF43699-714D-4AA8-8A4F-43729D0D0419 Hostname#6fcf37f3:443 tcp, url hash: 87f73228, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:46.857089-0500	RedLemon	[C76 Hostname#6fcf37f3:443 initial path ((null))] event: path:start @0.000s
+default	13:18:46.857295-0500	RedLemon	[C76 Hostname#6fcf37f3:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 8837821D-1080-4B45-9A6A-0A2799769138
+default	13:18:46.857994-0500	mDNSResponder	[R1072] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:46.857640-0500	RedLemon	[C76 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:46.857686-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C76] reporting state preparing
+default	13:18:46.857984-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> setting up Connection 76
+default	13:18:46.860270-0500	mDNSResponder	[R1067] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.861542-0500	mDNSResponder	[R1068] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.863153-0500	mDNSResponder	[R1069] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.864386-0500	mDNSResponder	[R1070] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.865427-0500	mDNSResponder	[R1071] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.866657-0500	mDNSResponder	[R1072] getaddrinfo stop -- hostname: <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, client pid: 18244 (RedLemon)
+default	13:18:46.866854-0500	RedLemon	nw_endpoint_resolver_update [C71 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.866972-0500	RedLemon	nw_endpoint_resolver_update [C71 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.867074-0500	RedLemon	[C71 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.027s
+default	13:18:46.867367-0500	RedLemon	nw_endpoint_resolver_update [C72 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.867456-0500	RedLemon	nw_endpoint_resolver_update [C72 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.867553-0500	RedLemon	[C72 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.019s
+default	13:18:46.867762-0500	RedLemon	nw_endpoint_resolver_update [C73 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.867856-0500	RedLemon	nw_endpoint_resolver_update [C73 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.867947-0500	RedLemon	[C73 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.018s
+default	13:18:46.868066-0500	RedLemon	nw_endpoint_resolver_update [C74 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.868130-0500	RedLemon	nw_endpoint_resolver_update [C74 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.868232-0500	RedLemon	[C74 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.016s
+default	13:18:46.868402-0500	RedLemon	nw_endpoint_resolver_update [C75 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.868468-0500	RedLemon	nw_endpoint_resolver_update [C75 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.868555-0500	RedLemon	[C75 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.014s
+default	13:18:46.868712-0500	RedLemon	nw_endpoint_resolver_update [C76 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#847abc55:443
+default	13:18:46.868774-0500	RedLemon	nw_endpoint_resolver_update [C76 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#4adc1ccf:443
+default	13:18:46.868879-0500	RedLemon	[C76 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.011s
+default	13:18:46.869259-0500	RedLemon	[C71.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.029s
+default	13:18:46.869730-0500	RedLemon	[C71.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.029s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.869875-0500	RedLemon	[C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.029s
+default	13:18:46.870954-0500	RedLemon	[C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.030s
+default	13:18:46.871805-0500	RedLemon	[C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.031s
+default	13:18:46.872035-0500	RedLemon	tcp_output [C71.1:3] flags=[S] seq=1987009797, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1987009797
+default	13:18:46.872463-0500	RedLemon	[C72.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.024s
+default	13:18:46.872692-0500	RedLemon	[C72.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: path:satisfied @0.024s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.872842-0500	RedLemon	[C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_nexus @0.024s
+default	13:18:46.873590-0500	RedLemon	[C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.025s
+default	13:18:46.874322-0500	RedLemon	[C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.025s
+default	13:18:46.874510-0500	RedLemon	tcp_output [C72.1:3] flags=[S] seq=1152863205, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1152863205
+default	13:18:46.875236-0500	RedLemon	[C73.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.025s
+default	13:18:46.875462-0500	RedLemon	[C73.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: path:satisfied @0.025s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.875612-0500	RedLemon	[C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_nexus @0.025s
+default	13:18:46.876554-0500	RedLemon	[C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.026s
+default	13:18:46.877346-0500	RedLemon	[C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.027s
+default	13:18:46.877558-0500	RedLemon	tcp_output [C73.1:3] flags=[S] seq=1531760046, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1531760046
+default	13:18:46.878865-0500	RedLemon	[C74.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.026s
+default	13:18:46.879224-0500	RedLemon	[C74.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: path:satisfied @0.027s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.879390-0500	RedLemon	[C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_nexus @0.027s
+default	13:18:46.880425-0500	RedLemon	[C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.028s
+default	13:18:46.881047-0500	RedLemon	[C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.028s
+default	13:18:46.881218-0500	RedLemon	tcp_output [C74.1:3] flags=[S] seq=2165507250, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2165507250
+default	13:18:46.882267-0500	RedLemon	[C75.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.028s
+default	13:18:46.882505-0500	RedLemon	[C75.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: path:satisfied @0.028s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.882659-0500	RedLemon	[C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_nexus @0.028s
+default	13:18:46.884475-0500	RedLemon	[C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.030s
+default	13:18:46.885282-0500	RedLemon	[C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.031s
+default	13:18:46.885452-0500	RedLemon	tcp_output [C75.1:3] flags=[S] seq=3711168658, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3711168658
+default	13:18:46.885862-0500	RedLemon	[C76.1 IPv4#847abc55:443 initial path ((null))] event: path:start @0.028s
+default	13:18:46.886101-0500	RedLemon	[C76.1 IPv4#847abc55:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: path:satisfied @0.029s, uuid: 554EDF92-8AE3-4A0F-B086-0E1E28AADE9C
+default	13:18:46.886305-0500	RedLemon	[C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_nexus @0.029s
+default	13:18:46.888376-0500	RedLemon	[C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.031s
+default	13:18:46.889189-0500	RedLemon	[C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.032s
+default	13:18:46.889424-0500	RedLemon	tcp_output [C76.1:3] flags=[S] seq=3713823642, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3713823642
+default	13:18:46.889523-0500	RedLemon	tcp_input [C71.1:3] flags=[S.] seq=162466958, ack=1987009798, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1987009797
+default	13:18:46.889647-0500	RedLemon	nw_flow_connected [C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.889800-0500	RedLemon	[C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.049s
+default	13:18:46.889904-0500	RedLemon	[C71 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.049s
+default	13:18:46.890363-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C71.1:2][0x7f90aceac1e0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.890527-0500	RedLemon	boringssl_context_info_handler(2028) [C71.1:2][0x7f90aceac1e0] Client handshake started
+default	13:18:46.890717-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client enter_early_data
+default	13:18:46.890870-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client read_server_hello
+default	13:18:46.891340-0500	RedLemon	tcp_input [C72.1:3] flags=[S.] seq=2546306188, ack=1152863206, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1152863205
+default	13:18:46.891446-0500	RedLemon	nw_flow_connected [C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.891598-0500	RedLemon	[C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.043s
+default	13:18:46.891710-0500	RedLemon	[C72 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.043s
+default	13:18:46.892285-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C72.1:2][0x7f90ad9a5b60] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.892406-0500	RedLemon	boringssl_context_info_handler(2028) [C72.1:2][0x7f90ad9a5b60] Client handshake started
+default	13:18:46.892694-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client enter_early_data
+default	13:18:46.892839-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_server_hello
+default	13:18:46.893313-0500	RedLemon	tcp_input [C73.1:3] flags=[S.] seq=1742877440, ack=1531760047, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1531760046
+default	13:18:46.893471-0500	RedLemon	nw_flow_connected [C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.893635-0500	RedLemon	[C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.043s
+default	13:18:46.893738-0500	RedLemon	[C73 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.043s
+default	13:18:46.894624-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C73.1:2][0x7f90acef8a30] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.894829-0500	RedLemon	boringssl_context_info_handler(2028) [C73.1:2][0x7f90acef8a30] Client handshake started
+default	13:18:46.895200-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client enter_early_data
+default	13:18:46.895445-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_server_hello
+default	13:18:46.897656-0500	RedLemon	tcp_input [C74.1:3] flags=[S.] seq=4502937, ack=2165507251, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2165507250
+default	13:18:46.897810-0500	RedLemon	nw_flow_connected [C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.897969-0500	RedLemon	[C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.045s
+default	13:18:46.898034-0500	RedLemon	[C74 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.045s
+default	13:18:46.898792-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C74.1:2][0x7f90add444b0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.898943-0500	RedLemon	boringssl_context_info_handler(2028) [C74.1:2][0x7f90add444b0] Client handshake started
+default	13:18:46.899329-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client enter_early_data
+default	13:18:46.899583-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_server_hello
+default	13:18:46.899995-0500	RedLemon	tcp_input [C75.1:3] flags=[S.] seq=1601884304, ack=3711168659, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3711168658
+default	13:18:46.900105-0500	RedLemon	nw_flow_connected [C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.900451-0500	RedLemon	[C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.046s
+default	13:18:46.900608-0500	RedLemon	[C75 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.046s
+default	13:18:46.901086-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C75.1:2][0x7f90ad6a2ec0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.901212-0500	RedLemon	boringssl_context_info_handler(2028) [C75.1:2][0x7f90ad6a2ec0] Client handshake started
+default	13:18:46.901427-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client enter_early_data
+default	13:18:46.901582-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_server_hello
+default	13:18:46.902199-0500	RedLemon	tcp_input [C76.1:3] flags=[S.] seq=3429467988, ack=3713823643, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3713823642
+default	13:18:46.902312-0500	RedLemon	nw_flow_connected [C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:46.902707-0500	RedLemon	[C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.045s
+default	13:18:46.902777-0500	RedLemon	[C76 Hostname#6fcf37f3:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.045s
+default	13:18:46.903374-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C76.1:2][0x7f90add0a050] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:46.903563-0500	RedLemon	boringssl_context_info_handler(2028) [C76.1:2][0x7f90add0a050] Client handshake started
+default	13:18:46.903764-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client enter_early_data
+default	13:18:46.903919-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_server_hello
+default	13:18:46.905963-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_server_certificate
+default	13:18:46.907366-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_certificate_status
+default	13:18:46.907695-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client verify_server_certificate
+default	13:18:46.908217-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C72.1:2][0x7f90ad9a5b60] Performing external trust evaluation
+default	13:18:46.908432-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C72.1:2][0x7f90ad9a5b60] Asyncing for external verify block
+default	13:18:46.909143-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client read_session_ticket
+default	13:18:46.909265-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.909580-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client read_server_finished
+default	13:18:46.909970-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client send_client_finished
+default	13:18:46.910288-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client finish_flight
+default	13:18:46.910474-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client finish_client_handshake
+default	13:18:46.910701-0500	RedLemon	boringssl_context_info_handler(2045) [C71.1:2][0x7f90aceac1e0] Client handshake state: TLS client done
+default	13:18:46.910792-0500	RedLemon	boringssl_context_info_handler(2034) [C71.1:2][0x7f90aceac1e0] Client handshake done
+default	13:18:46.911763-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C71.1:2][0x7f90aceac1e0] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(1) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(21ms) flight_time(19ms) rtt(19ms) write_stalls(0) read_stalls(6)]
+default	13:18:46.911959-0500	RedLemon	nw_flow_connected [C71.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:46.912414-0500	RedLemon	[C71.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.072s
+default	13:18:46.912683-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C71] reporting state ready
+default	13:18:46.912780-0500	RedLemon	[C71 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.072s
+default	13:18:46.912959-0500	RedLemon	[C71.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.072s
+default	13:18:46.913048-0500	RedLemon	[C71 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.072s
+default	13:18:46.913244-0500	RedLemon	Connection 72: asked to evaluate TLS Trust
+default	13:18:46.913913-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_server_certificate
+default	13:18:46.914182-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_certificate_status
+default	13:18:46.914572-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client verify_server_certificate
+default	13:18:46.915029-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C73.1:2][0x7f90acef8a30] Performing external trust evaluation
+default	13:18:46.915200-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C73.1:2][0x7f90acef8a30] Asyncing for external verify block
+default	13:18:46.915374-0500	RedLemon	Connection 71: connected successfully
+default	13:18:46.915525-0500	RedLemon	Connection 71: TLS handshake complete
+default	13:18:46.915771-0500	RedLemon	Connection 71: ready C(N) E(N)
+default	13:18:46.915944-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> now using Connection 71
+default	13:18:46.916095-0500	RedLemon	Connection 71: received viability advisory(Y)
+default	13:18:46.916712-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_server_certificate
+default	13:18:46.916932-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_certificate_status
+default	13:18:46.917516-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> auth completion disp=1 cred=0x0
+default	13:18:46.919198-0500	RedLemon	Connection 73: asked to evaluate TLS Trust
+default	13:18:46.919823-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client verify_server_certificate
+default	13:18:46.920254-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C74.1:2][0x7f90add444b0] Performing external trust evaluation
+default	13:18:46.920438-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C74.1:2][0x7f90add444b0] Asyncing for external verify block
+default	13:18:46.920814-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_server_certificate
+default	13:18:46.921084-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_certificate_status
+default	13:18:46.921437-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client verify_server_certificate
+default	13:18:46.921869-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C75.1:2][0x7f90ad6a2ec0] Performing external trust evaluation
+default	13:18:46.922066-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C75.1:2][0x7f90ad6a2ec0] Asyncing for external verify block
+default	13:18:46.922276-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> sent request, body N 0
+default	13:18:46.922676-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_server_certificate
+default	13:18:46.923222-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_certificate_status
+default	13:18:46.923475-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client verify_server_certificate
+default	13:18:46.923921-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C76.1:2][0x7f90add0a050] Performing external trust evaluation
+default	13:18:46.924082-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C76.1:2][0x7f90add0a050] Asyncing for external verify block
+default	13:18:46.924494-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> auth completion disp=1 cred=0x0
+default	13:18:46.924962-0500	RedLemon	Connection 74: asked to evaluate TLS Trust
+default	13:18:46.925272-0500	RedLemon	Connection 75: asked to evaluate TLS Trust
+default	13:18:46.925638-0500	RedLemon	Connection 76: asked to evaluate TLS Trust
+default	13:18:46.926165-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> auth completion disp=1 cred=0x0
+default	13:18:46.926230-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> auth completion disp=1 cred=0x0
+default	13:18:46.926281-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> auth completion disp=1 cred=0x0
+default	13:18:46.933243-0500	RedLemon	Connection 72: TLS Trust result 0
+default	13:18:46.933311-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C72.1:2][0x7f90ad9a5b60] Returning from external verify block with result: true
+default	13:18:46.933401-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C72.1:2][0x7f90ad9a5b60] Certificate verification result: OK
+default	13:18:46.933444-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_server_key_exchange
+default	13:18:46.934981-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_certificate_request
+default	13:18:46.935425-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_server_hello_done
+default	13:18:46.935470-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client send_client_certificate
+default	13:18:46.935509-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client send_client_key_exchange
+default	13:18:46.935981-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client send_client_certificate_verify
+default	13:18:46.936032-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client send_client_finished
+default	13:18:46.936196-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client finish_flight
+default	13:18:46.936391-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_session_ticket
+default	13:18:46.936430-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.943526-0500	RedLemon	Connection 73: TLS Trust result 0
+default	13:18:46.943593-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C73.1:2][0x7f90acef8a30] Returning from external verify block with result: true
+default	13:18:46.943687-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C73.1:2][0x7f90acef8a30] Certificate verification result: OK
+default	13:18:46.943731-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_server_key_exchange
+default	13:18:46.944605-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_certificate_request
+default	13:18:46.944889-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_server_hello_done
+default	13:18:46.944932-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client send_client_certificate
+default	13:18:46.944973-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client send_client_key_exchange
+default	13:18:46.945544-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client send_client_certificate_verify
+default	13:18:46.945652-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client send_client_finished
+default	13:18:46.945899-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client finish_flight
+default	13:18:46.946171-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_session_ticket
+default	13:18:46.946217-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.947328-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client read_server_finished
+default	13:18:46.947756-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client finish_client_handshake
+default	13:18:46.947910-0500	RedLemon	boringssl_context_info_handler(2045) [C72.1:2][0x7f90ad9a5b60] Client handshake state: TLS client done
+default	13:18:46.947952-0500	RedLemon	boringssl_context_info_handler(2034) [C72.1:2][0x7f90ad9a5b60] Client handshake done
+default	13:18:46.948625-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C72.1:2][0x7f90ad9a5b60] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(56ms) flight_time(24ms) rtt(13ms) write_stalls(0) read_stalls(9)]
+default	13:18:46.948795-0500	RedLemon	nw_flow_connected [C72.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:46.949177-0500	RedLemon	[C72.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.100s
+default	13:18:46.949582-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C72] reporting state ready
+default	13:18:46.949666-0500	RedLemon	[C72 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.101s
+default	13:18:46.950484-0500	RedLemon	[C72.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.102s
+default	13:18:46.950680-0500	RedLemon	[C72 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.102s
+default	13:18:46.951049-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> received response, status 307 content K
+default	13:18:46.951531-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> response ended
+default	13:18:46.951630-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> done using Connection 71
+default	13:18:46.952029-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> now using Connection 71
+default	13:18:46.952208-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> summary for redirection {transaction_duration_ms=114, response_status=307, connection=71, protocol="http/1.1", domain_lookup_duration_ms=25, connect_duration_ms=41, secure_connection_duration_ms=21, private_relay=false, request_start_ms=78, request_duration_ms=6, response_start_ms=113, response_duration_ms=1, request_bytes=245, response_bytes=562, cache_hit=false}
+default	13:18:46.952157-0500	RedLemon	Connection 72: connected successfully
+default	13:18:46.952676-0500	RedLemon	Connection 72: TLS handshake complete
+default	13:18:46.953075-0500	RedLemon	Connection 72: ready C(N) E(N)
+default	13:18:46.953782-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> now using Connection 72
+default	13:18:46.954430-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:46.955214-0500	RedLemon	Task <5BCB1660-D08F-4117-B79B-48F356B590B6>.<610> finished successfully
+default	13:18:46.954365-0500	RedLemon	Connection 72: received viability advisory(Y)
+default	13:18:46.956300-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> sent request, body N 0
+default	13:18:46.956837-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> sent request, body N 0
+default	13:18:46.959547-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client read_server_finished
+default	13:18:46.960521-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client finish_client_handshake
+default	13:18:46.960685-0500	RedLemon	boringssl_context_info_handler(2045) [C73.1:2][0x7f90acef8a30] Client handshake state: TLS client done
+default	13:18:46.960726-0500	RedLemon	boringssl_context_info_handler(2034) [C73.1:2][0x7f90acef8a30] Client handshake done
+default	13:18:46.961395-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C73.1:2][0x7f90acef8a30] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(67ms) flight_time(32ms) rtt(18ms) write_stalls(0) read_stalls(8)]
+default	13:18:46.962213-0500	RedLemon	nw_flow_connected [C73.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:46.962572-0500	RedLemon	[C73.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.112s
+default	13:18:46.962987-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C73] reporting state ready
+default	13:18:46.963115-0500	RedLemon	[C73 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.113s
+default	13:18:46.963356-0500	RedLemon	[C73.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.113s
+default	13:18:46.963515-0500	RedLemon	[C73 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.113s
+default	13:18:46.963671-0500	RedLemon	Connection 73: connected successfully
+default	13:18:46.963727-0500	RedLemon	Connection 73: TLS handshake complete
+default	13:18:46.964016-0500	RedLemon	Connection 73: ready C(N) E(N)
+default	13:18:46.964235-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> now using Connection 73
+default	13:18:46.964354-0500	RedLemon	Connection 73: received viability advisory(Y)
+default	13:18:46.964644-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> sent request, body N 0
+default	13:18:46.964850-0500	RedLemon	Connection 74: TLS Trust result 0
+default	13:18:46.964905-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C74.1:2][0x7f90add444b0] Returning from external verify block with result: true
+default	13:18:46.964986-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C74.1:2][0x7f90add444b0] Certificate verification result: OK
+default	13:18:46.965025-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_server_key_exchange
+default	13:18:46.966316-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_certificate_request
+default	13:18:46.966767-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_server_hello_done
+default	13:18:46.967027-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client send_client_certificate
+default	13:18:46.967308-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client send_client_key_exchange
+default	13:18:46.968027-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client send_client_certificate_verify
+default	13:18:46.968077-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client send_client_finished
+default	13:18:46.968245-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client finish_flight
+default	13:18:46.968588-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_session_ticket
+default	13:18:46.968631-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.971453-0500	RedLemon	Connection 75: TLS Trust result 0
+default	13:18:46.971575-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C75.1:2][0x7f90ad6a2ec0] Returning from external verify block with result: true
+default	13:18:46.971816-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C75.1:2][0x7f90ad6a2ec0] Certificate verification result: OK
+default	13:18:46.971858-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_server_key_exchange
+default	13:18:46.972534-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_certificate_request
+default	13:18:46.972784-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_server_hello_done
+default	13:18:46.972825-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client send_client_certificate
+default	13:18:46.972865-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client send_client_key_exchange
+default	13:18:46.973300-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client send_client_certificate_verify
+default	13:18:46.973344-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client send_client_finished
+default	13:18:46.973504-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client finish_flight
+default	13:18:46.973707-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_session_ticket
+default	13:18:46.973797-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.979121-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client read_server_finished
+default	13:18:46.979458-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client finish_client_handshake
+default	13:18:46.979696-0500	RedLemon	boringssl_context_info_handler(2045) [C74.1:2][0x7f90add444b0] Client handshake state: TLS client done
+default	13:18:46.979739-0500	RedLemon	boringssl_context_info_handler(2034) [C74.1:2][0x7f90add444b0] Client handshake done
+default	13:18:46.981072-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C74.1:2][0x7f90add444b0] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(82ms) flight_time(28ms) rtt(17ms) write_stalls(0) read_stalls(9)]
+default	13:18:46.981538-0500	RedLemon	nw_flow_connected [C74.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:46.982424-0500	RedLemon	[C74.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.130s
+default	13:18:46.983794-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C74] reporting state ready
+default	13:18:46.983906-0500	RedLemon	[C74 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.131s
+default	13:18:46.984072-0500	RedLemon	[C74.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.131s
+default	13:18:46.984147-0500	RedLemon	[C74 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.132s
+default	13:18:46.984275-0500	RedLemon	Connection 74: connected successfully
+default	13:18:46.984335-0500	RedLemon	Connection 74: TLS handshake complete
+default	13:18:46.984622-0500	RedLemon	Connection 74: ready C(N) E(N)
+default	13:18:46.984793-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> now using Connection 74
+default	13:18:46.984872-0500	RedLemon	Connection 74: received viability advisory(Y)
+default	13:18:46.985127-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> sent request, body N 0
+default	13:18:46.985512-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client read_server_finished
+default	13:18:46.985765-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client finish_client_handshake
+default	13:18:46.985927-0500	RedLemon	boringssl_context_info_handler(2045) [C75.1:2][0x7f90ad6a2ec0] Client handshake state: TLS client done
+default	13:18:46.985970-0500	RedLemon	boringssl_context_info_handler(2034) [C75.1:2][0x7f90ad6a2ec0] Client handshake done
+default	13:18:46.986643-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C75.1:2][0x7f90ad6a2ec0] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(85ms) flight_time(31ms) rtt(19ms) write_stalls(0) read_stalls(8)]
+default	13:18:46.986816-0500	RedLemon	nw_flow_connected [C75.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:46.987104-0500	RedLemon	[C75.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.133s
+default	13:18:46.987499-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C75] reporting state ready
+default	13:18:46.987585-0500	RedLemon	[C75 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.133s
+default	13:18:46.987739-0500	RedLemon	[C75.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.133s
+default	13:18:46.987812-0500	RedLemon	[C75 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.133s
+default	13:18:46.988085-0500	RedLemon	Connection 76: TLS Trust result 0
+default	13:18:46.988126-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C76.1:2][0x7f90add0a050] Returning from external verify block with result: true
+default	13:18:46.988179-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C76.1:2][0x7f90add0a050] Certificate verification result: OK
+default	13:18:46.988203-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_server_key_exchange
+default	13:18:46.988940-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_certificate_request
+default	13:18:46.989120-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_server_hello_done
+default	13:18:46.989144-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client send_client_certificate
+default	13:18:46.989166-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client send_client_key_exchange
+default	13:18:46.989512-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client send_client_certificate_verify
+default	13:18:46.989538-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client send_client_finished
+default	13:18:46.989649-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client finish_flight
+default	13:18:46.989907-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_session_ticket
+default	13:18:46.989957-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client process_change_cipher_spec
+default	13:18:46.990972-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> received response, status 307 content K
+default	13:18:46.991482-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> response ended
+default	13:18:46.991549-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> done using Connection 71
+default	13:18:46.991720-0500	RedLemon	Connection 75: connected successfully
+default	13:18:46.991735-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> summary for redirection {transaction_duration_ms=144, response_status=307, connection=71, reused=1, request_start_ms=108, request_duration_ms=0, response_start_ms=143, response_duration_ms=0, request_bytes=245, response_bytes=562, cache_hit=false}
+default	13:18:46.991775-0500	RedLemon	Connection 75: TLS handshake complete
+default	13:18:46.992134-0500	RedLemon	Connection 75: ready C(N) E(N)
+default	13:18:46.992350-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> now using Connection 75
+default	13:18:46.992650-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> summary for task success {transaction_duration_ms=0, response_status=200, cache_hit=true}
+default	13:18:46.992841-0500	RedLemon	Connection 75: received viability advisory(Y)
+default	13:18:46.992883-0500	RedLemon	Task <92EC6F27-B7D2-4D46-8236-C25830F8BE1E>.<616> finished successfully
+default	13:18:46.993294-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> received response, status 307 content K
+default	13:18:46.993801-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> response ended
+default	13:18:46.993858-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> done using Connection 72
+default	13:18:46.994046-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> summary for redirection {transaction_duration_ms=155, response_status=307, connection=72, protocol="http/1.1", domain_lookup_duration_ms=19, connect_duration_ms=75, secure_connection_duration_ms=56, private_relay=false, request_start_ms=117, request_duration_ms=0, response_start_ms=154, response_duration_ms=0, request_bytes=245, response_bytes=562, cache_hit=false}
+default	13:18:46.994071-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> sent request, body N 0
+default	13:18:46.994565-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> summary for task success {transaction_duration_ms=0, response_status=200, cache_hit=true}
+default	13:18:46.994806-0500	RedLemon	Task <9D9CCAD8-2D44-472F-9E7E-CD157FF20DD1>.<611> finished successfully
+default	13:18:47.001045-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client read_server_finished
+default	13:18:47.001266-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client finish_client_handshake
+default	13:18:47.001454-0500	RedLemon	boringssl_context_info_handler(2045) [C76.1:2][0x7f90add0a050] Client handshake state: TLS client done
+default	13:18:47.001497-0500	RedLemon	boringssl_context_info_handler(2034) [C76.1:2][0x7f90add0a050] Client handshake done
+default	13:18:47.002230-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C76.1:2][0x7f90add0a050] TLS connected [version(0x0303) ciphersuite(TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(98ms) flight_time(30ms) rtt(19ms) write_stalls(0) read_stalls(6)]
+default	13:18:47.002429-0500	RedLemon	nw_flow_connected [C76.1 IPv4#847abc55:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.002721-0500	RedLemon	[C76.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.145s
+default	13:18:47.002990-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C76] reporting state ready
+default	13:18:47.003063-0500	RedLemon	[C76 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.146s
+default	13:18:47.003207-0500	RedLemon	[C76.1 IPv4#847abc55:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.146s
+default	13:18:47.003281-0500	RedLemon	[C76 Hostname#6fcf37f3:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.146s
+default	13:18:47.003385-0500	RedLemon	Connection 76: connected successfully
+default	13:18:47.003478-0500	RedLemon	Connection 76: TLS handshake complete
+default	13:18:47.003707-0500	RedLemon	Connection 76: ready C(N) E(N)
+default	13:18:47.003906-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> now using Connection 76
+default	13:18:47.003972-0500	RedLemon	Connection 76: received viability advisory(Y)
+default	13:18:47.004226-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> sent request, body N 0
+default	13:18:47.006028-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> received response, status 307 content K
+default	13:18:47.006514-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> response ended
+default	13:18:47.006587-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> done using Connection 74
+default	13:18:47.006818-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> summary for redirection {transaction_duration_ms=165, response_status=307, connection=74, protocol="http/1.1", domain_lookup_duration_ms=16, connect_duration_ms=102, secure_connection_duration_ms=82, private_relay=false, request_start_ms=143, request_duration_ms=0, response_start_ms=164, response_duration_ms=0, request_bytes=245, response_bytes=561, cache_hit=false}
+default	13:18:47.007384-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> summary for task success {transaction_duration_ms=0, response_status=200, cache_hit=true}
+default	13:18:47.007733-0500	RedLemon	Task <66BCA975-001E-4388-8E75-3305662390CB>.<613> finished successfully
+default	13:18:47.008212-0500	RedLemon	Task <5F1D23DE-E4A3-48C7-9E37-EE7955AFE4F9>.<617> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.009269-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [719F2B0F-A1FC-437A-B9B2-7F1FDAE55A4D] (reporting strategy default)> on Task <5F1D23DE-E4A3-48C7-9E37-EE7955AFE4F9>.<617> was not selected for reporting
+default	13:18:47.014480-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> received response, status 307 content K
+default	13:18:47.014883-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> response ended
+default	13:18:47.014981-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> done using Connection 73
+default	13:18:47.020745-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> received response, status 307 content K
+default	13:18:47.021143-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> response ended
+default	13:18:47.021203-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> done using Connection 75
+default	13:18:47.023744-0500	RedLemon	Task <5F1D23DE-E4A3-48C7-9E37-EE7955AFE4F9>.<617> summary for task success {transaction_duration_ms=14, response_status=200, cache_hit=true}
+default	13:18:47.023988-0500	RedLemon	Task <5F1D23DE-E4A3-48C7-9E37-EE7955AFE4F9>.<617> finished successfully
+default	13:18:47.024239-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> summary for redirection {transaction_duration_ms=184, response_status=307, connection=73, protocol="http/1.1", domain_lookup_duration_ms=18, connect_duration_ms=85, secure_connection_duration_ms=67, private_relay=false, request_start_ms=124, request_duration_ms=0, response_start_ms=174, response_duration_ms=0, request_bytes=245, response_bytes=561, cache_hit=false}
+default	13:18:47.024483-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> summary for redirection {transaction_duration_ms=181, response_status=307, connection=75, protocol="http/1.1", domain_lookup_duration_ms=13, connect_duration_ms=102, secure_connection_duration_ms=85, private_relay=false, request_start_ms=150, request_duration_ms=1, response_start_ms=178, response_duration_ms=0, request_bytes=245, response_bytes=561, cache_hit=false}
+default	13:18:47.025226-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> summary for task success {transaction_duration_ms=0, response_status=200, cache_hit=true}
+default	13:18:47.025460-0500	RedLemon	Task <858C1F9B-05E4-4FDE-A82F-EA96F2894BBD>.<612> finished successfully
+default	13:18:47.025566-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> summary for task success {transaction_duration_ms=1, response_status=200, cache_hit=true}
+default	13:18:47.026043-0500	RedLemon	Task <711C3B9C-3CBF-482B-AD63-560A0E48E23E>.<614> finished successfully
+default	13:18:47.034838-0500	RedLemon	Task <5FA066A9-A425-40B3-BD5A-20A0B1DFB10D>.<618> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.035321-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E125446F-E9DE-45DE-AE66-66E77B0A0504] (reporting strategy default)> on Task <5FA066A9-A425-40B3-BD5A-20A0B1DFB10D>.<618> was not selected for reporting
+default	13:18:47.035582-0500	RedLemon	Task <994ED53D-5711-4218-9B28-C90CB178177E>.<619> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.036009-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D94C6137-CA9B-4D58-B4AE-560FCF29DF67] (reporting strategy default)> on Task <994ED53D-5711-4218-9B28-C90CB178177E>.<619> was not selected for reporting
+default	13:18:47.037708-0500	RedLemon	Task <5FA066A9-A425-40B3-BD5A-20A0B1DFB10D>.<618> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:47.037878-0500	RedLemon	Task <5FA066A9-A425-40B3-BD5A-20A0B1DFB10D>.<618> finished successfully
+default	13:18:47.039345-0500	RedLemon	Task <994ED53D-5711-4218-9B28-C90CB178177E>.<619> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:47.039592-0500	RedLemon	Task <994ED53D-5711-4218-9B28-C90CB178177E>.<619> finished successfully
+default	13:18:47.061083-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> received response, status 307 content K
+default	13:18:47.061501-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> response ended
+default	13:18:47.061563-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> done using Connection 76
+default	13:18:47.061820-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> summary for redirection {transaction_duration_ms=217, response_status=307, connection=76, protocol="http/1.1", domain_lookup_duration_ms=11, connect_duration_ms=113, secure_connection_duration_ms=98, private_relay=false, request_start_ms=160, request_duration_ms=0, response_start_ms=216, response_duration_ms=0, request_bytes=245, response_bytes=561, cache_hit=false}
+default	13:18:47.062380-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> summary for task success {transaction_duration_ms=0, response_status=200, cache_hit=true}
+default	13:18:47.062606-0500	RedLemon	Task <3F1837EB-8436-42C7-86BC-59F7D2F6FA87>.<615> finished successfully
+default	13:18:47.062987-0500	RedLemon	Task <AA7D3E77-9CED-4F63-B4A2-008B81C37AEB>.<620> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.063453-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0F3A12BA-B559-4747-BB4A-4148634399F0] (reporting strategy default)> on Task <AA7D3E77-9CED-4F63-B4A2-008B81C37AEB>.<620> was not selected for reporting
+default	13:18:47.065335-0500	RedLemon	Task <AA7D3E77-9CED-4F63-B4A2-008B81C37AEB>.<620> summary for task success {transaction_duration_ms=1, response_status=200, cache_hit=true}
+default	13:18:47.065567-0500	RedLemon	Task <AA7D3E77-9CED-4F63-B4A2-008B81C37AEB>.<620> finished successfully
+default	13:18:47.125489-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.125840-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C7C83E24-AFCA-4F30-8AB4-56F8A6C2480E] (reporting strategy default)> on Task <477689D0-A575-4110-8005-F6B85021D003>.<621> was not selected for reporting
+default	13:18:47.126499-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.126514-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.126929-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [149444FA-75F0-41B4-B1A0-6ACD584D830A] (reporting strategy default)> on Task <4F303441-7815-4985-B704-686358237456>.<622> was not selected for reporting
+default	13:18:47.127325-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	13:18:47.127553-0500	RedLemon	Task <70295330-AAC0-490B-8898-F6D7C30D24A8>.<623> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.127739-0500	RedLemon	Connection 77: enabling TLS
+default	13:18:47.127934-0500	RedLemon	Connection 77: starting, TC(0x0)
+default	13:18:47.128077-0500	RedLemon	[C77 39099ADD-7102-4095-8624-7C3F7355E93D Hostname#ddcfd216:443 quic-connection, url hash: 6c659e47, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:47.128226-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [38E219F7-5FA5-4CAD-A8E2-E47B77B6D588] (reporting strategy default)> on Task <70295330-AAC0-490B-8898-F6D7C30D24A8>.<623> was not selected for reporting
+default	13:18:47.128376-0500	RedLemon	[C77 Hostname#ddcfd216:443 initial path ((null))] event: path:start @0.000s
+default	13:18:47.128829-0500	RedLemon	[C77 Hostname#ddcfd216:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 53EE3230-7160-4403-AEA6-473894637F4E
+default	13:18:47.128895-0500	RedLemon	Task <0AE1D704-DF2C-4181-A752-A695FC0C7218>.<624> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.129018-0500	RedLemon	[C77 Hostname#ddcfd216:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: transform:start @0.000s
+default	13:18:47.129062-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C77] reporting state preparing
+default	13:18:47.129551-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D567127B-CFD3-4CF0-9292-D8008EBA02F5] (reporting strategy default)> on Task <0AE1D704-DF2C-4181-A752-A695FC0C7218>.<624> was not selected for reporting
+default	13:18:47.129977-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 initial path ((null))] event: path:start @0.001s
+default	13:18:47.130399-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.002s, uuid: A53F5CFB-F9C9-4457-9CA6-204B95F791B0
+default	13:18:47.130610-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.002s
+default	13:18:47.130812-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> setting up Connection 77
+default	13:18:47.131122-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.131212-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> waiting for setup of Connection 77
+default	13:18:47.131380-0500	mDNSResponder	[R1073] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'npC+bjpr0FT65wZd+tmbQw=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:47.131942-0500	RedLemon	Task <70295330-AAC0-490B-8898-F6D7C30D24A8>.<623> summary for task success {transaction_duration_ms=3, response_status=200, cache_hit=true}
+default	13:18:47.132098-0500	RedLemon	Task <0AE1D704-DF2C-4181-A752-A695FC0C7218>.<624> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:47.132112-0500	RedLemon	Task <70295330-AAC0-490B-8898-F6D7C30D24A8>.<623> finished successfully
+default	13:18:47.133116-0500	RedLemon	Task <0AE1D704-DF2C-4181-A752-A695FC0C7218>.<624> finished successfully
+default	13:18:47.166115-0500	RedLemon	nw_endpoint_resolver_update [C77.1 Hostname#ddcfd216:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#5d4d7301:443
+default	13:18:47.165554-0500	mDNSResponder	[R1073] getaddrinfo stop -- hostname: <mask.hash: 'npC+bjpr0FT65wZd+tmbQw=='>, client pid: 18244 (RedLemon)
+default	13:18:47.166342-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.038s
+default	13:18:47.167212-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 initial path ((null))] event: path:start @0.038s
+default	13:18:47.168564-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.040s, uuid: 7584A48C-4BDD-4B4A-AB5A-CA78E2C40608
+default	13:18:47.168884-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.040s
+default	13:18:47.169850-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.041s
+default	13:18:47.170655-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.042s
+default	13:18:47.170876-0500	RedLemon	tcp_output [C77.1.1:3] flags=[S] seq=2739943654, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2739943654
+default	13:18:47.193752-0500	RedLemon	tcp_input [C77.1.1:3] flags=[S.] seq=3531307941, ack=2739943655, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=2739943654
+default	13:18:47.193943-0500	RedLemon	nw_flow_connected [C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:47.194327-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.066s
+default	13:18:47.194533-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.066s
+default	13:18:47.194613-0500	RedLemon	[C77 Hostname#ddcfd216:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.066s
+default	13:18:47.195131-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C77.1.1:2][0x7f90aa7c5cb0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:47.195472-0500	RedLemon	boringssl_context_info_handler(2028) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake started
+default	13:18:47.195873-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS client enter_early_data
+default	13:18:47.196327-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS client read_server_hello
+default	13:18:47.217658-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:47.217828-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:47.218267-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:47.219130-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:47.221318-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:47.221479-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:47.222603-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C77.1.1:2][0x7f90aa7c5cb0] Performing external trust evaluation
+default	13:18:47.223917-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C77.1.1:2][0x7f90aa7c5cb0] Asyncing for external verify block
+default	13:18:47.224555-0500	RedLemon	Connection 77: asked to evaluate TLS Trust
+default	13:18:47.225337-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> auth completion disp=1 cred=0x0
+default	13:18:47.233020-0500	RedLemon	Connection 77: TLS Trust result 0
+default	13:18:47.233077-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C77.1.1:2][0x7f90aa7c5cb0] Returning from external verify block with result: true
+default	13:18:47.233208-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C77.1.1:2][0x7f90aa7c5cb0] Certificate verification result: OK
+default	13:18:47.233627-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:47.233875-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:47.233916-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:47.233953-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:47.233989-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:47.234133-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS 1.3 client done
+default	13:18:47.234306-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS client finish_client_handshake
+default	13:18:47.234365-0500	RedLemon	boringssl_context_info_handler(2045) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake state: TLS client done
+default	13:18:47.234404-0500	RedLemon	boringssl_context_info_handler(2034) [C77.1.1:2][0x7f90aa7c5cb0] Client handshake done
+default	13:18:47.235047-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C77.1.1:2][0x7f90aa7c5cb0] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(39ms) flight_time(23ms) rtt(22ms) write_stalls(0) read_stalls(7)]
+default	13:18:47.235209-0500	RedLemon	nw_flow_connected [C77.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.235586-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.107s
+default	13:18:47.235717-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C77] reporting state ready
+default	13:18:47.235944-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.107s
+default	13:18:47.235980-0500	RedLemon	[C77 Hostname#ddcfd216:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.107s
+default	13:18:47.236131-0500	RedLemon	[C77.1.1 IPv4#5d4d7301:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.107s
+default	13:18:47.236238-0500	RedLemon	[C77.1 Hostname#ddcfd216:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.107s
+default	13:18:47.236295-0500	RedLemon	[C77 Hostname#ddcfd216:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.108s
+default	13:18:47.236438-0500	RedLemon	Connection 77: connected successfully
+default	13:18:47.236476-0500	RedLemon	Connection 77: TLS handshake complete
+default	13:18:47.236689-0500	RedLemon	Connection 77: ready C(N) E(N)
+default	13:18:47.237019-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> now using Connection 77
+default	13:18:47.237176-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> now using Connection 77
+default	13:18:47.237243-0500	RedLemon	Connection 77: received viability advisory(Y)
+default	13:18:47.237374-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> sent request, body N 0
+default	13:18:47.237412-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> sent request, body N 0
+default	13:18:47.279537-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> received response, status 200 content K
+default	13:18:47.284998-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> done using Connection 77
+default	13:18:47.285202-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> response ended
+default	13:18:47.286194-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> summary for task success {transaction_duration_ms=160, response_status=200, connection=77, protocol="h2", domain_lookup_duration_ms=36, connect_duration_ms=65, secure_connection_duration_ms=39, private_relay=false, request_start_ms=111, request_duration_ms=0, response_start_ms=152, response_duration_ms=6, request_bytes=124, response_bytes=38859, cache_hit=false}
+default	13:18:47.286358-0500	RedLemon	Task <477689D0-A575-4110-8005-F6B85021D003>.<621> finished successfully
+default	13:18:47.289494-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> received response, status 200 content K
+default	13:18:47.300102-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> done using Connection 77
+default	13:18:47.300235-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> response ended
+default	13:18:47.300833-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> summary for task success {transaction_duration_ms=173, response_status=200, connection=77, reused=1, request_start_ms=110, request_duration_ms=0, response_start_ms=161, response_duration_ms=11, request_bytes=37, response_bytes=38240, cache_hit=false}
+default	13:18:47.300925-0500	RedLemon	Task <4F303441-7815-4985-B704-686358237456>.<622> finished successfully
+default	13:18:47.651956-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:47.652235-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:47.653105-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [25D08258-04F3-4A22-BB3E-03B8E913A8B2] (reporting strategy default)> on Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> was not selected for reporting
+default	13:18:47.654246-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.653975-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6EDA50B2-B5CC-4140-9910-98E1B4AB7533] (reporting strategy default)> on Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> was not selected for reporting
+default	13:18:47.654721-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> now using Connection 9
+default	13:18:47.660686-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.662667-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.663152-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2BB5399C-DB84-4EB9-966A-D39D727B0B82] (reporting strategy default)> on Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> was not selected for reporting
+default	13:18:47.663822-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:47.664037-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.664901-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3786A7E6-EB27-4195-96C0-B57DEC01EA0D] (reporting strategy default)> on Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> was not selected for reporting
+default	13:18:47.665848-0500	RedLemon	Connection 78: enabling TLS
+default	13:18:47.666014-0500	RedLemon	Connection 78: starting, TC(0x0)
+default	13:18:47.668605-0500	RedLemon	[C78 3FB4B3DC-B3F7-4B21-BB9A-57B9E3EF67A7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{4E106664-8435-4A0D-A8CF-51BD91409FE1}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:47.669866-0500	RedLemon	[C78 Hostname#f00e5bad:443 initial path ((null))] event: path:start @0.000s
+default	13:18:47.670332-0500	RedLemon	[C78 Hostname#f00e5bad:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.001s, uuid: 99B7BC7B-DF3D-4CA5-9636-D65C5D281092
+default	13:18:47.670574-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.001s
+default	13:18:47.670661-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state preparing
+default	13:18:47.671114-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> setting up Connection 78
+default	13:18:47.671608-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.674046-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	13:18:47.672200-0500	mDNSResponder	[R1074] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:47.675087-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> waiting for setup of Connection 79
+default	13:18:47.675137-0500	RedLemon	Connection 79: enabling TLS
+default	13:18:47.676980-0500	RedLemon	Connection 79: starting, TC(0x0)
+default	13:18:47.677074-0500	RedLemon	[C79 5C527EC3-CB3F-4CCA-945F-23AC7D5101FD Hostname#ae5efd1f:443 quic-connection, url hash: 25b49ff0, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:47.677385-0500	RedLemon	[C79 Hostname#ae5efd1f:443 initial path ((null))] event: path:start @0.000s
+default	13:18:47.678127-0500	RedLemon	[C79 Hostname#ae5efd1f:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 2B33BE3D-2F85-45F3-A832-6D08FBA2D6C4
+default	13:18:47.678738-0500	RedLemon	[C79 Hostname#ae5efd1f:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: transform:start @0.001s
+default	13:18:47.678796-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C79] reporting state preparing
+default	13:18:47.679313-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 initial path ((null))] event: path:start @0.002s
+default	13:18:47.679708-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.002s, uuid: 94DFCD9B-B292-45A2-BBCE-6CA53008E7DD
+default	13:18:47.680021-0500	mDNSResponder	[R1075] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'mssZ7BRFbx6ZjrE3hwAdbg=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:47.679847-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.002s
+default	13:18:47.680068-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> setting up Connection 79
+default	13:18:47.680583-0500	RedLemon	0x7f90aa38be58 ID=584 Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> sent request, body S 83
+default	13:18:47.681684-0500	RedLemon	nw_endpoint_resolver_update [C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#60630852:443
+default	13:18:47.681816-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.012s
+default	13:18:47.681974-0500	mDNSResponder	[R1074] getaddrinfo stop -- hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, client pid: 18244 (RedLemon)
+default	13:18:47.682138-0500	RedLemon	[C78.1 IPv4#60630852:443 initial path ((null))] event: path:start @0.013s
+default	13:18:47.682665-0500	RedLemon	[C78.1 IPv4#60630852:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.013s, uuid: AE21ECBE-5C77-489D-A82A-6FC6ACFF219D
+default	13:18:47.682821-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.013s
+default	13:18:47.683377-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.014s
+default	13:18:47.683943-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.014s
+default	13:18:47.684086-0500	RedLemon	tcp_output [C78.1:3] flags=[S] seq=3004248200, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3004248200
+default	13:18:47.684623-0500	mDNSResponder	[R1075] getaddrinfo stop -- hostname: <mask.hash: 'mssZ7BRFbx6ZjrE3hwAdbg=='>, client pid: 18244 (RedLemon)
+default	13:18:47.684746-0500	RedLemon	nw_endpoint_resolver_update [C79.1 Hostname#ae5efd1f:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#5d4d7301:443
+default	13:18:47.685005-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.007s
+default	13:18:47.685369-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 initial path ((null))] event: path:start @0.008s
+default	13:18:47.685831-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.008s, uuid: 939A4D5D-704E-4F53-B904-CA3A0774A933
+default	13:18:47.685990-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.008s
+default	13:18:47.686537-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.009s
+default	13:18:47.687159-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.009s
+default	13:18:47.687345-0500	RedLemon	tcp_output [C79.1.1:3] flags=[S] seq=3996798199, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3996798199
+default	13:18:47.705878-0500	RedLemon	tcp_input [C79.1.1:3] flags=[S.] seq=2579119080, ack=3996798200, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=3996798199
+default	13:18:47.706037-0500	RedLemon	nw_flow_connected [C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:47.706233-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.029s
+default	13:18:47.706425-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.029s
+default	13:18:47.706496-0500	RedLemon	[C79 Hostname#ae5efd1f:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.029s
+default	13:18:47.706974-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C79.1.1:2][0x7f90adb1bd30] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:47.707236-0500	RedLemon	boringssl_context_info_handler(2028) [C79.1.1:2][0x7f90adb1bd30] Client handshake started
+default	13:18:47.707561-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS client enter_early_data
+default	13:18:47.708028-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS client read_server_hello
+default	13:18:47.716984-0500	runningboardd	Invalidating assertion 173-18244-1100 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:47.729212-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:47.729387-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:47.729935-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:47.730530-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:47.733076-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:47.733236-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:47.734383-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C79.1.1:2][0x7f90adb1bd30] Performing external trust evaluation
+default	13:18:47.734678-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C79.1.1:2][0x7f90adb1bd30] Asyncing for external verify block
+default	13:18:47.734983-0500	RedLemon	Connection 79: asked to evaluate TLS Trust
+default	13:18:47.735524-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> auth completion disp=1 cred=0x0
+default	13:18:47.744613-0500	RedLemon	Connection 79: TLS Trust result 0
+default	13:18:47.744680-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C79.1.1:2][0x7f90adb1bd30] Returning from external verify block with result: true
+default	13:18:47.744817-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C79.1.1:2][0x7f90adb1bd30] Certificate verification result: OK
+default	13:18:47.745229-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:47.745484-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:47.745523-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:47.745560-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:47.745599-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:47.745739-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS 1.3 client done
+default	13:18:47.745915-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS client finish_client_handshake
+default	13:18:47.745961-0500	RedLemon	boringssl_context_info_handler(2045) [C79.1.1:2][0x7f90adb1bd30] Client handshake state: TLS client done
+default	13:18:47.746001-0500	RedLemon	boringssl_context_info_handler(2034) [C79.1.1:2][0x7f90adb1bd30] Client handshake done
+default	13:18:47.746676-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C79.1.1:2][0x7f90adb1bd30] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(39ms) flight_time(23ms) rtt(22ms) write_stalls(0) read_stalls(7)]
+default	13:18:47.746912-0500	RedLemon	nw_flow_connected [C79.1.1 IPv4#5d4d7301:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.747340-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.070s
+default	13:18:47.747513-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C79] reporting state ready
+default	13:18:47.747658-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.070s
+default	13:18:47.747718-0500	RedLemon	[C79 Hostname#ae5efd1f:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.070s
+default	13:18:47.747936-0500	RedLemon	[C79.1.1 IPv4#5d4d7301:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.070s
+default	13:18:47.748074-0500	RedLemon	[C79.1 Hostname#ae5efd1f:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.070s
+default	13:18:47.748131-0500	RedLemon	[C79 Hostname#ae5efd1f:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.070s
+default	13:18:47.748269-0500	RedLemon	Connection 79: connected successfully
+default	13:18:47.748321-0500	RedLemon	Connection 79: TLS handshake complete
+default	13:18:47.748574-0500	RedLemon	Connection 79: ready C(N) E(N)
+default	13:18:47.749073-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> now using Connection 79
+default	13:18:47.749267-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> now using Connection 79
+default	13:18:47.749368-0500	RedLemon	Connection 79: received viability advisory(Y)
+default	13:18:47.749521-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> sent request, body N 0
+default	13:18:47.749560-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> sent request, body N 0
+default	13:18:47.760045-0500	RedLemon	0x7f90aa38be58 ID=584 Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> received response, status 201 content U
+default	13:18:47.760746-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> response ended
+default	13:18:47.761349-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> done using Connection 9
+default	13:18:47.761519-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> summary for task success {transaction_duration_ms=107, response_status=201, connection=9, reused=1, request_start_ms=0, request_duration_ms=25, response_start_ms=105, response_duration_ms=1, request_bytes=496, response_bytes=776, cache_hit=false}
+default	13:18:47.762090-0500	RedLemon	Task <81BA75B4-AB99-42C1-811D-51280DF920CE>.<625> finished successfully
+default	13:18:47.762468-0500	RedLemon	✅ Guest joined room B82K in database
+default	13:18:47.763672-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:47.765409-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1C0148E2-CA19-40C0-81B8-B15757FA0490] (reporting strategy default)> on Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> was not selected for reporting
+default	13:18:47.768953-0500	RedLemon	Connection 80: enabling TLS
+default	13:18:47.769015-0500	RedLemon	Connection 80: starting, TC(0x0)
+default	13:18:47.769203-0500	RedLemon	[C80 F3BE4A64-ADB3-4113-BB0E-C5B31CE5FDB8 Hostname#ea0317c1:443 tcp, url hash: 2c021cb6, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{D27D1D38-5173-41B2-A9CE-DA4739A09504}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:47.769346-0500	RedLemon	[C80 Hostname#ea0317c1:443 initial path ((null))] event: path:start @0.000s
+default	13:18:47.775019-0500	RedLemon	[C80 Hostname#ea0317c1:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.005s, uuid: 4E1CA67A-768E-4D12-9E74-ABCFE87B656C
+default	13:18:47.777451-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.008s
+default	13:18:47.777494-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C80] reporting state preparing
+default	13:18:47.777894-0500	mDNSResponder	[R1076] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'O0A5PzwcYsiwLYAlMH+KxQ=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:47.777684-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> setting up Connection 80
+default	13:18:47.780817-0500	mDNSResponder	[R1076] getaddrinfo stop -- hostname: <mask.hash: 'O0A5PzwcYsiwLYAlMH+KxQ=='>, client pid: 18244 (RedLemon)
+default	13:18:47.780977-0500	RedLemon	nw_endpoint_resolver_update [C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#f6ffd5ac:443
+default	13:18:47.781157-0500	RedLemon	nw_endpoint_resolver_update [C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#67c275b6:443
+default	13:18:47.781310-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.012s
+default	13:18:47.781557-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 initial path ((null))] event: path:start @0.012s
+default	13:18:47.781965-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.012s, uuid: 2B86A01D-E96C-4C7D-81EE-A99BB0E45B6A
+default	13:18:47.782092-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.012s
+default	13:18:47.782617-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.013s
+default	13:18:47.783394-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.014s
+default	13:18:47.783535-0500	RedLemon	tcp_output [C80.1:3] flags=[S] seq=495206512, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=495206512
+default	13:18:47.794560-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> received response, status 200 content K
+default	13:18:47.796452-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:47.796765-0500	RedLemon	tcp_input [C80.1:3] flags=[S.] seq=3003676150, ack=495206513, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=495206512
+default	13:18:47.796871-0500	RedLemon	nw_flow_connected [C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:47.796963-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.027s
+default	13:18:47.797015-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.027s
+default	13:18:47.797405-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C80.1:2][0x7f90aa380000] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:47.797521-0500	RedLemon	boringssl_context_info_handler(2028) [C80.1:2][0x7f90aa380000] Client handshake started
+default	13:18:47.797763-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS client enter_early_data
+default	13:18:47.797911-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS client read_server_hello
+default	13:18:47.801415-0500	RedLemon	tcp_input [C78.1:3] flags=[S.] seq=4153601008, ack=3004248201, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=3004248200
+default	13:18:47.801603-0500	RedLemon	nw_flow_connected [C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:47.801781-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.132s
+default	13:18:47.801850-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.132s
+default	13:18:47.802423-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C78.1:2][0x7f90add1a1a0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:47.802511-0500	RedLemon	boringssl_context_info_handler(2028) [C78.1:2][0x7f90add1a1a0] Client handshake started
+default	13:18:47.802680-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS client enter_early_data
+default	13:18:47.802791-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS client read_server_hello
+default	13:18:47.811741-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:47.811835-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:47.812064-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:47.812963-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:47.813124-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:47.813208-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:47.813704-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C80.1:2][0x7f90aa380000] Performing external trust evaluation
+default	13:18:47.813883-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C80.1:2][0x7f90aa380000] Asyncing for external verify block
+default	13:18:47.814081-0500	RedLemon	Connection 80: asked to evaluate TLS Trust
+default	13:18:47.814322-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> auth completion disp=1 cred=0x0
+default	13:18:47.816754-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> done using Connection 79
+default	13:18:47.816956-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> response ended
+default	13:18:47.817560-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> summary for task success {transaction_duration_ms=150, response_status=200, connection=79, reused=1, request_start_ms=82, request_duration_ms=0, response_start_ms=127, response_duration_ms=22, request_bytes=37, response_bytes=75998, cache_hit=false}
+default	13:18:47.817667-0500	RedLemon	Task <ED50D87C-FEFC-459A-A59B-7ACB3F389B9A>.<627> finished successfully
+default	13:18:47.819329-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> received response, status 200 content K
+default	13:18:47.825046-0500	RedLemon	Connection 80: TLS Trust result 0
+default	13:18:47.825095-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C80.1:2][0x7f90aa380000] Returning from external verify block with result: true
+default	13:18:47.825150-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C80.1:2][0x7f90aa380000] Certificate verification result: OK
+default	13:18:47.825778-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:47.825961-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:47.826014-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:47.826047-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:47.826081-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:47.826212-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS 1.3 client done
+default	13:18:47.826380-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS client finish_client_handshake
+default	13:18:47.826425-0500	RedLemon	boringssl_context_info_handler(2045) [C80.1:2][0x7f90aa380000] Client handshake state: TLS client done
+default	13:18:47.826463-0500	RedLemon	boringssl_context_info_handler(2034) [C80.1:2][0x7f90aa380000] Client handshake done
+default	13:18:47.827568-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C80.1:2][0x7f90aa380000] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(30ms) flight_time(15ms) rtt(14ms) write_stalls(0) read_stalls(7)]
+default	13:18:47.827837-0500	RedLemon	nw_flow_connected [C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.828727-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.059s
+default	13:18:47.829737-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C80] reporting state ready
+default	13:18:47.829845-0500	RedLemon	[C80 Hostname#ea0317c1:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.060s
+default	13:18:47.830162-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.060s
+default	13:18:47.830240-0500	RedLemon	[C80 Hostname#ea0317c1:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.060s
+default	13:18:47.830913-0500	RedLemon	Connection 80: connected successfully
+default	13:18:47.831026-0500	RedLemon	Connection 80: TLS handshake complete
+default	13:18:47.831335-0500	RedLemon	Connection 80: ready C(N) E(N)
+default	13:18:47.831556-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> now using Connection 80
+default	13:18:47.831660-0500	RedLemon	Connection 80: received viability advisory(Y)
+default	13:18:47.832079-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> sent request, body N 0
+default	13:18:47.845084-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> done using Connection 79
+default	13:18:47.845197-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> response ended
+default	13:18:47.846014-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> summary for task success {transaction_duration_ms=182, response_status=200, connection=79, protocol="h2", domain_lookup_duration_ms=5, connect_duration_ms=61, secure_connection_duration_ms=39, private_relay=false, request_start_ms=85, request_duration_ms=0, response_start_ms=155, response_duration_ms=26, request_bytes=127, response_bytes=149919, cache_hit=false}
+default	13:18:47.846175-0500	RedLemon	Task <51CD853E-E5EE-4F32-AD67-9AE9D62DF32F>.<626> finished successfully
+default	13:18:47.868660-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:47.868738-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:47.868813-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:47.872147-0500	runningboardd	Invalidating assertion 173-114-1099 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:47.920159-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:47.920326-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:47.920942-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:47.921637-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:47.924299-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:47.924501-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:47.925893-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C78.1:2][0x7f90add1a1a0] Performing external trust evaluation
+default	13:18:47.926213-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C78.1:2][0x7f90add1a1a0] Asyncing for external verify block
+default	13:18:47.926654-0500	RedLemon	Connection 78: asked to evaluate TLS Trust
+default	13:18:47.927303-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> auth completion disp=1 cred=0x0
+default	13:18:47.934823-0500	RedLemon	Connection 78: TLS Trust result 0
+default	13:18:47.934878-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C78.1:2][0x7f90add1a1a0] Returning from external verify block with result: true
+default	13:18:47.934935-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C78.1:2][0x7f90add1a1a0] Certificate verification result: OK
+default	13:18:47.935333-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:47.935522-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:47.935547-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:47.935569-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:47.935589-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:47.935753-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS 1.3 client done
+default	13:18:47.935939-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS client finish_client_handshake
+default	13:18:47.935988-0500	RedLemon	boringssl_context_info_handler(2045) [C78.1:2][0x7f90add1a1a0] Client handshake state: TLS client done
+default	13:18:47.936031-0500	RedLemon	boringssl_context_info_handler(2034) [C78.1:2][0x7f90add1a1a0] Client handshake done
+default	13:18:47.936692-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C78.1:2][0x7f90add1a1a0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(134ms) flight_time(119ms) rtt(118ms) write_stalls(0) read_stalls(7)]
+default	13:18:47.937078-0500	RedLemon	nw_flow_connected [C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.937417-0500	RedLemon	[C78.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.268s
+default	13:18:47.937628-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state ready
+default	13:18:47.937669-0500	RedLemon	[C78 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.268s
+default	13:18:47.937783-0500	RedLemon	[C78.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.268s
+default	13:18:47.937824-0500	RedLemon	[C78 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.268s
+default	13:18:47.938205-0500	RedLemon	Connection 78: connected successfully
+default	13:18:47.938270-0500	RedLemon	Connection 78: TLS handshake complete
+default	13:18:47.938498-0500	RedLemon	Connection 78: ready C(N) E(N)
+default	13:18:47.938684-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> now using Connection 78
+default	13:18:47.938771-0500	RedLemon	Connection 78: received viability advisory(Y)
+default	13:18:47.938960-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> sent request, body N 0
+default	13:18:47.962048-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> received response, status 101 content U
+default	13:18:47.962662-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> response ended
+default	13:18:47.962794-0500	RedLemon	Task <0F37C06C-D33D-4F86-B962-01B0B0436CE6>.<1> done using Connection 80
+default	13:18:47.964406-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.195s
+default	13:18:47.964461-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C80] reporting state preparing
+default	13:18:47.964586-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.195s
+default	13:18:47.964759-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.195s
+default	13:18:47.964823-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.195s
+default	13:18:47.964910-0500	RedLemon	nw_flow_connected [C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:47.965056-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.195s
+default	13:18:47.965131-0500	RedLemon	[C80 Hostname#ea0317c1:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.195s
+default	13:18:47.965363-0500	RedLemon	nw_flow_connected [C80.1 IPv4#f6ffd5ac:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:47.965962-0500	RedLemon	[C80.1 IPv4#f6ffd5ac:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.196s
+default	13:18:47.966052-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C80] reporting state ready
+default	13:18:47.966178-0500	RedLemon	[C80 Hostname#ea0317c1:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.196s
+default	13:18:47.984258-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:47.984563-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C4163DBF-6E10-4EAB-A59E-EB7FB1BF5FF2] (reporting strategy default)> on Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> was not selected for reporting
+default	13:18:47.985658-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:47.985886-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> now using Connection 9
+default	13:18:47.986691-0500	RedLemon	0x7f90aa726578 ID=588 Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> sent request, body N 0
+default	13:18:48.009644-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:48.009958-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:48.010215-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:48.036237-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from misterchief in room B82K
+default	13:18:48.036390-0500	RedLemon	👋 Received: Guest 'misterchief' joined room B82K
+default	13:18:48.056755-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> received response, status 101 content U
+default	13:18:48.057590-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> response ended
+default	13:18:48.057817-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> done using Connection 78
+default	13:18:48.058438-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.389s
+default	13:18:48.058479-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state preparing
+default	13:18:48.058542-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.389s
+default	13:18:48.058677-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.389s
+default	13:18:48.058772-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.389s
+default	13:18:48.058852-0500	RedLemon	nw_flow_connected [C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:48.059016-0500	RedLemon	[C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.389s
+default	13:18:48.059118-0500	RedLemon	[C78 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.390s
+default	13:18:48.059365-0500	RedLemon	nw_flow_connected [C78.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:48.059756-0500	RedLemon	[C78.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.390s
+default	13:18:48.059854-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state ready
+default	13:18:48.060014-0500	RedLemon	[C78 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.390s
+default	13:18:48.063009-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1101 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:18:48.063225-0500	runningboardd	Assertion 173-18244-1101 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:48.064553-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:48.064603-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:48.064744-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:48.070144-0500	RedLemon	0x7f90aa726578 ID=588 Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> received response, status 200 content U
+default	13:18:48.070563-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1102 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:18:48.070772-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> response ended
+default	13:18:48.070997-0500	runningboardd	Assertion 173-114-1102 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:48.071338-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> done using Connection 9
+default	13:18:48.071538-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> summary for task success {transaction_duration_ms=86, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=84, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=false}
+default	13:18:48.072195-0500	RedLemon	Task <FDCE2ACA-52FB-4777-8188-0CB3E928E345>.<628> finished successfully
+default	13:18:48.074314-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:48.074724-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [40E59D44-EE57-4669-A666-9EBAC1840538] (reporting strategy default)> on Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> was not selected for reporting
+default	13:18:48.075552-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:48.075716-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:48.075861-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> now using Connection 9
+default	13:18:48.075895-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:48.076416-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:48.076962-0500	RedLemon	0x7f90aa3a9d98 ID=592 Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> sent request, body N 0
+default	13:18:48.089016-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:48.179506-0500	RedLemon	tcp_input [C78.1:3] flags=[F.] seq=4153604040, ack=3004249256, win=249 state=ESTABLISHED rcv_nxt=4153603925, snd_una=3004249163
+default	13:18:48.179877-0500	RedLemon	nw_protocol_tcp_log_summary [C78.1:3]
+	[BFFE548C-A665-40C5-A0C5-9E763C67FE35 <private>:56260<-><private>:443]
+	Init: 1, Conn_Time: 117.491ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 120.781ms, rtt_var: 6.187ms rtt_nc: 118.062ms, rtt_var_nc: 25.437ms base rtt: 113ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:27.266906-0500	RedLemon	tcp_input [C51.1:3] flags=[F.] seq=1644625895, ack=874208789, win=249 state=ESTABLISHED rcv_nxt=1644625895, snd_una=874208789
-default	18:36:27.268692-0500	RedLemon	[C51.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.573s, error Socket is not connected
-default	18:36:27.268795-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state failed error Socket is not connected
-default	18:36:27.268887-0500	RedLemon	[C51 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.573s
-error	18:36:27.268963-0500	RedLemon	nw_read_request_report [C51] Receive failed with error "Socket is not connected"
-error	18:36:27.269932-0500	RedLemon	nw_flow_service_reads [C51.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] No output handler
-error	18:36:27.270083-0500	RedLemon	tcp_output [C51.1:3] flags=[R.] seq=874208920, ack=1644625896, win=2047 state=CLOSED rcv_nxt=1644625896, snd_una=874208789
-error	18:36:27.270328-0500	RedLemon	Connection 51: received failure notification
-default	18:36:27.270734-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> summary for task success {transaction_duration_ms=578, response_status=101, connection=51, protocol="http/1.1", domain_lookup_duration_ms=15, connect_duration_ms=278, secure_connection_duration_ms=144, private_relay=false, request_start_ms=306, request_duration_ms=0, response_start_ms=432, response_duration_ms=1, request_bytes=359, response_bytes=330, cache_hit=false}
-error	18:36:27.270863-0500	RedLemon	nw_flow_add_write_request [C51.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-default	18:36:27.271023-0500	RedLemon	Task <F0A0843E-9D6A-4444-AB22-780295BB4C45>.<1> finished successfully
-error	18:36:27.271089-0500	RedLemon	nw_write_request_report [C51] Send failed with error "Socket is not connected"
-default	18:36:27.271245-0500	RedLemon	Connection 51: cleaning up
-default	18:36:27.271343-0500	RedLemon	[C51 6F7E026D-E2FB-4B9A-AC9A-F416A48EB4B4 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:27.271591-0500	RedLemon	[C51 6F7E026D-E2FB-4B9A-AC9A-F416A48EB4B4 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C51.1 2A82D612-C3BD-40F8-BD28-DD2243B3EAC1 10.0.0.249:55401<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:18:48.181813-0500	RedLemon	nw_flow_disconnected [C78.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol disconnected
+default	13:18:48.183815-0500	RedLemon	Connection 78: read-side closed
+default	13:18:48.183880-0500	RedLemon	Connection 78: read-side closed
+default	13:18:48.184016-0500	RedLemon	Connection 78: read-side closed
+default	13:18:48.184848-0500	RedLemon	[C78.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:disconnect @0.515s, error Socket is not connected
+default	13:18:48.184941-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state failed error Socket is not connected
+default	13:18:48.185045-0500	RedLemon	[C78 Hostname#f00e5bad:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:disconnect @0.515s
+error	13:18:48.185138-0500	RedLemon	nw_read_request_report [C78] Receive failed with error "Socket is not connected"
+error	13:18:48.186315-0500	RedLemon	nw_flow_service_reads [C78.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] No output handler
+default	13:18:48.186475-0500	RedLemon	tcp_output [C78.1:3] flags=[F.] seq=3004249387, ack=4153604041, win=2048 state=LAST_ACK rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.186619-0500	RedLemon	Connection 78: received failure notification
+default	13:18:48.186825-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> summary for task success {transaction_duration_ms=531, response_status=101, connection=78, protocol="http/1.1", domain_lookup_duration_ms=11, connect_duration_ms=254, secure_connection_duration_ms=134, private_relay=false, request_start_ms=283, request_duration_ms=0, response_start_ms=401, response_duration_ms=1, request_bytes=359, response_bytes=330, cache_hit=false}
+default	13:18:48.186923-0500	RedLemon	Task <E5128513-7B8B-494F-BB80-D07128C9E847>.<1> finished successfully
+error	13:18:48.187594-0500	RedLemon	nw_flow_add_write_request [C78.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] cannot accept write requests
+error	13:18:48.187658-0500	RedLemon	nw_write_request_report [C78] Send failed with error "Socket is not connected"
+default	13:18:48.187715-0500	RedLemon	Connection 78: cleaning up
+default	13:18:48.187768-0500	RedLemon	[C78 3FB4B3DC-B3F7-4B21-BB9A-57B9E3EF67A7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancel
+default	13:18:48.187990-0500	RedLemon	[C78 3FB4B3DC-B3F7-4B21-BB9A-57B9E3EF67A7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancelled
+	[C78.1 AE21ECBE-5C77-489D-A82A-6FC6ACFF219D 192.168.2.13:56260<->IPv4#60630852:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 0.575s, DNS @0.002s took 0.015s, TCP @0.432s took 0.131s
+	Duration: 0.518s, DNS @0.001s took 0.011s, TCP @0.389s took 0.118s
 	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:27.273080-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C51] reporting state cancelled error Socket is not connected
-default	18:36:27.273245-0500	RedLemon	Connection 51: done
-default	18:36:27.286148-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> received response, status 200 content U
-default	18:36:27.286348-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> done using Connection 2
-default	18:36:27.287312-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> response ended
-default	18:36:27.287650-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> summary for task success {transaction_duration_ms=63, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=244, response_bytes=534, cache_hit=true}
-default	18:36:27.288038-0500	RedLemon	Task <12960B62-B8B1-47FC-87C6-7ECB460D9704>.<475> finished successfully
-default	18:36:27.292000-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:27.292378-0500	RedLemon	👋 misterchief joined room
-default	18:36:27.293111-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:27.294301-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8B8B5296-D5C5-4222-ACB4-D67CCD72632F] (reporting strategy default)> on Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> was not selected for reporting
-default	18:36:27.295690-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:27.296148-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> now using Connection 2
-default	18:36:27.297604-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> sent request, body N 0
-default	18:36:27.356389-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> received response, status 200 content U
-default	18:36:27.358490-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> done using Connection 2
-default	18:36:27.358674-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> response ended
-default	18:36:27.358939-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> summary for task success {transaction_duration_ms=63, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=61, response_duration_ms=2, request_bytes=220, response_bytes=643, cache_hit=false}
-default	18:36:27.359297-0500	RedLemon	Task <037DF9D3-6019-419A-8F79-46B6B24AAA9B>.<476> finished successfully
-default	18:36:28.146567-0500	runningboardd	Invalidating assertion 173-20526-2961 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:28.271847-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:28.274157-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E83D4D4E-AF06-4163-8ECC-D97EA0D8C688] (reporting strategy default)> on Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> was not selected for reporting
-default	18:36:28.274993-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:28.275738-0500	RedLemon	Connection 53: enabling TLS
-default	18:36:28.275779-0500	RedLemon	Connection 53: starting, TC(0x0)
-default	18:36:28.275837-0500	RedLemon	[C53 3E2908DB-8B18-40C4-99E7-34AAB53D604D Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{51293320-9011-42AE-B89B-BFF4B0FE0FEA}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:28.275933-0500	RedLemon	[C53 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.000s
-default	18:36:28.276303-0500	RedLemon	[C53 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 4B74383C-6B0F-4481-AEE4-50A243907681
-default	18:36:28.276504-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	18:36:28.276544-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state preparing
-default	18:36:28.276799-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> setting up Connection 53
-default	18:36:28.276990-0500	mDNSResponder	[R2205] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:28.279269-0500	mDNSResponder	[R2205] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:28.278872-0500	RedLemon	nw_endpoint_resolver_update [C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:28.279092-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.003s
-default	18:36:28.280504-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.004s
-default	18:36:28.281459-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.005s, uuid: 9311635C-133D-4A27-A538-DE880B682983
-default	18:36:28.281651-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.005s
-default	18:36:28.282584-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.006s
-default	18:36:28.283648-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.007s
-default	18:36:28.283796-0500	RedLemon	tcp_output [C53.1:3] flags=[S] seq=1007624022, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1007624022
-default	18:36:28.320341-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:28.320390-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:28.320442-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:28.322262-0500	runningboardd	Invalidating assertion 173-114-2962 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:28.383836-0500	RedLemon	SWIFT TASK CONTINUATION MISUSE: waitForAuthAck(timeout:) leaked its continuation!
-default	18:36:28.403841-0500	RedLemon	tcp_input [C53.1:3] flags=[S.] seq=996914181, ack=1007624023, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=1007624022
-default	18:36:28.404035-0500	RedLemon	nw_flow_connected [C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:28.404208-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.128s
-default	18:36:28.404278-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.128s
-default	18:36:28.404635-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C53.1:2][0x7f99cd2dfbc0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:28.404791-0500	RedLemon	boringssl_context_info_handler(2028) [C53.1:2][0x7f99cd2dfbc0] Client handshake started
-default	18:36:28.404988-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS client enter_early_data
-default	18:36:28.405117-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS client read_server_hello
-default	18:36:28.493019-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:28.493356-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:28.493542-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:28.538055-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:28.547575-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:28.548422-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:28.552073-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:28.552409-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:28.555181-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:28.556639-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C53.1:2][0x7f99cd2dfbc0] Performing external trust evaluation
-default	18:36:28.557439-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C53.1:2][0x7f99cd2dfbc0] Asyncing for external verify block
-default	18:36:28.558819-0500	RedLemon	Connection 53: asked to evaluate TLS Trust
-default	18:36:28.559257-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> auth completion disp=1 cred=0x0
-default	18:36:28.574491-0500	RedLemon	Connection 53: TLS Trust result 0
-default	18:36:28.574799-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C53.1:2][0x7f99cd2dfbc0] Returning from external verify block with result: true
-default	18:36:28.643646-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C53.1:2][0x7f99cd2dfbc0] Certificate verification result: OK
-default	18:36:28.644295-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:28.675817-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:28.675883-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:28.675921-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:28.675956-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:28.676074-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS 1.3 client done
-default	18:36:28.682497-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS client finish_client_handshake
-default	18:36:28.682583-0500	RedLemon	boringssl_context_info_handler(2045) [C53.1:2][0x7f99cd2dfbc0] Client handshake state: TLS client done
-default	18:36:28.682635-0500	RedLemon	boringssl_context_info_handler(2034) [C53.1:2][0x7f99cd2dfbc0] Client handshake done
-default	18:36:28.700906-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C53.1:2][0x7f99cd2dfbc0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(293ms) flight_time(137ms) rtt(134ms) write_stalls(0) read_stalls(4)]
-default	18:36:28.701390-0500	RedLemon	nw_flow_connected [C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:28.701697-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.425s
-default	18:36:28.702039-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state ready
-default	18:36:28.702136-0500	RedLemon	[C53 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.426s
-default	18:36:28.702280-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.426s
-default	18:36:28.702348-0500	RedLemon	[C53 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.426s
-default	18:36:28.704817-0500	RedLemon	Connection 53: connected successfully
-default	18:36:28.704889-0500	RedLemon	Connection 53: TLS handshake complete
-default	18:36:28.705188-0500	RedLemon	Connection 53: ready C(N) E(N)
-default	18:36:28.705461-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> now using Connection 53
-default	18:36:28.708137-0500	RedLemon	Connection 53: received viability advisory(Y)
-default	18:36:28.708668-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> sent request, body N 0
-default	18:36:28.829937-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> received response, status 101 content U
-default	18:36:28.830235-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> response ended
-default	18:36:28.830303-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> done using Connection 53
-default	18:36:28.831079-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.555s
-default	18:36:28.831129-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state preparing
-default	18:36:28.831203-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.555s
-default	18:36:28.831353-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.555s
-default	18:36:28.831418-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.555s
-default	18:36:28.831497-0500	RedLemon	nw_flow_connected [C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:28.831639-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.555s
-default	18:36:28.831700-0500	RedLemon	[C53 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.555s
-default	18:36:28.831846-0500	RedLemon	nw_flow_connected [C53.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:28.832160-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.556s
-default	18:36:28.832205-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state ready
-default	18:36:28.832271-0500	RedLemon	[C53 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.556s
-default	18:36:28.955110-0500	RedLemon	nw_flow_disconnected [C53.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:28.955595-0500	RedLemon	nw_protocol_tcp_log_summary [C53.1:3]
-	[B8AC5094-32FD-4638-8047-91E1E829A0B6 <private>:55403<-><private>:443]
-	Init: 1, Conn_Time: 120.167ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 4, rtt: 127.218ms, rtt_var: 9.062ms rtt_nc: 124.562ms, rtt_var_nc: 32.125ms base rtt: 121ms
+default	13:18:48.188512-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C78] reporting state cancelled error Socket is not connected
+default	13:18:48.188647-0500	RedLemon	Connection 78: done
+default	13:18:48.188957-0500	RedLemon	0x7f90aa3a9d98 ID=592 Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> received response, status 200 content U
+default	13:18:48.189739-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> response ended
+default	13:18:48.190359-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> done using Connection 9
+default	13:18:48.190608-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> summary for task success {transaction_duration_ms=115, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=113, response_duration_ms=1, request_bytes=524, response_bytes=818, cache_hit=true}
+default	13:18:48.190838-0500	RedLemon	Task <FBD9FC59-AEBB-4096-9F7B-915883EE9336>.<629> finished successfully
+default	13:18:48.193072-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:48.193747-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D2D90B29-68FF-421F-A358-832BB42C623A] (reporting strategy default)> on Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> was not selected for reporting
+default	13:18:48.194617-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:48.194870-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> now using Connection 9
+default	13:18:48.195923-0500	RedLemon	0x7f90ad0ce8d8 ID=596 Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> sent request, body N 0
+default	13:18:48.198024-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:48.277390-0500	RedLemon	0x7f90ad0ce8d8 ID=596 Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> received response, status 200 content U
+default	13:18:48.278413-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> response ended
+default	13:18:48.278979-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> done using Connection 9
+default	13:18:48.279315-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> summary for task success {transaction_duration_ms=85, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=82, response_duration_ms=2, request_bytes=524, response_bytes=823, cache_hit=true}
+default	13:18:48.280141-0500	RedLemon	Task <BA7EA798-F0F0-49BE-981B-78C1A2EDE833>.<630> finished successfully
+default	13:18:48.282952-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
+default	13:18:48.283322-0500	RedLemon	👋 misterchief joined room
+default	13:18:48.284082-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:48.284779-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8F8DC681-5EC3-4319-BA82-CD8C37C67BCA] (reporting strategy default)> on Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> was not selected for reporting
+default	13:18:48.285903-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:48.286369-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> now using Connection 9
+default	13:18:48.288042-0500	RedLemon	0x7f90ad0ce8d8 ID=600 Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> sent request, body N 0
+default	13:18:48.289395-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+error	13:18:48.298398-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=LAST_ACK rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.298542-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=CLOSED rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.298577-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=CLOSED rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.298643-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=CLOSED rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.298824-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=CLOSED rcv_nxt=4153604041, snd_una=3004249256
+error	13:18:48.303447-0500	RedLemon	tcp_input [C78.1:3] flags=[R] seq=4153604041, ack=0, win=0 state=CLOSED rcv_nxt=4153604041, snd_una=3004249256
+default	13:18:48.385128-0500	RedLemon	0x7f90ad0ce8d8 ID=600 Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> received response, status 200 content U
+default	13:18:48.386173-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> response ended
+default	13:18:48.386728-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> done using Connection 9
+default	13:18:48.387243-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> summary for task success {transaction_duration_ms=101, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=99, response_duration_ms=2, request_bytes=500, response_bytes=1024, cache_hit=false}
+default	13:18:48.387907-0500	RedLemon	Task <51614F75-2C34-47C3-B269-40A374E05AB5>.<631> finished successfully
+default	13:18:48.396965-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:49.148997-0500	runningboardd	Invalidating assertion 173-18244-1101 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:49.285777-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:49.286632-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1F1CF81B-BBE5-4B9E-9D6A-6B0F8F84442F] (reporting strategy default)> on Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> was not selected for reporting
+default	13:18:49.287806-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:49.288558-0500	RedLemon	Connection 81: enabling TLS
+default	13:18:49.288604-0500	RedLemon	Connection 81: starting, TC(0x0)
+default	13:18:49.288665-0500	RedLemon	[C81 1E4349EA-BBFD-4E14-A77E-A486024ACAA3 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{C8A5D2BF-8F49-4DF7-AB52-FC975EAC8032}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:49.288800-0500	RedLemon	[C81 Hostname#f00e5bad:443 initial path ((null))] event: path:start @0.000s
+default	13:18:49.289244-0500	RedLemon	[C81 Hostname#f00e5bad:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: E54BAF1C-0C0F-42BF-9BC4-F95507B8D246
+default	13:18:49.289928-0500	mDNSResponder	[R1077] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:49.289468-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:49.289514-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state preparing
+default	13:18:49.289859-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> setting up Connection 81
+default	13:18:49.292484-0500	mDNSResponder	[R1077] getaddrinfo stop -- hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, client pid: 18244 (RedLemon)
+default	13:18:49.293262-0500	RedLemon	nw_endpoint_resolver_update [C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#60630852:443
+default	13:18:49.293443-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.004s
+default	13:18:49.293718-0500	RedLemon	[C81.1 IPv4#60630852:443 initial path ((null))] event: path:start @0.004s
+default	13:18:49.294200-0500	RedLemon	[C81.1 IPv4#60630852:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.005s, uuid: 06169E9D-8EE4-4336-949A-6577DEC0AA1A
+default	13:18:49.294343-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.005s
+default	13:18:49.295094-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.006s
+default	13:18:49.295958-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.007s
+default	13:18:49.296257-0500	RedLemon	tcp_output [C81.1:3] flags=[S] seq=875087589, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=875087589
+default	13:18:49.315105-0500	runningboardd	Assertion did invalidate due to timeout: 173-140-1094 (target:[anon<RedLemon>(501):18244])
+default	13:18:49.318224-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:49.318443-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:49.318700-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:49.323168-0500	runningboardd	Invalidating assertion 173-114-1102 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:49.397530-0500	RedLemon	SWIFT TASK CONTINUATION MISUSE: waitForAuthAck(timeout:) leaked its continuation!
+default	13:18:49.410065-0500	RedLemon	tcp_input [C81.1:3] flags=[S.] seq=2868912312, ack=875087590, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=875087589
+default	13:18:49.410332-0500	RedLemon	nw_flow_connected [C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:49.410624-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.121s
+default	13:18:49.410748-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.121s
+default	13:18:49.411923-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C81.1:2][0x7f90aa0e01a0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:49.412173-0500	RedLemon	boringssl_context_info_handler(2028) [C81.1:2][0x7f90aa0e01a0] Client handshake started
+default	13:18:49.412513-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS client enter_early_data
+default	13:18:49.412734-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS client read_server_hello
+default	13:18:49.486924-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:49.487068-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:49.487158-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:49.530498-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:49.530605-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:49.530951-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:49.532056-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:49.532813-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:49.533011-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:49.534614-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C81.1:2][0x7f90aa0e01a0] Performing external trust evaluation
+default	13:18:49.534967-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C81.1:2][0x7f90aa0e01a0] Asyncing for external verify block
+default	13:18:49.535732-0500	RedLemon	Connection 81: asked to evaluate TLS Trust
+default	13:18:49.536303-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> auth completion disp=1 cred=0x0
+default	13:18:49.544693-0500	RedLemon	Connection 81: TLS Trust result 0
+default	13:18:49.544753-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C81.1:2][0x7f90aa0e01a0] Returning from external verify block with result: true
+default	13:18:49.544862-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C81.1:2][0x7f90aa0e01a0] Certificate verification result: OK
+default	13:18:49.545241-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:49.545535-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:49.545577-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:49.545614-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:49.545653-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:49.545792-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS 1.3 client done
+default	13:18:49.545979-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS client finish_client_handshake
+default	13:18:49.546029-0500	RedLemon	boringssl_context_info_handler(2045) [C81.1:2][0x7f90aa0e01a0] Client handshake state: TLS client done
+default	13:18:49.546070-0500	RedLemon	boringssl_context_info_handler(2034) [C81.1:2][0x7f90aa0e01a0] Client handshake done
+default	13:18:49.546715-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C81.1:2][0x7f90aa0e01a0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(134ms) flight_time(119ms) rtt(118ms) write_stalls(0) read_stalls(4)]
+default	13:18:49.547003-0500	RedLemon	nw_flow_connected [C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:49.547319-0500	RedLemon	[C81.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.258s
+default	13:18:49.547657-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state ready
+default	13:18:49.547729-0500	RedLemon	[C81 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.258s
+default	13:18:49.547882-0500	RedLemon	[C81.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.259s
+default	13:18:49.547955-0500	RedLemon	[C81 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.259s
+default	13:18:49.548280-0500	RedLemon	Connection 81: connected successfully
+default	13:18:49.548330-0500	RedLemon	Connection 81: TLS handshake complete
+default	13:18:49.548557-0500	RedLemon	Connection 81: ready C(N) E(N)
+default	13:18:49.548788-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> now using Connection 81
+default	13:18:49.548892-0500	RedLemon	Connection 81: received viability advisory(Y)
+default	13:18:49.549113-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> sent request, body N 0
+default	13:18:49.663069-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> received response, status 101 content U
+default	13:18:49.664685-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> response ended
+default	13:18:49.664833-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> done using Connection 81
+default	13:18:49.665916-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.377s
+default	13:18:49.666001-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state preparing
+default	13:18:49.666129-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.377s
+default	13:18:49.666399-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.377s
+default	13:18:49.666512-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.377s
+default	13:18:49.666656-0500	RedLemon	nw_flow_connected [C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:49.666909-0500	RedLemon	[C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.378s
+default	13:18:49.667021-0500	RedLemon	[C81 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.378s
+default	13:18:49.667618-0500	RedLemon	nw_flow_connected [C81.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:49.669521-0500	RedLemon	[C81.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.380s
+default	13:18:49.669806-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state ready
+default	13:18:49.669987-0500	RedLemon	[C81 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.381s
+default	13:18:49.706336-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room B82K
+default	13:18:49.706497-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+default	13:18:49.730541-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+default	13:18:49.730938-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:49.731518-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7857C951-265C-41E2-B688-9332D0E45380] (reporting strategy default)> on Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> was not selected for reporting
+default	13:18:49.732673-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:49.732988-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> now using Connection 9
+default	13:18:49.738061-0500	RedLemon	0x7f90aa0e05a8 ID=604 Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> sent request, body N 0
+default	13:18:49.787223-0500	RedLemon	tcp_input [C81.1:3] flags=[F.] seq=2868915343, ack=875088646, win=249 state=ESTABLISHED rcv_nxt=2868915228, snd_una=875088552
+default	13:18:49.787390-0500	RedLemon	nw_protocol_tcp_log_summary [C81.1:3]
+	[5E0044D4-DD5A-4F96-8D97-BDE370D48053 <private>:56263<-><private>:443]
+	Init: 1, Conn_Time: 114.058ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 119.718ms, rtt_var: 5.437ms rtt_nc: 115.781ms, rtt_var_nc: 25.437ms base rtt: 113ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:28.955977-0500	RedLemon	Connection 53: read-side closed
-default	18:36:28.956065-0500	RedLemon	tcp_input [C53.1:3] flags=[F.] seq=996917213, ack=1007625078, win=249 state=ESTABLISHED rcv_nxt=996917213, snd_una=1007625078
-default	18:36:28.957058-0500	RedLemon	[C53.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.681s, error Socket is not connected
-default	18:36:28.957123-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state failed error Socket is not connected
-default	18:36:28.957197-0500	RedLemon	[C53 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.681s
-error	18:36:28.957276-0500	RedLemon	nw_read_request_report [C53] Receive failed with error "Socket is not connected"
-error	18:36:28.957472-0500	RedLemon	nw_flow_service_reads [C53.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] No output handler
-default	18:36:28.957613-0500	RedLemon	tcp_output [C53.1:3] flags=[F.] seq=1007625209, ack=996917214, win=2048 state=LAST_ACK rcv_nxt=996917214, snd_una=1007625078
-error	18:36:28.957761-0500	RedLemon	Connection 53: received failure notification
-default	18:36:28.958013-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> summary for task success {transaction_duration_ms=683, response_status=101, connection=53, protocol="http/1.1", domain_lookup_duration_ms=3, connect_duration_ms=418, secure_connection_duration_ms=293, private_relay=false, request_start_ms=433, request_duration_ms=0, response_start_ms=555, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
-default	18:36:28.958164-0500	RedLemon	Task <AFD99596-D12E-41E4-89C4-84D8D14742F1>.<1> finished successfully
-error	18:36:28.958252-0500	RedLemon	nw_flow_add_write_request [C53.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-error	18:36:28.958537-0500	RedLemon	nw_write_request_report [C53] Send failed with error "Socket is not connected"
-default	18:36:28.958858-0500	RedLemon	Connection 53: cleaning up
-default	18:36:28.959202-0500	RedLemon	[C53 3E2908DB-8B18-40C4-99E7-34AAB53D604D Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:28.959649-0500	RedLemon	[C53 3E2908DB-8B18-40C4-99E7-34AAB53D604D Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C53.1 9311635C-133D-4A27-A538-DE880B682983 10.0.0.249:55403<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:18:49.788422-0500	RedLemon	nw_flow_disconnected [C81.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol disconnected
+default	13:18:49.792066-0500	RedLemon	[C81.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:disconnect @0.503s, error Socket is not connected
+default	13:18:49.792181-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state failed error Socket is not connected
+default	13:18:49.792398-0500	RedLemon	[C81 Hostname#f00e5bad:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:disconnect @0.503s
+error	13:18:49.792577-0500	RedLemon	nw_read_request_report [C81] Receive failed with error "Socket is not connected"
+error	13:18:49.792849-0500	RedLemon	nw_flow_service_reads [C81.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] No output handler
+default	13:18:49.793076-0500	RedLemon	tcp_output [C81.1:3] flags=[F.] seq=875088777, ack=2868915344, win=2048 state=LAST_ACK rcv_nxt=2868915344, snd_una=875088646
+default	13:18:49.793560-0500	RedLemon	Connection 81: read-side closed
+default	13:18:49.793690-0500	RedLemon	Connection 81: read-side closed
+default	13:18:49.793881-0500	RedLemon	Connection 81: read-side closed
+error	13:18:49.794032-0500	RedLemon	Connection 81: received failure notification
+default	13:18:49.794255-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> summary for task success {transaction_duration_ms=506, response_status=101, connection=81, protocol="http/1.1", domain_lookup_duration_ms=4, connect_duration_ms=251, secure_connection_duration_ms=134, private_relay=false, request_start_ms=261, request_duration_ms=0, response_start_ms=375, response_duration_ms=2, request_bytes=359, response_bytes=330, cache_hit=false}
+default	13:18:49.794359-0500	RedLemon	Task <84B2514F-83C5-446C-91C5-A57C792CDA26>.<1> finished successfully
+error	13:18:49.794388-0500	RedLemon	nw_flow_add_write_request [C81.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] cannot accept write requests
+error	13:18:49.794485-0500	RedLemon	nw_write_request_report [C81] Send failed with error "Socket is not connected"
+default	13:18:49.794631-0500	RedLemon	Connection 81: cleaning up
+default	13:18:49.794744-0500	RedLemon	[C81 1E4349EA-BBFD-4E14-A77E-A486024ACAA3 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancel
+default	13:18:49.795032-0500	RedLemon	[C81 1E4349EA-BBFD-4E14-A77E-A486024ACAA3 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancelled
+	[C81.1 06169E9D-8EE4-4336-949A-6577DEC0AA1A 192.168.2.13:56263<->IPv4#60630852:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 0.683s, DNS @0.000s took 0.003s, TCP @0.555s took 0.121s
+	Duration: 0.506s, DNS @0.000s took 0.004s, TCP @0.377s took 0.114s
 	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:28.960459-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C53] reporting state cancelled error Socket is not connected
-default	18:36:28.960689-0500	RedLemon	Connection 53: done
-error	18:36:29.080944-0500	RedLemon	tcp_input [C53.1:3] flags=[R] seq=996917214, ack=0, win=0 state=LAST_ACK rcv_nxt=996917214, snd_una=1007625078
-default	18:36:29.084371-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:29.084371-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:29.085525-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [22AFB9F0-A821-4130-99EA-DEDE6880A6C7] (reporting strategy default)> on Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> was not selected for reporting
-default	18:36:29.085552-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [58F7760B-CF88-408F-A894-E894AB847A4B] (reporting strategy default)> on Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> was not selected for reporting
-default	18:36:29.086888-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:29.087235-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> now using Connection 2
-default	18:36:29.087660-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:29.087865-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> now using Connection 2
-default	18:36:29.088212-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> sent request, body N 0
-default	18:36:29.088265-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> sent request, body N 0
-default	18:36:29.145157-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> received response, status 200 content U
-default	18:36:29.146281-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> done using Connection 2
-default	18:36:29.146387-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> response ended
-default	18:36:29.146549-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> summary for task success {transaction_duration_ms=60, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=58, response_duration_ms=1, request_bytes=231, response_bytes=523, cache_hit=true}
-default	18:36:29.146753-0500	RedLemon	Task <C26C5B8F-18AA-46FE-B4BF-948EC0273F8B>.<477> finished successfully
-default	18:36:29.148524-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:29.149055-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [ABB74B14-E12C-429A-9562-1AAD53DE1FD8] (reporting strategy default)> on Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> was not selected for reporting
-default	18:36:29.149595-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> received response, status 200 content U
-default	18:36:29.150825-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:29.151051-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> now using Connection 2
-default	18:36:29.151546-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> done using Connection 2
-default	18:36:29.151763-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> sent request, body N 0
-default	18:36:29.151869-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> response ended
-default	18:36:29.152168-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> summary for task success {transaction_duration_ms=65, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=63, response_duration_ms=2, request_bytes=220, response_bytes=624, cache_hit=true}
-default	18:36:29.152659-0500	RedLemon	Task <4FA48B37-AEEC-406A-A0BA-8DC59C9FE7F3>.<478> finished successfully
-default	18:36:29.155349-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2963 target:20526 attributes:[
+default	13:18:49.795718-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C81] reporting state cancelled error Socket is not connected
+default	13:18:49.795896-0500	RedLemon	Connection 81: done
+default	13:18:49.837727-0500	RedLemon	0x7f90aa0e05a8 ID=604 Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> received response, status 200 content U
+default	13:18:49.838668-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> response ended
+default	13:18:49.839495-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> done using Connection 9
+default	13:18:49.839829-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> summary for task success {transaction_duration_ms=107, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=4, response_start_ms=105, response_duration_ms=2, request_bytes=500, response_bytes=1016, cache_hit=true}
+default	13:18:49.840564-0500	RedLemon	Task <049F94FA-4366-446A-AEA2-106B850B9C6B>.<632> finished successfully
+default	13:18:49.844276-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1104 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:29.155668-0500	runningboardd	Assertion 173-20526-2963 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:29.157449-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:29.157764-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:29.157938-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:29.163013-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2964 target:20526 attributes:[
+default	13:18:49.844640-0500	runningboardd	Assertion 173-18244-1104 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:49.848891-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:49.849070-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:49.849406-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:49.849160-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:49.851389-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1105 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:29.163476-0500	runningboardd	Assertion 173-114-2964 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:29.167224-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:29.167289-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:29.167340-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:29.177460-0500	RedLemon	🔍 Chat message - isHost: false, appStateUsername: misterchief, room.hostName: lemontom, finalUsername: misterchief
-default	18:36:29.177659-0500	RedLemon	💬 Added own message locally: 'hi'
-default	18:36:29.211242-0500	RedLemon	📡 Chat message sent via Realtime only
-default	18:36:29.211371-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> received response, status 200 content U
-default	18:36:29.211608-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> done using Connection 2
-default	18:36:29.212594-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> response ended
-default	18:36:29.212815-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> summary for task success {transaction_duration_ms=63, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=244, response_bytes=470, cache_hit=true}
-default	18:36:29.213073-0500	RedLemon	Task <32636FEC-BA20-431C-B1C7-4F78499B6C67>.<479> finished successfully
-default	18:36:29.215230-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:29.215899-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E42441BB-05A3-4086-BD34-F1A4B8B1BFCB] (reporting strategy default)> on Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> was not selected for reporting
-default	18:36:29.216705-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:29.216947-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> now using Connection 2
-default	18:36:29.218420-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> sent request, body N 0
-default	18:36:29.258006-0500	RedLemon	📥 Received Realtime message: 'hi' from misterchief in room T948
-default	18:36:29.258357-0500	RedLemon	🔍 Chat message received - senderId: '97933A49-DF93-4D7D-9E5D-94EE9B96191D', participantId: '97933A49-DF93-4D7D-9E5D-94EE9B96191D'
-default	18:36:29.258600-0500	RedLemon	💬 Skipping own message (already displayed locally): 'hi'
-default	18:36:29.282133-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> received response, status 200 content U
-default	18:36:29.282234-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> done using Connection 2
-default	18:36:29.282813-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> response ended
-default	18:36:29.283004-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> summary for task success {transaction_duration_ms=66, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=65, response_duration_ms=0, request_bytes=244, response_bytes=690, cache_hit=true}
-default	18:36:29.283230-0500	RedLemon	Task <59498818-0C01-4992-B148-ACF3C5A49535>.<480> finished successfully
-default	18:36:29.285104-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:30.168845-0500	runningboardd	Invalidating assertion 173-20526-2963 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:30.191261-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:30.191337-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:30.191709-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:30.195101-0500	runningboardd	Invalidating assertion 173-114-2964 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:30.302927-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:30.303035-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:30.303282-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:30.489917-0500	runningboardd	Assertion did invalidate due to timeout: 173-140-2960 (target:[anon<RedLemon>(501):20526])
-default	18:36:30.635219-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:30.635520-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:30.635714-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:31.084435-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:31.084435-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:31.085494-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [69CF8F3B-DCF2-4C01-B372-336B04B93C19] (reporting strategy default)> on Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> was not selected for reporting
-default	18:36:31.085563-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5E611719-C54B-413C-9FC2-75CE84B559BC] (reporting strategy default)> on Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> was not selected for reporting
-default	18:36:31.086306-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:31.086946-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:31.087227-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> now using Connection 2
-default	18:36:31.087426-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D07B4F74-F448-4051-9FA4-A21F893FF992] (reporting strategy default)> on Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> was not selected for reporting
-default	18:36:31.087523-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:31.087862-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> now using Connection 2
-default	18:36:31.088366-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:31.089122-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> sent request, body N 0
-default	18:36:31.089193-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> sent request, body N 0
-default	18:36:31.089756-0500	RedLemon	Connection 54: enabling TLS
-default	18:36:31.089808-0500	RedLemon	Connection 54: starting, TC(0x0)
-default	18:36:31.089871-0500	RedLemon	[C54 802DBFC4-534F-41D4-9060-537B1F21DA25 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{1935B1D8-E694-49FF-8CF0-DB021985121D}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:31.089967-0500	RedLemon	[C54 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.000s
-default	18:36:31.090368-0500	RedLemon	[C54 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 82F571E2-6D89-42EF-837A-9DC73D4A3396
-default	18:36:31.090575-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	18:36:31.090621-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state preparing
-default	18:36:31.090811-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> setting up Connection 54
-default	18:36:31.091047-0500	mDNSResponder	[R2206] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:31.093559-0500	mDNSResponder	[R2206] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:31.093669-0500	RedLemon	nw_endpoint_resolver_update [C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:31.093854-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.003s
-default	18:36:31.094073-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.004s
-default	18:36:31.094496-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: A54A70E4-8834-4099-996E-FD551AD37378
-default	18:36:31.095244-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.005s
-default	18:36:31.096260-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.006s
-default	18:36:31.097138-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.007s
-default	18:36:31.097291-0500	RedLemon	tcp_output [C54.1:3] flags=[S] seq=3759085261, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3759085261
-default	18:36:31.143356-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> received response, status 200 content U
-default	18:36:31.144381-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> done using Connection 2
-default	18:36:31.144491-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> response ended
-default	18:36:31.144696-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> summary for task success {transaction_duration_ms=58, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=57, response_duration_ms=1, request_bytes=220, response_bytes=669, cache_hit=true}
-default	18:36:31.145030-0500	RedLemon	Task <DF744D61-6763-4534-B882-6D4F6FCE85DF>.<481> finished successfully
-default	18:36:31.146063-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2966 target:20526 attributes:[
+default	13:18:49.852993-0500	runningboardd	Assertion 173-114-1105 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:49.855505-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:49.855554-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:49.855864-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+error	13:18:49.902861-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=LAST_ACK rcv_nxt=2868915344, snd_una=875088646
+error	13:18:49.902965-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=CLOSED rcv_nxt=2868915344, snd_una=875088646
+error	13:18:49.903032-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=CLOSED rcv_nxt=2868915344, snd_una=875088646
+error	13:18:49.904412-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=CLOSED rcv_nxt=2868915344, snd_una=875088646
+error	13:18:49.904469-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=CLOSED rcv_nxt=2868915344, snd_una=875088646
+error	13:18:49.905282-0500	RedLemon	tcp_input [C81.1:3] flags=[R] seq=2868915344, ack=0, win=0 state=CLOSED rcv_nxt=2868915344, snd_una=875088646
+default	13:18:49.914304-0500	RedLemon	📺 Guest: Set season/episode from DB (Realtime path): S1E4
+default	13:18:49.914422-0500	RedLemon	🎬 Guest: Waiting for countdown...
+default	13:18:49.984782-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:49.984782-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:49.986233-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9489E7B3-B8F5-43A8-8DEA-3BB47C72C038] (reporting strategy default)> on Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> was not selected for reporting
+default	13:18:49.986624-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6314EA7B-F164-4DB4-B3CA-4EEB7778E034] (reporting strategy default)> on Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> was not selected for reporting
+default	13:18:49.988461-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:49.988831-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> now using Connection 9
+default	13:18:49.991044-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:49.991486-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> now using Connection 9
+default	13:18:49.993513-0500	RedLemon	0x7f90ad96ef08 ID=608 Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> sent request, body N 0
+default	13:18:49.993601-0500	RedLemon	0x7f90addebb98 ID=612 Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> sent request, body N 0
+default	13:18:50.085599-0500	RedLemon	0x7f90addebb98 ID=612 Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> received response, status 200 content U
+default	13:18:50.086314-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> response ended
+default	13:18:50.086783-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> done using Connection 9
+default	13:18:50.087059-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> summary for task success {transaction_duration_ms=99, response_status=200, connection=9, reused=1, request_start_ms=3, request_duration_ms=2, response_start_ms=97, response_duration_ms=1, request_bytes=500, response_bytes=1016, cache_hit=true}
+default	13:18:50.087968-0500	RedLemon	Task <5AA85723-6715-45B4-A48E-90B3E72BBA0F>.<634> finished successfully
+default	13:18:50.090804-0500	RedLemon	🎬 Guest: Detected room playback start via database fallback
+default	13:18:50.109983-0500	RedLemon	0x7f90ad96ef08 ID=608 Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> received response, status 200 content U
+default	13:18:50.110666-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> response ended
+default	13:18:50.111140-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> done using Connection 9
+default	13:18:50.111413-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> summary for task success {transaction_duration_ms=124, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=4, response_start_ms=122, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
+default	13:18:50.111641-0500	RedLemon	Task <606E773B-76EE-48A9-8EA0-2CEFDD789B98>.<633> finished successfully
+default	13:18:50.113337-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:50.113672-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [84EF8500-77D7-4AC9-9072-66D51F647E75] (reporting strategy default)> on Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> was not selected for reporting
+default	13:18:50.114451-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:50.114670-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> now using Connection 9
+default	13:18:50.115483-0500	RedLemon	0x7f90ade059e8 ID=616 Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> sent request, body N 0
+default	13:18:50.121378-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:50.202152-0500	RedLemon	0x7f90ade059e8 ID=616 Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> received response, status 200 content U
+default	13:18:50.202934-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> response ended
+default	13:18:50.203524-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> done using Connection 9
+default	13:18:50.203809-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> summary for task success {transaction_duration_ms=89, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=87, response_duration_ms=1, request_bytes=524, response_bytes=822, cache_hit=true}
+default	13:18:50.204647-0500	RedLemon	Task <7842F2B7-D3C9-422D-9BD4-CAA07EC24B3F>.<635> finished successfully
+default	13:18:50.208656-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:50.209340-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6C75F2D1-098E-49B9-AB24-0BCBA4DD4933] (reporting strategy default)> on Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> was not selected for reporting
+default	13:18:50.210918-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:50.211297-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> now using Connection 9
+default	13:18:50.212585-0500	RedLemon	0x7f90ade059e8 ID=620 Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> sent request, body N 0
+default	13:18:50.225083-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:50.287587-0500	RedLemon	0x7f90ade059e8 ID=620 Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> received response, status 200 content U
+default	13:18:50.288448-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> response ended
+default	13:18:50.289010-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> done using Connection 9
+default	13:18:50.289336-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> summary for task success {transaction_duration_ms=79, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=77, response_duration_ms=1, request_bytes=524, response_bytes=823, cache_hit=true}
+default	13:18:50.290417-0500	RedLemon	Task <4C3E8BFA-663C-46C7-B8E2-A7821EB5ECC0>.<636> finished successfully
+default	13:18:50.294964-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
+default	13:18:50.327012-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:50.905332-0500	runningboardd	Invalidating assertion 173-18244-1104 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:51.018693-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:51.018795-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:51.018889-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:51.022612-0500	runningboardd	Invalidating assertion 173-114-1105 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:51.195940-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:51.196033-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:51.196124-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:51.957983-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:51.958410-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CECA560E-BA64-491F-B81A-94DF949A51A4] (reporting strategy default)> on Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> was not selected for reporting
+default	13:18:51.958987-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:51.959558-0500	RedLemon	Connection 82: enabling TLS
+default	13:18:51.959598-0500	RedLemon	Connection 82: starting, TC(0x0)
+default	13:18:51.959651-0500	RedLemon	[C82 C26825BD-4158-4203-A51C-FE72FD54A968 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{5C298499-64ED-47DE-B2FF-7A292C609673}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:51.959737-0500	RedLemon	[C82 Hostname#f00e5bad:443 initial path ((null))] event: path:start @0.000s
+default	13:18:51.960066-0500	RedLemon	[C82 Hostname#f00e5bad:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: 8CCA5752-860F-41BC-B39E-C7A11A354782
+default	13:18:51.960253-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:51.960294-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state preparing
+default	13:18:51.960503-0500	mDNSResponder	[R1078] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:51.960537-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> setting up Connection 82
+default	13:18:51.962120-0500	mDNSResponder	[R1078] getaddrinfo stop -- hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, client pid: 18244 (RedLemon)
+default	13:18:51.962364-0500	RedLemon	nw_endpoint_resolver_update [C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#60630852:443
+default	13:18:51.962500-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.002s
+default	13:18:51.962774-0500	RedLemon	[C82.1 IPv4#60630852:443 initial path ((null))] event: path:start @0.003s
+default	13:18:51.963181-0500	RedLemon	[C82.1 IPv4#60630852:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.003s, uuid: CD213CD4-FF6F-482B-B58E-1EB687B97EA4
+default	13:18:51.963327-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.003s
+default	13:18:51.963907-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.004s
+default	13:18:51.964679-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.004s
+default	13:18:51.964824-0500	RedLemon	tcp_output [C82.1:3] flags=[S] seq=1888848795, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1888848795
+default	13:18:51.985424-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:51.985533-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:51.986437-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EAA3100E-5DD8-4932-ACF2-2C37B814F039] (reporting strategy default)> on Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> was not selected for reporting
+default	13:18:51.986696-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [410F124F-D4FA-4870-80DA-3763A31BB656] (reporting strategy default)> on Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> was not selected for reporting
+default	13:18:51.987665-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:51.987982-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> now using Connection 9
+default	13:18:51.989207-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:51.989454-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> now using Connection 9
+default	13:18:51.990578-0500	RedLemon	0x7f90aa092018 ID=624 Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> sent request, body N 0
+default	13:18:51.990643-0500	RedLemon	0x7f90ad6cbad8 ID=628 Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> sent request, body N 0
+default	13:18:52.052773-0500	RedLemon	0x7f90aa092018 ID=624 Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> received response, status 200 content U
+default	13:18:52.053606-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> response ended
+default	13:18:52.053822-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> done using Connection 9
+default	13:18:52.053998-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> summary for task success {transaction_duration_ms=66, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=65, response_duration_ms=1, request_bytes=500, response_bytes=1018, cache_hit=false}
+default	13:18:52.054539-0500	RedLemon	Task <4D30BC27-65CB-4299-9D30-E7A1A30ED594>.<638> finished successfully
+default	13:18:52.055375-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1106 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:31.146511-0500	runningboardd	Assertion 173-20526-2966 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:31.148320-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:31.148381-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:31.148435-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:31.150216-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2967 target:20526 attributes:[
+default	13:18:52.055602-0500	runningboardd	Assertion 173-18244-1106 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:52.057483-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:52.057531-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:52.057575-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:52.059829-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1107 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:31.150410-0500	runningboardd	Assertion 173-114-2967 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:31.152066-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> received response, status 200 content U
-default	18:36:31.152976-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> done using Connection 2
-default	18:36:31.153094-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> response ended
-default	18:36:31.153260-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> summary for task success {transaction_duration_ms=66, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=65, response_duration_ms=1, request_bytes=231, response_bytes=550, cache_hit=true}
-default	18:36:31.153502-0500	RedLemon	Task <BFFE19E9-1A6D-43EC-842D-736CC9943521>.<482> finished successfully
-default	18:36:31.155416-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:31.155488-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:31.155848-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C143211A-5622-4359-9F38-B1E12405157C] (reporting strategy default)> on Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> was not selected for reporting
-default	18:36:31.156898-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:31.157140-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> now using Connection 2
-default	18:36:31.157409-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> sent request, body N 0
-default	18:36:31.157618-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:31.157823-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:31.192513-0500	RedLemon	SWIFT TASK CONTINUATION MISUSE: waitForAuthAck(timeout:) leaked its continuation!
-default	18:36:31.216020-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> received response, status 200 content U
-default	18:36:31.216157-0500	RedLemon	tcp_input [C54.1:3] flags=[S.] seq=1490589738, ack=3759085262, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=3759085261
-default	18:36:31.216269-0500	RedLemon	nw_flow_connected [C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:31.216500-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.126s
-default	18:36:31.216588-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.126s
-default	18:36:31.217055-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C54.1:2][0x7f99cfd86d70] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:31.217191-0500	RedLemon	boringssl_context_info_handler(2028) [C54.1:2][0x7f99cfd86d70] Client handshake started
-default	18:36:31.217405-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS client enter_early_data
-default	18:36:31.217561-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS client read_server_hello
-default	18:36:31.218700-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> done using Connection 2
-default	18:36:31.218905-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> response ended
-default	18:36:31.219378-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> summary for task success {transaction_duration_ms=62, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=59, response_duration_ms=3, request_bytes=244, response_bytes=517, cache_hit=true}
-default	18:36:31.219641-0500	RedLemon	Task <1F5F5675-9D9C-444C-B6A1-1A77E95C420B>.<483> finished successfully
-default	18:36:31.222091-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:31.223884-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1C94FC0C-5BFB-4225-AB9E-13447CCE3C6E] (reporting strategy default)> on Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> was not selected for reporting
-default	18:36:31.225591-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:31.225939-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> now using Connection 2
-default	18:36:31.226344-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> sent request, body N 0
-default	18:36:31.304506-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> received response, status 200 content U
-default	18:36:31.305377-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> done using Connection 2
-default	18:36:31.310043-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> response ended
-default	18:36:31.312118-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> summary for task success {transaction_duration_ms=87, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=79, response_duration_ms=5, request_bytes=244, response_bytes=523, cache_hit=true}
-default	18:36:31.313608-0500	RedLemon	Task <98DD737C-1AD3-43A6-A714-AF13231B46AC>.<484> finished successfully
-default	18:36:31.316339-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:31.339365-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:31.340010-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:31.340969-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:31.341413-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:31.342915-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:31.342994-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:31.345206-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C54.1:2][0x7f99cfd86d70] Performing external trust evaluation
-default	18:36:31.347978-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C54.1:2][0x7f99cfd86d70] Asyncing for external verify block
-default	18:36:31.348223-0500	RedLemon	Connection 54: asked to evaluate TLS Trust
-default	18:36:31.348622-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> auth completion disp=1 cred=0x0
-default	18:36:31.357409-0500	RedLemon	Connection 54: TLS Trust result 0
-default	18:36:31.357462-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C54.1:2][0x7f99cfd86d70] Returning from external verify block with result: true
-default	18:36:31.357522-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C54.1:2][0x7f99cfd86d70] Certificate verification result: OK
-default	18:36:31.357871-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:31.358154-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:31.358198-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:31.358237-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:31.358392-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:31.358824-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS 1.3 client done
-default	18:36:31.359064-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS client finish_client_handshake
-default	18:36:31.359117-0500	RedLemon	boringssl_context_info_handler(2045) [C54.1:2][0x7f99cfd86d70] Client handshake state: TLS client done
-default	18:36:31.359157-0500	RedLemon	boringssl_context_info_handler(2034) [C54.1:2][0x7f99cfd86d70] Client handshake done
-default	18:36:31.359786-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C54.1:2][0x7f99cfd86d70] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(142ms) flight_time(124ms) rtt(122ms) write_stalls(0) read_stalls(6)]
-default	18:36:31.359968-0500	RedLemon	nw_flow_connected [C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:31.360328-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.270s
-default	18:36:31.360790-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state ready
-default	18:36:31.360863-0500	RedLemon	[C54 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.270s
-default	18:36:31.361023-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.271s
-default	18:36:31.361093-0500	RedLemon	[C54 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.271s
-default	18:36:31.361439-0500	RedLemon	Connection 54: connected successfully
-default	18:36:31.361500-0500	RedLemon	Connection 54: TLS handshake complete
-default	18:36:31.361768-0500	RedLemon	Connection 54: ready C(N) E(N)
-default	18:36:31.362073-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> now using Connection 54
-default	18:36:31.362176-0500	RedLemon	Connection 54: received viability advisory(Y)
-default	18:36:31.362538-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> sent request, body N 0
-default	18:36:31.421467-0500	RedLemon	CoreAnimation: warning, deleted thread with uncommitted CATransaction; set CA_DEBUG_TRANSACTIONS=1 in environment to log backtraces, or set CA_ASSERT_MAIN_THREAD_TRANSACTIONS=1 to abort when an implicit transaction isn't created on a main thread.
-default	18:36:31.484031-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> received response, status 101 content U
-default	18:36:31.484426-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> response ended
-default	18:36:31.484524-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> done using Connection 54
-default	18:36:31.485686-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.395s
-default	18:36:31.485764-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state preparing
-default	18:36:31.485877-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.395s
-default	18:36:31.486123-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.396s
-default	18:36:31.486226-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.396s
-default	18:36:31.486361-0500	RedLemon	nw_flow_connected [C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:31.486589-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.396s
-default	18:36:31.486690-0500	RedLemon	[C54 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.396s
-default	18:36:31.486896-0500	RedLemon	nw_flow_connected [C54.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:31.487483-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.397s
-default	18:36:31.487545-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state ready
-default	18:36:31.487637-0500	RedLemon	[C54 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.397s
-default	18:36:31.607889-0500	RedLemon	nw_flow_disconnected [C54.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:31.608463-0500	RedLemon	nw_protocol_tcp_log_summary [C54.1:3]
-	[6AB5FDD2-7717-436C-A293-2AACD551B597 <private>:55404<-><private>:443]
-	Init: 1, Conn_Time: 118.963ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 4, rtt: 124.000ms, rtt_var: 5.500ms rtt_nc: 119.687ms, rtt_var_nc: 26.187ms base rtt: 119ms
+default	13:18:52.060122-0500	runningboardd	Assertion 173-114-1107 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:52.061280-0500	RedLemon	SWIFT TASK CONTINUATION MISUSE: waitForAuthAck(timeout:) leaked its continuation!
+default	13:18:52.061738-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:52.061790-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:52.061903-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:52.064459-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:52.078912-0500	RedLemon	tcp_input [C82.1:3] flags=[S.] seq=1536048590, ack=1888848796, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=1888848795
+default	13:18:52.079137-0500	RedLemon	nw_flow_connected [C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:52.079412-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.119s
+default	13:18:52.079528-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.119s
+default	13:18:52.080240-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C82.1:2][0x7f90adb75400] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:52.080451-0500	RedLemon	boringssl_context_info_handler(2028) [C82.1:2][0x7f90adb75400] Client handshake started
+default	13:18:52.080818-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS client enter_early_data
+default	13:18:52.081315-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS client read_server_hello
+default	13:18:52.095372-0500	RedLemon	0x7f90ad6cbad8 ID=628 Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> received response, status 200 content U
+default	13:18:52.096041-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> response ended
+default	13:18:52.096565-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> done using Connection 9
+default	13:18:52.096781-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> summary for task success {transaction_duration_ms=109, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=107, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	13:18:52.097054-0500	RedLemon	Task <E991B9A0-D320-4B52-B424-A57EBF7FE973>.<637> finished successfully
+default	13:18:52.099189-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:52.099495-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F6E699B0-F49F-456F-8296-3043A85CF19D] (reporting strategy default)> on Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> was not selected for reporting
+default	13:18:52.100478-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:52.100687-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> now using Connection 9
+default	13:18:52.101510-0500	RedLemon	0x7f90ade059e8 ID=632 Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> sent request, body N 0
+default	13:18:52.112582-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:52.159416-0500	RedLemon	0x7f90ade059e8 ID=632 Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> received response, status 200 content U
+default	13:18:52.160484-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> response ended
+default	13:18:52.161063-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> done using Connection 9
+default	13:18:52.161338-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> summary for task success {transaction_duration_ms=61, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=58, response_duration_ms=2, request_bytes=524, response_bytes=819, cache_hit=true}
+default	13:18:52.162091-0500	RedLemon	Task <6A3F6C90-9D2A-4A76-BD29-9A3AE020E45B>.<639> finished successfully
+default	13:18:52.165116-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:52.165611-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5FA74B03-3BBF-410A-A30C-95746BA51FD4] (reporting strategy default)> on Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> was not selected for reporting
+default	13:18:52.166779-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:52.167098-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> now using Connection 9
+default	13:18:52.168234-0500	RedLemon	0x7f90aa0e05a8 ID=636 Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> sent request, body N 0
+default	13:18:52.181071-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:52.203411-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:52.203579-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:52.204102-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:52.204794-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:52.207997-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:52.208235-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:52.210469-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C82.1:2][0x7f90adb75400] Performing external trust evaluation
+default	13:18:52.210745-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C82.1:2][0x7f90adb75400] Asyncing for external verify block
+default	13:18:52.211164-0500	RedLemon	Connection 82: asked to evaluate TLS Trust
+default	13:18:52.211620-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> auth completion disp=1 cred=0x0
+default	13:18:52.220562-0500	RedLemon	Connection 82: TLS Trust result 0
+default	13:18:52.220613-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C82.1:2][0x7f90adb75400] Returning from external verify block with result: true
+default	13:18:52.220671-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C82.1:2][0x7f90adb75400] Certificate verification result: OK
+default	13:18:52.221124-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:52.221314-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:52.221337-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:52.221358-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:52.221378-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:52.221606-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS 1.3 client done
+default	13:18:52.221812-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS client finish_client_handshake
+default	13:18:52.221863-0500	RedLemon	boringssl_context_info_handler(2045) [C82.1:2][0x7f90adb75400] Client handshake state: TLS client done
+default	13:18:52.221940-0500	RedLemon	boringssl_context_info_handler(2034) [C82.1:2][0x7f90adb75400] Client handshake done
+default	13:18:52.222646-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C82.1:2][0x7f90adb75400] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(142ms) flight_time(124ms) rtt(123ms) write_stalls(0) read_stalls(7)]
+default	13:18:52.222843-0500	RedLemon	nw_flow_connected [C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:52.223450-0500	RedLemon	[C82.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.263s
+default	13:18:52.223890-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state ready
+default	13:18:52.224029-0500	RedLemon	[C82 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.264s
+default	13:18:52.224262-0500	RedLemon	[C82.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.264s
+default	13:18:52.224370-0500	RedLemon	[C82 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.264s
+default	13:18:52.224930-0500	RedLemon	Connection 82: connected successfully
+default	13:18:52.225028-0500	RedLemon	Connection 82: TLS handshake complete
+default	13:18:52.225358-0500	RedLemon	Connection 82: ready C(N) E(N)
+default	13:18:52.226532-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> now using Connection 82
+default	13:18:52.226672-0500	RedLemon	Connection 82: received viability advisory(Y)
+default	13:18:52.226947-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> sent request, body N 0
+default	13:18:52.250205-0500	RedLemon	0x7f90aa0e05a8 ID=636 Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> received response, status 200 content U
+default	13:18:52.251138-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> response ended
+default	13:18:52.251738-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> done using Connection 9
+default	13:18:52.252048-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> summary for task success {transaction_duration_ms=85, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=83, response_duration_ms=1, request_bytes=524, response_bytes=825, cache_hit=true}
+default	13:18:52.252762-0500	RedLemon	Task <64EB7984-4987-404A-A2A0-CF9A3CA1D1A0>.<640> finished successfully
+default	13:18:52.255669-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
+default	13:18:52.287091-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:52.341984-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> received response, status 101 content U
+default	13:18:52.342324-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> response ended
+default	13:18:52.342428-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> done using Connection 82
+default	13:18:52.343564-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.383s
+default	13:18:52.343614-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state preparing
+default	13:18:52.343703-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.383s
+default	13:18:52.343867-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.384s
+default	13:18:52.343930-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.384s
+default	13:18:52.344016-0500	RedLemon	nw_flow_connected [C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:52.344157-0500	RedLemon	[C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.384s
+default	13:18:52.344342-0500	RedLemon	[C82 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.384s
+default	13:18:52.344665-0500	RedLemon	nw_flow_connected [C82.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:52.345278-0500	RedLemon	[C82.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.385s
+default	13:18:52.345364-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state ready
+default	13:18:52.345491-0500	RedLemon	[C82 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.385s
+default	13:18:52.459454-0500	RedLemon	tcp_input [C82.1:3] flags=[F.] seq=1536051620, ack=1888849851, win=249 state=ESTABLISHED rcv_nxt=1536051596, snd_una=1888849851
+default	13:18:52.460247-0500	RedLemon	nw_flow_disconnected [C82.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol disconnected
+default	13:18:52.460846-0500	RedLemon	nw_protocol_tcp_log_summary [C82.1:3]
+	[63406FA6-6D23-4432-9063-8F364EDE78E2 <private>:56264<-><private>:443]
+	Init: 1, Conn_Time: 114.259ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 119.062ms, rtt_var: 5.000ms rtt_nc: 115.125ms, rtt_var_nc: 26.000ms base rtt: 113ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:31.608724-0500	RedLemon	tcp_input [C54.1:3] flags=[F.] seq=1490592770, ack=3759086317, win=249 state=ESTABLISHED rcv_nxt=1490592770, snd_una=3759086317
-default	18:36:31.609261-0500	RedLemon	[C54.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.519s, error Socket is not connected
-default	18:36:31.609307-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state failed error Socket is not connected
-default	18:36:31.609366-0500	RedLemon	[C54 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.519s
-error	18:36:31.609493-0500	RedLemon	tcp_output [C54.1:3] flags=[R.] seq=3759086448, ack=1490592771, win=2047 state=CLOSED rcv_nxt=1490592771, snd_una=3759086317
-error	18:36:31.609659-0500	RedLemon	Connection 54: received failure notification
-error	18:36:31.609788-0500	RedLemon	nw_read_request_report [C54] Receive failed with error "Socket is not connected"
-error	18:36:31.609877-0500	RedLemon	nw_flow_service_reads [C54.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] No output handler
-default	18:36:31.610258-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> summary for task success {transaction_duration_ms=522, response_status=101, connection=54, protocol="http/1.1", domain_lookup_duration_ms=3, connect_duration_ms=263, secure_connection_duration_ms=142, private_relay=false, request_start_ms=274, request_duration_ms=0, response_start_ms=395, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
-default	18:36:31.610327-0500	RedLemon	Task <1C5DC4EE-880D-4E63-9273-338B78ACF0EA>.<1> finished successfully
-error	18:36:31.610606-0500	RedLemon	nw_flow_add_write_request [C54.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-error	18:36:31.610657-0500	RedLemon	nw_write_request_report [C54] Send failed with error "Socket is not connected"
-default	18:36:31.610780-0500	RedLemon	Connection 54: cleaning up
-default	18:36:31.610845-0500	RedLemon	[C54 802DBFC4-534F-41D4-9060-537B1F21DA25 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:31.611005-0500	RedLemon	[C54 802DBFC4-534F-41D4-9060-537B1F21DA25 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C54.1 A54A70E4-8834-4099-996E-FD551AD37378 10.0.0.249:55404<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:18:52.462172-0500	RedLemon	[C82.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:disconnect @0.502s, error Socket is not connected
+default	13:18:52.462232-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state failed error Socket is not connected
+default	13:18:52.462306-0500	RedLemon	[C82 Hostname#f00e5bad:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:disconnect @0.502s
+error	13:18:52.462380-0500	RedLemon	nw_read_request_report [C82] Receive failed with error "Socket is not connected"
+error	13:18:52.462455-0500	RedLemon	nw_flow_service_reads [C82.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] No output handler
+error	13:18:52.462529-0500	RedLemon	tcp_output [C82.1:3] flags=[R.] seq=1888849982, ack=1536051621, win=2047 state=CLOSED rcv_nxt=1536051621, snd_una=1888849851
+error	13:18:52.462764-0500	RedLemon	Connection 82: received failure notification
+error	13:18:52.463078-0500	RedLemon	nw_flow_add_write_request [C82.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] cannot accept write requests
+default	13:18:52.463129-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> summary for task success {transaction_duration_ms=504, response_status=101, connection=82, protocol="http/1.1", domain_lookup_duration_ms=2, connect_duration_ms=259, secure_connection_duration_ms=142, private_relay=false, request_start_ms=268, request_duration_ms=0, response_start_ms=383, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
+error	13:18:52.463197-0500	RedLemon	nw_write_request_report [C82] Send failed with error "Socket is not connected"
+default	13:18:52.463258-0500	RedLemon	Task <18E4C566-C0B3-46D4-A3D9-CDF09A00F650>.<1> finished successfully
+default	13:18:52.463418-0500	RedLemon	Connection 82: cleaning up
+default	13:18:52.463705-0500	RedLemon	[C82 C26825BD-4158-4203-A51C-FE72FD54A968 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancel
+default	13:18:52.464056-0500	RedLemon	[C82 C26825BD-4158-4203-A51C-FE72FD54A968 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancelled
+	[C82.1 CD213CD4-FF6F-482B-B58E-1EB687B97EA4 192.168.2.13:56264<->IPv4#60630852:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 0.520s, DNS @0.000s took 0.003s, TCP @0.396s took 0.119s
+	Duration: 0.504s, DNS @0.000s took 0.002s, TCP @0.384s took 0.115s
 	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:31.611563-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C54] reporting state cancelled error Socket is not connected
-default	18:36:31.611732-0500	RedLemon	Connection 54: done
-default	18:36:32.228013-0500	runningboardd	Invalidating assertion 173-20526-2966 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:32.386619-0500	RedLemon	📥 Received Realtime message: 'hi' from lemontom in room T948
-default	18:36:32.386831-0500	RedLemon	🔍 Chat message received - senderId: '96E01CDB-36C0-4228-A6E4-A29A3C66BC8E', participantId: '97933A49-DF93-4D7D-9E5D-94EE9B96191D'
-default	18:36:32.386970-0500	RedLemon	💬 Adding received message from other participant: 'hi'
-default	18:36:32.408552-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:32.408602-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:32.408648-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:32.409945-0500	runningboardd	Invalidating assertion 173-114-2967 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:32.540488-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:32.540585-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:32.540678-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:33.084249-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:33.084291-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:33.087640-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9A7D0A29-5379-4530-B93C-A42B416B8EDF] (reporting strategy default)> on Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> was not selected for reporting
-default	18:36:33.087841-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CD6DA071-AC95-47EF-B1C6-0AB719228032] (reporting strategy default)> on Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> was not selected for reporting
-default	18:36:33.089869-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:33.090219-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> now using Connection 2
-default	18:36:33.090574-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:33.090909-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> now using Connection 2
-default	18:36:33.091439-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> sent request, body N 0
-default	18:36:33.091552-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> sent request, body N 0
-default	18:36:33.147260-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> received response, status 200 content U
-default	18:36:33.147483-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> done using Connection 2
-default	18:36:33.148436-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> response ended
-default	18:36:33.148726-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> summary for task success {transaction_duration_ms=59, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=58, response_duration_ms=1, request_bytes=231, response_bytes=523, cache_hit=true}
-default	18:36:33.149126-0500	RedLemon	Task <292D1C00-DB36-49C2-B1F1-7421A2696EA8>.<485> finished successfully
-default	18:36:33.150691-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2968 target:20526 attributes:[
+default	13:18:52.465068-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C82] reporting state cancelled error Socket is not connected
+default	13:18:52.465254-0500	RedLemon	Connection 82: done
+default	13:18:53.159415-0500	RedLemon	🎬 Guest: Starting playback after countdown
+default	13:18:53.159679-0500	RedLemon	🎬 Guest: Launching player for Mirror
+default	13:18:53.160116-0500	RedLemon	   Quality: 1080p
+default	13:18:53.160468-0500	RedLemon	   Mode: watchParty
+default	13:18:53.160794-0500	RedLemon	   Season: 1, Episode: 4
+default	13:18:53.160988-0500	RedLemon	📡 Fetching metadata for tt0903747...
+default	13:18:53.162926-0500	runningboardd	Invalidating assertion 173-18244-1106 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:53.248171-0500	RedLemon	🖼️ Loading background art: https://live.metahub.space/background/medium/tt0903747/img
+default	13:18:53.248420-0500	RedLemon	⏳ Background art loading...
+default	13:18:53.248625-0500	RedLemon	🎨 Loading logo: https://live.metahub.space/logo/medium/tt0903747/img
+default	13:18:53.248873-0500	RedLemon	⏳ Logo loading...
+default	13:18:53.269701-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:53.270162-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DD58F4D4-4F88-41F4-A2CA-8A148449BABD] (reporting strategy default)> on Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> was not selected for reporting
+default	13:18:53.270836-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:53.270854-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.271042-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> now using Connection 79
+default	13:18:53.271385-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> sent request, body N 0
+default	13:18:53.271487-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C95ADDD5-6453-4A22-81F0-8DB83E63C469] (reporting strategy default)> on Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> was not selected for reporting
+default	13:18:53.272294-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.272631-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> now using Connection 79
+default	13:18:53.273014-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> sent request, body N 0
+default	13:18:53.297517-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> received response, status 200 content K
+default	13:18:53.299819-0500	RedLemon	🎬 Guest: Starting playback after database fallback detection
+default	13:18:53.299859-0500	RedLemon	✅ StreamService: Using provided metadata: Mirror
+default	13:18:53.299973-0500	RedLemon	🎬 Guest: Launching player for Mirror via database fallback
+default	13:18:53.300220-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
+default	13:18:53.303647-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> done using Connection 79
+default	13:18:53.303817-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> response ended
+default	13:18:53.304389-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> summary for task success {transaction_duration_ms=33, response_status=200, connection=79, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=26, response_duration_ms=6, request_bytes=37, response_bytes=75554, cache_hit=false}
+default	13:18:53.304517-0500	RedLemon	Task <EE5381C9-95C4-4D06-BC3A-41C721A6D567>.<641> finished successfully
+default	13:18:53.323569-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> received response, status 200 content K
+default	13:18:53.331729-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:53.331861-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:53.331954-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:53.338010-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> done using Connection 79
+default	13:18:53.338434-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> response ended
+default	13:18:53.339312-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> summary for task success {transaction_duration_ms=67, response_status=200, connection=79, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=51, response_duration_ms=15, request_bytes=41, response_bytes=149726, cache_hit=false}
+default	13:18:53.339448-0500	RedLemon	Task <41B0BB34-EEFC-4BDB-AE97-188D18BE0CD7>.<642> finished successfully
+default	13:18:53.341931-0500	runningboardd	Invalidating assertion 173-114-1107 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:53.361517-0500	RedLemon	✅ Background art loaded successfully
+default	13:18:53.361753-0500	RedLemon	✅ Logo loaded successfully
+default	13:18:53.363337-0500	RedLemon	📺 Guest: Set season/episode from DB: S1E4
+default	13:18:53.363576-0500	RedLemon	   Quality: 1080p
+default	13:18:53.363822-0500	RedLemon	   Mode: watchParty
+default	13:18:53.364032-0500	RedLemon	   Season: 1, Episode: 4
+default	13:18:53.364140-0500	RedLemon	📡 Fetching metadata for tt0903747...
+default	13:18:53.364259-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt0903747, type=movie, year=nil
+default	13:18:53.364681-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> resuming, timeouts(30.0, 300.0) QOS(0x21) Voucher (null)
+default	13:18:53.364983-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [48E907BE-405D-405F-8296-098229D14246] (reporting strategy default)> on Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> was not selected for reporting
+default	13:18:53.366858-0500	RedLemon	Connection 83: starting, TC(0x0)
+default	13:18:53.366961-0500	RedLemon	[C83 0B088E25-AAF5-4B2F-AE4A-D7DFCEAB541D 127.0.0.1:47253 tcp, url hash: 48c1fbe0, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{D206D3B6-92A5-426A-AA7E-04A2A61F04D1}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:53.367104-0500	RedLemon	[C83 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
+default	13:18:53.368383-0500	RedLemon	[C83 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.001s, uuid: 7F062832-8112-41A2-BF58-BF3A38863D80
+default	13:18:53.370085-0500	RedLemon	[C83 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.003s
+default	13:18:53.370136-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C83] reporting state preparing
+default	13:18:53.370515-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> setting up Connection 83
+default	13:18:53.371143-0500	RedLemon	nw_socket_handle_socket_event [C83:2] Socket received CONNECTED event
+default	13:18:53.371371-0500	RedLemon	nw_flow_connected [C83 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
+default	13:18:53.371658-0500	RedLemon	[C83 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.004s
+default	13:18:53.371961-0500	RedLemon	nw_flow_connected [C83 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:53.372538-0500	RedLemon	[C83 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.005s
+default	13:18:53.375833-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C83] reporting state ready
+default	13:18:53.377124-0500	RedLemon	[C83 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.009s
+default	13:18:53.377384-0500	RedLemon	Connection 83: connected successfully
+default	13:18:53.377804-0500	RedLemon	Connection 83: ready C(N) E(N)
+default	13:18:53.378112-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> now using Connection 83
+default	13:18:53.378226-0500	RedLemon	Connection 83: received viability advisory(Y)
+default	13:18:53.378721-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> sent request, body N 0
+default	13:18:53.381855-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.382169-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.382929-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F4D7B818-F874-4314-8748-92198CFE4917] (reporting strategy default)> on Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> was not selected for reporting
+default	13:18:53.383284-0500	RedLemon	Task <792361D9-4DEF-4AFE-92A7-A5F1DAD2C47A>.<645> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.392133-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.393569-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> now using Connection 24
+default	13:18:53.393305-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [025FF24A-0A70-4DDB-B078-137744007B91] (reporting strategy default)> on Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> was not selected for reporting
+default	13:18:53.394221-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> sent request, body N 0
+default	13:18:53.395368-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.395703-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [82955C9B-5BC7-45F5-A3AC-8C573D4DE8DA] (reporting strategy default)> on Task <792361D9-4DEF-4AFE-92A7-A5F1DAD2C47A>.<645> was not selected for reporting
+default	13:18:53.396616-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [163E987D-7CA2-4EF4-8522-3320A8F301A9] (reporting strategy default)> on Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> was not selected for reporting
+default	13:18:53.398437-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.398792-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> now using Connection 52
+default	13:18:53.399878-0500	RedLemon	0x7f90acb22578 ID=8 Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> sent request, body N 0
+default	13:18:53.404036-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.404371-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> now using Connection 24
+default	13:18:53.404869-0500	RedLemon	Task <792361D9-4DEF-4AFE-92A7-A5F1DAD2C47A>.<645> summary for task success {transaction_duration_ms=7, response_status=200, cache_hit=true}
+default	13:18:53.404872-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> sent request, body N 0
+default	13:18:53.405567-0500	RedLemon	Task <792361D9-4DEF-4AFE-92A7-A5F1DAD2C47A>.<645> finished successfully
+default	13:18:53.409363-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1108 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:33.151026-0500	runningboardd	Assertion 173-20526-2968 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:33.152817-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:33.153651-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C1DEDFC2-A90A-42FB-A36C-DEFC496A41EA] (reporting strategy default)> on Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> was not selected for reporting
-default	18:36:33.155333-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:33.155692-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> now using Connection 2
-default	18:36:33.155724-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:33.156027-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:33.156169-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> received response, status 200 content U
-default	18:36:33.156171-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:33.156558-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> sent request, body N 0
-default	18:36:33.158222-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> done using Connection 2
-default	18:36:33.158485-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> response ended
-default	18:36:33.158710-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> summary for task success {transaction_duration_ms=69, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=67, response_duration_ms=2, request_bytes=220, response_bytes=648, cache_hit=true}
-default	18:36:33.158984-0500	RedLemon	Task <A9CD4C79-0891-4213-A5EF-28CC7480924C>.<486> finished successfully
-default	18:36:33.161377-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2969 target:20526 attributes:[
+default	13:18:53.409826-0500	runningboardd	Assertion 173-18244-1108 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:53.413182-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:53.413373-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:53.413481-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:53.416894-0500	RedLemon	0x7f90acb22578 ID=8 Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> received response, status 200 content U
+default	13:18:53.423899-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1109 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:33.161499-0500	runningboardd	Assertion 173-114-2969 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:33.162477-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:33.162522-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:33.162751-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:33.224152-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> received response, status 200 content U
-default	18:36:33.224400-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> done using Connection 2
-default	18:36:33.225318-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> response ended
-default	18:36:33.225675-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> summary for task success {transaction_duration_ms=71, response_status=200, connection=2, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=244, response_bytes=665, cache_hit=true}
-default	18:36:33.226064-0500	RedLemon	Task <DFED9525-0118-4318-A3DB-1E0CCA43C2FB>.<487> finished successfully
-default	18:36:33.228806-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:33.229331-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8430B582-5FF4-4E85-99E6-7A75814D0C2E] (reporting strategy default)> on Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> was not selected for reporting
-default	18:36:33.230912-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:33.231261-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> now using Connection 2
-default	18:36:33.231724-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> sent request, body N 0
-default	18:36:33.300841-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> received response, status 200 content U
-default	18:36:33.301107-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> done using Connection 2
-default	18:36:33.302225-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> response ended
-default	18:36:33.302601-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> summary for task success {transaction_duration_ms=72, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=70, response_duration_ms=1, request_bytes=244, response_bytes=499, cache_hit=true}
-default	18:36:33.303045-0500	RedLemon	Task <0BA3D9E7-C066-4B59-B9AA-44F7A19889F6>.<488> finished successfully
-default	18:36:33.305902-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:33.922700-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room T948
-default	18:36:33.923003-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
-default	18:36:34.315633-0500	runningboardd	Invalidating assertion 173-20526-2968 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:34.492050-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:34.492145-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:34.492233-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:34.494254-0500	runningboardd	Invalidating assertion 173-114-2969 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:34.606033-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:34.606125-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:34.606211-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:35.084213-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:35.084213-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:35.085582-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [38C076E3-9732-4B7D-AFB6-DE2FF5151ED3] (reporting strategy default)> on Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> was not selected for reporting
-default	18:36:35.085706-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6D3312A4-F1B4-4003-A944-EBB738795313] (reporting strategy default)> on Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> was not selected for reporting
-default	18:36:35.087349-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:35.087600-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> now using Connection 2
-default	18:36:35.087896-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:35.088109-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> now using Connection 2
-default	18:36:35.088428-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> sent request, body N 0
-default	18:36:35.088502-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> sent request, body N 0
-default	18:36:35.142044-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> received response, status 200 content U
-default	18:36:35.142151-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> done using Connection 2
-default	18:36:35.142647-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> response ended
-default	18:36:35.142832-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> summary for task success {transaction_duration_ms=56, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=55, response_duration_ms=0, request_bytes=220, response_bytes=644, cache_hit=false}
-default	18:36:35.143054-0500	RedLemon	Task <2D8D9CBE-875E-4C5D-9499-2DDCAA54B242>.<490> finished successfully
-default	18:36:35.143949-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2971 target:20526 attributes:[
+default	13:18:53.424089-0500	runningboardd	Assertion 173-114-1109 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:53.431121-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> response ended
+default	13:18:53.431759-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> done using Connection 52
+default	13:18:53.432586-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> summary for task success {transaction_duration_ms=36, response_status=200, connection=52, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=20, response_duration_ms=15, request_bytes=148, response_bytes=12286, cache_hit=true}
+default	13:18:53.432858-0500	RedLemon	Task <A60097DE-BD61-481F-8F0F-540C1D4AEBAA>.<644> finished successfully
+default	13:18:53.528937-0500	RedLemon	✅ StreamService: Using provided metadata: Mirror
+default	13:18:53.529089-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
+default	13:18:53.529234-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt0903747, type=movie, year=nil
+default	13:18:53.529686-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> resuming, timeouts(30.0, 300.0) QOS(0x21) Voucher (null)
+default	13:18:53.530149-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [98BC39F3-2D9D-4D8F-93F0-2A604D3E2959] (reporting strategy default)> on Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> was not selected for reporting
+default	13:18:53.532309-0500	RedLemon	Connection 84: starting, TC(0x0)
+default	13:18:53.532382-0500	RedLemon	[C84 977EED44-467A-4B8D-8049-4E7077996C24 127.0.0.1:47253 tcp, url hash: 48c1fbe0, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{D206D3B6-92A5-426A-AA7E-04A2A61F04D1}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:53.532483-0500	RedLemon	[C84 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
+default	13:18:53.532634-0500	RedLemon	[C84 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), viable, interface: lo0)] event: path:satisfied @0.000s, uuid: 7F062832-8112-41A2-BF58-BF3A38863D80
+default	13:18:53.533574-0500	RedLemon	[C84 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:start_connect @0.001s
+default	13:18:53.533620-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C84] reporting state preparing
+default	13:18:53.533838-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> setting up Connection 84
+default	13:18:53.534444-0500	RedLemon	nw_socket_handle_socket_event [C84:2] Socket received CONNECTED event
+default	13:18:53.534576-0500	RedLemon	nw_flow_connected [C84 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
+default	13:18:53.534637-0500	RedLemon	[C84 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.002s
+default	13:18:53.534696-0500	RedLemon	nw_flow_connected [C84 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:53.534863-0500	RedLemon	[C84 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.002s
+default	13:18:53.535501-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C84] reporting state ready
+default	13:18:53.535576-0500	RedLemon	[C84 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.003s
+default	13:18:53.535655-0500	RedLemon	Connection 84: connected successfully
+default	13:18:53.535748-0500	RedLemon	Connection 84: ready C(N) E(N)
+default	13:18:53.535942-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> now using Connection 84
+default	13:18:53.536046-0500	RedLemon	Connection 84: received viability advisory(Y)
+default	13:18:53.536283-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> sent request, body N 0
+default	13:18:53.545682-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.546356-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6F4970D8-B739-47E3-A5CC-A008D52FC0E6] (reporting strategy default)> on Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> was not selected for reporting
+default	13:18:53.546539-0500	RedLemon	Task <1BA6641F-BEF3-413A-B22A-DFCA99E1C969>.<648> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.546973-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CB8D4F2B-60F7-477F-9EB2-460582B75315] (reporting strategy default)> on Task <1BA6641F-BEF3-413A-B22A-DFCA99E1C969>.<648> was not selected for reporting
+default	13:18:53.547274-0500	RedLemon	Task <91758896-6904-46EF-A294-38862686D7FF>.<649> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.548790-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [31B02312-26CD-4FAC-BBA4-9529DA5FAE37] (reporting strategy default)> on Task <91758896-6904-46EF-A294-38862686D7FF>.<649> was not selected for reporting
+default	13:18:53.550164-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:53.553515-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DE60A889-236A-486C-BE70-9C81343B800B] (reporting strategy default)> on Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> was not selected for reporting
+default	13:18:53.553878-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.554172-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> now using Connection 24
+default	13:18:53.554505-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> sent request, body N 0
+default	13:18:53.557677-0500	RedLemon	Task <1BA6641F-BEF3-413A-B22A-DFCA99E1C969>.<648> summary for task success {transaction_duration_ms=9, response_status=200, cache_hit=true}
+default	13:18:53.557739-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:53.558054-0500	RedLemon	Task <1BA6641F-BEF3-413A-B22A-DFCA99E1C969>.<648> finished successfully
+default	13:18:53.558178-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> now using Connection 24
+default	13:18:53.558427-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> sent request, body N 0
+default	13:18:53.558602-0500	RedLemon	Task <91758896-6904-46EF-A294-38862686D7FF>.<649> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
+default	13:18:53.558975-0500	RedLemon	Task <91758896-6904-46EF-A294-38862686D7FF>.<649> finished successfully
+default	13:18:53.565830-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> received response, status 200 content U
+default	13:18:53.566313-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> done using Connection 24
+default	13:18:53.566461-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> response ended
+default	13:18:53.566768-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> summary for task success {transaction_duration_ms=168, response_status=200, connection=24, reused=1, request_start_ms=6, request_duration_ms=0, response_start_ms=167, response_duration_ms=0, request_bytes=483, response_bytes=1139, cache_hit=true}
+default	13:18:53.568216-0500	RedLemon	Task <83C9EBA2-5A1C-44F7-B738-58598F6834FF>.<646> finished successfully
+default	13:18:53.729825-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> received response, status 200 content U
+default	13:18:53.730361-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> done using Connection 24
+default	13:18:53.730587-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> response ended
+default	13:18:53.730912-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> summary for task success {transaction_duration_ms=173, response_status=200, connection=24, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=172, response_duration_ms=0, request_bytes=483, response_bytes=1114, cache_hit=true}
+default	13:18:53.731317-0500	RedLemon	Task <B8A827D2-7FE5-4AC3-96D8-68FD6723E4BB>.<650> finished successfully
+default	13:18:54.337682-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.384594-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.468194-0500	runningboardd	Invalidating assertion 173-18244-1108 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:54.487287-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.584916-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.609843-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:54.609920-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:54.609981-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:54.612783-0500	runningboardd	Invalidating assertion 173-114-1109 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:54.648901-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> received response, status 200 content U
+default	13:18:54.649070-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> done using Connection 24
+default	13:18:54.649329-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> response ended
+default	13:18:54.649602-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> summary for task success {transaction_duration_ms=1259, response_status=200, connection=24, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=1258, response_duration_ms=0, request_bytes=38, response_bytes=416, cache_hit=false}
+default	13:18:54.650023-0500	RedLemon	Task <0D2B7F1C-B245-4405-A0DA-DF221979E40C>.<643> finished successfully
+default	13:18:54.652801-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1110 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:35.144150-0500	runningboardd	Assertion 173-20526-2971 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:35.145226-0500	RedLemon	🎬 Guest: Detected room playback start via database fallback
-default	18:36:35.146032-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:35.146083-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:35.146130-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:35.161436-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> received response, status 200 content U
-default	18:36:35.161567-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> done using Connection 2
-default	18:36:35.162123-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> response ended
-default	18:36:35.162350-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> summary for task success {transaction_duration_ms=75, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=74, response_duration_ms=0, request_bytes=231, response_bytes=540, cache_hit=true}
-default	18:36:35.162578-0500	RedLemon	Task <9F4CBEE0-4998-4B98-919F-2D7D4E445537>.<489> finished successfully
-default	18:36:35.164465-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2972 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:35.164721-0500	runningboardd	Assertion 173-114-2972 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:35.165801-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:35.166275-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CE875A90-5019-4449-913A-FA324963110D] (reporting strategy default)> on Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> was not selected for reporting
-default	18:36:35.167248-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:35.167524-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> now using Connection 2
-default	18:36:35.167891-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> sent request, body N 0
-default	18:36:35.171752-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:35.171838-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:35.171899-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:35.227623-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> received response, status 200 content U
-default	18:36:35.229170-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> done using Connection 2
-default	18:36:35.229389-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> response ended
-default	18:36:35.230994-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> summary for task success {transaction_duration_ms=64, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=60, response_duration_ms=2, request_bytes=244, response_bytes=519, cache_hit=true}
-default	18:36:35.231488-0500	RedLemon	Task <DCCB038E-F519-44A8-A6EE-F4D9841A87EE>.<491> finished successfully
-default	18:36:35.236985-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:35.238097-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3A9C4A65-FE13-40C3-8C9E-90F12E8E1917] (reporting strategy default)> on Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> was not selected for reporting
-default	18:36:35.239032-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:35.239222-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> now using Connection 2
-default	18:36:35.239509-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> sent request, body N 0
-default	18:36:35.296638-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> received response, status 200 content U
-default	18:36:35.296869-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> done using Connection 2
-default	18:36:35.297832-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> response ended
-default	18:36:35.298140-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> summary for task success {transaction_duration_ms=59, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=57, response_duration_ms=1, request_bytes=244, response_bytes=522, cache_hit=true}
-default	18:36:35.298530-0500	RedLemon	Task <18C58AF4-5829-44C6-956C-EF3F082A8887>.<492> finished successfully
-default	18:36:35.301363-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:35.920610-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:35.921437-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4C287A76-E797-458C-8CFE-671B3E129677] (reporting strategy default)> on Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> was not selected for reporting
-default	18:36:35.922516-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:35.923471-0500	RedLemon	Connection 55: enabling TLS
-default	18:36:35.923523-0500	RedLemon	Connection 55: starting, TC(0x0)
-default	18:36:35.923593-0500	RedLemon	[C55 C6F6BDB8-DCDB-4C7F-9618-1683B858781A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{8D6AC68E-F221-4026-A954-13F1383C8E61}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:35.923768-0500	RedLemon	[C55 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.000s
-default	18:36:35.924398-0500	RedLemon	[C55 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 0EB4EDBC-C9F3-4AF8-AEFE-FB77DFAD89D3
-default	18:36:35.924798-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
-default	18:36:35.924884-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state preparing
-default	18:36:35.925287-0500	mDNSResponder	[R2207] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:35.925403-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> setting up Connection 55
-default	18:36:35.927247-0500	mDNSResponder	[R2207] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:35.927529-0500	RedLemon	nw_endpoint_resolver_update [C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:35.927733-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.004s
-default	18:36:35.928091-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.004s
-default	18:36:35.928550-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: BDCB7E79-16BE-4564-A838-87E5503C2DEC
-default	18:36:35.928769-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.005s
-default	18:36:35.929336-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.005s
-default	18:36:35.930134-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.006s
-default	18:36:35.930366-0500	RedLemon	tcp_output [C55.1:3] flags=[S] seq=720070547, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=720070547
-default	18:36:36.051233-0500	RedLemon	tcp_input [C55.1:3] flags=[S.] seq=1777387907, ack=720070548, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=720070547
-default	18:36:36.051497-0500	RedLemon	nw_flow_connected [C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:36.051798-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.128s
-default	18:36:36.051925-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.128s
-default	18:36:36.052700-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C55.1:2][0x7f99cfae5a80] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:36.053772-0500	RedLemon	boringssl_context_info_handler(2028) [C55.1:2][0x7f99cfae5a80] Client handshake started
-default	18:36:36.054179-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS client enter_early_data
-default	18:36:36.054436-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS client read_server_hello
-default	18:36:36.181066-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:36.181152-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:36.181509-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:36.181874-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:36.182307-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:36.182475-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:36.183506-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C55.1:2][0x7f99cfae5a80] Performing external trust evaluation
-default	18:36:36.183875-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C55.1:2][0x7f99cfae5a80] Asyncing for external verify block
-default	18:36:36.184463-0500	RedLemon	Connection 55: asked to evaluate TLS Trust
-default	18:36:36.185055-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> auth completion disp=1 cred=0x0
-default	18:36:36.192488-0500	RedLemon	Connection 55: TLS Trust result 0
-default	18:36:36.192567-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C55.1:2][0x7f99cfae5a80] Returning from external verify block with result: true
-default	18:36:36.192667-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C55.1:2][0x7f99cfae5a80] Certificate verification result: OK
-default	18:36:36.193298-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:36.193547-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:36.193589-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:36.193629-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:36.193669-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:36.193809-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS 1.3 client done
-default	18:36:36.194036-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS client finish_client_handshake
-default	18:36:36.194086-0500	RedLemon	boringssl_context_info_handler(2045) [C55.1:2][0x7f99cfae5a80] Client handshake state: TLS client done
-default	18:36:36.194145-0500	RedLemon	boringssl_context_info_handler(2034) [C55.1:2][0x7f99cfae5a80] Client handshake done
-default	18:36:36.195063-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C55.1:2][0x7f99cfae5a80] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(141ms) flight_time(127ms) rtt(127ms) write_stalls(0) read_stalls(6)]
-default	18:36:36.195417-0500	RedLemon	nw_flow_connected [C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:36.196106-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.272s
-default	18:36:36.196417-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state ready
-default	18:36:36.196491-0500	RedLemon	[C55 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.272s
-default	18:36:36.196644-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.272s
-default	18:36:36.196718-0500	RedLemon	[C55 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.273s
-default	18:36:36.197263-0500	RedLemon	Connection 55: connected successfully
-default	18:36:36.197320-0500	RedLemon	Connection 55: TLS handshake complete
-default	18:36:36.197614-0500	RedLemon	Connection 55: ready C(N) E(N)
-default	18:36:36.198144-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> now using Connection 55
-default	18:36:36.198296-0500	RedLemon	Connection 55: received viability advisory(Y)
-default	18:36:36.198596-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> sent request, body N 0
-default	18:36:36.200047-0500	runningboardd	Invalidating assertion 173-20526-2971 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:36.316373-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> received response, status 101 content U
-default	18:36:36.316931-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> response ended
-default	18:36:36.317183-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> done using Connection 55
-default	18:36:36.318198-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.394s
-default	18:36:36.318270-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state preparing
-default	18:36:36.318407-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.394s
-default	18:36:36.318635-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.394s
-default	18:36:36.318734-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.395s
-default	18:36:36.318860-0500	RedLemon	nw_flow_connected [C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:36.319080-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.395s
-default	18:36:36.319178-0500	RedLemon	[C55 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.395s
-default	18:36:36.319444-0500	RedLemon	nw_flow_connected [C55.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:36.320102-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.396s
-default	18:36:36.320175-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state ready
-default	18:36:36.320276-0500	RedLemon	[C55 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.396s
-default	18:36:36.343643-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:36.343772-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:36.344033-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:36.345453-0500	runningboardd	Invalidating assertion 173-114-2972 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:36.438843-0500	RedLemon	tcp_input [C55.1:3] flags=[F.] seq=1777390939, ack=720071602, win=249 state=ESTABLISHED rcv_nxt=1777390939, snd_una=720071602
-default	18:36:36.438970-0500	RedLemon	nw_protocol_tcp_log_summary [C55.1:3]
-	[F72B228C-4FE9-4E17-B7EF-B0CF37AC6E48 <private>:55405<-><private>:443]
-	Init: 1, Conn_Time: 121.096ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 4, rtt: 123.781ms, rtt_var: 5.312ms rtt_nc: 121.125ms, rtt_var_nc: 27.250ms base rtt: 118ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:36.440021-0500	RedLemon	nw_flow_disconnected [C55.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:36.440776-0500	RedLemon	Connection 55: read-side closed
-default	18:36:36.440849-0500	RedLemon	Connection 55: read-side closed
-default	18:36:36.440996-0500	RedLemon	Connection 55: read-side closed
-error	18:36:36.441209-0500	RedLemon	nw_read_request_report [C55] Receive failed with error "Socket is not connected"
-default	18:36:36.442136-0500	RedLemon	[C55.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.518s, error Socket is not connected
-default	18:36:36.442226-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state failed error Socket is not connected
-default	18:36:36.442346-0500	RedLemon	[C55 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.518s
-default	18:36:36.442457-0500	RedLemon	tcp_output [C55.1:3] flags=[F.] seq=720071733, ack=1777390940, win=2048 state=LAST_ACK rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.442702-0500	RedLemon	Connection 55: received failure notification
-error	18:36:36.442881-0500	RedLemon	nw_flow_add_write_request [C55.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-error	18:36:36.443042-0500	RedLemon	nw_write_request_report [C55] Send failed with error "Socket is not connected"
-default	18:36:36.442862-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> summary for task success {transaction_duration_ms=520, response_status=101, connection=55, protocol="http/1.1", domain_lookup_duration_ms=3, connect_duration_ms=266, secure_connection_duration_ms=141, private_relay=false, request_start_ms=276, request_duration_ms=0, response_start_ms=394, response_duration_ms=1, request_bytes=359, response_bytes=330, cache_hit=false}
-default	18:36:36.443252-0500	RedLemon	Connection 55: cleaning up
-default	18:36:36.443294-0500	RedLemon	Task <09E264A2-A7F8-4A47-B873-84A9C3866A9C>.<1> finished successfully
-default	18:36:36.443360-0500	RedLemon	[C55 C6F6BDB8-DCDB-4C7F-9618-1683B858781A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:36.443804-0500	RedLemon	[C55 C6F6BDB8-DCDB-4C7F-9618-1683B858781A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C55.1 BDCB7E79-16BE-4564-A838-87E5503C2DEC 10.0.0.249:55405<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 0.520s, DNS @0.001s took 0.003s, TCP @0.394s took 0.122s
-	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:36.444956-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C55] reporting state cancelled error Socket is not connected
-default	18:36:36.445173-0500	RedLemon	Connection 55: done
-default	18:36:36.510689-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:36.510788-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:36.510885-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-error	18:36:36.564218-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=LAST_ACK rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564363-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564423-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564469-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564532-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564605-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-error	18:36:36.564675-0500	RedLemon	tcp_input [C55.1:3] flags=[R] seq=1777390940, ack=0, win=0 state=CLOSED rcv_nxt=1777390940, snd_una=720071602
-default	18:36:37.084171-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:37.084784-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:37.085747-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DA03440F-03DF-4C6A-9D6C-056C7C61C4FC] (reporting strategy default)> on Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> was not selected for reporting
-default	18:36:37.087335-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BED69985-AA36-4309-A8F8-82C464739E53] (reporting strategy default)> on Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> was not selected for reporting
-default	18:36:37.087610-0500	RedLemon	🎬 Guest: Starting playback after countdown
-default	18:36:37.087865-0500	RedLemon	🎬 Guest: Launching player for The Grinch
-default	18:36:37.088243-0500	RedLemon	   Quality: 1080p
-default	18:36:37.088537-0500	RedLemon	   Mode: watchParty
-default	18:36:37.088754-0500	RedLemon	📡 Fetching metadata for tt2709692...
-default	18:36:37.088746-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.089667-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> now using Connection 2
-default	18:36:37.090022-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.090244-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> now using Connection 2
-default	18:36:37.092384-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> sent request, body N 0
-default	18:36:37.098243-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> sent request, body N 0
-default	18:36:37.164956-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> received response, status 200 content U
-default	18:36:37.165102-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> done using Connection 2
-default	18:36:37.166145-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> response ended
-default	18:36:37.166361-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> summary for task success {transaction_duration_ms=78, response_status=200, connection=2, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=76, response_duration_ms=1, request_bytes=220, response_bytes=662, cache_hit=true}
-default	18:36:37.166646-0500	RedLemon	Task <CBF0AE8D-B348-47E3-B26E-81CCB9241DBE>.<493> finished successfully
-default	18:36:37.170775-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> received response, status 200 content U
-default	18:36:37.171201-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2973 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:37.171892-0500	runningboardd	Assertion 173-20526-2973 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:37.172923-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> done using Connection 2
-default	18:36:37.173701-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> response ended
-default	18:36:37.173940-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> summary for task success {transaction_duration_ms=85, response_status=200, connection=2, reused=1, request_start_ms=4, request_duration_ms=6, response_start_ms=82, response_duration_ms=3, request_bytes=231, response_bytes=714, cache_hit=true}
-default	18:36:37.174190-0500	RedLemon	Task <0F94AEDA-9225-4850-97AB-13E73BDE41E1>.<494> finished successfully
-default	18:36:37.180913-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:37.181109-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:37.181296-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:37.183979-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:37.184530-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [230D834B-5C81-4EC7-A2A0-B4774C5E0C53] (reporting strategy default)> on Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> was not selected for reporting
-default	18:36:37.185513-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.185764-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> now using Connection 2
-default	18:36:37.186145-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> sent request, body N 0
-default	18:36:37.194725-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2974 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:37.195022-0500	runningboardd	Assertion 173-114-2974 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:37.197468-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:37.197527-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:37.197741-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:37.222589-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt2709692/img
-default	18:36:37.223167-0500	RedLemon	⏳ Background art loading...
-default	18:36:37.223459-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt2709692/img
-default	18:36:37.223948-0500	RedLemon	⏳ Logo loading...
-default	18:36:37.254138-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:37.254606-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1D69D16A-20E0-4995-96F0-6311D395F9B1] (reporting strategy default)> on Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> was not selected for reporting
-default	18:36:37.255235-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:37.255325-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.255548-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> now using Connection 50
-default	18:36:37.256077-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EB295772-E2D9-4DAC-9742-AE5C9EC0CF64] (reporting strategy default)> on Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> was not selected for reporting
-default	18:36:37.256217-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> sent request, body N 0
-default	18:36:37.256582-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> received response, status 200 content U
-default	18:36:37.257307-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.257492-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> now using Connection 50
-default	18:36:37.257672-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> done using Connection 2
-default	18:36:37.257823-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> sent request, body N 0
-default	18:36:37.257869-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> response ended
-default	18:36:37.258054-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> summary for task success {transaction_duration_ms=73, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=244, response_bytes=482, cache_hit=true}
-default	18:36:37.258359-0500	RedLemon	Task <6BD47A1B-9B04-439F-BC9D-059C5292268E>.<495> finished successfully
-default	18:36:37.271616-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> received response, status 200 content K
-default	18:36:37.276715-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> done using Connection 50
-default	18:36:37.276932-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> response ended
-default	18:36:37.278120-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> summary for task success {transaction_duration_ms=23, response_status=200, connection=50, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=16, response_duration_ms=5, request_bytes=37, response_bytes=236626, cache_hit=false}
-default	18:36:37.278255-0500	RedLemon	Task <2170F52A-195C-4B21-A6CF-E452358CCF60>.<496> finished successfully
-default	18:36:37.293826-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> received response, status 200 content K
-default	18:36:37.307807-0500	RedLemon	✅ Logo loaded successfully
-default	18:36:37.310914-0500	RedLemon	✅ StreamService: Using provided metadata: The Grinch
-default	18:36:37.311182-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:37.311194-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:37.311060-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
-default	18:36:37.311410-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt2709692, type=movie, year=2018
-default	18:36:37.311995-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> resuming, timeouts(30.0, 300.0) QOS(0x21) Voucher (null)
-default	18:36:37.312707-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [236FAB78-6324-4CFB-A63E-A6CB5099334A] (reporting strategy default)> on Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> was not selected for reporting
-default	18:36:37.313340-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1F538CD4-EE29-494F-8EE0-2088C00416ED] (reporting strategy default)> on Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> was not selected for reporting
-default	18:36:37.313731-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7363323E-348F-4EFC-8AD0-E0AADDA68925] (reporting strategy default)> on Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> was not selected for reporting
-default	18:36:37.313957-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> now using Connection 42
-default	18:36:37.314794-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.315035-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> now using Connection 2
-default	18:36:37.316760-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.317039-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> now using Connection 2
-default	18:36:37.332175-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> sent request, body N 0
-default	18:36:37.332376-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> sent request, body N 0
-default	18:36:37.332427-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> sent request, body N 0
-default	18:36:37.339634-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> done using Connection 50
-default	18:36:37.339884-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> response ended
-default	18:36:37.341196-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> summary for task success {transaction_duration_ms=84, response_status=200, connection=50, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=37, response_duration_ms=46, request_bytes=41, response_bytes=900643, cache_hit=false}
-default	18:36:37.341387-0500	RedLemon	Task <2E7F8B03-D33D-4331-A77D-185EABBD4EE1>.<497> finished successfully
-default	18:36:37.344666-0500	RedLemon	✅ Background art loaded successfully
-default	18:36:37.344691-0500	RedLemon	Task <9779793D-32F3-45ED-8235-6F247CD18EE9>.<500> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:37.344710-0500	RedLemon	Task <C85B00DC-6DF3-49E2-A31D-0131DCCE269F>.<501> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:37.344784-0500	RedLemon	Task <5465983F-8B78-4F49-B6AF-5572210A8D2E>.<502> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:37.347513-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E3A28829-9262-4BE1-83BE-D4ED790B913F] (reporting strategy default)> on Task <5465983F-8B78-4F49-B6AF-5572210A8D2E>.<502> was not selected for reporting
-default	18:36:37.348079-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:37.350004-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DB2EDFD0-9AA4-4084-9622-757DFAEFAB60] (reporting strategy default)> on Task <C85B00DC-6DF3-49E2-A31D-0131DCCE269F>.<501> was not selected for reporting
-default	18:36:37.359945-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5095391E-DE17-401F-B58A-BAE5A6D491E0] (reporting strategy default)> on Task <9779793D-32F3-45ED-8235-6F247CD18EE9>.<500> was not selected for reporting
-default	18:36:37.361068-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B8CB2B3A-D108-4127-8296-93DA2B77925A] (reporting strategy default)> on Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> was not selected for reporting
-default	18:36:37.366065-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.366893-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> now using Connection 24
-default	18:36:37.367387-0500	RedLemon	Task <5465983F-8B78-4F49-B6AF-5572210A8D2E>.<502> summary for task success {transaction_duration_ms=7, response_status=200, cache_hit=true}
-default	18:36:37.367512-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> sent request, body N 0
-default	18:36:37.367686-0500	RedLemon	Task <5465983F-8B78-4F49-B6AF-5572210A8D2E>.<502> finished successfully
-default	18:36:37.367932-0500	RedLemon	Task <C85B00DC-6DF3-49E2-A31D-0131DCCE269F>.<501> summary for task success {transaction_duration_ms=7, response_status=200, cache_hit=true}
-default	18:36:37.368132-0500	RedLemon	Task <C85B00DC-6DF3-49E2-A31D-0131DCCE269F>.<501> finished successfully
-default	18:36:37.368546-0500	RedLemon	Task <9779793D-32F3-45ED-8235-6F247CD18EE9>.<500> summary for task success {transaction_duration_ms=4, response_status=200, cache_hit=true}
-default	18:36:37.368768-0500	RedLemon	Task <9779793D-32F3-45ED-8235-6F247CD18EE9>.<500> finished successfully
-default	18:36:37.394639-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> received response, status 200 content U
-default	18:36:37.394756-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> done using Connection 2
-default	18:36:37.395409-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> response ended
-default	18:36:37.395623-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> summary for task success {transaction_duration_ms=81, response_status=200, connection=2, reused=1, request_start_ms=17, request_duration_ms=0, response_start_ms=79, response_duration_ms=0, request_bytes=244, response_bytes=474, cache_hit=true}
-default	18:36:37.395852-0500	RedLemon	Task <F26761C4-9D0D-457F-94BA-1DD0A3DD9F80>.<499> finished successfully
-default	18:36:37.398654-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> received response, status 200 content K
-default	18:36:37.400918-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> done using Connection 2
-default	18:36:37.401017-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> response ended
-default	18:36:37.401177-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> summary for task success {transaction_duration_ms=87, response_status=200, connection=2, reused=1, request_start_ms=18, request_duration_ms=0, response_start_ms=84, response_duration_ms=2, request_bytes=265, response_bytes=348, cache_hit=false}
-default	18:36:37.401397-0500	RedLemon	Task <F101C59F-6FB3-446F-B970-A138997855E2>.<498> finished successfully
-default	18:36:37.453169-0500	RedLemon	🔍 Current guest participant found in polling: misterchief with ID 97933A49-DF93-4D7D-9E5D-94EE9B96191D
-default	18:36:37.453319-0500	RedLemon	✅ Left room T948
-default	18:36:37.454687-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> summary for task success {transaction_duration_ms=10661, response_status=101, connection=52, protocol="http/1.1", domain_lookup_duration_ms=40, connect_duration_ms=71, secure_connection_duration_ms=49, private_relay=false, request_start_ms=118, request_duration_ms=0, response_start_ms=263, response_duration_ms=1, request_bytes=828, response_bytes=850, cache_hit=false}
-default	18:36:37.454761-0500	RedLemon	Task <AF4225FB-F950-4138-B133-7365A2687C6B>.<1> finished successfully
-default	18:36:37.454929-0500	RedLemon	Connection 52: cleaning up
-default	18:36:37.455037-0500	RedLemon	[C52 036C0EFF-9110-44CD-B435-86B95CED0170 Hostname#d7069d94:443 tcp, url hash: 74dfb3cc, tls, definite, attribution: developer] cancel
-default	18:36:37.455292-0500	RedLemon	[C52 036C0EFF-9110-44CD-B435-86B95CED0170 Hostname#d7069d94:443 tcp, url hash: 74dfb3cc, tls, definite, attribution: developer] cancelled
-	[C52.1 CAB08E91-5B1F-4D3A-BE24-60848C160A49 10.0.0.249:55402<->IPv4#07b0ba20:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 10.659s, DNS @0.000s took 0.040s, TCP @0.264s took 0.020s, TLS 1.3 took 0.003s
-	bytes in/out: 6466/2773, packets in/out: 12/20, rtt: 0.022s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:37.455882-0500	RedLemon	nw_flow_disconnected [C52.1 IPv4#07b0ba20:443 cancelled channel-flow ((null))] Output protocol disconnected
-default	18:36:37.456892-0500	RedLemon	nw_protocol_tcp_log_summary [C52.1:3]
-	[628150D1-EED7-4B5A-98BF-750F216D9FA0 <private>:55402<-><private>:443]
-	Init: 1, Conn_Time: 19.994ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 5, rtt: 22.593ms, rtt_var: 10.625ms rtt_nc: 23.062ms, rtt_var_nc: 12.125ms base rtt: 10ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:37.457273-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C52] reporting state cancelled
-default	18:36:37.457556-0500	RedLemon	Connection 52: done
-error	18:36:37.457679-0500	RedLemon	Read completed with an error <private>
-default	18:36:37.458126-0500	RedLemon	tcp_output [C52.1:3] flags=[F.] seq=3544454708, ack=3875911100, win=2048 state=FIN_WAIT_1 rcv_nxt=3875911100, snd_una=3544454402
-default	18:36:37.477906-0500	RedLemon	tcp_input [C52.1:3] flags=[F.] seq=3875911100, ack=3544454709, win=16 state=FIN_WAIT_2 rcv_nxt=3875911100, snd_una=3544454709
-default	18:36:37.539935-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> received response, status 200 content U
-default	18:36:37.650243-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> done using Connection 24
-default	18:36:37.650597-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> response ended
-default	18:36:37.650966-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> summary for task success {transaction_duration_ms=286, response_status=200, connection=24, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=175, response_duration_ms=110, request_bytes=483, response_bytes=2724, cache_hit=true}
-default	18:36:37.651377-0500	RedLemon	Task <DD66223C-E113-49D4-8878-6D77D9B6C787>.<503> finished successfully
-default	18:36:37.659054-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 100
-default	18:36:37.659431-0500	RedLemon	   INPUT[0]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	18:36:37.659723-0500	RedLemon	   INPUT[1]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	18:36:37.659981-0500	RedLemon	   INPUT[2]: The Grinch (2018) MULTi VF2 [1080p] BluRay x264-PopHD mkv | 1080p | zilean
-default	18:36:37.660301-0500	RedLemon	   INPUT[3]: The Grinch 2018 BDRip 1080p LT EN LTSubs mkv | 1080p | zilean
-default	18:36:37.660667-0500	RedLemon	   INPUT[4]: The Grinch 2018 2160p 4K BluRay x265 10bit AAC5 1-[YTS MX] mkv | 2160p | zilean
-default	18:36:37.661170-0500	RedLemon	   INPUT[5]: The Grinch 2018 1080 WEB-DL KP 3xRus Ukr Eng Localization mkv | Unknown | zilean
-default	18:36:37.661432-0500	RedLemon	   INPUT[6]: The Grinch 2018 1080p 3D BluRay Half-SBS x264 TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:37.661663-0500	RedLemon	   INPUT[7]: The Grinch 2018 UHD BluRay 2160p DDP 7 1 DV HDR x265-hallowed mkv | 2160p | zilean
-default	18:36:37.661854-0500	RedLemon	   INPUT[8]: The Grinch 2018 2160p UHDRemux HDR DV-TheEqualizer mp4 | 2160p | zilean
-default	18:36:37.662041-0500	RedLemon	   INPUT[9]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean
-default	18:36:37.662197-0500	RedLemon	   INPUT[10]: the grinch 2018 1080p bluray x264 CZ-SK mkv | 1080p | zilean
-default	18:36:37.662372-0500	RedLemon	   INPUT[11]: The Grinch 2018 1080p 3D BluRay AVC TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:37.662528-0500	RedLemon	   INPUT[12]: The Grinch 2018 1080p 10bit BluRay 8CH x265 HEVC-PSA mkv | 1080p | zilean
-default	18:36:37.662704-0500	RedLemon	   INPUT[13]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 HEVC REMUX-FraMeSToR | 2160p | zilean
-default	18:36:37.662880-0500	RedLemon	   INPUT[14]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean
-default	18:36:37.663049-0500	RedLemon	   INPUT[15]: Grinch+2018+CZ+Dabing+FullHD+1080p mkv | 1080p | zilean
-default	18:36:37.663234-0500	RedLemon	   INPUT[16]: The Grinch 2018 MULTi 1080p BluRay x264 AC3-EXTREME mkv | 1080p | zilean
-default	18:36:37.663412-0500	RedLemon	   INPUT[17]: The Grinch 2018 SLOSinh 720p BluRay x264-DrSi | 720p | zilean
-default	18:36:37.663594-0500	RedLemon	   INPUT[18]: The Grinch 2018 SLOSINH 720p BluRay x264 DD 5 1-INFIRE mkv | 720p | zilean
-default	18:36:37.663758-0500	RedLemon	   INPUT[19]: Grinch (2018) [BluRay] [3D] [HSBS] [YTS AM] | Unknown | zilean
-default	18:36:37.663899-0500	RedLemon	   INPUT[20]: The Grinch 2018 BDRemux 2160p Ukr Eng mkv | 2160p | zilean
-default	18:36:37.664048-0500	RedLemon	   INPUT[21]: The Grinch 2018 MULTi 1080p BluRay Light x264 AC3-ACOOL mkv | 1080p | zilean
-default	18:36:37.664189-0500	RedLemon	   INPUT[22]: The Grinch 2018 1080p AMZN WEB-DL DDP5 1 H 264-MZABI mkv | 1080p | zilean
-default	18:36:37.664344-0500	RedLemon	   INPUT[23]: The Grinch 2018 NORDiC ENG 1080p BluRay x264-RAPiDCOWS mkv | 1080p | zilean
-default	18:36:37.664493-0500	RedLemon	   INPUT[24]: The Grinch 2018 1080p BluRay DD 5 1 x264 ESub [MW] mkv | 1080p | zilean
-default	18:36:37.665241-0500	RedLemon	   INPUT[25]: Grinch 2018 720p WEB-DL MkvCage ws mkv | 720p | zilean
-default	18:36:37.665705-0500	RedLemon	   INPUT[26]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean
-default	18:36:37.665891-0500	RedLemon	   INPUT[27]: The Grinch 2018 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
-default	18:36:37.666058-0500	RedLemon	   INPUT[28]: The Grinch (2018) 2160p HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean
-default	18:36:37.668014-0500	RedLemon	   INPUT[29]: The Grinch (2018) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean
-default	18:36:37.668415-0500	RedLemon	   INPUT[30]: The Grinch 2018 1080p 5 1 EST-ENG Blurip FLY635 mkv | 1080p | zilean
-default	18:36:37.668735-0500	RedLemon	   INPUT[31]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean
-default	18:36:37.668932-0500	RedLemon	   INPUT[32]: The Grinch 2018 1080p WEB-DL DD5 1 H264-CMRG[EtHD] mkv | 1080p | zilean
-default	18:36:37.669369-0500	RedLemon	   INPUT[33]: The Grinch 2018 2160p UHD BluRay DV HDR TrueHD Atmos 7 1 x265-BiTOR mkv | 2160p | zilean
-default	18:36:37.670146-0500	RedLemon	   INPUT[34]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST | 1080p | zilean
-default	18:36:37.670819-0500	RedLemon	   INPUT[35]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean
-default	18:36:37.671088-0500	RedLemon	   INPUT[36]: The Grinch 2018 720p BluRay x264-[YTS AM] mp4 | 720p | zilean
-default	18:36:37.671293-0500	RedLemon	   INPUT[37]: The Grinch (2018) [WEBRip] [1080p] [YTS AM] | 1080p | zilean
-default	18:36:37.671483-0500	RedLemon	   INPUT[38]: The Grinch 2018 REPACK 720p BluRay x264-BONSAI mkv | 720p | zilean
-default	18:36:37.671658-0500	RedLemon	   INPUT[39]: The Grinch 2018 BDRip 1080p X265 Ac3-GANJAMAN mkv | 1080p | zilean
-default	18:36:37.674155-0500	RedLemon	   INPUT[40]: The Grinch 2018 1080p BluRay x264 TrueHD 7 1 Atmos-FGT mkv | 1080p | zilean
-default	18:36:37.676054-0500	RedLemon	   INPUT[41]: The Grinch (2018) x 1616 (2160p) HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean
-default	18:36:37.677695-0500	RedLemon	   INPUT[42]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean
-default	18:36:37.677885-0500	RedLemon	   INPUT[43]: The Grinch 2018 MULTi 1080p BluRay x264-VENUE mkv | 1080p | zilean
-default	18:36:37.678044-0500	RedLemon	   INPUT[44]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean
-default	18:36:37.678196-0500	RedLemon	   INPUT[45]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST mkv | 1080p | zilean
-default	18:36:37.681242-0500	RedLemon	   INPUT[46]: The Grinch 2018 2160p UHD BluRay X265-IAMABLE | 2160p | zilean
-default	18:36:37.681572-0500	RedLemon	   INPUT[47]: Grinch 2018 BDRemux 1080p NNMClub mkv | 1080p | zilean
-default	18:36:37.681737-0500	RedLemon	   INPUT[48]: The Grinch 2018 1080p BDRip x264 AC3-iCMAL mkv | 1080p | zilean
-default	18:36:37.681878-0500	RedLemon	   INPUT[49]: The Grinch 2018 UHD 4K BluRay 2160p DoVi HDR TrueHD 7 1 Atmos H 265-MgB | 2160p | zilean
-default	18:36:37.682014-0500	RedLemon	   INPUT[50]: The Grinch 2018 Multi UHD BluRay 2160p x265 HDR Atmos 7 1-DTOne | 2160p | zilean
-default	18:36:37.682151-0500	RedLemon	   INPUT[51]: The Grinch 2018 Lic BDRip 1080p seleZen mkv | 1080p | zilean
-default	18:36:37.682286-0500	RedLemon	   INPUT[52]: The Grinch 2018 BluRay 1080p DTS AC3 x264-MgB mkv | 1080p | zilean
-default	18:36:37.682966-0500	RedLemon	   INPUT[53]: The Grinch 2018 BluRay 1080p DTS-HD MA TrueHD 7 1 Atmos x264-MgB mkv | 1080p | zilean
-default	18:36:37.686933-0500	RedLemon	   INPUT[54]: The Grinch 2018 2160p BluRay REMUX HEVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 2160p | zilean
-default	18:36:37.687263-0500	RedLemon	   INPUT[55]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	18:36:37.687530-0500	RedLemon	   INPUT[56]: The Grinch 2018 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean
-default	18:36:37.687832-0500	RedLemon	   INPUT[57]: The Grinch 2018 MULTI 1080p BluRay REMUX-DDB | 1080p | zilean
-default	18:36:37.694148-0500	RedLemon	   INPUT[58]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean
-default	18:36:37.699302-0500	RedLemon	   INPUT[59]: The Grinch 2018 2160p BluRay x265 10bit HDR DTS-HD MA TrueHD 7 1 Atmos-SWTYBLZ mkv | 2160p | zilean
-default	18:36:37.700381-0500	RedLemon	   INPUT[60]: The Grinch (2018) MULTi VF2 1080p Bluray x264-AW mkv | 1080p | zilean
-default	18:36:37.702169-0500	RedLemon	   INPUT[61]: The Grinch 2018 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
-default	18:36:37.703087-0500	RedLemon	   INPUT[62]: The Grinch 2018 1080p BluRay REMUX AVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:37.703421-0500	RedLemon	   INPUT[63]: The Grinch (2018) (1080p BluRay x265 HEVC 10bit AAC 7 1 Tigole) | 1080p | zilean
-default	18:36:37.703588-0500	RedLemon	   INPUT[64]: The Grinch 2018 2160p UHD EAC3 DoVi - SumVision mp4 | 2160p | zilean
-default	18:36:37.703777-0500	RedLemon	   INPUT[65]: The Grinch 2018 1080p WEB-DL DD5 1 H264-FGT mkv | 1080p | zilean
-default	18:36:37.703885-0500	RedLemon	   INPUT[66]: The Grinch 2018 1080p BluRay x265-RARBG | 1080p | zilean
-default	18:36:37.716640-0500	RedLemon	   INPUT[67]: Гринч / The Grinch (2018) UHD BDRemux 2160p | 4K | HDR | Dolby Vision Profile 8 | Лицензия
-👤 2 💾 36.71 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 2160p | torrentio
-default	18:36:37.725236-0500	RedLemon	   INPUT[68]: El Grinch [4K UHDremux][2160p][HDR][Dolby Digital Plus 7.1-AC3 5.1 Castellano-TrueHD 7.1-Ingles+Subs][ES-EN]
-👤 1 💾 39.89 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 2160p | torrentio
-default	18:36:37.728821-0500	RedLemon	   INPUT[69]: The.Grinch.2018.2160p.BluRay.HEVC.TrueHD.7.1.Atmos-BHD
-👤 7 💾 78.92 GB ⚙️ RARBG | 2160p | torrentio
-default	18:36:37.729516-0500	RedLemon	   INPUT[70]: Videos cosas
-El Grinch [MicroHD][1080p][DTS-AC3 5.1-Castellano-AC3 5.1-Ingles+Subs-ES-EN]/ElGrinchM1080.www.newpct.com.mkv
-👤 407 💾 4.17 GB ⚙️ Wolfmax4k
+default	13:18:54.653081-0500	runningboardd	Assertion 173-18244-1110 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:54.654398-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 60
+default	13:18:54.654850-0500	RedLemon	   INPUT[0]: Mirror Mirror 2012 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
+default	13:18:54.655229-0500	RedLemon	   INPUT[1]: Mirror Mirror 2012 1080p BluRay x264-OFT mkv | 1080p | zilean
+default	13:18:54.655601-0500	RedLemon	   INPUT[2]: Mirror Mirror 2012 720p BluRay x264 YIFY mp4 | 720p | zilean
+default	13:18:54.655927-0500	RedLemon	   INPUT[3]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean
+default	13:18:54.656307-0500	RedLemon	   INPUT[4]: Mirror Mirror 2012 BluRay 1080p MULTi REMUX AVC DTS-HD MA 5 1-LEGi0N mkv | 1080p | zilean
+default	13:18:54.656564-0500	RedLemon	   INPUT[5]: mirror-mirror_480p mp4 | 480p | zilean
+default	13:18:54.656936-0500	RedLemon	   INPUT[6]: Mirror 1975 1080p BluRay REMUX AVC LPCM 1 0 EngSub-ShNK | 1080p | zilean
+default	13:18:54.657305-0500	RedLemon	   INPUT[7]: Mirror Mirror 2012 1080p Bluray x264 anoXmous mp4 | 1080p | zilean
+default	13:18:54.657624-0500	RedLemon	   INPUT[8]: Mirror 1975 RUSSIAN 1080p BluRay x265-VXT mp4 | 1080p | zilean
+default	13:18:54.658178-0500	RedLemon	   INPUT[9]: The Mirror 1997 1080p WEB-DL AAC 2 0 x264 mkv | 1080p | zilean
+default	13:18:54.658624-0500	RedLemon	   INPUT[10]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean
+default	13:18:54.659213-0500	RedLemon	   INPUT[11]: Mirror Mirror 1990 1080p BluRay REMUX AVC FLAC 2 0-dOwn mkv | 1080p | zilean
+default	13:18:54.663882-0500	RedLemon	   INPUT[12]: Mirror Mirror 2012 1080p BluRay x265-RARBG mp4 | 1080p | zilean
+default	13:18:54.664369-0500	RedLemon	   INPUT[13]: Mirror Mirror 1990 1080p BluRay x265-RARBG | 1080p | zilean
+default	13:18:54.664669-0500	RedLemon	   INPUT[14]: The Mirror 2014 1080p WEBRip x264 AAC-[YTS MX] mp4 | 1080p | zilean
+default	13:18:54.664933-0500	RedLemon	   INPUT[15]: Mirror Mirror (1990) [1080p] [BluRay] [YTS MX] | 1080p | zilean
+default	13:18:54.665313-0500	RedLemon	   INPUT[16]: Mirror 1975 RUSSIAN 1080p BluRay H264 AAC-VXT | 1080p | zilean
+default	13:18:54.665713-0500	RedLemon	   INPUT[17]: Mirror (1975) Criterion (1080p BluRay x265 HEVC 10bit AAC 1 0 Russian Tigole) | 1080p | zilean
+default	13:18:54.666042-0500	RedLemon	   INPUT[18]: Mirror Mirror 1990 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
+default	13:18:54.666507-0500	RedLemon	   INPUT[19]: Mirror Mirror 2012 1080p BDRip H264 AAC - KiNGDOM | 1080p | zilean
+default	13:18:54.666937-0500	RedLemon	   INPUT[20]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean
+default	13:18:54.667150-0500	RedLemon	   INPUT[21]: Mirror 1975 RUSSIAN 1080p BluRay x264 DTS-ZQ | 1080p | zilean
+default	13:18:54.668580-0500	RedLemon	   INPUT[22]: Mirror Mirror 2022 1080p BluRay x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean
+default	13:18:54.668945-0500	RedLemon	   INPUT[23]: The Mirror 1975 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
+default	13:18:54.669291-0500	RedLemon	   INPUT[24]: the mirror 1975 1080p bluray x264-ghouls[PRiME] mkv | 1080p | zilean
+default	13:18:54.669567-0500	RedLemon	   INPUT[25]: The Mirror 1975 SUBFRENCH 1080p BluRay x264-CherryCoke mkv | 1080p | zilean
+default	13:18:54.670316-0500	RedLemon	   INPUT[26]: The Mirror 1975 BDRemux 1080p mkv | 1080p | zilean
+default	13:18:54.670557-0500	RedLemon	   INPUT[27]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean
+default	13:18:54.670844-0500	RedLemon	   INPUT[28]: mirror 1975 remastered 1080p bluray x264-usury mkv | 1080p | zilean
+default	13:18:54.671078-0500	RedLemon	   INPUT[29]: Mirror 1975 REPACK 1080p BluRay REMUX AVC FLAC 1 0-BLURANiUM mkv | 1080p | zilean
+default	13:18:54.671278-0500	RedLemon	   INPUT[30]: Mirror Mirror 1990 1080p BluRay x264 DTS-FGT | 1080p | zilean
+default	13:18:54.671619-0500	RedLemon	   INPUT[31]: Mirror 1975 1080p BluRay HEVC AAC-SARTRE | 1080p | zilean
+default	13:18:54.671830-0500	RedLemon	   INPUT[32]: Mirror Mirror 2012 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
+default	13:18:54.672017-0500	RedLemon	   INPUT[33]: Mirror Mirror 2012 1080p BluRay x264-SECTOR7 | 1080p | zilean
+default	13:18:54.672260-0500	RedLemon	   INPUT[34]: The Mirror (1997) [1080p] [WEBRip] [YTS MX] | 1080p | zilean
+default	13:18:54.672579-0500	RedLemon	   INPUT[35]: Mirror Mirror 2012 BDMux ITA ENG 1080p x265 Paso77 mkv | 1080p | zilean
+default	13:18:54.672863-0500	RedLemon	   INPUT[36]: Breaking.Bad.S05.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC
+Breaking.Bad.S05E15.Granite.State.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC.mkv
+👤 46 💾 5.77 GB ⚙️ ThePirateBay | 2160p | torrentio
+default	13:18:54.673150-0500	RedLemon	   INPUT[37]: Breaking Bad (2008) Season 02 S02 (2160p WEBRip x265 HEVC 10bit AAC 5.1 Joy) [UTR]
+Breaking Bad S02E04 Down (2160p x265 10bit Joy).mkv
+👤 43 💾 1.38 GB ⚙️ 1337x | 2160p | torrentio
+default	13:18:54.673290-0500	RedLemon	   INPUT[38]: Breaking.Bad.S03.1080p.BluRay.x265-RARBG
+Breaking.Bad.S03E12.1080p.BluRay.x265-RARBG.mp4
+👤 284 💾 753.42 MB ⚙️ RARBG | 1080p | torrentio
+default	13:18:54.673414-0500	RedLemon	   INPUT[39]: Breaking.Bad.S05.1080p.BluRay.x265-RARBG
+Breaking.Bad.S05E09.1080p.BluRay.x265-RARBG.mp4
+👤 272 💾 755.88 MB ⚙️ RARBG | 1080p | torrentio
+default	13:18:54.673535-0500	RedLemon	   INPUT[40]: Breaking Bad Full 1080p PT-BR
+Breaking.Bad.S02.Season.2.1080p/Breaking.Bad.S02E10.1080p.mkv
+👤 226 💾 544.19 MB ⚙️ MagnetDL
+🇵🇹 | 1080p | torrentio
+default	13:18:54.673902-0500	RedLemon	   INPUT[41]: Breaking Bad S04 Complete (2011) 1080p ENG-ITA MultiSub x264 Blu
+Ep 04 - Bullet Points - La Versione di Skyler.mkv
+👤 175 💾 2.72 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
+default	13:18:54.674078-0500	RedLemon	   INPUT[42]: Breaking Bad S02 1080p BluRay AV1 Opus [AV1D]
+Breaking Bad S02 08.mkv
+👤 160 💾 338.7 MB ⚙️ 1337x | 1080p | torrentio
+default	13:18:54.674374-0500	RedLemon	   INPUT[43]: Breaking.Bad.S02.1080p.BluRay.x265-RARBG
+Breaking.Bad.S02E10.1080p.BluRay.x265-RARBG.mp4
+👤 124 💾 755.82 MB ⚙️ RARBG | 1080p | torrentio
+default	13:18:54.674643-0500	RedLemon	   INPUT[44]: Breaking Bad S02 Season 2 1080p BluRay ReEnc-DeeJayAhmed [Little
+Breaking.Bad.S02E02.1080p.BluRay.ReEnc-DeeJayAhmed.mkv
+👤 120 💾 551.04 MB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:18:54.674860-0500	RedLemon	   INPUT[45]: Breaking Bad (2008) Season 1-5 S01-S05 (1080p BluRay x265 HEVC 1
+Season 3/Breaking Bad (2008) - S03E08 - I See You (1080p BluRay x265 Silence).mkv
+👤 89 💾 1.86 GB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:18:54.675163-0500	RedLemon	   INPUT[46]: Breaking Bad Complete S01-S05 1080p 10bit BluRay x265 HEVC 6CH-MRN
+Breaking.Bad.S03.1080p.10bit.BluRay.x265.HEVC.6CH-MRN/Breaking.Bad.S03E09.Kafkaesque.1080p.10bit.BluRay.x265.HEVC.6CH-MRN.mkv
+👤 60 💾 656.94 MB ⚙️ 1337x | 1080p | torrentio
+default	13:18:54.676692-0500	RedLemon	   INPUT[47]: Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub
+Breaking Bad Season 3/Breaking.Bad.S03E08.I.See.You.1080p.NF.WEB-DL.AV1.EAC3.mkv
+👤 49 💾 820.92 MB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 | 1080p | torrentio
+default	13:18:54.677818-0500	RedLemon	   INPUT[48]: Breaking.Bad.SEASON.01.S01.COMPLETE.1080p.10bit.BluRay.6CH.x265.HEVC-PSA
+Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.1080p.10bit.BluRay.6CH.x265.HEVC-PSA.mkv
+👤 49 💾 534.31 MB ⚙️ 1337x | 1080p | torrentio
+default	13:18:54.678021-0500	RedLemon	   INPUT[49]: Breaking Bad (2008) S02 (1080p x265 10bit BD DTS-HD MA 5.1) [Prof]
+S02E02 - Grilled.mkv
+👤 34 💾 6.03 GB ⚙️ TorrentGalaxy | 1080p | torrentio
+default	13:18:54.678304-0500	RedLemon	   INPUT[50]: Breaking Bad (S05)(2012)(1080p)(VP9)(WebDL)( EN 5.1+SPA 2.0)(Complete) PHDTeam
+Breaking Bad - S05E12_Vzteklý pes.mkv
+👤 33 💾 500.85 MB ⚙️ TorrentGalaxy
 🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:37.729737-0500	RedLemon	   INPUT[71]: El Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]
-👤 3 💾 10.04 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:37.730005-0500	RedLemon	   INPUT[72]: The.Grinch.2018.1080p.BluRay.x264.DTS-HD.MA.7.1-FGT
-👤 2 💾 6.35 GB ⚙️ RARBG | 1080p | torrentio
-default	18:36:37.730534-0500	RedLemon	   INPUT[73]: Veliki.paket.titlovanih.filmova.2025.08.1080p.x264.[ExYuSubs]
-Christmas.movie.pack.1080p.WEBRip.x264.[ExYuSubs]/The.Grinch.2018.1080p.WEBRip.x264.[ExYuSubs].mkv
-👤 1 💾 2 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	18:36:37.733267-0500	RedLemon	   INPUT[74]: El.grinch.2018.1080P-Dual-Lat.mp4
-👤 1 💾 1.38 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | Unknown | torrentio
-default	18:36:37.735100-0500	RedLemon	   INPUT[75]: zPelis3D
-Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN].mkv
-👤 1 💾 10.04 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:37.735723-0500	RedLemon	   INPUT[76]: The.Grinch.2018.MULTI.1080p.WEB.H264
-👤 1 💾 3 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 1080p | torrentio
-default	18:36:37.735997-0500	RedLemon	   INPUT[77]: The.Grinch.2018.MULTi.720p.BluRay.x264.AC3-EXTREME
-👤 3 💾 2.41 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 720p | torrentio
-default	18:36:37.736259-0500	RedLemon	   INPUT[78]: The Grinch 2018 720p WEBRip
-👤 1 💾 732.31 MB ⚙️ YTS | 720p | torrentio
-default	18:36:37.736407-0500	RedLemon	   INPUT[79]: The.Grinch.2018.TRUEFRENCH.BDRip.XviD-EXTREME
-👤 4 💾 694.58 MB ⚙️ Torrent9
+default	13:18:54.679018-0500	RedLemon	   INPUT[51]: Breaking.Bad.S01-S02-S03-S04-S05.1080p.BluRay.10bit.HEVC-MkvCage
+Breaking.Bad.S05.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws/Breaking.Bad.S05E09.Blood.Money.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws.mkv
+👤 31 💾 1 GB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:18:54.679230-0500	RedLemon	   INPUT[52]: Breaking Bad S02 Complete (2009) 1080p ENG-ITA MultiSub x264 Blu
+Ep 05 - Breakage - Una Pistola Per Jesse.mkv
+👤 31 💾 3.06 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
+default	13:18:54.679761-0500	RedLemon	   INPUT[53]: Breaking Bad Season 1 Complete 720p.BRrip.Sujaidr (pimprg)
+Breaking Bad s01e07 720p.BRrip.Sujaidr.mkv
+👤 43 💾 381.64 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:18:54.679930-0500	RedLemon	   INPUT[54]: Breaking Bad Season 3 Complete 720p.BRrip.Sujaidr
+breaking bad s03e11 720p brrip sujaidr.mkv
+👤 37 💾 377.74 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:18:54.680100-0500	RedLemon	   INPUT[55]: Breaking Bad Season 4 Complete 720p.BRrip.Sujaidr
+breaking bad s04e12 720p brrip sujaidr.mkv
+👤 36 💾 367.72 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:18:54.680228-0500	RedLemon	   INPUT[56]: Breaking Bad Season 5 Complete 720p.BRrip.Sujaidr
+breaking bad s05e11 720p brrip sujaidr.mkv
+👤 34 💾 379.11 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:18:54.680356-0500	RedLemon	   INPUT[57]: Breaking Bad Season 2 Complete 720p.BRrip.Sujaidr
+Breaking Bad s02ep6 720p brrip.sujaidr.mkv
+👤 33 💾 378.78 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:18:54.682842-0500	RedLemon	   INPUT[58]: Breaking Bad Saison 1 FRENCH HDTV
+Breaking.Bad.S01E02.FRENCH.DVDRip.XviD-JMT.avi
+👤 47 💾 348.31 MB ⚙️ Torrent9
 🇫🇷 | Unknown | torrentio
-default	18:36:37.736629-0500	RedLemon	   INPUT[80]: Гринч / The Grinch (2018) BDRip от MegaPeer | Лицензия
-👤 4 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	18:36:37.736824-0500	RedLemon	   INPUT[81]: The.Grinch.2018.BluRay.BD25.3D.AVC.TrueHD.7.1.Atmos
-👤 4 💾 22.52 GB ⚙️ ThePirateBay | Unknown | torrentio
-default	18:36:37.737199-0500	RedLemon	   INPUT[82]: El Grinch [BluRay Rip][AC3 5.1 Castellano][2019][www.pctnew.com]
-👤 2 💾 1.53 GB ⚙️ MejorTorrent
-🇪🇸 | Unknown | torrentio
-default	18:36:37.737443-0500	RedLemon	   INPUT[83]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.738033-0500	RedLemon	   INPUT[84]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.739474-0500	RedLemon	   INPUT[85]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.740525-0500	RedLemon	   INPUT[86]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.740811-0500	RedLemon	   INPUT[87]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.741360-0500	RedLemon	   INPUT[88]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.744261-0500	RedLemon	   INPUT[89]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.746808-0500	RedLemon	   INPUT[90]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.747117-0500	RedLemon	   INPUT[91]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.747257-0500	RedLemon	   INPUT[92]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:37.754611-0500	RedLemon	   INPUT[93]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.755290-0500	RedLemon	   INPUT[94]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.756594-0500	RedLemon	   INPUT[95]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.759732-0500	RedLemon	   INPUT[96]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.761166-0500	RedLemon	   INPUT[97]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.761727-0500	RedLemon	   INPUT[98]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.762327-0500	RedLemon	   INPUT[99]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:37.762943-0500	RedLemon	🔍 Searching SubDL for subtitles: tt2709692 (movie)
-default	18:36:37.763699-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:37.769351-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [439AA7BB-CA13-4C08-9F2C-FBACFF436EE6] (reporting strategy default)> on Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> was not selected for reporting
-default	18:36:37.770653-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:37.771970-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> now using Connection 28
-default	18:36:37.774039-0500	RedLemon	0x7f99cd1c2308 ID=8 Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> sent request, body N 0
-default	18:36:37.933557-0500	RedLemon	0x7f99cd1c2308 ID=8 Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> received response, status 200 content K
-default	18:36:37.934443-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> response ended
-default	18:36:37.935810-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> done using Connection 28
-default	18:36:37.936182-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> summary for task success {transaction_duration_ms=166, response_status=200, connection=28, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=163, response_duration_ms=2, request_bytes=166, response_bytes=1667, cache_hit=true}
-default	18:36:37.936444-0500	RedLemon	Task <E0041C53-E167-4835-A95B-CE024A631959>.<504> finished successfully
-default	18:36:37.941175-0500	RedLemon	✅ Found 10 total subtitle options from SubDL
-default	18:36:37.941327-0500	RedLemon	✅ Filtered to 10 English subtitles
-default	18:36:37.942101-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
-default	18:36:37.942270-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
-default	18:36:37.942811-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.943325-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.943645-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.943943-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.944118-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.944607-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.944930-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.945230-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.945565-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.945744-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.946171-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.946626-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.947562-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.949290-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.949547-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.950040-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.950216-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.952615-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.952991-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.953453-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.954216-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.954559-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.954890-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.955045-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.955199-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.955545-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.955869-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.956629-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.956949-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.957273-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.957417-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.957707-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.958029-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.959744-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.960199-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.960530-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.960819-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.961287-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.961879-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.962591-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.962938-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.963207-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.963363-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.963527-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.963836-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.963984-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.964291-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.965501-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.965807-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.967140-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.967428-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.967780-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.968116-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.968291-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.968736-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.968997-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.969356-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.969696-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.969878-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.970208-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.970377-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.970743-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.971231-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.971616-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.972385-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.973165-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.973639-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.974014-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.974210-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.974597-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.975398-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.975780-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.975969-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.976298-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.976461-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.977045-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.977494-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.977653-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.977972-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.978110-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.978442-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.978929-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.979134-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.979686-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.980163-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:37.980305-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.980632-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.980808-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.981159-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.981453-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:37.981606-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.982090-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.982254-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.982711-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.983115-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.983557-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.984261-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.985069-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.985687-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.986426-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:37.986576-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.986737-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.987063-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.987220-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.987796-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.990457-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.990756-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.991291-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.991444-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.992172-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.992522-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.992697-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.993009-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.993169-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.993505-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.993853-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.994028-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.994342-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.994508-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.994843-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.995179-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.995358-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.996293-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.996604-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:37.996773-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.997292-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.997477-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.997807-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.997960-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:37.998289-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:37.998625-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:37.998801-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:37.999110-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:37.999243-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.999696-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.000154-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.000333-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.001264-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.001708-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.002106-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.002228-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.002537-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.002996-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.003158-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.003549-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.003962-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.004142-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.004473-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.004640-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.004987-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.005327-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.005500-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.006089-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.006444-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.006925-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.007285-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.007468-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.007787-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.007953-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.008681-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.009063-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.009243-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.009596-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.009943-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.010240-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.010413-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.010586-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.011044-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.011297-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.011713-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.012064-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.012252-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.012696-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.013041-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.013376-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.013550-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.013895-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.014168-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:38.014332-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.014667-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.014841-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.015273-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.015449-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.016094-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.016603-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.016801-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.017324-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.017852-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:38.018346-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.019507-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.019824-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.020261-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.020451-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.021281-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.021687-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.021867-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.022198-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.022367-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.022701-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.023030-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.023205-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.023668-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.024079-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.024446-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.024575-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.024732-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.025373-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.025599-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.026213-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.026607-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.026791-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.027112-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.027280-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.027615-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.027955-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.028131-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.028549-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.028732-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.029098-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.029465-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.029632-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.029943-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.030106-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.030441-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.030785-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.030960-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.031306-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.031645-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.032412-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.032555-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.032717-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.033035-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.033340-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.033714-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.034040-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.034188-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.034511-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.034677-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.035017-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.035490-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.035655-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.036021-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.036367-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.036667-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.036988-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.037272-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.037677-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.038033-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.038600-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.038728-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.039015-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.039500-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.039628-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.039942-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.040393-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.040646-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.041121-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.041248-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.042206-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.042851-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.043008-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.043342-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.043509-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.043850-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.044241-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.044428-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.044832-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.045177-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.045471-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.045633-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.045792-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.046154-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.046498-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.046816-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.046988-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.047144-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.047698-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.048329-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.048616-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.048746-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.048871-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.049108-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.049209-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.049588-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.049940-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.050082-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.050393-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.050800-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.051286-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.051681-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.052139-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.052761-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.053482-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.053982-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.054164-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.054692-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.055195-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.055356-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.055805-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.056269-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.056453-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.056932-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.057077-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.057398-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.057742-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.057919-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.058408-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.058686-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.059043-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.059340-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.059516-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.060663-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.060831-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.061275-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.061706-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.061860-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.062216-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.062586-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.063038-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.063169-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.063324-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.063651-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.063822-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.064192-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.064570-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.064706-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.065156-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.065279-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.065841-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.066338-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.066627-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.067630-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.068528-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.069159-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.069394-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.069566-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.070048-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.070456-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.071448-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.072973-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.073208-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.074563-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.076919-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.077653-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.078052-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.078233-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.079493-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.079803-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.080495-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.081082-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.081401-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.081923-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.082273-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.082699-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.083251-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.083566-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.084896-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.086591-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.087348-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.087929-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.088232-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.088855-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.089092-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.089535-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.090091-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.090667-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.091109-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.091458-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.091866-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.093010-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.093492-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.094249-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.094830-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.095448-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.096031-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.096224-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.096744-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.097495-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.098452-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.099462-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.100054-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.100528-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.101054-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:38.101320-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.101703-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.102026-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.102572-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.103044-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:38.103238-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.103723-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.103928-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.105529-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.106436-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.106980-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.107141-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.107670-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.108115-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.108920-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.109076-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.109510-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.109978-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.110371-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.110558-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.111310-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.111745-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.112200-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.112374-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.112735-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.113049-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.113337-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.113507-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.113948-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.114378-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.114695-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.115180-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.115343-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.115520-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.117048-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.117904-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.118761-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.119488-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.119831-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.122348-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.123254-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.123990-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.124377-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.124571-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.124963-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.125643-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.126015-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.126199-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.126369-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.126744-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.127105-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.127439-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.127712-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.127949-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.128643-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.128998-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.129297-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.129455-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.129618-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.129987-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.130342-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.130630-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.130801-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.130964-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.131331-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.131684-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.131992-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.132157-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.132328-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.133462-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.133795-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.134252-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:38.134413-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.134582-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.134929-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.135108-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.135461-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.135816-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.135993-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.136328-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.136498-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.136841-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.137181-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.137361-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.138037-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.138256-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.138647-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.139066-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.139219-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.139549-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.139719-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.140058-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.140402-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.140578-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.140912-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.141082-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.141423-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.142174-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.142332-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.142844-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.143486-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.144449-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.144874-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.145044-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.145457-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:38.145636-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:38.145987-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:38.146343-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:38.146522-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:38.146656-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 100
-default	18:36:38.146858-0500	RedLemon	   OUTPUT[0]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.147043-0500	RedLemon	   OUTPUT[1]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.147221-0500	RedLemon	   OUTPUT[2]: The Grinch (2018) MULTi VF2 [1080p] BluRay x264-PopHD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.147391-0500	RedLemon	   OUTPUT[3]: The Grinch 2018 BDRip 1080p LT EN LTSubs mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.147655-0500	RedLemon	   OUTPUT[4]: The Grinch 2018 2160p 4K BluRay x265 10bit AAC5 1-[YTS MX] mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.148109-0500	RedLemon	   OUTPUT[5]: The Grinch 2018 1080 WEB-DL KP 3xRus Ukr Eng Localization mkv | Unknown | zilean | Subtitles: 3
-default	18:36:38.148422-0500	RedLemon	   OUTPUT[6]: The Grinch 2018 1080p 3D BluRay Half-SBS x264 TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:38.148694-0500	RedLemon	   OUTPUT[7]: The Grinch 2018 UHD BluRay 2160p DDP 7 1 DV HDR x265-hallowed mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.149149-0500	RedLemon	   OUTPUT[8]: The Grinch 2018 2160p UHDRemux HDR DV-TheEqualizer mp4 | 2160p | zilean | Subtitles: 3
-default	18:36:38.149401-0500	RedLemon	   OUTPUT[9]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.149596-0500	RedLemon	   OUTPUT[10]: the grinch 2018 1080p bluray x264 CZ-SK mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.149780-0500	RedLemon	   OUTPUT[11]: The Grinch 2018 1080p 3D BluRay AVC TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:38.149952-0500	RedLemon	   OUTPUT[12]: The Grinch 2018 1080p 10bit BluRay 8CH x265 HEVC-PSA mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.150130-0500	RedLemon	   OUTPUT[13]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 HEVC REMUX-FraMeSToR | 2160p | zilean | Subtitles: 3
-default	18:36:38.150291-0500	RedLemon	   OUTPUT[14]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean | Subtitles: 3
-default	18:36:38.150574-0500	RedLemon	   OUTPUT[15]: Grinch+2018+CZ+Dabing+FullHD+1080p mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.150886-0500	RedLemon	   OUTPUT[16]: The Grinch 2018 MULTi 1080p BluRay x264 AC3-EXTREME mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.151304-0500	RedLemon	   OUTPUT[17]: The Grinch 2018 SLOSinh 720p BluRay x264-DrSi | 720p | zilean | Subtitles: 3
-default	18:36:38.151690-0500	RedLemon	   OUTPUT[18]: The Grinch 2018 SLOSINH 720p BluRay x264 DD 5 1-INFIRE mkv | 720p | zilean | Subtitles: 3
-default	18:36:38.152178-0500	RedLemon	   OUTPUT[19]: Grinch (2018) [BluRay] [3D] [HSBS] [YTS AM] | Unknown | zilean | Subtitles: 3
-default	18:36:38.152729-0500	RedLemon	   OUTPUT[20]: The Grinch 2018 BDRemux 2160p Ukr Eng mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.153081-0500	RedLemon	   OUTPUT[21]: The Grinch 2018 MULTi 1080p BluRay Light x264 AC3-ACOOL mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.153443-0500	RedLemon	   OUTPUT[22]: The Grinch 2018 1080p AMZN WEB-DL DDP5 1 H 264-MZABI mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.153796-0500	RedLemon	   OUTPUT[23]: The Grinch 2018 NORDiC ENG 1080p BluRay x264-RAPiDCOWS mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.154109-0500	RedLemon	   OUTPUT[24]: The Grinch 2018 1080p BluRay DD 5 1 x264 ESub [MW] mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.154376-0500	RedLemon	   OUTPUT[25]: Grinch 2018 720p WEB-DL MkvCage ws mkv | 720p | zilean | Subtitles: 3
-default	18:36:38.154740-0500	RedLemon	   OUTPUT[26]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.155059-0500	RedLemon	   OUTPUT[27]: The Grinch 2018 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
-default	18:36:38.155299-0500	RedLemon	   OUTPUT[28]: The Grinch (2018) 2160p HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.155487-0500	RedLemon	   OUTPUT[29]: The Grinch (2018) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean | Subtitles: 3
-default	18:36:38.155657-0500	RedLemon	   OUTPUT[30]: The Grinch 2018 1080p 5 1 EST-ENG Blurip FLY635 mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.155827-0500	RedLemon	   OUTPUT[31]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.155997-0500	RedLemon	   OUTPUT[32]: The Grinch 2018 1080p WEB-DL DD5 1 H264-CMRG[EtHD] mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.156162-0500	RedLemon	   OUTPUT[33]: The Grinch 2018 2160p UHD BluRay DV HDR TrueHD Atmos 7 1 x265-BiTOR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.156476-0500	RedLemon	   OUTPUT[34]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST | 1080p | zilean | Subtitles: 3
-default	18:36:38.156770-0500	RedLemon	   OUTPUT[35]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean | Subtitles: 3
-default	18:36:38.156964-0500	RedLemon	   OUTPUT[36]: The Grinch 2018 720p BluRay x264-[YTS AM] mp4 | 720p | zilean | Subtitles: 3
-default	18:36:38.157141-0500	RedLemon	   OUTPUT[37]: The Grinch (2018) [WEBRip] [1080p] [YTS AM] | 1080p | zilean | Subtitles: 3
-default	18:36:38.157305-0500	RedLemon	   OUTPUT[38]: The Grinch 2018 REPACK 720p BluRay x264-BONSAI mkv | 720p | zilean | Subtitles: 3
-default	18:36:38.157476-0500	RedLemon	   OUTPUT[39]: The Grinch 2018 BDRip 1080p X265 Ac3-GANJAMAN mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.158054-0500	RedLemon	   OUTPUT[40]: The Grinch 2018 1080p BluRay x264 TrueHD 7 1 Atmos-FGT mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.158411-0500	RedLemon	   OUTPUT[41]: The Grinch (2018) x 1616 (2160p) HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.159007-0500	RedLemon	   OUTPUT[42]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.159229-0500	RedLemon	   OUTPUT[43]: The Grinch 2018 MULTi 1080p BluRay x264-VENUE mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.159614-0500	RedLemon	   OUTPUT[44]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.159837-0500	RedLemon	   OUTPUT[45]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.160080-0500	RedLemon	   OUTPUT[46]: The Grinch 2018 2160p UHD BluRay X265-IAMABLE | 2160p | zilean | Subtitles: 3
-default	18:36:38.160342-0500	RedLemon	   OUTPUT[47]: Grinch 2018 BDRemux 1080p NNMClub mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.160650-0500	RedLemon	   OUTPUT[48]: The Grinch 2018 1080p BDRip x264 AC3-iCMAL mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.160844-0500	RedLemon	   OUTPUT[49]: The Grinch 2018 UHD 4K BluRay 2160p DoVi HDR TrueHD 7 1 Atmos H 265-MgB | 2160p | zilean | Subtitles: 3
-default	18:36:38.161027-0500	RedLemon	   OUTPUT[50]: The Grinch 2018 Multi UHD BluRay 2160p x265 HDR Atmos 7 1-DTOne | 2160p | zilean | Subtitles: 3
-default	18:36:38.161201-0500	RedLemon	   OUTPUT[51]: The Grinch 2018 Lic BDRip 1080p seleZen mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.161375-0500	RedLemon	   OUTPUT[52]: The Grinch 2018 BluRay 1080p DTS AC3 x264-MgB mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.161545-0500	RedLemon	   OUTPUT[53]: The Grinch 2018 BluRay 1080p DTS-HD MA TrueHD 7 1 Atmos x264-MgB mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.161711-0500	RedLemon	   OUTPUT[54]: The Grinch 2018 2160p BluRay REMUX HEVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 2160p | zilean | Subtitles: 3
-default	18:36:38.161889-0500	RedLemon	   OUTPUT[55]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.162365-0500	RedLemon	   OUTPUT[56]: The Grinch 2018 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean | Subtitles: 3
-default	18:36:38.162642-0500	RedLemon	   OUTPUT[57]: The Grinch 2018 MULTI 1080p BluRay REMUX-DDB | 1080p | zilean | Subtitles: 3
-default	18:36:38.162997-0500	RedLemon	   OUTPUT[58]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.163187-0500	RedLemon	   OUTPUT[59]: The Grinch 2018 2160p BluRay x265 10bit HDR DTS-HD MA TrueHD 7 1 Atmos-SWTYBLZ mkv | 2160p | zilean | Subtitles: 3
-default	18:36:38.163353-0500	RedLemon	   OUTPUT[60]: The Grinch (2018) MULTi VF2 1080p Bluray x264-AW mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.163523-0500	RedLemon	   OUTPUT[61]: The Grinch 2018 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
-default	18:36:38.163686-0500	RedLemon	   OUTPUT[62]: The Grinch 2018 1080p BluRay REMUX AVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:38.163856-0500	RedLemon	   OUTPUT[63]: The Grinch (2018) (1080p BluRay x265 HEVC 10bit AAC 7 1 Tigole) | 1080p | zilean | Subtitles: 3
-default	18:36:38.164022-0500	RedLemon	   OUTPUT[64]: The Grinch 2018 2160p UHD EAC3 DoVi - SumVision mp4 | 2160p | zilean | Subtitles: 3
-default	18:36:38.164187-0500	RedLemon	   OUTPUT[65]: The Grinch 2018 1080p WEB-DL DD5 1 H264-FGT mkv | 1080p | zilean | Subtitles: 3
-default	18:36:38.164360-0500	RedLemon	   OUTPUT[66]: The Grinch 2018 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
-default	18:36:38.164518-0500	RedLemon	   OUTPUT[67]: Гринч / The Grinch (2018) UHD BDRemux 2160p | 4K | HDR | Dolby Vision Profile 8 | Лицензия
-👤 2 💾 36.71 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 2160p | torrentio | Subtitles: 3
-default	18:36:38.164666-0500	RedLemon	   OUTPUT[68]: El Grinch [4K UHDremux][2160p][HDR][Dolby Digital Plus 7.1-AC3 5.1 Castellano-TrueHD 7.1-Ingles+Subs][ES-EN]
-👤 1 💾 39.89 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 2160p | torrentio | Subtitles: 3
-default	18:36:38.164767-0500	RedLemon	   OUTPUT[69]: The.Grinch.2018.2160p.BluRay.HEVC.TrueHD.7.1.Atmos-BHD
-👤 7 💾 78.92 GB ⚙️ RARBG | 2160p | torrentio | Subtitles: 3
-default	18:36:38.164849-0500	RedLemon	   OUTPUT[70]: Videos cosas
-El Grinch [MicroHD][1080p][DTS-AC3 5.1-Castellano-AC3 5.1-Ingles+Subs-ES-EN]/ElGrinchM1080.www.newpct.com.mkv
-👤 407 💾 4.17 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:38.164921-0500	RedLemon	   OUTPUT[71]: El Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]
-👤 3 💾 10.04 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:38.164987-0500	RedLemon	   OUTPUT[72]: The.Grinch.2018.1080p.BluRay.x264.DTS-HD.MA.7.1-FGT
-👤 2 💾 6.35 GB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
-default	18:36:38.165081-0500	RedLemon	   OUTPUT[73]: Veliki.paket.titlovanih.filmova.2025.08.1080p.x264.[ExYuSubs]
-Christmas.movie.pack.1080p.WEBRip.x264.[ExYuSubs]/The.Grinch.2018.1080p.WEBRip.x264.[ExYuSubs].mkv
-👤 1 💾 2 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	18:36:38.165153-0500	RedLemon	   OUTPUT[74]: El.grinch.2018.1080P-Dual-Lat.mp4
-👤 1 💾 1.38 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | Unknown | torrentio | Subtitles: 3
-default	18:36:38.165225-0500	RedLemon	   OUTPUT[75]: zPelis3D
-Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN].mkv
-👤 1 💾 10.04 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:38.165292-0500	RedLemon	   OUTPUT[76]: The.Grinch.2018.MULTI.1080p.WEB.H264
-👤 1 💾 3 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 1080p | torrentio | Subtitles: 3
-default	18:36:38.165358-0500	RedLemon	   OUTPUT[77]: The.Grinch.2018.MULTi.720p.BluRay.x264.AC3-EXTREME
-👤 3 💾 2.41 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 720p | torrentio | Subtitles: 3
-default	18:36:38.165430-0500	RedLemon	   OUTPUT[78]: The Grinch 2018 720p WEBRip
-👤 1 💾 732.31 MB ⚙️ YTS | 720p | torrentio | Subtitles: 3
-default	18:36:38.165496-0500	RedLemon	   OUTPUT[79]: The.Grinch.2018.TRUEFRENCH.BDRip.XviD-EXTREME
-👤 4 💾 694.58 MB ⚙️ Torrent9
-🇫🇷 | Unknown | torrentio | Subtitles: 3
-default	18:36:38.165563-0500	RedLemon	   OUTPUT[80]: Гринч / The Grinch (2018) BDRip от MegaPeer | Лицензия
-👤 4 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	18:36:38.165627-0500	RedLemon	   OUTPUT[81]: The.Grinch.2018.BluRay.BD25.3D.AVC.TrueHD.7.1.Atmos
-👤 4 💾 22.52 GB ⚙️ ThePirateBay | Unknown | torrentio | Subtitles: 3
-default	18:36:38.165693-0500	RedLemon	   OUTPUT[82]: El Grinch [BluRay Rip][AC3 5.1 Castellano][2019][www.pctnew.com]
-👤 2 💾 1.53 GB ⚙️ MejorTorrent
-🇪🇸 | Unknown | torrentio | Subtitles: 3
-default	18:36:38.165755-0500	RedLemon	   OUTPUT[83]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.165812-0500	RedLemon	   OUTPUT[84]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.165869-0500	RedLemon	   OUTPUT[85]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.165925-0500	RedLemon	   OUTPUT[86]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166003-0500	RedLemon	   OUTPUT[87]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166101-0500	RedLemon	   OUTPUT[88]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166201-0500	RedLemon	   OUTPUT[89]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166282-0500	RedLemon	   OUTPUT[90]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166363-0500	RedLemon	   OUTPUT[91]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166615-0500	RedLemon	   OUTPUT[92]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:38.166737-0500	RedLemon	   OUTPUT[93]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.166842-0500	RedLemon	   OUTPUT[94]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.166944-0500	RedLemon	   OUTPUT[95]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.167047-0500	RedLemon	   OUTPUT[96]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.167154-0500	RedLemon	   OUTPUT[97]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.167263-0500	RedLemon	   OUTPUT[98]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.167370-0500	RedLemon	   OUTPUT[99]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:38.260437-0500	runningboardd	Invalidating assertion 173-20526-2973 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:38.395248-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> received response, status 200 content K
-default	18:36:38.395368-0500	RedLemon	🎬 Guest: Starting playback after database fallback detection
-default	18:36:38.395519-0500	RedLemon	🎬 Guest: Launching player for The Grinch via database fallback
-default	18:36:38.395776-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> response ended
-default	18:36:38.395787-0500	RedLemon	   Quality: 1080p
-default	18:36:38.395837-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> done using Connection 42
-default	18:36:38.396078-0500	RedLemon	   Mode: watchParty
-default	18:36:38.396302-0500	RedLemon	📡 Fetching metadata for tt2709692...
-default	18:36:38.396589-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> summary for task success {transaction_duration_ms=1083, response_status=200, connection=42, reused=1, request_start_ms=18, request_duration_ms=0, response_start_ms=1081, response_duration_ms=1, request_bytes=277, response_bytes=18258, cache_hit=false}
-default	18:36:38.397161-0500	RedLemon	Task <785EDDAC-854A-4AAE-90B2-38AFBFEEECEE>.<6> finished successfully
-default	18:36:38.421542-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:38.421588-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:38.421633-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:38.425299-0500	runningboardd	Invalidating assertion 173-114-2974 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:38.455202-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:38.455638-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FD6F1D3F-35CA-4169-A168-2163FF8DEE8E] (reporting strategy default)> on Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> was not selected for reporting
-default	18:36:38.457163-0500	RedLemon	Connection 56: starting, TC(0x0)
-default	18:36:38.458774-0500	RedLemon	[C56 CF5FFE2B-FC63-4B85-95F4-7ED647548770 127.0.0.1:47253 tcp, url hash: e0e54db1, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{BF2F6868-1060-43B4-B168-BD518BBE4D78}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:38.459031-0500	RedLemon	[C56 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
-default	18:36:38.459620-0500	RedLemon	[C56 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: 1E18D319-C720-418F-AABE-CFA3E8068194
-default	18:36:38.462635-0500	RedLemon	[C56 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.003s
-default	18:36:38.462682-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C56] reporting state preparing
-default	18:36:38.462963-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> setting up Connection 56
-default	18:36:38.463696-0500	RedLemon	nw_socket_handle_socket_event [C56:2] Socket received CONNECTED event
-default	18:36:38.463840-0500	RedLemon	nw_flow_connected [C56 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
-default	18:36:38.463897-0500	RedLemon	[C56 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.004s
-default	18:36:38.463953-0500	RedLemon	nw_flow_connected [C56 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:38.464114-0500	RedLemon	[C56 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.005s
-default	18:36:38.464240-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C56] reporting state ready
-default	18:36:38.464294-0500	RedLemon	[C56 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.005s
-default	18:36:38.464361-0500	RedLemon	Connection 56: connected successfully
-default	18:36:38.464452-0500	RedLemon	Connection 56: ready C(N) E(N)
-default	18:36:38.464632-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> now using Connection 56
-default	18:36:38.464821-0500	RedLemon	Connection 56: received viability advisory(Y)
-default	18:36:38.466923-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> sent request, body S 90
-default	18:36:38.469974-0500	RedLemon	🔓 Unlock request: infoHash=186f26abcf3d..., fileIdx=0
-default	18:36:38.470431-0500	RedLemon	✅ Token found, attempting unlock...
-default	18:36:38.471338-0500	RedLemon	✅ Unlocked successfully: The.Grinch.2018.BDRip.1080p.LT.EN.LTSubs.mkv
-default	18:36:38.477185-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> received response, status 200 content K
-default	18:36:38.499061-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> response ended
-default	18:36:38.499891-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> done using Connection 56
-default	18:36:38.500185-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> summary for task success {transaction_duration_ms=44, response_status=200, connection=56, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=2, secure_connection_duration_ms=0, private_relay=false, request_start_ms=8, request_duration_ms=1, response_start_ms=21, response_duration_ms=22, request_bytes=372, response_bytes=323, cache_hit=true}
-default	18:36:38.500643-0500	RedLemon	Task <8A12F9D8-BC33-4B52-9CE3-E5D3D3C8B9D8>.<505> finished successfully
-default	18:36:38.501266-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
-default	18:36:38.501635-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:38.501635-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:38.501904-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:38.504167-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BE1352BC-BD9E-4DD3-8AA8-EAB3FC08246E] (reporting strategy default)> on Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> was not selected for reporting
-default	18:36:38.508594-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [954901DD-3060-4199-8350-9CA6A8797DE9] (reporting strategy default)> on Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> was not selected for reporting
-default	18:36:38.514792-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2BA12F44-5BE6-4289-BECA-7E85BF88E2F8] (reporting strategy default)> on Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> was not selected for reporting
-default	18:36:38.522758-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:38.523092-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> now using Connection 33
-default	18:36:38.533895-0500	RedLemon	✅ StreamService: Using provided metadata: The Grinch
-default	18:36:38.534073-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
-default	18:36:38.534298-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt2709692, type=movie, year=2018
-default	18:36:38.534799-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> resuming, timeouts(30.0, 300.0) QOS(0x21) Voucher (null)
-default	18:36:38.535725-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CA3A9BFD-9D08-40FD-8032-36D2AA0207CD] (reporting strategy default)> on Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> was not selected for reporting
-default	18:36:38.537733-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:38.538031-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> now using Connection 33
-default	18:36:38.540913-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2975 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:38.540616-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> now using Connection 42
-default	18:36:38.540806-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:38.541076-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> now using Connection 33
-default	18:36:38.542644-0500	runningboardd	Assertion 173-20526-2975 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:38.542943-0500	RedLemon	0x7f99d0c6edb8 ID=24 Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> sent request, body N 0
-default	18:36:38.543005-0500	RedLemon	0x7f99d0c32f48 ID=28 Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> sent request, body N 0
-default	18:36:38.543051-0500	RedLemon	0x7f99cfc9b3a8 ID=32 Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> sent request, body N 0
-default	18:36:38.543378-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> sent request, body N 0
-default	18:36:38.548309-0500	RedLemon	Task <4E13B119-29FE-4BB5-BE37-F02195AF1756>.<509> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:38.549596-0500	RedLemon	Task <7BAD0229-FF3A-46AA-BD75-76B9F9EE3D61>.<510> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:38.551812-0500	RedLemon	Task <CCB08BB3-CAE4-490E-BF5F-5DB9C1ACA922>.<511> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:38.557188-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [923019DE-3424-47FA-8F5C-B8EADEC1EE75] (reporting strategy default)> on Task <7BAD0229-FF3A-46AA-BD75-76B9F9EE3D61>.<510> was not selected for reporting
-default	18:36:38.557719-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:38.558032-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E49378EC-D675-4963-A642-9472F27760AD] (reporting strategy default)> on Task <4E13B119-29FE-4BB5-BE37-F02195AF1756>.<509> was not selected for reporting
-default	18:36:38.558187-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DCA2560A-22EE-4C34-8366-EBE4D77C831B] (reporting strategy default)> on Task <CCB08BB3-CAE4-490E-BF5F-5DB9C1ACA922>.<511> was not selected for reporting
-default	18:36:38.559751-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3FA88F6D-601C-47A9-8392-FA93340BCEC8] (reporting strategy default)> on Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> was not selected for reporting
-default	18:36:38.564299-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:38.564325-0500	RedLemon	Task <7BAD0229-FF3A-46AA-BD75-76B9F9EE3D61>.<510> summary for task success {transaction_duration_ms=6, response_status=200, cache_hit=true}
-default	18:36:38.564439-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:38.564599-0500	RedLemon	Task <7BAD0229-FF3A-46AA-BD75-76B9F9EE3D61>.<510> finished successfully
-default	18:36:38.564692-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> now using Connection 24
-default	18:36:38.564934-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> sent request, body N 0
-default	18:36:38.565381-0500	RedLemon	Task <4E13B119-29FE-4BB5-BE37-F02195AF1756>.<509> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
-default	18:36:38.565727-0500	RedLemon	Task <4E13B119-29FE-4BB5-BE37-F02195AF1756>.<509> finished successfully
-default	18:36:38.565828-0500	RedLemon	Task <CCB08BB3-CAE4-490E-BF5F-5DB9C1ACA922>.<511> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
-default	18:36:38.566031-0500	RedLemon	Task <CCB08BB3-CAE4-490E-BF5F-5DB9C1ACA922>.<511> finished successfully
-default	18:36:38.570605-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:38.570945-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:38.574779-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2976 target:20526 attributes:[
+default	13:18:54.683130-0500	RedLemon	   INPUT[59]: [RD⚡] Comet unknown | unknown | comet
+default	13:18:54.683589-0500	RedLemon	🔍 Searching SubDL for subtitles: tt0903747 (movie)
+default	13:18:54.683958-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:18:54.685904-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7B775B18-3B12-4598-A254-93BA8A566B2F] (reporting strategy default)> on Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> was not selected for reporting
+default	13:18:54.687813-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:54.688116-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> now using Connection 58
+default	13:18:54.688566-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:54.689130-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:54.689295-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:54.689274-0500	RedLemon	0x7f90ad756488 ID=8 Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> sent request, body N 0
+default	13:18:54.692398-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1111 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:38.588291-0500	runningboardd	Assertion 173-114-2976 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:38.682835-0500	RedLemon	0x7f99d0c32f48 ID=28 Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> received response, status 200 content U
-default	18:36:38.688560-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> response ended
-default	18:36:38.689034-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> done using Connection 33
-default	18:36:38.689344-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> summary for task success {transaction_duration_ms=170, response_status=200, connection=33, reused=1, request_start_ms=18, request_duration_ms=4, response_start_ms=163, response_duration_ms=6, request_bytes=111, response_bytes=34965, cache_hit=true}
-default	18:36:38.689908-0500	RedLemon	Task <B1E13060-4826-4694-A62B-B94EDBBD4F9F>.<508> finished successfully
-default	18:36:38.692816-0500	RedLemon	0x7f99cfc9b3a8 ID=32 Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> received response, status 200 content U
-default	18:36:38.695018-0500	RedLemon	0x7f99d0c6edb8 ID=24 Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> received response, status 200 content U
-default	18:36:38.697969-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> response ended
-default	18:36:38.698332-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> done using Connection 33
-default	18:36:38.698550-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> summary for task success {transaction_duration_ms=177, response_status=200, connection=33, reused=1, request_start_ms=20, request_duration_ms=1, response_start_ms=171, response_duration_ms=5, request_bytes=111, response_bytes=34825, cache_hit=true}
-default	18:36:38.699073-0500	RedLemon	Task <B12330CD-3F8E-4E1C-88AF-966F5B3BCA05>.<507> finished successfully
-default	18:36:38.700695-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> response ended
-default	18:36:38.701282-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> done using Connection 33
-default	18:36:38.701761-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> summary for task success {transaction_duration_ms=184, response_status=200, connection=33, reused=1, request_start_ms=5, request_duration_ms=19, response_start_ms=177, response_duration_ms=6, request_bytes=112, response_bytes=28209, cache_hit=true}
-default	18:36:38.701977-0500	RedLemon	Task <661558F3-23B6-43F9-9FB0-E968576873FA>.<506> finished successfully
-default	18:36:38.736995-0500	RedLemon	🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi8-4.download.real-debrid.com/d/ELP3NVVGTYSOS23/Th, subtitles: 3
-default	18:36:38.754551-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> received response, status 200 content U
-default	18:36:38.772531-0500	RedLemon	✅ Stream ready, starting playback...
-default	18:36:38.772631-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
-default	18:36:38.772856-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7f99cd0f6640>
-default	18:36:38.772983-0500	RedLemon	   Is fullscreen: 0
-default	18:36:38.773080-0500	RedLemon	   ✅ WindowManager: Toggling fullscreen ON
-default	18:36:38.813246-0500	RedLemon	🖼️ Setting up MPV with native macOS video output...
-default	18:36:38.818435-0500	RedLemon	✅ MPV initialized with native GPU rendering
-default	18:36:38.821978-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task starting - About to call loadStream
-default	18:36:38.822141-0500	RedLemon	🎬🎬🎬 Subtitles: 3
-default	18:36:38.822366-0500	RedLemon	🎬🎬🎬 LOADSTREAM CALLED - streamTitle: The Grinch
-default	18:36:38.822561-0500	RedLemon	🎬🎬🎬 streamURL: https://chi8-4.download.real-debrid.com/d/ELP3NVVGTYSOS23/Th
-default	18:36:38.822683-0500	RedLemon	🎬🎬🎬 subtitles: 3
-default	18:36:38.824728-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:38.833090-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D80A7A4E-F994-4D38-B742-DF42B27682E1] (reporting strategy default)> on Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> was not selected for reporting
-default	18:36:38.851919-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> now using Connection 56
-default	18:36:38.864757-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> sent request, body N 0
-default	18:36:38.885054-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> done using Connection 24
-default	18:36:38.885561-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> response ended
-default	18:36:38.888859-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> summary for task success {transaction_duration_ms=325, response_status=200, connection=24, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=191, response_duration_ms=133, request_bytes=483, response_bytes=2729, cache_hit=true}
-default	18:36:38.890784-0500	RedLemon	Task <25080F2A-781C-4B9A-B511-95800987A82F>.<512> finished successfully
-default	18:36:38.929375-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 100
-default	18:36:38.929563-0500	RedLemon	   INPUT[0]: The Grinch 2018 UHD 4K BluRay 2160p DoVi HDR TrueHD 7.1 Atmos H.265-MgB
-👤 9 💾 16.6 GB ⚙️ 1337x | 2160p | torrentio
-default	18:36:38.929697-0500	RedLemon	   INPUT[1]: The.Grinch.2018.Multi.UHD.BluRay.2160p.x265.HDR.Atmos.7.1-DTOne
-👤 8 💾 5.64 GB ⚙️ ThePirateBay
-Multi Audio | 2160p | torrentio
-default	18:36:38.929817-0500	RedLemon	   INPUT[2]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR
-👤 2 💾 44.28 GB ⚙️ 1337x | 2160p | torrentio
-default	18:36:38.930205-0500	RedLemon	   INPUT[3]: Гринч / The Grinch (2018) UHD BDRemux 2160p | 4K | HDR | Dolby Vision Profile 8 | Лицензия
-👤 2 💾 36.71 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 2160p | torrentio
-default	18:36:38.929421-0500	runningboardd	Invalidating assertion 173-171-2942 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	18:36:38.930551-0500	RedLemon	   INPUT[4]: El Grinch [4K UHDremux][2160p][HDR][Dolby Digital Plus 7.1-AC3 5.1 Castellano-TrueHD 7.1-Ingles+Subs][ES-EN]
-👤 1 💾 39.89 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 2160p | torrentio
-default	18:36:38.930706-0500	RedLemon	   INPUT[5]: The Grinch 2018 2160p BluRay
-👤 45 💾 4.41 GB ⚙️ YTS | 2160p | torrentio
-default	18:36:38.930830-0500	RedLemon	   INPUT[6]: The.Grinch.2018.2160p.BluRay.HEVC.TrueHD.7.1.Atmos-BHD
-👤 7 💾 78.92 GB ⚙️ RARBG | 2160p | torrentio
-default	18:36:38.931065-0500	RedLemon	   INPUT[7]: Videos cosas
-El Grinch [MicroHD][1080p][DTS-AC3 5.1-Castellano-AC3 5.1-Ingles+Subs-ES-EN]/ElGrinchM1080.www.newpct.com.mkv
-👤 407 💾 4.17 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:38.930258-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-2980 target:20526 attributes:[
+default	13:18:54.692563-0500	runningboardd	Assertion 173-114-1111 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:54.706883-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.790183-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.865580-0500	RedLemon	0x7f90ad756488 ID=8 Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> received response, status 200 content K
+default	13:18:54.866420-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> response ended
+default	13:18:54.867160-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> done using Connection 58
+default	13:18:54.867882-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> summary for task success {transaction_duration_ms=181, response_status=200, connection=58, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=178, response_duration_ms=2, request_bytes=166, response_bytes=1598, cache_hit=true}
+default	13:18:54.868319-0500	RedLemon	Task <62EFFA2D-8212-4A68-9EF7-8D95809F8F4E>.<651> finished successfully
+default	13:18:54.876545-0500	RedLemon	✅ Found 10 total subtitle options from SubDL
+default	13:18:54.876705-0500	RedLemon	✅ Filtered to 10 English subtitles
+default	13:18:54.877280-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
+default	13:18:54.877422-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
+default	13:18:54.877836-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.877993-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.878377-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.878547-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.878993-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.879122-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.879436-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.879782-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.879905-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.880203-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.880345-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.880660-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.880808-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.880963-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.881279-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.881407-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.882524-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.885838-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.886706-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.887202-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.887238-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.887454-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.887800-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.887924-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.888773-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.888915-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.889245-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.889391-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.889548-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.890048-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.890305-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.890919-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.891313-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.892143-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.892437-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.893074-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.893521-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.893641-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.893969-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.894110-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.894470-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.894587-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.894912-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.895248-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.895364-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.895688-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.895853-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.896285-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.896389-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.896531-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.896861-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.896996-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.897295-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.897419-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.898065-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.898272-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.898444-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.899449-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.899609-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.901946-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.902210-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.902693-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.902813-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.902968-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.903302-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.903424-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.904196-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.904535-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.905011-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.905313-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.905555-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.906039-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.906194-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.906764-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.907001-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.907562-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.907710-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.907865-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.908198-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.908313-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.908730-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.908890-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.909269-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.909396-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.909554-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.910836-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.911142-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.911657-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.911792-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.912173-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.912292-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.912447-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.912780-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.912921-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.913264-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.913386-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.913774-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.913913-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.914068-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.914581-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:18:54.914916-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:18:54.915235-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:18:54.915397-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.917135-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.917977-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.919492-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.919677-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.920099-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.920245-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.920399-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.920720-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.920850-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.921262-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.921456-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.921881-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.922035-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.922583-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.923078-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.923232-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.925858-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.926026-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.926573-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.926707-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.926867-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.927217-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.927367-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.927680-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.927809-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.928111-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.928244-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.928395-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.928720-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.928853-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.929164-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.929311-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.929620-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.929737-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.930111-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.931411-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.931670-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.932038-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.932202-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.932519-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.932652-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.932806-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.933119-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.933250-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.933604-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.935919-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.938827-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.939213-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.939872-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.940495-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.940682-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.941270-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.941406-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.941760-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.941879-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.942032-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.942363-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.942502-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.942838-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.942974-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.943487-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.943607-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.943753-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.945208-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.945399-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.945730-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.945878-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.946402-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.946598-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.946814-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.947135-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.947252-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.947686-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.947848-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.948303-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.948452-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.948668-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.949206-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.949333-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.952991-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.953387-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.954077-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.954221-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.954382-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.954724-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.954868-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.955265-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.955508-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.956002-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.956129-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.956269-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.959031-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.959240-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.959599-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.959737-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.960227-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.960369-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.960526-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.960865-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.960999-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.961364-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.961494-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.961945-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.962061-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.962218-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.962548-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.962694-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.962999-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.963134-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.963430-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.963552-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.963705-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.965249-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.965447-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.965779-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.965923-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.966231-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.966344-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.968322-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.969067-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.969372-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.970664-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.971127-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.971501-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.971631-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.971779-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.972109-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.972228-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.972799-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.973014-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.973671-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.973833-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.974219-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.974697-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:18:54.975060-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:18:54.975464-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:18:54.975598-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.976783-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.977006-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.977658-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.977781-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.978071-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.978199-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.978363-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.978732-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.978878-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.979232-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.979360-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.979695-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.979842-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.980001-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.980498-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:18:54.981003-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:18:54.981478-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:18:54.981633-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.983100-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.985889-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.986639-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.986820-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.987202-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.987355-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.987999-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.989049-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.989188-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.989556-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.989737-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.990454-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.990623-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.990994-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.991765-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.992109-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.992551-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.992692-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.993496-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.994479-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.994750-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.995342-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.995472-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.995876-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.996015-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.996424-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.996556-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:54.996717-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:54.997104-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.997236-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:54.997874-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.998084-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:54.998194-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:54.998559-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:54.999313-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.999685-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.002638-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.002969-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.003437-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.003592-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.004497-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.005124-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.005451-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.006020-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.006220-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.006823-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.006998-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.007569-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.007746-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.008052-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.008569-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.008699-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.009100-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.009238-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.010162-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.010441-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.010915-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.011498-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.011655-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.012069-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.012209-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.012562-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.012700-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.012859-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.013269-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.013400-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.013844-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.013977-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.014368-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.014524-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.014682-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.015270-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.015522-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.018656-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.019509-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.020131-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.020327-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.020639-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.021157-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.021377-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.023021-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.023323-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.024041-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.024454-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.024880-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.025798-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.026000-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.026591-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.026870-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.027420-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.027656-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.029140-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.029684-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.029861-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.030364-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.030622-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.031245-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.031420-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.031769-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.032362-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.032617-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.033124-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.037512-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.038124-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.038326-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.038669-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.039132-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.039395-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.039984-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.040235-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.041038-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.041610-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.041827-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.042331-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.042566-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.043622-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.043868-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.044394-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.044579-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.044855-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.045357-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.045559-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.046063-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.046242-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.046740-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.046941-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.047281-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.047813-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.047972-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.048688-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.049365-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.052151-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.053162-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.053673-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.054208-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.054461-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.055881-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.056113-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.056818-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.057229-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.057522-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.058291-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.058854-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.059318-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.059494-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.060599-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.060902-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.061160-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.061647-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.061870-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:18:55.062401-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.062555-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:18:55.063126-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:18:55.063381-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:18:55.063621-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:18:55.063857-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 60
+default	13:18:55.064203-0500	RedLemon	   OUTPUT[0]: Mirror Mirror 2012 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.064410-0500	RedLemon	   OUTPUT[1]: Mirror Mirror 2012 1080p BluRay x264-OFT mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.064698-0500	RedLemon	   OUTPUT[2]: Mirror Mirror 2012 720p BluRay x264 YIFY mp4 | 720p | zilean | Subtitles: 3
+default	13:18:55.064989-0500	RedLemon	   OUTPUT[3]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.065216-0500	RedLemon	   OUTPUT[4]: Mirror Mirror 2012 BluRay 1080p MULTi REMUX AVC DTS-HD MA 5 1-LEGi0N mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.068383-0500	RedLemon	   OUTPUT[5]: mirror-mirror_480p mp4 | 480p | zilean | Subtitles: 3
+default	13:18:55.069842-0500	RedLemon	   OUTPUT[6]: Mirror 1975 1080p BluRay REMUX AVC LPCM 1 0 EngSub-ShNK | 1080p | zilean | Subtitles: 3
+default	13:18:55.070137-0500	RedLemon	   OUTPUT[7]: Mirror Mirror 2012 1080p Bluray x264 anoXmous mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.070574-0500	RedLemon	   OUTPUT[8]: Mirror 1975 RUSSIAN 1080p BluRay x265-VXT mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.070933-0500	RedLemon	   OUTPUT[9]: The Mirror 1997 1080p WEB-DL AAC 2 0 x264 mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.071163-0500	RedLemon	   OUTPUT[10]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean | Subtitles: 3
+default	13:18:55.071393-0500	RedLemon	   OUTPUT[11]: Mirror Mirror 1990 1080p BluRay REMUX AVC FLAC 2 0-dOwn mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.071607-0500	RedLemon	   OUTPUT[12]: Mirror Mirror 2012 1080p BluRay x265-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.071943-0500	RedLemon	   OUTPUT[13]: Mirror Mirror 1990 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
+default	13:18:55.072153-0500	RedLemon	   OUTPUT[14]: The Mirror 2014 1080p WEBRip x264 AAC-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.072886-0500	RedLemon	   OUTPUT[15]: Mirror Mirror (1990) [1080p] [BluRay] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	13:18:55.073625-0500	RedLemon	   OUTPUT[16]: Mirror 1975 RUSSIAN 1080p BluRay H264 AAC-VXT | 1080p | zilean | Subtitles: 3
+default	13:18:55.074625-0500	RedLemon	   OUTPUT[17]: Mirror (1975) Criterion (1080p BluRay x265 HEVC 10bit AAC 1 0 Russian Tigole) | 1080p | zilean | Subtitles: 3
+default	13:18:55.074985-0500	RedLemon	   OUTPUT[18]: Mirror Mirror 1990 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.075221-0500	RedLemon	   OUTPUT[19]: Mirror Mirror 2012 1080p BDRip H264 AAC - KiNGDOM | 1080p | zilean | Subtitles: 3
+default	13:18:55.075464-0500	RedLemon	   OUTPUT[20]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean | Subtitles: 3
+default	13:18:55.075711-0500	RedLemon	   OUTPUT[21]: Mirror 1975 RUSSIAN 1080p BluRay x264 DTS-ZQ | 1080p | zilean | Subtitles: 3
+default	13:18:55.075992-0500	RedLemon	   OUTPUT[22]: Mirror Mirror 2022 1080p BluRay x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.076356-0500	RedLemon	   OUTPUT[23]: The Mirror 1975 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.076591-0500	RedLemon	   OUTPUT[24]: the mirror 1975 1080p bluray x264-ghouls[PRiME] mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.076836-0500	RedLemon	   OUTPUT[25]: The Mirror 1975 SUBFRENCH 1080p BluRay x264-CherryCoke mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.077086-0500	RedLemon	   OUTPUT[26]: The Mirror 1975 BDRemux 1080p mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.077342-0500	RedLemon	   OUTPUT[27]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.077706-0500	RedLemon	   OUTPUT[28]: mirror 1975 remastered 1080p bluray x264-usury mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.078011-0500	RedLemon	   OUTPUT[29]: Mirror 1975 REPACK 1080p BluRay REMUX AVC FLAC 1 0-BLURANiUM mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.078242-0500	RedLemon	   OUTPUT[30]: Mirror Mirror 1990 1080p BluRay x264 DTS-FGT | 1080p | zilean | Subtitles: 3
+default	13:18:55.078494-0500	RedLemon	   OUTPUT[31]: Mirror 1975 1080p BluRay HEVC AAC-SARTRE | 1080p | zilean | Subtitles: 3
+default	13:18:55.078741-0500	RedLemon	   OUTPUT[32]: Mirror Mirror 2012 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
+default	13:18:55.079108-0500	RedLemon	   OUTPUT[33]: Mirror Mirror 2012 1080p BluRay x264-SECTOR7 | 1080p | zilean | Subtitles: 3
+default	13:18:55.079317-0500	RedLemon	   OUTPUT[34]: The Mirror (1997) [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	13:18:55.079622-0500	RedLemon	   OUTPUT[35]: Mirror Mirror 2012 BDMux ITA ENG 1080p x265 Paso77 mkv | 1080p | zilean | Subtitles: 3
+default	13:18:55.081275-0500	RedLemon	   OUTPUT[36]: Breaking.Bad.S05.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC
+Breaking.Bad.S05E15.Granite.State.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC.mkv
+👤 46 💾 5.77 GB ⚙️ ThePirateBay | 2160p | torrentio | Subtitles: 3
+default	13:18:55.081598-0500	RedLemon	   OUTPUT[37]: Breaking Bad (2008) Season 02 S02 (2160p WEBRip x265 HEVC 10bit AAC 5.1 Joy) [UTR]
+Breaking Bad S02E04 Down (2160p x265 10bit Joy).mkv
+👤 43 💾 1.38 GB ⚙️ 1337x | 2160p | torrentio | Subtitles: 3
+default	13:18:55.081851-0500	RedLemon	   OUTPUT[38]: Breaking.Bad.S03.1080p.BluRay.x265-RARBG
+Breaking.Bad.S03E12.1080p.BluRay.x265-RARBG.mp4
+👤 284 💾 753.42 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:18:55.082098-0500	RedLemon	   OUTPUT[39]: Breaking.Bad.S05.1080p.BluRay.x265-RARBG
+Breaking.Bad.S05E09.1080p.BluRay.x265-RARBG.mp4
+👤 272 💾 755.88 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:18:55.082389-0500	RedLemon	   OUTPUT[40]: Breaking Bad Full 1080p PT-BR
+Breaking.Bad.S02.Season.2.1080p/Breaking.Bad.S02E10.1080p.mkv
+👤 226 💾 544.19 MB ⚙️ MagnetDL
+🇵🇹 | 1080p | torrentio | Subtitles: 3
+default	13:18:55.082704-0500	RedLemon	   OUTPUT[41]: Breaking Bad S04 Complete (2011) 1080p ENG-ITA MultiSub x264 Blu
+Ep 04 - Bullet Points - La Versione di Skyler.mkv
+👤 175 💾 2.72 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
+default	13:18:55.082890-0500	RedLemon	   OUTPUT[42]: Breaking Bad S02 1080p BluRay AV1 Opus [AV1D]
+Breaking Bad S02 08.mkv
+👤 160 💾 338.7 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:18:55.083170-0500	RedLemon	   OUTPUT[43]: Breaking.Bad.S02.1080p.BluRay.x265-RARBG
+Breaking.Bad.S02E10.1080p.BluRay.x265-RARBG.mp4
+👤 124 💾 755.82 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:18:55.087248-0500	RedLemon	   OUTPUT[44]: Breaking Bad S02 Season 2 1080p BluRay ReEnc-DeeJayAhmed [Little
+Breaking.Bad.S02E02.1080p.BluRay.ReEnc-DeeJayAhmed.mkv
+👤 120 💾 551.04 MB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:18:55.087588-0500	RedLemon	   OUTPUT[45]: Breaking Bad (2008) Season 1-5 S01-S05 (1080p BluRay x265 HEVC 1
+Season 3/Breaking Bad (2008) - S03E08 - I See You (1080p BluRay x265 Silence).mkv
+👤 89 💾 1.86 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:18:55.087999-0500	RedLemon	   OUTPUT[46]: Breaking Bad Complete S01-S05 1080p 10bit BluRay x265 HEVC 6CH-MRN
+Breaking.Bad.S03.1080p.10bit.BluRay.x265.HEVC.6CH-MRN/Breaking.Bad.S03E09.Kafkaesque.1080p.10bit.BluRay.x265.HEVC.6CH-MRN.mkv
+👤 60 💾 656.94 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:18:55.088268-0500	RedLemon	   OUTPUT[47]: Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub
+Breaking Bad Season 3/Breaking.Bad.S03E08.I.See.You.1080p.NF.WEB-DL.AV1.EAC3.mkv
+👤 49 💾 820.92 MB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 | 1080p | torrentio | Subtitles: 3
+default	13:18:55.088582-0500	RedLemon	   OUTPUT[48]: Breaking.Bad.SEASON.01.S01.COMPLETE.1080p.10bit.BluRay.6CH.x265.HEVC-PSA
+Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.1080p.10bit.BluRay.6CH.x265.HEVC-PSA.mkv
+👤 49 💾 534.31 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:18:55.088887-0500	RedLemon	   OUTPUT[49]: Breaking Bad (2008) S02 (1080p x265 10bit BD DTS-HD MA 5.1) [Prof]
+S02E02 - Grilled.mkv
+👤 34 💾 6.03 GB ⚙️ TorrentGalaxy | 1080p | torrentio | Subtitles: 3
+default	13:18:55.089225-0500	RedLemon	   OUTPUT[50]: Breaking Bad (S05)(2012)(1080p)(VP9)(WebDL)( EN 5.1+SPA 2.0)(Complete) PHDTeam
+Breaking Bad - S05E12_Vzteklý pes.mkv
+👤 33 💾 500.85 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
+default	13:18:55.089440-0500	RedLemon	   OUTPUT[51]: Breaking.Bad.S01-S02-S03-S04-S05.1080p.BluRay.10bit.HEVC-MkvCage
+Breaking.Bad.S05.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws/Breaking.Bad.S05E09.Blood.Money.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws.mkv
+👤 31 💾 1 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:18:55.089786-0500	RedLemon	   OUTPUT[52]: Breaking Bad S02 Complete (2009) 1080p ENG-ITA MultiSub x264 Blu
+Ep 05 - Breakage - Una Pistola Per Jesse.mkv
+👤 31 💾 3.06 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
+default	13:18:55.090045-0500	RedLemon	   OUTPUT[53]: Breaking Bad Season 1 Complete 720p.BRrip.Sujaidr (pimprg)
+Breaking Bad s01e07 720p.BRrip.Sujaidr.mkv
+👤 43 💾 381.64 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:18:55.090473-0500	RedLemon	   OUTPUT[54]: Breaking Bad Season 3 Complete 720p.BRrip.Sujaidr
+breaking bad s03e11 720p brrip sujaidr.mkv
+👤 37 💾 377.74 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:18:55.090735-0500	RedLemon	   OUTPUT[55]: Breaking Bad Season 4 Complete 720p.BRrip.Sujaidr
+breaking bad s04e12 720p brrip sujaidr.mkv
+👤 36 💾 367.72 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:18:55.091167-0500	RedLemon	   OUTPUT[56]: Breaking Bad Season 5 Complete 720p.BRrip.Sujaidr
+breaking bad s05e11 720p brrip sujaidr.mkv
+👤 34 💾 379.11 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:18:55.091728-0500	RedLemon	   OUTPUT[57]: Breaking Bad Season 2 Complete 720p.BRrip.Sujaidr
+Breaking Bad s02ep6 720p brrip.sujaidr.mkv
+👤 33 💾 378.78 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:18:55.092305-0500	RedLemon	   OUTPUT[58]: Breaking Bad Saison 1 FRENCH HDTV
+Breaking.Bad.S01E02.FRENCH.DVDRip.XviD-JMT.avi
+👤 47 💾 348.31 MB ⚙️ Torrent9
+🇫🇷 | Unknown | torrentio | Subtitles: 3
+default	13:18:55.092540-0500	RedLemon	   OUTPUT[59]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	13:18:55.208194-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.209707-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.270771-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> received response, status 200 content K
+default	13:18:55.271037-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> response ended
+default	13:18:55.271086-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> done using Connection 83
+default	13:18:55.271248-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> summary for task success {transaction_duration_ms=1905, response_status=200, connection=83, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=2, secure_connection_duration_ms=0, private_relay=false, request_start_ms=13, request_duration_ms=0, response_start_ms=1905, response_duration_ms=0, request_bytes=267, response_bytes=12075, cache_hit=false}
+default	13:18:55.271451-0500	RedLemon	Task <9A470906-7F66-4D54-9050-A18EEFE43B70>.<9> finished successfully
+default	13:18:55.275161-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:55.275742-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [172D235A-C633-4CF6-BFBC-34D4FE7FD8A7] (reporting strategy default)> on Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> was not selected for reporting
+default	13:18:55.277283-0500	RedLemon	Connection 85: starting, TC(0x0)
+default	13:18:55.277354-0500	RedLemon	[C85 E7373DD3-1276-4C18-9D77-053762738D09 127.0.0.1:47253 tcp, url hash: 2b1a2fbb, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{36725A7F-D165-45A1-8324-4E6DB4528395}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:55.277447-0500	RedLemon	[C85 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
+default	13:18:55.277699-0500	RedLemon	[C85 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: 8DBF462D-6162-4B9E-AC9A-1BAF7D1E7275
+default	13:18:55.278487-0500	RedLemon	[C85 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.001s
+default	13:18:55.278527-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C85] reporting state preparing
+default	13:18:55.278727-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> setting up Connection 85
+default	13:18:55.279069-0500	RedLemon	nw_socket_handle_socket_event [C85:2] Socket received CONNECTED event
+default	13:18:55.279187-0500	RedLemon	nw_flow_connected [C85 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
+default	13:18:55.279239-0500	RedLemon	[C85 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.001s
+default	13:18:55.279293-0500	RedLemon	nw_flow_connected [C85 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:55.279445-0500	RedLemon	[C85 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.002s
+default	13:18:55.279570-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C85] reporting state ready
+default	13:18:55.279620-0500	RedLemon	[C85 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.002s
+default	13:18:55.279681-0500	RedLemon	Connection 85: connected successfully
+default	13:18:55.279762-0500	RedLemon	Connection 85: ready C(N) E(N)
+default	13:18:55.279937-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> now using Connection 85
+default	13:18:55.281100-0500	RedLemon	Connection 85: received viability advisory(Y)
+default	13:18:55.284041-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> sent request, body S 90
+default	13:18:55.286587-0500	RedLemon	🔓 Unlock request: infoHash=197c1fcdaf84..., fileIdx=0
+default	13:18:55.286751-0500	RedLemon	✅ Token found, attempting unlock...
+default	13:18:55.287189-0500	RedLemon	✅ Unlocked successfully: Mirror.1975.1080p.BluRay.REMUX.AVC.LPCM.1.0.EngSub-ShNK.mkv
+default	13:18:55.288192-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> received response, status 200 content K
+default	13:18:55.288438-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> response ended
+default	13:18:55.288738-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> done using Connection 85
+default	13:18:55.289021-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> summary for task success {transaction_duration_ms=12, response_status=200, connection=85, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=1, secure_connection_duration_ms=0, private_relay=false, request_start_ms=4, request_duration_ms=2, response_start_ms=11, response_duration_ms=0, request_bytes=372, response_bytes=353, cache_hit=true}
+default	13:18:55.289181-0500	RedLemon	Task <A2CEE3C1-6328-4758-844E-D8A8875E90AF>.<652> finished successfully
+default	13:18:55.289447-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
+default	13:18:55.289706-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:55.289776-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:55.290787-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [85A19700-A772-438A-AC82-2556E8C2107E] (reporting strategy default)> on Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> was not selected for reporting
+default	13:18:55.291105-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:55.291307-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1D019A42-45D3-49B7-B29E-9FB208EB5937] (reporting strategy default)> on Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> was not selected for reporting
+default	13:18:55.294188-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [925B59C5-E6B8-4E9A-9DF6-004A5DF181F7] (reporting strategy default)> on Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> was not selected for reporting
+default	13:18:55.295166-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:55.295440-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> now using Connection 63
+default	13:18:55.298830-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:55.299022-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> now using Connection 63
+default	13:18:55.302062-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:55.302293-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> now using Connection 63
+default	13:18:55.303416-0500	RedLemon	0x7f90aa0891d8 ID=24 Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> sent request, body N 0
+default	13:18:55.303498-0500	RedLemon	0x7f90aa08af58 ID=28 Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> sent request, body N 0
+default	13:18:55.303558-0500	RedLemon	0x7f90ad6871a8 ID=32 Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> sent request, body N 0
+default	13:18:55.303881-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.451426-0500	RedLemon	0x7f90aa0891d8 ID=24 Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> received response, status 200 content U
+default	13:18:55.459737-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.462403-0500	RedLemon	0x7f90aa08af58 ID=28 Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> received response, status 200 content U
+default	13:18:55.468156-0500	RedLemon	0x7f90ad6871a8 ID=32 Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> received response, status 200 content U
+default	13:18:55.474287-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> response ended
+default	13:18:55.474867-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> done using Connection 63
+default	13:18:55.475686-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> summary for task success {transaction_duration_ms=184, response_status=200, connection=63, reused=1, request_start_ms=4, request_duration_ms=7, response_start_ms=159, response_duration_ms=24, request_bytes=112, response_bytes=114246, cache_hit=true}
+default	13:18:55.475958-0500	RedLemon	Task <5B70B645-9763-4AAB-9E32-8956C6D8BDF4>.<653> finished successfully
+default	13:18:55.491053-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S28] app read 84008 bytes and is yet to read 0 bytes, stream receive window is 131072 bytes, current local stream max data is 215080 bytes and the last received offset is 99223
+default	13:18:55.492280-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S32] app read 66450 bytes and is yet to read 0 bytes, stream receive window is 131072 bytes, current local stream max data is 197522 bytes and the last received offset is 115616
+default	13:18:55.542104-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S28] app read 131072 bytes and is yet to read 0 bytes, stream receive window is 131072 bytes, current local stream max data is 262144 bytes and the last received offset is 131071
+default	13:18:55.543602-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S32] app read 131070 bytes and is yet to read 0 bytes, stream receive window is 131072 bytes, current local stream max data is 262142 bytes and the last received offset is 131069
+default	13:18:55.543714-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S28] app read 175634 bytes and is yet to read 0 bytes, stream receive window is 454088 bytes, current local stream max data is 629722 bytes and the last received offset is 179990
+default	13:18:55.545521-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S32] app read 165069 bytes and is yet to read 0 bytes, stream receive window is 520444 bytes, current local stream max data is 685513 bytes and the last received offset is 169434
+default	13:18:55.546221-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S32] app read 188191 bytes and is yet to read 0 bytes, stream receive window is 520444 bytes, current local stream max data is 708635 bytes and the last received offset is 189377
+default	13:18:55.547281-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> response ended
+default	13:18:55.548053-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> done using Connection 63
+default	13:18:55.548532-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> summary for task success {transaction_duration_ms=251, response_status=200, connection=63, reused=1, request_start_ms=5, request_duration_ms=1, response_start_ms=170, response_duration_ms=80, request_bytes=112, response_bytes=195093, cache_hit=true}
+default	13:18:55.548844-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> response ended
+default	13:18:55.548928-0500	RedLemon	Task <858C8694-581F-45A9-87F5-BC6B11F0FF52>.<655> finished successfully
+default	13:18:55.550631-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> done using Connection 63
+default	13:18:55.551162-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> summary for task success {transaction_duration_ms=256, response_status=200, connection=63, reused=1, request_start_ms=4, request_duration_ms=4, response_start_ms=167, response_duration_ms=88, request_bytes=112, response_bytes=210121, cache_hit=true}
+default	13:18:55.551647-0500	RedLemon	Task <0935DED8-99A6-4324-99D0-D362F6835A48>.<654> finished successfully
+default	13:18:55.596700-0500	RedLemon	🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/FZPFNCXYOXKJC21/Mi, subtitles: 3
+default	13:18:55.629103-0500	RedLemon	✅ Stream ready, starting playback...
+default	13:18:55.629204-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
+default	13:18:55.629430-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7f90aa076dc0>
+default	13:18:55.629559-0500	RedLemon	   Is fullscreen: 0
+default	13:18:55.629659-0500	RedLemon	   ✅ WindowManager: Toggling fullscreen ON
+default	13:18:55.667501-0500	RedLemon	🖼️ Setting up MPV with native macOS video output...
+default	13:18:55.672689-0500	RedLemon	✅ MPV initialized with native GPU rendering
+default	13:18:55.676120-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task starting - About to call loadStream
+default	13:18:55.676275-0500	RedLemon	🎬🎬🎬 Subtitles: 3
+default	13:18:55.676491-0500	RedLemon	🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Mirror
+default	13:18:55.676671-0500	RedLemon	🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/FZPFNCXYOXKJC21/Mi
+default	13:18:55.676783-0500	RedLemon	🎬🎬🎬 subtitles: 3
+default	13:18:55.677491-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:55.678252-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [96748EA2-43EF-47D8-AA24-8CEAA370CA08] (reporting strategy default)> on Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> was not selected for reporting
+default	13:18:55.678486-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.679745-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> now using Connection 85
+default	13:18:55.743314-0500	mDNSResponder	[R1079] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, Addr) START PID[18244](RedLemon)
+default	13:18:55.697588-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> sent request, body N 0
+default	13:18:55.739778-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.759784-0500	runningboardd	Invalidating assertion 173-171-1065 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	13:18:55.773444-0500	mDNSResponder	[R1080] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'Syhee7Y88RVyU/sbUhznzQ=='>, AAAA) START PID[18244](RedLemon)
+default	13:18:55.777168-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.787801-0500	mDNSResponder	[R1079] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'EStZzDgXSGZLWmj+y5UL1w=='>, Addr) STOP PID[18244](RedLemon)
+default	13:18:55.787916-0500	mDNSResponder	[R1080] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'EStZzDgXSGZLWmj+y5UL1w=='>, AAAA) STOP PID[18244](RedLemon)
+default	13:18:55.804956-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-1114 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:38.931334-0500	RedLemon	   INPUT[8]: The Grinch 2018 1080p BluRay
-👤 132 💾 1.37 GB ⚙️ YTS | 1080p | torrentio
-default	18:36:38.930418-0500	runningboardd	Assertion 173-171-2980 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:38.931920-0500	RedLemon	   INPUT[9]: The Grinch 2018 1080p WEBRip
-👤 104 💾 1.38 GB ⚙️ YTS | 1080p | torrentio
-default	18:36:38.932293-0500	RedLemon	   INPUT[10]: The.Grinch.2018.1080p.WEB-DL.DD5.1.H264-FGT
-👤 17 💾 2.94 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	18:36:38.932445-0500	RedLemon	   INPUT[11]: The.Grinch.2018.1080p.10bit.BluRay.8CH.x265.HEVC-PSA
-👤 9 💾 1.49 GB ⚙️ 1337x | 1080p | torrentio
-default	18:36:38.932852-0500	RedLemon	   INPUT[12]: Гринч / The Grinch (2018) WEBRip 1080p | D P | Локализованная версия
-👤 5 💾 5.74 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 / 🇺🇦 | 1080p | torrentio
-default	18:36:38.932996-0500	RedLemon	   INPUT[13]: The Grinch 2018 BluRay 1080p DTS-HD MA TrueHD 7.1 Atmos x264-MgB
-👤 3 💾 10.27 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	18:36:38.933542-0500	RedLemon	   INPUT[14]: The Grinch 2018 BluRay 1080p DTS AC3 x264-MgB
-👤 3 💾 6.23 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	18:36:38.933784-0500	RedLemon	   INPUT[15]: El Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]
-👤 3 💾 10.04 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:38.933960-0500	RedLemon	   INPUT[16]: The Grinch (2018) 3D HSBS 1080p BluRay H264 DolbyD 5.1 [nickarad]
-👤 2 💾 2.78 GB ⚙️ TorrentGalaxy | 1080p | torrentio
-default	18:36:38.938513-0500	RedLemon	   INPUT[17]: The.Grinch.2018.1080p.BluRay.x264.DTS-HD.MA.7.1-FGT
-👤 2 💾 6.35 GB ⚙️ RARBG | 1080p | torrentio
-default	18:36:38.938669-0500	RedLemon	   INPUT[18]: Veliki.paket.titlovanih.filmova.2025.08.1080p.x264.[ExYuSubs]
-Christmas.movie.pack.1080p.WEBRip.x264.[ExYuSubs]/The.Grinch.2018.1080p.WEBRip.x264.[ExYuSubs].mkv
-👤 1 💾 2 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	18:36:38.964972-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> received response, status 200 content K
-default	18:36:38.965491-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> response ended
-default	18:36:38.965572-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> done using Connection 56
-default	18:36:38.965831-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> summary for task success {transaction_duration_ms=114, response_status=200, connection=56, reused=1, request_start_ms=8, request_duration_ms=0, response_start_ms=113, response_duration_ms=0, request_bytes=244, response_bytes=4271, cache_hit=true}
-default	18:36:38.966304-0500	RedLemon	Task <47FD0D32-289A-400F-A536-ABF45F7D331F>.<513> finished successfully
-default	18:36:38.967458-0500	RedLemon	🎬 MPV loadVideo called with URL: https://chi8-4.download.real-debrid.com/d/ELP3NVVGTYSOS23/The.Grinch.2018.BDRip.1080p.LT.EN.LTSubs.m, autoplay: true
-default	18:36:38.967758-0500	RedLemon	🎬 MPV executing command: loadfile "https://chi8-4.download.real-debrid.com/d/ELP3NVVGTYSOS23/The.Grinch.2018.BDRip.1080p.LT.EN.LTSubs.mkv"
-default	18:36:38.968095-0500	RedLemon	🎬 MPV loadfile result: 0
-default	18:36:38.968374-0500	RedLemon	✅ MPV loadfile succeeded, isPlaying set to true
-default	18:36:38.968667-0500	RedLemon	✅ Subtitles already downloaded, loading immediately...
-default	18:36:38.968931-0500	RedLemon	🎉 Starting watch party sync - Room: T948, Host: NO
-default	18:36:38.974342-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:38.977046-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EA9678CC-4D4C-484F-8124-3B325DFAFC1C] (reporting strategy default)> on Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> was not selected for reporting
-default	18:36:38.978223-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:38.978616-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> now using Connection 50
-default	18:36:38.980266-0500	RedLemon	📝 Loading pre-downloaded subtitle 1 (The.Grinch.2018.720p.BluRay.x264-GECKOS): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_99E2D216-8A1E-40AB-8AFF-37343133652A/The.Grinch.2018.1080p.BluRay.x264-GECKOS.srt
-default	18:36:38.980587-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_99E2D216-8A1E-4
-default	18:36:38.979635-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:38.992702-0500	RedLemon	❌ Failed to load subtitle, MPV error code: -12
-default	18:36:38.993007-0500	RedLemon	📝 Loading pre-downloaded subtitle 2 (The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_18A660E9-CE19-47CD-BA2C-43F335673D73/EN-SDH Ori.srt
-default	18:36:38.993262-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_18A660E9-CE19-4
-default	18:36:38.994729-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DD4C432A-0AC8-4FED-8B48-575A27143CCC] (reporting strategy default)> on Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> was not selected for reporting
-default	18:36:38.996162-0500	RedLemon	❌ Failed to load subtitle, MPV error code: -12
-default	18:36:38.996784-0500	RedLemon	📝 Loading pre-downloaded subtitle 3 (The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_1DD908F2-6736-4273-B49A-52D30FFBDB68/The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en.srt
-default	18:36:38.997087-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_1DD908F2-6736-4
-default	18:36:38.997524-0500	RedLemon	❌ Failed to load subtitle, MPV error code: -12
-default	18:36:38.998161-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> sent request, body N 0
-default	18:36:38.966304-0500	RedLemon	   INPUT[19]: El.grinch.2018.1080P-Dual-Lat.mp4
-👤 1 💾 1.38 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | Unknown | torrentio
-default	18:36:39.032532-0500	mDNSResponder	[R2208] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, Addr) START PID[20526](RedLemon)
-default	18:36:39.033548-0500	RedLemon	   INPUT[20]: zPelis3D
-Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN].mkv
-👤 1 💾 10.04 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio
-default	18:36:39.034554-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> received response, status 200 content K
-default	18:36:39.039038-0500	RedLemon	Connection 57: enabling TLS
-default	18:36:39.039088-0500	RedLemon	Connection 57: starting, TC(0x0)
-default	18:36:39.039153-0500	RedLemon	[C57 35C01772-67A3-4C44-AF07-235EAC1AD4AA Hostname#d7069d94:443 tcp, url hash: 74dfb3cc, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{539D0B89-66D0-4D54-A196-8485A0B086DD}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:39.037280-0500	mDNSResponder	[R2209] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, AAAA) START PID[20526](RedLemon)
-default	18:36:39.040982-0500	RedLemon	[C57 Hostname#d7069d94:443 initial path ((null))] event: path:start @0.001s
-default	18:36:39.041374-0500	RedLemon	[C57 Hostname#d7069d94:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.002s, uuid: AED76043-3C43-461D-BB2E-90F0E57DA762
-default	18:36:39.043045-0500	mDNSResponder	[R2208] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, Addr) STOP PID[20526](RedLemon)
-default	18:36:39.044969-0500	mDNSResponder	[R2209] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, AAAA) STOP PID[20526](RedLemon)
-default	18:36:39.045490-0500	mDNSResponder	[R2210] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'EwQ2Kg6N6s5/DUwhe5VppQ=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:39.043875-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.004s
-default	18:36:39.043925-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C57] reporting state preparing
-default	18:36:39.044347-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> setting up Connection 57
-default	18:36:39.047127-0500	RedLemon	   INPUT[21]: The.Grinch.2018.MULTI.1080p.WEB.H264
-👤 1 💾 3 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 1080p | torrentio
-default	18:36:39.048211-0500	RedLemon	   INPUT[22]: The.Grinch.2018.1080p.BluRay.x265-RARBG
-👤 1 💾 1.34 GB ⚙️ RARBG | 1080p | torrentio
-default	18:36:39.048428-0500	RedLemon	   INPUT[23]: The Grinch 2018 720p BluRay
-👤 45 💾 731.01 MB ⚙️ YTS | 720p | torrentio
-default	18:36:39.049156-0500	RedLemon	   INPUT[24]: The Grinch (2018) 720p WEB-DL 700MB
-👤 6 💾 702.23 MB ⚙️ ThePirateBay | 720p | torrentio
-default	18:36:39.050218-0500	RedLemon	   INPUT[25]: The.Grinch.2018.MULTi.720p.BluRay.x264.AC3-EXTREME
-👤 3 💾 2.41 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 720p | torrentio
-default	18:36:39.050590-0500	RedLemon	nw_endpoint_resolver_update [C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#07b0ba20:443
-default	18:36:39.051352-0500	RedLemon	nw_endpoint_resolver_update [C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#1b12ec90:443
-default	18:36:39.054915-0500	mDNSResponder	[R2210] getaddrinfo stop -- hostname: <mask.hash: 'EwQ2Kg6N6s5/DUwhe5VppQ=='>, client pid: 20526 (RedLemon)
-default	18:36:39.051863-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.012s
-default	18:36:39.054913-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 initial path ((null))] event: path:start @0.015s
-default	18:36:39.057835-0500	RedLemon	   INPUT[26]: The Grinch 2018 720p WEBRip
-👤 1 💾 732.31 MB ⚙️ YTS | 720p | torrentio
-default	18:36:39.057889-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.018s, uuid: 528CC4B2-5792-4C40-9AF0-61A9CB42262D
-default	18:36:39.058728-0500	RedLemon	   INPUT[27]: The.Grinch.2018.TRUEFRENCH.BDRip.XviD-EXTREME
-👤 4 💾 694.58 MB ⚙️ Torrent9
-🇫🇷 | Unknown | torrentio
-default	18:36:39.058912-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.019s
-default	18:36:39.059153-0500	RedLemon	   INPUT[28]: Гринч / The Grinch (2018) BDRip от MegaPeer | Лицензия
-👤 4 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	18:36:39.059875-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.020s
-default	18:36:39.060107-0500	RedLemon	   INPUT[29]: The.Grinch.2018.BluRay.BD25.3D.AVC.TrueHD.7.1.Atmos
-👤 4 💾 22.52 GB ⚙️ ThePirateBay | Unknown | torrentio
-default	18:36:39.060653-0500	RedLemon	   INPUT[30]: El Grinch [BluRay Rip][AC3 5.1 Castellano][2019][www.pctnew.com]
-👤 2 💾 1.53 GB ⚙️ MejorTorrent
-🇪🇸 | Unknown | torrentio
-default	18:36:39.061212-0500	RedLemon	   INPUT[31]: The Grinch 2018 3D BluRay
-👤 1 💾 1.37 GB ⚙️ YTS | Unknown | torrentio
-default	18:36:39.061837-0500	RedLemon	   INPUT[32]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	18:36:39.061841-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.022s
-default	18:36:39.062122-0500	RedLemon	tcp_output [C57.1:3] flags=[S] seq=71501404, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=71501404
-default	18:36:39.062424-0500	RedLemon	   INPUT[33]: The Grinch (2018) MULTi VF2 [1080p] BluRay x264-PopHD mkv | 1080p | zilean
-default	18:36:39.063318-0500	RedLemon	   INPUT[34]: The Grinch 2018 BDRip 1080p LT EN LTSubs mkv | 1080p | zilean
-default	18:36:39.064382-0500	RedLemon	   INPUT[35]: The Grinch 2018 1080p 3D BluRay Half-SBS x264 TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:39.064532-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> done using Connection 50
-default	18:36:39.064667-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> response ended
-default	18:36:39.065165-0500	RedLemon	   INPUT[36]: The Grinch 2018 UHD BluRay 2160p DDP 7 1 DV HDR x265-hallowed mkv | 2160p | zilean
-default	18:36:39.065676-0500	RedLemon	   INPUT[37]: The Grinch 2018 2160p UHDRemux HDR DV-TheEqualizer mp4 | 2160p | zilean
-default	18:36:39.066499-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> summary for task success {transaction_duration_ms=88, response_status=200, connection=50, reused=1, request_start_ms=19, request_duration_ms=0, response_start_ms=56, response_duration_ms=30, request_bytes=41, response_bytes=900658, cache_hit=false}
-default	18:36:39.066701-0500	RedLemon	Task <B56B80CC-E788-4388-91AB-77747E769EFE>.<514> finished successfully
-default	18:36:39.066714-0500	RedLemon	   INPUT[38]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean
-default	18:36:39.067620-0500	RedLemon	   INPUT[39]: the grinch 2018 1080p bluray x264 CZ-SK mkv | 1080p | zilean
-default	18:36:39.068262-0500	RedLemon	   INPUT[40]: The Grinch 2018 1080p 3D BluRay AVC TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:39.069449-0500	RedLemon	   INPUT[41]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 HEVC REMUX-FraMeSToR | 2160p | zilean
-default	18:36:39.073365-0500	RedLemon	   INPUT[42]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean
-default	18:36:39.073957-0500	RedLemon	   INPUT[43]: Grinch+2018+CZ+Dabing+FullHD+1080p mkv | 1080p | zilean
-default	18:36:39.074479-0500	RedLemon	   INPUT[44]: The Grinch 2018 MULTi 1080p BluRay x264 AC3-EXTREME mkv | 1080p | zilean
-default	18:36:39.075855-0500	RedLemon	   INPUT[45]: The Grinch 2018 SLOSinh 720p BluRay x264-DrSi | 720p | zilean
-default	18:36:39.076889-0500	RedLemon	   INPUT[46]: The Grinch 2018 SLOSINH 720p BluRay x264 DD 5 1-INFIRE mkv | 720p | zilean
-default	18:36:39.078398-0500	RedLemon	   INPUT[47]: The Grinch 2018 BDRemux 2160p Ukr Eng mkv | 2160p | zilean
-default	18:36:39.078949-0500	RedLemon	   INPUT[48]: The Grinch 2018 MULTi 1080p BluRay Light x264 AC3-ACOOL mkv | 1080p | zilean
-default	18:36:39.079051-0500	RedLemon	tcp_input [C57.1:3] flags=[S.] seq=958812929, ack=71501405, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=71501404
-default	18:36:39.079382-0500	RedLemon	   INPUT[49]: The Grinch 2018 1080p AMZN WEB-DL DDP5 1 H 264-MZABI mkv | 1080p | zilean
-default	18:36:39.079821-0500	RedLemon	nw_flow_connected [C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:39.079940-0500	RedLemon	   INPUT[50]: The Grinch 2018 NORDiC ENG 1080p BluRay x264-RAPiDCOWS mkv | 1080p | zilean
-default	18:36:39.080090-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.040s
-default	18:36:39.080378-0500	RedLemon	   INPUT[51]: The Grinch 2018 1080p BluRay DD 5 1 x264 ESub [MW] mkv | 1080p | zilean
-default	18:36:39.081219-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.041s
-default	18:36:39.081815-0500	RedLemon	   INPUT[52]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean
-default	18:36:39.082278-0500	RedLemon	   INPUT[53]: The Grinch 2018 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
-default	18:36:39.082596-0500	RedLemon	   INPUT[54]: The Grinch (2018) 2160p HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean
-default	18:36:39.083106-0500	RedLemon	   INPUT[55]: The Grinch 2018 1080p 5 1 EST-ENG Blurip FLY635 mkv | 1080p | zilean
-default	18:36:39.083230-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C57.1:2][0x7f99d09acb50] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:39.084419-0500	RedLemon	   INPUT[56]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean
-default	18:36:39.084482-0500	RedLemon	boringssl_context_info_handler(2028) [C57.1:2][0x7f99d09acb50] Client handshake started
-default	18:36:39.084688-0500	RedLemon	   INPUT[57]: The Grinch 2018 1080p WEB-DL DD5 1 H264-CMRG[EtHD] mkv | 1080p | zilean
-default	18:36:39.085160-0500	RedLemon	   INPUT[58]: The Grinch 2018 2160p UHD BluRay DV HDR TrueHD Atmos 7 1 x265-BiTOR mkv | 2160p | zilean
-default	18:36:39.085179-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS client enter_early_data
-default	18:36:39.085398-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS client read_server_hello
-default	18:36:39.085520-0500	RedLemon	   INPUT[59]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST | 1080p | zilean
-default	18:36:39.088861-0500	RedLemon	   INPUT[60]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean
-default	18:36:39.089751-0500	RedLemon	   INPUT[61]: The Grinch 2018 REPACK 720p BluRay x264-BONSAI mkv | 720p | zilean
-default	18:36:39.090393-0500	RedLemon	   INPUT[62]: The Grinch 2018 BDRip 1080p X265 Ac3-GANJAMAN mkv | 1080p | zilean
-default	18:36:39.090811-0500	RedLemon	   INPUT[63]: The Grinch 2018 1080p BluRay x264 TrueHD 7 1 Atmos-FGT mkv | 1080p | zilean
-default	18:36:39.091089-0500	RedLemon	   INPUT[64]: The Grinch (2018) x 1616 (2160p) HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean
-default	18:36:39.091356-0500	RedLemon	   INPUT[65]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean
-default	18:36:39.092036-0500	RedLemon	   INPUT[66]: The Grinch 2018 MULTi 1080p BluRay x264-VENUE mkv | 1080p | zilean
-default	18:36:39.092324-0500	RedLemon	   INPUT[67]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean
-default	18:36:39.092628-0500	RedLemon	   INPUT[68]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST mkv | 1080p | zilean
-default	18:36:39.093024-0500	RedLemon	   INPUT[69]: The Grinch 2018 2160p UHD BluRay X265-IAMABLE | 2160p | zilean
-default	18:36:39.093615-0500	RedLemon	   INPUT[70]: Grinch 2018 BDRemux 1080p NNMClub mkv | 1080p | zilean
-default	18:36:39.094026-0500	RedLemon	   INPUT[71]: The Grinch 2018 1080p BDRip x264 AC3-iCMAL mkv | 1080p | zilean
-default	18:36:39.094507-0500	RedLemon	   INPUT[72]: The Grinch 2018 Lic BDRip 1080p seleZen mkv | 1080p | zilean
-default	18:36:39.094918-0500	RedLemon	   INPUT[73]: The Grinch 2018 2160p BluRay REMUX HEVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 2160p | zilean
-default	18:36:39.095782-0500	RedLemon	   INPUT[74]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	18:36:39.096049-0500	RedLemon	   INPUT[75]: The Grinch 2018 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean
-default	18:36:39.096295-0500	RedLemon	   INPUT[76]: The Grinch 2018 MULTI 1080p BluRay REMUX-DDB | 1080p | zilean
-default	18:36:39.096693-0500	RedLemon	   INPUT[77]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean
-default	18:36:39.096941-0500	RedLemon	   INPUT[78]: The Grinch 2018 2160p BluRay x265 10bit HDR DTS-HD MA TrueHD 7 1 Atmos-SWTYBLZ mkv | 2160p | zilean
-default	18:36:39.097739-0500	RedLemon	   INPUT[79]: The Grinch (2018) MULTi VF2 1080p Bluray x264-AW mkv | 1080p | zilean
-default	18:36:39.098129-0500	RedLemon	   INPUT[80]: The Grinch 2018 1080p BluRay REMUX AVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 1080p | zilean
-default	18:36:39.098875-0500	RedLemon	   INPUT[81]: The Grinch (2018) (1080p BluRay x265 HEVC 10bit AAC 7 1 Tigole) | 1080p | zilean
-default	18:36:39.099212-0500	RedLemon	   INPUT[82]: The Grinch 2018 2160p UHD EAC3 DoVi - SumVision mp4 | 2160p | zilean
-default	18:36:39.099368-0500	RedLemon	   INPUT[83]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.100286-0500	RedLemon	   INPUT[84]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.101778-0500	RedLemon	   INPUT[85]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.101965-0500	RedLemon	   INPUT[86]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.103180-0500	RedLemon	   INPUT[87]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.104599-0500	RedLemon	   INPUT[88]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.104913-0500	RedLemon	   INPUT[89]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.106697-0500	RedLemon	   INPUT[90]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.107645-0500	RedLemon	   INPUT[91]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.107809-0500	RedLemon	   INPUT[92]: [RD⚡] Comet 2160p | 2160p | comet
-default	18:36:39.108177-0500	RedLemon	   INPUT[93]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.108647-0500	RedLemon	   INPUT[94]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.108804-0500	RedLemon	   INPUT[95]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.108932-0500	RedLemon	   INPUT[96]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.109177-0500	RedLemon	   INPUT[97]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.109353-0500	RedLemon	   INPUT[98]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.109884-0500	RedLemon	   INPUT[99]: [RD⚡] Comet 1080p | 1080p | comet
-default	18:36:39.110255-0500	RedLemon	🔍 Searching SubDL for subtitles: tt2709692 (movie)
-default	18:36:39.110770-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	18:36:39.111635-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FEA5054B-BAA5-4806-BB82-A3BB843A3C03] (reporting strategy default)> on Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> was not selected for reporting
-default	18:36:39.113811-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:39.113909-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:39.114253-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:39.115477-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:39.115793-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> now using Connection 28
-default	18:36:39.117927-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:39.118005-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:39.118083-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:39.118592-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C57.1:2][0x7f99d09acb50] Performing external trust evaluation
-default	18:36:39.118798-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C57.1:2][0x7f99d09acb50] Asyncing for external verify block
-default	18:36:39.118963-0500	RedLemon	0x7f99d08df068 ID=12 Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> sent request, body N 0
-default	18:36:39.119085-0500	RedLemon	Connection 57: asked to evaluate TLS Trust
-default	18:36:39.119451-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> auth completion disp=1 cred=0x0
-default	18:36:39.138147-0500	RedLemon	Connection 57: TLS Trust result 0
-default	18:36:39.138350-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C57.1:2][0x7f99d09acb50] Returning from external verify block with result: true
-default	18:36:39.138501-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C57.1:2][0x7f99d09acb50] Certificate verification result: OK
-default	18:36:39.139620-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:39.139772-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:39.139813-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:39.139853-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:39.139888-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:39.140022-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS 1.3 client done
-default	18:36:39.140214-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS client finish_client_handshake
-default	18:36:39.140259-0500	RedLemon	boringssl_context_info_handler(2045) [C57.1:2][0x7f99d09acb50] Client handshake state: TLS client done
-default	18:36:39.140296-0500	RedLemon	boringssl_context_info_handler(2034) [C57.1:2][0x7f99d09acb50] Client handshake done
-default	18:36:39.140970-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C57.1:2][0x7f99d09acb50] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(56ms) flight_time(32ms) rtt(28ms) write_stalls(0) read_stalls(7)]
-default	18:36:39.141177-0500	RedLemon	nw_flow_connected [C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:39.141638-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.102s
-default	18:36:39.142254-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C57] reporting state ready
-default	18:36:39.142339-0500	RedLemon	[C57 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.103s
-default	18:36:39.142481-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.103s
-default	18:36:39.142549-0500	RedLemon	[C57 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.103s
-default	18:36:39.142735-0500	RedLemon	Connection 57: connected successfully
-default	18:36:39.142808-0500	RedLemon	Connection 57: TLS handshake complete
-default	18:36:39.143095-0500	RedLemon	Connection 57: ready C(N) E(N)
-default	18:36:39.143309-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> now using Connection 57
-default	18:36:39.143381-0500	RedLemon	Connection 57: received viability advisory(Y)
-default	18:36:39.143692-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> sent request, body N 0
-default	18:36:39.262661-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> received response, status 101 content U
-default	18:36:39.263041-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> response ended
-default	18:36:39.263098-0500	RedLemon	Task <9CE9BD6C-2954-40E5-AB17-1F74A75F65DC>.<1> done using Connection 57
-default	18:36:39.263667-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.224s
-default	18:36:39.263694-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C57] reporting state preparing
-default	18:36:39.263739-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.224s
-default	18:36:39.263870-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.224s
-default	18:36:39.263926-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.224s
-default	18:36:39.263998-0500	RedLemon	nw_flow_connected [C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:39.264125-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.224s
-default	18:36:39.264182-0500	RedLemon	[C57 Hostname#d7069d94:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.224s
-default	18:36:39.264292-0500	RedLemon	nw_flow_connected [C57.1 IPv4#07b0ba20:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:39.264564-0500	RedLemon	[C57.1 IPv4#07b0ba20:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.225s
-default	18:36:39.264616-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C57] reporting state ready
-default	18:36:39.264674-0500	RedLemon	[C57 Hostname#d7069d94:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.225s
-default	18:36:39.265511-0500	RedLemon	🔄 Starting chat polling for room: T948
-default	18:36:39.265645-0500	RedLemon	✅ Watch party sync started successfully
-default	18:36:39.265739-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task completed
-default	18:36:39.266144-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:39.266602-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8935664B-73DC-4183-85EA-7E46C865110C] (reporting strategy default)> on Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> was not selected for reporting
-default	18:36:39.267771-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:39.268018-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> now using Connection 2
-default	18:36:39.268273-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> sent request, body N 0
-default	18:36:39.274641-0500	RedLemon	0x7f99d08df068 ID=12 Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> received response, status 200 content K
-default	18:36:39.276257-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> response ended
-default	18:36:39.277394-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> done using Connection 28
-default	18:36:39.277643-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> summary for task success {transaction_duration_ms=164, response_status=200, connection=28, reused=1, request_start_ms=2, request_duration_ms=3, response_start_ms=161, response_duration_ms=3, request_bytes=166, response_bytes=1665, cache_hit=true}
-default	18:36:39.277858-0500	RedLemon	Task <DBBDB07C-5010-4D96-AA97-FF115BA940D9>.<515> finished successfully
-default	18:36:39.298501-0500	RedLemon	✅ Found 10 total subtitle options from SubDL
-default	18:36:39.298823-0500	RedLemon	✅ Filtered to 10 English subtitles
-default	18:36:39.299657-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
-default	18:36:39.300004-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
-default	18:36:39.300785-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.301244-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.301639-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.302057-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.303217-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.304577-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.305032-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.305394-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.305694-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.305902-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.306452-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.306894-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.307470-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.307667-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.307949-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.308815-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.309539-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.310193-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.310817-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.311038-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.311994-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.312659-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.313152-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.313561-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.313739-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.314477-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.315135-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.315493-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.315677-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.315844-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.316258-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.316925-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.317567-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.321892-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.322143-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.322601-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.322805-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.323241-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.323805-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.324326-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.324934-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.325150-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.325625-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.326325-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.326586-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.327142-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.327368-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.328552-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.329174-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.329489-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.329878-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.330039-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.330363-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.333549-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.333765-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.334171-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.334356-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.334722-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.340307-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> received response, status 200 content K
-default	18:36:39.340528-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> done using Connection 2
-default	18:36:39.341382-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> response ended
-default	18:36:39.341747-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> summary for task success {transaction_duration_ms=74, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=73, response_duration_ms=1, request_bytes=249, response_bytes=386, cache_hit=false}
-default	18:36:39.342458-0500	RedLemon	Task <B87F8656-F52E-4509-A761-36FA23139840>.<516> finished successfully
-default	18:36:39.406208-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.407530-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.408932-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.409399-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.410031-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.410900-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.411413-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.415750-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.420162-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.421125-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.422919-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.423557-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.424668-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.425890-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.428060-0500	runningboardd	Invalidating assertion 173-171-2980 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	18:36:39.427098-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.429871-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.430291-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.431099-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.431401-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.432288-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.433432-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.434438-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.437438-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.437752-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-2985 target:20526 attributes:[
+default	13:18:55.805203-0500	runningboardd	Assertion 173-171-1114 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:55.812190-0500	runningboardd	Invalidating assertion 173-18244-1110 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:55.868971-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:55.870266-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:55.870508-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:55.873142-0500	runningboardd	Invalidating assertion 173-114-1111 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:55.940393-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:55.948476-0500	mDNSResponder	[R1081] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'dUpGsG91J5pn46kGWjbcDw=='>, Addr) START PID[18244](RedLemon)
+default	13:18:55.954471-0500	mDNSResponder	[R1082] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'dUpGsG91J5pn46kGWjbcDw=='>, AAAA) START PID[18244](RedLemon)
+default	13:18:55.955403-0500	mDNSResponder	[R1081] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'yt8bXH3B+KjY6OuhRgLXPg=='>, Addr) STOP PID[18244](RedLemon)
+default	13:18:55.955508-0500	mDNSResponder	[R1082] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'yt8bXH3B+KjY6OuhRgLXPg=='>, AAAA) STOP PID[18244](RedLemon)
+default	13:18:55.980689-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:55.980772-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:55.980861-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:56.003480-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:56.139451-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:56.164444-0500	RedLemon	⚠️ Received Realtime message with no chat text
+default	13:18:56.222289-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> received response, status 200 content K
+default	13:18:56.222754-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> response ended
+default	13:18:56.222831-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> done using Connection 85
+default	13:18:56.223121-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> summary for task success {transaction_duration_ms=544, response_status=200, connection=85, reused=1, request_start_ms=3, request_duration_ms=14, response_start_ms=543, response_duration_ms=0, request_bytes=244, response_bytes=2570, cache_hit=true}
+default	13:18:56.223972-0500	RedLemon	Task <623CF038-A286-465B-863B-3D4BA9DBB4DA>.<656> finished successfully
+default	13:18:56.225620-0500	RedLemon	🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/FZPFNCXYOXKJC21/Mirror.1975.1080p.BluRay.REMUX.AVC.LPCM.1., autoplay: true
+default	13:18:56.226030-0500	RedLemon	🎬 MPV executing command: loadfile "https://chi4-4.download.real-debrid.com/d/FZPFNCXYOXKJC21/Mirror.1975.1080p.BluRay.REMUX.AVC.LPCM.1.0.EngSub-ShNK.mkv"
+default	13:18:56.226361-0500	RedLemon	🎬 MPV loadfile result: 0
+default	13:18:56.226674-0500	RedLemon	✅ MPV loadfile succeeded, isPlaying set to true
+default	13:18:56.227025-0500	RedLemon	🎉 Starting watch party sync - Room: B82K, Host: NO
+default	13:18:56.230226-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:18:56.231801-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3C9CF951-C62C-4D4B-8BCC-B26527BDF853] (reporting strategy default)> on Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> was not selected for reporting
+default	13:18:56.233671-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:56.234072-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> now using Connection 79
+default	13:18:56.235681-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> sent request, body N 0
+default	13:18:56.237637-0500	RedLemon	🔄 Starting chat polling for room: B82K
+default	13:18:56.237838-0500	RedLemon	✅ Watch party sync started successfully
+default	13:18:56.237941-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task completed
+default	13:18:56.238466-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:56.240355-0500	mDNSResponder	[R1083] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, Addr) START PID[18244](RedLemon)
+default	13:18:56.239876-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4057A760-6426-4EC4-BFCE-3EFCE255C924] (reporting strategy default)> on Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> was not selected for reporting
+default	13:18:56.241205-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:56.242616-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> now using Connection 9
+default	13:18:56.243395-0500	mDNSResponder	[R1084] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, AAAA) START PID[18244](RedLemon)
+default	13:18:56.246097-0500	RedLemon	0x7f90aa092018 ID=640 Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> sent request, body N 0
+default	13:18:56.250272-0500	mDNSResponder	[R1083] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, Addr) STOP PID[18244](RedLemon)
+default	13:18:56.250488-0500	mDNSResponder	[R1084] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, AAAA) STOP PID[18244](RedLemon)
+default	13:18:56.252489-0500	runningboardd	Invalidating assertion 173-171-1114 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	13:18:56.260634-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-1122 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:39.437966-0500	runningboardd	Assertion 173-171-2985 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:39.440221-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.440834-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.441684-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.442339-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.443470-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.535113-0500	mDNSResponder	[R2211] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, Addr) START PID[20526](RedLemon)
-default	18:36:39.538686-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.538641-0500	mDNSResponder	[R2212] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, AAAA) START PID[20526](RedLemon)
-default	18:36:39.541073-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.542541-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.540994-0500	mDNSResponder	[R2211] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, Addr) STOP PID[20526](RedLemon)
-default	18:36:39.542890-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.542138-0500	mDNSResponder	[R2212] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, AAAA) STOP PID[20526](RedLemon)
-default	18:36:39.543637-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.544187-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.544686-0500	RedLemon	🔍 MPV track-list/count: 0
-default	18:36:39.544827-0500	RedLemon	📊 Total subtitle tracks found: 1 (including Off if needed)
-default	18:36:39.545911-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.546876-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.548214-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.549313-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.551713-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.555910-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.556546-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.556749-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.557419-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.557683-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.558943-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.559701-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.560144-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.560858-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.561103-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.561600-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.562081-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.562319-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.563266-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.563813-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.564399-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.565064-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.565531-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.567292-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.568351-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.581307-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.590857-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.591526-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.592521-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.593429-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.593975-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.594888-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.595200-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.602706-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.604300-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.604980-0500	runningboardd	Invalidating assertion 173-20526-2975 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:39.605443-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.606178-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.610848-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.611649-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.612443-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.613303-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.614296-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.614943-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.616827-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.618467-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.620065-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.620560-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.621646-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.623545-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.624550-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.625122-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.625751-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.626754-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.627574-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.628092-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.629159-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.631185-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.633533-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.635057-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.637047-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.637734-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.638151-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.638531-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.639111-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.640970-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.641798-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.642013-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.642890-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.643785-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.644246-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.644922-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.645570-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.645787-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.647134-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.647764-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.648494-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.649262-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.650875-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.651464-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.651694-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.652987-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.653441-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.653803-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.654383-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.655052-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.655755-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.656970-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.691597-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:39.691656-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:39.692405-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:39.693015-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.693829-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.694608-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.695079-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.695241-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.695750-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.695795-0500	runningboardd	Invalidating assertion 173-114-2976 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.powerd>:114]
-default	18:36:39.696404-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.696528-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.697278-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.698131-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.698292-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.698507-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.698601-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.698779-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.698956-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.699052-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.699721-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.699872-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.700247-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.700659-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.700870-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.701426-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.701797-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.702091-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.702255-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.702920-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.704338-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.704844-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.705497-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.705780-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.706587-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.706804-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.707673-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.708087-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.708559-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.709371-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.709583-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.711328-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.711780-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.711992-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.712778-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.713186-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.713377-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.713766-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.713949-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.714332-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.714854-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.715126-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.715553-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.715738-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.716409-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.717509-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.717911-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.718070-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.718328-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.719049-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.719230-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.719583-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.720243-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.720364-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.720549-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.720640-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.720813-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.720988-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.721280-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.721642-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.722157-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.722837-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.723747-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.723987-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.724580-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.724767-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.725181-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.725667-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.725999-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.726387-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.726561-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.727150-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.727523-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.727708-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.728478-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.728662-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.729433-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.729774-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.730448-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.731261-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.732038-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.732754-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.732953-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.733131-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.734599-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.734891-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.735752-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.736362-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.736635-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.737188-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.737390-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.737749-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.738094-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.738270-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.738635-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.739767-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.740444-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.740987-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.741220-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.741971-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.742865-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.743453-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.743730-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.743899-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.744641-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.744956-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.745440-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.745928-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.746268-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.747600-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.747996-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.748562-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.748750-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.749334-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.749676-0500	RedLemon	    📺 Resolution match: 720p
-default	18:36:39.749876-0500	RedLemon	  [2] Score: 100 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.750263-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.750480-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.751089-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.751275-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.751693-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.752094-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.752291-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.752625-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.752790-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.753408-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.753797-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.754059-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.754918-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.755445-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.755970-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.756162-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.756829-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.757190-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.757349-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.757662-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.758244-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.758457-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.758872-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.759063-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.759458-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.759839-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.760029-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.760529-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.760658-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.760857-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.761151-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.761329-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.761670-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.761838-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.762181-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.762542-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.763124-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.763636-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.764178-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.764383-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.764472-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.764607-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.765115-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.765300-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.765873-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.766248-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.766441-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.767435-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.767684-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.768086-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.768600-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.768802-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.769370-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.769766-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.770416-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.770956-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.771143-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.771505-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.772167-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.772722-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.772907-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.773068-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.773427-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.773978-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.774362-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.774540-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.774719-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.776887-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.777524-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.778002-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.778202-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.778392-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.779640-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.779866-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.780735-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.781820-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.782332-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.783000-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.783231-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.783682-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.784132-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.784554-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.785134-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.785594-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.787456-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.787687-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.787997-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.788615-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.788810-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.789282-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.789906-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.790106-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.790659-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.790829-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.791148-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.791615-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.791857-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.792598-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.792728-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.794492-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.795187-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.795394-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.795769-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.796313-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.796750-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.796943-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.797116-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.798329-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.798607-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.800136-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.800823-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.801035-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.801547-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.801908-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.803162-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.803360-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.803544-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.804102-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:39.804155-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:39.804642-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.804200-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:39.805063-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.805417-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.806058-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.806265-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.806830-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.807219-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.807574-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.807760-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.808098-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.808588-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.808964-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.809283-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.810328-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.810595-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.811288-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.811562-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.812263-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.812467-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.812649-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.813415-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.813854-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.814429-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.814627-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.815120-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.816804-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.818370-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.824079-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.824804-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.825025-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.826617-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.828521-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.828959-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.829161-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.831271-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.832942-0500	RedLemon	  [1] Score: 0 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.839843-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.843914-0500	RedLemon	    📺 Resolution match: 2160p
-default	18:36:39.845379-0500	RedLemon	  [3] Score: 100 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.846031-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.846889-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.847234-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.848126-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.849486-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.850069-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.850914-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.851125-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.851500-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.851846-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.852025-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.852475-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.852691-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.853200-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.853859-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.854084-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.854613-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.854959-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.857923-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.858781-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.859011-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.859744-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.860002-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.860680-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.861421-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.861668-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.862318-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.862546-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.863497-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.864008-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.864219-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.865358-0500	RedLemon	    📺 Resolution match: 1080p
-default	18:36:39.865964-0500	RedLemon	  [1] Score: 100 | The.Grinch.2018.BluRay.1080p.AVC.Atmos.TrueHD-7.1-Elite@mhddl
-default	18:36:39.866365-0500	RedLemon	  [2] Score: 0 | The.Grinch.2018.720p.BluRay.x264-GECKOS
-default	18:36:39.866739-0500	RedLemon	  [3] Score: 0 | The.Grinch.2018.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
-default	18:36:39.867749-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	18:36:39.867942-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 100
-default	18:36:39.868145-0500	RedLemon	   OUTPUT[0]: The Grinch 2018 UHD 4K BluRay 2160p DoVi HDR TrueHD 7.1 Atmos H.265-MgB
-👤 9 💾 16.6 GB ⚙️ 1337x | 2160p | torrentio | Subtitles: 3
-default	18:36:39.868635-0500	RedLemon	   OUTPUT[1]: The.Grinch.2018.Multi.UHD.BluRay.2160p.x265.HDR.Atmos.7.1-DTOne
-👤 8 💾 5.64 GB ⚙️ ThePirateBay
-Multi Audio | 2160p | torrentio | Subtitles: 3
-default	18:36:39.869333-0500	RedLemon	   OUTPUT[2]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR
-👤 2 💾 44.28 GB ⚙️ 1337x | 2160p | torrentio | Subtitles: 3
-default	18:36:39.869534-0500	RedLemon	   OUTPUT[3]: Гринч / The Grinch (2018) UHD BDRemux 2160p | 4K | HDR | Dolby Vision Profile 8 | Лицензия
-👤 2 💾 36.71 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 2160p | torrentio | Subtitles: 3
-default	18:36:39.869698-0500	RedLemon	   OUTPUT[4]: El Grinch [4K UHDremux][2160p][HDR][Dolby Digital Plus 7.1-AC3 5.1 Castellano-TrueHD 7.1-Ingles+Subs][ES-EN]
-👤 1 💾 39.89 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 2160p | torrentio | Subtitles: 3
-default	18:36:39.870100-0500	RedLemon	   OUTPUT[5]: The Grinch 2018 2160p BluRay
-👤 45 💾 4.41 GB ⚙️ YTS | 2160p | torrentio | Subtitles: 3
-default	18:36:39.870315-0500	RedLemon	   OUTPUT[6]: The.Grinch.2018.2160p.BluRay.HEVC.TrueHD.7.1.Atmos-BHD
-👤 7 💾 78.92 GB ⚙️ RARBG | 2160p | torrentio | Subtitles: 3
-default	18:36:39.870526-0500	RedLemon	   OUTPUT[7]: Videos cosas
-El Grinch [MicroHD][1080p][DTS-AC3 5.1-Castellano-AC3 5.1-Ingles+Subs-ES-EN]/ElGrinchM1080.www.newpct.com.mkv
-👤 407 💾 4.17 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:39.870904-0500	RedLemon	   OUTPUT[8]: The Grinch 2018 1080p BluRay
-👤 132 💾 1.37 GB ⚙️ YTS | 1080p | torrentio | Subtitles: 3
-default	18:36:39.871515-0500	RedLemon	   OUTPUT[9]: The Grinch 2018 1080p WEBRip
-👤 104 💾 1.38 GB ⚙️ YTS | 1080p | torrentio | Subtitles: 3
-default	18:36:39.871740-0500	RedLemon	   OUTPUT[10]: The.Grinch.2018.1080p.WEB-DL.DD5.1.H264-FGT
-👤 17 💾 2.94 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	18:36:39.871844-0500	RedLemon	   OUTPUT[11]: The.Grinch.2018.1080p.10bit.BluRay.8CH.x265.HEVC-PSA
-👤 9 💾 1.49 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	18:36:39.871927-0500	RedLemon	   OUTPUT[12]: Гринч / The Grinch (2018) WEBRip 1080p | D P | Локализованная версия
-👤 5 💾 5.74 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 / 🇺🇦 | 1080p | torrentio | Subtitles: 3
-default	18:36:39.871999-0500	RedLemon	   OUTPUT[13]: The Grinch 2018 BluRay 1080p DTS-HD MA TrueHD 7.1 Atmos x264-MgB
-👤 3 💾 10.27 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872065-0500	RedLemon	   OUTPUT[14]: The Grinch 2018 BluRay 1080p DTS AC3 x264-MgB
-👤 3 💾 6.23 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872134-0500	RedLemon	   OUTPUT[15]: El Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN]
-👤 3 💾 10.04 GB ⚙️ MejorTorrent
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872201-0500	RedLemon	   OUTPUT[16]: The Grinch (2018) 3D HSBS 1080p BluRay H264 DolbyD 5.1 [nickarad]
-👤 2 💾 2.78 GB ⚙️ TorrentGalaxy | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872440-0500	RedLemon	   OUTPUT[17]: The.Grinch.2018.1080p.BluRay.x264.DTS-HD.MA.7.1-FGT
-👤 2 💾 6.35 GB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872553-0500	RedLemon	   OUTPUT[18]: Veliki.paket.titlovanih.filmova.2025.08.1080p.x264.[ExYuSubs]
-Christmas.movie.pack.1080p.WEBRip.x264.[ExYuSubs]/The.Grinch.2018.1080p.WEBRip.x264.[ExYuSubs].mkv
-👤 1 💾 2 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872628-0500	RedLemon	   OUTPUT[19]: El.grinch.2018.1080P-Dual-Lat.mp4
-👤 1 💾 1.38 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | Unknown | torrentio | Subtitles: 3
-default	18:36:39.872704-0500	RedLemon	   OUTPUT[20]: zPelis3D
-Grinch 3D [BluRay 1080p][EAC3 7.1-AC3 5.1 Castellano AC3 5.1-Ingles+Subs][ES-EN].mkv
-👤 1 💾 10.04 GB ⚙️ Wolfmax4k
-🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
-default	18:36:39.872812-0500	RedLemon	   OUTPUT[21]: The.Grinch.2018.MULTI.1080p.WEB.H264
-👤 1 💾 3 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 1080p | torrentio | Subtitles: 3
-default	18:36:39.873048-0500	RedLemon	   OUTPUT[22]: The.Grinch.2018.1080p.BluRay.x265-RARBG
-👤 1 💾 1.34 GB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
-default	18:36:39.873176-0500	RedLemon	   OUTPUT[23]: The Grinch 2018 720p BluRay
-👤 45 💾 731.01 MB ⚙️ YTS | 720p | torrentio | Subtitles: 3
-default	18:36:39.873528-0500	RedLemon	   OUTPUT[24]: The Grinch (2018) 720p WEB-DL 700MB
-👤 6 💾 702.23 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
-default	18:36:39.873676-0500	RedLemon	   OUTPUT[25]: The.Grinch.2018.MULTi.720p.BluRay.x264.AC3-EXTREME
-👤 3 💾 2.41 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 720p | torrentio | Subtitles: 3
-default	18:36:39.873985-0500	RedLemon	   OUTPUT[26]: The Grinch 2018 720p WEBRip
-👤 1 💾 732.31 MB ⚙️ YTS | 720p | torrentio | Subtitles: 3
-default	18:36:39.874142-0500	RedLemon	   OUTPUT[27]: The.Grinch.2018.TRUEFRENCH.BDRip.XviD-EXTREME
-👤 4 💾 694.58 MB ⚙️ Torrent9
-🇫🇷 | Unknown | torrentio | Subtitles: 3
-default	18:36:39.874357-0500	RedLemon	   OUTPUT[28]: Гринч / The Grinch (2018) BDRip от MegaPeer | Лицензия
-👤 4 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	18:36:39.874509-0500	RedLemon	   OUTPUT[29]: The.Grinch.2018.BluRay.BD25.3D.AVC.TrueHD.7.1.Atmos
-👤 4 💾 22.52 GB ⚙️ ThePirateBay | Unknown | torrentio | Subtitles: 3
-default	18:36:39.874687-0500	RedLemon	   OUTPUT[30]: El Grinch [BluRay Rip][AC3 5.1 Castellano][2019][www.pctnew.com]
-👤 2 💾 1.53 GB ⚙️ MejorTorrent
-🇪🇸 | Unknown | torrentio | Subtitles: 3
-default	18:36:39.874811-0500	RedLemon	   OUTPUT[31]: The Grinch 2018 3D BluRay
-👤 1 💾 1.37 GB ⚙️ YTS | Unknown | torrentio | Subtitles: 3
-default	18:36:39.874984-0500	RedLemon	   OUTPUT[32]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.875160-0500	RedLemon	   OUTPUT[33]: The Grinch (2018) MULTi VF2 [1080p] BluRay x264-PopHD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.875308-0500	RedLemon	   OUTPUT[34]: The Grinch 2018 BDRip 1080p LT EN LTSubs mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.875469-0500	RedLemon	   OUTPUT[35]: The Grinch 2018 1080p 3D BluRay Half-SBS x264 TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:39.875699-0500	RedLemon	   OUTPUT[36]: The Grinch 2018 UHD BluRay 2160p DDP 7 1 DV HDR x265-hallowed mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.876333-0500	RedLemon	   OUTPUT[37]: The Grinch 2018 2160p UHDRemux HDR DV-TheEqualizer mp4 | 2160p | zilean | Subtitles: 3
-default	18:36:39.876553-0500	RedLemon	   OUTPUT[38]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.876707-0500	RedLemon	   OUTPUT[39]: the grinch 2018 1080p bluray x264 CZ-SK mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.876857-0500	RedLemon	   OUTPUT[40]: The Grinch 2018 1080p 3D BluRay AVC TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:39.877011-0500	RedLemon	   OUTPUT[41]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 HEVC REMUX-FraMeSToR | 2160p | zilean | Subtitles: 3
-default	18:36:39.877157-0500	RedLemon	   OUTPUT[42]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean | Subtitles: 3
-default	18:36:39.877305-0500	RedLemon	   OUTPUT[43]: Grinch+2018+CZ+Dabing+FullHD+1080p mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.877465-0500	RedLemon	   OUTPUT[44]: The Grinch 2018 MULTi 1080p BluRay x264 AC3-EXTREME mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.877625-0500	RedLemon	   OUTPUT[45]: The Grinch 2018 SLOSinh 720p BluRay x264-DrSi | 720p | zilean | Subtitles: 3
-default	18:36:39.877784-0500	RedLemon	   OUTPUT[46]: The Grinch 2018 SLOSINH 720p BluRay x264 DD 5 1-INFIRE mkv | 720p | zilean | Subtitles: 3
-default	18:36:39.878026-0500	RedLemon	   OUTPUT[47]: The Grinch 2018 BDRemux 2160p Ukr Eng mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.878258-0500	RedLemon	   OUTPUT[48]: The Grinch 2018 MULTi 1080p BluRay Light x264 AC3-ACOOL mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.878449-0500	RedLemon	   OUTPUT[49]: The Grinch 2018 1080p AMZN WEB-DL DDP5 1 H 264-MZABI mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.878626-0500	RedLemon	   OUTPUT[50]: The Grinch 2018 NORDiC ENG 1080p BluRay x264-RAPiDCOWS mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.878793-0500	RedLemon	   OUTPUT[51]: The Grinch 2018 1080p BluRay DD 5 1 x264 ESub [MW] mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.879045-0500	RedLemon	   OUTPUT[52]: The Grinch 2018 1080p Remux AVC TrueHD Atmos 7 1-playBD mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.879261-0500	RedLemon	   OUTPUT[53]: The Grinch 2018 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
-default	18:36:39.879451-0500	RedLemon	   OUTPUT[54]: The Grinch (2018) 2160p HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.879630-0500	RedLemon	   OUTPUT[55]: The Grinch 2018 1080p 5 1 EST-ENG Blurip FLY635 mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.879807-0500	RedLemon	   OUTPUT[56]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.879972-0500	RedLemon	   OUTPUT[57]: The Grinch 2018 1080p WEB-DL DD5 1 H264-CMRG[EtHD] mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.880146-0500	RedLemon	   OUTPUT[58]: The Grinch 2018 2160p UHD BluRay DV HDR TrueHD Atmos 7 1 x265-BiTOR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.880321-0500	RedLemon	   OUTPUT[59]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST | 1080p | zilean | Subtitles: 3
-default	18:36:39.880495-0500	RedLemon	   OUTPUT[60]: The Grinch 2018 MULTI COMPLETE UHD BLURAY-FUTAB | Unknown | zilean | Subtitles: 3
-default	18:36:39.880968-0500	RedLemon	   OUTPUT[61]: The Grinch 2018 REPACK 720p BluRay x264-BONSAI mkv | 720p | zilean | Subtitles: 3
-default	18:36:39.881285-0500	RedLemon	   OUTPUT[62]: The Grinch 2018 BDRip 1080p X265 Ac3-GANJAMAN mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.881517-0500	RedLemon	   OUTPUT[63]: The Grinch 2018 1080p BluRay x264 TrueHD 7 1 Atmos-FGT mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.881701-0500	RedLemon	   OUTPUT[64]: The Grinch (2018) x 1616 (2160p) HDR 5 1 x265 10bit Phun Psyz mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.881870-0500	RedLemon	   OUTPUT[65]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.882050-0500	RedLemon	   OUTPUT[66]: The Grinch 2018 MULTi 1080p BluRay x264-VENUE mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.882210-0500	RedLemon	   OUTPUT[67]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay REMUX AVC TRUEHD ATMOS AC3-XANTAR mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.882375-0500	RedLemon	   OUTPUT[68]: The Grinch 2018 MULTi TRUEFRENCH 1080p BluRay x264-LOST mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.882575-0500	RedLemon	   OUTPUT[69]: The Grinch 2018 2160p UHD BluRay X265-IAMABLE | 2160p | zilean | Subtitles: 3
-default	18:36:39.882841-0500	RedLemon	   OUTPUT[70]: Grinch 2018 BDRemux 1080p NNMClub mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.883022-0500	RedLemon	   OUTPUT[71]: The Grinch 2018 1080p BDRip x264 AC3-iCMAL mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.883322-0500	RedLemon	   OUTPUT[72]: The Grinch 2018 Lic BDRip 1080p seleZen mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.883526-0500	RedLemon	   OUTPUT[73]: The Grinch 2018 2160p BluRay REMUX HEVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 2160p | zilean | Subtitles: 3
-default	18:36:39.883848-0500	RedLemon	   OUTPUT[74]: The Grinch 2018 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.884242-0500	RedLemon	   OUTPUT[75]: The Grinch 2018 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean | Subtitles: 3
-default	18:36:39.884460-0500	RedLemon	   OUTPUT[76]: The Grinch 2018 MULTI 1080p BluRay REMUX-DDB | 1080p | zilean | Subtitles: 3
-default	18:36:39.884637-0500	RedLemon	   OUTPUT[77]: the grinch 2018 1080p bluray x264-geckos mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.884835-0500	RedLemon	   OUTPUT[78]: The Grinch 2018 2160p BluRay x265 10bit HDR DTS-HD MA TrueHD 7 1 Atmos-SWTYBLZ mkv | 2160p | zilean | Subtitles: 3
-default	18:36:39.885020-0500	RedLemon	   OUTPUT[79]: The Grinch (2018) MULTi VF2 1080p Bluray x264-AW mkv | 1080p | zilean | Subtitles: 3
-default	18:36:39.885195-0500	RedLemon	   OUTPUT[80]: The Grinch 2018 1080p BluRay REMUX AVC DTS-HD MA TrueHD 7 1 Atmos-FGT | 1080p | zilean | Subtitles: 3
-default	18:36:39.885379-0500	RedLemon	   OUTPUT[81]: The Grinch (2018) (1080p BluRay x265 HEVC 10bit AAC 7 1 Tigole) | 1080p | zilean | Subtitles: 3
-default	18:36:39.885560-0500	RedLemon	   OUTPUT[82]: The Grinch 2018 2160p UHD EAC3 DoVi - SumVision mp4 | 2160p | zilean | Subtitles: 3
-default	18:36:39.885718-0500	RedLemon	   OUTPUT[83]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.885931-0500	RedLemon	   OUTPUT[84]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886224-0500	RedLemon	   OUTPUT[85]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886382-0500	RedLemon	   OUTPUT[86]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886502-0500	RedLemon	   OUTPUT[87]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886617-0500	RedLemon	   OUTPUT[88]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886729-0500	RedLemon	   OUTPUT[89]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.886971-0500	RedLemon	   OUTPUT[90]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.887164-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:39.887198-0500	RedLemon	   OUTPUT[91]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.887408-0500	RedLemon	   OUTPUT[92]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	18:36:39.887809-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F40411A7-4F14-4B04-B106-D1CA260FBC3C] (reporting strategy default)> on Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> was not selected for reporting
-default	18:36:39.887594-0500	RedLemon	   OUTPUT[93]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.888238-0500	RedLemon	   OUTPUT[94]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.888465-0500	RedLemon	   OUTPUT[95]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.888618-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:39.888706-0500	RedLemon	   OUTPUT[96]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.888900-0500	RedLemon	   OUTPUT[97]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.889107-0500	RedLemon	   OUTPUT[98]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.889250-0500	RedLemon	Connection 58: enabling TLS
-default	18:36:39.889377-0500	RedLemon	   OUTPUT[99]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	18:36:39.889345-0500	RedLemon	Connection 58: starting, TC(0x0)
-default	18:36:39.889538-0500	RedLemon	[C58 F00C078B-CAEA-493D-B829-8892D40F8476 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{FD5C7E52-25C3-41F3-800D-3F309D3849B1}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:39.890001-0500	RedLemon	[C58 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.000s
-default	18:36:39.890417-0500	RedLemon	[C58 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: C6F489C4-04C4-4BA1-80C6-884BCE253ECA
-default	18:36:39.890634-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	18:36:39.890701-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state preparing
-default	18:36:39.890901-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> setting up Connection 58
-default	18:36:39.891479-0500	mDNSResponder	[R2213] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:39.893038-0500	mDNSResponder	[R2213] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:39.893157-0500	RedLemon	nw_endpoint_resolver_update [C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:39.893745-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.003s
-default	18:36:39.893969-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.004s
-default	18:36:39.894262-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: 95316A71-6B2A-4C8F-9CB8-AC0E0C2EE6A2
-default	18:36:39.894361-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.004s
-default	18:36:39.894737-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.005s
-default	18:36:39.895200-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.005s
-default	18:36:39.895292-0500	RedLemon	tcp_output [C58.1:3] flags=[S] seq=1631817568, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1631817568
-default	18:36:40.015253-0500	RedLemon	tcp_input [C58.1:3] flags=[S.] seq=3350251589, ack=1631817569, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=1631817568
-default	18:36:40.015409-0500	RedLemon	nw_flow_connected [C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:40.015868-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.126s
-default	18:36:40.016040-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.126s
-default	18:36:40.017035-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C58.1:2][0x7f99d0a24b20] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:40.017173-0500	RedLemon	boringssl_context_info_handler(2028) [C58.1:2][0x7f99d0a24b20] Client handshake started
-default	18:36:40.017529-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS client enter_early_data
-default	18:36:40.017791-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS client read_server_hello
-default	18:36:40.136960-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:40.137155-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:40.137528-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:40.138159-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:40.139045-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:40.139242-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:40.140712-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C58.1:2][0x7f99d0a24b20] Performing external trust evaluation
-default	18:36:40.140894-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C58.1:2][0x7f99d0a24b20] Asyncing for external verify block
-default	18:36:40.141098-0500	RedLemon	Connection 58: asked to evaluate TLS Trust
-default	18:36:40.141438-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> auth completion disp=1 cred=0x0
-default	18:36:40.149468-0500	RedLemon	Connection 58: TLS Trust result 0
-default	18:36:40.149548-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C58.1:2][0x7f99d0a24b20] Returning from external verify block with result: true
-default	18:36:40.149631-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C58.1:2][0x7f99d0a24b20] Certificate verification result: OK
-default	18:36:40.150218-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:40.150516-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:40.150558-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:40.150599-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:40.150636-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:40.150774-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS 1.3 client done
-default	18:36:40.150991-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS client finish_client_handshake
-default	18:36:40.151078-0500	RedLemon	boringssl_context_info_handler(2045) [C58.1:2][0x7f99d0a24b20] Client handshake state: TLS client done
-default	18:36:40.151184-0500	RedLemon	boringssl_context_info_handler(2034) [C58.1:2][0x7f99d0a24b20] Client handshake done
-default	18:36:40.151926-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C58.1:2][0x7f99d0a24b20] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(134ms) flight_time(119ms) rtt(119ms) write_stalls(0) read_stalls(7)]
-default	18:36:40.152159-0500	RedLemon	nw_flow_connected [C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:40.152579-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.262s
-default	18:36:40.153245-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state ready
-default	18:36:40.153362-0500	RedLemon	[C58 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.263s
-default	18:36:40.153594-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.263s
-default	18:36:40.153717-0500	RedLemon	[C58 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.264s
-default	18:36:40.154253-0500	RedLemon	Connection 58: connected successfully
-default	18:36:40.154310-0500	RedLemon	Connection 58: TLS handshake complete
-default	18:36:40.154813-0500	RedLemon	Connection 58: ready C(N) E(N)
-default	18:36:40.155328-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> now using Connection 58
-default	18:36:40.155499-0500	RedLemon	Connection 58: received viability advisory(Y)
-default	18:36:40.155767-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> sent request, body N 0
-default	18:36:40.178302-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> received response, status 200 content K
-default	18:36:40.178708-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> response ended
-default	18:36:40.178858-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> done using Connection 42
-default	18:36:40.179358-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> summary for task success {transaction_duration_ms=1643, response_status=200, connection=42, reused=1, request_start_ms=6, request_duration_ms=0, response_start_ms=1641, response_duration_ms=0, request_bytes=277, response_bytes=18832, cache_hit=false}
-default	18:36:40.179600-0500	RedLemon	Task <C72D1395-243C-4637-8A36-D7D5B415AF58>.<7> finished successfully
-default	18:36:40.183273-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:40.183669-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EB573777-85D1-4D50-8118-5A86A615FE1D] (reporting strategy default)> on Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> was not selected for reporting
-default	18:36:40.184731-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> now using Connection 56
-default	18:36:40.186503-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> sent request, body S 90
-default	18:36:40.187624-0500	RedLemon	🔓 Unlock request: infoHash=186f26abcf3d..., fileIdx=0
-default	18:36:40.187777-0500	RedLemon	✅ Token found, attempting unlock...
-default	18:36:40.188395-0500	RedLemon	✅ Unlocked successfully: The.Grinch.2018.BDRip.1080p.LT.EN.LTSubs.mkv
-default	18:36:40.189474-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> received response, status 200 content K
-default	18:36:40.189685-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> response ended
-default	18:36:40.189754-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> done using Connection 56
-default	18:36:40.189938-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> summary for task success {transaction_duration_ms=5, response_status=200, connection=56, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=5, response_duration_ms=0, request_bytes=372, response_bytes=323, cache_hit=true}
-default	18:36:40.190203-0500	RedLemon	Task <9381F7FB-D2C9-4067-808D-CDF30C1BA0FA>.<517> finished successfully
-default	18:36:40.190481-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
-default	18:36:40.190718-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:40.190752-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:40.192017-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [28BBC268-FA19-492D-BB6A-BB4C0CB75FF6] (reporting strategy default)> on Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> was not selected for reporting
-default	18:36:40.192075-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [73620F77-7555-41D2-82DC-2C07B72CB522] (reporting strategy default)> on Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> was not selected for reporting
-default	18:36:40.192229-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:40.194137-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EBBD254B-ADCA-492C-83FC-AF091FA9D5A8] (reporting strategy default)> on Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> was not selected for reporting
-default	18:36:40.195661-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:40.201272-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> now using Connection 33
-default	18:36:40.203264-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:40.203469-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> now using Connection 33
-default	18:36:40.204915-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:40.205230-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> now using Connection 33
-default	18:36:40.207700-0500	RedLemon	0x7f99d0c38118 ID=36 Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> sent request, body N 0
-default	18:36:40.207767-0500	RedLemon	0x7f99cfdf97d8 ID=40 Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> sent request, body N 0
-default	18:36:40.207818-0500	RedLemon	0x7f99cfd1df88 ID=44 Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> sent request, body N 0
-default	18:36:40.208738-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2986 target:20526 attributes:[
+default	13:18:56.260891-0500	runningboardd	Assertion 173-171-1122 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:56.328052-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:56.328614-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:56.328852-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:56.331645-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> received response, status 200 content K
+default	13:18:56.335319-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> done using Connection 79
+default	13:18:56.337136-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> response ended
+default	13:18:56.338901-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> summary for task success {transaction_duration_ms=105, response_status=200, connection=79, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=98, response_duration_ms=6, request_bytes=41, response_bytes=149799, cache_hit=false}
+default	13:18:56.339107-0500	RedLemon	Task <0DE346E7-2732-4454-A530-365D9E0C161F>.<657> finished successfully
+default	13:18:56.341708-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:56.343349-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:56.343446-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:56.349054-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1123 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:40.209045-0500	runningboardd	Assertion 173-20526-2986 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:40.228507-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:40.229000-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:40.229429-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:40.236943-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-2987 target:20526 attributes:[
+default	13:18:56.349431-0500	runningboardd	Assertion 173-18244-1123 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:56.351183-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:56.351232-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:56.351279-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:56.355607-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1124 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:40.237184-0500	runningboardd	Assertion 173-114-2987 (target:[anon<RedLemon>(501):20526]) will be created as active
-default	18:36:40.239903-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:40.240087-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:40.240258-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:40.278552-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> received response, status 101 content U
-default	18:36:40.278897-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> response ended
-default	18:36:40.278992-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> done using Connection 58
-default	18:36:40.280107-0500	mDNSResponder	[R2214] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, Addr) START PID[20526](RedLemon)
-default	18:36:40.279989-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.390s
-default	18:36:40.280071-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state preparing
-default	18:36:40.280194-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.390s
-default	18:36:40.280447-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.390s
-default	18:36:40.280555-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.390s
-default	18:36:40.280689-0500	RedLemon	nw_flow_connected [C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:40.280910-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.391s
-default	18:36:40.281703-0500	mDNSResponder	[R2215] DNSServiceQueryRecord(1D000, 0, <mask.hash: '0ptmQlvZ+ulrs6HQXQnvcg=='>, AAAA) START PID[20526](RedLemon)
-default	18:36:40.280996-0500	RedLemon	[C58 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.391s
-default	18:36:40.281546-0500	RedLemon	nw_flow_connected [C58.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:40.283685-0500	mDNSResponder	[R2214] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, Addr) STOP PID[20526](RedLemon)
-default	18:36:40.282536-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.392s
-default	18:36:40.282804-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state ready
-default	18:36:40.283930-0500	mDNSResponder	[R2215] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'A8uodX0NTqygEUetlD9ShA=='>, AAAA) STOP PID[20526](RedLemon)
-default	18:36:40.283231-0500	RedLemon	[C58 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.393s
-default	18:36:40.361484-0500	RedLemon	0x7f99d0c38118 ID=36 Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> received response, status 200 content U
-default	18:36:40.370090-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> response ended
-default	18:36:40.370558-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> done using Connection 33
-default	18:36:40.370821-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> summary for task success {transaction_duration_ms=178, response_status=200, connection=33, reused=1, request_start_ms=8, request_duration_ms=6, response_start_ms=168, response_duration_ms=9, request_bytes=111, response_bytes=34826, cache_hit=true}
-default	18:36:40.371069-0500	RedLemon	Task <1E29F999-7C94-42D6-8707-9C1B44348F69>.<518> finished successfully
-default	18:36:40.373255-0500	RedLemon	0x7f99cfdf97d8 ID=40 Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> received response, status 200 content U
-default	18:36:40.381537-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> response ended
-default	18:36:40.381905-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> done using Connection 33
-default	18:36:40.382236-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> summary for task success {transaction_duration_ms=188, response_status=200, connection=33, reused=1, request_start_ms=9, request_duration_ms=4, response_start_ms=179, response_duration_ms=9, request_bytes=111, response_bytes=34958, cache_hit=true}
-default	18:36:40.382447-0500	RedLemon	Task <836D509B-ACC7-4529-A05F-0B27AD9FFAA6>.<519> finished successfully
-default	18:36:40.389708-0500	RedLemon	0x7f99cfd1df88 ID=44 Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> received response, status 200 content U
-default	18:36:40.396547-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> response ended
-default	18:36:40.396873-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> done using Connection 33
-default	18:36:40.397053-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> summary for task success {transaction_duration_ms=201, response_status=200, connection=33, reused=1, request_start_ms=9, request_duration_ms=2, response_start_ms=193, response_duration_ms=7, request_bytes=112, response_bytes=28199, cache_hit=true}
-default	18:36:40.397372-0500	RedLemon	Task <2956B1D4-C755-4403-9458-FBDD49E0B90A>.<520> finished successfully
-default	18:36:40.404011-0500	RedLemon	nw_flow_disconnected [C58.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:40.404366-0500	RedLemon	nw_protocol_tcp_log_summary [C58.1:3]
-	[D7163CA2-AF0B-46D3-A2BF-202A6D6EA75C <private>:55407<-><private>:443]
-	Init: 1, Conn_Time: 120.088ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 4, rtt: 123.218ms, rtt_var: 4.750ms rtt_nc: 120.468ms, rtt_var_nc: 26.937ms base rtt: 118ms
+default	13:18:56.356185-0500	runningboardd	Assertion 173-114-1124 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:56.361934-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:56.361984-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:56.362031-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:56.392378-0500	RedLemon	0x7f90aa092018 ID=640 Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> received response, status 200 content K
+default	13:18:56.393754-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> response ended
+default	13:18:56.402790-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> done using Connection 9
+default	13:18:56.403076-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> summary for task success {transaction_duration_ms=162, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=3, response_start_ms=151, response_duration_ms=10, request_bytes=529, response_bytes=662, cache_hit=false}
+default	13:18:56.404403-0500	RedLemon	Task <345F46D9-FCAF-421F-8735-998256FAEDF6>.<658> finished successfully
+default	13:18:56.431245-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:56.463629-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:56.464101-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A319AEDA-A530-47AC-AD02-95AABDD63D52] (reporting strategy default)> on Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> was not selected for reporting
+default	13:18:56.464750-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:56.465298-0500	RedLemon	Connection 86: enabling TLS
+default	13:18:56.465323-0500	RedLemon	Connection 86: starting, TC(0x0)
+default	13:18:56.465358-0500	RedLemon	[C86 BD153ABD-7959-437C-B325-DC05834B75D7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{C7AAB278-DAF8-41EB-9314-369F8A818685}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:18:56.465409-0500	RedLemon	[C86 Hostname#f00e5bad:443 initial path ((null))] event: path:start @0.000s
+default	13:18:56.465763-0500	RedLemon	[C86 Hostname#f00e5bad:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: B695CD52-2259-4A7C-A988-F59D487EB298
+default	13:18:56.465971-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.000s
+default	13:18:56.466218-0500	mDNSResponder	[R1085] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:18:56.466017-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state preparing
+default	13:18:56.466209-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> setting up Connection 86
+default	13:18:56.467500-0500	mDNSResponder	[R1085] getaddrinfo stop -- hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, client pid: 18244 (RedLemon)
+default	13:18:56.467681-0500	RedLemon	nw_endpoint_resolver_update [C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#60630852:443
+default	13:18:56.467776-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.002s
+default	13:18:56.467983-0500	RedLemon	[C86.1 IPv4#60630852:443 initial path ((null))] event: path:start @0.002s
+default	13:18:56.468468-0500	RedLemon	[C86.1 IPv4#60630852:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.003s, uuid: F1560DB2-EFAC-454A-8C88-BAA40083B305
+default	13:18:56.468674-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.003s
+default	13:18:56.469094-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.003s
+default	13:18:56.469579-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.004s
+default	13:18:56.469719-0500	RedLemon	tcp_output [C86.1:3] flags=[S] seq=3633960050, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3633960050
+default	13:18:56.536520-0500	RedLemon	[C84] event: client:data_stall @3.004s
+error	13:18:56.539516-0500	symptomsd	Unexpected type 4 for interface index 1 from libnetcore event EventDescription sb at 0x7fb45d821f20 from pid 18244 RedLemon SYMPTOM 0x6767002  flags 0x40000003 qual0 0x1 qual1 0x4744 key 421890 num additional quals 4
+default	13:18:56.548007-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/18244/1/4/1/<private>/0
+default	13:18:56.548185-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: RedLemon has preexisting endpoint match for stall type (1) within time range on interface type (4), updating timestamp: <private>
+default	13:18:56.623366-0500	RedLemon	tcp_output [C86.1:3] flags=[S] seq=3633960050, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3633960050
+default	13:18:56.627504-0500	RedLemon	tcp_input [C86.1:3] flags=[S.] seq=1917770893, ack=3633960051, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=3633960050
+default	13:18:56.628043-0500	RedLemon	nw_flow_connected [C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:56.628333-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.162s
+default	13:18:56.628452-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.163s
+default	13:18:56.629156-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C86.1:2][0x7f90ad92c110] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:18:56.629375-0500	RedLemon	boringssl_context_info_handler(2028) [C86.1:2][0x7f90ad92c110] Client handshake started
+default	13:18:56.629753-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS client enter_early_data
+default	13:18:56.630009-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS client read_server_hello
+default	13:18:56.747914-0500	RedLemon	tcp_input [C86.1:3] flags=[S.] seq=1917770893, ack=3633960051, win=31856 state=ESTABLISHED rcv_nxt=1917770894, snd_una=3633960051
+default	13:18:56.758764-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:18:56.758981-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_server_hello
+default	13:18:56.759665-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:18:56.760643-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:18:56.765132-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:18:56.765206-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:18:56.765918-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C86.1:2][0x7f90ad92c110] Performing external trust evaluation
+default	13:18:56.766226-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C86.1:2][0x7f90ad92c110] Asyncing for external verify block
+default	13:18:56.766496-0500	RedLemon	Connection 86: asked to evaluate TLS Trust
+default	13:18:56.766949-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> auth completion disp=1 cred=0x0
+default	13:18:56.774209-0500	RedLemon	Connection 86: TLS Trust result 0
+default	13:18:56.774269-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C86.1:2][0x7f90ad92c110] Returning from external verify block with result: true
+default	13:18:56.774379-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C86.1:2][0x7f90ad92c110] Certificate verification result: OK
+default	13:18:56.774761-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client read_server_finished
+default	13:18:56.775039-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:18:56.775078-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:18:56.775114-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:18:56.775149-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:18:56.775264-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS 1.3 client done
+default	13:18:56.775449-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS client finish_client_handshake
+default	13:18:56.775496-0500	RedLemon	boringssl_context_info_handler(2045) [C86.1:2][0x7f90ad92c110] Client handshake state: TLS client done
+default	13:18:56.775535-0500	RedLemon	boringssl_context_info_handler(2034) [C86.1:2][0x7f90ad92c110] Client handshake done
+default	13:18:56.776132-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C86.1:2][0x7f90ad92c110] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(146ms) flight_time(131ms) rtt(129ms) write_stalls(0) read_stalls(7)]
+default	13:18:56.776294-0500	RedLemon	nw_flow_connected [C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:56.776568-0500	RedLemon	[C86.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.311s
+default	13:18:56.776861-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state ready
+default	13:18:56.776987-0500	RedLemon	[C86 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.311s
+default	13:18:56.777167-0500	RedLemon	[C86.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.311s
+default	13:18:56.777240-0500	RedLemon	[C86 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.311s
+default	13:18:56.777575-0500	RedLemon	Connection 86: connected successfully
+default	13:18:56.777631-0500	RedLemon	Connection 86: TLS handshake complete
+default	13:18:56.777848-0500	RedLemon	Connection 86: ready C(N) E(N)
+default	13:18:56.778054-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> now using Connection 86
+default	13:18:56.778204-0500	RedLemon	Connection 86: received viability advisory(Y)
+default	13:18:56.778548-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> sent request, body N 0
+default	13:18:56.938473-0500	mDNSResponder	[R1086] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, Addr) START PID[18244](RedLemon)
+default	13:18:56.939729-0500	mDNSResponder	[R1087] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, AAAA) START PID[18244](RedLemon)
+default	13:18:56.941375-0500	mDNSResponder	[R1086] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, Addr) STOP PID[18244](RedLemon)
+default	13:18:56.941580-0500	mDNSResponder	[R1087] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, AAAA) STOP PID[18244](RedLemon)
+default	13:18:56.962600-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> received response, status 101 content U
+default	13:18:56.962908-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> response ended
+default	13:18:56.963002-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> done using Connection 86
+default	13:18:56.963857-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.498s
+default	13:18:56.963939-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state preparing
+default	13:18:56.964061-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.498s
+default	13:18:56.964405-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.498s
+default	13:18:56.964514-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.499s
+default	13:18:56.964652-0500	RedLemon	nw_flow_connected [C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:18:56.964893-0500	RedLemon	[C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.499s
+default	13:18:56.965001-0500	RedLemon	[C86 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.499s
+default	13:18:56.965214-0500	RedLemon	nw_flow_connected [C86.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:18:56.965739-0500	RedLemon	[C86.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.500s
+default	13:18:56.965815-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state ready
+default	13:18:56.965929-0500	RedLemon	[C86 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.500s
+default	13:18:57.127485-0500	RedLemon	tcp_input [C86.1:3] flags=[F.] seq=1917773924, ack=3633961105, win=249 state=ESTABLISHED rcv_nxt=1917773924, snd_una=3633961105
+default	13:18:57.127651-0500	RedLemon	nw_protocol_tcp_log_summary [C86.1:3]
+	[DB76A9F9-CE9B-4B92-AB2F-0DF619F03A09 <private>:56265<-><private>:443]
+	Init: 1, Conn_Time: 158.266ms, SYNs: 2, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 136.875ms, rtt_var: 25.125ms rtt_nc: 158.687ms, rtt_var_nc: 44.375ms base rtt: 113ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:40.404869-0500	RedLemon	tcp_input [C58.1:3] flags=[F.] seq=3350254620, ack=1631818624, win=249 state=ESTABLISHED rcv_nxt=3350254620, snd_una=1631818624
-default	18:36:40.405709-0500	RedLemon	[C58.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.516s, error Socket is not connected
-default	18:36:40.405757-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state failed error Socket is not connected
-default	18:36:40.405818-0500	RedLemon	[C58 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.516s
-error	18:36:40.405879-0500	RedLemon	nw_read_request_report [C58] Receive failed with error "Socket is not connected"
-error	18:36:40.405946-0500	RedLemon	nw_flow_service_reads [C58.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] No output handler
-error	18:36:40.406030-0500	RedLemon	tcp_output [C58.1:3] flags=[R.] seq=1631818755, ack=3350254621, win=2047 state=CLOSED rcv_nxt=3350254621, snd_una=1631818624
-error	18:36:40.406292-0500	RedLemon	Connection 58: received failure notification
-default	18:36:40.406738-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> summary for task success {transaction_duration_ms=518, response_status=101, connection=58, protocol="http/1.1", domain_lookup_duration_ms=3, connect_duration_ms=257, secure_connection_duration_ms=134, private_relay=false, request_start_ms=267, request_duration_ms=0, response_start_ms=390, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
-error	18:36:40.406770-0500	RedLemon	nw_flow_add_write_request [C58.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-error	18:36:40.406831-0500	RedLemon	nw_write_request_report [C58] Send failed with error "Socket is not connected"
-default	18:36:40.406889-0500	RedLemon	Connection 58: cleaning up
-default	18:36:40.406945-0500	RedLemon	[C58 F00C078B-CAEA-493D-B829-8892D40F8476 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:40.407058-0500	RedLemon	[C58 F00C078B-CAEA-493D-B829-8892D40F8476 Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C58.1 95316A71-6B2A-4C8F-9CB8-AC0E0C2EE6A2 10.0.0.249:55407<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:18:57.129132-0500	RedLemon	nw_flow_disconnected [C86.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol disconnected
+default	13:18:57.129981-0500	RedLemon	Connection 86: read-side closed
+default	13:18:57.130054-0500	RedLemon	Connection 86: read-side closed
+default	13:18:57.130179-0500	RedLemon	Connection 86: read-side closed
+default	13:18:57.131025-0500	RedLemon	[C86.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:disconnect @0.665s, error Socket is not connected
+default	13:18:57.131115-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state failed error Socket is not connected
+default	13:18:57.131237-0500	RedLemon	[C86 Hostname#f00e5bad:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:disconnect @0.665s
+error	13:18:57.131344-0500	RedLemon	nw_read_request_report [C86] Receive failed with error "Socket is not connected"
+error	13:18:57.131468-0500	RedLemon	nw_flow_service_reads [C86.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] No output handler
+default	13:18:57.131592-0500	RedLemon	tcp_output [C86.1:3] flags=[F.] seq=3633961236, ack=1917773925, win=2048 state=LAST_ACK rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.131733-0500	RedLemon	Connection 86: received failure notification
+error	13:18:57.132064-0500	RedLemon	nw_flow_add_write_request [C86.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] cannot accept write requests
+error	13:18:57.132227-0500	RedLemon	nw_write_request_report [C86] Send failed with error "Socket is not connected"
+default	13:18:57.132294-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> summary for task success {transaction_duration_ms=667, response_status=101, connection=86, protocol="http/1.1", domain_lookup_duration_ms=2, connect_duration_ms=307, secure_connection_duration_ms=146, private_relay=false, request_start_ms=313, request_duration_ms=0, response_start_ms=497, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
+default	13:18:57.132376-0500	RedLemon	Connection 86: cleaning up
+default	13:18:57.132426-0500	RedLemon	Task <22C8785A-57DC-4784-A33A-9E2E5F577137>.<1> finished successfully
+default	13:18:57.132488-0500	RedLemon	[C86 BD153ABD-7959-437C-B325-DC05834B75D7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancel
+default	13:18:57.132731-0500	RedLemon	[C86 BD153ABD-7959-437C-B325-DC05834B75D7 Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancelled
+	[C86.1 F1560DB2-EFAC-454A-8C88-BAA40083B305 192.168.2.13:56265<->IPv4#60630852:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 0.517s, DNS @0.000s took 0.003s, TCP @0.390s took 0.121s
+	Duration: 0.667s, DNS @0.000s took 0.002s, TCP @0.498s took 0.158s
 	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:40.406847-0500	RedLemon	Task <36EAAD40-CBDE-4F29-B9DA-A9D6FD5D46AE>.<1> finished successfully
-default	18:36:40.408158-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C58] reporting state cancelled error Socket is not connected
-default	18:36:40.408333-0500	RedLemon	Connection 58: done
-default	18:36:40.443070-0500	RedLemon	✅ Stream ready, starting playback...
-default	18:36:40.443186-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
-default	18:36:40.443388-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7f99cd0f6640>
-default	18:36:40.443512-0500	RedLemon	   Is fullscreen: 1
-default	18:36:40.443608-0500	RedLemon	   ⚠️ WindowManager: Already in fullscreen
-default	18:36:41.012304-0500	RedLemon	                AUHAL.cpp:386   AUHAL: (0x7f99cecda040) Listening to HAL system property 1682929012
-default	18:36:41.012460-0500	RedLemon	                AUHAL.cpp:397   AUHAL: (0x7f99cecda040) Selecting device 49 from constructor
-default	18:36:41.012515-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f99cecda040)
-default	18:36:41.012557-0500	RedLemon	                AUHAL.cpp:627   SelectDevice: (0x7f99cecda040) not already running
-default	18:36:41.012597-0500	RedLemon	                AUHAL.cpp:702   SelectDevice: (0x7f99cecda040) nothing to teardown
-default	18:36:41.012634-0500	RedLemon	                AUHAL.cpp:706   SelectDevice: (0x7f99cecda040) connecting device 49
-default	18:36:41.013061-0500	RedLemon	                AUHAL.cpp:3107  IsDeviceUsable: (0x7f99cecda040) Device ID: 49 (Input:No | Output:Yes): true
-default	18:36:41.013983-0500	RedLemon	                AUHAL.cpp:716   SelectDevice: (0x7f99cecda040) created ioproc 0xb for device 49
-default	18:36:41.014103-0500	RedLemon	                AUHAL.cpp:1452  UpdateStreamFormats: -> (0x7f99cecda040)
-default	18:36:41.014462-0500	RedLemon	                AUHAL.cpp:1516  UpdateStreamFormats:
+default	13:18:57.133610-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C86] reporting state cancelled error Socket is not connected
+default	13:18:57.133899-0500	RedLemon	Connection 86: done
+error	13:18:57.322500-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=LAST_ACK rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322715-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322771-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322814-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773924, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322855-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322905-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.322966-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+error	13:18:57.323008-0500	RedLemon	tcp_input [C86.1:3] flags=[R] seq=1917773925, ack=0, win=0 state=CLOSED rcv_nxt=1917773925, snd_una=3633961105
+default	13:18:57.358939-0500	runningboardd	Invalidating assertion 173-18244-1123 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:57.483731-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:57.483823-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:57.483915-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:57.486819-0500	runningboardd	Invalidating assertion 173-114-1124 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.powerd>:114]
+default	13:18:57.642941-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:57.643032-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:57.643119-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:57.978028-0500	RedLemon	[C24] event: client:data_stall @250.403s
+default	13:18:57.978511-0500	RedLemon	Connection 24 idle 68.859251 will initiate stall recovery
+default	13:18:57.983458-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/18244/4/1/1/<private>/0
+default	13:18:57.983660-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: RedLemon has preexisting endpoint match for stall type (1) within time range on interface type (1), updating timestamp: <private>
+default	13:18:58.027204-0500	mDNSResponder	[R1088] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, Addr) START PID[18244](RedLemon)
+default	13:18:58.028381-0500	mDNSResponder	[R1089] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'gTKENvNx0i6hWhaDGgxjHw=='>, AAAA) START PID[18244](RedLemon)
+default	13:18:58.029320-0500	mDNSResponder	[R1088] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, Addr) STOP PID[18244](RedLemon)
+default	13:18:58.029447-0500	mDNSResponder	[R1089] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'c7B6nViV+/dIjcbmlfCDdw=='>, AAAA) STOP PID[18244](RedLemon)
+default	13:18:58.239474-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:18:58.240073-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [53A84983-96CA-4986-892C-C56C4108D537] (reporting strategy default)> on Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> was not selected for reporting
+default	13:18:58.241889-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:18:58.242278-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> now using Connection 9
+default	13:18:58.243815-0500	RedLemon	0x7f90ade65888 ID=644 Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> sent request, body N 0
+default	13:18:58.699338-0500	RedLemon	0x7f90ade65888 ID=644 Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> received response, status 200 content K
+default	13:18:58.700361-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> response ended
+default	13:18:58.701056-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> done using Connection 9
+default	13:18:58.701363-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> summary for task success {transaction_duration_ms=460, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=458, response_duration_ms=2, request_bytes=529, response_bytes=661, cache_hit=false}
+default	13:18:58.702049-0500	RedLemon	Task <9E8EABC5-1205-4151-A116-AAE73506A1D0>.<659> finished successfully
+default	13:18:58.705399-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1125 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:18:58.705810-0500	runningboardd	Assertion 173-18244-1125 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:18:58.708642-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:58.708692-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:58.708739-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:58.712493-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1126 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:18:58.712783-0500	runningboardd	Assertion 173-114-1126 (target:[anon<RedLemon>(501):18244]) will be created as active
+default	13:18:58.714215-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:58.714262-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:58.714307-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:18:58.716845-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:18:59.035512-0500	RedLemon	                AUHAL.cpp:386   AUHAL: (0x7f90b4ac3040) Listening to HAL system property 1682929012
+default	13:18:59.035764-0500	RedLemon	                AUHAL.cpp:397   AUHAL: (0x7f90b4ac3040) Selecting device 49 from constructor
+default	13:18:59.035895-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f90b4ac3040)
+default	13:18:59.035953-0500	RedLemon	                AUHAL.cpp:627   SelectDevice: (0x7f90b4ac3040) not already running
+default	13:18:59.035993-0500	RedLemon	                AUHAL.cpp:702   SelectDevice: (0x7f90b4ac3040) nothing to teardown
+default	13:18:59.036031-0500	RedLemon	                AUHAL.cpp:706   SelectDevice: (0x7f90b4ac3040) connecting device 49
+default	13:18:59.036422-0500	RedLemon	                AUHAL.cpp:3107  IsDeviceUsable: (0x7f90b4ac3040) Device ID: 49 (Input:No | Output:Yes): true
+default	13:18:59.036868-0500	RedLemon	                AUHAL.cpp:716   SelectDevice: (0x7f90b4ac3040) created ioproc 0xc for device 49
+default	13:18:59.036959-0500	RedLemon	                AUHAL.cpp:1452  UpdateStreamFormats: -> (0x7f90b4ac3040)
+default	13:18:59.037252-0500	RedLemon	                AUHAL.cpp:1516  UpdateStreamFormats:
   output stream 0 [0x32]:  2 ch,  44100 Hz, Float32, interleaved
-default	18:36:41.014534-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 1 output streams; not all mono
-default	18:36:41.014630-0500	RedLemon	                AUHAL.cpp:1537  UpdateStreamFormats:
+default	13:18:59.037372-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 1 output streams; not all mono
+default	13:18:59.037439-0500	RedLemon	                AUHAL.cpp:1537  UpdateStreamFormats:
   Output render format:  2 ch,  44100 Hz, Float32, interleaved
-default	18:36:41.014692-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 0 input streams; not all mono
-default	18:36:41.015341-0500	RedLemon	                AUHAL.cpp:1602  UpdateStreamFormats: AUHAL(0x7f99cecda040) Calling PropertyChanged() for kAudioUnitProperty_StreamFormat, Scope:Output, Bus:Output
-default	18:36:41.015429-0500	RedLemon	                AUHAL.cpp:1615  UpdateStreamFormats: <-
-default	18:36:41.015907-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f99cecda040) removing 0 device listeners from device 0
-default	18:36:41.015983-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f99cecda040) adding 6 device listeners to device 49
-default	18:36:41.016480-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f99cecda040) removing 0 device delegate listeners from device 0
-default	18:36:41.016566-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f99cecda040) adding 0 device delegate listeners to device 49
-default	18:36:41.016618-0500	RedLemon	                AUHAL.cpp:842   SelectDevice: <- (0x7f99cecda040)
-default	18:36:41.017762-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	18:36:41.018816-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	18:36:41.019059-0500	RedLemon	                AUHAL.cpp:2060  SetProperty: (0x7f99cecda040) caller requesting device change from 49 to 49
-default	18:36:41.019139-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f99cecda040)
-default	18:36:41.019187-0500	RedLemon	                AUHAL.cpp:613   SelectDevice: <- (0x7f99cecda040) exiting with nothing to do
-default	18:36:41.102096-0500	CAReportingService	    CAReportingService.mm:465   sessions for client 206 : (
-    "reporterID=884763262985,serviceName=audiodeviceusage,ownerPid=206,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0"
+default	13:18:59.037494-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 0 input streams; not all mono
+default	13:18:59.037923-0500	RedLemon	                AUHAL.cpp:1602  UpdateStreamFormats: AUHAL(0x7f90b4ac3040) Calling PropertyChanged() for kAudioUnitProperty_StreamFormat, Scope:Output, Bus:Output
+default	13:18:59.038027-0500	RedLemon	                AUHAL.cpp:1615  UpdateStreamFormats: <-
+default	13:18:59.038573-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f90b4ac3040) removing 0 device listeners from device 0
+default	13:18:59.038652-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f90b4ac3040) adding 6 device listeners to device 49
+default	13:18:59.039412-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f90b4ac3040) removing 0 device delegate listeners from device 0
+default	13:18:59.039503-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f90b4ac3040) adding 0 device delegate listeners to device 49
+default	13:18:59.039555-0500	RedLemon	                AUHAL.cpp:842   SelectDevice: <- (0x7f90b4ac3040)
+default	13:18:59.040343-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
+default	13:18:59.041258-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
+default	13:18:59.041492-0500	RedLemon	                AUHAL.cpp:2060  SetProperty: (0x7f90b4ac3040) caller requesting device change from 49 to 49
+default	13:18:59.041563-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f90b4ac3040)
+default	13:18:59.041639-0500	RedLemon	                AUHAL.cpp:613   SelectDevice: <- (0x7f90b4ac3040) exiting with nothing to do
+default	13:18:59.165419-0500	CAReportingService	    CAReportingService.mm:465   sessions for client 206 : (
+    "reporterID=884763262978,serviceName=audiodeviceusage,ownerPid=206,clientProcessName=(null),HostApplicationDisplayID=Unknown,started=0,singleMessageSession=0",
+    "reporterID=884763262980,serviceName=audiodeviceusage,ownerPid=206,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0"
 )
-default	18:36:41.102207-0500	CAReportingService	    CAReportingService.mm:577   1 active reporting session(s) (
-    "reporterID=884763262985,serviceName=audiodeviceusage,ownerPid=206,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0"
+default	13:18:59.165652-0500	CAReportingService	    CAReportingService.mm:577   1 active reporting session(s) (
+    "reporterID=884763262980,serviceName=audiodeviceusage,ownerPid=206,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0"
 )
-default	18:36:41.237143-0500	runningboardd	Invalidating assertion 173-20526-2986 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:41.317131-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:41.318145-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0AA9D9ED-CED1-429D-AB0A-53F5F980E19F] (reporting strategy default)> on Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> was not selected for reporting
-default	18:36:41.321851-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:41.322837-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> now using Connection 2
-default	18:36:41.324112-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> sent request, body N 0
-default	18:36:41.341713-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:41.342273-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:41.342739-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:41.388664-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> received response, status 200 content K
-default	18:36:41.388899-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> done using Connection 2
-default	18:36:41.389784-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> response ended
-default	18:36:41.389961-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> summary for task success {transaction_duration_ms=71, response_status=200, connection=2, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=249, response_bytes=333, cache_hit=false}
-default	18:36:41.390259-0500	RedLemon	Task <0C982623-A4B5-41D5-918F-C16F5623E283>.<521> finished successfully
-default	18:36:41.391047-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2988 target:20526 attributes:[
+default	13:18:59.713411-0500	runningboardd	Invalidating assertion 173-18244-1125 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:18:59.888207-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:18:59.888297-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:18:59.888384-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:00.295479-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:00.296194-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A499CC8C-E4BC-462D-BF52-8ADCA8851028] (reporting strategy default)> on Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> was not selected for reporting
+default	13:19:00.298105-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:00.298402-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> now using Connection 9
+default	13:19:00.299283-0500	RedLemon	0x7f90ad94c488 ID=648 Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> sent request, body N 0
+default	13:19:00.443882-0500	RedLemon	0x7f90ad94c488 ID=648 Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> received response, status 200 content K
+default	13:19:00.445009-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> response ended
+default	13:19:00.445595-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> done using Connection 9
+default	13:19:00.446309-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> summary for task success {transaction_duration_ms=149, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=146, response_duration_ms=2, request_bytes=529, response_bytes=662, cache_hit=false}
+default	13:19:00.446659-0500	RedLemon	Task <47DB5BFB-C516-4742-96B6-4116ABB860B2>.<660> finished successfully
+default	13:19:00.447778-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1127 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:41.391264-0500	runningboardd	Assertion 173-20526-2988 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:41.392680-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:41.392730-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:41.392776-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:41.412189-0500	RedLemon	Connection 1: cleaning up
-default	18:36:41.412355-0500	RedLemon	[C1 557566AD-BB3F-4E3A-9BA1-5F33EC6AD78D Hostname#01d9dcfe:443 quic-connection, url hash: 8c533fa2, definite, attribution: developer] cancel
-default	18:36:41.413130-0500	RedLemon	[C1 557566AD-BB3F-4E3A-9BA1-5F33EC6AD78D Hostname#01d9dcfe:443 quic-connection, url hash: 8c533fa2, definite, attribution: developer] cancelled
-	[C1.1.1 E8C49ED5-2E16-4E3E-AF0A-8BFE364D547A 2607:fea8:995b:fd00:8018:38c4:5c74:5691.62263<->IPv6#7bf70149.443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 240.289s, DNS @0.028s took 0.023s, TCP @0.097s took 0.097s, TLS 1.3 took 0.067s
-	bytes in/out: 6512/870, packets in/out: 11/15, rtt: 0.026s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:41.414588-0500	RedLemon	nw_protocol_tcp_log_summary [C1.1.1:3]
-	[5CC4EB68-975C-45F8-9BA3-4E83F99AAB1E <private>:62263<-><private>:443]
-	Init: 1, Conn_Time: 93.294ms, SYNs: 2, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 5, rtt: 26.468ms, rtt_var: 12.062ms rtt_nc: 63.468ms, rtt_var_nc: 52.500ms base rtt: 18ms
+default	13:19:00.447962-0500	runningboardd	Assertion 173-18244-1127 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:00.449804-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:00.450016-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:00.450464-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:00.490782-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:01.243637-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:01.245052-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [60EA77C1-27E7-4503-9548-A1D0745F9454] (reporting strategy default)> on Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> was not selected for reporting
+default	13:19:01.246706-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:01.247998-0500	RedLemon	Connection 87: enabling TLS
+default	13:19:01.248070-0500	RedLemon	Connection 87: starting, TC(0x0)
+default	13:19:01.248167-0500	RedLemon	[C87 14505E21-24F5-44AE-8733-A337687B87DF Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{3A199537-29A2-4114-94C6-4C9CBF04B47A}{(null)}{Y}{2} (private), proc: 14FAAA11-1E21-3EA6-A1C7-B9EB7AAE9169] start
+default	13:19:01.248330-0500	RedLemon	[C87 Hostname#f00e5bad:443 initial path ((null))] event: path:start @0.000s
+default	13:19:01.249053-0500	RedLemon	[C87 Hostname#f00e5bad:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.000s, uuid: A57B0E7A-6320-4904-B094-A26C4955225E
+default	13:19:01.249506-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:start_dns @0.001s
+default	13:19:01.249572-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state preparing
+default	13:19:01.249810-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> setting up Connection 87
+default	13:19:01.249993-0500	mDNSResponder	[R1090] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, options: 0x8 {use-failover}, client pid: 18244 (RedLemon)
+default	13:19:01.254041-0500	mDNSResponder	[R1090] getaddrinfo stop -- hostname: <mask.hash: 'hlYDYUwDgygJoNwBa/+FYA=='>, client pid: 18244 (RedLemon)
+default	13:19:01.254348-0500	RedLemon	nw_endpoint_resolver_update [C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] Adding endpoint handler for IPv4#60630852:443
+default	13:19:01.254650-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: resolver:receive_dns @0.006s
+default	13:19:01.255079-0500	RedLemon	[C87.1 IPv4#60630852:443 initial path ((null))] event: path:start @0.006s
+default	13:19:01.256336-0500	RedLemon	[C87.1 IPv4#60630852:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: path:satisfied @0.008s, uuid: 7BCF35A3-C381-441C-B3F2-4E95228C8D0D
+default	13:19:01.256637-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_nexus @0.008s
+default	13:19:01.259300-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:receive_nexus @0.010s
+default	13:19:01.261571-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.013s
+default	13:19:01.261874-0500	RedLemon	tcp_output [C87.1:3] flags=[S] seq=2909057484, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2909057484
+default	13:19:01.454366-0500	runningboardd	Invalidating assertion 173-18244-1127 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:19:01.458159-0500	RedLemon	tcp_output [C87.1:3] flags=[S] seq=2909057484, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2909057484
+default	13:19:01.469063-0500	RedLemon	tcp_input [C87.1:3] flags=[S.] seq=1992862637, ack=2909057485, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=2909057484
+default	13:19:01.469300-0500	RedLemon	nw_flow_connected [C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:19:01.469506-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.221s
+default	13:19:01.469589-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.221s
+default	13:19:01.470510-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C87.1:2][0x7f90ace10fa0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	13:19:01.470664-0500	RedLemon	boringssl_context_info_handler(2028) [C87.1:2][0x7f90ace10fa0] Client handshake started
+default	13:19:01.470864-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS client enter_early_data
+default	13:19:01.471147-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS client read_server_hello
+default	13:19:01.635672-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:01.635763-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:01.635814-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:01.715617-0500	RedLemon	tcp_input [C87.1:3] flags=[S.] seq=1992862637, ack=2909057485, win=31856 state=ESTABLISHED rcv_nxt=1992862638, snd_una=2909057485
+default	13:19:01.718225-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	13:19:01.718754-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_server_hello
+default	13:19:01.719372-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	13:19:01.720484-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_certificate_request
+default	13:19:01.721724-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_server_certificate
+default	13:19:01.721827-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	13:19:01.723197-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C87.1:2][0x7f90ace10fa0] Performing external trust evaluation
+default	13:19:01.723401-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C87.1:2][0x7f90ace10fa0] Asyncing for external verify block
+default	13:19:01.723617-0500	RedLemon	Connection 87: asked to evaluate TLS Trust
+default	13:19:01.723949-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> auth completion disp=1 cred=0x0
+default	13:19:01.745556-0500	RedLemon	Connection 87: TLS Trust result 0
+default	13:19:01.745681-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C87.1:2][0x7f90ace10fa0] Returning from external verify block with result: true
+default	13:19:01.745805-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C87.1:2][0x7f90ace10fa0] Certificate verification result: OK
+default	13:19:01.746448-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client read_server_finished
+default	13:19:01.746761-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	13:19:01.746803-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	13:19:01.747363-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client send_client_certificate
+default	13:19:01.747554-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client complete_second_flight
+default	13:19:01.747927-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS 1.3 client done
+default	13:19:01.748441-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS client finish_client_handshake
+default	13:19:01.748513-0500	RedLemon	boringssl_context_info_handler(2045) [C87.1:2][0x7f90ace10fa0] Client handshake state: TLS client done
+default	13:19:01.748563-0500	RedLemon	boringssl_context_info_handler(2034) [C87.1:2][0x7f90ace10fa0] Client handshake done
+default	13:19:01.751530-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C87.1:2][0x7f90ace10fa0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(281ms) flight_time(250ms) rtt(248ms) write_stalls(0) read_stalls(6)]
+default	13:19:01.751801-0500	RedLemon	nw_flow_connected [C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:19:01.752185-0500	RedLemon	[C87.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.503s
+default	13:19:01.753416-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state ready
+default	13:19:01.753652-0500	RedLemon	[C87 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.505s
+default	13:19:01.754244-0500	RedLemon	[C87.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:changed_viability @0.505s
+default	13:19:01.754451-0500	RedLemon	[C87 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:changed_viability @0.506s
+default	13:19:01.757370-0500	RedLemon	Connection 87: connected successfully
+default	13:19:01.757529-0500	RedLemon	Connection 87: TLS handshake complete
+default	13:19:01.758322-0500	RedLemon	Connection 87: ready C(N) E(N)
+default	13:19:01.759506-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> now using Connection 87
+default	13:19:01.759962-0500	RedLemon	Connection 87: received viability advisory(Y)
+default	13:19:01.760742-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> sent request, body N 0
+default	13:19:01.925586-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> received response, status 101 content U
+default	13:19:01.927351-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> response ended
+default	13:19:01.927433-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> done using Connection 87
+default	13:19:01.929615-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.681s
+default	13:19:01.929697-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state preparing
+default	13:19:01.929809-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_secondary_connect @0.681s
+default	13:19:01.930330-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:start_connect @0.682s
+default	13:19:01.930408-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:start_connect @0.682s
+default	13:19:01.930608-0500	RedLemon	nw_flow_connected [C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Transport protocol connected (tcp)
+default	13:19:01.930943-0500	RedLemon	[C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_transport @0.682s
+default	13:19:01.932120-0500	RedLemon	[C87 Hostname#f00e5bad:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_transport @0.683s
+default	13:19:01.939470-0500	RedLemon	nw_flow_connected [C87.1 IPv4#60630852:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol connected (CFNetworkConnection-993482300)
+default	13:19:01.940341-0500	RedLemon	[C87.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:finish_connect @0.692s
+default	13:19:01.940390-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state ready
+default	13:19:01.940455-0500	RedLemon	[C87 Hostname#f00e5bad:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:finish_connect @0.692s
+default	13:19:02.016498-0500	RedLemon	Task <FE5350E1-147B-4B69-9B02-9F5A471672B2>.<661> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	13:19:02.016983-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C8EC8CAD-7331-4154-99A4-908630A61641] (reporting strategy default)> on Task <FE5350E1-147B-4B69-9B02-9F5A471672B2>.<661> was not selected for reporting
+default	13:19:02.020895-0500	RedLemon	Task <FE5350E1-147B-4B69-9B02-9F5A471672B2>.<661> summary for task success {transaction_duration_ms=3, response_status=200, cache_hit=true}
+default	13:19:02.021084-0500	RedLemon	Task <FE5350E1-147B-4B69-9B02-9F5A471672B2>.<661> finished successfully
+default	13:19:02.111799-0500	RedLemon	nw_flow_disconnected [C87.1 IPv4#60630852:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] Output protocol disconnected
+default	13:19:02.112107-0500	RedLemon	nw_protocol_tcp_log_summary [C87.1:3]
+	[180701A2-18E4-4782-8DD3-0FD0FBF2AC2E <private>:56266<-><private>:443]
+	Init: 1, Conn_Time: 207.434ms, SYNs: 2, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 156.812ms, rtt_var: 36.812ms rtt_nc: 202.625ms, rtt_var_nc: 65.062ms base rtt: 113ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:41.414726-0500	RedLemon	nw_flow_disconnected [C1.1.1 IPv6#7bf70149.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	18:36:41.421725-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C1] reporting state cancelled
-default	18:36:41.422235-0500	RedLemon	Connection 1: done
-default	18:36:41.422307-0500	RedLemon	tcp_output [C1.1.1:3] flags=[FP.] seq=1840015074, ack=2056325920, win=2048 state=FIN_WAIT_1 rcv_nxt=2056325920, snd_una=1840015035
-default	18:36:41.453107-0500	RedLemon	tcp_input [C1.1.1:3] flags=[F.] seq=2056325944, ack=1840015099, win=284 state=CLOSED rcv_nxt=2056325920, snd_una=1840015074
-default	18:36:42.396998-0500	runningboardd	Invalidating assertion 173-20526-2988 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:42.539237-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:42.539285-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:42.539371-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:43.350986-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:43.354980-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [095B8813-2F88-4C5E-8BE6-F912DD5C992B] (reporting strategy default)> on Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> was not selected for reporting
-default	18:36:43.358964-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:43.359924-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> now using Connection 2
-default	18:36:43.361277-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> sent request, body N 0
-default	18:36:43.451524-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> received response, status 200 content K
-default	18:36:43.451956-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> done using Connection 2
-default	18:36:43.454452-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> response ended
-default	18:36:43.454688-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> summary for task success {transaction_duration_ms=97, response_status=200, connection=2, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=94, response_duration_ms=3, request_bytes=249, response_bytes=334, cache_hit=true}
-default	18:36:43.454916-0500	RedLemon	Task <325B0C56-E344-4C34-AC07-6886A8F49564>.<522> finished successfully
-default	18:36:43.455650-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2989 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:43.455846-0500	runningboardd	Assertion 173-20526-2989 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:43.456680-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:43.456733-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:43.456806-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:44.460705-0500	runningboardd	Invalidating assertion 173-20526-2989 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:44.620121-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:44.620208-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:44.620296-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:45.394855-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:45.405747-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3B8A1739-8A69-474D-81B2-34636A4CA1D2] (reporting strategy default)> on Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> was not selected for reporting
-default	18:36:45.408128-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:45.408453-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> now using Connection 2
-default	18:36:45.411411-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> sent request, body N 0
-default	18:36:45.477446-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> received response, status 200 content K
-default	18:36:45.479329-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> done using Connection 2
-default	18:36:45.479548-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> response ended
-default	18:36:45.479923-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> summary for task success {transaction_duration_ms=73, response_status=200, connection=2, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=70, response_duration_ms=2, request_bytes=249, response_bytes=556, cache_hit=true}
-default	18:36:45.480369-0500	RedLemon	Task <BF19C079-DC71-48DA-85E4-322EE9F6FB3D>.<523> finished successfully
-default	18:36:45.485634-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2990 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:45.487603-0500	runningboardd	Assertion 173-20526-2990 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:45.490220-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:45.490267-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:45.490312-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:46.492851-0500	runningboardd	Invalidating assertion 173-20526-2990 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:46.669820-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:46.669908-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:46.669992-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:47.308901-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:47.310105-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [428A41BC-E151-429F-A96A-20CCB93F2C41] (reporting strategy default)> on Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> was not selected for reporting
-default	18:36:47.313793-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:47.314932-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> now using Connection 2
-default	18:36:47.315913-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> sent request, body N 0
-default	18:36:47.353948-0500	RedLemon	🔍 MPV track-list/count: 6
-default	18:36:47.354366-0500	RedLemon	🔍 Track 0 type: audio
-default	18:36:47.354639-0500	RedLemon	🔍 Track 1 type: sub
-default	18:36:47.354825-0500	RedLemon	✅ Found subtitle track: ID=1, lang=lit, title="DVD"
-default	18:36:47.354998-0500	RedLemon	🔍 Track 2 type: video
-default	18:36:47.355690-0500	RedLemon	🔍 Track 3 type: audio
-default	18:36:47.355974-0500	RedLemon	🔍 Track 4 type: sub
-default	18:36:47.356298-0500	RedLemon	✅ Found subtitle track: ID=2, lang=eng, title=nil
-default	18:36:47.356687-0500	RedLemon	🔍 Track 5 type: sub
-default	18:36:47.357032-0500	RedLemon	✅ Found subtitle track: ID=3, lang=eng, title=SDH
-default	18:36:47.357294-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
-default	18:36:47.379079-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> received response, status 200 content K
-default	18:36:47.379266-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> done using Connection 2
-default	18:36:47.379920-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> response ended
-default	18:36:47.380131-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> summary for task success {transaction_duration_ms=68, response_status=200, connection=2, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=67, response_duration_ms=0, request_bytes=249, response_bytes=333, cache_hit=false}
-default	18:36:47.380414-0500	RedLemon	Task <C56581C4-5AE0-4935-9D55-68AAF8024443>.<524> finished successfully
-default	18:36:47.382682-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2991 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:47.382981-0500	runningboardd	Assertion 173-20526-2991 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:47.385788-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:47.385962-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:47.386126-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:48.414349-0500	runningboardd	Invalidating assertion 173-20526-2991 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:48.520939-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:48.521034-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:48.521267-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:49.399020-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:49.400270-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5E70462C-AACA-4283-942E-E3CC3C2FA13C] (reporting strategy default)> on Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> was not selected for reporting
-default	18:36:49.404979-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:49.405766-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> now using Connection 2
-default	18:36:49.406856-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> sent request, body N 0
-default	18:36:49.470458-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> received response, status 200 content K
-default	18:36:49.470717-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> done using Connection 2
-default	18:36:49.471760-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> response ended
-default	18:36:49.472218-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> summary for task success {transaction_duration_ms=70, response_status=200, connection=2, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=68, response_duration_ms=1, request_bytes=249, response_bytes=342, cache_hit=false}
-default	18:36:49.472600-0500	RedLemon	Task <79DCD193-2337-4AEA-8FAB-B9C3407641F6>.<525> finished successfully
-default	18:36:49.473541-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2992 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:49.473783-0500	runningboardd	Assertion 173-20526-2992 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:49.475878-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:49.475965-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:49.476047-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:50.481837-0500	runningboardd	Invalidating assertion 173-20526-2992 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:50.655719-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:50.655905-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:50.656002-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:51.316481-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:51.317280-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [711D711B-E131-479F-BC96-52054351A2A7] (reporting strategy default)> on Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> was not selected for reporting
-default	18:36:51.320245-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:51.321418-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> now using Connection 2
-default	18:36:51.322750-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> sent request, body N 0
-default	18:36:51.379200-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> received response, status 200 content K
-default	18:36:51.379525-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> done using Connection 2
-default	18:36:51.380414-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> response ended
-default	18:36:51.380824-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> summary for task success {transaction_duration_ms=62, response_status=200, connection=2, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=60, response_duration_ms=1, request_bytes=249, response_bytes=385, cache_hit=false}
-default	18:36:51.381206-0500	RedLemon	Task <B45CE49D-7BB1-45E4-A538-5FFCC5D9D49E>.<526> finished successfully
-default	18:36:51.382718-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2993 target:20526 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	18:36:51.383088-0500	runningboardd	Assertion 173-20526-2993 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:51.384825-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:51.385150-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:51.385247-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:51.832237-0500	RedLemon	Task <0D1A4225-20D6-4105-85DB-E5A5517D7E75>.<527> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	18:36:51.832593-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6D695967-7BBF-41EC-89F6-84114C59BE4A] (reporting strategy default)> on Task <0D1A4225-20D6-4105-85DB-E5A5517D7E75>.<527> was not selected for reporting
-default	18:36:51.835712-0500	RedLemon	Task <0D1A4225-20D6-4105-85DB-E5A5517D7E75>.<527> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
-default	18:36:51.835834-0500	RedLemon	Task <0D1A4225-20D6-4105-85DB-E5A5517D7E75>.<527> finished successfully
-default	18:36:52.479516-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:52.479923-0500	runningboardd	Invalidating assertion 173-20526-2993 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:52.480554-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0A938D8D-89E1-4128-A928-ECB69619F971] (reporting strategy default)> on Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> was not selected for reporting
-default	18:36:52.481597-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:52.483604-0500	RedLemon	Connection 59: enabling TLS
-default	18:36:52.483654-0500	RedLemon	Connection 59: starting, TC(0x0)
-default	18:36:52.483720-0500	RedLemon	[C59 A7AA571F-D081-490D-A98B-E0DDA283772A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{74016DB8-B85F-44F1-9889-73D2795F0627}{(null)}{Y}{2} (private), proc: A80BB331-AB07-38D2-AE43-835FF9477B91] start
-default	18:36:52.483875-0500	RedLemon	[C59 Hostname#dde335fe:443 initial path ((null))] event: path:start @0.000s
-default	18:36:52.484960-0500	RedLemon	[C59 Hostname#dde335fe:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 76E000AB-F8E3-4A90-8020-6E6BDC86C826
-default	18:36:52.486202-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
-default	18:36:52.486324-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state preparing
-default	18:36:52.486659-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> setting up Connection 59
-default	18:36:52.486960-0500	mDNSResponder	[R2216] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, options: 0x8 {use-failover}, client pid: 20526 (RedLemon)
-default	18:36:52.494136-0500	mDNSResponder	[R2216] getaddrinfo stop -- hostname: <mask.hash: 'qz24Zvqi6IpMJhdAgd246A=='>, client pid: 20526 (RedLemon)
-default	18:36:52.494695-0500	RedLemon	nw_endpoint_resolver_update [C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d3ff7223:443
-default	18:36:52.494941-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.011s
-default	18:36:52.495482-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 initial path ((null))] event: path:start @0.011s
-default	18:36:52.496165-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.012s, uuid: C0319486-7707-49F1-9978-20FF1464FC43
-default	18:36:52.496563-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.012s
-default	18:36:52.497656-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.013s
-default	18:36:52.498608-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.014s
-default	18:36:52.498837-0500	RedLemon	tcp_output [C59.1:3] flags=[S] seq=2992985841, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2992985841
-default	18:36:52.617280-0500	RedLemon	tcp_input [C59.1:3] flags=[S.] seq=3652429438, ack=2992985842, win=31856 state=SYN_SENT rcv_nxt=0, snd_una=2992985841
-default	18:36:52.617486-0500	RedLemon	nw_flow_connected [C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:52.617677-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.133s
-default	18:36:52.617754-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.133s
-default	18:36:52.618213-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C59.1:2][0x7f99d14d7280] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	18:36:52.619420-0500	RedLemon	boringssl_context_info_handler(2028) [C59.1:2][0x7f99d14d7280] Client handshake started
-default	18:36:52.619623-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS client enter_early_data
-default	18:36:52.619770-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS client read_server_hello
-default	18:36:52.663528-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:52.663877-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:52.663934-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:52.744957-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	18:36:52.746099-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_server_hello
-default	18:36:52.747270-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	18:36:52.747725-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_certificate_request
-default	18:36:52.748440-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_server_certificate
-default	18:36:52.748517-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	18:36:52.749491-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C59.1:2][0x7f99d14d7280] Performing external trust evaluation
-default	18:36:52.749660-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C59.1:2][0x7f99d14d7280] Asyncing for external verify block
-default	18:36:52.750273-0500	RedLemon	Connection 59: asked to evaluate TLS Trust
-default	18:36:52.750602-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> auth completion disp=1 cred=0x0
-default	18:36:52.760737-0500	RedLemon	Connection 59: TLS Trust result 0
-default	18:36:52.760869-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C59.1:2][0x7f99d14d7280] Returning from external verify block with result: true
-default	18:36:52.761081-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C59.1:2][0x7f99d14d7280] Certificate verification result: OK
-default	18:36:52.761492-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client read_server_finished
-default	18:36:52.761692-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	18:36:52.761713-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	18:36:52.761733-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client send_client_certificate
-default	18:36:52.761800-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client complete_second_flight
-default	18:36:52.762028-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS 1.3 client done
-default	18:36:52.762336-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS client finish_client_handshake
-default	18:36:52.762425-0500	RedLemon	boringssl_context_info_handler(2045) [C59.1:2][0x7f99d14d7280] Client handshake state: TLS client done
-default	18:36:52.762479-0500	RedLemon	boringssl_context_info_handler(2034) [C59.1:2][0x7f99d14d7280] Client handshake done
-default	18:36:52.763263-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C59.1:2][0x7f99d14d7280] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(144ms) flight_time(127ms) rtt(125ms) write_stalls(0) read_stalls(4)]
-default	18:36:52.763602-0500	RedLemon	nw_flow_connected [C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:52.763879-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.280s
-default	18:36:52.764671-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state ready
-default	18:36:52.764765-0500	RedLemon	[C59 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.280s
-default	18:36:52.764919-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.281s
-default	18:36:52.764990-0500	RedLemon	[C59 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.281s
-default	18:36:52.765324-0500	RedLemon	Connection 59: connected successfully
-default	18:36:52.765377-0500	RedLemon	Connection 59: TLS handshake complete
-default	18:36:52.765681-0500	RedLemon	Connection 59: ready C(N) E(N)
-default	18:36:52.765928-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> now using Connection 59
-default	18:36:52.766020-0500	RedLemon	Connection 59: received viability advisory(Y)
-default	18:36:52.766318-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> sent request, body N 0
-default	18:36:52.881603-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> received response, status 101 content U
-default	18:36:52.882030-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> response ended
-default	18:36:52.882138-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> done using Connection 59
-default	18:36:52.883117-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.399s
-default	18:36:52.883191-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state preparing
-default	18:36:52.883405-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.399s
-default	18:36:52.883779-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.399s
-default	18:36:52.883903-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.400s
-default	18:36:52.884047-0500	RedLemon	nw_flow_connected [C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	18:36:52.884310-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.400s
-default	18:36:52.884427-0500	RedLemon	[C59 Hostname#dde335fe:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.400s
-default	18:36:52.884650-0500	RedLemon	nw_flow_connected [C59.1 IPv4#d3ff7223:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3142401894)
-default	18:36:52.885179-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.401s
-default	18:36:52.885258-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state ready
-default	18:36:52.885380-0500	RedLemon	[C59 Hostname#dde335fe:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.401s
-default	18:36:53.005938-0500	RedLemon	nw_flow_disconnected [C59.1 IPv4#d3ff7223:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol disconnected
-default	18:36:53.006930-0500	RedLemon	nw_protocol_tcp_log_summary [C59.1:3]
-	[BA772E39-3E04-40F7-A65B-A4D34214BA66 <private>:55408<-><private>:443]
-	Init: 1, Conn_Time: 118.646ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 4, rtt: 122.875ms, rtt_var: 4.875ms rtt_nc: 119.406ms, rtt_var_nc: 26.187ms base rtt: 118ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	18:36:53.007529-0500	RedLemon	tcp_input [C59.1:3] flags=[F.] seq=3652432469, ack=2992986899, win=249 state=ESTABLISHED rcv_nxt=3652432469, snd_una=2992986899
-default	18:36:53.008637-0500	RedLemon	[C59.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.524s, error Socket is not connected
-default	18:36:53.008701-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state failed error Socket is not connected
-default	18:36:53.008780-0500	RedLemon	[C59 Hostname#dde335fe:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:disconnect @0.524s
-error	18:36:53.009216-0500	RedLemon	nw_read_request_report [C59] Receive failed with error "Socket is not connected"
-error	18:36:53.009567-0500	RedLemon	nw_flow_service_reads [C59.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] No output handler
-error	18:36:53.010284-0500	RedLemon	tcp_output [C59.1:3] flags=[R.] seq=2992987030, ack=3652432470, win=2047 state=CLOSED rcv_nxt=3652432470, snd_una=2992986899
-error	18:36:53.010777-0500	RedLemon	Connection 59: received failure notification
-default	18:36:53.011032-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> summary for task success {transaction_duration_ms=529, response_status=101, connection=59, protocol="http/1.1", domain_lookup_duration_ms=10, connect_duration_ms=266, secure_connection_duration_ms=144, private_relay=false, request_start_ms=284, request_duration_ms=0, response_start_ms=400, response_duration_ms=0, request_bytes=359, response_bytes=330, cache_hit=false}
-error	18:36:53.011085-0500	RedLemon	nw_flow_add_write_request [C59.1 IPv4#d3ff7223:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] cannot accept write requests
-default	18:36:53.011115-0500	RedLemon	Task <CD1A7888-CBAF-473F-8A4F-D6ED17C53DDE>.<1> finished successfully
-error	18:36:53.011153-0500	RedLemon	nw_write_request_report [C59] Send failed with error "Socket is not connected"
-default	18:36:53.011219-0500	RedLemon	Connection 59: cleaning up
-default	18:36:53.011280-0500	RedLemon	[C59 A7AA571F-D081-490D-A98B-E0DDA283772A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancel
-default	18:36:53.011487-0500	RedLemon	[C59 A7AA571F-D081-490D-A98B-E0DDA283772A Hostname#dde335fe:443 tcp, url hash: 7af73cd4, tls, definite, attribution: developer] cancelled
-	[C59.1 C0319486-7707-49F1-9978-20FF1464FC43 10.0.0.249:55408<->IPv4#d3ff7223:443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:19:02.112747-0500	RedLemon	[C87.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] event: flow:disconnect @0.864s, error Socket is not connected
+default	13:19:02.112795-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state failed error Socket is not connected
+default	13:19:02.112858-0500	RedLemon	[C87 Hostname#f00e5bad:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, dns)] event: flow:disconnect @0.864s
+error	13:19:02.112901-0500	RedLemon	nw_read_request_report [C87] Receive failed with error "Socket is not connected"
+error	13:19:02.112941-0500	RedLemon	nw_flow_service_reads [C87.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] No output handler
+default	13:19:02.113020-0500	RedLemon	tcp_output [C87.1:3] flags=[F.] seq=2909058672, ack=1992865644, win=2048 state=FIN_WAIT_1 rcv_nxt=1992865644, snd_una=2909058541
+error	13:19:02.113151-0500	RedLemon	Connection 87: received failure notification
+default	13:19:02.113301-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> summary for task success {transaction_duration_ms=867, response_status=101, connection=87, protocol="http/1.1", domain_lookup_duration_ms=5, connect_duration_ms=490, secure_connection_duration_ms=281, private_relay=false, request_start_ms=514, request_duration_ms=0, response_start_ms=679, response_duration_ms=2, request_bytes=359, response_bytes=330, cache_hit=false}
+error	13:19:02.113502-0500	RedLemon	nw_flow_add_write_request [C87.1 IPv4#60630852:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, dns)] cannot accept write requests
+error	13:19:02.113569-0500	RedLemon	nw_write_request_report [C87] Send failed with error "Socket is not connected"
+default	13:19:02.113631-0500	RedLemon	Connection 87: cleaning up
+default	13:19:02.113719-0500	RedLemon	[C87 14505E21-24F5-44AE-8733-A337687B87DF Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancel
+default	13:19:02.113939-0500	RedLemon	[C87 14505E21-24F5-44AE-8733-A337687B87DF Hostname#f00e5bad:443 tcp, url hash: 224e8945, tls, definite, attribution: developer] cancelled
+	[C87.1 7BCF35A3-C381-441C-B3F2-4E95228C8D0D 192.168.2.13:56266<->IPv4#60630852:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 0.527s, DNS @0.001s took 0.010s, TCP @0.399s took 0.119s
+	Duration: 0.865s, DNS @0.001s took 0.005s, TCP @0.682s took 0.208s
 	bytes in/out: 0/0, packets in/out: 0/0, rtt: 0.000s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:53.011885-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C59] reporting state cancelled error Socket is not connected
-default	18:36:53.011995-0500	RedLemon	Connection 59: done
-default	18:36:53.327632-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	18:36:53.332597-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2DA2CB59-CF57-4073-A548-422CE8CE5AC4] (reporting strategy default)> on Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> was not selected for reporting
-default	18:36:53.337599-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	18:36:53.337888-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> now using Connection 2
-default	18:36:53.341877-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> sent request, body N 0
-default	18:36:53.411283-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> received response, status 200 content K
-default	18:36:53.412050-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> done using Connection 2
-default	18:36:53.413934-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> response ended
-default	18:36:53.414258-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> summary for task success {transaction_duration_ms=79, response_status=200, connection=2, reused=1, request_start_ms=6, request_duration_ms=0, response_start_ms=76, response_duration_ms=2, request_bytes=249, response_bytes=332, cache_hit=true}
-default	18:36:53.414748-0500	RedLemon	Task <27BB0410-6F40-42E2-9A3C-32BED8CA8E3A>.<528> finished successfully
-default	18:36:53.496335-0500	runningboardd	Invalidating assertion 173-140-2959 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
-default	18:36:53.580291-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):20526] from originator [anon<RedLemon>(501):20526] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-20526-2998 target:20526 attributes:[
+default	13:19:02.113806-0500	RedLemon	Task <77526795-AC53-4338-971E-9AAE54A507E6>.<1> finished successfully
+default	13:19:02.115819-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C87] reporting state cancelled error Socket is not connected
+default	13:19:02.116169-0500	RedLemon	Connection 87: done
+default	13:19:02.116691-0500	RedLemon	tcp_input [C87.1:3] flags=[F.] seq=1992865668, ack=2909058541, win=249 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+default	13:19:02.280509-0500	RedLemon	tcp_input [C77.1.1:3] flags=[FP.] seq=3531388438, ack=2739944524, win=8 state=ESTABLISHED rcv_nxt=3531388399, snd_una=2739944524
+default	13:19:02.280615-0500	RedLemon	nw_protocol_tcp_log_summary [C77.1.1:3]
+	[0B4C677B-2941-419E-9BD1-45D54E0CCDA5 <private>:56259<-><private>:443]
+	Init: 1, Conn_Time: 23.045ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: kernel, rtt_upd: 5, rtt: 25.625ms, rtt_var: 6.437ms rtt_nc: 22.468ms, rtt_var_nc: 5.250ms base rtt: 18ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	13:19:02.281462-0500	RedLemon	Connection 77: read-side closed
+default	13:19:02.281517-0500	RedLemon	Connection 77: read-side closed
+default	13:19:02.281553-0500	RedLemon	Connection 77: read-side closed
+default	13:19:02.281830-0500	RedLemon	Connection 77: cleaning up
+default	13:19:02.281945-0500	RedLemon	[C77 39099ADD-7102-4095-8624-7C3F7355E93D Hostname#ddcfd216:443 quic-connection, url hash: 6c659e47, definite, attribution: developer] cancel
+default	13:19:02.282207-0500	RedLemon	[C77 39099ADD-7102-4095-8624-7C3F7355E93D Hostname#ddcfd216:443 quic-connection, url hash: 6c659e47, definite, attribution: developer] cancelled
+	[C77.1.1 7584A48C-4BDD-4B4A-AB5A-CA78E2C40608 192.168.2.13:56259<->IPv4#5d4d7301:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
+	Privacy Stance: Not Eligible
+	Duration: 15.153s, DNS @0.002s took 0.036s, TCP @0.042s took 0.024s, TLS 1.3 took 0.041s
+	bytes in/out: 80520/908, packets in/out: 16/29, rtt: 0.025s, retransmitted bytes: 0, out-of-order bytes: 63
+default	13:19:02.283751-0500	RedLemon	nw_flow_disconnected [C77.1.1 IPv4#5d4d7301:443 cancelled channel-flow ((null))] Output protocol disconnected
+default	13:19:02.284317-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C77] reporting state cancelled
+error	13:19:02.285339-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+error	13:19:02.285603-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+error	13:19:02.285739-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+error	13:19:02.285871-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+error	13:19:02.286402-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+default	13:19:02.286469-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+error	13:19:02.286572-0500	RedLemon	tcp_input [C87.1:3] flags=[R] seq=1992865644, ack=0, win=0 state=CLOSED rcv_nxt=1992865644, snd_una=2909058541
+default	13:19:02.287012-0500	RedLemon	tcp_output [C77.1.1:3] flags=[FP.] seq=2739944563, ack=3531388463, win=4298 state=LAST_ACK rcv_nxt=3531388463, snd_una=2739944524
+default	13:19:02.288255-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DAD3B8CB-9628-4520-8512-ED9EEFC1382C] (reporting strategy default)> on Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> was not selected for reporting
+default	13:19:02.290122-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:02.292500-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> now using Connection 9
+default	13:19:02.301832-0500	RedLemon	0x7f90ad92e388 ID=652 Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> sent request, body N 0
+default	13:19:03.053946-0500	RedLemon	0x7f90ad92e388 ID=652 Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> received response, status 200 content K
+default	13:19:03.054779-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> response ended
+default	13:19:03.055811-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> done using Connection 9
+default	13:19:03.056386-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> summary for task success {transaction_duration_ms=767, response_status=200, connection=9, reused=1, request_start_ms=3, request_duration_ms=9, response_start_ms=764, response_duration_ms=2, request_bytes=529, response_bytes=668, cache_hit=true}
+default	13:19:03.057353-0500	RedLemon	Task <EDCFA937-DA5C-49D9-8965-B0ACCFE4F345>.<662> finished successfully
+default	13:19:03.059329-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1129 target:18244 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	18:36:53.580590-0500	runningboardd	Assertion 173-20526-2998 (target:[anon<RedLemon>(501):20526]) will be created as active as no start-time-defining assertions exist
-default	18:36:53.589449-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:53.589512-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:53.589566-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:53.622222-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:53.623158-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:53.629847-0500	runningboardd	[anon<RedLemon>(501):20526] Set darwin role to: UserInteractiveNonFocal
-default	18:36:53.632602-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:54.051265-0500	RedLemon	tcp_input [C50.1.1:3] flags=[F.] seq=1784753575, ack=215251403, win=8 state=ESTABLISHED rcv_nxt=1784753575, snd_una=215251403
-default	18:36:54.051354-0500	RedLemon	nw_protocol_tcp_log_summary [C50.1.1:3]
-	[387C54BB-4264-442E-823B-292F7C6C4C0B <private>:62284<-><private>:443]
-	Init: 1, Conn_Time: 205.321ms, SYNs: 3, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 12, rtt: 31.437ms, rtt_var: 14.125ms rtt_nc: 47.843ms, rtt_var_nc: 37.812ms base rtt: 10ms
-	ACKs-compressed: 0, ACKs delayed: 343 delayed ACKs sent: 0
-default	18:36:54.055831-0500	RedLemon	Connection 50: read-side closed
-default	18:36:54.056058-0500	RedLemon	Connection 50: read-side closed
-default	18:36:54.056190-0500	RedLemon	Connection 50: read-side closed
-default	18:36:54.056745-0500	RedLemon	Connection 50: cleaning up
-default	18:36:54.056832-0500	RedLemon	[C50 B3E33B3C-1FB7-4F01-9E53-1146445CB19E Hostname#5b531596:443 quic-connection, url hash: defdf7a5, definite, attribution: developer] cancel
-default	18:36:54.057857-0500	RedLemon	[C50 B3E33B3C-1FB7-4F01-9E53-1146445CB19E Hostname#5b531596:443 quic-connection, url hash: defdf7a5, definite, attribution: developer] cancelled
-	[C50.1.1 A98B1099-8F41-40E9-B188-3461BB349BAC 2607:fea8:995b:fd00:8018:38c4:5c74:5691.62284<->IPv6#19ffc9c9.443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
+default	13:19:03.060250-0500	runningboardd	Assertion 173-18244-1129 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:03.061379-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:03.061429-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:03.061477-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:03.189620-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:03.553647-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> summary for task failure {transaction_duration_ms=10005, response_status=-1, connection=24, reused=1, request_start_ms=6, request_duration_ms=0, response_start_ms=0, response_duration_ms=0, request_bytes=38, response_bytes=0, cache_hit=false}
+error	13:19:03.555994-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> finished with error [-1001] Error Domain=NSURLErrorDomain Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7f90aa7ca750 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>, NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _kCFStreamErrorDomainKey=4}
+default	13:19:03.559576-0500	RedLemon	Task <06325612-2103-4D4F-BBAE-233FC526EEE6>.<647> done using Connection 24
+default	13:19:03.564208-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 60
+default	13:19:03.566546-0500	RedLemon	   INPUT[0]: Mirror Mirror 2012 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
+default	13:19:03.567226-0500	RedLemon	   INPUT[1]: Mirror Mirror 2012 1080p BluRay x264-OFT mkv | 1080p | zilean
+default	13:19:03.567584-0500	RedLemon	   INPUT[2]: Mirror Mirror 2012 720p BluRay x264 YIFY mp4 | 720p | zilean
+default	13:19:03.567800-0500	RedLemon	   INPUT[3]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean
+default	13:19:03.568016-0500	RedLemon	   INPUT[4]: Mirror Mirror 2012 BluRay 1080p MULTi REMUX AVC DTS-HD MA 5 1-LEGi0N mkv | 1080p | zilean
+default	13:19:03.568274-0500	RedLemon	   INPUT[5]: mirror-mirror_480p mp4 | 480p | zilean
+default	13:19:03.568584-0500	RedLemon	   INPUT[6]: Mirror 1975 1080p BluRay REMUX AVC LPCM 1 0 EngSub-ShNK | 1080p | zilean
+default	13:19:03.568923-0500	RedLemon	   INPUT[7]: Mirror Mirror 2012 1080p Bluray x264 anoXmous mp4 | 1080p | zilean
+default	13:19:03.569304-0500	RedLemon	   INPUT[8]: Mirror 1975 RUSSIAN 1080p BluRay x265-VXT mp4 | 1080p | zilean
+default	13:19:03.569729-0500	RedLemon	   INPUT[9]: The Mirror 1997 1080p WEB-DL AAC 2 0 x264 mkv | 1080p | zilean
+default	13:19:03.569962-0500	RedLemon	   INPUT[10]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean
+default	13:19:03.570142-0500	RedLemon	   INPUT[11]: Mirror Mirror 1990 1080p BluRay REMUX AVC FLAC 2 0-dOwn mkv | 1080p | zilean
+default	13:19:03.570401-0500	RedLemon	   INPUT[12]: Mirror Mirror 2012 1080p BluRay x265-RARBG mp4 | 1080p | zilean
+default	13:19:03.571144-0500	RedLemon	   INPUT[13]: Mirror Mirror 1990 1080p BluRay x265-RARBG | 1080p | zilean
+default	13:19:03.574336-0500	RedLemon	   INPUT[14]: The Mirror 2014 1080p WEBRip x264 AAC-[YTS MX] mp4 | 1080p | zilean
+default	13:19:03.574812-0500	RedLemon	   INPUT[15]: Mirror Mirror (1990) [1080p] [BluRay] [YTS MX] | 1080p | zilean
+default	13:19:03.576924-0500	RedLemon	   INPUT[16]: Mirror 1975 RUSSIAN 1080p BluRay H264 AAC-VXT | 1080p | zilean
+default	13:19:03.577213-0500	RedLemon	   INPUT[17]: Mirror (1975) Criterion (1080p BluRay x265 HEVC 10bit AAC 1 0 Russian Tigole) | 1080p | zilean
+default	13:19:03.577508-0500	RedLemon	   INPUT[18]: Mirror Mirror 1990 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
+default	13:19:03.577800-0500	RedLemon	   INPUT[19]: Mirror Mirror 2012 1080p BDRip H264 AAC - KiNGDOM | 1080p | zilean
+default	13:19:03.578401-0500	RedLemon	   INPUT[20]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean
+default	13:19:03.578607-0500	RedLemon	   INPUT[21]: Mirror 1975 RUSSIAN 1080p BluRay x264 DTS-ZQ | 1080p | zilean
+default	13:19:03.578778-0500	RedLemon	   INPUT[22]: Mirror Mirror 2022 1080p BluRay x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean
+default	13:19:03.578958-0500	RedLemon	   INPUT[23]: The Mirror 1975 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
+default	13:19:03.579125-0500	RedLemon	   INPUT[24]: the mirror 1975 1080p bluray x264-ghouls[PRiME] mkv | 1080p | zilean
+default	13:19:03.579436-0500	RedLemon	   INPUT[25]: The Mirror 1975 SUBFRENCH 1080p BluRay x264-CherryCoke mkv | 1080p | zilean
+default	13:19:03.579715-0500	RedLemon	   INPUT[26]: The Mirror 1975 BDRemux 1080p mkv | 1080p | zilean
+default	13:19:03.579922-0500	RedLemon	   INPUT[27]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean
+default	13:19:03.580101-0500	RedLemon	   INPUT[28]: mirror 1975 remastered 1080p bluray x264-usury mkv | 1080p | zilean
+default	13:19:03.580271-0500	RedLemon	   INPUT[29]: Mirror 1975 REPACK 1080p BluRay REMUX AVC FLAC 1 0-BLURANiUM mkv | 1080p | zilean
+default	13:19:03.580440-0500	RedLemon	   INPUT[30]: Mirror Mirror 1990 1080p BluRay x264 DTS-FGT | 1080p | zilean
+default	13:19:03.580609-0500	RedLemon	   INPUT[31]: Mirror 1975 1080p BluRay HEVC AAC-SARTRE | 1080p | zilean
+default	13:19:03.580812-0500	RedLemon	   INPUT[32]: Mirror Mirror 2012 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
+default	13:19:03.581223-0500	RedLemon	   INPUT[33]: Mirror Mirror 2012 1080p BluRay x264-SECTOR7 | 1080p | zilean
+default	13:19:03.581510-0500	RedLemon	   INPUT[34]: The Mirror (1997) [1080p] [WEBRip] [YTS MX] | 1080p | zilean
+default	13:19:03.582281-0500	RedLemon	   INPUT[35]: Mirror Mirror 2012 BDMux ITA ENG 1080p x265 Paso77 mkv | 1080p | zilean
+default	13:19:03.582639-0500	RedLemon	   INPUT[36]: Breaking.Bad.S05.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC
+Breaking.Bad.S05E15.Granite.State.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC.mkv
+👤 46 💾 5.77 GB ⚙️ ThePirateBay | 2160p | torrentio
+default	13:19:03.582907-0500	RedLemon	   INPUT[37]: Breaking Bad (2008) Season 02 S02 (2160p WEBRip x265 HEVC 10bit AAC 5.1 Joy) [UTR]
+Breaking Bad S02E04 Down (2160p x265 10bit Joy).mkv
+👤 43 💾 1.38 GB ⚙️ 1337x | 2160p | torrentio
+default	13:19:03.583214-0500	RedLemon	   INPUT[38]: Breaking.Bad.S03.1080p.BluRay.x265-RARBG
+Breaking.Bad.S03E12.1080p.BluRay.x265-RARBG.mp4
+👤 284 💾 753.42 MB ⚙️ RARBG | 1080p | torrentio
+default	13:19:03.583410-0500	RedLemon	   INPUT[39]: Breaking.Bad.S05.1080p.BluRay.x265-RARBG
+Breaking.Bad.S05E09.1080p.BluRay.x265-RARBG.mp4
+👤 272 💾 755.88 MB ⚙️ RARBG | 1080p | torrentio
+default	13:19:03.583592-0500	RedLemon	   INPUT[40]: Breaking Bad Full 1080p PT-BR
+Breaking.Bad.S02.Season.2.1080p/Breaking.Bad.S02E10.1080p.mkv
+👤 226 💾 544.19 MB ⚙️ MagnetDL
+🇵🇹 | 1080p | torrentio
+default	13:19:03.583795-0500	RedLemon	   INPUT[41]: Breaking Bad S04 Complete (2011) 1080p ENG-ITA MultiSub x264 Blu
+Ep 04 - Bullet Points - La Versione di Skyler.mkv
+👤 175 💾 2.72 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
+default	13:19:03.583940-0500	RedLemon	   INPUT[42]: Breaking Bad S02 1080p BluRay AV1 Opus [AV1D]
+Breaking Bad S02 08.mkv
+👤 160 💾 338.7 MB ⚙️ 1337x | 1080p | torrentio
+default	13:19:03.584108-0500	RedLemon	   INPUT[43]: Breaking.Bad.S02.1080p.BluRay.x265-RARBG
+Breaking.Bad.S02E10.1080p.BluRay.x265-RARBG.mp4
+👤 124 💾 755.82 MB ⚙️ RARBG | 1080p | torrentio
+default	13:19:03.584234-0500	RedLemon	   INPUT[44]: Breaking Bad S02 Season 2 1080p BluRay ReEnc-DeeJayAhmed [Little
+Breaking.Bad.S02E02.1080p.BluRay.ReEnc-DeeJayAhmed.mkv
+👤 120 💾 551.04 MB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:19:03.584639-0500	RedLemon	   INPUT[45]: Breaking Bad (2008) Season 1-5 S01-S05 (1080p BluRay x265 HEVC 1
+Season 3/Breaking Bad (2008) - S03E08 - I See You (1080p BluRay x265 Silence).mkv
+👤 89 💾 1.86 GB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:19:03.584974-0500	RedLemon	   INPUT[46]: Breaking Bad Complete S01-S05 1080p 10bit BluRay x265 HEVC 6CH-MRN
+Breaking.Bad.S03.1080p.10bit.BluRay.x265.HEVC.6CH-MRN/Breaking.Bad.S03E09.Kafkaesque.1080p.10bit.BluRay.x265.HEVC.6CH-MRN.mkv
+👤 60 💾 656.94 MB ⚙️ 1337x | 1080p | torrentio
+default	13:19:03.585215-0500	RedLemon	   INPUT[47]: Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub
+Breaking Bad Season 3/Breaking.Bad.S03E08.I.See.You.1080p.NF.WEB-DL.AV1.EAC3.mkv
+👤 49 💾 820.92 MB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 | 1080p | torrentio
+default	13:19:03.585484-0500	RedLemon	   INPUT[48]: Breaking.Bad.SEASON.01.S01.COMPLETE.1080p.10bit.BluRay.6CH.x265.HEVC-PSA
+Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.1080p.10bit.BluRay.6CH.x265.HEVC-PSA.mkv
+👤 49 💾 534.31 MB ⚙️ 1337x | 1080p | torrentio
+default	13:19:03.585716-0500	RedLemon	   INPUT[49]: Breaking Bad (2008) S02 (1080p x265 10bit BD DTS-HD MA 5.1) [Prof]
+S02E02 - Grilled.mkv
+👤 34 💾 6.03 GB ⚙️ TorrentGalaxy | 1080p | torrentio
+default	13:19:03.585918-0500	RedLemon	   INPUT[50]: Breaking Bad (S05)(2012)(1080p)(VP9)(WebDL)( EN 5.1+SPA 2.0)(Complete) PHDTeam
+Breaking Bad - S05E12_Vzteklý pes.mkv
+👤 33 💾 500.85 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇪🇸 | 1080p | torrentio
+default	13:19:03.586256-0500	RedLemon	   INPUT[51]: Breaking.Bad.S01-S02-S03-S04-S05.1080p.BluRay.10bit.HEVC-MkvCage
+Breaking.Bad.S05.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws/Breaking.Bad.S05E09.Blood.Money.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws.mkv
+👤 31 💾 1 GB ⚙️ ThePirateBay | 1080p | torrentio
+default	13:19:03.586529-0500	RedLemon	   INPUT[52]: Breaking Bad S02 Complete (2009) 1080p ENG-ITA MultiSub x264 Blu
+Ep 05 - Breakage - Una Pistola Per Jesse.mkv
+👤 31 💾 3.06 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
+default	13:19:03.587862-0500	RedLemon	   INPUT[53]: Breaking Bad Season 1 Complete 720p.BRrip.Sujaidr (pimprg)
+Breaking Bad s01e07 720p.BRrip.Sujaidr.mkv
+👤 43 💾 381.64 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:19:03.588165-0500	RedLemon	   INPUT[54]: Breaking Bad Season 3 Complete 720p.BRrip.Sujaidr
+breaking bad s03e11 720p brrip sujaidr.mkv
+👤 37 💾 377.74 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:19:03.588406-0500	RedLemon	   INPUT[55]: Breaking Bad Season 4 Complete 720p.BRrip.Sujaidr
+breaking bad s04e12 720p brrip sujaidr.mkv
+👤 36 💾 367.72 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:19:03.589724-0500	RedLemon	   INPUT[56]: Breaking Bad Season 5 Complete 720p.BRrip.Sujaidr
+breaking bad s05e11 720p brrip sujaidr.mkv
+👤 34 💾 379.11 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:19:03.590030-0500	RedLemon	   INPUT[57]: Breaking Bad Season 2 Complete 720p.BRrip.Sujaidr
+Breaking Bad s02ep6 720p brrip.sujaidr.mkv
+👤 33 💾 378.78 MB ⚙️ ThePirateBay | 720p | torrentio
+default	13:19:03.590522-0500	RedLemon	   INPUT[58]: Breaking Bad Saison 1 FRENCH HDTV
+Breaking.Bad.S01E02.FRENCH.DVDRip.XviD-JMT.avi
+👤 47 💾 348.31 MB ⚙️ Torrent9
+🇫🇷 | Unknown | torrentio
+default	13:19:03.590655-0500	RedLemon	   INPUT[59]: [RD⚡] Comet unknown | unknown | comet
+default	13:19:03.590783-0500	RedLemon	🔍 Searching SubDL for subtitles: tt0903747 (movie)
+default	13:19:03.591037-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	13:19:03.592328-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8A697E9D-7D68-434F-806A-61347765C26A] (reporting strategy default)> on Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> was not selected for reporting
+default	13:19:03.593831-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:03.594151-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> now using Connection 58
+default	13:19:03.596154-0500	RedLemon	0x7f90adbbf578 ID=12 Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> sent request, body N 0
+default	13:19:03.706552-0500	runningboardd	Invalidating assertion 173-140-1093 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
+default	13:19:03.825130-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:03.825196-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:03.825364-0500	runningboardd	[anon<RedLemon>(501):18244] Set darwin role to: UserInteractiveNonFocal
+default	13:19:03.825416-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:03.829026-0500	RedLemon	0x7f90adbbf578 ID=12 Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> received response, status 200 content K
+default	13:19:03.829622-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> response ended
+default	13:19:03.830179-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> done using Connection 58
+default	13:19:03.830740-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> summary for task success {transaction_duration_ms=237, response_status=200, connection=58, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=235, response_duration_ms=1, request_bytes=166, response_bytes=1593, cache_hit=true}
+default	13:19:03.830950-0500	RedLemon	Task <DFC0A6D1-201F-45F7-8B26-839CEF1BAC01>.<663> finished successfully
+default	13:19:03.842936-0500	RedLemon	✅ Found 10 total subtitle options from SubDL
+default	13:19:03.843162-0500	RedLemon	✅ Filtered to 10 English subtitles
+default	13:19:03.843813-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
+default	13:19:03.844119-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
+default	13:19:03.844597-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.845218-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.845990-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.846335-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.847402-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.848885-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.867247-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.868899-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.869149-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.869613-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.869813-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.870290-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.870641-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.870814-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.871879-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.872139-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.872694-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.872859-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.873456-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.873796-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.875092-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.875617-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.875880-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.876754-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.877155-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.878628-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.878846-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.879409-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.880681-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.880856-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.881580-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.881737-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.882193-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.882343-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.882498-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.883249-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.893660-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.895335-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.895697-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.898133-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.905086-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.905570-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.924948-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.925179-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.933670-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.933979-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.935149-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.952442-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.953191-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.954349-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.954726-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.955632-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.957005-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:03.972016-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.972263-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:03.974575-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:03.985745-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:03.989953-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:03.990678-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.010845-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.011929-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.012358-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.013199-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.015717-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.016144-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.021733-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.026906-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.038851-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.040894-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.041923-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.046186-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.047338-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.072227-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.073180-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.085453-0500	runningboardd	Invalidating assertion 173-171-1122 (target:[anon<RedLemon>(501):18244]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	13:19:04.074398-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.074589-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.075067-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.075903-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.083144-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.085829-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.085998-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.087563-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.087910-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.088563-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.088999-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.091648-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.093038-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.126168-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.126672-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.129674-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.129884-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.130778-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.130939-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.132997-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.133179-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.138250-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.146401-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.146604-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.147197-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:19:04.147970-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:19:04.149301-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:19:04.149512-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.150424-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.159616-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.163713-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.163887-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.165574-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.166070-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.166393-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.169433-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.171742-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.171890-0500	runningboardd	Invalidating assertion 173-18244-1129 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:19:04.172372-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.172533-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.173263-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.173753-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.174315-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.175463-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.175664-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.179452-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.179634-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.180402-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.180699-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.181233-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.182442-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.182615-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.189871-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.203780-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.205410-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.208327-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.211564-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.215123-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.215579-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.216146-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.227653-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.229907-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.230068-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.231517-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.238051-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.238708-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.237806-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:04.238066-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:04.238332-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:04.241040-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.241750-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.245534-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.245712-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.245891-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.247214-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.247483-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.247972-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.248126-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.248572-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.248750-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.249182-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.249686-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.249836-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.254162-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.254978-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.255601-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.255769-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.256262-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.256947-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.257466-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.258093-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.258627-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.259474-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.262053-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.262583-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.263529-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.263690-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.264271-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.264482-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.265182-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.265464-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.265954-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.272216-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.272768-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.273466-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.273659-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.274319-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.274509-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.274693-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.275418-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.275893-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.278225-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.279700-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.280363-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.281476-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.281692-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.282265-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.282435-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.283041-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.283214-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.288858-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.289140-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.289663-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.290272-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.290458-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.291716-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.292293-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.297118-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.297287-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.298084-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.298738-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.298908-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.299576-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.299738-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.305644-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.305819-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.306603-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.307358-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.307774-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.308386-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.309458-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.313833-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.314018-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.314420-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.315030-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.315215-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.315829-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.315992-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.316633-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.323829-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.324449-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.325360-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.325923-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.329246-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.329488-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.355804-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.366955-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:04.371238-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [479D81D7-9803-4C67-8B04-21F9159C97E6] (reporting strategy default)> on Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> was not selected for reporting
+default	13:19:04.376375-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:04.380665-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> now using Connection 9
+default	13:19:04.383090-0500	RedLemon	🔍 MPV track-list/count: 4
+default	13:19:04.383997-0500	RedLemon	🔍 Track 0 type: video
+default	13:19:04.383035-0500	RedLemon	0x7f90ae2f0778 ID=656 Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> sent request, body N 0
+default	13:19:04.387577-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.418654-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.419075-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.419218-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.419514-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.419656-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.419971-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.420124-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.420280-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.420747-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:19:04.421226-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:19:04.422211-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:19:04.422434-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.423145-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.423341-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.425154-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.426505-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.426930-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.427102-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.427274-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.427753-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.427951-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.428360-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.428539-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.429665-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.429887-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.430078-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.432121-0500	RedLemon	  [1] Score: 0 | BreakingBad-Season1(WEBRip)
+default	13:19:04.432895-0500	RedLemon	  [2] Score: 0 | BreakingBad-Season2(WEBRip)
+default	13:19:04.435570-0500	RedLemon	  [3] Score: 0 | BreakingBad-Season3(WEBRip)
+default	13:19:04.435827-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.436624-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.436836-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.437602-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.437789-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.438201-0500	RedLemon	🔍 Track 1 type: audio
+default	13:19:04.438399-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.438559-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.438704-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.439641-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.439939-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.445166-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.445378-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.446044-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.446450-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.446564-0500	RedLemon	🔍 Track 2 type: sub
+default	13:19:04.447216-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.448329-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.448821-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.449632-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.449848-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.452019-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.452636-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.453248-0500	RedLemon	0x7f90ae2f0778 ID=656 Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> received response, status 200 content K
+default	13:19:04.453366-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.453918-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> response ended
+default	13:19:04.454703-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> done using Connection 9
+default	13:19:04.455141-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> summary for task success {transaction_duration_ms=82, response_status=200, connection=9, reused=1, request_start_ms=7, request_duration_ms=2, response_start_ms=79, response_duration_ms=2, request_bytes=529, response_bytes=664, cache_hit=false}
+default	13:19:04.455718-0500	RedLemon	Task <E64D3FF5-8D02-41C6-ACAF-E40B69D0E6A1>.<664> finished successfully
+default	13:19:04.455873-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.456625-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=nil
+default	13:19:04.456835-0500	RedLemon	🔍 Track 3 type: sub
+default	13:19:04.456988-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=nil
+default	13:19:04.457119-0500	RedLemon	📊 Total subtitle tracks found: 3 (including Off if needed)
+default	13:19:04.459901-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.460692-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.460885-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.461381-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.461539-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.462474-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.463934-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.464143-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.464965-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.465601-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.468338-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.468535-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.468710-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.469141-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.469300-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.470146-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.470864-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.471668-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.473615-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.476210-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.480485-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.480703-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.481636-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.481847-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.483861-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.484105-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.484503-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.486265-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.486449-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.487392-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.487595-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.487101-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1147 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:19:04.494621-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.494848-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:04.494613-0500	runningboardd	Assertion 173-18244-1147 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:04.495492-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.496560-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.497189-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.497375-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.497853-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.498904-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.499696-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.499872-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.500329-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.500845-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.501043-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.501843-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:04.502140-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:04.502190-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:04.517805-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.518003-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.529652-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.529860-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.530045-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.531104-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.531389-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.532356-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.532691-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.533106-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.533286-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.533441-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.533962-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.534126-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.534583-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.536183-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.547415-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.547640-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.547914-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.548770-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.549314-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.550110-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.550281-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.551794-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.552306-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.552484-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.555877-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.558438-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.559762-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.561651-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.562707-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.570178-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.570874-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.581923-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.582740-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.585028-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.586138-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.588253-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.588493-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.589101-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.592859-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.593081-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.595218-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.605499-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.606213-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.606676-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.606942-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.608133-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.608645-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.609335-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.612509-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.616080-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.616306-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.616653-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.617887-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.619772-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.622442-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.622752-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.623826-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.624260-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.624507-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.625174-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.629304-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.641617-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.641824-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.642280-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.642467-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.642853-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.644010-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.644839-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.645481-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.645653-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.646330-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.646673-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.647561-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.648588-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.648906-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.649420-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.649640-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.655425-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.658092-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.658411-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.659344-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.659782-0500	RedLemon	  [1] Score: -50 | BreakingBad-Season1(WEBRip)
+default	13:19:04.660314-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.660481-0500	RedLemon	  [2] Score: -50 | BreakingBad-Season2(WEBRip)
+default	13:19:04.661147-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	13:19:04.661313-0500	RedLemon	  [3] Score: -50 | BreakingBad-Season3(WEBRip)
+default	13:19:04.661575-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	13:19:04.661745-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 60
+default	13:19:04.661988-0500	RedLemon	   OUTPUT[0]: Mirror Mirror 2012 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.662184-0500	RedLemon	   OUTPUT[1]: Mirror Mirror 2012 1080p BluRay x264-OFT mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.686863-0500	RedLemon	   OUTPUT[2]: Mirror Mirror 2012 720p BluRay x264 YIFY mp4 | 720p | zilean | Subtitles: 3
+default	13:19:04.687123-0500	RedLemon	   OUTPUT[3]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.687282-0500	RedLemon	   OUTPUT[4]: Mirror Mirror 2012 BluRay 1080p MULTi REMUX AVC DTS-HD MA 5 1-LEGi0N mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.687402-0500	RedLemon	   OUTPUT[5]: mirror-mirror_480p mp4 | 480p | zilean | Subtitles: 3
+default	13:19:04.687516-0500	RedLemon	   OUTPUT[6]: Mirror 1975 1080p BluRay REMUX AVC LPCM 1 0 EngSub-ShNK | 1080p | zilean | Subtitles: 3
+default	13:19:04.687643-0500	RedLemon	   OUTPUT[7]: Mirror Mirror 2012 1080p Bluray x264 anoXmous mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.687797-0500	RedLemon	   OUTPUT[8]: Mirror 1975 RUSSIAN 1080p BluRay x265-VXT mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.687951-0500	RedLemon	   OUTPUT[9]: The Mirror 1997 1080p WEB-DL AAC 2 0 x264 mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.689644-0500	RedLemon	   OUTPUT[10]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean | Subtitles: 3
+default	13:19:04.691006-0500	RedLemon	   OUTPUT[11]: Mirror Mirror 1990 1080p BluRay REMUX AVC FLAC 2 0-dOwn mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.691271-0500	RedLemon	   OUTPUT[12]: Mirror Mirror 2012 1080p BluRay x265-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.693192-0500	RedLemon	   OUTPUT[13]: Mirror Mirror 1990 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
+default	13:19:04.694013-0500	RedLemon	   OUTPUT[14]: The Mirror 2014 1080p WEBRip x264 AAC-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.694938-0500	RedLemon	   OUTPUT[15]: Mirror Mirror (1990) [1080p] [BluRay] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	13:19:04.695466-0500	RedLemon	   OUTPUT[16]: Mirror 1975 RUSSIAN 1080p BluRay H264 AAC-VXT | 1080p | zilean | Subtitles: 3
+default	13:19:04.695679-0500	RedLemon	   OUTPUT[17]: Mirror (1975) Criterion (1080p BluRay x265 HEVC 10bit AAC 1 0 Russian Tigole) | 1080p | zilean | Subtitles: 3
+default	13:19:04.695853-0500	RedLemon	   OUTPUT[18]: Mirror Mirror 1990 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.696526-0500	RedLemon	   OUTPUT[19]: Mirror Mirror 2012 1080p BDRip H264 AAC - KiNGDOM | 1080p | zilean | Subtitles: 3
+default	13:19:04.696981-0500	RedLemon	   OUTPUT[20]: Mirror Mirror 1990 2160p UHD Blu-ray Remux HEVC HDR10 FLAC 2 0 - KRaLiMaRKo mkv | 2160p | zilean | Subtitles: 3
+default	13:19:04.697226-0500	RedLemon	   OUTPUT[21]: Mirror 1975 RUSSIAN 1080p BluRay x264 DTS-ZQ | 1080p | zilean | Subtitles: 3
+default	13:19:04.699584-0500	RedLemon	   OUTPUT[22]: Mirror Mirror 2022 1080p BluRay x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.699939-0500	RedLemon	   OUTPUT[23]: The Mirror 1975 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.700100-0500	RedLemon	   OUTPUT[24]: the mirror 1975 1080p bluray x264-ghouls[PRiME] mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.700242-0500	RedLemon	   OUTPUT[25]: The Mirror 1975 SUBFRENCH 1080p BluRay x264-CherryCoke mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.700377-0500	RedLemon	   OUTPUT[26]: The Mirror 1975 BDRemux 1080p mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.724275-0500	RedLemon	   OUTPUT[27]: Mirror Mirror 2012 BluRay 1080p DTS-HD MA 5 1 AVC REMUX-FraMeSToR mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.724486-0500	RedLemon	   OUTPUT[28]: mirror 1975 remastered 1080p bluray x264-usury mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.724668-0500	RedLemon	   OUTPUT[29]: Mirror 1975 REPACK 1080p BluRay REMUX AVC FLAC 1 0-BLURANiUM mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.724834-0500	RedLemon	   OUTPUT[30]: Mirror Mirror 1990 1080p BluRay x264 DTS-FGT | 1080p | zilean | Subtitles: 3
+default	13:19:04.724997-0500	RedLemon	   OUTPUT[31]: Mirror 1975 1080p BluRay HEVC AAC-SARTRE | 1080p | zilean | Subtitles: 3
+default	13:19:04.725159-0500	RedLemon	   OUTPUT[32]: Mirror Mirror 2012 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
+default	13:19:04.732842-0500	RedLemon	   OUTPUT[33]: Mirror Mirror 2012 1080p BluRay x264-SECTOR7 | 1080p | zilean | Subtitles: 3
+default	13:19:04.742984-0500	RedLemon	   OUTPUT[34]: The Mirror (1997) [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	13:19:04.744746-0500	RedLemon	   OUTPUT[35]: Mirror Mirror 2012 BDMux ITA ENG 1080p x265 Paso77 mkv | 1080p | zilean | Subtitles: 3
+default	13:19:04.746473-0500	RedLemon	   OUTPUT[36]: Breaking.Bad.S05.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC
+Breaking.Bad.S05E15.Granite.State.2160p.AMZN.WEB-DL.DDP5.1.H.265-XEBEC.mkv
+👤 46 💾 5.77 GB ⚙️ ThePirateBay | 2160p | torrentio | Subtitles: 3
+default	13:19:04.747242-0500	RedLemon	   OUTPUT[37]: Breaking Bad (2008) Season 02 S02 (2160p WEBRip x265 HEVC 10bit AAC 5.1 Joy) [UTR]
+Breaking Bad S02E04 Down (2160p x265 10bit Joy).mkv
+👤 43 💾 1.38 GB ⚙️ 1337x | 2160p | torrentio | Subtitles: 3
+default	13:19:04.747435-0500	RedLemon	   OUTPUT[38]: Breaking.Bad.S03.1080p.BluRay.x265-RARBG
+Breaking.Bad.S03E12.1080p.BluRay.x265-RARBG.mp4
+👤 284 💾 753.42 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:19:04.764198-0500	RedLemon	   OUTPUT[39]: Breaking.Bad.S05.1080p.BluRay.x265-RARBG
+Breaking.Bad.S05E09.1080p.BluRay.x265-RARBG.mp4
+👤 272 💾 755.88 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:19:04.767457-0500	RedLemon	   OUTPUT[40]: Breaking Bad Full 1080p PT-BR
+Breaking.Bad.S02.Season.2.1080p/Breaking.Bad.S02E10.1080p.mkv
+👤 226 💾 544.19 MB ⚙️ MagnetDL
+🇵🇹 | 1080p | torrentio | Subtitles: 3
+default	13:19:04.767684-0500	RedLemon	   OUTPUT[41]: Breaking Bad S04 Complete (2011) 1080p ENG-ITA MultiSub x264 Blu
+Ep 04 - Bullet Points - La Versione di Skyler.mkv
+👤 175 💾 2.72 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
+default	13:19:04.769985-0500	RedLemon	   OUTPUT[42]: Breaking Bad S02 1080p BluRay AV1 Opus [AV1D]
+Breaking Bad S02 08.mkv
+👤 160 💾 338.7 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:19:04.770174-0500	RedLemon	   OUTPUT[43]: Breaking.Bad.S02.1080p.BluRay.x265-RARBG
+Breaking.Bad.S02E10.1080p.BluRay.x265-RARBG.mp4
+👤 124 💾 755.82 MB ⚙️ RARBG | 1080p | torrentio | Subtitles: 3
+default	13:19:04.770320-0500	RedLemon	   OUTPUT[44]: Breaking Bad S02 Season 2 1080p BluRay ReEnc-DeeJayAhmed [Little
+Breaking.Bad.S02E02.1080p.BluRay.ReEnc-DeeJayAhmed.mkv
+👤 120 💾 551.04 MB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:19:04.770452-0500	RedLemon	   OUTPUT[45]: Breaking Bad (2008) Season 1-5 S01-S05 (1080p BluRay x265 HEVC 1
+Season 3/Breaking Bad (2008) - S03E08 - I See You (1080p BluRay x265 Silence).mkv
+👤 89 💾 1.86 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:19:04.780474-0500	RedLemon	   OUTPUT[46]: Breaking Bad Complete S01-S05 1080p 10bit BluRay x265 HEVC 6CH-MRN
+Breaking.Bad.S03.1080p.10bit.BluRay.x265.HEVC.6CH-MRN/Breaking.Bad.S03E09.Kafkaesque.1080p.10bit.BluRay.x265.HEVC.6CH-MRN.mkv
+👤 60 💾 656.94 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:19:04.781517-0500	RedLemon	   OUTPUT[47]: Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub
+Breaking Bad Season 3/Breaking.Bad.S03E08.I.See.You.1080p.NF.WEB-DL.AV1.EAC3.mkv
+👤 49 💾 820.92 MB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 | 1080p | torrentio | Subtitles: 3
+default	13:19:04.781717-0500	RedLemon	   OUTPUT[48]: Breaking.Bad.SEASON.01.S01.COMPLETE.1080p.10bit.BluRay.6CH.x265.HEVC-PSA
+Breaking.Bad.S01E07.A.No-Rough-Stuff-Type.Deal.1080p.10bit.BluRay.6CH.x265.HEVC-PSA.mkv
+👤 49 💾 534.31 MB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
+default	13:19:04.782021-0500	RedLemon	   OUTPUT[49]: Breaking Bad (2008) S02 (1080p x265 10bit BD DTS-HD MA 5.1) [Prof]
+S02E02 - Grilled.mkv
+👤 34 💾 6.03 GB ⚙️ TorrentGalaxy | 1080p | torrentio | Subtitles: 3
+default	13:19:04.782392-0500	RedLemon	   OUTPUT[50]: Breaking Bad (S05)(2012)(1080p)(VP9)(WebDL)( EN 5.1+SPA 2.0)(Complete) PHDTeam
+Breaking Bad - S05E12_Vzteklý pes.mkv
+👤 33 💾 500.85 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇪🇸 | 1080p | torrentio | Subtitles: 3
+default	13:19:04.782608-0500	RedLemon	   OUTPUT[51]: Breaking.Bad.S01-S02-S03-S04-S05.1080p.BluRay.10bit.HEVC-MkvCage
+Breaking.Bad.S05.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws/Breaking.Bad.S05E09.Blood.Money.1080p.BluRay.10bit.HEVC.6CH-MkvCage.ws.mkv
+👤 31 💾 1 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
+default	13:19:04.782769-0500	RedLemon	   OUTPUT[52]: Breaking Bad S02 Complete (2009) 1080p ENG-ITA MultiSub x264 Blu
+Ep 05 - Breakage - Una Pistola Per Jesse.mkv
+👤 31 💾 3.06 GB ⚙️ ThePirateBay
+Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
+default	13:19:04.783046-0500	RedLemon	   OUTPUT[53]: Breaking Bad Season 1 Complete 720p.BRrip.Sujaidr (pimprg)
+Breaking Bad s01e07 720p.BRrip.Sujaidr.mkv
+👤 43 💾 381.64 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:19:04.784349-0500	RedLemon	   OUTPUT[54]: Breaking Bad Season 3 Complete 720p.BRrip.Sujaidr
+breaking bad s03e11 720p brrip sujaidr.mkv
+👤 37 💾 377.74 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:19:04.784719-0500	RedLemon	   OUTPUT[55]: Breaking Bad Season 4 Complete 720p.BRrip.Sujaidr
+breaking bad s04e12 720p brrip sujaidr.mkv
+👤 36 💾 367.72 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:19:04.784882-0500	RedLemon	   OUTPUT[56]: Breaking Bad Season 5 Complete 720p.BRrip.Sujaidr
+breaking bad s05e11 720p brrip sujaidr.mkv
+👤 34 💾 379.11 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:19:04.785017-0500	RedLemon	   OUTPUT[57]: Breaking Bad Season 2 Complete 720p.BRrip.Sujaidr
+Breaking Bad s02ep6 720p brrip.sujaidr.mkv
+👤 33 💾 378.78 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
+default	13:19:04.785331-0500	RedLemon	   OUTPUT[58]: Breaking Bad Saison 1 FRENCH HDTV
+Breaking.Bad.S01E02.FRENCH.DVDRip.XviD-JMT.avi
+👤 47 💾 348.31 MB ⚙️ Torrent9
+🇫🇷 | Unknown | torrentio | Subtitles: 3
+default	13:19:04.785446-0500	RedLemon	   OUTPUT[59]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	13:19:05.000977-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> received response, status 200 content K
+default	13:19:05.001290-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> response ended
+default	13:19:05.001344-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> done using Connection 84
+default	13:19:05.001734-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> summary for task success {transaction_duration_ms=11471, response_status=200, connection=84, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=1, secure_connection_duration_ms=0, private_relay=false, request_start_ms=5, request_duration_ms=0, response_start_ms=11470, response_duration_ms=0, request_bytes=267, response_bytes=12075, cache_hit=false}
+default	13:19:05.001971-0500	RedLemon	Task <680679FB-6ECA-47B9-9EEC-63AA7E0A8B4C>.<10> finished successfully
+default	13:19:05.027443-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:05.028330-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CE3FD17E-45C2-47EC-BFEE-F2C5E711911E] (reporting strategy default)> on Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> was not selected for reporting
+default	13:19:05.035314-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> now using Connection 85
+default	13:19:05.038388-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> sent request, body S 90
+default	13:19:05.040463-0500	RedLemon	🔓 Unlock request: infoHash=197c1fcdaf84..., fileIdx=0
+default	13:19:05.041203-0500	RedLemon	✅ Token found, attempting unlock...
+default	13:19:05.042300-0500	RedLemon	✅ Unlocked successfully: Mirror.1975.1080p.BluRay.REMUX.AVC.LPCM.1.0.EngSub-ShNK.mkv
+default	13:19:05.047290-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> received response, status 200 content K
+default	13:19:05.047585-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> response ended
+default	13:19:05.047663-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> done using Connection 85
+default	13:19:05.047909-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> summary for task success {transaction_duration_ms=14, response_status=200, connection=85, reused=1, request_start_ms=3, request_duration_ms=1, response_start_ms=14, response_duration_ms=0, request_bytes=372, response_bytes=353, cache_hit=true}
+default	13:19:05.048150-0500	RedLemon	Task <96C2A8F7-3A97-4811-ABA8-3BC4CA542511>.<665> finished successfully
+default	13:19:05.048491-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
+default	13:19:05.049290-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:05.051548-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E38CBBF9-DB71-4ACD-BB90-B5984C0C055C] (reporting strategy default)> on Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> was not selected for reporting
+default	13:19:05.051904-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:05.053771-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6D18FBCE-573F-443F-82FE-D4343D0D32D1] (reporting strategy default)> on Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> was not selected for reporting
+default	13:19:05.054053-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:05.055578-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A9A2E3C7-69EC-42BC-90F6-387564449E2D] (reporting strategy default)> on Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> was not selected for reporting
+default	13:19:05.058104-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:05.062149-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> now using Connection 63
+default	13:19:05.071656-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:05.071943-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> now using Connection 63
+default	13:19:05.074151-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:05.074716-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> now using Connection 63
+default	13:19:05.076348-0500	RedLemon	0x7f90adbff1f8 ID=36 Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> sent request, body N 0
+default	13:19:05.076410-0500	RedLemon	0x7f90adbb7fa8 ID=40 Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> sent request, body N 0
+default	13:19:05.076455-0500	RedLemon	0x7f90ada0f138 ID=44 Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> sent request, body N 0
+default	13:19:05.231590-0500	RedLemon	0x7f90ada0f138 ID=44 Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> received response, status 200 content U
+default	13:19:05.232008-0500	RedLemon	0x7f90adbff1f8 ID=36 Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> received response, status 200 content U
+default	13:19:05.243895-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S44] app read 115616 bytes and is yet to read 0 bytes, stream receive window is 131072 bytes, current local stream max data is 246688 bytes and the last received offset is 115615
+default	13:19:05.250078-0500	RedLemon	0x7f90adbb7fa8 ID=40 Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> received response, status 200 content U
+default	13:19:05.259057-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> response ended
+default	13:19:05.260521-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> done using Connection 63
+default	13:19:05.261040-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> summary for task success {transaction_duration_ms=199, response_status=200, connection=63, reused=1, request_start_ms=12, request_duration_ms=1, response_start_ms=169, response_duration_ms=29, request_bytes=112, response_bytes=195077, cache_hit=true}
+default	13:19:05.261801-0500	RedLemon	Task <C0552EAD-4A73-4FF7-B67D-A938C7A43607>.<668> finished successfully
+default	13:19:05.269052-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S40] app read 75908 bytes and is yet to read 0 bytes, stream receive window is 307604 bytes, current local stream max data is 383512 bytes and the last received offset is 82790
+default	13:19:05.277688-0500	RedLemon	quic_process_stream_data_blocked [C63.1.1:2] [-01008a8bc288875118039b8b75888fb4bf8d045f] received STREAM_DATA_BLOCKED [S40] app read 131072 bytes and is yet to read 0 bytes, stream receive window is 307604 bytes, current local stream max data is 438676 bytes and the last received offset is 131071
+default	13:19:05.282310-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> response ended
+default	13:19:05.282743-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> done using Connection 63
+default	13:19:05.283442-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> summary for task success {transaction_duration_ms=230, response_status=200, connection=63, reused=1, request_start_ms=9, request_duration_ms=14, response_start_ms=179, response_duration_ms=51, request_bytes=112, response_bytes=114248, cache_hit=true}
+default	13:19:05.283745-0500	RedLemon	Task <E4C19EF8-95A5-4087-9E3B-1BF76A1D6BA3>.<666> finished successfully
+default	13:19:05.285629-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> response ended
+default	13:19:05.286312-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> done using Connection 63
+default	13:19:05.286618-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> summary for task success {transaction_duration_ms=230, response_status=200, connection=63, reused=1, request_start_ms=15, request_duration_ms=4, response_start_ms=192, response_duration_ms=37, request_bytes=112, response_bytes=210119, cache_hit=true}
+default	13:19:05.287199-0500	RedLemon	Task <10440016-0222-4566-BEA0-0E737FCF71C1>.<667> finished successfully
+default	13:19:05.376086-0500	RedLemon	✅ Stream ready, starting playback...
+default	13:19:05.376221-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
+default	13:19:05.376538-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7f90aa076dc0>
+default	13:19:05.376704-0500	RedLemon	   Is fullscreen: 1
+default	13:19:05.376821-0500	RedLemon	   ⚠️ WindowManager: Already in fullscreen
+default	13:19:05.606309-0500	runningboardd	Invalidating assertion 173-18244-1147 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:19:05.776011-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:05.776103-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:05.776192-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:06.241324-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:06.242098-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AC153A31-6CC4-41D8-9058-F1D77199F1CA] (reporting strategy default)> on Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> was not selected for reporting
+default	13:19:06.244353-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:06.245305-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> now using Connection 9
+default	13:19:06.248533-0500	RedLemon	0x7f90ad9c5578 ID=660 Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> sent request, body N 0
+default	13:19:06.357000-0500	RedLemon	0x7f90ad9c5578 ID=660 Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> received response, status 200 content K
+default	13:19:06.358129-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> response ended
+default	13:19:06.359348-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> done using Connection 9
+default	13:19:06.360239-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> summary for task success {transaction_duration_ms=116, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=3, response_start_ms=112, response_duration_ms=2, request_bytes=529, response_bytes=662, cache_hit=false}
+default	13:19:06.360656-0500	RedLemon	Task <50FA27CD-F989-425B-8036-0D96FE9AFBFD>.<669> finished successfully
+default	13:19:06.362677-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1148 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:19:06.363357-0500	runningboardd	Assertion 173-18244-1148 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:06.364952-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:06.365035-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:06.365106-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:06.395473-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:07.459287-0500	runningboardd	Invalidating assertion 173-18244-1148 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:19:07.633493-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:07.633826-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:07.634159-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:08.239878-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:08.240669-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8F3D0DDD-A67B-4F9E-8676-E2BCE2FB6AD4] (reporting strategy default)> on Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> was not selected for reporting
+default	13:19:08.243040-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:08.243683-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> now using Connection 9
+default	13:19:08.246018-0500	RedLemon	0x7f90adbc68c8 ID=664 Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> sent request, body N 0
+default	13:19:08.320251-0500	RedLemon	0x7f90adbc68c8 ID=664 Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> received response, status 200 content K
+default	13:19:08.321075-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> response ended
+default	13:19:08.321644-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> done using Connection 9
+default	13:19:08.322060-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> summary for task success {transaction_duration_ms=80, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=2, response_start_ms=78, response_duration_ms=1, request_bytes=529, response_bytes=664, cache_hit=false}
+default	13:19:08.322882-0500	RedLemon	Task <C3119D3F-4040-4E6C-B5F3-149AEEBBCE58>.<670> finished successfully
+default	13:19:08.325265-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1149 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:19:08.325772-0500	runningboardd	Assertion 173-18244-1149 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:08.328295-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:08.328372-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:08.328444-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:08.361083-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:09.430037-0500	runningboardd	Invalidating assertion 173-18244-1149 (target:[anon<RedLemon>(501):18244]) from originator [anon<RedLemon>(501):18244]
+default	13:19:09.534318-0500	RedLemon	CoreAnimation: warning, deleted thread with uncommitted CATransaction; set CA_DEBUG_TRANSACTIONS=1 in environment to log backtraces, or set CA_ASSERT_MAIN_THREAD_TRANSACTIONS=1 to abort when an implicit transaction isn't created on a main thread.
+default	13:19:09.605452-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:09.605545-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:09.605638-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:10.239525-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	13:19:10.240245-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [69D50A44-90D9-4E28-A2FA-219B723E3EEE] (reporting strategy default)> on Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> was not selected for reporting
+default	13:19:10.242896-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	13:19:10.243680-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> now using Connection 9
+default	13:19:10.245626-0500	RedLemon	0x7f90ae2f1888 ID=668 Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> sent request, body N 0
+default	13:19:10.317693-0500	RedLemon	0x7f90ae2f1888 ID=668 Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> received response, status 200 content K
+default	13:19:10.318523-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> response ended
+default	13:19:10.319076-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> done using Connection 9
+default	13:19:10.319500-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> summary for task success {transaction_duration_ms=78, response_status=200, connection=9, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=76, response_duration_ms=1, request_bytes=529, response_bytes=663, cache_hit=false}
+default	13:19:10.320440-0500	RedLemon	Task <C93BE6DE-2D79-4A9F-B174-F44E85EA3A47>.<671> finished successfully
+default	13:19:10.321432-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):18244] from originator [anon<RedLemon>(501):18244] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-18244-1150 target:18244 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	13:19:10.321858-0500	runningboardd	Assertion 173-18244-1150 (target:[anon<RedLemon>(501):18244]) will be created as active as no start-time-defining assertions exist
+default	13:19:10.324857-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring jetsam update because this process is not memory-managed
+default	13:19:10.324956-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring suspend because this process is not lifecycle managed
+default	13:19:10.325032-0500	runningboardd	[anon<RedLemon>(501):18244] Ignoring GPU update because this process is not GPU managed
+default	13:19:10.357019-0500	RedLemon	Connection 9: encountered bidirectional stream limit updated event
+default	13:19:11.277764-0500	RedLemon	CoreAnimation: warning, deleted thread with uncommitted CATransaction; set CA_DEBUG_TRANSACTIONS=1 in environment to log backtraces, or set CA_ASSERT_MAIN_THREAD_TRANSACTIONS=1 to abort when an implicit transaction isn't created on a main thread.
+default	13:19:11.283781-0500	RedLemon	tcp_input [C79.1.1:3] flags=[F.] seq=2579724598, ack=3996799257, win=8 state=ESTABLISHED rcv_nxt=2579724535, snd_una=3996799257
+default	13:19:11.283869-0500	RedLemon	nw_protocol_tcp_log_summary [C79.1.1:3]
+	[89C12162-5505-4CC9-ADC3-B318CE2F707D <private>:56261<-><private>:443]
+	Init: 1, Conn_Time: 18.667ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 8, rtt: 33.906ms, rtt_var: 18.687ms rtt_nc: 30.406ms, rtt_var_nc: 20.937ms base rtt: 18ms
+	ACKs-compressed: 0, ACKs delayed: 29 delayed ACKs sent: 0
+default	13:19:11.284761-0500	RedLemon	Connection 79: read-side closed
+default	13:19:11.284801-0500	RedLemon	Connection 79: read-side closed
+default	13:19:11.284837-0500	RedLemon	Connection 79: read-side closed
+default	13:19:11.285116-0500	RedLemon	Connection 79: cleaning up
+default	13:19:11.285190-0500	RedLemon	[C79 5C527EC3-CB3F-4CCA-945F-23AC7D5101FD Hostname#ae5efd1f:443 quic-connection, url hash: 25b49ff0, definite, attribution: developer] cancel
+default	13:19:11.285320-0500	RedLemon	[C79 5C527EC3-CB3F-4CCA-945F-23AC7D5101FD Hostname#ae5efd1f:443 quic-connection, url hash: 25b49ff0, definite, attribution: developer] cancelled
+	[C79.1.1 939A4D5D-704E-4F53-B904-CA3A0774A933 192.168.2.13:56261<->IPv4#5d4d7301:443]
+	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, dns
 	Privacy Stance: Not Eligible
-	Duration: 30.366s, DNS @0.000s took 0.001s, TCP @0.002s took 0.205s, TLS 1.3 took 0.037s
-	bytes in/out: 3214603/1261, packets in/out: 422/231, rtt: 0.031s, retransmitted bytes: 0, out-of-order bytes: 0
-default	18:36:54.060807-0500	RedLemon	nw_flow_disconnected [C50.1.1 IPv6#19ffc9c9.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	18:36:54.062762-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C50] reporting state cancelled
-default	18:36:54.063525-0500	RedLemon	Connection 50: done
-default	18:36:54.064284-0500	RedLemon	tcp_output [C50.1.1:3] flags=[FP.] seq=215251442, ack=1784753576, win=16417 state=LAST_ACK rcv_nxt=1784753576, snd_una=215251403
-error	18:36:54.076581-0500	RedLemon	tcp_input [C50.1.1:3] flags=[R.] seq=1784753576, ack=215251442, win=8 state=LAST_ACK rcv_nxt=1784753576, snd_una=215251403
-error	18:36:54.082020-0500	RedLemon	tcp_input [C50.1.1:3] flags=[R] seq=1784753576, ack=0, win=0 state=CLOSED rcv_nxt=1784753576, snd_una=215251403
-default	18:36:54.093622-0500	runningboardd	Invalidating assertion 173-171-2985 (target:[anon<RedLemon>(501):20526]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	18:36:54.266185-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:54.266236-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:54.266282-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
-default	18:36:54.611566-0500	runningboardd	Invalidating assertion 173-20526-2998 (target:[anon<RedLemon>(501):20526]) from originator [anon<RedLemon>(501):20526]
-default	18:36:54.778580-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring jetsam update because this process is not memory-managed
-default	18:36:54.778633-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring suspend because this process is not lifecycle managed
-default	18:36:54.778683-0500	runningboardd	[anon<RedLemon>(501):20526] Ignoring GPU update because this process is not GPU managed
+	Duration: 23.607s, DNS @0.002s took 0.005s, TCP @0.009s took 0.020s, TLS 1.3 took 0.041s
+	bytes in/out: 605517/1096, packets in/out: 95/109, rtt: 0.033s, retransmitted bytes: 0, out-of-order bytes: 63
+default	13:19:11.286592-0500	RedLemon	nw_flow_disconnected [C79.1.1 IPv4#5d4d7301:443 cancelled channel-flow ((null))] Output protocol disconnected
+default	13:19:11.286808-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C79] reporting state cancelled
+default	13:19:11.286993-0500	RedLemon	tcp_output [C79.1.1:3] flags=[FP.] seq=3996799296, ack=2579724599, win=4500 state=LAST_ACK rcv_nxt=2579724599, snd_una=3996799257
+

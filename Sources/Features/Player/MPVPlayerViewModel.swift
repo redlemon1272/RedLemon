@@ -1151,8 +1151,8 @@ extension MPVPlayerViewModel {
 
     /// Handle incoming sync messages from peers
     private func handleSyncMessage(_ message: SyncMessage) async {
-        guard !isWatchPartyHost else {
-            // Host doesn't respond to sync messages (host is authoritative)
+        // Host is authoritative for playback, but should still receive chat messages
+        if isWatchPartyHost && message.type != .chat {
             return
         }
 

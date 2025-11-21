@@ -513,6 +513,16 @@ class LobbyViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 100_000_000) // Check every 100ms
         }
         
+        // Countdown before starting (both host and guest will see this)
+        NSLog("🎬 Host: All guests ready, starting countdown...")
+        countdown = 3
+        
+        for i in (1...3).reversed() {
+            countdown = i
+            NSLog("⏱️ Host: Countdown \(i)...")
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+        }
+        
         // Send PLAY signal
         Task {
             let playMsg = SyncMessage(
@@ -533,6 +543,7 @@ class LobbyViewModel: ObservableObject {
         }
         
         // Host starts playing
+        NSLog("▶️ Host: Starting playback after countdown")
         appState.startPreloadedPlayback()
 
         // After host starts playback, send stream info to guests via WatchPartyManager
@@ -736,10 +747,23 @@ class LobbyViewModel: ObservableObject {
             }
             
         case .play:
-            // Guest: Start playing preloaded media
+            // Guest: Start playing preloaded media after countdown
             if !isHost {
-                NSLog("▶️ Guest: Received PLAY signal, starting playback")
-                appState?.startPreloadedPlayback()
+                NSLog("▶️ Guest: Received PLAY signal, starting countdown...")
+                
+                Task { @MainActor in
+                    // Countdown (synchronized with host)
+                    countdown = 3
+                    
+                    for i in (1...3).reversed() {
+                        countdown = i
+                        NSLog("⏱️ Guest: Countdown \(i)...")
+                        try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+                    }
+                    
+                    NSLog("▶️ Guest: Starting playback after countdown")
+                    appState?.startPreloadedPlayback()
+                }
             }
             
         default:

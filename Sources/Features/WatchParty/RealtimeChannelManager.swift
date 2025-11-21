@@ -31,6 +31,7 @@ actor RealtimeChannelManager {
 
     // Connection state tracking
     private var isConnected: Bool = false
+    private var isDisconnecting: Bool = false
 
     // Latency tracking (for sync compensation)
     private var latencySamples: [TimeInterval] = []
@@ -86,6 +87,7 @@ actor RealtimeChannelManager {
         ])
 
         isConnected = true
+        isDisconnecting = false
         await notifyConnectionStateChange(.connected)
 
         print("✅ Realtime channel setup complete")
@@ -233,12 +235,29 @@ actor RealtimeChannelManager {
     // MARK: - Cleanup
 
     func cleanup(leaveChannel: Bool = true, disconnectClient: Bool = true) async {
+        // Prevent double cleanup or cleanup while already disconnecting
+        guard !isDisconnecting else {
+            print("⚠️ Cleanup already in progress, skipping")
+            return
+        }
+        
+        // If we are not connected and not just trying to disconnect the client, we might be able to skip
+        // But we should be careful. The safest is to check if we have anything to clean up.
+        if !isConnected && !disconnectClient {
+             print("ℹ️ Already disconnected, skipping cleanup")
+             return
+        }
+
+        isDisconnecting = true
         print("🧹 Cleaning up Realtime channel for room: \(roomId ?? "unknown")")
 
         do {
-            print("🔄 Untracking presence...")
-            try await realtimeClient.untrack()
-            print("✅ Presence untracked")
+            // Only untrack if we are connected
+            if isConnected {
+                print("🔄 Untracking presence...")
+                try await realtimeClient.untrack()
+                print("✅ Presence untracked")
+            }
 
             if leaveChannel {
                 print("🔄 Leaving channel...")
@@ -260,6 +279,7 @@ actor RealtimeChannelManager {
         }
 
         isConnected = false
+        isDisconnecting = false
         roomId = nil
         userId = nil
         syncCallback = nil

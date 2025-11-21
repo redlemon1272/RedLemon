@@ -28,6 +28,7 @@ class LobbyViewModel: ObservableObject {
     private var participantsPollingTimer: Timer?
     private var roomStatePollingTimer: Timer?
     private var lastRoomPlayingState: Bool = false
+    private var isDisconnecting: Bool = false
     weak var appState: AppState?  // Weak reference to avoid retain cycle
 
     init(room: WatchPartyRoom, isHost: Bool) {
@@ -225,6 +226,10 @@ class LobbyViewModel: ObservableObject {
     }
 
     func disconnect() {
+        // Prevent double disconnect
+        guard !isDisconnecting else { return }
+        isDisconnecting = true
+        
         // Stop polling immediately
         stopPolling()
 
@@ -250,6 +255,9 @@ class LobbyViewModel: ObservableObject {
             // If we are starting the movie, keep the socket open for the player
             let shouldDisconnectClient = !isStarting
             await realtimeManager?.disconnect(leaveChannel: shouldDisconnectClient, disconnectClient: shouldDisconnectClient)
+            
+            // Reset flag after completion (though we likely won't use this instance again)
+            isDisconnecting = false
         }
         countdownTimer?.invalidate()
 

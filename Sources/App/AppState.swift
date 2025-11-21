@@ -193,6 +193,7 @@ class AppState: ObservableObject {
                 currentView = .player // Show player view to display error
             }
         }
+    }
 
     func preloadMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         streamError = nil
@@ -298,7 +299,6 @@ class AppState: ObservableObject {
         print("▶️ Starting preloaded playback")
         isPreloading = false
         // The PlayerView should observe this change and start playing
-    }
     }
 
     func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {

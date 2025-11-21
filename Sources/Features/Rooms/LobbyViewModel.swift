@@ -667,7 +667,7 @@ class LobbyViewModel: ObservableObject {
                 isStarting = true
                 transitionState.isStarting = true
                 
-                Task { @MainActor in
+                Task { @MainActor [self] in
                     // Fetch fresh room state
                     guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
                         NSLog("⚠️ Guest: Failed to fetch room state for preload")

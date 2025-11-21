@@ -795,7 +795,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     func sendMessage(_ text: String) {
         guard !text.isEmpty else { return }
-        guard let roomId = currentRoomId else {
+        guard currentRoomId != nil else {
             NSLog("⚠️ Cannot send message: no room ID")
             return
         }
@@ -903,7 +903,7 @@ class MPVPlayerViewModel: ObservableObject {
     deinit {
         print("🗑️ MPVPlayerViewModel deinit")
         Task { [weak self] in
-            guard let self else { return }
+            guard self != nil else { return }
             await MainActor.run {
                 invalidateAllTimers()
                 mpvWrapper.stop()
@@ -1194,7 +1194,7 @@ extension MPVPlayerViewModel {
             
             // Calculate drift with latency compensation
             let rawDrift = currentTime - predictedHostPosition
-            let absDrift = abs(rawDrift)
+            _ = abs(rawDrift)
             
             // Add to drift history for smoothing
             driftHistory.append(rawDrift)
@@ -1377,6 +1377,14 @@ extension MPVPlayerViewModel {
                 print("⚠️ Non-host received requestStream message, ignoring")
             }
 
+        case .preload:
+            // Preload message - handled in LobbyViewModel, not here
+            break
+            
+        case .ready:
+            // Ready message - handled in LobbyViewModel, not here
+            break
+            
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break

@@ -515,6 +515,27 @@ class LobbyViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 100_000_000) // Check every 100ms
         }
         
+        // Send PLAY signal BEFORE countdown so guest starts countdown at same time
+        NSLog("📡 Host: Sending PLAY signal to guests...")
+        let playMsg = SyncMessage(
+            type: .play,
+            timestamp: Date().timeIntervalSince1970,
+            position: 0,
+            isPlaying: true,
+            senderId: participantId,
+            chatText: nil,
+            chatUsername: nil
+        )
+        do {
+            try await realtimeManager?.sendSyncMessage(playMsg)
+            NSLog("✅ Host: Sent PLAY signal to all guests")
+        } catch {
+            NSLog("⚠️ Host: Failed to send PLAY signal: \(error)")
+        }
+        
+        // Small delay to ensure guest receives message before countdown starts
+        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+        
         // Countdown before starting (both host and guest will see this)
         NSLog("🎬 Host: All guests ready, starting countdown...")
         startingStatusMessage = "Starting in"
@@ -524,25 +545,6 @@ class LobbyViewModel: ObservableObject {
             countdown = i
             NSLog("⏱️ Host: Countdown \(i)...")
             try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
-        }
-        
-        // Send PLAY signal
-        Task {
-            let playMsg = SyncMessage(
-                type: .play,
-                timestamp: Date().timeIntervalSince1970,
-                position: 0,
-                isPlaying: true,
-                senderId: participantId,
-                chatText: nil,
-                chatUsername: nil
-            )
-            do {
-                try await realtimeManager?.sendSyncMessage(playMsg)
-                NSLog("✅ Host: Sent PLAY signal to all guests")
-            } catch {
-                NSLog("⚠️ Host: Failed to send PLAY signal: \(error)")
-            }
         }
         
         // Host starts playing

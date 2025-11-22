@@ -130,7 +130,7 @@ struct FirstTimeRecoverySetupView: View {
                     throw NSError(domain: "Auth", code: 401, userInfo: [NSLocalizedDescriptionKey: "Not authenticated"])
                 }
                 
-                try await SupabaseClient.shared
+                _ = try await SupabaseClient.shared
                     .from("users")
                     .update(["recovery_hash": hash])
                     .eq("id", value: userId.uuidString)

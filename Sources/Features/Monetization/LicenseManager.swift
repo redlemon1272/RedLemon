@@ -1,6 +1,6 @@
 import Foundation
 import SwiftUI
-import Supabase
+
 
 class LicenseManager: ObservableObject {
     static let shared = LicenseManager()
@@ -17,30 +17,19 @@ class LicenseManager: ObservableObject {
     @AppStorage("isHostLicenseActive") var isHostLicenseActive: Bool = false
     @AppStorage("recoveryPhraseHash") var recoveryPhraseHash: String = ""
     
-    private var realtimeChannel: RealtimeChannel?
-    
     private init() {
-        // Start listening for license updates if we have a user
-        setupRealtimeSubscription()
+        // Realtime subscription for license updates would go here
+        // For now, license activation is triggered manually after payment
+        // or via the recoverAccount method
     }
     
-    /// Listen for changes to 'is_host' in the users table
+    /// Setup realtime subscription for license updates
+    /// Note: Currently stubbed - activation happens via payment confirmation or recovery
     func setupRealtimeSubscription() {
-        guard let userId = SupabaseClient.shared.auth.currentUser?.id else { return }
-        
-        let channel = SupabaseClient.shared.realtime.channel("public:users:id=eq.\(userId)")
-        
-        channel.on("postgres_changes", filter: ChannelFilter(event: "UPDATE", schema: "public", table: "users", filter: "id=eq.\(userId)")) { message in
-            // Check if is_host changed to true
-            if let newRecord = message.payload["new"] as? [String: Any],
-               let isHost = newRecord["is_host"] as? Bool,
-               isHost == true {
-                self.activateLicense()
-            }
-        }
-        
-        channel.subscribe()
-        self.realtimeChannel = channel
+        // TODO: Implement realtime subscription when needed
+        // For now, license activation is handled via:
+        // 1. Payment confirmation in PaymentGateView
+        // 2. Account recovery in RestoreAccountView
     }
     
     /// Activate the license (called after successful payment or recovery)

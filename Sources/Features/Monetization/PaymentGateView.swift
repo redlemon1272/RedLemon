@@ -64,7 +64,7 @@ struct PaymentGateView: View {
                                 .fill(Color.white)
                                 .frame(width: 280, height: 280)
                             
-                            Image(uiImage: generateQRCode(from: invoice.paymentRequest))
+                            Image(nsImage: generateQRCode(from: invoice.paymentRequest))
                                 .interpolation(.none)
                                 .resizable()
                                 .scaledToFit()
@@ -118,17 +118,17 @@ struct PaymentGateView: View {
     
     // MARK: - Logic
     
-    private func generateQRCode(from string: String) -> UIImage {
+    private func generateQRCode(from string: String) -> NSImage {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(string.utf8)
         
         if let outputImage = filter.outputImage {
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-                return UIImage(cgImage: cgimg)
+                return NSImage(cgImage: cgimg, size: NSSize(width: cgimg.width, height: cgimg.height))
             }
         }
-        return UIImage(systemName: "xmark.circle") ?? UIImage()
+        return NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: nil) ?? NSImage()
     }
     
     private func generateInvoice() {
@@ -173,15 +173,18 @@ struct PaymentGateView: View {
         
         Task {
             do {
-                // Query the invoices table in Supabase
-                let result: [Invoice] = try await SupabaseClient.shared
+                // Query the invoices table in Supabase using custom query builder
+                let result = try await SupabaseClient.shared
                     .from("invoices")
                     .select()
                     .eq("payment_hash", value: paymentHash)
                     .execute()
-                    .value
                 
-                if let invoice = result.first, invoice.status == "paid" {
+                // Parse the result
+                if let jsonArray = try? result.value as? [[String: Any]],
+                   let firstInvoice = jsonArray.first,
+                   let status = firstInvoice["status"] as? String,
+                   status == "paid" {
                     await MainActor.run {
                         print("✅ Payment confirmed!")
                         licenseManager.activateLicense()

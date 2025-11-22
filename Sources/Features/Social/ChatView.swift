@@ -123,7 +123,8 @@ struct MessageBubble: View {
                     .foregroundColor(isMe ? .white : .primary)
                     .cornerRadius(12)
                 
-                Text(message.createdAt.formatted(date: .omitted, time: .shortened))
+                Text(message.createdAt.formatted(date: .omitted, time: .standard))
+
                     .font(.caption2)
                     .foregroundColor(.secondary)
             }

@@ -8,6 +8,12 @@ class SupabaseClient {
     private let baseURL: String
     private let apiKey: String
     private let session: URLSession
+    
+    /// Auth context for tracking current user
+    var auth: AuthContext { AuthContext.shared }
+    
+    /// Edge Functions API
+    var functions: EdgeFunctionsAPI { EdgeFunctionsAPI(baseURL: baseURL, apiKey: apiKey) }
 
     /// Custom Realtime client for watch party sync
     lazy var realtimeClient: SupabaseRealtimeClient = {
@@ -78,9 +84,16 @@ class SupabaseClient {
         self.session = URLSession.shared
     }
 
+    // MARK: - Query Builder
+    
+    /// Create a query builder for a table
+    func from(_ table: String) -> QueryBuilder {
+        return QueryBuilder(client: self, table: table)
+    }
+    
     // MARK: - Helper Methods
 
-    private func makeRequest(
+    internal func makeRequest(
         path: String,
         method: String = "GET",
         body: [String: Any]? = nil,
@@ -186,6 +199,10 @@ class SupabaseClient {
                 body: ["last_seen": ISO8601DateFormatter().string(from: Date())],
                 query: ["id": "eq.\(user.id.uuidString)"]
             )
+            
+            // Set auth context
+            auth.currentUser = AuthUser(id: user.id, username: user.username)
+            
             return user
         }
 
@@ -200,6 +217,9 @@ class SupabaseClient {
         guard let user = newUsers.first else {
             throw SupabaseError.userCreationFailed
         }
+        
+        // Set auth context
+        auth.currentUser = AuthUser(id: user.id, username: user.username)
 
         return user
     }
@@ -762,5 +782,166 @@ extension SupabaseClient {
         _ = try await makeRequest(path: path, method: "POST", body: body)
         
 
+    }
+}
+
+// MARK: - Auth Context
+
+/// Simple auth context to track current user
+class AuthContext {
+    static let shared = AuthContext()
+    
+    private init() {}
+    
+    /// Current user (set after login/signup)
+    var currentUser: AuthUser?
+}
+
+struct AuthUser {
+    let id: UUID
+    let username: String
+}
+
+// MARK: - Edge Functions API
+
+/// Supabase Edge Functions API client
+class EdgeFunctionsAPI {
+    private let baseURL: String
+    private let apiKey: String
+    
+    init(baseURL: String, apiKey: String) {
+        self.baseURL = baseURL
+        self.apiKey = apiKey
+    }
+    
+    /// Invoke an edge function
+    func invoke(_ functionName: String, options: FunctionInvokeOptions? = nil) async throws -> Data {
+        let urlString = "\(baseURL)/functions/v1/\(functionName)"
+        
+        guard let url = URL(string: urlString) else {
+            throw SupabaseError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let body = options?.body {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        }
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"
+            throw SupabaseError.httpError(httpResponse.statusCode, errorString)
+        }
+        
+        return data
+    }
+}
+
+struct FunctionInvokeOptions {
+    let body: [String: Any]
+}
+
+// MARK: - Query Builder
+
+/// Query builder for Supabase tables
+class QueryBuilder {
+    private weak var client: SupabaseClient?
+    private let table: String
+    private var selectFields: String = "*"
+    private var filters: [String] = []
+    private var updateData: [String: Any]?
+    
+    init(client: SupabaseClient, table: String) {
+        self.client = client
+        self.table = table
+    }
+    
+    /// Select specific fields
+    func select(_ fields: String = "*") -> QueryBuilder {
+        self.selectFields = fields
+        return self
+    }
+    
+    /// Add equality filter
+    func eq(_ column: String, value: Any) -> QueryBuilder {
+        let valueStr: String
+        if let uuid = value as? UUID {
+            valueStr = uuid.uuidString
+        } else if let str = value as? String {
+            valueStr = str
+        } else {
+            valueStr = "\(value)"
+        }
+        filters.append("\(column)=eq.\(valueStr)")
+        return self
+    }
+    
+    /// Set data for update
+    func update(_ data: [String: Any]) -> QueryBuilder {
+        self.updateData = data
+        return self
+    }
+    
+    /// Execute the query
+    func execute() async throws -> QueryResult {
+        guard let client = client else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        var query: [String: String] = [:]
+        
+        if !filters.isEmpty {
+            for filter in filters {
+                let parts = filter.split(separator: "=", maxSplits: 1)
+                if parts.count == 2 {
+                    query[String(parts[0])] = String(parts[1])
+                }
+            }
+        }
+        
+        if let updateData = updateData {
+            // PATCH request
+            query["select"] = selectFields
+            let data = try await client.makeRequest(
+                path: "/\(table)",
+                method: "PATCH",
+                body: updateData,
+                query: query
+            )
+            return QueryResult(data: data)
+        } else {
+            // GET request
+            query["select"] = selectFields
+            let data = try await client.makeRequest(
+                path: "/\(table)",
+                method: "GET",
+                query: query
+            )
+            return QueryResult(data: data)
+        }
+    }
+}
+
+struct QueryResult {
+    let data: Data
+    
+    /// Decode the result as an array
+    var value: [Any] {
+        get throws {
+            guard let json = try? JSONSerialization.jsonObject(with: data) as? [[String: Any]] else {
+                return []
+            }
+            return json
+        }
     }
 }

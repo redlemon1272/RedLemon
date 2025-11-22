@@ -1,5 +1,5 @@
 import Foundation
-import Supabase
+
 
 struct LNBitsInvoice: Codable {
     let paymentHash: String
@@ -20,17 +20,30 @@ class LNBitsClient: ObservableObject {
     
     /// Create a Lightning Invoice via Supabase Edge Function
     /// - Parameters:
-    ///   - amount: Amount in Satoshis (optional, handled by server)
-    ///   - memo: Description (optional, handled by server)
+    ///   - amount: Amount in Satoshis (default: 1000)
+    ///   - memo: Description (optional)
     /// - Returns: LNBitsInvoice object containing payment request and hash
-    func createInvoice(amount: Int = 1000, memo: String = "Host License") async throws -> LNBitsInvoice {
+    func createInvoice(amount: Int = 1000, memo: String? = nil) async throws -> LNBitsInvoice {
+        // Get current user ID
+        guard let userId = SupabaseClient.shared.auth.currentUser?.id else {
+            throw NSError(domain: "LNBits", code: 401, userInfo: [NSLocalizedDescriptionKey: "Not authenticated"])
+        }
+        
+        // Build request body
+        var body: [String: Any] = [
+            "user_id": userId.uuidString,
+            "amount": amount
+        ]
+        
+        if let memo = memo {
+            body["memo"] = memo
+        }
+        
         // Invoke the 'create-invoice' Edge Function
         let response = try await SupabaseClient.shared.functions
-            .invoke("create-invoice", options: FunctionInvokeOptions(
-                body: ["amount": amount, "memo": memo]
-            ))
+            .invoke("create-invoice", options: FunctionInvokeOptions(body: body))
         
-        let data = try JSONDecoder().decode(LNBitsInvoice.self, from: response)
-        return data
+        let invoice = try JSONDecoder().decode(LNBitsInvoice.self, from: response)
+        return invoice
     }
 }

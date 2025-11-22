@@ -31,10 +31,6 @@ class LobbyViewModel: ObservableObject {
     private var isDisconnecting: Bool = false
     weak var appState: AppState?  // Weak reference to avoid retain cycle
 
-    @Published var participantReadyStatus: [String: Bool] = [:]
-    @Published var waitingForReady: Bool = false
-    @Published var startingStatusMessage: String = ""
-
     // Helper to track state safely across actor boundaries (specifically for deinit)
     private class TransitionState {
         var isStarting: Bool = false
@@ -431,46 +427,10 @@ class LobbyViewModel: ObservableObject {
     func startMovie(appState: AppState) async {
         guard isHost else { return }
 
-        NSLog("🎬 Host: Starting TWO-PHASE START for \(participants.count) participants")
+        NSLog("🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
-        waitingForReady = true
-        startingStatusMessage = "Waiting for guests to load..."
         addMessage(.hostStarting, userName: "Host")
-        
-        // Initialize ready status for all guests (host is always ready)
-        participantReadyStatus = [:]
-        for participant in participants where !participant.isHost {
-            participantReadyStatus[participant.id] = false
-        }
-        
-        // Send PRELOAD signal
-        Task {
-            let preloadMsg = SyncMessage(type: .preload, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: participantId, chatText: nil, chatUsername: nil)
-            try? await realtimeManager?.sendSyncMessage(preloadMsg)
-            NSLog("✅ Host: Sent PRELOAD signal")
-        }
-        
-        // Host preloads
-        if let mediaItem = room.mediaItem {
-            await appState.preloadMedia(mediaItem, quality: room.quality, watchMode: .watchParty, roomId: room.id, isHost: true)
-        }
-        
-        // Wait for guests
-        let maxWaitTime: TimeInterval = 30.0
-        let startWait = Date()
-        
-        while waitingForReady {
-            let allReady = participantReadyStatus.values.allSatisfy { $0 == true }
-            if allReady || Date().timeIntervalSince(startWait) > maxWaitTime {
-                waitingForReady = false
-                break
-            }
-            try? await Task.sleep(nanoseconds: 100_000_000)
-        }
-        
-        NSLog("🎬 Host: All guests ready (or timeout), starting countdown...")
-        startingStatusMessage = "Starting in"
 
         var realtimeSuccess = false
 
@@ -762,11 +722,11 @@ class LobbyViewModel: ObservableObject {
                         
                         // NOW wait for countdown (DB fetch already done, so timing is accurate)
                         // Compensate for fetch time to ensure we start exactly 3s after signal
-                        // PLUS add 0.5s buffer to match Host's UI/processing overhead
+                        // PLUS add 0.25s buffer to match Host's UI/processing overhead
                         let fetchDuration = Date().timeIntervalSince(fetchStartTime)
-                        let remainingWait = max(0, 3.5 - fetchDuration)
+                        let remainingWait = max(0, 3.25 - fetchDuration)
                         
-                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.5s sync buffer)")
+                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.25s sync buffer)")
                         
                         if remainingWait > 0 {
                             try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))
@@ -1215,31 +1175,6 @@ extension LobbyViewModel: WatchPartyManagerDelegate {
         case .streamSelected, .requestStream:
             // Handle stream-related messages
             break
-        case .preload:
-            // Guest: Preload media and send READY
-            if !isHost {
-                NSLog("🎬 Guest: Received PRELOAD signal")
-                if let mediaItem = room.mediaItem {
-                    Task {
-                        await appState?.preloadMedia(mediaItem, quality: room.quality, watchMode: .watchParty, roomId: room.id, isHost: false)
-                        
-                        // Send READY signal
-                        let readyMsg = SyncMessage(type: .ready, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: participantId, chatText: nil, chatUsername: nil)
-                        try? await realtimeManager?.sendSyncMessage(readyMsg)
-                        NSLog("✅ Guest: Sent READY signal")
-                    }
-                }
-            }
-            
-        case .ready:
-            // Host: Mark guest as ready
-            if isHost, let senderId = message.senderId {
-                participantReadyStatus[senderId] = true
-                NSLog("✅ Host: Guest \(senderId) is READY")
-            }
-            
-        // .play case is already handled above (lines 1203-1205), removing duplicate
-            
         default:
             break
         }

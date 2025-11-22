@@ -84,6 +84,13 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var currentSubtitleTrack: MPVWrapper.SubtitleTrack?
     @Published var showSubtitleSyncPanel: Bool = false
 
+    // MARK: - Post-Load Ready Gate
+    @Published var showWaitingForGuests: Bool = false
+    private var connectedGuestIds: Set<String> = []
+    private var readyGuestIds: Set<String> = []
+    private var hasSentReadySignal: Bool = false
+
+
     // MARK: - Initialization
 
     func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool) async {
@@ -154,6 +161,11 @@ class MPVPlayerViewModel: ObservableObject {
             print("🔄 Resume mode: Will load video and immediately pause+seek")
             // Load video normally but will immediately pause and seek
             mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+        } else if isInWatchParty {
+            print("🛑 Watch Party: Starting PAUSED to wait for guests")
+            // Start paused!
+            mpvWrapper.loadVideo(url: streamURL, autoplay: false)
+            showWaitingForGuests = true
         } else {
             print("▶️ Normal mode: Will load video and play immediately")
             // Load video normally with autoplay
@@ -337,10 +349,34 @@ class MPVPlayerViewModel: ObservableObject {
     func onVideoReady() {
         print("✅ Video ready - hiding poster")
 
+```
         // Fade out poster when video is ready
         withAnimation(.easeOut(duration: 0.5)) {
             self.showPoster = false
             self.isLoading = false
+        }
+        
+        // Watch Party Ready Gate
+        if isInWatchParty && !hasSentReadySignal {
+            print("👋 Watch Party: Video loaded, sending READY signal")
+            hasSentReadySignal = true
+            
+            // Send Ready signal
+            let syncMessage = SyncMessage(
+                type: .ready,
+                timestamp: Date().timeIntervalSince1970,
+                position: 0,
+                isPlaying: false,
+                senderId: currentUserId
+            )
+            Task {
+                try? await realtimeManager?.sendSyncMessage(syncMessage)
+            }
+            
+            // If Host, mark self as ready and check if we can start
+            if isWatchPartyHost {
+                checkIfAllGuestsReady()
+            }
         }
 
         // Check if we should resume from a specific timestamp
@@ -350,10 +386,9 @@ class MPVPlayerViewModel: ObservableObject {
             // Check if we're in watch party mode and set flag accordingly
             if isInWatchParty {
                 isResumingInWatchParty = true
-                print("🎉 Watch party resume: Jumping to saved position")
+                print("👥 Resuming inside watch party - will sync resume time to guests")
             }
 
-            // For resume mode: pause immediately then seek
             print("⏸️ Pausing immediately for resume...")
             mpvWrapper.pause()
 
@@ -361,7 +396,8 @@ class MPVPlayerViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
                 self?.attemptImmediateResume(resumeTime: resumeTime)
             }
-        } else {
+        } else if !isInWatchParty {
+            // Only auto-play if NOT in watch party (Watch Party waits for Ready Gate)
             print("ℹ️ No resume timestamp set (starting from beginning)")
 
             // For normal playback, set isPlaying to true since video started
@@ -1091,6 +1127,31 @@ extension MPVPlayerViewModel {
                 }
             }
         )
+        
+        // Set up presence callback for Post-Load Ready Gate
+        await realtimeManager?.setPresenceCallback { [weak self] action, userId in
+            Task { @MainActor in
+                guard let self = self else { return }
+                // Only track guests (not self/host if we are host)
+                guard userId != self.currentUserId else { return }
+                
+                switch action {
+                case .join:
+                    print("👤 Post-Load Gate: Guest joined presence: \(userId)")
+                    self.connectedGuestIds.insert(userId)
+                    if self.isWatchPartyHost {
+                        self.checkIfAllGuestsReady()
+                    }
+                case .leave:
+                    print("👋 Post-Load Gate: Guest left presence: \(userId)")
+                    self.connectedGuestIds.remove(userId)
+                    self.readyGuestIds.remove(userId) // Remove from ready set too
+                    if self.isWatchPartyHost {
+                        self.checkIfAllGuestsReady()
+                    }
+                }
+            }
+        }
 
         // If host, start broadcasting playback state
         if isHost {
@@ -1169,8 +1230,8 @@ extension MPVPlayerViewModel {
 
     /// Handle incoming sync messages from peers
     private func handleSyncMessage(_ message: SyncMessage) async {
-        // Host is authoritative for playback, but should still receive chat messages
-        if isWatchPartyHost && message.type != .chat {
+        // Host is authoritative for playback, but should still receive chat messages and READY signals
+        if isWatchPartyHost && message.type != .chat && message.type != .ready {
             return
         }
 
@@ -1180,6 +1241,33 @@ extension MPVPlayerViewModel {
         }
 
         switch message.type {
+        case .ready:
+            // Handle Ready signal
+            if let senderId = message.senderId {
+                print("✅ Received READY signal from \(senderId)")
+                readyGuestIds.insert(senderId)
+                
+                if isWatchPartyHost {
+                    checkIfAllGuestsReady()
+                }
+            }
+            
+        case .play:
+            // Handle Play signal (Start of movie)
+            if showWaitingForGuests {
+                print("🎬 Received PLAY signal - All guests ready! Starting playback.")
+                showWaitingForGuests = false
+                mpvWrapper.play()
+                isPlaying = true
+            } else {
+                // Normal play sync
+                if !mpvWrapper.isPlaying {
+                    print("▶️ Sync: Playing")
+                    mpvWrapper.play()
+                    isPlaying = true
+                }
+            }
+
         case .playbackState:
             // Guest syncs to host's playback state with advanced smoothness optimization
             let hostTimestamp = message.timestamp
@@ -1388,6 +1476,102 @@ extension MPVPlayerViewModel {
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
+        }
+    }
+
+    // MARK: - Post-Load Ready Gate Helpers
+    
+    private func checkIfAllGuestsReady() {
+        guard isWatchPartyHost else { return }
+        
+        // Ensure Host is ready (video loaded)
+        guard hasSentReadySignal else {
+            print("⏳ Host not ready yet")
+            return
+        }
+        
+        // Check if all connected guests are ready
+        // Note: connectedGuestIds comes from Presence
+        let allReady = connectedGuestIds.isSubset(of: readyGuestIds)
+        
+        if allReady {
+            print("🚀 All guests ready! Starting playback in 1s...")
+            
+            // Small delay to ensure UI updates
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                self.startSynchronizedPlayback()
+            }
+        } else {
+            let missing = connectedGuestIds.subtracting(readyGuestIds)
+            print("⏳ Waiting for guests: \(missing.count) remaining")
+        }
+    }
+    
+    private func startSynchronizedPlayback() {
+        print("🎬 Host: Initiating synchronized start")
+        showWaitingForGuests = false
+        mpvWrapper.play()
+        isPlaying = true
+        
+        // Send Play signal
+        let syncMessage = SyncMessage(
+            type: .play,
+            timestamp: Date().timeIntervalSince1970,
+            position: currentTime,
+            isPlaying: true,
+            senderId: currentUserId
+        )
+        Task {
+            try? await realtimeManager?.sendSyncMessage(syncMessage)
+        }
+    }
+
+    // MARK: - Post-Load Ready Gate Helpers
+    
+    private func checkIfAllGuestsReady() {
+        guard isWatchPartyHost else { return }
+        
+        // Ensure Host is ready (video loaded)
+        guard hasSentReadySignal else {
+            print("⏳ Host not ready yet")
+            return
+        }
+        
+        // Check if all connected guests are ready
+        // Note: connectedGuestIds comes from Presence
+        let allReady = connectedGuestIds.isSubset(of: readyGuestIds)
+        
+        if allReady {
+            print("🚀 All guests ready! Starting playback in 1s...")
+            
+            // Small delay to ensure UI updates
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+                guard let self = self else { return }
+                self.startSynchronizedPlayback()
+            }
+        } else {
+            let missing = connectedGuestIds.subtracting(readyGuestIds)
+            print("⏳ Waiting for guests: \(missing.count) remaining")
+        }
+    }
+    
+    private func startSynchronizedPlayback() {
+        print("🎬 Host: Initiating synchronized start")
+        showWaitingForGuests = false
+        mpvWrapper.play()
+        isPlaying = true
+        
+        // Send Play signal
+        let syncMessage = SyncMessage(
+            type: .play,
+            timestamp: Date().timeIntervalSince1970,
+            position: currentTime,
+            isPlaying: true,
+            senderId: currentUserId
+        )
+        Task {
+            try? await realtimeManager?.sendSyncMessage(syncMessage)
         }
     }
 

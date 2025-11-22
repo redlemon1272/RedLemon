@@ -126,30 +126,8 @@ struct MPVPlayerView: View {
                     MPVLayerVideoView(wrapper: viewModel.mpvWrapper)
                         .opacity(viewModel.isLoading ? 0 : 1)
 
-                    // Logo overlay (during loading)
-                    if viewModel.isLoading, let logoURL = viewModel.logoURL {
-                        AsyncImage(url: URL(string: logoURL)) { phase in
-                            if case .success(let image) = phase {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(maxWidth: 400)
-                                    .shadow(color: .black.opacity(0.5), radius: 20, x: 0, y: 10)
-                            }
-                        }
-                        .transition(.opacity.combined(with: .scale))
-                    }
-
-                    // Loading overlay
-                    if viewModel.isLoading {
-                        loadingOverlay
-                    }
-                    
-                    // Waiting for guests overlay (Post-Load Ready Gate)
-                    if viewModel.showWaitingForGuests {
-                        waitingForGuestsOverlay
-                            .zIndex(100)
-                    }
+                    // Overlays (Loading, Waiting, Logo)
+                    overlays
 
                     // Exit Room button (top-left, appears independently)
                     if showExitButton {
@@ -413,6 +391,34 @@ struct MPVPlayerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black.opacity(0.3))
         .transition(.opacity)
+    }
+
+    @ViewBuilder
+    private var overlays: some View {
+        // Logo overlay (during loading)
+        if viewModel.isLoading, let logoURL = viewModel.logoURL {
+            AsyncImage(url: URL(string: logoURL)) { phase in
+                if case .success(let image) = phase {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxWidth: 400)
+                        .shadow(color: .black.opacity(0.5), radius: 20, x: 0, y: 10)
+                }
+            }
+            .transition(.opacity.combined(with: .scale))
+        }
+
+        // Loading overlay
+        if viewModel.isLoading {
+            loadingOverlay
+        }
+        
+        // Waiting for guests overlay (Post-Load Ready Gate)
+        if viewModel.showWaitingForGuests {
+            waitingForGuestsOverlay
+                .zIndex(100)
+        }
     }
 
     private var waitingForGuestsOverlay: some View {

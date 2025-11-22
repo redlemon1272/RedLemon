@@ -1220,24 +1220,25 @@ extension LobbyViewModel: WatchPartyManagerDelegate {
             if !isHost {
                 NSLog("🎬 Guest: Received PRELOAD signal")
                 if let mediaItem = room.mediaItem {
-                    await appState?.preloadMedia(mediaItem, quality: room.quality, watchMode: .watchParty, roomId: room.id, isHost: false)
-                    
-                    // Send READY signal
-                    let readyMsg = SyncMessage(type: .ready, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: participantId, chatText: nil, chatUsername: nil)
-                    try? await realtimeManager?.sendSyncMessage(readyMsg)
-                    NSLog("✅ Guest: Sent READY signal")
+                    Task {
+                        await appState?.preloadMedia(mediaItem, quality: room.quality, watchMode: .watchParty, roomId: room.id, isHost: false)
+                        
+                        // Send READY signal
+                        let readyMsg = SyncMessage(type: .ready, timestamp: Date().timeIntervalSince1970, isPlaying: nil, senderId: participantId, chatText: nil, chatUsername: nil)
+                        try? await realtimeManager?.sendSyncMessage(readyMsg)
+                        NSLog("✅ Guest: Sent READY signal")
+                    }
                 }
             }
             
         case .ready:
             // Host: Mark guest as ready
-            if isHost, let senderId = syncMessage.senderId {
+            if isHost, let senderId = message.senderId {
                 participantReadyStatus[senderId] = true
                 NSLog("✅ Host: Guest \(senderId) is READY")
             }
             
-        case .play:
-            break // Not used in this version (we use LOBBY_START_COUNTDOWN)
+        // .play case is already handled above (lines 1203-1205), removing duplicate
             
         default:
             break

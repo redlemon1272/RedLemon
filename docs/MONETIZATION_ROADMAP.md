@@ -42,37 +42,52 @@ Make RedLemon 100% free and open source, while monetizing managed hosting servic
 - Pro: $10/month (up to 50 concurrent users)
 - Enterprise: $25/month (unlimited users)
 
-## Implementation Phases
+## Impleme# Monetization Roadmap: LNBits Integration
 
-### Phase 1: Infrastructure Migration ✅ (Weeks 1-2)
+## Strategy: "The Hidden Host License"
+We will implement the payment infrastructure now but keep it disabled/hidden behind a feature flag.
+- **Model:** One-time payment (or subscription) to unlock "Host" capability.
+- **Backend:** LNBits (Lightweight, modular, Python-based).
+- **Launch State:** Disabled (Free Beta).
+- **Post-Beta State:** Enabled (Paid Host License).
 
-- [x] Plan Supabase migration
-- [x] Plan BTCPay setup
-- [ ] Execute Supabase migration
-- [ ] Test self-hosted database
-- [ ] Verify all features work
-- [ ] Create backup strategy
+## Why LNBits?
+- **Lightweight:** Runs easily on cheap VPS or even alongside the app server.
+- **Modular:** We only need the "Invoice" and "Wallet" extensions.
+- **API-First:** Simple REST API for creating invoices and checking status.
+- **No Full Node Required:** Can sit on top of an existing funding source or use a custodial backend for the MVP.
 
-**Deliverables:**
-- Self-hosted PostgreSQL
-- PostgREST API
-- Realtime subscriptions
-- Migration documentation
+## Implementation Plan (Hidden Phase)
 
-### Phase 2: Payment Integration (Weeks 3-4)
+### 1. LNBits Setup (Backend)
+- Deploy LNBits instance (or use a demo instance for dev).
+- Create a "RedLemon Store" wallet.
+- Secure the `Read/Invoice` API Key.
 
-- [ ] Install BTCPay Server
-- [ ] Configure Lightning Network
-- [ ] Create payment API endpoints
-- [ ] Build webhook handlers
-- [ ] Test payment flows
-- [ ] Document payment integration
+### 2. Client-Side Logic (The "Gate")
+- **New Component:** `PaymentGateView`
+    - Checks `UserDefaults` for `isHostLicenseActive`.
+    - If false, shows "Upgrade to Host" screen (hidden for now).
+- **API Client:** `LNBitsClient`
+    - `createInvoice(amount: satoshis, memo: "RedLemon Host License")`
+    - `checkPaymentStatus(paymentHash: String)`
 
-**Deliverables:**
-- Working BTCPay Server
-- Payment API
-- Webhook integration
-- Test invoices
+### 3. The "Hidden" Toggle
+- Add a global flag: `let IS_MONETIZATION_ENABLED = false`
+- Wrap the "Start Watch Party" button logic:
+  ```swift
+  if IS_MONETIZATION_ENABLED && !isHostLicenseActive {
+      showPaymentScreen()
+  } else {
+      startWatch Party()
+  }
+  ```
+
+## Future Activation (Post-Beta)
+1. Flip `IS_MONETIZATION_ENABLED = true`.
+2. Users clicking "Start Watch Party" will see the QR code invoice.
+3. Upon payment, `isHostLicenseActive` becomes `true`.
+4. They gain access to hosting forever (or for the subscription period).
 
 ### Phase 3: Subscription Management (Weeks 5-6)
 

@@ -8,6 +8,8 @@ struct WatchPartyLobbyView: View {
     let isHost: Bool
 
     @State private var showEmojiPicker: Bool = false
+    @State private var showPaymentGate = false
+    @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
     init(room: WatchPartyRoom, isHost: Bool) {
@@ -319,7 +321,13 @@ struct WatchPartyLobbyView: View {
                 VStack(spacing: 12) {
                     if isHost {
                         // Host controls
-                        Button(action: startMovie) {
+                        Button(action: {
+                            if licenseManager.canHost {
+                                startMovie()
+                            } else {
+                                showPaymentGate = true
+                            }
+                        }) {
                             HStack {
                                 Image(systemName: "play.fill")
                                 Text("Start Playback")
@@ -378,6 +386,9 @@ struct WatchPartyLobbyView: View {
         }
         .onDisappear {
             viewModel.disconnect()
+        }
+        .sheet(isPresented: $showPaymentGate) {
+            PaymentGateView()
         }
     }  // Close lobbyContent function
 

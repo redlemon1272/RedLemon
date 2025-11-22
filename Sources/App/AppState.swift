@@ -419,9 +419,16 @@ class AppState: ObservableObject {
     // Create a new watch party room and navigate to lobby
     @MainActor
     func createWatchPartyAndNavigate(mediaItem: MediaItem, season: Int?, episode: Int?, quality: VideoQuality = .fullHD) async {
+        // FIX: Ensure movies don't inherit stale season/episode data
+        let isMovie = mediaItem.type == "movie"
+        let finalSeason = isMovie ? nil : season
+        let finalEpisode = isMovie ? nil : episode
+        
         NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
-        if let season = season, let episode = episode {
-            NSLog("   Season: \(season), Episode: \(episode)")
+        if let s = finalSeason, let e = finalEpisode {
+            NSLog("   Season: \(s), Episode: \(e)")
+        } else {
+            NSLog("   Type: \(mediaItem.type) (No Season/Episode)")
         }
         NSLog("   Quality: \(quality.rawValue)")
 
@@ -447,8 +454,8 @@ class AppState: ObservableObject {
                 imdbId: mediaItem.id,
                 posterUrl: mediaItem.poster,
                 backdropUrl: mediaItem.background,
-                season: season,
-                episode: episode,
+                season: finalSeason,
+                episode: finalEpisode,
                 isPublic: true
             )
             
@@ -473,8 +480,8 @@ class AppState: ObservableObject {
                 hostId: room.hostUserId.uuidString,
                 hostName: room.hostUsername,
                 mediaItem: mediaItem,
-                season: season,
-                episode: episode,
+                season: finalSeason,
+                episode: finalEpisode,
                 quality: quality,
                 sourceQuality: nil,
                 description: nil,
@@ -492,8 +499,8 @@ class AppState: ObservableObject {
             
             // Set selection details for the lobby
             self.selectedMediaItem = mediaItem
-            self.selectedSeason = season
-            self.selectedEpisode = episode
+            self.selectedSeason = finalSeason
+            self.selectedEpisode = finalEpisode
             self.selectedQuality = quality
             // Fetch metadata if needed
             if self.selectedMetadata == nil || self.selectedMetadata?.id != mediaItem.id {

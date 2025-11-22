@@ -28,14 +28,23 @@ actor StreamService {
             NSLog("✅ StreamService: Metadata loaded: \(finalMetadata.title)")
         }
         
+        // FIX: Defensive check - ensure movies don't have season/episode
+        let isMovie = item.type == "movie"
+        let finalSeason = isMovie ? nil : season
+        let finalEpisode = isMovie ? nil : episode
+        
+        if isMovie && (season != nil || episode != nil) {
+            print("⚠️ StreamService: Corrected movie request - removed season/episode")
+        }
+        
         // Step 2: Get Stream Bucket
         NSLog("🔍 StreamService: Fetching stream bucket...")
         let bucket = try await LocalAPIClient.shared.getStreamBucket(
             for: item.id,
             type: item.type,
             quality: quality,
-            season: season,
-            episode: episode,
+            season: finalSeason,
+            episode: finalEpisode,
             year: finalMetadata.year
         )
         
@@ -81,7 +90,7 @@ actor StreamService {
             print("🔄 StreamService: Trying stream \(index + 1)/\(filteredStreams.count): \(stream.title)")
             
             do {
-                let unlockedStream = try await unlockStream(stream: stream, item: item, season: season, episode: episode)
+                let unlockedStream = try await unlockStream(stream: stream, item: item, season: finalSeason, episode: finalEpisode)
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata)
             } catch {
                 print("❌ StreamService: Unlock failed: \(error.localizedDescription)")

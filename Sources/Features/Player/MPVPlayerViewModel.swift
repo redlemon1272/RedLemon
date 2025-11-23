@@ -1359,8 +1359,13 @@ extension MPVPlayerViewModel {
                 }
             } else {
                 // Large drift (>5s) - seek required
-                print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to sync")
-                seek(to: predictedHostPosition)
+                // PREDICTIVE SEEK: Add offset to compensate for seek/buffer latency
+                // This is especially important when guest joins an active room mid-playback
+                let seekBufferOffset: Double = 1.2  // 1.2s to account for seek + buffer time
+                let targetPosition = predictedHostPosition + seekBufferOffset
+                
+                print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
+                seek(to: targetPosition)
                 // Reset drift history after seek
                 driftHistory.removeAll()
                 isCurrentlyAdjustingSpeed = false

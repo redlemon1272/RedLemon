@@ -160,7 +160,14 @@ class MPVPlayerViewModel: ObservableObject {
         if shouldResume {
             print("🔄 Resume mode: Will load video and immediately pause+seek")
             // Load video normally but will immediately pause and seek
-            mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+            // CRITICAL: In watch party mode, NEVER autoplay - even when resuming!
+            // The ready gate will control when playback starts
+            let shouldAutoplay = !isInWatchParty
+            mpvWrapper.loadVideo(url: streamURL, autoplay: shouldAutoplay)
+            if isInWatchParty {
+                showWaitingForGuests = true
+                print("🛑 Watch Party Resume: Starting PAUSED to wait for ready gate")
+            }
         } else if isInWatchParty {
             print("🛑 Watch Party: Starting PAUSED to wait for guests")
             // Start paused!
@@ -1479,7 +1486,7 @@ extension MPVPlayerViewModel {
         
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
-            print("⏳ Host not ready yet")
+            print("⏳ Host not ready yet (but \(readyGuestIds.count) guests are ready)")
             return
         }
         

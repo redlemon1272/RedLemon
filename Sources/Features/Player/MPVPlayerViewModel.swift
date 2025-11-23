@@ -1303,8 +1303,8 @@ extension MPVPlayerViewModel {
             // Advanced tiered sync with hysteresis and adaptive thresholds
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
             
-            if absSmoothedDrift < 0.2 {
-                // Perfect sync (<200ms smoothed drift)
+            if absSmoothedDrift < 0.1 {
+                // Perfect sync (<100ms smoothed drift)
                 // If we're currently adjusting speed, reset to normal
                 if isCurrentlyAdjustingSpeed {
                     mpvWrapper.setSpeed(1.0)
@@ -1313,7 +1313,7 @@ extension MPVPlayerViewModel {
                     print("✅ Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
                 }
             } else if absSmoothedDrift < 5.0 {
-                // Small/Medium drift (200ms-5s) - Use ultra-smooth speed adjustment
+                // Small/Medium drift (100ms-5s) - Use ultra-smooth speed adjustment
                 // Hysteresis: Only adjust if enough time has passed since last adjustment
                 let timeSinceLastAdjustment = lastSpeedAdjustmentTime.map { Date().timeIntervalSince($0) } ?? 1.0
                 
@@ -1333,7 +1333,7 @@ extension MPVPlayerViewModel {
                         speedFactor = smoothedDrift > 0 ? 0.99 : 1.01  // ±1%
                         print("⚡ Gentle speed sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     } else {
-                        // Small drift (200-400ms): Ultra-gentle correction
+                        // Small drift (100-400ms): Ultra-gentle correction
                         speedFactor = smoothedDrift > 0 ? 0.995 : 1.005  // ±0.5%
                         print("⚡ Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     }

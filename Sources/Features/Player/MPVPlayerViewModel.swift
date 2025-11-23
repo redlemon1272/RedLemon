@@ -1495,6 +1495,13 @@ extension MPVPlayerViewModel {
             return
         }
         
+        // CRITICAL FIX: Ensure we have at least one guest before starting
+        // Without this, fast hosts would start immediately if guests haven't joined presence yet
+        guard !connectedGuestIds.isEmpty else {
+            print("⏳ No guests connected yet (waiting for presence updates)")
+            return
+        }
+        
         // Check if all connected guests are ready
         // Note: connectedGuestIds comes from Presence
         let allReady = connectedGuestIds.isSubset(of: readyGuestIds)

@@ -264,6 +264,9 @@ struct HeroEventCard: View {
     let event: EventItem
     let onJoin: () -> Void
     
+    @State private var currentTime = Date()
+    @State private var timer: Timer?
+    
     var body: some View {
         Button(action: {
             // Only allow joining the live event (index 0)
@@ -410,7 +413,7 @@ struct HeroEventCard: View {
                                     .scaleEffect(x: 1, y: 1.5, anchor: .center)
                                 
                                 HStack {
-                                    Text(formatEventTime(currentTime))
+                                    Text(formatEventTime(elapsedTime))
                                         .font(.system(size: 13, weight: .medium))
                                     Spacer()
                                     Text("-\(formatEventTime(remainingTime))")
@@ -428,26 +431,37 @@ struct HeroEventCard: View {
             .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
         }
         .buttonStyle(PlainButtonStyle())
-        .disabled(event.isFinished)
         .overlay(
             // Hover effect hint
             RoundedRectangle(cornerRadius: 16)
                 .stroke(event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1), lineWidth: 2)
         )
+        .onAppear {
+            // Only start timer for live events
+            if event.isLive {
+                currentTime = Date()
+                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                    currentTime = Date()
+                }
+            }
+        }
+        .onDisappear {
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
     private var progress: Double {
-        let now = Date()
-        let elapsed = now.timeIntervalSince(event.startTime)
+        let elapsed = currentTime.timeIntervalSince(event.startTime)
         return min(max(elapsed / event.duration, 0), 1)
     }
     
-    private var currentTime: TimeInterval {
-        Date().timeIntervalSince(event.startTime)
+    private var elapsedTime: TimeInterval {
+        currentTime.timeIntervalSince(event.startTime)
     }
     
     private var remainingTime: TimeInterval {
-        event.endTime.timeIntervalSince(Date())
+        event.endTime.timeIntervalSince(currentTime)
     }
     
     private func formatTime(_ date: Date) -> String {

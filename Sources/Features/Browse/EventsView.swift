@@ -212,10 +212,17 @@ struct EventsView: View {
     }
 
     private func joinEvent(_ event: EventItem) {
-        // Use deterministic ID for system rooms so everyone joins the same session
-        // Format: event_{movieId}
+        print("🎟️ Joining event: \(event.mediaItem.name)")
+        print("   Event start time: \(event.startTime)")
+        print("   Event duration: \(event.duration)s")
+        print("   Current time: \(Date())")
+        print("   Is Live: \(event.isLive)")
+        print("   Is In Lobby: \(event.isInLobby)")
+        
+        // Use deterministic room ID based on movie IMDB ID
         let roomId = "event_\(event.mediaItem.id)"
         
+        // Create a WatchPartyRoom for this event
         let room = WatchPartyRoom(
             id: roomId,
             hostId: "system",
@@ -235,6 +242,8 @@ struct EventsView: View {
             selectedQuality: nil,
             unlockedStreamURL: nil
         )
+        
+        print("   Room createdAt: \(room.createdAt)")
         
         // Auto-join lobby if it's the live event OR if we are seamlessly transitioning
         if event.isLive || appState.shouldAutoJoinLobby {

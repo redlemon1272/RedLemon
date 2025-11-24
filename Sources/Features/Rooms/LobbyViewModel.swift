@@ -1066,14 +1066,23 @@ class LobbyViewModel: ObservableObject {
 
     // MARK: - Helper Functions
 
+
     private func autoStartSystemEvent() {
-        guard let appState = appState else { return }
+        guard let appState = appState else {
+            print("❌ Lobby: autoStartSystemEvent - no appState")
+            return
+        }
         
         print("🤖 Lobby: Checking auto-start for system event")
+        print("   Room ID: \(room.id)")
+        print("   Room createdAt: \(room.createdAt)")
+        print("   Current time: \(Date())")
         
         // Calculate time until start
         let now = Date()
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
+        
+        print("   Time until start: \(timeUntilStart)s")
         
         if timeUntilStart > 0 {
             // We are early! Wait for the official start time.
@@ -1105,8 +1114,13 @@ class LobbyViewModel: ObservableObject {
         // Calculate playback position (should be >= 0 now)
         let elapsed = now.timeIntervalSince(room.createdAt)
         
+        print("   Elapsed time: \(elapsed)s")
+        print("   Media item: \(room.mediaItem?.name ?? "nil")")
+        
         // Set resume timestamp
         appState.resumeFromTimestamp = max(0, elapsed)
+        
+        print("   Set resumeFromTimestamp to: \(appState.resumeFromTimestamp)")
         
         // Set starting state to update UI
         self.isStarting = true
@@ -1118,6 +1132,7 @@ class LobbyViewModel: ObservableObject {
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
             
             if let mediaItem = room.mediaItem {
+                print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
                 await appState.playMedia(
                     mediaItem,
                     quality: room.quality,
@@ -1125,9 +1140,12 @@ class LobbyViewModel: ObservableObject {
                     roomId: room.id,
                     isHost: false // System is host, user is guest
                 )
+            } else {
+                print("❌ Lobby: No media item to play!")
             }
         }
     }
+
 
     // MARK: - Timeout and Error Handling
 

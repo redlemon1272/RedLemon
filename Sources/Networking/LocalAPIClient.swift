@@ -83,9 +83,9 @@ class LocalAPIClient: ObservableObject {
             return year >= 1998 && year <= 2023
         }
         
-        // Take top 10 and fetch full metadata for each
+        // Take top 30 and fetch full metadata for each (more variety in rotation)
         var fullItems: [MediaItem] = []
-        for meta in filteredMetas.prefix(10) {
+        for meta in filteredMetas.prefix(30) {
             do {
                 // Fetch full metadata to get background art
                 let metaURL = URL(string: "\(baseURL)/api/metadata/meta/movie/\(meta.id).json")!

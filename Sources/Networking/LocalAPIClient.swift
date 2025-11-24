@@ -730,26 +730,20 @@ struct MediaItem: Identifiable, Codable {
         print("🔍 [DEBUG] Successfully created MediaItem from meta: \(self.name)")
     }
 
-    // FIXED: Removed unnecessary do-catch blocks - URL(string:) returns nil, doesn't throw
+    // Cinemeta returns full URLs, no need for construction
     var posterURL: URL? {
         guard let poster = poster else { return nil }
-        // Handle TMDB relative paths
-        let fullURL = poster.starts(with: "http") ? poster : "https://image.tmdb.org/t/p/original\(poster)"
-        return URL(string: fullURL)
+        return URL(string: poster)
     }
 
     var backgroundURL: URL? {
         guard let background = background else { return nil }
-        // Handle TMDB relative paths
-        let fullURL = background.starts(with: "http") ? background : "https://image.tmdb.org/t/p/original\(background)"
-        return URL(string: fullURL)
+        return URL(string: background)
     }
     
     var logoURL: URL? {
         guard let logo = logo else { return nil }
-        // Handle TMDB relative paths
-        let fullURL = logo.starts(with: "http") ? logo : "https://image.tmdb.org/t/p/original\(logo)"
-        return URL(string: fullURL)
+        return URL(string: logo)
     }
 }
 

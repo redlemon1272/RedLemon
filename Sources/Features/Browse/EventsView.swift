@@ -6,6 +6,8 @@ struct EventsView: View {
     @State private var events: [EventItem] = []
     @State private var isLoading = true
     @State private var timer: Timer?
+    @State private var allMovies: [MediaItem] = []  // Store all fetched movies
+    @State private var currentOffset = 0  // Track which set of 4 we're showing
 
     // MARK: - Constants
     private let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
@@ -61,15 +63,32 @@ struct EventsView: View {
         Task {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
-                // Just take first 4 movies for the event cards
-                let eventMovies = Array(movies.prefix(4))
-                calculateSchedule(movies: eventMovies)
+                allMovies = movies
+                // Start with first 4 movies
+                currentOffset = 0
+                showNextBatch()
                 isLoading = false
             } catch {
                 print("❌ Failed to load events: \(error)")
                 isLoading = false
             }
         }
+    }
+    
+    private func showNextBatch() {
+        // Get next 4 movies, cycling back to start if needed
+        var batch: [MediaItem] = []
+        for i in 0..<4 {
+            let index = (currentOffset + i) % allMovies.count
+            if index < allMovies.count {
+                batch.append(allMovies[index])
+            }
+        }
+        
+        calculateSchedule(movies: batch)
+        
+        // Move offset forward for next batch
+        currentOffset = (currentOffset + 4) % allMovies.count
     }
 
     private func calculateSchedule(movies: [MediaItem]) {

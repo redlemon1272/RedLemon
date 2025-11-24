@@ -159,8 +159,8 @@ class LobbyViewModel: ObservableObject {
                         }
                     }
                     
-                    // Auto-start if it's a system event
-                    if room.id.hasPrefix("event_") {
+                    // Auto-start if room is already playing (events or regular rooms)
+                    if room.state == .playing || room.id.hasPrefix("event_") {
                         autoStartSystemEvent()
                     }
                 }

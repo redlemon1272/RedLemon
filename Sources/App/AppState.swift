@@ -66,6 +66,7 @@ class AppState: ObservableObject {
 
     enum AppView {
         case browse
+        case events
         case discover
         case search
         case friends

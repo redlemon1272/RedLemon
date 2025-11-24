@@ -57,6 +57,14 @@ struct ContentView: View {
                         }
 
                         SidebarButton(
+                            title: "Events",
+                            icon: "calendar.badge.clock",
+                            isSelected: appState.currentView == .events
+                        ) {
+                            appState.currentView = .events
+                        }
+
+                        SidebarButton(
                             title: "Discover",
                             icon: "sparkles",
                             isSelected: appState.currentView == .discover
@@ -118,6 +126,8 @@ struct ContentView: View {
                     switch appState.currentView {
                     case .browse:
                         BrowseView()
+                    case .events:
+                        EventsView()
                     case .discover:
                         DiscoverView()
                     case .search:

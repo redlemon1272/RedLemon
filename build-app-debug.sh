@@ -42,16 +42,6 @@ else
     echo "⚠️  Sparkle.framework not found in $BIN_PATH"
 fi
 
-# Copy WebRTC framework
-echo "📦 Copying WebRTC.framework..."
-if [ -d "$BIN_PATH/WebRTC.framework" ]; then
-    rm -rf "$FRAMEWORKS/WebRTC.framework"
-    cp -R "$BIN_PATH/WebRTC.framework" "$FRAMEWORKS/"
-    echo "✅ WebRTC.framework copied"
-else
-    echo "⚠️  WebRTC.framework not found in $BIN_PATH"
-fi
-
 # Copy resources (internet-identity.html)
 echo "📄 Copying resources..."
 if [ -f "Sources/Features/Auth/internet-identity.html" ]; then

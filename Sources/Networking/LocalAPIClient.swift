@@ -83,71 +83,72 @@ class LocalAPIClient: ObservableObject {
             return year >= 1990 && year <= 2025
         }
         
-        // Take top 30 and fetch full metadata for each (more variety in rotation)
-        var fullItems: [MediaItem] = []
-        for meta in filteredMetas.prefix(30) {
-            do {
-                // Fetch full metadata to get background art
-                let metaURL = URL(string: "\(baseURL)/api/metadata/meta/movie/\(meta.id).json")!
-                let (metaData, _) = try await session.data(from: metaURL)
-                // FIXED: Decode CinemetaResponse wrapper, then access .meta
-                let fullResponse = try JSONDecoder().decode(CinemetaResponse.self, from: metaData)
-                let mediaItem = MediaItem(from: fullResponse.meta)
-                
-                // Debug logging
-                print("📺 Event: \(mediaItem.name)")
-                print("   Background: \(mediaItem.background ?? "nil")")
-                
-                // FILTER: Check release date to avoid CAM/TS
-                // We want movies released at least 45 days ago (typical VOD window)
-                var isSafeRelease = true
-                if let releasedStr = fullResponse.meta.released {
-                    let formatter = ISO8601DateFormatter()
-                    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                    // Try standard ISO first, then without fractional seconds
-                    if let date = formatter.date(from: releasedStr) ?? ISO8601DateFormatter().date(from: releasedStr) {
-                        let daysSinceRelease = Date().timeIntervalSince(date) / (60 * 60 * 24)
-                        print("   Released: \(releasedStr) (\(Int(daysSinceRelease)) days ago)")
+        // Take top 30 and fetch full metadata for each in PARALLEL
+        print("🚀 Fetching metadata for top 30 movies in parallel...")
+        
+        let apiBaseURL = self.baseURL // Capture locally to avoid MainActor isolation issues in TaskGroup
+        
+        let fullItems = await withTaskGroup(of: MediaItem?.self) { group in
+            for meta in filteredMetas.prefix(30) {
+                group.addTask {
+                    do {
+                        // Fetch full metadata to get background art
+                        let metaURL = URL(string: "\(apiBaseURL)/api/metadata/meta/movie/\(meta.id).json")!
+                        let (metaData, _) = try await self.session.data(from: metaURL)
+                        let fullResponse = try JSONDecoder().decode(CinemetaResponse.self, from: metaData)
+                        let mediaItem = MediaItem(from: fullResponse.meta)
                         
-                        if daysSinceRelease < 45 {
-                            print("   ⚠️ Skipping: Too new (< 45 days), likely CAM/TS only")
-                            isSafeRelease = false
+                        // FILTER: Check release date to avoid CAM/TS
+                        if let releasedStr = fullResponse.meta.released {
+                            let formatter = ISO8601DateFormatter()
+                            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                            // Try standard ISO first, then without fractional seconds
+                            if let date = formatter.date(from: releasedStr) ?? ISO8601DateFormatter().date(from: releasedStr) {
+                                let daysSinceRelease = Date().timeIntervalSince(date) / (60 * 60 * 24)
+                                
+                                if daysSinceRelease < 45 {
+                                    // print("   ⚠️ Skipping \(mediaItem.name): Too new (< 45 days)")
+                                    return nil
+                                }
+                            }
                         }
+                        
+                        return mediaItem
+                    } catch {
+                        print("⚠️ Failed to fetch full metadata for \(meta.id): \(error)")
+                        // Fallback to basic item if full fetch fails
+                        // Manually construct background and logo URLs as a fallback
+                        let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
+                        let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
+                        
+                        return MediaItem(
+                            id: meta.id,
+                            type: meta.type,
+                            name: meta.name,
+                            poster: meta.poster,
+                            background: backgroundURL,
+                            logo: logoURL,
+                            description: nil,
+                            releaseInfo: nil,
+                            year: meta.year,
+                            imdbRating: nil,
+                            genres: nil,
+                            runtime: nil
+                        )
                     }
                 }
-                
-                if isSafeRelease {
-                    fullItems.append(mediaItem)
-                }
-            } catch {
-                // Fallback to basic metadata if full fetch fails
-                print("⚠️ Failed to fetch full metadata for \(meta.id), using basic: \(error)")
-                
-                // Manually construct background and logo URLs as a fallback
-                // Cinemeta uses predictable URL patterns
-                let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
-                let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
-                
-                let basicItem = MediaItem(
-                    id: meta.id,
-                    type: meta.type,
-                    name: meta.name,
-                    poster: meta.poster,
-                    background: backgroundURL,
-                    logo: logoURL,
-                    description: nil,
-                    releaseInfo: nil,
-                    year: meta.year,
-                    imdbRating: nil,
-                    genres: nil,
-                    runtime: nil
-                )
-                fullItems.append(basicItem)
             }
+            
+            var results: [MediaItem] = []
+            for await item in group {
+                if let item = item {
+                    results.append(item)
+                }
+            }
+            return results
         }
         
-        print("📊 Fetched \(fullItems.count) movies with full metadata for Events page")
-        
+        print("📊 Fetched \(fullItems.count) movies with full metadata (Parallel)")
         return fullItems
     }
 

@@ -72,16 +72,13 @@ class LocalAPIClient: ObservableObject {
     }
 
     func fetchTopMoviesForEvents() async throws -> [MediaItem] {
-        // Fetch top-rated movies for Events page with full metadata including background art
-        let catalogURL = URL(string: "\(baseURL)/api/metadata/catalog/movie/top")!
+        // Use Prime Video catalog - guarantees WEB-DL/Bluray quality (no CAM/TS)
+        let catalogURL = URL(string: "\(baseURL)/api/metadata/catalog/movie/primevideo.catalogue")!
         let (data, _) = try await session.data(from: catalogURL)
         let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
         
-        // Filter to 1998-2023 to avoid telesyncs and ensure quality
-        let filteredMetas = response.metas.filter { meta in
-            guard let yearStr = meta.year, let year = Int(yearStr.prefix(4)) else { return false }
-            return year >= 1990 && year <= 2025
-        }
+        // No filtering needed - Prime Video content is always high quality
+        let filteredMetas = response.metas
         
         // Take top 30 and fetch full metadata for each in PARALLEL
         print("🚀 Fetching metadata for top 30 movies in parallel...")
@@ -97,21 +94,6 @@ class LocalAPIClient: ObservableObject {
                         let (metaData, _) = try await self.session.data(from: metaURL)
                         let fullResponse = try JSONDecoder().decode(CinemetaResponse.self, from: metaData)
                         let mediaItem = MediaItem(from: fullResponse.meta)
-                        
-                        // FILTER: Check release date to avoid CAM/TS
-                        if let releasedStr = fullResponse.meta.released {
-                            let formatter = ISO8601DateFormatter()
-                            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                            // Try standard ISO first, then without fractional seconds
-                            if let date = formatter.date(from: releasedStr) ?? ISO8601DateFormatter().date(from: releasedStr) {
-                                let daysSinceRelease = Date().timeIntervalSince(date) / (60 * 60 * 24)
-                                
-                                if daysSinceRelease < 45 {
-                                    // print("   ⚠️ Skipping \(mediaItem.name): Too new (< 45 days)")
-                                    return nil
-                                }
-                            }
-                        }
                         
                         return mediaItem
                     } catch {

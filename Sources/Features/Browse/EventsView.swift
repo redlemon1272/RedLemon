@@ -117,7 +117,10 @@ struct EventsView: View {
         // 4. Build the schedule starting from the current movie
         var scheduledEvents: [EventItem] = []
         
-        for i in 0..<4 {
+        // Limit to available movies or 4, whichever is smaller
+        let count = min(4, allMovies.count)
+        
+        for i in 0..<count {
             let index = (currentMovieIndex + i) % allMovies.count
             let movie = allMovies[index]
             

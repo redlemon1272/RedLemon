@@ -80,7 +80,7 @@ class LocalAPIClient: ObservableObject {
         // Filter to 1998-2023 to avoid telesyncs and ensure quality
         let filteredMetas = response.metas.filter { meta in
             guard let yearStr = meta.year, let year = Int(yearStr.prefix(4)) else { return false }
-            return year >= 1998 && year <= 2023
+            return year >= 1990 && year <= 2025
         }
         
         // Take top 30 and fetch full metadata for each (more variety in rotation)
@@ -97,9 +97,28 @@ class LocalAPIClient: ObservableObject {
                 // Debug logging
                 print("📺 Event: \(mediaItem.name)")
                 print("   Background: \(mediaItem.background ?? "nil")")
-                print("   Logo: \(mediaItem.logo ?? "nil")")
                 
-                fullItems.append(mediaItem)
+                // FILTER: Check release date to avoid CAM/TS
+                // We want movies released at least 45 days ago (typical VOD window)
+                var isSafeRelease = true
+                if let releasedStr = fullResponse.meta.released {
+                    let formatter = ISO8601DateFormatter()
+                    formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                    // Try standard ISO first, then without fractional seconds
+                    if let date = formatter.date(from: releasedStr) ?? ISO8601DateFormatter().date(from: releasedStr) {
+                        let daysSinceRelease = Date().timeIntervalSince(date) / (60 * 60 * 24)
+                        print("   Released: \(releasedStr) (\(Int(daysSinceRelease)) days ago)")
+                        
+                        if daysSinceRelease < 45 {
+                            print("   ⚠️ Skipping: Too new (< 45 days), likely CAM/TS only")
+                            isSafeRelease = false
+                        }
+                    }
+                }
+                
+                if isSafeRelease {
+                    fullItems.append(mediaItem)
+                }
             } catch {
                 // Fallback to basic metadata if full fetch fails
                 print("⚠️ Failed to fetch full metadata for \(meta.id), using basic: \(error)")

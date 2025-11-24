@@ -36,6 +36,7 @@ struct CinemetaMeta: Codable {
     let logo: String?
     let description: String?
     let releaseInfo: String?
+    let released: String? // ISO date string e.g. "2023-11-24T00:00:00.000Z"
     let director: [String]?
     let cast: [String]?
     let genre: [String]?  // Note: Cinemeta uses "genre" not "genres"
@@ -46,7 +47,7 @@ struct CinemetaMeta: Codable {
 
     enum CodingKeys: String, CodingKey {
         case imdb_id, id, name, type, year, poster, background, logo, description
-        case releaseInfo, director, cast, genre, runtime, imdbRating, trailers, videos
+        case releaseInfo, released, director, cast, genre, runtime, imdbRating, trailers, videos
     }
 
     // Computed property for compatibility - use imdb_id or fallback to id

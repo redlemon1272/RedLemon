@@ -5,6 +5,7 @@
 //  Manages credentials using macOS Keychain
 //  Replaces Node.js keytar functionality
 //
+//
 
 import Foundation
 import Security
@@ -46,13 +47,14 @@ actor KeychainManager {
     // MARK: - Public API
 
     func save(credential: String, for service: String) async throws {
-        // 1. Try to save to keychain (but don't fail if it doesn't work)
+        // 1. Try to save to iCloud keychain (synchronizable)
         do {
-            try saveToKeychain(credential: credential, service: service)
-            print("🔐 Saved \(service) credential to Keychain")
+            try saveToKeychain(credential: credential, service: service, synchronizable: true)
+            print("☁️🔐 Saved \(service) credential to iCloud Keychain")
         } catch {
-            print("⚠️ Keychain save failed, using cache-only mode: \(error)")
-            // Continue anyway - we'll use cache-only mode
+            print("⚠️ iCloud Keychain save failed, trying local: \(error)")
+            // Fallback to local keychain
+            try? saveToKeychain(credential: credential, service: service, synchronizable: false)
         }
 
         // 2. Update memory cache
@@ -70,8 +72,17 @@ actor KeychainManager {
             return cached
         }
 
-        // 2. Try keychain
-        if let credential = try? getFromKeychain(service: service) {
+        // 2. Try iCloud keychain
+        if let credential = try? getFromKeychain(service: service, synchronizable: true) {
+            cache[service] = credential
+            return credential
+        }
+        
+        // 3. Try local keychain (legacy/fallback)
+        if let credential = try? getFromKeychain(service: service, synchronizable: false) {
+            // Migrate to iCloud if found locally
+            try? saveToKeychain(credential: credential, service: service, synchronizable: true)
+            
             cache[service] = credential
             return credential
         }
@@ -86,8 +97,9 @@ actor KeychainManager {
         // 2. Update encrypted cache file
         await saveToEncryptedCache()
 
-        // 3. Delete from macOS Keychain
-        try deleteFromKeychain(service: service)
+        // 3. Delete from macOS Keychain (both local and synced)
+        try? deleteFromKeychain(service: service, synchronizable: true)
+        try? deleteFromKeychain(service: service, synchronizable: false)
 
         print("🗑️ Removed \(service) from cache and keychain")
     }
@@ -102,11 +114,25 @@ actor KeychainManager {
     func saveUsername(_ username: String) async throws {
         NSLog("💾 KeychainManager: Saving username '\(username)' to UserDefaults")
         UserDefaults.standard.set(username, forKey: "redlemon.username")
+        
+        // Also sync username to iCloud Key-Value Store (NSUbiquitousKeyValueStore)
+        NSUbiquitousKeyValueStore.default.set(username, forKey: "redlemon.username")
+        NSUbiquitousKeyValueStore.default.synchronize()
+        
         NSLog("✅ KeychainManager: Username saved successfully")
     }
 
     /// Get username
     func getUsername() async -> String? {
+        // Try iCloud KVS first
+        if let iCloudUsername = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.username") {
+             // Sync back to local if different
+             if UserDefaults.standard.string(forKey: "redlemon.username") != iCloudUsername {
+                 UserDefaults.standard.set(iCloudUsername, forKey: "redlemon.username")
+             }
+             return iCloudUsername
+        }
+        
         let username = UserDefaults.standard.string(forKey: "redlemon.username")
         if let username = username {
             NSLog("🔍 KeychainManager: Retrieved username '\(username)' from UserDefaults")
@@ -120,17 +146,19 @@ actor KeychainManager {
     func deleteUsername() async throws {
         NSLog("🗑️ KeychainManager: Deleting username from UserDefaults")
         UserDefaults.standard.removeObject(forKey: "redlemon.username")
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: "redlemon.username")
+        NSUbiquitousKeyValueStore.default.synchronize()
         NSLog("✅ KeychainManager: Username deleted successfully")
     }
 
     // MARK: - Keychain Operations
 
-    private func saveToKeychain(credential: String, service: String) throws {
+    private func saveToKeychain(credential: String, service: String, synchronizable: Bool) throws {
         guard let data = credential.data(using: .utf8) else {
             throw KeychainError.unexpectedData
         }
 
-        let query: [String: Any] = [
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service,
@@ -138,6 +166,10 @@ actor KeychainManager {
             // Allow access without password prompt when app is running
             kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlock
         ]
+        
+        if synchronizable {
+            query[kSecAttrSynchronizable as String] = true
+        }
 
         // Delete existing first
         SecItemDelete(query as CFDictionary)
@@ -149,14 +181,18 @@ actor KeychainManager {
         }
     }
 
-    private func getFromKeychain(service: String) throws -> String? {
-        let query: [String: Any] = [
+    private func getFromKeychain(service: String, synchronizable: Bool) throws -> String? {
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne
         ]
+        
+        if synchronizable {
+            query[kSecAttrSynchronizable as String] = true
+        }
 
         var result: AnyObject?
         let status = SecItemCopyMatching(query as CFDictionary, &result)
@@ -176,12 +212,16 @@ actor KeychainManager {
         return credential
     }
 
-    private func deleteFromKeychain(service: String) throws {
-        let query: [String: Any] = [
+    private func deleteFromKeychain(service: String, synchronizable: Bool) throws {
+        var query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: Self.serviceName,
             kSecAttrAccount as String: service
         ]
+        
+        if synchronizable {
+            query[kSecAttrSynchronizable as String] = true
+        }
 
         let status = SecItemDelete(query as CFDictionary)
 
@@ -190,7 +230,7 @@ actor KeychainManager {
             throw KeychainError.deleteFailed(status: status)
         }
 
-        print("🗑️ Deleted \(service) from macOS Keychain")
+        print("🗑️ Deleted \(service) from macOS Keychain (sync: \(synchronizable))")
     }
 
     // MARK: - Encrypted Cache (eliminates prompts on restart)

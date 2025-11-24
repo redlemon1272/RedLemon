@@ -25,6 +25,25 @@ struct UnlockResult {
     let ext: String
 }
 
+struct RDUserInfo: Codable {
+    let id: Int?
+    let username: String?
+    let email: String?
+    let premium: Int? // Unix timestamp of expiration
+    let expiration: String? // ISO date string
+    let type: String? // "premium" or "free"
+    
+    /// Calculate actual days remaining from the premium timestamp
+    var daysRemaining: Int? {
+        guard let secondsRemaining = premium else { return nil }
+        
+        // Premium is seconds remaining, not a timestamp
+        let daysRemaining = Int(secondsRemaining / 86400) // 86400 seconds in a day
+        
+        return max(0, daysRemaining) // Don't return negative days
+    }
+}
+
 struct TorrentInfo: Codable {
     let id: String
     let hash: String?
@@ -115,6 +134,21 @@ actor RealDebridClient {
 
     func isBadHash(_ infoHash: String) -> Bool {
         return badHashes.contains(infoHash.lowercased())
+    }
+    
+    /// Get user account information including premium days remaining
+    func getUserInfo(token: String) async throws -> RDUserInfo {
+        let url = URL(string: "\(baseURL)/user")!
+        var request = URLRequest(url: url)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            throw NSError(domain: "RealDebrid", code: (response as? HTTPURLResponse)?.statusCode ?? 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user info"])
+        }
+        
+        return try JSONDecoder().decode(RDUserInfo.self, from: data)
     }
 
     // MARK: - Core Unlock Logic (ports Node.js _rdUnlock)

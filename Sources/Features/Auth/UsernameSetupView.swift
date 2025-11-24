@@ -120,6 +120,7 @@ struct UsernameSetupView: View {
 
                 // Save to keychain
                 try await KeychainManager.shared.saveUsername(trimmed)
+                try await KeychainManager.shared.save(credential: user.id.uuidString, for: "user_id")
 
                 // Add lemontom as first friend (like Tom from MySpace!)
                 await addDefaultFriend(userId: user.id)

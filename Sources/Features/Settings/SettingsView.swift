@@ -7,11 +7,14 @@
 
 import SwiftUI
 import Foundation
+import AppKit
+import UniformTypeIdentifiers
 
 struct SettingsView: View {
 
     @EnvironmentObject var updateManager: UpdateManager
     @EnvironmentObject var appState: AppState
+    @StateObject private var licenseManager = LicenseManager.shared
 
     // MARK: - App Version
     private var appVersion: String {
@@ -26,6 +29,10 @@ struct SettingsView: View {
     @State private var isLoading = false
     @State private var saveMessage: String?
     @State private var messageType: MessageType = .success
+    
+    // Real-Debrid User Info
+    @State private var rdUserInfo: RDUserInfo?
+    @State private var rdInfoLoading = false
 
     // Username State
     @State private var currentUsername: String = ""
@@ -34,6 +41,15 @@ struct SettingsView: View {
     @State private var isResetting = false
     @State private var resetMessage: String?
     @State private var showingResetConfirmation = false
+    
+    // Recovery Phrase State
+    // @State private var recoveryPhrase: String = ""
+    // @State private var showRecoveryPhrase = false
+    @State private var copyMessage: String?
+    @State private var showRestoreAccount = false
+    
+    // Payment State
+    @State private var showPaymentGate = false
 
     enum MessageType {
         case success
@@ -51,8 +67,12 @@ struct SettingsView: View {
                 header
 
                 credentialsSection
+                
+                licenseSection
 
                 usernameSection
+                
+                recoveryPhraseSection
 
                 resetSection
 
@@ -73,6 +93,9 @@ struct SettingsView: View {
             } else if !appState.currentUsername.isEmpty {
                 currentUsername = appState.currentUsername
             }
+            
+            // Load recovery phrase - REMOVED
+            // await loadRecoveryPhrase()
         }
         .onChange(of: appState.currentUsername) { newUsername in
             // Sync when AppState changes
@@ -86,7 +109,13 @@ struct SettingsView: View {
                 }
             }
         } message: {
-            Text("This will permanently erase your username '@\(currentUsername)' and all local data. You'll need to create a new username to continue using the app. This action cannot be undone.")
+            Text("This will erase your username '@\(currentUsername)' and all local data from this device. Make sure you have saved your recovery phrase if you want to restore your account later.")
+        }
+        .sheet(isPresented: $showRestoreAccount) {
+            RestoreAccountView()
+        }
+        .sheet(isPresented: $showPaymentGate) {
+            PaymentGateView()
         }
     }
 
@@ -142,6 +171,43 @@ struct SettingsView: View {
                 SecureField("Paste your Real-Debrid token here", text: $realDebridToken)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.title3, design: .monospaced))
+                    .onChange(of: realDebridToken) { newValue in
+                        if !newValue.isEmpty {
+                            Task {
+                                await loadRDUserInfo()
+                            }
+                        }
+                    }
+                
+                // Premium days display - simplified for macOS 12 compatibility
+                if let userInfo = rdUserInfo, 
+                   let premiumDays = userInfo.daysRemaining,
+                   premiumDays >= 0 {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "calendar.badge.clock")
+                                .foregroundColor(premiumDays > 30 ? .green : (premiumDays > 7 ? .orange : .red))
+                            Text("\(premiumDays) days remaining")
+                                .font(.body.weight(.semibold))
+                                .foregroundColor(premiumDays > 30 ? .green : (premiumDays > 7 ? .orange : .red))
+                        }
+                        
+                        if premiumDays <= 7 {
+                            Text("Your premium is expiring soon!")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Link("Renew Premium →", destination: URL(string: "https://real-debrid.com/premium")!)
+                            .font(.caption)
+                    }
+                    .padding(12)
+                    .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+                    .cornerRadius(8)
+                }
+
+
+
 
                 Link("Get your token →", destination: URL(string: "https://real-debrid.com/apitoken")!)
                     .font(.body)
@@ -226,6 +292,94 @@ struct SettingsView: View {
                 .cornerRadius(12)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
+        }
+    }
+
+    private var licenseSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("License & Payments")
+                .font(.system(size: 28, weight: .semibold))
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "bitcoinsign.circle.fill")
+                        .font(.title2)
+                        .foregroundColor(.orange)
+                    Text("Host License")
+                        .font(.title3.weight(.semibold))
+
+                    Spacer()
+
+                    // Status indicator
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(licenseManager.canHost ? Color.green : Color.orange)
+                            .frame(width: 10, height: 10)
+                        Text(licenseManager.canHost ? "Active" : "Inactive")
+                            .font(.body)
+                            .foregroundColor(licenseManager.canHost ? .green : .orange)
+                    }
+                }
+
+                Text("Host License allows you to create and host watch parties with friends")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+
+                // Payment method badge
+                HStack(spacing: 8) {
+                    Image(systemName: "bolt.fill")
+                        .font(.caption)
+                        .foregroundColor(.yellow)
+                    Text("Bitcoin Lightning Network")
+                        .font(.caption.weight(.medium))
+                        .foregroundColor(.secondary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(Color.yellow.opacity(0.1))
+                .cornerRadius(8)
+
+                // Purchase button (if license is inactive)
+                if !licenseManager.canHost {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Divider()
+                            .padding(.vertical, 4)
+                        
+                        Text("Unlock hosting capabilities with a one-time payment")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        Button(action: {
+                            showPaymentGate = true
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "lock.open.fill")
+                                    .font(.body)
+                                Text("Unlock Host License")
+                                    .font(.body.weight(.medium))
+                            }
+                            .padding(.vertical, 10)
+                            .padding(.horizontal, 16)
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.orange)
+                    }
+                } else {
+                    // License active message
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                        Text("You can host unlimited watch parties!")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.top, 4)
+                }
+            }
+            .padding(24)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(16)
         }
     }
 
@@ -336,6 +490,105 @@ struct SettingsView: View {
         }
     }
 
+    private var recoveryPhraseSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Account Recovery")
+                .font(.system(size: 28, weight: .semibold))
+
+            VStack(alignment: .leading, spacing: 12) {
+                HStack {
+                    Image(systemName: "key.viewfinder")
+                        .font(.title2)
+                        .foregroundColor(.purple)
+                        .foregroundColor(.purple)
+                    Text("Account Recovery")
+                        .font(.title3.weight(.semibold))
+
+                    Spacer()
+
+                    // iCloud Status
+                    HStack(spacing: 6) {
+                        Image(systemName: "icloud.fill")
+                            .foregroundColor(.blue)
+                        Text("iCloud Sync Active")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.blue.opacity(0.1))
+                    .cornerRadius(12)
+                }
+
+                Text("Your account is automatically synced to iCloud. You can also create a manual backup file.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+
+                // Backup Actions
+                HStack(spacing: 12) {
+                    Button(action: {
+                        Task {
+                            await exportAccount()
+                        }
+                    }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "arrow.down.doc.fill")
+                            Text("Backup to File")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 10)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.purple)
+                }
+
+                
+                // Copy confirmation message
+                if let message = copyMessage {
+                    HStack(spacing: 8) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                        Text(message)
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
+                    .padding(.top, 4)
+                    .transition(.opacity)
+                }
+                
+                // Divider
+                Divider()
+                    .padding(.vertical, 8)
+                
+                // Restore Account button
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Lost access to your account?")
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(.secondary)
+                    
+                    Button(action: {
+                        showRestoreAccount = true
+                    }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "arrow.clockwise")
+                                .font(.body)
+                            Text("Restore Account from Backup")
+                                .font(.body.weight(.medium))
+                        }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 16)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
+                }
+            }
+            .padding(24)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(16)
+        }
+    }
+
     private var resetSection: some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Reset User Data")
@@ -352,7 +605,7 @@ struct SettingsView: View {
                     Spacer()
                 }
 
-                Text("Permanently erase your current username '@\(currentUsername)' and all local app data. You'll be able to create a completely new username and start fresh.")
+                Text("Erase your current username '@\(currentUsername)' and all local app data from this device. You can restore your account later using your backup file.")
                     .font(.body)
                     .foregroundColor(.secondary)
 
@@ -363,10 +616,10 @@ struct SettingsView: View {
                         .foregroundColor(.orange)
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Warning: This action cannot be undone!")
+                        Text("This will erase all local data")
                             .font(.body.weight(.medium))
                             .foregroundColor(.orange)
-                        Text("Your current username and all local data will be permanently erased.")
+                        Text("Your username and data will be removed from this device. Save your backup file to restore your account later.")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -495,6 +748,18 @@ struct SettingsView: View {
         if let subdlKey = await KeychainManager.shared.get(service: "subdl") {
             subDLApiKey = subdlKey
         }
+        
+        // Load RD user info if token exists
+        if !realDebridToken.isEmpty {
+            await loadRDUserInfo()
+        }
+        
+        // HEAL: Ensure user_id is in Keychain (for export feature)
+        let keychainUserId = await KeychainManager.shared.get(service: "user_id")
+        if keychainUserId == nil, let currentUserId = appState.currentUserId {
+            print("🩹 Healing missing user_id in Keychain...")
+            try? await KeychainManager.shared.save(credential: currentUserId.uuidString, for: "user_id")
+        }
     }
 
     private func saveCredentials() {
@@ -542,6 +807,33 @@ struct SettingsView: View {
             }
         }
     }
+    
+    private func loadRDUserInfo() async {
+        guard !realDebridToken.isEmpty else {
+            await MainActor.run {
+                rdUserInfo = nil
+            }
+            return
+        }
+        
+        await MainActor.run {
+            rdInfoLoading = true
+        }
+        
+        do {
+            let userInfo = try await RealDebridClient.shared.getUserInfo(token: realDebridToken)
+            await MainActor.run {
+                rdUserInfo = userInfo
+                rdInfoLoading = false
+            }
+        } catch {
+            print("❌ Failed to load RD user info: \(error.localizedDescription)")
+            await MainActor.run {
+                rdUserInfo = nil
+                rdInfoLoading = false
+            }
+        }
+    }
 
     private func resetUserData() async {
         isResetting = true
@@ -582,6 +874,36 @@ struct SettingsView: View {
                         resetMessage = nil
                     }
                 }
+            }
+        }
+    }
+    
+    // MARK: - Account Export
+    
+    private func exportAccount() async {
+        do {
+            let savePanel = NSSavePanel()
+            savePanel.allowedContentTypes = [UTType(filenameExtension: "redlemon-key")!]
+            savePanel.nameFieldStringValue = "redlemon-backup-\(Int(Date().timeIntervalSince1970))"
+            savePanel.canCreateDirectories = true
+            savePanel.title = "Save Account Backup"
+            savePanel.message = "Choose a secure location to save your account backup file."
+            
+            let response = await savePanel.begin()
+            
+            if response == .OK, let url = savePanel.url {
+                try await AccountExportManager.shared.saveExportFile(to: url)
+                
+                await MainActor.run {
+                    copyMessage = "✅ Backup saved successfully!"
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        copyMessage = nil
+                    }
+                }
+            }
+        } catch {
+            await MainActor.run {
+                copyMessage = "❌ Export failed: \(error.localizedDescription)"
             }
         }
     }

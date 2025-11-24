@@ -1,10 +1,11 @@
 import SwiftUI
+import AppKit
+import UniformTypeIdentifiers
 
 struct RestoreAccountView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var licenseManager = LicenseManager.shared
     
-    @State private var phraseInput: String = ""
     @State private var isRestoring = false
     @State private var errorMessage: String?
     @State private var successMessage: String?
@@ -24,59 +25,52 @@ struct RestoreAccountView: View {
                         .font(.system(size: 28, weight: .bold))
                         .foregroundColor(.white)
                     
-                    Text("Enter your 12-word recovery phrase to restore your account and Host License.")
+                    Text("Import your backup file (.redlemon-key) to restore your account.")
                         .font(.system(size: 14))
                         .foregroundColor(.gray)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
                 }
                 
-                // Input Field
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Recovery Phrase")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    TextEditor(text: $phraseInput)
-                        .font(.system(size: 14, design: .monospaced))
-                        .frame(height: 100)
-                        .padding(8)
-                        .background(Color.white.opacity(0.05))
-                        .cornerRadius(8)
+                // Import Actions
+                VStack(spacing: 16) {
+                    Button(action: importFromFile) {
+                        HStack {
+                            Image(systemName: "arrow.up.doc.fill")
+                            Text("Import Backup File")
+                        }
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
                         .foregroundColor(.white)
+                        .cornerRadius(10)
+                    }
+                    .disabled(isRestoring)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 40)
                 
                 // Error/Success Messages
                 if let error = errorMessage {
                     Text(error)
                         .foregroundColor(.red)
                         .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
                 
                 if let success = successMessage {
                     Text(success)
                         .foregroundColor(.green)
                         .font(.caption)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
                 
-                // Restore Button
-                Button(action: restoreAccount) {
-                    HStack {
-                        if isRestoring {
-                            ProgressView()
-                                .scaleEffect(0.8)
-                        }
-                        Text(isRestoring ? "Restoring..." : "Restore Account")
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(phraseInput.isEmpty ? Color.gray : Color.accentColor)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+                if isRestoring {
+                    ProgressView("Restoring...")
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 }
-                .disabled(phraseInput.isEmpty || isRestoring)
-                .padding(.horizontal)
                 
                 Spacer()
                 
@@ -90,36 +84,54 @@ struct RestoreAccountView: View {
         .frame(width: 500, height: 500)
     }
     
-    private func restoreAccount() {
+    private func importFromFile() {
         errorMessage = nil
         successMessage = nil
         
-        let phrase = phraseInput.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+        let openPanel = NSOpenPanel()
+        openPanel.allowedContentTypes = [UTType(filenameExtension: "redlemon-key")!]
+        openPanel.allowsMultipleSelection = false
+        openPanel.canChooseDirectories = false
+        openPanel.canChooseFiles = true
+        openPanel.title = "Select Account Backup File"
         
-        guard RecoveryPhraseManager.shared.isValidPhrase(phrase) else {
-            errorMessage = "Invalid phrase. Must be exactly 12 words."
-            return
+        openPanel.begin { response in
+            if response == .OK, let url = openPanel.url {
+                restoreAccount(from: url)
+            }
         }
-        
+    }
+    
+    private func restoreAccount(from url: URL) {
         isRestoring = true
         
         Task {
             do {
-                let success = try await licenseManager.recoverAccount(phrase: phrase)
+                let data = try Data(contentsOf: url)
+                guard let jsonString = String(data: data, encoding: .utf8) else {
+                    throw NSError(domain: "Restore", code: 1, userInfo: [NSLocalizedDescriptionKey: "Could not read file"])
+                }
+                
+                let account = try await AccountExportManager.shared.importAccount(from: jsonString)
+                
                 await MainActor.run {
-                    if success {
-                        successMessage = "✅ Account restored successfully!"
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                            dismiss()
-                        }
+                    successMessage = "✅ Restored account: \(account.username)"
+                    
+                    // Trigger app state refresh if needed
+                    // For now, just dismiss after delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        dismiss()
                     }
                 }
             } catch {
                 await MainActor.run {
-                    errorMessage = "Recovery failed: \(error.localizedDescription)"
+                    errorMessage = "Restore failed: \(error.localizedDescription)"
                 }
             }
-            isRestoring = false
+            
+            await MainActor.run {
+                isRestoring = false
+            }
         }
     }
 }

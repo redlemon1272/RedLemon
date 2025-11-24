@@ -45,4 +45,26 @@ class RecoveryPhraseManager {
         let words = phrase.split(separator: " ").map(String.init)
         return words.count == 12
     }
+    
+    /// Save recovery phrase to Keychain
+    func savePhrase(_ phrase: String) async throws {
+        try await KeychainManager.shared.save(credential: phrase, for: "recovery_phrase")
+    }
+    
+    /// Retrieve recovery phrase from Keychain
+    func getPhrase() async -> String? {
+        return await KeychainManager.shared.get(service: "recovery_phrase")
+    }
+    
+    /// Check if a recovery phrase exists
+    func hasPhrase() async -> Bool {
+        return await getPhrase() != nil
+    }
+    
+    /// Generate and save a new recovery phrase
+    func generateAndSavePhrase() async throws -> String {
+        let phrase = generatePhrase()
+        try await savePhrase(phrase)
+        return phrase
+    }
 }

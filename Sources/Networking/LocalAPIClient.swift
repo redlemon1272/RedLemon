@@ -71,6 +71,27 @@ class LocalAPIClient: ObservableObject {
         return items
     }
 
+    func fetchTopMoviesForEvents() async throws -> [MediaItem] {
+        // Fetch top-rated movies for Events page
+        // Use the popular movies endpoint and filter by year
+        let url = URL(string: "\(baseURL)/api/metadata/catalog/movie/top")!
+        let (data, _) = try await session.data(from: url)
+        let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
+        
+        // Filter to 1998-2023 to avoid telesyncs and ensure quality
+        let filteredMetas = response.metas.filter { meta in
+            guard let yearStr = meta.year, let year = Int(yearStr.prefix(4)) else { return false }
+            return year >= 1998 && year <= 2023
+        }
+        
+        // Take top 15 for Events
+        let items = filteredMetas.prefix(15).map { MediaItem(from: $0) }
+        
+        print("📊 Fetched \(items.count) movies for Events page")
+        
+        return items
+    }
+
     func searchMedia(query: String, type: String = "movie") async throws -> [MediaItem] {
         print("🔍 [DEBUG] searchMedia called with query: '\(query)', type: '\(type)'")
 

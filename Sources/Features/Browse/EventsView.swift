@@ -70,7 +70,7 @@ struct EventsView: View {
         }
     }
 
-    private func calculateSchedule(movies: [StreamItem]) {
+    private func calculateSchedule(movies: [MediaItem]) {
         let now = Date()
         let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: now)
@@ -156,7 +156,7 @@ struct EventsView: View {
 
 struct EventItem: Identifiable {
     let id: String
-    let mediaItem: StreamItem
+    let mediaItem: MediaItem
     let startTime: Date
     let duration: TimeInterval
     

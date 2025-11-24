@@ -970,13 +970,13 @@ class LobbyViewModel: ObservableObject {
                     // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
                     await self.updateMediaItemFromRoomState(roomState)
                     
-                    // Re-fetch mediaItem as it might have changed
-                    guard let currentMediaItem = self.room.mediaItem else {
-                         NSLog("❌ Guest: Media item missing after update check")
-                         return
+                    // Check if room has media item
+                    guard self.room.mediaItem != nil else {
+                        print("⚠️ Cannot join room: No media item")
+                        return
                     }
 
-                    NSLog("🎬 Guest: Launching player for \(currentMediaItem.name) via database fallback")
+                    NSLog("🎬 Guest: Launching player via database fallback")
                     
                     // CRITICAL: Set season/episode from room BEFORE playMedia()
                     // This ensures the guest resolves the correct episode for subtitles and metadata
@@ -999,7 +999,7 @@ class LobbyViewModel: ObservableObject {
                     }
 
                     await appState.playMedia(
-                        currentMediaItem,
+                        self.room.mediaItem!,
                         quality: room.quality,
                         watchMode: .watchParty,
                         roomId: room.id,

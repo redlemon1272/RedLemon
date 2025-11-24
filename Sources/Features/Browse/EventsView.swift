@@ -14,12 +14,9 @@ struct EventsView: View {
 
     var body: some View {
         ZStack {
-            Color.black.edgesIgnoringSafeArea(.all)
-
             if isLoading {
                 ProgressView()
                     .scaleEffect(1.5)
-                    .tint(.white)
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
@@ -27,25 +24,39 @@ struct EventsView: View {
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Live Events")
                                 .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(.white)
+                                .foregroundColor(.primary)
                             
                             Text("Curated cinema streaming 24/7. Join any movie in progress.")
                                 .font(.system(size: 16))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.secondary)
                         }
                         .padding(.horizontal)
                         .padding(.top, 20)
 
-                        // Events List
-                        LazyVStack(spacing: 20) {
-                            ForEach(events) { event in
-                                HeroEventCard(event: event) {
-                                    joinEvent(event)
+                        if events.isEmpty {
+                            VStack(spacing: 20) {
+                                Image(systemName: "film")
+                                    .font(.system(size: 50))
+                                    .foregroundColor(.secondary)
+                                Text("No events scheduled right now.")
+                                    .font(.title2)
+                                    .foregroundColor(.primary)
+                                Text("Check back later for more live screenings.")
+                                    .foregroundColor(.secondary)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 300)
+                        } else {
+                            // Events List
+                            LazyVStack(spacing: 20) {
+                                ForEach(events) { event in
+                                    HeroEventCard(event: event) {
+                                        joinEvent(event)
+                                    }
                                 }
                             }
+                            .padding(.horizontal)
+                            .padding(.bottom, 40)
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom, 40)
                     }
                 }
             }
@@ -255,7 +266,8 @@ struct HeroEventCard: View {
     
     var body: some View {
         Button(action: {
-            if !event.isFinished {
+            // Only allow joining the live event (index 0)
+            if event.isLive && !event.isFinished {
                 onJoin()
             }
         }) {
@@ -414,8 +426,6 @@ struct HeroEventCard: View {
             }
             .frame(height: 320)
             .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
-            .scaleEffect(event.isFinished ? 0.98 : 1.0)
-            .opacity(event.isFinished ? 0.6 : 1.0)
         }
         .buttonStyle(PlainButtonStyle())
         .disabled(event.isFinished)

@@ -292,14 +292,13 @@ struct RoomListView: View {
         appState.currentRoomId = room.id
         appState.isWatchPartyHost = isUserHost
         
-        // If room is already playing, skip lobby and go straight to playback
+        // If room is already playing, set auto-join flag so lobby auto-starts immediately
         if room.state == .playing {
-            print("🎬 Room is already playing - navigating directly to playback")
-            appState.currentView = .player
-        } else {
-            print("🚪 Room is in lobby - navigating to lobby view")
-            appState.currentView = .watchPartyLobby
+            print("🎬 Room is already playing - will auto-start from lobby")
+            appState.shouldAutoJoinLobby = true
         }
+        
+        appState.currentView = .watchPartyLobby
     }
 
     private func joinRoomByCode(code: String) {

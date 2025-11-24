@@ -72,10 +72,9 @@ class LocalAPIClient: ObservableObject {
     }
 
     func fetchTopMoviesForEvents() async throws -> [MediaItem] {
-        // Fetch top-rated movies for Events page
-        // Use the popular movies endpoint and filter by year
-        let url = URL(string: "\(baseURL)/api/metadata/catalog/movie/top")!
-        let (data, _) = try await session.data(from: url)
+        // Fetch top-rated movies for Events page with full metadata including background art
+        let catalogURL = URL(string: "\(baseURL)/api/metadata/catalog/movie/top")!
+        let (data, _) = try await session.data(from: catalogURL)
         let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
         
         // Filter to 1998-2023 to avoid telesyncs and ensure quality
@@ -84,12 +83,25 @@ class LocalAPIClient: ObservableObject {
             return year >= 1998 && year <= 2023
         }
         
-        // Take top 15 for Events
-        let items = filteredMetas.prefix(15).map { MediaItem(from: $0) }
+        // Take top 10 and fetch full metadata for each
+        var fullItems: [MediaItem] = []
+        for meta in filteredMetas.prefix(10) {
+            do {
+                // Fetch full metadata to get background art
+                let metaURL = URL(string: "\(baseURL)/api/metadata/meta/movie/\(meta.id).json")!
+                let (metaData, _) = try await session.data(from: metaURL)
+                let fullMeta = try JSONDecoder().decode(CinemetaMeta.self, from: metaData)
+                fullItems.append(MediaItem(from: fullMeta))
+            } catch {
+                // Fallback to basic metadata if full fetch fails
+                print("⚠️ Failed to fetch full metadata for \(meta.id), using basic: \(error)")
+                fullItems.append(MediaItem(from: meta))
+            }
+        }
         
-        print("📊 Fetched \(items.count) movies for Events page")
+        print("📊 Fetched \(fullItems.count) movies with full metadata for Events page")
         
-        return items
+        return fullItems
     }
 
     func searchMedia(query: String, type: String = "movie") async throws -> [MediaItem] {

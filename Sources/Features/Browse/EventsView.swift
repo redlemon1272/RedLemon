@@ -84,7 +84,6 @@ struct EventsView: View {
             let duration = TimeInterval(runtimeMinutes * 60)
             
             let startTime = startOfDay.addingTimeInterval(cumulativeTime)
-            let endTime = startTime.addingTimeInterval(duration)
             
             scheduledEvents.append(EventItem(
                 id: UUID().uuidString,
@@ -97,19 +96,21 @@ struct EventsView: View {
             cumulativeTime += duration + bufferBetweenMovies
         }
         
-        // Handle loop wrapping (if current time is past all events, shift them to next day or loop)
-        // For simplicity in this client-side view, we just display the calculated schedule relative to today's midnight.
-        // The backend worker handles the actual persistent room creation.
+        // Filter out expired events (keep only active and upcoming)
+        let activeEvents = scheduledEvents.filter { !$0.isFinished }
         
         DispatchQueue.main.async {
-            self.events = scheduledEvents
+            self.events = activeEvents
         }
     }
 
     private func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            // Force UI update for progress bars and timestamps
-            self.events = self.events.map { $0 }
+        // Update less frequently to avoid crashes (every 10 seconds instead of 1)
+        timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
+            // Recalculate schedule to remove expired events
+            Task { @MainActor in
+                self.events = self.events.filter { !$0.isFinished }
+            }
         }
     }
 

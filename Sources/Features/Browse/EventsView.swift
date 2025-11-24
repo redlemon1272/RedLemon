@@ -63,12 +63,10 @@ struct EventsView: View {
         Task {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
-                // Shuffle movies so it's different every time the app opens
-                allMovies = movies.shuffled()
+                // Sort movies deterministically by ID so everyone has the same list order
+                allMovies = movies.sorted { $0.id < $1.id }
                 
-                // Start with first 4 movies
-                currentOffset = 0
-                showNextBatch()
+                calculateDeterministicSchedule()
                 isLoading = false
                 
                 // Start timer to check for event completion
@@ -80,47 +78,60 @@ struct EventsView: View {
         }
     }
     
-    private func showNextBatch() {
-        // Get next 4 movies, cycling back to start if needed
-        var batch: [MediaItem] = []
-        for i in 0..<4 {
-            let index = (currentOffset + i) % allMovies.count
-            if index < allMovies.count {
-                batch.append(allMovies[index])
-            }
-        }
-        
-        calculateSchedule(movies: batch)
-        
-        // Move offset forward for next batch
-        currentOffset = (currentOffset + 4) % allMovies.count
-    }
-
-    private func calculateSchedule(movies: [MediaItem]) {
-        // Simple sequential schedule: first movie is "live", rest are upcoming
-        var scheduledEvents: [EventItem] = []
+    private func calculateDeterministicSchedule() {
+        guard !allMovies.isEmpty else { return }
         
         let now = Date()
         
-        for (index, movie) in movies.enumerated() {
-            // Parse runtime for display purposes
+        // 1. Calculate total duration of the entire playlist cycle
+        var totalCycleDuration: TimeInterval = 0
+        var movieDurations: [TimeInterval] = []
+        
+        for movie in allMovies {
+            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies
+            movieDurations.append(duration)
+            totalCycleDuration += duration
+        }
+        
+        // 2. Determine where we are in the cycle relative to a fixed epoch
+        // Use 2024-01-01 as epoch to keep numbers reasonable but consistent
+        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
+        let timeSinceEpoch = now.timeIntervalSince(epoch)
+        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+        
+        // 3. Find the currently playing movie
+        var accumulatedTime: TimeInterval = 0
+        var currentMovieIndex = 0
+        var timeIntoCurrentMovie: TimeInterval = 0
+        
+        for (index, duration) in movieDurations.enumerated() {
+            if accumulatedTime + duration > currentCycleTime {
+                currentMovieIndex = index
+                timeIntoCurrentMovie = currentCycleTime - accumulatedTime
+                break
+            }
+            accumulatedTime += duration
+        }
+        
+        // 4. Build the schedule starting from the current movie
+        var scheduledEvents: [EventItem] = []
+        
+        for i in 0..<4 {
+            let index = (currentMovieIndex + i) % allMovies.count
+            let movie = allMovies[index]
+            
             let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
             let duration = TimeInterval(runtimeMinutes * 60)
             
-            // First event starts NOW. Others follow sequentially with buffer.
-            // This ensures the "Live" event has a valid endTime for auto-cycling.
             let startTime: Date
-            if index == 0 {
-                // Simulate that the movie started some time ago (10-40% progress)
-                // This ensures the timestamp isn't 00:00 and looks "Live"
-                let simulatedProgress = Double.random(in: 0.1...0.4)
-                let offset = duration * simulatedProgress
-                startTime = now.addingTimeInterval(-offset)
+            if i == 0 {
+                // Live movie: Start time is in the past
+                startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
             } else {
-                // For upcoming events, just show them as starting after the previous one
-                let prevDuration = scheduledEvents.last?.duration ?? 0
-                let prevStart = scheduledEvents.last?.startTime ?? now
-                startTime = prevStart.addingTimeInterval(prevDuration + bufferBetweenMovies)
+                // Upcoming movies: Start time is based on previous movie's end + buffer
+                let prevEvent = scheduledEvents.last!
+                startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration + bufferBetweenMovies)
             }
             
             scheduledEvents.append(EventItem(
@@ -128,13 +139,25 @@ struct EventsView: View {
                 mediaItem: movie,
                 startTime: startTime,
                 duration: duration,
-                index: index
+                index: i
             ))
         }
         
         DispatchQueue.main.async {
             self.events = scheduledEvents
+            
+            // Debug log
+            if let live = scheduledEvents.first {
+                print("📅 Schedule Updated:")
+                print("   Live: \(live.mediaItem.name)")
+                print("   Progress: \(Int(timeIntoCurrentMovie))s / \(Int(live.duration))s")
+            }
         }
+    }
+    
+    // Legacy method kept for reference but unused
+    private func showNextBatch() {
+        calculateDeterministicSchedule()
     }
 
     private func startTimer() {
@@ -153,7 +176,7 @@ struct EventsView: View {
         // If live event is finished, cycle to next batch
         if Date() >= liveEvent.endTime {
             print("🔄 Live event finished: \(liveEvent.mediaItem.name). Cycling to next batch.")
-            showNextBatch()
+            calculateDeterministicSchedule()
         }
     }
 

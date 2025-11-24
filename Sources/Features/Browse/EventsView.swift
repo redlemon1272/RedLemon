@@ -192,7 +192,7 @@ struct HeroEventCard: View {
         }) {
             ZStack(alignment: .topLeading) {
                 // Full Background Image with Gradient
-                AsyncImage(url: URL(string: event.mediaItem.background ?? event.mediaItem.poster ?? "")) { image in
+                AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -271,8 +271,8 @@ struct HeroEventCard: View {
                     // Bottom Section: Logo, Metadata, Progress
                     VStack(alignment: .leading, spacing: 12) {
                         // Logo or Title
-                        if let logoUrl = event.mediaItem.logo, let url = URL(string: logoUrl) {
-                            AsyncImage(url: url) { image in
+                        if let logoURL = event.mediaItem.logoURL {
+                            AsyncImage(url: logoURL) { image in
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)

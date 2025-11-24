@@ -256,7 +256,9 @@ struct EventItem: Identifiable {
     }
     
     var isFinished: Bool {
-        return false  // Events never finish in this simple model
+        // Check if current time is past the movie's actual end time (not including buffer)
+        let now = Date()
+        return now >= endTime
     }
 }
 
@@ -269,7 +271,7 @@ struct HeroEventCard: View {
     
     var body: some View {
         Button(action: {
-            // Only allow joining the live event (index 0)
+            // Only allow joining the live event (index 0) if it's not finished
             if event.isLive && !event.isFinished {
                 onJoin()
             }
@@ -312,7 +314,22 @@ struct HeroEventCard: View {
                 VStack(alignment: .leading, spacing: 0) {
                     // Top Section: Status Badge
                     HStack {
-                        if event.isLive {
+                        if event.isFinished {
+                            HStack(spacing: 6) {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .font(.system(size: 11))
+                                Text("EVENT FINISHED")
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.gray.opacity(0.8))
+                                    .shadow(color: .gray.opacity(0.3), radius: 6, x: 0, y: 2)
+                            )
+                        } else if event.isLive {
                             HStack(spacing: 6) {
                                 Circle()
                                     .fill(Color.red)
@@ -431,10 +448,11 @@ struct HeroEventCard: View {
             .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
         }
         .buttonStyle(PlainButtonStyle())
+        .opacity(event.isFinished ? 0.6 : 1.0)
         .overlay(
             // Hover effect hint
             RoundedRectangle(cornerRadius: 16)
-                .stroke(event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1), lineWidth: 2)
+                .stroke(event.isFinished ? Color.gray.opacity(0.3) : (event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1)), lineWidth: 2)
         )
         .onAppear {
             // Only start timer for live events

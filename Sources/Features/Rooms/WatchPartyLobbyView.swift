@@ -163,7 +163,7 @@ struct WatchPartyLobbyView: View {
                                     )
                             }
 
-                            // Badges row (year and quality) and Room Code inline
+                            // Badges row (year and quality) and Room Code inline (hide for events)
                             HStack(spacing: 10) {
                                 if let year = room.mediaItem?.year {
                                     Text(year)
@@ -185,55 +185,61 @@ struct WatchPartyLobbyView: View {
                                     .foregroundColor(.accentColor)
                                     .cornerRadius(5)
 
-                                Text(room.id)
-                                    .font(.system(.caption, design: .monospaced))
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 5)
-                                    .background(Color.white.opacity(0.15))
-                                    .cornerRadius(5)
+                                // Only show room code for non-event rooms
+                                if !room.id.hasPrefix("event_") {
+                                    Text(room.id)
+                                        .font(.system(.caption, design: .monospaced))
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 5)
+                                        .background(Color.white.opacity(0.15))
+                                        .cornerRadius(5)
 
-                                Button(action: copyRoomID) {
-                                    Image(systemName: viewModel.didCopyRoomID ? "checkmark.circle.fill" : "doc.on.doc")
-                                        .foregroundColor(.accentColor)
-                                        .font(.caption)
+                                    Button(action: copyRoomID) {
+                                        Image(systemName: viewModel.didCopyRoomID ? "checkmark.circle.fill" : "doc.on.doc")
+                                            .foregroundColor(.accentColor)
+                                            .font(.caption)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
                                 }
-                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                         .frame(maxWidth: .infinity)
                         .padding(.horizontal, 16)
 
-                        // Connection Status and Participants section
+                        // Connection Status and Participants section (hide participants for events)
                         VStack(alignment: .leading, spacing: 12) {
                             // Realtime Connection Status Indicator
                             ConnectionStatusRow(status: viewModel.realtimeConnectionStatus)
 
-                            // Participants header
-                            HStack {
-                                Image(systemName: "person.2.fill")
-                                    .foregroundColor(.white.opacity(0.7))
-                                Text("Participants (\(viewModel.participants.count))")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
+                            // Only show participants for non-event rooms
+                            if !room.id.hasPrefix("event_") {
+                                // Participants header
+                                HStack {
+                                    Image(systemName: "person.2.fill")
+                                        .foregroundColor(.white.opacity(0.7))
+                                    Text("Participants (\(viewModel.participants.count))")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
 
-                                if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
-                                    Text("• \(room.readyCount) ready")
-                                        .font(.caption)
-                                        .foregroundColor(.green)
+                                    if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
+                                        Text("• \(room.readyCount) ready")
+                                            .font(.caption)
+                                            .foregroundColor(.green)
+                                    }
+
+                                    Spacer()
                                 }
 
-                                Spacer()
-                            }
-
-                            VStack(spacing: 6) {
-                                ForEach(viewModel.participants) { participant in
-                                    ParticipantRow(
-                                        participant: participant,
-                                        canKick: isHost && !participant.isHost,
-                                        onKick: { viewModel.kickParticipant(participant) }
-                                    )
+                                VStack(spacing: 6) {
+                                    ForEach(viewModel.participants) { participant in
+                                        ParticipantRow(
+                                            participant: participant,
+                                            canKick: isHost && !participant.isHost,
+                                            onKick: { viewModel.kickParticipant(participant) }
+                                        )
+                                    }
                                 }
                             }
                         }

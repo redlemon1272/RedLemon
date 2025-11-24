@@ -453,19 +453,6 @@ struct HeroEventCard: View {
                                 Text(runtime)
                                     .font(.system(size: 14, weight: .medium))
                             }
-                            if event.mediaItem.runtime != nil && event.mediaItem.imdbRating != nil {
-                                Text("•")
-                                    .font(.system(size: 14))
-                            }
-                            if let rating = event.mediaItem.imdbRating {
-                                HStack(spacing: 4) {
-                                    Image(systemName: "star.fill")
-                                        .font(.system(size: 12))
-                                        .foregroundColor(.yellow)
-                                    Text(String(format: "%.1f", rating))
-                                        .font(.system(size: 14, weight: .semibold))
-                                }
-                            }
                         }
                         .foregroundColor(.white.opacity(0.9))
                         

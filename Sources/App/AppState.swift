@@ -584,40 +584,95 @@ class AppState: ObservableObject {
                 NSLog("⚠️ Guest: Initialized room with missing season/episode (DB returned nil)")
             }
 
-            // Set state
-            self.currentRoomId = roomId
-            self.currentWatchPartyRoom = watchPartyRoom
-            self.isWatchPartyHost = (room.hostUserId == userId)
-            self.currentWatchMode = .watchParty
             
-            // Set selection details from room
-            if let imdbId = room.imdbId, !imdbId.isEmpty {
-                // We need to fetch the media item details
-                // For now, create a placeholder item - metadata fetch will fill in details
-                self.selectedMediaItem = MediaItem(
-                    id: imdbId,
-                    type: "movie", // Default to movie, logic needs improvement for series
-                    name: room.name,
-                    poster: nil,
-                    background: nil,
-                    logo: nil,
-                    description: nil,
-                    releaseInfo: nil,
-                    year: nil,
-                    imdbRating: nil,
-                    genres: nil,
-                    runtime: nil
-                )
+            // Check if room is already playing
+            if room.isPlaying {
+                NSLog("🎬 Room is already playing - navigating directly to playback")
                 
-                // Fetch metadata
-                self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
-                    type: "movie", // Default
-                    id: imdbId
-                )
+                // Set state for playback
+                self.currentRoomId = roomId
+                self.currentWatchPartyRoom = watchPartyRoom
+                self.isWatchPartyHost = (room.hostUserId == userId)
+                self.currentWatchMode = .watchParty
+                
+                // Set selection details from room
+                if let imdbId = room.imdbId, !imdbId.isEmpty {
+                    self.selectedMediaItem = MediaItem(
+                        id: imdbId,
+                        type: room.season != nil ? "series" : "movie",
+                        name: room.name,
+                        poster: nil,
+                        background: nil,
+                        logo: nil,
+                        description: nil,
+                        releaseInfo: nil,
+                        year: nil,
+                        imdbRating: nil,
+                        genres: nil,
+                        runtime: nil
+                    )
+                    
+                    // Fetch metadata
+                    self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
+                        type: room.season != nil ? "series" : "movie",
+                        id: imdbId
+                    )
+                    
+                    // Set season/episode if applicable
+                    self.selectedSeason = room.season
+                    self.selectedEpisode = room.episode
+                    self.selectedQuality = .fullHD
+                    
+                    // Calculate seek position based on room's playback position
+                    self.resumeFromTimestamp = Double(room.playbackPosition)
+                    
+                    // Navigate directly to player
+                    await playMedia(
+                        self.selectedMediaItem!,
+                        quality: .fullHD,
+                        watchMode: .watchParty,
+                        roomId: roomId,
+                        isHost: false
+                    )
+                }
+            } else {
+                NSLog("🚪 Room is in lobby - navigating to lobby view")
+                
+                // Set state
+                self.currentRoomId = roomId
+                self.currentWatchPartyRoom = watchPartyRoom
+                self.isWatchPartyHost = (room.hostUserId == userId)
+                self.currentWatchMode = .watchParty
+                
+                // Set selection details from room
+                if let imdbId = room.imdbId, !imdbId.isEmpty {
+                    // We need to fetch the media item details
+                    // For now, create a placeholder item - metadata fetch will fill in details
+                    self.selectedMediaItem = MediaItem(
+                        id: imdbId,
+                        type: "movie", // Default to movie, logic needs improvement for series
+                        name: room.name,
+                        poster: nil,
+                        background: nil,
+                        logo: nil,
+                        description: nil,
+                        releaseInfo: nil,
+                        year: nil,
+                        imdbRating: nil,
+                        genres: nil,
+                        runtime: nil
+                    )
+                    
+                    // Fetch metadata
+                    self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
+                        type: "movie", // Default
+                        id: imdbId
+                    )
+                }
+                
+                // Navigate to lobby
+                self.currentView = .watchPartyLobby
             }
-            
-            // Navigate to lobby
-            self.currentView = .watchPartyLobby
             
         } catch {
             NSLog("❌ Failed to join room: \(error)")

@@ -169,11 +169,22 @@ struct EventsView: View {
         
         let room = WatchPartyRoom(
             id: roomId,
-            hostId: "system", // System is host
+            hostId: "system",
+            hostName: "RedLemon System",
             mediaItem: event.mediaItem,
+            season: nil,
+            episode: nil,
             quality: .fullHD,
-            status: .waiting, // Will sync with server
-            participants: []
+            sourceQuality: nil,
+            description: "Live Event",
+            posterURL: event.mediaItem.poster,
+            participants: [],
+            state: .lobby, // Start in lobby state, will sync with server
+            createdAt: event.startTime,
+            selectedStreamHash: nil,
+            selectedFileIdx: nil,
+            selectedQuality: nil,
+            unlockedStreamURL: nil
         )
         
         // Auto-join lobby if it's the live event

@@ -103,7 +103,27 @@ class LocalAPIClient: ObservableObject {
             } catch {
                 // Fallback to basic metadata if full fetch fails
                 print("⚠️ Failed to fetch full metadata for \(meta.id), using basic: \(error)")
-                fullItems.append(MediaItem(from: meta))
+                
+                // Manually construct background and logo URLs as a fallback
+                // Cinemeta uses predictable URL patterns
+                let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
+                let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
+                
+                let basicItem = MediaItem(
+                    id: meta.id,
+                    type: meta.type,
+                    name: meta.name,
+                    poster: meta.poster,
+                    background: backgroundURL,
+                    logo: logoURL,
+                    description: nil,
+                    releaseInfo: nil,
+                    year: meta.year,
+                    imdbRating: nil,
+                    genres: nil,
+                    runtime: nil
+                )
+                fullItems.append(basicItem)
             }
         }
         

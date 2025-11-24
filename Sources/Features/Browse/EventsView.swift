@@ -260,6 +260,13 @@ struct EventItem: Identifiable {
         let now = Date()
         return now >= endTime
     }
+    
+    var isInLobby: Bool {
+        // The next event (index 1) is in lobby when the current event (index 0) has finished
+        // This happens during the 10-minute buffer period
+        let now = Date()
+        return index == 1 && now >= startTime.addingTimeInterval(-600) // 600s = 10 min buffer
+    }
 }
 
 struct HeroEventCard: View {
@@ -271,8 +278,10 @@ struct HeroEventCard: View {
     
     var body: some View {
         Button(action: {
-            // Only allow joining the live event (index 0) if it's not finished
-            if event.isLive && !event.isFinished {
+            // Allow joining if:
+            // 1. It's the live event (index 0) and not finished, OR
+            // 2. It's the next event (index 1) and in lobby state
+            if (event.isLive && !event.isFinished) || event.isInLobby {
                 onJoin()
             }
         }) {
@@ -328,6 +337,21 @@ struct HeroEventCard: View {
                                 Capsule()
                                     .fill(Color.gray.opacity(0.8))
                                     .shadow(color: .gray.opacity(0.3), radius: 6, x: 0, y: 2)
+                            )
+                        } else if event.isInLobby {
+                            HStack(spacing: 6) {
+                                Image(systemName: "person.2.fill")
+                                    .font(.system(size: 11))
+                                Text("LOBBY OPEN")
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.blue.opacity(0.9))
+                                    .shadow(color: .blue.opacity(0.4), radius: 8, x: 0, y: 2)
                             )
                         } else if event.isLive {
                             HStack(spacing: 6) {
@@ -452,7 +476,12 @@ struct HeroEventCard: View {
         .overlay(
             // Hover effect hint
             RoundedRectangle(cornerRadius: 16)
-                .stroke(event.isFinished ? Color.gray.opacity(0.3) : (event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1)), lineWidth: 2)
+                .stroke(
+                    event.isFinished ? Color.gray.opacity(0.3) : 
+                    (event.isInLobby ? Color.blue.opacity(0.5) : 
+                    (event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1))), 
+                    lineWidth: 2
+                )
         )
         .onAppear {
             // Only start timer for live events

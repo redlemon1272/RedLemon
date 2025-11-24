@@ -57,9 +57,8 @@ class MPVWrapper: ObservableObject {
         // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
         
-        // Hardware decoding: 'auto' is more aggressive than 'auto-safe'
-        // Falls back to software if HW fails, but tries harder to use GPU
-        mpv_set_option_string(handle, "hwdec", "auto")
+        // Hardware decoding - TRY DISABLING for Pro freeze debugging
+        mpv_set_option_string(handle, "hwdec", "no") // Was "auto"
         
         // Explicit VideoToolbox support for macOS (better for Intel Macs)
         mpv_set_option_string(handle, "hwdec-codecs", "all")

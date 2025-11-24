@@ -135,15 +135,22 @@ struct EventsView: View {
         // Create a mock room for now (until backend worker is restored)
         let room = WatchPartyRoom(
             id: "EVENT-\(event.mediaItem.id)",
-            hostUserId: "system",
-            hostUsername: "RedLemon System",
-            imdbId: event.mediaItem.id,
-            name: event.mediaItem.name,
-            posterUrl: event.mediaItem.poster,
-            backdropUrl: event.mediaItem.background,
-            isPlaying: true, // System events are always "playing"
+            hostId: "system",
+            hostName: "RedLemon System",
+            mediaItem: event.mediaItem,
+            season: nil,
+            episode: nil,
+            quality: .fullHD,
+            sourceQuality: nil,
+            description: "Live Event",
+            posterURL: event.mediaItem.poster,
+            participants: [],
+            state: .playing,
             createdAt: event.startTime,
-            participants: []
+            selectedStreamHash: nil,
+            selectedFileIdx: nil,
+            selectedQuality: nil,
+            unlockedStreamURL: nil
         )
         
         appState.currentWatchPartyRoom = room

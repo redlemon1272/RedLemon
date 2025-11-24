@@ -24,7 +24,8 @@ swift build
 
 # Copy executable (debug) - ALWAYS overwrite
 echo "🔧 Copying debug executable..."
-cp -f .build/debug/RedLemon "$MACOS/"
+BIN_PATH=$(swift build --show-bin-path)
+cp -f "$BIN_PATH/RedLemon" "$MACOS/"
 echo "✅ Binary updated at $(date '+%H:%M:%S')"
 
 # Copy frameworks
@@ -33,22 +34,22 @@ cp Frameworks/*.dylib "$FRAMEWORKS/"
 
 # Copy Sparkle framework
 echo "📦 Copying Sparkle.framework..."
-if [ -d ".build/debug/Sparkle.framework" ]; then
+if [ -d "$BIN_PATH/Sparkle.framework" ]; then
     rm -rf "$FRAMEWORKS/Sparkle.framework"
-    cp -R .build/debug/Sparkle.framework "$FRAMEWORKS/"
+    cp -R "$BIN_PATH/Sparkle.framework" "$FRAMEWORKS/"
     echo "✅ Sparkle.framework copied"
 else
-    echo "⚠️  Sparkle.framework not found in .build/debug/"
+    echo "⚠️  Sparkle.framework not found in $BIN_PATH"
 fi
 
 # Copy WebRTC framework
 echo "📦 Copying WebRTC.framework..."
-if [ -d ".build/debug/WebRTC.framework" ]; then
+if [ -d "$BIN_PATH/WebRTC.framework" ]; then
     rm -rf "$FRAMEWORKS/WebRTC.framework"
-    cp -R .build/debug/WebRTC.framework "$FRAMEWORKS/"
+    cp -R "$BIN_PATH/WebRTC.framework" "$FRAMEWORKS/"
     echo "✅ WebRTC.framework copied"
 else
-    echo "⚠️  WebRTC.framework not found in .build/debug/"
+    echo "⚠️  WebRTC.framework not found in $BIN_PATH"
 fi
 
 # Copy resources (internet-identity.html)

@@ -118,32 +118,41 @@ class LobbyViewModel: ObservableObject {
                         try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
                         NSLog("✅ Guest joined room \(room.id) in database")
                     } catch {
-                        // If join failed and it's a system room, try to create it
+                    } catch {
+                        // If join failed, check if it's because we're already in the room or if the room is missing
                         if room.id.hasPrefix("event_") {
-                            NSLog("⚠️ Lobby: System room missing, attempting to create: \(room.id)")
-                            do {
-                                // Create the room using current user as host (technical requirement)
-                                // but keeping system name/metadata
-                                let _ = try await SupabaseClient.shared.createRoom(
-                                    id: room.id,
-                                    name: room.description ?? "Live Event",
-                                    hostUserId: userId,
-                                    hostUsername: "RedLemon System",
-                                    streamHash: room.selectedStreamHash,
-                                    imdbId: room.mediaItem?.id,
-                                    posterUrl: room.posterURL,
-                                    backdropUrl: room.mediaItem?.background,
-                                    season: room.season,
-                                    episode: room.episode,
-                                    isPublic: true
-                                )
-                                
-                                // Retry join
-                                try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
-                                NSLog("✅ Guest created and joined system room \(room.id)")
-                            } catch let createError {
-                                NSLog("❌ Lobby: Failed to create system room: \(createError)")
-                                throw error // Throw original error
+                            // Check if room exists
+                            let roomExists = (try? await SupabaseClient.shared.getRoomState(roomId: room.id)) != nil
+                            
+                            if roomExists {
+                                NSLog("ℹ️ Lobby: Join failed but room exists - assuming user already joined")
+                                // Proceed as success
+                            } else {
+                                NSLog("⚠️ Lobby: System room missing, attempting to create: \(room.id)")
+                                do {
+                                    // Create the room using current user as host (technical requirement)
+                                    // but keeping system name/metadata
+                                    let _ = try await SupabaseClient.shared.createRoom(
+                                        id: room.id,
+                                        name: room.description ?? "Live Event",
+                                        hostUserId: userId,
+                                        hostUsername: "RedLemon System",
+                                        streamHash: room.selectedStreamHash,
+                                        imdbId: room.mediaItem?.id,
+                                        posterUrl: room.posterURL,
+                                        backdropUrl: room.mediaItem?.background,
+                                        season: room.season,
+                                        episode: room.episode,
+                                        isPublic: true
+                                    )
+                                    
+                                    // Retry join
+                                    try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
+                                    NSLog("✅ Guest created and joined system room \(room.id)")
+                                } catch let createError {
+                                    NSLog("❌ Lobby: Failed to create system room: \(createError)")
+                                    throw error // Throw original error
+                                }
                             }
                         } else {
                             throw error

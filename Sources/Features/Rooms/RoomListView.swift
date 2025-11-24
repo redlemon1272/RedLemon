@@ -285,12 +285,21 @@ struct RoomListView: View {
         print("   User ID: \(appState.currentUserId?.uuidString ?? "nil")")
         print("   Host ID: \(room.hostId)")
         print("   Is host: \(isUserHost)")
+        print("   Room state: \(room.state)")
 
-        // Set current room and navigate to lobby
+        // Set current room
         appState.currentWatchPartyRoom = room
         appState.currentRoomId = room.id
         appState.isWatchPartyHost = isUserHost
-        appState.currentView = .watchPartyLobby
+        
+        // If room is already playing, skip lobby and go straight to playback
+        if room.state == .playing {
+            print("🎬 Room is already playing - navigating directly to playback")
+            appState.currentView = .player
+        } else {
+            print("🚪 Room is in lobby - navigating to lobby view")
+            appState.currentView = .watchPartyLobby
+        }
     }
 
     private func joinRoomByCode(code: String) {

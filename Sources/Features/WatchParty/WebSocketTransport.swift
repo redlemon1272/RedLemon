@@ -20,6 +20,8 @@ final class WebSocketTransport: WatchPartyTransport {
     private var pendingReconnect: WorkItem?
     private var allowReconnect: Bool = true
     private var authContinuation: CheckedContinuation<Void, Error>?
+    private let authLock = NSLock()
+    private var connectionContinuation: CheckedContinuation<Void, Error>?
 
     // Connection state tracking
     private var connectionState: ConnectionState = .disconnected {
@@ -172,14 +174,21 @@ final class WebSocketTransport: WatchPartyTransport {
 
     private func waitForAuthAck(timeout: TimeInterval) async throws {
         try await withCheckedThrowingContinuation { continuation in
+            authLock.lock()
             authContinuation = continuation
-
+            authLock.unlock()
+            
             Task { [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
                 guard let self = self else { return }
-                guard let pending = self.authContinuation else { return }
-                self.authContinuation = nil
-                pending.resume(throwing: TransportError.authTimeout)
+                
+                self.authLock.lock()
+                defer { self.authLock.unlock() }
+                
+                if let pending = self.authContinuation {
+                    self.authContinuation = nil // Clear continuation after timeout
+                    pending.resume(throwing: TransportError.authTimeout)
+                }
             }
         }
     }

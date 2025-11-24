@@ -114,8 +114,46 @@ class LobbyViewModel: ObservableObject {
                     // Update participantId to match actual user ID
                     self.participantId = userId.uuidString
 
-                    try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
-                    NSLog("✅ Guest joined room \(room.id) in database")
+                    do {
+                        try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
+                        NSLog("✅ Guest joined room \(room.id) in database")
+                    } catch {
+                        // If join failed and it's a system room, try to create it
+                        if room.id.hasPrefix("event_") {
+                            NSLog("⚠️ Lobby: System room missing, attempting to create: \(room.id)")
+                            do {
+                                // Create the room using current user as host (technical requirement)
+                                // but keeping system name/metadata
+                                let _ = try await SupabaseClient.shared.createRoom(
+                                    id: room.id,
+                                    name: room.description ?? "Live Event",
+                                    hostUserId: userId,
+                                    hostUsername: "RedLemon System",
+                                    streamHash: room.selectedStreamHash,
+                                    imdbId: room.mediaItem?.id,
+                                    posterUrl: room.posterURL,
+                                    backdropUrl: room.mediaItem?.background,
+                                    season: room.season,
+                                    episode: room.episode,
+                                    isPublic: true
+                                )
+                                
+                                // Retry join
+                                try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
+                                NSLog("✅ Guest created and joined system room \(room.id)")
+                            } catch let createError {
+                                NSLog("❌ Lobby: Failed to create system room: \(createError)")
+                                throw error // Throw original error
+                            }
+                        } else {
+                            throw error
+                        }
+                    }
+                    
+                    // Auto-start if it's a system event
+                    if room.id.hasPrefix("event_") {
+                        autoStartSystemEvent()
+                    }
                 }
 
                 // Initialize Realtime channel for lobby chat/signaling
@@ -1013,6 +1051,41 @@ class LobbyViewModel: ObservableObject {
 
         } catch {
             NSLog("⚠️ Lobby: Failed to poll room state: \(error)")
+        }
+    }
+
+    // MARK: - Helper Functions
+
+    private func autoStartSystemEvent() {
+        guard let appState = appState else { return }
+        
+        print("🤖 Lobby: Auto-starting system event")
+        
+        // Calculate playback position
+        let now = Date()
+        let elapsed = now.timeIntervalSince(room.createdAt)
+        
+        // Set resume timestamp
+        appState.resumeFromTimestamp = max(0, elapsed)
+        
+        // Set starting state to update UI
+        self.isStarting = true
+        self.transitionState.isStarting = true
+        
+        // Start playback
+        Task {
+            // Wait a moment for the UI to settle and show "Starting..."
+            try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
+            
+            if let mediaItem = room.mediaItem {
+                await appState.playMedia(
+                    mediaItem,
+                    quality: room.quality,
+                    watchMode: .watchParty,
+                    roomId: room.id,
+                    isHost: false // System is host, user is guest
+                )
+            }
         }
     }
 

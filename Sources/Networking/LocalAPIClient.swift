@@ -72,66 +72,107 @@ class LocalAPIClient: ObservableObject {
     }
 
     func fetchTopMoviesForEvents() async throws -> [MediaItem] {
-        // Use Prime Video catalog - guarantees WEB-DL/Bluray quality (no CAM/TS)
-        let catalogURL = URL(string: "\(baseURL)/api/metadata/catalog/movie/primevideo.catalogue")!
-        let (data, _) = try await session.data(from: catalogURL)
-        let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
+        // Use the Stremio Streaming Addon directly (same as BrowseView)
+        // This ensures we get high-quality streaming content (Netflix, Disney+, etc.)
+        // and avoids "In Cinema" movies that are CAM quality
+        let addonBaseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
         
-        // No filtering needed - Prime Video content is always high quality
-        let filteredMetas = response.metas
+        let catalogs = [
+            "nfx", // Netflix
+            "dnp", // Disney+
+            "hlu", // Hulu
+            "amp"  // Prime Video
+        ]
         
-        // Take top 30 and fetch full metadata for each in PARALLEL
-        print("🚀 Fetching metadata for top 30 movies in parallel...")
+        var allMetas: [StremioMeta] = []
         
-        let apiBaseURL = self.baseURL // Capture locally to avoid MainActor isolation issues in TaskGroup
+        // Fetch from all catalogs
+        print("🚀 Fetching from \(catalogs.count) streaming catalogs (Direct Stremio)...")
         
-        let fullItems = await withTaskGroup(of: MediaItem?.self) { group in
-            for meta in filteredMetas.prefix(30) {
-                group.addTask {
-                    do {
-                        // Fetch full metadata to get background art
-                        let metaURL = URL(string: "\(apiBaseURL)/api/metadata/meta/movie/\(meta.id).json")!
-                        let (metaData, _) = try await self.session.data(from: metaURL)
-                        let fullResponse = try JSONDecoder().decode(CinemetaResponse.self, from: metaData)
-                        let mediaItem = MediaItem(from: fullResponse.meta)
-                        
-                        return mediaItem
-                    } catch {
-                        print("⚠️ Failed to fetch full metadata for \(meta.id): \(error)")
-                        // Fallback to basic item if full fetch fails
-                        // Manually construct background and logo URLs as a fallback
-                        let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
-                        let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
-                        
-                        return MediaItem(
-                            id: meta.id,
-                            type: meta.type,
-                            name: meta.name,
-                            poster: meta.poster,
-                            background: backgroundURL,
-                            logo: logoURL,
-                            description: nil,
-                            releaseInfo: nil,
-                            year: meta.year,
-                            imdbRating: nil,
-                            genres: nil,
-                            runtime: nil
-                        )
-                    }
-                }
+        for catalog in catalogs {
+            do {
+                let catalogURL = URL(string: "\(addonBaseURL)/catalog/movie/\(catalog).json")!
+                // Use standard request without heavy retry logic for catalogs
+                let (data, _) = try await session.data(from: catalogURL)
+                let response = try JSONDecoder().decode(StremioMetaResponse.self, from: data)
+                allMetas.append(contentsOf: response.metas)
+                print("   ✅ Fetched \(response.metas.count) items from \(catalog)")
+            } catch {
+                print("   ⚠️ Failed to fetch \(catalog): \(error)")
             }
-            
-            var results: [MediaItem] = []
-            for await item in group {
-                if let item = item {
-                    results.append(item)
-                }
-            }
-            return results
         }
         
-        print("📊 Fetched \(fullItems.count) movies with full metadata (Parallel)")
+        // Deduplicate by ID
+        var seenIds = Set<String>()
+        let uniqueMetas = allMetas.filter { meta in
+            if seenIds.contains(meta.id) {
+                return false
+            }
+            seenIds.insert(meta.id)
+            return true
+        }
+        
+        // DETERMINISTIC SHUFFLE:
+        // 1. Sort by ID first to ensure a stable starting point (removing network race condition order)
+        let sortedMetas = uniqueMetas.sorted { $0.id < $1.id }
+        
+        // 2. Generate a seed based on the current date (YYYYMMDD)
+        // This ensures everyone gets the EXACT SAME "random" shuffle for the entire day
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        let dateString = formatter.string(from: Date())
+        let seed = Int(dateString) ?? 20240101
+        
+        print("🎲 Shuffling with daily seed: \(seed)")
+        
+        // 3. Shuffle using seeded generator
+        var generator = SeededGenerator(seed: seed)
+        let shuffledMetas = sortedMetas.shuffled(using: &generator)
+        
+        // 4. Take top 30
+        let selectedMetas = Array(shuffledMetas.prefix(30))
+        
+        print("🚀 Processing \(selectedMetas.count) movies (Optimized)...")
+        
+        // OPTIMIZATION: Manually construct MediaItems
+        // This avoids 30+ network requests and prevents 502 errors/timeouts
+        let fullItems = selectedMetas.map { meta -> MediaItem in
+            // Construct standard MetaHub image URLs
+            let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
+            let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
+            
+            return MediaItem(
+                id: meta.id,
+                type: meta.type,
+                name: meta.name,
+                poster: meta.poster,
+                background: backgroundURL,
+                logo: logoURL,
+                description: nil,
+                releaseInfo: meta.releaseInfo, // Stremio addon provides this
+                year: meta.releaseInfo,        // Use releaseInfo as year
+                imdbRating: meta.imdbRating,   // Stremio addon provides this
+                genres: nil,
+                runtime: nil
+            )
+        }
+        
+        print("📊 Ready to show \(fullItems.count) movies")
         return fullItems
+    }
+
+    // Simple Linear Congruential Generator for deterministic shuffling
+    struct SeededGenerator: RandomNumberGenerator {
+        private var state: UInt64
+        
+        init(seed: Int) {
+            self.state = UInt64(seed)
+        }
+        
+        mutating func next() -> UInt64 {
+            state = 6364136223846793005 &* state &+ 1442695040888963407
+            return state
+        }
     }
 
     func searchMedia(query: String, type: String = "movie") async throws -> [MediaItem] {
@@ -204,27 +245,45 @@ class LocalAPIClient: ObservableObject {
 
     // MARK: - Hardware-Safe Network Methods
 
-    /// Perform network request with CPU-compatible error handling
+    /// Perform network request with CPU-compatible error handling and retry logic
     private func performSafeNetworkRequest(url: URL) async throws -> (Data, URLResponse) {
-        let maxRetries = 2
+        let maxRetries = 3
         var lastError: Error?
-
+        
         for attempt in 1...maxRetries {
             do {
-                print("🔍 [DEBUG] Network attempt \(attempt)/\(maxRetries)")
+                if attempt > 1 {
+                    print("🔍 [DEBUG] Network attempt \(attempt)/\(maxRetries) for \(url.lastPathComponent)")
+                }
+                
                 let (data, response) = try await session.data(from: url)
+                
+                // Check for 502 Bad Gateway or other server errors
+                if let httpResponse = response as? HTTPURLResponse {
+                    if httpResponse.statusCode == 502 || httpResponse.statusCode == 503 || httpResponse.statusCode == 504 {
+                        throw APIError.networkError(URLError(.badServerResponse))
+                    }
+                }
+                
                 return (data, response)
             } catch {
-                print("🔍 [DEBUG] Network attempt \(attempt) failed: \(error)")
                 lastError = error
-
-                // Wait before retry (with delay that works across CPU architectures)
+                
+                // Don't retry cancellation errors
+                if let urlError = error as? URLError, urlError.code == .cancelled {
+                    throw error
+                }
+                
+                print("🔍 [DEBUG] Network attempt \(attempt) failed: \(error)")
+                
+                // Wait before retry (exponential backoff)
                 if attempt < maxRetries {
-                    try await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
+                    let delay = UInt64(pow(2.0, Double(attempt)) * 500_000_000) // 1s, 2s, 4s
+                    try await Task.sleep(nanoseconds: delay)
                 }
             }
         }
-
+        
         throw lastError ?? APIError.networkError(URLError(.notConnectedToInternet))
     }
 
@@ -800,6 +859,14 @@ enum APIError: LocalizedError {
             return "Invalid response from server"
         case .networkError(let error):
             return "Network error: \(error.localizedDescription)"
+        }
+    }
+}
+// MARK: - Array Extension for Chunking
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
         }
     }
 }

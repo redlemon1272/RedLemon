@@ -18,6 +18,7 @@ class MPVWrapper: ObservableObject {
     @Published var duration: Double = 0
     @Published var isBuffering = false
     @Published var volume: Int = 100
+    @Published var playbackFinished = false
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -260,6 +261,8 @@ class MPVWrapper: ObservableObject {
             if memoryUsage > 200 {
                 performGentleCleanup()
             }
+            // Reset finished state on new file start
+            playbackFinished = false
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
         case MPV_EVENT_PLAYBACK_RESTART:
@@ -269,6 +272,15 @@ class MPVWrapper: ObservableObject {
             isPlaying = false
             // Perfect time for cleanup - video ended naturally
             performNaturalCleanup()
+            
+            // Check if it was EOF (natural finish)
+            var reason: UnsafeMutablePointer<CChar>?
+            if mpv_get_property(handle, "eof-reached", MPV_FORMAT_STRING, &reason) >= 0,
+               let r = reason.map({ String(cString: $0) }), r == "yes" {
+                print("🏁 MPV: Playback finished (EOF)")
+                playbackFinished = true
+            }
+            mpv_free(reason)
         case MPV_EVENT_IDLE:
             isBuffering = false
         default:

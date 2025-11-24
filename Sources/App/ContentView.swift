@@ -247,7 +247,6 @@ struct PlayerLoadingView: View {
             }
             // Ready to play - show actual player
             else if let stream = appState.selectedStream, let url = stream.url {
-                // Create StablePlayerContainer to capture data once and prevent overwrites
                 StablePlayerContainer(
                     streamURL: url,
                     imdbId: metadata.id,
@@ -256,7 +255,12 @@ struct PlayerLoadingView: View {
                     quality: stream.quality ?? "",
                     sourceQuality: stream.sourceQuality,
                     selectedSeason: appState.selectedSeason,
-                    selectedEpisode: appState.selectedEpisode
+                    selectedEpisode: appState.selectedEpisode,
+                    onPlaybackFinished: {
+                        Task {
+                            await appState.handleMovieFinished()
+                        }
+                    }
                 )
                 .id("stable-player-\(url)") // Stable ID based on URL
                 .ignoresSafeArea()
@@ -289,6 +293,7 @@ struct StablePlayerContainer: View, Equatable {
     let sourceQuality: String
     let selectedSeason: Int?
     let selectedEpisode: Int?
+    var onPlaybackFinished: (() -> Void)? = nil
 
     var body: some View {
         // Build display title with episode info if available
@@ -321,7 +326,8 @@ struct StablePlayerContainer: View, Equatable {
             subtitles: subtitles,
             streamQuality: quality,
             sourceQuality: sourceQuality,
-            isSeries: metadata.type == "series"
+            isSeries: metadata.type == "series",
+            onPlaybackFinished: onPlaybackFinished
         )
     }
 

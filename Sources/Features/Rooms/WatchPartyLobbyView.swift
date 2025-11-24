@@ -410,6 +410,22 @@ struct WatchPartyLobbyView: View {
                             }
                             .padding()
                         }
+                        
+                        if viewModel.timeUntilStart > 0 {
+                            HStack {
+                                Image(systemName: "timer")
+                                    .font(.title2)
+                                Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
+                                    .monospacedDigit()
+                            }
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.black.opacity(0.6))
+                            .cornerRadius(12)
+                            .padding(.bottom, 20)
+                        }
                     }
                 }
                 .padding(.horizontal)
@@ -460,6 +476,12 @@ struct WatchPartyLobbyView: View {
         viewModel.disconnect()
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
+    }
+    
+    private func formatDuration(_ interval: TimeInterval) -> String {
+        let minutes = Int(interval) / 60
+        let seconds = Int(interval) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
     }
 }
 

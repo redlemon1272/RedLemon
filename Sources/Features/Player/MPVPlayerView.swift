@@ -79,8 +79,9 @@ struct MPVPlayerView: View {
     let streamQuality: String
     let sourceQuality: String
     let isSeries: Bool
+    var onPlaybackFinished: (() -> Void)? = nil
 
-    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "", isSeries: Bool = false) {
+    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "", isSeries: Bool = false, onPlaybackFinished: (() -> Void)? = nil) {
         self.streamURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = streamTitle
@@ -88,6 +89,7 @@ struct MPVPlayerView: View {
         self.streamQuality = streamQuality
         self.sourceQuality = sourceQuality
         self.isSeries = isSeries
+        self.onPlaybackFinished = onPlaybackFinished
         NSLog("🎬🎬🎬 MPVPlayerView INIT called - streamURL: %@, subtitles: %d", streamURL.prefix(60) as CVarArg, subtitles.count)
     }
 
@@ -313,6 +315,12 @@ struct MPVPlayerView: View {
             }
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
+        }
+        .onChange(of: viewModel.playbackFinished) { finished in
+            if finished {
+                print("🎬 MPVPlayerView: Playback finished, triggering callback")
+                onPlaybackFinished?()
+            }
         }
         .onDisappear {
             // Stop watch history tracking

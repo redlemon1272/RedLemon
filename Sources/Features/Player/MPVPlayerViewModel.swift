@@ -58,6 +58,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var videoURL: String = ""
     @Published var isLoading: Bool = true
     @Published var isPlaying: Bool = false
+    @Published var playbackFinished: Bool = false
     @Published var currentTime: Double = 0
     @Published var duration: Double = 0
     @Published var volume: Double = 100
@@ -279,6 +280,12 @@ class MPVPlayerViewModel: ObservableObject {
                     self.onVideoReady()
                 }
                 self.isPlaying = mpvWrapper.isPlaying
+            }
+        }
+        
+        Task {
+            for await finished in mpvWrapper.$playbackFinished.values {
+                self.playbackFinished = finished
             }
         }
 

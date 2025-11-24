@@ -53,6 +53,7 @@ class AppState: ObservableObject {
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
     @Published var showUsernameSetup: Bool = false  // Show username setup dialog
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
+    @Published var isEventPlayback: Bool = false // Track if this is a public event playback
 
     // User authentication (simple username)
     @Published var currentUsername: String = ""
@@ -390,12 +391,33 @@ class AppState: ObservableObject {
         currentRoomId = nil
         currentWatchMode = .solo
         isWatchPartyHost = false
+        isEventPlayback = false // Reset event flag
         currentView = .browse
 
         exitFullscreen()
         restoreWindowSize()
 
         print("✅ Exited room and returned to browse")
+    }
+
+    func handleMovieFinished() async {
+        print("🎬 Movie finished naturally")
+        
+        // Save final watch history
+        if let item = selectedMediaItem, let duration = selectedStream?.size { // Using size as proxy if duration unavailable, but better to use actual duration
+             // Note: Watch history is usually saved periodically by the player view model
+        }
+        
+        await exitPlayer()
+        
+        // If this was an event, auto-transition to the next event lobby
+        if isEventPlayback {
+            print("🔄 Event finished - transitioning to Events flow")
+            await MainActor.run {
+                currentView = .events
+                shouldAutoJoinLobby = true
+            }
+        }
     }
 
     // MARK: - Window Management (Delegated to WindowManager)

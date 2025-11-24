@@ -74,8 +74,8 @@ struct EventsView: View {
         Task {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
-                // Sort movies deterministically by ID so everyone has the same list order
-                allMovies = movies.sorted { $0.id < $1.id }
+                // Use the daily shuffled order from the API
+                allMovies = movies
                 
                 calculateDeterministicSchedule()
                 isLoading = false
@@ -166,6 +166,18 @@ struct EventsView: View {
                 print("   Live: \(live.mediaItem.name)")
                 print("   Progress: \(Int(timeIntoCurrentMovie))s / \(Int(live.duration))s")
             }
+            
+            // Check for auto-join (Seamless Transition from finished movie)
+            if self.appState.shouldAutoJoinLobby {
+                // Priority: 1. Lobby (Next event), 2. Live (Current event if we just joined late/reloaded)
+                if let lobbyEvent = scheduledEvents.first(where: { $0.isInLobby }) {
+                    print("🔄 Auto-joining Lobby event: \(lobbyEvent.mediaItem.name)")
+                    self.joinEvent(lobbyEvent)
+                } else if let liveEvent = scheduledEvents.first(where: { $0.isLive && !$0.isFinished }) {
+                    print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
+                    self.joinEvent(liveEvent)
+                }
+            }
         }
     }
     
@@ -224,10 +236,12 @@ struct EventsView: View {
             unlockedStreamURL: nil
         )
         
-        // Auto-join lobby if it's the live event
-        if event.isLive {
+        // Auto-join lobby if it's the live event OR if we are seamlessly transitioning
+        if event.isLive || appState.shouldAutoJoinLobby {
             appState.shouldAutoJoinLobby = true
         }
+        
+        appState.isEventPlayback = true // Mark as event playback for seamless transition support
         
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false // User is always guest in system events

@@ -15,6 +15,7 @@ class LobbyViewModel: ObservableObject {
     @Published var posterURL: String?
     @Published var backdropURL: String?
     @Published var logoURL: String?
+    @Published var timeUntilStart: TimeInterval = 0 // Time until event officially starts
 
     // Realtime connection status for UI feedback
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
@@ -1068,10 +1069,40 @@ class LobbyViewModel: ObservableObject {
     private func autoStartSystemEvent() {
         guard let appState = appState else { return }
         
-        print("🤖 Lobby: Auto-starting system event")
+        print("🤖 Lobby: Checking auto-start for system event")
         
-        // Calculate playback position
+        // Calculate time until start
         let now = Date()
+        let timeUntilStart = room.createdAt.timeIntervalSince(now)
+        
+        if timeUntilStart > 0 {
+            // We are early! Wait for the official start time.
+            print("⏳ Lobby: Event starts in \(Int(timeUntilStart))s. Waiting...")
+            
+            self.timeUntilStart = timeUntilStart
+            
+            // Start a timer to update the countdown UI
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+                guard let self = self else {
+                    timer.invalidate()
+                    return
+                }
+                
+                let remaining = self.room.createdAt.timeIntervalSince(Date())
+                if remaining <= 0 {
+                    timer.invalidate()
+                    self.timeUntilStart = 0
+                    self.autoStartSystemEvent() // Retry start
+                } else {
+                    self.timeUntilStart = remaining
+                }
+            }
+            return
+        }
+        
+        print("🤖 Lobby: Auto-starting system event now")
+        
+        // Calculate playback position (should be >= 0 now)
         let elapsed = now.timeIntervalSince(room.createdAt)
         
         // Set resume timestamp

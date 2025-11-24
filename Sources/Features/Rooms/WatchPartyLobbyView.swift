@@ -9,6 +9,7 @@ struct WatchPartyLobbyView: View {
 
     @State private var showEmojiPicker: Bool = false
     @State private var showPaymentGate = false
+    @State private var isAutoJoining = false
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -20,7 +21,42 @@ struct WatchPartyLobbyView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            lobbyContent(windowHeight: geometry.size.height)
+            ZStack {
+                lobbyContent(windowHeight: geometry.size.height)
+                
+                if isAutoJoining {
+                    Color.black.ignoresSafeArea()
+                    VStack(spacing: 20) {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                            .tint(.white)
+                        Text("Joining Live Event...")
+                            .font(.title3)
+                            .fontWeight(.medium)
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+        }
+        .onAppear {
+            if appState.shouldAutoJoinLobby {
+                isAutoJoining = true
+                // Auto-ready after a brief delay to allow connection
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    if !viewModel.isReady {
+                        viewModel.toggleReady()
+                    }
+                    // Keep overlay for a bit longer, then hide if not switched
+                    // If room is playing, LobbyViewModel will switch view automatically
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        withAnimation {
+                            isAutoJoining = false
+                        }
+                    }
+                }
+                // Reset flag
+                appState.shouldAutoJoinLobby = false
+            }
         }
     }
 

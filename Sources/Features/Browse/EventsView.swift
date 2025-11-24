@@ -111,10 +111,13 @@ struct EventsView: View {
             // This ensures the "Live" event has a valid endTime for auto-cycling.
             let startTime: Date
             if index == 0 {
-                startTime = now
+                // Simulate that the movie started some time ago (10-40% progress)
+                // This ensures the timestamp isn't 00:00 and looks "Live"
+                let simulatedProgress = Double.random(in: 0.1...0.4)
+                let offset = duration * simulatedProgress
+                startTime = now.addingTimeInterval(-offset)
             } else {
                 // For upcoming events, just show them as starting after the previous one
-                // This is an approximation for UI display
                 let prevDuration = scheduledEvents.last?.duration ?? 0
                 let prevStart = scheduledEvents.last?.startTime ?? now
                 startTime = prevStart.addingTimeInterval(prevDuration + bufferBetweenMovies)
@@ -160,46 +163,28 @@ struct EventsView: View {
     }
 
     private func joinEvent(_ event: EventItem) {
-        // For now, join as a temporary watch party
-        // In the full implementation, this will fetch the persistent room from Supabase
-        print("🎬 Joining event: \(event.mediaItem.name)")
+        // Use deterministic ID for system rooms so everyone joins the same session
+        // Format: event_{movieId}
+        let roomId = "event_\(event.mediaItem.id)"
         
-        // Calculate current position if live
-        let now = Date()
-        let position: Double
-        if now >= event.startTime && now < event.endTime {
-            position = now.timeIntervalSince(event.startTime)
-        } else {
-            position = 0
-        }
-
-        // Create a mock room for now (until backend worker is restored)
         let room = WatchPartyRoom(
-            id: "EVENT-\(event.mediaItem.id)",
-            hostId: "system",
-            hostName: "RedLemon System",
+            id: roomId,
+            hostId: "system", // System is host
             mediaItem: event.mediaItem,
-            season: nil,
-            episode: nil,
             quality: .fullHD,
-            sourceQuality: nil,
-            description: "Live Event",
-            posterURL: event.mediaItem.poster,
-            participants: [],
-            state: .playing,
-            createdAt: event.startTime,
-            selectedStreamHash: nil,
-            selectedFileIdx: nil,
-            selectedQuality: nil,
-            unlockedStreamURL: nil
+            status: .waiting, // Will sync with server
+            participants: []
         )
         
-        appState.currentWatchPartyRoom = room
-        appState.currentView = .watchPartyLobby
+        // Auto-join lobby if it's the live event
+        if event.isLive {
+            appState.shouldAutoJoinLobby = true
+        }
         
-        // Set resume timestamp for late join
-        appState.resumeFromTimestamp = position
-    }
+        appState.currentWatchPartyRoom = room
+        appState.isWatchPartyHost = false // User is always guest in system events
+        appState.currentView = .watchPartyLobby
+    }    
 }
 
 struct EventItem: Identifiable {

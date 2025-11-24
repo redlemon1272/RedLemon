@@ -46,6 +46,7 @@ class AppState: ObservableObject {
     @Published var browseScrollPosition: String? = nil  // Track scroll position in browse view
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally
     @Published var isLoadingRoom: Bool = false  // Track room loading state
+    @Published var shouldAutoJoinLobby: Bool = false  // Flag to auto-join lobby for live events
     @Published var searchResults: [MediaItem] = []  // Persist search results across navigation
     @Published var lastSearchQuery: String = ""  // Remember last search query
     @Published var resumeFromTimestamp: Double? = nil  // When resuming playback, seek to this position

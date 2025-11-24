@@ -275,7 +275,8 @@ class MPVWrapper: ObservableObject {
             
             // Check if it was EOF (natural finish)
             var reason: UnsafeMutablePointer<CChar>?
-            if mpv_get_property(handle, "eof-reached", MPV_FORMAT_STRING, &reason) >= 0,
+            if let handle = mpvHandle,
+               mpv_get_property(handle, "eof-reached", MPV_FORMAT_STRING, &reason) >= 0,
                let r = reason.map({ String(cString: $0) }), r == "yes" {
                 print("🏁 MPV: Playback finished (EOF)")
                 playbackFinished = true

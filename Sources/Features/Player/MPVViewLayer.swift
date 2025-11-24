@@ -118,6 +118,8 @@ class MPVViewLayer: CAOpenGLLayer {
             kCGLPFAColorSize, CGLPixelFormatAttribute(24),
             kCGLPFAAlphaSize, CGLPixelFormatAttribute(8),
             kCGLPFADepthSize, CGLPixelFormatAttribute(0),
+            kCGLPFASupportsAutomaticGraphicsSwitching, // Critical for dual-GPU Macs
+            kCGLPFAAllowOfflineRenderers,              // Allow rendering on discrete GPU even if not driving display
             _CGLPixelFormatAttribute(rawValue: 0)
         ]
 

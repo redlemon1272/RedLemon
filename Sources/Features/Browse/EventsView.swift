@@ -61,7 +61,9 @@ struct EventsView: View {
         Task {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
-                calculateSchedule(movies: movies)
+                // Just take first 4 movies for the event cards
+                let eventMovies = Array(movies.prefix(4))
+                calculateSchedule(movies: eventMovies)
                 isLoading = false
             } catch {
                 print("❌ Failed to load events: \(error)")
@@ -71,44 +73,38 @@ struct EventsView: View {
     }
 
     private func calculateSchedule(movies: [MediaItem]) {
-        let now = Date()
-        
-        var cumulativeTime: TimeInterval = 0
+        // Simple sequential schedule: first movie is "live", rest are upcoming
+        // No actual time tracking needed - just for display
         var scheduledEvents: [EventItem] = []
-
-        for movie in movies {
-            // Parse runtime (e.g., "148 min")
+        
+        for (index, movie) in movies.enumerated() {
+            // Parse runtime for display purposes
             let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
             let duration = TimeInterval(runtimeMinutes * 60)
             
-            // Start from current time, not midnight
-            let startTime = now.addingTimeInterval(cumulativeTime)
+            // First event is "live now", others are upcoming
+            // Use dummy start times just for the UI
+            let now = Date()
+            let startTime = now.addingTimeInterval(TimeInterval(index) * 10) // Just for ordering
             
             scheduledEvents.append(EventItem(
                 id: UUID().uuidString,
                 mediaItem: movie,
                 startTime: startTime,
-                duration: duration
+                duration: duration,
+                index: index
             ))
-            
-            // Add duration + buffer for next start time
-            cumulativeTime += duration + bufferBetweenMovies
         }
         
-        // All events are in the future, no need to filter
         DispatchQueue.main.async {
             self.events = scheduledEvents
         }
     }
 
     private func startTimer() {
-        // Update less frequently to avoid crashes (every 10 seconds instead of 1)
-        timer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
-            // Recalculate schedule to remove expired events
-            Task { @MainActor in
-                self.events = self.events.filter { !$0.isFinished }
-            }
-        }
+        // No timer needed - events are static
+        timer?.invalidate()
+        timer = nil
     }
 
     private func stopTimer() {
@@ -162,24 +158,25 @@ struct EventsView: View {
 struct EventItem: Identifiable {
     let id: String
     let mediaItem: MediaItem
-    let startTime: Date
+    let startTime: Date  // Just for ordering, not actual time
     let duration: TimeInterval
+    let index: Int  // Position in the list (0 = live, 1-3 = upcoming)
     
     var endTime: Date {
         startTime.addingTimeInterval(duration)
     }
     
+    // First event (index 0) is always "live", rest are upcoming
     var isLive: Bool {
-        let now = Date()
-        return now >= startTime && now < endTime
+        return index == 0
     }
     
     var isUpcoming: Bool {
-        Date() < startTime
+        return index > 0
     }
     
     var isFinished: Bool {
-        Date() >= endTime
+        return false  // Events never finish in this simple model
     }
 }
 

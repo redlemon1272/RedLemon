@@ -63,11 +63,16 @@ struct EventsView: View {
         Task {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
-                allMovies = movies
+                // Shuffle movies so it's different every time the app opens
+                allMovies = movies.shuffled()
+                
                 // Start with first 4 movies
                 currentOffset = 0
                 showNextBatch()
                 isLoading = false
+                
+                // Start timer to check for event completion
+                startTimer()
             } catch {
                 print("❌ Failed to load events: \(error)")
                 isLoading = false
@@ -93,18 +98,27 @@ struct EventsView: View {
 
     private func calculateSchedule(movies: [MediaItem]) {
         // Simple sequential schedule: first movie is "live", rest are upcoming
-        // No actual time tracking needed - just for display
         var scheduledEvents: [EventItem] = []
+        
+        let now = Date()
         
         for (index, movie) in movies.enumerated() {
             // Parse runtime for display purposes
             let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
             let duration = TimeInterval(runtimeMinutes * 60)
             
-            // First event is "live now", others are upcoming
-            // Use dummy start times just for the UI
-            let now = Date()
-            let startTime = now.addingTimeInterval(TimeInterval(index) * 10) // Just for ordering
+            // First event starts NOW. Others follow sequentially with buffer.
+            // This ensures the "Live" event has a valid endTime for auto-cycling.
+            let startTime: Date
+            if index == 0 {
+                startTime = now
+            } else {
+                // For upcoming events, just show them as starting after the previous one
+                // This is an approximation for UI display
+                let prevDuration = scheduledEvents.last?.duration ?? 0
+                let prevStart = scheduledEvents.last?.startTime ?? now
+                startTime = prevStart.addingTimeInterval(prevDuration + bufferBetweenMovies)
+            }
             
             scheduledEvents.append(EventItem(
                 id: UUID().uuidString,
@@ -121,9 +135,23 @@ struct EventsView: View {
     }
 
     private func startTimer() {
-        // No timer needed - events are static
+        // Check every minute if the live event has finished
         timer?.invalidate()
-        timer = nil
+        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
+            Task { @MainActor in
+                self.checkEventStatus()
+            }
+        }
+    }
+    
+    private func checkEventStatus() {
+        guard let liveEvent = events.first else { return }
+        
+        // If live event is finished, cycle to next batch
+        if Date() >= liveEvent.endTime {
+            print("🔄 Live event finished: \(liveEvent.mediaItem.name). Cycling to next batch.")
+            showNextBatch()
+        }
     }
 
     private func stopTimer() {

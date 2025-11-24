@@ -90,14 +90,14 @@ class LocalAPIClient: ObservableObject {
                 // Fetch full metadata to get background art
                 let metaURL = URL(string: "\(baseURL)/api/metadata/meta/movie/\(meta.id).json")!
                 let (metaData, _) = try await session.data(from: metaURL)
-                let fullMeta = try JSONDecoder().decode(CinemetaMeta.self, from: metaData)
-                let mediaItem = MediaItem(from: fullMeta)
+                // FIXED: Decode CinemetaResponse wrapper, then access .meta
+                let fullResponse = try JSONDecoder().decode(CinemetaResponse.self, from: metaData)
+                let mediaItem = MediaItem(from: fullResponse.meta)
                 
                 // Debug logging
                 print("📺 Event: \(mediaItem.name)")
                 print("   Background: \(mediaItem.background ?? "nil")")
                 print("   Logo: \(mediaItem.logo ?? "nil")")
-                print("   Poster: \(mediaItem.poster ?? "nil")")
                 
                 fullItems.append(mediaItem)
             } catch {

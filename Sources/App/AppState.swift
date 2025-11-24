@@ -585,6 +585,8 @@ class AppState: ObservableObject {
             }
 
             
+            NSLog("🔍 Room state - isPlaying: \(room.isPlaying), playbackPosition: \(room.playbackPosition)")
+            
             // Check if room is already playing
             if room.isPlaying {
                 NSLog("🎬 Room is already playing - navigating directly to playback")

@@ -72,8 +72,6 @@ struct EventsView: View {
 
     private func calculateSchedule(movies: [MediaItem]) {
         let now = Date()
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: now)
         
         var cumulativeTime: TimeInterval = 0
         var scheduledEvents: [EventItem] = []
@@ -83,7 +81,8 @@ struct EventsView: View {
             let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
             let duration = TimeInterval(runtimeMinutes * 60)
             
-            let startTime = startOfDay.addingTimeInterval(cumulativeTime)
+            // Start from current time, not midnight
+            let startTime = now.addingTimeInterval(cumulativeTime)
             
             scheduledEvents.append(EventItem(
                 id: UUID().uuidString,
@@ -96,11 +95,9 @@ struct EventsView: View {
             cumulativeTime += duration + bufferBetweenMovies
         }
         
-        // Filter out expired events (keep only active and upcoming)
-        let activeEvents = scheduledEvents.filter { !$0.isFinished }
-        
+        // All events are in the future, no need to filter
         DispatchQueue.main.async {
-            self.events = activeEvents
+            self.events = scheduledEvents
         }
     }
 

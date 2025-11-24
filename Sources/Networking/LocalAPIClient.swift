@@ -91,7 +91,15 @@ class LocalAPIClient: ObservableObject {
                 let metaURL = URL(string: "\(baseURL)/api/metadata/meta/movie/\(meta.id).json")!
                 let (metaData, _) = try await session.data(from: metaURL)
                 let fullMeta = try JSONDecoder().decode(CinemetaMeta.self, from: metaData)
-                fullItems.append(MediaItem(from: fullMeta))
+                let mediaItem = MediaItem(from: fullMeta)
+                
+                // Debug logging
+                print("📺 Event: \(mediaItem.name)")
+                print("   Background: \(mediaItem.background ?? "nil")")
+                print("   Logo: \(mediaItem.logo ?? "nil")")
+                print("   Poster: \(mediaItem.poster ?? "nil")")
+                
+                fullItems.append(mediaItem)
             } catch {
                 // Fallback to basic metadata if full fetch fails
                 print("⚠️ Failed to fetch full metadata for \(meta.id), using basic: \(error)")

@@ -190,127 +190,176 @@ struct HeroEventCard: View {
     let onJoin: () -> Void
     
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            // Background Image
-            AsyncImage(url: URL(string: event.mediaItem.background ?? event.mediaItem.poster ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle().fill(Color.gray.opacity(0.3))
+        Button(action: {
+            if !event.isFinished {
+                onJoin()
             }
-            .frame(height: 250)
-            .clipped()
-            .overlay(
-                LinearGradient(
-                    gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
-                    startPoint: .top,
-                    endPoint: .bottom
+        }) {
+            ZStack(alignment: .topLeading) {
+                // Full Background Image with Gradient
+                AsyncImage(url: URL(string: event.mediaItem.background ?? event.mediaItem.poster ?? "")) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Rectangle().fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                }
+                .frame(height: 320)
+                .clipped()
+                .overlay(
+                    // Multi-layer gradient for better readability
+                    ZStack {
+                        LinearGradient(
+                            gradient: Gradient(colors: [.black.opacity(0.7), .clear, .black.opacity(0.9)]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        LinearGradient(
+                            gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    }
                 )
-            )
-            .cornerRadius(12)
-            
-            // Content
-            HStack(alignment: .bottom) {
-                VStack(alignment: .leading, spacing: 8) {
-                    // Status Badge
-                    if event.isLive {
-                        HStack(spacing: 6) {
-                            Circle()
-                                .fill(Color.red)
-                                .frame(width: 8, height: 8)
-                            Text("NOW PLAYING")
-                                .font(.system(size: 12, weight: .bold))
-                                .foregroundColor(.white)
-                        }
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(Color.red.opacity(0.2))
-                        .cornerRadius(4)
-                    } else if event.isUpcoming {
-                        Text("STARTS \(formatTime(event.startTime))")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.yellow)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.yellow.opacity(0.2))
-                            .cornerRadius(4)
-                    } else {
-                        Text("FINISHED")
-                            .font(.system(size: 12, weight: .bold))
-                            .foregroundColor(.gray)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(4)
-                    }
-                    
-                    // Logo or Title
-                    if let logoUrl = event.mediaItem.logo, let url = URL(string: logoUrl) {
-                        AsyncImage(url: url) { image in
-                            image.resizable().aspectRatio(contentMode: .fit)
-                        } placeholder: {
-                            Text(event.mediaItem.name)
-                                .font(.title2)
-                                .bold()
-                                .foregroundColor(.white)
-                        }
-                        .frame(height: 60, alignment: .leading)
-                    } else {
-                        Text(event.mediaItem.name)
-                            .font(.title2)
-                            .bold()
-                            .foregroundColor(.white)
-                    }
-                    
-                    // Metadata
+                .cornerRadius(16)
+                
+                // Content Overlay
+                VStack(alignment: .leading, spacing: 0) {
+                    // Top Section: Status Badge
                     HStack {
-                        Text(event.mediaItem.releaseInfo ?? "")
-                        Text("•")
-                        Text(event.mediaItem.runtime ?? "")
-                        Text("•")
-                        Text(String(format: "⭐️ %.1f", event.mediaItem.imdbRating ?? 0))
-                    }
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    
-                    // Progress Bar (if live)
-                    if event.isLive {
-                        VStack(alignment: .leading, spacing: 4) {
-                            ProgressView(value: progress, total: 1.0)
-                                .progressViewStyle(LinearProgressViewStyle(tint: .red))
-                            
-                            HStack {
-                                Text(formatEventTime(currentTime))
-                                Spacer()
-                                Text("-\(formatEventTime(remainingTime))")
+                        if event.isLive {
+                            HStack(spacing: 6) {
+                                Circle()
+                                    .fill(Color.red)
+                                    .frame(width: 10, height: 10)
+                                Text("LIVE NOW")
+                                    .font(.system(size: 13, weight: .bold))
+                                    .foregroundColor(.white)
                             }
-                            .font(.caption2)
-                            .foregroundColor(.gray)
-                        }
-                        .frame(width: 200)
-                    }
-                }
-                
-                Spacer()
-                
-                // Join Button
-                if !event.isFinished {
-                    Button(action: onJoin) {
-                        Text(event.isLive ? "Join Now" : "Notify Me")
-                            .font(.system(size: 14, weight: .bold))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.red.opacity(0.9))
+                                    .shadow(color: .red.opacity(0.5), radius: 8, x: 0, y: 2)
+                            )
+                        } else if event.isUpcoming {
+                            HStack(spacing: 6) {
+                                Image(systemName: "clock.fill")
+                                    .font(.system(size: 11))
+                                Text("STARTS \(formatTime(event.startTime))")
+                                    .font(.system(size: 12, weight: .semibold))
+                            }
                             .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .background(event.isLive ? Color.red : Color.white.opacity(0.2))
-                            .cornerRadius(8)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.orange.opacity(0.9))
+                                    .shadow(color: .orange.opacity(0.3), radius: 6, x: 0, y: 2)
+                            )
+                        }
+                        
+                        Spacer()
                     }
+                    .padding(.top, 20)
+                    .padding(.horizontal, 20)
+                    
+                    Spacer()
+                    
+                    // Bottom Section: Logo, Metadata, Progress
+                    VStack(alignment: .leading, spacing: 12) {
+                        // Logo or Title
+                        if let logoUrl = event.mediaItem.logo, let url = URL(string: logoUrl) {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } placeholder: {
+                                Text(event.mediaItem.name)
+                                    .font(.system(size: 28, weight: .bold))
+                                    .foregroundColor(.white)
+                                    .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
+                            }
+                            .frame(maxWidth: 300, maxHeight: 80, alignment: .leading)
+                            .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 4)
+                        } else {
+                            Text(event.mediaItem.name)
+                                .font(.system(size: 28, weight: .bold))
+                                .foregroundColor(.white)
+                                .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
+                        }
+                        
+                        // Metadata Row
+                        HStack(spacing: 8) {
+                            if let year = event.mediaItem.releaseInfo {
+                                Text(year)
+                                    .font(.system(size: 14, weight: .medium))
+                            }
+                            if event.mediaItem.releaseInfo != nil && event.mediaItem.runtime != nil {
+                                Text("•")
+                                    .font(.system(size: 14))
+                            }
+                            if let runtime = event.mediaItem.runtime {
+                                Text(runtime)
+                                    .font(.system(size: 14, weight: .medium))
+                            }
+                            if event.mediaItem.runtime != nil && event.mediaItem.imdbRating != nil {
+                                Text("•")
+                                    .font(.system(size: 14))
+                            }
+                            if let rating = event.mediaItem.imdbRating {
+                                HStack(spacing: 4) {
+                                    Image(systemName: "star.fill")
+                                        .font(.system(size: 12))
+                                        .foregroundColor(.yellow)
+                                    Text(String(format: "%.1f", rating))
+                                        .font(.system(size: 14, weight: .semibold))
+                                }
+                            }
+                        }
+                        .foregroundColor(.white.opacity(0.9))
+                        
+                        // Progress Bar (if live)
+                        if event.isLive {
+                            VStack(alignment: .leading, spacing: 6) {
+                                ProgressView(value: progress, total: 1.0)
+                                    .progressViewStyle(LinearProgressViewStyle(tint: .red))
+                                    .scaleEffect(x: 1, y: 1.5, anchor: .center)
+                                
+                                HStack {
+                                    Text(formatEventTime(currentTime))
+                                        .font(.system(size: 13, weight: .medium))
+                                    Spacer()
+                                    Text("-\(formatEventTime(remainingTime))")
+                                        .font(.system(size: 13, weight: .medium))
+                                }
+                                .foregroundColor(.white.opacity(0.8))
+                            }
+                            .padding(.top, 4)
+                        }
+                    }
+                    .padding(24)
                 }
             }
-            .padding(20)
+            .frame(height: 320)
+            .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
+            .scaleEffect(event.isFinished ? 0.98 : 1.0)
+            .opacity(event.isFinished ? 0.6 : 1.0)
         }
-        .frame(height: 250)
-        .shadow(radius: 10)
+        .buttonStyle(PlainButtonStyle())
+        .disabled(event.isFinished)
+        .overlay(
+            // Hover effect hint
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1), lineWidth: 2)
+        )
     }
     
     private var progress: Double {

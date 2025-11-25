@@ -182,8 +182,12 @@ class LobbyViewModel: ObservableObject {
                         }
                     }
                     
-                    // Auto-start if room is already playing (events or regular rooms)
-                    if room.state == .playing || room.id.hasPrefix("event_") {
+                    // Auto-start for event rooms (always) or regular rooms that are already playing
+                    if room.id.hasPrefix("event_") {
+                        print("🎬 Event room detected - auto-starting playback")
+                        autoStartSystemEvent()
+                    } else if room.state == .playing {
+                        print("▶️ Room already playing - auto-starting playback")
                         autoStartSystemEvent()
                     }
                 }

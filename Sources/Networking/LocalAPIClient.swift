@@ -112,27 +112,40 @@ class LocalAPIClient: ObservableObject {
             return true
         }
         
-        // DETERMINISTIC SHUFFLE:
+        // DETERMINISTIC SHUFFLE WITH FIXED SEED:
         // 1. Sort by ID first to ensure a stable starting point (removing network race condition order)
         let sortedMetas = uniqueMetas.sorted { $0.id < $1.id }
         
-        // 2. Generate a seed based on the current date (YYYYMMDD)
-        // This ensures everyone gets the EXACT SAME "random" shuffle for the entire day
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let dateString = formatter.string(from: Date())
-        let seed = Int(dateString) ?? 20240101
+        // 2. CYCLE-BASED SEED: Changes after each 80-movie marathon completes
+        // Uses conservative estimate to ensure shuffle happens AFTER cycle ends
         
-        print("🎲 Shuffling with daily seed: \(seed)")
+        // Calculate which "generation" we're in based on elapsed time
+        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
+        let timeSinceEpoch = Date().timeIntervalSince(epoch)
+        
+        // Use CONSERVATIVE estimate (2.5 hours avg) to ensure we don't shuffle mid-cycle
+        // Most movies are 90-150 min, so 2.5 hours ensures we wait for longest movies
+        // 80 movies × 2.5 hours = 200 hours per cycle
+        let conservativeMovieDuration: TimeInterval = 9000  // 2.5 hours
+        let cycleDuration = conservativeMovieDuration * 80  // ~200 hours (8.3 days)
+        
+        // Calculate which cycle we're in (0, 1, 2, ...)
+        let cycleNumber = Int(timeSinceEpoch / cycleDuration)
+        
+        // Base seed + cycle number = new shuffle each cycle
+        let baseSeed = 20250101
+        let seed = baseSeed + cycleNumber
+        
+        print("🎲 Shuffling with cycle-based seed: \(seed) (Cycle #\(cycleNumber), ~\(Int(cycleDuration/3600))h per cycle)")
         
         // 3. Shuffle using seeded generator
         var generator = SeededGenerator(seed: seed)
         let shuffledMetas = sortedMetas.shuffled(using: &generator)
         
         // 4. Take top 30
-        let selectedMetas = Array(shuffledMetas.prefix(30))
+        let selectedMetas = Array(shuffledMetas.prefix(80))  // Expanded from 30 to 80 for event marathon variety
         
-        print("🚀 Processing \(selectedMetas.count) movies (Optimized)...")
+        print("🚀 Processing \(selectedMetas.count) movies for Event Marathon...")
         
         // OPTIMIZATION: Manually construct MediaItems
         // This avoids 30+ network requests and prevents 502 errors/timeouts

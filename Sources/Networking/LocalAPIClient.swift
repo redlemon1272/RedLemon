@@ -167,16 +167,25 @@ class LocalAPIClient: ObservableObject {
                 return false
             }
             
-            // Optional: Keep basic quality filter (rating >= 6.0)
+            // Optional: Stricter quality filter (rating >= 7.0)
             if let ratingStr = meta.imdbRating,
                let rating = Double(ratingStr),
-               rating >= 6.0 {
+               rating >= 7.0 {
+                
+                // Filter out unwanted genres (Documentaries, Shorts, etc.)
+                if let genres = meta.genre {
+                    let unwantedGenres = ["Documentary", "Short", "News", "Talk-Show", "Reality-TV"]
+                    if genres.contains(where: { unwantedGenres.contains($0) }) {
+                        return false
+                    }
+                }
+                
                 return true
             }
             return false
         }
         
-        print("📊 Filtered to \(validMetas.count) movies with complete artwork & rating >= 6.0")
+        print("📊 Filtered to \(validMetas.count) movies with complete artwork, rating >= 7.0, & no documentaries")
         
         // 5. Take top 80
         let selectedMetas = Array(validMetas.prefix(80))

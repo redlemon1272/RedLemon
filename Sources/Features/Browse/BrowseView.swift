@@ -1520,4 +1520,5 @@ struct StremioMeta: Codable {
     let logo: String?
     let releaseInfo: String?
     let imdbRating: String?
+    let genre: [String]?
 }

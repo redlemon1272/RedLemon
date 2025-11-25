@@ -67,7 +67,7 @@ class MPVWrapper: ObservableObject {
         // OpenGL for better compatibility with older Intel graphics
         mpv_set_option_string(handle, "gpu-api", "opengl")
         mpv_set_option_string(handle, "gpu-hwdec-interop", "auto")
-        mpv_set_option_string(handle, "keep-open", "yes")
+        mpv_set_option_string(handle, "keep-open", "no")  // Changed to no for EOF detection
 
         // No audio display
         mpv_set_option_string(handle, "audio-display", "no")
@@ -84,7 +84,7 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "af", "scaletempo2")  // Better audio resampling for speed changes
 
         // UI
-        mpv_set_option_string(handle, "keep-open", "yes")
+        mpv_set_option_string(handle, "keep-open", "no")  // Changed to no for EOF detection
         mpv_set_option_string(handle, "input-default-bindings", "no")
         mpv_set_option_string(handle, "input-vo-keyboard", "no")
         mpv_set_option_string(handle, "osc", "no")

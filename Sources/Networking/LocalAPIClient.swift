@@ -138,21 +138,56 @@ class LocalAPIClient: ObservableObject {
         
         print("🎲 Shuffling with cycle-based seed: \(seed) (Cycle #\(cycleNumber), ~\(Int(cycleDuration/3600))h per cycle)")
         
+        // Check cache first - use same movies for entire cycle
+        let cacheKey = "eventMovies_cycle_\(cycleNumber)"
+        if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
+           let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
+            // Validate cache - ensure all movies have posters
+            let allHavePosters = cachedMovies.allSatisfy { $0.poster != nil }
+            if allHavePosters {
+                print("✅ Using cached movies for cycle #\(cycleNumber) (\(cachedMovies.count) movies)")
+                return cachedMovies
+            } else {
+                print("⚠️ Cache invalid - some movies missing posters, regenerating...")
+                UserDefaults.standard.removeObject(forKey: cacheKey)
+            }
+        }
+        
+        print("🔄 No cache found - generating new movie list for cycle #\(cycleNumber)")
+        
         // 3. Shuffle using seeded generator
         var generator = SeededGenerator(seed: seed)
         let shuffledMetas = sortedMetas.shuffled(using: &generator)
         
-        // 4. Take top 30
-        let selectedMetas = Array(shuffledMetas.prefix(80))  // Expanded from 30 to 80 for event marathon variety
+        // 4. Filter for movies with COMPLETE metadata (logo + background)
+        // This ensures no plain text titles or missing art
+        let validMetas = shuffledMetas.filter { meta in
+            // Must have logo and background
+            guard let _ = meta.logo, let _ = meta.background else {
+                return false
+            }
+            
+            // Optional: Keep basic quality filter (rating >= 6.0)
+            if let ratingStr = meta.imdbRating,
+               let rating = Double(ratingStr),
+               rating >= 6.0 {
+                return true
+            }
+            return false
+        }
+        
+        print("📊 Filtered to \(validMetas.count) movies with complete artwork & rating >= 6.0")
+        
+        // 5. Take top 80
+        let selectedMetas = Array(validMetas.prefix(80))
         
         print("🚀 Processing \(selectedMetas.count) movies for Event Marathon...")
         
         // OPTIMIZATION: Manually construct MediaItems
-        // This avoids 30+ network requests and prevents 502 errors/timeouts
         let fullItems = selectedMetas.map { meta -> MediaItem in
-            // Construct standard MetaHub image URLs
-            let backgroundURL = "https://images.metahub.space/background/medium/\(meta.id)/img"
-            let logoURL = "https://images.metahub.space/logo/medium/\(meta.id)/img"
+            // Use provided URLs directly - guaranteed to exist by filter above
+            let backgroundURL = meta.background ?? "https://images.metahub.space/background/medium/\(meta.id)/img"
+            let logoURL = meta.logo ?? "https://images.metahub.space/logo/medium/\(meta.id)/img"
             
             return MediaItem(
                 id: meta.id,
@@ -162,12 +197,18 @@ class LocalAPIClient: ObservableObject {
                 background: backgroundURL,
                 logo: logoURL,
                 description: nil,
-                releaseInfo: meta.releaseInfo, // Stremio addon provides this
-                year: meta.releaseInfo,        // Use releaseInfo as year
-                imdbRating: meta.imdbRating,   // Stremio addon provides this
+                releaseInfo: meta.releaseInfo,
+                year: meta.releaseInfo,
+                imdbRating: meta.imdbRating,
                 genres: nil,
                 runtime: nil
             )
+        }
+        
+        // Cache the movie list for this cycle
+        if let encoded = try? JSONEncoder().encode(fullItems) {
+            UserDefaults.standard.set(encoded, forKey: cacheKey)
+            print("💾 Cached \(fullItems.count) movies for cycle #\(cycleNumber)")
         }
         
         print("📊 Ready to show \(fullItems.count) movies")

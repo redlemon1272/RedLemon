@@ -1516,6 +1516,8 @@ struct StremioMeta: Codable {
     let name: String
     let type: String
     let poster: String?
+    let background: String?
+    let logo: String?
     let releaseInfo: String?
     let imdbRating: String?
 }

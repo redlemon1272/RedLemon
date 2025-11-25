@@ -133,7 +133,7 @@ class LocalAPIClient: ObservableObject {
         let cycleNumber = Int(timeSinceEpoch / cycleDuration)
         
         // Base seed + cycle number = new shuffle each cycle
-        let baseSeed = 20250101
+        let baseSeed = 20250126  // Incremented to force cache refresh
         let seed = baseSeed + cycleNumber
         
         print("🎲 Shuffling with cycle-based seed: \(seed) (Cycle #\(cycleNumber), ~\(Int(cycleDuration/3600))h per cycle)")
@@ -159,15 +159,25 @@ class LocalAPIClient: ObservableObject {
         var generator = SeededGenerator(seed: seed)
         let shuffledMetas = sortedMetas.shuffled(using: &generator)
         
-        // 4. Filter for movies with COMPLETE metadata (logo + background)
-        // This ensures no plain text titles or missing art
+        // 4. Filter for movies with COMPLETE metadata (logo + background) AND recent release year
+        // This ensures no plain text titles, missing art, or old movies
         let validMetas = shuffledMetas.filter { meta in
             // Must have logo and background
             guard let _ = meta.logo, let _ = meta.background else {
                 return false
             }
             
-            // Optional: Stricter quality filter (rating >= 7.0)
+            // Filter by release year (1990 or newer)
+            if let releaseInfo = meta.releaseInfo {
+                // Extract year from releaseInfo (format: "2015" or "2015-01-01")
+                let yearStr = String(releaseInfo.prefix(4))
+                if let year = Int(yearStr), year < 1990 {
+                    print("⏭️ Skipping old movie: \(meta.name) (\(year))")
+                    return false
+                }
+            }
+            
+            // Stricter quality filter (rating >= 7.0)
             if let ratingStr = meta.imdbRating,
                let rating = Double(ratingStr),
                rating >= 7.0 {
@@ -591,10 +601,27 @@ class LocalAPIClient: ObservableObject {
 
     // MARK: - Stream Quality Filtering (MPV - Universal Codec Support)
 
-    /// Basic quality check - allow CAM/TS but let scoring handle preference
+    /// Basic quality check - filter out 3D and allow rest for scoring
     /// MPV supports all codecs, so no codec filtering needed!
     private func isGoodQuality(_ stream: Stream) -> Bool {
-        // Allow all sources through - quality scoring will handle prioritization
+        let title = stream.title.uppercased()
+        
+        // Filter out 3D movies (all common 3D formats)
+        let is3D = title.contains("3D") || 
+                   title.contains("SBS") || 
+                   title.contains("HSBS") || 
+                   title.contains("H-SBS") ||
+                   title.contains("HALF-SBS") ||
+                   title.contains("TAB") ||
+                   title.contains("HTAB") ||
+                   title.contains("HALF-TAB")
+        
+        if is3D {
+            print("🚫 Filtered out 3D stream: \(stream.title)")
+            return false
+        }
+        
+        // Allow all other sources through - quality scoring will handle prioritization
         // CAM/TS will score low, WEB-DL/BluRay will score high
         // This way, CAM shows when nothing else exists, but auto-upgrades when better quality releases
         return true

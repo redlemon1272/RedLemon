@@ -325,6 +325,24 @@ func registerStreamRoutes(_ app: Application) {
             print("   🚫 SERVER FILTERED x265: \(beforeCodecFilter) → \(afterCodecFilter) streams")
         }
 
+        // CRITICAL: Filter 3D movies (server-side, ALWAYS runs)
+        let before3DFilter = streamsWithSubtitles.count
+        let threeDFormats = ["3d", "sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let titleLower = stream.title.lowercased()
+            let is3D = threeDFormats.contains { format in
+                titleLower.contains(format)
+            }
+            if is3D {
+                print("   🚫 SERVER BLOCKING 3D: \(stream.title)")
+            }
+            return !is3D
+        }
+        let after3DFilter = streamsWithSubtitles.count
+        if after3DFilter < before3DFilter {
+            print("   🚫 SERVER FILTERED 3D: \(before3DFilter) → \(after3DFilter) streams")
+        }
+
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
         let beforeAudioFilter = streamsWithSubtitles.count
         streamsWithSubtitles = streamsWithSubtitles.filter { stream in
@@ -346,7 +364,7 @@ func registerStreamRoutes(_ app: Application) {
             print("   🎵 SERVER FILTERED audio language: \(beforeAudioFilter) → \(afterAudioFilter) streams (English/Multi only)")
         }
 
-        print("   📊 After x265 + audio filter: \(streamsWithSubtitles.count) streams remaining")
+        print("   📊 After x265 + 3D + audio filter: \(streamsWithSubtitles.count) streams remaining")
         for (idx, stream) in streamsWithSubtitles.prefix(5).enumerated() {
             let audioDesc = getAudioLanguageDescription(stream.title)
             print("      [\(idx)] \(stream.title) (\(audioDesc))")

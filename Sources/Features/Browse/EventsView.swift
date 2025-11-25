@@ -62,7 +62,12 @@ struct EventsView: View {
             }
         }
         .onAppear {
-            loadEvents()
+            // Recalculate schedule on every appear to ensure status is current
+            if !allMovies.isEmpty {
+                calculateDeterministicSchedule()
+            } else {
+                loadEvents()
+            }
             startTimer()
         }
         .onDisappear {

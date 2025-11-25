@@ -48,6 +48,7 @@ struct ChatOverlayView: View {
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.3), radius: 20)
+        .drawingGroup() // GPU acceleration for smooth animations
         .padding(.trailing, 20)
         .padding(.vertical, 60)
         .onAppear {

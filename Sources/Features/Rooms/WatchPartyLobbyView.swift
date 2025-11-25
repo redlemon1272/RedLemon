@@ -244,6 +244,55 @@ struct WatchPartyLobbyView: View {
                             }
                         }
                         .padding(.horizontal, 24)
+                        
+                        // NEW: Playlist Section (only for hosts in non-event rooms)
+                        if isHost && !room.id.hasPrefix("event_") {
+                            VStack(alignment: .leading, spacing: 12) {
+                                HStack {
+                                    Image(systemName: "list.bullet")
+                                        .foregroundColor(.white.opacity(0.7))
+                                    Text("Playlist (\(viewModel.playlist.count) items)")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: { /* TODO: Show media picker */ }) {
+                                        HStack(spacing: 4) {
+                                            Image(systemName: "plus.circle.fill")
+                                            Text("Add")
+                                        }
+                                        .font(.caption)
+                                        .foregroundColor(.accentColor)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 5)
+                                        .background(Color.accentColor.opacity(0.2))
+                                        .cornerRadius(6)
+                                    }
+                                    .buttonStyle(PlainButtonStyle())
+                                }
+                                
+                                if !viewModel.playlist.isEmpty {
+                                    VStack(spacing: 6) {
+                                        ForEach(Array(viewModel.playlist.enumerated()), id: \.element.id) { index, item in
+                                            PlaylistItemRow(
+                                                item: item,
+                                                index: index,
+                                                isCurrent: index == viewModel.currentPlaylistIndex,
+                                                onRemove: { viewModel.removeFromPlaylist(at: index) }
+                                            )
+                                        }
+                                    }
+                                } else {
+                                    Text("No items in playlist. Add movies or episodes to create a marathon!")
+                                        .font(.caption)
+                                        .foregroundColor(.white.opacity(0.6))
+                                        .padding(.vertical, 8)
+                                }
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.top, 12)
+                        }
                     } // End content VStack
                 } // End ScrollView
 
@@ -421,10 +470,23 @@ struct WatchPartyLobbyView: View {
                             HStack {
                                 Image(systemName: "timer")
                                     .font(.title2)
-                                Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
-                                    .font(.title3)
-                                    .fontWeight(.semibold)
-                                    .monospacedDigit()
+                                // Show different text for events vs playlists
+                                if room.id.hasPrefix("event_") {
+                                    Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                        .monospacedDigit()
+                                } else if viewModel.isPlaylistMode {
+                                    Text("Next item in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                        .monospacedDigit()
+                                } else {
+                                    Text("Starting in \(formatDuration(viewModel.timeUntilStart))")
+                                        .font(.title3)
+                                        .fontWeight(.semibold)
+                                        .monospacedDigit()
+                                }
                             }
                             .foregroundColor(.white)
                             .padding()
@@ -664,5 +726,70 @@ struct ConnectionStatusRow: View {
         default:
             return 1.0
         }
+    }
+}
+
+// MARK: - Playlist Item Row
+
+struct PlaylistItemRow: View {
+    let item: PlaylistItem
+    let index: Int
+    let isCurrent: Bool
+    let onRemove: () -> Void
+    
+    var body: some View {
+        HStack(spacing: 12) {
+            // Index number
+            Text("\(index + 1)")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(isCurrent ? .accentColor : .white.opacity(0.5))
+                .frame(width: 24)
+            
+            // Thumbnail (if available)
+            if let posterURL = item.mediaItem.poster {
+                AsyncImage(url: URL(string: posterURL)) { image in
+                    image.resizable().aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Color.gray.opacity(0.3)
+                }
+                .frame(width: 40, height: 60)
+                .cornerRadius(4)
+            }
+            
+            // Title
+            VStack(alignment: .leading, spacing: 2) {
+                Text(item.displayTitle)
+                    .font(.subheadline)
+                    .fontWeight(isCurrent ? .semibold : .regular)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                
+                if let runtime = item.mediaItem.runtime {
+                    Text(runtime)
+                        .font(.caption2)
+                        .foregroundColor(.white.opacity(0.6))
+                }
+            }
+            
+            Spacer()
+            
+            // Current indicator
+            if isCurrent {
+                Image(systemName: "play.circle.fill")
+                    .foregroundColor(.accentColor)
+            }
+            
+            // Remove button
+            Button(action: onRemove) {
+                Image(systemName: "xmark.circle.fill")
+                    .foregroundColor(.red.opacity(0.8))
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(isCurrent ? Color.accentColor.opacity(0.2) : Color.white.opacity(0.05))
+        .cornerRadius(8)
     }
 }

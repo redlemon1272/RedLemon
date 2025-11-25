@@ -72,9 +72,9 @@ class MPVWrapper: ObservableObject {
         // No audio display
         mpv_set_option_string(handle, "audio-display", "no")
 
-        // Performance
-        mpv_set_option_string(handle, "cache-secs", "30")
-        mpv_set_option_string(handle, "demuxer-max-bytes", "200M")
+        // Performance - Reduced buffers for lower memory usage
+        mpv_set_option_string(handle, "cache-secs", "15")  // Was 30s
+        mpv_set_option_string(handle, "demuxer-max-bytes", "100M")  // Was 200M
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // Audio buffering for watch party sync (prevents crackling during speed changes)
@@ -115,24 +115,17 @@ class MPVWrapper: ObservableObject {
     // MARK: - Smart Memory Monitoring (No Stutter)
 
     private func startMemoryMonitoring() {
-        memoryMonitorTimer = Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { [weak self] _ in
+        // Check memory every 30 seconds (was 120s)
+        memoryMonitorTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { [weak self] _ in
             guard let strongSelf = self else { return }
-
-            // Only check memory during natural breaks
-            if strongSelf.shouldCheckMemory() {
-                strongSelf.performBackgroundMemoryCheck()
-            }
+            strongSelf.performBackgroundMemoryCheck()
         }
     }
 
-    private func shouldCheckMemory() -> Bool {
-        // Only check every 2 minutes OR during pauses/seek
-        let timeSinceLastCheck = Date().timeIntervalSince(lastMemoryCheck)
-        return !isPlaying || timeSinceLastCheck > 120
-    }
+
 
     private func performBackgroundMemoryCheck() {
-        guard let _ = mpvHandle, isInitialized else { return }
+        guard let handle = mpvHandle, isInitialized else { return }
 
         var info = mach_task_basic_info()
         var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
@@ -145,29 +138,54 @@ class MPVWrapper: ObservableObject {
 
         if kerr == KERN_SUCCESS {
             let usedMB = Double(info.resident_size) / 1024.0 / 1024.0
-            print("📊 MPV Memory: \(String(format: "%.1f", usedMB))MB")
-
-            // Only cleanup during natural pauses
-            if usedMB > 250.0 && !isPlaying {
-                print("⚠️ High memory usage detected during pause - gentle cleanup")
-                performGentleCleanup()
+            let timeSinceLastCheck = Date().timeIntervalSince(lastMemoryCheck)
+            
+            // Log every 2 minutes to avoid spam
+            if timeSinceLastCheck > 120 {
+                print("📊 MPV Memory: \(String(format: "%.1f", usedMB))MB")
+                lastMemoryCheck = Date()
             }
 
-            lastMemoryCheck = Date()
+            // Gentle cleanup during playback if memory is high (every 5 minutes)
+            if usedMB > 200.0 && isPlaying && timeSinceLastCheck > 300 {
+                print("🧹 Gentle cleanup during playback (high memory)")
+                performPlaybackSafeCleanup()
+                lastMemoryCheck = Date()
+            }
+            
+            // Aggressive cleanup when paused
+            else if usedMB > 250.0 && !isPlaying {
+                print("⚠️ High memory during pause - aggressive cleanup")
+                performGentleCleanup()
+                lastMemoryCheck = Date()
+            }
         }
     }
 
+    // NEW: Safe cleanup during playback (imperceptible)
+    private func performPlaybackSafeCleanup() {
+        guard let handle = mpvHandle, isInitialized else { return }
+        
+        // Temporarily reduce cache, then restore
+        // This is safe during playback and won't cause stuttering
+        mpv_command_string(handle, "set cache-secs 8")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            mpv_command_string(handle, "set cache-secs 15")
+        }
+    }
+    
+    // Aggressive cleanup when paused
     private func performGentleCleanup() {
         guard let handle = mpvHandle, isInitialized, !isPlaying else { return }
 
-        print("🧹 Gentle MPV buffer cleanup (no playback interruption)...")
+        print("🧹 Aggressive buffer cleanup (paused)...")
 
-        // Gentle cache adjustment - NO buffer cycling during playback
-        mpv_command_string(handle, "set cache-secs 10")
+        // More aggressive when paused
+        mpv_command_string(handle, "set cache-secs 5")
 
-        // Small delay to let changes take effect
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            mpv_command_string(handle, "set cache-secs 30")
+            mpv_command_string(handle, "set cache-secs 15")
         }
     }
 
@@ -320,7 +338,7 @@ class MPVWrapper: ObservableObject {
         mpv_command_string(handle, "set cache-secs 5")
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            mpv_command_string(handle, "set cache-secs 30")
+            mpv_command_string(handle, "set cache-secs 15")  // Was 30s
         }
     }
 

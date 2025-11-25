@@ -909,7 +909,7 @@ class MPVPlayerViewModel: ObservableObject {
     }
 
     /// Keep chat list bounded to avoid long-session memory bloat
-    private func trimChatMessages(maxCount: Int = 500) {
+    private func trimChatMessages(maxCount: Int = 200) {  // Was 500
         if messages.count > maxCount {
             messages.removeFirst(messages.count - maxCount)
         }

@@ -139,13 +139,15 @@ class LocalAPIClient: ObservableObject {
         print("🎲 Shuffling with cycle-based seed: \(seed) (Cycle #\(cycleNumber), ~\(Int(cycleDuration/3600))h per cycle)")
         
         // Check cache first - use same movies for entire cycle
-        let cacheKey = "eventMovies_cycle_\(cycleNumber)"
+        // Include filter version in cache key to invalidate when filters change
+        let filterVersion = "v2_1990plus_no3d"  // Increment when filters change
+        let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
             // Validate cache - ensure all movies have posters
             let allHavePosters = cachedMovies.allSatisfy { $0.poster != nil }
             if allHavePosters {
-                print("✅ Using cached movies for cycle #\(cycleNumber) (\(cachedMovies.count) movies)")
+                print("✅ Using cached movies for cycle #\(cycleNumber) (filter: \(filterVersion), \(cachedMovies.count) movies)")
                 return cachedMovies
             } else {
                 print("⚠️ Cache invalid - some movies missing posters, regenerating...")
@@ -224,10 +226,10 @@ class LocalAPIClient: ObservableObject {
             )
         }
         
-        // Cache the movie list for this cycle
+        // Cache the movie list for this cycle (use same versioned key)
         if let encoded = try? JSONEncoder().encode(fullItems) {
             UserDefaults.standard.set(encoded, forKey: cacheKey)
-            print("💾 Cached \(fullItems.count) movies for cycle #\(cycleNumber)")
+            print("💾 Cached \(fullItems.count) movies for cycle #\(cycleNumber) (filter: \(filterVersion))")
         }
         
         print("📊 Ready to show \(fullItems.count) movies")

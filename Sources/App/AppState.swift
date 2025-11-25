@@ -406,7 +406,9 @@ class AppState: ObservableObject {
         print("🎬   currentWatchPartyRoom: \(currentWatchPartyRoom?.id ?? "nil")")
         print("🎬   currentView: \(currentView)")
         
+        print("🎬 Calling exitPlayer()...")
         await exitPlayer()
+        print("🎬 exitPlayer() completed")
         
         // Priority 1: Event playback (existing logic)
         if isEventPlayback {

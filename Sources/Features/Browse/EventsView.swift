@@ -22,9 +22,31 @@ struct EventsView: View {
                     VStack(alignment: .leading, spacing: 24) {
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Live Events")
-                                .font(.system(size: 32, weight: .bold))
-                                .foregroundColor(.primary)
+                            HStack {
+                                Text("Live Events")
+                                    .font(.system(size: 32, weight: .bold))
+                                    .foregroundColor(.primary)
+                                
+                                Spacer()
+                                
+                                // DEBUG: Force refresh button
+                                Button(action: {
+                                    print("🔄 Force refresh triggered")
+                                    loadEvents()
+                                }) {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "arrow.clockwise")
+                                        Text("Refresh")
+                                    }
+                                    .font(.system(size: 13, weight: .medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.blue)
+                                    .cornerRadius(8)
+                                }
+                                .buttonStyle(.plain)
+                            }
                             
                             Text("Curated cinema streaming 24/7. Join any movie in progress.")
                                 .font(.system(size: 16))
@@ -62,10 +84,13 @@ struct EventsView: View {
             }
         }
         .onAppear {
+            print("📅 EventsView.onAppear - allMovies.count: \(allMovies.count)")
             // Recalculate schedule on every appear to ensure status is current
             if !allMovies.isEmpty {
+                print("📅 Recalculating schedule with existing movies")
                 calculateDeterministicSchedule()
             } else {
+                print("📅 Loading events from API")
                 loadEvents()
             }
             startTimer()

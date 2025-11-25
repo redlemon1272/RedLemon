@@ -286,6 +286,7 @@ struct EventsView: View {
         }
         
         appState.isEventPlayback = true // Mark as event playback for seamless transition support
+        appState.currentWatchMode = .watchParty // Enable watch party mode for chat
         
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false // User is always guest in system events

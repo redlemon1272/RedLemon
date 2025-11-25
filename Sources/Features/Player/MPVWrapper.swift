@@ -279,7 +279,11 @@ class MPVWrapper: ObservableObject {
                mpv_get_property(handle, "eof-reached", MPV_FORMAT_STRING, &reason) >= 0,
                let r = reason.map({ String(cString: $0) }), r == "yes" {
                 print("🏁 MPV: Playback finished (EOF)")
+                print("🏁 MPV: Setting playbackFinished = true")
                 playbackFinished = true
+                print("🏁 MPV: playbackFinished is now \(playbackFinished)")
+            } else {
+                print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.map { String(cString: $0) } ?? "nil"))")
             }
             mpv_free(reason)
         case MPV_EVENT_IDLE:

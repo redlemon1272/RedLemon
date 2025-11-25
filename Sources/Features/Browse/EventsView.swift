@@ -237,6 +237,11 @@ struct EventsView: View {
             participants: [],
             state: .lobby, // Start in lobby state, will sync with server
             createdAt: event.startTime,
+            playlist: nil,  // Events don't use playlists
+            currentPlaylistIndex: 0,
+            lobbyDuration: 600,  // 10 minutes for events
+            shouldLoop: false,
+            isPersistent: true,  // Events are persistent
             selectedStreamHash: nil,
             selectedFileIdx: nil,
             selectedQuality: nil,

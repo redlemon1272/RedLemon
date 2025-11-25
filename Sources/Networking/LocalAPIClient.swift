@@ -730,7 +730,7 @@ struct AllStreamsResponse: Codable {
     let count: Int
 }
 
-struct MediaItem: Identifiable, Codable {
+struct MediaItem: Identifiable, Codable, Equatable {
     let id: String
     let type: String
     let name: String

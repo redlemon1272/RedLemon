@@ -317,9 +317,12 @@ struct MPVPlayerView: View {
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
         }
         .onChange(of: viewModel.playbackFinished) { finished in
+            print("🎬 MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
             if finished {
                 print("🎬 MPVPlayerView: Playback finished, triggering callback")
+                print("🎬 MPVPlayerView: onPlaybackFinished callback exists: \(onPlaybackFinished != nil)")
                 onPlaybackFinished?()
+                print("🎬 MPVPlayerView: Callback invoked")
             }
         }
         .onDisappear {

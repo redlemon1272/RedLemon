@@ -159,7 +159,16 @@ struct RoomListView: View {
                         posterURL: room.posterUrl,
                         participants: [host] + guests,
                         state: room.isPlaying ? .playing : .lobby,
-                        createdAt: room.createdAt
+                        createdAt: room.createdAt,
+                        playlist: nil,  // Will be synced from database if exists
+                        currentPlaylistIndex: 0,
+                        lobbyDuration: 300,
+                        shouldLoop: false,
+                        isPersistent: true,
+                        selectedStreamHash: nil,
+                        selectedFileIdx: nil,
+                        selectedQuality: nil,
+                        unlockedStreamURL: nil
                     )
                     allRooms.append(watchPartyRoom)
                 }

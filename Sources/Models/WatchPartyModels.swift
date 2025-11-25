@@ -1,5 +1,28 @@
 import Foundation
 
+// MARK: - Playlist Item
+
+struct PlaylistItem: Identifiable, Codable, Equatable {
+    let id: String
+    let mediaItem: MediaItem
+    let season: Int?
+    let episode: Int?
+    
+    init(mediaItem: MediaItem, season: Int? = nil, episode: Int? = nil) {
+        self.id = UUID().uuidString
+        self.mediaItem = mediaItem
+        self.season = season
+        self.episode = episode
+    }
+    
+    var displayTitle: String {
+        if let s = season, let e = episode {
+            return "\(mediaItem.name) - S\(s)E\(e)"
+        }
+        return mediaItem.name
+    }
+}
+
 // MARK: - Watch Party Room
 
 struct WatchPartyRoom: Identifiable {
@@ -16,6 +39,13 @@ struct WatchPartyRoom: Identifiable {
     var participants: [Participant]
     var state: RoomState
     var createdAt: Date
+
+    // MARK: - Playlist Support
+    var playlist: [PlaylistItem]?
+    var currentPlaylistIndex: Int
+    var lobbyDuration: TimeInterval  // Buffer between movies (default 5 min)
+    var shouldLoop: Bool
+    var isPersistent: Bool  // If true, room stays alive after movies
 
     // MARK: - Stream Synchronization
     var selectedStreamHash: String? // Host's selected stream infoHash
@@ -36,6 +66,25 @@ struct WatchPartyRoom: Identifiable {
 
     var readyCount: Int {
         participants.filter { $0.isReady }.count
+    }
+    
+    // MARK: - Playlist Helpers
+    
+    var hasPlaylist: Bool {
+        playlist != nil && !(playlist?.isEmpty ?? true)
+    }
+    
+    var currentPlaylistItem: PlaylistItem? {
+        guard let playlist = playlist,
+              currentPlaylistIndex < playlist.count else {
+            return nil
+        }
+        return playlist[currentPlaylistIndex]
+    }
+    
+    var isLastItemInPlaylist: Bool {
+        guard let playlist = playlist else { return false }
+        return currentPlaylistIndex >= playlist.count - 1
     }
 }
 

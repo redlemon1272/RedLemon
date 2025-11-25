@@ -401,22 +401,56 @@ class AppState: ObservableObject {
     }
 
     func handleMovieFinished() async {
-        print("🎬 Movie finished naturally")
-        
-        // Save final watch history
-        if let item = selectedMediaItem, let duration = selectedStream?.size { // Using size as proxy if duration unavailable, but better to use actual duration
-             // Note: Watch history is usually saved periodically by the player view model
-        }
+        print("🎬 AppState.handleMovieFinished() called")
+        print("🎬   isEventPlayback: \(isEventPlayback)")
+        print("🎬   currentWatchPartyRoom: \(currentWatchPartyRoom?.id ?? "nil")")
+        print("🎬   currentView: \(currentView)")
         
         await exitPlayer()
         
-        // If this was an event, auto-transition to the next event lobby
+        // Priority 1: Event playback (existing logic)
         if isEventPlayback {
             print("🔄 Event finished - transitioning to Events flow")
+            print("🔄   Setting currentView = .events")
+            print("🔄   Setting shouldAutoJoinLobby = true")
             await MainActor.run {
                 currentView = .events
                 shouldAutoJoinLobby = true
             }
+            print("🔄   Transition complete - currentView is now \(currentView)")
+            return
+        }
+        
+        // Priority 2: Watch party with playlist (NEW)
+        if let room = currentWatchPartyRoom, room.hasPlaylist {
+            print("🔄 Playlist item finished - returning to lobby")
+            await handlePlaylistTransition(room: room)
+            return
+        }
+        
+        // Priority 3: Single movie watch party (persistent by default now)
+        if let room = currentWatchPartyRoom, room.isPersistent {
+            print("🔄 Movie finished - returning to persistent lobby")
+            await MainActor.run {
+                currentView = .watchPartyLobby
+            }
+            return
+        }
+        
+        // Fallback: Solo watching (no action needed, just exit)
+        print("✅ Playback finished - solo watching")
+    }
+
+    // NEW: Handle playlist progression
+    private func handlePlaylistTransition(room: WatchPartyRoom) async {
+        await MainActor.run {
+            // Return to lobby
+            currentView = .watchPartyLobby
+            
+            // The lobby will handle:
+            // 1. Showing countdown (using room.lobbyDuration)
+            // 2. Auto-advancing to next item
+            // 3. Looping if needed
         }
     }
 
@@ -512,7 +546,16 @@ class AppState: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: [hostParticipant],
                 state: .lobby,
-                createdAt: room.createdAt
+                createdAt: room.createdAt,
+                playlist: nil,  // Start with no playlist
+                currentPlaylistIndex: 0,
+                lobbyDuration: 300,  // 5 minutes default
+                shouldLoop: false,
+                isPersistent: true,  // All watch parties are persistent now
+                selectedStreamHash: nil,
+                selectedFileIdx: nil,
+                selectedQuality: nil,
+                unlockedStreamURL: nil
             )
 
             // Set state
@@ -597,7 +640,16 @@ class AppState: ObservableObject {
                 posterURL: room.posterUrl,
                 participants: watchPartyParticipants,
                 state: .lobby,
-                createdAt: room.createdAt
+                createdAt: room.createdAt,
+                playlist: nil,  // Will be synced from host if exists
+                currentPlaylistIndex: 0,
+                lobbyDuration: 300,
+                shouldLoop: false,
+                isPersistent: true,
+                selectedStreamHash: nil,
+                selectedFileIdx: nil,
+                selectedQuality: nil,
+                unlockedStreamURL: nil
             )
             
             if let season = room.season, let episode = room.episode {

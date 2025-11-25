@@ -16,6 +16,11 @@ class LobbyViewModel: ObservableObject {
     @Published var backdropURL: String?
     @Published var logoURL: String?
     @Published var timeUntilStart: TimeInterval = 0 // Time until event officially starts
+    
+    // NEW: Playlist Support
+    @Published var playlist: [PlaylistItem] = []
+    @Published var currentPlaylistIndex: Int = 0
+    @Published var isPlaylistMode: Bool = false
 
     // Realtime connection status for UI feedback
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
@@ -77,6 +82,23 @@ class LobbyViewModel: ObservableObject {
         // Add initial join message
         if isHost {
             addMessage(.userJoined, userName: "Host")
+        }
+        
+        // NEW: Initialize playlist state
+        if let roomPlaylist = room.playlist {
+            self.playlist = roomPlaylist
+            self.currentPlaylistIndex = room.currentPlaylistIndex
+            self.isPlaylistMode = !roomPlaylist.isEmpty
+        }
+        
+        // Check if we should auto-start next item (returning from playback)
+        // We do this in a task to ensure appState is available
+        Task { @MainActor in
+            // Wait a brief moment for appState to be set
+            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
+            if self.isHost && self.isPlaylistMode {
+                self.checkForAutoAdvance()
+            }
         }
     }
 
@@ -1251,9 +1273,111 @@ class LobbyViewModel: ObservableObject {
         // Realtime connections are persistent and don't need manual restart
         print("⚠️ restartRealtimeSignaling called but is deprecated with Realtime implementation")
     }
-}
 
 // MARK: - WatchPartyManagerDelegate
+
+    // MARK: - Playlist Management
+
+    func checkForAutoAdvance() {
+        guard isHost, isPlaylistMode else { return }
+        
+        // If we just finished a movie and there's a next item, start countdown
+        if currentPlaylistIndex < playlist.count {
+            startPlaylistCountdown()
+        } else if room.shouldLoop {
+            currentPlaylistIndex = 0
+            startPlaylistCountdown()
+        } else {
+            // Playlist finished
+            print("✅ Playlist completed")
+        }
+    }
+    
+    private func startPlaylistCountdown() {
+        // Use room's lobby duration
+        self.timeUntilStart = room.lobbyDuration
+        
+        // Start timer
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+            
+            Task { @MainActor in
+                self.timeUntilStart -= 1
+                
+                if self.timeUntilStart <= 0 {
+                    timer.invalidate()
+                    self.startNextPlaylistItem()
+                }
+            }
+        }
+    }
+    
+    private func startNextPlaylistItem() {
+        guard let appState = appState,
+              currentPlaylistIndex < playlist.count else {
+            return
+        }
+        
+        let item = playlist[currentPlaylistIndex]
+        
+        // Update room's current media
+        room.mediaItem = item.mediaItem
+        room.season = item.season
+        room.episode = item.episode
+        
+        // Update index in database
+        updatePlaylistIndex(currentPlaylistIndex)
+        
+        // Start playback
+        Task {
+            await startMovie(appState: appState)
+        }
+    }
+    
+    func addToPlaylist(_ item: PlaylistItem) {
+        guard isHost else { return }
+        
+        playlist.append(item)
+        isPlaylistMode = true
+        
+        // Update database
+        updatePlaylistInDatabase()
+    }
+    
+    func removeFromPlaylist(at index: Int) {
+        guard isHost, index < playlist.count else { return }
+        
+        playlist.remove(at: index)
+        
+        if playlist.isEmpty {
+            isPlaylistMode = false
+        }
+        
+        updatePlaylistInDatabase()
+    }
+    
+    func movePlaylistItem(from: Int, to: Int) {
+        guard isHost else { return }
+        
+        let item = playlist.remove(at: from)
+        playlist.insert(item, at: to)
+        
+        updatePlaylistInDatabase()
+    }
+    
+    private func updatePlaylistInDatabase() {
+        // Placeholder for database update
+        print("💾 Updating playlist in database (Placeholder)")
+    }
+    
+    private func updatePlaylistIndex(_ index: Int) {
+        // Placeholder for database update
+        print("💾 Updating playlist index in database (Placeholder)")
+    }
+}
 
 extension LobbyViewModel: WatchPartyManagerDelegate {
     func watchPartyManager(_ manager: WatchPartyManager, didUpdateStream streamInfo: StreamInfo) {

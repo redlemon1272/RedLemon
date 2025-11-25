@@ -252,6 +252,51 @@ struct EventsView: View {
         // Use deterministic room ID based on movie IMDB ID
         let roomId = "event_\(event.mediaItem.id)"
         
+        // Create/join event room in Supabase for chat
+        Task {
+            do {
+                guard let userId = appState.currentUserId else {
+                    print("⚠️ No user ID - skipping room creation")
+                    await createLocalEventRoom(event: event, roomId: roomId)
+                    return
+                }
+                
+                // Try to get existing room
+                if let existingRoom = try await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    print("✅ Event room already exists: \(roomId)")
+                    // Join the existing room
+                    try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
+                } else {
+                    // Create new event room
+                    print("📝 Creating new event room: \(roomId)")
+                    _ = try await SupabaseClient.shared.createRoom(
+                        id: roomId,
+                        name: event.mediaItem.name,
+                        hostUserId: userId, // First user becomes "host" for DB purposes
+                        hostUsername: "RedLemon Events",
+                        streamHash: nil,
+                        imdbId: event.mediaItem.id,
+                        posterUrl: event.mediaItem.poster,
+                        backdropUrl: event.mediaItem.background,
+                        season: nil,
+                        episode: nil,
+                        isPublic: true
+                    )
+                    // Join the room we just created
+                    try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
+                }
+                
+                await createLocalEventRoom(event: event, roomId: roomId)
+            } catch {
+                print("❌ Failed to create/join event room: \(error)")
+                // Fall back to local-only room (no chat sync)
+                await createLocalEventRoom(event: event, roomId: roomId)
+            }
+        }
+    }
+    
+    @MainActor
+    private func createLocalEventRoom(event: EventItem, roomId: String) {
         // Create a WatchPartyRoom for this event
         let room = WatchPartyRoom(
             id: roomId,

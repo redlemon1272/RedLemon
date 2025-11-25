@@ -42,16 +42,31 @@ actor UserResetManager {
         NSLog("   - Removed watch history from UserDefaults")
 
         // Clear any other user-related UserDefaults
-        let userDefaultsKeys = [
-            "redlemon.username",
-            "watchHistory",
-            "lastSearchQuery",
-            "selectedQuality"
-        ]
-
-        for key in userDefaultsKeys {
-            UserDefaults.standard.removeObject(forKey: key)
+        // Clear ALL app data using persistent domain
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            NSLog("   - Removed persistent domain for \(bundleID)")
+        } else {
+            // Fallback: Clear known keys if bundle ID fails
+            let userDefaultsKeys = [
+                "redlemon.username",
+                "watchHistory",
+                "lastSearchQuery",
+                "selectedQuality"
+            ]
+            
+            // Also clear event cache keys
+            for key in UserDefaults.standard.dictionaryRepresentation().keys {
+                if key.hasPrefix("eventMovies_cycle_") {
+                    UserDefaults.standard.removeObject(forKey: key)
+                }
+            }
+            
+            for key in userDefaultsKeys {
+                UserDefaults.standard.removeObject(forKey: key)
+            }
         }
+        
         UserDefaults.standard.synchronize()
         NSLog("   - Cleared all user-related UserDefaults")
 

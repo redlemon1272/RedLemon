@@ -48,7 +48,7 @@ struct ChatOverlayView: View {
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.3), radius: 20)
-        //.drawingGroup() // REMOVED: Causes input issues with TextField
+        .compositingGroup() // Optimize transparency blending without breaking input
         .padding(.trailing, 20)
         .padding(.vertical, 60)
         .onAppear {
@@ -131,6 +131,7 @@ struct ChatOverlayView: View {
                         .id(message.id)
                     }
                 }
+                .drawingGroup() // GPU accelerate the message list (safe: no inputs)
                 .padding()
             }
             .onChange(of: viewModel.messages.count) { _ in
@@ -191,6 +192,7 @@ struct ChatOverlayView: View {
                         }
                     }
                 }
+                .drawingGroup() // GPU accelerate the message list (safe: no inputs)
                 .padding()
             }
             .onChange(of: getMessageCount()) { _ in

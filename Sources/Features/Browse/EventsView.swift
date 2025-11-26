@@ -72,7 +72,10 @@ struct EventsView: View {
                             // Events List
                             LazyVStack(spacing: 20) {
                                 ForEach(events) { event in
-                                    HeroEventCard(event: event) {
+                                    // Check if this event should have its lobby forced open (because previous event finished)
+                                    let isLobbyOverride = (event.index == 1 && events.first?.isFinished == true)
+                                    
+                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
                                         joinEvent(event)
                                     }
                                 }
@@ -212,12 +215,14 @@ struct EventsView: View {
             }
             
             // Check for auto-join (Seamless Transition from finished movie)
+            // Check for auto-join (Seamless Transition from finished movie)
             if self.appState.shouldAutoJoinLobby {
                 // Priority: 1. Lobby (Next event), 2. Live (Current event if we just joined late/reloaded)
-                if let lobbyEvent = scheduledEvents.first(where: { $0.isInLobby }) {
+                // CRITICAL: Check finishedEventIds to prevent re-joining a movie we just finished
+                if let lobbyEvent = scheduledEvents.first(where: { $0.isInLobby || ($0.index == 1 && scheduledEvents.first?.isFinished == true) }) {
                     print("🔄 Auto-joining Lobby event: \(lobbyEvent.mediaItem.name)")
                     self.joinEvent(lobbyEvent)
-                } else if let liveEvent = scheduledEvents.first(where: { $0.isLive && !$0.isFinished }) {
+                } else if let liveEvent = scheduledEvents.first(where: { $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id) }) {
                     print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
                     self.joinEvent(liveEvent)
                 }
@@ -345,6 +350,8 @@ struct EventsView: View {
             appState.shouldAutoJoinLobby = true
         }
         
+        appState.currentEventId = event.id // Track current event ID
+        
         appState.isEventPlayback = true // Mark as event playback for seamless transition support
         appState.currentWatchMode = .watchParty // Enable watch party mode for chat
         
@@ -392,6 +399,7 @@ struct EventItem: Identifiable {
 
 struct HeroEventCard: View {
     let event: EventItem
+    var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
     let onJoin: () -> Void
     
     @State private var currentTime = TimeService.shared.now
@@ -401,8 +409,8 @@ struct HeroEventCard: View {
         Button(action: {
             // Allow joining if:
             // 1. It's the live event (index 0) and not finished, OR
-            // 2. It's the next event (index 1) and in lobby state
-            if (event.isLive && !event.isFinished) || event.isInLobby {
+            // 2. It's the next event (index 1) and in lobby state (or override is true)
+            if (event.isLive && !event.isFinished) || event.isInLobby || isLobbyOverride {
                 onJoin()
             }
         }) {
@@ -459,20 +467,24 @@ struct HeroEventCard: View {
                                     .fill(Color.gray.opacity(0.8))
                                     .shadow(color: .gray.opacity(0.3), radius: 6, x: 0, y: 2)
                             )
-                        } else if event.isInLobby {
+
+                        } else if event.isInLobby || isLobbyOverride {
                             HStack(spacing: 6) {
-                                Image(systemName: "person.2.fill")
-                                    .font(.system(size: 11))
-                                Text("LOBBY OPEN")
-                                    .font(.system(size: 13, weight: .bold))
+                                Circle()
+                                    .fill(Color.yellow)
+                                    .frame(width: 8, height: 8)
+                                    .shadow(color: .yellow.opacity(0.6), radius: 4)
+                                Text("Lobby Open")
+                                    .fontWeight(.bold)
                                     .foregroundColor(.white)
                             }
-                            .padding(.horizontal, 12)
+                            .padding(.horizontal, 10)
                             .padding(.vertical, 6)
-                            .background(
-                                Capsule()
-                                    .fill(Color.blue.opacity(0.9))
-                                    .shadow(color: .blue.opacity(0.4), radius: 8, x: 0, y: 2)
+                            .background(Color.yellow.opacity(0.2))
+                            .cornerRadius(20)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.yellow.opacity(0.3), lineWidth: 1)
                             )
                         } else if event.isLive {
                             HStack(spacing: 6) {

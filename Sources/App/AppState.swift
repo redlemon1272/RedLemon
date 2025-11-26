@@ -54,6 +54,8 @@ class AppState: ObservableObject {
     @Published var showUsernameSetup: Bool = false  // Show username setup dialog
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
     @Published var isEventPlayback: Bool = false // Track if this is a public event playback
+    @Published var currentEventId: String? = nil // Track ID of current event
+    @Published var finishedEventIds: Set<String> = [] // Track IDs of finished events to prevent auto-rejoin
 
     // User authentication (simple username)
     @Published var currentUsername: String = ""
@@ -415,6 +417,16 @@ class AppState: ObservableObject {
             print("🔄 Event finished - transitioning to Events flow")
             print("🔄   Setting currentView = .events")
             print("🔄   Setting shouldAutoJoinLobby = true")
+            
+            // Mark current event as finished to prevent auto-rejoin
+            if let eventId = currentEventId {
+                print("🔄   Marking event \(eventId) as finished")
+                await MainActor.run {
+                    finishedEventIds.insert(eventId)
+                    currentEventId = nil
+                }
+            }
+            
             await MainActor.run {
                 currentView = .events
                 shouldAutoJoinLobby = true

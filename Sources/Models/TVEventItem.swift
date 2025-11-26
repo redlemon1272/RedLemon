@@ -15,6 +15,7 @@ struct TVEventItem: Identifiable {
     let currentEpisode: Int
     let startTime: Date         // When current episode started
     let episodeRuntime: TimeInterval
+    var participantCount: Int = 0  // Number of participants in the event room
     
     var endTime: Date {
         startTime.addingTimeInterval(episodeRuntime)

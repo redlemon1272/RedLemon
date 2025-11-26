@@ -111,6 +111,14 @@ struct EventsView: View {
                 loadEvents()
             }
             startTimer()
+            
+            // CRITICAL: If returning from finished event, recalculate immediately
+            if appState.shouldAutoJoinLobby {
+                print("🔄 Returned from finished event - forcing immediate schedule update")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.calculateDeterministicSchedule()
+                }
+            }
         }
         .onChange(of: timeService.isSynced) { isSynced in
             if isSynced {
@@ -221,7 +229,7 @@ struct EventsView: View {
             }
             
             scheduledEvents.append(EventItem(
-                id: UUID().uuidString,
+                id: movie.id,  // Use IMDB ID for consistent tracking
                 mediaItem: movie,
                 startTime: startTime,
                 duration: duration,
@@ -232,6 +240,11 @@ struct EventsView: View {
         
         DispatchQueue.main.async {
             self.events = scheduledEvents
+            
+            // Fetch participant counts for each event
+            Task {
+                await self.updateParticipantCounts()
+            }
             
             // Debug log
             if let live = scheduledEvents.first {
@@ -252,6 +265,49 @@ struct EventsView: View {
                     print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
                     self.joinEvent(liveEvent)
                 }
+            }
+        }
+    }
+    
+    @MainActor
+    private func updateParticipantCounts() async {
+        let currentEvents = events
+        let currentTVEvents = tvEvents
+        
+        // Fetch in background task to avoid blocking main thread
+        let fetchedCounts = await Task.detached {
+            var newCounts: [String: Int] = [:]
+            
+            // Fetch for Movie Events
+            for event in currentEvents {
+                let roomId = "event_\(event.id)"
+                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    newCounts[event.id] = roomState.participantsCount
+                }
+            }
+            
+            // Fetch for TV Events
+            for event in currentTVEvents {
+                let roomId = "event_\(event.id)"
+                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    newCounts[event.id] = roomState.participantsCount
+                }
+            }
+            
+            return newCounts
+        }.value
+        
+        // Update Movie Events state on main actor
+        for i in 0..<events.count {
+            if let count = fetchedCounts[events[i].id] {
+                events[i].participantCount = count
+            }
+        }
+        
+        // Update TV Events state on main actor
+        for i in 0..<tvEvents.count {
+            if let count = fetchedCounts[tvEvents[i].id] {
+                tvEvents[i].participantCount = count
             }
         }
     }
@@ -394,6 +450,7 @@ struct EventItem: Identifiable {
     let duration: TimeInterval  // Total event slot duration (includes buffer)
     let actualMovieDuration: TimeInterval  // Actual movie runtime (no buffer)
     let index: Int  // Position in the list (0 = live, 1-3 = upcoming)
+    var participantCount: Int = 0  // Number of participants in the event room
     
     var endTime: Date {
         startTime.addingTimeInterval(duration)
@@ -546,6 +603,27 @@ struct HeroEventCard: View {
                         }
                         
                         Spacer()
+                        
+                        // Participant Count
+                        if event.participantCount > 0 {
+                            HStack(spacing: 4) {
+                                Image(systemName: "person.2.fill")
+                                    .font(.system(size: 11))
+                                Text("\(event.participantCount)")
+                                    .font(.system(size: 13, weight: .semibold))
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.white.opacity(0.2))
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                        }
                     }
                     .padding(.top, 20)
                     .padding(.horizontal, 20)

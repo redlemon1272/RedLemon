@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ChatOverlayView: View {
     @ObservedObject var viewModel: MPVPlayerViewModel
+    @EnvironmentObject var appState: AppState
     @ObservedObject private var socialService = SocialService.shared
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
@@ -99,6 +100,27 @@ struct ChatOverlayView: View {
                 }
                 
                 Spacer()
+                
+                // Participant Count (for room chat only)
+                if case .room = chatMode, let room = appState.currentWatchPartyRoom {
+                    HStack(spacing: 4) {
+                        Image(systemName: "person.2.fill")
+                            .font(.system(size: 11))
+                        Text("\(room.participants.count)")
+                            .font(.system(size: 13, weight: .semibold))
+                    }
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 6)
+                    .background(
+                        Capsule()
+                            .fill(Color.white.opacity(0.2))
+                            .overlay(
+                                Capsule()
+                                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                            )
+                    )
+                }
                 
                 Button(action: { viewModel.toggleChat() }) {
                     Image(systemName: "xmark.circle.fill")

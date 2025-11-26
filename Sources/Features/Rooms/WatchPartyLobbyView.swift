@@ -213,25 +213,25 @@ struct WatchPartyLobbyView: View {
                             // Realtime Connection Status Indicator
                             ConnectionStatusRow(status: viewModel.realtimeConnectionStatus)
 
-                            // Only show participants for non-event rooms
-                            if !room.id.hasPrefix("event_") {
-                                // Participants header
-                                HStack {
-                                    Image(systemName: "person.2.fill")
-                                        .foregroundColor(.white.opacity(0.7))
-                                    Text("Participants (\(viewModel.participants.count))")
-                                        .font(.headline)
-                                        .foregroundColor(.white)
+                            // Participants header (Always show count)
+                            HStack {
+                                Image(systemName: "person.2.fill")
+                                    .foregroundColor(.white.opacity(0.7))
+                                Text("Participants (\(viewModel.participants.count))")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
 
-                                    if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
-                                        Text("• \(room.readyCount) ready")
-                                            .font(.caption)
-                                            .foregroundColor(.green)
-                                    }
-
-                                    Spacer()
+                                if room.readyCount > 0 && room.readyCount < viewModel.participants.count {
+                                    Text("• \(room.readyCount) ready")
+                                        .font(.caption)
+                                        .foregroundColor(.green)
                                 }
 
+                                Spacer()
+                            }
+
+                            // Only show participant list for non-event rooms (to avoid clutter in large events)
+                            if !room.id.hasPrefix("event_") {
                                 VStack(spacing: 6) {
                                     ForEach(viewModel.participants) { participant in
                                         ParticipantRow(

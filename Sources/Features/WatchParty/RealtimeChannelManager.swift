@@ -47,7 +47,7 @@ actor RealtimeChannelManager {
     private var connectionStateCallback: ((RealtimeConnectionState) -> Void)?
 
     // Presence tracking
-    private var presenceCallback: ((PresenceAction, String) -> Void)?
+    private var presenceCallback: ((PresenceAction, String, [String: Any]?) -> Void)?
 
     // MARK: - Initialization
 
@@ -109,9 +109,9 @@ actor RealtimeChannelManager {
         }
 
         // Handle presence changes
-        await realtimeClient.onPresence { action, userId, _ in
+        await realtimeClient.onPresence { action, userId, metadata in
             Task { @MainActor in
-                await self.handlePresenceUpdate(action: action, userId: userId)
+                await self.handlePresenceUpdate(action: action, userId: userId, metadata: metadata)
             }
         }
 
@@ -123,8 +123,8 @@ actor RealtimeChannelManager {
         }
     }
 
-    private func handlePresenceUpdate(action: PresenceAction, userId: String) {
-        presenceCallback?(action, userId)
+    private func handlePresenceUpdate(action: PresenceAction, userId: String, metadata: [String: Any]?) {
+        presenceCallback?(action, userId, metadata)
     }
 
     private func handleBroadcastMessage(_ payload: [String: Any]) async {
@@ -138,9 +138,9 @@ actor RealtimeChannelManager {
         }
     }
 
-    private func handlePresenceChange(_ action: PresenceAction, userId: String) async {
+    private func handlePresenceChange(_ action: PresenceAction, userId: String, metadata: [String: Any]?) async {
         print("👥 Presence \(action == .join ? "joined" : "left"): \(userId)")
-        presenceCallback?(action, userId)
+        presenceCallback?(action, userId, metadata)
     }
 
     private func handleConnectionChange(_ connected: Bool) async {
@@ -216,7 +216,7 @@ actor RealtimeChannelManager {
         try await realtimeClient.track(userId: userId, metadata: state)
     }
 
-    func onPresenceChange(_ callback: @escaping (PresenceAction, String) -> Void) {
+    func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         self.presenceCallback = callback
     }
 
@@ -314,7 +314,7 @@ actor RealtimeChannelManager {
     }
 
     /// Set presence callback (for compatibility)
-    func setPresenceCallback(_ callback: @escaping (PresenceAction, String) -> Void) {
+    func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void) {
         self.presenceCallback = callback
     }
 

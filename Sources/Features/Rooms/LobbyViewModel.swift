@@ -250,9 +250,9 @@ class LobbyViewModel: ObservableObject {
                 }
 
                 if !isHost {
-                    // Guest joining - notify everyone
+                    // Guest joining - send join message via Realtime only
+                    // Don't add message locally to avoid duplicates
                     let guestName = appState?.currentUsername ?? "Guest"
-                    addMessage(.userJoined, userName: guestName)
 
                     // Send join message via Realtime
                     let joinMsg = SyncMessage(

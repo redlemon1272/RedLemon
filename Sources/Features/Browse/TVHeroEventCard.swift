@@ -71,7 +71,29 @@ struct TVHeroEventCard: View {
                                 .shadow(color: .red.opacity(0.5), radius: 8, x: 0, y: 2)
                         )
                         
+                        
                         Spacer()
+                        
+                        // Participant Count
+                        if tvEvent.participantCount > 0 {
+                            HStack(spacing: 4) {
+                                Image(systemName: "person.2.fill")
+                                    .font(.system(size: 11))
+                                Text("\(tvEvent.participantCount)")
+                                    .font(.system(size: 13, weight: .semibold))
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(
+                                Capsule()
+                                    .fill(Color.white.opacity(0.2))
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                    )
+                            )
+                        }
                     }
                     .padding(.top, 20)
                     .padding(.horizontal, 20)

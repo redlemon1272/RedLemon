@@ -864,6 +864,13 @@ class MPVWrapper: ObservableObject {
         // Stop playback
         _ = mpv_command_string(handle, "stop")
         isPlaying = false
+        
+        // Stop internal timers immediately
+        timeUpdateTimer?.invalidate()
+        timeUpdateTimer = nil
+        
+        memoryMonitorTimer?.invalidate()
+        memoryMonitorTimer = nil
 
         // Natural cleanup point when stopping
         performNaturalCleanup()

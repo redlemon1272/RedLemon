@@ -37,6 +37,12 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Cleanup state
     private var hasCleanedUp: Bool = false
+    private var mpvObserverTasks: [Task<Void, Never>] = []
+    
+    // Throttling State
+    private var lastTimeUpdate: Date = .distantPast
+    private var pendingChatMessages: [ChatMessage] = []
+    private var isFlushingChat: Bool = false
 
     // Watch party state
     @Published var isInWatchParty: Bool = false  // Track if currently in watch party mode
@@ -281,24 +287,30 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Monitor MPV state changes
-        Task {
-            for await _ in mpvWrapper.$isPlaying.values {
-                if mpvWrapper.isPlaying && self.isLoading {
+        // Monitor MPV state changes
+        let isPlayingTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await _ in self.mpvWrapper.$isPlaying.values {
+                if self.mpvWrapper.isPlaying && self.isLoading {
                     // Video started playing - hide poster
                     self.onVideoReady()
                 }
-                self.isPlaying = mpvWrapper.isPlaying
+                self.isPlaying = self.mpvWrapper.isPlaying
             }
         }
+        mpvObserverTasks.append(isPlayingTask)
         
-        Task {
-            for await finished in mpvWrapper.$playbackFinished.values {
+        let finishedTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await finished in self.mpvWrapper.$playbackFinished.values {
                 self.playbackFinished = finished
             }
         }
+        mpvObserverTasks.append(finishedTask)
 
-        Task {
-            for await time in mpvWrapper.$currentTime.values {
+        let timeTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await time in self.mpvWrapper.$currentTime.values {
                 // Throttle UI updates to ~5Hz (every 200ms)
                 let now = Date()
                 if now.timeIntervalSince(self.lastTimeUpdate) > 0.2 {
@@ -307,12 +319,15 @@ class MPVPlayerViewModel: ObservableObject {
                 }
             }
         }
+        mpvObserverTasks.append(timeTask)
 
-        Task {
-            for await dur in mpvWrapper.$duration.values {
+        let durationTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await dur in self.mpvWrapper.$duration.values {
                 self.duration = dur
             }
         }
+        mpvObserverTasks.append(durationTask)
     }
 
     // MARK: - Metadata Fetching
@@ -960,6 +975,17 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Just stop playback - layer will handle OpenGL cleanup
         mpvWrapper.stop()
+        
+        // Cancel all MPV observer tasks
+        print("🛑 Cancelling \(mpvObserverTasks.count) MPV observer tasks...")
+        for task in mpvObserverTasks {
+            task.cancel()
+        }
+        mpvObserverTasks.removeAll()
+        
+        // Cancel pending play task
+        pendingPlayTask?.cancel()
+        pendingPlayTask = nil
     }
 
     deinit {
@@ -1155,26 +1181,60 @@ extension MPVPlayerViewModel {
         )
         
         // Set up presence callback for Post-Load Ready Gate
-        await realtimeManager?.setPresenceCallback { [weak self] action, userId in
+        // Set up presence callback for Post-Load Ready Gate AND UI Updates
+        await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
             Task { @MainActor in
                 guard let self = self else { return }
-                // Only track guests (not self/host if we are host)
-                guard userId != self.currentUserId else { return }
                 
-                switch action {
-                case .join:
-                    print("👤 Post-Load Gate: Guest joined presence: \(userId)")
-                    self.connectedGuestIds.insert(userId)
-                    if self.isWatchPartyHost {
-                        self.checkIfAllGuestsReady()
+                // Update AppState participants list for UI
+                if let room = self.appState?.currentWatchPartyRoom {
+                    var updatedParticipants = room.participants
+                    
+                    switch action {
+                    case .join:
+                        // Check if already exists
+                        if !updatedParticipants.contains(where: { $0.id == userId }) {
+                            // Extract metadata
+                            let username = metadata?["username"] as? String ?? "User"
+                            let avatarUrl = metadata?["avatar_url"] as? String
+                            
+                            let newParticipant = Participant(
+                                id: userId,
+                                name: username,
+                                isHost: metadata?["is_host"] as? Bool ?? false,
+                                isReady: false,
+                                joinedAt: Date()
+                            )
+                            updatedParticipants.append(newParticipant)
+                            print("👤 Participant joined: \(username) (\(userId))")
+                        }
+                        
+                        // Post-Load Gate Logic
+                        if userId != self.currentUserId {
+                            print("👤 Post-Load Gate: Guest joined presence: \(userId)")
+                            self.connectedGuestIds.insert(userId)
+                            if self.isWatchPartyHost {
+                                self.checkIfAllGuestsReady()
+                            }
+                        }
+                        
+                    case .leave:
+                        updatedParticipants.removeAll(where: { $0.id == userId })
+                        print("👋 Participant left: \(userId)")
+                        
+                        // Post-Load Gate Logic
+                        if userId != self.currentUserId {
+                            print("👋 Post-Load Gate: Guest left presence: \(userId)")
+                            self.connectedGuestIds.remove(userId)
+                            self.readyGuestIds.remove(userId)
+                            if self.isWatchPartyHost {
+                                self.checkIfAllGuestsReady()
+                            }
+                        }
                     }
-                case .leave:
-                    print("👋 Post-Load Gate: Guest left presence: \(userId)")
-                    self.connectedGuestIds.remove(userId)
-                    self.readyGuestIds.remove(userId) // Remove from ready set too
-                    if self.isWatchPartyHost {
-                        self.checkIfAllGuestsReady()
-                    }
+                    
+                    // Update room state
+                    self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
                 }
             }
         }
@@ -1426,9 +1486,9 @@ extension MPVPlayerViewModel {
                     username: username,
                     text: text,
                     timestamp: Date(timeIntervalSince1970: message.timestamp)
-                )
+                
+                // Batch chat updates to avoid UI thrashing
                 await MainActor.run {
-                    // Batch chat updates to avoid UI thrashing
                     pendingChatMessages.append(chatMessage)
                     
                     if !isFlushingChat {

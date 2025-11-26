@@ -38,7 +38,7 @@ extension EventsView {
                     
                     // Fetch series metadata
                     if let mediaItem = try? await self.apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
-                        return TVEventItem(
+                        var item = TVEventItem(
                             id: series.id,
                             series: series,
                             mediaItem: mediaItem,
@@ -47,6 +47,14 @@ extension EventsView {
                             startTime: playbackState.startTime,
                             episodeRuntime: playbackState.episodeRuntime
                         )
+                        
+                        // Fetch participant count
+                        let roomId = "event_\(series.id)"
+                        if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                            item.participantCount = roomState.participantsCount
+                        }
+                        
+                        return item
                     }
                     return nil
                 }

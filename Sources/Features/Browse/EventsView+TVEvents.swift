@@ -27,34 +27,32 @@ extension EventsView {
     
     // MARK: - TV Event Functions
     
-    func loadTVEvents() {
-        Task {
-            print("📺 Loading TV events...")
-            var tvEventItems: [TVEventItem] = []
+    func loadTVEvents() async {
+        print("📺 Loading TV events...")
+        var tvEventItems: [TVEventItem] = []
+        
+        for series in TVEventData.allSeries {
+            // Calculate current episode
+            let playbackState = await TVEventScheduler.getCurrentEpisode(for: series)
             
-            for series in TVEventData.allSeries {
-                // Calculate current episode
-                let playbackState = await TVEventScheduler.getCurrentEpisode(for: series)
-                
-                // Fetch series metadata
-                if let mediaItem = try? await apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
-                    let tvEventItem = TVEventItem(
-                        id: series.id,
-                        series: series,
-                        mediaItem: mediaItem,
-                        currentSeason: playbackState.season,
-                        currentEpisode: playbackState.episode,
-                        startTime: playbackState.startTime,
-                        episodeRuntime: playbackState.episodeRuntime
-                    )
-                    tvEventItems.append(tvEventItem)
-                }
+            // Fetch series metadata
+            if let mediaItem = try? await apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
+                let tvEventItem = TVEventItem(
+                    id: series.id,
+                    series: series,
+                    mediaItem: mediaItem,
+                    currentSeason: playbackState.season,
+                    currentEpisode: playbackState.episode,
+                    startTime: playbackState.startTime,
+                    episodeRuntime: playbackState.episodeRuntime
+                )
+                tvEventItems.append(tvEventItem)
             }
-            
-            DispatchQueue.main.async {
-                self.tvEvents = tvEventItems
-                print("✅ Loaded \(tvEventItems.count) TV events")
-            }
+        }
+        
+        await MainActor.run {
+            self.tvEvents = tvEventItems
+            print("✅ Loaded \(tvEventItems.count) TV events")
         }
     }
     
@@ -106,7 +104,7 @@ extension EventsView {
     }
     
     @MainActor
-    func createLocalTVEventRoom(tvEvent: TVEventItem, roomId: String) {
+    func createLocalTVEventRoom(tvEvent: TVEventItem, roomId: String) async {
         let room = WatchPartyRoom(
             id: roomId,
             hostId: "system",
@@ -138,6 +136,29 @@ extension EventsView {
         appState.currentWatchMode = .watchParty
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false
-        appState.currentView = .player  // Go straight to player (no lobby)
+        
+        // Set selection details
+        appState.selectedMediaItem = tvEvent.mediaItem
+        appState.selectedSeason = tvEvent.currentSeason
+        appState.selectedEpisode = tvEvent.currentEpisode
+        
+        // Calculate seek position (time elapsed in current episode)
+        let now = Date().timeIntervalSince1970
+        let elapsed = now - tvEvent.startTime.timeIntervalSince1970
+        if elapsed > 0 {
+            appState.resumeFromTimestamp = elapsed
+            print("⏩ Seeking to \(elapsed)s (Live TV)")
+        } else {
+            appState.resumeFromTimestamp = 0
+        }
+        
+        // Trigger playback
+        await appState.playMedia(
+            tvEvent.mediaItem,
+            quality: .fullHD,
+            watchMode: .watchParty,
+            roomId: roomId,
+            isHost: false
+        )
     }
 }

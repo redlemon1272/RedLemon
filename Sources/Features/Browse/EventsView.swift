@@ -166,7 +166,7 @@ struct EventsView: View {
                 }
             } else {
                 // Load TV events
-                loadTVEvents()
+                await loadTVEvents()
                 isLoading = false
             }
         }

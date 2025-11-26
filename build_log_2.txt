@@ -1,0 +1,51 @@
+🍋 Building RedLemon.app (DEBUG mode - faster)...
+📁 Ensuring .app bundle structure exists...
+📦 Building Swift executable (debug)...
+[0/1] Planning build
+Building for debugging...
+[1/2] Generating RedLemon PCH
+[2/8] Compiling RedLemon EventsView.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView.swift:323:21: warning: no 'async' operations occur within 'await' expression
+                    await createLocalEventRoom(event: event, roomId: roomId)
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView.swift:353:17: warning: no 'async' operations occur within 'await' expression
+                await createLocalEventRoom(event: event, roomId: roomId)
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView.swift:357:17: warning: no 'async' operations occur within 'await' expression
+                await createLocalEventRoom(event: event, roomId: roomId)
+                ^
+[3/8] Compiling RedLemon WindowManager.swift
+[4/8] Compiling RedLemon UsernameSetupView.swift
+[5/8] Compiling RedLemon BrowseView.swift
+[6/8] Compiling RedLemon DiscoverView.swift
+[7/8] Compiling RedLemon EventsView+TVEvents.swift
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView+TVEvents.swift:40:92: error: missing argument for parameter 'type' in call
+                if let mediaItem = try? await apiClient.fetchMediaDetails(imdbId: series.id) {
+                                                                                           ^
+                                                                                           , type: <#String#>
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/LocalAPIClient.swift:444:10: note: 'fetchMediaDetails(imdbId:type:)' declared here
+    func fetchMediaDetails(imdbId: String, type: String) async throws -> MediaItem {
+         ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView+TVEvents.swift:72:21: warning: no 'async' operations occur within 'await' expression
+                    await createLocalTVEventRoom(tvEvent: tvEvent, roomId: roomId)
+                    ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView+TVEvents.swift:100:17: warning: no 'async' operations occur within 'await' expression
+                await createLocalTVEventRoom(tvEvent: tvEvent, roomId: roomId)
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView+TVEvents.swift:103:17: warning: no 'async' operations occur within 'await' expression
+                await createLocalTVEventRoom(tvEvent: tvEvent, roomId: roomId)
+                ^
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Browse/EventsView+TVEvents.swift:40:92: error: missing argument for parameter 'type' in call
+                if let mediaItem = try? await apiClient.fetchMediaDetails(imdbId: series.id) {
+                                                                                           ^
+                                                                                           , type: <#String#>
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Networking/LocalAPIClient.swift:444:10: note: 'fetchMediaDetails(imdbId:type:)' declared here
+    func fetchMediaDetails(imdbId: String, type: String) async throws -> MediaItem {
+         ^
+[8/12] Compiling RedLemon AppState.swift
+[9/12] Compiling RedLemon LocalAPIClient.swift
+[10/12] Compiling RedLemon ContentView.swift
+[11/12] Emitting module RedLemon
+/Users/danielnoble/Desktop/RedLemon-Native/Sources/Features/Player/MPVViewLayer.swift:20:21: warning: 'CAOpenGLLayer' was deprecated in macOS 10.14: OpenGL is deprecated
+class MPVViewLayer: CAOpenGLLayer {
+                    ^

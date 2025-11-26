@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v3_runtime_fix"  // Increment when filters change
+        let filterVersion = "v4_cleanup"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -164,8 +164,18 @@ class LocalAPIClient: ObservableObject {
         // 4. Filter for movies with COMPLETE metadata (logo + background) AND recent release year
         // This ensures no plain text titles, missing art, or old movies
         let validMetas = shuffledMetas.filter { meta in
-            // Must have logo and background
-            guard let _ = meta.logo, let _ = meta.background else {
+            // Must have logo and background (and logo must not be empty)
+            guard let logo = meta.logo, !logo.isEmpty,
+                  let _ = meta.background else {
+                return false
+            }
+            
+            // Blacklist specific unwanted titles
+            let blacklistedTitles = [
+                "Selena y Los Dinos: A Family's Legacy"
+            ]
+            if blacklistedTitles.contains(meta.name) {
+                print("🚫 Skipping blacklisted movie: \(meta.name)")
                 return false
             }
             

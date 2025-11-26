@@ -3,15 +3,30 @@ import SwiftUI
 struct EventsView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject private var timeService = TimeService.shared
-    @StateObject private var apiClient = LocalAPIClient()
+    @StateObject var apiClient = LocalAPIClient()
+    
+    // Media type selection
+    @State private var selectedMediaType: MediaType = .movies
+    
+    // Movie events
     @State private var events: [EventItem] = []
-    @State private var isLoading = true
-    @State private var timer: Timer?
     @State private var allMovies: [MediaItem] = []  // Store all fetched movies
     @State private var currentOffset = 0  // Track which set of 4 we're showing
+    
+    // TV events
+    @State var tvEvents: [TVEventItem] = []
+    
+    // Common state
+    @State private var isLoading = true
+    @State private var timer: Timer?
 
     // MARK: - Constants
     private let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
+    
+    enum MediaType: String, CaseIterable {
+        case movies = "Movies"
+        case tvShows = "TV Shows"
+    }
 
     var body: some View {
         ZStack {
@@ -21,6 +36,16 @@ struct EventsView: View {
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
+                        // Media Type Toggle
+                        Picker("Media Type", selection: $selectedMediaType) {
+                            ForEach(MediaType.allCases, id: \.self) { type in
+                                Text(type.rawValue).tag(type)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(.horizontal)
+                        .padding(.top, 20)
+                        
                         // Header
                         VStack(alignment: .leading, spacing: 8) {
                             HStack {
@@ -49,39 +74,46 @@ struct EventsView: View {
                                 .buttonStyle(.plain)
                             }
                             
-                            Text("Curated cinema streaming 24/7. Join any movie in progress.")
+                            Text(selectedMediaType == .movies ? "Curated cinema streaming 24/7. Join any movie in progress." : "Binge your favorite series 24/7. Join any episode in progress.")
                                 .font(.system(size: 16))
                                 .foregroundColor(.secondary)
                         }
                         .padding(.horizontal)
-                        .padding(.top, 20)
+                        .padding(.top, 12)
 
-                        if events.isEmpty {
-                            VStack(spacing: 20) {
-                                Image(systemName: "film")
-                                    .font(.system(size: 50))
-                                    .foregroundColor(.secondary)
-                                Text("No events scheduled right now.")
-                                    .font(.title2)
-                                    .foregroundColor(.primary)
-                                Text("Check back later for more live screenings.")
-                                    .foregroundColor(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, minHeight: 300)
-                        } else {
-                            // Events List
-                            LazyVStack(spacing: 20) {
-                                ForEach(events) { event in
-                                    // Check if this event should have its lobby forced open (because previous event finished)
-                                    let isLobbyOverride = (event.index == 1 && events.first?.isFinished == true)
-                                    
-                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
-                                        joinEvent(event)
+                        // Show appropriate events based on selected type
+                        if selectedMediaType == .movies {
+                            if events.isEmpty {
+                                emptyStateView(icon: "film", message: "No movie events scheduled right now.")
+                            } else {
+                                // Movie Events List
+                                LazyVStack(spacing: 20) {
+                                    ForEach(events) { event in
+                                        let isLobbyOverride = (event.index == 1 && events.first?.isFinished == true)
+                                        
+                                        HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
+                                            joinEvent(event)
+                                        }
                                     }
                                 }
+                                .padding(.horizontal)
+                                .padding(.bottom, 40)
                             }
-                            .padding(.horizontal)
-                            .padding(.bottom, 40)
+                        } else {
+                            if tvEvents.isEmpty {
+                                emptyStateView(icon: "tv", message: "No TV show events scheduled right now.")
+                            } else {
+                                // TV Events List
+                                LazyVStack(spacing: 20) {
+                                    ForEach(tvEvents) { tvEvent in
+                                        TVHeroEventCard(tvEvent: tvEvent) {
+                                            joinTVEvent(tvEvent)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.bottom, 40)
+                            }
                         }
                     }
                 }
@@ -107,22 +139,34 @@ struct EventsView: View {
         .onDisappear {
             stopTimer()
         }
+        .onChange(of: selectedMediaType) { _ in
+            // Reload events when switching tabs
+            isLoading = true
+            loadEvents()
+        }
     }
 
     private func loadEvents() {
         Task {
-            do {
-                let movies = try await apiClient.fetchTopMoviesForEvents()
-                // Use the daily shuffled order from the API
-                allMovies = movies
-                
-                calculateDeterministicSchedule()
-                isLoading = false
-                
-                // Start timer to check for event completion
-                startTimer()
-            } catch {
-                print("❌ Failed to load events: \(error)")
+            if selectedMediaType == .movies {
+                // Load movie events
+                do {
+                    let movies = try await apiClient.fetchTopMoviesForEvents()
+                    // Use the daily shuffled order from the API
+                    allMovies = movies
+                    
+                    calculateDeterministicSchedule()
+                    isLoading = false
+                    
+                    // Start timer to check for event completion
+                    startTimer()
+                } catch {
+                    print("❌ Failed to load movie events: \(error)")
+                    isLoading = false
+                }
+            } else {
+                // Load TV events
+                loadTVEvents()
                 isLoading = false
             }
         }

@@ -54,6 +54,9 @@ class AppState: ObservableObject {
     @Published var showUsernameSetup: Bool = false  // Show username setup dialog
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
     @Published var isEventPlayback: Bool = false // Track if this is a public event playback
+    @Published var isTVEvent: Bool = false // Track if this is a TV show event
+    @Published var currentTVSeries: TVEvent? // Current TV series for events
+    @Published var currentEpisodeIndex: Int = 0 // Track current episode in series
     @Published var currentEventId: String? = nil // Track ID of current event
     @Published var finishedEventIds: Set<String> = [] // Track IDs of finished events to prevent auto-rejoin
 
@@ -416,6 +419,14 @@ class AppState: ObservableObject {
 
     func handleMovieFinished() async {
         print("🎬 AppState.handleMovieFinished() called")
+        
+        // TV Event Logic - Continuous Playback
+        if isTVEvent, let series = currentTVSeries {
+            print("📺 TV Event finished - loading next episode")
+            await loadNextTVEpisode(series: series)
+            return
+        }
+        
         print("🎬   isEventPlayback: \(isEventPlayback)")
         print("🎬   currentWatchPartyRoom: \(currentWatchPartyRoom?.id ?? "nil")")
         print("🎬   currentView: \(currentView)")
@@ -480,6 +491,38 @@ class AppState: ObservableObject {
         }
     }
 
+    // NEW: Handle TV event progression
+    private func loadNextTVEpisode(series: TVEvent) async {
+        guard let currentSeason = selectedSeason, let currentEpisode = selectedEpisode, let mediaItem = selectedMediaItem else {
+            print("❌ No current season/episode/media found for TV event")
+            await exitPlayer()
+            return
+        }
+        
+        // Calculate next episode
+        let (nextSeason, nextEpisode) = series.getNextEpisode(currentSeason: currentSeason, currentEpisode: currentEpisode)
+        
+        print("📺 Loading next episode: S\(nextSeason)E\(nextEpisode)")
+        
+        // Update state
+        await MainActor.run {
+            selectedSeason = nextSeason
+            selectedEpisode = nextEpisode
+            // Reset stream resolution state
+            isResolvingStream = true
+            streamError = nil
+        }
+        
+        // Play next episode
+        await playMedia(
+            mediaItem,
+            quality: .fullHD,
+            watchMode: .watchParty,
+            roomId: currentRoomId,
+            isHost: false
+        )
+    }
+    
     // MARK: - Window Management (Delegated to WindowManager)
 
     private func enterFullscreen() {

@@ -217,30 +217,22 @@ func registerStreamRoutes(_ app: Application) {
             print("   📅 Filtering by year: \(year)")
         }
 
-        let isBreakingBad = imdbId == "tt0903747" // Breaking Bad
-        // Trusted Breaking Bad pack (covers all seasons); match by hash first, then by title fragments as backup
-        let knownBreakingBadPackHashes = [
-            "71feec966a66" // prefix of hash seen in logs; match is done via hasPrefix
-        ]
+        // Check for trusted packs from TVEventData
+        let trustedPackQuery: String?
+        if let series = TVEventData.getSeries(id: imdbId), case .trustedPack(let query) = series.packConfig {
+            trustedPackQuery = query.lowercased()
+            print("   🔒 Found trusted pack config for \(series.title): \(query)")
+        } else {
+            trustedPackQuery = nil
+        }
 
-        let knownBreakingBadPackFragments = [
-            "breaking bad s01-s05 1080p nf web-dl av1 eac3 multisub",
-            "breaking.bad.s01e01.pilot.1080p.nf.web-dl.av1.eac3"
-        ]
-
-        let isKnownBreakingBadPack: (Stream) -> Bool = { stream in
-            guard isBreakingBad else { return false }
+        let isTrustedPack: (Stream) -> Bool = { stream in
+            guard let query = trustedPackQuery else { return false }
             let titleLower = stream.title.lowercased()
-
-            // Prefer hash prefix match (more reliable across episodes/providers)
-            if let hash = stream.infoHash?.lowercased(),
-               knownBreakingBadPackHashes.contains(where: { hash.hasPrefix($0) }) {
-                return true
-            }
-
-            return knownBreakingBadPackFragments.contains { fragment in
-                titleLower.contains(fragment)
-            }
+            
+            // Check if title contains the trusted pack query (or significant parts of it)
+            // For now, simple containment check is usually enough for exact pack titles
+            return titleLower.contains(query)
         }
 
         // Fetch all streams from providers
@@ -346,9 +338,9 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
         let beforeAudioFilter = streamsWithSubtitles.count
         streamsWithSubtitles = streamsWithSubtitles.filter { stream in
-            // SPECIAL-CASE: Exempt known Breaking Bad pack from audio filtering
-            if isKnownBreakingBadPack(stream) {
-                print("   ✅ EXEMPTING Breaking Bad pack from audio filter: \(stream.title)")
+            // SPECIAL-CASE: Exempt trusted packs from audio filtering
+            if isTrustedPack(stream) {
+                print("   ✅ EXEMPTING trusted pack from audio filter: \(stream.title)")
                 return true
             }
             
@@ -424,8 +416,8 @@ func registerStreamRoutes(_ app: Application) {
                     titleLower.contains(pattern)
                 } || titleLower.contains("s01-s") || titleLower.contains("s02-s") || titleLower.contains("s03-s") || titleLower.contains("s04-s") || titleLower.contains("s05-s") || titleLower.contains("s06-s") || titleLower.contains("s07-s") || titleLower.contains("s08-s") || titleLower.contains("s09-s") || titleLower.contains("s10-s") || titleLower.range(of: "s\\d{2}-s\\d{2}", options: .regularExpression) != nil
 
-                // SPECIAL-CASE: Allow our known good Breaking Bad pack through, even if naming doesn't match strict filters
-                let matchesKnownPack = isKnownBreakingBadPack(stream)
+                // SPECIAL-CASE: Allow our known good trusted packs through, even if naming doesn't match strict filters
+                let matchesKnownPack = isTrustedPack(stream)
 
                 let matches = matchesEpisode || matchesSeasonPack || matchesKnownPack
 
@@ -562,8 +554,8 @@ func registerStreamRoutes(_ app: Application) {
             sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
         )
 
-        // If we found our trusted Breaking Bad pack, force it as primary for 1080p while keeping prior choices as alternates
-        if isBreakingBad {
+        // If we found our trusted pack, force it as primary for 1080p while keeping prior choices as alternates
+        if trustedPackQuery != nil {
             func prioritizeKnownPack(_ bucket: QualityBucket?) -> QualityBucket? {
                 guard let bucket = bucket else { return nil }
 
@@ -571,8 +563,8 @@ func registerStreamRoutes(_ app: Application) {
                 if let primary = bucket.primary { candidates.append(primary) }
                 if let alternates = bucket.alternates { candidates.append(contentsOf: alternates) }
 
-                // Prefer exact/prefix hash match; then fallback to title fragments
-                guard let pack = candidates.first(where: { stream in isKnownBreakingBadPack(stream) }) else {
+                // Prefer trusted pack match
+                guard let pack = candidates.first(where: { stream in isTrustedPack(stream) }) else {
                     return bucket
                 }
 
@@ -583,7 +575,7 @@ func registerStreamRoutes(_ app: Application) {
                     stream.id != packId
                 }
 
-                print("👑 Using trusted Breaking Bad pack as primary (1080p): \(pack.title)")
+                print("👑 Using trusted pack as primary (1080p): \(pack.title)")
                 return QualityBucket(primary: pack, alternates: newAlternates.isEmpty ? nil : newAlternates)
             }
 

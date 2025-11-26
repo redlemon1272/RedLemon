@@ -184,10 +184,6 @@ struct EventsView: View {
                 startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration + bufferBetweenMovies)
             }
             
-            
-            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
-            let duration = TimeInterval(runtimeMinutes * 60)
-            
             // Debug: Log runtime for troubleshooting
             if i == 0 {
                 print("🎬 Live Event: \(movie.name)")
@@ -280,7 +276,8 @@ struct EventsView: View {
                 }
                 
                 // Try to get existing room
-                if let existingRoom = try await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
+                if existingRoom != nil {
                     print("✅ Event room already exists: \(roomId)")
                     // Join the existing room
                     try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)

@@ -29,24 +29,43 @@ extension EventsView {
     
     func loadTVEvents() async {
         print("📺 Loading TV events...")
-        var tvEventItems: [TVEventItem] = []
         
-        for series in TVEventData.allSeries {
-            // Calculate current episode
-            let playbackState = await TVEventScheduler.getCurrentEpisode(for: series)
+        let tvEventItems = await withTaskGroup(of: TVEventItem?.self) { group in
+            for series in TVEventData.allSeries {
+                group.addTask {
+                    // Calculate current episode
+                    let playbackState = await TVEventScheduler.getCurrentEpisode(for: series)
+                    
+                    // Fetch series metadata
+                    if let mediaItem = try? await self.apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
+                        return TVEventItem(
+                            id: series.id,
+                            series: series,
+                            mediaItem: mediaItem,
+                            currentSeason: playbackState.season,
+                            currentEpisode: playbackState.episode,
+                            startTime: playbackState.startTime,
+                            episodeRuntime: playbackState.episodeRuntime
+                        )
+                    }
+                    return nil
+                }
+            }
             
-            // Fetch series metadata
-            if let mediaItem = try? await apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
-                let tvEventItem = TVEventItem(
-                    id: series.id,
-                    series: series,
-                    mediaItem: mediaItem,
-                    currentSeason: playbackState.season,
-                    currentEpisode: playbackState.episode,
-                    startTime: playbackState.startTime,
-                    episodeRuntime: playbackState.episodeRuntime
-                )
-                tvEventItems.append(tvEventItem)
+            var results: [TVEventItem] = []
+            for await result in group {
+                if let item = result {
+                    results.append(item)
+                }
+            }
+            
+            // Sort to maintain consistent order (e.g. by defined order in TVEventData)
+            // We can map the original order to indices for sorting
+            let orderMap = Dictionary(uniqueKeysWithValues: TVEventData.allSeries.enumerated().map { ($0.element.id, $0.offset) })
+            return results.sorted { (item1, item2) -> Bool in
+                let idx1 = orderMap[item1.series.id] ?? 0
+                let idx2 = orderMap[item2.series.id] ?? 0
+                return idx1 < idx2
             }
         }
         

@@ -123,6 +123,12 @@ class LobbyViewModel: ObservableObject {
     }
 
     func connect() {
+        // Prevent multiple connection attempts
+        if realtimeConnectionStatus == .connected || realtimeConnectionStatus == .connecting {
+            print("⚠️ Lobby: Already connected or connecting - skipping duplicate connect call")
+            return
+        }
+
         print("🎭 Lobby: Connecting to room \(room.id)...")
 
         Task { [self] in

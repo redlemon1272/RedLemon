@@ -387,14 +387,26 @@ class AppState: ObservableObject {
         }
 
         // Clean up player state
+        // Clean up player state
         showPlayer = false
         selectedStream = nil
         selectedMediaItem = nil
         currentRoomId = nil
         currentWatchMode = .solo
         isWatchPartyHost = false
+        
+        // Capture event state before resetting
+        let wasEventPlayback = isEventPlayback
         isEventPlayback = false // Reset event flag
-        currentView = .browse
+        
+        // Navigate back to appropriate view
+        if wasEventPlayback {
+            print("🔙 Returning to Events view")
+            currentView = .events
+        } else {
+            print("🔙 Returning to Browse view")
+            currentView = .browse
+        }
 
         exitFullscreen()
         restoreWindowSize()

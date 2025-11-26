@@ -291,19 +291,21 @@ class MPVWrapper: ObservableObject {
             // Perfect time for cleanup - video ended naturally
             performNaturalCleanup()
             
-            // Check if it was EOF (natural finish)
-            var reason: UnsafeMutablePointer<CChar>?
-            if let handle = mpvHandle,
-               mpv_get_property(handle, "eof-reached", MPV_FORMAT_STRING, &reason) >= 0,
-               let r = reason.map({ String(cString: $0) }), r == "yes" {
-                print("🏁 MPV: Playback finished (EOF)")
-                print("🏁 MPV: Setting playbackFinished = true")
-                playbackFinished = true
-                print("🏁 MPV: playbackFinished is now \(playbackFinished)")
+            // Check if it was EOF (natural finish) using the event data
+            if let data = eventPtr.pointee.data?.assumingMemoryBound(to: mpv_event_end_file.self) {
+                let reason = data.pointee.reason
+                // MPV_END_FILE_REASON_EOF = 0 means natural end of file
+                if reason.rawValue == 0 {
+                    print("🏁 MPV: Playback finished (EOF - reason: \(reason.rawValue))")
+                    print("🏁 MPV: Setting playbackFinished = true")
+                    playbackFinished = true
+                    print("🏁 MPV: playbackFinished is now \(playbackFinished)")
+                } else {
+                    print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
+                }
             } else {
-                print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.map { String(cString: $0) } ?? "nil"))")
+                print("⚠️ MPV: END_FILE event but no event data available")
             }
-            mpv_free(reason)
         case MPV_EVENT_IDLE:
             isBuffering = false
         default:

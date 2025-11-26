@@ -2,6 +2,7 @@ import SwiftUI
 
 struct EventsView: View {
     @EnvironmentObject var appState: AppState
+    @ObservedObject private var timeService = TimeService.shared
     @StateObject private var apiClient = LocalAPIClient()
     @State private var events: [EventItem] = []
     @State private var isLoading = true
@@ -84,16 +85,21 @@ struct EventsView: View {
             }
         }
         .onAppear {
-            print("📅 EventsView.onAppear - allMovies.count: \(allMovies.count)")
-            // Recalculate schedule on every appear to ensure status is current
+            print("📅 EventsView appeared")
+            // Force refresh schedule on appear to ensure status is up to date
             if !allMovies.isEmpty {
-                print("📅 Recalculating schedule with existing movies")
+                print("🔄 Recalculating schedule on appear...")
                 calculateDeterministicSchedule()
             } else {
-                print("📅 Loading events from API")
                 loadEvents()
             }
             startTimer()
+        }
+        .onChange(of: timeService.isSynced) { isSynced in
+            if isSynced {
+                print("⏰ Time synced with server! Recalculating schedule...")
+                calculateDeterministicSchedule()
+            }
         }
         .onDisappear {
             stopTimer()
@@ -122,7 +128,7 @@ struct EventsView: View {
     private func calculateDeterministicSchedule() {
         guard !allMovies.isEmpty else { return }
         
-        let now = Date()
+        let now = TimeService.shared.now
         
         // 1. Calculate total duration of the entire playlist cycle
         var totalCycleDuration: TimeInterval = 0
@@ -230,7 +236,7 @@ struct EventsView: View {
         guard let liveEvent = events.first else { return }
         
         // If live event is finished, cycle to next batch
-        if Date() >= liveEvent.endTime {
+        if TimeService.shared.now >= liveEvent.endTime {
             print("🔄 Live event finished: \(liveEvent.mediaItem.name). Cycling to next batch.")
             calculateDeterministicSchedule()
         }
@@ -245,7 +251,7 @@ struct EventsView: View {
         print("🎟️ Joining event: \(event.mediaItem.name)")
         print("   Event start time: \(event.startTime)")
         print("   Event duration: \(event.duration)s")
-        print("   Current time: \(Date())")
+        print("   Current time: \(TimeService.shared.now)")
         print("   Is Live: \(event.isLive)")
         print("   Is In Lobby: \(event.isInLobby)")
         
@@ -361,14 +367,14 @@ struct EventItem: Identifiable {
     
     var isFinished: Bool {
         // Check if current time is past the movie's actual end time (not including buffer)
-        let now = Date()
+        let now = TimeService.shared.now
         return now >= endTime
     }
     
     var isInLobby: Bool {
         // The next event (index 1) is in lobby when the current event (index 0) has finished
         // This happens during the 10-minute buffer period
-        let now = Date()
+        let now = TimeService.shared.now
         return index == 1 && now >= startTime.addingTimeInterval(-600) // 600s = 10 min buffer
     }
 }
@@ -377,7 +383,7 @@ struct HeroEventCard: View {
     let event: EventItem
     let onJoin: () -> Void
     
-    @State private var currentTime = Date()
+    @State private var currentTime = TimeService.shared.now
     @State private var timer: Timer?
     
     var body: some View {
@@ -577,9 +583,9 @@ struct HeroEventCard: View {
         .onAppear {
             // Only start timer for live events
             if event.isLive {
-                currentTime = Date()
+                currentTime = TimeService.shared.now
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                    currentTime = Date()
+                    currentTime = TimeService.shared.now
                 }
             }
         }

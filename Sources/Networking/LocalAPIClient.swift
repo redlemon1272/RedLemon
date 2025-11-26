@@ -121,7 +121,7 @@ class LocalAPIClient: ObservableObject {
         
         // Calculate which "generation" we're in based on elapsed time
         let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
-        let timeSinceEpoch = Date().timeIntervalSince(epoch)
+        let timeSinceEpoch = TimeService.shared.now.timeIntervalSince(epoch)
         
         // Use CONSERVATIVE estimate (2.5 hours avg) to ensure we don't shuffle mid-cycle
         // Most movies are 90-150 min, so 2.5 hours ensures we wait for longest movies

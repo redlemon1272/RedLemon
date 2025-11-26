@@ -142,6 +142,38 @@ class SupabaseClient {
 
         return data
     }
+    
+    /// Get trusted server time from Supabase (via HTTP Date header)
+    func getServerTime() async throws -> Date {
+        // Use a lightweight HEAD request to the users table (limit=1)
+        // We just want the headers, specifically the 'Date' header
+        let url = URL(string: "\(baseURL)/rest/v1/users?select=count&limit=1")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "HEAD"
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        let (_, response) = try await session.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        // Parse HTTP Date header (RFC 1123)
+        // Example: Tue, 15 Nov 1994 08:12:31 GMT
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss GMT"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = formatter.date(from: dateString) else {
+            print("❌ Failed to parse server date: \(dateString)")
+            throw SupabaseError.invalidResponse
+        }
+        
+        return date
+    }
 
     // MARK: - User Management
 

@@ -67,7 +67,11 @@ struct RedLemonApp: App {
                     await loadStoredUser()  // Load username from keychain on startup
                     await startServer()
                     await performStartupChecks()
+                    await performStartupChecks()
                     await checkForUpdates()
+                    
+                    // Sync clock with server for accurate event timing
+                    await TimeService.shared.sync()
                 }
                 .onOpenURL { url in
                     handleURL(url)

@@ -561,6 +561,7 @@ class MPVWrapper: ObservableObject {
             "espanol": "Spanish",
             "inglés": "English",
             "ingles": "English",
+            "angielski": "English",  // Polish for "English"
             "français": "French",
             "francais": "French",
             "deutsch": "German",

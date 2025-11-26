@@ -65,6 +65,7 @@ struct MPVPlayerView: View {
     @State private var exitButtonTimer: Timer?
     @State private var localKeyMonitor: Any?
     @State private var cursorHideTimer: Timer?
+    @State private var eventAutoExitTimer: Timer?
 
     // Track selection menus
     @State private var showSubtitleMenu = false
@@ -266,6 +267,14 @@ struct MPVPlayerView: View {
                 NSCursor.hide()
             }
 
+            // Start auto-exit timer for event movies
+            if appState.isEventPlayback {
+                print("🎬 Event playback detected - starting auto-exit monitor")
+                eventAutoExitTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                    checkEventMovieFinished()
+                }
+            }
+            
             // Install local event monitor to capture keyboard events even when text field is focused
             localKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { event in
                 // Spacebar (keyCode 49): open chat (only if in watch party and closed)
@@ -336,22 +345,50 @@ struct MPVPlayerView: View {
             controlsTimer?.invalidate()
             chatButtonTimer?.invalidate()
             exitButtonTimer?.invalidate()
-            cursorHideTimer?.invalidate()
 
-            // Show cursor when leaving player
-            NSCursor.unhide()
-
-            // Remove local event monitor
+            // Clean up event monitor
             if let monitor = localKeyMonitor {
                 NSEvent.removeMonitor(monitor)
                 localKeyMonitor = nil
             }
+            
+            // Clean up auto-exit timer
+            eventAutoExitTimer?.invalidate()
+            eventAutoExitTimer = nil
+
+            // Show cursor when leaving player
+            cursorHideTimer?.invalidate()
+            NSCursor.unhide()
         }
     }
 
     private func exitPlayer() async {
         await viewModel.cleanup()
         await appState.exitPlayer()
+    }
+    
+    private func checkEventMovieFinished() {
+        guard appState.isEventPlayback else { return }
+        
+        let position = viewModel.currentTime
+        let duration = viewModel.duration
+        let isPaused = !viewModel.isPlaying
+        
+        // Check if movie has finished (within 5 seconds of end AND paused)
+        if duration > 0 && position >= duration - 5 && isPaused {
+            print("🎬 Event movie finished detected!")
+            print("   Position: \(position)s / Duration: \(duration)s")
+            print("   Auto-exiting player and returning to Events page...")
+            
+            // Stop the timer
+            eventAutoExitTimer?.invalidate()
+            eventAutoExitTimer = nil
+            
+            // Exit player and return to events
+            Task {
+                await appState.handleMovieFinished()
+            }
+        }
     }
 
     // MARK: - Timer Management

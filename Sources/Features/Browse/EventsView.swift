@@ -184,6 +184,17 @@ struct EventsView: View {
                 startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration + bufferBetweenMovies)
             }
             
+            
+            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60)
+            
+            // Debug: Log runtime for troubleshooting
+            if i == 0 {
+                print("🎬 Live Event: \(movie.name)")
+                print("   Metadata runtime: \(movie.runtime ?? "unknown")")
+                print("   Calculated duration: \(Int(duration / 60)) minutes")
+            }
+            
             scheduledEvents.append(EventItem(
                 id: UUID().uuidString,
                 mediaItem: movie,

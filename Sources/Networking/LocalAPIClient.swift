@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v2_1990plus_no3d"  // Increment when filters change
+        let filterVersion = "v3_runtime_fix"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -222,7 +222,7 @@ class LocalAPIClient: ObservableObject {
                 year: meta.releaseInfo,
                 imdbRating: meta.imdbRating,
                 genres: nil,
-                runtime: nil
+                runtime: meta.runtime
             )
         }
         

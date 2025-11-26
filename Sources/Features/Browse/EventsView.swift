@@ -172,7 +172,7 @@ struct EventsView: View {
             let movie = allMovies[index]
             
             let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
-            let duration = TimeInterval(runtimeMinutes * 60)
+            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies  // Event slot includes buffer
             
             let startTime: Date
             if i == 0 {

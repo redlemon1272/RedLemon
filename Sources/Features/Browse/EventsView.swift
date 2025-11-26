@@ -189,6 +189,7 @@ struct EventsView: View {
                 mediaItem: movie,
                 startTime: startTime,
                 duration: duration,
+                actualMovieDuration: TimeInterval(runtimeMinutes * 60),
                 index: i
             ))
         }
@@ -349,7 +350,8 @@ struct EventItem: Identifiable {
     let id: String
     let mediaItem: MediaItem
     let startTime: Date  // Just for ordering, not actual time
-    let duration: TimeInterval
+    let duration: TimeInterval  // Total event slot duration (includes buffer)
+    let actualMovieDuration: TimeInterval  // Actual movie runtime (no buffer)
     let index: Int  // Position in the list (0 = live, 1-3 = upcoming)
     
     var endTime: Date {
@@ -368,7 +370,8 @@ struct EventItem: Identifiable {
     var isFinished: Bool {
         // Check if current time is past the movie's actual end time (not including buffer)
         let now = TimeService.shared.now
-        return now >= endTime
+        let actualMovieEndTime = startTime.addingTimeInterval(actualMovieDuration)
+        return now >= actualMovieEndTime
     }
     
     var isInLobby: Bool {
@@ -597,7 +600,7 @@ struct HeroEventCard: View {
     
     private var progress: Double {
         let elapsed = currentTime.timeIntervalSince(event.startTime)
-        return min(max(elapsed / event.duration, 0), 1)
+        return min(max(elapsed / event.actualMovieDuration, 0), 1)
     }
     
     private var elapsedTime: TimeInterval {
@@ -605,7 +608,8 @@ struct HeroEventCard: View {
     }
     
     private var remainingTime: TimeInterval {
-        event.endTime.timeIntervalSince(currentTime)
+        let actualMovieEndTime = event.startTime.addingTimeInterval(event.actualMovieDuration)
+        return max(actualMovieEndTime.timeIntervalSince(currentTime), 0)
     }
     
     private func formatTime(_ date: Date) -> String {

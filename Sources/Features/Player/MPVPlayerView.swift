@@ -179,7 +179,6 @@ struct MPVPlayerView: View {
                     }
             }
             .frame(width: viewModel.showChat ? geometry.size.width * 0.68 : geometry.size.width)
-            .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)
 
             // Chat overlay (slides in from right)
             if viewModel.showChat {
@@ -341,22 +340,17 @@ struct MPVPlayerView: View {
             Task {
                 await viewModel.cleanup()
             }
-            controlsTimer?.invalidate()
-            chatButtonTimer?.invalidate()
-            exitButtonTimer?.invalidate()
+            
+            // ✅ Use centralized timer cleanup
+            invalidateAllTimers()
 
             // Clean up event monitor
             if let monitor = localKeyMonitor {
                 NSEvent.removeMonitor(monitor)
                 localKeyMonitor = nil
             }
-            
-            // Clean up auto-exit timer
-            eventAutoExitTimer?.invalidate()
-            eventAutoExitTimer = nil
 
             // Show cursor when leaving player
-            cursorHideTimer?.invalidate()
             NSCursor.unhide()
         }
     }
@@ -408,6 +402,25 @@ struct MPVPlayerView: View {
     }
 
     // MARK: - Timer Management
+
+    private func invalidateAllTimers() {
+        print("⏱️ Invalidating all active timers")
+        
+        controlsTimer?.invalidate()
+        controlsTimer = nil
+        
+        chatButtonTimer?.invalidate()
+        chatButtonTimer = nil
+        
+        exitButtonTimer?.invalidate()
+        exitButtonTimer = nil
+        
+        cursorHideTimer?.invalidate()
+        cursorHideTimer = nil
+        
+        eventAutoExitTimer?.invalidate()
+        eventAutoExitTimer = nil
+    }
 
     private func showControlsTemporarily() {
         controlsTimer?.invalidate()

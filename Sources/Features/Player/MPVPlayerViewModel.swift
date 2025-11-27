@@ -77,6 +77,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Chat state
     @Published var showChat: Bool = false
+    @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
 
     // Metadata
@@ -859,9 +860,39 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Chat
 
     func toggleChat() {
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+        // ✅ Ensure we're not already animating
+        guard !isAnimatingChatToggle else { return }
+        
+        // ✅ Reduce background load during animation
+        isAnimatingChatToggle = true
+        
+        // ✅ Temporarily pause non-critical updates
+        let originalInterval = syncBroadcastTimer?.timeInterval
+        syncBroadcastTimer?.invalidate()
+        
+        // ✅ Use hardware-accelerated animation only on chat property
+        withAnimation(.easeOut(duration: 0.2)) {
             showChat.toggle()
         }
+        
+        // ✅ Restore background updates after animation completes with timeout safeguard
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let self = self else { return }
+            
+            // ✅ SAFEGUARD: Always reset animation state after timeout
+            self.isAnimatingChatToggle = false
+            
+            // Restart broadcasting if it was active
+            if self.isWatchPartyHost && originalInterval != nil {
+                self.startBroadcastingState()
+            }
+        }
+        
+        // ✅ TIMEOUT PROTECTION: Force reset after 1 second maximum
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.isAnimatingChatToggle = false
+        }
+        
         print(showChat ? "💬 Chat opened" : "💬 Chat closed")
     }
 
@@ -956,7 +987,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         print("🧹 Cleaning up MPV player...")
         
-        // Clear watching status
+        // ✅ STEP 1: Clear watching status immediately
         await SocialService.shared.updateWatchingStatus(
             mediaTitle: nil,
             mediaType: nil,
@@ -964,29 +995,29 @@ class MPVPlayerViewModel: ObservableObject {
             roomId: nil
         )
 
-        // Stop all timers first to prevent any more sync messages
+        // ✅ STEP 2: Stop timers to prevent further updates
         invalidateAllTimers()
 
-        // Disconnect realtime if in watch party - AWAIT to ensure it completes
-        if isInWatchParty {
-            print("🔌 Disconnecting realtime manager...")
-            await realtimeManager?.disconnect()
-            print("✅ Realtime manager disconnected")
-        }
-
-        // Just stop playback - layer will handle OpenGL cleanup
-        mpvWrapper.stop()
-        
-        // Cancel all MPV observer tasks
+        // ✅ STEP 3: Cancel observer tasks to prevent callbacks
         print("🛑 Cancelling \(mpvObserverTasks.count) MPV observer tasks...")
         for task in mpvObserverTasks {
             task.cancel()
         }
         mpvObserverTasks.removeAll()
         
-        // Cancel pending play task
         pendingPlayTask?.cancel()
         pendingPlayTask = nil
+
+        // ✅ STEP 4: Disconnect realtime FIRST and await completion
+        if isInWatchParty {
+            print("🔌 Disconnecting realtime manager...")
+            await realtimeManager?.disconnect()
+            print("✅ Realtime manager disconnected")
+        }
+
+        // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
+        print("🛑 Stopping MPV playback...")
+        mpvWrapper.stop()
     }
 
     deinit {
@@ -1640,9 +1671,14 @@ extension MPVPlayerViewModel {
         // Cancel any existing timer
         syncBroadcastTimer?.invalidate()
 
-        // Broadcast state every 100ms (10 Hz)
-        syncBroadcastTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+        // ✅ Reduce from 10Hz to 4Hz
+        syncBroadcastTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
             guard let self = self else { return }
+            
+            // ✅ Don't broadcast during chat animation
+            if self.isAnimatingChatToggle {
+                return
+            }
 
             // Don't send if we've already cleaned up
             guard !self.hasCleanedUp else { return }

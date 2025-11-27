@@ -25,6 +25,9 @@ struct ChatOverlayView: View {
 
     // Common emojis for quick access
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
+    
+    // ✅ Performance limit
+    private let maxVisibleMessages = 100
 
     var body: some View {
         VStack(spacing: 0) {
@@ -138,7 +141,8 @@ struct ChatOverlayView: View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
-                    ForEach(viewModel.messages) { message in
+                    // ✅ Show only most recent messages for performance
+                    ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)), id: \.id) { message in
                         VStack(alignment: .leading, spacing: 4) {
                             Text(message.username)
                                 .font(.caption.weight(.semibold))

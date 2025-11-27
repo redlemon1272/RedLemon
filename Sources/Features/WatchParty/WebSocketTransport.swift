@@ -179,11 +179,16 @@ final class WebSocketTransport: WatchPartyTransport {
 
             Task { [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
-                guard let self = self else { return }
+                
+                guard let self = self else {
+                    // If self is deallocated, we must resume the continuation to avoid a leak
+                    continuation.resume(throwing: TransportError.authTimeout)
+                    return
+                }
 
-                if let pending = self.authContinuation {
-                    self.authContinuation = nil // Clear continuation after timeout
-                    pending.resume(throwing: TransportError.authTimeout)
+                if self.authContinuation != nil {
+                    // Use the centralized helper to ensure consistent state cleanup
+                    self.resolveAuthContinuation(.failure(TransportError.authTimeout))
                 }
             }
         }

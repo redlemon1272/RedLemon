@@ -3,6 +3,7 @@ import Combine
 
 /// WebSocket-based transport for watch party realtime communication
 /// Implements the WebSocket protocol defined in the architecture docs
+@MainActor
 final class WebSocketTransport: WatchPartyTransport {
 
     // MARK: - Configuration
@@ -20,7 +21,7 @@ final class WebSocketTransport: WatchPartyTransport {
     private var pendingReconnect: WorkItem?
     private var allowReconnect: Bool = true
     private var authContinuation: CheckedContinuation<Void, Error>?
-    private let authLock = NSLock()
+    // authLock removed as we are now on MainActor
     private var connectionContinuation: CheckedContinuation<Void, Error>?
 
     // Connection state tracking
@@ -174,17 +175,12 @@ final class WebSocketTransport: WatchPartyTransport {
 
     private func waitForAuthAck(timeout: TimeInterval) async throws {
         try await withCheckedThrowingContinuation { continuation in
-            authLock.lock()
             authContinuation = continuation
-            authLock.unlock()
-            
+
             Task { [weak self] in
                 try? await Task.sleep(nanoseconds: UInt64(timeout * 1_000_000_000))
                 guard let self = self else { return }
-                
-                self.authLock.lock()
-                defer { self.authLock.unlock() }
-                
+
                 if let pending = self.authContinuation {
                     self.authContinuation = nil // Clear continuation after timeout
                     pending.resume(throwing: TransportError.authTimeout)

@@ -16,7 +16,7 @@ class LobbyViewModel: ObservableObject {
     @Published var backdropURL: String?
     @Published var logoURL: String?
     @Published var timeUntilStart: TimeInterval = 0 // Time until event officially starts
-    
+
     // NEW: Playlist Support
     @Published var playlist: [PlaylistItem] = []
     @Published var currentPlaylistIndex: Int = 0
@@ -30,9 +30,9 @@ class LobbyViewModel: ObservableObject {
     private var participantId: String
     private var realtimeManager: RealtimeChannelManager?
     private var watchPartyManager: WatchPartyManager?
-    private var countdownTimer: Timer?
-    private var participantsPollingTimer: Timer?
-    private var roomStatePollingTimer: Timer?
+    private var countdownTask: Task<Void, Never>?
+    private var participantsPollingTask: Task<Void, Never>?
+    private var roomStatePollingTask: Task<Void, Never>?
     private var lastRoomPlayingState: Bool = false
     private var isDisconnecting: Bool = false
     weak var appState: AppState?  // Weak reference to avoid retain cycle
@@ -83,14 +83,14 @@ class LobbyViewModel: ObservableObject {
         if isHost {
             addMessage(.userJoined, userName: "Host")
         }
-        
+
         // NEW: Initialize playlist state
         if let roomPlaylist = room.playlist {
             self.playlist = roomPlaylist
             self.currentPlaylistIndex = room.currentPlaylistIndex
             self.isPlaylistMode = !roomPlaylist.isEmpty
         }
-        
+
         // Check if we should auto-start next item (returning from playback)
         // We do this in a task to ensure appState is available
         Task { @MainActor in
@@ -107,12 +107,12 @@ class LobbyViewModel: ObservableObject {
         // Capture values needed for cleanup
         let manager = realtimeManager
         let starting = transitionState.isStarting
-        
-        // Invalidate timers synchronously (safe if deinit is on main, best effort otherwise)
-        countdownTimer?.invalidate()
-        participantsPollingTimer?.invalidate()
-        roomStatePollingTimer?.invalidate()
-        
+
+        // Cancel tasks
+        countdownTask?.cancel()
+        participantsPollingTask?.cancel()
+        roomStatePollingTask?.cancel()
+
         Task {
             // Only disconnect if we're NOT starting the movie
             // If starting, we keep the connection alive for the player
@@ -152,7 +152,7 @@ class LobbyViewModel: ObservableObject {
                         if room.id.hasPrefix("event_") {
                             // Check if room exists
                             let roomExists = (try? await SupabaseClient.shared.getRoomState(roomId: room.id)) != nil
-                            
+
                             if roomExists {
                                 NSLog("ℹ️ Lobby: Join failed but room exists - assuming user already joined")
                                 // Proceed as success
@@ -174,7 +174,7 @@ class LobbyViewModel: ObservableObject {
                                         episode: room.episode,
                                         isPublic: true
                                     )
-                                    
+
                                     // Retry join
                                     try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
                                     NSLog("✅ Guest created and joined system room \(room.id)")
@@ -187,7 +187,7 @@ class LobbyViewModel: ObservableObject {
                             throw error
                         }
                     }
-                    
+
                     // Auto-start for event rooms (always) or regular rooms that are already playing
                     if room.id.hasPrefix("event_") {
                         print("🎬 Event room detected - auto-starting playback")
@@ -313,7 +313,7 @@ class LobbyViewModel: ObservableObject {
         // Prevent double disconnect
         guard !isDisconnecting else { return }
         isDisconnecting = true
-        
+
         // Stop polling immediately
         stopPolling()
 
@@ -345,11 +345,11 @@ class LobbyViewModel: ObservableObject {
 
             // Disconnect Realtime channel
             await realtimeManager?.disconnect()
-            
+
             // Reset flag after completion (though we likely won't use this instance again)
             isDisconnecting = false
         }
-        countdownTimer?.invalidate()
+        countdownTask?.cancel()
 
         print("🎭 Lobby: Disconnected from room \(room.id)")
     }
@@ -582,12 +582,12 @@ class LobbyViewModel: ObservableObject {
         let startTime = Date()
         for i in (1...3).reversed() {
             countdown = i
-            
+
             // Calculate how much time has passed since we started
             let elapsed = Date().timeIntervalSince(startTime)
             // Calculate how much time we should have waited by now (3 - i + 1 seconds)
             let targetDelay = Double(3 - i + 1)
-            
+
             // Sleep for the remaining time to hit the target
             let sleepDuration = max(0, targetDelay - elapsed)
             if sleepDuration > 0 {
@@ -743,7 +743,7 @@ class LobbyViewModel: ObservableObject {
                     // Guest automatically starts playback after countdown
                     Task { @MainActor in
                         NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
-                        
+
                         // CRITICAL: Fetch fresh room state BEFORE countdown
                         // This ensures we have correct season/episode AND don't delay playback start
                         let fetchStartTime = Date()
@@ -775,7 +775,7 @@ class LobbyViewModel: ObservableObject {
                         // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
                         // This fixes the "Mirror" vs "Breaking Bad" issue
                         await self.updateMediaItemFromRoomState(roomState)
-                        
+
                         // Re-fetch mediaItem as it might have changed
                         guard let currentMediaItem = self.room.mediaItem else {
                              NSLog("❌ Guest: Media item missing after update check")
@@ -799,15 +799,15 @@ class LobbyViewModel: ObservableObject {
                         } else {
                             NSLog("⚠️ Guest: No season/episode found in DB or local state")
                         }
-                        
+
                         // NOW wait for countdown (DB fetch already done, so timing is accurate)
                         // Compensate for fetch time to ensure we start exactly 3s after signal
                         // PLUS add 0.25s buffer to match Host's UI/processing overhead
                         let fetchDuration = Date().timeIntervalSince(fetchStartTime)
                         let remainingWait = max(0, 3.25 - fetchDuration)
-                        
+
                         NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.25s sync buffer)")
-                        
+
                         if remainingWait > 0 {
                             try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))
                         }
@@ -826,7 +826,7 @@ class LobbyViewModel: ObservableObject {
                         }
 
                         NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
-                        
+
                         await appState.playMedia(
                             mediaItem,
                             quality: room.quality,
@@ -845,12 +845,12 @@ class LobbyViewModel: ObservableObject {
             // Regular chat message - add to chat UI
             // CRITICAL: Skip messages from self (already added locally when sent)
             NSLog("🔍 Chat message received - senderId: '\(syncMessage.senderId ?? "nil")', participantId: '\(participantId)'")
-            
+
             if syncMessage.senderId == participantId {
                 NSLog("💬 Skipping own message (already displayed locally): '\(chatText)'")
                 return
             }
-            
+
             NSLog("💬 Adding received message from other participant: '\(chatText)'")
             let chatMessage = ChatMessage(
                 id: UUID().uuidString,
@@ -909,9 +909,9 @@ class LobbyViewModel: ObservableObject {
         print("🔄 Lobby: Starting database polling for participants and room state...")
 
         // Poll participants every 2 seconds
-        participantsPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-            guard let self = self else { return }
-            Task { @MainActor [weak self] in
+        participantsPollingTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 2_000_000_000)
                 guard let self = self else { return }
                 await self.pollParticipants()
             }
@@ -919,9 +919,9 @@ class LobbyViewModel: ObservableObject {
 
         // Poll room state every 2 seconds for database fallback (guests only)
         if !isHost {
-            roomStatePollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
-                guard let self = self else { return }
-                Task { @MainActor [weak self] in
+            roomStatePollingTask = Task { [weak self] in
+                while !Task.isCancelled {
+                    try? await Task.sleep(nanoseconds: 2_000_000_000)
                     guard let self = self else { return }
                     await self.pollRoomState()
                 }
@@ -941,11 +941,11 @@ class LobbyViewModel: ObservableObject {
     }
 
     private func stopPolling() {
-        participantsPollingTimer?.invalidate()
-        participantsPollingTimer = nil
+        participantsPollingTask?.cancel()
+        participantsPollingTask = nil
 
-        roomStatePollingTimer?.invalidate()
-        roomStatePollingTimer = nil
+        roomStatePollingTask?.cancel()
+        roomStatePollingTask = nil
 
         print("🛑 Lobby: Polling stopped (chat via Realtime only)")
     }
@@ -1049,7 +1049,7 @@ class LobbyViewModel: ObservableObject {
 
                     // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
                     await self.updateMediaItemFromRoomState(roomState)
-                    
+
                     // Check if room has media item
                     guard self.room.mediaItem != nil else {
                         print("⚠️ Cannot join room: No media item")
@@ -1057,18 +1057,18 @@ class LobbyViewModel: ObservableObject {
                     }
 
                     NSLog("🎬 Guest: Launching player via database fallback")
-                    
+
                     // CRITICAL: Set season/episode from room BEFORE playMedia()
                     // This ensures the guest resolves the correct episode for subtitles and metadata
                     // Use roomState (fresh from DB) instead of room (local state) to ensure we have latest data
                     let season = roomState.season ?? room.season
                     let episode = roomState.episode ?? room.episode
-                    
+
                     if let season = season, let episode = episode {
                         await MainActor.run {
                             appState.selectedSeason = season
                             appState.selectedEpisode = episode
-                            
+
                             // Also update local room state
                             self.room.season = season
                             self.room.episode = episode
@@ -1104,65 +1104,67 @@ class LobbyViewModel: ObservableObject {
             print("❌ Lobby: autoStartSystemEvent - no appState")
             return
         }
-        
+
         print("🤖 Lobby: Checking auto-start for system event")
         print("   Room ID: \(room.id)")
         print("   Room createdAt: \(room.createdAt)")
         print("   Current time: \(Date())")
-        
+
         // Calculate time until start
         let now = Date()
         let timeUntilStart = room.createdAt.timeIntervalSince(now)
-        
+
         print("   Time until start: \(timeUntilStart)s")
-        
+
         if timeUntilStart > 0 {
             // We are early! Wait for the official start time.
             print("⏳ Lobby: Event starts in \(Int(timeUntilStart))s. Waiting...")
-            
+
             self.timeUntilStart = timeUntilStart
-            
-            // Start a timer to update the countdown UI
-            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-                guard let self = self else {
-                    timer.invalidate()
-                    return
-                }
-                
-                let remaining = self.room.createdAt.timeIntervalSince(Date())
-                if remaining <= 0 {
-                    timer.invalidate()
-                    self.timeUntilStart = 0
-                    self.autoStartSystemEvent() // Retry start
-                } else {
-                    self.timeUntilStart = remaining
+
+            // Start a task to update the countdown UI
+            countdownTask?.cancel()
+            countdownTask = Task { [weak self] in
+                while !Task.isCancelled {
+                    guard let self = self else { return }
+
+                    let remaining = self.room.createdAt.timeIntervalSince(Date())
+                    if remaining <= 0 {
+                        self.timeUntilStart = 0
+                        self.autoStartSystemEvent() // Retry start
+                        return
+                    } else {
+                        self.timeUntilStart = remaining
+                    }
+
+                    try? await Task.sleep(nanoseconds: 1_000_000_000)
                 }
             }
             return
         }
-        
+
         print("🤖 Lobby: Auto-starting system event now")
-        
+
         // Calculate playback position (should be >= 0 now)
         let elapsed = now.timeIntervalSince(room.createdAt)
-        
+
         print("   Elapsed time: \(elapsed)s")
         print("   Media item: \(room.mediaItem?.name ?? "nil")")
-        
+
         // Set resume timestamp
         appState.resumeFromTimestamp = max(0, elapsed)
-        
+
         print("   Set resumeFromTimestamp to: \(appState.resumeFromTimestamp)")
-        
+
         // Set starting state to update UI
         self.isStarting = true
         self.transitionState.isStarting = true
-        
+
         // Start playback
         Task {
             // Wait a moment for the UI to settle and show "Starting..."
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
-            
+
             if let mediaItem = room.mediaItem {
                 print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
                 await appState.playMedia(
@@ -1197,21 +1199,21 @@ class LobbyViewModel: ObservableObject {
         // Offer to restart signaling when guests join
         print("💡 Host: Realtime signaling is persistent, no restart needed")
     }
-    
+
     /// Check if media item needs update based on room state
     private func updateMediaItemFromRoomState(_ roomState: SupabaseRoom) async {
         // Check if IMDB ID matches
         guard let newImdbId = roomState.imdbId else { return }
-        
+
         // Infer expected type from season/episode presence
         // If season/episode are present, it MUST be a series
         let expectedType = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
-        
+
         // Check for mismatch in either ID OR Type
         // This fixes the issue where ID is correct (e.g. Breaking Bad) but Type is wrong (Movie -> "Mirror")
         let idMismatch = room.mediaItem?.id != newImdbId
         let typeMismatch = room.mediaItem?.type != expectedType
-        
+
         if idMismatch || typeMismatch {
             NSLog("🔄 Guest: Detected media change via DB")
             if idMismatch {
@@ -1220,11 +1222,11 @@ class LobbyViewModel: ObservableObject {
             if typeMismatch {
                 NSLog("   Type Mismatch: Local \(room.mediaItem?.type ?? "nil") -> Expected \(expectedType)")
             }
-            
+
             do {
                 // Fetch fresh metadata with the CORRECT type
                 let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: newImdbId, type: expectedType)
-                
+
                 await MainActor.run {
                     self.room.mediaItem = mediaItem
                     // Also update poster/backdrop
@@ -1232,12 +1234,12 @@ class LobbyViewModel: ObservableObject {
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString
                     self.logoURL = mediaItem.logo
                 }
-                
+
                 NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(expectedType))")
-                
+
                 // Trigger metadata load to ensure everything is fresh
                 loadMetadata()
-                
+
             } catch {
                 NSLog("❌ Guest: Failed to fetch metadata for new media item: \(error)")
             }
@@ -1290,7 +1292,7 @@ class LobbyViewModel: ObservableObject {
 
     func checkForAutoAdvance() {
         guard isHost, isPlaylistMode else { return }
-        
+
         // If we just finished a movie and there's a next item, start countdown
         if currentPlaylistIndex < playlist.count {
             startPlaylistCountdown()
@@ -1302,87 +1304,86 @@ class LobbyViewModel: ObservableObject {
             print("✅ Playlist completed")
         }
     }
-    
+
     private func startPlaylistCountdown() {
         // Use room's lobby duration
         self.timeUntilStart = room.lobbyDuration
-        
-        // Start timer
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            guard let self = self else {
-                timer.invalidate()
-                return
-            }
-            
-            Task { @MainActor in
+
+        // Start task
+        countdownTask?.cancel()
+        countdownTask = Task { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                guard let self = self else { return }
+
                 self.timeUntilStart -= 1
-                
+
                 if self.timeUntilStart <= 0 {
-                    timer.invalidate()
                     self.startNextPlaylistItem()
+                    return
                 }
             }
         }
     }
-    
+
     private func startNextPlaylistItem() {
         guard let appState = appState,
               currentPlaylistIndex < playlist.count else {
             return
         }
-        
+
         let item = playlist[currentPlaylistIndex]
-        
+
         // Update room's current media
         room.mediaItem = item.mediaItem
         room.season = item.season
         room.episode = item.episode
-        
+
         // Update index in database
         updatePlaylistIndex(currentPlaylistIndex)
-        
+
         // Start playback
         Task {
             await startMovie(appState: appState)
         }
     }
-    
+
     func addToPlaylist(_ item: PlaylistItem) {
         guard isHost else { return }
-        
+
         playlist.append(item)
         isPlaylistMode = true
-        
+
         // Update database
         updatePlaylistInDatabase()
     }
-    
+
     func removeFromPlaylist(at index: Int) {
         guard isHost, index < playlist.count else { return }
-        
+
         playlist.remove(at: index)
-        
+
         if playlist.isEmpty {
             isPlaylistMode = false
         }
-        
+
         updatePlaylistInDatabase()
     }
-    
+
     func movePlaylistItem(from: Int, to: Int) {
         guard isHost else { return }
-        
+
         let item = playlist.remove(at: from)
         playlist.insert(item, at: to)
-        
+
         updatePlaylistInDatabase()
     }
-    
+
     private func updatePlaylistInDatabase() {
         // Placeholder for database update
         print("💾 Updating playlist in database (Placeholder)")
     }
-    
+
     private func updatePlaylistIndex(_ index: Int) {
         // Placeholder for database update
         print("💾 Updating playlist index in database (Placeholder)")

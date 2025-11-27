@@ -49,19 +49,19 @@ struct ContentView: View {
                     // Main Navigation
                     VStack(spacing: 8) {
                         SidebarButton(
-                            title: "Browse",
-                            icon: "film.fill",
-                            isSelected: appState.currentView == .browse
-                        ) {
-                            appState.currentView = .browse
-                        }
-
-                        SidebarButton(
                             title: "Events",
                             icon: "calendar.badge.clock",
                             isSelected: appState.currentView == .events
                         ) {
                             appState.currentView = .events
+                        }
+
+                        SidebarButton(
+                            title: "Browse",
+                            icon: "film.fill",
+                            isSelected: appState.currentView == .browse
+                        ) {
+                            appState.currentView = .browse
                         }
 
                         SidebarButton(

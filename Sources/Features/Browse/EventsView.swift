@@ -54,24 +54,6 @@ struct EventsView: View {
                                     .foregroundColor(.primary)
                                 
                                 Spacer()
-                                
-                                // DEBUG: Force refresh button
-                                Button(action: {
-                                    print("🔄 Force refresh triggered")
-                                    loadEvents()
-                                }) {
-                                    HStack(spacing: 4) {
-                                        Image(systemName: "arrow.clockwise")
-                                        Text("Refresh")
-                                    }
-                                    .font(.system(size: 13, weight: .medium))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
-                                    .background(Color.blue)
-                                    .cornerRadius(8)
-                                }
-                                .buttonStyle(.plain)
                             }
                             
                             Text(selectedMediaType == .movies ? "Curated cinema streaming 24/7. Join any movie in progress." : "Binge your favorite series 24/7. Join any episode in progress.")

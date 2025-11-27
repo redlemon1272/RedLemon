@@ -883,6 +883,12 @@ class MPVPlayerViewModel: ObservableObject {
         )
 
         messages.append(message)
+        
+        // Limit message history to prevent memory bloat (keep last 100 messages)
+        if messages.count > 100 {
+            messages.removeFirst(messages.count - 100)
+        }
+        
         trimChatMessages()
         print("💬 Sent: \(text)")
 

@@ -14,6 +14,7 @@ struct ChatOverlayView: View {
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
+    @State private var isAnimating: Bool = false
     
     // Chat Modes
     enum ChatMode {
@@ -46,24 +47,42 @@ struct ChatOverlayView: View {
             }
         }
         .frame(width: 350)
-        .background(.ultraThinMaterial)
+        // Use solid background during animation, material when static
+        .background {
+            if isAnimating {
+                Color.black.opacity(0.85)
+            } else {
+                Color.clear.background(.ultraThinMaterial)
+            }
+        }
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.3), radius: 20)
-        .compositingGroup() // Optimize transparency blending without breaking input
+        .drawingGroup() // GPU accelerate the entire chat view
         .padding(.trailing, 20)
         .padding(.vertical, 60)
         .onAppear {
             print("👁️ ChatOverlayView appeared")
+            // Mark as animating initially
+            isAnimating = true
             // Auto-focus the input field when chat opens
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isInputFocused = true
             }
+            // Switch to material after animation completes
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                isAnimating = false
+            }
         }
         .onChange(of: viewModel.showChat) { newValue in
-            // Auto-focus when chat is toggled open
+            // Mark as animating when toggling
             if newValue {
+                isAnimating = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     isInputFocused = true
+                }
+                // Switch to material after animation completes
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    isAnimating = false
                 }
             }
         }

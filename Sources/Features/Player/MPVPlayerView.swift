@@ -177,20 +177,19 @@ struct MPVPlayerView: View {
                             .transition(.opacity.combined(with: .move(edge: .trailing)))
                             .zIndex(98)
                     }
-                }
-                .frame(width: viewModel.showChat ? geometry.size.width * 0.68 : geometry.size.width)
-                .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)  // Faster, simpler animation
-
-                // Chat overlay (slides in from right)
-                if viewModel.showChat {
-                    ChatOverlayView(viewModel: viewModel)
-                        .frame(width: geometry.size.width * 0.32)
-                        .transition(.move(edge: .trailing))
-                        .zIndex(100)
-                }
             }
-            .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)  // Single animation for entire container
-            .background(MouseTrackingView { location in
+            .frame(width: viewModel.showChat ? geometry.size.width * 0.68 : geometry.size.width)
+            .animation(.easeInOut(duration: 0.25), value: viewModel.showChat)
+
+            // Chat overlay (slides in from right)
+            if viewModel.showChat {
+                ChatOverlayView(viewModel: viewModel)
+                    .frame(width: geometry.size.width * 0.32)
+                    .transition(.move(edge: .trailing))
+                    .zIndex(100)
+            }
+        }
+        .background(MouseTrackingView { location in
                 mouseLocation = location
 
                 // Show cursor when mouse moves

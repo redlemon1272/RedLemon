@@ -371,11 +371,28 @@ struct MPVPlayerView: View {
         
         let position = viewModel.currentTime
         let duration = viewModel.duration
-        let isPaused = !viewModel.isPlaying
         
-        // Check if movie has finished (within 5 seconds of end AND paused) OR if MPV reported EOF
-        if (duration > 0 && position >= duration - 5 && isPaused) || viewModel.playbackFinished {
-            print("🎬 Event movie finished detected!")
+        // Check if MPV reported EOF (most reliable)
+        if viewModel.playbackFinished {
+            print("🎬 Event movie finished detected (MPV EOF)!")
+            print("   Position: \(position)s / Duration: \(duration)s")
+            print("   Auto-exiting player and returning to Events page...")
+            
+            // Stop the timer
+            eventAutoExitTimer?.invalidate()
+            eventAutoExitTimer = nil
+            
+            // Exit player and return to events
+            Task {
+                await appState.handleMovieFinished()
+            }
+            return
+        }
+        
+        // Fallback: Check if near end and paused (in case EOF wasn't detected)
+        let isPaused = !viewModel.isPlaying
+        if duration > 0 && position >= duration - 5 && isPaused {
+            print("🎬 Event movie finished detected (time-based fallback)!")
             print("   Position: \(position)s / Duration: \(duration)s")
             print("   Auto-exiting player and returning to Events page...")
             

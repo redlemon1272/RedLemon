@@ -57,7 +57,6 @@ struct ChatOverlayView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.3), radius: 20)
-        .drawingGroup() // GPU accelerate the entire chat view
         .padding(.trailing, 20)
         .padding(.vertical, 60)
         .onAppear {

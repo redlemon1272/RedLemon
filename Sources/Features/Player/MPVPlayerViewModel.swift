@@ -23,6 +23,11 @@ class MPVPlayerViewModel: ObservableObject {
     private var chatPollingTimer: Timer?
     private var lastChatMessageId: String?
 
+    // Throttling State
+    private var lastTimeUpdate: Date = .distantPast
+    private var pendingChatMessages: [ChatMessage] = []
+    private var isFlushingChat: Bool = false
+
     // Watch history tracking
     private var watchHistoryTimer: Timer?
 
@@ -153,7 +158,10 @@ class MPVPlayerViewModel: ObservableObject {
         print("💬 Added mock chat messages for testing")
 
         // Fetch metadata for background art
-        await fetchMetadata(imdbId: imdbId)
+        // Fetch metadata for background art (parallel, don't block video load)
+        Task {
+            await fetchMetadata(imdbId: imdbId)
+        }
 
         // Check if we should resume from a specific timestamp
         let shouldResume = appState?.resumeFromTimestamp != nil && (appState?.resumeFromTimestamp ?? 0) > 0
@@ -291,7 +299,12 @@ class MPVPlayerViewModel: ObservableObject {
 
         Task {
             for await time in mpvWrapper.$currentTime.values {
-                self.currentTime = time
+                // Throttle UI updates to ~5Hz (every 200ms)
+                let now = Date()
+                if now.timeIntervalSince(self.lastTimeUpdate) > 0.2 {
+                    self.lastTimeUpdate = now
+                    self.currentTime = time
+                }
             }
         }
 
@@ -1415,8 +1428,21 @@ extension MPVPlayerViewModel {
                     timestamp: Date(timeIntervalSince1970: message.timestamp)
                 )
                 await MainActor.run {
-                    messages.append(chatMessage)
-                    trimChatMessages()
+                    // Batch chat updates to avoid UI thrashing
+                    pendingChatMessages.append(chatMessage)
+                    
+                    if !isFlushingChat {
+                        isFlushingChat = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                            guard let self = self else { return }
+                            if !self.pendingChatMessages.isEmpty {
+                                self.messages.append(contentsOf: self.pendingChatMessages)
+                                self.pendingChatMessages.removeAll()
+                                self.trimChatMessages()
+                            }
+                            self.isFlushingChat = false
+                        }
+                    }
                 }
                 print("💬 Received chat from \(username): \(text)")
             }

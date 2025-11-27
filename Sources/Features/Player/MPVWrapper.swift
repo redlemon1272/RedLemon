@@ -110,6 +110,9 @@ class MPVWrapper: ObservableObject {
         // Start event polling and time updates
         eventPollingTask = Task { [weak self] in await self?.pollEvents() }
         startTimeUpdates()
+        
+        // Observe duration property for updates (critical for network streams)
+        mpv_observe_property(handle, 0, "duration", MPV_FORMAT_DOUBLE)
     }
 
     // MARK: - Smart Memory Monitoring (No Stutter)
@@ -308,6 +311,13 @@ class MPVWrapper: ObservableObject {
             }
         case MPV_EVENT_IDLE:
             isBuffering = false
+        case MPV_EVENT_PROPERTY_CHANGE:
+            guard let data = eventPtr.pointee.data else { break }
+            let prop = data.assumingMemoryBound(to: mpv_event_property.self)
+            if let name = prop.pointee.name, String(cString: name) == "duration" {
+                // Duration updated
+                updateDuration()
+            }
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {
                 print(" MPV Event: \(eventId.rawValue)")

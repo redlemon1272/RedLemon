@@ -106,6 +106,7 @@ class LobbyViewModel: ObservableObject {
         // Ensure all timers and realtime resources are released when the view model goes away
         // Capture values needed for cleanup
         let manager = realtimeManager
+        let watchParty = watchPartyManager
         let starting = transitionState.isStarting
 
         // Cancel tasks
@@ -114,6 +115,9 @@ class LobbyViewModel: ObservableObject {
         roomStatePollingTask?.cancel()
 
         Task {
+            // Disconnect WatchPartyManager first to clean up network connections
+            await watchParty?.disconnect()
+
             // Only disconnect if we're NOT starting the movie
             // If starting, we keep the connection alive for the player
             if !starting {
@@ -342,6 +346,10 @@ class LobbyViewModel: ObservableObject {
                     NSLog("❌ Failed to leave room: \(error)")
                 }
             }
+
+            // Disconnect WatchPartyManager to clean up network connections
+            await watchPartyManager?.disconnect()
+            watchPartyManager = nil
 
             // Disconnect Realtime channel
             await realtimeManager?.disconnect()

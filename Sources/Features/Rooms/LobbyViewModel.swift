@@ -235,7 +235,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Set up presence callback to track joins/leaves
                 Task {
-                    await realtimeManager?.setPresenceCallback { action, userId in
+                    await realtimeManager?.setPresenceCallback { action, userId, metadata in
                         Task { @MainActor in
                             switch action {
                             case .join:

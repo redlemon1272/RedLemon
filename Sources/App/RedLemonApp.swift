@@ -217,7 +217,7 @@ struct RedLemonApp: App {
         NSLog("🔄 Resetting playback state to prevent auto-selection...")
         await MainActor.run {
             // Reset all playback-related state to ensure clean startup
-            appState.currentView = .browse
+            appState.currentView = .events
             appState.selectedMediaItem = nil
             appState.selectedMetadata = nil
             appState.selectedStream = nil

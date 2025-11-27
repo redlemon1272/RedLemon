@@ -48,11 +48,7 @@ extension EventsView {
                             episodeRuntime: playbackState.episodeRuntime
                         )
                         
-                        // Fetch participant count
-                        let roomId = "event_\(series.id)"
-                        if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                            item.participantCount = roomState.participantsCount
-                        }
+                        // Participant count will be fetched asynchronously later
                         
                         return item
                     }

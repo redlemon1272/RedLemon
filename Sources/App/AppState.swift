@@ -29,7 +29,7 @@ class AppState: ObservableObject {
         case high = "High"    // > 16GB RAM and > 8 cores
     }
 
-    @Published var currentView: AppView = .browse
+    @Published var currentView: AppView = .events
     @Published var selectedStream: Stream?
     @Published var selectedMediaItem: MediaItem?
     @Published var selectedMetadata: MediaMetadata?

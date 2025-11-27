@@ -7,6 +7,7 @@ actor SupabaseRealtimeClient {
     // MARK: - Configuration
     private let realtimeURL: String
     private let apiKey: String
+    private let session: URLSession
 
     // MARK: - WebSocket State
     private var webSocketTask: URLSessionWebSocketTask?
@@ -37,6 +38,10 @@ actor SupabaseRealtimeClient {
             self.realtimeURL = realtimeURL
         }
         self.apiKey = apiKey
+        
+        // Initialize shared session
+        let config = URLSessionConfiguration.default
+        self.session = URLSession(configuration: config)
     }
 
     // MARK: - Connection Management
@@ -60,10 +65,7 @@ actor SupabaseRealtimeClient {
             throw RealtimeError.invalidURL
         }
 
-        // Create URLSession configuration
-        let session = URLSession(configuration: .default)
-
-        // Create WebSocket task
+        // Create WebSocket task using shared session
         var request = URLRequest(url: url)
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
 

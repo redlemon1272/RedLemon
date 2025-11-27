@@ -46,22 +46,7 @@ struct EventsView: View {
                         .padding(.horizontal)
                         .padding(.top, 20)
                         
-                        // Header
-                        VStack(alignment: .leading, spacing: 8) {
-                            HStack {
-                                Text("Live Events")
-                                    .font(.system(size: 32, weight: .bold))
-                                    .foregroundColor(.primary)
-                                
-                                Spacer()
-                            }
-                            
-                            Text(selectedMediaType == .movies ? "Curated cinema streaming 24/7. Join any movie in progress." : "Binge your favorite series 24/7. Join any episode in progress.")
-                                .font(.system(size: 16))
-                                .foregroundColor(.secondary)
-                        }
-                        .padding(.horizontal)
-                        .padding(.top, 12)
+                        // Header removed as requested
 
                         // Show appropriate events based on selected type
                         if selectedMediaType == .movies {
@@ -158,6 +143,9 @@ struct EventsView: View {
                 // Load TV events
                 await loadTVEvents()
                 isLoading = false
+                
+                // Fetch participant counts in background after UI is shown
+                await updateParticipantCounts()
             }
         }
     }

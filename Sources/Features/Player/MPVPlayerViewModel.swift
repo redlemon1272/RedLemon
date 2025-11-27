@@ -38,11 +38,6 @@ class MPVPlayerViewModel: ObservableObject {
     // Cleanup state
     private var hasCleanedUp: Bool = false
     private var mpvObserverTasks: [Task<Void, Never>] = []
-    
-    // Throttling State
-    private var lastTimeUpdate: Date = .distantPast
-    private var pendingChatMessages: [ChatMessage] = []
-    private var isFlushingChat: Bool = false
 
     // Watch party state
     @Published var isInWatchParty: Bool = false  // Track if currently in watch party mode

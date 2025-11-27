@@ -1486,7 +1486,7 @@ extension MPVPlayerViewModel {
                     username: username,
                     text: text,
                     timestamp: Date(timeIntervalSince1970: message.timestamp)
-                
+                )
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {
                     pendingChatMessages.append(chatMessage)

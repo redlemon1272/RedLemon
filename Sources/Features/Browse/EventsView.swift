@@ -56,7 +56,8 @@ struct EventsView: View {
                                 // Movie Events List
                                 LazyVStack(spacing: 20) {
                                     ForEach(events) { event in
-                                        let isLobbyOverride = (event.index == 1 && events.first?.isFinished == true)
+                                        // Check if previous event is finished (either by time OR by user completion)
+                                        let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
                                         
                                         HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
                                             joinEvent(event)
@@ -246,7 +247,11 @@ struct EventsView: View {
             if self.appState.shouldAutoJoinLobby {
                 // Priority: 1. Lobby (Next event), 2. Live (Current event if we just joined late/reloaded)
                 // CRITICAL: Check finishedEventIds to prevent re-joining a movie we just finished
-                if let lobbyEvent = scheduledEvents.first(where: { $0.isInLobby || ($0.index == 1 && scheduledEvents.first?.isFinished == true) }) {
+                // Also check if the live event is marked as finished in AppState to force lobby join
+                if let lobbyEvent = scheduledEvents.first(where: { 
+                    $0.isInLobby || 
+                    ($0.index == 1 && (scheduledEvents.first?.isFinished == true || appState.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))) 
+                }) {
                     print("🔄 Auto-joining Lobby event: \(lobbyEvent.mediaItem.name)")
                     self.joinEvent(lobbyEvent)
                 } else if let liveEvent = scheduledEvents.first(where: { $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id) }) {

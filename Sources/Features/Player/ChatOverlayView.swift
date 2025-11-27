@@ -14,8 +14,7 @@ struct ChatOverlayView: View {
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
-    @State private var isAnimating: Bool = false
-    
+
     // Chat Modes
     enum ChatMode {
         case room
@@ -30,7 +29,7 @@ struct ChatOverlayView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-            
+
             switch chatMode {
             case .room:
                 messagesList
@@ -39,7 +38,7 @@ struct ChatOverlayView: View {
             case .dm(let friend):
                 dmMessagesList(friend: friend)
             }
-            
+
             if case .friends = chatMode {
                 // No input area for friend list
             } else {
@@ -47,41 +46,24 @@ struct ChatOverlayView: View {
             }
         }
         .frame(width: 350)
-        // Use solid background during animation, material when static
-        .background {
-            if isAnimating {
-                Color.black.opacity(0.85)
-            } else {
-                Color.clear.background(.ultraThinMaterial)
-            }
-        }
+        .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .shadow(color: .black.opacity(0.3), radius: 20)
+        .compositingGroup() // Optimize transparency blending
         .padding(.trailing, 20)
         .padding(.vertical, 60)
         .onAppear {
             print("👁️ ChatOverlayView appeared")
-            // Mark as animating initially
-            isAnimating = true
             // Auto-focus the input field when chat opens
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 isInputFocused = true
             }
-            // Switch to material after animation completes
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                isAnimating = false
-            }
         }
         .onChange(of: viewModel.showChat) { newValue in
-            // Mark as animating when toggling
+            // Auto-focus when chat is toggled open
             if newValue {
-                isAnimating = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     isInputFocused = true
-                }
-                // Switch to material after animation completes
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    isAnimating = false
                 }
             }
         }
@@ -96,7 +78,7 @@ struct ChatOverlayView: View {
                             .foregroundColor(.white)
                     }
                     .buttonStyle(.plain)
-                    
+
                     Text(friend.displayName)
                         .font(.headline)
                         .foregroundColor(.white)
@@ -116,9 +98,9 @@ struct ChatOverlayView: View {
                     .pickerStyle(.segmented)
                     .frame(width: 150)
                 }
-                
+
                 Spacer()
-                
+
                 // Participant Count (for room chat only)
                 if case .room = chatMode, let room = appState.currentWatchPartyRoom {
                     HStack(spacing: 4) {
@@ -139,7 +121,7 @@ struct ChatOverlayView: View {
                             )
                     )
                 }
-                
+
                 Button(action: { viewModel.toggleChat() }) {
                     Image(systemName: "xmark.circle.fill")
                         .font(.title2)
@@ -171,7 +153,6 @@ struct ChatOverlayView: View {
                         .id(message.id)
                     }
                 }
-                .drawingGroup() // GPU accelerate the message list (safe: no inputs)
                 .padding()
             }
             .onChange(of: viewModel.messages.count) { _ in
@@ -179,7 +160,7 @@ struct ChatOverlayView: View {
             }
         }
     }
-    
+
     private var friendsList: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
@@ -194,7 +175,7 @@ struct ChatOverlayView: View {
                         }
                     }
                 }
-                
+
                 // All Friends
                 Section(header: Text("All Friends").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
                     ForEach(socialService.friends) { friend in
@@ -208,7 +189,7 @@ struct ChatOverlayView: View {
             .padding()
         }
     }
-    
+
     private func dmMessagesList(friend: Friend) -> some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -232,7 +213,6 @@ struct ChatOverlayView: View {
                         }
                     }
                 }
-                .drawingGroup() // GPU accelerate the message list (safe: no inputs)
                 .padding()
             }
             .onChange(of: getMessageCount()) { _ in
@@ -242,14 +222,14 @@ struct ChatOverlayView: View {
             }
         }
     }
-    
+
     private func getMessageCount() -> Int {
         if case .dm(let friend) = chatMode {
             return socialService.messages[friend.id]?.count ?? 0
         }
         return 0
     }
-    
+
     private func scrollToBottom(proxy: ScrollViewProxy, lastId: AnyHashable?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             if let id = lastId {
@@ -327,7 +307,7 @@ struct ChatOverlayView: View {
 
     private func sendMessage() {
         guard !inputText.isEmpty else { return }
-        
+
         switch chatMode {
         case .room:
             viewModel.sendMessage(inputText)
@@ -338,7 +318,7 @@ struct ChatOverlayView: View {
                 await socialService.sendMessage(to: friend.id, content: inputText)
             }
         }
-        
+
         inputText = ""
     }
 }
@@ -346,7 +326,7 @@ struct ChatOverlayView: View {
 struct FriendRowButton: View {
     let friend: Friend
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             HStack {
@@ -354,12 +334,12 @@ struct FriendRowButton: View {
                     .fill(Color.blue.opacity(0.3))
                     .frame(width: 32, height: 32)
                     .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
-                
+
                 Text(friend.displayName)
                     .foregroundColor(.white)
-                
+
                 Spacer()
-                
+
                 if SocialService.shared.onlineUserIds.contains(friend.id) {
                     Circle()
                         .fill(Color.green)

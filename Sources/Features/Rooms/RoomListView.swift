@@ -6,6 +6,7 @@ struct RoomListView: View {
     @State private var errorMessage: String?
     @State private var showJoinDialog = false
     @State private var roomCodeInput = ""
+    @State private var realtimeClient: SupabaseRealtimeClient?
 
     var body: some View {
         VStack {
@@ -63,6 +64,14 @@ struct RoomListView: View {
         }
         .onAppear {
             loadRooms()
+            Task {
+                await setupRealtimeSubscription()
+            }
+        }
+        .onDisappear {
+            Task {
+                await disconnectRealtime()
+            }
         }
     }
 
@@ -322,6 +331,83 @@ struct RoomListView: View {
             print("❌ Room not found: \(code)")
         }
     }
+    
+    // MARK: - Realtime Subscription
+    
+    private func setupRealtimeSubscription() async {
+        print("🔌 RoomListView: Setting up realtime subscription for rooms...")
+        
+        let client = SupabaseRealtimeClient(
+            realtimeURL: Config.supabaseURL,
+            apiKey: Config.supabaseAnonKey
+        )
+        
+        await MainActor.run {
+            self.realtimeClient = client
+        }
+        
+        // Subscribe to Postgres Changes on rooms table
+        await client.onPostgresChange { payload in
+            Task { @MainActor in
+                await self.handleRoomUpdate(payload)
+            }
+        }
+        
+        do {
+            try await client.connect()
+            
+            // Listen for UPDATEs on rooms table (state, playback_position changes)
+            let changesConfig: [[String: Any]] = [
+                [
+                    "event": "UPDATE",
+                    "schema": "public",
+                    "table": "rooms"
+                ]
+            ]
+            
+            try await client.joinChannel("rooms_updates", postgresChanges: changesConfig)
+            print("✅ RoomListView: Connected to rooms realtime updates")
+        } catch {
+            print("❌ RoomListView: Failed to subscribe to rooms: \(error)")
+        }
+    }
+    
+    private func disconnectRealtime() async {
+        if let client = realtimeClient {
+            await client.disconnect()
+            await MainActor.run {
+                self.realtimeClient = nil
+            }
+        }
+    }
+    
+    @MainActor
+    private func handleRoomUpdate(_ payload: [String: Any]) async {
+        guard let newRecord = payload["new"] as? [String: Any],
+              let roomId = newRecord["id"] as? String else {
+            return
+        }
+        
+        // Find the room in active rooms
+        guard let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) else {
+            return
+        }
+        
+        var room = appState.activeRooms[index]
+        
+        // Update state if changed
+        if let isPlaying = newRecord["is_playing"] as? Bool {
+            room.state = isPlaying ? .playing : .paused
+        }
+        
+        // Update playback position if changed
+        if let position = newRecord["playback_position"] as? Double {
+            room.playbackPosition = TimeInterval(position)
+        }
+        
+        appState.activeRooms[index] = room
+        print("🔄 RoomListView: Updated room \(roomId) - state: \(room.state), position: \(room.playbackPosition ?? 0)s")
+    }
 }
 
 extension NSAlert {
@@ -337,6 +423,8 @@ extension NSAlert {
 
 struct ActiveRoomRow: View {
     let room: WatchPartyRoom
+    @State private var currentTime = TimeService.shared.now
+    @State private var timer: Timer?
 
     var body: some View {
         HStack(spacing: 16) {
@@ -457,18 +545,20 @@ struct ActiveRoomRow: View {
                     }
                 }
 
-                // Progress Bar (if playing and has runtime)
-                if room.state == .playing, let position = room.playbackPosition, let runtime = room.runtime, runtime > 0 {
+                // Progress Bar (if has runtime)
+                if let runtime = room.runtime, runtime > 0 {
+                    let currentPosition = calculateCurrentPosition()
+                    
                     VStack(alignment: .leading, spacing: 6) {
-                        ProgressView(value: min(position / runtime, 1.0), total: 1.0)
-                            .progressViewStyle(LinearProgressViewStyle(tint: .green))
+                        ProgressView(value: min(currentPosition / runtime, 1.0), total: 1.0)
+                            .progressViewStyle(LinearProgressViewStyle(tint: room.state == .playing ? .green : .orange))
                             .scaleEffect(x: 1, y: 1.2, anchor: .center)
 
                         HStack {
-                            Text(formatTime(position))
+                            Text(formatTime(currentPosition))
                                 .font(.system(size: 11, weight: .medium))
                             Spacer()
-                            Text("-\(formatTime(runtime - position))")
+                            Text("-\(formatTime(runtime - currentPosition))")
                                 .font(.system(size: 11, weight: .medium))
                         }
                         .foregroundColor(.secondary)
@@ -484,6 +574,41 @@ struct ActiveRoomRow: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            stopTimer()
+        }
+    }
+    
+    // MARK: - Live Progress Calculation
+    
+    private func calculateCurrentPosition() -> TimeInterval {
+        guard let initialPosition = room.playbackPosition else { return 0 }
+        
+        // If paused, return the frozen position
+        if room.state != .playing {
+            return initialPosition
+        }
+        
+        // Calculate elapsed time since room creation
+        let elapsed = currentTime.timeIntervalSince(room.createdAt)
+        
+        // Current position = initial position + elapsed time
+        return initialPosition + elapsed
+    }
+    
+    private func startTimer() {
+        // Update current time every second
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            currentTime = TimeService.shared.now
+        }
+    }
+    
+    private func stopTimer() {
+        timer?.invalidate()
+        timer = nil
     }
 
     private func formatTime(_ interval: TimeInterval) -> String {

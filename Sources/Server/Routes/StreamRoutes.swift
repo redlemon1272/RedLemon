@@ -1709,7 +1709,8 @@ private func processBucket(
 
     // COMPLETELY REMOVE x265/HEVC streams (terrible quality) - CHECK TITLE
     // Also remove low-quality/unreliable release groups (YIFY, YTS, bitloks)
-    let badPatterns = ["x265", "hevc", "h.265", "h265", "x.265", "yify", "yts", "bitloks"]
+    // Also remove EXTRAS/bonus content torrents
+    let badPatterns = ["x265", "hevc", "h.265", "h265", "x.265", "yify", "yts", "bitloks", "extras"]
     let beforeFilter = yearAndCodecFiltered.count
     yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
         let titleLower = stream.title.lowercased()

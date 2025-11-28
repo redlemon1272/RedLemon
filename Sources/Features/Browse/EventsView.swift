@@ -243,20 +243,42 @@ struct EventsView: View {
             }
             
             // Check for auto-join (Seamless Transition from finished movie)
-            // Check for auto-join (Seamless Transition from finished movie)
             if self.appState.shouldAutoJoinLobby {
-                // Priority: 1. Lobby (Next event), 2. Live (Current event if we just joined late/reloaded)
-                // CRITICAL: Check finishedEventIds to prevent re-joining a movie we just finished
-                // Also check if the live event is marked as finished in AppState to force lobby join
-                if let lobbyEvent = scheduledEvents.first(where: { 
-                    $0.isInLobby || 
-                    ($0.index == 1 && (scheduledEvents.first?.isFinished == true || appState.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))) 
+                // Find the NEXT event (not the finished one)
+                // Priority: Lobby event that is NOT finished
+                if let lobbyEvent = scheduledEvents.first(where: { event in
+                    // ✅ Must not be in finished events list
+                    guard !appState.finishedEventIds.contains(event.id) else { 
+                        print("⏭️ Skipping finished event: \(event.mediaItem.name)")
+                        return false 
+                    }
+                    
+                    // ✅ Must not be marked as finished
+                    guard !event.isFinished else { 
+                        print("⏭️ Skipping finished event: \(event.mediaItem.name)")
+                        return false 
+                    }
+                    
+                    // ✅ Must be in lobby OR be the next event (index == 1) with previous event finished
+                    let isInLobby = event.isInLobby
+                    let isNextEventAfterFinished = event.index == 1 && 
+                                                   (scheduledEvents.first?.isFinished == true || 
+                                                    appState.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))
+                    
+                    return isInLobby || isNextEventAfterFinished
                 }) {
-                    print("🔄 Auto-joining Lobby event: \(lobbyEvent.mediaItem.name)")
+                    print("🔄 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
                     self.joinEvent(lobbyEvent)
-                } else if let liveEvent = scheduledEvents.first(where: { $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id) }) {
+                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
+                } else if let liveEvent = scheduledEvents.first(where: { 
+                    $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id) 
+                }) {
                     print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
                     self.joinEvent(liveEvent)
+                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
+                } else {
+                    print("⚠️ No eligible event found for auto-join")
+                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag even if no event found
                 }
             }
         }

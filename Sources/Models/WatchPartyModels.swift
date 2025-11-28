@@ -7,14 +7,14 @@ struct PlaylistItem: Identifiable, Codable, Equatable {
     let mediaItem: MediaItem
     let season: Int?
     let episode: Int?
-    
+
     init(mediaItem: MediaItem, season: Int? = nil, episode: Int? = nil) {
         self.id = UUID().uuidString
         self.mediaItem = mediaItem
         self.season = season
         self.episode = episode
     }
-    
+
     var displayTitle: String {
         if let s = season, let e = episode {
             return "\(mediaItem.name) - S\(s)E\(e)"
@@ -32,6 +32,7 @@ struct WatchPartyRoom: Identifiable {
     var mediaItem: MediaItem? // Optional - can be set later in lobby
     var season: Int? // Season number for series
     var episode: Int? // Episode number for series
+    var episodeTitle: String? // Title of the episode
     var quality: VideoQuality
     var sourceQuality: String? // BluRay, WEB-DL, CAM, etc.
     var description: String? // Room description set by host
@@ -67,13 +68,13 @@ struct WatchPartyRoom: Identifiable {
     var readyCount: Int {
         participants.filter { $0.isReady }.count
     }
-    
+
     // MARK: - Playlist Helpers
-    
+
     var hasPlaylist: Bool {
         playlist != nil && !(playlist?.isEmpty ?? true)
     }
-    
+
     var currentPlaylistItem: PlaylistItem? {
         guard let playlist = playlist,
               currentPlaylistIndex < playlist.count else {
@@ -81,7 +82,7 @@ struct WatchPartyRoom: Identifiable {
         }
         return playlist[currentPlaylistIndex]
     }
-    
+
     var isLastItemInPlaylist: Bool {
         guard let playlist = playlist else { return false }
         return currentPlaylistIndex >= playlist.count - 1

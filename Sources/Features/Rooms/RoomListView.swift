@@ -79,10 +79,13 @@ struct RoomListView: View {
                 // Convert Supabase rooms to WatchPartyRooms with participants
                 var allRooms: [WatchPartyRoom] = []
                 for room in backendRooms {
+                    // Determine media type based on season/episode
+                    let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
+
                     // Create a MediaItem from the room data
                     let mediaItem = MediaItem(
                         id: room.imdbId ?? "unknown",
-                        type: "movie",
+                        type: mediaType,
                         name: room.name,
                         poster: room.posterUrl,
                         background: room.backdropUrl,
@@ -153,6 +156,7 @@ struct RoomListView: View {
                         mediaItem: mediaItem,
                         season: nil,  // Extract from metadata when available
                         episode: nil,  // Extract from metadata when available
+                        episodeTitle: nil, // Extract from metadata when available
                         quality: .fullHD,
                         sourceQuality: nil,
                         description: nil,
@@ -230,58 +234,50 @@ struct RoomListView: View {
             return (index, nil)
         }
 
-        struct CinemetaMeta: Codable {
-            let meta: MetaInfo
-            struct MetaInfo: Codable {
-                let name: String?
-                let poster: String?
-                let background: String?
-                let logo: String?
-                let type: String?
-            }
-        }
-
         do {
             let mediaType = room.mediaItem?.type ?? "movie"
-            var cinemetaURL = URL(string: "https://v3-cinemeta.strem.io/meta/\(mediaType)/\(imdbId).json")!
-            let (data, _) = try await URLSession.shared.data(from: cinemetaURL)
-            var response = try JSONDecoder().decode(CinemetaMeta.self, from: data)
 
-            // If no artwork, try opposite type
-            if response.meta.poster == nil && response.meta.background == nil && response.meta.logo == nil {
-                let alternateType = mediaType == "movie" ? "series" : "movie"
-                cinemetaURL = URL(string: "https://v3-cinemeta.strem.io/meta/\(alternateType)/\(imdbId).json")!
+            // Use LocalAPIClient to fetch full metadata (includes episodes for series)
+            let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaType, id: imdbId)
 
-                if let altData = try? await URLSession.shared.data(from: cinemetaURL).0,
-                   let altResponse = try? JSONDecoder().decode(CinemetaMeta.self, from: altData),
-                   (altResponse.meta.poster != nil || altResponse.meta.background != nil || altResponse.meta.logo != nil) {
-                    response = altResponse
-                }
-            }
-
-            if let poster = response.meta.poster {
+            // Update poster/backdrop/logo
+            if let poster = metadata.posterURL {
                 room.posterURL = poster
             }
 
+            // Update MediaItem with full details
             if let existingMediaItem = room.mediaItem {
                 room.mediaItem = MediaItem(
                     id: existingMediaItem.id,
-                    type: response.meta.type ?? existingMediaItem.type,
-                    name: response.meta.name ?? existingMediaItem.name,
-                    poster: response.meta.poster ?? existingMediaItem.poster,
-                    background: response.meta.background ?? existingMediaItem.background,
-                    logo: response.meta.logo ?? existingMediaItem.logo,
-                    description: existingMediaItem.description,
-                    releaseInfo: existingMediaItem.releaseInfo,
-                    year: existingMediaItem.year,
-                    imdbRating: existingMediaItem.imdbRating,
-                    genres: existingMediaItem.genres,
-                    runtime: existingMediaItem.runtime
+                    type: metadata.type,
+                    name: metadata.title,
+                    poster: metadata.posterURL,
+                    background: metadata.backgroundURL,
+                    logo: metadata.logoURL,
+                    description: metadata.description,
+                    releaseInfo: metadata.releaseInfo,
+                    year: metadata.year,
+                    imdbRating: metadata.imdbRating.map { String($0) },
+                    genres: metadata.genres,
+                    runtime: metadata.runtime
                 )
+            }
+
+            // If it's a series, try to find the episode title
+            if mediaType == "series",
+               let season = room.season,
+               let episode = room.episode,
+               let videos = metadata.videos {
+
+                if let video = videos.first(where: { $0.season == season && $0.episode == episode }) {
+                    room.episodeTitle = video.title
+                    print("📺 Found episode title for \(metadata.title) S\(season)E\(episode): \(video.title)")
+                }
             }
 
             return (index, room)
         } catch {
+            print("❌ Failed to fetch metadata for room \(index): \(error)")
             return (index, nil)
         }
     }
@@ -300,13 +296,13 @@ struct RoomListView: View {
         appState.currentWatchPartyRoom = room
         appState.currentRoomId = room.id
         appState.isWatchPartyHost = isUserHost
-        
+
         // If room is already playing, set auto-join flag so lobby auto-starts immediately
         if room.state == .playing {
             print("🎬 Room is already playing - will auto-start from lobby")
             appState.shouldAutoJoinLobby = true
         }
-        
+
         appState.currentView = .watchPartyLobby
     }
 
@@ -348,10 +344,27 @@ struct ActiveRoomRow: View {
             VStack(alignment: .leading, spacing: 8) {
                 // Title - show movie name if available, otherwise show room name
                 if let movieName = room.mediaItem?.name, room.mediaItem?.id != "unknown" {
-                    Text(movieName)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .lineLimit(1)
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(movieName)
+                            .font(.headline)
+                            .fontWeight(.bold)
+                            .lineLimit(1)
+
+                        // Show S/E and Episode Title for series
+                        if let season = room.season, let episode = room.episode {
+                            HStack(spacing: 4) {
+                                Text("S\(season):E\(episode)")
+                                    .fontWeight(.semibold)
+
+                                if let epTitle = room.episodeTitle {
+                                    Text("- \(epTitle)")
+                                        .lineLimit(1)
+                                }
+                            }
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        }
+                    }
                 } else {
                     Text("Room: \(room.id)")
                         .font(.headline)

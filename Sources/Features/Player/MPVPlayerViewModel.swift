@@ -162,7 +162,7 @@ class MPVPlayerViewModel: ObservableObject {
         // Fetch metadata for background art
         // Fetch metadata for background art (parallel, don't block video load)
         Task {
-            await fetchMetadata(imdbId: imdbId)
+            await fetchMetadata(imdbId: imdbId, mediaType: isSeries ? "series" : "movie")
         }
 
         // Check if we should resume from a specific timestamp
@@ -328,41 +328,35 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Metadata Fetching
 
-    private func fetchMetadata(imdbId: String) async {
-        guard let url = Config.metadataMovieURL(imdbId: imdbId) else {
-            print("❌ Invalid metadata URL")
-            return
-        }
-
-        print("📡 Fetching metadata for \(imdbId)...")
+    private func fetchMetadata(imdbId: String, mediaType: String) async {
+        print("📡 Fetching metadata for \(imdbId) as \(mediaType)...")
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(CinemetaMetadataResponse.self, from: data)
-            let metadata = response.meta
+            // Use LocalAPIClient which correctly handles both movies and series
+            let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaType, id: imdbId)
 
             // Prefer background (widescreen) over poster
-            if let background = metadata.background {
+            if let background = metadata.backgroundURL {
                 self.backgroundURL = upgradeToHD(background)
                 print("✅ Got background: \(background.prefix(60))...")
-            } else if let poster = metadata.poster {
+            } else if let poster = metadata.posterURL {
                 self.backgroundURL = upgradeToHD(poster)
                 print("✅ Got poster as background: \(poster.prefix(60))...")
             }
 
             // Set poster URL for player UI
-            if let poster = metadata.poster {
+            if let poster = metadata.posterURL {
                 self.posterURL = upgradeToHD(poster)
                 print("✅ Got poster URL: \(poster.prefix(60))...")
             }
 
             // Get logo for loading screen
-            if let logo = metadata.logo {
+            if let logo = metadata.logoURL {
                 self.logoURL = upgradeToHD(logo)
                 print("✅ Got logo: \(logo.prefix(60))...")
             }
 
-            self.title = metadata.name
+            self.title = metadata.title
 
         } catch {
             print("⚠️ Failed to fetch metadata: \(error.localizedDescription)")

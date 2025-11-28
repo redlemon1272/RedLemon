@@ -102,7 +102,7 @@ class AppState: ObservableObject {
             // Step 1: Fetch metadata immediately for UI feedback
             NSLog("📡 Fetching metadata for \(item.id)...")
             let metadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
-            
+
             // Update UI immediately so background art shows
             await MainActor.run {
                 selectedMetadata = metadata
@@ -111,15 +111,15 @@ class AppState: ObservableObject {
                 currentWatchMode = watchMode
                 isWatchPartyHost = isHost
                 selectedQuality = quality
-                
+
                 // Switch to player view immediately
                 currentView = .player
             }
-            
+
             // Only pass season/episode for TV series, not movies
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
-            
+
             // Step 2: Resolve stream via StreamService (passing metadata)
             let result = try await StreamService.shared.resolveStream(
                 item: item,
@@ -128,23 +128,23 @@ class AppState: ObservableObject {
                 episode: episode,
                 metadata: metadata
             )
-            
+
             // Step 2: Update UI with resolved data
             await MainActor.run {
                 selectedStream = result.stream
-                
+
                 // Set room ID logic
                 if let roomId = roomId {
                     currentRoomId = roomId
                     print(" Using provided room ID: \(roomId)")
-                    
+
                     // GUEST LOGIC: Check if we should use host's stream instead
                     // This logic remains here as it depends on AppState properties
                     if !isHost, let watchPartyRoom = currentWatchPartyRoom,
                        let hostStreamHash = watchPartyRoom.selectedStreamHash,
                        let hostQuality = watchPartyRoom.selectedQuality,
                        let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
-                        
+
                         NSLog("🎬 GUEST: Using host's stream selection")
                         // Create stream with host's unlocked URL
                         var hostStream = Stream(
@@ -158,17 +158,17 @@ class AppState: ObservableObject {
                             fileIdx: watchPartyRoom.selectedFileIdx,
                             ext: nil,
                             behaviorHints: nil,
-                            subtitles: [] 
+                            subtitles: []
                         )
-                        
+
                         // Use subtitles from resolved stream if available
                         if let subtitles = result.stream.subtitles {
                             hostStream.subtitles = subtitles
                         }
-                        
+
                         selectedStream = hostStream
                     }
-                    
+
                 } else if watchMode == .watchParty {
                     currentRoomId = "room_\(UUID().uuidString.prefix(8))"
                     print(" Created room ID: \(currentRoomId ?? "none")")
@@ -176,14 +176,14 @@ class AppState: ObservableObject {
                     currentRoomId = nil
                     print(" Solo playback - no room created")
                 }
-                
+
                 currentView = .player
                 isResolvingStream = false
             }
-            
+
             NSLog("✅ Stream ready, starting playback...")
             enterFullscreen()
-            
+
         } catch {
             print("❌ Playback error: \(error)")
             await MainActor.run {
@@ -209,10 +209,10 @@ class AppState: ObservableObject {
         do {
             print("🎬 Preloading playback for: \(item.name)")
             NSLog("   Quality: \(quality.rawValue)")
-            
+
             // Step 1: Fetch metadata immediately
             let metadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
-            
+
             // Update UI immediately
             await MainActor.run {
                 selectedMetadata = metadata
@@ -222,15 +222,15 @@ class AppState: ObservableObject {
                 isWatchPartyHost = isHost
                 selectedQuality = quality
                 isPreloading = true // Set preloading flag
-                
+
                 // Switch to player view
                 currentView = .player
             }
-            
+
             // Only pass season/episode for TV series
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
-            
+
             // Step 2: Resolve stream
             let result = try await StreamService.shared.resolveStream(
                 item: item,
@@ -239,21 +239,21 @@ class AppState: ObservableObject {
                 episode: episode,
                 metadata: metadata
             )
-            
+
             // Step 3: Update UI with resolved data
             await MainActor.run {
                 selectedStream = result.stream
-                
+
                 // Set room ID logic (same as playMedia)
                 if let roomId = roomId {
                     currentRoomId = roomId
-                    
+
                     // GUEST LOGIC: Check if we should use host's stream
                     if !isHost, let watchPartyRoom = currentWatchPartyRoom,
                        let hostStreamHash = watchPartyRoom.selectedStreamHash,
                        let hostQuality = watchPartyRoom.selectedQuality,
                        let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
-                        
+
                         NSLog("🎬 GUEST: Using host's stream selection for preload")
                         var hostStream = Stream(
                             url: hostUnlockedURL,
@@ -266,31 +266,31 @@ class AppState: ObservableObject {
                             fileIdx: watchPartyRoom.selectedFileIdx,
                             ext: nil,
                             behaviorHints: nil,
-                            subtitles: [] 
+                            subtitles: []
                         )
-                        
+
                         if let subtitles = result.stream.subtitles {
                             hostStream.subtitles = subtitles
                         }
-                        
+
                         selectedStream = hostStream
                     }
-                    
+
                 } else if watchMode == .watchParty {
                     currentRoomId = "room_\(UUID().uuidString.prefix(8))"
                 } else {
                     currentRoomId = nil
                 }
-                
+
                 currentView = .player
                 isResolvingStream = false
             }
-            
+
             NSLog("✅ Stream preloaded, waiting for play signal...")
             // Do NOT call enterFullscreen() yet? Or maybe yes so they see the loading screen?
             // Let's enter fullscreen so they are ready
             enterFullscreen()
-            
+
         } catch {
             print("❌ Preload error: \(error)")
             await MainActor.run {
@@ -319,7 +319,7 @@ class AppState: ObservableObject {
 
         do {
             print("🎬 Starting playback with selected stream: \(stream.title)")
-            
+
             await MainActor.run {
                 isResolvingStream = true
                 currentWatchMode = watchMode
@@ -336,7 +336,7 @@ class AppState: ObservableObject {
             // Step 2: Unlock stream via StreamService
             let season = mediaItem.type == "series" ? selectedSeason : nil
             let episode = mediaItem.type == "series" ? selectedEpisode : nil
-            
+
             let unlockedStream = try await StreamService.shared.unlockStream(
                 stream: stream,
                 item: mediaItem,
@@ -347,7 +347,7 @@ class AppState: ObservableObject {
             // Step 3: Update UI
             await MainActor.run {
                 selectedStream = unlockedStream
-                
+
                 if let roomId = roomId {
                     currentRoomId = roomId
                 } else if watchMode == .watchParty {
@@ -355,11 +355,11 @@ class AppState: ObservableObject {
                 } else {
                     currentRoomId = nil
                 }
-                
+
                 currentView = .player
                 isResolvingStream = false
             }
-            
+
             enterFullscreen()
             print("✅ Selected stream ready for playback!")
 
@@ -397,11 +397,11 @@ class AppState: ObservableObject {
         currentRoomId = nil
         currentWatchMode = .solo
         isWatchPartyHost = false
-        
+
         // Capture event state before resetting
         let wasEventPlayback = isEventPlayback
         isEventPlayback = false // Reset event flag
-        
+
         // Navigate back to appropriate view
         if wasEventPlayback {
             print("🔙 Returning to Events view")
@@ -419,28 +419,31 @@ class AppState: ObservableObject {
 
     func handleMovieFinished() async {
         print("🎬 AppState.handleMovieFinished() called")
-        
+
         // TV Event Logic - Continuous Playback
         if isTVEvent, let series = currentTVSeries {
             print("📺 TV Event finished - loading next episode")
             await loadNextTVEpisode(series: series)
             return
         }
-        
+
         print("🎬   isEventPlayback: \(isEventPlayback)")
         print("🎬   currentWatchPartyRoom: \(currentWatchPartyRoom?.id ?? "nil")")
         print("🎬   currentView: \(currentView)")
-        
+
+        // Capture state BEFORE exiting player (which resets flags)
+        let wasEventPlayback = isEventPlayback
+
         print("🎬 Calling exitPlayer()...")
         await exitPlayer()
         print("🎬 exitPlayer() completed")
-        
+
         // Priority 1: Event playback (existing logic)
-        if isEventPlayback {
+        if wasEventPlayback {
             print("🔄 Event finished - transitioning to Events flow")
             print("🔄   Setting currentView = .events")
             print("🔄   Setting shouldAutoJoinLobby = true")
-            
+
             // Mark current event as finished to prevent auto-rejoin
             if let eventId = currentEventId {
                 print("🔄   Marking event \(eventId) as finished")
@@ -449,7 +452,7 @@ class AppState: ObservableObject {
                     currentEventId = nil
                 }
             }
-            
+
             await MainActor.run {
                 currentView = .events
                 shouldAutoJoinLobby = true
@@ -457,14 +460,14 @@ class AppState: ObservableObject {
             print("🔄   Transition complete - currentView is now \(currentView)")
             return
         }
-        
+
         // Priority 2: Watch party with playlist (NEW)
         if let room = currentWatchPartyRoom, room.hasPlaylist {
             print("🔄 Playlist item finished - returning to lobby")
             await handlePlaylistTransition(room: room)
             return
         }
-        
+
         // Priority 3: Single movie watch party (persistent by default now)
         if let room = currentWatchPartyRoom, room.isPersistent {
             print("🔄 Movie finished - returning to persistent lobby")
@@ -473,7 +476,7 @@ class AppState: ObservableObject {
             }
             return
         }
-        
+
         // Fallback: Solo watching (no action needed, just exit)
         print("✅ Playback finished - solo watching")
     }
@@ -483,7 +486,7 @@ class AppState: ObservableObject {
         await MainActor.run {
             // Return to lobby
             currentView = .watchPartyLobby
-            
+
             // The lobby will handle:
             // 1. Showing countdown (using room.lobbyDuration)
             // 2. Auto-advancing to next item
@@ -498,12 +501,12 @@ class AppState: ObservableObject {
             await exitPlayer()
             return
         }
-        
+
         // Calculate next episode
         let (nextSeason, nextEpisode) = series.getNextEpisode(currentSeason: currentSeason, currentEpisode: currentEpisode)
-        
+
         print("📺 Loading next episode: S\(nextSeason)E\(nextEpisode)")
-        
+
         // Update state
         await MainActor.run {
             selectedSeason = nextSeason
@@ -512,7 +515,7 @@ class AppState: ObservableObject {
             isResolvingStream = true
             streamError = nil
         }
-        
+
         // Play next episode
         await playMedia(
             mediaItem,
@@ -522,7 +525,7 @@ class AppState: ObservableObject {
             isHost: false
         )
     }
-    
+
     // MARK: - Window Management (Delegated to WindowManager)
 
     private func enterFullscreen() {
@@ -550,7 +553,7 @@ class AppState: ObservableObject {
         let isMovie = mediaItem.type == "movie"
         let finalSeason = isMovie ? nil : season
         let finalEpisode = isMovie ? nil : episode
-        
+
         NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
         if let s = finalSeason, let e = finalEpisode {
             NSLog("   Season: \(s), Episode: \(e)")
@@ -570,7 +573,7 @@ class AppState: ObservableObject {
             // Create room on Supabase
             let roomName = mediaItem.name
             let roomId = generateRoomCode()  // 4-digit alphanumeric (e.g., A3H9)
-            
+
             // Create room in database
             let room = try await SupabaseClient.shared.createRoom(
                 id: roomId,
@@ -585,14 +588,14 @@ class AppState: ObservableObject {
                 episode: finalEpisode,
                 isPublic: true
             )
-            
+
             NSLog("✅ Room created: \(roomId)")
 
             // CRITICAL: Host must join the room in the database immediately
             // Otherwise polling will think the host "left" because they aren't in the participants table
             try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: true)
             NSLog("✅ Host joined room in database")
-            
+
             // Create host participant
             let hostParticipant = Participant(
                 id: userId.uuidString,
@@ -632,7 +635,7 @@ class AppState: ObservableObject {
             self.currentWatchPartyRoom = watchPartyRoom
             self.isWatchPartyHost = true
             self.currentWatchMode = .watchParty
-            
+
             // Set selection details for the lobby
             self.selectedMediaItem = mediaItem
             self.selectedSeason = finalSeason
@@ -642,50 +645,50 @@ class AppState: ObservableObject {
             if self.selectedMetadata == nil || self.selectedMetadata?.id != mediaItem.id {
                 self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
             }
-            
+
             // Navigate to lobby
             self.currentView = .watchPartyLobby
-            
+
         } catch {
             NSLog("❌ Failed to create room: \(error)")
             // Show error alert?
         }
-        
+
         isLoadingRoom = false
     }
-    
+
     // Generate a short 4-character room code
     func generateRoomCode() -> String {
         let chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789" // Exclude I, O, 1, 0 to avoid confusion
         return String((0..<4).map { _ in chars.randomElement()! })
     }
-    
+
     // Join an existing room
     @MainActor
     func joinRoom(roomId: String) async {
         NSLog("🚪 Joining room: \(roomId)")
         isLoadingRoom = true
-        
+
         do {
             guard let userId = currentUserId else {
                 throw NSError(domain: "AppState", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
             }
-            
+
             // Fetch room details
             guard let room = try await SupabaseClient.shared.getRoomState(roomId: roomId) else {
                 throw NSError(domain: "AppState", code: 404, userInfo: [NSLocalizedDescriptionKey: "Room not found"])
             }
-            
+
             // Join as participant
             try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
-            
+
             NSLog("✅ Joined room: \(roomId)")
-            
+
             // Convert SupabaseRoom to WatchPartyRoom
             // We need to fetch participants to create a complete WatchPartyRoom
             let participants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
             let watchPartyParticipants = participants.compactMap { p -> Participant? in
-                // We don't have full user details here, just IDs. 
+                // We don't have full user details here, just IDs.
                 // In a real app we'd fetch user profiles. For now use placeholders or fetch if critical.
                 return Participant(
                     id: p.userId.uuidString,
@@ -720,26 +723,26 @@ class AppState: ObservableObject {
                 selectedQuality: nil,
                 unlockedStreamURL: nil
             )
-            
+
             if let season = room.season, let episode = room.episode {
                 NSLog("✅ Guest: Initialized room with S\(season)E\(episode)")
             } else {
                 NSLog("⚠️ Guest: Initialized room with missing season/episode (DB returned nil)")
             }
 
-            
+
             NSLog("🔍 Room state - isPlaying: \(room.isPlaying), playbackPosition: \(room.playbackPosition)")
-            
+
             // Check if room is already playing
             if room.isPlaying {
                 NSLog("🎬 Room is already playing - navigating directly to playback")
-                
+
                 // Set state for playback
                 self.currentRoomId = roomId
                 self.currentWatchPartyRoom = watchPartyRoom
                 self.isWatchPartyHost = (room.hostUserId == userId)
                 self.currentWatchMode = .watchParty
-                
+
                 // Set selection details from room
                 if let imdbId = room.imdbId, !imdbId.isEmpty {
                     self.selectedMediaItem = MediaItem(
@@ -756,21 +759,21 @@ class AppState: ObservableObject {
                         genres: nil,
                         runtime: nil
                     )
-                    
+
                     // Fetch metadata
                     self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
                         type: room.season != nil ? "series" : "movie",
                         id: imdbId
                     )
-                    
+
                     // Set season/episode if applicable
                     self.selectedSeason = room.season
                     self.selectedEpisode = room.episode
                     self.selectedQuality = .fullHD
-                    
+
                     // Calculate seek position based on room's playback position
                     self.resumeFromTimestamp = Double(room.playbackPosition)
-                    
+
                     // Navigate directly to player
                     await playMedia(
                         self.selectedMediaItem!,
@@ -782,13 +785,13 @@ class AppState: ObservableObject {
                 }
             } else {
                 NSLog("🚪 Room is in lobby - navigating to lobby view")
-                
+
                 // Set state
                 self.currentRoomId = roomId
                 self.currentWatchPartyRoom = watchPartyRoom
                 self.isWatchPartyHost = (room.hostUserId == userId)
                 self.currentWatchMode = .watchParty
-                
+
                 // Set selection details from room
                 if let imdbId = room.imdbId, !imdbId.isEmpty {
                     // We need to fetch the media item details
@@ -807,23 +810,23 @@ class AppState: ObservableObject {
                         genres: nil,
                         runtime: nil
                     )
-                    
+
                     // Fetch metadata
                     self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
                         type: "movie", // Default
                         id: imdbId
                     )
                 }
-                
+
                 // Navigate to lobby
                 self.currentView = .watchPartyLobby
             }
-            
+
         } catch {
             NSLog("❌ Failed to join room: \(error)")
             // Show error
         }
-        
+
         isLoadingRoom = false
     }
 

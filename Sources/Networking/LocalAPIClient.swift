@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v10_pinned_movies"  // Increment when filters change
+        let filterVersion = "v11_more_blocks"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -184,7 +184,9 @@ class LocalAPIClient: ObservableObject {
                 "Lilith Fair: Building a Mystery",
                 "Three Billboards Outside Ebbing, Missouri",
                 "Star Wars",
-                "The White House Effect"
+                "The White House Effect",
+                "Animal Kingdom",
+                "The Ugly Stepsister"
             ]
             if blacklistedTitles.contains(where: { meta.name.contains($0) }) {
                 print("🚫 Skipping blacklisted movie: \(meta.name)")

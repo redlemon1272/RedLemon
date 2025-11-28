@@ -868,18 +868,28 @@ class MPVWrapper: ObservableObject {
         timeUpdateTimer = nil
 
         // Clean up MPV resources
+        // Clean up MPV resources
         if let handle = mpvHandle {
             // Explicitly clear render context pointer to prevent any further access
             renderContext = nil
-
-            if isInitialized {
-                print("🗑️ Terminating MPV instance...")
-                mpv_terminate_destroy(handle)
-            } else {
-                print("🗑️ Destroying MPV instance...")
-                mpv_destroy(handle)
-            }
+            // Clear handle immediately so no other calls can use it
             mpvHandle = nil
+            
+            let wasInitialized = isInitialized
+            
+            // CRITICAL: Destroy MPV on background thread to prevent blocking Main Thread
+            // mpv_terminate_destroy can take significant time (flushing caches, closing streams)
+            // which causes "spinning beach ball" freezes if run on Main Thread.
+            Task.detached(priority: .background) {
+                if wasInitialized {
+                    print("🗑️ Terminating MPV instance (background)...")
+                    mpv_terminate_destroy(handle)
+                } else {
+                    print("🗑️ Destroying MPV instance (background)...")
+                    mpv_destroy(handle)
+                }
+                print("✅ MPV instance destroyed")
+            }
         }
 
         // Clean up memory pressure monitoring

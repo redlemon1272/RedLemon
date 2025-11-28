@@ -1472,8 +1472,38 @@ extension LobbyViewModel: WatchPartyManagerDelegate {
 
     func watchPartyManager(_ manager: WatchPartyManager, didUpdatePresence participants: [String: String]) {
         NSLog("👥 WatchPartyManager presence updated: \(participants)")
-        // Update participants list if needed
-        // This is handled by the main LobbyViewModel polling mechanism
+        
+        // ✅ Update participants list in real-time to keep count synchronized
+        Task { @MainActor in
+            guard let appState = appState,
+                  var room = appState.currentWatchPartyRoom else { return }
+            
+            // Convert presence dictionary to Participant objects
+            let updatedParticipants = participants.map { (userId, username) -> Participant in
+                // Check if this user is the host
+                let isHost = userId == room.hostId
+                
+                // Try to preserve existing participant data if available
+                if let existing = room.participants.first(where: { $0.id == userId }) {
+                    return existing
+                } else {
+                    // Create new participant
+                    return Participant(
+                        id: userId,
+                        name: username,
+                        isHost: isHost,
+                        isReady: isHost, // Host is always ready
+                        joinedAt: Date()
+                    )
+                }
+            }
+            
+            // Update the room's participants array
+            room.participants = updatedParticipants
+            appState.currentWatchPartyRoom = room
+            
+            NSLog("✅ Updated participants count: \(updatedParticipants.count)")
+        }
     }
 
     func watchPartyManager(_ manager: WatchPartyManager, didReceiveChatMessage message: SyncMessage) {

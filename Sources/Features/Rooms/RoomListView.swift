@@ -274,11 +274,6 @@ struct RoomListView: View {
                 if let video = videos.first(where: { $0.season == season && $0.episode == episode }) {
                     room.episodeTitle = video.title
                     print("📺 Found episode title for \(metadata.title) S\(season)E\(episode): \(video.title)")
-
-                    // Set runtime from episode runtime (in seconds)
-                    if let runtime = video.runtime {
-                        room.runtime = TimeInterval(runtime)
-                    }
                 }
             } else if let runtimeStr = metadata.runtime {
                 // For movies, parse runtime string (e.g., "120 min" -> 7200 seconds)

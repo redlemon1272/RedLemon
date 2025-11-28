@@ -3,7 +3,7 @@ import SwiftUI
 struct EventsView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject private var timeService = TimeService.shared
-    @StateObject var apiClient = LocalAPIClient()
+    @StateObject internal var apiClient = LocalAPIClient()
 
     // Media type selection
     @State private var selectedMediaType: MediaType = .movies

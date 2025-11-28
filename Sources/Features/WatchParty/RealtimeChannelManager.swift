@@ -57,7 +57,7 @@ actor RealtimeChannelManager {
 
     // MARK: - Setup
 
-    func setup(roomId: String, isHost: Bool, userId: String, onSync: @escaping (SyncMessage) -> Void) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, onSync: @escaping (SyncMessage) -> Void) async throws {
         self.roomId = roomId
         self.isHost = isHost
         self.userId = userId
@@ -88,7 +88,8 @@ actor RealtimeChannelManager {
         // Track presence
         try await realtimeClient.track(userId: userId, metadata: [
             "is_host": isHost,
-            "joined_at": Date().timeIntervalSince1970
+            "joined_at": Date().timeIntervalSince1970,
+            "username": username
         ])
 
         isConnected = true

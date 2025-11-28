@@ -1201,10 +1201,14 @@ extension MPVPlayerViewModel {
             )
         ]
 
+        // Get username from appState
+        let username = appState?.currentUsername ?? "User"
+
         try await realtimeManager?.setup(
             roomId: roomId,
             isHost: isHost,
             userId: userId,
+            username: username,
             onSync: { [weak self] syncMessage in
                 Task { @MainActor in
                     await self?.handleSyncMessage(syncMessage)

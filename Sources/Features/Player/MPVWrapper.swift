@@ -28,6 +28,11 @@ class MPVWrapper: ObservableObject {
     private var timeUpdateTimer: Timer?
     // Memory monitoring removed to prevent crashes
 
+    // ✅ Throttling Properties
+    private var lastUIUpdateTime: Date = .distantPast
+    private let minUIUpdateInterval: TimeInterval = 0.25 // 4Hz maximum
+    private let minTimeChangeThreshold: Double = 0.1 // 100ms minimum change
+
     init() {
         print("🎬 MPVWrapper: Creating embedded MPV with render context...")
         mpvHandle = mpv_create()
@@ -249,7 +254,11 @@ class MPVWrapper: ObservableObject {
     // MARK: - Enhanced Timer Management
 
     private func startTimeUpdates() {
-        timeUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [weak self] _ in
+        timeUpdateTimer?.invalidate()
+        timeUpdateTimer = nil
+        
+        // ✅ Reduce from 2Hz to 4Hz maximum (0.25s)
+        timeUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
             guard let strongSelf = self else { return }
             Task { @MainActor in
                 strongSelf.updateCurrentTime()
@@ -259,8 +268,16 @@ class MPVWrapper: ObservableObject {
 
     private func updateCurrentTime() {
         guard let handle = mpvHandle, isInitialized, isPlaying else { return }
+        
+        let now = Date()
+        guard now.timeIntervalSince(lastUIUpdateTime) >= minUIUpdateInterval else { return }
+        lastUIUpdateTime = now
+        
         var time: Double = 0
         mpv_get_property(handle, "time-pos", MPV_FORMAT_DOUBLE, &time)
+        
+        // ✅ Only update if significant change
+        guard abs(currentTime - time) >= minTimeChangeThreshold else { return }
         currentTime = time
     }
 
@@ -747,6 +764,10 @@ class MPVWrapper: ObservableObject {
 
         print("🛑 Stopping MPV playback...")
 
+        // ✅ IMMEDIATE: Cancel event polling
+        eventPollingTask?.cancel()
+        eventPollingTask = nil
+
         // Stop playback
         _ = mpv_command_string(handle, "stop")
         isPlaying = false
@@ -755,8 +776,14 @@ class MPVWrapper: ObservableObject {
         timeUpdateTimer?.invalidate()
         timeUpdateTimer = nil
 
-        // Natural cleanup point when stopping
-        // Cleanup removed to prevent crash
+        // ✅ WAIT: Give event loop time to exit cleanly
+        let cleanupDelay = Task {
+            try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+        }
+        Task {
+            _ = await cleanupDelay.value
+            print("✅ MPV stop completed with clean event loop exit")
+        }
     }
 
     /// Get cache buffering percentage (0-100) for large seek validation

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Make this script executable
+chmod +x "$0"
+
 # Log Cleanup Script
 # This script finds and deletes all log files in the RedLemon project
 
@@ -81,10 +84,10 @@ echo
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo -e "${YELLOW}Deleting log files...${NC}"
-    
+
     deleted_count=0
     deleted_size=0
-    
+
     # Delete files
     for file in "${log_files[@]}"; do
         if [ -f "$file" ]; then
@@ -98,13 +101,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             fi
         fi
     done
-    
+
     deleted_size_hr=$(human_size $deleted_size)
     echo
     echo -e "${GREEN}=== Cleanup Complete ===${NC}"
     echo -e "${GREEN}Successfully deleted $deleted_count log files${NC}"
     echo -e "${GREEN}Freed up ${deleted_size_hr} of disk space${NC}"
-    
+
 else
     echo -e "${BLUE}Cleanup cancelled. No files were deleted.${NC}"
 fi

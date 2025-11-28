@@ -48,6 +48,10 @@ struct WatchPartyRoom: Identifiable {
     var shouldLoop: Bool
     var isPersistent: Bool  // If true, room stays alive after movies
 
+    // MARK: - Playback Progress
+    var playbackPosition: TimeInterval? // Current playback position in seconds
+    var runtime: TimeInterval? // Total runtime in seconds
+
     // MARK: - Stream Synchronization
     var selectedStreamHash: String? // Host's selected stream infoHash
     var selectedFileIdx: Int? // Host's selected file index

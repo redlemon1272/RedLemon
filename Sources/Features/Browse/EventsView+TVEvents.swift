@@ -191,6 +191,8 @@ extension EventsView {
             lobbyDuration: 0,  // No lobby for TV events
             shouldLoop: false,
             isPersistent: true,
+            playbackPosition: nil,
+            runtime: nil,
             selectedStreamHash: nil,
             selectedFileIdx: nil,
             selectedQuality: nil,

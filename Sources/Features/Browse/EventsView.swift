@@ -457,6 +457,8 @@ struct EventsView: View {
             lobbyDuration: 600,  // 10 minutes for events
             shouldLoop: false,
             isPersistent: true,  // Events are persistent
+            playbackPosition: nil,
+            runtime: nil,
             selectedStreamHash: nil,
             selectedFileIdx: nil,
             selectedQuality: nil,

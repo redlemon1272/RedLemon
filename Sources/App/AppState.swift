@@ -624,6 +624,8 @@ class AppState: ObservableObject {
                 lobbyDuration: 300,  // 5 minutes default
                 shouldLoop: false,
                 isPersistent: true,  // All watch parties are persistent now
+                playbackPosition: nil,
+                runtime: nil,
                 selectedStreamHash: nil,
                 selectedFileIdx: nil,
                 selectedQuality: nil,
@@ -718,6 +720,8 @@ class AppState: ObservableObject {
                 lobbyDuration: 300,
                 shouldLoop: false,
                 isPersistent: true,
+                playbackPosition: nil,
+                runtime: nil,
                 selectedStreamHash: nil,
                 selectedFileIdx: nil,
                 selectedQuality: nil,

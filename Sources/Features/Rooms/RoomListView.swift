@@ -169,6 +169,8 @@ struct RoomListView: View {
                         lobbyDuration: 300,
                         shouldLoop: false,
                         isPersistent: true,
+                        playbackPosition: TimeInterval(room.playbackPosition), // From backend
+                        runtime: nil, // Will be populated from metadata
                         selectedStreamHash: nil,
                         selectedFileIdx: nil,
                         selectedQuality: nil,
@@ -272,7 +274,16 @@ struct RoomListView: View {
                 if let video = videos.first(where: { $0.season == season && $0.episode == episode }) {
                     room.episodeTitle = video.title
                     print("📺 Found episode title for \(metadata.title) S\(season)E\(episode): \(video.title)")
+
+                    // Set runtime from episode runtime (in seconds)
+                    if let runtime = video.runtime {
+                        room.runtime = TimeInterval(runtime)
+                    }
                 }
+            } else if let runtimeStr = metadata.runtime {
+                // For movies, parse runtime string (e.g., "120 min" -> 7200 seconds)
+                let runtimeMinutes = Int(runtimeStr.components(separatedBy: " ").first ?? "0") ?? 0
+                room.runtime = TimeInterval(runtimeMinutes * 60)
             }
 
             return (index, room)
@@ -450,6 +461,25 @@ struct ActiveRoomRow: View {
                         .cornerRadius(4)
                     }
                 }
+
+                // Progress Bar (if playing and has runtime)
+                if room.state == .playing, let position = room.playbackPosition, let runtime = room.runtime, runtime > 0 {
+                    VStack(alignment: .leading, spacing: 6) {
+                        ProgressView(value: min(position / runtime, 1.0), total: 1.0)
+                            .progressViewStyle(LinearProgressViewStyle(tint: .green))
+                            .scaleEffect(x: 1, y: 1.2, anchor: .center)
+
+                        HStack {
+                            Text(formatTime(position))
+                                .font(.system(size: 11, weight: .medium))
+                            Spacer()
+                            Text("-\(formatTime(runtime - position))")
+                                .font(.system(size: 11, weight: .medium))
+                        }
+                        .foregroundColor(.secondary)
+                    }
+                    .padding(.top, 4)
+                }
             }
         }
         .padding(12)
@@ -459,6 +489,17 @@ struct ActiveRoomRow: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
+    }
+
+    private func formatTime(_ interval: TimeInterval) -> String {
+        let hours = Int(interval) / 3600
+        let minutes = Int(interval) / 60 % 60
+        let seconds = Int(interval) % 60
+        if hours > 0 {
+            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+        } else {
+            return String(format: "%d:%02d", minutes, seconds)
+        }
     }
 
     @ViewBuilder

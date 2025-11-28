@@ -25,7 +25,7 @@ struct ChatOverlayView: View {
 
     // Common emojis for quick access
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
-    
+
     // ✅ Performance limit
     private let maxVisibleMessages = 100
 
@@ -161,6 +161,14 @@ struct ChatOverlayView: View {
             }
             .onChange(of: viewModel.messages.count) { _ in
                 scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
+            }
+            .onAppear {
+                scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
+            }
+            .onChange(of: viewModel.showChat) { show in
+                if show {
+                    scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
+                }
             }
         }
     }

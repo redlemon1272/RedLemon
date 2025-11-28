@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v11_more_blocks"  // Increment when filters change
+        let filterVersion = "v12_deterministic"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -283,6 +283,14 @@ class LocalAPIClient: ObservableObject {
                     pinnedItems.append(item)
                 }
             }
+        }
+        
+        // FIX: Sort pinned items to match the original ID list order
+        // This ensures deterministic order regardless of network response times
+        pinnedItems.sort { (a, b) -> Bool in
+            let indexA = pinnedMovieIds.firstIndex(of: a.id) ?? Int.max
+            let indexB = pinnedMovieIds.firstIndex(of: b.id) ?? Int.max
+            return indexA < indexB
         }
         
         print("✅ Fetched \(pinnedItems.count) pinned movies")

@@ -46,7 +46,7 @@ class MPVPlayerViewModel: ObservableObject {
     // Syncplay-inspired: Ignore echoed state changes (prevent jitter)
     private var ignoringRemoteUpdates: Int = 0  // Counter for ignoring remote updates after local actions
     private var lastLocalActionTime: Date?
-    
+
     // Advanced smoothness optimization (network-aware sync)
     private var driftHistory: [Double] = []  // Rolling window of drift measurements
     private let driftHistorySize = 5  // Number of samples to average
@@ -55,7 +55,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var networkLatency: Double = 0.05  // Estimated one-way latency (50ms default)
     private var lastSyncMessageTime: Date?
     private var isCurrentlyAdjustingSpeed: Bool = false
-    
+
     // Startup synchronization: Give guest time to spin up video pipeline
     private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
     private var pendingPlayTask: Task<Void, Never>?
@@ -125,7 +125,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.videoURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = cleanStreamTitle
-        
+
         // Broadcast watching status
         Task {
             await SocialService.shared.updateWatchingStatus(
@@ -295,7 +295,7 @@ class MPVPlayerViewModel: ObservableObject {
             }
         }
         mpvObserverTasks.append(isPlayingTask)
-        
+
         let finishedTask = Task { [weak self] in
             guard let self = self else { return }
             for await finished in self.mpvWrapper.$playbackFinished.values {
@@ -392,12 +392,12 @@ class MPVPlayerViewModel: ObservableObject {
             self.showPoster = false
             self.isLoading = false
         }
-        
+
         // Watch Party Ready Gate
         if isInWatchParty && !hasSentReadySignal {
             print("👋 Watch Party: Video loaded, sending READY signal")
             hasSentReadySignal = true
-            
+
             // Send Ready signal
             let syncMessage = SyncMessage(
                 type: .ready,
@@ -409,7 +409,7 @@ class MPVPlayerViewModel: ObservableObject {
             Task {
                 try? await realtimeManager?.sendSyncMessage(syncMessage)
             }
-            
+
             // If Host, mark self as ready and check if we can start
             if isWatchPartyHost {
                 checkIfAllGuestsReady()
@@ -576,10 +576,10 @@ class MPVPlayerViewModel: ObservableObject {
         if isInWatchParty && isWatchPartyHost && !mpvWrapper.isPlaying {
             // Cancel any pending play task
             pendingPlayTask?.cancel()
-            
+
             // Host is about to play - add brief delay for guest synchronization
             print("🏁 Host initiating play with \(Int(hostStartupDelay * 1000))ms startup delay for guest sync")
-            
+
             // Send play message FIRST (before actually playing)
             let syncMessage = SyncMessage(
                 type: .play,
@@ -590,7 +590,7 @@ class MPVPlayerViewModel: ObservableObject {
                 chatText: nil,
                 chatUsername: nil
             )
-            
+
             Task {
                 do {
                     try await realtimeManager?.sendSyncMessage(syncMessage)
@@ -599,27 +599,27 @@ class MPVPlayerViewModel: ObservableObject {
                     NSLog("⚠️ Failed to send play sync message: \(error)")
                 }
             }
-            
+
             // Mark local action to prevent echo
             markLocalAction()
-            
+
             // Then delay before actually starting playback
             pendingPlayTask = Task { @MainActor in
                 try? await Task.sleep(nanoseconds: UInt64(hostStartupDelay * 1_000_000_000))
-                
+
                 // Check if task wasn't cancelled
                 guard !Task.isCancelled else {
                     print("⏹️ Startup delay cancelled")
                     return
                 }
-                
+
                 print("▶️ Host starting playback after startup delay")
                 mpvWrapper.togglePlayPause()
             }
-            
+
             return
         }
-        
+
         // Normal toggle for non-watch-party or pause operations
         mpvWrapper.togglePlayPause()
         let isNowPlaying = mpvWrapper.isPlaying
@@ -862,37 +862,37 @@ class MPVPlayerViewModel: ObservableObject {
     func toggleChat() {
         // ✅ Ensure we're not already animating
         guard !isAnimatingChatToggle else { return }
-        
+
         // ✅ Reduce background load during animation
         isAnimatingChatToggle = true
-        
+
         // ✅ Temporarily pause non-critical updates
         let originalInterval = syncBroadcastTimer?.timeInterval
         syncBroadcastTimer?.invalidate()
-        
+
         // ✅ Use hardware-accelerated animation only on chat property
         withAnimation(.easeOut(duration: 0.2)) {
             showChat.toggle()
         }
-        
+
         // ✅ Restore background updates after animation completes with timeout safeguard
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
             guard let self = self else { return }
-            
+
             // ✅ SAFEGUARD: Always reset animation state after timeout
             self.isAnimatingChatToggle = false
-            
+
             // Restart broadcasting if it was active
             if self.isWatchPartyHost && originalInterval != nil {
                 self.startBroadcastingState()
             }
         }
-        
+
         // ✅ TIMEOUT PROTECTION: Force reset after 1 second maximum
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             self?.isAnimatingChatToggle = false
         }
-        
+
         print(showChat ? "💬 Chat opened" : "💬 Chat closed")
     }
 
@@ -914,12 +914,12 @@ class MPVPlayerViewModel: ObservableObject {
         )
 
         messages.append(message)
-        
+
         // Limit message history to prevent memory bloat (keep last 100 messages)
         if messages.count > 100 {
             messages.removeFirst(messages.count - 100)
         }
-        
+
         trimChatMessages()
         print("💬 Sent: \(text)")
 
@@ -986,7 +986,7 @@ class MPVPlayerViewModel: ObservableObject {
         hasCleanedUp = true
 
         print("🧹 Cleaning up MPV player...")
-        
+
         // ✅ STEP 1: Clear watching status immediately
         await SocialService.shared.updateWatchingStatus(
             mediaTitle: nil,
@@ -1004,7 +1004,7 @@ class MPVPlayerViewModel: ObservableObject {
             task.cancel()
         }
         mpvObserverTasks.removeAll()
-        
+
         pendingPlayTask?.cancel()
         pendingPlayTask = nil
 
@@ -1211,17 +1211,17 @@ extension MPVPlayerViewModel {
                 }
             }
         )
-        
+
         // Set up presence callback for Post-Load Ready Gate
         // Set up presence callback for Post-Load Ready Gate AND UI Updates
         await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
             Task { @MainActor in
                 guard let self = self else { return }
-                
+
                 // Update AppState participants list for UI
                 if let room = self.appState?.currentWatchPartyRoom {
                     var updatedParticipants = room.participants
-                    
+
                     switch action {
                     case .join:
                         // Check if already exists
@@ -1229,7 +1229,7 @@ extension MPVPlayerViewModel {
                             // Extract metadata
                             let username = metadata?["username"] as? String ?? "User"
                             let avatarUrl = metadata?["avatar_url"] as? String
-                            
+
                             let newParticipant = Participant(
                                 id: userId,
                                 name: username,
@@ -1240,7 +1240,7 @@ extension MPVPlayerViewModel {
                             updatedParticipants.append(newParticipant)
                             print("👤 Participant joined: \(username) (\(userId))")
                         }
-                        
+
                         // Post-Load Gate Logic
                         if userId != self.currentUserId {
                             print("👤 Post-Load Gate: Guest joined presence: \(userId)")
@@ -1249,11 +1249,11 @@ extension MPVPlayerViewModel {
                                 self.checkIfAllGuestsReady()
                             }
                         }
-                        
+
                     case .leave:
                         updatedParticipants.removeAll(where: { $0.id == userId })
                         print("👋 Participant left: \(userId)")
-                        
+
                         // Post-Load Gate Logic
                         if userId != self.currentUserId {
                             print("👋 Post-Load Gate: Guest left presence: \(userId)")
@@ -1264,7 +1264,7 @@ extension MPVPlayerViewModel {
                             }
                         }
                     }
-                    
+
                     // Update room state
                     self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
                 }
@@ -1364,12 +1364,12 @@ extension MPVPlayerViewModel {
             if let senderId = message.senderId {
                 print("✅ Received READY signal from \(senderId)")
                 readyGuestIds.insert(senderId)
-                
+
                 if isWatchPartyHost {
                     checkIfAllGuestsReady()
                 }
             }
-            
+
         case .play:
             // Handle Play signal (Start of movie)
             if showWaitingForGuests {
@@ -1390,31 +1390,31 @@ extension MPVPlayerViewModel {
             // Guest syncs to host's playback state with advanced smoothness optimization
             let hostTimestamp = message.timestamp
             guard let isPlaying = message.isPlaying else { return }
-            
+
             // Update network latency estimate
             updateNetworkLatency()
-            
+
             // Predictive compensation: Account for network latency
             // By the time we receive this message, the host has moved forward
             let predictedHostPosition = hostTimestamp + networkLatency
-            
+
             // Calculate drift with latency compensation
             let rawDrift = currentTime - predictedHostPosition
             _ = abs(rawDrift)
-            
+
             // Add to drift history for smoothing
             driftHistory.append(rawDrift)
             if driftHistory.count > driftHistorySize {
                 driftHistory.removeFirst()
             }
-            
+
             // Calculate smoothed drift (moving average)
             let smoothedDrift = driftHistory.reduce(0.0, +) / Double(driftHistory.count)
             let absSmoothedDrift = abs(smoothedDrift)
-            
+
             // Advanced tiered sync with hysteresis and adaptive thresholds
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
-            
+
             if absSmoothedDrift < 0.1 {
                 // Perfect sync (<100ms smoothed drift)
                 // If we're currently adjusting speed, reset to normal
@@ -1428,12 +1428,12 @@ extension MPVPlayerViewModel {
                 // Small/Medium drift (100ms-5s) - Use ultra-smooth speed adjustment
                 // Hysteresis: Only adjust if enough time has passed since last adjustment
                 let timeSinceLastAdjustment = lastSpeedAdjustmentTime.map { Date().timeIntervalSince($0) } ?? 1.0
-                
+
                 // Only adjust every 500ms to prevent micro-stutters
                 if timeSinceLastAdjustment >= 0.5 {
                     // Calculate adaptive speed factor based on smoothed drift
                     let speedFactor: Double
-                    
+
                     if absSmoothedDrift > 1.0 {
                         // Larger drift (1-5s): More aggressive correction
                         // Use proportional correction: more drift = faster correction
@@ -1449,12 +1449,12 @@ extension MPVPlayerViewModel {
                         speedFactor = smoothedDrift > 0 ? 0.995 : 1.005  // ±0.5%
                         print("⚡ Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     }
-                    
+
                     mpvWrapper.setSpeed(speedFactor)
                     currentSpeedAdjustment = speedFactor
                     isCurrentlyAdjustingSpeed = true
                     lastSpeedAdjustmentTime = Date()
-                    
+
                     // Auto-reset speed after correction period (proportional to drift)
                     let resetDelay = min(max(absSmoothedDrift * 2.0, 2.0), 5.0)  // 2-5 seconds
                     Task {
@@ -1475,7 +1475,7 @@ extension MPVPlayerViewModel {
                 // This is especially important when guest joins an active room mid-playback
                 let seekBufferOffset: Double = 1.2  // 1.2s to account for seek + buffer time
                 let targetPosition = predictedHostPosition + seekBufferOffset
-                
+
                 print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
                 seek(to: targetPosition)
                 // Reset drift history after seek
@@ -1511,8 +1511,14 @@ extension MPVPlayerViewModel {
                 print("💬 Skipping own message (already displayed locally)")
                 return
             }
-            
+
             if let text = message.chatText, let username = message.chatUsername {
+                // Filter out system LOBBY_ messages (LOBBY_JOIN, LOBBY_READY, etc.)
+                guard !text.starts(with: "LOBBY_") else {
+                    print("💬 Skipping system message: \(text)")
+                    return
+                }
+
                 let chatMessage = ChatMessage(
                     id: UUID().uuidString,
                     username: username,
@@ -1522,7 +1528,7 @@ extension MPVPlayerViewModel {
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {
                     pendingChatMessages.append(chatMessage)
-                    
+
                     if !isFlushingChat {
                         isFlushingChat = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
@@ -1600,9 +1606,9 @@ extension MPVPlayerViewModel {
         case .preload:
             // Preload message - handled in LobbyViewModel, not here
             break
-            
 
-            
+
+
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
@@ -1610,30 +1616,30 @@ extension MPVPlayerViewModel {
     }
 
     // MARK: - Post-Load Ready Gate Helpers
-    
+
     private func checkIfAllGuestsReady() {
         guard isWatchPartyHost else { return }
-        
+
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
             print("⏳ Host not ready yet (but \(readyGuestIds.count) guests are ready)")
             return
         }
-        
+
         // CRITICAL FIX: Ensure we have at least one guest before starting
         // Without this, fast hosts would start immediately if guests haven't joined presence yet
         guard !connectedGuestIds.isEmpty else {
             print("⏳ No guests connected yet (waiting for presence updates)")
             return
         }
-        
+
         // Check if all connected guests are ready
         // Note: connectedGuestIds comes from Presence
         let allReady = connectedGuestIds.isSubset(of: readyGuestIds)
-        
+
         if allReady {
             print("🚀 All guests ready! Starting playback in 1s...")
-            
+
             // Small delay to ensure UI updates
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
                 guard let self = self else { return }
@@ -1644,13 +1650,13 @@ extension MPVPlayerViewModel {
             print("⏳ Waiting for guests: \(missing.count) remaining")
         }
     }
-    
+
     private func startSynchronizedPlayback() {
         print("🎬 Host: Initiating synchronized start")
         showWaitingForGuests = false
         mpvWrapper.play()
         isPlaying = true
-        
+
         // Send Play signal
         let syncMessage = SyncMessage(
             type: .play,
@@ -1674,7 +1680,7 @@ extension MPVPlayerViewModel {
         // ✅ Reduce from 10Hz to 4Hz
         syncBroadcastTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            
+
             // ✅ Don't broadcast during chat animation
             if self.isAnimatingChatToggle {
                 return
@@ -1732,18 +1738,18 @@ extension MPVPlayerViewModel {
 
         return false
     }
-    
+
     /// Update network latency estimate based on message timing
     private func updateNetworkLatency() {
         guard let lastTime = lastSyncMessageTime else {
             lastSyncMessageTime = Date()
             return
         }
-        
+
         let now = Date()
         let messageInterval = now.timeIntervalSince(lastTime)
         lastSyncMessageTime = now
-        
+
         // Expected interval is 100ms (10 Hz broadcast)
         // Any excess is likely network jitter
         if messageInterval > 0.1 {

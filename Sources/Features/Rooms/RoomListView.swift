@@ -424,7 +424,9 @@ extension NSAlert {
 struct ActiveRoomRow: View {
     let room: WatchPartyRoom
     @State private var currentTime = TimeService.shared.now
-    @State private var timer: Timer?
+    
+    // Use Combine timer instead of Foundation Timer for safer SwiftUI updates
+    private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
 
     var body: some View {
         HStack(spacing: 16) {
@@ -574,11 +576,8 @@ struct ActiveRoomRow: View {
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray.opacity(0.2), lineWidth: 1)
         )
-        .onAppear {
-            startTimer()
-        }
-        .onDisappear {
-            stopTimer()
+        .onReceive(timer) { _ in
+            currentTime = TimeService.shared.now
         }
     }
     
@@ -597,18 +596,6 @@ struct ActiveRoomRow: View {
         
         // Current position = initial position + elapsed time
         return initialPosition + elapsed
-    }
-    
-    private func startTimer() {
-        // Update current time every second
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            currentTime = TimeService.shared.now
-        }
-    }
-    
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
     }
 
     private func formatTime(_ interval: TimeInterval) -> String {

@@ -206,10 +206,14 @@ class LobbyViewModel: ObservableObject {
                 realtimeConnectionStatus = .connecting
                 realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
 
+                // Get username from appState
+                let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
+
                 try await realtimeManager?.setup(
                     roomId: room.id,
                     isHost: isHost,
                     userId: participantId,
+                    username: username,
                     onSync: { [weak self] syncMessage in
                         Task { @MainActor in
                             await self?.handleLobbyMessage(syncMessage)

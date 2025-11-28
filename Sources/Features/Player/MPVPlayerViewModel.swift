@@ -1022,13 +1022,10 @@ class MPVPlayerViewModel: ObservableObject {
 
     deinit {
         print("🗑️ MPVPlayerViewModel deinit")
-        Task { [weak self] in
-            guard self != nil else { return }
-            await MainActor.run {
-                invalidateAllTimers()
-                mpvWrapper.stop()
-            }
-        }
+        // ✅ Don't create async tasks in deinit - cleanup() is already called before deallocation
+        // The Task with [weak self] creates a race condition where self may be deallocated
+        // between the guard check and the MainActor.run execution, causing a crash in Swift's
+        // reference counting system (decrementStrong). All necessary cleanup is handled by cleanup().
     }
 
     // MARK: - Subtitle Download

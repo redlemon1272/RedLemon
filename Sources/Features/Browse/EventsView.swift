@@ -581,14 +581,25 @@ struct HeroEventCard: View {
                             )
 
                         } else if event.isInLobby || isLobbyOverride {
-                            HStack(spacing: 6) {
-                                Circle()
-                                    .fill(Color.yellow)
-                                    .frame(width: 8, height: 8)
-                                    .shadow(color: .yellow.opacity(0.6), radius: 4)
-                                Text("Lobby Open")
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                            VStack(spacing: 4) {
+                                HStack(spacing: 6) {
+                                    Circle()
+                                        .fill(Color.yellow)
+                                        .frame(width: 8, height: 8)
+                                        .shadow(color: .yellow.opacity(0.6), radius: 4)
+                                    Text("Lobby Open")
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.white)
+                                }
+                                
+                                // Add countdown timer
+                                if event.startTime.timeIntervalSince(currentTime) > 0 {
+                                    Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(currentTime)))")
+                                        .font(.system(size: 11))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(.white.opacity(0.9))
+                                        .monospacedDigit()
+                                }
                             }
                             .padding(.horizontal, 10)
                             .padding(.vertical, 6)
@@ -737,8 +748,8 @@ struct HeroEventCard: View {
                 )
         )
         .onAppear {
-            // Only start timer for live events
-            if event.isLive {
+            // Start timer for live events or lobby events (for countdown)
+            if event.isLive || event.isInLobby || isLobbyOverride {
                 currentTime = TimeService.shared.now
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                     currentTime = TimeService.shared.now
@@ -778,6 +789,14 @@ struct HeroEventCard: View {
         if hours > 0 {
             return String(format: "%d:%02d:%02d", hours, minutes, seconds)
         }
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+    
+    // MARK: - Helper Functions
+    
+    private func formatDuration(_ interval: TimeInterval) -> String {
+        let minutes = Int(interval) / 60
+        let seconds = Int(interval) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
 }

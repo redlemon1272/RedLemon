@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v7_stricter_genres"  // Increment when filters change
+        let filterVersion = "v8_no_animation"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -196,7 +196,8 @@ class LocalAPIClient: ObservableObject {
                 
                 // Filter out unwanted genres (Documentaries, Shorts, Drama-only, Romance-only, etc.)
                 if let genres = meta.genre {
-                    let unwantedGenres = ["Documentary", "Short", "News", "Talk-Show", "Reality-TV"]
+                    // UPDATED: Added Animation, Family, Musical to exclude "Zootopia" and similar
+                    let unwantedGenres = ["Documentary", "Short", "News", "Talk-Show", "Reality-TV", "Animation", "Family", "Musical", "Biography"]
                     if genres.contains(where: { unwantedGenres.contains($0) }) {
                         return false
                     }

@@ -549,10 +549,13 @@ struct ActiveRoomRow: View {
 
                 // Progress Bar (if has runtime)
                 if let runtime = room.runtime, runtime > 0 {
-                    let currentPosition = calculateCurrentPosition()
+                    // Clamp current position to valid range [0, runtime]
+                    let currentPosition = min(max(calculateCurrentPosition(), 0), runtime)
+                    let remainingTime = max(runtime - currentPosition, 0)
+                    let progress = min(currentPosition / runtime, 1.0)
                     
                     VStack(alignment: .leading, spacing: 6) {
-                        ProgressView(value: min(currentPosition / runtime, 1.0), total: 1.0)
+                        ProgressView(value: progress, total: 1.0)
                             .progressViewStyle(LinearProgressViewStyle(tint: room.state == .playing ? .green : .orange))
                             .scaleEffect(x: 1, y: 1.2, anchor: .center)
 
@@ -560,7 +563,7 @@ struct ActiveRoomRow: View {
                             Text(formatTime(currentPosition))
                                 .font(.system(size: 11, weight: .medium))
                             Spacer()
-                            Text("-\(formatTime(runtime - currentPosition))")
+                            Text("-\(formatTime(remainingTime))")
                                 .font(.system(size: 11, weight: .medium))
                         }
                         .foregroundColor(.secondary)

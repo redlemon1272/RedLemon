@@ -1513,16 +1513,22 @@ extension MPVPlayerViewModel {
             }
 
             if let text = message.chatText, let username = message.chatUsername {
-                // Filter out system LOBBY_ messages (LOBBY_JOIN, LOBBY_READY, etc.)
-                guard !text.starts(with: "LOBBY_") else {
+                // Convert LOBBY_JOIN to a friendly join message, filter out other system messages
+                let displayText: String
+                if text == "LOBBY_JOIN" {
+                    displayText = "joined! 👋"
+                } else if text.starts(with: "LOBBY_") {
+                    // Filter out LOBBY_READY, LOBBY_UNREADY, etc.
                     print("💬 Skipping system message: \(text)")
                     return
+                } else {
+                    displayText = text
                 }
 
                 let chatMessage = ChatMessage(
                     id: UUID().uuidString,
                     username: username,
-                    text: text,
+                    text: displayText,
                     timestamp: Date(timeIntervalSince1970: message.timestamp)
                 )
                 // Batch chat updates to avoid UI thrashing

@@ -311,9 +311,9 @@ struct EventsView: View {
     }
 
     private func startTimer() {
-        // Check every minute if the live event has finished
+        // Check every 2 seconds for event status changes (immediate UI updates)
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
             Task { @MainActor in
                 self.checkEventStatus()
             }

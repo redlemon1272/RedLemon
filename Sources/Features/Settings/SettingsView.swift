@@ -29,7 +29,7 @@ struct SettingsView: View {
     @State private var isLoading = false
     @State private var saveMessage: String?
     @State private var messageType: MessageType = .success
-    
+
     // Real-Debrid User Info
     @State private var rdUserInfo: RDUserInfo?
     @State private var rdInfoLoading = false
@@ -41,13 +41,13 @@ struct SettingsView: View {
     @State private var isResetting = false
     @State private var resetMessage: String?
     @State private var showingResetConfirmation = false
-    
+
     // Recovery Phrase State
     // @State private var recoveryPhrase: String = ""
     // @State private var showRecoveryPhrase = false
     @State private var copyMessage: String?
     @State private var showRestoreAccount = false
-    
+
     // Payment State
     @State private var showPaymentGate = false
 
@@ -67,11 +67,11 @@ struct SettingsView: View {
                 header
 
                 credentialsSection
-                
+
                 licenseSection
 
                 usernameSection
-                
+
                 recoveryPhraseSection
 
                 resetSection
@@ -93,7 +93,7 @@ struct SettingsView: View {
             } else if !appState.currentUsername.isEmpty {
                 currentUsername = appState.currentUsername
             }
-            
+
             // Load recovery phrase - REMOVED
             // await loadRecoveryPhrase()
         }
@@ -168,7 +168,7 @@ struct SettingsView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
 
-                SecureField("Paste your Real-Debrid token here", text: $realDebridToken)
+                TextField("Paste your Real-Debrid token here", text: $realDebridToken)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.title3, design: .monospaced))
                     .onChange(of: realDebridToken) { newValue in
@@ -178,9 +178,9 @@ struct SettingsView: View {
                             }
                         }
                     }
-                
+
                 // Premium days display - simplified for macOS 12 compatibility
-                if let userInfo = rdUserInfo, 
+                if let userInfo = rdUserInfo,
                    let premiumDays = userInfo.daysRemaining,
                    premiumDays >= 0 {
                     VStack(alignment: .leading, spacing: 8) {
@@ -191,13 +191,13 @@ struct SettingsView: View {
                                 .font(.body.weight(.semibold))
                                 .foregroundColor(premiumDays > 30 ? .green : (premiumDays > 7 ? .orange : .red))
                         }
-                        
+
                         if premiumDays <= 7 {
                             Text("Your premium is expiring soon!")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }
-                        
+
                         Link("Renew Premium →", destination: URL(string: "https://real-debrid.com/premium")!)
                             .font(.caption)
                     }
@@ -242,7 +242,7 @@ struct SettingsView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
 
-                SecureField("Paste your SubDL API key here", text: $subDLApiKey)
+                TextField("Paste your SubDL API key here", text: $subDLApiKey)
                     .textFieldStyle(.roundedBorder)
                     .font(.system(.title3, design: .monospaced))
 
@@ -344,11 +344,11 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         Divider()
                             .padding(.vertical, 4)
-                        
+
                         Text("Unlock hosting capabilities with a one-time payment")
                             .font(.caption)
                             .foregroundColor(.secondary)
-                        
+
                         Button(action: {
                             showPaymentGate = true
                         }) {
@@ -542,7 +542,7 @@ struct SettingsView: View {
                     .tint(.purple)
                 }
 
-                
+
                 // Copy confirmation message
                 if let message = copyMessage {
                     HStack(spacing: 8) {
@@ -556,17 +556,17 @@ struct SettingsView: View {
                     .padding(.top, 4)
                     .transition(.opacity)
                 }
-                
+
                 // Divider
                 Divider()
                     .padding(.vertical, 8)
-                
+
                 // Restore Account button
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Lost access to your account?")
                         .font(.caption.weight(.semibold))
                         .foregroundColor(.secondary)
-                    
+
                     Button(action: {
                         showRestoreAccount = true
                     }) {
@@ -748,12 +748,12 @@ struct SettingsView: View {
         if let subdlKey = await KeychainManager.shared.get(service: "subdl") {
             subDLApiKey = subdlKey
         }
-        
+
         // Load RD user info if token exists
         if !realDebridToken.isEmpty {
             await loadRDUserInfo()
         }
-        
+
         // HEAL: Ensure user_id is in Keychain (for export feature)
         let keychainUserId = await KeychainManager.shared.get(service: "user_id")
         if keychainUserId == nil, let currentUserId = appState.currentUserId {
@@ -807,7 +807,7 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     private func loadRDUserInfo() async {
         guard !realDebridToken.isEmpty else {
             await MainActor.run {
@@ -815,11 +815,11 @@ struct SettingsView: View {
             }
             return
         }
-        
+
         await MainActor.run {
             rdInfoLoading = true
         }
-        
+
         do {
             let userInfo = try await RealDebridClient.shared.getUserInfo(token: realDebridToken)
             await MainActor.run {
@@ -877,9 +877,9 @@ struct SettingsView: View {
             }
         }
     }
-    
+
     // MARK: - Account Export
-    
+
     private func exportAccount() async {
         do {
             let savePanel = NSSavePanel()
@@ -888,12 +888,12 @@ struct SettingsView: View {
             savePanel.canCreateDirectories = true
             savePanel.title = "Save Account Backup"
             savePanel.message = "Choose a secure location to save your account backup file."
-            
+
             let response = await savePanel.begin()
-            
+
             if response == .OK, let url = savePanel.url {
                 try await AccountExportManager.shared.saveExportFile(to: url)
-                
+
                 await MainActor.run {
                     copyMessage = "✅ Backup saved successfully!"
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

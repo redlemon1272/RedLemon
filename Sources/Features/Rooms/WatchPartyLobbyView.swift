@@ -23,7 +23,7 @@ struct WatchPartyLobbyView: View {
         GeometryReader { geometry in
             ZStack {
                 lobbyContent(windowHeight: geometry.size.height)
-                
+
                 if isAutoJoining {
                     Color.black.ignoresSafeArea()
                     VStack(spacing: 20) {
@@ -244,7 +244,7 @@ struct WatchPartyLobbyView: View {
                             }
                         }
                         .padding(.horizontal, 24)
-                        
+
                         // NEW: Playlist Section (only for hosts in non-event rooms)
                         if isHost && !room.id.hasPrefix("event_") {
                             VStack(alignment: .leading, spacing: 12) {
@@ -254,9 +254,9 @@ struct WatchPartyLobbyView: View {
                                     Text("Playlist (\(viewModel.playlist.count) items)")
                                         .font(.headline)
                                         .foregroundColor(.white)
-                                    
+
                                     Spacer()
-                                    
+
                                     Button(action: { /* TODO: Show media picker */ }) {
                                         HStack(spacing: 4) {
                                             Image(systemName: "plus.circle.fill")
@@ -271,7 +271,7 @@ struct WatchPartyLobbyView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                 }
-                                
+
                                 if !viewModel.playlist.isEmpty {
                                     VStack(spacing: 6) {
                                         ForEach(Array(viewModel.playlist.enumerated()), id: \.element.id) { index, item in
@@ -442,19 +442,21 @@ struct WatchPartyLobbyView: View {
                             .padding()
                         }
                     } else {
-                        // Guest controls
-                        Button(action: toggleReady) {
-                            HStack {
-                                Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
-                                Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
+                        // Guest controls - hide ready button for events (no host coordination needed)
+                        if !room.id.hasPrefix("event_") {
+                            Button(action: toggleReady) {
+                                HStack {
+                                    Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
+                                    Text(viewModel.isReady ? "Ready!" : "Mark as Ready")
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
                             }
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(viewModel.isReady ? Color.green : Color.white.opacity(0.1))
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
 
                         if viewModel.isStarting {
                             HStack {
@@ -465,7 +467,7 @@ struct WatchPartyLobbyView: View {
                             }
                             .padding()
                         }
-                        
+
                         if viewModel.timeUntilStart > 0 {
                             HStack {
                                 Image(systemName: "timer")
@@ -545,7 +547,7 @@ struct WatchPartyLobbyView: View {
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
     }
-    
+
     private func formatDuration(_ interval: TimeInterval) -> String {
         let minutes = Int(interval) / 60
         let seconds = Int(interval) % 60
@@ -736,7 +738,7 @@ struct PlaylistItemRow: View {
     let index: Int
     let isCurrent: Bool
     let onRemove: () -> Void
-    
+
     var body: some View {
         HStack(spacing: 12) {
             // Index number
@@ -745,7 +747,7 @@ struct PlaylistItemRow: View {
                 .fontWeight(.bold)
                 .foregroundColor(isCurrent ? .accentColor : .white.opacity(0.5))
                 .frame(width: 24)
-            
+
             // Thumbnail (if available)
             if let posterURL = item.mediaItem.poster {
                 AsyncImage(url: URL(string: posterURL)) { image in
@@ -756,7 +758,7 @@ struct PlaylistItemRow: View {
                 .frame(width: 40, height: 60)
                 .cornerRadius(4)
             }
-            
+
             // Title
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.displayTitle)
@@ -764,22 +766,22 @@ struct PlaylistItemRow: View {
                     .fontWeight(isCurrent ? .semibold : .regular)
                     .foregroundColor(.white)
                     .lineLimit(1)
-                
+
                 if let runtime = item.mediaItem.runtime {
                     Text(runtime)
                         .font(.caption2)
                         .foregroundColor(.white.opacity(0.6))
                 }
             }
-            
+
             Spacer()
-            
+
             // Current indicator
             if isCurrent {
                 Image(systemName: "play.circle.fill")
                     .foregroundColor(.accentColor)
             }
-            
+
             // Remove button
             Button(action: onRemove) {
                 Image(systemName: "xmark.circle.fill")

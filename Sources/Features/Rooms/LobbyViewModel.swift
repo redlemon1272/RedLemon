@@ -707,7 +707,7 @@ class LobbyViewModel: ObservableObject {
                     let totalCount = participants.count
                     NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
 
-                    addMessage(.userReady, userName: username)
+                    // addMessage(.userReady, userName: username) // Reduced spam
                 } else {
                     NSLog("⚠️ Received LOBBY_READY from unknown participant: \(syncMessage.senderId ?? "unknown")")
                 }
@@ -726,7 +726,7 @@ class LobbyViewModel: ObservableObject {
                     let totalCount = participants.count
                     NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
 
-                    addMessage(.userNotReady, userName: username)
+                    // addMessage(.userNotReady, userName: username) // Reduced spam
                 } else {
                     NSLog("⚠️ Received LOBBY_UNREADY from unknown participant: \(syncMessage.senderId ?? "unknown")")
                 }

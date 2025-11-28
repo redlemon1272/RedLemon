@@ -207,8 +207,9 @@ struct EventsView: View {
                 startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
             } else {
                 // Upcoming movies: Start time is based on previous movie's end + buffer
-                let prevEvent = scheduledEvents.last!
-                startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration + bufferBetweenMovies)
+                // Start time is previous event start + duration (which includes buffer)
+                // FIX: Do NOT add bufferBetweenMovies again, as it's already in duration
+                startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration)
             }
 
             // Debug: Log runtime for troubleshooting

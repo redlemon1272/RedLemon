@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v8_no_animation"  // Increment when filters change
+        let filterVersion = "v9_no_star_trek"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -172,9 +172,12 @@ class LocalAPIClient: ObservableObject {
             
             // Blacklist specific unwanted titles
             let blacklistedTitles = [
-                "Selena y Los Dinos: A Family's Legacy"
+                "Selena y Los Dinos: A Family's Legacy",
+                "Star Trek Beyond",
+                "Star Trek Into Darkness",
+                "Star Trek"
             ]
-            if blacklistedTitles.contains(meta.name) {
+            if blacklistedTitles.contains(where: { meta.name.contains($0) }) {
                 print("🚫 Skipping blacklisted movie: \(meta.name)")
                 return false
             }

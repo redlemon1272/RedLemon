@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v9_no_star_trek"  // Increment when filters change
+        let filterVersion = "v10_pinned_movies"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -175,7 +175,16 @@ class LocalAPIClient: ObservableObject {
                 "Selena y Los Dinos: A Family's Legacy",
                 "Star Trek Beyond",
                 "Star Trek Into Darkness",
-                "Star Trek"
+                "Star Trek",
+                "In Waves and War",
+                "God Bless America",
+                "Tracing the Divide",
+                "The Teacher",
+                "Sunshine",
+                "Lilith Fair: Building a Mystery",
+                "Three Billboards Outside Ebbing, Missouri",
+                "Star Wars",
+                "The White House Effect"
             ]
             if blacklistedTitles.contains(where: { meta.name.contains($0) }) {
                 print("🚫 Skipping blacklisted movie: \(meta.name)")
@@ -226,32 +235,89 @@ class LocalAPIClient: ObservableObject {
         
         print("📊 Filtered to \(validMetas.count) movies with complete artwork, rating >= 7.0, & no documentaries")
         
-        // 5. Take top 80
-        let selectedMetas = Array(validMetas.prefix(80))
+        // 5. Fetch Pinned Movies (Permanent Fixtures)
+        let pinnedMovieIds = [
+            "tt10221344", // Smile (2022)
+            "tt28383839", // Smile 2 (2024)
+            "tt11742054", // The First Omen (2024)
+            "tt1396484",  // IT (2017)
+            "tt7349950",  // IT Chapter Two (2019)
+            "tt5052448"   // Get Out (2017)
+        ]
         
-        print("🚀 Processing \(selectedMetas.count) movies for Event Marathon...")
+        print("📌 Fetching \(pinnedMovieIds.count) pinned movies...")
         
-        // OPTIMIZATION: Manually construct MediaItems
-        let fullItems = selectedMetas.map { meta -> MediaItem in
-            // Use provided URLs directly - guaranteed to exist by filter above
-            let backgroundURL = meta.background ?? "https://images.metahub.space/background/medium/\(meta.id)/img"
-            let logoURL = meta.logo ?? "https://images.metahub.space/logo/medium/\(meta.id)/img"
+        var pinnedItems: [MediaItem] = []
+        
+        // Fetch pinned movies concurrently and convert to MediaItem
+        await withTaskGroup(of: MediaItem?.self) { group in
+            for id in pinnedMovieIds {
+                group.addTask {
+                    do {
+                        let meta = try await self.fetchMetadata(type: "movie", id: id)
+                        return MediaItem(
+                            id: meta.id,
+                            type: meta.type,
+                            name: meta.title,
+                            poster: meta.posterURL,
+                            background: meta.backgroundURL ?? "https://images.metahub.space/background/medium/\(meta.id)/img",
+                            logo: meta.logoURL ?? "https://images.metahub.space/logo/medium/\(meta.id)/img",
+                            description: meta.description,
+                            releaseInfo: meta.releaseInfo,
+                            year: meta.year,
+                            imdbRating: meta.imdbRating != nil ? String(meta.imdbRating!) : nil,
+                            genres: meta.genres,
+                            runtime: meta.runtime
+                        )
+                    } catch {
+                        print("⚠️ Failed to fetch pinned movie \(id): \(error)")
+                        return nil
+                    }
+                }
+            }
             
-            return MediaItem(
-                id: meta.id,
-                type: meta.type,
-                name: meta.name,
-                poster: meta.poster,
-                background: backgroundURL,
-                logo: logoURL,
-                description: nil,
-                releaseInfo: meta.releaseInfo,
-                year: meta.releaseInfo,
-                imdbRating: meta.imdbRating,
-                genres: nil,
-                runtime: meta.runtime
-            )
+            for await item in group {
+                if let item = item {
+                    pinnedItems.append(item)
+                }
+            }
         }
+        
+        print("✅ Fetched \(pinnedItems.count) pinned movies")
+        
+        // 6. Convert Random Selection to MediaItems
+        // Take enough random movies to fill the rest of the 80 slots
+        let randomMetas = validMetas // These are StremioMeta
+        var finalItems = pinnedItems
+        
+        for meta in randomMetas {
+            if finalItems.count >= 80 { break }
+            
+            // Skip if already in pinned list
+            if !finalItems.contains(where: { $0.id == meta.id }) {
+                // Convert StremioMeta to MediaItem
+                let backgroundURL = meta.background ?? "https://images.metahub.space/background/medium/\(meta.id)/img"
+                let logoURL = meta.logo ?? "https://images.metahub.space/logo/medium/\(meta.id)/img"
+                
+                let item = MediaItem(
+                    id: meta.id,
+                    type: meta.type,
+                    name: meta.name,
+                    poster: meta.poster,
+                    background: backgroundURL,
+                    logo: logoURL,
+                    description: nil,
+                    releaseInfo: meta.releaseInfo,
+                    year: meta.releaseInfo,
+                    imdbRating: meta.imdbRating,
+                    genres: meta.genre,
+                    runtime: meta.runtime
+                )
+                finalItems.append(item)
+            }
+        }
+        
+        let fullItems = finalItems
         
         // Cache the movie list for this cycle (use same versioned key)
         if let encoded = try? JSONEncoder().encode(fullItems) {

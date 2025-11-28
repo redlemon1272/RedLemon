@@ -115,10 +115,19 @@ struct EventsView: View {
         .onDisappear {
             stopTimer()
         }
-        .onChange(of: selectedMediaType) { _ in
+        .onChange(of: selectedMediaType) { newType in
             // Reload events when switching tabs
             isLoading = true
-            loadEvents()
+
+            // Pre-warm cache for TV shows to speed up loading
+            if newType == .tvShows {
+                Task {
+                    await prewarmTVMetadataCache()
+                    loadEvents()
+                }
+            } else {
+                loadEvents()
+            }
         }
     }
 
@@ -591,7 +600,7 @@ struct HeroEventCard: View {
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                 }
-                                
+
                                 // Add countdown timer
                                 if event.startTime.timeIntervalSince(currentTime) > 0 {
                                     Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(currentTime)))")
@@ -791,9 +800,9 @@ struct HeroEventCard: View {
         }
         return String(format: "%02d:%02d", minutes, seconds)
     }
-    
+
     // MARK: - Helper Functions
-    
+
     private func formatDuration(_ interval: TimeInterval) -> String {
         let minutes = Int(interval) / 60
         let seconds = Int(interval) % 60

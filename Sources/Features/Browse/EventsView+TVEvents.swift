@@ -8,8 +8,9 @@
 import SwiftUI
 
 extension EventsView {
+
     // MARK: - Helper Views
-    
+
     @ViewBuilder
     func emptyStateView(icon: String, message: String) -> some View {
         VStack(spacing: 20) {
@@ -24,20 +25,61 @@ extension EventsView {
         }
         .frame(maxWidth: .infinity, minHeight: 300)
     }
-    
+
+    // MARK: - Cache Pre-warming
+
+    /// Pre-warm metadata cache for TV shows to speed up loading
+    func prewarmTVMetadataCache() async {
+        print("🔥 Pre-warming TV metadata cache...")
+
+        await withTaskGroup(of: Void.self) { group in
+            for series in TVEventData.allSeries {
+                group.addTask {
+                    do {
+                        // Fetch metadata to populate cache
+                        _ = try await self.apiClient.fetchMetadata(type: "series", id: series.id)
+                        print("   ✅ Cached: \(series.title)")
+                    } catch {
+                        print("   ⚠️ Failed to cache \(series.title): \(error)")
+                    }
+                }
+            }
+        }
+
+        print("✅ TV metadata cache pre-warmed")
+    }
+
     // MARK: - TV Event Functions
-    
+
     func loadTVEvents() async {
         print("📺 Loading TV events...")
-        
+
         let tvEventItems = await withTaskGroup(of: TVEventItem?.self) { group in
             for series in TVEventData.allSeries {
                 group.addTask {
                     // Calculate current episode
                     let playbackState = await TVEventScheduler.getCurrentEpisode(for: series)
-                    
-                    // Fetch series metadata
-                    if let mediaItem = try? await self.apiClient.fetchMediaDetails(imdbId: series.id, type: "series") {
+
+                    // Fetch series metadata (uses cache if available)
+                    do {
+                        let metadata = try await self.apiClient.fetchMetadata(type: "series", id: series.id)
+
+                        // Convert MediaMetadata to MediaItem
+                        let mediaItem = MediaItem(
+                            id: metadata.id,
+                            type: metadata.type,
+                            name: metadata.title,
+                            poster: metadata.posterURL,
+                            background: metadata.backgroundURL,
+                            logo: metadata.logoURL,
+                            description: metadata.description,
+                            releaseInfo: metadata.releaseInfo,
+                            year: metadata.year,
+                            imdbRating: metadata.imdbRating.map { String($0) },
+                            genres: metadata.genres,
+                            runtime: metadata.runtime
+                        )
+
                         var item = TVEventItem(
                             id: series.id,
                             series: series,
@@ -47,22 +89,24 @@ extension EventsView {
                             startTime: playbackState.startTime,
                             episodeRuntime: playbackState.episodeRuntime
                         )
-                        
+
                         // Participant count will be fetched asynchronously later
-                        
+
                         return item
+                    } catch {
+                        print("⚠️ Failed to load metadata for \(series.title): \(error)")
+                        return nil
                     }
-                    return nil
                 }
             }
-            
+
             var results: [TVEventItem] = []
             for await result in group {
                 if let item = result {
                     results.append(item)
                 }
             }
-            
+
             // Sort to maintain consistent order (e.g. by defined order in TVEventData)
             // We can map the original order to indices for sorting
             let orderMap = Dictionary(uniqueKeysWithValues: TVEventData.allSeries.enumerated().map { ($0.element.id, $0.offset) })
@@ -72,19 +116,19 @@ extension EventsView {
                 return idx1 < idx2
             }
         }
-        
+
         await MainActor.run {
             self.tvEvents = tvEventItems
             print("✅ Loaded \(tvEventItems.count) TV events")
         }
     }
-    
+
     func joinTVEvent(_ tvEvent: TVEventItem) {
         print("📺 Joining TV event: \(tvEvent.series.title)")
         print("   Current episode: S\(String(format: "%02d", tvEvent.currentSeason))E\(String(format: "%02d", tvEvent.currentEpisode))")
-        
+
         let roomId = "tv_event_\(tvEvent.series.id)"
-        
+
         // Create/join event room
         Task {
             do {
@@ -93,7 +137,7 @@ extension EventsView {
                     await createLocalTVEventRoom(tvEvent: tvEvent, roomId: roomId)
                     return
                 }
-                
+
                 // Try to get existing room
                 let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
                 if existingRoom != nil {
@@ -117,7 +161,7 @@ extension EventsView {
                     )
                     try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
                 }
-                
+
                 await createLocalTVEventRoom(tvEvent: tvEvent, roomId: roomId)
             } catch {
                 print("❌ Failed to create/join TV event room: \(error)")
@@ -125,7 +169,7 @@ extension EventsView {
             }
         }
     }
-    
+
     @MainActor
     func createLocalTVEventRoom(tvEvent: TVEventItem, roomId: String) async {
         let room = WatchPartyRoom(
@@ -152,19 +196,19 @@ extension EventsView {
             selectedQuality: nil,
             unlockedStreamURL: nil
         )
-        
+
         appState.isTVEvent = true
         appState.currentTVSeries = tvEvent.series
         appState.isEventPlayback = true
         appState.currentWatchMode = .watchParty
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false
-        
+
         // Set selection details
         appState.selectedMediaItem = tvEvent.mediaItem
         appState.selectedSeason = tvEvent.currentSeason
         appState.selectedEpisode = tvEvent.currentEpisode
-        
+
         // Calculate seek position (time elapsed in current episode)
         let now = Date().timeIntervalSince1970
         let elapsed = now - tvEvent.startTime.timeIntervalSince1970
@@ -174,7 +218,7 @@ extension EventsView {
         } else {
             appState.resumeFromTimestamp = 0
         }
-        
+
         // Trigger playback
         await appState.playMedia(
             tvEvent.mediaItem,

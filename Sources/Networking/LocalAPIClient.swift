@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v6_strict_exciting"  // Increment when filters change
+        let filterVersion = "v7_stricter_genres"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -203,7 +203,8 @@ class LocalAPIClient: ObservableObject {
                     
                     // ✅ STRICTLY ENFORCE EXCITING GENRES: Thriller, Horror, Action, Sci-Fi, Mystery, Crime
                     // Movies MUST have at least one of these genres to be selected for events
-                    let excitingGenres = ["Thriller", "Horror", "Action", "Sci-Fi", "Mystery", "Crime", "Adventure", "Fantasy", "War", "Western"]
+                    // UPDATED: Removed Adventure, Fantasy, War, Western, Mystery to avoid "boring" movies
+                    let excitingGenres = ["Thriller", "Horror", "Action", "Sci-Fi", "Crime"]
                     
                     // Check if movie has at least one exciting genre
                     let hasExcitingGenre = genres.contains(where: { excitingGenres.contains($0) })

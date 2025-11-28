@@ -1725,6 +1725,27 @@ private func processBucket(
     if beforeFilter > yearAndCodecFiltered.count {
         print("  ✅ BLOCKED \(beforeFilter - yearAndCodecFiltered.count) streams (x265/YIFY/etc) for \(quality)")
     }
+    
+    // For MOVIES ONLY: Remove collection/pack torrents to avoid file index issues
+    // Collections can cause Real-Debrid to return wrong file from multi-file torrents
+    if targetTitle != nil {
+        let collectionPatterns = ["collection", "pack", "trilogy", "quadrilogy", "pentalogy", "anthology", "complete", "1 2 3", "1-2-3", "1-5", "1 - 5"]
+        let beforeCollectionFilter = yearAndCodecFiltered.count
+        yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
+            let titleLower = stream.title.lowercased()
+            let isCollection = collectionPatterns.contains { pattern in
+                titleLower.contains(pattern)
+            }
+            if isCollection {
+                print("  ⏭️ BLOCKING collection/pack (movies only): \(stream.title)")
+            }
+            return !isCollection
+        }
+        
+        if beforeCollectionFilter > yearAndCodecFiltered.count {
+            print("  ✅ BLOCKED \(beforeCollectionFilter - yearAndCodecFiltered.count) collection torrents for \(quality)")
+        }
+    }
 
     // Size filtering
     if let maxSize = maxSize {

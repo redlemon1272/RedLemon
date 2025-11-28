@@ -1340,6 +1340,17 @@ class LobbyViewModel: ObservableObject {
             return
         }
 
+        // CRITICAL: For event rooms, check if event is finished before starting playback
+        if room.id.hasPrefix("event_") {
+            if let eventId = appState.currentEventId, appState.finishedEventIds.contains(eventId) {
+                print("⚠️ Event \(eventId) is finished - redirecting to next event instead of starting playback")
+                disconnect()
+                appState.currentView = .events
+                appState.shouldAutoJoinLobby = true
+                return
+            }
+        }
+
         let item = playlist[currentPlaylistIndex]
 
         // Update room's current media
@@ -1355,6 +1366,7 @@ class LobbyViewModel: ObservableObject {
             await startMovie(appState: appState)
         }
     }
+
 
     func addToPlaylist(_ item: PlaylistItem) {
         guard isHost else { return }

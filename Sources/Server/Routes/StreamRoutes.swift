@@ -1708,21 +1708,22 @@ private func processBucket(
     var yearAndCodecFiltered = streams
 
     // COMPLETELY REMOVE x265/HEVC streams (terrible quality) - CHECK TITLE
-    let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-    let beforeX265Filter = yearAndCodecFiltered.count
+    // Also remove low-quality/unreliable release groups (YIFY, YTS, bitloks)
+    let badPatterns = ["x265", "hevc", "h.265", "h265", "x.265", "yify", "yts", "bitloks"]
+    let beforeFilter = yearAndCodecFiltered.count
     yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
         let titleLower = stream.title.lowercased()
-        let hasBadCodec = badCodecs.contains { codec in
-            titleLower.contains(codec)
+        let hasBadPattern = badPatterns.contains { pattern in
+            titleLower.contains(pattern)
         }
-        if hasBadCodec {
-            print("  ⏭️ BLOCKING x265/HEVC: \(stream.title)")
+        if hasBadPattern {
+            print("  ⏭️ BLOCKING low-quality/unreliable stream: \(stream.title)")
         }
-        return !hasBadCodec  // Only keep x264 and other good codecs
+        return !hasBadPattern
     }
 
-    if beforeX265Filter > yearAndCodecFiltered.count {
-        print("  ✅ BLOCKED \(beforeX265Filter - yearAndCodecFiltered.count) x265 streams for \(quality)")
+    if beforeFilter > yearAndCodecFiltered.count {
+        print("  ✅ BLOCKED \(beforeFilter - yearAndCodecFiltered.count) streams (x265/YIFY/etc) for \(quality)")
     }
 
     // Size filtering

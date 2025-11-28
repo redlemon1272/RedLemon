@@ -140,7 +140,7 @@ class LocalAPIClient: ObservableObject {
         
         // Check cache first - use same movies for entire cycle
         // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v5_exciting_genres"  // Increment when filters change
+        let filterVersion = "v6_strict_exciting"  // Increment when filters change
         let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
         if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
            let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
@@ -201,20 +201,15 @@ class LocalAPIClient: ObservableObject {
                         return false
                     }
                     
-                    // ✅ PRIORITIZE EXCITING GENRES: Thriller, Horror, Action, Sci-Fi, Mystery, Crime
-                    // Skip movies that are ONLY Drama, Romance, Biography, or Comedy (boring for events)
-                    let excitingGenres = ["Thriller", "Horror", "Action", "Sci-Fi", "Mystery", "Crime", "Adventure", "Fantasy"]
-                    let boringOnlyGenres = ["Drama", "Romance", "Biography", "Comedy", "Family", "Music"]
+                    // ✅ STRICTLY ENFORCE EXCITING GENRES: Thriller, Horror, Action, Sci-Fi, Mystery, Crime
+                    // Movies MUST have at least one of these genres to be selected for events
+                    let excitingGenres = ["Thriller", "Horror", "Action", "Sci-Fi", "Mystery", "Crime", "Adventure", "Fantasy", "War", "Western"]
                     
                     // Check if movie has at least one exciting genre
                     let hasExcitingGenre = genres.contains(where: { excitingGenres.contains($0) })
                     
-                    // Check if movie is ONLY boring genres (no exciting elements)
-                    let isOnlyBoring = !genres.isEmpty && genres.allSatisfy { boringOnlyGenres.contains($0) }
-                    
-                    // Keep movies that have at least one exciting genre OR are not purely boring
-                    if isOnlyBoring && !hasExcitingGenre {
-                        print("⏭️ Skipping boring-only movie: \(meta.name) (\(genres.joined(separator: ", ")))")
+                    if !hasExcitingGenre {
+                        print("⏭️ Skipping unexciting movie: \(meta.name) (\(genres.joined(separator: ", ")))")
                         return false
                     }
                 }

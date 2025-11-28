@@ -757,8 +757,11 @@ struct HeroEventCard: View {
                 )
         )
         .onAppear {
-            // Start timer for live events or lobby events (for countdown)
-            if event.isLive || event.isInLobby || isLobbyOverride {
+            // Start timer for:
+            // 1. Live events (to show progress)
+            // 2. Lobby events (for countdown)
+            // 3. Next event (index 1) so it can immediately detect when it should show "Lobby Open"
+            if event.isLive || event.isInLobby || isLobbyOverride || event.index == 1 {
                 currentTime = TimeService.shared.now
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                     currentTime = TimeService.shared.now

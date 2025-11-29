@@ -617,7 +617,7 @@ class LobbyViewModel: ObservableObject {
 
         await appState.playMedia(
             mediaItem,
-            quality: room.quality,
+            quality: .fullHD,
             watchMode: .watchParty,
             roomId: room.id,
             isHost: true
@@ -776,7 +776,7 @@ class LobbyViewModel: ObservableObject {
                             }
                             await appState.playMedia(
                                 mediaItem,
-                                quality: room.quality,
+                                quality: .fullHD,
                                 watchMode: .watchParty,
                                 roomId: room.id,
                                 isHost: false
@@ -841,7 +841,7 @@ class LobbyViewModel: ObservableObject {
 
                         await appState.playMedia(
                             mediaItem,
-                            quality: room.quality,
+                            quality: .fullHD,
                             watchMode: .watchParty,
                             roomId: room.id,
                             isHost: false
@@ -1092,7 +1092,7 @@ class LobbyViewModel: ObservableObject {
 
                     await appState.playMedia(
                         self.room.mediaItem!,
-                        quality: room.quality,
+                        quality: .fullHD,
                         watchMode: .watchParty,
                         roomId: room.id,
                         isHost: false
@@ -1181,7 +1181,7 @@ class LobbyViewModel: ObservableObject {
                 print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
                 await appState.playMedia(
                     mediaItem,
-                    quality: room.quality,
+                    quality: .fullHD,
                     watchMode: .watchParty,
                     roomId: room.id,
                     isHost: false // System is host, user is guest

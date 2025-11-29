@@ -129,13 +129,18 @@ actor RealtimeChannelManager {
     }
 
     private func handleBroadcastMessage(_ payload: [String: Any]) async {
+        NSLog("📨 Realtime: Received broadcast message")
+        NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
+        
         // Decode the sync message
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: payload)
             let message = try JSONDecoder().decode(SyncMessage.self, from: jsonData)
+            NSLog("✅ Realtime: Decoded message type: \(message.type), sender: \(message.senderId ?? "unknown")")
             handleSyncMessage(message)
         } catch {
-            print("⚠️ Failed to decode broadcast message: \(error)")
+            NSLog("❌ Realtime: Failed to decode broadcast message: \(error)")
+            NSLog("   Payload: \(payload)")
         }
     }
 
@@ -153,16 +158,21 @@ actor RealtimeChannelManager {
 
     func sendSyncMessage(_ message: SyncMessage) async throws {
         guard isConnected else {
-            print("⚠️ Cannot send sync message - not connected")
+            NSLog("⚠️ Realtime: Cannot send sync message - not connected")
             return
         }
 
+        NSLog("📤 Realtime: Sending message type: \(message.type), sender: \(message.senderId ?? "unknown")")
+        
         // Convert message to dictionary
         let jsonData = try JSONEncoder().encode(message)
         let payload = try JSONSerialization.jsonObject(with: jsonData) as? [String: Any] ?? [:]
-
+        
+        NSLog("   Payload keys: \(payload.keys.joined(separator: ", "))")
+        
         // Broadcast to channel
         try await realtimeClient.broadcast(event: eventName, payload: payload)
+        NSLog("✅ Realtime: Message broadcast complete")
     }
 
     // MARK: - Sync Message Handling

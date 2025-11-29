@@ -1170,32 +1170,7 @@ extension MPVPlayerViewModel {
 
         // Don't auto-open chat - let user toggle it with spacebar or chat button
         // But prepare welcome message for when they do open it
-        self.messages = [
-            ChatMessage(
-                id: UUID().uuidString,
-                username: "System",
-                text: isHost ? "🎉 Watch party started! Share room ID: \(roomId)" : "🎉 Joined watch party: \(roomId)",
-                timestamp: Date()
-            )
-        ]
-
-        // Get username from appState
-        let username = appState?.currentUsername ?? "User"
-
-        try await realtimeManager?.setup(
-            roomId: roomId,
-            isHost: isHost,
-            userId: userId,
-            username: username,
-            onSync: { [weak self] syncMessage in
-                Task { @MainActor in
-                    await self?.handleSyncMessage(syncMessage)
-                }
-            }
-        )
-
-        // Set up presence callback for Post-Load Ready Gate
-        // Set up presence callback for Post-Load Ready Gate AND UI Updates
+        // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
         await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
             Task { @MainActor in
                 guard let self = self else { return }
@@ -1252,6 +1227,33 @@ extension MPVPlayerViewModel {
                 }
             }
         }
+
+        // Now setup the channel with callbacks already in place
+        // Don't auto-open chat - let user toggle it with spacebar or chat button
+        // But prepare welcome message for when they do open it
+        self.messages = [
+            ChatMessage(
+                id: UUID().uuidString,
+                username: "System",
+                text: isHost ? "🎉 Watch party started! Share room ID: \(roomId)" : "🎉 Joined watch party: \(roomId)",
+                timestamp: Date()
+            )
+        ]
+
+        // Get username from appState
+        let username = appState?.currentUsername ?? "User"
+
+        try await realtimeManager?.setup(
+            roomId: roomId,
+            isHost: isHost,
+            userId: userId,
+            username: username,
+            onSync: { [weak self] syncMessage in
+                Task { @MainActor in
+                    await self?.handleSyncMessage(syncMessage)
+                }
+            }
+        )
 
         // If host, start broadcasting playback state
         if isHost {

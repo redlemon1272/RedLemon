@@ -1343,7 +1343,8 @@ extension MPVPlayerViewModel {
         }
 
         // Syncplay-inspired: Ignore remote updates if we just made a local action
-        if shouldIgnoreRemoteUpdate() {
+        // CRITICAL: NEVER ignore READY or CHAT messages - they must always be processed
+        if message.type != .ready && message.type != .chat && shouldIgnoreRemoteUpdate() {
             return
         }
 

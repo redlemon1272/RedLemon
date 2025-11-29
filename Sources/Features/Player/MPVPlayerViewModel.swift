@@ -173,9 +173,13 @@ class MPVPlayerViewModel: ObservableObject {
             // Load video normally but will immediately pause and seek
             // CRITICAL: In watch party mode, NEVER autoplay - even when resuming!
             // The ready gate will control when playback starts
-            let shouldAutoplay = !isInWatchParty
+            // EXCEPTION: Events should autoplay (they don't have a host to wait for)
+            let isEvent = appState?.isEventPlayback == true
+            let shouldAutoplay = !isInWatchParty || isEvent
+
             mpvWrapper.loadVideo(url: streamURL, autoplay: shouldAutoplay)
-            if isInWatchParty {
+
+            if isInWatchParty && !isEvent {
                 showWaitingForGuests = true
                 print("🛑 Watch Party Resume: Starting PAUSED to wait for ready gate")
             }

@@ -40,7 +40,7 @@ struct RoomListView: View {
             } else {
                 List {
                     ForEach(appState.activeRooms) { room in
-                        ActiveRoomRow(room: room)
+                        ActiveRoomRow(roomId: room.id)
                             .onTapGesture {
                                 joinRoom(room: room)
                             }
@@ -331,31 +331,31 @@ struct RoomListView: View {
             print("❌ Room not found: \(code)")
         }
     }
-    
+
     // MARK: - Realtime Subscription
-    
+
     private func setupRealtimeSubscription() async {
         print("🔌 RoomListView: Setting up realtime subscription for rooms...")
-        
+
         let client = SupabaseRealtimeClient(
             realtimeURL: Config.supabaseURL,
             apiKey: Config.supabaseAnonKey
         )
-        
+
         await MainActor.run {
             self.realtimeClient = client
         }
-        
+
         // Subscribe to Postgres Changes on rooms table
         await client.onPostgresChange { payload in
             Task { @MainActor in
                 await self.handleRoomUpdate(payload)
             }
         }
-        
+
         do {
             try await client.connect()
-            
+
             // Listen for UPDATEs on rooms table (state, playback_position changes)
             let changesConfig: [[String: Any]] = [
                 [
@@ -364,14 +364,14 @@ struct RoomListView: View {
                     "table": "rooms"
                 ]
             ]
-            
+
             try await client.joinChannel("rooms_updates", postgresChanges: changesConfig)
             print("✅ RoomListView: Connected to rooms realtime updates")
         } catch {
             print("❌ RoomListView: Failed to subscribe to rooms: \(error)")
         }
     }
-    
+
     private func disconnectRealtime() async {
         if let client = realtimeClient {
             await client.disconnect()
@@ -380,31 +380,31 @@ struct RoomListView: View {
             }
         }
     }
-    
+
     @MainActor
     private func handleRoomUpdate(_ payload: [String: Any]) async {
         guard let newRecord = payload["new"] as? [String: Any],
               let roomId = newRecord["id"] as? String else {
             return
         }
-        
+
         // Find the room in active rooms
         guard let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) else {
             return
         }
-        
+
         var room = appState.activeRooms[index]
-        
+
         // Update state if changed
         if let isPlaying = newRecord["is_playing"] as? Bool {
             room.state = isPlaying ? .playing : .paused
         }
-        
+
         // Update playback position if changed
         if let position = newRecord["playback_position"] as? Double {
             room.playbackPosition = TimeInterval(position)
         }
-        
+
         appState.activeRooms[index] = room
         print("🔄 RoomListView: Updated room \(roomId) - state: \(room.state), position: \(room.playbackPosition ?? 0)s")
     }
@@ -421,17 +421,33 @@ extension NSAlert {
     }
 }
 
+
 struct ActiveRoomRow: View {
-    let room: WatchPartyRoom
+    let roomId: String
+    @EnvironmentObject var appState: AppState
     @State private var currentTime = TimeService.shared.now
-    
+
     // Use Combine timer instead of Foundation Timer for safer SwiftUI updates
     private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
 
+    // Look up the room dynamically from appState to get realtime updates
+    private var room: WatchPartyRoom? {
+        appState.activeRooms.first(where: { $0.id == roomId })
+    }
+
     var body: some View {
+        if let room = room {
+            roomContent(for: room)
+        } else {
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder
+    private func roomContent(for room: WatchPartyRoom) -> some View {
         HStack(spacing: 16) {
             // Poster art (left side)
-            posterView
+            posterView(for: room)
                 .frame(width: 80, height: 120)
                 .cornerRadius(8)
                 .shadow(color: .black.opacity(0.3), radius: 5)
@@ -492,7 +508,7 @@ struct ActiveRoomRow: View {
                     Text("•")
                         .foregroundColor(.secondary)
 
-                    Text(timeAgoString)
+                    Text(timeAgoString(for: room))
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -525,51 +541,30 @@ struct ActiveRoomRow: View {
                                 .fontWeight(.semibold)
                                 .padding(.horizontal, 6)
                                 .padding(.vertical, 3)
-                                .background(sourceQualityColor.opacity(0.2))
-                                .foregroundColor(sourceQualityColor)
+                                .background(sourceQualityColor(for: room).opacity(0.2))
+                                .foregroundColor(sourceQualityColor(for: room))
                                 .cornerRadius(4)
                         }
 
                         // Status badge
                         HStack(spacing: 3) {
                             Circle()
-                                .fill(statusColor)
+                                .fill(statusColor(for: room))
                                 .frame(width: 6, height: 6)
-                            Text(statusText)
+                            Text(statusText(for: room))
                                 .font(.caption2)
                                 .fontWeight(.medium)
                         }
                         .padding(.horizontal, 6)
                         .padding(.vertical, 3)
-                        .background(statusColor.opacity(0.15))
-                        .foregroundColor(statusColor)
+                        .background(statusColor(for: room).opacity(0.15))
+                        .foregroundColor(statusColor(for: room))
                         .cornerRadius(4)
                     }
                 }
 
-                // Progress Bar (if has runtime)
-                if let runtime = room.runtime, runtime > 0 {
-                    // Clamp current position to valid range [0, runtime]
-                    let currentPosition = min(max(calculateCurrentPosition(), 0), runtime)
-                    let remainingTime = max(runtime - currentPosition, 0)
-                    let progress = min(currentPosition / runtime, 1.0)
-                    
-                    VStack(alignment: .leading, spacing: 6) {
-                        ProgressView(value: progress, total: 1.0)
-                            .progressViewStyle(LinearProgressViewStyle(tint: room.state == .playing ? .green : .orange))
-                            .scaleEffect(x: 1, y: 1.2, anchor: .center)
-
-                        HStack {
-                            Text(formatTime(currentPosition))
-                                .font(.system(size: 11, weight: .medium))
-                            Spacer()
-                            Text("-\(formatTime(remainingTime))")
-                                .font(.system(size: 11, weight: .medium))
-                        }
-                        .foregroundColor(.secondary)
-                    }
-                    .padding(.top, 4)
-                }
+                // Progress Bar (custom implementation to avoid layout crashes)
+                progressBarView(for: room)
             }
         }
         .padding(12)
@@ -583,23 +578,94 @@ struct ActiveRoomRow: View {
             currentTime = TimeService.shared.now
         }
     }
-    
-    // MARK: - Live Progress Calculation
-    
-    private func calculateCurrentPosition() -> TimeInterval {
-        guard let initialPosition = room.playbackPosition else { return 0 }
-        
-        // If paused, return the frozen position
-        if room.state != .playing {
-            return initialPosition
+
+    // MARK: - Progress Bar View
+
+    @ViewBuilder
+    private func progressBarView(for room: WatchPartyRoom) -> some View {
+        // Only attempt to render if we have valid runtime and position
+        if let runtime = room.runtime,
+           runtime > 0,
+           runtime.isFinite,
+           runtime < 86400,
+           let validPosition = calculateSafePosition(for: room, runtime: runtime) {
+
+            // Calculate progress percentage (0.0 to 1.0)
+            let progressValue = min(max(validPosition / runtime, 0), 1)
+            let remainingTime = max(runtime - validPosition, 0)
+
+            // Triple-check all values are safe before rendering
+            if progressValue.isFinite &&
+               validPosition.isFinite &&
+               remainingTime.isFinite &&
+               progressValue >= 0 &&
+               progressValue <= 1 {
+
+                VStack(alignment: .leading, spacing: 6) {
+                    // Custom progress bar using GeometryReader for safe layout
+                    GeometryReader { geometry in
+                        ZStack(alignment: .leading) {
+                            // Background track
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.3))
+                                .frame(height: 3)
+
+                            // Progress fill
+                            Rectangle()
+                                .fill(room.state == .playing ? Color.green : Color.orange)
+                                .frame(width: max(0, min(geometry.size.width * progressValue, geometry.size.width)), height: 3)
+                        }
+                        .cornerRadius(1.5)
+                    }
+                    .frame(height: 3)
+
+                    // Time labels
+                    HStack {
+                        Text(formatTime(validPosition))
+                            .font(.system(size: 11, weight: .medium))
+                        Spacer()
+                        Text("-\(formatTime(remainingTime))")
+                            .font(.system(size: 11, weight: .medium))
+                    }
+                    .foregroundColor(.secondary)
+                }
+                .padding(.top, 4)
+            }
         }
-        
-        // Calculate elapsed time since room creation
-        let elapsed = currentTime.timeIntervalSince(room.createdAt)
-        
-        // Current position = initial position + elapsed time
-        return initialPosition + elapsed
     }
+
+    // MARK: - Live Progress Calculation
+
+    /// Safely calculates the current playback position, returning nil if any values are invalid
+    private func calculateSafePosition(for room: WatchPartyRoom, runtime: TimeInterval) -> TimeInterval? {
+        if room.state == .playing {
+            // For playing rooms: calculate elapsed time since creation
+            let elapsed = currentTime.timeIntervalSince(room.createdAt)
+
+            // Validate elapsed time is reasonable
+            guard elapsed >= 0, elapsed < 86400, elapsed.isFinite else {
+                return nil
+            }
+
+            // Add initial playback position if available
+            let initialPos = room.playbackPosition ?? 0
+            guard initialPos.isFinite, initialPos >= 0 else {
+                return nil
+            }
+
+            return min(initialPos + elapsed, runtime)
+        } else {
+            // For paused/lobby/ended rooms: use frozen playback position
+            guard let frozenPos = room.playbackPosition,
+                  frozenPos.isFinite,
+                  frozenPos >= 0 else {
+                return nil
+            }
+            return min(frozenPos, runtime)
+        }
+    }
+
+
 
     private func formatTime(_ interval: TimeInterval) -> String {
         let hours = Int(interval) / 3600
@@ -613,7 +679,7 @@ struct ActiveRoomRow: View {
     }
 
     @ViewBuilder
-    private var posterView: some View {
+    private func posterView(for room: WatchPartyRoom) -> some View {
         if let posterURL = room.posterURL, !posterURL.isEmpty {
             let fullURL = posterURL.starts(with: "http") ? posterURL : "https://image.tmdb.org/t/p/w200\(posterURL)"
             AsyncImage(url: URL(string: fullURL)) { phase in
@@ -643,7 +709,7 @@ struct ActiveRoomRow: View {
         }
     }
 
-    private var timeAgoString: String {
+    private func timeAgoString(for room: WatchPartyRoom) -> String {
         let now = Date()
         let interval = now.timeIntervalSince(room.createdAt)
 
@@ -661,7 +727,7 @@ struct ActiveRoomRow: View {
         }
     }
 
-    private var sourceQualityColor: Color {
+    private func sourceQualityColor(for room: WatchPartyRoom) -> Color {
         guard let sourceQuality = room.sourceQuality else { return .gray }
         switch sourceQuality {
         case "BluRay":
@@ -677,7 +743,7 @@ struct ActiveRoomRow: View {
         }
     }
 
-    var statusColor: Color {
+    func statusColor(for room: WatchPartyRoom) -> Color {
         switch room.state {
         case .lobby:
             return .orange
@@ -690,7 +756,7 @@ struct ActiveRoomRow: View {
         }
     }
 
-    var statusText: String {
+    func statusText(for room: WatchPartyRoom) -> String {
         switch room.state {
         case .lobby:
             return "Lobby"

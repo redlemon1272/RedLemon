@@ -95,6 +95,10 @@ class MPVWrapper: ObservableObject {
         // Language preferences: English audio and subtitles by default
         mpv_set_option_string(handle, "alang", "eng,en,english")
         mpv_set_option_string(handle, "slang", "eng,en,english")
+        
+        // CRITICAL: Enable subs even when audio language matches subtitle language
+        // Without this, embedded English subs won't show when audio is also English
+        mpv_set_option_string(handle, "subs-with-matching-audio", "yes")
 
         let initResult = mpv_initialize(handle)
         guard initResult >= 0 else {
@@ -210,6 +214,9 @@ class MPVWrapper: ObservableObject {
             playbackFinished = false
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
+            // Auto-select English audio and subtitles BEFORE playback starts (no stutter)
+            autoSelectEnglishAudio()
+            autoSelectEnglishSubtitles()
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
             isPlaying = true
@@ -327,11 +334,12 @@ class MPVWrapper: ObservableObject {
         }
         NSLog("📝 Loading subtitle from: %@", String(url.prefix(80)))
 
-        // First add the subtitle with language and title
+        // Add the subtitle WITHOUT auto-selecting (use "cached" instead of "select")
+        // This prevents external subs from overriding embedded English subs
         var args: [UnsafePointer<CChar>?] = [
             UnsafePointer(strdup("sub-add")),
             UnsafePointer(strdup(url)),
-            UnsafePointer(strdup("select")),  // Auto-select this subtitle
+            UnsafePointer(strdup("cached")),  // Add to list but don't auto-select
             UnsafePointer(strdup(title)),     // Title (release name)
             UnsafePointer(strdup("en")),      // Language
             nil
@@ -347,25 +355,7 @@ class MPVWrapper: ObservableObject {
         }
 
         if result >= 0 {
-            NSLog("✅ Subtitle added successfully, now enabling it...")
-            // Enable subtitle visibility
-            var visFlag: Int32 = 1
-            mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
-
-            // Get the track count to find our newly added subtitle
-            var trackCount: Int64 = 0
-            if mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount) >= 0 && trackCount > 0 {
-                // Get the actual track ID of the last track (our newly added subtitle)
-                let lastTrackIndex = trackCount - 1
-                let idKey = "track-list/\(lastTrackIndex)/id"
-                var trackId: Int64 = 0
-                if mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0 {
-                    NSLog("📺 Setting subtitle track to ID: %lld (from index %lld)", trackId, lastTrackIndex)
-                    mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-                } else {
-                    NSLog("❌ Failed to get track ID for index %lld", lastTrackIndex)
-                }
-            }
+            NSLog("✅ External subtitle added to track list (not auto-selected)")
         } else {
             NSLog("❌ Failed to load subtitle, MPV error code: %d", result)
         }
@@ -643,6 +633,256 @@ class MPVWrapper: ObservableObject {
 
         NSLog("📊 Total subtitle tracks found: %d (including Off if needed)", tracks.count)
         return tracks
+    }
+
+    /// Auto-select English audio track (called on FILE_LOADED event)
+    private func autoSelectEnglishAudio() {
+        guard let handle = mpvHandle, isInitialized else { return }
+        
+        print("🔍 AUDIO AUTO-SELECT: Starting audio track scan during FILE_LOADED event")
+        
+        var trackCount: Int64 = 0
+        mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
+        print("🔍 AUDIO AUTO-SELECT: Found \(trackCount) total tracks")
+        
+        var englishAudioTrack: (id: Int, name: String)? = nil
+        var surroundAudioTrack: (id: Int, name: String)? = nil
+        var firstAudioTrack: (id: Int, name: String)? = nil
+        
+        // Scan all audio tracks
+        for i in 0..<Int(trackCount) {
+            // Check if it's an audio track
+            let typeKey = "track-list/\(i)/type"
+            var typeStr: UnsafeMutablePointer<CChar>?
+            guard mpv_get_property(handle, typeKey, MPV_FORMAT_STRING, &typeStr) >= 0,
+                  let type = typeStr.map({ String(cString: $0) }),
+                  type == "audio" else {
+                mpv_free(typeStr)
+                continue
+            }
+            mpv_free(typeStr)
+            
+            // Get track ID
+            let idKey = "track-list/\(i)/id"
+            var trackId: Int64 = 0
+            guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0 else {
+                continue
+            }
+            
+            // Get language
+            let langKey = "track-list/\(i)/lang"
+            var langStr: UnsafeMutablePointer<CChar>?
+            let lang = (mpv_get_property(handle, langKey, MPV_FORMAT_STRING, &langStr) >= 0)
+                ? langStr.map { String(cString: $0) }
+                : nil
+            mpv_free(langStr)
+            
+            // Get title
+            let titleKey = "track-list/\(i)/title"
+            var titleStr: UnsafeMutablePointer<CChar>?
+            let title = (mpv_get_property(handle, titleKey, MPV_FORMAT_STRING, &titleStr) >= 0)
+                ? titleStr.map { String(cString: $0) }
+                : nil
+            mpv_free(titleStr)
+            
+            let displayName = title ?? lang ?? "Track \(trackId)"
+            let langLower = lang?.lowercased() ?? ""
+            let titleLower = title?.lowercased() ?? ""
+            
+            print("🔍 AUDIO AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")'")
+            
+            // Save first audio track as fallback
+            if firstAudioTrack == nil {
+                firstAudioTrack = (Int(trackId), displayName)
+            }
+            
+            // Check if English by language tag
+            let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
+            
+            if isEnglish {
+                if englishAudioTrack == nil {
+                    englishAudioTrack = (Int(trackId), displayName)
+                    print("🎵 Found English audio track: \(displayName) (ID: \(trackId))")
+                }
+            }
+            
+            // Check if surround (typically English in dual-audio releases)
+            let isSurround = titleLower.contains("surround") || 
+                            titleLower.contains("5.1") || 
+                            titleLower.contains("7.1") ||
+                            titleLower.contains("atmos")
+            
+            if isSurround && surroundAudioTrack == nil {
+                surroundAudioTrack = (Int(trackId), displayName)
+                print("🔊 Found surround audio track: \(displayName) (ID: \(trackId))")
+            }
+        }
+        
+        // Priority: English tagged > Surround > First track
+        if let english = englishAudioTrack {
+            print("✅ Auto-selecting English audio: \(english.name) (ID: \(english.id))")
+            var trackId = Int64(english.id)
+            mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &trackId)
+        } else if let surround = surroundAudioTrack {
+            print("ℹ️ No English-tagged audio, selecting surround: \(surround.name) (ID: \(surround.id))")
+            var trackId = Int64(surround.id)
+            mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &trackId)
+        } else if let first = firstAudioTrack {
+            print("ℹ️ Using default first audio track: \(first.name) (ID: \(first.id))")
+        } else {
+            print("⚠️ No audio tracks found")
+        }
+    }
+
+    /// Auto-select first English embedded subtitle track (called on FILE_LOADED event)
+    private func autoSelectEnglishSubtitles() {
+        guard let handle = mpvHandle, isInitialized else { return }
+        
+        print("🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event")
+        
+        var trackCount: Int64 = 0
+        mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
+        print("🔍 AUTO-SELECT: Found \(trackCount) total tracks")
+        
+        struct SubCandidate {
+            let id: Int
+            let name: String
+            let isExternal: Bool
+            let isForced: Bool
+            let isDefault: Bool
+            let title: String
+        }
+        
+        var candidates: [SubCandidate] = []
+        
+        // Scan all subtitle tracks
+        for i in 0..<Int(trackCount) {
+            // Check if it's a subtitle track
+            let typeKey = "track-list/\(i)/type"
+            var typeStr: UnsafeMutablePointer<CChar>?
+            guard mpv_get_property(handle, typeKey, MPV_FORMAT_STRING, &typeStr) >= 0,
+                  let type = typeStr.map({ String(cString: $0) }),
+                  type == "sub" else {
+                mpv_free(typeStr)
+                continue
+            }
+            mpv_free(typeStr)
+            
+            // Get track ID
+            let idKey = "track-list/\(i)/id"
+            var trackId: Int64 = 0
+            guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0, trackId != 0 else {
+                continue
+            }
+            
+            // Check properties
+            let externalKey = "track-list/\(i)/external"
+            var isExternalVal: Int64 = 0
+            let _ = mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
+            let isExternal = isExternalVal != 0
+            
+            let forcedKey = "track-list/\(i)/forced"
+            var isForcedVal: Int64 = 0
+            let _ = mpv_get_property(handle, forcedKey, MPV_FORMAT_FLAG, &isForcedVal)
+            let isForced = isForcedVal != 0
+            
+            let defaultKey = "track-list/\(i)/default"
+            var isDefaultVal: Int64 = 0
+            let _ = mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
+            let isDefault = isDefaultVal != 0
+            
+            // Get language & title
+            let langKey = "track-list/\(i)/lang"
+            var langStr: UnsafeMutablePointer<CChar>?
+            let lang = (mpv_get_property(handle, langKey, MPV_FORMAT_STRING, &langStr) >= 0)
+                ? langStr.map { String(cString: $0) }
+                : nil
+            mpv_free(langStr)
+            
+            let titleKey = "track-list/\(i)/title"
+            var titleStr: UnsafeMutablePointer<CChar>?
+            let title = (mpv_get_property(handle, titleKey, MPV_FORMAT_STRING, &titleStr) >= 0)
+                ? titleStr.map { String(cString: $0) }
+                : nil
+            mpv_free(titleStr)
+            
+            // Check if English
+            let langLower = lang?.lowercased() ?? ""
+            let titleLower = title?.lowercased() ?? ""
+            let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
+            
+            print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault)")
+            
+            if isEnglish {
+                let displayName = title ?? lang ?? "Track \(trackId)"
+                
+                // Filter out known bad patterns
+                let isPartialSub = titleLower.contains("valyrian") || 
+                                   titleLower.contains("foreign") ||
+                                   titleLower.contains("parts") ||
+                                   titleLower.contains("commentary")
+                
+                if !isPartialSub {
+                    candidates.append(SubCandidate(
+                        id: Int(trackId),
+                        name: displayName,
+                        isExternal: isExternal,
+                        isForced: isForced,
+                        isDefault: isDefault,
+                        title: titleLower
+                    ))
+                } else {
+                    print("⚠️ Ignoring partial/commentary subtitle: \(displayName)")
+                }
+            }
+        }
+        
+        // Select best candidate
+        // Scoring:
+        // +100 for Embedded (vs External)
+        // +50 for SDH/CC
+        // -50 for Forced (unless it's the only one)
+        // -10 for Default (often foreign default in dual audio)
+        // +1 for Higher ID (often later tracks are better/fixed)
+        
+        let bestCandidate = candidates.max { a, b in
+            var scoreA = 0
+            var scoreB = 0
+            
+            // Prefer Embedded
+            if !a.isExternal { scoreA += 100 }
+            if !b.isExternal { scoreB += 100 }
+            
+            // Prefer SDH/CC
+            if a.title.contains("sdh") || a.title.contains("cc") { scoreA += 50 }
+            if b.title.contains("sdh") || b.title.contains("cc") { scoreB += 50 }
+            
+            // Avoid Forced
+            if a.isForced { scoreA -= 50 }
+            if b.isForced { scoreB -= 50 }
+            
+            // Avoid Default (in dual audio, default is often the foreign one)
+            if a.isDefault { scoreA -= 10 }
+            if b.isDefault { scoreB -= 10 }
+            
+            // Tie-breaker: Prefer later tracks (often better/fixed)
+            if a.id > b.id { scoreA += 1 }
+            if b.id > a.id { scoreB += 1 }
+            
+            return scoreA < scoreB
+        }
+        
+        if let best = bestCandidate {
+            print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault)]")
+            var trackId = Int64(best.id)
+            mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
+            
+            // Enable subtitle visibility
+            var visFlag: Int32 = 1
+            mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
+        } else {
+            print("ℹ️ No suitable English subtitles found")
+        }
     }
 
     func cycleSubtitles() {

@@ -108,16 +108,49 @@ class WatchPartyManager: ObservableObject {
     func sendPlayCommand() async {
         await transport?.send(.play)
         lastKnownPlayingState = true
+        
+        // Update database if host
+        if isHost, let roomId = currentRoom?.id {
+            Task {
+                try? await SupabaseClient.shared.updateRoomPlayback(
+                    roomId: roomId,
+                    position: Int(lastKnownPosition),
+                    isPlaying: true
+                )
+            }
+        }
     }
 
     func sendPauseCommand() async {
         await transport?.send(.pause)
         lastKnownPlayingState = false
+        
+        // Update database if host
+        if isHost, let roomId = currentRoom?.id {
+            Task {
+                try? await SupabaseClient.shared.updateRoomPlayback(
+                    roomId: roomId,
+                    position: Int(lastKnownPosition),
+                    isPlaying: false
+                )
+            }
+        }
     }
 
     func sendSeekCommand(positionMs: Int) async {
         await transport?.send(.seek(positionMs: positionMs))
         lastKnownPosition = TimeInterval(positionMs) / 1000.0
+        
+        // Update database if host
+        if isHost, let roomId = currentRoom?.id {
+            Task {
+                try? await SupabaseClient.shared.updateRoomPlayback(
+                    roomId: roomId,
+                    position: Int(lastKnownPosition),
+                    isPlaying: lastKnownPlayingState
+                )
+            }
+        }
     }
 
     func sendHeartbeat(positionMs: Int, playing: Bool) async {

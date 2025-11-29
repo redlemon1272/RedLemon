@@ -194,26 +194,30 @@ class MPVPlayerViewModel: ObservableObject {
             Task { [weak self] in
                 guard let self = self else { return }
 
-                // Give playback more head start before polling to avoid startup stutter
-                try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s initial delay
+                // Brief delay to let MPV's auto-selection complete
+                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s delay
 
-                // Poll a few times to give MPV a chance to parse embedded tracks
+                // Poll a few times to update UI with available tracks
                 for attempt in 1...3 {
-                    try? await Task.sleep(nanoseconds: 3_000_000_000) // 3s between checks
+                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s between checks
 
                     let tracks = self.mpvWrapper.getSubtitleTracks()
                     let embeddedSubs = tracks.filter { $0.id != 0 }
                     if !embeddedSubs.isEmpty {
                         print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
+                        
+                        // MPV already auto-selected via FILE_LOADED event handler
+                        let currentSid = self.mpvWrapper.getCurrentSubtitleTrack()
+                        print("ℹ️ Current subtitle track: \(currentSid) (auto-selected by MPV during FILE_LOADED)")
+                        
+                        // Update UI with tracks and current selection
                         await MainActor.run {
                             self.availableSubtitleTracks = tracks
-                        }
-                        // Only switch if no subtitle is currently active to avoid stutter
-                        let currentSid = self.mpvWrapper.getCurrentSubtitleTrack()
-                        if currentSid == 0 {
-                            _ = self.selectEnglishDefaults()
-                        } else {
-                            print("ℹ️ Embedded subs found but current sid=\(currentSid), not switching to avoid stutter")
+                            // Update selected track to match MPV's selection
+                            if let selectedTrack = tracks.first(where: { $0.id == currentSid }) {
+                                self.currentSubtitleTrack = selectedTrack
+                                print("✅ UI updated: Selected subtitle track \(selectedTrack.displayName)")
+                            }
                         }
                         break
                     } else if attempt == 3 {
@@ -233,17 +237,14 @@ class MPVPlayerViewModel: ObservableObject {
         let areSubtitlesLocal = effectiveSubtitles.allSatisfy { $0.url.starts(with: "/") }
 
         if areSubtitlesLocal && !effectiveSubtitles.isEmpty {
-            NSLog("✅ Subtitles already downloaded, loading immediately...")
-            // Load them right away (no delay needed)
+            NSLog("✅ Subtitles already downloaded, loading as additional options...")
+            // Load them as additional options (won't override embedded subs)
             Task {
                 for (index, subtitle) in effectiveSubtitles.enumerated() {
-                    NSLog("📝 Loading pre-downloaded subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
+                    NSLog("📝 Loading external subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
                     mpvWrapper.loadSubtitle(url: subtitle.url, title: subtitle.label)
                 }
-
-                // Wait briefly for subtitles to register, then select English
-                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconds
-                selectEnglishDefaults()
+                NSLog("ℹ️ External subtitles loaded as additional options (embedded subs take priority)")
             }
         } else if !effectiveSubtitles.isEmpty {
             // Subtitles need to be downloaded (fallback for older code paths)
@@ -264,21 +265,7 @@ class MPVPlayerViewModel: ObservableObject {
                         NSLog("❌ RedLemon: Failed to download subtitle %d", index + 1)
                     }
                 }
-
-                // Wait for all subtitles to load, then select first English one
-                if !subtitles.isEmpty {
-                    try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
-
-                    // Try to select English subtitle multiple times
-                    for attempt in 1...3 {
-                        print("🔄 Attempt \(attempt) to select subtitle track...")
-                        let hadSubtitles = await self.selectEnglishDefaults()
-                        if hadSubtitles {
-                            break // Success, stop trying
-                        }
-                        try? await Task.sleep(nanoseconds: 2_000_000_000) // Wait 2s between attempts
-                    }
-                }
+                NSLog("ℹ️ External subtitles downloaded and added as options (embedded subs take priority)")
             }
         }
 

@@ -205,11 +205,11 @@ class MPVPlayerViewModel: ObservableObject {
                     let embeddedSubs = tracks.filter { $0.id != 0 }
                     if !embeddedSubs.isEmpty {
                         print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
-                        
+
                         // MPV already auto-selected via FILE_LOADED event handler
                         let currentSid = self.mpvWrapper.getCurrentSubtitleTrack()
                         print("ℹ️ Current subtitle track: \(currentSid) (auto-selected by MPV during FILE_LOADED)")
-                        
+
                         // Update UI with tracks and current selection
                         await MainActor.run {
                             self.availableSubtitleTracks = tracks
@@ -308,6 +308,13 @@ class MPVPlayerViewModel: ObservableObject {
             guard let self = self else { return }
             for await dur in self.mpvWrapper.$duration.values {
                 self.duration = dur
+
+                // Watch Party Ready Gate: Trigger ready signal as soon as we have duration (file loaded)
+                // This fixes the deadlock where we waited for playback to start, but playback waits for ready signal
+                if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
+                    print("⏱️ Watch Party: Duration available (\(dur)s), triggering ready signal")
+                    self.sendReadySignal()
+                }
             }
         }
         mpvObserverTasks.append(durationTask)
@@ -376,25 +383,8 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Watch Party Ready Gate
         if isInWatchParty && !hasSentReadySignal {
-            print("👋 Watch Party: Video loaded, sending READY signal")
-            hasSentReadySignal = true
-
-            // Send Ready signal
-            let syncMessage = SyncMessage(
-                type: .ready,
-                timestamp: Date().timeIntervalSince1970,
-                position: 0,
-                isPlaying: false,
-                senderId: currentUserId
-            )
-            Task {
-                try? await realtimeManager?.sendSyncMessage(syncMessage)
-            }
-
-            // If Host, mark self as ready and check if we can start
-            if isWatchPartyHost {
-                checkIfAllGuestsReady()
-            }
+            print("👋 Watch Party: Video ready (playing), sending READY signal as fallback")
+            sendReadySignal()
         }
 
         // Check if we should resume from a specific timestamp
@@ -1606,6 +1596,30 @@ extension MPVPlayerViewModel {
     }
 
     // MARK: - Post-Load Ready Gate Helpers
+
+    private func sendReadySignal() {
+        guard !hasSentReadySignal else { return }
+        hasSentReadySignal = true
+
+        print("👋 Watch Party: Sending READY signal")
+
+        // Send Ready signal
+        let syncMessage = SyncMessage(
+            type: .ready,
+            timestamp: Date().timeIntervalSince1970,
+            position: 0,
+            isPlaying: false,
+            senderId: currentUserId
+        )
+        Task {
+            try? await realtimeManager?.sendSyncMessage(syncMessage)
+        }
+
+        // If Host, mark self as ready and check if we can start
+        if isWatchPartyHost {
+            checkIfAllGuestsReady()
+        }
+    }
 
     private func checkIfAllGuestsReady() {
         guard isWatchPartyHost else { return }

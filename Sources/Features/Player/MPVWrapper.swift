@@ -95,7 +95,7 @@ class MPVWrapper: ObservableObject {
         // Language preferences: English audio and subtitles by default
         mpv_set_option_string(handle, "alang", "eng,en,english")
         mpv_set_option_string(handle, "slang", "eng,en,english")
-        
+
         // CRITICAL: Enable subs even when audio language matches subtitle language
         // Without this, embedded English subs won't show when audio is also English
         mpv_set_option_string(handle, "subs-with-matching-audio", "yes")
@@ -263,7 +263,7 @@ class MPVWrapper: ObservableObject {
     private func startTimeUpdates() {
         timeUpdateTimer?.invalidate()
         timeUpdateTimer = nil
-        
+
         // ✅ Reduce from 2Hz to 4Hz maximum (0.25s)
         timeUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
             guard let strongSelf = self else { return }
@@ -275,14 +275,14 @@ class MPVWrapper: ObservableObject {
 
     private func updateCurrentTime() {
         guard let handle = mpvHandle, isInitialized, isPlaying else { return }
-        
+
         let now = Date()
         guard now.timeIntervalSince(lastUIUpdateTime) >= minUIUpdateInterval else { return }
         lastUIUpdateTime = now
-        
+
         var time: Double = 0
         mpv_get_property(handle, "time-pos", MPV_FORMAT_DOUBLE, &time)
-        
+
         // ✅ Only update if significant change
         guard abs(currentTime - time) >= minTimeChangeThreshold else { return }
         currentTime = time
@@ -304,6 +304,24 @@ class MPVWrapper: ObservableObject {
             Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: url, autoplay: autoplay) } }
             return
         }
+
+        // CRITICAL FIX: When loading in paused mode (watch party), add a small delay
+        // to ensure the render context is fully set up. Without this, loadfile fails with error -4
+        // because the command is executed before MPV is ready to accept it.
+        if !autoplay {
+            NSLog("⏸️ Loading in paused mode (watch party), adding 100ms delay for render context setup...")
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 100_000_000)  // 100ms delay
+                self.executeLoadVideo(url: url, autoplay: autoplay)
+            }
+            return
+        }
+
+        // Normal autoplay mode - execute immediately
+        executeLoadVideo(url: url, autoplay: autoplay)
+    }
+
+    private func executeLoadVideo(url: String, autoplay: Bool) {
         guard let handle = mpvHandle else {
             NSLog("❌ MPV handle is nil!")
             return
@@ -638,17 +656,17 @@ class MPVWrapper: ObservableObject {
     /// Auto-select English audio track (called on FILE_LOADED event)
     private func autoSelectEnglishAudio() {
         guard let handle = mpvHandle, isInitialized else { return }
-        
+
         print("🔍 AUDIO AUTO-SELECT: Starting audio track scan during FILE_LOADED event")
-        
+
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
         print("🔍 AUDIO AUTO-SELECT: Found \(trackCount) total tracks")
-        
+
         var englishAudioTrack: (id: Int, name: String)? = nil
         var surroundAudioTrack: (id: Int, name: String)? = nil
         var firstAudioTrack: (id: Int, name: String)? = nil
-        
+
         // Scan all audio tracks
         for i in 0..<Int(trackCount) {
             // Check if it's an audio track
@@ -661,14 +679,14 @@ class MPVWrapper: ObservableObject {
                 continue
             }
             mpv_free(typeStr)
-            
+
             // Get track ID
             let idKey = "track-list/\(i)/id"
             var trackId: Int64 = 0
             guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0 else {
                 continue
             }
-            
+
             // Get language
             let langKey = "track-list/\(i)/lang"
             var langStr: UnsafeMutablePointer<CChar>?
@@ -676,7 +694,7 @@ class MPVWrapper: ObservableObject {
                 ? langStr.map { String(cString: $0) }
                 : nil
             mpv_free(langStr)
-            
+
             // Get title
             let titleKey = "track-list/\(i)/title"
             var titleStr: UnsafeMutablePointer<CChar>?
@@ -684,40 +702,40 @@ class MPVWrapper: ObservableObject {
                 ? titleStr.map { String(cString: $0) }
                 : nil
             mpv_free(titleStr)
-            
+
             let displayName = title ?? lang ?? "Track \(trackId)"
             let langLower = lang?.lowercased() ?? ""
             let titleLower = title?.lowercased() ?? ""
-            
+
             print("🔍 AUDIO AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")'")
-            
+
             // Save first audio track as fallback
             if firstAudioTrack == nil {
                 firstAudioTrack = (Int(trackId), displayName)
             }
-            
+
             // Check if English by language tag
             let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
-            
+
             if isEnglish {
                 if englishAudioTrack == nil {
                     englishAudioTrack = (Int(trackId), displayName)
                     print("🎵 Found English audio track: \(displayName) (ID: \(trackId))")
                 }
             }
-            
+
             // Check if surround (typically English in dual-audio releases)
-            let isSurround = titleLower.contains("surround") || 
-                            titleLower.contains("5.1") || 
+            let isSurround = titleLower.contains("surround") ||
+                            titleLower.contains("5.1") ||
                             titleLower.contains("7.1") ||
                             titleLower.contains("atmos")
-            
+
             if isSurround && surroundAudioTrack == nil {
                 surroundAudioTrack = (Int(trackId), displayName)
                 print("🔊 Found surround audio track: \(displayName) (ID: \(trackId))")
             }
         }
-        
+
         // Priority: English tagged > Surround > First track
         if let english = englishAudioTrack {
             print("✅ Auto-selecting English audio: \(english.name) (ID: \(english.id))")
@@ -737,13 +755,13 @@ class MPVWrapper: ObservableObject {
     /// Auto-select first English embedded subtitle track (called on FILE_LOADED event)
     private func autoSelectEnglishSubtitles() {
         guard let handle = mpvHandle, isInitialized else { return }
-        
+
         print("🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event")
-        
+
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
         print("🔍 AUTO-SELECT: Found \(trackCount) total tracks")
-        
+
         struct SubCandidate {
             let id: Int
             let name: String
@@ -752,9 +770,9 @@ class MPVWrapper: ObservableObject {
             let isDefault: Bool
             let title: String
         }
-        
+
         var candidates: [SubCandidate] = []
-        
+
         // Scan all subtitle tracks
         for i in 0..<Int(trackCount) {
             // Check if it's a subtitle track
@@ -767,30 +785,30 @@ class MPVWrapper: ObservableObject {
                 continue
             }
             mpv_free(typeStr)
-            
+
             // Get track ID
             let idKey = "track-list/\(i)/id"
             var trackId: Int64 = 0
             guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0, trackId != 0 else {
                 continue
             }
-            
+
             // Check properties
             let externalKey = "track-list/\(i)/external"
             var isExternalVal: Int64 = 0
             let _ = mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
             let isExternal = isExternalVal != 0
-            
+
             let forcedKey = "track-list/\(i)/forced"
             var isForcedVal: Int64 = 0
             let _ = mpv_get_property(handle, forcedKey, MPV_FORMAT_FLAG, &isForcedVal)
             let isForced = isForcedVal != 0
-            
+
             let defaultKey = "track-list/\(i)/default"
             var isDefaultVal: Int64 = 0
             let _ = mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
             let isDefault = isDefaultVal != 0
-            
+
             // Get language & title
             let langKey = "track-list/\(i)/lang"
             var langStr: UnsafeMutablePointer<CChar>?
@@ -798,30 +816,30 @@ class MPVWrapper: ObservableObject {
                 ? langStr.map { String(cString: $0) }
                 : nil
             mpv_free(langStr)
-            
+
             let titleKey = "track-list/\(i)/title"
             var titleStr: UnsafeMutablePointer<CChar>?
             let title = (mpv_get_property(handle, titleKey, MPV_FORMAT_STRING, &titleStr) >= 0)
                 ? titleStr.map { String(cString: $0) }
                 : nil
             mpv_free(titleStr)
-            
+
             // Check if English
             let langLower = lang?.lowercased() ?? ""
             let titleLower = title?.lowercased() ?? ""
             let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
-            
+
             print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault)")
-            
+
             if isEnglish {
                 let displayName = title ?? lang ?? "Track \(trackId)"
-                
+
                 // Filter out known bad patterns
-                let isPartialSub = titleLower.contains("valyrian") || 
+                let isPartialSub = titleLower.contains("valyrian") ||
                                    titleLower.contains("foreign") ||
                                    titleLower.contains("parts") ||
                                    titleLower.contains("commentary")
-                
+
                 if !isPartialSub {
                     candidates.append(SubCandidate(
                         id: Int(trackId),
@@ -836,7 +854,7 @@ class MPVWrapper: ObservableObject {
                 }
             }
         }
-        
+
         // Select best candidate
         // Scoring:
         // +100 for Embedded (vs External)
@@ -844,39 +862,39 @@ class MPVWrapper: ObservableObject {
         // -50 for Forced (unless it's the only one)
         // -10 for Default (often foreign default in dual audio)
         // +1 for Higher ID (often later tracks are better/fixed)
-        
+
         let bestCandidate = candidates.max { a, b in
             var scoreA = 0
             var scoreB = 0
-            
+
             // Prefer Embedded
             if !a.isExternal { scoreA += 100 }
             if !b.isExternal { scoreB += 100 }
-            
+
             // Prefer SDH/CC
             if a.title.contains("sdh") || a.title.contains("cc") { scoreA += 50 }
             if b.title.contains("sdh") || b.title.contains("cc") { scoreB += 50 }
-            
+
             // Avoid Forced
             if a.isForced { scoreA -= 50 }
             if b.isForced { scoreB -= 50 }
-            
+
             // Avoid Default (in dual audio, default is often the foreign one)
             if a.isDefault { scoreA -= 10 }
             if b.isDefault { scoreB -= 10 }
-            
+
             // Tie-breaker: Prefer later tracks (often better/fixed)
             if a.id > b.id { scoreA += 1 }
             if b.id > a.id { scoreB += 1 }
-            
+
             return scoreA < scoreB
         }
-        
+
         if let best = bestCandidate {
             print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault)]")
             var trackId = Int64(best.id)
             mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-            
+
             // Enable subtitle visibility
             var visFlag: Int32 = 1
             mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
@@ -1114,9 +1132,9 @@ class MPVWrapper: ObservableObject {
             renderContext = nil
             // Clear handle immediately so no other calls can use it
             mpvHandle = nil
-            
+
             let wasInitialized = isInitialized
-            
+
             // CRITICAL: Destroy MPV on background thread to prevent blocking Main Thread
             // mpv_terminate_destroy can take significant time (flushing caches, closing streams)
             // which causes "spinning beach ball" freezes if run on Main Thread.

@@ -179,13 +179,13 @@ class MPVPlayerViewModel: ObservableObject {
                 showWaitingForGuests = true
                 print("🛑 Watch Party Resume: Starting PAUSED to wait for ready gate")
             }
-        } else if isInWatchParty {
+        } else if isInWatchParty && appState?.isEventPlayback != true {
             print("🛑 Watch Party: Starting PAUSED to wait for guests")
             // Start paused!
             mpvWrapper.loadVideo(url: streamURL, autoplay: false)
             showWaitingForGuests = true
         } else {
-            print("▶️ Normal mode: Will load video and play immediately")
+            print("▶️ Normal mode (or Event): Will load video and play immediately")
             // Load video normally with autoplay
             mpvWrapper.loadVideo(url: streamURL, autoplay: true)
         }

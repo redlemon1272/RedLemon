@@ -72,8 +72,8 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "audio-display", "no")
 
         // Performance - Reduced buffers for lower memory usage
-        mpv_set_option_string(handle, "cache-secs", "15")  // Was 30s
-        mpv_set_option_string(handle, "demuxer-max-bytes", "100M")  // Was 200M
+        mpv_set_option_string(handle, "cache-secs", "30")  // Increased for better initial buffering
+        mpv_set_option_string(handle, "demuxer-max-bytes", "200M")  // Increased for high-bitrate streams
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // Audio buffering for watch party sync (prevents crackling during speed changes)

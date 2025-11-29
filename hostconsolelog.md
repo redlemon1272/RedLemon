@@ -1,3752 +1,3890 @@
-default	15:51:30.010520-0500	runningboardd	Assertion did invalidate due to timeout: 174-140-1868 (target:[anon<RedLemon>(501):8572])
-default	15:51:30.123435-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:30.123486-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:30.123562-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:31.042128-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "frontmost:8572" ID:174-140-1880 target:8572 attributes:[
+default	16:11:00.744808-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "frontmost:10440" ID:174-140-2084 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"RoleUserInteractiveFocal" sourceEnvironment:"(null)">
 	]>
-default	15:51:31.045741-0500	runningboardd	Assertion 174-140-1880 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:31.070660-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "notification:8572" ID:174-140-1881 target:8572 attributes:[
+default	16:11:00.745434-0500	runningboardd	Assertion 174-140-2084 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:00.774828-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:00.778327-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:00.778419-0500	runningboardd	[anon<RedLemon>(501):10440] Set darwin role to: UserInteractiveFocal
+default	16:11:00.780154-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:00.782238-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "notification:10440" ID:174-140-2085 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"LSNotification" sourceEnvironment:"(null)">
 	]>
-default	15:51:31.070837-0500	runningboardd	Assertion 174-140-1881 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:31.071098-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:31.071146-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:31.076838-0500	runningboardd	[anon<RedLemon>(501):8572] Set darwin role to: UserInteractiveFocal
-default	15:51:31.078950-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:31.079809-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:31.081175-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:31.081281-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:31.565054-0500	RedLemon	tcp_input [C6.1.1:3] flags=[F.] seq=780864107, ack=2604900584, win=8 state=ESTABLISHED rcv_nxt=780864107, snd_una=2604900584
-default	15:51:31.565120-0500	RedLemon	nw_protocol_tcp_log_summary [C6.1.1:3]
-	[48D39400-772E-4D59-9D51-28104D1D5B1A <private>:60081<-><private>:443]
-	Init: 1, Conn_Time: 14.135ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/1, TS: 1
-	rtt_cache: process, rtt_upd: 7, rtt: 31.937ms, rtt_var: 19.875ms rtt_nc: 28.156ms, rtt_var_nc: 21.062ms base rtt: 11ms
-	ACKs-compressed: 0, ACKs delayed: 257 delayed ACKs sent: 0
-default	15:51:31.566226-0500	RedLemon	Connection 6: read-side closed
-default	15:51:31.566270-0500	RedLemon	Connection 6: read-side closed
-default	15:51:31.566303-0500	RedLemon	Connection 6: read-side closed
-default	15:51:31.566644-0500	RedLemon	Connection 6: cleaning up
-default	15:51:31.566796-0500	RedLemon	[C6 0E663BE7-E4E0-49BC-BF39-A988E198F6B1 Hostname#204e95ef:443 quic-connection, url hash: a51a5177, definite, attribution: developer] cancel
-default	15:51:31.566962-0500	RedLemon	[C6 0E663BE7-E4E0-49BC-BF39-A988E198F6B1 Hostname#204e95ef:443 quic-connection, url hash: a51a5177, definite, attribution: developer] cancelled
-	[C6.1.1 0670C083-31A9-4E01-8F94-1A474E628664 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60081<->IPv6#29739f0d.443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 15.312s, DNS @0.000s took 0.055s, TCP @0.056s took 0.014s, TLS 1.3 took 0.033s
-	bytes in/out: 2002971/1095, packets in/out: 304/194, rtt: 0.031s, retransmitted bytes: 0, out-of-order bytes: 0
-default	15:51:31.567450-0500	RedLemon	nw_flow_disconnected [C6.1.1 IPv6#29739f0d.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	15:51:31.567641-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C6] reporting state cancelled
-default	15:51:31.568072-0500	RedLemon	tcp_output [C6.1.1:3] flags=[FP.] seq=2604900623, ack=780864108, win=57360 state=LAST_ACK rcv_nxt=780864108, snd_una=2604900584
-error	15:51:31.585201-0500	RedLemon	tcp_input [C6.1.1:3] flags=[R.] seq=780864108, ack=2604900623, win=8 state=LAST_ACK rcv_nxt=780864108, snd_una=2604900584
-error	15:51:31.585736-0500	RedLemon	tcp_input [C6.1.1:3] flags=[R] seq=780864108, ack=0, win=0 state=CLOSED rcv_nxt=780864108, snd_una=2604900584
-error	15:51:31.586700-0500	RedLemon	tcp_input [C6.1.1:3] flags=[R] seq=780864108, ack=0, win=0 state=CLOSED rcv_nxt=780864108, snd_una=2604900584
-default	15:51:32.324655-0500	RedLemon	🎬 Creating Watch Party for: Frankenstein
-default	15:51:32.325198-0500	RedLemon	   Type: movie (No Season/Episode)
-default	15:51:32.326797-0500	RedLemon	   Quality: 1080p
-default	15:51:32.327630-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:32.328090-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5B5484EA-2B57-45D5-A87E-BF63FF39D697] (reporting strategy default)> on Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> was not selected for reporting
-default	15:51:32.329348-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:32.329698-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> now using Connection 3
-default	15:51:32.333986-0500	RedLemon	0x7fbf970d6198 ID=44 Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> sent request, body S 315
-default	15:51:32.419399-0500	RedLemon	0x7fbf970d6198 ID=44 Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> received response, status 201 content U
-default	15:51:32.420454-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> response ended
-default	15:51:32.420958-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> done using Connection 3
-default	15:51:32.421104-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> summary for task success {transaction_duration_ms=92, response_status=201, connection=3, reused=1, request_start_ms=1, request_duration_ms=4, response_start_ms=90, response_duration_ms=1, request_bytes=489, response_bytes=961, cache_hit=false}
-default	15:51:32.422416-0500	RedLemon	Task <55EFB44B-C69E-4FBE-8D97-6B045D116117>.<136> finished successfully
-default	15:51:32.633964-0500	RedLemon	✅ Room created: BPWN
-default	15:51:32.634589-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:32.635554-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A4486F59-2C3F-423D-ADC4-E11141D8EA7F] (reporting strategy default)> on Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> was not selected for reporting
-default	15:51:32.638945-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:32.639269-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> now using Connection 3
-default	15:51:32.645639-0500	RedLemon	0x7fbf93accbb8 ID=48 Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> sent request, body S 82
-default	15:51:32.875329-0500	RedLemon	0x7fbf93accbb8 ID=48 Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> received response, status 201 content U
-default	15:51:32.876024-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> response ended
-default	15:51:32.876498-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> done using Connection 3
-default	15:51:32.876885-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> summary for task success {transaction_duration_ms=238, response_status=201, connection=3, reused=1, request_start_ms=0, request_duration_ms=6, response_start_ms=236, response_duration_ms=1, request_bytes=496, response_bytes=779, cache_hit=false}
-default	15:51:32.877094-0500	RedLemon	Task <682C9ED9-733E-43CF-BBD0-FC58C638E424>.<137> finished successfully
-default	15:51:32.878014-0500	RedLemon	✅ Host joined room in database
-default	15:51:32.879693-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
-default	15:51:32.880805-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [33AFE82B-B560-42B9-BE8A-F504F4167B78] (reporting strategy default)> on Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> was not selected for reporting
-default	15:51:32.881678-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> now using Connection 9
-default	15:51:32.882147-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> sent request, body N 0
-default	15:51:32.932081-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> received response, status 200 content K
-default	15:51:32.935868-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> response ended
-default	15:51:32.936005-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> done using Connection 9
-default	15:51:32.940633-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> summary for task success {transaction_duration_ms=59, response_status=200, connection=9, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=50, response_duration_ms=8, request_bytes=244, response_bytes=2612, cache_hit=false}
-default	15:51:32.940947-0500	RedLemon	Task <BED5034E-FBF5-4508-9420-CD1EF3651B3E>.<2> finished successfully
-default	15:51:32.941227-0500	RedLemon	📡 Raw metadata response length: 2510 bytes
-default	15:51:32.941782-0500	RedLemon	❌ Raw response DOES NOT contain 'videos' field
-default	15:51:32.944322-0500	RedLemon	📦 Decoded CinemetaMeta - videos count: -1
-default	15:51:34.111099-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:34.111557-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A03558CC-6DCA-4804-BEAC-1B6039D18017] (reporting strategy default)> on Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> was not selected for reporting
-default	15:51:34.113013-0500	RedLemon	Connection 12: enabling TLS
-default	15:51:34.113058-0500	RedLemon	Connection 12: starting, TC(0x0)
-default	15:51:34.113115-0500	RedLemon	[C12 21500B9E-B8D6-4CF6-B250-6DCBA0480657 Hostname#83875299:443 tcp, url hash: 7e95af77, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{40B9562B-E771-436E-AD0D-53B77C2D4F55}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:34.113204-0500	RedLemon	[C12 Hostname#83875299:443 initial path ((null))] event: path:start @0.000s
-default	15:51:34.113600-0500	RedLemon	[C12 Hostname#83875299:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: F3340D8B-098B-49BA-9534-A6BBFE7E584C
-default	15:51:34.113801-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	15:51:34.113843-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C12] reporting state preparing
-default	15:51:34.114291-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> setting up Connection 12
-default	15:51:34.114434-0500	mDNSResponder	[R1755] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: '4awTpijcN9wOnZUl0kdtUw=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:34.118395-0500	mDNSResponder	[R1755] getaddrinfo stop -- hostname: <mask.hash: '4awTpijcN9wOnZUl0kdtUw=='>, client pid: 8572 (RedLemon)
-default	15:51:34.118779-0500	RedLemon	nw_endpoint_resolver_update [C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#00b48693:443
-default	15:51:34.119096-0500	RedLemon	nw_endpoint_resolver_update [C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#39dbc85c:443
-default	15:51:34.119319-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.006s
-default	15:51:34.120984-0500	RedLemon	[C12.1 IPv4#00b48693:443 initial path ((null))] event: path:start @0.007s
-default	15:51:34.123537-0500	RedLemon	[C12.1 IPv4#00b48693:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.010s, uuid: 0DEF14AE-2C06-437B-8A2E-7DFDC480619D
-default	15:51:34.123817-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.010s
-default	15:51:34.124938-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.011s
-default	15:51:34.128758-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.015s
-default	15:51:34.128917-0500	RedLemon	tcp_output [C12.1:3] flags=[SEC] seq=295366497, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=295366497
-default	15:51:34.148788-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:34.149107-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D40152DA-66A1-4F87-A68E-3BF2A1B1482E] (reporting strategy default)> on Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> was not selected for reporting
-default	15:51:34.149847-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:34.149918-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:34.150141-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	15:51:34.150527-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [05A0DEDB-10DA-49B2-A1B6-6ECE9ECF95BD] (reporting strategy default)> on Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> was not selected for reporting
-default	15:51:34.151051-0500	RedLemon	Connection 13: enabling TLS
-default	15:51:34.151262-0500	RedLemon	Connection 13: starting, TC(0x0)
-default	15:51:34.151387-0500	RedLemon	[C13 35213D18-9069-46DB-8F8E-9D84976BBB5C Hostname#204e95ef:443 quic-connection, url hash: eff720ee, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:34.151525-0500	RedLemon	[C13 Hostname#204e95ef:443 initial path ((null))] event: path:start @0.000s
-default	15:51:34.151742-0500	RedLemon	[C13 Hostname#204e95ef:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: BB699D09-2703-4FCB-BE64-B45524FC2573
-default	15:51:34.151987-0500	RedLemon	[C13 Hostname#204e95ef:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
-default	15:51:34.152030-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state preparing
-default	15:51:34.152405-0500	RedLemon	[C13.1 Hostname#204e95ef:443 initial path ((null))] event: path:start @0.000s
-default	15:51:34.152637-0500	RedLemon	[C13.1 Hostname#204e95ef:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: F81E92BC-B70F-43A0-9B0E-70C793A33895
-default	15:51:34.153251-0500	mDNSResponder	[R1756] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'dOPQzL8GmJFEha6imJVFwg=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:34.152853-0500	RedLemon	[C13.1 Hostname#204e95ef:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
-default	15:51:34.153042-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> setting up Connection 13
-default	15:51:34.153265-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:34.153361-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> waiting for setup of Connection 13
-default	15:51:34.153563-0500	RedLemon	tcp_input [C12.1:3] flags=[S.E] seq=2805649983, ack=295366498, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=295366497
-default	15:51:34.153701-0500	RedLemon	nw_flow_connected [C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	15:51:34.154220-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.040s
-default	15:51:34.154392-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.041s
-default	15:51:34.155812-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C12.1:2][0x7fbf962d87d0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:34.155945-0500	RedLemon	boringssl_context_info_handler(2028) [C12.1:2][0x7fbf962d87d0] Client handshake started
-default	15:51:34.156147-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS client enter_early_data
-default	15:51:34.156420-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS client read_server_hello
-default	15:51:34.162276-0500	mDNSResponder	[R1756] getaddrinfo stop -- hostname: <mask.hash: 'dOPQzL8GmJFEha6imJVFwg=='>, client pid: 8572 (RedLemon)
-default	15:51:34.165693-0500	RedLemon	nw_endpoint_resolver_update [C13.1 Hostname#204e95ef:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#29739f0d.443
-default	15:51:34.165865-0500	RedLemon	nw_endpoint_resolver_update [C13.1 Hostname#204e95ef:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#c514a6d2:443
-default	15:51:34.166138-0500	RedLemon	[C13.1 Hostname#204e95ef:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.014s
-default	15:51:34.166460-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 initial path ((null))] event: path:start @0.015s
-default	15:51:34.166760-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.015s, uuid: 0670C083-31A9-4E01-8F94-1A474E628664
-default	15:51:34.168962-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.017s
-default	15:51:34.171835-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.020s
-default	15:51:34.173146-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.021s
-default	15:51:34.173377-0500	RedLemon	tcp_output [C13.1.1:3] flags=[S] seq=1848503077, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1848503077
-default	15:51:34.180964-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:34.181200-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:34.182174-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	15:51:34.184580-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:34.184665-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:34.184750-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:34.186052-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C12.1:2][0x7fbf962d87d0] Performing external trust evaluation
-default	15:51:34.186388-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C12.1:2][0x7fbf962d87d0] Asyncing for external verify block
-default	15:51:34.186846-0500	RedLemon	Connection 12: asked to evaluate TLS Trust
-default	15:51:34.187292-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> auth completion disp=1 cred=0x0
-default	15:51:34.191324-0500	RedLemon	tcp_input [C13.1.1:3] flags=[S.] seq=1936875107, ack=1848503078, win=31416 state=SYN_SENT rcv_nxt=0, snd_una=1848503077
-default	15:51:34.191562-0500	RedLemon	nw_flow_connected [C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	15:51:34.191972-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.040s
-default	15:51:34.192121-0500	RedLemon	[C13.1 Hostname#204e95ef:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.040s
-default	15:51:34.192182-0500	RedLemon	[C13 Hostname#204e95ef:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.040s
-default	15:51:34.192764-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C13.1.1:2][0x7fbf962e89c0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:34.193003-0500	RedLemon	boringssl_context_info_handler(2028) [C13.1.1:2][0x7fbf962e89c0] Client handshake started
-default	15:51:34.193207-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS client enter_early_data
-default	15:51:34.193356-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS client read_server_hello
-default	15:51:34.203120-0500	RedLemon	Connection 12: TLS Trust result 0
-default	15:51:34.203192-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C12.1:2][0x7fbf962d87d0] Returning from external verify block with result: true
-default	15:51:34.203286-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C12.1:2][0x7fbf962d87d0] Certificate verification result: OK
-default	15:51:34.203938-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:34.204090-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:34.204135-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:34.204176-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:34.204216-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:34.204360-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS 1.3 client done
-default	15:51:34.204552-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS client finish_client_handshake
-default	15:51:34.204602-0500	RedLemon	boringssl_context_info_handler(2045) [C12.1:2][0x7fbf962d87d0] Client handshake state: TLS client done
-default	15:51:34.204644-0500	RedLemon	boringssl_context_info_handler(2034) [C12.1:2][0x7fbf962d87d0] Client handshake done
-default	15:51:34.205601-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C12.1:2][0x7fbf962d87d0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(50ms) flight_time(27ms) rtt(24ms) write_stalls(0) read_stalls(7)]
-default	15:51:34.205780-0500	RedLemon	nw_flow_connected [C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:34.206156-0500	RedLemon	[C12.1 IPv4#00b48693:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.092s
-default	15:51:34.206620-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C12] reporting state ready
-default	15:51:34.206856-0500	RedLemon	[C12 Hostname#83875299:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.093s
-default	15:51:34.207356-0500	RedLemon	[C12.1 IPv4#00b48693:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.094s
-default	15:51:34.207436-0500	RedLemon	[C12 Hostname#83875299:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.094s
-default	15:51:34.207761-0500	RedLemon	Connection 12: connected successfully
-default	15:51:34.207808-0500	RedLemon	Connection 12: TLS handshake complete
-default	15:51:34.208204-0500	RedLemon	Connection 12: ready C(N) E(N)
-default	15:51:34.208982-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> now using Connection 12
-default	15:51:34.209151-0500	RedLemon	Connection 12: received viability advisory(Y)
-default	15:51:34.209465-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> sent request, body N 0
-default	15:51:34.211694-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:34.211785-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:34.212155-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	15:51:34.212558-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:34.212827-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:34.212928-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:34.214464-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C13.1.1:2][0x7fbf962e89c0] Performing external trust evaluation
-default	15:51:34.214624-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C13.1.1:2][0x7fbf962e89c0] Asyncing for external verify block
-default	15:51:34.215029-0500	RedLemon	Connection 13: asked to evaluate TLS Trust
-default	15:51:34.215594-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> auth completion disp=1 cred=0x0
-default	15:51:34.226651-0500	RedLemon	Connection 13: TLS Trust result 0
-default	15:51:34.226764-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C13.1.1:2][0x7fbf962e89c0] Returning from external verify block with result: true
-default	15:51:34.226865-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C13.1.1:2][0x7fbf962e89c0] Certificate verification result: OK
-default	15:51:34.227713-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:34.228056-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:34.228100-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:34.228140-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:34.228178-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:34.228326-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS 1.3 client done
-default	15:51:34.228620-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS client finish_client_handshake
-default	15:51:34.228671-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1.1:2][0x7fbf962e89c0] Client handshake state: TLS client done
-default	15:51:34.228712-0500	RedLemon	boringssl_context_info_handler(2034) [C13.1.1:2][0x7fbf962e89c0] Client handshake done
-default	15:51:34.229546-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C13.1.1:2][0x7fbf962e89c0] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(36ms) flight_time(19ms) rtt(18ms) write_stalls(0) read_stalls(6)]
-default	15:51:34.230216-0500	RedLemon	nw_flow_connected [C13.1.1 IPv6#29739f0d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:34.230874-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.079s
-default	15:51:34.231949-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state ready
-default	15:51:34.232774-0500	RedLemon	[C13.1 Hostname#204e95ef:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.081s
-default	15:51:34.232844-0500	RedLemon	[C13 Hostname#204e95ef:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.081s
-default	15:51:34.233217-0500	RedLemon	[C13.1.1 IPv6#29739f0d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.081s
-default	15:51:34.233433-0500	RedLemon	[C13.1 Hostname#204e95ef:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.081s
-default	15:51:34.234532-0500	RedLemon	[C13 Hostname#204e95ef:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.082s
-default	15:51:34.234813-0500	RedLemon	Connection 13: connected successfully
-default	15:51:34.235220-0500	RedLemon	Connection 13: TLS handshake complete
-default	15:51:34.235533-0500	RedLemon	Connection 13: ready C(N) E(N)
-default	15:51:34.236200-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> now using Connection 13
-default	15:51:34.236407-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> now using Connection 13
-default	15:51:34.236552-0500	RedLemon	Connection 13: received viability advisory(Y)
-default	15:51:34.236723-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> sent request, body N 0
-default	15:51:34.236896-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> sent request, body N 0
-default	15:51:34.271070-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> received response, status 200 content K
-default	15:51:34.272398-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> received response, status 200 content K
-default	15:51:34.298403-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> done using Connection 13
-default	15:51:34.298858-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> response ended
-default	15:51:34.300347-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> summary for task success {transaction_duration_ms=149, response_status=200, connection=13, reused=1, request_start_ms=85, request_duration_ms=0, response_start_ms=121, response_duration_ms=26, request_bytes=36, response_bytes=63220, cache_hit=false}
-default	15:51:34.300548-0500	RedLemon	Task <94F72526-35EB-4F95-9CF1-C92C896CFA92>.<139> finished successfully
-default	15:51:34.307372-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> done using Connection 13
-default	15:51:34.307600-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> response ended
-default	15:51:34.308321-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> summary for task success {transaction_duration_ms=158, response_status=200, connection=13, protocol="h2", domain_lookup_duration_ms=13, connect_duration_ms=58, secure_connection_duration_ms=36, private_relay=false, request_start_ms=87, request_duration_ms=0, response_start_ms=121, response_duration_ms=36, request_bytes=128, response_bytes=118508, cache_hit=false}
-default	15:51:34.308454-0500	RedLemon	Task <AEF4758C-0575-40E0-9ACD-364BF14A6E87>.<138> finished successfully
-default	15:51:34.343157-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> received response, status 101 content U
-default	15:51:34.343560-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> response ended
-default	15:51:34.343615-0500	RedLemon	Task <F36F8CA9-227E-454C-A059-FCDDE1D5F2D7>.<1> done using Connection 12
-default	15:51:34.344242-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.231s
-default	15:51:34.344289-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C12] reporting state preparing
-default	15:51:34.344371-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.231s
-default	15:51:34.344516-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.231s
-default	15:51:34.344575-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.231s
-default	15:51:34.344650-0500	RedLemon	nw_flow_connected [C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	15:51:34.344783-0500	RedLemon	[C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.231s
-default	15:51:34.344841-0500	RedLemon	[C12 Hostname#83875299:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.231s
-default	15:51:34.344959-0500	RedLemon	nw_flow_connected [C12.1 IPv4#00b48693:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:34.345257-0500	RedLemon	[C12.1 IPv4#00b48693:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.232s
-default	15:51:34.345300-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C12] reporting state ready
-default	15:51:34.345365-0500	RedLemon	[C12 Hostname#83875299:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.232s
-default	15:51:34.370729-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:34.371412-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F7ABD88D-3FB3-4F62-8D18-8E14C6D09D3F] (reporting strategy default)> on Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> was not selected for reporting
-default	15:51:34.372147-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:34.372466-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> now using Connection 3
-default	15:51:34.373565-0500	RedLemon	0x7fbf96ac6ba8 ID=52 Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> sent request, body N 0
-default	15:51:34.439872-0500	RedLemon	0x7fbf96ac6ba8 ID=52 Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> received response, status 200 content U
-default	15:51:34.440301-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> response ended
-default	15:51:34.440754-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> done using Connection 3
-default	15:51:34.440944-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> summary for task success {transaction_duration_ms=69, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=67, response_duration_ms=1, request_bytes=512, response_bytes=793, cache_hit=false}
-default	15:51:34.441200-0500	RedLemon	Task <CB4E26FA-078E-41E1-8CC9-400390597FA7>.<140> finished successfully
-default	15:51:34.442574-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1884 target:8572 attributes:[
+default	16:11:00.782510-0500	runningboardd	Assertion 174-140-2085 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:00.790139-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:00.790184-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:00.790229-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:02.265496-0500	RedLemon	🎬 Creating Watch Party for: Frankenstein
+default	16:11:02.266767-0500	RedLemon	   Type: movie (No Season/Episode)
+default	16:11:02.269331-0500	RedLemon	   Quality: 1080p
+default	16:11:02.270277-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:02.274113-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C77F2D44-0CC6-4F95-B37C-A845AF0857B5] (reporting strategy default)> on Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> was not selected for reporting
+default	16:11:02.275243-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:02.276592-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> now using Connection 3
+default	16:11:02.282044-0500	RedLemon	0x7f989b2acd78 ID=68 Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> sent request, body S 315
+default	16:11:02.384067-0500	RedLemon	0x7f989b2acd78 ID=68 Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> received response, status 201 content U
+default	16:11:02.386499-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> response ended
+default	16:11:02.388128-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> done using Connection 3
+default	16:11:02.388283-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> summary for task success {transaction_duration_ms=113, response_status=201, connection=3, reused=1, request_start_ms=1, request_duration_ms=5, response_start_ms=109, response_duration_ms=4, request_bytes=489, response_bytes=954, cache_hit=false}
+default	16:11:02.388813-0500	RedLemon	Task <45EFC838-02C9-42A3-90B4-1027D68914AE>.<238> finished successfully
+default	16:11:02.899008-0500	RedLemon	✅ Room created: 584T
+default	16:11:02.899745-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:02.900300-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AA9D9EA0-8E00-4FDA-8ED6-16D363BD329E] (reporting strategy default)> on Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> was not selected for reporting
+default	16:11:02.922306-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:02.922960-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> now using Connection 3
+default	16:11:02.924904-0500	RedLemon	0x7f989bea1058 ID=72 Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> sent request, body S 82
+default	16:11:03.017317-0500	RedLemon	0x7f989bea1058 ID=72 Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> received response, status 201 content U
+default	16:11:03.020283-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> response ended
+default	16:11:03.020968-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> done using Connection 3
+default	16:11:03.025613-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> summary for task success {transaction_duration_ms=124, response_status=201, connection=3, reused=1, request_start_ms=22, request_duration_ms=1, response_start_ms=116, response_duration_ms=4, request_bytes=496, response_bytes=777, cache_hit=false}
+default	16:11:03.026107-0500	RedLemon	Task <AE79B5B9-987A-47AD-ABD0-D894EEA59075>.<239> finished successfully
+default	16:11:03.026436-0500	RedLemon	✅ Host joined room in database
+default	16:11:03.863075-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:03.863476-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [28177065-0220-45DF-804E-1D2CD778027A] (reporting strategy default)> on Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> was not selected for reporting
+default	16:11:03.865044-0500	RedLemon	Connection 13: enabling TLS
+default	16:11:03.865133-0500	RedLemon	Connection 13: starting, TC(0x0)
+default	16:11:03.865204-0500	RedLemon	[C13 3C5FA316-BF9A-443C-BE61-3E7BF68A793D Hostname#27e7d557:443 tcp, url hash: 5d8e7b8c, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{FDC58669-2122-47E8-92C2-435EE31C52B8}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:03.866014-0500	RedLemon	[C13 Hostname#27e7d557:443 initial path ((null))] event: path:start @0.000s
+default	16:11:03.866302-0500	RedLemon	[C13 Hostname#27e7d557:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: E4A0878B-B8F2-4A29-B608-D043F2BED08B
+default	16:11:03.866554-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
+default	16:11:03.866592-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state preparing
+default	16:11:03.893624-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:03.895814-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B5AC830D-75BF-4D89-94D8-A77525275060] (reporting strategy default)> on Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> was not selected for reporting
+default	16:11:03.896286-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:03.897263-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F935D866-4D32-4AA1-ABC6-AFD3E4836B31] (reporting strategy default)> on Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> was not selected for reporting
+default	16:11:03.899912-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> setting up Connection 13
+default	16:11:03.900233-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:03.900485-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> now using Connection 6
+default	16:11:03.900861-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:03.901146-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> now using Connection 6
+default	16:11:03.913894-0500	RedLemon	nw_endpoint_resolver_update [C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#70da2e73:443
+default	16:11:03.914064-0500	RedLemon	nw_endpoint_resolver_update [C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d76d4b6f:443
+default	16:11:03.914401-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.049s
+default	16:11:03.916660-0500	RedLemon	[C13.1 IPv4#70da2e73:443 initial path ((null))] event: path:start @0.051s
+default	16:11:03.916964-0500	RedLemon	[C13.1 IPv4#70da2e73:443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.051s, uuid: 6D365A6D-3786-4E59-8102-9AACB539B84E
+default	16:11:03.917114-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.051s
+default	16:11:03.925954-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.060s
+default	16:11:03.927428-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.062s
+default	16:11:03.929641-0500	RedLemon	tcp_output [C13.1:3] flags=[S] seq=1838366524, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1838366524
+default	16:11:03.931408-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> sent request, body N 0
+default	16:11:03.931477-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> sent request, body N 0
+default	16:11:03.931924-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> received response, status 200 content K
+default	16:11:03.938163-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> received response, status 200 content K
+default	16:11:03.939317-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> done using Connection 6
+default	16:11:03.939625-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> done using Connection 6
+default	16:11:03.942429-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> response ended
+default	16:11:03.942559-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> response ended
+default	16:11:03.943531-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> summary for task success {transaction_duration_ms=44, response_status=200, connection=6, reused=1, request_start_ms=15, request_duration_ms=16, response_start_ms=38, response_duration_ms=4, request_bytes=41, response_bytes=117927, cache_hit=false}
+default	16:11:03.943864-0500	RedLemon	Task <C1527C2B-75F1-432C-B314-4FD18385AC45>.<240> finished successfully
+default	16:11:03.943919-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> summary for task success {transaction_duration_ms=44, response_status=200, connection=6, reused=1, request_start_ms=15, request_duration_ms=16, response_start_ms=32, response_duration_ms=10, request_bytes=36, response_bytes=63086, cache_hit=false}
+default	16:11:03.944536-0500	RedLemon	Task <B8E33C10-822C-4B23-8356-C9A27A79786F>.<241> finished successfully
+default	16:11:03.952306-0500	RedLemon	tcp_input [C13.1:3] flags=[S.] seq=4167016011, ack=1838366525, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1838366524
+default	16:11:03.976090-0500	RedLemon	nw_flow_connected [C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:11:03.976275-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.111s
+default	16:11:03.976346-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.111s
+default	16:11:03.977349-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C13.1:2][0x7f98979f8480] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:03.977912-0500	RedLemon	boringssl_context_info_handler(2028) [C13.1:2][0x7f98979f8480] Client handshake started
+default	16:11:03.978272-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS client enter_early_data
+default	16:11:03.978468-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS client read_server_hello
+default	16:11:04.002182-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:04.004687-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:04.004983-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:11:04.006438-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:04.006602-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:04.006721-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:04.008002-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C13.1:2][0x7f98979f8480] Performing external trust evaluation
+default	16:11:04.008248-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C13.1:2][0x7f98979f8480] Asyncing for external verify block
+default	16:11:04.008570-0500	RedLemon	Connection 13: asked to evaluate TLS Trust
+default	16:11:04.009017-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> auth completion disp=1 cred=0x0
+default	16:11:04.017586-0500	RedLemon	Connection 13: TLS Trust result 0
+default	16:11:04.017784-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C13.1:2][0x7f98979f8480] Returning from external verify block with result: true
+default	16:11:04.018038-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C13.1:2][0x7f98979f8480] Certificate verification result: OK
+default	16:11:04.018701-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:04.019020-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:04.019082-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:04.019124-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:04.019165-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:04.019311-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS 1.3 client done
+default	16:11:04.019505-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS client finish_client_handshake
+default	16:11:04.019609-0500	RedLemon	boringssl_context_info_handler(2045) [C13.1:2][0x7f98979f8480] Client handshake state: TLS client done
+default	16:11:04.019650-0500	RedLemon	boringssl_context_info_handler(2034) [C13.1:2][0x7f98979f8480] Client handshake done
+default	16:11:04.021099-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C13.1:2][0x7f98979f8480] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(43ms) flight_time(28ms) rtt(24ms) write_stalls(0) read_stalls(6)]
+default	16:11:04.022423-0500	RedLemon	nw_flow_connected [C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:04.023200-0500	RedLemon	[C13.1 IPv4#70da2e73:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.157s
+default	16:11:04.023926-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state ready
+default	16:11:04.024056-0500	RedLemon	[C13 Hostname#27e7d557:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.158s
+default	16:11:04.024213-0500	RedLemon	[C13.1 IPv4#70da2e73:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.158s
+default	16:11:04.024282-0500	RedLemon	[C13 Hostname#27e7d557:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.159s
+default	16:11:04.024708-0500	RedLemon	Connection 13: connected successfully
+default	16:11:04.024833-0500	RedLemon	Connection 13: TLS handshake complete
+default	16:11:04.025248-0500	RedLemon	Connection 13: ready C(N) E(N)
+default	16:11:04.025479-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> now using Connection 13
+default	16:11:04.025590-0500	RedLemon	Connection 13: received viability advisory(Y)
+default	16:11:04.025882-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> sent request, body N 0
+default	16:11:04.169694-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> received response, status 101 content U
+default	16:11:04.170243-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> response ended
+default	16:11:04.170303-0500	RedLemon	Task <6565C726-ED4F-4024-A8B3-9A493F0C6482>.<2> done using Connection 13
+default	16:11:04.171638-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.306s
+default	16:11:04.171684-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state preparing
+default	16:11:04.171751-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.306s
+default	16:11:04.171937-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.306s
+default	16:11:04.172132-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.306s
+default	16:11:04.174257-0500	RedLemon	nw_flow_connected [C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:11:04.174432-0500	RedLemon	[C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.309s
+default	16:11:04.174515-0500	RedLemon	[C13 Hostname#27e7d557:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.309s
+default	16:11:04.175165-0500	RedLemon	nw_flow_connected [C13.1 IPv4#70da2e73:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:04.175538-0500	RedLemon	[C13.1 IPv4#70da2e73:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.310s
+default	16:11:04.175586-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state ready
+default	16:11:04.175652-0500	RedLemon	[C13 Hostname#27e7d557:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.310s
+default	16:11:04.194509-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:04.195415-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0A1AFACE-E93E-4451-A996-9ADE2AB8223E] (reporting strategy default)> on Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> was not selected for reporting
+default	16:11:04.196281-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:04.196573-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> now using Connection 3
+default	16:11:04.197981-0500	RedLemon	0x7f9897bf7178 ID=76 Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> sent request, body N 0
+default	16:11:04.299645-0500	RedLemon	0x7f9897bf7178 ID=76 Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> received response, status 200 content U
+default	16:11:04.300367-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> response ended
+default	16:11:04.301038-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> done using Connection 3
+default	16:11:04.301625-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> summary for task success {transaction_duration_ms=105, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=103, response_duration_ms=1, request_bytes=511, response_bytes=788, cache_hit=false}
+default	16:11:04.301800-0500	RedLemon	Task <E855F893-1DC8-45FD-8CCB-5C3086F35CB2>.<242> finished successfully
+default	16:11:04.303035-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:04.303603-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1AA3107E-3BCA-4CFF-B0F0-D0950F594769] (reporting strategy default)> on Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> was not selected for reporting
+default	16:11:04.304533-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2090 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:34.442827-0500	runningboardd	Assertion 174-8572-1884 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:34.443056-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:34.443547-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AE87FE46-4FC5-4806-9DAC-416D9345F850] (reporting strategy default)> on Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> was not selected for reporting
-default	15:51:34.445673-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:34.445986-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> now using Connection 3
-default	15:51:34.447168-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:34.447071-0500	RedLemon	0x7fbf93a70b98 ID=56 Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> sent request, body N 0
-default	15:51:34.447433-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:34.447710-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:34.456788-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1885 target:8572 attributes:[
+default	16:11:04.304743-0500	runningboardd	Assertion 174-10440-2090 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:04.308471-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:04.309642-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:04.309788-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:04.310029-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:04.310343-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> now using Connection 3
+default	16:11:04.311383-0500	RedLemon	0x7f989a05f418 ID=80 Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> sent request, body N 0
+default	16:11:04.319525-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2091 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:34.457010-0500	runningboardd	Assertion 174-114-1885 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:34.457855-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:34.457909-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:34.457957-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:34.515223-0500	RedLemon	0x7fbf93a70b98 ID=56 Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> received response, status 200 content U
-default	15:51:34.515790-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> response ended
-default	15:51:34.516246-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> done using Connection 3
-default	15:51:34.516493-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> summary for task success {transaction_duration_ms=72, response_status=200, connection=3, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=70, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	15:51:34.516762-0500	RedLemon	Task <86E3898C-67A0-4582-8D3C-56BEA7600E1E>.<141> finished successfully
-default	15:51:35.544305-0500	runningboardd	Invalidating assertion 174-8572-1884 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:35.723184-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:35.723233-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:35.723681-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:35.737262-0500	runningboardd	Invalidating assertion 174-114-1885 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:35.904546-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:35.904715-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:35.904791-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:36.133814-0500	runningboardd	Assertion did invalidate due to timeout: 174-140-1881 (target:[anon<RedLemon>(501):8572])
-default	15:51:36.285645-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:36.285695-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:36.285742-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:36.534535-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:36.534991-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [59F81945-239F-40F8-AABE-041498CD7C3F] (reporting strategy default)> on Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> was not selected for reporting
-default	15:51:36.535808-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:36.536094-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> now using Connection 3
-default	15:51:36.537883-0500	RedLemon	0x7fbf9770f8a8 ID=60 Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> sent request, body N 0
-default	15:51:36.602404-0500	RedLemon	0x7fbf9770f8a8 ID=60 Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> received response, status 200 content U
-default	15:51:36.603081-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> response ended
-default	15:51:36.603712-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> done using Connection 3
-default	15:51:36.603980-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> summary for task success {transaction_duration_ms=68, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=66, response_duration_ms=1, request_bytes=512, response_bytes=794, cache_hit=true}
-default	15:51:36.604413-0500	RedLemon	Task <F2CB830F-BC2D-4220-893E-E264757DB808>.<142> finished successfully
-default	15:51:36.605531-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1886 target:8572 attributes:[
+default	16:11:04.319727-0500	runningboardd	Assertion 174-114-2091 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:04.327229-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:04.327616-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:04.327689-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:04.373877-0500	RedLemon	0x7f989a05f418 ID=80 Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> received response, status 200 content U
+default	16:11:04.374531-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> response ended
+default	16:11:04.375324-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> done using Connection 3
+default	16:11:04.375870-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> summary for task success {transaction_duration_ms=71, response_status=200, connection=3, reused=1, request_start_ms=6, request_duration_ms=1, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:11:04.376110-0500	RedLemon	Task <8F9D412E-FE58-4451-BDA7-D03858C4982C>.<243> finished successfully
+default	16:11:05.424554-0500	runningboardd	Invalidating assertion 174-10440-2090 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:05.551886-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:05.552057-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:05.552318-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:05.554054-0500	runningboardd	Invalidating assertion 174-114-2091 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:05.735544-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:05.735608-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:05.736068-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:05.800302-0500	runningboardd	Assertion did invalidate due to timeout: 174-140-2085 (target:[anon<RedLemon>(501):10440])
+default	16:11:05.918164-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:05.918227-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:05.918272-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:06.214871-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:06.215702-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D813B509-950C-4AE6-9394-2B5F8EF6925A] (reporting strategy default)> on Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> was not selected for reporting
+default	16:11:06.217206-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:06.217628-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> now using Connection 3
+default	16:11:06.219147-0500	RedLemon	0x7f989a535cc8 ID=84 Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> sent request, body N 0
+default	16:11:06.274497-0500	RedLemon	0x7f989a535cc8 ID=84 Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> received response, status 200 content U
+default	16:11:06.276015-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> response ended
+default	16:11:06.276870-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> done using Connection 3
+default	16:11:06.277179-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> summary for task success {transaction_duration_ms=60, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=57, response_duration_ms=2, request_bytes=511, response_bytes=787, cache_hit=true}
+default	16:11:06.277972-0500	RedLemon	Task <F7E7B218-3FDF-434E-9D43-DCF684FA96BC>.<244> finished successfully
+default	16:11:06.280128-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2092 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:36.605660-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:36.605779-0500	runningboardd	Assertion 174-8572-1886 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:36.606107-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1986E26A-6AF6-4E80-9F8C-9E7174BE8C99] (reporting strategy default)> on Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> was not selected for reporting
-default	15:51:36.607450-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:36.607754-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> now using Connection 3
-default	15:51:36.609153-0500	RedLemon	0x7fbf96ac6ba8 ID=64 Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> sent request, body N 0
-default	15:51:36.610476-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:36.610642-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:36.610948-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:36.618385-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1887 target:8572 attributes:[
+default	16:11:06.280253-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:06.280709-0500	runningboardd	Assertion 174-10440-2092 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:06.281014-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [010CF555-60D4-40E5-A244-EED6D95483D2] (reporting strategy default)> on Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> was not selected for reporting
+default	16:11:06.282227-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:06.282666-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> now using Connection 3
+default	16:11:06.285147-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:06.285222-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:06.285367-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:06.284626-0500	RedLemon	0x7f9897bf7178 ID=88 Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> sent request, body N 0
+default	16:11:06.287894-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2093 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:36.618638-0500	runningboardd	Assertion 174-114-1887 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:36.619728-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:36.619776-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:36.619812-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:36.664686-0500	RedLemon	0x7fbf96ac6ba8 ID=64 Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> received response, status 200 content U
-default	15:51:36.665689-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> response ended
-default	15:51:36.666121-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> done using Connection 3
-default	15:51:36.666591-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> summary for task success {transaction_duration_ms=60, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=57, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	15:51:36.667193-0500	RedLemon	Task <9291A14E-FAFF-4601-B663-1A0D27949DF7>.<143> finished successfully
-default	15:51:36.686681-0500	RedLemon	Connection 11: read-side closed
-default	15:51:36.686867-0500	RedLemon	Connection 11: cleaning up
-default	15:51:36.686939-0500	RedLemon	[C11 FB91ECAB-3200-4755-9336-DB2FC90289EC Hostname#204e95ef:443 quic-connection, url hash: 0740ec8c, definite, attribution: developer] cancel
-default	15:51:36.687079-0500	RedLemon	[C11 FB91ECAB-3200-4755-9336-DB2FC90289EC Hostname#204e95ef:443 quic-connection, url hash: 0740ec8c, definite, attribution: developer] cancelled
-	[C11.1.1 0670C083-31A9-4E01-8F94-1A474E628664 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60083<->IPv6#29739f0d.443]
+default	16:11:06.288124-0500	runningboardd	Assertion 174-114-2093 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:06.289067-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:06.289119-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:06.289165-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:06.363547-0500	RedLemon	0x7f9897bf7178 ID=88 Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> received response, status 200 content U
+default	16:11:06.364437-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> response ended
+default	16:11:06.365024-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> done using Connection 3
+default	16:11:06.365874-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> summary for task success {transaction_duration_ms=84, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=81, response_duration_ms=2, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:11:06.366568-0500	RedLemon	Task <D979F701-5EAA-4D48-BFAB-E20210C968D5>.<245> finished successfully
+default	16:11:07.384550-0500	runningboardd	Invalidating assertion 174-10440-2092 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:07.563922-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:07.564079-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:07.565083-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:07.570230-0500	runningboardd	Invalidating assertion 174-114-2093 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:07.743645-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:07.743700-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:07.744046-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:08.567574-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:08.568667-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5AB28A68-E3C7-43FA-932E-D6C6948E0BB7] (reporting strategy default)> on Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> was not selected for reporting
+default	16:11:08.570523-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:08.570919-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> now using Connection 3
+default	16:11:08.572149-0500	RedLemon	0x7f9897bf7178 ID=92 Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> sent request, body N 0
+default	16:11:08.633991-0500	RedLemon	0x7f9897bf7178 ID=92 Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> received response, status 200 content U
+default	16:11:08.634777-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> response ended
+default	16:11:08.636482-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> done using Connection 3
+default	16:11:08.636720-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> summary for task success {transaction_duration_ms=67, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=64, response_duration_ms=2, request_bytes=511, response_bytes=791, cache_hit=false}
+default	16:11:08.637465-0500	RedLemon	Task <D0543CD1-0EB0-48D2-8E14-CD22600E97F1>.<246> finished successfully
+default	16:11:08.638515-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2094 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:08.638773-0500	runningboardd	Assertion 174-10440-2094 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:08.638802-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:08.639261-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9A20783D-762E-4840-A042-D5BDE510E3BA] (reporting strategy default)> on Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> was not selected for reporting
+default	16:11:08.640454-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:08.640769-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> now using Connection 3
+default	16:11:08.641993-0500	RedLemon	0x7f989a535cc8 ID=96 Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> sent request, body N 0
+default	16:11:08.646389-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:08.646641-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:08.646820-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:08.650633-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2095 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:08.650832-0500	runningboardd	Assertion 174-114-2095 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:08.652148-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:08.652199-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:08.652247-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:08.704031-0500	RedLemon	0x7f989a535cc8 ID=96 Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> received response, status 200 content U
+default	16:11:08.704668-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> response ended
+default	16:11:08.705167-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> done using Connection 3
+default	16:11:08.705373-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> summary for task success {transaction_duration_ms=65, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=846, cache_hit=true}
+default	16:11:08.705615-0500	RedLemon	Task <3D2330F6-940D-47EA-B407-2CFB83B34839>.<247> finished successfully
+default	16:11:09.750686-0500	runningboardd	Invalidating assertion 174-10440-2094 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:09.928227-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:09.928292-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:09.928769-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:09.931592-0500	runningboardd	Invalidating assertion 174-114-2095 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:10.085015-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:10.085059-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:10.085107-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:10.634763-0500	RedLemon	Connection 11: cleaning up
+default	16:11:10.634912-0500	RedLemon	[C11 34B8D682-5CDF-4936-8A4D-DDCE334C60E0 Hostname#908b0605:443 quic-connection, url hash: ed65fd6a, definite, attribution: developer] cancel
+default	16:11:10.635236-0500	RedLemon	[C11 34B8D682-5CDF-4936-8A4D-DDCE334C60E0 Hostname#908b0605:443 quic-connection, url hash: ed65fd6a, definite, attribution: developer] cancelled
+	[C11.1.1 6F1A230B-809E-40BF-996E-65E03BEB8531 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60093<->IPv6#1c6a6668.443]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
 	Privacy Stance: Not Eligible
-	Duration: 16.398s, DNS @0.000s took 0.000s, TCP @0.001s took 0.019s, TLS 1.3 took 0.039s
-	bytes in/out: 4004/932, packets in/out: 15/16, rtt: 0.032s, retransmitted bytes: 0, out-of-order bytes: 0
-default	15:51:36.687544-0500	RedLemon	nw_protocol_tcp_log_summary [C11.1.1:3]
-	[7FB891D0-1DE0-4FF6-921D-788AF3DBFAA6 <private>:60083<-><private>:443]
-	Init: 1, Conn_Time: 18.932ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 6, rtt: 32.375ms, rtt_var: 25.000ms rtt_nc: 30.312ms, rtt_var_nc: 25.312ms base rtt: 11ms
+	Duration: 21.453s, DNS @0.000s took 0.000s, TCP @0.001s took 0.013s, TLS 1.3 took 0.029s
+	bytes in/out: 4226/1062, packets in/out: 20/22, rtt: 0.027s, retransmitted bytes: 0, out-of-order bytes: 0
+default	16:11:10.636048-0500	RedLemon	nw_protocol_tcp_log_summary [C11.1.1:3]
+	[46E91487-8927-4F2B-9303-C8F10D84FA56 <private>:60093<-><private>:443]
+	Init: 1, Conn_Time: 12.558ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 9, rtt: 27.156ms, rtt_var: 19.937ms rtt_nc: 22.937ms, rtt_var_nc: 18.125ms base rtt: 9ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	15:51:36.687649-0500	RedLemon	nw_flow_disconnected [C11.1.1 IPv6#29739f0d.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	15:51:36.687983-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C11] reporting state cancelled
-default	15:51:36.688085-0500	RedLemon	tcp_input [C11.1.1:3] flags=[F.] seq=1502204792, ack=466835727, win=8 state=ESTABLISHED rcv_nxt=1502204792, snd_una=466835727
-default	15:51:36.688184-0500	RedLemon	tcp_output [C11.1.1:3] flags=[F.] seq=466835790, ack=1502204793, win=2048 state=LAST_ACK rcv_nxt=1502204793, snd_una=466835727
-default	15:51:36.699897-0500	RedLemon	tcp_output [C11.1.1:3] flags=[FP.] seq=466835727, ack=1502204793, win=2048 state=LAST_ACK rcv_nxt=1502204793, snd_una=466835727
-default	15:51:37.718858-0500	runningboardd	Invalidating assertion 174-8572-1886 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:37.856096-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:37.856489-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:37.856645-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:37.868314-0500	runningboardd	Invalidating assertion 174-114-1887 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:38.044750-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:38.044810-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:38.044859-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:38.759576-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:38.760046-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [65C44E09-DB0C-485F-B8DA-94CAE62F1426] (reporting strategy default)> on Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> was not selected for reporting
-default	15:51:38.760827-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:38.761136-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> now using Connection 3
-default	15:51:38.762801-0500	RedLemon	0x7fbf93a70b98 ID=68 Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> sent request, body N 0
-default	15:51:38.828813-0500	RedLemon	0x7fbf93a70b98 ID=68 Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> received response, status 200 content U
-default	15:51:38.829483-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> response ended
-default	15:51:38.829926-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> done using Connection 3
-default	15:51:38.830624-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> summary for task success {transaction_duration_ms=70, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=68, response_duration_ms=1, request_bytes=512, response_bytes=793, cache_hit=false}
-default	15:51:38.831197-0500	RedLemon	Task <0D92B292-73CC-4AFF-B207-355978679151>.<144> finished successfully
-default	15:51:38.832468-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:38.833467-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D415B02B-7462-45D8-89A4-8638430903A1] (reporting strategy default)> on Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> was not selected for reporting
-default	15:51:38.835911-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:38.836189-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> now using Connection 3
-default	15:51:38.837301-0500	RedLemon	0x7fbf96273288 ID=72 Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> sent request, body N 0
-default	15:51:38.837620-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1888 target:8572 attributes:[
+default	16:11:10.636100-0500	RedLemon	nw_flow_disconnected [C11.1.1 IPv6#1c6a6668.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:10.636490-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C11] reporting state cancelled
+default	16:11:10.636553-0500	RedLemon	tcp_input [C11.1.1:3] flags=[FP.] seq=215358297, ack=1700628085, win=8 state=ESTABLISHED rcv_nxt=215358297, snd_una=1700628085
+error	16:11:10.636651-0500	RedLemon	tcp_output [C11.1.1:3] flags=[R.] seq=1700628148, ack=215358322, win=2047 state=CLOSED rcv_nxt=215358322, snd_una=1700628085
+default	16:11:10.851212-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:10.851999-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0FAA7C97-A219-4E9D-A6D2-1772D6AA08C7] (reporting strategy default)> on Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> was not selected for reporting
+default	16:11:10.853321-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:10.853694-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> now using Connection 3
+default	16:11:10.855148-0500	RedLemon	0x7f989a0f4298 ID=100 Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> sent request, body N 0
+default	16:11:10.925662-0500	RedLemon	0x7f989a0f4298 ID=100 Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> received response, status 200 content U
+default	16:11:10.926707-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> response ended
+default	16:11:10.929234-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> done using Connection 3
+default	16:11:10.929861-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> summary for task success {transaction_duration_ms=77, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=72, response_duration_ms=4, request_bytes=511, response_bytes=789, cache_hit=true}
+default	16:11:10.930440-0500	RedLemon	Task <A1E236D7-92D6-4166-A011-833C7816BCCF>.<248> finished successfully
+default	16:11:10.932269-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:10.932913-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8977D4BA-ED29-49AD-AF3A-338583A9D5FD] (reporting strategy default)> on Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> was not selected for reporting
+default	16:11:10.934000-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:10.934375-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> now using Connection 3
+default	16:11:10.936204-0500	RedLemon	0x7f989a5c3d88 ID=104 Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> sent request, body N 0
+default	16:11:10.937800-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2096 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:38.837873-0500	runningboardd	Assertion 174-8572-1888 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:38.838702-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:38.838762-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:38.838813-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:38.844413-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1889 target:8572 attributes:[
+default	16:11:10.938026-0500	runningboardd	Assertion 174-10440-2096 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:10.938855-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:10.938945-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:10.939062-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:10.947706-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2097 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:38.844990-0500	runningboardd	Assertion 174-114-1889 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:38.848216-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:38.848268-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:38.848589-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:38.888834-0500	RedLemon	0x7fbf96273288 ID=72 Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> received response, status 200 content U
-default	15:51:38.889265-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> response ended
-default	15:51:38.889565-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> done using Connection 3
-default	15:51:38.889724-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> summary for task success {transaction_duration_ms=54, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=53, response_duration_ms=0, request_bytes=524, response_bytes=842, cache_hit=true}
-default	15:51:38.890383-0500	RedLemon	Task <89ED7C26-1445-49C2-8705-453C5130FE82>.<145> finished successfully
-default	15:51:39.934487-0500	runningboardd	Invalidating assertion 174-8572-1888 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:40.088346-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:40.088409-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:40.088459-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:40.124862-0500	runningboardd	Invalidating assertion 174-114-1889 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:40.287782-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:40.287834-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:40.287878-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:41.050811-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:41.051294-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [23C7FFCA-4B4C-4A9C-8D5C-16D1B0B9CCC4] (reporting strategy default)> on Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> was not selected for reporting
-default	15:51:41.052243-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:41.052630-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> now using Connection 3
-default	15:51:41.055561-0500	RedLemon	0x7fbf93a70b98 ID=76 Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> sent request, body N 0
-default	15:51:41.112936-0500	RedLemon	0x7fbf93a70b98 ID=76 Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> received response, status 200 content U
-default	15:51:41.113562-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> response ended
-default	15:51:41.113996-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> done using Connection 3
-default	15:51:41.114492-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> summary for task success {transaction_duration_ms=62, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=61, response_duration_ms=1, request_bytes=512, response_bytes=793, cache_hit=true}
-default	15:51:41.114778-0500	RedLemon	Task <59B11823-853A-4C96-A0AE-C7D87DFA671B>.<146> finished successfully
-default	15:51:41.115972-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:41.116417-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [38D17EE8-3368-4871-8E58-12FAFF845C23] (reporting strategy default)> on Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> was not selected for reporting
-default	15:51:41.117604-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:41.117918-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> now using Connection 3
-default	15:51:41.120733-0500	RedLemon	0x7fbf96273288 ID=80 Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> sent request, body N 0
-default	15:51:41.122539-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1890 target:8572 attributes:[
+default	16:11:10.948342-0500	runningboardd	Assertion 174-114-2097 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:10.950870-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:10.951035-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:10.951088-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:11.002476-0500	RedLemon	0x7f989a5c3d88 ID=104 Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> received response, status 200 content U
+default	16:11:11.003025-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> response ended
+default	16:11:11.003381-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> done using Connection 3
+default	16:11:11.003555-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> summary for task success {transaction_duration_ms=70, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=68, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:11:11.003931-0500	RedLemon	Task <3BFBC334-6ABE-4314-97CE-8A9332185EE7>.<249> finished successfully
+default	16:11:11.677328-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from lemontom in room 584T
+default	16:11:11.677603-0500	RedLemon	👋 Host received: Guest 'lemontom' joined room 584T
+default	16:11:11.677876-0500	RedLemon	   Guest ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E, Total participants: 2
+default	16:11:11.678164-0500	RedLemon	👥 Room status after join: 2 participants, 0 ready
+default	16:11:12.008321-0500	runningboardd	Invalidating assertion 174-10440-2096 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:12.184604-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:12.184699-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:12.184775-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:12.187411-0500	runningboardd	Invalidating assertion 174-114-2097 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:12.305016-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:12.305120-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:12.305217-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:13.171818-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:13.172303-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [26CEE9D3-386F-466C-9C10-5E94208560C8] (reporting strategy default)> on Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> was not selected for reporting
+default	16:11:13.174127-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:13.174612-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> now using Connection 3
+default	16:11:13.175820-0500	RedLemon	0x7f98978c74f8 ID=108 Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> sent request, body N 0
+default	16:11:13.250040-0500	RedLemon	0x7f98978c74f8 ID=108 Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> received response, status 200 content U
+default	16:11:13.251194-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> response ended
+default	16:11:13.252016-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> done using Connection 3
+default	16:11:13.252381-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> summary for task success {transaction_duration_ms=79, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=76, response_duration_ms=2, request_bytes=511, response_bytes=829, cache_hit=true}
+default	16:11:13.252820-0500	RedLemon	Task <8ACAE274-7149-45D8-BBEA-53B5C2A9CD57>.<250> finished successfully
+default	16:11:13.254530-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2098 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:41.122839-0500	runningboardd	Assertion 174-8572-1890 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:41.128168-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:41.128468-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:41.128707-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:41.134923-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1891 target:8572 attributes:[
+default	16:11:13.255049-0500	runningboardd	Assertion 174-10440-2098 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:13.256553-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:13.258687-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0D38D019-9782-4F82-967C-AB65ED81E7C8] (reporting strategy default)> on Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> was not selected for reporting
+default	16:11:13.259984-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:13.260330-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> now using Connection 3
+default	16:11:13.261612-0500	RedLemon	0x7f9897bf7178 ID=112 Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> sent request, body N 0
+default	16:11:13.261874-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:13.262027-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:13.262115-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:13.264985-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2099 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:41.135663-0500	runningboardd	Assertion 174-114-1891 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:41.139528-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:41.139594-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:41.139647-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:41.187602-0500	RedLemon	0x7fbf96273288 ID=80 Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> received response, status 200 content U
-default	15:51:41.189862-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> response ended
-default	15:51:41.190831-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> done using Connection 3
-default	15:51:41.191117-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> summary for task success {transaction_duration_ms=74, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=70, response_duration_ms=3, request_bytes=524, response_bytes=843, cache_hit=true}
-default	15:51:41.191335-0500	RedLemon	Task <F810EEB8-D290-4065-B364-8C626F51EC36>.<147> finished successfully
-default	15:51:42.240869-0500	runningboardd	Invalidating assertion 174-8572-1890 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:42.251974-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from lemontom in room BPWN
-default	15:51:42.252177-0500	RedLemon	👋 Host received: Guest 'lemontom' joined room BPWN
-default	15:51:42.252372-0500	RedLemon	   Guest ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E, Total participants: 2
-default	15:51:42.252639-0500	RedLemon	👥 Room status after join: 2 participants, 0 ready
-default	15:51:42.390397-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:42.390444-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:42.390491-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:42.402802-0500	runningboardd	Invalidating assertion 174-114-1891 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:42.520634-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:42.520721-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:42.520950-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:43.403381-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:43.404148-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5FB54B1B-6FBE-4ACB-8CE4-A6DB05A61196] (reporting strategy default)> on Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> was not selected for reporting
-default	15:51:43.405113-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:43.405437-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> now using Connection 3
-default	15:51:43.412693-0500	RedLemon	0x7fbf93abfe88 ID=84 Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> sent request, body N 0
-default	15:51:43.478426-0500	RedLemon	0x7fbf93abfe88 ID=84 Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> received response, status 200 content U
-default	15:51:43.479012-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> response ended
-default	15:51:43.479446-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> done using Connection 3
-default	15:51:43.480091-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> summary for task success {transaction_duration_ms=75, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=7, response_start_ms=73, response_duration_ms=1, request_bytes=512, response_bytes=837, cache_hit=true}
-default	15:51:43.480304-0500	RedLemon	Task <CCF03AFB-B4A2-4F69-B784-4B865C10FABC>.<148> finished successfully
-default	15:51:43.482353-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:43.484040-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [49048164-F3D7-4918-9E96-720E071E2E5F] (reporting strategy default)> on Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> was not selected for reporting
-default	15:51:43.485671-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:43.485960-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> now using Connection 3
-default	15:51:43.488149-0500	RedLemon	0x7fbf92fac178 ID=88 Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> sent request, body N 0
-default	15:51:43.490842-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1892 target:8572 attributes:[
+default	16:11:13.265142-0500	runningboardd	Assertion 174-114-2099 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:13.266364-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:13.266411-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:13.266454-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:13.349544-0500	RedLemon	0x7f9897bf7178 ID=112 Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> received response, status 200 content U
+default	16:11:13.352287-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> response ended
+default	16:11:13.352993-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> done using Connection 3
+default	16:11:13.353365-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> summary for task success {transaction_duration_ms=94, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=89, response_duration_ms=4, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:11:13.353847-0500	RedLemon	Task <18E206A2-AA44-45D6-B0DB-5A9796D86F58>.<251> finished successfully
+default	16:11:13.355602-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:13.356332-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [61CF9802-7238-448A-9EE0-D291A77F2C86] (reporting strategy default)> on Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> was not selected for reporting
+default	16:11:13.358833-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:13.359159-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> now using Connection 3
+default	16:11:13.361246-0500	RedLemon	0x7f989a284d28 ID=116 Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> sent request, body N 0
+default	16:11:13.443869-0500	RedLemon	0x7f989a284d28 ID=116 Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> received response, status 200 content U
+default	16:11:13.445276-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> response ended
+default	16:11:13.448652-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> done using Connection 3
+default	16:11:13.450468-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> summary for task success {transaction_duration_ms=93, response_status=200, connection=3, reused=1, request_start_ms=2, request_duration_ms=2, response_start_ms=86, response_duration_ms=5, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:11:13.451023-0500	RedLemon	Task <A5BF5250-9BD7-408C-A901-53DD6499AC82>.<252> finished successfully
+default	16:11:13.522917-0500	RedLemon	🎬 Host: Starting movie for 2 participants
+default	16:11:13.557482-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:13.558768-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7C94E7AE-6E18-4522-918E-FBC6E1D9D155] (reporting strategy default)> on Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> was not selected for reporting
+default	16:11:13.558887-0500	RedLemon	✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime
+default	16:11:13.559098-0500	RedLemon	📡 Realtime delivery confirmed for 2 guests
+default	16:11:13.559967-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:13.560425-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> now using Connection 3
+default	16:11:13.566157-0500	RedLemon	0x7f98978c74f8 ID=120 Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> sent request, body S 80
+default	16:11:13.596602-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room 584T
+default	16:11:13.637408-0500	RedLemon	0x7f98978c74f8 ID=120 Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> received response, status 200 content U
+default	16:11:13.638195-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> response ended
+default	16:11:13.638798-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> done using Connection 3
+default	16:11:13.639055-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> summary for task success {transaction_duration_ms=79, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=5, response_start_ms=77, response_duration_ms=1, request_bytes=504, response_bytes=952, cache_hit=false}
+default	16:11:13.639301-0500	RedLemon	Task <C0905B32-2D11-4F97-BABB-563D2293AE02>.<253> finished successfully
+default	16:11:13.639604-0500	RedLemon	✅ Host: Set room playback state in database as fallback
+default	16:11:13.639806-0500	RedLemon	💾 Database delivery confirmed for start signal
+default	16:11:14.358975-0500	runningboardd	Invalidating assertion 174-10440-2098 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:14.689943-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:14.690005-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:14.690063-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:14.693644-0500	runningboardd	Invalidating assertion 174-114-2099 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:14.803411-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:14.803471-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:14.803525-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:15.534210-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:15.535231-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [70B85AF9-6663-4AFF-A3CA-11A5CB28387C] (reporting strategy default)> on Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> was not selected for reporting
+default	16:11:15.536160-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:15.536489-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> now using Connection 3
+default	16:11:15.537595-0500	RedLemon	0x7f989a284d28 ID=124 Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> sent request, body N 0
+default	16:11:15.612039-0500	RedLemon	0x7f989a284d28 ID=124 Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> received response, status 200 content U
+default	16:11:15.613013-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> response ended
+default	16:11:15.613862-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> done using Connection 3
+default	16:11:15.614805-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2100 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:43.491267-0500	runningboardd	Assertion 174-8572-1892 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:43.496244-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:43.496419-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:43.496592-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:43.503668-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1893 target:8572 attributes:[
+default	16:11:15.615470-0500	runningboardd	Assertion 174-10440-2100 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:15.614275-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> summary for task success {transaction_duration_ms=78, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=75, response_duration_ms=2, request_bytes=511, response_bytes=831, cache_hit=true}
+default	16:11:15.615101-0500	RedLemon	Task <4AA7CDBF-0ED0-4729-87B9-197C160919DC>.<254> finished successfully
+default	16:11:15.618431-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:15.619123-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2EA0DDDC-EB23-4030-9656-62DE0C2BD8EB] (reporting strategy default)> on Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> was not selected for reporting
+default	16:11:15.620481-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:15.621047-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> now using Connection 3
+default	16:11:15.622497-0500	RedLemon	0x7f9897b96598 ID=128 Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> sent request, body N 0
+default	16:11:15.625313-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:15.625541-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:15.625732-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:15.627857-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2101 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:43.504113-0500	runningboardd	Assertion 174-114-1893 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:43.507671-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:43.507901-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:43.508042-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:43.543512-0500	RedLemon	0x7fbf92fac178 ID=88 Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> received response, status 200 content U
-default	15:51:43.544225-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> response ended
-default	15:51:43.544660-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> done using Connection 3
-default	15:51:43.545484-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> summary for task success {transaction_duration_ms=60, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=58, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	15:51:43.545900-0500	RedLemon	Task <C170238C-B765-4EF3-9CE1-A12A88EC2F5F>.<149> finished successfully
-default	15:51:43.548026-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:43.548839-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C4332D75-F214-44DC-A09A-1F3246666085] (reporting strategy default)> on Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> was not selected for reporting
-default	15:51:43.550746-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:43.551278-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> now using Connection 3
-default	15:51:43.552544-0500	RedLemon	0x7fbf93abfe88 ID=92 Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> sent request, body N 0
-default	15:51:43.618938-0500	RedLemon	0x7fbf93abfe88 ID=92 Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> received response, status 200 content U
-default	15:51:43.620564-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> response ended
-default	15:51:43.621356-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> done using Connection 3
-default	15:51:43.621666-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> summary for task success {transaction_duration_ms=72, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=68, response_duration_ms=3, request_bytes=524, response_bytes=844, cache_hit=true}
-default	15:51:43.622234-0500	RedLemon	Task <57015FC5-4A70-444E-A694-09A4C33B9E59>.<150> finished successfully
-default	15:51:43.939598-0500	RedLemon	🎬 Host: Starting movie for 2 participants
-default	15:51:43.974390-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:43.981174-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [41802297-B805-4541-ADC2-41EF706FEA3B] (reporting strategy default)> on Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> was not selected for reporting
-default	15:51:43.982562-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:43.983030-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> now using Connection 3
-default	15:51:43.990636-0500	RedLemon	✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime
-default	15:51:43.990797-0500	RedLemon	📡 Realtime delivery confirmed for 2 guests
-default	15:51:43.992686-0500	RedLemon	0x7fbf93abfe88 ID=96 Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> sent request, body S 80
-default	15:51:44.017529-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room BPWN
-default	15:51:44.057900-0500	RedLemon	0x7fbf93abfe88 ID=96 Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> received response, status 200 content U
-default	15:51:44.058401-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> response ended
-default	15:51:44.059228-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> done using Connection 3
-default	15:51:44.059609-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> summary for task success {transaction_duration_ms=77, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=9, response_start_ms=75, response_duration_ms=1, request_bytes=504, response_bytes=959, cache_hit=false}
-default	15:51:44.061657-0500	RedLemon	Task <B2D3B715-3849-4358-9590-72579B35C7FA>.<151> finished successfully
-default	15:51:44.062063-0500	RedLemon	✅ Host: Set room playback state in database as fallback
-default	15:51:44.062335-0500	RedLemon	💾 Database delivery confirmed for start signal
-default	15:51:44.618206-0500	runningboardd	Invalidating assertion 174-8572-1892 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:44.796109-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:44.796315-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:44.796519-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:44.801333-0500	runningboardd	Invalidating assertion 174-114-1893 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:44.970895-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:44.970943-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:44.970990-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:45.760225-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:45.760823-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5AC9C600-5EE1-4FDB-9C52-4C3F80E57812] (reporting strategy default)> on Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> was not selected for reporting
-default	15:51:45.761785-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:45.762114-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> now using Connection 3
-default	15:51:45.763997-0500	RedLemon	0x7fbf96273288 ID=100 Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> sent request, body N 0
-default	15:51:45.824692-0500	RedLemon	0x7fbf96273288 ID=100 Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> received response, status 200 content U
-default	15:51:45.825105-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> response ended
-default	15:51:45.825825-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> done using Connection 3
-default	15:51:45.826667-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> summary for task success {transaction_duration_ms=65, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=63, response_duration_ms=1, request_bytes=512, response_bytes=835, cache_hit=true}
-default	15:51:45.826913-0500	RedLemon	Task <D0D0FBF4-3B9A-41AB-9957-EB9BDC9F0BE1>.<152> finished successfully
-default	15:51:45.828821-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:45.829534-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AECAB297-CD69-4867-A170-A0DC5FA4EFEA] (reporting strategy default)> on Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> was not selected for reporting
-default	15:51:45.830498-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:45.830804-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> now using Connection 3
-default	15:51:45.832452-0500	RedLemon	0x7fbf939c4218 ID=104 Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> sent request, body N 0
-default	15:51:45.835841-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1895 target:8572 attributes:[
+default	16:11:15.628209-0500	runningboardd	Assertion 174-114-2101 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:15.630028-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:15.630098-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:15.630150-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:15.698971-0500	RedLemon	0x7f9897b96598 ID=128 Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> received response, status 200 content U
+default	16:11:15.700290-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> response ended
+default	16:11:15.700763-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> done using Connection 3
+default	16:11:15.701179-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> summary for task success {transaction_duration_ms=81, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=78, response_duration_ms=2, request_bytes=524, response_bytes=841, cache_hit=true}
+default	16:11:15.701391-0500	RedLemon	Task <C3BCE4AA-4666-4F03-B431-7CDCA3C81ACB>.<255> finished successfully
+default	16:11:15.703268-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:15.703593-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1377ACD4-2DC7-4584-871C-2E4D29995C5F] (reporting strategy default)> on Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> was not selected for reporting
+default	16:11:15.705143-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:15.705368-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> now using Connection 3
+default	16:11:15.706412-0500	RedLemon	0x7f989a284d28 ID=132 Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> sent request, body N 0
+default	16:11:15.776601-0500	RedLemon	0x7f989a284d28 ID=132 Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> received response, status 200 content U
+default	16:11:15.779506-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> response ended
+default	16:11:15.781004-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> done using Connection 3
+default	16:11:15.781914-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> summary for task success {transaction_duration_ms=77, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=72, response_duration_ms=4, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:11:15.782252-0500	RedLemon	Task <14F39AB1-F33C-435C-BDF0-6CEF599A94CA>.<256> finished successfully
+default	16:11:15.796005-0500	RedLemon	Connection 3: encountered bidirectional stream limit updated event
+default	16:11:16.608407-0500	RedLemon	🎬 Host: Launching player for Frankenstein
+default	16:11:16.608920-0500	RedLemon	   Quality: 1080p
+default	16:11:16.609240-0500	RedLemon	   Mode: watchParty
+default	16:11:16.609497-0500	RedLemon	📡 Fetching metadata for tt1312221...
+default	16:11:16.723401-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt1312221/img
+default	16:11:16.724476-0500	RedLemon	⏳ Background art loading...
+default	16:11:16.725025-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt1312221/img
+default	16:11:16.726090-0500	RedLemon	⏳ Logo loading...
+default	16:11:16.738143-0500	runningboardd	Invalidating assertion 174-10440-2100 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:16.761650-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:16.762696-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B4015DD5-1D7B-42EE-83C4-EC2BD335F5D2] (reporting strategy default)> on Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> was not selected for reporting
+default	16:11:16.763524-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:16.763818-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> now using Connection 6
+default	16:11:16.763909-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:16.766139-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> sent request, body N 0
+default	16:11:16.766737-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7F2EDBEA-5216-43EE-9C6E-D350FF3B4694] (reporting strategy default)> on Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> was not selected for reporting
+default	16:11:16.768563-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:16.769124-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> now using Connection 6
+default	16:11:16.769975-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> sent request, body N 0
+default	16:11:16.786653-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> received response, status 200 content K
+default	16:11:16.786844-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> done using Connection 6
+default	16:11:16.787615-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> response ended
+default	16:11:16.788525-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> summary for task success {transaction_duration_ms=25, response_status=200, connection=6, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=23, response_duration_ms=1, request_bytes=36, response_bytes=63087, cache_hit=false}
+default	16:11:16.788647-0500	RedLemon	Task <9118B5BE-A106-410C-8C1B-D2750BDC5CBA>.<257> finished successfully
+default	16:11:16.811588-0500	RedLemon	✅ Logo loaded successfully
+default	16:11:16.813813-0500	RedLemon	✅ StreamService: Using provided metadata: Frankenstein
+default	16:11:16.813957-0500	RedLemon	Task <11A58D6B-3E67-4A51-BB8C-51013E1F2962>.<259> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:16.814016-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
+default	16:11:16.814286-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt1312221, type=movie, year=2025
+default	16:11:16.814986-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
+default	16:11:16.815413-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [932E887A-3E67-4919-9E06-B4ADCCDCB990] (reporting strategy default)> on Task <11A58D6B-3E67-4A51-BB8C-51013E1F2962>.<259> was not selected for reporting
+default	16:11:16.816745-0500	RedLemon	Task <11A58D6B-3E67-4A51-BB8C-51013E1F2962>.<259> finished with error [-999] Error Domain=NSURLErrorDomain Code=-999 UserInfo={NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>}
+default	16:11:16.816004-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> received response, status 200 content K
+default	16:11:16.817609-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [59B6DD80-8358-467E-ABD2-2B3913BEC4ED] (reporting strategy default)> on Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> was not selected for reporting
+default	16:11:16.819319-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> now using Connection 9
+default	16:11:16.827272-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> sent request, body N 0
+default	16:11:16.831154-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> done using Connection 6
+default	16:11:16.832874-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> response ended
+default	16:11:16.833810-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> summary for task success {transaction_duration_ms=66, response_status=200, connection=6, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=48, response_duration_ms=17, request_bytes=41, response_bytes=118073, cache_hit=false}
+default	16:11:16.834677-0500	RedLemon	Task <5DCE108D-1A5F-4C62-B920-96C7A4602982>.<258> finished successfully
+default	16:11:16.842427-0500	RedLemon	⚠️ Lobby: Failed to poll participants: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/room_participants?select=*&room_id=eq.584T, NSErrorFailingURLKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/room_participants?select=*&room_id=eq.584T, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <11A58D6B-3E67-4A51-BB8C-51013E1F2962>.<259>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <11A58D6B-3E67-4A51-BB8C-51013E1F2962>.<259>, NSLocalizedDescription=cancelled}
+default	16:11:16.843416-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:16.843401-0500	RedLemon	Task <9B20F1F0-BE8D-46E6-88B7-7FE461D70C38>.<260> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:16.845710-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:16.847521-0500	RedLemon	✅ Background art loaded successfully
+default	16:11:16.849848-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [941D6A62-1E23-4CE9-9D84-BACBED6BAB73] (reporting strategy default)> on Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> was not selected for reporting
+default	16:11:16.853092-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:16.853955-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:16.854640-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B113AA13-B4CD-477B-A7E4-EF7E6DA2DBD6] (reporting strategy default)> on Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> was not selected for reporting
+default	16:11:16.861382-0500	RedLemon	Connection 14: enabling TLS
+default	16:11:16.862338-0500	RedLemon	Connection 14: starting, TC(0x0)
+default	16:11:16.863682-0500	RedLemon	[C14 D83F490C-F3F2-43CE-8672-7E2EC0AA2F8F Hostname#761bef13:443 quic-connection, url hash: fcd9d1e8, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:16.864968-0500	RedLemon	[C14 Hostname#761bef13:443 initial path ((null))] event: path:start @0.000s
+default	16:11:16.865411-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B8FE2664-FD9A-481B-B920-6FD247BC1ABF] (reporting strategy default)> on Task <9B20F1F0-BE8D-46E6-88B7-7FE461D70C38>.<260> was not selected for reporting
+default	16:11:16.845993-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:16.869359-0500	RedLemon	[C14 Hostname#761bef13:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.005s, uuid: 9D393961-52F2-4849-A6C0-8B3FA8117D0B
+default	16:11:16.871815-0500	RedLemon	[C14 Hostname#761bef13:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.007s
+default	16:11:16.872220-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C14] reporting state preparing
+default	16:11:16.874866-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CFBB0528-8810-4ACF-AA04-C3EB686AA4F1] (reporting strategy default)> on Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> was not selected for reporting
+default	16:11:16.875988-0500	RedLemon	[C14.1 Hostname#761bef13:443 initial path ((null))] event: path:start @0.011s
+default	16:11:16.879381-0500	mDNSResponder	[R2243] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'f1sHzVcJqTCJl3J8hK/U6g=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:16.877451-0500	RedLemon	[C14.1 Hostname#761bef13:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.013s, uuid: B71F476A-E6C6-4E9E-8CB8-74E0E3289A6C
+default	16:11:16.878756-0500	RedLemon	[C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.014s
+default	16:11:16.881597-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> setting up Connection 14
+default	16:11:16.882580-0500	RedLemon	Task <9B20F1F0-BE8D-46E6-88B7-7FE461D70C38>.<260> summary for task success {transaction_duration_ms=15, response_status=200, cache_hit=true}
+default	16:11:16.882730-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:16.883569-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:16.886704-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:16.886861-0500	RedLemon	Task <9B20F1F0-BE8D-46E6-88B7-7FE461D70C38>.<260> finished successfully
+default	16:11:16.887927-0500	RedLemon	Connection 15: enabling TLS
+default	16:11:16.887967-0500	RedLemon	Connection 15: starting, TC(0x0)
+default	16:11:16.888073-0500	RedLemon	[C15 2E3A3B7B-6331-4279-8F82-8333EA26E1D7 Hostname#6ba4ca83:443 quic-connection, url hash: bef3e913, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:16.888365-0500	RedLemon	[C15 Hostname#6ba4ca83:443 initial path ((null))] event: path:start @0.000s
+default	16:11:16.888608-0500	RedLemon	Task <E541CDAB-F620-4A1C-9A39-96D732C2F4D1>.<264> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:16.889027-0500	RedLemon	[C15 Hostname#6ba4ca83:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 4687F01A-D0B2-4240-93C6-9A7746B69BC7
+default	16:11:16.890377-0500	RedLemon	[C15 Hostname#6ba4ca83:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.002s
+default	16:11:16.890784-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C15] reporting state preparing
+default	16:11:16.891339-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8B286F6A-C174-4F2C-9548-1C77406C54B1] (reporting strategy default)> on Task <E541CDAB-F620-4A1C-9A39-96D732C2F4D1>.<264> was not selected for reporting
+default	16:11:16.892925-0500	RedLemon	[C15.1 Hostname#6ba4ca83:443 initial path ((null))] event: path:start @0.004s
+default	16:11:16.893770-0500	RedLemon	[C15.1 Hostname#6ba4ca83:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.005s, uuid: 584E164A-E3C3-40E1-9050-94AB68F91450
+default	16:11:16.894083-0500	RedLemon	[C15.1 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.005s
+default	16:11:16.894328-0500	mDNSResponder	[R2244] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'EiiASYKDbDe6i732tOWGpw=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:16.894685-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> setting up Connection 15
+default	16:11:16.894821-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:16.895250-0500	RedLemon	Connection 16: enabling TLS
+default	16:11:16.895287-0500	RedLemon	Connection 16: starting, TC(0x0)
+default	16:11:16.895342-0500	RedLemon	[C16 FC95DDB0-96CB-4C47-848B-3D81FE3644A7 Hostname#de24f77b:443 quic-connection, url hash: 641d6815, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:16.895435-0500	RedLemon	[C16 Hostname#de24f77b:443 initial path ((null))] event: path:start @0.000s
+default	16:11:16.896199-0500	RedLemon	[C16 Hostname#de24f77b:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 419CC307-DD21-4F73-98D8-47EBB35FCF7A
+default	16:11:16.896487-0500	RedLemon	[C16 Hostname#de24f77b:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.001s
+default	16:11:16.896573-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C16] reporting state preparing
+default	16:11:16.897026-0500	RedLemon	[C16.1 Hostname#de24f77b:443 initial path ((null))] event: path:start @0.001s
+default	16:11:16.897659-0500	RedLemon	[C16.1 Hostname#de24f77b:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.002s, uuid: A1F82A96-0611-4429-A4AE-0443AE0337CA
+default	16:11:16.898036-0500	RedLemon	[C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.002s
+default	16:11:16.898272-0500	mDNSResponder	[R2245] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'uoOTVPMZK1vyR7qH5s9S4Q=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:16.898235-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> setting up Connection 16
+default	16:11:16.900330-0500	RedLemon	Task <E541CDAB-F620-4A1C-9A39-96D732C2F4D1>.<264> summary for task success {transaction_duration_ms=8, response_status=200, cache_hit=true}
+default	16:11:16.900572-0500	RedLemon	Task <E541CDAB-F620-4A1C-9A39-96D732C2F4D1>.<264> finished successfully
+default	16:11:16.913990-0500	mDNSResponder	[R2243] getaddrinfo stop -- hostname: <mask.hash: 'f1sHzVcJqTCJl3J8hK/U6g=='>, client pid: 10440 (RedLemon)
+default	16:11:16.914383-0500	RedLemon	[C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.050s
+default	16:11:16.914673-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#8812c122.443
+default	16:11:16.914820-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b105d3fd.443
+default	16:11:16.914967-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d23d9429:443
+default	16:11:16.915183-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#62f23059.443
+default	16:11:16.915397-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#33ec5d11:443
+default	16:11:16.915586-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0f6049ff:443
+default	16:11:16.915899-0500	RedLemon	[C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.051s
+default	16:11:16.916388-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 initial path ((null))] event: path:start @0.052s
+default	16:11:16.917104-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.052s, uuid: 9792CDC6-3A35-453A-9F90-DA838CC80D43
+default	16:11:16.917331-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.053s
+default	16:11:16.918546-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.054s
+default	16:11:16.919466-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.055s
+default	16:11:16.919748-0500	RedLemon	tcp_output [C14.1.1:3] flags=[S] seq=3442409147, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3442409147
+default	16:11:16.921433-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#246ac99d.443
+default	16:11:16.921555-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#ec7b8fac:443
+default	16:11:16.922871-0500	RedLemon	[C15.1 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.034s
+default	16:11:16.923441-0500	RedLemon	[C15.1.1 IPv6#246ac99d.443 initial path ((null))] event: path:start @0.035s
+default	16:11:16.924220-0500	RedLemon	[C15.1.1 IPv6#246ac99d.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.035s, uuid: 9187BBA3-476E-407A-89E6-2AE1A198C405
+default	16:11:16.924628-0500	RedLemon	[C15.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.036s
+default	16:11:16.925684-0500	RedLemon	[C15.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.037s
+default	16:11:16.929112-0500	RedLemon	nw_protocol_instance_ignore_future_path_changes [C15.1.1:2] Ignoring future path changes for protocol
+default	16:11:16.929259-0500	RedLemon	quic_initialize_block_invoke [C15.1.1:2] [-b8d0e06bca3551e7] created QUIC connection (spin bit enabled)
+default	16:11:16.930032-0500	RedLemon	[C15.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.041s
+default	16:11:16.932212-0500	RedLemon	quic_crypto_new_flow [C15.1.1:2] [-b8d0e06bca3551e7] TLS stream is: [C17]
+default	16:11:16.932324-0500	RedLemon	[C17 F06AF3C5-A96A-4CCF-901A-A4F8F1C0766E IPv6#246ac99d.443 quic-connection, url hash: bef3e913, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89, no transport] start
+default	16:11:16.932466-0500	RedLemon	[C17 IPv6#246ac99d.443 initial socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:start @0.000s
+default	16:11:16.932590-0500	RedLemon	[C17 IPv6#246ac99d.443 waiting socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 9187BBA3-476E-407A-89E6-2AE1A198C405
+default	16:11:16.932777-0500	RedLemon	[C17 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.000s
+default	16:11:16.932820-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C17] reporting state preparing
+default	16:11:16.932966-0500	RedLemon	nw_flow_connected [C17 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
+default	16:11:16.933028-0500	RedLemon	[C17 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.000s
+default	16:11:16.933401-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C17:1][0x7f989b09d490] TLS configured [min_version(0x0304) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:16.933530-0500	RedLemon	boringssl_context_info_handler(2028) [C17:1][0x7f989b09d490] Client handshake started
+default	16:11:16.933754-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS client enter_early_data
+default	16:11:16.934257-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS client read_server_hello
+default	16:11:16.945604-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2102 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:45.836030-0500	runningboardd	Assertion 174-8572-1895 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:45.837382-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:45.837438-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:45.837533-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:45.839293-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1896 target:8572 attributes:[
+default	16:11:16.945794-0500	runningboardd	Assertion 174-10440-2102 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:16.948575-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:16.948626-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:16.948673-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:16.953284-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:16.953331-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:16.953380-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:16.955697-0500	runningboardd	Invalidating assertion 174-114-2101 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:16.962532-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2103 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:45.839463-0500	runningboardd	Assertion 174-114-1896 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:45.840959-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:45.841047-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:45.841110-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:45.892268-0500	RedLemon	0x7fbf939c4218 ID=104 Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> received response, status 200 content U
-default	15:51:45.893562-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> response ended
-default	15:51:45.894031-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> done using Connection 3
-default	15:51:45.894393-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> summary for task success {transaction_duration_ms=64, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=62, response_duration_ms=2, request_bytes=524, response_bytes=841, cache_hit=true}
-default	15:51:45.894702-0500	RedLemon	Task <7FB23F8D-34B7-4A25-9C28-5BB5DFEC1FCC>.<153> finished successfully
-default	15:51:45.897214-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:45.897672-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [341E2845-E664-474D-9A86-1116B266507B] (reporting strategy default)> on Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> was not selected for reporting
-default	15:51:45.898524-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:45.898828-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> now using Connection 3
-default	15:51:45.899869-0500	RedLemon	0x7fbf96273288 ID=108 Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> sent request, body N 0
-default	15:51:45.973057-0500	RedLemon	0x7fbf96273288 ID=108 Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> received response, status 200 content U
-default	15:51:45.973475-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> response ended
-default	15:51:45.973906-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> done using Connection 3
-default	15:51:45.974088-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> summary for task success {transaction_duration_ms=76, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=74, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	15:51:45.974355-0500	RedLemon	Task <D403635C-7EB3-44E9-A000-6401257262F8>.<154> finished successfully
-default	15:51:46.937822-0500	runningboardd	Invalidating assertion 174-8572-1895 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:47.034025-0500	RedLemon	🎬 Host: Launching player for Frankenstein
-default	15:51:47.034328-0500	RedLemon	   Quality: 1080p
-default	15:51:47.034466-0500	RedLemon	   Mode: watchParty
-default	15:51:47.034533-0500	RedLemon	📡 Fetching metadata for tt1312221...
-default	15:51:47.086330-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:47.089246-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:47.089303-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:47.095232-0500	runningboardd	Invalidating assertion 174-114-1896 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:47.162306-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt1312221/img
-default	15:51:47.163403-0500	RedLemon	⏳ Background art loading...
-default	15:51:47.163719-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt1312221/img
-default	15:51:47.164498-0500	RedLemon	⏳ Logo loading...
-default	15:51:47.204869-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:47.204921-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:47.204972-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:47.223479-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:47.224224-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [471E9425-FF9A-478E-B2B6-A8107C6EF917] (reporting strategy default)> on Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> was not selected for reporting
-default	15:51:47.225507-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:47.225907-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> now using Connection 13
-default	15:51:47.226665-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> sent request, body N 0
-default	15:51:47.226917-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:47.227521-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F358665C-8994-454E-A1F6-F38F42D5FB7F] (reporting strategy default)> on Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> was not selected for reporting
-default	15:51:47.228144-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:47.228351-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> now using Connection 13
-default	15:51:47.228553-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> sent request, body N 0
-default	15:51:47.244894-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> received response, status 200 content K
-default	15:51:47.246649-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> done using Connection 13
-default	15:51:47.248112-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> response ended
-default	15:51:47.249989-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> summary for task success {transaction_duration_ms=25, response_status=200, connection=13, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=20, response_duration_ms=3, request_bytes=36, response_bytes=63076, cache_hit=false}
-default	15:51:47.250138-0500	RedLemon	Task <E4240B3D-777D-4750-8051-BFED42EA1B98>.<155> finished successfully
-default	15:51:47.280997-0500	RedLemon	✅ Logo loaded successfully
-default	15:51:47.282730-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> received response, status 200 content K
-default	15:51:47.283797-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> done using Connection 13
-default	15:51:47.284025-0500	RedLemon	✅ StreamService: Using provided metadata: Frankenstein
-default	15:51:47.284209-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
-default	15:51:47.284215-0500	RedLemon	Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:47.284360-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt1312221, type=movie, year=2025
-default	15:51:47.284847-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
-default	15:51:47.286623-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [81362F2F-B241-4C7B-9BEC-9C93B194E362] (reporting strategy default)> on Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> was not selected for reporting
-default	15:51:47.287436-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8A0C1A74-530E-4A3E-AC02-658C9D213310] (reporting strategy default)> on Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> was not selected for reporting
-default	15:51:47.288132-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> response ended
-default	15:51:47.288700-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> now using Connection 9
-default	15:51:47.302082-0500	RedLemon	Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> finished with error [-999] Error Domain=NSURLErrorDomain Code=-999 UserInfo={NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>}
-default	15:51:47.303613-0500	RedLemon	Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:47.304274-0500	RedLemon	Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> now using Connection 3
-default	15:51:47.304708-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> summary for task success {transaction_duration_ms=76, response_status=200, connection=13, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=54, response_duration_ms=5, request_bytes=41, response_bytes=117928, cache_hit=false}
-default	15:51:47.305017-0500	RedLemon	Task <24312FD9-3123-4049-B640-CFC5DA77C0B1>.<156> finished successfully
-default	15:51:47.310826-0500	RedLemon	⚠️ Lobby: Failed to poll participants: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/room_participants?room_id=eq.BPWN&select=*, NSErrorFailingURLKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/room_participants?room_id=eq.BPWN&select=*, _NSURLErrorRelatedURLSessionTaskErrorKey=(
-    "LocalDataTask <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157>"
-), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157>, NSLocalizedDescription=cancelled}
-default	15:51:47.311445-0500	RedLemon	✅ Background art loaded successfully
-default	15:51:47.313522-0500	RedLemon	Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> done using Connection 3
-default	15:51:47.315735-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> sent request, body N 0
-default	15:51:47.334568-0500	RedLemon	0x7fbf93a15298 ID=112 Task <93B18897-D6F5-46CF-9F40-EC0BE726F2E5>.<157> sent request, body N 0
-default	15:51:47.348689-0500	RedLemon	Task <087EA0B8-4D62-4F20-A5E2-324E1E357CE2>.<158> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:47.348783-0500	RedLemon	Task <C5C2AD22-6AA4-4A1B-9408-D9359B55AF50>.<160> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:47.348778-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:47.348977-0500	RedLemon	Task <DE92242A-ACFE-48CD-8572-C9F3018789A6>.<161> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:47.350969-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [93DF7C6E-FDF3-4CF8-B91C-B3D792879559] (reporting strategy default)> on Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> was not selected for reporting
-default	15:51:47.350627-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A2B6435F-ECF3-40C8-A670-599407790D37] (reporting strategy default)> on Task <087EA0B8-4D62-4F20-A5E2-324E1E357CE2>.<158> was not selected for reporting
-default	15:51:47.351695-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E03985FE-51FC-451A-8DCE-59B67BDDE394] (reporting strategy default)> on Task <DE92242A-ACFE-48CD-8572-C9F3018789A6>.<161> was not selected for reporting
-default	15:51:47.352139-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [543A519D-020E-4570-911C-47C80819D8EC] (reporting strategy default)> on Task <C5C2AD22-6AA4-4A1B-9408-D9359B55AF50>.<160> was not selected for reporting
-default	15:51:47.361661-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:47.361989-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	15:51:47.362489-0500	RedLemon	Connection 14: enabling TLS
-default	15:51:47.362531-0500	RedLemon	Connection 14: starting, TC(0x0)
-default	15:51:47.362587-0500	RedLemon	[C14 F8A00166-F956-4425-912D-5C032E250652 Hostname#cc2f46d4:443 quic-connection, url hash: ccdffc4c, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:47.362683-0500	RedLemon	[C14 Hostname#cc2f46d4:443 initial path ((null))] event: path:start @0.000s
-default	15:51:47.364073-0500	RedLemon	[C14 Hostname#cc2f46d4:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: F5679C9E-E915-4785-808E-05D1ABD936C2
-default	15:51:47.364662-0500	RedLemon	[C14 Hostname#cc2f46d4:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.001s
-default	15:51:47.364723-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C14] reporting state preparing
-default	15:51:47.365154-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 initial path ((null))] event: path:start @0.002s
-default	15:51:47.365540-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.002s, uuid: 42E0FA53-A2E8-410D-8F0A-402002B77A13
-default	15:51:47.365977-0500	mDNSResponder	[R1757] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'f1sHzVcJqTCJl3J8hK/U6g=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:47.365748-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.003s
-default	15:51:47.365963-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> setting up Connection 14
-default	15:51:47.374762-0500	RedLemon	Task <DE92242A-ACFE-48CD-8572-C9F3018789A6>.<161> summary for task success {transaction_duration_ms=14, response_status=200, cache_hit=true}
-default	15:51:47.381454-0500	RedLemon	Task <DE92242A-ACFE-48CD-8572-C9F3018789A6>.<161> finished successfully
-default	15:51:47.381544-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.018s
-default	15:51:47.381886-0500	RedLemon	Task <087EA0B8-4D62-4F20-A5E2-324E1E357CE2>.<158> summary for task success {transaction_duration_ms=21, response_status=200, cache_hit=true}
-default	15:51:47.381957-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#59484bc1.443
-default	15:51:47.382107-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#e264860f.443
-default	15:51:47.382111-0500	RedLemon	Task <087EA0B8-4D62-4F20-A5E2-324E1E357CE2>.<158> finished successfully
-default	15:51:47.382306-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#cca10403:443
-default	15:51:47.382320-0500	RedLemon	Task <C5C2AD22-6AA4-4A1B-9408-D9359B55AF50>.<160> summary for task success {transaction_duration_ms=21, response_status=200, cache_hit=true}
-default	15:51:47.382461-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b0ea87ff.443
-default	15:51:47.382632-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0add3092:443
-default	15:51:47.382673-0500	RedLemon	Task <C5C2AD22-6AA4-4A1B-9408-D9359B55AF50>.<160> finished successfully
-default	15:51:47.382915-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#f6877565:443
-default	15:51:47.383122-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.020s
-default	15:51:47.383800-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 initial path ((null))] event: path:start @0.021s
-default	15:51:47.384339-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.021s, uuid: BDF2EB9B-9C9B-4556-83A0-05D18B62E937
-default	15:51:47.384565-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.021s
-default	15:51:47.385246-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.022s
-default	15:51:47.386209-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.023s
-default	15:51:47.386441-0500	RedLemon	tcp_output [C14.1.1:3] flags=[S] seq=2109340840, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2109340840
-default	15:51:47.387470-0500	RedLemon	Task <88F5353B-9028-4B6C-8739-8DD3582AA09B>.<162> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:47.387924-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [34BFF9EA-4718-43D7-9010-B13612BB2D64] (reporting strategy default)> on Task <88F5353B-9028-4B6C-8739-8DD3582AA09B>.<162> was not selected for reporting
-default	15:51:47.387902-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1897 target:8572 attributes:[
+default	16:11:16.963255-0500	runningboardd	Assertion 174-114-2103 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:16.995398-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 initial path ((null))] event: path:start @0.107s
+default	16:11:16.995829-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.107s, uuid: 298137E7-3149-48CC-A564-A969A402E32B
+default	16:11:16.996052-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.107s
+default	16:11:16.996875-0500	mDNSResponder	[R2246] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'EiiASYKDbDe6i732tOWGpw=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:16.998640-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.110s
+default	16:11:16.998842-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.110s
+default	16:11:16.999057-0500	RedLemon	nw_endpoint_resolver_update [C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#246ac99d.443
+default	16:11:16.999192-0500	RedLemon	nw_endpoint_resolver_update [C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#ec7b8fac:443
+default	16:11:16.999423-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.111s
+default	16:11:17.999722-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 initial path ((null))] event: path:start @0.111s
+default	16:11:17.000407-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.112s, uuid: 5EC3594B-11D7-4764-B02C-9A2A30D4B3BA
+default	16:11:17.000705-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.112s
+default	16:11:17.001405-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.113s
+default	16:11:17.002276-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.114s
+default	16:11:17.002516-0500	RedLemon	tcp_output [C15.2.1:3] flags=[S] seq=441641437, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=441641437
+default	16:11:17.003530-0500	RedLemon	tcp_output [C14.1.1:3] flags=[S] seq=3442409147, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3442409147
+default	16:11:17.003653-0500	RedLemon	tcp_input [C14.1.1:3] flags=[S.] seq=3897557883, ack=3442409148, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3442409147
+default	16:11:17.003760-0500	RedLemon	nw_flow_connected [C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:11:17.003994-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.139s
+default	16:11:17.004137-0500	RedLemon	[C14.1 Hostname#761bef13:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.139s
+default	16:11:17.004195-0500	RedLemon	[C14 Hostname#761bef13:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.139s
+default	16:11:17.006319-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C14.1.1:2][0x7f989b0c2310] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:17.006450-0500	RedLemon	boringssl_context_info_handler(2028) [C14.1.1:2][0x7f989b0c2310] Client handshake started
+default	16:11:17.006669-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS client enter_early_data
+default	16:11:17.006828-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS client read_server_hello
+default	16:11:17.021538-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:17.021909-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:17.022444-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_encrypted_extensions
+error	16:11:17.022627-0500	RedLemon	quic_packet_parser_inner [C15.1.1:2] [-0161acf0f01fa390db61b1f00a1f6046deec841f] SH fixed bit is zero
+default	16:11:17.023448-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:17.023858-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:17.023937-0500	RedLemon	boringssl_context_info_handler(2045) [C17:1][0x7f989b09d490] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:17.024420-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C17:1][0x7f989b09d490] Performing external trust evaluation
+default	16:11:17.024615-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C17:1][0x7f989b09d490] Asyncing for external verify block
+default	16:11:17.025233-0500	RedLemon	Connection 15: asked to evaluate TLS Trust
+default	16:11:17.027499-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> auth completion disp=1 cred=0x0
+default	16:11:17.028882-0500	RedLemon	tcp_input [C15.2.1:3] flags=[S.] seq=175586426, ack=441641438, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=441641437
+default	16:11:17.029025-0500	RedLemon	nw_flow_connected [C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:11:17.029261-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.141s
+default	16:11:17.030267-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.142s
+default	16:11:17.030349-0500	RedLemon	[C15 Hostname#6ba4ca83:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.142s
+default	16:11:17.032421-0500	RedLemon	quic_frame_write_CONNECTION_CLOSE [C15.1.1:2] [-0161acf0f01fa390db61b1f00a1f6046deec841f] sending CONNECTION_CLOSE, code NO_ERROR, type UNKNOWN, reason <null>
+default	16:11:17.032996-0500	RedLemon	[C17 F06AF3C5-A96A-4CCF-901A-A4F8F1C0766E IPv6#246ac99d.443 quic-connection, url hash: bef3e913, tls, definite, attribution: developer] cancel
+default	16:11:17.033080-0500	RedLemon	[C17 IPv6#246ac99d.443 quic-connection, url hash: bef3e913, tls, definite, attribution: developer] cancelled
+default	16:11:17.033960-0500	RedLemon	nw_flow_disconnected [C17 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.034030-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C17] reporting state cancelled
+default	16:11:17.034347-0500	RedLemon	nw_flow_disconnected [C17 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.034392-0500	RedLemon	nw_flow_disconnected [C15.1.1 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.035202-0500	RedLemon	nw_flow_disconnected [C17 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.035250-0500	RedLemon	nw_flow_disconnected [C15.1.1 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.035408-0500	RedLemon	nw_flow_disconnected [C15.1.1 IPv6#246ac99d.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:17.036324-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C15.2.1:2][0x7f989b0d1b00] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:17.036606-0500	RedLemon	boringssl_context_info_handler(2028) [C15.2.1:2][0x7f989b0d1b00] Client handshake started
+default	16:11:17.036856-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS client enter_early_data
+default	16:11:17.037009-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS client read_server_hello
+default	16:11:17.038106-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:17.038274-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:17.038475-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:11:17.038703-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:17.038746-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:17.038789-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:17.039129-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C14.1.1:2][0x7f989b0c2310] Performing external trust evaluation
+default	16:11:17.039449-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C14.1.1:2][0x7f989b0c2310] Asyncing for external verify block
+default	16:11:17.047914-0500	RedLemon	Connection 14: asked to evaluate TLS Trust
+default	16:11:17.049628-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> auth completion disp=1 cred=0x0
+default	16:11:17.052933-0500	RedLemon	Connection 15: TLS Trust result 0
+default	16:11:17.053137-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke(1604) [0x0] Cancelled during verify block
+default	16:11:17.064402-0500	RedLemon	Connection 14: TLS Trust result 0
+default	16:11:17.064579-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C14.1.1:2][0x7f989b0c2310] Returning from external verify block with result: true
+default	16:11:17.064702-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C14.1.1:2][0x7f989b0c2310] Certificate verification result: OK
+default	16:11:17.065458-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:17.065709-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:17.065758-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:17.065813-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:17.065853-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:17.066045-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS 1.3 client done
+default	16:11:17.066242-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS client finish_client_handshake
+default	16:11:17.066323-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7f989b0c2310] Client handshake state: TLS client done
+default	16:11:17.066376-0500	RedLemon	boringssl_context_info_handler(2034) [C14.1.1:2][0x7f989b0c2310] Client handshake done
+default	16:11:17.067631-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C14.1.1:2][0x7f989b0c2310] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(60ms) flight_time(31ms) rtt(31ms) write_stalls(0) read_stalls(6)]
+default	16:11:17.067832-0500	RedLemon	nw_flow_connected [C14.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:17.068264-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.203s
+default	16:11:17.068476-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C14] reporting state ready
+default	16:11:17.068826-0500	RedLemon	[C14.1 Hostname#761bef13:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.204s
+default	16:11:17.068911-0500	RedLemon	[C14 Hostname#761bef13:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.204s
+default	16:11:17.069152-0500	RedLemon	[C14.1.1 IPv6#8812c122.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.204s
+default	16:11:17.069567-0500	RedLemon	[C14.1 Hostname#761bef13:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.205s
+default	16:11:17.069657-0500	RedLemon	[C14 Hostname#761bef13:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.205s
+default	16:11:17.071110-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:17.071500-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:17.072139-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:11:17.074563-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:17.074649-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:17.074726-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:17.077505-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C15.2.1:2][0x7f989b0d1b00] Performing external trust evaluation
+default	16:11:17.077698-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C15.2.1:2][0x7f989b0d1b00] Asyncing for external verify block
+default	16:11:17.077857-0500	RedLemon	Connection 14: connected successfully
+default	16:11:17.077944-0500	RedLemon	Connection 14: TLS handshake complete
+default	16:11:17.078268-0500	RedLemon	Connection 14: ready C(N) E(N)
+default	16:11:17.080111-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> now using Connection 14
+default	16:11:17.080269-0500	RedLemon	Connection 14: received viability advisory(Y)
+default	16:11:17.080415-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> sent request, body N 0
+default	16:11:17.081554-0500	RedLemon	Connection 15: asked to evaluate TLS Trust
+default	16:11:17.081912-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> auth completion disp=1 cred=0x0
+default	16:11:17.091967-0500	RedLemon	Connection 15: TLS Trust result 0
+default	16:11:17.092020-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C15.2.1:2][0x7f989b0d1b00] Returning from external verify block with result: true
+default	16:11:17.092082-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C15.2.1:2][0x7f989b0d1b00] Certificate verification result: OK
+default	16:11:17.092437-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:17.092538-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:17.092561-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:17.092592-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:17.092617-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:17.092700-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS 1.3 client done
+default	16:11:17.092926-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS client finish_client_handshake
+default	16:11:17.092964-0500	RedLemon	boringssl_context_info_handler(2045) [C15.2.1:2][0x7f989b0d1b00] Client handshake state: TLS client done
+default	16:11:17.093067-0500	RedLemon	boringssl_context_info_handler(2034) [C15.2.1:2][0x7f989b0d1b00] Client handshake done
+default	16:11:17.093827-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C15.2.1:2][0x7f989b0d1b00] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(57ms) flight_time(38ms) rtt(35ms) write_stalls(0) read_stalls(4)]
+default	16:11:17.094034-0500	RedLemon	nw_flow_connected [C15.2.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:17.094475-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.206s
+default	16:11:17.094691-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C15] reporting state ready
+default	16:11:17.094863-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.206s
+default	16:11:17.094928-0500	RedLemon	[C15 Hostname#6ba4ca83:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.206s
+default	16:11:17.095144-0500	RedLemon	[C15.2.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.206s
+default	16:11:17.095293-0500	RedLemon	[C15.2 Hostname#6ba4ca83:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.207s
+default	16:11:17.095356-0500	RedLemon	[C15 Hostname#6ba4ca83:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.207s
+default	16:11:17.095490-0500	RedLemon	Connection 15: connected successfully
+default	16:11:17.095535-0500	RedLemon	Connection 15: TLS handshake complete
+default	16:11:17.095715-0500	RedLemon	Connection 15: ready C(N) E(N)
+default	16:11:17.096086-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> now using Connection 15
+default	16:11:17.096199-0500	RedLemon	Connection 15: received viability advisory(Y)
+default	16:11:17.096345-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> sent request, body N 0
+default	16:11:17.138056-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> received response, status 304 content U
+default	16:11:17.138165-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> done using Connection 15
+default	16:11:17.139715-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> summary for task success {transaction_duration_ms=279, response_status=304, connection=15, protocol="h2", domain_lookup_duration_ms=4, connect_duration_ms=92, secure_connection_duration_ms=57, private_relay=false, request_start_ms=235, request_duration_ms=0, response_start_ms=277, response_duration_ms=0, request_bytes=157, response_bytes=488, cache_hit=true}
+default	16:11:17.140027-0500	RedLemon	Task <EF36B1BD-9FDD-4EB4-A1A5-948CCCCAE62B>.<262> finished successfully
+default	16:11:17.276529-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> received response, status 200 content U
+default	16:11:17.507639-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> done using Connection 14
+default	16:11:17.508692-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> response ended
+default	16:11:17.509130-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> summary for task success {transaction_duration_ms=657, response_status=200, connection=14, protocol="h2", domain_lookup_duration_ms=37, connect_duration_ms=148, secure_connection_duration_ms=60, private_relay=false, request_start_ms=229, request_duration_ms=0, response_start_ms=425, response_duration_ms=232, request_bytes=569, response_bytes=6764, cache_hit=true}
+default	16:11:17.509547-0500	RedLemon	Task <85BA3DD4-6993-4AAF-9E19-53EB09856032>.<261> finished successfully
+default	16:11:17.977850-0500	RedLemon	[C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @1.082s
+default	16:11:17.978811-0500	mDNSResponder	[R2244] getaddrinfo stop -- hostname: <mask.hash: 'EiiASYKDbDe6i732tOWGpw=='>, client pid: 10440 (RedLemon)
+default	16:11:17.979324-0500	mDNSResponder	[R2246] getaddrinfo stop -- hostname: <mask.hash: 'EiiASYKDbDe6i732tOWGpw=='>, client pid: 10440 (RedLemon)
+default	16:11:17.980294-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#8812c122.443
+default	16:11:17.980798-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b105d3fd.443
+default	16:11:17.981010-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d23d9429:443
+default	16:11:17.981339-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#62f23059.443
+default	16:11:17.981477-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#33ec5d11:443
+default	16:11:17.981606-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0f6049ff:443
+default	16:11:17.981941-0500	RedLemon	[C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @1.086s
+default	16:11:17.986200-0500	mDNSResponder	[R2245] getaddrinfo stop -- hostname: <mask.hash: 'uoOTVPMZK1vyR7qH5s9S4Q=='>, client pid: 10440 (RedLemon)
+default	16:11:17.986476-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 initial path ((null))] event: path:start @1.091s
+default	16:11:17.987004-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.091s, uuid: 9A706333-2766-4E3D-8976-CE2DF3A6708A
+default	16:11:17.987241-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.091s
+default	16:11:17.988419-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.092s
+default	16:11:17.988913-0500	runningboardd	Invalidating assertion 174-10440-2102 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:17.989866-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.094s
+default	16:11:17.990885-0500	RedLemon	Connection 16: will be coalesced
+default	16:11:17.991344-0500	RedLemon	TIC Coalescing TCP Conn [16] may go into <private>
+default	16:11:17.992173-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.1:3]
+	[C1FC69FF-97A1-4442-ABD1-56ADDB6ECDAF <private>:60096<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:17.992506-0500	RedLemon	[C16.1.1 IPv6#8812c122.443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.097s, error Operation canceled
+default	16:11:17.993614-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b105d3fd.443
+default	16:11:17.993763-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#d23d9429:443
+default	16:11:17.993889-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#62f23059.443
+default	16:11:17.994009-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#33ec5d11:443
+default	16:11:17.994127-0500	RedLemon	nw_endpoint_resolver_update [C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0f6049ff:443
+default	16:11:17.994348-0500	RedLemon	[C16.1 Hostname#de24f77b:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @1.098s
+default	16:11:17.995143-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> auth completion disp=1 cred=0x0
+default	16:11:17.995641-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 initial path ((null))] event: path:start @1.100s
+default	16:11:17.996483-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.101s, uuid: 79F7C095-6973-46D2-B1B0-097EED3BE9A5
+default	16:11:17.996712-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.101s
+default	16:11:17.997361-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.101s
+default	16:11:17.998775-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.103s
+default	16:11:17.998999-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.7:3]
+	[1EDE15D9-201F-4E47-8983-44B913260915 <private>:60097<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:17.999377-0500	RedLemon	[C16.1.7 IPv6#b105d3fd.443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.103s, error Operation canceled
+default	16:11:18.999841-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 initial path ((null))] event: path:start @1.104s
+default	16:11:18.000428-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.104s, uuid: 81D9A86B-A7B1-4F48-BF04-1E4E525406AC
+default	16:11:18.000679-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.105s
+default	16:11:18.001471-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.106s
+default	16:11:18.002383-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.106s
+default	16:11:18.002748-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.8:3]
+	[19340DF7-0BDF-48DC-908D-177F72C397AB <private>:65019<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:18.003428-0500	RedLemon	[C16.1.8 IPv4#d23d9429:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.107s, error Operation canceled
+default	16:11:18.004987-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 initial path ((null))] event: path:start @1.109s
+default	16:11:18.005546-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.110s, uuid: EFF55A63-78B0-4E9F-AC84-F10FE26170BC
+default	16:11:18.005887-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.110s
+default	16:11:18.007460-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.112s
+default	16:11:18.008568-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.113s
+default	16:11:18.008740-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.9:3]
+	[D47AFCA6-247E-41A1-89DF-7F656B29CA96 <private>:60098<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:18.009996-0500	RedLemon	[C16.1.9 IPv6#62f23059.443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.114s, error Operation canceled
+default	16:11:18.010572-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 initial path ((null))] event: path:start @1.115s
+default	16:11:18.011343-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.115s, uuid: 0672C710-5AC9-4C13-B86E-9906B4454C30
+default	16:11:18.011573-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.116s
+default	16:11:18.013087-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.117s
+default	16:11:18.013951-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.118s
+default	16:11:18.014122-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.10:3]
+	[7214E8D7-CADD-4077-B10D-0C9D02C95585 <private>:65020<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:18.014668-0500	RedLemon	[C16.1.10 IPv4#33ec5d11:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.119s, error Operation canceled
+default	16:11:18.016441-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 initial path ((null))] event: path:start @1.121s
+default	16:11:18.017009-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @1.121s, uuid: F7527580-2F91-4DD3-8276-F0F32A911357
+default	16:11:18.017522-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @1.122s
+default	16:11:18.018518-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @1.123s
+default	16:11:18.019484-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @1.124s
+default	16:11:18.020040-0500	RedLemon	nw_protocol_tcp_log_summary [C16.1.11:3]
+	[20771B66-0E1E-48B4-90A5-82A30C713C1C <private>:65021<-><private>:443]
+	Init: 1, Conn_Time: 0.000ms, SYNs: 0, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: invalid, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
+	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
+default	16:11:18.020678-0500	RedLemon	[C16.1.11 IPv4#0f6049ff:443 failed channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:failed_connect @1.125s, error Operation canceled
+default	16:11:18.020900-0500	RedLemon	[C16.1 Hostname#de24f77b:443 failed resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:children_failed @1.125s
+default	16:11:18.021349-0500	RedLemon	[C16 Hostname#de24f77b:443 failed transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:children_failed @1.125s
+default	16:11:18.021410-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C16] reporting state failed error Operation canceled
+default	16:11:18.034455-0500	RedLemon	Connection 16: TLS Trust result 0
+default	16:11:18.034753-0500	RedLemon	Connection 16: coalesced with <private>
+default	16:11:18.034802-0500	RedLemon	Connection 16: TLS handshake complete
+error	16:11:18.034881-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+error	16:11:18.034925-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+error	16:11:18.035023-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+error	16:11:18.035105-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+error	16:11:18.035146-0500	RedLemon	nw_connection_copy_connected_local_endpoint [C16] Client called nw_connection_copy_connected_local_endpoint on unconnected nw_connection
+error	16:11:18.035223-0500	RedLemon	nw_connection_copy_connected_remote_endpoint [C16] Client called nw_connection_copy_connected_remote_endpoint on unconnected nw_connection
+error	16:11:18.035262-0500	RedLemon	nw_connection_copy_connected_path [C16] Client called nw_connection_copy_connected_path on unconnected nw_connection
+default	16:11:18.035927-0500	RedLemon	Connection 16: ready C(N) E(N)
+error	16:11:18.035969-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+default	16:11:18.036204-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> can retry(Y) with reason(7) for error [4:-2200]
+error	16:11:18.036458-0500	RedLemon	nw_connection_copy_protocol_metadata_internal [C16] Client called nw_connection_copy_protocol_metadata_internal on unconnected nw_connection
+error	16:11:18.037010-0500	RedLemon	nw_connection_copy_metadata [C16] Client called nw_connection_copy_metadata on unconnected nw_connection
+default	16:11:18.037127-0500	RedLemon	Connection 16: cleaning up
+default	16:11:18.037194-0500	RedLemon	[C16 FC95DDB0-96CB-4C47-848B-3D81FE3644A7 Hostname#de24f77b:443 quic-connection, url hash: 641d6815, definite, attribution: developer] cancel
+default	16:11:18.037256-0500	RedLemon	[C16 Hostname#de24f77b:443 quic-connection, url hash: 641d6815, definite, attribution: developer] cancelled
+default	16:11:18.039099-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C16] reporting state cancelled error Operation canceled
+default	16:11:18.040292-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> now using Connection 14
+default	16:11:18.040635-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> sent request, body N 0
+default	16:11:18.103305-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:18.103394-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:18.103482-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:18.108556-0500	runningboardd	Invalidating assertion 174-114-2103 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:18.227998-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:18.228091-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:18.228178-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:18.259622-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> received response, status 200 content U
+default	16:11:18.497474-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> done using Connection 14
+default	16:11:18.498007-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> response ended
+default	16:11:18.498222-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> summary for task success {transaction_duration_ms=1622, response_status=200, connection=14, reused=1, request_start_ms=1164, request_duration_ms=0, response_start_ms=1383, response_duration_ms=238, request_bytes=69, response_bytes=6267, cache_hit=true}
+default	16:11:18.498507-0500	RedLemon	Task <5BCE1112-A5F2-42CD-B347-DB2F584C24ED>.<263> finished successfully
+default	16:11:18.501477-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2104 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:47.388427-0500	runningboardd	Assertion 174-8572-1897 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:47.390284-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:47.390466-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:47.391501-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:47.394452-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1898 target:8572 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	15:51:47.394797-0500	RedLemon	Task <88F5353B-9028-4B6C-8739-8DD3582AA09B>.<162> summary for task success {transaction_duration_ms=6, response_status=200, cache_hit=true}
-default	15:51:47.395020-0500	RedLemon	Task <88F5353B-9028-4B6C-8739-8DD3582AA09B>.<162> finished successfully
-default	15:51:47.399627-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.036s
-default	15:51:47.400161-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#e264860f.443
-default	15:51:47.400335-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#cca10403:443
-default	15:51:47.400492-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b0ea87ff.443
-default	15:51:47.400643-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0add3092:443
-default	15:51:47.400785-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#f6877565:443
-default	15:51:47.400994-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.038s
-default	15:51:47.406995-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#e264860f.443
-default	15:51:47.407167-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b0ea87ff.443
-default	15:51:47.407337-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#cca10403:443
-default	15:51:47.407501-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#f6877565:443
-default	15:51:47.407659-0500	RedLemon	nw_endpoint_resolver_update [C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#0add3092:443
-default	15:51:47.407880-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.045s
-default	15:51:47.407946-0500	RedLemon	tcp_input [C14.1.1:3] flags=[S.] seq=1102649756, ack=2109340841, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2109340840
-default	15:51:47.408041-0500	RedLemon	nw_flow_connected [C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	15:51:47.408411-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.045s
-default	15:51:47.408917-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.046s
-default	15:51:47.409003-0500	RedLemon	[C14 Hostname#cc2f46d4:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.046s
-default	15:51:47.409879-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C14.1.1:2][0x7fbf939c4f10] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:47.410013-0500	RedLemon	boringssl_context_info_handler(2028) [C14.1.1:2][0x7fbf939c4f10] Client handshake started
-default	15:51:47.410275-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS client enter_early_data
-default	15:51:47.410424-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS client read_server_hello
-default	15:51:47.411875-0500	runningboardd	Assertion 174-114-1898 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:47.406188-0500	mDNSResponder	[R1757] getaddrinfo stop -- hostname: <mask.hash: 'f1sHzVcJqTCJl3J8hK/U6g=='>, client pid: 8572 (RedLemon)
-default	15:51:47.413480-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:47.413533-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:47.413587-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:47.432977-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:47.433073-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:47.433680-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	15:51:47.436526-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:47.436602-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:47.436676-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:47.437139-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C14.1.1:2][0x7fbf939c4f10] Performing external trust evaluation
-default	15:51:47.437323-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C14.1.1:2][0x7fbf939c4f10] Asyncing for external verify block
-default	15:51:47.437556-0500	RedLemon	Connection 14: asked to evaluate TLS Trust
-default	15:51:47.437963-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> auth completion disp=1 cred=0x0
-default	15:51:47.448157-0500	RedLemon	Connection 14: TLS Trust result 0
-default	15:51:47.448225-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C14.1.1:2][0x7fbf939c4f10] Returning from external verify block with result: true
-default	15:51:47.448314-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C14.1.1:2][0x7fbf939c4f10] Certificate verification result: OK
-default	15:51:47.448720-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:47.448805-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:47.448826-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:47.448844-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:47.448863-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:47.448962-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS 1.3 client done
-default	15:51:47.449361-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS client finish_client_handshake
-default	15:51:47.449482-0500	RedLemon	boringssl_context_info_handler(2045) [C14.1.1:2][0x7fbf939c4f10] Client handshake state: TLS client done
-default	15:51:47.449584-0500	RedLemon	boringssl_context_info_handler(2034) [C14.1.1:2][0x7fbf939c4f10] Client handshake done
-default	15:51:47.450380-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C14.1.1:2][0x7fbf939c4f10] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(40ms) flight_time(25ms) rtt(22ms) write_stalls(0) read_stalls(7)]
-default	15:51:47.450571-0500	RedLemon	nw_flow_connected [C14.1.1 IPv6#59484bc1.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:47.451159-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.088s
-default	15:51:47.451312-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C14] reporting state ready
-default	15:51:47.451466-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.088s
-default	15:51:47.451613-0500	RedLemon	[C14 Hostname#cc2f46d4:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.088s
-default	15:51:47.451847-0500	RedLemon	[C14.1.1 IPv6#59484bc1.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.089s
-default	15:51:47.452003-0500	RedLemon	[C14.1 Hostname#cc2f46d4:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.089s
-default	15:51:47.452068-0500	RedLemon	[C14 Hostname#cc2f46d4:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.089s
-default	15:51:47.452398-0500	RedLemon	Connection 14: connected successfully
-default	15:51:47.452464-0500	RedLemon	Connection 14: TLS handshake complete
-default	15:51:47.452763-0500	RedLemon	Connection 14: ready C(N) E(N)
-default	15:51:47.453344-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> now using Connection 14
-default	15:51:47.453460-0500	RedLemon	Connection 14: received viability advisory(Y)
-default	15:51:47.453591-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> sent request, body N 0
-default	15:51:47.655961-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> received response, status 200 content U
-default	15:51:47.871942-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> done using Connection 14
-default	15:51:47.872437-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> response ended
-default	15:51:47.872648-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> summary for task success {transaction_duration_ms=515, response_status=200, connection=14, protocol="h2", domain_lookup_duration_ms=17, connect_duration_ms=65, secure_connection_duration_ms=40, private_relay=false, request_start_ms=96, request_duration_ms=0, response_start_ms=298, response_duration_ms=216, request_bytes=569, response_bytes=6939, cache_hit=true}
-default	15:51:47.872868-0500	RedLemon	Task <3627556D-9A39-48BF-B6A0-4074D65696F2>.<159> finished successfully
-default	15:51:47.907042-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 207
-default	15:51:47.907270-0500	RedLemon	   INPUT[0]: Frankenstein.2025.2160p.NF.WEB-DL.HDR.MULTi.DDP5.1.Atmos.H265-BEN.THE.MEN
-👤 542 💾 36.27 GB ⚙️ ilCorSaRoNeRo
-Multi Audio / 🇬🇧 / 🇷🇺 / 🇮🇹 / 🇵🇹 / 🇪🇸 / 🇫🇷 / 🇩🇪 / 🇮🇳 / 🇵🇱 / 🇺🇦 | 2160p | torrentio
-default	15:51:47.907406-0500	RedLemon	   INPUT[1]: Frankenstein.2025.4K.HDR.DV.2160p.WEBDL Ita Eng x265-NAHOM
+default	16:11:18.501960-0500	runningboardd	Assertion 174-10440-2104 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:18.503727-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:18.503776-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:18.503819-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:18.504008-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 206
+default	16:11:18.504267-0500	RedLemon	   INPUT[0]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
+default	16:11:18.504724-0500	RedLemon	   INPUT[1]: ww UIndex org   -    Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV H 265-SNAKE | 1080p | zilean
+default	16:11:18.505017-0500	RedLemon	   INPUT[2]: Frankenstein 2025 WEB-DL 1080p-Dual-Lat mkv | 1080p | zilean
+default	16:11:18.505306-0500	RedLemon	   INPUT[3]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean
+default	16:11:18.505517-0500	RedLemon	   INPUT[4]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean
+default	16:11:18.505692-0500	RedLemon	   INPUT[5]: Frankenstein 2025 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean
+default	16:11:18.505867-0500	RedLemon	   INPUT[6]: Frankenstein 2004 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean
+default	16:11:18.506041-0500	RedLemon	   INPUT[7]: Frankenstein 2025 Ger Eng EAC3 Atmos DL 2160p WEB DV HDR h265-VECTOR mkv | 2160p | zilean
+default	16:11:18.506211-0500	RedLemon	   INPUT[8]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX mkv | 1080p | zilean
+default	16:11:18.506381-0500	RedLemon	   INPUT[9]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos HDR H 265-SNAKE mkv | 1080p | zilean
+default	16:11:18.506546-0500	RedLemon	   INPUT[10]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR Hybrid H265 DUAL-AOC mkv | 2160p | zilean
+default	16:11:18.506792-0500	RedLemon	   INPUT[11]: Frankenstein 2025 [10Bit SDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean
+default	16:11:18.507201-0500	RedLemon	   INPUT[12]: Frankenstein 2025 MULTi 1080p NF WEB-DL H264 DDP5 1 Atmos-K83 mkv | 1080p | zilean
+default	16:11:18.507407-0500	RedLemon	   INPUT[13]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean
+default	16:11:18.507566-0500	RedLemon	   INPUT[14]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean
+default	16:11:18.507725-0500	RedLemon	   INPUT[15]: Frankenstein 2025 2160p NF WEB-DL DV P5 ENG LATINO DDP5 1 Atmos H265 MP4-BEN THE MEN | 2160p | zilean
+default	16:11:18.508047-0500	RedLemon	   INPUT[16]: Frankenstein (2025) 2160p SDR NETFLiX WEBRiP x264 24-bit WAV-CREATiVE24 mkv | 2160p | zilean
+default	16:11:18.508222-0500	RedLemon	   INPUT[17]: Frankenstein 2025 MULTi 2160p NF WEB SDR H265-THESYNDiCATE mkv | 2160p | zilean
+default	16:11:18.508368-0500	RedLemon	   INPUT[18]: Frankenstein 2025 MULTi 1080p WEB x264-TFA mkv | 1080p | zilean
+default	16:11:18.508554-0500	RedLemon	   INPUT[19]: Frankenstein 2025 MULTi 1080p WEB H265-TFA mkv | 1080p | zilean
+default	16:11:18.508716-0500	RedLemon	   INPUT[20]: Frankenstein 2025 2160p Hybrid MULTI WEB-DL DV HDR H265-AOC mkv | 2160p | zilean
+default	16:11:18.508867-0500	RedLemon	   INPUT[21]: Frankenstein 1994 [10Bit SDR] [2160p BluRay H265 AC3-AS76-FT] [Lektor PL] [Alusia] | 2160p | zilean
+default	16:11:18.509511-0500	RedLemon	   INPUT[22]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264 DUAL-BiOMA mkv | 1080p | zilean
+default	16:11:18.509711-0500	RedLemon	   INPUT[23]: Frankenstein 2025 MULTi 1080p NF WEB-DL x264-OzW | 1080p | zilean
+default	16:11:18.509875-0500	RedLemon	   INPUT[24]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean
+default	16:11:18.510036-0500	RedLemon	   INPUT[25]: Frankenstein 2025 2160p NF WEB-DL HDR MULTi DDP5 1 Atmos H265-BEN THE MEN | 2160p | zilean
+default	16:11:18.510198-0500	RedLemon	   INPUT[26]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
+default	16:11:18.512737-0500	RedLemon	   INPUT[27]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX mkv | 1080p | zilean
+default	16:11:18.513331-0500	RedLemon	   INPUT[28]: Frankenstein 2025 MULTi 2160p NF WEB-DL HEVC HDR AtmosDoVi H265-RX mkv | 2160p | zilean
+default	16:11:18.513511-0500	RedLemon	   INPUT[29]: Frankenstein 2025 MULTi 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-OzW | 2160p | zilean
+default	16:11:18.513662-0500	RedLemon	   INPUT[30]: Frankenstein 2025 [10Bit DV-HDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean
+default	16:11:18.513880-0500	RedLemon	   INPUT[31]: Frankenstein 2015 720p BluRay x264-[YTS LT] mp4 | 720p | zilean
+default	16:11:18.514106-0500	RedLemon	   INPUT[32]: frankenstein 1931 1080p bluray x264-hd4u mkv | 1080p | zilean
+default	16:11:18.514262-0500	RedLemon	   INPUT[33]: Frankenstein 1994 UHD BluRay 2160p DTS-HD MA 5 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
+default	16:11:18.514415-0500	RedLemon	   INPUT[34]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [720p] [WEBRip] [YTS MX] | 720p | zilean
+default	16:11:18.514563-0500	RedLemon	   INPUT[35]: Frankenstein (2011) [1080p] [WEBRip] [YTS MX] | 1080p | zilean
+default	16:11:18.514710-0500	RedLemon	   INPUT[36]: Frankenstein 1931 4K HDR 2160p BDRemux Ita Eng x265-NAHOM mkv | 2160p | zilean
+default	16:11:18.514858-0500	RedLemon	   INPUT[37]: Frankenstein - 2007 - DVDRip - A KARMADrome KvCD by The Poison Dwarf bin | Unknown | zilean
+default	16:11:18.515305-0500	RedLemon	   INPUT[38]: Frankenstein 1931 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
+default	16:11:18.515476-0500	RedLemon	   INPUT[39]: Frankenstein (2015) [BluRay] [1080p] [YTS LT] | 1080p | zilean
+default	16:11:18.515623-0500	RedLemon	   INPUT[40]: FRANKENSTEIN mkv | Unknown | zilean
+default	16:11:18.515768-0500	RedLemon	   INPUT[41]: Frankenstein 2004 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
+default	16:11:18.515988-0500	RedLemon	   INPUT[42]: Frankenstein 1931 2160p BluRay REMUX HEVC DTS-HD MA 2 0-FGT mkv | 2160p | zilean
+default	16:11:18.518019-0500	RedLemon	   INPUT[43]: Frankenstein 1931 2160p UHD BluRay x265-B0MBARDiERS | 2160p | zilean
+default	16:11:18.519150-0500	RedLemon	   INPUT[44]: Frankenstein (1931) (1080p BluRay x265 HEVC 10bit AAC 2 0 Tigole) | 1080p | zilean
+default	16:11:18.519669-0500	RedLemon	   INPUT[45]: Frankenstein 2015 BDRip 1080p ELEKTRI4KA UNIONGANG mkv | 1080p | zilean
+default	16:11:18.519864-0500	RedLemon	   INPUT[46]: Frankenstein 1970 1958 1080p BluRay x264 AAC-[YTS MX] mp4 | 1080p | zilean
+default	16:11:18.520145-0500	RedLemon	   INPUT[47]: Frankenstein 1931 4K HDR 2160p BDRip Ita Eng Ger x265-NAHOM mkv | 2160p | zilean
+default	16:11:18.520330-0500	RedLemon	   INPUT[48]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [1080p] [WEBRip] [YTS MX] | 1080p | zilean
+default	16:11:18.520492-0500	RedLemon	   INPUT[49]: Frankenstein (1931) 1080p AC3 2ch x264 BDRip LatTeam mkv | 1080p | zilean
+default	16:11:18.520658-0500	RedLemon	   INPUT[50]: Frankenstein 1931 1080p BluRay H264 AAC-RARBG | 1080p | zilean
+default	16:11:18.520823-0500	RedLemon	   INPUT[51]: Frankenstein 1931 Restored 1080p BluRay x265 hevc 10bit AAC 2 0 commentary-HeVK mkv | 1080p | zilean
+default	16:11:18.523161-0500	RedLemon	   INPUT[52]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DDP2 0-RARBG mkv | 2160p | zilean
+default	16:11:18.523379-0500	RedLemon	   INPUT[53]: Frankenstein 2015 1080p WEBRip AAC x264-ETRG mp4 | 1080p | zilean
+default	16:11:18.523539-0500	RedLemon	   INPUT[54]: Frankenstein 1931 Restored Bluray 1080p DTS-HD-2 0 x264-Grym mkv | 1080p | zilean
+default	16:11:18.523698-0500	RedLemon	   INPUT[55]: Frankenstein 1931 RESTORED 1080p BluRay REMUX-DDB | 1080p | zilean
+default	16:11:18.523854-0500	RedLemon	   INPUT[56]: Frankenstein 1931 1080p BluRay x265-RARBG | 1080p | zilean
+default	16:11:18.524000-0500	RedLemon	   INPUT[57]: Frankenstein (1931 - James Whale) [BDRip720p Ita-Eng] mkv | 720p | zilean
+default	16:11:18.524147-0500	RedLemon	   INPUT[58]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DTS-HD MA 2 0-RARBG mkv | 2160p | zilean
+default	16:11:18.524291-0500	RedLemon	   INPUT[59]: Frankenstein 1994 2160p UHD Blu-ray Remux HEVC DV DTS-HD MA 5 1-HDT mkv | 2160p | zilean
+default	16:11:18.524437-0500	RedLemon	   INPUT[60]: Frankenstein 1931 [BDRip-1080p-MultiLang-MultiSub-Chapters][RiP By MaX] mkv | 1080p | zilean
+default	16:11:18.524586-0500	RedLemon	   INPUT[61]: Frankenstein_remux_1931 mkv | Unknown | zilean
+default	16:11:18.524841-0500	RedLemon	   INPUT[62]: Frankenstein 1910 WEBRIP 576p x264 RUS liosaa mkv | Unknown | zilean
+default	16:11:18.525010-0500	RedLemon	   INPUT[63]: Frankenstein (1931) (2160p BluRay x265 10bit HDR Tigole) mkv | 2160p | zilean
+default	16:11:18.525157-0500	RedLemon	   INPUT[64]: Frankenstein 2015 1080p BluRay AVC AC-3 DD 5 1 x264-PANAM | 1080p | zilean
+default	16:11:18.525743-0500	RedLemon	   INPUT[65]: Frankenstein 1970 1958 1080p BluRay x265-RARBG mp4 | 1080p | zilean
+default	16:11:18.526021-0500	RedLemon	   INPUT[66]: I, Frankenstein 2014 1080p AMZN WEB-DL DDP5 1 H264-GPRS mkv | 1080p | zilean
+default	16:11:18.526226-0500	RedLemon	   INPUT[67]: I Frankenstein 2014 1080p BluRay x265-RARBG | 1080p | zilean
+default	16:11:18.526376-0500	RedLemon	   INPUT[68]: I Frankenstein 2014 1080p BluRay x264-SPARKS mkv | 1080p | zilean
+default	16:11:18.528740-0500	RedLemon	   INPUT[69]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 mkv | 1080p | zilean
+default	16:11:18.529485-0500	RedLemon	   INPUT[70]: I Frankenstein 2014 1080p BRRip H264 AAC-RARBG | 1080p | zilean
+default	16:11:18.529786-0500	RedLemon	   INPUT[71]: I Frankenstein 2014 1080p BRRip x264 AAC-JYK mp4 | 1080p | zilean
+default	16:11:18.530100-0500	RedLemon	   INPUT[72]: I, Frankenstein 2014 1080p BluRay x264 YIFY mp4 | 1080p | zilean
+default	16:11:18.530277-0500	RedLemon	   INPUT[73]: I Frankenstein (2014) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean
+default	16:11:18.530436-0500	RedLemon	   INPUT[74]: I, Frankenstein (2014) 1080p BDRip x264 English AC3 5 1 - MeGUiL | 1080p | zilean
+default	16:11:18.530582-0500	RedLemon	   INPUT[75]: I Frankenstein 2014 1080p BluRay x265 10bit-z97 mkv | 1080p | zilean
+default	16:11:18.531347-0500	RedLemon	   INPUT[76]: I, Frankenstein (2014) 1080p 10bit Bluray x265 HEVC [Hindi 2 0 + DD 5 1 English] ESubs ~ TombDoc mkv | 1080p | zilean
+default	16:11:18.531532-0500	RedLemon	   INPUT[77]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 | 1080p | zilean
+default	16:11:18.531989-0500	RedLemon	   INPUT[78]: I Frankenstein (2014) VF2-ENG AC3 BluRay 1080p x264 GHT | 1080p | zilean
+default	16:11:18.532176-0500	RedLemon	   INPUT[79]: I Frankenstein 2014 JPN BluRay Remux 1080p AVC Atmos 7 1-decibeL | 1080p | zilean
+default	16:11:18.532636-0500	RedLemon	   INPUT[80]: i frankenstein 2014 1080p bluray x264-sparks mkv | 1080p | zilean
+default	16:11:18.532784-0500	RedLemon	   INPUT[81]: Frankenstein.2025.4K.HDR.DV.2160p.WEBDL Ita Eng x265-NAHOM
 👤 151 💾 22 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	15:51:47.907715-0500	RedLemon	   INPUT[2]: Frankenstein.2025.2160p.NF.WEB-DL.DV.P5.ENG.LATINO.DDP5.1.Atmos.MP4.H265-BTM
-👤 109 💾 22.86 GB ⚙️ ThePirateBay
-Multi Audio / 🇬🇧 / 🇲🇽 | 2160p | torrentio
-default	15:51:47.907877-0500	RedLemon	   INPUT[3]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p от Scarabey | 4K | HDR | Dolby Vision | D | Red Head Sound
+default	16:11:18.532928-0500	RedLemon	   INPUT[82]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p от Scarabey | 4K | HDR | Dolby Vision | D | Red Head Sound
 👤 58 💾 21.86 GB ⚙️ Rutor
 🇷🇺 | 2160p | torrentio
-default	15:51:47.908008-0500	RedLemon	   INPUT[4]: Frankenstein (2025) 2160p H265 WebDl Rip 10 bit DV HDR10 ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
+default	16:11:18.533757-0500	RedLemon	   INPUT[83]: Frankenstein (2025) 2160p H265 WebDl Rip 10 bit DV HDR10 ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
 👤 43 💾 5.76 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	15:51:47.908130-0500	RedLemon	   INPUT[5]: Frankenstein.2025.MULTi.2160p.NF.WEB.DV.HDR.H265-THESYNDiCATE.mkv
+default	16:11:18.533978-0500	RedLemon	   INPUT[84]: Frankenstein.2025.MULTi.2160p.NF.WEB.DV.HDR.H265-THESYNDiCATE.mkv
 👤 21 💾 21.86 GB ⚙️ Torrent9
 Multi Audio / 🇫🇷 | 2160p | torrentio
-default	15:51:47.908449-0500	RedLemon	   INPUT[6]: Frankenstein (2025) [MULTi] [2160p] [NF] [WEB-DL] [HDR] [H265] [DDP5.1.Atmos-K83] [Lektor PL i Napisy PL]
-👤 18 💾 21.81 GB ⚙️ BestTorrents
-Multi Audio / 🇬🇧 / 🇵🇱 | 2160p | torrentio
-default	15:51:47.908575-0500	RedLemon	   INPUT[7]: Frankenstein 2025 WEB DL 2160p HDR10 DV HEVC DDP Atmos 5 1 x265 E
+default	16:11:18.536236-0500	RedLemon	   INPUT[85]: Frankenstein 2025 WEB DL 2160p HDR10 DV HEVC DDP Atmos 5 1 x265 E
 👤 10 💾 17.17 GB ⚙️ TorrentGalaxy | 2160p | torrentio
-default	15:51:47.918873-0500	RedLemon	   INPUT[8]: Frankenstein (2025) [4k 2160p][Esp]
+default	16:11:18.536385-0500	RedLemon	   INPUT[86]: Frankenstein (2025) [4k 2160p][Esp]
 👤 115 💾 21.99 GB ⚙️ Wolfmax4k
 🇪🇸 | 2160p | torrentio
-default	15:51:47.919019-0500	RedLemon	   INPUT[9]: Frankenstein 2025 2160p WEBRip
+default	16:11:18.536504-0500	RedLemon	   INPUT[87]: Frankenstein 2025 2160p WEBRip
 👤 100 💾 6.81 GB ⚙️ YTS | 2160p | torrentio
-default	15:51:47.919158-0500	RedLemon	   INPUT[10]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p | 4K | SDR | D | Videofilm Int
+default	16:11:18.536639-0500	RedLemon	   INPUT[88]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p | 4K | SDR | D | Videofilm Int
 👤 23 💾 15.59 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 / 🇺🇦 | 2160p | torrentio
-default	15:51:47.919291-0500	RedLemon	   INPUT[11]: Frankenstein (2025) 2160p H265 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
+default	16:11:18.536770-0500	RedLemon	   INPUT[89]: Frankenstein (2025) 2160p H265 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
 👤 12 💾 22 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	15:51:47.955964-0500	RedLemon	   INPUT[12]: Frankenstein 2025 NF WEBRip SDR 10Bit 1260p DDP5.1 Atmos HEVC-3Li
+default	16:11:18.536889-0500	RedLemon	   INPUT[90]: Frankenstein 2025 NF WEBRip SDR 10Bit 1260p DDP5.1 Atmos HEVC-3Li
 👤 15 💾 7.9 GB ⚙️ 1337x | Unknown | torrentio
-default	15:51:47.956137-0500	RedLemon	   INPUT[13]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.DV.H.265-SNAKE
-👤 35 💾 3 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.956260-0500	RedLemon	   INPUT[14]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV HDR H 265-WADU
+default	16:11:18.537007-0500	RedLemon	   INPUT[91]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV HDR H 265-WADU
 👤 15 💾 4.24 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.956377-0500	RedLemon	   INPUT[15]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.HDR.H.265-SNAKE
-👤 12 💾 4.19 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.956496-0500	RedLemon	   INPUT[16]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от EniaHD | D
+default	16:11:18.537209-0500	RedLemon	   INPUT[92]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от EniaHD | D
 👤 4549 💾 7.48 GB ⚙️ Rutor | 1080p | torrentio
-default	15:51:47.956614-0500	RedLemon	   INPUT[17]: Frankenstein.2025.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir
+default	16:11:18.537332-0500	RedLemon	   INPUT[93]: Frankenstein.2025.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir
 👤 1394 💾 1.93 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.956742-0500	RedLemon	   INPUT[18]: Frankenstein.2025.1080p.WEB.h264-ETHEL
-👤 175 💾 5.98 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.957087-0500	RedLemon	   INPUT[19]: I.frankenstein.2014.1080p-dual-lat.mp4
+default	16:11:18.537456-0500	RedLemon	   INPUT[94]: I.frankenstein.2014.1080p-dual-lat.mp4
 👤 161 💾 1.35 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio
-default	15:51:47.957423-0500	RedLemon	   INPUT[20]: Frankenstein.2025.1080p-dual-lat-cinecalidad.ro.mp4
+default	16:11:18.537580-0500	RedLemon	   INPUT[95]: Frankenstein.2025.1080p-dual-lat-cinecalidad.ro.mp4
 👤 160 💾 2.72 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio
-default	15:51:47.957590-0500	RedLemon	   INPUT[21]: Frankenstein.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
+default	16:11:18.538613-0500	RedLemon	   INPUT[96]: Frankenstein.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
 👤 131 💾 2.23 GB ⚙️ ilCorSaRoNeRo
 Multi Audio / 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.957727-0500	RedLemon	   INPUT[22]: Frankenstein (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
+default	16:11:18.538778-0500	RedLemon	   INPUT[97]: Frankenstein (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
 👤 129 💾 3.24 GB ⚙️ ilCorSaRoNeRo
 Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.958111-0500	RedLemon	   INPUT[23]: Frankenstein (2025) 1080p WEBRip 5.1-LAMA
+default	16:11:18.538911-0500	RedLemon	   INPUT[98]: Frankenstein (2025) 1080p WEBRip 5.1-LAMA
 👤 125 💾 2.81 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.958230-0500	RedLemon	   INPUT[24]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-👤 122 💾 5.98 GB ⚙️ 1337x | 1080p | torrentio
-default	15:51:47.958359-0500	RedLemon	   INPUT[25]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p | D | Red Head Sound
+default	16:11:18.539047-0500	RedLemon	   INPUT[99]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p | D | Red Head Sound
 👤 114 💾 6.18 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	15:51:47.959287-0500	RedLemon	   INPUT[26]: Frankenstein 2025 1080p WEBRip
+default	16:11:18.545531-0500	RedLemon	   INPUT[100]: Frankenstein 2025 1080p WEBRip
 👤 100 💾 2.55 GB ⚙️ YTS | 1080p | torrentio
-default	15:51:47.959511-0500	RedLemon	   INPUT[27]: Frankenstein 2025 1080p WEBRip
-👤 100 💾 2.81 GB ⚙️ YTS | 1080p | torrentio
-default	15:51:47.968883-0500	RedLemon	   INPUT[28]: Frankenstein 2025 1080p WEB DL HEVC x265 5 1 BONE
+default	16:11:18.545901-0500	RedLemon	   INPUT[101]: Frankenstein 2025 1080p WEB DL HEVC x265 5 1 BONE
 👤 87 💾 2.02 GB ⚙️ TorrentGalaxy | 1080p | torrentio
-default	15:51:47.969971-0500	RedLemon	   INPUT[29]: Frankenstein 2025 1080p 10bit WEBRip 6CH x265 HEVC-PSA
+default	16:11:18.546807-0500	RedLemon	   INPUT[102]: Frankenstein 2025 1080p 10bit WEBRip 6CH x265 HEVC-PSA
 👤 86 💾 2.14 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.970141-0500	RedLemon	   INPUT[30]: Frankenstein.2025.1080p.WEBRip.x265-KONTRAST
+default	16:11:18.546955-0500	RedLemon	   INPUT[103]: Frankenstein.2025.1080p.WEBRip.x265-KONTRAST
 👤 73 💾 3.44 GB ⚙️ 1337x | 1080p | torrentio
-default	15:51:47.989106-0500	RedLemon	   INPUT[31]: Frankenstein 2025 1080p HDRip x264-RGB
+default	16:11:18.547070-0500	RedLemon	   INPUT[104]: Frankenstein 2025 1080p HDRip x264-RGB
 👤 56 💾 1.09 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.989295-0500	RedLemon	   INPUT[32]: Pluribus S01E04 Please Carol.1080p.ATVP.WEB-DL.DD5.1.Atmos H264.TRIal.YG⭐
+default	16:11:18.547195-0500	RedLemon	   INPUT[105]: Pluribus S01E04 Please Carol.1080p.ATVP.WEB-DL.DD5.1.Atmos H264.TRIal.YG⭐
 👤 54 💾 3.9 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.989722-0500	RedLemon	   INPUT[33]: Frankenstein 2025 iTA ENG WEBDL 1080p x264 CYBER mkv
+default	16:11:18.547390-0500	RedLemon	   INPUT[106]: Frankenstein 2025 iTA ENG WEBDL 1080p x264 CYBER mkv
 👤 47 💾 8.02 GB ⚙️ TorrentGalaxy
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.989878-0500	RedLemon	   INPUT[34]: Frankenstein.2025.1080p.10bit.DS4K.NF.WEBRip.[Org.DDPA5.1-Hindi DDPA5.1-English].ESub.HEVC-The.PunisheR
+default	16:11:18.547524-0500	RedLemon	   INPUT[107]: Frankenstein.2025.1080p.10bit.DS4K.NF.WEBRip.[Org.DDPA5.1-Hindi DDPA5.1-English].ESub.HEVC-The.PunisheR
 👤 37 💾 6.98 GB ⚙️ 1337x
 🇬🇧 / 🇮🇳 | 1080p | torrentio
-default	15:51:47.990102-0500	RedLemon	   INPUT[35]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от Scarabey | D | Red Head Sound
+default	16:11:18.548110-0500	RedLemon	   INPUT[108]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от Scarabey | D | Red Head Sound
 👤 35 💾 6.66 GB ⚙️ Rutor
 🇷🇺 | 1080p | torrentio
-default	15:51:47.990268-0500	RedLemon	   INPUT[36]: Frankenstein.2025.MULTi.1080p.WEB.x264-TFA.mkv
+default	16:11:18.548255-0500	RedLemon	   INPUT[109]: Frankenstein.2025.MULTi.1080p.WEB.x264-TFA.mkv
 👤 35 💾 7.89 GB ⚙️ Torrent9
 Multi Audio / 🇫🇷 | 1080p | torrentio
-default	15:51:47.990417-0500	RedLemon	   INPUT[37]: Frankenstein (2025) 1080p x264 [Tam Tel Hin Eng] DDP ESub [i2p]
+default	16:11:18.548381-0500	RedLemon	   INPUT[110]: Frankenstein (2025) 1080p x264 [Tam Tel Hin Eng] DDP ESub [i2p]
 👤 27 💾 4.96 GB ⚙️ 1337x
 🇬🇧 / 🇮🇳 | 1080p | torrentio
-default	15:51:47.990562-0500	RedLemon	   INPUT[38]: Frankenstein (2025) 1080p H265 ITA ENG EAC3 Atmos SUB ITA ENG WEBRip [5.04 GB] - UBi CreW
+default	16:11:18.548508-0500	RedLemon	   INPUT[111]: Frankenstein (2025) 1080p H265 ITA ENG EAC3 Atmos SUB ITA ENG WEBRip [5.04 GB] - UBi CreW
 👤 24 💾 5.05 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.990709-0500	RedLemon	   INPUT[39]: Frankenstein (2025) (1080p NF WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) [QxR]
+default	16:11:18.548633-0500	RedLemon	   INPUT[112]: Frankenstein (2025) (1080p NF WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) [QxR]
 Frankenstein (2025) (1080p NF WEB-DL x265 Ghost).mkv
 👤 24 💾 6.04 GB ⚙️ 1337x | 1080p | torrentio
-default	15:51:47.990849-0500	RedLemon	   INPUT[40]: Frankenstein (2025) 1080p H265 WebDl Rip ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
+default	16:11:18.548753-0500	RedLemon	   INPUT[113]: Frankenstein (2025) 1080p H265 WebDl Rip ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
 👤 24 💾 3.34 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.990967-0500	RedLemon	   INPUT[41]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX
-👤 15 💾 5.98 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.991086-0500	RedLemon	   INPUT[42]: Frankenstein.2025.1080p.NF.WEBRip.AAC5.1.10bits.x265-Rapta
+default	16:11:18.548865-0500	RedLemon	   INPUT[114]: Frankenstein.2025.1080p.NF.WEBRip.AAC5.1.10bits.x265-Rapta
 👤 14 💾 1.88 GB ⚙️ 1337x | 1080p | torrentio
-default	15:51:47.991229-0500	RedLemon	   INPUT[43]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
+default	16:11:18.548990-0500	RedLemon	   INPUT[115]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
 👤 11 💾 10.61 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	15:51:47.991410-0500	RedLemon	   INPUT[44]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
+default	16:11:18.549112-0500	RedLemon	   INPUT[116]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
 👤 10 💾 10.12 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	15:51:47.991575-0500	RedLemon	   INPUT[45]: Frankenstein.2025.1080p.NF.WEB.DL.Multi.DDP5.1.Atmos.H.265-themoviesboss
+default	16:11:18.549232-0500	RedLemon	   INPUT[117]: Frankenstein.2025.1080p.NF.WEB.DL.Multi.DDP5.1.Atmos.H.265-themoviesboss
 👤 9 💾 5.73 GB ⚙️ 1337x
 Multi Audio / 🇮🇳 | 1080p | torrentio
-default	15:51:47.991724-0500	RedLemon	   INPUT[46]: Frankenstein (2025) [MULTi] [1080p] [NF] [WEB-DL] [H264] [DDP5.1.Atmos-K83[ [Lektor PL i Napisy PL]
-👤 9 💾 6.66 GB ⚙️ BestTorrents
-Multi Audio / 🇬🇧 / 🇵🇱 | 1080p | torrentio
-default	15:51:47.992233-0500	RedLemon	   INPUT[47]: Frankenstein.2025.1080p-Dual-Lat
+default	16:11:18.549345-0500	RedLemon	   INPUT[118]: Frankenstein.2025.1080p-Dual-Lat
 👤 8 💾 3.22 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio
-default	15:51:47.993557-0500	RedLemon	   INPUT[48]: Frankenstein (2025) 1080p H264 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
+default	16:11:18.549626-0500	RedLemon	   INPUT[119]: Frankenstein (2025) 1080p H264 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
 👤 8 💾 6.79 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.993999-0500	RedLemon	   INPUT[49]: Frankenstein.2025.WEB-DL.1080p-Dual-Lat
-👤 7 💾 6.8 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | 1080p | torrentio
-default	15:51:47.994219-0500	RedLemon	   INPUT[50]: Frankenstein (2025) Eng 1080p WEBRip x265 DDP 5.1 ESub
+default	16:11:18.550257-0500	RedLemon	   INPUT[120]: Frankenstein (2025) Eng 1080p WEBRip x265 DDP 5.1 ESub
 👤 7 💾 2.15 GB ⚙️ 1337x | 1080p | torrentio
-default	15:51:47.994358-0500	RedLemon	   INPUT[51]: Frankenstein 2025 1080p WEBRip 10Bit DDP5 1 x265-NeoNoir
+default	16:11:18.550450-0500	RedLemon	   INPUT[121]: Frankenstein 2025 1080p WEBRip 10Bit DDP5 1 x265-NeoNoir
 👤 7 💾 1.93 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.994493-0500	RedLemon	   INPUT[52]: Frankenstein (2025) AC3 5.1 ITA.ENG 1080p H265 sub NUita.eng Sp33dy94 MIRCrew
+default	16:11:18.550637-0500	RedLemon	   INPUT[122]: Frankenstein (2025) AC3 5.1 ITA.ENG 1080p H265 sub NUita.eng Sp33dy94 MIRCrew
 👤 6 💾 3.23 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.994627-0500	RedLemon	   INPUT[53]: Frankenstein 2025 1080p WEB-DL HEVC x265 5 1 BONE
+default	16:11:18.550780-0500	RedLemon	   INPUT[123]: Frankenstein 2025 1080p WEB-DL HEVC x265 5 1 BONE
 👤 6 💾 2.02 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.994755-0500	RedLemon	   INPUT[54]: Frankenstein.2025.1080p.WEB-DL.DUAL.5.1
+default	16:11:18.550906-0500	RedLemon	   INPUT[124]: Frankenstein.2025.1080p.WEB-DL.DUAL.5.1
 👤 6 💾 3.91 GB ⚙️ Comando
 Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	15:51:47.994885-0500	RedLemon	   INPUT[55]: Frankenstein (2025) 1080p x265 ita eng ac3 sub ita eng nuita nueng - MIRCrew
+default	16:11:18.551037-0500	RedLemon	   INPUT[125]: Frankenstein (2025) 1080p x265 ita eng ac3 sub ita eng nuita nueng - MIRCrew
 👤 5 💾 3.19 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	15:51:47.995004-0500	RedLemon	   INPUT[56]: Frankenstein (2025) 1080p WEBRip x265 10bit 5.1-LAMA
+default	16:11:18.551887-0500	RedLemon	   INPUT[126]: Frankenstein (2025) 1080p WEBRip x265 10bit 5.1-LAMA
 👤 5 💾 2.55 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.995132-0500	RedLemon	   INPUT[57]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от ExKinoRay | D
+default	16:11:18.552222-0500	RedLemon	   INPUT[127]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от ExKinoRay | D
 👤 5 💾 10.18 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	15:51:47.995261-0500	RedLemon	   INPUT[58]: Frankenstein 80 (1972) 720p BluRay-WORLD
+default	16:11:18.552490-0500	RedLemon	   INPUT[128]: Frankenstein 80 (1972) 720p BluRay-WORLD
 👤 339 💾 823.54 MB ⚙️ ThePirateBay | 720p | torrentio
-default	15:51:47.995397-0500	RedLemon	   INPUT[59]: Франкенштейн / Frankenstein (2025) WEB-DL 720p от селезень | D | Videofilm Int
+default	16:11:18.552630-0500	RedLemon	   INPUT[129]: Франкенштейн / Frankenstein (2025) WEB-DL 720p от селезень | D | Videofilm Int
 👤 260 💾 2.77 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio
-default	15:51:47.995517-0500	RedLemon	   INPUT[60]: Frankenstein (2025) [Bluray 720p][Esp]
+default	16:11:18.554328-0500	RedLemon	   INPUT[130]: Frankenstein (2025) [Bluray 720p][Esp]
 👤 114 💾 6.52 GB ⚙️ Wolfmax4k
 🇪🇸 | 720p | torrentio
-default	15:51:47.995630-0500	RedLemon	   INPUT[61]: Frankenstein 2025 720p WEBRip
+default	16:11:18.559314-0500	RedLemon	   INPUT[131]: Frankenstein 2025 720p WEBRip
 👤 100 💾 1.37 GB ⚙️ YTS | 720p | torrentio
-default	15:51:47.995749-0500	RedLemon	   INPUT[62]: Frankenstein (2025) 720p WEBRip-LAMA
+default	16:11:18.559936-0500	RedLemon	   INPUT[132]: Frankenstein (2025) 720p WEBRip-LAMA
 👤 44 💾 1.37 GB ⚙️ ThePirateBay | 720p | torrentio
-default	15:51:47.995878-0500	RedLemon	   INPUT[63]: Frankenstein (2025).mkv 720p WEB-DL DDP 5.1 ATMOS iTA ENG H264 - FHC_CREW.mkv
+default	16:11:18.561244-0500	RedLemon	   INPUT[133]: Frankenstein (2025).mkv 720p WEB-DL DDP 5.1 ATMOS iTA ENG H264 - FHC_CREW.mkv
 👤 18 💾 3.46 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 720p | torrentio
-default	15:51:47.996000-0500	RedLemon	   INPUT[64]: Frankenstein 2025 720p NF WEB-DL DDP5 1 Atmos H 264-FLUX
+default	16:11:18.561906-0500	RedLemon	   INPUT[134]: Frankenstein 2025 720p NF WEB-DL DDP5 1 Atmos H 264-FLUX
 👤 15 💾 2.64 GB ⚙️ ThePirateBay | 720p | torrentio
-default	15:51:47.996371-0500	RedLemon	   INPUT[65]: Frankenstein.2025.720p.NF.WebRip.Multi.AAC2.0.H.264-themoviesboss
+default	16:11:18.562553-0500	RedLemon	   INPUT[135]: Frankenstein.2025.720p.NF.WebRip.Multi.AAC2.0.H.264-themoviesboss
 👤 15 💾 1.48 GB ⚙️ 1337x
 Multi Audio / 🇮🇳 | 720p | torrentio
-default	15:51:47.996539-0500	RedLemon	   INPUT[66]: Frankenstein (2025) 720p h264 Ac3 5.1 Ita Eng Sub Ita NUita Eng-MIRCrew
+default	16:11:18.564034-0500	RedLemon	   INPUT[136]: Frankenstein (2025) 720p h264 Ac3 5.1 Ita Eng Sub Ita NUita Eng-MIRCrew
 👤 12 💾 2.81 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 720p | torrentio
-default	15:51:47.996850-0500	RedLemon	   INPUT[67]: Frankenstein 2025 720p 10bit WEBRip 6CH x265 HEVC-PSA
+default	16:11:18.566143-0500	RedLemon	   INPUT[137]: Frankenstein 2025 720p 10bit WEBRip 6CH x265 HEVC-PSA
 👤 12 💾 1.07 GB ⚙️ ThePirateBay | 720p | torrentio
-default	15:51:47.997018-0500	RedLemon	   INPUT[68]: Frankenstein (2025) [NF] [480p] [WEB-DL] [XviD] [DD5.1-K83] [Lektor PL]
+default	16:11:18.567136-0500	RedLemon	   INPUT[138]: Frankenstein (2025) [NF] [480p] [WEB-DL] [XviD] [DD5.1-K83] [Lektor PL]
 👤 5 💾 2.46 GB ⚙️ BestTorrents
 🇵🇱 | 480p | torrentio
-default	15:51:47.997168-0500	RedLemon	   INPUT[69]: Frankenstein 2025 1080p HDCAM x264-RGB
+default	16:11:18.573265-0500	RedLemon	   INPUT[139]: Frankenstein 2025 1080p HDCAM x264-RGB
 👤 13 💾 4.16 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	15:51:47.997309-0500	RedLemon	   INPUT[70]: Frankenstein 2025 1080p CAM x264-RGB
+default	16:11:18.575052-0500	RedLemon	   INPUT[140]: Frankenstein 2025 1080p CAM x264-RGB
 👤 7 💾 4.16 GB ⚙️ TorrentGalaxy | 1080p | torrentio
-default	15:51:47.997452-0500	RedLemon	   INPUT[71]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.)
+default	16:11:18.575465-0500	RedLemon	   INPUT[141]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.)
 👤 876 💾 2.17 GB ⚙️ Rutracker
 🇷🇺 | Unknown | torrentio
-default	15:51:47.997600-0500	RedLemon	   INPUT[72]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.) + Sub (Rus Eng) + Original Eng
+default	16:11:18.576123-0500	RedLemon	   INPUT[142]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.) + Sub (Rus Eng) + Original Eng
 👤 192 💾 2.92 GB ⚙️ Rutracker
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	15:51:47.997742-0500	RedLemon	   INPUT[73]: Франкенштейн / Frankenstein (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Videofilm Int
+default	16:11:18.576868-0500	RedLemon	   INPUT[143]: Франкенштейн / Frankenstein (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Videofilm Int
 👤 143 💾 1.46 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	15:51:47.997912-0500	RedLemon	   INPUT[74]: Франкенштейн / Frankenstein (2025) WEB-DLRip от MegaPeer | D | Videofilm Int
+default	16:11:18.577131-0500	RedLemon	   INPUT[144]: Франкенштейн / Frankenstein (2025) WEB-DLRip от MegaPeer | D | Videofilm Int
 👤 24 💾 2.18 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	15:51:47.998096-0500	RedLemon	   INPUT[75]: Frankenstein (2025) [PL] [WEB-DL] [XviD-OzW] [Lektor PL]
+default	16:11:18.577439-0500	RedLemon	   INPUT[145]: Frankenstein (2025) [PL] [WEB-DL] [XviD-OzW] [Lektor PL]
 👤 11 💾 1.38 GB ⚙️ BestTorrents
 🇵🇱 | Unknown | torrentio
-default	15:51:47.998239-0500	RedLemon	   INPUT[76]: Франкенштейн / Frankenstein (2025) WEB-DLRip от Leon-masl | D L
+default	16:11:18.578084-0500	RedLemon	   INPUT[146]: Франкенштейн / Frankenstein (2025) WEB-DLRip от Leon-masl | D L
 👤 6 💾 2.19 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	15:51:47.998366-0500	RedLemon	   INPUT[77]: Frankenstein (2025) [Bluray][Esp]
+default	16:11:18.578449-0500	RedLemon	   INPUT[147]: Frankenstein (2025) [Bluray][Esp]
 👤 5 💾 1.83 GB ⚙️ Wolfmax4k
 🇪🇸 | Unknown | torrentio
-default	15:51:47.998495-0500	RedLemon	   INPUT[78]: frankenstein.2025.french.web.x264-higgsboson.mkv
+default	16:11:18.578871-0500	RedLemon	   INPUT[148]: frankenstein.2025.french.web.x264-higgsboson.mkv
 👤 357 💾 1.19 GB ⚙️ Torrent9
 🇫🇷 | Unknown | torrentio
-default	15:51:47.998675-0500	RedLemon	   INPUT[79]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
-default	15:51:47.998853-0500	RedLemon	   INPUT[80]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean
-default	15:51:47.999031-0500	RedLemon	   INPUT[81]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean
-default	15:51:47.999213-0500	RedLemon	   INPUT[82]: Frankenstein 2004 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean
-default	15:51:47.999423-0500	RedLemon	   INPUT[83]: Frankenstein 2025 Ger Eng EAC3 Atmos DL 2160p WEB DV HDR h265-VECTOR mkv | 2160p | zilean
-default	15:51:48.999862-0500	RedLemon	   INPUT[84]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR Hybrid H265 DUAL-AOC mkv | 2160p | zilean
-default	15:51:48.000202-0500	RedLemon	   INPUT[85]: Frankenstein 2025 [10Bit SDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean
-default	15:51:48.000421-0500	RedLemon	   INPUT[86]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean
-default	15:51:48.000663-0500	RedLemon	   INPUT[87]: Frankenstein (2025) 2160p SDR NETFLiX WEBRiP x264 24-bit WAV-CREATiVE24 mkv | 2160p | zilean
-default	15:51:48.000958-0500	RedLemon	   INPUT[88]: Frankenstein 2025 MULTi 2160p NF WEB SDR H265-THESYNDiCATE mkv | 2160p | zilean
-default	15:51:48.001245-0500	RedLemon	   INPUT[89]: Frankenstein 2025 MULTi 1080p WEB x264-TFA mkv | 1080p | zilean
-default	15:51:48.001535-0500	RedLemon	   INPUT[90]: Frankenstein 2025 MULTi 1080p WEB H265-TFA mkv | 1080p | zilean
-default	15:51:48.001781-0500	RedLemon	   INPUT[91]: Frankenstein 2025 2160p Hybrid MULTI WEB-DL DV HDR H265-AOC mkv | 2160p | zilean
-default	15:51:48.002063-0500	RedLemon	   INPUT[92]: Frankenstein 1994 [10Bit SDR] [2160p BluRay H265 AC3-AS76-FT] [Lektor PL] [Alusia] | 2160p | zilean
-default	15:51:48.002441-0500	RedLemon	   INPUT[93]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264 DUAL-BiOMA mkv | 1080p | zilean
-default	15:51:48.002887-0500	RedLemon	   INPUT[94]: Frankenstein 2025 MULTi 1080p NF WEB-DL x264-OzW | 1080p | zilean
-default	15:51:48.003300-0500	RedLemon	   INPUT[95]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean
-default	15:51:48.003592-0500	RedLemon	   INPUT[96]: Frankenstein 2025 MULTi 2160p NF WEB-DL HEVC HDR AtmosDoVi H265-RX mkv | 2160p | zilean
-default	15:51:48.003788-0500	RedLemon	   INPUT[97]: Frankenstein 2025 MULTi 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-OzW | 2160p | zilean
-default	15:51:48.003976-0500	RedLemon	   INPUT[98]: Frankenstein 2025 [10Bit DV-HDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean
-default	15:51:48.004154-0500	RedLemon	   INPUT[99]: Frankenstein 2015 720p BluRay x264-[YTS LT] mp4 | 720p | zilean
-default	15:51:48.004345-0500	RedLemon	   INPUT[100]: frankenstein 1931 1080p bluray x264-hd4u mkv | 1080p | zilean
-default	15:51:48.004882-0500	RedLemon	   INPUT[101]: Frankenstein 1994 UHD BluRay 2160p DTS-HD MA 5 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean
-default	15:51:48.005141-0500	RedLemon	   INPUT[102]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [720p] [WEBRip] [YTS MX] | 720p | zilean
-default	15:51:48.005341-0500	RedLemon	   INPUT[103]: Frankenstein (2011) [1080p] [WEBRip] [YTS MX] | 1080p | zilean
-default	15:51:48.005528-0500	RedLemon	   INPUT[104]: Frankenstein 1931 4K HDR 2160p BDRemux Ita Eng x265-NAHOM mkv | 2160p | zilean
-default	15:51:48.005723-0500	RedLemon	   INPUT[105]: Frankenstein - 2007 - DVDRip - A KARMADrome KvCD by The Poison Dwarf bin | Unknown | zilean
-default	15:51:48.005896-0500	RedLemon	   INPUT[106]: Frankenstein 1931 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean
-default	15:51:48.006064-0500	RedLemon	   INPUT[107]: Frankenstein (2015) [BluRay] [1080p] [YTS LT] | 1080p | zilean
-default	15:51:48.006228-0500	RedLemon	   INPUT[108]: FRANKENSTEIN mkv | Unknown | zilean
-default	15:51:48.006395-0500	RedLemon	   INPUT[109]: Frankenstein 2004 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean
-default	15:51:48.006572-0500	RedLemon	   INPUT[110]: Frankenstein 1931 2160p BluRay REMUX HEVC DTS-HD MA 2 0-FGT mkv | 2160p | zilean
-default	15:51:48.006740-0500	RedLemon	   INPUT[111]: Frankenstein 1931 2160p UHD BluRay x265-B0MBARDiERS | 2160p | zilean
-default	15:51:48.006905-0500	RedLemon	   INPUT[112]: Frankenstein (1931) (1080p BluRay x265 HEVC 10bit AAC 2 0 Tigole) | 1080p | zilean
-default	15:51:48.007155-0500	RedLemon	   INPUT[113]: Frankenstein 2015 BDRip 1080p ELEKTRI4KA UNIONGANG mkv | 1080p | zilean
-default	15:51:48.007554-0500	RedLemon	   INPUT[114]: Frankenstein 1970 1958 1080p BluRay x264 AAC-[YTS MX] mp4 | 1080p | zilean
-default	15:51:48.007922-0500	RedLemon	   INPUT[115]: Frankenstein 1931 4K HDR 2160p BDRip Ita Eng Ger x265-NAHOM mkv | 2160p | zilean
-default	15:51:48.008140-0500	RedLemon	   INPUT[116]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [1080p] [WEBRip] [YTS MX] | 1080p | zilean
-default	15:51:48.008320-0500	RedLemon	   INPUT[117]: Frankenstein (1931) 1080p AC3 2ch x264 BDRip LatTeam mkv | 1080p | zilean
-default	15:51:48.008888-0500	RedLemon	   INPUT[118]: Frankenstein 1931 1080p BluRay H264 AAC-RARBG | 1080p | zilean
-default	15:51:48.009699-0500	RedLemon	   INPUT[119]: Frankenstein 1931 Restored 1080p BluRay x265 hevc 10bit AAC 2 0 commentary-HeVK mkv | 1080p | zilean
-default	15:51:48.010267-0500	RedLemon	   INPUT[120]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DDP2 0-RARBG mkv | 2160p | zilean
-default	15:51:48.010519-0500	RedLemon	   INPUT[121]: Frankenstein 2015 1080p WEBRip AAC x264-ETRG mp4 | 1080p | zilean
-default	15:51:48.010739-0500	RedLemon	   INPUT[122]: Frankenstein 1931 Restored Bluray 1080p DTS-HD-2 0 x264-Grym mkv | 1080p | zilean
-default	15:51:48.010987-0500	RedLemon	   INPUT[123]: Frankenstein 1931 RESTORED 1080p BluRay REMUX-DDB | 1080p | zilean
-default	15:51:48.011202-0500	RedLemon	   INPUT[124]: Frankenstein 1931 1080p BluRay x265-RARBG | 1080p | zilean
-default	15:51:48.011395-0500	RedLemon	   INPUT[125]: Frankenstein (1931 - James Whale) [BDRip720p Ita-Eng] mkv | 720p | zilean
-default	15:51:48.011576-0500	RedLemon	   INPUT[126]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DTS-HD MA 2 0-RARBG mkv | 2160p | zilean
-default	15:51:48.011759-0500	RedLemon	   INPUT[127]: Frankenstein 1994 2160p UHD Blu-ray Remux HEVC DV DTS-HD MA 5 1-HDT mkv | 2160p | zilean
-default	15:51:48.011935-0500	RedLemon	   INPUT[128]: Frankenstein 1931 [BDRip-1080p-MultiLang-MultiSub-Chapters][RiP By MaX] mkv | 1080p | zilean
-default	15:51:48.012101-0500	RedLemon	   INPUT[129]: Frankenstein_remux_1931 mkv | Unknown | zilean
-default	15:51:48.012270-0500	RedLemon	   INPUT[130]: Frankenstein 1910 WEBRIP 576p x264 RUS liosaa mkv | Unknown | zilean
-default	15:51:48.012438-0500	RedLemon	   INPUT[131]: Frankenstein (1931) (2160p BluRay x265 10bit HDR Tigole) mkv | 2160p | zilean
-default	15:51:48.012599-0500	RedLemon	   INPUT[132]: Frankenstein 2015 1080p BluRay AVC AC-3 DD 5 1 x264-PANAM | 1080p | zilean
-default	15:51:48.012779-0500	RedLemon	   INPUT[133]: Frankenstein 1970 1958 1080p BluRay x265-RARBG mp4 | 1080p | zilean
-default	15:51:48.012952-0500	RedLemon	   INPUT[134]: I, Frankenstein 2014 1080p AMZN WEB-DL DDP5 1 H264-GPRS mkv | 1080p | zilean
-default	15:51:48.013113-0500	RedLemon	   INPUT[135]: I Frankenstein 2014 1080p BluRay x265-RARBG | 1080p | zilean
-default	15:51:48.013286-0500	RedLemon	   INPUT[136]: I Frankenstein 2014 1080p BluRay x264-SPARKS mkv | 1080p | zilean
-default	15:51:48.013458-0500	RedLemon	   INPUT[137]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 mkv | 1080p | zilean
-default	15:51:48.013628-0500	RedLemon	   INPUT[138]: I Frankenstein 2014 1080p BRRip H264 AAC-RARBG | 1080p | zilean
-default	15:51:48.013801-0500	RedLemon	   INPUT[139]: I Frankenstein 2014 1080p BRRip x264 AAC-JYK mp4 | 1080p | zilean
-default	15:51:48.013972-0500	RedLemon	   INPUT[140]: I, Frankenstein 2014 1080p BluRay x264 YIFY mp4 | 1080p | zilean
-default	15:51:48.014141-0500	RedLemon	   INPUT[141]: I Frankenstein (2014) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean
-default	15:51:48.014319-0500	RedLemon	   INPUT[142]: I, Frankenstein (2014) 1080p BDRip x264 English AC3 5 1 - MeGUiL | 1080p | zilean
-default	15:51:48.014497-0500	RedLemon	   INPUT[143]: I Frankenstein 2014 1080p BluRay x265 10bit-z97 mkv | 1080p | zilean
-default	15:51:48.014673-0500	RedLemon	   INPUT[144]: I, Frankenstein (2014) 1080p 10bit Bluray x265 HEVC [Hindi 2 0 + DD 5 1 English] ESubs ~ TombDoc mkv | 1080p | zilean
-default	15:51:48.014844-0500	RedLemon	   INPUT[145]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 | 1080p | zilean
-default	15:51:48.015014-0500	RedLemon	   INPUT[146]: I Frankenstein (2014) VF2-ENG AC3 BluRay 1080p x264 GHT | 1080p | zilean
-default	15:51:48.015187-0500	RedLemon	   INPUT[147]: I Frankenstein 2014 JPN BluRay Remux 1080p AVC Atmos 7 1-decibeL | 1080p | zilean
-default	15:51:48.015718-0500	RedLemon	   INPUT[148]: i frankenstein 2014 1080p bluray x264-sparks mkv | 1080p | zilean
-default	15:51:48.015918-0500	RedLemon	   INPUT[149]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016099-0500	RedLemon	   INPUT[150]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016298-0500	RedLemon	   INPUT[151]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016458-0500	RedLemon	   INPUT[152]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016601-0500	RedLemon	   INPUT[153]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016712-0500	RedLemon	   INPUT[154]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.016969-0500	RedLemon	   INPUT[155]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.017096-0500	RedLemon	   INPUT[156]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.017210-0500	RedLemon	   INPUT[157]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.017421-0500	RedLemon	   INPUT[158]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.017661-0500	RedLemon	   INPUT[159]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.017822-0500	RedLemon	   INPUT[160]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018063-0500	RedLemon	   INPUT[161]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018296-0500	RedLemon	   INPUT[162]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018487-0500	RedLemon	   INPUT[163]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018651-0500	RedLemon	   INPUT[164]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018764-0500	RedLemon	   INPUT[165]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018874-0500	RedLemon	   INPUT[166]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.018981-0500	RedLemon	   INPUT[167]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019085-0500	RedLemon	   INPUT[168]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019186-0500	RedLemon	   INPUT[169]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019288-0500	RedLemon	   INPUT[170]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019388-0500	RedLemon	   INPUT[171]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019488-0500	RedLemon	   INPUT[172]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.019581-0500	RedLemon	   INPUT[173]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.020840-0500	RedLemon	   INPUT[174]: [RD⚡] Comet 2160p | 2160p | comet
-default	15:51:48.021033-0500	RedLemon	   INPUT[175]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.021147-0500	RedLemon	   INPUT[176]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.021253-0500	RedLemon	   INPUT[177]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.021653-0500	RedLemon	   INPUT[178]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.021929-0500	RedLemon	   INPUT[179]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.023736-0500	RedLemon	   INPUT[180]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.024203-0500	RedLemon	   INPUT[181]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.024492-0500	RedLemon	   INPUT[182]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.026628-0500	RedLemon	   INPUT[183]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.027050-0500	RedLemon	   INPUT[184]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.027214-0500	RedLemon	   INPUT[185]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.027504-0500	RedLemon	   INPUT[186]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.027949-0500	RedLemon	   INPUT[187]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.028413-0500	RedLemon	   INPUT[188]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.028624-0500	RedLemon	   INPUT[189]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.030555-0500	RedLemon	   INPUT[190]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.032282-0500	RedLemon	   INPUT[191]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.032875-0500	RedLemon	   INPUT[192]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.034097-0500	RedLemon	   INPUT[193]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.035334-0500	RedLemon	   INPUT[194]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.035999-0500	RedLemon	   INPUT[195]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.036391-0500	RedLemon	   INPUT[196]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.036716-0500	RedLemon	   INPUT[197]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.037781-0500	RedLemon	   INPUT[198]: [RD⚡] Comet 1080p | 1080p | comet
-default	15:51:48.037955-0500	RedLemon	   INPUT[199]: [RD⚡] Comet 720p | 720p | comet
-default	15:51:48.038427-0500	RedLemon	   INPUT[200]: [RD⚡] Comet 720p | 720p | comet
-default	15:51:48.038686-0500	RedLemon	   INPUT[201]: [RD⚡] Comet 720p | 720p | comet
-default	15:51:48.038892-0500	RedLemon	   INPUT[202]: [RD⚡] Comet 480p | 480p | comet
-default	15:51:48.039324-0500	RedLemon	   INPUT[203]: [RD⚡] Comet unknown | unknown | comet
-default	15:51:48.039577-0500	RedLemon	   INPUT[204]: [RD⚡] Comet unknown | unknown | comet
-default	15:51:48.040044-0500	RedLemon	   INPUT[205]: [RD⚡] Comet unknown | unknown | comet
-default	15:51:48.040299-0500	RedLemon	   INPUT[206]: [RD⚡] Comet unknown | unknown | comet
-default	15:51:48.040587-0500	RedLemon	🔍 Searching SubDL for subtitles: tt1312221 (movie)
-default	15:51:48.041589-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:48.043199-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E1DE8AA2-CF64-43E1-BE7C-999F289492CA] (reporting strategy default)> on Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> was not selected for reporting
-default	15:51:48.044994-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:48.045394-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	15:51:48.045845-0500	RedLemon	Connection 15: enabling TLS
-default	15:51:48.045887-0500	RedLemon	Connection 15: starting, TC(0x0)
-default	15:51:48.045945-0500	RedLemon	[C15 E5764720-D930-480E-97A9-33513BB51F46 Hostname#b2955b41:443 quic-connection, url hash: fb5c59d4, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:48.046039-0500	RedLemon	[C15 Hostname#b2955b41:443 initial path ((null))] event: path:start @0.000s
-default	15:51:48.046456-0500	RedLemon	[C15 Hostname#b2955b41:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: E1EC1672-8B83-4A8D-A514-3075CA902098
-default	15:51:48.046648-0500	RedLemon	[C15 Hostname#b2955b41:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
-default	15:51:48.046689-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C15] reporting state preparing
-default	15:51:48.047066-0500	RedLemon	[C15.1 Hostname#b2955b41:443 initial path ((null))] event: path:start @0.001s
-default	15:51:48.047518-0500	RedLemon	[C15.1 Hostname#b2955b41:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: 96BF542F-2F5F-4E43-AB7E-5128FD31DCB5
-default	15:51:48.047744-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
-default	15:51:48.048028-0500	mDNSResponder	[R1758] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:48.048314-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> setting up Connection 15
-default	15:51:48.051285-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#3bcd49a0.443
-default	15:51:48.051420-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:48.051645-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.005s
-default	15:51:48.051925-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 initial path ((null))] event: path:start @0.005s
-default	15:51:48.052462-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.006s, uuid: E3221F6D-CDA6-4F0C-8CA0-0912431AD732
-default	15:51:48.052830-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.006s
-default	15:51:48.053726-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.007s
-default	15:51:48.055289-0500	RedLemon	nw_protocol_instance_ignore_future_path_changes [C15.1.1:2] Ignoring future path changes for protocol
-default	15:51:48.055599-0500	RedLemon	quic_initialize_block_invoke [C15.1.1:2] [-484501ec62d12c55] created QUIC connection (spin bit enabled)
-default	15:51:48.056619-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.010s
-default	15:51:48.058885-0500	RedLemon	quic_crypto_new_flow [C15.1.1:2] [-484501ec62d12c55] TLS stream is: [C16]
-default	15:51:48.058993-0500	RedLemon	[C16 F8BA239C-4555-4226-A225-ADE98081D94F IPv6#3bcd49a0.443 quic-connection, url hash: fb5c59d4, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01, no transport] start
-default	15:51:48.059128-0500	RedLemon	[C16 IPv6#3bcd49a0.443 initial socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:start @0.000s
-default	15:51:48.059309-0500	RedLemon	[C16 IPv6#3bcd49a0.443 waiting socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: E3221F6D-CDA6-4F0C-8CA0-0912431AD732
-default	15:51:48.059623-0500	RedLemon	[C16 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.000s
-default	15:51:48.059669-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C16] reporting state preparing
-default	15:51:48.059864-0500	RedLemon	nw_flow_connected [C16 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
-default	15:51:48.060033-0500	RedLemon	[C16 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.000s
-default	15:51:48.060429-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C16:1][0x7fbf96a5d840] TLS configured [min_version(0x0304) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:48.060559-0500	RedLemon	boringssl_context_info_handler(2028) [C16:1][0x7fbf96a5d840] Client handshake started
-default	15:51:48.060766-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS client enter_early_data
-default	15:51:48.061007-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS client read_server_hello
-default	15:51:48.061358-0500	RedLemon	[C16 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.002s
-default	15:51:48.071294-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:48.071561-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.025s
-default	15:51:48.077167-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:48.077383-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.031s
-error	15:51:48.080188-0500	RedLemon	quic_packet_parser_inner [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] SH fixed bit is zero
-default	15:51:48.080761-0500	mDNSResponder	[R1758] getaddrinfo stop -- hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, client pid: 8572 (RedLemon)
-default	15:51:48.081598-0500	RedLemon	nw_endpoint_resolver_update [C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:48.081836-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.035s
-default	15:51:48.084512-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:48.084608-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:48.085166-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_encrypted_extensions
-error	15:51:48.085550-0500	RedLemon	quic_packet_parser_inner [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] SH fixed bit is zero
-default	15:51:48.085778-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:48.086054-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:48.086133-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:48.086612-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C16:1][0x7fbf96a5d840] Performing external trust evaluation
-default	15:51:48.086805-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C16:1][0x7fbf96a5d840] Asyncing for external verify block
-default	15:51:48.087568-0500	RedLemon	Connection 15: asked to evaluate TLS Trust
-default	15:51:48.087898-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> auth completion disp=1 cred=0x0
-default	15:51:48.098725-0500	RedLemon	Connection 15: TLS Trust result 0
-default	15:51:48.098798-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C16:1][0x7fbf96a5d840] Returning from external verify block with result: true
-default	15:51:48.099174-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C16:1][0x7fbf96a5d840] Certificate verification result: OK
-default	15:51:48.099844-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:48.099997-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:48.100055-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:48.100491-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:48.100678-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:48.101227-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS 1.3 client done
-default	15:51:48.101368-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS client finish_client_handshake
-default	15:51:48.101429-0500	RedLemon	boringssl_context_info_handler(2045) [C16:1][0x7fbf96a5d840] Client handshake state: TLS client done
-default	15:51:48.101473-0500	RedLemon	boringssl_context_info_handler(2034) [C16:1][0x7fbf96a5d840] Client handshake done
-default	15:51:48.102421-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C16:1][0x7fbf96a5d840] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(41ms) flight_time(25ms) rtt(24ms) write_stalls(0) read_stalls(4)]
-default	15:51:48.102807-0500	RedLemon	nw_flow_connected [C16 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
-default	15:51:48.103178-0500	RedLemon	[C16 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.044s
-default	15:51:48.103909-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C16] reporting state ready
-default	15:51:48.103981-0500	RedLemon	[C16 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.044s
-default	15:51:48.105515-0500	RedLemon	quic_pmtud_restart [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] PMTUD enabled, max PMTU: 1398, header size: 48, current PMTU 1248
-default	15:51:48.105667-0500	RedLemon	quic_crypto_tls_ready_inner [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] QUIC connection established in 48.846 ms, RTT 19.231 ms
-default	15:51:48.105747-0500	RedLemon	nw_flow_connected [C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
-default	15:51:48.105973-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.059s
-default	15:51:48.106117-0500	RedLemon	[C15.1 Hostname#b2955b41:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.060s
-default	15:51:48.106182-0500	RedLemon	[C15 Hostname#b2955b41:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.060s
-default	15:51:48.106401-0500	RedLemon	nw_flow_connected [C15.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:48.106847-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.060s
-default	15:51:48.107224-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C15] reporting state ready
-default	15:51:48.107397-0500	RedLemon	[C15.1 Hostname#b2955b41:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.061s
-default	15:51:48.107460-0500	RedLemon	[C15 Hostname#b2955b41:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.061s
-default	15:51:48.108824-0500	RedLemon	[C15.1.1 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.062s
-default	15:51:48.109246-0500	RedLemon	[C15.1 Hostname#b2955b41:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.063s
-default	15:51:48.109313-0500	RedLemon	[C15 Hostname#b2955b41:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.063s
-default	15:51:48.109568-0500	RedLemon	Connection 15: connected successfully
-default	15:51:48.109623-0500	RedLemon	Connection 15: TLS handshake complete
-default	15:51:48.109901-0500	RedLemon	Connection 15: ready C(N) E(N)
-default	15:51:48.111426-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> now using Connection 15
-default	15:51:48.112555-0500	RedLemon	Connection 15: received viability advisory(Y)
-default	15:51:48.112613-0500	RedLemon	0x7fbf96299308 ID=0 Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> sent request, body N 0
-default	15:51:48.114346-0500	RedLemon	boringssl_context_new_session_handler(1336) [C16:1][0x7fbf96a5d840] Asyncing for session update block
-default	15:51:48.114779-0500	RedLemon	boringssl_context_new_session_handler(1336) [C16:1][0x7fbf96a5d840] Asyncing for session update block
-default	15:51:48.118447-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C16:1][0x7fbf96a5d840] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(41ms) flight_time(25ms) rtt(24ms) write_stalls(0) read_stalls(4)]
-default	15:51:48.118581-0500	RedLemon	nw_flow_connected [C16 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
-default	15:51:48.120703-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C16:1][0x7fbf96a5d840] Returning from session update block
-default	15:51:48.123383-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C16:1][0x7fbf96a5d840] Returning from session update block
-default	15:51:48.123667-0500	RedLemon	quic_stream_create_inbound [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] creating inbound stream 3
-default	15:51:48.124705-0500	RedLemon	quic_stream_create_inbound [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] creating inbound stream 7
-default	15:51:48.125277-0500	RedLemon	quic_stream_create_inbound [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] creating inbound stream 11
-default	15:51:48.127716-0500	RedLemon	quic_stream_create_inbound [C15.1.1:2] [-015429574cce0edd325434579bce15944a7a07b0] creating inbound stream 15
-default	15:51:48.270369-0500	RedLemon	0x7fbf96299308 ID=0 Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> received response, status 200 content K
-default	15:51:48.271035-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> response ended
-default	15:51:48.271509-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> done using Connection 15
-default	15:51:48.271780-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> summary for task success {transaction_duration_ms=228, response_status=200, connection=15, protocol="h3", domain_lookup_duration_ms=4, connect_duration_ms=50, secure_connection_duration_ms=48, private_relay=false, request_start_ms=67, request_duration_ms=1, response_start_ms=226, response_duration_ms=1, request_bytes=166, response_bytes=1380, cache_hit=true}
-default	15:51:48.272281-0500	RedLemon	Task <6AB48199-F14C-41E1-A1BC-1CDE06C97DF0>.<163> finished successfully
-default	15:51:48.277560-0500	RedLemon	✅ Found 4 total subtitle options from SubDL
-default	15:51:48.277811-0500	RedLemon	✅ Filtered to 4 English subtitles
-default	15:51:48.278270-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
-default	15:51:48.278774-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
-default	15:51:48.279912-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.280558-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.280755-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.281213-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.281502-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.282046-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.282294-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.282980-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.283200-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.284040-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.284243-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.284780-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.285170-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.285334-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.285834-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.286185-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.286863-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.287420-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.288348-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.288955-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.289203-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.289403-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.290019-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.290183-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.290709-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.291034-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.292347-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.292768-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.292977-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.293628-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.293931-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.294565-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.294708-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.295114-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.295294-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.295882-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.296344-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.296471-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.296904-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.297152-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.297353-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.297821-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.297938-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.298636-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.298856-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.299375-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.299556-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.300065-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.300198-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.301058-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.301322-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.302412-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.302803-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.303154-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.303524-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.303966-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.304585-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.305047-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.305223-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.305834-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.306298-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.306449-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.306864-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.307125-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.307374-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.307917-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.308054-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.309142-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.309530-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.310444-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.310707-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.310972-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.311583-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.311709-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.312367-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.312731-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.312939-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.313369-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.313548-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.313922-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.314114-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.314274-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.314702-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.314907-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.315650-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.315859-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.316257-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.316445-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.316617-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.317182-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.317428-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.317893-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.318120-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.318511-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.318703-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.318876-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.319297-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.319502-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.320072-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.320259-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.321060-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.321271-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.321444-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.321902-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.322135-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.322350-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.322770-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.322946-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.323088-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.323451-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.323647-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.324054-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.324263-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.325289-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.326031-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.326381-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.327136-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.327573-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.327756-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.328188-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.328401-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.328839-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.329037-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.329179-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.329546-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.329731-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.329912-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.330322-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.330517-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.330941-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.331151-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.331293-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.331648-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.331815-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.331974-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.332701-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.333040-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.333520-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.333705-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.333846-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.334414-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.334666-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.335547-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.336246-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.337137-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.337506-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.338149-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.338722-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.338943-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.339129-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.339607-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.339867-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.340070-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.340591-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.340745-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.340876-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.341495-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.341759-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.342194-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.342441-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.343218-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.344377-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.344687-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.345341-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.345576-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.345825-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.346281-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.346538-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.347204-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.347420-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.347961-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.348103-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.348202-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.349261-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.349658-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.349955-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.350765-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.351241-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.351475-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.352118-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.352518-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.352963-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.353123-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.353432-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.353610-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.353745-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.354115-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.354372-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.355021-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.355346-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.355972-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.356331-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.356657-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.357192-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.357351-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.357566-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.358072-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.358288-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.359142-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.359591-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.359776-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.360552-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.360783-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.361532-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.361732-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.362132-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.362315-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.362462-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.362929-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.363250-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.363864-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.364023-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.364629-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.364860-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.365031-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.366187-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.366379-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.366592-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.367676-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.367959-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.370786-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.371061-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.371499-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.371670-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.371810-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.372416-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.372611-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.373743-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.373979-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.374110-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.376524-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.378060-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.378472-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.379364-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.379760-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.380364-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.380692-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.380889-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.381551-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.381798-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.382289-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.382565-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.383286-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.383500-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.384227-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.384438-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.384699-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.385426-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.385691-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.385890-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.386310-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.386516-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.386651-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.387017-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.387192-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.387351-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.388008-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.388556-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.389286-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.389498-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.389641-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.390122-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.390309-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.390480-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.390923-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.391169-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.391356-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.392900-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.393304-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.393575-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.394454-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.394789-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.395292-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.395556-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.395751-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.396315-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.396558-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.397063-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.397265-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.397430-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.397893-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.398145-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.398349-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.398888-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.399122-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.399260-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.400177-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.400465-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.401247-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.403532-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.404161-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.405138-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.405915-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.406125-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.406929-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.407115-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.407737-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.408819-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.409646-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.411139-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.411701-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.411876-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.412621-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.412825-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.413460-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.414088-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.415033-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.415656-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.416452-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.417295-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.418256-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.418968-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.419240-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.419519-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.420413-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.420923-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.421576-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.422013-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.422214-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.423415-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.424050-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.424422-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.425285-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.426729-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.426908-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.428332-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.428514-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.428931-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.429517-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.429939-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.430713-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.431210-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.431865-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.432760-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.432977-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.434041-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.434662-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.435224-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.436546-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.436748-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.437140-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.437731-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.437907-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.438688-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.439476-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.440027-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.440819-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.441042-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.441183-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.442878-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.443147-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.444304-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.445179-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.445435-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.445846-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.446588-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.447038-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.447590-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.448051-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.448467-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.449148-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.450071-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.451122-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.451649-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.451977-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.452713-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.453269-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.453954-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.454458-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.454895-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.456043-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.456264-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.457175-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.458101-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.458808-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.459384-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.459599-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.460433-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.460669-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.461107-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.462317-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.462521-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.463262-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.463799-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.464046-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.464454-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.465060-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.465615-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.466345-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.466825-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.467170-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.471947-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.472511-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.473189-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.473432-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.478117-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.478560-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.479104-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.480189-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.480684-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.481251-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.481556-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.481758-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.482696-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.482893-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.483259-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.484704-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.485419-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.485876-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.486498-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.486896-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.494607-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.505662-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.505906-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.506700-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.506932-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.507308-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.507950-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.508188-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.509675-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.510163-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.510984-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.512151-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.512429-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.512922-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.513710-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.513873-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.514707-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.515188-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.516097-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.516287-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.517324-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.519226-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.519457-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.520469-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.521598-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.523597-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.524988-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.525243-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.526989-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.529266-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.530044-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.530284-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.530463-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.531254-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.531739-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.532615-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.533938-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.534403-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.537420-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.537708-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.538888-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.539525-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.540023-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.542141-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.544146-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.545892-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.546093-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.546741-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.546988-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.547563-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.548177-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.549010-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.549242-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.549801-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.550364-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.551927-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.552174-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.552846-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.553422-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.553693-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.554476-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.554656-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.556760-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.556996-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.558070-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.558769-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.559353-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.560084-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.560312-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.560847-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.563677-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.564558-0500	runningboardd	Invalidating assertion 174-8572-1897 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:48.564461-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.565387-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.565954-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.566121-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.566728-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.566960-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.568584-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.569969-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.570125-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.570210-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.570417-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.570508-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.570588-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.570781-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.571295-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.571543-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.571645-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.571715-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.571888-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.571974-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.572050-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.572379-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.572722-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.573978-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.574218-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.574316-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.574525-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.576802-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.578980-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.580415-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.580621-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.581340-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.581548-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.583976-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.584371-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.584480-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.584708-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.584847-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.584947-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.585841-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.586589-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.586823-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.588517-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.588815-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.589350-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.590220-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.590873-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.591041-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.591655-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.592264-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.592458-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.593086-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.593614-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.593734-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.593975-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.594099-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.594194-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.595251-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.595366-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.595633-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.597516-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.597795-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.597914-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.598012-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.598246-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.598407-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.599025-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.599163-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.599391-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.599497-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.599675-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.599764-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.599833-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.601744-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.601958-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.602600-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.603971-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.604187-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.604825-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.605180-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.605499-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.606338-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.607527-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.609127-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.609304-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.610105-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.610390-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.611803-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.612031-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.614341-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.614767-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.614938-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.617345-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.617563-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.617918-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.618092-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.618441-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.618577-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.618900-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.619045-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.619358-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.619535-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.620589-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.621248-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.621428-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.621995-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.622200-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.622853-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.623244-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.623400-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.623747-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.624358-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.624783-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.624924-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.627091-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.627270-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.627940-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.628159-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.634229-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.634419-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.635814-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.638300-0500	RedLemon	    🎯 Release group match: 2025 = 2025
-default	15:51:48.638459-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
-default	15:51:48.638576-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.638803-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.638889-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.639070-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.639153-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.639774-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.639934-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.640219-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.640357-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.640474-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.640748-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.640885-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.641006-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.641802-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.641936-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.642131-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.642222-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.643321-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.643714-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.644416-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.644579-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.645123-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.645313-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.645670-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.646150-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.646267-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.646461-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.646569-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.646770-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.646850-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.647025-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.648585-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.649843-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.649996-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.650669-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.652335-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.652688-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.652781-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.652861-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.653039-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.653141-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.653316-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.653407-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.653716-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.654450-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.654622-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.654987-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.655437-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.655971-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.656346-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.656492-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.656812-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.657123-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.658551-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.659565-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.659780-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.660978-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.661139-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.661366-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.661556-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.661645-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.662575-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.662745-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.663007-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.663216-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.663310-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.663500-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.663603-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.664773-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.664942-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.665534-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.665998-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.666610-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.666822-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.667145-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.667292-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.668729-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.669420-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.669608-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.669734-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.670088-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.670269-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.670659-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.670814-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.671159-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.671310-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.671664-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.671875-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.672420-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.672744-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.674420-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.676079-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.676302-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.676935-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.680968-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.681103-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.684324-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.684462-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.685062-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.685235-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.685482-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.685565-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.685750-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.685832-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.686003-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.687318-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.687952-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.688107-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.688426-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.688563-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.688875-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.689042-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.689331-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.693995-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.694232-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.695101-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.695225-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.695307-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.695739-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.695914-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.696333-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.696487-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.696604-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.697002-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.697150-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.697280-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.697854-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.697987-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.698180-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.698256-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.698416-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.698494-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.698652-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.699067-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.699393-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.699558-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.700283-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.702059-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.702368-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.703433-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.703809-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.703980-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.704528-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.704684-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.705024-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.705177-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.705502-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.705662-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.706015-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.706455-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.706816-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.706969-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.707506-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.707694-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.708106-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.708252-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.708369-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.709449-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.709630-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.709783-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.710644-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.710798-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.710993-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.711081-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.711149-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.711308-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.711388-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.712251-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.712501-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.712624-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.713308-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.713488-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.713607-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.713915-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.714049-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.714175-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.714637-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.714826-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.715387-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.715498-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.715706-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.715965-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.716449-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.716660-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.718894-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.719110-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.719249-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.719688-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.719875-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.720338-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.720551-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.721009-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.721189-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.721326-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.722840-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.723181-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.723356-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.727386-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.727655-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.728027-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.728179-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.728287-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.729477-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:48.729526-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:48.729572-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:48.731152-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.731323-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.732970-0500	runningboardd	Invalidating assertion 174-114-1898 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:48.732968-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.736772-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.736982-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.737936-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.739694-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.739824-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.740057-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.740149-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.740227-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.740416-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.740516-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.741235-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.741369-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.741666-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.743768-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.745090-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.745333-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.745713-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.747020-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.747173-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.747499-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.748162-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.749440-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.749613-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.749838-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.749943-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.750020-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.751734-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.751966-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.752321-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.752710-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.757474-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.758094-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.758275-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.758394-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.759510-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.759633-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.759721-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.759922-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.760030-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.760852-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.761032-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.761523-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.762788-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.762943-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.763041-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.763401-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.763686-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.764020-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.764261-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.764666-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.764822-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.765327-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.765508-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.766025-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.766132-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.766324-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.766407-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.766582-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.766680-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.766863-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.770864-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.771493-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.771615-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.771823-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.771930-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.772109-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.772196-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.772263-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.774069-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.774245-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.774606-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.774996-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.776525-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.777100-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.777205-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.777394-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.777481-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.777659-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.777765-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.780832-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.782013-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.783973-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.784362-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.784532-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.784920-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.785037-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.785402-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.785528-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.786463-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.789829-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.790339-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.790586-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.790734-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.790966-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.791059-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.791145-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.791570-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.791771-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.792758-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.792937-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.793237-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.794127-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.794488-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.794910-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.795864-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.796109-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.796509-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.796688-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.797177-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.797343-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.797662-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.798115-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.798470-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.798938-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.799117-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.799242-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.799567-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.799707-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.799834-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.800657-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.800868-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.803967-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.804158-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.804465-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.804825-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.804980-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.805232-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.805841-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.806037-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.806463-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.806993-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.807387-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.808356-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.808546-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.809287-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.809614-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.809818-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.810344-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.810509-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.812057-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.813715-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.813883-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.814337-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.814973-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.815155-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.816066-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.816531-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.816679-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.820044-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.820352-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.820486-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.821074-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.821283-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.821841-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.822019-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.822150-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.822477-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.822623-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.822753-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.823417-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.830852-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.834556-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.834709-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.834815-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.835165-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.835292-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.835410-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.838473-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.839272-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.839778-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.840018-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.840248-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.840785-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.841073-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.841794-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.845210-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.845464-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.847032-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.847907-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.849086-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.849662-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.849984-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.850701-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.851111-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.851300-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.851722-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.851892-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.852013-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.853012-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.853256-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.853455-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.855078-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.858850-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.859488-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.860011-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.860148-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.860821-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.861176-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.861330-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.861799-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.861927-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.862179-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.862268-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.862337-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.862550-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.862631-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.863486-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.865344-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.865767-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.866231-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.866348-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.866477-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.867211-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.867424-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.867554-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.872296-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.872492-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.872725-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.872826-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.872901-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.873075-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.873157-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.874325-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.874737-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.877695-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.878032-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.878143-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.878349-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.878441-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.878629-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.878751-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.881211-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.881791-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.882800-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.883115-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.883861-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.884093-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.886189-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.886380-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.894054-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.895062-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.899173-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.899516-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.900537-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.901936-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.902399-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.902592-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.904089-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.904294-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.904774-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.905344-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.905756-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.905927-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.906277-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.906457-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.907016-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.907159-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.907468-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.907660-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.908463-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.909584-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.909868-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.909960-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.911314-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.911479-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.911803-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.911972-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.912307-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.912431-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.912723-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.912864-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.913176-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.913757-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.914141-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.914268-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.915510-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:48.914922-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.915571-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:48.915076-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.915621-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:48.916297-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.917054-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.917701-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.917864-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.919368-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.919548-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.920773-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.921034-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.921854-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.922913-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.923806-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.924092-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.927839-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.928320-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.928970-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.929121-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.929548-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.929932-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.930882-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.931324-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.932012-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.932909-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.934480-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.934654-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.934957-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.935331-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.935703-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.935846-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.936172-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.936347-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.938059-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.938221-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.941252-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.943267-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.943826-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.944125-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.944911-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.945174-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.945641-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.945812-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.946154-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.946271-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.946484-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.946593-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.946801-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.946878-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.947052-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.948106-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.948501-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.948662-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.950392-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.950723-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.952055-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.952214-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.952537-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.952713-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.953689-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.953864-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.954206-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.954364-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.955061-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.955291-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.956016-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.956163-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.956387-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.957267-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.957807-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.958738-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.959230-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.959389-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.960130-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.960319-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.961143-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.961347-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.961713-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.961909-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.963040-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.963176-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.963390-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.963495-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.963695-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.963771-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.963937-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.965059-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.966243-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.966756-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.967447-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.967683-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.970076-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.970371-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.970774-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.970967-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.971757-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.971920-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.973701-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.973953-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.974983-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.975270-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.977618-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.977830-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.978380-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.978635-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.979031-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.979290-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.980622-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.980792-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.981937-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.982367-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.983043-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.983207-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:48.983990-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:48.984944-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:48.985584-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.986090-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:48.986556-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:48.987173-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:48.987394-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:48.987660-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.000884-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.001110-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.001446-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.001605-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.001719-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.002012-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.002161-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.011997-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.012460-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.013004-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.014364-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.014553-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.014791-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.015341-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.015500-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.015635-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.015948-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.016269-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.016860-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.017080-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.017211-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.018717-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.018898-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.019026-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.019356-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.019512-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.019829-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.019990-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.020241-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.022058-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.022250-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.022511-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.023175-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.023370-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.023710-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.024451-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.025166-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.026107-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.026246-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.026340-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.026621-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.026794-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.027163-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.027654-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.027791-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.028117-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.028255-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.028382-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.028686-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.028831-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.030755-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.030929-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.031050-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.031348-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.031483-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.031610-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.032246-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.032385-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.032588-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.032680-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.032749-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.032911-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.032990-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.033637-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.035332-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.035552-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.037008-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.037244-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.038405-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.038693-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.038794-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.038877-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.039066-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.039169-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.039347-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.040033-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.040165-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.040746-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.040937-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.041765-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.042920-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.043076-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.043309-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.043404-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.043473-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.043638-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.043716-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.044532-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.046710-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.046916-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.047261-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.047418-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.047538-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.047838-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.047974-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.048098-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.048625-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.048758-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.048955-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.049046-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.049117-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.049280-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.049360-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.049904-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.050705-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.050913-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.051270-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.051785-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.051903-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.052119-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.052205-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.052280-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.052459-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.054599-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.055162-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.055324-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.055444-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.055732-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.055866-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.055990-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.056572-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.056775-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.057329-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.057586-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.057713-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.062587-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.062762-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.063160-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.063534-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.063704-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.065184-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.065346-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.065455-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.065747-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.065881-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.066009-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.066749-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.066950-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.070545-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.070760-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.070894-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.071244-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.071393-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.071527-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.072195-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.075018-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.076577-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.076785-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.076905-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.077771-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.077944-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.079015-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.079416-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.079596-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.079940-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.080096-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.080637-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.081054-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.081222-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.081373-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.082037-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.082351-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.083707-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.083929-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.084395-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.084747-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.084901-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.085026-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.086333-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.086802-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.096741-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.096923-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.097038-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.097309-0500	RedLemon	    📺 Resolution match: 1080p
-default	15:51:49.097439-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.097882-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.098400-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.098540-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.098762-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.098845-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.099317-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.099479-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.100599-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.101308-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.104716-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.104939-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.105319-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.107076-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.107507-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.107690-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.108035-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.108170-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.108500-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.123289-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.123732-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.123907-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.124260-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.124389-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.128484-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.134666-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.135040-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.135202-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.135529-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.135658-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.135970-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.136126-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.136471-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.136667-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.137047-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.137185-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.137516-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.137701-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.140645-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.140846-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.143826-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.156750-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.158061-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.159109-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.159604-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.160571-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.161056-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
-default	15:51:49.161761-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:49.162017-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
-default	15:51:49.162111-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:49.162497-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
-default	15:51:49.163324-0500	RedLemon	✅ Selected 3 subtitle options for stream
-default	15:51:49.163460-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 207
-default	15:51:49.163567-0500	RedLemon	   OUTPUT[0]: Frankenstein.2025.2160p.NF.WEB-DL.HDR.MULTi.DDP5.1.Atmos.H265-BEN.THE.MEN
-👤 542 💾 36.27 GB ⚙️ ilCorSaRoNeRo
-Multi Audio / 🇬🇧 / 🇷🇺 / 🇮🇹 / 🇵🇹 / 🇪🇸 / 🇫🇷 / 🇩🇪 / 🇮🇳 / 🇵🇱 / 🇺🇦 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.163651-0500	RedLemon	   OUTPUT[1]: Frankenstein.2025.4K.HDR.DV.2160p.WEBDL Ita Eng x265-NAHOM
+default	16:11:18.578995-0500	RedLemon	   INPUT[149]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.579382-0500	RedLemon	   INPUT[150]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.579719-0500	RedLemon	   INPUT[151]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.579920-0500	RedLemon	   INPUT[152]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.580245-0500	RedLemon	   INPUT[153]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.580503-0500	RedLemon	   INPUT[154]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.580693-0500	RedLemon	   INPUT[155]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.581124-0500	RedLemon	   INPUT[156]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.581298-0500	RedLemon	   INPUT[157]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.581562-0500	RedLemon	   INPUT[158]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.581820-0500	RedLemon	   INPUT[159]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.582060-0500	RedLemon	   INPUT[160]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.582242-0500	RedLemon	   INPUT[161]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.582382-0500	RedLemon	   INPUT[162]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.583019-0500	RedLemon	   INPUT[163]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.583785-0500	RedLemon	   INPUT[164]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.586153-0500	RedLemon	   INPUT[165]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.586440-0500	RedLemon	   INPUT[166]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.586724-0500	RedLemon	   INPUT[167]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.586919-0500	RedLemon	   INPUT[168]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.587256-0500	RedLemon	   INPUT[169]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.587379-0500	RedLemon	   INPUT[170]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.587507-0500	RedLemon	   INPUT[171]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.588149-0500	RedLemon	   INPUT[172]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.588273-0500	RedLemon	   INPUT[173]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.588380-0500	RedLemon	   INPUT[174]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:11:18.588690-0500	RedLemon	   INPUT[175]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.588820-0500	RedLemon	   INPUT[176]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.589219-0500	RedLemon	   INPUT[177]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.589443-0500	RedLemon	   INPUT[178]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.590213-0500	RedLemon	   INPUT[179]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.590739-0500	RedLemon	   INPUT[180]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.591188-0500	RedLemon	   INPUT[181]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.591512-0500	RedLemon	   INPUT[182]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.591795-0500	RedLemon	   INPUT[183]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.592040-0500	RedLemon	   INPUT[184]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.592259-0500	RedLemon	   INPUT[185]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.592547-0500	RedLemon	   INPUT[186]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.593245-0500	RedLemon	   INPUT[187]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.593473-0500	RedLemon	   INPUT[188]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.593750-0500	RedLemon	   INPUT[189]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.594084-0500	RedLemon	   INPUT[190]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.594341-0500	RedLemon	   INPUT[191]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.594604-0500	RedLemon	   INPUT[192]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.594724-0500	RedLemon	   INPUT[193]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.594829-0500	RedLemon	   INPUT[194]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.595293-0500	RedLemon	   INPUT[195]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.595424-0500	RedLemon	   INPUT[196]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.595777-0500	RedLemon	   INPUT[197]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:11:18.596013-0500	RedLemon	   INPUT[198]: [RD⚡] Comet 720p | 720p | comet
+default	16:11:18.596226-0500	RedLemon	   INPUT[199]: [RD⚡] Comet 720p | 720p | comet
+default	16:11:18.596375-0500	RedLemon	   INPUT[200]: [RD⚡] Comet 720p | 720p | comet
+default	16:11:18.596541-0500	RedLemon	   INPUT[201]: [RD⚡] Comet 480p | 480p | comet
+default	16:11:18.596844-0500	RedLemon	   INPUT[202]: [RD⚡] Comet unknown | unknown | comet
+default	16:11:18.597017-0500	RedLemon	   INPUT[203]: [RD⚡] Comet unknown | unknown | comet
+default	16:11:18.597512-0500	RedLemon	   INPUT[204]: [RD⚡] Comet unknown | unknown | comet
+default	16:11:18.597637-0500	RedLemon	   INPUT[205]: [RD⚡] Comet unknown | unknown | comet
+default	16:11:18.598325-0500	RedLemon	🔍 Searching SubDL for subtitles: tt1312221 (movie)
+default	16:11:18.598799-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:18.599852-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AEBEDEBD-3318-43EF-827A-B0EBED1C1F56] (reporting strategy default)> on Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> was not selected for reporting
+default	16:11:18.601495-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:18.601843-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:18.602719-0500	RedLemon	Connection 18: enabling TLS
+default	16:11:18.602772-0500	RedLemon	Connection 18: starting, TC(0x0)
+default	16:11:18.602838-0500	RedLemon	[C18 5AB9B89A-C78D-41F9-9313-B71BE9E97B4E Hostname#e0bd0f6c:443 quic-connection, url hash: e5f3d401, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:18.603092-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 initial path ((null))] event: path:start @0.000s
+default	16:11:18.603357-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: B578C974-8552-4DA4-8270-35F2B7B4F95C
+default	16:11:18.603507-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
+default	16:11:18.603534-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C18] reporting state preparing
+default	16:11:18.604202-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 initial path ((null))] event: path:start @0.001s
+default	16:11:18.605412-0500	mDNSResponder	[R2247] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:18.604691-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: BFF18654-088F-473E-A254-C3C929015630
+default	16:11:18.605005-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
+default	16:11:18.606450-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> setting up Connection 18
+default	16:11:18.608613-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2105 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:18.611608-0500	runningboardd	Assertion 174-114-2105 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:18.613387-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:18.613441-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:18.613492-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:18.640491-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#246ac99d.443
+default	16:11:18.640594-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#ec7b8fac:443
+default	16:11:18.638931-0500	mDNSResponder	[R2247] getaddrinfo stop -- hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, client pid: 10440 (RedLemon)
+default	16:11:18.640728-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.037s
+default	16:11:18.640897-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 initial path ((null))] event: path:start @0.037s
+default	16:11:18.641494-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.038s, uuid: 424B9702-5ADE-45D4-9D44-89D29BF4BB70
+default	16:11:18.641724-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.038s
+default	16:11:18.642443-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.039s
+default	16:11:18.644071-0500	RedLemon	nw_protocol_instance_ignore_future_path_changes [C18.1.1:2] Ignoring future path changes for protocol
+default	16:11:18.644166-0500	RedLemon	quic_initialize_block_invoke [C18.1.1:2] [-1ff67d346dffb30e] created QUIC connection (spin bit enabled)
+default	16:11:18.644943-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.041s
+default	16:11:18.649089-0500	RedLemon	quic_crypto_new_flow [C18.1.1:2] [-1ff67d346dffb30e] TLS stream is: [C19]
+default	16:11:18.649156-0500	RedLemon	[C19 22925CDF-D5B2-4F29-A4D7-99A861935A67 IPv6#246ac99d.443 quic-connection, url hash: e5f3d401, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89, no transport] start
+default	16:11:18.649365-0500	RedLemon	[C19 IPv6#246ac99d.443 initial socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:start @0.000s
+default	16:11:18.649545-0500	RedLemon	[C19 IPv6#246ac99d.443 waiting socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 424B9702-5ADE-45D4-9D44-89D29BF4BB70
+default	16:11:18.649866-0500	RedLemon	[C19 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.000s
+default	16:11:18.649951-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C19] reporting state preparing
+default	16:11:18.650233-0500	RedLemon	nw_flow_connected [C19 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
+default	16:11:18.650309-0500	RedLemon	[C19 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.001s
+default	16:11:18.650784-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C19:1][0x7f989b099500] TLS configured [min_version(0x0304) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:18.650990-0500	RedLemon	boringssl_context_info_handler(2028) [C19:1][0x7f989b099500] Client handshake started
+default	16:11:18.651300-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS client enter_early_data
+default	16:11:18.651546-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS client read_server_hello
+error	16:11:18.670634-0500	RedLemon	quic_packet_parser_inner [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] SH fixed bit is zero
+default	16:11:18.674794-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:18.674890-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:18.675420-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_encrypted_extensions
+error	16:11:18.675610-0500	RedLemon	quic_packet_parser_inner [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] SH fixed bit is zero
+default	16:11:18.676668-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:18.677731-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:18.677988-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:18.678745-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C19:1][0x7f989b099500] Performing external trust evaluation
+default	16:11:18.679091-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C19:1][0x7f989b099500] Asyncing for external verify block
+default	16:11:18.680763-0500	RedLemon	Connection 18: asked to evaluate TLS Trust
+default	16:11:18.681308-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> auth completion disp=1 cred=0x0
+default	16:11:18.696645-0500	RedLemon	Connection 18: TLS Trust result 0
+default	16:11:18.696734-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C19:1][0x7f989b099500] Returning from external verify block with result: true
+default	16:11:18.697021-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C19:1][0x7f989b099500] Certificate verification result: OK
+default	16:11:18.700143-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:18.700268-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:18.700294-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:18.700345-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:18.700728-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:18.703541-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS 1.3 client done
+default	16:11:18.703680-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS client finish_client_handshake
+default	16:11:18.703780-0500	RedLemon	boringssl_context_info_handler(2045) [C19:1][0x7f989b099500] Client handshake state: TLS client done
+default	16:11:18.703840-0500	RedLemon	boringssl_context_info_handler(2034) [C19:1][0x7f989b099500] Client handshake done
+default	16:11:18.705593-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C19:1][0x7f989b099500] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(54ms) flight_time(24ms) rtt(23ms) write_stalls(0) read_stalls(4)]
+default	16:11:18.706393-0500	RedLemon	nw_flow_connected [C19 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
+default	16:11:18.706825-0500	RedLemon	[C19 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.057s
+default	16:11:18.708515-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C19] reporting state ready
+default	16:11:18.708817-0500	RedLemon	[C19 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.059s
+default	16:11:18.710897-0500	RedLemon	[C18.2 Hostname#e0bd0f6c:443 initial path ((null))] event: path:start @0.107s
+default	16:11:18.711417-0500	RedLemon	[C18.2 Hostname#e0bd0f6c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.108s, uuid: DA2954F4-2100-4A08-B1DC-679A8202B294
+default	16:11:18.711653-0500	RedLemon	[C18.2 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.108s
+default	16:11:18.711886-0500	mDNSResponder	[R2248] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:18.713618-0500	RedLemon	quic_pmtud_restart [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] PMTUD enabled, max PMTU: 1398, header size: 48, current PMTU 1248
+default	16:11:18.713814-0500	RedLemon	quic_crypto_tls_ready_inner [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] QUIC connection established in 68.14 ms, RTT 19.117 ms
+default	16:11:18.713956-0500	RedLemon	nw_flow_connected [C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
+default	16:11:18.714354-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.111s
+default	16:11:18.715171-0500	mDNSResponder	[R2248] getaddrinfo stop -- hostname: <mask.hash: '9i/Fwt+MkPMfnlIoEYH4yQ=='>, client pid: 10440 (RedLemon)
+default	16:11:18.714624-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.111s
+default	16:11:18.714693-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.111s
+default	16:11:18.715300-0500	RedLemon	nw_flow_connected [C18.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:18.715856-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.112s
+default	16:11:18.716557-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C18] reporting state ready
+default	16:11:18.716811-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.113s
+default	16:11:18.717014-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.113s
+default	16:11:18.717655-0500	RedLemon	[C18.1.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.114s
+default	16:11:18.717820-0500	RedLemon	[C18.1 Hostname#e0bd0f6c:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.114s
+default	16:11:18.717880-0500	RedLemon	[C18 Hostname#e0bd0f6c:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.114s
+default	16:11:18.718347-0500	RedLemon	Connection 18: connected successfully
+default	16:11:18.718403-0500	RedLemon	Connection 18: TLS handshake complete
+default	16:11:18.718700-0500	RedLemon	Connection 18: ready C(N) E(N)
+default	16:11:18.720874-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> now using Connection 18
+default	16:11:18.724479-0500	RedLemon	Connection 18: received viability advisory(Y)
+default	16:11:18.724565-0500	RedLemon	0x7f989a5e1fd8 ID=0 Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> sent request, body N 0
+default	16:11:18.726716-0500	RedLemon	boringssl_context_new_session_handler(1336) [C19:1][0x7f989b099500] Asyncing for session update block
+default	16:11:18.727387-0500	RedLemon	boringssl_context_new_session_handler(1336) [C19:1][0x7f989b099500] Asyncing for session update block
+default	16:11:18.728055-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C19:1][0x7f989b099500] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(54ms) flight_time(24ms) rtt(23ms) write_stalls(0) read_stalls(4)]
+default	16:11:18.728194-0500	RedLemon	nw_flow_connected [C19 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
+default	16:11:18.728477-0500	RedLemon	quic_stream_create_inbound [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] creating inbound stream 3
+default	16:11:18.729331-0500	RedLemon	quic_stream_create_inbound [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] creating inbound stream 7
+default	16:11:18.730351-0500	RedLemon	quic_stream_create_inbound [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] creating inbound stream 11
+default	16:11:18.732923-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C19:1][0x7f989b099500] Returning from session update block
+default	16:11:18.733935-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C19:1][0x7f989b099500] Returning from session update block
+default	16:11:18.794337-0500	RedLemon	quic_stream_create_inbound [C18.1.1:2] [-01751ec80a8900211a760cc8688941afe651ded9] creating inbound stream 15
+default	16:11:18.972358-0500	RedLemon	0x7f989a5e1fd8 ID=0 Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> received response, status 200 content K
+default	16:11:18.973567-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> response ended
+default	16:11:18.974231-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> done using Connection 18
+default	16:11:18.975282-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> summary for task success {transaction_duration_ms=374, response_status=200, connection=18, protocol="h3", domain_lookup_duration_ms=36, connect_duration_ms=71, secure_connection_duration_ms=68, private_relay=false, request_start_ms=120, request_duration_ms=3, response_start_ms=371, response_duration_ms=2, request_bytes=166, response_bytes=1381, cache_hit=true}
+default	16:11:18.975745-0500	RedLemon	Task <77C6E906-339A-41FE-8287-0F1719E8537B>.<265> finished successfully
+default	16:11:18.978440-0500	RedLemon	✅ Found 4 total subtitle options from SubDL
+default	16:11:18.978656-0500	RedLemon	✅ Filtered to 4 English subtitles
+default	16:11:18.979275-0500	RedLemon	✅ Filtered out 0 problematic subtitle versions
+default	16:11:18.979856-0500	RedLemon	✅ Movie or no episode specified, using top 3 English subtitle options
+default	16:11:18.980536-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.981050-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:18.981698-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.982719-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.982894-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:18.983099-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:18.985586-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:18.986154-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:18.986644-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.986823-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.987334-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.987482-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:18.987607-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:18.987941-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:18.988106-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:18.988415-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.988565-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.989063-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.989438-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:18.989834-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:18.990231-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:18.991729-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:18.992146-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.992794-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:18.992960-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:18.993308-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:18.993505-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:18.993848-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:18.994339-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.996068-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:18.996211-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:18.996521-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:18.996973-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:18.997559-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:18.997745-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:18.998250-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:18.999413-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.999769-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.000241-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.002796-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.003192-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.003350-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.003467-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.004051-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.007304-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.010586-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.010951-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.011533-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.011790-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.012360-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.013154-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.017074-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.017319-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.017677-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.017842-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.018140-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.018289-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.023689-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.024120-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.024286-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.024607-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.024769-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.025190-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.031128-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.031296-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.031970-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.032855-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.033781-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.034271-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.034441-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.034795-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.034966-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.035330-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.035697-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.035880-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.039932-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.040534-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.041254-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.041650-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.042501-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.042685-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.042839-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.043649-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.043940-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.045435-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.045667-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.046350-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.046580-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.047350-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.047754-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.050101-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.053208-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.054771-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.054969-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.055620-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.056257-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.056934-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.057596-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.057781-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.058530-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.061830-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.062499-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.062779-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.063529-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.064461-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.065139-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.065570-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.066329-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.066489-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.069145-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.069686-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.070435-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.071095-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.071882-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.072478-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.077630-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.079556-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.079926-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.080873-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.081840-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.082571-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.082983-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.083494-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.084387-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.084990-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.085171-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.085680-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.086357-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.086891-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.088080-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.089817-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.090792-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.091339-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.091953-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.092781-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.093182-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.094316-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.094496-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.095386-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.095879-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.096441-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.096858-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.097404-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.097707-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.098150-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.098809-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.104213-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.105129-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.105628-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.106314-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.106492-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.106743-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.107387-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.107863-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.108508-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.109019-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.109211-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.110749-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.111471-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.112123-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.112638-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.112895-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.113440-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.113797-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.114414-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.114706-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.115344-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.115835-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.116107-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.116364-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.117014-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.117789-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.118633-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.119167-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.120513-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.123666-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.123943-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.125006-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.125318-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.126055-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.126769-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.127259-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.127907-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.128261-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.129142-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.130002-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.130198-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.131746-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.131957-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.132513-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.133452-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.134218-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.135307-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.136173-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.137350-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.138789-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.140120-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.140291-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.140953-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.141331-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.141989-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.142858-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.144555-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.145271-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.145636-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.146025-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.146701-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.147106-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.147917-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.148071-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.149648-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.149832-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.151303-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.152232-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.153064-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.153665-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.154465-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.159728-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.161098-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.161900-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.162072-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.162869-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.163984-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.164432-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.165251-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.166270-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.168940-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.171330-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.173208-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.174192-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.175082-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.175611-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.176381-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.176765-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.177433-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.177583-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.182490-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.182966-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.187705-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.188992-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.189182-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.191062-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.191458-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.192038-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.192642-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.193121-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.195962-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.196693-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.197290-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.198021-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.198503-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.198884-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.199606-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.200231-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.201777-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.203455-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.204265-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.204699-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.205745-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.206389-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.207182-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.207588-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.207731-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.209280-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.209459-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.213418-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.214095-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.215014-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.215825-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.216219-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.217093-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.222239-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.224064-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.224586-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.225913-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.226528-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.227253-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.227488-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.228476-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.228761-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.229670-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.229922-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.230609-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.231194-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.231349-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.231872-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.232621-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.232867-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.234173-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.234376-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.235505-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.236718-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.236882-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.237402-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.237967-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.238152-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.238482-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.241039-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.241197-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.241998-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.242202-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.242937-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.243501-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.243769-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.244891-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.245129-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.247997-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.248193-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.250066-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.250276-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.250998-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.251184-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.251796-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.253144-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.253401-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.254427-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.255127-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.257085-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.257319-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.257827-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.258590-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.258817-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.259450-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.260039-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.260354-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.261112-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.261352-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.262100-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.262907-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.263156-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.263540-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.264422-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.264715-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.265732-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.265908-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.266062-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.266995-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.268104-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.269658-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.270406-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.270658-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.271473-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.271682-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.272617-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.273067-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.274287-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.274771-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.275230-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.275665-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.275830-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.276518-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.276760-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.277807-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.278335-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.278763-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.278947-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.279258-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.279618-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.280002-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.280440-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.280843-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.281310-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.281677-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.281855-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.282154-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.282525-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.282672-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.282809-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.283128-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.283864-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.284209-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.284354-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.284470-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.285058-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.285545-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.285994-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.286417-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.294792-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.298650-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.298826-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.299566-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.299737-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.300196-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.300451-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.300815-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.300951-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.301254-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.301398-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.301721-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.302401-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.303148-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.304223-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.306052-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.306278-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.307132-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.307321-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.307905-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.308077-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.308197-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.308528-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.308687-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.308825-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.309182-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.309370-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.309828-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.309979-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.310453-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.310699-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.311186-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.311355-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.311722-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.311871-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.312227-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.312552-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.312742-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.313245-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.313375-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.313867-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.314035-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.314837-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.315059-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.315480-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.315660-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.315803-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.316148-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.316309-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.316508-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.317064-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.317316-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.317781-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.317929-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.318242-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.318708-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.318866-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.319005-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.319365-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.319797-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.320301-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.320497-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.320863-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.321037-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.321187-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.321485-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.322093-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.323065-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.323278-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.323421-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.323784-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.323954-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.324103-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.324479-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.325087-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.325503-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.325680-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.325818-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.326176-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.326337-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.326488-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.326873-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.327090-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.327492-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.327629-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.327765-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.328097-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.328262-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.328407-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.328768-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.328927-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.329437-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.329628-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.329771-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.330122-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.330285-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.330430-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.331016-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.331432-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.331820-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.332000-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.332149-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.332494-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.332664-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.333117-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.333620-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.333858-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.334462-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.334723-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.334908-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.335236-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.335520-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.335659-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.337135-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.337335-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.337785-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.337970-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.338113-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.338587-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.338782-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.338937-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.340538-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.340943-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.341778-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.342047-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.342468-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.342947-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.343072-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.343214-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.343842-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.344043-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.344432-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.344609-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.344743-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.345077-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.345236-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.345377-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.345730-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.345913-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.346441-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.346952-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.347237-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.347831-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.347959-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.348107-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.348727-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.348907-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.349278-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.349437-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.349571-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.350095-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.350259-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.350406-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.351162-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.351383-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.352139-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.352401-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.352550-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.353048-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.353216-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.353374-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.353888-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.354211-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.354695-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.354842-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.355017-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.355376-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.355545-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.355690-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.356370-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.357162-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.357578-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.357780-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.357925-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.358673-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.358859-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.359014-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.359386-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.359582-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.362433-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.362581-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.363152-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.363395-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.364233-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.364430-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.365097-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.365581-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.365751-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.366231-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.366471-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.366810-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.367544-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.367708-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.369426-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.369695-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.370189-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.370452-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.370647-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.371139-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.371295-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.371704-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.371974-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.372870-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.373087-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.373878-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.374146-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.374797-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.375274-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.375780-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.375979-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.376547-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.376672-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.377159-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.377321-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.377763-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.377962-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.378149-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.378593-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.378730-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.379149-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.379650-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.379837-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.380435-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.381318-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.381484-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.381946-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.382225-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.382503-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.383065-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.383521-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.384176-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.384682-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.385251-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.385478-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.385752-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.386460-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.386617-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.387667-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.389884-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.390114-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.391227-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.391514-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.392409-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.392918-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.393069-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.393534-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.393734-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.394409-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.394598-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.394993-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.395147-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.395422-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.396096-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.396333-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.396523-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.396934-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.397134-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.397279-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.397881-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.398098-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.398535-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.398796-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.399380-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.399583-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.399744-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.400151-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.400345-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.400861-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.401597-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.401870-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.402363-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.403845-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.404071-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.404635-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.407160-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.407454-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.408269-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.409432-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.409873-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.410069-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.410388-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.411341-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.411566-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.412056-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.412298-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.413161-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.413775-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.413923-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.414583-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.415031-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.415210-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.415664-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.415896-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.416076-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.416933-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.417373-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.419008-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.419532-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.420001-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.420454-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.420825-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.421004-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.422288-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.424709-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.429325-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.429526-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.429682-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.430974-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.431391-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.431591-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.432194-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.432382-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.432574-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.432945-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.433121-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.434114-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.434822-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.438365-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.438596-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.438767-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.439727-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.440234-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.440365-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.440606-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.441993-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.442708-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.442909-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.457540-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.458168-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.458478-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.458903-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.459070-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.459631-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.459815-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.459933-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.460383-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.460561-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.460912-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.461069-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.461421-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.461898-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.472326-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.474489-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.474719-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.474879-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.475296-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.475465-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.475821-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.476172-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.476639-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.476808-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.477214-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.477989-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.478214-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.478626-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.478806-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.478929-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.479245-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.479408-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.488302-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.489538-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.489964-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.490410-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.490602-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.490722-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.491074-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.491278-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.491790-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.491982-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.493716-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.493941-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.494400-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.494568-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.494713-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.495469-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.495723-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.495943-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.506160-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.507566-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.507699-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.508058-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.508481-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.508657-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.509104-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.509454-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.510536-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.510792-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.510916-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.511363-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.511523-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.512204-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.512916-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.513235-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.513396-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.514082-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.514524-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.514766-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.521387-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.522725-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.523330-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.523816-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.524159-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.524823-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.525168-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.526329-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.526529-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.526680-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.527117-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.528120-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.530133-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.531327-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.532507-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.533834-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.538917-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.540467-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.541347-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.542293-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.543293-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.545341-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.546314-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.547379-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.548141-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.548943-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.551700-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.552603-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.553519-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.554405-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.555171-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.558355-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.559012-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.560022-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.562201-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.571310-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.573040-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.574848-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.575860-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.577266-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.579344-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.580688-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.586359-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.587552-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.588210-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.590106-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.590755-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.591365-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.592713-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.593214-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.594248-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.595038-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.595338-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.596131-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.596523-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.596885-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.597635-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.597995-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.598835-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.599911-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.600229-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.603034-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.603382-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.603693-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.604255-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.604470-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.605540-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.606487-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.607109-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.607410-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.608153-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.608443-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.608758-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.609447-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.610073-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.610672-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.610958-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.611380-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.612178-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.612472-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.612762-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.613286-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.613571-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.614237-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.615164-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.615806-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.616116-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.616370-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.617253-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.618701-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.619079-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.620322-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.620744-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.621412-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.622073-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.622411-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.623225-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.623754-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.624428-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.625072-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.625268-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.626661-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.628240-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.628901-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.629141-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.629436-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.630074-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.630728-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.631433-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.631762-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.632085-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.632986-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.633244-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.633830-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.634531-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.636585-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.636827-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.637586-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.637892-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.639012-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.640060-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.640324-0500	RedLemon	  [2] Score: 100 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.641328-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.641665-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.642157-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.642781-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.643065-0500	RedLemon	  [1] Score: 100 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.644012-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.644331-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.644699-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.645384-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.645917-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.646747-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.647378-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.647531-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.648268-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.648497-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.649144-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.649385-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.650346-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.651591-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.651829-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.653019-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.653438-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.653912-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.654759-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.656867-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.658849-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.659039-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.660104-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.660562-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.661096-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.661741-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.661881-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.672578-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.674021-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.674488-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.675292-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.675438-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.676280-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.677026-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.677527-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.678030-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.679328-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.680221-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.680754-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.681813-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.682291-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.682801-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.683697-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.688030-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.688219-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.689280-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.690078-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.691257-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.691839-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.692795-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.693993-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.695112-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.696120-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.696270-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.696990-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.697284-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.697889-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.698489-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.699134-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.699966-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.700126-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.706892-0500	RedLemon	  [2] Score: 0 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.708472-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.709156-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.717498-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.721776-0500	runningboardd	Invalidating assertion 174-10440-2104 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:19.722358-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.723195-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.724071-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.724366-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.724998-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.725712-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.726237-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.726640-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.727220-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.727437-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.727967-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.728501-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.728710-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.729330-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.729748-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.730012-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.731137-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.731333-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.732033-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.732520-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.732748-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.733522-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.735641-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.737015-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.737762-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.738055-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.740020-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.740463-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.740994-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.741435-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.741974-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.743081-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.748481-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.748718-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.750179-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.752111-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.753163-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.754591-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.756620-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.756885-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.757673-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.757921-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.758476-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.759174-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.759780-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.760003-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.760678-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.760996-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.762063-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.762819-0500	RedLemon	  [1] Score: 0 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.763437-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.763691-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.764718-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.765033-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.765681-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.766365-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.766876-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.767853-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.768043-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.770454-0500	RedLemon	    🎯 Release group match: 2025 = 2025
+default	16:11:19.770762-0500	RedLemon	  [3] Score: 1000 | Frankenstein (2025) eng
+default	16:11:19.771305-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.773355-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.773935-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.774657-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.774821-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.776204-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.776397-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.777108-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.777266-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.780128-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.780319-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.780870-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.781064-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.782248-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.782949-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.783456-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.785449-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.785878-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.786073-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.786529-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.786787-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.787786-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.788182-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.788584-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.790343-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.791309-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.791490-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.791887-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.792229-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.792826-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.793010-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.793361-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.793937-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.794709-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.795077-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.795440-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.795615-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.796348-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.796475-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.796693-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.796787-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.796974-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.798103-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.798512-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.798641-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.798942-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.799158-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.799576-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.799771-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.800344-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.800683-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.801080-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.801229-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.801634-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.801825-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.803601-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.803761-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.804096-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.804382-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.804912-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.805121-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.805968-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.806106-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.806478-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.806641-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.807007-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.807199-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.807607-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.807761-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.808185-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.808398-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.808840-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.808996-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.809520-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.809849-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.810275-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.810439-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.810822-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.811019-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.811414-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.811563-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.811925-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.812072-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.812433-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.812623-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.812973-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.813106-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.813443-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.813602-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.813961-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.814141-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.815151-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.815289-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.815673-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.815941-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.816520-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.816770-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.817203-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.817359-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.817811-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.817980-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.818404-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.818572-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.818962-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.819119-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.819525-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.819839-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.820259-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.820461-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.820854-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.821007-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.821353-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.821481-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.821872-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.822082-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.822688-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.823348-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.823980-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.824255-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.824829-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.825246-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.825678-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.825841-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.826205-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.826428-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.827038-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.827245-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.827677-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.828351-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.829046-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.829227-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.829631-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.829956-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.830817-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.830996-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.831367-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.831520-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.831885-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.832083-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.832483-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.832629-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.833128-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.833333-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.833885-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.834083-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.834867-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.835061-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.836287-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.836616-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.837049-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.837245-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.837722-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.837874-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.838414-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.838561-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.838953-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.839138-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.840243-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.840406-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.841255-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.841481-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.842161-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.842396-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.842804-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.842981-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.843113-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.843569-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.843770-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.843929-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.844299-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.844484-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.844846-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.845019-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.845153-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.845487-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.845644-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.845791-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.846147-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.846328-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.847076-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.847264-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.847409-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.847765-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.847925-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.848072-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.848536-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.848731-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.849208-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.849353-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.849587-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.850199-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.850334-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.850579-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.851398-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.851653-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.852292-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.852478-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.852608-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.853338-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.853547-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.853965-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.854415-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.855132-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.857620-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.858330-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.858529-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.858890-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.859050-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.859194-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.859500-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.859774-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.860194-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.860358-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.860642-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.861306-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.861437-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.861736-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.862137-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.862329-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.862708-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.862884-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.863024-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.863368-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.864044-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.864366-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.864800-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.864999-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.865381-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.865523-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.865649-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.865991-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.866158-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.866308-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.866856-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.867120-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.867640-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.868118-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.868284-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.869370-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.869821-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.870028-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.870774-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.871037-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.871587-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.871916-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.872090-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.872991-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.873215-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.873505-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.874277-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.874640-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.875232-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.875986-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.876147-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.876637-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.876852-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.877016-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.877409-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.877619-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.878005-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.878186-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.878328-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.878818-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.879024-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.879261-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.879743-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.879951-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.880438-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.880587-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.880765-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.881124-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.881294-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.881443-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.882163-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.882411-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.882813-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.882965-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.883091-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.883599-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.883785-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.884360-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.884924-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.885176-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.885535-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.885680-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.885816-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.886152-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.886316-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.886462-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.887298-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.887514-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.888021-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.888417-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.888716-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.889234-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.889416-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.889733-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.891196-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.891423-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.891999-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.892292-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.892632-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.893023-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.893204-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.893352-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.893742-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.893954-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.894324-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.894499-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.894639-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.894975-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.895133-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.895270-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.895776-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.896136-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.896631-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.896775-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.897027-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.897392-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.897929-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.898098-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.898679-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.898919-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.899420-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.899615-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.899915-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.900382-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.900626-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.900845-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.901210-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.901439-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.902136-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.902429-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.903645-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.904388-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.904557-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.904808-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.905354-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.905551-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.906413-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.906790-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.906940-0500	RedLemon	  [1] Score: 50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.907854-0500	RedLemon	    📺 Resolution match: 1080p
+default	16:11:19.908313-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.908974-0500	RedLemon	  [2] Score: 50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.909621-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.909894-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.910476-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.910623-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.911062-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.911482-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.912271-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.912528-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.913054-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.913265-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.913626-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.913779-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.914172-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.914361-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.914736-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.914884-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.915221-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.915374-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.915704-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.915909-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.916372-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.916549-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.917115-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.917288-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.917686-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.917880-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.918572-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.918715-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.919192-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.920645-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.921703-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.922451-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.923650-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.923805-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.923739-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:19.924256-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.924562-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.925173-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.923814-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:19.925303-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:19.925729-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.926156-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.926306-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.926886-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.927073-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.927432-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.927611-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.927974-0500	RedLemon	    ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+default	16:11:19.928113-0500	RedLemon	  [1] Score: -50 | Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:19.929402-0500	RedLemon	    ⚠️ Format mismatch: subtitle has webrip but stream doesn't
+default	16:11:19.929688-0500	RedLemon	  [2] Score: -50 | Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:19.930404-0500	RedLemon	  [3] Score: 0 | Frankenstein (2025) eng
+default	16:11:19.930608-0500	RedLemon	✅ Selected 3 subtitle options for stream
+default	16:11:19.930929-0500	RedLemon	🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 206
+default	16:11:19.931225-0500	RedLemon	   OUTPUT[0]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.931627-0500	RedLemon	   OUTPUT[1]: ww UIndex org   -    Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV H 265-SNAKE | 1080p | zilean | Subtitles: 3
+default	16:11:19.931854-0500	RedLemon	   OUTPUT[2]: Frankenstein 2025 WEB-DL 1080p-Dual-Lat mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.932226-0500	RedLemon	   OUTPUT[3]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.933334-0500	RedLemon	   OUTPUT[4]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.933636-0500	RedLemon	   OUTPUT[5]: Frankenstein 2025 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.933830-0500	RedLemon	   OUTPUT[6]: Frankenstein 2004 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.934494-0500	RedLemon	   OUTPUT[7]: Frankenstein 2025 Ger Eng EAC3 Atmos DL 2160p WEB DV HDR h265-VECTOR mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.935283-0500	RedLemon	   OUTPUT[8]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.935915-0500	RedLemon	   OUTPUT[9]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos HDR H 265-SNAKE mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.936595-0500	RedLemon	   OUTPUT[10]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR Hybrid H265 DUAL-AOC mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.937088-0500	RedLemon	   OUTPUT[11]: Frankenstein 2025 [10Bit SDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
+default	16:11:19.937391-0500	RedLemon	   OUTPUT[12]: Frankenstein 2025 MULTi 1080p NF WEB-DL H264 DDP5 1 Atmos-K83 mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.937735-0500	RedLemon	   OUTPUT[13]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.938091-0500	RedLemon	   OUTPUT[14]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.938293-0500	RedLemon	   OUTPUT[15]: Frankenstein 2025 2160p NF WEB-DL DV P5 ENG LATINO DDP5 1 Atmos H265 MP4-BEN THE MEN | 2160p | zilean | Subtitles: 3
+default	16:11:19.940079-0500	RedLemon	   OUTPUT[16]: Frankenstein (2025) 2160p SDR NETFLiX WEBRiP x264 24-bit WAV-CREATiVE24 mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.940710-0500	RedLemon	   OUTPUT[17]: Frankenstein 2025 MULTi 2160p NF WEB SDR H265-THESYNDiCATE mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.941178-0500	RedLemon	   OUTPUT[18]: Frankenstein 2025 MULTi 1080p WEB x264-TFA mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.941529-0500	RedLemon	   OUTPUT[19]: Frankenstein 2025 MULTi 1080p WEB H265-TFA mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.942114-0500	RedLemon	   OUTPUT[20]: Frankenstein 2025 2160p Hybrid MULTI WEB-DL DV HDR H265-AOC mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.942506-0500	RedLemon	   OUTPUT[21]: Frankenstein 1994 [10Bit SDR] [2160p BluRay H265 AC3-AS76-FT] [Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
+default	16:11:19.942729-0500	RedLemon	   OUTPUT[22]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264 DUAL-BiOMA mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.943139-0500	RedLemon	   OUTPUT[23]: Frankenstein 2025 MULTi 1080p NF WEB-DL x264-OzW | 1080p | zilean | Subtitles: 3
+default	16:11:19.943550-0500	RedLemon	   OUTPUT[24]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.943761-0500	RedLemon	   OUTPUT[25]: Frankenstein 2025 2160p NF WEB-DL HDR MULTi DDP5 1 Atmos H265-BEN THE MEN | 2160p | zilean | Subtitles: 3
+default	16:11:19.943936-0500	RedLemon	   OUTPUT[26]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.944108-0500	RedLemon	   OUTPUT[27]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.944276-0500	RedLemon	   OUTPUT[28]: Frankenstein 2025 MULTi 2160p NF WEB-DL HEVC HDR AtmosDoVi H265-RX mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.944443-0500	RedLemon	   OUTPUT[29]: Frankenstein 2025 MULTi 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-OzW | 2160p | zilean | Subtitles: 3
+default	16:11:19.944614-0500	RedLemon	   OUTPUT[30]: Frankenstein 2025 [10Bit DV-HDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
+default	16:11:19.944781-0500	RedLemon	   OUTPUT[31]: Frankenstein 2015 720p BluRay x264-[YTS LT] mp4 | 720p | zilean | Subtitles: 3
+default	16:11:19.944950-0500	RedLemon	   OUTPUT[32]: frankenstein 1931 1080p bluray x264-hd4u mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.945111-0500	RedLemon	   OUTPUT[33]: Frankenstein 1994 UHD BluRay 2160p DTS-HD MA 5 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.945405-0500	RedLemon	   OUTPUT[34]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [720p] [WEBRip] [YTS MX] | 720p | zilean | Subtitles: 3
+default	16:11:19.945664-0500	RedLemon	   OUTPUT[35]: Frankenstein (2011) [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	16:11:19.945838-0500	RedLemon	   OUTPUT[36]: Frankenstein 1931 4K HDR 2160p BDRemux Ita Eng x265-NAHOM mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.946002-0500	RedLemon	   OUTPUT[37]: Frankenstein - 2007 - DVDRip - A KARMADrome KvCD by The Poison Dwarf bin | Unknown | zilean | Subtitles: 3
+default	16:11:19.946163-0500	RedLemon	   OUTPUT[38]: Frankenstein 1931 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.946329-0500	RedLemon	   OUTPUT[39]: Frankenstein (2015) [BluRay] [1080p] [YTS LT] | 1080p | zilean | Subtitles: 3
+default	16:11:19.946482-0500	RedLemon	   OUTPUT[40]: FRANKENSTEIN mkv | Unknown | zilean | Subtitles: 3
+default	16:11:19.946635-0500	RedLemon	   OUTPUT[41]: Frankenstein 2004 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.946814-0500	RedLemon	   OUTPUT[42]: Frankenstein 1931 2160p BluRay REMUX HEVC DTS-HD MA 2 0-FGT mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.947007-0500	RedLemon	   OUTPUT[43]: Frankenstein 1931 2160p UHD BluRay x265-B0MBARDiERS | 2160p | zilean | Subtitles: 3
+default	16:11:19.947184-0500	RedLemon	   OUTPUT[44]: Frankenstein (1931) (1080p BluRay x265 HEVC 10bit AAC 2 0 Tigole) | 1080p | zilean | Subtitles: 3
+default	16:11:19.947356-0500	RedLemon	   OUTPUT[45]: Frankenstein 2015 BDRip 1080p ELEKTRI4KA UNIONGANG mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.947525-0500	RedLemon	   OUTPUT[46]: Frankenstein 1970 1958 1080p BluRay x264 AAC-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.947689-0500	RedLemon	   OUTPUT[47]: Frankenstein 1931 4K HDR 2160p BDRip Ita Eng Ger x265-NAHOM mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.948003-0500	RedLemon	   OUTPUT[48]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
+default	16:11:19.948385-0500	RedLemon	   OUTPUT[49]: Frankenstein (1931) 1080p AC3 2ch x264 BDRip LatTeam mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.948700-0500	RedLemon	   OUTPUT[50]: Frankenstein 1931 1080p BluRay H264 AAC-RARBG | 1080p | zilean | Subtitles: 3
+default	16:11:19.948931-0500	RedLemon	   OUTPUT[51]: Frankenstein 1931 Restored 1080p BluRay x265 hevc 10bit AAC 2 0 commentary-HeVK mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.949193-0500	RedLemon	   OUTPUT[52]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DDP2 0-RARBG mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.949664-0500	RedLemon	   OUTPUT[53]: Frankenstein 2015 1080p WEBRip AAC x264-ETRG mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.950032-0500	RedLemon	   OUTPUT[54]: Frankenstein 1931 Restored Bluray 1080p DTS-HD-2 0 x264-Grym mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.950252-0500	RedLemon	   OUTPUT[55]: Frankenstein 1931 RESTORED 1080p BluRay REMUX-DDB | 1080p | zilean | Subtitles: 3
+default	16:11:19.950421-0500	RedLemon	   OUTPUT[56]: Frankenstein 1931 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
+default	16:11:19.951488-0500	RedLemon	   OUTPUT[57]: Frankenstein (1931 - James Whale) [BDRip720p Ita-Eng] mkv | 720p | zilean | Subtitles: 3
+default	16:11:19.949580-0500	runningboardd	Invalidating assertion 174-114-2105 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:19.951785-0500	RedLemon	   OUTPUT[58]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DTS-HD MA 2 0-RARBG mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.951982-0500	RedLemon	   OUTPUT[59]: Frankenstein 1994 2160p UHD Blu-ray Remux HEVC DV DTS-HD MA 5 1-HDT mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.952203-0500	RedLemon	   OUTPUT[60]: Frankenstein 1931 [BDRip-1080p-MultiLang-MultiSub-Chapters][RiP By MaX] mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.952585-0500	RedLemon	   OUTPUT[61]: Frankenstein_remux_1931 mkv | Unknown | zilean | Subtitles: 3
+default	16:11:19.953474-0500	RedLemon	   OUTPUT[62]: Frankenstein 1910 WEBRIP 576p x264 RUS liosaa mkv | Unknown | zilean | Subtitles: 3
+default	16:11:19.953686-0500	RedLemon	   OUTPUT[63]: Frankenstein (1931) (2160p BluRay x265 10bit HDR Tigole) mkv | 2160p | zilean | Subtitles: 3
+default	16:11:19.954757-0500	RedLemon	   OUTPUT[64]: Frankenstein 2015 1080p BluRay AVC AC-3 DD 5 1 x264-PANAM | 1080p | zilean | Subtitles: 3
+default	16:11:19.955611-0500	RedLemon	   OUTPUT[65]: Frankenstein 1970 1958 1080p BluRay x265-RARBG mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.957840-0500	RedLemon	   OUTPUT[66]: I, Frankenstein 2014 1080p AMZN WEB-DL DDP5 1 H264-GPRS mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.959109-0500	RedLemon	   OUTPUT[67]: I Frankenstein 2014 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
+default	16:11:19.959347-0500	RedLemon	   OUTPUT[68]: I Frankenstein 2014 1080p BluRay x264-SPARKS mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.960233-0500	RedLemon	   OUTPUT[69]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.960541-0500	RedLemon	   OUTPUT[70]: I Frankenstein 2014 1080p BRRip H264 AAC-RARBG | 1080p | zilean | Subtitles: 3
+default	16:11:19.960899-0500	RedLemon	   OUTPUT[71]: I Frankenstein 2014 1080p BRRip x264 AAC-JYK mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.961380-0500	RedLemon	   OUTPUT[72]: I, Frankenstein 2014 1080p BluRay x264 YIFY mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.961728-0500	RedLemon	   OUTPUT[73]: I Frankenstein (2014) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean | Subtitles: 3
+default	16:11:19.961963-0500	RedLemon	   OUTPUT[74]: I, Frankenstein (2014) 1080p BDRip x264 English AC3 5 1 - MeGUiL | 1080p | zilean | Subtitles: 3
+default	16:11:19.962148-0500	RedLemon	   OUTPUT[75]: I Frankenstein 2014 1080p BluRay x265 10bit-z97 mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.962449-0500	RedLemon	   OUTPUT[76]: I, Frankenstein (2014) 1080p 10bit Bluray x265 HEVC [Hindi 2 0 + DD 5 1 English] ESubs ~ TombDoc mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.962963-0500	RedLemon	   OUTPUT[77]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 | 1080p | zilean | Subtitles: 3
+default	16:11:19.963229-0500	RedLemon	   OUTPUT[78]: I Frankenstein (2014) VF2-ENG AC3 BluRay 1080p x264 GHT | 1080p | zilean | Subtitles: 3
+default	16:11:19.963762-0500	RedLemon	   OUTPUT[79]: I Frankenstein 2014 JPN BluRay Remux 1080p AVC Atmos 7 1-decibeL | 1080p | zilean | Subtitles: 3
+default	16:11:19.964119-0500	RedLemon	   OUTPUT[80]: i frankenstein 2014 1080p bluray x264-sparks mkv | 1080p | zilean | Subtitles: 3
+default	16:11:19.964895-0500	RedLemon	   OUTPUT[81]: Frankenstein.2025.4K.HDR.DV.2160p.WEBDL Ita Eng x265-NAHOM
 👤 151 💾 22 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.163729-0500	RedLemon	   OUTPUT[2]: Frankenstein.2025.2160p.NF.WEB-DL.DV.P5.ENG.LATINO.DDP5.1.Atmos.MP4.H265-BTM
-👤 109 💾 22.86 GB ⚙️ ThePirateBay
-Multi Audio / 🇬🇧 / 🇲🇽 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.163815-0500	RedLemon	   OUTPUT[3]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p от Scarabey | 4K | HDR | Dolby Vision | D | Red Head Sound
+default	16:11:19.965842-0500	RedLemon	   OUTPUT[82]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p от Scarabey | 4K | HDR | Dolby Vision | D | Red Head Sound
 👤 58 💾 21.86 GB ⚙️ Rutor
 🇷🇺 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.163891-0500	RedLemon	   OUTPUT[4]: Frankenstein (2025) 2160p H265 WebDl Rip 10 bit DV HDR10 ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
+default	16:11:19.966109-0500	RedLemon	   OUTPUT[83]: Frankenstein (2025) 2160p H265 WebDl Rip 10 bit DV HDR10 ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
 👤 43 💾 5.76 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.167337-0500	RedLemon	   OUTPUT[5]: Frankenstein.2025.MULTi.2160p.NF.WEB.DV.HDR.H265-THESYNDiCATE.mkv
+default	16:11:19.966329-0500	RedLemon	   OUTPUT[84]: Frankenstein.2025.MULTi.2160p.NF.WEB.DV.HDR.H265-THESYNDiCATE.mkv
 👤 21 💾 21.86 GB ⚙️ Torrent9
 Multi Audio / 🇫🇷 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.167545-0500	RedLemon	   OUTPUT[6]: Frankenstein (2025) [MULTi] [2160p] [NF] [WEB-DL] [HDR] [H265] [DDP5.1.Atmos-K83] [Lektor PL i Napisy PL]
-👤 18 💾 21.81 GB ⚙️ BestTorrents
-Multi Audio / 🇬🇧 / 🇵🇱 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.167674-0500	RedLemon	   OUTPUT[7]: Frankenstein 2025 WEB DL 2160p HDR10 DV HEVC DDP Atmos 5 1 x265 E
+default	16:11:19.966583-0500	RedLemon	   OUTPUT[85]: Frankenstein 2025 WEB DL 2160p HDR10 DV HEVC DDP Atmos 5 1 x265 E
 👤 10 💾 17.17 GB ⚙️ TorrentGalaxy | 2160p | torrentio | Subtitles: 3
-default	15:51:49.167798-0500	RedLemon	   OUTPUT[8]: Frankenstein (2025) [4k 2160p][Esp]
+default	16:11:19.966839-0500	RedLemon	   OUTPUT[86]: Frankenstein (2025) [4k 2160p][Esp]
 👤 115 💾 21.99 GB ⚙️ Wolfmax4k
 🇪🇸 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.167915-0500	RedLemon	   OUTPUT[9]: Frankenstein 2025 2160p WEBRip
+default	16:11:19.966998-0500	RedLemon	   OUTPUT[87]: Frankenstein 2025 2160p WEBRip
 👤 100 💾 6.81 GB ⚙️ YTS | 2160p | torrentio | Subtitles: 3
-default	15:51:49.168047-0500	RedLemon	   OUTPUT[10]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p | 4K | SDR | D | Videofilm Int
+default	16:11:19.967148-0500	RedLemon	   OUTPUT[88]: Франкенштейн / Frankenstein (2025) WEB-DL-HEVC 2160p | 4K | SDR | D | Videofilm Int
 👤 23 💾 15.59 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 / 🇺🇦 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.168175-0500	RedLemon	   OUTPUT[11]: Frankenstein (2025) 2160p H265 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
+default	16:11:19.967870-0500	RedLemon	   OUTPUT[89]: Frankenstein (2025) 2160p H265 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
 👤 12 💾 22 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio | Subtitles: 3
-default	15:51:49.171614-0500	RedLemon	   OUTPUT[12]: Frankenstein 2025 NF WEBRip SDR 10Bit 1260p DDP5.1 Atmos HEVC-3Li
+default	16:11:19.968030-0500	RedLemon	   OUTPUT[90]: Frankenstein 2025 NF WEBRip SDR 10Bit 1260p DDP5.1 Atmos HEVC-3Li
 👤 15 💾 7.9 GB ⚙️ 1337x | Unknown | torrentio | Subtitles: 3
-default	15:51:49.171788-0500	RedLemon	   OUTPUT[13]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.DV.H.265-SNAKE
-👤 35 💾 3 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.171941-0500	RedLemon	   OUTPUT[14]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV HDR H 265-WADU
+default	16:11:19.968440-0500	RedLemon	   OUTPUT[91]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos DV HDR H 265-WADU
 👤 15 💾 4.24 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.172080-0500	RedLemon	   OUTPUT[15]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.HDR.H.265-SNAKE
-👤 12 💾 4.19 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.172216-0500	RedLemon	   OUTPUT[16]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от EniaHD | D
+default	16:11:19.969043-0500	RedLemon	   OUTPUT[92]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от EniaHD | D
 👤 4549 💾 7.48 GB ⚙️ Rutor | 1080p | torrentio | Subtitles: 3
-default	15:51:49.172446-0500	RedLemon	   OUTPUT[17]: Frankenstein.2025.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir
+default	16:11:19.969501-0500	RedLemon	   OUTPUT[93]: Frankenstein.2025.1080p.WEBRip.10Bit.DDP5.1.x265-NeoNoir
 👤 1394 💾 1.93 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.172574-0500	RedLemon	   OUTPUT[18]: Frankenstein.2025.1080p.WEB.h264-ETHEL
-👤 175 💾 5.98 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.172883-0500	RedLemon	   OUTPUT[19]: I.frankenstein.2014.1080p-dual-lat.mp4
+default	16:11:19.970024-0500	RedLemon	   OUTPUT[94]: I.frankenstein.2014.1080p-dual-lat.mp4
 👤 161 💾 1.35 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.173028-0500	RedLemon	   OUTPUT[20]: Frankenstein.2025.1080p-dual-lat-cinecalidad.ro.mp4
+default	16:11:19.971657-0500	RedLemon	   OUTPUT[95]: Frankenstein.2025.1080p-dual-lat-cinecalidad.ro.mp4
 👤 160 💾 2.72 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.173408-0500	RedLemon	   OUTPUT[21]: Frankenstein.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
+default	16:11:19.971854-0500	RedLemon	   OUTPUT[96]: Frankenstein.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
 👤 131 💾 2.23 GB ⚙️ ilCorSaRoNeRo
 Multi Audio / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.176814-0500	RedLemon	   OUTPUT[22]: Frankenstein (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
+default	16:11:19.972317-0500	RedLemon	   OUTPUT[97]: Frankenstein (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
 👤 129 💾 3.24 GB ⚙️ ilCorSaRoNeRo
 Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.177412-0500	RedLemon	   OUTPUT[23]: Frankenstein (2025) 1080p WEBRip 5.1-LAMA
+default	16:11:19.972615-0500	RedLemon	   OUTPUT[98]: Frankenstein (2025) 1080p WEBRip 5.1-LAMA
 👤 125 💾 2.81 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.177941-0500	RedLemon	   OUTPUT[24]: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-👤 122 💾 5.98 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	15:51:49.178132-0500	RedLemon	   OUTPUT[25]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p | D | Red Head Sound
+default	16:11:19.972933-0500	RedLemon	   OUTPUT[99]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p | D | Red Head Sound
 👤 114 💾 6.18 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.178277-0500	RedLemon	   OUTPUT[26]: Frankenstein 2025 1080p WEBRip
+default	16:11:19.973165-0500	RedLemon	   OUTPUT[100]: Frankenstein 2025 1080p WEBRip
 👤 100 💾 2.55 GB ⚙️ YTS | 1080p | torrentio | Subtitles: 3
-default	15:51:49.178412-0500	RedLemon	   OUTPUT[27]: Frankenstein 2025 1080p WEBRip
-👤 100 💾 2.81 GB ⚙️ YTS | 1080p | torrentio | Subtitles: 3
-default	15:51:49.178546-0500	RedLemon	   OUTPUT[28]: Frankenstein 2025 1080p WEB DL HEVC x265 5 1 BONE
+default	16:11:19.973373-0500	RedLemon	   OUTPUT[101]: Frankenstein 2025 1080p WEB DL HEVC x265 5 1 BONE
 👤 87 💾 2.02 GB ⚙️ TorrentGalaxy | 1080p | torrentio | Subtitles: 3
-default	15:51:49.178903-0500	RedLemon	   OUTPUT[29]: Frankenstein 2025 1080p 10bit WEBRip 6CH x265 HEVC-PSA
+default	16:11:19.974014-0500	RedLemon	   OUTPUT[102]: Frankenstein 2025 1080p 10bit WEBRip 6CH x265 HEVC-PSA
 👤 86 💾 2.14 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179054-0500	RedLemon	   OUTPUT[30]: Frankenstein.2025.1080p.WEBRip.x265-KONTRAST
+default	16:11:19.974497-0500	RedLemon	   OUTPUT[103]: Frankenstein.2025.1080p.WEBRip.x265-KONTRAST
 👤 73 💾 3.44 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179141-0500	RedLemon	   OUTPUT[31]: Frankenstein 2025 1080p HDRip x264-RGB
+default	16:11:19.974674-0500	RedLemon	   OUTPUT[104]: Frankenstein 2025 1080p HDRip x264-RGB
 👤 56 💾 1.09 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179217-0500	RedLemon	   OUTPUT[32]: Pluribus S01E04 Please Carol.1080p.ATVP.WEB-DL.DD5.1.Atmos H264.TRIal.YG⭐
+default	16:11:19.974818-0500	RedLemon	   OUTPUT[105]: Pluribus S01E04 Please Carol.1080p.ATVP.WEB-DL.DD5.1.Atmos H264.TRIal.YG⭐
 👤 54 💾 3.9 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179291-0500	RedLemon	   OUTPUT[33]: Frankenstein 2025 iTA ENG WEBDL 1080p x264 CYBER mkv
+default	16:11:19.974981-0500	RedLemon	   OUTPUT[106]: Frankenstein 2025 iTA ENG WEBDL 1080p x264 CYBER mkv
 👤 47 💾 8.02 GB ⚙️ TorrentGalaxy
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179368-0500	RedLemon	   OUTPUT[34]: Frankenstein.2025.1080p.10bit.DS4K.NF.WEBRip.[Org.DDPA5.1-Hindi DDPA5.1-English].ESub.HEVC-The.PunisheR
+default	16:11:19.975123-0500	RedLemon	   OUTPUT[107]: Frankenstein.2025.1080p.10bit.DS4K.NF.WEBRip.[Org.DDPA5.1-Hindi DDPA5.1-English].ESub.HEVC-The.PunisheR
 👤 37 💾 6.98 GB ⚙️ 1337x
 🇬🇧 / 🇮🇳 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179442-0500	RedLemon	   OUTPUT[35]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от Scarabey | D | Red Head Sound
+default	16:11:19.975265-0500	RedLemon	   OUTPUT[108]: Франкенштейн / Frankenstein (2025) WEB-DL 1080p от Scarabey | D | Red Head Sound
 👤 35 💾 6.66 GB ⚙️ Rutor
 🇷🇺 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179512-0500	RedLemon	   OUTPUT[36]: Frankenstein.2025.MULTi.1080p.WEB.x264-TFA.mkv
+default	16:11:19.975446-0500	RedLemon	   OUTPUT[109]: Frankenstein.2025.MULTi.1080p.WEB.x264-TFA.mkv
 👤 35 💾 7.89 GB ⚙️ Torrent9
 Multi Audio / 🇫🇷 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179584-0500	RedLemon	   OUTPUT[37]: Frankenstein (2025) 1080p x264 [Tam Tel Hin Eng] DDP ESub [i2p]
+default	16:11:19.975584-0500	RedLemon	   OUTPUT[110]: Frankenstein (2025) 1080p x264 [Tam Tel Hin Eng] DDP ESub [i2p]
 👤 27 💾 4.96 GB ⚙️ 1337x
 🇬🇧 / 🇮🇳 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179655-0500	RedLemon	   OUTPUT[38]: Frankenstein (2025) 1080p H265 ITA ENG EAC3 Atmos SUB ITA ENG WEBRip [5.04 GB] - UBi CreW
+default	16:11:19.975728-0500	RedLemon	   OUTPUT[111]: Frankenstein (2025) 1080p H265 ITA ENG EAC3 Atmos SUB ITA ENG WEBRip [5.04 GB] - UBi CreW
 👤 24 💾 5.05 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179728-0500	RedLemon	   OUTPUT[39]: Frankenstein (2025) (1080p NF WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) [QxR]
+default	16:11:19.975872-0500	RedLemon	   OUTPUT[112]: Frankenstein (2025) (1080p NF WEB-DL x265 10bit EAC3 Atmos 5.1 Ghost) [QxR]
 Frankenstein (2025) (1080p NF WEB-DL x265 Ghost).mkv
 👤 24 💾 6.04 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179799-0500	RedLemon	   OUTPUT[40]: Frankenstein (2025) 1080p H265 WebDl Rip ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
+default	16:11:19.976012-0500	RedLemon	   OUTPUT[113]: Frankenstein (2025) 1080p H265 WebDl Rip ita eng AC3 5.1 sub ita eng NUita NUeng Licdom
 👤 24 💾 3.34 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.179927-0500	RedLemon	   OUTPUT[41]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX
-👤 15 💾 5.98 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.180464-0500	RedLemon	   OUTPUT[42]: Frankenstein.2025.1080p.NF.WEBRip.AAC5.1.10bits.x265-Rapta
+default	16:11:19.976142-0500	RedLemon	   OUTPUT[114]: Frankenstein.2025.1080p.NF.WEBRip.AAC5.1.10bits.x265-Rapta
 👤 14 💾 1.88 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	15:51:49.180735-0500	RedLemon	   OUTPUT[43]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
+default	16:11:19.976288-0500	RedLemon	   OUTPUT[115]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
 👤 11 💾 10.61 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.181184-0500	RedLemon	   OUTPUT[44]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
+default	16:11:19.976428-0500	RedLemon	   OUTPUT[116]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от селезень | D | Videofilm Int
 👤 10 💾 10.12 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.181935-0500	RedLemon	   OUTPUT[45]: Frankenstein.2025.1080p.NF.WEB.DL.Multi.DDP5.1.Atmos.H.265-themoviesboss
+default	16:11:19.976563-0500	RedLemon	   OUTPUT[117]: Frankenstein.2025.1080p.NF.WEB.DL.Multi.DDP5.1.Atmos.H.265-themoviesboss
 👤 9 💾 5.73 GB ⚙️ 1337x
 Multi Audio / 🇮🇳 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.183419-0500	RedLemon	   OUTPUT[46]: Frankenstein (2025) [MULTi] [1080p] [NF] [WEB-DL] [H264] [DDP5.1.Atmos-K83[ [Lektor PL i Napisy PL]
-👤 9 💾 6.66 GB ⚙️ BestTorrents
-Multi Audio / 🇬🇧 / 🇵🇱 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184051-0500	RedLemon	   OUTPUT[47]: Frankenstein.2025.1080p-Dual-Lat
+default	16:11:19.976694-0500	RedLemon	   OUTPUT[118]: Frankenstein.2025.1080p-Dual-Lat
 👤 8 💾 3.22 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184228-0500	RedLemon	   OUTPUT[48]: Frankenstein (2025) 1080p H264 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
+default	16:11:19.976830-0500	RedLemon	   OUTPUT[119]: Frankenstein (2025) 1080p H264 ITA ENG EAC3 5.1 Sub ITA ENG NUITA NUENG-FHC_CREW
 👤 8 💾 6.79 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184356-0500	RedLemon	   OUTPUT[49]: Frankenstein.2025.WEB-DL.1080p-Dual-Lat
-👤 7 💾 6.8 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184479-0500	RedLemon	   OUTPUT[50]: Frankenstein (2025) Eng 1080p WEBRip x265 DDP 5.1 ESub
+default	16:11:19.977159-0500	RedLemon	   OUTPUT[120]: Frankenstein (2025) Eng 1080p WEBRip x265 DDP 5.1 ESub
 👤 7 💾 2.15 GB ⚙️ 1337x | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184601-0500	RedLemon	   OUTPUT[51]: Frankenstein 2025 1080p WEBRip 10Bit DDP5 1 x265-NeoNoir
+default	16:11:19.977351-0500	RedLemon	   OUTPUT[121]: Frankenstein 2025 1080p WEBRip 10Bit DDP5 1 x265-NeoNoir
 👤 7 💾 1.93 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184729-0500	RedLemon	   OUTPUT[52]: Frankenstein (2025) AC3 5.1 ITA.ENG 1080p H265 sub NUita.eng Sp33dy94 MIRCrew
+default	16:11:19.977524-0500	RedLemon	   OUTPUT[122]: Frankenstein (2025) AC3 5.1 ITA.ENG 1080p H265 sub NUita.eng Sp33dy94 MIRCrew
 👤 6 💾 3.23 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184845-0500	RedLemon	   OUTPUT[53]: Frankenstein 2025 1080p WEB-DL HEVC x265 5 1 BONE
+default	16:11:19.977665-0500	RedLemon	   OUTPUT[123]: Frankenstein 2025 1080p WEB-DL HEVC x265 5 1 BONE
 👤 6 💾 2.02 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.184962-0500	RedLemon	   OUTPUT[54]: Frankenstein.2025.1080p.WEB-DL.DUAL.5.1
+default	16:11:19.977821-0500	RedLemon	   OUTPUT[124]: Frankenstein.2025.1080p.WEB-DL.DUAL.5.1
 👤 6 💾 3.91 GB ⚙️ Comando
 Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.185091-0500	RedLemon	   OUTPUT[55]: Frankenstein (2025) 1080p x265 ita eng ac3 sub ita eng nuita nueng - MIRCrew
+default	16:11:19.977960-0500	RedLemon	   OUTPUT[125]: Frankenstein (2025) 1080p x265 ita eng ac3 sub ita eng nuita nueng - MIRCrew
 👤 5 💾 3.19 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.185209-0500	RedLemon	   OUTPUT[56]: Frankenstein (2025) 1080p WEBRip x265 10bit 5.1-LAMA
+default	16:11:19.978096-0500	RedLemon	   OUTPUT[126]: Frankenstein (2025) 1080p WEBRip x265 10bit 5.1-LAMA
 👤 5 💾 2.55 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.185333-0500	RedLemon	   OUTPUT[57]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от ExKinoRay | D
+default	16:11:19.978230-0500	RedLemon	   OUTPUT[127]: Франкенштейн / Frankenstein (2025) WEB-DLRip 1080p от ExKinoRay | D
 👤 5 💾 10.18 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio | Subtitles: 3
-default	15:51:49.185661-0500	RedLemon	   OUTPUT[58]: Frankenstein 80 (1972) 720p BluRay-WORLD
+default	16:11:19.978358-0500	RedLemon	   OUTPUT[128]: Frankenstein 80 (1972) 720p BluRay-WORLD
 👤 339 💾 823.54 MB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
-default	15:51:49.186194-0500	RedLemon	   OUTPUT[59]: Франкенштейн / Frankenstein (2025) WEB-DL 720p от селезень | D | Videofilm Int
+default	16:11:19.978494-0500	RedLemon	   OUTPUT[129]: Франкенштейн / Frankenstein (2025) WEB-DL 720p от селезень | D | Videofilm Int
 👤 260 💾 2.77 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio | Subtitles: 3
-default	15:51:49.186718-0500	RedLemon	   OUTPUT[60]: Frankenstein (2025) [Bluray 720p][Esp]
+default	16:11:19.978621-0500	RedLemon	   OUTPUT[130]: Frankenstein (2025) [Bluray 720p][Esp]
 👤 114 💾 6.52 GB ⚙️ Wolfmax4k
 🇪🇸 | 720p | torrentio | Subtitles: 3
-default	15:51:49.186841-0500	RedLemon	   OUTPUT[61]: Frankenstein 2025 720p WEBRip
+default	16:11:19.978745-0500	RedLemon	   OUTPUT[131]: Frankenstein 2025 720p WEBRip
 👤 100 💾 1.37 GB ⚙️ YTS | 720p | torrentio | Subtitles: 3
-default	15:51:49.186923-0500	RedLemon	   OUTPUT[62]: Frankenstein (2025) 720p WEBRip-LAMA
+default	16:11:19.978867-0500	RedLemon	   OUTPUT[132]: Frankenstein (2025) 720p WEBRip-LAMA
 👤 44 💾 1.37 GB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
-default	15:51:49.187002-0500	RedLemon	   OUTPUT[63]: Frankenstein (2025).mkv 720p WEB-DL DDP 5.1 ATMOS iTA ENG H264 - FHC_CREW.mkv
+default	16:11:19.978997-0500	RedLemon	   OUTPUT[133]: Frankenstein (2025).mkv 720p WEB-DL DDP 5.1 ATMOS iTA ENG H264 - FHC_CREW.mkv
 👤 18 💾 3.46 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 720p | torrentio | Subtitles: 3
-default	15:51:49.187077-0500	RedLemon	   OUTPUT[64]: Frankenstein 2025 720p NF WEB-DL DDP5 1 Atmos H 264-FLUX
+default	16:11:19.979131-0500	RedLemon	   OUTPUT[134]: Frankenstein 2025 720p NF WEB-DL DDP5 1 Atmos H 264-FLUX
 👤 15 💾 2.64 GB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
-default	15:51:49.187151-0500	RedLemon	   OUTPUT[65]: Frankenstein.2025.720p.NF.WebRip.Multi.AAC2.0.H.264-themoviesboss
+default	16:11:19.979260-0500	RedLemon	   OUTPUT[135]: Frankenstein.2025.720p.NF.WebRip.Multi.AAC2.0.H.264-themoviesboss
 👤 15 💾 1.48 GB ⚙️ 1337x
 Multi Audio / 🇮🇳 | 720p | torrentio | Subtitles: 3
-default	15:51:49.187223-0500	RedLemon	   OUTPUT[66]: Frankenstein (2025) 720p h264 Ac3 5.1 Ita Eng Sub Ita NUita Eng-MIRCrew
+default	16:11:19.979393-0500	RedLemon	   OUTPUT[136]: Frankenstein (2025) 720p h264 Ac3 5.1 Ita Eng Sub Ita NUita Eng-MIRCrew
 👤 12 💾 2.81 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 720p | torrentio | Subtitles: 3
-default	15:51:49.188147-0500	RedLemon	   OUTPUT[67]: Frankenstein 2025 720p 10bit WEBRip 6CH x265 HEVC-PSA
+default	16:11:19.979517-0500	RedLemon	   OUTPUT[137]: Frankenstein 2025 720p 10bit WEBRip 6CH x265 HEVC-PSA
 👤 12 💾 1.07 GB ⚙️ ThePirateBay | 720p | torrentio | Subtitles: 3
-default	15:51:49.188628-0500	RedLemon	   OUTPUT[68]: Frankenstein (2025) [NF] [480p] [WEB-DL] [XviD] [DD5.1-K83] [Lektor PL]
+default	16:11:19.979645-0500	RedLemon	   OUTPUT[138]: Frankenstein (2025) [NF] [480p] [WEB-DL] [XviD] [DD5.1-K83] [Lektor PL]
 👤 5 💾 2.46 GB ⚙️ BestTorrents
 🇵🇱 | 480p | torrentio | Subtitles: 3
-default	15:51:49.188796-0500	RedLemon	   OUTPUT[69]: Frankenstein 2025 1080p HDCAM x264-RGB
+default	16:11:19.979764-0500	RedLemon	   OUTPUT[139]: Frankenstein 2025 1080p HDCAM x264-RGB
 👤 13 💾 4.16 GB ⚙️ ThePirateBay | 1080p | torrentio | Subtitles: 3
-default	15:51:49.188926-0500	RedLemon	   OUTPUT[70]: Frankenstein 2025 1080p CAM x264-RGB
+default	16:11:19.979887-0500	RedLemon	   OUTPUT[140]: Frankenstein 2025 1080p CAM x264-RGB
 👤 7 💾 4.16 GB ⚙️ TorrentGalaxy | 1080p | torrentio | Subtitles: 3
-default	15:51:49.189110-0500	RedLemon	   OUTPUT[71]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.)
+default	16:11:19.980019-0500	RedLemon	   OUTPUT[141]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.)
 👤 876 💾 2.17 GB ⚙️ Rutracker
 🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.189261-0500	RedLemon	   OUTPUT[72]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.) + Sub (Rus Eng) + Original Eng
+default	16:11:19.980561-0500	RedLemon	   OUTPUT[142]: Франкенштейн / Frankenstein [2025 WEB-DLRip] Dub (Videofilm Int.) + Sub (Rus Eng) + Original Eng
 👤 192 💾 2.92 GB ⚙️ Rutracker
 🇬🇧 / 🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.192812-0500	RedLemon	   OUTPUT[73]: Франкенштейн / Frankenstein (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Videofilm Int
+default	16:11:19.980741-0500	RedLemon	   OUTPUT[143]: Франкенштейн / Frankenstein (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Videofilm Int
 👤 143 💾 1.46 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.192959-0500	RedLemon	   OUTPUT[74]: Франкенштейн / Frankenstein (2025) WEB-DLRip от MegaPeer | D | Videofilm Int
+default	16:11:19.980911-0500	RedLemon	   OUTPUT[144]: Франкенштейн / Frankenstein (2025) WEB-DLRip от MegaPeer | D | Videofilm Int
 👤 24 💾 2.18 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.193049-0500	RedLemon	   OUTPUT[75]: Frankenstein (2025) [PL] [WEB-DL] [XviD-OzW] [Lektor PL]
+default	16:11:19.981261-0500	RedLemon	   OUTPUT[145]: Frankenstein (2025) [PL] [WEB-DL] [XviD-OzW] [Lektor PL]
 👤 11 💾 1.38 GB ⚙️ BestTorrents
 🇵🇱 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.193130-0500	RedLemon	   OUTPUT[76]: Франкенштейн / Frankenstein (2025) WEB-DLRip от Leon-masl | D L
+default	16:11:19.981420-0500	RedLemon	   OUTPUT[146]: Франкенштейн / Frankenstein (2025) WEB-DLRip от Leon-masl | D L
 👤 6 💾 2.19 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.193200-0500	RedLemon	   OUTPUT[77]: Frankenstein (2025) [Bluray][Esp]
+default	16:11:19.981754-0500	RedLemon	   OUTPUT[147]: Frankenstein (2025) [Bluray][Esp]
 👤 5 💾 1.83 GB ⚙️ Wolfmax4k
 🇪🇸 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.193270-0500	RedLemon	   OUTPUT[78]: frankenstein.2025.french.web.x264-higgsboson.mkv
+default	16:11:19.981899-0500	RedLemon	   OUTPUT[148]: frankenstein.2025.french.web.x264-higgsboson.mkv
 👤 357 💾 1.19 GB ⚙️ Torrent9
 🇫🇷 | Unknown | torrentio | Subtitles: 3
-default	15:51:49.193449-0500	RedLemon	   OUTPUT[79]: Frankenstein 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.193625-0500	RedLemon	   OUTPUT[80]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.193784-0500	RedLemon	   OUTPUT[81]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.193943-0500	RedLemon	   OUTPUT[82]: Frankenstein 2004 1080p WEBRip x264 AAC5 1-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.194458-0500	RedLemon	   OUTPUT[83]: Frankenstein 2025 Ger Eng EAC3 Atmos DL 2160p WEB DV HDR h265-VECTOR mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.194715-0500	RedLemon	   OUTPUT[84]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR Hybrid H265 DUAL-AOC mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.195259-0500	RedLemon	   OUTPUT[85]: Frankenstein 2025 [10Bit SDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
-default	15:51:49.195483-0500	RedLemon	   OUTPUT[86]: Frankenstein 2025 MULTi 2160p NF WEB-D HDR H265 DDP5 1 Atmos-K83 mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.195678-0500	RedLemon	   OUTPUT[87]: Frankenstein (2025) 2160p SDR NETFLiX WEBRiP x264 24-bit WAV-CREATiVE24 mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.195902-0500	RedLemon	   OUTPUT[88]: Frankenstein 2025 MULTi 2160p NF WEB SDR H265-THESYNDiCATE mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.196232-0500	RedLemon	   OUTPUT[89]: Frankenstein 2025 MULTi 1080p WEB x264-TFA mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.196435-0500	RedLemon	   OUTPUT[90]: Frankenstein 2025 MULTi 1080p WEB H265-TFA mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.196618-0500	RedLemon	   OUTPUT[91]: Frankenstein 2025 2160p Hybrid MULTI WEB-DL DV HDR H265-AOC mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.196827-0500	RedLemon	   OUTPUT[92]: Frankenstein 1994 [10Bit SDR] [2160p BluRay H265 AC3-AS76-FT] [Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
-default	15:51:49.197213-0500	RedLemon	   OUTPUT[93]: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264 DUAL-BiOMA mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.197388-0500	RedLemon	   OUTPUT[94]: Frankenstein 2025 MULTi 1080p NF WEB-DL x264-OzW | 1080p | zilean | Subtitles: 3
-default	15:51:49.199964-0500	RedLemon	   OUTPUT[95]: Frankenstein 2025 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-BYNDR mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.200428-0500	RedLemon	   OUTPUT[96]: Frankenstein 2025 MULTi 2160p NF WEB-DL HEVC HDR AtmosDoVi H265-RX mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.200664-0500	RedLemon	   OUTPUT[97]: Frankenstein 2025 MULTi 2160p NF WEB-DL DDP5 1 Atmos DV HDR H 265-OzW | 2160p | zilean | Subtitles: 3
-default	15:51:49.201069-0500	RedLemon	   OUTPUT[98]: Frankenstein 2025 [10Bit DV-HDR] [2160p WEB-DL H265 EAC3 Atmos-AS76-FT] [ENG-Lektor PL] [Alusia] | 2160p | zilean | Subtitles: 3
-default	15:51:49.201598-0500	RedLemon	   OUTPUT[99]: Frankenstein 2015 720p BluRay x264-[YTS LT] mp4 | 720p | zilean | Subtitles: 3
-default	15:51:49.201764-0500	RedLemon	   OUTPUT[100]: frankenstein 1931 1080p bluray x264-hd4u mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.202105-0500	RedLemon	   OUTPUT[101]: Frankenstein 1994 UHD BluRay 2160p DTS-HD MA 5 1 DV HEVC REMUX-FraMeSToR mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.202332-0500	RedLemon	   OUTPUT[102]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [720p] [WEBRip] [YTS MX] | 720p | zilean | Subtitles: 3
-default	15:51:49.203023-0500	RedLemon	   OUTPUT[103]: Frankenstein (2011) [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
-default	15:51:49.203190-0500	RedLemon	   OUTPUT[104]: Frankenstein 1931 4K HDR 2160p BDRemux Ita Eng x265-NAHOM mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.203303-0500	RedLemon	   OUTPUT[105]: Frankenstein - 2007 - DVDRip - A KARMADrome KvCD by The Poison Dwarf bin | Unknown | zilean | Subtitles: 3
-default	15:51:49.203700-0500	RedLemon	   OUTPUT[106]: Frankenstein 1931 1080p BluRay x264-[YTS AM] mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.206543-0500	RedLemon	   OUTPUT[107]: Frankenstein (2015) [BluRay] [1080p] [YTS LT] | 1080p | zilean | Subtitles: 3
-default	15:51:49.207231-0500	RedLemon	   OUTPUT[108]: FRANKENSTEIN mkv | Unknown | zilean | Subtitles: 3
-default	15:51:49.207468-0500	RedLemon	   OUTPUT[109]: Frankenstein 2004 1080p BluRay H264 AAC-RARBG mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.207669-0500	RedLemon	   OUTPUT[110]: Frankenstein 1931 2160p BluRay REMUX HEVC DTS-HD MA 2 0-FGT mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.208690-0500	RedLemon	   OUTPUT[111]: Frankenstein 1931 2160p UHD BluRay x265-B0MBARDiERS | 2160p | zilean | Subtitles: 3
-default	15:51:49.209139-0500	RedLemon	   OUTPUT[112]: Frankenstein (1931) (1080p BluRay x265 HEVC 10bit AAC 2 0 Tigole) | 1080p | zilean | Subtitles: 3
-default	15:51:49.209309-0500	RedLemon	   OUTPUT[113]: Frankenstein 2015 BDRip 1080p ELEKTRI4KA UNIONGANG mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.209465-0500	RedLemon	   OUTPUT[114]: Frankenstein 1970 1958 1080p BluRay x264 AAC-[YTS MX] mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.209625-0500	RedLemon	   OUTPUT[115]: Frankenstein 1931 4K HDR 2160p BDRip Ita Eng Ger x265-NAHOM mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.210113-0500	RedLemon	   OUTPUT[116]: Frankenstein (2011) [CUMBERBATCH CREATURE VERSION] [1080p] [WEBRip] [YTS MX] | 1080p | zilean | Subtitles: 3
-default	15:51:49.210966-0500	RedLemon	   OUTPUT[117]: Frankenstein (1931) 1080p AC3 2ch x264 BDRip LatTeam mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.211159-0500	RedLemon	   OUTPUT[118]: Frankenstein 1931 1080p BluRay H264 AAC-RARBG | 1080p | zilean | Subtitles: 3
-default	15:51:49.211322-0500	RedLemon	   OUTPUT[119]: Frankenstein 1931 Restored 1080p BluRay x265 hevc 10bit AAC 2 0 commentary-HeVK mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.211477-0500	RedLemon	   OUTPUT[120]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DDP2 0-RARBG mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.211641-0500	RedLemon	   OUTPUT[121]: Frankenstein 2015 1080p WEBRip AAC x264-ETRG mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.212239-0500	RedLemon	   OUTPUT[122]: Frankenstein 1931 Restored Bluray 1080p DTS-HD-2 0 x264-Grym mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.212424-0500	RedLemon	   OUTPUT[123]: Frankenstein 1931 RESTORED 1080p BluRay REMUX-DDB | 1080p | zilean | Subtitles: 3
-default	15:51:49.212579-0500	RedLemon	   OUTPUT[124]: Frankenstein 1931 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
-default	15:51:49.213012-0500	RedLemon	   OUTPUT[125]: Frankenstein (1931 - James Whale) [BDRip720p Ita-Eng] mkv | 720p | zilean | Subtitles: 3
-default	15:51:49.214740-0500	RedLemon	   OUTPUT[126]: Frankenstein 1931 2160p UHD BluRay x265 10bit HDR DTS-HD MA 2 0-RARBG mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.215156-0500	RedLemon	   OUTPUT[127]: Frankenstein 1994 2160p UHD Blu-ray Remux HEVC DV DTS-HD MA 5 1-HDT mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.215426-0500	RedLemon	   OUTPUT[128]: Frankenstein 1931 [BDRip-1080p-MultiLang-MultiSub-Chapters][RiP By MaX] mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.215806-0500	RedLemon	   OUTPUT[129]: Frankenstein_remux_1931 mkv | Unknown | zilean | Subtitles: 3
-default	15:51:49.216023-0500	RedLemon	   OUTPUT[130]: Frankenstein 1910 WEBRIP 576p x264 RUS liosaa mkv | Unknown | zilean | Subtitles: 3
-default	15:51:49.216226-0500	RedLemon	   OUTPUT[131]: Frankenstein (1931) (2160p BluRay x265 10bit HDR Tigole) mkv | 2160p | zilean | Subtitles: 3
-default	15:51:49.216463-0500	RedLemon	   OUTPUT[132]: Frankenstein 2015 1080p BluRay AVC AC-3 DD 5 1 x264-PANAM | 1080p | zilean | Subtitles: 3
-default	15:51:49.216706-0500	RedLemon	   OUTPUT[133]: Frankenstein 1970 1958 1080p BluRay x265-RARBG mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.217470-0500	RedLemon	   OUTPUT[134]: I, Frankenstein 2014 1080p AMZN WEB-DL DDP5 1 H264-GPRS mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.217592-0500	RedLemon	   OUTPUT[135]: I Frankenstein 2014 1080p BluRay x265-RARBG | 1080p | zilean | Subtitles: 3
-default	15:51:49.217701-0500	RedLemon	   OUTPUT[136]: I Frankenstein 2014 1080p BluRay x264-SPARKS mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.217803-0500	RedLemon	   OUTPUT[137]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.217900-0500	RedLemon	   OUTPUT[138]: I Frankenstein 2014 1080p BRRip H264 AAC-RARBG | 1080p | zilean | Subtitles: 3
-default	15:51:49.217993-0500	RedLemon	   OUTPUT[139]: I Frankenstein 2014 1080p BRRip x264 AAC-JYK mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.218086-0500	RedLemon	   OUTPUT[140]: I, Frankenstein 2014 1080p BluRay x264 YIFY mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.218177-0500	RedLemon	   OUTPUT[141]: I Frankenstein (2014) 3D HSBS 1080p BluRay H264 DolbyD 5 1 + nickarad mp4 | 1080p | zilean | Subtitles: 3
-default	15:51:49.218270-0500	RedLemon	   OUTPUT[142]: I, Frankenstein (2014) 1080p BDRip x264 English AC3 5 1 - MeGUiL | 1080p | zilean | Subtitles: 3
-default	15:51:49.218359-0500	RedLemon	   OUTPUT[143]: I Frankenstein 2014 1080p BluRay x265 10bit-z97 mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.218451-0500	RedLemon	   OUTPUT[144]: I, Frankenstein (2014) 1080p 10bit Bluray x265 HEVC [Hindi 2 0 + DD 5 1 English] ESubs ~ TombDoc mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.218548-0500	RedLemon	   OUTPUT[145]: I Frankenstein 2014 1080p BluRay Remux DTS-HD MA 7 1 | 1080p | zilean | Subtitles: 3
-default	15:51:49.220467-0500	RedLemon	   OUTPUT[146]: I Frankenstein (2014) VF2-ENG AC3 BluRay 1080p x264 GHT | 1080p | zilean | Subtitles: 3
-default	15:51:49.221843-0500	RedLemon	   OUTPUT[147]: I Frankenstein 2014 JPN BluRay Remux 1080p AVC Atmos 7 1-decibeL | 1080p | zilean | Subtitles: 3
-default	15:51:49.222090-0500	RedLemon	   OUTPUT[148]: i frankenstein 2014 1080p bluray x264-sparks mkv | 1080p | zilean | Subtitles: 3
-default	15:51:49.223228-0500	RedLemon	   OUTPUT[149]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223493-0500	RedLemon	   OUTPUT[150]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223573-0500	RedLemon	   OUTPUT[151]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223640-0500	RedLemon	   OUTPUT[152]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223702-0500	RedLemon	   OUTPUT[153]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223762-0500	RedLemon	   OUTPUT[154]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.223819-0500	RedLemon	   OUTPUT[155]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.224611-0500	RedLemon	   OUTPUT[156]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.224750-0500	RedLemon	   OUTPUT[157]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.224873-0500	RedLemon	   OUTPUT[158]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.224988-0500	RedLemon	   OUTPUT[159]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.225101-0500	RedLemon	   OUTPUT[160]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.227180-0500	RedLemon	   OUTPUT[161]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.227328-0500	RedLemon	   OUTPUT[162]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.227449-0500	RedLemon	   OUTPUT[163]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.227560-0500	RedLemon	   OUTPUT[164]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.227668-0500	RedLemon	   OUTPUT[165]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228265-0500	RedLemon	   OUTPUT[166]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228355-0500	RedLemon	   OUTPUT[167]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228425-0500	RedLemon	   OUTPUT[168]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228488-0500	RedLemon	   OUTPUT[169]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228549-0500	RedLemon	   OUTPUT[170]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.228606-0500	RedLemon	   OUTPUT[171]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.229010-0500	RedLemon	   OUTPUT[172]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.229767-0500	RedLemon	   OUTPUT[173]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.230099-0500	RedLemon	   OUTPUT[174]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
-default	15:51:49.230833-0500	RedLemon	   OUTPUT[175]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.230988-0500	RedLemon	   OUTPUT[176]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231103-0500	RedLemon	   OUTPUT[177]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231209-0500	RedLemon	   OUTPUT[178]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231311-0500	RedLemon	   OUTPUT[179]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231414-0500	RedLemon	   OUTPUT[180]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231518-0500	RedLemon	   OUTPUT[181]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231620-0500	RedLemon	   OUTPUT[182]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231715-0500	RedLemon	   OUTPUT[183]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231811-0500	RedLemon	   OUTPUT[184]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.231905-0500	RedLemon	   OUTPUT[185]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.232001-0500	RedLemon	   OUTPUT[186]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.232096-0500	RedLemon	   OUTPUT[187]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.232191-0500	RedLemon	   OUTPUT[188]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.232285-0500	RedLemon	   OUTPUT[189]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.232379-0500	RedLemon	   OUTPUT[190]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.233269-0500	RedLemon	   OUTPUT[191]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.233441-0500	RedLemon	   OUTPUT[192]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.233809-0500	RedLemon	   OUTPUT[193]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.234304-0500	RedLemon	   OUTPUT[194]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.234651-0500	RedLemon	   OUTPUT[195]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.235193-0500	RedLemon	   OUTPUT[196]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.235579-0500	RedLemon	   OUTPUT[197]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.235702-0500	RedLemon	   OUTPUT[198]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
-default	15:51:49.235816-0500	RedLemon	   OUTPUT[199]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
-default	15:51:49.235924-0500	RedLemon	   OUTPUT[200]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
-default	15:51:49.236027-0500	RedLemon	   OUTPUT[201]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
-default	15:51:49.236133-0500	RedLemon	   OUTPUT[202]: [RD⚡] Comet 480p | 480p | comet | Subtitles: 3
-default	15:51:49.236254-0500	RedLemon	   OUTPUT[203]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
-default	15:51:49.236366-0500	RedLemon	   OUTPUT[204]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
-default	15:51:49.236469-0500	RedLemon	   OUTPUT[205]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
-default	15:51:49.236572-0500	RedLemon	   OUTPUT[206]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
-default	15:51:49.741017-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> received response, status 200 content K
-default	15:51:49.741810-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> response ended
-default	15:51:49.741890-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> done using Connection 9
-default	15:51:49.742114-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> summary for task success {transaction_duration_ms=2454, response_status=200, connection=9, reused=1, request_start_ms=27, request_duration_ms=0, response_start_ms=2453, response_duration_ms=1, request_bytes=277, response_bytes=20492, cache_hit=false}
-default	15:51:49.742423-0500	RedLemon	Task <E6B24DA2-98FF-4E29-9CE4-B8F09CA5B100>.<3> finished successfully
-default	15:51:49.753751-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:49.754190-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8C2F9C15-1448-4338-BC6C-2F52A15F339E] (reporting strategy default)> on Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> was not selected for reporting
-default	15:51:49.755748-0500	RedLemon	Connection 17: starting, TC(0x0)
-default	15:51:49.755825-0500	RedLemon	[C17 89B5AFC4-E0D4-460A-A66F-DCA399C095B1 127.0.0.1:47253 tcp, url hash: 52ab954c, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:49.755924-0500	RedLemon	[C17 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
-default	15:51:49.756201-0500	RedLemon	[C17 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: C9346439-03CD-4109-A644-14731EA641DE
-default	15:51:49.756865-0500	RedLemon	[C17 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.000s
-default	15:51:49.756910-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C17] reporting state preparing
-default	15:51:49.757157-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> setting up Connection 17
-default	15:51:49.757639-0500	RedLemon	nw_socket_handle_socket_event [C17:2] Socket received CONNECTED event
-default	15:51:49.757771-0500	RedLemon	nw_flow_connected [C17 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
-default	15:51:49.757951-0500	RedLemon	[C17 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.002s
-default	15:51:49.758050-0500	RedLemon	nw_flow_connected [C17 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:49.758399-0500	RedLemon	[C17 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.002s
-default	15:51:49.759299-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C17] reporting state ready
-default	15:51:49.759388-0500	RedLemon	[C17 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.003s
-default	15:51:49.759464-0500	RedLemon	Connection 17: connected successfully
-default	15:51:49.759562-0500	RedLemon	Connection 17: ready C(N) E(N)
-default	15:51:49.759780-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> now using Connection 17
-default	15:51:49.760168-0500	RedLemon	Connection 17: received viability advisory(Y)
-default	15:51:49.762253-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> sent request, body S 90
-default	15:51:49.767539-0500	RedLemon	🔓 Unlock request: infoHash=50a4c9c42abe..., fileIdx=0
-default	15:51:49.768395-0500	RedLemon	✅ Token found, attempting unlock...
-default	15:51:49.770739-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:49.771234-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F27536CC-69A1-42F3-AA32-9D0EF80AB278] (reporting strategy default)> on Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> was not selected for reporting
-default	15:51:49.772552-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:49.772888-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	15:51:49.773346-0500	RedLemon	Connection 18: enabling TLS
-default	15:51:49.773386-0500	RedLemon	Connection 18: starting, TC(0x0)
-default	15:51:49.773442-0500	RedLemon	[C18 D53836F8-0DFE-4F22-BFD1-18CA3C2C3215 Hostname#199a033c:443 quic-connection, url hash: 12f6340e, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:49.773535-0500	RedLemon	[C18 Hostname#199a033c:443 initial path ((null))] event: path:start @0.000s
-default	15:51:49.773989-0500	RedLemon	[C18 Hostname#199a033c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 830E2DC3-7CFD-4F94-AFF2-97108DBDF1E6
-default	15:51:49.774508-0500	RedLemon	[C18 Hostname#199a033c:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
-default	15:51:49.774580-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C18] reporting state preparing
-default	15:51:49.774935-0500	RedLemon	[C18.1 Hostname#199a033c:443 initial path ((null))] event: path:start @0.001s
-default	15:51:49.780692-0500	RedLemon	[C18.1 Hostname#199a033c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.007s, uuid: 3F2B02B4-C3A0-48C7-8ABE-9CD9686347B2
-default	15:51:49.780965-0500	RedLemon	[C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.007s
-default	15:51:49.781173-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> setting up Connection 18
-default	15:51:49.781274-0500	mDNSResponder	[R1759] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'YvUIV3orAzkBrkkk9tx76w=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:49.802479-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#1274a9ff.443
-default	15:51:49.802755-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#384d667c.443
-default	15:51:49.802922-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#a86d1126:443
-default	15:51:49.803215-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#17ecea7e:443
-default	15:51:49.803447-0500	RedLemon	[C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.029s
-default	15:51:49.803734-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 initial path ((null))] event: path:start @0.030s
-default	15:51:49.804234-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.030s, uuid: CD3EA301-2864-413A-B904-565889E224DD
-default	15:51:49.804477-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.030s
-default	15:51:49.805367-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.031s
-default	15:51:49.806518-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.033s
-default	15:51:49.806854-0500	RedLemon	tcp_output [C18.1.1:3] flags=[S] seq=2980632020, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2980632020
-default	15:51:49.808322-0500	mDNSResponder	[R1759] getaddrinfo stop -- hostname: <mask.hash: 'YvUIV3orAzkBrkkk9tx76w=='>, client pid: 8572 (RedLemon)
-default	15:51:49.809073-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#384d667c.443
-default	15:51:49.809205-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#17ecea7e:443
-default	15:51:49.809329-0500	RedLemon	nw_endpoint_resolver_update [C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#a86d1126:443
-default	15:51:49.809542-0500	RedLemon	[C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.036s
-default	15:51:49.916251-0500	RedLemon	tcp_input [C18.1.1:3] flags=[S.] seq=1055015467, ack=2980632021, win=64800 state=SYN_SENT rcv_nxt=0, snd_una=2980632020
-default	15:51:49.916476-0500	RedLemon	nw_flow_connected [C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	15:51:49.916793-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.143s
-default	15:51:49.917083-0500	RedLemon	[C18.1 Hostname#199a033c:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.143s
-default	15:51:49.917123-0500	RedLemon	[C18 Hostname#199a033c:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.143s
-default	15:51:49.917674-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C18.1.1:2][0x7fbf939e0f60] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:49.917798-0500	RedLemon	boringssl_context_info_handler(2028) [C18.1.1:2][0x7fbf939e0f60] Client handshake started
-default	15:51:49.917992-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS client enter_early_data
-default	15:51:49.918135-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS client read_server_hello
-default	15:51:50.053149-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:50.089860-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:50.107878-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	15:51:50.121594-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:50.122092-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:50.122199-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:50.123045-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C18.1.1:2][0x7fbf939e0f60] Performing external trust evaluation
-default	15:51:50.123205-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C18.1.1:2][0x7fbf939e0f60] Asyncing for external verify block
-default	15:51:50.125842-0500	RedLemon	Connection 18: asked to evaluate TLS Trust
-default	15:51:50.126997-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> auth completion disp=1 cred=0x0
-default	15:51:50.134147-0500	RedLemon	Connection 18: TLS Trust result 0
-default	15:51:50.134326-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C18.1.1:2][0x7fbf939e0f60] Returning from external verify block with result: true
-default	15:51:50.134428-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C18.1.1:2][0x7fbf939e0f60] Certificate verification result: OK
-default	15:51:50.135068-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:50.135462-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:50.135602-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:50.136425-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:50.136468-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:50.136631-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS 1.3 client done
-default	15:51:50.137264-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS client finish_client_handshake
-default	15:51:50.137331-0500	RedLemon	boringssl_context_info_handler(2045) [C18.1.1:2][0x7fbf939e0f60] Client handshake state: TLS client done
-default	15:51:50.137376-0500	RedLemon	boringssl_context_info_handler(2034) [C18.1.1:2][0x7fbf939e0f60] Client handshake done
-default	15:51:50.138345-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C18.1.1:2][0x7fbf939e0f60] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0804) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(220ms) flight_time(178ms) rtt(136ms) write_stalls(0) read_stalls(4)]
-default	15:51:50.138536-0500	RedLemon	nw_flow_connected [C18.1.1 IPv6#1274a9ff.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:50.138957-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.365s
-default	15:51:50.139107-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C18] reporting state ready
-default	15:51:50.139252-0500	RedLemon	[C18.1 Hostname#199a033c:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.365s
-default	15:51:50.139312-0500	RedLemon	[C18 Hostname#199a033c:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.365s
-default	15:51:50.139538-0500	RedLemon	[C18.1.1 IPv6#1274a9ff.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.366s
-default	15:51:50.139679-0500	RedLemon	[C18.1 Hostname#199a033c:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.366s
-default	15:51:50.139738-0500	RedLemon	[C18 Hostname#199a033c:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.366s
-default	15:51:50.139880-0500	RedLemon	Connection 18: connected successfully
-default	15:51:50.139935-0500	RedLemon	Connection 18: TLS handshake complete
-default	15:51:50.140223-0500	RedLemon	Connection 18: ready C(N) E(N)
-default	15:51:50.140724-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> now using Connection 18
-default	15:51:50.140957-0500	RedLemon	Connection 18: received viability advisory(Y)
-default	15:51:50.141511-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> sent request, body S 291
-default	15:51:50.480554-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> received response, status 201 content U
-default	15:51:50.483760-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> done using Connection 18
-default	15:51:50.483973-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> response ended
-default	15:51:50.484121-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> summary for task success {transaction_duration_ms=712, response_status=201, connection=18, protocol="h2", domain_lookup_duration_ms=22, connect_duration_ms=332, secure_connection_duration_ms=220, private_relay=false, request_start_ms=369, request_duration_ms=0, response_start_ms=708, response_duration_ms=3, request_bytes=508, response_bytes=196, cache_hit=false}
-default	15:51:50.484363-0500	RedLemon	Task <979A73FF-FD51-4CAF-822D-E8F472863574>.<165> finished successfully
-default	15:51:50.484749-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:50.485214-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AE06B959-5DCC-468A-B344-5998556997B7] (reporting strategy default)> on Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> was not selected for reporting
-default	15:51:50.486195-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:50.486943-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> now using Connection 18
-default	15:51:50.487365-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> sent request, body N 0
-default	15:51:50.646418-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> received response, status 200 content U
-default	15:51:50.646658-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> done using Connection 18
-default	15:51:50.646914-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> response ended
-default	15:51:50.647141-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> summary for task success {transaction_duration_ms=161, response_status=200, connection=18, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=160, response_duration_ms=0, request_bytes=97, response_bytes=532, cache_hit=false}
-default	15:51:50.647392-0500	RedLemon	Task <17083C34-A114-4D66-B38E-051FC6EDBA8D>.<166> finished successfully
-default	15:51:50.649288-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:50.649957-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [87382921-1FFE-45A3-B6A2-D5E541F26B39] (reporting strategy default)> on Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> was not selected for reporting
-default	15:51:50.651355-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:50.651774-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> now using Connection 18
-default	15:51:50.652940-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> sent request, body S 7
-default	15:51:50.706597-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1899 target:8572 attributes:[
+default	16:11:19.982182-0500	RedLemon	   OUTPUT[149]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.982525-0500	RedLemon	   OUTPUT[150]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.982897-0500	RedLemon	   OUTPUT[151]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983033-0500	RedLemon	   OUTPUT[152]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983412-0500	RedLemon	   OUTPUT[153]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983568-0500	RedLemon	   OUTPUT[154]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983686-0500	RedLemon	   OUTPUT[155]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983800-0500	RedLemon	   OUTPUT[156]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.983906-0500	RedLemon	   OUTPUT[157]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.984009-0500	RedLemon	   OUTPUT[158]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.984118-0500	RedLemon	   OUTPUT[159]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.984229-0500	RedLemon	   OUTPUT[160]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.984762-0500	RedLemon	   OUTPUT[161]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.985280-0500	RedLemon	   OUTPUT[162]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.985481-0500	RedLemon	   OUTPUT[163]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.985613-0500	RedLemon	   OUTPUT[164]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.985917-0500	RedLemon	   OUTPUT[165]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986053-0500	RedLemon	   OUTPUT[166]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986232-0500	RedLemon	   OUTPUT[167]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986361-0500	RedLemon	   OUTPUT[168]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986474-0500	RedLemon	   OUTPUT[169]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986582-0500	RedLemon	   OUTPUT[170]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986692-0500	RedLemon	   OUTPUT[171]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.986931-0500	RedLemon	   OUTPUT[172]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.987225-0500	RedLemon	   OUTPUT[173]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.987360-0500	RedLemon	   OUTPUT[174]: [RD⚡] Comet 2160p | 2160p | comet | Subtitles: 3
+default	16:11:19.987725-0500	RedLemon	   OUTPUT[175]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.987880-0500	RedLemon	   OUTPUT[176]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988267-0500	RedLemon	   OUTPUT[177]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988441-0500	RedLemon	   OUTPUT[178]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988568-0500	RedLemon	   OUTPUT[179]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988679-0500	RedLemon	   OUTPUT[180]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988789-0500	RedLemon	   OUTPUT[181]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.988898-0500	RedLemon	   OUTPUT[182]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.989005-0500	RedLemon	   OUTPUT[183]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.989109-0500	RedLemon	   OUTPUT[184]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.989212-0500	RedLemon	   OUTPUT[185]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.991487-0500	RedLemon	   OUTPUT[186]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992058-0500	RedLemon	   OUTPUT[187]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992223-0500	RedLemon	   OUTPUT[188]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992338-0500	RedLemon	   OUTPUT[189]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992451-0500	RedLemon	   OUTPUT[190]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992563-0500	RedLemon	   OUTPUT[191]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.992898-0500	RedLemon	   OUTPUT[192]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993045-0500	RedLemon	   OUTPUT[193]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993513-0500	RedLemon	   OUTPUT[194]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993654-0500	RedLemon	   OUTPUT[195]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993767-0500	RedLemon	   OUTPUT[196]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993872-0500	RedLemon	   OUTPUT[197]: [RD⚡] Comet 1080p | 1080p | comet | Subtitles: 3
+default	16:11:19.993978-0500	RedLemon	   OUTPUT[198]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
+default	16:11:19.994081-0500	RedLemon	   OUTPUT[199]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
+default	16:11:19.994184-0500	RedLemon	   OUTPUT[200]: [RD⚡] Comet 720p | 720p | comet | Subtitles: 3
+default	16:11:19.994294-0500	RedLemon	   OUTPUT[201]: [RD⚡] Comet 480p | 480p | comet | Subtitles: 3
+default	16:11:19.994579-0500	RedLemon	   OUTPUT[202]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	16:11:19.994757-0500	RedLemon	   OUTPUT[203]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	16:11:19.994882-0500	RedLemon	   OUTPUT[204]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	16:11:19.994995-0500	RedLemon	   OUTPUT[205]: [RD⚡] Comet unknown | unknown | comet | Subtitles: 3
+default	16:11:20.101038-0500	RedLemon	[C9] event: client:data_stall @31.369s
+default	16:11:20.115351-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+error	16:11:20.115451-0500	symptomsd	Unexpected type 4 for interface index 1 from libnetcore event EventDescription sb at 0x7fd2c8206bf0 from pid 10440 RedLemon SYMPTOM 0x6767002  flags 0x40000003 qual0 0x1 qual1 0x28c8 key 421890 num additional quals 4
+default	16:11:20.115649-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:20.116120-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:20.127562-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/10440/1/4/1/<private>/0
+default	16:11:20.127787-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: added unique stall type (1) on interface type (4) for existing process RedLemon
+default	16:11:20.359499-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> received response, status 200 content K
+default	16:11:20.359945-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> response ended
+default	16:11:20.360003-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> done using Connection 9
+default	16:11:20.360279-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> summary for task success {transaction_duration_ms=3541, response_status=200, connection=9, reused=1, request_start_ms=8, request_duration_ms=0, response_start_ms=3540, response_duration_ms=0, request_bytes=277, response_bytes=19768, cache_hit=false}
+default	16:11:20.360882-0500	RedLemon	Task <758A6C4E-126B-4AC6-ABF6-603973A1F771>.<3> finished successfully
+default	16:11:20.370855-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:20.371171-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E9AF5F42-2C3E-48DE-8A44-0E55E26D4C39] (reporting strategy default)> on Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> was not selected for reporting
+default	16:11:20.373092-0500	RedLemon	Connection 20: starting, TC(0x0)
+default	16:11:20.373178-0500	RedLemon	[C20 50219E9A-CBF1-4BB8-B1E3-6D710FF31FF3 127.0.0.1:47253 tcp, url hash: b84f8601, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:20.373281-0500	RedLemon	[C20 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
+default	16:11:20.373569-0500	RedLemon	[C20 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: 91134FCF-54BC-4A74-93CE-6DCA6238E88A
+default	16:11:20.376185-0500	RedLemon	[C20 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.002s
+default	16:11:20.376236-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C20] reporting state preparing
+default	16:11:20.376739-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> setting up Connection 20
+default	16:11:20.377454-0500	RedLemon	nw_socket_handle_socket_event [C20:2] Socket received CONNECTED event
+default	16:11:20.377717-0500	RedLemon	nw_flow_connected [C20 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
+default	16:11:20.378808-0500	RedLemon	[C20 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.005s
+default	16:11:20.378891-0500	RedLemon	nw_flow_connected [C20 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:20.379067-0500	RedLemon	[C20 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.005s
+default	16:11:20.379923-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C20] reporting state ready
+default	16:11:20.380002-0500	RedLemon	[C20 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.006s
+default	16:11:20.380079-0500	RedLemon	Connection 20: connected successfully
+default	16:11:20.380173-0500	RedLemon	Connection 20: ready C(N) E(N)
+default	16:11:20.380423-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> now using Connection 20
+default	16:11:20.380979-0500	RedLemon	Connection 20: received viability advisory(Y)
+default	16:11:20.382901-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> sent request, body S 90
+default	16:11:20.385540-0500	RedLemon	🔓 Unlock request: infoHash=54753892d63a..., fileIdx=0
+default	16:11:20.385694-0500	RedLemon	✅ Token found, attempting unlock...
+default	16:11:20.386363-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:20.386670-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7A40D325-7BA0-4F67-91BC-8C12BF5D4D3F] (reporting strategy default)> on Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> was not selected for reporting
+default	16:11:20.387377-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:20.387578-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:20.387940-0500	RedLemon	Connection 21: enabling TLS
+default	16:11:20.387965-0500	RedLemon	Connection 21: starting, TC(0x0)
+default	16:11:20.388017-0500	RedLemon	[C21 DE51AED5-A08C-4D4D-9AC5-195E303D875B Hostname#dba06b85:443 quic-connection, url hash: 69195dcf, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:20.388114-0500	RedLemon	[C21 Hostname#dba06b85:443 initial path ((null))] event: path:start @0.000s
+default	16:11:20.388475-0500	RedLemon	[C21 Hostname#dba06b85:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 95759168-BAB6-4BE9-A4F4-3721433983FE
+default	16:11:20.388679-0500	RedLemon	[C21 Hostname#dba06b85:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
+default	16:11:20.388724-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C21] reporting state preparing
+default	16:11:20.389043-0500	RedLemon	[C21.1 Hostname#dba06b85:443 initial path ((null))] event: path:start @0.000s
+default	16:11:20.391647-0500	RedLemon	[C21.1 Hostname#dba06b85:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.003s, uuid: B06F059E-6FE1-495F-B568-4A0535668006
+default	16:11:20.391865-0500	RedLemon	[C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.003s
+default	16:11:20.392827-0500	mDNSResponder	[R2249] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'YvUIV3orAzkBrkkk9tx76w=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:20.392621-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> setting up Connection 21
+default	16:11:20.541699-0500	RedLemon	nw_endpoint_resolver_update [C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#6cfa34dc.443
+default	16:11:20.542151-0500	RedLemon	nw_endpoint_resolver_update [C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#d605ba69.443
+default	16:11:20.542414-0500	RedLemon	nw_endpoint_resolver_update [C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#627b657b:443
+default	16:11:20.542624-0500	RedLemon	nw_endpoint_resolver_update [C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#60045cbb:443
+default	16:11:20.542963-0500	RedLemon	[C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.154s
+default	16:11:20.543401-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 initial path ((null))] event: path:start @0.155s
+default	16:11:20.544164-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.156s, uuid: 4DBBFFEC-1F9C-4DC6-A13C-11D2899B6678
+default	16:11:20.544512-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.156s
+default	16:11:20.546197-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.157s
+default	16:11:20.548773-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.160s
+default	16:11:20.549011-0500	RedLemon	tcp_output [C21.1.1:3] flags=[S] seq=1392063103, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1392063103
+default	16:11:20.663918-0500	RedLemon	tcp_input [C21.1.1:3] flags=[S.] seq=1520590012, ack=1392063104, win=64800 state=SYN_SENT rcv_nxt=0, snd_una=1392063103
+default	16:11:20.664107-0500	RedLemon	nw_flow_connected [C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:11:20.664428-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.276s
+default	16:11:20.664608-0500	RedLemon	[C21.1 Hostname#dba06b85:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.276s
+default	16:11:20.664669-0500	RedLemon	[C21 Hostname#dba06b85:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.276s
+default	16:11:20.665322-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C21.1.1:2][0x7f989a0a4ed0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:20.665447-0500	RedLemon	boringssl_context_info_handler(2028) [C21.1.1:2][0x7f989a0a4ed0] Client handshake started
+default	16:11:20.665657-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS client enter_early_data
+default	16:11:20.665802-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS client read_server_hello
+default	16:11:20.784780-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:20.785399-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:20.786000-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:11:20.786426-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:20.786933-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:20.787050-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:20.788619-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C21.1.1:2][0x7f989a0a4ed0] Performing external trust evaluation
+default	16:11:20.788781-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C21.1.1:2][0x7f989a0a4ed0] Asyncing for external verify block
+default	16:11:20.789002-0500	RedLemon	Connection 21: asked to evaluate TLS Trust
+default	16:11:20.789819-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> auth completion disp=1 cred=0x0
+default	16:11:20.796766-0500	RedLemon	Connection 21: TLS Trust result 0
+default	16:11:20.797226-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C21.1.1:2][0x7f989a0a4ed0] Returning from external verify block with result: true
+default	16:11:20.797341-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C21.1.1:2][0x7f989a0a4ed0] Certificate verification result: OK
+default	16:11:20.797924-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:20.798156-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:20.798181-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:20.798202-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:20.798223-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:20.798479-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS 1.3 client done
+default	16:11:20.798685-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS client finish_client_handshake
+default	16:11:20.798738-0500	RedLemon	boringssl_context_info_handler(2045) [C21.1.1:2][0x7f989a0a4ed0] Client handshake state: TLS client done
+default	16:11:20.798779-0500	RedLemon	boringssl_context_info_handler(2034) [C21.1.1:2][0x7f989a0a4ed0] Client handshake done
+default	16:11:20.799557-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C21.1.1:2][0x7f989a0a4ed0] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0804) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(134ms) flight_time(120ms) rtt(118ms) write_stalls(0) read_stalls(7)]
+default	16:11:20.799814-0500	RedLemon	nw_flow_connected [C21.1.1 IPv6#6cfa34dc.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:20.800187-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.412s
+default	16:11:20.800432-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C21] reporting state ready
+default	16:11:20.800929-0500	RedLemon	[C21.1 Hostname#dba06b85:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.412s
+default	16:11:20.801007-0500	RedLemon	[C21 Hostname#dba06b85:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.412s
+default	16:11:20.801233-0500	RedLemon	[C21.1.1 IPv6#6cfa34dc.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.413s
+default	16:11:20.801386-0500	RedLemon	[C21.1 Hostname#dba06b85:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.413s
+default	16:11:20.801450-0500	RedLemon	[C21 Hostname#dba06b85:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.413s
+default	16:11:20.801662-0500	RedLemon	Connection 21: connected successfully
+default	16:11:20.801780-0500	RedLemon	Connection 21: TLS handshake complete
+default	16:11:20.802417-0500	RedLemon	Connection 21: ready C(N) E(N)
+default	16:11:20.803057-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> now using Connection 21
+default	16:11:20.803281-0500	RedLemon	Connection 21: received viability advisory(Y)
+default	16:11:20.803884-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> sent request, body S 291
+default	16:11:21.235496-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> received response, status 201 content U
+default	16:11:21.235759-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> done using Connection 21
+default	16:11:21.236321-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> response ended
+default	16:11:21.236890-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> summary for task success {transaction_duration_ms=849, response_status=201, connection=21, protocol="h2", domain_lookup_duration_ms=151, connect_duration_ms=252, secure_connection_duration_ms=134, private_relay=false, request_start_ms=416, request_duration_ms=0, response_start_ms=848, response_duration_ms=1, request_bytes=508, response_bytes=196, cache_hit=false}
+default	16:11:21.237230-0500	RedLemon	Task <7B533202-CCF5-4F24-B8A1-7D8521FC73B7>.<267> finished successfully
+default	16:11:21.237833-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:21.238390-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [061DD385-A5EF-417E-8222-5011864FDA15] (reporting strategy default)> on Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> was not selected for reporting
+default	16:11:21.240237-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:21.241656-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> now using Connection 21
+default	16:11:21.242254-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> sent request, body N 0
+default	16:11:21.471154-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> received response, status 200 content U
+default	16:11:21.471278-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> done using Connection 21
+default	16:11:21.471478-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> response ended
+default	16:11:21.471658-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> summary for task success {transaction_duration_ms=232, response_status=200, connection=21, reused=1, request_start_ms=3, request_duration_ms=0, response_start_ms=232, response_duration_ms=0, request_bytes=98, response_bytes=461, cache_hit=false}
+default	16:11:21.471887-0500	RedLemon	Task <17C3A9D8-A821-4399-BCBE-0114B7509749>.<268> finished successfully
+default	16:11:21.473896-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:21.474812-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9E9AC8AF-E7A2-4BC1-8768-DB9E5E0FF13F] (reporting strategy default)> on Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> was not selected for reporting
+default	16:11:21.477315-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:21.477758-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> now using Connection 21
+default	16:11:21.478981-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2106 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:50.712743-0500	runningboardd	Assertion 174-8572-1899 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:50.733414-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:50.733478-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:50.733526-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:50.767951-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1900 target:8572 attributes:[
+default	16:11:21.479106-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> sent request, body S 7
+default	16:11:21.479531-0500	runningboardd	Assertion 174-10440-2106 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:21.481015-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:21.481451-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:21.481823-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:21.486793-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2107 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:50.768124-0500	runningboardd	Assertion 174-114-1900 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:50.772098-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:50.772159-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:50.772208-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:51.095320-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> received response, status 204 content U
-default	15:51:51.095511-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> done using Connection 18
-default	15:51:51.095849-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> response ended
-default	15:51:51.096021-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> summary for task success {transaction_duration_ms=445, response_status=204, connection=18, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=444, response_duration_ms=0, request_bytes=123, response_bytes=48, cache_hit=false}
-default	15:51:51.096276-0500	RedLemon	Task <25CDF76A-C047-4A22-89FA-322938D2B586>.<167> finished successfully
-default	15:51:51.097003-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:51.097460-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [59EA1523-955F-43FE-8D0A-E9178E0F3CA9] (reporting strategy default)> on Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> was not selected for reporting
-default	15:51:51.098318-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:51.098534-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> now using Connection 18
-default	15:51:51.098771-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> sent request, body N 0
-default	15:51:51.256212-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> received response, status 200 content U
-default	15:51:51.256345-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> done using Connection 18
-default	15:51:51.256633-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> response ended
-default	15:51:51.256836-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> summary for task success {transaction_duration_ms=159, response_status=200, connection=18, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=158, response_duration_ms=0, request_bytes=97, response_bytes=578, cache_hit=true}
-default	15:51:51.257119-0500	RedLemon	Task <D0938A55-F046-4092-8B8F-78042A096B00>.<168> finished successfully
-default	15:51:51.257927-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	15:51:51.258888-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B36F04CB-5E93-4021-964A-95DBA17978BB] (reporting strategy default)> on Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> was not selected for reporting
-default	15:51:51.262029-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:51.262244-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> now using Connection 18
-default	15:51:51.262974-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> sent request, body S 47
-default	15:51:51.594870-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> received response, status 200 content U
-default	15:51:51.595065-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> done using Connection 18
-default	15:51:51.595331-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> response ended
-default	15:51:51.595746-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> summary for task success {transaction_duration_ms=336, response_status=200, connection=18, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=334, response_duration_ms=1, request_bytes=150, response_bytes=538, cache_hit=true}
-default	15:51:51.596026-0500	RedLemon	Task <B256BC15-5EB4-4D1A-AB7E-76F5041EFBEA>.<169> finished successfully
-default	15:51:51.597299-0500	RedLemon	✅ Unlocked successfully: Frankenstein 2025 1080p NF WEB-DL DDP5 1 Atmos H 264-FLUX.mkv
-default	15:51:51.598551-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> received response, status 200 content K
-default	15:51:51.598921-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> response ended
-default	15:51:51.599004-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> done using Connection 17
-default	15:51:51.599436-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> summary for task success {transaction_duration_ms=1844, response_status=200, connection=17, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=2, secure_connection_duration_ms=0, private_relay=false, request_start_ms=5, request_duration_ms=1, response_start_ms=1843, response_duration_ms=0, request_bytes=372, response_bytes=376, cache_hit=true}
-default	15:51:51.599693-0500	RedLemon	Task <4E6E2552-8CD5-4DE3-9081-AD1A8E58D49A>.<164> finished successfully
-default	15:51:51.600234-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
-default	15:51:51.600681-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:51.600708-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:51.600775-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:51.602016-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [25A0A48B-849B-474D-AB70-372936A6D1F8] (reporting strategy default)> on Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> was not selected for reporting
-default	15:51:51.602727-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [675A9556-04DC-47BE-BC38-68CEB17D9892] (reporting strategy default)> on Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> was not selected for reporting
-default	15:51:51.602854-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [262E6FA2-6E31-44E1-9DE0-031097793762] (reporting strategy default)> on Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> was not selected for reporting
-default	15:51:51.605340-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:51.605716-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	15:51:51.606168-0500	RedLemon	Connection 19: enabling TLS
-default	15:51:51.606242-0500	RedLemon	Connection 19: starting, TC(0x0)
-default	15:51:51.606324-0500	RedLemon	[C19 C8A923AE-325D-4E40-8B71-F968CC92DBB8 Hostname#a1d66c0d:443 quic-connection, url hash: 31da3055, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01] start
-default	15:51:51.606426-0500	RedLemon	[C19 Hostname#a1d66c0d:443 initial path ((null))] event: path:start @0.000s
-default	15:51:51.606857-0500	RedLemon	[C19 Hostname#a1d66c0d:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 61F6D687-791A-4597-8298-EEB768FA38B3
-default	15:51:51.607062-0500	RedLemon	[C19 Hostname#a1d66c0d:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
-default	15:51:51.607109-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C19] reporting state preparing
-default	15:51:51.607497-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 initial path ((null))] event: path:start @0.001s
-default	15:51:51.608206-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: 4F5914FF-521A-4C7F-A450-CF2D8031A279
-default	15:51:51.608455-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.002s
-default	15:51:51.608989-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> setting up Connection 19
-default	15:51:51.608681-0500	mDNSResponder	[R1760] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'VkU6jUPj8QTibCrwfcJdZQ=='>, options: 0x8 {use-failover}, client pid: 8572 (RedLemon)
-default	15:51:51.609450-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:51.609558-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> waiting for setup of Connection 19
-default	15:51:51.609627-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:51.609704-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> waiting for setup of Connection 19
-default	15:51:51.613775-0500	RedLemon	nw_endpoint_resolver_update [C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#3bcd49a0.443
-default	15:51:51.613898-0500	RedLemon	nw_endpoint_resolver_update [C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:51.614106-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.007s
-default	15:51:51.614484-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 initial path ((null))] event: path:start @0.008s
-default	15:51:51.615283-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.008s, uuid: 301324B5-1D77-4B73-B23E-910DC6540F5C
-default	15:51:51.615694-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.009s
-default	15:51:51.616610-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.010s
-default	15:51:51.620696-0500	RedLemon	nw_protocol_instance_ignore_future_path_changes [C19.1.1:2] Ignoring future path changes for protocol
-default	15:51:51.620795-0500	RedLemon	quic_initialize_block_invoke [C19.1.1:2] [-d1de6a82533c6641] created QUIC connection (spin bit disabled)
-default	15:51:51.621753-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.015s
-default	15:51:51.623567-0500	RedLemon	quic_crypto_new_flow [C19.1.1:2] [-d1de6a82533c6641] TLS stream is: [C20]
-default	15:51:51.623626-0500	RedLemon	[C20 3B11BA86-CDDA-40C3-B56A-3C32073422D5 IPv6#3bcd49a0.443 quic-connection, url hash: 31da3055, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{90BB7D89-C425-446F-823D-960A5F622A3F}{(null)}{Y}{2} (private), proc: F2A35C62-84F6-3E68-B0C5-C12BFC414E01, no transport] start
-default	15:51:51.623761-0500	RedLemon	[C20 IPv6#3bcd49a0.443 initial socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:start @0.000s
-default	15:51:51.623888-0500	RedLemon	[C20 IPv6#3bcd49a0.443 waiting socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 301324B5-1D77-4B73-B23E-910DC6540F5C
-default	15:51:51.624152-0500	RedLemon	[C20 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.000s
-default	15:51:51.624196-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C20] reporting state preparing
-default	15:51:51.624351-0500	RedLemon	nw_flow_connected [C20 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
-default	15:51:51.624418-0500	RedLemon	[C20 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.000s
-default	15:51:51.624799-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C20:1][0x7fbf96a155c0] TLS configured [min_version(0x0304) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	15:51:51.624944-0500	RedLemon	boringssl_context_info_handler(2028) [C20:1][0x7fbf96a155c0] Client handshake started
-default	15:51:51.625149-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS client enter_early_data
-default	15:51:51.625619-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS client read_server_hello
-default	15:51:51.638173-0500	RedLemon	nw_endpoint_resolver_update [C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:51.638437-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.032s
-default	15:51:51.639641-0500	mDNSResponder	[R1760] getaddrinfo stop -- hostname: <mask.hash: 'VkU6jUPj8QTibCrwfcJdZQ=='>, client pid: 8572 (RedLemon)
-default	15:51:51.640163-0500	RedLemon	nw_endpoint_resolver_update [C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#3e8bdc91:443
-default	15:51:51.640523-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.034s
-error	15:51:51.643296-0500	RedLemon	quic_packet_parser_inner [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] SH fixed bit is zero
-default	15:51:51.649245-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	15:51:51.649410-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_server_hello
-default	15:51:51.649965-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-error	15:51:51.650160-0500	RedLemon	quic_packet_parser_inner [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] SH fixed bit is zero
-default	15:51:51.650595-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_certificate_request
-default	15:51:51.650892-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_server_certificate
-default	15:51:51.650985-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	15:51:51.651473-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C20:1][0x7fbf96a155c0] Performing external trust evaluation
-default	15:51:51.651669-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C20:1][0x7fbf96a155c0] Asyncing for external verify block
-default	15:51:51.652059-0500	RedLemon	Connection 19: asked to evaluate TLS Trust
-default	15:51:51.652389-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> auth completion disp=1 cred=0x0
-default	15:51:51.667937-0500	RedLemon	Connection 19: TLS Trust result 0
-default	15:51:51.668010-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C20:1][0x7fbf96a155c0] Returning from external verify block with result: true
-default	15:51:51.668102-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C20:1][0x7fbf96a155c0] Certificate verification result: OK
-default	15:51:51.668730-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client read_server_finished
-default	15:51:51.668941-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	15:51:51.668989-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	15:51:51.669028-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client send_client_certificate
-default	15:51:51.669064-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client complete_second_flight
-default	15:51:51.669898-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS 1.3 client done
-default	15:51:51.670095-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS client finish_client_handshake
-default	15:51:51.670181-0500	RedLemon	boringssl_context_info_handler(2045) [C20:1][0x7fbf96a155c0] Client handshake state: TLS client done
-default	15:51:51.670209-0500	RedLemon	boringssl_context_info_handler(2034) [C20:1][0x7fbf96a155c0] Client handshake done
-default	15:51:51.670814-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C20:1][0x7fbf96a155c0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(46ms) flight_time(25ms) rtt(24ms) write_stalls(0) read_stalls(4)]
-default	15:51:51.670932-0500	RedLemon	nw_flow_connected [C20 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
-default	15:51:51.671166-0500	RedLemon	[C20 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.047s
-default	15:51:51.671447-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C20] reporting state ready
-default	15:51:51.671518-0500	RedLemon	[C20 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.047s
-default	15:51:51.673568-0500	RedLemon	quic_pmtud_restart [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] PMTUD enabled, max PMTU: 1398, header size: 48, current PMTU 1248
-default	15:51:51.673669-0500	RedLemon	quic_crypto_tls_ready_inner [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] QUIC connection established in 51.671 ms, RTT 17.757 ms
-default	15:51:51.673751-0500	RedLemon	nw_flow_connected [C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
-default	15:51:51.674067-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.067s
-default	15:51:51.674263-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.067s
-default	15:51:51.674465-0500	RedLemon	[C19 Hostname#a1d66c0d:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.068s
-default	15:51:51.674637-0500	RedLemon	nw_flow_connected [C19.1.1 IPv6#3bcd49a0.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-2853746719)
-default	15:51:51.675441-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.069s
-default	15:51:51.676074-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C19] reporting state ready
-default	15:51:51.676481-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.070s
-default	15:51:51.676556-0500	RedLemon	[C19 Hostname#a1d66c0d:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.070s
-default	15:51:51.676788-0500	RedLemon	[C19.1.1 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.070s
-default	15:51:51.676960-0500	RedLemon	[C19.1 Hostname#a1d66c0d:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.070s
-default	15:51:51.677030-0500	RedLemon	[C19 Hostname#a1d66c0d:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.070s
-default	15:51:51.677505-0500	RedLemon	Connection 19: connected successfully
-default	15:51:51.677798-0500	RedLemon	Connection 19: TLS handshake complete
-default	15:51:51.679928-0500	RedLemon	Connection 19: ready C(N) E(N)
-default	15:51:51.682102-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> now using Connection 19
-default	15:51:51.683859-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> now using Connection 19
-default	15:51:51.685322-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> now using Connection 19
-default	15:51:51.686302-0500	RedLemon	Connection 19: received viability advisory(Y)
-default	15:51:51.686378-0500	RedLemon	0x7fbf973d1db8 ID=0 Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> sent request, body N 0
-default	15:51:51.686434-0500	RedLemon	0x7fbf939ead28 ID=4 Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> sent request, body N 0
-default	15:51:51.686481-0500	RedLemon	0x7fbf977e1f48 ID=8 Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> sent request, body N 0
-default	15:51:51.687134-0500	RedLemon	boringssl_context_new_session_handler(1336) [C20:1][0x7fbf96a155c0] Asyncing for session update block
-default	15:51:51.687597-0500	RedLemon	boringssl_context_new_session_handler(1336) [C20:1][0x7fbf96a155c0] Asyncing for session update block
-default	15:51:51.687777-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C20:1][0x7fbf96a155c0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(46ms) flight_time(25ms) rtt(24ms) write_stalls(0) read_stalls(4)]
-default	15:51:51.687902-0500	RedLemon	nw_flow_connected [C20 IPv6#3bcd49a0.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
-default	15:51:51.688186-0500	RedLemon	quic_stream_create_inbound [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] creating inbound stream 3
-default	15:51:51.689184-0500	RedLemon	quic_stream_create_inbound [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] creating inbound stream 7
-default	15:51:51.691220-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C20:1][0x7fbf96a155c0] Returning from session update block
-default	15:51:51.693473-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C20:1][0x7fbf96a155c0] Returning from session update block
-default	15:51:51.693975-0500	RedLemon	quic_stream_create_inbound [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] creating inbound stream 11
-default	15:51:51.700905-0500	RedLemon	quic_stream_create_inbound [C19.1.1:2] [-014c017ca5605604874f107c2460b293fbb5f808] creating inbound stream 15
-default	15:51:51.778840-0500	runningboardd	Invalidating assertion 174-8572-1899 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:51.954482-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:51.954538-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:51.954626-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:51.956188-0500	runningboardd	Invalidating assertion 174-114-1900 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:51.976726-0500	RedLemon	0x7fbf977e1f48 ID=8 Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> received response, status 200 content U
-default	15:51:51.977247-0500	RedLemon	0x7fbf973d1db8 ID=0 Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> received response, status 200 content U
-default	15:51:51.978872-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1901 target:8572 attributes:[
+default	16:11:21.487220-0500	runningboardd	Assertion 174-114-2107 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:21.496670-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:21.496721-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:21.497057-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:21.508721-0500	mDNSResponder	[R2249] getaddrinfo stop -- hostname: <mask.hash: 'YvUIV3orAzkBrkkk9tx76w=='>, client pid: 10440 (RedLemon)
+default	16:11:22.019198-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> received response, status 204 content U
+default	16:11:22.019325-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> done using Connection 21
+default	16:11:22.019525-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> response ended
+default	16:11:22.019711-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> summary for task success {transaction_duration_ms=543, response_status=204, connection=21, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=542, response_duration_ms=0, request_bytes=123, response_bytes=48, cache_hit=false}
+default	16:11:22.020009-0500	RedLemon	Task <B0E252EA-42FD-4FFC-A1FE-928CABA8BAB3>.<269> finished successfully
+default	16:11:22.020329-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:22.020612-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [03F8ADED-5DAA-4F52-AA62-DFAE1B36D976] (reporting strategy default)> on Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> was not selected for reporting
+default	16:11:22.021473-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:22.021625-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> now using Connection 21
+default	16:11:22.021900-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> sent request, body N 0
+default	16:11:22.186399-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> received response, status 200 content U
+default	16:11:22.186614-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> done using Connection 21
+default	16:11:22.186944-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> response ended
+default	16:11:22.187297-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> summary for task success {transaction_duration_ms=166, response_status=200, connection=21, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=165, response_duration_ms=0, request_bytes=98, response_bytes=499, cache_hit=true}
+default	16:11:22.187822-0500	RedLemon	Task <BFA1229C-7888-4470-AF94-583C4E097145>.<270> finished successfully
+default	16:11:22.189130-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:11:22.189853-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [399CD11E-3649-4B9C-894E-5A7F70C8613B] (reporting strategy default)> on Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> was not selected for reporting
+default	16:11:22.192243-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:22.192610-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> now using Connection 21
+default	16:11:22.193917-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> sent request, body S 47
+default	16:11:22.437419-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> received response, status 200 content U
+default	16:11:22.437839-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> done using Connection 21
+default	16:11:22.438270-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> response ended
+default	16:11:22.439148-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> summary for task success {transaction_duration_ms=248, response_status=200, connection=21, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=246, response_duration_ms=1, request_bytes=150, response_bytes=504, cache_hit=true}
+default	16:11:22.439412-0500	RedLemon	Task <2F5CEB42-9CA7-4136-980A-FE3A380D615F>.<271> finished successfully
+default	16:11:22.443346-0500	RedLemon	✅ Unlocked successfully: Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+default	16:11:22.447174-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> received response, status 200 content K
+default	16:11:22.447498-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> response ended
+default	16:11:22.447684-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> done using Connection 20
+default	16:11:22.447935-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> summary for task success {transaction_duration_ms=2076, response_status=200, connection=20, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=3, secure_connection_duration_ms=0, private_relay=false, request_start_ms=9, request_duration_ms=1, response_start_ms=2075, response_duration_ms=0, request_bytes=372, response_bytes=358, cache_hit=true}
+default	16:11:22.448457-0500	RedLemon	Task <07E0F49F-4AD4-4041-B5A5-FDF30ECA944D>.<266> finished successfully
+default	16:11:22.449240-0500	RedLemon	📥 StreamService: Pre-downloading 3 subtitles...
+default	16:11:22.450287-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:22.450788-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:22.451796-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:22.453028-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1D60BBA3-6421-4031-BA86-E1288B717912] (reporting strategy default)> on Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> was not selected for reporting
+default	16:11:22.453509-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3C7AFC26-3CA7-4578-AF8A-C54BB1741EED] (reporting strategy default)> on Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> was not selected for reporting
+default	16:11:22.455319-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FCCB1DAD-2897-4A2E-BDBE-9874CFAC984B] (reporting strategy default)> on Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> was not selected for reporting
+default	16:11:22.459161-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:22.461400-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:22.461610-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:22.472857-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:11:22.475328-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> waiting for setup of Connection 22
+default	16:11:22.475369-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> waiting for setup of Connection 22
+default	16:11:22.475416-0500	RedLemon	Connection 22: enabling TLS
+default	16:11:22.475456-0500	RedLemon	Connection 22: starting, TC(0x0)
+default	16:11:22.482207-0500	RedLemon	[C22 1147A841-B5C7-4BC1-9FF6-1011F0EE71EC Hostname#c34080c5:443 quic-connection, url hash: c72138fa, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89] start
+default	16:11:22.482445-0500	RedLemon	[C22 Hostname#c34080c5:443 initial path ((null))] event: path:start @0.000s
+default	16:11:22.484749-0500	RedLemon	[C22 Hostname#c34080c5:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.002s, uuid: 1EB75307-8DDF-4C00-B838-3DA115437E40
+default	16:11:22.485878-0500	RedLemon	[C22 Hostname#c34080c5:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.003s
+default	16:11:22.485932-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C22] reporting state preparing
+default	16:11:22.486340-0500	RedLemon	[C22.1 Hostname#c34080c5:443 initial path ((null))] event: path:start @0.003s
+default	16:11:22.486921-0500	RedLemon	[C22.1 Hostname#c34080c5:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: B3C3CBF8-D76A-476F-A5C8-4BFA0A95AA8F
+default	16:11:22.487180-0500	RedLemon	[C22.1 Hostname#c34080c5:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.004s
+default	16:11:22.487663-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> setting up Connection 22
+default	16:11:22.487612-0500	mDNSResponder	[R2250] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'VkU6jUPj8QTibCrwfcJdZQ=='>, options: 0x8 {use-failover}, client pid: 10440 (RedLemon)
+default	16:11:22.510338-0500	RedLemon	nw_endpoint_resolver_update [C22.1 Hostname#c34080c5:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#246ac99d.443
+default	16:11:22.510459-0500	RedLemon	nw_endpoint_resolver_update [C22.1 Hostname#c34080c5:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#ec7b8fac:443
+default	16:11:22.510669-0500	RedLemon	[C22.1 Hostname#c34080c5:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.028s
+default	16:11:22.510967-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 initial path ((null))] event: path:start @0.028s
+default	16:11:22.511428-0500	mDNSResponder	[R2250] getaddrinfo stop -- hostname: <mask.hash: 'VkU6jUPj8QTibCrwfcJdZQ=='>, client pid: 10440 (RedLemon)
+default	16:11:22.511596-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.029s, uuid: 6C35E786-F4EB-41CF-B8BC-14EE1C4890E0
+default	16:11:22.512284-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.029s
+default	16:11:22.513108-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.030s
+default	16:11:22.515331-0500	RedLemon	nw_protocol_instance_ignore_future_path_changes [C22.1.1:2] Ignoring future path changes for protocol
+default	16:11:22.515433-0500	RedLemon	quic_initialize_block_invoke [C22.1.1:2] [-dae69ef23805982f] created QUIC connection (spin bit enabled)
+default	16:11:22.516530-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.034s
+default	16:11:22.518891-0500	RedLemon	quic_crypto_new_flow [C22.1.1:2] [-dae69ef23805982f] TLS stream is: [C23]
+default	16:11:22.518950-0500	RedLemon	[C23 5B2D4F54-43E2-4EB7-8210-1EC4A95D850B IPv6#246ac99d.443 quic-connection, url hash: c72138fa, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{85758553-2AB3-4CF0-A450-1C7F4B488E55}{(null)}{Y}{2} (private), proc: EF9EC314-D11B-38DD-BC50-01B50CE6EC89, no transport] start
+default	16:11:22.519088-0500	RedLemon	[C23 IPv6#246ac99d.443 initial socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:start @0.000s
+default	16:11:22.519215-0500	RedLemon	[C23 IPv6#246ac99d.443 waiting socket-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 6C35E786-F4EB-41CF-B8BC-14EE1C4890E0
+default	16:11:22.519397-0500	RedLemon	[C23 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.000s
+default	16:11:22.519438-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C23] reporting state preparing
+default	16:11:22.519587-0500	RedLemon	nw_flow_connected [C23 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
+default	16:11:22.519670-0500	RedLemon	[C23 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.000s
+default	16:11:22.520158-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C23:1][0x7f989a06ed60] TLS configured [min_version(0x0304) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:11:22.520356-0500	RedLemon	boringssl_context_info_handler(2028) [C23:1][0x7f989a06ed60] Client handshake started
+default	16:11:22.520553-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS client enter_early_data
+default	16:11:22.520818-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS client read_server_hello
+error	16:11:22.541309-0500	RedLemon	quic_packet_parser_inner [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] SH fixed bit is zero
+default	16:11:22.544771-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:11:22.544934-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_server_hello
+default	16:11:22.545778-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:11:22.546406-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:11:22.548285-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:11:22.548573-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:11:22.549257-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C23:1][0x7f989a06ed60] Performing external trust evaluation
+default	16:11:22.549515-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C23:1][0x7f989a06ed60] Asyncing for external verify block
+default	16:11:22.549751-0500	RedLemon	Connection 22: asked to evaluate TLS Trust
+default	16:11:22.550199-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> auth completion disp=1 cred=0x0
+default	16:11:22.556678-0500	RedLemon	Connection 22: TLS Trust result 0
+default	16:11:22.556746-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C23:1][0x7f989a06ed60] Returning from external verify block with result: true
+default	16:11:22.556891-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C23:1][0x7f989a06ed60] Certificate verification result: OK
+default	16:11:22.557784-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client read_server_finished
+default	16:11:22.557988-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:11:22.558036-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:11:22.558077-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:11:22.558115-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:11:22.558737-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS 1.3 client done
+default	16:11:22.558867-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS client finish_client_handshake
+default	16:11:22.558957-0500	RedLemon	boringssl_context_info_handler(2045) [C23:1][0x7f989a06ed60] Client handshake state: TLS client done
+default	16:11:22.559015-0500	RedLemon	boringssl_context_info_handler(2034) [C23:1][0x7f989a06ed60] Client handshake done
+default	16:11:22.559854-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C23:1][0x7f989a06ed60] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(39ms) flight_time(26ms) rtt(24ms) write_stalls(0) read_stalls(4)]
+default	16:11:22.560131-0500	RedLemon	nw_flow_connected [C23 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
+default	16:11:22.560394-0500	RedLemon	[C23 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.041s
+default	16:11:22.560679-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C23] reporting state ready
+default	16:11:22.560748-0500	RedLemon	[C23 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.041s
+default	16:11:22.564086-0500	RedLemon	quic_pmtud_restart [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] PMTUD enabled, max PMTU: 1398, header size: 48, current PMTU 1248
+default	16:11:22.564182-0500	RedLemon	quic_crypto_tls_ready_inner [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] QUIC connection established in 47.292 ms, RTT 20.536 ms
+default	16:11:22.564259-0500	RedLemon	nw_flow_connected [C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (quic-connection)
+default	16:11:22.564476-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.082s
+default	16:11:22.564614-0500	RedLemon	[C22.1 Hostname#c34080c5:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.082s
+default	16:11:22.564672-0500	RedLemon	[C22 Hostname#c34080c5:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.082s
+default	16:11:22.564832-0500	RedLemon	nw_flow_connected [C22.1.1 IPv6#246ac99d.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-1037753433)
+default	16:11:22.565181-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.082s
+default	16:11:22.565603-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C22] reporting state ready
+default	16:11:22.565931-0500	RedLemon	[C22.1 Hostname#c34080c5:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.083s
+default	16:11:22.566068-0500	RedLemon	[C22 Hostname#c34080c5:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.083s
+default	16:11:22.566373-0500	RedLemon	[C22.1.1 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.084s
+default	16:11:22.566687-0500	RedLemon	[C22.1 Hostname#c34080c5:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.084s
+default	16:11:22.566989-0500	RedLemon	[C22 Hostname#c34080c5:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.084s
+default	16:11:22.567333-0500	RedLemon	Connection 22: connected successfully
+default	16:11:22.567388-0500	RedLemon	Connection 22: TLS handshake complete
+default	16:11:22.567678-0500	RedLemon	Connection 22: ready C(N) E(N)
+default	16:11:22.569534-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> now using Connection 22
+default	16:11:22.570607-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> now using Connection 22
+default	16:11:22.571468-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> now using Connection 22
+default	16:11:22.572426-0500	RedLemon	Connection 22: received viability advisory(Y)
+default	16:11:22.572484-0500	RedLemon	0x7f989b0d7b08 ID=0 Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> sent request, body N 0
+default	16:11:22.572597-0500	RedLemon	0x7f989ade7418 ID=4 Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> sent request, body N 0
+default	16:11:22.572959-0500	RedLemon	0x7f989adea0f8 ID=8 Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> sent request, body N 0
+default	16:11:22.574275-0500	runningboardd	Invalidating assertion 174-10440-2106 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:22.579647-0500	RedLemon	boringssl_context_new_session_handler(1336) [C23:1][0x7f989a06ed60] Asyncing for session update block
+default	16:11:22.580384-0500	RedLemon	boringssl_context_new_session_handler(1336) [C23:1][0x7f989a06ed60] Asyncing for session update block
+default	16:11:22.580591-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C23:1][0x7f989a06ed60] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h3) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(39ms) flight_time(26ms) rtt(24ms) write_stalls(0) read_stalls(4)]
+default	16:11:22.580719-0500	RedLemon	nw_flow_connected [C23 IPv6#246ac99d.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (tls)
+default	16:11:22.582885-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C23:1][0x7f989a06ed60] Returning from session update block
+default	16:11:22.583580-0500	RedLemon	boringssl_context_new_session_handler_block_invoke(1339) [C23:1][0x7f989a06ed60] Returning from session update block
+default	16:11:22.583719-0500	RedLemon	quic_stream_create_inbound [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] creating inbound stream 3
+default	16:11:22.584597-0500	RedLemon	quic_stream_create_inbound [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] creating inbound stream 7
+default	16:11:22.585141-0500	RedLemon	quic_stream_create_inbound [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] creating inbound stream 11
+default	16:11:22.587400-0500	RedLemon	quic_stream_create_inbound [C22.1.1:2] [-01cd140e028643ebdece060e218622e7d0f22041] creating inbound stream 15
+default	16:11:22.732357-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:22.732736-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:22.733129-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:22.736800-0500	runningboardd	Invalidating assertion 174-114-2107 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:22.903492-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:22.903970-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:22.904082-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:23.452857-0500	RedLemon	0x7f989adea0f8 ID=8 Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> received response, status 200 content U
+default	16:11:23.453464-0500	RedLemon	0x7f989b0d7b08 ID=0 Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> received response, status 200 content U
+default	16:11:23.454240-0500	RedLemon	0x7f989ade7418 ID=4 Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> received response, status 200 content K
+default	16:11:23.455111-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> response ended
+default	16:11:23.456139-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> done using Connection 22
+default	16:11:23.460675-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> summary for task success {transaction_duration_ms=1003, response_status=200, connection=22, reused=1, request_start_ms=113, request_duration_ms=1, response_start_ms=996, response_duration_ms=2, request_bytes=112, response_bytes=3279, cache_hit=true}
+default	16:11:23.461196-0500	RedLemon	Task <3C1BDD74-5AA6-4DDD-84FB-8B05BC668A7A>.<273> finished successfully
+default	16:11:23.587340-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2108 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:51.979207-0500	runningboardd	Assertion 174-8572-1901 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:51.980506-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:51.980552-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:51.980597-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:51.983154-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1902 target:8572 attributes:[
+default	16:11:23.587712-0500	runningboardd	Assertion 174-10440-2108 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:23.591048-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:23.591116-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:23.591445-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:23.601943-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2109 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:51.983331-0500	runningboardd	Assertion 174-114-1902 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:51.987931-0500	RedLemon	0x7fbf939ead28 ID=4 Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> received response, status 200 content K
-default	15:51:51.994951-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> response ended
-default	15:51:51.995374-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> done using Connection 19
-default	15:51:51.995629-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> summary for task success {transaction_duration_ms=390, response_status=200, connection=19, reused=1, request_start_ms=78, request_duration_ms=2, response_start_ms=382, response_duration_ms=7, request_bytes=112, response_bytes=3279, cache_hit=true}
-default	15:51:51.995861-0500	RedLemon	Task <F86E79A8-7EE1-4FB8-A73F-8BF0BFC6C158>.<172> finished successfully
-default	15:51:52.039859-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> response ended
-default	15:51:52.040270-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> done using Connection 19
-default	15:51:52.040545-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> summary for task success {transaction_duration_ms=434, response_status=200, connection=19, reused=1, request_start_ms=79, request_duration_ms=1, response_start_ms=370, response_duration_ms=64, request_bytes=112, response_bytes=39901, cache_hit=true}
-default	15:51:52.041019-0500	RedLemon	Task <06C55D36-441D-41F0-ABC3-A38E4C7B0811>.<171> finished successfully
-default	15:51:52.049284-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> response ended
-default	15:51:52.049752-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> done using Connection 19
-default	15:51:52.049974-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> summary for task success {transaction_duration_ms=447, response_status=200, connection=19, protocol="h3", domain_lookup_duration_ms=5, connect_duration_ms=54, secure_connection_duration_ms=51, private_relay=false, request_start_ms=79, request_duration_ms=4, response_start_ms=374, response_duration_ms=72, request_bytes=112, response_bytes=91146, cache_hit=true}
-default	15:51:52.050465-0500	RedLemon	Task <0E2F5F26-49DD-48E9-ADEB-AE8B2C0CF0FE>.<170> finished successfully
-default	15:51:52.106611-0500	RedLemon	🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/4CHAP3VHT7MKE106/F, subtitles: 3
-default	15:51:52.173413-0500	RedLemon	✅ Stream ready, starting playback...
-default	15:51:52.173607-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
-default	15:51:52.173981-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7fbf93f27450>
-default	15:51:52.174171-0500	RedLemon	   Is fullscreen: 0
-default	15:51:52.174401-0500	RedLemon	   ✅ WindowManager: Toggling fullscreen ON
-default	15:51:52.415973-0500	RedLemon	🖼️ Setting up MPV with native macOS video output...
-default	15:51:52.443881-0500	RedLemon	✅ MPV initialized with native GPU rendering
-default	15:51:52.456341-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task starting
-default	15:51:52.456556-0500	RedLemon	🎉 Starting watch party sync - Room: BPWN, Host: YES
-default	15:51:52.457099-0500	RedLemon	🎉 Watch Party Mode ENABLED. isInWatchParty = YES
-default	15:51:52.512072-0500	runningboardd	Invalidating assertion 174-171-1846 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	15:51:52.529799-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:174-171-1906 target:8572 attributes:[
+default	16:11:23.602207-0500	runningboardd	Assertion 174-114-2109 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:23.603444-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:23.603492-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:23.603538-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:23.758801-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> response ended
+default	16:11:23.759205-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> done using Connection 22
+default	16:11:23.759562-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> summary for task success {transaction_duration_ms=1300, response_status=200, connection=22, reused=1, request_start_ms=112, request_duration_ms=1, response_start_ms=994, response_duration_ms=306, request_bytes=112, response_bytes=39897, cache_hit=true}
+default	16:11:23.759854-0500	RedLemon	Task <17F3AB29-F9E0-484C-BA11-015D15F9161E>.<274> finished successfully
+default	16:11:23.785340-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> response ended
+default	16:11:23.785815-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> done using Connection 22
+default	16:11:23.786062-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> summary for task success {transaction_duration_ms=1330, response_status=200, connection=22, protocol="h3", domain_lookup_duration_ms=24, connect_duration_ms=48, secure_connection_duration_ms=47, private_relay=false, request_start_ms=113, request_duration_ms=2, response_start_ms=997, response_duration_ms=332, request_bytes=112, response_bytes=91150, cache_hit=true}
+default	16:11:23.786294-0500	RedLemon	Task <F4114CE0-2C74-46C5-830F-06659E4F82B9>.<272> finished successfully
+default	16:11:23.829113-0500	RedLemon	🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi2-4.download.real-debrid.com/d/K7QLU3UNWAGGA112/F, subtitles: 3
+default	16:11:23.910967-0500	RedLemon	✅ Stream ready, starting playback...
+default	16:11:23.917009-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
+default	16:11:23.920399-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7f9897b83f80>
+default	16:11:23.920965-0500	RedLemon	   Is fullscreen: 0
+default	16:11:23.921345-0500	RedLemon	   ✅ WindowManager: Toggling fullscreen ON
+default	16:11:24.208714-0500	RedLemon	🖼️ Setting up MPV with native macOS video output...
+default	16:11:24.221065-0500	RedLemon	✅ MPV initialized with native GPU rendering
+default	16:11:24.248822-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task starting
+default	16:11:24.249011-0500	RedLemon	🎉 Starting watch party sync - Room: 584T, Host: YES
+default	16:11:24.249264-0500	RedLemon	🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+default	16:11:24.290965-0500	runningboardd	Invalidating assertion 174-171-2060 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	16:11:24.309247-0500	RedLemon	🔄 Starting chat polling for room: 584T
+default	16:11:24.309560-0500	RedLemon	✅ Watch party sync started successfully - isInWatchParty is now TRUE
+default	16:11:24.310017-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:174-171-2113 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:52.529989-0500	runningboardd	Assertion 174-171-1906 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:52.535180-0500	RedLemon	🔄 Starting chat polling for room: BPWN
-default	15:51:52.535773-0500	RedLemon	✅ Watch party sync started successfully - isInWatchParty is now TRUE
-default	15:51:52.536948-0500	RedLemon	🎬🎬🎬 About to call loadStream - isInWatchParty: YES
-default	15:51:52.537120-0500	RedLemon	🎬🎬🎬 Subtitles: 3
-default	15:51:52.537398-0500	RedLemon	🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Frankenstein
-default	15:51:52.537589-0500	RedLemon	🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/4CHAP3VHT7MKE106/F
-default	15:51:52.537708-0500	RedLemon	🎬🎬🎬 subtitles: 3
-default	15:51:52.538513-0500	RedLemon	🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/4CHAP3VHT7MKE106/Frankenstein%202025%201080p%20NF%20WEB-DL, autoplay: false
-default	15:51:52.538721-0500	RedLemon	⏸️ Loading in paused mode (watch party)
-default	15:51:52.538851-0500	RedLemon	🔗 URL: https://chi4-4.download.real-debrid.com/d/4CHAP3VHT7MKE106/Frankenstein%202025%201080p%20NF%20WEB-DL%20DDP5%201%20Atmos%20H%20264-FLUX.mkv
-default	15:51:52.538995-0500	RedLemon	🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/4CHAP3VHT7MKE106/Frankenstein%202025%201080p%20NF%20WEB-DL%20DDP5%201%20Atmos%20H%20264-FLUX.mkv"
-default	15:51:52.539347-0500	RedLemon	🎬 MPV loadfile result: 0
-default	15:51:52.545562-0500	RedLemon	✅ MPV loadfile succeeded, immediately paused for watch party
-default	15:51:52.545875-0500	RedLemon	✅ Subtitles already downloaded, loading as additional options...
-default	15:51:52.546238-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task completed
-default	15:51:52.548825-0500	mDNSResponder	[R1761] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, Addr) START PID[8572](RedLemon)
-default	15:51:52.549487-0500	mDNSResponder	[R1762] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, AAAA) START PID[8572](RedLemon)
-default	15:51:52.564699-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:52.565237-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A2801BB7-FB3B-482A-850A-3396C2E49E34] (reporting strategy default)> on Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> was not selected for reporting
-default	15:51:52.566909-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:52.567312-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> now using Connection 3
-default	15:51:52.568290-0500	RedLemon	📝 Loading external subtitle 1 (Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_AC0A3498-D057-4AEF-B094-98BC92F0A4F2/Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA.srt
-default	15:51:52.568475-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_AC0A3498-D057-4
-default	15:51:52.571073-0500	RedLemon	0x7fbf977651d8 ID=116 Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> sent request, body N 0
-default	15:51:52.578243-0500	mDNSResponder	[R1761] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, Addr) STOP PID[8572](RedLemon)
-default	15:51:52.578351-0500	mDNSResponder	[R1762] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, AAAA) STOP PID[8572](RedLemon)
-default	15:51:52.657008-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
-default	15:51:52.657192-0500	RedLemon	📝 Loading external subtitle 2 (Frankenstein (2025) eng): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_4D191E9C-9ECC-434A-8C6C-BE3AE0C0D865/Frankenstein (2025) eng.srt
-default	15:51:52.657368-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_4D191E9C-9ECC-4
-default	15:51:52.674917-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
-default	15:51:52.675086-0500	RedLemon	📝 Loading external subtitle 3 (Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_49B7EDE5-313D-46F9-9E35-16642BC03781/Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX.eng.srt
-default	15:51:52.675257-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_49B7EDE5-313D-4
-default	15:51:52.680260-0500	RedLemon	0x7fbf977651d8 ID=116 Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> received response, status 200 content K
-default	15:51:52.680907-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> response ended
-default	15:51:52.681772-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> done using Connection 3
-default	15:51:52.681998-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> summary for task success {transaction_duration_ms=116, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=3, response_start_ms=114, response_duration_ms=1, request_bytes=530, response_bytes=663, cache_hit=false}
-default	15:51:52.682270-0500	RedLemon	Task <1473BB9E-20D5-4168-BD0D-A115EB491B96>.<173> finished successfully
-default	15:51:52.689997-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
-default	15:51:52.690213-0500	RedLemon	ℹ️ External subtitles loaded as additional options (embedded subs take priority)
-default	15:51:52.776544-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:52.777832-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [273B2BB8-AA0A-4895-A750-3757B5F81347] (reporting strategy default)> on Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> was not selected for reporting
-default	15:51:52.778620-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:52.778825-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> now using Connection 13
-default	15:51:52.779525-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> sent request, body N 0
-default	15:51:52.800328-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> received response, status 200 content K
-default	15:51:52.806684-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> done using Connection 13
-default	15:51:52.807100-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> response ended
-default	15:51:52.808152-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> summary for task success {transaction_duration_ms=29, response_status=200, connection=13, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=21, response_duration_ms=7, request_bytes=41, response_bytes=117949, cache_hit=false}
-default	15:51:52.808295-0500	RedLemon	Task <44551C25-4971-4AE8-8B9D-63474E558466>.<174> finished successfully
-default	15:51:53.057008-0500	runningboardd	Invalidating assertion 174-171-1906 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	15:51:53.057919-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:174-171-1909 target:8572 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	15:51:53.058250-0500	runningboardd	Assertion 174-171-1909 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:53.135934-0500	runningboardd	Invalidating assertion 174-8572-1901 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:53.165179-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:53.165293-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:53.165627-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:53.167551-0500	runningboardd	Invalidating assertion 174-114-1902 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:53.211291-0500	mDNSResponder	[R1763] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, Addr) START PID[8572](RedLemon)
-default	15:51:53.212100-0500	mDNSResponder	[R1764] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, AAAA) START PID[8572](RedLemon)
-default	15:51:53.213177-0500	mDNSResponder	[R1763] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, Addr) STOP PID[8572](RedLemon)
-default	15:51:53.213270-0500	mDNSResponder	[R1764] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, AAAA) STOP PID[8572](RedLemon)
-default	15:51:53.277124-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:53.277586-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:53.277928-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:53.703950-0500	RedLemon	🖱️ Mouse: x=681/1366 y=81/768 | Exit: 0 Controls: 1 Chat: 0
-default	15:51:53.753703-0500	RedLemon	🖱️ Mouse: x=682/1366 y=74/768 | Exit: 0 Controls: 1 Chat: 0
-default	15:51:54.377370-0500	RedLemon	🖱️ Mouse: x=681/1366 y=0/768 | Exit: 0 Controls: 1 Chat: 0
-default	15:51:54.535768-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:54.536937-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2D81FEDE-5C6C-49D2-916C-CF613D0347E1] (reporting strategy default)> on Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> was not selected for reporting
-default	15:51:54.538281-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:54.538597-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> now using Connection 3
-default	15:51:54.539937-0500	RedLemon	0x7fbf97abfaa8 ID=120 Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> sent request, body N 0
-default	15:51:54.566479-0500	mDNSResponder	[R1765] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, Addr) START PID[8572](RedLemon)
-default	15:51:54.567373-0500	mDNSResponder	[R1766] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, AAAA) START PID[8572](RedLemon)
-default	15:51:54.568440-0500	mDNSResponder	[R1765] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, Addr) STOP PID[8572](RedLemon)
-default	15:51:54.568538-0500	mDNSResponder	[R1766] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, AAAA) STOP PID[8572](RedLemon)
-default	15:51:54.624229-0500	RedLemon	0x7fbf97abfaa8 ID=120 Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> received response, status 200 content K
-default	15:51:54.625710-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> response ended
-default	15:51:54.626281-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> done using Connection 3
-default	15:51:54.626744-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> summary for task success {transaction_duration_ms=89, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=86, response_duration_ms=2, request_bytes=530, response_bytes=665, cache_hit=false}
-default	15:51:54.626962-0500	RedLemon	Task <9E6A81DA-245C-486D-BF9D-E71F3DE92908>.<175> finished successfully
-default	15:51:54.630695-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1911 target:8572 attributes:[
+default	16:11:24.310194-0500	runningboardd	Assertion 174-171-2113 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:24.309722-0500	RedLemon	🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+default	16:11:24.309833-0500	RedLemon	🎬🎬🎬 Subtitles: 3
+default	16:11:24.310177-0500	RedLemon	🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Frankenstein
+default	16:11:24.310406-0500	RedLemon	🎬🎬🎬 streamURL: https://chi2-4.download.real-debrid.com/d/K7QLU3UNWAGGA112/F
+default	16:11:24.310528-0500	RedLemon	🎬🎬🎬 subtitles: 3
+default	16:11:24.311176-0500	RedLemon	🎬 MPV loadVideo called with URL: https://chi2-4.download.real-debrid.com/d/K7QLU3UNWAGGA112/Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1., autoplay: false
+default	16:11:24.311328-0500	RedLemon	⏸️ Loading in paused mode (watch party)
+default	16:11:24.311495-0500	RedLemon	🔗 URL: https://chi2-4.download.real-debrid.com/d/K7QLU3UNWAGGA112/Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+default	16:11:24.312139-0500	RedLemon	🎬 MPV executing: loadfile "https://chi2-4.download.real-debrid.com/d/K7QLU3UNWAGGA112/Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv"
+default	16:11:24.312777-0500	RedLemon	🎬 MPV loadfile result: 0
+default	16:11:24.312977-0500	RedLemon	✅ MPV loadfile succeeded (started paused)
+default	16:11:24.313405-0500	RedLemon	✅ Subtitles already downloaded, loading as additional options...
+default	16:11:24.313777-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task completed
+default	16:11:24.326981-0500	mDNSResponder	[R2251] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, Addr) START PID[10440](RedLemon)
+default	16:11:24.327554-0500	mDNSResponder	[R2252] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, AAAA) START PID[10440](RedLemon)
+default	16:11:24.358155-0500	mDNSResponder	[R2251] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, Addr) STOP PID[10440](RedLemon)
+default	16:11:24.358481-0500	mDNSResponder	[R2252] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, AAAA) STOP PID[10440](RedLemon)
+default	16:11:24.412820-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:24.413199-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [173657B2-C004-4095-8BCA-D5634D7C1AF4] (reporting strategy default)> on Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> was not selected for reporting
+default	16:11:24.414237-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:24.414556-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> now using Connection 3
+default	16:11:24.415749-0500	RedLemon	0x7f989b2161e8 ID=136 Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> sent request, body N 0
+default	16:11:24.416826-0500	RedLemon	📝 Loading external subtitle 1 (Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_EC0223F8-B701-402C-A4B6-42F2E878D075/Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA.srt
+default	16:11:24.417426-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_EC0223F8-B701-4
+default	16:11:24.540704-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
+default	16:11:24.540864-0500	RedLemon	📝 Loading external subtitle 2 (Frankenstein (2025) eng): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_5670FCF7-74FD-4646-B185-8F620554E3C5/Frankenstein (2025) eng.srt
+default	16:11:24.541007-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_5670FCF7-74FD-4
+default	16:11:24.560148-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
+default	16:11:24.560317-0500	RedLemon	📝 Loading external subtitle 3 (Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX): /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_DADC9E6A-FF14-4643-AB94-C3D23B9ECABD/Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX.eng.srt
+default	16:11:24.560446-0500	RedLemon	📝 Loading subtitle from: /private/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/extract_DADC9E6A-FF14-4
+default	16:11:24.576529-0500	RedLemon	✅ External subtitle added to track list (not auto-selected)
+default	16:11:24.576669-0500	RedLemon	ℹ️ External subtitles loaded as additional options (embedded subs take priority)
+default	16:11:24.621829-0500	runningboardd	Invalidating assertion 174-10440-2108 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:24.655589-0500	RedLemon	0x7f989b2161e8 ID=136 Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> received response, status 200 content K
+default	16:11:24.656547-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> response ended
+default	16:11:24.657012-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> done using Connection 3
+default	16:11:24.657301-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> summary for task success {transaction_duration_ms=243, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=241, response_duration_ms=1, request_bytes=529, response_bytes=663, cache_hit=false}
+default	16:11:24.657932-0500	RedLemon	Task <2DC09BD1-F224-4560-BF21-05492E3452EF>.<275> finished successfully
+default	16:11:24.666722-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2116 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:54.630960-0500	runningboardd	Assertion 174-8572-1911 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:54.631836-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:54.631887-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:54.631937-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:54.634542-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1912 target:8572 attributes:[
+default	16:11:24.667572-0500	runningboardd	Assertion 174-10440-2116 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:24.670137-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:24.670186-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:24.670514-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:24.736028-0500	runningboardd	Attempting to rename power assertion 33909 for target anon<RedLemon>(501) to anon<RedLemon>(501);174-10440-2108:com.apple.CFNetwork.StorageDB;174-10440-2116:com.apple.CFNetwork.StorageDB
+default	16:11:24.736834-0500	runningboardd	Attempting to rename power assertion 33909 for target anon<RedLemon>(501) to anon<RedLemon>(501)174-10440-2116:com.apple.CFNetwork.StorageDB
+default	16:11:24.737529-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:24.738423-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:24.739058-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:24.825762-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:24.826179-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [038DD0C8-5B7F-4C27-AEA4-1457C3755CD4] (reporting strategy default)> on Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> was not selected for reporting
+default	16:11:24.826904-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:24.827162-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> now using Connection 6
+default	16:11:24.827589-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> sent request, body N 0
+default	16:11:24.853298-0500	runningboardd	Invalidating assertion 174-171-2113 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	16:11:24.855587-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> received response, status 200 content K
+default	16:11:24.858304-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> done using Connection 6
+default	16:11:24.858509-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> response ended
+default	16:11:24.859206-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> summary for task success {transaction_duration_ms=32, response_status=200, connection=6, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=28, response_duration_ms=3, request_bytes=41, response_bytes=118047, cache_hit=false}
+default	16:11:24.859324-0500	RedLemon	Task <E8105A7F-914A-4E2B-8939-DCAE53043BEA>.<276> finished successfully
+default	16:11:24.873209-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:174-171-2117 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:24.873390-0500	runningboardd	Assertion 174-171-2117 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:25.744537-0500	runningboardd	Invalidating assertion 174-10440-2116 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:25.854585-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:25.854824-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:25.854926-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:25.858530-0500	runningboardd	Invalidating assertion 174-114-2109 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:25.880649-0500	mDNSResponder	[R2253] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, Addr) START PID[10440](RedLemon)
+default	16:11:25.882180-0500	mDNSResponder	[R2254] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, AAAA) START PID[10440](RedLemon)
+default	16:11:25.883353-0500	mDNSResponder	[R2253] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, Addr) STOP PID[10440](RedLemon)
+default	16:11:25.883632-0500	mDNSResponder	[R2254] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, AAAA) STOP PID[10440](RedLemon)
+default	16:11:25.987967-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:25.988059-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:25.988146-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:26.310894-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:26.311672-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2245CCDA-B93B-430E-B55A-03EEADF2A4D1] (reporting strategy default)> on Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> was not selected for reporting
+default	16:11:26.312760-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:26.313137-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> now using Connection 3
+default	16:11:26.314712-0500	RedLemon	0x7f989a524ed8 ID=140 Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> sent request, body N 0
+default	16:11:26.393095-0500	RedLemon	0x7f989a524ed8 ID=140 Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> received response, status 200 content K
+default	16:11:26.394537-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> response ended
+default	16:11:26.395270-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> done using Connection 3
+default	16:11:26.395553-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> summary for task success {transaction_duration_ms=83, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=80, response_duration_ms=2, request_bytes=529, response_bytes=662, cache_hit=false}
+default	16:11:26.396496-0500	RedLemon	Task <1E229743-8ADE-41EE-8E00-E058F3CC1106>.<277> finished successfully
+default	16:11:26.397376-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2118 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:26.397728-0500	runningboardd	Assertion 174-10440-2118 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:26.400682-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:26.401159-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:26.401530-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:26.403309-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2119 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:54.634777-0500	runningboardd	Assertion 174-114-1912 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:54.635710-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:54.635763-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:54.635813-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:55.068833-0500	RedLemon	🔍 MPV track-list/count: 3
-default	15:51:55.069199-0500	RedLemon	🔍 Track 0 type: sub
-default	15:51:55.069437-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
-default	15:51:55.069677-0500	RedLemon	🔍 Track 1 type: sub
-default	15:51:55.069854-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=Frankenstein (2025) eng
-default	15:51:55.070012-0500	RedLemon	🔍 Track 2 type: sub
-default	15:51:55.070204-0500	RedLemon	✅ Found subtitle track: ID=3, lang=en, title=Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
-default	15:51:55.070355-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
-default	15:51:55.245445-0500	RedLemon	 HALPlugInManagement::RegisterPlugIns: skipping in-process plug-ins
-error	15:51:55.245524-0500	RedLemon	AddInstanceForFactory: No factory registered for id <CFUUID 0x7fbf9622c3e0> F8BB1C28-BAE8-11D6-9C31-00039315CD46
-default	15:51:55.334492-0500	RedLemon	                AUHAL.cpp:386   AUHAL: (0x7fbf95083e40) Listening to HAL system property 1682929012
-default	15:51:55.334666-0500	RedLemon	                AUHAL.cpp:397   AUHAL: (0x7fbf95083e40) Selecting device 49 from constructor
-default	15:51:55.334728-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7fbf95083e40)
-default	15:51:55.334774-0500	RedLemon	                AUHAL.cpp:627   SelectDevice: (0x7fbf95083e40) not already running
-default	15:51:55.334811-0500	RedLemon	                AUHAL.cpp:702   SelectDevice: (0x7fbf95083e40) nothing to teardown
-default	15:51:55.334846-0500	RedLemon	                AUHAL.cpp:706   SelectDevice: (0x7fbf95083e40) connecting device 49
-default	15:51:55.336405-0500	RedLemon	                AUHAL.cpp:3107  IsDeviceUsable: (0x7fbf95083e40) Device ID: 49 (Input:No | Output:Yes): true
-default	15:51:55.336805-0500	RedLemon	                AUHAL.cpp:716   SelectDevice: (0x7fbf95083e40) created ioproc 0xa for device 49
-default	15:51:55.336867-0500	RedLemon	                AUHAL.cpp:1452  UpdateStreamFormats: -> (0x7fbf95083e40)
-default	15:51:55.337182-0500	RedLemon	                AUHAL.cpp:1516  UpdateStreamFormats:
-  output stream 0 [0x32]:  2 ch,  44100 Hz, Float32, interleaved
-default	15:51:55.337294-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 1 output streams; not all mono
-default	15:51:55.337349-0500	RedLemon	                AUHAL.cpp:1537  UpdateStreamFormats:
-  Output render format:  2 ch,  44100 Hz, Float32, interleaved
-default	15:51:55.337400-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 0 input streams; not all mono
-default	15:51:55.337671-0500	RedLemon	                AUHAL.cpp:1602  UpdateStreamFormats: AUHAL(0x7fbf95083e40) Calling PropertyChanged() for kAudioUnitProperty_StreamFormat, Scope:Output, Bus:Output
-default	15:51:55.337764-0500	RedLemon	                AUHAL.cpp:1615  UpdateStreamFormats: <-
-default	15:51:55.338700-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7fbf95083e40) removing 0 device listeners from device 0
-default	15:51:55.338738-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7fbf95083e40) adding 6 device listeners to device 49
-default	15:51:55.339159-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7fbf95083e40) removing 0 device delegate listeners from device 0
-default	15:51:55.339241-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7fbf95083e40) adding 0 device delegate listeners to device 49
-default	15:51:55.339287-0500	RedLemon	                AUHAL.cpp:842   SelectDevice: <- (0x7fbf95083e40)
-default	15:51:55.340009-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	15:51:55.343204-0500	RedLemon	Registered notify signal com.apple.caulk.alloc.audiodump (0)
-default	15:51:55.344383-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	15:51:55.344559-0500	RedLemon	                AUHAL.cpp:2060  SetProperty: (0x7fbf95083e40) caller requesting device change from 49 to 49
-default	15:51:55.344624-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7fbf95083e40)
-default	15:51:55.344667-0500	RedLemon	                AUHAL.cpp:613   SelectDevice: <- (0x7fbf95083e40) exiting with nothing to do
-default	15:51:55.598406-0500	mDNSResponder	[R1767] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, Addr) START PID[8572](RedLemon)
-default	15:51:55.599659-0500	mDNSResponder	[R1768] DNSServiceQueryRecord(1D000, 0, <mask.hash: '8QCB12s8AQmmN/JWxb5wSw=='>, AAAA) START PID[8572](RedLemon)
-default	15:51:55.601756-0500	mDNSResponder	[R1767] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, Addr) STOP PID[8572](RedLemon)
-default	15:51:55.601850-0500	mDNSResponder	[R1768] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'a+ZGcP2TnfAKHAs9CPXCKw=='>, AAAA) STOP PID[8572](RedLemon)
-default	15:51:55.639379-0500	runningboardd	Invalidating assertion 174-8572-1911 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:55.652616-0500	RedLemon	⏱️ Duration update: 9145.8s. WatchParty: YES, SentReady: NO
-default	15:51:55.652781-0500	RedLemon	⏱️ Watch Party: Duration available (9145.8s), triggering ready signal
-default	15:51:55.652884-0500	RedLemon	👋 Watch Party: Sending READY signal
-default	15:51:55.749377-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:55.749998-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:55.750083-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:55.754704-0500	runningboardd	Invalidating assertion 174-114-1912 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:55.841490-0500	RedLemon	✅ Watch Party: READY signal sent successfully
-default	15:51:55.863008-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:55.863792-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:55.863883-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:55.887269-0500	RedLemon	Task <20BC6C24-724D-4463-9AF6-4A31FEDC1B58>.<176> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:51:55.887722-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8D26C51D-CCD5-4FE6-AF16-A109B9B810D5] (reporting strategy default)> on Task <20BC6C24-724D-4463-9AF6-4A31FEDC1B58>.<176> was not selected for reporting
-default	15:51:55.891309-0500	RedLemon	Task <20BC6C24-724D-4463-9AF6-4A31FEDC1B58>.<176> summary for task success {transaction_duration_ms=3, response_status=200, cache_hit=true}
-default	15:51:55.891443-0500	RedLemon	Task <20BC6C24-724D-4463-9AF6-4A31FEDC1B58>.<176> finished successfully
-default	15:51:55.907339-0500	RedLemon	⏱️ Duration update: 9145.8s. WatchParty: YES, SentReady: YES
-default	15:51:56.535862-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:56.536375-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D3C27D3E-3B24-420D-94BE-C2A6BA3BCE71] (reporting strategy default)> on Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> was not selected for reporting
-default	15:51:56.537487-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:56.537806-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> now using Connection 3
-default	15:51:56.538969-0500	RedLemon	0x7fbf96254b68 ID=124 Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> sent request, body N 0
-default	15:51:56.592284-0500	RedLemon	Connection 18: cleaning up
-default	15:51:56.592377-0500	RedLemon	[C18 D53836F8-0DFE-4F22-BFD1-18CA3C2C3215 Hostname#199a033c:443 quic-connection, url hash: 12f6340e, definite, attribution: developer] cancel
-default	15:51:56.592538-0500	RedLemon	[C18 D53836F8-0DFE-4F22-BFD1-18CA3C2C3215 Hostname#199a033c:443 quic-connection, url hash: 12f6340e, definite, attribution: developer] cancelled
-	[C18.1.1 CD3EA301-2864-413A-B904-565889E224DD 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60086<->IPv6#1274a9ff.443]
+default	16:11:26.403835-0500	runningboardd	Assertion 174-114-2119 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:26.406193-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:26.406240-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:26.406285-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:27.001202-0500	RedLemon	🔍 MPV track-list/count: 3
+default	16:11:27.002059-0500	RedLemon	🔍 Track 0 type: sub
+default	16:11:27.002347-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=Frankenstein.2025.1080p.WEBRip.x264.AAC5.1-LAMA
+default	16:11:27.002619-0500	RedLemon	🔍 Track 1 type: sub
+default	16:11:27.002862-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=Frankenstein (2025) eng
+default	16:11:27.003031-0500	RedLemon	🔍 Track 2 type: sub
+default	16:11:27.003261-0500	RedLemon	✅ Found subtitle track: ID=3, lang=en, title=Frankenstein.2025.1080p.NF.WEB-DL.DDP5.1.Atmos.H.264-FLUX
+default	16:11:27.003432-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
+default	16:11:27.044342-0500	mDNSResponder	[R2255] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, Addr) START PID[10440](RedLemon)
+default	16:11:27.045324-0500	mDNSResponder	[R2256] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, AAAA) START PID[10440](RedLemon)
+default	16:11:27.046154-0500	mDNSResponder	[R2255] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, Addr) STOP PID[10440](RedLemon)
+default	16:11:27.046267-0500	mDNSResponder	[R2256] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, AAAA) STOP PID[10440](RedLemon)
+default	16:11:27.407004-0500	runningboardd	Invalidating assertion 174-10440-2118 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:27.419852-0500	RedLemon	Connection 21: cleaning up
+default	16:11:27.419975-0500	RedLemon	[C21 DE51AED5-A08C-4D4D-9AC5-195E303D875B Hostname#dba06b85:443 quic-connection, url hash: 69195dcf, definite, attribution: developer] cancel
+default	16:11:27.420176-0500	RedLemon	[C21 DE51AED5-A08C-4D4D-9AC5-195E303D875B Hostname#dba06b85:443 quic-connection, url hash: 69195dcf, definite, attribution: developer] cancelled
+	[C21.1.1 4DBBFFEC-1F9C-4DC6-A13C-11D2899B6678 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60099<->IPv6#6cfa34dc.443]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
 	Privacy Stance: Not Eligible
-	Duration: 6.818s, DNS @0.007s took 0.022s, TCP @0.033s took 0.110s, TLS 1.3 took 0.222s
-	bytes in/out: 7078/1876, packets in/out: 21/24, rtt: 0.128s, retransmitted bytes: 0, out-of-order bytes: 0
-default	15:51:56.593138-0500	RedLemon	nw_protocol_tcp_log_summary [C18.1.1:3]
-	[5FB6815B-62B1-4FA3-B021-4B20E36E1BD0 <private>:60086<-><private>:443]
-	Init: 1, Conn_Time: 109.631ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
-	rtt_cache: kernel, rtt_upd: 11, rtt: 128.718ms, rtt_var: 20.750ms rtt_nc: 124.437ms, rtt_var_nc: 21.937ms base rtt: 100ms
+	Duration: 7.031s, DNS @0.003s took 0.151s, TCP @0.160s took 0.116s, TLS 1.3 took 0.136s
+	bytes in/out: 6894/1878, packets in/out: 20/24, rtt: 0.129s, retransmitted bytes: 0, out-of-order bytes: 0
+default	16:11:27.421370-0500	RedLemon	nw_protocol_tcp_log_summary [C21.1.1:3]
+	[0C656F2F-44A0-4451-959D-EDAC6F6DC78A <private>:60099<-><private>:443]
+	Init: 1, Conn_Time: 115.073ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
+	rtt_cache: kernel, rtt_upd: 11, rtt: 129.000ms, rtt_var: 16.812ms rtt_nc: 125.781ms, rtt_var_nc: 19.000ms base rtt: 100ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	15:51:56.593410-0500	RedLemon	nw_flow_disconnected [C18.1.1 IPv6#1274a9ff.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	15:51:56.594002-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C18] reporting state cancelled
-default	15:51:56.594167-0500	RedLemon	Connection 18: done
-default	15:51:56.594223-0500	RedLemon	tcp_input [C18.1.1:3] flags=[FP.] seq=1055022546, ack=2980633858, win=501 state=ESTABLISHED rcv_nxt=1055022546, snd_una=2980633858
-error	15:51:56.594367-0500	RedLemon	tcp_output [C18.1.1:3] flags=[R.] seq=2980633921, ack=1055022571, win=4095 state=CLOSED rcv_nxt=1055022571, snd_una=2980633858
-default	15:51:56.620050-0500	RedLemon	0x7fbf96254b68 ID=124 Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> received response, status 200 content K
-default	15:51:56.626385-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> response ended
-default	15:51:56.630495-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> done using Connection 3
-default	15:51:56.630995-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> summary for task success {transaction_duration_ms=94, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=83, response_duration_ms=10, request_bytes=530, response_bytes=663, cache_hit=false}
-default	15:51:56.631232-0500	RedLemon	Task <F24F425F-008A-4491-ADE0-BEA111033169>.<177> finished successfully
-default	15:51:56.639288-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1913 target:8572 attributes:[
+default	16:11:27.421540-0500	RedLemon	nw_flow_disconnected [C21.1.1 IPv6#6cfa34dc.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:27.422513-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C21] reporting state cancelled
+default	16:11:27.422794-0500	RedLemon	Connection 21: done
+default	16:11:27.422893-0500	RedLemon	tcp_input [C21.1.1:3] flags=[FP.] seq=1520596907, ack=1392064943, win=501 state=ESTABLISHED rcv_nxt=1520596907, snd_una=1392064943
+error	16:11:27.423258-0500	RedLemon	tcp_output [C21.1.1:3] flags=[R.] seq=1392065006, ack=1520596932, win=4095 state=CLOSED rcv_nxt=1520596932, snd_una=1392064943
+default	16:11:27.570446-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:27.570538-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:27.570624-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:27.573478-0500	runningboardd	Invalidating assertion 174-114-2119 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:27.744333-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:27.744386-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:27.744438-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:27.750387-0500	RedLemon	 HALPlugInManagement::RegisterPlugIns: skipping in-process plug-ins
+error	16:11:27.752317-0500	RedLemon	AddInstanceForFactory: No factory registered for id <CFUUID 0x7f989a27b4e0> F8BB1C28-BAE8-11D6-9C31-00039315CD46
+default	16:11:27.859090-0500	RedLemon	                AUHAL.cpp:386   AUHAL: (0x7f98971fae40) Listening to HAL system property 1682929012
+default	16:11:27.859270-0500	RedLemon	                AUHAL.cpp:397   AUHAL: (0x7f98971fae40) Selecting device 49 from constructor
+default	16:11:27.859330-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f98971fae40)
+default	16:11:27.859416-0500	RedLemon	                AUHAL.cpp:627   SelectDevice: (0x7f98971fae40) not already running
+default	16:11:27.859457-0500	RedLemon	                AUHAL.cpp:702   SelectDevice: (0x7f98971fae40) nothing to teardown
+default	16:11:27.859492-0500	RedLemon	                AUHAL.cpp:706   SelectDevice: (0x7f98971fae40) connecting device 49
+default	16:11:27.860858-0500	RedLemon	                AUHAL.cpp:3107  IsDeviceUsable: (0x7f98971fae40) Device ID: 49 (Input:No | Output:Yes): true
+default	16:11:27.863012-0500	RedLemon	                AUHAL.cpp:716   SelectDevice: (0x7f98971fae40) created ioproc 0xa for device 49
+default	16:11:27.863087-0500	RedLemon	                AUHAL.cpp:1452  UpdateStreamFormats: -> (0x7f98971fae40)
+default	16:11:27.863360-0500	RedLemon	                AUHAL.cpp:1516  UpdateStreamFormats:
+  output stream 0 [0x32]:  2 ch,  44100 Hz, Float32, interleaved
+default	16:11:27.863424-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 1 output streams; not all mono
+default	16:11:27.863467-0500	RedLemon	                AUHAL.cpp:1537  UpdateStreamFormats:
+  Output render format:  2 ch,  44100 Hz, Float32, interleaved
+default	16:11:27.863548-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 0 input streams; not all mono
+default	16:11:27.863811-0500	RedLemon	                AUHAL.cpp:1602  UpdateStreamFormats: AUHAL(0x7f98971fae40) Calling PropertyChanged() for kAudioUnitProperty_StreamFormat, Scope:Output, Bus:Output
+default	16:11:27.863894-0500	RedLemon	                AUHAL.cpp:1615  UpdateStreamFormats: <-
+default	16:11:27.867796-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f98971fae40) removing 0 device listeners from device 0
+default	16:11:27.867875-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f98971fae40) adding 6 device listeners to device 49
+default	16:11:27.868532-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7f98971fae40) removing 0 device delegate listeners from device 0
+default	16:11:27.868647-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7f98971fae40) adding 0 device delegate listeners to device 49
+default	16:11:27.868690-0500	RedLemon	                AUHAL.cpp:842   SelectDevice: <- (0x7f98971fae40)
+default	16:11:27.871766-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
+default	16:11:27.873940-0500	RedLemon	Registered notify signal com.apple.caulk.alloc.audiodump (0)
+default	16:11:27.877964-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
+default	16:11:27.878175-0500	RedLemon	                AUHAL.cpp:2060  SetProperty: (0x7f98971fae40) caller requesting device change from 49 to 49
+default	16:11:27.878222-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7f98971fae40)
+default	16:11:27.878262-0500	RedLemon	                AUHAL.cpp:613   SelectDevice: <- (0x7f98971fae40) exiting with nothing to do
+default	16:11:28.124955-0500	RedLemon	⏱️ Duration update: 9145.8s. WatchParty: YES, SentReady: NO
+default	16:11:28.125168-0500	RedLemon	⏱️ Watch Party: Duration available (9145.8s), triggering ready signal
+default	16:11:28.125278-0500	RedLemon	👋 Watch Party: Sending READY signal
+default	16:11:28.132888-0500	mDNSResponder	[R2257] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, Addr) START PID[10440](RedLemon)
+default	16:11:28.134042-0500	mDNSResponder	[R2258] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'CribGwa2rHlgkAkOnpK7TQ=='>, AAAA) START PID[10440](RedLemon)
+default	16:11:28.138262-0500	mDNSResponder	[R2257] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, Addr) STOP PID[10440](RedLemon)
+default	16:11:28.138360-0500	mDNSResponder	[R2258] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'aGkfasRM44WZ9wsbUYOeag=='>, AAAA) STOP PID[10440](RedLemon)
+default	16:11:28.361855-0500	RedLemon	✅ Watch Party: READY signal sent successfully
+default	16:11:28.362061-0500	RedLemon	⏱️ Duration update: 9145.8s. WatchParty: YES, SentReady: YES
+default	16:11:28.363177-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:28.364691-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [74FB39CD-309A-4105-A89E-BA00BE38D8C1] (reporting strategy default)> on Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> was not selected for reporting
+default	16:11:28.366010-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:28.366252-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> now using Connection 3
+default	16:11:28.367252-0500	RedLemon	0x7f989b2afe38 ID=144 Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> sent request, body N 0
+default	16:11:28.435838-0500	RedLemon	0x7f989b2afe38 ID=144 Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> received response, status 200 content K
+default	16:11:28.436804-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> response ended
+default	16:11:28.437422-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> done using Connection 3
+default	16:11:28.437963-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> summary for task success {transaction_duration_ms=72, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=70, response_duration_ms=2, request_bytes=529, response_bytes=662, cache_hit=false}
+default	16:11:28.438528-0500	RedLemon	Task <7ADF215B-FCE7-4D13-82DD-BBEBE86E45C5>.<278> finished successfully
+default	16:11:28.439366-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2120 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:56.641061-0500	runningboardd	Assertion 174-8572-1913 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:56.643198-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:56.643296-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:56.643567-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:56.645979-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1914 target:8572 attributes:[
+default	16:11:28.440048-0500	runningboardd	Assertion 174-10440-2120 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:28.443206-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:28.443260-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:28.443308-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:28.446499-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2121 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:56.646626-0500	runningboardd	Assertion 174-114-1914 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:56.648592-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:56.648639-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:56.648685-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:57.648341-0500	runningboardd	Invalidating assertion 174-8572-1913 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:57.822468-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:57.822549-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:57.822633-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:57.824714-0500	runningboardd	Invalidating assertion 174-114-1914 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:57.927792-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:57.927884-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:57.927972-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:58.536751-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:51:58.537703-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4C250BE6-B8A9-4FE5-920A-FE5C65FEF22C] (reporting strategy default)> on Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> was not selected for reporting
-default	15:51:58.538889-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:51:58.539288-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> now using Connection 3
-default	15:51:58.540350-0500	RedLemon	0x7fbf970c4d48 ID=128 Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> sent request, body N 0
-default	15:51:58.598603-0500	RedLemon	0x7fbf970c4d48 ID=128 Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> received response, status 200 content K
-default	15:51:58.599219-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> response ended
-default	15:51:58.599730-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> done using Connection 3
-default	15:51:58.599955-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> summary for task success {transaction_duration_ms=61, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=60, response_duration_ms=1, request_bytes=530, response_bytes=660, cache_hit=false}
-default	15:51:58.600455-0500	RedLemon	Task <375CB4B0-DD3D-44B3-8E37-5E0874AD6801>.<178> finished successfully
-default	15:51:58.601568-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1915 target:8572 attributes:[
+default	16:11:28.446721-0500	runningboardd	Assertion 174-114-2121 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:28.447906-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:28.447989-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:28.448036-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:28.474562-0500	tccd	AUTHREQ_ATTRIBUTION: msgID=171.72, attribution={responsible={<TCCDProcess: identifier=com.google.antigravity, pid=560, auid=501, euid=501, responsible_path=/Applications/Antigravity.app/Contents/MacOS/Electron, binary_path=/Applications/Antigravity.app/Contents/MacOS/Electron>}, accessing={<TCCDProcess: identifier=com.redlemon.app, pid=10440, auid=501, euid=501, binary_path=/Users/danielnoble/Desktop/Redlemon/build/RedLemon.app/Contents/MacOS/RedLemon>}, requesting={<TCCDProcess: identifier=com.apple.WindowServer, pid=171, auid=88, euid=88, binary_path=/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/WindowServer>}, },
+default	16:11:28.474646-0500	tccd	requestor: <TCCDProcess: identifier=com.apple.WindowServer, pid=171, auid=88, euid=88, binary_path=/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/WindowServer> is checking access for accessor <TCCDProcess: identifier=com.redlemon.app, pid=10440, auid=501, euid=501, binary_path=/Users/danielnoble/Desktop/Redlemon/build/RedLemon.app/Contents/MacOS/RedLemon>
+default	16:11:29.451237-0500	runningboardd	Invalidating assertion 174-10440-2120 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:29.620510-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:29.620575-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:29.620624-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:29.622775-0500	runningboardd	Invalidating assertion 174-114-2121 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:29.786756-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:29.786849-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:29.786937-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:30.311005-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:30.311943-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6E060FA2-FC10-4B6A-8C02-64975ED1E3DB] (reporting strategy default)> on Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> was not selected for reporting
+default	16:11:30.313304-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:30.313685-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> now using Connection 3
+default	16:11:30.315295-0500	RedLemon	0x7f989aeb7478 ID=148 Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> sent request, body N 0
+default	16:11:30.386379-0500	RedLemon	0x7f989aeb7478 ID=148 Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> received response, status 200 content K
+default	16:11:30.387244-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> response ended
+default	16:11:30.388034-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> done using Connection 3
+default	16:11:30.388372-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> summary for task success {transaction_duration_ms=75, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=73, response_duration_ms=2, request_bytes=529, response_bytes=661, cache_hit=false}
+default	16:11:30.388973-0500	RedLemon	Task <63648B82-5591-4A87-B8A4-85FA9478F820>.<279> finished successfully
+default	16:11:30.390516-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2122 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:58.601855-0500	runningboardd	Assertion 174-8572-1915 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:51:58.602616-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:58.602663-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:58.603015-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:58.605302-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1916 target:8572 attributes:[
+default	16:11:30.390933-0500	runningboardd	Assertion 174-10440-2122 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:30.392357-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:30.392456-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:30.392561-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:30.396450-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2123 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:51:58.605704-0500	runningboardd	Assertion 174-114-1916 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:51:58.606707-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:58.606831-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:58.606880-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:59.608078-0500	runningboardd	Invalidating assertion 174-8572-1915 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:51:59.709861-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:59.709917-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:59.709964-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:51:59.711443-0500	runningboardd	Invalidating assertion 174-114-1916 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:51:59.822662-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:51:59.822746-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:51:59.822824-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:00.536869-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:52:00.537585-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B6E203EE-5517-490D-828C-426538E7A2E4] (reporting strategy default)> on Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> was not selected for reporting
-default	15:52:00.539009-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:52:00.539403-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> now using Connection 3
-default	15:52:00.540657-0500	RedLemon	0x7fbf970a1048 ID=132 Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> sent request, body N 0
-default	15:52:00.601413-0500	RedLemon	0x7fbf970a1048 ID=132 Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> received response, status 200 content K
-default	15:52:00.602690-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> response ended
-default	15:52:00.603487-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> done using Connection 3
-default	15:52:00.603885-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> summary for task success {transaction_duration_ms=65, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=62, response_duration_ms=2, request_bytes=530, response_bytes=663, cache_hit=false}
-default	15:52:00.604408-0500	RedLemon	Task <514D65AC-3182-4926-A85F-F7AB7ACA224F>.<179> finished successfully
-default	15:52:00.605693-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1917 target:8572 attributes:[
+default	16:11:30.396733-0500	runningboardd	Assertion 174-114-2123 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:30.397939-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:30.398009-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:30.398118-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:31.399266-0500	runningboardd	Invalidating assertion 174-10440-2122 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:31.501933-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:31.501995-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:31.502051-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:31.503711-0500	runningboardd	Invalidating assertion 174-114-2123 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:31.670356-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:31.670459-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:31.670550-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:32.310992-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:32.312043-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [97D6F41D-13F6-4D4A-8976-081E9E5EA153] (reporting strategy default)> on Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> was not selected for reporting
+default	16:11:32.313162-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:32.313565-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> now using Connection 3
+default	16:11:32.315018-0500	RedLemon	0x7f989ba76068 ID=152 Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> sent request, body N 0
+default	16:11:32.397491-0500	RedLemon	0x7f989ba76068 ID=152 Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> received response, status 200 content K
+default	16:11:32.398324-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> response ended
+default	16:11:32.398829-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> done using Connection 3
+default	16:11:32.399280-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> summary for task success {transaction_duration_ms=86, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=84, response_duration_ms=1, request_bytes=529, response_bytes=665, cache_hit=false}
+default	16:11:32.400022-0500	RedLemon	Task <E850DB13-1355-4C4D-A533-25CA201C1FA0>.<280> finished successfully
+default	16:11:32.401846-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2124 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:00.605922-0500	runningboardd	Assertion 174-8572-1917 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:52:00.606687-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:00.606739-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:00.606789-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:00.609029-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1918 target:8572 attributes:[
+default	16:11:32.402153-0500	runningboardd	Assertion 174-10440-2124 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:32.403589-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:32.403701-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:32.403908-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:32.407536-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2125 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:00.609309-0500	runningboardd	Assertion 174-114-1918 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:52:00.611795-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:00.611845-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:00.611890-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:00.637757-0500	RedLemon	Connection 3: encountered bidirectional stream limit updated event
-default	15:52:01.162633-0500	RedLemon	Task <38084F03-00D3-44FF-A0DB-7B59CB612115>.<180> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	15:52:01.163187-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CCD01C62-C005-4D0A-BC38-AD2174179CE0] (reporting strategy default)> on Task <38084F03-00D3-44FF-A0DB-7B59CB612115>.<180> was not selected for reporting
-default	15:52:01.165591-0500	RedLemon	Task <38084F03-00D3-44FF-A0DB-7B59CB612115>.<180> summary for task success {transaction_duration_ms=2, response_status=200, cache_hit=true}
-default	15:52:01.165718-0500	RedLemon	Task <38084F03-00D3-44FF-A0DB-7B59CB612115>.<180> finished successfully
-default	15:52:01.612720-0500	runningboardd	Invalidating assertion 174-8572-1917 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:52:01.714200-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:01.714240-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:01.714274-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:01.717468-0500	runningboardd	Invalidating assertion 174-114-1918 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:52:01.889522-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:01.889569-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:01.889616-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:02.537328-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:52:02.537810-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BEB67E84-6031-4330-8CC2-BA471AD7D782] (reporting strategy default)> on Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> was not selected for reporting
-default	15:52:02.539207-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:52:02.539472-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> now using Connection 3
-default	15:52:02.540915-0500	RedLemon	0x7fbf970f03c8 ID=136 Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> sent request, body N 0
-default	15:52:02.606096-0500	RedLemon	0x7fbf970f03c8 ID=136 Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> received response, status 200 content K
-default	15:52:02.606591-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> response ended
-default	15:52:02.606867-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> done using Connection 3
-default	15:52:02.607331-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> summary for task success {transaction_duration_ms=68, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=67, response_duration_ms=1, request_bytes=530, response_bytes=663, cache_hit=false}
-default	15:52:02.608494-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1919 target:8572 attributes:[
+default	16:11:32.407778-0500	runningboardd	Assertion 174-114-2125 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:32.409054-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:32.409161-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:32.409578-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:33.410226-0500	runningboardd	Invalidating assertion 174-10440-2124 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:33.570039-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:33.570131-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:33.570220-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:33.573296-0500	runningboardd	Invalidating assertion 174-114-2125 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:33.737165-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:33.737376-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:33.737479-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:34.311126-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:34.312115-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2CCD2FF7-914F-4F31-A9E4-B7AD4C2BC5AC] (reporting strategy default)> on Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> was not selected for reporting
+default	16:11:34.313277-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:34.313652-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> now using Connection 3
+default	16:11:34.315138-0500	RedLemon	0x7f989aeb6e88 ID=156 Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> sent request, body N 0
+default	16:11:34.391024-0500	RedLemon	0x7f989aeb6e88 ID=156 Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> received response, status 200 content K
+default	16:11:34.391869-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> response ended
+default	16:11:34.392683-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> done using Connection 3
+default	16:11:34.393034-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> summary for task success {transaction_duration_ms=80, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=78, response_duration_ms=2, request_bytes=529, response_bytes=662, cache_hit=false}
+default	16:11:34.393446-0500	RedLemon	Task <408E4D8D-1FD1-4FDD-8A2F-24D014AC3AA7>.<281> finished successfully
+default	16:11:34.395445-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2127 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:02.607697-0500	RedLemon	Task <372D9DF6-EF1C-48AD-902B-129B707F907D>.<181> finished successfully
-default	15:52:02.609087-0500	runningboardd	Assertion 174-8572-1919 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:52:02.610546-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:02.610649-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:02.610697-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:02.613660-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1920 target:8572 attributes:[
+default	16:11:34.395852-0500	runningboardd	Assertion 174-10440-2127 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:34.397105-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:34.397238-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:34.397311-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:34.400891-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2128 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:02.613836-0500	runningboardd	Assertion 174-114-1920 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:52:02.615317-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:02.615405-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:02.615461-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:03.616413-0500	runningboardd	Invalidating assertion 174-8572-1919 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:52:03.719177-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:03.719451-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:03.719742-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:03.722737-0500	runningboardd	Invalidating assertion 174-114-1920 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:52:03.825268-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:03.825359-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:03.825448-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:04.536166-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:52:04.536956-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9F844A3C-C92F-467C-9830-46DF9C7AAE9A] (reporting strategy default)> on Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> was not selected for reporting
-default	15:52:04.538140-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:52:04.538582-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> now using Connection 3
-default	15:52:04.541273-0500	RedLemon	0x7fbf97061588 ID=140 Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> sent request, body N 0
-default	15:52:04.607630-0500	RedLemon	0x7fbf97061588 ID=140 Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> received response, status 200 content K
-default	15:52:04.608189-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> response ended
-default	15:52:04.608558-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> done using Connection 3
-default	15:52:04.609114-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> summary for task success {transaction_duration_ms=71, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=70, response_duration_ms=1, request_bytes=530, response_bytes=662, cache_hit=true}
-default	15:52:04.609591-0500	RedLemon	Task <16C454F9-3775-4ACD-A25A-8465707D0E20>.<182> finished successfully
-default	15:52:04.610979-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1923 target:8572 attributes:[
+default	16:11:34.401113-0500	runningboardd	Assertion 174-114-2128 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:34.406471-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:34.406941-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:34.407090-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:34.474189-0500	RedLemon	Task <0693ED11-8577-4CD3-AAE5-80137F942E5D>.<282> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:11:34.474513-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [70583A3F-468E-4537-BB38-38B1B223DC8D] (reporting strategy default)> on Task <0693ED11-8577-4CD3-AAE5-80137F942E5D>.<282> was not selected for reporting
+default	16:11:34.478293-0500	RedLemon	Task <0693ED11-8577-4CD3-AAE5-80137F942E5D>.<282> summary for task success {transaction_duration_ms=3, response_status=200, cache_hit=true}
+default	16:11:34.478416-0500	RedLemon	Task <0693ED11-8577-4CD3-AAE5-80137F942E5D>.<282> finished successfully
+default	16:11:35.401377-0500	runningboardd	Invalidating assertion 174-10440-2127 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:35.572114-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:35.572326-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:35.572417-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:35.576139-0500	runningboardd	Invalidating assertion 174-114-2128 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:35.736754-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:35.736855-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:35.737082-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:36.311240-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:36.312083-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A554D63B-9A20-42E4-BAFA-D8CACB615D90] (reporting strategy default)> on Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> was not selected for reporting
+default	16:11:36.313560-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:36.314147-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> now using Connection 3
+default	16:11:36.315651-0500	RedLemon	0x7f989bed2b88 ID=160 Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> sent request, body N 0
+default	16:11:36.389991-0500	RedLemon	0x7f989bed2b88 ID=160 Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> received response, status 200 content K
+default	16:11:36.390842-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> response ended
+default	16:11:36.391362-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> done using Connection 3
+default	16:11:36.391796-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> summary for task success {transaction_duration_ms=79, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=77, response_duration_ms=1, request_bytes=529, response_bytes=663, cache_hit=false}
+default	16:11:36.392585-0500	RedLemon	Task <A0BF66E1-0512-43A7-9E7A-2FD0224AAD6B>.<283> finished successfully
+default	16:11:36.394104-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2131 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:04.611171-0500	runningboardd	Assertion 174-8572-1923 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:52:04.612020-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:04.612067-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:04.612113-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:04.614784-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1924 target:8572 attributes:[
+default	16:11:36.394634-0500	runningboardd	Assertion 174-10440-2131 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:36.396699-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:36.396795-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:36.396878-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:36.401144-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2132 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:04.614943-0500	runningboardd	Assertion 174-114-1924 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:52:04.615890-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:04.615957-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:04.616003-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:05.065428-0500	runningboardd	Invalidating assertion 174-140-1880 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
-default	15:52:05.353444-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:05.355722-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:05.366377-0500	runningboardd	[anon<RedLemon>(501):8572] Set darwin role to: UserInteractiveNonFocal
-default	15:52:05.368333-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:05.508994-0500	runningboardd	Invalidating assertion 174-171-1909 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	15:52:05.677527-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:05.679307-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:05.680012-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:05.710755-0500	runningboardd	Invalidating assertion 174-8572-1923 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:52:05.871934-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:05.871984-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:05.872035-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:05.879225-0500	runningboardd	Invalidating assertion 174-114-1924 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:52:06.038372-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:06.038424-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:06.038531-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:06.536550-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:52:06.537503-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5AB8A968-9FF0-4B15-8050-762B44C2943D] (reporting strategy default)> on Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> was not selected for reporting
-default	15:52:06.539004-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:52:06.539216-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> now using Connection 3
-default	15:52:06.541019-0500	RedLemon	0x7fbf97074408 ID=144 Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> sent request, body N 0
-default	15:52:06.623023-0500	RedLemon	0x7fbf97074408 ID=144 Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> received response, status 200 content K
-default	15:52:06.624876-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> response ended
-default	15:52:06.625447-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> done using Connection 3
-default	15:52:06.625772-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> summary for task success {transaction_duration_ms=87, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=84, response_duration_ms=2, request_bytes=530, response_bytes=662, cache_hit=false}
-default	15:52:06.626162-0500	RedLemon	Task <4C90D82F-41D7-4C37-BBEA-A044CDB9B52A>.<183> finished successfully
-default	15:52:06.630608-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1941 target:8572 attributes:[
+default	16:11:36.401381-0500	runningboardd	Assertion 174-114-2132 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:36.402523-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:36.402590-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:36.402653-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:37.400648-0500	runningboardd	Invalidating assertion 174-10440-2131 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:37.570197-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:37.570297-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:37.570393-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:37.573889-0500	runningboardd	Invalidating assertion 174-114-2132 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:37.736408-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:37.736510-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:37.736604-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:38.310708-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:38.311588-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C4299128-2DE4-4DAD-A310-24371ECE4648] (reporting strategy default)> on Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> was not selected for reporting
+default	16:11:38.313205-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:38.313584-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> now using Connection 3
+default	16:11:38.315109-0500	RedLemon	0x7f989a2b8238 ID=164 Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> sent request, body N 0
+default	16:11:38.394748-0500	RedLemon	0x7f989a2b8238 ID=164 Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> received response, status 200 content K
+default	16:11:38.395567-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> response ended
+default	16:11:38.396074-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> done using Connection 3
+default	16:11:38.396532-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> summary for task success {transaction_duration_ms=84, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=82, response_duration_ms=1, request_bytes=529, response_bytes=662, cache_hit=true}
+default	16:11:38.397263-0500	RedLemon	Task <8A2B760B-0DA6-44CA-A574-1B401C248E61>.<284> finished successfully
+default	16:11:38.401741-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2133 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:06.630978-0500	runningboardd	Assertion 174-8572-1941 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:52:06.633832-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:06.634169-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:06.634227-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:06.646717-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1942 target:8572 attributes:[
+default	16:11:38.402195-0500	runningboardd	Assertion 174-10440-2133 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:38.404366-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:38.404437-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:38.404508-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:38.409145-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2134 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:06.647083-0500	runningboardd	Assertion 174-114-1942 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:52:06.649118-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:06.649358-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:06.649540-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:07.735146-0500	runningboardd	Invalidating assertion 174-8572-1941 (target:[anon<RedLemon>(501):8572]) from originator [anon<RedLemon>(501):8572]
-default	15:52:07.802217-0500	RedLemon	tcp_input [C13.1.1:3] flags=[F.] seq=1937360025, ack=1848504134, win=8 state=ESTABLISHED rcv_nxt=1937360025, snd_una=1848504134
-default	15:52:07.802328-0500	RedLemon	nw_protocol_tcp_log_summary [C13.1.1:3]
-	[BE60941F-0AB6-449F-AE63-6C810AE1F82D <private>:60084<-><private>:443]
-	Init: 1, Conn_Time: 18.165ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 8, rtt: 26.562ms, rtt_var: 12.312ms rtt_nc: 23.187ms, rtt_var_nc: 10.375ms base rtt: 11ms
-	ACKs-compressed: 0, ACKs delayed: 9 delayed ACKs sent: 0
-default	15:52:07.803116-0500	RedLemon	Connection 13: read-side closed
-default	15:52:07.803138-0500	RedLemon	Connection 13: read-side closed
-default	15:52:07.803162-0500	RedLemon	Connection 13: read-side closed
-default	15:52:07.803427-0500	RedLemon	Connection 13: cleaning up
-default	15:52:07.803498-0500	RedLemon	[C13 35213D18-9069-46DB-8F8E-9D84976BBB5C Hostname#204e95ef:443 quic-connection, url hash: eff720ee, definite, attribution: developer] cancel
-default	15:52:07.803632-0500	RedLemon	[C13 35213D18-9069-46DB-8F8E-9D84976BBB5C Hostname#204e95ef:443 quic-connection, url hash: eff720ee, definite, attribution: developer] cancelled
-	[C13.1.1 0670C083-31A9-4E01-8F94-1A474E628664 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60084<->IPv6#29739f0d.443]
+default	16:11:38.409326-0500	runningboardd	Assertion 174-114-2134 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:38.410321-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:38.410373-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:38.410423-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:38.600507-0500	runningboardd	Invalidating assertion 174-140-2084 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
+default	16:11:38.821552-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:38.824538-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:38.825242-0500	runningboardd	[anon<RedLemon>(501):10440] Set darwin role to: UserInteractiveNonFocal
+default	16:11:38.827899-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:38.876085-0500	runningboardd	Invalidating assertion 174-171-2117 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.WindowServer(88)>:171]
+default	16:11:38.977204-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:38.977348-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:38.977500-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:39.409583-0500	runningboardd	Invalidating assertion 174-10440-2133 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:39.585664-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:39.585716-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:39.585767-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:39.588816-0500	runningboardd	Invalidating assertion 174-114-2134 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:39.754403-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:39.754477-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:39.754604-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:39.852895-0500	RedLemon	Connection 6: read-side closed
+default	16:11:39.853317-0500	RedLemon	Connection 6: cleaning up
+default	16:11:39.853449-0500	RedLemon	[C6 AC1A4EA5-FC49-452A-9AFF-9F66927FCEC5 Hostname#908b0605:443 quic-connection, url hash: d3f38232, definite, attribution: developer] cancel
+default	16:11:39.853693-0500	RedLemon	[C6 AC1A4EA5-FC49-452A-9AFF-9F66927FCEC5 Hostname#908b0605:443 quic-connection, url hash: d3f38232, definite, attribution: developer] cancelled
+	[C6.1.1 6F1A230B-809E-40BF-996E-65E03BEB8531 2607:fea8:995b:fd00:e143:eb11:f54f:69d1.60091<->IPv6#1c6a6668.443]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
 	Privacy Stance: Not Eligible
-	Duration: 33.651s, DNS @0.001s took 0.013s, TCP @0.021s took 0.019s, TLS 1.3 took 0.039s
-	bytes in/out: 484917/1095, packets in/out: 84/107, rtt: 0.026s, retransmitted bytes: 0, out-of-order bytes: 34970
-default	15:52:07.804625-0500	RedLemon	nw_flow_disconnected [C13.1.1 IPv6#29739f0d.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	15:52:07.805013-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C13] reporting state cancelled
-default	15:52:07.805547-0500	RedLemon	Connection 13: done
-default	15:52:07.805613-0500	RedLemon	tcp_output [C13.1.1:3] flags=[FP.] seq=1848504173, ack=1937360026, win=11374 state=LAST_ACK rcv_nxt=1937360026, snd_una=1848504134
-default	15:52:07.905476-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:07.905531-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:07.905580-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:07.908418-0500	runningboardd	Invalidating assertion 174-114-1942 (target:[anon<RedLemon>(501):8572]) from originator [daemon<com.apple.powerd>:114]
-default	15:52:08.072247-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:08.072534-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:08.072715-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:08.536984-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	15:52:08.538024-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [769357A1-5286-4CA7-977E-25A12FDEBD83] (reporting strategy default)> on Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> was not selected for reporting
-default	15:52:08.539510-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	15:52:08.539809-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> now using Connection 3
-default	15:52:08.540895-0500	RedLemon	0x7fbf93f41fe8 ID=148 Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> sent request, body N 0
-default	15:52:08.610754-0500	RedLemon	0x7fbf93f41fe8 ID=148 Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> received response, status 200 content K
-default	15:52:08.611428-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> response ended
-default	15:52:08.611888-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> done using Connection 3
-default	15:52:08.612164-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> summary for task success {transaction_duration_ms=73, response_status=200, connection=3, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=71, response_duration_ms=1, request_bytes=530, response_bytes=663, cache_hit=true}
-default	15:52:08.612525-0500	RedLemon	Task <6296693C-7535-405C-B680-C4B3ED8BEEEA>.<184> finished successfully
-default	15:52:08.620064-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [anon<RedLemon>(501):8572] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-8572-1943 target:8572 attributes:[
+	Duration: 55.343s, DNS @0.000s took 0.221s, TCP @0.222s took 0.017s, TLS 1.3 took 0.031s
+	bytes in/out: 2666094/1477, packets in/out: 375/299, rtt: 0.024s, retransmitted bytes: 0, out-of-order bytes: 30888
+default	16:11:39.855159-0500	RedLemon	nw_protocol_tcp_log_summary [C6.1.1:3]
+	[1EAEE881-9F3E-417D-B763-3FDC0A4F38A4 <private>:60091<-><private>:443]
+	Init: 1, Conn_Time: 17.260ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 12, rtt: 24.562ms, rtt_var: 5.750ms rtt_nc: 22.781ms, rtt_var_nc: 6.312ms base rtt: 9ms
+	ACKs-compressed: 0, ACKs delayed: 265 delayed ACKs sent: 0
+default	16:11:39.855907-0500	RedLemon	nw_flow_disconnected [C6.1.1 IPv6#1c6a6668.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:11:39.856539-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C6] reporting state cancelled
+default	16:11:39.856797-0500	RedLemon	Connection 6: done
+default	16:11:39.856936-0500	RedLemon	tcp_input [C6.1.1:3] flags=[F.] seq=1824682704, ack=513242975, win=8 state=ESTABLISHED rcv_nxt=1824682704, snd_una=513242975
+default	16:11:39.857283-0500	RedLemon	tcp_output [C6.1.1:3] flags=[F.] seq=513243038, ack=1824682705, win=38462 state=LAST_ACK rcv_nxt=1824682705, snd_una=513242975
+error	16:11:39.871495-0500	RedLemon	tcp_input [C6.1.1:3] flags=[R.] seq=1824682705, ack=513243038, win=8 state=LAST_ACK rcv_nxt=1824682705, snd_una=513242975
+error	16:11:39.876041-0500	RedLemon	tcp_input [C6.1.1:3] flags=[R] seq=1824682705, ack=0, win=0 state=CLOSED rcv_nxt=1824682705, snd_una=513242975
+default	16:11:40.310194-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:40.311599-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F042CE3B-9FCF-4256-8028-3762B5128689] (reporting strategy default)> on Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> was not selected for reporting
+default	16:11:40.312760-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:40.313131-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> now using Connection 3
+default	16:11:40.314866-0500	RedLemon	0x7f989a5818c8 ID=168 Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> sent request, body N 0
+default	16:11:40.391618-0500	RedLemon	0x7f989a5818c8 ID=168 Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> received response, status 200 content K
+default	16:11:40.392446-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> response ended
+default	16:11:40.392925-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> done using Connection 3
+default	16:11:40.393131-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> summary for task success {transaction_duration_ms=81, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=79, response_duration_ms=1, request_bytes=529, response_bytes=662, cache_hit=true}
+default	16:11:40.393510-0500	RedLemon	Task <5E65E227-26C7-40CE-842E-C108FAEF2864>.<285> finished successfully
+default	16:11:40.394850-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2152 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:08.620249-0500	runningboardd	Assertion 174-8572-1943 (target:[anon<RedLemon>(501):8572]) will be created as active as no start-time-defining assertions exist
-default	15:52:08.621697-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:08.621742-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:08.621824-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-default	15:52:08.623819-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):8572] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-1944 target:8572 attributes:[
+default	16:11:40.395047-0500	runningboardd	Assertion 174-10440-2152 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:40.396403-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:40.396702-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:40.396801-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:40.400386-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2153 target:10440 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	15:52:08.623991-0500	runningboardd	Assertion 174-114-1944 (target:[anon<RedLemon>(501):8572]) will be created as active
-default	15:52:08.625144-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring jetsam update because this process is not memory-managed
-default	15:52:08.625199-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring suspend because this process is not lifecycle managed
-default	15:52:08.625432-0500	runningboardd	[anon<RedLemon>(501):8572] Ignoring GPU update because this process is not GPU managed
-
+default	16:11:40.400578-0500	runningboardd	Assertion 174-114-2153 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:40.404916-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:40.404987-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:40.405040-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:41.497622-0500	runningboardd	Invalidating assertion 174-10440-2152 (target:[anon<RedLemon>(501):10440]) from originator [anon<RedLemon>(501):10440]
+default	16:11:41.664002-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:41.664541-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:41.664601-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:41.666129-0500	runningboardd	Invalidating assertion 174-114-2153 (target:[anon<RedLemon>(501):10440]) from originator [daemon<com.apple.powerd>:114]
+default	16:11:41.825350-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:41.825519-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:41.825691-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:42.310550-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:11:42.311678-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A8D2F799-778A-4E3B-BE4E-44FD197D17EB] (reporting strategy default)> on Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> was not selected for reporting
+default	16:11:42.313178-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:11:42.313632-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> now using Connection 3
+default	16:11:42.315332-0500	RedLemon	0x7f989a5818c8 ID=172 Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> sent request, body N 0
+default	16:11:42.385812-0500	RedLemon	0x7f989a5818c8 ID=172 Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> received response, status 200 content K
+default	16:11:42.386450-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> response ended
+default	16:11:42.387680-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> done using Connection 3
+default	16:11:42.388166-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> summary for task success {transaction_duration_ms=75, response_status=200, connection=3, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=73, response_duration_ms=2, request_bytes=529, response_bytes=661, cache_hit=false}
+default	16:11:42.388901-0500	RedLemon	Task <B6AA1249-CE30-4668-963B-7501B8C7D5AD>.<286> finished successfully
+default	16:11:42.392618-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [anon<RedLemon>(501):10440] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:174-10440-2154 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:42.392848-0500	runningboardd	Assertion 174-10440-2154 (target:[anon<RedLemon>(501):10440]) will be created as active as no start-time-defining assertions exist
+default	16:11:42.394252-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:42.394300-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:42.394350-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed
+default	16:11:42.398586-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):10440] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:174-114-2155 target:10440 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:11:42.400413-0500	runningboardd	Assertion 174-114-2155 (target:[anon<RedLemon>(501):10440]) will be created as active
+default	16:11:42.403491-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring jetsam update because this process is not memory-managed
+default	16:11:42.403701-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring suspend because this process is not lifecycle managed
+default	16:11:42.403987-0500	runningboardd	[anon<RedLemon>(501):10440] Ignoring GPU update because this process is not GPU managed

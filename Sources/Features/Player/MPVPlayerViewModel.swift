@@ -311,9 +311,12 @@ class MPVPlayerViewModel: ObservableObject {
 
                 // Watch Party Ready Gate: Trigger ready signal as soon as we have duration (file loaded)
                 // This fixes the deadlock where we waited for playback to start, but playback waits for ready signal
-                if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
-                    print("⏱️ Watch Party: Duration available (\(dur)s), triggering ready signal")
-                    self.sendReadySignal()
+                if dur > 0 {
+                    print("⏱️ Duration update: \(dur)s. WatchParty: \(self.isInWatchParty), SentReady: \(self.hasSentReadySignal)")
+                    if self.isInWatchParty && !self.hasSentReadySignal {
+                        print("⏱️ Watch Party: Duration available (\(dur)s), triggering ready signal")
+                        self.sendReadySignal()
+                    }
                 }
             }
         }
@@ -1148,6 +1151,7 @@ extension MPVPlayerViewModel {
         self.currentRoomId = roomId
         self.isWatchPartyHost = isHost
         self.isInWatchParty = true  // Enable watch party mode
+        print("🎉 Watch Party Mode ENABLED. isInWatchParty = \(self.isInWatchParty)")
 
         // Get user ID from appState
         guard let userId = appState?.currentUserId?.uuidString else {

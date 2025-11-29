@@ -101,7 +101,19 @@ func fetchTopMoviesForEvents() async {
             "Selena y Los Dinos: A Family's Legacy",
             "Star Trek Beyond",
             "Star Trek Into Darkness",
-            "Star Trek"
+            "Star Trek",
+            "In Waves and War",
+            "God Bless America",
+            "Tracing the Divide",
+            "The Teacher",
+            "Sunshine",
+            "Lilith Fair: Building a Mystery",
+            "Three Billboards Outside Ebbing, Missouri",
+            "Star Wars",
+            "The White House Effect",
+            "Animal Kingdom",
+            "The Ugly Stepsister",
+            "ONE SHOT with Ed Sheeran"
         ]
         if blacklistedTitles.contains(where: { meta.name.contains($0) }) {
             return false

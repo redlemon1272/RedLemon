@@ -1359,6 +1359,13 @@ extension MPVPlayerViewModel {
             if let senderId = message.senderId {
                 NSLog("✅ Received READY signal from \(senderId)")
                 readyGuestIds.insert(senderId)
+                
+                // PRESENCE FALLBACK: Ensure sender is in connectedGuestIds
+                // This handles cases where Presence events are delayed/missing
+                if !connectedGuestIds.contains(senderId) {
+                    NSLog("⚠️ Adding \(senderId) to connectedGuestIds (presence fallback)")
+                    connectedGuestIds.insert(senderId)
+                }
 
                 if isWatchPartyHost {
                     checkIfAllGuestsReady()

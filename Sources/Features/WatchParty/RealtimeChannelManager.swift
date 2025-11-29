@@ -201,8 +201,18 @@ actor RealtimeChannelManager {
         lastRemoteTimestamp = compensatedMessage.position
         lastRemoteUpdateTime = Date()
 
+        // CRITICAL: Log callback status before invoking
+        if syncCallback == nil {
+            NSLog("❌ Realtime: syncCallback is NIL, cannot deliver message type: \(message.type)")
+            return
+        }
+        
+        NSLog("📞 Realtime: Invoking syncCallback for message type: \(message.type)")
+        
         // Pass to callback
         syncCallback?(compensatedMessage)
+        
+        NSLog("✅ Realtime: syncCallback invoked successfully")
     }
 
     // MARK: - Latency Tracking

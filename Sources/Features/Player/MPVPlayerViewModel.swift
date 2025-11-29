@@ -1258,6 +1258,13 @@ extension MPVPlayerViewModel {
         startChatPolling()
 
         print("✅ Watch party sync initialized with Realtime")
+
+        // Post-Setup Check: If video already loaded, send ready signal now
+        // This handles the race condition where duration loaded before Realtime was ready
+        if duration > 0 && !hasSentReadySignal {
+             NSLog("👋 Watch Party: Setup complete, sending delayed READY signal")
+             sendReadySignal()
+        }
     }
 
     /// Start polling chat messages from Supabase
@@ -1603,9 +1610,11 @@ extension MPVPlayerViewModel {
 
     private func sendReadySignal() {
         guard !hasSentReadySignal else { return }
+
+        // Optimistically set true to prevent rapid-fire calls
         hasSentReadySignal = true
 
-        print("👋 Watch Party: Sending READY signal")
+        NSLog("👋 Watch Party: Sending READY signal")
 
         // Send Ready signal
         let syncMessage = SyncMessage(
@@ -1616,7 +1625,20 @@ extension MPVPlayerViewModel {
             senderId: currentUserId
         )
         Task {
-            try? await realtimeManager?.sendSyncMessage(syncMessage)
+            do {
+                if let manager = realtimeManager {
+                    try await manager.sendSyncMessage(syncMessage)
+                    NSLog("✅ Watch Party: READY signal sent successfully")
+                } else {
+                    NSLog("❌ Watch Party: realtimeManager is nil, cannot send READY signal")
+                    // Revert flag so we can retry
+                    await MainActor.run { self.hasSentReadySignal = false }
+                }
+            } catch {
+                NSLog("❌ Watch Party: Failed to send READY signal: %@", error.localizedDescription)
+                // Revert flag so we can retry
+                await MainActor.run { self.hasSentReadySignal = false }
+            }
         }
 
         // If Host, mark self as ready and check if we can start

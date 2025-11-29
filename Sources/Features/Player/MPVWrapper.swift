@@ -322,6 +322,11 @@ class MPVWrapper: ObservableObject {
             NSLog("⏸️ Loading in paused mode (watch party)")
             NSLog("🔗 URL: %@", url)
 
+            // CRITICAL FIX: Set pause=yes BEFORE loading the file
+            // This ensures MPV initializes the file (firing FILE_LOADED and updating duration)
+            // but starts in a paused state.
+            mpv_set_property_string(handle, "pause", "yes")
+            
             // Load the file normally
             let loadCommand = "loadfile \"\(url)\""
             NSLog("🎬 MPV executing: %@", loadCommand)
@@ -329,13 +334,13 @@ class MPVWrapper: ObservableObject {
             NSLog("🎬 MPV loadfile result: %d", loadResult)
 
             if loadResult >= 0 {
-                // Immediately pause
-                mpv_set_property_string(handle, "pause", "yes")
                 isPlaying = false
-                NSLog("✅ MPV loadfile succeeded, immediately paused for watch party")
+                NSLog("✅ MPV loadfile succeeded (started paused)")
             } else {
                 NSLog("❌ MPV loadfile failed with code: %d", loadResult)
                 NSLog("❌ Failed URL was: %@", url)
+                // Revert pause state if load failed
+                mpv_set_property_string(handle, "pause", "no")
             }
         } else {
             // Normal autoplay mode

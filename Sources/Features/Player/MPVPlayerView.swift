@@ -300,7 +300,22 @@ struct MPVPlayerView: View {
             }
         }
         .task {
-            NSLog("🎬🎬🎬 MPVPlayerView .task starting - About to call loadStream")
+            NSLog("🎬🎬🎬 MPVPlayerView .task starting")
+            
+            // CRITICAL: Start watch party sync BEFORE loading stream
+            // This ensures isInWatchParty is set when video loads, activating the ready gate
+            if appState.currentWatchMode == .watchParty, let roomId = appState.currentRoomId {
+                NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.isWatchPartyHost ? "YES" : "NO")
+                do {
+                    try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.isWatchPartyHost)
+                    NSLog("✅ Watch party sync started successfully - isInWatchParty is now TRUE")
+                } catch {
+                    NSLog("❌ Failed to start watch party sync: %@", error.localizedDescription)
+                }
+            }
+            
+            // Now load stream with watch party mode properly set
+            NSLog("🎬🎬🎬 About to call loadStream - isInWatchParty: %@", viewModel.isInWatchParty ? "YES" : "NO")
             NSLog("🎬🎬🎬 Subtitles: %d", subtitles.count)
             await viewModel.loadStream(
                 streamURL: streamURL,
@@ -309,17 +324,6 @@ struct MPVPlayerView: View {
                 subtitles: subtitles,
                 isSeries: isSeries
             )
-
-            // Start watch party sync if needed
-            if appState.currentWatchMode == .watchParty, let roomId = appState.currentRoomId {
-                NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.isWatchPartyHost ? "YES" : "NO")
-                do {
-                    try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.isWatchPartyHost)
-                    NSLog("✅ Watch party sync started successfully")
-                } catch {
-                    NSLog("❌ Failed to start watch party sync: %@", error.localizedDescription)
-                }
-            }
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
         }

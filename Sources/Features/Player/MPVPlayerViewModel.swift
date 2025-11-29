@@ -1338,18 +1338,18 @@ extension MPVPlayerViewModel {
     /// Handle incoming sync messages from peers
     private func handleSyncMessage(_ message: SyncMessage) async {
         // DEBUG: Log ALL incoming messages before any filtering
-        print("🔍 DEBUG: Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
+        NSLog("🔍 DEBUG: Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
 
         // Host is authoritative for playback, but should still receive chat messages and READY signals
         if isWatchPartyHost && message.type != .chat && message.type != .ready {
-            print("🚫 DEBUG: Host filtering out message type: \(message.type)")
+            NSLog("🚫 DEBUG: Host filtering out message type: \(message.type)")
             return
         }
 
         // Syncplay-inspired: Ignore remote updates if we just made a local action
         // CRITICAL: NEVER ignore READY or CHAT messages - they must always be processed
         if message.type != .ready && message.type != .chat && shouldIgnoreRemoteUpdate() {
-            print("🚫 DEBUG: Filtering message due to recent local action - type: \(message.type)")
+            NSLog("🚫 DEBUG: Filtering message due to recent local action - type: \(message.type)")
             return
         }
 
@@ -1357,7 +1357,7 @@ extension MPVPlayerViewModel {
         case .ready:
             // Handle Ready signal
             if let senderId = message.senderId {
-                print("✅ Received READY signal from \(senderId)")
+                NSLog("✅ Received READY signal from \(senderId)")
                 readyGuestIds.insert(senderId)
 
                 if isWatchPartyHost {

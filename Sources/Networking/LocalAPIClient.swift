@@ -667,6 +667,19 @@ class LocalAPIClient: ObservableObject {
             return false
         }
 
+        // Filter out Dolby Vision (DoVi) Profile 5 which causes purple/green tint on non-supported displays
+        // Look for "DV", "DoVi", "Dolby Vision" in title
+        // Note: "HDR" and "HDR10" are usually fine (tone mapped by MPV), but DV Profile 5 is problematic
+        let isDoVi = title.contains("DV") ||
+                     title.contains("DOVI") ||
+                     title.contains("DOLBY VISION") ||
+                     title.contains("DOLBYVISION")
+
+        if isDoVi {
+            print("🚫 Filtered out Dolby Vision stream (potential color issues): \(stream.title)")
+            return false
+        }
+
         // Allow all other sources through - quality scoring will handle prioritization
         // CAM/TS will score low, WEB-DL/BluRay will score high
         // This way, CAM shows when nothing else exists, but auto-upgrades when better quality releases

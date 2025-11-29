@@ -40,6 +40,7 @@ struct WatchPartyRoom: Identifiable {
     var participants: [Participant]
     var state: RoomState
     var createdAt: Date
+    var lastActivity: Date
 
     // MARK: - Playlist Support
     var playlist: [PlaylistItem]?

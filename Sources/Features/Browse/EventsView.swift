@@ -452,6 +452,7 @@ struct EventsView: View {
             participants: [],
             state: .lobby, // Start in lobby state, will sync with server
             createdAt: event.startTime,
+            lastActivity: event.startTime,
             playlist: nil,  // Events don't use playlists
             currentPlaylistIndex: 0,
             lobbyDuration: 600,  // 10 minutes for events

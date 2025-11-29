@@ -186,6 +186,7 @@ extension EventsView {
             participants: [],
             state: .playing,  // TV events go straight to playing (no lobby)
             createdAt: tvEvent.startTime,
+            lastActivity: tvEvent.startTime,
             playlist: nil,
             currentPlaylistIndex: 0,
             lobbyDuration: 0,  // No lobby for TV events

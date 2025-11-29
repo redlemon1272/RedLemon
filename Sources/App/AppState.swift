@@ -619,6 +619,7 @@ class AppState: ObservableObject {
                 participants: [hostParticipant],
                 state: .lobby,
                 createdAt: room.createdAt,
+                lastActivity: room.createdAt,
                 playlist: nil,  // Start with no playlist
                 currentPlaylistIndex: 0,
                 lobbyDuration: 300,  // 5 minutes default
@@ -715,6 +716,7 @@ class AppState: ObservableObject {
                 participants: watchPartyParticipants,
                 state: .lobby,
                 createdAt: room.createdAt,
+                lastActivity: room.lastActivity,
                 playlist: nil,  // Will be synced from host if exists
                 currentPlaylistIndex: 0,
                 lobbyDuration: 300,

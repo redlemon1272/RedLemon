@@ -173,6 +173,7 @@ struct RoomListView: View {
                         participants: [host] + guests,
                         state: room.isPlaying ? .playing : .lobby,
                         createdAt: room.createdAt,
+                        lastActivity: room.lastActivity,
                         playlist: nil,  // Will be synced from database if exists
                         currentPlaylistIndex: 0,
                         lobbyDuration: 300,
@@ -403,6 +404,14 @@ struct RoomListView: View {
         // Update playback position if changed
         if let position = newRecord["playback_position"] as? Double {
             room.playbackPosition = TimeInterval(position)
+        }
+
+        // Update lastActivity if changed
+        if let lastActivityStr = newRecord["last_activity"] as? String {
+            let formatter = ISO8601DateFormatter()
+            if let lastActivity = formatter.date(from: lastActivityStr) {
+                room.lastActivity = lastActivity
+            }
         }
 
         appState.activeRooms[index] = room
@@ -639,8 +648,8 @@ struct ActiveRoomRow: View {
     /// Safely calculates the current playback position, returning nil if any values are invalid
     private func calculateSafePosition(for room: WatchPartyRoom, runtime: TimeInterval) -> TimeInterval? {
         if room.state == .playing {
-            // For playing rooms: calculate elapsed time since creation
-            let elapsed = currentTime.timeIntervalSince(room.createdAt)
+            // For playing rooms: calculate elapsed time since last activity (play/pause event)
+            let elapsed = currentTime.timeIntervalSince(room.lastActivity)
 
             // Validate elapsed time is reasonable
             guard elapsed >= 0, elapsed < 86400, elapsed.isFinite else {

@@ -305,13 +305,14 @@ class MPVWrapper: ObservableObject {
             return
         }
 
-        // CRITICAL FIX: When loading in paused mode (watch party), add a small delay
-        // to ensure the render context is fully set up. Without this, loadfile fails with error -4
-        // because the command is executed before MPV is ready to accept it.
+        // CRITICAL FIX: When loading in paused mode (watch party), add a delay
+        // to ensure the render context is fully set up. Error -4 from MPV typically means
+        // the URL is invalid/inaccessible, so we also log the full URL for debugging.
         if !autoplay {
-            NSLog("⏸️ Loading in paused mode (watch party), adding 100ms delay for render context setup...")
+            NSLog("⏸️ Loading in paused mode (watch party), adding 250ms delay for render context setup...")
+            NSLog("🔗 Full URL to load: %@", url)
             Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 100_000_000)  // 100ms delay
+                try? await Task.sleep(nanoseconds: 250_000_000)  // 250ms delay
                 self.executeLoadVideo(url: url, autoplay: autoplay)
             }
             return
@@ -342,6 +343,7 @@ class MPVWrapper: ObservableObject {
             NSLog("✅ MPV loadfile succeeded, isPlaying set to %@", autoplay ? "true" : "false")
         } else {
             NSLog("❌ MPV loadfile failed with code: %d", result)
+            NSLog("❌ Failed URL was: %@", url)
         }
     }
 

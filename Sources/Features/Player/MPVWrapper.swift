@@ -305,20 +305,7 @@ class MPVWrapper: ObservableObject {
             return
         }
 
-        // CRITICAL FIX: When loading in paused mode (watch party), add a delay
-        // to ensure the render context is fully set up. Error -4 from MPV typically means
-        // the URL is invalid/inaccessible, so we also log the full URL for debugging.
-        if !autoplay {
-            NSLog("⏸️ Loading in paused mode (watch party), adding 250ms delay for render context setup...")
-            NSLog("🔗 Full URL to load: %@", url)
-            Task { @MainActor in
-                try? await Task.sleep(nanoseconds: 250_000_000)  // 250ms delay
-                self.executeLoadVideo(url: url, autoplay: autoplay)
-            }
-            return
-        }
-
-        // Normal autoplay mode - execute immediately
+        // Execute load immediately
         executeLoadVideo(url: url, autoplay: autoplay)
     }
 
@@ -328,24 +315,44 @@ class MPVWrapper: ObservableObject {
             return
         }
 
-        let command: String
-        if autoplay {
-            command = "loadfile \"\(url)\""
-        } else {
-            command = "loadfile \"\(url)\" pause"
-        }
+        // CRITICAL FIX: For paused loads (watch party), we load normally then immediately pause
+        // Using 'loadfile "URL" pause' was failing with error -4
+        // Instead, we load the file and set pause=yes immediately after
+        if !autoplay {
+            NSLog("⏸️ Loading in paused mode (watch party)")
+            NSLog("🔗 URL: %@", url)
 
-        NSLog("🎬 MPV executing command: %@", command)
-        let result = mpv_command_string(handle, command)
-        NSLog("🎬 MPV loadfile result: %d", result)
-        if result >= 0 {
-            isPlaying = autoplay
-            NSLog("✅ MPV loadfile succeeded, isPlaying set to %@", autoplay ? "true" : "false")
+            // Load the file normally
+            let loadCommand = "loadfile \"\(url)\""
+            NSLog("🎬 MPV executing: %@", loadCommand)
+            let loadResult = mpv_command_string(handle, loadCommand)
+            NSLog("🎬 MPV loadfile result: %d", loadResult)
+
+            if loadResult >= 0 {
+                // Immediately pause
+                mpv_set_property_string(handle, "pause", "yes")
+                isPlaying = false
+                NSLog("✅ MPV loadfile succeeded, immediately paused for watch party")
+            } else {
+                NSLog("❌ MPV loadfile failed with code: %d", loadResult)
+                NSLog("❌ Failed URL was: %@", url)
+            }
         } else {
-            NSLog("❌ MPV loadfile failed with code: %d", result)
-            NSLog("❌ Failed URL was: %@", url)
+            // Normal autoplay mode
+            let command = "loadfile \"\(url)\""
+            NSLog("🎬 MPV executing command: %@", command)
+            let result = mpv_command_string(handle, command)
+            NSLog("🎬 MPV loadfile result: %d", result)
+            if result >= 0 {
+                isPlaying = true
+                NSLog("✅ MPV loadfile succeeded, isPlaying set to true")
+            } else {
+                NSLog("❌ MPV loadfile failed with code: %d", result)
+                NSLog("❌ Failed URL was: %@", url)
+            }
         }
     }
+
 
     func loadSubtitle(url: String, title: String = "English") {
         guard let handle = mpvHandle, isInitialized else {

@@ -8,12 +8,17 @@ struct RoomListView: View {
     @State private var roomCodeInput = ""
     @State private var realtimeClient: SupabaseRealtimeClient?
 
+    @State private var offset = 0
+    @State private var hasMore = true
+    @State private var isLoadingMore = false
+    private let pageSize = 20
+
     var body: some View {
         VStack {
-            if isLoading {
+            if isLoading && appState.activeRooms.isEmpty {
                 ProgressView("Loading rooms...")
                     .padding()
-            } else if let error = errorMessage {
+            } else if let error = errorMessage, appState.activeRooms.isEmpty {
                 VStack {
                     Text("Error loading rooms")
                         .font(.headline)
@@ -21,7 +26,7 @@ struct RoomListView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                     Button("Retry") {
-                        loadRooms()
+                        loadRooms(reset: true)
                     }
                     .padding()
                 }
@@ -35,16 +40,42 @@ struct RoomListView: View {
                         .fontWeight(.bold)
                     Text("Be the first to start a watch party!")
                         .foregroundColor(.secondary)
+                    Button("Refresh") {
+                        loadRooms(reset: true)
+                    }
                 }
                 .padding()
             } else {
-                List {
-                    ForEach(appState.activeRooms) { room in
-                        ActiveRoomRow(roomId: room.id)
-                            .onTapGesture {
+                ScrollView {
+                    LazyVStack(spacing: 24) {
+                        ForEach(appState.activeRooms) { room in
+                            HeroRoomCard(room: room) {
                                 joinRoom(room: room)
                             }
+                        }
+                        
+                        if hasMore {
+                            Button(action: {
+                                loadRooms(reset: false)
+                            }) {
+                                HStack {
+                                    if isLoadingMore {
+                                        ProgressView()
+                                            .controlSize(.small)
+                                    }
+                                    Text(isLoadingMore ? "Loading..." : "Load More")
+                                        .fontWeight(.semibold)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(8)
+                            }
+                            .disabled(isLoadingMore)
+                            .padding(.top, 8)
+                        }
                     }
+                    .padding()
                 }
             }
 
@@ -63,7 +94,9 @@ struct RoomListView: View {
             })
         }
         .onAppear {
-            loadRooms()
+            if appState.activeRooms.isEmpty {
+                loadRooms(reset: true)
+            }
             Task {
                 await setupRealtimeSubscription()
             }
@@ -75,18 +108,28 @@ struct RoomListView: View {
         }
     }
 
-    private func loadRooms() {
-        isLoading = true
-        errorMessage = nil
+    private func loadRooms(reset: Bool = false) {
+        if reset {
+            isLoading = true
+            errorMessage = nil
+            offset = 0
+            hasMore = true
+        } else {
+            isLoadingMore = true
+        }
 
         Task {
             do {
-                // Fetch rooms from Supabase backend
-                print("📋 Fetching rooms from Supabase backend...")
-                let backendRooms = try await SupabaseClient.shared.getAllRooms()
+                // Fetch rooms from Supabase backend with pagination
+                print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize))...")
+                let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset)
+                
+                if backendRooms.count < pageSize {
+                    await MainActor.run { hasMore = false }
+                }
 
                 // Convert Supabase rooms to WatchPartyRooms with participants
-                var allRooms: [WatchPartyRoom] = []
+                var newRooms: [WatchPartyRoom] = []
                 for room in backendRooms {
                     // Determine media type based on season/episode
                     let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
@@ -120,16 +163,10 @@ struct RoomListView: View {
                     var guests: [Participant] = []
                     do {
                         let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-                        NSLog("📋 Found \(roomParticipants.count) participants in room \(room.id)")
-
                         // Convert to Participant objects (excluding host)
                         for participant in roomParticipants {
-                            // Skip the host since we already added them
-                            if participant.userId.uuidString == room.hostUserId.uuidString {
-                                continue
-                            }
-
-                            // Get username from user ID
+                            if participant.userId.uuidString == room.hostUserId.uuidString { continue }
+                            
                             if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
                                 let guest = Participant(
                                     id: participant.userId.uuidString,
@@ -139,9 +176,7 @@ struct RoomListView: View {
                                     joinedAt: participant.joinedAt
                                 )
                                 guests.append(guest)
-                                NSLog("   - \(user.username) (guest)")
                             } else {
-                                // Fallback if user lookup fails
                                 let guest = Participant(
                                     id: participant.userId.uuidString,
                                     name: "Unknown User",
@@ -150,12 +185,10 @@ struct RoomListView: View {
                                     joinedAt: participant.joinedAt
                                 )
                                 guests.append(guest)
-                                NSLog("   - Unknown User (guest)")
                             }
                         }
                     } catch {
-                        NSLog("⚠️ Failed to fetch participants for room \(room.id): \(error)")
-                        // Continue with empty guests list if fetch fails
+                        print("⚠️ Failed to fetch participants for room \(room.id): \(error)")
                     }
 
                     let watchPartyRoom = WatchPartyRoom(
@@ -163,9 +196,9 @@ struct RoomListView: View {
                         hostId: host.id,
                         hostName: room.hostUsername,
                         mediaItem: mediaItem,
-                        season: nil,  // Extract from metadata when available
-                        episode: nil,  // Extract from metadata when available
-                        episodeTitle: nil, // Extract from metadata when available
+                        season: nil,
+                        episode: nil,
+                        episodeTitle: nil,
                         quality: .fullHD,
                         sourceQuality: nil,
                         description: nil,
@@ -174,76 +207,90 @@ struct RoomListView: View {
                         state: room.isPlaying ? .playing : .lobby,
                         createdAt: room.createdAt,
                         lastActivity: room.lastActivity,
-                        playlist: nil,  // Will be synced from database if exists
+                        playlist: nil,
                         currentPlaylistIndex: 0,
                         lobbyDuration: 300,
                         shouldLoop: false,
                         isPersistent: true,
-                        playbackPosition: TimeInterval(room.playbackPosition), // From backend
-                        runtime: nil, // Will be populated from metadata
+                        playbackPosition: TimeInterval(room.playbackPosition),
+                        runtime: nil,
                         selectedStreamHash: nil,
                         selectedFileIdx: nil,
                         selectedQuality: nil,
                         unlockedStreamURL: nil
                     )
-                    allRooms.append(watchPartyRoom)
+                    newRooms.append(watchPartyRoom)
                 }
 
                 await MainActor.run {
-
-                    // Sort by creation time (newest first) and limit to 10
-                    appState.activeRooms = allRooms
-                        .sorted { $0.createdAt > $1.createdAt }
-                        .prefix(10)
-                        .map { $0 }
-
+                    if reset {
+                        appState.activeRooms = newRooms
+                    } else {
+                        // Append new rooms, avoiding duplicates
+                        let existingIds = Set(appState.activeRooms.map { $0.id })
+                        let uniqueNewRooms = newRooms.filter { !existingIds.contains($0.id) }
+                        appState.activeRooms.append(contentsOf: uniqueNewRooms)
+                    }
+                    
+                    offset += pageSize
                     isLoading = false
-                    print("✅ Loaded \(appState.activeRooms.count) rooms from Supabase (showing 10 most recent)")
+                    isLoadingMore = false
+                    print("✅ Loaded \(newRooms.count) rooms (total: \(appState.activeRooms.count))")
                 }
 
-                // Fetch poster URLs from Cinemeta for each room (async, don't block UI)
+                // Fetch poster URLs from Cinemeta for new rooms
                 Task {
-                    await fetchPostersForRooms()
+                    await fetchPostersForRooms(rooms: newRooms)
                 }
             } catch {
                 await MainActor.run {
                     errorMessage = error.localizedDescription
                     isLoading = false
+                    isLoadingMore = false
                     print("❌ Failed to load rooms from backend: \(error)")
                 }
             }
         }
     }
 
-    private func fetchPostersForRooms() async {
+    private func fetchPostersForRooms(rooms: [WatchPartyRoom]? = nil) async {
+        // If specific rooms provided, use those. Otherwise use all active rooms.
+        let targetRooms = rooms ?? appState.activeRooms
+        
         // Fetch all posters concurrently instead of sequentially
-        await withTaskGroup(of: (Int, WatchPartyRoom?).self) { group in
-            for (index, room) in appState.activeRooms.enumerated() {
+        await withTaskGroup(of: (String, WatchPartyRoom?).self) { group in
+            for room in targetRooms {
                 group.addTask {
-                    await self.fetchPosterForRoom(room: room, index: index)
+                    await self.fetchPosterForRoom(room: room)
                 }
             }
 
-            // Collect results
-            var updatedRooms = appState.activeRooms
-            for await (index, updatedRoom) in group {
+            // Collect results and update appState
+            var roomUpdates: [(String, WatchPartyRoom)] = []
+            for await (roomId, updatedRoom) in group {
                 if let updatedRoom = updatedRoom {
-                    updatedRooms[index] = updatedRoom
+                    roomUpdates.append((roomId, updatedRoom))
                 }
             }
 
-            // Update appState on main actor
+            // Apply updates on MainActor
             await MainActor.run {
+                var updatedRooms = appState.activeRooms
+                for (roomId, updatedRoom) in roomUpdates {
+                    if let index = updatedRooms.firstIndex(where: { $0.id == roomId }) {
+                        updatedRooms[index] = updatedRoom
+                    }
+                }
                 appState.activeRooms = updatedRooms
             }
         }
     }
 
-    private func fetchPosterForRoom(room: WatchPartyRoom, index: Int) async -> (Int, WatchPartyRoom?) {
+    private func fetchPosterForRoom(room: WatchPartyRoom) async -> (String, WatchPartyRoom?) {
         var room = room
 
         guard let imdbId = room.mediaItem?.id, imdbId != "unknown" else {
-            return (index, nil)
+            return (room.id, nil)
         }
 
         do {
@@ -291,10 +338,10 @@ struct RoomListView: View {
                 room.runtime = TimeInterval(runtimeMinutes * 60)
             }
 
-            return (index, room)
+            return (room.id, room)
         } catch {
-            print("❌ Failed to fetch metadata for room \(index): \(error)")
-            return (index, nil)
+            print("❌ Failed to fetch metadata for room \(room.id): \(error)")
+            return (room.id, nil)
         }
     }
 
@@ -431,353 +478,7 @@ extension NSAlert {
 }
 
 
-struct ActiveRoomRow: View {
-    let roomId: String
-    @EnvironmentObject var appState: AppState
-    @State private var currentTime = TimeService.shared.now
 
-    // Use Combine timer instead of Foundation Timer for safer SwiftUI updates
-    private let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
-
-    // Look up the room dynamically from appState to get realtime updates
-    private var room: WatchPartyRoom? {
-        appState.activeRooms.first(where: { $0.id == roomId })
-    }
-
-    var body: some View {
-        if let room = room {
-            roomContent(for: room)
-        } else {
-            EmptyView()
-        }
-    }
-
-    @ViewBuilder
-    private func roomContent(for room: WatchPartyRoom) -> some View {
-        HStack(spacing: 16) {
-            // Poster art (left side)
-            posterView(for: room)
-                .frame(width: 80, height: 120)
-                .cornerRadius(8)
-                .shadow(color: .black.opacity(0.3), radius: 5)
-
-            // Room info (main content)
-            VStack(alignment: .leading, spacing: 8) {
-                // Title - show movie name if available, otherwise show room name
-                if let movieName = room.mediaItem?.name, room.mediaItem?.id != "unknown" {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(movieName)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .lineLimit(1)
-
-                        // Show S/E and Episode Title for series
-                        if let season = room.season, let episode = room.episode {
-                            HStack(spacing: 4) {
-                                Text("S\(season):E\(episode)")
-                                    .fontWeight(.semibold)
-
-                                if let epTitle = room.episodeTitle {
-                                    Text("- \(epTitle)")
-                                        .lineLimit(1)
-                                }
-                            }
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        }
-                    }
-                } else {
-                    Text("Room: \(room.id)")
-                        .font(.headline)
-                        .fontWeight(.bold)
-                        .lineLimit(1)
-                }
-
-                // Description (if available)
-                if let description = room.description, !description.isEmpty {
-                    Text(description)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .italic()
-                        .lineLimit(2)
-                }
-
-                // Host info and room age
-                HStack(spacing: 6) {
-                    if let hostName = room.hostName {
-                        Text("Hosted by @\(hostName)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    } else {
-                        Text("Hosted by \(String(room.hostId.prefix(8)))...")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-
-                    Text("•")
-                        .foregroundColor(.secondary)
-
-                    Text(timeAgoString(for: room))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-
-                // Bottom row: participants, quality badges, status
-                HStack(spacing: 8) {
-                    // Participant count
-                    Label("\(room.participants.count)", systemImage: "person.2.fill")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-
-                    Spacer()
-
-                    // Quality badges
-                    HStack(spacing: 6) {
-                        // Resolution badge
-                        Text(room.quality.displayName)
-                            .font(.caption2)
-                            .fontWeight(.semibold)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 3)
-                            .background(Color.blue.opacity(0.2))
-                            .foregroundColor(.blue)
-                            .cornerRadius(4)
-
-                        // Source quality badge (if available)
-                        if let sourceQuality = room.sourceQuality, !sourceQuality.isEmpty {
-                            Text(sourceQuality)
-                                .font(.caption2)
-                                .fontWeight(.semibold)
-                                .padding(.horizontal, 6)
-                                .padding(.vertical, 3)
-                                .background(sourceQualityColor(for: room).opacity(0.2))
-                                .foregroundColor(sourceQualityColor(for: room))
-                                .cornerRadius(4)
-                        }
-
-                        // Status badge
-                        HStack(spacing: 3) {
-                            Circle()
-                                .fill(statusColor(for: room))
-                                .frame(width: 6, height: 6)
-                            Text(statusText(for: room))
-                                .font(.caption2)
-                                .fontWeight(.medium)
-                        }
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 3)
-                        .background(statusColor(for: room).opacity(0.15))
-                        .foregroundColor(statusColor(for: room))
-                        .cornerRadius(4)
-                    }
-                }
-
-                // Progress Bar (custom implementation to avoid layout crashes)
-                progressBarView(for: room)
-            }
-        }
-        .padding(12)
-        .background(Color(NSColor.controlBackgroundColor))
-        .cornerRadius(12)
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-        )
-        .onReceive(timer) { _ in
-            currentTime = TimeService.shared.now
-        }
-    }
-
-    // MARK: - Progress Bar View
-
-    @ViewBuilder
-    private func progressBarView(for room: WatchPartyRoom) -> some View {
-        // Only attempt to render if we have valid runtime and position
-        if let runtime = room.runtime,
-           runtime > 0,
-           runtime.isFinite,
-           runtime < 86400,
-           let validPosition = calculateSafePosition(for: room, runtime: runtime) {
-
-            // Calculate progress percentage (0.0 to 1.0)
-            let progressValue = min(max(validPosition / runtime, 0), 1)
-            let remainingTime = max(runtime - validPosition, 0)
-
-            // Triple-check all values are safe before rendering
-            if progressValue.isFinite &&
-               validPosition.isFinite &&
-               remainingTime.isFinite &&
-               progressValue >= 0 &&
-               progressValue <= 1 {
-
-                VStack(alignment: .leading, spacing: 6) {
-                    // Custom progress bar using GeometryReader for safe layout
-                    GeometryReader { geometry in
-                        ZStack(alignment: .leading) {
-                            // Background track
-                            Rectangle()
-                                .fill(Color.gray.opacity(0.3))
-                                .frame(height: 3)
-
-                            // Progress fill
-                            Rectangle()
-                                .fill(room.state == .playing ? Color.green : Color.orange)
-                                .frame(width: max(0, min(geometry.size.width * progressValue, geometry.size.width)), height: 3)
-                        }
-                        .cornerRadius(1.5)
-                    }
-                    .frame(height: 3)
-
-                    // Time labels
-                    HStack {
-                        Text(formatTime(validPosition))
-                            .font(.system(size: 11, weight: .medium))
-                        Spacer()
-                        Text("-\(formatTime(remainingTime))")
-                            .font(.system(size: 11, weight: .medium))
-                    }
-                    .foregroundColor(.secondary)
-                }
-                .padding(.top, 4)
-            }
-        }
-    }
-
-    // MARK: - Live Progress Calculation
-
-    /// Safely calculates the current playback position, returning nil if any values are invalid
-    private func calculateSafePosition(for room: WatchPartyRoom, runtime: TimeInterval) -> TimeInterval? {
-        if room.state == .playing {
-            // For playing rooms: calculate elapsed time since last activity (play/pause event)
-            let elapsed = currentTime.timeIntervalSince(room.lastActivity)
-
-            // Validate elapsed time is reasonable
-            guard elapsed >= 0, elapsed < 86400, elapsed.isFinite else {
-                return nil
-            }
-
-            // Add initial playback position if available
-            let initialPos = room.playbackPosition ?? 0
-            guard initialPos.isFinite, initialPos >= 0 else {
-                return nil
-            }
-
-            return min(initialPos + elapsed, runtime)
-        } else {
-            // For paused/lobby/ended rooms: use frozen playback position
-            guard let frozenPos = room.playbackPosition,
-                  frozenPos.isFinite,
-                  frozenPos >= 0 else {
-                return nil
-            }
-            return min(frozenPos, runtime)
-        }
-    }
-
-
-
-    private func formatTime(_ interval: TimeInterval) -> String {
-        let hours = Int(interval) / 3600
-        let minutes = Int(interval) / 60 % 60
-        let seconds = Int(interval) % 60
-        if hours > 0 {
-            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
-        } else {
-            return String(format: "%d:%02d", minutes, seconds)
-        }
-    }
-
-    @ViewBuilder
-    private func posterView(for room: WatchPartyRoom) -> some View {
-        if let posterURL = room.posterURL, !posterURL.isEmpty {
-            let fullURL = posterURL.starts(with: "http") ? posterURL : "https://image.tmdb.org/t/p/w200\(posterURL)"
-            AsyncImage(url: URL(string: fullURL)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                case .failure, .empty:
-                    placeholderPoster
-                @unknown default:
-                    placeholderPoster
-                }
-            }
-        } else {
-            placeholderPoster
-        }
-    }
-
-    private var placeholderPoster: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 8)
-                .fill(Color.gray.opacity(0.2))
-            Image(systemName: "film")
-                .font(.system(size: 32))
-                .foregroundColor(.gray)
-        }
-    }
-
-    private func timeAgoString(for room: WatchPartyRoom) -> String {
-        let now = Date()
-        let interval = now.timeIntervalSince(room.createdAt)
-
-        if interval < 60 {
-            return "Just now"
-        } else if interval < 3600 {
-            let minutes = Int(interval / 60)
-            return "\(minutes)m ago"
-        } else if interval < 86400 {
-            let hours = Int(interval / 3600)
-            return "\(hours)h ago"
-        } else {
-            let days = Int(interval / 86400)
-            return "\(days)d ago"
-        }
-    }
-
-    private func sourceQualityColor(for room: WatchPartyRoom) -> Color {
-        guard let sourceQuality = room.sourceQuality else { return .gray }
-        switch sourceQuality {
-        case "BluRay":
-            return .blue
-        case "WEB-DL", "WEBRip":
-            return .green
-        case "CAM", "TS":
-            return .red
-        case "HDTV", "DVDRip":
-            return .orange
-        default:
-            return .gray
-        }
-    }
-
-    func statusColor(for room: WatchPartyRoom) -> Color {
-        switch room.state {
-        case .lobby:
-            return .orange
-        case .playing:
-            return .green
-        case .paused:
-            return .yellow
-        case .ended:
-            return .gray
-        }
-    }
-
-    func statusText(for room: WatchPartyRoom) -> String {
-        switch room.state {
-        case .lobby:
-            return "Lobby"
-        case .playing:
-            return "Playing"
-        case .paused:
-            return "Paused"
-        case .ended:
-            return "Ended"
-        }
-    }
-}
 
 struct JoinRoomDialog: View {
     @Binding var roomCodeInput: String

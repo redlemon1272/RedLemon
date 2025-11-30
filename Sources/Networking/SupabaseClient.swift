@@ -8,10 +8,10 @@ class SupabaseClient {
     private let baseURL: String
     private let apiKey: String
     private let session: URLSession
-    
+
     /// Auth context for tracking current user
     var auth: AuthContext { AuthContext.shared }
-    
+
     /// Edge Functions API
     var functions: EdgeFunctionsAPI { EdgeFunctionsAPI(baseURL: baseURL, apiKey: apiKey) }
 
@@ -85,12 +85,12 @@ class SupabaseClient {
     }
 
     // MARK: - Query Builder
-    
+
     /// Create a query builder for a table
     func from(_ table: String) -> QueryBuilder {
         return QueryBuilder(client: self, table: table)
     }
-    
+
     // MARK: - Helper Methods
 
     internal func makeRequest(
@@ -122,7 +122,7 @@ class SupabaseClient {
         }
 
         let (data, response) = try await session.data(for: request)
-        
+
         // DEBUG: Print raw JSON for room requests to verify season/episode
         if path.contains("/rooms") {
             if let jsonString = String(data: data, encoding: .utf8) {
@@ -142,7 +142,7 @@ class SupabaseClient {
 
         return data
     }
-    
+
     /// Get trusted server time from Supabase (via HTTP Date header)
     func getServerTime() async throws -> Date {
         // Use a lightweight HEAD request to the users table (limit=1)
@@ -152,26 +152,36 @@ class SupabaseClient {
         request.httpMethod = "HEAD"
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let (_, response) = try await session.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
+
+        guard let httpResponse = response as? HTTPURLResponse else {
+            print("❌ TimeService: Response is not HTTPURLResponse")
             throw SupabaseError.invalidResponse
         }
-        
+
+        guard let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
+            print("❌ TimeService: No 'Date' header in response")
+            print("   Available headers: \(httpResponse.allHeaderFields.keys)")
+            throw SupabaseError.invalidResponse
+        }
+
+        print("⏰ TimeService: Received Date header: '\(dateString)'")
+
         // Parse HTTP Date header (RFC 1123)
-        // Example: Tue, 15 Nov 1994 08:12:31 GMT
+        // Example: Sun, 30 Nov 2025 06:37:32 GMT
         let formatter = DateFormatter()
-        formatter.dateFormat = "E, d MMM yyyy HH:mm:ss GMT"
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        
+
         guard let date = formatter.date(from: dateString) else {
             print("❌ Failed to parse server date: \(dateString)")
+            print("   Expected format: EEE, dd MMM yyyy HH:mm:ss zzz")
             throw SupabaseError.invalidResponse
         }
-        
+
+        print("✅ TimeService: Parsed server time: \(date)")
         return date
     }
 
@@ -231,10 +241,10 @@ class SupabaseClient {
                 body: ["last_seen": ISO8601DateFormatter().string(from: Date())],
                 query: ["id": "eq.\(user.id.uuidString)"]
             )
-            
+
             // Set auth context
             auth.currentUser = AuthUser(id: user.id, username: user.username)
-            
+
             return user
         }
 
@@ -249,7 +259,7 @@ class SupabaseClient {
         guard let user = newUsers.first else {
             throw SupabaseError.userCreationFailed
         }
-        
+
         // Set auth context
         auth.currentUser = AuthUser(id: user.id, username: user.username)
 
@@ -629,11 +639,11 @@ struct Friendship: Codable, Identifiable {
     let userId2: UUID
     let status: FriendshipStatus
     let createdAt: Date
-    
+
     // Joined data (optional)
     let fromUser: SupabaseUser?
     let toUser: SupabaseUser?
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId1 = "user_id_1"
@@ -656,41 +666,41 @@ enum FriendshipStatus: String, Codable {
 // MARK: - Social Features Extensions
 
 extension SupabaseClient {
-    
+
     // MARK: - Friendships
-    
+
     /// Get list of accepted friends (Profiles)
     func getFriends(userId: UUID) async throws -> [SupabaseUser] {
         // 1. Get all accepted friendships involving this user
         let path = "/friendships?or=(user_id_1.eq.\(userId),user_id_2.eq.\(userId))&status=eq.accepted&select=*"
         let data = try await makeRequest(path: path, method: "GET")
         let friendships = try jsonDecoder.decode([Friendship].self, from: data)
-        
+
         // 2. Extract friend IDs
         let friendIds = friendships.compactMap { friendship -> UUID? in
             if friendship.userId1 == userId { return friendship.userId2 }
             if friendship.userId2 == userId { return friendship.userId1 }
             return nil
         }
-        
+
         if friendIds.isEmpty { return [] }
-        
+
         // 3. Fetch profiles for these IDs from 'users' table
         let idsString = friendIds.map { $0.uuidString }.joined(separator: ",")
 
         let usersPath = "/users?id=in.(\(idsString))"
         let usersData = try await makeRequest(path: usersPath, method: "GET")
-        
+
         return try jsonDecoder.decode([SupabaseUser].self, from: usersData)
     }
-    
+
     /// Get pending friend requests received by user
     func getFriendRequests(userId: UUID) async throws -> [Friendship] {
         // Fetch pending requests where user is receiver (user_id_2)
         let path = "/friendships?user_id_2=eq.\(userId)&status=eq.pending"
         let data = try await makeRequest(path: path, method: "GET")
         var friendships = try jsonDecoder.decode([Friendship].self, from: data)
-        
+
         // Fetch profiles for senders from 'users' table
         let senderIds = friendships.map { $0.userId1 }
         if !senderIds.isEmpty {
@@ -698,7 +708,7 @@ extension SupabaseClient {
             let usersPath = "/users?id=in.(\(idsString))"
             let usersData = try await makeRequest(path: usersPath, method: "GET")
             let profiles = try? jsonDecoder.decode([SupabaseUser].self, from: usersData)
-            
+
             // Reconstruct friendships with profiles
             friendships = friendships.map { friendship in
                 let profile = profiles?.first(where: { $0.id == friendship.userId1 })
@@ -713,41 +723,41 @@ extension SupabaseClient {
                 )
             }
         }
-        
+
         return friendships
     }
-    
+
     func sendFriendRequest(fromUserId: UUID, toUsername: String) async throws {
         // 1. Find user by username
         let users = try await searchUsers(username: toUsername)
         guard let targetUser = users.first else {
             throw SupabaseError.userNotFound
         }
-        
+
         if targetUser.id == fromUserId {
             throw SupabaseError.httpError(400, "Cannot add yourself")
         }
-        
+
         // 2. Send request
         try await sendFriendRequest(from: fromUserId, to: targetUser.id)
     }
-    
+
     func acceptFriendRequest(requestId: UUID, userId: UUID, friendId: UUID) async throws {
         try await updateFriendshipStatus(id: requestId, status: .accepted)
     }
-    
+
     func declineFriendRequest(requestId: UUID) async throws {
         // Delete the row
         let path = "/friendships?id=eq.\(requestId)"
         _ = try await makeRequest(path: path, method: "DELETE")
-        
+
 
     }
-    
+
     // Removed duplicate searchUsers (already exists in SupabaseClient)
-    
+
     // Internal helpers
-    
+
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
         let path = "/friendships"
         let body: [String: Any] = [
@@ -755,22 +765,22 @@ extension SupabaseClient {
             "user_id_2": receiverId.uuidString,
             "status": "pending"
         ]
-        
+
         _ = try await makeRequest(path: path, method: "POST", body: body)
-        
+
 
     }
-    
+
     func updateFriendshipStatus(id: UUID, status: FriendshipStatus) async throws {
         let path = "/friendships?id=eq.\(id)"
         let body = ["status": status.rawValue]
         _ = try await makeRequest(path: path, method: "PATCH", body: body)
-        
+
 
     }
-    
+
     // MARK: - Direct Messages
-    
+
     /// Create friendship directly (bypasses friend request system)
     /// Used for auto-friending lemontom (MySpace Tom style)
     func createFriendship(userId1: UUID, userId2: UUID) async throws {
@@ -795,14 +805,14 @@ extension SupabaseClient {
             ]
         )
     }
-    
+
     func getDirectMessages(userId: UUID, with friendId: UUID) async throws -> [DirectMessage] {
         let query = "or=(and(sender_id.eq.\(userId),receiver_id.eq.\(friendId)),and(sender_id.eq.\(friendId),receiver_id.eq.\(userId)))&order=created_at.asc"
         let path = "/direct_messages?\(query)"
         let data = try await makeRequest(path: path, method: "GET")
         return try jsonDecoder.decode([DirectMessage].self, from: data)
     }
-    
+
     func sendDirectMessage(from senderId: UUID, to receiverId: UUID, content: String) async throws {
         let path = "/direct_messages"
         let body: [String: Any] = [
@@ -810,9 +820,9 @@ extension SupabaseClient {
             "receiver_id": receiverId.uuidString,
             "content": content
         ]
-        
+
         _ = try await makeRequest(path: path, method: "POST", body: body)
-        
+
 
     }
 }
@@ -822,9 +832,9 @@ extension SupabaseClient {
 /// Simple auth context to track current user
 class AuthContext {
     static let shared = AuthContext()
-    
+
     private init() {}
-    
+
     /// Current user (set after login/signup)
     var currentUser: AuthUser?
 }
@@ -840,41 +850,41 @@ struct AuthUser {
 class EdgeFunctionsAPI {
     private let baseURL: String
     private let apiKey: String
-    
+
     init(baseURL: String, apiKey: String) {
         self.baseURL = baseURL
         self.apiKey = apiKey
     }
-    
+
     /// Invoke an edge function
     func invoke(_ functionName: String, options: FunctionInvokeOptions? = nil) async throws -> Data {
         let urlString = "\(baseURL)/functions/v1/\(functionName)"
-        
+
         guard let url = URL(string: urlString) else {
             throw SupabaseError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         if let body = options?.body {
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
         }
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse
         }
-        
+
         guard (200...299).contains(httpResponse.statusCode) else {
             let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"
             throw SupabaseError.httpError(httpResponse.statusCode, errorString)
         }
-        
+
         return data
     }
 }
@@ -892,18 +902,18 @@ class QueryBuilder {
     private var selectFields: String = "*"
     private var filters: [String] = []
     private var updateData: [String: Any]?
-    
+
     init(client: SupabaseClient, table: String) {
         self.client = client
         self.table = table
     }
-    
+
     /// Select specific fields
     func select(_ fields: String = "*") -> QueryBuilder {
         self.selectFields = fields
         return self
     }
-    
+
     /// Add equality filter
     func eq(_ column: String, value: Any) -> QueryBuilder {
         let valueStr: String
@@ -917,21 +927,21 @@ class QueryBuilder {
         filters.append("\(column)=eq.\(valueStr)")
         return self
     }
-    
+
     /// Set data for update
     func update(_ data: [String: Any]) -> QueryBuilder {
         self.updateData = data
         return self
     }
-    
+
     /// Execute the query
     func execute() async throws -> QueryResult {
         guard let client = client else {
             throw SupabaseError.invalidResponse
         }
-        
+
         var query: [String: String] = [:]
-        
+
         if !filters.isEmpty {
             for filter in filters {
                 let parts = filter.split(separator: "=", maxSplits: 1)
@@ -940,7 +950,7 @@ class QueryBuilder {
                 }
             }
         }
-        
+
         if let updateData = updateData {
             // PATCH request
             query["select"] = selectFields
@@ -966,7 +976,7 @@ class QueryBuilder {
 
 struct QueryResult {
     let data: Data
-    
+
     /// Decode the result as an array
     var value: [Any] {
         get throws {

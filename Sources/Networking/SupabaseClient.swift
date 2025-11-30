@@ -305,13 +305,16 @@ class SupabaseClient {
     // MARK: - Room Management
 
     /// Get all public rooms
-    func getAllRooms() async throws -> [SupabaseRoom] {
+    /// Get all public rooms with pagination
+    func getAllRooms(limit: Int = 20, offset: Int = 0) async throws -> [SupabaseRoom] {
         let data = try await makeRequest(
             path: "/rooms",
             query: [
                 "is_public": "eq.true",
                 "select": "*",
-                "order": "last_activity.desc"
+                "order": "last_activity.desc",
+                "limit": String(limit),
+                "offset": String(offset)
             ]
         )
         return try jsonDecoder.decode([SupabaseRoom].self, from: data)

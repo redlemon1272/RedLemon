@@ -161,19 +161,98 @@ ALTER TABLE chat_messages ADD COLUMN language VARCHAR(10);
 - Modify: `Sources/Networking/SupabaseClient.swift`
 - New: `Sources/Services/LanguageDetectionService.swift`
 
-#### Phase 4: Enhanced Discovery (Weeks 7-8)
+#### Phase 3.5: Language-Specific Events (Weeks 6-7)
+**Objectives**: Implement separate event configurations per language
+
+**Rationale**: 
+Language-specific events provide superior user experience by ensuring:
+- **Verified Audio Availability**: All movies in each language's event list have confirmed audio tracks in that language
+- **Clean Chat Experience**: Language-specific rooms prevent mixed-language confusion
+- **Cultural Curation**: Content selection tailored to each language's audience preferences
+- **Quality Over Quantity**: Curated lists with guaranteed language support vs. larger lists with inconsistent availability
+
+**Implementation Strategy**:
+
+**Separate Event Configs Approach** (Recommended):
+```swift
+// EventsConfigService enhancement
+func fetchMovieEventsConfig(language: AppLanguage) async throws -> EventsConfig {
+    let configType = "movie_events_\(language.rawValue)"
+    return try await fetchConfig(type: configType)
+}
+```
+
+**Supabase Structure**:
+- `config_type: "movie_events_en"` - English events (120 movies)
+- `config_type: "movie_events_pt-BR"` - Portuguese events (100 movies)
+- `config_type: "movie_events_es"` - Spanish events (110 movies)
+- `config_type: "movie_events_fr"` - French events (90 movies)
+
+**Content Curation Strategy**:
+1. Start with English baseline list
+2. Filter for verified audio availability in target language
+3. Add language-specific popular content (e.g., Spanish-language films for Spanish users)
+4. Remove culturally inappropriate content per region
+5. Verify subtitle availability as backup
+
+**Room ID Strategy**:
+```swift
+// Language-specific room IDs prevent cross-language mixing
+let roomId = "event_\(event.mediaItem.id)_\(userLanguage.rawValue)"
+// Example: "event_tt0468569_pt-BR" vs "event_tt0468569_en"
+```
+
+**Script Automation**:
+```bash
+# Generate configs for all languages
+swift Scripts/generate_events_config.swift --language en
+swift Scripts/generate_events_config.swift --language pt-BR
+swift Scripts/generate_events_config.swift --language es
+swift Scripts/generate_events_config.swift --language fr
+```
+
+**Expected List Sizes**:
+- English: 120 movies (baseline, broadest availability)
+- Portuguese: 100 movies (good multi-language support)
+- Spanish: 110 movies (includes Spanish-language films)
+- French: 90 movies (selective, quality-focused)
+
+**Benefits**:
+- Users always get content in their preferred language
+- No "audio unavailable" disappointments
+- Independent versioning per language
+- Easy to add new languages
+- Better community building within language groups
+
+**Deliverables**:
+- Language-aware event configuration system
+- Modified `generate_events_config.swift` with language parameter
+- Language-specific audio verification logic
+- Separate event configs uploaded to Supabase
+- Updated EventsView to fetch language-specific events
+
+**Key Files**:
+- Modify: `Scripts/generate_events_config.swift`
+- Modify: `Sources/Services/EventsConfigService.swift`
+- Modify: `Sources/Features/Browse/EventsView.swift`
+
+**Database Changes**:
+```sql
+-- No schema changes needed, uses existing events_config table
+-- Just different config_type values per language
+```
+#### Phase 4: Enhanced Discovery (Weeks 8-9)
 **Objectives**: Improve content discovery with language preferences
 
 **Deliverables**:
-- Multi-language events configuration
 - Language-filtered room discovery
 - Smart room recommendations
+- Cross-language exploration features
 
 **Key Files**:
-- Modify: `Sources/Services/EventsConfigService.swift`
 - New: `Sources/Features/LanguageRoomDiscovery/LanguageRoomDiscoveryView.swift`
 
-#### Phase 5: Complete Localization (Weeks 9-10)
+#### Phase 5: Complete Localization (Weeks 10-12)
 **Objectives**: Full UI localization and advanced features
 
 **Deliverables**:

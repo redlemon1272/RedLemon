@@ -43,32 +43,56 @@ class EventsConfigService {
     private func fetchConfig(type: String) async throws -> EventsConfig {
         let cachedVersion = UserDefaults.standard.integer(forKey: "\(versionKey)_\(type)")
         
-        // Try to load from cache first
-        if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"),
-           let cachedConfig = try? JSONDecoder().decode(EventsConfig.self, from: cachedData),
-           cachedVersion > 0 {
-            print("✅ [EventsConfig] Using cached \(type) config (version \(cachedVersion), \(cachedConfig.movies.count) movies)")
+        // ALWAYS check server for latest version first
+        print("📡 [EventsConfig] Checking server for \(type) config version...")
+        
+        do {
+            let serverConfig = try await fetchFromSupabase(type: type)
             
-            // Fetch latest version in background to check for updates
-            Task.detached {
-                await self.checkForUpdates(type: type, currentVersion: cachedVersion)
+            // If server version is newer than cache, use server version
+            if serverConfig.version > cachedVersion {
+                print("🆕 [EventsConfig] Server has newer version \(serverConfig.version) (cached: \(cachedVersion))")
+                
+                // Cache the new version
+                if let encoded = try? JSONEncoder().encode(serverConfig) {
+                    UserDefaults.standard.set(encoded, forKey: "\(cacheKey)_\(type)")
+                    UserDefaults.standard.set(serverConfig.version, forKey: "\(versionKey)_\(type)")
+                    print("💾 [EventsConfig] Cached new version \(serverConfig.version)")
+                }
+                
+                return serverConfig
             }
             
-            return cachedConfig
+            // Server version matches cache, use cached data if available
+            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"),
+               let cachedConfig = try? JSONDecoder().decode(EventsConfig.self, from: cachedData),
+               cachedVersion > 0 {
+                print("✅ [EventsConfig] Using cached \(type) config (version \(cachedVersion), \(cachedConfig.movies.count) movies)")
+                return cachedConfig
+            }
+            
+            // No valid cache, use server config
+            print("💾 [EventsConfig] No valid cache, using server config")
+            if let encoded = try? JSONEncoder().encode(serverConfig) {
+                UserDefaults.standard.set(encoded, forKey: "\(cacheKey)_\(type)")
+                UserDefaults.standard.set(serverConfig.version, forKey: "\(versionKey)_\(type)")
+            }
+            return serverConfig
+            
+        } catch {
+            // Server fetch failed, try to use cache as fallback
+            print("⚠️ [EventsConfig] Server fetch failed: \(error)")
+            
+            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"),
+               let cachedConfig = try? JSONDecoder().decode(EventsConfig.self, from: cachedData),
+               cachedVersion > 0 {
+                print("📦 [EventsConfig] Using cached \(type) config as fallback (version \(cachedVersion))")
+                return cachedConfig
+            }
+            
+            // No cache available, throw error
+            throw error
         }
-        
-        // No cache, fetch from server
-        print("📡 [EventsConfig] Fetching \(type) config from Supabase...")
-        let config = try await fetchFromSupabase(type: type)
-        
-        // Cache the result
-        if let encoded = try? JSONEncoder().encode(config) {
-            UserDefaults.standard.set(encoded, forKey: "\(cacheKey)_\(type)")
-            UserDefaults.standard.set(config.version, forKey: "\(versionKey)_\(type)")
-            print("💾 [EventsConfig] Cached \(type) config version \(config.version)")
-        }
-        
-        return config
     }
     
     private func fetchFromSupabase(type: String) async throws -> EventsConfig {

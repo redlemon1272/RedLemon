@@ -14,7 +14,7 @@ import Foundation
 
 let supabaseURL = "https://nhvsojszwfvcinkyvzmf.supabase.co"
 let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NjE5MTYsImV4cCI6MjA3ODEzNzkxNn0.1u8C04lu1r_Jsy7m8bdGD-dT33Ml1EautcPNib93bWw"
-let configVersion = 1 // Increment this when you want to update the config
+let configVersion = 3 // Increment this when you want to update the config
 
 // MARK: - Models
 
@@ -162,7 +162,15 @@ let blacklistedTitles = [
     "The White House Effect", "Animal Kingdom", "The Ugly Stepsister",
     "ONE SHOT with Ed Sheeran", "Dark City", "Free Guy",
     "Arlington Road", "Margin Call", "Glass Onion",
-    "L.A. Confidential", "Master and Commander"
+    "L.A. Confidential", "Master and Commander",
+    // User requested removals (2025-11-30)
+    "Spider-Man: No Way Home", "Sidney", "Dungeons & Dragons",
+    "Left-Handed Girl", "Back to the Future", "Bono: Stories of Surrender",
+    "Downey Wrote That", "Sangre Del Toro", "September 5",
+    "Come See Me in the Good Light", "My Cousin Vinny", "American Made",
+    "Blue Ruin", "Knives Out", "Bodyguard of Lies",
+    "A Knight's Tale", "Brimstone", "The Gentlemen",
+    "The Hunt for Red October", "Deaf President Now!", "Stiller & Meara"
 ]
 
 let validMetas = shuffledMetas.filter { meta in
@@ -212,14 +220,45 @@ let validMetas = shuffledMetas.filter { meta in
 
 print("📊 Filtered to \(validMetas.count) high-quality movies")
 
-// Step 5: Convert to MediaItems
-print("\n📦 Step 5: Converting to MediaItem format...")
+// Step 5: Fetch exact runtimes from Cinemeta
+print("\n📦 Step 5: Fetching exact runtimes from Cinemeta...")
 
-let mediaItems: [MediaItem] = validMetas.prefix(200).map { meta in
+var mediaItemsWithRuntimes: [MediaItem] = []
+let cinemataBaseURL = "https://v3-cinemeta.strem.io"
+
+for (index, meta) in validMetas.prefix(200).enumerated() {
     let backgroundURL = meta.background ?? "https://images.metahub.space/background/medium/\(meta.id)/img"
     let logoURL = meta.logo ?? "https://images.metahub.space/logo/medium/\(meta.id)/img"
     
-    return MediaItem(
+    // Fetch runtime from Cinemeta
+    var runtime: String? = nil
+    do {
+        let metaURL = URL(string: "\(cinemataBaseURL)/meta/movie/\(meta.id).json")!
+        let (data, _) = try await URLSession.shared.data(from: metaURL)
+        
+        struct CinemetaMetaResponse: Codable {
+            let meta: CinemetaMetaDetail
+        }
+        
+        struct CinemetaMetaDetail: Codable {
+            let runtime: String?
+        }
+        
+        let response = try JSONDecoder().decode(CinemetaMetaResponse.self, from: data)
+        runtime = response.meta.runtime
+        
+        if let rt = runtime {
+            print("   ✅ [\(index + 1)/200] \(meta.name): \(rt)")
+        } else {
+            print("   ⚠️  [\(index + 1)/200] \(meta.name): No runtime, using default 120 min")
+            runtime = "120 min"
+        }
+    } catch {
+        print("   ⚠️  [\(index + 1)/200] \(meta.name): Failed to fetch runtime, using default 120 min")
+        runtime = "120 min"
+    }
+    
+    mediaItemsWithRuntimes.append(MediaItem(
         id: meta.id,
         type: meta.type,
         name: meta.name,
@@ -231,18 +270,37 @@ let mediaItems: [MediaItem] = validMetas.prefix(200).map { meta in
         year: nil,
         imdbRating: meta.imdbRating,
         genres: meta.genre,
-        runtime: nil // Will be fetched on-demand
-    )
+        runtime: runtime
+    ))
+    
+    // Small delay to avoid rate limiting
+    if index % 10 == 9 {
+        try await Task.sleep(nanoseconds: 500_000_000) // 0.5 second pause every 10 requests
+    }
 }
 
-print("✅ Generated \(mediaItems.count) movies for events")
+print("✅ Generated \(mediaItemsWithRuntimes.count) movies with exact runtimes")
 
-// Step 6: Create config object
-print("\n📋 Step 6: Creating events config...")
+// Step 6: Calculate precise cycle duration based on actual runtimes
+print("\n📋 Step 6: Calculating precise cycle duration...")
+
+var totalCycleDuration: TimeInterval = 0
+let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
+
+for movie in mediaItemsWithRuntimes {
+    let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+    let movieDuration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies
+    totalCycleDuration += movieDuration
+}
+
+let cycleDurationHours = Int(ceil(totalCycleDuration / 3600))
+
+print("   Total cycle duration: \(Int(totalCycleDuration / 3600)) hours (\(Int(totalCycleDuration / 60)) minutes)")
+print("   Average movie slot: \(Int(totalCycleDuration / TimeInterval(mediaItemsWithRuntimes.count) / 60)) minutes")
 
 let config = EventsConfig(
-    movies: mediaItems,
-    cycle_duration_hours: 200,
+    movies: mediaItemsWithRuntimes,
+    cycle_duration_hours: cycleDurationHours,
     buffer_between_movies_seconds: 600,
     epoch_timestamp: 1704067200,
     generated_at: ISO8601DateFormatter().string(from: Date())
@@ -251,21 +309,41 @@ let config = EventsConfig(
 // Step 7: Upload to Supabase
 print("\n☁️  Step 7: Uploading to Supabase...")
 
-// Create payload with just the data field (for PATCH)
-struct UpdatePayload: Codable {
+// First, delete any existing config for this type (we'll replace it)
+print("   🗑️  Deleting old config...")
+let deleteURL = URL(string: "\(supabaseURL)/rest/v1/events_config?config_type=eq.movie_events")!
+var deleteRequest = URLRequest(url: deleteURL)
+deleteRequest.httpMethod = "DELETE"
+deleteRequest.setValue(supabaseAnonKey, forHTTPHeaderField: "apikey")
+deleteRequest.setValue("Bearer \(supabaseAnonKey)", forHTTPHeaderField: "Authorization")
+
+do {
+    let (_, deleteResponse) = try await URLSession.shared.data(for: deleteRequest)
+    if let httpResponse = deleteResponse as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) {
+        print("   ✅ Deleted old config")
+    }
+} catch {
+    print("   ⚠️  Delete failed (might not exist): \(error)")
+}
+
+// Now insert the new config
+struct InsertPayload: Codable {
+    let config_type: String
+    let version: Int
     let data: EventsConfig
     let is_active: Bool
 }
 
-let updatePayload = UpdatePayload(
+let insertPayload = InsertPayload(
+    config_type: "movie_events",
+    version: configVersion,
     data: config,
     is_active: true
 )
 
-// Use PATCH to update the existing row instead of POST to insert
-let uploadURL = URL(string: "\(supabaseURL)/rest/v1/events_config?config_type=eq.movie_events&version=eq.\(configVersion)")!
+let uploadURL = URL(string: "\(supabaseURL)/rest/v1/events_config")!
 var request = URLRequest(url: uploadURL)
-request.httpMethod = "PATCH"
+request.httpMethod = "POST"
 request.setValue(supabaseAnonKey, forHTTPHeaderField: "apikey")
 request.setValue("Bearer \(supabaseAnonKey)", forHTTPHeaderField: "Authorization")
 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -273,7 +351,7 @@ request.setValue("return=representation", forHTTPHeaderField: "Prefer")
 
 let encoder = JSONEncoder()
 encoder.outputFormatting = .prettyPrinted
-request.httpBody = try encoder.encode(updatePayload)
+request.httpBody = try encoder.encode(insertPayload)
 
 do {
     let (data, response) = try await URLSession.shared.data(for: request)
@@ -285,13 +363,13 @@ do {
     
     if (200...299).contains(httpResponse.statusCode) {
         print("✅ Successfully updated config version \(configVersion)")
-        print("   Movies: \(mediaItems.count)")
-        print("   Cycle duration: 200 hours")
+        print("   Movies: \(mediaItemsWithRuntimes.count)")
+        print("   Cycle duration: \(cycleDurationHours) hours (calculated from exact runtimes)")
         
-        // Print first 10 movies
+        // Print first 10 movies with runtimes
         print("\n📽️  First 10 movies:")
-        for (index, movie) in mediaItems.prefix(10).enumerated() {
-            print("   \(index + 1). \(movie.name) (\(movie.imdbRating ?? "N/A"))")
+        for (index, movie) in mediaItemsWithRuntimes.prefix(10).enumerated() {
+            print("   \(index + 1). \(movie.name) - \(movie.runtime ?? "N/A") (\(movie.imdbRating ?? "N/A"))")
         }
     } else {
         let errorString = String(data: data, encoding: .utf8) ?? "Unknown error"

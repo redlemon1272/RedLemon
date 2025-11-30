@@ -58,8 +58,8 @@ class MPVWrapper: ObservableObject {
         // Use libmpv render API with optimized settings for Intel Macs
         mpv_set_option_string(handle, "vo", "libmpv")
 
-        // Hardware decoding - TRY DISABLING for Pro freeze debugging
-        mpv_set_option_string(handle, "hwdec", "no") // Was "auto"
+        // Hardware decoding - Enable for smooth x265 playback
+        mpv_set_option_string(handle, "hwdec", "auto")
 
         // Explicit VideoToolbox support for macOS (better for Intel Macs)
         mpv_set_option_string(handle, "hwdec-codecs", "all")
@@ -95,10 +95,6 @@ class MPVWrapper: ObservableObject {
         // Language preferences: English audio and subtitles by default
         mpv_set_option_string(handle, "alang", "eng,en,english")
         mpv_set_option_string(handle, "slang", "eng,en,english")
-
-        // CRITICAL: Enable subs even when audio language matches subtitle language
-        // Without this, embedded English subs won't show when audio is also English
-        mpv_set_option_string(handle, "subs-with-matching-audio", "yes")
 
         let initResult = mpv_initialize(handle)
         guard initResult >= 0 else {
@@ -326,7 +322,7 @@ class MPVWrapper: ObservableObject {
             // This ensures MPV initializes the file (firing FILE_LOADED and updating duration)
             // but starts in a paused state.
             mpv_set_property_string(handle, "pause", "yes")
-            
+
             // Load the file normally
             let loadCommand = "loadfile \"\(url)\""
             NSLog("🎬 MPV executing: %@", loadCommand)
@@ -344,6 +340,9 @@ class MPVWrapper: ObservableObject {
             }
         } else {
             // Normal autoplay mode
+            // CRITICAL FIX: Explicitly set pause=no to ensure we don't inherit paused state from previous session
+            mpv_set_property_string(handle, "pause", "no")
+
             let command = "loadfile \"\(url)\""
             NSLog("🎬 MPV executing command: %@", command)
             let result = mpv_command_string(handle, command)
@@ -667,19 +666,21 @@ class MPVWrapper: ObservableObject {
         return tracks
     }
 
-    /// Auto-select English audio track (called on FILE_LOADED event)
+    /// Auto-select best audio track using scoring system (Language + Channels - Commentary)
     private func autoSelectEnglishAudio() {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        print("🔍 AUDIO AUTO-SELECT: Starting audio track scan during FILE_LOADED event")
+        print("🔍 AUDIO AUTO-SELECT: Starting smart audio track scan")
 
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
-        print("🔍 AUDIO AUTO-SELECT: Found \(trackCount) total tracks")
 
-        var englishAudioTrack: (id: Int, name: String)? = nil
-        var surroundAudioTrack: (id: Int, name: String)? = nil
-        var firstAudioTrack: (id: Int, name: String)? = nil
+        // Keywords to AVOID
+        let commentaryKeywords = ["commentary", "narration", "description", "director", "comment", "visually impaired", "audio description"]
+
+        var bestTrackId: Int64 = -1
+        var bestScore: Int = -99999
+        var bestTrackName: String = ""
 
         // Scan all audio tracks
         for i in 0..<Int(trackCount) {
@@ -697,9 +698,7 @@ class MPVWrapper: ObservableObject {
             // Get track ID
             let idKey = "track-list/\(i)/id"
             var trackId: Int64 = 0
-            guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0 else {
-                continue
-            }
+            guard mpv_get_property(handle, idKey, MPV_FORMAT_INT64, &trackId) >= 0 else { continue }
 
             // Get language
             let langKey = "track-list/\(i)/lang"
@@ -717,52 +716,53 @@ class MPVWrapper: ObservableObject {
                 : nil
             mpv_free(titleStr)
 
+            // Get channel count
+            let channelsKey = "track-list/\(i)/audio-channels"
+            var channels: Int64 = 2 // Default to stereo if unknown
+            mpv_get_property(handle, channelsKey, MPV_FORMAT_INT64, &channels)
+
             let displayName = title ?? lang ?? "Track \(trackId)"
             let langLower = lang?.lowercased() ?? ""
             let titleLower = title?.lowercased() ?? ""
 
-            print("🔍 AUDIO AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")'")
+            // --- SCORING SYSTEM ---
+            var score = 0
 
-            // Save first audio track as fallback
-            if firstAudioTrack == nil {
-                firstAudioTrack = (Int(trackId), displayName)
-            }
-
-            // Check if English by language tag
+            // 1. Language Score (+1000 for English)
             let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
+            if isEnglish { score += 1000 }
 
-            if isEnglish {
-                if englishAudioTrack == nil {
-                    englishAudioTrack = (Int(trackId), displayName)
-                    print("🎵 Found English audio track: \(displayName) (ID: \(trackId))")
-                }
+            // 2. Channel Score (+10 per channel)
+            // 5.1 (6ch) = +60, Stereo (2ch) = +20
+            score += Int(channels) * 10
+
+            // 3. Commentary Penalty (-10000)
+            let isCommentary = commentaryKeywords.contains { keyword in
+                titleLower.contains(keyword)
             }
+            if isCommentary { score -= 10000 }
 
-            // Check if surround (typically English in dual-audio releases)
-            let isSurround = titleLower.contains("surround") ||
-                            titleLower.contains("5.1") ||
-                            titleLower.contains("7.1") ||
-                            titleLower.contains("atmos")
+            // 4. Default Flag Bonus (+5) - Tiebreaker
+            let defaultKey = "track-list/\(i)/default"
+            var isDefaultFlag: Int64 = 0
+            mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultFlag)
+            if isDefaultFlag == 1 { score += 5 }
 
-            if isSurround && surroundAudioTrack == nil {
-                surroundAudioTrack = (Int(trackId), displayName)
-                print("🔊 Found surround audio track: \(displayName) (ID: \(trackId))")
+            print("🔍 Track \(trackId): \(displayName) | \(channels)ch | English: \(isEnglish) | Commentary: \(isCommentary) -> Score: \(score)")
+
+            if score > bestScore {
+                bestScore = score
+                bestTrackId = trackId
+                bestTrackName = displayName
             }
         }
 
-        // Priority: English tagged > Surround > First track
-        if let english = englishAudioTrack {
-            print("✅ Auto-selecting English audio: \(english.name) (ID: \(english.id))")
-            var trackId = Int64(english.id)
-            mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &trackId)
-        } else if let surround = surroundAudioTrack {
-            print("ℹ️ No English-tagged audio, selecting surround: \(surround.name) (ID: \(surround.id))")
-            var trackId = Int64(surround.id)
-            mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &trackId)
-        } else if let first = firstAudioTrack {
-            print("ℹ️ Using default first audio track: \(first.name) (ID: \(first.id))")
+        if bestTrackId != -1 {
+            print("🏆 Selected best audio track: \(bestTrackName) (ID: \(bestTrackId), Score: \(bestScore))")
+            var tid = bestTrackId
+            mpv_set_property(handle, "aid", MPV_FORMAT_INT64, &tid)
         } else {
-            print("⚠️ No audio tracks found")
+            print("⚠️ No suitable audio tracks found")
         }
     }
 

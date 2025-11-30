@@ -184,7 +184,9 @@ class LobbyViewModel: ObservableObject {
                                     NSLog("✅ Guest created and joined system room \(room.id)")
                                 } catch let createError {
                                     NSLog("❌ Lobby: Failed to create system room: \(createError)")
-                                    throw error // Throw original error
+                                    // CRITICAL FIX: Don't throw here for events!
+                                    // We want to proceed to autoStartSystemEvent even if DB join fails
+                                    NSLog("⚠️ Proceeding with local playback despite join failure")
                                 }
                             }
                         } else {
@@ -1472,17 +1474,17 @@ extension LobbyViewModel: WatchPartyManagerDelegate {
 
     func watchPartyManager(_ manager: WatchPartyManager, didUpdatePresence participants: [String: String]) {
         NSLog("👥 WatchPartyManager presence updated: \(participants)")
-        
+
         // ✅ Update participants list in real-time to keep count synchronized
         Task { @MainActor in
             guard let appState = appState,
                   var room = appState.currentWatchPartyRoom else { return }
-            
+
             // Convert presence dictionary to Participant objects
             let updatedParticipants = participants.map { (userId, username) -> Participant in
                 // Check if this user is the host
                 let isHost = userId == room.hostId
-                
+
                 // Try to preserve existing participant data if available
                 if let existing = room.participants.first(where: { $0.id == userId }) {
                     return existing
@@ -1497,11 +1499,11 @@ extension LobbyViewModel: WatchPartyManagerDelegate {
                     )
                 }
             }
-            
+
             // Update the room's participants array
             room.participants = updatedParticipants
             appState.currentWatchPartyRoom = room
-            
+
             NSLog("✅ Updated participants count: \(updatedParticipants.count)")
         }
     }

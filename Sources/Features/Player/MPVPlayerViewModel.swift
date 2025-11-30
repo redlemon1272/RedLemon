@@ -166,32 +166,44 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Check if we should resume from a specific timestamp
-        let shouldResume = appState?.resumeFromTimestamp != nil && (appState?.resumeFromTimestamp ?? 0) > 0
+        let resumeTime = appState?.resumeFromTimestamp ?? 0
+        let shouldResume = resumeTime > 0
+        let isEvent = appState?.isEventPlayback == true
 
-        if shouldResume {
-            print("🔄 Resume mode: Will load video and immediately pause+seek")
-            // Load video normally but will immediately pause and seek
-            // CRITICAL: In watch party mode, NEVER autoplay - even when resuming!
-            // The ready gate will control when playback starts
-            // EXCEPTION: Events should autoplay (they don't have a host to wait for)
-            let isEvent = appState?.isEventPlayback == true
-            let shouldAutoplay = !isInWatchParty || isEvent
+        // CRITICAL: Strict separation of logic
+        // 1. EVENT: Always autoplay, ignore watch party gates, ignore resume (unless specifically handled later)
+        // 2. SOLO: Always autoplay, handle resume
+        // 3. WATCH PARTY: Start PAUSED, wait for ready gate, handle resume sync
 
-            mpvWrapper.loadVideo(url: streamURL, autoplay: shouldAutoplay)
+        if isEvent {
+            print("🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)")
+            mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+            // Events don't use waitingForGuests
+            showWaitingForGuests = false
 
-            if isInWatchParty && !isEvent {
-                showWaitingForGuests = true
-                print("🛑 Watch Party Resume: Starting PAUSED to wait for ready gate")
+        } else if !isInWatchParty {
+            print("👤 SOLO MODE: Autoplaying")
+            if shouldResume {
+                print("   With resume from \(Int(resumeTime))s")
+                // Load with autoplay=true, onVideoReady will handle the seek
+                mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+            } else {
+                mpvWrapper.loadVideo(url: streamURL, autoplay: true)
             }
-        } else if isInWatchParty && appState?.isEventPlayback != true {
-            print("🛑 Watch Party: Starting PAUSED to wait for guests")
-            // Start paused!
+            showWaitingForGuests = false
+
+        } else {
+            // Watch Party Mode (Non-Event)
+            print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
+
+            if shouldResume {
+                print("   With resume from \(Int(resumeTime))s")
+                // Still load paused!
+            }
+
+            // Always load paused for watch party
             mpvWrapper.loadVideo(url: streamURL, autoplay: false)
             showWaitingForGuests = true
-        } else {
-            print("▶️ Normal mode (or Event): Will load video and play immediately")
-            // Load video normally with autoplay
-            mpvWrapper.loadVideo(url: streamURL, autoplay: true)
         }
 
         func startEmbeddedSubtitleScan() {
@@ -1359,7 +1371,7 @@ extension MPVPlayerViewModel {
             if let senderId = message.senderId {
                 NSLog("✅ Received READY signal from \(senderId)")
                 readyGuestIds.insert(senderId)
-                
+
                 // PRESENCE FALLBACK: Ensure sender is in connectedGuestIds
                 // This handles cases where Presence events are delayed/missing
                 if !connectedGuestIds.contains(senderId) {

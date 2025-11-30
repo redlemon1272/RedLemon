@@ -145,44 +145,55 @@ class SupabaseClient {
 
     /// Get trusted server time from Supabase (via HTTP Date header)
     func getServerTime() async throws -> Date {
-        // Use a lightweight HEAD request to the users table (limit=1)
-        // We just want the headers, specifically the 'Date' header
-        let url = URL(string: "\(baseURL)/rest/v1/users?select=count&limit=1")!
+        // Use a lightweight GET request with minimal data
+        // HEAD requests sometimes don't return Date header reliably
+        let url = URL(string: "\(baseURL)/rest/v1/users?select=id&limit=1")!
         var request = URLRequest(url: url)
-        request.httpMethod = "HEAD"
+        request.httpMethod = "GET"
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
-        let (_, response) = try await session.data(for: request)
-
-        guard let httpResponse = response as? HTTPURLResponse else {
-            print("❌ TimeService: Response is not HTTPURLResponse")
-            throw SupabaseError.invalidResponse
+        do {
+            let (_, response) = try await session.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("❌ TimeService: Response is not HTTPURLResponse")
+                throw SupabaseError.invalidResponse
+            }
+            
+            // Debug: Print all headers
+            print("⏰ TimeService: Response headers:")
+            for (key, value) in httpResponse.allHeaderFields {
+                print("   \(key): \(value)")
+            }
+            
+            guard let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
+                print("❌ TimeService: No 'Date' header in response")
+                print("   Status code: \(httpResponse.statusCode)")
+                throw SupabaseError.invalidResponse
+            }
+            
+            print("⏰ TimeService: Received Date header: '\(dateString)'")
+            
+            // Parse HTTP Date header (RFC 1123)
+            // Example: Sun, 30 Nov 2025 06:37:32 GMT
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            
+            guard let date = formatter.date(from: dateString) else {
+                print("❌ Failed to parse server date: \(dateString)")
+                print("   Expected format: EEE, dd MMM yyyy HH:mm:ss zzz")
+                throw SupabaseError.invalidResponse
+            }
+            
+            print("✅ TimeService: Parsed server time: \(date)")
+            return date
+        } catch {
+            print("❌ TimeService: Network error: \(error)")
+            throw error
         }
-
-        guard let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
-            print("❌ TimeService: No 'Date' header in response")
-            print("   Available headers: \(httpResponse.allHeaderFields.keys)")
-            throw SupabaseError.invalidResponse
-        }
-
-        print("⏰ TimeService: Received Date header: '\(dateString)'")
-
-        // Parse HTTP Date header (RFC 1123)
-        // Example: Sun, 30 Nov 2025 06:37:32 GMT
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-
-        guard let date = formatter.date(from: dateString) else {
-            print("❌ Failed to parse server date: \(dateString)")
-            print("   Expected format: EEE, dd MMM yyyy HH:mm:ss zzz")
-            throw SupabaseError.invalidResponse
-        }
-
-        print("✅ TimeService: Parsed server time: \(date)")
-        return date
     }
 
     // MARK: - User Management

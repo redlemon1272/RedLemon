@@ -71,213 +71,27 @@ class LocalAPIClient: ObservableObject {
     }
 
     func fetchTopMoviesForEvents() async throws -> [MediaItem] {
-        // Use the Stremio Streaming Addon directly (same as BrowseView)
-        // This ensures we get high-quality streaming content (Netflix, Disney+, etc.)
-        // and avoids "In Cinema" movies that are CAM quality
-        let addonBaseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
-
-        let catalogs = [
-            "nfx", // Netflix
-            "dnp", // Disney+
-            "hlu", // Hulu
-            "amp"  // Prime Video
-        ]
-
-        var allMetas: [StremioMeta] = []
-
-        // Fetch from all catalogs
-        print("🚀 Fetching from \(catalogs.count) streaming catalogs (Direct Stremio)...")
-
-        for catalog in catalogs {
-            do {
-                let catalogURL = URL(string: "\(addonBaseURL)/catalog/movie/\(catalog).json")!
-                // Use standard request without heavy retry logic for catalogs
-                let (data, _) = try await session.data(from: catalogURL)
-                let response = try JSONDecoder().decode(StremioMetaResponse.self, from: data)
-                allMetas.append(contentsOf: response.metas)
-                print("   ✅ Fetched \(response.metas.count) items from \(catalog)")
-            } catch {
-                print("   ⚠️ Failed to fetch \(catalog): \(error)")
+        print("🎬 [EventsView] Fetching movie events from centralized config...")
+        
+        // Fetch centralized config from Supabase
+        // This ensures ALL RedLemon instances show identical movie lists
+        do {
+            let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
+            print("✅ [EventsView] Loaded \(config.movies.count) movies from config version \(config.version)")
+            
+            // Log first few movies for verification
+            for (index, movie) in config.movies.prefix(5).enumerated() {
+                print("   \(index + 1). \(movie.name)")
             }
+            
+            return config.movies
+        } catch {
+            print("❌ [EventsView] Failed to fetch events config: \(error)")
+            
+            // Fallback: Return empty array and show error to user
+            // This is better than showing inconsistent data
+            throw APIError.networkError(error)
         }
-
-        // Deduplicate by ID
-        var seenIds = Set<String>()
-        let uniqueMetas = allMetas.filter { meta in
-            if seenIds.contains(meta.id) {
-                return false
-            }
-            seenIds.insert(meta.id)
-            return true
-        }
-
-        // DETERMINISTIC SHUFFLE WITH FIXED SEED:
-        // 1. Sort by ID first to ensure a stable starting point (removing network race condition order)
-        let sortedMetas = uniqueMetas.sorted { $0.id < $1.id }
-
-        // 2. CYCLE-BASED SEED: Changes after each 80-movie marathon completes
-        // Uses conservative estimate to ensure shuffle happens AFTER cycle ends
-
-        // Calculate which "generation" we're in based on elapsed time
-        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
-        let timeSinceEpoch = TimeService.shared.now.timeIntervalSince(epoch)
-
-        // Use CONSERVATIVE estimate (2.5 hours avg) to ensure we don't shuffle mid-cycle
-        // Most movies are 90-150 min, so 2.5 hours ensures we wait for longest movies
-        // 80 movies × 2.5 hours = 200 hours per cycle
-        let conservativeMovieDuration: TimeInterval = 9000  // 2.5 hours
-        let cycleDuration = conservativeMovieDuration * 80  // ~200 hours (8.3 days)
-
-        // Calculate which cycle we're in (0, 1, 2, ...)
-        let cycleNumber = Int(timeSinceEpoch / cycleDuration)
-
-        // Base seed + cycle number = new shuffle each cycle
-        let baseSeed = 20250126  // Incremented to force cache refresh
-        let seed = baseSeed + cycleNumber
-
-        print("🎲 Shuffling with cycle-based seed: \(seed) (Cycle #\(cycleNumber), ~\(Int(cycleDuration/3600))h per cycle)")
-
-        // Check cache first - use same movies for entire cycle
-        // Include filter version in cache key to invalidate when filters change
-        let filterVersion = "v15_blocklist_update"  // Increment when filters change
-        let cacheKey = "eventMovies_\(filterVersion)_cycle_\(cycleNumber)"
-        if let cachedData = UserDefaults.standard.data(forKey: cacheKey),
-           let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: cachedData) {
-            // Validate cache - ensure all movies have posters
-            let allHavePosters = cachedMovies.allSatisfy { $0.poster != nil }
-            if allHavePosters {
-                print("✅ Using cached movies for cycle #\(cycleNumber) (filter: \(filterVersion), \(cachedMovies.count) movies)")
-                return cachedMovies
-            } else {
-                print("⚠️ Cache invalid - some movies missing posters, regenerating...")
-                UserDefaults.standard.removeObject(forKey: cacheKey)
-            }
-        }
-
-        print("🔄 No cache found - generating new movie list for cycle #\(cycleNumber)")
-
-        // 3. Shuffle using seeded generator
-        var generator = SeededGenerator(seed: seed)
-        let shuffledMetas = sortedMetas.shuffled(using: &generator)
-
-        // 4. Filter for movies with COMPLETE metadata (logo + background) AND recent release year
-        // This ensures no plain text titles, missing art, or old movies
-        let validMetas = shuffledMetas.filter { meta in
-            // Must have logo and background (and logo must not be empty)
-            guard let logo = meta.logo, !logo.isEmpty,
-                  let _ = meta.background else {
-                return false
-            }
-
-            // Blacklist specific unwanted titles
-            let blacklistedTitles = [
-                "Selena y Los Dinos: A Family's Legacy",
-                "Star Trek Beyond",
-                "Star Trek Into Darkness",
-                "Star Trek",
-                "In Waves and War",
-                "God Bless America",
-                "Tracing the Divide",
-                "The Teacher",
-                "Sunshine",
-                "Lilith Fair: Building a Mystery",
-                "Three Billboards Outside Ebbing, Missouri",
-                "Star Wars",
-                "The White House Effect",
-                "Animal Kingdom",
-                "The Ugly Stepsister",
-                "ONE SHOT with Ed Sheeran",
-                "Dark City",
-                "Free Guy",
-                "Arlington Road",
-                "Margin Call",
-                "Glass Onion",
-                "L.A. Confidential",
-                "Master and Commander"
-            ]
-            if blacklistedTitles.contains(where: { meta.name.contains($0) }) {
-                print("🚫 Skipping blacklisted movie: \(meta.name)")
-                return false
-            }
-
-            // Filter by release year (1990 or newer)
-            if let releaseInfo = meta.releaseInfo {
-                // Extract year from releaseInfo (format: "2015" or "2015-01-01")
-                let yearStr = String(releaseInfo.prefix(4))
-                if let year = Int(yearStr), year < 1990 {
-                    print("⏭️ Skipping old movie: \(meta.name) (\(year))")
-                    return false
-                }
-            }
-
-            // Stricter quality filter (rating >= 7.0)
-            if let ratingStr = meta.imdbRating,
-               let rating = Double(ratingStr),
-               rating >= 7.0 {
-
-                // Filter out unwanted genres (Documentaries, Shorts, Drama-only, Romance-only, etc.)
-                if let genres = meta.genre {
-                    // UPDATED: Added Animation, Family, Musical to exclude "Zootopia" and similar
-                    let unwantedGenres = ["Documentary", "Short", "News", "Talk-Show", "Reality-TV", "Animation", "Family", "Musical", "Biography"]
-                    if genres.contains(where: { unwantedGenres.contains($0) }) {
-                        return false
-                    }
-
-                    // ✅ STRICTLY ENFORCE EXCITING GENRES: Thriller, Horror, Action, Sci-Fi, Mystery, Crime
-                    // Movies MUST have at least one of these genres to be selected for events
-                    // UPDATED: Removed Adventure, Fantasy, War, Western, Mystery to avoid "boring" movies
-                    let excitingGenres = ["Thriller", "Horror", "Action", "Sci-Fi", "Crime"]
-
-                    // Check if movie has at least one exciting genre
-                    let hasExcitingGenre = genres.contains(where: { excitingGenres.contains($0) })
-
-                    if !hasExcitingGenre {
-                        print("⏭️ Skipping unexciting movie: \(meta.name) (\(genres.joined(separator: ", ")))")
-                        return false
-                    }
-                }
-
-                return true
-            }
-            return false
-        }
-
-        print("📊 Filtered to \(validMetas.count) movies with complete artwork, rating >= 7.0, & no documentaries")
-
-        // 5. Convert to MediaItems and take first 80
-        let finalItems: [MediaItem] = validMetas.prefix(80).map { meta in
-            let backgroundURL = meta.background ?? "https://images.metahub.space/background/medium/\(meta.id)/img"
-            let logoURL = meta.logo ?? "https://images.metahub.space/logo/medium/\(meta.id)/img"
-
-            return MediaItem(
-                id: meta.id,
-                type: meta.type,
-                name: meta.name,
-                poster: meta.poster,
-                background: backgroundURL,
-                logo: logoURL,
-                description: nil,
-                releaseInfo: nil,
-                year: nil,
-                imdbRating: nil,
-                genres: nil,
-                runtime: nil
-            )
-        }
-
-        print("🎬 Final selection: \(finalItems.count) movies")
-        for movie in finalItems.prefix(10) {
-            print("   Movie: \(movie.name)")
-        }
-
-        // Cache the movie list for this cycle (use same versioned key)
-        if let encoded = try? JSONEncoder().encode(finalItems) {
-            UserDefaults.standard.set(encoded, forKey: cacheKey)
-            print("💾 Cached \(finalItems.count) movies for cycle #\(cycleNumber) (filter: \(filterVersion))")
-        }
-
-        print("📊 Ready to show \(finalItems.count) movies")
-        return finalItems
     }
 
     // Simple Linear Congruential Generator for deterministic shuffling

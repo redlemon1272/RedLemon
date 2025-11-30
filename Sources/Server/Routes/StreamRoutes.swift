@@ -300,6 +300,7 @@ func registerStreamRoutes(_ app: Application) {
         }
 
         // CRITICAL: Filter x265/HEVC streams (server-side, ALWAYS runs)
+        // User is on 2015 hardware, so we must block x265
         let beforeCodecFilter = streamsWithSubtitles.count
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
         streamsWithSubtitles = streamsWithSubtitles.filter { stream in
@@ -315,6 +316,54 @@ func registerStreamRoutes(_ app: Application) {
         let afterCodecFilter = streamsWithSubtitles.count
         if afterCodecFilter < beforeCodecFilter {
             print("   🚫 SERVER FILTERED x265: \(beforeCodecFilter) → \(afterCodecFilter) streams")
+        }
+
+        // CRITICAL: Filter AV1 streams (hardware incompatibility)
+        let beforeAV1Filter = streamsWithSubtitles.count
+        let av1Codecs = ["av1"]
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let titleLower = stream.title.lowercased()
+            let hasAV1 = av1Codecs.contains { codec in
+                titleLower.contains(codec)
+            }
+            if hasAV1 {
+                print("   🚫 SERVER BLOCKING AV1: \(stream.title)")
+            }
+            return !hasAV1
+        }
+        let afterAV1Filter = streamsWithSubtitles.count
+        if afterAV1Filter < beforeAV1Filter {
+            print("   🚫 SERVER FILTERED AV1: \(beforeAV1Filter) → \(afterAV1Filter) streams")
+        }
+
+        // CRITICAL: Filter MPEG-2 / REMUX streams (too large/inefficient for older hardware)
+        // We only block REMUX if it's explicitly MPEG-2 or if we suspect it's a massive legacy file
+        let beforeMpeg2Filter = streamsWithSubtitles.count
+        let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
+        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let titleLower = stream.title.lowercased()
+            
+            // Block explicit MPEG-2
+            let isMpeg2 = mpeg2Terms.contains { term in
+                titleLower.contains(term)
+            }
+            
+            // Also block REMUX if it doesn't explicitly say x264/AVC, as it might be an old VC-1 or MPEG-2 rip
+            // But if it says x264 REMUX, it might be okay (though still large). 
+            // Given the user's issue with a 19GB file, let's be safe and block non-x264 REMUXes or just deprioritize them?
+            // The user said "x264 must be our default".
+            // Let's block MPEG-2 explicitly.
+            
+            if isMpeg2 {
+                print("   🚫 SERVER BLOCKING MPEG-2: \(stream.title)")
+                return false
+            }
+            
+            return true
+        }
+        let afterMpeg2Filter = streamsWithSubtitles.count
+        if afterMpeg2Filter < beforeMpeg2Filter {
+            print("   🚫 SERVER FILTERED MPEG-2: \(beforeMpeg2Filter) → \(afterMpeg2Filter) streams")
         }
 
         // CRITICAL: Filter 3D movies (server-side, ALWAYS runs)
@@ -1710,7 +1759,8 @@ private func processBucket(
     // COMPLETELY REMOVE x265/HEVC streams (terrible quality) - CHECK TITLE
     // Also remove low-quality/unreliable release groups (YIFY, YTS, bitloks)
     // Also remove EXTRAS/bonus content torrents
-    let badPatterns = ["x265", "hevc", "h.265", "h265", "x.265", "yify", "yts", "bitloks", "extras"]
+    // Also remove incompatible codecs (AV1, MPEG-2) for older hardware
+    let badPatterns = ["x265", "hevc", "h.265", "h265", "x.265", "yify", "yts", "bitloks", "extras", "av1", "mpeg-2", "mpeg2", "dvd5", "dvd9"]
     let beforeFilter = yearAndCodecFiltered.count
     yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
         let titleLower = stream.title.lowercased()

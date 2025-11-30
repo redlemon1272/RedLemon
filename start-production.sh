@@ -91,6 +91,21 @@ validate_environment() {
         return 1
     fi
 
+    # Check Node.js version for watchparty server
+    if ! command -v node > /dev/null 2>&1; then
+        log_error "Node.js not found. Please install Node.js 20 LTS from https://nodejs.org/"
+        return 1
+    fi
+
+    NODE_VERSION=$(node --version | grep -o '[0-9]\+' | head -n1)
+    if [ "$NODE_VERSION" -lt 20 ] || [ "$NODE_VERSION" -ge 26 ]; then
+        log_error "Node.js version $NODE_VERSION is not supported. Please use Node.js 20-25."
+        log_error "Current version: $(node --version)"
+        log_error "Install Node 20 LTS: https://nodejs.org/"
+        return 1
+    fi
+    log_info "Node.js version: $(node --version) ✓"
+
     log_success "Environment validation passed"
     return 0
 }
@@ -181,13 +196,15 @@ launch_app() {
     log_info "Building and starting watchparty server..."
     cd "$SCRIPT_DIR/watchparty-server"
 
-    # Ensure dependencies are installed
-    if [ ! -d "node_modules" ]; then
-        log_info "Installing watchparty dependencies..."
+    # Ensure dependencies are installed and up to date
+    if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then
+        log_info "Installing/Updating watchparty dependencies..."
         if ! npm install; then
             log_error "Failed to install watchparty dependencies"
             return 1
         fi
+        # Touch node_modules to update its timestamp
+        touch node_modules
     fi
 
     # Build TypeScript if needed

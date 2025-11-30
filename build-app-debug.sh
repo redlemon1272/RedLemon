@@ -1,6 +1,46 @@
 #!/bin/bash
 set -e
+
+# Detect system information
+ARCH_NAME=$(uname -m)
+MACOS_VERSION=$(sw_vers -productVersion)
+XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
+
 echo "🍋 Building RedLemon.app (DEBUG mode - faster)..."
+echo "🔧 System: $ARCH_NAME"
+echo "🍎 macOS: $MACOS_VERSION"
+echo "🛠️  Xcode: $XCODE_VERSION"
+
+# OpenGL compatibility check
+if [[ "$MACOS_VERSION" > "13.0" ]]; then
+    echo "⚠️  macOS $MACOS_VERSION detected - OpenGL may not be available"
+    echo "🔄 Recommending Metal backend for optimal performance"
+
+    # Check if OpenGL framework is available
+    if ! pkgutil --files com.apple.opengl >/dev/null 2>&1; then
+        echo "❌ OpenGL framework not available"
+        echo "💡 Consider updating to Metal-based rendering for full compatibility"
+        # Don't exit here - continue with build but warn user
+    else
+        echo "✅ OpenGL framework found, but deprecated"
+    fi
+else
+    echo "✅ macOS $MACOS_VERSION - OpenGL should be available"
+fi
+
+# Architecture-specific setup
+if [[ "$ARCH_NAME" == "arm64" ]]; then
+    echo "🔧 Apple Silicon detected - using optimized libraries"
+    export LIBRARY_PATH="Frameworks/arm64"
+    export SWIFT_BUILD_FLAGS="--arch arm64"
+elif [[ "$ARCH_NAME" == "x86_64" ]]; then
+    echo "🔧 Intel Mac detected - using standard libraries"
+    export LIBRARY_PATH="Frameworks/x86_64"
+    export SWIFT_BUILD_FLAGS="--arch x86_64"
+else
+    echo "⚠️  Unknown architecture $ARCH_NAME - using default settings"
+    export LIBRARY_PATH="Frameworks"
+fi
 
 # Check if .build exists, if not resolve packages first
 if [ ! -d ".build" ]; then
@@ -20,17 +60,45 @@ mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
 # Build debug executable
 echo "📦 Building Swift executable (debug)..."
-swift build
+if [[ -n "$SWIFT_BUILD_FLAGS" ]]; then
+    echo "🔧 Using architecture-specific flags: $SWIFT_BUILD_FLAGS"
+    swift build $SWIFT_BUILD_FLAGS
+else
+    swift build
+fi
 
 # Copy executable (debug) - ALWAYS overwrite
 echo "🔧 Copying debug executable..."
-BIN_PATH=$(swift build --show-bin-path)
+if [[ -n "$SWIFT_BUILD_FLAGS" ]]; then
+    BIN_PATH=$(swift build $SWIFT_BUILD_FLAGS --show-bin-path)
+else
+    BIN_PATH=$(swift build --show-bin-path)
+fi
 cp -f "$BIN_PATH/RedLemon" "$MACOS/"
 echo "✅ Binary updated at $(date '+%H:%M:%S')"
 
 # Copy frameworks
 echo "📚 Copying frameworks..."
-cp Frameworks/*.dylib "$FRAMEWORKS/"
+
+# Copy architecture-specific frameworks if they exist
+if [[ "$ARCH_NAME" == "arm64" && -d "Frameworks/arm64" ]]; then
+    echo "🍎 Using Apple Silicon optimized frameworks"
+    cp Frameworks/arm64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+elif [[ "$ARCH_NAME" == "x86_64" && -d "Frameworks/x86_64" ]]; then
+    echo "🖥️  Using Intel optimized frameworks"
+    cp Frameworks/x86_64/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+else
+    echo "📚 Using default frameworks"
+    cp Frameworks/*.dylib "$FRAMEWORKS/" 2>/dev/null || true
+fi
+
+# Ensure libmpv is copied regardless of architecture (critical dependency)
+if [[ -f "Frameworks/libmpv.2.dylib" ]]; then
+    cp Frameworks/libmpv.2.dylib "$FRAMEWORKS/"
+    echo "✅ libmpv.2.dylib copied"
+else
+    echo "❌ libmpv.2.dylib not found - this may cause runtime issues"
+fi
 
 # Copy Sparkle framework
 echo "📦 Copying Sparkle.framework..."

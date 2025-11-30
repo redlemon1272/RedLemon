@@ -10,7 +10,7 @@ let package = Package(
         .executable(name: "RedLemon", targets: ["RedLemon"])
     ],
     dependencies: [
-        // Pin Vapor ecosystem to stable versions
+        // Use versions compatible with Swift 5.7 while maintaining functionality
         .package(url: "https://github.com/vapor/vapor.git", exact: "4.96.0"),
         .package(url: "https://github.com/sparkle-project/Sparkle.git", exact: "2.8.0"),
         .package(url: "https://github.com/apple/swift-nio-extras.git", exact: "1.22.0"),
@@ -37,7 +37,9 @@ let package = Package(
                     "-import-objc-header", "Sources/Features/Player/MPVBridgingHeader.h",
                     "-DGL_SILENCE_DEPRECATION",  // Silence OpenGL deprecation warnings
                     // CPU compatibility flags for older Intel Macs (Haswell)
-                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module"
+                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module",
+                    // Modern macOS compatibility flags
+                    "-DMACOS_MODERN_COMPATIBILITY"
                 ])
             ],
             linkerSettings: [

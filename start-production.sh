@@ -6,6 +6,11 @@
 # Get the directory where this script is located (works anywhere)
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Detect system information for modern Mac compatibility
+ARCH_NAME=$(uname -m)
+MACOS_VERSION=$(sw_vers -productVersion)
+XCODE_VERSION=$(xcodebuild -version | head -1 | awk '{print $2}')
+
 # Configuration
 BUILD_SCRIPT="$SCRIPT_DIR/build-app-debug.sh"
 MAX_RETRIES=3
@@ -276,6 +281,9 @@ cleanup() {
 # Main execution
 main() {
     echo "🚀 RedLemon - Production Mode (Enhanced)"
+    echo "🔧 System: $ARCH_NAME"
+    echo "🍎 macOS: $MACOS_VERSION"
+    echo "🛠️  Xcode: $XCODE_VERSION"
     echo "=========================================="
     echo ""
     echo "📁 Project: $SCRIPT_DIR"
@@ -284,6 +292,24 @@ main() {
     echo "   Backend:      Supabase PostgreSQL"
     echo "   Auth Method:  Username-based"
     echo "   Max Retries:  $MAX_RETRIES"
+
+    # OpenGL compatibility check for modern macOS
+    if [[ "$MACOS_VERSION" > "13.0" ]]; then
+        echo ""
+        echo "⚠️  macOS $MACOS_VERSION detected - OpenGL may not be available"
+        echo "🔄 Recommending Metal backend for optimal performance"
+
+        # Check if OpenGL framework is available
+        if ! pkgutil --files com.apple.opengl >/dev/null 2>&1; then
+            echo "❌ OpenGL framework not available"
+            echo "💡 Consider updating to Metal-based rendering for full compatibility"
+        else
+            echo "✅ OpenGL framework found, but deprecated"
+        fi
+    else
+        echo ""
+        echo "✅ macOS $MACOS_VERSION - OpenGL should be available"
+    fi
     echo ""
 
     # Initial cleanup of existing processes

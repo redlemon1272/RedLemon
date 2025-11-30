@@ -181,12 +181,26 @@ launch_app() {
     log_info "Building and starting watchparty server..."
     cd "$SCRIPT_DIR/watchparty-server"
 
+    # Ensure dependencies are installed
+    if [ ! -d "node_modules" ]; then
+        log_info "Installing watchparty dependencies..."
+        if ! npm install; then
+            log_error "Failed to install watchparty dependencies"
+            return 1
+        fi
+    fi
+
     # Build TypeScript if needed
-    if [ ! -d "dist" ] || [ "src/index.ts" -nt "dist/index.js" ]; then
+    if [ ! -d "dist" ] || [ "src/index.ts" -nt "dist/index.js" ] || [ ! -f "dist/index.js" ]; then
         log_info "Building watchparty server..."
         if ! npm run build; then
-            log_error "Failed to build watchparty server"
-            return 1
+            log_warning "Build failed. Attempting clean install (fixes architecture mismatches)..."
+            rm -rf node_modules package-lock.json
+            npm install
+            if ! npm run build; then
+                log_error "Failed to build watchparty server after clean install"
+                return 1
+            fi
         fi
     fi
 

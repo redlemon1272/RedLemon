@@ -83,9 +83,26 @@ actor StreamService {
             throw APIError.noStreamsFound
         }
 
+        // Step 3.5: Apply Keyword Safety Filter (Remux, etc)
+        // User reported performance issues (spinning beach ball) with Remux files
+        let blockedKeywords = ["remux"]
+        let keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
+            let titleLower = stream.title.lowercased()
+            if blockedKeywords.contains(where: { titleLower.contains($0) }) {
+                print("🚫 StreamService: Blocking stream with restricted keyword: \(stream.title)")
+                return nil
+            }
+            return stream
+        }
+
+        guard !keywordFiltered.isEmpty else {
+            print("❌ StreamService: No streams available after keyword filter")
+            throw APIError.noStreamsFound
+        }
+
         // Step 4: Apply File Size Limit (Max 12GB) for 1080p
         // Older hardware (2015 Macs) struggles with large files, especially H.264 Remuxes (30GB+)
-        var finalStreams = filteredStreams
+        var finalStreams = keywordFiltered
 
         if quality == .fullHD {
             let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes

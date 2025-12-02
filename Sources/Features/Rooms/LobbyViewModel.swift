@@ -1212,8 +1212,11 @@ class LobbyViewModel: ObservableObject {
         print("   Media item: \(room.mediaItem?.name ?? "nil")")
 
         // Set resume timestamp
+        let previousResumeFromTimestamp = appState.resumeFromTimestamp
         appState.resumeFromTimestamp = max(0, elapsed)
 
+        print("   Previous resumeFromTimestamp: \(previousResumeFromTimestamp ?? -1)")
+        print("   Calculated elapsed: \(elapsed)s")
         print("   Set resumeFromTimestamp to: \(appState.resumeFromTimestamp)")
 
         // Set starting state to update UI

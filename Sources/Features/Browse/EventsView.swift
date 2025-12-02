@@ -437,6 +437,20 @@ struct EventsView: View {
 
     @MainActor
     private func createLocalEventRoom(event: EventItem, roomId: String) {
+        // Calculate current position for live events
+        let now = TimeService.shared.now
+        let position: Double
+        if event.isLive {
+            // For live events, calculate how far into the movie we should start
+            position = now.timeIntervalSince(event.startTime)
+            print("🎬 Live event - calculating position: \(position) seconds")
+            print("   Event start time: \(event.startTime)")
+            print("   Current time: \(now)")
+        } else {
+            position = 0
+            print("🎭 Upcoming event - position: 0")
+        }
+
         // Create a WatchPartyRoom for this event
         let room = WatchPartyRoom(
             id: roomId,
@@ -450,12 +464,12 @@ struct EventsView: View {
             description: "Live Event",
             posterURL: event.mediaItem.poster,
             participants: [],
-            state: .lobby, // Start in lobby state, will sync with server
+            state: event.isLive ? .playing : .lobby, // Live events start playing, upcoming go to lobby
             createdAt: event.startTime,
             lastActivity: event.startTime,
             playlist: nil,  // Events don't use playlists
             currentPlaylistIndex: 0,
-            lobbyDuration: 600,  // 10 minutes for events
+            lobbyDuration: event.isLive ? 0 : 600,  // No lobby for live events, 10 min for upcoming
             shouldLoop: false,
             isPersistent: true,  // Events are persistent
             playbackPosition: nil,
@@ -467,21 +481,41 @@ struct EventsView: View {
         )
 
         print("   Room createdAt: \(room.createdAt)")
-
-        // Auto-join lobby if we are seamlessly transitioning from a finished event
-        // (NOT for fresh live events - users should see lobby UI)
-        if appState.shouldAutoJoinLobby {
-            appState.shouldAutoJoinLobby = true
-        }
+        print("   Room state: \(room.state)")
 
         appState.currentEventId = event.id // Track current event ID
-
         appState.isEventPlayback = true // Mark as event playback for seamless transition support
         appState.currentWatchMode = .watchParty // Enable watch party mode for chat
 
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false // User is always guest in system events
-        appState.currentView = .watchPartyLobby
+
+        if event.isLive {
+            // For live events, set resume position and go directly to player
+            appState.resumeFromTimestamp = max(0, position)
+            print("   Setting resumeFromTimestamp to: \(appState.resumeFromTimestamp!)")
+            print("🎬 Live event - starting playback immediately (no lobby)")
+
+            // Set selection details for player
+            appState.selectedMediaItem = event.mediaItem
+            appState.selectedSeason = nil
+            appState.selectedEpisode = nil
+
+            // Trigger playback directly like TV events do
+            Task {
+                await appState.playMedia(
+                    event.mediaItem,
+                    quality: .fullHD,
+                    watchMode: .watchParty,
+                    roomId: roomId,
+                    isHost: false
+                )
+            }
+        } else {
+            // For upcoming events, go to lobby
+            print("🎭 Upcoming event - going to lobby")
+            appState.currentView = .watchPartyLobby
+        }
     }
 }
 

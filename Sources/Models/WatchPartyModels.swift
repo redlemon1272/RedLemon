@@ -295,12 +295,3 @@ enum PresenceAction {
     case leave
 }
 
-// MARK: - Watch Party Manager Delegate
-
-protocol WatchPartyManagerDelegate: AnyObject {
-    func watchPartyManager(_ manager: WatchPartyManager, didUpdateStream streamInfo: StreamInfo)
-    func watchPartyManager(_ manager: WatchPartyManager, didChangeConnectionState state: RealtimeConnectionState)
-    func watchPartyManager(_ manager: WatchPartyManager, didReceiveSyncMessage message: SyncMessage)
-    func watchPartyManager(_ manager: WatchPartyManager, didUpdatePresence participants: [String: String])
-    func watchPartyManager(_ manager: WatchPartyManager, didReceiveChatMessage message: SyncMessage)
-}

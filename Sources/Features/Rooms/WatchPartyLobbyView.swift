@@ -504,10 +504,6 @@ struct WatchPartyLobbyView: View {
         }  // Close ZStack
         .onAppear {
             viewModel.appState = appState  // Set weak reference
-            viewModel.connect()
-        }
-        .onDisappear {
-            viewModel.disconnect()
         }
         .sheet(isPresented: $showPaymentGate) {
             PaymentGateView()
@@ -543,7 +539,6 @@ struct WatchPartyLobbyView: View {
     }
 
     private func leaveLobby() {
-        viewModel.disconnect()
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
     }

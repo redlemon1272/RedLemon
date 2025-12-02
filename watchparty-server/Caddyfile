@@ -1,3 +1,0 @@
-151.243.109.217.nip.io {
-    reverse_proxy localhost:18081
-}

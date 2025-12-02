@@ -26,57 +26,22 @@ class LobbyViewModel: ObservableObject {
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
 
     private var room: WatchPartyRoom
-    private let isHost: Bool
-    private var participantId: String
-    private var realtimeManager: RealtimeChannelManager?
-    private var watchPartyManager: WatchPartyManager?
-    private var countdownTask: Task<Void, Never>?
-    private var participantsPollingTask: Task<Void, Never>?
-    private var roomStatePollingTask: Task<Void, Never>?
-    private var lastRoomPlayingState: Bool = false
-    private var isDisconnecting: Bool = false
+    private var isHost: Bool
+    private var realtimeClient: SupabaseRealtimeClient?
+    private var countdownTimer: Timer?
     weak var appState: AppState?  // Weak reference to avoid retain cycle
 
-    // Helper to track state safely across actor boundaries (specifically for deinit)
-    private class TransitionState {
-        var isStarting: Bool = false
-    }
-    private let transitionState = TransitionState()
+    // MARK: - Initialization
 
     init(room: WatchPartyRoom, isHost: Bool) {
         self.room = room
         self.isHost = isHost
         self.participants = room.participants
 
-        // For hosts, use room host ID. For guests, we'll set to participantId after getting user ID
-        if isHost {
-            self.participantId = room.hostId
-        } else {
-            // Temporary - will be updated when we get actual user ID
-            self.participantId = UUID().uuidString
-        }
 
-        // Load metadata for poster/backdrop
-        loadMetadata()
-
-        // Initialize WatchPartyManager for stream synchronization
-        watchPartyManager = WatchPartyManager()
-        watchPartyManager?.delegate = self
-
-        // Set up WatchPartyManager for guests to receive host stream info
-        if !isHost {
-            Task {
-                do {
-                    try await watchPartyManager?.connect(
-                        roomId: room.id,
-                        userId: participantId,
-                        isHost: false
-                    )
-                    NSLog("✅ Guest: WatchPartyManager connected for stream sync")
-                } catch {
-                    NSLog("⚠️ Guest: Failed to connect WatchPartyManager: \(error)")
-                }
-            }
+        // Setup Realtime subscription for room updates
+        Task {
+            await setupRealtimeSubscription()
         }
 
         // Add initial join message
@@ -103,25 +68,12 @@ class LobbyViewModel: ObservableObject {
     }
 
     deinit {
-        // Ensure all timers and realtime resources are released when the view model goes away
-        // Capture values needed for cleanup
-        let manager = realtimeManager
-        let watchParty = watchPartyManager
-        let starting = transitionState.isStarting
+        countdownTimer?.invalidate()
 
-        // Cancel tasks
-        countdownTask?.cancel()
-        participantsPollingTask?.cancel()
-        roomStatePollingTask?.cancel()
-
-        Task {
-            // Disconnect WatchPartyManager first to clean up network connections
-            await watchParty?.disconnect()
-
-            // Only disconnect if we're NOT starting the movie
-            // If starting, we keep the connection alive for the player
-            if !starting {
-                await manager?.disconnect()
+        // Capture client for async cleanup
+        if let client = realtimeClient {
+            Task {
+                await client.disconnect()
             }
         }
     }
@@ -352,13 +304,6 @@ class LobbyViewModel: ObservableObject {
                     NSLog("❌ Failed to leave room: \(error)")
                 }
             }
-
-            // Disconnect WatchPartyManager to clean up network connections
-            await watchPartyManager?.disconnect()
-            watchPartyManager = nil
-
-            // Disconnect Realtime channel
-            await realtimeManager?.disconnect()
 
             // Reset flag after completion (though we likely won't use this instance again)
             isDisconnecting = false
@@ -624,24 +569,6 @@ class LobbyViewModel: ObservableObject {
             roomId: room.id,
             isHost: true
         )
-
-        // After host starts playback, send stream info to guests via WatchPartyManager
-        if let streamHash = room.selectedStreamHash,
-           let quality = room.selectedQuality {
-
-            Task {
-                await watchPartyManager?.sendStreamSelection(
-                    infoHash: streamHash,
-                    fileIdx: room.selectedFileIdx,
-                    quality: quality,
-                    unlockedURL: room.unlockedStreamURL
-                )
-                NSLog("📡 Host: Sent stream selection to guests via WatchPartyManager")
-                NSLog("   InfoHash: \(streamHash)")
-                NSLog("   FileIdx: \(room.selectedFileIdx ?? -1)")
-                NSLog("   Quality: \(quality)")
-            }
-        }
     }
 
     private func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String]? = nil) {
@@ -1416,109 +1343,4 @@ class LobbyViewModel: ObservableObject {
     }
 }
 
-extension LobbyViewModel: WatchPartyManagerDelegate {
-    func watchPartyManager(_ manager: WatchPartyManager, didUpdateStream streamInfo: StreamInfo) {
-        NSLog("🎬 Lobby: Received stream info from host")
-        NSLog("   InfoHash: \(streamInfo.infoHash), File: \(streamInfo.fileIdx ?? -1), Quality: \(streamInfo.quality)")
-        NSLog("   This guest should use host's stream when starting playback")
 
-        // Store stream info in room for guest use
-        room.selectedStreamHash = streamInfo.infoHash
-        room.selectedFileIdx = streamInfo.fileIdx
-        room.selectedQuality = streamInfo.quality
-        room.unlockedStreamURL = streamInfo.unlockedURL
-    }
-
-    func watchPartyManager(_ manager: WatchPartyManager, didChangeConnectionState state: RealtimeConnectionState) {
-        NSLog("📡 WatchPartyManager connection state changed: \(state)")
-        // Update UI connection status if needed
-        switch state {
-        case .connected:
-            // Connection is established
-            break
-        case .connecting:
-            // Connection is being established
-            break
-        case .disconnected:
-            // Connection was lost
-            break
-        case .failed:
-            // Connection failed
-            break
-        }
-    }
-
-    func watchPartyManager(_ manager: WatchPartyManager, didReceiveSyncMessage message: SyncMessage) {
-        NSLog("📡 WatchPartyManager received sync message: \(message.type)")
-        // Handle sync messages from WatchPartyManager
-        switch message.type {
-        case .play:
-            // Handle play command
-            break
-        case .pause:
-            // Handle pause command
-            break
-        case .seek:
-            // Handle seek command
-            break
-        case .playbackState:
-            // Handle playback state update
-            break
-        case .streamSelected, .requestStream:
-            // Handle stream-related messages
-            break
-        default:
-            break
-        }
-    }
-
-    func watchPartyManager(_ manager: WatchPartyManager, didUpdatePresence participants: [String: String]) {
-        NSLog("👥 WatchPartyManager presence updated: \(participants)")
-
-        // ✅ Update participants list in real-time to keep count synchronized
-        Task { @MainActor in
-            guard let appState = appState,
-                  var room = appState.currentWatchPartyRoom else { return }
-
-            // Convert presence dictionary to Participant objects
-            let updatedParticipants = participants.map { (userId, username) -> Participant in
-                // Check if this user is the host
-                let isHost = userId == room.hostId
-
-                // Try to preserve existing participant data if available
-                if let existing = room.participants.first(where: { $0.id == userId }) {
-                    return existing
-                } else {
-                    // Create new participant
-                    return Participant(
-                        id: userId,
-                        name: username,
-                        isHost: isHost,
-                        isReady: isHost, // Host is always ready
-                        joinedAt: Date()
-                    )
-                }
-            }
-
-            // Update the room's participants array
-            room.participants = updatedParticipants
-            appState.currentWatchPartyRoom = room
-
-            NSLog("✅ Updated participants count: \(updatedParticipants.count)")
-        }
-    }
-
-    func watchPartyManager(_ manager: WatchPartyManager, didReceiveChatMessage message: SyncMessage) {
-        NSLog("💬 WatchPartyManager received chat message: \(message.chatText ?? "")")
-        // Handle chat messages from WatchPartyManager
-        if let chatText = message.chatText, let username = message.chatUsername {
-            let chatMessage = ChatMessage(
-                id: UUID().uuidString,
-                username: username,
-                text: chatText,
-                timestamp: Date(timeIntervalSince1970: message.timestamp)
-            )
-            chatMessages.append(chatMessage)
-        }
-    }
-}

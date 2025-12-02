@@ -53,7 +53,7 @@ struct RoomListView: View {
                                 joinRoom(room: room)
                             }
                         }
-                        
+
                         if hasMore {
                             Button(action: {
                                 loadRooms(reset: false)
@@ -87,6 +87,16 @@ struct RoomListView: View {
             .padding()
         }
         .navigationTitle("Watch Party Rooms")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    loadRooms(reset: true)
+                }) {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
+                .disabled(isLoading)
+            }
+        }
         .sheet(isPresented: $showJoinDialog) {
             JoinRoomDialog(roomCodeInput: $roomCodeInput, onJoin: { code in
                 joinRoomByCode(code: code)
@@ -123,7 +133,7 @@ struct RoomListView: View {
                 // Fetch rooms from Supabase backend with pagination
                 print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize))...")
                 let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset)
-                
+
                 if backendRooms.count < pageSize {
                     await MainActor.run { hasMore = false }
                 }
@@ -166,7 +176,7 @@ struct RoomListView: View {
                         // Convert to Participant objects (excluding host)
                         for participant in roomParticipants {
                             if participant.userId.uuidString == room.hostUserId.uuidString { continue }
-                            
+
                             if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
                                 let guest = Participant(
                                     id: participant.userId.uuidString,
@@ -231,7 +241,7 @@ struct RoomListView: View {
                         let uniqueNewRooms = newRooms.filter { !existingIds.contains($0.id) }
                         appState.activeRooms.append(contentsOf: uniqueNewRooms)
                     }
-                    
+
                     offset += pageSize
                     isLoading = false
                     isLoadingMore = false
@@ -256,7 +266,7 @@ struct RoomListView: View {
     private func fetchPostersForRooms(rooms: [WatchPartyRoom]? = nil) async {
         // If specific rooms provided, use those. Otherwise use all active rooms.
         let targetRooms = rooms ?? appState.activeRooms
-        
+
         // Fetch all posters concurrently instead of sequentially
         await withTaskGroup(of: (String, WatchPartyRoom?).self) { group in
             for room in targetRooms {

@@ -516,6 +516,7 @@ func registerStreamRoutes(_ app: Application) {
                 continue
             }
 
+            
             buckets[bucket, default: []].append(stream)
         }
 
@@ -531,6 +532,16 @@ func registerStreamRoutes(_ app: Application) {
                     guard let numStr = comps.first(where: { !$0.isEmpty }), let value = Double(numStr) else { return nil }
                     if size.contains("gb") { return Int64(value * 1_073_741_824) }
                     if size.contains("mb") { return Int64(value * 1_048_576) }
+                    return nil
+                }
+
+                // Parse size string to GB for trusted pack filtering
+                func parseSizeToGB(_ size: String?) -> Double? {
+                    guard let size = size?.lowercased() else { return nil }
+                    let comps = size.components(separatedBy: CharacterSet.decimalDigits.inverted)
+                    guard let numStr = comps.first(where: { !$0.isEmpty }), let value = Double(numStr) else { return nil }
+                    if size.contains("gb") { return value }
+                    if size.contains("mb") { return value / 1024.0 }
                     return nil
                 }
 

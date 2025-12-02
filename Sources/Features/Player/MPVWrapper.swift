@@ -113,6 +113,9 @@ class MPVWrapper: ObservableObject {
 
         // Observe duration property for updates (critical for network streams)
         mpv_observe_property(handle, 0, "duration", MPV_FORMAT_DOUBLE)
+        
+        // Observe pause property to correctly track playback state
+        mpv_observe_property(handle, 0, "pause", MPV_FORMAT_FLAG)
     }
 
     // MARK: - Smart Memory Monitoring (Removed)
@@ -215,7 +218,9 @@ class MPVWrapper: ObservableObject {
             autoSelectEnglishSubtitles()
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
-            isPlaying = true
+            // Don't blindly set isPlaying = true here.
+            // Rely on the "pause" property change event to set isPlaying.
+            // This prevents false positives when loading a file in paused state.
         case MPV_EVENT_END_FILE:
             isPlaying = false
             // Perfect time for cleanup - video ended naturally
@@ -241,9 +246,23 @@ class MPVWrapper: ObservableObject {
         case MPV_EVENT_PROPERTY_CHANGE:
             guard let data = eventPtr.pointee.data else { break }
             let prop = data.assumingMemoryBound(to: mpv_event_property.self)
-            if let name = prop.pointee.name, String(cString: name) == "duration" {
+            guard let name = prop.pointee.name else { break }
+            let nameStr = String(cString: name)
+            
+            if nameStr == "duration" {
                 // Duration updated
                 updateDuration()
+            } else if nameStr == "pause" {
+                // Pause state changed - update isPlaying
+                // MPV_FORMAT_FLAG returns int (0 or 1)
+                if let value = prop.pointee.data {
+                    let isPaused = value.assumingMemoryBound(to: Int32.self).pointee != 0
+                    // Only update if changed to avoid loop
+                    if self.isPlaying == isPaused {
+                        self.isPlaying = !isPaused
+                        print("⏯️ MPV: Pause state changed to \(isPaused) -> isPlaying = \(self.isPlaying)")
+                    }
+                }
             }
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {

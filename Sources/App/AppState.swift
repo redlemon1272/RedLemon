@@ -50,6 +50,7 @@ class AppState: ObservableObject {
     @Published var searchResults: [MediaItem] = []  // Persist search results across navigation
     @Published var lastSearchQuery: String = ""  // Remember last search query
     @Published var resumeFromTimestamp: Double? = nil  // When resuming playback, seek to this position
+    @Published var eventStartTime: Date? = nil  // For live events: absolute start time (recalculate seek on load)
     @Published var isServerReady: Bool = false  // Track if HTTP server is ready to accept requests
     @Published var showUsernameSetup: Bool = false  // Show username setup dialog
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)

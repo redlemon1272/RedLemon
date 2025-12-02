@@ -1211,13 +1211,13 @@ class LobbyViewModel: ObservableObject {
         print("   Elapsed time: \(elapsed)s")
         print("   Media item: \(room.mediaItem?.name ?? "nil")")
 
-        // Set resume timestamp
-        let previousResumeFromTimestamp = appState.resumeFromTimestamp
-        appState.resumeFromTimestamp = max(0, elapsed)
+        // NEW: Set event start time for dynamic seeking (instead of static timestamp)
+        // The player will recalculate the correct seek position when video is ready
+        appState.eventStartTime = room.createdAt
+        appState.resumeFromTimestamp = nil  // Don't use static timestamp for events
 
-        print("   Previous resumeFromTimestamp: \(previousResumeFromTimestamp ?? -1)")
-        print("   Calculated elapsed: \(elapsed)s")
-        print("   Set resumeFromTimestamp to: \(appState.resumeFromTimestamp)")
+        print("   Set eventStartTime to: \(room.createdAt)")
+        print("   Current elapsed would be: \(elapsed)s (will recalculate on video ready)")
 
         // Set starting state to update UI
         self.isStarting = true

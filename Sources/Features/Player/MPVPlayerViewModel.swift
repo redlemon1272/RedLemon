@@ -400,6 +400,40 @@ class MPVPlayerViewModel: ObservableObject {
             self.isLoading = false
         }
 
+        // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
+        // This compensates for all loading delays and ensures tight sync across devices
+        if let eventStartTime = appState?.eventStartTime {
+            let elapsed = Date().timeIntervalSince(eventStartTime)
+            let seekTime = max(0, elapsed)
+
+            print("🎉 EVENT: Recalculating seek time at video ready")
+            print("   Event started at: \(eventStartTime)")
+            print("   Current time: \(Date())")
+            print("   Elapsed: \(Int(elapsed))s")
+            print("   Seeking to: \(Int(seekTime))s")
+
+            // Pause, seek, then resume
+            mpvWrapper.pause()
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                guard let self = self else { return }
+                self.mpvWrapper.seek(to: seekTime)
+
+                // Verify and resume after seek
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.mpvWrapper.play()
+                    print("✅ EVENT: Seeked to \(Int(seekTime))s and resumed playback")
+
+                    // Clear event start time after successful seek
+                    self.appState?.eventStartTime = nil
+                }
+            }
+
+            // Start watch history saving
+            startWatchHistorySaving()
+            return  // Skip normal resume logic
+        }
+
         // Watch Party Ready Gate
         if isInWatchParty && !hasSentReadySignal {
             print("👋 Watch Party: Video ready (playing), sending READY signal as fallback")

@@ -468,8 +468,9 @@ struct EventsView: View {
 
         print("   Room createdAt: \(room.createdAt)")
 
-        // Auto-join lobby if it's the live event OR if we are seamlessly transitioning
-        if event.isLive || appState.shouldAutoJoinLobby {
+        // Auto-join lobby if we are seamlessly transitioning from a finished event
+        // (NOT for fresh live events - users should see lobby UI)
+        if appState.shouldAutoJoinLobby {
             appState.shouldAutoJoinLobby = true
         }
 

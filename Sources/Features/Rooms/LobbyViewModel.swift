@@ -60,6 +60,9 @@ class LobbyViewModel: ObservableObject {
             self.participantId = UUID().uuidString
         }
 
+        // Load metadata for poster/backdrop
+        loadMetadata()
+
         // Setup Realtime subscription for room updates
         Task {
             await setupRealtimeSubscription()

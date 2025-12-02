@@ -1032,16 +1032,24 @@ class LobbyViewModel: ObservableObject {
                 let newParticipants = participantIds.subtracting(currentIds)
                 let leftParticipants = currentIds.subtracting(participantIds)
 
+                // Only add messages if realtime is NOT connected (fallback mode)
+                // When realtime is connected, presence callbacks handle the messages
+                let shouldAddMessages = realtimeConnectionStatus != .connected
+
                 for newId in newParticipants {
                     if let newParticipant = updatedParticipants.first(where: { $0.id == newId }) {
-                        addMessage(.userJoined, userName: newParticipant.name)
+                        if shouldAddMessages {
+                            addMessage(.userJoined, userName: newParticipant.name)
+                        }
                         NSLog("👋 \(newParticipant.name) joined room")
                     }
                 }
 
                 for leftId in leftParticipants {
                     if let leftParticipant = participants.first(where: { $0.id == leftId }) {
-                        addMessage(.userLeft, userName: leftParticipant.name)
+                        if shouldAddMessages {
+                            addMessage(.userLeft, userName: leftParticipant.name)
+                        }
                         NSLog("👋 \(leftParticipant.name) left room")
                     }
                 }

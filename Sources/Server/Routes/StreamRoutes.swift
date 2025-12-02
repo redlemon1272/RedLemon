@@ -229,9 +229,19 @@ func registerStreamRoutes(_ app: Application) {
         let isTrustedPack: (Stream) -> Bool = { stream in
             guard let query = trustedPackQuery else { return false }
             let titleLower = stream.title.lowercased()
-            
-            // Check if title contains the trusted pack query (or significant parts of it)
-            // For now, simple containment check is usually enough for exact pack titles
+
+            // Enhanced matching for Breaking Bad trusted pack:
+            // Query: "breaking bad s01-s05 1080p nf web-dl av1 eac3 multsub"
+            // Check for key components: "breaking bad", "s01-s05", "1080p", "nf web-dl", "av1", "eac3"
+            if query.contains("breaking bad") && query.contains("s01-s05") {
+                return titleLower.contains("breaking bad") &&
+                       (titleLower.contains("s01-s05") || titleLower.contains("season 5") || titleLower.contains("complete")) &&
+                       titleLower.contains("1080p") &&
+                       titleLower.contains("nf") &&
+                       (titleLower.contains("av1") || titleLower.contains("web-dl"))
+            }
+
+            // Fallback to original logic for other series
             return titleLower.contains(query)
         }
 

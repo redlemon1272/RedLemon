@@ -1405,6 +1405,13 @@ extension MPVPlayerViewModel {
             let hostTimestamp = message.timestamp
             guard let isPlaying = message.isPlaying else { return }
 
+            // FIX: Ensure waiting overlay is dismissed if host is playing
+            // This handles cases where the initial .play command was missed
+            if isPlaying && showWaitingForGuests {
+                print("🎬 Received playback state (playing) - Dismissing waiting overlay")
+                showWaitingForGuests = false
+            }
+
             // Update network latency estimate
             updateNetworkLatency()
 

@@ -39,6 +39,9 @@ struct WatchPartyLobbyView: View {
             }
         }
         .onAppear {
+            viewModel.appState = appState  // Set weak reference
+            viewModel.connect()
+
             if appState.shouldAutoJoinLobby {
                 isAutoJoining = true
                 // Auto-ready after a brief delay to allow connection
@@ -539,6 +542,7 @@ struct WatchPartyLobbyView: View {
     }
 
     private func leaveLobby() {
+        viewModel.disconnect()
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
     }

@@ -1250,12 +1250,16 @@ extension MPVPlayerViewModel {
                         }
 
                         // Post-Load Gate Logic
-                        if userId != self.currentUserId {
-                            print("👤 Post-Load Gate: Guest joined presence: \(userId)")
-                            self.connectedGuestIds.insert(userId)
+                        // CRITICAL: Extract actual user_id from metadata, not the presence key
+                        let actualUserId = metadata?["user_id"] as? String ?? userId
+                        if actualUserId != self.currentUserId {
+                            print("👤 Post-Load Gate: Guest joined presence: \(actualUserId) (presence key: \(userId))")
+                            self.connectedGuestIds.insert(actualUserId)
                             if self.isWatchPartyHost {
                                 self.checkIfAllGuestsReady()
                             }
+                        } else {
+                            print("🚫 Post-Load Gate: Ignoring host's own presence: \(actualUserId)")
                         }
 
                     case .leave:
@@ -1263,10 +1267,12 @@ extension MPVPlayerViewModel {
                         print("👋 Participant left: \(userId)")
 
                         // Post-Load Gate Logic
-                        if userId != self.currentUserId {
-                            print("👋 Post-Load Gate: Guest left presence: \(userId)")
-                            self.connectedGuestIds.remove(userId)
-                            self.readyGuestIds.remove(userId)
+                        // CRITICAL: Extract actual user_id from metadata, not the presence key
+                        let actualUserId = metadata?["user_id"] as? String ?? userId
+                        if actualUserId != self.currentUserId {
+                            print("👋 Post-Load Gate: Guest left presence: \(actualUserId) (presence key: \(userId))")
+                            self.connectedGuestIds.remove(actualUserId)
+                            self.readyGuestIds.remove(actualUserId)
                             if self.isWatchPartyHost {
                                 self.checkIfAllGuestsReady()
                             }

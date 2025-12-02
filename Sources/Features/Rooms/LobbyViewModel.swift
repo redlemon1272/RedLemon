@@ -314,22 +314,6 @@ class LobbyViewModel: ObservableObject {
                     }
                 }
 
-                // Set up presence callback to track joins/leaves
-                Task {
-                    await realtimeManager?.setPresenceCallback { action, userId, metadata in
-                        Task { @MainActor in
-                            switch action {
-                            case .join:
-                                print("👤 User joined via presence: \(userId)")
-                                // Presence changes will be handled by database polling
-                            case .leave:
-                                print("👋 User left via presence: \(userId)")
-                                // Presence changes will be handled by database polling
-                            }
-                        }
-                    }
-                }
-
                 if !isHost {
                     // Guest joining - send join message via Realtime only
                     // Don't add message locally to avoid duplicates

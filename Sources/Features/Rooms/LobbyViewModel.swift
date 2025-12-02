@@ -130,10 +130,25 @@ class LobbyViewModel: ObservableObject {
                         self.addMessage(.userJoined, userName: username)
                     }
                 case .leave:
-                    if let index = self.participants.firstIndex(where: { $0.id == userId }) {
-                        let participant = self.participants[index]
-                        self.participants.remove(at: index)
-                        self.addMessage(.userLeft, userName: participant.name)
+                    // Defer leave processing to avoid false positives from metadata updates
+                    // Phoenix sends leave+join for the same user when updating metadata
+                    // Wait a moment to see if they rejoin (metadata update) before removing
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+
+                        // Only remove if they're still not in participants (actual leave)
+                        // If they rejoined (metadata update), they'll already be in the list
+                        if let index = self.participants.firstIndex(where: { $0.id == userId }) {
+                            // Double-check they're actually gone by verifying no recent join
+                            let participant = self.participants[index]
+                            let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
+
+                            // If they joined recently (\u003c 1 second), it's a metadata update, not a real leave
+                            if timeSinceJoin > 1.0 {
+                                self.participants.remove(at: index)
+                                self.addMessage(.userLeft, userName: participant.name)
+                            }
+                        }
                     }
                 }
             }

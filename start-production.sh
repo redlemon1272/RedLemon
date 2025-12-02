@@ -96,20 +96,6 @@ validate_environment() {
         return 1
     fi
 
-    # Check Node.js version for watchparty server
-    if ! command -v node > /dev/null 2>&1; then
-        log_error "Node.js not found. Please install Node.js 20 LTS from https://nodejs.org/"
-        return 1
-    fi
-
-    NODE_VERSION=$(node --version | grep -o '[0-9]\+' | head -n1)
-    if [ "$NODE_VERSION" -lt 20 ] || [ "$NODE_VERSION" -ge 26 ]; then
-        log_error "Node.js version $NODE_VERSION is not supported. Please use Node.js 20-25."
-        log_error "Current version: $(node --version)"
-        log_error "Install Node 20 LTS: https://nodejs.org/"
-        return 1
-    fi
-    log_info "Node.js version: $(node --version) ✓"
 
     log_success "Environment validation passed"
     return 0
@@ -192,56 +178,9 @@ analyze_build_failure() {
 
 launch_app() {
     local http_port=${REDLEMON_PORT:-47253}
-    local watchparty_port=18081
     local log_file="${SCRIPT_DIR}/redlemon-$(date +%Y%m%d-%H%M%S).log"
 
-    log_info "Preparing to launch RedLemon with watchparty server..."
-
-    # Start watchparty server first
-    log_info "Building and starting watchparty server..."
-    cd "$SCRIPT_DIR/watchparty-server"
-
-    # Ensure dependencies are installed and up to date
-    if [ ! -d "node_modules" ] || [ "package.json" -nt "node_modules" ]; then
-        log_info "Installing/Updating watchparty dependencies..."
-        if ! npm install; then
-            log_error "Failed to install watchparty dependencies"
-            return 1
-        fi
-        # Touch node_modules to update its timestamp
-        touch node_modules
-    fi
-
-    # Build TypeScript if needed
-    if [ ! -d "dist" ] || [ "src/index.ts" -nt "dist/index.js" ] || [ ! -f "dist/index.js" ]; then
-        log_info "Building watchparty server..."
-        if ! npm run build; then
-            log_warning "Build failed. Attempting clean install (fixes architecture mismatches)..."
-            rm -rf node_modules package-lock.json
-            npm install
-            if ! npm run build; then
-                log_error "Failed to build watchparty server after clean install"
-                return 1
-            fi
-        fi
-    fi
-
-    # Start watchparty server in background
-    export WATCHPARTY_PORT=$watchparty_port
-    export SUPABASE_URL=$SUPABASE_URL
-    export SUPABASE_SERVICE_ROLE_KEY=$SUPABASE_SERVICE_ROLE_KEY
-    npm start &
-    WATCHPARTY_PID=$!
-
-    # Verify watchparty server started
-    sleep 3
-    if ! curl -s "http://localhost:$watchparty_port/healthz" > /dev/null; then
-        log_error "Watchparty server failed to start on port $watchparty_port"
-        return 1
-    fi
-
-    log_success "Watchparty server started on port $watchparty_port (PID: $WATCHPARTY_PID)"
-    cd "$SCRIPT_DIR"
+    log_info "Preparing to launch RedLemon..."
 
     # Remove quarantine flag
     log_info "Removing quarantine flag..."
@@ -255,11 +194,9 @@ launch_app() {
 
     # Launch with environment variables and proper output handling
     log_info "Launching RedLemon on port $http_port..."
-    log_info "Watchparty server running on port $watchparty_port"
     log_info "Application logs will be displayed below and saved to: $log_file"
     cd "$SCRIPT_DIR"
     export REDLEMON_PORT=$http_port
-    export WATCHPARTY_PORT=$watchparty_port
 
     # Start app in foreground with output duplication to log file
     # This ensures logs appear in real-time in terminal while also being saved
@@ -267,13 +204,9 @@ launch_app() {
 }
 
 cleanup() {
-    log_info "Stopping any remaining RedLemon and WatchParty processes..."
+    log_info "Stopping any remaining RedLemon processes..."
     pkill -f RedLemon 2>/dev/null || true
-    pkill -f "npm start" 2>/dev/null || true
     lsof -ti:${REDLEMON_PORT:-47253} 2>/dev/null | xargs kill -9 2>/dev/null || true
-    lsof -ti:18081 2>/dev/null | xargs kill -9 2>/dev/null || true
-    lsof -ti:8080 2>/dev/null | xargs kill -9 2>/dev/null || true
-    lsof -ti:3000 2>/dev/null | xargs kill -9 2>/dev/null || true
     log_success "Cleanup completed"
     exit 0
 }
@@ -350,9 +283,8 @@ main() {
     log_success "RedLemon is starting in PRODUCTION MODE!"
     echo ""
     echo "📊 Services:"
-    echo "   ✅ Backend:           Supabase PostgreSQL"
-    echo "   ✅ WatchParty Server:  Port 18081 (WebSocket)"
-    echo "   🔐 Authentication:    Username-based"
+    echo "   ✅ Backend:        Supabase PostgreSQL + Realtime"
+    echo "   🔐 Authentication: Username-based"
     echo ""
     echo "📝 Application output will appear below in real-time:"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

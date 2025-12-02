@@ -29,6 +29,20 @@ class LobbyViewModel: ObservableObject {
     private var isHost: Bool
     private var realtimeClient: SupabaseRealtimeClient?
     private var countdownTimer: Timer?
+    private var countdownTask: Task<Void, Never>?
+    private var participantsPollingTask: Task<Void, Never>?
+    private var roomStatePollingTask: Task<Void, Never>?
+    private var lastRoomPlayingState: Bool = false
+    private var participantId: String
+    private var isDisconnecting: Bool = false
+    private var realtimeManager: RealtimeChannelManager?
+
+    // Helper to track state safely across actor boundaries (specifically for deinit)
+    private class TransitionState {
+        var isStarting: Bool = false
+    }
+    private let transitionState = TransitionState()
+
     weak var appState: AppState?  // Weak reference to avoid retain cycle
 
     // MARK: - Initialization
@@ -38,6 +52,13 @@ class LobbyViewModel: ObservableObject {
         self.isHost = isHost
         self.participants = room.participants
 
+        // For hosts, use room host ID. For guests, we'll set to participantId after getting user ID
+        if isHost {
+            self.participantId = room.hostId
+        } else {
+            // Temporary - will be updated when we get actual user ID
+            self.participantId = UUID().uuidString
+        }
 
         // Setup Realtime subscription for room updates
         Task {
@@ -74,6 +95,101 @@ class LobbyViewModel: ObservableObject {
         if let client = realtimeClient {
             Task {
                 await client.disconnect()
+            }
+        }
+    }
+
+    private func setupRealtimeSubscription() async {
+        // Initialize Realtime manager
+        self.realtimeManager = RealtimeChannelManager(realtimeClient: SupabaseClient.shared.realtimeClient)
+
+        // Set up presence callback
+        await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+
+                // Update participants list
+                switch action {
+                case .join:
+                    // Check if already exists
+                    if !self.participants.contains(where: { $0.id == userId }) {
+                        let username = metadata?["username"] as? String ?? "User"
+                        let _ = metadata?["avatar_url"] as? String
+
+                        let newParticipant = Participant(
+                            id: userId,
+                            name: username,
+                            isHost: false, // We can't easily determine host from presence alone yet
+                            isReady: false,
+                            joinedAt: Date()
+                        )
+                        self.participants.append(newParticipant)
+                        self.addMessage(.userJoined, userName: username)
+                    }
+                case .leave:
+                    if let index = self.participants.firstIndex(where: { $0.id == userId }) {
+                        let participant = self.participants[index]
+                        self.participants.remove(at: index)
+                        self.addMessage(.userLeft, userName: participant.name)
+                    }
+                }
+            }
+        }
+
+        // Set up connection state callback
+        await realtimeManager?.setConnectionStateCallback { [weak self] state in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                // Convert RealtimeConnectionState to RealtimeConnectionStatus
+                switch state {
+                case .connected:
+                    self.realtimeConnectionStatus = .connected
+                case .connecting:
+                    self.realtimeConnectionStatus = .connecting
+                case .disconnected:
+                    self.realtimeConnectionStatus = .disconnected
+                case .failed:
+                    self.realtimeConnectionStatus = .failed
+                }
+            }
+        }
+
+        // Connect - the onSync callback will handle all sync messages including chat
+        do {
+            try await realtimeManager?.setup(
+                roomId: room.id,
+                isHost: isHost,
+                userId: participantId,
+                username: appState?.currentUsername ?? "User",
+                onSync: { [weak self] message in
+                    Task { @MainActor [weak self] in
+                        guard let self = self else { return }
+                        await self.handleLobbyMessage(message)
+                    }
+                }
+            )
+            print("✅ Lobby: Connected to Realtime")
+        } catch {
+            print("❌ Lobby: Failed to connect to Realtime: \(error)")
+        }
+    }
+
+    func startCountdown() {
+        guard !isStarting else { return }
+        isStarting = true
+        transitionState.isStarting = true
+        countdown = 3
+
+        countdownTimer?.invalidate()
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                if self.countdown > 0 {
+                    self.countdown -= 1
+                } else {
+                    timer.invalidate()
+                    // Transition to player handled by view based on isStarting/countdown
+                }
             }
         }
     }
@@ -453,11 +569,11 @@ class LobbyViewModel: ObservableObject {
                 type: .chat,
                 timestamp: 0,
                 isPlaying: nil,
-                senderId: participantId,
+                senderId: self.participantId,
                 chatText: "LOBBY_KICK:\(participant.id)",
                 chatUsername: "Host"
             )
-            try? await realtimeManager?.sendSyncMessage(syncMsg)
+            try? await self.realtimeManager?.sendSyncMessage(syncMsg)
         }
 
         print("🚫 Lobby: Kicked \(participant.name)")
@@ -477,14 +593,14 @@ class LobbyViewModel: ObservableObject {
         Task {
             let syncMsg = SyncMessage(
                 type: .chat,
-                timestamp: Double(countdown),
+                timestamp: Double(self.countdown),
                 isPlaying: nil,
-                senderId: participantId,
+                senderId: self.participantId,
                 chatText: "LOBBY_START_COUNTDOWN",
                 chatUsername: "Host"
             )
             do {
-                try await realtimeManager?.sendSyncMessage(syncMsg)
+                try await self.realtimeManager?.sendSyncMessage(syncMsg)
                 realtimeSuccess = true
                 NSLog("✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime")
                 NSLog("📡 Realtime delivery confirmed for \(participants.count) guests")

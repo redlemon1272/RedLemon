@@ -275,14 +275,8 @@ struct MPVPlayerView: View {
             
             // Install local event monitor to capture keyboard events even when text field is focused
             localKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { event in
-                // Spacebar (keyCode 49): open chat (only if in watch party and closed)
-                if event.keyCode == 49 && event.type == .keyDown && !viewModel.showChat && viewModel.isInWatchParty {
-                    viewModel.toggleChat()
-                    return nil // Consume event
-                }
-
-                // Command key pressed: close chat if open
-                if event.type == .flagsChanged && event.modifierFlags.contains(.command) && viewModel.showChat {
+                // Command key pressed: toggle chat (only in watch party mode)
+                if event.type == .flagsChanged && event.modifierFlags.contains(.command) && viewModel.isInWatchParty {
                     viewModel.toggleChat()
                     return nil // Consume event
                 }

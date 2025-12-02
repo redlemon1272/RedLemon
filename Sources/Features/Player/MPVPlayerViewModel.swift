@@ -60,6 +60,9 @@ class MPVPlayerViewModel: ObservableObject {
     private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
     private var pendingPlayTask: Task<Void, Never>?
 
+    // Ready Loop: Periodically resend READY signal until playback starts
+    private var readyLoopTimer: Timer?
+
     // Player state
     @Published var videoURL: String = ""
     @Published var isLoading: Bool = true
@@ -1032,6 +1035,10 @@ class MPVPlayerViewModel: ObservableObject {
         pendingPlayTask?.cancel()
         pendingPlayTask = nil
 
+        // Stop Ready Loop
+        readyLoopTimer?.invalidate()
+        readyLoopTimer = nil
+
         // ✅ STEP 4: Disconnect realtime FIRST and await completion
         if isInWatchParty {
             print("🔌 Disconnecting realtime manager...")
@@ -1425,6 +1432,10 @@ extension MPVPlayerViewModel {
                 showWaitingForGuests = false
                 mpvWrapper.play()
                 isPlaying = true
+
+                // Stop Ready Loop
+                readyLoopTimer?.invalidate()
+                readyLoopTimer = nil
             } else {
                 // Normal play sync
                 if !mpvWrapper.isPlaying {
@@ -1444,6 +1455,10 @@ extension MPVPlayerViewModel {
             if isPlaying && showWaitingForGuests {
                 print("🎬 Received playback state (playing) - Dismissing waiting overlay")
                 showWaitingForGuests = false
+
+                // Stop Ready Loop
+                readyLoopTimer?.invalidate()
+                readyLoopTimer = nil
             }
 
             // Update network latency estimate
@@ -1684,30 +1699,54 @@ extension MPVPlayerViewModel {
         // Optimistically set true to prevent rapid-fire calls
         hasSentReadySignal = true
 
-        NSLog("👋 Watch Party: Sending READY signal")
+        NSLog("👋 Watch Party: Sending INITIAL READY signal and starting loop")
 
-        // Send Ready signal
-        let syncMessage = SyncMessage(
-            type: .ready,
-            timestamp: Date().timeIntervalSince1970,
-            position: 0,
-            isPlaying: false,
-            senderId: currentUserId
-        )
-        Task {
-            do {
-                if let manager = realtimeManager {
-                    try await manager.sendSyncMessage(syncMessage)
-                    NSLog("✅ Watch Party: READY signal sent successfully")
-                } else {
-                    NSLog("❌ Watch Party: realtimeManager is nil, cannot send READY signal")
-                    // Revert flag so we can retry
-                    await MainActor.run { self.hasSentReadySignal = false }
+        // Define transmission logic
+        let transmit = { [weak self] (isRetry: Bool) in
+            guard let self = self else { return }
+
+            // Send Ready signal
+            let syncMessage = SyncMessage(
+                type: .ready,
+                timestamp: Date().timeIntervalSince1970,
+                position: 0,
+                isPlaying: false,
+                senderId: self.currentUserId
+            )
+
+            Task {
+                do {
+                    if let manager = self.realtimeManager {
+                        try await manager.sendSyncMessage(syncMessage)
+                        if isRetry {
+                            NSLog("🔄 Watch Party: Resent READY signal (loop)")
+                        } else {
+                            NSLog("✅ Watch Party: READY signal sent successfully")
+                        }
+                    } else {
+                        NSLog("❌ Watch Party: realtimeManager is nil, cannot send READY signal")
+                    }
+                } catch {
+                    NSLog("❌ Watch Party: Failed to send READY signal: %@", error.localizedDescription)
                 }
-            } catch {
-                NSLog("❌ Watch Party: Failed to send READY signal: %@", error.localizedDescription)
-                // Revert flag so we can retry
-                await MainActor.run { self.hasSentReadySignal = false }
+            }
+        }
+
+        // Send immediately
+        transmit(false)
+
+        // Start Ready Loop (resend every 2 seconds until playback starts)
+        readyLoopTimer?.invalidate()
+        readyLoopTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+
+            // Only continue loop if we are still waiting for guests (waiting for host to start)
+            if self.showWaitingForGuests {
+                transmit(true)
+            } else {
+                // Stop loop if we're no longer waiting
+                self.readyLoopTimer?.invalidate()
+                self.readyLoopTimer = nil
             }
         }
 

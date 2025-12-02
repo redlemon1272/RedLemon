@@ -499,6 +499,13 @@ func registerStreamRoutes(_ app: Application) {
 
         for stream in streamsWithSubtitles {
             let bucket = determineQualityBucket(stream.quality ?? "")
+
+            // CRITICAL FIX: Filter out 2160p streams for TV events with trusted packs to prevent massive file selection
+            if bucket == "2160p" && type == "series" && trustedPackQuery != nil {
+                print("   🚫 TV EVENT FILTER: Blocking 2160p stream for series with trusted pack: \(stream.title)")
+                continue
+            }
+
             buckets[bucket, default: []].append(stream)
         }
 
@@ -596,8 +603,14 @@ func registerStreamRoutes(_ app: Application) {
 
         let preferMultiSubMovies = (type == "movie")
 
+        // CRITICAL FIX: Skip 2160p processing entirely for TV events with trusted packs
+        let uhd4kBucket: [Stream] = (type == "series" && trustedPackQuery != nil) ? [] : (buckets["2160p"] ?? [])
+        if type == "series" && trustedPackQuery != nil {
+            print("   🚫 TV EVENT FILTER: Completely skipping 2160p bucket for series with trusted pack to ensure hardcoded pack is used")
+        }
+
         var qualityBuckets = QualityBuckets(
-            uhd4k: processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
+            uhd4k: processBucket(uhd4kBucket, minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
             fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
             hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
             sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
@@ -645,8 +658,8 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL FIX: Build streams array respecting server's ordering
         var finalStreams: [Stream] = []
 
-        // Add 2160p bucket if available
-        if let uhd4k = qualityBuckets.uhd4k {
+        // Add 2160p bucket if available (but NOT for TV events with trusted packs)
+        if let uhd4k = qualityBuckets.uhd4k, !(type == "series" && trustedPackQuery != nil) {
             if let primary = uhd4k.primary {
                 finalStreams.append(primary)
                 print("📦 Adding 2160p primary: \(primary.title)")
@@ -657,6 +670,8 @@ func registerStreamRoutes(_ app: Application) {
                     print("📦 Adding 2160p alternate: \(alt.title)")
                 }
             }
+        } else if type == "series" && trustedPackQuery != nil {
+            print("   🚫 TV EVENT FILTER: Skipping 2160p bucket in final streams for series with trusted pack")
         }
 
         // Add 1080p bucket if available (highest priority for most users)

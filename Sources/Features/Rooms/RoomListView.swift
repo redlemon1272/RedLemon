@@ -88,7 +88,7 @@ struct RoomListView: View {
         }
         .navigationTitle("Watch Party Rooms")
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .automatic) {
                 Button(action: {
                     loadRooms(reset: true)
                 }) {

@@ -1759,25 +1759,31 @@ extension MPVPlayerViewModel {
     private func checkIfAllGuestsReady() {
         guard isWatchPartyHost else { return }
 
+        NSLog("🔍 DEBUG: checkIfAllGuestsReady called")
+        NSLog("🔍 DEBUG: hasSentReadySignal = %@", hasSentReadySignal ? "true" : "false")
+        NSLog("🔍 DEBUG: connectedGuestIds = %@", Array(connectedGuestIds).joined(separator: ", "))
+        NSLog("🔍 DEBUG: readyGuestIds = %@", Array(readyGuestIds).joined(separator: ", "))
+
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
-            print("⏳ Host not ready yet (but \(readyGuestIds.count) guests are ready)")
+            NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)
             return
         }
 
         // CRITICAL FIX: Ensure we have at least one guest before starting
         // Without this, fast hosts would start immediately if guests haven't joined presence yet
         guard !connectedGuestIds.isEmpty else {
-            print("⏳ No guests connected yet (waiting for presence updates)")
+            NSLog("⏳ No guests connected yet (waiting for presence updates)")
             return
         }
 
         // Check if all connected guests are ready
         // Note: connectedGuestIds comes from Presence
         let allReady = connectedGuestIds.isSubset(of: readyGuestIds)
+        NSLog("🔍 DEBUG: allReady = %@", allReady ? "true" : "false")
 
         if allReady {
-            print("🚀 All guests ready! Starting playback in 1s...")
+            NSLog("🚀 All guests ready! Starting playback in 1s...")
 
             // Small delay to ensure UI updates
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
@@ -1786,12 +1792,12 @@ extension MPVPlayerViewModel {
             }
         } else {
             let missing = connectedGuestIds.subtracting(readyGuestIds)
-            print("⏳ Waiting for guests: \(missing.count) remaining")
+            NSLog("⏳ Waiting for guests: %d remaining - %@", missing.count, Array(missing).joined(separator: ", "))
         }
     }
 
     private func startSynchronizedPlayback() {
-        print("🎬 Host: Initiating synchronized start")
+        NSLog("🎬 Host: Initiating synchronized start")
         showWaitingForGuests = false
         mpvWrapper.play()
         isPlaying = true

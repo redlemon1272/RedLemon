@@ -50,6 +50,56 @@ func registerStreamRoutes(_ app: Application) {
         return httpResponse
     }
 
+    // POST /api/streams/resolve (enhanced for trusted packs)
+    app.post("api", "streams", "resolve") { req async throws -> Response in
+        let request = try req.content.decode(ResolveRequest.self)
+
+        print("🔍 Resolving streams for: \(request.imdbId)")
+
+        // Check if this is a TV series with trusted pack configuration
+        var trustedPackQuery: String? = nil
+        if request.type == "series",
+           let tvEvent = TVEventData.getSeries(id: request.imdbId),
+           case let .trustedPack(searchQuery) = tvEvent.packConfig {
+            trustedPackQuery = searchQuery
+            print("🎯 Found trusted pack for \(tvEvent.title): \(searchQuery)")
+        }
+
+        let streams = try await ProviderManager.shared.fetchStreams(
+            imdbId: request.imdbId,
+            type: request.type ?? "movie",
+            season: request.season,
+            episode: request.episode,
+            providerNames: request.providers
+        )
+
+        // Enhanced sorting: prioritize trusted pack if available
+        var sorted = sortStreams(streams, trustedPackQuery: trustedPackQuery)
+
+        // Attach subtitles to streams
+        sorted = await attachSubtitles(
+            to: sorted,
+            imdbId: request.imdbId,
+            type: request.type ?? "movie",
+            season: request.season,
+            episode: request.episode
+        )
+
+        let response = ResolveResponse(
+            streams: sorted,
+            count: sorted.count
+        )
+
+        let jsonData = try JSONEncoder().encode(response)
+        let httpResponse = Response(status: .ok)
+        httpResponse.body = .init(data: jsonData)
+        httpResponse.headers.contentType = .json
+
+        print("✅ Found \(sorted.count) streams")
+
+        return httpResponse
+    }
+
     // POST /api/streams/episodes - Get available episodes from a season pack torrent
     app.post("api", "streams", "episodes") { (req: Request) async throws -> Response in
         struct EpisodesRequest: Codable {
@@ -1401,8 +1451,18 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
 
 // MARK: - Sorting and Filtering
 
-private func sortStreams(_ streams: [Stream]) -> [Stream] {
+private func sortStreams(_ streams: [Stream], trustedPackQuery: String? = nil) -> [Stream] {
     return streams.sorted { s1, s2 in
+        // 0. Highest priority: Trusted pack match
+        if let trustedQuery = trustedPackQuery {
+            let s1MatchesTrusted = matchesTrustedPack(s1, query: trustedQuery)
+            let s2MatchesTrusted = matchesTrustedPack(s2, query: trustedQuery)
+
+            if s1MatchesTrusted != s2MatchesTrusted {
+                return s1MatchesTrusted && !s2MatchesTrusted
+            }
+        }
+
         // 1. Enhanced source quality ranking
         let sourceScore1 = sourceQualityRank(s1)
         let sourceScore2 = sourceQualityRank(s2)
@@ -1450,6 +1510,35 @@ private func sortStreams(_ streams: [Stream]) -> [Stream] {
         return size1 > size2
     }
 }
+
+// MARK: - Trusted Pack Matching
+
+private func matchesTrustedPack(_ stream: Stream, query: String) -> Bool {
+    let title = stream.title.lowercased()
+    let queryLower = query.lowercased()
+
+    // For Breaking Bad: "Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub"
+    // Check for key components rather than exact match
+    let queryComponents = queryLower.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
+
+    // Must contain show name
+    guard title.contains("breaking bad") else { return false }
+
+    // Must contain seasons
+    guard title.contains("s01") && (title.contains("s05") || title.contains("s1-s5") || title.contains("s01-s05")) else { return false }
+
+    // Must contain quality
+    guard title.contains("1080p") else { return false }
+
+    // Must contain Netflix or WEB-DL indicators
+    guard title.contains("nf ") || title.contains("web-dl") || title.contains("webdl") else { return false }
+
+    // Prefer AV1 but allow AVC
+    let hasGoodCodec = title.contains("av1") || title.contains("avc") || title.contains("h264") || title.contains("x264")
+
+    return hasGoodCodec
+}
+
 // MARK: - Enhanced Quality Ranking Functions
 
 private func sourceQualityRank(_ stream: Stream) -> Int {

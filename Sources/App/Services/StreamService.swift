@@ -37,7 +37,10 @@ actor StreamService {
             print("⚠️ StreamService: Corrected movie request - removed season/episode")
         }
 
-        // Step 2: Get Stream Bucket
+        // Step 2: Continue with regular stream resolution (trusted pack filtering happens server-side)
+        print("🎬 StreamService: Resolving \(item.type) - trusted pack filtering will be applied server-side")
+
+        // Step 3: Get Stream Bucket (fallback)
         NSLog("🔍 StreamService: Fetching stream bucket...")
         let bucket = try await LocalAPIClient.shared.getStreamBucket(
             for: item.id,

@@ -26,6 +26,20 @@ protocol ProviderService {
         season: Int?,
         episode: Int?
     ) async throws -> [Stream]
+
+    /// Search streams by query string
+    /// - Parameter query: Search query
+    /// - Returns: Array of Stream objects
+    func search(query: String) async throws -> [Stream]
+}
+
+/// Default implementation for search method
+extension ProviderService {
+    func search(query: String) async throws -> [Stream] {
+        // Default implementation - providers should override this if they support search
+        print("⚠️ Provider \(name) does not support search functionality")
+        return []
+    }
 }
 
 /// Provider configuration
@@ -110,6 +124,27 @@ actor ProviderManager {
         
         // Deduplicate by info hash
         return deduplicateStreams(results)
+    }
+
+    func searchTorrents(query: String) async throws -> [Stream] {
+        print("🔍 Searching torrents for query: \(query)")
+
+        // Use all providers but search with specific query instead of broad IMDB search
+        let providersToUse = Array(providers.values)
+        var searchResults: [Stream] = []
+
+        for provider in providersToUse {
+            do {
+                let results = try await provider.search(query: query)
+                print("   🔍 Provider \(provider.name) found \(results.count) results")
+                searchResults.append(contentsOf: results)
+            } catch {
+                print("❌ Provider \(provider.name) search failed: \(error)")
+            }
+        }
+
+        print("📦 Search completed: \(searchResults.count) total results")
+        return deduplicateStreams(searchResults)
     }
     
     private func deduplicateStreams(_ streams: [Stream]) -> [Stream] {

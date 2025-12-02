@@ -468,43 +468,19 @@ struct EventsView: View {
 
         print("   Room createdAt: \(room.createdAt)")
 
+        // Auto-join lobby if it's the live event OR if we are seamlessly transitioning
+        if event.isLive || appState.shouldAutoJoinLobby {
+            appState.shouldAutoJoinLobby = true
+        }
+
         appState.currentEventId = event.id // Track current event ID
+
         appState.isEventPlayback = true // Mark as event playback for seamless transition support
         appState.currentWatchMode = .watchParty // Enable watch party mode for chat
 
         appState.currentWatchPartyRoom = room
         appState.isWatchPartyHost = false // User is always guest in system events
-
-        // For live events, go directly to player at current timestamp
-        // For upcoming events, go to lobby to wait
-        if event.isLive {
-            print("🎬 Live event detected - going directly to player")
-
-            // Calculate how far into the movie the live event is
-            let now = Date()
-            let elapsedSeconds = now.timeIntervalSince(room.createdAt)
-
-            // Set resume timestamp to current playback position
-            appState.resumeFromTimestamp = max(0, elapsedSeconds)
-
-            print("   Live event started at: \(room.createdAt)")
-            print("   Current time: \(now)")
-            print("   Elapsed: \(elapsedSeconds) seconds")
-            print("   Setting resumeFromTimestamp to: \(appState.resumeFromTimestamp)")
-
-            // Go directly to player, bypassing lobby
-            appState.currentView = .player
-        } else {
-            print("🎭 Upcoming event detected - going to lobby")
-
-            // Auto-join lobby if we are seamlessly transitioning
-            if appState.shouldAutoJoinLobby {
-                appState.shouldAutoJoinLobby = true
-            }
-
-            // Go to lobby to wait for event to start
-            appState.currentView = .watchPartyLobby
-        }
+        appState.currentView = .watchPartyLobby
     }
 }
 

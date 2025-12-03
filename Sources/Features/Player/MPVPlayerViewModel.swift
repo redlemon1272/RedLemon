@@ -39,6 +39,9 @@ class MPVPlayerViewModel: ObservableObject {
     private var hasCleanedUp: Bool = false
     private var mpvObserverTasks: [Task<Void, Never>] = []
 
+    // Resume state tracking
+    private var hasVideoReadyTriggered: Bool = false
+
     // Watch party state
     @Published var isInWatchParty: Bool = false  // Track if currently in watch party mode
     @Published var isResumingInWatchParty: Bool = false  // Track if resuming from saved position in watch party
@@ -152,6 +155,9 @@ class MPVPlayerViewModel: ObservableObject {
         self.subtitles = effectiveSubtitles
         self.isLoading = true
         self.showPoster = true
+
+        // Reset resume handling flag for new video loads
+        self.hasVideoReadyTriggered = false
 
         // Add mock chat messages for testing UI
         self.messages = [
@@ -395,6 +401,13 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Playback Control
 
     func onVideoReady() {
+        // Strict gate: Ensure this only runs once per video load
+        guard !hasVideoReadyTriggered else {
+            print("⚠️ onVideoReady called again - ignoring to prevent loops")
+            return
+        }
+        hasVideoReadyTriggered = true
+        
         print("✅ Video ready - hiding poster")
 
         // Fade out poster when video is ready
@@ -417,20 +430,9 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Pause, seek, then resume
             mpvWrapper.pause()
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
-                guard let self = self else { return }
-                self.mpvWrapper.seek(to: seekTime)
-
-                // Verify and resume after seek
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.mpvWrapper.play()
-                    print("✅ EVENT: Seeked to \(Int(seekTime))s and resumed playback")
-
-                    // Clear event start time after successful seek
-                    self.appState?.eventStartTime = nil
-                }
-            }
+            
+            // Use the robust resume logic which waits for duration/load
+            attemptImmediateResume(resumeTime: seekTime)
 
             // Start watch history saving
             startWatchHistorySaving()
@@ -446,6 +448,8 @@ class MPVPlayerViewModel: ObservableObject {
         // Check if we should resume from a specific timestamp
         if let resumeTime = appState?.resumeFromTimestamp, resumeTime > 0 {
             print("🔄 Resuming playback from \(Int(resumeTime))s (appState.resumeFromTimestamp = \(appState?.resumeFromTimestamp ?? 0))")
+
+
 
             // Check if we're in watch party mode and set flag accordingly
             if isInWatchParty {
@@ -464,8 +468,12 @@ class MPVPlayerViewModel: ObservableObject {
             // Only auto-play if NOT in watch party (Watch Party waits for Ready Gate)
             print("ℹ️ No resume timestamp set (starting from beginning)")
 
-            // For normal playback, set isPlaying to true since video started
+            // For normal playback, ensure MPV is playing and update UI state
+            if !mpvWrapper.isPlaying {
+                mpvWrapper.play()
+            }
             self.isPlaying = true
+            print("▶️ Auto-playing solo content from beginning")
         }
 
         // Start periodic watch history saving (every 10 seconds)
@@ -501,101 +509,22 @@ class MPVPlayerViewModel: ObservableObject {
             print("🎯 Executing immediate seek to \(Int(resumeTime))s...")
             self.mpvWrapper.seek(to: resumeTime)
 
-            // Verify seek was successful after a brief delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                let actualTime = self.currentTime
-                let timeDifference = abs(actualTime - resumeTime)
-                let tolerance: Double = resumeTime > 300 ? 5.0 : 2.0  // Smaller tolerance since we're seeking immediately
-
-                if timeDifference <= tolerance {
-                    print("✅ Immediate resume successful: Seeked to \(Int(actualTime))s (target: \(Int(resumeTime))s, diff: \(String(format: "%.1f", timeDifference))s)")
-
-                    // Clear resume timestamp and reset watch party resume flag after successful seek
-                    self.appState?.resumeFromTimestamp = nil
-                    self.isResumingInWatchParty = false
-                    self.mpvWrapper.play()  // Explicitly start playback after successful seek
-                    print("🧹 Cleared resumeFromTimestamp after successful immediate resume")
-                    print("🧹 Reset isResumingInWatchParty after successful immediate resume")
-                } else {
-                    print("⚠️ Immediate seek inaccurate: Current time \(Int(actualTime))s, target \(Int(resumeTime))s, diff \(String(format: "%.1f", timeDifference))s, retrying...")
-
-                    // Retry with fallback logic
-                    self.fallbackResume(resumeTime: resumeTime)
-                }
+            // Resume playback after brief delay to allow seek to register
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.mpvWrapper.play()
+                self.isPlaying = true
+                
+                // Clear state
+                self.appState?.resumeFromTimestamp = nil
+                self.appState?.eventStartTime = nil // Clear event start too if present
+                self.isResumingInWatchParty = false
+                
+                print("✅ Resumed playback after seek to \(Int(resumeTime))s")
             }
         }
     }
 
-    /// Fallback resume with progressive delays if immediate seek fails
-    private func fallbackResume(resumeTime: Double) {
-        print("🔄 FALLBACK RESUME: Using progressive delays for \(Int(resumeTime))s")
 
-        var retryCount = 0
-        let maxRetries = 5  // Reduced from 8 since we tried immediate first
-        let baseDelay: TimeInterval = 1.0  // Much shorter initial delays
-        let maxDelay: TimeInterval = 5.0  // Much shorter max delay
-
-        func attemptSeek() {
-            guard retryCount < maxRetries else {
-                print("❌ Failed to resume after fallback attempts, starting from beginning")
-                // Clear resume timestamp after all retries fail
-                appState?.resumeFromTimestamp = nil
-                self.isPlaying = true  // Start playing normally
-                return
-            }
-
-            retryCount += 1
-            // Use much shorter progressive delays: 1s, 2s, 3s, 5s, 5s
-            let delay = retryCount <= 2 ? baseDelay * Double(retryCount) : maxDelay
-
-            print("⏩ Fallback attempt \(retryCount)/\(maxRetries): Seeking to \(Int(resumeTime))s after \(delay)s delay...")
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-                guard let self = self else { return }
-
-                // Enhanced validation before seeking
-                guard self.duration > 0 else {
-                    print("⚠️ Video duration not available yet (\(self.duration)s), retrying...")
-                    attemptSeek()
-                    return
-                }
-
-                guard resumeTime < self.duration else {
-                    print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s), starting from beginning")
-                    self.appState?.resumeFromTimestamp = nil
-                    return
-                }
-
-                // Attempt seek
-                print("🎯 Executing fallback seek to \(Int(resumeTime))s...")
-                self.mpvWrapper.seek(to: resumeTime)
-
-                // Verify seek was successful after a brief delay
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    let actualTime = self.currentTime
-                    let timeDifference = abs(actualTime - resumeTime)
-                    let tolerance: Double = resumeTime > 300 ? 5.0 : 2.0
-
-                    if timeDifference <= tolerance {
-                        print("✅ Fallback resume successful: Seeked to \(Int(actualTime))s (target: \(Int(resumeTime))s, diff: \(String(format: "%.1f", timeDifference))s)")
-
-                        // Clear resume timestamp and reset watch party resume flag after successful seek
-                        self.appState?.resumeFromTimestamp = nil
-                        self.isResumingInWatchParty = false
-                        self.mpvWrapper.play()  // Explicitly start playback after successful seek
-                        print("🧹 Cleared resumeFromTimestamp after successful fallback resume")
-                        print("🧹 Reset isResumingInWatchParty after successful fallback resume")
-                    } else {
-                        print("⚠️ Fallback seek inaccurate: Current time \(Int(actualTime))s, target \(Int(resumeTime))s, diff \(String(format: "%.1f", timeDifference))s, retrying...")
-                        // Retry if seek was not accurate enough
-                        attemptSeek()
-                    }
-                }
-            }
-        }
-
-        attemptSeek()
-    }
 
 
     func togglePlayPause() {

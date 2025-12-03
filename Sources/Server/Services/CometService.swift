@@ -90,7 +90,7 @@ class CometService: ProviderService {
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = 20
+        request.timeoutInterval = 5
 
         let (data, response) = try await URLSession.shared.data(for: request)
 

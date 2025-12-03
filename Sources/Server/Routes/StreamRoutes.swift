@@ -295,13 +295,23 @@ func registerStreamRoutes(_ app: Application) {
             return titleLower.contains(query)
         }
 
+        // OPTIMIZATION: If we have a trusted pack, we can skip Comet (which is slow/unreliable)
+        // and rely on Torrentio/Zilean which are guaranteed to have the pack.
+        let providersToUse: [String]?
+        if trustedPackQuery != nil {
+            print("   🚀 Trusted pack detected - skipping Comet to avoid timeouts")
+            providersToUse = ["torrentio", "zilean", "mediafusion"]
+        } else {
+            providersToUse = nil
+        }
+
         // Fetch all streams from providers
         let streams = try await ProviderManager.shared.fetchStreams(
             imdbId: imdbId,
             type: type,
             season: season,
             episode: episode,
-            providerNames: nil
+            providerNames: providersToUse
         )
 
         print("📦 Received \(streams.count) raw streams, bucketing by quality...")

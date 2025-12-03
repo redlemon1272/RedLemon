@@ -543,8 +543,12 @@ struct EventItem: Identifiable {
 
     var isFinished: Bool {
         // Check if current time is past the movie's actual end time (not including buffer)
+        // Subtract 10-minute tolerance to account for streams that are shorter than metadata
+        // (e.g., metadata says 100min but actual stream is 90min)
         let now = TimeService.shared.now
-        let actualMovieEndTime = startTime.addingTimeInterval(actualMovieDuration)
+        let toleranceBuffer: TimeInterval = 600 // 10 minutes
+        let adjustedMovieDuration = max(0, actualMovieDuration - toleranceBuffer)
+        let actualMovieEndTime = startTime.addingTimeInterval(adjustedMovieDuration)
         return now >= actualMovieEndTime
     }
 

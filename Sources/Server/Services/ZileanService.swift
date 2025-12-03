@@ -47,6 +47,7 @@ class ZileanService: ProviderService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.timeoutInterval = 20
 
         let (data, response) = try await URLSession.shared.data(for: request)
 

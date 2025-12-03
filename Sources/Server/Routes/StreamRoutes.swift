@@ -1905,7 +1905,7 @@ private func processBucket(
     // For MOVIES ONLY: Remove collection/pack torrents to avoid file index issues
     // Collections can cause Real-Debrid to return wrong file from multi-file torrents
     if targetTitle != nil {
-        let collectionPatterns = ["collection", "pack", "trilogy", "quadrilogy", "pentalogy", "anthology", "complete", "1 2 3", "1-2-3", "1-5", "1 - 5"]
+        let collectionPatterns = ["collection", "pack", "trilogy", "quadrilogy", "pentalogy", "anthology", "complete", "1 2 3", "1-2-3", "1-5", "1 - 5", "top 250", "top 100", "imdb top", "box set", "boxset"]
         let beforeCollectionFilter = yearAndCodecFiltered.count
         yearAndCodecFiltered = yearAndCodecFiltered.filter { stream in
             let titleLower = stream.title.lowercased()

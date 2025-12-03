@@ -121,55 +121,66 @@ class AppState: ObservableObject {
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
 
-            // Step 2: Resolve stream via StreamService (passing metadata)
-            let result = try await StreamService.shared.resolveStream(
-                item: item,
-                quality: quality,
-                season: season,
-                episode: episode,
-                metadata: metadata
-            )
+            // Step 2: Resolve stream (Optimized for Guest)
+            var resolvedStream: Stream?
+            var resolvedMetadata: MediaMetadata? = metadata
 
-            // Step 2: Update UI with resolved data
+            // GUEST OPTIMIZATION: Check if we can use host's stream directly
+            if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+               let hostStreamHash = watchPartyRoom.selectedStreamHash,
+               let hostQuality = watchPartyRoom.selectedQuality,
+               let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+
+                NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
+                // Create stream with host's unlocked URL
+                var hostStream = Stream(
+                    url: hostUnlockedURL,
+                    title: "Host Stream (\(hostQuality))",
+                    quality: hostQuality,
+                    seeders: nil,
+                    size: nil,
+                    provider: "realdebrid",
+                    infoHash: hostStreamHash,
+                    fileIdx: watchPartyRoom.selectedFileIdx,
+                    ext: nil,
+                    behaviorHints: nil,
+                    subtitles: []
+                )
+                
+                // We still need to resolve subtitles if possible, but we can do that separately or lazily
+                // For now, let's try to get them from the room if available (not currently synced fully)
+                // Or we can trigger a lightweight subtitle fetch
+                
+                resolvedStream = hostStream
+                
+            } else {
+                // Standard resolution
+                let result = try await StreamService.shared.resolveStream(
+                    item: item,
+                    quality: quality,
+                    season: season,
+                    episode: episode,
+                    metadata: metadata
+                )
+                resolvedStream = result.stream
+                resolvedMetadata = result.metadata // Might have been updated
+            }
+
+            guard let finalStream = resolvedStream else {
+                throw APIError.noStreamsFound
+            }
+
+            // Step 3: Update UI with resolved data
             await MainActor.run {
-                selectedStream = result.stream
+                selectedStream = finalStream
+                if let meta = resolvedMetadata {
+                    selectedMetadata = meta
+                }
 
                 // Set room ID logic
                 if let roomId = roomId {
                     currentRoomId = roomId
                     print(" Using provided room ID: \(roomId)")
-
-                    // GUEST LOGIC: Check if we should use host's stream instead
-                    // This logic remains here as it depends on AppState properties
-                    if !isHost, let watchPartyRoom = currentWatchPartyRoom,
-                       let hostStreamHash = watchPartyRoom.selectedStreamHash,
-                       let hostQuality = watchPartyRoom.selectedQuality,
-                       let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
-
-                        NSLog("🎬 GUEST: Using host's stream selection")
-                        // Create stream with host's unlocked URL
-                        var hostStream = Stream(
-                            url: hostUnlockedURL,
-                            title: "Host Stream (\(hostQuality))",
-                            quality: hostQuality,
-                            seeders: nil,
-                            size: nil,
-                            provider: "realdebrid",
-                            infoHash: hostStreamHash,
-                            fileIdx: watchPartyRoom.selectedFileIdx,
-                            ext: nil,
-                            behaviorHints: nil,
-                            subtitles: []
-                        )
-
-                        // Use subtitles from resolved stream if available
-                        if let subtitles = result.stream.subtitles {
-                            hostStream.subtitles = subtitles
-                        }
-
-                        selectedStream = hostStream
-                    }
-
                 } else if watchMode == .watchParty {
                     currentRoomId = "room_\(UUID().uuidString.prefix(8))"
                     print(" Created room ID: \(currentRoomId ?? "none")")
@@ -232,51 +243,53 @@ class AppState: ObservableObject {
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
 
-            // Step 2: Resolve stream
-            let result = try await StreamService.shared.resolveStream(
-                item: item,
-                quality: quality,
-                season: season,
-                episode: episode,
-                metadata: metadata
-            )
+            // Step 2: Resolve stream (Optimized for Guest)
+            var resolvedStream: Stream?
+            
+            // GUEST OPTIMIZATION: Check if we can use host's stream directly
+            if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+               let hostStreamHash = watchPartyRoom.selectedStreamHash,
+               let hostQuality = watchPartyRoom.selectedQuality,
+               let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+
+                NSLog("🎬 GUEST: Using host's stream selection for preload (skipping resolution)")
+                var hostStream = Stream(
+                    url: hostUnlockedURL,
+                    title: "Host Stream (\(hostQuality))",
+                    quality: hostQuality,
+                    seeders: nil,
+                    size: nil,
+                    provider: "realdebrid",
+                    infoHash: hostStreamHash,
+                    fileIdx: watchPartyRoom.selectedFileIdx,
+                    ext: nil,
+                    behaviorHints: nil,
+                    subtitles: []
+                )
+                resolvedStream = hostStream
+                
+            } else {
+                let result = try await StreamService.shared.resolveStream(
+                    item: item,
+                    quality: quality,
+                    season: season,
+                    episode: episode,
+                    metadata: metadata
+                )
+                resolvedStream = result.stream
+            }
+            
+            guard let finalStream = resolvedStream else {
+                throw APIError.noStreamsFound
+            }
 
             // Step 3: Update UI with resolved data
             await MainActor.run {
-                selectedStream = result.stream
+                selectedStream = finalStream
 
                 // Set room ID logic (same as playMedia)
                 if let roomId = roomId {
                     currentRoomId = roomId
-
-                    // GUEST LOGIC: Check if we should use host's stream
-                    if !isHost, let watchPartyRoom = currentWatchPartyRoom,
-                       let hostStreamHash = watchPartyRoom.selectedStreamHash,
-                       let hostQuality = watchPartyRoom.selectedQuality,
-                       let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
-
-                        NSLog("🎬 GUEST: Using host's stream selection for preload")
-                        var hostStream = Stream(
-                            url: hostUnlockedURL,
-                            title: "Host Stream (\(hostQuality))",
-                            quality: hostQuality,
-                            seeders: nil,
-                            size: nil,
-                            provider: "realdebrid",
-                            infoHash: hostStreamHash,
-                            fileIdx: watchPartyRoom.selectedFileIdx,
-                            ext: nil,
-                            behaviorHints: nil,
-                            subtitles: []
-                        )
-
-                        if let subtitles = result.stream.subtitles {
-                            hostStream.subtitles = subtitles
-                        }
-
-                        selectedStream = hostStream
-                    }
-
                 } else if watchMode == .watchParty {
                     currentRoomId = "room_\(UUID().uuidString.prefix(8))"
                 } else {

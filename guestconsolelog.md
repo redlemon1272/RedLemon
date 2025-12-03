@@ -1,3516 +1,2487 @@
-default	16:01:47.796858-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "frontmost:5311" ID:169-129-1006 target:5311 attributes:[
+default	16:41:21.628423-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "frontmost:6308" ID:169-129-1760 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"RoleUserInteractiveFocal" sourceEnvironment:"(null)">
 	]>
-default	16:01:47.797055-0500	runningboardd	Assertion 169-129-1006 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:47.799705-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:47.803054-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:47.816112-0500	runningboardd	[anon<RedLemon>(501):5311] Set darwin role to: UserInteractiveFocal
-default	16:01:47.820297-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:47.820682-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "notification:5311" ID:169-129-1007 target:5311 attributes:[
+default	16:41:21.628875-0500	runningboardd	Assertion 169-129-1760 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:21.646215-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:21.647588-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:21.647861-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "notification:6308" ID:169-129-1761 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"LSNotification" sourceEnvironment:"(null)">
 	]>
-default	16:01:47.821727-0500	runningboardd	Assertion 169-129-1007 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:47.833529-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:47.834723-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:47.834800-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:48.340377-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:48.340629-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BF7E4AB8-9F1A-4344-8D40-36A1CB47133B] (reporting strategy default)> on Task <EC441997-5359-4D32-992C-843820EC4604>.<321> was not selected for reporting
-default	16:01:48.341176-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:48.341379-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:48.341562-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B0DC8680-3CC4-41C7-BB48-3F28739D4BD4] (reporting strategy default)> on Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> was not selected for reporting
-default	16:01:48.341600-0500	RedLemon	Connection 0: creating secure tcp or quic connection
-default	16:01:48.342288-0500	RedLemon	Connection 27: enabling TLS
-default	16:01:48.342324-0500	RedLemon	Connection 27: starting, TC(0x0)
-default	16:01:48.342366-0500	RedLemon	[C27 7A331C71-87E2-4A8D-96A9-F4B118A73A14 Hostname#afe42ebd:443 quic-connection, url hash: 4c7e9bc6, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{7C5E9FEF-3147-452F-9F12-1E82E6D1FF91}{(null)}{Y}{2} (private), proc: E8E931A4-3EA4-3070-8D28-FBFFFC7A0E59] start
-default	16:01:48.342433-0500	RedLemon	[C27 Hostname#afe42ebd:443 initial path ((null))] event: path:start @0.000s
-default	16:01:48.342619-0500	RedLemon	[C27 Hostname#afe42ebd:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: B8FD4E44-7D04-4B81-B076-7B3B43608901
-default	16:01:48.342757-0500	RedLemon	[C27 Hostname#afe42ebd:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
-default	16:01:48.342788-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C27] reporting state preparing
-default	16:01:48.343231-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 initial path ((null))] event: path:start @0.000s
-default	16:01:48.343594-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: F7762A65-ED02-46B9-AF3E-BF94574C1A35
-default	16:01:48.343878-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
-default	16:01:48.344042-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> setting up Connection 27
-default	16:01:48.344563-0500	mDNSResponder	[R467] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'z5LN/js6tAYV2drtLzzUoQ=='>, options: 0x8 {use-failover}, client pid: 5311 (RedLemon)
-default	16:01:48.344202-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:48.344331-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> waiting for setup of Connection 27
-default	16:01:48.388151-0500	mDNSResponder	[R467] getaddrinfo stop -- hostname: <mask.hash: 'z5LN/js6tAYV2drtLzzUoQ=='>, client pid: 5311 (RedLemon)
-default	16:01:48.388916-0500	RedLemon	nw_endpoint_resolver_update [C27.1 Hostname#afe42ebd:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#085d3596.443
-default	16:01:48.389048-0500	RedLemon	nw_endpoint_resolver_update [C27.1 Hostname#afe42ebd:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#8e3d1c9b:443
-default	16:01:48.389523-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.047s
-default	16:01:48.390904-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 initial path ((null))] event: path:start @0.048s
-default	16:01:48.393646-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 waiting path (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.051s, uuid: AA8F4782-4280-4F9B-A168-989BFF3D24B3
-default	16:01:48.393985-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.051s
-default	16:01:48.395184-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.052s
-default	16:01:48.396274-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.053s
-default	16:01:48.396511-0500	RedLemon	tcp_output [C27.1.1:3] flags=[S] seq=1590833403, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1590833403
-default	16:01:48.409991-0500	RedLemon	tcp_input [C27.1.1:3] flags=[S.] seq=1577989680, ack=1590833404, win=31416 state=SYN_SENT rcv_nxt=0, snd_una=1590833403
-default	16:01:48.410250-0500	RedLemon	nw_flow_connected [C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	16:01:48.410463-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.068s
-default	16:01:48.410625-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.068s
-default	16:01:48.410707-0500	RedLemon	[C27 Hostname#afe42ebd:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.068s
-default	16:01:48.411214-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C27.1.1:2][0x7f8630a62f40] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	16:01:48.411550-0500	RedLemon	boringssl_context_info_handler(2028) [C27.1.1:2][0x7f8630a62f40] Client handshake started
-default	16:01:48.412456-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS client enter_early_data
-default	16:01:48.412641-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS client read_server_hello
-default	16:01:48.607358-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	16:01:48.607430-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_server_hello
-default	16:01:48.607752-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	16:01:48.608232-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_certificate_request
-default	16:01:48.609638-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_server_certificate
-default	16:01:48.609755-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	16:01:48.611177-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C27.1.1:2][0x7f8630a62f40] Performing external trust evaluation
-default	16:01:48.611368-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C27.1.1:2][0x7f8630a62f40] Asyncing for external verify block
-default	16:01:48.611536-0500	RedLemon	Connection 27: asked to evaluate TLS Trust
-default	16:01:48.611869-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> auth completion disp=1 cred=0x0
-default	16:01:48.613687-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:48.614084-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E6732493-0116-40D4-873C-5DCFE5163585] (reporting strategy default)> on Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> was not selected for reporting
-default	16:01:48.615209-0500	RedLemon	Connection 28: enabling TLS
-default	16:01:48.615281-0500	RedLemon	Connection 28: starting, TC(0x0)
-default	16:01:48.615365-0500	RedLemon	[C28 CD116DD6-E75D-4D84-BB8C-38D7CE728AF1 Hostname#23ce8654:443 tcp, url hash: 02510389, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{7028141D-486E-4BFE-B69D-4A7DB634233A}{(null)}{Y}{2} (private), proc: E8E931A4-3EA4-3070-8D28-FBFFFC7A0E59] start
-default	16:01:48.615514-0500	RedLemon	[C28 Hostname#23ce8654:443 initial path ((null))] event: path:start @0.000s
-default	16:01:48.615856-0500	RedLemon	[C28 Hostname#23ce8654:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: E5F5D1A7-C907-4FBE-A546-DD028A9AFC44
-default	16:01:48.616027-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	16:01:48.616058-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C28] reporting state preparing
-default	16:01:48.616231-0500	mDNSResponder	[R468] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, options: 0x8 {use-failover}, client pid: 5311 (RedLemon)
-default	16:01:48.616241-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> setting up Connection 28
-default	16:01:48.620434-0500	RedLemon	Connection 27: TLS Trust result 0
-default	16:01:48.620490-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C27.1.1:2][0x7f8630a62f40] Returning from external verify block with result: true
-default	16:01:48.620565-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C27.1.1:2][0x7f8630a62f40] Certificate verification result: OK
-default	16:01:48.620942-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client read_server_finished
-default	16:01:48.621176-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	16:01:48.621206-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	16:01:48.621234-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client send_client_certificate
-default	16:01:48.621263-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client complete_second_flight
-default	16:01:48.621423-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS 1.3 client done
-default	16:01:48.621709-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS client finish_client_handshake
-default	16:01:48.621761-0500	RedLemon	boringssl_context_info_handler(2045) [C27.1.1:2][0x7f8630a62f40] Client handshake state: TLS client done
-default	16:01:48.621797-0500	RedLemon	boringssl_context_info_handler(2034) [C27.1.1:2][0x7f8630a62f40] Client handshake done
-default	16:01:48.623100-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C27.1.1:2][0x7f8630a62f40] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(211ms) flight_time(196ms) rtt(195ms) write_stalls(0) read_stalls(7)]
-default	16:01:48.623264-0500	RedLemon	nw_flow_connected [C27.1.1 IPv6#085d3596.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:01:48.623588-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.281s
-default	16:01:48.623747-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C27] reporting state ready
-default	16:01:48.624046-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.281s
-default	16:01:48.624253-0500	RedLemon	[C27 Hostname#afe42ebd:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.281s
-default	16:01:48.624456-0500	RedLemon	[C27.1.1 IPv6#085d3596.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.282s
-default	16:01:48.624576-0500	RedLemon	[C27.1 Hostname#afe42ebd:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.282s
-default	16:01:48.624639-0500	RedLemon	[C27 Hostname#afe42ebd:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.282s
-default	16:01:48.625296-0500	RedLemon	Connection 27: connected successfully
-default	16:01:48.625396-0500	RedLemon	Connection 27: TLS handshake complete
-default	16:01:48.625780-0500	RedLemon	Connection 27: ready C(N) E(N)
-default	16:01:48.627405-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> now using Connection 27
-default	16:01:48.627691-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> now using Connection 27
-default	16:01:48.627829-0500	RedLemon	Connection 27: received viability advisory(Y)
-default	16:01:48.627979-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> sent request, body N 0
-default	16:01:48.628858-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> sent request, body N 0
-default	16:01:48.646378-0500	mDNSResponder	[R468] getaddrinfo stop -- hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, client pid: 5311 (RedLemon)
-default	16:01:48.646922-0500	RedLemon	nw_endpoint_resolver_update [C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#9735f8ed:443
-default	16:01:48.647248-0500	RedLemon	nw_endpoint_resolver_update [C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#bdc5d67c:443
-default	16:01:48.647783-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.032s
-default	16:01:48.648386-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 initial path ((null))] event: path:start @0.032s
-default	16:01:48.649573-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.034s, uuid: 4098041A-7D28-4A0D-90FE-525CCE3B7E23
-default	16:01:48.649755-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.034s
-default	16:01:48.650810-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.035s
-default	16:01:48.651962-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.036s
-default	16:01:48.652415-0500	RedLemon	tcp_output [C28.1:3] flags=[S] seq=1584075386, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1584075386
-default	16:01:48.655117-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> received response, status 200 content K
-default	16:01:48.695751-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> received response, status 200 content K
-default	16:01:48.701968-0500	RedLemon	tcp_input [C28.1:3] flags=[S.] seq=381011346, ack=1584075387, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1584075386
-default	16:01:48.702091-0500	RedLemon	nw_flow_connected [C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	16:01:48.702263-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.086s
-default	16:01:48.702326-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.086s
-default	16:01:48.702693-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C28.1:2][0x7f8633a92500] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	16:01:48.702836-0500	RedLemon	boringssl_context_info_handler(2028) [C28.1:2][0x7f8633a92500] Client handshake started
-default	16:01:48.703022-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS client enter_early_data
-default	16:01:48.703123-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS client read_server_hello
-default	16:01:48.708041-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> done using Connection 27
-default	16:01:48.708137-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> done using Connection 27
-default	16:01:48.708223-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> response ended
-default	16:01:48.708301-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> response ended
-default	16:01:48.708815-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> summary for task success {transaction_duration_ms=367, response_status=200, connection=27, reused=1, request_start_ms=286, request_duration_ms=0, response_start_ms=353, response_duration_ms=12, request_bytes=42, response_bytes=117382, cache_hit=false}
-default	16:01:48.708904-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> summary for task success {transaction_duration_ms=367, response_status=200, connection=27, protocol="h2", domain_lookup_duration_ms=46, connect_duration_ms=228, secure_connection_duration_ms=211, private_relay=false, request_start_ms=286, request_duration_ms=0, response_start_ms=313, response_duration_ms=53, request_bytes=129, response_bytes=117975, cache_hit=false}
-default	16:01:48.708900-0500	RedLemon	Task <37C6C4C2-508E-46C9-BA23-7EC512C3DF26>.<322> finished successfully
-default	16:01:48.712357-0500	RedLemon	Task <EC441997-5359-4D32-992C-843820EC4604>.<321> finished successfully
-default	16:01:48.719268-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	16:01:48.719342-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_server_hello
-default	16:01:48.719625-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	16:01:48.721092-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_certificate_request
-default	16:01:48.721199-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_server_certificate
-default	16:01:48.721265-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	16:01:48.721796-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C28.1:2][0x7f8633a92500] Performing external trust evaluation
-default	16:01:48.721971-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C28.1:2][0x7f8633a92500] Asyncing for external verify block
-default	16:01:48.722124-0500	RedLemon	Connection 28: asked to evaluate TLS Trust
-default	16:01:48.722448-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> auth completion disp=1 cred=0x0
-default	16:01:48.729784-0500	RedLemon	Connection 28: TLS Trust result 0
-default	16:01:48.729841-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C28.1:2][0x7f8633a92500] Returning from external verify block with result: true
-default	16:01:48.729919-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C28.1:2][0x7f8633a92500] Certificate verification result: OK
-default	16:01:48.730331-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client read_server_finished
-default	16:01:48.730443-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	16:01:48.730475-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	16:01:48.730505-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client send_client_certificate
-default	16:01:48.730535-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client complete_second_flight
-default	16:01:48.730653-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS 1.3 client done
-default	16:01:48.731086-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS client finish_client_handshake
-default	16:01:48.731132-0500	RedLemon	boringssl_context_info_handler(2045) [C28.1:2][0x7f8633a92500] Client handshake state: TLS client done
-default	16:01:48.731215-0500	RedLemon	boringssl_context_info_handler(2034) [C28.1:2][0x7f8633a92500] Client handshake done
-default	16:01:48.732177-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C28.1:2][0x7f8633a92500] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(29ms) flight_time(19ms) rtt(17ms) write_stalls(0) read_stalls(8)]
-default	16:01:48.732853-0500	RedLemon	nw_flow_connected [C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:01:48.733171-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.117s
-default	16:01:48.733395-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C28] reporting state ready
-default	16:01:48.733570-0500	RedLemon	[C28 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.118s
-default	16:01:48.733740-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.118s
-default	16:01:48.733808-0500	RedLemon	[C28 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.118s
-default	16:01:48.733979-0500	RedLemon	Connection 28: connected successfully
-default	16:01:48.734030-0500	RedLemon	Connection 28: TLS handshake complete
-default	16:01:48.734357-0500	RedLemon	Connection 28: ready C(N) E(N)
-default	16:01:48.734553-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> now using Connection 28
-default	16:01:48.734643-0500	RedLemon	Connection 28: received viability advisory(Y)
-default	16:01:48.734931-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> sent request, body N 0
-default	16:01:49.071867-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> received response, status 101 content U
-default	16:01:49.072254-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> response ended
-default	16:01:49.072357-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> done using Connection 28
-default	16:01:49.073328-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.457s
-default	16:01:49.073390-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C28] reporting state preparing
-default	16:01:49.073493-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.458s
-default	16:01:49.074018-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1013 target:5311 attributes:[
+default	16:41:21.653387-0500	runningboardd	Assertion 169-129-1761 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:21.652688-0500	runningboardd	[anon<RedLemon>(501):6308] Set darwin role to: UserInteractiveFocal
+default	16:41:21.653508-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:21.655272-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:21.657982-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:21.658037-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:23.147253-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:23.147572-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [95E5AB64-2EE2-4800-918C-A55D4472451F] (reporting strategy default)> on Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> was not selected for reporting
+default	16:41:23.148085-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:23.148236-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:23.148488-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7EEA1AA0-FB1E-4936-84C4-9F544C445B7D] (reporting strategy default)> on Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> was not selected for reporting
+default	16:41:23.148467-0500	RedLemon	Connection 0: creating secure tcp or quic connection
+default	16:41:23.149056-0500	RedLemon	Connection 37: enabling TLS
+default	16:41:23.149383-0500	RedLemon	Connection 37: starting, TC(0x0)
+default	16:41:23.149547-0500	RedLemon	[C37 B182F655-AFF1-42B4-82A3-2BB77565BD40 Hostname#5a828566:443 quic-connection, url hash: 8005778e, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{8CB16F14-934A-4C1E-BB68-BE6FF0746A5B}{(null)}{Y}{2} (private), proc: 12180268-3769-3688-9AA2-A4113A2F44C4] start
+default	16:41:23.149771-0500	RedLemon	[C37 Hostname#5a828566:443 initial path ((null))] event: path:start @0.000s
+default	16:41:23.150171-0500	RedLemon	[C37 Hostname#5a828566:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: DCD2828C-7E38-4209-BD56-C2799267831C
+default	16:41:23.150326-0500	RedLemon	[C37 Hostname#5a828566:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: transform:start @0.000s
+default	16:41:23.150360-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C37] reporting state preparing
+default	16:41:23.150609-0500	RedLemon	[C37.1 Hostname#5a828566:443 initial path ((null))] event: path:start @0.000s
+default	16:41:23.150918-0500	RedLemon	[C37.1 Hostname#5a828566:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: 2C7BF51D-54DF-42E8-A056-7D630BFEDA41
+default	16:41:23.151101-0500	RedLemon	[C37.1 Hostname#5a828566:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
+default	16:41:23.151257-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> setting up Connection 37
+default	16:41:23.151988-0500	mDNSResponder	[R1082] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'z5LN/js6tAYV2drtLzzUoQ=='>, options: 0x8 {use-failover}, client pid: 6308 (RedLemon)
+default	16:41:23.151458-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:23.151540-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> waiting for setup of Connection 37
+default	16:41:23.200555-0500	mDNSResponder	[R1082] getaddrinfo stop -- hostname: <mask.hash: 'z5LN/js6tAYV2drtLzzUoQ=='>, client pid: 6308 (RedLemon)
+default	16:41:23.200921-0500	RedLemon	nw_endpoint_resolver_update [C37.1 Hostname#5a828566:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#1a273ade.443
+default	16:41:23.201092-0500	RedLemon	nw_endpoint_resolver_update [C37.1 Hostname#5a828566:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#8ed0db6d:443
+default	16:41:23.201267-0500	RedLemon	[C37.1 Hostname#5a828566:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.051s
+default	16:41:23.201566-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 initial path ((null))] event: path:start @0.051s
+default	16:41:23.202003-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.052s, uuid: 32F6E45D-0EF1-4111-A336-EB823367A2DA
+default	16:41:23.202177-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.052s
+default	16:41:23.202749-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.053s
+default	16:41:23.203449-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.053s
+default	16:41:23.203718-0500	RedLemon	tcp_output [C37.1.1:3] flags=[S] seq=3554862599, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3554862599
+default	16:41:23.217916-0500	RedLemon	tcp_input [C37.1.1:3] flags=[S.] seq=2316107602, ack=3554862600, win=31416 state=SYN_SENT rcv_nxt=0, snd_una=3554862599
+default	16:41:23.218568-0500	RedLemon	nw_flow_connected [C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:41:23.218863-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.069s
+default	16:41:23.219054-0500	RedLemon	[C37.1 Hostname#5a828566:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.069s
+default	16:41:23.219106-0500	RedLemon	[C37 Hostname#5a828566:443 in_progress transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.069s
+default	16:41:23.219491-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C37.1.1:2][0x7fe2389a7e20] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:41:23.219666-0500	RedLemon	boringssl_context_info_handler(2028) [C37.1.1:2][0x7fe2389a7e20] Client handshake started
+default	16:41:23.219886-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS client enter_early_data
+default	16:41:23.220005-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS client read_server_hello
+default	16:41:23.245786-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:41:23.245907-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_server_hello
+default	16:41:23.246202-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:41:23.246578-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:41:23.247301-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:41:23.247383-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:41:23.248836-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C37.1.1:2][0x7fe2389a7e20] Performing external trust evaluation
+default	16:41:23.249006-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C37.1.1:2][0x7fe2389a7e20] Asyncing for external verify block
+default	16:41:23.249259-0500	RedLemon	Connection 37: asked to evaluate TLS Trust
+default	16:41:23.250217-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> auth completion disp=1 cred=0x0
+default	16:41:23.257704-0500	RedLemon	Connection 37: TLS Trust result 0
+default	16:41:23.259659-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C37.1.1:2][0x7fe2389a7e20] Returning from external verify block with result: true
+default	16:41:23.259727-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C37.1.1:2][0x7fe2389a7e20] Certificate verification result: OK
+default	16:41:23.260207-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client read_server_finished
+default	16:41:23.260476-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:41:23.260508-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:41:23.260539-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:41:23.260567-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:41:23.260684-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS 1.3 client done
+default	16:41:23.260904-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS client finish_client_handshake
+default	16:41:23.260943-0500	RedLemon	boringssl_context_info_handler(2045) [C37.1.1:2][0x7fe2389a7e20] Client handshake state: TLS client done
+default	16:41:23.260974-0500	RedLemon	boringssl_context_info_handler(2034) [C37.1.1:2][0x7fe2389a7e20] Client handshake done
+default	16:41:23.261539-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C37.1.1:2][0x7fe2389a7e20] TLS connected [version(0x0304) ciphersuite(TLS_AES_256_GCM_SHA384) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(0) sct_received(0) connect_time(42ms) flight_time(27ms) rtt(26ms) write_stalls(0) read_stalls(6)]
+default	16:41:23.261686-0500	RedLemon	nw_flow_connected [C37.1.1 IPv6#1a273ade.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:23.262427-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.112s
+default	16:41:23.262514-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C37] reporting state ready
+default	16:41:23.262603-0500	RedLemon	[C37.1 Hostname#5a828566:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.112s
+default	16:41:23.262631-0500	RedLemon	[C37 Hostname#5a828566:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.112s
+default	16:41:23.262768-0500	RedLemon	[C37.1.1 IPv6#1a273ade.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.113s
+default	16:41:23.262876-0500	RedLemon	[C37.1 Hostname#5a828566:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.113s
+default	16:41:23.262922-0500	RedLemon	[C37 Hostname#5a828566:443 ready transform (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.113s
+default	16:41:23.263044-0500	RedLemon	Connection 37: connected successfully
+default	16:41:23.263091-0500	RedLemon	Connection 37: TLS handshake complete
+default	16:41:23.263315-0500	RedLemon	Connection 37: ready C(N) E(N)
+default	16:41:23.263643-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> now using Connection 37
+default	16:41:23.263755-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> now using Connection 37
+default	16:41:23.263803-0500	RedLemon	Connection 37: received viability advisory(Y)
+default	16:41:23.263879-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> sent request, body N 0
+default	16:41:23.263899-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> sent request, body N 0
+default	16:41:23.306611-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> received response, status 200 content K
+default	16:41:23.330528-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:23.331068-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6D60EDDA-4196-4E25-AF70-77D6F198DDF1] (reporting strategy default)> on Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> was not selected for reporting
+default	16:41:23.332180-0500	RedLemon	Connection 38: enabling TLS
+default	16:41:23.332216-0500	RedLemon	Connection 38: starting, TC(0x0)
+default	16:41:23.332262-0500	RedLemon	[C38 EA959C32-C0D5-4DC6-9240-C32DB4C59CBF Hostname#316a8648:443 tcp, url hash: 028c1bce, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{7529F084-3581-4320-A751-2B62136340AF}{(null)}{Y}{2} (private), proc: 12180268-3769-3688-9AA2-A4113A2F44C4] start
+default	16:41:23.332335-0500	RedLemon	[C38 Hostname#316a8648:443 initial path ((null))] event: path:start @0.000s
+default	16:41:23.332673-0500	RedLemon	[C38 Hostname#316a8648:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 6487DF09-62B8-4A88-AB50-29E8BC8CBCD5
+default	16:41:23.332854-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
+default	16:41:23.332891-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C38] reporting state preparing
+default	16:41:23.333051-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> setting up Connection 38
+default	16:41:23.333465-0500	mDNSResponder	[R1083] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, options: 0x8 {use-failover}, client pid: 6308 (RedLemon)
+default	16:41:23.354979-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> received response, status 200 content K
+default	16:41:23.372132-0500	mDNSResponder	[R1083] getaddrinfo stop -- hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, client pid: 6308 (RedLemon)
+default	16:41:23.372677-0500	RedLemon	nw_endpoint_resolver_update [C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#f44b3bd4:443
+default	16:41:23.373003-0500	RedLemon	nw_endpoint_resolver_update [C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#dba0a053:443
+default	16:41:23.373248-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.040s
+default	16:41:23.373492-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 initial path ((null))] event: path:start @0.041s
+default	16:41:23.374604-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.042s, uuid: C91DF3DB-7EE4-4BBB-9186-FADFA412E598
+default	16:41:23.375739-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.043s
+default	16:41:23.377161-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.044s
+default	16:41:23.379229-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.046s
+default	16:41:23.379507-0500	RedLemon	tcp_output [C38.1:3] flags=[S] seq=3319207152, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3319207152
+default	16:41:23.451889-0500	RedLemon	tcp_output [C38.1:3] flags=[S] seq=3319207152, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3319207152
+default	16:41:23.467967-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> done using Connection 37
+default	16:41:23.468178-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> response ended
+default	16:41:23.468713-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> summary for task success {transaction_duration_ms=319, response_status=200, connection=37, reused=1, request_start_ms=115, request_duration_ms=0, response_start_ms=206, response_duration_ms=113, request_bytes=42, response_bytes=117785, cache_hit=false}
+default	16:41:23.468827-0500	RedLemon	Task <7868A684-1F24-4013-A0CE-E6A5B22CA50F>.<640> finished successfully
+default	16:41:23.471647-0500	RedLemon	tcp_input [C38.1:3] flags=[S.] seq=1277023091, ack=3319207153, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=3319207152
+default	16:41:23.471801-0500	RedLemon	nw_flow_connected [C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:41:23.471931-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.139s
+default	16:41:23.471980-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.139s
+default	16:41:23.472377-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C38.1:2][0x7fe23bcc2250] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:41:23.472599-0500	RedLemon	boringssl_context_info_handler(2028) [C38.1:2][0x7fe23bcc2250] Client handshake started
+default	16:41:23.472848-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS client enter_early_data
+default	16:41:23.473206-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS client read_server_hello
+default	16:41:23.500981-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:41:23.501096-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_server_hello
+default	16:41:23.501380-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:41:23.501795-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:41:23.502070-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:41:23.502201-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:41:23.503505-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C38.1:2][0x7fe23bcc2250] Performing external trust evaluation
+default	16:41:23.503961-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C38.1:2][0x7fe23bcc2250] Asyncing for external verify block
+default	16:41:23.504935-0500	RedLemon	Connection 38: asked to evaluate TLS Trust
+default	16:41:23.506309-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> done using Connection 37
+default	16:41:23.506319-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> auth completion disp=1 cred=0x0
+default	16:41:23.506469-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> response ended
+default	16:41:23.507206-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> summary for task success {transaction_duration_ms=359, response_status=200, connection=37, protocol="h2", domain_lookup_duration_ms=50, connect_duration_ms=59, secure_connection_duration_ms=42, private_relay=false, request_start_ms=116, request_duration_ms=0, response_start_ms=158, response_duration_ms=200, request_bytes=128, response_bytes=1015596, cache_hit=false}
+default	16:41:23.507311-0500	RedLemon	Task <6375CA58-79FF-4ED4-8EAB-7F3EE01A2B75>.<639> finished successfully
+default	16:41:23.519896-0500	RedLemon	Connection 38: TLS Trust result 0
+default	16:41:23.519968-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C38.1:2][0x7fe23bcc2250] Returning from external verify block with result: true
+default	16:41:23.520080-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C38.1:2][0x7fe23bcc2250] Certificate verification result: OK
+default	16:41:23.520723-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client read_server_finished
+default	16:41:23.520881-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:41:23.520920-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:41:23.520952-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:41:23.520983-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:41:23.521125-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS 1.3 client done
+default	16:41:23.521328-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS client finish_client_handshake
+default	16:41:23.521372-0500	RedLemon	boringssl_context_info_handler(2045) [C38.1:2][0x7fe23bcc2250] Client handshake state: TLS client done
+default	16:41:23.521404-0500	RedLemon	boringssl_context_info_handler(2034) [C38.1:2][0x7fe23bcc2250] Client handshake done
+default	16:41:23.522145-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C38.1:2][0x7fe23bcc2250] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(49ms) flight_time(28ms) rtt(28ms) write_stalls(0) read_stalls(6)]
+default	16:41:23.522475-0500	RedLemon	nw_flow_connected [C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:23.522737-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.190s
+default	16:41:23.523185-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C38] reporting state ready
+default	16:41:23.524482-0500	RedLemon	[C38 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.192s
+default	16:41:23.524759-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.192s
+default	16:41:23.524889-0500	RedLemon	[C38 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.192s
+default	16:41:23.525103-0500	RedLemon	Connection 38: connected successfully
+default	16:41:23.525197-0500	RedLemon	Connection 38: TLS handshake complete
+default	16:41:23.525532-0500	RedLemon	Connection 38: ready C(N) E(N)
+default	16:41:23.525795-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> now using Connection 38
+default	16:41:23.525960-0500	RedLemon	Connection 38: received viability advisory(Y)
+default	16:41:23.526978-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> sent request, body N 0
+default	16:41:23.547374-0500	RedLemon	<private>
+default	16:41:23.547506-0500	RedLemon	<private>
+default	16:41:23.547612-0500	RedLemon	<private>
+default	16:41:23.547713-0500	RedLemon	<private>
+default	16:41:23.668751-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> received response, status 101 content U
+default	16:41:23.669152-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> response ended
+default	16:41:23.669255-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> done using Connection 38
+default	16:41:23.670197-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.337s
+default	16:41:23.670285-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C38] reporting state preparing
+default	16:41:23.670391-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.338s
+default	16:41:23.670605-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.338s
+default	16:41:23.670700-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.338s
+default	16:41:23.670813-0500	RedLemon	nw_flow_connected [C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:41:23.671289-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1764 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:49.073707-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.458s
-default	16:01:49.073796-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.458s
-default	16:01:49.073908-0500	RedLemon	nw_flow_connected [C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	16:01:49.074666-0500	runningboardd	Assertion 169-5311-1013 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:49.074131-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.458s
-default	16:01:49.074220-0500	RedLemon	[C28 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.458s
-default	16:01:49.074400-0500	RedLemon	nw_flow_connected [C28.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:01:49.075133-0500	RedLemon	[C28.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.459s
-default	16:01:49.075210-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C28] reporting state ready
-default	16:01:49.075325-0500	RedLemon	[C28 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.459s
-default	16:01:49.076605-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:49.076658-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:49.076709-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:49.079319-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1014 target:5311 attributes:[
+default	16:41:23.671010-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.338s
+default	16:41:23.671083-0500	RedLemon	[C38 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.338s
+default	16:41:23.671237-0500	RedLemon	nw_flow_connected [C38.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:23.672126-0500	RedLemon	[C38.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.339s
+default	16:41:23.672174-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C38] reporting state ready
+default	16:41:23.672348-0500	RedLemon	[C38 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.340s
+default	16:41:23.673146-0500	runningboardd	Assertion 169-6308-1764 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:23.675390-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:23.675457-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:23.675513-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:23.678524-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1765 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:49.079452-0500	runningboardd	Assertion 169-103-1014 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:49.080179-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:49.080233-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:49.080279-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:50.152579-0500	runningboardd	Invalidating assertion 169-5311-1013 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:50.221755-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.222034-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C808916F-1710-41FB-9124-C26E55A1558D] (reporting strategy default)> on Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> was not selected for reporting
-default	16:01:50.222620-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.222805-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> now using Connection 1
-default	16:01:50.223511-0500	RedLemon	0x7f86317890d8 ID=656 Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> sent request, body N 0
-default	16:01:50.293176-0500	RedLemon	0x7f86317890d8 ID=656 Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> received response, status 200 content U
-default	16:01:50.294002-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> response ended
-default	16:01:50.294672-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> done using Connection 1
-default	16:01:50.294928-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=70, response_duration_ms=1, request_bytes=534, response_bytes=1912, cache_hit=false}
-default	16:01:50.295660-0500	RedLemon	Task <8ACC8C14-A4D5-4005-9BD8-1F29F0A514B0>.<323> finished successfully
-default	16:01:50.298150-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1015 target:5311 attributes:[
+default	16:41:23.678809-0500	runningboardd	Assertion 169-103-1765 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:23.681055-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:23.681106-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:23.681152-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:24.780945-0500	runningboardd	Invalidating assertion 169-6308-1764 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:24.943896-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:24.943938-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:24.943981-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:24.944958-0500	runningboardd	Invalidating assertion 169-103-1765 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:25.049931-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:25.050443-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:25.050502-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:25.097184-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.097475-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2B6CEFD7-19B3-403E-AF32-B6E1D44DC874] (reporting strategy default)> on Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> was not selected for reporting
+default	16:41:25.098052-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.098228-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> now using Connection 1
+default	16:41:25.098989-0500	RedLemon	0x7fe23c36e318 ID=2308 Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> sent request, body N 0
+default	16:41:25.209223-0500	RedLemon	0x7fe23c36e318 ID=2308 Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> received response, status 200 content U
+default	16:41:25.210880-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> response ended
+default	16:41:25.211666-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> done using Connection 1
+default	16:41:25.212018-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> summary for task success {transaction_duration_ms=114, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=111, response_duration_ms=2, request_bytes=534, response_bytes=1884, cache_hit=false}
+default	16:41:25.212605-0500	RedLemon	Task <EE601237-38F6-4DB3-9317-ABB6AE7CF16D>.<641> finished successfully
+default	16:41:25.214263-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1766 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:50.298335-0500	runningboardd	Assertion 169-5311-1015 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:50.299690-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:50.299731-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:50.299773-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:50.300232-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1013:com.apple.CFNetwork.StorageDB;169-5311-1015:com.apple.CFNetwork.StorageDB
-default	16:01:50.307141-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.390510-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.391088-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5BDC0615-BF8B-4322-B75C-D5893F6248BE] (reporting strategy default)> on Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> was not selected for reporting
-default	16:01:50.391741-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.392138-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> now using Connection 1
-default	16:01:50.399590-0500	RedLemon	0x7f863087fab8 ID=660 Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> sent request, body N 0
-default	16:01:50.454200-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:50.454216-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1015:com.apple.CFNetwork.StorageDB
-default	16:01:50.457967-0500	RedLemon	0x7f863087fab8 ID=660 Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> received response, status 200 content U
-default	16:01:50.458461-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> response ended
-default	16:01:50.458888-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> done using Connection 1
-default	16:01:50.459707-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=5, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=789, cache_hit=false}
-default	16:01:50.460464-0500	RedLemon	Task <B7037ADD-1CB7-44E5-8701-EA7700A90B97>.<324> finished successfully
-default	16:01:50.461927-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.462469-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [97B1BBCD-665E-414C-A756-8B473DEF0B0D] (reporting strategy default)> on Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> was not selected for reporting
-default	16:01:50.463344-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.463659-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> now using Connection 1
-default	16:01:50.469543-0500	RedLemon	0x7f862e251c58 ID=664 Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> sent request, body N 0
-default	16:01:50.482122-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.514348-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:50.514612-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:50.545792-0500	RedLemon	0x7f862e251c58 ID=664 Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> received response, status 200 content U
-default	16:01:50.546544-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> response ended
-default	16:01:50.547230-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> done using Connection 1
-default	16:01:50.547573-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> summary for task success {transaction_duration_ms=84, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=5, response_start_ms=82, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
-default	16:01:50.547929-0500	RedLemon	Task <E0D3F9ED-E946-44F6-BE46-6AC167253626>.<325> finished successfully
-default	16:01:50.549894-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.550234-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6E31F9D6-D7BD-4B8C-A828-77EB20EFAF36] (reporting strategy default)> on Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> was not selected for reporting
-default	16:01:50.550988-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.551201-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> now using Connection 1
-default	16:01:50.551983-0500	RedLemon	0x7f8632e1e408 ID=668 Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> sent request, body N 0
-default	16:01:50.566468-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.612659-0500	RedLemon	0x7f8632e1e408 ID=668 Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> received response, status 200 content U
-default	16:01:50.613631-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> response ended
-default	16:01:50.613920-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> done using Connection 1
-default	16:01:50.614075-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:01:50.614509-0500	RedLemon	Task <7A0A3ABA-A45B-4AA8-9B88-16DCCCE09CB3>.<326> finished successfully
-default	16:01:50.616231-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.616563-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7B01A16D-008D-4A90-A500-765EAEF4C2F9] (reporting strategy default)> on Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> was not selected for reporting
-default	16:01:50.617286-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.617491-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> now using Connection 1
-default	16:01:50.618233-0500	RedLemon	0x7f863087fab8 ID=672 Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> sent request, body N 0
-default	16:01:50.628249-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.680835-0500	RedLemon	0x7f863087fab8 ID=672 Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> received response, status 200 content U
-default	16:01:50.681626-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> response ended
-default	16:01:50.682126-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> done using Connection 1
-default	16:01:50.682357-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
-default	16:01:50.683065-0500	RedLemon	Task <4FC60709-7944-4C1D-A8A5-F7BDA10ED91C>.<327> finished successfully
-default	16:01:50.684891-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.685189-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4CC0E926-FFFC-4DC5-A45C-0812491E24E9] (reporting strategy default)> on Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> was not selected for reporting
-default	16:01:50.685924-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.686122-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> now using Connection 1
-default	16:01:50.686903-0500	RedLemon	0x7f8632e1e408 ID=676 Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> sent request, body N 0
-default	16:01:50.700414-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.753586-0500	RedLemon	0x7f8632e1e408 ID=676 Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> received response, status 200 content U
-default	16:01:50.754175-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> response ended
-default	16:01:50.754637-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> done using Connection 1
-default	16:01:50.754870-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:01:50.755502-0500	RedLemon	Task <D143EA7B-3581-4174-8251-C895567ED986>.<328> finished successfully
-default	16:01:50.757164-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.757467-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [96F1E9F8-485C-49DB-9EEA-2D4040805A67] (reporting strategy default)> on Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> was not selected for reporting
-default	16:01:50.758341-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.758668-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> now using Connection 1
-default	16:01:50.759634-0500	RedLemon	0x7f8633a3da78 ID=680 Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> sent request, body N 0
-default	16:01:50.811408-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.853984-0500	RedLemon	0x7f8633a3da78 ID=680 Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> received response, status 200 content U
-default	16:01:50.854581-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> response ended
-default	16:01:50.855494-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> done using Connection 1
-default	16:01:50.856013-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> summary for task success {transaction_duration_ms=98, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=95, response_duration_ms=1, request_bytes=512, response_bytes=835, cache_hit=true}
-default	16:01:50.856316-0500	RedLemon	Task <7FD7F9CD-0D41-420D-9FA2-6E21847E78ED>.<329> finished successfully
-default	16:01:50.857939-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.858413-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0DC9F9F7-C500-4149-A036-CBF3DFE083AA] (reporting strategy default)> on Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> was not selected for reporting
-default	16:01:50.859112-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.859317-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> now using Connection 1
-default	16:01:50.860083-0500	RedLemon	0x7f8632e1e408 ID=684 Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> sent request, body N 0
-default	16:01:50.875299-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.920527-0500	RedLemon	0x7f8632e1e408 ID=684 Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> received response, status 200 content U
-default	16:01:50.921339-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> response ended
-default	16:01:50.921808-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> done using Connection 1
-default	16:01:50.922066-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:50.922918-0500	RedLemon	Task <E803B0DA-AC8C-4F7A-80D6-F4EFAEF0ADA2>.<330> finished successfully
-default	16:01:50.924860-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.925190-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8C043ACD-FEDC-40F3-BC56-AD40DDEA11E8] (reporting strategy default)> on Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> was not selected for reporting
-default	16:01:50.926011-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.926213-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> now using Connection 1
-default	16:01:50.927016-0500	RedLemon	0x7f8632e1e408 ID=688 Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> sent request, body N 0
-default	16:01:50.935555-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:50.992257-0500	RedLemon	0x7f8632e1e408 ID=688 Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> received response, status 200 content U
-default	16:01:50.992929-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> response ended
-default	16:01:50.993410-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> done using Connection 1
-default	16:01:50.993676-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
-default	16:01:50.994251-0500	RedLemon	Task <75A75823-A8D1-40A7-8CD2-A2E071835C93>.<331> finished successfully
-default	16:01:50.996556-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:50.996897-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4F249F1C-EBA8-430A-9B4C-D7EEE445C289] (reporting strategy default)> on Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> was not selected for reporting
-default	16:01:50.997735-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:50.997939-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> now using Connection 1
-default	16:01:50.998846-0500	RedLemon	0x7f863087fab8 ID=692 Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> sent request, body N 0
-default	16:01:51.006464-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.065267-0500	RedLemon	0x7f863087fab8 ID=692 Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> received response, status 200 content U
-default	16:01:51.065896-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> response ended
-default	16:01:51.066203-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> done using Connection 1
-default	16:01:51.066345-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:51.066720-0500	RedLemon	Task <1EA868E9-DB7D-43FC-ABD2-36FD25D72A2C>.<332> finished successfully
-default	16:01:51.068368-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.068677-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [31AB7D89-EA74-4C85-B528-F0703B71F6F7] (reporting strategy default)> on Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> was not selected for reporting
-default	16:01:51.069477-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.069684-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> now using Connection 1
-default	16:01:51.070451-0500	RedLemon	0x7f863087fab8 ID=696 Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> sent request, body N 0
-default	16:01:51.183260-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.203598-0500	RedLemon	0x7f863087fab8 ID=696 Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> received response, status 200 content U
-default	16:01:51.204451-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> response ended
-default	16:01:51.204927-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> done using Connection 1
-default	16:01:51.205163-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> summary for task success {transaction_duration_ms=136, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=134, response_duration_ms=1, request_bytes=511, response_bytes=838, cache_hit=true}
-default	16:01:51.205785-0500	RedLemon	Task <3FC9C49B-F94E-4F4B-AADE-1561299E5032>.<333> finished successfully
-default	16:01:51.207242-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.207570-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7DDB1834-0A5A-4ABE-87E6-90D58417DDC5] (reporting strategy default)> on Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> was not selected for reporting
-default	16:01:51.208383-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.208584-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> now using Connection 1
-default	16:01:51.209458-0500	RedLemon	0x7f8632e61b78 ID=700 Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> sent request, body N 0
-default	16:01:51.311959-0500	runningboardd	Invalidating assertion 169-5311-1015 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:51.325726-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.338762-0500	RedLemon	0x7f8632e61b78 ID=700 Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> received response, status 200 content U
-default	16:01:51.339272-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> response ended
-default	16:01:51.339689-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> done using Connection 1
-default	16:01:51.339874-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> summary for task success {transaction_duration_ms=131, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=130, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:51.340075-0500	RedLemon	Task <61B7260E-9256-4517-8311-1D56E0B49E49>.<334> finished successfully
-default	16:01:51.342206-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1017 target:5311 attributes:[
+default	16:41:25.214452-0500	runningboardd	Assertion 169-6308-1766 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:25.215996-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:25.216051-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:25.216103-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:25.217926-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1767 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:41:25.218702-0500	runningboardd	Assertion 169-103-1767 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:25.220520-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:25.220597-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:25.220647-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:25.230693-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.234101-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.234406-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0F94EF8E-82F8-416A-B3C6-7A812A9BF5F9] (reporting strategy default)> on Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> was not selected for reporting
+default	16:41:25.235012-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.235196-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> now using Connection 1
+default	16:41:25.235934-0500	RedLemon	0x7fe23c36e318 ID=2312 Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> sent request, body N 0
+default	16:41:25.306096-0500	RedLemon	0x7fe23c36e318 ID=2312 Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> received response, status 200 content U
+default	16:41:25.306706-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> response ended
+default	16:41:25.307142-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> done using Connection 1
+default	16:41:25.307364-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=511, response_bytes=790, cache_hit=false}
+default	16:41:25.307810-0500	RedLemon	Task <B3F76426-8DF7-4EC8-AFC3-B65A3AEB2D7C>.<642> finished successfully
+default	16:41:25.309120-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.309561-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D43E5A00-1F9B-471F-A320-3C086B6339F5] (reporting strategy default)> on Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> was not selected for reporting
+default	16:41:25.310420-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.310786-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> now using Connection 1
+default	16:41:25.312488-0500	RedLemon	0x7fe23bf3d648 ID=2316 Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> sent request, body N 0
+default	16:41:25.326587-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.368370-0500	RedLemon	0x7fe23bf3d648 ID=2316 Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> received response, status 200 content U
+default	16:41:25.369271-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> response ended
+default	16:41:25.369617-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> done using Connection 1
+default	16:41:25.369760-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> summary for task success {transaction_duration_ms=59, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=58, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:25.370210-0500	RedLemon	Task <226782FD-4160-4031-A926-6AF85F16C147>.<643> finished successfully
+default	16:41:25.371664-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.371993-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B1DB280F-6E35-4DC5-96FE-5B5B1331F026] (reporting strategy default)> on Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> was not selected for reporting
+default	16:41:25.372709-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.372983-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> now using Connection 1
+default	16:41:25.373848-0500	RedLemon	0x7fe238b73e78 ID=2320 Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> sent request, body N 0
+default	16:41:25.389223-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.438776-0500	RedLemon	0x7fe238b73e78 ID=2320 Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> received response, status 200 content U
+default	16:41:25.440222-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> response ended
+default	16:41:25.441476-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> done using Connection 1
+default	16:41:25.441684-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=3, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:25.442003-0500	RedLemon	Task <13450038-7A2D-4DA6-9E0B-74185A5CFE1B>.<644> finished successfully
+default	16:41:25.443759-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.444084-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2B08EE95-ECDC-458E-ADBE-EA0D5D77EC61] (reporting strategy default)> on Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> was not selected for reporting
+default	16:41:25.444811-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.445004-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> now using Connection 1
+default	16:41:25.445848-0500	RedLemon	0x7fe23c36e318 ID=2324 Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> sent request, body N 0
+default	16:41:25.467696-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.515414-0500	RedLemon	0x7fe23c36e318 ID=2324 Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> received response, status 200 content U
+default	16:41:25.516278-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> response ended
+default	16:41:25.517215-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> done using Connection 1
+default	16:41:25.517733-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> summary for task success {transaction_duration_ms=73, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=70, response_duration_ms=2, request_bytes=519, response_bytes=849, cache_hit=true}
+default	16:41:25.518044-0500	RedLemon	Task <02BEBBAD-9AD8-465A-902B-2BF7931BBABF>.<645> finished successfully
+default	16:41:25.520112-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.520431-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5804A19C-11E3-47BA-B524-85083FF24FE9] (reporting strategy default)> on Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> was not selected for reporting
+default	16:41:25.521198-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.521395-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> now using Connection 1
+default	16:41:25.522222-0500	RedLemon	0x7fe23c36e318 ID=2328 Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> sent request, body N 0
+default	16:41:25.539536-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.579680-0500	RedLemon	0x7fe23c36e318 ID=2328 Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> received response, status 200 content U
+default	16:41:25.580451-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> response ended
+default	16:41:25.580799-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> done using Connection 1
+default	16:41:25.581073-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> summary for task success {transaction_duration_ms=60, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=58, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:25.581250-0500	RedLemon	Task <8469F7D5-78A6-4C3E-81BD-90442CB0C1BA>.<646> finished successfully
+default	16:41:25.582922-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.583233-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9857A1E5-8746-4759-974E-C2296529C59C] (reporting strategy default)> on Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> was not selected for reporting
+default	16:41:25.584028-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.584275-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> now using Connection 1
+default	16:41:25.585217-0500	RedLemon	0x7fe23c36e318 ID=2332 Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> sent request, body N 0
+default	16:41:25.595824-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.691148-0500	RedLemon	0x7fe23c36e318 ID=2332 Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> received response, status 200 content U
+default	16:41:25.692378-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> response ended
+default	16:41:25.693085-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> done using Connection 1
+default	16:41:25.693274-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> summary for task success {transaction_duration_ms=109, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=107, response_duration_ms=2, request_bytes=511, response_bytes=834, cache_hit=true}
+default	16:41:25.693500-0500	RedLemon	Task <9359F1FC-FF5F-4E78-96BA-4A07C683940A>.<647> finished successfully
+default	16:41:25.694977-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.695307-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C558C87E-0F89-4D51-BA66-CC8B8DC78FC6] (reporting strategy default)> on Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> was not selected for reporting
+default	16:41:25.696047-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.696238-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> now using Connection 1
+default	16:41:25.697128-0500	RedLemon	0x7fe23c36e318 ID=2336 Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> sent request, body N 0
+default	16:41:25.711327-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.757667-0500	RedLemon	0x7fe23c36e318 ID=2336 Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> received response, status 200 content U
+default	16:41:25.758265-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> response ended
+default	16:41:25.758723-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> done using Connection 1
+default	16:41:25.758956-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:25.759541-0500	RedLemon	Task <77758C5E-9389-497A-B23A-7DEC8A4203FE>.<648> finished successfully
+default	16:41:25.761162-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.761482-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [46E85E76-0CFC-4D6E-9DF0-EA7CD8401181] (reporting strategy default)> on Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> was not selected for reporting
+default	16:41:25.762192-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.762386-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> now using Connection 1
+default	16:41:25.763478-0500	RedLemon	0x7fe23bf3d648 ID=2340 Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> sent request, body N 0
+default	16:41:25.777883-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.819670-0500	RedLemon	0x7fe23bf3d648 ID=2340 Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> received response, status 200 content U
+default	16:41:25.820884-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> response ended
+default	16:41:25.821351-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> done using Connection 1
+default	16:41:25.821759-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> summary for task success {transaction_duration_ms=59, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=57, response_duration_ms=2, request_bytes=511, response_bytes=836, cache_hit=true}
+default	16:41:25.822330-0500	RedLemon	Task <4976BF5B-E9EC-4172-B917-C144CECFB65C>.<649> finished successfully
+default	16:41:25.824136-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.824455-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B7042F06-8FDF-4FBB-BAC6-7C0387915222] (reporting strategy default)> on Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> was not selected for reporting
+default	16:41:25.825197-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.825407-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> now using Connection 1
+default	16:41:25.826160-0500	RedLemon	0x7fe23bf3d648 ID=2344 Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> sent request, body N 0
+default	16:41:25.887619-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:25.933533-0500	RedLemon	0x7fe23bf3d648 ID=2344 Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> received response, status 200 content U
+default	16:41:25.934115-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> response ended
+default	16:41:25.934549-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> done using Connection 1
+default	16:41:25.934775-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> summary for task success {transaction_duration_ms=109, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=108, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:25.935616-0500	RedLemon	Task <4A87DA74-D33F-467D-A954-FCA249AAFC5F>.<650> finished successfully
+default	16:41:25.938025-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:25.938719-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BE4DD3A6-C251-437F-A4C0-9C18236F945C] (reporting strategy default)> on Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> was not selected for reporting
+default	16:41:25.939538-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:25.939734-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> now using Connection 1
+default	16:41:25.940531-0500	RedLemon	0x7fe23bf3d648 ID=2348 Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> sent request, body N 0
+default	16:41:25.957441-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.015681-0500	RedLemon	0x7fe23bf3d648 ID=2348 Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> received response, status 200 content U
+default	16:41:26.016284-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> response ended
+default	16:41:26.016724-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> done using Connection 1
+default	16:41:26.016949-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=76, response_duration_ms=1, request_bytes=511, response_bytes=839, cache_hit=true}
+default	16:41:26.017713-0500	RedLemon	Task <2FF82B70-956A-44A4-A07F-A26893A79E84>.<651> finished successfully
+default	16:41:26.019571-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.019874-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [80546C5F-3541-4F03-B82A-85BD3ABA93C3] (reporting strategy default)> on Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> was not selected for reporting
+default	16:41:26.020636-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.020860-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> now using Connection 1
+default	16:41:26.021688-0500	RedLemon	0x7fe23c36e318 ID=2352 Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> sent request, body N 0
+default	16:41:26.029907-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.130970-0500	RedLemon	0x7fe23c36e318 ID=2352 Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> received response, status 200 content U
+default	16:41:26.131705-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> response ended
+default	16:41:26.132368-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> done using Connection 1
+default	16:41:26.132846-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> summary for task success {transaction_duration_ms=112, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=110, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:26.133176-0500	RedLemon	Task <D6239A2A-AE6F-42A5-97D8-5F2AF31D5102>.<652> finished successfully
+default	16:41:26.135263-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.135567-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [28B8C81C-C25B-458A-8658-795BAABADD8F] (reporting strategy default)> on Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> was not selected for reporting
+default	16:41:26.136431-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.136635-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> now using Connection 1
+default	16:41:26.137474-0500	RedLemon	0x7fe23c36e318 ID=2356 Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> sent request, body N 0
+default	16:41:26.144838-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.243525-0500	RedLemon	0x7fe23c36e318 ID=2356 Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> received response, status 200 content U
+default	16:41:26.244494-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> response ended
+default	16:41:26.245038-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> done using Connection 1
+default	16:41:26.245378-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> summary for task success {transaction_duration_ms=109, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=107, response_duration_ms=1, request_bytes=512, response_bytes=837, cache_hit=true}
+default	16:41:26.246157-0500	RedLemon	Task <4D81D4E7-2227-4971-8F45-51062DAB441F>.<653> finished successfully
+default	16:41:26.248740-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.249296-0500	runningboardd	Invalidating assertion 169-6308-1766 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:26.249169-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [91998AEB-DDF9-4356-B34C-0799D98C0754] (reporting strategy default)> on Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> was not selected for reporting
+default	16:41:26.249931-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.250171-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> now using Connection 1
+default	16:41:26.250947-0500	RedLemon	0x7fe23bf3d648 ID=2360 Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> sent request, body N 0
+default	16:41:26.256963-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.329574-0500	RedLemon	0x7fe23bf3d648 ID=2360 Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> received response, status 200 content U
+default	16:41:26.331506-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> response ended
+default	16:41:26.332350-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> done using Connection 1
+default	16:41:26.332791-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> summary for task success {transaction_duration_ms=83, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=79, response_duration_ms=3, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:26.333412-0500	RedLemon	Task <C8D79899-DBE7-4A5E-AFC9-A6737A71F0E9>.<654> finished successfully
+default	16:41:26.335021-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1768 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:51.342386-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.342794-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [389A76C6-3F10-42C6-BFD2-5259A16C4DB1] (reporting strategy default)> on Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> was not selected for reporting
-default	16:01:51.343535-0500	runningboardd	Assertion 169-5311-1017 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:51.344057-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.344345-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> now using Connection 1
-default	16:01:51.345388-0500	RedLemon	0x7f8632e61b78 ID=704 Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> sent request, body N 0
-default	16:01:51.347764-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:51.347973-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:51.348527-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:51.350044-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1015:com.apple.CFNetwork.StorageDB;169-5311-1017:com.apple.CFNetwork.StorageDB
-default	16:01:51.351341-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.410984-0500	RedLemon	0x7f8632e61b78 ID=704 Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> received response, status 200 content U
-default	16:01:51.411576-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> response ended
-default	16:01:51.412090-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> done using Connection 1
-default	16:01:51.412318-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=67, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
-default	16:01:51.412904-0500	RedLemon	Task <7FC1FC8A-5A6E-400D-B80D-060AD6A9BD62>.<335> finished successfully
-default	16:01:51.414889-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.415198-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F0FDF235-0CB2-44E6-AE36-F0021A0EB571] (reporting strategy default)> on Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> was not selected for reporting
-default	16:01:51.416012-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.416249-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> now using Connection 1
-default	16:01:51.417165-0500	RedLemon	0x7f863087fab8 ID=708 Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> sent request, body N 0
-default	16:01:51.431592-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.476265-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:51.476408-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1017:com.apple.CFNetwork.StorageDB
-default	16:01:51.476538-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:51.477080-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:51.478008-0500	RedLemon	0x7f863087fab8 ID=708 Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> received response, status 200 content U
-default	16:01:51.478668-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> response ended
-default	16:01:51.479110-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> done using Connection 1
-default	16:01:51.479294-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:51.479537-0500	RedLemon	Task <435D0C06-C41E-4EAD-BF2B-6427653431B3>.<336> finished successfully
-default	16:01:51.481172-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.481544-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6317D004-9AF7-4541-8452-56D60CF5E6A0] (reporting strategy default)> on Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> was not selected for reporting
-default	16:01:51.482259-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.482523-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> now using Connection 1
-default	16:01:51.483493-0500	RedLemon	0x7f863087fab8 ID=712 Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> sent request, body N 0
-default	16:01:51.499135-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.556623-0500	RedLemon	0x7f863087fab8 ID=712 Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> received response, status 200 content U
-default	16:01:51.557226-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> response ended
-default	16:01:51.557693-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> done using Connection 1
-default	16:01:51.557929-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> summary for task success {transaction_duration_ms=76, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=74, response_duration_ms=1, request_bytes=512, response_bytes=837, cache_hit=true}
-default	16:01:51.558536-0500	RedLemon	Task <4BD521CA-E02D-4697-93A4-DD76D60D665F>.<337> finished successfully
-default	16:01:51.560518-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.560827-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [790E38B5-6C46-4992-8566-21AA8E958718] (reporting strategy default)> on Task <8489715A-E927-4329-9685-2619DA246954>.<338> was not selected for reporting
-default	16:01:51.561630-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.561840-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> now using Connection 1
-default	16:01:51.562644-0500	RedLemon	0x7f863087fab8 ID=716 Task <8489715A-E927-4329-9685-2619DA246954>.<338> sent request, body N 0
-default	16:01:51.577927-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.622510-0500	RedLemon	0x7f863087fab8 ID=716 Task <8489715A-E927-4329-9685-2619DA246954>.<338> received response, status 200 content U
-default	16:01:51.623115-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> response ended
-default	16:01:51.623567-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> done using Connection 1
-default	16:01:51.623795-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:51.624420-0500	RedLemon	Task <8489715A-E927-4329-9685-2619DA246954>.<338> finished successfully
-default	16:01:51.626610-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.626931-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [07781842-AC9B-4832-A5BE-A4CF321E3806] (reporting strategy default)> on Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> was not selected for reporting
-default	16:01:51.627729-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.627929-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> now using Connection 1
-default	16:01:51.628746-0500	RedLemon	0x7f8632e1e408 ID=720 Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> sent request, body N 0
-default	16:01:51.644393-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.698640-0500	RedLemon	0x7f8632e1e408 ID=720 Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> received response, status 200 content U
-default	16:01:51.699228-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> response ended
-default	16:01:51.699723-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> done using Connection 1
-default	16:01:51.699954-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=512, response_bytes=836, cache_hit=true}
-default	16:01:51.700711-0500	RedLemon	Task <271B9EDC-2BA6-41C1-B87B-CD3042992EF8>.<339> finished successfully
-default	16:01:51.702537-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.702836-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [166B0FE9-62D1-4354-B1D4-F7EBF2B8581F] (reporting strategy default)> on Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> was not selected for reporting
-default	16:01:51.703558-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.703768-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> now using Connection 1
-default	16:01:51.704613-0500	RedLemon	0x7f863087fab8 ID=724 Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> sent request, body N 0
-default	16:01:51.719706-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.780155-0500	RedLemon	0x7f863087fab8 ID=724 Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> received response, status 200 content U
-default	16:01:51.780864-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> response ended
-default	16:01:51.781321-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> done using Connection 1
-default	16:01:51.781552-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> summary for task success {transaction_duration_ms=78, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=76, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:01:51.782550-0500	RedLemon	Task <86E6B687-5C9E-443E-BB6E-68CF74DF0A55>.<340> finished successfully
-default	16:01:51.784601-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.784924-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4B165D87-5F26-43E5-8AC4-5424CAFD7479] (reporting strategy default)> on Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> was not selected for reporting
-default	16:01:51.785625-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.785831-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> now using Connection 1
-default	16:01:51.786602-0500	RedLemon	0x7f8632e1e408 ID=728 Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> sent request, body N 0
-default	16:01:51.802160-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.856811-0500	RedLemon	0x7f8632e1e408 ID=728 Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> received response, status 200 content U
-default	16:01:51.857418-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> response ended
-default	16:01:51.857995-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> done using Connection 1
-default	16:01:51.858233-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> summary for task success {transaction_duration_ms=73, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=512, response_bytes=838, cache_hit=true}
-default	16:01:51.858767-0500	RedLemon	Task <F895E31B-2116-4161-84D4-E7516DC27EF2>.<341> finished successfully
-default	16:01:51.860368-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.860665-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [35A0D0B4-47A2-4699-B456-4A24712433B2] (reporting strategy default)> on Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> was not selected for reporting
-default	16:01:51.861444-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.861712-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> now using Connection 1
-default	16:01:51.862874-0500	RedLemon	0x7f8632e1e408 ID=732 Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> sent request, body N 0
-default	16:01:51.877299-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:51.928838-0500	RedLemon	0x7f8632e1e408 ID=732 Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> received response, status 200 content U
-default	16:01:51.929699-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> response ended
-default	16:01:51.930558-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> done using Connection 1
-default	16:01:51.931062-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=67, response_duration_ms=2, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:01:51.931615-0500	RedLemon	Task <0FB62A85-8948-4026-B8B7-450091DAAE0C>.<342> finished successfully
-default	16:01:51.933562-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:51.933877-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C813717F-66A9-4B97-8DC0-F7D1487796F6] (reporting strategy default)> on Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> was not selected for reporting
-default	16:01:51.934643-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:51.934845-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> now using Connection 1
-default	16:01:51.935627-0500	RedLemon	0x7f8632e1e408 ID=736 Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> sent request, body N 0
-default	16:01:51.952812-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.005486-0500	RedLemon	0x7f8632e1e408 ID=736 Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> received response, status 200 content U
-default	16:01:52.006086-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> response ended
-default	16:01:52.006541-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> done using Connection 1
-default	16:01:52.006772-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=512, response_bytes=835, cache_hit=true}
-default	16:01:52.007353-0500	RedLemon	Task <95BC9722-23B3-46E8-A99F-9DB6E69805D8>.<343> finished successfully
-default	16:01:52.009176-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.009485-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9DEF9AF1-81B1-46EB-9BA2-CC39CCF45013] (reporting strategy default)> on Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> was not selected for reporting
-default	16:01:52.010252-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.010459-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> now using Connection 1
-default	16:01:52.011259-0500	RedLemon	0x7f8632e1e408 ID=740 Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> sent request, body N 0
-default	16:01:52.149661-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.194541-0500	RedLemon	0x7f8632e1e408 ID=740 Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> received response, status 200 content U
-default	16:01:52.195430-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> response ended
-default	16:01:52.196216-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> done using Connection 1
-default	16:01:52.196587-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> summary for task success {transaction_duration_ms=186, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=184, response_duration_ms=2, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:01:52.196934-0500	RedLemon	Task <DBA64736-79AE-4BF4-B20F-EFA32614846C>.<344> finished successfully
-default	16:01:52.199059-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.199395-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B6B62FCB-F8A8-4F63-B32E-1B1707290473] (reporting strategy default)> on Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> was not selected for reporting
-default	16:01:52.200180-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.200391-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> now using Connection 1
-default	16:01:52.201181-0500	RedLemon	0x7f8632e1e408 ID=744 Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> sent request, body N 0
-default	16:01:52.218664-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.287868-0500	RedLemon	0x7f8632e1e408 ID=744 Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> received response, status 200 content U
-default	16:01:52.288649-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> response ended
-default	16:01:52.289149-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> done using Connection 1
-default	16:01:52.289407-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> summary for task success {transaction_duration_ms=89, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=87, response_duration_ms=1, request_bytes=512, response_bytes=837, cache_hit=true}
-default	16:01:52.289975-0500	RedLemon	Task <AE59B0C8-825C-4BF4-8AAD-A4EF7B2E906E>.<345> finished successfully
-default	16:01:52.291879-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.292196-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [46BE891F-3D81-4DEF-8826-813245102076] (reporting strategy default)> on Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> was not selected for reporting
-default	16:01:52.292954-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.293160-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> now using Connection 1
-default	16:01:52.293972-0500	RedLemon	0x7f8632e1e408 ID=748 Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> sent request, body N 0
-default	16:01:52.302654-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.369416-0500	RedLemon	0x7f8632e1e408 ID=748 Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> received response, status 200 content U
-default	16:01:52.370196-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> response ended
-default	16:01:52.370649-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> done using Connection 1
-default	16:01:52.370903-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> summary for task success {transaction_duration_ms=78, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=76, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:52.371525-0500	RedLemon	Task <0F0197EB-E0A1-436D-8D5C-AFE0364E99EE>.<346> finished successfully
-default	16:01:52.372874-0500	runningboardd	Invalidating assertion 169-5311-1017 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:52.373775-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.374073-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0607FF95-D17E-4CCC-8D1C-0CED28D92A28] (reporting strategy default)> on Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> was not selected for reporting
-default	16:01:52.374921-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.375132-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> now using Connection 1
-default	16:01:52.375925-0500	RedLemon	0x7f8632e1e408 ID=752 Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> sent request, body N 0
-default	16:01:52.382370-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.441612-0500	RedLemon	0x7f8632e1e408 ID=752 Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> received response, status 200 content U
-default	16:01:52.442219-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> response ended
-default	16:01:52.442679-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> done using Connection 1
-default	16:01:52.442907-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=832, cache_hit=true}
-default	16:01:52.444087-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1018 target:5311 attributes:[
+default	16:41:26.335280-0500	runningboardd	Assertion 169-6308-1768 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:26.335717-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.336333-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [550792E5-AF92-43CB-9240-D9B45D59C009] (reporting strategy default)> on Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> was not selected for reporting
+default	16:41:26.337183-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.337465-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> now using Connection 1
+default	16:41:26.338681-0500	RedLemon	0x7fe23bf3d648 ID=2364 Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> sent request, body N 0
+default	16:41:26.339433-0500	runningboardd	Attempting to rename power assertion 34089 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-6308-1766:com.apple.CFNetwork.StorageDB;169-6308-1768:com.apple.CFNetwork.StorageDB
+default	16:41:26.339374-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:26.339493-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:26.339581-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:26.398741-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.413557-0500	runningboardd	Attempting to rename power assertion 34089 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-6308-1768:com.apple.CFNetwork.StorageDB
+default	16:41:26.413639-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:26.413903-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:26.414045-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:26.443375-0500	RedLemon	0x7fe23bf3d648 ID=2364 Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> received response, status 200 content U
+default	16:41:26.444108-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> response ended
+default	16:41:26.444585-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> done using Connection 1
+default	16:41:26.444730-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> summary for task success {transaction_duration_ms=108, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=106, response_duration_ms=1, request_bytes=511, response_bytes=836, cache_hit=true}
+default	16:41:26.445200-0500	RedLemon	Task <7D2B5AF4-9FFB-4F46-A50A-3E50582E3AFB>.<655> finished successfully
+default	16:41:26.446695-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.447204-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [52392BED-52E5-4F35-BA92-53D93F6B004E] (reporting strategy default)> on Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> was not selected for reporting
+default	16:41:26.448160-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.448498-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> now using Connection 1
+default	16:41:26.449420-0500	RedLemon	0x7fe23c36e318 ID=2368 Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> sent request, body N 0
+default	16:41:26.463732-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.508529-0500	RedLemon	0x7fe23c36e318 ID=2368 Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> received response, status 200 content U
+default	16:41:26.509890-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> response ended
+default	16:41:26.510416-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> done using Connection 1
+default	16:41:26.510657-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=60, response_duration_ms=2, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:26.511316-0500	RedLemon	Task <F127C94A-DC3E-4563-AE6F-BD25CB364390>.<656> finished successfully
+default	16:41:26.513000-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.513324-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7292E30F-201E-4FFD-A7F8-8D3F1974E950] (reporting strategy default)> on Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> was not selected for reporting
+default	16:41:26.518121-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.518328-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> now using Connection 1
+default	16:41:26.519155-0500	RedLemon	0x7fe23bf3d648 ID=2372 Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> sent request, body N 0
+default	16:41:26.536441-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.589983-0500	RedLemon	0x7fe23bf3d648 ID=2372 Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> received response, status 200 content U
+default	16:41:26.590373-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> response ended
+default	16:41:26.590779-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> done using Connection 1
+default	16:41:26.590956-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=76, response_duration_ms=1, request_bytes=511, response_bytes=841, cache_hit=true}
+default	16:41:26.591192-0500	RedLemon	Task <66DB594C-4B14-47B6-BA90-2E9B8417C21E>.<657> finished successfully
+default	16:41:26.592632-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.592957-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [20687162-F81A-45FC-BA4E-CDAC7FE4B995] (reporting strategy default)> on Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> was not selected for reporting
+default	16:41:26.593677-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.593875-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> now using Connection 1
+default	16:41:26.594659-0500	RedLemon	0x7fe23bf3d648 ID=2376 Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> sent request, body N 0
+default	16:41:26.612613-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.655860-0500	RedLemon	0x7fe23bf3d648 ID=2376 Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> received response, status 200 content U
+default	16:41:26.657006-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> response ended
+default	16:41:26.657479-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> done using Connection 1
+default	16:41:26.657672-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=846, cache_hit=true}
+default	16:41:26.657879-0500	RedLemon	Task <C417FC43-8C56-47F7-893C-751F3C22BA2D>.<658> finished successfully
+default	16:41:26.660188-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.660569-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0CA5CC59-6B7F-4662-A150-DDD619BBBBC7] (reporting strategy default)> on Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> was not selected for reporting
+default	16:41:26.661371-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.661649-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> now using Connection 1
+default	16:41:26.663100-0500	RedLemon	0x7fe238b73e78 ID=2380 Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> sent request, body N 0
+default	16:41:26.671740-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.679725-0500	runningboardd	Assertion did invalidate due to timeout: 169-129-1761 (target:[anon<RedLemon>(501):6308])
+default	16:41:26.727356-0500	RedLemon	0x7fe238b73e78 ID=2380 Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> received response, status 200 content U
+default	16:41:26.728143-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> response ended
+default	16:41:26.728583-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> done using Connection 1
+default	16:41:26.728832-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:26.729406-0500	RedLemon	Task <C9DD7F8D-2637-45FA-AD80-6F00BC6BA64C>.<659> finished successfully
+default	16:41:26.731389-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.731719-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [894B4460-6F4E-4B2D-A086-B34F38AC76BC] (reporting strategy default)> on Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> was not selected for reporting
+default	16:41:26.732495-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.732690-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> now using Connection 1
+default	16:41:26.733508-0500	RedLemon	0x7fe23c36e318 ID=2384 Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> sent request, body N 0
+default	16:41:26.748042-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.795712-0500	RedLemon	0x7fe23c36e318 ID=2384 Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> received response, status 200 content U
+default	16:41:26.796511-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> response ended
+default	16:41:26.796972-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> done using Connection 1
+default	16:41:26.797204-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:26.797862-0500	RedLemon	Task <1B587828-4378-4435-BF11-F5B787F1C277>.<660> finished successfully
+default	16:41:26.799906-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.800230-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A15A240E-A168-4FD1-90E6-ADED43D628B6] (reporting strategy default)> on Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> was not selected for reporting
+default	16:41:26.801328-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.801531-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> now using Connection 1
+default	16:41:26.802301-0500	RedLemon	0x7fe23c36e318 ID=2388 Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> sent request, body N 0
+default	16:41:26.818022-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.850855-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:26.851299-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:26.851367-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:26.857731-0500	RedLemon	0x7fe23c36e318 ID=2388 Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> received response, status 200 content U
+default	16:41:26.858104-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> response ended
+default	16:41:26.858381-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> done using Connection 1
+default	16:41:26.858520-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> summary for task success {transaction_duration_ms=57, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=56, response_duration_ms=0, request_bytes=512, response_bytes=839, cache_hit=true}
+default	16:41:26.858881-0500	RedLemon	Task <C91EF0EA-AD57-40A3-A9E0-58FCFDC8E868>.<661> finished successfully
+default	16:41:26.860330-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.860652-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7F708483-AD2E-4506-887C-ECD669768085] (reporting strategy default)> on Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> was not selected for reporting
+default	16:41:26.861361-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.861572-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> now using Connection 1
+default	16:41:26.862382-0500	RedLemon	0x7fe23c36e318 ID=2392 Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> sent request, body N 0
+default	16:41:26.877919-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.921617-0500	RedLemon	0x7fe23c36e318 ID=2392 Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> received response, status 200 content U
+default	16:41:26.923358-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> response ended
+default	16:41:26.923903-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> done using Connection 1
+default	16:41:26.924105-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=60, response_duration_ms=2, request_bytes=524, response_bytes=846, cache_hit=true}
+default	16:41:26.924333-0500	RedLemon	Task <31A182F1-73F7-4DF0-840E-134A1FCE1665>.<662> finished successfully
+default	16:41:26.926016-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.926342-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9A0C547A-D243-4FFF-8DDA-A05F2B0116EF] (reporting strategy default)> on Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> was not selected for reporting
+default	16:41:26.927093-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.927330-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> now using Connection 1
+default	16:41:26.928102-0500	RedLemon	0x7fe23bf3d648 ID=2396 Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> sent request, body N 0
+default	16:41:26.937263-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:26.990119-0500	RedLemon	0x7fe23bf3d648 ID=2396 Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> received response, status 200 content U
+default	16:41:26.990719-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> response ended
+default	16:41:26.991225-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> done using Connection 1
+default	16:41:26.991461-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=512, response_bytes=839, cache_hit=true}
+default	16:41:26.992187-0500	RedLemon	Task <C66C44F9-E78C-47A2-8CF5-7D8128416010>.<663> finished successfully
+default	16:41:26.993810-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:26.994131-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DAFBCE31-3120-4394-A436-8A4D9F01EC3A] (reporting strategy default)> on Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> was not selected for reporting
+default	16:41:26.994844-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:26.995055-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> now using Connection 1
+default	16:41:26.995827-0500	RedLemon	0x7fe23c36e318 ID=2400 Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> sent request, body N 0
+default	16:41:27.016766-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.064615-0500	RedLemon	0x7fe23c36e318 ID=2400 Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> received response, status 200 content U
+default	16:41:27.065427-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> response ended
+default	16:41:27.065876-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> done using Connection 1
+default	16:41:27.066128-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:27.066683-0500	RedLemon	Task <A52AD13C-79BF-44F1-A02B-A326CEE14A24>.<664> finished successfully
+default	16:41:27.068562-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.068919-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [34B99D02-1DFD-44D6-A834-20A5149CA22F] (reporting strategy default)> on Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> was not selected for reporting
+default	16:41:27.069755-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.070043-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> now using Connection 1
+default	16:41:27.071053-0500	RedLemon	0x7fe238b73e78 ID=2404 Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> sent request, body N 0
+default	16:41:27.080532-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.127728-0500	RedLemon	0x7fe238b73e78 ID=2404 Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> received response, status 200 content U
+default	16:41:27.128734-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> response ended
+default	16:41:27.129420-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> done using Connection 1
+default	16:41:27.129662-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> summary for task success {transaction_duration_ms=60, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=58, response_duration_ms=2, request_bytes=512, response_bytes=840, cache_hit=true}
+default	16:41:27.130146-0500	RedLemon	Task <86CEE9DD-E2DE-44B6-A573-7D8D541F66DA>.<665> finished successfully
+default	16:41:27.132086-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.132410-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2C4B2DA3-83D5-4B8A-9DE6-5C16ADEE3BD0] (reporting strategy default)> on Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> was not selected for reporting
+default	16:41:27.133111-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.133315-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> now using Connection 1
+default	16:41:27.134161-0500	RedLemon	0x7fe23c36e318 ID=2408 Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> sent request, body N 0
+default	16:41:27.142481-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.196254-0500	RedLemon	0x7fe23c36e318 ID=2408 Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> received response, status 200 content U
+default	16:41:27.196953-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> response ended
+default	16:41:27.197530-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> done using Connection 1
+default	16:41:27.197763-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:27.198385-0500	RedLemon	Task <D6E85B9E-3503-4310-80C1-CF0B36A0D0DA>.<666> finished successfully
+default	16:41:27.200021-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.200341-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [40D4F048-F24B-4142-9480-BF515CC6F0EF] (reporting strategy default)> on Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> was not selected for reporting
+default	16:41:27.201147-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.201347-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> now using Connection 1
+default	16:41:27.202116-0500	RedLemon	0x7fe23c36e318 ID=2412 Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> sent request, body N 0
+default	16:41:27.209794-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.254899-0500	RedLemon	0x7fe23c36e318 ID=2412 Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> received response, status 200 content U
+default	16:41:27.255697-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> response ended
+default	16:41:27.256371-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> done using Connection 1
+default	16:41:27.256664-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> summary for task success {transaction_duration_ms=55, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=53, response_duration_ms=1, request_bytes=512, response_bytes=834, cache_hit=true}
+default	16:41:27.257504-0500	RedLemon	Task <08B418F2-9567-493B-A181-BFF410F12130>.<667> finished successfully
+default	16:41:27.258905-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.259227-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [06B3FC0B-4AC1-4CD2-A426-BC5C567129D7] (reporting strategy default)> on Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> was not selected for reporting
+default	16:41:27.259999-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.260577-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> now using Connection 1
+default	16:41:27.262522-0500	RedLemon	0x7fe238b73e78 ID=2416 Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> sent request, body N 0
+default	16:41:27.279341-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.319133-0500	RedLemon	0x7fe238b73e78 ID=2416 Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> received response, status 200 content U
+default	16:41:27.319741-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> response ended
+default	16:41:27.320225-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> done using Connection 1
+default	16:41:27.320465-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> summary for task success {transaction_duration_ms=60, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=59, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:27.321105-0500	RedLemon	Task <F2334684-8945-49A1-B028-2E85EB05F472>.<668> finished successfully
+default	16:41:27.323100-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.323409-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BE38573A-2065-4A86-8172-32DEEC2B3B9B] (reporting strategy default)> on Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> was not selected for reporting
+default	16:41:27.327956-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.328166-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> now using Connection 1
+default	16:41:27.329113-0500	RedLemon	0x7fe23bfd61d8 ID=2420 Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> sent request, body N 0
+default	16:41:27.345103-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.373857-0500	runningboardd	Invalidating assertion 169-6308-1768 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:27.389257-0500	RedLemon	0x7fe23bfd61d8 ID=2420 Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> received response, status 200 content U
+default	16:41:27.389894-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> response ended
+default	16:41:27.390383-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> done using Connection 1
+default	16:41:27.390620-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=65, response_duration_ms=1, request_bytes=512, response_bytes=836, cache_hit=true}
+default	16:41:27.391339-0500	RedLemon	Task <5BC515C3-0536-440C-9F06-CD44C23C2486>.<669> finished successfully
+default	16:41:27.392452-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1769 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:52.443634-0500	RedLemon	Task <6A07ACAF-4B44-446B-9FF4-88D6A30DA0EC>.<347> finished successfully
-default	16:01:52.445198-0500	runningboardd	Assertion 169-5311-1018 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:52.445969-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.446408-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [69D3608D-54DF-4C7F-8064-313D6B3DA2C7] (reporting strategy default)> on Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> was not selected for reporting
-default	16:01:52.447221-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.447520-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> now using Connection 1
-default	16:01:52.447613-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:52.447760-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:52.448148-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:52.449028-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1017:com.apple.CFNetwork.StorageDB;169-5311-1018:com.apple.CFNetwork.StorageDB
-default	16:01:52.448596-0500	RedLemon	0x7f862e251c58 ID=756 Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> sent request, body N 0
-default	16:01:52.452850-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.514044-0500	RedLemon	0x7f862e251c58 ID=756 Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> received response, status 200 content U
-default	16:01:52.514642-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> response ended
-default	16:01:52.515091-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> done using Connection 1
-default	16:01:52.515324-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:52.515923-0500	RedLemon	Task <04546C24-584B-4FFB-9509-448BAEA04E20>.<348> finished successfully
-default	16:01:52.518158-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.518476-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4CCEFA50-7959-4851-89A0-238FB73E4AEF] (reporting strategy default)> on Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> was not selected for reporting
-default	16:01:52.519155-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.519360-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> now using Connection 1
-default	16:01:52.520200-0500	RedLemon	0x7f863087fab8 ID=760 Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> sent request, body N 0
-default	16:01:52.533899-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.547355-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:52.547493-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:52.547636-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:52.547740-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1018:com.apple.CFNetwork.StorageDB
-default	16:01:52.603034-0500	RedLemon	0x7f863087fab8 ID=760 Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> received response, status 200 content U
-default	16:01:52.603632-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> response ended
-default	16:01:52.604080-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> done using Connection 1
-default	16:01:52.604310-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> summary for task success {transaction_duration_ms=85, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=83, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=false}
-default	16:01:52.604943-0500	RedLemon	Task <AA8B3FC7-B690-4777-9B86-28A20F88F648>.<349> finished successfully
-default	16:01:52.606832-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.607144-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A30EF865-052E-4F63-89C2-22ED9F8BB48C] (reporting strategy default)> on Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> was not selected for reporting
-default	16:01:52.607947-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.608159-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> now using Connection 1
-default	16:01:52.609018-0500	RedLemon	0x7f863087fab8 ID=764 Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> sent request, body N 0
-default	16:01:52.619740-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.675256-0500	RedLemon	0x7f863087fab8 ID=764 Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> received response, status 200 content U
-default	16:01:52.675879-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> response ended
-default	16:01:52.676390-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> done using Connection 1
-default	16:01:52.676635-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:52.677614-0500	RedLemon	Task <99B654D2-DF1D-4024-8369-C0406F7D3DBD>.<350> finished successfully
-default	16:01:52.679888-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.680236-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FB0D5CF9-24D7-4C63-9A92-B010E3EE0890] (reporting strategy default)> on Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> was not selected for reporting
-default	16:01:52.681011-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.681310-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> now using Connection 1
-default	16:01:52.682255-0500	RedLemon	0x7f862e251c58 ID=768 Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> sent request, body N 0
-default	16:01:52.695875-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.754282-0500	RedLemon	0x7f862e251c58 ID=768 Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> received response, status 200 content U
-default	16:01:52.754909-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> response ended
-default	16:01:52.755389-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> done using Connection 1
-default	16:01:52.755630-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=73, response_duration_ms=1, request_bytes=512, response_bytes=837, cache_hit=true}
-default	16:01:52.756375-0500	RedLemon	Task <E33F37B2-9134-45E0-B697-52DF73D0743A>.<351> finished successfully
-default	16:01:52.757987-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.758287-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8B3ADC85-FF6D-4003-9428-0462F55880A5] (reporting strategy default)> on Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> was not selected for reporting
-default	16:01:52.759083-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.759296-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> now using Connection 1
-default	16:01:52.760138-0500	RedLemon	0x7f8632e61b78 ID=772 Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> sent request, body N 0
-default	16:01:52.776164-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.829065-0500	RedLemon	0x7f8632e61b78 ID=772 Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> received response, status 200 content U
-default	16:01:52.830056-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> response ended
-default	16:01:52.830714-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> done using Connection 1
-default	16:01:52.831191-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=70, response_duration_ms=2, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:52.831821-0500	RedLemon	Task <798B395C-88BE-4F24-95A2-21A7BF0655CB>.<352> finished successfully
-default	16:01:52.833760-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.834085-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [011AFF09-AB5D-4177-BE1A-EA531662DDEC] (reporting strategy default)> on Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> was not selected for reporting
-default	16:01:52.834868-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.835072-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> now using Connection 1
-default	16:01:52.835884-0500	RedLemon	0x7f863087fab8 ID=776 Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> sent request, body N 0
-default	16:01:52.851520-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.865521-0500	runningboardd	Assertion did invalidate due to timeout: 169-129-1007 (target:[anon<RedLemon>(501):5311])
-default	16:01:52.899241-0500	RedLemon	0x7f863087fab8 ID=776 Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> received response, status 200 content U
-default	16:01:52.900063-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> response ended
-default	16:01:52.900639-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> done using Connection 1
-default	16:01:52.900880-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
-default	16:01:52.901479-0500	RedLemon	Task <DCC84C66-B248-46AD-A988-CDBB693E9B8D>.<353> finished successfully
-default	16:01:52.903048-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.903346-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8EF83623-D6ED-4248-9C7E-551F26FD93E6] (reporting strategy default)> on Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> was not selected for reporting
-default	16:01:52.904165-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.904366-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> now using Connection 1
-default	16:01:52.905133-0500	RedLemon	0x7f863087fab8 ID=780 Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> sent request, body N 0
-default	16:01:52.917629-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:52.917674-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:52.917716-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:52.920248-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:52.966757-0500	RedLemon	0x7f863087fab8 ID=780 Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> received response, status 200 content U
-default	16:01:52.967480-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> response ended
-default	16:01:52.967926-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> done using Connection 1
-default	16:01:52.968347-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=840, cache_hit=true}
-default	16:01:52.968878-0500	RedLemon	Task <271C81B9-4DC6-412D-AC8D-D8114D915B40>.<354> finished successfully
-default	16:01:52.970971-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:52.971293-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AE26621E-7AA5-42CC-BB38-2F67755DD5ED] (reporting strategy default)> on Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> was not selected for reporting
-default	16:01:52.971952-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:52.972204-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> now using Connection 1
-default	16:01:52.972989-0500	RedLemon	0x7f863087fab8 ID=784 Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> sent request, body N 0
-default	16:01:52.988174-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.042278-0500	RedLemon	0x7f863087fab8 ID=784 Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> received response, status 200 content U
-default	16:01:53.042886-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> response ended
-default	16:01:53.043343-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> done using Connection 1
-default	16:01:53.043572-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=70, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=false}
-default	16:01:53.044282-0500	RedLemon	Task <D257585F-5EAC-4D64-83C1-A0A12A145C19>.<355> finished successfully
-default	16:01:53.046511-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.046808-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6C229A4C-35D3-4AA1-A794-B8DA9039284D] (reporting strategy default)> on Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> was not selected for reporting
-default	16:01:53.047594-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.047812-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> now using Connection 1
-default	16:01:53.048683-0500	RedLemon	0x7f8632e08768 ID=788 Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> sent request, body N 0
-default	16:01:53.064193-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.109432-0500	RedLemon	0x7f8632e08768 ID=788 Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> received response, status 200 content U
-default	16:01:53.110207-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> response ended
-default	16:01:53.110663-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> done using Connection 1
-default	16:01:53.110922-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:53.111535-0500	RedLemon	Task <B933C955-DB06-486A-B2CA-69F5B7F782CC>.<356> finished successfully
-default	16:01:53.113621-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.113912-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [01AF402F-6F01-4924-8082-664926C7D660] (reporting strategy default)> on Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> was not selected for reporting
-default	16:01:53.114732-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.114933-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> now using Connection 1
-default	16:01:53.115736-0500	RedLemon	0x7f863087fab8 ID=792 Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> sent request, body N 0
-default	16:01:53.129946-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.177812-0500	RedLemon	0x7f863087fab8 ID=792 Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> received response, status 200 content U
-default	16:01:53.178416-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> response ended
-default	16:01:53.178869-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> done using Connection 1
-default	16:01:53.179100-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=518, response_bytes=848, cache_hit=true}
-default	16:01:53.179699-0500	RedLemon	Task <1AD1B088-F360-4A4D-9CB4-0CF5BE7DADD2>.<357> finished successfully
-default	16:01:53.181749-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.182065-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CAF18403-2354-4092-A692-333FD74FE4CF] (reporting strategy default)> on Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> was not selected for reporting
-default	16:01:53.182852-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.183052-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> now using Connection 1
-default	16:01:53.183868-0500	RedLemon	0x7f8632e08768 ID=796 Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> sent request, body N 0
-default	16:01:53.198949-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.269915-0500	RedLemon	0x7f8632e08768 ID=796 Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> received response, status 200 content U
-default	16:01:53.270515-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> response ended
-default	16:01:53.270977-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> done using Connection 1
-default	16:01:53.271208-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> summary for task success {transaction_duration_ms=88, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=87, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:53.271702-0500	RedLemon	Task <E3630771-C3DA-4ED3-B5DE-D341780ADF2A>.<358> finished successfully
-default	16:01:53.273988-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.274305-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8732FA5F-958D-400F-9118-79499EA329BB] (reporting strategy default)> on Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> was not selected for reporting
-default	16:01:53.275054-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.275259-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> now using Connection 1
-default	16:01:53.276027-0500	RedLemon	0x7f8632e08768 ID=800 Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> sent request, body N 0
-default	16:01:53.292094-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.344032-0500	RedLemon	0x7f8632e08768 ID=800 Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> received response, status 200 content U
-default	16:01:53.344396-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> response ended
-default	16:01:53.344789-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> done using Connection 1
-default	16:01:53.344963-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=0, request_bytes=521, response_bytes=848, cache_hit=true}
-default	16:01:53.345185-0500	RedLemon	Task <1C145139-0C8E-4A0D-8458-C65CEF1BADF3>.<359> finished successfully
-default	16:01:53.346769-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.347192-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [382C750A-BEDD-4F5F-8EE0-C62B182613B6] (reporting strategy default)> on Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> was not selected for reporting
-default	16:01:53.347906-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.348198-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> now using Connection 1
-default	16:01:53.349199-0500	RedLemon	0x7f8633a3da78 ID=804 Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> sent request, body N 0
-default	16:01:53.499907-0500	runningboardd	Invalidating assertion 169-5311-1018 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:53.512178-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.571518-0500	RedLemon	0x7f8633a3da78 ID=804 Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> received response, status 200 content U
-default	16:01:53.572737-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> response ended
-default	16:01:53.573195-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> done using Connection 1
-default	16:01:53.573542-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> summary for task success {transaction_duration_ms=226, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=223, response_duration_ms=2, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:01:53.574389-0500	RedLemon	Task <3593B1D2-6898-40AF-B1E8-80BA20CCE07D>.<360> finished successfully
-default	16:01:53.575656-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1019 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:01:53.575829-0500	runningboardd	Assertion 169-5311-1019 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:53.576993-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1018:com.apple.CFNetwork.StorageDB;169-5311-1019:com.apple.CFNetwork.StorageDB
-default	16:01:53.577009-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.577455-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0094C84B-1C91-4113-BFAC-AF50DAD29DB5] (reporting strategy default)> on Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> was not selected for reporting
-default	16:01:53.578265-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.578552-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> now using Connection 1
-default	16:01:53.578557-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:53.578739-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:53.578852-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:53.579565-0500	RedLemon	0x7f862e251c58 ID=808 Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> sent request, body N 0
-default	16:01:53.584922-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.650137-0500	RedLemon	0x7f862e251c58 ID=808 Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> received response, status 200 content U
-default	16:01:53.650954-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> response ended
-default	16:01:53.651427-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> done using Connection 1
-default	16:01:53.651662-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> summary for task success {transaction_duration_ms=73, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=71, response_duration_ms=1, request_bytes=521, response_bytes=848, cache_hit=true}
-default	16:01:53.652266-0500	RedLemon	Task <7CF669E0-218C-488A-A092-CEAA63642D41>.<361> finished successfully
-default	16:01:53.654181-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
-default	16:01:53.654520-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6E71A258-4380-4A35-B87A-CEC29E1ADE28] (reporting strategy default)> on Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> was not selected for reporting
-default	16:01:53.655249-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.655453-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> now using Connection 1
-default	16:01:53.656230-0500	RedLemon	0x7f863087fab8 ID=812 Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> sent request, body N 0
-default	16:01:53.665033-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.670423-0500	runningboardd	Attempting to rename power assertion 33541 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1019:com.apple.CFNetwork.StorageDB
-default	16:01:53.670862-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:53.671228-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:53.671331-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:53.719399-0500	RedLemon	0x7f863087fab8 ID=812 Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> received response, status 200 content U
-default	16:01:53.720201-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> response ended
-default	16:01:53.720912-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> done using Connection 1
-default	16:01:53.721211-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=2, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:53.721606-0500	RedLemon	Task <514A08A5-61B5-479A-8156-027464C46F5A>.<362> finished successfully
-default	16:01:53.731832-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:53.762137-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:53.762423-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6D0146B3-F49F-4330-8AA6-94F6A667DA6D] (reporting strategy default)> on Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> was not selected for reporting
-default	16:01:53.763031-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:53.763225-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> now using Connection 27
-default	16:01:53.763498-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> sent request, body N 0
-default	16:01:53.777903-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> received response, status 200 content K
-default	16:01:53.783402-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> done using Connection 27
-default	16:01:53.783577-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> response ended
-default	16:01:53.784239-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> summary for task success {transaction_duration_ms=21, response_status=200, connection=27, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=15, response_duration_ms=6, request_bytes=42, response_bytes=117420, cache_hit=false}
-default	16:01:53.784333-0500	RedLemon	Task <F7A0EAB7-9F5A-4D05-BF58-20BC3D88F458>.<363> finished successfully
-default	16:01:54.599441-0500	runningboardd	Invalidating assertion 169-5311-1019 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:54.683975-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> summary for task success {transaction_duration_ms=6069, response_status=101, connection=28, protocol="http/1.1", domain_lookup_duration_ms=32, connect_duration_ms=81, secure_connection_duration_ms=29, private_relay=false, request_start_ms=120, request_duration_ms=0, response_start_ms=457, response_duration_ms=0, request_bytes=828, response_bytes=850, cache_hit=false}
-default	16:01:54.684094-0500	RedLemon	Task <FBE04E78-1CD2-4E67-B4DD-52F79583645E>.<1> finished successfully
-default	16:01:54.684120-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:54.684570-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:54.684634-0500	RedLemon	Connection 28: cleaning up
-default	16:01:54.685911-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5F6875E1-DF51-477A-9A60-C190854F6FAD] (reporting strategy default)> on Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> was not selected for reporting
-default	16:01:54.685957-0500	RedLemon	[C28 CD116DD6-E75D-4D84-BB8C-38D7CE728AF1 Hostname#23ce8654:443 tcp, url hash: 02510389, tls, definite, attribution: developer] cancel
-default	16:01:54.686203-0500	RedLemon	[C28 CD116DD6-E75D-4D84-BB8C-38D7CE728AF1 Hostname#23ce8654:443 tcp, url hash: 02510389, tls, definite, attribution: developer] cancelled
-	[C28.1 4098041A-7D28-4A0D-90FE-525CCE3B7E23 10.0.0.113:61363<->IPv4#9735f8ed:443]
+default	16:41:27.392642-0500	runningboardd	Assertion 169-6308-1769 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:27.393311-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.393779-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D000070D-3950-421B-ABA8-6645BACE2F9C] (reporting strategy default)> on Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> was not selected for reporting
+default	16:41:27.394634-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.394937-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> now using Connection 1
+default	16:41:27.395212-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:27.395430-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:27.395698-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:27.395942-0500	RedLemon	0x7fe23c36e318 ID=2424 Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> sent request, body N 0
+default	16:41:27.396578-0500	runningboardd	Attempting to rename power assertion 34089 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-6308-1768:com.apple.CFNetwork.StorageDB;169-6308-1769:com.apple.CFNetwork.StorageDB
+default	16:41:27.411739-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.451617-0500	RedLemon	0x7fe23c36e318 ID=2424 Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> received response, status 200 content U
+default	16:41:27.452264-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> response ended
+default	16:41:27.452704-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> done using Connection 1
+default	16:41:27.452951-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> summary for task success {transaction_duration_ms=58, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=57, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:27.453701-0500	RedLemon	Task <99DDA487-AC73-4887-A13A-3DDF9B3C011C>.<670> finished successfully
+default	16:41:27.455857-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.456177-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B5DB6018-62EC-4709-8B1A-ABDA4649C036] (reporting strategy default)> on Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> was not selected for reporting
+default	16:41:27.456947-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.457160-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> now using Connection 1
+default	16:41:27.457926-0500	RedLemon	0x7fe23bfd61d8 ID=2428 Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> sent request, body N 0
+default	16:41:27.479996-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.530536-0500	RedLemon	0x7fe23bfd61d8 ID=2428 Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> received response, status 200 content U
+default	16:41:27.531193-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> response ended
+default	16:41:27.531809-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> done using Connection 1
+default	16:41:27.532121-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=73, response_duration_ms=1, request_bytes=511, response_bytes=831, cache_hit=true}
+default	16:41:27.532500-0500	RedLemon	Task <E59D1C95-229B-4BF4-981F-05BE9B965D54>.<671> finished successfully
+default	16:41:27.534236-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.534533-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AE69FFBC-63BD-4DB1-BB38-6459C42175BF] (reporting strategy default)> on Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> was not selected for reporting
+default	16:41:27.535547-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.535871-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> now using Connection 1
+default	16:41:27.537585-0500	RedLemon	0x7fe23c36e318 ID=2432 Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> sent request, body N 0
+default	16:41:27.549767-0500	runningboardd	Attempting to rename power assertion 34089 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-6308-1769:com.apple.CFNetwork.StorageDB
+default	16:41:27.549856-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:27.549962-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:27.550051-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:27.555109-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.605644-0500	RedLemon	0x7fe23c36e318 ID=2432 Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> received response, status 200 content U
+default	16:41:27.606249-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> response ended
+default	16:41:27.606743-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> done using Connection 1
+default	16:41:27.606975-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=70, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:27.608340-0500	RedLemon	Task <552EADB3-BE48-43A4-A815-4A0D1CF560AE>.<672> finished successfully
+default	16:41:27.610276-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.610605-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7C0C9BEC-DFD7-437D-9FC8-7AC80B1F309E] (reporting strategy default)> on Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> was not selected for reporting
+default	16:41:27.611310-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.611509-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> now using Connection 1
+default	16:41:27.612281-0500	RedLemon	0x7fe23bfd61d8 ID=2436 Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> sent request, body N 0
+default	16:41:27.632690-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.682634-0500	RedLemon	0x7fe23bfd61d8 ID=2436 Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> received response, status 200 content U
+default	16:41:27.683232-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> response ended
+default	16:41:27.683790-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> done using Connection 1
+default	16:41:27.684138-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> summary for task success {transaction_duration_ms=73, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
+default	16:41:27.684499-0500	RedLemon	Task <DE0DD8B5-C647-454F-A32E-C5903CA18FA6>.<673> finished successfully
+default	16:41:27.686479-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.689263-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F887087F-29CE-400E-8302-1E38D3DC4DDC] (reporting strategy default)> on Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> was not selected for reporting
+default	16:41:27.690335-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.690860-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> now using Connection 1
+default	16:41:27.692658-0500	RedLemon	0x7fe23c36e318 ID=2440 Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> sent request, body N 0
+default	16:41:27.709232-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.752646-0500	RedLemon	0x7fe23c36e318 ID=2440 Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> received response, status 200 content U
+default	16:41:27.753251-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> response ended
+default	16:41:27.753720-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> done using Connection 1
+default	16:41:27.754003-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:27.754571-0500	RedLemon	Task <3C7E9CE6-AE81-4651-A8A9-315651CB904F>.<674> finished successfully
+default	16:41:27.756829-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.757149-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B0511C93-D56C-4716-8B36-D05713F9880C] (reporting strategy default)> on Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> was not selected for reporting
+default	16:41:27.761672-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.761883-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> now using Connection 1
+default	16:41:27.762659-0500	RedLemon	0x7fe23c36e318 ID=2444 Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> sent request, body N 0
+default	16:41:27.778445-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.847127-0500	RedLemon	0x7fe23c36e318 ID=2444 Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> received response, status 200 content U
+default	16:41:27.847764-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> response ended
+default	16:41:27.848278-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> done using Connection 1
+default	16:41:27.848519-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> summary for task success {transaction_duration_ms=91, response_status=200, connection=1, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=89, response_duration_ms=1, request_bytes=512, response_bytes=838, cache_hit=true}
+default	16:41:27.849244-0500	RedLemon	Task <4AE4A8FC-3DE5-4F34-9482-F68FD6B97C66>.<675> finished successfully
+default	16:41:27.851057-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.851356-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DFBC7EFC-46D2-449F-864C-642657D1BD90] (reporting strategy default)> on Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> was not selected for reporting
+default	16:41:27.852101-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.852300-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> now using Connection 1
+default	16:41:27.853106-0500	RedLemon	0x7fe23c36e318 ID=2448 Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> sent request, body N 0
+default	16:41:27.870676-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.913002-0500	RedLemon	0x7fe23c36e318 ID=2448 Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> received response, status 200 content U
+default	16:41:27.913902-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> response ended
+default	16:41:27.914623-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> done using Connection 1
+default	16:41:27.914932-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=60, response_duration_ms=2, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:27.915216-0500	RedLemon	Task <9F780C07-D029-402D-A5DA-33AD54AD6173>.<676> finished successfully
+default	16:41:27.917207-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.917540-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [47EDB550-91BB-44D3-B250-F9B992A0B313] (reporting strategy default)> on Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> was not selected for reporting
+default	16:41:27.918381-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.918595-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> now using Connection 1
+default	16:41:27.919414-0500	RedLemon	0x7fe23c36e318 ID=2452 Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> sent request, body N 0
+default	16:41:27.933444-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:27.981787-0500	RedLemon	0x7fe23c36e318 ID=2452 Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> received response, status 200 content U
+default	16:41:27.982584-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> response ended
+default	16:41:27.983051-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> done using Connection 1
+default	16:41:27.983305-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:27.983935-0500	RedLemon	Task <A6CE2DAC-36A6-4B38-8287-4821B2CAE9D1>.<677> finished successfully
+default	16:41:27.985893-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:27.986185-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [47EE2662-5788-4633-99B2-C4CCDA797996] (reporting strategy default)> on Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> was not selected for reporting
+default	16:41:27.986958-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:27.987234-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> now using Connection 1
+default	16:41:27.988101-0500	RedLemon	0x7fe23c36e318 ID=2456 Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> sent request, body N 0
+default	16:41:28.052638-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:28.104587-0500	RedLemon	0x7fe23c36e318 ID=2456 Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> received response, status 200 content U
+default	16:41:28.105442-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> response ended
+default	16:41:28.105930-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> done using Connection 1
+default	16:41:28.106161-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> summary for task success {transaction_duration_ms=119, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=117, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:28.106786-0500	RedLemon	Task <25169361-9EEE-4B72-9E5E-E3C578562E59>.<678> finished successfully
+default	16:41:28.108817-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:28.109126-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [18BC547F-53C3-410B-B9EC-D57FA2A7C310] (reporting strategy default)> on Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> was not selected for reporting
+default	16:41:28.109889-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:28.110085-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> now using Connection 1
+default	16:41:28.110862-0500	RedLemon	0x7fe23bf3d648 ID=2460 Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> sent request, body N 0
+default	16:41:28.126791-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:28.192919-0500	RedLemon	0x7fe23bf3d648 ID=2460 Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> received response, status 200 content U
+default	16:41:28.193509-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> response ended
+default	16:41:28.194261-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> done using Connection 1
+default	16:41:28.194566-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> summary for task success {transaction_duration_ms=85, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=83, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
+default	16:41:28.194926-0500	RedLemon	Task <7DC29907-DAA6-4BB8-9244-11AE5D51F382>.<679> finished successfully
+default	16:41:28.197216-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher <private>
+default	16:41:28.197499-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C84EDFBE-3F15-4394-95F4-7EA929C10A7F] (reporting strategy default)> on Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> was not selected for reporting
+default	16:41:28.198291-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:28.198483-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> now using Connection 1
+default	16:41:28.199237-0500	RedLemon	0x7fe23c36e318 ID=2464 Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> sent request, body N 0
+default	16:41:28.215487-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:28.256661-0500	RedLemon	0x7fe23c36e318 ID=2464 Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> received response, status 200 content U
+default	16:41:28.257272-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> response ended
+default	16:41:28.257740-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> done using Connection 1
+default	16:41:28.257973-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> summary for task success {transaction_duration_ms=60, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=58, response_duration_ms=1, request_bytes=524, response_bytes=846, cache_hit=true}
+default	16:41:28.258559-0500	RedLemon	Task <4B6920C5-610F-48D9-80F5-62F876DA63F3>.<680> finished successfully
+default	16:41:28.295852-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:28.322838-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:28.323246-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B1FB2E95-662B-4FDC-BD34-78605BF09DE4] (reporting strategy default)> on Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> was not selected for reporting
+default	16:41:28.323882-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:28.324067-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> now using Connection 37
+default	16:41:28.324312-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> sent request, body N 0
+default	16:41:28.347397-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> received response, status 200 content K
+default	16:41:28.349230-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> done using Connection 37
+default	16:41:28.349347-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> response ended
+default	16:41:28.349901-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> summary for task success {transaction_duration_ms=26, response_status=200, connection=37, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=23, response_duration_ms=2, request_bytes=42, response_bytes=117419, cache_hit=false}
+default	16:41:28.349982-0500	RedLemon	Task <6FC8E5F9-2E7F-43D8-AC82-539FD9E9CC17>.<681> finished successfully
+default	16:41:28.431864-0500	runningboardd	Invalidating assertion 169-6308-1769 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:28.536696-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:28.536808-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:28.536864-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:28.538492-0500	runningboardd	Invalidating assertion 169-103-1767 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:28.691471-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:28.691521-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:28.691590-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:29.428395-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> summary for task success {transaction_duration_ms=6096, response_status=101, connection=38, protocol="http/1.1", domain_lookup_duration_ms=40, connect_duration_ms=144, secure_connection_duration_ms=49, private_relay=false, request_start_ms=194, request_duration_ms=0, response_start_ms=337, response_duration_ms=0, request_bytes=828, response_bytes=850, cache_hit=false}
+default	16:41:29.428508-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.429007-0500	RedLemon	Task <9CDA3045-71E6-4D16-8C17-8174C9BEE586>.<1> finished successfully
+default	16:41:29.429173-0500	RedLemon	Connection 38: cleaning up
+default	16:41:29.429903-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9573A8DD-EA71-4769-83B8-00CF54F98C89] (reporting strategy default)> on Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> was not selected for reporting
+default	16:41:29.430041-0500	RedLemon	[C38 EA959C32-C0D5-4DC6-9240-C32DB4C59CBF Hostname#316a8648:443 tcp, url hash: 028c1bce, tls, definite, attribution: developer] cancel
+default	16:41:29.430253-0500	RedLemon	[C38 EA959C32-C0D5-4DC6-9240-C32DB4C59CBF Hostname#316a8648:443 tcp, url hash: 028c1bce, tls, definite, attribution: developer] cancelled
+	[C38.1 C91DF3DB-7EE4-4BBB-9186-FADFA412E598 10.0.0.113:61374<->IPv4#f44b3bd4:443]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
 	Privacy Stance: Not Eligible
-	Duration: 6.070s, DNS @0.000s took 0.032s, TCP @0.458s took 0.050s, TLS 1.3 took 0.002s
-	bytes in/out: 5100/1734, packets in/out: 8/12, rtt: 0.035s, retransmitted bytes: 0, out-of-order bytes: 0
-default	16:01:54.686542-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [75D54B63-3364-496A-B278-756D64AEAA19] (reporting strategy default)> on Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> was not selected for reporting
-default	16:01:54.687262-0500	RedLemon	nw_flow_disconnected [C28.1 IPv4#9735f8ed:443 cancelled channel-flow ((null))] Output protocol disconnected
-default	16:01:54.687577-0500	RedLemon	nw_protocol_tcp_log_summary [C28.1:3] 
-	[5C6B7865-4CDF-4C45-8C43-4D7AD336FC52 <private>:61363<-><private>:443]
-	Init: 1, Conn_Time: 49.667ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: process, rtt_upd: 4, rtt: 35.312ms, rtt_var: 18.000ms rtt_nc: 44.031ms, rtt_var_nc: 22.812ms base rtt: 12ms
+	Duration: 6.097s, DNS @0.000s took 0.040s, TCP @0.338s took 0.093s, TLS 1.3 took 0.002s
+	bytes in/out: 5122/1734, packets in/out: 8/13, rtt: 0.028s, retransmitted bytes: 0, out-of-order bytes: 0
+default	16:41:29.430972-0500	RedLemon	nw_flow_disconnected [C38.1 IPv4#f44b3bd4:443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:41:29.431344-0500	RedLemon	nw_protocol_tcp_log_summary [C38.1:3] 
+	[E8E5C944-4A38-479A-98B9-91A409E7AE1C <private>:61374<-><private>:443]
+	Init: 1, Conn_Time: 92.327ms, SYNs: 2, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: process, rtt_upd: 4, rtt: 28.031ms, rtt_var: 10.812ms rtt_nc: 23.312ms, rtt_var_nc: 10.625ms base rtt: 11ms
 	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	16:01:54.688133-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C28] reporting state cancelled
-default	16:01:54.688365-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:54.688661-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> now using Connection 1
-default	16:01:54.691262-0500	RedLemon	tcp_output [C28.1:3] flags=[F.] seq=1584077145, ack=381016447, win=2048 state=FIN_WAIT_1 rcv_nxt=381016447, snd_una=1584077091
-default	16:01:54.691817-0500	RedLemon	Connection 28: done
-default	16:01:54.692472-0500	RedLemon	Connection 29: enabling TLS
-default	16:01:54.692516-0500	RedLemon	Connection 29: starting, TC(0x0)
-default	16:01:54.692574-0500	RedLemon	[C29 4456D29C-37CD-4070-B7FB-DF1FDF2EE6F5 Hostname#23ce8654:443 tcp, url hash: 02510389, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{015D2438-319C-42F4-A75A-D31B0A95594B}{(null)}{Y}{2} (private), proc: E8E931A4-3EA4-3070-8D28-FBFFFC7A0E59] start
-default	16:01:54.693078-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-error	16:01:54.693608-0500	RedLemon	Read completed with an error <private>
-default	16:01:54.694103-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A3CA0EFD-3EE8-4385-A9F2-9D50D5AD8822] (reporting strategy default)> on Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> was not selected for reporting
-default	16:01:54.693687-0500	RedLemon	[C29 Hostname#23ce8654:443 initial path ((null))] event: path:start @0.001s
-default	16:01:54.695403-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:54.696674-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1CAB3ECF-C3C6-405D-84E0-2F0F081AA670] (reporting strategy default)> on Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> was not selected for reporting
-default	16:01:54.696837-0500	RedLemon	[C29 Hostname#23ce8654:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: F58B9BF2-636D-4E88-8D28-E8AFF663EF6B
-default	16:01:54.698205-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.005s
-default	16:01:54.698399-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C29] reporting state preparing
-default	16:01:54.698755-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> setting up Connection 29
-default	16:01:54.699089-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:54.699409-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> now using Connection 27
-default	16:01:54.699498-0500	mDNSResponder	[R469] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, options: 0x8 {use-failover}, client pid: 5311 (RedLemon)
-default	16:01:54.699608-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:54.699992-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> now using Connection 27
-default	16:01:54.701503-0500	RedLemon	0x7f862e39d248 ID=816 Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> sent request, body S 83
-default	16:01:54.701971-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> sent request, body N 0
-default	16:01:54.702234-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> sent request, body N 0
-default	16:01:54.704035-0500	mDNSResponder	[R469] getaddrinfo stop -- hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, client pid: 5311 (RedLemon)
-default	16:01:54.704231-0500	RedLemon	nw_endpoint_resolver_update [C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#9735f8ed:443
-default	16:01:54.704349-0500	RedLemon	nw_endpoint_resolver_update [C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#bdc5d67c:443
-default	16:01:54.704461-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.011s
-default	16:01:54.704683-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 initial path ((null))] event: path:start @0.012s
-default	16:01:54.705126-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.012s, uuid: 661CA4FA-2366-464F-9F9C-7893C6E93A95
-default	16:01:54.705254-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.012s
-default	16:01:54.705766-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.013s
-default	16:01:54.706793-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.014s
-default	16:01:54.706986-0500	RedLemon	tcp_output [C29.1:3] flags=[S] seq=2146973291, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2146973291
-default	16:01:54.730891-0500	RedLemon	tcp_input [C28.1:3] flags=[F.] seq=381016447, ack=1584077146, win=16 state=FIN_WAIT_2 rcv_nxt=381016447, snd_una=1584077146
-default	16:01:54.765691-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:54.765769-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:54.765846-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:54.767477-0500	runningboardd	Invalidating assertion 169-103-1014 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:01:54.769553-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> received response, status 200 content K
-default	16:01:54.770608-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> received response, status 200 content K
-default	16:01:54.771112-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> done using Connection 27
-default	16:01:54.771270-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> response ended
-default	16:01:54.771656-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> summary for task success {transaction_duration_ms=74, response_status=200, connection=27, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=71, response_duration_ms=1, request_bytes=37, response_bytes=34792, cache_hit=false}
-default	16:01:54.771770-0500	RedLemon	Task <98C1B9B4-C3BF-453B-9951-F4B8237C8E42>.<366> finished successfully
-default	16:01:54.773396-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> done using Connection 27
-default	16:01:54.774005-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> response ended
-default	16:01:54.775235-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> summary for task success {transaction_duration_ms=80, response_status=200, connection=27, reused=1, request_start_ms=7, request_duration_ms=0, response_start_ms=75, response_duration_ms=4, request_bytes=42, response_bytes=117388, cache_hit=false}
-default	16:01:54.776578-0500	RedLemon	Task <365D0029-79EE-417E-BF76-8675C080CCE2>.<365> finished successfully
-default	16:01:54.801867-0500	RedLemon	tcp_output [C29.1:3] flags=[S] seq=2146973291, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2146973291
-default	16:01:54.808383-0500	RedLemon	[C29.2 IPv4#bdc5d67c:443 initial path ((null))] event: path:start @0.115s
-default	16:01:54.809057-0500	RedLemon	[C29.2 IPv4#bdc5d67c:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.116s, uuid: E445D468-5B75-4F5E-BA22-117E6C002EF0
-default	16:01:54.809237-0500	RedLemon	[C29.2 IPv4#bdc5d67c:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.116s
-default	16:01:54.809940-0500	RedLemon	[C29.2 IPv4#bdc5d67c:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.117s
-default	16:01:54.810770-0500	RedLemon	[C29.2 IPv4#bdc5d67c:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.118s
-default	16:01:54.810899-0500	RedLemon	tcp_output [C29.2:3] flags=[S] seq=1840674674, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=1840674674
-default	16:01:54.819026-0500	RedLemon	tcp_input [C29.1:3] flags=[S.] seq=4035363656, ack=2146973292, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2146973291
-default	16:01:54.819463-0500	RedLemon	nw_flow_connected [C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	16:01:54.819916-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.127s
-default	16:01:54.820112-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.127s
-default	16:01:54.820848-0500	RedLemon	nw_protocol_tcp_log_summary [C29.2:3] 
-	[BED06804-902A-4706-882B-75DACA06B6B8 <private>:61365<-><private>:443]
-	Init: 1, Conn_Time: 0.000ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
-	rtt_cache: none, rtt_upd: 0, rtt: 0.000ms, rtt_var: 250.000ms rtt_nc: 0.000ms, rtt_var_nc: 250.000ms base rtt: 0ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	16:01:54.821070-0500	RedLemon	nw_flow_disconnected [C29.2 IPv4#bdc5d67c:443 cancelled channel-flow ((null))] Output protocol disconnected
-default	16:01:54.821825-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C29.1:2][0x7f86317494f0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	16:01:54.822299-0500	RedLemon	boringssl_context_info_handler(2028) [C29.1:2][0x7f86317494f0] Client handshake started
-default	16:01:54.822768-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS client enter_early_data
-default	16:01:54.823041-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS client read_server_hello
-default	16:01:54.825604-0500	RedLemon	tcp_input [C29.2:3] flags=[S.] seq=1759999823, ack=1840674675, win=65535 state=CLOSED rcv_nxt=0, snd_una=1840674674
-default	16:01:54.849488-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	16:01:54.849621-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_server_hello
-default	16:01:54.850048-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	16:01:54.850895-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_certificate_request
-default	16:01:54.851058-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_server_certificate
-default	16:01:54.851124-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	16:01:54.852324-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C29.1:2][0x7f86317494f0] Performing external trust evaluation
-default	16:01:54.852505-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C29.1:2][0x7f86317494f0] Asyncing for external verify block
-default	16:01:54.852644-0500	RedLemon	Connection 29: asked to evaluate TLS Trust
-default	16:01:54.852922-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> auth completion disp=1 cred=0x0
-default	16:01:54.859141-0500	RedLemon	Connection 29: TLS Trust result 0
-default	16:01:54.859189-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C29.1:2][0x7f86317494f0] Returning from external verify block with result: true
-default	16:01:54.859241-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C29.1:2][0x7f86317494f0] Certificate verification result: OK
-default	16:01:54.859550-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client read_server_finished
-default	16:01:54.859632-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	16:01:54.859653-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	16:01:54.859671-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client send_client_certificate
-default	16:01:54.859688-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client complete_second_flight
-default	16:01:54.859766-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS 1.3 client done
-default	16:01:54.859888-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS client finish_client_handshake
-default	16:01:54.859926-0500	RedLemon	boringssl_context_info_handler(2045) [C29.1:2][0x7f86317494f0] Client handshake state: TLS client done
-default	16:01:54.860124-0500	RedLemon	boringssl_context_info_handler(2034) [C29.1:2][0x7f86317494f0] Client handshake done
-default	16:01:54.860619-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C29.1:2][0x7f86317494f0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(38ms) flight_time(28ms) rtt(27ms) write_stalls(0) read_stalls(7)]
-default	16:01:54.860759-0500	RedLemon	nw_flow_connected [C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:01:54.861043-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.168s
-default	16:01:54.861354-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C29] reporting state ready
-default	16:01:54.861434-0500	RedLemon	[C29 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.168s
-default	16:01:54.861562-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.168s
-default	16:01:54.861634-0500	RedLemon	[C29 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.169s
-default	16:01:54.861763-0500	RedLemon	Connection 29: connected successfully
-default	16:01:54.861835-0500	RedLemon	Connection 29: TLS handshake complete
-default	16:01:54.862075-0500	RedLemon	Connection 29: ready C(N) E(N)
-default	16:01:54.862272-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> now using Connection 29
-default	16:01:54.862363-0500	RedLemon	Connection 29: received viability advisory(Y)
-default	16:01:54.862564-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> sent request, body N 0
-default	16:01:54.877893-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:54.877986-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:54.878042-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:54.916091-0500	RedLemon	0x7f862e39d248 ID=816 Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> received response, status 201 content U
-default	16:01:54.916873-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> response ended
-default	16:01:54.917561-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> done using Connection 1
-default	16:01:54.917714-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> summary for task success {transaction_duration_ms=231, response_status=201, connection=1, reused=1, request_start_ms=2, request_duration_ms=12, response_start_ms=229, response_duration_ms=1, request_bytes=496, response_bytes=776, cache_hit=false}
-default	16:01:54.918181-0500	RedLemon	Task <8082C0AC-F2F6-4DAA-B836-B1280273FFA0>.<364> finished successfully
-default	16:01:54.918437-0500	RedLemon	✅ Guest joined room 789Q in database
-default	16:01:54.956983-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:55.016263-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> received response, status 101 content U
-default	16:01:55.016815-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> response ended
-default	16:01:55.016894-0500	RedLemon	Task <EE4A601B-3320-4CCD-8FFB-F1962A04A794>.<2> done using Connection 29
-default	16:01:55.017807-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.325s
-default	16:01:55.017883-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C29] reporting state preparing
-default	16:01:55.017940-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.325s
-default	16:01:55.018063-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.325s
-default	16:01:55.018114-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.325s
-default	16:01:55.018179-0500	RedLemon	nw_flow_connected [C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	16:01:55.018294-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.325s
-default	16:01:55.018345-0500	RedLemon	[C29 Hostname#23ce8654:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.325s
-default	16:01:55.018446-0500	RedLemon	nw_flow_connected [C29.1 IPv4#9735f8ed:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:01:55.018699-0500	RedLemon	[C29.1 IPv4#9735f8ed:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.326s
-default	16:01:55.018743-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C29] reporting state ready
-default	16:01:55.018802-0500	RedLemon	[C29 Hostname#23ce8654:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.326s
-default	16:01:55.019370-0500	RedLemon	📤 Realtime: Sending message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:01:55.019809-0500	RedLemon	   Payload keys: type, position, chatUsername, senderId, timestamp, chatText
-default	16:01:55.020618-0500	RedLemon	✅ Realtime: Message broadcast complete
-default	16:01:55.039942-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:55.040569-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B62A2853-D94F-4430-AA80-45BCBB92FD39] (reporting strategy default)> on Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> was not selected for reporting
-default	16:01:55.042098-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:55.042431-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> now using Connection 1
-default	16:01:55.043513-0500	RedLemon	0x7f862e39d248 ID=820 Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> sent request, body N 0
-default	16:01:55.068197-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:01:55.068442-0500	RedLemon	   Payload keys: timestamp, senderId, chatText, position, chatUsername, type
-default	16:01:55.068766-0500	RedLemon	✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:01:55.068897-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: chat
-default	16:01:55.069057-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:01:55.086514-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from lemontom in room 789Q
-default	16:01:55.086662-0500	RedLemon	👋 Received: Guest 'lemontom' joined room 789Q
-default	16:01:55.113002-0500	RedLemon	0x7f862e39d248 ID=820 Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> received response, status 200 content U
-default	16:01:55.114763-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> response ended
-default	16:01:55.119487-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> done using Connection 1
-default	16:01:55.119767-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> summary for task success {transaction_duration_ms=78, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=71, response_duration_ms=6, request_bytes=511, response_bytes=832, cache_hit=false}
-default	16:01:55.120290-0500	RedLemon	Task <AE66B9A3-53CB-49B4-9A3E-B0404B6FA0FE>.<367> finished successfully
-default	16:01:55.123048-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1020 target:5311 attributes:[
+default	16:41:29.431847-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C38] reporting state cancelled
+default	16:41:29.432012-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.432290-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> now using Connection 1
+default	16:41:29.433681-0500	RedLemon	tcp_output [C38.1:3] flags=[F.] seq=3319208911, ack=1277028214, win=2048 state=FIN_WAIT_1 rcv_nxt=1277028214, snd_una=3319208857
+default	16:41:29.433877-0500	RedLemon	Connection 38: done
+error	16:41:29.433952-0500	RedLemon	Read completed with an error <private>
+default	16:41:29.435069-0500	RedLemon	0x7fe23b438c58 ID=2468 Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> sent request, body S 83
+default	16:41:29.436078-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:29.436428-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [706D3EA4-5DCC-4F08-9456-EA1C643BB466] (reporting strategy default)> on Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> was not selected for reporting
+default	16:41:29.436922-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:29.436992-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.437165-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> now using Connection 37
+default	16:41:29.437277-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D6B95ADF-B333-4E19-B518-C68B80B07FA9] (reporting strategy default)> on Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> was not selected for reporting
+default	16:41:29.437417-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> sent request, body N 0
+default	16:41:29.437855-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.438055-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> now using Connection 37
+default	16:41:29.438250-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> sent request, body N 0
+default	16:41:29.448815-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.450805-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5146A1BA-A5D2-4827-AEDA-16163091D366] (reporting strategy default)> on Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> was not selected for reporting
+default	16:41:29.452200-0500	RedLemon	Connection 39: enabling TLS
+default	16:41:29.452234-0500	RedLemon	Connection 39: starting, TC(0x0)
+default	16:41:29.452277-0500	RedLemon	[C39 0FDE5583-8585-4AA9-A73F-82C54265CFB5 Hostname#316a8648:443 tcp, url hash: 028c1bce, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{6E9BC476-5667-42CD-8780-0D74F541FF71}{(null)}{Y}{2} (private), proc: 12180268-3769-3688-9AA2-A4113A2F44C4] start
+default	16:41:29.452348-0500	RedLemon	[C39 Hostname#316a8648:443 initial path ((null))] event: path:start @0.000s
+default	16:41:29.453600-0500	RedLemon	[C39 Hostname#316a8648:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.001s, uuid: 692187FF-F542-4E91-AC30-3B3DC3C6917E
+default	16:41:29.454265-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.001s
+default	16:41:29.454361-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C39] reporting state preparing
+default	16:41:29.454648-0500	mDNSResponder	[R1084] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, options: 0x8 {use-failover}, client pid: 6308 (RedLemon)
+default	16:41:29.455156-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> setting up Connection 39
+default	16:41:29.455483-0500	RedLemon	tcp_input [C38.1:3] flags=[F.] seq=1277028214, ack=3319208912, win=16 state=FIN_WAIT_2 rcv_nxt=1277028214, snd_una=3319208912
+default	16:41:29.456783-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> received response, status 200 content K
+default	16:41:29.457204-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> done using Connection 37
+default	16:41:29.459314-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> response ended
+default	16:41:29.460313-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> summary for task success {transaction_duration_ms=23, response_status=200, connection=37, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=19, response_duration_ms=2, request_bytes=42, response_bytes=117419, cache_hit=false}
+default	16:41:29.460469-0500	RedLemon	Task <C1781781-38B2-43A6-8578-587EA9638BA2>.<683> finished successfully
+default	16:41:29.462764-0500	mDNSResponder	[R1084] getaddrinfo stop -- hostname: <mask.hash: 'LfJOt0PdXD49Vu8v884VSw=='>, client pid: 6308 (RedLemon)
+default	16:41:29.464443-0500	RedLemon	nw_endpoint_resolver_update [C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#f44b3bd4:443
+default	16:41:29.464847-0500	RedLemon	nw_endpoint_resolver_update [C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#dba0a053:443
+default	16:41:29.465106-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.012s
+default	16:41:29.466150-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 initial path ((null))] event: path:start @0.013s
+default	16:41:29.466696-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.014s, uuid: 2D43BB59-AFD1-45CF-9076-9492D3605DA4
+default	16:41:29.466835-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.014s
+default	16:41:29.467488-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.015s
+default	16:41:29.468358-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.016s
+default	16:41:29.468534-0500	RedLemon	tcp_output [C39.1:3] flags=[S] seq=2253151190, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2253151190
+default	16:41:29.481920-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> received response, status 200 content K
+default	16:41:29.483021-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> done using Connection 37
+default	16:41:29.483141-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> response ended
+default	16:41:29.483680-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> summary for task success {transaction_duration_ms=46, response_status=200, connection=37, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=44, response_duration_ms=1, request_bytes=37, response_bytes=34671, cache_hit=false}
+default	16:41:29.483779-0500	RedLemon	Task <A5337A21-3509-48C6-830B-FF5471BF92BD>.<684> finished successfully
+default	16:41:29.487788-0500	RedLemon	tcp_input [C39.1:3] flags=[S.] seq=3165124500, ack=2253151191, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2253151190
+default	16:41:29.487927-0500	RedLemon	nw_flow_connected [C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:41:29.488070-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.035s
+default	16:41:29.488131-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.035s
+default	16:41:29.488477-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C39.1:2][0x7fe23df880a0] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
+default	16:41:29.488662-0500	RedLemon	boringssl_context_info_handler(2028) [C39.1:2][0x7fe23df880a0] Client handshake started
+default	16:41:29.488830-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS client enter_early_data
+default	16:41:29.488945-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS client read_server_hello
+default	16:41:29.504138-0500	RedLemon	0x7fe23b438c58 ID=2468 Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> received response, status 201 content U
+default	16:41:29.505242-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> response ended
+default	16:41:29.505568-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> done using Connection 1
+default	16:41:29.505660-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> summary for task success {transaction_duration_ms=75, response_status=201, connection=1, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=73, response_duration_ms=1, request_bytes=496, response_bytes=778, cache_hit=false}
+default	16:41:29.505975-0500	RedLemon	Task <4C389B9E-2DA1-4DB0-A5A9-285F200666BE>.<682> finished successfully
+default	16:41:29.506190-0500	RedLemon	✅ Guest joined room HN5M in database
+default	16:41:29.529606-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_hello_retry_request
+default	16:41:29.529679-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_server_hello
+default	16:41:29.529937-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_encrypted_extensions
+default	16:41:29.530978-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_certificate_request
+default	16:41:29.531052-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_server_certificate
+default	16:41:29.531114-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_server_certificate_verify
+default	16:41:29.531533-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C39.1:2][0x7fe23df880a0] Performing external trust evaluation
+default	16:41:29.531697-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C39.1:2][0x7fe23df880a0] Asyncing for external verify block
+default	16:41:29.531816-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:29.531877-0500	RedLemon	Connection 39: asked to evaluate TLS Trust
+default	16:41:29.532105-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> auth completion disp=1 cred=0x0
+default	16:41:29.537580-0500	RedLemon	Connection 39: TLS Trust result 0
+default	16:41:29.537625-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C39.1:2][0x7fe23df880a0] Returning from external verify block with result: true
+default	16:41:29.537678-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C39.1:2][0x7fe23df880a0] Certificate verification result: OK
+default	16:41:29.538049-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client read_server_finished
+default	16:41:29.538157-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client send_end_of_early_data
+default	16:41:29.538187-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
+default	16:41:29.538207-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client send_client_certificate
+default	16:41:29.538223-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client complete_second_flight
+default	16:41:29.538288-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS 1.3 client done
+default	16:41:29.538427-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS client finish_client_handshake
+default	16:41:29.538450-0500	RedLemon	boringssl_context_info_handler(2045) [C39.1:2][0x7fe23df880a0] Client handshake state: TLS client done
+default	16:41:29.538469-0500	RedLemon	boringssl_context_info_handler(2034) [C39.1:2][0x7fe23df880a0] Client handshake done
+default	16:41:29.539053-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C39.1:2][0x7fe23df880a0] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(http/1.1) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(50ms) flight_time(42ms) rtt(41ms) write_stalls(0) read_stalls(7)]
+default	16:41:29.539210-0500	RedLemon	nw_flow_connected [C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:29.539437-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.087s
+default	16:41:29.539670-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C39] reporting state ready
+default	16:41:29.539818-0500	RedLemon	[C39 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.087s
+default	16:41:29.539952-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.087s
+default	16:41:29.540026-0500	RedLemon	[C39 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.087s
+default	16:41:29.540153-0500	RedLemon	Connection 39: connected successfully
+default	16:41:29.540200-0500	RedLemon	Connection 39: TLS handshake complete
+default	16:41:29.540446-0500	RedLemon	Connection 39: ready C(N) E(N)
+default	16:41:29.540610-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> now using Connection 39
+default	16:41:29.540678-0500	RedLemon	Connection 39: received viability advisory(Y)
+default	16:41:29.540899-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> sent request, body N 0
+default	16:41:29.661741-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> received response, status 101 content U
+default	16:41:29.662136-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> response ended
+default	16:41:29.662200-0500	RedLemon	Task <D7335F71-EDE7-4E24-8E8C-9610BB910087>.<3> done using Connection 39
+default	16:41:29.662878-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.210s
+default	16:41:29.662911-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C39] reporting state preparing
+default	16:41:29.662964-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_secondary_connect @0.210s
+default	16:41:29.663073-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.210s
+default	16:41:29.663196-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.210s
+default	16:41:29.663326-0500	RedLemon	nw_flow_connected [C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
+default	16:41:29.663569-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.211s
+default	16:41:29.663623-0500	RedLemon	[C39 Hostname#316a8648:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.211s
+default	16:41:29.663724-0500	RedLemon	nw_flow_connected [C39.1 IPv4#f44b3bd4:443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:29.664074-0500	RedLemon	[C39.1 IPv4#f44b3bd4:443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.211s
+default	16:41:29.664130-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C39] reporting state ready
+default	16:41:29.664299-0500	RedLemon	[C39 Hostname#316a8648:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.211s
+default	16:41:29.664979-0500	RedLemon	📤 Realtime: Sending message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:29.665318-0500	RedLemon	   Payload keys: type, chatText, chatUsername, position, timestamp, senderId
+default	16:41:29.666399-0500	RedLemon	✅ Realtime: Message broadcast complete
+default	16:41:29.683741-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.685523-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3C090A97-5A42-48A5-89A4-ECF353EE07B1] (reporting strategy default)> on Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> was not selected for reporting
+default	16:41:29.688026-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.689188-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> now using Connection 1
+default	16:41:29.691230-0500	RedLemon	0x7fe23bfd43f8 ID=2472 Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> sent request, body N 0
+default	16:41:29.798974-0500	RedLemon	0x7fe23bfd43f8 ID=2472 Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> received response, status 200 content U
+default	16:41:29.799573-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> response ended
+default	16:41:29.800146-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> done using Connection 1
+default	16:41:29.800494-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> summary for task success {transaction_duration_ms=113, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=111, response_duration_ms=1, request_bytes=511, response_bytes=838, cache_hit=true}
+default	16:41:29.802280-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1770 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:55.123492-0500	runningboardd	Assertion 169-5311-1020 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:55.124737-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:55.125125-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4CFC8355-7CFD-45A0-B7B0-BEED69A35397] (reporting strategy default)> on Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> was not selected for reporting
-default	16:01:55.125904-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:55.126053-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:55.126180-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> now using Connection 1
-default	16:01:55.126209-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:55.127058-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:55.127089-0500	RedLemon	0x7f8631662bf8 ID=824 Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> sent request, body N 0
-default	16:01:55.128882-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1021 target:5311 attributes:[
+default	16:41:29.801134-0500	RedLemon	Task <C5FABE74-676D-4B61-9FA5-E795BFB44D01>.<685> finished successfully
+default	16:41:29.802690-0500	runningboardd	Assertion 169-6308-1770 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:29.803353-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.804012-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:29.804275-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:29.803742-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2FC6B202-17B0-4197-A942-AA6980B95592] (reporting strategy default)> on Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> was not selected for reporting
+default	16:41:29.804486-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:29.804522-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.804806-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> now using Connection 1
+default	16:41:29.806029-0500	RedLemon	0x7fe23bfd43f8 ID=2476 Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> sent request, body N 0
+default	16:41:29.813636-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1771 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:55.129053-0500	runningboardd	Assertion 169-103-1021 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:55.129781-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:55.129821-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:55.129861-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:55.141787-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:55.190696-0500	RedLemon	0x7f8631662bf8 ID=824 Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> received response, status 200 content U
-default	16:01:55.191346-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> response ended
-default	16:01:55.191828-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> done using Connection 1
-default	16:01:55.192058-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:01:55.192662-0500	RedLemon	Task <81914331-8924-4147-8A6A-14CEB848D804>.<368> finished successfully
-default	16:01:55.194771-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:55.195079-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [92AA1E85-5E67-4B35-AC8C-59DEBE94A4DF] (reporting strategy default)> on Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> was not selected for reporting
-default	16:01:55.195753-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:55.195972-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> now using Connection 1
-default	16:01:55.196723-0500	RedLemon	0x7f86317b3bc8 ID=828 Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> sent request, body N 0
-default	16:01:55.210391-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:55.283283-0500	RedLemon	0x7f86317b3bc8 ID=828 Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> received response, status 200 content U
-default	16:01:55.284483-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> response ended
-default	16:01:55.284930-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> done using Connection 1
-default	16:01:55.285286-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> summary for task success {transaction_duration_ms=89, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=87, response_duration_ms=2, request_bytes=524, response_bytes=841, cache_hit=true}
-default	16:01:55.285851-0500	RedLemon	Task <5AB1E1D2-45EE-41B3-98FD-E5AF6A4FCDD6>.<369> finished successfully
-default	16:01:55.287626-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:01:55.287786-0500	RedLemon	👋 lemontom joined room
-default	16:01:55.287913-0500	RedLemon	👋 lemontom left room
-default	16:01:55.288029-0500	RedLemon	👋 ursinho left room
-default	16:01:55.288400-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:55.288815-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [309146F9-3278-4B27-BAB6-601AA2343C23] (reporting strategy default)> on Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> was not selected for reporting
-default	16:01:55.289596-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:55.289911-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> now using Connection 1
-default	16:01:55.290952-0500	RedLemon	0x7f8631662bf8 ID=832 Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> sent request, body N 0
-default	16:01:55.303499-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:55.366744-0500	RedLemon	0x7f8631662bf8 ID=832 Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> received response, status 200 content U
-default	16:01:55.367578-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> response ended
-default	16:01:55.368093-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> done using Connection 1
-default	16:01:55.368325-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> summary for task success {transaction_duration_ms=79, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=77, response_duration_ms=1, request_bytes=500, response_bytes=966, cache_hit=false}
-default	16:01:55.368938-0500	RedLemon	Task <2A9F23C9-4866-470A-817F-ADB924C1671A>.<370> finished successfully
-default	16:01:55.494297-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:56.226147-0500	runningboardd	Invalidating assertion 169-5311-1020 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:56.241408-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:01:56.241712-0500	RedLemon	   Payload keys: type, timestamp, senderId, chatUsername, chatText, position
-default	16:01:56.242223-0500	RedLemon	✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	16:01:56.242441-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: chat
-default	16:01:56.242620-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:01:56.242728-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room 789Q
-default	16:01:56.242928-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
-default	16:01:56.263971-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
-default	16:01:56.264342-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:56.264727-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [88A2B705-9A5B-4931-B5D6-3B493D05A6C9] (reporting strategy default)> on Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> was not selected for reporting
-default	16:01:56.265304-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:56.265502-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> now using Connection 1
-default	16:01:56.266252-0500	RedLemon	0x7f8630843e88 ID=836 Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> sent request, body N 0
-default	16:01:56.338116-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:56.338161-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:56.338202-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:56.340531-0500	RedLemon	0x7f8630843e88 ID=836 Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> received response, status 200 content U
-default	16:01:56.340639-0500	runningboardd	Invalidating assertion 169-103-1021 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:01:56.341063-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> response ended
-default	16:01:56.341459-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> done using Connection 1
-default	16:01:56.341635-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> summary for task success {transaction_duration_ms=76, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=75, response_duration_ms=1, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:01:56.342148-0500	RedLemon	Task <1176E783-97E6-4FF0-8DCA-00BC6D70EDB8>.<371> finished successfully
-default	16:01:56.343759-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1022 target:5311 attributes:[
+default	16:41:29.813941-0500	runningboardd	Assertion 169-103-1771 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:29.814491-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:29.814892-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:29.814944-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:29.814989-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:29.866985-0500	RedLemon	0x7fe23bfd43f8 ID=2476 Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> received response, status 200 content U
+default	16:41:29.867625-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> response ended
+default	16:41:29.868108-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> done using Connection 1
+default	16:41:29.868357-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:29.868875-0500	RedLemon	Task <2C0BD239-6A3E-4F7D-9856-104AF58BF908>.<686> finished successfully
+default	16:41:29.871229-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.871701-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F51825BD-5A3D-40A7-8F7A-DD79F8668210] (reporting strategy default)> on Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> was not selected for reporting
+default	16:41:29.872483-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.872703-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> now using Connection 1
+default	16:41:29.873532-0500	RedLemon	0x7fe23bc1e1f8 ID=2480 Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> sent request, body N 0
+default	16:41:29.881669-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:29.886838-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:41:29.887089-0500	RedLemon	   Payload keys: timestamp, position, chatText, chatUsername, type, senderId
+default	16:41:29.887480-0500	RedLemon	✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:29.887645-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: chat
+default	16:41:29.887767-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:41:29.900422-0500	RedLemon	📥 Received Realtime message: 'LOBBY_JOIN' from lemontom in room HN5M
+default	16:41:29.900645-0500	RedLemon	👋 Received: Guest 'lemontom' joined room HN5M
+default	16:41:29.933523-0500	RedLemon	0x7fe23bc1e1f8 ID=2480 Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> received response, status 200 content U
+default	16:41:29.933931-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> response ended
+default	16:41:29.934251-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> done using Connection 1
+default	16:41:29.934412-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=0, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:29.934737-0500	RedLemon	Task <A6B581B3-5174-4760-B2DE-E681AC9771D3>.<687> finished successfully
+default	16:41:29.936248-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:29.936400-0500	RedLemon	👋 lemontom joined room
+default	16:41:29.936522-0500	RedLemon	👋 lemontom left room
+default	16:41:29.936635-0500	RedLemon	👋 ursinho left room
+default	16:41:29.937022-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:29.937436-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B24A8EAC-FA2C-44E1-AAFA-45B34D7E65AD] (reporting strategy default)> on Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> was not selected for reporting
+default	16:41:29.938184-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:29.938474-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> now using Connection 1
+default	16:41:29.939469-0500	RedLemon	0x7fe23b404628 ID=2484 Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> sent request, body N 0
+default	16:41:29.958345-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:29.997639-0500	RedLemon	0x7fe23b404628 ID=2484 Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> received response, status 200 content U
+default	16:41:29.998235-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> response ended
+default	16:41:29.998671-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> done using Connection 1
+default	16:41:29.998888-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> summary for task success {transaction_duration_ms=61, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=59, response_duration_ms=1, request_bytes=500, response_bytes=966, cache_hit=false}
+default	16:41:29.999466-0500	RedLemon	Task <0F483756-DBC7-41F0-AE4C-180DB5A06641>.<688> finished successfully
+default	16:41:30.043517-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:30.896676-0500	runningboardd	Invalidating assertion 169-6308-1770 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:31.052633-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:31.052781-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:31.052867-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:31.054867-0500	runningboardd	Invalidating assertion 169-103-1771 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:31.231645-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:31.231726-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:31.231807-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:31.438280-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:41:31.438591-0500	RedLemon	   Payload keys: position, chatText, type, timestamp, senderId, chatUsername
+default	16:41:31.439044-0500	RedLemon	✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+default	16:41:31.439253-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: chat
+default	16:41:31.439430-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:41:31.439524-0500	RedLemon	📥 Received Realtime message: 'LOBBY_START_COUNTDOWN' from Host in room HN5M
+default	16:41:31.439698-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+default	16:41:31.458406-0500	RedLemon	🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+default	16:41:31.458797-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:31.459104-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [466BABED-B307-476E-8D0A-A1C5A319D224] (reporting strategy default)> on Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> was not selected for reporting
+default	16:41:31.459649-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:31.459906-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> now using Connection 1
+default	16:41:31.460886-0500	RedLemon	0x7fe23df2b5d8 ID=2488 Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> sent request, body N 0
+default	16:41:31.520622-0500	RedLemon	0x7fe23df2b5d8 ID=2488 Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> received response, status 200 content U
+default	16:41:31.521640-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> response ended
+default	16:41:31.522022-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> done using Connection 1
+default	16:41:31.522877-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=61, response_duration_ms=1, request_bytes=500, response_bytes=956, cache_hit=false}
+default	16:41:31.523580-0500	RedLemon	Task <AD8EC22F-3F6A-409A-B68F-9A111BCA3589>.<689> finished successfully
+default	16:41:31.527708-0500	RedLemon	🎬 Guest: Fetch took 0.069s, waiting 3.181s (includes 0.25s sync buffer)
+default	16:41:31.528831-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1772 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:56.344048-0500	runningboardd	Assertion 169-5311-1022 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:56.344165-0500	RedLemon	⚠️ Guest: No season/episode found in DB or local state
-default	16:01:56.344347-0500	RedLemon	🎬 Guest: Fetch took 0.080s, waiting 3.170s (includes 0.25s sync buffer)
-default	16:01:56.346086-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:56.346343-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:56.346535-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:56.353020-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1023 target:5311 attributes:[
+default	16:41:31.529087-0500	runningboardd	Assertion 169-6308-1772 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:31.529951-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:31.529995-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:31.530040-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:31.533370-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1773 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:56.353770-0500	runningboardd	Assertion 169-103-1023 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:56.382508-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:57.213551-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:57.213608-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:57.215282-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7775B4EC-CB47-4EBA-9D2A-405C46B3DCD4] (reporting strategy default)> on Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> was not selected for reporting
-default	16:01:57.215476-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [93128FFE-6F3C-4A64-A74E-AF8230F77FB8] (reporting strategy default)> on Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> was not selected for reporting
-default	16:01:57.217176-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:57.217397-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> now using Connection 1
-default	16:01:57.218377-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:57.218554-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> now using Connection 1
-default	16:01:57.219417-0500	RedLemon	0x7f8630843e88 ID=840 Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> sent request, body N 0
-default	16:01:57.219470-0500	RedLemon	0x7f8630876768 ID=844 Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> sent request, body N 0
-default	16:01:57.295361-0500	RedLemon	0x7f8630876768 ID=844 Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> received response, status 200 content U
-default	16:01:57.296291-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> response ended
-default	16:01:57.296772-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> done using Connection 1
-default	16:01:57.297086-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> summary for task success {transaction_duration_ms=80, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=78, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:01:57.297755-0500	RedLemon	Task <61EA15F6-A4C1-4560-942D-E7724FE3E3A8>.<373> finished successfully
-default	16:01:57.299669-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:57.299990-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [61B00CB8-F8D9-4D91-AA76-3652714C00FB] (reporting strategy default)> on Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> was not selected for reporting
-default	16:01:57.300770-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:57.300915-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> now using Connection 1
-default	16:01:57.301691-0500	RedLemon	0x7f8632e8bb88 ID=848 Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> sent request, body N 0
-default	16:01:57.317565-0500	RedLemon	0x7f8630843e88 ID=840 Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> received response, status 200 content U
-default	16:01:57.318346-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> response ended
-default	16:01:57.318738-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> done using Connection 1
-default	16:01:57.319001-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> summary for task success {transaction_duration_ms=102, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=100, response_duration_ms=1, request_bytes=500, response_bytes=954, cache_hit=true}
-default	16:01:57.319355-0500	RedLemon	Task <A57D02AD-A6FA-417F-A01F-021348D6E32F>.<372> finished successfully
-default	16:01:57.320045-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:57.321177-0500	RedLemon	🎬 Guest: Detected room playback start via database fallback
-default	16:01:57.335661-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:57.370115-0500	RedLemon	0x7f8632e8bb88 ID=848 Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> received response, status 200 content U
-default	16:01:57.370598-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> response ended
-default	16:01:57.371186-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> done using Connection 1
-default	16:01:57.371393-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:57.371622-0500	RedLemon	Task <7CF4A606-6FDC-4DAD-9FB2-3B43B6A7A2D1>.<374> finished successfully
-default	16:01:57.373155-0500	runningboardd	Invalidating assertion 169-5311-1022 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:57.373714-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:57.373990-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4D0883F7-8BDB-444A-8D0E-432C42382FD7] (reporting strategy default)> on Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> was not selected for reporting
-default	16:01:57.374669-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:57.374850-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> now using Connection 1
-default	16:01:57.375583-0500	RedLemon	0x7f8630843e88 ID=852 Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> sent request, body N 0
-default	16:01:57.385863-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:57.516375-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:57.516520-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:57.516624-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:57.517981-0500	runningboardd	Invalidating assertion 169-103-1023 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:01:57.603101-0500	RedLemon	0x7f8630843e88 ID=852 Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> received response, status 200 content U
-default	16:01:57.603754-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> response ended
-default	16:01:57.604326-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> done using Connection 1
-default	16:01:57.604604-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> summary for task success {transaction_duration_ms=230, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=228, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:57.604823-0500	RedLemon	Task <D5F62432-2AF4-4365-8022-65DF84C23A7B>.<375> finished successfully
-default	16:01:57.605628-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1024 target:5311 attributes:[
+default	16:41:31.533531-0500	runningboardd	Assertion 169-103-1773 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:31.542047-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:31.542206-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:31.542357-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:31.565130-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:31.876965-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:31.877661-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BFB17D10-CCE5-4957-A446-311538F05513] (reporting strategy default)> on Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> was not selected for reporting
+default	16:41:31.878639-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:31.878957-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> now using Connection 1
+default	16:41:31.880120-0500	RedLemon	0x7fe23bfbcdc8 ID=2492 Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> sent request, body N 0
+default	16:41:31.944400-0500	RedLemon	0x7fe23bfbcdc8 ID=2492 Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> received response, status 200 content U
+default	16:41:31.946065-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> response ended
+default	16:41:31.946815-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> done using Connection 1
+default	16:41:31.947134-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=66, response_duration_ms=2, request_bytes=511, response_bytes=834, cache_hit=false}
+default	16:41:31.947330-0500	RedLemon	Task <27BBEF72-14CA-4AC7-B39C-FB6ED6ED1301>.<690> finished successfully
+default	16:41:31.949237-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:31.949655-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4622C70E-E3F3-4B20-A8FA-BC545DF6C5F6] (reporting strategy default)> on Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> was not selected for reporting
+default	16:41:31.950448-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:31.950669-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> now using Connection 1
+default	16:41:31.951504-0500	RedLemon	0x7fe23bc1e1f8 ID=2496 Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> sent request, body N 0
+default	16:41:31.969141-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:32.013842-0500	RedLemon	0x7fe23bc1e1f8 ID=2496 Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> received response, status 200 content U
+default	16:41:32.014424-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> response ended
+default	16:41:32.014870-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> done using Connection 1
+default	16:41:32.015095-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:32.015748-0500	RedLemon	Task <3D7CCB4F-A0C5-4EDA-BEB8-30C8E47F152C>.<691> finished successfully
+default	16:41:32.017878-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:32.018162-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3B966C11-1E7E-4D1F-9F78-D47F3506C41B] (reporting strategy default)> on Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> was not selected for reporting
+default	16:41:32.019043-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:32.019356-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> now using Connection 1
+default	16:41:32.020704-0500	RedLemon	0x7fe238bc5798 ID=2500 Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> sent request, body N 0
+default	16:41:32.153898-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:32.163511-0500	RedLemon	0x7fe238bc5798 ID=2500 Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> received response, status 200 content U
+default	16:41:32.164278-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> response ended
+default	16:41:32.164719-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> done using Connection 1
+default	16:41:32.164968-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> summary for task success {transaction_duration_ms=146, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=144, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:32.165535-0500	RedLemon	Task <848A8311-A2D3-4FB2-9587-5CA04D8A4A80>.<692> finished successfully
+default	16:41:32.167167-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:32.177021-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:32.631422-0500	runningboardd	Invalidating assertion 169-6308-1772 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:32.787936-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:32.788311-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:32.788405-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:32.789879-0500	runningboardd	Invalidating assertion 169-103-1773 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:32.948128-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:32.948178-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:32.948546-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:34.367993-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:34.368498-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [55BCD949-E649-45F0-A484-CD64B373C03D] (reporting strategy default)> on Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> was not selected for reporting
+default	16:41:34.370079-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:34.370608-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> now using Connection 1
+default	16:41:34.372184-0500	RedLemon	0x7fe23bc1e1f8 ID=2504 Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> sent request, body N 0
+default	16:41:34.432610-0500	RedLemon	0x7fe23bc1e1f8 ID=2504 Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> received response, status 200 content U
+default	16:41:34.433382-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> response ended
+default	16:41:34.433830-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> done using Connection 1
+default	16:41:34.434081-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=63, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
+default	16:41:34.434639-0500	RedLemon	Task <56DAEB72-9058-479E-9BDC-BC6AF72A22F8>.<693> finished successfully
+default	16:41:34.435941-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1774 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:57.605813-0500	runningboardd	Assertion 169-5311-1024 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:57.606853-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:01:57.607400-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:57.607498-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:57.607559-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:57.609859-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1025 target:5311 attributes:[
+default	16:41:34.436152-0500	runningboardd	Assertion 169-6308-1774 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:34.436647-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:34.437088-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FA9B85E7-7FF7-4549-9858-15F7DF66AE3B] (reporting strategy default)> on Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> was not selected for reporting
+default	16:41:34.437916-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:34.438209-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> now using Connection 1
+default	16:41:34.439069-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:34.439176-0500	RedLemon	0x7fe238bc5798 ID=2508 Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> sent request, body N 0
+default	16:41:34.439287-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:34.439407-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:34.441329-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1775 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:57.610089-0500	runningboardd	Assertion 169-103-1025 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:57.621860-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:58.708513-0500	runningboardd	Invalidating assertion 169-5311-1024 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:01:58.884921-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:58.884968-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:58.885015-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:58.886241-0500	runningboardd	Invalidating assertion 169-103-1025 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:01:59.007092-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:59.007172-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:59.007244-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:59.472541-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:59.473206-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5D999430-C14A-4E61-AB4C-498B3B08D7B4] (reporting strategy default)> on Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> was not selected for reporting
-default	16:01:59.474495-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.474953-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> now using Connection 1
-default	16:01:59.476429-0500	RedLemon	0x7f8633a36ad8 ID=856 Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> sent request, body N 0
-default	16:01:59.544940-0500	RedLemon	0x7f8633a36ad8 ID=856 Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> received response, status 200 content U
-default	16:01:59.545528-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> response ended
-default	16:01:59.546001-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> done using Connection 1
-default	16:01:59.546303-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=70, response_duration_ms=1, request_bytes=500, response_bytes=955, cache_hit=true}
-default	16:01:59.546557-0500	RedLemon	🎬 Guest: Starting playback after countdown
-default	16:01:59.546845-0500	RedLemon	🎬 Guest: Launching player for Weapons
-default	16:01:59.547139-0500	RedLemon	Task <B554D1A2-C47F-4C52-8545-B5AD3102C886>.<376> finished successfully
-default	16:01:59.547275-0500	RedLemon	   Quality: 1080p
-default	16:01:59.548177-0500	RedLemon	   Mode: watchParty
-default	16:01:59.548352-0500	RedLemon	📡 Fetching metadata for tt26581740...
-default	16:01:59.551636-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1026 target:5311 attributes:[
+default	16:41:34.441487-0500	runningboardd	Assertion 169-103-1775 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:34.442421-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:34.442470-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:34.442514-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:34.455040-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:34.498399-0500	RedLemon	0x7fe238bc5798 ID=2508 Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> received response, status 200 content U
+default	16:41:34.499017-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> response ended
+default	16:41:34.499510-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> done using Connection 1
+default	16:41:34.499746-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=60, response_duration_ms=1, request_bytes=524, response_bytes=848, cache_hit=true}
+default	16:41:34.500543-0500	RedLemon	Task <A42AB9A6-8549-4BED-9B8D-BBEBB710B97C>.<694> finished successfully
+default	16:41:34.502825-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:34.503158-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6340FCFA-68A3-4333-8592-C9404DC776FC] (reporting strategy default)> on Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> was not selected for reporting
+default	16:41:34.503896-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:34.504164-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> now using Connection 1
+default	16:41:34.505023-0500	RedLemon	0x7fe23b3f9388 ID=2512 Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> sent request, body N 0
+default	16:41:34.521579-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:34.560265-0500	RedLemon	0x7fe23b3f9388 ID=2512 Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> received response, status 200 content U
+default	16:41:34.560895-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> response ended
+default	16:41:34.562222-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> done using Connection 1
+default	16:41:34.564774-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> summary for task success {transaction_duration_ms=61, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=56, response_duration_ms=2, request_bytes=524, response_bytes=840, cache_hit=true}
+default	16:41:34.564984-0500	RedLemon	Task <433965F2-AF22-45EF-AE59-EC3BB01BAB8D>.<695> finished successfully
+default	16:41:34.566862-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:34.601843-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:34.911396-0500	RedLemon	🎬 Guest: Starting playback after countdown
+default	16:41:34.911591-0500	RedLemon	🎬 Guest: Launching player for Weapons
+default	16:41:34.911958-0500	RedLemon	   Quality: 1080p
+default	16:41:34.912250-0500	RedLemon	   Mode: watchParty
+default	16:41:34.912426-0500	RedLemon	📡 Fetching metadata for tt26581740...
+default	16:41:35.021655-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt26581740/img
+default	16:41:35.021946-0500	RedLemon	⏳ Background art loading...
+default	16:41:35.022144-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt26581740/img
+default	16:41:35.022355-0500	RedLemon	⏳ Logo loading...
+default	16:41:35.044619-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:35.045070-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BAA7665E-4B09-4470-8DAE-E1537D08D402] (reporting strategy default)> on Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> was not selected for reporting
+default	16:41:35.045650-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
+default	16:41:35.045732-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:35.045948-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> now using Connection 37
+default	16:41:35.046066-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2B6C8B7C-5BC7-410B-AC82-8DE2CABC289D] (reporting strategy default)> on Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> was not selected for reporting
+default	16:41:35.046428-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> sent request, body N 0
+default	16:41:35.046737-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:35.046916-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> now using Connection 37
+default	16:41:35.047125-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> sent request, body N 0
+default	16:41:35.062222-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> received response, status 200 content K
+default	16:41:35.062403-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> done using Connection 37
+default	16:41:35.062892-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> response ended
+default	16:41:35.063489-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> summary for task success {transaction_duration_ms=18, response_status=200, connection=37, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=16, response_duration_ms=0, request_bytes=37, response_bytes=34633, cache_hit=false}
+default	16:41:35.063594-0500	RedLemon	Task <DDFF27FD-13AD-4896-B0DB-15183EB91D2A>.<696> finished successfully
+default	16:41:35.076396-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> received response, status 200 content K
+default	16:41:35.079287-0500	RedLemon	✅ Logo loaded successfully
+default	16:41:35.080964-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> done using Connection 37
+default	16:41:35.081116-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> response ended
+default	16:41:35.081830-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> summary for task success {transaction_duration_ms=35, response_status=200, connection=37, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=29, response_duration_ms=5, request_bytes=42, response_bytes=117405, cache_hit=false}
+default	16:41:35.081950-0500	RedLemon	Task <AF81056B-83CB-45F3-9D6F-FE6C987EF361>.<697> finished successfully
+default	16:41:35.082346-0500	RedLemon	✅ StreamService: Using provided metadata: Weapons
+default	16:41:35.082499-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
+default	16:41:35.082554-0500	RedLemon	✅ Background art loaded successfully
+default	16:41:35.082591-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt26581740, type=movie, year=2025
+default	16:41:35.082984-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
+default	16:41:35.083363-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0829BF7C-25D2-45E0-9B2C-C638AB2D33BE] (reporting strategy default)> on Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> was not selected for reporting
+default	16:41:35.084403-0500	RedLemon	Connection 40: starting, TC(0x0)
+default	16:41:35.084456-0500	RedLemon	[C40 B05F6B89-756E-4F74-8D00-A6AECC3AE26D 127.0.0.1:47253 tcp, url hash: a025d583, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{9335F7B4-8967-4EAA-B8EE-42E31B2BD663}{(null)}{Y}{2} (private), proc: 12180268-3769-3688-9AA2-A4113A2F44C4] start
+default	16:41:35.084539-0500	RedLemon	[C40 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
+default	16:41:35.084747-0500	RedLemon	[C40 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: 5354C819-ACD2-4DB0-871A-5C9F0F16EF74
+default	16:41:35.085128-0500	RedLemon	[C40 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.000s
+default	16:41:35.085155-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C40] reporting state preparing
+default	16:41:35.085293-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> setting up Connection 40
+default	16:41:35.085582-0500	RedLemon	nw_socket_handle_socket_event [C40:2] Socket received CONNECTED event
+default	16:41:35.085684-0500	RedLemon	nw_flow_connected [C40 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
+default	16:41:35.085726-0500	RedLemon	[C40 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.001s
+default	16:41:35.085771-0500	RedLemon	nw_flow_connected [C40 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-636241346)
+default	16:41:35.085896-0500	RedLemon	[C40 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.001s
+default	16:41:35.086009-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C40] reporting state ready
+default	16:41:35.086093-0500	RedLemon	[C40 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.001s
+default	16:41:35.086239-0500	RedLemon	Connection 40: connected successfully
+default	16:41:35.086321-0500	RedLemon	Connection 40: ready C(N) E(N)
+default	16:41:35.086553-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> now using Connection 40
+default	16:41:35.086657-0500	RedLemon	Connection 40: received viability advisory(Y)
+default	16:41:35.086872-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> sent request, body N 0
+default	16:41:35.112747-0500	RedLemon	Task <4343ECAC-554C-42F5-8D8A-46BA0F7DB968>.<698> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:41:35.112838-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:41:35.113070-0500	RedLemon	Task <C83C2578-ECFE-4EEC-A27B-7B3BB2C7C629>.<701> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:41:35.113064-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:41:35.113814-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [154B0809-BCB8-41E0-83F0-63E1AA2A3E6D] (reporting strategy default)> on Task <4343ECAC-554C-42F5-8D8A-46BA0F7DB968>.<698> was not selected for reporting
+default	16:41:35.114156-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E2AF620F-571D-4DB5-A22E-E485AAF1F8A5] (reporting strategy default)> on Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> was not selected for reporting
+default	16:41:35.115864-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A3B68B93-C771-4387-9AA2-E2E7D6AEFF19] (reporting strategy default)> on Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> was not selected for reporting
+default	16:41:35.116367-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [638DC81D-A992-4F06-A178-69A1F4037DE9] (reporting strategy default)> on Task <C83C2578-ECFE-4EEC-A27B-7B3BB2C7C629>.<701> was not selected for reporting
+default	16:41:35.117266-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:35.118019-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> now using Connection 27
+default	16:41:35.129916-0500	RedLemon	0x7fe23b3e4448 ID=4 Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> sent request, body N 0
+default	16:41:35.133908-0500	RedLemon	Task <4343ECAC-554C-42F5-8D8A-46BA0F7DB968>.<698> summary for task success {transaction_duration_ms=18, response_status=200, cache_hit=true}
+default	16:41:35.133970-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:35.134125-0500	RedLemon	Task <4343ECAC-554C-42F5-8D8A-46BA0F7DB968>.<698> finished successfully
+default	16:41:35.134210-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> now using Connection 28
+default	16:41:35.134412-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> sent request, body N 0
+default	16:41:35.134756-0500	RedLemon	Task <C83C2578-ECFE-4EEC-A27B-7B3BB2C7C629>.<701> summary for task success {transaction_duration_ms=4, response_status=200, cache_hit=true}
+default	16:41:35.135030-0500	RedLemon	Task <C83C2578-ECFE-4EEC-A27B-7B3BB2C7C629>.<701> finished successfully
+default	16:41:35.154179-0500	RedLemon	0x7fe23b3e4448 ID=4 Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> received response, status 200 content U
+default	16:41:35.204015-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> response ended
+default	16:41:35.204809-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> done using Connection 27
+default	16:41:35.205128-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> summary for task success {transaction_duration_ms=89, response_status=200, connection=27, reused=1, request_start_ms=2, request_duration_ms=11, response_start_ms=38, response_duration_ms=50, request_bytes=148, response_bytes=8323, cache_hit=true}
+default	16:41:35.205554-0500	RedLemon	Task <24B712A1-B201-4E90-A5A2-24B606D1C319>.<699> finished successfully
+default	16:41:35.475831-0500	runningboardd	Invalidating assertion 169-6308-1774 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:35.642010-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:35.642055-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:35.642136-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:35.643619-0500	runningboardd	Invalidating assertion 169-103-1775 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:35.738574-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> received response, status 200 content U
+default	16:41:35.738668-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> done using Connection 28
+default	16:41:35.738866-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> response ended
+default	16:41:35.739003-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> summary for task success {transaction_duration_ms=621, response_status=200, connection=28, reused=1, request_start_ms=17, request_duration_ms=0, response_start_ms=621, response_duration_ms=0, request_bytes=484, response_bytes=2105, cache_hit=true}
+default	16:41:35.739192-0500	RedLemon	Task <C563780B-6477-4F59-B3DF-D6D7E420D83A>.<700> finished successfully
+default	16:41:35.739969-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1776 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:01:59.560626-0500	runningboardd	Assertion 169-5311-1026 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:01:59.562236-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:59.562422-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:59.562597-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:59.565083-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1027 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:01:59.565632-0500	runningboardd	Assertion 169-103-1027 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:01:59.567842-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:01:59.567925-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:01:59.568067-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:01:59.587387-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:59.612696-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:59.613090-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3836CFBA-2E58-4C47-BFE4-E6B2C8EDF9EA] (reporting strategy default)> on Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> was not selected for reporting
-default	16:01:59.613852-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt26581740/img
-default	16:01:59.613893-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.614155-0500	RedLemon	⏳ Background art loading...
-default	16:01:59.614176-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> now using Connection 1
-default	16:01:59.614351-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt26581740/img
-default	16:01:59.614588-0500	RedLemon	⏳ Logo loading...
-default	16:01:59.616281-0500	RedLemon	0x7f862e2ba528 ID=860 Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> sent request, body N 0
-default	16:01:59.652977-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:59.653395-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C44D25E3-BA36-4CA3-9618-CEE69BF2E200] (reporting strategy default)> on Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> was not selected for reporting
-default	16:01:59.655004-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	16:01:59.655139-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.656110-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F91EA65F-330B-4237-87A8-F34281443CCC] (reporting strategy default)> on Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> was not selected for reporting
-default	16:01:59.656102-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> now using Connection 27
-default	16:01:59.657059-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.657249-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> now using Connection 27
-default	16:01:59.657526-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> sent request, body N 0
-default	16:01:59.657668-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> sent request, body N 0
-default	16:01:59.671478-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> received response, status 200 content K
-default	16:01:59.673154-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> done using Connection 27
-default	16:01:59.673405-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> response ended
-default	16:01:59.673960-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> summary for task success {transaction_duration_ms=19, response_status=200, connection=27, reused=1, request_start_ms=2, request_duration_ms=0, response_start_ms=17, response_duration_ms=2, request_bytes=37, response_bytes=34633, cache_hit=false}
-default	16:01:59.674055-0500	RedLemon	Task <F1296D6A-0400-4C3A-8DC8-F94E3904CF1D>.<378> finished successfully
-default	16:01:59.677407-0500	RedLemon	0x7f862e2ba528 ID=860 Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> received response, status 200 content U
-default	16:01:59.678339-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> response ended
-default	16:01:59.679075-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> done using Connection 1
-default	16:01:59.679341-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> summary for task success {transaction_duration_ms=65, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=63, response_duration_ms=2, request_bytes=511, response_bytes=834, cache_hit=true}
-default	16:01:59.679615-0500	RedLemon	Task <295ED956-2609-4666-87B2-4A4352CD6545>.<377> finished successfully
-default	16:01:59.684890-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> received response, status 200 content K
-default	16:01:59.690238-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> done using Connection 27
-default	16:01:59.690371-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> response ended
-default	16:01:59.690999-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> summary for task success {transaction_duration_ms=34, response_status=200, connection=27, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=28, response_duration_ms=5, request_bytes=42, response_bytes=117406, cache_hit=false}
-default	16:01:59.691108-0500	RedLemon	Task <C9D0838C-8155-4344-BB67-0EFB03FD2102>.<379> finished successfully
-default	16:01:59.697964-0500	RedLemon	✅ Logo loaded successfully
-default	16:01:59.698272-0500	RedLemon	✅ Background art loaded successfully
-default	16:01:59.721293-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:59.725121-0500	RedLemon	✅ StreamService: Using provided metadata: Weapons
-default	16:01:59.725291-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
-default	16:01:59.725286-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:59.725394-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt26581740, type=movie, year=2025
-default	16:01:59.725852-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
-default	16:01:59.726238-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [298FBC5F-2A7E-4912-9652-AD2E5561AD58] (reporting strategy default)> on Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> was not selected for reporting
-default	16:01:59.727195-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.727413-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BF66DFFD-96DF-48DD-B738-E8DB3B0222D3] (reporting strategy default)> on Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> was not selected for reporting
-default	16:01:59.727551-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> now using Connection 1
-default	16:01:59.729104-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> now using Connection 24
-default	16:01:59.729235-0500	RedLemon	0x7f8633a13428 ID=864 Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> sent request, body N 0
-default	16:01:59.729607-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> sent request, body N 0
-default	16:01:59.745625-0500	RedLemon	Task <CDC1E131-8F29-44E0-BC11-0382260439BC>.<381> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:01:59.745625-0500	RedLemon	Task <38630621-FB72-4FF9-B005-63AFD9F471CF>.<382> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:01:59.745917-0500	RedLemon	Task <5DF163D3-9BF8-4594-BF7C-8DB9369C4E06>.<383> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:01:59.746021-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:01:59.754122-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B2EBCB1E-141F-43EB-8BF4-AE16FEF336BB] (reporting strategy default)> on Task <CDC1E131-8F29-44E0-BC11-0382260439BC>.<381> was not selected for reporting
-default	16:01:59.754580-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FFA1C10D-CE0F-4E2C-8888-58341549A111] (reporting strategy default)> on Task <38630621-FB72-4FF9-B005-63AFD9F471CF>.<382> was not selected for reporting
-default	16:01:59.755134-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E135E977-860A-4E15-98E8-7FA07CCA0B1F] (reporting strategy default)> on Task <5DF163D3-9BF8-4594-BF7C-8DB9369C4E06>.<383> was not selected for reporting
-default	16:01:59.758713-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [98828CB4-578B-4AA4-812C-C5BA42571C55] (reporting strategy default)> on Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> was not selected for reporting
-default	16:01:59.761622-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.761759-0500	RedLemon	Task <CDC1E131-8F29-44E0-BC11-0382260439BC>.<381> summary for task success {transaction_duration_ms=6, response_status=200, cache_hit=true}
-default	16:01:59.761964-0500	RedLemon	Task <CDC1E131-8F29-44E0-BC11-0382260439BC>.<381> finished successfully
-default	16:01:59.761960-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> now using Connection 16
-default	16:01:59.762059-0500	RedLemon	Task <38630621-FB72-4FF9-B005-63AFD9F471CF>.<382> summary for task success {transaction_duration_ms=4, response_status=200, cache_hit=true}
-default	16:01:59.764071-0500	RedLemon	Task <38630621-FB72-4FF9-B005-63AFD9F471CF>.<382> finished successfully
-default	16:01:59.765146-0500	RedLemon	Task <5DF163D3-9BF8-4594-BF7C-8DB9369C4E06>.<383> summary for task success {transaction_duration_ms=4, response_status=200, cache_hit=true}
-default	16:01:59.765480-0500	RedLemon	Task <5DF163D3-9BF8-4594-BF7C-8DB9369C4E06>.<383> finished successfully
-default	16:01:59.765526-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> sent request, body N 0
-default	16:01:59.793401-0500	RedLemon	0x7f8633a13428 ID=864 Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> received response, status 200 content U
-default	16:01:59.794025-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> response ended
-default	16:01:59.794703-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> done using Connection 1
-default	16:01:59.795001-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=66, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:01:59.795336-0500	RedLemon	Task <1A17AF7B-E32A-4310-9377-8DA45E7C7E26>.<380> finished successfully
-default	16:01:59.797246-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:01:59.797552-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6A50F5F7-DDE5-453F-81AC-2F0EC43AB9A0] (reporting strategy default)> on Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> was not selected for reporting
-default	16:01:59.798325-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:01:59.798542-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> now using Connection 1
-default	16:01:59.799510-0500	RedLemon	0x7f8631528218 ID=868 Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> sent request, body N 0
-default	16:01:59.814811-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:01:59.867712-0500	RedLemon	0x7f8631528218 ID=868 Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> received response, status 200 content U
-default	16:01:59.868099-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> response ended
-default	16:01:59.868398-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> done using Connection 1
-default	16:01:59.868547-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=0, request_bytes=524, response_bytes=841, cache_hit=true}
-default	16:01:59.868874-0500	RedLemon	Task <728BB7B7-7BF3-42D5-B8E9-3CA3097ABB30>.<385> finished successfully
-default	16:01:59.870363-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:01:59.909482-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:00.437561-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> received response, status 200 content U
-default	16:02:00.437776-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> done using Connection 16
-default	16:02:00.438194-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> response ended
-default	16:02:00.438477-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> summary for task success {transaction_duration_ms=677, response_status=200, connection=16, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=676, response_duration_ms=0, request_bytes=484, response_bytes=2107, cache_hit=true}
-default	16:02:00.438827-0500	RedLemon	Task <D0DB2770-9A02-4797-B4BF-11F15BAE11BC>.<384> finished successfully
-default	16:02:00.441914-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 185
-default	16:02:00.442095-0500	RedLemon	   INPUT[0]: Weapons 2025 UHD BluRay 2160p DDP Atmos 5 1 DV HDR10Plus x265-hallowed mkv | 2160p | zilean
-default	16:02:00.442353-0500	RedLemon	   INPUT[1]: Weapons 2025 Hybrid 2160p UHD BluRay TrueHD Atmos 7 1 DV HDR10+ x265-j3rico mkv | 2160p | zilean
-default	16:02:00.442529-0500	RedLemon	   INPUT[2]: Weapons 2025 MULTi FRENCH VF2 HDR DV 2160p WEB H265-SUPPLY mkv | 2160p | zilean
-default	16:02:00.442697-0500	RedLemon	   INPUT[3]: Weapons 2025 2160p WEB-DL DV-TheEqualizer mp4 | 2160p | zilean
-default	16:02:00.442857-0500	RedLemon	   INPUT[4]: Weapons 2025 NORDiC PROPER 2160p SDR WEB-DL DDP5 1 Atmos H 265-NorTekst mkv | 2160p | zilean
-default	16:02:00.443012-0500	RedLemon	   INPUT[5]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RUS SUB mkv | 2160p | zilean
-default	16:02:00.443169-0500	RedLemon	   INPUT[6]: Weapons 2025 2160p WEB-DL DDP5 1 Atmos SDR H265-AOC | 2160p | zilean
-default	16:02:00.443322-0500	RedLemon	   INPUT[7]: Weapons 2025 2160p AMZN WEB-DL DDP5 1 H 265-BYNDR mkv | 2160p | zilean
-default	16:02:00.443510-0500	RedLemon	   INPUT[8]: Weapons 2025 2160p iTunes WEB-DL DD5 1 DV H 265-DreamHD mkv | 2160p | zilean
-default	16:02:00.443754-0500	RedLemon	   INPUT[9]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES | 2160p | zilean
-default	16:02:00.443978-0500	RedLemon	   INPUT[10]: Weapons 2025 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean
-default	16:02:00.444252-0500	RedLemon	   INPUT[11]: Weapons (2025) MA WEB-DL 2160p HDR 2xUkr Eng [Hurtom] v2 mkv | 2160p | zilean
-default	16:02:00.444443-0500	RedLemon	   INPUT[12]: Weapons 2025 MULTi VF2 HDR DV 2160p WEB H265-SUPPLY | 2160p | zilean
-default	16:02:00.444621-0500	RedLemon	   INPUT[13]: Weapons 2025 2160p MA WEB-DL DV HDR TYMBLER mkv | 2160p | zilean
-default	16:02:00.444799-0500	RedLemon	   INPUT[14]: Weapons 2025 MULTi VF2 HDR 2160p WEB H265-SUPPLY | 2160p | zilean
-default	16:02:00.444964-0500	RedLemon	   INPUT[15]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 mkv | 2160p | zilean
-default	16:02:00.445125-0500	RedLemon	   INPUT[16]: Weapons 2025 iTA-ENG WEBDL 2160p HEVC HDR x265-CYBER mkv | 2160p | zilean
-default	16:02:00.445283-0500	RedLemon	   INPUT[17]: Weapons 2025 2160p MA WEB-DL HDR H 265 Master5 mkv | 2160p | zilean
-default	16:02:00.445559-0500	RedLemon	   INPUT[18]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
-default	16:02:00.445749-0500	RedLemon	   INPUT[19]: Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264 mkv | 720p | zilean
-default	16:02:00.445930-0500	RedLemon	   INPUT[20]: Weapons 2025 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR | 2160p | zilean
-default	16:02:00.446095-0500	RedLemon	   INPUT[21]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
-default	16:02:00.446294-0500	RedLemon	   INPUT[22]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
-default	16:02:00.447051-0500	RedLemon	   INPUT[23]: Weapons 2025 2160p HDR10Plus DV WEBRip 6CH x265 HEVC-PSA | 2160p | zilean
-default	16:02:00.450252-0500	RedLemon	   INPUT[24]: Weapons 2025 Dub WEB-DLRip-AVC ExKinoRay mkv | Unknown | zilean
-default	16:02:00.450459-0500	RedLemon	   INPUT[25]: Weapons 2025 1080p WEBRip DD5 1 10bits x265-Rapta mkv | 1080p | zilean
-default	16:02:00.450665-0500	RedLemon	   INPUT[26]: Weapons 2025 iTA-ENG WEBDL 1080p x264-CYBER mkv | 1080p | zilean
-default	16:02:00.450838-0500	RedLemon	   INPUT[27]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 DUAL-C76 mkv | 2160p | zilean
-default	16:02:00.451173-0500	RedLemon	   INPUT[28]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:00.451349-0500	RedLemon	   INPUT[29]: Weapons 2025 1080p HDTS x264 ENG YG mkv | 1080p | zilean
-default	16:02:00.451512-0500	RedLemon	   INPUT[30]: Weapons 2025 1080p ITA-ENG MULTI WEBRip x264 AAC-V3SP4EV3R mkv | 1080p | zilean
-default	16:02:00.451678-0500	RedLemon	   INPUT[31]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:00.451824-0500	RedLemon	   INPUT[32]: Weapons 2025 MULTi VF2 1080p WEB H264-SUPPLY | 1080p | zilean
-default	16:02:00.451972-0500	RedLemon	   INPUT[33]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
-default	16:02:00.456254-0500	RedLemon	   INPUT[34]: Weapons 2025 MULTi 2160p UHD BluRay REMUX DV HDR HEVC TrueHD Atmos 7 1-R22 | 2160p | zilean
-default	16:02:00.457021-0500	RedLemon	   INPUT[35]: Weapons 2025 2160p BDRemux HEVC HDR DV TrueHD Atmos 7 1-DaTmoSX | 2160p | zilean
-default	16:02:00.457331-0500	RedLemon	   INPUT[36]: Weapons 2025 WEB-DL 2160p DD5 1 Atmos DV HDR-DVT mkv | 2160p | zilean
-default	16:02:00.457623-0500	RedLemon	   INPUT[37]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:00.459132-0500	RedLemon	   INPUT[38]: Weapons 2025 1080p HMAX WEB-DL DDP5 1 H 265 DUAL-Potatin mkv | 1080p | zilean
-default	16:02:00.459475-0500	RedLemon	   INPUT[39]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:00.459753-0500	RedLemon	   INPUT[40]: Weapons 2025 1080p BluRay x265-YAWNTiC mkv | 1080p | zilean
-default	16:02:00.460028-0500	RedLemon	   INPUT[41]: Weapons 2025 MULTi 2160p UHD BluRay x265-SESKAPiLE mkv | 2160p | zilean
-default	16:02:00.460236-0500	RedLemon	   INPUT[42]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:00.460402-0500	RedLemon	   INPUT[43]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.460567-0500	RedLemon	   INPUT[44]: Weapons 2025 2160p UHD BluRay REMUX DV P7 HDR MULTi TrueHD Atmos 7 1 H265-BEN THE MEN | 2160p | zilean
-default	16:02:00.460738-0500	RedLemon	   INPUT[45]: Weapons 2025 1080p 10bit BluRay 8CH X265 HEVC-PSA mkv | 1080p | zilean
-default	16:02:00.460891-0500	RedLemon	   INPUT[46]: www UIndex org   -    Weapons 2025 1080p BluRay x264-OFT | 1080p | zilean
-default	16:02:00.461040-0500	RedLemon	   INPUT[47]: Weapons 2025 BluRay 1080p DDP Atmos 5 1 x264-hallowed mkv | 1080p | zilean
-default	16:02:00.461184-0500	RedLemon	   INPUT[48]: Weapons 2025 WEB-DL1080p mkv | 1080p | zilean
-default	16:02:00.461333-0500	RedLemon	   INPUT[49]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
-default	16:02:00.461479-0500	RedLemon	   INPUT[50]: Weapons 2025 1080p BluRay AV1 Opus 7 1-AV1Core mkv | 1080p | zilean
-default	16:02:00.461627-0500	RedLemon	   INPUT[51]: Weapons (2025) (2160p UHD BluRay x265 10bit DV HDR TrueHD Atmos 7 1 r00t) | 2160p | zilean
-default	16:02:00.461779-0500	RedLemon	   INPUT[52]: Weapons (2025) (1080p BluRay x265 10bit EAC3 Atmos 7 1 Ghost) | 1080p | zilean
-default	16:02:00.461925-0500	RedLemon	   INPUT[53]: Weapons 2025 MULTi 2160p UHD BluRay REMUX HEVC DV HDR TrueHD 7 1 Atmos-DSiTE | 2160p | zilean
-default	16:02:00.462073-0500	RedLemon	   INPUT[54]: Weapons (2025) (2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 English - HONE) mkv | 2160p | zilean
-default	16:02:00.462236-0500	RedLemon	   INPUT[55]: Weapons 2025 2160p MA WEB-DL DDP5 1 Atmos DoVi HDR H 265-HONE mkv | 2160p | zilean
-default	16:02:00.462424-0500	RedLemon	   INPUT[56]: Weapons (2025) [MULTi] [2160p] [iT] [WEB-DL] [DV] [HDR] [H 265] [DDP5 1-R22] [Dubbing PL i napisy PL] | 2160p | zilean
-default	16:02:00.462589-0500	RedLemon	   INPUT[57]: Weapons 2025 PLDUB MULTi 2160p iT WEB-DL DoVi HDR DDP5 1 x264-P2P mkv | 2160p | zilean
-default	16:02:00.462795-0500	RedLemon	   INPUT[58]: Weapons (2025) mkv | Unknown | zilean
-default	16:02:00.463007-0500	RedLemon	   INPUT[59]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew iso | 2160p | zilean
-default	16:02:00.463179-0500	RedLemon	   INPUT[60]: Weapons [2025, WEB-DL 2160p, HDR10, Dolby Vision] [Hybrid] Dub (Movie Dubbing, RHS) + 4x MVO (HDRezka, TVShows, LostFilm, LE-Production) + AVO + Dub (Ukr) + DVO (Ukr) + Original (Eng) + Sub (Rus, Ukr, Eng) | 2160p | zilean
-default	16:02:00.463342-0500	RedLemon	   INPUT[61]: Weapons 2025 x265 WEB-DL 2160p SDR mkv | 2160p | zilean
-default	16:02:00.463556-0500	RedLemon	   INPUT[62]: Weapons (2025) [2160p] [YTS MX] | 2160p | zilean
-default	16:02:00.464785-0500	RedLemon	   INPUT[63]: Weapons 2025 2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 mkv | 2160p | zilean
-default	16:02:00.465331-0500	RedLemon	   INPUT[64]: [superseed byethost7 com] Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS mkv ts | 2160p | zilean
-default	16:02:00.465809-0500	RedLemon	   INPUT[65]: Weapons 2025 1080p CAMRip LAT DUB 1XBET mp4 | 1080p | zilean
-default	16:02:00.466133-0500	RedLemon	   INPUT[66]: ww UIndex org    -    Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264-BYNDR | 720p | zilean
-default	16:02:00.466377-0500	RedLemon	   INPUT[67]: Weapons 2025 720p MA WEB-DL DDP5 1 Atmos H 264-BYNDR | 720p | zilean
-default	16:02:00.466818-0500	RedLemon	   INPUT[68]: Weapons 2025 x265 WEB-DL 2160p HDR-DV mkv | 2160p | zilean
-default	16:02:00.467026-0500	RedLemon	   INPUT[69]: Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS | 2160p | zilean
-default	16:02:00.467294-0500	RedLemon	   INPUT[70]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT | 2160p | zilean
-default	16:02:00.467570-0500	RedLemon	   INPUT[71]: Weapons 2025 4K HDR DV 2160p WEBDL Ita Eng x265-NAHOM mkv | 2160p | zilean
-default	16:02:00.468070-0500	RedLemon	   INPUT[72]: Weapons 2025 2160p iT WEB-DL DV P5 MULTi[Ben The Men] mp4 | 2160p | zilean
-default	16:02:00.468400-0500	RedLemon	   INPUT[73]: Weapons 2025 NORDiC REPACK 2160p WEB-DL DDP5 1 Atmos DV HDR H 265-BANDOLEROS mkv | 2160p | zilean
-default	16:02:00.469307-0500	RedLemon	   INPUT[74]: Weapons 2025 MULTi 2160p iT WEB-DL DDP5 1 DV HDR H 265-R22 mkv | 2160p | zilean
-default	16:02:00.470213-0500	RedLemon	   INPUT[75]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 mkv | 1080p | zilean
-default	16:02:00.470788-0500	RedLemon	   INPUT[76]: Weapons 2025 WEB-DL 2160p HDR Dolby 10bit mkv | 2160p | zilean
-default	16:02:00.472340-0500	RedLemon	   INPUT[77]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.472929-0500	RedLemon	   INPUT[78]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.473911-0500	RedLemon	   INPUT[79]: Weapons 2025 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
-default	16:02:00.474138-0500	RedLemon	   INPUT[80]: Weapons 2025 REPACK 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
-default	16:02:00.474318-0500	RedLemon	   INPUT[81]: Weapons 2025 MULTi iNTERNAL UHD BluRay 2160p TrueHD Atmos 7 1 DV HDR10 REMUX-seedpool mkv | 2160p | zilean
-default	16:02:00.474474-0500	RedLemon	   INPUT[82]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:00.474630-0500	RedLemon	   INPUT[83]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:00.474746-0500	RedLemon	   INPUT[84]: Weapons 2025 1080p TSHD (DVO Колодій Трейлерів + місіс kor0bochkina) mkv | 1080p | zilean
-default	16:02:00.474910-0500	RedLemon	   INPUT[85]: Weapons 2025 1080p 10bit WEBRip 6CH X265 HEVC-PSA mkv | 1080p | zilean
-default	16:02:00.475375-0500	RedLemon	   INPUT[86]: Weapons 2025 1080p DS4K WEBRip 10Bit DDP5 1 Atmos x265-NeoNoir mkv | 1080p | zilean
-default	16:02:00.475564-0500	RedLemon	   INPUT[87]: Weapons 2025 PLSUBBED 720p WEB-DL XviD AC3-R22 avi | 720p | zilean
-default	16:02:00.475708-0500	RedLemon	   INPUT[88]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.475908-0500	RedLemon	   INPUT[89]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.476059-0500	RedLemon	   INPUT[90]: Weapons 2025 1080p WEBRip DV HDR10  DDP Atmos 5 1 x265-FZHD mkv | 1080p | zilean
-default	16:02:00.476221-0500	RedLemon	   INPUT[91]: Weapons (2025) [1080p] [WEBRip] [5 1] [YTS MX] | 1080p | zilean
-default	16:02:00.476558-0500	RedLemon	   INPUT[92]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:00.476752-0500	RedLemon	   INPUT[93]: Weapons 2025 Hybrid 2160p MA WEB-DL DDP5 1 Atmos DV HDR10P H 265-7HOTDOGS mkv | 2160p | zilean
-default	16:02:00.477022-0500	RedLemon	   INPUT[94]: Weapons 2025 MULTi 1080p AMZN WEB-DL x264 AC3-KiT mkv | 1080p | zilean
-default	16:02:00.477407-0500	RedLemon	   INPUT[95]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT mkv | 2160p | zilean
-default	16:02:00.477618-0500	RedLemon	   INPUT[96]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
-default	16:02:00.477778-0500	RedLemon	   INPUT[97]: Weapons 2025 Ger Eng DL EAC3 2160p MA DV HDR WEB H265-ZeroTwo mkv | 2160p | zilean
-default	16:02:00.478144-0500	RedLemon	   INPUT[98]: Weapons 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
-default	16:02:00.478298-0500	RedLemon	   INPUT[99]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
-default	16:02:00.478446-0500	RedLemon	   INPUT[100]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:00.478590-0500	RedLemon	   INPUT[101]: Weapons 2025 MULTi 1080p 10bit WEB-DL DD5 1 x265 HEVC-AdL mkv | 1080p | zilean
-default	16:02:00.478734-0500	RedLemon	   INPUT[102]: Weapons (2025) (1080p MA WEB-DL x265 10bit EAC3 Atmos 5 1 Ghost) | 1080p | zilean
-default	16:02:00.478874-0500	RedLemon	   INPUT[103]: Weapons 2025 1080p HDTS x264 UA-EN mkv | 1080p | zilean
-default	16:02:00.479029-0500	RedLemon	   INPUT[104]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 DUAL-BiOMA mkv | 1080p | zilean
-default	16:02:00.485433-0500	RedLemon	   INPUT[105]: Weapons (2025) En 1080p HDR10  X265 HEVC 10 bit mkv | 1080p | zilean
-default	16:02:00.485995-0500	RedLemon	   INPUT[106]: Weapons (2025) En 2160p UHD HDR10  X265 HEVC 10 bit | 2160p | zilean
-default	16:02:00.486238-0500	RedLemon	   INPUT[107]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
-default	16:02:00.486912-0500	RedLemon	   INPUT[108]: Weapons [2025] mkv | Unknown | zilean
-default	16:02:00.487128-0500	RedLemon	   INPUT[109]: Weapons 2025 1080p TS EN-RGB | 1080p | zilean
-default	16:02:00.487432-0500	RedLemon	   INPUT[110]: Weapons.2025.2160p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.DoVi.HDR.H.265-TURG
+default	16:41:35.740195-0500	runningboardd	Assertion 169-6308-1776 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:35.741949-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:35.742033-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:35.742125-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 185
+default	16:41:35.742322-0500	RedLemon	   INPUT[0]: Weapons 2025 UHD BluRay 2160p DDP Atmos 5 1 DV HDR10Plus x265-hallowed mkv | 2160p | zilean
+default	16:41:35.742486-0500	RedLemon	   INPUT[1]: Weapons 2025 Hybrid 2160p UHD BluRay TrueHD Atmos 7 1 DV HDR10+ x265-j3rico mkv | 2160p | zilean
+default	16:41:35.742634-0500	RedLemon	   INPUT[2]: Weapons 2025 MULTi FRENCH VF2 HDR DV 2160p WEB H265-SUPPLY mkv | 2160p | zilean
+default	16:41:35.742782-0500	RedLemon	   INPUT[3]: Weapons 2025 2160p WEB-DL DV-TheEqualizer mp4 | 2160p | zilean
+default	16:41:35.742932-0500	RedLemon	   INPUT[4]: Weapons 2025 NORDiC PROPER 2160p SDR WEB-DL DDP5 1 Atmos H 265-NorTekst mkv | 2160p | zilean
+default	16:41:35.743078-0500	RedLemon	   INPUT[5]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RUS SUB mkv | 2160p | zilean
+default	16:41:35.743223-0500	RedLemon	   INPUT[6]: Weapons 2025 2160p WEB-DL DDP5 1 Atmos SDR H265-AOC | 2160p | zilean
+default	16:41:35.743366-0500	RedLemon	   INPUT[7]: Weapons 2025 2160p AMZN WEB-DL DDP5 1 H 265-BYNDR mkv | 2160p | zilean
+default	16:41:35.743520-0500	RedLemon	   INPUT[8]: Weapons 2025 2160p iTunes WEB-DL DD5 1 DV H 265-DreamHD mkv | 2160p | zilean
+default	16:41:35.743676-0500	RedLemon	   INPUT[9]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES | 2160p | zilean
+default	16:41:35.743829-0500	RedLemon	   INPUT[10]: Weapons 2025 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean
+default	16:41:35.743983-0500	RedLemon	   INPUT[11]: Weapons (2025) MA WEB-DL 2160p HDR 2xUkr Eng [Hurtom] v2 mkv | 2160p | zilean
+default	16:41:35.744183-0500	RedLemon	   INPUT[12]: Weapons 2025 MULTi VF2 HDR DV 2160p WEB H265-SUPPLY | 2160p | zilean
+default	16:41:35.744369-0500	RedLemon	   INPUT[13]: Weapons 2025 2160p MA WEB-DL DV HDR TYMBLER mkv | 2160p | zilean
+default	16:41:35.744534-0500	RedLemon	   INPUT[14]: Weapons 2025 MULTi VF2 HDR 2160p WEB H265-SUPPLY | 2160p | zilean
+default	16:41:35.744724-0500	RedLemon	   INPUT[15]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 mkv | 2160p | zilean
+default	16:41:35.744972-0500	RedLemon	   INPUT[16]: Weapons 2025 iTA-ENG WEBDL 2160p HEVC HDR x265-CYBER mkv | 2160p | zilean
+default	16:41:35.745168-0500	RedLemon	   INPUT[17]: Weapons 2025 2160p MA WEB-DL HDR H 265 Master5 mkv | 2160p | zilean
+default	16:41:35.745341-0500	RedLemon	   INPUT[18]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
+default	16:41:35.745500-0500	RedLemon	   INPUT[19]: Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264 mkv | 720p | zilean
+default	16:41:35.745722-0500	RedLemon	   INPUT[20]: Weapons 2025 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR | 2160p | zilean
+default	16:41:35.744793-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:35.746020-0500	RedLemon	   INPUT[21]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
+default	16:41:35.746296-0500	RedLemon	   INPUT[22]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
+default	16:41:35.746618-0500	RedLemon	   INPUT[23]: Weapons 2025 2160p HDR10Plus DV WEBRip 6CH x265 HEVC-PSA | 2160p | zilean
+default	16:41:35.746809-0500	RedLemon	   INPUT[24]: Weapons 2025 Dub WEB-DLRip-AVC ExKinoRay mkv | Unknown | zilean
+default	16:41:35.747526-0500	RedLemon	   INPUT[25]: Weapons 2025 1080p WEBRip DD5 1 10bits x265-Rapta mkv | 1080p | zilean
+default	16:41:35.748182-0500	RedLemon	   INPUT[26]: Weapons 2025 iTA-ENG WEBDL 1080p x264-CYBER mkv | 1080p | zilean
+default	16:41:35.748414-0500	RedLemon	   INPUT[27]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 DUAL-C76 mkv | 2160p | zilean
+default	16:41:35.748596-0500	RedLemon	   INPUT[28]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
+default	16:41:35.748774-0500	RedLemon	   INPUT[29]: Weapons 2025 1080p HDTS x264 ENG YG mkv | 1080p | zilean
+default	16:41:35.748946-0500	RedLemon	   INPUT[30]: Weapons 2025 1080p ITA-ENG MULTI WEBRip x264 AAC-V3SP4EV3R mkv | 1080p | zilean
+default	16:41:35.749094-0500	RedLemon	   INPUT[31]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
+default	16:41:35.750096-0500	RedLemon	   INPUT[32]: Weapons 2025 MULTi VF2 1080p WEB H264-SUPPLY | 1080p | zilean
+default	16:41:35.750368-0500	RedLemon	   INPUT[33]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
+default	16:41:35.750504-0500	RedLemon	   INPUT[34]: Weapons 2025 MULTi 2160p UHD BluRay REMUX DV HDR HEVC TrueHD Atmos 7 1-R22 | 2160p | zilean
+default	16:41:35.750633-0500	RedLemon	   INPUT[35]: Weapons 2025 2160p BDRemux HEVC HDR DV TrueHD Atmos 7 1-DaTmoSX | 2160p | zilean
+default	16:41:35.750839-0500	RedLemon	   INPUT[36]: Weapons 2025 WEB-DL 2160p DD5 1 Atmos DV HDR-DVT mkv | 2160p | zilean
+default	16:41:35.751039-0500	RedLemon	   INPUT[37]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
+default	16:41:35.751245-0500	RedLemon	   INPUT[38]: Weapons 2025 1080p HMAX WEB-DL DDP5 1 H 265 DUAL-Potatin mkv | 1080p | zilean
+default	16:41:35.751396-0500	RedLemon	   INPUT[39]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
+default	16:41:35.751533-0500	RedLemon	   INPUT[40]: Weapons 2025 1080p BluRay x265-YAWNTiC mkv | 1080p | zilean
+default	16:41:35.751707-0500	RedLemon	   INPUT[41]: Weapons 2025 MULTi 2160p UHD BluRay x265-SESKAPiLE mkv | 2160p | zilean
+default	16:41:35.752027-0500	RedLemon	   INPUT[42]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
+default	16:41:35.752192-0500	RedLemon	   INPUT[43]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.752314-0500	RedLemon	   INPUT[44]: Weapons 2025 2160p UHD BluRay REMUX DV P7 HDR MULTi TrueHD Atmos 7 1 H265-BEN THE MEN | 2160p | zilean
+default	16:41:35.752691-0500	RedLemon	   INPUT[45]: Weapons 2025 1080p 10bit BluRay 8CH X265 HEVC-PSA mkv | 1080p | zilean
+default	16:41:35.752932-0500	RedLemon	   INPUT[46]: www UIndex org   -    Weapons 2025 1080p BluRay x264-OFT | 1080p | zilean
+default	16:41:35.753185-0500	RedLemon	   INPUT[47]: Weapons 2025 BluRay 1080p DDP Atmos 5 1 x264-hallowed mkv | 1080p | zilean
+default	16:41:35.753540-0500	RedLemon	   INPUT[48]: Weapons 2025 WEB-DL1080p mkv | 1080p | zilean
+default	16:41:35.754534-0500	RedLemon	   INPUT[49]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
+default	16:41:35.754837-0500	RedLemon	   INPUT[50]: Weapons 2025 1080p BluRay AV1 Opus 7 1-AV1Core mkv | 1080p | zilean
+default	16:41:35.757395-0500	RedLemon	   INPUT[51]: Weapons (2025) (2160p UHD BluRay x265 10bit DV HDR TrueHD Atmos 7 1 r00t) | 2160p | zilean
+default	16:41:35.757847-0500	RedLemon	   INPUT[52]: Weapons (2025) (1080p BluRay x265 10bit EAC3 Atmos 7 1 Ghost) | 1080p | zilean
+default	16:41:35.758598-0500	RedLemon	   INPUT[53]: Weapons 2025 MULTi 2160p UHD BluRay REMUX HEVC DV HDR TrueHD 7 1 Atmos-DSiTE | 2160p | zilean
+default	16:41:35.758881-0500	RedLemon	   INPUT[54]: Weapons (2025) (2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 English - HONE) mkv | 2160p | zilean
+default	16:41:35.759061-0500	RedLemon	   INPUT[55]: Weapons 2025 2160p MA WEB-DL DDP5 1 Atmos DoVi HDR H 265-HONE mkv | 2160p | zilean
+default	16:41:35.759268-0500	RedLemon	   INPUT[56]: Weapons (2025) [MULTi] [2160p] [iT] [WEB-DL] [DV] [HDR] [H 265] [DDP5 1-R22] [Dubbing PL i napisy PL] | 2160p | zilean
+default	16:41:35.759582-0500	RedLemon	   INPUT[57]: Weapons 2025 PLDUB MULTi 2160p iT WEB-DL DoVi HDR DDP5 1 x264-P2P mkv | 2160p | zilean
+default	16:41:35.759756-0500	RedLemon	   INPUT[58]: Weapons (2025) mkv | Unknown | zilean
+default	16:41:35.760150-0500	RedLemon	   INPUT[59]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew iso | 2160p | zilean
+default	16:41:35.760385-0500	RedLemon	   INPUT[60]: Weapons [2025, WEB-DL 2160p, HDR10, Dolby Vision] [Hybrid] Dub (Movie Dubbing, RHS) + 4x MVO (HDRezka, TVShows, LostFilm, LE-Production) + AVO + Dub (Ukr) + DVO (Ukr) + Original (Eng) + Sub (Rus, Ukr, Eng) | 2160p | zilean
+default	16:41:35.760624-0500	RedLemon	   INPUT[61]: Weapons 2025 x265 WEB-DL 2160p SDR mkv | 2160p | zilean
+default	16:41:35.760879-0500	RedLemon	   INPUT[62]: Weapons (2025) [2160p] [YTS MX] | 2160p | zilean
+default	16:41:35.761122-0500	RedLemon	   INPUT[63]: Weapons 2025 2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 mkv | 2160p | zilean
+default	16:41:35.761291-0500	RedLemon	   INPUT[64]: [superseed byethost7 com] Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS mkv ts | 2160p | zilean
+default	16:41:35.761710-0500	RedLemon	   INPUT[65]: Weapons 2025 1080p CAMRip LAT DUB 1XBET mp4 | 1080p | zilean
+default	16:41:35.762275-0500	RedLemon	   INPUT[66]: ww UIndex org    -    Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264-BYNDR | 720p | zilean
+default	16:41:35.762516-0500	RedLemon	   INPUT[67]: Weapons 2025 720p MA WEB-DL DDP5 1 Atmos H 264-BYNDR | 720p | zilean
+default	16:41:35.762706-0500	RedLemon	   INPUT[68]: Weapons 2025 x265 WEB-DL 2160p HDR-DV mkv | 2160p | zilean
+default	16:41:35.762990-0500	RedLemon	   INPUT[69]: Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS | 2160p | zilean
+default	16:41:35.763211-0500	RedLemon	   INPUT[70]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT | 2160p | zilean
+default	16:41:35.763567-0500	RedLemon	   INPUT[71]: Weapons 2025 4K HDR DV 2160p WEBDL Ita Eng x265-NAHOM mkv | 2160p | zilean
+default	16:41:35.764372-0500	RedLemon	   INPUT[72]: Weapons 2025 2160p iT WEB-DL DV P5 MULTi[Ben The Men] mp4 | 2160p | zilean
+default	16:41:35.764926-0500	RedLemon	   INPUT[73]: Weapons 2025 NORDiC REPACK 2160p WEB-DL DDP5 1 Atmos DV HDR H 265-BANDOLEROS mkv | 2160p | zilean
+default	16:41:35.765141-0500	RedLemon	   INPUT[74]: Weapons 2025 MULTi 2160p iT WEB-DL DDP5 1 DV HDR H 265-R22 mkv | 2160p | zilean
+default	16:41:35.765335-0500	RedLemon	   INPUT[75]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 mkv | 1080p | zilean
+default	16:41:35.765501-0500	RedLemon	   INPUT[76]: Weapons 2025 WEB-DL 2160p HDR Dolby 10bit mkv | 2160p | zilean
+default	16:41:35.765630-0500	RedLemon	   INPUT[77]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.765750-0500	RedLemon	   INPUT[78]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.767143-0500	RedLemon	   INPUT[79]: Weapons 2025 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
+default	16:41:35.767425-0500	RedLemon	   INPUT[80]: Weapons 2025 REPACK 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
+default	16:41:35.767576-0500	RedLemon	   INPUT[81]: Weapons 2025 MULTi iNTERNAL UHD BluRay 2160p TrueHD Atmos 7 1 DV HDR10 REMUX-seedpool mkv | 2160p | zilean
+default	16:41:35.767714-0500	RedLemon	   INPUT[82]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
+default	16:41:35.767843-0500	RedLemon	   INPUT[83]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
+default	16:41:35.767950-0500	RedLemon	   INPUT[84]: Weapons 2025 1080p TSHD (DVO Колодій Трейлерів + місіс kor0bochkina) mkv | 1080p | zilean
+default	16:41:35.768089-0500	RedLemon	   INPUT[85]: Weapons 2025 1080p 10bit WEBRip 6CH X265 HEVC-PSA mkv | 1080p | zilean
+default	16:41:35.768224-0500	RedLemon	   INPUT[86]: Weapons 2025 1080p DS4K WEBRip 10Bit DDP5 1 Atmos x265-NeoNoir mkv | 1080p | zilean
+default	16:41:35.768349-0500	RedLemon	   INPUT[87]: Weapons 2025 PLSUBBED 720p WEB-DL XviD AC3-R22 avi | 720p | zilean
+default	16:41:35.768472-0500	RedLemon	   INPUT[88]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.768632-0500	RedLemon	   INPUT[89]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.772249-0500	RedLemon	   INPUT[90]: Weapons 2025 1080p WEBRip DV HDR10  DDP Atmos 5 1 x265-FZHD mkv | 1080p | zilean
+default	16:41:35.772989-0500	RedLemon	   INPUT[91]: Weapons (2025) [1080p] [WEBRip] [5 1] [YTS MX] | 1080p | zilean
+default	16:41:35.774686-0500	RedLemon	   INPUT[92]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
+default	16:41:35.775943-0500	RedLemon	   INPUT[93]: Weapons 2025 Hybrid 2160p MA WEB-DL DDP5 1 Atmos DV HDR10P H 265-7HOTDOGS mkv | 2160p | zilean
+default	16:41:35.776314-0500	RedLemon	   INPUT[94]: Weapons 2025 MULTi 1080p AMZN WEB-DL x264 AC3-KiT mkv | 1080p | zilean
+default	16:41:35.777375-0500	RedLemon	   INPUT[95]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT mkv | 2160p | zilean
+default	16:41:35.777997-0500	RedLemon	   INPUT[96]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
+default	16:41:35.778536-0500	RedLemon	   INPUT[97]: Weapons 2025 Ger Eng DL EAC3 2160p MA DV HDR WEB H265-ZeroTwo mkv | 2160p | zilean
+default	16:41:35.778778-0500	RedLemon	   INPUT[98]: Weapons 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
+default	16:41:35.779105-0500	RedLemon	   INPUT[99]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
+default	16:41:35.780678-0500	RedLemon	   INPUT[100]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
+default	16:41:35.780890-0500	RedLemon	   INPUT[101]: Weapons 2025 MULTi 1080p 10bit WEB-DL DD5 1 x265 HEVC-AdL mkv | 1080p | zilean
+default	16:41:35.781990-0500	RedLemon	   INPUT[102]: Weapons (2025) (1080p MA WEB-DL x265 10bit EAC3 Atmos 5 1 Ghost) | 1080p | zilean
+default	16:41:35.782224-0500	RedLemon	   INPUT[103]: Weapons 2025 1080p HDTS x264 UA-EN mkv | 1080p | zilean
+default	16:41:35.782638-0500	RedLemon	   INPUT[104]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 DUAL-BiOMA mkv | 1080p | zilean
+default	16:41:35.783257-0500	RedLemon	   INPUT[105]: Weapons (2025) En 1080p HDR10  X265 HEVC 10 bit mkv | 1080p | zilean
+default	16:41:35.785041-0500	RedLemon	   INPUT[106]: Weapons (2025) En 2160p UHD HDR10  X265 HEVC 10 bit | 2160p | zilean
+default	16:41:35.785331-0500	RedLemon	   INPUT[107]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
+default	16:41:35.785537-0500	RedLemon	   INPUT[108]: Weapons [2025] mkv | Unknown | zilean
+default	16:41:35.785697-0500	RedLemon	   INPUT[109]: Weapons 2025 1080p TS EN-RGB | 1080p | zilean
+default	16:41:35.785815-0500	RedLemon	   INPUT[110]: Weapons.2025.2160p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.DoVi.HDR.H.265-TURG
 👤 29 💾 8.33 GB ⚙️ ThePirateBay
 Dual Audio | 2160p | torrentio
-default	16:02:00.487706-0500	RedLemon	   INPUT[111]: Weapons.2025.bluray.hdr.2160p.av1-7.1.opus-Dust
+default	16:41:35.785917-0500	RedLemon	   INPUT[111]: Weapons.2025.bluray.hdr.2160p.av1-7.1.opus-Dust
 👤 15 💾 3.19 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:00.487912-0500	RedLemon	   INPUT[112]: Weapons (2025) 2160p H265 BluRay Rip 10 bit DV HDR10+ ita eng AC3 5.1 sub ita eng NUeng Licdom
+default	16:41:35.786024-0500	RedLemon	   INPUT[112]: Weapons (2025) 2160p H265 BluRay Rip 10 bit DV HDR10+ ita eng AC3 5.1 sub ita eng NUeng Licdom
 👤 13 💾 2.91 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	16:02:00.488167-0500	RedLemon	   INPUT[113]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew
+default	16:41:35.786938-0500	RedLemon	   INPUT[113]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew
 👤 11 💾 3.57 GB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	16:02:00.488363-0500	RedLemon	   INPUT[114]: Weapons 2025 UHD BluRay 2160p HDR10 DV HEVC TrueHD Atmos 7.1 x265-E
+default	16:41:35.791574-0500	RedLemon	   INPUT[114]: Weapons 2025 UHD BluRay 2160p HDR10 DV HEVC TrueHD Atmos 7.1 x265-E
 👤 9 💾 26.84 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:00.488580-0500	RedLemon	   INPUT[115]: A.Hora.do.Mal.2025.WEB-DL.2160p.DV.HDR10 .x265.DUAL.5.1-SF
+default	16:41:35.791784-0500	RedLemon	   INPUT[115]: A.Hora.do.Mal.2025.WEB-DL.2160p.DV.HDR10 .x265.DUAL.5.1-SF
 👤 7 💾 23.13 GB ⚙️ BluDV
 Dual Audio / 🇬🇧 / 🇵🇹 | 2160p | torrentio
-default	16:02:00.489101-0500	RedLemon	   INPUT[116]: La.hora.de.la.desaparicion.2025.WEB-DL.4k.HDR-Dual-Lat
+default	16:41:35.791943-0500	RedLemon	   INPUT[116]: La.hora.de.la.desaparicion.2025.WEB-DL.4k.HDR-Dual-Lat
 👤 6 💾 22.63 GB ⚙️ Cinecalidad
 Dual Audio / 🇲🇽 | Unknown | torrentio
-default	16:02:00.489883-0500	RedLemon	   INPUT[117]: Weapons.2025.Hybrid.2160p.WEB-DL.DV.HDR.DDP5.1.Atmos.H265-AOC
+default	16:41:35.792054-0500	RedLemon	   INPUT[117]: Weapons.2025.Hybrid.2160p.WEB-DL.DV.HDR.DDP5.1.Atmos.H265-AOC
 👤 5 💾 22.66 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:00.490231-0500	RedLemon	   INPUT[118]: Орудия / Weapons (2025) WEB-DL-HEVC 2160p от ELEKTRI4KA | 4K | SDR | D P A | Movie Dubbing Red Head Sound HDrezka Studio Сербин
+default	16:41:35.792361-0500	RedLemon	   INPUT[118]: Орудия / Weapons (2025) WEB-DL-HEVC 2160p от ELEKTRI4KA | 4K | SDR | D P A | Movie Dubbing Red Head Sound HDrezka Studio Сербин
 👤 34 💾 15.53 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 2160p | torrentio
-default	16:02:00.490343-0500	RedLemon	   INPUT[119]: Weapons (La hora de la desaparicion) (2025) [4k 2160p][Esp]
+default	16:41:35.796180-0500	RedLemon	   INPUT[119]: Weapons (La hora de la desaparicion) (2025) [4k 2160p][Esp]
 👤 26 💾 23.53 GB ⚙️ Wolfmax4k
 🇪🇸 | 2160p | torrentio
-default	16:02:00.490441-0500	RedLemon	   INPUT[120]: Weapons.2025.UHD.2160p.10bit.iTunes.WEBRip.AV1.English.DDP5.1.ESubs-DaddyCooL
+default	16:41:35.796364-0500	RedLemon	   INPUT[120]: Weapons.2025.UHD.2160p.10bit.iTunes.WEBRip.AV1.English.DDP5.1.ESubs-DaddyCooL
 👤 17 💾 4.91 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:00.490571-0500	RedLemon	   INPUT[121]: Weapons.2025.2160p.iT.WEB-DL.SDR.ENG.LATINO.DDP5.1.H265.MP4-BTM
+default	16:41:35.796483-0500	RedLemon	   INPUT[121]: Weapons.2025.2160p.iT.WEB-DL.SDR.ENG.LATINO.DDP5.1.H265.MP4-BTM
 👤 7 💾 12.47 GB ⚙️ ThePirateBay
 Multi Audio / 🇬🇧 / 🇲🇽 | 2160p | torrentio
-default	16:02:00.490672-0500	RedLemon	   INPUT[122]: Weapons 2025 UHD BluRay 1080p DD Atmos 5 1 DoVi HDR10 x265-SM737
+default	16:41:35.796586-0500	RedLemon	   INPUT[122]: Weapons 2025 UHD BluRay 1080p DD Atmos 5 1 DoVi HDR10 x265-SM737
 👤 25 💾 5.69 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.491770-0500	RedLemon	   INPUT[123]: Weapons.2025.1080p.MA.WEBRip.10Bit.DDP5.1.x265-NeoNoir
+default	16:41:35.796683-0500	RedLemon	   INPUT[123]: Weapons.2025.1080p.MA.WEBRip.10Bit.DDP5.1.x265-NeoNoir
 👤 112 💾 1.74 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.492062-0500	RedLemon	   INPUT[124]: Weapons 2025 1080p BluRay
+default	16:41:35.796776-0500	RedLemon	   INPUT[124]: Weapons 2025 1080p BluRay
 👤 100 💾 2.37 GB ⚙️ YTS | 1080p | torrentio
-default	16:02:00.492449-0500	RedLemon	   INPUT[125]: Weapons 2025 1080p WEBRip
+default	16:41:35.796869-0500	RedLemon	   INPUT[125]: Weapons 2025 1080p WEBRip
 👤 100 💾 2.15 GB ⚙️ YTS | 1080p | torrentio
-default	16:02:00.492578-0500	RedLemon	   INPUT[126]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
+default	16:41:35.796957-0500	RedLemon	   INPUT[126]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
 👤 88 💾 1.35 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.492680-0500	RedLemon	   INPUT[127]: A.Hora.do.Mal.2025.1080p.FULL.HD.WEB-DL.DUAL.5.1
+default	16:41:35.798438-0500	RedLemon	   INPUT[127]: A.Hora.do.Mal.2025.1080p.FULL.HD.WEB-DL.DUAL.5.1
 👤 84 💾 7.59 GB ⚙️ Comando
 Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:00.492795-0500	RedLemon	   INPUT[128]: A Hora do Mal 2025 WEB-DL 1080p x264 DUAL 5.1
+default	16:41:35.798624-0500	RedLemon	   INPUT[128]: A Hora do Mal 2025 WEB-DL 1080p x264 DUAL 5.1
 👤 53 💾 2.94 GB ⚙️ BluDV
 Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:00.492887-0500	RedLemon	   INPUT[129]: Weapons.2025.1080p.WEB-DL.MA.h265.EAC3
+default	16:41:35.798773-0500	RedLemon	   INPUT[129]: Weapons.2025.1080p.WEB-DL.MA.h265.EAC3
 👤 44 💾 7.58 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.493110-0500	RedLemon	   INPUT[130]: Weapons (2025) Eng 1080p WEBRip x264 AAC ESub
+default	16:41:35.799194-0500	RedLemon	   INPUT[130]: Weapons (2025) Eng 1080p WEBRip x264 AAC ESub
 👤 42 💾 1.98 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.493222-0500	RedLemon	   INPUT[131]: Weapons (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
+default	16:41:35.799340-0500	RedLemon	   INPUT[131]: Weapons (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
 👤 33 💾 2.89 GB ⚙️ ilCorSaRoNeRo
 Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	16:02:00.493396-0500	RedLemon	   INPUT[132]: Weapons.2025.iTA-ENG.Bluray.1080p.x264-CYBER.mkv
+default	16:41:35.799463-0500	RedLemon	   INPUT[132]: Weapons.2025.iTA-ENG.Bluray.1080p.x264-CYBER.mkv
 👤 31 💾 8.79 GB ⚙️ 1337x
 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	16:02:00.493495-0500	RedLemon	   INPUT[133]: Weapons 2025 1080p REPACK WEBRip DDP 5 1 Atmos 10bit H 265-iVy
+default	16:41:35.799580-0500	RedLemon	   INPUT[133]: Weapons 2025 1080p REPACK WEBRip DDP 5 1 Atmos 10bit H 265-iVy
 👤 21 💾 1.83 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.493587-0500	RedLemon	   INPUT[134]: Weapons (La hora de la desaparicion) (2025) [Bluray 1080p][Esp]
+default	16:41:35.799688-0500	RedLemon	   INPUT[134]: Weapons (La hora de la desaparicion) (2025) [Bluray 1080p][Esp]
 👤 18 💾 7.83 GB ⚙️ Wolfmax4k
 🇪🇸 | 1080p | torrentio
-default	16:02:00.493679-0500	RedLemon	   INPUT[135]: Weapons.2025.MULTi.VF2.1080p.WEB.H264-SUPPLY.mkv
+default	16:41:35.799787-0500	RedLemon	   INPUT[135]: Weapons.2025.MULTi.VF2.1080p.WEB.H264-SUPPLY.mkv
 👤 18 💾 8.17 GB ⚙️ Torrent9
 Multi Audio / 🇫🇷 | 1080p | torrentio
-default	16:02:00.493765-0500	RedLemon	   INPUT[136]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR
+default	16:41:35.799880-0500	RedLemon	   INPUT[136]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR
 👤 16 💾 7.02 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.493897-0500	RedLemon	   INPUT[137]: Weapons.2025.1080p.ITA-ENG-SPA.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
+default	16:41:35.799978-0500	RedLemon	   INPUT[137]: Weapons.2025.1080p.ITA-ENG-SPA.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
 👤 13 💾 1.45 GB ⚙️ ilCorSaRoNeRo
 Multi Audio / 🇬🇧 / 🇮🇹 / 🇪🇸 | 1080p | torrentio
-default	16:02:00.493985-0500	RedLemon	   INPUT[138]: Weapons 2025 1080p Blu-Ray HEVC x265 10Bit DDP5.1 Subs KINGDOM
+default	16:41:35.800072-0500	RedLemon	   INPUT[138]: Weapons 2025 1080p Blu-Ray HEVC x265 10Bit DDP5.1 Subs KINGDOM
 👤 11 💾 6.09 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.494302-0500	RedLemon	   INPUT[139]: A.Hora.do.Mal.2025.1080p.WEB-DL.DUAL.5.1
+default	16:41:35.800168-0500	RedLemon	   INPUT[139]: A.Hora.do.Mal.2025.1080p.WEB-DL.DUAL.5.1
 👤 11 💾 2.94 GB ⚙️ Comando
 Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:00.494837-0500	RedLemon	   INPUT[140]: Weapons 2025 1080p BluRay x265 HEVC 10bit AAC 7 1 HeVK Zach C
+default	16:41:35.800367-0500	RedLemon	   INPUT[140]: Weapons 2025 1080p BluRay x265 HEVC 10bit AAC 7 1 HeVK Zach C
 👤 10 💾 12.29 GB ⚙️ TorrentGalaxy | 1080p | torrentio
-default	16:02:00.495193-0500	RedLemon	   INPUT[141]: Weapons 2025 1080p WEB-DL HEVC x265 10Bit DDP5.1 Subs KINGDOM
+default	16:41:35.800683-0500	RedLemon	   INPUT[141]: Weapons 2025 1080p WEB-DL HEVC x265 10Bit DDP5.1 Subs KINGDOM
 👤 8 💾 6.25 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.495353-0500	RedLemon	   INPUT[142]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR
+default	16:41:35.800801-0500	RedLemon	   INPUT[142]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR
 👤 8 💾 7.64 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.496932-0500	RedLemon	   INPUT[143]: Weapons 2025 1080p WebRip EAC3 5 1 x265-Lootera
+default	16:41:35.800889-0500	RedLemon	   INPUT[143]: Weapons 2025 1080p WebRip EAC3 5 1 x265-Lootera
 👤 8 💾 2.62 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.498433-0500	RedLemon	   INPUT[144]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
+default	16:41:35.800983-0500	RedLemon	   INPUT[144]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
 Weapons 2025 1080p WEB-Rip  HEVC x265 10Bit DDP5 1 Subs KINGDOM.mkv
 👤 7 💾 6.25 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.498778-0500	RedLemon	   INPUT[145]: Weapons.2025.1080p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.H.265-TURG
+default	16:41:35.801074-0500	RedLemon	   INPUT[145]: Weapons.2025.1080p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.H.265-TURG
 👤 6 💾 3.46 GB ⚙️ ThePirateBay
 Dual Audio | 1080p | torrentio
-default	16:02:00.498940-0500	RedLemon	   INPUT[146]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
+default	16:41:35.801158-0500	RedLemon	   INPUT[146]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
 👤 6 💾 6.25 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.499130-0500	RedLemon	   INPUT[147]: Veliki.paket.titlovanih.filmova.2025.14.1080p.x264.[ExYuSubs] ⭐
+default	16:41:35.801470-0500	RedLemon	   INPUT[147]: Veliki.paket.titlovanih.filmova.2025.14.1080p.x264.[ExYuSubs] ⭐
 Weapons.2025.1080p.WEBRip.x264.[ExYuSubs]/Weapons.2025.1080p.WEBRip.x264.[ExYuSubs].mp4
 👤 5 💾 2.01 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.499572-0500	RedLemon	   INPUT[148]: Weapons.2025.1080p.Blu-ray.Remux.AVC.TrueHD.Atmos.7.1-CiNEPHiLES
+default	16:41:35.801670-0500	RedLemon	   INPUT[148]: Weapons.2025.1080p.Blu-ray.Remux.AVC.TrueHD.Atmos.7.1-CiNEPHiLES
 👤 5 💾 29.87 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:00.499927-0500	RedLemon	   INPUT[149]: Weapons 2025 1080p BluRay x265-YAWNTiC
+default	16:41:35.801820-0500	RedLemon	   INPUT[149]: Weapons 2025 1080p BluRay x265-YAWNTiC
 👤 5 💾 7.83 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.500091-0500	RedLemon	   INPUT[150]: Орудия / Weapons (2025) WEB-DLRip 1080p | D P A | Movie Dubbing HDrezka Studio Сербин
+default	16:41:35.802020-0500	RedLemon	   INPUT[150]: Орудия / Weapons (2025) WEB-DLRip 1080p | D P A | Movie Dubbing HDrezka Studio Сербин
 👤 5 💾 16.32 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	16:02:00.500379-0500	RedLemon	   INPUT[151]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
+default	16:41:35.802161-0500	RedLemon	   INPUT[151]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
 👤 5 💾 1.35 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.500766-0500	RedLemon	   INPUT[152]: Weapons 2025 1080p MA WEBRip 10Bit DDP5 1 x265-NeoNoir
+default	16:41:35.802305-0500	RedLemon	   INPUT[152]: Weapons 2025 1080p MA WEBRip 10Bit DDP5 1 x265-NeoNoir
 👤 5 💾 1.74 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.500937-0500	RedLemon	   INPUT[153]: Weapons 2025 720p BluRay
+default	16:41:35.802401-0500	RedLemon	   INPUT[153]: Weapons 2025 720p BluRay
 👤 100 💾 1.15 GB ⚙️ YTS | 720p | torrentio
-default	16:02:00.501386-0500	RedLemon	   INPUT[154]: Weapons 2025 720p WEBRip
+default	16:41:35.810317-0500	RedLemon	   INPUT[154]: Weapons 2025 720p WEBRip
 👤 100 💾 1.15 GB ⚙️ YTS | 720p | torrentio
-default	16:02:00.501946-0500	RedLemon	   INPUT[155]: Орудия / Weapons (2025) BDRip 720p от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
+default	16:41:35.811209-0500	RedLemon	   INPUT[155]: Орудия / Weapons (2025) BDRip 720p от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
 👤 36 💾 5.59 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:00.502621-0500	RedLemon	   INPUT[156]: Weapons (La hora de la desaparicion) (2025) [Bluray 720p][Esp]
+default	16:41:35.812640-0500	RedLemon	   INPUT[156]: Weapons (La hora de la desaparicion) (2025) [Bluray 720p][Esp]
 👤 36 💾 3.34 GB ⚙️ Wolfmax4k
 🇪🇸 | 720p | torrentio
-default	16:02:00.503215-0500	RedLemon	   INPUT[157]: Weapons.2025.TRUEFRENCH.VF2.720p.WEB.H264-SUPPLY.mkv
+default	16:41:35.812936-0500	RedLemon	   INPUT[157]: Weapons.2025.TRUEFRENCH.VF2.720p.WEB.H264-SUPPLY.mkv
 👤 32 💾 3.68 GB ⚙️ Torrent9
 🇫🇷 | 720p | torrentio
-default	16:02:00.504702-0500	RedLemon	   INPUT[158]: Орудия / Weapons (2025) WEB-DL 720p от селезень | D | Movie Dubbing Red Head Sound
+default	16:41:35.813101-0500	RedLemon	   INPUT[158]: Орудия / Weapons (2025) WEB-DL 720p от селезень | D | Movie Dubbing Red Head Sound
 👤 26 💾 4.03 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:00.505393-0500	RedLemon	   INPUT[159]: Орудия / Weapons (2025) WEB-DL 720p от селезень | P | HDrezka Studio
+default	16:41:35.813821-0500	RedLemon	   INPUT[159]: Орудия / Weapons (2025) WEB-DL 720p от селезень | P | HDrezka Studio
 👤 23 💾 3.45 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:00.506546-0500	RedLemon	   INPUT[160]: Орудия / Weapons (2025) WEB-DLRip 720p | D P A
+default	16:41:35.813972-0500	RedLemon	   INPUT[160]: Орудия / Weapons (2025) WEB-DLRip 720p | D P A
 👤 16 💾 7.02 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:00.506685-0500	RedLemon	   INPUT[161]: Weapons (2025) 720p WEBRip-LAMA
+default	16:41:35.814068-0500	RedLemon	   INPUT[161]: Weapons (2025) 720p WEBRip-LAMA
 👤 7 💾 1.15 GB ⚙️ ThePirateBay | 720p | torrentio
-default	16:02:00.506805-0500	RedLemon	   INPUT[162]: Weapons 2025 576p WEBRip x265 AAC-SSN
+default	16:41:35.816040-0500	RedLemon	   INPUT[162]: Weapons 2025 576p WEBRip x265 AAC-SSN
 👤 5 💾 1.57 GB ⚙️ ThePirateBay | Unknown | torrentio
-default	16:02:00.507179-0500	RedLemon	   INPUT[163]: Weapons 2025 1080p TS EN-RGB
+default	16:41:35.816219-0500	RedLemon	   INPUT[163]: Weapons 2025 1080p TS EN-RGB
 👤 28 💾 5.77 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.507296-0500	RedLemon	   INPUT[164]: Weapons 2025 1080p TELESYNC x264-RGB
+default	16:41:35.816346-0500	RedLemon	   INPUT[164]: Weapons 2025 1080p TELESYNC x264-RGB
 👤 11 💾 5.77 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:00.507405-0500	RedLemon	   INPUT[165]: Weapons.2025.1080p.TELESYNC.V2.MULTi.x264-SyncUP
+default	16:41:35.816468-0500	RedLemon	   INPUT[165]: Weapons.2025.1080p.TELESYNC.V2.MULTi.x264-SyncUP
 👤 7 💾 6.07 GB ⚙️ ThePirateBay
 Multi Audio | 1080p | torrentio
-default	16:02:00.507513-0500	RedLemon	   INPUT[166]: Weapons.2025.FRENCH.VF2.WEBRip.x264-LACTEL.mkv
+default	16:41:35.816581-0500	RedLemon	   INPUT[166]: Weapons.2025.FRENCH.VF2.WEBRip.x264-LACTEL.mkv
 👤 96 💾 1.22 GB ⚙️ Torrent9
 🇫🇷 | Unknown | torrentio
-default	16:02:00.507630-0500	RedLemon	   INPUT[167]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | P | HDrezka Studio
+default	16:41:35.816698-0500	RedLemon	   INPUT[167]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | P | HDrezka Studio
 👤 94 💾 2.29 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:00.507744-0500	RedLemon	   INPUT[168]: Орудия / Weapons (2025) BDRip-AVC от селезень | D | Movie Dubbing Red Head Sound
+default	16:41:35.816809-0500	RedLemon	   INPUT[168]: Орудия / Weapons (2025) BDRip-AVC от селезень | D | Movie Dubbing Red Head Sound
 👤 75 💾 2.35 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:00.510600-0500	RedLemon	   INPUT[169]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | D | Movie Dubbing
+default	16:41:35.816912-0500	RedLemon	   INPUT[169]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | D | Movie Dubbing
 👤 44 💾 1.46 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	16:02:00.511574-0500	RedLemon	   INPUT[170]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | P | HDrezka Studio
+default	16:41:35.817013-0500	RedLemon	   INPUT[170]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | P | HDrezka Studio
 👤 30 💾 1.47 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	16:02:00.511816-0500	RedLemon	   INPUT[171]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
+default	16:41:35.817112-0500	RedLemon	   INPUT[171]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
 👤 27 💾 2.29 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:00.512010-0500	RedLemon	   INPUT[172]: Орудия / Weapons (2025) WEB-DLRip от DoMiNo & селезень | D | Red Head Sound
+default	16:41:35.817219-0500	RedLemon	   INPUT[172]: Орудия / Weapons (2025) WEB-DLRip от DoMiNo & селезень | D | Red Head Sound
 👤 14 💾 1.46 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	16:02:00.512388-0500	RedLemon	   INPUT[173]: Орудия / Weapons (2025) HDRip-AVC от ExKinoRay | D | Red Head Sound
+default	16:41:35.817315-0500	RedLemon	   INPUT[173]: Орудия / Weapons (2025) HDRip-AVC от ExKinoRay | D | Red Head Sound
 👤 9 💾 745.46 MB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:00.512559-0500	RedLemon	   INPUT[174]: Орудия / Weapons (2025) BDRip от MegaPeer | D | Movie Dubbing
+default	16:41:35.817405-0500	RedLemon	   INPUT[174]: Орудия / Weapons (2025) BDRip от MegaPeer | D | Movie Dubbing
 👤 6 💾 1.46 GB ⚙️ Rutor
 🇷🇺 | Unknown | torrentio
-default	16:02:00.512996-0500	RedLemon	   INPUT[175]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | Sub
+default	16:41:35.817500-0500	RedLemon	   INPUT[175]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | Sub
 👤 5 💾 1.95 GB ⚙️ Rutor
 🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:00.513149-0500	RedLemon	   INPUT[176]: Weapons (2025) SD H264 MP4 ITA [HD4ME]
+default	16:41:35.817589-0500	RedLemon	   INPUT[176]: Weapons (2025) SD H264 MP4 ITA [HD4ME]
 👤 5 💾 713.92 MB ⚙️ ilCorSaRoNeRo
 🇬🇧 / 🇮🇹 | Unknown | torrentio
-default	16:02:00.513252-0500	RedLemon	   INPUT[177]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:00.513341-0500	RedLemon	   INPUT[178]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:00.513511-0500	RedLemon	   INPUT[179]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:00.514631-0500	RedLemon	   INPUT[180]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:00.514806-0500	RedLemon	   INPUT[181]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:00.514925-0500	RedLemon	   INPUT[182]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:00.515027-0500	RedLemon	   INPUT[183]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:00.515120-0500	RedLemon	   INPUT[184]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:00.515235-0500	RedLemon	🔍 Searching SubDL for subtitles: tt26581740 (movie)
-default	16:02:00.515480-0500	RedLemon	Task <13DA7517-9180-4CC5-A302-01A1C0BD1C34>.<386> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:00.520539-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [59AB85BE-AC63-444C-9652-1917D3F9143C] (reporting strategy default)> on Task <13DA7517-9180-4CC5-A302-01A1C0BD1C34>.<386> was not selected for reporting
-default	16:02:00.520929-0500	RedLemon	🎬 Guest: Starting playback after database fallback detection
-default	16:02:00.521068-0500	RedLemon	🎬 Guest: Launching player via database fallback
-default	16:02:00.521161-0500	RedLemon	⚠️ Guest: No season/episode found in DB or local state
-default	16:02:00.521415-0500	RedLemon	   Quality: 1080p
-default	16:02:00.521619-0500	RedLemon	   Mode: watchParty
-default	16:02:00.521727-0500	RedLemon	📡 Fetching metadata for tt26581740...
-default	16:02:00.521903-0500	RedLemon	Task <13DA7517-9180-4CC5-A302-01A1C0BD1C34>.<386> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:00.522300-0500	RedLemon	Task <13DA7517-9180-4CC5-A302-01A1C0BD1C34>.<386> now using Connection 17
-default	16:02:00.529329-0500	RedLemon	0x7f862e261fa8 ID=8 Task <13DA7517-9180-4CC5-A302-01A1C0BD1C34>.<386> sent request, body N 0
-default	16:02:00.595225-0500	runningboardd	Invalidating assertion 169-5311-1026 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:00.623691-0500	RedLemon	✅ StreamService: Using provided metadata: Weapons
-default	16:02:00.623802-0500	RedLemon	🔍 StreamService: Fetching stream bucket...
-default	16:02:00.623889-0500	RedLemon	🔍 CLIENT: Resolving streams - imdbId=tt26581740, type=movie, year=2025
-default	16:02:00.624300-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> resuming, timeouts(30.0, 300.0) QOS(0x19) Voucher (null)
-default	16:02:00.624659-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [88246213-92E3-4D29-802A-DCD48FCEC812] (reporting strategy default)> on Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> was not selected for reporting
-default	16:02:00.625574-0500	RedLemon	Connection 30: starting, TC(0x0)
-default	16:02:00.625674-0500	RedLemon	[C30 E23A00D1-3B0F-4E60-9696-919BFD0CE734 127.0.0.1:47253 tcp, url hash: c280ff71, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{08570D34-4CCC-4689-AAE7-3DB77F1878CD}{(null)}{Y}{2} (private), proc: E8E931A4-3EA4-3070-8D28-FBFFFC7A0E59] start
-default	16:02:00.625730-0500	RedLemon	[C30 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
-default	16:02:00.625823-0500	RedLemon	[C30 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), viable, interface: lo0)] event: path:satisfied @0.000s, uuid: 1A83A3C6-4492-4D94-93EE-447AF901F060
-default	16:02:00.626214-0500	RedLemon	[C30 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:start_connect @0.000s
-default	16:02:00.626249-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C30] reporting state preparing
-default	16:02:00.626435-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> setting up Connection 30
-default	16:02:00.626992-0500	RedLemon	nw_socket_handle_socket_event [C30:2] Socket received CONNECTED event
-default	16:02:00.627137-0500	RedLemon	nw_flow_connected [C30 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
-default	16:02:00.627196-0500	RedLemon	[C30 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.001s
-default	16:02:00.627245-0500	RedLemon	nw_flow_connected [C30 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-88486127)
-default	16:02:00.627449-0500	RedLemon	[C30 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.001s
-default	16:02:00.627583-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C30] reporting state ready
-default	16:02:00.627633-0500	RedLemon	[C30 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.001s
-default	16:02:00.627690-0500	RedLemon	Connection 30: connected successfully
-default	16:02:00.627794-0500	RedLemon	Connection 30: ready C(N) E(N)
-default	16:02:00.627954-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> now using Connection 30
-default	16:02:00.628036-0500	RedLemon	Connection 30: received viability advisory(Y)
-default	16:02:00.628230-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> sent request, body N 0
-default	16:02:00.635705-0500	RedLemon	Task <049E775C-0916-4C28-88B2-0CEA1CD69617>.<387> resuming, timeouts(10.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:00.638791-0500	RedLemon	Task <F0C9DA68-189C-402F-8C65-011CC27693ED>.<388> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:00.642311-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:00.643089-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [814D86D7-D5AB-407E-9612-1D31A72B596D] (reporting strategy default)> on Task <049E775C-0916-4C28-88B2-0CEA1CD69617>.<387> was not selected for reporting
-default	16:02:00.642965-0500	RedLemon	Task <AFB11107-3470-492A-B86A-18CD253B7530>.<390> resuming, timeouts(20.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:00.644303-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [70125641-8A49-4535-ACA8-7D3AB36F69AC] (reporting strategy default)> on Task <F0C9DA68-189C-402F-8C65-011CC27693ED>.<388> was not selected for reporting
-default	16:02:00.645368-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AF3C1AC2-65F3-478E-B97C-47A583CF2D0D] (reporting strategy default)> on Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> was not selected for reporting
-default	16:02:00.645698-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [38D03044-C01F-4F1E-A0AC-16ADC08C680F] (reporting strategy default)> on Task <AFB11107-3470-492A-B86A-18CD253B7530>.<390> was not selected for reporting
-default	16:02:00.651926-0500	RedLemon	Task <049E775C-0916-4C28-88B2-0CEA1CD69617>.<387> summary for task success {transaction_duration_ms=5, response_status=200, cache_hit=true}
-default	16:02:00.651940-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:00.652194-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> now using Connection 16
-default	16:02:00.652259-0500	RedLemon	Task <049E775C-0916-4C28-88B2-0CEA1CD69617>.<387> finished successfully
-default	16:02:00.652503-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> sent request, body N 0
-default	16:02:00.653744-0500	RedLemon	Task <F0C9DA68-189C-402F-8C65-011CC27693ED>.<388> summary for task success {transaction_duration_ms=4, response_status=200, cache_hit=true}
-default	16:02:00.654123-0500	RedLemon	Task <F0C9DA68-189C-402F-8C65-011CC27693ED>.<388> finished successfully
-default	16:02:00.654696-0500	RedLemon	Task <AFB11107-3470-492A-B86A-18CD253B7530>.<390> summary for task success {transaction_duration_ms=3, response_status=200, cache_hit=true}
-default	16:02:00.655098-0500	RedLemon	Task <AFB11107-3470-492A-B86A-18CD253B7530>.<390> finished successfully
-default	16:02:00.658524-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1028 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:02:00.658839-0500	runningboardd	Assertion 169-5311-1028 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:00.660742-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:00.660887-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:00.661047-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:00.661429-0500	runningboardd	Attempting to rename power assertion 33546 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1026:com.apple.CFNetwork.StorageDB;169-5311-1028:com.apple.CFNetwork.StorageDB
-default	16:02:00.751616-0500	runningboardd	Attempting to rename power assertion 33546 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1028:com.apple.CFNetwork.StorageDB
-default	16:02:00.751730-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:00.751832-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:00.751912-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:01.563940-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> received response, status 200 content U
-default	16:02:01.564155-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> done using Connection 16
-default	16:02:01.564623-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> response ended
-default	16:02:01.564904-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> summary for task success {transaction_duration_ms=914, response_status=200, connection=16, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=913, response_duration_ms=0, request_bytes=484, response_bytes=2121, cache_hit=true}
-default	16:02:01.565254-0500	RedLemon	Task <7B26123A-82FB-4D92-856D-BF8460CD84EE>.<389> finished successfully
-default	16:02:01.568380-0500	RedLemon	🔍 DEBUG: attachSubtitles INPUT - streams.count: 185
-default	16:02:01.568654-0500	RedLemon	   INPUT[0]: Weapons 2025 UHD BluRay 2160p DDP Atmos 5 1 DV HDR10Plus x265-hallowed mkv | 2160p | zilean
-default	16:02:01.568927-0500	RedLemon	   INPUT[1]: Weapons 2025 Hybrid 2160p UHD BluRay TrueHD Atmos 7 1 DV HDR10+ x265-j3rico mkv | 2160p | zilean
-default	16:02:01.569118-0500	RedLemon	   INPUT[2]: Weapons 2025 MULTi FRENCH VF2 HDR DV 2160p WEB H265-SUPPLY mkv | 2160p | zilean
-default	16:02:01.569322-0500	RedLemon	   INPUT[3]: Weapons 2025 2160p WEB-DL DV-TheEqualizer mp4 | 2160p | zilean
-default	16:02:01.569530-0500	RedLemon	   INPUT[4]: Weapons 2025 NORDiC PROPER 2160p SDR WEB-DL DDP5 1 Atmos H 265-NorTekst mkv | 2160p | zilean
-default	16:02:01.569907-0500	RedLemon	   INPUT[5]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RUS SUB mkv | 2160p | zilean
-default	16:02:01.570291-0500	RedLemon	   INPUT[6]: Weapons 2025 2160p WEB-DL DDP5 1 Atmos SDR H265-AOC | 2160p | zilean
-default	16:02:01.570549-0500	RedLemon	   INPUT[7]: Weapons 2025 2160p AMZN WEB-DL DDP5 1 H 265-BYNDR mkv | 2160p | zilean
-default	16:02:01.570827-0500	RedLemon	   INPUT[8]: Weapons 2025 2160p iTunes WEB-DL DD5 1 DV H 265-DreamHD mkv | 2160p | zilean
-default	16:02:01.571024-0500	RedLemon	   INPUT[9]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES | 2160p | zilean
-default	16:02:01.571196-0500	RedLemon	   INPUT[10]: Weapons 2025 2160p UHD Remux HEVC DoVi TrueHD Atmos 7 1-playBD | 2160p | zilean
-default	16:02:01.571361-0500	RedLemon	   INPUT[11]: Weapons (2025) MA WEB-DL 2160p HDR 2xUkr Eng [Hurtom] v2 mkv | 2160p | zilean
-default	16:02:01.571532-0500	RedLemon	   INPUT[12]: Weapons 2025 MULTi VF2 HDR DV 2160p WEB H265-SUPPLY | 2160p | zilean
-default	16:02:01.571702-0500	RedLemon	   INPUT[13]: Weapons 2025 2160p MA WEB-DL DV HDR TYMBLER mkv | 2160p | zilean
-default	16:02:01.571871-0500	RedLemon	   INPUT[14]: Weapons 2025 MULTi VF2 HDR 2160p WEB H265-SUPPLY | 2160p | zilean
-default	16:02:01.572036-0500	RedLemon	   INPUT[15]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 mkv | 2160p | zilean
-default	16:02:01.572192-0500	RedLemon	   INPUT[16]: Weapons 2025 iTA-ENG WEBDL 2160p HEVC HDR x265-CYBER mkv | 2160p | zilean
-default	16:02:01.572345-0500	RedLemon	   INPUT[17]: Weapons 2025 2160p MA WEB-DL HDR H 265 Master5 mkv | 2160p | zilean
-default	16:02:01.572501-0500	RedLemon	   INPUT[18]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
-default	16:02:01.572737-0500	RedLemon	   INPUT[19]: Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264 mkv | 720p | zilean
-default	16:02:01.573025-0500	RedLemon	   INPUT[20]: Weapons 2025 UHD BluRay 2160p TrueHD Atmos 7 1 DV HEVC REMUX-FraMeSToR | 2160p | zilean
-default	16:02:01.573268-0500	RedLemon	   INPUT[21]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
-default	16:02:01.573580-0500	RedLemon	   INPUT[22]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
-default	16:02:01.575185-0500	RedLemon	   INPUT[23]: Weapons 2025 2160p HDR10Plus DV WEBRip 6CH x265 HEVC-PSA | 2160p | zilean
-default	16:02:01.575432-0500	RedLemon	   INPUT[24]: Weapons 2025 Dub WEB-DLRip-AVC ExKinoRay mkv | Unknown | zilean
-default	16:02:01.575921-0500	RedLemon	   INPUT[25]: Weapons 2025 1080p WEBRip DD5 1 10bits x265-Rapta mkv | 1080p | zilean
-default	16:02:01.576136-0500	RedLemon	   INPUT[26]: Weapons 2025 iTA-ENG WEBDL 1080p x264-CYBER mkv | 1080p | zilean
-default	16:02:01.576312-0500	RedLemon	   INPUT[27]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265 DUAL-C76 mkv | 2160p | zilean
-default	16:02:01.576478-0500	RedLemon	   INPUT[28]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:01.576632-0500	RedLemon	   INPUT[29]: Weapons 2025 1080p HDTS x264 ENG YG mkv | 1080p | zilean
-default	16:02:01.577083-0500	RedLemon	   INPUT[30]: Weapons 2025 1080p ITA-ENG MULTI WEBRip x264 AAC-V3SP4EV3R mkv | 1080p | zilean
-default	16:02:01.577483-0500	RedLemon	   INPUT[31]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:01.577683-0500	RedLemon	   INPUT[32]: Weapons 2025 MULTi VF2 1080p WEB H264-SUPPLY | 1080p | zilean
-default	16:02:01.577855-0500	RedLemon	   INPUT[33]: Weapons 2025 1080p HD x264 ENG YG iso | 1080p | zilean
-default	16:02:01.578016-0500	RedLemon	   INPUT[34]: Weapons 2025 MULTi 2160p UHD BluRay REMUX DV HDR HEVC TrueHD Atmos 7 1-R22 | 2160p | zilean
-default	16:02:01.578181-0500	RedLemon	   INPUT[35]: Weapons 2025 2160p BDRemux HEVC HDR DV TrueHD Atmos 7 1-DaTmoSX | 2160p | zilean
-default	16:02:01.578330-0500	RedLemon	   INPUT[36]: Weapons 2025 WEB-DL 2160p DD5 1 Atmos DV HDR-DVT mkv | 2160p | zilean
-default	16:02:01.579865-0500	RedLemon	   INPUT[37]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:01.580202-0500	RedLemon	   INPUT[38]: Weapons 2025 1080p HMAX WEB-DL DDP5 1 H 265 DUAL-Potatin mkv | 1080p | zilean
-default	16:02:01.580374-0500	RedLemon	   INPUT[39]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:01.580482-0500	RedLemon	   INPUT[40]: Weapons 2025 1080p BluRay x265-YAWNTiC mkv | 1080p | zilean
-default	16:02:01.580570-0500	RedLemon	   INPUT[41]: Weapons 2025 MULTi 2160p UHD BluRay x265-SESKAPiLE mkv | 2160p | zilean
-default	16:02:01.580656-0500	RedLemon	   INPUT[42]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:01.580738-0500	RedLemon	   INPUT[43]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.580823-0500	RedLemon	   INPUT[44]: Weapons 2025 2160p UHD BluRay REMUX DV P7 HDR MULTi TrueHD Atmos 7 1 H265-BEN THE MEN | 2160p | zilean
-default	16:02:01.580904-0500	RedLemon	   INPUT[45]: Weapons 2025 1080p 10bit BluRay 8CH X265 HEVC-PSA mkv | 1080p | zilean
-default	16:02:01.584589-0500	RedLemon	   INPUT[46]: www UIndex org   -    Weapons 2025 1080p BluRay x264-OFT | 1080p | zilean
-default	16:02:01.584853-0500	RedLemon	   INPUT[47]: Weapons 2025 BluRay 1080p DDP Atmos 5 1 x264-hallowed mkv | 1080p | zilean
-default	16:02:01.585453-0500	RedLemon	   INPUT[48]: Weapons 2025 WEB-DL1080p mkv | 1080p | zilean
-default	16:02:01.585692-0500	RedLemon	   INPUT[49]: Weapons 2025 1080p Blu-ray Remux AVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 1080p | zilean
-default	16:02:01.585917-0500	RedLemon	   INPUT[50]: Weapons 2025 1080p BluRay AV1 Opus 7 1-AV1Core mkv | 1080p | zilean
-default	16:02:01.586108-0500	RedLemon	   INPUT[51]: Weapons (2025) (2160p UHD BluRay x265 10bit DV HDR TrueHD Atmos 7 1 r00t) | 2160p | zilean
-default	16:02:01.586729-0500	RedLemon	   INPUT[52]: Weapons (2025) (1080p BluRay x265 10bit EAC3 Atmos 7 1 Ghost) | 1080p | zilean
-default	16:02:01.586973-0500	RedLemon	   INPUT[53]: Weapons 2025 MULTi 2160p UHD BluRay REMUX HEVC DV HDR TrueHD 7 1 Atmos-DSiTE | 2160p | zilean
-default	16:02:01.587301-0500	RedLemon	   INPUT[54]: Weapons (2025) (2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 English - HONE) mkv | 2160p | zilean
-default	16:02:01.587515-0500	RedLemon	   INPUT[55]: Weapons 2025 2160p MA WEB-DL DDP5 1 Atmos DoVi HDR H 265-HONE mkv | 2160p | zilean
-default	16:02:01.587723-0500	RedLemon	   INPUT[56]: Weapons (2025) [MULTi] [2160p] [iT] [WEB-DL] [DV] [HDR] [H 265] [DDP5 1-R22] [Dubbing PL i napisy PL] | 2160p | zilean
-default	16:02:01.587986-0500	RedLemon	   INPUT[57]: Weapons 2025 PLDUB MULTi 2160p iT WEB-DL DoVi HDR DDP5 1 x264-P2P mkv | 2160p | zilean
-default	16:02:01.589093-0500	RedLemon	   INPUT[58]: Weapons (2025) mkv | Unknown | zilean
-default	16:02:01.589353-0500	RedLemon	   INPUT[59]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew iso | 2160p | zilean
-default	16:02:01.589543-0500	RedLemon	   INPUT[60]: Weapons [2025, WEB-DL 2160p, HDR10, Dolby Vision] [Hybrid] Dub (Movie Dubbing, RHS) + 4x MVO (HDRezka, TVShows, LostFilm, LE-Production) + AVO + Dub (Ukr) + DVO (Ukr) + Original (Eng) + Sub (Rus, Ukr, Eng) | 2160p | zilean
-default	16:02:01.591629-0500	RedLemon	   INPUT[61]: Weapons 2025 x265 WEB-DL 2160p SDR mkv | 2160p | zilean
-default	16:02:01.592339-0500	RedLemon	   INPUT[62]: Weapons (2025) [2160p] [YTS MX] | 2160p | zilean
-default	16:02:01.592592-0500	RedLemon	   INPUT[63]: Weapons 2025 2160p WEB-DL Hybrid H265 DV HDR DDP Atmos 5 1 mkv | 2160p | zilean
-default	16:02:01.592777-0500	RedLemon	   INPUT[64]: [superseed byethost7 com] Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS mkv ts | 2160p | zilean
-default	16:02:01.592956-0500	RedLemon	   INPUT[65]: Weapons 2025 1080p CAMRip LAT DUB 1XBET mp4 | 1080p | zilean
-default	16:02:01.593122-0500	RedLemon	   INPUT[66]: ww UIndex org    -    Weapons 2025 720p AMZN WEB-DL DDP5 1 H 264-BYNDR | 720p | zilean
-default	16:02:01.593280-0500	RedLemon	   INPUT[67]: Weapons 2025 720p MA WEB-DL DDP5 1 Atmos H 264-BYNDR | 720p | zilean
-default	16:02:01.594765-0500	RedLemon	   INPUT[68]: Weapons 2025 x265 WEB-DL 2160p HDR-DV mkv | 2160p | zilean
-default	16:02:01.595042-0500	RedLemon	   INPUT[69]: Weapons 2025 PL HDR AI UP 2160p HDTS AC3-ChrisVPS | 2160p | zilean
-default	16:02:01.595210-0500	RedLemon	   INPUT[70]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT | 2160p | zilean
-default	16:02:01.597564-0500	RedLemon	   INPUT[71]: Weapons 2025 4K HDR DV 2160p WEBDL Ita Eng x265-NAHOM mkv | 2160p | zilean
-default	16:02:01.598375-0500	RedLemon	   INPUT[72]: Weapons 2025 2160p iT WEB-DL DV P5 MULTi[Ben The Men] mp4 | 2160p | zilean
-default	16:02:01.598841-0500	RedLemon	   INPUT[73]: Weapons 2025 NORDiC REPACK 2160p WEB-DL DDP5 1 Atmos DV HDR H 265-BANDOLEROS mkv | 2160p | zilean
-default	16:02:01.599227-0500	RedLemon	   INPUT[74]: Weapons 2025 MULTi 2160p iT WEB-DL DDP5 1 DV HDR H 265-R22 mkv | 2160p | zilean
-default	16:02:01.600317-0500	RedLemon	   INPUT[75]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 mkv | 1080p | zilean
-default	16:02:01.600591-0500	RedLemon	   INPUT[76]: Weapons 2025 WEB-DL 2160p HDR Dolby 10bit mkv | 2160p | zilean
-default	16:02:01.600821-0500	RedLemon	   INPUT[77]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.601238-0500	RedLemon	   INPUT[78]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.601515-0500	RedLemon	   INPUT[79]: Weapons 2025 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
-default	16:02:01.602024-0500	RedLemon	   INPUT[80]: Weapons 2025 REPACK 2160p iT WEB-DL DDP5 1 Atmos DV H 265-BYNDR | 2160p | zilean
-default	16:02:01.602377-0500	RedLemon	   INPUT[81]: Weapons 2025 MULTi iNTERNAL UHD BluRay 2160p TrueHD Atmos 7 1 DV HDR10 REMUX-seedpool mkv | 2160p | zilean
-default	16:02:01.602677-0500	RedLemon	   INPUT[82]: Weapons 2025 2160p UHD Blu-ray Remux DV HDR HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:01.602879-0500	RedLemon	   INPUT[83]: Weapons 2025 Hybrid 2160p UHD Blu-ray Remux DV HDR10plus HEVC TrueHD Atmos 7 1-CiNEPHiLES mkv | 2160p | zilean
-default	16:02:01.603256-0500	RedLemon	   INPUT[84]: Weapons 2025 1080p TSHD (DVO Колодій Трейлерів + місіс kor0bochkina) mkv | 1080p | zilean
-default	16:02:01.604192-0500	RedLemon	   INPUT[85]: Weapons 2025 1080p 10bit WEBRip 6CH X265 HEVC-PSA mkv | 1080p | zilean
-default	16:02:01.604615-0500	RedLemon	   INPUT[86]: Weapons 2025 1080p DS4K WEBRip 10Bit DDP5 1 Atmos x265-NeoNoir mkv | 1080p | zilean
-default	16:02:01.605113-0500	RedLemon	   INPUT[87]: Weapons 2025 PLSUBBED 720p WEB-DL XviD AC3-R22 avi | 720p | zilean
-default	16:02:01.605644-0500	RedLemon	   INPUT[88]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.607069-0500	RedLemon	   INPUT[89]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.607660-0500	RedLemon	   INPUT[90]: Weapons 2025 1080p WEBRip DV HDR10  DDP Atmos 5 1 x265-FZHD mkv | 1080p | zilean
-default	16:02:01.608396-0500	RedLemon	   INPUT[91]: Weapons (2025) [1080p] [WEBRip] [5 1] [YTS MX] | 1080p | zilean
-default	16:02:01.608947-0500	RedLemon	   INPUT[92]: Weapons 2025 2160p iT WEB-DL DDP5 1 DV HDR H 265-RDNYB mkv | 2160p | zilean
-default	16:02:01.609195-0500	RedLemon	   INPUT[93]: Weapons 2025 Hybrid 2160p MA WEB-DL DDP5 1 Atmos DV HDR10P H 265-7HOTDOGS mkv | 2160p | zilean
-default	16:02:01.609416-0500	RedLemon	   INPUT[94]: Weapons 2025 MULTi 1080p AMZN WEB-DL x264 AC3-KiT mkv | 1080p | zilean
-default	16:02:01.609813-0500	RedLemon	   INPUT[95]: Weapons 2025 MULTi 2160p WEB-DL DDP5 1 DV HDR HEVC-KiT mkv | 2160p | zilean
-default	16:02:01.609983-0500	RedLemon	   INPUT[96]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
-default	16:02:01.610133-0500	RedLemon	   INPUT[97]: Weapons 2025 Ger Eng DL EAC3 2160p MA DV HDR WEB H265-ZeroTwo mkv | 2160p | zilean
-default	16:02:01.610424-0500	RedLemon	   INPUT[98]: Weapons 2025 1080p WEB h264-ETHEL mkv | 1080p | zilean
-default	16:02:01.610584-0500	RedLemon	   INPUT[99]: Weapons 2025 2160p iT WEB-DL DV HDR10+[Ben The Men] mp4 | 2160p | zilean
-default	16:02:01.610718-0500	RedLemon	   INPUT[100]: Weapons 2025 REPACK 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR mkv | 1080p | zilean
-default	16:02:01.610847-0500	RedLemon	   INPUT[101]: Weapons 2025 MULTi 1080p 10bit WEB-DL DD5 1 x265 HEVC-AdL mkv | 1080p | zilean
-default	16:02:01.611172-0500	RedLemon	   INPUT[102]: Weapons (2025) (1080p MA WEB-DL x265 10bit EAC3 Atmos 5 1 Ghost) | 1080p | zilean
-default	16:02:01.616477-0500	RedLemon	   INPUT[103]: Weapons 2025 1080p HDTS x264 UA-EN mkv | 1080p | zilean
-default	16:02:01.617073-0500	RedLemon	   INPUT[104]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264 DUAL-BiOMA mkv | 1080p | zilean
-default	16:02:01.617594-0500	RedLemon	   INPUT[105]: Weapons (2025) En 1080p HDR10  X265 HEVC 10 bit mkv | 1080p | zilean
-default	16:02:01.617821-0500	RedLemon	   INPUT[106]: Weapons (2025) En 2160p UHD HDR10  X265 HEVC 10 bit | 2160p | zilean
-default	16:02:01.618081-0500	RedLemon	   INPUT[107]: Weapons (2025) En 1080p X265 HEVC 10 bit | 1080p | zilean
-default	16:02:01.618489-0500	RedLemon	   INPUT[108]: Weapons [2025] mkv | Unknown | zilean
-default	16:02:01.618762-0500	RedLemon	   INPUT[109]: Weapons 2025 1080p TS EN-RGB | 1080p | zilean
-default	16:02:01.618972-0500	RedLemon	   INPUT[110]: Weapons.2025.2160p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.DoVi.HDR.H.265-TURG
-👤 29 💾 8.33 GB ⚙️ ThePirateBay
-Dual Audio | 2160p | torrentio
-default	16:02:01.619170-0500	RedLemon	   INPUT[111]: Weapons.2025.bluray.hdr.2160p.av1-7.1.opus-Dust
-👤 15 💾 3.19 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:01.619947-0500	RedLemon	   INPUT[112]: Weapons (2025) 2160p H265 BluRay Rip 10 bit DV HDR10+ ita eng AC3 5.1 sub ita eng NUeng Licdom
-👤 13 💾 2.91 GB ⚙️ ilCorSaRoNeRo
-🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	16:02:01.620532-0500	RedLemon	   INPUT[113]: Weapons (2025) 2160p H265 HDR10 DV iTA EnG AC3 Sub iTA EnG-MIRCrew
-👤 11 💾 3.57 GB ⚙️ ilCorSaRoNeRo
-🇬🇧 / 🇮🇹 | 2160p | torrentio
-default	16:02:01.620752-0500	RedLemon	   INPUT[114]: Weapons 2025 UHD BluRay 2160p HDR10 DV HEVC TrueHD Atmos 7.1 x265-E
-👤 9 💾 26.84 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:01.621027-0500	RedLemon	   INPUT[115]: A.Hora.do.Mal.2025.WEB-DL.2160p.DV.HDR10 .x265.DUAL.5.1-SF
-👤 7 💾 23.13 GB ⚙️ BluDV
-Dual Audio / 🇬🇧 / 🇵🇹 | 2160p | torrentio
-default	16:02:01.621171-0500	RedLemon	   INPUT[116]: La.hora.de.la.desaparicion.2025.WEB-DL.4k.HDR-Dual-Lat
-👤 6 💾 22.63 GB ⚙️ Cinecalidad
-Dual Audio / 🇲🇽 | Unknown | torrentio
-default	16:02:01.621278-0500	RedLemon	   INPUT[117]: Weapons.2025.Hybrid.2160p.WEB-DL.DV.HDR.DDP5.1.Atmos.H265-AOC
-👤 5 💾 22.66 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:01.621943-0500	RedLemon	   INPUT[118]: Орудия / Weapons (2025) WEB-DL-HEVC 2160p от ELEKTRI4KA | 4K | SDR | D P A | Movie Dubbing Red Head Sound HDrezka Studio Сербин
-👤 34 💾 15.53 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 2160p | torrentio
-default	16:02:01.624063-0500	RedLemon	   INPUT[119]: Weapons (La hora de la desaparicion) (2025) [4k 2160p][Esp]
-👤 26 💾 23.53 GB ⚙️ Wolfmax4k
-🇪🇸 | 2160p | torrentio
-default	16:02:01.625046-0500	RedLemon	   INPUT[120]: Weapons.2025.UHD.2160p.10bit.iTunes.WEBRip.AV1.English.DDP5.1.ESubs-DaddyCooL
-👤 17 💾 4.91 GB ⚙️ 1337x | 2160p | torrentio
-default	16:02:01.625507-0500	RedLemon	   INPUT[121]: Weapons.2025.2160p.iT.WEB-DL.SDR.ENG.LATINO.DDP5.1.H265.MP4-BTM
-👤 7 💾 12.47 GB ⚙️ ThePirateBay
-Multi Audio / 🇬🇧 / 🇲🇽 | 2160p | torrentio
-default	16:02:01.626400-0500	RedLemon	   INPUT[122]: Weapons 2025 UHD BluRay 1080p DD Atmos 5 1 DoVi HDR10 x265-SM737
-👤 25 💾 5.69 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.626826-0500	RedLemon	   INPUT[123]: Weapons.2025.1080p.MA.WEBRip.10Bit.DDP5.1.x265-NeoNoir
-👤 112 💾 1.74 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.627285-0500	RedLemon	   INPUT[124]: Weapons 2025 1080p BluRay
-👤 100 💾 2.37 GB ⚙️ YTS | 1080p | torrentio
-default	16:02:01.628329-0500	RedLemon	   INPUT[125]: Weapons 2025 1080p WEBRip
-👤 100 💾 2.15 GB ⚙️ YTS | 1080p | torrentio
-default	16:02:01.630496-0500	RedLemon	   INPUT[126]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
-👤 88 💾 1.35 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.631380-0500	RedLemon	   INPUT[127]: A.Hora.do.Mal.2025.1080p.FULL.HD.WEB-DL.DUAL.5.1
-👤 84 💾 7.59 GB ⚙️ Comando
-Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:01.631742-0500	RedLemon	   INPUT[128]: A Hora do Mal 2025 WEB-DL 1080p x264 DUAL 5.1
-👤 53 💾 2.94 GB ⚙️ BluDV
-Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:01.632416-0500	RedLemon	   INPUT[129]: Weapons.2025.1080p.WEB-DL.MA.h265.EAC3
-👤 44 💾 7.58 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.632841-0500	RedLemon	   INPUT[130]: Weapons (2025) Eng 1080p WEBRip x264 AAC ESub
-👤 42 💾 1.98 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.633177-0500	RedLemon	   INPUT[131]: Weapons (2025) FullHD 1080p.H264 Webdl Ita Eng AC3 5.1 Multisub - realDMDJ
-👤 33 💾 2.89 GB ⚙️ ilCorSaRoNeRo
-Multi Subs / 🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	16:02:01.633399-0500	RedLemon	   INPUT[132]: Weapons.2025.iTA-ENG.Bluray.1080p.x264-CYBER.mkv
-👤 31 💾 8.79 GB ⚙️ 1337x
-🇬🇧 / 🇮🇹 | 1080p | torrentio
-default	16:02:01.634393-0500	RedLemon	   INPUT[133]: Weapons 2025 1080p REPACK WEBRip DDP 5 1 Atmos 10bit H 265-iVy
-👤 21 💾 1.83 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.635998-0500	RedLemon	   INPUT[134]: Weapons (La hora de la desaparicion) (2025) [Bluray 1080p][Esp]
-👤 18 💾 7.83 GB ⚙️ Wolfmax4k
-🇪🇸 | 1080p | torrentio
-default	16:02:01.636467-0500	RedLemon	   INPUT[135]: Weapons.2025.MULTi.VF2.1080p.WEB.H264-SUPPLY.mkv
-👤 18 💾 8.17 GB ⚙️ Torrent9
-Multi Audio / 🇫🇷 | 1080p | torrentio
-default	16:02:01.636735-0500	RedLemon	   INPUT[136]: Weapons 2025 1080p AMZN WEB-DL DDP5 1 H 264-BYNDR
-👤 16 💾 7.02 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.637087-0500	RedLemon	   INPUT[137]: Weapons.2025.1080p.ITA-ENG-SPA.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
-👤 13 💾 1.45 GB ⚙️ ilCorSaRoNeRo
-Multi Audio / 🇬🇧 / 🇮🇹 / 🇪🇸 | 1080p | torrentio
-default	16:02:01.637597-0500	RedLemon	   INPUT[138]: Weapons 2025 1080p Blu-Ray HEVC x265 10Bit DDP5.1 Subs KINGDOM
-👤 11 💾 6.09 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.638004-0500	RedLemon	   INPUT[139]: A.Hora.do.Mal.2025.1080p.WEB-DL.DUAL.5.1
-👤 11 💾 2.94 GB ⚙️ Comando
-Dual Audio / 🇬🇧 / 🇵🇹 | 1080p | torrentio
-default	16:02:01.638292-0500	RedLemon	   INPUT[140]: Weapons 2025 1080p BluRay x265 HEVC 10bit AAC 7 1 HeVK Zach C
-👤 10 💾 12.29 GB ⚙️ TorrentGalaxy | 1080p | torrentio
-default	16:02:01.638495-0500	RedLemon	   INPUT[141]: Weapons 2025 1080p WEB-DL HEVC x265 10Bit DDP5.1 Subs KINGDOM
-👤 8 💾 6.25 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.638778-0500	RedLemon	   INPUT[142]: Weapons 2025 1080p MA WEB-DL DDP5 1 Atmos H 264-BYNDR
-👤 8 💾 7.64 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.639044-0500	RedLemon	   INPUT[143]: Weapons 2025 1080p WebRip EAC3 5 1 x265-Lootera
-👤 8 💾 2.62 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.639585-0500	RedLemon	   INPUT[144]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
-Weapons 2025 1080p WEB-Rip  HEVC x265 10Bit DDP5 1 Subs KINGDOM.mkv
-👤 7 💾 6.25 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.641129-0500	RedLemon	   INPUT[145]: Weapons.2025.1080p.HMAX.WEB-DL.DUAL.DDP5.1.Atmos.H.265-TURG
-👤 6 💾 3.46 GB ⚙️ ThePirateBay
-Dual Audio | 1080p | torrentio
-default	16:02:01.641601-0500	RedLemon	   INPUT[146]: Weapons 2025 1080p WEB-Rip HEVC x265 10Bit DDP5 1 Subs KINGDOM
-👤 6 💾 6.25 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.642091-0500	RedLemon	   INPUT[147]: Veliki.paket.titlovanih.filmova.2025.14.1080p.x264.[ExYuSubs] ⭐
-Weapons.2025.1080p.WEBRip.x264.[ExYuSubs]/Weapons.2025.1080p.WEBRip.x264.[ExYuSubs].mp4
-👤 5 💾 2.01 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.642596-0500	RedLemon	   INPUT[148]: Weapons.2025.1080p.Blu-ray.Remux.AVC.TrueHD.Atmos.7.1-CiNEPHiLES
-👤 5 💾 29.87 GB ⚙️ 1337x | 1080p | torrentio
-default	16:02:01.643287-0500	RedLemon	   INPUT[149]: Weapons 2025 1080p BluRay x265-YAWNTiC
-👤 5 💾 7.83 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.643534-0500	RedLemon	   INPUT[150]: Орудия / Weapons (2025) WEB-DLRip 1080p | D P A | Movie Dubbing HDrezka Studio Сербин
-👤 5 💾 16.32 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 1080p | torrentio
-default	16:02:01.644165-0500	RedLemon	   INPUT[151]: Weapons 2025 REPACK 1080p WEB-DL HEVC x265-RMTeam
-👤 5 💾 1.35 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.644646-0500	RedLemon	   INPUT[152]: Weapons 2025 1080p MA WEBRip 10Bit DDP5 1 x265-NeoNoir
-👤 5 💾 1.74 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.645083-0500	RedLemon	   INPUT[153]: Weapons 2025 720p BluRay
-👤 100 💾 1.15 GB ⚙️ YTS | 720p | torrentio
-default	16:02:01.646193-0500	RedLemon	   INPUT[154]: Weapons 2025 720p WEBRip
-👤 100 💾 1.15 GB ⚙️ YTS | 720p | torrentio
-default	16:02:01.651093-0500	RedLemon	   INPUT[155]: Орудия / Weapons (2025) BDRip 720p от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
-👤 36 💾 5.59 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:01.651401-0500	RedLemon	   INPUT[156]: Weapons (La hora de la desaparicion) (2025) [Bluray 720p][Esp]
-👤 36 💾 3.34 GB ⚙️ Wolfmax4k
-🇪🇸 | 720p | torrentio
-default	16:02:01.651563-0500	RedLemon	   INPUT[157]: Weapons.2025.TRUEFRENCH.VF2.720p.WEB.H264-SUPPLY.mkv
-👤 32 💾 3.68 GB ⚙️ Torrent9
-🇫🇷 | 720p | torrentio
-default	16:02:01.651783-0500	RedLemon	   INPUT[158]: Орудия / Weapons (2025) WEB-DL 720p от селезень | D | Movie Dubbing Red Head Sound
-👤 26 💾 4.03 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:01.651969-0500	RedLemon	   INPUT[159]: Орудия / Weapons (2025) WEB-DL 720p от селезень | P | HDrezka Studio
-👤 23 💾 3.45 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:01.652092-0500	RedLemon	   INPUT[160]: Орудия / Weapons (2025) WEB-DLRip 720p | D P A
-👤 16 💾 7.02 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | 720p | torrentio
-default	16:02:01.652194-0500	RedLemon	   INPUT[161]: Weapons (2025) 720p WEBRip-LAMA
-👤 7 💾 1.15 GB ⚙️ ThePirateBay | 720p | torrentio
-default	16:02:01.652293-0500	RedLemon	   INPUT[162]: Weapons 2025 576p WEBRip x265 AAC-SSN
-👤 5 💾 1.57 GB ⚙️ ThePirateBay | Unknown | torrentio
-default	16:02:01.652476-0500	RedLemon	   INPUT[163]: Weapons 2025 1080p TS EN-RGB
-👤 28 💾 5.77 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.652642-0500	RedLemon	   INPUT[164]: Weapons 2025 1080p TELESYNC x264-RGB
-👤 11 💾 5.77 GB ⚙️ ThePirateBay | 1080p | torrentio
-default	16:02:01.652832-0500	RedLemon	   INPUT[165]: Weapons.2025.1080p.TELESYNC.V2.MULTi.x264-SyncUP
-👤 7 💾 6.07 GB ⚙️ ThePirateBay
-Multi Audio | 1080p | torrentio
-default	16:02:01.652981-0500	RedLemon	   INPUT[166]: Weapons.2025.FRENCH.VF2.WEBRip.x264-LACTEL.mkv
-👤 96 💾 1.22 GB ⚙️ Torrent9
-🇫🇷 | Unknown | torrentio
-default	16:02:01.653251-0500	RedLemon	   INPUT[167]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | P | HDrezka Studio
-👤 94 💾 2.29 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:01.653417-0500	RedLemon	   INPUT[168]: Орудия / Weapons (2025) BDRip-AVC от селезень | D | Movie Dubbing Red Head Sound
-👤 75 💾 2.35 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:01.653651-0500	RedLemon	   INPUT[169]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | D | Movie Dubbing
-👤 44 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	16:02:01.653887-0500	RedLemon	   INPUT[170]: Орудия / Weapons (2025) WEB-DLRip от ELEKTRI4KA | P | HDrezka Studio
-👤 30 💾 1.47 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	16:02:01.654021-0500	RedLemon	   INPUT[171]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | D | Movie Dubbing Red Head Sound
-👤 27 💾 2.29 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:01.654192-0500	RedLemon	   INPUT[172]: Орудия / Weapons (2025) WEB-DLRip от DoMiNo & селезень | D | Red Head Sound
-👤 14 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	16:02:01.654309-0500	RedLemon	   INPUT[173]: Орудия / Weapons (2025) HDRip-AVC от ExKinoRay | D | Red Head Sound
-👤 9 💾 745.46 MB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:01.654462-0500	RedLemon	   INPUT[174]: Орудия / Weapons (2025) BDRip от MegaPeer | D | Movie Dubbing
-👤 6 💾 1.46 GB ⚙️ Rutor
-🇷🇺 | Unknown | torrentio
-default	16:02:01.654653-0500	RedLemon	   INPUT[175]: Орудия / Weapons (2025) WEB-DLRip-AVC от DoMiNo & селезень | Sub
-👤 5 💾 1.95 GB ⚙️ Rutor
-🇬🇧 / 🇷🇺 | Unknown | torrentio
-default	16:02:01.654880-0500	RedLemon	   INPUT[176]: Weapons (2025) SD H264 MP4 ITA [HD4ME]
-👤 5 💾 713.92 MB ⚙️ ilCorSaRoNeRo
-🇬🇧 / 🇮🇹 | Unknown | torrentio
-default	16:02:01.655040-0500	RedLemon	   INPUT[177]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:01.655205-0500	RedLemon	   INPUT[178]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:01.655426-0500	RedLemon	   INPUT[179]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:01.655684-0500	RedLemon	   INPUT[180]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:01.656560-0500	RedLemon	   INPUT[181]: [RD⚡] Comet 2160p | 2160p | comet
-default	16:02:01.657618-0500	RedLemon	   INPUT[182]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:01.658215-0500	RedLemon	   INPUT[183]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:01.658694-0500	RedLemon	   INPUT[184]: [RD⚡] Comet 1080p | 1080p | comet
-default	16:02:01.659152-0500	RedLemon	🔍 Searching SubDL for subtitles: tt26581740 (movie)
-default	16:02:01.659769-0500	RedLemon	Task <F750CDEA-3E4F-4820-ADB0-5EA6C04080C1>.<391> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
-default	16:02:01.663589-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [219E07B0-8C0C-43D1-A9C0-55D8ECBD7665] (reporting strategy default)> on Task <F750CDEA-3E4F-4820-ADB0-5EA6C04080C1>.<391> was not selected for reporting
-default	16:02:01.664211-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:01.664516-0500	RedLemon	Task <F750CDEA-3E4F-4820-ADB0-5EA6C04080C1>.<391> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:01.665642-0500	runningboardd	Invalidating assertion 169-5311-1028 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:01.664680-0500	RedLemon	Task <F750CDEA-3E4F-4820-ADB0-5EA6C04080C1>.<391> now using Connection 17
-default	16:02:01.664891-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1498B26C-8AC3-4610-B686-AB06F728A479] (reporting strategy default)> on Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> was not selected for reporting
-default	16:02:01.667051-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:01.667355-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> now using Connection 1
-default	16:02:01.668356-0500	RedLemon	0x7f862e2ba528 ID=12 Task <F750CDEA-3E4F-4820-ADB0-5EA6C04080C1>.<391> sent request, body N 0
-default	16:02:01.668472-0500	RedLemon	0x7f862e25fe88 ID=872 Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> sent request, body N 0
-default	16:02:01.739526-0500	RedLemon	0x7f862e25fe88 ID=872 Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> received response, status 200 content U
-default	16:02:01.740272-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> response ended
-default	16:02:01.740767-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> done using Connection 1
-default	16:02:01.740999-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=2, request_duration_ms=1, response_start_ms=73, response_duration_ms=1, request_bytes=500, response_bytes=953, cache_hit=false}
-default	16:02:01.741550-0500	RedLemon	Task <EFE6276B-ECBB-4E05-8DDA-954477C8F8E8>.<392> finished successfully
-default	16:02:01.742952-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1029 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:02:01.743161-0500	runningboardd	Assertion 169-5311-1029 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:01.744378-0500	runningboardd	Attempting to rename power assertion 33546 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1028:com.apple.CFNetwork.StorageDB;169-5311-1029:com.apple.CFNetwork.StorageDB
-default	16:02:01.744659-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:01.744765-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:01.744860-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:01.782185-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:01.841701-0500	runningboardd	Attempting to rename power assertion 33546 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1029:com.apple.CFNetwork.StorageDB
-default	16:02:01.841774-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:01.841847-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:01.841939-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:01.951224-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:01.951832-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4C4566E7-C3B4-4660-9C0E-EAE5D7481B52] (reporting strategy default)> on Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> was not selected for reporting
-default	16:02:01.952491-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:01.952722-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> now using Connection 1
-default	16:02:01.953599-0500	RedLemon	0x7f863156b3a8 ID=876 Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> sent request, body N 0
-default	16:02:02.018668-0500	RedLemon	0x7f863156b3a8 ID=876 Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> received response, status 200 content U
-default	16:02:02.019145-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> response ended
-default	16:02:02.019423-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> done using Connection 1
-default	16:02:02.019596-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:02.019929-0500	RedLemon	Task <99805A74-37E3-4039-883A-897FE3624A55>.<393> finished successfully
-default	16:02:02.021323-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:02.021629-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0DC11C7C-251D-4995-B458-5FBBE2C0D8EC] (reporting strategy default)> on Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> was not selected for reporting
-default	16:02:02.022303-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:02.022501-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> now using Connection 1
-default	16:02:02.023269-0500	RedLemon	0x7f863179fe78 ID=880 Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> sent request, body N 0
-default	16:02:02.089616-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:02.150042-0500	RedLemon	0x7f863179fe78 ID=880 Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> received response, status 200 content U
-default	16:02:02.151387-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> response ended
-default	16:02:02.152081-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> done using Connection 1
-default	16:02:02.152369-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> summary for task success {transaction_duration_ms=130, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=127, response_duration_ms=2, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:02.152833-0500	RedLemon	Task <625B05D3-25F4-4600-A02B-E798B5BF44DE>.<394> finished successfully
-default	16:02:02.154577-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:02.154891-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A3D24430-155A-444B-B974-32D0DAA33707] (reporting strategy default)> on Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> was not selected for reporting
-default	16:02:02.155709-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:02.155910-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> now using Connection 1
-default	16:02:02.156640-0500	RedLemon	0x7f8632dbf1b8 ID=884 Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> sent request, body N 0
-default	16:02:02.178417-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:02.229059-0500	RedLemon	0x7f8632dbf1b8 ID=884 Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> received response, status 200 content U
-default	16:02:02.229648-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> response ended
-default	16:02:02.230093-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> done using Connection 1
-default	16:02:02.230321-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=73, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
-default	16:02:02.230829-0500	RedLemon	Task <4D2AF094-8237-4FE2-AE15-59F1192DD719>.<395> finished successfully
-default	16:02:02.233167-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:02.272372-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:02.839675-0500	RedLemon	[C24] event: client:data_stall @38.641s
-default	16:02:02.841279-0500	runningboardd	Invalidating assertion 169-5311-1029 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-error	16:02:02.842432-0500	symptomsd	Unexpected type 4 for interface index 1 from libnetcore event EventDescription sb at 0x7fcd7b83bb00 from pid 5311 RedLemon SYMPTOM 0x6767002  flags 0x40000003 qual0 0x1 qual1 0x14bf key 421890 num additional quals 4
-default	16:02:02.844415-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/5311/1/4/1/<private>/0
-default	16:02:02.844544-0500	symptomsd	Stall symptom: RedLemon has stale endpoint for stall type (1) on interface type (4), removing it: <private>
-default	16:02:02.844623-0500	symptomsd	Stall symptom: RedLemon has 1 stale endpoints total for stall type (4) on interface type (1), removed them
-default	16:02:02.844687-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: added unique stall type (1) on interface type (4) for existing process RedLemon
-default	16:02:02.987034-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:02.987075-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:02.987119-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:02.988409-0500	runningboardd	Invalidating assertion 169-103-1027 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:03.142143-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:03.142234-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:03.142319-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:03.844532-0500	RedLemon	[C17] event: client:data_stall @124.247s
-default	16:02:03.845068-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:03.845844-0500	RedLemon	[C30] event: client:data_stall @3.220s
-default	16:02:03.846558-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [256177B5-8AA8-4621-BDC4-2499B8523D5E] (reporting strategy default)> on Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> was not selected for reporting
-default	16:02:03.848169-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:03.848572-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> now using Connection 1
-default	16:02:03.850069-0500	RedLemon	0x7f863179fe78 ID=888 Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> sent request, body N 0
-default	16:02:03.852371-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/5311/5/1/1/<private>/0
-default	16:02:03.852483-0500	symptomsd	Stall symptom: RedLemon has stale endpoint for stall type (1) on interface type (1), removing it: <private>
-default	16:02:03.852551-0500	symptomsd	Stall symptom: RedLemon has stale endpoint for stall type (1) on interface type (1), removing it: <private>
-default	16:02:03.852633-0500	symptomsd	Stall symptom: RedLemon has 1 stale endpoints total for stall type (1) on interface type (2), removed them
-default	16:02:03.852701-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: added unique stall type (1) on interface type (1) for existing process RedLemon
-error	16:02:03.853785-0500	symptomsd	Unexpected type 4 for interface index 1 from libnetcore event EventDescription sb at 0x7fcd7b923e00 from pid 5311 RedLemon SYMPTOM 0x6767002  flags 0x40000003 qual0 0x1 qual1 0x14bf key 421890 num additional quals 4
-default	16:02:03.855123-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/5311/1/4/1/<private>/0
-default	16:02:03.855195-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: RedLemon has preexisting endpoint match for stall type (1) within time range on interface type (4), updating timestamp: <private>
-default	16:02:03.927026-0500	RedLemon	0x7f863179fe78 ID=888 Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> received response, status 200 content U
-default	16:02:03.927695-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> response ended
-default	16:02:03.928181-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> done using Connection 1
-default	16:02:03.928411-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> summary for task success {transaction_duration_ms=80, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=79, response_duration_ms=1, request_bytes=500, response_bytes=954, cache_hit=true}
-default	16:02:03.929003-0500	RedLemon	Task <7E4BF719-A3E4-4EAE-BAD6-0D77CDBCC0CD>.<396> finished successfully
-default	16:02:03.930581-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1030 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:02:03.930794-0500	runningboardd	Assertion 169-5311-1030 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:03.932535-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:03.932583-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:03.932701-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:03.934066-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1031 target:5311 attributes:[
+default	16:41:35.817668-0500	RedLemon	   INPUT[177]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:41:35.817918-0500	RedLemon	   INPUT[178]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:41:35.818173-0500	RedLemon	   INPUT[179]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:41:35.818265-0500	RedLemon	   INPUT[180]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:41:35.818344-0500	RedLemon	   INPUT[181]: [RD⚡] Comet 2160p | 2160p | comet
+default	16:41:35.818418-0500	RedLemon	   INPUT[182]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:41:35.818491-0500	RedLemon	   INPUT[183]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:41:35.818562-0500	RedLemon	   INPUT[184]: [RD⚡] Comet 1080p | 1080p | comet
+default	16:41:35.818834-0500	RedLemon	🔍 Searching SubDL for subtitles: tt26581740 (movie)
+default	16:41:35.819072-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> resuming, timeouts(60.0, 604800.0) QOS(0x15) Voucher (null)
+default	16:41:35.880919-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3FC0CC11-6047-4801-9B46-DA1555CDDEB7] (reporting strategy default)> on Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> was not selected for reporting
+default	16:41:35.886480-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:35.886847-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> now using Connection 30
+default	16:41:35.887752-0500	RedLemon	0x7fe23e18ced8 ID=4 Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> sent request, body N 0
+default	16:41:35.929761-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1777 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:03.934308-0500	runningboardd	Assertion 169-103-1031 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:03.935914-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:03.935965-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:03.936012-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:03.965658-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:04.374672-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:04.375128-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [775789C2-8D8E-4AF0-B0BE-F98806D6CE98] (reporting strategy default)> on Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> was not selected for reporting
-default	16:02:04.376446-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:04.376785-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> now using Connection 1
-default	16:02:04.378231-0500	RedLemon	0x7f86315c33d8 ID=892 Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> sent request, body N 0
-default	16:02:04.448755-0500	RedLemon	0x7f86315c33d8 ID=892 Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> received response, status 200 content U
-default	16:02:04.449441-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> response ended
-default	16:02:04.450158-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> done using Connection 1
-default	16:02:04.450777-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=72, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:04.451095-0500	RedLemon	Task <0DE7EF11-E4E5-40F6-AE5F-650261EDF7AF>.<397> finished successfully
-default	16:02:04.453454-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:04.453772-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [14A68491-9F08-41C2-AB86-DF316EC5C227] (reporting strategy default)> on Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> was not selected for reporting
-default	16:02:04.454488-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:04.454691-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> now using Connection 1
-default	16:02:04.455463-0500	RedLemon	0x7f863179fe78 ID=896 Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> sent request, body N 0
-default	16:02:04.469934-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:04.524813-0500	RedLemon	0x7f863179fe78 ID=896 Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> received response, status 200 content U
-default	16:02:04.526031-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> response ended
-default	16:02:04.526503-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> done using Connection 1
-default	16:02:04.526871-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=70, response_duration_ms=2, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:04.527509-0500	RedLemon	Task <40354BA8-5208-4DC2-846E-86AC51DBA2E9>.<398> finished successfully
-default	16:02:04.529489-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:04.529799-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9F2D4162-7FE4-4A65-B434-A41E7A87EBA9] (reporting strategy default)> on Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> was not selected for reporting
-default	16:02:04.530615-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:04.530817-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> now using Connection 1
-default	16:02:04.531584-0500	RedLemon	0x7f863179fe78 ID=900 Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> sent request, body N 0
-default	16:02:04.540298-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:04.604927-0500	RedLemon	0x7f863179fe78 ID=900 Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> received response, status 200 content U
-default	16:02:04.605519-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> response ended
-default	16:02:04.605959-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> done using Connection 1
-default	16:02:04.606188-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> summary for task success {transaction_duration_ms=76, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=74, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:04.606844-0500	RedLemon	Task <F89BCBF8-87F5-40F7-BDD3-1DD5179C9AD9>.<399> finished successfully
-default	16:02:04.608937-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:04.643593-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:04.941548-0500	runningboardd	Invalidating assertion 169-5311-1030 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:05.086462-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:05.086546-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:05.086675-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:05.088481-0500	runningboardd	Invalidating assertion 169-103-1031 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:05.219839-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:05.219938-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:05.220029-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:05.953279-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:05.953815-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [95C36DEA-E142-47AF-BEA2-B878B383088C] (reporting strategy default)> on Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> was not selected for reporting
-default	16:02:05.954746-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:05.954940-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> now using Connection 1
-default	16:02:05.955727-0500	RedLemon	0x7f8631531168 ID=904 Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> sent request, body N 0
-default	16:02:06.028023-0500	RedLemon	0x7f8631531168 ID=904 Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> received response, status 200 content U
-default	16:02:06.029205-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> response ended
-default	16:02:06.029653-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> done using Connection 1
-default	16:02:06.030030-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=73, response_duration_ms=2, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:02:06.030646-0500	RedLemon	Task <6AE51730-51E6-4A6D-B183-E4D74DEA38C7>.<400> finished successfully
-default	16:02:06.032058-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1032 target:5311 attributes:[
+default	16:41:35.929994-0500	runningboardd	Assertion 169-103-1777 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:35.934010-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:35.934055-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:35.934099-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:35.934237-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:35.934279-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:35.934322-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:36.695925-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:36.696475-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [150CEAE8-A8BD-4DC5-8D10-78778A803E66] (reporting strategy default)> on Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> was not selected for reporting
+default	16:41:36.697704-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:36.698040-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> now using Connection 1
+default	16:41:36.699455-0500	RedLemon	0x7fe23e1f1558 ID=2516 Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> sent request, body N 0
+default	16:41:36.768330-0500	RedLemon	0x7fe23e1f1558 ID=2516 Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> received response, status 200 content U
+default	16:41:36.769201-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> response ended
+default	16:41:36.769854-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> done using Connection 1
+default	16:41:36.770140-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> summary for task success {transaction_duration_ms=73, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=70, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:36.770500-0500	RedLemon	Task <924D342D-2ADE-4BF3-A5D0-214863F371D1>.<703> finished successfully
+default	16:41:36.772972-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:36.773377-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [86ED711B-F1B8-494C-87E4-9F987E81569C] (reporting strategy default)> on Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> was not selected for reporting
+default	16:41:36.774060-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:36.774255-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> now using Connection 1
+default	16:41:36.775111-0500	RedLemon	0x7fe23e1f1558 ID=2520 Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> sent request, body N 0
+default	16:41:36.782593-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:36.846954-0500	RedLemon	0x7fe23e1f1558 ID=2520 Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> received response, status 200 content U
+default	16:41:36.847803-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> response ended
+default	16:41:36.848234-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> done using Connection 1
+default	16:41:36.848481-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> summary for task success {transaction_duration_ms=74, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=72, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:36.849082-0500	RedLemon	Task <0FF8E328-6032-4604-BE3F-C597CA86B7E3>.<704> finished successfully
+default	16:41:36.851181-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:36.851490-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0DC380ED-AC8D-4E51-8B2C-98C381DA7BB0] (reporting strategy default)> on Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> was not selected for reporting
+default	16:41:36.852159-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:36.852361-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> now using Connection 1
+default	16:41:36.853117-0500	RedLemon	0x7fe23b3e4448 ID=2524 Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> sent request, body N 0
+default	16:41:36.863951-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:36.930119-0500	RedLemon	0x7fe23b3e4448 ID=2524 Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> received response, status 200 content U
+default	16:41:36.931063-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> response ended
+default	16:41:36.932030-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> done using Connection 1
+default	16:41:36.932775-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> summary for task success {transaction_duration_ms=80, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=78, response_duration_ms=2, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:36.933156-0500	RedLemon	Task <04C0156D-60CE-4191-A8CE-895514DCAEE9>.<705> finished successfully
+default	16:41:36.934700-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:36.944859-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:37.031488-0500	runningboardd	Invalidating assertion 169-6308-1776 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:37.142357-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:37.142402-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:37.142446-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:37.143537-0500	runningboardd	Invalidating assertion 169-103-1777 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:37.308928-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:37.308979-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:37.309031-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:38.096164-0500	RedLemon	[C40] event: client:data_stall @3.011s
+error	16:41:38.098752-0500	symptomsd	Unexpected type 4 for interface index 1 from libnetcore event EventDescription sb at 0x7fcd7b93b000 from pid 6308 RedLemon SYMPTOM 0x6767002  flags 0x40000003 qual0 0x1 qual1 0x18a4 key 421890 num additional quals 4
+default	16:41:38.100624-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/6308/1/4/1/<private>/0
+default	16:41:38.100711-0500	symptomsd	Stall symptom: RedLemon has stale endpoint for stall type (1) on interface type (4), removing it: <private>
+default	16:41:38.100778-0500	symptomsd	Stall symptom: RedLemon has 1 stale endpoints total for stall type (4) on interface type (1), removed them
+default	16:41:38.100837-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: added unique stall type (1) on interface type (4) for existing process RedLemon
+default	16:41:38.905226-0500	RedLemon	[C30] event: client:data_stall @115.744s
+default	16:41:38.909044-0500	symptomsd	Stall symptom detail: (symName/procName/ePid/ifIndex/interfaceType/stallType/endpoint/isFgOrBg): SYMPTOM_LIBNETCORE_DATA_STALL/RedLemon/6308/5/1/1/<private>/0
+default	16:41:38.909154-0500	symptomsd	Stall symptom SYMPTOM_LIBNETCORE_DATA_STALL: added unique stall type (1) on interface type (1) for existing process RedLemon
+default	16:41:39.097054-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:39.097632-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [93C31EE2-6A5A-4E9D-9304-DAFFEA89819C] (reporting strategy default)> on Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> was not selected for reporting
+default	16:41:39.098864-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:39.099200-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> now using Connection 1
+default	16:41:39.100488-0500	RedLemon	0x7fe23c313bd8 ID=2528 Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> sent request, body N 0
+default	16:41:39.182023-0500	RedLemon	0x7fe23c313bd8 ID=2528 Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> received response, status 200 content U
+default	16:41:39.182847-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> response ended
+default	16:41:39.183290-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> done using Connection 1
+default	16:41:39.183542-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> summary for task success {transaction_duration_ms=85, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=83, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:39.184163-0500	RedLemon	Task <03814F2D-DA58-4D23-B315-4F8D77EB09D5>.<706> finished successfully
+default	16:41:39.185239-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1778 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:06.032248-0500	runningboardd	Assertion 169-5311-1032 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:06.033334-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:06.033390-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:06.033580-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:06.036652-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1033 target:5311 attributes:[
+default	16:41:39.185471-0500	runningboardd	Assertion 169-6308-1778 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:39.185894-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:39.186276-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [18A79656-246D-49DD-B154-4EFE456EE256] (reporting strategy default)> on Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> was not selected for reporting
+default	16:41:39.187025-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:39.187316-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> now using Connection 1
+default	16:41:39.188425-0500	RedLemon	0x7fe23c313bd8 ID=2532 Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> sent request, body N 0
+default	16:41:39.189157-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:39.189347-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:39.189404-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:39.191029-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1779 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:06.036828-0500	runningboardd	Assertion 169-103-1033 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:06.037837-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:06.037890-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:06.037944-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:06.043560-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:06.809189-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:06.809789-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A15242DD-76DC-4FFF-98E4-F381FABFF730] (reporting strategy default)> on Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> was not selected for reporting
-default	16:02:06.811045-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:06.811383-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> now using Connection 1
-default	16:02:06.812781-0500	RedLemon	0x7f8631531168 ID=908 Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> sent request, body N 0
-default	16:02:06.888592-0500	RedLemon	0x7f8631531168 ID=908 Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> received response, status 200 content U
-default	16:02:06.889370-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> response ended
-default	16:02:06.889744-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> done using Connection 1
-default	16:02:06.889928-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> summary for task success {transaction_duration_ms=79, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=78, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
-default	16:02:06.890299-0500	RedLemon	Task <DC6F4FE5-CA57-435A-91C4-BF5BE10FBD9E>.<401> finished successfully
-default	16:02:06.892290-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:06.892620-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BE74C932-54C1-4523-90BC-8E4E3D8D1659] (reporting strategy default)> on Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> was not selected for reporting
-default	16:02:06.893373-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:06.893575-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> now using Connection 1
-default	16:02:06.894361-0500	RedLemon	0x7f863179fe78 ID=912 Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> sent request, body N 0
-default	16:02:06.908441-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:06.962379-0500	RedLemon	0x7f863179fe78 ID=912 Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> received response, status 200 content U
-default	16:02:06.963087-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> response ended
-default	16:02:06.963453-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> done using Connection 1
-default	16:02:06.963618-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=841, cache_hit=true}
-default	16:02:06.964014-0500	RedLemon	Task <6085209B-28A6-4100-AA72-052624CB6380>.<402> finished successfully
-default	16:02:06.966208-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:06.966562-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C6810714-81A8-4872-BEB4-6F96596FCCF7] (reporting strategy default)> on Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> was not selected for reporting
-default	16:02:06.967566-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:06.967817-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> now using Connection 1
-default	16:02:06.969330-0500	RedLemon	0x7f862e3fce28 ID=916 Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> sent request, body N 0
-default	16:02:06.977035-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:07.040873-0500	RedLemon	0x7f862e3fce28 ID=916 Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> received response, status 200 content U
-default	16:02:07.041266-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> response ended
-default	16:02:07.041567-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> done using Connection 1
-default	16:02:07.041760-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> summary for task success {transaction_duration_ms=74, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=73, response_duration_ms=0, request_bytes=524, response_bytes=841, cache_hit=true}
-default	16:02:07.042099-0500	RedLemon	Task <7B6348D1-4103-4AA4-85D9-4915F1DB283A>.<403> finished successfully
-default	16:02:07.043030-0500	runningboardd	Invalidating assertion 169-5311-1032 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:07.043729-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:07.064806-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:07.064851-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:07.064990-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:07.067291-0500	runningboardd	Invalidating assertion 169-103-1033 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:07.083106-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:07.083270-0500	RedLemon	CoreAnimation: warning, deleted thread with uncommitted CATransaction; set CA_DEBUG_TRANSACTIONS=1 in environment to log backtraces, or set CA_ASSERT_MAIN_THREAD_TRANSACTIONS=1 to abort when an implicit transaction isn't created on a main thread.
-default	16:02:07.178234-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:07.178308-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:07.178381-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:08.168637-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:08.169337-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1044CB48-91CD-4A0F-82A6-867224913EBA] (reporting strategy default)> on Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> was not selected for reporting
-default	16:02:08.170643-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:08.171089-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> now using Connection 1
-default	16:02:08.172451-0500	RedLemon	0x7f863179fe78 ID=920 Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> sent request, body N 0
-default	16:02:08.240017-0500	RedLemon	0x7f863179fe78 ID=920 Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> received response, status 200 content U
-default	16:02:08.240602-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> response ended
-default	16:02:08.241040-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> done using Connection 1
-default	16:02:08.241266-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=69, response_duration_ms=1, request_bytes=500, response_bytes=954, cache_hit=true}
-default	16:02:08.241801-0500	RedLemon	Task <DBBB6C3D-DA78-4084-B2B6-CB00047814B9>.<404> finished successfully
-default	16:02:08.243561-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1036 target:5311 attributes:[
+default	16:41:39.191355-0500	runningboardd	Assertion 169-103-1779 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:39.192338-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:39.192389-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:39.192435-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:39.204896-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:39.252316-0500	RedLemon	0x7fe23c313bd8 ID=2532 Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> received response, status 200 content U
+default	16:41:39.252901-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> response ended
+default	16:41:39.253366-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> done using Connection 1
+default	16:41:39.253593-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=65, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:39.254168-0500	RedLemon	Task <3A2727F8-FB48-4B85-B425-947B042E380E>.<707> finished successfully
+default	16:41:39.256944-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:39.257244-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6EE68E05-2F86-4701-9C16-E7CC732D010A] (reporting strategy default)> on Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> was not selected for reporting
+default	16:41:39.258152-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:39.258394-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> now using Connection 1
+default	16:41:39.259133-0500	RedLemon	0x7fe23b3e4448 ID=2536 Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> sent request, body N 0
+default	16:41:39.275788-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:39.323920-0500	RedLemon	0x7fe23b3e4448 ID=2536 Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> received response, status 200 content U
+default	16:41:39.324470-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> response ended
+default	16:41:39.324899-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> done using Connection 1
+default	16:41:39.325067-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:39.325239-0500	RedLemon	Task <10448ADA-C4B0-449A-B5E7-AEBD7024F644>.<708> finished successfully
+default	16:41:39.326728-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:39.366242-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:40.242435-0500	runningboardd	Invalidating assertion 169-6308-1778 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:40.411108-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:40.411194-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:40.411267-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:40.413638-0500	runningboardd	Invalidating assertion 169-103-1779 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:40.534265-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:40.534327-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:40.534637-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:41.498286-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:41.498858-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [600C71C0-2AB1-43CF-A544-9B9F69FBA7C9] (reporting strategy default)> on Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> was not selected for reporting
+default	16:41:41.499730-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:41.499967-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> now using Connection 1
+default	16:41:41.500799-0500	RedLemon	0x7fe23c313bd8 ID=2540 Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> sent request, body N 0
+default	16:41:41.738318-0500	RedLemon	0x7fe23c313bd8 ID=2540 Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> received response, status 200 content U
+default	16:41:41.739517-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> response ended
+default	16:41:41.739959-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> done using Connection 1
+default	16:41:41.740335-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> summary for task success {transaction_duration_ms=240, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=238, response_duration_ms=2, request_bytes=511, response_bytes=838, cache_hit=true}
+default	16:41:41.741009-0500	RedLemon	Task <F38E7E74-D5A4-4904-99B2-07D17BF7EF6D>.<709> finished successfully
+default	16:41:41.743308-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1780 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:08.243797-0500	runningboardd	Assertion 169-5311-1036 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:08.245290-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:08.245388-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:08.245502-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:08.246784-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1037 target:5311 attributes:[
+default	16:41:41.743480-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:41.743539-0500	runningboardd	Assertion 169-6308-1780 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:41.743885-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DDDFBE62-A80F-4654-A170-E53C53569E8D] (reporting strategy default)> on Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> was not selected for reporting
+default	16:41:41.744641-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:41.744927-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> now using Connection 1
+default	16:41:41.745899-0500	RedLemon	0x7fe238bd8118 ID=2544 Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> sent request, body N 0
+default	16:41:41.746228-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:41.746282-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:41.746326-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:41.747958-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1781 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:08.247025-0500	runningboardd	Assertion 169-103-1037 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:08.248455-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:08.248503-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:08.248610-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:08.281011-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:09.219095-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:09.219784-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DC4F4085-D15C-41D5-956A-3C60ED705E37] (reporting strategy default)> on Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> was not selected for reporting
-default	16:02:09.221254-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:09.221590-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> now using Connection 1
-default	16:02:09.222870-0500	RedLemon	0x7f86308dd908 ID=924 Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> sent request, body N 0
-default	16:02:09.275996-0500	runningboardd	Invalidating assertion 169-5311-1036 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:09.286636-0500	RedLemon	0x7f86308dd908 ID=924 Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> received response, status 200 content U
-default	16:02:09.287890-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> response ended
-default	16:02:09.288352-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> done using Connection 1
-default	16:02:09.288578-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=65, response_duration_ms=2, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:09.289247-0500	RedLemon	Task <8580CC24-346F-4BAB-A6A8-365020FFC885>.<405> finished successfully
-default	16:02:09.290350-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1038 target:5311 attributes:[
+default	16:41:41.748193-0500	runningboardd	Assertion 169-103-1781 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:41.749119-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:41.749228-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:41.749289-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:41.754503-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:41.809261-0500	RedLemon	0x7fe238bd8118 ID=2544 Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> received response, status 200 content U
+default	16:41:41.810065-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> response ended
+default	16:41:41.810568-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> done using Connection 1
+default	16:41:41.810796-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=2, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:41.811187-0500	RedLemon	Task <CF01D3D6-B367-450C-9949-FF4FF43E153D>.<710> finished successfully
+default	16:41:41.812789-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:41.813092-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [9318753D-43BB-4318-B7AE-3C0A78D01808] (reporting strategy default)> on Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> was not selected for reporting
+default	16:41:41.813786-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:41.813994-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> now using Connection 1
+default	16:41:41.814815-0500	RedLemon	0x7fe23b3e4448 ID=2548 Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> sent request, body N 0
+default	16:41:41.885200-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:41.931597-0500	RedLemon	0x7fe23b3e4448 ID=2548 Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> received response, status 200 content U
+default	16:41:41.932542-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> response ended
+default	16:41:41.933046-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> done using Connection 1
+default	16:41:41.933275-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> summary for task success {transaction_duration_ms=119, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=117, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:41.934063-0500	RedLemon	Task <D192DF87-21C4-4847-8E75-EE20003356A4>.<711> finished successfully
+default	16:41:41.936260-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:42.069334-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:42.807907-0500	runningboardd	Invalidating assertion 169-6308-1780 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:42.978178-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:42.978225-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:42.978276-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:42.979171-0500	runningboardd	Invalidating assertion 169-103-1781 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:43.144943-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:43.144996-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:43.145045-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:44.099488-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:44.099997-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [66BC308F-C746-4577-8C5E-D8349F9E20AE] (reporting strategy default)> on Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> was not selected for reporting
+default	16:41:44.101006-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:44.101211-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> now using Connection 1
+default	16:41:44.101965-0500	RedLemon	0x7fe23b3e4448 ID=2552 Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> sent request, body N 0
+default	16:41:44.168544-0500	RedLemon	0x7fe23b3e4448 ID=2552 Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> received response, status 200 content U
+default	16:41:44.169158-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> response ended
+default	16:41:44.169590-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> done using Connection 1
+default	16:41:44.169821-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:41:44.170429-0500	RedLemon	Task <E1C95D58-62E1-42DC-8A43-BBB993BB01F5>.<712> finished successfully
+default	16:41:44.172044-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1782 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:09.290540-0500	runningboardd	Assertion 169-5311-1038 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:09.291062-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:09.291452-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D110AFF6-7563-4B4B-9182-452DB5980081] (reporting strategy default)> on Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> was not selected for reporting
-default	16:02:09.292186-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1036:com.apple.CFNetwork.StorageDB;169-5311-1038:com.apple.CFNetwork.StorageDB
-default	16:02:09.292287-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:09.292563-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> now using Connection 1
-default	16:02:09.293380-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:09.293428-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:09.293579-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:09.293483-0500	RedLemon	0x7f86308dd908 ID=928 Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> sent request, body N 0
-default	16:02:09.307923-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:09.358795-0500	RedLemon	0x7f86308dd908 ID=928 Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> received response, status 200 content U
-default	16:02:09.359719-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> response ended
-default	16:02:09.360204-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> done using Connection 1
-default	16:02:09.360440-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=66, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:09.360824-0500	RedLemon	Task <48272622-3CAA-498C-9EF6-94A2AEE22C89>.<406> finished successfully
-default	16:02:09.363118-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:09.363456-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [663322C3-9289-406B-9F3E-D959C6AA217B] (reporting strategy default)> on Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> was not selected for reporting
-default	16:02:09.364125-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:09.364311-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> now using Connection 1
-default	16:02:09.364980-0500	RedLemon	0x7f863179fe78 ID=932 Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> sent request, body N 0
-default	16:02:09.381594-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:09.426783-0500	RedLemon	0x7f863179fe78 ID=932 Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> received response, status 200 content U
-default	16:02:09.427373-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> response ended
-default	16:02:09.427819-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> done using Connection 1
-default	16:02:09.428049-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=840, cache_hit=true}
-default	16:02:09.428617-0500	RedLemon	Task <A3005870-4218-4EBD-B6CE-35704AB3FDFF>.<407> finished successfully
-default	16:02:09.430349-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:09.430495-0500	RedLemon	👋 ursinho left room
-default	16:02:09.446326-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:09.446388-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:09.446383-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1038:com.apple.CFNetwork.StorageDB
-default	16:02:09.446434-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:09.502197-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:09.758759-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:09.759191-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:09.759711-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:09.759900-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:09.760282-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:09.760363-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:09.902982-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:09.903281-0500	RedLemon	   Payload keys: timestamp, type, position, isPlaying, senderId
-default	16:02:09.903608-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:09.903748-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:09.903860-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:09.903938-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:10.167772-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:10.168152-0500	RedLemon	   Payload keys: timestamp, isPlaying, type, position, senderId
-default	16:02:10.168668-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:10.168898-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:10.169078-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:10.169184-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:10.388382-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:10.389173-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AA330507-C25F-4580-8E2A-A7832A9C41AD] (reporting strategy default)> on Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> was not selected for reporting
-default	16:02:10.390449-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:10.390743-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> now using Connection 1
-default	16:02:10.391716-0500	RedLemon	0x7f862e3fce28 ID=936 Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> sent request, body N 0
-default	16:02:10.392292-0500	runningboardd	Invalidating assertion 169-5311-1038 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:10.504101-0500	RedLemon	0x7f862e3fce28 ID=936 Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> received response, status 200 content U
-default	16:02:10.504791-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> response ended
-default	16:02:10.505254-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> done using Connection 1
-default	16:02:10.505481-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> summary for task success {transaction_duration_ms=115, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=113, response_duration_ms=1, request_bytes=500, response_bytes=954, cache_hit=true}
-default	16:02:10.506006-0500	RedLemon	Task <641F7840-9985-462D-9E4E-A1586501AE69>.<408> finished successfully
-default	16:02:10.507735-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1039 target:5311 attributes:[
+default	16:41:44.172220-0500	runningboardd	Assertion 169-6308-1782 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:44.172740-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:44.173142-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [943EE605-90B1-4766-AD20-DC4659E28DE5] (reporting strategy default)> on Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> was not selected for reporting
+default	16:41:44.173927-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:44.174226-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> now using Connection 1
+default	16:41:44.175295-0500	RedLemon	0x7fe23b3e4448 ID=2556 Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> sent request, body N 0
+default	16:41:44.176177-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:44.176287-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:44.176450-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:44.179162-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1783 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:41:44.179313-0500	runningboardd	Assertion 169-103-1783 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:44.180166-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:44.180216-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:44.180263-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:44.189970-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:44.234066-0500	RedLemon	0x7fe23b3e4448 ID=2556 Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> received response, status 200 content U
+default	16:41:44.234648-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> response ended
+default	16:41:44.235084-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> done using Connection 1
+default	16:41:44.235308-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> summary for task success {transaction_duration_ms=61, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=60, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:44.235878-0500	RedLemon	Task <24F73D22-92F0-4792-88A4-EDB80BAF5624>.<713> finished successfully
+default	16:41:44.237873-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:44.238228-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [111AE80E-C2FF-475F-A4AE-EA1306280829] (reporting strategy default)> on Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> was not selected for reporting
+default	16:41:44.238979-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:44.239182-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> now using Connection 1
+default	16:41:44.239943-0500	RedLemon	0x7fe23b3e4448 ID=2560 Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> sent request, body N 0
+default	16:41:44.280878-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:44.328542-0500	RedLemon	0x7fe23b3e4448 ID=2560 Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> received response, status 200 content U
+default	16:41:44.329339-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> response ended
+default	16:41:44.329677-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> done using Connection 1
+default	16:41:44.329818-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> summary for task success {transaction_duration_ms=91, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=89, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:44.330272-0500	RedLemon	Task <3CB57F85-4F59-4FB0-97FA-D81FF9C944A7>.<714> finished successfully
+default	16:41:44.331661-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:44.369599-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:45.215514-0500	runningboardd	Invalidating assertion 169-6308-1782 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:45.383057-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:45.383135-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:45.383279-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:45.386753-0500	runningboardd	Invalidating assertion 169-103-1783 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:45.501692-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:45.501779-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:45.501869-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:46.426067-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:46.426742-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BE59B04C-A178-4634-ACB4-16C3986903CD] (reporting strategy default)> on Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> was not selected for reporting
+default	16:41:46.427972-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:46.428297-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> now using Connection 1
+default	16:41:46.429740-0500	RedLemon	0x7fe23b3e4448 ID=2564 Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> sent request, body N 0
+default	16:41:46.497562-0500	RedLemon	0x7fe23b3e4448 ID=2564 Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> received response, status 200 content U
+default	16:41:46.498323-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> response ended
+default	16:41:46.498982-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> done using Connection 1
+default	16:41:46.499265-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=69, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
+default	16:41:46.499887-0500	RedLemon	Task <8ED91DEA-D0A7-4B95-9820-05D96BB95055>.<715> finished successfully
+default	16:41:46.501115-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1784 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:10.507925-0500	runningboardd	Assertion 169-5311-1039 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:10.508935-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:10.508980-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:10.509025-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:10.509143-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1038:com.apple.CFNetwork.StorageDB;169-5311-1039:com.apple.CFNetwork.StorageDB
-default	16:02:10.511559-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:10.511728-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:10.511755-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1039:com.apple.CFNetwork.StorageDB
-default	16:02:10.511786-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:10.544933-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:10.593264-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:10.593558-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:10.594017-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:10.594233-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:10.594407-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:10.594505-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:10.669953-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:10.670244-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:10.670794-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:10.670994-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:10.671164-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:10.671252-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:10.985270-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:10.985578-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:10.986099-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:10.986330-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:10.986505-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:10.986747-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:11.189126-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:11.189424-0500	RedLemon	   Payload keys: senderId, type, isPlaying, position, timestamp
-default	16:02:11.189913-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:11.190146-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:11.190337-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:11.190393-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:11.497543-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:11.497946-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:11.498483-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:11.498712-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:11.498888-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:11.498970-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:11.578097-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:11.578305-0500	runningboardd	Invalidating assertion 169-5311-1039 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:11.578775-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [86487153-3C97-4D9A-813E-52E2D5CA142D] (reporting strategy default)> on Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> was not selected for reporting
-default	16:02:11.579907-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:11.580214-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> now using Connection 1
-default	16:02:11.581486-0500	RedLemon	0x7f86308dd908 ID=940 Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> sent request, body N 0
-default	16:02:11.659778-0500	RedLemon	0x7f86308dd908 ID=940 Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> received response, status 200 content U
-default	16:02:11.660465-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> response ended
-default	16:02:11.660986-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> done using Connection 1
-default	16:02:11.661223-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> summary for task success {transaction_duration_ms=81, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=80, response_duration_ms=1, request_bytes=511, response_bytes=832, cache_hit=true}
-default	16:02:11.661911-0500	RedLemon	Task <A57F69D5-5561-4CE7-A7D2-6A53963C5973>.<409> finished successfully
-default	16:02:11.663166-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1040 target:5311 attributes:[
+default	16:41:46.501332-0500	runningboardd	Assertion 169-6308-1784 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:46.502131-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:46.502510-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B5905B59-64DA-4B26-B228-F130F0584C41] (reporting strategy default)> on Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> was not selected for reporting
+default	16:41:46.503285-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:46.503576-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> now using Connection 1
+default	16:41:46.504587-0500	RedLemon	0x7fe23c313bd8 ID=2568 Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> sent request, body N 0
+default	16:41:46.505012-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:46.505109-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:46.505220-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:46.505862-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1785 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:41:46.506103-0500	runningboardd	Assertion 169-103-1785 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:46.507229-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:46.507456-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:46.507503-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:46.520612-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:46.567315-0500	RedLemon	0x7fe23c313bd8 ID=2568 Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> received response, status 200 content U
+default	16:41:46.567981-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> response ended
+default	16:41:46.568677-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> done using Connection 1
+default	16:41:46.570400-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=63, response_duration_ms=2, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:46.570625-0500	RedLemon	Task <C4219CE1-7228-4765-904A-9ACDA9844141>.<716> finished successfully
+default	16:41:46.572866-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:46.573156-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [41A15558-B934-4EA8-8528-22F1D0F9270C] (reporting strategy default)> on Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> was not selected for reporting
+default	16:41:46.573925-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:46.574162-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> now using Connection 1
+default	16:41:46.574907-0500	RedLemon	0x7fe23c313bd8 ID=2572 Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> sent request, body N 0
+default	16:41:46.582472-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:46.654016-0500	RedLemon	0x7fe23c313bd8 ID=2572 Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> received response, status 200 content U
+default	16:41:46.654596-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> response ended
+default	16:41:46.654988-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> done using Connection 1
+default	16:41:46.655157-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> summary for task success {transaction_duration_ms=81, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=80, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:46.655338-0500	RedLemon	Task <50AD7E78-D7F8-4F5B-9B09-6048BFD139C9>.<717> finished successfully
+default	16:41:46.657376-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:46.668589-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:47.601295-0500	runningboardd	Invalidating assertion 169-6308-1784 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:47.736609-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:47.736685-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:47.736758-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:47.739566-0500	runningboardd	Invalidating assertion 169-103-1785 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:47.904896-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:47.904992-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:47.905204-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:48.701790-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:48.702346-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [1B663EBE-9871-4482-9E36-0EF1B3F1488D] (reporting strategy default)> on Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> was not selected for reporting
+default	16:41:48.703097-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:48.703310-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> now using Connection 1
+default	16:41:48.704176-0500	RedLemon	0x7fe23c313bd8 ID=2576 Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> sent request, body N 0
+default	16:41:48.778575-0500	RedLemon	0x7fe23c313bd8 ID=2576 Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> received response, status 200 content U
+default	16:41:48.779776-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> response ended
+default	16:41:48.780337-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> done using Connection 1
+default	16:41:48.780566-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=75, response_duration_ms=2, request_bytes=511, response_bytes=839, cache_hit=true}
+default	16:41:48.781127-0500	RedLemon	Task <61E85094-8129-44E1-8BD6-7B0288C9D371>.<718> finished successfully
+default	16:41:48.782156-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1786 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:11.663410-0500	runningboardd	Assertion 169-5311-1040 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:11.663849-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:11.664236-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6812DF93-6DAF-489B-934E-8D044C5FCBE7] (reporting strategy default)> on Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> was not selected for reporting
-default	16:02:11.664989-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:11.665111-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:11.665158-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:11.665338-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:11.665276-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> now using Connection 1
-default	16:02:11.665651-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1039:com.apple.CFNetwork.StorageDB;169-5311-1040:com.apple.CFNetwork.StorageDB
-default	16:02:11.666379-0500	RedLemon	0x7f863179fe78 ID=944 Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> sent request, body N 0
-default	16:02:11.689471-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1040:com.apple.CFNetwork.StorageDB
-default	16:02:11.689922-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:11.690023-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:11.690191-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:11.690483-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:11.739862-0500	RedLemon	0x7f863179fe78 ID=944 Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> received response, status 200 content U
-default	16:02:11.740448-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> response ended
-default	16:02:11.740890-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> done using Connection 1
-default	16:02:11.741122-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> summary for task success {transaction_duration_ms=76, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=75, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:11.741672-0500	RedLemon	Task <983402F8-3CD9-45B9-9E16-05A575EAC90E>.<410> finished successfully
-default	16:02:11.743935-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:11.744426-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AC7EB5E1-084B-4145-9684-A959E87369D9] (reporting strategy default)> on Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> was not selected for reporting
-default	16:02:11.745202-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:11.745417-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> now using Connection 1
-default	16:02:11.746217-0500	RedLemon	0x7f863179fe78 ID=948 Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> sent request, body N 0
-default	16:02:11.775468-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:11.828080-0500	RedLemon	0x7f863179fe78 ID=948 Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> received response, status 200 content U
-default	16:02:11.828877-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> response ended
-default	16:02:11.829330-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> done using Connection 1
-default	16:02:11.829562-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> summary for task success {transaction_duration_ms=84, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=83, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:11.830302-0500	RedLemon	Task <97EF4F7A-8AFE-4A04-864D-C4120872AD05>.<411> finished successfully
-default	16:02:11.831909-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:11.873799-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:12.111500-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:12.111902-0500	RedLemon	   Payload keys: senderId, type, position, timestamp, isPlaying
-default	16:02:12.112409-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:12.112534-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:12.112634-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:12.112704-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:12.112760-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:12.112924-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:12.113209-0500	RedLemon	✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	16:02:12.113337-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: ready
-default	16:02:12.113436-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:12.113497-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:12.154398-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:12.154727-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:12.155491-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:12.155666-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:12.155826-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:12.155915-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:12.418020-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:12.418334-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:12.418844-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:12.419059-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:12.419166-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:12.419219-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:12.654017-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:12.654663-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [63D9B98A-74AE-40BF-9340-A45C74032572] (reporting strategy default)> on Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> was not selected for reporting
-default	16:02:12.656210-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:12.656595-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> now using Connection 1
-default	16:02:12.657524-0500	RedLemon	0x7f86316dd2d8 ID=952 Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> sent request, body N 0
-default	16:02:12.665930-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:12.666244-0500	RedLemon	   Payload keys: isPlaying, timestamp, position, senderId, type
-default	16:02:12.666805-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:12.667018-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:12.667229-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:12.667327-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:12.723012-0500	runningboardd	Invalidating assertion 169-5311-1040 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:12.730633-0500	RedLemon	0x7f86316dd2d8 ID=952 Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> received response, status 200 content U
-default	16:02:12.736299-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> response ended
-default	16:02:12.737056-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> done using Connection 1
-default	16:02:12.737370-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> summary for task success {transaction_duration_ms=82, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=75, response_duration_ms=6, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:02:12.737776-0500	RedLemon	Task <42F54EF3-031D-414A-B55D-47D023FB26BE>.<412> finished successfully
-default	16:02:12.738816-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1041 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+default	16:41:48.782373-0500	runningboardd	Assertion 169-6308-1786 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:48.782816-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:48.783196-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7A8988DB-AC83-4FA5-A8A6-E5CAB94524D1] (reporting strategy default)> on Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> was not selected for reporting
+default	16:41:48.783978-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:48.784254-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> now using Connection 1
+default	16:41:48.785173-0500	RedLemon	0x7fe23c313bd8 ID=2580 Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> sent request, body N 0
+default	16:41:48.785361-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:48.785609-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:48.785706-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:48.787137-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1787 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:12.739048-0500	runningboardd	Assertion 169-5311-1041 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:12.740334-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:12.740335-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1040:com.apple.CFNetwork.StorageDB;169-5311-1041:com.apple.CFNetwork.StorageDB
-default	16:02:12.740377-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:12.740418-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:12.754872-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:12.895203-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:12.895250-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:12.894900-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1041:com.apple.CFNetwork.StorageDB
-default	16:02:12.895296-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:13.033591-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:13.033905-0500	RedLemon	   Payload keys: isPlaying, timestamp, position, senderId, type
-default	16:02:13.034338-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:13.034539-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:13.034724-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:13.034817-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:13.084863-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:13.085166-0500	RedLemon	   Payload keys: senderId, type, position, timestamp, isPlaying
-default	16:02:13.085608-0500	RedLemon	✅ Realtime: Decoded message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	16:02:13.085832-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: play
-default	16:02:13.086009-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:13.086097-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:13.159673-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:13.160176-0500	RedLemon	   Payload keys: isPlaying, timestamp, position, senderId, type
-default	16:02:13.160651-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:13.160825-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:13.160998-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:13.161086-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:13.442594-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:13.442893-0500	RedLemon	   Payload keys: senderId, type, position, timestamp, isPlaying
-default	16:02:13.443381-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:13.443579-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:13.443744-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:13.443866-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:13.749413-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:13.749728-0500	RedLemon	   Payload keys: isPlaying, timestamp, position, senderId, type
-default	16:02:13.750185-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:13.750370-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:13.750540-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:13.750631-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:13.840929-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:13.841522-0500	runningboardd	Invalidating assertion 169-5311-1041 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:13.841579-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [85871BA0-9237-474B-B4DA-7E487FA98021] (reporting strategy default)> on Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> was not selected for reporting
-default	16:02:13.842757-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:13.843061-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> now using Connection 1
-default	16:02:13.843952-0500	RedLemon	0x7f863179fe78 ID=956 Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> sent request, body N 0
-default	16:02:13.910904-0500	RedLemon	0x7f863179fe78 ID=956 Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> received response, status 200 content U
-default	16:02:13.911494-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> response ended
-default	16:02:13.912013-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> done using Connection 1
-default	16:02:13.912360-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=68, response_duration_ms=1, request_bytes=511, response_bytes=832, cache_hit=true}
-default	16:02:13.912554-0500	RedLemon	Task <F98C66B6-0F05-4EAF-A5FC-C3D18BBECC12>.<413> finished successfully
-default	16:02:13.914228-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1042 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:02:13.914459-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:13.914846-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DFFFB3D5-D8D4-4AC1-AB28-36AD67769336] (reporting strategy default)> on Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> was not selected for reporting
-default	16:02:13.915610-0500	runningboardd	Assertion 169-5311-1042 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:13.915678-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:13.916009-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> now using Connection 1
-default	16:02:13.917258-0500	RedLemon	0x7f86308dd908 ID=960 Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> sent request, body N 0
-default	16:02:13.917959-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:13.918000-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:13.918037-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:13.918325-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1041:com.apple.CFNetwork.StorageDB;169-5311-1042:com.apple.CFNetwork.StorageDB
-default	16:02:14.004158-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:14.004441-0500	RedLemon	   Payload keys: senderId, type, position, timestamp, isPlaying
-default	16:02:14.005008-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:14.005228-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:14.005399-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:14.005491-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:14.015115-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1042:com.apple.CFNetwork.StorageDB
-default	16:02:14.015990-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:14.016426-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:14.016609-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:14.035145-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:14.100320-0500	RedLemon	0x7f86308dd908 ID=960 Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> received response, status 200 content U
-default	16:02:14.100898-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> response ended
-default	16:02:14.101345-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> done using Connection 1
-default	16:02:14.101573-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> summary for task success {transaction_duration_ms=186, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=184, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:14.102133-0500	RedLemon	Task <02F8E14E-7AF2-4696-8C97-E2346EC8D743>.<414> finished successfully
-default	16:02:14.104598-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:14.104890-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C92187C8-49BA-41E2-BE58-AA150FFC005F] (reporting strategy default)> on Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> was not selected for reporting
-default	16:02:14.105664-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:14.105874-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> now using Connection 1
-default	16:02:14.106618-0500	RedLemon	0x7f86308dd908 ID=964 Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> sent request, body N 0
-default	16:02:14.121243-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:14.219717-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:14.220128-0500	RedLemon	   Payload keys: isPlaying, timestamp, position, senderId, type
-default	16:02:14.220598-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:14.220833-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:14.221112-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:14.221223-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:14.241092-0500	RedLemon	0x7f86308dd908 ID=964 Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> received response, status 200 content U
-default	16:02:14.241642-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> response ended
-default	16:02:14.242196-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> done using Connection 1
-default	16:02:14.242506-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> summary for task success {transaction_duration_ms=137, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=135, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:14.243216-0500	RedLemon	Task <8E9793AF-86C2-4CC7-92DD-E6AE9EADB5DB>.<415> finished successfully
-default	16:02:14.245110-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:14.282440-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:14.568521-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:14.568795-0500	RedLemon	   Payload keys: timestamp, type, position, senderId, isPlaying
-default	16:02:14.569324-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:14.569555-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:14.569732-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:14.569808-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:14.773480-0500	RedLemon	tcp_input [C27.1.1:3] flags=[F.] seq=1578651441, ack=1590834571, win=8 state=ESTABLISHED rcv_nxt=1578651441, snd_una=1590834571
-default	16:02:14.773602-0500	RedLemon	nw_protocol_tcp_log_summary [C27.1.1:3] 
-	[A01E4290-D838-4B97-BD6B-40851DF1CC53 <private>:55994<-><private>:443]
-	Init: 1, Conn_Time: 13.735ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 9, rtt: 26.843ms, rtt_var: 17.062ms rtt_nc: 22.968ms, rtt_var_nc: 15.437ms base rtt: 7ms
-	ACKs-compressed: 0, ACKs delayed: 21 delayed ACKs sent: 0
-default	16:02:14.774277-0500	RedLemon	Connection 27: read-side closed
-default	16:02:14.774313-0500	RedLemon	Connection 27: read-side closed
-default	16:02:14.774343-0500	RedLemon	Connection 27: read-side closed
-default	16:02:14.774532-0500	RedLemon	Connection 27: cleaning up
-default	16:02:14.774595-0500	RedLemon	[C27 7A331C71-87E2-4A8D-96A9-F4B118A73A14 Hostname#afe42ebd:443 quic-connection, url hash: 4c7e9bc6, definite, attribution: developer] cancel
-default	16:02:14.774718-0500	RedLemon	[C27 7A331C71-87E2-4A8D-96A9-F4B118A73A14 Hostname#afe42ebd:443 quic-connection, url hash: 4c7e9bc6, definite, attribution: developer] cancelled
-	[C27.1.1 AA8F4782-4280-4F9B-A168-989BFF3D24B3 2607:fea8:995b:fd00:7141:6ed:4959:38c8.55994<->IPv6#085d3596.443]
+default	16:41:48.787394-0500	runningboardd	Assertion 169-103-1787 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:48.788182-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:48.788225-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:48.788336-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:48.791726-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:48.852905-0500	RedLemon	0x7fe23c313bd8 ID=2580 Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> received response, status 200 content U
+default	16:41:48.853487-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> response ended
+default	16:41:48.853924-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> done using Connection 1
+default	16:41:48.854149-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:48.854726-0500	RedLemon	Task <4F6C1174-94E9-46E7-A7AD-40627F7002EB>.<719> finished successfully
+default	16:41:48.856918-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:48.857220-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0B1C5F1D-C1B4-4E35-9600-7DA2FACBA1B4] (reporting strategy default)> on Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> was not selected for reporting
+default	16:41:48.857997-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:48.858211-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> now using Connection 1
+default	16:41:48.858943-0500	RedLemon	0x7fe23c313bd8 ID=2584 Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> sent request, body N 0
+default	16:41:48.877273-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:48.931727-0500	RedLemon	0x7fe23c313bd8 ID=2584 Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> received response, status 200 content U
+default	16:41:48.932442-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> response ended
+default	16:41:48.932892-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> done using Connection 1
+default	16:41:48.933118-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> summary for task success {transaction_duration_ms=75, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=73, response_duration_ms=1, request_bytes=524, response_bytes=841, cache_hit=true}
+default	16:41:48.933924-0500	RedLemon	Task <2546F8EA-698E-4558-B720-597EF04F8331>.<720> finished successfully
+default	16:41:48.935626-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:48.972971-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:49.887923-0500	runningboardd	Invalidating assertion 169-6308-1786 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:50.003916-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:50.003988-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:50.004381-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:50.006243-0500	runningboardd	Invalidating assertion 169-103-1787 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:50.176171-0500	RedLemon	tcp_input [C37.1.1:3] flags=[F.] seq=2317668901, ack=3554863858, win=8 state=ESTABLISHED rcv_nxt=2317668901, snd_una=3554863858
+default	16:41:50.176271-0500	RedLemon	nw_protocol_tcp_log_summary [C37.1.1:3] 
+	[A078FD02-8CEF-479D-BB97-788C0732FA69 <private>:57439<-><private>:443]
+	Init: 1, Conn_Time: 14.745ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
+	rtt_cache: kernel, rtt_upd: 12, rtt: 28.562ms, rtt_var: 16.812ms rtt_nc: 25.718ms, rtt_var_nc: 15.500ms base rtt: 9ms
+	ACKs-compressed: 0, ACKs delayed: 134 delayed ACKs sent: 0
+default	16:41:50.176923-0500	RedLemon	Connection 37: read-side closed
+default	16:41:50.176956-0500	RedLemon	Connection 37: read-side closed
+default	16:41:50.177057-0500	RedLemon	Connection 37: read-side closed
+default	16:41:50.177279-0500	RedLemon	Connection 37: cleaning up
+default	16:41:50.177346-0500	RedLemon	[C37 B182F655-AFF1-42B4-82A3-2BB77565BD40 Hostname#5a828566:443 quic-connection, url hash: 8005778e, definite, attribution: developer] cancel
+default	16:41:50.177480-0500	RedLemon	[C37 B182F655-AFF1-42B4-82A3-2BB77565BD40 Hostname#5a828566:443 quic-connection, url hash: 8005778e, definite, attribution: developer] cancelled
+	[C37.1.1 32F6E45D-0EF1-4111-A336-EB823367A2DA 2607:fea8:995b:fd00:7141:6ed:4959:38c8.57439<->IPv6#1a273ade.443]
 	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
 	Privacy Stance: Not Eligible
-	Duration: 26.432s, DNS @0.001s took 0.046s, TCP @0.053s took 0.015s, TLS 1.3 took 0.213s
-	bytes in/out: 668900/1723, packets in/out: 119/155, rtt: 0.026s, retransmitted bytes: 517, out-of-order bytes: 58548
-default	16:02:14.775376-0500	RedLemon	nw_flow_disconnected [C27.1.1 IPv6#085d3596.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	16:02:14.775731-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C27] reporting state cancelled
-default	16:02:14.775927-0500	RedLemon	Connection 27: done
-default	16:02:14.776010-0500	RedLemon	tcp_output [C27.1.1:3] flags=[FP.] seq=1590834610, ack=1578651442, win=4747 state=LAST_ACK rcv_nxt=1578651442, snd_una=1590834571
-default	16:02:14.776232-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:14.776444-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:14.776767-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:14.776917-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:14.777095-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:14.777096-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:14.857136-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:14.857569-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4BC0F0D3-FD09-4A22-9622-8DE2741E5E65] (reporting strategy default)> on Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> was not selected for reporting
-default	16:02:14.858314-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:14.858572-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> now using Connection 1
-default	16:02:14.859498-0500	RedLemon	0x7f86308dd908 ID=968 Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> sent request, body N 0
-default	16:02:14.923038-0500	runningboardd	Invalidating assertion 169-5311-1042 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:14.971381-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:14.971609-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:14.972146-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:14.972313-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:14.972446-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:14.972506-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:15.001544-0500	RedLemon	0x7f86308dd908 ID=968 Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> received response, status 200 content U
-default	16:02:15.002046-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> response ended
-default	16:02:15.002438-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> done using Connection 1
-default	16:02:15.002615-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> summary for task success {transaction_duration_ms=144, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=143, response_duration_ms=1, request_bytes=500, response_bytes=955, cache_hit=true}
-default	16:02:15.002933-0500	RedLemon	Task <C89A7A00-1365-427B-A982-061961EA71AA>.<416> finished successfully
-default	16:02:15.003721-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1043 target:5311 attributes:[
+	Duration: 27.027s, DNS @0.001s took 0.050s, TCP @0.053s took 0.016s, TLS 1.3 took 0.043s
+	bytes in/out: 1571106/1297, packets in/out: 224/212, rtt: 0.028s, retransmitted bytes: 0, out-of-order bytes: 45696
+default	16:41:50.178632-0500	RedLemon	nw_flow_disconnected [C37.1.1 IPv6#1a273ade.443 cancelled channel-flow ((null))] Output protocol disconnected
+default	16:41:50.178985-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C37] reporting state cancelled
+default	16:41:50.179100-0500	RedLemon	tcp_output [C37.1.1:3] flags=[FP.] seq=3554863897, ack=2317668902, win=19585 state=LAST_ACK rcv_nxt=2317668902, snd_una=3554863858
+default	16:41:50.181864-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:50.181960-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:50.182096-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:51.003026-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:51.003566-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [96317DD8-277B-480C-8A50-E69B8B6FAB15] (reporting strategy default)> on Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> was not selected for reporting
+default	16:41:51.004547-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:51.004750-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> now using Connection 1
+default	16:41:51.005614-0500	RedLemon	0x7fe23c313bd8 ID=2588 Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> sent request, body N 0
+default	16:41:51.079833-0500	RedLemon	0x7fe23c313bd8 ID=2588 Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> received response, status 200 content U
+default	16:41:51.080882-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> response ended
+default	16:41:51.081566-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> done using Connection 1
+default	16:41:51.081826-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=75, response_duration_ms=2, request_bytes=511, response_bytes=839, cache_hit=true}
+default	16:41:51.082201-0500	RedLemon	Task <DE73E96E-CE02-49A7-8949-AF65C1E4F3B0>.<721> finished successfully
+default	16:41:51.083240-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1788 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:15.004189-0500	runningboardd	Assertion 169-5311-1043 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:15.005645-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:15.005686-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:15.005724-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:15.005844-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501);169-5311-1042:com.apple.CFNetwork.StorageDB;169-5311-1043:com.apple.CFNetwork.StorageDB
-default	16:02:15.015485-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:15.092684-0500	runningboardd	Attempting to rename power assertion 33549 for target anon<RedLemon>(501) to anon<RedLemon>(501)169-5311-1043:com.apple.CFNetwork.StorageDB
-default	16:02:15.092900-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:15.093075-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:15.093126-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:15.285617-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:15.285927-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:15.286427-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:15.286638-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:15.286815-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:15.286915-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:15.490390-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:15.490731-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:15.491204-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:15.491416-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:15.491591-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:15.491667-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:15.797687-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:15.797971-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:15.798656-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:15.798857-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:15.799027-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:15.799114-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:16.002149-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:16.002420-0500	RedLemon	   Payload keys: timestamp, type, position, senderId, isPlaying
-default	16:02:16.002860-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:16.003086-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:16.003262-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:16.003355-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:16.186965-0500	runningboardd	Invalidating assertion 169-5311-1043 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:16.291007-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:16.291541-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:16.291626-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:16.293530-0500	runningboardd	Invalidating assertion 169-103-1037 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:16.309417-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:16.309757-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:16.310148-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:16.310283-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:16.310386-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:16.310444-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:16.413455-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:16.413856-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5A721545-1A44-47F4-BF94-A0BD53D994EF] (reporting strategy default)> on Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> was not selected for reporting
-default	16:02:16.414712-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:16.415014-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> now using Connection 1
-default	16:02:16.416054-0500	RedLemon	0x7f863179fe78 ID=972 Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> sent request, body N 0
-default	16:02:16.417244-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:16.417298-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:16.417376-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:16.475229-0500	RedLemon	0x7f863179fe78 ID=972 Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> received response, status 200 content U
-default	16:02:16.476016-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> response ended
-default	16:02:16.476474-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> done using Connection 1
-default	16:02:16.476701-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=60, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:16.477349-0500	RedLemon	Task <B9F84CAF-DE48-4094-A009-4AAFB69EA511>.<417> finished successfully
-default	16:02:16.478655-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1044 target:5311 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	16:02:16.478859-0500	runningboardd	Assertion 169-5311-1044 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:16.479293-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:16.479693-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [750E0110-EE5B-46CD-87E8-377689F334D8] (reporting strategy default)> on Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> was not selected for reporting
-default	16:02:16.480485-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:16.480763-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> now using Connection 1
-default	16:02:16.481739-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:16.481955-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:16.482014-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:16.481837-0500	RedLemon	0x7f862e298b08 ID=976 Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> sent request, body N 0
-default	16:02:16.484294-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1045 target:5311 attributes:[
+default	16:41:51.083442-0500	runningboardd	Assertion 169-6308-1788 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:51.083806-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:51.084278-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [18C4FACF-5780-46CF-8F36-9C899F10F0A4] (reporting strategy default)> on Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> was not selected for reporting
+default	16:41:51.085202-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:51.085479-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> now using Connection 1
+default	16:41:51.086024-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:51.086265-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:51.086395-0500	RedLemon	0x7fe23c313bd8 ID=2592 Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> sent request, body N 0
+default	16:41:51.086623-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:51.088876-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1789 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:16.484461-0500	runningboardd	Assertion 169-103-1045 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:16.485373-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:16.485435-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:16.485544-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:16.487219-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:16.487423-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:16.487864-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:16.488008-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:16.488122-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:16.488188-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:16.618489-0500	RedLemon	0x7f862e298b08 ID=976 Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> received response, status 200 content U
-default	16:02:16.619076-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> response ended
-default	16:02:16.619514-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> done using Connection 1
-default	16:02:16.619741-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> summary for task success {transaction_duration_ms=139, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=138, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:16.620292-0500	RedLemon	Task <78235187-C5A1-4E01-85E5-04B0958B5D9D>.<418> finished successfully
-default	16:02:16.621153-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:16.622699-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:16.623275-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0FF866D2-2ECA-458F-9CB4-D49423A48A6B] (reporting strategy default)> on Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> was not selected for reporting
-default	16:02:16.624105-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:16.624392-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> now using Connection 1
-default	16:02:16.625344-0500	RedLemon	0x7f863179fe78 ID=980 Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> sent request, body N 0
-default	16:02:16.635562-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:16.692925-0500	RedLemon	0x7f863179fe78 ID=980 Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> received response, status 200 content U
-default	16:02:16.693608-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> response ended
-default	16:02:16.694063-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> done using Connection 1
-default	16:02:16.694292-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:16.694936-0500	RedLemon	Task <4FFA7415-01CA-4555-9E80-AFAFCDDF9A1D>.<419> finished successfully
-default	16:02:16.696389-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:16.728682-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:16.729274-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:16.729744-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:16.729867-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:16.729981-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:16.730046-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:16.743334-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:17.026020-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:17.026391-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:17.026771-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:17.026879-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:17.026985-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:17.027036-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:17.147382-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:17.147978-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3BEB441D-38E5-4764-9D8E-A73304956CE7] (reporting strategy default)> on Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> was not selected for reporting
-default	16:02:17.149138-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:17.149444-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> now using Connection 1
-default	16:02:17.150667-0500	RedLemon	0x7f86315c33d8 ID=984 Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> sent request, body N 0
-default	16:02:17.214715-0500	RedLemon	0x7f86315c33d8 ID=984 Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> received response, status 200 content U
-default	16:02:17.215317-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> response ended
-default	16:02:17.215761-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> done using Connection 1
-default	16:02:17.215986-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=66, response_duration_ms=1, request_bytes=500, response_bytes=955, cache_hit=true}
-default	16:02:17.216527-0500	RedLemon	Task <F9C09A1E-8DFE-4B98-B862-12217809B66E>.<420> finished successfully
-default	16:02:17.236790-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:17.237118-0500	RedLemon	   Payload keys: timestamp, type, position, isPlaying, senderId
-default	16:02:17.237639-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:17.237929-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:17.238121-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:17.238205-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:17.247072-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:17.538304-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:17.538719-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:17.539274-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:17.539484-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:17.539660-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:17.539748-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:17.580851-0500	runningboardd	Invalidating assertion 169-5311-1044 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:17.726418-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:17.726494-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:17.726567-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:17.728121-0500	runningboardd	Invalidating assertion 169-103-1045 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:17.743750-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:17.744065-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:17.744566-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:17.744775-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:17.744950-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:17.745076-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:17.897006-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:17.897089-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:17.897169-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:18.050393-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:18.050962-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:18.051522-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:18.051799-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:18.052009-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:18.052090-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:18.254864-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:18.255160-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:18.255659-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:18.255876-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:18.256095-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:18.256131-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:18.561969-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:18.562278-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:18.562725-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:18.562943-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:18.563118-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:18.563210-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:18.766891-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:18.767215-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:18.767674-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:18.767945-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:18.768147-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:18.768230-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:18.859272-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:18.859698-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [5805A6B5-6247-43EB-99B8-4295DE6328DF] (reporting strategy default)> on Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> was not selected for reporting
-default	16:02:18.860486-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:18.860680-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> now using Connection 1
-default	16:02:18.861408-0500	RedLemon	0x7f863179fe78 ID=988 Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> sent request, body N 0
-default	16:02:18.928219-0500	RedLemon	0x7f863179fe78 ID=988 Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> received response, status 200 content U
-default	16:02:18.928787-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> response ended
-default	16:02:18.929181-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> done using Connection 1
-default	16:02:18.929374-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:18.929780-0500	RedLemon	Task <6A255483-7CAA-49B3-9A2C-2E82933D0B27>.<421> finished successfully
-default	16:02:18.931850-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:18.931876-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1046 target:5311 attributes:[
+default	16:41:51.089030-0500	runningboardd	Assertion 169-103-1789 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:51.089940-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:51.089998-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:51.090049-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:51.103837-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:51.148174-0500	RedLemon	0x7fe23c313bd8 ID=2592 Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> received response, status 200 content U
+default	16:41:51.148752-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> response ended
+default	16:41:51.149194-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> done using Connection 1
+default	16:41:51.149422-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:51.149863-0500	RedLemon	Task <FE45A8CE-C5D4-445B-ABA5-DE1F4CF47E8C>.<722> finished successfully
+default	16:41:51.151532-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:51.151844-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [72615144-5C9A-46B1-A67C-28C3387C8A26] (reporting strategy default)> on Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> was not selected for reporting
+default	16:41:51.152612-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:51.152903-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> now using Connection 1
+default	16:41:51.154028-0500	RedLemon	0x7fe238b96dd8 ID=2596 Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> sent request, body N 0
+default	16:41:51.220237-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:51.274794-0500	RedLemon	0x7fe238b96dd8 ID=2596 Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> received response, status 200 content U
+default	16:41:51.275372-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> response ended
+default	16:41:51.276057-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> done using Connection 1
+default	16:41:51.276362-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> summary for task success {transaction_duration_ms=124, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=122, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:41:51.276705-0500	RedLemon	Task <8822CCE0-8C15-47F9-80EA-3F932F3ACDA6>.<723> finished successfully
+default	16:41:51.279007-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:51.312028-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:52.129106-0500	runningboardd	Invalidating assertion 169-6308-1788 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:52.300857-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:52.300904-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:52.300946-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:52.301902-0500	runningboardd	Invalidating assertion 169-103-1789 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:52.424449-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:52.424496-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:52.424541-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:53.420922-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:53.421547-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [78875DBE-21A9-4F0B-BF38-A80CAC8F6312] (reporting strategy default)> on Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> was not selected for reporting
+default	16:41:53.422753-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:53.423089-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> now using Connection 1
+default	16:41:53.424489-0500	RedLemon	0x7fe23c313bd8 ID=2600 Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> sent request, body N 0
+default	16:41:53.495059-0500	RedLemon	0x7fe23c313bd8 ID=2600 Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> received response, status 200 content U
+default	16:41:53.495657-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> response ended
+default	16:41:53.496421-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> done using Connection 1
+default	16:41:53.496980-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> summary for task success {transaction_duration_ms=74, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=72, response_duration_ms=1, request_bytes=511, response_bytes=835, cache_hit=true}
+default	16:41:53.497616-0500	RedLemon	Task <86EB57F4-93A5-42B6-A286-338B1275E16B>.<724> finished successfully
+default	16:41:53.499342-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1791 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:18.932410-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7986BB02-A565-415B-9E10-74996ED712A1] (reporting strategy default)> on Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> was not selected for reporting
-default	16:02:18.933232-0500	runningboardd	Assertion 169-5311-1046 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:18.933393-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:18.933707-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> now using Connection 1
-default	16:02:18.934811-0500	RedLemon	0x7f863179fe78 ID=992 Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> sent request, body N 0
-default	16:02:18.936367-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:18.936528-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:18.936676-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:18.938822-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1047 target:5311 attributes:[
+default	16:41:53.499589-0500	runningboardd	Assertion 169-6308-1791 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:53.499923-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:53.500319-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [3CD78A9B-37C1-4535-8DB6-A1E8A29FDC44] (reporting strategy default)> on Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> was not selected for reporting
+default	16:41:53.501143-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:53.501427-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> now using Connection 1
+default	16:41:53.502453-0500	RedLemon	0x7fe23c313bd8 ID=2604 Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> sent request, body N 0
+default	16:41:53.502805-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:53.502887-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:53.502934-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:53.504920-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1792 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:18.938978-0500	runningboardd	Assertion 169-103-1047 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:18.940356-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:18.940471-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:18.940782-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:18.940857-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:18.997133-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:18.997416-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
-default	16:02:18.998061-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:18.998339-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:18.998519-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:18.998598-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:19.009664-0500	RedLemon	0x7f863179fe78 ID=992 Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> received response, status 200 content U
-default	16:02:19.010232-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> response ended
-default	16:02:19.010694-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> done using Connection 1
-default	16:02:19.010992-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> summary for task success {transaction_duration_ms=78, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=76, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:19.011832-0500	RedLemon	Task <FABBF6B7-06F9-48DD-9AF1-666E281D9410>.<422> finished successfully
-default	16:02:19.015444-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:19.015976-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4F5F7AB6-6373-4E1A-949A-491798CCE683] (reporting strategy default)> on Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> was not selected for reporting
-default	16:02:19.016731-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:19.016946-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> now using Connection 1
-default	16:02:19.017791-0500	RedLemon	0x7f86315c33d8 ID=996 Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> sent request, body N 0
-default	16:02:19.024230-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:19.081379-0500	RedLemon	0x7f86315c33d8 ID=996 Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> received response, status 200 content U
-default	16:02:19.081860-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> response ended
-default	16:02:19.082293-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> done using Connection 1
-default	16:02:19.082474-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:19.082685-0500	RedLemon	Task <9B530908-352C-430B-BF6E-D94A420FD068>.<423> finished successfully
-default	16:02:19.084229-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:19.089531-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:19.278924-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:19.279330-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:19.279788-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:19.280000-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:19.280184-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:19.280275-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:19.415077-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:19.415544-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [866B4BC4-195F-46A9-84F0-FF8475DB5167] (reporting strategy default)> on Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> was not selected for reporting
-default	16:02:19.416768-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:19.417081-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> now using Connection 1
-default	16:02:19.418267-0500	RedLemon	0x7f86315c33d8 ID=1000 Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> sent request, body N 0
-default	16:02:19.434658-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:19.434969-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:19.435484-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:19.435700-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:19.435874-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:19.435961-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:19.488765-0500	RedLemon	0x7f86315c33d8 ID=1000 Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> received response, status 200 content U
-default	16:02:19.489475-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> response ended
-default	16:02:19.490151-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> done using Connection 1
-default	16:02:19.490447-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> summary for task success {transaction_duration_ms=74, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=72, response_duration_ms=1, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:02:19.491616-0500	RedLemon	Task <FED45FA1-253A-4449-AD69-6D563E87A6AD>.<424> finished successfully
-default	16:02:19.531800-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:19.791111-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:19.791448-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:19.792376-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:19.792721-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:19.792927-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:19.793051-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:19.996627-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:19.996942-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:19.997606-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:19.997788-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:19.997966-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:19.998064-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:20.033191-0500	runningboardd	Invalidating assertion 169-5311-1046 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:20.184020-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:20.184099-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:20.184170-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:20.186180-0500	runningboardd	Invalidating assertion 169-103-1047 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:20.302824-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:20.303137-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:20.303572-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:20.303791-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:20.303962-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:20.304042-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:20.342423-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:20.342504-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:20.342578-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:20.507620-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:20.507885-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:20.508315-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:20.508524-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:20.508781-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:20.508701-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:20.814826-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:20.815177-0500	RedLemon	   Payload keys: timestamp, type, position, senderId, isPlaying
-default	16:02:20.815659-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:20.815877-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:20.816056-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:20.816155-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:21.215924-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:21.216495-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EAB46561-49F0-4513-AE3A-90885A875011] (reporting strategy default)> on Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> was not selected for reporting
-default	16:02:21.217709-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:21.218012-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> now using Connection 1
-default	16:02:21.219407-0500	RedLemon	0x7f8632dd12b8 ID=1004 Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> sent request, body N 0
-default	16:02:21.223788-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:21.223995-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:21.224395-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:21.224548-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:21.224654-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:21.224709-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:21.262875-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:21.263091-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:21.263653-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:21.263937-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:21.264188-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:21.264333-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:21.293695-0500	RedLemon	0x7f8632dd12b8 ID=1004 Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> received response, status 200 content U
-default	16:02:21.294558-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> response ended
-default	16:02:21.295193-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> done using Connection 1
-default	16:02:21.295553-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> summary for task success {transaction_duration_ms=78, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=76, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
-default	16:02:21.295759-0500	RedLemon	Task <67613D99-7552-47C2-9810-7C657F482DE5>.<425> finished successfully
-default	16:02:21.298576-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1048 target:5311 attributes:[
+default	16:41:53.505079-0500	runningboardd	Assertion 169-103-1792 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:53.506119-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:53.506202-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:53.506251-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:53.515892-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:53.562057-0500	RedLemon	0x7fe23c313bd8 ID=2604 Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> received response, status 200 content U
+default	16:41:53.562500-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> response ended
+default	16:41:53.562923-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> done using Connection 1
+default	16:41:53.563114-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:53.563325-0500	RedLemon	Task <E7290E2B-143A-4A5E-B9A2-902E9C7C9CCD>.<725> finished successfully
+default	16:41:53.565586-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:53.565872-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [225C9C04-7330-479E-8666-E108C453E4F8] (reporting strategy default)> on Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> was not selected for reporting
+default	16:41:53.566611-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:53.566811-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> now using Connection 1
+default	16:41:53.567540-0500	RedLemon	0x7fe23c313bd8 ID=2608 Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> sent request, body N 0
+default	16:41:53.582504-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:53.631938-0500	RedLemon	0x7fe23c313bd8 ID=2608 Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> received response, status 200 content U
+default	16:41:53.632642-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> response ended
+default	16:41:53.633073-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> done using Connection 1
+default	16:41:53.633296-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=65, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:53.633893-0500	RedLemon	Task <607A5288-1C3D-49DF-85C5-64BD3A9C07F4>.<726> finished successfully
+default	16:41:53.635305-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:53.668709-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:54.599745-0500	runningboardd	Invalidating assertion 169-6308-1791 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:54.723299-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:54.723376-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:54.723418-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:54.724373-0500	runningboardd	Invalidating assertion 169-103-1792 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:54.833146-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:54.833220-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:54.833287-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:55.822087-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:55.822627-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [79824E98-9323-43E6-890E-840FF64CB415] (reporting strategy default)> on Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> was not selected for reporting
+default	16:41:55.823761-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:55.824186-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> now using Connection 1
+default	16:41:55.825710-0500	RedLemon	0x7fe23b4363e8 ID=2612 Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> sent request, body N 0
+default	16:41:55.913990-0500	RedLemon	0x7fe23b4363e8 ID=2612 Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> received response, status 200 content U
+default	16:41:55.914537-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> response ended
+default	16:41:55.914958-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> done using Connection 1
+default	16:41:55.915139-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> summary for task success {transaction_duration_ms=92, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=90, response_duration_ms=1, request_bytes=511, response_bytes=836, cache_hit=true}
+default	16:41:55.915417-0500	RedLemon	Task <8D1D4611-6438-4958-971D-036D70147AE6>.<727> finished successfully
+default	16:41:55.916731-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1793 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:21.298999-0500	runningboardd	Assertion 169-5311-1048 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:21.299088-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:21.299912-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6444D7A1-C818-4296-B7D6-75207D30BB2E] (reporting strategy default)> on Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> was not selected for reporting
-default	16:02:21.301217-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:21.301529-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> now using Connection 1
-default	16:02:21.302521-0500	RedLemon	0x7f862e298b08 ID=1008 Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> sent request, body N 0
-default	16:02:21.302678-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:21.302721-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:21.302757-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:21.305255-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1049 target:5311 attributes:[
+default	16:41:55.916927-0500	runningboardd	Assertion 169-6308-1793 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:55.917293-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:55.917692-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E6A84B76-0C25-44A1-B092-AF0477317CB8] (reporting strategy default)> on Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> was not selected for reporting
+default	16:41:55.918509-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:55.918796-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> now using Connection 1
+default	16:41:55.919894-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:55.920007-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:55.919733-0500	RedLemon	0x7fe23b3e4448 ID=2616 Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> sent request, body N 0
+default	16:41:55.920109-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:55.921830-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1794 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:21.305892-0500	runningboardd	Assertion 169-103-1049 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:21.307385-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:21.307682-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:21.307848-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:21.326297-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:21.386143-0500	RedLemon	0x7f862e298b08 ID=1008 Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> received response, status 200 content U
-default	16:02:21.386732-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> response ended
-default	16:02:21.387164-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> done using Connection 1
-default	16:02:21.387389-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> summary for task success {transaction_duration_ms=86, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=85, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:21.388037-0500	RedLemon	Task <E1733E4D-D1D3-4D8A-9998-4B5E6EE21EBB>.<426> finished successfully
-default	16:02:21.390295-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:21.390608-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E798BBA0-D7D5-4891-960A-17BA0117B4C3] (reporting strategy default)> on Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> was not selected for reporting
-default	16:02:21.391432-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:21.391796-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> now using Connection 1
-default	16:02:21.392966-0500	RedLemon	0x7f8633a32ed8 ID=1012 Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> sent request, body N 0
-default	16:02:21.409929-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:21.462650-0500	RedLemon	0x7f8633a32ed8 ID=1012 Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> received response, status 200 content U
-default	16:02:21.463232-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> response ended
-default	16:02:21.463660-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> done using Connection 1
-default	16:02:21.463886-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=71, response_duration_ms=1, request_bytes=524, response_bytes=839, cache_hit=true}
-default	16:02:21.464436-0500	RedLemon	Task <5BEA7D7D-1F74-46DC-BA8E-750D18621887>.<427> finished successfully
-default	16:02:21.466234-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:21.476654-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:21.476912-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:21.477381-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:21.477514-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:21.477669-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:21.477618-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:21.504209-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:21.691672-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:21.692352-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [F3A68244-8304-4E60-88D2-99B21F999901] (reporting strategy default)> on Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> was not selected for reporting
-default	16:02:21.693871-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:21.694310-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> now using Connection 1
-default	16:02:21.695662-0500	RedLemon	0x7f862e298b08 ID=1016 Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> sent request, body N 0
-default	16:02:21.731102-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:21.731429-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:21.731882-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:21.732167-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:21.732424-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:21.732510-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:21.763257-0500	RedLemon	0x7f862e298b08 ID=1016 Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> received response, status 200 content U
-default	16:02:21.763940-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> response ended
-default	16:02:21.764434-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> done using Connection 1
-default	16:02:21.764719-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> summary for task success {transaction_duration_ms=71, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=70, response_duration_ms=1, request_bytes=500, response_bytes=955, cache_hit=true}
-default	16:02:21.765239-0500	RedLemon	Task <AB308DF7-6284-4217-83DA-57E3517ADF02>.<428> finished successfully
-default	16:02:21.804047-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:22.043694-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:22.044022-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:22.044543-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:22.044765-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:22.044946-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:22.045027-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:22.248492-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:22.248754-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:22.249356-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:22.249567-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:22.249739-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:22.249830-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:22.349762-0500	runningboardd	Invalidating assertion 169-5311-1048 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:22.454046-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:22.454602-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:22.455177-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:22.455343-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:22.455507-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:22.455581-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:22.477159-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:22.477231-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:22.477309-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:22.480869-0500	runningboardd	Invalidating assertion 169-103-1049 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:22.654301-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:22.654381-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:22.654454-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:22.760667-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:22.761008-0500	RedLemon	   Payload keys: isPlaying, senderId, type, timestamp, position
-default	16:02:22.761476-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:22.761678-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:22.761853-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:22.761941-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:22.938067-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:22.938405-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, position, type
-default	16:02:22.938853-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:22.939055-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:22.939229-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:22.939326-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:23.272183-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:23.272522-0500	RedLemon	   Payload keys: senderId, isPlaying, position, type, timestamp
-default	16:02:23.272979-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:23.273189-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:23.273365-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:23.273462-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:23.476964-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:23.477360-0500	RedLemon	   Payload keys: isPlaying, senderId, type, timestamp, position
-default	16:02:23.477917-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:23.478137-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:23.478317-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:23.478406-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:23.625720-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:23.626368-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [675F17F3-63BE-485C-BC06-5DF56F179396] (reporting strategy default)> on Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> was not selected for reporting
-default	16:02:23.627871-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:23.628308-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> now using Connection 1
-default	16:02:23.629225-0500	RedLemon	0x7f863179fe78 ID=1020 Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> sent request, body N 0
-default	16:02:23.704864-0500	RedLemon	0x7f863179fe78 ID=1020 Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> received response, status 200 content U
-default	16:02:23.705454-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> response ended
-default	16:02:23.705895-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> done using Connection 1
-default	16:02:23.706121-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> summary for task success {transaction_duration_ms=79, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=77, response_duration_ms=1, request_bytes=511, response_bytes=836, cache_hit=true}
-default	16:02:23.706675-0500	RedLemon	Task <B45BA417-CA1B-4BF9-B433-7ED2C864125F>.<429> finished successfully
-default	16:02:23.708349-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1050 target:5311 attributes:[
+default	16:41:55.921960-0500	runningboardd	Assertion 169-103-1794 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:55.922741-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:55.922786-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:55.923489-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:55.936161-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:55.991257-0500	RedLemon	0x7fe23b3e4448 ID=2616 Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> received response, status 200 content U
+default	16:41:55.991909-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> response ended
+default	16:41:55.992343-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> done using Connection 1
+default	16:41:55.992568-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> summary for task success {transaction_duration_ms=74, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=72, response_duration_ms=1, request_bytes=524, response_bytes=846, cache_hit=true}
+default	16:41:55.993120-0500	RedLemon	Task <068DC80F-02E0-4293-8919-25B4ED8A7160>.<728> finished successfully
+default	16:41:55.995347-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:55.995655-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [09C0E44D-CD9B-4BBD-A526-5945463F03AC] (reporting strategy default)> on Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> was not selected for reporting
+default	16:41:55.996344-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:55.996644-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> now using Connection 1
+default	16:41:55.997602-0500	RedLemon	0x7fe23c313bd8 ID=2620 Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> sent request, body N 0
+default	16:41:56.012975-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:56.058734-0500	RedLemon	0x7fe23c313bd8 ID=2620 Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> received response, status 200 content U
+default	16:41:56.059506-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> response ended
+default	16:41:56.059961-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> done using Connection 1
+default	16:41:56.060184-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=842, cache_hit=true}
+default	16:41:56.060914-0500	RedLemon	Task <1FBA232E-96BB-4397-A1F9-7D75014D1E37>.<729> finished successfully
+default	16:41:56.062731-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:56.070995-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:56.981971-0500	runningboardd	Invalidating assertion 169-6308-1793 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:57.090970-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:57.091056-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:57.091130-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:57.093138-0500	runningboardd	Invalidating assertion 169-103-1794 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:57.268848-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:57.268896-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:57.268940-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:58.234667-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:58.235151-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [02BC6C05-C4B7-466D-8780-2103C0D2238B] (reporting strategy default)> on Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> was not selected for reporting
+default	16:41:58.236116-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:58.236315-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> now using Connection 1
+default	16:41:58.237138-0500	RedLemon	0x7fe23c313bd8 ID=2624 Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> sent request, body N 0
+default	16:41:58.301557-0500	RedLemon	0x7fe23c313bd8 ID=2624 Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> received response, status 200 content U
+default	16:41:58.301989-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> response ended
+default	16:41:58.302390-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> done using Connection 1
+default	16:41:58.302649-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=65, response_duration_ms=1, request_bytes=511, response_bytes=836, cache_hit=true}
+default	16:41:58.302860-0500	RedLemon	Task <F65D8DF8-05C4-4E88-B637-E18A35CE31FB>.<730> finished successfully
+default	16:41:58.303538-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1795 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:23.708695-0500	runningboardd	Assertion 169-5311-1050 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:23.708811-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:23.709233-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [483918DD-52FF-4C78-B536-4A4D2205A776] (reporting strategy default)> on Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> was not selected for reporting
-default	16:02:23.710006-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:23.710280-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> now using Connection 1
-default	16:02:23.711357-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:23.711687-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:23.711431-0500	RedLemon	0x7f863179fe78 ID=1024 Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> sent request, body N 0
-default	16:02:23.711853-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:23.713813-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1051 target:5311 attributes:[
+default	16:41:58.303741-0500	runningboardd	Assertion 169-6308-1795 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:41:58.304605-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:58.305011-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [DDD40464-9A46-49D3-9782-769F64CD14DF] (reporting strategy default)> on Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> was not selected for reporting
+default	16:41:58.305756-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:58.306034-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> now using Connection 1
+default	16:41:58.305773-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:58.306302-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:58.306404-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:58.307116-0500	RedLemon	0x7fe23c313bd8 ID=2628 Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> sent request, body N 0
+default	16:41:58.308918-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1796 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:23.714009-0500	runningboardd	Assertion 169-103-1051 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:23.714828-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:23.714921-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:23.714972-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:23.725480-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:23.729197-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:23.729481-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:23.730029-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:23.730246-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:23.730420-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:23.730515-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:23.775577-0500	RedLemon	0x7f863179fe78 ID=1024 Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> received response, status 200 content U
-default	16:02:23.776246-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> response ended
-default	16:02:23.776684-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> done using Connection 1
-default	16:02:23.777018-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=65, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:23.777595-0500	RedLemon	Task <8FFFECB5-F54E-4452-A7CF-F83CE75FC35C>.<430> finished successfully
-default	16:02:23.778255-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:23.779304-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BB3FEF81-A853-4041-ABE8-8FE96DAB5A56] (reporting strategy default)> on Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> was not selected for reporting
-default	16:02:23.780122-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:23.780333-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:23.780447-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> now using Connection 1
-default	16:02:23.780946-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [E5523659-C788-46F2-AB88-379C633C5D60] (reporting strategy default)> on Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> was not selected for reporting
-default	16:02:23.782001-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:23.782181-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> now using Connection 1
-default	16:02:23.783169-0500	RedLemon	0x7f8630843c88 ID=1028 Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> sent request, body N 0
-default	16:02:23.783215-0500	RedLemon	0x7f8632dd12b8 ID=1032 Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> sent request, body N 0
-default	16:02:23.797488-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:23.841190-0500	RedLemon	0x7f8630843c88 ID=1028 Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> received response, status 200 content U
-default	16:02:23.841958-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> response ended
-default	16:02:23.842366-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> done using Connection 1
-default	16:02:23.842592-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=2, response_start_ms=61, response_duration_ms=1, request_bytes=500, response_bytes=954, cache_hit=true}
-default	16:02:23.843364-0500	RedLemon	Task <D4043B01-3F59-4E3E-8392-3E4626755001>.<431> finished successfully
-default	16:02:23.855925-0500	RedLemon	0x7f8632dd12b8 ID=1032 Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> received response, status 200 content U
-default	16:02:23.856689-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> response ended
-default	16:02:23.857125-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> done using Connection 1
-default	16:02:23.857376-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> summary for task success {transaction_duration_ms=76, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=74, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:23.857943-0500	RedLemon	Task <196C08A3-CD7F-49E5-8422-833FB35EF751>.<432> finished successfully
-default	16:02:23.860413-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:23.939199-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:23.939603-0500	RedLemon	   Payload keys: isPlaying, senderId, type, timestamp, position
-default	16:02:23.940052-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:23.940265-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:23.940439-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:23.940526-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:23.991308-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:24.398780-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:24.399122-0500	RedLemon	   Payload keys: position, isPlaying, timestamp, type, senderId
-default	16:02:24.399746-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:24.399972-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:24.400137-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:24.400207-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:24.458843-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:24.459216-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:24.459942-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:24.460179-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:24.460445-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:24.460445-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:24.698363-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:24.698537-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:24.698807-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:24.698940-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:24.699048-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:24.699107-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:24.784030-0500	RedLemon	Connection 25: cleaning up
-default	16:02:24.784192-0500	RedLemon	[C25 637C87C6-7FA3-44B3-A886-28C9A553C8B5 Hostname#314b9ea3:443 quic-connection, url hash: 8980cd49, definite, attribution: developer] cancel
-default	16:02:24.784415-0500	RedLemon	[C25 637C87C6-7FA3-44B3-A886-28C9A553C8B5 Hostname#314b9ea3:443 quic-connection, url hash: 8980cd49, definite, attribution: developer] cancelled
-	[C25.1.1 70E0EEBB-BE92-4F86-8D52-32A3AA575C96 2607:fea8:995b:fd00:7141:6ed:4959:38c8.55992<->IPv6#ee94bece.443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 60.449s, DNS @0.006s took 0.124s, TCP @0.227s took 0.026s, TLS 1.2 took 0.161s
-	bytes in/out: 4307/1152, packets in/out: 7/10, rtt: 0.020s, retransmitted bytes: 0, out-of-order bytes: 0
-default	16:02:24.784974-0500	runningboardd	Invalidating assertion 169-5311-1050 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:24.785372-0500	RedLemon	nw_protocol_tcp_log_summary [C25.1.1:3] 
-	[EB902F84-7B64-4106-B17F-3F8C0C1CAB34 <private>:55992<-><private>:443]
-	Init: 1, Conn_Time: 24.738ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 1
-	rtt_cache: kernel, rtt_upd: 5, rtt: 20.562ms, rtt_var: 6.812ms rtt_nc: 24.281ms, rtt_var_nc: 6.375ms base rtt: 20ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	16:02:24.785547-0500	RedLemon	nw_flow_disconnected [C25.1.1 IPv6#ee94bece.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	16:02:24.786495-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C25] reporting state cancelled
-default	16:02:24.787671-0500	RedLemon	Connection 25: done
-default	16:02:24.787734-0500	RedLemon	tcp_output [C25.1.1:3] flags=[F.] seq=1171606442, ack=2151223566, win=2048 state=FIN_WAIT_1 rcv_nxt=2151223566, snd_una=1171606411
-default	16:02:24.802339-0500	RedLemon	tcp_output [C25.1.1:3] flags=[FP.] seq=1171606411, ack=2151223566, win=2048 state=FIN_WAIT_1 rcv_nxt=2151223566, snd_una=1171606411
-default	16:02:24.808007-0500	RedLemon	tcp_input [C25.1.1:3] flags=[F.] seq=2151223566, ack=1171606443, win=16 state=FIN_WAIT_2 rcv_nxt=2151223566, snd_una=1171606443
-default	16:02:24.896796-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:24.896843-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:24.896974-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:24.898509-0500	runningboardd	Invalidating assertion 169-103-1051 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:24.945067-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:24.945516-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:24.946027-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:24.946228-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:24.946403-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:24.946497-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:25.075109-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:25.075249-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:25.075342-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:25.320696-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:25.320964-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:25.321400-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:25.321610-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:25.321785-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:25.321876-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:25.525965-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:25.526693-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:25.527205-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:25.527420-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:25.527601-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:25.527693-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:25.730130-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:25.730510-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:25.731113-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:25.731277-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:25.731435-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:25.731499-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:26.029629-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:26.029624-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:26.030452-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D9237AC4-B302-4D59-AC2E-D7B69FF9D9A4] (reporting strategy default)> on Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> was not selected for reporting
-default	16:02:26.030515-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [66AB13B1-96EC-4164-9BFE-D346006D3235] (reporting strategy default)> on Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> was not selected for reporting
-default	16:02:26.031512-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:26.031749-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> now using Connection 1
-default	16:02:26.032656-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:26.032812-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> now using Connection 1
-default	16:02:26.033653-0500	RedLemon	0x7f862e298b08 ID=1036 Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> sent request, body N 0
-default	16:02:26.033751-0500	RedLemon	0x7f86316e74a8 ID=1040 Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> sent request, body N 0
-default	16:02:26.036787-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:26.036981-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:26.037312-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:26.037442-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:26.037555-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:26.037619-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:26.100222-0500	RedLemon	0x7f86316e74a8 ID=1040 Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> received response, status 200 content U
-default	16:02:26.100718-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> response ended
-default	16:02:26.101069-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> done using Connection 1
-default	16:02:26.101340-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=68, response_duration_ms=1, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:02:26.101557-0500	RedLemon	Task <53E7F8F5-3844-4AA0-8EC2-30193CE6B94E>.<434> finished successfully
-default	16:02:26.102334-0500	RedLemon	0x7f862e298b08 ID=1036 Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> received response, status 200 content U
-default	16:02:26.102861-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> response ended
-default	16:02:26.103363-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> done using Connection 1
-default	16:02:26.103538-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> summary for task success {transaction_duration_ms=72, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=71, response_duration_ms=1, request_bytes=511, response_bytes=833, cache_hit=true}
-default	16:02:26.103945-0500	RedLemon	Task <2601307A-AAC1-4DD1-A7C8-50D759C34C2F>.<433> finished successfully
-default	16:02:26.104810-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1052 target:5311 attributes:[
+default	16:41:58.309056-0500	runningboardd	Assertion 169-103-1796 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:41:58.310040-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:58.310158-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:58.310216-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:58.316170-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:58.368356-0500	RedLemon	0x7fe23c313bd8 ID=2628 Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> received response, status 200 content U
+default	16:41:58.369121-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> response ended
+default	16:41:58.369389-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> done using Connection 1
+default	16:41:58.369539-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=62, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:41:58.369898-0500	RedLemon	Task <327CCA34-BBC5-49C3-A8C4-1A6524F94EAE>.<731> finished successfully
+default	16:41:58.371506-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:41:58.371805-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [7AC19BE2-CE87-4646-ABAC-B6C14A27062E] (reporting strategy default)> on Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> was not selected for reporting
+default	16:41:58.372561-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:41:58.372781-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> now using Connection 1
+default	16:41:58.373481-0500	RedLemon	0x7fe23c313bd8 ID=2632 Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> sent request, body N 0
+default	16:41:58.380131-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:58.429393-0500	RedLemon	0x7fe23c313bd8 ID=2632 Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> received response, status 200 content U
+default	16:41:58.430089-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> response ended
+default	16:41:58.430521-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> done using Connection 1
+default	16:41:58.430742-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> summary for task success {transaction_duration_ms=58, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=56, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:41:58.431468-0500	RedLemon	Task <0B62583B-A051-4EAA-B56F-DCE5C8BF8A7E>.<732> finished successfully
+default	16:41:58.433712-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:41:58.470469-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:41:59.410805-0500	runningboardd	Invalidating assertion 169-6308-1795 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:41:59.535144-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:59.535219-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:59.535291-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:41:59.536498-0500	runningboardd	Invalidating assertion 169-103-1796 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:41:59.660376-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:41:59.660509-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:41:59.660563-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:00.457669-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:00.458354-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [BCF76BFC-6265-4293-9504-B7ED94D9E590] (reporting strategy default)> on Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> was not selected for reporting
+default	16:42:00.459599-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:00.460067-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> now using Connection 1
+default	16:42:00.461260-0500	RedLemon	0x7fe23b3e4448 ID=2636 Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> sent request, body N 0
+default	16:42:00.556099-0500	RedLemon	0x7fe23b3e4448 ID=2636 Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> received response, status 200 content U
+default	16:42:00.556875-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> response ended
+default	16:42:00.557646-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> done using Connection 1
+default	16:42:00.557950-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> summary for task success {transaction_duration_ms=99, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=96, response_duration_ms=1, request_bytes=511, response_bytes=836, cache_hit=true}
+default	16:42:00.558516-0500	RedLemon	Task <28AB0D2C-6E02-4B92-99CF-063B1B68E02A>.<733> finished successfully
+default	16:42:00.560523-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:00.561137-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [95011104-4A3D-4FF2-829E-8C36BD8D2DBF] (reporting strategy default)> on Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> was not selected for reporting
+default	16:42:00.562189-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:00.562582-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1797 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:26.105074-0500	runningboardd	Assertion 169-5311-1052 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:26.105762-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:26.106128-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [0AB308EE-E0EF-457B-8BD8-B500DA65BBD9] (reporting strategy default)> on Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> was not selected for reporting
-default	16:02:26.106873-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:26.107155-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> now using Connection 1
-default	16:02:26.107580-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:26.107790-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:26.108172-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:26.108067-0500	RedLemon	0x7f8630a807f8 ID=1044 Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> sent request, body N 0
-default	16:02:26.110261-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1053 target:5311 attributes:[
+default	16:42:00.562469-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> now using Connection 1
+default	16:42:00.562987-0500	runningboardd	Assertion 169-6308-1797 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:42:00.563458-0500	RedLemon	0x7fe23bc5f238 ID=2640 Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> sent request, body N 0
+default	16:42:00.564343-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:00.564399-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:00.564456-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:00.565979-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1798 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:26.110424-0500	runningboardd	Assertion 169-103-1053 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:26.112076-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:26.112129-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:26.112171-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:26.117022-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:26.121918-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:26.174772-0500	RedLemon	0x7f8630a807f8 ID=1044 Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> received response, status 200 content U
-default	16:02:26.175385-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> response ended
-default	16:02:26.175900-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> done using Connection 1
-default	16:02:26.176254-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> summary for task success {transaction_duration_ms=69, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:26.176987-0500	RedLemon	Task <8E0982B6-AFD4-4141-A3AE-61F50286B294>.<435> finished successfully
-default	16:02:26.178917-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:26.179234-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [A7584DA5-1B9D-4EE9-AE1A-54D2E71EDF61] (reporting strategy default)> on Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> was not selected for reporting
-default	16:02:26.179958-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:26.180187-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> now using Connection 1
-default	16:02:26.181000-0500	RedLemon	0x7f8630843c88 ID=1048 Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> sent request, body N 0
-default	16:02:26.188909-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:26.209944-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:26.210242-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:26.210679-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:26.210901-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:26.211071-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:26.211159-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:26.248130-0500	RedLemon	0x7f8630843c88 ID=1048 Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> received response, status 200 content U
-default	16:02:26.248872-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> response ended
-default	16:02:26.249342-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> done using Connection 1
-default	16:02:26.249561-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> summary for task success {transaction_duration_ms=70, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=68, response_duration_ms=1, request_bytes=524, response_bytes=843, cache_hit=true}
-default	16:02:26.249927-0500	RedLemon	Task <1679F65D-0331-4295-90C7-11B5BB88532E>.<436> finished successfully
-default	16:02:26.252024-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:26.288904-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:26.548939-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:26.549248-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
-default	16:02:26.549686-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:26.549899-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:26.550069-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:26.550148-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:26.868453-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:26.868699-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:26.869139-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:26.869343-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:26.869514-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:26.869610-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:26.978954-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:26.979239-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:26.979794-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:26.980035-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:26.980215-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:26.980292-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:27.212805-0500	runningboardd	Invalidating assertion 169-5311-1052 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:27.215604-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:27.215934-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:27.216432-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:27.216639-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:27.216819-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:27.216908-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:27.389039-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:27.389233-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:27.389297-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:27.391038-0500	runningboardd	Invalidating assertion 169-103-1053 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:27.521023-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:27.521116-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:27.521200-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:27.549340-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:27.549530-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:27.549840-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:27.550017-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:27.550128-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:27.550184-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:27.658179-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:27.658485-0500	RedLemon	   Payload keys: senderId, type, timestamp, isPlaying, position
-default	16:02:27.658920-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:27.659132-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:27.659300-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:27.659389-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:28.085046-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:28.085361-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:28.085964-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:28.086142-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:28.086316-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:28.086410-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:28.158015-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:28.158324-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:28.158866-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:28.159075-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:28.159255-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:28.159341-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:28.261459-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:28.261522-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:28.263411-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [520ED423-1F22-4C1D-BB26-741FD033B345] (reporting strategy default)> on Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> was not selected for reporting
-default	16:02:28.263545-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [829D9856-92C6-4D07-BFB4-97CC6F4CF624] (reporting strategy default)> on Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> was not selected for reporting
-default	16:02:28.265178-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:28.265407-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> now using Connection 1
-default	16:02:28.266419-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:28.266609-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> now using Connection 1
-default	16:02:28.267421-0500	RedLemon	0x7f8630843c88 ID=1052 Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> sent request, body N 0
-default	16:02:28.267463-0500	RedLemon	0x7f8631531168 ID=1056 Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> sent request, body N 0
-default	16:02:28.372483-0500	RedLemon	0x7f8631531168 ID=1056 Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> received response, status 200 content U
-default	16:02:28.372900-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> response ended
-default	16:02:28.373218-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> done using Connection 1
-default	16:02:28.373867-0500	RedLemon	0x7f8630843c88 ID=1052 Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> received response, status 200 content U
-default	16:02:28.374155-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> summary for task success {transaction_duration_ms=109, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=107, response_duration_ms=1, request_bytes=511, response_bytes=834, cache_hit=true}
-default	16:02:28.374337-0500	RedLemon	Task <8E241A31-FEBB-48A9-A486-A9392494F79C>.<438> finished successfully
-default	16:02:28.375020-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> response ended
-default	16:02:28.376321-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:28.376360-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> done using Connection 1
-default	16:02:28.377182-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> summary for task success {transaction_duration_ms=112, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=109, response_duration_ms=3, request_bytes=500, response_bytes=955, cache_hit=true}
-default	16:02:28.377805-0500	RedLemon	Task <F06B8A96-FFB7-4F32-A4D1-49AE1A94206E>.<437> finished successfully
-default	16:02:28.377948-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [8A00DD28-EFBA-4CC6-8024-DAE0A77A22B4] (reporting strategy default)> on Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> was not selected for reporting
-default	16:02:28.378892-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:28.379307-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> now using Connection 1
-default	16:02:28.381119-0500	RedLemon	0x7f862e298b08 ID=1060 Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> sent request, body N 0
-default	16:02:28.381825-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1055 target:5311 attributes:[
+default	16:42:00.566380-0500	runningboardd	Assertion 169-103-1798 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:00.567977-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:00.568018-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:00.568059-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:00.575602-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:00.618227-0500	RedLemon	0x7fe23bc5f238 ID=2640 Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> received response, status 200 content U
+default	16:42:00.618983-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> response ended
+default	16:42:00.619627-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> done using Connection 1
+default	16:42:00.619873-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> summary for task success {transaction_duration_ms=58, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=56, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:42:00.620408-0500	RedLemon	Task <E605C02A-6E7F-435A-905C-6254C8491F0C>.<734> finished successfully
+default	16:42:00.622420-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:00.622731-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D54D2896-DC89-4D30-AE54-9E21670FDF79] (reporting strategy default)> on Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> was not selected for reporting
+default	16:42:00.623414-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:00.623606-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> now using Connection 1
+default	16:42:00.624562-0500	RedLemon	0x7fe23b3e4448 ID=2644 Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> sent request, body N 0
+default	16:42:00.632014-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:00.686544-0500	RedLemon	0x7fe23b3e4448 ID=2644 Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> received response, status 200 content U
+default	16:42:00.687127-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> response ended
+default	16:42:00.687561-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> done using Connection 1
+default	16:42:00.687784-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> summary for task success {transaction_duration_ms=64, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=63, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:42:00.688319-0500	RedLemon	Task <AEF4DC27-896F-42D4-9CA1-3341272F2339>.<735> finished successfully
+default	16:42:00.690243-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:42:00.723458-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:01.667790-0500	runningboardd	Invalidating assertion 169-6308-1797 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:42:01.793414-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:01.793490-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:01.793565-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:01.795105-0500	runningboardd	Invalidating assertion 169-103-1798 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:42:01.903604-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:01.903651-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:01.903697-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:02.883970-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:02.885257-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [23972790-124C-4643-A166-4F59B6AFD559] (reporting strategy default)> on Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> was not selected for reporting
+default	16:42:02.886312-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:02.886612-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> now using Connection 1
+default	16:42:02.887669-0500	RedLemon	0x7fe23b3e4448 ID=2648 Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> sent request, body N 0
+default	16:42:02.961513-0500	RedLemon	0x7fe23b3e4448 ID=2648 Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> received response, status 200 content U
+default	16:42:02.962301-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> response ended
+default	16:42:02.962739-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> done using Connection 1
+default	16:42:02.962984-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=75, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:42:02.963541-0500	RedLemon	Task <E32F2C5D-9D65-475C-877C-ECFEBBF836DE>.<736> finished successfully
+default	16:42:02.964822-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1799 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:28.382127-0500	runningboardd	Assertion 169-5311-1055 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:28.383980-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:28.384027-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:28.384105-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:28.385479-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:28.386702-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1056 target:5311 attributes:[
+default	16:42:02.965064-0500	runningboardd	Assertion 169-6308-1799 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:42:02.965408-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:02.965802-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FACD7C6A-3542-4817-A920-76D27BF92A0A] (reporting strategy default)> on Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> was not selected for reporting
+default	16:42:02.966528-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:02.966804-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> now using Connection 1
+default	16:42:02.967809-0500	RedLemon	0x7fe23bc5f238 ID=2652 Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> sent request, body N 0
+default	16:42:02.969017-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:02.969482-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:02.969546-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:02.971167-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1800 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:28.386854-0500	runningboardd	Assertion 169-103-1056 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:28.387753-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:28.387799-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:28.387842-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:28.439819-0500	RedLemon	0x7f862e298b08 ID=1060 Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> received response, status 200 content U
-default	16:02:28.440452-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> response ended
-default	16:02:28.440912-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> done using Connection 1
-default	16:02:28.441169-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> summary for task success {transaction_duration_ms=62, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=61, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:28.441690-0500	RedLemon	Task <80817D19-B246-48A0-AE40-5DC3927F8CDB>.<439> finished successfully
-default	16:02:28.443943-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:28.444253-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [023C46A1-2342-4386-8950-630CD6169152] (reporting strategy default)> on Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> was not selected for reporting
-default	16:02:28.444961-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:28.445152-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> now using Connection 1
-default	16:02:28.445911-0500	RedLemon	0x7f8630843c88 ID=1064 Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> sent request, body N 0
-default	16:02:28.452404-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:28.454552-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:28.454843-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:28.455297-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:28.455492-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:28.455672-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:28.455769-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:28.580437-0500	RedLemon	0x7f8630843c88 ID=1064 Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> received response, status 200 content U
-default	16:02:28.581109-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> response ended
-default	16:02:28.581871-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> done using Connection 1
-default	16:02:28.583312-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> summary for task success {transaction_duration_ms=138, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=135, response_duration_ms=2, request_bytes=524, response_bytes=839, cache_hit=true}
-default	16:02:28.583839-0500	RedLemon	Task <A3BA6E70-CDDF-414C-83E0-AFED91A94D61>.<440> finished successfully
-default	16:02:28.585808-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:28.616462-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:28.656694-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:28.656897-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:28.657195-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:28.657329-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:28.657434-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:28.657490-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:29.006515-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:29.006824-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:29.007272-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:29.007479-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:29.007652-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:29.007746-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:29.211611-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:29.212001-0500	RedLemon	   Payload keys: senderId, position, isPlaying, timestamp, type
-default	16:02:29.212471-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:29.212676-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:29.212855-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:29.212989-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:29.486534-0500	runningboardd	Invalidating assertion 169-5311-1055 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:29.518583-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:29.518922-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:29.519525-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:29.519754-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:29.519948-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:29.520029-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:29.664828-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:29.664908-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:29.664987-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:29.666682-0500	runningboardd	Invalidating assertion 169-103-1056 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:29.723565-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:29.723951-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:29.724392-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:29.724606-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:29.724780-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:29.724873-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:29.787956-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:29.788031-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:29.788100-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:29.953289-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:29.953506-0500	RedLemon	   Payload keys: senderId, type, position, timestamp, isPlaying
-default	16:02:29.953814-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:29.953943-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:29.954052-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:29.954109-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:30.338179-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:30.338504-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:30.338990-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:30.339215-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:30.339402-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:30.339495-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:30.542154-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:30.542463-0500	RedLemon	   Payload keys: senderId, timestamp, isPlaying, position, type
-default	16:02:30.542984-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:30.543188-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:30.543369-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:30.543459-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:30.566011-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> summary for task failure {transaction_duration_ms=30838, response_status=-1, connection=24, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=0, response_duration_ms=0, request_bytes=278, response_bytes=0, cache_hit=false}
-default	16:02:30.566279-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-error	16:02:30.566437-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> finished with error [-1001] Error Domain=NSURLErrorDomain Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7f86308857d0 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>, NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _kCFStreamErrorDomainKey=4}
-default	16:02:30.566793-0500	RedLemon	Connection 24: cleaning up
-default	16:02:30.567128-0500	RedLemon	[C24 2FF68A92-E19D-4FFF-AE49-994009A9A420 127.0.0.1:47253 tcp, url hash: 9000dee9, definite, attribution: developer] cancel
-default	16:02:30.567464-0500	RedLemon	[C24 2FF68A92-E19D-4FFF-AE49-994009A9A420 127.0.0.1:47253 tcp, url hash: 9000dee9, definite, attribution: developer] cancelled
-	[C24 1A83A3C6-4492-4D94-93EE-447AF901F060 127.0.0.1:49322<->127.0.0.1:47253]
+default	16:42:02.971362-0500	runningboardd	Assertion 169-103-1800 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:02.972091-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:02.972326-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:02.972379-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:02.972435-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:03.026776-0500	RedLemon	0x7fe23bc5f238 ID=2652 Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> received response, status 200 content U
+default	16:42:03.027355-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> response ended
+default	16:42:03.027796-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> done using Connection 1
+default	16:42:03.028031-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> summary for task success {transaction_duration_ms=61, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=60, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:42:03.028676-0500	RedLemon	Task <5C00D0A9-02EF-49B4-B994-ECDD5106F48B>.<737> finished successfully
+default	16:42:03.030797-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:03.031094-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [43416A3A-CD51-4CBD-8C2C-CCB95EB6B810] (reporting strategy default)> on Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> was not selected for reporting
+default	16:42:03.031873-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:03.032074-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> now using Connection 1
+default	16:42:03.032887-0500	RedLemon	0x7fe23bc5f238 ID=2656 Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> sent request, body N 0
+default	16:42:03.045200-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:03.098736-0500	RedLemon	0x7fe23bc5f238 ID=2656 Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> received response, status 200 content U
+default	16:42:03.099322-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> response ended
+default	16:42:03.099764-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> done using Connection 1
+default	16:42:03.099992-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> summary for task success {transaction_duration_ms=68, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=67, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
+default	16:42:03.100564-0500	RedLemon	Task <FA3D45DC-E4B3-4EF9-8A04-8AE7243E0DDC>.<738> finished successfully
+default	16:42:03.104100-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:42:03.140253-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:04.043771-0500	runningboardd	Invalidating assertion 169-6308-1799 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:42:04.194317-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:04.194392-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:04.194470-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:04.195946-0500	runningboardd	Invalidating assertion 169-103-1800 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:42:04.371186-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:04.371259-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:04.371326-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:05.293133-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> summary for task failure {transaction_duration_ms=30209, response_status=-1, connection=40, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=1, secure_connection_duration_ms=0, private_relay=false, request_start_ms=3, request_duration_ms=0, response_start_ms=0, response_duration_ms=0, request_bytes=278, response_bytes=0, cache_hit=false}
+default	16:42:05.293500-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+error	16:42:05.293690-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> finished with error [-1001] Error Domain=NSURLErrorDomain Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7fe23b3b7660 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>, NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _kCFStreamErrorDomainKey=4}
+default	16:42:05.294069-0500	RedLemon	Connection 40: cleaning up
+default	16:42:05.294337-0500	RedLemon	[C40 B05F6B89-756E-4F74-8D00-A6AECC3AE26D 127.0.0.1:47253 tcp, url hash: a025d583, definite, attribution: developer] cancel
+default	16:42:05.294684-0500	RedLemon	[C40 B05F6B89-756E-4F74-8D00-A6AECC3AE26D 127.0.0.1:47253 tcp, url hash: a025d583, definite, attribution: developer] cancelled
+	[C40 5354C819-ACD2-4DB0-871A-5C9F0F16EF74 127.0.0.1:49671<->127.0.0.1:47253]
 	Connected Path: satisfied (Path is satisfied), viable, interface: lo0
 	Privacy Stance: Not Eligible
-	Duration: 66.369s, TCP @0.001s took 0.003s
-	bytes in/out: 234596/523, packets in/out: 15/2, rtt: 0.001s, retransmitted bytes: 0, out-of-order bytes: 0
-default	16:02:30.567493-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [731836FA-EF71-4022-88D8-0AFEA3E12A24] (reporting strategy default)> on Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> was not selected for reporting
-default	16:02:30.568171-0500	RedLemon	nw_flow_disconnected [C24 127.0.0.1:47253 cancelled socket-flow ((null))] Output protocol disconnected
-default	16:02:30.568360-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C24] reporting state cancelled
-default	16:02:30.568536-0500	RedLemon	Task <CC449EF5-8DE9-4366-B66C-3C0339D1B475>.<24> done using Connection 24
-default	16:02:30.568952-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:30.569340-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> now using Connection 1
-default	16:02:30.571351-0500	RedLemon	0x7f862e298b08 ID=1068 Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> sent request, body N 0
-default	16:02:30.639785-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> summary for task failure {transaction_duration_ms=30014, response_status=-1, connection=30, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=1, secure_connection_duration_ms=0, private_relay=false, request_start_ms=3, request_duration_ms=0, response_start_ms=0, response_duration_ms=0, request_bytes=278, response_bytes=0, cache_hit=false}
-error	16:02:30.640276-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> finished with error [-1001] Error Domain=NSURLErrorDomain Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7f863089cf90 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=<private>, _NSURLErrorRelatedURLSessionTaskErrorKey=<private>, NSLocalizedDescription=<private>, NSErrorFailingURLStringKey=<private>, NSErrorFailingURLKey=<private>, _kCFStreamErrorDomainKey=4}
-default	16:02:30.640522-0500	RedLemon	Connection 30: cleaning up
-default	16:02:30.640610-0500	RedLemon	[C30 E23A00D1-3B0F-4E60-9696-919BFD0CE734 127.0.0.1:47253 tcp, url hash: c280ff71, definite, attribution: developer] cancel
-default	16:02:30.640774-0500	RedLemon	[C30 E23A00D1-3B0F-4E60-9696-919BFD0CE734 127.0.0.1:47253 tcp, url hash: c280ff71, definite, attribution: developer] cancelled
-	[C30 1A83A3C6-4492-4D94-93EE-447AF901F060 127.0.0.1:49328<->127.0.0.1:47253]
-	Connected Path: satisfied (Path is satisfied), viable, interface: lo0
-	Privacy Stance: Not Eligible
-	Duration: 30.015s, TCP @0.000s took 0.001s
+	Duration: 30.209s, TCP @0.000s took 0.001s
 	bytes in/out: 0/278, packets in/out: 0/1, rtt: 0.001s, retransmitted bytes: 0, out-of-order bytes: 0
-default	16:02:30.641067-0500	RedLemon	nw_flow_disconnected [C30 127.0.0.1:47253 cancelled socket-flow ((null))] Output protocol disconnected
-default	16:02:30.641110-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C30] reporting state cancelled
-default	16:02:30.641161-0500	RedLemon	Task <118AE513-342A-49DD-BD0F-7B21E98141A4>.<25> done using Connection 30
-default	16:02:30.641638-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:30.642004-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [6B4B81E7-F1A5-4F3C-9258-540541B2C4FC] (reporting strategy default)> on Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> was not selected for reporting
-default	16:02:30.642796-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:30.642995-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> now using Connection 1
-default	16:02:30.643975-0500	RedLemon	0x7f8632e5b438 ID=1072 Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> sent request, body N 0
-default	16:02:30.644602-0500	RedLemon	0x7f862e298b08 ID=1068 Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> received response, status 200 content U
-default	16:02:30.645458-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> response ended
-default	16:02:30.645870-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> done using Connection 1
-default	16:02:30.646290-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> summary for task success {transaction_duration_ms=77, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=2, response_start_ms=76, response_duration_ms=1, request_bytes=500, response_bytes=956, cache_hit=true}
-default	16:02:30.646627-0500	RedLemon	Task <A2AFBC12-BF88-49A3-8E0C-2372F0F8F57A>.<441> finished successfully
-default	16:02:30.655128-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:30.655765-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:30.656496-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:30.656831-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:30.657108-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:30.661094-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [anon<RedLemon>(501):5311] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-5311-1057 target:5311 attributes:[
+default	16:42:05.294775-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B683DF8B-63E7-4799-8C94-B9A397C88100] (reporting strategy default)> on Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> was not selected for reporting
+default	16:42:05.295588-0500	RedLemon	nw_flow_disconnected [C40 127.0.0.1:47253 cancelled socket-flow ((null))] Output protocol disconnected
+default	16:42:05.295994-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C40] reporting state cancelled
+default	16:42:05.296155-0500	RedLemon	Task <ED2EB75D-E22F-4749-AEB4-875CCA30790A>.<22> done using Connection 40
+default	16:42:05.296521-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:05.296858-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> now using Connection 1
+default	16:42:05.298551-0500	RedLemon	0x7fe23b4b6728 ID=2660 Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> sent request, body N 0
+default	16:42:05.362227-0500	RedLemon	0x7fe23b4b6728 ID=2660 Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> received response, status 200 content U
+default	16:42:05.362734-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> response ended
+default	16:42:05.363127-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> done using Connection 1
+default	16:42:05.363308-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> summary for task success {transaction_duration_ms=67, response_status=200, connection=1, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=66, response_duration_ms=1, request_bytes=511, response_bytes=837, cache_hit=true}
+default	16:42:05.363487-0500	RedLemon	Task <7717F458-113C-4412-B28F-2900858F80D2>.<739> finished successfully
+default	16:42:05.365860-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1801 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:30.661597-0500	runningboardd	Assertion 169-5311-1057 (target:[anon<RedLemon>(501):5311]) will be created as active as no start-time-defining assertions exist
-default	16:02:30.663395-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:30.663434-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:30.663470-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:30.678548-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):5311] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1058 target:5311 attributes:[
+default	16:42:05.366031-0500	runningboardd	Assertion 169-6308-1801 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:42:05.366435-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:05.366802-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [FF4C7928-BE9F-4233-81F2-528D9DEA9CC8] (reporting strategy default)> on Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> was not selected for reporting
+default	16:42:05.367500-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:05.367830-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> now using Connection 1
+default	16:42:05.368846-0500	RedLemon	0x7fe23bcf0198 ID=2664 Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> sent request, body N 0
+default	16:42:05.369390-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:05.369585-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:05.369674-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:05.373220-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1802 target:6308 attributes:[
 	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
 	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
 	]>
-default	16:02:30.678962-0500	runningboardd	Assertion 169-103-1058 (target:[anon<RedLemon>(501):5311]) will be created as active
-default	16:02:30.683748-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:30.684593-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:30.684937-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:30.685230-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:30.704731-0500	RedLemon	0x7f8632e5b438 ID=1072 Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> received response, status 200 content U
-default	16:02:30.705351-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> response ended
-default	16:02:30.705737-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> done using Connection 1
-default	16:02:30.705913-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> summary for task success {transaction_duration_ms=63, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=62, response_duration_ms=1, request_bytes=511, response_bytes=830, cache_hit=true}
-default	16:02:30.706206-0500	RedLemon	Task <F7E37484-A578-41D7-9AF7-CA8648F91AA1>.<442> finished successfully
-default	16:02:30.715253-0500	RedLemon	⚠️ Received Realtime message with no chat text
-default	16:02:30.715928-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:30.716339-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [4810C59A-9631-4C35-A02C-7AFF072BAEFC] (reporting strategy default)> on Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> was not selected for reporting
-default	16:02:30.717026-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:30.717202-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> now using Connection 1
-default	16:02:30.717896-0500	RedLemon	0x7f8632e5b438 ID=1076 Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> sent request, body N 0
-default	16:02:30.718552-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:30.781851-0500	RedLemon	0x7f8632e5b438 ID=1076 Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> received response, status 200 content U
-default	16:02:30.782437-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> response ended
-default	16:02:30.782875-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> done using Connection 1
-default	16:02:30.783103-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
-default	16:02:30.783711-0500	RedLemon	Task <571255AD-64FF-4CA4-BF61-E2023F136C94>.<443> finished successfully
-default	16:02:30.785717-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	16:02:30.786001-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [505860D7-C9BD-4027-865E-26973F154A43] (reporting strategy default)> on Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> was not selected for reporting
-default	16:02:30.786803-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	16:02:30.787010-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> now using Connection 1
-default	16:02:30.787729-0500	RedLemon	0x7f8632ddee28 ID=1080 Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> sent request, body N 0
-default	16:02:30.812084-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:30.867656-0500	RedLemon	0x7f8632ddee28 ID=1080 Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> received response, status 200 content U
-default	16:02:30.868247-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> response ended
-default	16:02:30.868704-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> done using Connection 1
-default	16:02:30.868937-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> summary for task success {transaction_duration_ms=82, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=81, response_duration_ms=1, request_bytes=524, response_bytes=845, cache_hit=true}
-default	16:02:30.869683-0500	RedLemon	Task <13F02049-DE35-46D0-9FF2-78A2F25C0A4C>.<444> finished successfully
-default	16:02:30.871556-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
-default	16:02:30.910702-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
-default	16:02:30.954319-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:30.954509-0500	RedLemon	   Payload keys: timestamp, senderId, position, isPlaying, type
-default	16:02:30.954807-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:30.954936-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:30.955108-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:31.259365-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:31.259623-0500	RedLemon	   Payload keys: position, isPlaying, senderId, type, timestamp
-default	16:02:31.260062-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:31.260277-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:31.260449-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:31.465210-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:31.465616-0500	RedLemon	   Payload keys: position, timestamp, isPlaying, type, senderId
-default	16:02:31.466125-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:31.466345-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:31.466526-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:31.736105-0500	runningboardd	Invalidating assertion 169-5311-1057 (target:[anon<RedLemon>(501):5311]) from originator [anon<RedLemon>(501):5311]
-default	16:02:31.771347-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:31.771656-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:31.772154-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:31.772367-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:31.772541-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:31.864368-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:31.864450-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:31.864527-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:31.866686-0500	runningboardd	Invalidating assertion 169-103-1058 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.powerd>:103]
-default	16:02:31.976056-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:31.976372-0500	RedLemon	   Payload keys: timestamp, senderId, isPlaying, position, type
-default	16:02:31.976867-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:31.977077-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:31.977252-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:32.039998-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:32.040076-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:32.040152-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:32.283283-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:32.283818-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:32.284354-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:32.284528-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:32.284687-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:32.488296-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:32.488624-0500	RedLemon	   Payload keys: position, timestamp, isPlaying, type, senderId
-default	16:02:32.489123-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:32.489308-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:32.489473-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:32.795270-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:32.795667-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:32.796160-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:32.796407-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:32.796581-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:33.102793-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:33.103115-0500	RedLemon	   Payload keys: position, timestamp, isPlaying, type, senderId
-default	16:02:33.103600-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:33.103830-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:33.104006-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:33.168692-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:33.168982-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:33.169527-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:33.169708-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:33.169878-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:33.512696-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:33.513011-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:33.513540-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:33.513742-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:33.513919-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:33.716981-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:33.717294-0500	RedLemon	   Payload keys: timestamp, senderId, position, isPlaying, type
-default	16:02:33.717758-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:33.717972-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:33.718147-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:34.024209-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:34.024508-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:34.025008-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:34.025204-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:34.025376-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:34.228497-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:34.228905-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:34.229299-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:34.229439-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:34.229582-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:34.433746-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:34.434046-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:34.434533-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:34.434740-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:34.434907-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:34.741048-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:34.741355-0500	RedLemon	   Payload keys: position, isPlaying, senderId, type, timestamp
-default	16:02:34.741795-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:34.742005-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:34.742294-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:34.945739-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:34.946141-0500	RedLemon	   Payload keys: position, timestamp, isPlaying, type, senderId
-default	16:02:34.946660-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:34.946871-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:34.947036-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:35.253036-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:35.253413-0500	RedLemon	   Payload keys: position, senderId, type, isPlaying, timestamp
-default	16:02:35.253849-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:35.254045-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:35.254230-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:35.457942-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:35.458261-0500	RedLemon	   Payload keys: position, isPlaying, senderId, type, timestamp
-default	16:02:35.458702-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:35.458934-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:35.459116-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:35.662314-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:35.662626-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:35.663153-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:35.663355-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:35.663526-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:35.711539-0500	runningboardd	Invalidating assertion 169-129-1006 (target:[anon<RedLemon>(501):5311]) from originator [daemon<com.apple.coreservices.launchservicesd>:129]
-default	16:02:35.824701-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring jetsam update because this process is not memory-managed
-default	16:02:35.824742-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring suspend because this process is not lifecycle managed
-default	16:02:35.824810-0500	runningboardd	[anon<RedLemon>(501):5311] Set darwin role to: UserInteractiveNonFocal
-default	16:02:35.824856-0500	runningboardd	[anon<RedLemon>(501):5311] Ignoring GPU update because this process is not GPU managed
-default	16:02:35.969455-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:35.969676-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:35.969969-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:35.970151-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:35.970274-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:36.174453-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:36.174647-0500	RedLemon	   Payload keys: position, isPlaying, type, senderId, timestamp
-default	16:02:36.174921-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:36.175048-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:36.175143-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:36.481527-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:36.481887-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:36.482523-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:36.482803-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:36.482986-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:36.687141-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:36.687455-0500	RedLemon	   Payload keys: position, timestamp, isPlaying, type, senderId
-default	16:02:36.687880-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:36.688019-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:36.688121-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:36.993376-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:36.993592-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:36.993885-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:36.994010-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:36.994118-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:37.241489-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:37.241832-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:37.242270-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:37.242475-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:37.242645-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:37.505517-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:37.505826-0500	RedLemon	   Payload keys: type, isPlaying, position, senderId, timestamp
-default	16:02:37.506279-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:37.506570-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:37.506783-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	16:02:37.710459-0500	RedLemon	📨 Realtime: Received broadcast message
-default	16:02:37.710771-0500	RedLemon	   Payload keys: senderId, isPlaying, type, timestamp, position
-default	16:02:37.711210-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: 789Q
-default	16:02:37.711406-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
-default	16:02:37.711596-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:05.373924-0500	runningboardd	Assertion 169-103-1802 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:05.378041-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:05.378218-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:05.378321-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:05.384067-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:05.427388-0500	RedLemon	0x7fe23bcf0198 ID=2664 Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> received response, status 200 content U
+default	16:42:05.427784-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> response ended
+default	16:42:05.428144-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> done using Connection 1
+default	16:42:05.428294-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> summary for task success {transaction_duration_ms=61, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=1, response_start_ms=60, response_duration_ms=0, request_bytes=524, response_bytes=843, cache_hit=true}
+default	16:42:05.428719-0500	RedLemon	Task <22B168B5-7DF9-4660-975A-AF840BD340BC>.<740> finished successfully
+default	16:42:05.430615-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
+default	16:42:05.430922-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D8CAD453-222C-4031-901C-13D2760ED9F9] (reporting strategy default)> on Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> was not selected for reporting
+default	16:42:05.431715-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
+default	16:42:05.431921-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> now using Connection 1
+default	16:42:05.432663-0500	RedLemon	0x7fe23bcf0198 ID=2668 Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> sent request, body N 0
+default	16:42:05.447143-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:05.495960-0500	RedLemon	0x7fe23bcf0198 ID=2668 Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> received response, status 200 content U
+default	16:42:05.496752-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> response ended
+default	16:42:05.497423-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> done using Connection 1
+default	16:42:05.497719-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> summary for task success {transaction_duration_ms=66, response_status=200, connection=1, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=64, response_duration_ms=1, request_bytes=524, response_bytes=844, cache_hit=true}
+default	16:42:05.498167-0500	RedLemon	Task <3FDA79DB-C53C-425B-A1CD-C94ECB6C4559>.<741> finished successfully
+default	16:42:05.500070-0500	RedLemon	🔍 Current guest participant found in polling: lemontom with ID 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+default	16:42:05.510087-0500	RedLemon	Connection 1: encountered bidirectional stream limit updated event
+default	16:42:06.421061-0500	runningboardd	Invalidating assertion 169-6308-1801 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:42:06.577259-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:06.577418-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:06.577548-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:06.581203-0500	runningboardd	Invalidating assertion 169-103-1802 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:42:06.692666-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:06.692713-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:06.692754-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:16.004371-0500	runningboardd	Invalidating assertion 169-129-1760 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.coreservices.launchservicesd>:129]
+default	16:42:16.123440-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:16.123605-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:16.123919-0500	runningboardd	[anon<RedLemon>(501):6308] Set darwin role to: UserInteractiveNonFocal
+default	16:42:16.124234-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:18.132322-0500	RedLemon	0x7fe23e18ced8 ID=4 Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> received response, status 520 content K
+default	16:42:18.132803-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> response ended
+default	16:42:18.133666-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [anon<RedLemon>(501):6308] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:169-6308-1813 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:42:18.133189-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> done using Connection 30
+default	16:42:18.133369-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> summary for task success {transaction_duration_ms=42247, response_status=520, connection=30, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=42246, response_duration_ms=1, request_bytes=167, response_bytes=7670, cache_hit=true}
+default	16:42:18.133939-0500	runningboardd	Assertion 169-6308-1813 (target:[anon<RedLemon>(501):6308]) will be created as active as no start-time-defining assertions exist
+default	16:42:18.133934-0500	RedLemon	Task <612ADD22-193D-46F8-8E96-580DBF6FD770>.<702> finished successfully
+default	16:42:18.134579-0500	RedLemon	❌ Failed to fetch subtitles: Abort.503: SubDL API request failed
+default	16:42:18.135998-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:18.136050-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:18.136131-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:18.138665-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.powerd>:103] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:169-103-1814 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
+	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
+	]>
+default	16:42:18.138822-0500	runningboardd	Assertion 169-103-1814 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:18.140604-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:18.140649-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:18.140691-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:19.143341-0500	runningboardd	Invalidating assertion 169-6308-1813 (target:[anon<RedLemon>(501):6308]) from originator [anon<RedLemon>(501):6308]
+default	16:42:19.245222-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:19.245301-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:19.245373-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:19.247435-0500	runningboardd	Invalidating assertion 169-103-1814 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.powerd>:103]
+default	16:42:19.414736-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:19.414899-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:19.415029-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:30.215970-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:30.216270-0500	RedLemon	   Payload keys: isPlaying, position, timestamp, senderId, type
+default	16:42:30.216715-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:30.216937-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:30.217116-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:30.420922-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:30.421248-0500	RedLemon	   Payload keys: timestamp, position, senderId, type, isPlaying
+default	16:42:30.421674-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:30.421896-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:30.422072-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:30.728482-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:30.728846-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, type, position
+default	16:42:30.729301-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:30.729482-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:30.729602-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:30.871766-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:30.872104-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:30.872741-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:30.872981-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:30.873231-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:31.138000-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:31.138338-0500	RedLemon	   Payload keys: isPlaying, senderId, position, timestamp, type
+default	16:42:31.138767-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:31.138967-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:31.139134-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:31.445250-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:31.445574-0500	RedLemon	   Payload keys: timestamp, position, senderId, type, isPlaying
+default	16:42:31.445998-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:31.446207-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:31.446388-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:31.854496-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:31.855171-0500	RedLemon	   Payload keys: isPlaying, position, timestamp, senderId, type
+default	16:42:31.855690-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:31.855901-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:31.856065-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:31.879231-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:31.879580-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, type, position
+default	16:42:31.880069-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:31.880245-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:31.880417-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:32.571146-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:32.571532-0500	RedLemon	   Payload keys: timestamp, position, senderId, type, isPlaying
+default	16:42:32.571973-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:32.572185-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:32.572356-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:32.572551-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:32.572828-0500	RedLemon	   Payload keys: position, senderId, timestamp, isPlaying, type
+default	16:42:32.573273-0500	RedLemon	✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+default	16:42:32.573504-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: ready
+default	16:42:32.573681-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:32.632123-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:32.632462-0500	RedLemon	   Payload keys: isPlaying, senderId, position, timestamp, type
+default	16:42:32.632877-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:32.633093-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:32.633264-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:32.983640-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:32.983967-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:32.984402-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:32.984602-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:32.984770-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:33.186283-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:33.186707-0500	RedLemon	   Payload keys: isPlaying, position, timestamp, senderId, type
+default	16:42:33.187145-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:33.187345-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:33.187505-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:33.390676-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:33.391016-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, type, position
+default	16:42:33.391510-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:33.391726-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:33.391897-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:33.703708-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:33.704072-0500	RedLemon	   Payload keys: timestamp, position, senderId, type, isPlaying
+default	16:42:33.704546-0500	RedLemon	✅ Realtime: Decoded message type: play, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+default	16:42:33.704772-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: play
+default	16:42:33.704952-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:33.705096-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:33.705270-0500	RedLemon	   Payload keys: position, senderId, timestamp, isPlaying, type
+default	16:42:33.705533-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:33.705657-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:33.705760-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:33.902225-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:33.902496-0500	RedLemon	   Payload keys: isPlaying, senderId, position, timestamp, type
+default	16:42:33.902934-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:33.903134-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:33.903301-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:34.209706-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:34.210067-0500	RedLemon	   Payload keys: position, senderId, isPlaying, type, timestamp
+default	16:42:34.210652-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:34.210838-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:34.211002-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:34.516594-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:34.517007-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
+default	16:42:34.517581-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:34.517802-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:34.517977-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:34.564915-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "frontmost:6308" ID:169-129-1816 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"RoleUserInteractiveFocal" sourceEnvironment:"(null)">
+	]>
+default	16:42:34.565396-0500	runningboardd	Assertion 169-129-1816 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:34.587376-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:34.587470-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:34.587547-0500	runningboardd	[anon<RedLemon>(501):6308] Set darwin role to: UserInteractiveFocal
+default	16:42:34.587595-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:34.595834-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):6308] from originator [daemon<com.apple.coreservices.launchservicesd>:129] with description <RBSAssertionDescriptor| "notification:6308" ID:169-129-1817 target:6308 attributes:[
+	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"LSNotification" sourceEnvironment:"(null)">
+	]>
+default	16:42:34.596013-0500	runningboardd	Assertion 169-129-1817 (target:[anon<RedLemon>(501):6308]) will be created as active
+default	16:42:34.601754-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:34.601797-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:34.601835-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:34.722631-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:34.722923-0500	RedLemon	   Payload keys: isPlaying, timestamp, senderId, type, position
+default	16:42:34.723541-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:34.723933-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:34.724066-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:35.177587-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:35.177886-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:35.178334-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:35.178560-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:35.178740-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:35.193877-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:35.194123-0500	RedLemon	   Payload keys: isPlaying, position, timestamp, senderId, type
+default	16:42:35.194456-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:35.194565-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:35.194670-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:35.540699-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:35.541029-0500	RedLemon	   Payload keys: isPlaying, senderId, timestamp, position, type
+default	16:42:35.541588-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:35.541855-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:35.542079-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:35.849121-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:35.849570-0500	RedLemon	   Payload keys: senderId, timestamp, type, isPlaying, position
+default	16:42:35.850058-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:35.850198-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:35.850353-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:35.951111-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:35.951376-0500	RedLemon	   Payload keys: isPlaying, senderId, timestamp, position, type
+default	16:42:35.951704-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:35.951822-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:35.951944-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:36.387887-0500	runningboardd	Invalidating assertion 169-129-1816 (target:[anon<RedLemon>(501):6308]) from originator [daemon<com.apple.coreservices.launchservicesd>:129]
+default	16:42:36.462321-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:36.462541-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, type, senderId
+default	16:42:36.462862-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:36.463000-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:36.463110-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:36.463257-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:36.463445-0500	RedLemon	   Payload keys: position, senderId, isPlaying, type, timestamp
+default	16:42:36.463956-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:36.464185-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:36.464303-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:36.503205-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring jetsam update because this process is not memory-managed
+default	16:42:36.503314-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring suspend because this process is not lifecycle managed
+default	16:42:36.503557-0500	runningboardd	[anon<RedLemon>(501):6308] Set darwin role to: UserInteractiveNonFocal
+default	16:42:36.503757-0500	runningboardd	[anon<RedLemon>(501):6308] Ignoring GPU update because this process is not GPU managed
+default	16:42:36.871721-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:36.871969-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:36.872284-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:36.872389-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:36.872492-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:36.953725-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:36.953921-0500	RedLemon	   Payload keys: position, senderId, isPlaying, type, timestamp
+default	16:42:36.954216-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:36.954385-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:36.954495-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:37.281791-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:37.282001-0500	RedLemon	   Payload keys: isPlaying, position, senderId, timestamp, type
+default	16:42:37.282306-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:37.282423-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:37.282514-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:37.496016-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:37.496295-0500	RedLemon	   Payload keys: senderId, timestamp, type, isPlaying, position
+default	16:42:37.496840-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:37.497057-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:37.497231-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:37.793757-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:37.793960-0500	RedLemon	   Payload keys: isPlaying, senderId, position, timestamp, type
+default	16:42:37.794254-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:37.794388-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:37.794493-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:37.998110-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:37.998334-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:37.998613-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:37.998735-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:37.998828-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:38.305114-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:38.305361-0500	RedLemon	   Payload keys: timestamp, position, senderId, type, isPlaying
+default	16:42:38.305727-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:38.305869-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:38.305973-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:38.509872-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:38.510082-0500	RedLemon	   Payload keys: position, senderId, isPlaying, type, timestamp
+default	16:42:38.510447-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:38.510606-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:38.510711-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:38.818432-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:38.818717-0500	RedLemon	   Payload keys: timestamp, isPlaying, position, senderId, type
+default	16:42:38.819143-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:38.819339-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:38.819515-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+default	16:42:39.022526-0500	RedLemon	📨 Realtime: Received broadcast message
+default	16:42:39.022833-0500	RedLemon	   Payload keys: position, isPlaying, senderId, timestamp, type
+default	16:42:39.023559-0500	RedLemon	✅ Realtime: Decoded message type: playbackState, sender: HN5M
+default	16:42:39.023715-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: playbackState
+default	16:42:39.023865-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
+
 
 
 

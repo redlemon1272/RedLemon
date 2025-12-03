@@ -803,6 +803,9 @@ class LobbyViewModel: ObservableObject {
                     Task { @MainActor in
                         NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
 
+                        // CRITICAL FIX: Update lastRoomPlayingState to prevent DB polling from triggering double-start
+                        self.lastRoomPlayingState = true
+
                         // CRITICAL: Fetch fresh room state BEFORE countdown
                         // This ensures we have correct season/episode AND don't delay playback start
                         let fetchStartTime = Date()
@@ -856,7 +859,10 @@ class LobbyViewModel: ObservableObject {
                             }
                             NSLog("📺 Guest: Set season/episode from DB (Realtime path): S\(season)E\(episode)")
                         } else {
-                            NSLog("⚠️ Guest: No season/episode found in DB or local state")
+                            // Only warn if it's a series
+                            if self.room.mediaItem?.type == "series" {
+                                NSLog("⚠️ Guest: No season/episode found in DB or local state for series")
+                            }
                         }
 
                         // NOW wait for countdown (DB fetch already done, so timing is accurate)
@@ -1079,6 +1085,9 @@ class LobbyViewModel: ObservableObject {
 
     /// Poll room state for database fallback (guests only)
     private func pollRoomState() async {
+        // CRITICAL FIX: Don't poll/trigger if we are already starting
+        guard !isStarting else { return }
+
         do {
             guard let roomState = try await SupabaseClient.shared.getRoomState(roomId: room.id) else {
                 return
@@ -1142,7 +1151,10 @@ class LobbyViewModel: ObservableObject {
                         }
                         NSLog("📺 Guest: Set season/episode from DB: S\(season)E\(episode)")
                     } else {
-                        NSLog("⚠️ Guest: No season/episode found in DB or local state")
+                        // Only warn if it's a series
+                        if self.room.mediaItem?.type == "series" {
+                            NSLog("⚠️ Guest: No season/episode found in DB or local state for series")
+                        }
                     }
 
                     await appState.playMedia(

@@ -318,8 +318,8 @@ func registerStreamRoutes(_ app: Application) {
             targetTitle = nil
         }
 
-        // Attach subtitles to all streams
-        var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode)
+        // OPTIMIZATION: Filter streams FIRST, then attach subtitles to the survivors
+        var filteredStreams = streams
 
         // Filter by year if provided (removes wrong releases like 2005 version when looking for 2025)
         if let year = year {
@@ -328,8 +328,8 @@ func registerStreamRoutes(_ app: Application) {
                 print("   ⚠️ Year string '\(year)' could not be parsed; skipping year filter")
             }
 
-            let beforeCount = streamsWithSubtitles.count
-            streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            let beforeCount = filteredStreams.count
+            filteredStreams = filteredStreams.filter { stream in
                 // Movies: keep only streams whose titles include the exact year (or range member)
                 if type == "movie" {
                     guard let targetYear = allowedYears.first else { return true }
@@ -349,7 +349,7 @@ func registerStreamRoutes(_ app: Application) {
                 }
                 return hasAllowedYear
             }
-            let afterCount = streamsWithSubtitles.count
+            let afterCount = filteredStreams.count
             if type == "movie" {
                 print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
             } else {
@@ -361,9 +361,9 @@ func registerStreamRoutes(_ app: Application) {
 
         // CRITICAL: Filter x265/HEVC streams (server-side, ALWAYS runs)
         // User is on 2015 hardware, so we must block x265
-        let beforeCodecFilter = streamsWithSubtitles.count
+        let beforeCodecFilter = filteredStreams.count
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+        filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
             let hasBadCodec = badCodecs.contains { codec in
                 titleLower.contains(codec)
@@ -373,15 +373,15 @@ func registerStreamRoutes(_ app: Application) {
             }
             return !hasBadCodec
         }
-        let afterCodecFilter = streamsWithSubtitles.count
+        let afterCodecFilter = filteredStreams.count
         if afterCodecFilter < beforeCodecFilter {
             print("   🚫 SERVER FILTERED x265: \(beforeCodecFilter) → \(afterCodecFilter) streams")
         }
 
         // CRITICAL: Filter AV1 streams (hardware incompatibility)
-        let beforeAV1Filter = streamsWithSubtitles.count
+        let beforeAV1Filter = filteredStreams.count
         let av1Codecs = ["av1"]
-        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+        filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
             let hasAV1 = av1Codecs.contains { codec in
                 titleLower.contains(codec)
@@ -391,16 +391,16 @@ func registerStreamRoutes(_ app: Application) {
             }
             return !hasAV1
         }
-        let afterAV1Filter = streamsWithSubtitles.count
+        let afterAV1Filter = filteredStreams.count
         if afterAV1Filter < beforeAV1Filter {
             print("   🚫 SERVER FILTERED AV1: \(beforeAV1Filter) → \(afterAV1Filter) streams")
         }
 
         // CRITICAL: Filter MPEG-2 / REMUX streams (too large/inefficient for older hardware)
         // We only block REMUX if it's explicitly MPEG-2 or if we suspect it's a massive legacy file
-        let beforeMpeg2Filter = streamsWithSubtitles.count
+        let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
-        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+        filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
             
             // Block explicit MPEG-2
@@ -421,15 +421,15 @@ func registerStreamRoutes(_ app: Application) {
             
             return true
         }
-        let afterMpeg2Filter = streamsWithSubtitles.count
+        let afterMpeg2Filter = filteredStreams.count
         if afterMpeg2Filter < beforeMpeg2Filter {
             print("   🚫 SERVER FILTERED MPEG-2: \(beforeMpeg2Filter) → \(afterMpeg2Filter) streams")
         }
 
         // CRITICAL: Filter 3D movies (server-side, ALWAYS runs)
-        let before3DFilter = streamsWithSubtitles.count
+        let before3DFilter = filteredStreams.count
         let threeDFormats = ["3d", "sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
-        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+        filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
             let is3D = threeDFormats.contains { format in
                 titleLower.contains(format)
@@ -439,14 +439,14 @@ func registerStreamRoutes(_ app: Application) {
             }
             return !is3D
         }
-        let after3DFilter = streamsWithSubtitles.count
+        let after3DFilter = filteredStreams.count
         if after3DFilter < before3DFilter {
             print("   🚫 SERVER FILTERED 3D: \(before3DFilter) → \(after3DFilter) streams")
         }
 
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
-        let beforeAudioFilter = streamsWithSubtitles.count
-        streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+        let beforeAudioFilter = filteredStreams.count
+        filteredStreams = filteredStreams.filter { stream in
             // SPECIAL-CASE: Exempt trusted packs from audio filtering
             if isTrustedPack(stream) {
                 print("   ✅ EXEMPTING trusted pack from audio filter: \(stream.title)")
@@ -460,13 +460,13 @@ func registerStreamRoutes(_ app: Application) {
             }
             return hasAcceptableAudio
         }
-        let afterAudioFilter = streamsWithSubtitles.count
+        let afterAudioFilter = filteredStreams.count
         if afterAudioFilter < beforeAudioFilter {
             print("   🎵 SERVER FILTERED audio language: \(beforeAudioFilter) → \(afterAudioFilter) streams (English/Multi only)")
         }
 
-        print("   📊 After x265 + 3D + audio filter: \(streamsWithSubtitles.count) streams remaining")
-        for (idx, stream) in streamsWithSubtitles.prefix(5).enumerated() {
+        print("   📊 After x265 + 3D + audio filter: \(filteredStreams.count) streams remaining")
+        for (idx, stream) in filteredStreams.prefix(5).enumerated() {
             let audioDesc = getAudioLanguageDescription(stream.title)
             print("      [\(idx)] \(stream.title) (\(audioDesc))")
         }
@@ -474,7 +474,7 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL: Filter by episode pattern for TV shows ONLY (before bucketing!)
         // Only apply episode filtering to TV series, not movies
         if type == "series" && season != nil && episode != nil {
-            let beforeEpisodeFilter = streamsWithSubtitles.count
+            let beforeEpisodeFilter = filteredStreams.count
 
             let episodePatterns = [
                 String(format: "s%02de%02d", season!, episode!),  // s01e01
@@ -493,7 +493,7 @@ func registerStreamRoutes(_ app: Application) {
                 String(format: "season %d ", season!)  // "season 1 "
             ]
 
-            streamsWithSubtitles = streamsWithSubtitles.filter { stream in
+            filteredStreams = filteredStreams.filter { stream in
                 let titleLower = stream.title.lowercased()
 
                 // Check for Comet cached streams first - they're pre-verified and should be trusted
@@ -537,7 +537,7 @@ func registerStreamRoutes(_ app: Application) {
                 return matches || isCometCached
             }
 
-            let afterEpisodeFilter = streamsWithSubtitles.count
+            let afterEpisodeFilter = filteredStreams.count
             print("   📺 Episode filter (S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!)): \(beforeEpisodeFilter) → \(afterEpisodeFilter) streams")
 
             guard afterEpisodeFilter > 0 else {
@@ -548,6 +548,10 @@ func registerStreamRoutes(_ app: Application) {
             // SAFETY: Log if episode data is being passed for a movie (shouldn't happen after AppState fix)
             print("   ⚠️ WARNING: Movie type received season/episode data (season: \(season ?? 0), episode: \(episode ?? 0)) - this should be filtered out by client")
         }
+
+        // OPTIMIZATION: Now that we've filtered down to the relevant streams, attach subtitles
+        // This saves massive amounts of time by not processing subtitles for blocked streams
+        let streamsWithSubtitles = await attachSubtitles(to: filteredStreams, imdbId: imdbId, type: type, season: season, episode: episode)
 
         // Partition into quality buckets (ColorFruit logic)
         var buckets: [String: [Stream]] = [

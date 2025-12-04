@@ -1,24 +1,45 @@
 import SwiftUI
 
 struct AdminDashboardView: View {
+    @Binding var isPresented: Bool
     @State private var logs: [AppLog] = []
     @State private var userCount: Int = 0
     @State private var systemLatency: Double = 0
     @State private var isLoading = false
     @State private var errorMessage: String?
-    
+
     var body: some View {
         VStack(spacing: 0) {
+            // Custom Window Header
+            HStack {
+                Text("Admin Dashboard")
+                    .font(.title2)
+                    .fontWeight(.bold)
+
+                Spacer()
+
+                Button("Close") {
+                    isPresented = false
+                }
+                .keyboardShortcut(.escape, modifiers: [])
+            }
+            .padding()
+            .background(Color(NSColor.windowBackgroundColor))
+
+            Divider()
+
             // Stats Header
             HStack(spacing: 16) {
                 StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
                 StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
+                Spacer() // Push to left, but fill width
             }
             .padding()
+            .frame(maxWidth: .infinity) // Force full width
             .background(Color(NSColor.controlBackgroundColor))
-            
+
             Divider()
-            
+
             // Logs List
             List {
                 Section(header: Text("Recent Logs")) {
@@ -26,7 +47,7 @@ struct AdminDashboardView: View {
                         Text("Error: \(error)")
                             .foregroundColor(.red)
                     }
-                    
+
                     if isLoading {
                         HStack {
                             Spacer()
@@ -44,35 +65,29 @@ struct AdminDashboardView: View {
                 }
             }
         }
-        .navigationTitle("Admin Dashboard")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: refreshData) {
-                    Image(systemName: "arrow.clockwise")
-                }
-            }
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Force full size
+        .background(Color(NSColor.windowBackgroundColor))
         .task {
             refreshData()
         }
     }
-    
+
     private func refreshData() {
         isLoading = true
         errorMessage = nil
-        
+
         Task {
             do {
                 // Fetch logs
                 logs = try await SupabaseClient.shared.getAppLogs()
-                
+
                 // Fetch stats
                 async let count = SupabaseClient.shared.getUserCount()
                 async let latency = SupabaseClient.shared.checkHealth()
-                
+
                 userCount = try await count
                 systemLatency = try await latency
-                
+
             } catch {
                 errorMessage = error.localizedDescription
             }
@@ -86,7 +101,7 @@ struct StatusCard: View {
     let value: String
     let icon: String
     let color: Color
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
@@ -110,7 +125,7 @@ struct StatusCard: View {
 
 struct LogEntryRow: View {
     let log: AppLog
-    
+
     var levelColor: Color {
         switch log.level.uppercased() {
         case "ERROR": return .red
@@ -119,7 +134,7 @@ struct LogEntryRow: View {
         default: return .gray
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
@@ -131,13 +146,13 @@ struct LogEntryRow: View {
                     .background(levelColor.opacity(0.2))
                     .foregroundColor(levelColor)
                     .cornerRadius(4)
-                
+
                 Text(log.timestamp, style: .time)
                     .font(.caption)
                     .foregroundColor(.secondary)
-                
+
                 Spacer()
-                
+
                 if let userId = log.userId {
                     Text(userId.uuidString.prefix(8))
                         .font(.caption2)
@@ -145,11 +160,11 @@ struct LogEntryRow: View {
                         .monospacedDigit()
                 }
             }
-            
+
             Text(log.message)
                 .font(.body)
                 .lineLimit(3)
-            
+
             if let metadata = log.metadata, !metadata.isEmpty {
                 Text(metadataDescription(metadata))
                     .font(.caption)
@@ -159,7 +174,7 @@ struct LogEntryRow: View {
         }
         .padding(.vertical, 4)
     }
-    
+
     private func metadataDescription(_ metadata: [String: AnyCodable]) -> String {
         metadata.map { "\($0.key): \($0.value.value)" }.joined(separator: " | ")
     }

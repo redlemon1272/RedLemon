@@ -215,43 +215,15 @@ class SupabaseClient {
 
     /// Create or login user (username is unique and persistent)
     func createOrGetUser(username: String) async throws -> SupabaseUser {
-        // Try to get existing user first
-        let existingData = try await makeRequest(
-            path: "/users",
-            query: ["username": "ilike.\(username)", "select": "*"]
-        )
-
-        let existing = try jsonDecoder.decode([SupabaseUser].self, from: existingData)
-        if let user = existing.first {
-            // Update last_seen
-            Task {
-                do {
-                    _ = try await makeRequest(
-                        path: "/users",
-                        method: "PATCH",
-                        body: ["last_seen": ISO8601DateFormatter().string(from: Date())],
-                        query: ["id": "eq.\(user.id.uuidString)"]
-                    )
-                } catch {
-                    LogManager.shared.error("Failed to update last_seen for user \(user.username)", error: error)
-                }
-            }
-
-            // Set auth context
-            auth.currentUser = AuthUser(id: user.id, username: user.username, isAdmin: user.isAdmin ?? false)
-
-            return user
-        }
-
-        // Create new user
-        let newData = try await makeRequest(
-            path: "/users",
+        // Use RPC for atomic login/registration (bypasses RLS issues)
+        let data = try await makeRequest(
+            path: "/rpc/login_by_username",
             method: "POST",
-            body: ["username": username]
+            body: ["p_username": username]
         )
 
-        let newUsers = try jsonDecoder.decode([SupabaseUser].self, from: newData)
-        guard let user = newUsers.first else {
+        let users = try jsonDecoder.decode([SupabaseUser].self, from: data)
+        guard let user = users.first else {
             throw SupabaseError.userCreationFailed
         }
 

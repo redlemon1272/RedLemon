@@ -32,14 +32,14 @@ struct RDUserInfo: Codable {
     let premium: Int? // Unix timestamp of expiration
     let expiration: String? // ISO date string
     let type: String? // "premium" or "free"
-    
+
     /// Calculate actual days remaining from the premium timestamp
     var daysRemaining: Int? {
         guard let secondsRemaining = premium else { return nil }
-        
+
         // Premium is seconds remaining, not a timestamp
         let daysRemaining = Int(secondsRemaining / 86400) // 86400 seconds in a day
-        
+
         return max(0, daysRemaining) // Don't return negative days
     }
 }
@@ -135,19 +135,19 @@ actor RealDebridClient {
     func isBadHash(_ infoHash: String) -> Bool {
         return badHashes.contains(infoHash.lowercased())
     }
-    
+
     /// Get user account information including premium days remaining
     func getUserInfo(token: String) async throws -> RDUserInfo {
         let url = URL(string: "\(baseURL)/user")!
         var request = URLRequest(url: url)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
-        
+
         guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
             throw NSError(domain: "RealDebrid", code: (response as? HTTPURLResponse)?.statusCode ?? 0, userInfo: [NSLocalizedDescriptionKey: "Failed to fetch user info"])
         }
-        
+
         return try JSONDecoder().decode(RDUserInfo.self, from: data)
     }
 
@@ -253,8 +253,15 @@ actor RealDebridClient {
         }
 
         // Step 3: Select the file (1-based index for RD API)
-        let selectIdx = "\(actualFileIdx)"
-        try await selectFiles(torrentId: torrentId, filesParam: selectIdx, token: token)
+        // CRITICAL FIX: Only select files if the torrent is waiting for selection
+        // Calling selectFiles on an already active/downloaded torrent causes a 60s timeout/hang
+        if initialInfo.status == "waiting_files_selection" {
+            let selectIdx = "\(actualFileIdx)"
+            print("📝 RD: Selecting file ID \(selectIdx) for torrent \(torrentId)")
+            try await selectFiles(torrentId: torrentId, filesParam: selectIdx, token: token)
+        } else {
+            print("⏩ RD: Torrent status is '\(initialInfo.status ?? "unknown")', skipping file selection (already active)")
+        }
 
         // Step 4: Poll for completion
         var info: TorrentInfo?

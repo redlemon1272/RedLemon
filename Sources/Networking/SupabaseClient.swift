@@ -144,56 +144,34 @@ class SupabaseClient {
     }
 
     /// Get trusted server time from Supabase (via HTTP Date header)
+    /// Get trusted server time from Supabase (via RPC)
     func getServerTime() async throws -> Date {
-        // Use a lightweight GET request with minimal data
-        // HEAD requests sometimes don't return Date header reliably
-        let url = URL(string: "\(baseURL)/rest/v1/users?select=id&limit=1")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue(apiKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-
-        do {
-            let (_, response) = try await session.data(for: request)
-            
-            guard let httpResponse = response as? HTTPURLResponse else {
-                print("❌ TimeService: Response is not HTTPURLResponse")
-                throw SupabaseError.invalidResponse
-            }
-            
-            // Debug: Print all headers
-            print("⏰ TimeService: Response headers:")
-            for (key, value) in httpResponse.allHeaderFields {
-                print("   \(key): \(value)")
-            }
-            
-            guard let dateString = httpResponse.value(forHTTPHeaderField: "Date") else {
-                print("❌ TimeService: No 'Date' header in response")
-                print("   Status code: \(httpResponse.statusCode)")
-                throw SupabaseError.invalidResponse
-            }
-            
-            print("⏰ TimeService: Received Date header: '\(dateString)'")
-            
-            // Parse HTTP Date header (RFC 1123)
-            // Example: Sun, 30 Nov 2025 06:37:32 GMT
-            let formatter = DateFormatter()
-            formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
-            formatter.locale = Locale(identifier: "en_US_POSIX")
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            
-            guard let date = formatter.date(from: dateString) else {
-                print("❌ Failed to parse server date: \(dateString)")
-                print("   Expected format: EEE, dd MMM yyyy HH:mm:ss zzz")
-                throw SupabaseError.invalidResponse
-            }
-            
-            print("✅ TimeService: Parsed server time: \(date)")
-            return date
-        } catch {
-            print("❌ TimeService: Network error: \(error)")
-            throw error
+        let data = try await makeRequest(
+            path: "/rpc/get_server_time",
+            method: "POST"
+        )
+        
+        // RPC returns a string like "2023-10-27T10:00:00.123456+00:00"
+        // It might be wrapped in quotes if it's a JSON string
+        guard let dateString = String(data: data, encoding: .utf8)?.trimmingCharacters(in: CharacterSet(charactersIn: "\"")) else {
+            throw SupabaseError.invalidResponse
         }
+        
+        // Use our flexible date decoder logic (or just a formatter here)
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        if let date = formatter.date(from: dateString) {
+            return date
+        }
+        
+        // Fallback for standard ISO8601
+        let fallbackFormatter = ISO8601DateFormatter()
+        if let date = fallbackFormatter.date(from: dateString) {
+            return date
+        }
+        
+        throw SupabaseError.invalidResponse
     }
 
     // MARK: - User Management
@@ -481,7 +459,7 @@ class SupabaseClient {
         var body: [String: Any] = [
             "level": level,
             "message": message,
-            "timestamp": ISO8601DateFormatter().string(from: Date())
+            "created_at": ISO8601DateFormatter().string(from: Date())
         ]
         
         if let metadata = metadata {
@@ -506,7 +484,7 @@ class SupabaseClient {
             path: "/app_logs",
             query: [
                 "select": "*",
-                "order": "timestamp.desc",
+                "order": "created_at.desc",
                 "limit": String(limit)
             ]
         )
@@ -565,7 +543,8 @@ struct AppLog: Codable, Identifiable {
     let metadata: [String: AnyCodable]?
     
     enum CodingKeys: String, CodingKey {
-        case id, level, message, timestamp, metadata
+        case id, level, message, metadata
+        case timestamp = "created_at"
         case userId = "user_id"
     }
 }

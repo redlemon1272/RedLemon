@@ -710,15 +710,8 @@ struct SettingsView: View {
                     .buttonStyle(PlainButtonStyle())
                 }
                 .sheet(isPresented: $showAdminDashboard) {
-                    NavigationView {
-                        AdminDashboardView()
-                            .toolbar {
-                                ToolbarItem(placement: .cancellationAction) {
-                                    Button("Close") { showAdminDashboard = false }
-                                }
-                            }
-                    }
-                    .frame(minWidth: 800, minHeight: 600)
+                    AdminDashboardView(isPresented: $showAdminDashboard)
+                        .frame(minWidth: 800, minHeight: 600)
                 }
             }
         }

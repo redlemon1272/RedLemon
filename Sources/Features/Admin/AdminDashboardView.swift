@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AdminDashboardView: View {
+    @Binding var isPresented: Bool
     @State private var logs: [AppLog] = []
     @State private var userCount: Int = 0
     @State private var systemLatency: Double = 0
@@ -8,48 +9,64 @@ struct AdminDashboardView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        List {
-            // Stats Section
-            Section(header: Text("System Status")) {
-                HStack {
-                    StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
-                    StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
-                }
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
-            }
-            
-            // Logs Section
-            Section(header: Text("Recent Logs")) {
-                if let error = errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundColor(.red)
-                }
+        VStack(spacing: 0) {
+            // Custom Window Header
+            HStack {
+                Text("Admin Dashboard")
+                    .font(.title2)
+                    .fontWeight(.bold)
                 
-                if isLoading {
-                    HStack {
-                        Spacer()
-                        ProgressView("Loading logs...")
-                        Spacer()
+                Spacer()
+                
+                Button("Close") {
+                    isPresented = false
+                }
+                .keyboardShortcut(.escape, modifiers: [])
+            }
+            .padding()
+            .background(Color(NSColor.windowBackgroundColor))
+            
+            Divider()
+
+            // Stats Header
+            HStack(spacing: 16) {
+                StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
+                StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
+                Spacer() // Push to left, but fill width
+            }
+            .padding()
+            .frame(maxWidth: .infinity) // Force full width
+            .background(Color(NSColor.controlBackgroundColor))
+            
+            Divider()
+            
+            // Logs List
+            List {
+                Section(header: Text("Recent Logs")) {
+                    if let error = errorMessage {
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
                     }
-                } else if logs.isEmpty && errorMessage == nil {
-                    Text("No logs found.")
-                        .foregroundColor(.secondary)
-                } else {
-                    ForEach(logs) { log in
-                        LogEntryRow(log: log)
+                    
+                    if isLoading {
+                        HStack {
+                            Spacer()
+                            ProgressView("Loading logs...")
+                            Spacer()
+                        }
+                    } else if logs.isEmpty && errorMessage == nil {
+                        Text("No logs found.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(logs) { log in
+                            LogEntryRow(log: log)
+                        }
                     }
                 }
             }
         }
-        .navigationTitle("Admin Dashboard")
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button(action: refreshData) {
-                    Image(systemName: "arrow.clockwise")
-                }
-            }
-        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity) // Force full size
+        .background(Color(NSColor.windowBackgroundColor))
         .task {
             refreshData()
         }

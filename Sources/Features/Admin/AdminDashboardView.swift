@@ -22,9 +22,14 @@ struct AdminDashboardView: View {
 
                 Spacer()
 
-                Button("Close") {
+                Button(action: {
                     isPresented = false
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 22))
+                        .foregroundColor(.secondary)
                 }
+                .buttonStyle(.plain)
                 .keyboardShortcut(.escape, modifiers: [])
             }
             .padding()

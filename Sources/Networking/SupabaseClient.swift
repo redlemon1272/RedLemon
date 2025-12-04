@@ -507,10 +507,41 @@ class SupabaseClient {
         _ = try await getServerTime()
         return Date().timeIntervalSince(start) * 1000 // ms
     }
+    
+    // MARK: - Analytics
+    
+    func getAppVersionStats() async throws -> [AppVersionStat] {
+        let data = try await makeRequest(
+            path: "/rpc/get_app_version_stats",
+            method: "POST"
+        )
+        return try jsonDecoder.decode([AppVersionStat].self, from: data)
+    }
+    
+    func getContentPopularity() async throws -> [ContentPopularityStat] {
+        let data = try await makeRequest(
+            path: "/rpc/get_content_popularity",
+            method: "POST"
+        )
+        return try jsonDecoder.decode([ContentPopularityStat].self, from: data)
+    }
 }
 
 struct SupabaseUserID: Codable {
     let id: UUID
+}
+
+struct AppVersionStat: Codable, Identifiable {
+    var id: String { version ?? "unknown" }
+    let version: String?
+    let count: Int
+}
+
+struct ContentPopularityStat: Codable, Identifiable {
+    var id: String { title }
+    let title: String
+    let type: String
+    let count: Int
 }
 // MARK: - Supabase Models
 

@@ -5,6 +5,8 @@ struct AdminDashboardView: View {
     @State private var logs: [AppLog] = []
     @State private var activeRooms: [SupabaseRoom] = []
     @State private var allUsers: [SupabaseUser] = []
+    @State private var versionStats: [AppVersionStat] = []
+    @State private var contentStats: [ContentPopularityStat] = []
     @State private var userCount: Int = 0
     @State private var systemLatency: Double = 0
     @State private var isLoading = false
@@ -128,6 +130,52 @@ struct AdminDashboardView: View {
                  Divider()
             }
 
+            // Analytics Section
+            if !versionStats.isEmpty || !contentStats.isEmpty {
+                HStack(alignment: .top, spacing: 16) {
+                    // App Versions
+                    VStack(alignment: .leading) {
+                        Text("App Versions")
+                            .font(.headline)
+                        ForEach(versionStats) { stat in
+                            HStack {
+                                Text(stat.version ?? "Unknown")
+                                Spacer()
+                                Text("\(stat.count)")
+                                    .foregroundColor(.secondary)
+                            }
+                            .font(.caption)
+                        }
+                    }
+                    .padding()
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(8)
+                    
+                    // Content Popularity
+                    VStack(alignment: .leading) {
+                        Text("Top Content")
+                            .font(.headline)
+                        ForEach(contentStats) { stat in
+                            HStack {
+                                Text(stat.title)
+                                    .lineLimit(1)
+                                Spacer()
+                                Text("\(stat.count)")
+                                    .foregroundColor(.secondary)
+                            }
+                            .font(.caption)
+                        }
+                    }
+                    .padding()
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(8)
+                }
+                .padding(.horizontal)
+                .padding(.bottom)
+                
+                Divider()
+            }
+
             // Logs List
             List {
                 Section(header: Text("Recent Logs")) {
@@ -174,11 +222,15 @@ struct AdminDashboardView: View {
                 async let latency = SupabaseClient.shared.checkHealth()
                 async let rooms = SupabaseClient.shared.getActiveRooms()
                 async let users = SupabaseClient.shared.getAllUsers()
+                async let versions = SupabaseClient.shared.getAppVersionStats()
+                async let content = SupabaseClient.shared.getContentPopularity()
                 
                 userCount = try await count
                 systemLatency = try await latency
                 activeRooms = try await rooms
                 allUsers = try await users
+                versionStats = try await versions
+                contentStats = try await content
 
             } catch {
                 errorMessage = error.localizedDescription

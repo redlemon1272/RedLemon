@@ -183,7 +183,7 @@ class SupabaseClient {
 
         let data = try await makeRequest(
             path: "/users",
-            query: ["username": "eq.\(username)", "select": "*"]
+            query: ["username": "ilike.\(username)", "select": "*"]
         )
 
         NSLog("📡 SupabaseClient: User lookup response received (\(data.count) bytes)")
@@ -218,7 +218,7 @@ class SupabaseClient {
         // Try to get existing user first
         let existingData = try await makeRequest(
             path: "/users",
-            query: ["username": "eq.\(username)", "select": "*"]
+            query: ["username": "ilike.\(username)", "select": "*"]
         )
 
         let existing = try jsonDecoder.decode([SupabaseUser].self, from: existingData)

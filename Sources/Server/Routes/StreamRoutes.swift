@@ -406,6 +406,24 @@ func registerStreamRoutes(_ app: Application) {
             print("   🚫 SERVER FILTERED AV1: \(beforeAV1Filter) → \(afterAV1Filter) streams")
         }
 
+        // CRITICAL: Filter "Bad Groups" / Low Quality Rips (TamilMV, etc)
+        let beforeBadGroupFilter = filteredStreams.count
+        let badGroups = ["tamilmv", "1tamilmv", "tamilrockers"]
+        filteredStreams = filteredStreams.filter { stream in
+            let titleLower = stream.title.lowercased()
+            let isBadGroup = badGroups.contains { group in
+                titleLower.contains(group)
+            }
+            if isBadGroup {
+                print("   🚫 SERVER BLOCKING Bad Group: \(stream.title)")
+            }
+            return !isBadGroup
+        }
+        let afterBadGroupFilter = filteredStreams.count
+        if afterBadGroupFilter < beforeBadGroupFilter {
+            print("   🚫 SERVER FILTERED Bad Groups: \(beforeBadGroupFilter) → \(afterBadGroupFilter) streams")
+        }
+
         // CRITICAL: Filter MPEG-2 / REMUX streams (too large/inefficient for older hardware)
         // We only block REMUX if it's explicitly MPEG-2 or if we suspect it's a massive legacy file
         let beforeMpeg2Filter = filteredStreams.count

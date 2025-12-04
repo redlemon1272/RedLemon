@@ -25,15 +25,19 @@ struct AdminDashboardView: View {
                 Button(action: {
                     isPresented = false
                 }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 22))
-                        .foregroundColor(.secondary)
+                    Text("Done")
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Color.blue)
+                        .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
                 .keyboardShortcut(.escape, modifiers: [])
             }
             .padding()
-            .background(Color(NSColor.windowBackgroundColor))
+            .background(Color(NSColor.controlBackgroundColor)) // Slightly different background
 
             Divider()
 

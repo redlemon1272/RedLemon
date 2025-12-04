@@ -1173,6 +1173,14 @@ extension MPVPlayerViewModel {
                             )
                             updatedParticipants.append(newParticipant)
                             print("👤 Participant joined: \(username) (\(userId))")
+                            
+                            // Add system message
+                            self.messages.append(ChatMessage(
+                                id: UUID().uuidString,
+                                username: "System",
+                                text: "\(username) has joined the room",
+                                timestamp: Date()
+                            ))
                         }
 
                         // Post-Load Gate Logic
@@ -1189,6 +1197,17 @@ extension MPVPlayerViewModel {
                         }
 
                     case .leave:
+                        // Find participant name before removing
+                        if let participant = updatedParticipants.first(where: { $0.id == userId }) {
+                            // Add system message
+                            self.messages.append(ChatMessage(
+                                id: UUID().uuidString,
+                                username: "System",
+                                text: "\(participant.name) has left the room",
+                                timestamp: Date()
+                            ))
+                        }
+                        
                         updatedParticipants.removeAll(where: { $0.id == userId })
                         print("👋 Participant left: \(userId)")
 

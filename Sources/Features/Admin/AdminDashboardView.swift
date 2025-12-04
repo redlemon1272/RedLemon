@@ -39,23 +39,21 @@ struct AdminDashboardView: View {
             .padding()
             .background(Color(NSColor.controlBackgroundColor)) // Slightly different background
 
-            Divider()
+            // Main Content List
+            List {
+                // Stats Section
+                Section {
+                    HStack(spacing: 16) {
+                        StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
+                        StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
+                    }
+                    .padding(.vertical, 8)
+                } header: {
+                    Text("System Status")
+                }
 
-            // Stats Header
-            HStack(spacing: 16) {
-                StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
-                StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
-                Spacer() // Push to left, but fill width
-            }
-            .padding()
-            .frame(maxWidth: .infinity) // Force full width
-            .background(Color(NSColor.controlBackgroundColor))
-
-            Divider()
-
-            // Active Rooms Section
-            if !activeRooms.isEmpty {
-                List {
+                // Active Rooms Section
+                if !activeRooms.isEmpty {
                     Section(header: Text("Active Rooms (\(activeRooms.count))")) {
                         ForEach(activeRooms, id: \.id) { room in
                             HStack {
@@ -92,14 +90,9 @@ struct AdminDashboardView: View {
                         }
                     }
                 }
-                .frame(height: 200) // Limit height for this section
-                
-                Divider()
-            }
 
-            // User Management Section
-            if !allUsers.isEmpty {
-                 List {
+                // User Management Section
+                if !allUsers.isEmpty {
                      Section(header: Text("Users (\(allUsers.count))")) {
                          ForEach(allUsers, id: \.id) { user in
                              HStack {
@@ -133,60 +126,56 @@ struct AdminDashboardView: View {
                              .padding(.vertical, 4)
                          }
                      }
-                 }
-                 .frame(height: 200)
-                 
-                 Divider()
-            }
-
-            // Analytics Section
-            if !versionStats.isEmpty || !contentStats.isEmpty {
-                HStack(alignment: .top, spacing: 16) {
-                    // App Versions
-                    VStack(alignment: .leading) {
-                        Text("App Versions")
-                            .font(.headline)
-                        ForEach(versionStats) { stat in
-                            HStack {
-                                Text(stat.version ?? "Unknown")
-                                Spacer()
-                                Text("\(stat.count)")
-                                    .foregroundColor(.secondary)
-                            }
-                            .font(.caption)
-                        }
-                    }
-                    .padding()
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
-                    
-                    // Content Popularity
-                    VStack(alignment: .leading) {
-                        Text("Top Content")
-                            .font(.headline)
-                        ForEach(contentStats) { stat in
-                            HStack {
-                                Text(stat.title)
-                                    .lineLimit(1)
-                                Spacer()
-                                Text("\(stat.count)")
-                                    .foregroundColor(.secondary)
-                            }
-                            .font(.caption)
-                        }
-                    }
-                    .padding()
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(8)
                 }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                Divider()
-            }
 
-            // Logs List
-            List {
+                // Analytics Section
+                if !versionStats.isEmpty || !contentStats.isEmpty {
+                    Section(header: Text("Analytics")) {
+                        HStack(alignment: .top, spacing: 16) {
+                            // App Versions
+                            VStack(alignment: .leading) {
+                                Text("App Versions")
+                                    .font(.headline)
+                                    .padding(.bottom, 4)
+                                ForEach(versionStats) { stat in
+                                    HStack {
+                                        Text(stat.version ?? "Unknown")
+                                        Spacer()
+                                        Text("\(stat.count)")
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .font(.caption)
+                                    .padding(.vertical, 2)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            Divider()
+                            
+                            // Content Popularity
+                            VStack(alignment: .leading) {
+                                Text("Top Content")
+                                    .font(.headline)
+                                    .padding(.bottom, 4)
+                                ForEach(contentStats) { stat in
+                                    HStack {
+                                        Text(stat.title)
+                                            .lineLimit(1)
+                                        Spacer()
+                                        Text("\(stat.count)")
+                                            .foregroundColor(.secondary)
+                                    }
+                                    .font(.caption)
+                                    .padding(.vertical, 2)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.vertical, 8)
+                    }
+                }
+
+                // Logs List
                 Section(header: Text("Recent Logs")) {
                     if let error = errorMessage {
                         Text("Error: \(error)")
@@ -209,6 +198,7 @@ struct AdminDashboardView: View {
                     }
                 }
             }
+            .listStyle(InsetListStyle()) // Use InsetListStyle for a cleaner look inside the window
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Force full size
         .background(Color(NSColor.windowBackgroundColor))

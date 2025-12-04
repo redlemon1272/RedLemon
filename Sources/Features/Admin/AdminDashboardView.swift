@@ -18,7 +18,7 @@ struct AdminDashboardView: View {
                     ProgressView("Loading logs...")
                     Spacer()
                 }
-                .listRowSeparator(.hidden)
+                // .listRowSeparator(.hidden) - Requires macOS 13.0+
             } else if logs.isEmpty {
                 Text("No logs found.")
                     .foregroundColor(.secondary)

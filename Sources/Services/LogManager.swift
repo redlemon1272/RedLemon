@@ -47,6 +47,9 @@ class LogManager {
         }
         log(level: "ERROR", message: fullMessage, file: file, function: function, line: line)
         
+        // Capture immutable copy for Task
+        let messageForUpload = fullMessage
+        
         // Queue for Supabase upload
         Task {
             do {
@@ -55,7 +58,7 @@ class LogManager {
                 // (It throws, and we catch it here)
                 try await SupabaseClient.shared.insertLog(
                     level: "ERROR",
-                    message: fullMessage,
+                    message: messageForUpload,
                     metadata: [
                         "file": (file as NSString).lastPathComponent,
                         "function": function,

@@ -535,7 +535,7 @@ struct SupabaseUser: Codable {
 }
 
 struct AppLog: Codable, Identifiable {
-    let id: Int
+    let id: UUID
     let level: String
     let message: String
     let timestamp: Date

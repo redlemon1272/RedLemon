@@ -19,6 +19,7 @@ struct EventsView: View {
     // Common state
     @State private var isLoading = true
     @State private var timer: Timer?
+    @State private var lastUpdate = Date() // Force view refresh when needed
 
     // MARK: - Constants
     private let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
@@ -57,6 +58,8 @@ struct EventsView: View {
                                 LazyVStack(spacing: 20) {
                                     ForEach(events) { event in
                                         // Check if previous event is finished (either by time OR by user completion)
+                                        // We use lastUpdate here to ensure this recalculates when state changes
+                                        let _ = lastUpdate 
                                         let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
 
                                         HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
@@ -372,6 +375,10 @@ struct EventsView: View {
         if TimeService.shared.now >= liveEvent.endTime {
             print("🔄 Live event finished: \(liveEvent.mediaItem.name). Cycling to next batch.")
             calculateDeterministicSchedule()
+        } else if liveEvent.isFinished {
+            // Force UI refresh if the live event is finished (but not yet cycled out)
+            // This ensures the "Lobby Open" status appears for the next event
+            lastUpdate = Date()
         }
     }
 

@@ -512,6 +512,28 @@ class SupabaseClient {
         )
         return try jsonDecoder.decode([AppLog].self, from: data)
     }
+
+    /// Get total user count
+    func getUserCount() async throws -> Int {
+        // Workaround: Just fetch all IDs (small payload)
+        let idsData = try await makeRequest(
+            path: "/users",
+            query: ["select": "id"]
+        )
+        let ids = try jsonDecoder.decode([SupabaseUserID].self, from: idsData)
+        return ids.count
+    }
+    
+    /// Check system health (latency)
+    func checkHealth() async throws -> Double {
+        let start = Date()
+        _ = try await getServerTime()
+        return Date().timeIntervalSince(start) * 1000 // ms
+    }
+}
+
+struct SupabaseUserID: Codable {
+    let id: UUID
 }
 // MARK: - Supabase Models
 

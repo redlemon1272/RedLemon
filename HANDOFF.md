@@ -1,3 +1,7 @@
+# [DEPRECATED] RedLemon-Native Project Handoff
+> [!WARNING]
+> This document describes the state of the project *before* the removal of the uWebSockets implementation. Many details regarding the WebSocket server and architecture may be outdated. Please refer to `CURRENT_STATE.md` for the most accurate information.
+
 # RedLemon-Native Project Handoff
 **Date:** November 9, 2025
 **Status:** ✅ Production-ready v1.0.8 Deployed

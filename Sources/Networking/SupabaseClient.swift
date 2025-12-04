@@ -246,15 +246,21 @@ class SupabaseClient {
         let existing = try jsonDecoder.decode([SupabaseUser].self, from: existingData)
         if let user = existing.first {
             // Update last_seen
-            _ = try? await makeRequest(
-                path: "/users",
-                method: "PATCH",
-                body: ["last_seen": ISO8601DateFormatter().string(from: Date())],
-                query: ["id": "eq.\(user.id.uuidString)"]
-            )
+            Task {
+                do {
+                    _ = try await makeRequest(
+                        path: "/users",
+                        method: "PATCH",
+                        body: ["last_seen": ISO8601DateFormatter().string(from: Date())],
+                        query: ["id": "eq.\(user.id.uuidString)"]
+                    )
+                } catch {
+                    LogManager.shared.error("Failed to update last_seen for user \(user.username)", error: error)
+                }
+            }
 
             // Set auth context
-            auth.currentUser = AuthUser(id: user.id, username: user.username)
+            auth.currentUser = AuthUser(id: user.id, username: user.username, isAdmin: user.isAdmin ?? false)
 
             return user
         }
@@ -272,7 +278,7 @@ class SupabaseClient {
         }
 
         // Set auth context
-        auth.currentUser = AuthUser(id: user.id, username: user.username)
+        auth.currentUser = AuthUser(id: user.id, username: user.username, isAdmin: user.isAdmin ?? false)
 
         return user
     }
@@ -468,6 +474,44 @@ class SupabaseClient {
         )
         return try jsonDecoder.decode([SupabaseChatMessage].self, from: data)
     }
+    // MARK: - Logging
+
+    /// Upload log entry to Supabase
+    func insertLog(level: String, message: String, metadata: [String: Any]? = nil) async throws {
+        var body: [String: Any] = [
+            "level": level,
+            "message": message,
+            "timestamp": ISO8601DateFormatter().string(from: Date())
+        ]
+        
+        if let metadata = metadata {
+            body["metadata"] = metadata
+        }
+        
+        if let userId = auth.currentUser?.id {
+            body["user_id"] = userId.uuidString
+        }
+        
+        // Fire and forget - don't wait for response to avoid blocking
+        _ = try await makeRequest(
+            path: "/app_logs",
+            method: "POST",
+            body: body
+        )
+    }
+
+    /// Fetch recent logs for Admin Dashboard
+    func getAppLogs(limit: Int = 50) async throws -> [AppLog] {
+        let data = try await makeRequest(
+            path: "/app_logs",
+            query: [
+                "select": "*",
+                "order": "timestamp.desc",
+                "limit": String(limit)
+            ]
+        )
+        return try jsonDecoder.decode([AppLog].self, from: data)
+    }
 }
 // MARK: - Supabase Models
 
@@ -478,6 +522,7 @@ struct SupabaseUser: Codable {
     let avatarUrl: String?
     let createdAt: Date
     let lastSeen: Date
+    let isAdmin: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, username
@@ -485,6 +530,21 @@ struct SupabaseUser: Codable {
         case avatarUrl = "avatar_url"
         case createdAt = "created_at"
         case lastSeen = "last_seen"
+        case isAdmin = "is_admin"
+    }
+}
+
+struct AppLog: Codable, Identifiable {
+    let id: Int
+    let level: String
+    let message: String
+    let timestamp: Date
+    let userId: UUID?
+    let metadata: [String: AnyCodable]?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, level, message, timestamp, metadata
+        case userId = "user_id"
     }
 }
 
@@ -721,7 +781,13 @@ extension SupabaseClient {
             let idsString = senderIds.map { $0.uuidString }.joined(separator: ",")
             let usersPath = "/users?id=in.(\(idsString))"
             let usersData = try await makeRequest(path: usersPath, method: "GET")
-            let profiles = try? jsonDecoder.decode([SupabaseUser].self, from: usersData)
+            let profiles: [SupabaseUser]?
+            do {
+                profiles = try jsonDecoder.decode([SupabaseUser].self, from: usersData)
+            } catch {
+                LogManager.shared.error("Failed to decode friend request profiles", error: error)
+                profiles = nil
+            }
 
             // Reconstruct friendships with profiles
             friendships = friendships.map { friendship in
@@ -856,6 +922,7 @@ class AuthContext {
 struct AuthUser {
     let id: UUID
     let username: String
+    let isAdmin: Bool
 }
 
 // MARK: - Edge Functions API

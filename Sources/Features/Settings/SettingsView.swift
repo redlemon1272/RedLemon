@@ -50,6 +50,9 @@ struct SettingsView: View {
 
     // Payment State
     @State private var showPaymentGate = false
+    
+    // Admin State
+    @State private var showAdminDashboard = false
 
     enum MessageType {
         case success
@@ -75,6 +78,8 @@ struct SettingsView: View {
                 recoveryPhraseSection
 
                 resetSection
+
+                adminSection
 
                 aboutSection
 
@@ -676,6 +681,46 @@ struct SettingsView: View {
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
+        }
+    }
+    
+    private var adminSection: some View {
+        Group {
+            if SupabaseClient.shared.auth.currentUser?.isAdmin == true {
+                VStack(alignment: .leading, spacing: 24) {
+                    Text("Administration")
+                        .font(.system(size: 28, weight: .semibold))
+                    
+                    Button(action: { showAdminDashboard = true }) {
+                        HStack {
+                            Image(systemName: "shield.checkerboard")
+                                .font(.title2)
+                                .foregroundColor(.purple)
+                            Text("Admin Dashboard")
+                                .font(.title3.weight(.semibold))
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                        .padding(24)
+                        .background(Color(NSColor.controlBackgroundColor))
+                        .cornerRadius(16)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                }
+                .sheet(isPresented: $showAdminDashboard) {
+                    NavigationView {
+                        AdminDashboardView()
+                            .toolbar {
+                                ToolbarItem(placement: .cancellationAction) {
+                                    Button("Close") { showAdminDashboard = false }
+                                }
+                            }
+                    }
+                    .frame(minWidth: 800, minHeight: 600)
+                }
+            }
         }
     }
 

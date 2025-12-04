@@ -161,10 +161,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Add mock chat messages for testing UI
         self.messages = [
-            ChatMessage(id: "1", username: "Alice", text: "Hey! Ready to watch?", timestamp: Date()),
-            ChatMessage(id: "2", username: "Bob", text: "Yeah! Let's start!", timestamp: Date().addingTimeInterval(2)),
-            ChatMessage(id: "3", username: "System", text: "Press C to toggle chat overlay", timestamp: Date().addingTimeInterval(4)),
-            ChatMessage(id: "4", username: "Charlie", text: "This is so cool! Native Swift player with chat 🎉", timestamp: Date().addingTimeInterval(8))
+            ChatMessage(id: UUID().uuidString, username: "System", text: "Press ⌘ (Cmd) to toggle chat.", timestamp: Date())
         ]
         print("💬 Added mock chat messages for testing")
 

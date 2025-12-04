@@ -276,6 +276,19 @@ class SupabaseClient {
         return try jsonDecoder.decode([SupabaseRoom].self, from: data)
     }
 
+    /// Get active rooms for Admin Dashboard
+    func getActiveRooms() async throws -> [SupabaseRoom] {
+        let data = try await makeRequest(
+            path: "/rooms",
+            query: [
+                "participants_count": "gt.0",
+                "select": "*",
+                "order": "participants_count.desc"
+            ]
+        )
+        return try jsonDecoder.decode([SupabaseRoom].self, from: data)
+    }
+
     /// Create a new room
     func createRoom(
         id: String,

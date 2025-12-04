@@ -3,6 +3,7 @@ import SwiftUI
 struct AdminDashboardView: View {
     @Binding var isPresented: Bool
     @State private var logs: [AppLog] = []
+    @State private var activeRooms: [SupabaseRoom] = []
     @State private var userCount: Int = 0
     @State private var systemLatency: Double = 0
     @State private var isLoading = false
@@ -39,6 +40,50 @@ struct AdminDashboardView: View {
             .background(Color(NSColor.controlBackgroundColor))
 
             Divider()
+
+            // Active Rooms Section
+            if !activeRooms.isEmpty {
+                List {
+                    Section(header: Text("Active Rooms (\(activeRooms.count))")) {
+                        ForEach(activeRooms, id: \.id) { room in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(room.name)
+                                        .font(.headline)
+                                    Text("Host: \(room.hostUsername)")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                }
+                                
+                                Spacer()
+                                
+                                VStack(alignment: .trailing) {
+                                    HStack(spacing: 4) {
+                                        Image(systemName: "person.2.fill")
+                                        Text("\(room.participantsCount)")
+                                    }
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    
+                                    if room.isPlaying {
+                                        Text("Playing")
+                                            .font(.caption2)
+                                            .foregroundColor(.green)
+                                            .padding(.horizontal, 6)
+                                            .padding(.vertical, 2)
+                                            .background(Color.green.opacity(0.1))
+                                            .cornerRadius(4)
+                                    }
+                                }
+                            }
+                            .padding(.vertical, 4)
+                        }
+                    }
+                }
+                .frame(height: 200) // Limit height for this section
+                
+                Divider()
+            }
 
             // Logs List
             List {
@@ -84,9 +129,11 @@ struct AdminDashboardView: View {
                 // Fetch stats
                 async let count = SupabaseClient.shared.getUserCount()
                 async let latency = SupabaseClient.shared.checkHealth()
-
+                async let rooms = SupabaseClient.shared.getActiveRooms()
+                
                 userCount = try await count
                 systemLatency = try await latency
+                activeRooms = try await rooms
 
             } catch {
                 errorMessage = error.localizedDescription

@@ -8,36 +8,38 @@ struct AdminDashboardView: View {
     @State private var errorMessage: String?
     
     var body: some View {
-        List {
-            // Stats Section
-            Section(header: Text("System Status")) {
-                HStack {
-                    StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
-                    StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
-                }
-                .listRowInsets(EdgeInsets())
-                .listRowBackground(Color.clear)
+        VStack(spacing: 0) {
+            // Stats Header
+            HStack(spacing: 16) {
+                StatusCard(title: "Users", value: "\(userCount)", icon: "person.2.fill", color: .blue)
+                StatusCard(title: "Latency", value: String(format: "%.0f ms", systemLatency), icon: "network", color: systemLatency > 500 ? .orange : .green)
             }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
             
-            // Logs Section
-            Section(header: Text("Recent Logs")) {
-                if let error = errorMessage {
-                    Text("Error: \(error)")
-                        .foregroundColor(.red)
-                }
-                
-                if isLoading {
-                    HStack {
-                        Spacer()
-                        ProgressView("Loading logs...")
-                        Spacer()
+            Divider()
+            
+            // Logs List
+            List {
+                Section(header: Text("Recent Logs")) {
+                    if let error = errorMessage {
+                        Text("Error: \(error)")
+                            .foregroundColor(.red)
                     }
-                } else if logs.isEmpty && errorMessage == nil {
-                    Text("No logs found.")
-                        .foregroundColor(.secondary)
-                } else {
-                    ForEach(logs) { log in
-                        LogEntryRow(log: log)
+                    
+                    if isLoading {
+                        HStack {
+                            Spacer()
+                            ProgressView("Loading logs...")
+                            Spacer()
+                        }
+                    } else if logs.isEmpty && errorMessage == nil {
+                        Text("No logs found.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(logs) { log in
+                            LogEntryRow(log: log)
+                        }
                     }
                 }
             }

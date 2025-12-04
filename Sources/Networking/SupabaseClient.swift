@@ -242,6 +242,20 @@ class SupabaseClient {
         return users.first
     }
 
+    /// Get all users for Admin Dashboard
+    func getAllUsers(limit: Int = 50, offset: Int = 0) async throws -> [SupabaseUser] {
+        let data = try await makeRequest(
+            path: "/users",
+            query: [
+                "select": "*",
+                "order": "last_seen.desc",
+                "limit": String(limit),
+                "offset": String(offset)
+            ]
+        )
+        return try jsonDecoder.decode([SupabaseUser].self, from: data)
+    }
+
     /// Alias for getUser (more descriptive)
     func getUserById(userId: UUID) async throws -> SupabaseUser? {
         return try await getUser(id: userId)

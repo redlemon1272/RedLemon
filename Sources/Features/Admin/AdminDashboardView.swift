@@ -4,6 +4,7 @@ struct AdminDashboardView: View {
     @Binding var isPresented: Bool
     @State private var logs: [AppLog] = []
     @State private var activeRooms: [SupabaseRoom] = []
+    @State private var allUsers: [SupabaseUser] = []
     @State private var userCount: Int = 0
     @State private var systemLatency: Double = 0
     @State private var isLoading = false
@@ -85,6 +86,48 @@ struct AdminDashboardView: View {
                 Divider()
             }
 
+            // User Management Section
+            if !allUsers.isEmpty {
+                 List {
+                     Section(header: Text("Users (\(allUsers.count))")) {
+                         ForEach(allUsers, id: \.id) { user in
+                             HStack {
+                                 VStack(alignment: .leading) {
+                                     Text(user.username)
+                                         .font(.headline)
+                                     Text("Joined: \(user.createdAt, style: .date)")
+                                         .font(.caption)
+                                         .foregroundColor(.secondary)
+                                 }
+                                 
+                                 Spacer()
+                                 
+                                 VStack(alignment: .trailing) {
+                                     if let isAdmin = user.isAdmin, isAdmin {
+                                         Text("Admin")
+                                             .font(.caption2)
+                                             .fontWeight(.bold)
+                                             .foregroundColor(.white)
+                                             .padding(.horizontal, 6)
+                                             .padding(.vertical, 2)
+                                             .background(Color.blue)
+                                             .cornerRadius(4)
+                                     }
+                                     
+                                     Text("Last seen: \(user.lastSeen, style: .relative) ago")
+                                         .font(.caption)
+                                         .foregroundColor(.secondary)
+                                 }
+                             }
+                             .padding(.vertical, 4)
+                         }
+                     }
+                 }
+                 .frame(height: 200)
+                 
+                 Divider()
+            }
+
             // Logs List
             List {
                 Section(header: Text("Recent Logs")) {
@@ -130,10 +173,12 @@ struct AdminDashboardView: View {
                 async let count = SupabaseClient.shared.getUserCount()
                 async let latency = SupabaseClient.shared.checkHealth()
                 async let rooms = SupabaseClient.shared.getActiveRooms()
+                async let users = SupabaseClient.shared.getAllUsers()
                 
                 userCount = try await count
                 systemLatency = try await latency
                 activeRooms = try await rooms
+                allUsers = try await users
 
             } catch {
                 errorMessage = error.localizedDescription

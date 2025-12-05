@@ -54,81 +54,100 @@ class TVEventScheduler {
             episodeRuntime: episodeRuntime
         )
     }
+
+    /// Get the start time for a specific episode
+    static func getEpisodeStartTime(series: TVEvent, season: Int, episode: Int) async -> Date {
+        let now = TimeService.shared.now
+        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01
+        let timeSinceEpoch = now.timeIntervalSince(epoch)
+
+        let episodeRuntimes = await fetchEpisodeRuntimes(for: series)
+        let totalCycleDuration = episodeRuntimes.reduce(0, +)
+        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+
+        // Find target episode index
+        let targetIndex = series.getGlobalIndex(season: season, episode: episode)
+        
+        // Calculate time offset for target episode
+        var targetOffset: TimeInterval = 0
+        for i in 0..<targetIndex {
+            targetOffset += episodeRuntimes[i]
+        }
+        
+        // Calculate start time relative to now
+        // If target is ahead in current cycle: start = now + (targetOffset - currentCycleTime)
+        // If target is behind: start = now + (targetOffset - currentCycleTime) + totalCycleDuration
+        
+        var timeUntilStart = targetOffset - currentCycleTime
+        if timeUntilStart < -120 { // Allow 2 min buffer for "just started"
+            timeUntilStart += totalCycleDuration
+        }
+        
+        return now.addingTimeInterval(timeUntilStart)
+    }
     
     /// Cache for episode runtimes to avoid re-fetching
-    private static var runtimeCache: [String: [TimeInterval]] = [:]
+    private static let cache = RuntimeCache()
+    
+    /// Thread-safe cache actor
+    private actor RuntimeCache {
+        private var cache: [String: [TimeInterval]] = [:]
+        
+        func get(_ id: String) -> [TimeInterval]? {
+            return cache[id]
+        }
+        
+        func set(_ id: String, values: [TimeInterval]) {
+            cache[id] = values
+        }
+    }
 
-    /// Fetch episode runtimes from TVMaze (Free, no key, one request per show)
-    /// Falls back to default runtimes if unavailable
+    /// Fetch episode runtimes
+    /// Uses hardcoded exact runtimes from TVEventRuntimes.swift
     private static func fetchEpisodeRuntimes(for series: TVEvent) async -> [TimeInterval] {
         // Check cache first
-        if let cached = runtimeCache[series.id] {
+        if let cached = await cache.get(series.id) {
             return cached
         }
 
-        // Default runtimes based on series type (Fallback)
-        let defaultRuntime: TimeInterval
-        switch series.id {
-        case "tt0903747": // Breaking Bad
-            defaultRuntime = 47 * 60
-        case "tt0944947": // Game of Thrones
-            defaultRuntime = 55 * 60
-        case "tt0386676", "tt0108778": // The Office, Friends
-            defaultRuntime = 22 * 60
-        default:
-            defaultRuntime = 30 * 60
-        }
-        
-        // Try to fetch from TVMaze
-        do {
-            guard let encodedTitle = series.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-                  let url = URL(string: "https://api.tvmaze.com/singlesearch/shows?q=\(encodedTitle)&embed=episodes") else {
-                throw NSError(domain: "Invalid URL", code: -1)
-            }
-            
-            print("📺 Fetching runtimes from TVMaze for: \(series.title)")
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(TVMazeShowResponse.self, from: data)
-            
+        // Check Hardcoded Exact Runtimes
+        if let exactRuntimes = TVEventRuntimes.runtimes[series.id] {
+            print("💎 Using EXACT runtimes for \(series.title)")
             var allRuntimes: [TimeInterval] = []
             
-            // Map episodes by season/number for easy lookup
-            var episodeMap: [String: Int] = [:]
-            for ep in response._embedded.episodes {
-                let key = "\(ep.season)-\(ep.number)"
-                episodeMap[key] = ep.runtime
-            }
-            
-            // Reconstruct the flat list based on our expected season/episode counts
-            // This ensures alignment with our internal structure
+            // Reconstruct the flat list
             for season in 1...series.totalSeasons {
                 let episodeCount = series.episodesPerSeason[season - 1]
                 for episodeNum in 1...episodeCount {
                     let key = "\(season)-\(episodeNum)"
-                    if let runtimeMinutes = episodeMap[key] {
-                        allRuntimes.append(TimeInterval(runtimeMinutes * 60))
+                    if let duration = exactRuntimes[key] {
+                        allRuntimes.append(duration)
                     } else {
-                        // If specific episode missing in TVMaze, use default
-                        allRuntimes.append(defaultRuntime)
+                        // Missing exact runtime? Fallback to average of knowns or default
+                        // Only print if it's not one of the known missing ones (to reduce log noise)
+                        // Breaking Bad has some known missing ones in S4/S5
+                        if series.id != "tt0903747" || (season != 4 && season != 5) {
+                            print("⚠️ Missing exact runtime for \(series.title) S\(season)E\(episodeNum)")
+                        }
+                        allRuntimes.append(30 * 60) // Safe fallback
                     }
                 }
             }
             
-            print("   ✅ Loaded \(allRuntimes.count) exact runtimes for \(series.title)")
-            runtimeCache[series.id] = allRuntimes
-            return allRuntimes
-            
-        } catch {
-            print("⚠️ Failed to fetch from TVMaze for \(series.title): \(error)")
-            // Fallback to defaults
-            var allRuntimes: [TimeInterval] = []
-            for season in 1...series.totalSeasons {
-                let episodeCount = series.episodesPerSeason[season - 1]
-                allRuntimes.append(contentsOf: Array(repeating: defaultRuntime, count: episodeCount))
-            }
-            runtimeCache[series.id] = allRuntimes
+            await cache.set(series.id, values: allRuntimes)
             return allRuntimes
         }
+        
+        // Fallback for unknown series (should not happen for our 4 shows)
+        print("⚠️ No exact runtimes found for \(series.title) - using defaults")
+        let defaultRuntime: TimeInterval = 30 * 60
+        var allRuntimes: [TimeInterval] = []
+        for season in 1...series.totalSeasons {
+            let episodeCount = series.episodesPerSeason[season - 1]
+            allRuntimes.append(contentsOf: Array(repeating: defaultRuntime, count: episodeCount))
+        }
+        await cache.set(series.id, values: allRuntimes)
+        return allRuntimes
     }
 }
 

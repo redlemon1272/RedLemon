@@ -77,9 +77,14 @@ struct EventsView: View {
                                 // TV Events List
                                 LazyVStack(spacing: 20) {
                                     ForEach(tvEvents) { tvEvent in
-                                        TVHeroEventCard(tvEvent: tvEvent) {
+                                        TVHeroEventCard(tvEvent: tvEvent, onJoin: {
                                             joinTVEvent(tvEvent)
-                                        }
+                                        }, onRefreshNeeded: {
+                                            print("🔄 TV Event finished, refreshing schedule...")
+                                            Task {
+                                                await loadTVEvents()
+                                            }
+                                        })
                                     }
                                 }
                                 .padding(.horizontal)

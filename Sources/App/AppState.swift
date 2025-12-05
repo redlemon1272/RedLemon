@@ -521,23 +521,50 @@ class AppState: ObservableObject {
 
         print("📺 Loading next episode: S\(nextSeason)E\(nextEpisode)")
 
-        // Update state
-        await MainActor.run {
-            selectedSeason = nextSeason
-            selectedEpisode = nextEpisode
-            // Reset stream resolution state
-            isResolvingStream = true
-            streamError = nil
-        }
+        // Check start time
+        let startTime = await TVEventScheduler.getEpisodeStartTime(series: series, season: nextSeason, episode: nextEpisode)
+        let timeUntilStart = startTime.timeIntervalSince(TimeService.shared.now)
+        
+        if timeUntilStart > 5 { // If more than 5 seconds wait, go to lobby
+            print("⏳ Next episode starts in \(Int(timeUntilStart))s - going to lobby")
+            await MainActor.run {
+                // Update room state to lobby
+                if var room = currentWatchPartyRoom {
+                    room.state = .lobby
+                    room.lobbyDuration = 120 // Standard 2 min buffer
+                    // Update room metadata for next episode
+                    room.season = nextSeason
+                    room.episode = nextEpisode
+                    currentWatchPartyRoom = room
+                }
+                
+                // Update selection state
+                selectedSeason = nextSeason
+                selectedEpisode = nextEpisode
+                
+                // Go to lobby view
+                currentView = .watchPartyLobby
+            }
+        } else {
+            print("🚀 Next episode ready - playing immediately")
+            // Update state
+            await MainActor.run {
+                selectedSeason = nextSeason
+                selectedEpisode = nextEpisode
+                // Reset stream resolution state
+                isResolvingStream = true
+                streamError = nil
+            }
 
-        // Play next episode
-        await playMedia(
-            mediaItem,
-            quality: .fullHD,
-            watchMode: .watchParty,
-            roomId: currentRoomId,
-            isHost: false
-        )
+            // Play next episode
+            await playMedia(
+                mediaItem,
+                quality: .fullHD,
+                watchMode: .watchParty,
+                roomId: currentRoomId,
+                isHost: false
+            )
+        }
     }
 
     // MARK: - Window Management (Delegated to WindowManager)

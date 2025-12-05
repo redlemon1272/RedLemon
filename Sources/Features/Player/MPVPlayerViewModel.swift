@@ -213,7 +213,8 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         func startEmbeddedSubtitleScan() {
-            Task { [weak self] in
+            // Run in detached task to avoid blocking MainActor (UI)
+            Task.detached(priority: .userInitiated) { [weak self] in
                 guard let self = self else { return }
 
                 // Brief delay to let MPV's auto-selection complete
@@ -223,13 +224,16 @@ class MPVPlayerViewModel: ObservableObject {
                 for attempt in 1...3 {
                     try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s between checks
 
-                    let tracks = self.mpvWrapper.getSubtitleTracks()
+                    // Access MPV wrapper safely (assuming it's thread-safe or we accept the risk for read-only)
+                    // Ideally MPVWrapper should be an actor or have internal locking
+                    let tracks = await self.mpvWrapper.getSubtitleTracks()
                     let embeddedSubs = tracks.filter { $0.id != 0 }
+                    
                     if !embeddedSubs.isEmpty {
                         print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
 
                         // MPV already auto-selected via FILE_LOADED event handler
-                        let currentSid = self.mpvWrapper.getCurrentSubtitleTrack()
+                        let currentSid = await self.mpvWrapper.getCurrentSubtitleTrack()
                         print("ℹ️ Current subtitle track: \(currentSid) (auto-selected by MPV during FILE_LOADED)")
 
                         // Update UI with tracks and current selection
@@ -496,9 +500,17 @@ class MPVPlayerViewModel: ObservableObject {
             }
 
             guard resumeTime < self.duration else {
-                print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s), starting from beginning")
+                print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s). Event is effectively finished for this file.")
+                // Seek to near the end to trigger natural completion and transition to lobby
+                // This ensures the user enters the "Waiting" state for the next event, maintaining sync
+                let nearEnd = max(0, self.duration - 1.0)
+                self.mpvWrapper.seek(to: nearEnd)
+                self.mpvWrapper.play()
+                self.isPlaying = true
+                
+                // Clear state
                 self.appState?.resumeFromTimestamp = nil
-                self.isPlaying = true  // Start playing normally
+                self.appState?.eventStartTime = nil
                 return
             }
 

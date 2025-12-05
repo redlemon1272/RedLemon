@@ -10,9 +10,11 @@ import SwiftUI
 struct TVHeroEventCard: View {
     let tvEvent: TVEventItem
     let onJoin: () -> Void
+    var onRefreshNeeded: (() -> Void)? = nil
     
     @State private var currentTime = TimeService.shared.now
     @State private var timer: Timer?
+    @State private var hasTriggeredRefresh = false
     
     var body: some View {
         Button(action: onJoin) {
@@ -166,7 +168,18 @@ struct TVHeroEventCard: View {
             currentTime = TimeService.shared.now
             timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 currentTime = TimeService.shared.now
+                
+                // Check if episode has finished
+                if remainingTime <= 0 && !hasTriggeredRefresh {
+                    print("🔄 TV Event finished: \(tvEvent.series.title) S\(tvEvent.currentSeason)E\(tvEvent.currentEpisode)")
+                    hasTriggeredRefresh = true
+                    onRefreshNeeded?()
+                }
             }
+        }
+        .onChange(of: tvEvent.currentEpisode) { _ in
+            // Reset trigger when episode changes
+            hasTriggeredRefresh = false
         }
         .onDisappear {
             timer?.invalidate()

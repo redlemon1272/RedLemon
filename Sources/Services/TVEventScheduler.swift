@@ -55,96 +55,97 @@ class TVEventScheduler {
         )
     }
     
-    /// Fetch episode runtimes from TMDB
-    /// Falls back to 22 minutes (standard sitcom) or 45 minutes (drama) if unavailable
+    /// Cache for episode runtimes to avoid re-fetching
+    private static var runtimeCache: [String: [TimeInterval]] = [:]
+
+    /// Fetch episode runtimes from TVMaze (Free, no key, one request per show)
+    /// Falls back to default runtimes if unavailable
     private static func fetchEpisodeRuntimes(for series: TVEvent) async -> [TimeInterval] {
-        // Default runtimes based on series type
+        // Check cache first
+        if let cached = runtimeCache[series.id] {
+            return cached
+        }
+
+        // Default runtimes based on series type (Fallback)
         let defaultRuntime: TimeInterval
         switch series.id {
         case "tt0903747": // Breaking Bad
-            defaultRuntime = 47 * 60  // 47 minutes
+            defaultRuntime = 47 * 60
         case "tt0944947": // Game of Thrones
-            defaultRuntime = 55 * 60  // 55 minutes
+            defaultRuntime = 55 * 60
         case "tt0386676", "tt0108778": // The Office, Friends
-            defaultRuntime = 22 * 60  // 22 minutes
+            defaultRuntime = 22 * 60
         default:
-            defaultRuntime = 30 * 60  // 30 minutes generic
+            defaultRuntime = 30 * 60
         }
         
-        // Try to fetch from TMDB
-        let client = LocalAPIClient.shared
-        var allRuntimes: [TimeInterval] = []
-        
-        for season in 1...series.totalSeasons {
-            // Fetch season details from TMDB
-            if let seasonData = try? await client.fetchSeasonDetails(imdbId: series.id, season: season) {
-                // Extract episode runtimes
-                for episode in seasonData.episodes {
-                    let runtime = TimeInterval((episode.runtime ?? Int(defaultRuntime / 60)) * 60)
-                    allRuntimes.append(runtime)
+        // Try to fetch from TVMaze
+        do {
+            guard let encodedTitle = series.title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+                  let url = URL(string: "https://api.tvmaze.com/singlesearch/shows?q=\(encodedTitle)&embed=episodes") else {
+                throw NSError(domain: "Invalid URL", code: -1)
+            }
+            
+            print("📺 Fetching runtimes from TVMaze for: \(series.title)")
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let response = try JSONDecoder().decode(TVMazeShowResponse.self, from: data)
+            
+            var allRuntimes: [TimeInterval] = []
+            
+            // Map episodes by season/number for easy lookup
+            var episodeMap: [String: Int] = [:]
+            for ep in response._embedded.episodes {
+                let key = "\(ep.season)-\(ep.number)"
+                episodeMap[key] = ep.runtime
+            }
+            
+            // Reconstruct the flat list based on our expected season/episode counts
+            // This ensures alignment with our internal structure
+            for season in 1...series.totalSeasons {
+                let episodeCount = series.episodesPerSeason[season - 1]
+                for episodeNum in 1...episodeCount {
+                    let key = "\(season)-\(episodeNum)"
+                    if let runtimeMinutes = episodeMap[key] {
+                        allRuntimes.append(TimeInterval(runtimeMinutes * 60))
+                    } else {
+                        // If specific episode missing in TVMaze, use default
+                        allRuntimes.append(defaultRuntime)
+                    }
                 }
-            } else {
-                // Fallback: use default runtime for all episodes in this season
+            }
+            
+            print("   ✅ Loaded \(allRuntimes.count) exact runtimes for \(series.title)")
+            runtimeCache[series.id] = allRuntimes
+            return allRuntimes
+            
+        } catch {
+            print("⚠️ Failed to fetch from TVMaze for \(series.title): \(error)")
+            // Fallback to defaults
+            var allRuntimes: [TimeInterval] = []
+            for season in 1...series.totalSeasons {
                 let episodeCount = series.episodesPerSeason[season - 1]
                 allRuntimes.append(contentsOf: Array(repeating: defaultRuntime, count: episodeCount))
             }
+            runtimeCache[series.id] = allRuntimes
+            return allRuntimes
         }
-        
-        return allRuntimes
     }
 }
 
-/// Extension to LocalAPIClient for TMDB season details
-extension LocalAPIClient {
-    func fetchSeasonDetails(imdbId: String, season: Int) async throws -> TMDBSeasonResponse {
-        // Convert IMDB ID to TMDB ID first
-        let tmdbId = try await convertIMDBToTMDB(imdbId: imdbId)
-        
-        let urlString = "https://api.themoviedb.org/3/tv/\(tmdbId)/season/\(season)?api_key=\(tmdbAPIKey)"
-        guard let url = URL(string: urlString) else {
-            throw NSError(domain: "Invalid URL", code: -1)
-        }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        return try JSONDecoder().decode(TMDBSeasonResponse.self, from: data)
-    }
-    
-    private func convertIMDBToTMDB(imdbId: String) async throws -> Int {
-        let urlString = "https://api.themoviedb.org/3/find/\(imdbId)?api_key=\(tmdbAPIKey)&external_source=imdb_id"
-        guard let url = URL(string: urlString) else {
-            throw NSError(domain: "Invalid URL", code: -1)
-        }
-        
-        let (data, _) = try await URLSession.shared.data(from: url)
-        let response = try JSONDecoder().decode(TMDBFindResponse.self, from: data)
-        
-        guard let tmdbId = response.tv_results.first?.id else {
-            throw NSError(domain: "TMDB ID not found", code: -1)
-        }
-        
-        return tmdbId
-    }
-    
-    private var tmdbAPIKey: String {
-        return "your_tmdb_api_key_here"  // TODO: Add TMDB API key
-    }
+// MARK: - TVMaze Models
+struct TVMazeShowResponse: Codable {
+    let name: String
+    let _embedded: TVMazeEmbedded
 }
 
-/// TMDB API response models
-struct TMDBSeasonResponse: Codable {
-    let episodes: [TMDBEpisode]
+struct TVMazeEmbedded: Codable {
+    let episodes: [TVMazeEpisode]
 }
 
-struct TMDBEpisode: Codable {
-    let episode_number: Int
-    let name: String?
-    let runtime: Int?
+struct TVMazeEpisode: Codable {
+    let season: Int
+    let number: Int
+    let runtime: Int
 }
 
-struct TMDBFindResponse: Codable {
-    let tv_results: [TMDBTVResult]
-}
 
-struct TMDBTVResult: Codable {
-    let id: Int
-}

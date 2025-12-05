@@ -46,7 +46,7 @@ struct TVEventData {
             title: "Game of Thrones",
             totalSeasons: 8,
             totalEpisodes: 73,
-            packConfig: .autoSelect,  // Uses existing stream search
+            packConfig: .trustedPack(searchQuery: "Game.of.Thrones.S01-S08.COMPLETE.SERIES.REPACK.1080p.Bluray.x265-HiQVE"),
             episodesPerSeason: [10, 10, 10, 10, 10, 10, 7, 6]
         )
     ]

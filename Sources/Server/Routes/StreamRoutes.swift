@@ -291,6 +291,15 @@ func registerStreamRoutes(_ app: Application) {
                        (titleLower.contains("av1") || titleLower.contains("web-dl"))
             }
 
+            // Enhanced matching for Game of Thrones trusted pack:
+            // Query: "Game.of.Thrones.S01-S08.COMPLETE.SERIES.REPACK.1080p.Bluray.x265-HiQVE"
+            if query.contains("game of thrones") || query.contains("game.of.thrones") {
+                // Match the specific HiQVE repack
+                return (titleLower.contains("game of thrones") || titleLower.contains("game.of.thrones")) &&
+                       titleLower.contains("hiqve") &&
+                       titleLower.contains("1080p")
+            }
+
             // Fallback to original logic for other series
             return titleLower.contains(query)
         }
@@ -374,6 +383,12 @@ func registerStreamRoutes(_ app: Application) {
         let beforeCodecFilter = filteredStreams.count
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
         filteredStreams = filteredStreams.filter { stream in
+            // SPECIAL-CASE: Exempt trusted packs from codec filtering
+            if isTrustedPack(stream) {
+                print("   ✅ EXEMPTING trusted pack from x265 filter: \(stream.title)")
+                return true
+            }
+
             let titleLower = stream.title.lowercased()
             let hasBadCodec = badCodecs.contains { codec in
                 titleLower.contains(codec)
@@ -392,6 +407,11 @@ func registerStreamRoutes(_ app: Application) {
         let beforeAV1Filter = filteredStreams.count
         let av1Codecs = ["av1"]
         filteredStreams = filteredStreams.filter { stream in
+            // SPECIAL-CASE: Exempt trusted packs from codec filtering
+            if isTrustedPack(stream) {
+                return true
+            }
+
             let titleLower = stream.title.lowercased()
             let hasAV1 = av1Codecs.contains { codec in
                 titleLower.contains(codec)
@@ -429,6 +449,11 @@ func registerStreamRoutes(_ app: Application) {
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
         filteredStreams = filteredStreams.filter { stream in
+            // SPECIAL-CASE: Exempt trusted packs
+            if isTrustedPack(stream) {
+                return true
+            }
+
             let titleLower = stream.title.lowercased()
             
             // Block explicit MPEG-2

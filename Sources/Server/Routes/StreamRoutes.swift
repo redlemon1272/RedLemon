@@ -1331,12 +1331,70 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                     continue
                 }
 
-                let matches = episodePatterns.contains { pattern in
-                    releaseName.contains(pattern.lowercased())
+                // 1. Check for EXPLICIT mismatch (e.g. we want S05E02, but sub says S05E01)
+                // We use regex to find any SxxExx pattern in the release name
+                let seasonEpisodePattern = "s(\\d{1,2})e(\\d{1,2})"
+                var isExplicitMismatch = false
+                
+                if let regex = try? NSRegularExpression(pattern: seasonEpisodePattern, options: []) {
+                    let nsString = releaseName as NSString
+                    let results = regex.matches(in: releaseName, options: [], range: NSRange(location: 0, length: nsString.length))
+                    
+                    for result in results {
+                        if result.numberOfRanges >= 3 {
+                            let subSeason = Int(nsString.substring(with: result.range(at: 1))) ?? 0
+                            let subEpisode = Int(nsString.substring(with: result.range(at: 2))) ?? 0
+                            
+                            // If it specifies a DIFFERENT episode, it's a mismatch
+                            // (Unless it's a multi-episode file like S05E01-E02, but simple logic first)
+                            if subSeason == season && subEpisode != episode {
+                                isExplicitMismatch = true
+                                break
+                            }
+                            // If it specifies a DIFFERENT season, it's a mismatch
+                            if subSeason != season {
+                                isExplicitMismatch = true
+                                break
+                            }
+                        }
+                    }
+                }
+                
+                if isExplicitMismatch {
+                    NSLog("  ❌ EXPLICIT MISMATCH: %@", sub.releaseName ?? "unknown")
+                    continue
                 }
 
-                if matches {
-                    NSLog("  ✅ MATCH (English): %@", sub.releaseName ?? "unknown")
+                // 2. Check for POSITIVE match (Target Episode OR Season Pack)
+                // It's a match if:
+                // a) It contains the target episode pattern (S05E02)
+                // b) OR it contains the Season pattern (S05) AND NO specific episode pattern (Season Pack)
+                // c) OR it contains "Complete" and "S05"
+                
+                let targetEpisodePatterns = [
+                    String(format: "s%02de%02d", season, episode),
+                    String(format: "s%de%d", season, episode),
+                    String(format: "%dx%02d", season, episode)
+                ]
+                
+                let hasTargetEpisode = targetEpisodePatterns.contains { releaseName.contains($0) }
+                
+                let seasonPatterns = [
+                    String(format: "s%02d", season),
+                    String(format: "season %d", season)
+                ]
+                let hasSeason = seasonPatterns.contains { releaseName.contains($0) }
+                
+                // Check if it looks like a season pack (Has season, but NO "E01", "E02" etc patterns)
+                // Actually, we already filtered out explicit mismatches above.
+                // So if we are here, it either has OUR episode, or NO episode (season pack), or a different episode format we missed.
+                // Let's be permissive: If it has the Season, keep it.
+                
+                if hasTargetEpisode {
+                    NSLog("  ✅ MATCH (Episode): %@", sub.releaseName ?? "unknown")
+                    filteredSubtitles.append(sub)
+                } else if hasSeason {
+                    NSLog("  ✅ MATCH (Season Pack): %@", sub.releaseName ?? "unknown")
                     filteredSubtitles.append(sub)
                 } else {
                     NSLog("  ❌ NO MATCH: %@", sub.releaseName ?? "unknown")
@@ -1408,10 +1466,21 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
                 let subReleaseLower = (sub.releaseName ?? "").lowercased()
 
                 let encodedPath = Data(sub.url.utf8).base64EncodedString()
-                let cdnURL = sub.url.starts(with: "http") ? sub.url : "https://dl.subdl.com\(sub.url)"
+                
+                // Route through our proxy to handle zip extraction and VTT conversion
+                // We append season/episode info so the proxy knows which file to extract from a season pack
+                var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
+                var queryItems: [String] = []
+                if let season = season { queryItems.append("season=\(season)") }
+                if let episode = episode { queryItems.append("episode=\(episode)") }
+                
+                if !queryItems.isEmpty {
+                    proxyURL += "?" + queryItems.joined(separator: "&")
+                }
+                
                 let subtitle = Subtitle(
                     id: encodedPath,
-                    url: cdnURL,
+                    url: proxyURL,
                     lang: sub.language ?? "en",
                     label: sub.releaseName ?? "English",
                     srclang: sub.language ?? "en",

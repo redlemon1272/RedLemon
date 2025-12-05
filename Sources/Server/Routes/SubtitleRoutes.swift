@@ -56,7 +56,9 @@ func registerSubtitleRoutes(_ app: Application) {
 
         // Extract optional offset parameter (milliseconds)
         let offset = req.query[Int.self, at: "offset"] ?? 0
-
+        let season = req.query[Int.self, at: "season"]
+        let episode = req.query[Int.self, at: "episode"]
+        
         print("📄 Subtitle request: \(encodedPath.prefix(20))... (offset: \(offset)ms)")
 
         // Get SubDL API key from Keychain
@@ -73,7 +75,9 @@ func registerSubtitleRoutes(_ app: Application) {
         // Download and convert subtitle
         let vttText = try await SubDLClient.shared.download(
             downloadPath: downloadPath,
-            offset: offset
+            offset: offset,
+            season: season,
+            episode: episode
         )
 
         // Return as VTT

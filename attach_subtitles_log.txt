@@ -1,0 +1,354 @@
+2025-12-05 17:20:11.521 RedLemon[57795:260878] 🔍 DEBUG: attachSubtitles INPUT - streams.count: 35
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[0]: Breaking Bad COMPLETE S01-S05 2160p WEB-DL Rus Ukr Eng DTS-HD MA5.1 x264-TrollUHD [RiCK]
+Breaking.Bad.S05.2160p.WEB-DL.3xRus.2xEng.TrollUHD-ULTRAHDCLUB/Breaking.Bad.S05E15.2160p.WEB-DL.3xRus.2xEng.TrollUHD-ULTRAHDCLUB.mkv
+👤 26 💾 26.4 GB ⚙️ 1337x
+🇬🇧 / 🇷🇺 / 🇺🇦 | 2160p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[1]: Breaking Bad Full 1080p PT-BR
+Breaking.Bad.S05.Season.5.1080p/Breaking.Bad.S05E15.1080p.mkv
+👤 356 💾 613.42 MB ⚙️ MagnetDL
+🇵🇹 | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[2]: Breaking Bad S05 Complete (2012-2013) 1080p ENG-ITA x264 BluRay
+Ep 15 - Granite State - Tutto Torna.mkv
+👤 74 💾 3.42 GB ⚙️ ThePirateBay
+🇬🇧 / 🇮🇹 | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[3]: Breaking Bad S01-S05 1080p NF WEB-DL AV1 EAC3 MultiSub
+Breaking Bad Season 5/Breaking.Bad.S05E15.Granite.State.1080p.NF.WEB-DL.AV1.EAC3.mkv
+👤 49 💾 1.04 GB ⚙️ TorrentGalaxy
+Multi Subs / 🇬🇧 | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[4]: Breaking Bad (S05)(2012)(1080p)(VP9)(WebDL)( EN 5.1+SPA 2.0)(Complete) PHDTeam
+Breaking Bad - S05E15_Žulový stát.mkv
+👤 20 💾 541.54 MB ⚙️ TorrentGalaxy
+🇬🇧 / 🇪🇸 | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[5]: Breaking.Bad.S05.1080p.BluRay.x264-ROVERS[rartv]
+breaking.bad.s05e15.1080p.bluray.x264-rovers.mkv
+👤 13 💾 3.97 GB ⚙️ RARBG | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[6]: Breaking Bad S01-S05 Seasons 1-5 Complete 1080p H264 BluRay-MIXE
+Breaking.Bad.S05E15.Granite State.1080p.H264.BluRay.mkv
+👤 9 💾 3.2 GB ⚙️ ThePirateBay | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[7]: Breaking Bad - Complete Season + Extras - BluRay 1080p
+Breaking Bad - S05E15 - Granite State.mkv
+👤 8 💾 3.2 GB ⚙️ ThePirateBay | 1080p | torrentio
+2025-12-05 17:20:11.521 RedLemon[57795:260878]    INPUT[8]: Breaking.Bad.iNTEGRALE.MULTi.1080p.WEB.DDP5.1.x264-TFA
+Breaking.Bad.S05.MULTi.1080p.WEB.DDP5.1.x264-TFA/Breaking.Bad.S05E15.MULTi.1080p.WEB.DDP5.1.x264-TFA.mkv
+👤 7 💾 2.33 GB ⚙️ Torrent9
+Multi Audio / 🇫🇷 | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[9]: Breaking.Bad.S05.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP[rartv]
+Breaking.Bad.S05E15.Granite.State.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv
+👤 7 💾 7.98 GB ⚙️ RARBG | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[10]: Breaking.Bad.S05E15.Granite.Slate.1080p.WEB-DL.DD5.1.H.264-BS [P
+👤 7 💾 2.1 GB ⚙️ ThePirateBay | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[11]: Breaking.Bad.S05.Season.5.COMPLETE.1080p.WEB-DL.H264-PublicHD
+Breaking.Bad.S05E15.Granite.Slate.1080p.WEB-DL.DD5.1.H.264-BS.mkv
+👤 6 💾 2.1 GB ⚙️ 1337x | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[12]: Breaking Bad S01 - S05 COMPLETE 1080p BluRay REMUX AVC DTS-HD MA 5.1 - FraMeSToR
+Breaking.Bad.S05.Part.2.2013.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR/Breaking.Bad.S05E15.Granite.State.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR.mkv
+👤 4 💾 8 GB ⚙️ 1337x | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[13]: Во все тяжкие / Breaking Bad / Сезон: 5 / Серии: 1-16 (16) [2012-2013 BDRip 1080p] Dub (Selena International) + MVO (FoxCrime / Amedia) + DVO (LostFilm Кубик в Кубе) + AVO (Ю. Сербин Дмитрий «Goblin» Пучков) + Original (Eng) + Sub (Rus Eng)
+Breaking.Bad.S05.E15.BDRip.1080p-SOFCJ.mkv
+👤 4 💾 7.33 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[14]: Breaking Bad S05 Season 5 1080p Web-DL ReEnc-DeeJayAhmed [LittleFairyRG]
+Breaking.Bad.S05E15.1080p.Web-DL.ReEnc-DeeJayAhmed.mkv
+👤 3 💾 613.42 MB ⚙️ 1337x | 1080p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[15]: Breaking Bad Season 5 Complete 720p.BRrip.Sujaidr
+breaking bad s05e15 720p brrip sujaidr.mkv
+👤 32 💾 427.43 MB ⚙️ ThePirateBay | 720p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[16]: Breaking Bad - 5ª Temporada (2012) 720p Dual Áudio - Douglasvip
+S05E15 - Granite State.mp4
+👤 5 💾 382.28 MB ⚙️ Comando
+Dual Audio / 🇬🇧 / 🇵🇹 | 720p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[17]: Во все тяжкие / Вразнос / Breaking Bad / Сезон: 1-5 / Серии: 1-62 из 62 [2008-2013 BDRip 720p] AVO (Дмитрий «Goblin» Пучков) + Original + Sub (Eng)
+Breaking.Bad.S05.720p.BluRay.Goblin.Eng.AMC/Breaking.Bad.S05E15.720p.BluRay.Goblin.Eng.AMC.mkv
+👤 2 💾 3.11 GB ⚙️ Rutracker
+🇬🇧 / 🇷🇺 | 720p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[18]: Breaking Bad Season 5 Complete 720p BluRay x264 [i_c]
+Breaking Bad S05E15 Granite State.mkv
+👤 2 💾 512.57 MB ⚙️ 1337x | 720p | torrentio
+2025-12-05 17:20:11.522 RedLemon[57795:260878]    INPUT[19]: Breaking.Bad.S05E15.720p.MP4.BDRip.[KoTuWa]
+👤 2 💾 366.05 MB ⚙️ ThePirateBay | 720p | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[20]: Breaking Bad Season 1-5 Complete 480p x264 MKVTV
+Breaking Bad Season 5 480p (mkvtv.net)/Breaking.Bad.S05E15.480p.MKVTV.mkv
+👤 26 💾 348.59 MB ⚙️ 1337x | 480p | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[21]: Во все тяжкие / Breaking Bad [S01-05] (2008-2013) BDRip | D
+Season 5/s05e15.avi
+👤 7 💾 991.08 MB ⚙️ Rutor
+🇬🇧 / 🇷🇺 | Unknown | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[22]: Во все тяжкие / Breaking Bad [S01-05] (2008-2013) BDRip от qqss44 | LostFilm
+Season 05/Breaking.Bad.s05e15.XviD.BDrip.DD5.1.LostFilm.[qqss44].avi
+👤 5 💾 862.86 MB ⚙️ Rutor
+🇷🇺 | Unknown | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[23]: Breaking Bad S01-05e01-62 (Serie Completa Extra) [Mux - H264 - Ita Eng Ac3 5.1 - Sub Ita Eng] BDMux by Fratposa
+Breaking Bad S05 H264 SD by Fratposa/Breaking.Bad.S05e15.BDMux.H264.SD.by.Fratposa.mkv
+👤 4 💾 794.89 MB ⚙️ 1337x
+🇬🇧 / 🇮🇹 | Unknown | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[24]: Во все тяжкие / Breaking Bad [S05] (2013) WEB-DLRip от Scarabey | LostFilm
+Breaking.Bad.5x15_[scarabey.org].avi
+👤 3 💾 847.24 MB ⚙️ Rutor
+🇷🇺 | Unknown | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[25]: Во все тяжкие / Breaking Bad [S01-05] (2008-2013) HDRip | КПК | Кубик в Кубе
+Vo.Vse.Tyazhkie.S05.2012-2013.AVC.HDRip.KPK.KvK.GF/Vo.Vse.Tyazhkie.s05e15.2012.AVC.HDRip.KPK.KvK.GF.mp4
+👤 2 💾 242.2 MB ⚙️ Rutor
+🇷🇺 | Unknown | torrentio
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[26]: Breaking Bad s05 BDRip 720p Rus Eng CasStudio TV | 720p | zilean
+2025-12-05 17:20:11.523 RedLemon[57795:260878]    INPUT[27]: Breaking Bad S01-S05 REPACK COMPLETE 1080p BluRay REMUX AVC DTS-HD MA 5 1-FraMeSToR | 1080p | zilean
+2025-12-05 17:20:11.525 RedLemon[57795:260878]    INPUT[28]: Breaking Bad Season 5 1080p NF Web-DL | 1080p | zilean
+2025-12-05 17:20:11.526 RedLemon[57795:260878]    INPUT[29]: Breaking Bad S01-S05 COMPLETE 1080p BluRay REMUX AVC DTS-HD MA 5 1-FraMeSToR | 1080p | zilean
+2025-12-05 17:20:11.526 RedLemon[57795:260878]    INPUT[30]: Breaking Bad S05 MULTi 1080p BluRay x264-AiRTV | 1080p | zilean
+2025-12-05 17:20:11.527 RedLemon[57795:260878]    INPUT[31]: [Ex-torrenty org]Breaking Bad S05 MULTi 1080p BluRay DDP5 1 x264-Ralf | 1080p | zilean
+2025-12-05 17:20:11.528 RedLemon[57795:260878]    INPUT[32]: Breaking Bad (2008) - Season 5 - tt0903747 - show | Unknown | zilean
+2025-12-05 17:20:11.528 RedLemon[57795:260878]    INPUT[33]: Breaking Bad S05 PROPER 1080p BluRay x264 10-bit-FELIX | 1080p | zilean
+2025-12-05 17:20:11.528 RedLemon[57795:260878]    INPUT[34]: Breaking Bad S01-S05 1080p BluRay DTS x264-decibeL | 1080p | zilean
+2025-12-05 17:20:11.528 RedLemon[57795:260878] 🔍 Searching SubDL for subtitles: tt0903747 (series) S05E15
+2025-12-05 17:20:11.801 RedLemon[57795:260741] ✅ Found 10 total subtitle options from SubDL
+2025-12-05 17:20:11.801 RedLemon[57795:260741] ✅ Filtered to 10 English subtitles
+2025-12-05 17:20:11.801 RedLemon[57795:260741]   🚫 Filtering out: Breaking Bad S05E15 - Granite State - Ehhhh
+2025-12-05 17:20:11.802 RedLemon[57795:260741] ✅ Filtered out 1 problematic subtitle versions
+2025-12-05 17:20:11.802 RedLemon[57795:260741] 🔍 Looking for S05E15 episode markers in 9 English subtitles
+2025-12-05 17:20:11.802 RedLemon[57795:260741]   ✅ MATCH (Episode): S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.802 RedLemon[57795:260741]   ✅ MATCH (Season Pack): Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.802 RedLemon[57795:260741]   ✅ MATCH (Season Pack): Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ❌ NO MATCH: BDRip DVDRip HDTV TSV
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ❌ NO MATCH: BDRip DVDRip HDTV TSV - improved
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ❌ NO MATCH: breaking.bad.season.05.1080p-PFT
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ✅ MATCH (Season Pack): Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ❌ NO MATCH: Breaking.Bad.Season.05.1080p-PFT
+2025-12-05 17:20:11.803 RedLemon[57795:260741]   ❌ NO MATCH: Br Bd s5
+2025-12-05 17:20:11.803 RedLemon[57795:260741] ✅ Found 4 English subtitles matching S05E15 episode markers
+2025-12-05 17:20:11.804 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.804 RedLemon[57795:260741]     📺 Resolution match: 2160p
+2025-12-05 17:20:11.804 RedLemon[57795:260741]   [2] Score: 100 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.804 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.804 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.805 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.805 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.805 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.805 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.805 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.805 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.806 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.806 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.806 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.806 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.806 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.807 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.807 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.810 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.811 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.811 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.812 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.812 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.813 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.813 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.813 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.813 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.814 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.814 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.814 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.815 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.815 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.816 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.817 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.818 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.818 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.818 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.819 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.819 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.819 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.820 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.820 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.820 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.820 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.820 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.820 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.820 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.821 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.821 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.821 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.821 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.821 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.821 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.821 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.822 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.822 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.822 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.822 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.822 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.822 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.822 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.823 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.823 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.823 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.823 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.823 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.827 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.828 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.828 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.829 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.830 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.830 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.830 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.830 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.831 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.831 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.831 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.831 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.832 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.832 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.832 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.834 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.834 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.836 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.837 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.837 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.837 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.838 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.838 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.839 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.839 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.839 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.840 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.840 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.840 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.840 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.845 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.846 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.846 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.846 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.846 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.847 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.847 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.847 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.847 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.848 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.848 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.848 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.848 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.848 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.849 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.849 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.849 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.850 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.850 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.850 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.850 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.851 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.854 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.854 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.855 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.856 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.856 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.856 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.856 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.856 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.856 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.856 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.857 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.857 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.860 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.860 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.861 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.862 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.863 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.863 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.863 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.864 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.864 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.864 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.864 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.865 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.865 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.865 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.865 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.872 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.872 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.873 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.873 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.873 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.873 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.873 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.873 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.874 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.877 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.879 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.880 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.880 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.880 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.881 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.881 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.881 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.881 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.881 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.882 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.882 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.882 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.883 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.883 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.883 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.884 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.884 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.884 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.885 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.886 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.889 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.889 RedLemon[57795:260741]   [1] Score: 100 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.889 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.889 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.889 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.889 RedLemon[57795:260741]     📺 Resolution match: 720p
+2025-12-05 17:20:11.889 RedLemon[57795:260741]   [4] Score: 100 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.890 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.890 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.890 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.890 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.890 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.890 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.896 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.896 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.897 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.897 RedLemon[57795:260741]   [2] Score: 0 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.898 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.898 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.898 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.898 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.899 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.899 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.899 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.899 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.900 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.900 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.900 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.900 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.900 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.900 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.901 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.902 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.902 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.903 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.905 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.906 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.906 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.906 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.907 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.907 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.907 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.909 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.912 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.912 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.912 RedLemon[57795:260741]   [3] Score: 0 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.913 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.913 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.913 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.913 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.914 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.914 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.914 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.914 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.915 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.915 RedLemon[57795:260741]   [1] Score: 0 | S05E15 - Granite State --- 720p [KoTuWa]
+2025-12-05 17:20:11.915 RedLemon[57795:260741]     ⚠️ Format mismatch: subtitle has web-dl but stream doesn't
+2025-12-05 17:20:11.915 RedLemon[57795:260741]   [2] Score: -50 | Breaking.Bad.S05.2160p.WEB-DL.3xRus.Eng.TrollUHD-ULTRAHDCLUB
+2025-12-05 17:20:11.916 RedLemon[57795:260741]     📺 Resolution match: 1080p
+2025-12-05 17:20:11.916 RedLemon[57795:260741]   [3] Score: 100 | Breaking.Bad.S05.1080p.Bluray.x265-YAWNiX
+2025-12-05 17:20:11.916 RedLemon[57795:260741]   [4] Score: 0 | Breaking Bad - Season 5 - Complete + ExtraS - 720p HD MP4
+2025-12-05 17:20:11.916 RedLemon[57795:260741] ✅ Selected 4 subtitle options for stream
+2025-12-05 17:20:11.916 RedLemon[57795:260741] 🔍 DEBUG: attachSubtitles OUTPUT - streams.count: 35

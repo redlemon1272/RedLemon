@@ -141,18 +141,7 @@ class MPVPlayerViewModel: ObservableObject {
                 roomId: self.currentRoomId
             )
         }
-        let isBreakingBad = imdbId == "tt0903747"
-
-        // Breaking Bad trusted pack: skip external subs so we can use embedded multisubs (even if title doesn't contain S01-S05)
-        let effectiveSubtitles: [(url: String, label: String)] = {
-            if isBreakingBad {
-                print("📝 Breaking Bad detected - skipping external subtitles to prefer embedded multisubs")
-                return []
-            }
-            return subtitles
-        }()
-
-        self.subtitles = effectiveSubtitles
+        self.subtitles = subtitles
         self.isLoading = true
         self.showPoster = true
 
@@ -260,19 +249,19 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Load subtitles immediately if they're already downloaded (local paths)
         // Otherwise download them in background
-        let areSubtitlesLocal = effectiveSubtitles.allSatisfy { $0.url.starts(with: "/") }
+        let areSubtitlesLocal = subtitles.allSatisfy { $0.url.starts(with: "/") }
 
-        if areSubtitlesLocal && !effectiveSubtitles.isEmpty {
+        if areSubtitlesLocal && !subtitles.isEmpty {
             NSLog("✅ Subtitles already downloaded, loading as additional options...")
             // Load them as additional options (won't override embedded subs)
             Task {
-                for (index, subtitle) in effectiveSubtitles.enumerated() {
+                for (index, subtitle) in subtitles.enumerated() {
                     NSLog("📝 Loading external subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
                     mpvWrapper.loadSubtitle(url: subtitle.url, title: subtitle.label)
                 }
                 NSLog("ℹ️ External subtitles loaded as additional options (embedded subs take priority)")
             }
-        } else if !effectiveSubtitles.isEmpty {
+        } else if !subtitles.isEmpty {
             // Subtitles need to be downloaded (fallback for older code paths)
             NSLog("⚠️ Subtitles not pre-downloaded, downloading in background...")
             Task.detached(priority: .background) {
@@ -280,7 +269,7 @@ class MPVPlayerViewModel: ObservableObject {
                 try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds - let playback stabilize
 
                 // Download and load all subtitle files with their labels
-                for (index, subtitle) in effectiveSubtitles.enumerated() {
+                for (index, subtitle) in subtitles.enumerated() {
                     NSLog("📝 RedLemon: Downloading subtitle %d (%@) from: %@", index + 1, subtitle.label, subtitle.url)
 
                     // Download subtitle file locally first

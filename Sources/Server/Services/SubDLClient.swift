@@ -118,7 +118,9 @@ actor SubDLClient {
     /// - Parameters:
     ///   - downloadPath: Path from SubDL API (e.g., "/subtitle/3486048-8409061.zip")
     ///   - offset: Optional time offset in milliseconds for sync adjustment
-    func download(downloadPath: String, offset: Int = 0) async throws -> String {
+    ///   - season: Optional season number for zip extraction
+    ///   - episode: Optional episode number for zip extraction
+    func download(downloadPath: String, offset: Int = 0, season: Int? = nil, episode: Int? = nil) async throws -> String {
         let downloadURL = downloadPath.starts(with: "http")
             ? downloadPath
             : "\(cdnURL)\(downloadPath)"
@@ -139,8 +141,8 @@ actor SubDLClient {
         var srtText = ""
 
         // Handle ZIP archives
-        if contentType.contains("zip") || contentType.contains("octet-stream") {
-            srtText = try extractSRTFromZip(data: data)
+        if contentType.contains("zip") || contentType.contains("octet-stream") || downloadPath.hasSuffix(".zip") {
+            srtText = try extractSRTFromZip(data: data, season: season, episode: episode)
         } else {
             // Assume raw SRT or VTT
             guard let text = String(data: data, encoding: .utf8) else {
@@ -165,10 +167,114 @@ actor SubDLClient {
 
     // MARK: - Helper Methods
 
-    private func extractSRTFromZip(data: Data) throws -> String {
-        // TODO: Implement ZIP extraction using libzip or swift-zip
-        // For now, throw error - will implement if needed
-        throw Abort(.notImplemented, reason: "ZIP extraction not yet implemented")
+    private func extractSRTFromZip(data: Data, season: Int?, episode: Int?) throws -> String {
+        // Create temporary file for zip
+        let tempDir = FileManager.default.temporaryDirectory
+        let zipURL = tempDir.appendingPathComponent(UUID().uuidString + ".zip")
+        
+        try data.write(to: zipURL)
+        
+        defer {
+            try? FileManager.default.removeItem(at: zipURL)
+        }
+        
+        // 1. List files in zip
+        let listProcess = Process()
+        let pipe = Pipe()
+        
+        listProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
+        listProcess.arguments = ["-l", zipURL.path]
+        listProcess.standardOutput = pipe
+        
+        try listProcess.run()
+        listProcess.waitUntilExit()
+        
+        let listData = pipe.fileHandleForReading.readDataToEndOfFile()
+        guard let listOutput = String(data: listData, encoding: .utf8) else {
+            throw Abort(.internalServerError, reason: "Failed to list zip contents")
+        }
+        
+        // Parse output to find best matching file
+        let lines = listOutput.components(separatedBy: .newlines)
+        var bestMatch: String?
+        
+        // Patterns to look for if we have season/episode info
+        var searchPatterns: [String] = []
+        if let s = season, let e = episode {
+            searchPatterns = [
+                String(format: "s%02de%02d", s, e),  // s05e15
+                String(format: "s%de%d", s, e),      // s5e15
+                String(format: "%dx%02d", s, e),     // 5x15
+                String(format: "%d%02d", s, e)       // 515
+            ]
+        }
+        
+        // Filter for subtitle files
+        let subtitleFiles = lines.compactMap { line -> String? in
+            // unzip -l output format: Length  Date  Time  Name
+            // We just want the name at the end
+            let parts = line.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
+            guard parts.count == 4 else { return nil }
+            let filename = String(parts[3]).trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let lower = filename.lowercased()
+            if lower.hasSuffix(".srt") || lower.hasSuffix(".vtt") {
+                return filename
+            }
+            return nil
+        }
+        
+        if subtitleFiles.isEmpty {
+            print("⚠️ No subtitle files found in zip list output:")
+            print(listOutput)
+        }
+        
+        if let s = season, let e = episode {
+            print("🔍 Looking for S%02dE%02d in zip (%d files)...", s, e, subtitleFiles.count)
+            
+            // Try to find exact match
+            for pattern in searchPatterns {
+                if let match = subtitleFiles.first(where: { $0.lowercased().contains(pattern) }) {
+                    print("✅ Found matching file in zip: \(match)")
+                    bestMatch = match
+                    break
+                }
+            }
+        }
+        
+        // Fallback: Use first subtitle file if no specific match found
+        if bestMatch == nil {
+            bestMatch = subtitleFiles.first
+            if let match = bestMatch {
+                print("⚠️ No specific episode match found, using first file: \(match)")
+            }
+        }
+        
+        guard let targetFile = bestMatch else {
+            throw Abort(.notFound, reason: "No subtitle files found in zip")
+        }
+        
+        // 2. Extract specific file to stdout
+        let extractProcess = Process()
+        let extractPipe = Pipe()
+        
+        extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
+        extractProcess.arguments = ["-p", zipURL.path, targetFile]
+        extractProcess.standardOutput = extractPipe
+        
+        try extractProcess.run()
+        extractProcess.waitUntilExit()
+        
+        let extractedData = extractPipe.fileHandleForReading.readDataToEndOfFile()
+        
+        // Try decoding with UTF-8 first, then ISO-8859-1 (common for subs)
+        if let text = String(data: extractedData, encoding: .utf8) {
+            return text
+        } else if let text = String(data: extractedData, encoding: .isoLatin1) {
+            return text
+        } else {
+            throw Abort(.internalServerError, reason: "Failed to decode extracted subtitle")
+        }
     }
 
     private func applySRTOffset(srtText: String, offsetMs: Int) -> String {

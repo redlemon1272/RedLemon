@@ -100,50 +100,65 @@ struct ScheduleManagementView: View {
             }
             
             // Movie List
-            List {
-                if isLoading {
-                    HStack {
-                        Spacer()
-                        ProgressView("Loading schedule...")
-                        Spacer()
-                    }
-                    .padding()
-                } else if eventConfigMovies.isEmpty {
-                    Text("No movies scheduled.")
-                        .foregroundColor(.secondary)
-                        .padding()
-                } else {
-                    ForEach(Array(eventConfigMovies.enumerated()), id: \.element.id) { index, movie in
+            ScrollView {
+                LazyVStack(spacing: 0) {
+                    if isLoading {
                         HStack {
-                            Text("\(index + 1)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                                .frame(width: 30, alignment: .trailing)
-                            
-                            VStack(alignment: .leading) {
-                                Text(movie.name)
-                                    .font(.body)
-                                if let genres = movie.genres {
-                                    Text(genres.joined(separator: ", "))
-                                        .font(.caption2)
-                                        .foregroundColor(.secondary)
-                                }
-                            }
-                            
                             Spacer()
-                            
-                            if let rating = movie.imdbRating {
-                                Text("★ \(rating)")
-                                    .font(.caption)
-                                    .foregroundColor(.orange)
-                            }
+                            ProgressView("Loading schedule...")
+                            Spacer()
                         }
-                        .padding(.vertical, 4)
+                        .padding()
+                    } else if eventConfigMovies.isEmpty {
+                        Text("No movies scheduled.")
+                            .foregroundColor(.secondary)
+                            .padding()
+                    } else {
+                        ForEach(Array(eventConfigMovies.enumerated()), id: \.element.id) { index, movie in
+                            HStack {
+                                Text("\(index + 1)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                    .frame(width: 30, alignment: .trailing)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(movie.name)
+                                        .font(.body)
+                                    if let genres = movie.genres {
+                                        Text(genres.joined(separator: ", "))
+                                            .font(.caption2)
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                
+                                Spacer()
+                                
+                                if let rating = movie.imdbRating {
+                                    Text("★ \(rating)")
+                                        .font(.caption)
+                                        .foregroundColor(.orange)
+                                }
+                                
+                                Button(action: {
+                                    deleteMovie(movie: movie)
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                        .padding(4)
+                                }
+                                .buttonStyle(.plain)
+                                .padding(.leading, 8)
+                            }
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(index % 2 == 0 ? Color.white.opacity(0.05) : Color.clear)
+                            
+                            Divider()
+                        }
                     }
-                    .onDelete(perform: deleteMovie)
                 }
+                .padding(.vertical)
             }
-            .listStyle(InsetListStyle())
         }
         .frame(minWidth: 600, minHeight: 500)
         .background(Color(NSColor.windowBackgroundColor))
@@ -191,13 +206,13 @@ struct ScheduleManagementView: View {
         }
     }
     
-    private func deleteMovie(at offsets: IndexSet) {
-        guard let index = offsets.first else { return }
-        let movieToDelete = eventConfigMovies[index]
+    private func deleteMovie(movie: MediaItem) {
+        guard let index = eventConfigMovies.firstIndex(of: movie) else { return }
+        let movieToDelete = movie
         
         // Optimistically update UI
         var updatedMovies = eventConfigMovies
-        updatedMovies.remove(atOffsets: offsets)
+        updatedMovies.remove(at: index)
         eventConfigMovies = updatedMovies
         eventConfigMovieCount = updatedMovies.count
         

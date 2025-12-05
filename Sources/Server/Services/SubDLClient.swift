@@ -30,7 +30,7 @@ struct SubDLResponse: Codable {
     let subtitles: [SubDLSubtitle]
 }
 
-actor SubDLClient {
+final class SubDLClient {
     static let shared = SubDLClient()
 
     private let baseURL = "https://api.subdl.com/api/v1"
@@ -83,7 +83,10 @@ actor SubDLClient {
             print("🔍 Searching SubDL: \(imdbWithPrefix) (\(subdlType))")
         }
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5 // 5s timeout for search
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw Abort(.serviceUnavailable, reason: "SubDL API request failed")
@@ -131,18 +134,44 @@ actor SubDLClient {
 
         print("📥 Downloading subtitle from SubDL CDN: \(downloadPath)")
 
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5 // Explicitly set request timeout
+        
+        // request.timeoutInterval is sometimes ignored by shared session, so we use a custom config
+        
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 5 // 5s timeout for download (fail fast)
+        config.timeoutIntervalForResource = 5
+        let session = URLSession(configuration: config)
+        
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw Abort(.serviceUnavailable, reason: "SubDL download failed")
         }
+        
+        print("✅ Download complete: \(data.count) bytes")
 
         let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") ?? ""
         var srtText = ""
 
         // Handle ZIP archives
         if contentType.contains("zip") || contentType.contains("octet-stream") || downloadPath.hasSuffix(".zip") {
-            srtText = try extractSRTFromZip(data: data, season: season, episode: episode)
+            print("📦 Detected ZIP archive, extracting...")
+            // Save zip to temp file
+            let tempDir = FileManager.default.temporaryDirectory
+            let zipURL = tempDir.appendingPathComponent(UUID().uuidString + ".zip")
+            
+            try data.write(to: zipURL)
+            
+            do {
+                srtText = try extractSRTFromZip(zipURL: zipURL, season: season, episode: episode)
+                print("✅ Extraction successful")
+                try FileManager.default.removeItem(at: zipURL)
+            } catch {
+                try? FileManager.default.removeItem(at: zipURL)
+                throw error
+            }
         } else {
             // Assume raw SRT or VTT
             guard let text = String(data: data, encoding: .utf8) else {
@@ -167,29 +196,19 @@ actor SubDLClient {
 
     // MARK: - Helper Methods
 
-    private func extractSRTFromZip(data: Data, season: Int?, episode: Int?) throws -> String {
-        // Create temporary file for zip
-        let tempDir = FileManager.default.temporaryDirectory
-        let zipURL = tempDir.appendingPathComponent(UUID().uuidString + ".zip")
-        
-        try data.write(to: zipURL)
-        
-        defer {
-            try? FileManager.default.removeItem(at: zipURL)
-        }
-        
+    private func extractSRTFromZip(zipURL: URL, season: Int?, episode: Int?) throws -> String {
         // 1. List files in zip
         let listProcess = Process()
-        let pipe = Pipe()
+        let listPipe = Pipe()
         
         listProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         listProcess.arguments = ["-l", zipURL.path]
-        listProcess.standardOutput = pipe
+        listProcess.standardOutput = listPipe
         
         try listProcess.run()
         listProcess.waitUntilExit()
         
-        let listData = pipe.fileHandleForReading.readDataToEndOfFile()
+        let listData = listPipe.fileHandleForReading.readDataToEndOfFile()
         guard let listOutput = String(data: listData, encoding: .utf8) else {
             throw Abort(.internalServerError, reason: "Failed to list zip contents")
         }

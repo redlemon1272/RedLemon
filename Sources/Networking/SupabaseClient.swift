@@ -81,7 +81,11 @@ class SupabaseClient {
     private init() {
         self.baseURL = Config.supabaseURL
         self.apiKey = Config.supabaseAnonKey
-        self.session = URLSession.shared
+        
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil
+        self.session = URLSession(configuration: config)
     }
 
     // MARK: - Query Builder

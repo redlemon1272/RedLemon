@@ -8,8 +8,20 @@ func registerMetadataRoutes(_ app: Application) {
     metadata.get("catalog", ":type", ":category") { req -> EventLoopFuture<Response> in
         let type = req.parameters.get("type") ?? "movie"
         let category = req.parameters.get("category") ?? "popular"
-
-        let cinemetaURL = "https://v3-cinemeta.strem.io/catalog/\(type)/\(category).json"
+        
+        // Extract skip parameter
+        let skip = (try? req.query.get(Int.self, at: "skip")) ?? 0
+        
+        // Construct Cinemeta URL with skip if present
+        // Format: .../catalog/{type}/{category}/skip={skip}.json
+        let cinemetaURL: String
+        if skip > 0 {
+            cinemetaURL = "https://v3-cinemeta.strem.io/catalog/\(type)/\(category)/skip=\(skip).json"
+        } else {
+            cinemetaURL = "https://v3-cinemeta.strem.io/catalog/\(type)/\(category).json"
+        }
+        
+        print("🔍 [Server] Proxying catalog request to: \(cinemetaURL)")
 
         return req.client.get(URI(string: cinemetaURL)).flatMapThrowing { response in
             guard response.status == .ok else {

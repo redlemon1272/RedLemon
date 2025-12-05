@@ -11,6 +11,9 @@ struct AdminDashboardView: View {
     @State private var systemLatency: Double = 0
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @State private var eventConfigVersion: Int?
+    @State private var eventConfigMovieCount: Int?
+    @State private var isShowingScheduleManagement = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -41,6 +44,42 @@ struct AdminDashboardView: View {
 
             // Main Content List
             List {
+                // Event Configuration Section
+                Section(header: Text("Event Configuration")) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Movie Schedule")
+                                .font(.headline)
+                            if let version = eventConfigVersion {
+                                Text("Version: \(version)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                            if let count = eventConfigMovieCount {
+                                Text("Movies: \(count)")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            isShowingScheduleManagement = true
+                        }) {
+                            Text("Manage Schedule")
+                                .fontWeight(.medium)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color.blue)
+                                .cornerRadius(6)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.vertical, 4)
+                }
+
                 // Stats Section
                 Section {
                     HStack(spacing: 16) {
@@ -202,6 +241,9 @@ struct AdminDashboardView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity) // Force full size
         .background(Color(NSColor.windowBackgroundColor))
+        .sheet(isPresented: $isShowingScheduleManagement) {
+            ScheduleManagementView(isPresented: $isShowingScheduleManagement)
+        }
         .task {
             refreshData()
         }
@@ -224,12 +266,19 @@ struct AdminDashboardView: View {
                 async let versions = SupabaseClient.shared.getAppVersionStats()
                 async let content = SupabaseClient.shared.getContentPopularity()
                 
+                // Fetch Event Config
+                async let eventConfig = EventsConfigService.shared.fetchMovieEventsConfig()
+                
                 userCount = try await count
                 systemLatency = try await latency
                 activeRooms = try await rooms
                 allUsers = try await users
                 versionStats = try await versions
                 contentStats = try await content
+                
+                let config = try await eventConfig
+                eventConfigVersion = config.version
+                eventConfigMovieCount = config.movies.count
 
             } catch {
                 errorMessage = error.localizedDescription
@@ -249,7 +298,7 @@ struct StatusCard: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: icon)
-                    .foregroundColor(color)
+                .foregroundColor(color)
                 Text(title)
                     .font(.caption)
                     .foregroundColor(.secondary)

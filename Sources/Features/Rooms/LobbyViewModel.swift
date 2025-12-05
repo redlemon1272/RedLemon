@@ -237,7 +237,6 @@ class LobbyViewModel: ObservableObject {
                         try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)
                         NSLog("✅ Guest joined room \(room.id) in database")
                     } catch {
-                    } catch {
                         // If join failed, check if it's because we're already in the room or if the room is missing
                         if room.id.hasPrefix("event_") {
                             // Check if room exists
@@ -949,16 +948,16 @@ class LobbyViewModel: ObservableObject {
         Task {
             do {
                 // Fetch metadata from local API
-                let metadata = try await LocalAPIClient.shared.fetchMetadata(
-                    type: mediaItem.type,
-                    id: mediaItem.id
+                let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(
+                    imdbId: mediaItem.id,
+                    type: mediaItem.type
                 )
 
                 // Extract poster and backdrop URLs
                 await MainActor.run {
-                    posterURL = metadata.posterURL
-                    backdropURL = metadata.backgroundURL
-                    logoURL = metadata.logoURL
+                    posterURL = mediaItem.posterURL?.absoluteString
+                    backdropURL = mediaItem.backgroundURL?.absoluteString
+                    logoURL = mediaItem.logo
                 }
 
                 print("✅ Lobby: Loaded metadata for \(mediaItem.name)")

@@ -38,6 +38,51 @@ class EventsConfigService {
         return try await fetchConfig(type: type)
     }
     
+    /// Upload a new configuration to Supabase (Admin only)
+    func uploadNewConfig(type: String = "movie_events", movies: [MediaItem], excludedMovieIds: [String]? = nil) async throws -> Int {
+        print("📤 [EventsConfig] Uploading new \(type) config with \(movies.count) movies...")
+        
+        // 1. Get current version to increment
+        let currentConfig = try? await fetchFromSupabase(type: type)
+        let newVersion = (currentConfig?.version ?? 0) + 1
+        
+        // 2. Prepare data
+        let configData = EventsConfigData(
+            movies: movies,
+            cycle_duration_hours: currentConfig?.cycleDurationHours ?? 24,
+            buffer_between_movies_seconds: currentConfig?.bufferBetweenMoviesSeconds ?? 600,
+            epoch_timestamp: Int(Date().timeIntervalSince1970),
+            generated_at: ISO8601DateFormatter().string(from: Date()),
+            excluded_movie_ids: excludedMovieIds ?? currentConfig?.excludedMovieIds
+        )
+        
+        // 3. Deactivate old configs (optional, but good practice if we want only one active)
+        // For now, we'll just insert the new one as active. Supabase RLS or triggers might handle cleanup.
+        
+        // 4. Insert new config
+        // We need to use a dictionary for the body, so we need to convert configData to a dict
+        guard let jsonData = try? JSONEncoder().encode(configData),
+              let jsonDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            throw EventsConfigError.invalidData
+        }
+        
+        let insertBody: [String: Any] = [
+            "config_type": type,
+            "version": newVersion,
+            "data": jsonDict,
+            "is_active": true
+        ]
+        
+        _ = try await SupabaseClient.shared.makeRequest(
+            path: "/events_config",
+            method: "POST",
+            body: insertBody
+        )
+        
+        print("✅ [EventsConfig] Successfully uploaded version \(newVersion)")
+        return newVersion
+    }
+    
     // MARK: - Private Methods
     
     private func fetchConfig(type: String) async throws -> EventsConfig {
@@ -146,7 +191,8 @@ class EventsConfigService {
             cycleDurationHours: supabaseConfig.data.cycle_duration_hours,
             bufferBetweenMoviesSeconds: supabaseConfig.data.buffer_between_movies_seconds,
             epochTimestamp: supabaseConfig.data.epoch_timestamp,
-            generatedAt: supabaseConfig.data.generated_at
+            generatedAt: supabaseConfig.data.generated_at,
+            excludedMovieIds: supabaseConfig.data.excluded_movie_ids
         )
     }
     
@@ -179,6 +225,7 @@ struct EventsConfig: Codable {
     let bufferBetweenMoviesSeconds: Int
     let epochTimestamp: Int
     let generatedAt: String
+    let excludedMovieIds: [String]?
     
     enum CodingKeys: String, CodingKey {
         case version
@@ -187,6 +234,7 @@ struct EventsConfig: Codable {
         case bufferBetweenMoviesSeconds = "buffer_between_movies_seconds"
         case epochTimestamp = "epoch_timestamp"
         case generatedAt = "generated_at"
+        case excludedMovieIds = "excluded_movie_ids"
     }
 }
 
@@ -216,6 +264,7 @@ struct EventsConfigData: Codable {
     let buffer_between_movies_seconds: Int
     let epoch_timestamp: Int
     let generated_at: String
+    let excluded_movie_ids: [String]?
 }
 
 // MARK: - Errors

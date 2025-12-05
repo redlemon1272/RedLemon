@@ -45,6 +45,8 @@ class LocalAPIClient: ObservableObject {
         return items
     }
 
+
+
     func fetchPopularShows() async throws -> [MediaItem] {
         // Use fixed cache key (no hardware detection)
         let cacheKey = "popular_shows_fixed"
@@ -75,6 +77,7 @@ class LocalAPIClient: ObservableObject {
         
         // Fetch centralized config from Supabase
         // This ensures ALL RedLemon instances show identical movie lists
+        // The list is pre-generated, filtered, and shuffled by the Admin Generator
         do {
             let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
             print("✅ [EventsView] Loaded \(config.movies.count) movies from config version \(config.version)")
@@ -89,9 +92,242 @@ class LocalAPIClient: ObservableObject {
             print("❌ [EventsView] Failed to fetch events config: \(error)")
             
             // Fallback: Return empty array and show error to user
-            // This is better than showing inconsistent data
             throw APIError.networkError(error)
         }
+    }
+    
+    func fetchLargeCatalogForAdmin() async throws -> [MediaItem] {
+        // Use a specific cache key for the large admin catalog
+        // Use a specific cache key for the large admin catalog
+        let cacheKey = "popular_movies_large_admin_v3" // Bump version for new size
+
+        // Check cache first
+        if let cached = await CacheManager.shared.getCatalog(key: cacheKey) {
+            print("📦 [Admin] Using cached large catalog (\(cached.count) items)")
+            return cached
+        }
+
+        print("🌐 [Admin] Fetching large catalog (1000 items)...")
+        var allItems: [MediaItem] = []
+        var currentSkip = 0
+        let targetCount = 2000
+        let maxPages = 40 // Safety break
+        
+        for page in 0..<maxPages {
+            if allItems.count >= targetCount { break }
+            
+            // Try to request 100 items, but the API might return fewer
+            let urlString = "\(baseURL)/api/metadata/catalog/movie/popular?skip=\(currentSkip)&limit=100"
+            guard let url = URL(string: urlString) else { continue }
+            
+            do {
+                print("   [Admin] Fetching page \(page + 1) (skip=\(currentSkip))...")
+                let (data, _) = try await session.data(from: url)
+                let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
+                
+                let pageItems = response.metas.map { MediaItem(from: $0) }
+                if pageItems.isEmpty {
+                    print("   [Admin] No more items found at skip \(currentSkip). Stopping.")
+                    break 
+                }
+                
+                allItems.append(contentsOf: pageItems)
+                print("   [Admin] Received \(pageItems.count) items. Total: \(allItems.count)")
+                
+                // Increment skip by the ACTUAL number of items received to ensure no gaps
+                // If the API supports limit, we might get 100. If not, we might get 20 or 50.
+                // This adapts to whatever the server gives us.
+                currentSkip += pageItems.count
+                
+                // Small delay to be nice to the server
+                try await Task.sleep(nanoseconds: 200_000_000) // 0.2s
+            } catch {
+                print("   ⚠️ [Admin] Failed to fetch page \(page + 1): \(error)")
+                // If we fail, we might want to stop or retry, but for now let's just break to avoid infinite loops of errors
+                break
+            }
+        }
+        
+        // Deduplicate based on ID
+        var uniqueItems: [MediaItem] = []
+        var seenIds: Set<String> = []
+        
+        for item in allItems {
+            if !seenIds.contains(item.id) {
+                seenIds.insert(item.id)
+                uniqueItems.append(item)
+            }
+        }
+
+        print("📊 [Admin] Fetched \(uniqueItems.count) unique items (Target: \(targetCount))")
+
+        // Cache result
+        await CacheManager.shared.setCatalog(key: cacheKey, value: uniqueItems)
+
+        return uniqueItems
+    }
+
+    /// ADMIN ONLY: Generates a new random schedule and uploads it to Supabase
+    /// This becomes the single source of truth for ALL clients
+    func generateAndUploadSchedule() async throws -> Int {
+        print("🎲 [Admin] Generating new global schedule...")
+        
+        // Fetch a LARGE pool of movies (100+) to ensure variety
+        // We do NOT use the standard fetchPopularMovies() because it's limited to 15 for older devices
+        let allMovies = try await fetchLargeCatalogForAdmin()
+        print("   [Admin] Pool size: \(allMovies.count) movies")
+        
+        // Fetch current config to preserve exclusions
+        // FORCE REFRESH to ensure we have the latest exclusions (e.g. from a recent delete)
+        NSLog("📝 [Admin] Fetching current config to retrieve exclusions...")
+        let currentConfig = try await EventsConfigService.shared.refreshConfig(type: "movie_events")
+        let previouslyExcludedIds = Set(currentConfig.excludedMovieIds ?? [])
+        
+        NSLog("📝 [Admin] Found \(previouslyExcludedIds.count) previously excluded movies")
+        if !previouslyExcludedIds.isEmpty {
+            NSLog("📝 [Admin] Exclusions list: \(previouslyExcludedIds)")
+        } else {
+            NSLog("⚠️ [Admin] Exclusions list is EMPTY. If you just deleted a movie, this is WRONG.")
+        }
+        if !previouslyExcludedIds.isEmpty {
+            NSLog("📝 [Admin] Exclusions: \(previouslyExcludedIds.joined(separator: ", "))")
+        }
+        
+        // Filter for "Thrilling" content
+        let thrillingGenres: Set<String> = ["action", "adventure", "sci-fi", "thriller", "mystery", "crime", "horror"]
+        // excludedTitles removed as it was unused
+        // For now, popular movies is a good start.
+        
+        // 2. (REMOVED) Paramount Specific Fetching
+        // User requested to remove specific Paramount movies and let it be random.
+        
+        // 3. Enrich and Filter for Thrilling Genres
+        print("   [Admin] Processing \(allMovies.count) movies (fetching metadata if needed)...")
+        
+        var filteredMovies: [MediaItem] = []
+
+        
+        // Batch processing to avoid rate limiting
+        let batchSize = 20
+        let batches = allMovies.chunked(into: batchSize)
+        
+        // Debug counters
+        var totalProcessed = 0
+        var droppedExclusions = 0
+        var droppedTitles = 0
+        var droppedMetadataFail = 0
+        var droppedGenreMismatch = 0
+        var kept = 0
+        
+        for (batchIndex, batch) in batches.enumerated() {
+            print("   [Admin] Processing batch \(batchIndex + 1)/\(batches.count) (\(batch.count) items)...")
+            
+            await withTaskGroup(of: MediaItem?.self) { group in
+                for movie in batch {
+                    group.addTask {
+                        // Check persistent exclusions first
+                        let cleanMovieId = movie.id.trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        if previouslyExcludedIds.contains(cleanMovieId) || previouslyExcludedIds.contains(movie.id) {
+                            // NSLog("🚫 [Admin] Skipping excluded movie: \(movie.name) (ID: \(cleanMovieId))")
+                            return nil
+                        }
+                        
+                        // Exclude specific titles
+                        let excludedTitles = [
+                            "the stringer: the man who took the photo",
+                            "kinds of kindness",
+                            "deaf president now"
+                        ]
+                        if excludedTitles.contains(movie.name.lowercased()) { return nil }
+                        
+                        // Check if we need to fetch full metadata
+                        var movieToUse = movie
+                        let needsMetadata = (movie.genres?.isEmpty ?? true) || movie.background == nil || movie.logo == nil
+                        
+                        if needsMetadata {
+                            if let fullItem = try? await self.fetchMediaDetails(imdbId: movie.id, type: "movie") {
+                                movieToUse = fullItem
+                            } else {
+                                print("   ⚠️ [Admin] Failed to fetch metadata for: \(movie.name)")
+                                if movie.genres?.isEmpty ?? true {
+                                    return nil
+                                }
+                            }
+                        }
+                        
+                        // Filter by genre
+                        let genres = (movieToUse.genres ?? []).map { $0.lowercased() }
+                        let movieGenresSet = Set(genres)
+                        
+                        if !movieGenresSet.isDisjoint(with: thrillingGenres) {
+                            return movieToUse
+                        } else {
+                            return nil
+                        }
+                    }
+                }
+                
+                for await movie in group {
+                    totalProcessed += 1
+                    if let movie = movie {
+                        filteredMovies.append(movie)
+                        kept += 1
+                    }
+                }
+            }
+            
+            // Small delay between batches
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+        }
+        
+        print("📊 [Admin] Filtering Report:")
+        print("   Total Processed: \(totalProcessed)")
+        print("   Kept: \(kept)")
+        print("   Total movies after filtering: \(filteredMovies.count)")
+        
+        // SAFETY CHECK: Never upload an empty list!
+        guard !filteredMovies.isEmpty else {
+            print("❌ [Admin] Generated list is empty! Aborting upload.")
+            throw APIError.invalidResponse
+        }
+        
+        // 6. Sort and Shuffle
+        // Sort by popularity (vote_count) first to ensure quality
+        // Then shuffle deterministically based on date seed
+        // But for now, we want a random shuffle for the schedule since we are generating a static list
+        // The admin can regenerate if they don't like it.
+        var shuffledMovies = filteredMovies.shuffled()
+        
+        // Ensure we have enough movies
+        if shuffledMovies.isEmpty {
+            print("⚠️ [Admin] No movies found after filtering!")
+            // Fallback to raw list if filtering was too aggressive
+            shuffledMovies = allMovies.prefix(20).map { $0 }
+        }
+        
+        // Log the final list for verification
+        NSLog("✅ [Admin] Final list contains \(shuffledMovies.count) movies:")
+        for (index, movie) in shuffledMovies.enumerated() {
+            NSLog("   \(index + 1). \(movie.name) (ID: \(movie.id))")
+        }
+        
+        // 7. Upload to Supabase
+        print("📤 [Admin] Uploading new schedule with \(shuffledMovies.count) movies...")
+        
+        // Pass the preserved excludedMovieIds to the upload function
+        // This ensures they are persisted in the new config row
+        let exclusionsToPersist = Array(previouslyExcludedIds)
+        NSLog("📤 [Admin] Persisting \(exclusionsToPersist.count) exclusions: \(exclusionsToPersist)")
+        
+        let newVersion = try await EventsConfigService.shared.uploadNewConfig(
+            movies: shuffledMovies,
+            excludedMovieIds: exclusionsToPersist
+        )
+        
+        print("✅ [Admin] Schedule generated and uploaded successfully! Version: \(newVersion)")
+        
+        return newVersion
     }
 
     // Simple Linear Congruential Generator for deterministic shuffling
@@ -180,7 +416,7 @@ class LocalAPIClient: ObservableObject {
 
     /// Perform network request with CPU-compatible error handling and retry logic
     private func performSafeNetworkRequest(url: URL) async throws -> (Data, URLResponse) {
-        let maxRetries = 3
+        let maxRetries = 5 // Increased retries for rate limits
         var lastError: Error?
 
         for attempt in 1...maxRetries {
@@ -191,9 +427,10 @@ class LocalAPIClient: ObservableObject {
 
                 let (data, response) = try await session.data(from: url)
 
-                // Check for 502 Bad Gateway or other server errors
+                // Check for 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout, or 429 Too Many Requests
                 if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 502 || httpResponse.statusCode == 503 || httpResponse.statusCode == 504 {
+                    if [429, 502, 503, 504].contains(httpResponse.statusCode) {
+                        // Throw error to trigger retry
                         throw APIError.networkError(URLError(.badServerResponse))
                     }
                 }
@@ -211,7 +448,9 @@ class LocalAPIClient: ObservableObject {
 
                 // Wait before retry (exponential backoff)
                 if attempt < maxRetries {
-                    let delay = UInt64(pow(2.0, Double(attempt)) * 500_000_000) // 1s, 2s, 4s
+                    // Base delay 1s, max 10s
+                    let baseDelay = 1_000_000_000.0 // 1 second
+                    let delay = UInt64(min(baseDelay * pow(2.0, Double(attempt)), 10_000_000_000.0))
                     try await Task.sleep(nanoseconds: delay)
                 }
             }
@@ -291,32 +530,23 @@ class LocalAPIClient: ObservableObject {
 
     func fetchMediaDetails(imdbId: String, type: String) async throws -> MediaItem {
         let url = URL(string: "\(baseURL)/api/metadata/meta/\(type)/\(imdbId)")!
-        let (data, _) = try await session.data(from: url)
+        let (data, _) = try await performSafeNetworkRequest(url: url)
         let response = try JSONDecoder().decode(CinemetaResponse.self, from: data)
         return MediaItem(from: response.meta)
     }
 
+    // MARK: - Helper Methods
+    
     func fetchMetadata(type: String, id: String) async throws -> MediaMetadata {
-        let cacheKey = "\(type)_\(id)"
-
         // Check cache first
+        let cacheKey = "meta_\(type)_\(id)"
         if let cached = await CacheManager.shared.getMetadata(key: cacheKey) {
             return cached
         }
 
+        // Fetch from API
         let url = URL(string: "\(baseURL)/api/metadata/meta/\(type)/\(id)")!
-        let (data, _) = try await session.data(from: url)
-
-        // Debug: Log raw response
-        if let jsonString = String(data: data, encoding: .utf8) {
-            NSLog("📡 Raw metadata response length: %d bytes", data.count)
-            if jsonString.contains("\"videos\"") {
-                NSLog("✅ Raw response CONTAINS 'videos' field")
-            } else {
-                NSLog("❌ Raw response DOES NOT contain 'videos' field")
-            }
-        }
-
+        let (data, _) = try await performSafeNetworkRequest(url: url)
         let response = try JSONDecoder().decode(CinemetaResponse.self, from: data)
         let meta = response.meta
 
@@ -367,11 +597,13 @@ class LocalAPIClient: ObservableObject {
             videos: videos
         )
 
-        // Cache result - FIXED: Use setMetadata instead of setCatalog
+        // Cache result
         await CacheManager.shared.setMetadata(key: cacheKey, value: metadata)
 
         return metadata
     }
+    
+
 
     // MARK: - Stream Resolution
 
@@ -680,6 +912,88 @@ class LocalAPIClient: ObservableObject {
 
         return nil
     }
+
+    // MARK: - Specific Movie Fetching
+    
+    private func fetchParamountHorrorMovies() async -> [MediaItem] {
+        let cacheKey = "cached_paramount_horror_movies"
+        
+        // 1. Try to load from cache first (Fast & Consistent)
+        if let data = UserDefaults.standard.data(forKey: cacheKey),
+           let cachedMovies = try? JSONDecoder().decode([MediaItem].self, from: data) {
+            print("💾 [Paramount] Loaded \(cachedMovies.count) movies from cache")
+            // Return cached movies immediately, but still fetch in background to update cache if needed?
+            // For now, just return cache to ensure consistency and speed.
+            // We can add a TTL later if needed, but these specific movies are static.
+            return cachedMovies
+        }
+        
+        // 2. Fetch from Network
+        // Paramount catalog URL from DiscoverView
+        let baseURL = "https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky"
+        let urlString = "\(baseURL)/catalog/movie/pmp.json"
+        
+        guard let url = URL(string: urlString) else {
+            print("❌ [Paramount] Invalid URL")
+            return []
+        }
+        
+        do {
+            print("☁️ [Paramount] Fetching from network...")
+            let (data, _) = try await session.data(from: url)
+            let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data) // Reusing CinemetaSearchResponse as structure is likely similar (metas array)
+            
+            let targetTitles = ["smile", "smile 2", "longlegs"]
+            
+            var foundMovies: [MediaItem] = []
+            
+            for meta in response.metas {
+                // Check title
+                if targetTitles.contains(meta.name.lowercased()) {
+                    print("🔍 [Paramount] Found candidate: \(meta.name)")
+                    
+                    var movie = MediaItem(from: meta)
+                    
+                    // Fetch full metadata to verify rating and genre if needed
+                    if let fullItem = try? await fetchMediaDetails(imdbId: movie.id, type: "movie") {
+                        movie = fullItem // Update with full details
+                        
+                        // Verify Genre
+                        let genres = (movie.genres ?? []).map { $0.lowercased() }
+                        if !genres.contains("horror") {
+                            print("   🚫 Not Horror (Genres: \(genres))")
+                            continue
+                        }
+                        
+                        // Verify Rating (6.5+)
+                        if let ratingStr = movie.imdbRating, let rating = Double(ratingStr) {
+                            if rating < 6.5 {
+                                print("   🚫 Rating too low: \(rating)")
+                                continue
+                            }
+                        }
+                        
+                        print("   ✅ Matches criteria! Adding to list.")
+                        foundMovies.append(movie)
+                    }
+                }
+            }
+            
+            // 3. Save to Cache
+            if !foundMovies.isEmpty {
+                if let encoded = try? JSONEncoder().encode(foundMovies) {
+                    UserDefaults.standard.set(encoded, forKey: cacheKey)
+                    print("💾 [Paramount] Cached \(foundMovies.count) movies for future runs")
+                }
+            }
+            
+            return foundMovies
+            
+        } catch {
+            print("❌ [Paramount] Failed to fetch catalog: \(error)")
+            return []
+        }
+    }
 }
 
 // MARK: - MediaItem (UI-friendly wrapper)
@@ -772,6 +1086,26 @@ struct MediaItem: Identifiable, Codable, Equatable {
         self.runtime = meta.runtime
 
         print("🔍 [DEBUG] Successfully created MediaItem from meta: \(self.name)")
+    }
+
+    // HARDWARE-SAFE initializer from MediaMetadata
+    init(from meta: MediaMetadata) {
+        print("🔍 [DEBUG] Creating MediaItem from MediaMetadata")
+        
+        self.id = meta.id
+        self.type = meta.type
+        self.name = meta.title
+        self.poster = meta.posterURL
+        self.background = meta.backgroundURL
+        self.logo = meta.logoURL
+        self.description = meta.description
+        self.releaseInfo = meta.releaseInfo
+        self.year = meta.year
+        self.imdbRating = meta.imdbRating.map { String($0) }
+        self.genres = meta.genres
+        self.runtime = meta.runtime
+        
+        print("🔍 [DEBUG] Successfully created MediaItem from metadata: \(self.name)")
     }
 
     // Cinemeta returns full URLs, no need for construction

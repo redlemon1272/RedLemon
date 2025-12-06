@@ -55,16 +55,9 @@ struct ChatOverlayView: View {
         .compositingGroup() // Optimize transparency blending
         .onAppear {
             print("👁️ ChatOverlayView appeared")
-            // Auto-focus the input field when chat opens
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                isInputFocused = true
-                manualFocus = true
-            }
-        }
-        .onChange(of: viewModel.showChat) { newValue in
-            // Auto-focus when chat is toggled open
-            if newValue {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            // Auto-focus the input field ONLY if explicitly toggled (prevents stealing focus on load)
+            if viewModel.isAnimatingChatToggle {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     isInputFocused = true
                     manualFocus = true
                 }
@@ -252,8 +245,8 @@ struct ChatOverlayView: View {
                     .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
-            // Unified Input Bar
-            HStack(alignment: .bottom, spacing: 12) {
+            // Unified Input Bar (Sleek)
+            HStack(alignment: .bottom, spacing: 6) {
                 // Emoji button
                 Button(action: {
                     withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
@@ -261,44 +254,47 @@ struct ChatOverlayView: View {
                     }
                 }) {
                     Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
-                        .font(.system(size: 20))
+                        .font(.system(size: 18))
                         .foregroundColor(showEmojiPicker ? .yellow : .white.opacity(0.7))
-                        .frame(width: 24, height: 24)
+                        .frame(width: 22, height: 22)
                         // Align visually with text center (approx)
-                        .padding(.bottom, 6)
+                        .padding(.bottom, 5)
                 }
                 .buttonStyle(.plain)
 
                 // Input Field
-                if #available(macOS 13.0, *) {
-                    TextField("Message...", text: $inputText, axis: .vertical)
-                        .textFieldStyle(.plain)
-                        .foregroundColor(.white)
-                        .focused($isInputFocused)
-                        .lineLimit(1...8)
-                        .onSubmit { sendMessage() }
-                        .padding(.vertical, 8)
-                } else {
-                    // Fallback for macOS 12
-                    ZStack(alignment: .topLeading) {
-                        if inputText.isEmpty {
-                            Text("Message...")
-                                .foregroundColor(.white.opacity(0.5))
-                                .padding(.horizontal, 0)
-                                .padding(.top, 0)
-                                .allowsHitTesting(false)
+                Group {
+                    if #available(macOS 13.0, *) {
+                        TextField("Message...", text: $inputText, axis: .vertical)
+                            .textFieldStyle(.plain)
+                            .foregroundColor(.white)
+                            .focused($isInputFocused)
+                            .lineLimit(1...8)
+                            .onSubmit { sendMessage() }
+                            .padding(.vertical, 4)
+                    } else {
+                        // Fallback for macOS 12
+                        ZStack(alignment: .topLeading) {
+                            if inputText.isEmpty {
+                                Text("Message...")
+                                    .foregroundColor(.white.opacity(0.5))
+                                    .padding(.leading, 4) // Align with text cursor
+                                    .padding(.top, 0)
+                                    .allowsHitTesting(false)
+                            }
+                            
+                            TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
+                                .frame(minHeight: 20, maxHeight: 100)
                         }
-                        
-                        TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
-                            .frame(minHeight: 20, maxHeight: 100)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 4)
                     }
-                    .padding(.vertical, 8)
                 }
 
                 // Send Button
                 Button(action: sendMessage) {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 28))
+                        .font(.system(size: 26))
                         .symbolRenderingMode(.hierarchical)
                         .foregroundColor(inputText.isEmpty ? .gray : .blue)
                 }
@@ -306,13 +302,13 @@ struct ChatOverlayView: View {
                 .disabled(inputText.isEmpty)
                 .padding(.bottom, 2)
             }
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(Color.white.opacity(0.12))
-            .cornerRadius(24)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(20)
             .overlay(
-                RoundedRectangle(cornerRadius: 24)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
             )
             .padding(.horizontal, 16)
             .padding(.bottom, 16)

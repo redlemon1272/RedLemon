@@ -256,6 +256,8 @@ struct MPVPlayerView: View {
         }
         .background(Color.black)
         .edgesIgnoringSafeArea(.all)
+        // Ensure the view can accept valid key events (fixes focus issue on start)
+        .background(KeyEventHandler { _ in false })
         .onAppear {
             // Set appState reference for watch history tracking
             viewModel.appState = appState

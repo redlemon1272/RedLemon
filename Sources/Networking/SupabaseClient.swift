@@ -350,15 +350,24 @@ class SupabaseClient {
         return room
     }    /// Join a room
     func joinRoom(roomId: String, userId: UUID, isHost: Bool = false) async throws {
-        _ = try await makeRequest(
-            path: "/room_participants",
-            method: "POST",
-            body: [
-                "room_id": roomId,
-                "user_id": userId.uuidString,
-                "is_host": isHost
-            ]
-        )
+        do {
+            _ = try await makeRequest(
+                path: "/room_participants",
+                method: "POST",
+                body: [
+                    "room_id": roomId,
+                    "user_id": userId.uuidString,
+                    "is_host": isHost
+                ]
+            )
+        } catch SupabaseError.httpError(409, _) {
+            // Error 409 means user is already in the room (duplicate key).
+            // We can safely ignore this and proceed as if join was successful.
+            NSLog("⚠️ SupabaseClient: User already in room (409), proceeding...")
+        } catch {
+            // Re-throw other errors
+            throw error
+        }
     }
 
     /// Leave a room

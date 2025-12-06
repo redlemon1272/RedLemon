@@ -242,65 +242,77 @@ struct ChatOverlayView: View {
 
     private var inputArea: some View {
         VStack(spacing: 0) {
-            // Emoji picker (appears above input when shown)
+            // Emoji picker (appears above)
             if showEmojiPicker {
                 emojiPicker
+                    .padding(.bottom, 8)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
 
-            // Input row
-            HStack(spacing: 12) {
+            // Unified Input Bar
+            HStack(alignment: .bottom, spacing: 12) {
                 // Emoji button
                 Button(action: {
-                    showEmojiPicker.toggle()
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                        showEmojiPicker.toggle()
+                    }
                 }) {
                     Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
-                        .foregroundColor(.white)
-                        .padding(12)
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(8)
+                        .font(.system(size: 20))
+                        .foregroundColor(showEmojiPicker ? .yellow : .white.opacity(0.7))
+                        .frame(width: 24, height: 24)
+                        // Align visually with text center (approx)
+                        .padding(.bottom, 6)
                 }
                 .buttonStyle(.plain)
 
+                // Input Field
                 if #available(macOS 13.0, *) {
-                    TextField("Type a message...", text: $inputText, axis: .vertical)
+                    TextField("Message...", text: $inputText, axis: .vertical)
                         .textFieldStyle(.plain)
-                        .padding(12)
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(8)
                         .foregroundColor(.white)
                         .focused($isInputFocused)
                         .lineLimit(1...8)
                         .onSubmit { sendMessage() }
+                        .padding(.vertical, 8)
                 } else {
                     // Fallback for macOS 12
                     ZStack(alignment: .topLeading) {
                         if inputText.isEmpty {
-                            Text("Type a message...")
+                            Text("Message...")
                                 .foregroundColor(.white.opacity(0.5))
-                                .padding(.horizontal, 4)
-                                .padding(.vertical, 0)
+                                .padding(.horizontal, 0)
+                                .padding(.top, 0)
                                 .allowsHitTesting(false)
                         }
                         
                         TransparentTextEditor(text: $inputText, onCommit: sendMessage)
                             .frame(minHeight: 20, maxHeight: 100)
                     }
-                    .padding(12)
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(8)
+                    .padding(.vertical, 8)
                 }
 
+                // Send Button
                 Button(action: sendMessage) {
-                    Image(systemName: "paperplane.fill")
-                        .foregroundColor(.white)
-                        .padding(12)
-                        .background(Color.blue)
-                        .cornerRadius(8)
+                    Image(systemName: "arrow.up.circle.fill")
+                        .font(.system(size: 28))
+                        .symbolRenderingMode(.hierarchical)
+                        .foregroundColor(inputText.isEmpty ? .gray : .blue)
                 }
                 .buttonStyle(.plain)
                 .disabled(inputText.isEmpty)
+                .padding(.bottom, 2)
             }
-            .padding()
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
+            .background(Color.white.opacity(0.12))
+            .cornerRadius(24)
+            .overlay(
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+            )
+            .padding(.horizontal, 16)
+            .padding(.bottom, 16)
         }
     }
 

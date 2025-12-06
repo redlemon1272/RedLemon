@@ -261,14 +261,34 @@ struct ChatOverlayView: View {
                 }
                 .buttonStyle(.plain)
 
-                TextField("Type a message...", text: $inputText)
-                    .textFieldStyle(.plain)
+                if #available(macOS 13.0, *) {
+                    TextField("Type a message...", text: $inputText, axis: .vertical)
+                        .textFieldStyle(.plain)
+                        .padding(12)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .focused($isInputFocused)
+                        .lineLimit(1...8)
+                        .onSubmit { sendMessage() }
+                } else {
+                    // Fallback for macOS 12
+                    ZStack(alignment: .topLeading) {
+                        if inputText.isEmpty {
+                            Text("Type a message...")
+                                .foregroundColor(.white.opacity(0.5))
+                                .padding(.horizontal, 4)
+                                .padding(.vertical, 0)
+                                .allowsHitTesting(false)
+                        }
+                        
+                        TransparentTextEditor(text: $inputText, onCommit: sendMessage)
+                            .frame(minHeight: 20, maxHeight: 100)
+                    }
                     .padding(12)
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(8)
-                    .foregroundColor(.white)
-                    .focused($isInputFocused)
-                    .onSubmit { sendMessage() }
+                }
 
                 Button(action: sendMessage) {
                     Image(systemName: "paperplane.fill")

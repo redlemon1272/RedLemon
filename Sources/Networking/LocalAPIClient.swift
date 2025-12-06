@@ -11,7 +11,7 @@ class LocalAPIClient: ObservableObject {
 
     init() {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 30
+        config.timeoutIntervalForRequest = 60
         config.timeoutIntervalForResource = 300
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil

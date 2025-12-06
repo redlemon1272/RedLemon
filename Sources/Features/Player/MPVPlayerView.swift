@@ -178,12 +178,12 @@ struct MPVPlayerView: View {
                             .zIndex(98)
                     }
             }
-            .frame(width: viewModel.showChat ? geometry.size.width * 0.75 : geometry.size.width)
+            .frame(width: viewModel.showChat ? geometry.size.width * 0.8 : geometry.size.width)
 
             // Chat overlay (Pop in/out)
             if viewModel.showChat {
                 ChatOverlayView(viewModel: viewModel)
-                    .frame(width: geometry.size.width * 0.25)
+                    .frame(width: geometry.size.width * 0.2)
                     // .transition(.identity) // Explicitly no transition
                     .zIndex(100)
             }

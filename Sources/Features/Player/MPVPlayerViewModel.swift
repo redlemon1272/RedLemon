@@ -825,10 +825,8 @@ class MPVPlayerViewModel: ObservableObject {
         let originalInterval = syncBroadcastTimer?.timeInterval
         syncBroadcastTimer?.invalidate()
 
-        // ✅ Use hardware-accelerated animation only on chat property
-        withAnimation(.easeOut(duration: 0.2)) {
-            showChat.toggle()
-        }
+        // ✅ Instant toggle (Twitch-style pop) - Zero animation for max performance
+        showChat.toggle()
 
         // ✅ Restore background updates after animation completes with timeout safeguard
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in

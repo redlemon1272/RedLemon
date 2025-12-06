@@ -40,16 +40,29 @@ actor StreamService {
         // Step 2: Continue with regular stream resolution (trusted pack filtering happens server-side)
         print("🎬 StreamService: Resolving \(item.type) - trusted pack filtering will be applied server-side")
 
-        // Step 3: Get Stream Bucket (fallback)
-        NSLog("🔍 StreamService: Fetching stream bucket...")
-        let bucket = try await LocalAPIClient.shared.getStreamBucket(
-            for: item.id,
+        // Step 3: Get Stream Bucket (Direct Resolver Call)
+        NSLog("⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...")
+        
+        let bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
+            imdbId: item.id,
             type: item.type,
-            quality: quality,
             season: finalSeason,
             episode: finalEpisode,
             year: finalMetadata.year
         )
+        
+        let buckets = bucketsResponse.buckets
+        let rawBucket: QualityBucket?
+        switch quality {
+        case .uhd4k: rawBucket = buckets.uhd4k
+        case .fullHD: rawBucket = buckets.fullHD
+        case .hd: rawBucket = buckets.hd
+        case .sd: rawBucket = buckets.sd
+        }
+        
+        guard let bucket = rawBucket else {
+             throw APIError.noStreamsFound
+        }
 
         // Build list of streams to try
         var streamsToTry: [Stream] = []

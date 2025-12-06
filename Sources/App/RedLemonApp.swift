@@ -177,7 +177,7 @@ struct RedLemonApp: App {
             NSLog("✅ RedLemon: HTTPServer instance created")
 
             // Start server in a background task that keeps running
-            Task.detached(priority: .background) {
+            Task.detached(priority: .userInitiated) {
                 do {
                     NSLog("📡 RedLemon: Server starting on port \(Config.serverPort)...")
                     try await server.start()

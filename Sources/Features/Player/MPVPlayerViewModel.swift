@@ -410,7 +410,8 @@ class MPVPlayerViewModel: ObservableObject {
         // This compensates for all loading delays and ensures tight sync across devices
         if let eventStartTime = appState?.eventStartTime {
             let elapsed = Date().timeIntervalSince(eventStartTime)
-            let seekTime = max(0, elapsed)
+            // Add 1.5s compensation for seek/buffer latency to ensure we start "live"
+            let seekTime = max(0, elapsed + 1.5)
 
             print("🎉 EVENT: Recalculating seek time at video ready")
             print("   Event started at: \(eventStartTime)")
@@ -1437,6 +1438,10 @@ extension MPVPlayerViewModel {
             // Advanced tiered sync with hysteresis and adaptive thresholds
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
 
+            // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
+            // EVENTS: Disable speed sync (adaptive sync) as requested - rely on initial seek and large drift correction only
+            let isEvent = appState?.isEventPlayback == true
+
             if absSmoothedDrift < 0.1 {
                 // Perfect sync (<100ms smoothed drift)
                 // If we're currently adjusting speed, reset to normal
@@ -1446,7 +1451,7 @@ extension MPVPlayerViewModel {
                     currentSpeedAdjustment = 1.0
                     print("✅ Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
                 }
-            } else if absSmoothedDrift < 5.0 {
+            } else if absSmoothedDrift < 5.0 && !isEvent {
                 // Small/Medium drift (100ms-5s) - Use ultra-smooth speed adjustment
                 // Hysteresis: Only adjust if enough time has passed since last adjustment
                 let timeSinceLastAdjustment = lastSpeedAdjustmentTime.map { Date().timeIntervalSince($0) } ?? 1.0

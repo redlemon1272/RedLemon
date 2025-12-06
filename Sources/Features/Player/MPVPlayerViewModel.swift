@@ -1368,7 +1368,7 @@ extension MPVPlayerViewModel {
 
                 // PRESENCE FALLBACK: Ensure sender is in connectedGuestIds
                 // This handles cases where Presence events are delayed/missing
-                if !connectedGuestIds.contains(senderId) {
+                if !connectedGuestIds.contains(senderId) && senderId != currentUserId {
                     NSLog("⚠️ Adding \(senderId) to connectedGuestIds (presence fallback)")
                     connectedGuestIds.insert(senderId)
                 }

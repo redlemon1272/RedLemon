@@ -11,6 +11,7 @@ import AppKit
 struct TransparentTextEditor: NSViewRepresentable {
     @Binding var text: String
     var onCommit: () -> Void
+    var isFocused: Bool = false
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -20,7 +21,7 @@ struct TransparentTextEditor: NSViewRepresentable {
         let scrollView = NSScrollView()
         scrollView.drawsBackground = false
         scrollView.borderType = .noBorder
-        scrollView.hasVerticalScroller = false // Auto-grow preferred, or scroll if max height
+        scrollView.hasVerticalScroller = false // Auto-grow preferred
         scrollView.documentView = context.coordinator.textView
         return scrollView
     }
@@ -28,6 +29,14 @@ struct TransparentTextEditor: NSViewRepresentable {
     func updateNSView(_ nsView: NSScrollView, context: Context) {
         if context.coordinator.textView.string != text {
             context.coordinator.textView.string = text
+        }
+        
+        if isFocused {
+             DispatchQueue.main.async {
+                 if let window = nsView.window, window.firstResponder != context.coordinator.textView {
+                     window.makeFirstResponder(context.coordinator.textView)
+                 }
+             }
         }
     }
 

@@ -14,6 +14,7 @@ struct ChatOverlayView: View {
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
+    @State private var manualFocus: Bool = false
 
     // Chat Modes
     enum ChatMode {
@@ -55,15 +56,17 @@ struct ChatOverlayView: View {
         .onAppear {
             print("👁️ ChatOverlayView appeared")
             // Auto-focus the input field when chat opens
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 isInputFocused = true
+                manualFocus = true
             }
         }
         .onChange(of: viewModel.showChat) { newValue in
             // Auto-focus when chat is toggled open
             if newValue {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                     isInputFocused = true
+                    manualFocus = true
                 }
             }
         }
@@ -286,7 +289,7 @@ struct ChatOverlayView: View {
                                 .allowsHitTesting(false)
                         }
                         
-                        TransparentTextEditor(text: $inputText, onCommit: sendMessage)
+                        TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
                             .frame(minHeight: 20, maxHeight: 100)
                     }
                     .padding(.vertical, 8)
@@ -317,24 +320,49 @@ struct ChatOverlayView: View {
     }
 
     private var emojiPicker: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
-            ForEach(emojis, id: \.self) { emoji in
+        VStack(spacing: 8) {
+            // Header with Close Button
+            HStack {
+                Text("Emojis")
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.6))
+                Spacer()
                 Button(action: {
-                    inputText += emoji
-                    showEmojiPicker = false
-                    isInputFocused = true
+                    withAnimation { showEmojiPicker = false }
                 }) {
-                    Text(emoji)
-                        .font(.system(size: 24))
-                        .frame(width: 40, height: 40)
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(8)
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 20)) // Larger target
+                        .foregroundColor(.white.opacity(0.6))
                 }
                 .buttonStyle(.plain)
             }
+            .padding(.horizontal, 4)
+
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
+                ForEach(emojis, id: \.self) { emoji in
+                    Button(action: {
+                        inputText += emoji
+                        // Kept open for multiple selections
+                        isInputFocused = true
+                        manualFocus = true
+                    }) {
+                        Text(emoji)
+                            .font(.system(size: 24))
+                            .frame(width: 40, height: 40)
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(8)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
         }
-        .padding()
-        .background(Color.black.opacity(0.3))
+        .padding(12)
+        .background(Color.black.opacity(0.9))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+        )
     }
 
     private func sendMessage() {

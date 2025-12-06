@@ -94,40 +94,66 @@ actor ProviderManager {
         episode: Int? = nil,
         providerNames: [String]? = nil
     ) async throws -> [Stream] {
+        NSLog("🔍 ProviderManager: Fetching streams for \(imdbId)...")
+        
         // Use specified providers or all registered
         let providersToUse = providerNames?.compactMap { providers[$0] } ?? Array(providers.values)
         
-        // Fetch from all providers concurrently
-        let results = await withTaskGroup(of: [Stream].self) { group in
-            for provider in providersToUse {
-                group.addTask {
-                    do {
-                        return try await provider.fetchStreams(
-                            imdbId: imdbId,
-                            type: type,
-                            season: season,
-                            episode: episode
-                        )
-                    } catch {
-                        print("❌ Provider \(provider.name) failed: \(error)")
-                        return []
+        // Fetch from all providers concurrently WITH TIMEOUT
+        let results = try await withThrowingTaskGroup(of: [Stream].self) { group in
+            // Task 1: The actual fetch from all providers
+            group.addTask {
+                let fetched = await withTaskGroup(of: [Stream].self) { providerGroup in
+                    for provider in providersToUse {
+                        providerGroup.addTask {
+                            do {
+                                return try await provider.fetchStreams(
+                                    imdbId: imdbId,
+                                    type: type,
+                                    season: season,
+                                    episode: episode
+                                )
+                            } catch {
+                                NSLog("❌ Provider \(provider.name) failed: \(error)")
+                                return []
+                            }
+                        }
                     }
+                    
+                    var all: [Stream] = []
+                    for await streams in providerGroup {
+                        all.append(contentsOf: streams)
+                    }
+                    return all
                 }
+                return fetched
             }
             
-            var allStreams: [Stream] = []
-            for await streams in group {
-                allStreams.append(contentsOf: streams)
+            // Task 2: Global timeout (15 seconds)
+            group.addTask {
+                try await Task.sleep(nanoseconds: 15 * 1_000_000_000)
+                // Throw specific timeout error
+                throw URLError(.timedOut)
             }
-            return allStreams
+            
+            // Process whichever finishes first
+            guard let result = try await group.next() else {
+                return []
+            }
+            
+            // If we got here, one task finished. Cancel the other.
+            group.cancelAll()
+            return result
         }
         
         // Deduplicate by info hash
-        return deduplicateStreams(results)
+        let unique = deduplicateStreams(results)
+        NSLog("✅ ProviderManager: Fetched \(results.count) raw, returning \(unique.count) unique streams")
+        return unique
     }
 
     func searchTorrents(query: String) async throws -> [Stream] {
-        print("🔍 Searching torrents for query: \(query)")
+        NSLog("🔍 Searching torrents for query: \(query)")
 
         // Use all providers but search with specific query instead of broad IMDB search
         let providersToUse = Array(providers.values)
@@ -136,14 +162,14 @@ actor ProviderManager {
         for provider in providersToUse {
             do {
                 let results = try await provider.search(query: query)
-                print("   🔍 Provider \(provider.name) found \(results.count) results")
+                NSLog("   🔍 Provider \(provider.name) found \(results.count) results")
                 searchResults.append(contentsOf: results)
             } catch {
-                print("❌ Provider \(provider.name) search failed: \(error)")
+                NSLog("❌ Provider \(provider.name) search failed: \(error)")
             }
         }
 
-        print("📦 Search completed: \(searchResults.count) total results")
+        NSLog("📦 Search completed: \(searchResults.count) total results")
         return deduplicateStreams(searchResults)
     }
     

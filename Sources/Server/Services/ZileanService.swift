@@ -31,7 +31,7 @@ class ZileanService: ProviderService {
         }
 
         let title = metadata.title
-        print("🔍 Zilean: Searching for \"\(title)\"")
+        NSLog("🔍 Zilean: Searching for \"\(title)\"")
 
         // URL encode the title
         guard let encodedTitle = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
@@ -47,7 +47,7 @@ class ZileanService: ProviderService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.timeoutInterval = 20
+        request.timeoutInterval = 8
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -59,7 +59,7 @@ class ZileanService: ProviderService {
         // Zilean returns JSON array directly, not {streams: []}
         let results = try JSONDecoder().decode([ZileanResult].self, from: data)
 
-        print("✅ Zilean: Got \(results.count) results")
+        NSLog("✅ Zilean: Got \(results.count) results")
 
         // Filter by season/episode if needed
         let filtered: [ZileanResult]
@@ -92,7 +92,7 @@ class ZileanService: ProviderService {
             filtered = results
         }
 
-        print("🔍 Zilean: Filtered to \(filtered.count) streams")
+        NSLog("🔍 Zilean: Filtered to \(filtered.count) streams")
 
         return parseStreams(filtered)
     }

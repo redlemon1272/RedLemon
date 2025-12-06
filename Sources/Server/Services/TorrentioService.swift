@@ -26,11 +26,11 @@ class TorrentioService: ProviderService {
     ) async throws -> [Stream] {
         let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode)
 
-        print("🔍 Torrentio: Fetching \(url)")
+        NSLog("🔍 Torrentio: Fetching \(url)")
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = 20
+        request.timeoutInterval = 8
 
         let (data, response) = try await URLSession.shared.data(for: request)
 
@@ -49,15 +49,15 @@ class TorrentioService: ProviderService {
 
         if let season = season, let episode = episode {
             path += ":\(season):\(episode)"
-            print("📺 Torrentio: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
+            NSLog("📺 Torrentio: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
         } else {
-            print("🎬 Torrentio: Building URL for movie (no season/episode)")
+            NSLog("🎬 Torrentio: Building URL for movie (no season/episode)")
         }
 
         path += ".json"
 
         let url = URL(string: baseUrl + path)!
-        print("🔗 Torrentio URL: \(url)")
+        NSLog("🔗 Torrentio URL: \(url)")
         return url
     }
 

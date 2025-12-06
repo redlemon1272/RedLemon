@@ -204,7 +204,7 @@ func registerStreamRoutes(_ app: Application) {
 
     // GET /api/streams/resolveByQuality - ColorFruit bucket logic
     app.get("api", "streams", "resolveByQuality") { req async throws -> Response in
-        print("🔥🔥🔥 RESOLVEBY QUALITY ENDPOINT HIT!")
+        NSLog("🔥🔥🔥 RESOLVEBY QUALITY ENDPOINT HIT!")
 
         guard let imdbId = req.query[String.self, at: "imdbId"] else {
             throw Abort(.badRequest, reason: "Missing imdbId")
@@ -215,9 +215,9 @@ func registerStreamRoutes(_ app: Application) {
         let episode = req.query[Int.self, at: "episode"]
         let year = req.query[String.self, at: "year"] // e.g., "2025", "2005"
 
-        print("🔍 Resolving streams by quality buckets for: \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
+        NSLog("🔍 Resolving streams by quality buckets for: \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
         if let year = year {
-            print("   📅 Filtering by year: \(year)")
+            NSLog("   📅 Filtering by year: \(year)")
         }
 
         // Fetch all streams from providers
@@ -232,7 +232,7 @@ func registerStreamRoutes(_ app: Application) {
             providerNames: providersToUse
         )
 
-        print("📦 Received \(streams.count) raw streams, bucketing by quality...")
+        NSLog("📦 Received \(streams.count) raw streams, bucketing by quality...")
 
         // For movies only, pull canonical title to prioritize correct matches (avoid wrong same-year titles)
         let targetTitle: String?

@@ -48,13 +48,10 @@ struct ChatOverlayView: View {
                 inputArea
             }
         }
-        .frame(width: 350)
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .shadow(color: .black.opacity(0.3), radius: 20)
+
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.black)
         .compositingGroup() // Optimize transparency blending
-        .padding(.trailing, 20)
-        .padding(.vertical, 60)
         .onAppear {
             print("👁️ ChatOverlayView appeared")
             // Auto-focus the input field when chat opens
@@ -99,6 +96,7 @@ struct ChatOverlayView: View {
                         Text("Friends").tag(1)
                     }
                     .pickerStyle(.segmented)
+                    .labelsHidden() // Hide "Chat Mode" text
                     .frame(width: 150)
                 }
 
@@ -138,39 +136,31 @@ struct ChatOverlayView: View {
     }
 
     private var messagesList: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 12) {
-                    // ✅ Show only most recent messages for performance
-                    ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)), id: \.id) { message in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(message.username)
-                                .font(.caption.weight(.semibold))
-                                .foregroundColor(.blue)
-                            Text(message.text)
-                                .font(.body)
-                                .foregroundColor(.white)
-                        }
-                        .padding(12)
-                        .background(Color.black.opacity(0.2))
-                        .cornerRadius(8)
-                        .id(message.id)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 12) {
+                // ✅ Show only most recent messages for performance
+                // Reversed for inverted list (bottom-up)
+                ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)).reversed(), id: \.id) { message in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(message.username)
+                            .font(.caption.weight(.semibold))
+                            .foregroundColor(.blue)
+                        Text(message.text)
+                            .font(.body)
+                            .foregroundColor(.white)
                     }
-                }
-                .padding()
-            }
-            .onChange(of: viewModel.messages.count) { _ in
-                scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
-            }
-            .onAppear {
-                scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
-            }
-            .onChange(of: viewModel.showChat) { show in
-                if show {
-                    scrollToBottom(proxy: proxy, lastId: viewModel.messages.last?.id)
+                    .padding(12)
+                    .background(Color.black.opacity(0.2))
+                    .cornerRadius(8)
+                    .id(message.id)
+                    .rotationEffect(.degrees(180)) // Correct text orientation
+                    .scaleEffect(x: -1, y: 1, anchor: .center)
                 }
             }
+            .padding()
         }
+        .rotationEffect(.degrees(180)) // Invert list
+        .scaleEffect(x: -1, y: 1, anchor: .center)
     }
 
     private var friendsList: some View {

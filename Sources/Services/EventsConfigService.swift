@@ -25,10 +25,7 @@ class EventsConfigService {
         return try await fetchConfig(type: "movie_events")
     }
     
-    /// Fetch active TV events configuration
-    func fetchTVEventsConfig() async throws -> EventsConfig {
-        return try await fetchConfig(type: "tv_events")
-    }
+
     
     /// Force refresh config from server (bypasses cache)
     func refreshConfig(type: String) async throws -> EventsConfig {

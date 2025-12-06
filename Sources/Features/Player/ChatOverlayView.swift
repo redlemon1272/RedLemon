@@ -83,21 +83,19 @@ struct ChatOverlayView: View {
                         .font(.headline)
                         .foregroundColor(.white)
                 } else {
-                    Picker("Chat Mode", selection: Binding(
-                        get: {
-                            if case .room = chatMode { return 0 }
-                            return 1
-                        },
-                        set: { newValue in
-                            chatMode = newValue == 0 ? .room : .friends
+                    // Custom Segmented Control for better visibility
+                    HStack(spacing: 2) {
+                        tabButton(title: "Room", isSelected: isRoomMode) {
+                            chatMode = .room
                         }
-                    )) {
-                        Text("Room").tag(0)
-                        Text("Friends").tag(1)
+                        tabButton(title: "Friends", isSelected: isFriendsMode) {
+                            chatMode = .friends
+                        }
                     }
-                    .pickerStyle(.segmented)
-                    .labelsHidden() // Hide "Chat Mode" text
-                    .frame(width: 150)
+                    .padding(2)
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(8)
+                    .frame(width: 160)
                 }
 
                 Spacer()
@@ -322,6 +320,31 @@ struct ChatOverlayView: View {
         }
 
         inputText = ""
+    }
+
+    private var isRoomMode: Bool {
+        if case .room = chatMode { return true }
+        return false
+    }
+
+    private var isFriendsMode: Bool {
+        if case .friends = chatMode { return true }
+        return false
+    }
+
+    private func tabButton(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: 13, weight: .medium))
+                .foregroundColor(isSelected ? .white : .white.opacity(0.5))
+                .frame(maxWidth: .infinity)
+                .frame(height: 28)
+                .background(
+                    RoundedRectangle(cornerRadius: 6)
+                        .fill(isSelected ? Color.white.opacity(0.2) : Color.clear)
+                )
+        }
+        .buttonStyle(.plain)
     }
 }
 

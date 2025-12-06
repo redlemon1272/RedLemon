@@ -50,55 +50,8 @@ func registerStreamRoutes(_ app: Application) {
         return httpResponse
     }
 
-    // POST /api/streams/resolve (enhanced for trusted packs)
-    app.post("api", "streams", "resolve") { req async throws -> Response in
-        let request = try req.content.decode(ResolveRequest.self)
 
-        print("🔍 Resolving streams for: \(request.imdbId)")
 
-        // Check if this is a TV series with trusted pack configuration
-        var trustedPackQuery: String? = nil
-        if request.type == "series",
-           let tvEvent = TVEventData.getSeries(id: request.imdbId),
-           case let .trustedPack(searchQuery) = tvEvent.packConfig {
-            trustedPackQuery = searchQuery
-            print("🎯 Found trusted pack for \(tvEvent.title): \(searchQuery)")
-        }
-
-        let streams = try await ProviderManager.shared.fetchStreams(
-            imdbId: request.imdbId,
-            type: request.type ?? "movie",
-            season: request.season,
-            episode: request.episode,
-            providerNames: request.providers
-        )
-
-        // Enhanced sorting: prioritize trusted pack if available
-        var sorted = sortStreams(streams, trustedPackQuery: trustedPackQuery)
-
-        // Attach subtitles to streams
-        sorted = await attachSubtitles(
-            to: sorted,
-            imdbId: request.imdbId,
-            type: request.type ?? "movie",
-            season: request.season,
-            episode: request.episode
-        )
-
-        let response = ResolveResponse(
-            streams: sorted,
-            count: sorted.count
-        )
-
-        let jsonData = try JSONEncoder().encode(response)
-        let httpResponse = Response(status: .ok)
-        httpResponse.body = .init(data: jsonData)
-        httpResponse.headers.contentType = .json
-
-        print("✅ Found \(sorted.count) streams")
-
-        return httpResponse
-    }
 
     // POST /api/streams/episodes - Get available episodes from a season pack torrent
     app.post("api", "streams", "episodes") { (req: Request) async throws -> Response in
@@ -267,52 +220,8 @@ func registerStreamRoutes(_ app: Application) {
             print("   📅 Filtering by year: \(year)")
         }
 
-        // Check for trusted packs from TVEventData
-        let trustedPackQuery: String?
-        if let series = TVEventData.getSeries(id: imdbId), case .trustedPack(let query) = series.packConfig {
-            trustedPackQuery = query.lowercased()
-            print("   🔒 Found trusted pack config for \(series.title): \(query)")
-        } else {
-            trustedPackQuery = nil
-        }
-
-        let isTrustedPack: (Stream) -> Bool = { stream in
-            guard let query = trustedPackQuery else { return false }
-            let titleLower = stream.title.lowercased()
-
-            // Enhanced matching for Breaking Bad trusted pack:
-            // Query: "breaking bad s01-s05 1080p nf web-dl av1 eac3 multsub"
-            // Check for key components: "breaking bad", "s01-s05", "1080p", "nf web-dl", "av1", "eac3"
-            if query.contains("breaking bad") && query.contains("s01-s05") {
-                return titleLower.contains("breaking bad") &&
-                       (titleLower.contains("s01-s05") || titleLower.contains("season 5") || titleLower.contains("complete")) &&
-                       titleLower.contains("1080p") &&
-                       titleLower.contains("nf") &&
-                       (titleLower.contains("av1") || titleLower.contains("web-dl"))
-            }
-
-            // Enhanced matching for Game of Thrones trusted pack:
-            // Query: "Game.of.Thrones.S01-S08.COMPLETE.SERIES.REPACK.1080p.Bluray.x265-HiQVE"
-            if query.contains("game of thrones") || query.contains("game.of.thrones") {
-                // Match the specific HiQVE repack
-                return (titleLower.contains("game of thrones") || titleLower.contains("game.of.thrones")) &&
-                       titleLower.contains("hiqve") &&
-                       titleLower.contains("1080p")
-            }
-
-            // Fallback to original logic for other series
-            return titleLower.contains(query)
-        }
-
-        // OPTIMIZATION: If we have a trusted pack, we can skip Comet (which is slow/unreliable)
-        // and rely on Torrentio/Zilean which are guaranteed to have the pack.
-        let providersToUse: [String]?
-        if trustedPackQuery != nil {
-            print("   🚀 Trusted pack detected - skipping Comet to avoid timeouts")
-            providersToUse = ["torrentio", "zilean", "mediafusion"]
-        } else {
-            providersToUse = nil
-        }
+        // Fetch all streams from providers
+        let providersToUse: [String]? = nil
 
         // Fetch all streams from providers
         let streams = try await ProviderManager.shared.fetchStreams(
@@ -383,12 +292,6 @@ func registerStreamRoutes(_ app: Application) {
         let beforeCodecFilter = filteredStreams.count
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
         filteredStreams = filteredStreams.filter { stream in
-            // SPECIAL-CASE: Exempt trusted packs from codec filtering
-            if isTrustedPack(stream) {
-                print("   ✅ EXEMPTING trusted pack from x265 filter: \(stream.title)")
-                return true
-            }
-
             let titleLower = stream.title.lowercased()
             let hasBadCodec = badCodecs.contains { codec in
                 titleLower.contains(codec)
@@ -407,10 +310,7 @@ func registerStreamRoutes(_ app: Application) {
         let beforeAV1Filter = filteredStreams.count
         let av1Codecs = ["av1"]
         filteredStreams = filteredStreams.filter { stream in
-            // SPECIAL-CASE: Exempt trusted packs from codec filtering
-            if isTrustedPack(stream) {
-                return true
-            }
+
 
             let titleLower = stream.title.lowercased()
             let hasAV1 = av1Codecs.contains { codec in
@@ -449,10 +349,7 @@ func registerStreamRoutes(_ app: Application) {
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
         filteredStreams = filteredStreams.filter { stream in
-            // SPECIAL-CASE: Exempt trusted packs
-            if isTrustedPack(stream) {
-                return true
-            }
+
 
             let titleLower = stream.title.lowercased()
             
@@ -500,11 +397,7 @@ func registerStreamRoutes(_ app: Application) {
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred over foreign-only
         let beforeAudioFilter = filteredStreams.count
         filteredStreams = filteredStreams.filter { stream in
-            // SPECIAL-CASE: Exempt trusted packs from audio filtering
-            if isTrustedPack(stream) {
-                print("   ✅ EXEMPTING trusted pack from audio filter: \(stream.title)")
-                return true
-            }
+
             
             let hasAcceptableAudio = hasAcceptableAudioLanguage(stream.title)
             if !hasAcceptableAudio {
@@ -578,10 +471,7 @@ func registerStreamRoutes(_ app: Application) {
                     titleLower.contains(pattern)
                 } || titleLower.contains("s01-s") || titleLower.contains("s02-s") || titleLower.contains("s03-s") || titleLower.contains("s04-s") || titleLower.contains("s05-s") || titleLower.contains("s06-s") || titleLower.contains("s07-s") || titleLower.contains("s08-s") || titleLower.contains("s09-s") || titleLower.contains("s10-s") || titleLower.range(of: "s\\d{2}-s\\d{2}", options: .regularExpression) != nil
 
-                // SPECIAL-CASE: Allow our known good trusted packs through, even if naming doesn't match strict filters
-                let matchesKnownPack = isTrustedPack(stream)
-
-                let matches = matchesEpisode || matchesSeasonPack || matchesKnownPack
+                let matches = matchesEpisode || matchesSeasonPack
 
                 if !matches && !isCometCached {
                     print("   ⏭️  Skipping \(stream.title) - doesn't match S\(String(format: "%02d", season!))E\(String(format: "%02d", episode!))")
@@ -617,11 +507,7 @@ func registerStreamRoutes(_ app: Application) {
         for stream in streamsWithSubtitles {
             let bucket = determineQualityBucket(stream.quality ?? "")
 
-            // CRITICAL FIX: Filter out 2160p streams for TV events with trusted packs to prevent massive file selection
-            if bucket == "2160p" && type == "series" && trustedPackQuery != nil {
-                print("   🚫 TV EVENT FILTER: Blocking 2160p stream for series with trusted pack: \(stream.title)")
-                continue
-            }
+
 
             
             buckets[bucket, default: []].append(stream)
@@ -731,11 +617,7 @@ func registerStreamRoutes(_ app: Application) {
 
         let preferMultiSubMovies = (type == "movie")
 
-        // CRITICAL FIX: Skip 2160p processing entirely for TV events with trusted packs
-        let uhd4kBucket: [Stream] = (type == "series" && trustedPackQuery != nil) ? [] : (buckets["2160p"] ?? [])
-        if type == "series" && trustedPackQuery != nil {
-            print("   🚫 TV EVENT FILTER: Completely skipping 2160p bucket for series with trusted pack to ensure hardcoded pack is used")
-        }
+        let uhd4kBucket: [Stream] = buckets["2160p"] ?? []
 
         var qualityBuckets = QualityBuckets(
             uhd4k: processBucket(uhd4kBucket, minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
@@ -744,38 +626,7 @@ func registerStreamRoutes(_ app: Application) {
             sd: processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
         )
 
-        // If we found our trusted pack, force it as primary for 1080p while keeping prior choices as alternates
-        if trustedPackQuery != nil {
-            func prioritizeKnownPack(_ bucket: QualityBucket?) -> QualityBucket? {
-                guard let bucket = bucket else { return nil }
 
-                var candidates: [Stream] = []
-                if let primary = bucket.primary { candidates.append(primary) }
-                if let alternates = bucket.alternates { candidates.append(contentsOf: alternates) }
-
-                // Prefer trusted pack match
-                guard let pack = candidates.first(where: { stream in isTrustedPack(stream) }) else {
-                    return bucket
-                }
-
-                // Keep other streams as alternates (excluding the chosen pack)
-                let packId = pack.id
-                let newAlternates = candidates.filter { stream in
-                    // Keep all non-pack streams as alternates
-                    stream.id != packId
-                }
-
-                print("👑 Using trusted pack as primary (1080p): \(pack.title)")
-                return QualityBucket(primary: pack, alternates: newAlternates.isEmpty ? nil : newAlternates)
-            }
-
-            qualityBuckets = QualityBuckets(
-                uhd4k: qualityBuckets.uhd4k,
-                fullHD: prioritizeKnownPack(qualityBuckets.fullHD),
-                hd: qualityBuckets.hd,
-                sd: qualityBuckets.sd
-            )
-        }
 
         print("   📦 Bucket counts (after processBucket/seeder filter):")
         print("      2160p: \(qualityBuckets.uhd4k?.primary != nil ? "1 primary" : "0") + \(qualityBuckets.uhd4k?.alternates?.count ?? 0) alts")
@@ -787,7 +638,8 @@ func registerStreamRoutes(_ app: Application) {
         var finalStreams: [Stream] = []
 
         // Add 2160p bucket if available (but NOT for TV events with trusted packs)
-        if let uhd4k = qualityBuckets.uhd4k, !(type == "series" && trustedPackQuery != nil) {
+        // Add 2160p bucket if available
+        if let uhd4k = qualityBuckets.uhd4k {
             if let primary = uhd4k.primary {
                 finalStreams.append(primary)
                 print("📦 Adding 2160p primary: \(primary.title)")
@@ -798,8 +650,6 @@ func registerStreamRoutes(_ app: Application) {
                     print("📦 Adding 2160p alternate: \(alt.title)")
                 }
             }
-        } else if type == "series" && trustedPackQuery != nil {
-            print("   🚫 TV EVENT FILTER: Skipping 2160p bucket in final streams for series with trusted pack")
         }
 
         // Add 1080p bucket if available (highest priority for most users)

@@ -5,16 +5,14 @@ struct EventsView: View {
     @ObservedObject private var timeService = TimeService.shared
     @StateObject internal var apiClient = LocalAPIClient()
 
-    // Media type selection
-    @State private var selectedMediaType: MediaType = .movies
+
 
     // Movie events
     @State private var events: [EventItem] = []
     @State private var allMovies: [MediaItem] = []  // Store all fetched movies
     @State private var currentOffset = 0  // Track which set of 4 we're showing
 
-    // TV events
-    @State var tvEvents: [TVEventItem] = []
+
 
     // Common state
     @State private var isLoading = true
@@ -24,10 +22,7 @@ struct EventsView: View {
     // MARK: - Constants
     private let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
 
-    enum MediaType: String, CaseIterable {
-        case movies = "Movies"
-        case tvShows = "TV Shows"
-    }
+
 
     var body: some View {
         ZStack {
@@ -37,59 +32,28 @@ struct EventsView: View {
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 24) {
-                        // Media Type Toggle
-                        Picker("Media Type", selection: $selectedMediaType) {
-                            ForEach(MediaType.allCases, id: \.self) { type in
-                                Text(type.rawValue).tag(type)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                        .padding(.horizontal)
-                        .padding(.top, 20)
+
 
                         // Header removed as requested
 
-                        // Show appropriate events based on selected type
-                        if selectedMediaType == .movies {
-                            if events.isEmpty {
-                                emptyStateView(icon: "film", message: "No movie events scheduled right now.")
-                            } else {
-                                // Movie Events List
-                                LazyVStack(spacing: 20) {
-                                    ForEach(events) { event in
-                                        // Check if previous event is finished (either by time OR by user completion)
-                                        // We use lastUpdate here to ensure this recalculates when state changes
-                                        let _ = lastUpdate 
-                                        let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
-
-                                        HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
-                                            joinEvent(event)
-                                        }
-                                    }
-                                }
-                                .padding(.horizontal)
-                                .padding(.bottom, 40)
-                            }
+                        if events.isEmpty {
+                            emptyStateView(icon: "film", message: "No movie events scheduled right now.")
                         } else {
-                            if tvEvents.isEmpty {
-                                emptyStateView(icon: "tv", message: "No TV show events scheduled right now.")
-                            } else {
-                                // TV Events List
-                                LazyVStack(spacing: 20) {
-                                    ForEach(tvEvents) { tvEvent in
-                                        TVHeroEventCard(tvEvent: tvEvent, onJoin: {
-                                            joinTVEvent(tvEvent)
-                                        }, onRefreshNeeded: {
-                                            print("🔄 TV Event finished, refreshing schedule...")
-                                            Task {
-                                                await loadTVEvents()
-                                            }
-                                        })
+                            // Movie Events List
+                            LazyVStack(spacing: 20) {
+                                ForEach(events) { event in
+                                    // Check if previous event is finished (either by time OR by user completion)
+                                    // We use lastUpdate here to ensure this recalculates when state changes
+                                    let _ = lastUpdate 
+                                    let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
+
+                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
+                                        joinEvent(event)
                                     }
                                 }
-                                .padding(.horizontal)
-                                .padding(.bottom, 40)
                             }
+                            .padding(.horizontal)
+                            .padding(.bottom, 40)
                         }
                     }
                 }
@@ -123,47 +87,25 @@ struct EventsView: View {
         .onDisappear {
             stopTimer()
         }
-        .onChange(of: selectedMediaType) { newType in
-            // Reload events when switching tabs
-            isLoading = true
 
-            // Pre-warm cache for TV shows to speed up loading
-            if newType == .tvShows {
-                Task {
-                    await prewarmTVMetadataCache()
-                    loadEvents()
-                }
-            } else {
-                loadEvents()
-            }
-        }
     }
 
     private func loadEvents() {
         Task {
-            if selectedMediaType == .movies {
-                // Load movie events
-                do {
-                    let movies = try await apiClient.fetchTopMoviesForEvents()
-                    // Use the daily shuffled order from the API
-                    allMovies = movies
+            // Load movie events
+            do {
+                let movies = try await apiClient.fetchTopMoviesForEvents()
+                // Use the daily shuffled order from the API
+                allMovies = movies
 
-                    calculateDeterministicSchedule()
-                    isLoading = false
-
-                    // Start timer to check for event completion
-                    startTimer()
-                } catch {
-                    print("❌ Failed to load movie events: \(error)")
-                    isLoading = false
-                }
-            } else {
-                // Load TV events
-                await loadTVEvents()
+                calculateDeterministicSchedule()
                 isLoading = false
 
-                // Fetch participant counts in background after UI is shown
-                await updateParticipantCounts()
+                // Start timer to check for event completion
+                startTimer()
+            } catch {
+                print("❌ Failed to load movie events: \(error)")
+                isLoading = false
             }
         }
     }
@@ -318,7 +260,6 @@ struct EventsView: View {
     @MainActor
     private func updateParticipantCounts() async {
         let currentEvents = events
-        let currentTVEvents = tvEvents
 
         // Fetch in background task to avoid blocking main thread
         let fetchedCounts = await Task.detached {
@@ -332,14 +273,6 @@ struct EventsView: View {
                 }
             }
 
-            // Fetch for TV Events
-            for event in currentTVEvents {
-                let roomId = "event_\(event.id)"
-                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                    newCounts[event.id] = roomState.participantsCount
-                }
-            }
-
             return newCounts
         }.value
 
@@ -347,13 +280,6 @@ struct EventsView: View {
         for i in 0..<events.count {
             if let count = fetchedCounts[events[i].id] {
                 events[i].participantCount = count
-            }
-        }
-
-        // Update TV Events state on main actor
-        for i in 0..<tvEvents.count {
-            if let count = fetchedCounts[tvEvents[i].id] {
-                tvEvents[i].participantCount = count
             }
         }
     }
@@ -408,7 +334,7 @@ struct EventsView: View {
             do {
                 guard let userId = appState.currentUserId else {
                     print("⚠️ No user ID - skipping room creation")
-                    await createLocalEventRoom(event: event, roomId: roomId)
+                    createLocalEventRoom(event: event, roomId: roomId)
                     return
                 }
 
@@ -438,11 +364,11 @@ struct EventsView: View {
                     try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
                 }
 
-                await createLocalEventRoom(event: event, roomId: roomId)
+                createLocalEventRoom(event: event, roomId: roomId)
             } catch {
                 print("❌ Failed to create/join event room: \(error)")
                 // Fall back to local-only room (no chat sync)
-                await createLocalEventRoom(event: event, roomId: roomId)
+                createLocalEventRoom(event: event, roomId: roomId)
             }
         }
     }
@@ -528,6 +454,19 @@ struct EventsView: View {
             print("🎭 Upcoming event - going to lobby")
             appState.currentView = .watchPartyLobby
         }
+    }
+
+
+    private func emptyStateView(icon: String, message: String) -> some View {
+        VStack(spacing: 16) {
+            Image(systemName: icon)
+                .font(.system(size: 48))
+                .foregroundColor(.gray)
+            Text(message)
+                .font(.headline)
+                .foregroundColor(.gray)
+        }
+        .frame(maxWidth: .infinity, minHeight: 200)
     }
 }
 

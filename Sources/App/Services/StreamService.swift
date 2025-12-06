@@ -286,13 +286,19 @@ actor StreamService {
     // MARK: - Subtitle Downloading
 
     func downloadSubtitlesInParallel(subtitles: [Subtitle]) async -> [Subtitle] {
-        await withTaskGroup(of: Subtitle?.self) { group -> [Subtitle] in
+        // Use a custom session with short timeout to avoid blocking playback
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 3.0 // 3 seconds max per subtitle
+        config.timeoutIntervalForResource = 3.0
+        let session = URLSession(configuration: config)
+
+        return await withTaskGroup(of: Subtitle?.self) { group -> [Subtitle] in
             for subtitle in subtitles {
                 group.addTask { () -> Subtitle? in
                     guard let url = URL(string: subtitle.url) else { return nil }
 
                     do {
-                        let (data, response) = try await URLSession.shared.data(from: url)
+                        let (data, response) = try await session.data(from: url)
 
                         let isZip = subtitle.url.lowercased().hasSuffix(".zip") ||
                                    (response as? HTTPURLResponse)?.allHeaderFields["Content-Type"] as? String == "application/zip"
@@ -324,6 +330,8 @@ actor StreamService {
             return downloaded
         }
     }
+
+
 
     nonisolated private func extractSubtitleFromZip(data: Data) async throws -> String? {
         let tempDir = FileManager.default.temporaryDirectory

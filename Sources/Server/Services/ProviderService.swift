@@ -100,7 +100,7 @@ actor ProviderManager {
         let providersToUse = providerNames?.compactMap { providers[$0] } ?? Array(providers.values)
         
         // Fetch from all providers concurrently WITH TIMEOUT
-        let results = try await withThrowingTaskGroup(of: [Stream].self) { group in
+        let results = try await withThrowingTaskGroup(of: [Stream].self) { group -> [Stream] in
             // Task 1: The actual fetch from all providers
             group.addTask {
                 let fetched = await withTaskGroup(of: [Stream].self) { providerGroup in
@@ -134,6 +134,7 @@ actor ProviderManager {
                 try await Task.sleep(nanoseconds: 15 * 1_000_000_000)
                 // Throw specific timeout error
                 throw URLError(.timedOut)
+                return [] // Dead code to satisfy type inference
             }
             
             // Process whichever finishes first

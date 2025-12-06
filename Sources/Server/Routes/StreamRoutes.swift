@@ -619,7 +619,7 @@ func registerStreamRoutes(_ app: Application) {
 
         let uhd4kBucket: [Stream] = buckets["2160p"] ?? []
 
-        var qualityBuckets = QualityBuckets(
+        let qualityBuckets = QualityBuckets(
             uhd4k: processBucket(uhd4kBucket, minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
             fullHD: processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),
             hd: processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies),

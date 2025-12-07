@@ -377,7 +377,7 @@ actor StreamResolver {
         
         // FIX: Use stricter matching for bad patterns to avoid frequent false positives
         // e.g. "ts" matching "Nigh(ts)"
-        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener"]
+        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener", "iso", ".iso"]
         // Note: "ts" is too dangerous as a substring match, removed it.
         
         var filtered = streams.filter { stream in

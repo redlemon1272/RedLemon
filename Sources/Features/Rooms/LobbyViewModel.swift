@@ -290,48 +290,11 @@ class LobbyViewModel: ObservableObject {
                     }
                 }
 
-                // Initialize Realtime channel for lobby chat/signaling
-                realtimeConnectionStatus = .connecting
-                realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
-
-                // Get username from appState
-                let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
-
-                try await realtimeManager?.setup(
-                    roomId: room.id,
-                    isHost: isHost,
-                    userId: participantId,
-                    username: username,
-                    onSync: { [weak self] syncMessage in
-                        Task { @MainActor in
-                            await self?.handleLobbyMessage(syncMessage)
-                        }
-                    }
-                )
-
-                print("✅ Lobby: Realtime connected to room \(room.id)")
-                realtimeConnectionStatus = .connected
-
-                // Set up Realtime connection state callback
-                Task {
-                    await realtimeManager?.setConnectionStateCallback { [weak self] state in
-                        Task { @MainActor in
-                            guard let self = self else { return }
-                            switch state {
-                            case .connected:
-                                self.realtimeConnectionStatus = .connected
-                            case .connecting:
-                                self.realtimeConnectionStatus = .connecting
-                            case .failed, .disconnected:
-                                self.realtimeConnectionStatus = .disconnected
-                            }
-                        }
-                    }
-                }
-
+                // Initialize Realtime channel (reusing setup method to ensure callbacks are attached)
+                await self.setupRealtimeSubscription()
+                
                 if !isHost {
                     // Guest joining - send join message via Realtime only
-                    // Don't add message locally to avoid duplicates
                     let guestName = appState?.currentUsername ?? "Guest"
 
                     // Send join message via Realtime
@@ -345,27 +308,7 @@ class LobbyViewModel: ObservableObject {
                     )
                     try? await realtimeManager?.sendSyncMessage(joinMsg)
                 }
-            } catch RealtimeError.connectionFailed {
-                NSLog("❌ Lobby: Realtime connection failed - will use database polling fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Realtime connection failed. Using database fallback for synchronization.",
-                    "reason": "Network connection issues"
-                ])
-                realtimeConnectionStatus = .disconnected
-            } catch RealtimeError.connectionTimeout {
-                NSLog("⏰ Lobby: Realtime connection timeout - will use database polling fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Realtime connection timed out. Using database fallback for synchronization.",
-                    "reason": "Connection took too long to establish"
-                ])
-                realtimeConnectionStatus = .disconnected
-            } catch RealtimeError.channelNotReady {
-                NSLog("⚠️ Lobby: Realtime channel not ready - will use database polling fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Realtime channel not ready. Using database fallback for synchronization.",
-                    "reason": "Channel initialization failed"
-                ])
-                realtimeConnectionStatus = .disconnected
+
             } catch {
                 NSLog("❌ Lobby: Failed to connect - \(error)")
                 if !isHost {
@@ -377,7 +320,7 @@ class LobbyViewModel: ObservableObject {
                 } else {
                     NSLog("   Will rely on database polling instead")
                     addMessage(.systemInfo, userName: "System", data: [
-                        "message": "Realtime setup failed. Using database polling for synchronization.",
+                        "message": "Connection setup failed. Using database polling for synchronization.",
                         "error": "\(error.localizedDescription)"
                     ])
                 }

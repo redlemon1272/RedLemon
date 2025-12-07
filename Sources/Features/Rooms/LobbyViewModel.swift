@@ -1020,6 +1020,10 @@ class LobbyViewModel: ObservableObject {
             }
         }
 
+        // Heartbeat Loop (every 30 seconds)
+        // Keeps the user "active" in the room_participants table
+        startHeartbeatLoop()
+
         // Do initial fetch immediately (no chat message polling)
         Task { @MainActor [weak self] in
             guard let self = self else { return }
@@ -1028,9 +1032,31 @@ class LobbyViewModel: ObservableObject {
                 await self.pollRoomState() // Get initial room state
             }
         }
-
-        print("✅ Lobby: Polling started (chat via Realtime only)")
     }
+    
+    private func startHeartbeatLoop() {
+        print("💓 Lobby: Starting heartbeat loop...")
+        Task { [weak self] in
+            while !Task.isCancelled {
+                guard let self = self else { return }
+                
+                // Send heartbeat
+                if let userId = self.appState?.currentUserId {
+                    do {
+                        try await SupabaseClient.shared.sendHeartbeat(roomId: self.room.id, userId: userId)
+                        // print("💓 Heartbeat sent") // Verbose logging disabled
+                    } catch {
+                        print("⚠️ Heartbeat failed: \(error)")
+                    }
+                }
+                
+                // Wait 30 seconds
+                try? await Task.sleep(nanoseconds: 30_000_000_000)
+            }
+        }
+    }
+
+
 
     private func stopPolling() {
         participantsPollingTask?.cancel()

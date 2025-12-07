@@ -475,6 +475,29 @@ class SupabaseClient {
         )
     }
 
+    /// Send heartbeat to update last_seen for participant
+    func sendHeartbeat(roomId: String, userId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/room_participants",
+            method: "PATCH",
+            body: [
+                "last_seen": ISO8601DateFormatter().string(from: Date())
+            ],
+            query: [
+                "room_id": "eq.\(roomId)",
+                "user_id": "eq.\(userId.uuidString)"
+            ]
+        )
+    }
+
+    /// Invoke cleanup for stale participants (RPC call)
+    func cleanupStaleParticipants() async throws {
+        _ = try await makeRequest(
+            path: "/rpc/cleanup_stale_participants",
+            method: "POST"
+        )
+    }
+
     // MARK: - Chat
 
     /// Send chat message

@@ -570,235 +570,16 @@ struct HeroEventCard: View {
                 }
             }
         }) {
-            ZStack(alignment: .topLeading) {
-                // Full Background Image with Gradient
-                AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                } placeholder: {
-                    Rectangle().fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                }
-                .frame(height: 320)
-                .clipped()
-                .overlay(
-                    // Multi-layer gradient for better readability
-                    ZStack {
-                        LinearGradient(
-                            gradient: Gradient(colors: [.black.opacity(0.7), .clear, .black.opacity(0.9)]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        LinearGradient(
-                            gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    }
-                )
-                .cornerRadius(16)
-                .overlay(
-                    ZStack {
-                        Color.black.opacity(0.6)
-                        VStack(spacing: 12) {
-                            ProgressView()
-                                .scaleEffect(1.2)
-                                .tint(.white)
-                            Text("Joining...")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .opacity(isJoining ? 1 : 0)
-                    .animation(.easeInOut(duration: 0.2), value: isJoining)
-                    .allowsHitTesting(false)
-                )
-
-                // Content Overlay
-                VStack(alignment: .leading, spacing: 0) {
-                    // Top Section: Status Badge
-                    HStack {
-                        if event.isFinished {
-                            HStack(spacing: 6) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.system(size: 11))
-                                Text("EVENT FINISHED")
-                                    .font(.system(size: 13, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(
-                                Capsule()
-                                    .fill(Color.gray.opacity(0.8))
-                                    .shadow(color: .gray.opacity(0.3), radius: 6, x: 0, y: 2)
-                            )
-
-                        } else if event.isInLobby || isLobbyOverride {
-                            VStack(spacing: 4) {
-                                HStack(spacing: 6) {
-                                    Circle()
-                                        .fill(Color.yellow)
-                                        .frame(width: 8, height: 8)
-                                        .shadow(color: .yellow.opacity(0.6), radius: 4)
-                                    Text("Lobby Open")
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                }
-
-                                // Add countdown timer
-                                if event.startTime.timeIntervalSince(currentTime) > 0 {
-                                    Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(currentTime)))")
-                                        .font(.system(size: 11))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.white.opacity(0.9))
-                                        .monospacedDigit()
-                                }
-                            }
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(Color.yellow.opacity(0.2))
-                            .cornerRadius(20)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(Color.yellow.opacity(0.3), lineWidth: 1)
-                            )
-                        } else if event.isLive {
-                            HStack(spacing: 6) {
-                                Circle()
-                                    .fill(Color.red)
-                                    .frame(width: 10, height: 10)
-                                Text("LIVE NOW")
-                                    .font(.system(size: 13, weight: .bold))
-                                    .foregroundColor(.white)
-                            }
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(
-                                Capsule()
-                                    .fill(Color.red.opacity(0.9))
-                                    .shadow(color: .red.opacity(0.5), radius: 8, x: 0, y: 2)
-                            )
-                        } else if event.isUpcoming {
-                            HStack(spacing: 6) {
-                                Image(systemName: "clock.fill")
-                                    .font(.system(size: 11))
-                                Text("STARTS \(formatTime(event.startTime))")
-                                    .font(.system(size: 12, weight: .semibold))
-                            }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(
-                                Capsule()
-                                    .fill(Color.orange.opacity(0.9))
-                                    .shadow(color: .orange.opacity(0.3), radius: 6, x: 0, y: 2)
-                            )
-                        }
-
-                        Spacer()
-
-                        // Participant Count
-                        if event.participantCount > 0 {
-                            HStack(spacing: 4) {
-                                Image(systemName: "person.2.fill")
-                                    .font(.system(size: 11))
-                                Text("\(event.participantCount)")
-                                    .font(.system(size: 13, weight: .semibold))
-                            }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(
-                                Capsule()
-                                    .fill(Color.white.opacity(0.2))
-                                    .overlay(
-                                        Capsule()
-                                            .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                                    )
-                            )
-                        }
-                    }
-                    .padding(.top, 20)
-                    .padding(.horizontal, 20)
-
-                    Spacer()
-
-                    // Bottom Section: Logo, Metadata, Progress
-                    VStack(alignment: .leading, spacing: 12) {
-                        // Logo or Title
-                        if let logoURL = event.mediaItem.logoURL {
-                            AsyncImage(url: logoURL) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            } placeholder: {
-                                Text(event.mediaItem.name)
-                                    .font(.system(size: 28, weight: .bold))
-                                    .foregroundColor(.white)
-                                    .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
-                            }
-                            .frame(maxWidth: 300, maxHeight: 80, alignment: .leading)
-                            .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 4)
-                        } else {
-                            Text(event.mediaItem.name)
-                                .font(.system(size: 28, weight: .bold))
-                                .foregroundColor(.white)
-                                .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
-                        }
-
-                        // Metadata Row
-                        HStack(spacing: 8) {
-                            if let year = event.mediaItem.releaseInfo {
-                                Text(year)
-                                    .font(.system(size: 14, weight: .medium))
-                            }
-                            if event.mediaItem.releaseInfo != nil && event.mediaItem.runtime != nil {
-                                Text("•")
-                                    .font(.system(size: 14))
-                            }
-                            if let runtime = event.mediaItem.runtime {
-                                Text(runtime)
-                                    .font(.system(size: 14, weight: .medium))
-                            }
-                        }
-                        .foregroundColor(.white.opacity(0.9))
-
-                        // Progress Bar (if live)
-                        if event.isLive {
-                            VStack(alignment: .leading, spacing: 6) {
-                                ProgressView(value: progress, total: 1.0)
-                                    .progressViewStyle(LinearProgressViewStyle(tint: .red))
-                                    .scaleEffect(x: 1, y: 1.5, anchor: .center)
-
-                                HStack {
-                                    Text(formatEventTime(elapsedTime))
-                                        .font(.system(size: 13, weight: .medium))
-                                    Spacer()
-                                    Text("-\(formatEventTime(remainingTime))")
-                                        .font(.system(size: 13, weight: .medium))
-                                }
-                                .foregroundColor(.white.opacity(0.8))
-                            }
-                            .padding(.top, 4)
-                        }
-                    }
-                    .padding(24)
-                }
-            }
-            .frame(height: 320)
-            .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
+            HeroEventCardContent(
+                event: event,
+                isLobbyOverride: isLobbyOverride,
+                isJoining: isJoining,
+                currentTime: currentTime
+            )
         }
         .buttonStyle(PlainButtonStyle())
         .opacity(event.isFinished ? 0.6 : 1.0)
         .overlay(
-            // Hover effect hint
             RoundedRectangle(cornerRadius: 16)
                 .stroke(
                     event.isFinished ? Color.gray.opacity(0.3) :
@@ -808,10 +589,6 @@ struct HeroEventCard: View {
                 )
         )
         .onAppear {
-            // Start timer for:
-            // 1. Live events (to show progress)
-            // 2. Lobby events (for countdown)
-            // 3. Next event (index 1) so it can immediately detect when it should show "Lobby Open"
             if event.isLive || event.isInLobby || isLobbyOverride || event.index == 1 {
                 currentTime = TimeService.shared.now
                 timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -824,42 +601,273 @@ struct HeroEventCard: View {
             timer = nil
         }
     }
+}
 
-    private var progress: Double {
+// Helper view for the card content to keep the main body clean and flat
+struct HeroEventCardContent: View {
+    let event: EventItem
+    let isLobbyOverride: Bool
+    let isJoining: Bool
+    let currentTime: Date
+    // Helper to calculate progress for live events
+    var progress: Double {
         let elapsed = currentTime.timeIntervalSince(event.startTime)
-        return min(max(elapsed / event.actualMovieDuration, 0), 1)
+        return min(max(elapsed / event.duration, 0), 1)
     }
 
-    private var elapsedTime: TimeInterval {
-        currentTime.timeIntervalSince(event.startTime)
+    var elapsedTime: TimeInterval {
+        return currentTime.timeIntervalSince(event.startTime)
     }
 
-    private var remainingTime: TimeInterval {
-        let actualMovieEndTime = event.startTime.addingTimeInterval(event.actualMovieDuration)
-        return max(actualMovieEndTime.timeIntervalSince(currentTime), 0)
+    var remainingTime: TimeInterval {
+        return event.duration - elapsedTime
     }
 
-    private func formatTime(_ date: Date) -> String {
+    // Helper formats
+    func formatDuration(_ interval: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        return formatter.string(from: interval) ?? ""
+    }
+
+    func formatTime(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
 
-    private func formatEventTime(_ interval: TimeInterval) -> String {
-        let hours = Int(interval) / 3600
-        let minutes = Int(interval) / 60 % 60
-        let seconds = Int(interval) % 60
-        if hours > 0 {
-            return String(format: "%d:%02d:%02d", hours, minutes, seconds)
+    func formatEventTime(_ interval: TimeInterval) -> String {
+         let formatter = DateComponentsFormatter()
+         formatter.allowedUnits = [.hour, .minute, .second]
+         formatter.zeroFormattingBehavior = .pad
+         return formatter.string(from: interval) ?? "0:00"
+     }
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            // LAYER 1: Background Image
+            AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Rectangle().fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            }
+            .frame(height: 320)
+            .clipped()
+
+            // LAYER 2: Gradients
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [.black.opacity(0.7), .clear, .black.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, .black.opacity(0.8)]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
+
+            // LAYER 3: Content
+            VStack(alignment: .leading, spacing: 0) {
+                 // Top Section: Status Badge
+                 HStack {
+                     if event.isFinished {
+                         HStack(spacing: 6) {
+                             Image(systemName: "checkmark.circle.fill")
+                                 .font(.system(size: 11))
+                             Text("EVENT FINISHED")
+                                 .font(.system(size: 13, weight: .bold))
+                                 .foregroundColor(.white)
+                         }
+                         .padding(.horizontal, 12)
+                         .padding(.vertical, 6)
+                         .background(
+                             Capsule()
+                                 .fill(Color.gray.opacity(0.8))
+                                 .shadow(color: .gray.opacity(0.3), radius: 6, x: 0, y: 2)
+                         )
+
+                     } else if event.isInLobby || isLobbyOverride {
+                         VStack(spacing: 4) {
+                             HStack(spacing: 6) {
+                                 Circle()
+                                     .fill(Color.yellow)
+                                     .frame(width: 8, height: 8)
+                                     .shadow(color: .yellow.opacity(0.6), radius: 4)
+                                 Text("Lobby Open")
+                                     .fontWeight(.bold)
+                                     .foregroundColor(.white)
+                             }
+
+                             // Add countdown timer
+                             if event.startTime.timeIntervalSince(currentTime) > 0 {
+                                 Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(currentTime)))")
+                                     .font(.system(size: 11))
+                                     .fontWeight(.semibold)
+                                     .foregroundColor(.white.opacity(0.9))
+                                     .monospacedDigit()
+                             }
+                         }
+                         .padding(.horizontal, 10)
+                         .padding(.vertical, 6)
+                         .background(Color.yellow.opacity(0.2))
+                         .cornerRadius(20)
+                         .overlay(
+                             RoundedRectangle(cornerRadius: 20)
+                                 .stroke(Color.yellow.opacity(0.3), lineWidth: 1)
+                         )
+                     } else if event.isLive {
+                         HStack(spacing: 6) {
+                             Circle()
+                                 .fill(Color.red)
+                                 .frame(width: 10, height: 10)
+                             Text("LIVE NOW")
+                                 .font(.system(size: 13, weight: .bold))
+                                 .foregroundColor(.white)
+                         }
+                         .padding(.horizontal, 12)
+                         .padding(.vertical, 6)
+                         .background(
+                             Capsule()
+                                 .fill(Color.red.opacity(0.9))
+                                 .shadow(color: .red.opacity(0.5), radius: 8, x: 0, y: 2)
+                         )
+                     } else if event.isUpcoming {
+                         HStack(spacing: 6) {
+                             Image(systemName: "clock.fill")
+                                 .font(.system(size: 11))
+                             Text("STARTS \(formatTime(event.startTime))")
+                                 .font(.system(size: 12, weight: .semibold))
+                         }
+                         .foregroundColor(.white)
+                         .padding(.horizontal, 12)
+                         .padding(.vertical, 6)
+                         .background(
+                             Capsule()
+                                 .fill(Color.orange.opacity(0.9))
+                                 .shadow(color: .orange.opacity(0.3), radius: 6, x: 0, y: 2)
+                         )
+                     }
+
+                     Spacer()
+
+                     // Participant Count
+                     if event.participantCount > 0 {
+                         HStack(spacing: 4) {
+                             Image(systemName: "person.2.fill")
+                                 .font(.system(size: 11))
+                             Text("\(event.participantCount)")
+                                 .font(.system(size: 13, weight: .semibold))
+                         }
+                         .foregroundColor(.white)
+                         .padding(.horizontal, 10)
+                         .padding(.vertical, 6)
+                         .background(
+                             Capsule()
+                                 .fill(Color.white.opacity(0.2))
+                                 .overlay(
+                                     Capsule()
+                                         .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                 )
+                         )
+                     }
+                 }
+                 .padding(.top, 20)
+                 .padding(.horizontal, 20)
+
+                 Spacer()
+
+                 // Bottom Section: Logo, Metadata, Progress
+                 VStack(alignment: .leading, spacing: 12) {
+                     // Logo or Title
+                     if let logoURL = event.mediaItem.logoURL {
+                         AsyncImage(url: logoURL) { image in
+                             image
+                                 .resizable()
+                                 .aspectRatio(contentMode: .fit)
+                         } placeholder: {
+                             Text(event.mediaItem.name)
+                                 .font(.system(size: 28, weight: .bold))
+                                 .foregroundColor(.white)
+                                 .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
+                         }
+                         .frame(maxWidth: 300, maxHeight: 80, alignment: .leading)
+                         .shadow(color: .black.opacity(0.6), radius: 8, x: 0, y: 4)
+                     } else {
+                         Text(event.mediaItem.name)
+                             .font(.system(size: 28, weight: .bold))
+                             .foregroundColor(.white)
+                             .shadow(color: .black.opacity(0.8), radius: 4, x: 0, y: 2)
+                     }
+
+                     // Metadata Row
+                     HStack(spacing: 8) {
+                         if let year = event.mediaItem.releaseInfo {
+                             Text(year)
+                                 .font(.system(size: 14, weight: .medium))
+                         }
+                         if event.mediaItem.releaseInfo != nil && event.mediaItem.runtime != nil {
+                             Text("•")
+                                 .font(.system(size: 14))
+                         }
+                         if let runtime = event.mediaItem.runtime {
+                             Text(runtime)
+                                 .font(.system(size: 14, weight: .medium))
+                         }
+                     }
+                     .foregroundColor(.white.opacity(0.9))
+
+                     // Progress Bar (if live)
+                     if event.isLive {
+                         VStack(alignment: .leading, spacing: 6) {
+                             ProgressView(value: progress, total: 1.0)
+                                 .progressViewStyle(LinearProgressViewStyle(tint: .red))
+                                 .scaleEffect(x: 1, y: 1.5, anchor: .center)
+
+                             HStack {
+                                 Text(formatEventTime(elapsedTime))
+                                     .font(.system(size: 13, weight: .medium))
+                                 Spacer()
+                                 Text("-\(formatEventTime(remainingTime))")
+                                     .font(.system(size: 13, weight: .medium))
+                             }
+                             .foregroundColor(.white.opacity(0.8))
+                         }
+                         .padding(.top, 4)
+                     }
+                 }
+                 .padding(24)
+            }
+
+            // LAYER 4: Loading State (Top Level)
+            ZStack {
+                Color.black.opacity(0.6)
+                VStack(spacing: 12) {
+                    ProgressView()
+                        .scaleEffect(1.2)
+                        .tint(.white)
+                    Text("Joining...")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white)
+                }
+            }
+            .opacity(isJoining ? 1 : 0)
+            .animation(.easeInOut(duration: 0.2), value: isJoining)
+            .allowsHitTesting(false)
         }
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-
-    // MARK: - Helper Functions
-
-    private func formatDuration(_ interval: TimeInterval) -> String {
-        let minutes = Int(interval) / 60
-        let seconds = Int(interval) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
     }
 }
+
+

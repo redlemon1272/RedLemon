@@ -40,7 +40,7 @@ struct EventsView: View {
                             emptyStateView(icon: "film", message: "No movie events scheduled right now.")
                         } else {
                             // Movie Events List
-                            LazyVStack(spacing: 20) {
+                            VStack(spacing: 20) {
                                 ForEach(events) { event in
                                     // Check if previous event is finished (either by time OR by user completion)
                                     // We use lastUpdate here to ensure this recalculates when state changes

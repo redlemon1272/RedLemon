@@ -47,7 +47,7 @@ struct RoomListView: View {
                 .padding()
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 24) {
+                    VStack(spacing: 24) {
                         ForEach(appState.activeRooms) { room in
                             HeroRoomCard(room: room) {
                                 // Although joinRoom is synchronous, the closure is async, so we wrap it

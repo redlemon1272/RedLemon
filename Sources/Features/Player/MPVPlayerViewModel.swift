@@ -1337,16 +1337,21 @@ extension MPVPlayerViewModel {
                             return // Skip re-adding since they never technically left our model
                         }
 
-                        // Check if already exists
-                        if !updatedParticipants.contains(where: { $0.id == userId }) {
-                            // Extract metadata
+                        // Check if already exists using actualUserId (stable ID)
+                        if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
+                            // User exists - update their timestamp and name
+                            updatedParticipants[index].joinedAt = Date()
+                            if let name = metaUsername {
+                                updatedParticipants[index].name = name
+                            }
+                        } else {
+                            // New user - create with actualUserId
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
-                            // let avatarUrl = metadata?["avatar_url"] as? String // Unused
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970 
 
                             let newParticipant = Participant(
-                                id: userId,
+                                id: actualUserId, // Use stable ID
                                 name: username,
                                 isHost: isHostVal,
                                 isReady: false,
@@ -1373,7 +1378,7 @@ extension MPVPlayerViewModel {
                     case .leave:
                         // DEBOUNCE LEAVE: Wait 10 seconds before actually removing
                         // This handles flaky connections and Lobby->Player transitions
-                        print("⏳ Participant leaving (grace period started): \(userId)")
+                        print("⏳ Participant leaving (grace period started): \(actualUserId)")
                         
                         let task: Task<Void, Never> = Task { [weak self] in
                             // Wait 10 seconds (nano)
@@ -1388,8 +1393,8 @@ extension MPVPlayerViewModel {
                                 // Fetch FRESH list to avoid stale data race
                                 guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
                                 
-                                // Remove
-                                currentParticipants.removeAll(where: { $0.id == userId })
+                                // Remove using actualUserId
+                                currentParticipants.removeAll(where: { $0.id == actualUserId })
                                 print("👋 Participant left (confirmed): \(userId)")
 
                                 // Post-Load Gate Logic

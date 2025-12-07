@@ -93,23 +93,10 @@ actor StreamResolver {
             }
         }
 
-        // CRITICAL: Filter x265/HEVC streams (ALWAYS runs for compatibility)
-        let beforeCodecFilter = filteredStreams.count
-        let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-        filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
-            let hasBadCodec = badCodecs.contains { codec in
-                titleLower.contains(codec)
-            }
-            if hasBadCodec {
-                print("   🚫 RESOLVER BLOCKING x265/HEVC: \(stream.title)")
-            }
-            return !hasBadCodec
-        }
-        let afterCodecFilter = filteredStreams.count
-        if afterCodecFilter < beforeCodecFilter {
-            print("   🚫 RESOLVER FILTERED x265: \(beforeCodecFilter) → \(afterCodecFilter) streams")
-        }
+        // REMOVED: Upstream x265/HEVC filter
+        // We now handle this safely in StreamService with a tiered fallback (H.264 > x265 8bit > x265 10bit)
+        // This allows movies like "Five Nights at Freddy's" (which are 100% x265) to play.
+
 
         // CRITICAL: Filter AV1 streams (hardware incompatibility)
         let beforeAV1Filter = filteredStreams.count
@@ -383,10 +370,50 @@ actor StreamResolver {
         preferMultiSubMovies: Bool
     ) -> QualityBucket {
         
+        print("   --- Processing Bucket: \(quality) (Input: \(streams.count)) ---")
+        
         // Filter out bad patterns (redundant but safe)
-        let badPatterns = ["x265", "hevc", "cam", "ts"]
+        // Note: Removed x265/hevc from here to allow StreamService to decide
+        
+        // FIX: Use stricter matching for bad patterns to avoid frequent false positives
+        // e.g. "ts" matching "Nigh(ts)"
+        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener"]
+        // Note: "ts" is too dangerous as a substring match, removed it.
+        
         var filtered = streams.filter { stream in
-            !badPatterns.contains { stream.title.lowercased().contains($0) }
+             let titleLower = stream.title.lowercased()
+             
+             // Check against safe list of bad terms
+             for pattern in badPatterns {
+                 // Simple containment for longer unique words
+                 if titleLower.contains(pattern) {
+                     // Extra check for "cam" to avoid matching "webcam" or "camera" if those ever appeared (unlikely in movie titles but good practice)
+                     // validating word boundaries for short terms would be better, but "cam" is usually distinct.
+                     // A title like "The Camera" would fail.
+                     
+                     // Quick hack: if it's "cam", ensure it's surrounded by spaces or delimiters
+                     if pattern == "cam" {
+                         let regex = try? NSRegularExpression(pattern: "\\bcam\\b")
+                         let range = NSRange(location: 0, length: titleLower.utf16.count)
+                         if let match = regex?.firstMatch(in: titleLower, options: [], range: range) {
+                             print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (Strict): \(stream.title)")
+                             return false
+                         }
+                         continue // Contains "cam" but not as a word, so it's safe (e.g. "came")
+                     }
+                     
+                     print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern: \(stream.title)")
+                     return false
+                 }
+             }
+             
+             // Special check for .TS files (extension or explicit marking)
+             if titleLower.hasSuffix(".ts") || titleLower.contains(".ts ") || titleLower.contains(" ts ") {
+                  print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (TS): \(stream.title)")
+                  return false
+             }
+             
+            return true
         }
         
         // Sort
@@ -401,8 +428,14 @@ actor StreamResolver {
         // Seeder filter (skipped for cached)
         filtered = filtered.filter { stream in
             if stream.title.contains("⚡") { return true }
-            return (stream.seeders ?? 0) >= minSeeders
+            let hasSeeders = (stream.seeders ?? 0) >= minSeeders
+            if !hasSeeders {
+                print("   🚫 RESOLVER DROP (\(quality)): Low Seeders (\(stream.seeders ?? 0)): \(stream.title)")
+            }
+            return hasSeeders
         }
+        
+        print("   ✅ Bucket \(quality) Final Count: \(filtered.count)")
         
         if filtered.isEmpty { return QualityBucket(primary: nil, alternates: nil) }
         

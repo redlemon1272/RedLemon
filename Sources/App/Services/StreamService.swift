@@ -60,42 +60,90 @@ actor StreamService {
         case .sd: rawBucket = buckets.sd
         }
 
-        guard let bucket = rawBucket else {
-             throw APIError.noStreamsFound
-        }
-
-        // Build list of streams to try
+        // Build list of streams to try with Cross-Quality Fallback
+        // Priority: Requested (1080p) -> 720p -> 4K (Hail Mary)
         var streamsToTry: [Stream] = []
-        if let primary = bucket.primary {
-            streamsToTry.append(primary)
+        
+        // Helper to extract streams from a bucket
+        func extractStreams(from bucket: QualityBucket?) -> [Stream] {
+            var extracted: [Stream] = []
+            if let primary = bucket?.primary { extracted.append(primary) }
+            if let alternates = bucket?.alternates { extracted.append(contentsOf: alternates) }
+            return extracted
         }
-        if let alternates = bucket.alternates {
-            streamsToTry.append(contentsOf: alternates)
+        
+        // 1. Requested Quality (usually 1080p)
+        streamsToTry.append(contentsOf: extractStreams(from: rawBucket))
+        
+        if quality == .fullHD {
+            // 2. Fallback: 720p (Safe for older hardware)
+            let hdStreams = extractStreams(from: buckets.hd)
+             if !hdStreams.isEmpty {
+                print("   ➕ Added \(hdStreams.count) 720p streams as backup")
+                streamsToTry.append(contentsOf: hdStreams)
+            }
+            
+            // 3. Fallback: 4K (Last Resort - may lag on old hardware)
+            let uhdStreams = extractStreams(from: buckets.uhd4k)
+            if !uhdStreams.isEmpty {
+                print("   ➕ Added \(uhdStreams.count) 4K streams as 'Hail Mary' backup")
+                streamsToTry.append(contentsOf: uhdStreams)
+            }
         }
-
+        
         guard !streamsToTry.isEmpty else {
             throw APIError.noStreamsFound
         }
+        
+        print("📦 StreamService: Found \(streamsToTry.count) total streams to try (across all qualities)")
 
-        print("📦 StreamService: Found \(streamsToTry.count) streams to try")
-
-        // Step 3: Apply x265 Safety Filter
-        // Preserve server order but remove x265/HEVC
+        // Step 3: Apply Tiered Codec Safety Filter
+        // Goal: Prioritize H.264 (best compat), then 8-bit x265 (okay), then anything (last resort)
+        
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
-        let filteredStreams = streamsToTry.compactMap { stream -> Stream? in
+        let tenBitKeywords = ["10bit", "10-bit", "10 bit"]
+        
+        // Tier 1: Strict H.264 Preference (Original Behavior)
+        // Completely removes anything looking like x265
+        let tier1Streams = streamsToTry.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
-            let hasBadCodec = badCodecs.contains { codec in
-                titleLower.contains(codec)
-            }
-            if hasBadCodec {
-                print("🚫 StreamService: Blocking x265/HEVC: \(stream.title)")
-                return nil
-            }
-            return stream
+            let hasBadCodec = badCodecs.contains { titleLower.contains($0) }
+            return hasBadCodec ? nil : stream
         }
-
+        
+        var filteredStreams: [Stream] = tier1Streams
+        
+        if !filteredStreams.isEmpty {
+            print("✅ StreamService: Found \(filteredStreams.count) H.264 streams (Tier 1)")
+        } else {
+            print("⚠️ StreamService: No H.264 streams found. Attempting Tier 2 (x265 8-bit)...")
+            
+            // Tier 2: Allow x265 but BLOCK 10-bit (causes performance issues on old hardware)
+            let tier2Streams = streamsToTry.compactMap { stream -> Stream? in
+                let titleLower = stream.title.lowercased()
+                let isTenBit = tenBitKeywords.contains { titleLower.contains($0) }
+                if isTenBit {
+                    return nil // block 10-bit
+                }
+                return stream // allow 8-bit x265 (and any other codec)
+            }
+            
+            filteredStreams = tier2Streams
+            
+            if !filteredStreams.isEmpty {
+                print("⚠️ StreamService: Fallback to Tier 2 (x265 8-bit). Found \(filteredStreams.count) streams.")
+            } else {
+                print("⚠️ StreamService: No 8-bit streams found. Attempting Tier 3 (Everything)...")
+                
+                // Tier 3: "Hail Mary" - Use whatever we have
+                // Better to play with lag than not play at all
+                filteredStreams = streamsToTry
+                print("⚠️ StreamService: Fallback to Tier 3 (All Codecs). Found \(filteredStreams.count) streams.")
+            }
+        }
+        
         guard !filteredStreams.isEmpty else {
-            print("❌ StreamService: No streams available after x265 safety filter")
+            print("❌ StreamService: No streams available even after Tier 3 fallback")
             throw APIError.noStreamsFound
         }
 

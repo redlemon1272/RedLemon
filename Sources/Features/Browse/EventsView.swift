@@ -347,12 +347,33 @@ struct EventsView: View {
                 } else {
                     // Create new event room
                     print("📝 Creating new event room: \(roomId)")
+
+                    // NEW: Resolve stream beforehand (System events are created lazily by first user)
+                    // This ensures the room is "seeded" with a valid stream for everyone
+                    var initialStreamHash: String? = nil
+                    do {
+                        print("⚡️ Resolving stream for system event creation...")
+                        // System events default to FullHD
+                        let result = try await StreamService.shared.resolveStream(
+                            item: event.mediaItem,
+                            quality: .fullHD,
+                            season: nil,
+                            episode: nil
+                        )
+                        initialStreamHash = result.stream.infoHash
+                        print("✅ Stream resolved for system event: \(result.stream.title)")
+                        print("   Hash: \(initialStreamHash ?? "nil")")
+                    } catch {
+                        print("⚠️ Failed to resolve seed stream for system event: \(error)")
+                        // Continue creation without a hash (clients will have to resolve themselves as fallback)
+                    }
+
                     _ = try await SupabaseClient.shared.createRoom(
                         id: roomId,
                         name: event.mediaItem.name,
                         hostUserId: userId, // First user becomes "host" for DB purposes
                         hostUsername: "RedLemon Events",
-                        streamHash: nil,
+                        streamHash: initialStreamHash,
                         imdbId: event.mediaItem.id,
                         posterUrl: event.mediaItem.poster,
                         backdropUrl: event.mediaItem.background,

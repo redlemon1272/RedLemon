@@ -748,7 +748,8 @@ class MPVWrapper: ObservableObject {
             var score = 0
 
             // 1. Language Score (+1000 for English)
-            let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
+            // Check for: "en", "en-US", "en-GB", "eng", "english" in title
+            let isEnglish = langLower.hasPrefix("en") || langLower.contains("eng") || titleLower.contains("english")
             if isEnglish { score += 1000 }
 
             // 2. Channel Score (+10 per channel)

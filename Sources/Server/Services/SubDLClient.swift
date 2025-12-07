@@ -206,9 +206,8 @@ final class SubDLClient {
         listProcess.standardOutput = listPipe
         
         try listProcess.run()
-        listProcess.waitUntilExit()
-        
         let listData = listPipe.fileHandleForReading.readDataToEndOfFile()
+        listProcess.waitUntilExit()
         guard let listOutput = String(data: listData, encoding: .utf8) else {
             throw Abort(.internalServerError, reason: "Failed to list zip contents")
         }
@@ -282,9 +281,8 @@ final class SubDLClient {
         extractProcess.standardOutput = extractPipe
         
         try extractProcess.run()
-        extractProcess.waitUntilExit()
-        
         let extractedData = extractPipe.fileHandleForReading.readDataToEndOfFile()
+        extractProcess.waitUntilExit()
         
         // Try decoding with UTF-8 first, then ISO-8859-1 (common for subs)
         if let text = String(data: extractedData, encoding: .utf8) {

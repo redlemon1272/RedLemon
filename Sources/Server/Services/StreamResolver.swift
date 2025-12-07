@@ -436,7 +436,33 @@ actor StreamResolver {
 
     private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
         let lower = title.lowercased()
-        let isForeign = lower.contains("french") || lower.contains("german") || lower.contains("spanish") || lower.contains("italian")
+        
+        // Explicit foreign language indicators (primary audio is NOT English)
+        let isForeign = lower.contains("french") || 
+                       lower.contains("german") || 
+                       lower.contains("spanish") || 
+                       lower.contains("italian") ||
+                       lower.contains("portuguese") ||
+                       lower.contains("russian") ||
+                       lower.contains("japanese") ||
+                       lower.contains("korean") ||
+                       lower.contains("chinese")
+        
+        // French-specific audio indicators (VF = Version Française)
+        // These indicate French is the primary audio, even if English is also present
+        let frenchAudioIndicators = [
+            " vf ", ".vf.", "-vf-", "_vf_",  // Version Française
+            " vff ", ".vff.", "-vff-",         // Version Française Française
+            " vfq ", ".vfq.", "-vfq-",         // Version Française Québécoise
+            " vf2 ", ".vf2.", "-vf2-",         // Version Française 2
+            "vostfr",                             // Version Originale Sous-Titrée FRançais
+            "truefrench"                          // TrueFrench (French audio)
+        ]
+        let hasFrenchAudio = frenchAudioIndicators.contains { lower.contains($0) }
+        
+        // If it has French audio indicators, block it
+        if hasFrenchAudio { return false }
+        
         let hasEnglish = lower.contains("english") || lower.contains("eng") || lower.contains("en")
         let isMulti = lower.contains("multi") || lower.contains("dual")
         

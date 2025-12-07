@@ -309,7 +309,39 @@ actor StreamService {
         return await withTaskGroup(of: Subtitle?.self) { group -> [Subtitle] in
             for subtitle in subtitles {
                 group.addTask { () -> Subtitle? in
-                    guard let url = URL(string: subtitle.url) else { return nil }
+                    NSLog("🔍 DEBUG: Processing subtitle URL: %@", subtitle.url)
+                    
+                    // Handle SubDL subtitles (both proxy URLs and raw API paths)
+                    // Proxy URLs: http://127.0.0.1:47253/subtitles/subdl/... (already converted, skip download)
+                    // Raw API URLs: /subtitle/... (need to convert to proxy URL)
+                    if subtitle.url.contains("/subtitles/subdl/") {
+                        NSLog("✅ DEBUG: SubDL proxy URL detected, skipping download")
+                        return subtitle // Already a proxy URL, return as-is
+                    }
+                    
+                    if subtitle.url.hasPrefix("/subtitle/") {
+                        NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
+                        // Convert raw SubDL URL to proxy URL
+                        let encodedPath = Data(subtitle.url.utf8).base64EncodedString()
+                        let proxyURL = "http://127.0.0.1:47253/subtitles/subdl/\(encodedPath)"
+                        
+                        // Create new subtitle with proxy URL
+                        return Subtitle(
+                            id: subtitle.id,
+                            url: proxyURL,
+                            lang: subtitle.lang,
+                            label: subtitle.label,
+                            srclang: subtitle.srclang,
+                            kind: subtitle.kind,
+                            provider: subtitle.provider
+                        )
+                    }
+                    
+                    NSLog("⚠️ DEBUG: Not a SubDL URL, attempting download")
+                    guard let url = URL(string: subtitle.url) else { 
+                        NSLog("❌ StreamService: Failed to download subtitle: unsupported URL")
+                        return nil 
+                    }
 
                     do {
                         let (data, response) = try await session.data(from: url)

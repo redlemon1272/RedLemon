@@ -819,7 +819,7 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
 
         } else {
             // For movies or when episode not specified, use top 3 English subtitles
-            filteredSubtitles = Array(englishSubtitles.prefix(3))
+            filteredSubtitles = Array(englishSubtitles.prefix(10))
             NSLog("✅ Movie or no episode specified, using top %d English subtitle options", filteredSubtitles.count)
         }
 

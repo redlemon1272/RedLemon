@@ -9,6 +9,27 @@ import Foundation
 import SwiftUI
 import Compression
 
+// Timeout error for subtitle downloads
+struct TimeoutError: Error {}
+
+// Helper function to add timeout to async operations
+func withTimeout<T>(seconds: TimeInterval, operation: @escaping () async throws -> T) async throws -> T {
+    try await withThrowingTaskGroup(of: T.self) { group in
+        group.addTask {
+            try await operation()
+        }
+        
+        group.addTask {
+            try await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
+            throw TimeoutError()
+        }
+        
+        let result = try await group.next()!
+        group.cancelAll()
+        return result
+    }
+}
+
 @MainActor
 class MPVPlayerViewModel: ObservableObject {
     // MPV wrapper instance
@@ -247,8 +268,8 @@ class MPVPlayerViewModel: ObservableObject {
         // Always scan for embedded subtitles to prefer them when available
         startEmbeddedSubtitleScan()
 
-        // Load subtitles immediately if they're already downloaded (local paths)
-        // Otherwise download them in background
+        // Load subtitles immediately if they're already downloaded (local file paths only)
+        // SubDL proxy URLs need to be downloaded to local files first
         let areSubtitlesLocal = subtitles.allSatisfy { $0.url.starts(with: "/") }
 
         if areSubtitlesLocal && !subtitles.isEmpty {
@@ -262,25 +283,67 @@ class MPVPlayerViewModel: ObservableObject {
                 NSLog("ℹ️ External subtitles loaded as additional options (embedded subs take priority)")
             }
         } else if !subtitles.isEmpty {
-            // Subtitles need to be downloaded (fallback for older code paths)
-            NSLog("⚠️ Subtitles not pre-downloaded, downloading in background...")
-            Task.detached(priority: .background) {
-                // Wait for video to establish playback first
-                try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds - let playback stabilize
-
-                // Download and load all subtitle files with their labels
-                for (index, subtitle) in subtitles.enumerated() {
-                    NSLog("📝 RedLemon: Downloading subtitle %d (%@) from: %@", index + 1, subtitle.label, subtitle.url)
-
-                    // Download subtitle file locally first
-                    if let localPath = await self.downloadSubtitle(url: subtitle.url) {
-                        NSLog("✅ RedLemon: Subtitle %d downloaded to: %@", index + 1, localPath)
-                        self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
-                    } else {
-                        NSLog("❌ RedLemon: Failed to download subtitle %d", index + 1)
+            // Subtitles are either SubDL proxy URLs or need to be downloaded
+            let hasSubDLSubtitles = subtitles.contains { $0.url.contains("/subtitles/subdl/") }
+            
+            if hasSubDLSubtitles {
+                // Download SubDL subtitles to local files, then load into MPV
+                NSLog("ℹ️ SubDL subtitles detected - downloading to local files in background...")
+                Task {
+                    // Wait for playback to stabilize first
+                    try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
+                    
+                    for (index, subtitle) in subtitles.enumerated() {
+                        do {
+                            NSLog("📝 Downloading SubDL subtitle %d (%@) from proxy...", index + 1, subtitle.label)
+                            NSLog("🔍 Subtitle URL: %@", subtitle.url)
+                            
+                            // Download from proxy server to local file with timeout
+                            let downloadTask = Task {
+                                return await self.downloadSubtitle(url: subtitle.url)
+                            }
+                            
+                            // Wait for download with timeout
+                            let localPath = try await withTimeout(seconds: 45) {
+                                await downloadTask.value
+                            }
+                            
+                            if let localPath = localPath {
+                                NSLog("✅ SubDL subtitle %d downloaded to: %@", index + 1, localPath)
+                                self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
+                                NSLog("✅ SubDL subtitle %d loaded into MPV", index + 1)
+                            } else {
+                                NSLog("❌ Failed to download SubDL subtitle %d - downloadSubtitle returned nil", index + 1)
+                            }
+                        } catch is TimeoutError {
+                            NSLog("❌ Timeout downloading SubDL subtitle %d (exceeded 45 seconds)", index + 1)
+                        } catch {
+                            NSLog("❌ Exception downloading SubDL subtitle %d: %@", index + 1, error.localizedDescription)
+                        }
                     }
+                    NSLog("✅ SubDL subtitle download loop completed")
                 }
-                NSLog("ℹ️ External subtitles downloaded and added as options (embedded subs take priority)")
+            } else {
+                // Download other subtitles in background (fallback for older code paths)
+                NSLog("⚠️ Subtitles not pre-downloaded, downloading in background...")
+                Task.detached(priority: .background) {
+                    // Wait for video to establish playback first
+                    try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds - let playback stabilize
+
+                    // Download and load all subtitle files with their labels
+                    for (index, subtitle) in subtitles.enumerated() {
+                        NSLog("📝 RedLemon: Downloading subtitle %d (%@) from: %@", index + 1, subtitle.label, subtitle.url)
+
+                        // Download subtitle file locally first
+                        if let localPath = await self.downloadSubtitle(url: subtitle.url) {
+                            NSLog("✅ RedLemon: Subtitle %d downloaded to: %@", index + 1, localPath)
+                            self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
+                        } else {
+                            NSLog("❌ RedLemon: Failed to download subtitle %d", index + 1)
+                        }
+                    }
+                    NSLog("ℹ️ External subtitles downloaded and added as options (embedded subs take priority)")
+                }
             }
         }
 
@@ -987,22 +1050,45 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Subtitle Download
 
-    private func downloadSubtitle(url: String) async -> String? {
+    nonisolated private func downloadSubtitle(url: String) async -> String? {
+        NSLog("🔍 downloadSubtitle() called with URL: %@", url)
         guard let subtitleURL = URL(string: url) else {
             NSLog("❌ RedLemon: Invalid subtitle URL")
             return nil
         }
 
         do {
-            let (data, response) = try await URLSession.shared.data(from: subtitleURL)
+            NSLog("📡 Starting URLSession download...")
+            // Use custom session with longer timeout for SubDL proxy downloads
+            // (server needs time to download from SubDL, extract ZIP, convert to VTT)
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 30.0  // 30 seconds
+            config.timeoutIntervalForResource = 30.0
+            let session = URLSession(configuration: config)
+            
+            NSLog("⏳ Waiting for server response...")
+            let (data, response) = try await session.data(from: subtitleURL)
+            NSLog("✅ Received response! Data size: %d bytes", data.count)
 
-            // Check if it's a ZIP archive
+            // Check if it's actually a ZIP archive by inspecting the content
+            // Don't rely on URL or Content-Type for SubDL proxy URLs
             let contentType = (response as? HTTPURLResponse)?.value(forHTTPHeaderField: "Content-Type") ?? ""
             NSLog("🔍 Content-Type: %@", contentType)
-            NSLog("🔍 URL: %@", url)
-            NSLog("🔍 URL ends with .zip: %@", url.lowercased().hasSuffix(".zip") ? "YES" : "NO")
-            let isZip = contentType.contains("zip") || contentType.contains("octet-stream") || url.lowercased().hasSuffix(".zip")
-            NSLog("🔍 isZip = %@", isZip ? "YES" : "NO")
+            NSLog("🔍 Downloaded %d bytes", data.count)
+            
+            // Check if content is actually VTT (proxy server returns VTT even if URL has .zip)
+            if let text = String(data: data, encoding: .utf8), text.hasPrefix("WEBVTT") {
+                NSLog("✅ Detected VTT content from proxy server")
+                // Save VTT directly
+                let tempDir = FileManager.default.temporaryDirectory
+                let subtitleFileName = "subtitle_\(UUID().uuidString).vtt"
+                let localURL = tempDir.appendingPathComponent(subtitleFileName)
+                try text.write(to: localURL, atomically: true, encoding: .utf8)
+                return localURL.path
+            }
+            
+            // Check for ZIP magic bytes (PK\x03\x04)
+            let isZip = data.count > 4 && data[0] == 0x50 && data[1] == 0x4B && data[2] == 0x03 && data[3] == 0x04
 
             var subtitleText: String
 
@@ -1037,7 +1123,7 @@ class MPVPlayerViewModel: ObservableObject {
         }
     }
 
-    private func extractSRTFromZip(data: Data) throws -> String {
+    nonisolated private func extractSRTFromZip(data: Data) throws -> String {
         // Use libz to extract (7z format uses zlib internally)
         // First, try to find .srt file in archive
 
@@ -1075,7 +1161,7 @@ class MPVPlayerViewModel: ObservableObject {
         return srtContent
     }
 
-    private func convertSRTToVTT(srt: String) -> String {
+    nonisolated private func convertSRTToVTT(srt: String) -> String {
         var vtt = "WEBVTT\n\n"
 
         // Split into cues (separated by double newlines in SRT)

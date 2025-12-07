@@ -116,7 +116,15 @@ class LobbyViewModel: ObservableObject {
                 switch action {
                 case .join:
                     // Check if already exists
-                    if !self.participants.contains(where: { $0.id == userId }) {
+                    if let index = self.participants.firstIndex(where: { $0.id == userId }) {
+                        // User exists - update their timestamp so the subsequent 'leave' event
+                        // (which happens on metadata updates) knows they just 'joined' and doesn't remove them.
+                        self.participants[index].joinedAt = Date()
+                        // Also update metadata if needed
+                        let username = metadata?["username"] as? String ?? "User"
+                        self.participants[index].name = username
+                    } else {
+                        // New user
                         let username = metadata?["username"] as? String ?? "User"
                         let _ = metadata?["avatar_url"] as? String
 

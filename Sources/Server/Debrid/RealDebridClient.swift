@@ -233,7 +233,7 @@ actor RealDebridClient {
                 }
             }
         } else {
-        } else {
+
             // Movie: select largest video file OR match by title
             let videoExtensions = ["mkv", "mp4", "avi", "mov", "m4v", "webm"]
             let videoFiles = initialInfo.files?.filter { file in

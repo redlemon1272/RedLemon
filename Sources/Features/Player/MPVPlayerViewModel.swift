@@ -399,6 +399,22 @@ class MPVPlayerViewModel: ObservableObject {
             }
         }
         mpvObserverTasks.append(durationTask)
+        
+        let fileLoadedTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await loaded in self.mpvWrapper.$isFileLoaded.values {
+                if loaded {
+                    NSLog("📂 File loaded signal received. WatchParty: %@, SentReady: %@", self.isInWatchParty ? "YES" : "NO", self.hasSentReadySignal ? "YES" : "NO")
+                    // Watch Party Ready Gate Fallback:
+                    // If duration is still 0 (e.g. ISO files), the file loaded event is our backup trigger
+                    if self.isInWatchParty && !self.hasSentReadySignal {
+                        NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
+                        self.sendReadySignal()
+                    }
+                }
+            }
+        }
+        mpvObserverTasks.append(fileLoadedTask)
     }
 
     // MARK: - Metadata Fetching

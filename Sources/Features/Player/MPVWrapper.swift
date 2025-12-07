@@ -19,6 +19,7 @@ class MPVWrapper: ObservableObject {
     @Published var isBuffering = false
     @Published var volume: Int = 100
     @Published var playbackFinished = false
+    @Published var isFileLoaded = false
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -207,12 +208,14 @@ class MPVWrapper: ObservableObject {
         case MPV_EVENT_NONE: break
         case MPV_EVENT_START_FILE:
             isBuffering = true
+            isFileLoaded = false
             // Natural cleanup point - video starting
             // Cleanup removed to prevent crash
             // Reset finished state on new file start
             playbackFinished = false
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
+            isFileLoaded = true
             // Auto-select English audio and subtitles BEFORE playback starts (no stutter)
             autoSelectEnglishAudio()
             autoSelectEnglishSubtitles()

@@ -462,6 +462,19 @@ class SupabaseClient {
         NSLog("✅ Persisted stream selection to room \(roomId)")
     }
 
+    /// Update room visibility (e.g. Soft Close)
+    func setRoomVisibility(roomId: String, isPublic: Bool) async throws {
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: [
+                "is_public": isPublic,
+                "last_activity": ISO8601DateFormatter().string(from: Date())
+            ],
+            query: ["id": "eq.\(roomId)"]
+        )
+    }
+
     // MARK: - Chat
 
     /// Send chat message

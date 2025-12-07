@@ -408,10 +408,14 @@ class LobbyViewModel: ObservableObject {
             // Leave Supabase room (use current user ID, not just host ID)
             if isHost {
                 do {
+                    // Soft Close: Hide room from public list
+                    print("🙈 Host leaving: Soft closing room \(room.id)")
+                    try await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
+                    
                     try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: UUID(uuidString: room.hostId)!)
-                    NSLog("✅ Left room \(room.id)")
+                    NSLog("✅ Host Left room \(room.id)")
                 } catch {
-                    NSLog("❌ Failed to leave room: \(error)")
+                    NSLog("❌ Failed to soft close/leave room: \(error)")
                 }
             } else if let userId = appState?.currentUserId {
                 do {

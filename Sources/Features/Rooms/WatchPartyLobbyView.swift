@@ -435,7 +435,15 @@ struct WatchPartyLobbyView: View {
                         .buttonStyle(.plain)
                         .disabled(viewModel.isStarting)
 
-                        if viewModel.isStarting {
+                        if viewModel.isResolvingStream {
+                            HStack {
+                                ProgressView()
+                                    .scaleEffect(0.8)
+                                Text("Resolving stream...")
+                                    .foregroundColor(.white)
+                            }
+                            .padding()
+                        } else if viewModel.isStarting {
                             HStack {
                                 ProgressView()
                                     .scaleEffect(0.8)

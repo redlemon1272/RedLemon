@@ -24,6 +24,7 @@ class LobbyViewModel: ObservableObject {
 
     // Realtime connection status for UI feedback
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
+    @Published var isResolvingStream: Bool = false // UI indicator for stream resolution
 
     private var room: WatchPartyRoom
     private var isHost: Bool
@@ -598,6 +599,7 @@ class LobbyViewModel: ObservableObject {
 
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
         // This ensures guests don't fetch nil stream details
+        isResolvingStream = true
         var preResolvedStream: Stream?
         do {
             preResolvedStream = try await appState.resolveAndPersistForWatchParty(
@@ -614,8 +616,10 @@ class LobbyViewModel: ObservableObject {
             ])
             isStarting = false
             transitionState.isStarting = false
+            isResolvingStream = false
             return
         }
+        isResolvingStream = false
         
         guard let finalStream = preResolvedStream else {
              isStarting = false

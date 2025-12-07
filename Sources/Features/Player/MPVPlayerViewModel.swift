@@ -1583,6 +1583,15 @@ extension MPVPlayerViewModel {
                 }
             }
 
+            // FORCE PLAY SAFETY NET (GUEST): Retrigger play if still at 0.0 after 1.5s
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                guard let self = self else { return }
+                if self.mpvWrapper.currentTime < 0.1 && self.isPlaying {
+                    NSLog("⚠️ PLAYBACK SAFETY NET (GUEST): Force-starting playback (stuck at 0.0)")
+                    self.mpvWrapper.play()
+                }
+            }
+
         case .playbackState:
             // Guest syncs to host's playback state with advanced smoothness optimization
             let hostTimestamp = message.timestamp
@@ -1943,6 +1952,16 @@ extension MPVPlayerViewModel {
         showWaitingForGuests = false
         mpvWrapper.play()
         isPlaying = true
+
+        // FORCE PLAY SAFETY NET: Retrigger play if still at 0.0 after 1.5s
+        // This fixes the "Black Screen at 0:00" issue where the initial command is missed
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            guard let self = self else { return }
+            if self.mpvWrapper.currentTime < 0.1 && self.isPlaying {
+                NSLog("⚠️ PLAYBACK SAFETY NET: Force-starting playback (stuck at 0.0)")
+                self.mpvWrapper.play()
+            }
+        }
 
         // Send Play signal
         let syncMessage = SyncMessage(

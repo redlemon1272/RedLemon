@@ -50,6 +50,7 @@ struct RoomListView: View {
                     LazyVStack(spacing: 24) {
                         ForEach(appState.activeRooms) { room in
                             HeroRoomCard(room: room) {
+                                // Although joinRoom is synchronous, the closure is async, so we wrap it
                                 joinRoom(room: room)
                             }
                         }
@@ -132,7 +133,7 @@ struct RoomListView: View {
             do {
                 // Cleanup stale participants first to get accurate count
                 try? await SupabaseClient.shared.cleanupStaleParticipants()
-                
+
                 // Fetch rooms from Supabase backend with pagination
                 print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize))...")
                 let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset)

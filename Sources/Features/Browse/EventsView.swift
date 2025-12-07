@@ -44,11 +44,11 @@ struct EventsView: View {
                                 ForEach(events) { event in
                                     // Check if previous event is finished (either by time OR by user completion)
                                     // We use lastUpdate here to ensure this recalculates when state changes
-                                    let _ = lastUpdate 
+                                    let _ = lastUpdate
                                     let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
 
                                     HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
-                                        joinEvent(event)
+                                        await joinEvent(event)
                                     }
                                 }
                             }
@@ -241,13 +241,17 @@ struct EventsView: View {
                     return isInLobby || isNextEventAfterFinished
                 }) {
                     print("🔄 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
-                    self.joinEvent(lobbyEvent)
+                    Task {
+                        await self.joinEvent(lobbyEvent)
+                    }
                     self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
                 } else if let liveEvent = scheduledEvents.first(where: {
                     $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id)
                 }) {
                     print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
-                    self.joinEvent(liveEvent)
+                    Task {
+                        await self.joinEvent(liveEvent)
+                    }
                     self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
                 } else {
                     print("⚠️ No eligible event found for auto-join")
@@ -318,7 +322,7 @@ struct EventsView: View {
         timer = nil
     }
 
-    private func joinEvent(_ event: EventItem) {
+    private func joinEvent(_ event: EventItem) async {
         print("🎟️ Joining event: \(event.mediaItem.name)")
         print("   Event start time: \(event.startTime)")
         print("   Event duration: \(event.duration)s")
@@ -330,67 +334,65 @@ struct EventsView: View {
         let roomId = "event_\(event.mediaItem.id)"
 
         // Create/join event room in Supabase for chat
-        Task {
-            do {
-                guard let userId = appState.currentUserId else {
-                    print("⚠️ No user ID - skipping room creation")
-                    createLocalEventRoom(event: event, roomId: roomId)
-                    return
-                }
-
-                // Try to get existing room
-                let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
-                if existingRoom != nil {
-                    print("✅ Event room already exists: \(roomId)")
-                    // Join the existing room
-                    try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
-                } else {
-                    // Create new event room
-                    print("📝 Creating new event room: \(roomId)")
-
-                    // NEW: Resolve stream beforehand (System events are created lazily by first user)
-                    // This ensures the room is "seeded" with a valid stream for everyone
-                    var initialStreamHash: String? = nil
-                    do {
-                        print("⚡️ Resolving stream for system event creation...")
-                        // System events default to FullHD
-                        let result = try await StreamService.shared.resolveStream(
-                            item: event.mediaItem,
-                            quality: .fullHD,
-                            season: nil,
-                            episode: nil
-                        )
-                        initialStreamHash = result.stream.infoHash
-                        print("✅ Stream resolved for system event: \(result.stream.title)")
-                        print("   Hash: \(initialStreamHash ?? "nil")")
-                    } catch {
-                        print("⚠️ Failed to resolve seed stream for system event: \(error)")
-                        // Continue creation without a hash (clients will have to resolve themselves as fallback)
-                    }
-
-                    _ = try await SupabaseClient.shared.createRoom(
-                        id: roomId,
-                        name: event.mediaItem.name,
-                        hostUserId: userId, // First user becomes "host" for DB purposes
-                        hostUsername: "RedLemon Events",
-                        streamHash: initialStreamHash,
-                        imdbId: event.mediaItem.id,
-                        posterUrl: event.mediaItem.poster,
-                        backdropUrl: event.mediaItem.background,
-                        season: nil,
-                        episode: nil,
-                        isPublic: true
-                    )
-                    // Join the room we just created
-                    try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
-                }
-
+        do {
+            guard let userId = appState.currentUserId else {
+                print("⚠️ No user ID - skipping room creation")
                 createLocalEventRoom(event: event, roomId: roomId)
-            } catch {
-                print("❌ Failed to create/join event room: \(error)")
-                // Fall back to local-only room (no chat sync)
-                createLocalEventRoom(event: event, roomId: roomId)
+                return
             }
+
+            // Try to get existing room
+            let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
+            if existingRoom != nil {
+                print("✅ Event room already exists: \(roomId)")
+                // Join the existing room
+                try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
+            } else {
+                // Create new event room
+                print("📝 Creating new event room: \(roomId)")
+
+                // NEW: Resolve stream beforehand (System events are created lazily by first user)
+                // This ensures the room is "seeded" with a valid stream for everyone
+                var initialStreamHash: String? = nil
+                do {
+                    print("⚡️ Resolving stream for system event creation...")
+                    // System events default to FullHD
+                    let result = try await StreamService.shared.resolveStream(
+                        item: event.mediaItem,
+                        quality: .fullHD,
+                        season: nil,
+                        episode: nil
+                    )
+                    initialStreamHash = result.stream.infoHash
+                    print("✅ Stream resolved for system event: \(result.stream.title)")
+                    print("   Hash: \(initialStreamHash ?? "nil")")
+                } catch {
+                    print("⚠️ Failed to resolve seed stream for system event: \(error)")
+                    // Continue creation without a hash (clients will have to resolve themselves as fallback)
+                }
+
+                _ = try await SupabaseClient.shared.createRoom(
+                    id: roomId,
+                    name: event.mediaItem.name,
+                    hostUserId: userId, // First user becomes "host" for DB purposes
+                    hostUsername: "RedLemon Events",
+                    streamHash: initialStreamHash,
+                    imdbId: event.mediaItem.id,
+                    posterUrl: event.mediaItem.poster,
+                    backdropUrl: event.mediaItem.background,
+                    season: nil,
+                    episode: nil,
+                    isPublic: true
+                )
+                // Join the room we just created
+                try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
+            }
+
+            createLocalEventRoom(event: event, roomId: roomId)
+        } catch {
+            print("❌ Failed to create/join event room: \(error)")
+            // Fall back to local-only room (no chat sync)
+            createLocalEventRoom(event: event, roomId: roomId)
         }
     }
 
@@ -535,10 +537,11 @@ struct EventItem: Identifiable {
 struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
-    let onJoin: () -> Void
+    let onJoin: () async -> Void
 
     @State private var currentTime = TimeService.shared.now
     @State private var timer: Timer?
+    @State private var isJoining = false
 
     var body: some View {
         Button(action: {
@@ -546,7 +549,25 @@ struct HeroEventCard: View {
             // 1. It's the live event (index 0) and not finished, OR
             // 2. It's the next event (index 1) and in lobby state (or override is true)
             if (event.isLive && !event.isFinished) || event.isInLobby || isLobbyOverride {
-                onJoin()
+                guard !isJoining else { return }
+                isJoining = true
+                Task {
+                    // Slight delay to ensure "Joining" state renders and provides visual feedback
+                    // especially for fast operations or when the main thread is about to be busy
+                    try? await Task.sleep(nanoseconds: 50_000_000) // 0.05s
+                    await onJoin()
+                    // We don't strictly need to set isJoining = false here if we navigate away,
+                    // but it's good practice in case navigation fails or is cancelled.
+                    // However, for this UX, sticking to "Loading..." until the view disappears is usually better.
+                    // But if it fails, we should reset.
+                    // For now, let's reset it after a timeout or if we assume success/fail handling happens elsewhere.
+                    // Actually, since onJoin is async, we can wait for it.
+                    // If detailed error handling isn't there, we might want to reset locally.
+                    // Let's reset it on main actor after await.
+                    await MainActor.run {
+                        isJoining = false
+                    }
+                }
             }
         }) {
             ZStack(alignment: .topLeading) {
@@ -582,6 +603,24 @@ struct HeroEventCard: View {
                     }
                 )
                 .cornerRadius(16)
+
+                // Loading Overlay
+                if isJoining {
+                    ZStack {
+                        Color.black.opacity(0.6)
+                        VStack(spacing: 12) {
+                            ProgressView()
+                                .scaleEffect(1.2)
+                                .tint(.white)
+                            Text("Joining...")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .transition(.opacity)
+                    .zIndex(100)
+                    .cornerRadius(16)
+                }
 
                 // Content Overlay
                 VStack(alignment: .leading, spacing: 0) {

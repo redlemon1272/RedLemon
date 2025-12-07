@@ -2,10 +2,22 @@ import SwiftUI
 
 struct HeroRoomCard: View {
     let room: WatchPartyRoom
-    let onJoin: () -> Void
-    
+    let onJoin: () async -> Void
+    @State private var isJoining = false
+
     var body: some View {
-        Button(action: onJoin) {
+        Button(action: {
+            guard !isJoining else { return }
+            isJoining = true
+            Task {
+                // Slight delay to ensure "Joining" state renders
+                try? await Task.sleep(nanoseconds: 50_000_000) // 0.05s
+                await onJoin()
+                await MainActor.run {
+                    isJoining = false
+                }
+            }
+        }) {
             ZStack(alignment: .topLeading) {
                 // Full Background Image with Gradient
                 AsyncImage(url: URL(string: room.mediaItem?.background ?? room.mediaItem?.poster ?? room.posterURL ?? "")) { image in
@@ -39,7 +51,25 @@ struct HeroRoomCard: View {
                     }
                 )
                 .cornerRadius(16)
-                
+
+                // Loading Overlay
+                if isJoining {
+                    ZStack {
+                        Color.black.opacity(0.6)
+                        VStack(spacing: 12) {
+                            ProgressView()
+                                .scaleEffect(1.2)
+                                .tint(.white)
+                            Text("Joining...")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(.white)
+                        }
+                    }
+                    .transition(.opacity)
+                    .zIndex(100)
+                    .cornerRadius(16)
+                }
+
                 // Content Overlay
                 VStack(alignment: .leading, spacing: 0) {
                     // Top Section: Badges
@@ -78,9 +108,9 @@ struct HeroRoomCard: View {
                                     .shadow(color: .green.opacity(0.5), radius: 4, x: 0, y: 2)
                             )
                         }
-                        
+
                         Spacer()
-                        
+
                         // Language Badge (Mocked for now)
                         HStack(spacing: 4) {
                             Text("🇺🇸") // Placeholder flag
@@ -92,7 +122,7 @@ struct HeroRoomCard: View {
                         .padding(.vertical, 5)
                         .background(Material.thinMaterial)
                         .clipShape(Capsule())
-                        
+
                         // Participants Badge
                         HStack(spacing: 4) {
                             Image(systemName: "person.2.fill")
@@ -107,9 +137,9 @@ struct HeroRoomCard: View {
                         .clipShape(Capsule())
                     }
                     .padding(16)
-                    
+
                     Spacer()
-                    
+
                     // Bottom Section: Info
                     VStack(alignment: .leading, spacing: 6) {
                         // Host Description (if available)
@@ -120,14 +150,14 @@ struct HeroRoomCard: View {
                                 .lineLimit(1)
                                 .padding(.bottom, 2)
                         }
-                        
+
                         // Title
                         Text(room.mediaItem?.name ?? room.episodeTitle ?? "Unknown Title")
                             .font(.system(size: 24, weight: .bold))
                             .foregroundColor(.white)
                             .lineLimit(2)
                             .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
-                        
+
                         // Metadata Row
                         HStack(spacing: 12) {
                             // Host Name
@@ -139,7 +169,7 @@ struct HeroRoomCard: View {
                                     .font(.system(size: 13, weight: .medium))
                                     .foregroundColor(.white.opacity(0.9))
                             }
-                            
+
                             if let year = room.mediaItem?.year {
                                 Text("•")
                                     .foregroundColor(.white.opacity(0.5))
@@ -147,7 +177,7 @@ struct HeroRoomCard: View {
                                     .font(.system(size: 13))
                                     .foregroundColor(.white.opacity(0.8))
                             }
-                            
+
                             if let runtime = room.mediaItem?.runtime {
                                 Text("•")
                                     .foregroundColor(.white.opacity(0.5))

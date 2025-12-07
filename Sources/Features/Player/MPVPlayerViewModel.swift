@@ -1007,6 +1007,21 @@ class MPVPlayerViewModel: ObservableObject {
             messages.removeFirst(messages.count - maxCount)
         }
     }
+    
+    /// Adds a local system message to the chat (not broadcasted)
+    private func addSystemMessage(_ text: String) {
+        let message = ChatMessage(
+            id: UUID().uuidString,
+            username: "System",
+            text: text,
+            timestamp: Date(),
+            isSystem: true
+        )
+        Task { @MainActor in
+            self.messages.append(message)
+            self.trimChatMessages()
+        }
+    }
 
     // MARK: - Cleanup
 
@@ -1199,12 +1214,17 @@ class MPVPlayerViewModel: ObservableObject {
 
 // MARK: - Models
 
+// MARK: - Models
+
 struct ChatMessage: Identifiable {
     let id: String
     let username: String
     let text: String
     let timestamp: Date
+    var isSystem: Bool = false
 }
+
+
 
 // MARK: - Response Models
 
@@ -1358,6 +1378,12 @@ extension MPVPlayerViewModel {
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal)
                             )
                             updatedParticipants.append(newParticipant)
+                            
+                            // 💬 System Message: Join
+                            // Only show for others, not self (unless we want "You joined") -> User asked for "ursinho joined"
+                            if actualUserId != self.currentUserId {
+                                self.addSystemMessage("\(username) joined")
+                            }
                         }
                         
                         // ENSURE SELF IS IN LIST
@@ -1393,8 +1419,16 @@ extension MPVPlayerViewModel {
                                 // Fetch FRESH list to avoid stale data race
                                 guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
                                 
+                                // Find username before removing for the message
+                                let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? "User"
+                                
                                 // Remove using actualUserId
                                 currentParticipants.removeAll(where: { $0.id == actualUserId })
+                                
+                                // 💬 System Message: Leave
+                                if actualUserId != self.currentUserId {
+                                    self.addSystemMessage("\(username) left")
+                                }
                                 print("👋 Participant left (confirmed): \(userId)")
 
                                 // Post-Load Gate Logic

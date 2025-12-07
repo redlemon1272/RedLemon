@@ -582,11 +582,42 @@ class LobbyViewModel: ObservableObject {
 
     func startMovie(appState: AppState) async {
         guard isHost else { return }
+        guard let mediaItem = room.mediaItem else {
+            NSLog("❌ Host: Cannot start playback - no media selected")
+            return
+        }
 
         NSLog("🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
         addMessage(.hostStarting, userName: "Host")
+
+        // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
+        // This ensures guests don't fetch nil stream details
+        var preResolvedStream: Stream?
+        do {
+            preResolvedStream = try await appState.resolveAndPersistForWatchParty(
+                mediaItem: mediaItem,
+                quality: .fullHD,
+                roomId: room.id
+            )
+            NSLog("✅ Host: Stream resolved and persisted OK")
+        } catch {
+            NSLog("❌ Host: Stream resolution failed: \(error)")
+            addMessage(.systemError, userName: "System", data: [
+                "message": "Failed to resolve stream for Watch Party",
+                "error": "\(error.localizedDescription)"
+            ])
+            isStarting = false
+            transitionState.isStarting = false
+            return
+        }
+        
+        guard let finalStream = preResolvedStream else {
+             isStarting = false
+             transitionState.isStarting = false
+             return
+        }
 
         var realtimeSuccess = false
 
@@ -611,22 +642,10 @@ class LobbyViewModel: ObservableObject {
                     "message": "Using database fallback for start signal (Realtime not ready)",
                     "reason": "Channel not ready"
                 ])
-            } catch RealtimeError.connectionTimeout {
-                NSLog("⏰ Host: Realtime connection timeout - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime timeout)",
-                    "reason": "Connection timeout"
-                ])
-            } catch RealtimeError.connectionFailed {
-                NSLog("❌ Host: Realtime connection failed - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime failed)",
-                    "reason": "Connection failed"
-                ])
             } catch {
                 NSLog("⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
                 addMessage(.systemInfo, userName: "System", data: [
-                    "message": "Using database fallback for start signal (Realtime error)",
+                    "message": "Using database fallback for start signal",
                     "error": "\(error.localizedDescription)"
                 ])
             }
@@ -637,8 +656,7 @@ class LobbyViewModel: ObservableObject {
             do {
                 try await SupabaseClient.shared.startRoomPlayback(roomId: room.id)
                 NSLog("✅ Host: Set room playback state in database as fallback")
-                NSLog("💾 Database delivery confirmed for start signal")
-
+                
                 if !realtimeSuccess {
                     addMessage(.systemInfo, userName: "System", data: [
                         "message": "✅ Start signal sent via database (Realtime unavailable)",
@@ -647,10 +665,6 @@ class LobbyViewModel: ObservableObject {
                 }
             } catch {
                 NSLog("❌ Host: Failed to update room state in database: \(error)")
-                addMessage(.systemError, userName: "System", data: [
-                    "message": "⚠️ Warning: Both Realtime and database fallback failed for start signal",
-                    "error": "\(error.localizedDescription)"
-                ])
             }
         }
 
@@ -671,21 +685,16 @@ class LobbyViewModel: ObservableObject {
             }
         }
 
-        // Start playback for everyone (only if media is selected)
-        guard let mediaItem = room.mediaItem else {
-            NSLog("❌ Host: Cannot start playback - no media selected")
-            return
-        }
-
+        // Start playback for everyone
         NSLog("🎬 Host: Launching player for \(mediaItem.name)")
 
-        await appState.playMedia(
-            mediaItem,
-            quality: .fullHD,
-            watchMode: .watchParty,
-            roomId: room.id,
-            isHost: true
-        )
+        await MainActor.run {
+            // Manually set state since we resolve first
+            appState.isWatchPartyHost = true
+            appState.currentWatchMode = .watchParty
+            appState.currentRoomId = room.id
+            appState.navigateToPlayer(stream: finalStream)
+        }
     }
 
     private func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String]? = nil) {

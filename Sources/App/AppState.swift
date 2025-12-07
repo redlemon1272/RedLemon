@@ -320,6 +320,72 @@ class AppState: ObservableObject {
         // The PlayerView should observe this change and start playing
     }
 
+    // NEW: Resolve and persist stream BEFORE starting watch party
+    // This fixes the race condition where guests join before the stream is ready
+    func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String) async throws -> Stream {
+        print("🎬 Resolving & Persisting stream for Watch Party Room: \(roomId)")
+        
+        await MainActor.run {
+            self.isResolvingStream = true
+            self.streamError = nil
+        }
+        
+        defer {
+            Task { @MainActor in self.isResolvingStream = false }
+        }
+
+        // Step 0: Ensure metadata is loaded
+        let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+        
+        // Step 1: Resolve Stream
+        let season = mediaItem.type == "series" ? selectedSeason : nil
+        let episode = mediaItem.type == "series" ? selectedEpisode : nil
+        
+        let result = try await StreamService.shared.resolveStream(
+            item: mediaItem,
+            quality: quality,
+            season: season,
+            episode: episode,
+            metadata: metadata
+        )
+        
+        // Step 2: Unlock Stream
+        let unlockedStream = try await StreamService.shared.unlockStream(
+            stream: result.stream,
+            item: mediaItem,
+            season: season,
+            episode: episode
+        )
+        
+        // Step 3: Persist to Supabase & Local State
+        print("📡 Persisting resolved stream to room \(roomId)...")
+        
+        // Update local room object & metadata
+        await MainActor.run {
+            self.selectedMetadata = metadata // Use the fetched metadata
+            
+            if var room = self.currentWatchPartyRoom {
+                room.selectedStreamHash = unlockedStream.infoHash
+                room.selectedFileIdx = unlockedStream.fileIdx
+                room.selectedQuality = unlockedStream.quality
+                room.unlockedStreamURL = unlockedStream.url
+                self.currentWatchPartyRoom = room
+            }
+        }
+        
+        // Persist to Supabase
+        try await SupabaseClient.shared.updateRoomStream(
+            roomId: roomId,
+            streamHash: unlockedStream.infoHash,
+            fileIdx: unlockedStream.fileIdx,
+            quality: unlockedStream.quality,
+            unlockedUrl: unlockedStream.url
+        )
+        
+        print("✅ Stream persisted! Hash: \(unlockedStream.infoHash ?? "nil")")
+        return unlockedStream
+    }
+
     func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         guard let mediaItem = selectedMediaItem else {
             streamError = "No media item selected"

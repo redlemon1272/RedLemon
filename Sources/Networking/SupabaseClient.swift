@@ -438,16 +438,16 @@ class SupabaseClient {
     /// Update room stream selection (Host only)
     func updateRoomStream(
         roomId: String,
-        streamHash: String,
+        streamHash: String?,
         fileIdx: Int?,
         quality: String?,
         unlockedUrl: String?
     ) async throws {
         var body: [String: Any] = [
-            "stream_hash": streamHash,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
         
+        if let streamHash = streamHash { body["stream_hash"] = streamHash }
         if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }
         if let quality = quality { body["selected_quality"] = quality }
         if let unlockedUrl = unlockedUrl { body["unlocked_stream_url"] = unlockedUrl }

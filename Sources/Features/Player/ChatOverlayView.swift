@@ -15,6 +15,7 @@ struct ChatOverlayView: View {
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
     @State private var manualFocus: Bool = false
+    @State private var showParticipantsList: Bool = false
 
     // Chat Modes
     enum ChatMode {
@@ -98,25 +99,65 @@ struct ChatOverlayView: View {
 
                 // Participant Count (for room chat only)
                 if case .room = chatMode, let room = appState.currentWatchPartyRoom {
-                    HStack(spacing: 4) {
-                        Image(systemName: "person.2.fill")
-                            .font(.system(size: 11))
-                        Text("\(room.participants.count)")
-                            .font(.system(size: 13, weight: .semibold))
+                    Button(action: { showParticipantsList.toggle() }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "person.2.fill")
+                                .font(.system(size: 11))
+                            Text("\(room.participants.count)")
+                                .font(.system(size: 13, weight: .semibold))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 8)
+                        .background(
+                            Capsule()
+                                .fill(Color.white.opacity(0.2))
+                                .overlay(
+                                    Capsule()
+                                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                                )
+                        )
                     }
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 10)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 8) // Increased from 6 to fix cutoff
-                    .background(
-                        Capsule()
-                            .fill(Color.white.opacity(0.2))
-                            .overlay(
-                                Capsule()
-                                    .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                            )
-                    )
-                    .fixedSize() // Ensure text isn't compressed
+                    .buttonStyle(.plain)
+                    .popover(isPresented: $showParticipantsList, arrowEdge: .bottom) {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("Participants (\(room.participants.count))")
+                                .font(.headline)
+                                .padding(.bottom, 4)
+                            
+                            ScrollView {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    ForEach(room.participants) { participant in
+                                        HStack {
+                                            Circle()
+                                                .fill(Color.blue.opacity(0.8))
+                                                .frame(width: 24, height: 24)
+                                                .overlay(Text(participant.name.prefix(1).uppercased()).font(.caption).foregroundColor(.white))
+                                            
+                                            Text(participant.name)
+                                                .font(.body)
+                                            
+                                            if participant.isHost {
+                                                Text("HOST")
+                                                    .font(.system(size: 9, weight: .bold))
+                                                    .padding(.horizontal, 4)
+                                                    .padding(.vertical, 2)
+                                                    .background(Color.yellow)
+                                                    .foregroundColor(.black)
+                                                    .cornerRadius(4)
+                                            }
+                                            
+                                            Spacer()
+                                        }
+                                        .padding(.vertical, 2)
+                                    }
+                                }
+                            }
+                            .frame(maxHeight: 250)
+                        }
+                        .padding()
+                        .frame(width: 250)
+                    }
                 }
 
                 Button(action: { viewModel.toggleChat() }) {

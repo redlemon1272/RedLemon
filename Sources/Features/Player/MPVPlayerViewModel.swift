@@ -120,9 +120,10 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var showSubtitleSyncPanel: Bool = false
 
     // MARK: - Post-Load Ready Gate
-    @Published var showWaitingForGuests: Bool = false
-    private var connectedGuestIds: Set<String> = []
-    private var readyGuestIds: Set<String> = []
+    @Published var showWaitingForGuests: Bool = false    // Presence Management
+    @Published var connectedGuestIds: Set<String> = []
+    @Published var readyGuestIds: Set<String> = []
+    private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Debounce map for leaving guests
     private var hasSentReadySignal: Bool = false
 
 
@@ -1250,8 +1251,8 @@ extension MPVPlayerViewModel {
         // Don't auto-open chat - let user toggle it with spacebar or chat button
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
-        await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
-            Task { @MainActor in
+        await realtimeManager?.setPresenceCallback { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
+            _ = Task { @MainActor in
                 guard let self = self else { return }
 
                 // Update AppState participants list for UI
@@ -1260,16 +1261,26 @@ extension MPVPlayerViewModel {
 
                     switch action {
                     case .join:
+                        // Cancel any pending leave for this user
+                        let actualUserId = metadata?["user_id"] as? String ?? userId
+                        if let existingTask = self.pendingLeaveTasks[actualUserId] {
+                            print("🔄 User \(actualUserId) reconnected within grace period - cancelling leave")
+                            existingTask.cancel()
+                            self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                            return // Skip re-adding since they never technically left our model
+                        }
+
                         // Check if already exists
                         if !updatedParticipants.contains(where: { $0.id == userId }) {
                             // Extract metadata
                             let username = metadata?["username"] as? String ?? "User"
-                            let avatarUrl = metadata?["avatar_url"] as? String
+                            let isHostVal = metadata?["is_host"] as? Bool ?? false
+                            // let avatarUrl = metadata?["avatar_url"] as? String // Unused
 
                             let newParticipant = Participant(
                                 id: userId,
                                 name: username,
-                                isHost: metadata?["is_host"] as? Bool ?? false,
+                                isHost: isHostVal,
                                 isReady: false,
                                 joinedAt: Date()
                             )
@@ -1286,8 +1297,6 @@ extension MPVPlayerViewModel {
                         }
 
                         // Post-Load Gate Logic
-                        // CRITICAL: Extract actual user_id from metadata, not the presence key
-                        let actualUserId = metadata?["user_id"] as? String ?? userId
                         if actualUserId != self.currentUserId {
                             print("👤 Post-Load Gate: Guest joined presence: \(actualUserId) (presence key: \(userId))")
                             self.connectedGuestIds.insert(actualUserId)
@@ -1299,33 +1308,54 @@ extension MPVPlayerViewModel {
                         }
 
                     case .leave:
-                        // Find participant name before removing
-                        if let participant = updatedParticipants.first(where: { $0.id == userId }) {
-                            // Add system message
-                            self.messages.append(ChatMessage(
-                                id: UUID().uuidString,
-                                username: "System",
-                                text: "\(participant.name) has left the room",
-                                timestamp: Date()
-                            ))
-                        }
-                        
-                        updatedParticipants.removeAll(where: { $0.id == userId })
-                        print("👋 Participant left: \(userId)")
-
-                        // Post-Load Gate Logic
-                        // CRITICAL: Extract actual user_id from metadata, not the presence key
                         let actualUserId = metadata?["user_id"] as? String ?? userId
-                        if actualUserId != self.currentUserId {
-                            print("👋 Post-Load Gate: Guest left presence: \(actualUserId) (presence key: \(userId))")
-                            self.connectedGuestIds.remove(actualUserId)
-                            self.readyGuestIds.remove(actualUserId)
-                            if self.isWatchPartyHost {
-                                self.checkIfAllGuestsReady()
+                        print("⏳ Participant leaving (grace period started): \(actualUserId)")
+
+                        // Debounce leave: wait 5 seconds before actually removing
+                        let task = Task { [weak self] in
+                            try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds
+                            guard let self = self, !Task.isCancelled else { return }
+
+                            await MainActor.run {
+                                // Fetch FRESH participants list to avoid overwriting recent joins
+                                var currentParticipants: [Participant] = self.appState?.currentWatchPartyRoom?.participants ?? []
+                                
+                                // Find participant name before removing
+                                if let participant = currentParticipants.first(where: { $0.id == userId }) {
+                                    // Add system message
+                                    self.messages.append(ChatMessage(
+                                        id: UUID().uuidString,
+                                        username: "System",
+                                        text: "\(participant.name) has left the room",
+                                        timestamp: Date()
+                                    ))
+                                }
+                                
+                                currentParticipants.removeAll(where: { $0.id == userId })
+                                print("👋 Participant left (confirmed): \(userId)")
+
+                                // Post-Load Gate Logic
+                                if actualUserId != self.currentUserId {
+                                    print("👋 Post-Load Gate: Guest left presence (confirmed): \(actualUserId) (presence key: \(userId))")
+                                    self.connectedGuestIds.remove(actualUserId)
+                                    self.readyGuestIds.remove(actualUserId)
+                                    if self.isWatchPartyHost {
+                                        self.checkIfAllGuestsReady()
+                                    }
+                                }
+                                
+                                // Update room state with fresh list
+                                self.appState?.currentWatchPartyRoom?.participants = currentParticipants
+                                self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             }
                         }
-                    }
+                        self.pendingLeaveTasks[actualUserId] = task
+                        
+                        // Don't update 'updatedParticipants' yet!
+                        return
 
+                    }
+                    
                     // Update room state
                     self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
                 }

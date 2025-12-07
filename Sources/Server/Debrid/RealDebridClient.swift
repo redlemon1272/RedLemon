@@ -86,7 +86,7 @@ actor RealDebridClient {
 
     // MARK: - Public API
 
-    func unlock(infoHash: String, fileIdx: Int = 0, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil) async throws -> UnlockResult? {
+    func unlock(infoHash: String, fileIdx: Int = 0, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil) async throws -> UnlockResult? {
         // CRITICAL: Block known x265 torrents
         let hashPrefix = String(infoHash.prefix(12)).lowercased()
         if x265Blocklist.contains(where: { hashPrefix.hasPrefix($0) }) {
@@ -110,7 +110,7 @@ actor RealDebridClient {
 
         // Create new unlock task
         let task = Task<UnlockResult?, Error> {
-            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode)
+            try await self._rdUnlock(infoHash: infoHash, fileIdx: fileIdx, token: token, maxPolls: maxPolls, season: season, episode: episode, title: title)
         }
 
         inflightRequests[cacheKey] = task
@@ -153,7 +153,7 @@ actor RealDebridClient {
 
     // MARK: - Core Unlock Logic (ports Node.js _rdUnlock)
 
-    private func _rdUnlock(infoHash: String, fileIdx: Int, token: String, maxPolls: Int, season: Int?, episode: Int?) async throws -> UnlockResult? {
+    private func _rdUnlock(infoHash: String, fileIdx: Int, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?) async throws -> UnlockResult? {
         let pollDelay: UInt64 = 1_000_000_000 // 1 second
 
         // Build magnet with trackers
@@ -233,18 +233,53 @@ actor RealDebridClient {
                 }
             }
         } else {
-            // Movie: select largest video file
+        } else {
+            // Movie: select largest video file OR match by title
             let videoExtensions = ["mkv", "mp4", "avi", "mov", "m4v", "webm"]
             let videoFiles = initialInfo.files?.filter { file in
                 guard let path = file.path?.lowercased() else { return false }
                 return videoExtensions.contains(where: { ext in path.hasSuffix(".\(ext)") })
             } ?? []
 
-            let largestVideoFile = videoFiles.max(by: { ($0.bytes ?? 0) < ($1.bytes ?? 0) })
+            var selectedFile: TorrentInfo.TorrentFile?
 
-            if let videoFile = largestVideoFile, let videoFileId = videoFile.id {
+            // Priority 1: Title match (if provided)
+            if let title = title, !title.isEmpty {
+                let cleanTitle = title.lowercased().replacingOccurrences(of: ":", with: "").replacingOccurrences(of: "-", with: " ")
+                let titleWords = cleanTitle.components(separatedBy: " ").filter { $0.count > 2 } // Only significant words
+
+                // Find files that contain ALL significant words from the title
+                let matchingFiles = videoFiles.filter { file in
+                    guard let path = file.path?.lowercased() else { return false }
+                    // Simple check: path contains the full title?
+                    if path.contains(cleanTitle) { return true }
+
+                    // Fuzzy check: path contains all significant words?
+                    let allWordsMatch = titleWords.allSatisfy { word in path.contains(word) }
+                    return allWordsMatch
+                }
+
+                if !matchingFiles.isEmpty {
+                    // If multiple matches, pick the largest one (likely higher quality)
+                    selectedFile = matchingFiles.max(by: { ($0.bytes ?? 0) < ($1.bytes ?? 0) })
+                    if let file = selectedFile {
+                        print("🎬 Movie: Found matching file for title '\(title)': \(file.path ?? "unknown")")
+                    }
+                } else {
+                    print("⚠️ Movie: No file matched title '\(title)', falling back to largest file")
+                }
+            }
+
+            // Priority 2: Largest video file (Fallback)
+            if selectedFile == nil {
+                selectedFile = videoFiles.max(by: { ($0.bytes ?? 0) < ($1.bytes ?? 0) })
+                if let file = selectedFile {
+                    print("🎬 Movie: Auto-selected largest video file: \(file.path ?? "unknown") (ID: \(file.id ?? 0), size: \(file.bytes ?? 0) bytes)")
+                }
+            }
+
+            if let videoFile = selectedFile, let videoFileId = videoFile.id {
                 actualFileIdx = videoFileId
-                print("🎬 Movie: Auto-selected largest video file: \(videoFile.path ?? "unknown") (ID: \(videoFileId), size: \(videoFile.bytes ?? 0) bytes)")
             } else {
                 // Fallback to provided fileIdx
                 actualFileIdx = fileIdx >= 0 ? fileIdx + 1 : 1

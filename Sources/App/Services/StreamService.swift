@@ -42,7 +42,7 @@ actor StreamService {
 
         // Step 3: Get Stream Bucket (Direct Resolver Call)
         NSLog("⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...")
-        
+
         let bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
             imdbId: item.id,
             type: item.type,
@@ -50,7 +50,7 @@ actor StreamService {
             episode: finalEpisode,
             year: finalMetadata.year
         )
-        
+
         let buckets = bucketsResponse.buckets
         let rawBucket: QualityBucket?
         switch quality {
@@ -59,7 +59,7 @@ actor StreamService {
         case .hd: rawBucket = buckets.hd
         case .sd: rawBucket = buckets.sd
         }
-        
+
         guard let bucket = rawBucket else {
              throw APIError.noStreamsFound
         }
@@ -241,7 +241,8 @@ actor StreamService {
         var unlockBody: [String: Any] = [
             "infoHash": infoHash,
             "fileIdx": fileIndex,
-            "service": "realdebrid"
+            "service": "realdebrid",
+            "title": item.name
         ]
 
         if item.type == "series" {

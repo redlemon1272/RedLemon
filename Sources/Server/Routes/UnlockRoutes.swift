@@ -22,6 +22,7 @@ func registerUnlockRoutes(_ app: Application) {
             let debridService: String?
             let season: Int?
             let episode: Int?
+            let title: String?
         }
 
         let body = try req.content.decode(UnlockRequest.self)
@@ -53,7 +54,8 @@ func registerUnlockRoutes(_ app: Application) {
                 token: token,
                 maxPolls: 2, // Reduced from 3 - pre-validated streams should be faster
                 season: body.season,
-                episode: body.episode
+                episode: body.episode,
+                title: body.title
             ) else {
                 NSLog("❌ Unlock failed - torrent not cached")
                 throw Abort(.badGateway, reason: "Unlock failed - torrent may not be cached")

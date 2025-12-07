@@ -51,24 +51,24 @@ struct HeroRoomCard: View {
                     }
                 )
                 .cornerRadius(16)
-
-                // Loading Overlay
-                if isJoining {
-                    ZStack {
-                        Color.black.opacity(0.6)
-                        VStack(spacing: 12) {
-                            ProgressView()
-                                .scaleEffect(1.2)
-                                .tint(.white)
-                            Text("Joining...")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(.white)
+                .overlay(
+                    Group {
+                        if isJoining {
+                            ZStack {
+                                Color.black.opacity(0.6)
+                                VStack(spacing: 12) {
+                                    ProgressView()
+                                        .scaleEffect(1.2)
+                                        .tint(.white)
+                                    Text("Joining...")
+                                        .font(.system(size: 14, weight: .semibold))
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .transition(.opacity)
                         }
                     }
-                    .transition(.opacity)
-                    .zIndex(100)
-                    .cornerRadius(16)
-                }
+                )
 
                 // Content Overlay
                 VStack(alignment: .leading, spacing: 0) {

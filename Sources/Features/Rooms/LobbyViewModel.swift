@@ -1210,6 +1210,14 @@ class LobbyViewModel: ObservableObject {
                         }
                     }
 
+                    // CRITICAL: Set resume timestamp so guest starts exactly where host is!
+                    if roomState.playbackPosition > 5 {
+                        await MainActor.run {
+                            appState.resumeFromTimestamp = TimeInterval(roomState.playbackPosition)
+                            NSLog("⏩ Guest: Pre-setting start time to host position: \(roomState.playbackPosition)s")
+                        }
+                    }
+
                     await appState.playMedia(
                         self.room.mediaItem!,
                         quality: .fullHD,

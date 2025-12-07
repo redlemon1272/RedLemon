@@ -434,6 +434,33 @@ class SupabaseClient {
         let rooms = try jsonDecoder.decode([SupabaseRoom].self, from: data)
         return rooms.first
     }
+    
+    /// Update room stream selection (Host only)
+    func updateRoomStream(
+        roomId: String,
+        streamHash: String,
+        fileIdx: Int?,
+        quality: String?,
+        unlockedUrl: String?
+    ) async throws {
+        var body: [String: Any] = [
+            "stream_hash": streamHash,
+            "last_activity": ISO8601DateFormatter().string(from: Date())
+        ]
+        
+        if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }
+        if let quality = quality { body["selected_quality"] = quality }
+        if let unlockedUrl = unlockedUrl { body["unlocked_stream_url"] = unlockedUrl }
+        
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: body,
+            query: ["id": "eq.\(roomId)"]
+        )
+        
+        NSLog("✅ Persisted stream selection to room \(roomId)")
+    }
 
     // MARK: - Chat
 
@@ -610,6 +637,9 @@ struct SupabaseRoom: Codable {
     let lastActivity: Date
     let season: Int?  // Season number for TV shows
     let episode: Int?  // Episode number for TV shows
+    let fileIdx: Int? // Selected file index
+    let quality: String? // Selected quality
+    let unlockedStreamUrl: String? // Unlocked stream URL
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -628,6 +658,9 @@ struct SupabaseRoom: Codable {
         case lastActivity = "last_activity"
         case season
         case episode
+        case fileIdx = "selected_file_idx"
+        case quality = "selected_quality"
+        case unlockedStreamUrl = "unlocked_stream_url"
     }
 }
 

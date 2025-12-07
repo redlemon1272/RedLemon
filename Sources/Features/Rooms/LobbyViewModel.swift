@@ -847,6 +847,21 @@ class LobbyViewModel: ObservableObject {
                         let season = roomState.season ?? room.season
                         let episode = roomState.episode ?? room.episode
 
+                        if var currentRoom = appState?.currentWatchPartyRoom {
+                            currentRoom.season = season ?? currentRoom.season
+                            currentRoom.episode = episode ?? currentRoom.episode
+                            
+                            // IMPORTANT: Copy stream details from fetched roomState to appState
+                            // This ensures AppState.playMedia sees the "Guest Optimization" data
+                            currentRoom.selectedStreamHash = roomState.streamHash
+                            currentRoom.selectedFileIdx = roomState.fileIdx
+                            currentRoom.selectedQuality = roomState.quality
+                            currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
+                            
+                            appState?.currentWatchPartyRoom = currentRoom
+                            NSLog("✅ Guest: Synced stream details from host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
+                        }
+
                         if let season = season, let episode = episode {
                             await MainActor.run {
                                 appState?.selectedSeason = season

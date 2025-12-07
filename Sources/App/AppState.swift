@@ -371,6 +371,31 @@ class AppState: ObservableObject {
                 isResolvingStream = false
             }
 
+            // Step 4: If hosting Watch Party, persist stream selection to specific room
+            if isHost, let roomId = currentRoomId, watchMode == .watchParty {
+                NSLog("📡 Persisting stream selection to room \(roomId)")
+                
+                // Update local room object
+                if var room = self.currentWatchPartyRoom {
+                    room.selectedStreamHash = unlockedStream.infoHash
+                    room.selectedFileIdx = unlockedStream.fileIdx
+                    room.selectedQuality = unlockedStream.quality
+                    room.unlockedStreamURL = unlockedStream.url
+                    self.currentWatchPartyRoom = room
+                }
+                
+                // Persist to Supabase
+                Task {
+                    try? await SupabaseClient.shared.updateRoomStream(
+                        roomId: roomId,
+                        streamHash: unlockedStream.infoHash,
+                        fileIdx: unlockedStream.fileIdx,
+                        quality: unlockedStream.quality,
+                        unlockedUrl: unlockedStream.url
+                    )
+                }
+            }
+
             enterFullscreen()
             print("✅ Selected stream ready for playback!")
 

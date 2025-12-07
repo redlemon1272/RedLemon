@@ -1248,21 +1248,88 @@ extension MPVPlayerViewModel {
         // Initialize Realtime manager
         self.realtimeManager = RealtimeChannelManager(realtimeClient: RedLemon.SupabaseClient.shared.realtimeClient)
 
-        // Don't auto-open chat - let user toggle it with spacebar or chat button
         // But prepare welcome message for when they do open it
         // CRITICAL: Set up presence callback BEFORE setup() so we don't miss any presence events
         await realtimeManager?.setPresenceCallback { [weak self] (action: PresenceAction, userId: String, metadata: [String: Any]?) in
             _ = Task { @MainActor in
                 guard let self = self else { return }
 
+                // FALLBACK: If room is missing locally (e.g. host started quickly), fetch it
+                if self.appState?.currentWatchPartyRoom == nil, let roomId = self.currentRoomId {
+                    print("⚠️ Room state missing in MPVViewModel - fetching fallback for \(roomId)")
+                    if let fetchedSupabaseRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                        // Map to minimal WatchPartyRoom for participant tracking
+                        let mediaItem = MediaItem(
+                            id: fetchedSupabaseRoom.imdbId ?? "unknown",
+                            type: "movie", // simplified
+                            name: fetchedSupabaseRoom.name,
+                            poster: fetchedSupabaseRoom.posterUrl,
+                            background: fetchedSupabaseRoom.backdropUrl,
+                            logo: nil,
+                            description: nil,
+                            releaseInfo: nil,
+                            year: nil,
+                            imdbRating: nil,
+                            genres: nil,
+                            runtime: nil
+                        )
+                        
+                        // Basic host participant (others will populate via Realtime)
+                        let host = Participant(
+                            id: fetchedSupabaseRoom.hostUserId.uuidString,
+                            name: fetchedSupabaseRoom.hostUsername,
+                            isHost: true,
+                            isReady: true,
+                            joinedAt: Date()
+                        )
+
+                        let fetchedRoom = WatchPartyRoom(
+                            id: fetchedSupabaseRoom.id,
+                            hostId: fetchedSupabaseRoom.hostUserId.uuidString,
+                            hostName: fetchedSupabaseRoom.hostUsername,
+                            mediaItem: mediaItem,
+                            season: fetchedSupabaseRoom.season,
+                            episode: fetchedSupabaseRoom.episode,
+                            episodeTitle: nil,
+                            quality: .fullHD,
+                            sourceQuality: nil,
+                            description: nil,
+                            posterURL: fetchedSupabaseRoom.posterUrl,
+                            participants: [host],
+                            state: fetchedSupabaseRoom.isPlaying ? .playing : .lobby,
+                            createdAt: fetchedSupabaseRoom.createdAt,
+                            lastActivity: fetchedSupabaseRoom.lastActivity,
+                            playlist: nil,
+                            currentPlaylistIndex: 0,
+                            lobbyDuration: 300,
+                            shouldLoop: false,
+                            isPersistent: true,
+                            playbackPosition: TimeInterval(fetchedSupabaseRoom.playbackPosition),
+                            runtime: nil,
+                            selectedStreamHash: nil,
+                            selectedFileIdx: nil,
+                            selectedQuality: nil,
+                            unlockedStreamURL: nil
+                        )
+                        
+                        self.appState?.currentWatchPartyRoom = fetchedRoom
+                    }
+                }
+
                 // Update AppState participants list for UI
                 if let room = self.appState?.currentWatchPartyRoom {
-                    var updatedParticipants = room.participants
+                    var updatedParticipants: [Participant] = room.participants
+                    let localCurrentUserId = self.currentUserId
 
+                    // Define actualUserId ONCE before switch, using consistent logic
+                    // Prioritize user_id from metadata, then username, then fallback to passed userId
+                    let metaUserId = metadata?["user_id"] as? String
+                    let metaUsername = metadata?["username"] as? String
+                    let actualUserId = metaUserId ?? metaUsername ?? userId
+                    
                     switch action {
                     case .join:
                         // Cancel any pending leave for this user
-                        let actualUserId = metadata?["user_id"] as? String ?? userId
                         if let existingTask = self.pendingLeaveTasks[actualUserId] {
                             print("🔄 User \(actualUserId) reconnected within grace period - cancelling leave")
                             existingTask.cancel()
@@ -1273,70 +1340,60 @@ extension MPVPlayerViewModel {
                         // Check if already exists
                         if !updatedParticipants.contains(where: { $0.id == userId }) {
                             // Extract metadata
-                            let username = metadata?["username"] as? String ?? "User"
+                            let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             // let avatarUrl = metadata?["avatar_url"] as? String // Unused
+                            let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970 
 
                             let newParticipant = Participant(
                                 id: userId,
                                 name: username,
                                 isHost: isHostVal,
                                 isReady: false,
-                                joinedAt: Date()
+                                joinedAt: Date(timeIntervalSince1970: joinedAtVal)
                             )
                             updatedParticipants.append(newParticipant)
-                            print("👤 Participant joined: \(username) (\(userId))")
-                            
-                            // Add system message
-                            self.messages.append(ChatMessage(
-                                id: UUID().uuidString,
-                                username: "System",
-                                text: "\(username) has joined the room",
-                                timestamp: Date()
-                            ))
                         }
-
-                        // Post-Load Gate Logic
-                        if actualUserId != self.currentUserId {
-                            print("👤 Post-Load Gate: Guest joined presence: \(actualUserId) (presence key: \(userId))")
-                            self.connectedGuestIds.insert(actualUserId)
-                            if self.isWatchPartyHost {
-                                self.checkIfAllGuestsReady()
+                        
+                        // ENSURE SELF IS IN LIST
+                        if let currentId = localCurrentUserId {
+                            let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
+                            if !isSelfPresent {
+                                let selfParticipant = Participant(
+                                    id: currentId,
+                                    name: self.appState?.currentUsername ?? "Me",
+                                    isHost: self.isWatchPartyHost,
+                                    isReady: true,
+                                    joinedAt: Date()
+                                )
+                                updatedParticipants.append(selfParticipant)
                             }
-                        } else {
-                            print("🚫 Post-Load Gate: Ignoring host's own presence: \(actualUserId)")
                         }
-
+                        
                     case .leave:
-                        let actualUserId = metadata?["user_id"] as? String ?? userId
-                        print("⏳ Participant leaving (grace period started): \(actualUserId)")
-
-                        // Debounce leave: wait 5 seconds before actually removing
-                        let task = Task { [weak self] in
-                            try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds
-                            guard let self = self, !Task.isCancelled else { return }
-
+                        // DEBOUNCE LEAVE: Wait 10 seconds before actually removing
+                        // This handles flaky connections and Lobby->Player transitions
+                        print("⏳ Participant leaving (grace period started): \(userId)")
+                        
+                        let task: Task<Void, Never> = Task { [weak self] in
+                            // Wait 10 seconds (nano)
+                            try? await Task.sleep(nanoseconds: 10_000_000_000)
+                            
+                            guard let self = self else { return }
+                            
+                            // Check for cancellation
+                            if Task.isCancelled { return }
+                            
                             await MainActor.run {
-                                // Fetch FRESH participants list to avoid overwriting recent joins
-                                var currentParticipants: [Participant] = self.appState?.currentWatchPartyRoom?.participants ?? []
+                                // Fetch FRESH list to avoid stale data race
+                                guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
                                 
-                                // Find participant name before removing
-                                if let participant = currentParticipants.first(where: { $0.id == userId }) {
-                                    // Add system message
-                                    self.messages.append(ChatMessage(
-                                        id: UUID().uuidString,
-                                        username: "System",
-                                        text: "\(participant.name) has left the room",
-                                        timestamp: Date()
-                                    ))
-                                }
-                                
+                                // Remove
                                 currentParticipants.removeAll(where: { $0.id == userId })
                                 print("👋 Participant left (confirmed): \(userId)")
 
                                 // Post-Load Gate Logic
                                 if actualUserId != self.currentUserId {
-                                    print("👋 Post-Load Gate: Guest left presence (confirmed): \(actualUserId) (presence key: \(userId))")
                                     self.connectedGuestIds.remove(actualUserId)
                                     self.readyGuestIds.remove(actualUserId)
                                     if self.isWatchPartyHost {
@@ -1350,8 +1407,6 @@ extension MPVPlayerViewModel {
                             }
                         }
                         self.pendingLeaveTasks[actualUserId] = task
-                        
-                        // Don't update 'updatedParticipants' yet!
                         return
 
                     }

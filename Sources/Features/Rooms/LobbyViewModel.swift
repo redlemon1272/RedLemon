@@ -1146,9 +1146,9 @@ class LobbyViewModel: ObservableObject {
                 return
             }
 
-            // Check if room state changed from not playing to playing
-            if !lastRoomPlayingState && roomState.isPlaying {
-                NSLog("🎬 Guest: Detected room playback start via database fallback")
+            // Check if room state is playing (event if it was already playing)
+            if roomState.isPlaying && !isStarting {
+                NSLog("🎬 Guest: Detected room playback via database fallback")
                 // NOTE: Don't add .hostStarting message here - guest already received it via Realtime
 
                 // Start countdown and playback

@@ -54,7 +54,7 @@ struct ChatOverlayView: View {
         .background(Color.black)
         .compositingGroup() // Optimize transparency blending
         .onAppear {
-            print("👁️ ChatOverlayView appeared")
+            print("👁️ ChatOverlayView appeared - UI UPDATE ROUND 5 VERIFIED ✅")
             // Auto-focus the input field ONLY if explicitly toggled (prevents stealing focus on load)
             if viewModel.isAnimatingChatToggle {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -106,7 +106,8 @@ struct ChatOverlayView: View {
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 10)
-                    .padding(.vertical, 6)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 8) // Increased from 6 to fix cutoff
                     .background(
                         Capsule()
                             .fill(Color.white.opacity(0.2))
@@ -115,16 +116,18 @@ struct ChatOverlayView: View {
                                     .stroke(Color.white.opacity(0.3), lineWidth: 1)
                             )
                     )
+                    .fixedSize() // Ensure text isn't compressed
                 }
 
                 Button(action: { viewModel.toggleChat() }) {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.title2)
+                        .font(.system(size: 16)) // Round 3: Aggressive reduction to 16pt
                         .foregroundColor(.white.opacity(0.7))
                 }
                 .buttonStyle(.plain)
+                .padding(.trailing, 8) // Round 5: Explicitly pull away from right edge
             }
-            .padding()
+            .padding(10) // Round 4: Reduced from generic .padding() (16) to 10
             .background(Color.black.opacity(0.3))
         }
     }
@@ -269,9 +272,9 @@ struct ChatOverlayView: View {
                             .textFieldStyle(.plain)
                             .foregroundColor(.white)
                             .focused($isInputFocused)
-                            .lineLimit(1...8)
+                            .lineLimit(1...5)
                             .onSubmit { sendMessage() }
-                            .padding(.vertical, 4)
+                            //.padding(.vertical, 2) // Removed entirely for max compactness
                     } else {
                         // Fallback for macOS 12
                         ZStack(alignment: .topLeading) {
@@ -294,7 +297,7 @@ struct ChatOverlayView: View {
                 // Send Button
                 Button(action: sendMessage) {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 26))
+                        .font(.system(size: 20)) // Round 4: Reduced from 26 to 20 to allow box to shrink
                         .symbolRenderingMode(.hierarchical)
                         .foregroundColor(inputText.isEmpty ? .gray : .blue)
                 }
@@ -303,7 +306,7 @@ struct ChatOverlayView: View {
                 .padding(.bottom, 2)
             }
             .padding(.horizontal, 8)
-            .padding(.vertical, 4)
+            //.padding(.vertical, 2) // Removed entirely for max compactness
             .background(Color.white.opacity(0.1))
             .cornerRadius(20)
             .overlay(
@@ -311,7 +314,9 @@ struct ChatOverlayView: View {
                     .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
             )
             .padding(.horizontal, 16)
-            .padding(.bottom, 16)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8) // Round 3: Reduced from 16 to 8 for compactness
+            .frame(height: 32) // Round 5: FORCE COMPACT HEIGHT
         }
     }
 

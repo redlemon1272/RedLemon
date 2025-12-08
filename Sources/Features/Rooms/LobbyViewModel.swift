@@ -40,6 +40,7 @@ class LobbyViewModel: ObservableObject {
     private var participantId: String
     private var isDisconnecting: Bool = false
     private var realtimeManager: RealtimeChannelManager?
+    private var playbackEndedTimestamp: Date? // Track when playback ended to prevent immediate re-join race condition
 
     // Helper to track state safely across actor boundaries (specifically for deinit)
     private class TransitionState {
@@ -1187,6 +1188,21 @@ class LobbyViewModel: ObservableObject {
 
             // Check if room state is playing (event if it was already playing)
             if roomState.isPlaying && !isStarting {
+                // CRITICAL FIX: Race Condition Check
+                // 1. Check if we just finished playback (grace period)
+                if let endedAt = playbackEndedTimestamp, Date().timeIntervalSince(endedAt) < 5 {
+                    NSLog("🛑 Guest: Ignoring playback signal - just finished playback (Grace Period)")
+                    return
+                }
+
+                // 2. Check for stale "is_playing" signal (e.g. Host crashed or failed to clear DB)
+                // If last_activity is old (> 60s) and we just joined, it's likely a stale flag.
+                let activityAge = Date().timeIntervalSince(roomState.lastActivity)
+                if activityAge > 60 {
+                    NSLog("🛑 Guest: Ignoring stale playback signal (Age: \(Int(activityAge))s)")
+                    return
+                }
+
                 NSLog("🎬 Guest: Detected room playback via database fallback")
                 // NOTE: Don't add .hostStarting message here - guest already received it via Realtime
 

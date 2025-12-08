@@ -333,7 +333,8 @@ class SupabaseClient {
         season: Int? = nil,
         episode: Int? = nil,
         isPublic: Bool? = nil,
-        description: String? = nil
+        description: String? = nil,
+        playlist: [PlaylistItem]? = nil
     ) async throws -> SupabaseRoom {
         var roomData: [String: Any] = [
             "id": id,
@@ -352,6 +353,23 @@ class SupabaseClient {
         if let backdropUrl = backdropUrl { roomData["backdrop_url"] = backdropUrl }
         if let season = season { roomData["season"] = season }
         if let episode = episode { roomData["episode"] = episode }
+
+        if let playlist = playlist {
+            // Serialize playlist items to dictionaries for JSONB column
+            do {
+                let playlistData = try playlist.map { item -> [String: Any] in
+                    let data = try JSONEncoder().encode(item)
+                    guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                        throw SupabaseError.encodingError
+                    }
+                    return dict
+                }
+                roomData["playlist"] = playlistData
+            } catch {
+                NSLog("⚠️ Failed to encode playlist for room creation: \(error)")
+                // Continue without playlist rather than failing entirely
+            }
+        }
 
         let data = try await makeRequest(
             path: "/rooms",

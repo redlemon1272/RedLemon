@@ -579,15 +579,6 @@ struct HeroEventCard: View {
         }
         .buttonStyle(PlainButtonStyle())
         .opacity(event.isFinished ? 0.6 : 1.0)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(
-                    event.isFinished ? Color.gray.opacity(0.3) :
-                    (event.isInLobby ? Color.blue.opacity(0.5) :
-                    (event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1))),
-                    lineWidth: 2
-                )
-        )
         .onAppear {
             if event.isLive || event.isInLobby || isLobbyOverride || event.index == 1 {
                 currentTime = TimeService.shared.now
@@ -864,6 +855,15 @@ struct HeroEventCardContent: View {
             .opacity(isJoining ? 1 : 0)
             .animation(.easeInOut(duration: 0.2), value: isJoining)
             .allowsHitTesting(false)
+
+            // LAYER 5: Status Border (Formerly in .overlay)
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    event.isFinished ? Color.gray.opacity(0.3) :
+                    (event.isInLobby ? Color.blue.opacity(0.5) :
+                    (event.isLive ? Color.red.opacity(0.5) : Color.white.opacity(0.1))),
+                    lineWidth: 2
+                )
         }
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)

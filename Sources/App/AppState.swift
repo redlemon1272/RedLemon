@@ -670,6 +670,11 @@ class AppState: ObservableObject {
             let roomId = generateRoomCode()  // 4-digit alphanumeric (e.g., A3H9)
 
             // Create room in database
+            NSLog("📝 Creating room with parameters:")
+            NSLog("   Name: \(roomName)")
+            NSLog("   Description: \(description ?? "nil")")
+            NSLog("   IsPublic: \(isPublic)")
+
             // Create room in database
             // Attempt 1: Try with new fields (Description / IsPublic)
             var room: SupabaseRoom!
@@ -688,6 +693,7 @@ class AppState: ObservableObject {
                     isPublic: isPublic,
                     description: description
                 )
+                NSLog("✅ SupabaseRoom created successfully with Description: \(room.description ?? "nil")")
              } catch {
                 NSLog("⚠️ Failed to create room with description/public flags. Retrying fallback... Error: \(error)")
                 // Attempt 2: Retry without new fields (Backward compatibility for non-migrated backend)
@@ -705,6 +711,7 @@ class AppState: ObservableObject {
                     isPublic: nil,      // Don't send is_public
                     description: nil    // Don't send description
                 )
+                NSLog("⚠️ Fallback room created (No Description logged in returned object)")
              }
 
             NSLog("✅ Room created: \(roomId)")
@@ -791,52 +798,73 @@ class AppState: ObservableObject {
         isLoadingRoom = true
 
         do {
-            guard let userId = currentUserId else {
-                throw NSError(domain: "AppState", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            // Join in database first (to ensure participant record exists)
+            // But first, fetch room details to ensure it exists
+            let roomState = try await SupabaseClient.shared.getRoomState(roomId: roomId)
+            
+            // Check if we found the room
+            guard let room = roomState else {
+                NSLog("❌ Room not found: \(roomId)")
+                isLoadingRoom = false
+                return
+            }
+            
+            NSLog("✅ Guest fetched room state: \(room.name)")
+            NSLog("   Description: \(room.description ?? "nil")")
+            NSLog("   Playlist: \(room.playlist != nil ? "Yes (\(room.playlist!.count) items)" : "nil")")
+            NSLog("   PlaylistIndex: \(room.currentPlaylistIndex)")
+
+            // Now join as participant
+            if let userId = currentUserId {
+                try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
+                NSLog("✅ Guest joined room in database")
+            } else {
+                 NSLog("⚠️ Guest has no user ID, skipping DB join (Realtime will handle)")
             }
 
-            // Fetch room details
-            guard let room = try await SupabaseClient.shared.getRoomState(roomId: roomId) else {
-                throw NSError(domain: "AppState", code: 404, userInfo: [NSLocalizedDescriptionKey: "Room not found"])
-            }
-
-            // Join as participant
-            try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
-
-            NSLog("✅ Joined room: \(roomId)")
-
-            // Convert SupabaseRoom to WatchPartyRoom
-            // We need to fetch participants to create a complete WatchPartyRoom
+            // Create local WatchPartyRoom object
             let participants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
-            let watchPartyParticipants = participants.compactMap { p -> Participant? in
-                // We don't have full user details here, just IDs.
-                // In a real app we'd fetch user profiles. For now use placeholders or fetch if critical.
-                return Participant(
-                    id: p.userId.uuidString,
-                    name: "User", // Placeholder, will be updated by realtime
-                    isHost: p.isHost,
-                    isReady: false,
-                    joinedAt: p.joinedAt
-                )
+            var participantList: [Participant] = []
+            for p in participants {
+                // Fetch user metadata for name
+                var name = "User"
+                if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
+                    name = user.username
+                }
+                participantList.append(Participant(
+                     id: p.userId.uuidString,
+                     name: name,
+                     isHost: p.isHost,
+                     isReady: false,
+                     joinedAt: p.joinedAt
+                ))
             }
 
+            // Map SupabaseRoom -> WatchPartyRoom
             let watchPartyRoom = WatchPartyRoom(
                 id: room.id,
                 hostId: room.hostUserId.uuidString,
                 hostName: room.hostUsername,
-                mediaItem: nil, // Will be set below
+                mediaItem: MediaItem(
+                    id: room.imdbId ?? "",
+                    type: (room.season != nil) ? "series" : "movie",
+                    name: room.name,
+                    poster: room.posterUrl,
+                    background: room.backdropUrl,
+                    logo: nil, description: nil, releaseDate: nil, rating: nil, genres: nil
+                ),
                 season: room.season,
                 episode: room.episode,
-                quality: .fullHD,
+                quality: .fullHD, // Default, will sync from host
                 sourceQuality: nil,
                 description: room.description,
                 posterURL: room.posterUrl,
-                participants: watchPartyParticipants,
+                participants: participantList,
                 state: .lobby,
                 createdAt: room.createdAt,
-                lastActivity: room.lastActivity,
+                lastActivity: room.createdAt,
                 playlist: room.playlist,
-                currentPlaylistIndex: room.currentPlaylistIndex ?? 0,
+                currentPlaylistIndex: room.currentPlaylistIndex,
                 lobbyDuration: 300,
                 shouldLoop: false,
                 isPersistent: true,

@@ -494,18 +494,23 @@ class SupabaseClient {
             return dict
         }
 
-        _ = try await makeRequest(
-            path: "/rooms",
-            method: "PATCH",
-            body: [
-                "playlist": playlistData,
-                "current_playlist_index": currentIndex,
-                "last_activity": ISO8601DateFormatter().string(from: Date())
-            ],
-            query: ["id": "eq.\(roomId)"]
-        )
-        
-        NSLog("✅ Updated playlist for room \(roomId): \(playlist.count) items")
+        do {
+            _ = try await makeRequest(
+                path: "/rooms",
+                method: "PATCH",
+                body: [
+                    "playlist": playlistData,
+                    "current_playlist_index": currentIndex,
+                    "last_activity": ISO8601DateFormatter().string(from: Date())
+                ],
+                query: ["id": "eq.\(roomId)"]
+            )
+            NSLog("✅ Updated playlist for room \(roomId): \(playlist.count) items")
+        } catch SupabaseError.httpError(let code, let message) where code == 400 && message.contains("current_playlist_index") {
+            NSLog("⚠️ SupabaseClient: Backend schema missing 'current_playlist_index'. Playlist state will NOT be persisted.")
+        } catch {
+            throw error
+        }
     }
 
     /// Update room visibility (e.g. Soft Close)

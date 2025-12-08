@@ -1112,19 +1112,23 @@ class LobbyViewModel: ObservableObject {
             var updatedParticipants: [Participant] = []
 
             for participant in roomParticipants {
+                var username = "User"
                 if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
-                    // Preserve existing ready state for known participants
-                    let existingParticipant = participants.first { $0.id == participant.userId.uuidString }
-                    let isReady = existingParticipant?.isReady ?? false
+                    username = user.username
+                }
+                
+                // Preserve existing ready state for known participants
+                let existingParticipant = participants.first { $0.id == participant.userId.uuidString }
+                let isReady = existingParticipant?.isReady ?? false
 
-                    let p = Participant(
-                        id: participant.userId.uuidString,
-                        name: user.username,
-                        isHost: participant.isHost,
-                        isReady: isReady,  // Preserve ready state from local state
-                        joinedAt: participant.joinedAt
-                    )
-                    updatedParticipants.append(p)
+                let p = Participant(
+                    id: participant.userId.uuidString,
+                    name: username,
+                    isHost: participant.isHost,
+                    isReady: isReady,  // Preserve ready state from local state
+                    joinedAt: participant.joinedAt
+                )
+                updatedParticipants.append(p)
 
                     // If this is the current user (guest), ensure their ID matches
                     if !isHost && participant.userId.uuidString == participantId {

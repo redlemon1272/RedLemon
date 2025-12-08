@@ -851,7 +851,13 @@ class AppState: ObservableObject {
                     name: room.name,
                     poster: room.posterUrl,
                     background: room.backdropUrl,
-                    logo: nil, description: nil, releaseDate: nil, rating: nil, genres: nil
+                    logo: nil,
+                    description: nil,
+                    releaseInfo: nil,
+                    year: nil,
+                    imdbRating: nil,
+                    genres: nil,
+                    runtime: nil
                 ),
                 season: room.season,
                 episode: room.episode,

@@ -282,6 +282,12 @@ class MPVPlayerViewModel: ObservableObject {
                     NSLog("📝 Loading external subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
                     mpvWrapper.loadSubtitle(url: subtitle.url, title: subtitle.label)
                 }
+                
+                // Immediately refresh UI tracks
+                await MainActor.run {
+                    self.updateSubtitleTracks()
+                }
+                
                 NSLog("ℹ️ External subtitles loaded as additional options (embedded subs take priority)")
             }
         } else if !subtitles.isEmpty {
@@ -323,6 +329,12 @@ class MPVPlayerViewModel: ObservableObject {
                             NSLog("❌ Exception downloading SubDL subtitle %d: %@", index + 1, error.localizedDescription)
                         }
                     }
+                    
+                    // Immediately refresh UI tracks after download loop
+                    await MainActor.run {
+                        self.updateSubtitleTracks()
+                    }
+                    
                     NSLog("✅ SubDL subtitle download loop completed")
                 }
             } else {
@@ -344,6 +356,12 @@ class MPVPlayerViewModel: ObservableObject {
                             NSLog("❌ RedLemon: Failed to download subtitle %d", index + 1)
                         }
                     }
+                    
+                    // Immediately refresh UI tracks
+                    await MainActor.run {
+                        self.updateSubtitleTracks()
+                    }
+                    
                     NSLog("ℹ️ External subtitles downloaded and added as options (embedded subs take priority)")
                 }
             }

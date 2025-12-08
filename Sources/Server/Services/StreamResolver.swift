@@ -501,6 +501,13 @@ actor StreamResolver {
         
         if isMulti || hasEnglish { return true }
         if isForeign { return false } // Explicitly foreign only
+        
+        // Block "DUB" releases if they aren't marked as English/Multi
+        // "DUB" usually implies dubbing into a non-English language (for English movies) 
+        // or just "Dubbed" without specifying English (risky)
+        let isDubbed = lower.contains(".dub.") || lower.contains(" dub ") || lower.contains("-dub-") || lower.hasSuffix("-dub") || lower.hasSuffix(".dub")
+        if isDubbed { return false }
+        
         return true // Default to true if unknown
     }
     

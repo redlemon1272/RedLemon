@@ -482,30 +482,36 @@ class AppState: ObservableObject {
         enterFullscreen()
     }
 
-    func exitPlayer() async {
-        // Leave room logic
-        if let roomId = currentRoomId {
-            print("👋 Leaving room: \(roomId)")
-            if currentWatchMode == .watchParty {
-                print("   Notifying other users in watch party...")
+    func exitPlayer(keepRoomState: Bool = false) async {
+        // Leave room logic (only if fully exiting)
+        if !keepRoomState {
+            if let roomId = currentRoomId {
+                print("👋 Leaving room: \(roomId)")
+                if currentWatchMode == .watchParty {
+                    print("   Notifying other users in watch party...")
+                }
             }
         }
 
         // Clean up player state
-        // Clean up player state
         showPlayer = false
         selectedStream = nil
         selectedMediaItem = nil
-        currentRoomId = nil
-        currentWatchMode = .solo
-        isWatchPartyHost = false
+        
+        if !keepRoomState {
+            currentRoomId = nil
+            currentWatchMode = .solo
+            isWatchPartyHost = false
+        }
 
         // Capture event state before resetting
         let wasEventPlayback = isEventPlayback
         isEventPlayback = false // Reset event flag
 
         // Navigate back to appropriate view
-        if wasEventPlayback {
+        if keepRoomState {
+            // Do not change view here, caller handles it (or defaults to lobby)
+        } else if wasEventPlayback {
             print("🔙 Returning to Events view")
             currentView = .events
         } else {
@@ -516,65 +522,71 @@ class AppState: ObservableObject {
         exitFullscreen()
         restoreWindowSize()
 
-        print("✅ Exited room and returned to browse")
+        if keepRoomState {
+             print("✅ Player exited (Room state preserved)")
+        } else {
+             print("✅ Exited room and returned to browse")
+        }
     }
 
     func handleMovieFinished() async {
         print("🎬 AppState.handleMovieFinished() called")
-
-
-
         print("🎬   isEventPlayback: \(isEventPlayback)")
         print("🎬   currentWatchPartyRoom: \(currentWatchPartyRoom?.id ?? "nil")")
         print("🎬   currentView: \(currentView)")
 
-        // Capture state BEFORE exiting player (which resets flags)
+        // Identify logic path BEFORE calling exitPlayer
         let wasEventPlayback = isEventPlayback
+        // Priority 2: Watch party with playlist
+        let isPlaylistRoom = currentWatchPartyRoom?.hasPlaylist ?? false
+        // Priority 3: Persistent room
+        let isPersistentRoom = currentWatchPartyRoom?.isPersistent ?? false
 
-        print("🎬 Calling exitPlayer()...")
-        await exitPlayer()
+        // Determine if we should keep room state
+        // Events: NO (handled separately)
+        // Playlist/Persistent: YES
+        let shouldKeepRoomState = !wasEventPlayback && (isPlaylistRoom || isPersistentRoom)
+
+        print("🎬 Calling exitPlayer(keepRoomState: \(shouldKeepRoomState))...")
+        await exitPlayer(keepRoomState: shouldKeepRoomState)
         print("🎬 exitPlayer() completed")
 
         // Priority 1: Event playback (existing logic)
         if wasEventPlayback {
             print("🔄 Event finished - transitioning to Events flow")
-            print("🔄   Setting currentView = .events")
-            print("🔄   Setting shouldAutoJoinLobby = true")
-
-            // Mark current event as finished to prevent auto-rejoin
+            // Logic handled by exitPlayer mostly, but specific event logic here
             if let eventId = currentEventId {
-                print("🔄   Marking event \(eventId) as finished")
                 await MainActor.run {
                     finishedEventIds.insert(eventId)
                     currentEventId = nil
                 }
             }
-
             await MainActor.run {
                 currentView = .events
                 shouldAutoJoinLobby = true
             }
-            print("🔄   Transition complete - currentView is now \(currentView)")
             return
         }
 
         // Priority 2: Watch party with playlist (NEW)
-        if let room = currentWatchPartyRoom, room.hasPlaylist {
+        if isPlaylistRoom, let room = currentWatchPartyRoom {
             print("🔄 Playlist item finished - returning to lobby")
             await handlePlaylistTransition(room: room)
             return
         }
 
         // Priority 3: Single movie watch party (persistent by default now)
-        if let room = currentWatchPartyRoom, room.isPersistent {
+        if isPersistentRoom {
             print("🔄 Movie finished - returning to persistent lobby")
             await MainActor.run {
                 currentView = .watchPartyLobby
             }
+            // CRITICAL: Ensure LobbyViewModel knows we just finished playing
+            // The LobbyViewModel.init will see isHost=true and clear the DB state
             return
         }
 
-        // Fallback: Solo watching (no action needed, just exit)
+        // Fallback: Solo watching (no action needed, already handled by exitPlayer default)
         print("✅ Playback finished - solo watching")
     }
 

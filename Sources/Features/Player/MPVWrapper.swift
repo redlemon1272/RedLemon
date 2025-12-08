@@ -111,12 +111,18 @@ class MPVWrapper: ObservableObject {
         // Start event polling and time updates
         eventPollingTask = Task { [weak self] in await self?.pollEvents() }
         startTimeUpdates()
+        
+        // Enable detailed logging for network diagnostics
+        mpv_request_log_messages(handle, "info")
 
         // Observe duration property for updates (critical for network streams)
         mpv_observe_property(handle, 0, "duration", MPV_FORMAT_DOUBLE)
         
         // Observe pause property to correctly track playback state
         mpv_observe_property(handle, 0, "pause", MPV_FORMAT_FLAG)
+        
+        // Observe buffering state (detects network stalls)
+        mpv_observe_property(handle, 0, "paused-for-cache", MPV_FORMAT_FLAG)
     }
 
     // MARK: - Smart Memory Monitoring (Removed)
@@ -266,7 +272,23 @@ class MPVWrapper: ObservableObject {
                         print("⏯️ MPV: Pause state changed to \(isPaused) -> isPlaying = \(self.isPlaying)")
                     }
                 }
+            } else if nameStr == "paused-for-cache" {
+                 // Buffering state changed
+                 if let value = prop.pointee.data {
+                     let isBufferingNow = value.assumingMemoryBound(to: Int32.self).pointee != 0
+                     if self.isBuffering != isBufferingNow {
+                         self.isBuffering = isBufferingNow
+                         print("⏳ MPV: Buffering state changed: \(isBufferingNow) (paused-for-cache)")
+                     }
+                 }
             }
+        case MPV_EVENT_LOG_MESSAGE:
+            guard let data = eventPtr.pointee.data else { break }
+            let log = data.assumingMemoryBound(to: mpv_event_log_message.self)
+            guard let text = log.pointee.text else { break }
+            let message = String(cString: text).trimmingCharacters(in: .whitespacesAndNewlines)
+            // Filter out noisy logs if needed, but keeping "info" level is good for diagnostics
+            print("[MPV] \(message)")
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {
                 print(" MPV Event: \(eventId.rawValue)")

@@ -435,6 +435,24 @@ class MPVPlayerViewModel: ObservableObject {
             }
         }
         mpvObserverTasks.append(fileLoadedTask)
+        
+        // Listen for buffering (stalling) events
+        let bufferingTask = Task { [weak self] in
+            guard let self = self else { return }
+            for await isBuffering in self.mpvWrapper.$isBuffering.values {
+                // Only update if we're not in the initial loading state (to avoid flickering)
+                // When isBuffering becomes true, show loader. When false, hide it.
+                if isBuffering {
+                    print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
+                    self.isLoading = true
+                } else if self.hasVideoReadyTriggered && !isBuffering {
+                    // Only hide loader if we've already passed the initial "Video Ready" gate
+                    print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
+                    self.isLoading = false
+                }
+            }
+        }
+        mpvObserverTasks.append(bufferingTask)
     }
 
     // MARK: - Metadata Fetching

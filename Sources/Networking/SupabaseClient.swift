@@ -332,16 +332,17 @@ class SupabaseClient {
         backdropUrl: String? = nil,
         season: Int? = nil,
         episode: Int? = nil,
-        isPublic: Bool = true,
+        isPublic: Bool? = nil,
         description: String? = nil
     ) async throws -> SupabaseRoom {
         var roomData: [String: Any] = [
             "id": id,
             "name": name,
             "host_user_id": hostUserId.uuidString,
-            "host_username": hostUsername,
-            "is_public": isPublic
+            "host_username": hostUsername
         ]
+        
+        if let isPublic = isPublic { roomData["is_public"] = isPublic }
         
         if let description = description { roomData["description"] = description }
 

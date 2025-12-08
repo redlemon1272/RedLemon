@@ -670,20 +670,42 @@ class AppState: ObservableObject {
             let roomId = generateRoomCode()  // 4-digit alphanumeric (e.g., A3H9)
 
             // Create room in database
-            let room = try await SupabaseClient.shared.createRoom(
-                id: roomId,
-                name: roomName,
-                hostUserId: userId,
-                hostUsername: currentUsername,
-                streamHash: nil,
-                imdbId: mediaItem.id,
-                posterUrl: mediaItem.poster,
-                backdropUrl: mediaItem.background,
-                season: finalSeason,
-                episode: finalEpisode,
-                isPublic: isPublic,
-                description: description
-            )
+            // Create room in database
+            // Attempt 1: Try with new fields (Description / IsPublic)
+            var room: SupabaseRoom!
+            do {
+                room = try await SupabaseClient.shared.createRoom(
+                    id: roomId,
+                    name: roomName,
+                    hostUserId: userId,
+                    hostUsername: currentUsername,
+                    streamHash: nil,
+                    imdbId: mediaItem.id,
+                    posterUrl: mediaItem.poster,
+                    backdropUrl: mediaItem.background,
+                    season: finalSeason,
+                    episode: finalEpisode,
+                    isPublic: isPublic,
+                    description: description
+                )
+             } catch {
+                NSLog("⚠️ Failed to create room with description/public flags. Retrying fallback... Error: \(error)")
+                // Attempt 2: Retry without new fields (Backward compatibility for non-migrated backend)
+                room = try await SupabaseClient.shared.createRoom(
+                    id: roomId,
+                    name: roomName,
+                    hostUserId: userId,
+                    hostUsername: currentUsername,
+                    streamHash: nil,
+                    imdbId: mediaItem.id,
+                    posterUrl: mediaItem.poster,
+                    backdropUrl: mediaItem.background,
+                     season: finalSeason,
+                    episode: finalEpisode,
+                    isPublic: nil,      // Don't send is_public
+                    description: nil    // Don't send description
+                )
+             }
 
             NSLog("✅ Room created: \(roomId)")
 

@@ -1513,6 +1513,14 @@ class LobbyViewModel: ObservableObject {
         if logoURL == nil {
              loadMetadata() // Full fetch if needed
         }
+        
+        // CRITICAL: Reset ready state so we don't start automatically or stuck in ready state
+        self.isReady = false
+        // Also update backend to unready? The standard "toggleReady" might be needed or manual DB update.
+        // For now, local reset ensures UI is correct.
+        // Ideally we should broadcast "UNREADY" but existing logic handles toggles.
+        // Let's force a toggle if we are ready?
+        // if self.isReady { toggleReady() } - better to just set false locally and let user click again.
     }
     
     // REMOVED: startPlaylistCountdown

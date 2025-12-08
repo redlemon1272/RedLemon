@@ -419,7 +419,7 @@ class MPVWrapper: ObservableObject {
         var args: [UnsafePointer<CChar>?] = [
             UnsafePointer(strdup("sub-add")),
             UnsafePointer(strdup(url)),
-            UnsafePointer(strdup("cached")),  // Add to list but don't auto-select
+            UnsafePointer(strdup("auto")),    // Add to list but don't auto-select (use "auto" flag)
             UnsafePointer(strdup(title)),     // Title (release name)
             UnsafePointer(strdup("en")),      // Language
             nil

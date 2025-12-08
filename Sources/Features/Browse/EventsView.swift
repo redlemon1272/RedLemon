@@ -643,24 +643,11 @@ struct HeroEventCardContent: View {
                 .frame(height: 320)
                 .frame(maxWidth: .infinity)
 
-            // LAYER 1: Background Image
-            AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: 320)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
-            } placeholder: {
-                Rectangle().fill(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-            }
-            .allowsHitTesting(false)
+            // LAYER 1: Background Image (DISABLED FOR DEBUGGING)
+            Color.blue.opacity(0.2)
+                .frame(height: 320)
+                .frame(maxWidth: .infinity)
+                .allowsHitTesting(false)
 
             // LAYER 2: Gradients
             ZStack {

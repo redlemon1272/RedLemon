@@ -2,6 +2,19 @@ import Foundation
 
 /// Supabase REST API client for RedLemon backend operations
 /// Uses direct HTTP requests to Supabase PostgREST API
+
+enum SupabaseError: Error {
+    case httpError(Int, String)
+    case decodingError(Error)
+    case encodingError
+    case roomCreationFailed
+    case userNotFound
+    case invalidURL
+    case invalidResponse
+    case userCreationFailed
+    case serverError(String)
+}
+
 class SupabaseClient {
     static let shared = SupabaseClient()
 
@@ -319,7 +332,8 @@ class SupabaseClient {
         backdropUrl: String? = nil,
         season: Int? = nil,
         episode: Int? = nil,
-        isPublic: Bool = true
+        isPublic: Bool = true,
+        description: String? = nil
     ) async throws -> SupabaseRoom {
         var roomData: [String: Any] = [
             "id": id,
@@ -328,6 +342,8 @@ class SupabaseClient {
             "host_username": hostUsername,
             "is_public": isPublic
         ]
+        
+        if let description = description { roomData["description"] = description }
 
         if let streamHash = streamHash { roomData["stream_hash"] = streamHash }
         if let imdbId = imdbId { roomData["imdb_id"] = imdbId }
@@ -360,7 +376,7 @@ class SupabaseClient {
                     "is_host": isHost
                 ]
             )
-        } catch SupabaseError.httpError(409, _) {
+        } catch SupabaseError.httpError(let code, _) where code == 409 {
             // Error 409 means user is already in the room (duplicate key).
             // We can safely ignore this and proceed as if join was successful.
             NSLog("⚠️ SupabaseClient: User already in room (409), proceeding...")
@@ -460,6 +476,35 @@ class SupabaseClient {
         )
         
         NSLog("✅ Persisted stream selection to room \(roomId)")
+    }
+
+    /// Update room playlist (Host only)
+    func updateRoomPlaylist(
+        roomId: String,
+        playlist: [PlaylistItem],
+        currentIndex: Int
+    ) async throws {
+        // Serialize playlist items to dictionaries for JSONB column
+        let playlistData = try playlist.map { item -> [String: Any] in
+            let data = try JSONEncoder().encode(item)
+            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                throw SupabaseError.encodingError
+            }
+            return dict
+        }
+
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: [
+                "playlist": playlistData,
+                "current_playlist_index": currentIndex,
+                "last_activity": ISO8601DateFormatter().string(from: Date())
+            ],
+            query: ["id": "eq.\(roomId)"]
+        )
+        
+        NSLog("✅ Updated playlist for room \(roomId): \(playlist.count) items")
     }
 
     /// Update room visibility (e.g. Soft Close)
@@ -684,6 +729,9 @@ struct SupabaseRoom: Codable {
     let fileIdx: Int? // Selected file index
     let quality: String? // Selected quality
     let unlockedStreamUrl: String? // Unlocked stream URL
+    let playlist: [PlaylistItem]? // List of items to play
+    let currentPlaylistIndex: Int? // Current index in playlist
+    let description: String? // Room description
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -705,6 +753,9 @@ struct SupabaseRoom: Codable {
         case fileIdx = "selected_file_idx"
         case quality = "selected_quality"
         case unlockedStreamUrl = "unlocked_stream_url"
+        case playlist
+        case currentPlaylistIndex = "current_playlist_index"
+        case description
     }
 }
 
@@ -813,17 +864,7 @@ struct AnyCodable: Codable {
     }
 }
 
-// MARK: - Errors
 
-enum SupabaseError: Error {
-    case userCreationFailed
-    case userNotFound
-    case roomCreationFailed
-    case invalidURL
-    case invalidResponse
-    case httpError(Int, String)
-    case serverError(String)
-}
 // MARK: - Social Features Models
 
 // MARK: - Social Features Models

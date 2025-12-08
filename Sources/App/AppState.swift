@@ -581,13 +581,25 @@ class AppState: ObservableObject {
     // NEW: Handle playlist progression
     private func handlePlaylistTransition(room: WatchPartyRoom) async {
         await MainActor.run {
+            // Increment index for next item
+            var updatedRoom = room
+            updatedRoom.currentPlaylistIndex += 1
+            
+            // Loop functionality check
+            if updatedRoom.currentPlaylistIndex >= (updatedRoom.playlist?.count ?? 0) {
+                if updatedRoom.shouldLoop {
+                    updatedRoom.currentPlaylistIndex = 0
+                }
+                // If not looping, we'll let LobbyViewModel handle the "Playlist Finished" state
+                // But we still return to lobby to show "Finished" message or similar
+            }
+            
+            self.currentWatchPartyRoom = updatedRoom
+            
             // Return to lobby
             currentView = .watchPartyLobby
 
-            // The lobby will handle:
-            // 1. Showing countdown (using room.lobbyDuration)
-            // 2. Auto-advancing to next item
-            // 3. Looping if needed
+            // usage: LobbyViewModel will see the updated index via room/appState and update its UI/State
         }
     }
 
@@ -615,23 +627,39 @@ class AppState: ObservableObject {
 
     // Create a new watch party room and navigate to lobby
     @MainActor
-    func createWatchPartyAndNavigate(mediaItem: MediaItem, season: Int?, episode: Int?, quality: VideoQuality = .fullHD) async {
-        // FIX: Ensure movies don't inherit stale season/episode data
-        let isMovie = mediaItem.type == "movie"
-        let finalSeason = isMovie ? nil : season
-        let finalEpisode = isMovie ? nil : episode
 
-        NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
-        if let s = finalSeason, let e = finalEpisode {
-            NSLog("   Season: \(s), Episode: \(e)")
-        } else {
-            NSLog("   Type: \(mediaItem.type) (No Season/Episode)")
-        }
-        NSLog("   Quality: \(quality.rawValue)")
-
+    func createWatchPartyAndNavigate(
+        mediaItem: MediaItem,
+        season: Int? = nil,
+        episode: Int? = nil,
+        quality: VideoQuality = .fullHD,
+        isPublic: Bool = true,
+        description: String? = nil
+    ) async {
         isLoadingRoom = true
+        self.isLoadingRoom = true // Bind to main thread published property
 
         do {
+            guard let userId = currentUserId else {
+                throw NSError(domain: "AppState", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
+            }
+            
+            // Handle Series logic (default to S1E1 if missing)
+            var finalSeason = season
+            var finalEpisode = episode
+            if mediaItem.type == "series" && (season == nil || episode == nil) {
+                 finalSeason = 1
+                 finalEpisode = 1
+            }
+
+            NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")
+            if let s = finalSeason, let e = finalEpisode {
+                NSLog("   Season: \(s), Episode: \(e)")
+            } else {
+                NSLog("   Type: \(mediaItem.type) (No Season/Episode)")
+            }
+            NSLog("   Quality: \(quality.rawValue)")
+
             // Ensure we have a user
             guard let userId = currentUserId, !currentUsername.isEmpty else {
                 throw NSError(domain: "AppState", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
@@ -653,7 +681,8 @@ class AppState: ObservableObject {
                 backdropUrl: mediaItem.background,
                 season: finalSeason,
                 episode: finalEpisode,
-                isPublic: true
+                isPublic: isPublic,
+                description: description
             )
 
             NSLog("✅ Room created: \(roomId)")
@@ -681,7 +710,7 @@ class AppState: ObservableObject {
                 episode: finalEpisode,
                 quality: quality,
                 sourceQuality: nil,
-                description: nil,
+                description: description,
                 posterURL: room.posterUrl,
                 participants: [hostParticipant],
                 state: .lobby,

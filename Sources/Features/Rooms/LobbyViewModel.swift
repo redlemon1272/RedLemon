@@ -21,6 +21,9 @@ class LobbyViewModel: ObservableObject {
     @Published var playlist: [PlaylistItem] = []
     @Published var currentPlaylistIndex: Int = 0
     @Published var isPlaylistMode: Bool = false
+    @Published var mutedUserIds: Set<String> = []
+    
+    // Realtime connection status for UI feedback
 
     // Realtime connection status for UI feedback
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
@@ -87,7 +90,7 @@ class LobbyViewModel: ObservableObject {
             // Wait a brief moment for appState to be set
             try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
             if self.isHost && self.isPlaylistMode {
-                self.checkForAutoAdvance()
+                self.prepareNextItem()
             }
         }
     }
@@ -513,6 +516,16 @@ class LobbyViewModel: ObservableObject {
         print("✓ Lobby: \(currentUsername) toggled ready to \(isReady)")
     }
 
+    func toggleMute(participantId: String) {
+        if mutedUserIds.contains(participantId) {
+            mutedUserIds.remove(participantId)
+            addMessage(.systemInfo, userName: "System", data: ["message": "Unmuted participant"])
+        } else {
+            mutedUserIds.insert(participantId)
+            addMessage(.systemInfo, userName: "System", data: ["message": "Muted participant"])
+        }
+    }
+
     func kickParticipant(_ participant: Participant) {
         guard isHost else { return }
 
@@ -657,6 +670,52 @@ class LobbyViewModel: ObservableObject {
             appState.currentRoomId = room.id
             appState.navigateToPlayer(stream: finalStream)
         }
+
+    }
+
+    func addToPlaylist(item: MediaItem, season: Int? = nil, episode: Int? = nil) async {
+        await addItemsToPlaylist([(item, season, episode)])
+    }
+    
+    func addItemsToPlaylist(_ items: [(item: MediaItem, season: Int?, episode: Int?)]) async {
+        guard isHost, !items.isEmpty else { return }
+        
+        let newItems = items.compactMap { entry -> PlaylistItem? in
+            let finalSeason = entry.season ?? (entry.item.type == "series" ? 1 : nil)
+            let finalEpisode = entry.episode ?? (entry.item.type == "series" ? 1 : nil)
+            
+            // Check for duplicates in existing playlist
+            let isDuplicateInPlaylist = playlist.contains { existing in
+                existing.mediaItem.id == entry.item.id &&
+                existing.season == finalSeason &&
+                existing.episode == finalEpisode
+            }
+            
+            // Check if it matches the CURRENTLY playing item (to avoid immediate replay)
+            let isCurrentItem = (room.mediaItem?.id == entry.item.id &&
+                                 room.season == finalSeason &&
+                                 room.episode == finalEpisode)
+            
+            if isDuplicateInPlaylist || isCurrentItem {
+                 return nil
+            }
+            
+            return PlaylistItem(mediaItem: entry.item, season: finalSeason, episode: finalEpisode)
+        }
+        
+        guard !newItems.isEmpty else { return }
+        
+        // Optimistic update
+        await MainActor.run {
+            self.playlist.append(contentsOf: newItems)
+            if playlist.count == newItems.count { // First items added
+                self.currentPlaylistIndex = 0
+            }
+            self.isPlaylistMode = true
+            
+            // Persist to Supabase
+            self.updatePlaylistInDatabase()
+        }
     }
 
     private func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String]? = nil) {
@@ -683,7 +742,13 @@ class LobbyViewModel: ObservableObject {
 
         // Log incoming Realtime message
         let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
-        NSLog("📥 Received Realtime message: '\(chatText)' from \(senderInfo) in room \(room.id)")
+        // NSLog("📥 Received Realtime message: '\(chatText)' from \(senderInfo)") // Reduced log spam
+
+        // MUTE CHECK: Ignore chat if user is muted
+        if let senderId = syncMessage.senderId, mutedUserIds.contains(senderId), syncMessage.type == .chat, !chatText.starts(with: "LOBBY_") {
+             // System messages (LOBBY_*) are never muted
+             return
+        }
 
         // Handle special lobby commands
         if chatText.starts(with: "LOBBY_") {
@@ -695,7 +760,9 @@ class LobbyViewModel: ObservableObject {
                     NSLog("👋 Host received: Guest '\(guestUsername)' joined room \(room.id)")
                     NSLog("   Guest ID: \(guestId), Total participants: \(participants.count + 1)")
 
-                    addMessage(.userJoined, userName: guestUsername)
+                    // REMOVED: addMessage(.userJoined, userName: guestUsername)
+                    // Reason: Presence callback handles this already. Removing to prevent double messages.
+                    
                     let guest = Participant(
                         id: guestId,
                         name: guestUsername,
@@ -728,7 +795,7 @@ class LobbyViewModel: ObservableObject {
                     let totalCount = participants.count
                     NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
 
-                    // addMessage(.userReady, userName: username) // Reduced spam
+                    addMessage(.userReady, userName: username) // RESTORED
                 } else {
                     NSLog("⚠️ Received LOBBY_READY from unknown participant: \(syncMessage.senderId ?? "unknown")")
                 }
@@ -747,7 +814,7 @@ class LobbyViewModel: ObservableObject {
                     let totalCount = participants.count
                     NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
 
-                    // addMessage(.userNotReady, userName: username) // Reduced spam
+                    addMessage(.userNotReady, userName: username) // RESTORED
                 } else {
                     NSLog("⚠️ Received LOBBY_UNREADY from unknown participant: \(syncMessage.senderId ?? "unknown")")
                 }
@@ -757,8 +824,16 @@ class LobbyViewModel: ObservableObject {
                 if participantId == kickedId {
                     // We were kicked - disconnect and return to browse
                     print("❌ Lobby: Kicked by host")
-                    disconnect()
-                    // Navigation handled by disconnect() or parent view
+                    
+                    // Show alert via lobby message? Or just leave.
+                    // Ideally we'd show an alert but we can't easily trigger one from VM -> View without state binding
+                    // Just force leave
+                    
+                    await MainActor.run {
+                        self.disconnect()
+                        self.appState?.currentView = .browse
+                        self.appState?.restoreWindowFromLobby()
+                    }
                 }
             } else if chatText == "LOBBY_START_COUNTDOWN" {
                 // Host started countdown
@@ -1398,85 +1473,53 @@ class LobbyViewModel: ObservableObject {
 
     // MARK: - Playlist Management
 
-    func checkForAutoAdvance() {
+    // MARK: - Playlist Management
+    
+    // RENAMED: was checkForAutoAdvance
+    func prepareNextItem() {
         guard isHost, isPlaylistMode else { return }
-
-        // If we just finished a movie and there's a next item, start countdown
-        if currentPlaylistIndex < playlist.count {
-            startPlaylistCountdown()
-        } else if room.shouldLoop {
-            currentPlaylistIndex = 0
-            startPlaylistCountdown()
-        } else {
-            // Playlist finished
-            print("✅ Playlist completed")
+        
+        // Sync local index with Updated AppState if referenced
+        if let appStateIndex = appState?.currentWatchPartyRoom?.currentPlaylistIndex {
+            self.currentPlaylistIndex = appStateIndex
         }
-    }
 
-    private func startPlaylistCountdown() {
-        // Use room's lobby duration
-        self.timeUntilStart = room.lobbyDuration
-
-        // Start task
-        countdownTask?.cancel()
-        countdownTask = Task { [weak self] in
-            while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
-                guard let self = self else { return }
-
-                self.timeUntilStart -= 1
-
-                if self.timeUntilStart <= 0 {
-                    self.startNextPlaylistItem()
-                    return
-                }
-            }
-        }
-    }
-
-    private func startNextPlaylistItem() {
-        guard let appState = appState,
-              currentPlaylistIndex < playlist.count else {
+        // Validate index
+        guard currentPlaylistIndex < playlist.count else {
+            print("✅ Playlist completed (Manual Advance)")
+            // Reset to 0 if we want to show the first item again, or leave as is?
+            // If looped, AppState already reset it to 0. 
+            // If valid index, prepare it.
             return
         }
 
-        // CRITICAL: For event rooms, check if event is finished before starting playback
-        if room.id.hasPrefix("event_") {
-            if let eventId = appState.currentEventId, appState.finishedEventIds.contains(eventId) {
-                print("⚠️ Event \(eventId) is finished - redirecting to next event instead of starting playback")
-                disconnect()
-                appState.currentView = .events
-                appState.shouldAutoJoinLobby = true
-                return
-            }
-        }
-
         let item = playlist[currentPlaylistIndex]
-
-        // Update room's current media
+        print("🎬 Preparing next item: \(item.displayTitle) (Index: \(currentPlaylistIndex))")
+        
+        // Update room's current media immediately for the lobby UI
         room.mediaItem = item.mediaItem
         room.season = item.season
         room.episode = item.episode
-
-        // Update index in database
+        
+        // Update Supabase with new index & media
+        // This ensures guests see the new poster/title
         updatePlaylistIndex(currentPlaylistIndex)
-
-        // Start playback
-        Task {
-            await startMovie(appState: appState)
+        
+        // Also trigger metadata load specifically for this new item to refresh background/poster
+        posterURL = item.mediaItem.poster
+        backdropURL = item.mediaItem.background
+        logoURL = item.mediaItem.logo // If available on item, or nil to trigger fetch
+        
+        if logoURL == nil {
+             loadMetadata() // Full fetch if needed
         }
     }
+    
+    // REMOVED: startPlaylistCountdown
+    // REMOVED: startNextPlaylistItem (Host calls startMovie manually now)
 
 
-    func addToPlaylist(_ item: PlaylistItem) {
-        guard isHost else { return }
 
-        playlist.append(item)
-        isPlaylistMode = true
-
-        // Update database
-        updatePlaylistInDatabase()
-    }
 
     func removeFromPlaylist(at index: Int) {
         guard isHost, index < playlist.count else { return }
@@ -1500,13 +1543,32 @@ class LobbyViewModel: ObservableObject {
     }
 
     private func updatePlaylistInDatabase() {
-        // Placeholder for database update
-        print("💾 Updating playlist in database (Placeholder)")
+        Task {
+            do {
+                try await SupabaseClient.shared.updateRoomPlaylist(
+                    roomId: room.id,
+                    playlist: playlist,
+                    currentIndex: currentPlaylistIndex
+                )
+            } catch {
+                print("❌ Failed to update playlist in database: \(error)")
+            }
+        }
     }
 
     private func updatePlaylistIndex(_ index: Int) {
-        // Placeholder for database update
-        print("💾 Updating playlist index in database (Placeholder)")
+        // We update the whole playlist structure for simplicity as our backend expects both
+        Task {
+            do {
+                try await SupabaseClient.shared.updateRoomPlaylist(
+                    roomId: room.id,
+                    playlist: playlist,
+                    currentIndex: index
+                )
+            } catch {
+                print("❌ Failed to update playlist index: \(error)")
+            }
+        }
     }
 }
 

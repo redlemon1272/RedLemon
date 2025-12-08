@@ -8,6 +8,8 @@ struct QualitySelectionView: View {
     @State private var selectedQuality: VideoQuality = .fullHD
     @State private var watchMode: WatchMode = .solo
     @State private var showingStreamSelection = false
+    @State private var roomDescription: String = ""
+    @State private var isPublicRoom: Bool = true
 
     var body: some View {
         VStack(spacing: 0) {
@@ -133,6 +135,27 @@ struct QualitySelectionView: View {
                             .buttonStyle(.plain)
                             .frame(width: 180, height: 120)
                         }
+                        
+                        // NEW: Room Settings (Only for Watch Party)
+                        if watchMode == .watchParty {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Room Settings")
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                    .padding(.top, 4)
+                                
+                                TextField("Room Description (optional)", text: $roomDescription)
+                                    .textFieldStyle(PlainTextFieldStyle())
+                                    .padding(8)
+                                    .background(Color.secondary.opacity(0.1))
+                                    .cornerRadius(8)
+                                    .frame(width: 380)
+                                
+                                Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
+                                    .toggleStyle(SwitchToggleStyle(tint: .accentColor))
+                            }
+                            .transition(.opacity)
+                        }
                     }
                 }
                 .padding(.horizontal, 40)
@@ -201,7 +224,9 @@ struct QualitySelectionView: View {
                     mediaItem: mediaItem,
                     season: appState.selectedSeason,
                     episode: appState.selectedEpisode,
-                    quality: selectedQuality
+                    quality: selectedQuality,
+                    isPublic: isPublicRoom,
+                    description: roomDescription.isEmpty ? nil : roomDescription
                 )
             }
         } else {

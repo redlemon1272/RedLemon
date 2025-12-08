@@ -158,6 +158,14 @@ struct HeroRoomCardContent: View {
                         .foregroundColor(.white)
                         .lineLimit(2)
                         .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                    
+                    // NEW: Season/Episode Info
+                    if let season = room.season, let episode = room.episode {
+                        Text("Season \(season), Episode \(episode)")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.yellow)
+                            .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+                    }
 
                     // Metadata Row
                     HStack(spacing: 12) {

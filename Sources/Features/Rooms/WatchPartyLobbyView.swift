@@ -10,6 +10,7 @@ struct WatchPartyLobbyView: View {
     @State private var showEmojiPicker: Bool = false
     @State private var showPaymentGate = false
     @State private var isAutoJoining = false
+    @State private var showMediaPicker = false
     @StateObject private var licenseManager = LicenseManager.shared
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
@@ -149,7 +150,15 @@ struct WatchPartyLobbyView: View {
                                 Text(room.mediaItem?.name ?? "Select Media")
                                     .font(.title)
                                     .fontWeight(.bold)
+                                    .fontWeight(.bold)
                                     .foregroundColor(.white)
+                                    
+                                if let description = room.description {
+                                    Text(description)
+                                        .font(.subheadline)
+                                        .foregroundColor(.white.opacity(0.8))
+                                        .padding(.top, 2)
+                                }
                             }
 
                             // Season & Episode info for TV series
@@ -240,7 +249,9 @@ struct WatchPartyLobbyView: View {
                                         ParticipantRow(
                                             participant: participant,
                                             canKick: isHost && !participant.isHost,
-                                            onKick: { viewModel.kickParticipant(participant) }
+                                            onKick: { viewModel.kickParticipant(participant) },
+                                            onMute: { viewModel.toggleMute(participantId: participant.id) },
+                                            isMuted: viewModel.mutedUserIds.contains(participant.id)
                                         )
                                     }
                                 }
@@ -260,7 +271,7 @@ struct WatchPartyLobbyView: View {
 
                                     Spacer()
 
-                                    Button(action: { /* TODO: Show media picker */ }) {
+                                    Button(action: { showMediaPicker = true }) {
                                         HStack(spacing: 4) {
                                             Image(systemName: "plus.circle.fill")
                                             Text("Add")
@@ -371,7 +382,6 @@ struct WatchPartyLobbyView: View {
                                                     showEmojiPicker = false
                                                 }) {
                                                     Text(emoji)
-                                                        .font(.system(size: 24))
                                                 }
                                                 .buttonStyle(PlainButtonStyle())
                                             }
@@ -516,6 +526,20 @@ struct WatchPartyLobbyView: View {
         .onAppear {
             viewModel.appState = appState  // Set weak reference
         }
+        .sheet(isPresented: $showMediaPicker) {
+            MediaPickerSheet(
+                onSelect: { item, season, episode in
+                    Task {
+                        await viewModel.addToPlaylist(item: item, season: season, episode: episode)
+                    }
+                },
+                onBulkSelect: { items in
+                    Task {
+                        await viewModel.addItemsToPlaylist(items)
+                    }
+                }
+            )
+        }
         .sheet(isPresented: $showPaymentGate) {
             PaymentGateView()
         }
@@ -568,6 +592,8 @@ struct ParticipantRow: View {
     let participant: Participant
     let canKick: Bool
     let onKick: () -> Void
+    let onMute: () -> Void
+    let isMuted: Bool
 
     var body: some View {
         HStack {
@@ -600,11 +626,21 @@ struct ParticipantRow: View {
             }
 
             if canKick {
-                Button(action: onKick) {
-                    Image(systemName: "xmark.circle.fill")
-                        .foregroundColor(.red)
+                Menu {
+                    Button(role: .destructive, action: onKick) {
+                        Label("Kick Participant", systemImage: "xmark.circle")
+                    }
+                    
+                    Button(action: onMute) {
+                        Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis.circle.fill")
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 20))
                 }
-                .buttonStyle(PlainButtonStyle())
+                .menuStyle(BorderlessButtonMenuStyle())
+                .frame(width: 24, height: 24)
             }
         }
         .padding(8)

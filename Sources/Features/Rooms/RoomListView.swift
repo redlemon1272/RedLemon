@@ -474,9 +474,32 @@ struct RoomListView: View {
                 room.lastActivity = lastActivity
             }
         }
+        
+        // NEW: Update media info (for playlist progression)
+        if let mediaItemData = newRecord["media_item"] as? [String: Any] {
+            // Parse MediaItem from JSON
+            if let data = try? JSONSerialization.data(withJSONObject: mediaItemData),
+               let mediaItem = try? JSONDecoder().decode(MediaItem.self, from: data) {
+                room.mediaItem = mediaItem
+                // Update poster if available
+                if let poster = mediaItem.poster {
+                     room.posterURL = poster
+                }
+            }
+        }
+        
+        // Update Season/Episode
+        if let season = newRecord["season"] as? Int {
+             room.season = season
+        }
+        if let episode = newRecord["episode"] as? Int {
+             room.episode = episode
+        }
+        // If episode changed, we might need to fetch the episode title again
+        // But for now, just having the number is good
 
         appState.activeRooms[index] = room
-        print("🔄 RoomListView: Updated room \(roomId) - state: \(room.state), position: \(room.playbackPosition ?? 0)s")
+        print("🔄 RoomListView: Updated room \(roomId) - Media: \(room.mediaItem?.name ?? "nil"), S\(room.season ?? 0)E\(room.episode ?? 0), state: \(room.state)")
     }
 }
 

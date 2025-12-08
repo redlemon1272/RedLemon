@@ -73,8 +73,13 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "audio-display", "no")
 
         // Performance - Reduced buffers for lower memory usage
-        mpv_set_option_string(handle, "cache-secs", "30")  // Increased for better initial buffering
-        mpv_set_option_string(handle, "demuxer-max-bytes", "200M")  // Increased for high-bitrate streams
+        // Performance - Increased buffers for 4K streaming
+        mpv_set_option_string(handle, "cache-secs", "60")  // Allow up to 60s of buffer
+        mpv_set_option_string(handle, "demuxer-max-bytes", "500M")  // 500MB buffer for high-bitrate streams
+        
+        // Anti-Stutter: Wait for buffer to fill before resuming
+        // This prevents the "play-buffer-play-buffer" loop by forcing a 5s buffer fill
+        mpv_set_option_string(handle, "cache-pause-wait", "5")
         mpv_set_option_string(handle, "vd-lavc-threads", "4")
 
         // Audio buffering for watch party sync (prevents crackling during speed changes)

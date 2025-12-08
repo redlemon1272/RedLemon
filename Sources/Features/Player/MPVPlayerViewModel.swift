@@ -2240,8 +2240,8 @@ extension MPVPlayerViewModel {
         // Cancel any existing timer
         watchHistoryTimer?.invalidate()
 
-        // Save watch history every 10 seconds
-        watchHistoryTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
+        // Save watch history every 30 seconds
+        watchHistoryTimer = Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             Task { @MainActor in
                 self.saveWatchHistory()
@@ -2251,14 +2251,14 @@ extension MPVPlayerViewModel {
         print("📝 Started watch history tracking")
     }
 
-    private func saveWatchHistory() {
+    private func saveWatchHistory(force: Bool = false) {
         guard currentTime > 0 && duration > 0 else { return }
-        appState?.saveToWatchHistory(timestamp: currentTime, duration: duration)
+        appState?.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
     }
 
     func stopWatchHistorySaving() {
-        // Save one final time before stopping
-        saveWatchHistory()
+        // Save one final time before stopping (forced)
+        saveWatchHistory(force: true)
 
         // Stop timer
         watchHistoryTimer?.invalidate()

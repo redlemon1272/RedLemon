@@ -905,8 +905,17 @@ class AppState: ObservableObject {
 
     // MARK: - Watch History
 
-    func saveToWatchHistory(timestamp: Double, duration: Double) {
+    private var lastHistorySaveTime: Date = .distantPast
+
+    func saveToWatchHistory(timestamp: Double, duration: Double, force: Bool = false) {
         guard let mediaItem = selectedMediaItem else { return }
+
+        // Throttle saving to once every 60 seconds unless forced
+        let timeSinceLastSave = Date().timeIntervalSince(lastHistorySaveTime)
+        if !force && timeSinceLastSave < 60.0 {
+            // print("⏳ Skipping watch history save (throttled): \(Int(timeSinceLastSave))s since last save")
+            return
+        }
 
         // Load existing history
         var history: [WatchHistoryItem] = []
@@ -939,6 +948,7 @@ class AppState: ObservableObject {
         // Save to UserDefaults
         if let data = try? JSONEncoder().encode(history) {
             UserDefaults.standard.set(data, forKey: "watchHistory")
+            lastHistorySaveTime = Date()
             print("💾 Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
         }
     }

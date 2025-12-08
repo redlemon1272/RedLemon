@@ -394,6 +394,9 @@ actor SupabaseRealtimeClient {
     }
 
     private func startHeartbeat() {
+        // Cancel any existing heartbeat task to prevent duplicates
+        heartbeatTask?.cancel()
+        
         heartbeatTask = Task {
             while !Task.isCancelled {
                 do {

@@ -1130,10 +1130,9 @@ class LobbyViewModel: ObservableObject {
                 )
                 updatedParticipants.append(p)
 
-                    // If this is the current user (guest), ensure their ID matches
-                    if !isHost && participant.userId.uuidString == participantId {
-                        NSLog("🔍 Current guest participant found in polling: \(p.name) with ID \(p.id)")
-                    }
+                // If this is the current user (guest), ensure their ID matches
+                if !isHost && participant.userId.uuidString == participantId {
+                    NSLog("🔍 Current guest participant found in polling: \(p.name) with ID \(p.id)")
                 }
             }
 

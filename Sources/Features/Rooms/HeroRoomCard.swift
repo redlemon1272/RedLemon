@@ -45,7 +45,8 @@ struct HeroRoomCardContent: View {
                     )
                 )
             }
-            .frame(height: 280) // Slightly shorter than event card (320)
+            .frame(height: 280)
+            .frame(maxWidth: .infinity) // Slightly shorter than event card (320)
             .clipped()
             .overlay(
                 // Multi-layer gradient for better readability
@@ -207,6 +208,7 @@ struct HeroRoomCardContent: View {
                 )
             }
         }
+        .frame(maxWidth: .infinity)
         .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
     }
 }

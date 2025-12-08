@@ -652,6 +652,7 @@ struct HeroEventCardContent: View {
                 )
             }
             .frame(height: 320)
+            .frame(maxWidth: .infinity)
             .clipped()
 
             // LAYER 2: Gradients
@@ -865,6 +866,7 @@ struct HeroEventCardContent: View {
                     lineWidth: 2
                 )
         }
+        .frame(maxWidth: .infinity)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
     }

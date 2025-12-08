@@ -172,25 +172,11 @@ actor StreamService {
             let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes
 
             let sizeFiltered = finalStreams.compactMap { stream -> Stream? in
-                guard let sizeString = stream.size else { return stream }
-
-                // Parse size string (e.g., "15.2 GB", "850 MB")
-                let components = sizeString.components(separatedBy: CharacterSet.decimalDigits.union(CharacterSet(charactersIn: ".")).inverted)
-                let numbers = components.filter { !$0.isEmpty }
-
-                guard let numberString = numbers.first, let number = Double(numberString) else {
-                    return stream // Can't parse, keep it
-                }
-
-                // Convert to bytes based on unit
-                var sizeInBytes: Double = 0
-                let upperSize = sizeString.uppercased()
-                if upperSize.contains("GB") {
-                    sizeInBytes = number * 1_073_741_824.0 // GB to bytes
-                } else if upperSize.contains("MB") {
-                    sizeInBytes = number * 1_048_576.0 // MB to bytes
-                } else {
-                    return stream // Unknown unit, keep it
+                let sizeInBytes = self.parseSizeToBytes(stream.size)
+                
+                // If parsing failed (returns infinity), we keep the stream to be safe
+                if sizeInBytes == Double.greatestFiniteMagnitude {
+                    return stream 
                 }
 
                 if sizeInBytes > maxSizeBytes {
@@ -254,7 +240,11 @@ actor StreamService {
     private func parseSizeToBytes(_ sizeString: String?) -> Double {
         guard let sizeString = sizeString else { return Double.greatestFiniteMagnitude }
 
-        let components = sizeString.components(separatedBy: CharacterSet.decimalDigits.union(CharacterSet(charactersIn: ".")).inverted)
+        // Sanitize
+        let sanitized = sizeString.replacingOccurrences(of: ",", with: "")
+        
+        // Extract numeric part
+        let components = sanitized.components(separatedBy: CharacterSet.decimalDigits.union(CharacterSet(charactersIn: ".")).inverted)
         let numbers = components.filter { !$0.isEmpty }
 
         guard let numberString = numbers.first, let number = Double(numberString) else {
@@ -262,10 +252,20 @@ actor StreamService {
         }
 
         let upperSize = sizeString.uppercased()
-        if upperSize.contains("GB") {
+        
+        // Check units
+        if upperSize.contains("GB") || upperSize.contains("GIB") {
             return number * 1_073_741_824.0
-        } else if upperSize.contains("MB") {
+        } else if upperSize.contains("MB") || upperSize.contains("MIB") {
             return number * 1_048_576.0
+        } else if upperSize.contains("KB") || upperSize.contains("KIB") {
+            return number * 1024.0
+        }
+        
+        // If no units found, assume it's raw bytes if it looks like a whole number
+        // This handles cases where providers send raw byte counts (e.g. "24421538041")
+        if !upperSize.contains("B") { // No "B" unit found
+             return number
         }
 
         return Double.greatestFiniteMagnitude

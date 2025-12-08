@@ -84,14 +84,17 @@ class LobbyViewModel: ObservableObject {
             self.isPlaylistMode = !roomPlaylist.isEmpty
         }
 
-        // Check if we should auto-start next item (returning from playback)
-        // We do this in a task to ensure appState is available
-        Task { @MainActor in
-            // Wait a brief moment for appState to be set
-            try? await Task.sleep(nanoseconds: 100_000_000) // 0.1s
-            if self.isHost && self.isPlaylistMode {
-                self.prepareNextItem()
-            }
+
+
+        // CRITICAL FIX: Prevent "Autoplay Death Loop"
+        // When host returns to lobby after movie finishes, DB still says is_playing=true
+        // This causes the "Database Fallback" in init/join to immediately restart playback
+        // We must strictly reset this for USER hosted rooms, but preserve it for EVENTS (which do autoplay)
+        if isHost && !room.id.hasPrefix("event_") {
+             Task {
+                 print("🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop")
+                 try? await SupabaseClient.shared.updateRoomPlayback(roomId: room.id, position: 0, isPlaying: false)
+             }
         }
     }
 

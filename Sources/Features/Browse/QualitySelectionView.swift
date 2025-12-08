@@ -214,6 +214,12 @@ struct QualitySelectionView: View {
                 }
             )
         }
+        .onAppear {
+            // Sync with global state (e.g. if coming from "Resume Watch Party")
+            if appState.currentWatchMode == .watchParty {
+                self.watchMode = .watchParty
+            }
+        }
     }
 
     private func startPlayback() {

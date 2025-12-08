@@ -1028,16 +1028,11 @@ struct WatchModeSelectionView: View {
         let quality = VideoQuality(rawValue: historyItem.quality ?? "1080p") ?? .fullHD
 
         if mode == .watchParty {
-            // Create watch party and go to lobby
-            await appState.createWatchPartyAndNavigate(
-                mediaItem: historyItem.mediaItem,
-                season: historyItem.season,
-                episode: historyItem.episode,
-                quality: quality
-            )
-
-            // Turn off loading and dismiss after room created
+            // Redirect to QualitySelectionView to allow configuring description/public settings
+            // This replaces the "Quick Add" immediate creation flow
             await MainActor.run {
+                appState.currentWatchMode = .watchParty
+                appState.currentView = .qualitySelection
                 isCreatingRoom = false
             }
             dismiss()

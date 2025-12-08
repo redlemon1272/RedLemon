@@ -1544,8 +1544,8 @@ extension MPVPlayerViewModel {
 
         NSLog("🔄 Starting chat polling for room: \(roomId)")
 
-        // Poll chat every 2 seconds
-        chatPollingTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
+        // Poll chat every 10 seconds (reduced from 2s to prevent buffering)
+        chatPollingTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             Task { @MainActor in
                 await self.pollChatMessages()

@@ -647,6 +647,9 @@ class LobbyViewModel: ObservableObject {
         // Start playback for everyone
         NSLog("🎬 Host: Launching player for \(mediaItem.name)")
 
+        // Stop polling before transition to prevent double-polling
+        stopPolling()
+
         await MainActor.run {
             // Manually set state since we resolve first
             appState.isWatchPartyHost = true
@@ -1173,6 +1176,9 @@ class LobbyViewModel: ObservableObject {
                         }
                     }
 
+                    // Stop polling before transition
+                    self.stopPolling()
+
                     await appState.playMedia(
                         self.room.mediaItem!,
                         quality: .fullHD,
@@ -1265,6 +1271,10 @@ class LobbyViewModel: ObservableObject {
 
             if let mediaItem = room.mediaItem {
                 print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
+                
+                // Stop polling before transition
+                self.stopPolling()
+
                 await appState.playMedia(
                     mediaItem,
                     quality: .fullHD,

@@ -46,42 +46,26 @@ struct HeroRoomCardContent: View {
                 )
             }
             .frame(height: 280)
-            .frame(maxWidth: .infinity) // Slightly shorter than event card (320)
+            .frame(maxWidth: .infinity)
             .clipped()
-            .overlay(
-                // Multi-layer gradient for better readability
-                ZStack {
-                    LinearGradient(
-                        gradient: Gradient(colors: [.black.opacity(0.6), .clear, .black.opacity(0.9)]),
-                        startPoint: .top,
-                        endPoint: .bottom
-                    )
-                    LinearGradient(
-                        gradient: Gradient(colors: [.black.opacity(0.4), .clear]),
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                }
-            )
-            .cornerRadius(16)
-            .overlay(
-                ZStack {
-                    Color.black.opacity(0.6)
-                    VStack(spacing: 12) {
-                        ProgressView()
-                            .scaleEffect(1.2)
-                            .tint(.white)
-                        Text("Joining...")
-                            .font(.system(size: 14, weight: .semibold))
-                            .foregroundColor(.white)
-                    }
-                }
-                .opacity(isJoining ? 1 : 0)
-                .animation(.easeInOut(duration: 0.2), value: isJoining)
-                .allowsHitTesting(false)
-            )
+            .cornerRadius(16) // Apply corner radius to the base image
 
-            // Content Overlay
+            // LAYER 2: Gradients
+            ZStack {
+                LinearGradient(
+                    gradient: Gradient(colors: [.black.opacity(0.6), .clear, .black.opacity(0.9)]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                LinearGradient(
+                    gradient: Gradient(colors: [.black.opacity(0.4), .clear]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
+            .cornerRadius(16) // Apply corner radius to gradients to match image
+
+            // LAYER 3: Content Overlay
             VStack(alignment: .leading, spacing: 0) {
                 // Top Section: Badges
                 HStack {
@@ -207,8 +191,26 @@ struct HeroRoomCardContent: View {
                     )
                 )
             }
+
+            // LAYER 4: Loading State
+            ZStack {
+                Color.black.opacity(0.6)
+                VStack(spacing: 12) {
+                    ProgressView()
+                        .scaleEffect(1.2)
+                        .tint(.white)
+                    Text("Joining...")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(.white)
+                }
+            }
+            .opacity(isJoining ? 1 : 0)
+            .animation(.easeInOut(duration: 0.2), value: isJoining)
+            .allowsHitTesting(false)
+            .cornerRadius(16)
         }
         .frame(maxWidth: .infinity)
+        .cornerRadius(16)
         .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
     }
 }

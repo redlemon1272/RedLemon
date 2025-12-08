@@ -1513,12 +1513,66 @@ extension MPVPlayerViewModel {
             guard let self = self else { return }
             Task { @MainActor in
                 await self.pollChatMessages()
+                await self.pollParticipants()
             }
         }
 
         // Do initial fetch immediately
         Task { @MainActor in
             await pollChatMessages()
+            await pollParticipants()
+        }
+    }
+
+    /// Poll participants from database (Fix for Rooms showing 0 participants)
+    private func pollParticipants() async {
+        guard let roomId = currentRoomId else { return }
+        
+        do {
+            let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
+            
+            var updatedParticipants: [Participant] = []
+            
+            for p in roomParticipants {
+                var name = "User"
+                // Try to find existing participant to get name (avoid DB call if possible) 
+                // or fetch if new. 
+                // To be robust like Lobby, we should fetch, but caching is better.
+                // Let's reuse existing name if available to reduce latency.
+                if let existing = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString }) {
+                    name = existing.name
+                } else if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
+                     name = user.username
+                }
+                
+                // Preserve ready state
+                let isReady = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString })?.isReady ?? p.isHost
+                
+                let participant = Participant(
+                    id: p.userId.uuidString,
+                    name: name,
+                    isHost: p.isHost,
+                    isReady: isReady,
+                    joinedAt: p.joinedAt
+                )
+                updatedParticipants.append(participant)
+            }
+            
+            // Only update if changed (basic check on count or IDs)
+            let currentIds = Set(appState?.currentWatchPartyRoom?.participants.map { $0.id } ?? [])
+            let newIds = Set(updatedParticipants.map { $0.id })
+            
+            if currentIds != newIds || appState?.currentWatchPartyRoom?.participants.count != updatedParticipants.count {
+                self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
+                NSLog("👥 MPVPlayer: Updated participants list via polling: \(updatedParticipants.count)")
+            } else {
+                 // Even if IDs are same, maybe name changed? Or specific properties?
+                 // But replacing array is safe.
+                 self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
+            }
+            
+        } catch {
+            // fail silently mostly
         }
     }
 

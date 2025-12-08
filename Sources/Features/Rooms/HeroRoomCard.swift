@@ -31,11 +31,20 @@ struct HeroRoomCardContent: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            // Full Background Image with Gradient
+            // LAYER 0: Sizing Anchor (Stable Layout)
+            Rectangle()
+                .fill(Color.gray.opacity(0.1))
+                .frame(height: 280)
+                .frame(maxWidth: .infinity)
+
+            // LAYER 1: Background Image
             AsyncImage(url: URL(string: room.mediaItem?.background ?? room.mediaItem?.poster ?? room.posterURL ?? "")) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
+                    .frame(height: 280)
+                    .frame(maxWidth: .infinity)
+                    .clipped()
             } placeholder: {
                 Rectangle().fill(
                     LinearGradient(
@@ -45,10 +54,7 @@ struct HeroRoomCardContent: View {
                     )
                 )
             }
-            .frame(height: 280)
-            .frame(maxWidth: .infinity)
-            .clipped()
-            .cornerRadius(16) // Apply corner radius to the base image
+            .allowsHitTesting(false)
 
             // LAYER 2: Gradients
             ZStack {

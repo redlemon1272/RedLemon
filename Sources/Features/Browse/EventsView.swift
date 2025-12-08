@@ -637,11 +637,20 @@ struct HeroEventCardContent: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
+            // LAYER 0: Sizing Anchor (Stable Layout)
+            Rectangle()
+                .fill(Color.gray.opacity(0.1))
+                .frame(height: 320)
+                .frame(maxWidth: .infinity)
+
             // LAYER 1: Background Image
             AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
+                    .frame(height: 320)
+                    .frame(maxWidth: .infinity)
+                    .clipped()
             } placeholder: {
                 Rectangle().fill(
                     LinearGradient(
@@ -651,9 +660,7 @@ struct HeroEventCardContent: View {
                     )
                 )
             }
-            .frame(height: 320)
-            .frame(maxWidth: .infinity)
-            .clipped()
+            .allowsHitTesting(false)
 
             // LAYER 2: Gradients
             ZStack {

@@ -503,32 +503,33 @@ class SupabaseClient {
         playlist: [PlaylistItem],
         currentIndex: Int
     ) async throws {
-        print("📡 SupabaseClient: updateRoomPlaylist called for room \(roomId) with \(playlist.count) items")
-        // Serialize playlist items to dictionaries for JSONB column
-        let playlistData = try playlist.map { item -> [String: Any] in
-            let data = try JSONEncoder().encode(item)
-            guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                throw SupabaseError.encodingError
-            }
-            return dict
-        }
-
+        NSLog("📡 SupabaseClient: updateRoomPlaylist called for room \(roomId) with \(playlist.count) items, index: \(currentIndex)")
+        
         do {
+            // Serialize playlist items to dictionaries for JSONB column
+            let playlistData = try playlist.map { item -> [String: Any] in
+                let data = try JSONEncoder().encode(item)
+                guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                    throw SupabaseError.encodingError
+                }
+                return dict
+            }
+
             _ = try await makeRequest(
                 path: "/rooms",
                 method: "PATCH",
                 body: [
                     "playlist": playlistData,
-                    "current_playlist_index": currentIndex,
-                    "last_activity": ISO8601DateFormatter().string(from: Date())
+                    "current_playlist_index": currentIndex
                 ],
                 query: ["id": "eq.\(roomId)"]
             )
-            NSLog("✅ Updated playlist for room \(roomId): \(playlist.count) items")
+            NSLog("✅ SupabaseClient: Playlist updated successfully")
         } catch SupabaseError.httpError(let code, let message) where code == 400 && message.contains("current_playlist_index") {
             NSLog("⚠️ SupabaseClient: Backend schema missing 'current_playlist_index'. Playlist state will NOT be persisted.")
         } catch {
-            throw error
+             NSLog("❌ SupabaseClient: Failed to update playlist: \(error)")
+             throw error
         }
     }
 

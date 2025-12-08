@@ -1099,9 +1099,11 @@ class MPVPlayerViewModel: ObservableObject {
 
         // ✅ STEP 4: Disconnect realtime FIRST and await completion
         if isInWatchParty {
-            print("🔌 Disconnecting realtime manager...")
-            await realtimeManager?.disconnect()
-            print("✅ Realtime manager disconnected")
+            // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
+            // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
+            // Disconnecting the client kills the connection for the LobbyViewModel too.
+            await realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
+            print("✅ Realtime manager channel left (client connection preserved)")
         }
 
         // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected

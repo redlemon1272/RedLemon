@@ -140,7 +140,7 @@ RedLemon-Native/
 ## 🔄 Recent Changes (December 2025)
 
 ### **Removed**
-- ❌ uWebSockets implementation (reverted to Supabase Realtime)
+- ❌ uWebSockets implementation (Supabase Realtime is used)
 - ❌ ICP integration
 - ❌ SwiftNIO dependency
 

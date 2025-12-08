@@ -5,6 +5,7 @@ This guide explains how to set up and populate the centralized events configurat
 ## Overview
 
 The events config system ensures all RedLemon instances show identical movie/TV event schedules by storing curated lists in Supabase instead of fetching from dynamic streaming catalogs.
+> **Note**: For a clear distinction between User-Hosted Rooms and System-Hosted Events, see [ROOMS_VS_EVENTS.md](ROOMS_VS_EVENTS.md).
 
 ## Prerequisites
 

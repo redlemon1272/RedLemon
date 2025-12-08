@@ -655,6 +655,14 @@ struct AppLog: Codable, Identifiable {
     }
 }
 
+/// Represents a User-Hosted Watch Party (Room).
+///
+/// **Distinct from System Events**:
+/// - A `SupabaseRoom` is created and managed by a user ("Host").
+/// - Playback is synchronized via WebSockets (pause/resume/seek).
+/// - Ephemeral lifecycle (exists while occupied).
+///
+/// For system-scheduled content, see `EventsConfig` in `EventsConfigService`.
 struct SupabaseRoom: Codable {
     let id: String
     let name: String

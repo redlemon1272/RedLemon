@@ -26,7 +26,6 @@ AnonVM Server (your-domain.com)
     ├── PostgREST (Port 3001)
     ├── Supabase Auth (Port 3002)
     ├── Supabase Realtime (Port 3003)
-    ├── uWebSockets (Port 3000) - existing
     └── Nginx (Port 80/443) - reverse proxy
 ```
 
@@ -303,19 +302,7 @@ server {
     }
 }
 
-# Watch Party WebSocket (existing)
-server {
-    listen 80;
-    server_name ws.your-domain.com;
 
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-    }
-}
 ```
 
 ```bash
@@ -327,7 +314,7 @@ sudo systemctl reload nginx
 # Get SSL certificates
 sudo certbot --nginx -d api.your-domain.com
 sudo certbot --nginx -d realtime.your-domain.com
-sudo certbot --nginx -d ws.your-domain.com
+sudo certbot --nginx -d realtime.your-domain.com
 ```
 
 ## Phase 5: Update RedLemon App

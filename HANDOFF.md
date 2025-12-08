@@ -25,7 +25,7 @@
 - **Code Signing**: Ad-hoc signatures for Sparkle compatibility
 
 ### In Progress 🔄
-- **Watch Party Testing**: Production uWebSockets.js server deployed, client integration complete
+- **Watch Party Testing**: Supabase Realtime testing in progress
 
 ### Critical Information 🔑
 - **Current Version**: v1.0.8 (build 8)

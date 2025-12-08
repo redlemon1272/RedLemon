@@ -3,6 +3,7 @@
 ## 🎯 System Overview
 
 RedLemon's watch party system is a **production-ready, high-performance WebSocket service** that replaces Supabase Realtime with a custom optimized implementation. The system supports thousands of concurrent users across multiple rooms with sub-5ms latency.
+> **Note**: For a clear distinction between User-Hosted Rooms and System-Hosted Events, see [ROOMS_VS_EVENTS.md](ROOMS_VS_EVENTS.md).
 
 ## 📋 Current Architecture Status
 
@@ -353,8 +354,6 @@ watchparty-server/
 
 docs/
 ├── REDLEMON_WATCHPARTY_COMPLETE_HANDOFF.md
-├── watchparty-handoff.md
-├── watchparty-websockets.md
 └── migrations/                 # Database migrations
 
 Sources/Features/WatchParty/

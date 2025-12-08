@@ -40,8 +40,18 @@ class EventsConfigService {
         print("📤 [EventsConfig] Uploading new \(type) config with \(movies.count) movies...")
         
         // 1. Get current version to increment
-        let currentConfig = try? await fetchFromSupabase(type: type)
-        let newVersion = (currentConfig?.version ?? 0) + 1
+        // 1. Get current version to increment
+        var currentVersion = 0
+        var currentConfig: EventsConfig?
+        
+        do {
+            currentConfig = try await fetchFromSupabase(type: type)
+            currentVersion = currentConfig?.version ?? 0
+        } catch {
+            print("⚠️ [EventsConfig] Could not fetch current version: \(error). Assuming version 0.")
+        }
+        
+        let newVersion = currentVersion + 1
         
         // 2. Prepare data
         let configData = EventsConfigData(
@@ -58,8 +68,18 @@ class EventsConfigService {
         
         // 4. Insert new config
         // We need to use a dictionary for the body, so we need to convert configData to a dict
-        guard let jsonData = try? JSONEncoder().encode(configData),
-              let jsonDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+        // 4. Insert new config
+        // We need to use a dictionary for the body, so we need to convert configData to a dict
+        let jsonData: Data
+        do {
+            jsonData = try JSONEncoder().encode(configData)
+        } catch {
+             print("❌ [EventsConfig] Failed to encode config data: \(error)")
+             throw EventsConfigError.invalidData
+        }
+        
+        guard let jsonDict = try? JSONSerialization.jsonObject(with: jsonData) as? [String: Any] else {
+            print("❌ [EventsConfig] Failed to serialize config JSON")
             throw EventsConfigError.invalidData
         }
         
@@ -96,21 +116,29 @@ class EventsConfigService {
                 print("🆕 [EventsConfig] Server has newer version \(serverConfig.version) (cached: \(cachedVersion))")
                 
                 // Cache the new version
-                if let encoded = try? JSONEncoder().encode(serverConfig) {
+                // Cache the new version
+                do {
+                    let encoded = try JSONEncoder().encode(serverConfig)
                     UserDefaults.standard.set(encoded, forKey: "\(cacheKey)_\(type)")
                     UserDefaults.standard.set(serverConfig.version, forKey: "\(versionKey)_\(type)")
                     print("💾 [EventsConfig] Cached new version \(serverConfig.version)")
+                } catch {
+                    print("⚠️ [EventsConfig] Failed to cache new version: \(error)")
                 }
                 
                 return serverConfig
             }
             
             // Server version matches cache, use cached data if available
-            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"),
-               let cachedConfig = try? JSONDecoder().decode(EventsConfig.self, from: cachedData),
-               cachedVersion > 0 {
-                print("✅ [EventsConfig] Using cached \(type) config (version \(cachedVersion), \(cachedConfig.movies.count) movies)")
-                return cachedConfig
+            // Server version matches cache, use cached data if available
+            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"), cachedVersion > 0 {
+                do {
+                    let cachedConfig = try JSONDecoder().decode(EventsConfig.self, from: cachedData)
+                    print("✅ [EventsConfig] Using cached \(type) config (version \(cachedVersion), \(cachedConfig.movies.count) movies)")
+                    return cachedConfig
+                } catch {
+                     print("⚠️ [EventsConfig] Failed to decode cached config: \(error)")
+                }
             }
             
             // No valid cache, use server config
@@ -125,11 +153,14 @@ class EventsConfigService {
             // Server fetch failed, try to use cache as fallback
             print("⚠️ [EventsConfig] Server fetch failed: \(error)")
             
-            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"),
-               let cachedConfig = try? JSONDecoder().decode(EventsConfig.self, from: cachedData),
-               cachedVersion > 0 {
-                print("📦 [EventsConfig] Using cached \(type) config as fallback (version \(cachedVersion))")
-                return cachedConfig
+            if let cachedData = UserDefaults.standard.data(forKey: "\(cacheKey)_\(type)"), cachedVersion > 0 {
+                do {
+                    let cachedConfig = try JSONDecoder().decode(EventsConfig.self, from: cachedData)
+                     print("📦 [EventsConfig] Using cached \(type) config as fallback (version \(cachedVersion))")
+                     return cachedConfig
+                } catch {
+                    print("❌ [EventsConfig] Cache fallback failed due to decode error: \(error)")
+                }
             }
             
             // No cache available, throw error
@@ -201,10 +232,13 @@ class EventsConfigService {
                 print("🆕 [EventsConfig] New version available: \(latestConfig.version) (current: \(currentVersion))")
                 
                 // Update cache
-                if let encoded = try? JSONEncoder().encode(latestConfig) {
+                do {
+                    let encoded = try JSONEncoder().encode(latestConfig)
                     UserDefaults.standard.set(encoded, forKey: "\(cacheKey)_\(type)")
                     UserDefaults.standard.set(latestConfig.version, forKey: "\(versionKey)_\(type)")
                     print("✅ [EventsConfig] Auto-updated to version \(latestConfig.version)")
+                } catch {
+                    print("⚠️ [EventsConfig] Failed to cache auto-update: \(error)")
                 }
             }
         } catch {
@@ -215,6 +249,14 @@ class EventsConfigService {
 
 // MARK: - Models
 
+/// Represents System-Hosted Movie Events (Events).
+///
+/// **Distinct from User Rooms**:
+/// - An `EventsConfig` is a static schedule defined by the system/admin.
+/// - Playback is "live broadcast" style (no user pause/seek).
+/// - Global schedule shared by all users.
+///
+/// For user-hosted watch parties, see `SupabaseRoom` in `SupabaseClient`.
 struct EventsConfig: Codable {
     let version: Int
     let movies: [MediaItem]

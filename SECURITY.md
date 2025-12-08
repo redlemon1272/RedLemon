@@ -23,7 +23,7 @@ RedLemon uses **native Swift** with:
 - ✅ **Supabase** for PostgreSQL database + Realtime WebSocket
 - ✅ **Keychain** for secure local credential storage
 
-**No Supabase SDK dependency** - we use URLSession's built-in WebSocket implementation for watch party sync via our production uWebSockets.js server (wss://151.243.109.217.nip.io/ws).
+**No Supabase SDK dependency** - we use URLSession's built-in WebSocket implementation for watch party sync via Supabase Realtime.
 
 ## For Anonymous Developers
 
@@ -101,7 +101,7 @@ RedLemon does **not** collect:
 
 We only use:
 - ✅ Supabase for usernames and friend lists (opt-in, requires username setup)
-- ✅ uWebSockets.js server for watch party sync (WSS encrypted, production deployment)
+- ✅ Supabase Realtime for watch party sync
 
 ---
 

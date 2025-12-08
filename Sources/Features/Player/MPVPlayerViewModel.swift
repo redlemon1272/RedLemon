@@ -18,12 +18,12 @@ func withTimeout<T>(seconds: TimeInterval, operation: @escaping () async throws 
         group.addTask {
             try await operation()
         }
-        
+
         group.addTask {
             try await Task.sleep(nanoseconds: UInt64(seconds * 1_000_000_000))
             throw TimeoutError()
         }
-        
+
         let result = try await group.next()!
         group.cancelAll()
         return result
@@ -129,7 +129,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool) async {
+    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool) async {
         // For movies, strip any accidental episode markers in stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
             guard !isSeries else { return title }
@@ -185,12 +185,13 @@ class MPVPlayerViewModel: ObservableObject {
         // Check if we should resume from a specific timestamp
         let resumeTime = appState?.resumeFromTimestamp ?? 0
         let shouldResume = resumeTime > 0
-        let isEvent = appState?.isEventPlayback == true
 
         // CRITICAL: Strict separation of logic
         // 1. EVENT: Always autoplay, ignore watch party gates, ignore resume (unless specifically handled later)
         // 2. SOLO: Always autoplay, handle resume
         // 3. WATCH PARTY: Start PAUSED, wait for ready gate, handle resume sync
+
+        // Note: isEvent is now passed explicitly to avoid race conditions with appState injection
 
         if isEvent {
             print("🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)")
@@ -239,7 +240,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // Ideally MPVWrapper should be an actor or have internal locking
                     let tracks = await self.mpvWrapper.getSubtitleTracks()
                     let embeddedSubs = tracks.filter { $0.id != 0 }
-                    
+
                     if !embeddedSubs.isEmpty {
                         print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
 
@@ -286,29 +287,29 @@ class MPVPlayerViewModel: ObservableObject {
         } else if !subtitles.isEmpty {
             // Subtitles are either SubDL proxy URLs or need to be downloaded
             let hasSubDLSubtitles = subtitles.contains { $0.url.contains("/subtitles/subdl/") }
-            
+
             if hasSubDLSubtitles {
                 // Download SubDL subtitles to local files, then load into MPV
                 NSLog("ℹ️ SubDL subtitles detected - downloading to local files in background...")
                 Task {
                     // Wait for playback to stabilize first
                     try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
-                    
+
                     for (index, subtitle) in subtitles.enumerated() {
                         do {
                             NSLog("📝 Downloading SubDL subtitle %d (%@) from proxy...", index + 1, subtitle.label)
                             NSLog("🔍 Subtitle URL: %@", subtitle.url)
-                            
+
                             // Download from proxy server to local file with timeout
                             let downloadTask = Task {
                                 return await self.downloadSubtitle(url: subtitle.url)
                             }
-                            
+
                             // Wait for download with timeout
                             let localPath = try await withTimeout(seconds: 45) {
                                 await downloadTask.value
                             }
-                            
+
                             if let localPath = localPath {
                                 NSLog("✅ SubDL subtitle %d downloaded to: %@", index + 1, localPath)
                                 self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
@@ -400,7 +401,7 @@ class MPVPlayerViewModel: ObservableObject {
             }
         }
         mpvObserverTasks.append(durationTask)
-        
+
         let fileLoadedTask = Task { [weak self] in
             guard let self = self else { return }
             for await loaded in self.mpvWrapper.$isFileLoaded.values {
@@ -477,7 +478,7 @@ class MPVPlayerViewModel: ObservableObject {
             return
         }
         hasVideoReadyTriggered = true
-        
+
         print("✅ Video ready - hiding poster")
 
         // Fade out poster when video is ready
@@ -501,7 +502,7 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Pause, seek, then resume
             mpvWrapper.pause()
-            
+
             // Use the robust resume logic which waits for duration/load
             attemptImmediateResume(resumeTime: seekTime)
 
@@ -577,7 +578,7 @@ class MPVPlayerViewModel: ObservableObject {
                 self.mpvWrapper.seek(to: nearEnd)
                 self.mpvWrapper.play()
                 self.isPlaying = true
-                
+
                 // Clear state
                 self.appState?.resumeFromTimestamp = nil
                 self.appState?.eventStartTime = nil
@@ -592,12 +593,12 @@ class MPVPlayerViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.mpvWrapper.play()
                 self.isPlaying = true
-                
+
                 // Clear state
                 self.appState?.resumeFromTimestamp = nil
                 self.appState?.eventStartTime = nil // Clear event start too if present
                 self.isResumingInWatchParty = false
-                
+
                 print("✅ Resumed playback after seek to \(Int(resumeTime))s")
             }
         }
@@ -1007,7 +1008,7 @@ class MPVPlayerViewModel: ObservableObject {
             messages.removeFirst(messages.count - maxCount)
         }
     }
-    
+
     /// Adds a local system message to the chat (not broadcasted)
     private func addSystemMessage(_ text: String) {
         let message = ChatMessage(
@@ -1097,7 +1098,7 @@ class MPVPlayerViewModel: ObservableObject {
             config.timeoutIntervalForRequest = 30.0  // 30 seconds
             config.timeoutIntervalForResource = 30.0
             let session = URLSession(configuration: config)
-            
+
             NSLog("⏳ Waiting for server response...")
             let (data, response) = try await session.data(from: subtitleURL)
             NSLog("✅ Received response! Data size: %d bytes", data.count)
@@ -1107,7 +1108,7 @@ class MPVPlayerViewModel: ObservableObject {
             let contentType = (response as? HTTPURLResponse)?.value(forHTTPHeaderField: "Content-Type") ?? ""
             NSLog("🔍 Content-Type: %@", contentType)
             NSLog("🔍 Downloaded %d bytes", data.count)
-            
+
             // Check if content is actually VTT (proxy server returns VTT even if URL has .zip)
             if let text = String(data: data, encoding: .utf8), text.hasPrefix("WEBVTT") {
                 NSLog("✅ Detected VTT content from proxy server")
@@ -1118,7 +1119,7 @@ class MPVPlayerViewModel: ObservableObject {
                 try text.write(to: localURL, atomically: true, encoding: .utf8)
                 return localURL.path
             }
-            
+
             // Check for ZIP magic bytes (PK\x03\x04)
             let isZip = data.count > 4 && data[0] == 0x50 && data[1] == 0x4B && data[2] == 0x03 && data[3] == 0x04
 
@@ -1293,7 +1294,7 @@ extension MPVPlayerViewModel {
                             genres: nil,
                             runtime: nil
                         )
-                        
+
                         // Basic host participant (others will populate via Realtime)
                         let host = Participant(
                             id: fetchedSupabaseRoom.hostUserId.uuidString,
@@ -1331,7 +1332,7 @@ extension MPVPlayerViewModel {
                             selectedQuality: nil,
                             unlockedStreamURL: nil
                         )
-                        
+
                         self.appState?.currentWatchPartyRoom = fetchedRoom
                     }
                 }
@@ -1346,7 +1347,7 @@ extension MPVPlayerViewModel {
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
                     let actualUserId = metaUserId ?? metaUsername ?? userId
-                    
+
                     switch action {
                     case .join:
                         // Cancel any pending leave for this user
@@ -1368,7 +1369,7 @@ extension MPVPlayerViewModel {
                             // New user - create with actualUserId
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
-                            let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970 
+                            let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
 
                             let newParticipant = Participant(
                                 id: actualUserId, // Use stable ID
@@ -1378,14 +1379,14 @@ extension MPVPlayerViewModel {
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal)
                             )
                             updatedParticipants.append(newParticipant)
-                            
+
                             // 💬 System Message: Join
                             // Only show for others, not self (unless we want "You joined") -> User asked for "ursinho joined"
                             if actualUserId != self.currentUserId {
                                 self.addSystemMessage("\(username) joined")
                             }
                         }
-                        
+
                         // ENSURE SELF IS IN LIST
                         if let currentId = localCurrentUserId {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
@@ -1400,31 +1401,31 @@ extension MPVPlayerViewModel {
                                 updatedParticipants.append(selfParticipant)
                             }
                         }
-                        
+
                     case .leave:
                         // DEBOUNCE LEAVE: Wait 10 seconds before actually removing
                         // This handles flaky connections and Lobby->Player transitions
                         print("⏳ Participant leaving (grace period started): \(actualUserId)")
-                        
+
                         let task: Task<Void, Never> = Task { [weak self] in
                             // Wait 10 seconds (nano)
                             try? await Task.sleep(nanoseconds: 10_000_000_000)
-                            
+
                             guard let self = self else { return }
-                            
+
                             // Check for cancellation
                             if Task.isCancelled { return }
-                            
+
                             await MainActor.run {
                                 // Fetch FRESH list to avoid stale data race
                                 guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
-                                
+
                                 // Find username before removing for the message
                                 let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? "User"
-                                
+
                                 // Remove using actualUserId
                                 currentParticipants.removeAll(where: { $0.id == actualUserId })
-                                
+
                                 // 💬 System Message: Leave
                                 if actualUserId != self.currentUserId {
                                     self.addSystemMessage("\(username) left")
@@ -1439,7 +1440,7 @@ extension MPVPlayerViewModel {
                                         self.checkIfAllGuestsReady()
                                     }
                                 }
-                                
+
                                 // Update room state with fresh list
                                 self.appState?.currentWatchPartyRoom?.participants = currentParticipants
                                 self.pendingLeaveTasks.removeValue(forKey: actualUserId)
@@ -1449,7 +1450,7 @@ extension MPVPlayerViewModel {
                         return
 
                     }
-                    
+
                     // Update room state
                     self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
                 }

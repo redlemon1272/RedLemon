@@ -274,7 +274,7 @@ struct MPVPlayerView: View {
                     checkEventMovieFinished()
                 }
             }
-            
+
             // Install local event monitor to capture keyboard events even when text field is focused
             localKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { event in
                 // Command key pressed: toggle chat (only in watch party mode)
@@ -297,7 +297,7 @@ struct MPVPlayerView: View {
         }
         .task {
             NSLog("🎬🎬🎬 MPVPlayerView .task starting")
-            
+
             // CRITICAL: Start watch party sync BEFORE loading stream
             // This ensures isInWatchParty is set when video loads, activating the ready gate
             if appState.currentWatchMode == .watchParty, let roomId = appState.currentRoomId {
@@ -309,7 +309,10 @@ struct MPVPlayerView: View {
                     NSLog("❌ Failed to start watch party sync: %@", error.localizedDescription)
                 }
             }
-            
+
+            // CRITICAL: Inject appState immediately to ensure ViewModel has access to global state
+            viewModel.appState = appState
+
             // Now load stream with watch party mode properly set
             NSLog("🎬🎬🎬 About to call loadStream - isInWatchParty: %@", viewModel.isInWatchParty ? "YES" : "NO")
             NSLog("🎬🎬🎬 Subtitles: %d", subtitles.count)
@@ -318,7 +321,8 @@ struct MPVPlayerView: View {
                 imdbId: imdbId,
                 streamTitle: streamTitle,
                 subtitles: subtitles,
-                isSeries: isSeries
+                isSeries: isSeries,
+                isEvent: appState.isEventPlayback
             )
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
@@ -340,7 +344,7 @@ struct MPVPlayerView: View {
             Task {
                 await viewModel.cleanup()
             }
-            
+
             // ✅ Use centralized timer cleanup
             invalidateAllTimers()
 
@@ -359,41 +363,41 @@ struct MPVPlayerView: View {
         await viewModel.cleanup()
         await appState.exitPlayer()
     }
-    
+
     private func checkEventMovieFinished() {
         guard appState.isEventPlayback else { return }
-        
+
         let position = viewModel.currentTime
         let duration = viewModel.duration
-        
+
         // Check if MPV reported EOF (most reliable)
         if viewModel.playbackFinished {
             print("🎬 Event movie finished detected (MPV EOF)!")
             print("   Position: \(position)s / Duration: \(duration)s")
             print("   Auto-exiting player and returning to Events page...")
-            
+
             // Stop the timer
             eventAutoExitTimer?.invalidate()
             eventAutoExitTimer = nil
-            
+
             // Exit player and return to events
             Task {
                 await appState.handleMovieFinished()
             }
             return
         }
-        
+
         // Fallback: Check if near end and paused (in case EOF wasn't detected)
         let isPaused = !viewModel.isPlaying
         if duration > 0 && position >= duration - 5 && isPaused {
             print("🎬 Event movie finished detected (time-based fallback)!")
             print("   Position: \(position)s / Duration: \(duration)s")
             print("   Auto-exiting player and returning to Events page...")
-            
+
             // Stop the timer
             eventAutoExitTimer?.invalidate()
             eventAutoExitTimer = nil
-            
+
             // Exit player and return to events
             Task {
                 await appState.handleMovieFinished()
@@ -405,19 +409,19 @@ struct MPVPlayerView: View {
 
     private func invalidateAllTimers() {
         print("⏱️ Invalidating all active timers")
-        
+
         controlsTimer?.invalidate()
         controlsTimer = nil
-        
+
         chatButtonTimer?.invalidate()
         chatButtonTimer = nil
-        
+
         exitButtonTimer?.invalidate()
         exitButtonTimer = nil
-        
+
         cursorHideTimer?.invalidate()
         cursorHideTimer = nil
-        
+
         eventAutoExitTimer?.invalidate()
         eventAutoExitTimer = nil
     }
@@ -490,7 +494,7 @@ struct MPVPlayerView: View {
         if viewModel.isLoading {
             loadingOverlay
         }
-        
+
         // Waiting for guests overlay (Post-Load Ready Gate)
         if viewModel.showWaitingForGuests {
             waitingForGuestsOverlay

@@ -198,24 +198,19 @@ struct HeroRoomCardContent: View {
                 )
             }
 
-            // LAYER 4: Loading State (DISABLED - CAUSES CRASH)
-            /*
-            ZStack {
-                Color.black.opacity(0.6)
-                VStack(spacing: 12) {
-                    ProgressView()
-                        .scaleEffect(1.2)
-                        .tint(.white)
-                    Text("Joining...")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(.white)
+            // LAYER 4: Loading State (Safe Mode: No Spinner/Anim)
+            if isJoining {
+                ZStack {
+                    Color.black.opacity(0.6)
+                    VStack(spacing: 8) {
+                        Text("Joining...")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(.white)
+                    }
                 }
+                .allowsHitTesting(false)
+                .cornerRadius(16)
             }
-            .opacity(isJoining ? 1 : 0)
-            .animation(.easeInOut(duration: 0.2), value: isJoining)
-            .allowsHitTesting(false)
-            .cornerRadius(16)
-            */
         }
         .frame(maxWidth: .infinity)
         .cornerRadius(16)

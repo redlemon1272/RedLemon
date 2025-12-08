@@ -678,6 +678,7 @@ class LobbyViewModel: ObservableObject {
     }
 
     func addToPlaylist(item: MediaItem, season: Int? = nil, episode: Int? = nil) async {
+        print("🎬 LobbyViewModel: addToPlaylist called for \(item.name)")
         await addItemsToPlaylist([(item, season, episode)])
     }
     
@@ -1580,6 +1581,7 @@ class LobbyViewModel: ObservableObject {
                     playlist: playlist,
                     currentIndex: currentPlaylistIndex
                 )
+                print("✅ LobbyViewModel: updateRoomPlaylist returned successfully")
             } catch {
                 print("❌ Failed to update playlist in database: \(error)")
             }

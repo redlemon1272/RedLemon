@@ -503,6 +503,7 @@ class SupabaseClient {
         playlist: [PlaylistItem],
         currentIndex: Int
     ) async throws {
+        print("📡 SupabaseClient: updateRoomPlaylist called for room \(roomId) with \(playlist.count) items")
         // Serialize playlist items to dictionaries for JSONB column
         let playlistData = try playlist.map { item -> [String: Any] in
             let data = try JSONEncoder().encode(item)

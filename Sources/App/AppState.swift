@@ -870,7 +870,7 @@ class AppState: ObservableObject {
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,
                 playlist: room.playlist,
-                currentPlaylistIndex: room.currentPlaylistIndex,
+                currentPlaylistIndex: room.currentPlaylistIndex ?? 0,
                 lobbyDuration: 300,
                 shouldLoop: false,
                 isPersistent: true,
@@ -898,7 +898,7 @@ class AppState: ObservableObject {
                 // Set state for playback
                 self.currentRoomId = roomId
                 self.currentWatchPartyRoom = watchPartyRoom
-                self.isWatchPartyHost = (room.hostUserId == userId)
+                self.isWatchPartyHost = (room.hostUserId == currentUserId)
                 self.currentWatchMode = .watchParty
 
                 // Set selection details from room
@@ -947,7 +947,7 @@ class AppState: ObservableObject {
                 // Set state
                 self.currentRoomId = roomId
                 self.currentWatchPartyRoom = watchPartyRoom
-                self.isWatchPartyHost = (room.hostUserId == userId)
+                self.isWatchPartyHost = (room.hostUserId == currentUserId)
                 self.currentWatchMode = .watchParty
 
                 // Set selection details from room

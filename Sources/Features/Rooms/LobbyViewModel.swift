@@ -1338,6 +1338,22 @@ class LobbyViewModel: ObservableObject {
 
                     NSLog("🎬 Guest: Launching player via database fallback")
 
+                    // CRITICAL FIX: Sync stream details from fresh roomState to AppState
+                    // This ensures we use the HOST'S resolved stream (E02) and not the stale one (E01)
+                    if var currentRoom = appState.currentWatchPartyRoom {
+                        currentRoom.selectedStreamHash = roomState.streamHash
+                        currentRoom.selectedFileIdx = roomState.fileIdx
+                        currentRoom.selectedQuality = roomState.quality
+                        currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
+                        
+                        appState.currentWatchPartyRoom = currentRoom
+                        NSLog("✅ Guest: Synced stream details from DB fallback (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
+                    } else {
+                        // If currentWatchPartyRoom is nil, we should try to set it if possible, 
+                        // or at least clear stale state if we could. 
+                        // But playMedia will set it up. Main risk is STALE data, which we just overwrote above.
+                    }
+
                     // CRITICAL: Set season/episode from room BEFORE playMedia()
                     // This ensures the guest resolves the correct episode for subtitles and metadata
                     // Use roomState (fresh from DB) instead of room (local state) to ensure we have latest data

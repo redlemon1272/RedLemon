@@ -86,7 +86,7 @@ actor RealDebridClient {
 
     // MARK: - Public API
 
-    func unlock(infoHash: String, fileIdx: Int = 0, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil) async throws -> UnlockResult? {
+    func unlock(infoHash: String, fileIdx: Int? = nil, token: String, maxPolls: Int = 3, season: Int? = nil, episode: Int? = nil, title: String? = nil) async throws -> UnlockResult? {
         // CRITICAL: Block known x265 torrents
         let hashPrefix = String(infoHash.prefix(12)).lowercased()
         if x265Blocklist.contains(where: { hashPrefix.hasPrefix($0) }) {
@@ -94,7 +94,7 @@ actor RealDebridClient {
             throw RDError.notCached // Throw error to try next stream
         }
 
-        let cacheKey = "\(infoHash):\(fileIdx):\(season ?? 0):\(episode ?? 0)"
+        let cacheKey = "\(infoHash):\(fileIdx ?? -1):\(season ?? 0):\(episode ?? 0)"
 
         // Check cache first
         if let cached = cache[cacheKey], cached.expiry > Date() {
@@ -153,7 +153,7 @@ actor RealDebridClient {
 
     // MARK: - Core Unlock Logic (ports Node.js _rdUnlock)
 
-    private func _rdUnlock(infoHash: String, fileIdx: Int, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?) async throws -> UnlockResult? {
+    private func _rdUnlock(infoHash: String, fileIdx: Int?, token: String, maxPolls: Int, season: Int?, episode: Int?, title: String?) async throws -> UnlockResult? {
         let pollDelay: UInt64 = 1_000_000_000 // 1 second
 
         // Build magnet with trackers
@@ -282,8 +282,13 @@ actor RealDebridClient {
                 actualFileIdx = videoFileId
             } else {
                 // Fallback to provided fileIdx
-                actualFileIdx = fileIdx >= 0 ? fileIdx + 1 : 1
-                print("⚠️ No video files found, using fileIdx: \(actualFileIdx)")
+                if let idx = fileIdx, idx >= 0 {
+                    actualFileIdx = idx + 1
+                    print("⚠️ No video files found, using provided fileIdx: \(actualFileIdx)")
+                } else {
+                    actualFileIdx = 1
+                    print("⚠️ No video files found and no fileIdx provided, defaulting to file ID 1")
+                }
             }
         }
 

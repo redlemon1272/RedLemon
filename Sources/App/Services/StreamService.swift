@@ -279,8 +279,8 @@ actor StreamService {
         }
 
         print("🔓 StreamService: Unlocking with infoHash: \(infoHash.prefix(12))...")
-
-        let fileIndex = stream.fileIdx ?? 0
+        
+        // CRITICAL FIX: Don't default to 0 if fileIdx is nil (Pack support)
         let unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")!
         var request = URLRequest(url: unlockURL)
         request.httpMethod = "POST"
@@ -288,10 +288,13 @@ actor StreamService {
 
         var unlockBody: [String: Any] = [
             "infoHash": infoHash,
-            "fileIdx": fileIndex,
             "service": "realdebrid",
             "title": item.name
         ]
+        
+        if let fileIdx = stream.fileIdx {
+            unlockBody["fileIdx"] = fileIdx
+        }
 
         if item.type == "series" {
             if let season = season { unlockBody["season"] = season }

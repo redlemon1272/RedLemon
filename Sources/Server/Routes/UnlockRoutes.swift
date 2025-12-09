@@ -50,7 +50,7 @@ func registerUnlockRoutes(_ app: Application) {
         do {
             guard let result = try await rdClient.unlock(
                 infoHash: body.infoHash,
-                fileIdx: body.fileIdx ?? 0,
+                fileIdx: body.fileIdx,
                 token: token,
                 maxPolls: 2, // Reduced from 3 - pre-validated streams should be faster
                 season: body.season,

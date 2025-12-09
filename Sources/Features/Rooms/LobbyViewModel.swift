@@ -1219,6 +1219,32 @@ class LobbyViewModel: ObservableObject {
                 // Update AppState to keep it in sync
                 appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist
                 appState?.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+                
+                // CRITICAL FIX: Ensure initial item is in playlist (for Host)
+                if self.isHost, self.playlist.isEmpty, let mediaItem = self.room.mediaItem {
+                    print("🆕 Lobby: Auto-adding initial item to playlist: \(mediaItem.name)")
+                    let initialItem = PlaylistItem(
+                        mediaItem: mediaItem,
+                        season: self.room.season,
+                        episode: self.room.episode
+                    )
+                    self.playlist = [initialItem]
+                    self.isPlaylistMode = true
+                    
+                    // Persist to Supabase immediately
+                    Task {
+                        do {
+                            try await SupabaseClient.shared.updateRoomPlaylist(
+                                roomId: self.room.id,
+                                playlist: [initialItem],
+                                currentIndex: 0
+                            )
+                            print("✅ Lobby: Persisted initial playlist item")
+                        } catch {
+                            print("❌ Lobby: Failed to persist initial playlist item: \(error)")
+                        }
+                    }
+                }
             }
             
         } catch {

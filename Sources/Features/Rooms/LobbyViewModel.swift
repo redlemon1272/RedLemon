@@ -1223,6 +1223,26 @@ class LobbyViewModel: ObservableObject {
                 }
 
                 participants = updatedParticipants
+
+                // CRITICAL FIX: "Presence Guarantee" (Self-Healing)
+                // If I am the Host, I MUST be in the participant list.
+                // If I am missing (e.g. timed out during playback), re-join immediately.
+                if isHost && !isLeavingExplicitly {
+                    // Check if my ID is in the list
+                    let amIPresent = participants.contains(where: { $0.id == participantId })
+
+                    if !amIPresent {
+                        // Debounce/Log carefully to avoid spam, but this is critical
+                        print("⚠️ Lobby: Host missing from participant list (Self-Healing activated)")
+
+                        Task {
+                            if let userId = UUID(uuidString: participantId) {
+                                try? await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: true)
+                                print("✅ Lobby: Host self-healed presence in DB")
+                            }
+                        }
+                    }
+                }
             }
 
         } catch {

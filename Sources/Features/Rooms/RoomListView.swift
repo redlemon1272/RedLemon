@@ -131,9 +131,6 @@ struct RoomListView: View {
 
         Task {
             do {
-                // Cleanup stale participants first to get accurate count
-                try? await SupabaseClient.shared.cleanupStaleParticipants()
-
                 // Fetch rooms from Supabase backend with pagination
                 print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize))...")
                 let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset)

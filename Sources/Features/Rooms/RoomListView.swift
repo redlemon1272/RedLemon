@@ -170,7 +170,11 @@ struct RoomListView: View {
                         
                         // ZOMBIE CHECK: Verify host is in the participant list
                         guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
-                            print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Skipping...")
+                            print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Cleaning up...")
+                            Task {
+                                try? await SupabaseClient.shared.deleteRoom(roomId: room.id)
+                                print("🧹 Distributed Cleanup: Deleted zombie room \(room.id)")
+                            }
                             continue
                         }
                         

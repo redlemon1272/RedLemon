@@ -417,6 +417,15 @@ class SupabaseClient {
         )
     }
 
+    /// Delete a room (Admin or Distributed Cleanup)
+    func deleteRoom(roomId: String) async throws {
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "DELETE",
+            query: ["id": "eq.\(roomId)"]
+        )
+    }
+
     /// Get all participants in a room
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant] {
         let data = try await makeRequest(

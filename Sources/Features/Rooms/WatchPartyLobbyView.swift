@@ -154,7 +154,7 @@ struct WatchPartyLobbyView: View {
                                     .fontWeight(.bold)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
-                                    
+
                                 if let description = viewModel.room.description {
                                     Text(description)
                                         .font(.subheadline)
@@ -580,7 +580,7 @@ struct WatchPartyLobbyView: View {
     }
 
     private func leaveLobby() {
-        viewModel.disconnect()
+        viewModel.initiateLeave()
         appState.restoreWindowFromLobby()
         appState.currentView = .browse
     }
@@ -636,7 +636,7 @@ struct ParticipantRow: View {
                     Button(role: .destructive, action: onKick) {
                         Label("Kick Participant", systemImage: "xmark.circle")
                     }
-                    
+
                     Button(action: onMute) {
                         Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
                     }

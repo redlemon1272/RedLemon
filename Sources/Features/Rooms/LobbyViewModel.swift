@@ -22,7 +22,7 @@ class LobbyViewModel: ObservableObject {
     @Published var currentPlaylistIndex: Int = 0
     @Published var isPlaylistMode: Bool = false
     @Published var mutedUserIds: Set<String> = []
-    
+
     // Realtime connection status for UI feedback
 
     // Realtime connection status for UI feedback
@@ -41,6 +41,7 @@ class LobbyViewModel: ObservableObject {
     private var isDisconnecting: Bool = false
     private var realtimeManager: RealtimeChannelManager?
     private var playbackEndedTimestamp: Date? // Track when playback ended to prevent immediate re-join race condition
+    private var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
 
     // Helper to track state safely across actor boundaries (specifically for deinit)
     private class TransitionState {
@@ -314,7 +315,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Initialize Realtime channel (reusing setup method to ensure callbacks are attached)
                 await self.setupRealtimeSubscription()
-                
+
                 if !isHost {
                     // Guest joining - send join message via Realtime only
                     let guestName = appState?.currentUsername ?? "Guest"
@@ -374,12 +375,17 @@ class LobbyViewModel: ObservableObject {
             // Leave Supabase room (use current user ID, not just host ID)
             if isHost {
                 do {
-                    // Soft Close: Hide room from public list
-                    print("🙈 Host leaving: Soft closing room \(room.id)")
-                    try await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
-                    
-                    try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: UUID(uuidString: room.hostId)!)
-                    NSLog("✅ Host Left room \(room.id)")
+                    // Soft Close: Only hide room from public list if explicitly leaving
+                    if isLeavingExplicitly {
+                        print("🙈 Host leaving explicitly: Soft closing room \(room.id)")
+                        try await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
+                        try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: UUID(uuidString: room.hostId)!)
+                        NSLog("✅ Host Left room \(room.id)")
+                    } else {
+                        print("⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
+                        // Logic: If app crashes/closes without explicit leave, room stays "Active" until heartbeat timeout
+                        // This prevents guests from being kicked if host just rotates device/updates view
+                    }
                 } catch {
                     NSLog("❌ Failed to soft close/leave room: \(error)")
                 }
@@ -398,6 +404,12 @@ class LobbyViewModel: ObservableObject {
         countdownTask?.cancel()
 
         print("🎭 Lobby: Disconnected from room \(room.id)")
+    }
+
+    func initiateLeave() {
+        print("🚪 Lobby: Explicit leave initiated")
+        isLeavingExplicitly = true
+        disconnect()
     }
 
     func sendChatMessage() {
@@ -597,7 +609,7 @@ class LobbyViewModel: ObservableObject {
             return
         }
         isResolvingStream = false
-        
+
         guard let finalStream = preResolvedStream else {
              isStarting = false
              transitionState.isStarting = false
@@ -641,7 +653,7 @@ class LobbyViewModel: ObservableObject {
             do {
                 try await SupabaseClient.shared.startRoomPlayback(roomId: room.id)
                 NSLog("✅ Host: Set room playback state in database as fallback")
-                
+
                 if !realtimeSuccess {
                     addMessage(.systemInfo, userName: "System", data: [
                         "message": "✅ Start signal sent via database (Realtime unavailable)",
@@ -681,7 +693,7 @@ class LobbyViewModel: ObservableObject {
             appState.isWatchPartyHost = true
             appState.currentWatchMode = .watchParty
             appState.currentRoomId = room.id
-            
+
             // CRITICAL FIX: Update AppState season/episode so Player UI shows correct title
             if let mediaItem = room.mediaItem, mediaItem.type == "series" {
                 appState.selectedSeason = room.season
@@ -698,35 +710,35 @@ class LobbyViewModel: ObservableObject {
         print("🎬 LobbyViewModel: addToPlaylist called for \(item.name)")
         await addItemsToPlaylist([(item, season, episode)])
     }
-    
+
     func addItemsToPlaylist(_ items: [(item: MediaItem, season: Int?, episode: Int?)]) async {
         guard isHost, !items.isEmpty else { return }
-        
+
         let newItems = items.compactMap { entry -> PlaylistItem? in
             let finalSeason = entry.season ?? (entry.item.type == "series" ? 1 : nil)
             let finalEpisode = entry.episode ?? (entry.item.type == "series" ? 1 : nil)
-            
+
             // Check for duplicates in existing playlist
             let isDuplicateInPlaylist = playlist.contains { existing in
                 existing.mediaItem.id == entry.item.id &&
                 existing.season == finalSeason &&
                 existing.episode == finalEpisode
             }
-            
+
             // Check if it matches the CURRENTLY playing item (to avoid immediate replay)
             let isCurrentItem = (room.mediaItem?.id == entry.item.id &&
                                  room.season == finalSeason &&
                                  room.episode == finalEpisode)
-            
+
             if isDuplicateInPlaylist || isCurrentItem {
                  return nil
             }
-            
+
             return PlaylistItem(mediaItem: entry.item, season: finalSeason, episode: finalEpisode)
         }
-        
+
         guard !newItems.isEmpty else { return }
-        
+
         // Optimistic update
         await MainActor.run {
             self.playlist.append(contentsOf: newItems)
@@ -734,7 +746,7 @@ class LobbyViewModel: ObservableObject {
                 self.currentPlaylistIndex = 0
             }
             self.isPlaylistMode = true
-            
+
             // Persist to Supabase
             self.updatePlaylistInDatabase()
         }
@@ -784,7 +796,7 @@ class LobbyViewModel: ObservableObject {
 
                     // REMOVED: addMessage(.userJoined, userName: guestUsername)
                     // Reason: Presence callback handles this already. Removing to prevent double messages.
-                    
+
                     let guest = Participant(
                         id: guestId,
                         name: guestUsername,
@@ -846,11 +858,11 @@ class LobbyViewModel: ObservableObject {
                 if participantId == kickedId {
                     // We were kicked - disconnect and return to browse
                     print("❌ Lobby: Kicked by host")
-                    
+
                     // Show alert via lobby message? Or just leave.
                     // Ideally we'd show an alert but we can't easily trigger one from VM -> View without state binding
                     // Just force leave
-                    
+
                     await MainActor.run {
                         self.disconnect()
                         self.appState?.currentView = .browse
@@ -883,7 +895,7 @@ class LobbyViewModel: ObservableObject {
                                 await MainActor.run {
                                     appState?.selectedSeason = season
                                     appState?.selectedEpisode = episode
-                                    
+
                                     // CRITICAL FIX: Clear stale stream optimization data to force fresh resolution
                                     // If we failed to get fresh room state, the existing optimization data (URL/Hash)
                                     // likely points to the PREVIOUS episode. We must clear it to avoid playing wrong content.
@@ -930,14 +942,14 @@ class LobbyViewModel: ObservableObject {
                         if var currentRoom = appState?.currentWatchPartyRoom {
                             currentRoom.season = season ?? currentRoom.season
                             currentRoom.episode = episode ?? currentRoom.episode
-                            
+
                             // IMPORTANT: Copy stream details from fetched roomState to appState
                             // This ensures AppState.playMedia sees the "Guest Optimization" data
                             currentRoom.selectedStreamHash = roomState.streamHash
                             currentRoom.selectedFileIdx = roomState.fileIdx
                             currentRoom.selectedQuality = roomState.quality
                             currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
-                            
+
                             appState?.currentWatchPartyRoom = currentRoom
                             NSLog("✅ Guest: Synced stream details from host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
                         }
@@ -1100,13 +1112,13 @@ class LobbyViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func startHeartbeatLoop() {
         print("💓 Lobby: Starting heartbeat loop...")
         Task { [weak self] in
             while !Task.isCancelled {
                 guard let self = self else { return }
-                
+
                 // Send heartbeat
                 if let userId = self.appState?.currentUserId {
                     do {
@@ -1116,7 +1128,7 @@ class LobbyViewModel: ObservableObject {
                         print("⚠️ Heartbeat failed: \(error)")
                     }
                 }
-                
+
                 // Wait 30 seconds
                 try? await Task.sleep(nanoseconds: 30_000_000_000)
             }
@@ -1147,7 +1159,7 @@ class LobbyViewModel: ObservableObject {
                 if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
                     username = user.username
                 }
-                
+
                 // Preserve existing ready state for known participants
                 let existingParticipant = participants.first { $0.id == participant.userId.uuidString }
                 let isReady = existingParticipant?.isReady ?? false
@@ -1215,7 +1227,7 @@ class LobbyViewModel: ObservableObject {
                 print("❌ Lobby: Failed to fetch fresh room state (not found)")
                 return
             }
-            
+
             await MainActor.run {
                 // Update Playlist
                 if let playlist = freshRoom.playlist {
@@ -1223,23 +1235,23 @@ class LobbyViewModel: ObservableObject {
                     self.playlist = playlist
                     self.isPlaylistMode = !playlist.isEmpty
                 }
-                
+
                 // Update Index
                 if let index = freshRoom.currentPlaylistIndex {
                     print("✅ Lobby: Synced playlist index to \(index)")
                     self.currentPlaylistIndex = index
                 }
-                
+
                 // Update other room properties locally if needed
                 // Note: We don't replace self.room completely to avoid wiping out other local state,
                 // but we SHOULD update the playlist on the room struct too.
                 self.room.playlist = freshRoom.playlist
                 self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
-                
+
                 // Update AppState to keep it in sync
                 appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist
                 appState?.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
-                
+
                 // CRITICAL FIX: Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties
                 var freshMedia: MediaItem? = nil
@@ -1260,31 +1272,31 @@ class LobbyViewModel: ObservableObject {
                         runtime: nil
                     )
                 }
-                
+
                 if let mediaItem = freshMedia {
                     if self.room.mediaItem?.id != mediaItem.id ||
                        self.room.season != freshRoom.season ||
                        self.room.episode != freshRoom.episode {
-                        
+
                         // Update local room state
                         self.room.mediaItem = mediaItem
                         self.room.season = freshRoom.season
                         self.room.episode = freshRoom.episode
-                        
+
                         // Update UI Bindings
                         self.posterURL = mediaItem.poster
                         self.backdropURL = mediaItem.background
                         self.logoURL = mediaItem.logo // Reset logo (will be nil for DB state, triggering fetch)
-                        
+
                         print("✅ Lobby: Synced Initial Metadata -> \(mediaItem.name)")
-                        
+
                         // Trigger metadata load if assets are missing
                         if self.logoURL == nil {
                             self.loadMetadata()
                         }
                     }
                 }
-                
+
                 // CRITICAL FIX: Ensure initial item is in playlist (for Host)
                 if self.isHost, self.playlist.isEmpty, let mediaItem = self.room.mediaItem {
                     print("🆕 Lobby: Auto-adding initial item to playlist: \(mediaItem.name)")
@@ -1295,7 +1307,7 @@ class LobbyViewModel: ObservableObject {
                     )
                     self.playlist = [initialItem]
                     self.isPlaylistMode = true
-                    
+
                     // Persist to Supabase immediately
                     Task {
                         do {
@@ -1311,7 +1323,7 @@ class LobbyViewModel: ObservableObject {
                     }
                 }
             }
-            
+
         } catch {
             print("❌ Lobby: Error fetching fresh state: \(error)")
         }
@@ -1328,7 +1340,7 @@ class LobbyViewModel: ObservableObject {
             }
             // CRITICAL FIX: Sync UI Metadata (Guest UI was not updating when Host changed item)
             // Extract values needed for UI update to avoid complex captures
-            
+
             // Construct MediaItem from SupabaseRoom flat properties
             var freshMedia: MediaItem? = nil
             if let imdbId = roomState.imdbId {
@@ -1339,7 +1351,7 @@ class LobbyViewModel: ObservableObject {
                     name: roomState.name, // The room name is updated to content name by Host
                     poster: roomState.posterUrl,
                     background: roomState.backdropUrl,
-                    logo: nil, 
+                    logo: nil,
                     description: roomState.description,
                     releaseInfo: nil,
                     year: nil,
@@ -1348,38 +1360,38 @@ class LobbyViewModel: ObservableObject {
                     runtime: nil
                 )
             }
-            
+
             let freshPlaylist = roomState.playlist
             let freshSeason = roomState.season
             let freshEpisode = roomState.episode
             let freshIndex = roomState.currentPlaylistIndex
-            
+
             await MainActor.run {
                 // 1. Update Media Item & UI Assets if changed
                 if let mediaItem = freshMedia {
-                    if self.room.mediaItem?.id != mediaItem.id || 
-                       self.room.season != freshSeason || 
+                    if self.room.mediaItem?.id != mediaItem.id ||
+                       self.room.season != freshSeason ||
                        self.room.episode != freshEpisode {
-                        
+
                         // Update local room state
                         self.room.mediaItem = mediaItem
                         self.room.season = freshSeason
                         self.room.episode = freshEpisode
-                        
+
                         // Update UI Bindings
                         self.posterURL = mediaItem.poster
                         self.backdropURL = mediaItem.background
                         self.logoURL = mediaItem.logo // Reset logo (will be nil for DB state, triggering fetch)
-                        
+
                         NSLog("✅ Guest: Synced Metadata Update -> \(mediaItem.name)")
-                        
+
                         // Trigger fetch for full metadata (logo etc) if needed
                         if self.logoURL == nil {
                             self.loadMetadata()
                         }
                     }
                 }
-                
+
                 // 2. Update Playlist & Index
                 if let playlist = freshPlaylist {
                     if self.playlist.count != playlist.count || self.room.currentPlaylistIndex != freshIndex {
@@ -1457,12 +1469,12 @@ class LobbyViewModel: ObservableObject {
                         currentRoom.selectedFileIdx = roomState.fileIdx
                         currentRoom.selectedQuality = roomState.quality
                         currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
-                        
+
                         appState.currentWatchPartyRoom = currentRoom
                         NSLog("✅ Guest: Synced stream details from DB fallback (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
                     } else {
-                        // If currentWatchPartyRoom is nil, we should try to set it if possible, 
-                        // or at least clear stale state if we could. 
+                        // If currentWatchPartyRoom is nil, we should try to set it if possible,
+                        // or at least clear stale state if we could.
                         // But playMedia will set it up. Main risk is STALE data, which we just overwrote above.
                     }
 
@@ -1592,7 +1604,7 @@ class LobbyViewModel: ObservableObject {
 
             if let mediaItem = room.mediaItem {
                 print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
-                
+
                 // Stop polling before transition
                 self.stopPolling()
 
@@ -1720,11 +1732,11 @@ class LobbyViewModel: ObservableObject {
     // MARK: - Playlist Management
 
     // MARK: - Playlist Management
-    
+
     // RENAMED: was checkForAutoAdvance
     func prepareNextItem() {
         guard isHost, isPlaylistMode else { return }
-        
+
         // Sync local index with Updated AppState if referenced
         if let appStateIndex = appState?.currentWatchPartyRoom?.currentPlaylistIndex {
             self.currentPlaylistIndex = appStateIndex
@@ -1734,32 +1746,32 @@ class LobbyViewModel: ObservableObject {
         guard currentPlaylistIndex < playlist.count else {
             print("✅ Playlist completed (Manual Advance)")
             // Reset to 0 if we want to show the first item again, or leave as is?
-            // If looped, AppState already reset it to 0. 
+            // If looped, AppState already reset it to 0.
             // If valid index, prepare it.
             return
         }
 
         let item = playlist[currentPlaylistIndex]
         print("🎬 Preparing next item: \(item.displayTitle) (Index: \(currentPlaylistIndex))")
-        
+
         // Update room's current media immediately for the lobby UI
         room.mediaItem = item.mediaItem
         room.season = item.season
         room.episode = item.episode
-        
+
         // Update Supabase with new index & media
         // This ensures guests see the new poster/title
         updatePlaylistIndex(currentPlaylistIndex)
-        
+
         // Also trigger metadata load specifically for this new item to refresh background/poster
         posterURL = item.mediaItem.poster
         backdropURL = item.mediaItem.background
         logoURL = item.mediaItem.logo // If available on item, or nil to trigger fetch
-        
+
         if logoURL == nil {
              loadMetadata() // Full fetch if needed
         }
-        
+
         // CRITICAL: Reset ready state so we don't start automatically or stuck in ready state
         self.isReady = false
         // Also update backend to unready? The standard "toggleReady" might be needed or manual DB update.
@@ -1768,42 +1780,42 @@ class LobbyViewModel: ObservableObject {
         // Let's force a toggle if we are ready?
         // if self.isReady { toggleReady() } - better to just set false locally and let user click again.
     }
-    
+
     // REMOVED: startPlaylistCountdown
     // REMOVED: startNextPlaylistItem (Host calls startMovie manually now)
 
     /// Explicitly play a specific item from the playlist (Host only)
     func playItem(at index: Int) {
         guard isHost, index >= 0, index < playlist.count else { return }
-        
+
         let item = playlist[index]
         print("🎬 Host switching to playlist item \(index + 1): \(item.displayTitle)")
-        
+
         // Update local state
         self.currentPlaylistIndex = index
-        
+
         // Update Supabase with new index & media
         // If assets are missing (e.g. from search), start a Task to fetch fresh
         // metadata BEFORE updating Supabase to ensure consistency.
-        
+
         // 2. Update local state immediately with what we have
         self.room.mediaItem = item.mediaItem
         self.room.season = item.season
         self.room.episode = item.episode
         self.room.currentPlaylistIndex = index
-        
+
         self.posterURL = item.mediaItem.poster
         self.backdropURL = item.mediaItem.background
         self.logoURL = item.mediaItem.logo
-        
+
         // CRITICAL: Reset ready state
         self.isReady = false
-        
+
         Task {
             // Prepare metadata to send
             var finalPoster = item.mediaItem.poster
             var finalBackdrop = item.mediaItem.background
-            
+
             // If assets are missing, try to fetch fresh metadata
             if item.mediaItem.logo == nil || item.mediaItem.background == nil {
                 do {
@@ -1811,14 +1823,14 @@ class LobbyViewModel: ObservableObject {
                     let freshMeta = try await LocalAPIClient.shared.fetchMediaDetails(
                         imdbId: item.mediaItem.id,
                         type: item.mediaItem.type
-                    ) 
-                    
+                    )
+
                     // Update Local UI with fresh details
                     await MainActor.run {
                         self.posterURL = freshMeta.posterURL?.absoluteString
                         self.backdropURL = freshMeta.backgroundURL?.absoluteString
                         self.logoURL = freshMeta.logo
-                        
+
                         // Update local room item too so it persists
                         if let freshPoster = freshMeta.posterURL?.absoluteString {
                             finalPoster = freshPoster
@@ -1832,7 +1844,7 @@ class LobbyViewModel: ObservableObject {
                     print("⚠️ Lobby: Failed to fetch fresh metadata, proceeding with basic info: \(error)")
                 }
             }
-            
+
             do {
                 // 3. Update Supabase with definitive metadata (fresh or basic)
                 // Use empty strings to clear stale art if still missing
@@ -1845,7 +1857,7 @@ class LobbyViewModel: ObservableObject {
                     posterUrl: finalPoster ?? "",
                     backdropUrl: finalBackdrop ?? ""
                 )
-                
+
                 // Also update playlist index
                 try await SupabaseClient.shared.updateRoomPlaylist(
                     roomId: room.id,

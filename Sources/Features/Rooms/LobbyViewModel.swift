@@ -85,7 +85,14 @@ class LobbyViewModel: ObservableObject {
             self.isPlaylistMode = !roomPlaylist.isEmpty
         }
 
+        // Initialize playbackEndedTimestamp to enable the grace period check in pollRoomState
+        self.playbackEndedTimestamp = Date()
 
+        // Fetch fresh room state from Supabase to ensure playlist is synced
+        // This fixes the issue where Host sees "Playlist 0" because AppState had stale data
+        Task {
+            await self.fetchFreshRoomState()
+        }
 
         // CRITICAL FIX: Prevent "Autoplay Death Loop"
         // When host returns to lobby after movie finishes, DB still says is_playing=true
@@ -1174,6 +1181,46 @@ class LobbyViewModel: ObservableObject {
 
         } catch {
             NSLog("⚠️ Lobby: Failed to poll participants: \(error)")
+        }
+    }
+
+    /// Fetch fresh room state from Supabase (Host & Guest)
+    /// This ensures we have the latest playlist and room details, as AppState might be stale
+    private func fetchFreshRoomState() async {
+        print("🔄 Lobby: Fetching fresh room state from Supabase...")
+        do {
+            guard let freshRoom = try await SupabaseClient.shared.getRoomState(roomId: room.id) else {
+                print("❌ Lobby: Failed to fetch fresh room state (not found)")
+                return
+            }
+            
+            await MainActor.run {
+                // Update Playlist
+                if let playlist = freshRoom.playlist {
+                    print("✅ Lobby: Synced playlist with \(playlist.count) items")
+                    self.playlist = playlist
+                    self.isPlaylistMode = !playlist.isEmpty
+                }
+                
+                // Update Index
+                if let index = freshRoom.currentPlaylistIndex {
+                    print("✅ Lobby: Synced playlist index to \(index)")
+                    self.currentPlaylistIndex = index
+                }
+                
+                // Update other room properties locally if needed
+                // Note: We don't replace self.room completely to avoid wiping out other local state,
+                // but we SHOULD update the playlist on the room struct too.
+                self.room.playlist = freshRoom.playlist
+                self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex
+                
+                // Update AppState to keep it in sync
+                appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist
+                appState?.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+            }
+            
+        } catch {
+            print("❌ Lobby: Error fetching fresh state: \(error)")
         }
     }
 

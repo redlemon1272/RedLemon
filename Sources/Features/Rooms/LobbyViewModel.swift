@@ -883,6 +883,18 @@ class LobbyViewModel: ObservableObject {
                                 await MainActor.run {
                                     appState?.selectedSeason = season
                                     appState?.selectedEpisode = episode
+                                    
+                                    // CRITICAL FIX: Clear stale stream optimization data to force fresh resolution
+                                    // If we failed to get fresh room state, the existing optimization data (URL/Hash)
+                                    // likely points to the PREVIOUS episode. We must clear it to avoid playing wrong content.
+                                    if var currentRoom = appState?.currentWatchPartyRoom {
+                                        currentRoom.selectedStreamHash = nil
+                                        currentRoom.selectedFileIdx = nil
+                                        currentRoom.selectedQuality = nil
+                                        currentRoom.unlockedStreamURL = nil
+                                        appState?.currentWatchPartyRoom = currentRoom
+                                        print("🛡️ Guest: Cleared stale stream optimization data (Fallback Mode)")
+                                    }
                                 }
                                 NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
                             }

@@ -1240,6 +1240,52 @@ class LobbyViewModel: ObservableObject {
                 appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist
                 appState?.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
                 
+                // CRITICAL FIX: Sync UI Metadata on Init (Fixes Art Reversion)
+                // Construct MediaItem from SupabaseRoom flat properties
+                var freshMedia: MediaItem? = nil
+                if let imdbId = freshRoom.imdbId {
+                    let type = (freshRoom.season != nil || freshRoom.episode != nil) ? "series" : "movie"
+                    freshMedia = MediaItem(
+                        id: imdbId,
+                        type: type,
+                        name: freshRoom.name,
+                        poster: freshRoom.posterUrl,
+                        background: freshRoom.backdropUrl,
+                        logo: nil,
+                        description: freshRoom.description,
+                        releaseInfo: nil,
+                        year: nil,
+                        imdbRating: nil,
+                        genres: nil,
+                        runtime: nil
+                    )
+                }
+                
+                if let mediaItem = freshMedia {
+                    if self.room.mediaItem?.id != mediaItem.id ||
+                       self.room.season != freshRoom.season ||
+                       self.room.episode != freshRoom.episode {
+                        
+                        // Update local room state
+                        self.room.mediaItem = mediaItem
+                        self.room.season = freshRoom.season
+                        self.room.episode = freshRoom.episode
+                        
+                        // Update UI Bindings
+                        self.posterURL = mediaItem.poster
+                        self.backdropURL = mediaItem.background
+                        // Only update logo if we have it, or rely on loadMetadata()
+                        // self.logoURL = mediaItem.logo 
+                        
+                        print("✅ Lobby: Synced Initial Metadata -> \(mediaItem.name)")
+                        
+                        // Trigger metadata load if assets are missing
+                        if self.logoURL == nil {
+                            self.loadMetadata()
+                        }
+                    }
+                }
+                
                 // CRITICAL FIX: Ensure initial item is in playlist (for Host)
                 if self.isHost, self.playlist.isEmpty, let mediaItem = self.room.mediaItem {
                     print("🆕 Lobby: Auto-adding initial item to playlist: \(mediaItem.name)")

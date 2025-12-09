@@ -390,9 +390,12 @@ class LobbyViewModel: ObservableObject {
                     // Soft Close: Only hide room from public list if explicitly leaving
                     if isLeavingExplicitly {
                         print("🙈 Host leaving explicitly: Soft closing room \(room.id)")
-                        try await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
+                        // Attempt soft close (ignore failure)
+                        try? await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
+                        
+                        // CRITICAL: Ensure we leave the room even if soft close failed
                         try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: UUID(uuidString: room.hostId)!)
-                        NSLog("✅ Host Left room \(room.id)")
+                        NSLog("✅ Host Left room \(room.id) (Row deleted)")
                     } else {
                         print("⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
                         // Logic: If app crashes/closes without explicit leave, room stays "Active" until heartbeat timeout

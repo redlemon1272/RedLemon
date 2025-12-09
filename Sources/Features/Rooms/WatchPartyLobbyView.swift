@@ -259,8 +259,8 @@ struct WatchPartyLobbyView: View {
                         }
                         .padding(.horizontal, 24)
 
-                        // NEW: Playlist Section (only for hosts in non-event rooms)
-                        if isHost && !room.id.hasPrefix("event_") {
+                        // NEW: Playlist Section (Visible to all, but controls restricted)
+                        if !room.id.hasPrefix("event_") {
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
                                     Image(systemName: "list.bullet")
@@ -271,19 +271,21 @@ struct WatchPartyLobbyView: View {
 
                                     Spacer()
 
-                                    Button(action: { showMediaPicker = true }) {
-                                        HStack(spacing: 4) {
-                                            Image(systemName: "plus.circle.fill")
-                                            Text("Add")
+                                    if isHost {
+                                        Button(action: { showMediaPicker = true }) {
+                                            HStack(spacing: 4) {
+                                                Image(systemName: "plus.circle.fill")
+                                                Text("Add")
+                                            }
+                                            .font(.caption)
+                                            .foregroundColor(.accentColor)
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 5)
+                                            .background(Color.accentColor.opacity(0.2))
+                                            .cornerRadius(6)
                                         }
-                                        .font(.caption)
-                                        .foregroundColor(.accentColor)
-                                        .padding(.horizontal, 10)
-                                        .padding(.vertical, 5)
-                                        .background(Color.accentColor.opacity(0.2))
-                                        .cornerRadius(6)
+                                        .buttonStyle(PlainButtonStyle())
                                     }
-                                    .buttonStyle(PlainButtonStyle())
                                 }
 
                                 if !viewModel.playlist.isEmpty {
@@ -293,7 +295,9 @@ struct WatchPartyLobbyView: View {
                                                 item: item,
                                                 index: index,
                                                 isCurrent: index == viewModel.currentPlaylistIndex,
-                                                onRemove: { viewModel.removeFromPlaylist(at: index) }
+                                                isHost: isHost,
+                                                onRemove: { viewModel.removeFromPlaylist(at: index) },
+                                                onPlay: { viewModel.playItem(at: index) }
                                             )
                                         }
                                     }
@@ -780,7 +784,9 @@ struct PlaylistItemRow: View {
     let item: PlaylistItem
     let index: Int
     let isCurrent: Bool
+    let isHost: Bool
     let onRemove: () -> Void
+    let onPlay: () -> Void
 
     var body: some View {
         HStack(spacing: 12) {
@@ -819,18 +825,31 @@ struct PlaylistItemRow: View {
 
             Spacer()
 
+            // Play button (Host only, if not current)
+            if isHost && !isCurrent {
+                Button(action: onPlay) {
+                    Image(systemName: "play.circle")
+                        .foregroundColor(.white.opacity(0.8))
+                        .font(.system(size: 18))
+                }
+                .buttonStyle(PlainButtonStyle())
+                .padding(.trailing, 4)
+            }
+
             // Current indicator
             if isCurrent {
                 Image(systemName: "play.circle.fill")
                     .foregroundColor(.accentColor)
             }
 
-            // Remove button
-            Button(action: onRemove) {
-                Image(systemName: "xmark.circle.fill")
-                    .foregroundColor(.red.opacity(0.8))
+            // Remove button (Host only)
+            if isHost {
+                Button(action: onRemove) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.red.opacity(0.8))
+                }
+                .buttonStyle(PlainButtonStyle())
             }
-            .buttonStyle(PlainButtonStyle())
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)

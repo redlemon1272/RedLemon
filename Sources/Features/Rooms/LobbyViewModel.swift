@@ -1596,6 +1596,63 @@ class LobbyViewModel: ObservableObject {
     // REMOVED: startPlaylistCountdown
     // REMOVED: startNextPlaylistItem (Host calls startMovie manually now)
 
+    /// Explicitly play a specific item from the playlist (Host only)
+    func playItem(at index: Int) {
+        guard isHost, index >= 0, index < playlist.count else { return }
+        
+        let item = playlist[index]
+        print("🎬 Host switching to playlist item \(index + 1): \(item.displayTitle)")
+        
+        // Update local state
+        self.currentPlaylistIndex = index
+        self.room.currentPlaylistIndex = index
+        
+        // Update room media
+        self.room.mediaItem = item.mediaItem
+        self.room.season = item.season
+        self.room.episode = item.episode
+        
+        // Update UI assets immediately
+        self.posterURL = item.mediaItem.poster
+        self.backdropURL = item.mediaItem.background
+        self.logoURL = item.mediaItem.logo
+        
+        // Reset readiness so players don't auto-start without confirmation
+        self.isReady = false
+        
+        // Update Supabase
+        Task {
+            // 1. Update Metadata first (critical for Guests joining)
+            do {
+                try await SupabaseClient.shared.updateRoomMetadata(
+                    roomId: room.id,
+                    name: item.mediaItem.name,
+                    imdbId: item.mediaItem.id,
+                    season: item.season,
+                    episode: item.episode,
+                    posterUrl: item.mediaItem.poster,
+                    backdropUrl: item.mediaItem.background
+                )
+                print("✅ Supabase: Room metadata updated for new item")
+            } catch {
+                print("❌ Supabase: Failed to update room metadata: \(error)")
+            }
+            
+            // 2. Update Playlist Index
+            do {
+                try await SupabaseClient.shared.updateRoomPlaylist(
+                    roomId: room.id,
+                    playlist: playlist,
+                    currentIndex: index
+                )
+                print("✅ Supabase: Playlist index updated to \(index)")
+            } catch {
+                print("❌ Supabase: Failed to update playlist index: \(error)")
+            }
+        }
+    }
+
+
 
 
 

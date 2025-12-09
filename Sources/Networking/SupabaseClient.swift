@@ -533,6 +533,35 @@ class SupabaseClient {
         }
     }
 
+    /// Update room metadata (Active Media)
+    func updateRoomMetadata(
+        roomId: String,
+        name: String,
+        imdbId: String?,
+        season: Int?,
+        episode: Int?,
+        posterUrl: String? = nil,
+        backdropUrl: String? = nil
+    ) async throws {
+        var body: [String: Any] = [
+            "name": name,
+            "last_activity": ISO8601DateFormatter().string(from: Date())
+        ]
+        
+        if let imdbId = imdbId { body["imdb_id"] = imdbId }
+        if let season = season { body["season"] = season }
+        if let episode = episode { body["episode"] = episode }
+        if let posterUrl = posterUrl { body["poster_url"] = posterUrl }
+        if let backdropUrl = backdropUrl { body["backdrop_url"] = backdropUrl }
+        
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: body,
+            query: ["id": "eq.\(roomId)"]
+        )
+    }
+
     /// Update room visibility (e.g. Soft Close)
     func setRoomVisibility(roomId: String, isPublic: Bool) async throws {
         _ = try await makeRequest(

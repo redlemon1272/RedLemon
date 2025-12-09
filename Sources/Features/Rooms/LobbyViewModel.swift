@@ -1212,7 +1212,7 @@ class LobbyViewModel: ObservableObject {
                 // Note: We don't replace self.room completely to avoid wiping out other local state,
                 // but we SHOULD update the playlist on the room struct too.
                 self.room.playlist = freshRoom.playlist
-                self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex
+                self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
                 
                 // Update AppState to keep it in sync
                 appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist

@@ -247,6 +247,18 @@ class LobbyViewModel: ObservableObject {
 
         Task { [self] in
             do {
+                // Force Host re-join to ensure presence in DB (idempotent)
+                // This fixes the "zombie host" issue where host times out during playback
+                // and returns to lobby without being in the room_participants table.
+                if isHost {
+                     if let userId = UUID(uuidString: participantId) {
+                         // We use try? because we don't want to block connection if this fails (e.g. network blip)
+                         // The heartbeat loop will also try to keep us alive, but this is the "instant" fix.
+                         try? await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: true)
+                         NSLog("✅ Host re-joined room \(room.id) in database (refreshing presence)")
+                     }
+                }
+
                 // Guest needs to join room in database first
                 if !isHost {
                     guard let userId = appState?.currentUserId else {

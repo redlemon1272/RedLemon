@@ -161,20 +161,29 @@ struct RoomListView: View {
                         runtime: nil
                     )
 
-                    // Create host participant
-                    let host = Participant(
-                        id: room.hostUserId.uuidString,
-                        name: room.hostUsername,
-                        isHost: true,
-                        isReady: true,
-                        joinedAt: Date()
-                    )
-
-                    // Fetch actual participants from room_participants table
+                    // Fetch actual participants from room_participants table first to verify Host presence
                     var guests: [Participant] = []
+                    var host: Participant?
+                    
                     do {
                         let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-                        // Convert to Participant objects (excluding host)
+                        
+                        // ZOMBIE CHECK: Verify host is in the participant list
+                        guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
+                            print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Skipping...")
+                            continue
+                        }
+                        
+                        // Create host participant from REAL data
+                        host = Participant(
+                            id: room.hostUserId.uuidString,
+                            name: room.hostUsername,
+                            isHost: true,
+                            isReady: true,
+                            joinedAt: hostData.joinedAt
+                        )
+
+                        // Convert guests
                         for participant in roomParticipants {
                             if participant.userId.uuidString == room.hostUserId.uuidString { continue }
 
@@ -200,11 +209,15 @@ struct RoomListView: View {
                         }
                     } catch {
                         print("⚠️ Failed to fetch participants for room \(room.id): \(error)")
+                        // If we can't verify participants, skip to avoid showing invalid rooms
+                        continue
                     }
+                    
+                    guard let validatedHost = host else { continue }
 
                     let watchPartyRoom = WatchPartyRoom(
                         id: room.id,
-                        hostId: host.id,
+                        hostId: validatedHost.id,
                         hostName: room.hostUsername,
                         mediaItem: mediaItem,
                         season: nil,
@@ -215,7 +228,7 @@ struct RoomListView: View {
 
                         description: room.description,
                         posterURL: room.posterUrl,
-                        participants: [host] + guests,
+                        participants: [validatedHost] + guests,
                         state: room.isPlaying ? .playing : .lobby,
                         createdAt: room.createdAt,
                         lastActivity: room.lastActivity,

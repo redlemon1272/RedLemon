@@ -1274,8 +1274,7 @@ class LobbyViewModel: ObservableObject {
                         // Update UI Bindings
                         self.posterURL = mediaItem.poster
                         self.backdropURL = mediaItem.background
-                        // Only update logo if we have it, or rely on loadMetadata()
-                        // self.logoURL = mediaItem.logo 
+                        self.logoURL = mediaItem.logo // Reset logo (will be nil for DB state, triggering fetch)
                         
                         print("✅ Lobby: Synced Initial Metadata -> \(mediaItem.name)")
                         
@@ -1370,10 +1369,7 @@ class LobbyViewModel: ObservableObject {
                         // Update UI Bindings
                         self.posterURL = mediaItem.poster
                         self.backdropURL = mediaItem.background
-                        // Keep existing logo if nil, or fetch? 
-                        // Since we don't have logo in DB, we rely on cached or fetched. 
-                        // But loadMetadata() usually handles fetching.
-                        // We should probably trigger loadMetadata() if assets are missing.
+                        self.logoURL = mediaItem.logo // Reset logo (will be nil for DB state, triggering fetch)
                         
                         NSLog("✅ Guest: Synced Metadata Update -> \(mediaItem.name)")
                         

@@ -147,13 +147,13 @@ struct WatchPartyLobbyView: View {
                                 }
                             } else {
                                 // Fallback to title if no logo
-                                Text(room.mediaItem?.name ?? "Select Media")
+                                Text(viewModel.room.mediaItem?.name ?? "Select Media")
                                     .font(.title)
                                     .fontWeight(.bold)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                     
-                                if let description = room.description {
+                                if let description = viewModel.room.description {
                                     Text(description)
                                         .font(.subheadline)
                                         .foregroundColor(.white.opacity(0.8))
@@ -162,7 +162,7 @@ struct WatchPartyLobbyView: View {
                             }
 
                             // Season & Episode info for TV series
-                            if room.mediaItem?.type == "series", let season = room.season, let episode = room.episode {
+                            if viewModel.room.mediaItem?.type == "series", let season = viewModel.room.season, let episode = viewModel.room.episode {
                                 Text("Season \(season) • Episode \(episode)")
                                     .font(.title3)
                                     .fontWeight(.medium)
@@ -177,7 +177,7 @@ struct WatchPartyLobbyView: View {
 
                             // Badges row (year and quality) and Room Code inline (hide for events)
                             HStack(spacing: 10) {
-                                if let year = room.mediaItem?.year {
+                                if let year = viewModel.room.mediaItem?.year {
                                     Text(year)
                                         .font(.caption)
                                         .fontWeight(.medium)
@@ -188,7 +188,7 @@ struct WatchPartyLobbyView: View {
                                         .cornerRadius(5)
                                 }
 
-                                Text(room.quality.displayName)
+                                Text(viewModel.room.quality.displayName)
                                     .font(.caption)
                                     .fontWeight(.semibold)
                                     .padding(.horizontal, 10)

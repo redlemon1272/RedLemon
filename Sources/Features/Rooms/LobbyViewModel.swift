@@ -29,7 +29,7 @@ class LobbyViewModel: ObservableObject {
     @Published var realtimeConnectionStatus: RealtimeConnectionStatus = .disconnected
     @Published var isResolvingStream: Bool = false // UI indicator for stream resolution
 
-    private var room: WatchPartyRoom
+    @Published var room: WatchPartyRoom
     private var isHost: Bool
     private var realtimeClient: SupabaseRealtimeClient?
     private var countdownTimer: Timer?
@@ -580,7 +580,9 @@ class LobbyViewModel: ObservableObject {
             preResolvedStream = try await appState.resolveAndPersistForWatchParty(
                 mediaItem: mediaItem,
                 quality: .fullHD,
-                roomId: room.id
+                roomId: room.id,
+                season: room.season,
+                episode: room.episode
             )
             NSLog("✅ Host: Stream resolved and persisted OK")
         } catch {
@@ -1616,6 +1618,11 @@ class LobbyViewModel: ObservableObject {
         self.posterURL = item.mediaItem.poster
         self.backdropURL = item.mediaItem.background
         self.logoURL = item.mediaItem.logo
+        
+        // If assets are missing (e.g. added from search), fetch full metadata
+        if logoURL == nil || backdropURL == nil {
+            loadMetadata()
+        }
         
         // Reset readiness so players don't auto-start without confirmation
         self.isReady = false

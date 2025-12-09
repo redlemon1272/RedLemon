@@ -322,7 +322,7 @@ class AppState: ObservableObject {
 
     // NEW: Resolve and persist stream BEFORE starting watch party
     // This fixes the race condition where guests join before the stream is ready
-    func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String) async throws -> Stream {
+    func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String, season: Int? = nil, episode: Int? = nil) async throws -> Stream {
         print("🎬 Resolving & Persisting stream for Watch Party Room: \(roomId)")
         
         await MainActor.run {
@@ -338,14 +338,15 @@ class AppState: ObservableObject {
         let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
         
         // Step 1: Resolve Stream
-        let season = mediaItem.type == "series" ? selectedSeason : nil
-        let episode = mediaItem.type == "series" ? selectedEpisode : nil
+        // Use passed parameters if available, otherwise fallback to AppState selection (legacy behavior)
+        let targetSeason = season ?? (mediaItem.type == "series" ? selectedSeason : nil)
+        let targetEpisode = episode ?? (mediaItem.type == "series" ? selectedEpisode : nil)
         
         let result = try await StreamService.shared.resolveStream(
             item: mediaItem,
             quality: quality,
-            season: season,
-            episode: episode,
+            season: targetSeason,
+            episode: targetEpisode,
             metadata: metadata
         )
         
@@ -353,8 +354,8 @@ class AppState: ObservableObject {
         let unlockedStream = try await StreamService.shared.unlockStream(
             stream: result.stream,
             item: mediaItem,
-            season: season,
-            episode: episode
+            season: targetSeason,
+            episode: targetEpisode
         )
         
         // Step 3: Persist to Supabase & Local State

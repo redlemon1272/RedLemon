@@ -681,6 +681,14 @@ class LobbyViewModel: ObservableObject {
             appState.isWatchPartyHost = true
             appState.currentWatchMode = .watchParty
             appState.currentRoomId = room.id
+            
+            // CRITICAL FIX: Update AppState season/episode so Player UI shows correct title
+            if let mediaItem = room.mediaItem, mediaItem.type == "series" {
+                appState.selectedSeason = room.season
+                appState.selectedEpisode = room.episode
+                print("✅ Host: Updated AppState selection to S\(room.season ?? 0)E\(room.episode ?? 0)")
+            }
+
             appState.navigateToPlayer(stream: finalStream)
         }
 

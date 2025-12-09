@@ -1785,54 +1785,80 @@ class LobbyViewModel: ObservableObject {
         
         // Update local state
         self.currentPlaylistIndex = index
-        self.room.currentPlaylistIndex = index
         
-        // Update room media
+        // Update Supabase with new index & media
+        // If assets are missing (e.g. from search), start a Task to fetch fresh
+        // metadata BEFORE updating Supabase to ensure consistency.
+        
+        // 2. Update local state immediately with what we have
         self.room.mediaItem = item.mediaItem
         self.room.season = item.season
         self.room.episode = item.episode
+        self.room.currentPlaylistIndex = index
         
-        // Update UI assets immediately
         self.posterURL = item.mediaItem.poster
         self.backdropURL = item.mediaItem.background
         self.logoURL = item.mediaItem.logo
         
-        // If assets are missing (e.g. added from search), fetch full metadata
-        if logoURL == nil || backdropURL == nil {
-            loadMetadata()
-        }
-        
-        // Reset readiness so players don't auto-start without confirmation
+        // CRITICAL: Reset ready state
         self.isReady = false
         
-        // Update Supabase
         Task {
-            // 1. Update Metadata first (critical for Guests joining)
+            // Prepare metadata to send
+            var finalPoster = item.mediaItem.poster
+            var finalBackdrop = item.mediaItem.background
+            
+            // If assets are missing, try to fetch fresh metadata
+            if item.mediaItem.logo == nil || item.mediaItem.background == nil {
+                do {
+                    print("🔍 Lobby: Fetching fresh metadata before Supabase update...")
+                    let freshMeta = try await LocalAPIClient.shared.fetchMediaDetails(
+                        imdbId: item.mediaItem.id,
+                        type: item.mediaItem.type
+                    ) 
+                    
+                    // Update Local UI with fresh details
+                    await MainActor.run {
+                        self.posterURL = freshMeta.posterURL?.absoluteString
+                        self.backdropURL = freshMeta.backgroundURL?.absoluteString
+                        self.logoURL = freshMeta.logo
+                        
+                        // Update local room item too so it persists
+                        if let freshPoster = freshMeta.posterURL?.absoluteString {
+                            finalPoster = freshPoster
+                        }
+                        if let freshBackdrop = freshMeta.backgroundURL?.absoluteString {
+                            finalBackdrop = freshBackdrop
+                        }
+                    }
+                    print("✅ Lobby: Fresh metadata fetched for Supabase sync")
+                } catch {
+                    print("⚠️ Lobby: Failed to fetch fresh metadata, proceeding with basic info: \(error)")
+                }
+            }
+            
             do {
+                // 3. Update Supabase with definitive metadata (fresh or basic)
+                // Use empty strings to clear stale art if still missing
                 try await SupabaseClient.shared.updateRoomMetadata(
                     roomId: room.id,
                     name: item.mediaItem.name,
                     imdbId: item.mediaItem.id,
                     season: item.season,
                     episode: item.episode,
-                    posterUrl: item.mediaItem.poster,
-                    backdropUrl: item.mediaItem.background
+                    posterUrl: finalPoster ?? "",
+                    backdropUrl: finalBackdrop ?? ""
                 )
-                print("✅ Supabase: Room metadata updated for new item")
-            } catch {
-                print("❌ Supabase: Failed to update room metadata: \(error)")
-            }
-            
-            // 2. Update Playlist Index
-            do {
+                
+                // Also update playlist index
                 try await SupabaseClient.shared.updateRoomPlaylist(
                     roomId: room.id,
-                    playlist: playlist,
+                    playlist: self.playlist,
                     currentIndex: index
                 )
-                print("✅ Supabase: Playlist index updated to \(index)")
+                print("✅ Supabase: Room metadata & playlist updated")
             } catch {
-                print("❌ Supabase: Failed to update playlist index: \(error)")
+                print("❌ Supabase: Failed to update room: \(error)")
             }
         }
     }

@@ -1012,7 +1012,7 @@ struct MediaItem: Identifiable, Codable, Equatable {
     let type: String
     let name: String
     let poster: String?
-    let background: String?
+    var background: String?
     let logo: String?
     let description: String?
     let releaseInfo: String?

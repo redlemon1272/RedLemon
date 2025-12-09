@@ -83,6 +83,7 @@ struct WatchPartyLobbyView: View {
                     } placeholder: {
                         Color.black
                     }
+                    .id(backdropURL) // Force refresh when URL changes
                 } else {
                     Color.black
                 }
@@ -145,6 +146,7 @@ struct WatchPartyLobbyView: View {
                                         EmptyView()
                                     }
                                 }
+                                .id(logoURL) // Force refresh when URL changes
                             } else {
                                 // Fallback to title if no logo
                                 Text(viewModel.room.mediaItem?.name ?? "Select Media")

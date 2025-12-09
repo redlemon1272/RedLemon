@@ -554,6 +554,9 @@ class SupabaseClient {
         if let posterUrl = posterUrl { body["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { body["backdrop_url"] = backdropUrl }
         
+        // Update last_activity to keep room visible/fresh
+        body["last_activity"] = ISO8601DateFormatter().string(from: Date())
+        
         _ = try await makeRequest(
             path: "/rooms",
             method: "PATCH",

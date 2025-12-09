@@ -1281,6 +1281,76 @@ class LobbyViewModel: ObservableObject {
             guard let roomState = try await SupabaseClient.shared.getRoomState(roomId: room.id) else {
                 return
             }
+            // CRITICAL FIX: Sync UI Metadata (Guest UI was not updating when Host changed item)
+            // Extract values needed for UI update to avoid complex captures
+            
+            // Construct MediaItem from SupabaseRoom flat properties
+            var freshMedia: MediaItem? = nil
+            if let imdbId = roomState.imdbId {
+                let type = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+                freshMedia = MediaItem(
+                    id: imdbId,
+                    type: type,
+                    name: roomState.name, // The room name is updated to content name by Host
+                    poster: roomState.posterUrl,
+                    background: roomState.backdropUrl,
+                    logo: nil, 
+                    description: roomState.description,
+                    releaseInfo: nil,
+                    year: nil,
+                    imdbRating: nil,
+                    genres: nil,
+                    runtime: nil
+                )
+            }
+            
+            let freshPlaylist = roomState.playlist
+            let freshSeason = roomState.season
+            let freshEpisode = roomState.episode
+            let freshIndex = roomState.currentPlaylistIndex
+            
+            await MainActor.run {
+                // 1. Update Media Item & UI Assets if changed
+                if let mediaItem = freshMedia {
+                    if self.room.mediaItem?.id != mediaItem.id || 
+                       self.room.season != freshSeason || 
+                       self.room.episode != freshEpisode {
+                        
+                        // Update local room state
+                        self.room.mediaItem = mediaItem
+                        self.room.season = freshSeason
+                        self.room.episode = freshEpisode
+                        
+                        // Update UI Bindings
+                        self.posterURL = mediaItem.poster
+                        self.backdropURL = mediaItem.background
+                        // Keep existing logo if nil, or fetch? 
+                        // Since we don't have logo in DB, we rely on cached or fetched. 
+                        // But loadMetadata() usually handles fetching.
+                        // We should probably trigger loadMetadata() if assets are missing.
+                        
+                        NSLog("✅ Guest: Synced Metadata Update -> \(mediaItem.name)")
+                        
+                        // Trigger fetch for full metadata (logo etc) if needed
+                        if self.logoURL == nil {
+                            self.loadMetadata()
+                        }
+                    }
+                }
+                
+                // 2. Update Playlist & Index
+                if let playlist = freshPlaylist {
+                    if self.playlist.count != playlist.count || self.room.currentPlaylistIndex != freshIndex {
+                        self.playlist = playlist
+                        self.room.playlist = playlist
+                        if let idx = freshIndex {
+                            self.currentPlaylistIndex = idx
+                            self.room.currentPlaylistIndex = idx
+                        }
+                        self.isPlaylistMode = !playlist.isEmpty
+                    }
+                }
+            }
 
             // Check if room state is playing (event if it was already playing)
             if roomState.isPlaying && !isStarting {

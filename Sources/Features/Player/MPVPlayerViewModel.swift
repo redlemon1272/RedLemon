@@ -2168,8 +2168,8 @@ extension MPVPlayerViewModel {
         // Cancel any existing timer
         syncBroadcastTimer?.invalidate()
 
-        // ✅ Reduce from 10Hz to 4Hz
-        syncBroadcastTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
+        // ✅ Reduce from 10Hz to 0.5Hz (2s) to prevent playback blips
+        syncBroadcastTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
             guard let self = self else { return }
 
             // ✅ Don't broadcast during chat animation

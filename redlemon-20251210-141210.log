@@ -1,0 +1,1351 @@
+2025-12-10 14:12:17.246 RedLemon[14125:117661] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-10 14:12:17.246 RedLemon[14125:117661] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-10 14:12:17.342 RedLemon[14125:117661] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-10 14:12:17.376 RedLemon[14125:117721] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-10 14:12:17.406 RedLemon[14125:117661] ✅ Playback state reset complete - starting in browse view
+2025-12-10 14:12:17.406 RedLemon[14125:117661] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-10 14:12:17.406 RedLemon[14125:117661] 🧪 Testing Profile: debug
+2025-12-10 14:12:17.407 RedLemon[14125:117735] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-10 14:12:17.446 RedLemon[14125:117661] ✅ Keychain: Found stored username: ursinho
+2025-12-10 14:12:17.446 RedLemon[14125:117661] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-10 14:12:17.446 RedLemon[14125:117720] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-10 14:12:17.766 RedLemon[14125:117661] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 14:12:17.773 RedLemon[14125:117756] 📡 SupabaseClient: User lookup response received (243 bytes)
+2025-12-10 14:12:17.776 RedLemon[14125:117756] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-10 14:12:17.776 RedLemon[14125:117756] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 14:12:17.830 RedLemon[14125:117661] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 14:12:17.830 RedLemon[14125:117661] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:17.830 RedLemon[14125:117661] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:17.830 RedLemon[14125:117661] 🚀 RedLemon: Starting HTTP server...
+2025-12-10 14:12:17.830 RedLemon[14125:117661] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-10 14:12:17.856 RedLemon[14125:117661] ✅ RedLemon: HTTPServer instance created
+2025-12-10 14:12:17.856 RedLemon[14125:117741] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1211 with 427 movies
+✅ [EventsConfig] Using cached movie_events config (version 1211, 427 movies)
+✅ [EventsView] Loaded 427 movies from config version 1211
+   1. Pacific Rim
+   2. Harry Potter and the Sorcerer's Stone
+   3. Stigmata
+   4. Deadpool 2
+   5. Split
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Turtles All the Way Down | Runtime: 111m | Duration: 7260s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Oldboy | Runtime: 120m | Duration: 7800s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Mad Max | Runtime: 91m | Duration: 6060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Snatch | Runtime: 90m | Duration: 6000s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Dogma | Runtime: 130m | Duration: 8400s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: Raiders of the Lost Ark | Runtime: 115m | Duration: 7500s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Shaolin Soccer | Runtime: 113m | Duration: 7380s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 1072025-12-10 14:12:20.039 RedLemon[14125:117661] ✅ RedLemon: Server marked as ready
+2025-12-10 14:12:20.090 RedLemon[14125:117661] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-10 14:12:20.090 RedLemon[14125:117661] 🔍 Performing startup checks...
+2025-12-10 14:12:20.090 RedLemon[14125:117661] ✅ Username-based authentication ready
+2025-12-10 14:12:20.090 RedLemon[14125:117661] 🔍 Performing startup checks...
+2025-12-10 14:12:20.090 RedLemon[14125:117661] ✅ Username-based authentication ready
+2025-12-10 14:12:20.091 RedLemon[14125:117661] 🔄 Checking for app updates...
+40s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Scooby-Doo
+   Metadata runtime: 87 min
+   Calculated duration: 97 minutes
+📅 Schedule Updated:
+   Live: Scooby-Doo
+   Progress: 917s / 5820s
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"F8B9FCBB-A3FD-4824-AB45-BA88AE50FE7F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":"BC1017F0-5CE2-4D7B-8377-0F8AC5F6664D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"1b4e744e-d5fc-11f0-9660-0a58a9feac02":{"metas":[{"phx_ref":"GH_wawwtrWbIVYQC","last_seen":"2025-12-10T19:12:01Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 2.190s (RTT: 74ms)
+   Local:  2025-12-10 19:12:20 +0000
+   Server: 2025-12-10 19:12:22 +0000
+⏰ Time synced with server! Recalculating schedule...
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Turtles All the Way Down | Runtime: 111m | Duration: 7260s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Oldboy | Runtime: 120m | Duration: 7800s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Mad Max | Runtime: 91m | Duration: 6060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Snatch | Runtime: 90m | Duration: 6000s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Dogma | Runtime: 130m | Duration: 8400s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: Raiders of the Lost Ark | Runtime: 115m | Duration: 7500s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Shaolin Soccer | Runtime: 113m | Duration: 7380s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire 2025-12-10 14:12:23.764 RedLemon[14125:117796] 📡 StreamService: Fetching metadata for tt0267913...
+| Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Scooby-Doo
+   Metadata runtime: 87 min
+   Calculated duration: 97 minutes
+📅 Schedule Updated:
+   Live: Scooby-Doo
+   Progress: 922s / 5820s
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2787a352-d5fc-11f0-89a6-0a58a9feac02":{"metas":[{"phx_ref":"GH_wb-pePFbIVbiN","last_seen":"2025-12-10T19:12:19Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+🎟️ Joining event: Scooby-Doo
+   Event start time: 2025-12-10 18:57:00 +0000
+   Event duration: 5820.0s
+   Current time: 2025-12-10 19:12:25 +0000
+   Is Live: true
+   Is In Lobby: false
+🔍 Supabase Response for /rooms: []
+📝 Creating new event room: event_tt0267913
+⚡️ Resolving stream for system event creation...
+🎬 StreamService: Starting resolution for: Scooby-Doo
+[ INFO ] GET /api/metadata/meta/movie/tt0267913 [request-id: 3B0AF356-EC5C-4E0E-92FB-67192F8372A5]
+2025-12-10 14:12:24.123 RedLemon[14125:117796] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-10 14:12:24.123 RedLemon[14125:117796] ✅ StreamService: Metadata loaded: Scooby-Doo
+2025-12-10 14:12:24.123 RedLemon[14125:117796] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-10 14:12:24.124 RedLemon[14125:117796] ⚡️ StreamResolver: Resolving streams for tt0267913 (S0E0)
+2025-12-10 14:12:24.124 RedLemon[14125:117796]    📅 Filtering by year: 2002
+2025-12-10 14:12:24.124 RedLemon[14125:117796] 🔍 ProviderManager: Fetching streams for tt0267913...
+2025-12-10 14:12:24.126 RedLemon[14125:117741] 🎬 Torrentio: Building URL for movie (no season/episode)
+2025-12-10 14:12:24.126 RedLemon[14125:117741] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-10 14:12:24.126 RedLemon[14125:117741] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-10 14:12:24.299 RedLemon[14125:117735] 🔍 Zilean: Searching for "Scooby-Doo"
+2025-12-10 14:12:25.068 RedLemon[14125:117735] ✅ Zilean: Got 30 results
+2025-12-10 14:12:25.068 RedLemon[14125:117735] 🔍 Zilean: Filtered to 30 streams
+2025-12-10 14:12:25.147 RedLemon[14125:117735] ✅ ProviderManager: Fetched 66 raw, returning 54 unique streams
+2025-12-10 14:12:25.147 RedLemon[14125:117735] 📦 StreamResolver: Received 54 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt0267913]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0267913.json
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0267913.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+✅ Metadata fetched from Cinemeta for tt0267913: Scooby-Doo (2002)
+✅ Comet: Got 11 streams
+🔍 Comet: Parsing 11 streams...
+✅ Comet: Parsed 11 valid streams
+✅ MediaFusion: Got 31 streams
+✅ Metadata cache hit for tt0267913: Scooby-Doo
+🎯 Target title for matching: Scooby-Doo
+   📅 Year filter (2002): 54 → 36 streams
+   🚫 RESOLVER BLOCKING non-English audio: Scooby-Doo 2002 MULTi VFF 1080p BluRay MHD x264 AC3-BK mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Scooby Doo 2002 Multi VFF 1080p Bluray Remux VC-1 AC3 5 1-Ki0squ3 mkv (Audio)
+   🎵 RESOLVER FILTERED audio language: 36 → 34 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0267913 (movie)
+❌ StreamResolver: Subtitle error: keyNotFound(CodingKeys(stringValue: "subtitles", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"subtitles\", intValue: nil) (\"subtitles\").", underlyingError: nil))
+   --- Processing Bucket: 2160p (Input: 2) ---
+   ✅ Bucket 2160p Final Count: 2
+   --- Processing Bucket: 1080p (Input: 22) ---
+   ✅ Bucket 1080p Final Count: 22
+   --- Processing Bucket: 720p (Input: 5) ---
+   ✅ Bucket 720p Final Count: 5
+   --- Processing Bucket: 480p (Input: 5) ---
+   ✅ Bucket 480p Final Count: 5
+📦 2160p Primary: Scooby-Doo 2002 Upscaled BluRay 2160p HDR10 HEVC DD 5.1 x265-E
+👤 73 💾 11.79 GB ⚙️ 1337x
+📦 1080p Primary: Scooby Doo (2002 ITA-ENG) [1080p]
+📦 720p Primary: Scooby Doo 2002 MULTI 720p BluRay x264 AAC-Prem mkv
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 5 720p streams as backup
+   ➕ Added 2 4K streams as 'Hail Mary' backup
+📦 StreamService: Found 18 total streams to try (across all qualities)
+✅ StreamService: Found 15 H.264 streams (Tier 1)
+🚫 StreamService: Blocking stream with restricted keyword: Scooby-Doo 2002 1080p Blu-ray Remux VC-1 DD 5 1 - KRaLiMaRKo mkv
+🚫 StreamService: Blocking stream with restricted keyword: Scooby-Doo 2002 1080p Blu-ray Remux VC-1 DD 5 1 - KRaLiMaRKo mkv
+🚫 StreamService: Blocking stream with restricted keyword: 2002 Scooby-Doo BDRemux 1080p [DUB Мосфильм] [MVO] [MVO [DVO Гланц и Королёва] [AVO Живов] [AVO Визгунов] [ENG] [2xComm] {2xRUS} {2xENG} {MULTI} (CHP-n) mkv
+📦 StreamService: 12 streams remain after size filter
+🔄 StreamService: Trying stream 1/12: Scooby Doo (2002 ITA-ENG) [1080p]
+🔓 StreamService: Unlocking with infoHash: 9b7b5615fc6c...
+[ INFO ] POST /api/streams/unlock [request-id: D6614B3B-1EC7-4581-8B2F-C601E1353876]
+2025-12-10 14:12:25.487 RedLemon[14125:117735] 🔓 Unlock request: infoHash=9b7b5615fc6c..., fileIdx=0
+2025-12-10 14:12:25.487 RedLemon[14125:117735] ✅ Token found, attempting unlock...
+2025-12-10 14:12:27.952 RedLemon[14125:117741] ✅ Unlocked successfully: Scooby Doo - Il film (2002).mkv
+2025-12-10 14:12:28.232 RedLemon[14125:117661]    Quality: 1080p
+2025-12-10 14:12:28.233 RedLemon[14125:117661]    Mode: watchParty
+2025-12-10 14:12:28.233 RedLemon[14125:117661] 📡 Fetching metadata for tt0267913...
+2025-12-10 14:12:28.292 RedLemon[14125:117661] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0267913/img
+2025-12-10 14:12:28.293 RedLemon[14125:117661] ⏳ Background art loading...
+2025-12-10 14:12:28.294 RedLemon[14125:117661] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0267913/img
+2025-12-10 14:12:28.295 RedLemon[14125:117661] ⏳ Logo loading...
+2025-12-10 14:12:28.371 RedLemon[14125:117721] ✅ StreamService: Using provided metadata: Scooby-Doo
+2025-12-10 14:12:28.371 RedLemon[14125:117721] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-10 14:12:28.371 RedLemon[14125:117721] ⚡️ StreamResolver: Resolving streams for tt0267913 (S0E0)
+2025-12-10 14:12:28.371 RedLemon[14125:117721]    📅 Filtering by year: 2002
+2025-12-10 14:12:28.372 RedLemon[14125:117721] 🔍 ProviderManager: Fetching streams for tt0267913...
+2025-12-10 14:12:28.372 RedLemon[14125:117721] 🎬 Torrentio: Building URL for movie (no season/episode)
+2025-12-10 14:12:28.372 RedLemon[14125:117793] 🔍 Zilean: Searching for "Scooby-Doo"
+2025-12-10 14:12:28.372 RedLemon[14125:117721] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-10 14:12:28.372 RedLemon[14125:117721] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-10 14:12:28.388 RedLemon[14125:117796] ✅ Zilean: Got 30 results
+2025-12-10 14:12:28.388 RedLemon[14125:117796] 🔍 Zilean: Filtered to 30 streams
+2025-12-10 14:12:28.420 RedLemon[14125:117661] ✅ Logo loaded successfully
+2025-12-10 14:12:28.449 RedLemon[14125:117661] ✅ Background art loaded successfully
+2025-12-10 14:12:28.548 RedLemon[14125:117720] ✅ ProviderManager: Fetched 66 raw, returning 54 unique streams
+2025-12-10 14:12:28.549 RedLemon[14125:117720] 📦 StreamResolver: Received 54 raw streams, bucketing...
+✅ RD addMagnet: 7LTEVGTE7IAC2
+🎬 Movie: Found matching file for title 'Scooby-Doo': /Scooby Doo - Il film (2002).mkv
+📝 RD: Selecting file ID 2 for torrent 7LTEVGTE7IAC2
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/TJGRT72PLBUJU296
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Scooby Doo (2002 ITA-ENG) [1080p]
+📊 Stream Size: 3.05 GB
+✅ Stream resolved for system event: Scooby Doo (2002 ITA-ENG) [1080p]
+   Hash: 9b7b5615fc6cda95001defe00a6d228dce2b98e4
+🔍 Supabase Response for /rooms: {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"rooms_pkey\""}
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"rooms_pkey\""}
+⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...
+🔍 Supabase Response for /rooms: [{"id":"event_tt0267913","name":"Scooby-Doo","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"9b7b5615fc6cda95001defe00a6d228dce2b98e4","imdb_id":"tt0267913","poster_url":"https://images.metahub.space/poster/small/tt0267913/img","backdrop_url":"https://images.metahub.space/background/medium/tt0267913/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-10T19:12:29.536662","last_activity":"2025-12-10T19:12:29.633056","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+✅ Recovered from race condition! Joining existing room.
+🎬 Live event - calculating position: 930.3838949203491 seconds
+   Event start time: 2025-12-10 18:57:00 +0000
+   Current time: 2025-12-10 19:12:30 +0000
+   Room createdAt: 2025-12-10 18:57:00 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 930.3838949203491
+🎬 Live event - starting playback immediately (no lobby)
+🎬 Starting playback for: Scooby-Doo
+✅ Cache HIT: Metadata[meta_movie_tt0267913]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒
+   Hash: 9b7b5615fc6cda95001defe00a6d228dce2b98e4
+   Resolving locally with forced selection...
+
+🎬 StreamService: Starting resolution for: Scooby-Doo
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0267913.json
+✅ Metadata cache hit for tt0267913: Scooby-Doo
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+✅ MediaFusion: Got 31 streams
+✅ Comet: Got 11 streams
+🔍 Comet: Parsing 11 streams...
+✅ Comet: Parsed 11 valid streams
+✅ Metadata cache hit for tt0267913: Scooby-Doo
+🎯 Target title for matching: Scooby-Doo
+   📅 Year filter (2002): 54 → 36 streams
+   🚫 RESOLVER BLOCKING non-English audio: Scooby-Doo 2002 MULTi VFF 1080p BluRay MHD x264 AC3-BK mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Scooby Doo 2002 Multi VFF 1080p Bluray Remux VC-1 AC3 5 1-Ki0squ3 mkv (Audio)
+   🎵 RESOLVER FILTERED audio language: 36 → 34 streams
+🔍 Searching SubDL: tt0267913 (movie)
+❌ StreamResolver: Subtitle error: keyNotFound(CodingKeys(stringValue: "subtitles", intValue: nil), Swift.DecodingError.Context(codingPath: [], debugDescription: "No value associated with key CodingKeys(stringValue: \"subtitles\", intValue: nil) (\"subtitles\").", underlyingError: nil))
+   --- Processing Bucket: 2160p (Input: 2) ---
+   ✅ Bucket 2160p Final Count: 2
+   --- Processing Bucket: 1080p (Input: 21) ---
+   ✅ Bucket 1080p Final Count: 21
+   --- Processing Bucket: 720p (Input: 5) ---
+   ✅ Bucket 720p Final Count: 5
+   --- Processing Bucket: 480p (Input: 6) ---
+   ✅ Bucket 480p Final Count: 6
+📦 2160p Primary: Scooby-Doo 2002 2160p BRRip x265 AI Enhanced UPSCALE AC3 5 1-BleSSed
+📦 1080p Primary: Scooby Doo (2002 ITA-ENG) [1080p]
+📦 720p Primary: Scooby Doo 2002 MULTI 720p BluRay x264 AAC-Prem mkv
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: 9b7b5615fc6cda95001defe00a6d228dce2b98e4
+✅ StreamService: Found requested stream hash! Locking selection.
+📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Scooby Doo (2002 ITA-ENG) [1080p]
+🔓 StreamService: Unlocking with infoHash: 9b7b5615fc6c...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1b4e744e-d5fc-11f0-9660-0a58a9feac02":{"metas":[{"phx_ref":"GH_wceKeKoDIVUVP","phx_ref_prev":"GH_wawwtrWbIVYQC","last_seen":"2025-12-10T19:12:30Z","room_id":"event_tt0267913","started_at":"2025-12-10T19:12:30Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"1b4e744e-d5fc-11f0-9660-0a58a9feac02":{"metas":[{"phx_ref":"GH_wawwtrWbIVYQC","last_seen":"2025-12-10T19:12:01Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+[ INFO ] POST /api/streams/unlock [request-id: 398F8649-F3AF-4013-8F5E-C3D9ED880BC8]
+2025-12-10 14:12:28.712 RedLemon[14125:117796] 🔓 Unlock request: infoHash=9b7b5615fc6c..., fileIdx=0
+2025-12-10 14:12:28.712 RedLemon[14125:117796] ✅ Token found, attempting unlock...
+2025-12-10 14:12:28.713 RedLemon[14125:117796] ✅ Unlocked successfully: Scooby Doo - Il film (2002).mkv
+2025-12-10 14:12:28.726 RedLemon[14125:117661] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/S, subtitles: 0
+2025-12-10 14:12:28.794 RedLemon[14125:117661] ✅ Stream ready, starting playback...
+2025-12-10 14:12:28.795 RedLemon[14125:117661] 🖥️ WindowManager: enterFullscreen() called
+2025-12-10 14:12:28.795 RedLemon[14125:117661]    Window: <SwiftUI.SwiftUIWindow: 0x7fe4250e1f80>
+2025-12-10 14:12:28.795 RedLemon[14125:117661]    Is fullscreen: 0
+2025-12-10 14:12:28.795 RedLemon[14125:117661]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-10 14:12:28.884 RedLemon[14125:117661] 🖼️ Setting up MPV with native macOS video output...
+2025-12-10 14:12:28.891 RedLemon[14125:117661] ✅ MPV initialized with native GPU rendering
+2025-12-10 14:12:28.905 RedLemon[14125:117661] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-10 14:12:28.906 RedLemon[14125:117661] 🎉 Starting watch party sync - Room: event_tt0267913, Host: NO
+2025-12-10 14:12:28.906 RedLemon[14125:117661] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-10 14:12:28.973 RedLemon[14125:117661] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-10 14:12:28.977 RedLemon[14125:117741] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:28.978 RedLemon[14125:117741]    Payload keys: isPlaying, position, type, timestamp, senderId
+2025-12-10 14:12:29.203 RedLemon[14125:117741] ✅ Realtime: Message broadcast complete
+2025-12-10 14:12:29.203 RedLemon[14125:117661] ✅ Watch Party: READY signal sent successfully
+2025-12-10 14:12:29.205 RedLemon[14125:117661] 🔄 Starting chat polling for room: event_tt0267913
+2025-12-10 14:12:29.205 RedLemon[14125:117661] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-10 14:12:29.205 RedLemon[14125:117661] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-10 14:12:29.205 RedLemon[14125:117661] 🎬🎬🎬 Subtitles: 0
+2025-12-10 14:12:29.206 RedLemon[14125:117661] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Scooby-Doo
+2025-12-10 14:12:29.206 RedLemon[14125:117661] 🎬🎬🎬 streamURL: https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/S
+2025-12-10 14:12:29.206 RedLemon[14125:117661] 🎬🎬🎬 subtitles: 0
+2025-12-10 14:12:29.206 RedLemon[14125:117661] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-10 14:12:29.214 RedLemon[14125:117796] 🎬 MPV loadVideo called with URL: https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/Scooby%20Doo%20-%20Il%20film%20%282002%29, autoplay: true
+2025-12-10 14:12:29.215 RedLemon[14125:117796] 🎬 MPV executing command: loadfile "https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/Scooby%20Doo%20-%20Il%20film%20%282002%29.mkv"
+2025-12-10 14:12:29.215 RedLemon[14125:117796] 🎬 MPV loadfile result: 0
+2025-12-10 14:12:29.215 RedLemon[14125:117796] ✅ MPV loadfile succeeded, isPlaying set to true
+2025-12-10 14:12:29.319 RedLemon[14125:117741] 📨 Realtime: Received broadcast message
+2025-12-10 14:12:29.319 RedLemon[14125:117741]    Payload keys: isPlaying, type, position, timestamp, senderId
+2025-12-10 14:12:29.320 RedLemon[14125:117741] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:29.320 RedLemon[14125:117741] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-10 14:12:29.320 RedLemon[14125:117741] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 14:12:29.371 RedLemon[14125:117661] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:29.372 RedLemon[14125:117661] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 14:12:37.554 RedLemon[14125:117661] 🖱️ Mouse: x=937/1366 y=0/768 | Exit: 0 Controls: 1 Chat: 0
+✅ RD cache hit: 9b7b5615fc6c
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Scooby Doo (2002 ITA-ENG) [1080p]
+📊 Stream Size: 3.05 GB
+ Using provided room ID: event_tt0267913
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/S
+   Display Title: Scooby-Doo
+   Subtitle URLs: 0
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0267913, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0267913
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+✅ Video ready - hiding poster
+👋 Watch Party: Video ready (playing), sending READY signal as fallback
+🔄 Resuming playback from 930s (appState.resumeFromTimestamp = 930.3838949203491)
+👥 Resuming inside watch party - will sync resume time to guests
+⏸️ Pausing immediately for resume...
+📝 Started watch history tracking
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+📡 Joined channel: realtime:watch-party:event_tt0267913
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Scooby-Doo
+   IMDB: tt0267913
+   URL: https://chi3-4.download.real-debrid.com/d/ZGDRF44BX2SVG112/S...
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+📡 Fetching metadata for tt0267913 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0267913]
+✅ Got background: https://images.metahub.space/background/medium/tt0267913/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0267913/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0267913/img...
+✅ Video ready - hiding poster
+🔄 Resuming playback from 930s (appState.resumeFromTimestamp = 930.3838949203491)
+👥 Resuming inside watch party - will sync resume time to guests
+⏸️ Pausing immediately for resume...
+📝 Started watch history tracking
+📡 SocialService: Updated status - Watching: Scooby-Doo
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"5D374F39-568F-48F1-8E6D-E1D8AC8CBCB2","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"2cbc3cc0-d5fc-11f0-b0e0-0a58a9feac02":{"metas":[{"phx_ref":"GH_wcdtDwCe7eT7P","is_host":false,"joined_at":1765393950.685066,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765393948.973669,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2d2ba858-d5fc-11f0-ba61-0a58a9feac02":{"metas":[{"phx_ref":"GH_wcga_9RtYxE6K","is_host":false,"joined_at":1765393949.203141,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0267913"}
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2787a352-d5fc-11f0-89a6-0a58a9feac02":{"metas":[{"phx_ref":"GH_wchSzAfTIVZwM","phx_ref_prev":"GH_wb-pePFbIVbiN","last_seen":"2025-12-10T19:12:29Z","room_id":"event_tt0267913","started_at":"2025-12-10T19:12:29Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"2787a352-d5fc-11f0-89a6-0a58a9feac02":{"metas":[{"phx_ref":"GH_wb-pePFbIVbiN","last_seen":"2025-12-10T19:12:19Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+⚠️ Video duration not available yet (0.0s), retrying...
+🎬 DisplayLink: reportSwap() (throttled)
+⚠️ Video duration not available yet (0.0s), retrying...
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+⚠️ Video duration not available yet (0.0s), retrying...
+🎬 DisplayLink: reportSwap() (throttled)
+⚠️ Video duration not available yet (0.0s), retrying...
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+[MPV] (+) Video --vid=1 (*) (h264 1920x1072 23.976fps)
+[MPV] Audio --aid=1 --alang=ita (*) 'Stereo' (ac3 2ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Surround' (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ita (subrip)
+[MPV] (+) Subs  --sid=2 --slang=eng (ass)
+[MPV] File tags:
+[MPV] Title: Scooby Doo (2002)
+⚠️ Video duration not available yet (0.0s), retrying...
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 Track 1: Stereo | 2ch | English: false | Commentary: false -> Score: 25
+🔍 Track 2: Surround | 6ch | English: true | Commentary: false -> Score: 1060
+🏆 Selected best audio track: Surround (ID: 2, Score: 1060)
+🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 3 - ID: 1, lang: 'ita', title: 'nil', forced: false, default: false
+🔍 AUTO-SELECT: Track 4 - ID: 2, lang: 'eng', title: 'nil', forced: false, default: false
+✅ Auto-selecting BEST English subtitle: eng (ID: 2) [External: false, Forced: false, Default: false]
+🎯 Executing immediate seek to 930s...
+ MPV Event: 18
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 17
+ MPV Event: 17
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 20
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x1072 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [Main] 1920x1072 23.976fps)
+[MPV] Audio --aid=1 --alang=ita (*) 'Stereo' (ac3 2ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Surround' (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ita (subrip)
+[MPV] (+) Subs  --sid=2 --slang=eng (ass)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [Main] 1920x1072 23.976fps)
+[MPV] Audio --aid=1 --alang=ita (*) 'Stereo' (ac3 2ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Surround' (ac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ita (subrip)
+[MPV] (+) Subs  --sid=2 --slang=eng (ass)
+🎯 IMMEDIATE RESUME: Seeking to 930s without delay
+✅ Resumed playback after seek to 930s
+🎯 Executing immediate seek to 930s...
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Resumed playback after seek to 930s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

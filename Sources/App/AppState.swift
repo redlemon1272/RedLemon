@@ -173,6 +173,38 @@ class AppState: ObservableObject {
                 // For now, let's try to get them from the room if available (not currently synced fully)
                 // Or we can trigger a lightweight subtitle fetch
                 
+                // NEW: Fetch subtitles for Guest
+                // We must do this because we skipped the standard StreamService pipeline
+                NSLog("🎬 GUEST: Fetching subtitles for shared stream...")
+                
+                // Use LocalAPIClient to fetch subtitles (requires mapped MediaItem)
+                // Note: searchSubtitles returns [SubDLSubtitle], needs mapping to internal [Subtitle]
+                Task {
+                    // Perform in background to not block initial load, using Task inside the existing Task context? 
+                    // No, we are in an async function, we can await!
+                }
+                
+                // Fetch safely
+                if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(imdbId: item.id, type: item.type) {
+                     NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
+                     
+                     // Map [SubDLSubtitle] -> [Subtitle]
+                     let internalSubtitles = subDLSubtitles.map { sub in
+                         Subtitle(
+                             id: UUID().uuidString,
+                             url: LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url),
+                             lang: sub.language ?? "en",
+                             label: sub.releaseName ?? (sub.language ?? "Unknown"),
+                             srclang: sub.language ?? "en",
+                             kind: "subtitles",
+                             provider: "SubDL"
+                         )
+                     }
+                     hostStream.subtitles = internalSubtitles
+                } else {
+                     NSLog("⚠️ GUEST: Failed to fetch subtitles or none found")
+                }
+                
                 resolvedStream = hostStream
                 
             } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,

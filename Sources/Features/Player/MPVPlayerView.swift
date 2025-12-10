@@ -1355,7 +1355,8 @@ struct PlaylistMenuContent: View {
                 
             ScrollView {
                 VStack(spacing: 0) {
-                    ForEach(Array(playlist.enumerated()), id: \.element.id) { index, item in
+                    ForEach(playlist.indices, id: \.self) { index in
+                         let item = playlist[index]
                          HStack(spacing: 8) {
                              // Icons
                              if index == currentIndex {
@@ -1386,10 +1387,15 @@ struct PlaylistMenuContent: View {
                          .padding(.horizontal, 12)
                          .padding(.vertical, 8)
                          .contentShape(Rectangle())
+                         .onTapGesture {
+                             // Optional: Allow jumping to item?
+                             // valid for host, maybe not guest
+                             print("Playlist item tapped: \(index)")
+                         }
                     }
                 }
             }
-            .frame(maxHeight: 200)
+            .frame(height: min(CGFloat(playlist.count * 35), 200)) // Dynamic height up to 200
         }
         .background(.regularMaterial)
         .cornerRadius(8)

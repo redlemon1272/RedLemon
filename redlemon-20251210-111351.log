@@ -1,0 +1,1210 @@
+2025-12-10 11:13:58.463 RedLemon[9846:73516] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-10 11:13:58.463 RedLemon[9846:73516] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-10 11:13:58.540 RedLemon[9846:73559] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-10 11:13:58.540 RedLemon[9846:73516] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-10 11:13:58.646 RedLemon[9846:73516] ✅ Playback state reset complete - starting in browse view
+2025-12-10 11:13:58.646 RedLemon[9846:73516] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-10 11:13:58.646 RedLemon[9846:73516] 🧪 Testing Profile: debug
+2025-12-10 11:13:58.663 RedLemon[9846:73578] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-10 11:13:58.663 RedLemon[9846:73516] ✅ Keychain: Found stored username: ursinho
+2025-12-10 11:13:58.663 RedLemon[9846:73516] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-10 11:13:58.678 RedLemon[9846:73602] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-10 11:13:59.193 RedLemon[9846:73578] 📡 SupabaseClient: User lookup response received (243 bytes)
+2025-12-10 11:13:59.203 RedLemon[9846:73578] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-10 11:13:59.204 RedLemon[9846:73516] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 11:13:59.205 RedLemon[9846:73578] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 11:13:59.289 RedLemon[9846:73516] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-10 11:13:59.289 RedLemon[9846:73516] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:13:59.289 RedLemon[9846:73516] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:13:59.289 RedLemon[9846:73516] 🚀 RedLemon: Starting HTTP server...
+2025-12-10 11:13:59.289 RedLemon[9846:73516] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-10 11:13:59.306 RedLemon[9846:73516] ✅ RedLemon: HTTPServer instance created
+2025-12-10 11:13:59.306 RedLemon[9846:73579] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1211 with 427 movies
+✅ [EventsConfig] Using cached movie_events config (version 1211, 427 movies)
+✅ [EventsView] Loaded 427 movies from config version 1211
+   1. Pacific Rim
+   2. Harry Potter and the Sorcerer's Stone
+   3. Stigmata
+   4. Deadpool 2
+   5. Split
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Turtles All the Way Down | Runtime: 111m | Duration: 7260s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Oldboy | Runtime: 120m | Duration: 7800s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Mad Max | Runtime: 91m | Duration: 6060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Snatch | Runtime: 90m | Duration: 6000s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Dogma | Runtime: 130m | Duration: 8400s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: Raiders of the Lost Ark | Runtime: 115m | Duration: 7500s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Shaolin Soccer | Runtime: 113m | Duration: 7380s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Night at the Museum
+   Metadata runtime: 108 min
+   Calculated duration: 118 minutes
+📅 Schedule Updated:
+   Live: Night at the Museum
+   Progress: 4079s / 7080s
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt0477347","name":"Night at the Museum","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"70533c87ed14974be6a9ccaaf7e8081772619607","imdb_id":"tt0477347","poster_url":"https://images.metahub.space/poster/small/tt0477347/img","backdrop_url":"https://images.metahub.space/background/medium/tt0477347/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T15:09:44.021863","last_activity":"2025-12-10T15:23:00.669515","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:global-presence
+🔍 Supabase Response for /rooms: []
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"7798E367-63E0-45F4-A1F9-6B1895CFD3FF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"1eccbd24-d5e3-11f0-968f-0a58a9feac02":{"metas":[{"phx_ref":"GH_mqG9x7htYf0oB","last_seen":"2025-12-10T16:13:09Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3c95a5e6-d5e3-11f0-acbf-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtAv98_dXihUK","last_seen":"2025-12-10T16:13:59Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"438740AE-50E1-43E2-86F4-F5BCC79A5BA2","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20)...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:13:39","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"WMFB","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"77298ff761e6a4e1dca993e9f58e2c6edb8ad6de","imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T15:59:15.854735","last_activity":"2025-12-10T16:00:22","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/EZOTL42HAQXCG43/Orphan%202009%201080p%20NF%20WEB-DL%20H264-SPWEB.mkv","description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "32A52762-2114-4398-8D93-DB46F5C9B5A5", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lo2025-12-10 11:14:01.361 RedLemon[9846:73516] ✅ RedLemon: Server marked as ready
+2025-12-10 11:14:01.429 RedLemon[9846:73516] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-10 11:14:01.429 RedLemon[9846:73516] 🔍 Performing startup checks...
+2025-12-10 11:14:01.429 RedLemon[9846:73516] ✅ Username-based authentication ready
+2025-12-10 11:14:01.429 RedLemon[9846:73516] 🔍 Performing startup checks...
+2025-12-10 11:14:01.429 RedLemon[9846:73516] ✅ Username-based authentication ready
+2025-12-10 11:14:01.429 RedLemon[9846:73516] 🔄 Checking for app updates...
+st their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "0693E477-29C9-40C3-8784-2B54E94F529F", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "F0BE0B33-E6C0-4B07-BB2B-366FB5E32C28", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"event_tt0477347","name":"Night at the Museum","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"70533c87ed14974be6a9ccaaf7e8081772619607","imdb_id":"tt0477347","poster_url":"https://images.metahub.space/poster/small/tt0477347/img","backdrop_url":"https://images.metahub.space/background/medium/tt0477347/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T15:09:44.021863","last_activity":"2025-12-10T15:23:00.669515","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"QKGQ","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"241ea4282bb65df2070edbbb2963d74c042d9df3","imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T15:02:53.537477","last_activity":"2025-12-10T15:04:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/7XG5U26W3ESFY23/Orphan%202009%20BluRay%201080p%20DTS%20AC3%20x264-MgB.mkv","description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "DA200C23-D28A-4EED-A941-E20DEB3E4B05", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "7D28DD8F-C889-48FA-BB2F-6EBABA7FEE6D", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"EE5K","name":"Smile 2","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"1c420cfd388af739b8667055153dc1f8e47651cb","imdb_id":"tt29268110","poster_url":"https://images.metahub.space/poster/small/tt29268110/img","backdrop_url":"https://images.metahub.space/background/medium/tt29268110/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T14:04:11.727338","last_activity":"2025-12-10T14:06:52","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/CLZEO5ETE5MHW43/Smile.2.2024.BluRay.1080p.DDP.5.1.x264-hallowed.mkv","description":"Horror Marathon","current_playlist_index":1,"playlist":[{"id": "DA95C778-AD6E-4493-9E4D-D93ECEC8E6A6", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "CDDF53C4-11C0-4F7E-8A74-98349571032F", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"event_tt1657507","name":"Colombiana","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"2b232fa1ede15105ef93571ed154f094281b0d9b","imdb_id":"tt1657507","poster_url":"https://images.metahub.space/poster/small/tt1657507/img","backdrop_url":"https://images.metahub.space/background/medium/tt1657507/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T12:58:39.303069","last_activity":"2025-12-10T13:03:13.287082","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt0373074","name":"Kung Fu Hustle","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"34783b13e4266d3a15666cd8afa34d9bdd6c5be3","imdb_id":"tt0373074","poster_url":"https://images.metahub.space/poster/small/tt0373074/img","backdrop_url":"https://images.metahub.space/background/medium/tt0373074/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-10T12:13:10.722178","last_activity":"2025-12-10T12:13:10.828963","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt1723121","name":"We're the Millers","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"d14a2dbc1f922ab7fd7aff360757bad19a5bc665","imdb_id":"tt1723121","poster_url":"https://images.metahub.space/poster/small/tt1723121/img","backdrop_url":"https://images.metahub.space/background/medium/tt1723121/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T05:38:55.791195","last_activity":"2025-12-10T06:25:37.362329","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:rooms_updates
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"E3238F4D-1861-4AC7-907D-7FA571E78A0E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+✅ TimeService: Synced! Offset: 0.031s (RTT: 73ms)
+   Local:  2025-12-10 16:14:01 +0000
+   Server: 2025-12-10 16:14:01 +0000
+✅ Loaded 4 rooms (total: 4)
+[ INFO ] GET /api/metadata/meta/movie/tt1148204 [request-id: 8837BA79-E3AE-43E6-8DD8-0103465892B6]
+[ INFO ] GET /api/metadata/meta/movie/tt1148204 [request-id: FA2F1E8A-07D3-43BB-BA55-9FE17078768C]
+[ INFO ] GET /api/metadata/meta/movie/tt1148204 [request-id: 7D6AFA86-E359-4E38-A0A8-75BF405D4555]
+[ INFO ] GET /api/metadata/meta/movie/tt29268110 [request-id: 33CBB993-4CDE-41CE-B67A-5FCA961DD7E0]
+2025-12-10 11:14:02.275 RedLemon[9846:73578] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-10 11:14:02.278 RedLemon[9846:73601] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-10 11:14:02.350 RedLemon[9846:73578] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-10 11:14:02.424 RedLemon[9846:73559] 📦 Decoded CinemetaMeta - videos count: 0
+💾 Cache SET: Metadata[meta_movie_tt29268110]
+💾 Cache SET: Metadata[meta_movie_tt1148204]
+💾 Cache SET: Metadata[meta_movie_tt1148204]
+💾 Cache SET: Metadata[meta_movie_tt1148204]
+🚪 Joining room: 9KYP
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room 9KYP...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+🔌 Setting up Realtime channel: watch-party:9KYP
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+❌ Heartbeat failed: CancellationError()
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+[ INFO ] GET /api/metadata/meta/movie/tt1148204 [request-id: 767229CB-B66A-4AB8-A694-EDDEBA57C25F]
+2025-12-10 11:14:03.351 RedLemon[9846:73516] ✅ Guest joined room 9KYP in database
+2025-12-10 11:14:03.531 RedLemon[9846:73559] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:03.532 RedLemon[9846:73559]    Payload keys: timestamp, position, senderId, type, chatText, chatUsername
+2025-12-10 11:14:03.532 RedLemon[9846:73579] ✅ Realtime: Message broadcast complete
+2025-12-10 11:14:03.698 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:03.699 RedLemon[9846:73578]    Payload keys: senderId, chatText, position, timestamp, chatUsername, type
+2025-12-10 11:14:03.700 RedLemon[9846:73578] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:03.700 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-10 11:14:03.700 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:03.722 RedLemon[9846:73516] 👋 Received: Guest 'ursinho' joined room 9KYP
+2025-12-10 11:14:03.750 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:03.751 RedLemon[9846:73516] 👋 ursinho joined room
+2025-12-10 11:14:03.751 RedLemon[9846:73516] 👋 ursinho left room
+2025-12-10 11:14:03.751 RedLemon[9846:73516] 👋 lemontom left room
+2025-12-10 11:14:06.468 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:08.761 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:09.640 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:09.641 RedLemon[9846:73560]    Payload keys: senderId, position, chatUsername, chatText, type, timestamp
+2025-12-10 11:14:09.641 RedLemon[9846:73560] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:09.641 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-10 11:14:09.641 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:09.642 RedLemon[9846:73516] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-10 11:14:09.667 RedLemon[9846:73516] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-10 11:14:09.856 RedLemon[9846:73516] ✅ Guest: Synced stream details from host (Hash: 77298ff7)
+2025-12-10 11:14:09.857 RedLemon[9846:73516] 🎬 Guest: Fetch took 0.189s, waiting 3.061s (includes 0.25s sync buffer)
+2025-12-10 11:14:11.161 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:12.921 RedLemon[9846:73516] 🎬 Guest: Starting playback after countdown
+2025-12-10 11:14:12.921 RedLemon[9846:73516] 🎬 Guest: Launching player for Orphan
+2025-12-10 11:14:12.921 RedLemon[9846:73516]    Quality: 1080p
+2025-12-10 11:14:12.922 RedLemon[9846:73516]    Mode: watchParty
+2025-12-10 11:14:12.922 RedLemon[9846:73516] 📡 Fetching metadata for tt1148204...
+2025-12-10 11:14:12.982 RedLemon[9846:73516] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1148204/img
+2025-12-10 11:14:12.983 RedLemon[9846:73516] ⏳ Background art loading...
+2025-12-10 11:14:12.983 RedLemon[9846:73516] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1148204/img
+2025-12-10 11:14:12.984 RedLemon[9846:73516] ⏳ Logo loading...
+2025-12-10 11:14:13.058 RedLemon[9846:73516] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-10 11:14:13.066 RedLemon[9846:73516] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Or, subtitles: 0
+2025-12-10 11:14:13.144 RedLemon[9846:73516] ✅ Stream ready, starting playback...
+2025-12-10 11:14:13.144 RedLemon[9846:73516] 🖥️ WindowManager: enterFullscreen() called
+2025-12-10 11:14:13.144 RedLemon[9846:73516]    Window: <SwiftUI.SwiftUIWindow: 0x7fc1b102ee40>
+2025-12-10 11:14:13.144 RedLemon[9846:73516]    Is fullscreen: 0
+2025-12-10 11:14:13.144 RedLemon[9846:73516]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-10 11:14:13.211 RedLemon[9846:73516] 🖼️ Setting up MPV with native macOS video output...
+2025-12-10 11:14:13.217 RedLemon[9846:73516] ✅ MPV initialized with native GPU rendering
+2025-12-10 11:14:13.228 RedLemon[9846:73516] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-10 11:14:13.228 RedLemon[9846:73516] 🎉 Starting watch party sync - Room: 9KYP, Host: NO
+2025-12-10 11:14:13.229 RedLemon[9846:73516] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-10 11:14:13.280 RedLemon[9846:73516] 🔄 Starting chat polling for room: 9KYP
+2025-12-10 11:14:13.281 RedLemon[9846:73516] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-10 11:14:13.281 RedLemon[9846:73516] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-10 11:14:13.281 RedLemon[9846:73516] 🎬🎬🎬 Subtitles: 0
+2025-12-10 11:14:13.281 RedLemon[9846:73516] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Orphan
+2025-12-10 11:14:13.281 RedLemon[9846:73516] 🎬🎬🎬 streamURL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Or
+2025-12-10 11:14:13.281 RedLemon[9846:73516] 🎬🎬🎬 subtitles: 0
+2025-12-10 11:14:13.282 RedLemon[9846:73516] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-10 11:14:13.302 RedLemon[9846:73604] 🎬 MPV loadVideo called with URL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Orphan%202009%201080p%20NF%20WEB-DL%20H264, autoplay: false
+2025-12-10 11:14:13.302 RedLemon[9846:73604] ⏸️ Loading in paused mode (watch party)
+2025-12-10 11:14:13.302 RedLemon[9846:73604] 🔗 URL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Orphan%202009%201080p%20NF%20WEB-DL%20H264-SPWEB.mkv
+2025-12-10 11:14:13.302 RedLemon[9846:73604] 🎬 MPV executing: loadfile "https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Orphan%202009%201080p%20NF%20WEB-DL%20H264-SPWEB.mkv"
+2025-12-10 11:14:13.303 RedLemon[9846:73604] 🎬 MPV loadfile result: 0
+2025-12-10 11:14:13.303 RedLemon[9846:73604] ✅ MPV loadfile succeeded (started paused)
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt1148204
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Orphan
+🔍 [DEBUG] Successfully created MediaItem from meta: Orphan
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:13:39","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+✅ Lobby: Loaded metadata for Orphan
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+🔌 Setting up Realtime channel: watch-party:9KYP
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:9KYP, skipping join
+📡 Joined channel: realtime:watch-party:9KYP
+📡 Connection state: connected
+✅ Realtime channel setup complete
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+✅ Lobby: Connected to Realtime
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+📨 Received: {"ref":"8D879230-038B-4D41-856B-2BA12968FEAD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"30d89736-d5e3-11f0-b94d-0a58a9feac02":{"metas":[{"phx_ref":"GH_mr3Zmnjm1hceG","phx_ref_prev":"GH_mr3ZdR-u1hVPM","is_host":true,"joined_at":1765383220.1369839,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3ed62c2c-d5e3-11f0-9ec4-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtO1UmuTe-JjG","is_host":false,"joined_at":1765383243.4289699,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3ed62c2c-d5e3-11f0-9ec4-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtO1kAdPe-INP","phx_ref_prev":"GH_mtO1UmuTe-JjG","is_host":false,"joined_at":1765383243.5147018,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"3ed62c2c-d5e3-11f0-9ec4-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtO1UmuTe-JjG","is_host":false,"joined_at":1765383243.4289699,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:9KYP"}
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:14:03.328981","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:14:03.328981","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:14:03.328981","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🔍 Supabase Response for /rooms: [{"id":"9KYP","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"77298ff761e6a4e1dca993e9f58e2c6edb8ad6de","imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-10T16:13:39.233312","last_activity":"2025-12-10T16:14:09","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Orphan%202009%201080p%20NF%20WEB-DL%20H264-SPWEB.mkv","description":"Horror Marathon","current_playlist_index":0,"playlist":[{"id": "6903A2CC-84CE-4DD2-A13E-15F0E104ED9D", "mediaItem": {"id": "tt1148204", "logo": "https://images.metahub.space/logo/medium/tt1148204/img", "name": "Orphan", "type": "movie", "year": "2009", "genres": ["Horror", "Mystery", "Thriller"], "poster": "https://images.metahub.space/poster/small/tt1148204/img", "runtime": "122 min", "background": "https://images.metahub.space/background/medium/tt1148204/img", "imdbRating": "7.0", "description": "A husband and wife who recently lost their baby adopt a 9-year-old girl who is not nearly as innocent as she appears.", "releaseInfo": "2009"}}, {"id": "B4CABB3C-B19F-427F-AE37-34FCCC266C88", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "98FB7E1C-BB84-4D96-B5FD-43E47B0C7061", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🎬 Starting playback for: Orphan
+✅ Cache HIT: Metadata[meta_movie_tt1148204]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+   Hash: 77298ff761e6a4e1dca993e9f58e2c6edb8ad6de
+   Quality: 1080p
+   Skipping local resolution to ensure perfect sync.
+
+ Using provided room ID: 9KYP
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Or
+   Display Title: Orphan
+   Subtitle URLs: 0
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"30d89736-d5e3-11f0-b94d-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtw-tvS-1hb2E","phx_ref_prev":"GH_mr3Zmnjm1hceG","is_host":true,"joined_at":1765383252.7151961,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"30d89736-d5e3-11f0-b94d-0a58a9feac02":{"metas":[{"phx_ref":"GH_mr3Zmnjm1hceG","phx_ref_prev":"GH_mr3ZdR-u1hVPM","is_host":true,"joined_at":1765383220.1369839,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:9KYP"}
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=9KYP, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:9KYP
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:9KYP, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Orphan
+   IMDB: tt1148204
+   URL: https://chi3-4.download.real-debrid.com/d/SL5OKNBJXMP6440/Or...
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+📡 Fetching metadata for tt1148204 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1148204]
+✅ Got background: https://images.metahub.space/background/medium/tt1148204/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1148204/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1148204/img...
+📡 SocialService: Updated status - Watching: Orphan
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:9KYP"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3ed62c2c-d5e3-11f0-9ec4-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtysjG0fe-IsC","phx_ref_prev":"GH_mtO1kAdPe-INP","is_host":false,"joined_at":1765383253.275595,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"3ed62c2c-d5e3-11f0-9ec4-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtO1kAdPe-INP","phx_ref_prev":"GH_mtO1UmuTe-JjG","is_host":false,"joined_at":1765383243.5147018,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:9KYP"}
+⏳ Participant leaving (grace period started): 656DAA91-33B4-4688-9135-C982EA52D7C9
+🔄 User 656DAA91-33B4-4688-9135-C982EA52D7C9 reconnected within grace period - cancelling leave
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3c95a5e6-d5e3-11f0-acbf-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtyzRnlxXiqdB","phx_ref_prev":"GH_mtAv98_dXihUK","last_seen":"2025-12-10T16:14:13Z","room_id":"9KYP","started_at":"2025-12-10T16:14:13Z","status":"online","user_id":"652025-12-10 11:14:13.545 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:13.546 RedLemon[9846:73516] 👋 lemontom left room
+2025-12-10 11:14:13.546 RedLemon[9846:73516] 👋 ursinho left room
+2025-12-10 11:14:13.549 RedLemon[9846:73516] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-10 11:14:14.807 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:14.807 RedLemon[9846:73578]    Payload keys: isPlaying, type, timestamp, position, senderId
+2025-12-10 11:14:14.808 RedLemon[9846:73578] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:14.808 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:14.808 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:14.808 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:15.837 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:16.825 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:16.825 RedLemon[9846:73560]    Payload keys: type, isPlaying, timestamp, senderId, position
+2025-12-10 11:14:16.826 RedLemon[9846:73560] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:16.826 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-10 11:14:16.826 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:17.096 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:17.096 RedLemon[9846:73560]    Payload keys: senderId, isPlaying, timestamp, type, position
+2025-12-10 11:14:17.096 RedLemon[9846:73560] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:17.097 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:17.097 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:17.155 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:17.155 RedLemon[9846:73516] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:17.155 RedLemon[9846:73516] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-10 11:14:17.155 RedLemon[9846:73516] ⏱️ Watch Party: Duration available (7373.2s), triggering ready signal
+2025-12-10 11:14:17.155 RedLemon[9846:73516] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-10 11:14:17.155 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:17.235 RedLemon[9846:73759] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:17.236 RedLemon[9846:73759]    Payload keys: isPlaying, position, type, timestamp, senderId
+2025-12-10 11:14:17.237 RedLemon[9846:73759] ✅ Realtime: Message broadcast complete
+2025-12-10 11:14:17.238 RedLemon[9846:73516] ✅ Watch Party: READY signal sent successfully
+2025-12-10 11:14:17.370 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:17.371 RedLemon[9846:73559]    Payload keys: senderId, timestamp, isPlaying, position, type
+2025-12-10 11:14:17.371 RedLemon[9846:73559] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:17.371 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-10 11:14:17.372 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:17.372 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:17.372 RedLemon[9846:73516] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:18.258 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:18.508 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:18.508 RedLemon[9846:73578]    Payload keys: timestamp, position, senderId, type, isPlaying
+2025-12-10 11:14:18.508 RedLemon[9846:73578] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:18.509 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-10 11:14:18.509 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:18.509 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-10 11:14:18.856 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:18.857 RedLemon[9846:73559]    Payload keys: position, isPlaying, type, senderId, timestamp
+2025-12-10 11:14:18.857 RedLemon[9846:73559] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:18.857 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:18.857 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:18.882 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:20.611 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:21.006 RedLemon[9846:73604] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:21.007 RedLemon[9846:73604]    Payload keys: senderId, isPlaying, position, type, timestamp
+2025-12-10 11:14:21.007 RedLemon[9846:73604] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:21.007 RedLemon[9846:73604] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:21.008 RedLemon[9846:73604] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:21.032 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:22.838 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:22.838 RedLemon[9846:73559]    Payload keys: position, isPlaying, senderId, type, timestamp
+2025-12-10 11:14:22.839 RedLemon[9846:73559] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:22.839 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:22.839 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:22.862 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:22.944 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:25.105 RedLemon[9846:73602] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:25.106 RedLemon[9846:73602]    Payload keys: position, isPlaying, type, senderId, timestamp
+2025-12-10 11:14:25.106 RedLemon[9846:73602] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:25.106 RedLemon[9846:73602] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:25.106 RedLemon[9846:73602] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:25.117 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:25.248 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:26.160 RedLemon[9846:73516] 🖱️ Mouse: x=325/1366 y=45/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-10 11:14:26.947 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:26.948 RedLemon[9846:73559]    Payload keys: senderId, isPlaying, position, type, timestamp
+2025-12-10 11:14:26.948 RedLemon[9846:73559] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:26.949 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:26.949 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:26.990 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:27.588 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:29.006 RedLemon[9846:73604] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:29.007 RedLemon[9846:73604]    Payload keys: type, position, isPlaying, senderId, timestamp
+2025-12-10 11:14:29.009 RedLemon[9846:73604] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:29.009 RedLemon[9846:73604] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:29.009 RedLemon[9846:73604] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:29.080 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:29.583 RedLemon[9846:73516] 🖱️ Mouse: x=264/1366 y=144/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-10 11:14:29.931 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:31.553 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:31.553 RedLemon[9846:73759]    Payload keys: timestamp, isPlaying, type, position, senderId
+2025-12-10 11:14:31.553 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:31.553 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:31.554 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:31.577 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:32.377 RedLemon[9846:73516] 🔍 Current guest participant found in polling: ursinho with ID 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-10 11:14:32.886 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:32.888 RedLemon[9846:73759]    Payload keys: senderId, timestamp, isPlaying, position, type
+2025-12-10 11:14:32.889 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:32.889 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:32.889 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:32.915 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:33.747 RedLemon[9846:73516] 🖱️ Mouse: x=375/1366 y=349/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-10 11:14:35.050 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:35.051 RedLemon[9846:73759]    Payload keys: position, isPlaying, senderId, timestamp, type
+2025-12-10 11:14:35.054 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:35.055 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:35.055 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:35.086 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:36.981 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:36.982 RedLemon[9846:73560]    Payload keys: type, isPlaying, senderId, timestamp, position
+2025-12-10 11:14:36.982 RedLemon[9846:73560] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:36.982 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:36.983 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:37.013 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:38.815 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:38.815 RedLemon[9846:73759]    Payload keys: position, senderId, isPlaying, type, timestamp
+2025-12-10 11:14:38.816 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:38.816 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:38.816 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:38.840 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:40.860 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:40.860 RedLemon[9846:73578]    Payload keys: isPlaying, timestamp, senderId, type, position
+2025-12-10 11:14:40.861 RedLemon[9846:73578] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:40.861 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:40.861 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:40.884 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:42.909 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:42.909 RedLemon[9846:73560]    Payload keys: type, position, senderId, timestamp, isPlaying
+2025-12-10 11:14:42.910 RedLemon[9846:73560] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:42.910 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:42.910 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:42.924 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:43.124 RedLemon[9846:73516] 🖱️ Mouse: x=254/1366 y=269/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-10 11:14:45.937 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:45.937 RedLemon[9846:73759]    Payload keys: senderId, type, timestamp, isPlaying, position
+2025-12-10 11:14:45.938 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:45.938 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:45.939 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:45.972 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:46.860 RedLemon[9846:73602] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:46.860 RedLemon[9846:73602]    Payload keys: type, position, timestamp, isPlaying, senderId
+2025-12-10 11:14:46.861 RedLemon[9846:73602] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:46.861 RedLemon[9846:73602] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:46.862 RedLemon[9846:73602] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:46.889 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:48.825 RedLemon[9846:73602] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:48.825 RedLemon[9846:73602]    Payload keys: senderId, type, timestamp, position, isPlaying
+2025-12-10 11:14:48.826 RedLemon[9846:73602] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:48.827 RedLemon[9846:73602] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:48.827 RedLemon[9846:73602] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:48.849 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:50.847 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:50.848 RedLemon[9846:73759]    Payload keys: timestamp, isPlaying, position, type, senderId
+2025-12-10 11:14:50.849 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:50.849 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:50.850 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:50.853 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:52.853 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:52.853 RedLemon[9846:73578]    Payload keys: type, timestamp, isPlaying, senderId, position
+2025-12-10 11:14:52.854 RedLemon[9846:73578] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:52.854 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:52.854 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:52.894 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:54.902 RedLemon[9846:73578] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:54.902 RedLemon[9846:73578]    Payload keys: isPlaying, senderId, timestamp, type, position
+2025-12-10 11:14:54.903 RedLemon[9846:73578] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:54.903 RedLemon[9846:73578] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:54.903 RedLemon[9846:73578] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:54.934 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+6DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho","watching_id":"tt1148204","watching_title":"Orphan","watching_type":"movie"}]}},"leaves":{"3c95a5e6-d5e3-11f0-acbf-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtAv98_dXihUK","last_seen":"2025-12-10T16:13:59Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1eccbd24-d5e3-11f0-968f-0a58a9feac02":{"metas":[{"phx_ref":"GH_mtw6MvMdYf0sE","phx_ref_prev":"GH_mqG9x7htYf0oB","last_seen":"2025-12-10T16:14:12Z","room_id":"9KYP","started_at":"2025-12-10T16:14:12Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom","watching_id":"tt1148204","watching_title":"Orphan","watching_type":"movie"}]}},"leaves":{"1eccbd24-d5e3-11f0-968f-0a58a9feac02":{"metas":[{"phx_ref":"GH_mqG9x7htYf0oB","last_seen":"2025-12-10T16:13:09Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"9KYP","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] Video --vid=2 [P] 'cover.png' (png)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=pl (*) (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ro (*) (subrip)
+[MPV] Subs  --sid=2 --slang=pl (*) (subrip)
+[MPV] Subs  --sid=3 --slang=hu (*) (subrip)
+[MPV] (+) Subs  --sid=4 --slang=en (*) (subrip)
+[MPV] Subs  --sid=5 --slang=pl (*) (subrip)
+[MPV] File tags:
+[MPV] Title: Orphan
+ MPV Event: 18
+ MPV Event: 18
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765383256.4808102,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"9KYP","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🔍 Track 2: pl | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event
+🔍 AUTO-SELECT: Found 9 total tracks
+🔍 AUTO-SELECT: Track 3 - ID: 1, lang: 'ro', title: 'nil', forced: false, default: true
+🔍 AUTO-SELECT: Track 4 - ID: 2, lang: 'pl', title: 'nil', forced: false, default: true
+🔍 AUTO-SELECT: Track 5 - ID: 3, lang: 'hu', title: 'nil', forced: false, default: true
+🔍 AUTO-SELECT: Track 6 - ID: 4, lang: 'en', title: 'nil', forced: false, default: true
+🔍 AUTO-SELECT: Track 7 - ID: 5, lang: 'pl', title: 'nil', forced: false, default: true
+✅ Auto-selecting BEST English subtitle: en (ID: 4) [External: false, Forced: false, Default: true]
+⚡ Ultra-gentle sync: 1.005x to fix 157ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] Video --vid=2 [P] 'cover.png' (png)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=pl (*) (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ro (*) (subrip)
+[MPV] Subs  --sid=2 --slang=pl (*) (subrip)
+[MPV] Subs  --sid=3 --slang=hu (*) (subrip)
+[MPV] (+) Subs  --sid=4 --slang=en (*) (subrip)
+[MPV] Subs  --sid=5 --slang=pl (*) (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x1080 23.976fps)
+[MPV] Video --vid=2 [P] 'cover.png' (png)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=pl (*) (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=ro (*) (subrip)
+[MPV] Subs  --sid=2 --slang=pl (*) (subrip)
+[MPV] Subs  --sid=3 --slang=hu (*) (subrip)
+[MPV] (+) Subs  --sid=4 --slang=en (*) (subrip)
+[MPV] Subs  --sid=5 --slang=pl (*) (subrip)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765383257.155682,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765383258.338418,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+✅ Video ready - hiding poster
+📝 Started watch history tracking
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":0.209,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 229ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":1.96,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 224ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":4.004,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 279ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":6.048,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 302ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":8.091,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 349ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":10.177,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+⚡ Ultra-gentle sync: 1.005x to fix 375ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":11.969999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 249ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":14.014,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 241ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":16.099,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 249ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":18.143,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 258ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":20.186999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 258ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":21.939,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Gentle speed sync: 1.01x to fix 433ms drift
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":23.982,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Gentle speed sync: 1.01x to fix 416ms drift
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":26.026,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 258ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":28.07,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 263ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Orphan at 29s
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":30.113,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 279ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":32.157,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 304ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":33.951,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 296ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":36.036,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Gentle speed sync: 1.01x to fix 488ms drift
+⚡ Pl2025-12-10 11:14:56.850 RedLemon[9846:73602] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:56.851 RedLemon[9846:73602]    Payload keys: senderId, type, timestamp, isPlaying, position
+2025-12-10 11:14:56.851 RedLemon[9846:73602] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:56.852 RedLemon[9846:73602] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:56.852 RedLemon[9846:73602] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:56.865 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:14:57.965 RedLemon[9846:73516] 🖱️ Mouse: x=470/1366 y=65/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-10 11:14:58.866 RedLemon[9846:73759] 📨 Realtime: Received broadcast message
+2025-12-10 11:14:58.866 RedLemon[9846:73759]    Payload keys: position, type, timestamp, isPlaying, senderId
+2025-12-10 11:14:58.866 RedLemon[9846:73759] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:14:58.866 RedLemon[9846:73759] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:14:58.867 RedLemon[9846:73759] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:14:58.867 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:15:00.873 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:15:00.874 RedLemon[9846:73559]    Payload keys: senderId, timestamp, position, isPlaying, type
+2025-12-10 11:15:00.874 RedLemon[9846:73559] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:15:00.875 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:15:00.875 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:15:00.917 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:15:02.884 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:15:02.884 RedLemon[9846:73560]    Payload keys: isPlaying, senderId, timestamp, position, type
+2025-12-10 11:15:02.885 RedLemon[9846:73560] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:15:02.886 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:15:02.886 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:15:02.912 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:15:04.843 RedLemon[9846:73560] 📨 Realtime: Received broadcast message
+2025-12-10 11:15:04.843 RedLemon[9846:73560]    Payload keys: position, senderId, type, timestamp, isPlaying
+2025-12-10 11:15:04.844 RedLemon[9846:73560] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:15:04.844 RedLemon[9846:73560] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:15:04.844 RedLemon[9846:73560] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:15:04.914 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+2025-12-10 11:15:06.842 RedLemon[9846:73559] 📨 Realtime: Received broadcast message
+2025-12-10 11:15:06.843 RedLemon[9846:73559]    Payload keys: isPlaying, senderId, timestamp, type, position
+2025-12-10 11:15:06.844 RedLemon[9846:73559] ✅ Realtime: Decoded message type: playbackState, sender: 9KYP
+2025-12-10 11:15:06.844 RedLemon[9846:73559] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-10 11:15:06.845 RedLemon[9846:73559] ✅ Realtime: syncCallback invoked successfully
+2025-12-10 11:15:06.871 RedLemon[9846:73516] 🔍 DEBUG: Received sync message - type: playbackState, sender: 9KYP
+ayback speed adjusted to 1.01x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3567.3138964943064,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+🔄 Large drift (706.3s) - seeking to 3569.0s (host at 3567.8s + 1.2s offset)
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3568.3559999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 0.995x to fix 157ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3570.3999999999996,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+✅ Perfect sync achieved: 25ms - resetting to 1.0x
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3572.444,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3574.488,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 116ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"9KYP","timestamp":3576.531,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:9KYP"}
+⚡ Ultra-gentle sync: 1.005x to fix 134ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)

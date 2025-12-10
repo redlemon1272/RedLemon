@@ -374,13 +374,28 @@ class LobbyViewModel: ObservableObject {
                         }
                     }
 
-                    // Auto-start for event rooms (always) or regular rooms that are already playing
-                    if room.id.hasPrefix("event_") {
-                        print("🎬 Event room detected - auto-starting playback")
-                        autoStartSystemEvent()
-                    } else if room.state == .playing {
-                        print("▶️ Room already playing - auto-starting playback")
-                        autoStartSystemEvent()
+                    // Refresh room state to check for active playback
+                    // This prevents stale auto-start loops when returning to lobby
+                    if let freshRoom = try? await SupabaseClient.shared.getRoomState(roomId: room.id) {
+                        print("✅ Lobby: Refreshed room state. isPlaying: \(freshRoom.isPlaying)")
+                        
+                        // Auto-start for event rooms (always) or regular rooms that are already playing
+                        if room.id.hasPrefix("event_") {
+                            print("🎬 Event room detected - auto-starting playback")
+                            autoStartSystemEvent()
+                        } else if freshRoom.isPlaying {
+                            print("▶️ Room already playing - auto-starting playback")
+                            autoStartSystemEvent()
+                        }
+                    } else {
+                        // Fallback to existing state if fetch fails (rare)
+                        if room.id.hasPrefix("event_") {
+                            print("🎬 Event room detected - auto-starting playback")
+                            autoStartSystemEvent()
+                        } else if room.state == .playing {
+                            print("▶️ Room already playing - auto-starting playback (cached state)")
+                            autoStartSystemEvent()
+                        }
                     }
                 }
 
@@ -396,7 +411,7 @@ class LobbyViewModel: ObservableObject {
                         type: .chat,
                         timestamp: 0,
                         isPlaying: nil,
-                        senderId: participantId,
+                        senderId: self.participantId,
                         chatText: "LOBBY_JOIN",
                         chatUsername: guestName
                     )

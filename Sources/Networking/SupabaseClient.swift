@@ -563,7 +563,26 @@ class SupabaseClient: RoomManager, UserManager {
             )
             NSLog("✅ SupabaseClient: Playlist updated successfully")
         } catch SupabaseError.httpError(let code, let message) where code == 400 && message.contains("current_playlist_index") {
-            NSLog("⚠️ SupabaseClient: Backend schema missing 'current_playlist_index'. Playlist state will NOT be persisted.")
+            NSLog("⚠️ SupabaseClient: Backend schema missing 'current_playlist_index'. Retrying without index...")
+            
+            // RETRY: Update ONLY the playlist array
+            // Serialize playlist items AGAIN (since they were consumed/scoped above)
+            let playlistData = try playlist.map { item -> [String: Any] in
+                let data = try JSONEncoder().encode(item)
+                guard let dict = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+                    throw SupabaseError.encodingError
+                }
+                return dict
+            }
+            
+            _ = try await makeRequest(
+                path: "/rooms",
+                method: "PATCH",
+                body: ["playlist": playlistData],
+                query: ["id": "eq.\(roomId)"]
+            )
+            NSLog("✅ SupabaseClient: Playlist updated (Fallback mode: No Index persisted)")
+            
         } catch {
              NSLog("❌ SupabaseClient: Failed to update playlist: \(error)")
              throw error

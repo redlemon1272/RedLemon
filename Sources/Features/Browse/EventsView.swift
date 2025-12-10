@@ -384,7 +384,8 @@ struct EventsView: View {
                         item: event.mediaItem,
                         quality: .fullHD,
                         season: nil,
-                        episode: nil
+                        episode: nil,
+                        preferredInfoHash: nil
                     )
                     initialStreamHash = result.stream.infoHash
                     print("✅ Stream resolved for system event: \(result.stream.title)")

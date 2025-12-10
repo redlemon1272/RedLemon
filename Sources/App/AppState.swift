@@ -314,7 +314,8 @@ class AppState: ObservableObject {
                     quality: quality,
                     season: season,
                     episode: episode,
-                    metadata: metadata
+                    metadata: metadata,
+                    preferredInfoHash: nil
                 )
                 resolvedStream = result.stream
             }
@@ -390,7 +391,8 @@ class AppState: ObservableObject {
             quality: quality,
             season: targetSeason,
             episode: targetEpisode,
-            metadata: metadata
+            metadata: metadata,
+            preferredInfoHash: nil
         )
         
         // Step 2: Unlock Stream

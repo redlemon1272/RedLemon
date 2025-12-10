@@ -153,44 +153,8 @@ struct MPVPlayerView: View {
                             .zIndex(99)
                     }
 
-                    // Tap shield to close subtitle menu when open
-                    if showSubtitleMenu {
-                        Color.black.opacity(0.001)
-                            .ignoresSafeArea()
-                            .zIndex(101)
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.15)) {
-                                    showSubtitleMenu = false
-                                }
-                            }
-                    }
-                    
-                    // Tap shield to close playlist menu
-                    if showPlaylistMenu {
-                        Color.black.opacity(0.001)
-                            .ignoresSafeArea()
-                            .zIndex(100)
-                            .onTapGesture {
-                                withAnimation(.easeInOut(duration: 0.15)) {
-                                    showPlaylistMenu = false
-                                }
-                            }
-                    }
-
-                    // Full subtitle menu (appears when player controls are hidden)
-                    if showSubtitleMenu {
-                        fullSubtitleMenu
-                            .zIndex(102)
-                            .transition(.opacity.combined(with: .scale))
-                    }
-
-                    // Chat toggle button (appears on right side when mouse is there and chat is closed)
-                    // Only show in watch party mode
-                    if showChatButton && !viewModel.showChat && viewModel.isInWatchParty {
-                        chatToggleButton
-                            .transition(.opacity.combined(with: .move(edge: .trailing)))
-                            .zIndex(98)
-                    }
+                    // Extracted menus (Shields, Subtitles, Playlist, Chat Toggle)
+                    menus
             }
             .frame(width: viewModel.showChat ? geometry.size.width * 0.8 : geometry.size.width)
 
@@ -1132,6 +1096,61 @@ struct MPVPlayerView: View {
         .shadow(radius: 20)
     }
 
+
+
+    @ViewBuilder
+    private var menus: some View {
+        // Tap shield to close subtitle menu when open
+        if showSubtitleMenu {
+            Color.black.opacity(0.001)
+                .ignoresSafeArea()
+                .zIndex(101)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showSubtitleMenu = false
+                    }
+                }
+        }
+        
+        // Tap shield to close playlist menu
+        if showPlaylistMenu {
+            Color.black.opacity(0.001)
+                .ignoresSafeArea()
+                .zIndex(100)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showPlaylistMenu = false
+                    }
+                }
+        }
+
+        // Full subtitle menu (appears when player controls are hidden)
+        if showSubtitleMenu {
+            fullSubtitleMenu
+                .zIndex(102)
+                .transition(.opacity.combined(with: .scale))
+        }
+
+        // Full playlist menu (Modal style)
+        if showPlaylistMenu, let room = appState.currentWatchPartyRoom {
+            PlaylistModalView(
+                room: room,
+                isHost: viewModel.isWatchPartyHost,
+                showPlaylistMenu: $showPlaylistMenu
+            )
+            .zIndex(102)
+            .transition(.opacity.combined(with: .scale))
+        }
+
+        // Chat toggle button (appears on right side when mouse is there and chat is closed)
+        // Only show in watch party mode
+        if showChatButton && !viewModel.showChat && viewModel.isInWatchParty {
+            chatToggleButton
+                .transition(.opacity.combined(with: .move(edge: .trailing)))
+                .zIndex(98)
+        }
+    }
+
     private var chatToggleButton: some View {
         VStack {
             Spacer()
@@ -1313,7 +1332,12 @@ struct PlaylistButton: View {
     @Binding var showPlaylistMenu: Bool
     
     var body: some View {
-        if let playlist = appState.currentWatchPartyRoom?.playlist, !playlist.isEmpty {
+        content
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        if let room = appState.currentWatchPartyRoom, let playlist = room.playlist, !playlist.isEmpty {
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.15)) {
                     showPlaylistMenu.toggle()
@@ -1330,79 +1354,130 @@ struct PlaylistButton: View {
                 }
             }
             .buttonStyle(.plain)
-            .overlay(alignment: .top) {
-                if showPlaylistMenu {
-                    PlaylistMenuContent(playlist: playlist, currentIndex: appState.currentWatchPartyRoom?.currentPlaylistIndex ?? 0, showPlaylistMenu: $showPlaylistMenu)
-                }
-            }
         }
     }
 }
 
-struct PlaylistMenuContent: View {
-    let playlist: [PlaylistItem]
-    let currentIndex: Int
+// MARK: - Playlist Modal View
+
+struct PlaylistModalView: View {
+    let room: WatchPartyRoom
+    let isHost: Bool
     @Binding var showPlaylistMenu: Bool
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Playlist")
-                .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.primary)
-                .padding(.horizontal, 12)
-                .padding(.top, 12)
-                .padding(.bottom, 8)
-                
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(playlist.indices, id: \.self) { index in
-                         let item = playlist[index]
-                         HStack(spacing: 8) {
-                             // Icons
-                             if index == currentIndex {
-                                 Image(systemName: "play.fill")
-                                     .font(.system(size: 10))
-                                     .foregroundColor(.green)
-                                     .frame(width: 16)
-                             } else if index < currentIndex {
-                                 Image(systemName: "checkmark")
-                                     .font(.system(size: 10))
-                                     .foregroundColor(.secondary)
-                                     .frame(width: 16)
-                             } else {
-                                 Text("\(index + 1)")
-                                     .font(.system(size: 10))
-                                     .foregroundColor(.secondary)
-                                     .frame(width: 16)
-                                     .multilineTextAlignment(.center)
-                             }
-                             
-                             Text(item.displayTitle)
-                                 .font(.system(size: 13))
-                                 .foregroundColor(index == currentIndex ? .green : .primary)
-                                 .lineLimit(1)
-                             
-                             Spacer()
-                         }
-                         .padding(.horizontal, 12)
-                         .padding(.vertical, 8)
-                         .contentShape(Rectangle())
-                         .onTapGesture {
-                             // Optional: Allow jumping to item?
-                             // valid for host, maybe not guest
-                             print("Playlist item tapped: \(index)")
-                         }
-                    }
-                }
+        VStack(spacing: 16) {
+            // Header
+            HStack {
+                Text("Playlist")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.primary)
+
+                Spacer()
+
+                Text("Click outside to close")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.secondary)
             }
-            .frame(height: min(CGFloat(playlist.count * 35), 200)) // Dynamic height up to 200
+            .padding(.horizontal, 24)
+            .padding(.top, 20)
+
+            // Playlist Items
+            if let playlist = room.playlist, !playlist.isEmpty {
+                ScrollView(.vertical, showsIndicators: true) {
+                    VStack(spacing: 12) {
+                        ForEach(playlist.indices, id: \.self) { index in
+                            let item = playlist[index]
+                            let isCurrent = index == room.currentPlaylistIndex
+                            
+                            Button(action: {
+                                // Only host can change playlist item
+                                if isHost && index != room.currentPlaylistIndex {
+                                    // TODO: Implement playlist jump logic
+                                    print("Playlist item tapped: \(index)")
+                                }
+                            }) {
+                                HStack(spacing: 12) {
+                                    // Poster
+                                    if let poster = item.mediaItem.poster {
+                                        AsyncImage(url: URL(string: poster)) { phase in
+                                            if case .success(let image) = phase {
+                                                image
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 40, height: 60)
+                                                    .cornerRadius(4)
+                                                    .clipped()
+                                            } else {
+                                                Rectangle()
+                                                    .fill(Color.gray.opacity(0.3))
+                                                    .frame(width: 40, height: 60)
+                                                    .cornerRadius(4)
+                                            }
+                                        }
+                                    } else {
+                                        Rectangle()
+                                            .fill(Color.gray.opacity(0.3))
+                                            .frame(width: 40, height: 60)
+                                            .cornerRadius(4)
+                                    }
+                                    
+                                    // Title info
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(item.displayTitle)
+                                            .font(.system(size: 14, weight: isCurrent ? .bold : .medium))
+                                            .foregroundColor(isCurrent ? .green : .primary)
+                                            .lineLimit(2)
+                                            .multilineTextAlignment(.leading)
+                                        
+                                        if isCurrent {
+                                            Text("Now Playing")
+                                                .font(.system(size: 12))
+                                                .foregroundColor(.green.opacity(0.8))
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    // Playing Indicator
+                                    if isCurrent {
+                                        Image(systemName: "play.circle.fill")
+                                            .font(.system(size: 20))
+                                            .foregroundColor(.green)
+                                    } else if index < room.currentPlaylistIndex {
+                                        Image(systemName: "checkmark.circle")
+                                            .font(.system(size: 16))
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                .padding(8)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .fill(isCurrent ? Color.green.opacity(0.1) : Color.primary.opacity(0.05))
+                                )
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                            .disabled(!isHost) // Guests can view but not change
+                        }
+                    }
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 20)
+                }
+                .frame(maxHeight: 500)
+            } else {
+                 Text("No playlist items")
+                    .foregroundColor(.secondary)
+                    .padding(30)
+            }
         }
-        .background(.regularMaterial)
-        .cornerRadius(8)
-        .shadow(radius: 10)
-        .frame(width: 250)
-        .offset(y: -10)
-        .transition(.opacity)
-        .zIndex(100)
+        .frame(width: 450)
+        .background(.ultraThinMaterial)
+        .cornerRadius(16)
+        .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.white.opacity(0.1), lineWidth: 1)
+        )
     }
 }

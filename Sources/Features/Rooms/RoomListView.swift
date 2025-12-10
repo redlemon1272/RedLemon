@@ -442,7 +442,7 @@ struct RoomListView: View {
             // Listen for UPDATEs on rooms table (state, playback_position changes)
             let changesConfig: [[String: Any]] = [
                 [
-                    "event": "UPDATE",
+                    "event": "*",
                     "schema": "public",
                     "table": "rooms"
                 ]
@@ -466,6 +466,25 @@ struct RoomListView: View {
 
     @MainActor
     private func handleRoomUpdate(_ payload: [String: Any]) async {
+        // Log payload for debugging
+        // print("📦 Room Update Payload: \(payload)")
+        
+        let eventType = payload["eventType"] as? String ?? ""
+        
+        // CASE 1: DELETE (Room Closed)
+        if eventType == "DELETE" {
+            guard let oldRecord = payload["old"] as? [String: Any],
+                  let roomId = oldRecord["id"] as? String else {
+                return
+            }
+            print("🗑️ RoomListView: Detected DELETE for room \(roomId) - Removing from list")
+            if let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) {
+                appState.activeRooms.remove(at: index)
+            }
+            return
+        }
+
+        // CASE 2: UPDATE / INSERT
         guard let newRecord = payload["new"] as? [String: Any],
               let roomId = newRecord["id"] as? String else {
             return

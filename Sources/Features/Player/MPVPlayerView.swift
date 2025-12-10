@@ -1430,6 +1430,7 @@ struct PlaylistModalView: View {
                                             .lineLimit(2)
                                             .multilineTextAlignment(.leading)
                                         
+
                                         if isCurrent {
                                             Text("Now Playing")
                                                 .font(.system(size: 12))
@@ -1472,7 +1473,7 @@ struct PlaylistModalView: View {
             }
         }
         .frame(width: 450)
-        .background(.ultraThinMaterial)
+        .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
         .overlay(

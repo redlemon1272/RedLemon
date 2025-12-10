@@ -1623,7 +1623,7 @@ extension MPVPlayerViewModel {
             // 2. If drift < 2.0s -> "Synced 🟢"
             // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
             
-            if (isBuffering || isSeeking) && absSmoothedDrift > 0.5 {
+            if (isBuffering || isSeeking) && absSmoothedDrift > 1.2 {
                 syncStatus = "Syncing... 🟡"
             } else if absSmoothedDrift < 2.0 {
                  // Fade out "Synced" after a while? For now keep it static as requested.

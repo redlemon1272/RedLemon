@@ -80,7 +80,11 @@ class MPVViewLayer: CAOpenGLLayer {
 
         // Critical CAOpenGLLayer settings for async rendering (IINA pattern)
         self.isAsynchronous = true
-        self.contentsScale = NSScreen.main?.backingScaleFactor ?? 2.0
+        // PERFORMANCE FIX: Force 1.0 scale (non-Retina) to avoid 4x fragment shader cost
+        // This resolves stutter/blips on older Retina Macs (e.g. 2015 MBP)
+        // Video content is naturally soft, so hardware upscaling by the OS is virtually indistinguishable
+        // but saves ~75% of GPU fill rate.
+        self.contentsScale = 1.0
 
         print("🎬 MPVViewLayer initialized with async rendering")
     }

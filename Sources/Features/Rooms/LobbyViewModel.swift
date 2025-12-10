@@ -780,6 +780,14 @@ class LobbyViewModel: ObservableObject {
                 print("✅ Host: Updated AppState selection to S\(room.season ?? 0)E\(room.episode ?? 0)")
             }
 
+            // Sync Playlist State to AppState
+            if var currentRoom = appState.currentWatchPartyRoom {
+                currentRoom.playlist = self.playlist
+                currentRoom.currentPlaylistIndex = self.currentPlaylistIndex
+                appState.currentWatchPartyRoom = currentRoom
+                print("✅ Host: Synced playlist state to AppState (Index: \(self.currentPlaylistIndex))")
+            }
+
             appState.navigateToPlayer(stream: finalStream)
         }
 
@@ -1943,6 +1951,12 @@ class LobbyViewModel: ObservableObject {
         self.room.episode = item.episode
         self.room.currentPlaylistIndex = index
 
+        // Sync to AppState so MPVPlayerView sees it immediately if active
+        if var room = self.appState?.currentWatchPartyRoom {
+            room.currentPlaylistIndex = index
+            self.appState?.currentWatchPartyRoom = room
+        }
+
         self.posterURL = item.mediaItem.poster
         self.backdropURL = item.mediaItem.background
         self.logoURL = item.mediaItem.logo
@@ -2020,8 +2034,19 @@ class LobbyViewModel: ObservableObject {
 
         playlist.remove(at: index)
 
+        // Adjust currentPlaylistIndex if necessary
+        if index < currentPlaylistIndex {
+            currentPlaylistIndex -= 1
+        } else if index == currentPlaylistIndex {
+            // If removed current item, ensure index is still valid
+            if currentPlaylistIndex >= playlist.count {
+                currentPlaylistIndex = max(0, playlist.count - 1)
+            }
+        }
+
         if playlist.isEmpty {
             isPlaylistMode = false
+            currentPlaylistIndex = 0
         }
 
         // Sync to AppState so MPVPlayerView sees it
@@ -2037,8 +2062,26 @@ class LobbyViewModel: ObservableObject {
     func movePlaylistItem(from: Int, to: Int) {
         guard isHost else { return }
 
+        // Track if we are moving the currently playing item
+        let isMovingCurrent = (from == currentPlaylistIndex)
+        
+        // Temporarily adjust index for removal
+        if from < currentPlaylistIndex {
+            currentPlaylistIndex -= 1
+        }
+        
         let item = playlist.remove(at: from)
         playlist.insert(item, at: to)
+
+        // Adjust index for insertion
+        if to <= currentPlaylistIndex {
+            currentPlaylistIndex += 1
+        }
+        
+        // If we moved the current item, update index to its new position
+        if isMovingCurrent {
+            currentPlaylistIndex = to
+        }
 
         // Sync to AppState so MPVPlayerView sees it
         if var room = self.appState?.currentWatchPartyRoom {

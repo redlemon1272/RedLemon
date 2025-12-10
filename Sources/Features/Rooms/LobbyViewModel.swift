@@ -2024,6 +2024,13 @@ class LobbyViewModel: ObservableObject {
             isPlaylistMode = false
         }
 
+        // Sync to AppState so MPVPlayerView sees it
+        if var room = self.appState?.currentWatchPartyRoom {
+            room.playlist = self.playlist
+            room.currentPlaylistIndex = self.currentPlaylistIndex
+            self.appState?.currentWatchPartyRoom = room
+        }
+
         updatePlaylistInDatabase()
     }
 
@@ -2032,6 +2039,13 @@ class LobbyViewModel: ObservableObject {
 
         let item = playlist.remove(at: from)
         playlist.insert(item, at: to)
+
+        // Sync to AppState so MPVPlayerView sees it
+        if var room = self.appState?.currentWatchPartyRoom {
+            room.playlist = self.playlist
+            room.currentPlaylistIndex = self.currentPlaylistIndex
+            self.appState?.currentWatchPartyRoom = room
+        }
 
         updatePlaylistInDatabase()
     }

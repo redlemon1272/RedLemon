@@ -172,6 +172,26 @@ class AppState: ObservableObject {
                 
                 resolvedStream = hostStream
                 
+            } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+                      let hostStreamHash = watchPartyRoom.selectedStreamHash {
+                 
+                 // PARTIAL LOCK (System Event / Missing URL):
+                 // We have the hash but not the URL. We must resolve locally but FORCE the hash.
+                 print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒")
+                 print("   Hash: \(hostStreamHash)")
+                 print("   Resolving locally with forced selection...\n")
+                 
+                 let result = try await streamResolver.resolveStream(
+                     item: item,
+                     quality: quality,
+                     season: season,
+                     episode: episode,
+                     metadata: metadata,
+                     preferredInfoHash: hostStreamHash
+                 )
+                 resolvedStream = result.stream
+                 resolvedMetadata = result.metadata
+
             } else {
                 // Standard resolution
                 let result = try await streamResolver.resolveStream(
@@ -179,7 +199,8 @@ class AppState: ObservableObject {
                     quality: quality,
                     season: season,
                     episode: episode,
-                    metadata: metadata
+                    metadata: metadata,
+                    preferredInfoHash: nil
                 )
                 resolvedStream = result.stream
                 resolvedMetadata = result.metadata // Might have been updated

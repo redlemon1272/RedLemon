@@ -10,7 +10,7 @@ struct StreamResolutionResult {
 
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?) async throws -> StreamResolutionResult
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?) async throws -> StreamResolutionResult
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream
 }
 
@@ -23,7 +23,7 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Resolution
 
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil) async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil) async throws -> StreamResolutionResult {
         print("🎬 StreamService: Starting resolution for: \(item.name)")
 
         // Step 1: Load metadata
@@ -73,6 +73,9 @@ actor StreamService: StreamResolving {
         // Priority: Requested (1080p) -> 720p -> 4K (Hail Mary)
         var streamsToTry: [Stream] = []
         
+        
+        var forcedStream: Stream? = nil
+        
         // Helper to extract streams from a bucket
         func extractStreams(from bucket: QualityBucket?) -> [Stream] {
             var extracted: [Stream] = []
@@ -81,10 +84,32 @@ actor StreamService: StreamResolving {
             return extracted
         }
         
-        // 1. Requested Quality (usually 1080p)
-        streamsToTry.append(contentsOf: extractStreams(from: rawBucket))
+        // NEW: Check for preferred hash (Synchronization Logic)
+        if let targetHash = preferredInfoHash {
+            print("🔗 StreamService: Attempting to resolve specific stream hash: \(targetHash)")
+            let allBuckets = [buckets.uhd4k, buckets.fullHD, buckets.hd, buckets.sd]
+            for bucket in allBuckets {
+                let streams = extractStreams(from: bucket)
+                if let match = streams.first(where: { $0.infoHash == targetHash }) {
+                    print("✅ StreamService: Found requested stream hash! Locking selection.")
+                    forcedStream = match
+                    break
+                }
+            }
+            if forcedStream == nil {
+                print("⚠️ StreamService: Requested hash not found in resolved streams. Falling back to standard selection.")
+            }
+        }
+
+        // If forced stream is found, we skip standard selection logic
+        if let match = forcedStream {
+            streamsToTry = [match]
+        } else {
+            // 1. Requested Quality (usually 1080p)
+            streamsToTry.append(contentsOf: extractStreams(from: rawBucket))
+        }
         
-        if quality == .fullHD {
+        if forcedStream == nil && quality == .fullHD {
             // 2. Fallback: 720p (Safe for older hardware)
             let hdStreams = extractStreams(from: buckets.hd)
              if !hdStreams.isEmpty {
@@ -176,6 +201,16 @@ actor StreamService: StreamResolving {
         // Step 4: Apply File Size Limit (Max 12GB) for 1080p
         // Older hardware (2015 Macs) struggles with large files, especially H.264 Remuxes (30GB+)
         var finalStreams = keywordFiltered
+        
+        // Force bypass filters if we have a locked stream
+        if let match = forcedStream {
+            print("🔒 StreamService: Bypassing filters for enforced stream")
+            // Ensure the forced stream is the only one in finalStreams. 
+            // Note: keywordFiltered might have removed it? 
+            // We should ideally assume 'match' is valid if the host played it, but let's check keyword safety?
+            // Actually, for sync, we should force it even if it has a 'bad' keyword locally if the user is joining a party.
+            finalStreams = [match]
+        } else {
 
         if quality == .fullHD {
             let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes
@@ -209,6 +244,7 @@ actor StreamService: StreamResolving {
                 }) {
                     finalStreams = [smallest]
                 }
+            }
             }
         }
 

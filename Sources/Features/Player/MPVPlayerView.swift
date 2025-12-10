@@ -164,6 +164,18 @@ struct MPVPlayerView: View {
                                 }
                             }
                     }
+                    
+                    // Tap shield to close playlist menu
+                    if showPlaylistMenu {
+                        Color.black.opacity(0.001)
+                            .ignoresSafeArea()
+                            .zIndex(100)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.15)) {
+                                    showPlaylistMenu = false
+                                }
+                            }
+                    }
 
                     // Full subtitle menu (appears when player controls are hidden)
                     if showSubtitleMenu {
@@ -503,26 +515,7 @@ struct MPVPlayerView: View {
                 .zIndex(100)
         }
         
-        // SYNC INFO PILL
-        if let syncStatus = viewModel.syncStatus {
-            VStack {
-                Text(syncStatus)
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 4)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(12)
-                    .overlay(
-                        Capsule()
-                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                    )
-                    .padding(.top, 16)
-                Spacer()
-            }
-            .transition(.opacity)
-            .zIndex(90)
-        }
+
     }
 
     private var waitingForGuestsOverlay: some View {
@@ -736,6 +729,21 @@ struct MPVPlayerView: View {
 
                 // Control buttons - all on left side
                 HStack(spacing: 8) {
+                    // Sync Status Pill (Watch Party Only)
+                    if viewModel.isInWatchParty, let syncStatus = viewModel.syncStatus {
+                        Text(syncStatus)
+                            .font(.system(size: 11, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Color.black.opacity(0.4))
+                            .cornerRadius(6)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 6)
+                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                            )
+                            .padding(.trailing, 4)
+                    }
                     // Play/Pause button - only for solo or host
                     if !viewModel.isInWatchParty || viewModel.isWatchPartyHost {
                         Button(action: {
@@ -1390,12 +1398,5 @@ struct PlaylistMenuContent: View {
         .offset(y: -10)
         .transition(.opacity)
         .zIndex(100)
-        .onHover { isHovering in
-            if !isHovering {
-                withAnimation(.easeInOut(duration: 0.15)) {
-                    showPlaylistMenu = false
-                }
-            }
-        }
     }
 }

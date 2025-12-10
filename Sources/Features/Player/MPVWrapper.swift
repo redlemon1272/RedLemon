@@ -27,7 +27,7 @@ class MPVWrapper: ObservableObject {
     private var openGLContext: CGLContextObj?  // OpenGL context for locking (IINA pattern)
     private var isInitialized = false
     private var eventPollingTask: Task<Void, Never>?
-    private var timeUpdateTimer: Timer?
+    private var timeUpdateTask: Task<Void, Never>?
     // Memory monitoring removed to prevent crashes
 
     // ✅ Throttling Properties
@@ -307,14 +307,19 @@ class MPVWrapper: ObservableObject {
     // MARK: - Enhanced Timer Management
 
     private func startTimeUpdates() {
-        timeUpdateTimer?.invalidate()
-        timeUpdateTimer = nil
+        timeUpdateTask?.cancel()
+        timeUpdateTask = nil
 
-        // ✅ Reduce from 2Hz to 4Hz maximum (0.25s)
-        timeUpdateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] _ in
-            guard let strongSelf = self else { return }
-            Task { @MainActor in
-                strongSelf.updateCurrentTime()
+        timeUpdateTask = Task(priority: .userInitiated) { [weak self] in
+            while !Task.isCancelled {
+                // Throttled update rate (250ms / 4Hz)
+                try? await Task.sleep(nanoseconds: 250_000_000)
+                
+                guard let self = self, !Task.isCancelled else { return }
+                
+                await MainActor.run {
+                    self.updateCurrentTime()
+                }
             }
         }
     }
@@ -986,8 +991,8 @@ class MPVWrapper: ObservableObject {
         isPlaying = false
 
         // Stop internal timers immediately
-        timeUpdateTimer?.invalidate()
-        timeUpdateTimer = nil
+        timeUpdateTask?.cancel()
+        timeUpdateTask = nil
 
         // ✅ WAIT: Give event loop time to exit cleanly
         let cleanupDelay = Task {
@@ -1077,8 +1082,8 @@ class MPVWrapper: ObservableObject {
         eventPollingTask = nil
 
         // Cancel time update timer
-        timeUpdateTimer?.invalidate()
-        timeUpdateTimer = nil
+        timeUpdateTask?.cancel()
+        timeUpdateTask = nil
 
         // Clean up MPV resources
         // Clean up MPV resources

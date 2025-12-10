@@ -34,7 +34,8 @@ class LobbyViewModel: ObservableObject {
     @Published var room: WatchPartyRoom
     private var isHost: Bool
     private var realtimeClient: SupabaseRealtimeClient?
-    private var countdownTimer: Timer?
+    // private var countdownTimer: Timer? // Removed for concurrency
+    // countdownTask already declared on line 38, ensuring we use that instead.
     private var countdownTask: Task<Void, Never>?
     private var participantsPollingTask: Task<Void, Never>?
     private var roomStatePollingTask: Task<Void, Never>?
@@ -131,7 +132,7 @@ class LobbyViewModel: ObservableObject {
     }
 
     deinit {
-        countdownTimer?.invalidate()
+        countdownTask?.cancel()
 
         // Capture client for async cleanup
         if let client = realtimeClient {
@@ -247,15 +248,18 @@ class LobbyViewModel: ObservableObject {
         transitionState.isStarting = true
         countdown = 3
 
-        countdownTimer?.invalidate()
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
-            Task { @MainActor [weak self] in
-                guard let self = self else { return }
+        countdownTask?.cancel()
+        countdownTask = nil
+        
+        countdownTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                guard let self = self, !Task.isCancelled else { return }
+                
                 if self.countdown > 0 {
                     self.countdown -= 1
                 } else {
-                    timer.invalidate()
-                    // Transition to player handled by view based on isStarting/countdown
+                    return // Loop finished
                 }
             }
         }

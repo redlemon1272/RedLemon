@@ -107,4 +107,23 @@ final class LobbyViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.chatMessages.first?.text, chatText)
         XCTAssertEqual(viewModel.chatMessages.first?.username, senderName)
     }
+    func testStartCountdown() async throws {
+        // Given
+        viewModel = LobbyViewModel(room: mockRoom, isHost: true, realtimeManager: mockRealtimeManager)
+        
+        // When
+        viewModel.startCountdown()
+        
+        // Then
+        XCTAssertTrue(viewModel.isStarting)
+        XCTAssertEqual(viewModel.countdown, 3)
+        
+        // Wait for countdown (1.1s) to allow first tick
+        try? await Task.sleep(nanoseconds: 1_100_000_000)
+        XCTAssertEqual(viewModel.countdown, 2, "Countdown should have ticked down to 2")
+        
+        // Wait for full countdown (another 2.1s)
+        try? await Task.sleep(nanoseconds: 2_100_000_000)
+        XCTAssertEqual(viewModel.countdown, 0, "Countdown should have reached 0")
+    }
 }

@@ -334,13 +334,13 @@ struct EventsView: View {
         let roomId = "event_\(event.mediaItem.id)"
 
         // Create/join event room in Supabase for chat
-        do {
-            guard let userId = appState.currentUserId else {
-                print("⚠️ No user ID - skipping room creation")
-                createLocalEventRoom(event: event, roomId: roomId)
-                return
-            }
+        guard let userId = appState.currentUserId else {
+            print("⚠️ No user ID - skipping room creation")
+            createLocalEventRoom(event: event, roomId: roomId)
+            return
+        }
 
+        do {
             // Variables to hold stream selection details to ensure synchronization
             var selectedStreamHash: String? = nil
             var selectedUnlockedURL: String? = nil
@@ -424,6 +424,32 @@ struct EventsView: View {
                 fileIdx: selectedFileIdx
             )
         } catch {
+            let errorString = String(describing: error)
+            // Handle race condition: If room creation failed because it already exists (409/duplicate key),
+            // it means another user beat us to it. We should join that room instead of falling back to local.
+            if errorString.contains("409") || errorString.contains("duplicate key") {
+                print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
+                
+                // 1. Fetch the room that was just created by the winner
+                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    print("✅ Recovered from race condition! Joining existing room.")
+                    
+                    // 2. Join it
+                    try? await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
+                    
+                    // 3. Use the WINNER'S stream details to ensure sync
+                    createLocalEventRoom(
+                        event: event,
+                        roomId: roomId,
+                        streamHash: roomState.streamHash,
+                        unlockedStreamUrl: roomState.unlockedStreamUrl,
+                        quality: roomState.quality,
+                        fileIdx: roomState.fileIdx
+                    )
+                    return
+                }
+            }
+
             print("❌ Failed to create/join event room: \(error)")
             // Fall back to local-only room (no chat sync)
             createLocalEventRoom(event: event, roomId: roomId)

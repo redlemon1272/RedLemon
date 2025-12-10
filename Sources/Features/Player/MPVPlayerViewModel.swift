@@ -129,10 +129,16 @@ class MPVPlayerViewModel: ObservableObject {
                         print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
                         self.isBuffering = true
                         self.isLoading = true
-                    } else if self.hasVideoReadyTriggered && !isBuffering {
-                        print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
-                        self.isBuffering = false
-                        self.isLoading = false
+                    } else {
+                         // Buffering finished
+                         if self.isSwitchingTracks {
+                             // Snap-Seek Event: Switching completed, now seek to sync
+                             self.completeTrackSwitch()
+                         } else if self.hasVideoReadyTriggered {
+                            print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
+                            self.isBuffering = false
+                            self.isLoading = false
+                        }
                     }
                 }
                 .store(in: &serviceCancellables)
@@ -252,6 +258,11 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var readyGuestIds: Set<String> = []
     private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Debounce map for leaving guests
     private var hasSentReadySignal: Bool = false
+
+    // MARK: - Phantom Sync & Snap-Seek State
+    private var isSwitchingTracks: Bool = false
+    private var trackSwitchStartTime: Date?
+    private var trackSwitchStartPos: Double = 0
 
 
     // MARK: - Initialization
@@ -723,14 +734,22 @@ class MPVPlayerViewModel: ObservableObject {
         }
     }
 
-    /// Update available subtitle tracks and current selection
-
-
-    /// Select subtitle track by ID
-    /// - Parameter trackId: Track ID (0 = off, or valid track ID)
-    func selectSubtitleTrack(_ trackId: Int) {
+    /// Update available subtitle tracks (Wrapper for service)
+    func updateSubtitleTracks() {
         Task {
-            await subtitleService.selectTrack(trackId)
+            await subtitleService.scanEmbeddedTracks()
+        }
+    }
+
+    /// Update available audio tracks
+    func updateAudioTracks() {
+        let tracks = mpvWrapper.getAudioTracks()
+        self.availableAudioTracks = tracks
+
+        // Sync current track
+        let currentId = mpvWrapper.getCurrentAudioTrack()
+        if let current = tracks.first(where: { $0.id == currentId }) {
+            self.currentAudioTrack = current
         }
     }
 
@@ -759,40 +778,93 @@ class MPVPlayerViewModel: ObservableObject {
                 print("✅ Good version match: \(subtitle.label)")
             }
         }
-
-        // Update available tracks
+        
         // Update available tracks
         Task {
             await subtitleService.scanEmbeddedTracks()
         }
-    }
+    }    // MARK: - Phantom Sync / Snap-Seek Logic
 
-    /// Update available subtitle tracks (Wrapper for service)
-    func updateSubtitleTracks() {
-        Task {
-            await subtitleService.scanEmbeddedTracks()
+    private func completeTrackSwitch() {
+        print("🎯 Completing track switch (Snap-Seek)...")
+        
+        // Reset state immediately to avoid re-triggering
+        isSwitchingTracks = false
+        
+        let switchDuration = Date().timeIntervalSince(trackSwitchStartTime ?? Date())
+        print("⏱️ Switch took: \(Int(switchDuration * 1000))ms")
+
+        // 1. HOST LOGIC: Phantom Sync
+        if isWatchPartyHost {
+            let targetTime = trackSwitchStartPos + switchDuration
+            print("👻 Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime))s (skipped stalling period)")
+            
+            // Seek to where we would have been
+            Task { @MainActor in
+                await playbackService.seek(to: targetTime)
+                // Resume sync broadcasts if we paused them (optional implementation detail, but here we just seek)
+            }
         }
-    }
-
-    /// Update available audio tracks
-    func updateAudioTracks() {
-        let tracks = mpvWrapper.getAudioTracks()
-        self.availableAudioTracks = tracks
-
-        // Sync current track
-        let currentId = mpvWrapper.getCurrentAudioTrack()
-        if let current = tracks.first(where: { $0.id == currentId }) {
-            self.currentAudioTrack = current
+        
+        // 2. GUEST LOGIC: Snap-Seek Catch-up
+        else if isInWatchParty {
+             // Calculate where the host is NOW
+            if let manager = realtimeManager {
+                Task {
+                    let remotePos = await manager.getInterpolatedPosition()
+                    let drift = abs(remotePos - self.currentTime)
+                    
+                    print("⚡ Guest: Snap-Seek - Host is at \(String(format: "%.3f", remotePos))s (Drift: \(Int(drift * 1000))ms)")
+                    
+                    // Always snap if drift is significant (> 100ms)
+                    if drift > 0.1 {
+                        print("⚡ Executing Snap-Seek to Host time")
+                        await playbackService.seek(to: remotePos)
+                    } else {
+                        print("✅ Drift is negligible, skipping snap")
+                    }
+                }
+            }
         }
+        
+        // Clear buffering state manually since we consumed the event
+        self.isBuffering = false
+        self.isLoading = false
     }
+
+    // MARK: - Track Selection
 
     func setAudioTrack(_ track: AudioTrack) {
+        if isInWatchParty {
+            print("🔄 Switching audio track in Watch Party Mode...")
+            isSwitchingTracks = true
+            trackSwitchStartTime = Date()
+            trackSwitchStartPos = currentTime
+        }
+        
         mpvWrapper.setAudioTrack(track.id)
         self.currentAudioTrack = track
         self.updateAudioTracks()
     }
+    
+    /// Select subtitle track by ID
+    /// - Parameter trackId: Track ID (0 = off, or valid track ID)
+    func selectSubtitleTrack(_ trackId: Int) {
+        // Only apply special sync logic for EMBEDDED tracks
+        // External tracks don't cause stalling, so simpler is better
+        let isEmbedded = availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
+        
+        if isInWatchParty && isEmbedded {
+             print("🔄 Switching embedded subtitle track in Watch Party Mode...")
+             isSwitchingTracks = true
+             trackSwitchStartTime = Date()
+             trackSwitchStartPos = currentTime
+        }
 
-    // MARK: - Track Selection
+        Task {
+            await subtitleService.selectTrack(trackId)
+        }
+    }
 
     @discardableResult
     private func selectEnglishDefaults() -> Bool {

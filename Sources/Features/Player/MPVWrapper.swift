@@ -596,15 +596,21 @@ class MPVWrapper: ObservableObject {
                         : nil
                     mpv_free(titleStr)
 
-                    NSLog("✅ Found subtitle track: ID=%lld, lang=%@, title=%@", trackId, lang ?? "nil", title ?? "nil")
-                    tracks.append(SubtitleTrack(id: Int(trackId), lang: lang, title: title))
+                    // Get external flag
+                    let externalKey = "track-list/\(i)/external"
+                    var isExternalVal: Int64 = 0
+                    mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternalVal)
+                    let isExternal = isExternalVal != 0
+
+                    NSLog("✅ Found subtitle track: ID=%lld, lang=%@, title=%@, external=%d", trackId, lang ?? "nil", title ?? "nil", isExternal)
+                    tracks.append(SubtitleTrack(id: Int(trackId), lang: lang, title: title, isExternal: isExternal))
                 }
             }
         }
 
         // Only add "Off" track if MPV doesn't already provide one
         if !hasOffTrack {
-            tracks.insert(SubtitleTrack(id: 0, lang: nil, title: "Off"), at: 0)
+            tracks.insert(SubtitleTrack(id: 0, lang: nil, title: "Off", isExternal: false), at: 0)
         }
 
         NSLog("📊 Total subtitle tracks found: %d (including Off if needed)", tracks.count)

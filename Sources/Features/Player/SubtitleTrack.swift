@@ -4,6 +4,7 @@ struct SubtitleTrack: Equatable, Identifiable {
     let id: Int
     let lang: String?
     let title: String?
+    let isExternal: Bool
 
     var displayName: String {
         // Translate common language names to English

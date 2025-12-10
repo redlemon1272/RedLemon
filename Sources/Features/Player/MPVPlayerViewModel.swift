@@ -1341,6 +1341,14 @@ extension MPVPlayerViewModel {
         guard isWatchPartyHost else { return }
         print("🏠 Host triggering return to lobby...")
 
+        // 1. Clear DB State IMMEDIATELY (Prevent race condition for quick-returning guests)
+        Task {
+            if let roomId = appState?.currentRoomId {
+                try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
+                print("✅ Host cleared DB playback state before exit")
+            }
+        }
+
         // Send sync message to guests
         let message = SyncMessage(
             type: .returnToLobby,

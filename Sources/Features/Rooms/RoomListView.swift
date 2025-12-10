@@ -105,9 +105,8 @@ struct RoomListView: View {
             })
         }
         .onAppear {
-            if appState.activeRooms.isEmpty {
-                loadRooms(reset: true)
-            }
+            // Always refresh list when appearing to ensure stale (private) rooms are removed
+            loadRooms(reset: true)
             Task {
                 await setupRealtimeSubscription()
             }
@@ -487,6 +486,15 @@ struct RoomListView: View {
         // CASE 2: UPDATE / INSERT
         guard let newRecord = payload["new"] as? [String: Any],
               let roomId = newRecord["id"] as? String else {
+            return
+        }
+        
+        // CHECK: If room became private (Soft Close), remove it
+        if let isPublic = newRecord["is_public"] as? Bool, !isPublic {
+            print("🙈 RoomListView: Room \(roomId) is now private (Soft Closed) - Removing from list")
+            if let index = appState.activeRooms.firstIndex(where: { $0.id == roomId }) {
+                appState.activeRooms.remove(at: index)
+            }
             return
         }
 

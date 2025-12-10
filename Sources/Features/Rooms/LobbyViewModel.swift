@@ -826,6 +826,13 @@ class LobbyViewModel: ObservableObject {
             }
             self.isPlaylistMode = true
 
+            // Sync to AppState so MPVPlayerView sees it
+            if var room = self.appState?.currentWatchPartyRoom {
+                room.playlist = self.playlist
+                room.currentPlaylistIndex = self.currentPlaylistIndex
+                self.appState?.currentWatchPartyRoom = room
+            }
+
             // Persist to Supabase
             self.updatePlaylistInDatabase()
         }

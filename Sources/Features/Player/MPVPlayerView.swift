@@ -1459,7 +1459,6 @@ struct PlaylistModalView: View {
                                 .contentShape(Rectangle())
                             }
                             .buttonStyle(.plain)
-                            .disabled(!isHost) // Guests can view but not change
                         }
                     }
                     .padding(.horizontal, 24)
@@ -1473,7 +1472,7 @@ struct PlaylistModalView: View {
             }
         }
         .frame(width: 450)
-        .background(Color(white: 0.25).opacity(0.95))
+        .background(.regularMaterial)
         .cornerRadius(16)
         .shadow(radius: 20)
         .overlay(

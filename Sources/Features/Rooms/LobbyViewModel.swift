@@ -224,11 +224,33 @@ class LobbyViewModel: ObservableObject {
 
         // Connect - the onSync callback will handle all sync messages including chat
         do {
+            // Configure Realtime to listen for Room updates (Playlist changes)
+            let roomUpdatesConfig: [[String: Any]] = [
+                [
+                    "event": "UPDATE",
+                    "schema": "public",
+                    "table": "rooms",
+                    "filter": "id=eq.\(room.id)"
+                ]
+            ]
+            
+            // Note: We register the handler globally on the client since RealtimeChannelManager handles the channel join
+            // This works because SupabaseRealtimeClient's postgres handlers are global for the connection
+            await SupabaseClient.shared.realtimeClient.onPostgresChange { [weak self] payload in
+                 // Verify this update is for our room (though filter should catch it)
+                 // Just trigger fetch
+                 print("📨 Lobby: Received Room UPDATE from Realtime")
+                 Task { [weak self] in
+                     await self?.fetchFreshRoomState()
+                 }
+            }
+
             try await realtimeManager?.setup(
                 roomId: room.id,
                 isHost: isHost,
                 userId: participantId,
                 username: appState?.currentUsername ?? "User",
+                postgresChanges: roomUpdatesConfig,
                 onSync: { [weak self] message in
                     Task { @MainActor [weak self] in
                         guard let self = self else { return }

@@ -10,7 +10,7 @@ enum RealtimeConnectionState {
 
 /// Protocol for RealtimeChannelManager to enable mocking
 protocol RealtimeService: Actor {
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, onSync: @escaping (SyncMessage) -> Void) async throws
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]?, onSync: @escaping (SyncMessage) -> Void) async throws
     func sendSyncMessage(_ message: SyncMessage) async throws
     func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
     func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
@@ -70,7 +70,7 @@ actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Setup
 
-    func setup(roomId: String, isHost: Bool, userId: String, username: String, onSync: @escaping (SyncMessage) -> Void) async throws {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, postgresChanges: [[String: Any]]? = nil, onSync: @escaping (SyncMessage) -> Void) async throws {
         self.roomId = roomId
         self.isHost = isHost
         self.userId = userId
@@ -95,7 +95,7 @@ actor RealtimeChannelManager: RealtimeService {
             print("ℹ️ Already joined channel \(channelName), skipping join")
         } else {
             // Join the channel
-            try await realtimeClient.joinChannel(channelName)
+            try await realtimeClient.joinChannel(channelName, postgresChanges: postgresChanges)
         }
 
         // Track presence

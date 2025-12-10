@@ -1473,7 +1473,7 @@ struct PlaylistModalView: View {
             }
         }
         .frame(width: 450)
-        .background(.regularMaterial)
+        .background(Color(white: 0.15).opacity(0.95))
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.4), radius: 20, x: 0, y: 10)
         .overlay(

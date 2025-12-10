@@ -1560,11 +1560,11 @@ extension MPVPlayerViewModel {
         case .playbackState:
             // Guest syncs to host's playback state with advanced smoothness optimization
             let hostTimestamp = message.timestamp
-            guard let isPlaying = message.isPlaying else { return }
+            guard let remoteIsPlaying = message.isPlaying else { return }
 
             // FIX: Ensure waiting overlay is dismissed if host is playing
             // This handles cases where the initial .play command was missed
-            if isPlaying && showWaitingForGuests {
+            if remoteIsPlaying && showWaitingForGuests {
                 print("🎬 Received playback state (playing) - Dismissing waiting overlay")
                 showWaitingForGuests = false
 
@@ -1669,10 +1669,14 @@ extension MPVPlayerViewModel {
             }
 
             // Sync play/pause state
-            if isPlaying && !isPlaying {
-                await playbackService.togglePlayPause()
-            } else if !isPlaying && isPlaying {
-                await playbackService.togglePlayPause()
+            // FIX: Shadowing bug resolved. "remoteIsPlaying" is the source of truth from host.
+            // "self.isPlaying" is our current local state.
+            if remoteIsPlaying && !self.isPlaying {
+                print("▶️ Sync: Resuming playback to match Host")
+                await playbackService.play()
+            } else if !remoteIsPlaying && self.isPlaying {
+                print("⏸️ Sync: Pausing playback to match Host")
+                await playbackService.pause()
             }
 
 

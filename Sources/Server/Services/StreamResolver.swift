@@ -470,37 +470,48 @@ actor StreamResolver {
     private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
         let lower = title.lowercased()
         
-        // Explicit foreign language indicators (primary audio is NOT English)
+        // 1. Check if explicitly marked as English FIRST
+        // Use strict matching for short codes to avoid false positives (e.g. "Fr-en-ch" matching "en")
+        let hasEnglish = lower.contains("english") || 
+                        lower.contains(".eng.") || lower.contains(" eng ") || lower.contains("-eng-") || lower.hasSuffix(".eng") ||
+                        lower.contains(".en.") || lower.contains(" en ") || lower.contains("-en-") || lower.hasSuffix(".en")
+        if hasEnglish { return true }
+        
+        // 2. Explicit foreign language indicators (primary audio is NOT English)
         let isForeign = lower.contains("french") || 
                        lower.contains("german") || 
                        lower.contains("spanish") || 
-                       lower.contains("italian") ||
-                       lower.contains("portuguese") ||
-                       lower.contains("russian") ||
-                       lower.contains("japanese") ||
-                       lower.contains("korean") ||
-                       lower.contains("chinese")
+                       lower.contains("italian") || 
+                       lower.contains("portuguese") || 
+                       lower.contains("russian") || 
+                       lower.contains("japanese") || 
+                       lower.contains("korean") || 
+                       lower.contains("chinese") || 
+                       lower.contains("国粤") || // Mandarin/Cantonese
+                       lower.contains("中文字幕") || // Chinese Subs
+                       lower.contains("韩文") // Korean
         
-        // French-specific audio indicators (VF = Version Française)
-        // These indicate French is the primary audio, even if English is also present
+        // 3. French-specific audio indicators (VF = Version Française)
         let frenchAudioIndicators = [
             " vf ", ".vf.", "-vf-", "_vf_",  // Version Française
             " vff ", ".vff.", "-vff-",         // Version Française Française
             " vfq ", ".vfq.", "-vfq-",         // Version Française Québécoise
             " vf2 ", ".vf2.", "-vf2-",         // Version Française 2
             "vostfr",                             // Version Originale Sous-Titrée FRançais
-            "truefrench"                          // TrueFrench (French audio)
+            "truefrench",                         // TrueFrench (French audio)
+            "rififi"                              // Known French release group
         ]
         let hasFrenchAudio = frenchAudioIndicators.contains { lower.contains($0) }
         
         // If it has French audio indicators, block it
         if hasFrenchAudio { return false }
         
-        let hasEnglish = lower.contains("english") || lower.contains("eng") || lower.contains("en")
-        let isMulti = lower.contains("multi") || lower.contains("dual")
+        // Block explicit foreign languages next
+        if isForeign { return false }
         
-        if isMulti || hasEnglish { return true }
-        if isForeign { return false } // Explicitly foreign only
+        // 4. THEN allow Multi/Dual if it wasn't already blocked as foreign
+        let isMulti = lower.contains("multi") || lower.contains("dual")
+        if isMulti { return true }
         
         // Block "DUB" releases if they aren't marked as English/Multi
         // "DUB" usually implies dubbing into a non-English language (for English movies) 

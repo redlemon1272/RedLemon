@@ -44,6 +44,9 @@ struct WatchPartyLobbyView: View {
             viewModel.connect()
 
             if appState.shouldAutoJoinLobby {
+                // CRITICAL FIX: Late Joiners should skip the 8s safety delay
+                viewModel.enableInstantJoin()
+
                 isAutoJoining = true
                 // Auto-ready after a brief delay to allow connection
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {

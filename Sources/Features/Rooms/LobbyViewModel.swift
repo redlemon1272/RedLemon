@@ -42,6 +42,7 @@ class LobbyViewModel: ObservableObject {
     private var realtimeManager: RealtimeChannelManager?
     private var playbackEndedTimestamp: Date? // Track when playback ended to prevent immediate re-join race condition
     private var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
+    private var canAutoJoin: Bool = false // Safety flag: Prevents auto-join immediately upon entry (race condition protection)
 
     // Helper to track state safely across actor boundaries (specifically for deinit)
     private class TransitionState {
@@ -105,6 +106,25 @@ class LobbyViewModel: ObservableObject {
                  try? await SupabaseClient.shared.updateRoomPlayback(roomId: room.id, position: 0, isPlaying: false)
              }
         }
+
+        
+        // Safety Delay for Auto-Join (User Rooms)
+        // If we join and DB says "Playing", it might be STALE (Host in Lobby).
+        // Wait 8 seconds. If it's STILL playing, then it's real.
+        Task {
+            try? await Task.sleep(nanoseconds: 8 * 1_000_000_000)
+            await MainActor.run {
+                self.canAutoJoin = true
+                print("🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.")
+            }
+        }
+    }
+
+    // Called by View when "Auto Join" intent is detected (e.g. User clicked "Join" on a playing room)
+    // This bypasses the safety delay because the user explicitly asked to join NOW.
+    func enableInstantJoin() {
+        print("🚀 Lobby: Enabling INSTANT JOIN (Late Joiner detected)")
+        self.canAutoJoin = true
     }
 
     deinit {

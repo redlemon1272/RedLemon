@@ -341,10 +341,33 @@ struct EventsView: View {
                 return
             }
 
+            // Variables to hold stream selection details to ensure synchronization
+            var selectedStreamHash: String? = nil
+            var selectedUnlockedURL: String? = nil
+            var selectedQuality: String? = nil
+            var selectedFileIdx: Int? = nil
+
             // Try to get existing room
             let existingRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId)
-            if existingRoom != nil {
+            if let existingRoom = existingRoom {
                 print("✅ Event room already exists: \(roomId)")
+                
+                // CRITICAL: Extract stream details from the server room to ensure we match the host/server state
+                // This prevents independent resolution which causes desync (Colombiana bug)
+                selectedStreamHash = existingRoom.streamHash
+                selectedUnlockedURL = existingRoom.unlockedStreamUrl
+                selectedQuality = existingRoom.quality
+                selectedFileIdx = existingRoom.fileIdx
+                
+                if let hash = selectedStreamHash {
+                    print("\n✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑")
+                    print("   UnlockedURL: \(selectedUnlockedURL?.prefix(20) ?? "nil")...")
+                    print("   Hash: \(hash)")
+                    print("   Quality: \(selectedQuality ?? "nil")")
+                    print("   FileIdx: \(selectedFileIdx ?? -1)")
+                    print("   🔗 Locking to server-provided stream hash: \(hash)\n")
+                }
+
                 // Join the existing room
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
             } else {
@@ -370,6 +393,9 @@ struct EventsView: View {
                     print("⚠️ Failed to resolve seed stream for system event: \(error)")
                     // Continue creation without a hash (clients will have to resolve themselves as fallback)
                 }
+                
+                // Use the resolved hash for our local state too
+                selectedStreamHash = initialStreamHash
 
                 _ = try await SupabaseClient.shared.createRoom(
                     id: roomId,
@@ -388,7 +414,14 @@ struct EventsView: View {
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
             }
 
-            createLocalEventRoom(event: event, roomId: roomId)
+            createLocalEventRoom(
+                event: event, 
+                roomId: roomId, 
+                streamHash: selectedStreamHash, 
+                unlockedStreamUrl: selectedUnlockedURL,
+                quality: selectedQuality,
+                fileIdx: selectedFileIdx
+            )
         } catch {
             print("❌ Failed to create/join event room: \(error)")
             // Fall back to local-only room (no chat sync)
@@ -397,7 +430,14 @@ struct EventsView: View {
     }
 
     @MainActor
-    private func createLocalEventRoom(event: EventItem, roomId: String) {
+    private func createLocalEventRoom(
+        event: EventItem, 
+        roomId: String,
+        streamHash: String? = nil,
+        unlockedStreamUrl: String? = nil,
+        quality: String? = nil,
+        fileIdx: Int? = nil
+    ) {
         // Calculate current position for live events
         let now = TimeService.shared.now
         let position: Double
@@ -412,6 +452,12 @@ struct EventsView: View {
             print("🎭 Upcoming event - position: 0")
         }
 
+        // Parse quality string to VideoQuality enum if possible
+        var parsedQuality: VideoQuality = .fullHD // Default to FullHD for events
+        if let q = quality, let pq = VideoQuality(rawValue: q) {
+            parsedQuality = pq
+        }
+
         // Create a WatchPartyRoom for this event
         let room = WatchPartyRoom(
             id: roomId,
@@ -420,7 +466,7 @@ struct EventsView: View {
             mediaItem: event.mediaItem,
             season: nil,
             episode: nil,
-            quality: .fullHD,
+            quality: parsedQuality,
             sourceQuality: nil,
             description: "Live Event",
             posterURL: event.mediaItem.poster,
@@ -435,10 +481,10 @@ struct EventsView: View {
             isPersistent: true,  // Events are persistent
             playbackPosition: nil,
             runtime: nil,
-            selectedStreamHash: nil,
-            selectedFileIdx: nil,
-            selectedQuality: nil,
-            unlockedStreamURL: nil
+            selectedStreamHash: streamHash,
+            selectedFileIdx: fileIdx,
+            selectedQuality: quality,
+            unlockedStreamURL: unlockedStreamUrl
         )
 
         print("   Room createdAt: \(room.createdAt)")

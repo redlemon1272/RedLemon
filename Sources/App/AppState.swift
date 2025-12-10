@@ -146,6 +146,10 @@ class AppState: ObservableObject {
                let hostQuality = watchPartyRoom.selectedQuality,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
 
+                print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
+                print("   Hash: \(hostStreamHash)")
+                print("   Quality: \(hostQuality)")
+                print("   Skipping local resolution to ensure perfect sync.\n")
                 NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
                 // Create stream with host's unlocked URL
                 var hostStream = Stream(

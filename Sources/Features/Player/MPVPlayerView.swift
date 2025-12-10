@@ -68,8 +68,10 @@ struct MPVPlayerView: View {
     @State private var eventAutoExitTimer: Timer?
 
     // Track selection menus
-    @State private var showSubtitleMenu = false
     @State private var showAudioMenu = false
+    @State private var showSubtitleMenu = false
+    @State private var showPlaylistMenu = false
+    @State private var volume: Double = 1.0
     @State private var subtitleMenuExpanded = false
 
     // Stream info (passed from ContentView)
@@ -500,6 +502,27 @@ struct MPVPlayerView: View {
             waitingForGuestsOverlay
                 .zIndex(100)
         }
+        
+        // SYNC INFO PILL
+        if let syncStatus = viewModel.syncStatus {
+            VStack {
+                Text(syncStatus)
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(12)
+                    .overlay(
+                        Capsule()
+                            .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                    )
+                    .padding(.top, 16)
+                Spacer()
+            }
+            .transition(.opacity)
+            .zIndex(90)
+        }
     }
 
     private var waitingForGuestsOverlay: some View {
@@ -569,6 +592,10 @@ struct MPVPlayerView: View {
         .buttonStyle(PlainButtonStyle())
         .padding(12)
     }
+
+
+
+
 
     private var playerControlsBar: some View {
         VStack(spacing: 0) {
@@ -830,6 +857,11 @@ struct MPVPlayerView: View {
                             }
                         }
                     }
+
+
+                    // Playlist Button
+                    // Playlist Button
+                    PlaylistButton(showPlaylistMenu: $showPlaylistMenu)
 
                     Spacer()
                 }
@@ -1263,5 +1295,107 @@ struct MPVPlayerView_Previews: PreviewProvider {
             isSeries: false
         )
         .frame(width: 1280, height: 720)
+    }
+}
+
+// MARK: - Playlist Subviews
+
+struct PlaylistButton: View {
+    @EnvironmentObject var appState: AppState
+    @Binding var showPlaylistMenu: Bool
+    
+    var body: some View {
+        if let playlist = appState.currentWatchPartyRoom?.playlist, !playlist.isEmpty {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.15)) {
+                    showPlaylistMenu.toggle()
+                }
+            }) {
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.2))
+                        .frame(width: 40, height: 40)
+                    
+                    Image(systemName: "list.and.film")
+                        .font(.system(size: 16))
+                        .foregroundColor(.white)
+                }
+            }
+            .buttonStyle(.plain)
+            .overlay(alignment: .top) {
+                if showPlaylistMenu {
+                    PlaylistMenuContent(playlist: playlist, currentIndex: appState.currentWatchPartyRoom?.currentPlaylistIndex ?? 0, showPlaylistMenu: $showPlaylistMenu)
+                }
+            }
+        }
+    }
+}
+
+struct PlaylistMenuContent: View {
+    let playlist: [PlaylistItem]
+    let currentIndex: Int
+    @Binding var showPlaylistMenu: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Playlist")
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.primary)
+                .padding(.horizontal, 12)
+                .padding(.top, 12)
+                .padding(.bottom, 8)
+                
+            ScrollView {
+                VStack(spacing: 0) {
+                    ForEach(Array(playlist.enumerated()), id: \.element.id) { index, item in
+                         HStack(spacing: 8) {
+                             // Icons
+                             if index == currentIndex {
+                                 Image(systemName: "play.fill")
+                                     .font(.system(size: 10))
+                                     .foregroundColor(.green)
+                                     .frame(width: 16)
+                             } else if index < currentIndex {
+                                 Image(systemName: "checkmark")
+                                     .font(.system(size: 10))
+                                     .foregroundColor(.secondary)
+                                     .frame(width: 16)
+                             } else {
+                                 Text("\(index + 1)")
+                                     .font(.system(size: 10))
+                                     .foregroundColor(.secondary)
+                                     .frame(width: 16)
+                                     .multilineTextAlignment(.center)
+                             }
+                             
+                             Text(item.displayTitle)
+                                 .font(.system(size: 13))
+                                 .foregroundColor(index == currentIndex ? .green : .primary)
+                                 .lineLimit(1)
+                             
+                             Spacer()
+                         }
+                         .padding(.horizontal, 12)
+                         .padding(.vertical, 8)
+                         .contentShape(Rectangle())
+                    }
+                }
+            }
+            .frame(maxHeight: 200)
+        }
+        .background(.regularMaterial)
+        .cornerRadius(8)
+        .shadow(radius: 10)
+        .frame(width: 250)
+        .offset(y: -10)
+        .transition(.opacity)
+        .zIndex(100)
+        .onHover { isHovering in
+            if !isHovering {
+                withAnimation(.easeInOut(duration: 0.15)) {
+                    showPlaylistMenu = false
+                }
+            }
+        }
     }
 }

@@ -127,9 +127,11 @@ class MPVPlayerViewModel: ObservableObject {
                     guard let self = self else { return }
                     if isBuffering {
                         print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
+                        self.isBuffering = true
                         self.isLoading = true
                     } else if self.hasVideoReadyTriggered && !isBuffering {
                         print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
+                        self.isBuffering = false
                         self.isLoading = false
                     }
                 }
@@ -214,8 +216,14 @@ class MPVPlayerViewModel: ObservableObject {
     // Visual state
     @Published var posterURL: String?
     @Published var backgroundURL: String?
-    @Published var logoURL: String?
+    @Published var logoURL: String? = nil
     @Published var showPoster: Bool = true  // Show during loading
+    @Published var isVideoTitleVisible: Bool = false
+    
+    // UI Enhancements
+    @Published var syncStatus: String? = nil
+    @Published var isBuffering: Bool = false
+    @Published var isSeeking: Bool = false
 
     // Chat state
     @Published var showChat: Bool = false
@@ -647,7 +655,11 @@ class MPVPlayerViewModel: ObservableObject {
 
     func seek(to time: Double) {
         Task { @MainActor in
+            self.isSeeking = true
             await playbackService.seek(to: time)
+            // Keep "Syncing..." state for a moment to allow playback to stabilize
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
+            self.isSeeking = false
         }
         print("⏩ Seeking to \(Int(time))s")
 
@@ -1604,6 +1616,22 @@ extension MPVPlayerViewModel {
             // Calculate smoothed drift (moving average)
             let smoothedDrift = driftHistory.reduce(0.0, +) / Double(driftHistory.count)
             let absSmoothedDrift = abs(smoothedDrift)
+            
+            // UPDATE SYNC STATUS UI
+            // Logic:
+            // 1. If actively seeking/buffering -> "Syncing... 🟡"
+            // 2. If drift < 2.0s -> "Synced 🟢"
+            // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
+            
+            if isBuffering || isSeeking {
+                syncStatus = "Syncing... 🟡"
+            } else if absSmoothedDrift < 2.0 {
+                 // Fade out "Synced" after a while? For now keep it static as requested.
+                 syncStatus = "Synced 🟢"
+            } else {
+                 let symbol = smoothedDrift > 0 ? "+" : ""
+                 syncStatus = "Drift: \(symbol)\(String(format: "%.1f", -smoothedDrift))s 🔴"
+            }
 
             // Advanced tiered sync with hysteresis and adaptive thresholds
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls

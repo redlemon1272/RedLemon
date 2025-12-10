@@ -1341,6 +1341,9 @@ extension MPVPlayerViewModel {
         guard isWatchPartyHost else { return }
         print("🏠 Host triggering return to lobby...")
 
+        // Set message for Host
+        appState?.pendingLobbyMessage = "You returned the group to the lobby."
+
         // 1. Clear DB State IMMEDIATELY (Prevent race condition for quick-returning guests)
         Task {
             if let roomId = appState?.currentRoomId {
@@ -1828,6 +1831,9 @@ extension MPVPlayerViewModel {
             
         case .returnToLobby:
             print("🏠 Received Return to Lobby signal from Host")
+            
+            // Set message for Guest
+            appState?.pendingLobbyMessage = "Host returned the group to the lobby."
             // Perform cleanup and navigate back to lobby
             Task { @MainActor [weak self] in
                 guard let self = self else { return }

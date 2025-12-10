@@ -266,6 +266,13 @@ class LobbyViewModel: ObservableObject {
     }
 
     func connect() {
+        // Check for pending messages from Player (e.g. "Host returned to lobby")
+        if let msg = appState?.pendingLobbyMessage {
+            print("🔔 Lobby: Displaying pending message: \(msg)")
+            addMessage(.systemInfo, userName: "System", text: msg)
+            appState?.pendingLobbyMessage = nil
+        }
+
         // Prevent multiple connection attempts
         if realtimeConnectionStatus == .connected || realtimeConnectionStatus == .connecting {
             print("⚠️ Lobby: Already connected or connecting - skipping duplicate connect call")

@@ -79,6 +79,9 @@ class AppState: ObservableObject {
     // User authentication (simple username)
     @Published var currentUsername: String = ""
     @Published var currentUserId: UUID?
+    
+    // Message passing (Player -> Lobby)
+    @Published var pendingLobbyMessage: String? = nil
 
     // TV Show support
     @Published var selectedSeason: Int?

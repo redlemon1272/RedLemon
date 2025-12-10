@@ -4,6 +4,24 @@ import AppKit
 
 @MainActor
 class AppState: ObservableObject {
+    
+    // Dependencies
+    private let metadataProvider: MetadataProvider
+    private let streamResolver: StreamResolving
+    private let roomManager: RoomManager
+    private let userManager: UserManager
+    
+    init(
+        metadataProvider: MetadataProvider = LocalAPIClient.shared,
+        streamResolver: StreamResolving = StreamService.shared,
+        roomManager: RoomManager = SupabaseClient.shared,
+        userManager: UserManager = SupabaseClient.shared
+    ) {
+        self.metadataProvider = metadataProvider
+        self.streamResolver = streamResolver
+        self.roomManager = roomManager
+        self.userManager = userManager
+    }
 
     // MARK: - Performance Settings (Hardware Detection Removed)
     // Fixed conservative settings for all devices to prevent crashes
@@ -99,7 +117,7 @@ class AppState: ObservableObject {
 
             // Step 1: Fetch metadata immediately for UI feedback
             NSLog("📡 Fetching metadata for \(item.id)...")
-            let metadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
+            let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
             // Update UI immediately so background art shows
             await MainActor.run {
@@ -152,7 +170,7 @@ class AppState: ObservableObject {
                 
             } else {
                 // Standard resolution
-                let result = try await StreamService.shared.resolveStream(
+                let result = try await streamResolver.resolveStream(
                     item: item,
                     quality: quality,
                     season: season,
@@ -202,7 +220,7 @@ class AppState: ObservableObject {
                 if selectedMetadata == nil {
                     // Try to at least fetch metadata for background
                     Task {
-                        if let meta = try? await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id) {
+                        if let meta = try? await metadataProvider.fetchMetadata(type: item.type, id: item.id) {
                             await MainActor.run { self.selectedMetadata = meta }
                         }
                     }
@@ -220,7 +238,7 @@ class AppState: ObservableObject {
             NSLog("   Quality: \(quality.rawValue)")
 
             // Step 1: Fetch metadata immediately
-            let metadata = try await LocalAPIClient.shared.fetchMetadata(type: item.type, id: item.id)
+            let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
             // Update UI immediately
             await MainActor.run {
@@ -266,7 +284,7 @@ class AppState: ObservableObject {
                 resolvedStream = hostStream
                 
             } else {
-                let result = try await StreamService.shared.resolveStream(
+                let result = try await streamResolver.resolveStream(
                     item: item,
                     quality: quality,
                     season: season,
@@ -335,14 +353,14 @@ class AppState: ObservableObject {
         }
 
         // Step 0: Ensure metadata is loaded
-        let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+        let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
         
         // Step 1: Resolve Stream
         // Use passed parameters if available, otherwise fallback to AppState selection (legacy behavior)
         let targetSeason = season ?? (mediaItem.type == "series" ? selectedSeason : nil)
         let targetEpisode = episode ?? (mediaItem.type == "series" ? selectedEpisode : nil)
         
-        let result = try await StreamService.shared.resolveStream(
+        let result = try await streamResolver.resolveStream(
             item: mediaItem,
             quality: quality,
             season: targetSeason,
@@ -351,7 +369,7 @@ class AppState: ObservableObject {
         )
         
         // Step 2: Unlock Stream
-        let unlockedStream = try await StreamService.shared.unlockStream(
+        let unlockedStream = try await streamResolver.unlockStream(
             stream: result.stream,
             item: mediaItem,
             season: targetSeason,
@@ -375,7 +393,7 @@ class AppState: ObservableObject {
         }
         
         // Persist to Supabase
-        try await SupabaseClient.shared.updateRoomStream(
+        try await roomManager.updateRoomStream(
             roomId: roomId,
             streamHash: unlockedStream.infoHash,
             fileIdx: unlockedStream.fileIdx,
@@ -407,7 +425,7 @@ class AppState: ObservableObject {
             // Step 1: Load metadata if needed
             var metadata = selectedMetadata
             if metadata == nil || metadata?.id != mediaItem.id {
-                metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+                metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
                 await MainActor.run { selectedMetadata = metadata }
             }
 
@@ -415,7 +433,7 @@ class AppState: ObservableObject {
             let season = mediaItem.type == "series" ? selectedSeason : nil
             let episode = mediaItem.type == "series" ? selectedEpisode : nil
 
-            let unlockedStream = try await StreamService.shared.unlockStream(
+            let unlockedStream = try await streamResolver.unlockStream(
                 stream: stream,
                 item: mediaItem,
                 season: season,
@@ -453,7 +471,7 @@ class AppState: ObservableObject {
                 
                 // Persist to Supabase
                 Task {
-                    try? await SupabaseClient.shared.updateRoomStream(
+                    try? await roomManager.updateRoomStream(
                         roomId: roomId,
                         streamHash: unlockedStream.infoHash,
                         fileIdx: unlockedStream.fileIdx,
@@ -692,7 +710,7 @@ class AppState: ObservableObject {
             // Attempt 1: Try with new fields (Description / IsPublic)
             var room: SupabaseRoom!
             do {
-                room = try await SupabaseClient.shared.createRoom(
+                room = try await roomManager.createRoom(
                     id: roomId,
                     name: roomName,
                     hostUserId: userId,
@@ -704,13 +722,14 @@ class AppState: ObservableObject {
                     season: finalSeason,
                     episode: finalEpisode,
                     isPublic: isPublic,
-                    description: description
+                    description: description,
+                    playlist: nil
                 )
                 NSLog("✅ SupabaseRoom created successfully with Description: \(room.description ?? "nil")")
              } catch {
                 NSLog("⚠️ Failed to create room with description/public flags. Retrying fallback... Error: \(error)")
                 // Attempt 2: Retry without new fields (Backward compatibility for non-migrated backend)
-                room = try await SupabaseClient.shared.createRoom(
+                room = try await roomManager.createRoom(
                     id: roomId,
                     name: roomName,
                     hostUserId: userId,
@@ -722,7 +741,8 @@ class AppState: ObservableObject {
                      season: finalSeason,
                     episode: finalEpisode,
                     isPublic: nil,      // Don't send is_public
-                    description: nil    // Don't send description
+                    description: nil,    // Don't send description
+                    playlist: nil
                 )
                 NSLog("⚠️ Fallback room created (No Description logged in returned object)")
              }
@@ -731,7 +751,7 @@ class AppState: ObservableObject {
 
             // CRITICAL: Host must join the room in the database immediately
             // Otherwise polling will think the host "left" because they aren't in the participants table
-            try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: true)
+            try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: true)
             NSLog("✅ Host joined room in database")
 
             // Create host participant
@@ -784,7 +804,7 @@ class AppState: ObservableObject {
             self.selectedQuality = quality
             // Fetch metadata if needed
             if self.selectedMetadata == nil || self.selectedMetadata?.id != mediaItem.id {
-                self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
+                self.selectedMetadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
             }
 
             // Navigate to lobby
@@ -813,7 +833,7 @@ class AppState: ObservableObject {
         do {
             // Join in database first (to ensure participant record exists)
             // But first, fetch room details to ensure it exists
-            let roomState = try await SupabaseClient.shared.getRoomState(roomId: roomId)
+            let roomState = try await roomManager.getRoomState(roomId: roomId)
             
             // Check if we found the room
             guard let room = roomState else {
@@ -829,19 +849,19 @@ class AppState: ObservableObject {
 
             // Now join as participant
             if let userId = currentUserId {
-                try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
+                try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: false)
                 NSLog("✅ Guest joined room in database")
             } else {
                  NSLog("⚠️ Guest has no user ID, skipping DB join (Realtime will handle)")
             }
 
             // Create local WatchPartyRoom object
-            let participants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
+            let participants = try await roomManager.getRoomParticipants(roomId: roomId)
             var participantList: [Participant] = []
             for p in participants {
                 // Fetch user metadata for name
                 var name = "User"
-                if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
+                if let user = try? await userManager.getUserById(userId: p.userId) {
                     name = user.username
                 }
                 participantList.append(Participant(
@@ -932,7 +952,7 @@ class AppState: ObservableObject {
                     )
 
                     // Fetch metadata
-                    self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
+                    self.selectedMetadata = try await metadataProvider.fetchMetadata(
                         type: room.season != nil ? "series" : "movie",
                         id: imdbId
                     )
@@ -983,7 +1003,7 @@ class AppState: ObservableObject {
                     )
 
                     // Fetch metadata
-                    self.selectedMetadata = try await LocalAPIClient.shared.fetchMetadata(
+                    self.selectedMetadata = try await metadataProvider.fetchMetadata(
                         type: "movie", // Default
                         id: imdbId
                     )

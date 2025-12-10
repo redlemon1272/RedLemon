@@ -1,7 +1,16 @@
 import Foundation
 
+/// Protocol for fetching media metadata
+protocol MetadataProvider {
+    func fetchMetadata(type: String, id: String) async throws -> MediaMetadata
+    func fetchMediaDetails(imdbId: String, type: String) async throws -> MediaItem
+    func fetchPopularMovies() async throws -> [MediaItem]
+    func fetchPopularShows() async throws -> [MediaItem]
+    func searchMedia(query: String, type: String) async throws -> [MediaItem]
+}
+
 /// Client for communicating with local Vapor server
-class LocalAPIClient: ObservableObject {
+class LocalAPIClient: ObservableObject, MetadataProvider {
     static let shared = LocalAPIClient()
 
     private var baseURL: String {

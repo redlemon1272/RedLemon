@@ -8,10 +8,23 @@ enum RealtimeConnectionState {
     case failed
 }
 
+/// Protocol for RealtimeChannelManager to enable mocking
+protocol RealtimeService: Actor {
+    func setup(roomId: String, isHost: Bool, userId: String, username: String, onSync: @escaping (SyncMessage) -> Void) async throws
+    func sendSyncMessage(_ message: SyncMessage) async throws
+    func disconnect(leaveChannel: Bool, disconnectClient: Bool) async
+    func cleanup(leaveChannel: Bool, disconnectClient: Bool) async
+    func isRealtimeConnected() -> Bool
+    func setConnectionStateCallback(_ callback: @escaping (RealtimeConnectionState) -> Void)
+    func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
+    func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
+    func onConnectionStateChange(_ callback: @escaping (RealtimeConnectionState) -> Void)
+}
+
 // MARK: - Realtime Channel Manager for Watch Party Sync
 /// Manages Supabase Realtime channels for watch party synchronization
 /// Uses custom WebSocket client instead of Supabase SDK
-actor RealtimeChannelManager {
+actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Configuration
     private let realtimeClient: SupabaseRealtimeClient

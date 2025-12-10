@@ -2,17 +2,26 @@ import Foundation
 import Combine
 
 /// Manages stream resolution, unlocking, and subtitle downloading
-actor StreamService {
-    static let shared = StreamService()
+/// Result of stream resolution
+struct StreamResolutionResult {
+    let stream: Stream
+    let metadata: MediaMetadata
+}
 
+/// Protocol for resolving and unlocking streams
+protocol StreamResolving {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?) async throws -> StreamResolutionResult
+    func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream
+}
+
+/// Manages stream resolution, unlocking, and subtitle downloading
+actor StreamService: StreamResolving {
+    static let shared = StreamService()
+    
     private init() {}
 
     // MARK: - Stream Resolution
 
-    struct StreamResolutionResult {
-        let stream: Stream
-        let metadata: MediaMetadata
-    }
 
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil) async throws -> StreamResolutionResult {
         print("🎬 StreamService: Starting resolution for: \(item.name)")

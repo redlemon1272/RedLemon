@@ -41,7 +41,7 @@ class LobbyViewModel: ObservableObject {
     private var lastRoomPlayingState: Bool = false
     private var participantId: String
     private var isDisconnecting: Bool = false
-    private var realtimeManager: RealtimeChannelManager?
+    private var realtimeManager: (any RealtimeService)?
     private var playbackEndedTimestamp: Date? // Track when playback ended to prevent immediate re-join race condition
     private var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     private var canAutoJoin: Bool = false // Safety flag: Prevents auto-join immediately upon entry (race condition protection)
@@ -56,9 +56,10 @@ class LobbyViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    init(room: WatchPartyRoom, isHost: Bool) {
+    init(room: WatchPartyRoom, isHost: Bool, realtimeManager: (any RealtimeService)? = nil) {
         self.room = room
         self.isHost = isHost
+        self.realtimeManager = realtimeManager
         self.participants = room.participants
 
         // For hosts, use room host ID. For guests, we'll set to participantId after getting user ID
@@ -113,10 +114,10 @@ class LobbyViewModel: ObservableObject {
         // Safety Delay for Auto-Join (User Rooms)
         // If we join and DB says "Playing", it might be STALE (Host in Lobby).
         // Wait 8 seconds. If it's STILL playing, then it's real.
-        Task {
+        Task { [weak self] in
             try? await Task.sleep(nanoseconds: 8 * 1_000_000_000)
             await MainActor.run {
-                self.canAutoJoin = true
+                self?.canAutoJoin = true
                 print("🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.")
             }
         }
@@ -141,8 +142,10 @@ class LobbyViewModel: ObservableObject {
     }
 
     private func setupRealtimeSubscription() async {
-        // Initialize Realtime manager
-        self.realtimeManager = RealtimeChannelManager(realtimeClient: SupabaseClient.shared.realtimeClient)
+        // Initialize Realtime manager if not already injected (for testing)
+        if self.realtimeManager == nil {
+            self.realtimeManager = RealtimeChannelManager(realtimeClient: SupabaseClient.shared.realtimeClient)
+        }
 
         // Set up presence callback
         await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
@@ -267,7 +270,8 @@ class LobbyViewModel: ObservableObject {
 
         print("🎭 Lobby: Connecting to room \(room.id)...")
 
-        Task { [self] in
+        Task { [weak self] in
+            guard let self = self else { return }
             do {
                 // Force Host re-join to ensure presence in DB (idempotent)
                 // This fixes the "zombie host" issue where host times out during playback
@@ -397,27 +401,29 @@ class LobbyViewModel: ObservableObject {
         // Stop polling immediately
         stopPolling()
 
-        Task {
+        Task { [weak self] in
             // If we are starting the movie, DO NOT leave the room or disconnect
             // This ensures the player can take over the existing connection and DB presence
-            if isStarting {
+            guard let self = self else { return }
+            
+            if self.isStarting {
                 print("🎬 Lobby: Starting movie - skipping disconnect to preserve connection and presence")
-                isDisconnecting = false
+                self.isDisconnecting = false
                 return
             }
 
             // Leave Supabase room (use current user ID, not just host ID)
-            if isHost {
+            if self.isHost {
                 do {
                     // Soft Close: Only hide room from public list if explicitly leaving
-                    if isLeavingExplicitly {
-                        print("🙈 Host leaving explicitly: Soft closing room \(room.id)")
+                    if self.isLeavingExplicitly {
+                        print("🙈 Host leaving explicitly: Soft closing room \(self.room.id)")
                         // Attempt soft close (ignore failure)
-                        try? await SupabaseClient.shared.setRoomVisibility(roomId: room.id, isPublic: false)
+                        try? await SupabaseClient.shared.setRoomVisibility(roomId: self.room.id, isPublic: false)
                         
                         // CRITICAL: Ensure we leave the room even if soft close failed
-                        try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: UUID(uuidString: room.hostId)!)
-                        NSLog("✅ Host Left room \(room.id) (Row deleted)")
+                        try await SupabaseClient.shared.leaveRoom(roomId: self.room.id, userId: UUID(uuidString: self.room.hostId)!)
+                        NSLog("✅ Host Left room \(self.room.id) (Row deleted)")
                     } else {
                         print("⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
                         // Logic: If app crashes/closes without explicit leave, room stays "Active" until heartbeat timeout
@@ -426,17 +432,17 @@ class LobbyViewModel: ObservableObject {
                 } catch {
                     NSLog("❌ Failed to soft close/leave room: \(error)")
                 }
-            } else if let userId = appState?.currentUserId {
+            } else if let userId = self.appState?.currentUserId {
                 do {
-                    try await SupabaseClient.shared.leaveRoom(roomId: room.id, userId: userId)
-                    NSLog("✅ Left room \(room.id)")
+                    try await SupabaseClient.shared.leaveRoom(roomId: self.room.id, userId: userId)
+                    NSLog("✅ Left room \(self.room.id)")
                 } catch {
                     NSLog("❌ Failed to leave room: \(error)")
                 }
             }
 
             // Reset flag after completion (though we likely won't use this instance again)
-            isDisconnecting = false
+            self.isDisconnecting = false
         }
         countdownTask?.cancel()
 
@@ -449,7 +455,8 @@ class LobbyViewModel: ObservableObject {
         
         if isHost {
             // Notify guests that room is closing
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 print("🔒 Host closing room, notifying guests...")
                 let syncMsg = SyncMessage(
                     type: .roomClosed,
@@ -616,7 +623,8 @@ class LobbyViewModel: ObservableObject {
         participants.removeAll { $0.id == participant.id }
 
         // Send kick command via Realtime
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             let syncMsg = SyncMessage(
                 type: .chat,
                 timestamp: 0,
@@ -678,7 +686,8 @@ class LobbyViewModel: ObservableObject {
         var realtimeSuccess = false
 
         // Broadcast via Realtime with error handling
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             let syncMsg = SyncMessage(
                 type: .chat,
                 timestamp: Double(self.countdown),
@@ -691,16 +700,16 @@ class LobbyViewModel: ObservableObject {
                 try await self.realtimeManager?.sendSyncMessage(syncMsg)
                 realtimeSuccess = true
                 NSLog("✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime")
-                NSLog("📡 Realtime delivery confirmed for \(participants.count) guests")
+                NSLog("📡 Realtime delivery confirmed for \(self.participants.count) guests")
             } catch RealtimeError.channelNotReady {
                 NSLog("⚠️ Host: Realtime channel not ready - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
+                await self.addMessage(.systemInfo, userName: "System", data: [
                     "message": "Using database fallback for start signal (Realtime not ready)",
                     "reason": "Channel not ready"
                 ])
             } catch {
                 NSLog("⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
-                addMessage(.systemInfo, userName: "System", data: [
+                await self.addMessage(.systemInfo, userName: "System", data: [
                     "message": "Using database fallback for start signal",
                     "error": "\(error.localizedDescription)"
                 ])
@@ -938,7 +947,8 @@ class LobbyViewModel: ObservableObject {
                     addMessage(.hostStarting, userName: "Host")
 
                     // Guest automatically starts playback after countdown
-                    Task { @MainActor in
+                    Task { @MainActor [weak self] in
+                        guard let self = self else { return }
                         NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
 
                         // CRITICAL FIX: Update lastRoomPlayingState to prevent DB polling from triggering double-start
@@ -1076,7 +1086,10 @@ class LobbyViewModel: ObservableObject {
              NSLog("🔒 Received Room Closed signal from Host")
              addMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
              
-             Task { @MainActor in
+             addMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
+             
+             Task { @MainActor [weak self] in
+                 guard let self = self else { return }
                  self.roomClosedMessage = "The host has left the room."
                  self.showRoomClosedAlert = true
                  // We don't disconnect immediately, we let the user click OK or wait for the alert dismissal
@@ -1122,7 +1135,8 @@ class LobbyViewModel: ObservableObject {
             return
         }
 
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             do {
                 // Fetch metadata from local API
                 let mediaItem = try await LocalAPIClient.shared.fetchMediaDetails(
@@ -1132,9 +1146,9 @@ class LobbyViewModel: ObservableObject {
 
                 // Extract poster and backdrop URLs
                 await MainActor.run {
-                    posterURL = mediaItem.posterURL?.absoluteString
-                    backdropURL = mediaItem.backgroundURL?.absoluteString
-                    logoURL = mediaItem.logo
+                    self.posterURL = mediaItem.posterURL?.absoluteString
+                    self.backdropURL = mediaItem.backgroundURL?.absoluteString
+                    self.logoURL = mediaItem.logo
                 }
 
                 print("✅ Lobby: Loaded metadata for \(mediaItem.name)")
@@ -1293,9 +1307,10 @@ class LobbyViewModel: ObservableObject {
                         // Debounce/Log carefully to avoid spam, but this is critical
                         print("⚠️ Lobby: Host missing from participant list (Self-Healing activated)")
 
-                        Task {
-                            if let userId = UUID(uuidString: participantId) {
-                                try? await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: true)
+                        Task { [weak self] in
+                            if let userId = UUID(uuidString: self?.participantId ?? "") {
+                                guard let self = self else { return }
+                                try? await SupabaseClient.shared.joinRoom(roomId: self.room.id, userId: userId, isHost: true)
                                 print("✅ Lobby: Host self-healed presence in DB")
                             }
                         }
@@ -1399,7 +1414,8 @@ class LobbyViewModel: ObservableObject {
                     self.isPlaylistMode = true
 
                     // Persist to Supabase immediately
-                    Task {
+                    Task { [weak self] in
+                        guard let self = self else { return }
                         do {
                             try await SupabaseClient.shared.updateRoomPlaylist(
                                 roomId: self.room.id,
@@ -1521,10 +1537,11 @@ class LobbyViewModel: ObservableObject {
                 transitionState.isStarting = true
                 countdown = 3
 
-                Task { @MainActor in
+                Task { @MainActor [weak self] in
+                    guard let self = self else { return }
                     // Wait for countdown (same duration as host)
                     for i in (1...3).reversed() {
-                        countdown = i
+                        self.countdown = i
                         try? await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
                     }
 
@@ -1688,21 +1705,22 @@ class LobbyViewModel: ObservableObject {
         self.transitionState.isStarting = true
 
         // Start playback
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             // Wait a moment for the UI to settle and show "Starting..."
             try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5 seconds
 
-            if let mediaItem = room.mediaItem {
+            if let mediaItem = self.room.mediaItem {
                 print("🎬 Lobby: Calling playMedia for \(mediaItem.name)")
 
                 // Stop polling before transition
                 self.stopPolling()
 
-                await appState.playMedia(
+                await self.appState?.playMedia(
                     mediaItem,
                     quality: .fullHD,
                     watchMode: .watchParty,
-                    roomId: room.id,
+                    roomId: self.room.id,
                     isHost: false // System is host, user is guest
                 )
             } else {
@@ -1901,7 +1919,8 @@ class LobbyViewModel: ObservableObject {
         // CRITICAL: Reset ready state
         self.isReady = false
 
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             // Prepare metadata to send
             var finalPoster = item.mediaItem.poster
             var finalBackdrop = item.mediaItem.background
@@ -1939,7 +1958,7 @@ class LobbyViewModel: ObservableObject {
                 // 3. Update Supabase with definitive metadata (fresh or basic)
                 // Use empty strings to clear stale art if still missing
                 try await SupabaseClient.shared.updateRoomMetadata(
-                    roomId: room.id,
+                    roomId: self.room.id,
                     name: item.mediaItem.name,
                     imdbId: item.mediaItem.id,
                     season: item.season,
@@ -1950,7 +1969,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Also update playlist index
                 try await SupabaseClient.shared.updateRoomPlaylist(
-                    roomId: room.id,
+                    roomId: self.room.id,
                     playlist: self.playlist,
                     currentIndex: index
                 )
@@ -1987,12 +2006,13 @@ class LobbyViewModel: ObservableObject {
     }
 
     private func updatePlaylistInDatabase() {
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             do {
                 try await SupabaseClient.shared.updateRoomPlaylist(
-                    roomId: room.id,
-                    playlist: playlist,
-                    currentIndex: currentPlaylistIndex
+                    roomId: self.room.id,
+                    playlist: self.playlist,
+                    currentIndex: self.currentPlaylistIndex
                 )
                 print("✅ LobbyViewModel: updateRoomPlaylist returned successfully")
             } catch {
@@ -2003,11 +2023,12 @@ class LobbyViewModel: ObservableObject {
 
     private func updatePlaylistIndex(_ index: Int) {
         // We update the whole playlist structure for simplicity as our backend expects both
-        Task {
+        Task { [weak self] in
+            guard let self = self else { return }
             do {
                 try await SupabaseClient.shared.updateRoomPlaylist(
-                    roomId: room.id,
-                    playlist: playlist,
+                    roomId: self.room.id,
+                    playlist: self.playlist,
                     currentIndex: index
                 )
             } catch {

@@ -9,7 +9,8 @@
 import Cocoa
 import OpenGL.GL
 import OpenGL.GL3
-import Quartz
+import QuartzCore
+import LibMPV
 
 /// OpenGL layer for embedded MPV rendering with CVDisplayLink
 ///

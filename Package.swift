@@ -18,9 +18,14 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio-http2.git", exact: "1.30.0")
     ],
     targets: [
+        .systemLibrary(
+            name: "LibMPV",
+            path: "Frameworks"
+        ),
         .executableTarget(
             name: "RedLemon",
             dependencies: [
+                "LibMPV",
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "Sparkle", package: "Sparkle"),
                 .product(name: "NIOExtras", package: "swift-nio-extras"),
@@ -28,17 +33,13 @@ let package = Package(
                 .product(name: "NIOHTTP2", package: "swift-nio-http2")
             ],
             path: "Sources",
-            cSettings: [
-                .headerSearchPath("../Frameworks/include")
-            ],
+            exclude: ["Networking/guestconsolelog.md"],
+            // Removed cSettings header search path as LibMPV handles it
             swiftSettings: [
                 .unsafeFlags([
-                    "-I", "Frameworks/include",
-                    "-import-objc-header", "Sources/Features/Player/MPVBridgingHeader.h",
-                    "-DGL_SILENCE_DEPRECATION",  // Silence OpenGL deprecation warnings
-                    // CPU compatibility flags for older Intel Macs (Haswell)
-                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module",
-                    // Modern macOS compatibility flags
+                    // Removed explicit include and bridging header
+                    "-DGL_SILENCE_DEPRECATION",
+                    "-Xfrontend", "-disable-objc-attr-requires-foundation-module", // Keep this?
                     "-DMACOS_MODERN_COMPATIBILITY"
                 ])
             ],
@@ -51,5 +52,16 @@ let package = Package(
                 ])
             ]
         ),
+        .testTarget(
+            name: "RedLemonTests",
+            dependencies: ["RedLemon", "LibMPV"],
+            linkerSettings: [
+                .unsafeFlags([
+                    "-L", "Frameworks",
+                    "-lmpv.2",
+                    "-Xlinker", "-rpath", "-Xlinker", "/Users/danielnoble/Desktop/RedLemon-Native/Frameworks"
+                ])
+            ]
+        )
     ]
 )

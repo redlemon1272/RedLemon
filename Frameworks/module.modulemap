@@ -1,0 +1,6 @@
+module LibMPV [system] {
+    header "include/mpv/client.h"
+    header "include/mpv/render.h"
+    header "include/mpv/render_gl.h"
+    export *
+}

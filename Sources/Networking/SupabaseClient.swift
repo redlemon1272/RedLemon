@@ -15,7 +15,35 @@ enum SupabaseError: Error {
     case serverError(String)
 }
 
-class SupabaseClient {
+/// Protocol for managing watch party rooms
+protocol RoomManager {
+    func createRoom(
+        id: String,
+        name: String,
+        hostUserId: UUID,
+        hostUsername: String,
+        streamHash: String?,
+        imdbId: String?,
+        posterUrl: String?,
+        backdropUrl: String?,
+        season: Int?,
+        episode: Int?,
+        isPublic: Bool?,
+        description: String?,
+        playlist: [PlaylistItem]?
+    ) async throws -> SupabaseRoom
+    
+    func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
+    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?) async throws
+    func getRoomState(roomId: String) async throws -> SupabaseRoom?
+    func getRoomParticipants(roomId: String) async throws -> [RoomParticipant]
+}
+
+protocol UserManager {
+    func getUserById(userId: UUID) async throws -> SupabaseUser?
+}
+
+class SupabaseClient: RoomManager, UserManager {
     static let shared = SupabaseClient()
 
     private let baseURL: String

@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Compression
+import Combine
 
 // Timeout error for subtitle downloads
 struct TimeoutError: Error {}
@@ -33,7 +34,122 @@ func withTimeout<T>(seconds: TimeInterval, operation: @escaping () async throws 
 @MainActor
 class MPVPlayerViewModel: ObservableObject {
     // MPV wrapper instance
-    let mpvWrapper = MPVWrapper()
+    let mpvWrapper: MPVWrapper
+
+    // Services
+    private let subtitleService: SubtitleService
+    private let playbackService: PlaybackService
+    private var serviceCancellables = Set<AnyCancellable>()
+
+    init(mpvWrapper: MPVWrapper = MPVWrapper(), 
+         subtitleService: SubtitleService? = nil,
+         playbackService: PlaybackService? = nil) {
+        self.mpvWrapper = mpvWrapper
+        self.subtitleService = subtitleService ?? MPVSubtitleService(mpvController: mpvWrapper)
+        self.playbackService = playbackService ?? MPVPlaybackService(mpvController: mpvWrapper)
+        
+        setupServiceBindings()
+    }
+    
+    private func setupServiceBindings() {
+        Task { @MainActor in
+            // Subtitle Bindings
+            let tracksPublisher = await subtitleService.availableTracksPublisher
+            tracksPublisher
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$availableSubtitleTracks)
+                
+            let currentTrackPublisher = await subtitleService.currentTrackPublisher
+            currentTrackPublisher
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$currentSubtitleTrack)
+                
+            // Playback Bindings
+            let isPlayingPub = await playbackService.isPlayingPublisher
+            let playbackFinishedPub = await playbackService.playbackFinishedPublisher
+            let currentTimePub = await playbackService.currentTimePublisher
+            let durationPub = await playbackService.durationPublisher
+            let videoURLPub = await playbackService.videoURLPublisher
+            let isBufferingPub = await playbackService.isBufferingPublisher
+            let isFileLoadedPub = await playbackService.isFileLoadedPublisher
+            
+            // IsPlaying: Sync state and trigger VideoReady logic
+            isPlayingPub
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] isPlaying in
+                    guard let self = self else { return }
+                    self.isPlaying = isPlaying
+                    if isPlaying && self.isLoading {
+                        // Video started playing - hide poster
+                        self.onVideoReady()
+                    }
+                }
+                .store(in: &serviceCancellables)
+                
+            // PlaybackFinished
+            playbackFinishedPub
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$playbackFinished)
+                
+            // CurrentTime: Throttled update
+            currentTimePub
+                .throttle(for: 0.2, scheduler: DispatchQueue.main, latest: true)
+                .sink { [weak self] time in
+                    guard let self = self else { return }
+                    self.currentTime = time
+                }
+                .store(in: &serviceCancellables)
+                
+            // Duration: Sync state and trigger WatchParty Ready Signal
+            durationPub
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] dur in
+                    guard let self = self else { return }
+                    self.duration = dur
+                    
+                    // Watch Party Ready Gate
+                    if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
+                        NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
+                        self.sendReadySignal()
+                    }
+                }
+                .store(in: &serviceCancellables)
+                
+            // VideoURL
+            videoURLPub
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$videoURL)
+                
+            // IsBuffering: Update loading state
+            isBufferingPub
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] isBuffering in
+                    guard let self = self else { return }
+                    if isBuffering {
+                        print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
+                        self.isLoading = true
+                    } else if self.hasVideoReadyTriggered && !isBuffering {
+                        print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
+                        self.isLoading = false
+                    }
+                }
+                .store(in: &serviceCancellables)
+                
+            // IsFileLoaded: Fallback trigger for WatchParty
+            isFileLoadedPub
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] loaded in
+                    guard let self = self else { return }
+                    if loaded {
+                        if self.isInWatchParty && !self.hasSentReadySignal {
+                            NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
+                            self.sendReadySignal()
+                        }
+                    }
+                }
+                .store(in: &serviceCancellables)
+        }
+    }
 
     // Realtime sync manager
     private var realtimeManager: RealtimeChannelManager?
@@ -58,7 +174,6 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Cleanup state
     private var hasCleanedUp: Bool = false
-    private var mpvObserverTasks: [Task<Void, Never>] = []
 
     // Resume state tracking
     private var hasVideoReadyTriggered: Bool = false
@@ -115,8 +230,8 @@ class MPVPlayerViewModel: ObservableObject {
     // Subtitles
     @Published var subtitles: [(url: String, label: String)] = []
     @Published var subtitleOffset: Double = 0.0  // Current subtitle offset in milliseconds
-    @Published var availableSubtitleTracks: [MPVWrapper.SubtitleTrack] = []
-    @Published var currentSubtitleTrack: MPVWrapper.SubtitleTrack?
+    @Published var availableSubtitleTracks: [SubtitleTrack] = []
+    @Published var currentSubtitleTrack: SubtitleTrack?
     @Published var showSubtitleSyncPanel: Bool = false
 
     // MARK: - Post-Load Ready Gate
@@ -195,7 +310,9 @@ class MPVPlayerViewModel: ObservableObject {
 
         if isEvent {
             print("🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)")
-            mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+            Task { @MainActor in
+                await playbackService.loadVideo(url: streamURL, autoplay: true)
+            }
             // Events don't use waitingForGuests
             showWaitingForGuests = false
 
@@ -204,9 +321,13 @@ class MPVPlayerViewModel: ObservableObject {
             if shouldResume {
                 print("   With resume from \(Int(resumeTime))s")
                 // Load with autoplay=true, onVideoReady will handle the seek
-                mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+                Task { @MainActor in
+                    await playbackService.loadVideo(url: streamURL, autoplay: true)
+                }
             } else {
-                mpvWrapper.loadVideo(url: streamURL, autoplay: true)
+                Task { @MainActor in
+                    await playbackService.loadVideo(url: streamURL, autoplay: true)
+                }
             }
             showWaitingForGuests = false
 
@@ -220,239 +341,20 @@ class MPVPlayerViewModel: ObservableObject {
             }
 
             // Always load paused for watch party
-            mpvWrapper.loadVideo(url: streamURL, autoplay: false)
+            Task { @MainActor in
+                await playbackService.loadVideo(url: streamURL, autoplay: false)
+            }
             showWaitingForGuests = true
         }
 
-        func startEmbeddedSubtitleScan() {
-            // Run in detached task to avoid blocking MainActor (UI)
-            Task.detached(priority: .userInitiated) { [weak self] in
-                guard let self = self else { return }
 
-                // Brief delay to let MPV's auto-selection complete
-                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s delay
 
-                // Poll a few times to update UI with available tracks
-                for attempt in 1...3 {
-                    try? await Task.sleep(nanoseconds: 1_500_000_000) // 1.5s between checks
-
-                    // Access MPV wrapper safely (assuming it's thread-safe or we accept the risk for read-only)
-                    // Ideally MPVWrapper should be an actor or have internal locking
-                    let tracks = await self.mpvWrapper.getSubtitleTracks()
-                    let embeddedSubs = tracks.filter { $0.id != 0 }
-
-                    if !embeddedSubs.isEmpty {
-                        print("✅ Detected embedded subtitles (\(embeddedSubs.count)) on attempt \(attempt)")
-
-                        // MPV already auto-selected via FILE_LOADED event handler
-                        let currentSid = await self.mpvWrapper.getCurrentSubtitleTrack()
-                        print("ℹ️ Current subtitle track: \(currentSid) (auto-selected by MPV during FILE_LOADED)")
-
-                        // Update UI with tracks and current selection
-                        await MainActor.run {
-                            self.availableSubtitleTracks = tracks
-                            // Update selected track to match MPV's selection
-                            if let selectedTrack = tracks.first(where: { $0.id == currentSid }) {
-                                self.currentSubtitleTrack = selectedTrack
-                                print("✅ UI updated: Selected subtitle track \(selectedTrack.displayName)")
-                            }
-                        }
-                        break
-                    } else if attempt == 3 {
-                        print("⏳ No embedded subtitles detected after \(attempt) attempts")
-                    } else {
-                        print("⏳ No embedded subtitles detected yet (attempt \(attempt)), retrying...")
-                    }
-                }
-            }
+        // Delegate subtitle handling to service
+        Task {
+            await subtitleService.loadExternalSubtitles(subtitles)
         }
 
-        // Always scan for embedded subtitles to prefer them when available
-        startEmbeddedSubtitleScan()
-
-        // Load subtitles immediately if they're already downloaded (local file paths only)
-        // SubDL proxy URLs need to be downloaded to local files first
-        let areSubtitlesLocal = subtitles.allSatisfy { $0.url.starts(with: "/") }
-
-        if areSubtitlesLocal && !subtitles.isEmpty {
-            NSLog("✅ Subtitles already downloaded, loading as additional options...")
-            // Load them as additional options (won't override embedded subs)
-            Task {
-                for (index, subtitle) in subtitles.enumerated() {
-                    NSLog("📝 Loading external subtitle %d (%@): %@", index + 1, subtitle.label, subtitle.url)
-                    mpvWrapper.loadSubtitle(url: subtitle.url, title: subtitle.label)
-                }
-                
-                // Immediately refresh UI tracks
-                await MainActor.run {
-                    self.updateSubtitleTracks()
-                }
-                
-                NSLog("ℹ️ External subtitles loaded as additional options (embedded subs take priority)")
-            }
-        } else if !subtitles.isEmpty {
-            // Subtitles are either SubDL proxy URLs or need to be downloaded
-            let hasSubDLSubtitles = subtitles.contains { $0.url.contains("/subtitles/subdl/") }
-
-            if hasSubDLSubtitles {
-                // Download SubDL subtitles to local files, then load into MPV
-                NSLog("ℹ️ SubDL subtitles detected - downloading to local files in background...")
-                Task {
-                    // Wait for playback to stabilize first
-                    try? await Task.sleep(nanoseconds: 3_000_000_000) // 3 seconds
-
-                    for (index, subtitle) in subtitles.enumerated() {
-                        do {
-                            NSLog("📝 Downloading SubDL subtitle %d (%@) from proxy...", index + 1, subtitle.label)
-                            NSLog("🔍 Subtitle URL: %@", subtitle.url)
-
-                            // Download from proxy server to local file with timeout
-                            let downloadTask = Task {
-                                return await self.downloadSubtitle(url: subtitle.url)
-                            }
-
-                            // Wait for download with timeout
-                            let localPath = try await withTimeout(seconds: 45) {
-                                await downloadTask.value
-                            }
-
-                            if let localPath = localPath {
-                                NSLog("✅ SubDL subtitle %d downloaded to: %@", index + 1, localPath)
-                                self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
-                                NSLog("✅ SubDL subtitle %d loaded into MPV", index + 1)
-                            } else {
-                                NSLog("❌ Failed to download SubDL subtitle %d - downloadSubtitle returned nil", index + 1)
-                            }
-                        } catch is TimeoutError {
-                            NSLog("❌ Timeout downloading SubDL subtitle %d (exceeded 45 seconds)", index + 1)
-                        } catch {
-                            NSLog("❌ Exception downloading SubDL subtitle %d: %@", index + 1, error.localizedDescription)
-                        }
-                    }
-                    
-                    // Immediately refresh UI tracks after download loop
-                    await MainActor.run {
-                        self.updateSubtitleTracks()
-                    }
-                    
-                    NSLog("✅ SubDL subtitle download loop completed")
-                }
-            } else {
-                // Download other subtitles in background (fallback for older code paths)
-                NSLog("⚠️ Subtitles not pre-downloaded, downloading in background...")
-                Task.detached(priority: .background) {
-                    // Wait for video to establish playback first
-                    try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds - let playback stabilize
-
-                    // Download and load all subtitle files with their labels
-                    for (index, subtitle) in subtitles.enumerated() {
-                        NSLog("📝 RedLemon: Downloading subtitle %d (%@) from: %@", index + 1, subtitle.label, subtitle.url)
-
-                        // Download subtitle file locally first
-                        if let localPath = await self.downloadSubtitle(url: subtitle.url) {
-                            NSLog("✅ RedLemon: Subtitle %d downloaded to: %@", index + 1, localPath)
-                            self.mpvWrapper.loadSubtitle(url: localPath, title: subtitle.label)
-                        } else {
-                            NSLog("❌ RedLemon: Failed to download subtitle %d", index + 1)
-                        }
-                    }
-                    
-                    // Immediately refresh UI tracks
-                    await MainActor.run {
-                        self.updateSubtitleTracks()
-                    }
-                    
-                    NSLog("ℹ️ External subtitles downloaded and added as options (embedded subs take priority)")
-                }
-            }
-        }
-
-        // Monitor MPV state changes
-        // Monitor MPV state changes
-        let isPlayingTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await _ in self.mpvWrapper.$isPlaying.values {
-                if self.mpvWrapper.isPlaying && self.isLoading {
-                    // Video started playing - hide poster
-                    self.onVideoReady()
-                }
-                self.isPlaying = self.mpvWrapper.isPlaying
-            }
-        }
-        mpvObserverTasks.append(isPlayingTask)
-
-        let finishedTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await finished in self.mpvWrapper.$playbackFinished.values {
-                self.playbackFinished = finished
-            }
-        }
-        mpvObserverTasks.append(finishedTask)
-
-        let timeTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await time in self.mpvWrapper.$currentTime.values {
-                // Throttle UI updates to ~5Hz (every 200ms)
-                let now = Date()
-                if now.timeIntervalSince(self.lastTimeUpdate) > 0.2 {
-                    self.lastTimeUpdate = now
-                    self.currentTime = time
-                }
-            }
-        }
-        mpvObserverTasks.append(timeTask)
-
-        let durationTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await dur in self.mpvWrapper.$duration.values {
-                self.duration = dur
-
-                // Watch Party Ready Gate: Trigger ready signal as soon as we have duration (file loaded)
-                // This fixes the deadlock where we waited for playback to start, but playback waits for ready signal
-                if dur > 0 {
-                    NSLog("⏱️ Duration update: %.1fs. WatchParty: %@, SentReady: %@", dur, self.isInWatchParty ? "YES" : "NO", self.hasSentReadySignal ? "YES" : "NO")
-                    if self.isInWatchParty && !self.hasSentReadySignal {
-                        NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
-                        self.sendReadySignal()
-                    }
-                }
-            }
-        }
-        mpvObserverTasks.append(durationTask)
-
-        let fileLoadedTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await loaded in self.mpvWrapper.$isFileLoaded.values {
-                if loaded {
-                    NSLog("📂 File loaded signal received. WatchParty: %@, SentReady: %@", self.isInWatchParty ? "YES" : "NO", self.hasSentReadySignal ? "YES" : "NO")
-                    // Watch Party Ready Gate Fallback:
-                    // If duration is still 0 (e.g. ISO files), the file loaded event is our backup trigger
-                    if self.isInWatchParty && !self.hasSentReadySignal {
-                        NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
-                        self.sendReadySignal()
-                    }
-                }
-            }
-        }
-        mpvObserverTasks.append(fileLoadedTask)
-        
-        // Listen for buffering (stalling) events
-        let bufferingTask = Task { [weak self] in
-            guard let self = self else { return }
-            for await isBuffering in self.mpvWrapper.$isBuffering.values {
-                // Only update if we're not in the initial loading state (to avoid flickering)
-                // When isBuffering becomes true, show loader. When false, hide it.
-                if isBuffering {
-                    print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
-                    self.isLoading = true
-                } else if self.hasVideoReadyTriggered && !isBuffering {
-                    // Only hide loader if we've already passed the initial "Video Ready" gate
-                    print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
-                    self.isLoading = false
-                }
-            }
-        }
-        mpvObserverTasks.append(bufferingTask)
+        // Monitor MPV state changes - Handled by PlaybackService bindings
     }
 
     // MARK: - Metadata Fetching
@@ -537,7 +439,9 @@ class MPVPlayerViewModel: ObservableObject {
             print("   Seeking to: \(Int(seekTime))s")
 
             // Pause, seek, then resume
-            mpvWrapper.pause()
+            Task { @MainActor in
+                await playbackService.pause()
+            }
 
             // Use the robust resume logic which waits for duration/load
             attemptImmediateResume(resumeTime: seekTime)
@@ -566,10 +470,13 @@ class MPVPlayerViewModel: ObservableObject {
             }
 
             print("⏸️ Pausing immediately for resume...")
-            mpvWrapper.pause()
+            Task { @MainActor in
+                await playbackService.pause()
+            }
 
             // Then seek immediately after brief pause
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: 200_000_000)
                 self?.attemptImmediateResume(resumeTime: resumeTime)
             }
         } else if !isInWatchParty {
@@ -577,8 +484,10 @@ class MPVPlayerViewModel: ObservableObject {
             print("ℹ️ No resume timestamp set (starting from beginning)")
 
             // For normal playback, ensure MPV is playing and update UI state
-            if !mpvWrapper.isPlaying {
-                mpvWrapper.play()
+            if !isPlaying {
+                Task { @MainActor in
+                    await playbackService.play()
+                }
             }
             self.isPlaying = true
             print("▶️ Auto-playing solo content from beginning")
@@ -593,15 +502,17 @@ class MPVPlayerViewModel: ObservableObject {
         print("🎯 IMMEDIATE RESUME: Seeking to \(Int(resumeTime))s without delay")
 
         // Wait a brief moment for video metadata to load (much faster than buffering)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 500_000_000)
             guard let self = self else { return }
 
             // Enhanced validation before seeking
             guard self.duration > 0 else {
                 print("⚠️ Video duration not available yet (\(self.duration)s), retrying...")
                 // Retry after another short delay
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    self.attemptImmediateResume(resumeTime: resumeTime)
+                Task { @MainActor [weak self] in
+                    try? await Task.sleep(nanoseconds: 500_000_000)
+                    self?.attemptImmediateResume(resumeTime: resumeTime)
                 }
                 return
             }
@@ -611,8 +522,10 @@ class MPVPlayerViewModel: ObservableObject {
                 // Seek to near the end to trigger natural completion and transition to lobby
                 // This ensures the user enters the "Waiting" state for the next event, maintaining sync
                 let nearEnd = max(0, self.duration - 1.0)
-                self.mpvWrapper.seek(to: nearEnd)
-                self.mpvWrapper.play()
+                Task { @MainActor in
+                    await playbackService.seek(to: nearEnd)
+                    await playbackService.play()
+                }
                 self.isPlaying = true
 
                 // Clear state
@@ -623,11 +536,15 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Execute seek immediately
             print("🎯 Executing immediate seek to \(Int(resumeTime))s...")
-            self.mpvWrapper.seek(to: resumeTime)
+            Task { @MainActor in
+                await playbackService.seek(to: resumeTime)
+            }
 
             // Resume playback after brief delay to allow seek to register
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.mpvWrapper.play()
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: 200_000_000)
+                guard let self = self else { return }
+                await playbackService.play()
                 self.isPlaying = true
 
                 // Clear state
@@ -645,7 +562,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     func togglePlayPause() {
         // Special handling for watch party host: Add startup delay when transitioning to play
-        if isInWatchParty && isWatchPartyHost && !mpvWrapper.isPlaying {
+        if isInWatchParty && isWatchPartyHost && !isPlaying {
             // Cancel any pending play task
             pendingPlayTask?.cancel()
 
@@ -663,9 +580,10 @@ class MPVPlayerViewModel: ObservableObject {
                 chatUsername: nil
             )
 
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 do {
-                    try await realtimeManager?.sendSyncMessage(syncMessage)
+                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
                     NSLog("📡 Sent play message to guests (pre-delay)")
                 } catch {
                     NSLog("⚠️ Failed to send play sync message: \(error)")
@@ -686,15 +604,17 @@ class MPVPlayerViewModel: ObservableObject {
                 }
 
                 print("▶️ Host starting playback after startup delay")
-                mpvWrapper.togglePlayPause()
+                await playbackService.togglePlayPause()
             }
 
             return
         }
 
         // Normal toggle for non-watch-party or pause operations
-        mpvWrapper.togglePlayPause()
-        let isNowPlaying = mpvWrapper.isPlaying
+        Task { @MainActor in
+            await playbackService.togglePlayPause()
+        }
+        let isNowPlaying = !isPlaying
         print(isNowPlaying ? "▶️ Playing" : "⏸️ Paused")
 
         // Mark that we initiated this action (ignore echo from remote)
@@ -713,9 +633,10 @@ class MPVPlayerViewModel: ObservableObject {
                 chatUsername: nil
             )
 
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 do {
-                    try await realtimeManager?.sendSyncMessage(syncMessage)
+                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
                     NSLog("📡 Sent explicit \(messageType) message to guests")
                 } catch {
                     NSLog("⚠️ Failed to send \(messageType) sync message: \(error)")
@@ -725,7 +646,9 @@ class MPVPlayerViewModel: ObservableObject {
     }
 
     func seek(to time: Double) {
-        mpvWrapper.seek(to: time)
+        Task { @MainActor in
+            await playbackService.seek(to: time)
+        }
         print("⏩ Seeking to \(Int(time))s")
 
         // Mark that we initiated this action (ignore echo from remote)
@@ -737,15 +660,16 @@ class MPVPlayerViewModel: ObservableObject {
                 type: .seek,
                 timestamp: Date().timeIntervalSince1970,
                 position: time,
-                isPlaying: mpvWrapper.isPlaying,
+                isPlaying: isPlaying,
                 senderId: currentUserId,
                 chatText: nil,
                 chatUsername: nil
             )
 
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 do {
-                    try await realtimeManager?.sendSyncMessage(syncMessage)
+                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
                     NSLog("📡 Sent explicit seek message to guests: \(Int(time))s")
                 } catch {
                     NSLog("⚠️ Failed to send seek sync message: \(error)")
@@ -756,7 +680,9 @@ class MPVPlayerViewModel: ObservableObject {
 
     func setVolume(_ level: Double) {
         volume = level
-        mpvWrapper.setVolume(Int(level))
+        Task { @MainActor in
+            await playbackService.setVolume(level)
+        }
         print("🔊 Volume: \(Int(level))%")
     }
 
@@ -765,44 +691,26 @@ class MPVPlayerViewModel: ObservableObject {
     /// Adjust subtitle timing offset
     /// - Parameter offsetMs: Offset in milliseconds (positive = delay, negative = advance)
     func adjustSubtitleOffset(_ offsetMs: Double) {
-        subtitleOffset = offsetMs
-        mpvWrapper.setSubtitleOffset(offsetMs)
-        print("⏱️ Subtitle offset adjusted: \(String(format: "%.1f", offsetMs))ms")
+        Task {
+            await subtitleService.setOffset(offsetMs)
+        }
     }
 
     /// Reset subtitle timing to default
     func resetSubtitleTiming() {
-        subtitleOffset = 0.0
-        mpvWrapper.resetSubtitleTiming()
-        print("🔄 Subtitle timing reset to default")
+        Task {
+            await subtitleService.setOffset(0.0)
+        }
     }
 
     /// Update available subtitle tracks and current selection
-    func updateSubtitleTracks() {
-        availableSubtitleTracks = mpvWrapper.getSubtitleTracks()
 
-        // Find current track
-        let currentId = mpvWrapper.getCurrentSubtitleTrack()
-        currentSubtitleTrack = availableSubtitleTracks.first { $0.id == currentId }
-
-        // Update current offset from MPV
-        subtitleOffset = mpvWrapper.getSubtitleOffset()
-
-        print("📊 Updated subtitle tracks: \(availableSubtitleTracks.count) available, current: \(currentSubtitleTrack?.displayName ?? "Off")")
-    }
 
     /// Select subtitle track by ID
     /// - Parameter trackId: Track ID (0 = off, or valid track ID)
     func selectSubtitleTrack(_ trackId: Int) {
-        mpvWrapper.setSubtitleTrack(trackId) { [weak self] in
-            guard let self = self else { return }
-            self.updateSubtitleTracks()
-
-            if let track = self.currentSubtitleTrack {
-                print("📝 Selected subtitle track: \(track.displayName)")
-            } else {
-                print("🔇 Subtitles disabled")
-            }
+        Task {
+            await subtitleService.selectTrack(trackId)
         }
     }
 
@@ -833,7 +741,17 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Update available tracks
-        updateSubtitleTracks()
+        // Update available tracks
+        Task {
+            await subtitleService.scanEmbeddedTracks()
+        }
+    }
+
+    /// Update available subtitle tracks (Wrapper for service)
+    func updateSubtitleTracks() {
+        Task {
+            await subtitleService.scanEmbeddedTracks()
+        }
     }
 
     // MARK: - Track Selection
@@ -901,7 +819,10 @@ class MPVPlayerViewModel: ObservableObject {
             }
 
             // Update our state
-            updateSubtitleTracks()
+            // Update our state
+            Task {
+                await subtitleService.scanEmbeddedTracks()
+            }
 
             // Analyze compatibility after selecting track
             analyzeSubtitleCompatibility()
@@ -917,7 +838,10 @@ class MPVPlayerViewModel: ObservableObject {
             }
 
             // Update our state
-            updateSubtitleTracks()
+            // Update our state
+            Task {
+                await subtitleService.scanEmbeddedTracks()
+            }
 
             // Analyze compatibility after selecting track
             analyzeSubtitleCompatibility()
@@ -946,7 +870,8 @@ class MPVPlayerViewModel: ObservableObject {
         showChat.toggle()
 
         // ✅ Restore background updates after animation completes with timeout safeguard
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 300_000_000)
             guard let self = self else { return }
 
             // ✅ SAFEGUARD: Always reset animation state after timeout
@@ -959,7 +884,8 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // ✅ TIMEOUT PROTECTION: Force reset after 1 second maximum
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             self?.isAnimatingChatToggle = false
         }
 
@@ -996,7 +922,8 @@ class MPVPlayerViewModel: ObservableObject {
         // Watch party chat: Send via Realtime ONLY (no database)
         // Watch party rooms don't exist in the database, only in Realtime
         if isInWatchParty {
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 let syncMessage = SyncMessage(
                     type: .chat,
                     timestamp: Date().timeIntervalSince1970,
@@ -1007,7 +934,7 @@ class MPVPlayerViewModel: ObservableObject {
                 )
 
                 do {
-                    try await realtimeManager?.sendSyncMessage(syncMessage)
+                    try await self.realtimeManager?.sendSyncMessage(syncMessage)
                     print("✅ Chat message sent via Realtime")
                 } catch {
                     print("❌ Failed to send chat message: \(error)")
@@ -1083,12 +1010,8 @@ class MPVPlayerViewModel: ObservableObject {
         // ✅ STEP 2: Stop timers to prevent further updates
         invalidateAllTimers()
 
-        // ✅ STEP 3: Cancel observer tasks to prevent callbacks
-        print("🛑 Cancelling \(mpvObserverTasks.count) MPV observer tasks...")
-        for task in mpvObserverTasks {
-            task.cancel()
-        }
-        mpvObserverTasks.removeAll()
+        // ✅ STEP 3: Cancel observers (Handled by bindings/Lifecycle)
+        // mpvObserverTasks.removeAll()
 
         pendingPlayTask?.cancel()
         pendingPlayTask = nil
@@ -1121,134 +1044,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Subtitle Download
 
-    nonisolated private func downloadSubtitle(url: String) async -> String? {
-        NSLog("🔍 downloadSubtitle() called with URL: %@", url)
-        guard let subtitleURL = URL(string: url) else {
-            NSLog("❌ RedLemon: Invalid subtitle URL")
-            return nil
-        }
 
-        do {
-            NSLog("📡 Starting URLSession download...")
-            // Use custom session with longer timeout for SubDL proxy downloads
-            // (server needs time to download from SubDL, extract ZIP, convert to VTT)
-            let config = URLSessionConfiguration.default
-            config.timeoutIntervalForRequest = 30.0  // 30 seconds
-            config.timeoutIntervalForResource = 30.0
-            let session = URLSession(configuration: config)
-
-            NSLog("⏳ Waiting for server response...")
-            let (data, response) = try await session.data(from: subtitleURL)
-            NSLog("✅ Received response! Data size: %d bytes", data.count)
-
-            // Check if it's actually a ZIP archive by inspecting the content
-            // Don't rely on URL or Content-Type for SubDL proxy URLs
-            let contentType = (response as? HTTPURLResponse)?.value(forHTTPHeaderField: "Content-Type") ?? ""
-            NSLog("🔍 Content-Type: %@", contentType)
-            NSLog("🔍 Downloaded %d bytes", data.count)
-
-            // Check if content is actually VTT (proxy server returns VTT even if URL has .zip)
-            if let text = String(data: data, encoding: .utf8), text.hasPrefix("WEBVTT") {
-                NSLog("✅ Detected VTT content from proxy server")
-                // Save VTT directly
-                let tempDir = FileManager.default.temporaryDirectory
-                let subtitleFileName = "subtitle_\(UUID().uuidString).vtt"
-                let localURL = tempDir.appendingPathComponent(subtitleFileName)
-                try text.write(to: localURL, atomically: true, encoding: .utf8)
-                return localURL.path
-            }
-
-            // Check for ZIP magic bytes (PK\x03\x04)
-            let isZip = data.count > 4 && data[0] == 0x50 && data[1] == 0x4B && data[2] == 0x03 && data[3] == 0x04
-
-            var subtitleText: String
-
-            if isZip {
-                NSLog("📦 Extracting subtitle from ZIP archive")
-                subtitleText = try extractSRTFromZip(data: data)
-            } else {
-                // Assume raw SRT or VTT
-                guard let text = String(data: data, encoding: .utf8) else {
-                    NSLog("❌ Failed to decode subtitle file")
-                    return nil
-                }
-                subtitleText = text
-            }
-
-            // Convert SRT to VTT if needed
-            if !subtitleText.hasPrefix("WEBVTT") {
-                subtitleText = convertSRTToVTT(srt: subtitleText)
-            }
-
-            // Save to temporary directory
-            let tempDir = FileManager.default.temporaryDirectory
-            let subtitleFileName = "subtitle_\(UUID().uuidString).vtt"
-            let localURL = tempDir.appendingPathComponent(subtitleFileName)
-
-            try subtitleText.write(to: localURL, atomically: true, encoding: .utf8)
-
-            return localURL.path
-        } catch {
-            NSLog("❌ RedLemon: Failed to download subtitle: %@", error.localizedDescription)
-            return nil
-        }
-    }
-
-    nonisolated private func extractSRTFromZip(data: Data) throws -> String {
-        // Use libz to extract (7z format uses zlib internally)
-        // First, try to find .srt file in archive
-
-        // For now, use a simple approach: Look for SRT content markers
-        // The file appears to be a 7z archive with an en.sdh.srt file inside
-
-        // Swift doesn't have built-in 7z support, so let's try using unzip command
-        let tempDir = FileManager.default.temporaryDirectory
-        let zipFile = tempDir.appendingPathComponent("temp_\(UUID().uuidString).zip")
-        let extractDir = tempDir.appendingPathComponent("extract_\(UUID().uuidString)")
-
-        try data.write(to: zipFile)
-        try FileManager.default.createDirectory(at: extractDir, withIntermediateDirectories: true)
-
-        // Try to extract using system unzip command
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        process.arguments = ["-q", "-o", zipFile.path, "-d", extractDir.path]
-
-        try process.run()
-        process.waitUntilExit()
-
-        // Find .srt file in extracted directory
-        let contents = try FileManager.default.contentsOfDirectory(at: extractDir, includingPropertiesForKeys: nil)
-        guard let srtFile = contents.first(where: { $0.pathExtension.lowercased() == "srt" }) else {
-            throw NSError(domain: "SubtitleExtraction", code: -1, userInfo: [NSLocalizedDescriptionKey: "No SRT file found in archive"])
-        }
-
-        let srtContent = try String(contentsOf: srtFile, encoding: .utf8)
-
-        // Cleanup
-        try? FileManager.default.removeItem(at: zipFile)
-        try? FileManager.default.removeItem(at: extractDir)
-
-        return srtContent
-    }
-
-    nonisolated private func convertSRTToVTT(srt: String) -> String {
-        var vtt = "WEBVTT\n\n"
-
-        // Split into cues (separated by double newlines in SRT)
-        let cues = srt.components(separatedBy: "\n\n")
-
-        for cue in cues {
-            let trimmedCue = cue.trimmingCharacters(in: .whitespacesAndNewlines)
-            if trimmedCue.isEmpty { continue }
-
-            // Convert comma to period in timestamps and add to cue
-            let convertedCue = trimmedCue.replacingOccurrences(of: ",", with: ".")
-            vtt += convertedCue + "\n\n"
-        }
-
-        return vtt
-    }
 }
 
 // MARK: - Models
@@ -1554,15 +1350,17 @@ extension MPVPlayerViewModel {
             senderId: currentUserId
         )
 
-        Task {
-            try? await realtimeManager?.sendSyncMessage(message)
+        Task { [weak self] in
+            guard let self = self else { return }
+            try? await self.realtimeManager?.sendSyncMessage(message)
             
             // Wait briefly for message to send, then clean up locally
             try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
             
             await MainActor.run {
                 // Host cleanup and navigation
-                Task {
+                Task { [weak self] in
+                    guard let self = self else { return }
                     await self.cleanup()
                     await self.appState?.exitPlayer(keepRoomState: true)
                     await MainActor.run {
@@ -1733,7 +1531,8 @@ extension MPVPlayerViewModel {
             if showWaitingForGuests {
                 print("🎬 Received PLAY signal - All guests ready! Starting playback.")
                 showWaitingForGuests = false
-                mpvWrapper.play()
+                showWaitingForGuests = false
+                await playbackService.play()
                 isPlaying = true
 
                 // Stop Ready Loop
@@ -1741,19 +1540,20 @@ extension MPVPlayerViewModel {
                 readyLoopTimer = nil
             } else {
                 // Normal play sync
-                if !mpvWrapper.isPlaying {
+                if !isPlaying {
                     print("▶️ Sync: Playing")
-                    mpvWrapper.play()
+                    await playbackService.play()
                     isPlaying = true
                 }
             }
 
             // FORCE PLAY SAFETY NET (GUEST): Retrigger play if still at 0.0 after 1.5s
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: 1_500_000_000)
                 guard let self = self else { return }
-                if self.mpvWrapper.currentTime < 0.1 && self.isPlaying {
+                if self.currentTime < 0.1 && self.isPlaying {
                     NSLog("⚠️ PLAYBACK SAFETY NET (GUEST): Force-starting playback (stuck at 0.0)")
-                    self.mpvWrapper.play()
+                    await self.playbackService.play()
                 }
             }
 
@@ -1836,7 +1636,7 @@ extension MPVPlayerViewModel {
                         print("⚡ Ultra-gentle sync: \(speedFactor)x to fix \(Int(absSmoothedDrift * 1000))ms drift")
                     }
 
-                    mpvWrapper.setSpeed(speedFactor)
+                    await playbackService.setSpeed(speedFactor)
                     currentSpeedAdjustment = speedFactor
                     isCurrentlyAdjustingSpeed = true
                     lastSpeedAdjustmentTime = Date()
@@ -1845,13 +1645,11 @@ extension MPVPlayerViewModel {
                     let resetDelay = min(max(absSmoothedDrift * 2.0, 2.0), 5.0)  // 2-5 seconds
                     Task {
                         try? await Task.sleep(nanoseconds: UInt64(resetDelay * 1_000_000_000))
-                        await MainActor.run {
-                            // Only reset if we haven't made another adjustment
-                            if self.currentSpeedAdjustment == speedFactor {
-                                self.mpvWrapper.setSpeed(1.0)
-                                self.isCurrentlyAdjustingSpeed = false
-                                self.currentSpeedAdjustment = 1.0
-                            }
+                        // Only reset if we haven't made another adjustment
+                        if self.currentSpeedAdjustment == speedFactor {
+                            await self.playbackService.setSpeed(1.0)
+                            self.isCurrentlyAdjustingSpeed = false
+                            self.currentSpeedAdjustment = 1.0
                         }
                     }
                 }
@@ -1863,7 +1661,7 @@ extension MPVPlayerViewModel {
                 let targetPosition = predictedHostPosition + seekBufferOffset
 
                 print("🔄 Large drift (\(String(format: "%.1f", absSmoothedDrift))s) - seeking to \(String(format: "%.1f", targetPosition))s (host at \(String(format: "%.1f", predictedHostPosition))s + \(seekBufferOffset)s offset)")
-                seek(to: targetPosition)
+                await playbackService.seek(to: targetPosition)
                 // Reset drift history after seek
                 driftHistory.removeAll()
                 isCurrentlyAdjustingSpeed = false
@@ -1871,24 +1669,24 @@ extension MPVPlayerViewModel {
             }
 
             // Sync play/pause state
-            if isPlaying && !mpvWrapper.isPlaying {
-                togglePlayPause()
-            } else if !isPlaying && mpvWrapper.isPlaying {
-                togglePlayPause()
+            if isPlaying && !isPlaying {
+                await playbackService.togglePlayPause()
+            } else if !isPlaying && isPlaying {
+                await playbackService.togglePlayPause()
             }
 
 
 
         case .pause:
             print("⏸️ Host pressed pause")
-            if mpvWrapper.isPlaying {
-                togglePlayPause()
+            if isPlaying {
+                await playbackService.togglePlayPause()
             }
 
         case .seek:
             let timestamp = message.timestamp
             print("⏩ Host seeked to \(timestamp)s")
-            seek(to: timestamp)
+            await playbackService.seek(to: timestamp)
 
         case .chat:
             // Receive chat message from other participants
@@ -1923,7 +1721,8 @@ extension MPVPlayerViewModel {
 
                     if !isFlushingChat {
                         isFlushingChat = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+                        Task { @MainActor [weak self] in
+                            try? await Task.sleep(nanoseconds: 200_000_000)
                             guard let self = self else { return }
                             if !self.pendingChatMessages.isEmpty {
                                 self.messages.append(contentsOf: self.pendingChatMessages)
@@ -2001,7 +1800,8 @@ extension MPVPlayerViewModel {
             
         case .roomClosed:
             print("🔒 Received Room Closed signal in Player")
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 await self.cleanup()
                 // Force full exit to browse
                 await self.appState?.exitPlayer(keepRoomState: false)
@@ -2017,7 +1817,8 @@ extension MPVPlayerViewModel {
         case .returnToLobby:
             print("🏠 Received Return to Lobby signal from Host")
             // Perform cleanup and navigate back to lobby
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
                 await self.cleanup()
                 await self.appState?.exitPlayer(keepRoomState: true)
                 await MainActor.run {
@@ -2050,7 +1851,8 @@ extension MPVPlayerViewModel {
                 senderId: self.currentUserId
             )
 
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 do {
                     if let manager = self.realtimeManager {
                         try await manager.sendSyncMessage(syncMessage)
@@ -2122,7 +1924,8 @@ extension MPVPlayerViewModel {
             NSLog("🚀 All guests ready! Starting playback in 1s...")
 
             // Small delay to ensure UI updates
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
                 guard let self = self else { return }
                 self.startSynchronizedPlayback()
             }
@@ -2135,16 +1938,18 @@ extension MPVPlayerViewModel {
     private func startSynchronizedPlayback() {
         NSLog("🎬 Host: Initiating synchronized start")
         showWaitingForGuests = false
-        mpvWrapper.play()
+        // mpvWrapper.play() - Removed
+        Task { await playbackService.play() }
         isPlaying = true
 
         // FORCE PLAY SAFETY NET: Retrigger play if still at 0.0 after 1.5s
         // This fixes the "Black Screen at 0:00" issue where the initial command is missed
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(nanoseconds: 1_500_000_000)
             guard let self = self else { return }
-            if self.mpvWrapper.currentTime < 0.1 && self.isPlaying {
+            if self.currentTime < 0.1 && self.isPlaying {
                 NSLog("⚠️ PLAYBACK SAFETY NET: Force-starting playback (stuck at 0.0)")
-                self.mpvWrapper.play()
+                await self.playbackService.play()
             }
         }
 
@@ -2189,7 +1994,8 @@ extension MPVPlayerViewModel {
                 chatUsername: nil
             )
 
-            Task {
+            Task { [weak self] in
+                guard let self = self else { return }
                 try? await self.realtimeManager?.sendSyncMessage(message)
             }
         }
@@ -2204,9 +2010,10 @@ extension MPVPlayerViewModel {
         lastLocalActionTime = Date()
 
         // Auto-reset after 500ms (round-trip time)
-        Task {
+        Task { [weak self] in
             try? await Task.sleep(nanoseconds: 500_000_000)
             await MainActor.run {
+                guard let self = self else { return }
                 if self.ignoringRemoteUpdates > 0 {
                     self.ignoringRemoteUpdates -= 1
                 }

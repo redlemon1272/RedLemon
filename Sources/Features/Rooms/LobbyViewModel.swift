@@ -269,7 +269,7 @@ class LobbyViewModel: ObservableObject {
         // Check for pending messages from Player (e.g. "Host returned to lobby")
         if let msg = appState?.pendingLobbyMessage {
             print("🔔 Lobby: Displaying pending message: \(msg)")
-            addMessage(.systemInfo, userName: "System", text: msg)
+            addMessage(.systemInfo, userName: "System", data: ["message": msg])
             appState?.pendingLobbyMessage = nil
         }
 

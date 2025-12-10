@@ -242,6 +242,10 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var currentSubtitleTrack: SubtitleTrack?
     @Published var showSubtitleSyncPanel: Bool = false
 
+    // Audio Tracks
+    @Published var availableAudioTracks: [AudioTrack] = []
+    @Published var currentAudioTrack: AudioTrack?
+
     // MARK: - Post-Load Ready Gate
     @Published var showWaitingForGuests: Bool = false    // Presence Management
     @Published var connectedGuestIds: Set<String> = []
@@ -432,6 +436,10 @@ class MPVPlayerViewModel: ObservableObject {
             self.showPoster = false
             self.isLoading = false
         }
+
+        // Update tracks
+        self.updateSubtitleTracks() // Ensure we have latest subs
+        self.updateAudioTracks()    // Scan audio tracks
 
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices
@@ -764,6 +772,24 @@ class MPVPlayerViewModel: ObservableObject {
         Task {
             await subtitleService.scanEmbeddedTracks()
         }
+    }
+
+    /// Update available audio tracks
+    func updateAudioTracks() {
+        let tracks = mpvWrapper.getAudioTracks()
+        self.availableAudioTracks = tracks
+
+        // Sync current track
+        let currentId = mpvWrapper.getCurrentAudioTrack()
+        if let current = tracks.first(where: { $0.id == currentId }) {
+            self.currentAudioTrack = current
+        }
+    }
+
+    func setAudioTrack(_ track: AudioTrack) {
+        mpvWrapper.setAudioTrack(track.id)
+        self.currentAudioTrack = track
+        self.updateAudioTracks()
     }
 
     // MARK: - Track Selection

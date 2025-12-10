@@ -766,11 +766,15 @@ struct MPVPlayerView: View {
                     Button(action: {
                         withAnimation(.easeInOut(duration: 0.15)) {
                             showAudioMenu.toggle()
+                            // Update tracks when menu opens
+                            if showAudioMenu {
+                                viewModel.updateAudioTracks()
+                            }
                         }
                     }) {
                         ZStack {
                             Circle()
-                                .fill(Color.white.opacity(0.2))
+                                .fill(showAudioMenu ? Color.white.opacity(0.3) : Color.white.opacity(0.2))
                                 .frame(width: 40, height: 40)
 
                             Image(systemName: "waveform.circle.fill")
@@ -779,56 +783,7 @@ struct MPVPlayerView: View {
                         }
                     }
                     .buttonStyle(.plain)
-                    .overlay(alignment: .top) {
-                        if showAudioMenu {
-                            VStack(alignment: .leading, spacing: 0) {
-                                let currentAudioId = viewModel.mpvWrapper.getCurrentAudioTrack()
 
-                                ForEach(viewModel.mpvWrapper.getAudioTracks(), id: \.id) { track in
-                                    Button(action: {
-                                        viewModel.mpvWrapper.setAudioTrack(track.id)
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            withAnimation(.easeInOut(duration: 0.15)) {
-                                                showAudioMenu = false
-                                            }
-                                        }
-                                    }) {
-                                        HStack {
-                                            Text(track.displayName)
-                                                .font(.system(size: 13))
-                                                .foregroundColor(.primary)
-                                            Spacer()
-                                            if currentAudioId == track.id {
-                                                Image(systemName: "checkmark")
-                                                    .font(.system(size: 12, weight: .semibold))
-                                                    .foregroundColor(.blue)
-                                            }
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .contentShape(Rectangle())
-                                        .foregroundColor(.primary)
-                                        .padding(.horizontal, 12)
-                                        .padding(.vertical, 10)
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
-                                }
-                            }
-                            .background(.regularMaterial)
-                            .cornerRadius(8)
-                            .shadow(radius: 10)
-                            .frame(minWidth: 250)
-                            .offset(y: -10)
-                            .transition(.opacity)
-                            .zIndex(100)
-                            .onHover { isHovering in
-                                if !isHovering {
-                                    withAnimation(.easeInOut(duration: 0.15)) {
-                                        showAudioMenu = false
-                                    }
-                                }
-                            }
-                        }
-                    }
 
 
                     // Playlist Button
@@ -1096,6 +1051,101 @@ struct MPVPlayerView: View {
         .shadow(radius: 20)
     }
 
+    private var fullAudioMenu: some View {
+        VStack(spacing: 16) {
+            // Header
+            HStack {
+                Text("Audio Configuration")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.primary)
+
+                Spacer()
+
+                Text("Click outside to close")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.secondary)
+            }
+            .padding(.horizontal, 24)
+            .padding(.top, 20)
+
+            // Current track info
+            if let currentTrack = viewModel.currentAudioTrack {
+                HStack {
+                    Text("Currently Selected:")
+                        .foregroundColor(.secondary)
+                        .font(.system(size: 14))
+
+                    Text(currentTrack.displayName)
+                        .foregroundColor(.primary)
+                        .font(.system(size: 14, weight: .medium))
+                        .lineLimit(1)
+
+                    Spacer()
+                }
+                .padding(.horizontal, 24)
+            }
+
+            // Track selector with scrollable list
+            if !viewModel.availableAudioTracks.isEmpty {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Select Audio Track:")
+                        .foregroundColor(.primary)
+                        .font(.system(size: 16, weight: .medium))
+
+                    ScrollView(.vertical, showsIndicators: true) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            ForEach(viewModel.availableAudioTracks, id: \.id) { track in
+                                Button(action: {
+                                    viewModel.setAudioTrack(track)
+                                    // Optional: Close menu on selection? User might want to verify.
+                                    // withAnimation { showAudioMenu = false }
+                                }) {
+                                    HStack {
+                                        Text(track.displayName)
+                                            .foregroundColor(.primary)
+                                            .font(.system(size: 14, weight: .medium))
+                                            .lineLimit(1)
+                                        Spacer()
+                                        if viewModel.currentAudioTrack?.id == track.id {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .font(.system(size: 16, weight: .semibold))
+                                                .foregroundColor(.blue)
+                                        }
+                                    }
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 12)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(viewModel.currentAudioTrack?.id == track.id ? Color.blue.opacity(0.15) : Color.primary.opacity(0.08))
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                        .padding(.horizontal, 8)
+                    }
+                    .frame(height: 140)
+                    .id(UUID()) // Force redraw if list changes
+                }
+                .padding(.horizontal, 24)
+            } else {
+                Text("No audio tracks found")
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 14))
+                    .padding(.vertical, 20)
+            }
+
+            // Additional Audio Options (Future: Sync, Normalize, etc)
+            // For now, consistent spacing with subtitle menu
+            Spacer().frame(height: 10)
+        }
+        .padding(.bottom, 24)
+        .frame(width: 450)
+        .background(.regularMaterial)
+        .cornerRadius(16)
+        .shadow(radius: 20)
+    }
+
 
 
     @ViewBuilder
@@ -1108,6 +1158,18 @@ struct MPVPlayerView: View {
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         showSubtitleMenu = false
+                    }
+                }
+        }
+
+        // Tap shield to close AUDIO menu when open
+        if showAudioMenu {
+            Color.black.opacity(0.001)
+                .ignoresSafeArea()
+                .zIndex(101)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showAudioMenu = false
                     }
                 }
         }
@@ -1127,6 +1189,13 @@ struct MPVPlayerView: View {
         // Full subtitle menu (appears when player controls are hidden)
         if showSubtitleMenu {
             fullSubtitleMenu
+                .zIndex(102)
+                .transition(.opacity.combined(with: .scale))
+        }
+
+        // Full AUDIO menu (Modal style)
+        if showAudioMenu {
+            fullAudioMenu
                 .zIndex(102)
                 .transition(.opacity.combined(with: .scale))
         }

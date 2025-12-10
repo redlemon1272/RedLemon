@@ -1525,7 +1525,20 @@ class LobbyViewModel: ObservableObject {
                     return
                 }
 
-                // 2. Check for stale "is_playing" signal (e.g. Host crashed or failed to clear DB)
+                // 2. NEW: "Smart Safety Delay"
+                // If we just finished playback, we MUST wait for the 8s safety timer (canAutoJoin)
+                // This prevents the "Race Condition" where Host is slow to clear DB state.
+                if playbackEndedTimestamp != nil && !canAutoJoin {
+                     NSLog("🛡️ Lobby: Keeping safety hold active (Returning from Playback)")
+                     return
+                }
+                
+                // If playbackEndedTimestamp is nil, this is a FRESH join (late joiner), so we allow instant entry.
+                if playbackEndedTimestamp == nil {
+                    NSLog("✅ Lobby: Fresh join detected (No prior playback), allowing instant check")
+                }
+
+                // 3. Check for stale "is_playing" signal (e.g. Host crashed or failed to clear DB)
                 // If last_activity is old (> 60s) and we just joined, it's likely a stale flag.
                 let activityAge = Date().timeIntervalSince(roomState.lastActivity)
                 if activityAge > 60 {

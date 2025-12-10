@@ -552,6 +552,16 @@ struct WatchPartyLobbyView: View {
         .sheet(isPresented: $showPaymentGate) {
             PaymentGateView()
         }
+        .alert(isPresented: $viewModel.showRoomClosedAlert) {
+            Alert(
+                title: Text("Room Closed"),
+                message: Text(viewModel.roomClosedMessage),
+                dismissButton: .default(Text("OK")) {
+                    appState.restoreWindowFromLobby()
+                    appState.currentView = .browse
+                }
+            )
+        }
     }  // Close lobbyContent function
 
     private func copyRoomID() {
@@ -594,6 +604,11 @@ struct WatchPartyLobbyView: View {
         return String(format: "%02d:%02d", minutes, seconds)
     }
 }
+
+extension WatchPartyLobbyView {
+    // Helper view modifier for alerts if needed, or just attach to body
+}
+
 
 // MARK: - Participant Row
 

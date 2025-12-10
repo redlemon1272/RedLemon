@@ -142,6 +142,12 @@ struct RoomListView: View {
                 // Convert Supabase rooms to WatchPartyRooms with participants
                 var newRooms: [WatchPartyRoom] = []
                 for room in backendRooms {
+                    // FILTER: Exclude system-run events ("RedLemon Events") from the public rooms list
+                    // Events are distinct and shouldn't appear as user-hosted rooms
+                    if room.hostUsername == "RedLemon Events" || room.id.hasPrefix("event_") {
+                        continue
+                    }
+
                     // Determine media type based on season/episode
                     let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
 

@@ -16,6 +16,8 @@ class LobbyViewModel: ObservableObject {
     @Published var backdropURL: String?
     @Published var logoURL: String?
     @Published var timeUntilStart: TimeInterval = 0 // Time until event officially starts
+    @Published var showRoomClosedAlert: Bool = false
+    @Published var roomClosedMessage: String = "The host has left the room."
 
     // NEW: Playlist Support
     @Published var playlist: [PlaylistItem] = []
@@ -444,7 +446,29 @@ class LobbyViewModel: ObservableObject {
     func initiateLeave() {
         print("🚪 Lobby: Explicit leave initiated")
         isLeavingExplicitly = true
-        disconnect()
+        
+        if isHost {
+            // Notify guests that room is closing
+            Task {
+                print("🔒 Host closing room, notifying guests...")
+                let syncMsg = SyncMessage(
+                    type: .roomClosed,
+                    timestamp: Date().timeIntervalSince1970,
+                    isPlaying: nil,
+                    senderId: self.participantId,
+                    chatText: "Room Closed",
+                    chatUsername: "Host"
+                )
+                try? await self.realtimeManager?.sendSyncMessage(syncMsg)
+                // Short wait to ensure message delivery
+                try? await Task.sleep(nanoseconds: 200_000_000)
+                await MainActor.run {
+                    self.disconnect()
+                }
+            }
+        } else {
+             disconnect()
+        }
     }
 
     func sendChatMessage() {
@@ -1047,6 +1071,17 @@ class LobbyViewModel: ObservableObject {
                 // Unknown LOBBY command - log warning
                 NSLog("⚠️ Unknown lobby command received: '\(chatText)' from \(senderInfo)")
             }
+        } else if syncMessage.type == .roomClosed {
+             // Host closed the room
+             NSLog("🔒 Received Room Closed signal from Host")
+             addMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
+             
+             Task { @MainActor in
+                 self.roomClosedMessage = "The host has left the room."
+                 self.showRoomClosedAlert = true
+                 // We don't disconnect immediately, we let the user click OK or wait for the alert dismissal
+                 // The alert's dismiss button handles navigation
+             }
         } else {
             // Regular chat message - add to chat UI
             // CRITICAL: Skip messages from self (already added locally when sent)

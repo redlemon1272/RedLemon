@@ -1540,6 +1540,39 @@ extension MPVPlayerViewModel {
         }
     }
 
+    /// Trigger return to lobby for all participants (Host Only)
+    func triggerReturnToLobby() {
+        guard isWatchPartyHost else { return }
+        print("🏠 Host triggering return to lobby...")
+
+        // Send sync message to guests
+        let message = SyncMessage(
+            type: .returnToLobby,
+            timestamp: Date().timeIntervalSince1970,
+            position: 0,
+            isPlaying: false,
+            senderId: currentUserId
+        )
+
+        Task {
+            try? await realtimeManager?.sendSyncMessage(message)
+            
+            // Wait briefly for message to send, then clean up locally
+            try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
+            
+            await MainActor.run {
+                // Host cleanup and navigation
+                Task {
+                    await self.cleanup()
+                    await self.appState?.exitPlayer(keepRoomState: true)
+                    await MainActor.run {
+                        self.appState?.currentView = .watchPartyLobby
+                    }
+                }
+            }
+        }
+    }
+
     /// Start polling chat messages from Supabase
     private func startChatPolling() {
         guard let roomId = currentRoomId else { return }
@@ -1965,12 +1998,32 @@ extension MPVPlayerViewModel {
         case .preload:
             // Preload message - handled in LobbyViewModel, not here
             break
-
-
+            
+        case .roomClosed:
+            print("🔒 Received Room Closed signal in Player")
+            Task { @MainActor in
+                await self.cleanup()
+                // Force full exit to browse
+                await self.appState?.exitPlayer(keepRoomState: false)
+                await MainActor.run {
+                    self.appState?.currentView = .browse
+                }
+            }
 
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
+            
+        case .returnToLobby:
+            print("🏠 Received Return to Lobby signal from Host")
+            // Perform cleanup and navigate back to lobby
+            Task { @MainActor in
+                await self.cleanup()
+                await self.appState?.exitPlayer(keepRoomState: true)
+                await MainActor.run {
+                    self.appState?.currentView = .watchPartyLobby
+                }
+            }
         }
     }
 

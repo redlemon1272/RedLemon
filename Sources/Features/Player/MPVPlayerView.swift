@@ -533,15 +533,31 @@ struct MPVPlayerView: View {
     }
 
     private var exitButton: some View {
-        Button(action: {
+        // Logic:
+        // 1. Event -> "Exit Event" (Standard behavior)
+        // 2. Watch Party Host -> "Back to Lobby" (Triggers synchronized return)
+        // 3. Watch Party Guest / Other -> "Exit Room" (Standard behavior)
+        
+        let isEvent = appState.isEventPlayback == true
+        let isHost = viewModel.isWatchPartyHost
+        
+        return Button(action: {
             Task {
-                await exitPlayer()
+                if !isEvent && isHost {
+                     // Trigger synchronized return
+                     viewModel.triggerReturnToLobby()
+                } else {
+                     // Standard exit
+                     await appState.exitPlayer()
+                }
             }
         }) {
             HStack(spacing: 6) {
-                Image(systemName: "arrow.left.circle.fill")
+                Image(systemName: (!isEvent && isHost) ? "arrow.turn.up.left" : "arrow.left.circle.fill")
                     .font(.system(size: 14))
-                Text("Exit Room")
+                // Note: User requested "Back to Lobby" for hosts, "Exit Room" for guests.
+                // Events logic remains "Exit Room" (or Event)
+                Text((!isEvent && isHost) ? "Back to Lobby" : "Exit Room")
                     .font(.system(size: 13, weight: .medium))
             }
             .foregroundColor(.white)

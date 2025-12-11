@@ -109,19 +109,32 @@ actor MPVSubtitleService: SubtitleService {
     func scanEmbeddedTracks() async {
         guard let mpv = mpvController else { return }
         
-        // Retry logic for embedded tracks (often appear slightly after file load)
-        // We will do a single scan here, assuming the VM calls this possibly multiple times or we just do one robust scan
-        let tracks = await mpv.getSubtitleTracks()
-        self.availableTracks = tracks
+        // Retry logic: Tracks often appear slightly AFTER file load/video ready
+        // We poll for 5 seconds to ensure we catch all embedded streams
+        print("🔍 SubtitleService: Starting embedded track scan (polling 5s)...")
         
-        let currentid = await mpv.getCurrentSubtitleTrack()
-        if let current = tracks.first(where: { $0.id == currentid }) {
-            self.currentTrack = current
-        } else {
-            self.currentTrack = nil
+        for i in 0..<5 {
+            let tracks = await mpv.getSubtitleTracks()
+            
+            // Only update if count changed or it's the first run
+            if tracks.count != self.availableTracks.count || i == 0 {
+                self.availableTracks = tracks
+                
+                let currentid = await mpv.getCurrentSubtitleTrack()
+                if let current = tracks.first(where: { $0.id == currentid }) {
+                    self.currentTrack = current
+                } else {
+                    self.currentTrack = nil
+                }
+                
+                NSLog("✅ SubtitleService: Scanned %d tracks (Attempt %d/5)", tracks.count, i+1)
+            }
+            
+            // Wait 1 second before next poll
+            if i < 4 {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+            }
         }
-        
-        NSLog("✅ SubtitleService: Scanned %d tracks", tracks.count)
     }
     
     func selectTrack(_ id: Int) async {

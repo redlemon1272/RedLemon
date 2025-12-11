@@ -417,8 +417,8 @@ class LobbyViewModel: ObservableObject {
                         return
                     }
 
-                    // Update participantId to match actual user ID
-                    self.participantId = userId.uuidString
+                    // Update participantId to match actual user ID (Normalized to lowercase)
+                    self.participantId = userId.uuidString.lowercased()
 
                     do {
                         try await SupabaseClient.shared.joinRoom(roomId: room.id, userId: userId, isHost: false)

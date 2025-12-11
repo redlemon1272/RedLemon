@@ -150,12 +150,20 @@ class LobbyEventRouter: ObservableObject {
     private func handleLobbyKick(_ chatText: String) async {
         guard let viewModel = viewModel else { return }
         
-        let kickedId = chatText.replacingOccurrences(of: "LOBBY_KICK:", with: "")
-        if viewModel.participantId == kickedId {
+        // Robust parsing: Remove prefix then trim whitespace
+        let kickedIdRaw = chatText.replacingOccurrences(of: "LOBBY_KICK:", with: "")
+        let kickedId = kickedIdRaw.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Case-insensitive comparison to prevent mismatches
+        if viewModel.participantId.caseInsensitiveCompare(kickedId) == .orderedSame {
             // We were kicked - disconnect and return to browse
-            print("❌ Lobby: Kicked by host")
+            print("❌ Lobby: Kicked by host (ID Match: \(kickedId))")
 
             await MainActor.run {
+                // Show alert before disconnecting
+                viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "You have been kicked from the room."])
+                
+                // Trigger disconnect
                 viewModel.disconnect()
                 viewModel.appState?.currentView = .browse
                 viewModel.appState?.restoreWindowFromLobby()

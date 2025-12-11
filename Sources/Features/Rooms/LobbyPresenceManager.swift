@@ -188,16 +188,25 @@ class LobbyPresenceManager: ObservableObject {
                     username = user.username
                 }
                 
-                // Preserve existing ready state
+                // Preserve existing ready state AND timestamp if newer
+                // This fixes the "User Left" bug where DB polling overwrites the fresh "re-join" timestamp
+                // from Realtime with the old "session start" timestamp from DB, invalidating the grace period.
                 let existingParticipant = viewModel.participants.first { $0.id == participant.userId.uuidString }
                 let isReady = existingParticipant?.isReady ?? false // Default to false if new
+                
+                // Use the NEWER timestamp.
+                // If Realtime updated it (re-join), local is newer.
+                // If it's a fresh DB fetch, DB is effectively same (or we don't have local).
+                let localJoinedAt = existingParticipant?.joinedAt ?? Date.distantPast
+                let dbJoinedAt = participant.joinedAt
+                let finalJoinedAt = localJoinedAt > dbJoinedAt ? localJoinedAt : dbJoinedAt
                 
                 let p = Participant(
                     id: participant.userId.uuidString,
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
-                    joinedAt: participant.joinedAt // Use DB joinedAt or local? VM used DB joinedAt? Logic check needed
+                    joinedAt: finalJoinedAt 
                 )
                 updatedParticipants.append(p)
                 

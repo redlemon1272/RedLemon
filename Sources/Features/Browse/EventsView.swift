@@ -377,6 +377,7 @@ struct EventsView: View {
                 // NEW: Resolve stream beforehand (System events are created lazily by first user)
                 // This ensures the room is "seeded" with a valid stream for everyone
                 var initialStreamHash: String? = nil
+                var initialUnlockedUrl: String? = nil
                 do {
                     print("⚡️ Resolving stream for system event creation...")
                     // System events default to FullHD
@@ -388,8 +389,10 @@ struct EventsView: View {
                         preferredInfoHash: nil
                     )
                     initialStreamHash = result.stream.infoHash
+                    initialUnlockedUrl = result.stream.url
                     print("✅ Stream resolved for system event: \(result.stream.title)")
                     print("   Hash: \(initialStreamHash ?? "nil")")
+                    print("   URL: \(initialUnlockedUrl?.prefix(30) ?? "nil")...")
                 } catch {
                     print("⚠️ Failed to resolve seed stream for system event: \(error)")
                     // Continue creation without a hash (clients will have to resolve themselves as fallback)
@@ -409,7 +412,8 @@ struct EventsView: View {
                     backdropUrl: event.mediaItem.background,
                     season: nil,
                     episode: nil,
-                    isPublic: true
+                    isPublic: true,
+                    unlockedStreamUrl: initialUnlockedUrl
                 )
                 // Join the room we just created
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)

@@ -112,6 +112,7 @@ struct WatchPartyLobbyView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .padding(.horizontal, 16)
+                    .padding(.top, 40) // Avoid window traffic lights
 
                     Spacer()
                 }

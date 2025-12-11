@@ -28,7 +28,8 @@ protocol RoomManager {
         backdropUrl: String?,
         season: Int?,
         episode: Int?,
-        isPublic: Bool?,
+        isPublic: Bool,
+        unlockedStreamUrl: String?,
         description: String?,
         playlist: [PlaylistItem]?
     ) async throws -> SupabaseRoom
@@ -360,7 +361,8 @@ class SupabaseClient: RoomManager, UserManager {
         backdropUrl: String? = nil,
         season: Int? = nil,
         episode: Int? = nil,
-        isPublic: Bool? = nil,
+        isPublic: Bool = false,
+        unlockedStreamUrl: String? = nil,
         description: String? = nil,
         playlist: [PlaylistItem]? = nil
     ) async throws -> SupabaseRoom {
@@ -368,19 +370,19 @@ class SupabaseClient: RoomManager, UserManager {
             "id": id,
             "name": name,
             "host_user_id": hostUserId.uuidString,
-            "host_username": hostUsername
+            "host_username": hostUsername,
+            "is_public": isPublic,
+            "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-        
-        if let isPublic = isPublic { roomData["is_public"] = isPublic }
-        
-        if let description = description { roomData["description"] = description }
 
+        if let description = description { roomData["description"] = description }
         if let streamHash = streamHash { roomData["stream_hash"] = streamHash }
         if let imdbId = imdbId { roomData["imdb_id"] = imdbId }
         if let posterUrl = posterUrl { roomData["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { roomData["backdrop_url"] = backdropUrl }
         if let season = season { roomData["season"] = season }
         if let episode = episode { roomData["episode"] = episode }
+        if let unlockedStreamUrl = unlockedStreamUrl { roomData["unlocked_stream_url"] = unlockedStreamUrl }
 
         if let playlist = playlist {
             // Serialize playlist items to dictionaries for JSONB column

@@ -162,16 +162,8 @@ struct ContentView: View {
                             Text("No media selected")
                         }
                     case .watchPartyLobby:
-                        if let room = appState.currentWatchPartyRoom {
-                            WatchPartyLobbyView(room: room, isHost: appState.isWatchPartyHost)
-                                .environmentObject(appState)
-                        } else if appState.isLoadingRoom {
-                            ProgressView("Loading room...")
-                                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                .background(Color.black)
-                        } else {
-                            Text("No room found")
-                        }
+                        // Handled by lobbyOverlay
+                        Color.black.ignoresSafeArea()
                     case .player:
                         // Placeholder - player shown in fullscreen ZStack
                         Text("")
@@ -181,6 +173,9 @@ struct ContentView: View {
 
             // Fullscreen player overlay
             playerOverlay
+            
+            // Fullscreen lobby overlay (covers sidebar)
+            lobbyOverlay
         }
         .sheet(isPresented: $appState.showUsernameSetup) {
             UsernameSetupView()
@@ -226,6 +221,28 @@ struct ContentView: View {
             .id("player-view-\(metadata.id)") // Prevent recreation on parent rebuilds
             .ignoresSafeArea()
             .transition(.opacity)
+        }
+    }
+
+    @ViewBuilder
+    private var lobbyOverlay: some View {
+        if appState.currentView == .watchPartyLobby {
+            Group {
+                if let room = appState.currentWatchPartyRoom {
+                    WatchPartyLobbyView(room: room, isHost: appState.isWatchPartyHost)
+                        .environmentObject(appState)
+                } else if appState.isLoadingRoom {
+                    ProgressView("Loading room...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.black)
+                } else {
+                    Text("No room found")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color.black)
+                }
+            }
+            .transition(.opacity)
+            .ignoresSafeArea() // Ensure it covers the sidebar
         }
     }
 }

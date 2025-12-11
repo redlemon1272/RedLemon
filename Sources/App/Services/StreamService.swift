@@ -90,7 +90,8 @@ actor StreamService: StreamResolving {
             let allBuckets = [buckets.uhd4k, buckets.fullHD, buckets.hd, buckets.sd]
             for bucket in allBuckets {
                 let streams = extractStreams(from: bucket)
-                if let match = streams.first(where: { $0.infoHash == targetHash }) {
+                // Case-insensitive comparison for reliability
+                if let match = streams.first(where: { $0.infoHash?.lowercased() == targetHash.lowercased() }) {
                     print("✅ StreamService: Found requested stream hash! Locking selection.")
                     forcedStream = match
                     break

@@ -792,6 +792,7 @@ class AppState: ObservableObject {
                     season: finalSeason,
                     episode: finalEpisode,
                     isPublic: isPublic,
+                    unlockedStreamUrl: nil,
                     description: description,
                     playlist: nil
                 )
@@ -810,7 +811,8 @@ class AppState: ObservableObject {
                     backdropUrl: mediaItem.background,
                      season: finalSeason,
                     episode: finalEpisode,
-                    isPublic: nil,      // Don't send is_public
+                    isPublic: false,      // Don't send is_public
+                    unlockedStreamUrl: nil,
                     description: nil,    // Don't send description
                     playlist: nil
                 )

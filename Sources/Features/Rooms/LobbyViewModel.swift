@@ -33,6 +33,10 @@ class LobbyViewModel: ObservableObject {
     @Published var currentPlaylistIndex: Int = 0
     @Published var isPlaylistMode: Bool = false
     @Published var mutedUserIds: Set<String> = []
+    
+    // Track unique realtime connection IDs to show "Joined" notifications correctly
+    // even if user is already known from DB polling
+    private var connectedUserIds: Set<String> = []
 
     // Realtime connection status for UI feedback
 
@@ -120,8 +124,10 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Add initial join message
+        // Add initial join message and track connection
         if isHost {
-            addMessage(.userJoined, userName: "Host")
+            self.connectedUserIds.insert(self.participantId)
+            addMessage(.userJoined, userName: room.hostName ?? "Host")
         }
 
         // NEW: Initialize playlist state
@@ -201,6 +207,7 @@ class LobbyViewModel: ObservableObject {
                 guard let self = self else { return }
 
                 // Update participants list
+                // Update participants list
                 switch action {
                 case .join:
                     // RESOLVE TRUE USER ID:
@@ -214,6 +221,14 @@ class LobbyViewModel: ObservableObject {
 
                     let normalizedID = trueUserId.lowercased()
                     
+                    // Determine if we should show a notification (New Connection)
+                    // We use `connectedUserIds` to track distinct active sessions
+                    // This creates a notification even if the user is already in `participants` (e.g. from DB poll)
+                    let isNewConnection = !self.connectedUserIds.contains(normalizedID)
+                    if isNewConnection {
+                        self.connectedUserIds.insert(normalizedID)
+                    }
+                    
                     // Check if already exists (CASE INSENSITIVE)
                     if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                         self.participants[index].joinedAt = Date()
@@ -221,9 +236,14 @@ class LobbyViewModel: ObservableObject {
                         if let dict = metadata as? [String: Any],
                            let username = dict["username"] as? String {
                             self.participants[index].name = username
+                            
+                            // If it's a new Realtime connection, show the toast even if they were in DB list
+                            if isNewConnection {
+                                self.addMessage(.userJoined, userName: username)
+                            }
                         }
                     } else {
-                        // New user
+                        // New user (Not in DB list yet)
                         var username = "User"
                         if let dict = metadata as? [String: Any] {
                             if let name = dict["username"] as? String {
@@ -239,7 +259,9 @@ class LobbyViewModel: ObservableObject {
                             joinedAt: Date()
                         )
                         self.participants.append(newParticipant)
-                        self.addMessage(.userJoined, userName: username)
+                        if isNewConnection {
+                            self.addMessage(.userJoined, userName: username)
+                        }
                     }
                 case .leave:
                     // RESOLVE TRUE USER ID (Same as Join)
@@ -265,6 +287,7 @@ class LobbyViewModel: ObservableObject {
                             // If they joined recently (\u003c 1 second), it's a metadata update, not a real leave
                             if timeSinceJoin > 1.0 {
                                 self.participants.remove(at: index)
+                                self.connectedUserIds.remove(normalizedID) // Remove from tracking
                                 self.addMessage(.userLeft, userName: participant.name)
                             }
                         }

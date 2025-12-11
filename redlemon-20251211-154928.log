@@ -1,0 +1,2115 @@
+2025-12-11 15:49:35.377 RedLemon[12341:93614] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-11 15:49:35.377 RedLemon[12341:93614] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-11 15:49:35.463 RedLemon[12341:93614] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-11 15:49:35.464 RedLemon[12341:93670] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-11 15:49:35.517 RedLemon[12341:93614] ✅ Playback state reset complete - starting in browse view
+2025-12-11 15:49:35.517 RedLemon[12341:93614] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-11 15:49:35.517 RedLemon[12341:93614] 🧪 Testing Profile: debug
+2025-12-11 15:49:35.518 RedLemon[12341:93669] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-11 15:49:35.565 RedLemon[12341:93614] ✅ Keychain: Found stored username: ursinho
+2025-12-11 15:49:35.565 RedLemon[12341:93614] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-11 15:49:35.565 RedLemon[12341:93689] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-11 15:49:35.873 RedLemon[12341:93685] 📡 SupabaseClient: User lookup response received (243 bytes)
+2025-12-11 15:49:35.874 RedLemon[12341:93614] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-11 15:49:35.877 RedLemon[12341:93685] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-11 15:49:35.877 RedLemon[12341:93685] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-11 15:49:35.941 RedLemon[12341:93614] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-11 15:49:35.941 RedLemon[12341:93614] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:49:35.941 RedLemon[12341:93614] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:49:35.941 RedLemon[12341:93614] 🚀 RedLemon: Starting HTTP server...
+2025-12-11 15:49:35.941 RedLemon[12341:93614] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-11 15:49:35.964 RedLemon[12341:93614] ✅ RedLemon: HTTPServer instance created
+2025-12-11 15:49:35.965 RedLemon[12341:93685] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1215 with 423 movies
+✅ [EventsConfig] Using cached movie_events config (version 1215, 423 movies)
+✅ [EventsView] Loaded 423 movies from config version 1215
+   1. Pacific Rim
+   2. Harry Potter and the Sorcerer's Stone
+   3. Stigmata
+   4. Deadpool 2
+   5. Split
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Snatch | Runtime: 90m | Duration: 6000s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Dogma | Runtime: 130m | Duration: 8400s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: Raiders of the Lost Ark | Runtime: 115m | Duration: 7500s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Facu2025-12-11 15:49:38.023 RedLemon[12341:93614] ✅ RedLemon: Server marked as ready
+2025-12-11 15:49:38.071 RedLemon[12341:93614] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-11 15:49:38.071 RedLemon[12341:93614] 🔍 Performing startup checks...
+2025-12-11 15:49:38.071 RedLemon[12341:93614] ✅ Username-based authentication ready
+2025-12-11 15:49:38.071 RedLemon[12341:93614] 🔍 Performing startup checks...
+2025-12-11 15:49:38.071 RedLemon[12341:93614] ✅ Username-based authentication ready
+2025-12-11 15:49:38.071 RedLemon[12341:93614] 🔄 Checking for app updates...
+lty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Kingdom of the Planet of the Apes
+   Metadata runtime: 145 min
+   Calculated duration: 155 minutes
+📅 Schedule Updated:
+   Live: Kingdom of the Planet of the Apes
+   Progress: 7596s / 9300s
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt11389872","name":"Kingdom of the Planet of the Apes","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"12e91b37b0afc70162a29e8da6ed6876f1b7a34b","imdb_id":"tt11389872","poster_url":"https://images.metahub.space/poster/small/tt11389872/img","backdrop_url":"https://images.metahub.space/background/medium/tt11389872/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T19:38:01.611199","last_activity":"2025-12-11T19:38:29.938657","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"F850C4AC-093A-4005-9222-709AA02783CE","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"6470be1c-d6d2-11f0-b164-0a58a9feac02":{"metas":[{"phx_ref":"GIBEH55aqZYFhh6Q","last_seen":"2025-12-11T20:45:56Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e849b680-d6d2-11f0-9267-0a58a9feac02":{"metas":[{"phx_ref":"GIBEUx5UG9ZL2f5Q","last_seen":"2025-12-11T20:49:36Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+📨 Received: {"ref":"8105A4F1-8260-405A-B55A-F714B34A5DBA","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+✅ SocialService: Connected to DM channel
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 1.011s (RTT: 71ms)
+   Local:  2025-12-11 20:49:38 +0000
+   Server: 2025-12-11 20:49:39 +0000
+⏰ Time synced with server! Recalculating schedule...
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Snatch | Runtime: 90m | Duration: 6000s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Dogma | Runtime: 130m | Duration: 8400s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: Raiders of the Lost Ark | Runtime: 115m | Duration: 7500s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Kingdom of the Planet of the Apes
+   Metadata runtime: 145 min
+   Calculated duration: 155 minutes
+📅 Schedule Updated:
+   Live: Kingdom of the Planet of the Apes
+   Progress: 7599s / 9300s
+🔍 Supabase Response for /rooms: [{"id":"event_tt11389872","name":"Kingdom of the Planet of the Apes","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"12e91b37b0afc70162a29e8da6ed6876f1b7a34b","imdb_id":"tt11389872","poster_url":"https://images.metahub.space/poster/small/tt11389872/img","backdrop_url":"https://images.metahub.space/background/medium/tt11389872/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T19:38:01.611199","last_activity":"2025-12-11T19:38:29.938657","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20)...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:48:19","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"4ASG","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8818f5e38f8eb3f1029c7ba0b363517ad02be6dc","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:32:21.889353","last_activity":"2025-12-11T20:33:54","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/YGKEZRJE2ZTBQ43/Nightcrawler%20%282014%29%20Open%20Matte%20WEB-DL%201080p.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "4914B846-6C4F-40F7-98B7-618154535DB8", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "genres": ["Crime", "Drama", "Thriller"], "poster": "https://images.justwatch.com/poster/51204426/s332/img", "description": "A petty thief desperate for work muscles into the world of crime journalism and becomes the star of his own story as he blurs the line between observer and participant."}}]}, 
+ {"id":"7TQP","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:23:43.980831","last_activity":"2025-12-11T20:24:25","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/4LORA72O2ZP7O112/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "4D0AE4B4-3646-4C75-99FE-9C12D04462E6", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}, 
+ {"id":"MSAS","name":"Orphan","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"241ea4282bb65df2070edbbb2963d74c042d9df3","imdb_id":"tt1148204","poster_url":"https://images.metahub.space/poster/small/tt1148204/img","backdrop_url":"https://images.metahub.space/background/medium/tt1148204/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:06:12.394942","last_activity":"2025-12-11T20:14:04","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/AIWTARVLRX4F241/Orphan%202009%20BluRay%201080p%20DTS%20AC3%20x264-MgB.mkv","description":"Horror Marathon","current_playlist_index":2,"playlist":[{"id": "226078BD-60B9-4CCD-B16C-257B7E479828", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "A08D0A69-0D99-4FCB-B23C-14AD3CCBB16D", "mediaItem": {"id": "tt29268110", "name": "Smile 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYTg5OTMyMGMtYzMwNC00NDMyLWE0OGUtMTQ1ODcwM2FjOTM4XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "31B24DDC-65C9-42D6-A15D-545EF788B4C4", "mediaItem": {"id": "tt1148204", "name": "Orphan", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYjc1Y2M4ZmQtMTA2NC00OTUwLTgxZDMtZDJmNTk1OTU4Njk4XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "8F12D869-3E0E-43F3-A2CC-6CD29877E460", "mediaItem": {"id": "tt11851548", "name": "Orphan: First Kill", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BYzU1MGZmODctODU0ZC00YjllLWE3ZmYtNmFmZjE1ZjE3YzVkXkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "5A88E167-2B70-4843-B22F-C3FB47CABC38", "mediaItem": {"id": "tt1922777", "name": "Sinister", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMjI5MTg1Njg0Ml5BMl5BanBnXkFtZTcwNzg2Mjc4Nw@@._V1_SX250.jpg"}}, {"id": "67BB83AD-334A-4677-937C-D6493A7B8793", "mediaItem": {"id": "tt2752772", "name": "Sinister 2", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMjM3MTQ5NjA0OV5BMl5BanBnXkFtZTgwMzg2OTYyNTE@._V1_SX250.jpg"}}]}, 
+ {"id":"event_tt11389872","name":"Kingdom of the Planet of the Apes","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"12e91b37b0afc70162a29e8da6ed6876f1b7a34b","imdb_id":"tt11389872","poster_url":"https://images.metahub.space/poster/small/tt11389872/img","backdrop_url":"https://images.metahub.space/background/medium/tt11389872/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T19:38:01.611199","last_activity":"2025-12-11T19:38:29.938657","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt1136608","name":"District 9","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"a460eed9eb10964400e4a1e112029c28ea9e5dbe","imdb_id":"tt1136608","poster_url":"https://images.metahub.space/poster/small/tt1136608/img","backdrop_url":"https://images.metahub.space/background/medium/tt1136608/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-11T18:18:03.986885","last_activity":"2025-12-11T18:18:04.058277","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"53345969-BF97-4C03-8282-F5260DA13524","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+✅ Loaded 4 rooms (total: 4)
+[ INFO ] GET /api/metadata/meta/movie/tt15474916 [request-id: ED1659B6-099E-4588-B48E-E360AA379A14]
+[ INFO ] GET /api/metadata/meta/movie/tt1148204 [request-id: EB1E6E40-92F3-4504-8297-D06195010D1B]
+[ INFO ] GET /api/metadata/meta/movie/tt15474916 [request-id: 9AD81B41-31F4-4385-B414-B6603FBA1809]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: C22B5AD2-30FD-4E84-BCE3-292977D64A5B]
+2025-12-11 15:50:20.313 RedLemon[12341:94000] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-11 15:50:20.314 RedLemon[12341:93987] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-11 15:50:20.325 RedLemon[12341:93889] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-11 15:50:20.342 RedLemon[12341:93889] 📦 Decoded CinemetaMeta - videos count: -1
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt1148204]
+💾 Cache SET: Metadata[meta_movie_tt15474916]
+💾 Cache SET: Metadata[meta_movie_tt15474916]
+🚪 Joining room: 56YF
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room 56YF...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+🔌 Setting up Realtime channel: watch-party:56YF
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+[ INFO ] GET /api/metadata/meta/movie/tt15474916 [request-id: 2948CB8B-35CC-4D17-8ECC-8776DB32B988]
+2025-12-11 15:50:21.597 RedLemon[12341:93614] ✅ Guest joined room 56YF in database
+2025-12-11 15:50:21.765 RedLemon[12341:93986] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-11 15:50:21.767 RedLemon[12341:93986]    Payload keys: chatUsername, type, timestamp, senderId, position, chatText
+2025-12-11 15:50:21.769 RedLemon[12341:93889] ✅ Realtime: Message broadcast complete
+2025-12-11 15:50:21.876 RedLemon[12341:93999] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:21.876 RedLemon[12341:93999]    Payload keys: chatUsername, chatText, senderId, timestamp, position, type
+2025-12-11 15:50:21.877 RedLemon[12341:93999] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-11 15:50:21.877 RedLemon[12341:93999] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-11 15:50:21.877 RedLemon[12341:93999] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:21.907 RedLemon[12341:93614] 👋 Received: Guest 'ursinho' joined room 56YF
+2025-12-11 15:50:27.224 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:27.224 RedLemon[12341:93986]    Payload keys: chatText, chatUsername, type, senderId, timestamp, position
+2025-12-11 15:50:27.225 RedLemon[12341:93986] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2025-12-11 15:50:27.225 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-11 15:50:27.225 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:27.225 RedLemon[12341:93614] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-11 15:50:27.237 RedLemon[12341:93614] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt15474916
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Smile
+🔍 [DEBUG] Successfully created MediaItem from meta: Smile
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:48:19","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+✅ Lobby: Loaded metadata for Smile
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:22.514479","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+✅ Lobby: Refreshed room state. isPlaying: false
+🔌 Setting up Realtime channel: watch-party:56YF
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:56YF, skipping join
+📡 Joined channel: realtime:watch-party:56YF
+📡 Connection state: connected
+✅ Realtime channel setup complete
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+✅ Lobby: Connected to Realtime
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+📨 Received: {"ref":"D72B8F62-38C1-4234-ABC4-75D76B5ED951","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":48309482,"event":"UPDATE","filter":"id=eq.56YF","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:56YF"}
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:22.514479","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:56YF"},"topic":"realtime:watch-party:56YF"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{"b9ef3eb8-d6d2-11f0-970c-0a58a9feac02":{"metas":[{"phx_ref":"GIBEQQSx_wmgqMmJ","phx_ref_prev":"GIBEQQSuIpygqP7P","is_host":true,"joined_at":1765486099.6410232,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0328ac5e-d6d3-11f0-9918-0a58a9feac02":{"metas":[{"phx_ref":"GIBEXZ4qWdf5mejE","is_host":false,"joined_at":1765486221.754236,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0328ac5e-d6d3-11f0-9918-0a58a9feac02":{"metas":[{"phx_ref":"GIBEXZ4tPyX5mWqL","phx_ref_prev":"GIBEXZ4qWdf5mejE","is_host":false,"joined_at":1765486221.7570472,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0328ac5e-d6d3-11f0-9918-0a58a9feac02":{"metas":[{"phx_ref":"GIBEXZ4qWdf5mejE","is_host":false,"joined_at":1765486221.754236,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:22.514479","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:22.514479","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "56YF", "name": "Smile", "season": null, "episode": null, "imdb_id": "tt15474916", "playlist": [{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2025-12-11T20:48:19.095736", "is_playing": false, "poster_url": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-11T20:50:27", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-11T20:50:28.121Z","old_record":{"id": "56YF"}},"ids":[48309482]},"topic":"realtime:watch-party:56YF"}
+📨 Lobby: Received Room UPDATE from Realtime
+📨 Lobby: Received Room UPDATE from Realtime
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:28","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:28","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:28","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "56YF", "name": "Smile", "season": null, "episode": null, "imdb_id": "tt15474916", "playlist": [{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2025-12-11T20:48:19.095736", "is_playing": true, "poster_url": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg", "description": null, "stream_hash": "b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-11T20:50:28", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-11T20:50:28.215Z","old_r2025-12-11 15:50:27.359 RedLemon[12341:93614] ✅ Guest: Synced stream details from host (Hash: b342efbc)
+2025-12-11 15:50:27.359 RedLemon[12341:93614] 🎬 Guest: Fetch took 0.122s, waiting 3.128s
+2025-12-11 15:50:30.604 RedLemon[12341:93614] 🎬 Guest: Starting playback after countdown
+2025-12-11 15:50:30.604 RedLemon[12341:93614] 🎬 Guest: Launching player for Smile
+2025-12-11 15:50:30.605 RedLemon[12341:93614]    Quality: 1080p
+2025-12-11 15:50:30.605 RedLemon[12341:93614]    Mode: watchParty
+2025-12-11 15:50:30.605 RedLemon[12341:93614] 📡 Fetching metadata for tt15474916...
+2025-12-11 15:50:30.688 RedLemon[12341:93614] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt15474916/img
+2025-12-11 15:50:30.688 RedLemon[12341:93614] ⏳ Background art loading...
+2025-12-11 15:50:30.689 RedLemon[12341:93614] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt15474916/img
+2025-12-11 15:50:30.689 RedLemon[12341:93614] ⏳ Logo loading...
+2025-12-11 15:50:30.740 RedLemon[12341:93614] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-11 15:50:30.740 RedLemon[12341:93614] 🎬 GUEST: Fetching subtitles for shared stream...
+ecord":{"id": "56YF"}},"ids":[48309482]},"topic":"realtime:watch-party:56YF"}
+📨 Lobby: Received Room UPDATE from Realtime
+📨 Lobby: Received Room UPDATE from Realtime
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:28","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"56YF","name":"Smile","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b","imdb_id":"tt15474916","poster_url":"https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-11T20:48:19.095736","last_activity":"2025-12-11T20:50:28","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "6901F8D7-7970-40C1-9069-EE8550FCFA66", "mediaItem": {"id": "tt15474916", "name": "Smile", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BNjFhMzBlNzktMjE2Ni00YTMyLWI2YWUtYmM1N2QxMDQwZmZhXkEyXkFqcGc@._V1_SX250.jpg"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🎬 Starting playback for: Smile
+✅ Cache HIT: Metadata[meta_movie_tt15474916]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+   Hash: b342efbc7e1fb28d34c693e6a4b3a29030dd7e7b
+   Quality: 1080p
+   Skipping local resolution to ensure perfect sync.
+
+[ INFO ] GET /subtitles/search [request-id: CE3B13BE-82DF-414D-8F76-E87BB2D35B3B]
+2025-12-11 15:50:30.749 RedLemon[12341:93614] ✅ Logo loaded successfully
+2025-12-11 15:50:30.836 RedLemon[12341:93614] ✅ Background art loaded successfully
+2025-12-11 15:50:31.252 RedLemon[12341:93614] ✅ GUEST: Found 10 subtitles
+2025-12-11 15:50:31.295 RedLemon[12341:93614] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/S, subtitles: 10
+2025-12-11 15:50:31.384 RedLemon[12341:93614] ✅ Stream ready, starting playback...
+2025-12-11 15:50:31.384 RedLemon[12341:93614] 🖥️ WindowManager: enterFullscreen() called
+2025-12-11 15:50:31.386 RedLemon[12341:93614]    Window: <SwiftUI.SwiftUIWindow: 0x7fce512049f0>
+2025-12-11 15:50:31.386 RedLemon[12341:93614]    Is fullscreen: 0
+2025-12-11 15:50:31.386 RedLemon[12341:93614]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-11 15:50:31.551 RedLemon[12341:93614] 🖼️ Setting up MPV with native macOS video output...
+2025-12-11 15:50:31.572 RedLemon[12341:93614] ✅ MPV initialized with native GPU rendering
+2025-12-11 15:50:31.588 RedLemon[12341:93614] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-11 15:50:31.588 RedLemon[12341:93614] 🎉 Starting watch party sync - Room: 56YF, Host: NO
+2025-12-11 15:50:31.590 RedLemon[12341:93614] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-11 15:50:31.671 RedLemon[12341:93614] 🔄 Starting chat polling for room: 56YF
+2025-12-11 15:50:31.674 RedLemon[12341:93614] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-11 15:50:31.674 RedLemon[12341:93614] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-11 15:50:31.676 RedLemon[12341:93614] 🎬🎬🎬 Subtitles: 10
+2025-12-11 15:50:31.676 RedLemon[12341:93614] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Smile
+2025-12-11 15:50:31.677 RedLemon[12341:93614] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/S
+2025-12-11 15:50:31.677 RedLemon[12341:93614] 🎬🎬🎬 subtitles: 10
+2025-12-11 15:50:31.679 RedLemon[12341:93614] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-11 15:50:31.729 RedLemon[12341:93999] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DD, autoplay: false
+2025-12-11 15:50:31.729 RedLemon[12341:94121] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-11 15:50:31.729 RedLemon[12341:93999] ⏸️ Loading in paused mode (watch party)
+2025-12-11 15:50:31.729 RedLemon[12341:93999] 🔗 URL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv
+2025-12-11 15:50:31.729 RedLemon[12341:94121] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTkzNjgtMjk1MzU0OS56aXA=
+2025-12-11 15:50:31.729 RedLemon[12341:93999] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/Smile%202022%201080p%20ATVP%20WEB-DL%20DDPA%205%201%20H%20264-PiRaTeS.mkv"
+2025-12-11 15:50:31.730 RedLemon[12341:93999] 🎬 MPV loadfile result: 0
+2025-12-11 15:50:31.730 RedLemon[12341:93999] ✅ MPV loadfile succeeded (started paused)
+🔍 Subtitle search request: tt15474916 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt15474916 (movie)
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Smile(2022)(1080pBluRayx26510bitTigole) [EN] (score: 20)
+   [2] Smile.2022.1080p.BluRay.H264.AAC-RARBG [EN] (score: 20)
+   [3] Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn [EN] (score: 20)
+   [4] Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN [EN] (score: 20)
+   [5] Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG [EN] (score: 20)
+   [6] Smile.2022.WEBRip-HBOGO/CP [EN] (score: 15)
+   [7] Smile.2022.WEBRip.iTunes [EN] (score: 15)
+   [8] Smile.2022.WEBRip.Amazon [EN] (score: 15)
+   [9] Smile(2022)[BluRay01h55m38s] [EN] (score: 15)
+   [10] Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI [EN] (score: 10)
+✅ Subtitle search returned 10 results
+ Using provided room ID: 56YF
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/S
+   Display Title: Smile
+   Subtitle URLs: 10
+      [0] Smile(2022)(1080pBluRayx26510bitTigole)
+      [1] Smile.2022.1080p.BluRay.H264.AAC-RARBG
+      [2] Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn
+      [3] Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN
+      [4] Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG
+      [5] Smile.2022.WEBRip-HBOGO/CP
+      [6] Smile.2022.WEBRip.iTunes
+      [7] Smile.2022.WEBRip.Amazon
+      [8] Smile(2022)[BluRay01h55m38s]
+      [9] Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"6470be1c-d6d2-11f0-b164-0a58a9feac02":{"metas":[{"phx_ref":"GIBEX6JWp2MFhhzC","phx_ref_prev":"GIBEH55aqZYFhh6Q","last_seen":"2025-12-11T20:50:31Z","room_id":"56YF","started_at":"2025-12-11T20:50:31Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom","watching_id":"tt15474916","watching_title":"Smile","watching_type":"movie"}]}},"leaves":{"6470be1c-d6d2-11f0-b164-0a58a9feac02":{"metas":[{"phx_ref":"GIBEH55aqZYFhh6Q","last_seen":"2025-12-11T20:45:56Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=56YF, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:56YF
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:56YF, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Smile
+   IMDB: tt15474916
+   URL: https://chi9-4.download.real-debrid.com/d/HMICDMYNOJJV6125/S...
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0328ac5e-d6d3-11f0-9918-0a58a9feac02":{"metas":[{"phx_ref":"GIBEX-tBIwD5mUuF","phx_ref_prev":"GIBEXZ4tPyX5mWqL","is_host":false,"joined_at":1765486231.658167,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"0328ac5e-d6d3-11f0-9918-0a58a9feac02":{"metas":[{"phx_ref":"GIBEXZ4tPyX5mWqL","phx_ref_prev":"GIBEXZ4qWdf5mejE","is_host":false,"joined_at":1765486221.7570472,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:56YF"}
+📡 Fetching metadata for tt15474916 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt15474916]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NTkzNjgtMjk1MzU0OS56aXA= [request-id: 33FBE449-69EE-4060-BAD8-399590BB1BB1]
+2025-12-11 15:50:32.024 RedLemon[12341:93614] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-11 15:50:32.238 RedLemon[12341:93986] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F64B11A4-204D-4B4E-B2B0-4E8BCC5FC784.vtt
+2025-12-11 15:50:32.238 RedLemon[12341:93986] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F64B11A4-204D-4B4E-B2B0-4E8
+2025-12-11 15:50:32.256 RedLemon[12341:93986] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:32.256 RedLemon[12341:93986] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTcxMTEtMjk1MTI4MS56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5NTkz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2959368-2953549.zip
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+✅ Got background: https://images.metahub.space/background/medium/tt15474916/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt15474916/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt15474916/img...
+📡 SocialService: Updated status - Watching: Smile
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e849b680-d6d2-11f0-9267-0a58a9feac02":{"metas":[{"phx_ref":"GIBEX-85FhNL2fSG","phx_ref_prev":"GIBEUx5UG9ZL2f5Q","last_seen":"2025-12-11T20:50:31Z","room_id":"56YF","started_at":"2025-12-11T20:50:31Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho","watching_id":"tt15474916","watching_title":"Smile","watching_type":"movie"}]}},"leaves":{"e849b680-d6d2-11f0-9267-0a58a9feac02":{"metas":[{"phx_ref":"GIBEUx5UG9ZL2f5Q","last_seen":"2025-12-11T20:49:36Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b9ef3eb8-d6d2-11f0-970c-0a58a9feac02":{"metas":[{"phx_ref":"GIBEX56RT3ugqNyG","phx_ref_prev":"GIBEQQSx_wmgqMmJ","is_host":true,"joined_at":1765486231.2887192,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"b9ef3eb8-d6d2-11f0-970c-0a58a9feac02":{"metas":[{"phx_ref":"GIBEQQSx_wmgqMmJ","phx_ref_prev":"GIBEQQSuIpygqP7P","is_host":true,"joined_at":1765486099.6410232,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:56YF"}
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 29259 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile (2022) (1080p BluRay x265 10bit Tigole).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NTcxMTEtMjk1MTI4MS56aXA= [request-id: F46D39B4-0092-420A-B469-B15CC3C977CB]
+2025-12-11 15:50:32.436 RedLemon[12341:93889] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:32.436 RedLemon[12341:93889]    Payload keys: timestamp, isPlaying, position, senderId, type
+2025-12-11 15:50:32.437 RedLemon[12341:93889] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:32.437 RedLemon[12341:93889] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:32.437 RedLemon[12341:93889] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:32.438 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:32.691 RedLemon[12341:93889] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E5863306-E3B7-4498-A511-F295E5DF0AA6.vtt
+2025-12-11 15:50:32.691 RedLemon[12341:93889] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E5863306-E3B7-4498-A511-F29
+2025-12-11 15:50:32.700 RedLemon[12341:93889] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:32.700 RedLemon[12341:93889] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTY0MDQtMjk1MDU1MC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5NTcx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2957111-2951281.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"56YF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+✅ Download complete: 60290 bytes
+📦 Detected ZIP archive, extracting...
+🎬 DisplayLink: reportSwap() (throttled)
+⚠️ No specific episode match found, using first file: Smile.2022.1080p.BluRay.H264.AAC-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NTY0MDQtMjk1MDU1MC56aXA= [request-id: C11C6061-1B68-4507-B3E6-043E9F4D150B]
+2025-12-11 15:50:33.000 RedLemon[12341:93999] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B6B5CB23-B1F6-4D86-80E7-73EA8C97CA7D.vtt
+2025-12-11 15:50:33.000 RedLemon[12341:93999] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B6B5CB23-B1F6-4D86-80E7-73E
+2025-12-11 15:50:33.007 RedLemon[12341:93999] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:33.007 RedLemon[12341:93999] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NTU4ODMtMjk1MDAwMC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5NTY0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2956404-2950550.zip
+✅ Download complete: 28439 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile (2022).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NTU4ODMtMjk1MDAwMC56aXA= [request-id: AA6E24CC-32E8-40C7-8A39-FAE425B36802]
+2025-12-11 15:50:33.318 RedLemon[12341:93888] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:33.318 RedLemon[12341:93888]    Payload keys: isPlaying, position, senderId, timestamp, type
+2025-12-11 15:50:33.319 RedLemon[12341:93888] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:33.319 RedLemon[12341:93888] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-11 15:50:33.319 RedLemon[12341:93888] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:33.319 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:33.319 RedLemon[12341:93614] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:33.319 RedLemon[12341:93614] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-11 15:50:33.396 RedLemon[12341:93889] ✅ Subtitle 4 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2D0749A3-BC7E-4452-A4A1-8300103711E7.vtt
+2025-12-11 15:50:33.396 RedLemon[12341:93889] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2D0749A3-BC7E-4452-A4A1-830
+2025-12-11 15:50:33.402 RedLemon[12341:93889] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:33.403 RedLemon[12341:93889] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NDE1NDQtMjkzNDYxNi56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5NTU4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2955883-2950000.zip
+✅ Download complete: 30313 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile 2022 2160p UHD BluRay REMUX DV HDR HEVC Atmos-TRiToN.srt
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765486234.120226,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NDE1NDQtMjkzNDYxNi56aXA= [request-id: 871A4063-1004-43D5-A791-547353148317]
+2025-12-11 15:50:33.968 RedLemon[12341:93986] ✅ Subtitle 5 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_8C0D8F8E-EB5B-4D58-BBF6-62ABABFEA800.vtt
+2025-12-11 15:50:33.968 RedLemon[12341:93986] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_8C0D8F8E-EB5B-4D58-BBF6-62A
+2025-12-11 15:50:34.322 RedLemon[12341:93986] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:34.322 RedLemon[12341:93986] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxMjU1MjktMzEzODM2OC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5NDE1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2941544-2934616.zip
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en (subrip)
+✅ Download complete: 34739 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxMjU1MjktMzEzODM2OC56aXA= [request-id: 2CF81D26-8E74-4605-BBD7-79EBE056DFCA]
+2025-12-11 15:50:34.396 RedLemon[12341:93614] ⏱️ Watch Party: Duration available (6938.2s), triggering ready signal
+2025-12-11 15:50:34.396 RedLemon[12341:93614] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-11 15:50:34.437 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:34.437 RedLemon[12341:93986]    Payload keys: senderId, timestamp, type, position, isPlaying
+2025-12-11 15:50:34.437 RedLemon[12341:93986] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:34.437 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:34.438 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:34.477 RedLemon[12341:93999] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:50:34.477 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:34.479 RedLemon[12341:93999]    Payload keys: timestamp, senderId, position, isPlaying, type
+2025-12-11 15:50:34.481 RedLemon[12341:93986] ✅ Realtime: Message broadcast complete
+2025-12-11 15:50:34.490 RedLemon[12341:93614] ✅ Watch Party: READY signal sent successfully
+2025-12-11 15:50:34.531 RedLemon[12341:94004] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:34.531 RedLemon[12341:94004]    Payload keys: type, position, isPlaying, senderId, timestamp
+2025-12-11 15:50:34.531 RedLemon[12341:94004] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:50:34.531 RedLemon[12341:94004] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-11 15:50:34.531 RedLemon[12341:94004] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:34.532 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:50:34.532 RedLemon[12341:93614] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-11 15:50:35.278 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:35.278 RedLemon[12341:93986]    Payload keys: isPlaying, type, senderId, position, timestamp
+2025-12-11 15:50:35.279 RedLemon[12341:93986] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:35.279 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-11 15:50:35.279 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:35.279 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:35.279 RedLemon[12341:93614] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:35.583 RedLemon[12341:94004] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:35.583 RedLemon[12341:94004]    Payload keys: timestamp, position, isPlaying, senderId, type
+2025-12-11 15:50:35.583 RedLemon[12341:94004] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:35.583 RedLemon[12341:94004] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-11 15:50:35.583 RedLemon[12341:94004] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:35.584 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:35.715 RedLemon[12341:93614] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:35.715 RedLemon[12341:93614] 🔍 Track 0 type: sub
+2025-12-11 15:50:35.715 RedLemon[12341:93614] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:35.715 RedLemon[12341:93614] 🔍 Track 1 type: sub
+2025-12-11 15:50:35.715 RedLemon[12341:93614] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:35.715 RedLemon[12341:93614] 🔍 Track 2 type: sub
+2025-12-11 15:50:35.715 RedLemon[12341:93614] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 🔍 Track 3 type: sub
+2025-12-11 15:50:35.716 RedLemon[12341:93614] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 🔍 Track 4 type: video
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 🔍 Track 5 type: audio
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 🔍 Track 6 type: sub
+2025-12-11 15:50:35.716 RedLemon[12341:93614] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 🔍 Track 7 type: sub
+2025-12-11 15:50:35.716 RedLemon[12341:93614] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:35.716 RedLemon[12341:93614] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:35.749 RedLemon[12341:93999] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:35.749 RedLemon[12341:93999] 🔍 Track 0 type: sub
+2025-12-11 15:50:35.749 RedLemon[12341:93999] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:35.749 RedLemon[12341:93999] 🔍 Track 1 type: sub
+2025-12-11 15:50:35.749 RedLemon[12341:93999] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:35.749 RedLemon[12341:93999] 🔍 Track 2 type: sub
+2025-12-11 15:50:35.750 RedLemon[12341:93999] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:35.750 RedLemon[12341:93999] 🔍 Track 3 type: sub
+2025-12-11 15:50:35.750 RedLemon[12341:93999] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:35.750 RedLemon[12341:93999] 🔍 Track 4 type: video
+2025-12-11 15:50:35.751 RedLemon[12341:93999] 🔍 Track 5 type: audio
+2025-12-11 15:50:35.751 RedLemon[12341:93999] 🔍 Track 6 type: sub
+2025-12-11 15:50:35.751 RedLemon[12341:93999] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:35.751 RedLemon[12341:93999] 🔍 Track 7 type: sub
+2025-12-11 15:50:35.751 RedLemon[12341:93999] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:35.751 RedLemon[12341:93999] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:35.752 RedLemon[12341:93999] ✅ SubtitleService: Scanned 7 tracks (Attempt 1/5)
+2025-12-11 15:50:35.752 RedLemon[12341:93999] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:35.752 RedLemon[12341:93999] 🔍 Track 0 type: sub
+2025-12-11 15:50:35.752 RedLemon[12341:93999] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:35.753 RedLemon[12341:93999] 🔍 Track 1 type: sub
+2025-12-11 15:50:35.753 RedLemon[12341:93999] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:35.753 RedLemon[12341:93999] 🔍 Track 2 type: sub
+2025-12-11 15:50:35.753 RedLemon[12341:93999] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:35.753 RedLemon[12341:93999] 🔍 Track 3 type: sub
+2025-12-11 15:50:35.753 RedLemon[12341:93999] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:35.753 RedLemon[12341:93999] 🔍 Track 4 type: video
+2025-12-11 15:50:35.754 RedLemon[12341:93999] 🔍 Track 5 type: audio
+2025-12-11 15:50:35.754 RedLemon[12341:93999] 🔍 Track 6 type: sub
+2025-12-11 15:50:35.754 RedLemon[12341:93999] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:35.754 RedLemon[12341:93999] 🔍 Track 7 type: sub
+2025-12-11 15:50:35.754 RedLemon[12341:93999] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:35.754 RedLemon[12341:93999] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:35.754 RedLemon[12341:93999] ✅ SubtitleService: Scanned 7 tracks (Attempt 1/5)
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 Track 0 type: sub
+2025-12-11 15:50:35.755 RedLemon[12341:93999] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 Track 1 type: sub
+2025-12-11 15:50:35.755 RedLemon[12341:93999] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 Track 2 type: sub
+2025-12-11 15:50:35.755 RedLemon[12341:93999] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 Track 3 type: sub
+2025-12-11 15:50:35.755 RedLemon[12341:93999] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:35.755 RedLemon[12341:93999] 🔍 Track 4 type: video
+2025-12-11 15:50:35.756 RedLemon[12341:93999] 🔍 Track 5 type: audio
+2025-12-11 15:50:35.756 RedLemon[12341:93999] 🔍 Track 6 type: sub
+2025-12-11 15:50:35.756 RedLemon[12341:93999] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:35.756 RedLemon[12341:93999] 🔍 Track 7 type: sub
+2025-12-11 15:50:35.756 RedLemon[12341:93999] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:35.756 RedLemon[12341:93999] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:35.756 RedLemon[12341:93999] ✅ SubtitleService: Scanned 7 tracks (Attempt 1/5)
+2025-12-11 15:50:36.415 RedLemon[12341:93999] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:36.415 RedLemon[12341:93999]    Payload keys: isPlaying, type, position, timestamp, senderId
+2025-12-11 15:50:36.415 RedLemon[12341:93999] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:36.415 RedLemon[12341:93999] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-11 15:50:36.415 RedLemon[12341:93999] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:36.431 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:36.451 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:36.452 RedLemon[12341:93986]    Payload keys: timestamp, isPlaying, senderId, type, position
+2025-12-11 15:50:36.452 RedLemon[12341:93986] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:36.452 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:36.452 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:36.473 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:36.842 RedLemon[12341:93986] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:36.843 RedLemon[12341:93986] 🔍 Track 0 type: sub
+2025-12-11 15:50:36.843 RedLemon[12341:93986] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:36.843 RedLemon[12341:93986] 🔍 Track 1 type: sub
+2025-12-11 15:50:36.843 RedLemon[12341:93986] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:36.844 RedLemon[12341:93986] 🔍 Track 2 type: sub
+2025-12-11 15:50:36.863 RedLemon[12341:93986] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:36.863 RedLemon[12341:93986] 🔍 Track 3 type: sub
+2025-12-11 15:50:36.864 RedLemon[12341:93986] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:36.864 RedLemon[12341:93986] 🔍 Track 4 type: video
+2025-12-11 15:50:36.865 RedLemon[12341:93986] 🔍 Track 5 type: audio
+2025-12-11 15:50:36.865 RedLemon[12341:93986] 🔍 Track 6 type: sub
+2025-12-11 15:50:36.865 RedLemon[12341:93986] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:36.866 RedLemon[12341:93986] 🔍 Track 7 type: sub
+2025-12-11 15:50:36.866 RedLemon[12341:93986] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:36.866 RedLemon[12341:93986] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:36.867 RedLemon[12341:94004] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:36.867 RedLemon[12341:94004] 🔍 Track 0 type: sub
+2025-12-11 15:50:36.867 RedLemon[12341:94004] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:36.868 RedLemon[12341:94004] 🔍 Track 1 type: sub
+2025-12-11 15:50:36.868 RedLemon[12341:94004] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:36.868 RedLemon[12341:94004] 🔍 Track 2 type: sub
+2025-12-11 15:50:36.868 RedLemon[12341:94004] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:36.868 RedLemon[12341:94004] 🔍 Track 3 type: sub
+2025-12-11 15:50:36.869 RedLemon[12341:94004] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:36.869 RedLemon[12341:94004] 🔍 Track 4 type: video
+2025-12-11 15:50:36.869 RedLemon[12341:94004] 🔍 Track 5 type: audio
+2025-12-11 15:50:36.869 RedLemon[12341:94004] 🔍 Track 6 type: sub
+2025-12-11 15:50:36.869 RedLemon[12341:94004] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:36.869 RedLemon[12341:94004] 🔍 Track 7 type: sub
+2025-12-11 15:50:36.869 RedLemon[12341:94004] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:36.869 RedLemon[12341:94004] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:36.870 RedLemon[12341:94004] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:36.870 RedLemon[12341:94004] 🔍 Track 0 type: sub
+2025-12-11 15:50:36.870 RedLemon[12341:94004] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:36.870 RedLemon[12341:94004] 🔍 Track 1 type: sub
+2025-12-11 15:50:36.871 RedLemon[12341:94004] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:36.871 RedLemon[12341:94004] 🔍 Track 2 type: sub
+2025-12-11 15:50:36.871 RedLemon[12341:94004] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:36.872 RedLemon[12341:94004] 🔍 Track 3 type: sub
+2025-12-11 15:50:36.872 RedLemon[12341:94004] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:36.872 RedLemon[12341:94004] 🔍 Track 4 type: video
+2025-12-11 15:50:36.872 RedLemon[12341:94004] 🔍 Track 5 type: audio
+2025-12-11 15:50:36.872 RedLemon[12341:94004] 🔍 Track 6 type: sub
+2025-12-11 15:50:36.873 RedLemon[12341:94004] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:36.873 RedLemon[12341:94004] 🔍 Track 7 type: sub
+2025-12-11 15:50:36.873 RedLemon[12341:94004] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:36.873 RedLemon[12341:94004] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:37.958 RedLemon[12341:93888] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:37.958 RedLemon[12341:93888] 🔍 Track 0 type: sub
+2025-12-11 15:50:37.958 RedLemon[12341:93888] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:37.959 RedLemon[12341:93888] 🔍 Track 1 type: sub
+2025-12-11 15:50:37.959 RedLemon[12341:93888] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:37.959 RedLemon[12341:93888] 🔍 Track 2 type: sub
+2025-12-11 15:50:37.959 RedLemon[12341:93888] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:37.959 RedLemon[12341:93888] 🔍 Track 3 type: sub
+2025-12-11 15:50:37.959 RedLemon[12341:93888] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:37.959 RedLemon[12341:93888] 🔍 Track 4 type: video
+2025-12-11 15:50:37.959 RedLemon[12341:93888] 🔍 Track 5 type: audio
+2025-12-11 15:50:37.960 RedLemon[12341:93888] 🔍 Track 6 type: sub
+2025-12-11 15:50:37.960 RedLemon[12341:93888] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:37.960 RedLemon[12341:93888] 🔍 Track 7 type: sub
+2025-12-11 15:50:37.960 RedLemon[12341:93888] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:37.960 RedLemon[12341:93888] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:37.960 RedLemon[12341:93888] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:37.960 RedLemon[12341:93888] 🔍 Track 0 type: sub
+2025-12-11 15:50:37.960 RedLemon[12341:93888] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 1 type: sub
+2025-12-11 15:50:37.961 RedLemon[12341:93888] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 2 type: sub
+2025-12-11 15:50:37.961 RedLemon[12341:93888] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 3 type: sub
+2025-12-11 15:50:37.961 RedLemon[12341:93888] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 4 type: video
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 5 type: audio
+2025-12-11 15:50:37.961 RedLemon[12341:93888] 🔍 Track 6 type: sub
+2025-12-11 15:50:37.962 RedLemon[12341:93888] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:37.962 RedLemon[12341:93888] 🔍 Track 7 type: sub
+2025-12-11 15:50:37.962 RedLemon[12341:93888] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:37.962 RedLemon[12341:93888] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:37.962 RedLemon[12341:93888] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:37.962 RedLemon[12341:93888] 🔍 Track 0 type: sub
+2025-12-11 15:50:37.962 RedLemon[12341:93888] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:37.962 RedLemon[12341:93888] 🔍 Track 1 type: sub
+2025-12-11 15:50:37.963 RedLemon[12341:93888] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:37.963 RedLemon[12341:93888] 🔍 Track 2 type: sub
+2025-12-11 15:50:37.964 RedLemon[12341:93888] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:37.964 RedLemon[12341:93888] 🔍 Track 3 type: sub
+2025-12-11 15:50:37.965 RedLemon[12341:93888] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:37.965 RedLemon[12341:93888] 🔍 Track 4 type: video
+2025-12-11 15:50:37.966 RedLemon[12341:93888] 🔍 Track 5 type: audio
+2025-12-11 15:50:37.966 RedLemon[12341:93888] 🔍 Track 6 type: sub
+2025-12-11 15:50:37.966 RedLemon[12341:93888] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:37.966 RedLemon[12341:93888] 🔍 Track 7 type: sub
+2025-12-11 15:50:37.966 RedLemon[12341:93888] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:37.966 RedLemon[12341:93888] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:38.534 RedLemon[12341:93999] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:38.535 RedLemon[12341:93999]    Payload keys: type, isPlaying, position, senderId, timestamp
+2025-12-11 15:50:38.536 RedLemon[12341:93999] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:38.536 RedLemon[12341:93999] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:38.536 RedLemon[12341:93999] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:38.564 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:39.001 RedLemon[12341:93986] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:39.001 RedLemon[12341:93986] 🔍 Track 0 type: sub
+2025-12-11 15:50:39.001 RedLemon[12341:93986] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:39.002 RedLemon[12341:93986] 🔍 Track 1 type: sub
+2025-12-11 15:50:39.002 RedLemon[12341:93986] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:39.002 RedLemon[12341:93986] 🔍 Track 2 type: sub
+2025-12-11 15:50:39.002 RedLemon[12341:93986] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:39.002 RedLemon[12341:93986] 🔍 Track 3 type: sub
+2025-12-11 15:50:39.003 RedLemon[12341:93986] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:39.003 RedLemon[12341:93986] 🔍 Track 4 type: video
+2025-12-11 15:50:39.004 RedLemon[12341:93986] 🔍 Track 5 type: audio
+2025-12-11 15:50:39.004 RedLemon[12341:93986] 🔍 Track 6 type: sub
+2025-12-11 15:50:39.004 RedLemon[12341:93986] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:39.004 RedLemon[12341:93986] 🔍 Track 7 type: sub
+2025-12-11 15:50:39.004 RedLemon[12341:93986] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:39.005 RedLemon[12341:93986] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:39.005 RedLemon[12341:93986] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:39.005 RedLemon[12341:93986] 🔍 Track 0 type: sub
+2025-12-11 15:50:39.005 RedLemon[12341:93986] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:39.005 RedLemon[12341:93986] 🔍 Track 1 type: sub
+2025-12-11 15:50:39.006 RedLemon[12341:93986] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:39.006 RedLemon[12341:93986] 🔍 Track 2 type: sub
+2025-12-11 15:50:39.007 RedLemon[12341:93986] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:39.007 RedLemon[12341:93986] 🔍 Track 3 type: sub
+2025-12-11 15:50:39.007 RedLemon[12341:93986] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:39.007 RedLemon[12341:93986] 🔍 Track 4 type: video
+2025-12-11 15:50:39.007 RedLemon[12341:93986] 🔍 Track 5 type: audio
+2025-12-11 15:50:39.007 RedLemon[12341:93986] 🔍 Track 6 type: sub
+2025-12-11 15:50:39.008 RedLemon[12341:93986] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:39.008 RedLemon[12341:93986] 🔍 Track 7 type: sub
+2025-12-11 15:50:39.008 RedLemon[12341:93986] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:39.008 RedLemon[12341:93986] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-11 15:50:39.008 RedLemon[12341:93986] 🔍 MPV track-list/count: 8
+2025-12-11 15:50:39.009 RedLemon[12341:93986] 🔍 Track 0 type: sub
+2025-12-11 15:50:39.009 RedLemon[12341:93986] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:39.009 RedLemon[12341:93986] 🔍 Track 1 type: sub
+2025-12-11 15:50:39.009 RedLemon[12341:93986] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:39.009 RedLemon[12341:93986] 🔍 Track 2 type: sub
+2025-12-11 15:50:39.009 RedLemon[12341:93986] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:39.010 RedLemon[12341:93986] 🔍 Track 3 type: sub
+2025-12-11 15:50:39.010 RedLemon[12341:93986] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:39.010 RedLemon[12341:93986] 🔍 Track 4 type: video
+2025-12-11 15:50:39.010 RedLemon[12341:93986] 🔍 Track 5 type: audio
+2025-12-11 15:50:39.010 RedLemon[12341:93986] 🔍 Track 6 type: sub
+2025-12-11 15:50:39.011 RedLemon[12341:93986] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:39.011 RedLemon[12341:93986] 🔍 Track 7 type: sub
+2025-12-11 15:50:39.011 RedLemon[12341:93986] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:39.011 RedLemon[12341:93986] 📊 Total subtitle tracks found: 7 (including Off if needed)
+📄 Subtitle request: L3N1YnRpdGxlLzMxMjU1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3125529-3138368.zip
+🔍 Track 1: en | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event
+🔍 AUTO-SELECT: Found 8 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Smile(2022)(1080pBluRayx26510bitTigole)', forced: false, default: false
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Smile.2022.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn', forced: false, default: false
+🔍 AUTO-SELECT: Track 3 - ID: 4, lang: 'en', title: 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN', forced: false, default: false
+🔍 AUTO-SELECT: Track 6 - ID: 5, lang: 'en', title: 'nil', forced: false, default: false
+🔍 AUTO-SELECT: Track 7 - ID: 6, lang: 'en', title: 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG', forced: false, default: false
+✅ Auto-selecting BEST English subtitle: en (ID: 5) [External: false, Forced: false, Default: false]
+ MPV Event: 18
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"56YF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+ MPV Event: 17
+⚡ Ultra-gentle sync: 1.005x to fix 141ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] h264: Increasing reorder buffer to 1
+[MPV] VO: [libmpv] 1920x960 videotoolbox[nv12]
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765486234.396879,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765486236.121043,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765486236.451904,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Video ready - hiding poster
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 1 audio tracks
+   Audio: ID=1 lang=en title=nil
+✅ Found English audio track: English
+📊 Found 7 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+   Subtitle: ID=1 lang=en title=Smile(2022)(1080pBluRayx26510bitTigole)
+   Subtitle: ID=2 lang=en title=Smile.2022.1080p.BluRay.H264.AAC-RARBG
+   Subtitle: ID=3 lang=en title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn
+   Subtitle: ID=4 lang=en title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN
+   Subtitle: ID=5 lang=en title=nil
+   Subtitle: ID=6 lang=en title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG
+📊 After filtering: 6 actual subtitle tracks
+📊 Current subtitle track: 5
+ℹ️ English subtitle already active (ID: 5), no switch needed
+🔍 Analyzing subtitle compatibility...
+✅ Good version match: Smile(2022)(1080pBluRayx26510bitTigole)
+✅ Good version match: Smile.2022.1080p.BluRay.H264.AAC-RARBG
+✅ Good version match: Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn
+✅ Good version match: Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN
+✅ Good version match: Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG
+✅ Good version match: Smile.2022.WEBRip-HBOGO/CP
+✅ Good version match: Smile.2022.WEBRip.iTunes
+✅ Good version match: Smile.2022.WEBRip.Amazon
+✅ Good version match: Smile(2022)[BluRay01h55m38s]
+✅ Good version match: Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI
+📝 Started watch history tracking
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 5
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 5
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 5
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0.375,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765486237.225881,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":0.6669999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 233ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":2.419,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 248ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[ WARNING ] Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <E9FE31BA-53E5-4337-821D-DF54DC9E7299>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <E9FE31BA-53E5-4337-821D-DF54DC9E7299>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://dl.subdl.com/subtitle/3125529-3138368.zip, NSErrorFailingURLKey=https://dl.subdl.com/subtitle/3125529-3138368.zip, _kCFStreamErrorDomainKey=4} [request-id: 2CF81D26-8E74-4605-BBD7-79EBE056DFCA]
+2025-12-11 15:50:39.342 RedLemon[12341:93986] ✅ Subtitle 6 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6770F7F8-2551-4F79-8DA8-7ACD2B2461E4.vtt
+2025-12-11 15:50:39.342 RedLemon[12341:93986] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6770F7F8-2551-4F79-8DA8-7AC
+2025-12-11 15:50:39.348 RedLemon[12341:93986] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:39.348 RedLemon[12341:93986] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwNDQ4NTYtMzA1MTY3Ni56aXA=
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwNDQ4NTYtMzA1MTY3Ni56aXA= [request-id: 136A33CB-F5F7-47E7-B6A3-FB454D6CBD83]
+2025-12-11 15:50:40.059 RedLemon[12341:93889] 🔍 MPV track-list/count: 9
+2025-12-11 15:50:40.059 RedLemon[12341:93889] 🔍 Track 0 type: sub
+2025-12-11 15:50:40.078 RedLemon[12341:93889] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:40.078 RedLemon[12341:93889] 🔍 Track 1 type: sub
+2025-12-11 15:50:40.078 RedLemon[12341:93889] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:40.078 RedLemon[12341:93889] 🔍 Track 2 type: sub
+2025-12-11 15:50:40.078 RedLemon[12341:93889] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:40.078 RedLemon[12341:93889] 🔍 Track 3 type: sub
+2025-12-11 15:50:40.079 RedLemon[12341:93889] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:40.079 RedLemon[12341:93889] 🔍 Track 4 type: video
+2025-12-11 15:50:40.079 RedLemon[12341:93889] 🔍 Track 5 type: audio
+2025-12-11 15:50:40.079 RedLemon[12341:93889] 🔍 Track 6 type: sub
+2025-12-11 15:50:40.079 RedLemon[12341:93889] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:40.079 RedLemon[12341:93889] 🔍 Track 7 type: sub
+2025-12-11 15:50:40.079 RedLemon[12341:93889] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:40.080 RedLemon[12341:93889] 🔍 Track 8 type: sub
+2025-12-11 15:50:40.080 RedLemon[12341:93889] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:40.080 RedLemon[12341:93889] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2025-12-11 15:50:40.080 RedLemon[12341:93889] ✅ SubtitleService: Scanned 8 tracks (Attempt 5/5)
+2025-12-11 15:50:40.080 RedLemon[12341:93889] 🔍 MPV track-list/count: 9
+2025-12-11 15:50:40.080 RedLemon[12341:93889] 🔍 Track 0 type: sub
+2025-12-11 15:50:40.081 RedLemon[12341:93889] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:40.081 RedLemon[12341:93889] 🔍 Track 1 type: sub
+2025-12-11 15:50:40.081 RedLemon[12341:93889] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:40.081 RedLemon[12341:93889] 🔍 Track 2 type: sub
+2025-12-11 15:50:40.081 RedLemon[12341:93889] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:40.081 RedLemon[12341:93889] 🔍 Track 3 type: sub
+2025-12-11 15:50:40.082 RedLemon[12341:93889] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:40.082 RedLemon[12341:93889] 🔍 Track 4 type: video
+2025-12-11 15:50:40.082 RedLemon[12341:93889] 🔍 Track 5 type: audio
+2025-12-11 15:50:40.082 RedLemon[12341:93889] 🔍 Track 6 type: sub
+2025-12-11 15:50:40.082 RedLemon[12341:93889] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:40.082 RedLemon[12341:93889] 🔍 Track 7 type: sub
+2025-12-11 15:50:40.082 RedLemon[12341:93889] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:40.082 RedLemon[12341:93889] 🔍 Track 8 type: sub
+2025-12-11 15:50:40.083 RedLemon[12341:93889] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:40.083 RedLemon[12341:93889] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2025-12-11 15:50:40.084 RedLemon[12341:93889] 🔍 MPV track-list/count: 9
+2025-12-11 15:50:40.084 RedLemon[12341:93889] 🔍 Track 0 type: sub
+2025-12-11 15:50:40.084 RedLemon[12341:93889] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:40.085 RedLemon[12341:93889] 🔍 Track 1 type: sub
+2025-12-11 15:50:40.085 RedLemon[12341:93889] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:40.085 RedLemon[12341:93889] 🔍 Track 2 type: sub
+2025-12-11 15:50:40.085 RedLemon[12341:93889] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:40.085 RedLemon[12341:93889] 🔍 Track 3 type: sub
+2025-12-11 15:50:40.086 RedLemon[12341:93889] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:40.086 RedLemon[12341:93889] 🔍 Track 4 type: video
+2025-12-11 15:50:40.086 RedLemon[12341:93889] 🔍 Track 5 type: audio
+2025-12-11 15:50:40.086 RedLemon[12341:93889] 🔍 Track 6 type: sub
+2025-12-11 15:50:40.087 RedLemon[12341:93889] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:40.087 RedLemon[12341:93889] 🔍 Track 7 type: sub
+2025-12-11 15:50:40.087 RedLemon[12341:93889] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:40.087 RedLemon[12341:93889] 🔍 Track 8 type: sub
+2025-12-11 15:50:40.087 RedLemon[12341:93889] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:40.087 RedLemon[12341:93889] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2025-12-11 15:50:40.087 RedLemon[12341:93889] ✅ Subtitle 7 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_236D6A93-0A42-4372-AD58-891B3EA51784.vtt
+2025-12-11 15:50:40.087 RedLemon[12341:93889] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_236D6A93-0A42-4372-AD58-891
+2025-12-11 15:50:40.095 RedLemon[12341:93889] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:40.095 RedLemon[12341:93889] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjEyMjAtMzAyNDc4OS56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMwNDQ4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3044856-3051676.zip
+[MPV] Track added:
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Smile.2022.WEBRip-HBOGO/CP' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 28371 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile.2022.WEBRip.iTunes.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📊 Current subtitle track: 5
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjEyMjAtMzAyNDc4OS56aXA= [request-id: 1D3C3AFA-DAE3-43E6-8E14-2E052B4CB400]
+2025-12-11 15:50:40.513 RedLemon[12341:93999] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:40.513 RedLemon[12341:93999]    Payload keys: timestamp, type, senderId, position, isPlaying
+2025-12-11 15:50:40.514 RedLemon[12341:93999] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:40.514 RedLemon[12341:93999] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:40.514 RedLemon[12341:93999] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:40.520 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:40.556 RedLemon[12341:93999] ✅ Subtitle 8 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C488A6E5-0235-46B8-B58F-98D60C38D291.vtt
+2025-12-11 15:50:40.556 RedLemon[12341:93999] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C488A6E5-0235-46B8-B58F-98D
+2025-12-11 15:50:40.578 RedLemon[12341:93999] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:40.578 RedLemon[12341:93999] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5ODcwNzYtMjk4MjE0MS56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjEy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3021220-3024789.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+✅ Download complete: 33929 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+⚠️ No specific episode match found, using first file: Smile.2022.WEBRip.Amazon.srt
+✅ Extraction successful
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":4.463,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+[MPV] Subs  --sid=7 --slang=en 'Smile.2022.WEBRip-HBOGO/CP' (webvtt) (external)
+⚡ Ultra-gentle sync: 1.005x to fix 256ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+[MPV] Subs  --sid=8 --slang=en 'Smile.2022.WEBRip.iTunes' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5ODcwNzYtMjk4MjE0MS56aXA= [request-id: 1854B6E0-8A6F-4141-9B52-48873534223E]
+caution: filename not matched:  Smile (2022) [BluRay 01h55m38s].srt
+2025-12-11 15:50:40.888 RedLemon[12341:94005] ✅ Subtitle 9 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2356FBAA-BD8B-4837-862F-504B56248492.vtt
+2025-12-11 15:50:40.888 RedLemon[12341:94005] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2356FBAA-BD8B-4837-862F-504
+2025-12-11 15:50:40.891 RedLemon[12341:94005] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:40.892 RedLemon[12341:94005] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5ODUxNzgtMjk3OTgwNy56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzI5ODcw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2987076-2982141.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+✅ Download complete: 28295 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile (2022) [BluRay 01h55m38s].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5ODUxNzgtMjk3OTgwNy56aXA= [request-id: D2B75303-AFDC-4021-A57C-1AE5B91F3C1E]
+2025-12-11 15:50:41.324 RedLemon[12341:93889] ✅ Subtitle 10 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CA729D11-DB5D-421D-8198-00CADA6EA216.vtt
+2025-12-11 15:50:41.324 RedLemon[12341:93889] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CA729D11-DB5D-421D-8198-00C
+2025-12-11 15:50:41.337 RedLemon[12341:93889] ✅ External subtitle added to track list (not auto-selected)
+2025-12-11 15:50:41.337 RedLemon[12341:93889] 🔍 MPV track-list/count: 13
+2025-12-11 15:50:41.337 RedLemon[12341:93889] 🔍 Track 0 type: sub
+2025-12-11 15:50:41.337 RedLemon[12341:93889] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:41.337 RedLemon[12341:93889] 🔍 Track 1 type: sub
+2025-12-11 15:50:41.337 RedLemon[12341:93889] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:41.337 RedLemon[12341:93889] 🔍 Track 2 type: sub
+2025-12-11 15:50:41.338 RedLemon[12341:93889] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:41.338 RedLemon[12341:93889] 🔍 Track 3 type: sub
+2025-12-11 15:50:41.338 RedLemon[12341:93889] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:41.338 RedLemon[12341:93889] 🔍 Track 4 type: video
+2025-12-11 15:50:41.338 RedLemon[12341:93889] 🔍 Track 5 type: audio
+2025-12-11 15:50:41.338 RedLemon[12341:93889] 🔍 Track 6 type: sub
+2025-12-11 15:50:41.338 RedLemon[12341:93889] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:41.338 RedLemon[12341:93889] 🔍 Track 7 type: sub
+2025-12-11 15:50:41.338 RedLemon[12341:93889] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:41.339 RedLemon[12341:93889] 🔍 Track 8 type: sub
+2025-12-11 15:50:41.339 RedLemon[12341:93889] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:41.339 RedLemon[12341:93889] 🔍 Track 9 type: sub
+2025-12-11 15:50:41.339 RedLemon[12341:93889] ✅ Found subtitle track: ID=8, lang=en, title=Smile.2022.WEBRip.iTunes, external=1
+2025-12-11 15:50:41.339 RedLemon[12341:93889] 🔍 Track 10 type: sub
+2025-12-11 15:50:41.339 RedLemon[12341:93889] ✅ Found subtitle track: ID=9, lang=en, title=Smile.2022.WEBRip.Amazon, external=1
+2025-12-11 15:50:41.339 RedLemon[12341:93889] 🔍 Track 11 type: sub
+2025-12-11 15:50:41.339 RedLemon[12341:93889] ✅ Found subtitle track: ID=10, lang=en, title=Smile(2022)[BluRay01h55m38s], external=1
+2025-12-11 15:50:41.339 RedLemon[12341:93889] 🔍 Track 12 type: sub
+2025-12-11 15:50:41.340 RedLemon[12341:93889] ✅ Found subtitle track: ID=11, lang=en, title=Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI, external=1
+2025-12-11 15:50:41.340 RedLemon[12341:93889] 📊 Total subtitle tracks found: 12 (including Off if needed)
+2025-12-11 15:50:41.340 RedLemon[12341:93889] ✅ SubtitleService: Scanned 12 tracks (Attempt 1/5)
+2025-12-11 15:50:42.439 RedLemon[12341:93987] 🔍 MPV track-list/count: 13
+2025-12-11 15:50:42.440 RedLemon[12341:93987] 🔍 Track 0 type: sub
+2025-12-11 15:50:42.460 RedLemon[12341:93987] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:42.461 RedLemon[12341:93987] 🔍 Track 1 type: sub
+2025-12-11 15:50:42.461 RedLemon[12341:93987] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:42.461 RedLemon[12341:93987] 🔍 Track 2 type: sub
+2025-12-11 15:50:42.461 RedLemon[12341:93987] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:42.462 RedLemon[12341:93987] 🔍 Track 3 type: sub
+2025-12-11 15:50:42.462 RedLemon[12341:93987] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:42.462 RedLemon[12341:93987] 🔍 Track 4 type: video
+2025-12-11 15:50:42.462 RedLemon[12341:93987] 🔍 Track 5 type: audio
+2025-12-11 15:50:42.463 RedLemon[12341:93987] 🔍 Track 6 type: sub
+2025-12-11 15:50:42.463 RedLemon[12341:93987] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:42.464 RedLemon[12341:93987] 🔍 Track 7 type: sub
+2025-12-11 15:50:42.464 RedLemon[12341:93987] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:42.464 RedLemon[12341:93987] 🔍 Track 8 type: sub
+2025-12-11 15:50:42.464 RedLemon[12341:93987] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:42.464 RedLemon[12341:93987] 🔍 Track 9 type: sub
+2025-12-11 15:50:42.465 RedLemon[12341:93987] ✅ Found subtitle track: ID=8, lang=en, title=Smile.2022.WEBRip.iTunes, external=1
+2025-12-11 15:50:42.465 RedLemon[12341:93987] 🔍 Track 10 type: sub
+2025-12-11 15:50:42.465 RedLemon[12341:93987] ✅ Found subtitle track: ID=9, lang=en, title=Smile.2022.WEBRip.Amazon, external=1
+2025-12-11 15:50:42.465 RedLemon[12341:93987] 🔍 Track 11 type: sub
+2025-12-11 15:50:42.466 RedLemon[12341:93987] ✅ Found subtitle track: ID=10, lang=en, title=Smile(2022)[BluRay01h55m38s], external=1
+2025-12-11 15:50:42.466 RedLemon[12341:93987] 🔍 Track 12 type: sub
+2025-12-11 15:50:42.467 RedLemon[12341:93987] ✅ Found subtitle track: ID=11, lang=en, title=Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI, external=1
+2025-12-11 15:50:42.467 RedLemon[12341:93987] 📊 Total subtitle tracks found: 12 (including Off if needed)
+2025-12-11 15:50:42.514 RedLemon[12341:93889] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:42.514 RedLemon[12341:93889]    Payload keys: type, senderId, position, timestamp, isPlaying
+2025-12-11 15:50:42.514 RedLemon[12341:93889] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:42.514 RedLemon[12341:93889] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:42.515 RedLemon[12341:93889] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:42.527 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:43.449 RedLemon[12341:93614] 🖱️ Mouse: x=774/1366 y=536/768 | Exit: 0 Controls: 0 Chat: 0
+2025-12-11 15:50:43.467 RedLemon[12341:93987] 🔍 MPV track-list/count: 13
+2025-12-11 15:50:43.468 RedLemon[12341:93987] 🔍 Track 0 type: sub
+2025-12-11 15:50:43.468 RedLemon[12341:93987] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:43.468 RedLemon[12341:93987] 🔍 Track 1 type: sub
+2025-12-11 15:50:43.469 RedLemon[12341:93987] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:43.469 RedLemon[12341:93987] 🔍 Track 2 type: sub
+2025-12-11 15:50:43.469 RedLemon[12341:93987] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:43.469 RedLemon[12341:93987] 🔍 Track 3 type: sub
+2025-12-11 15:50:43.470 RedLemon[12341:93987] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:43.470 RedLemon[12341:93987] 🔍 Track 4 type: video
+2025-12-11 15:50:43.470 RedLemon[12341:93987] 🔍 Track 5 type: audio
+2025-12-11 15:50:43.470 RedLemon[12341:93987] 🔍 Track 6 type: sub
+2025-12-11 15:50:43.470 RedLemon[12341:93987] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:43.470 RedLemon[12341:93987] 🔍 Track 7 type: sub
+2025-12-11 15:50:43.471 RedLemon[12341:93987] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:43.471 RedLemon[12341:93987] 🔍 Track 8 type: sub
+2025-12-11 15:50:43.471 RedLemon[12341:93987] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:43.471 RedLemon[12341:93987] 🔍 Track 9 type: sub
+2025-12-11 15:50:43.471 RedLemon[12341:93987] ✅ Found subtitle track: ID=8, lang=en, title=Smile.2022.WEBRip.iTunes, external=1
+2025-12-11 15:50:43.471 RedLemon[12341:93987] 🔍 Track 10 type: sub
+2025-12-11 15:50:43.472 RedLemon[12341:93987] ✅ Found subtitle track: ID=9, lang=en, title=Smile.2022.WEBRip.Amazon, external=1
+2025-12-11 15:50:43.472 RedLemon[12341:93987] 🔍 Track 11 type: sub
+2025-12-11 15:50:43.472 RedLemon[12341:93987] ✅ Found subtitle track: ID=10, lang=en, title=Smile(2022)[BluRay01h55m38s], external=1
+2025-12-11 15:50:43.472 RedLemon[12341:93987] 🔍 Track 12 type: sub
+2025-12-11 15:50:43.472 RedLemon[12341:93987] ✅ Found subtitle track: ID=11, lang=en, title=Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI, external=1
+2025-12-11 15:50:43.472 RedLemon[12341:93987] 📊 Total subtitle tracks found: 12 (including Off if needed)
+2025-12-11 15:50:43.918 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:43.919 RedLemon[12341:93986]    Payload keys: type, isPlaying, timestamp, position, senderId
+2025-12-11 15:50:43.919 RedLemon[12341:93986] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:43.920 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-11 15:50:43.920 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:43.948 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-11 15:50:44.483 RedLemon[12341:94005] 🔍 MPV track-list/count: 13
+2025-12-11 15:50:44.484 RedLemon[12341:94005] 🔍 Track 0 type: sub
+2025-12-11 15:50:44.504 RedLemon[12341:94005] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:44.504 RedLemon[12341:94005] 🔍 Track 1 type: sub
+2025-12-11 15:50:44.505 RedLemon[12341:94005] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:44.505 RedLemon[12341:94005] 🔍 Track 2 type: sub
+2025-12-11 15:50:44.505 RedLemon[12341:94005] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:44.505 RedLemon[12341:94005] 🔍 Track 3 type: sub
+2025-12-11 15:50:44.505 RedLemon[12341:94005] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:44.506 RedLemon[12341:94005] 🔍 Track 4 type: video
+2025-12-11 15:50:44.506 RedLemon[12341:94005] 🔍 Track 5 type: audio
+2025-12-11 15:50:44.506 RedLemon[12341:94005] 🔍 Track 6 type: sub
+2025-12-11 15:50:44.507 RedLemon[12341:94005] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:44.507 RedLemon[12341:94005] 🔍 Track 7 type: sub
+2025-12-11 15:50:44.507 RedLemon[12341:94005] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:44.507 RedLemon[12341:94005] 🔍 Track 8 type: sub
+2025-12-11 15:50:44.507 RedLemon[12341:94005] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:44.507 RedLemon[12341:94005] 🔍 Track 9 type: sub
+2025-12-11 15:50:44.508 RedLemon[12341:94005] ✅ Found subtitle track: ID=8, lang=en, title=Smile.2022.WEBRip.iTunes, external=1
+2025-12-11 15:50:44.508 RedLemon[12341:94005] 🔍 Track 10 type: sub
+2025-12-11 15:50:44.508 RedLemon[12341:94005] ✅ Found subtitle track: ID=9, lang=en, title=Smile.2022.WEBRip.Amazon, external=1
+2025-12-11 15:50:44.508 RedLemon[12341:94005] 🔍 Track 11 type: sub
+2025-12-11 15:50:44.508 RedLemon[12341:94005] ✅ Found subtitle track: ID=10, lang=en, title=Smile(2022)[BluRay01h55m38s], external=1
+2025-12-11 15:50:44.508 RedLemon[12341:94005] 🔍 Track 12 type: sub
+2025-12-11 15:50:44.509 RedLemon[12341:94005] ✅ Found subtitle track: ID=11, lang=en, title=Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI, external=1
+2025-12-11 15:50:44.509 RedLemon[12341:94005] 📊 Total subtitle tracks found: 12 (including Off if needed)
+2025-12-11 15:50:44.521 RedLemon[12341:93999] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:44.521 RedLemon[12341:93999]    Payload keys: timestamp, type, senderId, position, isPlaying
+2025-12-11 15:50:44.521 RedLemon[12341:93999] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:44.522 RedLemon[12341:93999] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:44.522 RedLemon[12341:93999] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:44.531 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:45.609 RedLemon[12341:93888] 🔍 MPV track-list/count: 13
+2025-12-11 15:50:45.610 RedLemon[12341:93888] 🔍 Track 0 type: sub
+2025-12-11 15:50:45.629 RedLemon[12341:93888] ✅ Found subtitle track: ID=1, lang=en, title=Smile(2022)(1080pBluRayx26510bitTigole), external=1
+2025-12-11 15:50:45.629 RedLemon[12341:93888] 🔍 Track 1 type: sub
+2025-12-11 15:50:45.630 RedLemon[12341:93888] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2022.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-11 15:50:45.630 RedLemon[12341:93888] 🔍 Track 2 type: sub
+2025-12-11 15:50:45.630 RedLemon[12341:93888] ✅ Found subtitle track: ID=3, lang=en, title=Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn, external=1
+2025-12-11 15:50:45.630 RedLemon[12341:93888] 🔍 Track 3 type: sub
+2025-12-11 15:50:45.631 RedLemon[12341:93888] ✅ Found subtitle track: ID=4, lang=en, title=Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN, external=1
+2025-12-11 15:50:45.631 RedLemon[12341:93888] 🔍 Track 4 type: video
+2025-12-11 15:50:45.631 RedLemon[12341:93888] 🔍 Track 5 type: audio
+2025-12-11 15:50:45.631 RedLemon[12341:93888] 🔍 Track 6 type: sub
+2025-12-11 15:50:45.632 RedLemon[12341:93888] ✅ Found subtitle track: ID=5, lang=en, title=nil, external=0
+2025-12-11 15:50:45.632 RedLemon[12341:93888] 🔍 Track 7 type: sub
+2025-12-11 15:50:45.632 RedLemon[12341:93888] ✅ Found subtitle track: ID=6, lang=en, title=Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG, external=1
+2025-12-11 15:50:45.632 RedLemon[12341:93888] 🔍 Track 8 type: sub
+2025-12-11 15:50:45.632 RedLemon[12341:93888] ✅ Found subtitle track: ID=7, lang=en, title=Smile.2022.WEBRip-HBOGO/CP, external=1
+2025-12-11 15:50:45.633 RedLemon[12341:93888] 🔍 Track 9 type: sub
+2025-12-11 15:50:45.634 RedLemon[12341:93888] ✅ Found subtitle track: ID=8, lang=en, title=Smile.2022.WEBRip.iTunes, external=1
+2025-12-11 15:50:45.634 RedLemon[12341:93888] 🔍 Track 10 type: sub
+2025-12-11 15:50:45.635 RedLemon[12341:93888] ✅ Found subtitle track: ID=9, lang=en, title=Smile.2022.WEBRip.Amazon, external=1
+2025-12-11 15:50:45.635 RedLemon[12341:93888] 🔍 Track 11 type: sub
+2025-12-11 15:50:45.636 RedLemon[12341:93888] ✅ Found subtitle track: ID=10, lang=en, title=Smile(2022)[BluRay01h55m38s], external=1
+2025-12-11 15:50:45.636 RedLemon[12341:93888] 🔍 Track 12 type: sub
+2025-12-11 15:50:45.636 RedLemon[12341:93888] ✅ Found subtitle track: ID=11, lang=en, title=Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI, external=1
+2025-12-11 15:50:45.636 RedLemon[12341:93888] 📊 Total subtitle tracks found: 12 (including Off if needed)
+2025-12-11 15:50:47.984 RedLemon[12341:93987] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:47.984 RedLemon[12341:93987]    Payload keys: position, timestamp, isPlaying, senderId, type
+2025-12-11 15:50:47.984 RedLemon[12341:93987] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:47.984 RedLemon[12341:93987] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:47.985 RedLemon[12341:93987] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:47.992 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:49.983 RedLemon[12341:93986] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:49.983 RedLemon[12341:93986]    Payload keys: type, timestamp, isPlaying, position, senderId
+2025-12-11 15:50:49.984 RedLemon[12341:93986] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:49.984 RedLemon[12341:93986] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:49.984 RedLemon[12341:93986] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:49.988 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:51.938 RedLemon[12341:94004] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:51.939 RedLemon[12341:94004]    Payload keys: position, isPlaying, type, timestamp, senderId
+2025-12-11 15:50:51.939 RedLemon[12341:94004] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:51.939 RedLemon[12341:94004] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:51.939 RedLemon[12341:94004] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:51.967 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:54.052 RedLemon[12341:93987] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:54.053 RedLemon[12341:93987]    Payload keys: timestamp, type, isPlaying, position, senderId
+2025-12-11 15:50:54.053 RedLemon[12341:93987] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:54.053 RedLemon[12341:93987] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:54.053 RedLemon[12341:93987] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:54.070 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+2025-12-11 15:50:55.999 RedLemon[12341:93987] 📨 Realtime: Received broadcast message
+2025-12-11 15:50:56.000 RedLemon[12341:93987]    Payload keys: position, senderId, timestamp, isPlaying, type
+2025-12-11 15:50:56.000 RedLemon[12341:93987] ✅ Realtime: Decoded message type: playbackState, sender: 56YF
+2025-12-11 15:50:56.001 RedLemon[12341:93987] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-11 15:50:56.001 RedLemon[12341:93987] ✅ Realtime: syncCallback invoked successfully
+2025-12-11 15:50:56.040 RedLemon[12341:93614] 🔍 DEBUG: Received sync message - type: playbackState, sender: 56YF
+📄 Subtitle request: L3N1YnRpdGxlLzI5ODUx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2985178-2979807.zip
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Smile.2022.WEBRip-HBOGO/CP' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Smile.2022.WEBRip.iTunes' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Smile.2022.WEBRip.Amazon' (webvtt) (external)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+✅ Download complete: 30373 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+⚠️ No specific episode match found, using first file: Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI.srt
+✅ Extraction successful
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 5
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Smile.2022.WEBRip-HBOGO/CP' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Smile.2022.WEBRip.iTunes' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Smile.2022.WEBRip.Amazon' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Smile(2022)[BluRay01h55m38s]' (webvtt) (external)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile(2022)(1080pBluRayx26510bitTigole)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2022.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile2022BluRay1080pAVCTrueHDAtmos7.1-dOwn' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Smile20222160pUHDBluRayREMUXDVHDRHEVCAtmos-TRiToN' (webvtt) (external)
+[MPV] (+) Subs  --sid=5 --slang=en (subrip)
+[MPV] Subs  --sid=6 --slang=en 'Smile.2022.720p.AMZN.WEBRip.800MB.x264-GalaxyRG' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Smile.2022.WEBRip-HBOGO/CP' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Smile.2022.WEBRip.iTunes' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Smile.2022.WEBRip.Amazon' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Smile(2022)[BluRay01h55m38s]' (webvtt) (external)
+[MPV] Subs  --sid=11 --slang=en 'Smile.2022.1080p.WEBRip.x264-RARBG_NON_HI' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+👋 Participant left (confirmed): 0328ac5e-d6d3-11f0-9918-0a58a9feac02
+👋 Participant left (confirmed): b9ef3eb8-d6d2-11f0-970c-0a58a9feac02
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":6.505999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 296ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":7.965999999999999,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765486244.7216349,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":8.549999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 299ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Chat opened
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 5 VERIFIED ✅
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":12.054,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 324ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":14.097,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Ultra-gentle sync: 1.005x to fix 374ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":16.141,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Gentle speed sync: 1.01x to fix 424ms drift
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":17.893,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Gentle speed sync: 1.01x to fix 416ms drift
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"56YF","timestamp":19.977999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:56YF"}
+⚡ Gentle speed sync: 1.01x to fix 416ms drift
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

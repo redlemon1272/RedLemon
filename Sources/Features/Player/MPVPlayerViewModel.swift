@@ -1377,6 +1377,20 @@ extension MPVPlayerViewModel {
                                 // Fetch FRESH list to avoid stale data race
                                 guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
 
+                                // Check if this is an old session leavning (stale ref)
+                                // If the user is physically present with a NEWER joinedAt, ignore this leave
+                                if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
+                                    let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
+                                    let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
+                                    
+                                    // Allow 1s tolerance for clock skew/processing time
+                                    if leaveJoinedAt < (existingJoinedAt - 1.0) {
+                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Leave: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
+                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                        return
+                                    }
+                                }
+
                                 // Find username before removing for the message
                                 let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? "User"
 
@@ -1734,7 +1748,7 @@ extension MPVPlayerViewModel {
             // 2. If drift < 2.0s -> "Synced 🟢"
             // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
             
-            if (isBuffering || isSeeking) && absSmoothedDrift > 0.5 {
+            if (isBuffering || isSeeking || isCurrentlyAdjustingSpeed) && absSmoothedDrift > 0.5 {
                 syncStatus = "Syncing... 🟡"
             } else if absSmoothedDrift < 2.0 {
                  // Fade out "Synced" after a while? For now keep it static as requested.

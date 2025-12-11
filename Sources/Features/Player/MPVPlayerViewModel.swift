@@ -1397,10 +1397,19 @@ extension MPVPlayerViewModel {
                                     // Use phx_ref from metadata if available, otherwise fallback to userId
                                     let leavingPhxRef = metadata?["phx_ref"] as? String ?? userId
                                     
+                                    // Debug: Dump all participants to find ID mismatch
+                                    print("🔍 DEBUG LEAVE: Analyzing leave for \(actualUserId) (Ref: \(leavingPhxRef))")
+                                    print("   Participants dump:")
+                                    for p in currentParticipants {
+                                        print("   - [\(p.id)] '\(p.name)' Ref: \(p.phxRef ?? "nil") Joined: \(p.joinedAt.timeIntervalSince1970)")
+                                    }
+
                                     if let currentRef = existingParticipant.phxRef, currentRef != leavingPhxRef {
-                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
+                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
+                                    } else {
+                                        print("⚠️ LEAVE VALIDATED: proceeding to remove. CurrentRef: \(existingParticipant.phxRef ?? "nil") vs LeavingRef: \(leavingPhxRef)")
                                     }
 
                                     // FALLBACK: Timestamp check (original fix)

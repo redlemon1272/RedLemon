@@ -451,6 +451,9 @@ class MPVPlayerViewModel: ObservableObject {
         // Update tracks
         self.updateSubtitleTracks() // Ensure we have latest subs
         self.updateAudioTracks()    // Scan audio tracks
+        
+        // Restore subtitle/audio prioritization logic
+        self.selectEnglishDefaults()
 
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices
@@ -904,12 +907,22 @@ class MPVPlayerViewModel: ObservableObject {
         let englishSubs = actualSubtitles.filter { track in
             let lang = track.lang?.lowercased() ?? ""
             let title = track.title?.lowercased() ?? ""
-            return lang.contains("eng") || lang == "en" || title.contains("english")
+            // FIX: Be more permissive with "en-US", "en-GB", etc.
+            return lang.hasPrefix("en") || lang.contains("eng") || title.contains("english")
+        }
+        
+        // Prioritize embedded tracks (isExternal == false)
+        // We want embedded tracks to appear FIRST in our candidate list
+        let sortedEnglishSubs = englishSubs.sorted { (track1, track2) -> Bool in
+            // atomic: if track1 is embedded and track2 is external, track1 comes first
+            if !track1.isExternal && track2.isExternal { return true }
+            if track1.isExternal && !track2.isExternal { return false }
+            return false // Keep original order otherwise
         }
 
         // Prioritize full subtitles over foreign-parts-only subtitles
         // First, try to find non-foreign, non-HI subtitles (ideal)
-        let preferredSub = englishSubs.first(where: { track in
+        let preferredSub = sortedEnglishSubs.first(where: { track in
             let title = track.title?.lowercased() ?? ""
             let isForeignOnly = title.contains("foreign") ||
                                title.contains("forced") ||
@@ -917,7 +930,7 @@ class MPVPlayerViewModel: ObservableObject {
                                title.contains("only")
             let isHI = title.contains(".hi") || title.contains(" hi")
             return !isForeignOnly && !isHI
-        }) ?? englishSubs.first
+        }) ?? sortedEnglishSubs.first
 
         if let englishSub = preferredSub {
             let currentSid = mpvWrapper.getCurrentSubtitleTrack()

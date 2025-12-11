@@ -793,7 +793,7 @@ class MPVWrapper: ObservableObject {
             // Check if English
             let langLower = lang?.lowercased() ?? ""
             let titleLower = title?.lowercased() ?? ""
-            let isEnglish = langLower.contains("eng") || langLower == "en" || titleLower.contains("english")
+            let isEnglish = langLower.hasPrefix("en") || langLower.contains("eng") || titleLower.contains("english")
 
             print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault)")
 

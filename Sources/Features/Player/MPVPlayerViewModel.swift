@@ -1370,7 +1370,6 @@ extension MPVPlayerViewModel {
                         }
 
                     case .leave:
-                        // DEBOUNCE LEAVE: Wait 10 seconds before actually removing
                         // This handles flaky connections and Lobby->Player transitions
                         print("⏳ Participant leaving (grace period started): \(actualUserId)")
 
@@ -1416,7 +1415,9 @@ extension MPVPlayerViewModel {
                                 }
 
                                 // Find username before removing for the message
-                                let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? "User"
+                                // Find username before removing for the message
+                                let defaultsName = metadata?["username"] as? String ?? "User"
+                                let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
 
                                 // Remove using actualUserId
                                 currentParticipants.removeAll(where: { $0.id == actualUserId })

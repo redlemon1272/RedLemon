@@ -1321,7 +1321,11 @@ extension MPVPlayerViewModel {
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
                             // User exists - update their timestamp and name
                             updatedParticipants[index].joinedAt = Date()
-                            updatedParticipants[index].phxRef = userId // Update Connection ID
+                            
+                            // Prefer phx_ref from metadata (rotates on update), fallback to userId (stable key)
+                            let newPhxRef = metadata?["phx_ref"] as? String ?? userId
+                            updatedParticipants[index].phxRef = newPhxRef
+                            
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
                             }
@@ -1330,6 +1334,7 @@ extension MPVPlayerViewModel {
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
+                            let phxRefVal = metadata?["phx_ref"] as? String ?? userId
 
                             let newParticipant = Participant(
                                 id: actualUserId, // Use stable ID
@@ -1337,7 +1342,7 @@ extension MPVPlayerViewModel {
                                 isHost: isHostVal,
                                 isReady: false,
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal),
-                                phxRef: userId // Store Connection ID
+                                phxRef: phxRefVal // Store Connection ID
                             )
                             updatedParticipants.append(newParticipant)
 
@@ -1389,8 +1394,11 @@ extension MPVPlayerViewModel {
                                     // PREFERRED: Check specific Connection ID (phx_ref) mismatch
                                     // If the user's current connection ID is different from the leaving one, 
                                     // it means they have already reconnected (Join processed before Leave task).
-                                    if let currentRef = existingParticipant.phxRef, currentRef != userId {
-                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(userId) != Current: \(currentRef))")
+                                    // Use phx_ref from metadata if available, otherwise fallback to userId
+                                    let leavingPhxRef = metadata?["phx_ref"] as? String ?? userId
+                                    
+                                    if let currentRef = existingParticipant.phxRef, currentRef != leavingPhxRef {
+                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }

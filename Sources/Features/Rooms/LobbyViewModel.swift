@@ -233,11 +233,13 @@ class LobbyViewModel: ObservableObject {
                     // Check if already exists (CASE INSENSITIVE)
                     if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                         self.participants[index].joinedAt = Date()
-                        self.participants[index].phxRef = userId // Update Connection ID
+                        // Use phx_ref from metadata if available
+                        let newPhxRef = metadata?["phx_ref"] as? String ?? userId
+                        self.participants[index].phxRef = newPhxRef // Update Connection ID
                         // Also update metadata if needed
                         if let dict = metadata as? [String: Any],
                            let username = dict["username"] as? String {
-                            self.participants[index].name = username
+                             self.participants[index].name = username
                             
                             // If it's a new Realtime connection, show the toast even if they were in DB list
                             if isNewConnection {
@@ -245,21 +247,23 @@ class LobbyViewModel: ObservableObject {
                             }
                         }
                     } else {
-                        // New user (Not in DB list yet)
-                        var username = "User"
-                        if let dict = metadata as? [String: Any] {
-                            if let name = dict["username"] as? String {
-                                username = name
-                            }
+                        // New user
+                        // Try to get username from metadata
+                        var username = "Guest"
+                        if let dict = metadata as? [String: Any],
+                           let name = dict["username"] as? String {
+                            username = name
                         }
                         
+                        let phxRefVal = metadata?["phx_ref"] as? String ?? userId
+                        
                         let newParticipant = Participant(
-                            id: normalizedID, // NORMALIZE TO LOWERCASE
+                            id: normalizedID,
                             name: username,
                             isHost: false, // Default false, will be corrected by DB poll if needed
                             isReady: false,
                             joinedAt: Date(),
-                            phxRef: userId // Store Connection ID
+                            phxRef: phxRefVal // Store Connection ID
                         )
                         self.participants.append(newParticipant)
                         if isNewConnection {

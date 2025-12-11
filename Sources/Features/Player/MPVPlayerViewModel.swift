@@ -1303,7 +1303,8 @@ extension MPVPlayerViewModel {
                     // Prioritize user_id from metadata, then username, then fallback to passed userId
                     let metaUserId = metadata?["user_id"] as? String
                     let metaUsername = metadata?["username"] as? String
-                    let actualUserId = metaUserId ?? metaUsername ?? userId
+                    // CRITICAL FIX: Normalize UUIDs to lowercase to prevent mismatched keys (Supabase inconsistency)
+                    let actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
 
                     switch action {
                     case .join:
@@ -1345,7 +1346,7 @@ extension MPVPlayerViewModel {
                         }
 
                         // ENSURE SELF IS IN LIST
-                        if let currentId = localCurrentUserId {
+                        if let currentId = localCurrentUserId?.lowercased() {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
                             if !isSelfPresent {
                                 let selfParticipant = Participant(

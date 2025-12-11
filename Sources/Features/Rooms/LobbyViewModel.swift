@@ -36,7 +36,7 @@ class LobbyViewModel: ObservableObject {
     
     // Track unique realtime connection IDs to show "Joined" notifications correctly
     // even if user is already known from DB polling
-    private var connectedUserIds: Set<String> = []
+    var connectedUserIds: Set<String> = []
 
     // Realtime connection status for UI feedback
 

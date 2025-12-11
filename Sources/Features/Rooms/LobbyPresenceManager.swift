@@ -239,14 +239,16 @@ class LobbyPresenceManager: ObservableObject {
                 }
 
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
-                if timeSinceJoin < 10.0 {
-                    // KEEP THEM: They joined less than 10 seconds ago
-                    // NSLog("🛡️ Preserving recent joiner '\(localP.name)' (joined \(String(format: "%.1f", timeSinceJoin))s ago) despite missing from DB")
+                if timeSinceJoin < 3.0 {
+                    // KEEP THEM: They joined less than 3 seconds ago (Grace Period)
+                    // This protects against "blips" where Realtime connects before DB syncs
+                   //  NSLog("🛡️ Preserving recent joiner '\(localP.name)' (joined \(String(format: "%.1f", timeSinceJoin))s ago)")
                     finalParticipants.append(localP)
                 } else {
                     // REMOVE THEM: They've been gone from DB for too long
                     // This is a legitimate "User Left" event
                     viewModel.chatManager.addSystemMessage(.userLeft, userName: localP.name, data: [:])
+                    viewModel.connectedUserIds.remove(localP.id) // Ensure we track this disconnect
                     NSLog("👋 \(localP.name) left room (confirmed by DB polling)")
                 }
             }

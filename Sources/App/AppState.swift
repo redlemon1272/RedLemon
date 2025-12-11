@@ -11,6 +11,14 @@ class AppState: ObservableObject {
     private let roomManager: RoomManager
     private let userManager: UserManager
     
+    // Global Alert State
+    struct AppAlert: Identifiable {
+        let id = UUID()
+        let title: String
+        let message: String
+    }
+    @Published var activeAlert: AppAlert?
+    
     init(
         metadataProvider: MetadataProvider = LocalAPIClient.shared,
         streamResolver: StreamResolving = StreamService.shared,

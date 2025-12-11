@@ -95,7 +95,8 @@ class LobbyPresenceManager: ObservableObject {
         Task { [weak self] in
             guard let self = self, let viewModel = self.viewModel else { return }
             
-            let syncMsg = SyncMessage(
+            // 1. Private Command: Kick the target user
+            let kickCmd = SyncMessage(
                 type: .chat,
                 timestamp: 0,
                 isPlaying: nil,
@@ -103,7 +104,19 @@ class LobbyPresenceManager: ObservableObject {
                 chatText: "LOBBY_KICK:\(participant.id)",
                 chatUsername: "Host"
             )
-            try? await viewModel.realtimeManager?.sendSyncMessage(syncMsg)
+            try? await viewModel.realtimeManager?.sendSyncMessage(kickCmd)
+            
+            // 2. Public Announcement: Inform room
+            try? await Task.sleep(nanoseconds: 100_000_000) // Slight delay to ensure order
+            let publicMsg = SyncMessage(
+                type: .chat,
+                timestamp: 0,
+                isPlaying: nil,
+                senderId: viewModel.participantId,
+                chatText: "\(participant.name) has been kicked.",
+                chatUsername: "System"
+            )
+            try? await viewModel.realtimeManager?.sendSyncMessage(publicMsg)
         }
         
         // Kick via Database (Remove from room_participants)

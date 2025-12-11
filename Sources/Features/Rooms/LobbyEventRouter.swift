@@ -160,10 +160,13 @@ class LobbyEventRouter: ObservableObject {
             print("❌ Lobby: Kicked by host (ID Match: \(kickedId))")
 
             await MainActor.run {
-                // Show alert before disconnecting
-                viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "You have been kicked from the room."])
+                // Show GLOBAL alert (persists after view change)
+                viewModel.appState?.activeAlert = AppState.AppAlert(
+                    title: "Kicked",
+                    message: "You have been kicked from the room."
+                )
                 
-                // Trigger disconnect
+                // Trigger disconnect and return to browse
                 viewModel.disconnect()
                 viewModel.appState?.currentView = .browse
                 viewModel.appState?.restoreWindowFromLobby()

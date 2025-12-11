@@ -8,10 +8,11 @@ struct ContentView: View {
         ZStack {
             // Main navigation view
             NavigationView {
-                // Sidebar
-                VStack(spacing: 0) {
-                    // App logo/title
-                    VStack(spacing: 4) {
+                // Sidebar - Hide when in Watch Party Lobby (immersive mode)
+                if appState.currentView != .watchPartyLobby {
+                    VStack(spacing: 0) {
+                        // App logo/title
+                        VStack(spacing: 4) {
                         if let appIconImage = NSImage(named: "AppIcon") {
                             Image(nsImage: appIconImage)
                                 .resizable()
@@ -120,6 +121,7 @@ struct ContentView: View {
                 }
                 .frame(width: 240)
                 .background(Color(NSColor.controlBackgroundColor))
+                } // End if !watchPartyLobby
 
                 // Main content area (excluding player)
                 Group {
@@ -183,6 +185,13 @@ struct ContentView: View {
         .sheet(isPresented: $appState.showUsernameSetup) {
             UsernameSetupView()
                 .environmentObject(appState)
+        }
+        .alert(item: $appState.activeAlert) { alert in
+            Alert(
+                title: Text(alert.title),
+                message: Text(alert.message),
+                dismissButton: .default(Text("OK"))
+            )
         }
         .task {
             // Initialize performance-optimized cache limits

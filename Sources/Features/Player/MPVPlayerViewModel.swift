@@ -162,6 +162,10 @@ class MPVPlayerViewModel: ObservableObject {
     // Realtime sync manager
     private var realtimeManager: RealtimeChannelManager?
     @Published var isWatchPartyHost: Bool = false  // Exposed to view for UI control
+    
+    // Grace Period: Track when this view model was created
+    private let initializationTime = Date()
+    
     private var currentRoomId: String?
     private var currentUserId: String?
     private var syncBroadcastTimer: Timer?
@@ -1233,7 +1237,9 @@ extension MPVPlayerViewModel {
                 guard let self = self else { return }
 
                 // FALLBACK: If room is missing locally (e.g. host started quickly), fetch it
-                if self.appState?.currentWatchPartyRoom == nil, let roomId = self.currentRoomId {
+                if self.appState?.currentWatchPartyRoom == nil {
+                    // Explicitly capture roomId to avoid ambiguous expression error in closure
+                    if let roomId: String = self.currentRoomId {
                     print("⚠️ Room state missing in MPVViewModel - fetching fallback for \(roomId)")
                     if let fetchedSupabaseRoom = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
                         // Map to minimal WatchPartyRoom for participant tracking
@@ -1294,6 +1300,7 @@ extension MPVPlayerViewModel {
                         self.appState?.currentWatchPartyRoom = fetchedRoom
                     }
                 }
+            }
 
                 // Update AppState participants list for UI
                 if let room = self.appState?.currentWatchPartyRoom {
@@ -1390,6 +1397,15 @@ extension MPVPlayerViewModel {
                                 // Check if this is an old session leavning (stale ref)
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
+                                    
+                                    // MAGIC BULLET: Grace Period Check
+                                    // Ignore ALL "User Left" events in the first 5 seconds of the session.
+                                    // This filters out transition noise (Lobby -> Player) and "Ghost" session cleanups.
+                                    if Date().timeIntervalSince(self.initializationTime) < 5.0 {
+                                        print("🛡️ Grace Period: Ignoring LEAVE for \(actualUserId) (Session too young)")
+                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                        return
+                                    }
                                     
                                     // PREFERRED: Check specific Connection ID (phx_ref) mismatch
                                     // If the user's current connection ID is different from the leaving one, 

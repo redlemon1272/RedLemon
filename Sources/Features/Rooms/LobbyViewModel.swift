@@ -11,6 +11,7 @@ class LobbyViewModel: ObservableObject {
     // View should eventually bind to chatManager paths directly, but this is a transitional step.
     var messages: [LobbyMessage] { chatManager.messages }
     var chatMessages: [ChatMessage] { chatManager.chatMessages }
+    var unifiedMessages: [UnifiedLobbyMessage] { chatManager.unifiedMessages }
     var chatInput: String {
         get { chatManager.chatInput }
         set { chatManager.chatInput = newValue }

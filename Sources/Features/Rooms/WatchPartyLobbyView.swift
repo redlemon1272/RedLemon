@@ -338,44 +338,43 @@ struct WatchPartyLobbyView: View {
                                 ScrollViewReader { proxy in
                                     ScrollView {
                                         VStack(alignment: .leading, spacing: 8) {
-                                            // System messages (joins, ready status, etc.)
-                                            ForEach(viewModel.messages) { message in
-                                                LobbyMessageRow(message: message)
-                                                    .id(message.id)
-                                            }
-
-                                            // User chat messages
-                                            ForEach(viewModel.chatMessages) { chatMsg in
-                                                VStack(alignment: .leading, spacing: 4) {
-                                                    Text(chatMsg.username)
-                                                        .font(.caption.weight(.semibold))
-                                                        .foregroundColor(.blue)
-                                                    Text(chatMsg.text)
-                                                        .font(.body)
-                                                        .foregroundColor(.white)
+                                            // Unified Message List (Interleaved System + Chat)
+                                            ForEach(viewModel.unifiedMessages) { item in
+                                                switch item {
+                                                case .system(let message):
+                                                    LobbyMessageRow(message: message)
+                                                        .id(item.id)
+                                                case .chat(let chatMsg):
+                                                    VStack(alignment: .leading, spacing: 4) {
+                                                        Text(chatMsg.username)
+                                                            .font(.caption.weight(.semibold))
+                                                            .foregroundColor(.blue)
+                                                        Text(chatMsg.text)
+                                                            .font(.body)
+                                                            .foregroundColor(.white)
+                                                    }
+                                                    .padding(8)
+                                                    .background(Color.white.opacity(0.1))
+                                                    .cornerRadius(8)
+                                                    .id(item.id)
                                                 }
-                                                .padding(8)
-                                                .background(Color.white.opacity(0.1))
-                                                .cornerRadius(8)
-                                                .id(chatMsg.id)
                                             }
+                                            
+                                            // Invisible view to anchor the scroll
+                                            Color.clear
+                                                .frame(height: 1)
+                                                .id("BOTTOM")
                                         }
                                         .padding()
                                     }
                                     .frame(minHeight: chatMinHeight, maxHeight: .infinity)
                                     .background(Color.black.opacity(0.3))
                                     .cornerRadius(8)
-                                    .onChange(of: viewModel.messages.count) { _ in
-                                        if let lastMessage = viewModel.messages.last {
+                                    .onChange(of: viewModel.unifiedMessages.count) { _ in
+                                        // Scroll to bottom whenever messages change
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                             withAnimation {
-                                                proxy.scrollTo(lastMessage.id, anchor: .bottom)
-                                            }
-                                        }
-                                    }
-                                    .onChange(of: viewModel.chatMessages.count) { _ in
-                                        if let lastChat = viewModel.chatMessages.last {
-                                            withAnimation {
-                                                proxy.scrollTo(lastChat.id, anchor: .bottom)
+                                                proxy.scrollTo("BOTTOM", anchor: .bottom)
                                             }
                                         }
                                     }

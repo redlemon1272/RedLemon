@@ -2,17 +2,52 @@ import Foundation
 import Combine
 import SwiftUI
 
+/// Unified message type for interleaved display
+enum UnifiedLobbyMessage: Identifiable {
+    case system(LobbyMessage)
+    case chat(ChatMessage)
+    
+    var id: String {
+        switch self {
+        case .system(let m): return m.id
+        case .chat(let m): return m.id
+        }
+    }
+    
+    var timestamp: Date {
+        switch self {
+        case .system(let m): return m.timestamp
+        case .chat(let m): return m.timestamp
+        }
+    }
+}
+
 /// Manages chat messages and input for the Lobby
 /// Extracts chat logic from the God Object LobbyViewModel
 @MainActor
 class LobbyChatManager: ObservableObject {
-    @Published var messages: [LobbyMessage] = []
-    @Published var chatMessages: [ChatMessage] = []
+    // Unified storage for chronological display
+    @Published var unifiedMessages: [UnifiedLobbyMessage] = []
+    
+    // Legacy support (computed filters) - or we can remove if we update View
+    var messages: [LobbyMessage] {
+        unifiedMessages.compactMap {
+            if case .system(let m) = $0 { return m }
+            return nil
+        }
+    }
+    
+    var chatMessages: [ChatMessage] {
+        unifiedMessages.compactMap {
+            if case .chat(let m) = $0 { return m }
+            return nil
+        }
+    }
+    
     @Published var chatInput: String = ""
     
     // Limits
-    private let maxSystemMessages = 50
-    private let maxChatMessages = 100
+    private let maxMessages = 150
     
     // Dependencies
     private let sendCallback: (String) async -> Void
@@ -45,19 +80,20 @@ class LobbyChatManager: ObservableObject {
         )
         
         withAnimation {
-            messages.append(message)
-            if messages.count > maxSystemMessages {
-                messages.removeFirst()
-            }
+            addUnified(.system(message))
         }
     }
     
     func addChatMessage(_ message: ChatMessage) {
         withAnimation {
-            chatMessages.append(message)
-            if chatMessages.count > maxChatMessages {
-                chatMessages.removeFirst()
-            }
+            addUnified(.chat(message))
+        }
+    }
+    
+    private func addUnified(_ item: UnifiedLobbyMessage) {
+        unifiedMessages.append(item)
+        if unifiedMessages.count > maxMessages {
+            unifiedMessages.removeFirst()
         }
     }
     
@@ -73,7 +109,6 @@ class LobbyChatManager: ObservableObject {
     }
     
     func clearMessages() {
-        messages.removeAll()
-        chatMessages.removeAll()
+        unifiedMessages.removeAll()
     }
 }

@@ -1317,6 +1317,7 @@ extension MPVPlayerViewModel {
                             return // Skip re-adding since they never technically left our model
                         }
 
+
                         // Check if already exists using actualUserId (stable ID)
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
                             // User exists - update their timestamp and name
@@ -1439,9 +1440,11 @@ extension MPVPlayerViewModel {
 
                                 // Update room state with fresh list
                                 self.appState?.currentWatchPartyRoom?.participants = currentParticipants
+                                self.appState?.objectWillChange.send() // Force UI update
                                 self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             }
                         }
+                        
                         self.pendingLeaveTasks[actualUserId] = task
                         return
 

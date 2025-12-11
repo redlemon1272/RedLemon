@@ -1397,19 +1397,13 @@ extension MPVPlayerViewModel {
                                     // Use phx_ref from metadata if available, otherwise fallback to userId
                                     let leavingPhxRef = metadata?["phx_ref"] as? String ?? userId
                                     
-                                    // Debug: Dump all participants to find ID mismatch
-                                    print("🔍 DEBUG LEAVE: Analyzing leave for \(actualUserId) (Ref: \(leavingPhxRef))")
-                                    print("   Participants dump:")
-                                    for p in currentParticipants {
-                                        print("   - [\(p.id)] '\(p.name)' Ref: \(p.phxRef ?? "nil") Joined: \(p.joinedAt.timeIntervalSince1970)")
-                                    }
-
+                                    // Strict check: Only remove if phxRef matches (or we have no ref tracked yet)
+                                    // This prevents removing the "active" session if a stale one disconnects
+                                    
                                     if let currentRef = existingParticipant.phxRef, currentRef != leavingPhxRef {
-                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
+                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
-                                    } else {
-                                        print("⚠️ LEAVE VALIDATED: proceeding to remove. CurrentRef: \(existingParticipant.phxRef ?? "nil") vs LeavingRef: \(leavingPhxRef)")
                                     }
 
                                     // FALLBACK: Timestamp check (original fix)
@@ -1418,7 +1412,7 @@ extension MPVPlayerViewModel {
                                     
                                     // Allow 1s tolerance for clock skew/processing time
                                     if leaveJoinedAt < (existingJoinedAt - 1.0) {
-                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Leave: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
+                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Leave: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
@@ -1459,8 +1453,34 @@ extension MPVPlayerViewModel {
 
                     }
 
+                    // Deduplicate participants by ID (preferring entries with phxRef or newer joinedAt)
+                    // This fixes the "Ghost User" issue where Uppercase (DB) and Lowercase (Realtime) IDs coexist
+                    var uniqueParticipants: [String: Participant] = [:]
+                    
+                    for p in updatedParticipants {
+                        let normalizedId = p.id.lowercased()
+                        if let existing = uniqueParticipants[normalizedId] {
+                            // Merge logic: Keep the one with phxRef, or the newer one
+                            if existing.phxRef == nil && p.phxRef != nil {
+                                uniqueParticipants[normalizedId] = p
+                            } else if existing.phxRef != nil && p.phxRef == nil {
+                                // Keep existing
+                            } else {
+                                // Both have ref or neither; keep newest
+                                if p.joinedAt > existing.joinedAt {
+                                    uniqueParticipants[normalizedId] = p
+                                }
+                            }
+                        } else {
+                            uniqueParticipants[normalizedId] = p
+                        }
+                    }
+                    
+                    // Final sorted list
+                    let dedupedList = uniqueParticipants.values.sorted { $0.joinedAt < $1.joinedAt }
+
                     // Update room state
-                    self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
+                    self.appState?.currentWatchPartyRoom?.participants = dedupedList
                 }
             }
         }

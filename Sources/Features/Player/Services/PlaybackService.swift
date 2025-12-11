@@ -70,6 +70,11 @@ actor MPVPlaybackService: PlaybackService {
         for observer in observers {
             observer.cancel()
         }
+        
+        // Ensure assertion is released if actor is deallocated while playing
+        if let assertion = sleepAssertion {
+            ProcessInfo.processInfo.endActivity(assertion)
+        }
     }
     
     // MARK: - Protocol Implementation
@@ -152,7 +157,28 @@ actor MPVPlaybackService: PlaybackService {
     
     // MARK: - State Updates (Internal)
     
-    private func updateIsPlaying(_ playing: Bool) { self.isPlaying = playing }
+    // Sleep Prevention
+    private var sleepAssertion: NSObjectProtocol?
+
+    private func updateIsPlaying(_ playing: Bool) { 
+        self.isPlaying = playing
+        
+        if playing {
+            if sleepAssertion == nil {
+                print("⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)")
+                sleepAssertion = ProcessInfo.processInfo.beginActivity(
+                    options: [.userInitiated, .idleSystemSleepDisabled], 
+                    reason: "RedLemon Video Playback"
+                )
+            }
+        } else {
+            if let assertion = sleepAssertion {
+                print("⚡️ PlaybackService: releasing sleep assertion")
+                ProcessInfo.processInfo.endActivity(assertion)
+                sleepAssertion = nil
+            }
+        }
+    }
     private func updatePlaybackFinished(_ finished: Bool) { self.playbackFinished = finished }
     private func updateCurrentTime(_ time: Double) { self.currentTime = time }
     private func updateDuration(_ dur: Double) { self.duration = dur }

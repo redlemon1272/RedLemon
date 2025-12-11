@@ -5,9 +5,17 @@ import Combine
 @MainActor
 class LobbyViewModel: ObservableObject {
     @Published var participants: [Participant]
-    @Published var messages: [LobbyMessage] = []
-    @Published var chatMessages: [ChatMessage] = []  // User chat messages
-    @Published var chatInput: String = ""
+    
+    // Phase 1: Chat properties delegated to ChatManager
+    // We keep them as published properties linked to the manager for minimal view breakage
+    // View should eventually bind to chatManager paths directly, but this is a transitional step.
+    var messages: [LobbyMessage] { chatManager.messages }
+    var chatMessages: [ChatMessage] { chatManager.chatMessages }
+    var chatInput: String {
+        get { chatManager.chatInput }
+        set { chatManager.chatInput = newValue }
+    }
+    
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
     @Published var countdown: Int = 3
@@ -32,28 +40,49 @@ class LobbyViewModel: ObservableObject {
     @Published var isResolvingStream: Bool = false // UI indicator for stream resolution
 
     @Published var room: WatchPartyRoom
-    private var isHost: Bool
+    var isHost: Bool
     private var realtimeClient: SupabaseRealtimeClient?
     // private var countdownTimer: Timer? // Removed for concurrency
     // countdownTask already declared on line 38, ensuring we use that instead.
     private var countdownTask: Task<Void, Never>?
     private var participantsPollingTask: Task<Void, Never>?
     private var roomStatePollingTask: Task<Void, Never>?
-    private var lastRoomPlayingState: Bool = false
-    private var participantId: String
+    var lastRoomPlayingState: Bool = false
+    var participantId: String
     private var isDisconnecting: Bool = false
-    private var realtimeManager: (any RealtimeService)?
+    var realtimeManager: (any RealtimeService)?
     private var playbackEndedTimestamp: Date? // Track when playback ended to prevent immediate re-join race condition
-    private var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
+    var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     private var canAutoJoin: Bool = false // Safety flag: Prevents auto-join immediately upon entry (race condition protection)
+    
+    // Combine storage for Refactor Phase 1
+    private var cancellables = Set<AnyCancellable>()
 
     // Helper to track state safely across actor boundaries (specifically for deinit)
-    private class TransitionState {
+    var transitionState = TransitionState() // made var internal
+    class TransitionState { // made class internal
         var isStarting: Bool = false
     }
-    private let transitionState = TransitionState()
 
     weak var appState: AppState?  // Weak reference to avoid retain cycle
+
+    // MARK: - Composition / Managers
+    // Phase 1: Chat Logic
+    lazy var chatManager: LobbyChatManager = {
+        LobbyChatManager(sendCallback: { [weak self] text in
+             await self?.performSendChatMessage(text)
+        })
+    }()
+    
+    // Phase 2: Event Logic
+    lazy var eventRouter: LobbyEventRouter = {
+        LobbyEventRouter(viewModel: self)
+    }()
+    
+    // Phase 3: Presence Logic
+    lazy var presenceManager: LobbyPresenceManager = {
+        LobbyPresenceManager(viewModel: self)
+    }()
 
     // MARK: - Initialization
 
@@ -93,6 +122,13 @@ class LobbyViewModel: ObservableObject {
 
         // Initialize playbackEndedTimestamp to enable the grace period check in pollRoomState
         self.playbackEndedTimestamp = Date()
+        
+        // Phase 1: Wire up ChatManager changes to View Model changes
+        self.chatManager.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
 
         // Fetch fresh room state from Supabase to ensure playlist is synced
         // This fixes the issue where Host sees "Playlist 0" because AppState had stale data
@@ -158,17 +194,21 @@ class LobbyViewModel: ObservableObject {
                 case .join:
                     // Check if already exists
                     if let index = self.participants.firstIndex(where: { $0.id == userId }) {
-                        // User exists - update their timestamp so the subsequent 'leave' event
-                        // (which happens on metadata updates) knows they just 'joined' and doesn't remove them.
                         self.participants[index].joinedAt = Date()
                         // Also update metadata if needed
-                        let username = metadata?["username"] as? String ?? "User"
-                        self.participants[index].name = username
+                        if let dict = metadata as? [String: Any],
+                           let username = dict["username"] as? String {
+                            self.participants[index].name = username
+                        }
                     } else {
                         // New user
-                        let username = metadata?["username"] as? String ?? "User"
-                        let _ = metadata?["avatar_url"] as? String
-
+                        var username = "User"
+                        if let dict = metadata as? [String: Any] {
+                            if let name = dict["username"] as? String {
+                                username = name
+                            }
+                        }
+                        
                         let newParticipant = Participant(
                             id: userId,
                             name: username,
@@ -320,7 +360,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Guest needs to join room in database first
                 if !isHost {
-                    guard let userId = appState?.currentUserId else {
+                    guard let userId = self.appState?.currentUserId else {
                         print("❌ Lobby: Cannot join room - no user ID")
                         return
                     }
@@ -335,7 +375,7 @@ class LobbyViewModel: ObservableObject {
                         // If join failed, check if it's because we're already in the room or if the room is missing
                         if room.id.hasPrefix("event_") {
                             // Check if room exists
-                            let roomExists = (try? await SupabaseClient.shared.getRoomState(roomId: room.id)) != nil
+                            let roomExists = (try? await SupabaseClient.shared.getRoomState(roomId: self.room.id)) != nil
 
                             if roomExists {
                                 NSLog("ℹ️ Lobby: Join failed but room exists - assuming user already joined")
@@ -404,7 +444,7 @@ class LobbyViewModel: ObservableObject {
 
                 if !isHost {
                     // Guest joining - send join message via Realtime only
-                    let guestName = appState?.currentUsername ?? "Guest"
+                    let guestName = self.appState?.currentUsername ?? "Guest"
 
                     // Send join message via Realtime
                     let joinMsg = SyncMessage(
@@ -527,6 +567,14 @@ class LobbyViewModel: ObservableObject {
     }
 
     func sendChatMessage() {
+        Task {
+            await chatManager.send()
+        }
+    }
+
+    // Extracted logic for network transmission (called by ChatManager callback)
+    private func performSendChatMessage(_ text: String) async {
+
         guard !chatInput.trimmingCharacters(in: .whitespaces).isEmpty else { return }
 
         let messageText = chatInput
@@ -543,17 +591,12 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Clear input immediately for better UX
-        chatInput = ""
-
+        // Handled by ChatManager now
+        
         // Add message locally for instant feedback (optimistic UI)
-        let localMessage = ChatMessage(
-            id: UUID().uuidString,
-            username: username,
-            text: messageText,
-            timestamp: Date()
-        )
-        chatMessages.append(localMessage)
-        trimLobbyMessages()
+        chatManager.addLocalMessage(username: username, text: messageText)
+        // chatMessages.append(localMessage) -> Handled by manager
+        // trimLobbyMessages() -> Handled by manager
         NSLog("💬 Added own message locally: '\(messageText)'")
 
         // Send via Realtime only (no database involvement)
@@ -586,105 +629,24 @@ class LobbyViewModel: ObservableObject {
         print("💬 Lobby: Sent message via Realtime")
     }
 
+
+    func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String] = [:]) {
+        chatManager.addSystemMessage(type, userName: userName, data: data)
+    }
+
+    // Old trimLobbyMessages function - Removed as ChatManager handles it
+    // func trimLobbyMessages() { ... }
+
     func toggleReady() {
-        let wasReady = isReady
-        isReady.toggle()
-
-        // Get current username for logging
-        let currentUsername = appState?.currentUsername ?? "Guest"
-        let readyStatus = isReady ? "READY" : "NOT READY"
-
-        NSLog("🟢 Guest '\(currentUsername)' marked as \(readyStatus) in room \(room.id)")
-        NSLog("   Previous state: \(wasReady ? "Ready" : "Not Ready") → New state: \(readyStatus)")
-
-        let messageType: LobbyMessageType = isReady ? .userReady : .userNotReady
-        addMessage(messageType, userName: currentUsername)
-
-        // Update participant ready state locally
-        if let index = participants.firstIndex(where: { $0.id == participantId }) {
-            participants[index].isReady = isReady
-            NSLog("✅ Updated local participant ready state for \(currentUsername)")
-        } else {
-            NSLog("⚠️ Could not find participant with ID \(participantId) to update ready state")
-        }
-
-        // Broadcast ready state via Realtime with enhanced error handling
-        Task { [weak self] in
-            guard let self = self else { return }
-
-            let syncMsg = SyncMessage(
-                type: .chat,
-                timestamp: 0,
-                isPlaying: nil,
-                senderId: self.participantId,
-                chatText: self.isReady ? "LOBBY_READY" : "LOBBY_UNREADY",
-                chatUsername: currentUsername
-            )
-
-            do {
-                // Check Realtime connection status first
-                if let manager = self.realtimeManager, await manager.isRealtimeConnected() {
-                    try await manager.sendSyncMessage(syncMsg)
-                    NSLog("📡 Successfully broadcasted \(readyStatus) state via Realtime to room \(self.room.id)")
-                } else {
-                    NSLog("⚠️ Realtime not connected, falling back to database polling for \(readyStatus) state")
-                    // Message will be delivered through database polling
-                    return
-                }
-
-                // Log room-wide ready status
-                let readyCount = self.participants.filter { $0.isReady }.count
-                let totalCount = self.participants.count
-                NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
-
-            } catch RealtimeError.connectionTimeout {
-                NSLog("⏰ Realtime connection timeout while broadcasting \(readyStatus) state - falling back to database")
-                // Continue with database polling fallback
-            } catch RealtimeError.connectionFailed {
-                NSLog("❌ Realtime connection failed while broadcasting \(readyStatus) state - falling back to database")
-                // Continue with database polling fallback
-            } catch {
-                NSLog("❌ Failed to broadcast \(readyStatus) state via Realtime: \(error)")
-                NSLog("   Room: \(self.room.id), User: \(currentUsername)")
-                // Continue with database polling fallback
-            }
-        }
-
-        print("✓ Lobby: \(currentUsername) toggled ready to \(isReady)")
+        presenceManager.toggleReady()
     }
 
     func toggleMute(participantId: String) {
-        if mutedUserIds.contains(participantId) {
-            mutedUserIds.remove(participantId)
-            addMessage(.systemInfo, userName: "System", data: ["message": "Unmuted participant"])
-        } else {
-            mutedUserIds.insert(participantId)
-            addMessage(.systemInfo, userName: "System", data: ["message": "Muted participant"])
-        }
+        presenceManager.toggleMute(participantId: participantId)
     }
 
     func kickParticipant(_ participant: Participant) {
-        guard isHost else { return }
-
-        addMessage(.userKicked, userName: participant.name)
-
-        participants.removeAll { $0.id == participant.id }
-
-        // Send kick command via Realtime
-        Task { [weak self] in
-            guard let self = self else { return }
-            let syncMsg = SyncMessage(
-                type: .chat,
-                timestamp: 0,
-                isPlaying: nil,
-                senderId: self.participantId,
-                chatText: "LOBBY_KICK:\(participant.id)",
-                chatUsername: "Host"
-            )
-            try? await self.realtimeManager?.sendSyncMessage(syncMsg)
-        }
-
-        print("🚫 Lobby: Kicked \(participant.name)")
+        presenceManager.kickParticipant(participant)
     }
 
     func startMovie(appState: AppState) async {
@@ -751,13 +713,13 @@ class LobbyViewModel: ObservableObject {
                 NSLog("📡 Realtime delivery confirmed for \(self.participants.count) guests")
             } catch RealtimeError.channelNotReady {
                 NSLog("⚠️ Host: Realtime channel not ready - will use database fallback")
-                await self.addMessage(.systemInfo, userName: "System", data: [
+                self.addMessage(.systemInfo, userName: "System", data: [
                     "message": "Using database fallback for start signal (Realtime not ready)",
                     "reason": "Channel not ready"
                 ])
             } catch {
                 NSLog("⚠️ Host: Unknown Realtime error: \(error) - will use database fallback")
-                await self.addMessage(.systemInfo, userName: "System", data: [
+                self.addMessage(.systemInfo, userName: "System", data: [
                     "message": "Using database fallback for start signal",
                     "error": "\(error.localizedDescription)"
                 ])
@@ -883,312 +845,12 @@ class LobbyViewModel: ObservableObject {
         }
     }
 
-    private func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String]? = nil) {
-        let message = LobbyMessage(
-            id: UUID().uuidString,
-            type: type,
-            userId: participantId,
-            userName: userName,
-            timestamp: Date(),
-            data: data
-        )
 
-        messages.append(message)
-        trimLobbyMessages()
-    }
 
     // MARK: - Realtime Message Handling
 
     private func handleLobbyMessage(_ syncMessage: SyncMessage) async {
-        guard let chatText = syncMessage.chatText else {
-            NSLog("⚠️ Received Realtime message with no chat text")
-            return
-        }
-
-        // Log incoming Realtime message
-        let senderInfo = syncMessage.chatUsername ?? syncMessage.senderId ?? "Unknown"
-        // NSLog("📥 Received Realtime message: '\(chatText)' from \(senderInfo)") // Reduced log spam
-
-        // MUTE CHECK: Ignore chat if user is muted
-        if let senderId = syncMessage.senderId, mutedUserIds.contains(senderId), syncMessage.type == .chat, !chatText.starts(with: "LOBBY_") {
-             // System messages (LOBBY_*) are never muted
-             return
-        }
-
-        // Handle special lobby commands
-        if chatText.starts(with: "LOBBY_") {
-            if chatText == "LOBBY_JOIN" {
-                // Guest joined
-                if isHost {
-                    let guestUsername = syncMessage.chatUsername ?? "Guest"
-                    let guestId = syncMessage.senderId ?? UUID().uuidString
-                    NSLog("👋 Host received: Guest '\(guestUsername)' joined room \(room.id)")
-                    NSLog("   Guest ID: \(guestId), Total participants: \(participants.count + 1)")
-
-                    // REMOVED: addMessage(.userJoined, userName: guestUsername)
-                    // Reason: Presence callback handles this already. Removing to prevent double messages.
-
-                    let guest = Participant(
-                        id: guestId,
-                        name: guestUsername,
-                        isHost: false,
-                        isReady: false,
-                        joinedAt: Date()
-                    )
-                    participants.append(guest)
-
-                    // Log updated room status
-                    let readyCount = participants.filter { $0.isReady }.count
-                    NSLog("👥 Room status after join: \(participants.count) participants, \(readyCount) ready")
-                } else {
-                    // Non-host received guest join notification
-                    let guestUsername = syncMessage.chatUsername ?? "Guest"
-                    NSLog("👋 Received: Guest '\(guestUsername)' joined room \(room.id)")
-                }
-            } else if chatText == "LOBBY_READY" {
-                // Guest marked as ready
-                if let senderId = syncMessage.senderId,
-                   let index = participants.firstIndex(where: { $0.id == senderId }) {
-                    let username = participants[index].name
-                    participants[index].isReady = true
-                    let recipientRole = isHost ? "Host" : "Guest"
-                    NSLog("📡 \(recipientRole) received: '\(username)' marked as READY via Realtime")
-                    NSLog("   Sender ID: \(senderId), Room: \(room.id)")
-
-                    // Log room-wide ready status
-                    let readyCount = participants.filter { $0.isReady }.count
-                    let totalCount = participants.count
-                    NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
-
-                    addMessage(.userReady, userName: username) // RESTORED
-                } else {
-                    NSLog("⚠️ Received LOBBY_READY from unknown participant: \(syncMessage.senderId ?? "unknown")")
-                }
-            } else if chatText == "LOBBY_UNREADY" {
-                // Guest marked as not ready
-                if let senderId = syncMessage.senderId,
-                   let index = participants.firstIndex(where: { $0.id == senderId }) {
-                    let username = participants[index].name
-                    participants[index].isReady = false
-                    let recipientRole = isHost ? "Host" : "Guest"
-                    NSLog("📡 \(recipientRole) received: '\(username)' marked as NOT READY via Realtime")
-                    NSLog("   Sender ID: \(senderId), Room: \(room.id)")
-
-                    // Log room-wide ready status
-                    let readyCount = participants.filter { $0.isReady }.count
-                    let totalCount = participants.count
-                    NSLog("👥 Room ready status updated: \(readyCount)/\(totalCount) participants ready")
-
-                    addMessage(.userNotReady, userName: username) // RESTORED
-                } else {
-                    NSLog("⚠️ Received LOBBY_UNREADY from unknown participant: \(syncMessage.senderId ?? "unknown")")
-                }
-            } else if chatText.starts(with: "LOBBY_KICK:") {
-                // Host kicked someone
-                let kickedId = chatText.replacingOccurrences(of: "LOBBY_KICK:", with: "")
-                if participantId == kickedId {
-                    // We were kicked - disconnect and return to browse
-                    print("❌ Lobby: Kicked by host")
-
-                    // Show alert via lobby message? Or just leave.
-                    // Ideally we'd show an alert but we can't easily trigger one from VM -> View without state binding
-                    // Just force leave
-
-                    await MainActor.run {
-                        self.disconnect()
-                        self.appState?.currentView = .browse
-                        self.appState?.restoreWindowFromLobby()
-                    }
-                }
-            } else if chatText == "LOBBY_START_COUNTDOWN" {
-                // Host started countdown
-                if !isHost {
-                    NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
-                    isStarting = true
-                    transitionState.isStarting = true
-                    countdown = Int(syncMessage.timestamp)
-                    addMessage(.hostStarting, userName: "Host")
-
-                    // Guest automatically starts playback after countdown
-                    Task { @MainActor [weak self] in
-                        guard let self = self else { return }
-                        NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
-
-                        // CRITICAL FIX: Update lastRoomPlayingState to prevent DB polling from triggering double-start
-                        self.lastRoomPlayingState = true
-
-                        // CRITICAL: Fetch fresh room state BEFORE countdown
-                        // This ensures we have correct season/episode AND don't delay playback start
-                        let fetchStartTime = Date()
-                        guard let roomState = try? await SupabaseClient.shared.getRoomState(roomId: room.id) else {
-                            NSLog("⚠️ Guest: Failed to fetch room state, using local state")
-                            // Fallback to local state
-                            if let season = room.season, let episode = room.episode {
-                                await MainActor.run {
-                                    appState?.selectedSeason = season
-                                    appState?.selectedEpisode = episode
-
-                                    // CRITICAL FIX: Clear stale stream optimization data to force fresh resolution
-                                    // If we failed to get fresh room state, the existing optimization data (URL/Hash)
-                                    // likely points to the PREVIOUS episode. We must clear it to avoid playing wrong content.
-                                    if var currentRoom = appState?.currentWatchPartyRoom {
-                                        currentRoom.selectedStreamHash = nil
-                                        currentRoom.selectedFileIdx = nil
-                                        currentRoom.selectedQuality = nil
-                                        currentRoom.unlockedStreamURL = nil
-                                        appState?.currentWatchPartyRoom = currentRoom
-                                        print("🛡️ Guest: Cleared stale stream optimization data (Fallback Mode)")
-                                    }
-                                }
-                                NSLog("📺 Guest: Set season/episode from local state: S\(season)E\(episode)")
-                            }
-                            // Continue with playback even if we couldn't fetch fresh state
-                            guard let mediaItem = room.mediaItem, let appState = appState else {
-                                NSLog("❌ Guest: Cannot start playback - missing media or appState")
-                                return
-                            }
-                            await appState.playMedia(
-                                mediaItem,
-                                quality: .fullHD,
-                                watchMode: .watchParty,
-                                roomId: room.id,
-                                isHost: false
-                            )
-                            return
-                        }
-
-                        // CRITICAL: Check for media mismatch (e.g. host changed movie to show)
-                        // This fixes the "Mirror" vs "Breaking Bad" issue
-                        await self.updateMediaItemFromRoomState(roomState)
-
-                        // Re-fetch mediaItem as it might have changed
-                        guard let currentMediaItem = self.room.mediaItem else {
-                             NSLog("❌ Guest: Media item missing after update check")
-                             return
-                        }
-
-                        // Use fresh DB state (same logic as database fallback path)
-                        let season = roomState.season ?? room.season
-                        let episode = roomState.episode ?? room.episode
-
-                        if var currentRoom = appState?.currentWatchPartyRoom {
-                            currentRoom.season = season ?? currentRoom.season
-                            currentRoom.episode = episode ?? currentRoom.episode
-
-                            // IMPORTANT: Copy stream details from fetched roomState to appState
-                            // This ensures AppState.playMedia sees the "Guest Optimization" data
-                            currentRoom.selectedStreamHash = roomState.streamHash
-                            currentRoom.selectedFileIdx = roomState.fileIdx
-                            currentRoom.selectedQuality = roomState.quality
-                            currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
-
-                            appState?.currentWatchPartyRoom = currentRoom
-                            NSLog("✅ Guest: Synced stream details from host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
-                        }
-
-                        if let season = season, let episode = episode {
-                            await MainActor.run {
-                                appState?.selectedSeason = season
-                                appState?.selectedEpisode = episode
-
-                                // Also update local room state
-                                self.room.season = season
-                                self.room.episode = episode
-                            }
-                            NSLog("📺 Guest: Set season/episode from DB (Realtime path): S\(season)E\(episode)")
-                        } else {
-                            // Only warn if it's a series
-                            if self.room.mediaItem?.type == "series" {
-                                NSLog("⚠️ Guest: No season/episode found in DB or local state for series")
-                            }
-                        }
-
-                        // NOW wait for countdown (DB fetch already done, so timing is accurate)
-                        // Compensate for fetch time to ensure we start exactly 3s after signal
-                        // PLUS add 0.25s buffer to match Host's UI/processing overhead
-                        let fetchDuration = Date().timeIntervalSince(fetchStartTime)
-                        let remainingWait = max(0, 3.25 - fetchDuration)
-
-                        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s (includes 0.25s sync buffer)")
-
-                        if remainingWait > 0 {
-                            try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))
-                        }
-
-                        NSLog("🎬 Guest: Starting playback after countdown")
-
-                        // Start playback
-                        guard let mediaItem = room.mediaItem else {
-                            NSLog("❌ Guest: Cannot start playback - no media selected")
-                            return
-                        }
-
-                        guard let appState = appState else {
-                            NSLog("❌ Guest: Cannot start playback - no appState")
-                            return
-                        }
-
-                        NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
-
-                        await appState.playMedia(
-                            mediaItem,
-                            quality: .fullHD,
-                            watchMode: .watchParty,
-                            roomId: room.id,
-                            isHost: false
-                        )
-
-                    }
-                }
-            } else {
-                // Unknown LOBBY command - log warning
-                NSLog("⚠️ Unknown lobby command received: '\(chatText)' from \(senderInfo)")
-            }
-        } else if syncMessage.type == .roomClosed {
-             // Host closed the room
-             NSLog("🔒 Received Room Closed signal from Host")
-             addMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
-             
-             addMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
-             
-             Task { @MainActor [weak self] in
-                 guard let self = self else { return }
-                 self.roomClosedMessage = "The host has left the room."
-                 self.showRoomClosedAlert = true
-                 // We don't disconnect immediately, we let the user click OK or wait for the alert dismissal
-                 // The alert's dismiss button handles navigation
-             }
-        } else {
-            // Regular chat message - add to chat UI
-            // CRITICAL: Skip messages from self (already added locally when sent)
-            NSLog("🔍 Chat message received - senderId: '\(syncMessage.senderId ?? "nil")', participantId: '\(participantId)'")
-
-            if syncMessage.senderId == participantId {
-                NSLog("💬 Skipping own message (already displayed locally): '\(chatText)'")
-                return
-            }
-
-            NSLog("💬 Adding received message from other participant: '\(chatText)'")
-            let chatMessage = ChatMessage(
-                id: UUID().uuidString,
-                username: syncMessage.chatUsername ?? "Unknown",
-                text: chatText,
-                timestamp: Date(timeIntervalSince1970: syncMessage.timestamp)
-            )
-            chatMessages.append(chatMessage)
-            trimLobbyMessages()
-            print("💬 Lobby chat received: [\(syncMessage.chatUsername ?? "Unknown")] \(chatText)")
-        }
-    }
-
-    /// Keep lobby chat/messages bounded to avoid unbounded memory growth during long sessions
-    private func trimLobbyMessages(maxCount: Int = 300) {
-        if messages.count > maxCount {
-            messages.removeFirst(messages.count - maxCount)
-        }
-        if chatMessages.count > maxCount {
-            chatMessages.removeFirst(chatMessages.count - maxCount)
-        }
+        await eventRouter.handle(syncMessage)
     }
 
     private func loadMetadata() {
@@ -1225,165 +887,28 @@ class LobbyViewModel: ObservableObject {
 
     private func startPolling() {
         print("🔄 Lobby: Starting database polling for participants and room state...")
+        
+        presenceManager.startPolling()
 
-        // Poll participants every 2 seconds
-        participantsPollingTask = Task { [weak self] in
-            while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-                guard let self = self else { return }
-                await self.pollParticipants()
-            }
-        }
-
-        // Poll room state every 2 seconds for database fallback (guests only)
+        // Poll room state (guests)
         if !isHost {
-            roomStatePollingTask = Task { [weak self] in
-                while !Task.isCancelled {
-                    try? await Task.sleep(nanoseconds: 2_000_000_000)
-                    guard let self = self else { return }
-                    await self.pollRoomState()
-                }
-            }
-        }
-
-        // Heartbeat Loop (every 30 seconds)
-        // Keeps the user "active" in the room_participants table
-        startHeartbeatLoop()
-
-        // Do initial fetch immediately (no chat message polling)
-        Task { @MainActor [weak self] in
-            guard let self = self else { return }
-            await self.pollParticipants()
-            if !isHost {
-                await self.pollRoomState() // Get initial room state
-            }
+             roomStatePollingTask = Task { [weak self] in
+                 while !Task.isCancelled {
+                     guard let self = self else { return }
+                     await self.pollRoomState()
+                     try? await Task.sleep(nanoseconds: 2_000_000_000)
+                 }
+             }
         }
     }
-
-    private func startHeartbeatLoop() {
-        print("💓 Lobby: Starting heartbeat loop...")
-        Task { [weak self] in
-            while !Task.isCancelled {
-                guard let self = self else { return }
-
-                // Send heartbeat
-                if let userId = self.appState?.currentUserId {
-                    do {
-                        try await SupabaseClient.shared.sendHeartbeat(roomId: self.room.id, userId: userId)
-                        // print("💓 Heartbeat sent") // Verbose logging disabled
-                    } catch {
-                        print("⚠️ Heartbeat failed: \(error)")
-                    }
-                }
-
-                // Wait 30 seconds
-                try? await Task.sleep(nanoseconds: 30_000_000_000)
-            }
-        }
-    }
-
-
-
+    
     private func stopPolling() {
-        participantsPollingTask?.cancel()
-        participantsPollingTask = nil
+        presenceManager.stopPolling()
 
         roomStatePollingTask?.cancel()
         roomStatePollingTask = nil
 
         print("🛑 Lobby: Polling stopped (chat via Realtime only)")
-    }
-
-    private func pollParticipants() async {
-        do {
-            let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-
-            // Convert to Participant objects
-            var updatedParticipants: [Participant] = []
-
-            for participant in roomParticipants {
-                var username = "User"
-                if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
-                    username = user.username
-                }
-
-                // Preserve existing ready state for known participants
-                let existingParticipant = participants.first { $0.id == participant.userId.uuidString }
-                let isReady = existingParticipant?.isReady ?? false
-
-                let p = Participant(
-                    id: participant.userId.uuidString,
-                    name: username,
-                    isHost: participant.isHost,
-                    isReady: isReady,  // Preserve ready state from local state
-                    joinedAt: participant.joinedAt
-                )
-                updatedParticipants.append(p)
-
-                // If this is the current user (guest), ensure their ID matches
-                if !isHost && participant.userId.uuidString == participantId {
-                    NSLog("🔍 Current guest participant found in polling: \(p.name) with ID \(p.id)")
-                }
-            }
-
-            // Check if participants changed
-            let participantIds = Set(updatedParticipants.map { $0.id })
-            let currentIds = Set(participants.map { $0.id })
-
-            if participantIds != currentIds {
-                // Someone joined or left
-                let newParticipants = participantIds.subtracting(currentIds)
-                let leftParticipants = currentIds.subtracting(participantIds)
-
-                // Only add messages if realtime is NOT connected (fallback mode)
-                // When realtime is connected, presence callbacks handle the messages
-                let shouldAddMessages = realtimeConnectionStatus != .connected
-
-                for newId in newParticipants {
-                    if let newParticipant = updatedParticipants.first(where: { $0.id == newId }) {
-                        if shouldAddMessages {
-                            addMessage(.userJoined, userName: newParticipant.name)
-                        }
-                        NSLog("👋 \(newParticipant.name) joined room")
-                    }
-                }
-
-                for leftId in leftParticipants {
-                    if let leftParticipant = participants.first(where: { $0.id == leftId }) {
-                        if shouldAddMessages {
-                            addMessage(.userLeft, userName: leftParticipant.name)
-                        }
-                        NSLog("👋 \(leftParticipant.name) left room")
-                    }
-                }
-
-                participants = updatedParticipants
-
-                // CRITICAL FIX: "Presence Guarantee" (Self-Healing)
-                // If I am the Host, I MUST be in the participant list.
-                // If I am missing (e.g. timed out during playback), re-join immediately.
-                if isHost && !isLeavingExplicitly {
-                    // Check if my ID is in the list
-                    let amIPresent = participants.contains(where: { $0.id == participantId })
-
-                    if !amIPresent {
-                        // Debounce/Log carefully to avoid spam, but this is critical
-                        print("⚠️ Lobby: Host missing from participant list (Self-Healing activated)")
-
-                        Task { [weak self] in
-                            if let userId = UUID(uuidString: self?.participantId ?? "") {
-                                guard let self = self else { return }
-                                try? await SupabaseClient.shared.joinRoom(roomId: self.room.id, userId: userId, isHost: true)
-                                print("✅ Lobby: Host self-healed presence in DB")
-                            }
-                        }
-                    }
-                }
-            }
-
-        } catch {
-            NSLog("⚠️ Lobby: Failed to poll participants: \(error)")
-        }
     }
 
     /// Fetch fresh room state from Supabase (Host & Guest)
@@ -1826,7 +1351,7 @@ class LobbyViewModel: ObservableObject {
     }
 
     /// Check if media item needs update based on room state
-    private func updateMediaItemFromRoomState(_ roomState: SupabaseRoom) async {
+    func updateMediaItemFromRoomState(_ roomState: SupabaseRoom) async {
         // Check if IMDB ID matches
         guard let newImdbId = roomState.imdbId else { return }
 

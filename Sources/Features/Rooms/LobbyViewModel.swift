@@ -90,11 +90,20 @@ class LobbyViewModel: ObservableObject {
         self.room = room
         self.isHost = isHost
         self.realtimeManager = realtimeManager
-        self.participants = room.participants
+        // NORMALIZE: Ensure all initial participants have lowercase IDs for consistency
+        self.participants = room.participants.map { p in
+            return Participant(
+                id: p.id.lowercased(),
+                name: p.name,
+                isHost: p.isHost,
+                isReady: p.isReady,
+                joinedAt: p.joinedAt
+            )
+        }
 
         // For hosts, use room host ID. For guests, we'll set to participantId after getting user ID
         if isHost {
-            self.participantId = room.hostId
+            self.participantId = room.hostId.lowercased()
         } else {
             // Temporary - will be updated when we get actual user ID
             // NORMALIZE TO LOWERCASE to match Postgres conventions and avoid Realtime/DB mismatches
@@ -193,8 +202,19 @@ class LobbyViewModel: ObservableObject {
                 // Update participants list
                 switch action {
                 case .join:
-                    // Check if already exists
-                    if let index = self.participants.firstIndex(where: { $0.id == userId }) {
+                    // RESOLVE TRUE USER ID:
+                    // The `userId` param here is the Presence Ref (Connection ID), NOT the user's UUID.
+                    // We must extract the actual user_id from metadata if available.
+                    var trueUserId = userId
+                    if let dict = metadata as? [String: Any],
+                       let metaUserId = dict["user_id"] as? String {
+                        trueUserId = metaUserId
+                    }
+
+                    let normalizedID = trueUserId.lowercased()
+                    
+                    // Check if already exists (CASE INSENSITIVE)
+                    if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                         self.participants[index].joinedAt = Date()
                         // Also update metadata if needed
                         if let dict = metadata as? [String: Any],
@@ -211,9 +231,9 @@ class LobbyViewModel: ObservableObject {
                         }
                         
                         let newParticipant = Participant(
-                            id: userId,
+                            id: normalizedID, // NORMALIZE TO LOWERCASE
                             name: username,
-                            isHost: false, // We can't easily determine host from presence alone yet
+                            isHost: false, // Default false, will be corrected by DB poll if needed
                             isReady: false,
                             joinedAt: Date()
                         )
@@ -221,15 +241,22 @@ class LobbyViewModel: ObservableObject {
                         self.addMessage(.userJoined, userName: username)
                     }
                 case .leave:
+                    // RESOLVE TRUE USER ID (Same as Join)
+                    var trueUserId = userId
+                    if let dict = metadata as? [String: Any],
+                       let metaUserId = dict["user_id"] as? String {
+                        trueUserId = metaUserId
+                    }
+                    let normalizedID = trueUserId.lowercased()
+
                     // Defer leave processing to avoid false positives from metadata updates
-                    // Phoenix sends leave+join for the same user when updating metadata
-                    // Wait a moment to see if they rejoin (metadata update) before removing
                     Task { @MainActor in
                         try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
 
                         // Only remove if they're still not in participants (actual leave)
                         // If they rejoined (metadata update), they'll already be in the list
-                        if let index = self.participants.firstIndex(where: { $0.id == userId }) {
+                        // CASE INSENSITIVE CHECK
+                        if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                             // Double-check they're actually gone by verifying no recent join
                             let participant = self.participants[index]
                             let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)

@@ -205,7 +205,7 @@ class LobbyPresenceManager: ObservableObject {
                 let finalJoinedAt = localJoinedAt > dbJoinedAt ? localJoinedAt : dbJoinedAt
                 
                 let p = Participant(
-                    id: existingLocal?.id ?? participant.userId.uuidString, // Use local ID (Stable ID) if found to preserve casing
+                    id: existingLocal?.id ?? participant.userId.uuidString.lowercased(), // Use local ID (Stable ID) if found to preserve casing
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
@@ -224,12 +224,20 @@ class LobbyPresenceManager: ObservableObject {
             // but hasn't appeared in the DB query yet (race condition).
             
             var finalParticipants = dbParticipants
-            let dbIds = Set(dbParticipants.map { $0.id })
+            let dbIds = Set(dbParticipants.map { $0.id.lowercased() })
             
             // Check for locally existing participants that are missing from DB
-            let localOnly = viewModel.participants.filter { !dbIds.contains($0.id) }
+            let localOnly = viewModel.participants.filter { !dbIds.contains($0.id.lowercased()) }
             
             for localP in localOnly {
+                // Host Protection: Host logic is authoritative locally. 
+                // If DB temporarily misses the host (RLS/Latency), do NOT evict them.
+                if localP.isHost {
+                    // NSLog("🛡️ Preserving Host '\(localP.name)' despite missing from DB poll")
+                    finalParticipants.append(localP)
+                    continue
+                }
+
                 let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
                 if timeSinceJoin < 10.0 {
                     // KEEP THEM: They joined less than 10 seconds ago
@@ -244,9 +252,9 @@ class LobbyPresenceManager: ObservableObject {
             }
             
             // Check for NEW DB participants (that weren't local) ensures we log joins from polling too
-            let currentIds = Set(viewModel.participants.map { $0.id })
+            let currentIds = Set(viewModel.participants.map { $0.id.lowercased() })
             for p in dbParticipants {
-                if !currentIds.contains(p.id) {
+                if !currentIds.contains(p.id.lowercased()) {
                      // We don't log here to avoid double-logging if Realtime caught it
                      // specific logging could happen if needed
                      NSLog("👋 \(p.name) synced from database")
@@ -259,7 +267,7 @@ class LobbyPresenceManager: ObservableObject {
             // Self-Healing
             // If Host is missing, re-join.
             if viewModel.isHost && !viewModel.isLeavingExplicitly {
-                     if !dbIds.contains(viewModel.participantId) {
+                     if !dbIds.contains(viewModel.participantId.lowercased()) {
                          print("⚠️ Lobby: Host missing from DB participants list - attempting self-heal re-join")
                          if let userId = UUID(uuidString: viewModel.participantId) {
                              do {

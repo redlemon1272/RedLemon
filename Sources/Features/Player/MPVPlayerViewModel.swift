@@ -1258,7 +1258,8 @@ extension MPVPlayerViewModel {
                             name: fetchedSupabaseRoom.hostUsername,
                             isHost: true,
                             isReady: true,
-                            joinedAt: Date()
+                            joinedAt: Date(),
+                            phxRef: nil
                         )
 
                         let fetchedRoom = WatchPartyRoom(
@@ -1320,6 +1321,7 @@ extension MPVPlayerViewModel {
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
                             // User exists - update their timestamp and name
                             updatedParticipants[index].joinedAt = Date()
+                            updatedParticipants[index].phxRef = userId // Update Connection ID
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
                             }
@@ -1334,7 +1336,8 @@ extension MPVPlayerViewModel {
                                 name: username,
                                 isHost: isHostVal,
                                 isReady: false,
-                                joinedAt: Date(timeIntervalSince1970: joinedAtVal)
+                                joinedAt: Date(timeIntervalSince1970: joinedAtVal),
+                                phxRef: userId // Store Connection ID
                             )
                             updatedParticipants.append(newParticipant)
 
@@ -1354,7 +1357,8 @@ extension MPVPlayerViewModel {
                                     name: self.appState?.currentUsername ?? "Me",
                                     isHost: self.isWatchPartyHost,
                                     isReady: true,
-                                    joinedAt: Date()
+                                    joinedAt: Date(),
+                                    phxRef: userId // Store current connection ID if this join triggered it
                                 )
                                 updatedParticipants.append(selfParticipant)
                             }
@@ -1381,6 +1385,17 @@ extension MPVPlayerViewModel {
                                 // Check if this is an old session leavning (stale ref)
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
+                                    
+                                    // PREFERRED: Check specific Connection ID (phx_ref) mismatch
+                                    // If the user's current connection ID is different from the leaving one, 
+                                    // it means they have already reconnected (Join processed before Leave task).
+                                    if let currentRef = existingParticipant.phxRef, currentRef != userId {
+                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(userId) != Current: \(currentRef))")
+                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                        return
+                                    }
+
+                                    // FALLBACK: Timestamp check (original fix)
                                     let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
                                     let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
                                     

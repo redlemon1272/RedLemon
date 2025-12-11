@@ -102,7 +102,8 @@ class LobbyViewModel: ObservableObject {
                 name: p.name,
                 isHost: p.isHost,
                 isReady: p.isReady,
-                joinedAt: p.joinedAt
+                joinedAt: p.joinedAt,
+                phxRef: nil
             )
         }
 
@@ -232,6 +233,7 @@ class LobbyViewModel: ObservableObject {
                     // Check if already exists (CASE INSENSITIVE)
                     if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
                         self.participants[index].joinedAt = Date()
+                        self.participants[index].phxRef = userId // Update Connection ID
                         // Also update metadata if needed
                         if let dict = metadata as? [String: Any],
                            let username = dict["username"] as? String {
@@ -256,7 +258,8 @@ class LobbyViewModel: ObservableObject {
                             name: username,
                             isHost: false, // Default false, will be corrected by DB poll if needed
                             isReady: false,
-                            joinedAt: Date()
+                            joinedAt: Date(),
+                            phxRef: userId // Store Connection ID
                         )
                         self.participants.append(newParticipant)
                         if isNewConnection {

@@ -102,6 +102,7 @@ struct Participant: Identifiable {
     var isHost: Bool
     var isReady: Bool // Ready to start
     var joinedAt: Date
+    var phxRef: String? // Unique Phoenix Presence Reference (Connection ID)
 
     static func guest(number: Int) -> Participant {
         Participant(
@@ -109,7 +110,8 @@ struct Participant: Identifiable {
             name: "Guest \(number)",
             isHost: false,
             isReady: false,
-            joinedAt: Date()
+            joinedAt: Date(),
+            phxRef: nil
         )
     }
 
@@ -119,7 +121,8 @@ struct Participant: Identifiable {
             name: "Host",
             isHost: true,
             isReady: true, // Host is always ready
-            joinedAt: Date()
+            joinedAt: Date(),
+            phxRef: nil
         )
     }
 }

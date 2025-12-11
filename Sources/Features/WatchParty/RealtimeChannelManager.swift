@@ -102,7 +102,8 @@ actor RealtimeChannelManager: RealtimeService {
         try await realtimeClient.track(userId: userId, metadata: [
             "is_host": isHost,
             "joined_at": Date().timeIntervalSince1970,
-            "username": username
+            "username": username,
+            "user_id": userId
         ])
 
         isConnected = true

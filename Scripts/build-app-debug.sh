@@ -1,6 +1,13 @@
 #!/bin/bash
 set -e
 
+# Get the directory where this script is located
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$SCRIPT_DIR/.."
+
+# Move to project root
+cd "$PROJECT_ROOT"
+
 # Detect system information
 ARCH_NAME=$(uname -m)
 MACOS_VERSION=$(sw_vers -productVersion)

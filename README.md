@@ -54,18 +54,19 @@ Download the latest DMG from [GitHub Releases](https://github.com/orangeapple127
 - Drag RedLemon.app to Applications
 - Launch from Applications folder
 
-**No additional setup required** - ICP proxy auto-starts on launch!
+**No additional setup required** - Just launch and play!
 
 ### 2. Build from Source (Developers)
 ```bash
-./build-app-debug.sh
+# Build app
+scripts/build-app-debug.sh
+
+# Build DMG
+scripts/build-dmg.sh
+
+# Run app
+open build/RedLemon.app
 ```
-
-This will:
-- Build the Swift app with Sparkle framework
-- Code sign with ad-hoc signature (required for Sparkle)
-- Create RedLemon.app in `build/`
-
 ### 3. Configure
 - Go to **Settings**
 - Add your RealDebrid API token

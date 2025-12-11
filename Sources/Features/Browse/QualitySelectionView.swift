@@ -224,7 +224,7 @@ struct QualitySelectionView: View {
 
     private func startPlayback() {
         if watchMode == .watchParty {
-            // Create ICP room and navigate to lobby
+            // Create room and navigate to lobby
             Task {
                 await appState.createWatchPartyAndNavigate(
                     mediaItem: mediaItem,

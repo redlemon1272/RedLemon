@@ -63,7 +63,7 @@ struct RedLemonApp: App {
                     // Reset state to prevent automatic playback of last watched content
                     await resetPlaybackState()
 
-                    // ICP proxy removed - no longer needed (using Supabase backend)
+
                     await loadStoredUser()  // Load username from keychain on startup
                     await startServer()
                     await performStartupChecks()
@@ -98,7 +98,7 @@ struct RedLemonApp: App {
         }
     }
 
-    // ICP proxy removed - no longer needed (using Supabase backend)
+
     // Kept as comment for reference:
     // - Previously started Python proxy on port 3847
     // - Provided HTTP ↔ Candid translation for IC canister

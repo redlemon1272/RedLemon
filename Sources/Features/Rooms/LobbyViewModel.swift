@@ -541,10 +541,16 @@ class LobbyViewModel: ObservableObject {
         // Stop polling immediately
         stopPolling()
 
-        Task { [weak self] in
-            // If we are starting the movie, DO NOT leave the room or disconnect
-            // This ensures the player can take over the existing connection and DB presence
-            guard let self = self else { return }
+        // Capture values locally (optional but safe)
+        let roomId = self.room.id
+        let isHost = self.isHost
+        let hostId = self.room.hostId
+        let isLeavingExplicitly = self.isLeavingExplicitly
+        let currentUserId = self.appState?.currentUserId
+        
+        Task {
+            // Implicit strong capture of 'self' ensures ViewModel stays alive 
+            // until the DB leave operation completes.
             
             if self.isStarting {
                 print("🎬 Lobby: Starting movie - skipping disconnect to preserve connection and presence")
@@ -552,36 +558,34 @@ class LobbyViewModel: ObservableObject {
                 return
             }
 
-            // Leave Supabase room (use current user ID, not just host ID)
-            if self.isHost {
+            // Leave Supabase room (use captured values)
+            if isHost {
                 do {
                     // Soft Close: Only hide room from public list if explicitly leaving
-                    if self.isLeavingExplicitly {
-                        print("🙈 Host leaving explicitly: Soft closing room \(self.room.id)")
+                    if isLeavingExplicitly {
+                        print("🙈 Host leaving explicitly: Soft closing room \(roomId)")
                         // Attempt soft close (ignore failure)
-                        try? await SupabaseClient.shared.setRoomVisibility(roomId: self.room.id, isPublic: false)
+                        try? await SupabaseClient.shared.setRoomVisibility(roomId: roomId, isPublic: false)
                         
                         // CRITICAL: Ensure we leave the room even if soft close failed
-                        try await SupabaseClient.shared.leaveRoom(roomId: self.room.id, userId: UUID(uuidString: self.room.hostId)!)
-                        NSLog("✅ Host Left room \(self.room.id) (Row deleted)")
+                        try await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: UUID(uuidString: hostId)!)
+                        NSLog("✅ Host Left room \(roomId) (Row deleted)")
                     } else {
                         print("⚠️ Lobby: Host disconnected but preserving room presence (implicit disconnect)")
-                        // Logic: If app crashes/closes without explicit leave, room stays "Active" until heartbeat timeout
-                        // This prevents guests from being kicked if host just rotates device/updates view
                     }
                 } catch {
                     NSLog("❌ Failed to soft close/leave room: \(error)")
                 }
-            } else if let userId = self.appState?.currentUserId {
+            } else if let userId = currentUserId {
                 do {
-                    try await SupabaseClient.shared.leaveRoom(roomId: self.room.id, userId: userId)
-                    NSLog("✅ Left room \(self.room.id)")
+                    try await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userId)
+                    NSLog("✅ Left room \(roomId) (User: \(userId))")
                 } catch {
                     NSLog("❌ Failed to leave room: \(error)")
                 }
             }
 
-            // Reset flag after completion (though we likely won't use this instance again)
+            // Reset flag after completion
             self.isDisconnecting = false
         }
         countdownTask?.cancel()

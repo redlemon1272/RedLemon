@@ -179,8 +179,8 @@ class LobbyPresenceManager: ObservableObject {
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: viewModel.room.id)
             
-            // Convert to Participant objects
-            var updatedParticipants: [Participant] = []
+            var dbParticipants: [Participant] = []
+            let currentParticipants = viewModel.participants
             
             for participant in roomParticipants {
                 var username = "User"
@@ -188,31 +188,34 @@ class LobbyPresenceManager: ObservableObject {
                     username = user.username
                 }
                 
-                // Preserve existing ready state AND timestamp if newer
-                // This fixes the "User Left" bug where DB polling overwrites the fresh "re-join" timestamp
-                // from Realtime with the old "session start" timestamp from DB, invalidating the grace period.
-                let existingParticipant = viewModel.participants.first { $0.id == participant.userId.uuidString }
-                let isReady = existingParticipant?.isReady ?? false // Default to false if new
+                // CASE-INSENSITIVE MATCH: Find if this DB participant exists locally
+                // This is CRITICAL because DB returns lowercase UUIDs but local generated ones might be Uppercase
+                let existingLocal = currentParticipants.first(where: { 
+                    $0.id.caseInsensitiveCompare(participant.userId.uuidString) == .orderedSame 
+                })
                 
-                // Use the NEWER timestamp.
-                // If Realtime updated it (re-join), local is newer.
-                // If it's a fresh DB fetch, DB is effectively same (or we don't have local).
-                let localJoinedAt = existingParticipant?.joinedAt ?? Date.distantPast
+                // Preserve existing ready state
+                let isReady = existingLocal?.isReady ?? false
+                
+                // Fix for "Left Room" bug: Use the NEWER of the two joinedAt times
+                // If user re-connected via Realtime, their local `joinedAt` is newer.
+                // If we overwrite with old DB `joinedAt`, grace period logic might fail.
+                let localJoinedAt = existingLocal?.joinedAt ?? Date.distantPast
                 let dbJoinedAt = participant.joinedAt
                 let finalJoinedAt = localJoinedAt > dbJoinedAt ? localJoinedAt : dbJoinedAt
                 
                 let p = Participant(
-                    id: participant.userId.uuidString,
+                    id: existingLocal?.id ?? participant.userId.uuidString, // Use local ID (Stable ID) if found to preserve casing
                     name: username,
                     isHost: participant.isHost,
                     isReady: isReady,
-                    joinedAt: finalJoinedAt 
+                    joinedAt: finalJoinedAt
                 )
-                updatedParticipants.append(p)
+                dbParticipants.append(p)
                 
                 // Self-discovery logging (reduced)
                 if p.id == viewModel.participantId {
-                    // NSLog("🔍 Current guest participant found...")
+                     // NSLog("🔍 Current guest participant found...")
                 }
             }
             
@@ -220,8 +223,8 @@ class LobbyPresenceManager: ObservableObject {
             // This prevents the polling loop from deleting a user who just joined via Realtime
             // but hasn't appeared in the DB query yet (race condition).
             
-            var finalParticipants = updatedParticipants
-            let dbIds = Set(updatedParticipants.map { $0.id })
+            var finalParticipants = dbParticipants
+            let dbIds = Set(dbParticipants.map { $0.id })
             
             // Check for locally existing participants that are missing from DB
             let localOnly = viewModel.participants.filter { !dbIds.contains($0.id) }
@@ -242,7 +245,7 @@ class LobbyPresenceManager: ObservableObject {
             
             // Check for NEW DB participants (that weren't local) ensures we log joins from polling too
             let currentIds = Set(viewModel.participants.map { $0.id })
-            for p in updatedParticipants {
+            for p in dbParticipants {
                 if !currentIds.contains(p.id) {
                      // We don't log here to avoid double-logging if Realtime caught it
                      // specific logging could happen if needed

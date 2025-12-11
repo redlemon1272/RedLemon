@@ -97,7 +97,8 @@ class LobbyViewModel: ObservableObject {
             self.participantId = room.hostId
         } else {
             // Temporary - will be updated when we get actual user ID
-            self.participantId = UUID().uuidString
+            // NORMALIZE TO LOWERCASE to match Postgres conventions and avoid Realtime/DB mismatches
+            self.participantId = UUID().uuidString.lowercased()
         }
 
         // Load metadata for poster/backdrop

@@ -574,13 +574,12 @@ class LobbyViewModel: ObservableObject {
 
     // Extracted logic for network transmission (called by ChatManager callback)
     private func performSendChatMessage(_ text: String) async {
-
-        guard !chatInput.trimmingCharacters(in: .whitespaces).isEmpty else { return }
-
-        let messageText = chatInput
+        let messageText = text.trimmingCharacters(in: .whitespaces)
+        guard !messageText.isEmpty else { return }
+        
         // Always use actual user's username from AppState, with host as fallback
         let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
-
+        
         // Debug logging to track username assignment
         NSLog("🔍 Chat message - isHost: \(isHost), appStateUsername: \(appState?.currentUsername ?? "nil"), room.hostName: \(room.hostName ?? "nil"), finalUsername: \(username)")
 
@@ -589,14 +588,9 @@ class LobbyViewModel: ObservableObject {
             NSLog("⚠️ Cannot send message: No user ID")
             return
         }
-
-        // Clear input immediately for better UX
-        // Handled by ChatManager now
         
         // Add message locally for instant feedback (optimistic UI)
         chatManager.addLocalMessage(username: username, text: messageText)
-        // chatMessages.append(localMessage) -> Handled by manager
-        // trimLobbyMessages() -> Handled by manager
         NSLog("💬 Added own message locally: '\(messageText)'")
 
         // Send via Realtime only (no database involvement)

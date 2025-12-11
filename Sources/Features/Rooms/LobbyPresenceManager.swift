@@ -207,37 +207,47 @@ class LobbyPresenceManager: ObservableObject {
                 }
             }
             
-            let participantIds = Set(updatedParticipants.map { $0.id })
-            let currentIds = Set(viewModel.participants.map { $0.id })
+            // MERGE LOGIC: Combine DB participants with recent local joiners (Grace Period)
+            // This prevents the polling loop from deleting a user who just joined via Realtime
+            // but hasn't appeared in the DB query yet (race condition).
             
-            if participantIds != currentIds {
-                // Someone joined or left
-                let newParticipants = participantIds.subtracting(currentIds)
-                let leftParticipants = currentIds.subtracting(participantIds)
-                
-                for newId in newParticipants {
-                    if let newParticipant = updatedParticipants.first(where: { $0.id == newId }) {
-                        // Avoid double join message if Realtime already handled it
-                        // viewModel.chatManager.addSystemMessage(.userJoined, userName: newParticipant.name, data: [:])
-                         NSLog("👋 \(newParticipant.name) joined room (detected via polling)")
-                    }
-                }
-                
-                for leftId in leftParticipants {
-                    if let leftParticipant = viewModel.participants.first(where: { $0.id == leftId }) {
-                        viewModel.chatManager.addSystemMessage(.userLeft, userName: leftParticipant.name, data: [:])
-                        NSLog("👋 \(leftParticipant.name) left room")
-                    }
+            var finalParticipants = updatedParticipants
+            let dbIds = Set(updatedParticipants.map { $0.id })
+            
+            // Check for locally existing participants that are missing from DB
+            let localOnly = viewModel.participants.filter { !dbIds.contains($0.id) }
+            
+            for localP in localOnly {
+                let timeSinceJoin = Date().timeIntervalSince(localP.joinedAt)
+                if timeSinceJoin < 10.0 {
+                    // KEEP THEM: They joined less than 10 seconds ago
+                    // NSLog("🛡️ Preserving recent joiner '\(localP.name)' (joined \(String(format: "%.1f", timeSinceJoin))s ago) despite missing from DB")
+                    finalParticipants.append(localP)
+                } else {
+                    // REMOVE THEM: They've been gone from DB for too long
+                    // This is a legitimate "User Left" event
+                    viewModel.chatManager.addSystemMessage(.userLeft, userName: localP.name, data: [:])
+                    NSLog("👋 \(localP.name) left room (confirmed by DB polling)")
                 }
             }
             
-            // Always update participants to catch name changes / ready state sync
-            viewModel.participants = updatedParticipants
+            // Check for NEW DB participants (that weren't local) ensures we log joins from polling too
+            let currentIds = Set(viewModel.participants.map { $0.id })
+            for p in updatedParticipants {
+                if !currentIds.contains(p.id) {
+                     // We don't log here to avoid double-logging if Realtime caught it
+                     // specific logging could happen if needed
+                     NSLog("👋 \(p.name) synced from database")
+                }
+            }
+            
+            // Update the source of truth
+            viewModel.participants = finalParticipants
                 
             // Self-Healing
             // If Host is missing, re-join.
             if viewModel.isHost && !viewModel.isLeavingExplicitly {
-                     if !participantIds.contains(viewModel.participantId) {
+                     if !dbIds.contains(viewModel.participantId) {
                          print("⚠️ Lobby: Host missing from DB participants list - attempting self-heal re-join")
                          if let userId = UUID(uuidString: viewModel.participantId) {
                              do {

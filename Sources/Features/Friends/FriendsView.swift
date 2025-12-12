@@ -257,11 +257,29 @@ struct FriendsView: View {
             }
         }
 
-        // Sort: favorites first, then by username
+        // Sort: Unread -> Favorites -> Last Message -> Username
         return result.sorted { lhs, rhs in
+            // 1. Unread messages (High priority)
+            let unreadLhs = socialService.unreadCounts[lhs.id] ?? 0
+            let unreadRhs = socialService.unreadCounts[rhs.id] ?? 0
+            if unreadLhs != unreadRhs {
+                return unreadLhs > unreadRhs
+            }
+            
+            // 2. Favorites
             if lhs.isFavorite != rhs.isFavorite {
                 return lhs.isFavorite
             }
+            
+            // 3. Last Message Time (Recent conversations first)
+            // Note: messages might be empty if not loaded, treating as distantPast
+            let lastMsgLhs = socialService.messages[lhs.id]?.last?.createdAt ?? Date.distantPast
+            let lastMsgRhs = socialService.messages[rhs.id]?.last?.createdAt ?? Date.distantPast
+            if lastMsgLhs != lastMsgRhs {
+                 return lastMsgLhs > lastMsgRhs
+            }
+            
+            // 4. Alphabetical
             return lhs.username.localizedCaseInsensitiveCompare(rhs.username) == .orderedAscending
         }
     }

@@ -18,6 +18,7 @@ struct PlayerControlsView: View {
     @Binding var showSubtitleMenu: Bool
     @Binding var showAudioMenu: Bool
     @Binding var showPlaylistMenu: Bool
+    @Binding var showEventListMenu: Bool
 
     // State for animation
     let showControls: Bool
@@ -257,6 +258,9 @@ struct PlayerControlsView: View {
                     // Playlist Button
                     // Playlist Button
                     PlaylistButton(showPlaylistMenu: $showPlaylistMenu)
+
+                    // Event List Button (Movies)
+                    EventListButton(showEventListMenu: $showEventListMenu)
 
                     Spacer()
                 }

@@ -71,6 +71,7 @@ struct MPVPlayerView: View {
     @State private var showAudioMenu = false
     @State private var showSubtitleMenu = false
     @State private var showPlaylistMenu = false
+    @State private var showEventListMenu = false
     @State private var volume: Double = 1.0
     @State private var subtitleMenuExpanded = false
 
@@ -161,6 +162,7 @@ struct MPVPlayerView: View {
                             showSubtitleMenu: $showSubtitleMenu,
                             showAudioMenu: $showAudioMenu,
                             showPlaylistMenu: $showPlaylistMenu,
+                            showEventListMenu: $showEventListMenu,
                             showControls: showControls
                         )
                         .zIndex(99)
@@ -801,37 +803,92 @@ struct MPVPlayerView: View {
         if showPlaylistMenu {
             Color.black.opacity(0.001)
                 .ignoresSafeArea()
-                .zIndex(100)
+                .zIndex(101)
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         showPlaylistMenu = false
                     }
                 }
         }
+        
+        // Tap shield to close event list menu
+        if showEventListMenu {
+            Color.black.opacity(0.001)
+                .ignoresSafeArea()
+                .zIndex(101)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showEventListMenu = false
+                    }
+                }
+        }
 
-        // Full subtitle menu (appears when player controls are hidden)
+        // Subtitle Menu (Bottom Left)
         if showSubtitleMenu {
-            fullSubtitleMenu
-                .zIndex(102)
-                .transition(.opacity.combined(with: .scale))
-        }
-
-        // Full AUDIO menu (Modal style)
-        if showAudioMenu {
-            fullAudioMenu
-                .zIndex(102)
-                .transition(.opacity.combined(with: .scale))
-        }
-
-        // Full playlist menu (Modal style)
-        if showPlaylistMenu, let room = appState.player.currentWatchPartyRoom {
-            PlaylistModalView(
-                room: room,
-                isHost: viewModel.isWatchPartyHost,
-                showPlaylistMenu: $showPlaylistMenu
-            )
+            VStack {
+                Spacer()
+                HStack {
+                    fullSubtitleMenu
+                        .padding(.leading, 50)
+                        .padding(.bottom, 80)
+                    Spacer()
+                }
+            }
+            .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
-            .transition(.opacity.combined(with: .scale))
+        }
+
+        // Audio Menu (Bottom Left next to subtitle)
+        if showAudioMenu {
+            VStack {
+                Spacer()
+                HStack {
+                    fullAudioMenu
+                        .padding(.leading, 100)
+                        .padding(.bottom, 80)
+                    Spacer()
+                }
+            }
+            .transition(.opacity.combined(with: .move(edge: .bottom)))
+            .zIndex(102)
+        }
+        
+        // Playlist Menu (Bottom Left)
+        if showPlaylistMenu {
+            VStack {
+                Spacer()
+                HStack {
+                    if let room = appState.player.currentWatchPartyRoom {
+                        PlaylistModalView(
+                            room: room,
+                            isHost: appState.player.isWatchPartyHost,
+                            showPlaylistMenu: $showPlaylistMenu
+                        )
+                        .padding(.leading, 150)
+                        .padding(.bottom, 80)
+                    }
+                    Spacer()
+                }
+            }
+            .transition(.opacity.combined(with: .move(edge: .bottom)))
+            .zIndex(102)
+        }
+        
+        // Event List Menu (Bottom Left)
+        if showEventListMenu {
+            VStack {
+                Spacer()
+                HStack {
+                    EventListModalView(
+                        showEventListMenu: $showEventListMenu
+                    )
+                    .padding(.leading, 200)
+                    .padding(.bottom, 80)
+                    Spacer()
+                }
+            }
+            .transition(.opacity.combined(with: .move(edge: .bottom)))
+            .zIndex(102)
         }
 
         // Chat toggle button (appears on right side when mouse is there and chat is closed)

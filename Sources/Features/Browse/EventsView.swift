@@ -191,6 +191,7 @@ struct EventsView: View {
 
         DispatchQueue.main.async {
             self.events = scheduledEvents
+            self.appState.eventsSchedule = scheduledEvents // Sync to AppState for player access
 
             // Fetch participant counts for each event
             Task {
@@ -571,46 +572,6 @@ struct EventsView: View {
     }
 }
 
-struct EventItem: Identifiable {
-    let id: String
-    let mediaItem: MediaItem
-    let startTime: Date  // Just for ordering, not actual time
-    let duration: TimeInterval  // Total event slot duration (includes buffer)
-    let actualMovieDuration: TimeInterval  // Actual movie runtime (no buffer)
-    let index: Int  // Position in the list (0 = live, 1-3 = upcoming)
-    var participantCount: Int = 0  // Number of participants in the event room
-
-    var endTime: Date {
-        startTime.addingTimeInterval(duration)
-    }
-
-    // First event (index 0) is always "live", rest are upcoming
-    var isLive: Bool {
-        return index == 0
-    }
-
-    var isUpcoming: Bool {
-        return index > 0
-    }
-
-    var isFinished: Bool {
-        // Check if current time is past the movie's actual end time (not including buffer)
-        // Subtract 10-minute tolerance to account for streams that are shorter than metadata
-        // (e.g., metadata says 100min but actual stream is 90min)
-        let now = TimeService.shared.now
-        let toleranceBuffer: TimeInterval = 600 // 10 minutes
-        let adjustedMovieDuration = max(0, actualMovieDuration - toleranceBuffer)
-        let actualMovieEndTime = startTime.addingTimeInterval(adjustedMovieDuration)
-        return now >= actualMovieEndTime
-    }
-
-    var isInLobby: Bool {
-        // The next event (index 1) is in lobby when the current event (index 0) has finished
-        // This happens during the 10-minute buffer period
-        let now = TimeService.shared.now
-        return index == 1 && now >= startTime.addingTimeInterval(-600) // 600s = 10 min buffer
-    }
-}
 
 struct HeroEventCard: View {
     let event: EventItem
@@ -695,8 +656,9 @@ struct HeroEventCardContent: View {
     // Helper formats
     func formatDuration(_ interval: TimeInterval) -> String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .abbreviated
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
         return formatter.string(from: interval) ?? ""
     }
 

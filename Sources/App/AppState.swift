@@ -84,8 +84,10 @@ class AppState: ObservableObject {
     // showQualitySelection, showMediaDetail, selectedQuality,
     // isResolvingStream, streamError, currentWatchMode, currentRoomId
     // isWatchPartyHost, currentWatchPartyRoom, isPreloading
-    // isEventPlayback, currentEventId, finishedEventIds
-    // resumeFromTimestamp, eventStartTime
+    // Event specific state
+    @Published var eventsSchedule: [EventItem] = [] // Shared schedule for player access
+    @Published var isEventPlayback: Bool = false // Track if this is a public event playback
+    @Published var currentEventId: String? = nil // Track ID of current event
 
     @Published var browseScrollPosition: String? = nil  // Track scroll position in browse view
     @Published var activeRooms: [WatchPartyRoom] = []  // Track all active rooms locally

@@ -366,6 +366,22 @@ class SocialService: ObservableObject {
         // Check for duplicates (optimistic updates might cause this)
         // Check for duplicates (optimistic updates might cause this)
         if !currentMsgs.contains(where: { $0.id == id }) {
+            // Deduplicate optimistic message from self
+            // When Supabase echoes back the message I just sent, it has a real ID.
+            // My local optimistic message has a temp ID. I need to remove the temp one to avoid "Double Message" effect.
+            if senderIdStr == currentUserId {
+                // Look for a message with same content and diff ID (assumed to be the temp one)
+                // We search from the end since it's likely the last one
+                if let idx = currentMsgs.lastIndex(where: { 
+                    $0.senderId.uuidString.lowercased() == currentUserId &&
+                    $0.content == content &&
+                    $0.id != id
+                }) {
+                    print("🧹 SocialService: Replacing optimistic message")
+                    currentMsgs.remove(at: idx)
+                }
+            }
+            
             currentMsgs.append(message)
             self.messages[normalizedFriendId] = currentMsgs
             

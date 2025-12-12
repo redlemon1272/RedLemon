@@ -56,17 +56,17 @@ final class AppStateTests: XCTestCase {
             selectedStreamHash: nil, selectedFileIdx: nil, selectedQuality: nil, unlockedStreamURL: nil
         )
         
-        sut.currentWatchPartyRoom = room
+        sut.player.currentWatchPartyRoom = room
         sut.currentView = .player
-        sut.currentWatchMode = .watchParty
-        sut.currentRoomId = "room_123"
+        sut.player.currentWatchMode = .watchParty
+        sut.player.currentRoomId = "room_123"
         
         // WHEN movie finishes
-        await sut.handleMovieFinished()
+        await sut.player.handleMovieFinished()
         
         // THEN it should return to lobby (not clear state completely)
         XCTAssertEqual(sut.currentView, .watchPartyLobby)
-        XCTAssertEqual(sut.currentRoomId, "room_123") // Should stay in room
+        XCTAssertEqual(sut.player.currentRoomId, "room_123") // Should stay in room
     }
     
     func testHandleMovieFinished_Event_ReturnsToEvents() async {
@@ -76,28 +76,28 @@ final class AppStateTests: XCTestCase {
         sut.currentView = .player
         
         // WHEN movie finishes
-        await sut.handleMovieFinished()
+        await sut.player.handleMovieFinished()
         
         // THEN it should return to events view
         XCTAssertEqual(sut.currentView, .events)
         XCTAssertFalse(sut.isEventPlayback)
         XCTAssertNil(sut.currentEventId)
-        XCTAssertTrue(sut.finishedEventIds.contains("event_123"))
+        XCTAssertTrue(sut.player.finishedEventIds.contains("event_123"))
     }
     
     func testExitPlayer_ClearsState() async {
         // GIVEN player is active
-        sut.showPlayer = true
-        sut.selectedStream = Stream(url: "http://test", title: "Test", quality: "1080p", provider: "RD")
+        sut.player.showPlayer = true
+        sut.player.selectedStream = Stream(url: "http://test", title: "Test", quality: "1080p", provider: "RD")
         sut.currentView = .player
         
         // WHEN exit player
-        await sut.exitPlayer(keepRoomState: false)
+        await sut.player.exitPlayer(keepRoomState: false)
         
         // THEN state is cleared
-        XCTAssertFalse(sut.showPlayer)
-        XCTAssertNil(sut.selectedStream)
-        XCTAssertNil(sut.selectedMediaItem)
+        XCTAssertFalse(sut.player.showPlayer)
+        XCTAssertNil(sut.player.selectedStream)
+        XCTAssertNil(sut.player.selectedMediaItem)
         XCTAssertEqual(sut.currentView, .browse) // Default
     }
 }

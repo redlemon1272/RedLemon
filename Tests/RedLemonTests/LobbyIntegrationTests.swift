@@ -24,20 +24,41 @@ class LobbyIntegrationTests: XCTestCase {
         // 3. Setup Test Room
         mockRoom = WatchPartyRoom(
             id: "test-room-123",
-            name: "Test Room",
             hostId: "host-user-id", // Lowercase for normalization check
-            hostUsername: "HostUser",
+            hostName: "HostUser",
+            mediaItem: MediaItem(
+                id: "tt123",
+                type: "movie",
+                name: "Test Movie",
+                poster: nil,
+                background: nil,
+                logo: nil,
+                description: nil,
+                releaseInfo: nil,
+                year: nil,
+                imdbRating: nil,
+                genres: nil,
+                runtime: nil
+            ),
+            season: nil, episode: nil,
+            quality: .fullHD, sourceQuality: nil, description: "Test Room", posterURL: nil,
             participants: [],
+            state: .lobby,
             createdAt: Date(),
-            maxParticipants: 10
+            lastActivity: Date(),
+            playlist: nil, currentPlaylistIndex: 0,
+            lobbyDuration: 600, shouldLoop: false,
+            isPersistent: true,
+            playbackPosition: 0, runtime: nil,
+            selectedStreamHash: nil, selectedFileIdx: nil, selectedQuality: nil, unlockedStreamURL: nil
         )
         
         // 4. Setup Mock Room State
         mockDataService.roomStateToReturn = SupabaseRoom(
             id: mockRoom.id,
-            name: mockRoom.name,
+            name: "Test Room", // Hardcoded as WatchPartyRoom lacks name
             hostUserId: UUID(uuidString: "00000000-0000-0000-0000-000000000001")!,
-            hostUsername: mockRoom.hostUsername,
+            hostUsername: mockRoom.hostName ?? "HostUser",
             streamHash: nil,
             imdbId: nil,
             posterUrl: nil,
@@ -92,7 +113,8 @@ class LobbyIntegrationTests: XCTestCase {
         try? await Task.sleep(nanoseconds: 100_000_000)
         
         // Should have attempted to join room
-        XCTAssertTrue(mockRealtimeManager.isConnected)
+        let isConnected = await mockRealtimeManager.isRealtimeConnected()
+        XCTAssertTrue(isConnected)
         XCTAssertEqual(mockDataService.joinRoomCallCount, 1) // Host joins DB too
         
         // State should be connected

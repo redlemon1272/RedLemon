@@ -142,7 +142,8 @@ class PlayerViewModel: ObservableObject {
                      season: season,
                      episode: episode,
                      metadata: metadata,
-                     preferredInfoHash: hostStreamHash
+                     preferredInfoHash: hostStreamHash,
+                     filterExtended: false
                  )
                  resolvedStream = result.stream
                  resolvedMetadata = result.metadata
@@ -154,7 +155,8 @@ class PlayerViewModel: ObservableObject {
                     season: season,
                     episode: episode,
                     metadata: metadata,
-                    preferredInfoHash: nil
+                    preferredInfoHash: nil,
+                    filterExtended: false
                 )
                 resolvedStream = result.stream
                 resolvedMetadata = result.metadata
@@ -258,7 +260,8 @@ class PlayerViewModel: ObservableObject {
                     season: season,
                     episode: episode,
                     metadata: metadata,
-                    preferredInfoHash: nil
+                    preferredInfoHash: nil,
+                    filterExtended: false
                 )
                 resolvedStream = result.stream
             }
@@ -324,7 +327,8 @@ class PlayerViewModel: ObservableObject {
             season: targetSeason,
             episode: targetEpisode,
             metadata: metadata,
-            preferredInfoHash: nil
+            preferredInfoHash: nil,
+            filterExtended: false
         )
         
         let unlockedStream = try await streamResolver.unlockStream(

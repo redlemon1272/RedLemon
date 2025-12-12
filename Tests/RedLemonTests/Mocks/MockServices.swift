@@ -54,6 +54,10 @@ actor MockRealtimeManager: RealtimeService {
     func simulateIncomingMessage(_ message: SyncMessage) {
         syncCallback?(message)
     }
+    
+    func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void) {
+        // Mock implementation
+    }
 }
 
 // MARK: - Mock MetadataProvider
@@ -127,7 +131,7 @@ class MockStreamResolver: StreamResolving {
     var resolvedStream: RedLemon.Stream?
     var unlockedStream: RedLemon.Stream?
     
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?) async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool) async throws -> StreamResolutionResult {
         let stream = resolvedStream ?? RedLemon.Stream(
             url: "https://example.com/stream",
             title: "Mock Stream",
@@ -171,7 +175,8 @@ class MockRoomManager: RoomManager, UserManager {
         backdropUrl: String?,
         season: Int?,
         episode: Int?,
-        isPublic: Bool?,
+        isPublic: Bool,
+        unlockedStreamUrl: String?,
         description: String?,
         playlist: [PlaylistItem]?
     ) async throws -> SupabaseRoom {
@@ -211,6 +216,10 @@ class MockRoomManager: RoomManager, UserManager {
     
     func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?) async throws {
         updateStreamCalled = true
+    }
+    
+    func updateRoomPlaylist(roomId: String, playlist: [PlaylistItem], currentIndex: Int) async throws {
+        updatePlaylistCalled = true
     }
     
     func getRoomState(roomId: String) async throws -> SupabaseRoom? {

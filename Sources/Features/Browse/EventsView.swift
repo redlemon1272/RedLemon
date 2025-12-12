@@ -387,7 +387,8 @@ struct EventsView: View {
                         quality: .fullHD,
                         season: nil,
                         episode: nil,
-                        preferredInfoHash: nil
+                        preferredInfoHash: nil,
+                        filterExtended: true // Filter extended cuts for schedule accuracy
                     )
                     initialStreamHash = result.stream.infoHash
                     initialUnlockedUrl = result.stream.url

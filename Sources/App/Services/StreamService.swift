@@ -10,7 +10,7 @@ struct StreamResolutionResult {
 
 /// Protocol for resolving and unlocking streams
 protocol StreamResolving {
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?) async throws -> StreamResolutionResult
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata?, preferredInfoHash: String?, filterExtended: Bool) async throws -> StreamResolutionResult
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream
 }
 
@@ -23,7 +23,7 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Resolution
 
 
-    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil) async throws -> StreamResolutionResult {
+    func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil, filterExtended: Bool = false) async throws -> StreamResolutionResult {
         print("🎬 StreamService: Starting resolution for: \(item.name)")
 
         // Step 1: Load metadata
@@ -182,9 +182,16 @@ actor StreamService: StreamResolving {
             throw APIError.noStreamsFound
         }
 
-        // Step 3.5: Apply Keyword Safety Filter (Remux, etc)
+        // Step 3.5: Apply Keyword Safety Filter (Remux, etc) AND Extended Cut Filter
         // User reported performance issues (spinning beach ball) with Remux files
-        let blockedKeywords = ["remux"]
+        var blockedKeywords = ["remux"]
+        
+        // NEW: Filter extended cuts if requested (for events)
+        if filterExtended {
+            print("🚫 StreamService: Applying Extended Cut Filter (Event Mode)")
+            blockedKeywords.append(contentsOf: ["extended", "director", "uncut", "unrated", "special edition"])
+        }
+
         let keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
             if blockedKeywords.contains(where: { titleLower.contains($0) }) {
@@ -196,6 +203,13 @@ actor StreamService: StreamResolving {
 
         guard !keywordFiltered.isEmpty else {
             print("❌ StreamService: No streams available after keyword filter")
+            
+            // Fallback: If we filtered everything because of "extended" but we have no other choice,
+            // we should probably fail rather than play the wrong runtime event?
+            // User requested explicit filtering for schedule accuracy.
+            
+            // However, if it's just REMUX blocking that caused empty, maybe we relax?
+            // For now, let's strict fail to respect the user's intent to avoid issues.
             throw APIError.noStreamsFound
         }
 

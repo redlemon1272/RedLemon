@@ -130,6 +130,11 @@ struct MPVPlayerView: View {
                     // MPV video output - IINA-style CAOpenGLLayer
                     MPVLayerVideoView(wrapper: viewModel.mpvWrapper)
                         .opacity(viewModel.isLoading ? 0 : 1)
+                        .contentShape(Rectangle()) // Capture all clicks in this area
+                        .onTapGesture {
+                            // Swallow clicks to prevent falling through to sidebar
+                            // Double-click to toggle fullscreen could go here
+                        }
 
                     // Overlays (Loading, Waiting, Logo)
                     overlays
@@ -451,7 +456,7 @@ struct MPVPlayerView: View {
              WaitingGateView(isHost: viewModel.isWatchPartyHost)
                 .zIndex(100)
         }
-        
+
 
     }
 
@@ -791,7 +796,7 @@ struct MPVPlayerView: View {
                     }
                 }
         }
-        
+
         // Tap shield to close playlist menu
         if showPlaylistMenu {
             Color.black.opacity(0.001)

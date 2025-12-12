@@ -9,16 +9,16 @@ import SwiftUI
 
 struct PlayerControlsView: View {
     @ObservedObject var viewModel: MPVPlayerViewModel
-    
+
     // Config
     let streamQuality: String
     let sourceQuality: String
-    
+
     // Bindings
     @Binding var showSubtitleMenu: Bool
     @Binding var showAudioMenu: Bool
     @Binding var showPlaylistMenu: Bool
-    
+
     // State for animation
     let showControls: Bool
 
@@ -268,10 +268,12 @@ struct PlayerControlsView: View {
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .animation(.easeInOut(duration: 0.25), value: showControls)
         }
+        .background(Color.black.opacity(0.01)) // Invisible background to capture hovers/clicks
+        .contentShape(Rectangle()) // Ensure entire area is hittable
     }
-    
+
     // MARK: - Helpers
-    
+
     private func progressWidth(in totalWidth: CGFloat) -> CGFloat {
         guard viewModel.mpvWrapper.duration > 0 else { return 0 }
         return totalWidth * CGFloat(viewModel.mpvWrapper.currentTime / viewModel.mpvWrapper.duration)

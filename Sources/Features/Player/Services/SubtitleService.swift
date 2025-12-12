@@ -7,62 +7,62 @@ protocol SubtitleService: Actor {
     var availableTracks: [SubtitleTrack] { get }
     var currentTrack: SubtitleTrack? { get }
     var offset: Double { get }
-    
+
     /// Load a list of external subtitle URLs (e.g. from OpenSubtitles/Stremio)
     func loadExternalSubtitles(_ items: [(url: String, label: String)]) async
-    
+
     /// Scan for embedded tracks in the current file
     func scanEmbeddedTracks() async
-    
+
     /// Select a specific track by ID
     func selectTrack(_ id: Int) async
-    
+
     /// Set subtitle delay/offset in seconds
     func setOffset(_ offset: Double) async
-    
+
     /// Stream of available tracks for UI binding
     var availableTracksPublisher: AnyPublisher<[SubtitleTrack], Never> { get }
-    
+
     /// Stream of current track for UI binding
     var currentTrackPublisher: AnyPublisher<SubtitleTrack?, Never> { get }
 }
 
 /// Actor-based implementation of SubtitleService
 actor MPVSubtitleService: SubtitleService {
-    
+
     // MARK: - State
     @Published var subtitles: [(url: String, label: String)] = []
     @Published var availableTracks: [SubtitleTrack] = []
     @Published var currentTrack: SubtitleTrack?
 
     @Published var offset: Double = 0.0
-    
+
     // MARK: - Publishers
     var availableTracksPublisher: AnyPublisher<[SubtitleTrack], Never> {
         $availableTracks.eraseToAnyPublisher()
     }
-    
+
     var currentTrackPublisher: AnyPublisher<SubtitleTrack?, Never> {
         $currentTrack.eraseToAnyPublisher()
     }
-    
+
     // MARK: - Dependencies
     private weak var mpvController: (any MPVController)?
-    
+
     // MARK: - Initialization
     init(mpvController: any MPVController) {
         self.mpvController = mpvController
     }
-    
+
     // MARK: - Protocol Implementation
-    
+
     func loadExternalSubtitles(_ items: [(url: String, label: String)]) async {
         self.subtitles = items
         guard let mpv = mpvController else { return }
-        
+
         // Logic extracted from MPVPlayerViewModel
         let areSubtitlesLocal = items.allSatisfy { $0.url.starts(with: "/") }
-        
+
         if areSubtitlesLocal && !items.isEmpty {
             NSLog("✅ Subtitles already downloaded, loading as additional options...")
             for (index, subtitle) in items.enumerated() {
@@ -74,10 +74,10 @@ actor MPVSubtitleService: SubtitleService {
         } else if !items.isEmpty {
             // Check for SubDL URLs which need proxy handling
              let hasSubDLSubtitles = items.contains { $0.url.contains("/subtitles/subdl/") }
-            
+
             if hasSubDLSubtitles {
                 NSLog("ℹ️ SubDL subtitles detected - downloading to local files in background...")
-                
+
                 // Download sequentially to avoid overwhelming server or logic
                 for (index, subtitle) in items.enumerated() {
                     // Start download
@@ -88,13 +88,13 @@ actor MPVSubtitleService: SubtitleService {
                          NSLog("❌ Failed to download subtitle %d", index + 1)
                     }
                 }
-                
+
                 // Update tracks after loading all
                 await scanEmbeddedTracks()
             } else {
                  // Standard URL loading (MPV can handle many http urls directly, but safer to download)
                  // For now, assuming direct load for non-SubDL or falling back to download logic
-                 // Implementing simple direct load for non-proxy URLs if MPV supports it, 
+                 // Implementing simple direct load for non-proxy URLs if MPV supports it,
                  // BUT previous logic suggested downloading everything. Let's stick to downloading.
                 for (index, subtitle) in items.enumerated() {
                     if let localPath = await downloadSubtitle(url: subtitle.url) {
@@ -105,47 +105,48 @@ actor MPVSubtitleService: SubtitleService {
             }
         }
     }
-    
+
     func scanEmbeddedTracks() async {
         guard let mpv = mpvController else { return }
-        
+
         // Retry logic: Tracks often appear slightly AFTER file load/video ready
         // We poll for 5 seconds to ensure we catch all embedded streams
         print("🔍 SubtitleService: Starting embedded track scan (polling 5s)...")
-        
+
         for i in 0..<5 {
             let tracks = await mpv.getSubtitleTracks()
-            
-            // Only update if count changed or it's the first run
-            if tracks.count != self.availableTracks.count || i == 0 {
-                self.availableTracks = tracks
-                
-                let currentid = await mpv.getCurrentSubtitleTrack()
-                if let current = tracks.first(where: { $0.id == currentid }) {
-                    self.currentTrack = current
-                } else {
-                    self.currentTrack = nil
-                }
-                
-                NSLog("✅ SubtitleService: Scanned %d tracks (Attempt %d/5)", tracks.count, i+1)
+
+            // Always update to ensure we catch all state changes (optimization was causing missed updates)
+            self.availableTracks = tracks
+
+            let currentid = await mpv.getCurrentSubtitleTrack()
+            if let current = tracks.first(where: { $0.id == currentid }) {
+                self.currentTrack = current
+            } else {
+                self.currentTrack = nil
             }
-            
+
+            NSLog("✅ SubtitleService: Scanned %d tracks (Attempt %d/5)", tracks.count, i+1)
+            for t in tracks {
+                NSLog("   Track: ID=%d, Title=%@, External=%d", t.id, t.displayName, t.isExternal)
+            }
+
             // Wait 1 second before next poll
             if i < 4 {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
             }
         }
     }
-    
+
     func selectTrack(_ id: Int) async {
         guard let mpv = mpvController else { return }
-        
+
         mpv.setSubtitleTrack(id)
-        
+
         // Re-scan to confirm state
         let tracks = await mpv.getSubtitleTracks()
         self.availableTracks = tracks
-        
+
         // Update current track based on ID
         if let current = tracks.first(where: { $0.id == id }) {
              self.currentTrack = current
@@ -153,16 +154,16 @@ actor MPVSubtitleService: SubtitleService {
              self.currentTrack = nil // Off or not found
         }
     }
-    
+
     func setOffset(_ offset: Double) async {
         guard let mpv = mpvController else { return }
         self.offset = offset
         // MPVWrapper expects milliseconds
         mpv.setSubtitleOffset(offset)
     }
-    
+
     // MARK: - Private Helpers (Extracted from VM)
-    
+
     nonisolated private func downloadSubtitle(url: String) async -> String? {
         NSLog("🔍 SubtitleService: Downloading %@", url)
         guard let subtitleURL = URL(string: url) else { return nil }
@@ -173,7 +174,7 @@ actor MPVSubtitleService: SubtitleService {
             let session = URLSession(configuration: config)
 
             let (data, response) = try await session.data(from: subtitleURL)
-            
+
             // Check for VTT content (even if zip extension)
             if let text = String(data: data, encoding: .utf8), text.hasPrefix("WEBVTT") {
                return try saveSubtitleLocally(content: text, extension: "vtt")
@@ -194,15 +195,15 @@ actor MPVSubtitleService: SubtitleService {
             if !subtitleText.hasPrefix("WEBVTT") {
                  subtitleText = convertSRTToVTT(srt: subtitleText)
             }
-            
+
             return try saveSubtitleLocally(content: subtitleText, extension: "vtt")
-            
+
         } catch {
             NSLog("❌ SubtitleService: Download failed: %@", error.localizedDescription)
             return nil
         }
     }
-    
+
     nonisolated private func saveSubtitleLocally(content: String, extension ext: String) throws -> String {
         let tempDir = FileManager.default.temporaryDirectory
         let fileName = "sub_\(UUID().uuidString).\(ext)"

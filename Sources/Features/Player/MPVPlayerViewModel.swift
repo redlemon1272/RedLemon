@@ -41,16 +41,16 @@ class MPVPlayerViewModel: ObservableObject {
     private let playbackService: PlaybackService
     private var serviceCancellables = Set<AnyCancellable>()
 
-    init(mpvWrapper: MPVWrapper = MPVWrapper(), 
+    init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
          playbackService: PlaybackService? = nil) {
         self.mpvWrapper = mpvWrapper
         self.subtitleService = subtitleService ?? MPVSubtitleService(mpvController: mpvWrapper)
         self.playbackService = playbackService ?? MPVPlaybackService(mpvController: mpvWrapper)
-        
+
         setupServiceBindings()
     }
-    
+
     private func setupServiceBindings() {
         Task { @MainActor in
             // Subtitle Bindings
@@ -58,12 +58,12 @@ class MPVPlayerViewModel: ObservableObject {
             tracksPublisher
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$availableSubtitleTracks)
-                
+
             let currentTrackPublisher = await subtitleService.currentTrackPublisher
             currentTrackPublisher
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$currentSubtitleTrack)
-                
+
             // Playback Bindings
             let isPlayingPub = await playbackService.isPlayingPublisher
             let playbackFinishedPub = await playbackService.playbackFinishedPublisher
@@ -72,7 +72,7 @@ class MPVPlayerViewModel: ObservableObject {
             let videoURLPub = await playbackService.videoURLPublisher
             let isBufferingPub = await playbackService.isBufferingPublisher
             let isFileLoadedPub = await playbackService.isFileLoadedPublisher
-            
+
             // IsPlaying: Sync state and trigger VideoReady logic
             isPlayingPub
                 .receive(on: DispatchQueue.main)
@@ -85,12 +85,12 @@ class MPVPlayerViewModel: ObservableObject {
                     }
                 }
                 .store(in: &serviceCancellables)
-                
+
             // PlaybackFinished
             playbackFinishedPub
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$playbackFinished)
-                
+
             // CurrentTime: Throttled update
             currentTimePub
                 .throttle(for: 0.2, scheduler: DispatchQueue.main, latest: true)
@@ -99,14 +99,14 @@ class MPVPlayerViewModel: ObservableObject {
                     self.currentTime = time
                 }
                 .store(in: &serviceCancellables)
-                
+
             // Duration: Sync state and trigger WatchParty Ready Signal
             durationPub
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] dur in
                     guard let self = self else { return }
                     self.duration = dur
-                    
+
                     // Watch Party Ready Gate
                     if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
                         NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
@@ -114,12 +114,12 @@ class MPVPlayerViewModel: ObservableObject {
                     }
                 }
                 .store(in: &serviceCancellables)
-                
+
             // VideoURL
             videoURLPub
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$videoURL)
-                
+
             // IsBuffering: Update loading state
             isBufferingPub
                 .receive(on: DispatchQueue.main)
@@ -142,7 +142,7 @@ class MPVPlayerViewModel: ObservableObject {
                     }
                 }
                 .store(in: &serviceCancellables)
-                
+
             // IsFileLoaded: Fallback trigger for WatchParty
             isFileLoadedPub
                 .receive(on: DispatchQueue.main)
@@ -162,10 +162,10 @@ class MPVPlayerViewModel: ObservableObject {
     // Realtime sync manager
     private var realtimeManager: RealtimeChannelManager?
     @Published var isWatchPartyHost: Bool = false  // Exposed to view for UI control
-    
+
     // Grace Period: Track when this view model was created
     private let initializationTime = Date()
-    
+
     private var currentRoomId: String?
     private var currentUserId: String?
     private var syncBroadcastTimer: Timer?
@@ -229,7 +229,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var logoURL: String? = nil
     @Published var showPoster: Bool = true  // Show during loading
     @Published var isVideoTitleVisible: Bool = false
-    
+
     // UI Enhancements
     @Published var syncStatus: String? = nil
     @Published var isBuffering: Bool = false
@@ -376,10 +376,7 @@ class MPVPlayerViewModel: ObservableObject {
 
 
 
-        // Delegate subtitle handling to service
-        Task {
-            await subtitleService.loadExternalSubtitles(subtitles)
-        }
+
 
         // Monitor MPV state changes - Handled by PlaybackService bindings
     }
@@ -452,10 +449,20 @@ class MPVPlayerViewModel: ObservableObject {
             self.isLoading = false
         }
 
-        // Update tracks
-        self.updateSubtitleTracks() // Ensure we have latest subs
+        // Load external subtitles if present (delayed to prevent race conditions with embedded tracks)
+        Task {
+            if !self.subtitles.isEmpty {
+                print("📝 Loading external subtitles (delayed execution)...")
+                await self.subtitleService.loadExternalSubtitles(self.subtitles)
+            } else {
+                // If no external subs, just scan for embedded ones
+                await self.subtitleService.scanEmbeddedTracks()
+            }
+        }
+
+        // Update tracks (Audio only - subtitle scan handled above or in loadExternalSubtitles)
         self.updateAudioTracks()    // Scan audio tracks
-        
+
         // Restore subtitle/audio prioritization logic
         self.selectEnglishDefaults()
 
@@ -785,7 +792,7 @@ class MPVPlayerViewModel: ObservableObject {
                 print("✅ Good version match: \(subtitle.label)")
             }
         }
-        
+
         // Update available tracks
         Task {
             await subtitleService.scanEmbeddedTracks()
@@ -794,10 +801,10 @@ class MPVPlayerViewModel: ObservableObject {
 
     private func completeTrackSwitch() {
         print("🎯 Completing track switch (Snap-Seek)...")
-        
+
         // Reset state immediately to avoid re-triggering
         isSwitchingTracks = false
-        
+
         let switchDuration = Date().timeIntervalSince(trackSwitchStartTime ?? Date())
         print("⏱️ Switch took: \(Int(switchDuration * 1000))ms")
 
@@ -805,14 +812,14 @@ class MPVPlayerViewModel: ObservableObject {
         if isWatchPartyHost {
             let targetTime = trackSwitchStartPos + switchDuration
             print("👻 Host: Phantom Sync - seeking to \(String(format: "%.3f", targetTime))s (skipped stalling period)")
-            
+
             // Seek to where we would have been
             Task { @MainActor in
                 await playbackService.seek(to: targetTime)
                 // Resume sync broadcasts if we paused them (optional implementation detail, but here we just seek)
             }
         }
-        
+
         // 2. GUEST LOGIC: Snap-Seek Catch-up
         else if isInWatchParty {
              // Calculate where the host is NOW
@@ -820,9 +827,9 @@ class MPVPlayerViewModel: ObservableObject {
                 Task {
                     let remotePos = await manager.getInterpolatedPosition()
                     let drift = abs(remotePos - self.currentTime)
-                    
+
                     print("⚡ Guest: Snap-Seek - Host is at \(String(format: "%.3f", remotePos))s (Drift: \(Int(drift * 1000))ms)")
-                    
+
                     // Always snap if drift is significant (> 100ms)
                     if drift > 0.1 {
                         print("⚡ Executing Snap-Seek to Host time")
@@ -833,7 +840,7 @@ class MPVPlayerViewModel: ObservableObject {
                 }
             }
         }
-        
+
         // Clear buffering state manually since we consumed the event
         self.isBuffering = false
         self.isLoading = false
@@ -848,19 +855,19 @@ class MPVPlayerViewModel: ObservableObject {
             trackSwitchStartTime = Date()
             trackSwitchStartPos = currentTime
         }
-        
+
         mpvWrapper.setAudioTrack(track.id)
         self.currentAudioTrack = track
         self.updateAudioTracks()
     }
-    
+
     /// Select subtitle track by ID
     /// - Parameter trackId: Track ID (0 = off, or valid track ID)
     func selectSubtitleTrack(_ trackId: Int) {
         // Only apply special sync logic for EMBEDDED tracks
         // External tracks don't cause stalling, so simpler is better
         let isEmbedded = availableSubtitleTracks.first(where: { $0.id == trackId })?.isExternal == false
-        
+
         if isInWatchParty && isEmbedded {
              print("🔄 Switching embedded subtitle track in Watch Party Mode...")
              isSwitchingTracks = true
@@ -914,7 +921,7 @@ class MPVPlayerViewModel: ObservableObject {
             // FIX: Be more permissive with "en-US", "en-GB", etc.
             return lang.hasPrefix("en") || lang.contains("eng") || title.contains("english")
         }
-        
+
         // Prioritize embedded tracks (isExternal == false)
         // We want embedded tracks to appear FIRST in our candidate list
         let sortedEnglishSubs = englishSubs.sorted { (track1, track2) -> Bool in
@@ -1329,11 +1336,11 @@ extension MPVPlayerViewModel {
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
                             // User exists - update their timestamp and name
                             updatedParticipants[index].joinedAt = Date()
-                            
+
                             // Prefer phx_ref from metadata (rotates on update), fallback to userId (stable key)
                             let newPhxRef = metadata?["phx_ref"] as? String ?? userId
                             updatedParticipants[index].phxRef = newPhxRef
-                            
+
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
                             }
@@ -1397,7 +1404,7 @@ extension MPVPlayerViewModel {
                                 // Check if this is an old session leavning (stale ref)
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
-                                    
+
                                     // MAGIC BULLET: Grace Period Check
                                     // Ignore ALL "User Left" events in the first 5 seconds of the session.
                                     // This filters out transition noise (Lobby -> Player) and "Ghost" session cleanups.
@@ -1406,16 +1413,16 @@ extension MPVPlayerViewModel {
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
-                                    
+
                                     // PREFERRED: Check specific Connection ID (phx_ref) mismatch
-                                    // If the user's current connection ID is different from the leaving one, 
+                                    // If the user's current connection ID is different from the leaving one,
                                     // it means they have already reconnected (Join processed before Leave task).
                                     // Use phx_ref from metadata if available, otherwise fallback to userId
                                     let leavingPhxRef = metadata?["phx_ref"] as? String ?? userId
-                                    
+
                                     // Strict check: Only remove if phxRef matches (or we have no ref tracked yet)
                                     // This prevents removing the "active" session if a stale one disconnects
-                                    
+
                                     if let currentRef = existingParticipant.phxRef, currentRef != leavingPhxRef {
                                         // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
@@ -1425,7 +1432,7 @@ extension MPVPlayerViewModel {
                                     // FALLBACK: Timestamp check (original fix)
                                     let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
                                     let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
-                                    
+
                                     // Allow 1s tolerance for clock skew/processing time
                                     if leaveJoinedAt < (existingJoinedAt - 1.0) {
                                         // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Leave: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
@@ -1463,7 +1470,7 @@ extension MPVPlayerViewModel {
                                 self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             }
                         }
-                        
+
                         self.pendingLeaveTasks[actualUserId] = task
                         return
 
@@ -1472,7 +1479,7 @@ extension MPVPlayerViewModel {
                     // Deduplicate participants by ID (preferring entries with phxRef or newer joinedAt)
                     // This fixes the "Ghost User" issue where Uppercase (DB) and Lowercase (Realtime) IDs coexist
                     var uniqueParticipants: [String: Participant] = [:]
-                    
+
                     for p in updatedParticipants {
                         let normalizedId = p.id.lowercased()
                         if let existing = uniqueParticipants[normalizedId] {
@@ -1491,7 +1498,7 @@ extension MPVPlayerViewModel {
                             uniqueParticipants[normalizedId] = p
                         }
                     }
-                    
+
                     // Final sorted list
                     let dedupedList = uniqueParticipants.values.sorted { $0.joinedAt < $1.joinedAt }
 
@@ -1574,10 +1581,10 @@ extension MPVPlayerViewModel {
         Task { [weak self] in
             guard let self = self else { return }
             try? await self.realtimeManager?.sendSyncMessage(message)
-            
+
             // Wait briefly for message to send, then clean up locally
             try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
-            
+
             await MainActor.run {
                 // Host cleanup and navigation
                 Task { [weak self] in
@@ -1617,16 +1624,16 @@ extension MPVPlayerViewModel {
     /// Poll participants from database (Fix for Rooms showing 0 participants)
     private func pollParticipants() async {
         guard let roomId = currentRoomId else { return }
-        
+
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
-            
+
             var updatedParticipants: [Participant] = []
-            
+
             for p in roomParticipants {
                 var name = "User"
-                // Try to find existing participant to get name (avoid DB call if possible) 
-                // or fetch if new. 
+                // Try to find existing participant to get name (avoid DB call if possible)
+                // or fetch if new.
                 // To be robust like Lobby, we should fetch, but caching is better.
                 // Let's reuse existing name if available to reduce latency.
                 if let existing = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString }) {
@@ -1634,10 +1641,10 @@ extension MPVPlayerViewModel {
                 } else if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
                      name = user.username
                 }
-                
+
                 // Preserve ready state
                 let isReady = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString })?.isReady ?? p.isHost
-                
+
                 let participant = Participant(
                     id: p.userId.uuidString,
                     name: name,
@@ -1647,11 +1654,11 @@ extension MPVPlayerViewModel {
                 )
                 updatedParticipants.append(participant)
             }
-            
+
             // Only update if changed (basic check on count or IDs)
             let currentIds = Set(appState?.currentWatchPartyRoom?.participants.map { $0.id } ?? [])
             let newIds = Set(updatedParticipants.map { $0.id })
-            
+
             if currentIds != newIds || appState?.currentWatchPartyRoom?.participants.count != updatedParticipants.count {
                 self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
                 NSLog("👥 MPVPlayer: Updated participants list via polling: \(updatedParticipants.count)")
@@ -1660,7 +1667,7 @@ extension MPVPlayerViewModel {
                  // But replacing array is safe.
                  self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
             }
-            
+
         } catch {
             // fail silently mostly
         }
@@ -1814,13 +1821,13 @@ extension MPVPlayerViewModel {
             // Calculate smoothed drift (moving average)
             let smoothedDrift = driftHistory.reduce(0.0, +) / Double(driftHistory.count)
             let absSmoothedDrift = abs(smoothedDrift)
-            
+
             // UPDATE SYNC STATUS UI
             // Logic:
             // 1. If actively seeking/buffering -> "Syncing... 🟡"
             // 2. If drift < 2.0s -> "Synced 🟢"
             // 3. If drift > 2.0s -> "Drift: -5.2s 🔴"
-            
+
             if (isBuffering || isSeeking || isCurrentlyAdjustingSpeed) && absSmoothedDrift > 0.5 {
                 syncStatus = "Syncing... 🟡"
             } else if absSmoothedDrift < 2.0 {
@@ -2038,7 +2045,7 @@ extension MPVPlayerViewModel {
         case .preload:
             // Preload message - handled in LobbyViewModel, not here
             break
-            
+
         case .roomClosed:
             print("🔒 Received Room Closed signal in Player")
             Task { @MainActor [weak self] in
@@ -2054,10 +2061,10 @@ extension MPVPlayerViewModel {
         case .ping, .pong:
             // Handled by RealtimeChannelManager
             break
-            
+
         case .returnToLobby:
             print("🏠 Received Return to Lobby signal from Host")
-            
+
             // Set message for Guest
             appState?.pendingLobbyMessage = "Host returned the group to the lobby."
             // Perform cleanup and navigate back to lobby

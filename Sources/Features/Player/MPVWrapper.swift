@@ -75,7 +75,7 @@ class MPVWrapper: ObservableObject {
         // Performance - Increased buffers for 4K streaming
         mpv_set_option_string(handle, "cache-secs", "60")  // Allow up to 60s of buffer
         mpv_set_option_string(handle, "demuxer-max-bytes", "500M")  // 500MB buffer for high-bitrate streams
-        
+
         // Anti-Stutter: Wait for buffer to fill before resuming
         // This prevents the "play-buffer-play-buffer" loop by forcing a 5s buffer fill
         mpv_set_option_string(handle, "cache-pause-wait", "5")
@@ -115,16 +115,16 @@ class MPVWrapper: ObservableObject {
         // Start event polling and time updates
         eventPollingTask = Task { [weak self] in await self?.pollEvents() }
         startTimeUpdates()
-        
+
         // Enable detailed logging for network diagnostics
         mpv_request_log_messages(handle, "info")
 
         // Observe duration property for updates (critical for network streams)
         mpv_observe_property(handle, 0, "duration", MPV_FORMAT_DOUBLE)
-        
+
         // Observe pause property to correctly track playback state
         mpv_observe_property(handle, 0, "pause", MPV_FORMAT_FLAG)
-        
+
         // Observe buffering state (detects network stalls)
         mpv_observe_property(handle, 0, "paused-for-cache", MPV_FORMAT_FLAG)
     }
@@ -258,7 +258,7 @@ class MPVWrapper: ObservableObject {
             let prop = data.assumingMemoryBound(to: mpv_event_property.self)
             guard let name = prop.pointee.name else { break }
             let nameStr = String(cString: name)
-            
+
             if nameStr == "duration" {
                 // Duration updated
                 updateDuration()
@@ -309,9 +309,9 @@ class MPVWrapper: ObservableObject {
             while !Task.isCancelled {
                 // Throttled update rate (250ms / 4Hz)
                 try? await Task.sleep(nanoseconds: 250_000_000)
-                
+
                 guard let self = self, !Task.isCancelled else { return }
-                
+
                 await MainActor.run {
                     self.updateCurrentTime()
                 }
@@ -607,6 +607,9 @@ class MPVWrapper: ObservableObject {
         }
 
         NSLog("📊 Total subtitle tracks found: %d (including Off if needed)", tracks.count)
+        for (index, track) in tracks.enumerated() {
+             NSLog("   Start[%d]: ID=%d, Title='%@', Lang='%@', Ext=%d", index, track.id, track.title ?? "nil", track.lang ?? "nil", track.isExternal)
+        }
         return tracks
     }
 
@@ -1125,7 +1128,7 @@ extension MPVWrapper: MPVController {
     var durationPublisher: AnyPublisher<Double, Never> { $duration.eraseToAnyPublisher() }
     var isBufferingPublisher: AnyPublisher<Bool, Never> { $isBuffering.eraseToAnyPublisher() }
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { $isFileLoaded.eraseToAnyPublisher() }
-    
+
     // Explicit witness for protocol to handle default argument mismatch?
     func setSubtitleTrack(_ id: Int) {
         setSubtitleTrack(id, completion: {})

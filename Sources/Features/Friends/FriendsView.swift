@@ -14,6 +14,7 @@ struct FriendsView: View {
     @State private var showingAddFriend = false
     @State private var searchText = ""
     @State private var selectedTab: FriendTab = .all
+    @State private var selectedFriend: Friend?
 
     enum FriendTab {
         case all
@@ -58,6 +59,9 @@ struct FriendsView: View {
             AddFriendSheet(isPresented: $showingAddFriend, onAdd: { principal, username in
                 await socialService.sendRequest(username: username)
             })
+        }
+        .sheet(item: $selectedFriend) { friend in
+            FriendProfileView(friend: friend)
         }
         .task {
             // Refresh friends on view appear
@@ -150,7 +154,9 @@ struct FriendsView: View {
 
     private var friendsList: some View {
         ForEach(filteredFriends) { friend in
-            NavigationLink(destination: FriendProfileView(friend: friend)) {
+            Button(action: {
+                selectedFriend = friend
+            }) {
                 FriendRow(
                     friend: friend,
                     activity: socialService.friendActivity[friend.id],

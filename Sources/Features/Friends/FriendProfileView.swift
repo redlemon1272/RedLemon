@@ -15,6 +15,8 @@ struct FriendProfileView: View {
     @State private var friendHistory: [SupabaseWatchHistoryEntry] = []
     @State private var isLoadingHistory = false
     
+    @Environment(\.dismiss) var dismiss
+    
     // Chat state
     @State private var messageText = ""
     @FocusState private var isFocused: Bool
@@ -35,10 +37,11 @@ struct FriendProfileView: View {
                 
                 // Right: Profile & History (Side panel)
                 profileSidebar
-                    .frame(width: 300)
+                    .frame(width: 320) // Slightly wider sidebar
                     .background(Color(NSColor.controlBackgroundColor))
             }
         }
+        .frame(minWidth: 900, minHeight: 600) // Force larger window/modal size
         .task {
             // Load messages
             await socialService.loadMessages(friendId: friend.id)
@@ -95,6 +98,15 @@ struct FriendProfileView: View {
             }
             
             Spacer()
+            
+            // Close Button
+            Button(action: { dismiss() }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.title2)
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(.plain)
+            .keyboardShortcut(.cancelAction)
         }
         .padding()
         .background(Color(NSColor.windowBackgroundColor))

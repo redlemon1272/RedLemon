@@ -39,6 +39,9 @@ class SocialService: ObservableObject {
         
         // 3. Connect to DM Channel
         await setupDMChannel(userId: userId)
+        
+        // 4. Sync Watch History
+        await syncLocalHistory()
     }
     
     func disconnect() async {
@@ -394,6 +397,32 @@ class SocialService: ObservableObject {
             // Revert optimistic update
             self.messages[friendId]?.removeAll(where: { $0.id == tempId })
             errorMessage = "Failed to send message"
+        }
+    }
+    // MARK: - Watch History Sync
+    
+    private func syncLocalHistory() async {
+        guard let data = UserDefaults.standard.data(forKey: "watchHistory"),
+              let history = try? JSONDecoder().decode([WatchHistoryItem].self, from: data),
+              let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr) else { return }
+        
+        print("🔄 SocialService: Syncing \(history.count) items to cloud...")
+        
+        for item in history {
+            // Fire and forget individually to avoid blocking
+            Task {
+                try? await client.upsertWatchHistory(item: item, userId: userId)
+            }
+        }
+    }
+    
+    func fetchFriendHistory(friendId: String) async -> [SupabaseWatchHistoryEntry] {
+        guard let friendUUID = UUID(uuidString: friendId) else { return [] }
+        do {
+            return try await client.getWatchHistory(userId: friendUUID)
+        } catch {
+            print("❌ Failed to fetch friend history: \(error)")
+            return []
         }
     }
 }

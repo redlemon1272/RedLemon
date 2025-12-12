@@ -795,6 +795,71 @@ class SupabaseClient: RoomManager, UserManager {
         let result = try JSONDecoder().decode(PaymentCheckResult.self, from: response)
         return result.premium ?? false
     }
+    // MARK: - Watch History Management
+    
+    /// Sync a watch history item to the cloud
+    func upsertWatchHistory(item: WatchHistoryItem, userId: UUID) async throws {
+        let payload: [String: Any] = [
+            "user_id": userId.uuidString,
+            "media_id": item.mediaItem.id,
+            "media_type": item.mediaItem.type,
+            "title": item.mediaItem.name,
+            "season": item.season as Any,
+            "episode": item.episode as Any,
+            "progress": item.progress,
+            "poster_url": item.mediaItem.poster as Any,
+            "last_watched": ISO8601DateFormatter().string(from: item.lastWatched)
+        ]
+        
+        let CleanPayload = payload.compactMapValues { $0 } // Remove nils
+        
+        _ = try await makeRequest(
+            path: "/user_watch_history",
+            method: "POST",
+            body: CleanPayload,
+            query: ["on_conflict": "user_id,media_id,season,episode"] // Upsert based on unique constraint
+        )
+    }
+    
+    /// Get watch history for a user (e.g. self or friend)
+    func getWatchHistory(userId: UUID) async throws -> [SupabaseWatchHistoryEntry] {
+        let data = try await makeRequest(
+            path: "/user_watch_history",
+            query: [
+                "user_id": "eq.\(userId.uuidString)",
+                "select": "*",
+                "order": "last_watched.desc",
+                "limit": "20"
+            ]
+        )
+        return try jsonDecoder.decode([SupabaseWatchHistoryEntry].self, from: data)
+    }
+}
+
+struct SupabaseWatchHistoryEntry: Codable, Identifiable {
+    let id: UUID
+    let userId: UUID
+    let mediaId: String
+    let mediaType: String
+    let title: String
+    let season: Int?
+    let episode: Int?
+    let progress: Double
+    let posterUrl: String?
+    let lastWatched: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userId = "user_id"
+        case mediaId = "media_id"
+        case mediaType = "media_type"
+        case title
+        case season
+        case episode
+        case progress
+        case posterUrl = "poster_url"
+        case lastWatched = "last_watched"
+    }
 }
 
 struct SupabaseUserID: Codable {

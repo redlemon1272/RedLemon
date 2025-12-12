@@ -150,7 +150,7 @@ struct FriendsView: View {
 
     private var friendsList: some View {
         ForEach(filteredFriends) { friend in
-            NavigationLink(destination: ChatView(friend: friend)) {
+            NavigationLink(destination: FriendProfileView(friend: friend)) {
                 FriendRow(
                     friend: friend,
                     activity: socialService.friendActivity[friend.id],

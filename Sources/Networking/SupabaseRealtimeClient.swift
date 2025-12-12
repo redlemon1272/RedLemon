@@ -362,32 +362,42 @@ actor SupabaseRealtimeClient {
         if event == "presence_diff" {
             // Handle joins
             if let joins = payload["joins"] as? [String: Any] {
-                for (userId, data) in joins {
+                for (_, data) in joins {
                     let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                     let metadata = metas?.first
-                    for handler in presenceHandlers {
-                        handler(.join, userId, metadata)
+                    
+                    // Extract actual user_id from metadata, fallback to empty string if missing (shouldn't happen)
+                    if let realUserId = metadata?["user_id"] as? String {
+                        for handler in presenceHandlers {
+                            handler(.join, realUserId, metadata)
+                        }
                     }
                 }
             }
 
             // Handle leaves
             if let leaves = payload["leaves"] as? [String: Any] {
-                for (userId, data) in leaves {
+                for (_, data) in leaves {
                     let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                     let metadata = metas?.first
-                    for handler in presenceHandlers {
-                        handler(.leave, userId, metadata)
+                    
+                    if let realUserId = metadata?["user_id"] as? String {
+                        for handler in presenceHandlers {
+                            handler(.leave, realUserId, metadata)
+                        }
                     }
                 }
             }
         } else if event == "presence_state" {
             // Initial state - treat all as joins
-            for (userId, data) in payload {
+            for (_, data) in payload {
                 let metas = (data as? [String: Any])?["metas"] as? [[String: Any]]
                 let metadata = metas?.first
-                for handler in presenceHandlers {
-                    handler(.join, userId, metadata)
+                
+                if let realUserId = metadata?["user_id"] as? String {
+                    for handler in presenceHandlers {
+                        handler(.join, realUserId, metadata)
+                    }
                 }
             }
         }

@@ -545,7 +545,9 @@ struct EventsView: View {
                 await appState.player.playMedia(
                     event.mediaItem,
                     quality: .fullHD,
-                    watchMode: .solo
+                    watchMode: .watchParty,
+                    roomId: roomId,
+                    isHost: false
                 )
             }
         } else {

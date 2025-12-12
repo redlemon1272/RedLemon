@@ -453,21 +453,60 @@ struct ChatOverlayView: View {
 struct FriendRowButton: View {
     let friend: Friend
     let action: () -> Void
+    @EnvironmentObject var appState: AppState // Need appState to join rooms
 
     var body: some View {
         Button(action: action) {
             HStack {
+                // Avatar
                 Circle()
-                    .fill(Color.blue.opacity(0.3))
+                    .fill(Constants.avatarColor(for: friend.username))
                     .frame(width: 32, height: 32)
                     .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
 
-                Text(friend.displayName)
-                    .foregroundColor(.white)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(friend.displayName)
+                        .foregroundColor(.white)
+                        .font(.body)
+
+                    // Activity Status
+                    if let activity = SocialService.shared.friendActivity[friend.id],
+                       let watching = activity.currentlyWatching {
+                        Text("Watching \(watching.mediaTitle)")
+                            .font(.caption)
+                            .foregroundColor(.accentColor)
+                    } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                        Text("Online")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    } else {
+                        Text("Offline")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
 
                 Spacer()
-
-                if SocialService.shared.onlineUserIds.contains(friend.id) {
+                
+                // Join Button (if friend is in a room)
+                if let activity = SocialService.shared.friendActivity[friend.id],
+                   let watching = activity.currentlyWatching,
+                   let roomId = watching.roomId {
+                    
+                    Button(action: {
+                        Task {
+                            // Join the room
+                            print("🚀 Joining room via FriendRowButton: \(roomId)")
+                            await appState.player.joinRoom(roomId: roomId)
+                        }
+                    }) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .foregroundColor(.green)
+                            .font(.title2)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Join \(friend.displayName)")
+                } else if SocialService.shared.onlineUserIds.contains(friend.id) {
                     Circle()
                         .fill(Color.green)
                         .frame(width: 8, height: 8)

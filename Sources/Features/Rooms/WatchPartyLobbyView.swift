@@ -20,6 +20,16 @@ struct WatchPartyLobbyView: View {
         _viewModel = StateObject(wrappedValue: LobbyViewModel(room: room, isHost: isHost))
     }
 
+    // Social & Sidebar State
+    @ObservedObject private var socialService = SocialService.shared
+    @State private var sidebarTab: SidebarTab = .chat
+    @State private var selectedFriend: Friend? = nil // For DM view
+
+    enum SidebarTab {
+        case chat
+        case friends
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -323,109 +333,245 @@ struct WatchPartyLobbyView: View {
                 Spacer()
 
 
-                // Chat section (now outside ScrollView, grouped with button)
+                // Social Sidebar (Unified Chat & Friends)
                 VStack(alignment: .leading, spacing: 12) {
-                    HStack {
-                        Image(systemName: "bubble.left.and.bubble.right.fill")
-                            .foregroundColor(.white.opacity(0.7))
-                        Text("Chat")
-                            .font(.headline)
-                            .foregroundColor(.white)
-
-                        Spacer()
-                    }
-
-                    VStack(spacing: 8) {
-                                ScrollViewReader { proxy in
-                                    ScrollView {
-                                        VStack(alignment: .leading, spacing: 8) {
-                                            // Unified Message List (Interleaved System + Chat)
-                                            ForEach(viewModel.unifiedMessages) { item in
-                                                switch item {
-                                                case .system(let message):
-                                                    LobbyMessageRow(message: message)
-                                                        .id(item.id)
-                                                case .chat(let chatMsg):
-                                                    VStack(alignment: .leading, spacing: 4) {
-                                                        Text(chatMsg.username)
-                                                            .font(.caption.weight(.semibold))
-                                                            .foregroundColor(.blue)
-                                                        Text(chatMsg.text)
-                                                            .font(.body)
-                                                            .foregroundColor(.white)
-                                                    }
-                                                    .padding(8)
-                                                    .background(Color.white.opacity(0.1))
-                                                    .cornerRadius(8)
-                                                    .id(item.id)
-                                                }
-                                            }
-                                            
-                                            // Invisible view to anchor the scroll
-                                            Color.clear
-                                                .frame(height: 1)
-                                                .id("BOTTOM")
-                                        }
-                                        .padding()
-                                    }
-                                    .frame(minHeight: chatMinHeight, maxHeight: .infinity)
-                                    .background(Color.black.opacity(0.3))
-                                    .cornerRadius(8)
-                                    .onChange(of: viewModel.unifiedMessages.count) { _ in
-                                        // Scroll to bottom whenever messages change
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                            withAnimation {
-                                                proxy.scrollTo("BOTTOM", anchor: .bottom)
-                                            }
-                                        }
-                                    }
-                                }
-
-                                VStack(spacing: 0) {
-                                    if showEmojiPicker {
-                                        // Emoji picker
-                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
-                                            ForEach(emojis, id: \.self) { emoji in
-                                                Button(action: {
-                                                    viewModel.chatInput += emoji
-                                                    showEmojiPicker = false
-                                                }) {
-                                                    Text(emoji)
-                                                }
-                                                .buttonStyle(PlainButtonStyle())
-                                            }
-                                        }
-                                        .padding(8)
-                                        .background(Color.white.opacity(0.1))
-                                        .cornerRadius(8)
-                                    }
-
+                    // Header / Tabs
+                    HStack(spacing: 16) {
+                        if let friend = selectedFriend {
+                            // DM Header
+                            Button(action: { 
+                                withAnimation { selectedFriend = nil }
+                            }) {
+                                Image(systemName: "chevron.left")
+                                    .foregroundColor(.white)
+                                    .padding(4)
+                                    .background(Color.white.opacity(0.1))
+                                    .clipShape(Circle())
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Text(friend.displayName)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                            
+                            Spacer()
+                            
+                            // Online/Watching Status Indicator
+                            if let activity = socialService.friendActivity[friend.id],
+                               let watching = activity.currentlyWatching {
+                                Image(systemName: "film.fill")
+                                    .foregroundColor(.accentColor)
+                                    .help("Watching \(watching.mediaTitle)")
+                            } else if socialService.onlineUserIds.contains(friend.id) {
+                                Circle()
+                                    .fill(Color.green)
+                                    .frame(width: 8, height: 8)
+                            }
+                        } else {
+                            // Main Tabs
+                            Button(action: { sidebarTab = .chat }) {
+                                VStack(spacing: 4) {
                                     HStack {
+                                        Image(systemName: "bubble.left.and.bubble.right.fill")
+                                        Text("Chat")
+                                    }
+                                    .foregroundColor(sidebarTab == .chat ? .white : .white.opacity(0.6))
+                                    
+                                    // Active Indicator
+                                    Rectangle()
+                                        .fill(sidebarTab == .chat ? Color.accentColor : Color.clear)
+                                        .frame(height: 2)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Button(action: { sidebarTab = .friends }) {
+                                VStack(spacing: 4) {
+                                    HStack {
+                                        Image(systemName: "person.2.fill")
+                                        Text("Friends")
+                                    }
+                                    .foregroundColor(sidebarTab == .friends ? .white : .white.opacity(0.6))
+                                    
+                                    // Active Indicator
+                                    Rectangle()
+                                        .fill(sidebarTab == .friends ? Color.accentColor : Color.clear)
+                                        .frame(height: 2)
+                                }
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Spacer()
+                        }
+                    }
+                    .font(.headline)
+                    .padding(.bottom, 4)
+
+                    // Content Area
+                    if let friend = selectedFriend {
+                        // Direct Message View (Embedded)
+                        ChatView(friend: friend)
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                            )
+                    } else if sidebarTab == .friends {
+                        // Friends List
+                        ScrollView {
+                            LazyVStack(spacing: 8) {
+                                if socialService.friends.isEmpty {
+                                    Text("No friends online")
+                                        .foregroundColor(.secondary)
+                                        .padding(.top, 20)
+                                } else {
+                                    ForEach(socialService.friends.filter { $0.status == .accepted }) { friend in
                                         Button(action: {
-                                            showEmojiPicker.toggle()
+                                            withAnimation { selectedFriend = friend }
                                         }) {
-                                            Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
-                                                .foregroundColor(.white.opacity(0.7))
-                                        }
-                                        .buttonStyle(PlainButtonStyle())
-
-                                        TextField("Send a message...", text: $viewModel.chatInput)
-                                            .textFieldStyle(PlainTextFieldStyle())
-                                            .padding(8)
-                                            .background(Color.white.opacity(0.1))
+                                            HStack {
+                                                // Avatar
+                                                Circle()
+                                                    .fill(Constants.avatarColor(for: friend.username))
+                                                    .frame(width: 32, height: 32)
+                                                    .overlay(
+                                                        Text(friend.username.prefix(1).uppercased())
+                                                            .font(.caption.bold())
+                                                            .foregroundColor(.white)
+                                                    )
+                                                
+                                                VStack(alignment: .leading) {
+                                                    Text(friend.displayName)
+                                                        .foregroundColor(.white)
+                                                        .font(.callout)
+                                                    
+                                                    // Status
+                                                    if let activity = socialService.friendActivity[friend.id],
+                                                       let watching = activity.currentlyWatching {
+                                                        Text("Watching \(watching.mediaTitle)")
+                                                            .font(.caption2)
+                                                            .foregroundColor(.accentColor)
+                                                    } else if socialService.onlineUserIds.contains(friend.id) {
+                                                        Text("Online")
+                                                            .font(.caption2)
+                                                            .foregroundColor(.green)
+                                                    } else {
+                                                        Text("Offline")
+                                                            .font(.caption2)
+                                                            .foregroundColor(.gray)
+                                                    }
+                                                }
+                                                
+                                                Spacer()
+                                                
+                                                Image(systemName: "chevron.right")
+                                                    .foregroundColor(.white.opacity(0.3))
+                                                    .font(.caption)
+                                            }
+                                            .padding(10)
+                                            .background(Color.white.opacity(0.05))
                                             .cornerRadius(8)
-                                            .foregroundColor(.white)
-                                            .onSubmit(sendMessage)
-
-                                        Button(action: sendMessage) {
-                                            Image(systemName: "paperplane.fill")
-                                                .foregroundColor(.accentColor)
                                         }
-                                        .buttonStyle(PlainButtonStyle())
-                                        .disabled(viewModel.chatInput.isEmpty)
+                                        .buttonStyle(.plain)
                                     }
                                 }
                             }
+                            .padding(.trailing, 4)
+                        }
+                    } else {
+                        // Existing Lobby Chat
+                        VStack(spacing: 8) {
+                                    ScrollViewReader { proxy in
+                                        ScrollView {
+                                            VStack(alignment: .leading, spacing: 8) {
+                                                // Unified Message List (Interleaved System + Chat)
+                                                ForEach(viewModel.unifiedMessages) { item in
+                                                    switch item {
+                                                    case .system(let message):
+                                                        LobbyMessageRow(message: message)
+                                                            .id(item.id)
+                                                    case .chat(let chatMsg):
+                                                        VStack(alignment: .leading, spacing: 4) {
+                                                            Text(chatMsg.username)
+                                                                .font(.caption.weight(.semibold))
+                                                                .foregroundColor(.blue)
+                                                            Text(chatMsg.text)
+                                                                .font(.body)
+                                                                .foregroundColor(.white)
+                                                        }
+                                                        .padding(8)
+                                                        .background(Color.white.opacity(0.1))
+                                                        .cornerRadius(8)
+                                                        .id(item.id)
+                                                    }
+                                                }
+                                                
+                                                // Invisible view to anchor the scroll
+                                                Color.clear
+                                                    .frame(height: 1)
+                                                    .id("BOTTOM")
+                                            }
+                                            .padding()
+                                        }
+                                        .frame(minHeight: chatMinHeight, maxHeight: .infinity)
+                                        .background(Color.black.opacity(0.3))
+                                        .cornerRadius(8)
+                                        .onChange(of: viewModel.unifiedMessages.count) { _ in
+                                            // Scroll to bottom whenever messages change
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                withAnimation {
+                                                    proxy.scrollTo("BOTTOM", anchor: .bottom)
+                                                }
+                                            }
+                                        }
+                                    }
+    
+                                    VStack(spacing: 0) {
+                                        if showEmojiPicker {
+                                            // Emoji picker
+                                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
+                                                ForEach(emojis, id: \.self) { emoji in
+                                                    Button(action: {
+                                                        viewModel.chatInput += emoji
+                                                        showEmojiPicker = false
+                                                    }) {
+                                                        Text(emoji)
+                                                    }
+                                                    .buttonStyle(PlainButtonStyle())
+                                                }
+                                            }
+                                            .padding(8)
+                                            .background(Color.white.opacity(0.1))
+                                            .cornerRadius(8)
+                                        }
+    
+                                        HStack {
+                                            Button(action: {
+                                                showEmojiPicker.toggle()
+                                            }) {
+                                                Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
+                                                .foregroundColor(.white.opacity(0.7))
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+    
+                                            TextField("Send a message...", text: $viewModel.chatInput)
+                                                .textFieldStyle(PlainTextFieldStyle())
+                                                .padding(8)
+                                                .background(Color.white.opacity(0.1))
+                                                .cornerRadius(8)
+                                                .foregroundColor(.white)
+                                                .onSubmit(sendMessage)
+    
+                                            Button(action: sendMessage) {
+                                                Image(systemName: "paperplane.fill")
+                                                    .foregroundColor(.accentColor)
+                                            }
+                                            .buttonStyle(PlainButtonStyle())
+                                            .disabled(viewModel.chatInput.isEmpty)
+                                        }
+                                    }
+                                }
+                    }
                         }
                         .padding(.horizontal, 24)
                         .padding(.bottom, 16)

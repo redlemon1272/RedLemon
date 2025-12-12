@@ -156,7 +156,8 @@ struct FriendsView: View {
                     activity: socialService.friendActivity[friend.id],
                     onToggleFavorite: { await toggleFavorite(friend) },
                     onRemove: { await removeFriend(friend) },
-                    onInvite: { inviteToWatchParty(friend) }
+                    onInvite: { inviteToWatchParty(friend) },
+                    onJoin: { joinFriend(friend) }
                 )
             }
             .buttonStyle(.plain)
@@ -166,6 +167,7 @@ struct FriendsView: View {
     // MARK: - Requests List
 
     private var requestsList: some View {
+
         Group {
             if socialService.friendRequests.filter({ $0.status == .pending }).isEmpty {
                 VStack(spacing: 12) {
@@ -279,6 +281,19 @@ struct FriendsView: View {
         print("📨 Inviting \(friend.username) to watch party")
         // FUTURE: Send push notification or in-app invite via Supabase
     }
+    
+    private func joinFriend(_ friend: Friend) {
+        guard let activity = socialService.friendActivity[friend.id],
+              let watching = activity.currentlyWatching,
+              let roomId = watching.roomId else {
+            return
+        }
+        
+        print("🚀 Joining friend \(friend.username) in room: \(roomId)")
+        Task {
+            await appState.player.joinRoom(roomId: roomId)
+        }
+    }
 }
 
 // MARK: - Friend Row
@@ -289,6 +304,16 @@ struct FriendRow: View {
     let onToggleFavorite: () async -> Void
     let onRemove: () async -> Void
     let onInvite: () -> Void
+    let onJoin: (() -> Void)? // Optional join action
+    
+    init(friend: Friend, activity: FriendActivity?, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil) {
+        self.friend = friend
+        self.activity = activity
+        self.onToggleFavorite = onToggleFavorite
+        self.onRemove = onRemove
+        self.onInvite = onInvite
+        self.onJoin = onJoin
+    }
 
     @State private var showingMenu = false
 
@@ -354,12 +379,22 @@ struct FriendRow: View {
 
             // Action buttons
             if let activity = activity, activity.currentlyWatching != nil {
-                Button(action: onInvite) {
-                    Label("Join", systemImage: "play.fill") // Changed to Join if watching
-                        .font(.caption)
+                if let onJoin = onJoin, activity.currentlyWatching?.roomId != nil {
+                     Button(action: onJoin) {
+                         Label("Join", systemImage: "play.fill")
+                             .font(.caption)
+                     }
+                     .buttonStyle(.borderedProminent)
+                     .controlSize(.small)
+                } else {
+                    Button(action: onInvite) {
+                        Label("Join", systemImage: "play.fill")
+                            .font(.caption)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+                    .disabled(true) // Disable if we can't actually join (e.g. no room ID)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
             }
 
             // Menu

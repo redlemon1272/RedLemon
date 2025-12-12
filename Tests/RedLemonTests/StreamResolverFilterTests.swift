@@ -188,7 +188,7 @@ final class StreamResolverFilterTests: XCTestCase {
     
     private func shouldBlockBadPattern(_ title: String) -> Bool {
         let titleLower = title.lowercased()
-        let badPatterns = ["telesync", "hdcam", "hdtc", "dvdscr", "screener"]
+        let badPatterns = ["telesync", "hdcam", "hdtc", "dvdscr", "screener", "camrip"]
         
         // Check simple patterns
         for pattern in badPatterns {
@@ -213,9 +213,13 @@ final class StreamResolverFilterTests: XCTestCase {
             }
         }
         
-        // TS file extension or explicit marking
-        if titleLower.hasSuffix(".ts") || titleLower.contains(".ts ") || titleLower.contains(" ts ") {
-            return true
+        // TS file extension or word boundary check
+        // Note: Also need to check for "hdts" pattern
+        if let regex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$|\\bhdts\\b") {
+            let range = NSRange(location: 0, length: titleLower.utf16.count)
+            if regex.firstMatch(in: titleLower, options: [], range: range) != nil {
+                return true
+            }
         }
         
         return false

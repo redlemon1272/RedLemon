@@ -5,7 +5,7 @@ import Combine
 @MainActor
 class LobbyViewModel: ObservableObject {
     @Published var participants: [Participant]
-    
+
     // Phase 1: Chat properties delegated to ChatManager
     // We keep them as published properties linked to the manager for minimal view breakage
     // View should eventually bind to chatManager paths directly, but this is a transitional step.
@@ -16,7 +16,7 @@ class LobbyViewModel: ObservableObject {
         get { chatManager.chatInput }
         set { chatManager.chatInput = newValue }
     }
-    
+
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
     @Published var countdown: Int = 3
@@ -34,7 +34,7 @@ class LobbyViewModel: ObservableObject {
     @Published var currentPlaylistIndex: Int = 0
     @Published var isPlaylistMode: Bool = false
     @Published var mutedUserIds: Set<String> = []
-    
+
     // Track unique realtime connection IDs to show "Joined" notifications correctly
     // even if user is already known from DB polling
     var connectedUserIds: Set<String> = []
@@ -54,14 +54,14 @@ class LobbyViewModel: ObservableObject {
     // NOTE: participantsPollingTask moved to LobbyPresenceManager
     // NOTE: roomStatePollingTask moved to LobbyDatabaseManager
     var lastRoomPlayingState: Bool = false // Made var for LobbyDatabaseManager access
-    var participantId: String  
+    var participantId: String
     private var isDisconnecting: Bool = false
     var realtimeManager: (any RealtimeService)?
     var playbackEndedTimestamp: Date? // Made var for LobbyDatabaseManager access (Track when playback ended)
     var isLeavingExplicitly: Bool = false // Flag to track if host is explicitly leaving (vs deinit/background)
     var canAutoJoin: Bool = false // Safety flag: Made var for LobbyDatabaseManager access
 
-    
+
     // Combine storage for Refactor Phase 1
     private var cancellables = Set<AnyCancellable>()
 
@@ -85,22 +85,22 @@ class LobbyViewModel: ObservableObject {
              try await manager.sendSyncMessage(syncMessage)
         })
     }()
-    
+
     // Phase 2: Event Logic
     lazy var eventRouter: LobbyEventRouter = {
         LobbyEventRouter(viewModel: self)
     }()
-    
+
     // Phase 3: Presence Logic
     lazy var presenceManager: LobbyPresenceManager = {
         LobbyPresenceManager(viewModel: self)
     }()
-    
+
     // Phase 4: Database Logic
     lazy var databaseManager: LobbyDatabaseManager = {
         LobbyDatabaseManager(viewModel: self)
     }()
-    
+
     // Phase 5: State Machine
     lazy var stateMachine: LobbyStateMachine = {
         LobbyStateMachine()
@@ -163,14 +163,14 @@ class LobbyViewModel: ObservableObject {
 
         // Initialize playbackEndedTimestamp to enable the grace period check in pollRoomState
         self.playbackEndedTimestamp = Date()
-        
+
         // Phase 1: Wire up ChatManager changes to View Model changes
         self.chatManager.objectWillChange
             .sink { [weak self] _ in
                 self?.objectWillChange.send()
             }
             .store(in: &cancellables)
-            
+
         // Phase 5: Subscribe to State Machine updates
         stateMachine.$currentState
             .receive(on: RunLoop.main)
@@ -194,7 +194,7 @@ class LobbyViewModel: ObservableObject {
              }
         }
 
-        
+
         // Safety Delay for Auto-Join (User Rooms)
         // If we join and DB says "Playing", it might be STALE (Host in Lobby).
         // Wait 8 seconds. If it's STILL playing, then it's real.
@@ -265,7 +265,7 @@ class LobbyViewModel: ObservableObject {
                     "filter": "id=eq.\(room.id)"
                 ]
             ]
-            
+
             // Note: We register the handler globally on the client since RealtimeChannelManager handles the channel join
             // This works because SupabaseRealtimeClient's postgres handlers are global for the connection
             // Delegate Postgres changes handling to LobbyPresenceManager via RealtimeChannelManager
@@ -293,22 +293,22 @@ class LobbyViewModel: ObservableObject {
 
     func startCountdown() {
         guard !isStarting else { return }
-        
+
         // Transition state machine
         stateMachine.transition(to: .startingCountdown(secondsRemaining: 3))
-        
+
         isStarting = true
         transitionState.isStarting = true
         countdown = 3
 
         countdownTask?.cancel()
         countdownTask = nil
-        
+
         countdownTask = Task { @MainActor [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
                 guard let self = self, !Task.isCancelled else { return }
-                
+
                 if self.countdown > 0 {
                     self.countdown -= 1
                 } else {
@@ -410,7 +410,7 @@ class LobbyViewModel: ObservableObject {
                     // This prevents stale auto-start loops when returning to lobby
                     if let freshRoom = try? await self.dataService.getRoomState(roomId: room.id) {
                         print("✅ Lobby: Refreshed room state. isPlaying: \(freshRoom.isPlaying)")
-                        
+
                         // Auto-start for event rooms (always) or regular rooms that are already playing
                         if room.id.hasPrefix("event_") {
                             print("🎬 Event room detected - auto-starting playback")
@@ -433,7 +433,7 @@ class LobbyViewModel: ObservableObject {
 
                 // Initialize Realtime channel (reusing setup method to ensure callbacks are attached)
                 await self.setupRealtimeSubscription()
-                
+
                 await MainActor.run {
                     self.stateMachine.transition(to: .connected)
                 }
@@ -471,7 +471,7 @@ class LobbyViewModel: ObservableObject {
                 }
 
                 realtimeConnectionStatus = .disconnected
-                
+
                 await MainActor.run {
                     self.stateMachine.transition(to: .error(error.localizedDescription))
                 }
@@ -489,7 +489,7 @@ class LobbyViewModel: ObservableObject {
 
         // Stop polling immediately
         stopPolling()
-        
+
         stateMachine.transition(to: .closed)
 
         // Capture values locally (optional but safe)
@@ -498,11 +498,11 @@ class LobbyViewModel: ObservableObject {
         let hostId = self.room.hostId
         let isLeavingExplicitly = self.isLeavingExplicitly
         let currentUserId = self.appState?.currentUserId
-        
+
         Task {
-            // Implicit strong capture of 'self' ensures ViewModel stays alive 
+            // Implicit strong capture of 'self' ensures ViewModel stays alive
             // until the DB leave operation completes.
-            
+
             if self.isStarting {
                 print("🎬 Lobby: Starting movie - skipping disconnect to preserve connection and presence")
                 self.isDisconnecting = false
@@ -510,12 +510,13 @@ class LobbyViewModel: ObservableObject {
             }
 
             // Leave Supabase room (use captured values)
-            if isHost {
+            // CRITICAL FIX: improved logic to not delete event rooms
+            if isHost && !self.room.id.hasPrefix("event_") {
                 do {
                     // Delete Room: Explicitly delete the room from the database
                     if isLeavingExplicitly {
                         print("🙈 Host leaving explicitly: Deleting room \(roomId)")
-                        
+
                         // CRITICAL: Explicitly delete the room to trigger DELETE event for guests
                         try await self.dataService.deleteRoom(roomId: roomId)
                         NSLog("✅ Host DELETED room \(roomId)")
@@ -545,8 +546,8 @@ class LobbyViewModel: ObservableObject {
     func initiateLeave() {
         print("🚪 Lobby: Explicit leave initiated")
         isLeavingExplicitly = true
-        
-        if isHost {
+
+        if isHost && !room.id.hasPrefix("event_") {
             // Notify guests that room is closing
             Task { [weak self] in
                 guard let self = self else { return }
@@ -575,22 +576,22 @@ class LobbyViewModel: ObservableObject {
         Task {
             // Always use actual user's username from AppState, with host as fallback
             let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
-            
+
             // Validate user ID exists
             guard (isHost ? UUID(uuidString: room.hostId) != nil : appState?.currentUserId != nil) else {
                 NSLog("⚠️ Cannot send message: No user ID")
                 return
             }
-            
+
             await chatManager.send(senderId: participantId, username: username)
         }
-        
+
         // Subscribe to State Machine updates
         stateMachine.$currentState
             .receive(on: RunLoop.main)
             .assign(to: \.lobbyState, on: self)
             .store(in: &cancellables)
-            
+
         // Setup Chat Manager binding
     }
 
@@ -857,11 +858,11 @@ class LobbyViewModel: ObservableObject {
 
     private func startPolling() {
         print("🔄 Lobby: Starting database polling for participants and room state...")
-        
+
         presenceManager.startPolling()
         databaseManager.startPolling() // Delegates room state polling for guests
     }
-    
+
     private func stopPolling() {
         presenceManager.stopPolling()
         databaseManager.stopPolling()
@@ -993,7 +994,7 @@ class LobbyViewModel: ObservableObject {
                 return
             }
         }
-        
+
         guard let appState = appState else {
             print("❌ Lobby: autoStartSystemEvent - no appState")
             return
@@ -1378,12 +1379,12 @@ class LobbyViewModel: ObservableObject {
 
         // Track if we are moving the currently playing item
         let isMovingCurrent = (from == currentPlaylistIndex)
-        
+
         // Temporarily adjust index for removal
         if from < currentPlaylistIndex {
             currentPlaylistIndex -= 1
         }
-        
+
         let item = playlist.remove(at: from)
         playlist.insert(item, at: to)
 
@@ -1391,7 +1392,7 @@ class LobbyViewModel: ObservableObject {
         if to <= currentPlaylistIndex {
             currentPlaylistIndex += 1
         }
-        
+
         // If we moved the current item, update index to its new position
         if isMovingCurrent {
             currentPlaylistIndex = to

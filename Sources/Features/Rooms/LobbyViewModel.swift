@@ -544,10 +544,10 @@ class LobbyViewModel: ObservableObject {
     }
 
     func initiateLeave() {
-        print("🚪 Lobby: Explicit leave initiated")
+        print("🚪 Lobby: Explicit leave initiated. isHost=\(isHost), roomId=\(room.id), hostId=\(room.hostId)")
         isLeavingExplicitly = true
 
-        if isHost && !room.id.hasPrefix("event_") {
+        if isHost && !room.id.hasPrefix("event_") && room.hostId != "system" {
             // Notify guests that room is closing
             Task { [weak self] in
                 guard let self = self else { return }

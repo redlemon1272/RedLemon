@@ -57,6 +57,13 @@ class LobbyEventRouter: ObservableObject {
         guard let viewModel = viewModel else { return }
         
         NSLog("🔒 Received Room Closed signal from Host")
+        
+        // FIX: Ignore room closed messages for event rooms (they are persistent)
+        if viewModel.room.id.hasPrefix("event_") {
+             NSLog("⚠️ Ignoring Room Closed signal for event room: \(viewModel.room.id)")
+             return
+        }
+
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
         
         // FIX: Don't show alert for the host who initiated the leave

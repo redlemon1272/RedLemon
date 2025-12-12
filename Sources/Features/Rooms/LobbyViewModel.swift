@@ -235,7 +235,7 @@ class LobbyViewModel: ObservableObject {
             // Configure Realtime to listen for Room updates (Playlist changes)
             let roomUpdatesConfig: [[String: Any]] = [
                 [
-                    "event": "UPDATE",
+                    "event": "*",
                     "schema": "public",
                     "table": "rooms",
                     "filter": "id=eq.\(room.id)"
@@ -244,14 +244,9 @@ class LobbyViewModel: ObservableObject {
             
             // Note: We register the handler globally on the client since RealtimeChannelManager handles the channel join
             // This works because SupabaseRealtimeClient's postgres handlers are global for the connection
-            await SupabaseClient.shared.realtimeClient.onPostgresChange { [weak self] payload in
-                 // Verify this update is for our room (though filter should catch it)
-                 // Just trigger fetch
-                 print("📨 Lobby: Received Room UPDATE from Realtime")
-                 Task { [weak self] in
-                     await self?.fetchFreshRoomState()
-                 }
-            }
+            // Delegate Postgres changes handling to LobbyPresenceManager via RealtimeChannelManager
+            // This prevents split-brain logic and ensures we handle DELETE events correctly.
+
 
             try await realtimeManager?.setup(
                 roomId: room.id,
@@ -842,7 +837,7 @@ class LobbyViewModel: ObservableObject {
 
     /// Fetch fresh room state from Supabase (Host & Guest)
     /// This ensures we have the latest playlist and room details, as AppState might be stale
-    private func fetchFreshRoomState() async {
+    func fetchFreshRoomState() async {
         print("🔄 Lobby: Fetching fresh room state from Supabase...")
         do {
             guard let freshRoom = try await SupabaseClient.shared.getRoomState(roomId: room.id) else {

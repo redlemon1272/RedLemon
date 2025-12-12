@@ -18,6 +18,29 @@ class LobbyPresenceManager: ObservableObject {
     // MARK: - Realtime Presence
     
     func setupPresence(realtimeManager: any RealtimeService) async {
+        
+        // Handle Postgres Changes (Room Deletion)
+        await realtimeManager.setPostgresCallback { [weak self] payload in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                
+                // Parse payload for DELETE on rooms table
+                if let data = payload["data"] as? [String: Any],
+                   let table = data["table"] as? String,
+                   let type = data["type"] as? String,
+                   table == "rooms",
+                   type == "DELETE" {
+                    
+                     NSLog("❌ Lobby: Room deleted by host (Postgres Event)")
+                     guard let viewModel = self.viewModel else { return }
+                     
+                     viewModel.roomClosedMessage = "The host has left the room."
+                     viewModel.showRoomClosedAlert = true
+                     viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Room closed by host"])
+                }
+            }
+        }
+
         await realtimeManager.setPresenceCallback { [weak self] action, userId, metadata in
             Task { @MainActor [weak self] in
                 guard let self = self, let viewModel = self.viewModel else { return }

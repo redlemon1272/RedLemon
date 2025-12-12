@@ -19,6 +19,7 @@ protocol RealtimeService: Actor {
     func setPresenceCallback(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
     func onPresenceChange(_ callback: @escaping (PresenceAction, String, [String: Any]?) -> Void)
     func onConnectionStateChange(_ callback: @escaping (RealtimeConnectionState) -> Void)
+    func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void)
 }
 
 // MARK: - Realtime Channel Manager for Watch Party Sync
@@ -61,6 +62,9 @@ actor RealtimeChannelManager: RealtimeService {
 
     // Presence tracking
     private var presenceCallback: ((PresenceAction, String, [String: Any]?) -> Void)?
+    
+    // Postgres tracking
+    private var postgresCallback: (([String: Any]) -> Void)?
 
     // MARK: - Initialization
 
@@ -136,6 +140,18 @@ actor RealtimeChannelManager: RealtimeService {
                 await self?.handleConnectionChange(connected)
             }
         }
+        
+        // Handle postgres changes
+        await realtimeClient.onPostgresChange { payload in
+            Task { [weak self] in
+               await self?.handlePostgresChange(payload)
+            }
+        }
+    }
+    
+    // New method to handle postgres changes
+    private func handlePostgresChange(_ payload: [String: Any]) async {
+        postgresCallback?(payload)
     }
 
     private func handlePresenceUpdate(action: PresenceAction, userId: String, metadata: [String: Any]?) {
@@ -170,6 +186,10 @@ actor RealtimeChannelManager: RealtimeService {
 
     // MARK: - Sending Messages
 
+    func setPostgresCallback(_ callback: @escaping ([String: Any]) -> Void) {
+        self.postgresCallback = callback
+    }
+    
     func sendSyncMessage(_ message: SyncMessage) async throws {
         guard isConnected else {
             NSLog("⚠️ Realtime: Cannot send sync message - not connected")

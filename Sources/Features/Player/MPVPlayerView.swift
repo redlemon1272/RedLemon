@@ -218,7 +218,7 @@ struct MPVPlayerView: View {
 
                     // Show chat button when mouse is in right 25% of screen (independent of controls)
                     // Only in watch party mode
-                    if location.x >= rightThreshold && viewModel.isInWatchParty {
+                    if location.x >= rightThreshold {
                         showChatButton = true
 
                         // Reset chat button timer
@@ -271,7 +271,7 @@ struct MPVPlayerView: View {
             // Install local event monitor to capture keyboard events even when text field is focused
             localKeyMonitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .flagsChanged]) { event in
                 // Command key pressed: toggle chat (only in watch party mode)
-                if event.type == .flagsChanged && event.modifierFlags.contains(.command) && viewModel.isInWatchParty {
+                if event.type == .flagsChanged && event.modifierFlags.contains(.command) {
                     viewModel.toggleChat()
                     return nil // Consume event
                 }
@@ -893,7 +893,7 @@ struct MPVPlayerView: View {
 
         // Chat toggle button (appears on right side when mouse is there and chat is closed)
         // Only show in watch party mode
-        if showChatButton && !viewModel.showChat && viewModel.isInWatchParty {
+        if showChatButton && !viewModel.showChat {
             chatToggleButton
                 .transition(.opacity.combined(with: .move(edge: .trailing)))
                 .zIndex(98)
@@ -986,19 +986,22 @@ class MouseTrackingNSView: NSView {
         let location = convert(event.locationInWindow, from: nil)
         let viewBounds = bounds
 
-        // Define safe zones for UI controls (bottom 25% for controls, top-left for exit button)
+        // Define safe zones for UI controls:
+        // 1. Bottom 25% for controls
+        // 2. Top-left 25% for exit button
+        // 3. Right 25% for Chat Overlay (CRITICAL FIX)
         let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
         let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
+        let rightChatZone = CGRect(x: viewBounds.width * 0.75, y: 0, width: viewBounds.width * 0.25, height: viewBounds.height)
 
-        // If click is in UI control zones, don't handle it - let SwiftUI buttons handle it
-        if bottomZone.contains(location) || topExitZone.contains(location) {
+        // If click is in UI control zones, don't handle it here - let SwiftUI/Window handle it
+        if bottomZone.contains(location) || topExitZone.contains(location) || rightChatZone.contains(location) {
             // Forward to window's first responder (likely SwiftUI)
             window?.firstResponder?.mouseDown(with: event)
             return
         }
 
         // For clicks in video area, don't forward events - let video layer handle them naturally
-        // This prevents crashes in the main video viewing area
         return
     }
 
@@ -1009,14 +1012,13 @@ class MouseTrackingNSView: NSView {
 
         let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
         let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
+        let rightChatZone = CGRect(x: viewBounds.width * 0.75, y: 0, width: viewBounds.width * 0.25, height: viewBounds.height)
 
-        if bottomZone.contains(location) || topExitZone.contains(location) {
+        if bottomZone.contains(location) || topExitZone.contains(location) || rightChatZone.contains(location) {
             window?.firstResponder?.mouseUp(with: event)
             return
         }
 
-        // For clicks in video area, don't forward events - let video layer handle them naturally
-        // This prevents crashes in the main video viewing area
         return
     }
 

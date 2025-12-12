@@ -11,6 +11,8 @@ struct ChatOverlayView: View {
     @ObservedObject var viewModel: MPVPlayerViewModel
     @EnvironmentObject var appState: AppState
     @ObservedObject private var socialService = SocialService.shared
+    @ObservedObject private var eventChatService = EventChatService.shared
+    
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
     @State private var showEmojiPicker: Bool = false
@@ -18,12 +20,13 @@ struct ChatOverlayView: View {
     @State private var showParticipantsList: Bool = false
 
     // Chat Modes
-    enum ChatMode {
+    enum ChatMode: Equatable {
+        case event
         case room
         case friends
         case dm(Friend)
     }
-    @State private var chatMode: ChatMode = .room
+    @State private var chatMode: ChatMode = .friends // Default to friends (safe fallback)
 
     // Common emojis for quick access
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
@@ -36,6 +39,8 @@ struct ChatOverlayView: View {
             header
 
             switch chatMode {
+            case .event:
+                eventChatList
             case .room:
                 messagesList
             case .friends:
@@ -50,19 +55,38 @@ struct ChatOverlayView: View {
                 inputArea
             }
         }
-
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.black)
         .compositingGroup() // Optimize transparency blending
         .onAppear {
-            print("👁️ ChatOverlayView appeared - UI UPDATE ROUND 5 VERIFIED ✅")
+            print("👁️ ChatOverlayView appeared - UI UPDATE ROUND 6")
+            setupInitialMode()
+            
+            // Connect to event chat if applicable
+            if appState.isEventPlayback, let eventId = appState.currentEventId, let userId = appState.currentUserId {
+                Task {
+                    await eventChatService.connect(eventId: eventId, userId: userId.uuidString, username: appState.currentUsername)
+                }
+            }
+            
             // Auto-focus the input field ONLY if explicitly toggled (prevents stealing focus on load)
-            if viewModel.isAnimatingChatToggle {
+            if viewModel.isAnimatingChatToggle && chatMode != .friends {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     isInputFocused = true
                     manualFocus = true
                 }
             }
+        }
+    }
+    
+    private func setupInitialMode() {
+        // Intelligence to pick the best default tab
+        if appState.isEventPlayback {
+            chatMode = .event
+        } else if viewModel.isInWatchParty {
+            chatMode = .room
+        } else {
+            chatMode = .friends
         }
     }
 
@@ -71,105 +95,94 @@ struct ChatOverlayView: View {
             HStack {
                 if case .dm(let friend) = chatMode {
                     Button(action: { chatMode = .friends }) {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.white)
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left")
+                            Text("Back")
+                        }
+                        .foregroundColor(.white)
                     }
                     .buttonStyle(.plain)
 
+                    Spacer()
+                    
                     Text(friend.displayName)
                         .font(.headline)
                         .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    // Invisible spacer balance
+                    Color.clear.frame(width: 50, height: 1)
                 } else {
                     // Custom Segmented Control for better visibility
                     HStack(spacing: 2) {
-                        tabButton(title: "Room", isSelected: isRoomMode) {
-                            chatMode = .room
+                        if appState.isEventPlayback {
+                            tabButton(title: "Event", mode: .event)
                         }
-                        tabButton(title: "Friends", isSelected: isFriendsMode) {
-                            chatMode = .friends
+                        
+                        // Show "Room" if we are in a legit room (Watch Party) OR we are in an event (which is also a room)
+                        // But if we are in an event, we usually prefer "Event" tab for public chat.
+                        // However, user might be in a PRIVATE party viewing the event.
+                        if viewModel.isInWatchParty {
+                            tabButton(title: "Room", mode: .room)
                         }
+                        
+                        tabButton(title: "Friends", mode: .friends, badge: totalUnreadCount)
                     }
                     .padding(2)
                     .background(Color.white.opacity(0.1))
                     .cornerRadius(8)
-                    .frame(width: 160)
+                    // Dynamic width based on tabs
                 }
 
-                Spacer()
-
-                // Participant Count (for room chat only)
-                if case .room = chatMode, let room = appState.player.currentWatchPartyRoom {
-                    Button(action: { showParticipantsList.toggle() }) {
-                        HStack(spacing: 4) {
-                            Image(systemName: "person.2.fill")
-                                .font(.system(size: 11))
-                            Text("\(room.participants.count)")
-                                .font(.system(size: 13, weight: .semibold))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 8)
-                        .background(
-                            Capsule()
-                                .fill(Color.white.opacity(0.2))
-                                .overlay(
-                                    Capsule()
-                                        .stroke(Color.white.opacity(0.3), lineWidth: 1)
-                                )
-                        )
+                if case .dm = chatMode {
+                    // No extra controls in DM header for now
+                } else {
+                    Spacer()
+                    
+                    // Close Button
+                    Button(action: { viewModel.toggleChat() }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white.opacity(0.7))
                     }
                     .buttonStyle(.plain)
-                    .popover(isPresented: $showParticipantsList, arrowEdge: .bottom) {
-                        VStack(alignment: .leading, spacing: 12) {
-                            Text("Participants (\(room.participants.count))")
-                                .font(.headline)
-                                .padding(.bottom, 4)
-                            
-                            ScrollView {
-                                VStack(alignment: .leading, spacing: 8) {
-                                    ForEach(room.participants) { participant in
-                                        HStack {
-                                            Circle()
-                                                .fill(Color.blue.opacity(0.8))
-                                                .frame(width: 24, height: 24)
-                                                .overlay(Text(participant.name.prefix(1).uppercased()).font(.caption).foregroundColor(.white))
-                                            
-                                            Text(participant.name)
-                                                .font(.body)
-                                            
-                                            if participant.isHost {
-                                                Text("HOST")
-                                                    .font(.system(size: 9, weight: .bold))
-                                                    .padding(.horizontal, 4)
-                                                    .padding(.vertical, 2)
-                                                    .background(Color.yellow)
-                                                    .foregroundColor(.black)
-                                                    .cornerRadius(4)
-                                            }
-                                            
-                                            Spacer()
-                                        }
-                                        .padding(.vertical, 2)
-                                    }
-                                }
-                            }
-                            .frame(maxHeight: 250)
+                    .padding(.trailing, 8)
+                }
+            }
+            .padding(10)
+            .background(Color.black.opacity(0.3))
+        }
+    }
+    
+    // MARK: - List Views
+    
+    private var eventChatList: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 12) {
+                    ForEach(eventChatService.messages.suffix(maxVisibleMessages), id: \.id) { message in
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(message.username)
+                                .font(.caption.weight(.semibold))
+                                .foregroundColor(.purple) // Events get purple
+                            Text(message.text)
+                                .font(.body)
+                                .foregroundColor(.white)
                         }
-                        .padding()
-                        .frame(width: 250)
+                        .padding(12)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .id(message.id)
                     }
                 }
-
-                Button(action: { viewModel.toggleChat() }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 16)) // Round 3: Aggressive reduction to 16pt
-                        .foregroundColor(.white.opacity(0.7))
-                }
-                .buttonStyle(.plain)
-                .padding(.trailing, 8) // Round 5: Explicitly pull away from right edge
+                .padding()
             }
-            .padding(10) // Round 4: Reduced from generic .padding() (16) to 10
-            .background(Color.black.opacity(0.3))
+            .onChange(of: eventChatService.messages.count) { _ in
+                if let lastId = eventChatService.messages.last?.id {
+                     withAnimation { proxy.scrollTo(lastId, anchor: .bottom) }
+                }
+            }
         }
     }
 
@@ -204,24 +217,50 @@ struct ChatOverlayView: View {
     private var friendsList: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
-                // Online Friends
+                
+                // MESSAGES SECTION (New)
+                let activeDMs = socialService.friends.filter { friend in
+                    (socialService.unreadCounts[friend.id] ?? 0) > 0 ||
+                    (socialService.messages[friend.id]?.isEmpty == false)
+                }.sorted { f1, f2 in
+                    // Sort by unread first, then by last message time
+                    let u1 = socialService.unreadCounts[f1.id] ?? 0
+                    let u2 = socialService.unreadCounts[f2.id] ?? 0
+                    if u1 != u2 { return u1 > u2 }
+                    
+                    let t1 = socialService.messages[f1.id]?.last?.createdAt ?? Date.distantPast
+                    let t2 = socialService.messages[f2.id]?.last?.createdAt ?? Date.distantPast
+                    return t1 > t2
+                }
+                
+                if !activeDMs.isEmpty {
+                    Section(header: Text("MESSAGES").font(.caption).fontWeight(.bold).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
+                        ForEach(activeDMs) { friend in
+                            FriendRowButton(friend: friend, unreadCount: socialService.unreadCounts[friend.id] ?? 0) {
+                                openDM(friend)
+                            }
+                        }
+                    }
+                    .padding(.bottom, 8)
+                }
+
+                // Online Friends (excluding those already active in Messages to avoid dupe, or keep them?)
+                // Let's keep them but maybe filter? For now, simple list is better.
                 if !socialService.onlineUserIds.isEmpty {
-                    Section(header: Text("Online").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
+                    Section(header: Text("ONLINE").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
                         ForEach(socialService.friends.filter { socialService.onlineUserIds.contains($0.id) }) { friend in
-                            FriendRowButton(friend: friend) {
-                                chatMode = .dm(friend)
-                                Task { await socialService.loadMessages(friendId: friend.id) }
+                            FriendRowButton(friend: friend, unreadCount: 0) {
+                                openDM(friend)
                             }
                         }
                     }
                 }
 
                 // All Friends
-                Section(header: Text("All Friends").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
+                Section(header: Text("ALL FRIENDS").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
                     ForEach(socialService.friends) { friend in
-                        FriendRowButton(friend: friend) {
-                            chatMode = .dm(friend)
-                            Task { await socialService.loadMessages(friendId: friend.id) }
+                        FriendRowButton(friend: friend, unreadCount: 0) {
+                            openDM(friend)
                         }
                     }
                 }
@@ -236,7 +275,7 @@ struct ChatOverlayView: View {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     if case .dm(let friend) = chatMode, let messages = socialService.messages[friend.id] {
                         ForEach(messages) { message in
-                            let isMe = message.senderId.uuidString != friend.id
+                            let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
                             HStack {
                                 if isMe { Spacer() }
                                 VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
@@ -258,9 +297,22 @@ struct ChatOverlayView: View {
             .onChange(of: getMessageCount()) { _ in
                 if case .dm(let friend) = chatMode {
                     scrollToBottom(proxy: proxy, lastId: socialService.messages[friend.id]?.last?.id)
+                    // Mark as read
+                    Task { await socialService.clearUnread(friendId: friend.id) }
+                }
+            }
+            .onAppear {
+                if case .dm(let friend) = chatMode {
+                    scrollToBottom(proxy: proxy, lastId: socialService.messages[friend.id]?.last?.id)
+                    Task { await socialService.clearUnread(friendId: friend.id) }
                 }
             }
         }
+    }
+    
+    private func openDM(_ friend: Friend) {
+        chatMode = .dm(friend)
+        Task { await socialService.loadMessages(friendId: friend.id) }
     }
 
     private func getMessageCount() -> Int {
@@ -315,7 +367,6 @@ struct ChatOverlayView: View {
                             .focused($isInputFocused)
                             .lineLimit(1...5)
                             .onSubmit { sendMessage() }
-                            //.padding(.vertical, 2) // Removed entirely for max compactness
                     } else {
                         // Fallback for macOS 12
                         ZStack(alignment: .topLeading) {
@@ -338,7 +389,7 @@ struct ChatOverlayView: View {
                 // Send Button
                 Button(action: sendMessage) {
                     Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 20)) // Round 4: Reduced from 26 to 20 to allow box to shrink
+                        .font(.system(size: 20))
                         .symbolRenderingMode(.hierarchical)
                         .foregroundColor(inputText.isEmpty ? .gray : .blue)
                 }
@@ -347,7 +398,6 @@ struct ChatOverlayView: View {
                 .padding(.bottom, 2)
             }
             .padding(.horizontal, 8)
-            //.padding(.vertical, 2) // Removed entirely for max compactness
             .background(Color.white.opacity(0.1))
             .cornerRadius(20)
             .overlay(
@@ -356,8 +406,8 @@ struct ChatOverlayView: View {
             )
             .padding(.horizontal, 16)
             .padding(.horizontal, 16)
-            .padding(.bottom, 8) // Round 3: Reduced from 16 to 8 for compactness
-            .frame(height: 32) // Round 5: FORCE COMPACT HEIGHT
+            .padding(.bottom, 8)
+            .frame(height: 32)
         }
     }
 
@@ -373,7 +423,7 @@ struct ChatOverlayView: View {
                     withAnimation { showEmojiPicker = false }
                 }) {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 20)) // Larger target
+                        .font(.system(size: 20))
                         .foregroundColor(.white.opacity(0.6))
                 }
                 .buttonStyle(.plain)
@@ -384,7 +434,6 @@ struct ChatOverlayView: View {
                 ForEach(emojis, id: \.self) { emoji in
                     Button(action: {
                         inputText += emoji
-                        // Kept open for multiple selections
                         isInputFocused = true
                         manualFocus = true
                     }) {
@@ -411,40 +460,46 @@ struct ChatOverlayView: View {
         guard !inputText.isEmpty else { return }
 
         switch chatMode {
+        case .event:
+            Task { await eventChatService.sendMessage(inputText) }
         case .room:
             viewModel.sendMessage(inputText)
         case .friends:
             break
         case .dm(let friend):
-            Task {
-                await socialService.sendMessage(to: friend.id, content: inputText)
-            }
+            Task { await socialService.sendMessage(to: friend.id, content: inputText) }
         }
 
         inputText = ""
     }
-
-    private var isRoomMode: Bool {
-        if case .room = chatMode { return true }
-        return false
+    
+    private var totalUnreadCount: Int {
+        socialService.unreadCounts.values.reduce(0, +)
     }
 
-    private var isFriendsMode: Bool {
-        if case .friends = chatMode { return true }
-        return false
-    }
-
-    private func tabButton(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(.system(size: 13, weight: .medium))
-                .foregroundColor(isSelected ? .white : .white.opacity(0.5))
-                .frame(maxWidth: .infinity)
-                .frame(height: 28)
-                .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(isSelected ? Color.white.opacity(0.2) : Color.clear)
-                )
+    private func tabButton(title: String, mode: ChatMode, badge: Int = 0) -> some View {
+        Button(action: { chatMode = mode }) {
+            HStack(spacing: 4) {
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+                
+                if badge > 0 {
+                    Text("\(badge)")
+                        .font(.system(size: 10, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 2)
+                        .background(Color.red)
+                        .cornerRadius(8)
+                }
+            }
+            .foregroundColor(chatMode == mode ? .white : .white.opacity(0.5))
+            .padding(.horizontal, 12)
+            .frame(height: 28)
+            .background(
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(chatMode == mode ? Color.white.opacity(0.2) : Color.clear)
+            )
         }
         .buttonStyle(.plain)
     }
@@ -452,70 +507,87 @@ struct ChatOverlayView: View {
 
 struct FriendRowButton: View {
     let friend: Friend
+    let unreadCount: Int
     let action: () -> Void
-    @EnvironmentObject var appState: AppState // Need appState to join rooms
+    @EnvironmentObject var appState: AppState
+    @State private var isHovering: Bool = false
 
     var body: some View {
-        Button(action: action) {
-            HStack {
-                // Avatar
-                Circle()
-                    .fill(Constants.avatarColor(for: friend.username))
-                    .frame(width: 32, height: 32)
-                    .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(friend.displayName)
-                        .foregroundColor(.white)
-                        .font(.body)
-
-                    // Activity Status
-                    if let activity = SocialService.shared.friendActivity[friend.id],
-                       let watching = activity.currentlyWatching {
-                        Text("Watching \(watching.mediaTitle)")
-                            .font(.caption)
-                            .foregroundColor(.accentColor)
-                    } else if SocialService.shared.onlineUserIds.contains(friend.id) {
-                        Text("Online")
-                            .font(.caption)
-                            .foregroundColor(.green)
-                    } else {
-                        Text("Offline")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                }
-
-                Spacer()
-                
-                // Join Button (if friend is in a room)
-                if let activity = SocialService.shared.friendActivity[friend.id],
-                   let watching = activity.currentlyWatching,
-                   let roomId = watching.roomId {
-                    
-                    Button(action: {
-                        Task {
-                            // Join the room
-                            print("🚀 Joining room via FriendRowButton: \(roomId)")
-                            await appState.player.joinRoom(roomId: roomId)
+        HStack(spacing: 8) {
+            // Main Row Action (Open DM) - Wrapper Button
+            Button(action: action) {
+                HStack {
+                    // Avatar
+                    ZStack(alignment: .topTrailing) {
+                        Circle()
+                            .fill(Constants.avatarColor(for: friend.username))
+                            .frame(width: 32, height: 32)
+                            .overlay(Text(friend.username.prefix(1).uppercased()).foregroundColor(.white))
+                        
+                        if unreadCount > 0 {
+                            Circle()
+                                .fill(Color.red)
+                                .frame(width: 12, height: 12)
+                                .overlay(Text("\(unreadCount)").font(.system(size: 8)).foregroundColor(.white))
+                                .offset(x: 2, y: -2)
                         }
-                    }) {
-                        Image(systemName: "arrow.right.circle.fill")
-                            .foregroundColor(.green)
-                            .font(.title2)
                     }
-                    .buttonStyle(.plain)
-                    .help("Join \(friend.displayName)")
-                } else if SocialService.shared.onlineUserIds.contains(friend.id) {
-                    Circle()
-                        .fill(Color.green)
-                        .frame(width: 8, height: 8)
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(friend.displayName)
+                            .foregroundColor(.white)
+                            .font(.body)
+
+                        // Activity Status
+                        if let activity = SocialService.shared.friendActivity[friend.id],
+                           let watching = activity.currentlyWatching {
+                            Text("Watching \(watching.mediaTitle)")
+                                .font(.caption)
+                                .foregroundColor(.accentColor)
+                        } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                            Text("Online")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                        } else {
+                            Text("Offline")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    
+                    Spacer()
                 }
+                .padding(8)
+                .contentShape(Rectangle())
             }
-            .padding(8)
-            .background(Color.white.opacity(0.1))
+            .buttonStyle(.plain)
+            .background(isHovering ? Color.white.opacity(0.2) : Color.clear)
             .cornerRadius(8)
+            .onHover { hovering in
+                isHovering = hovering
+            }
+
+            // Join Button (if friend is in a room)
+            if let activity = SocialService.shared.friendActivity[friend.id],
+               let watching = activity.currentlyWatching,
+               let roomId = watching.roomId {
+                
+                Button(action: {
+                    Task { await appState.player.joinRoom(roomId: roomId) }
+                }) {
+                    Image(systemName: "arrow.right.circle.fill")
+                        .foregroundColor(.green)
+                        .font(.title2)
+                }
+                .buttonStyle(.plain)
+                .help("Join \(friend.displayName)")
+            } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                // Online indicator
+                 Circle()
+                    .fill(Color.green)
+                    .frame(width: 8, height: 8)
+            }
         }
-        .buttonStyle(.plain)
+        .padding(0) // Inner padding handles it
     }
 }

@@ -21,6 +21,7 @@ class AppState: ObservableObject {
 
     // Sub-ViewModels
     let player: PlayerViewModel
+    private var cancellables = Set<AnyCancellable>()
     
     init(
         metadataProvider: MetadataProvider = LocalAPIClient.shared,
@@ -39,6 +40,14 @@ class AppState: ObservableObject {
             streamResolver: streamResolver,
             roomManager: roomManager
         )
+        
+        // Forward PlayerViewModel changes to AppState
+        self.player.objectWillChange
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
     }
 
     // Wiring up PlayerViewModel callbacks

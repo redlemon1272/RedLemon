@@ -301,28 +301,15 @@ main() {
     echo "   🔐 Authentication: Username-based"
     echo ""
 
-    echo "🔨 Building RedLemon..."
-    swift build -c release
+    echo "🚀 Launching RedLemon.app..."
+    # Open the debug app that was already built
+    open "$PROJECT_ROOT/build/RedLemon.app"
 
-    if [ $? -ne 0 ]; then
-        echo "❌ Build failed!"
-        exit 1
-    fi
-
-    echo "✅ Build successful!"
-    echo "🚀 Starting RedLemon..."
-
-    # Run the app
-    .build/release/RedLemon
-
-    log_success "RedLemon is starting in PRODUCTION MODE!"
+    log_success "RedLemon launched successfully!"
     echo ""
-    echo "📝 Application output will appear below in real-time:"
+    echo "📝 The app is now running. Check the app window for output."
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
-
-    # Launch the application (this will block until app exits)
-    launch_app
 }
 
 # Run main function

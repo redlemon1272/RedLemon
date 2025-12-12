@@ -33,6 +33,12 @@ class LobbyPresenceManager: ObservableObject {
                          NSLog("❌ Lobby: Room deleted by host (Postgres Event)")
                          guard let viewModel = self.viewModel else { return }
                          
+                         // FIX: Ignore room closed messages for event rooms (they are persistent)
+                         if viewModel.room.type == .event {
+                             NSLog("⚠️ Ignoring Room DELETE signal for event room: \(viewModel.room.id)")
+                             return
+                         }
+
                          // FIX: Don't show alert for the host who initiated the delete
                          if !viewModel.isHost {
                              // Global Alert + Immediate Exit

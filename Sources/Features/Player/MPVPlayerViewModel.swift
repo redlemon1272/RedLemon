@@ -325,7 +325,7 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Check if we should resume from a specific timestamp
-        let resumeTime = appState?.resumeFromTimestamp ?? 0
+        let resumeTime = appState?.player.resumeFromTimestamp ?? 0
         let shouldResume = resumeTime > 0
 
         // CRITICAL: Strict separation of logic
@@ -468,7 +468,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices
-        if let eventStartTime = appState?.eventStartTime {
+        if let eventStartTime = appState?.player.eventStartTime {
             let elapsed = Date().timeIntervalSince(eventStartTime)
             // Add 5.0s compensation for seek/buffer latency to ensure we start "live"
             let seekTime = max(0, elapsed + 5.0)
@@ -499,8 +499,8 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Check if we should resume from a specific timestamp
-        if let resumeTime = appState?.resumeFromTimestamp, resumeTime > 0 {
-            print("🔄 Resuming playback from \(Int(resumeTime))s (appState.resumeFromTimestamp = \(appState?.resumeFromTimestamp ?? 0))")
+        if let resumeTime = appState?.player.resumeFromTimestamp, resumeTime > 0 {
+            print("🔄 Resuming playback from \(Int(resumeTime))s (appState.resumeFromTimestamp = \(appState?.player.resumeFromTimestamp ?? 0))")
 
 
 
@@ -570,8 +570,8 @@ class MPVPlayerViewModel: ObservableObject {
                 self.isPlaying = true
 
                 // Clear state
-                self.appState?.resumeFromTimestamp = nil
-                self.appState?.eventStartTime = nil
+                self.appState?.player.resumeFromTimestamp = nil
+                self.appState?.player.eventStartTime = nil
                 return
             }
 
@@ -589,8 +589,8 @@ class MPVPlayerViewModel: ObservableObject {
                 self.isPlaying = true
 
                 // Clear state
-                self.appState?.resumeFromTimestamp = nil
-                self.appState?.eventStartTime = nil // Clear event start too if present
+                self.appState?.player.resumeFromTimestamp = nil
+                self.appState?.player.eventStartTime = nil // Clear event start too if present
                 self.isResumingInWatchParty = false
 
                 print("✅ Resumed playback after seek to \(Int(resumeTime))s")
@@ -1244,7 +1244,7 @@ extension MPVPlayerViewModel {
                 guard let self = self else { return }
 
                 // FALLBACK: If room is missing locally (e.g. host started quickly), fetch it
-                if self.appState?.currentWatchPartyRoom == nil {
+                if self.appState?.player.currentWatchPartyRoom == nil {
                     // Explicitly capture roomId to avoid ambiguous expression error in closure
                     if let roomId: String = self.currentRoomId {
                     print("⚠️ Room state missing in MPVViewModel - fetching fallback for \(roomId)")
@@ -1304,13 +1304,13 @@ extension MPVPlayerViewModel {
                             unlockedStreamURL: nil
                         )
 
-                        self.appState?.currentWatchPartyRoom = fetchedRoom
+                        self.appState?.player.currentWatchPartyRoom = fetchedRoom
                     }
                 }
             }
 
                 // Update AppState participants list for UI
-                if let room = self.appState?.currentWatchPartyRoom {
+                if let room = self.appState?.player.currentWatchPartyRoom {
                     var updatedParticipants: [Participant] = room.participants
                     let localCurrentUserId = self.currentUserId
 
@@ -1399,7 +1399,7 @@ extension MPVPlayerViewModel {
 
                             await MainActor.run {
                                 // Fetch FRESH list to avoid stale data race
-                                guard var currentParticipants = self.appState?.currentWatchPartyRoom?.participants else { return }
+                                guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
 
                                 // Check if this is an old session leavning (stale ref)
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
@@ -1466,7 +1466,7 @@ extension MPVPlayerViewModel {
                                 }
 
                                 // Update room state with fresh list
-                                self.appState?.currentWatchPartyRoom?.participants = currentParticipants
+                                self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
                                 self.appState?.objectWillChange.send() // Force UI update
                                 self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             }
@@ -1504,7 +1504,7 @@ extension MPVPlayerViewModel {
                     let dedupedList = uniqueParticipants.values.sorted { $0.joinedAt < $1.joinedAt }
 
                     // Update room state
-                    self.appState?.currentWatchPartyRoom?.participants = dedupedList
+                    self.appState?.player.currentWatchPartyRoom?.participants = dedupedList
                 }
             }
         }
@@ -1564,7 +1564,7 @@ extension MPVPlayerViewModel {
 
         // 1. Clear DB State IMMEDIATELY (Prevent race condition for quick-returning guests)
         Task {
-            if let roomId = appState?.currentRoomId {
+            if let roomId = appState?.player.currentRoomId {
                 try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
                 print("✅ Host cleared DB playback state before exit")
             }
@@ -1591,7 +1591,7 @@ extension MPVPlayerViewModel {
                 Task { [weak self] in
                     guard let self = self else { return }
                     await self.cleanup()
-                    await self.appState?.exitPlayer(keepRoomState: true)
+                    await self.appState?.player.exitPlayer(keepRoomState: true)
                     await MainActor.run {
                         self.appState?.currentView = .watchPartyLobby
                     }
@@ -1637,14 +1637,14 @@ extension MPVPlayerViewModel {
                 // or fetch if new.
                 // To be robust like Lobby, we should fetch, but caching is better.
                 // Let's reuse existing name if available to reduce latency.
-                if let existing = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString }) {
+                if let existing = appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString }) {
                     name = existing.name
                 } else if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
                      name = user.username
                 }
 
                 // Preserve ready state
-                let isReady = appState?.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString })?.isReady ?? p.isHost
+                let isReady = appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString })?.isReady ?? p.isHost
 
                 let participant = Participant(
                     id: p.userId.uuidString,
@@ -1657,16 +1657,16 @@ extension MPVPlayerViewModel {
             }
 
             // Only update if changed (basic check on count or IDs)
-            let currentIds = Set(appState?.currentWatchPartyRoom?.participants.map { $0.id } ?? [])
+            let currentIds = Set(appState?.player.currentWatchPartyRoom?.participants.map { $0.id } ?? [])
             let newIds = Set(updatedParticipants.map { $0.id })
 
-            if currentIds != newIds || appState?.currentWatchPartyRoom?.participants.count != updatedParticipants.count {
-                self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
+            if currentIds != newIds || appState?.player.currentWatchPartyRoom?.participants.count != updatedParticipants.count {
+                self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
                 NSLog("👥 MPVPlayer: Updated participants list via polling: \(updatedParticipants.count)")
             } else {
                  // Even if IDs are same, maybe name changed? Or specific properties?
                  // But replacing array is safe.
-                 self.appState?.currentWatchPartyRoom?.participants = updatedParticipants
+                 self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
             }
 
         } catch {
@@ -1844,7 +1844,7 @@ extension MPVPlayerViewModel {
 
             // CRITICAL: Avoid seeks on weaker hardware - they cause video pipeline stalls
             // EVENTS: Disable speed sync (adaptive sync) as requested - rely on initial seek and large drift correction only
-            let isEvent = appState?.isEventPlayback == true
+            let isEvent = appState?.player.isEventPlayback == true
 
             if absSmoothedDrift < 0.1 {
                 // Perfect sync (<100ms smoothed drift)
@@ -2053,7 +2053,7 @@ extension MPVPlayerViewModel {
                 guard let self = self else { return }
                 await self.cleanup()
                 // Force full exit to browse
-                await self.appState?.exitPlayer(keepRoomState: false)
+                await self.appState?.player.exitPlayer(keepRoomState: false)
                 await MainActor.run {
                     self.appState?.currentView = .browse
                 }
@@ -2072,7 +2072,7 @@ extension MPVPlayerViewModel {
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
                 await self.cleanup()
-                await self.appState?.exitPlayer(keepRoomState: true)
+                await self.appState?.player.exitPlayer(keepRoomState: true)
                 await MainActor.run {
                     self.appState?.currentView = .watchPartyLobby
                 }
@@ -2367,7 +2367,7 @@ extension MPVPlayerViewModel {
 
     private func saveWatchHistory(force: Bool = false) {
         guard currentTime > 0 && duration > 0 else { return }
-        appState?.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
+        appState?.player.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
     }
 
     func stopWatchHistorySaving() {

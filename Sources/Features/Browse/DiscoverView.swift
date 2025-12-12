@@ -258,7 +258,7 @@ struct DiscoverView: View {
 
     private func selectMedia(_ item: MediaItem) async {
         // Navigate to detail view in main content area (same as BrowseView)
-        appState.selectedMediaItem = item
+        appState.player.selectedMediaItem = item
         appState.currentView = .mediaDetail
     }
 }

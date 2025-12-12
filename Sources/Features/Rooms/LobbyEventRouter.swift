@@ -213,12 +213,12 @@ class LobbyEventRouter: ObservableObject {
                     viewModel.appState?.selectedEpisode = episode
 
                     // CRITICAL FIX: Clear stale stream optimization data
-                    if var currentRoom = viewModel.appState?.currentWatchPartyRoom {
+                    if var currentRoom = viewModel.appState?.player.currentWatchPartyRoom {
                         currentRoom.selectedStreamHash = nil
                         currentRoom.selectedFileIdx = nil
                         currentRoom.selectedQuality = nil
                         currentRoom.unlockedStreamURL = nil
-                        viewModel.appState?.currentWatchPartyRoom = currentRoom
+                        viewModel.appState?.player.currentWatchPartyRoom = currentRoom
                         print("🛡️ Guest: Cleared stale stream optimization data (Fallback Mode)")
                     }
                 }
@@ -229,7 +229,7 @@ class LobbyEventRouter: ObservableObject {
                 NSLog("❌ Guest: Cannot start playback - missing media or appState")
                 return
             }
-            await appState.playMedia(
+            await appState.player.playMedia(
                 mediaItem,
                 quality: .fullHD,
                 watchMode: .watchParty,
@@ -252,7 +252,7 @@ class LobbyEventRouter: ObservableObject {
         let season = roomState.season ?? viewModel.room.season
         let episode = roomState.episode ?? viewModel.room.episode
 
-        if var currentRoom = viewModel.appState?.currentWatchPartyRoom {
+        if var currentRoom = viewModel.appState?.player.currentWatchPartyRoom {
             currentRoom.season = season ?? currentRoom.season
             currentRoom.episode = episode ?? currentRoom.episode
 
@@ -262,7 +262,7 @@ class LobbyEventRouter: ObservableObject {
             currentRoom.selectedQuality = roomState.quality
             currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
 
-            viewModel.appState?.currentWatchPartyRoom = currentRoom
+            viewModel.appState?.player.currentWatchPartyRoom = currentRoom
             NSLog("✅ Guest: Synced stream details from host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
         }
 
@@ -308,7 +308,7 @@ class LobbyEventRouter: ObservableObject {
 
         NSLog("🎬 Guest: Launching player for \(mediaItem.name)")
 
-        await appState.playMedia(
+        await appState.player.playMedia(
             mediaItem,
             quality: .fullHD,
             watchMode: .watchParty,

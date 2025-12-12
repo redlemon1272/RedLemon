@@ -57,6 +57,9 @@ struct RedLemonApp: App {
                 .environmentObject(appState)
                 .environmentObject(updateManager)
                 .task {
+                    // Wiring up PlayerViewModel callbacks
+                    appState.setupPlayerBindings()
+
                     // Check if username setup should be forced (after user reset)
                     await checkForcedUsernameSetup()
 
@@ -218,21 +221,21 @@ struct RedLemonApp: App {
         await MainActor.run {
             // Reset all playback-related state to ensure clean startup
             appState.currentView = .events
-            appState.selectedMediaItem = nil
-            appState.selectedMetadata = nil
-            appState.selectedStream = nil
-            appState.showPlayer = false
-            appState.showMediaDetail = false
-            appState.showQualitySelection = false
-            appState.isResolvingStream = false
-            appState.streamError = nil
-            appState.resumeFromTimestamp = nil
-            appState.currentRoomId = nil
-            appState.currentWatchPartyRoom = nil
+            appState.player.selectedMediaItem = nil
+            appState.player.selectedMetadata = nil
+            appState.player.selectedStream = nil
+            appState.player.showPlayer = false
+            appState.player.showMediaDetail = false
+            appState.player.showQualitySelection = false
+            appState.player.isResolvingStream = false
+            appState.player.streamError = nil
+            appState.player.resumeFromTimestamp = nil
+            appState.player.currentRoomId = nil
+            appState.player.currentWatchPartyRoom = nil
             appState.selectedSeason = nil
             appState.selectedEpisode = nil
-            appState.isWatchPartyHost = false
-            appState.currentWatchMode = .solo
+            appState.player.isWatchPartyHost = false
+            appState.player.currentWatchMode = .solo
             appState.isLoadingRoom = false
         }
         NSLog("✅ Playback state reset complete - starting in browse view")

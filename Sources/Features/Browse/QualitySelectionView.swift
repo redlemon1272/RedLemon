@@ -164,7 +164,7 @@ struct QualitySelectionView: View {
 
                 // Action Buttons
                 VStack(spacing: 12) {
-                    if appState.isResolvingStream || appState.isLoadingRoom {
+                    if appState.player.isResolvingStream || appState.isLoadingRoom {
                         ProgressView(appState.isLoadingRoom ? "Creating room..." : "Finding best stream...")
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -183,7 +183,7 @@ struct QualitySelectionView: View {
                         }
                         .buttonStyle(.plain)
 
-                        if let error = appState.streamError {
+                        if let error = appState.player.streamError {
                             Text(error)
                                 .font(.caption)
                                 .foregroundColor(.red)
@@ -208,7 +208,7 @@ struct QualitySelectionView: View {
                 onStreamSelected: { stream in
                     // Handle manual stream selection
                     Task {
-                        await appState.playSelectedStream(stream, watchMode: watchMode)
+                        await appState.player.playSelectedStream(stream, watchMode: watchMode)
                     }
                     showingStreamSelection = false
                 }
@@ -216,7 +216,7 @@ struct QualitySelectionView: View {
         }
         .onAppear {
             // Sync with global state (e.g. if coming from "Resume Watch Party")
-            if appState.currentWatchMode == .watchParty {
+            if appState.player.currentWatchMode == .watchParty {
                 self.watchMode = .watchParty
             }
         }
@@ -226,7 +226,7 @@ struct QualitySelectionView: View {
         if watchMode == .watchParty {
             // Create room and navigate to lobby
             Task {
-                await appState.createWatchPartyAndNavigate(
+                await appState.player.createWatchPartyAndNavigate(
                     mediaItem: mediaItem,
                     season: appState.selectedSeason,
                     episode: appState.selectedEpisode,
@@ -238,7 +238,7 @@ struct QualitySelectionView: View {
         } else {
             // Start solo playback immediately
             Task {
-                await appState.playMedia(mediaItem, quality: selectedQuality, watchMode: watchMode)
+                await appState.player.playMedia(mediaItem, quality: selectedQuality, watchMode: watchMode)
             }
         }
     }

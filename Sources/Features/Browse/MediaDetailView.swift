@@ -230,7 +230,7 @@ struct MediaDetailView: View {
 
                             // Watch Now Button
                             Button(action: {
-                                appState.selectedMediaItem = mediaItem
+                                appState.player.selectedMediaItem = mediaItem
                                 if mediaItem.type == "series" {
                                     appState.selectedSeason = selectedSeason
                                     appState.selectedEpisode = selectedEpisode

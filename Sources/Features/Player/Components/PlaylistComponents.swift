@@ -17,7 +17,7 @@ struct PlaylistButton: View {
 
     @ViewBuilder
     private var content: some View {
-        if let room = appState.currentWatchPartyRoom, let playlist = room.playlist, !playlist.isEmpty {
+        if let room = appState.player.currentWatchPartyRoom, let playlist = room.playlist, !playlist.isEmpty {
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.15)) {
                     showPlaylistMenu.toggle()

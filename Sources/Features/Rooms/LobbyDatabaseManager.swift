@@ -237,13 +237,13 @@ class LobbyDatabaseManager: ObservableObject {
             NSLog("🎬 Guest: Launching player via database fallback")
             
             // CRITICAL FIX: Sync stream details from fresh roomState to AppState
-            if var currentRoom = appState.currentWatchPartyRoom {
+            if var currentRoom = appState.player.currentWatchPartyRoom {
                 currentRoom.selectedStreamHash = roomState.streamHash
                 currentRoom.selectedFileIdx = roomState.fileIdx
                 currentRoom.selectedQuality = roomState.quality
                 currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
                 
-                appState.currentWatchPartyRoom = currentRoom
+                appState.player.currentWatchPartyRoom = currentRoom
                 NSLog("✅ Guest: Synced stream details from DB fallback (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
             }
             
@@ -271,7 +271,7 @@ class LobbyDatabaseManager: ObservableObject {
             // CRITICAL: Set resume timestamp so guest starts exactly where host is!
             if roomState.playbackPosition > 5 {
                 await MainActor.run {
-                    appState.resumeFromTimestamp = TimeInterval(roomState.playbackPosition)
+                    appState.player.resumeFromTimestamp = TimeInterval(roomState.playbackPosition)
                     NSLog("⏩ Guest: Pre-setting start time to host position: \(roomState.playbackPosition)s")
                 }
             }
@@ -279,7 +279,7 @@ class LobbyDatabaseManager: ObservableObject {
             // Stop polling before transition
             self.stopPolling()
             
-            await appState.playMedia(
+            await appState.player.playMedia(
                 viewModel.room.mediaItem!,
                 quality: .fullHD,
                 watchMode: .watchParty,

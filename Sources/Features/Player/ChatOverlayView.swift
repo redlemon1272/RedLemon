@@ -98,7 +98,7 @@ struct ChatOverlayView: View {
                 Spacer()
 
                 // Participant Count (for room chat only)
-                if case .room = chatMode, let room = appState.currentWatchPartyRoom {
+                if case .room = chatMode, let room = appState.player.currentWatchPartyRoom {
                     Button(action: { showParticipantsList.toggle() }) {
                         HStack(spacing: 4) {
                             Image(systemName: "person.2.fill")

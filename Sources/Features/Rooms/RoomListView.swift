@@ -390,9 +390,9 @@ struct RoomListView: View {
         print("   Room state: \(room.state)")
 
         // Set current room
-        appState.currentWatchPartyRoom = room
-        appState.currentRoomId = room.id
-        appState.isWatchPartyHost = isUserHost
+        appState.player.currentWatchPartyRoom = room
+        appState.player.currentRoomId = room.id
+        appState.player.isWatchPartyHost = isUserHost
 
         // If room is already playing, set auto-join flag so lobby auto-starts immediately
         if room.state == .playing {

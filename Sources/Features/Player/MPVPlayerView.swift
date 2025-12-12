@@ -259,7 +259,7 @@ struct MPVPlayerView: View {
             }
 
             // Start auto-exit timer for event movies
-            if appState.isEventPlayback {
+            if appState.player.isEventPlayback {
                 print("🎬 Event playback detected - starting auto-exit monitor")
                 eventAutoExitTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                     checkEventMovieFinished()
@@ -291,10 +291,10 @@ struct MPVPlayerView: View {
 
             // CRITICAL: Start watch party sync BEFORE loading stream
             // This ensures isInWatchParty is set when video loads, activating the ready gate
-            if appState.currentWatchMode == .watchParty, let roomId = appState.currentRoomId {
-                NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.isWatchPartyHost ? "YES" : "NO")
+            if appState.player.currentWatchMode == .watchParty, let roomId = appState.player.currentRoomId {
+                NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.player.isWatchPartyHost ? "YES" : "NO")
                 do {
-                    try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.isWatchPartyHost)
+                    try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.player.isWatchPartyHost)
                     NSLog("✅ Watch party sync started successfully - isInWatchParty is now TRUE")
                 } catch {
                     NSLog("❌ Failed to start watch party sync: %@", error.localizedDescription)
@@ -313,7 +313,7 @@ struct MPVPlayerView: View {
                 streamTitle: streamTitle,
                 subtitles: subtitles,
                 isSeries: isSeries,
-                isEvent: appState.isEventPlayback
+                isEvent: appState.player.isEventPlayback
             )
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
@@ -352,11 +352,11 @@ struct MPVPlayerView: View {
 
     private func exitPlayer() async {
         await viewModel.cleanup()
-        await appState.exitPlayer()
+        await appState.player.exitPlayer()
     }
 
     private func checkEventMovieFinished() {
-        guard appState.isEventPlayback else { return }
+        guard appState.player.isEventPlayback else { return }
 
         let position = viewModel.currentTime
         let duration = viewModel.duration
@@ -373,7 +373,7 @@ struct MPVPlayerView: View {
 
             // Exit player and return to events
             Task {
-                await appState.handleMovieFinished()
+                await appState.player.handleMovieFinished()
             }
             return
         }
@@ -391,7 +391,7 @@ struct MPVPlayerView: View {
 
             // Exit player and return to events
             Task {
-                await appState.handleMovieFinished()
+                await appState.player.handleMovieFinished()
             }
         }
     }
@@ -824,7 +824,7 @@ struct MPVPlayerView: View {
         }
 
         // Full playlist menu (Modal style)
-        if showPlaylistMenu, let room = appState.currentWatchPartyRoom {
+        if showPlaylistMenu, let room = appState.player.currentWatchPartyRoom {
             PlaylistModalView(
                 room: room,
                 isHost: viewModel.isWatchPartyHost,

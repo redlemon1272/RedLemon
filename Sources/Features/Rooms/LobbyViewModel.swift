@@ -637,7 +637,7 @@ class LobbyViewModel: ObservableObject {
         isResolvingStream = true
         var preResolvedStream: Stream?
         do {
-            preResolvedStream = try await appState.resolveAndPersistForWatchParty(
+            preResolvedStream = try await appState.player.resolveAndPersistForWatchParty(
                 mediaItem: mediaItem,
                 quality: .fullHD,
                 roomId: room.id,
@@ -739,9 +739,9 @@ class LobbyViewModel: ObservableObject {
 
         await MainActor.run {
             // Manually set state since we resolve first
-            appState.isWatchPartyHost = true
-            appState.currentWatchMode = .watchParty
-            appState.currentRoomId = room.id
+            appState.player.isWatchPartyHost = true
+            appState.player.currentWatchMode = .watchParty
+            appState.player.currentRoomId = room.id
 
             // CRITICAL FIX: Update AppState season/episode so Player UI shows correct title
             if let mediaItem = room.mediaItem, mediaItem.type == "series" {
@@ -751,14 +751,14 @@ class LobbyViewModel: ObservableObject {
             }
 
             // Sync Playlist State to AppState
-            if var currentRoom = appState.currentWatchPartyRoom {
+            if var currentRoom = appState.player.currentWatchPartyRoom {
                 currentRoom.playlist = self.playlist
                 currentRoom.currentPlaylistIndex = self.currentPlaylistIndex
-                appState.currentWatchPartyRoom = currentRoom
+                appState.player.currentWatchPartyRoom = currentRoom
                 print("✅ Host: Synced playlist state to AppState (Index: \(self.currentPlaylistIndex))")
             }
 
-            appState.navigateToPlayer(stream: finalStream)
+            appState.player.navigateToPlayer(stream: finalStream)
         }
 
     }
@@ -805,10 +805,10 @@ class LobbyViewModel: ObservableObject {
             self.isPlaylistMode = true
 
             // Sync to AppState so MPVPlayerView sees it
-            if var room = self.appState?.currentWatchPartyRoom {
+            if var room = self.appState?.player.currentWatchPartyRoom {
                 room.playlist = self.playlist
                 room.currentPlaylistIndex = self.currentPlaylistIndex
-                self.appState?.currentWatchPartyRoom = room
+                self.appState?.player.currentWatchPartyRoom = room
             }
 
             // Persist to Supabase
@@ -901,8 +901,8 @@ class LobbyViewModel: ObservableObject {
                 self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
 
                 // Update AppState to keep it in sync
-                appState?.currentWatchPartyRoom?.playlist = freshRoom.playlist
-                appState?.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+                appState?.player.currentWatchPartyRoom?.playlist = freshRoom.playlist
+                appState?.player.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
 
                 // CRITICAL FIX: Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties
@@ -1048,8 +1048,8 @@ class LobbyViewModel: ObservableObject {
 
         // NEW: Set event start time for dynamic seeking (instead of static timestamp)
         // The player will recalculate the correct seek position when video is ready
-        appState.eventStartTime = room.createdAt
-        appState.resumeFromTimestamp = nil  // Don't use static timestamp for events
+        appState.player.eventStartTime = room.createdAt
+        appState.player.resumeFromTimestamp = nil  // Don't use static timestamp for events
 
         print("   Set eventStartTime to: \(room.createdAt)")
         print("   Current elapsed would be: \(elapsed)s (will recalculate on video ready)")
@@ -1070,7 +1070,7 @@ class LobbyViewModel: ObservableObject {
                 // Stop polling before transition
                 self.stopPolling()
 
-                await self.appState?.playMedia(
+                await self.appState?.player.playMedia(
                     mediaItem,
                     quality: .fullHD,
                     watchMode: .watchParty,
@@ -1200,7 +1200,7 @@ class LobbyViewModel: ObservableObject {
         guard isHost, isPlaylistMode else { return }
 
         // Sync local index with Updated AppState if referenced
-        if let appStateIndex = appState?.currentWatchPartyRoom?.currentPlaylistIndex {
+        if let appStateIndex = appState?.player.currentWatchPartyRoom?.currentPlaylistIndex {
             self.currentPlaylistIndex = appStateIndex
         }
 
@@ -1267,9 +1267,9 @@ class LobbyViewModel: ObservableObject {
         self.room.currentPlaylistIndex = index
 
         // Sync to AppState so MPVPlayerView sees it immediately if active
-        if var room = self.appState?.currentWatchPartyRoom {
+        if var room = self.appState?.player.currentWatchPartyRoom {
             room.currentPlaylistIndex = index
-            self.appState?.currentWatchPartyRoom = room
+            self.appState?.player.currentWatchPartyRoom = room
         }
 
         self.posterURL = item.mediaItem.poster
@@ -1365,10 +1365,10 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Sync to AppState so MPVPlayerView sees it
-        if var room = self.appState?.currentWatchPartyRoom {
+        if var room = self.appState?.player.currentWatchPartyRoom {
             room.playlist = self.playlist
             room.currentPlaylistIndex = self.currentPlaylistIndex
-            self.appState?.currentWatchPartyRoom = room
+            self.appState?.player.currentWatchPartyRoom = room
         }
 
         updatePlaylistInDatabase()
@@ -1399,10 +1399,10 @@ class LobbyViewModel: ObservableObject {
         }
 
         // Sync to AppState so MPVPlayerView sees it
-        if var room = self.appState?.currentWatchPartyRoom {
+        if var room = self.appState?.player.currentWatchPartyRoom {
             room.playlist = self.playlist
             room.currentPlaylistIndex = self.currentPlaylistIndex
-            self.appState?.currentWatchPartyRoom = room
+            self.appState?.player.currentWatchPartyRoom = room
         }
 
         updatePlaylistInDatabase()

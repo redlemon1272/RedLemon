@@ -141,21 +141,21 @@ struct ContentView: View {
                     case .settings:
                         SettingsView()
                     case .mediaDetail:
-                        if let mediaItem = appState.selectedMediaItem {
+                        if let mediaItem = appState.player.selectedMediaItem {
                             MediaDetailView(mediaItem: mediaItem)
                                 .environmentObject(appState)
                         } else {
                             Text("No media selected")
                         }
                     case .seasonEpisodeSelector:
-                        if let mediaItem = appState.selectedMediaItem {
+                        if let mediaItem = appState.player.selectedMediaItem {
                             SeasonEpisodeSelectorView(mediaItem: mediaItem)
                                 .environmentObject(appState)
                         } else {
                             Text("No media selected")
                         }
                     case .qualitySelection:
-                        if let mediaItem = appState.selectedMediaItem {
+                        if let mediaItem = appState.player.selectedMediaItem {
                             QualitySelectionView(mediaItem: mediaItem)
                                 .environmentObject(appState)
                         } else {
@@ -213,7 +213,7 @@ struct ContentView: View {
     @ViewBuilder
     private var playerOverlay: some View {
         if appState.currentView == .player,
-           let metadata = appState.selectedMetadata {
+           let metadata = appState.player.selectedMetadata {
             PlayerLoadingView(
                 appState: appState,
                 metadata: metadata
@@ -228,8 +228,8 @@ struct ContentView: View {
     private var lobbyOverlay: some View {
         if appState.currentView == .watchPartyLobby {
             Group {
-                if let room = appState.currentWatchPartyRoom {
-                    WatchPartyLobbyView(room: room, isHost: appState.isWatchPartyHost)
+                if let room = appState.player.currentWatchPartyRoom {
+                    WatchPartyLobbyView(room: room, isHost: appState.player.isWatchPartyHost)
                         .environmentObject(appState)
                 } else if appState.isLoadingRoom {
                     ProgressView("Loading room...")
@@ -258,21 +258,21 @@ struct PlayerLoadingView: View {
             Color.black.ignoresSafeArea()
 
             // Show background art and logo while loading OR if error
-            if appState.isResolvingStream || appState.streamError != nil {
+            if appState.player.isResolvingStream || appState.player.streamError != nil {
                 BackgroundArtView(backdropURL: metadata.backgroundURL)
                 LogoOverlayView(logoURL: metadata.logoURL)
             }
 
             // Error state
-            if let error = appState.streamError {
+            if let error = appState.player.streamError {
                 StreamErrorView(error: error, appState: appState)
             }
             // Loading state
-            else if appState.isResolvingStream {
+            else if appState.player.isResolvingStream {
                 LoadingIndicatorView()
             }
             // Ready to play - show actual player
-            else if let stream = appState.selectedStream, let url = stream.url {
+            else if let stream = appState.player.selectedStream, let url = stream.url {
                 StablePlayerContainer(
                     streamURL: url,
                     imdbId: metadata.id,
@@ -284,7 +284,7 @@ struct PlayerLoadingView: View {
                     selectedEpisode: appState.selectedEpisode,
                     onPlaybackFinished: {
                         Task {
-                            await appState.handleMovieFinished()
+                            await appState.player.handleMovieFinished()
                         }
                     }
                 )
@@ -295,10 +295,10 @@ struct PlayerLoadingView: View {
             else {
                 let _ = {
                     print("❌ RedLemon: NOT showing MPVPlayerView")
-                    print("   isResolvingStream: \(appState.isResolvingStream)")
-                    print("   streamError: \(appState.streamError ?? "nil")")
-                    print("   selectedStream: \(appState.selectedStream == nil ? "NIL" : "SET")")
-                    if let stream = appState.selectedStream {
+                    print("   isResolvingStream: \(appState.player.isResolvingStream)")
+                    print("   streamError: \(appState.player.streamError ?? "nil")")
+                    print("   selectedStream: \(appState.player.selectedStream == nil ? "NIL" : "SET")")
+                    if let stream = appState.player.selectedStream {
                         print("   stream.url: \(stream.url == nil ? "NIL" : "SET")")
                     }
                 }()

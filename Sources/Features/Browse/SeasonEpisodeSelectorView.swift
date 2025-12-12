@@ -136,7 +136,7 @@ struct SeasonEpisodeSelectorView: View {
         // Store season/episode in app state
         appState.selectedSeason = season
         appState.selectedEpisode = episode
-        appState.selectedMediaItem = mediaItem
+        appState.player.selectedMediaItem = mediaItem
         appState.currentView = .qualitySelection
     }
 }

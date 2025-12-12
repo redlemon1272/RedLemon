@@ -45,7 +45,7 @@ struct EventsView: View {
                                     // Check if previous event is finished (either by time OR by user completion)
                                     // We use lastUpdate here to ensure this recalculates when state changes
                                     let _ = lastUpdate
-                                    let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.finishedEventIds.contains(events.first?.id ?? "")))
+                                    let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.player.finishedEventIds.contains(events.first?.id ?? "")))
 
                                     HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
                                         await joinEvent(event)
@@ -206,18 +206,18 @@ struct EventsView: View {
 
             // Check for auto-join (Seamless Transition from finished movie)
             if self.appState.shouldAutoJoinLobby {
-                print("🔄 Checking for auto-join... Finished IDs: \(self.appState.finishedEventIds)")
+                print("🔄 Checking for auto-join... Finished IDs: \(self.appState.player.finishedEventIds)")
                 if let firstEvent = scheduledEvents.first {
                     print("   First event: \(firstEvent.mediaItem.name) (ID: \(firstEvent.id))")
                     print("   Is Finished: \(firstEvent.isFinished)")
-                    print("   Is in FinishedIDs: \(self.appState.finishedEventIds.contains(firstEvent.id))")
+                    print("   Is in FinishedIDs: \(self.appState.player.finishedEventIds.contains(firstEvent.id))")
                 }
 
                 // Find the NEXT event (not the finished one)
                 // Priority: Lobby event that is NOT finished
                 if let lobbyEvent = scheduledEvents.first(where: { event in
                     // ✅ Must not be in finished events list
-                    guard !appState.finishedEventIds.contains(event.id) else {
+                    guard !appState.player.finishedEventIds.contains(event.id) else {
                         print("⏭️ Skipping finished event: \(event.mediaItem.name)")
                         return false
                     }
@@ -232,7 +232,7 @@ struct EventsView: View {
                     let isInLobby = event.isInLobby
                     let isNextEventAfterFinished = event.index == 1 &&
                                                    (scheduledEvents.first?.isFinished == true ||
-                                                    appState.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))
+                                                    appState.player.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))
 
                     print("   Checking event: \(event.mediaItem.name) (Index: \(event.index))")
                     print("     isInLobby: \(isInLobby)")
@@ -246,7 +246,7 @@ struct EventsView: View {
                     }
                     self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
                 } else if let liveEvent = scheduledEvents.first(where: {
-                    $0.isLive && !$0.isFinished && !appState.finishedEventIds.contains($0.id)
+                    $0.isLive && !$0.isFinished && !appState.player.finishedEventIds.contains($0.id)
                 }) {
                     print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
                     Task {
@@ -521,32 +521,30 @@ struct EventsView: View {
         print("   Room createdAt: \(room.createdAt)")
         print("   Room state: \(room.state)")
 
-        appState.currentEventId = event.id // Track current event ID
-        appState.isEventPlayback = true // Mark as event playback for seamless transition support
-        appState.currentWatchMode = .watchParty // Enable watch party mode for chat
+        appState.player.currentEventId = event.id // Track current event ID
+        appState.player.isEventPlayback = true // Mark as event playback for seamless transition support
+        appState.player.currentWatchMode = .watchParty // Enable watch party mode for chat
 
-        appState.currentWatchPartyRoom = room
-        appState.isWatchPartyHost = false // User is always guest in system events
+        appState.player.currentWatchPartyRoom = room
+        appState.player.isWatchPartyHost = false // User is always guest in system events
 
         if event.isLive {
             // For live events, set resume position and go directly to player
-            appState.resumeFromTimestamp = max(0, position)
-            print("   Setting resumeFromTimestamp to: \(appState.resumeFromTimestamp!)")
+            appState.player.resumeFromTimestamp = max(0, position)
+            print("   Setting resumeFromTimestamp to: \(appState.player.resumeFromTimestamp!)")
             print("🎬 Live event - starting playback immediately (no lobby)")
 
             // Set selection details for player
-            appState.selectedMediaItem = event.mediaItem
+            appState.player.selectedMediaItem = event.mediaItem
             appState.selectedSeason = nil
             appState.selectedEpisode = nil
 
             // Trigger playback directly like TV events do
             Task {
-                await appState.playMedia(
+                await appState.player.playMedia(
                     event.mediaItem,
                     quality: .fullHD,
-                    watchMode: .watchParty,
-                    roomId: roomId,
-                    isHost: false
+                    watchMode: .solo
                 )
             }
         } else {

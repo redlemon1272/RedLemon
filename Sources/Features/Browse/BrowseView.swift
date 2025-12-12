@@ -445,7 +445,7 @@ struct BrowseView: View {
 
     private func selectMedia(_ item: MediaItem) async {
         // Navigate to detail view in main content area
-        appState.selectedMediaItem = item
+        appState.player.selectedMediaItem = item
         appState.currentView = .mediaDetail
     }
 
@@ -1005,21 +1005,21 @@ struct WatchModeSelectionView: View {
 
         // Set media item on main actor
         await MainActor.run {
-            appState.selectedMediaItem = historyItem.mediaItem
+            appState.player.selectedMediaItem = historyItem.mediaItem
 
             // Only set resume timestamp if shouldResume is true
             if shouldResume {
-                appState.resumeFromTimestamp = historyItem.timestamp
-                print("✅ Set appState.resumeFromTimestamp = \(historyItem.timestamp)s")
+                appState.player.resumeFromTimestamp = historyItem.timestamp
+                print("✅ Set appState.player.resumeFromTimestamp = \(historyItem.timestamp)s")
             } else {
-                appState.resumeFromTimestamp = nil
+                appState.player.resumeFromTimestamp = nil
                 print("✅ Cleared resumeFromTimestamp - starting from beginning")
             }
 
             // Set season/episode if it's a TV show
             if let season = historyItem.season, let episode = historyItem.episode {
-                appState.selectedSeason = season
-                appState.selectedEpisode = episode
+                appState.player.selectedSeason = season
+                appState.player.selectedEpisode = episode
                 print("✅ Set season \(season) episode \(episode)")
             }
         }
@@ -1031,7 +1031,7 @@ struct WatchModeSelectionView: View {
             // Redirect to QualitySelectionView to allow configuring description/public settings
             // This replaces the "Quick Add" immediate creation flow
             await MainActor.run {
-                appState.currentWatchMode = .watchParty
+                appState.player.currentWatchMode = .watchParty
                 appState.currentView = .qualitySelection
                 isCreatingRoom = false
             }
@@ -1039,7 +1039,7 @@ struct WatchModeSelectionView: View {
         } else {
             // Play solo - dismiss immediately
             dismiss()
-            await appState.playMedia(
+            await appState.player.playMedia(
                 historyItem.mediaItem,
                 quality: quality,
                 watchMode: .solo
@@ -1050,7 +1050,7 @@ struct WatchModeSelectionView: View {
     private func goToDetailPage() {
         Task { @MainActor in
             // Set media item and navigation state
-            appState.selectedMediaItem = historyItem.mediaItem
+            appState.player.selectedMediaItem = historyItem.mediaItem
 
             // If it's a TV show, set the season and episode context
             if let season = historyItem.season, let episode = historyItem.episode {

@@ -66,7 +66,7 @@ struct ExitButton: View {
         // 2. Watch Party Host -> "Back to Lobby" (Triggers synchronized return)
         // 3. Watch Party Guest / Other -> "Exit Room" (Standard behavior)
 
-        let isEvent = appState.isEventPlayback == true
+        let isEvent = appState.player.isEventPlayback == true
         let isHost = viewModel.isWatchPartyHost
 
         Button(action: {
@@ -76,7 +76,7 @@ struct ExitButton: View {
                      viewModel.triggerReturnToLobby()
                 } else {
                      // Standard exit
-                     await appState.exitPlayer()
+                     await appState.player.exitPlayer()
                 }
             }
         }) {

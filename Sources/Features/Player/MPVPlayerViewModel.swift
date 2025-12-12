@@ -1406,9 +1406,10 @@ extension MPVPlayerViewModel {
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
 
                                     // MAGIC BULLET: Grace Period Check
-                                    // Ignore ALL "User Left" events in the first 5 seconds of the session.
+                                    // Ignore ALL "User Left" events in the first 10 seconds of the session.
                                     // This filters out transition noise (Lobby -> Player) and "Ghost" session cleanups.
-                                    if Date().timeIntervalSince(self.initializationTime) < 5.0 {
+                                    // Extended to 10s to account for slower network/transition delays in rooms.
+                                    if Date().timeIntervalSince(self.initializationTime) < 10.0 {
                                         print("🛡️ Grace Period: Ignoring LEAVE for \(actualUserId) (Session too young)")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return

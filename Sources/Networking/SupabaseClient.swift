@@ -143,7 +143,8 @@ class SupabaseClient: RoomManager, UserManager {
         path: String,
         method: String = "GET",
         body: [String: Any]? = nil,
-        query: [String: String]? = nil
+        query: [String: String]? = nil,
+        headers: [String: String]? = nil
     ) async throws -> Data {
         var urlString = "\(baseURL)/rest/v1\(path)"
 
@@ -161,7 +162,21 @@ class SupabaseClient: RoomManager, UserManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("return=representation", forHTTPHeaderField: "Prefer")
+        
+        // Default Preference
+        var requestHeaders = ["Prefer": "return=representation"]
+        
+        // Merge custom headers (overwriting defaults if key exists)
+        if let customHeaders = headers {
+            for (key, value) in customHeaders {
+                requestHeaders[key] = value
+            }
+        }
+        
+        // Apply headers to request
+        for (key, value) in requestHeaders {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
 
         if let body = body {
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
@@ -822,7 +837,8 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/user_watch_history",
             method: "POST",
             body: cleanPayload,
-            query: ["on_conflict": "user_id,media_id,season,episode"]
+            query: ["on_conflict": "user_id,media_id,season,episode"],
+            headers: ["Prefer": "resolution=merge-duplicates, return=representation"]
         )
     }
     

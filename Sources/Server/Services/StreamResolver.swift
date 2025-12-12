@@ -508,13 +508,19 @@ actor StreamResolver {
                        lower.contains("spanish") || 
                        lower.contains("italian") || 
                        lower.contains("portuguese") || 
+                       lower.contains("dublado") ||  // Portuguese: dubbed
+                       lower.contains("doblado") ||  // Spanish: dubbed (masculine)
+                       lower.contains("doblada") ||  // Spanish: dubbed (feminine)
+                       lower.contains("doppiato") || // Italian: dubbed
+                       lower.contains("doublé") ||   // French: doubled/dubbed
+                       lower.contains("dablyazh") || // Russian: dubbing (romanized)
                        lower.contains("russian") || 
                        lower.contains("japanese") || 
                        lower.contains("korean") || 
                        lower.contains("chinese") || 
                        lower.contains("国粤") || // Mandarin/Cantonese
                        lower.contains("中文字幕") || // Chinese Subs
-                       lower.contains("韩文") // Korean
+                       lower.contains("韓文") // Korean
         
         // 3. French-specific audio indicators (VF = Version Française)
         let frenchAudioIndicators = [

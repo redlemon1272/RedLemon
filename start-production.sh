@@ -287,13 +287,19 @@ main() {
     echo ""
 
     echo "🧪 Running filter tests..."
-    if swift test --filter StreamResolverFilterTests --quiet 2>&1 | grep -q "0 failures"; then
-        echo "✅ All filter tests passed"
+    if swift test --filter StreamResolverFilterTests 2>&1 | grep -q "0 failures"; then
+        log_success "All filter tests passed"
     else
-        echo "❌ Filter tests failed! Fix issues before starting app."
+        log_error "Filter tests failed! Fix issues before starting app."
         echo "   Run: swift test --filter StreamResolverFilterTests"
         exit 1
     fi
+
+    echo ""
+    echo "📊 Services:"
+    echo "   ✅ Backend:        Supabase PostgreSQL + Realtime"
+    echo "   🔐 Authentication: Username-based"
+    echo ""
 
     echo "🔨 Building RedLemon..."
     swift build -c release
@@ -310,10 +316,6 @@ main() {
     .build/release/RedLemon
 
     log_success "RedLemon is starting in PRODUCTION MODE!"
-    echo ""
-    echo "📊 Services:"
-    echo "   ✅ Backend:        Supabase PostgreSQL + Realtime"
-    echo "   🔐 Authentication: Username-based"
     echo ""
     echo "📝 Application output will appear below in real-time:"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

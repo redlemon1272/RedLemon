@@ -25,8 +25,20 @@ struct PlaylistItem: Identifiable, Codable, Equatable {
 
 // MARK: - Watch Party Room
 
+// MARK: - Room Type
+
+enum RoomType {
+    case event
+    case userRoom
+}
+
 struct WatchPartyRoom: Identifiable {
     let id: String // Room ID for joining
+    
+    var type: RoomType {
+        id.hasPrefix("event_") ? .event : .userRoom
+    }
+
     var hostId: String
     var hostName: String? // Username of host
     var mediaItem: MediaItem? // Optional - can be set later in lobby

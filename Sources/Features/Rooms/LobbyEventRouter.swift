@@ -59,7 +59,7 @@ class LobbyEventRouter: ObservableObject {
         NSLog("🔒 Received Room Closed signal from Host")
         
         // FIX: Ignore room closed messages for event rooms (they are persistent)
-        if viewModel.room.id.hasPrefix("event_") {
+        if viewModel.room.type == .event {
              NSLog("⚠️ Ignoring Room Closed signal for event room: \(viewModel.room.id)")
              return
         }

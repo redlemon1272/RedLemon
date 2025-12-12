@@ -143,7 +143,7 @@ struct RoomListView: View {
                 for room in backendRooms {
                     // FILTER: Exclude system-run events ("RedLemon Events") from the public rooms list
                     // Events are distinct and shouldn't appear as user-hosted rooms
-                    if room.hostUsername == "RedLemon Events" || room.id.hasPrefix("event_") {
+                    if room.hostUsername == "RedLemon Events" || room.type == .event {
                         continue
                     }
 

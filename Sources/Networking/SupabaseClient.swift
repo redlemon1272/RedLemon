@@ -826,6 +826,11 @@ struct AppLog: Codable, Identifiable {
 /// For system-scheduled content, see `EventsConfig` in `EventsConfigService`.
 struct SupabaseRoom: Codable {
     let id: String
+    
+    var type: RoomType {
+        id.hasPrefix("event_") ? .event : .userRoom
+    }
+    
     let name: String
     let hostUserId: UUID
     let hostUsername: String

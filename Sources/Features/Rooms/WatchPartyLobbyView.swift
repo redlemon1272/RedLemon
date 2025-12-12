@@ -204,7 +204,7 @@ struct WatchPartyLobbyView: View {
                                     .cornerRadius(5)
 
                                 // Only show room code for non-event rooms
-                                if !room.id.hasPrefix("event_") {
+                                if room.type == .userRoom {
                                     Text(room.id)
                                         .font(.system(.caption, design: .monospaced))
                                         .fontWeight(.bold)
@@ -249,7 +249,7 @@ struct WatchPartyLobbyView: View {
                             }
 
                             // Only show participant list for non-event rooms (to avoid clutter in large events)
-                            if !room.id.hasPrefix("event_") {
+                            if room.type == .userRoom {
                                 VStack(spacing: 6) {
                                     ForEach(viewModel.participants) { participant in
                                         ParticipantRow(
@@ -266,7 +266,7 @@ struct WatchPartyLobbyView: View {
                         .padding(.horizontal, 24)
 
                         // NEW: Playlist Section (Visible to all, but controls restricted)
-                        if !room.id.hasPrefix("event_") {
+                        if room.type == .userRoom {
                             VStack(alignment: .leading, spacing: 12) {
                                 HStack {
                                     Image(systemName: "list.bullet")
@@ -473,7 +473,7 @@ struct WatchPartyLobbyView: View {
                         }
                     } else {
                         // Guest controls - hide ready button for events (no host coordination needed)
-                        if !room.id.hasPrefix("event_") {
+                        if room.type == .userRoom {
                             Button(action: toggleReady) {
                                 HStack {
                                     Image(systemName: viewModel.isReady ? "checkmark.circle.fill" : "circle")
@@ -503,7 +503,7 @@ struct WatchPartyLobbyView: View {
                                 Image(systemName: "timer")
                                     .font(.title2)
                                 // Show different text for events vs playlists
-                                if room.id.hasPrefix("event_") {
+                                if room.type == .event {
                                     Text("Event starts in \(formatDuration(viewModel.timeUntilStart))")
                                         .font(.title3)
                                         .fontWeight(.semibold)

@@ -187,7 +187,7 @@ class LobbyViewModel: ObservableObject {
         // When host returns to lobby after movie finishes, DB still says is_playing=true
         // This causes the "Database Fallback" in init/join to immediately restart playback
         // We must strictly reset this for USER hosted rooms, but preserve it for EVENTS (which do autoplay)
-        if isHost && !room.id.hasPrefix("event_") {
+        if isHost && room.type == .userRoom {
              Task {
                  print("🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop")
                  try? await self.dataService.updateRoomPlayback(roomId: room.id, position: 0, isPlaying: false)
@@ -365,7 +365,7 @@ class LobbyViewModel: ObservableObject {
                         NSLog("✅ Guest joined room \(room.id) in database")
                     } catch {
                         // If join failed, check if it's because we're already in the room or if the room is missing
-                        if room.id.hasPrefix("event_") {
+                        if room.type == .event {
                             // Check if room exists
                             let roomExists = (try? await self.dataService.getRoomState(roomId: self.room.id)) != nil
 
@@ -412,7 +412,7 @@ class LobbyViewModel: ObservableObject {
                         print("✅ Lobby: Refreshed room state. isPlaying: \(freshRoom.isPlaying)")
 
                         // Auto-start for event rooms (always) or regular rooms that are already playing
-                        if room.id.hasPrefix("event_") {
+                        if room.type == .event {
                             print("🎬 Event room detected - auto-starting playback")
                             autoStartSystemEvent()
                         } else if freshRoom.isPlaying {
@@ -421,7 +421,7 @@ class LobbyViewModel: ObservableObject {
                         }
                     } else {
                         // Fallback to existing state if fetch fails (rare)
-                        if room.id.hasPrefix("event_") {
+                        if room.type == .event {
                             print("🎬 Event room detected - auto-starting playback")
                             autoStartSystemEvent()
                         } else if room.state == .playing {
@@ -511,7 +511,7 @@ class LobbyViewModel: ObservableObject {
 
             // Leave Supabase room (use captured values)
             // CRITICAL FIX: improved logic to not delete event rooms
-            if isHost && !self.room.id.hasPrefix("event_") {
+            if isHost && self.room.type == .userRoom {
                 do {
                     // Delete Room: Explicitly delete the room from the database
                     if isLeavingExplicitly {
@@ -547,7 +547,7 @@ class LobbyViewModel: ObservableObject {
         print("🚪 Lobby: Explicit leave initiated. isHost=\(isHost), roomId=\(room.id), hostId=\(room.hostId)")
         isLeavingExplicitly = true
 
-        if isHost && !room.id.hasPrefix("event_") && room.hostId != "system" {
+        if isHost && room.type == .userRoom && room.hostId != "system" {
             // Notify guests that room is closing
             Task { [weak self] in
                 guard let self = self else { return }

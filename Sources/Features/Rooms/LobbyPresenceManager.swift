@@ -33,18 +33,21 @@ class LobbyPresenceManager: ObservableObject {
                          NSLog("❌ Lobby: Room deleted by host (Postgres Event)")
                          guard let viewModel = self.viewModel else { return }
                          
-                         // Global Alert + Immediate Exit
-                         viewModel.appState?.activeAlert = AppState.AppAlert(
-                             title: "Room Closed",
-                             message: "The host has left the room."
-                         )
-                         
-                         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Room closed by host"])
-                         
-                         // Exit Lobby
-                         viewModel.disconnect()
-                         viewModel.appState?.currentView = .browse
-                         viewModel.appState?.restoreWindowFromLobby()
+                         // FIX: Don't show alert for the host who initiated the delete
+                         if !viewModel.isHost {
+                             // Global Alert + Immediate Exit
+                             viewModel.appState?.activeAlert = AppState.AppAlert(
+                                 title: "Room Closed",
+                                 message: "The host has left the room."
+                             )
+                             
+                             viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Room closed by host"])
+                             
+                             // Exit Lobby
+                             viewModel.disconnect()
+                             viewModel.appState?.currentView = .browse
+                             viewModel.appState?.restoreWindowFromLobby()
+                         }
                     } else if type == "UPDATE" {
                          NSLog("📨 Lobby: Received Room UPDATE from Realtime")
                          guard let viewModel = self.viewModel else { return }

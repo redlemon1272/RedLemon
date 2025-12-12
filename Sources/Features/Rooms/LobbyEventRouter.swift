@@ -59,15 +59,18 @@ class LobbyEventRouter: ObservableObject {
         NSLog("🔒 Received Room Closed signal from Host")
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
         
-        // Global Alert + Immediate Exit
-        viewModel.appState?.activeAlert = AppState.AppAlert(
-             title: "Room Closed",
-             message: "The host has left the room."
-        )
-        
-        viewModel.disconnect()
-        viewModel.appState?.currentView = .browse
-        viewModel.appState?.restoreWindowFromLobby()
+        // FIX: Don't show alert for the host who initiated the leave
+        if !viewModel.isHost {
+            // Global Alert + Immediate Exit
+            viewModel.appState?.activeAlert = AppState.AppAlert(
+                 title: "Room Closed",
+                 message: "The host has left the room."
+            )
+            
+            viewModel.disconnect()
+            viewModel.appState?.currentView = .browse
+            viewModel.appState?.restoreWindowFromLobby()
+        }
     }
     
     private func handleLobbyCommand(_ chatText: String, syncMessage: SyncMessage) async {

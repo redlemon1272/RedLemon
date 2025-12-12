@@ -432,24 +432,48 @@ actor StreamResolver {
         }
         
         // Sort
+        // Sort
         filtered.sort { s1, s2 in
-            // Logic: Embedded English Subs (if Movie) > Seeders > Others
-            
-            if preferMultiSubMovies {
-                let s1Lower = s1.title.lowercased()
-                let s2Lower = s2.title.lowercased()
+            func getScore(_ stream: Stream) -> Int {
+                var score = 0
+                let title = stream.title.lowercased()
                 
-                // Prioritize streams that explicitly say they have english subs
-                // e.g. "sub eng", "eng sub", "subbed"
-                let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed"]
-                let s1HasSub = subIndicators.contains { s1Lower.contains($0) }
-                let s2HasSub = subIndicators.contains { s2Lower.contains($0) }
-                
-                if s1HasSub != s2HasSub {
-                    return s1HasSub // True comes first
+                // 1. Explicit English (Highest Priority)
+                let englishIndicators = ["english", ".eng.", " eng ", "-eng-"]
+                if englishIndicators.contains(where: { title.contains($0) }) {
+                    score += 20
                 }
+                
+                // 2. Reputable Scene Groups (Boost)
+                let goodGroups = ["ntb", "flux", "galaxyrg", "rarbg", "yts", "mx"]
+                if goodGroups.contains(where: { title.contains($0) }) {
+                    score += 10
+                }
+                
+                // 3. Penalize "MULTi" (Often defaults to foreign audio or has poor subs)
+                if title.contains("multi") {
+                    score -= 10
+                }
+                
+                // 4. Secondary priority for embedded subs (Movies)
+                if preferMultiSubMovies {
+                    let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed"]
+                    if subIndicators.contains(where: { title.contains($0) }) {
+                        score += 5
+                    }
+                }
+                
+                return score
             }
             
+            let score1 = getScore(s1)
+            let score2 = getScore(s2)
+            
+            if score1 != score2 {
+                return score1 > score2
+            }
+            
+            // Fallback to Seeders
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
             return seeders1 > seeders2
@@ -535,7 +559,8 @@ actor StreamResolver {
             " vf2 ", ".vf2.", "-vf2-",         // Version Française 2
             "vostfr",                             // Version Originale Sous-Titrée FRançais
             "truefrench",                         // TrueFrench (French audio)
-            "rififi"                              // Known French release group
+            "rififi",                             // Known French release group
+            "fidelio"                             // Known French release group
         ]
         let hasFrenchAudio = frenchAudioIndicators.contains { lower.contains($0) }
         

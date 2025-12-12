@@ -28,7 +28,7 @@ class MPVWrapper: ObservableObject {
     private var isInitialized = false
     private var eventPollingTask: Task<Void, Never>?
     private var timeUpdateTask: Task<Void, Never>?
-    // Memory monitoring removed to prevent crashes
+
 
     // ✅ Throttling Properties
     private var lastUIUpdateTime: Date = .distantPast
@@ -43,8 +43,6 @@ class MPVWrapper: ObservableObject {
             print("❌ Failed to create MPV handle")
             return
         }
-
-        print("✅ MPV handle created")
 
         print("✅ MPV handle created")
     }
@@ -131,8 +129,7 @@ class MPVWrapper: ObservableObject {
         mpv_observe_property(handle, 0, "paused-for-cache", MPV_FORMAT_FLAG)
     }
 
-    // MARK: - Smart Memory Monitoring (Removed)
-    // Memory monitoring logic removed to prevent race conditions during playback transitions
+
 
     // MARK: - Render Context Setup (IINA Implementation)
 
@@ -222,7 +219,6 @@ class MPVWrapper: ObservableObject {
             isBuffering = true
             isFileLoaded = false
             // Natural cleanup point - video starting
-            // Cleanup removed to prevent crash
             // Reset finished state on new file start
             playbackFinished = false
         case MPV_EVENT_FILE_LOADED:
@@ -239,7 +235,6 @@ class MPVWrapper: ObservableObject {
         case MPV_EVENT_END_FILE:
             isPlaying = false
             // Perfect time for cleanup - video ended naturally
-            // Cleanup removed to prevent crash
 
             // Check if it was EOF (natural finish) using the event data
             if let data = eventPtr.pointee.data?.assumingMemoryBound(to: mpv_event_end_file.self) {
@@ -461,7 +456,6 @@ class MPVWrapper: ObservableObject {
         isPlaying = false
 
         // Safe cleanup point during pause
-        // Cleanup removed to prevent crash
     }
 
     func togglePlayPause() { isPlaying ? pause() : play() }
@@ -472,7 +466,6 @@ class MPVWrapper: ObservableObject {
         mpv_set_property(handle, "time-pos", MPV_FORMAT_DOUBLE, &t)
 
         // Natural cleanup point during seek
-        // Cleanup removed to prevent crash
     }
 
     func seekRelative(seconds: Double) {

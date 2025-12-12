@@ -74,8 +74,13 @@ class LobbyViewModel: ObservableObject {
     // MARK: - Composition / Managers
     // Phase 1: Chat Logic
     lazy var chatManager: LobbyChatManager = {
-        LobbyChatManager(sendCallback: { [weak self] text in
-             await self?.performSendChatMessage(text)
+        LobbyChatManager(sendMessageHandler: { [weak self] syncMessage in
+             guard let self = self,
+                   let manager = self.realtimeManager,
+                   await manager.isRealtimeConnected() else {
+                 throw NSError(domain: "LobbyViewModel", code: 1, userInfo: [NSLocalizedDescriptionKey: "Realtime not connected"])
+             }
+             try await manager.sendSyncMessage(syncMessage)
         })
     }()
     
@@ -202,105 +207,9 @@ class LobbyViewModel: ObservableObject {
             self.realtimeManager = RealtimeChannelManager(realtimeClient: SupabaseClient.shared.realtimeClient)
         }
 
-        // Set up presence callback
-        await realtimeManager?.setPresenceCallback { [weak self] action, userId, metadata in
-            Task { @MainActor [weak self] in
-                guard let self = self else { return }
-
-                // Update participants list
-                // Update participants list
-                switch action {
-                case .join:
-                    // RESOLVE TRUE USER ID:
-                    // The `userId` param here is the Presence Ref (Connection ID), NOT the user's UUID.
-                    // We must extract the actual user_id from metadata if available.
-                    var trueUserId = userId
-                    if let dict = metadata as? [String: Any],
-                       let metaUserId = dict["user_id"] as? String {
-                        trueUserId = metaUserId
-                    }
-
-                    let normalizedID = trueUserId.lowercased()
-                    
-                    // Determine if we should show a notification (New Connection)
-                    // We use `connectedUserIds` to track distinct active sessions
-                    // This creates a notification even if the user is already in `participants` (e.g. from DB poll)
-                    let isNewConnection = !self.connectedUserIds.contains(normalizedID)
-                    if isNewConnection {
-                        self.connectedUserIds.insert(normalizedID)
-                    }
-                    
-                    // Check if already exists (CASE INSENSITIVE)
-                    if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                        self.participants[index].joinedAt = Date()
-                        // Use phx_ref from metadata if available
-                        let newPhxRef = metadata?["phx_ref"] as? String ?? userId
-                        self.participants[index].phxRef = newPhxRef // Update Connection ID
-                        // Also update metadata if needed
-                        if let dict = metadata as? [String: Any],
-                           let username = dict["username"] as? String {
-                             self.participants[index].name = username
-                            
-                            // If it's a new Realtime connection, show the toast even if they were in DB list
-                            if isNewConnection {
-                                self.addMessage(.userJoined, userName: username)
-                            }
-                        }
-                    } else {
-                        // New user
-                        // Try to get username from metadata
-                        var username = "Guest"
-                        if let dict = metadata as? [String: Any],
-                           let name = dict["username"] as? String {
-                            username = name
-                        }
-                        
-                        let phxRefVal = metadata?["phx_ref"] as? String ?? userId
-                        
-                        let newParticipant = Participant(
-                            id: normalizedID,
-                            name: username,
-                            isHost: false, // Default false, will be corrected by DB poll if needed
-                            isReady: false,
-                            joinedAt: Date(),
-                            phxRef: phxRefVal // Store Connection ID
-                        )
-                        self.participants.append(newParticipant)
-                        if isNewConnection {
-                            self.addMessage(.userJoined, userName: username)
-                        }
-                    }
-                case .leave:
-                    // RESOLVE TRUE USER ID (Same as Join)
-                    var trueUserId = userId
-                    if let dict = metadata as? [String: Any],
-                       let metaUserId = dict["user_id"] as? String {
-                        trueUserId = metaUserId
-                    }
-                    let normalizedID = trueUserId.lowercased()
-
-                    // Defer leave processing to avoid false positives from metadata updates
-                    Task { @MainActor in
-                        try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
-
-                        // Only remove if they're still not in participants (actual leave)
-                        // If they rejoined (metadata update), they'll already be in the list
-                        // CASE INSENSITIVE CHECK
-                        if let index = self.participants.firstIndex(where: { $0.id.lowercased() == normalizedID }) {
-                            // Double-check they're actually gone by verifying no recent join
-                            let participant = self.participants[index]
-                            let timeSinceJoin = Date().timeIntervalSince(participant.joinedAt)
-
-                            // If they joined recently (\u003c 1 second), it's a metadata update, not a real leave
-                            if timeSinceJoin > 1.0 {
-                                self.participants.remove(at: index)
-                                self.connectedUserIds.remove(normalizedID) // Remove from tracking
-                                self.addMessage(.userLeft, userName: participant.name)
-                            }
-                        }
-                    }
-                }
-            }
+        // Set up presence callback (Delegated to Manager)
+        if let manager = realtimeManager {
+            await presenceManager.setupPresence(realtimeManager: manager)
         }
 
         // Set up connection state callback
@@ -631,60 +540,23 @@ class LobbyViewModel: ObservableObject {
 
     func sendChatMessage() {
         Task {
-            await chatManager.send()
+            // Always use actual user's username from AppState, with host as fallback
+            let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
+            
+            // Validate user ID exists
+            guard (isHost ? UUID(uuidString: room.hostId) != nil : appState?.currentUserId != nil) else {
+                NSLog("⚠️ Cannot send message: No user ID")
+                return
+            }
+            
+            await chatManager.send(senderId: participantId, username: username)
         }
     }
 
     // Extracted logic for network transmission (called by ChatManager callback)
-    private func performSendChatMessage(_ text: String) async {
-        let messageText = text.trimmingCharacters(in: .whitespaces)
-        guard !messageText.isEmpty else { return }
-        
-        // Always use actual user's username from AppState, with host as fallback
-        let username = appState?.currentUsername ?? (isHost ? (room.hostName ?? "Host") : "Guest")
-        
-        // Debug logging to track username assignment
-        NSLog("🔍 Chat message - isHost: \(isHost), appStateUsername: \(appState?.currentUsername ?? "nil"), room.hostName: \(room.hostName ?? "nil"), finalUsername: \(username)")
 
-        // Validate user ID exists
-        guard (isHost ? UUID(uuidString: room.hostId) != nil : appState?.currentUserId != nil) else {
-            NSLog("⚠️ Cannot send message: No user ID")
-            return
-        }
-        
-        // Add message locally for instant feedback (optimistic UI)
-        chatManager.addLocalMessage(username: username, text: messageText)
-        NSLog("💬 Added own message locally: '\(messageText)'")
 
-        // Send via Realtime only (no database involvement)
-        Task { [weak self] in
-            guard let self = self else { return }
 
-            let syncMsg = SyncMessage(
-                type: .chat,
-                timestamp: Date().timeIntervalSince1970,
-                isPlaying: nil,
-                senderId: self.participantId,
-                chatText: messageText,
-                chatUsername: username
-            )
-
-            do {
-                if let manager = self.realtimeManager, await manager.isRealtimeConnected() {
-                    try await manager.sendSyncMessage(syncMsg)
-                    NSLog("📡 Chat message sent via Realtime only")
-                } else {
-                    NSLog("⚠️ Realtime not connected, message not sent")
-                    // Could add user-facing error here if needed
-                }
-            } catch {
-                NSLog("❌ Failed to send chat message via Realtime: \(error)")
-                // Could add user-facing error here if needed
-            }
-        }
-
-        print("💬 Lobby: Sent message via Realtime")
-    }
 
 
     func addMessage(_ type: LobbyMessageType, userName: String, data: [String: String] = [:]) {

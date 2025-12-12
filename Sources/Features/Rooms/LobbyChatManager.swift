@@ -50,23 +50,67 @@ class LobbyChatManager: ObservableObject {
     private let maxMessages = 150
     
     // Dependencies
-    private let sendCallback: (String) async -> Void
+    // The handler is responsible for the actual network transmission
+    private let sendMessageHandler: (SyncMessage) async throws -> Void
     
-    init(sendCallback: @escaping (String) async -> Void) {
-        self.sendCallback = sendCallback
+    init(sendMessageHandler: @escaping (SyncMessage) async throws -> Void) {
+        self.sendMessageHandler = sendMessageHandler
     }
     
     // MARK: - Actions
     
-    func send() async {
+    func send(senderId: String, username: String) async {
         let trimmed = chatInput.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
         
         // Optimistic clear
         chatInput = ""
         
-        // Delegate actual sending to the owner (who handles Realtime plumbing)
-        await sendCallback(trimmed)
+        // Add message locally for instant feedback (optimistic UI)
+        addLocalMessage(username: username, text: trimmed)
+        
+        // Construct SyncMessage
+        let syncMsg = SyncMessage(
+            type: .chat,
+            timestamp: Date().timeIntervalSince1970,
+            isPlaying: nil,
+            senderId: senderId,
+            chatText: trimmed,
+            chatUsername: username
+        )
+        
+        // Delegate actual sending to the owner
+        do {
+            try await sendMessageHandler(syncMsg)
+            NSLog("📡 ChatManager: Chat message sent via Realtime")
+        } catch {
+            NSLog("❌ ChatManager: Failed to send chat message: \(error)")
+        }
+    }
+    
+    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>) {
+        guard let validSenderId = senderId else { return }
+        
+        // Mute check
+        if mutedUserIds.contains(validSenderId) {
+             // System messages (LOBBY_*) should be handled by Router before calling this
+             return
+        }
+        
+        // Skip own messages (optimistically added)
+        if validSenderId == currentUserId {
+            return
+        }
+
+        let chatMessage = ChatMessage(
+            id: UUID().uuidString,
+            username: username ?? "Unknown",
+            text: chatText,
+            timestamp: Date(timeIntervalSince1970: timestamp)
+        )
+        
+        addChatMessage(chatMessage)
+        // print("💬 ChatManager: Received chat: [\(username ?? "Unknown")] \(chatText)")
     }
     
     func addSystemMessage(_ type: LobbyMessageType, userName: String, data: [String: String] = [:]) {
@@ -98,7 +142,7 @@ class LobbyChatManager: ObservableObject {
     }
     
     // Helper to add a local optimistic message
-    func addLocalMessage(username: String, text: String) {
+    public func addLocalMessage(username: String, text: String) {
         let msg = ChatMessage(
             id: UUID().uuidString,
             username: username,

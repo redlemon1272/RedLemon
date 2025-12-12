@@ -138,7 +138,7 @@ struct MPVPlayerView: View {
                     if showExitButton {
                         VStack {
                             HStack {
-                                exitButton
+                                ExitButton(viewModel: viewModel)
                                 Spacer()
                             }
                             Spacer()
@@ -149,8 +149,16 @@ struct MPVPlayerView: View {
 
                     // Player controls (bottom bar)
                     if showControls && !viewModel.isLoading {
-                        playerControlsBar
-                            .zIndex(99)
+                        PlayerControlsView(
+                            viewModel: viewModel,
+                            streamQuality: streamQuality,
+                            sourceQuality: sourceQuality,
+                            showSubtitleMenu: $showSubtitleMenu,
+                            showAudioMenu: $showAudioMenu,
+                            showPlaylistMenu: $showPlaylistMenu,
+                            showControls: showControls
+                        )
+                        .zIndex(99)
                     }
 
                     // Extracted menus (Shields, Subtitles, Playlist, Chat Toggle)
@@ -424,428 +432,38 @@ struct MPVPlayerView: View {
             ))
     }
 
-    private var loadingOverlay: some View {
-        VStack(spacing: 20) {
-            Spacer()
 
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
-
-            Text("Loading stream...")
-                .font(.headline)
-                .foregroundColor(.white.opacity(0.8))
-
-            if !viewModel.streamTitle.isEmpty {
-                Text(viewModel.streamTitle)
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.6))
-                    .padding(.horizontal, 40)
-                    .multilineTextAlignment(.center)
-            }
-
-            Spacer()
-            Spacer()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.3))
-        .transition(.opacity)
-    }
 
     @ViewBuilder
     private var overlays: some View {
         // Logo overlay (during loading)
         if viewModel.isLoading, let logoURL = viewModel.logoURL {
-            AsyncImage(url: URL(string: logoURL)) { phase in
-                if case .success(let image) = phase {
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxWidth: 400)
-                        .shadow(color: .black.opacity(0.5), radius: 20, x: 0, y: 10)
-                }
-            }
-            .transition(.opacity.combined(with: .scale))
+            HeroLogoView(logoURL: logoURL)
         }
 
         // Loading overlay
         if viewModel.isLoading {
-            loadingOverlay
+            LoadingOverlay(streamTitle: viewModel.streamTitle)
         }
 
         // Waiting for guests overlay (Post-Load Ready Gate)
         if viewModel.showWaitingForGuests {
-            waitingForGuestsOverlay
+             WaitingGateView(isHost: viewModel.isWatchPartyHost)
                 .zIndex(100)
         }
         
 
     }
 
-    private var waitingForGuestsOverlay: some View {
-        VStack(spacing: 20) {
-            Spacer()
-
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                .scaleEffect(1.5)
-
-            Text(viewModel.isWatchPartyHost ? "Waiting for guests to load..." : "Waiting for host to start...")
-                .font(.headline)
-                .foregroundColor(.white.opacity(0.9))
-                .padding(.horizontal, 20)
-                .padding(.vertical, 10)
-                .background(Color.black.opacity(0.6))
-                .cornerRadius(10)
-
-            if viewModel.isWatchPartyHost {
-                Text("Playback will start automatically when everyone is ready")
-                    .font(.caption)
-                    .foregroundColor(.white.opacity(0.6))
-            }
-
-            Spacer()
-            Spacer()
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.black.opacity(0.4))
-        .transition(.opacity)
-    }
-
-    private var exitButton: some View {
-        // Logic:
-        // 1. Event -> "Exit Event" (Standard behavior)
-        // 2. Watch Party Host -> "Back to Lobby" (Triggers synchronized return)
-        // 3. Watch Party Guest / Other -> "Exit Room" (Standard behavior)
-        
-        let isEvent = appState.isEventPlayback == true
-        let isHost = viewModel.isWatchPartyHost
-        
-        return Button(action: {
-            Task {
-                if !isEvent && isHost {
-                     // Trigger synchronized return
-                     viewModel.triggerReturnToLobby()
-                } else {
-                     // Standard exit
-                     await appState.exitPlayer()
-                }
-            }
-        }) {
-            HStack(spacing: 6) {
-                Image(systemName: (!isEvent && isHost) ? "arrow.turn.up.left" : "arrow.left.circle.fill")
-                    .font(.system(size: 14))
-                // Note: User requested "Back to Lobby" for hosts, "Exit Room" for guests.
-                // Events logic remains "Exit Room" (or Event)
-                Text((!isEvent && isHost) ? "Back to Lobby" : "Exit Room")
-                    .font(.system(size: 13, weight: .medium))
-            }
-            .foregroundColor(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 7)
-            .background(.ultraThinMaterial)
-            .clipShape(Capsule())
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding(12)
-    }
 
 
 
 
 
-    private var playerControlsBar: some View {
-        VStack(spacing: 0) {
-            Spacer()
-
-            VStack(spacing: 3) {
-                // Title bar with poster art
-                HStack(spacing: 20) {
-                    // Poster art
-                    if let posterURL = viewModel.posterURL {
-                        let fullURL = posterURL.starts(with: "http") ? posterURL : "https://image.tmdb.org/t/p/original\(posterURL)"
-                        AsyncImage(url: URL(string: fullURL)) { phase in
-                            switch phase {
-                            case .success(let image):
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 95, height: 142)
-                                    .clipShape(RoundedRectangle(cornerRadius: 12))
-                                    .shadow(color: .black.opacity(0.5), radius: 10, y: 5)
-                            default:
-                                RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.white.opacity(0.1))
-                                    .frame(width: 95, height: 142)
-                            }
-                        }
-                    }
-
-                    // Title text with quality badges
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(viewModel.streamTitle)
-                            .font(.system(size: 32, weight: .bold))
-                            .foregroundColor(.white)
-                            .lineLimit(2)
-                            .shadow(color: .black.opacity(0.5), radius: 8, y: 4)
-
-                        // Quality badges
-                        HStack(spacing: 8) {
-                            if !streamQuality.isEmpty {
-                                Text(streamQuality)
-                                    .font(.system(size: 13, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 4)
-                                    .background(Color.blue.opacity(0.8))
-                                    .cornerRadius(6)
-                            }
-
-                            if !sourceQuality.isEmpty && sourceQuality != "Unknown" {
-                                Text(sourceQuality)
-                                    .font(.system(size: 13, weight: .semibold))
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 4)
-                                    .background(sourceQualityBackgroundColor)
-                                    .cornerRadius(6)
-                            }
-                        }
-                    }
-
-                    Spacer()
-                }
-                .padding(.horizontal, 10)
-                .padding(.top, 8)
-                .padding(.bottom, 6)
-
-                // Seek bar with time indicators
-                VStack(spacing: 2) {
-                    // Seek bar - only show if solo or host
-                    if !viewModel.isInWatchParty || viewModel.isWatchPartyHost {
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                // Background track
-                                Capsule()
-                                    .fill(Color.white.opacity(0.25))
-                                    .frame(height: 3)
-
-                                // Progress
-                                Capsule()
-                                    .fill(Color.white)
-                                    .frame(width: progressWidth(in: geometry.size.width), height: 3)
-
-                                // Scrubber handle
-                                Circle()
-                                    .fill(Color.white)
-                                    .frame(width: 10, height: 10)
-                                    .shadow(color: .black.opacity(0.3), radius: 3)
-                                    .offset(x: progressWidth(in: geometry.size.width) - 5)
-                            }
-                            .gesture(
-                                DragGesture(minimumDistance: 0)
-                                    .onChanged { value in
-                                        let progress = max(0, min(1, value.location.x / geometry.size.width))
-                                        let seekTime = Double(progress) * viewModel.mpvWrapper.duration
-                                        viewModel.mpvWrapper.seek(to: seekTime)
-                                    }
-                            )
-                        }
-                        .frame(height: 8)
-                        .padding(.horizontal, 10)
-                    } else {
-                        // Guest view - show progress bar without interaction
-                        GeometryReader { geometry in
-                            ZStack(alignment: .leading) {
-                                // Background track
-                                Capsule()
-                                    .fill(Color.white.opacity(0.25))
-                                    .frame(height: 3)
-
-                                // Progress (read-only)
-                                Capsule()
-                                    .fill(Color.white.opacity(0.6))
-                                    .frame(width: progressWidth(in: geometry.size.width), height: 3)
-                            }
-                        }
-                        .frame(height: 8)
-                        .padding(.horizontal, 10)
-                    }
-
-                    // Time display - ENLARGED and more visible
-                    HStack {
-                        Text(formatTime(viewModel.mpvWrapper.currentTime))
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(.white)
-                            .monospacedDigit()
-                            .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
-
-                        Spacer()
-
-                        Text(formatTime(viewModel.mpvWrapper.duration))
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundColor(.white.opacity(0.85))
-                            .monospacedDigit()
-                            .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
-                    }
-                    .padding(.horizontal, 10)
-                }
-
-                // Control buttons - all on left side
-                HStack(spacing: 8) {
-                    // Sync Status Pill (Watch Party Only)
-                    if viewModel.isInWatchParty, let syncStatus = viewModel.syncStatus {
-                        Text(syncStatus)
-                            .font(.system(size: 11, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Color.black.opacity(0.4))
-                            .cornerRadius(6)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 6)
-                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                            )
-                            .padding(.trailing, 4)
-                    }
-                    // Play/Pause button - only for solo or host
-                    if !viewModel.isInWatchParty || viewModel.isWatchPartyHost {
-                        Button(action: {
-                            viewModel.mpvWrapper.togglePlayPause()
-                        }) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.white.opacity(0.2))
-                                    .frame(width: 40, height: 40)
-
-                                Image(systemName: viewModel.mpvWrapper.isPlaying ? "pause.fill" : "play.fill")
-                                    .font(.system(size: 16, weight: .semibold))
-                                    .foregroundColor(.white)
-                            }
-                        }
-                        .buttonStyle(.plain)
-                    }
-
-                    // Volume control
-                    Button(action: {
-                        let currentVolume = viewModel.mpvWrapper.volume
-                        let newVolume = currentVolume == 0 ? 50 : (currentVolume < 50 ? 75 : (currentVolume < 75 ? 100 : 0))
-                        viewModel.mpvWrapper.setVolume(newVolume)
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.white.opacity(0.2))
-                                .frame(width: 40, height: 40)
-
-                            Image(systemName: volumeIcon(viewModel.mpvWrapper.volume))
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .buttonStyle(.plain)
-
-                    // Simple subtitle button
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            showSubtitleMenu.toggle()
-                        }
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(Color.white.opacity(0.2))
-                                .frame(width: 40, height: 40)
-
-                            Image(systemName: "captions.bubble.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .buttonStyle(.plain)
-
-                    // Audio button
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            showAudioMenu.toggle()
-                            // Update tracks when menu opens
-                            if showAudioMenu {
-                                viewModel.updateAudioTracks()
-                            }
-                        }
-                    }) {
-                        ZStack {
-                            Circle()
-                                .fill(showAudioMenu ? Color.white.opacity(0.3) : Color.white.opacity(0.2))
-                                .frame(width: 40, height: 40)
-
-                            Image(systemName: "waveform.circle.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                        }
-                    }
-                    .buttonStyle(.plain)
 
 
 
-                    // Playlist Button
-                    // Playlist Button
-                    PlaylistButton(showPlaylistMenu: $showPlaylistMenu)
 
-                    Spacer()
-                }
-                .padding(.horizontal, 10)
-                .padding(.bottom, 5)
-            }
-            .padding(.horizontal, 40)
-            .padding(.bottom, 16)
-            .transition(.opacity.combined(with: .move(edge: .bottom)))
-            .animation(.easeInOut(duration: 0.25), value: showControls)
-        }
-    }
-
-    private func progressWidth(in totalWidth: CGFloat) -> CGFloat {
-        guard viewModel.mpvWrapper.duration > 0 else { return 0 }
-        return totalWidth * CGFloat(viewModel.mpvWrapper.currentTime / viewModel.mpvWrapper.duration)
-    }
-
-    private func formatTime(_ seconds: Double) -> String {
-        let totalSeconds = Int(seconds)
-        let hours = totalSeconds / 3600
-        let minutes = (totalSeconds % 3600) / 60
-        let secs = totalSeconds % 60
-
-        if hours > 0 {
-            return String(format: "%d:%02d:%02d", hours, minutes, secs)
-        } else {
-            return String(format: "%d:%02d", minutes, secs)
-        }
-    }
-
-    private func volumeIcon(_ volume: Int) -> String {
-        if volume == 0 {
-            return "speaker.slash.fill"
-        } else if volume < 33 {
-            return "speaker.wave.1.fill"
-        } else if volume < 66 {
-            return "speaker.wave.2.fill"
-        } else {
-            return "speaker.wave.3.fill"
-        }
-    }
-
-    private var sourceQualityBackgroundColor: Color {
-        switch sourceQuality {
-        case "BluRay":
-            return Color.blue.opacity(0.8)
-        case "WEB-DL", "WEBRip":
-            return Color.green.opacity(0.8)
-        case "CAM", "TS":
-            return Color.red.opacity(0.8)
-        case "HDTV", "DVDRip":
-            return Color.orange.opacity(0.8)
-        default:
-            return Color.gray.opacity(0.8)
-        }
-    }
 
     private var fullSubtitleMenu: some View {
         VStack(spacing: 16) {
@@ -1396,157 +1014,4 @@ struct MPVPlayerView_Previews: PreviewProvider {
 
 // MARK: - Playlist Subviews
 
-struct PlaylistButton: View {
-    @EnvironmentObject var appState: AppState
-    @Binding var showPlaylistMenu: Bool
-    
-    var body: some View {
-        content
-    }
 
-    @ViewBuilder
-    private var content: some View {
-        if let room = appState.currentWatchPartyRoom, let playlist = room.playlist, !playlist.isEmpty {
-            Button(action: {
-                withAnimation(.easeInOut(duration: 0.15)) {
-                    showPlaylistMenu.toggle()
-                }
-            }) {
-                ZStack {
-                    Circle()
-                        .fill(Color.white.opacity(0.2))
-                        .frame(width: 40, height: 40)
-                    
-                    Image(systemName: "list.and.film")
-                        .font(.system(size: 16))
-                        .foregroundColor(.white)
-                }
-            }
-            .buttonStyle(.plain)
-        }
-    }
-}
-
-// MARK: - Playlist Modal View
-
-struct PlaylistModalView: View {
-    let room: WatchPartyRoom
-    let isHost: Bool
-    @Binding var showPlaylistMenu: Bool
-    
-    var body: some View {
-        VStack(spacing: 16) {
-            // Header
-            HStack {
-                Text("Playlist")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(.primary)
-
-                Spacer()
-
-                Text("Click outside to close")
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundColor(.secondary)
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 20)
-
-            // Playlist Items
-            if let playlist = room.playlist, !playlist.isEmpty {
-                ScrollView(.vertical, showsIndicators: true) {
-                    VStack(spacing: 12) {
-                        ForEach(playlist.indices, id: \.self) { index in
-                            let item = playlist[index]
-                            let isCurrent = index == room.currentPlaylistIndex
-                            
-                            Button(action: {
-                                // Only host can change playlist item
-                                if isHost && index != room.currentPlaylistIndex {
-                                    // TODO: Implement playlist jump logic
-                                    print("Playlist item tapped: \(index)")
-                                }
-                            }) {
-                                HStack(spacing: 12) {
-                                    // Poster
-                                    if let poster = item.mediaItem.poster {
-                                        AsyncImage(url: URL(string: poster)) { phase in
-                                            if case .success(let image) = phase {
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fill)
-                                                    .frame(width: 40, height: 60)
-                                                    .cornerRadius(4)
-                                                    .clipped()
-                                            } else {
-                                                Rectangle()
-                                                    .fill(Color.gray.opacity(0.3))
-                                                    .frame(width: 40, height: 60)
-                                                    .cornerRadius(4)
-                                            }
-                                        }
-                                    } else {
-                                        Rectangle()
-                                            .fill(Color.gray.opacity(0.3))
-                                            .frame(width: 40, height: 60)
-                                            .cornerRadius(4)
-                                    }
-                                    
-                                    // Title info
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text(item.displayTitle)
-                                            .font(.system(size: 14, weight: isCurrent ? .bold : .medium))
-                                            .foregroundColor(isCurrent ? .green : .primary)
-                                            .lineLimit(2)
-                                            .multilineTextAlignment(.leading)
-                                        
-
-                                        if isCurrent {
-                                            Text("Now Playing")
-                                                .font(.system(size: 12))
-                                                .foregroundColor(.green.opacity(0.8))
-                                        }
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    // Playing Indicator
-                                    if isCurrent {
-                                        Image(systemName: "play.circle.fill")
-                                            .font(.system(size: 20))
-                                            .foregroundColor(.green)
-                                    } else if index < room.currentPlaylistIndex {
-                                        Image(systemName: "checkmark.circle")
-                                            .font(.system(size: 16))
-                                            .foregroundColor(.secondary)
-                                    }
-                                }
-                                .padding(8)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .fill(isCurrent ? Color.green.opacity(0.1) : Color.primary.opacity(0.05))
-                                )
-                                .contentShape(Rectangle())
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 20)
-                }
-                .frame(maxHeight: 500)
-            } else {
-                 Text("No playlist items")
-                    .foregroundColor(.secondary)
-                    .padding(30)
-            }
-        }
-        .frame(width: 450)
-        .background(.regularMaterial)
-        .cornerRadius(16)
-        .shadow(radius: 20)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.white.opacity(0.1), lineWidth: 1)
-        )
-    }
-}

@@ -43,23 +43,14 @@ class LobbyEventRouter: ObservableObject {
     private func handleRegularChatMessage(_ chatText: String, syncMessage: SyncMessage) {
         guard let viewModel = viewModel else { return }
         
-        // CRITICAL: Skip messages from self (already added locally when sent)
-        // NSLog("🔍 Chat message received - senderId: '\(syncMessage.senderId ?? "nil")', participantId: '\(viewModel.participantId)'")
-
-        if syncMessage.senderId == viewModel.participantId {
-            // NSLog("💬 Skipping own message (already displayed locally): '\(chatText)'")
-            return
-        }
-
-        // NSLog("💬 Adding received message from other participant: '\(chatText)'")
-        let chatMessage = ChatMessage(
-            id: UUID().uuidString,
-            username: syncMessage.chatUsername ?? "Unknown",
-            text: chatText,
-            timestamp: Date(timeIntervalSince1970: syncMessage.timestamp)
+        viewModel.chatManager.handleIncomingChat(
+            chatText: chatText,
+            senderId: syncMessage.senderId,
+            username: syncMessage.chatUsername,
+            timestamp: syncMessage.timestamp,
+            currentUserId: viewModel.participantId,
+            mutedUserIds: viewModel.mutedUserIds
         )
-        viewModel.chatManager.addChatMessage(chatMessage)
-        print("💬 Lobby chat received: [\(syncMessage.chatUsername ?? "Unknown")] \(chatText)")
     }
     
     private func handleRoomClosed() async {

@@ -423,7 +423,6 @@ actor StreamResolver {
              // Special check for TS files (word boundary or file extension only)
              // This prevents false positives like "Nigh(ts) at Freddy's"
              let tsRegex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$")
-             let range = NSRange(location: 0, length: titleLower.utf16.count)
              if let match = tsRegex?.firstMatch(in: titleLower, options: [], range: range) {
                   print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (TS): \(stream.title)")
                   return false

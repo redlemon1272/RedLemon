@@ -120,7 +120,7 @@ struct SettingsView: View {
             RestoreAccountView()
         }
         .sheet(isPresented: $showPaymentGate) {
-            PaymentGateView()
+            PremiumPaymentView()
         }
     }
 
@@ -335,7 +335,7 @@ struct SettingsView: View {
                     Image(systemName: "bolt.fill")
                         .font(.caption)
                         .foregroundColor(.yellow)
-                    Text("Bitcoin Lightning Network")
+                    Text("Crypto (BTC, ETH, SOL)")
                         .font(.caption.weight(.medium))
                         .foregroundColor(.secondary)
                 }

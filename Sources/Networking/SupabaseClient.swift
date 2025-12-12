@@ -762,6 +762,39 @@ class SupabaseClient: RoomManager, UserManager {
         )
         return try jsonDecoder.decode([ContentPopularityStat].self, from: data)
     }
+
+    // MARK: - Payments (Edge Functions)
+
+    /// Assign a payment address for the user
+    func assignPaymentAddress(chain: String) async throws -> String {
+        let response = try await functions.invoke(
+            "assign-address",
+            options: FunctionInvokeOptions(body: ["chain": chain])
+        )
+        
+        let result = try JSONDecoder().decode(PaymentAssignment.self, from: response)
+        
+        if let error = result.error {
+            throw SupabaseError.serverError(error)
+        }
+        
+        guard let address = result.address else {
+            throw SupabaseError.serverError("No address returned")
+        }
+        
+        return address
+    }
+    
+    /// Check payment status
+    func checkPaymentStatus() async throws -> Bool {
+        let response = try await functions.invoke(
+            "check-payment",
+            options: FunctionInvokeOptions(body: [:]) // Body not strictly needed as it uses Auth context
+        )
+        
+        let result = try JSONDecoder().decode(PaymentCheckResult.self, from: response)
+        return result.premium ?? false
+    }
 }
 
 struct SupabaseUserID: Codable {
@@ -790,6 +823,7 @@ struct SupabaseUser: Codable {
     let createdAt: Date
     let lastSeen: Date
     let isAdmin: Bool?
+    let isPremium: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id, username
@@ -798,7 +832,23 @@ struct SupabaseUser: Codable {
         case createdAt = "created_at"
         case lastSeen = "last_seen"
         case isAdmin = "is_admin"
+        case isPremium = "is_premium"
     }
+}
+
+// MARK: - Payment Models
+
+struct PaymentAssignment: Codable {
+    let success: Bool
+    let address: String?
+    let message: String?
+    let error: String?
+}
+
+struct PaymentCheckResult: Codable {
+    let success: Bool
+    let premium: Bool?
+    let message: String?
 }
 
 struct AppLog: Codable, Identifiable {

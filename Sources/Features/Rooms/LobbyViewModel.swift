@@ -215,6 +215,7 @@ class LobbyViewModel: ObservableObject {
     }
 
     deinit {
+        print("☠️ LobbyViewModel deinit")
         countdownTask?.cancel()
 
         // Capture client for async cleanup
@@ -495,9 +496,14 @@ class LobbyViewModel: ObservableObject {
         // Capture values locally (optional but safe)
         let roomId = self.room.id
         let isHost = self.isHost
-        let hostId = self.room.hostId
+        // let hostId = self.room.hostId // Unused
         let isLeavingExplicitly = self.isLeavingExplicitly
         let currentUserId = self.appState?.currentUserId
+
+        // Cleanup Realtime subscription to prevent "Zombie" listeners (e.g. Persistent DELETE events)
+        Task { [weak self] in
+            await self?.realtimeManager?.disconnect(leaveChannel: true, disconnectClient: false)
+        }
 
         Task {
             // Implicit strong capture of 'self' ensures ViewModel stays alive

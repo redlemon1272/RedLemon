@@ -348,6 +348,7 @@ actor RealtimeChannelManager: RealtimeService {
         userId = nil
         syncCallback = nil
         presenceCallback = nil
+        postgresCallback = nil // CRITICAL: Stop receiving DB changes
         connectionStateCallback = nil
 
         print("✅ Realtime channel cleanup complete")

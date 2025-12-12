@@ -286,7 +286,29 @@ main() {
     log_success "Build completed successfully"
     echo ""
 
-    echo ""
+    echo "🧪 Running filter tests..."
+    if swift test --filter StreamResolverFilterTests --quiet 2>&1 | grep -q "0 failures"; then
+        echo "✅ All filter tests passed"
+    else
+        echo "❌ Filter tests failed! Fix issues before starting app."
+        echo "   Run: swift test --filter StreamResolverFilterTests"
+        exit 1
+    fi
+
+    echo "🔨 Building RedLemon..."
+    swift build -c release
+
+    if [ $? -ne 0 ]; then
+        echo "❌ Build failed!"
+        exit 1
+    fi
+
+    echo "✅ Build successful!"
+    echo "🚀 Starting RedLemon..."
+
+    # Run the app
+    .build/release/RedLemon
+
     log_success "RedLemon is starting in PRODUCTION MODE!"
     echo ""
     echo "📊 Services:"

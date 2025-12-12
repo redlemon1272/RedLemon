@@ -267,7 +267,7 @@ class LobbyPresenceManager: ObservableObject {
         Task { [weak self] in
             guard let self = self, let viewModel = self.viewModel else { return }
             do {
-                try await SupabaseClient.shared.leaveRoom(
+                try await viewModel.dataService.leaveRoom(
                     roomId: viewModel.room.id,
                     userId: UUID(uuidString: participant.id) ?? UUID()
                 )
@@ -318,7 +318,7 @@ class LobbyPresenceManager: ObservableObject {
                 
                 if let userId = viewModel.appState?.currentUserId {
                     do {
-                        try await SupabaseClient.shared.sendHeartbeat(roomId: viewModel.room.id, userId: userId)
+                        try await viewModel.dataService.sendHeartbeat(roomId: viewModel.room.id, userId: userId)
                     } catch {
                         print("⚠️ Heartbeat failed: \(error)")
                     }
@@ -330,18 +330,18 @@ class LobbyPresenceManager: ObservableObject {
         }
     }
     
-    private func pollParticipants() async {
+    func pollParticipants() async {
         guard let viewModel = viewModel else { return }
         
         do {
-            let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: viewModel.room.id)
+            let roomParticipants = try await viewModel.dataService.getRoomParticipants(roomId: viewModel.room.id)
             
             var dbParticipants: [Participant] = []
             let currentParticipants = viewModel.participants
             
             for participant in roomParticipants {
                 var username = "User"
-                if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
+                if let user = try? await viewModel.dataService.getUserById(userId: participant.userId) {
                     username = user.username
                 }
                 
@@ -430,7 +430,7 @@ class LobbyPresenceManager: ObservableObject {
                          print("⚠️ Lobby: Host missing from DB participants list - attempting self-heal re-join")
                          if let userId = UUID(uuidString: viewModel.participantId) {
                              do {
-                                 try await SupabaseClient.shared.joinRoom(roomId: viewModel.room.id, userId: userId, isHost: true)
+                                 try await viewModel.dataService.joinRoom(roomId: viewModel.room.id, userId: userId, isHost: true)
                                  print("✅ Lobby: Host self-healed presence in DB")
                              } catch {
                                  print("❌ Lobby: Failed to self-heal host presence: \(error)")

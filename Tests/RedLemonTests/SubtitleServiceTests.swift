@@ -23,8 +23,8 @@ final class SubtitleServiceTests: XCTestCase {
     func testScanTracks() async {
         // Setup stub
         let tracks = [
-            SubtitleTrack(id: 1, lang: "en", title: "English"),
-            SubtitleTrack(id: 2, lang: "es", title: "Spanish")
+            SubtitleTrack(id: 1, lang: "en", title: "English", isExternal: false),
+            SubtitleTrack(id: 2, lang: "es", title: "Spanish", isExternal: false)
         ]
         mockController.stubbedSubtitleTracks = tracks
         mockController.stubbedCurrentSubtitleTrackID = 2
@@ -43,7 +43,7 @@ final class SubtitleServiceTests: XCTestCase {
     
     func testSelectTrack() async {
         // Setup stub
-        let tracks = [SubtitleTrack(id: 1, lang: "en", title: "English")]
+        let tracks = [SubtitleTrack(id: 1, lang: "en", title: "English", isExternal: false)]
         mockController.stubbedSubtitleTracks = tracks
         
         // Execute

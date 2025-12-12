@@ -524,6 +524,7 @@ struct EventsView: View {
         appState.player.currentEventId = event.id // Track current event ID
         appState.player.isEventPlayback = true // Mark as event playback for seamless transition support
         appState.player.currentWatchMode = .watchParty // Enable watch party mode for chat
+        appState.player.currentRoomId = roomId // Linked to event ID
 
         appState.player.currentWatchPartyRoom = room
         appState.player.isWatchPartyHost = false // User is always guest in system events

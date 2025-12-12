@@ -301,15 +301,20 @@ main() {
     echo "   🔐 Authentication: Username-based"
     echo ""
 
+    # Create log file with timestamp
+    local log_file="${PROJECT_ROOT}/redlemon-$(date +%Y%m%d-%H%M%S).log"
+    
     echo "🚀 Launching RedLemon.app..."
-    # Open the debug app that was already built
-    open "$PROJECT_ROOT/build/RedLemon.app"
-
-    log_success "RedLemon launched successfully!"
+    log_info "Application logs will be saved to: $log_file"
+    
+    # Launch app in foreground with output duplication to log file
+    # This captures all app output to both terminal and log file
     echo ""
-    echo "📝 The app is now running. Check the app window for output."
+    echo "📝 Application output:"
     echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
     echo ""
+    
+    "$PROJECT_ROOT/build/RedLemon.app/Contents/MacOS/RedLemon" 2>&1 | tee "$log_file"
 }
 
 # Run main function

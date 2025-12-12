@@ -74,36 +74,58 @@ Modify `LNBitsClient` and add a UI.
 
 ### Phase 3: Premium Logic Enforcement (The "Quota" System)
 
-Instead of limiting features (like 4K or guest counts), we will **limit use frequency**.
+**The "Real-Debrid Model"**: Premium status is sold in **Time Buckets** (e.g., 30 Days, 90 Days, 180 Days).
 *   **Free Users**:
-    *   **1 Room per 24 hours**.
-    *   **Max Playlist Size: 1 Item**. (No binge-watching seasons).
-*   **Premium Key Holders**: **Unlimited hosting & Unlimited playlist**.
+    *   **1 Room per 48 hours**. (Prevents couples from alternating daily hosting to bypass limits).
+    *   **Max Playlist Size: 1 Item**.
+*   **Premium Key Holders**:
+    *   **Unlimited hosting** & **Unlimited playlist** for the duration of their key.
 
 **1. Room Creation Logic (`create_premium_room` RPC):**
 
 ```sql
--- (See previous step for Rate Limiting logic)
--- Enforces 1 room creation per 24h for non-premium users.
+create or replace function create_premium_room(
+  p_room_id text,
+  p_host_id uuid,
+  p_premium_key text default null
+) returns json as $$
+declare
+  v_is_premium boolean := false;
+  v_recent_room_count int;
+begin
+  -- 1. Check Premium Key Validity AND Expiration
+  if p_premium_key is not null then
+    select true into v_is_premium
+    from premium_keys
+    where key_code = p_premium_key 
+      and is_active = true
+      and expires_at > now(); -- Key must not be expired
+  end if;
+
+  -- 2. If NOT Premium, enforce 48-hour limit
+  if not v_is_premium then
+    select count(*) into v_recent_room_count
+    from rooms
+    where host_user_id = p_host_id
+      and created_at > now() - interval '48 hours';
+
+    if v_recent_room_count >= 1 then
+       return json_build_object('success', false, 'error', 'Free limit reached (1 host every 48h). Upgrade for unlimited!');
+    end if;
+  end if;
+
+  -- 3. Create Room
+  insert into rooms (id, host_user_id, ...)
+  values (p_room_id, p_host_id, ...);
+
+  return json_build_object('success', true);
+end;
+$$ language plpgsql security definer;
 ```
 
 **2. Playlist Logic (RLS or RPC):**
 
-We need to prevent free users from adding more than 1 item to the queue.
-
-```sql
-create policy "Enforce Playlist Limit" on rooms
-for update
-using (
-  -- Allow if Premium Key is valid OR if Playlist length <= 1
-  (select tier from premium_keys where key_code = premium_key) = 'pro'
-  OR
-  jsonb_array_length(playlist) <= 1
-);
-```
-
-*Effect*: A free user can host a room, but they can only queue **one movie** or **one episode**. Once that item is done, they cannot simply "add the next episode"—they would need to create a new room, which is blocked by the 24h limit.
-**(Result: "One Free Watch Party Per Night")**
+(Same as before: Premium users get unlimited items, Free users get 1 item max).
 
 ### Phase 4: UI Changes
 

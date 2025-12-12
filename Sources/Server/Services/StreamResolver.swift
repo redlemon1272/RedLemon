@@ -153,9 +153,19 @@ actor StreamResolver {
 
         // CRITICAL: Filter 3D movies
         let before3DFilter = filteredStreams.count
-        let threeDFormats = ["3d", "sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
+        // Use stricter patterns for 3D detection to avoid false positives (like "Sp33dy94")
+        // "3d" is the most dangerous one, so we check it with delimiters
+        let threeDFormats = ["sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
+        
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
+            
+            // Check implicit 3D ("3d" surrounded by delimiters)
+            if titleLower.contains(".3d.") || titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(".3d") || titleLower.hasSuffix(" 3d") {
+                 print("   🚫 RESOLVER BLOCKING 3D (Strict): \(stream.title)")
+                 return false
+            }
+            
             let is3D = threeDFormats.contains { format in
                 titleLower.contains(format)
             }
@@ -418,8 +428,23 @@ actor StreamResolver {
         
         // Sort
         filtered.sort { s1, s2 in
-            // Logic: Year > Source > Provider > Seeders
-            // Simplified sorting for StreamResolver
+            // Logic: Embedded English Subs (if Movie) > Seeders > Others
+            
+            if preferMultiSubMovies {
+                let s1Lower = s1.title.lowercased()
+                let s2Lower = s2.title.lowercased()
+                
+                // Prioritize streams that explicitly say they have english subs
+                // e.g. "sub eng", "eng sub", "subbed"
+                let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed"]
+                let s1HasSub = subIndicators.contains { s1Lower.contains($0) }
+                let s2HasSub = subIndicators.contains { s2Lower.contains($0) }
+                
+                if s1HasSub != s2HasSub {
+                    return s1HasSub // True comes first
+                }
+            }
+            
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
             return seeders1 > seeders2

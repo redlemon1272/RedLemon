@@ -38,10 +38,13 @@ class SocialService: ObservableObject {
         // 2. Connect to Global Presence Channel
         await setupPresenceChannel(userId: userId, username: username)
         
-        // 3. Connect to DM Channel
+        // 4. Connect to DM Channel
         await setupDMChannel(userId: userId)
         
-        // 4. Sync Watch History
+        // 5. Fetch Unread Counts (Offline messages)
+        await fetchUnreadCounts()
+        
+        // 6. Sync Watch History
         await syncLocalHistory()
     }
     
@@ -377,7 +380,57 @@ class SocialService: ObservableObject {
     }
     
     func clearUnread(friendId: String) {
-        unreadCounts[friendId.lowercased()] = 0
+        let friendId = friendId.lowercased()
+        unreadCounts[friendId] = 0
+        
+        // Mark as read on server
+        guard let userIdStr = currentUserId else { return }
+        Task {
+            do {
+                _ = try await client.database
+                    .from("direct_messages")
+                    .update(["is_read": true])
+                    .eq("sender_id", friendId)
+                    .eq("receiver_id", userIdStr)
+                    .execute()
+            } catch {
+                print("❌ Failed to mark messages as read: \(error)")
+            }
+        }
+    }
+    
+    func fetchUnreadCounts() async {
+        guard let userIdStr = currentUserId else { return }
+        
+        struct UnreadMessage: Decodable {
+            let senderId: String
+            
+            enum CodingKeys: String, CodingKey {
+                case senderId = "sender_id"
+            }
+        }
+        
+        do {
+            let response: [UnreadMessage] = try await client.database
+                .from("direct_messages")
+                .select("sender_id")
+                .eq("receiver_id", userIdStr)
+                .eq("is_read", false)
+                .execute()
+                .value
+            
+            // Group by senderId
+            var counts: [String: Int] = [:]
+            for msg in response {
+                let sender = msg.senderId.lowercased()
+                counts[sender, default: 0] += 1
+            }
+            
+            self.unreadCounts = counts
+            print("📬 SocialService: Fetched \(response.count) unread messages")
+        } catch {
+            print("❌ Failed to fetch unread counts: \(error)")
+        }
     }
     
     func loadMessages(friendId: String) async {

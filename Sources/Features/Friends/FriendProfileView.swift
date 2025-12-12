@@ -138,7 +138,7 @@ struct FriendProfileView: View {
                             .padding(.top, 60)
                         } else {
                             ForEach(messages) { message in
-                                MessageBubble(message: message, isMe: message.senderId.uuidString != friend.id)
+                                MessageBubble(message: message, isMe: message.senderId.uuidString.lowercased() != friend.id)
                                     .id(message.id)
                             }
                         }

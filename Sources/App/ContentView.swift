@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var appState: AppState
     @EnvironmentObject var updateManager: UpdateManager
+    @ObservedObject var socialService = SocialService.shared
 
     var body: some View {
         ZStack {
@@ -84,7 +85,8 @@ struct ContentView: View {
                         SidebarButton(
                             title: "Friends",
                             icon: "person.2.fill",
-                            isSelected: appState.currentView == .friends
+                            isSelected: appState.currentView == .friends,
+                            badgeCount: socialService.unreadCounts.values.reduce(0, +)
                         ) {
                             appState.currentView = .friends
                         }
@@ -489,6 +491,7 @@ struct SidebarButton: View {
     let icon: String
     let isSelected: Bool
     var showBadge: Bool = false
+    var badgeCount: Int = 0
     let action: () -> Void
 
     @State private var isHovered = false
@@ -501,7 +504,16 @@ struct SidebarButton: View {
                         .font(.system(size: 18, weight: .medium))
                         .frame(width: 24)
 
-                    if showBadge {
+                    if badgeCount > 0 {
+                        Text("\(badgeCount)")
+                            .font(.system(size: 9, weight: .bold))
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 4)
+                            .frame(minWidth: 14, minHeight: 14)
+                            .background(Color.red)
+                            .clipShape(Capsule())
+                            .offset(x: 10, y: -8)
+                    } else if showBadge {
                         Circle()
                             .fill(Color.red)
                             .frame(width: 10, height: 10)

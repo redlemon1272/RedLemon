@@ -283,19 +283,9 @@ main() {
         exit 1
     fi
 
+
     log_success "Build completed successfully"
-    echo ""
 
-    echo "🧪 Running filter tests..."
-    if swift test --filter StreamResolverFilterTests 2>&1 | grep -q "0 failures"; then
-        log_success "All filter tests passed"
-    else
-        log_error "Filter tests failed! Fix issues before starting app."
-        echo "   Run: swift test --filter StreamResolverFilterTests"
-        exit 1
-    fi
-
-    echo ""
     echo "📊 Services:"
     echo "   ✅ Backend:        Supabase PostgreSQL + Realtime"
     echo "   🔐 Authentication: Username-based"

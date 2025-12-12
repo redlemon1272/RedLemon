@@ -29,7 +29,7 @@ class SocialService: ObservableObject {
     // MARK: - Setup
     
     func connect(userId: String, username: String) async {
-        self.currentUserId = userId
+        self.currentUserId = userId.lowercased()
         self.currentUsername = username
         
         // 1. Load initial friend list
@@ -175,10 +175,10 @@ class SocialService: ObservableObject {
             let supabaseFriends = try await client.getFriends(userId: userId)
             self.friends = supabaseFriends.map { user in
                 Friend(
-                    id: user.id.uuidString,
+                    id: user.id.uuidString.lowercased(),
                     username: user.username,
                     addedDate: Date(),
-                    isFavorite: self.isFavorite(user.id.uuidString),
+                    isFavorite: self.isFavorite(user.id.uuidString.lowercased()),
                     status: .accepted
                 )
             }
@@ -353,20 +353,23 @@ class SocialService: ObservableObject {
         )
         
         // Determine which friend conversation this belongs to
+        // Determine which friend conversation this belongs to
+        // INFO: Normalize to lowercase to match Friend.id
         let friendId = (senderIdStr == currentUserId) ? receiverIdStr : senderIdStr
+        let normalizedFriendId = friendId.lowercased()
         
-        var currentMsgs = self.messages[friendId] ?? []
+        var currentMsgs = self.messages[normalizedFriendId] ?? []
         
         // Check for duplicates (optimistic updates might cause this)
         // Check for duplicates (optimistic updates might cause this)
         if !currentMsgs.contains(where: { $0.id == id }) {
             currentMsgs.append(message)
-            self.messages[friendId] = currentMsgs
+            self.messages[normalizedFriendId] = currentMsgs
             
             // Increment unread count if it's an incoming message (not from me)
             // Note: We use the raw string ID comparison here
             if senderIdStr != currentUserId {
-                self.unreadCounts[friendId, default: 0] += 1
+                self.unreadCounts[normalizedFriendId, default: 0] += 1
             }
             
             print("📨 SocialService: New message from/to \(friendId)")
@@ -374,10 +377,11 @@ class SocialService: ObservableObject {
     }
     
     func clearUnread(friendId: String) {
-        unreadCounts[friendId] = 0
+        unreadCounts[friendId.lowercased()] = 0
     }
     
     func loadMessages(friendId: String) async {
+        let friendId = friendId.lowercased()
         guard let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr),
               let friendUUID = UUID(uuidString: friendId) else { return }
         
@@ -390,6 +394,7 @@ class SocialService: ObservableObject {
     }
     
     func sendMessage(to friendId: String, content: String) async {
+        let friendId = friendId.lowercased()
         guard let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr),
               let friendUUID = UUID(uuidString: friendId) else { return }
         

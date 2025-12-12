@@ -183,6 +183,29 @@ final class StreamResolverFilterTests: XCTestCase {
             XCTAssertFalse(shouldBlockBadPattern(title), "Five Nights should NOT be blocked by TS filter: \(title)")
         }
     }
+
+    func testScreamAudioFiltering() {
+        // Regression: FiDELiO releases (French) were slipping through as "MULTi"
+        let badStreams = [
+            "Scream.1996.MULTi.1080p.BluRay.x264-FiDELiO.mkv",
+            "Scream.1996.MULTi.VFF.1080p.BluRay.x264-FiDELiO.mkv",
+            "Scream.1996.1080p.BluRay.TrueFrench.mkv"
+        ]
+        
+        for title in badStreams {
+             XCTAssertFalse(hasAcceptableAudioLanguage(title), "Should block French release: \(title)")
+        }
+        
+        let goodStreams = [
+            "Scream.1996.1080p.BluRay.DD+5.1.x264-NTb",
+            "Scream.1996.2160p.UHD.BluRay.x265-SCARYMOVIE",
+            "Scream.1996.UNCUT.720p.BluRay.H264.AAC-RARBG"
+        ]
+        
+        for title in goodStreams {
+             XCTAssertTrue(hasAcceptableAudioLanguage(title), "Should allow English release: \(title)")
+        }
+    }
     
     // MARK: - Helper Functions (Mirror StreamResolver logic)
     
@@ -249,7 +272,20 @@ final class StreamResolverFilterTests: XCTestCase {
                        lower.contains("doublé") ||   // French
                        lower.contains("dablyazh")    // Russian
         
-        if isForeign { return false }
+        // Check for French-specific audio indicators (VF = Version Française)
+        let frenchAudioIndicators = [
+            " vf ", ".vf.", "-vf-", "_vf_",  // Version Française
+            " vff ", ".vff.", "-vff-",         // Version Française Française
+            " vfq ", ".vfq.", "-vfq-",         // Version Française Québécoise
+            " vf2 ", ".vf2.", "-vf2-",         // Version Française 2
+            "vostfr",                             // Version Originale Sous-Titrée FRançais
+            "truefrench",                         // TrueFrench (French audio)
+            "rififi",                             // Known French release group
+            "fidelio"                             // Known French release group
+        ]
+        let hasFrenchAudio = frenchAudioIndicators.contains { lower.contains($0) }
+        
+        if isForeign || hasFrenchAudio { return false }
         
         // Allow Multi/Dual audio
         let isMulti = lower.contains("multi") || lower.contains("dual")

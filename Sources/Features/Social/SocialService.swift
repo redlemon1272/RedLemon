@@ -387,12 +387,15 @@ class SocialService: ObservableObject {
         guard let userIdStr = currentUserId else { return }
         Task {
             do {
-                _ = try await client.database
-                    .from("direct_messages")
-                    .update(["is_read": true])
-                    .eq("sender_id", friendId)
-                    .eq("receiver_id", userIdStr)
-                    .execute()
+                _ = try await client.makeRequest(
+                    path: "/direct_messages",
+                    method: "PATCH",
+                    body: ["is_read": true],
+                    query: [
+                        "sender_id": "eq.\(friendId)",
+                        "receiver_id": "eq.\(userIdStr)"
+                    ]
+                )
             } catch {
                 print("❌ Failed to mark messages as read: \(error)")
             }
@@ -411,13 +414,16 @@ class SocialService: ObservableObject {
         }
         
         do {
-            let response: [UnreadMessage] = try await client.database
-                .from("direct_messages")
-                .select("sender_id")
-                .eq("receiver_id", userIdStr)
-                .eq("is_read", false)
-                .execute()
-                .value
+            let data = try await client.makeRequest(
+                path: "/direct_messages",
+                query: [
+                    "select": "sender_id",
+                    "receiver_id": "eq.\(userIdStr)",
+                    "is_read": "eq.false"
+                ]
+            )
+            
+            let response = try JSONDecoder().decode([UnreadMessage].self, from: data)
             
             // Group by senderId
             var counts: [String: Int] = [:]

@@ -386,22 +386,16 @@ actor StreamResolver {
         // Note: Removed x265/hevc from here to allow StreamService to decide
         
         // FIX: Use stricter matching for bad patterns to avoid frequent false positives
-        // e.g. "ts" matching "Nigh(ts)"
-        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener", "iso", ".iso"]
-        // Note: "ts" is too dangerous as a substring match, removed it.
+        // e.g. "ts" matching "Nigh(ts)" or "iso" matching "Pr(iso)ner"
+        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener"]
         
         var filtered = streams.filter { stream in
              let titleLower = stream.title.lowercased()
              
-             // Check against safe list of bad terms
+             // Check against bad terms
              for pattern in badPatterns {
-                 // Simple containment for longer unique words
                  if titleLower.contains(pattern) {
-                     // Extra check for "cam" to avoid matching "webcam" or "camera" if those ever appeared (unlikely in movie titles but good practice)
-                     // validating word boundaries for short terms would be better, but "cam" is usually distinct.
-                     // A title like "The Camera" would fail.
-                     
-                     // Quick hack: if it's "cam", ensure it's surrounded by spaces or delimiters
+                     // Extra check for "cam" to avoid matching "webcam" or "camera"
                      if pattern == "cam" {
                          let regex = try? NSRegularExpression(pattern: "\\bcam\\b")
                          let range = NSRange(location: 0, length: titleLower.utf16.count)
@@ -415,6 +409,15 @@ actor StreamResolver {
                      print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern: \(stream.title)")
                      return false
                  }
+             }
+             
+             // Special check for ISO files (word boundary or file extension only)
+             // This prevents false positives like "Pr(iso)ner"
+             let isoRegex = try? NSRegularExpression(pattern: "\\biso\\b|\\.iso$")
+             let range = NSRange(location: 0, length: titleLower.utf16.count)
+             if let match = isoRegex?.firstMatch(in: titleLower, options: [], range: range) {
+                  print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (ISO): \(stream.title)")
+                  return false
              }
              
              // Special check for .TS files (extension or explicit marking)

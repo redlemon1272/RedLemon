@@ -11,6 +11,7 @@ class SocialService: ObservableObject {
     @Published var friendActivity: [String: FriendActivity] = [:] // Key: UserID (Principal)
     @Published var onlineUserIds: Set<String> = []
     @Published var messages: [String: [DirectMessage]] = [:] // Key: FriendID (Principal)
+    @Published var unreadCounts: [String: Int] = [:] // Key: FriendID
     
     @Published var isConnected: Bool = false
     @Published var isLoading: Bool = false
@@ -311,8 +312,20 @@ class SocialService: ObservableObject {
     }
     
     private func handleIncomingMessage(_ payload: [String: Any]) {
-        // Payload structure: { "new": { ... }, "eventType": "INSERT", ... }
-        guard let newRecord = payload["new"] as? [String: Any],
+        // Payload structure can be:
+        // 1. { "new": { ... }, "eventType": "INSERT", ... } (Standard Realtime)
+        // 2. { "data": { "record": { ... }, "type": "INSERT", ... } } (Postgres Changes)
+        
+        var record: [String: Any]?
+        
+        if let newRecord = payload["new"] as? [String: Any] {
+            record = newRecord
+        } else if let data = payload["data"] as? [String: Any],
+                  let newRecord = data["record"] as? [String: Any] {
+            record = newRecord
+        }
+        
+        guard let newRecord = record,
               let idStr = newRecord["id"] as? String,
               let id = UUID(uuidString: idStr),
               let senderIdStr = newRecord["sender_id"] as? String,
@@ -321,6 +334,7 @@ class SocialService: ObservableObject {
               let receiverId = UUID(uuidString: receiverIdStr),
               let content = newRecord["content"] as? String,
               let createdAtStr = newRecord["created_at"] as? String else {
+            // print("⚠️ SocialService: Failed to parse incoming message payload: \(payload)")
             return
         }
         
@@ -344,11 +358,23 @@ class SocialService: ObservableObject {
         var currentMsgs = self.messages[friendId] ?? []
         
         // Check for duplicates (optimistic updates might cause this)
+        // Check for duplicates (optimistic updates might cause this)
         if !currentMsgs.contains(where: { $0.id == id }) {
             currentMsgs.append(message)
             self.messages[friendId] = currentMsgs
+            
+            // Increment unread count if it's an incoming message (not from me)
+            // Note: We use the raw string ID comparison here
+            if senderIdStr != currentUserId {
+                self.unreadCounts[friendId, default: 0] += 1
+            }
+            
             print("📨 SocialService: New message from/to \(friendId)")
         }
+    }
+    
+    func clearUnread(friendId: String) {
+        unreadCounts[friendId] = 0
     }
     
     func loadMessages(friendId: String) async {
@@ -419,7 +445,18 @@ class SocialService: ObservableObject {
     func fetchFriendHistory(friendId: String) async -> [SupabaseWatchHistoryEntry] {
         guard let friendUUID = UUID(uuidString: friendId) else { return [] }
         do {
-            return try await client.getWatchHistory(userId: friendUUID)
+            let rawHistory = try await client.getWatchHistory(userId: friendUUID)
+            
+            // Deduplicate: Keep only the most recent entry for each media_id (Show/Movie)
+            // Since the API returns sorted by last_watched (desc), the first one we find is the latest.
+            var seenMedia = Set<String>()
+            return rawHistory.filter { entry in
+                // For shows, mediaId should be the Show ID. For movies, it's the Movie ID.
+                // This ensures "Breaking Bad S02E03" and "Breaking Bad S01E05" don't appear twice.
+                guard !seenMedia.contains(entry.mediaId) else { return false }
+                seenMedia.insert(entry.mediaId)
+                return true
+            }
         } catch {
             print("❌ Failed to fetch friend history: \(error)")
             return []

@@ -45,6 +45,7 @@ struct FriendProfileView: View {
         .task {
             // Load messages
             await socialService.loadMessages(friendId: friend.id)
+            socialService.clearUnread(friendId: friend.id)
             
             // Load history
             isLoadingHistory = true
@@ -150,6 +151,8 @@ struct FriendProfileView: View {
                             proxy.scrollTo(lastId, anchor: .bottom)
                         }
                     }
+                    // Clear unread count when new messages arrive while viewing
+                    socialService.clearUnread(friendId: friend.id)
                 }
             }
             
@@ -249,12 +252,12 @@ struct HistoryItemRow: View {
                     .font(.callout)
                     .lineLimit(2)
                 
-                if let season = item.season, let episode = item.episode {
+                if let season = item.season, season > 0, let episode = item.episode, episode > 0 {
                     Text("S\(season) E\(episode)")
                         .font(.caption2)
                         .foregroundColor(.secondary)
-                } else if item.mediaType == "movie" {
-                    Text("Movie")
+                } else {
+                    Text(item.mediaType.capitalized) // "Movie" or fallback
                         .font(.caption2)
                         .foregroundColor(.secondary)
                 }

@@ -799,25 +799,30 @@ class SupabaseClient: RoomManager, UserManager {
     
     /// Sync a watch history item to the cloud
     func upsertWatchHistory(item: WatchHistoryItem, userId: UUID) async throws {
+        // Use -1 for movies (where season/episode is nil) to satisfy UNIQUE constraint compatibility
+        let season = item.season ?? -1
+        let episode = item.episode ?? -1
+        
         let payload: [String: Any] = [
             "user_id": userId.uuidString,
             "media_id": item.mediaItem.id,
             "media_type": item.mediaItem.type,
             "title": item.mediaItem.name,
-            "season": item.season as Any,
-            "episode": item.episode as Any,
+            "season": season,
+            "episode": episode,
             "progress": item.progress,
             "poster_url": item.mediaItem.poster as Any,
             "last_watched": ISO8601DateFormatter().string(from: item.lastWatched)
         ]
         
-        let CleanPayload = payload.compactMapValues { $0 } // Remove nils
+        // Remove nils (like poster_url if missing), but keep season/episode (-1)
+        let cleanPayload = payload.compactMapValues { $0 }
         
         _ = try await makeRequest(
             path: "/user_watch_history",
             method: "POST",
-            body: CleanPayload,
-            query: ["on_conflict": "user_id,media_id,season,episode"] // Upsert based on unique constraint
+            body: cleanPayload,
+            query: ["on_conflict": "user_id,media_id,season,episode"]
         )
     }
     

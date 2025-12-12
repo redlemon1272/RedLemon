@@ -160,6 +160,7 @@ struct FriendsView: View {
                 FriendRow(
                     friend: friend,
                     activity: socialService.friendActivity[friend.id],
+                    unreadCount: socialService.unreadCounts[friend.id] ?? 0,
                     onToggleFavorite: { await toggleFavorite(friend) },
                     onRemove: { await removeFriend(friend) },
                     onInvite: { inviteToWatchParty(friend) },
@@ -307,14 +308,16 @@ struct FriendsView: View {
 struct FriendRow: View {
     let friend: Friend
     let activity: FriendActivity?
+    let unreadCount: Int
     let onToggleFavorite: () async -> Void
     let onRemove: () async -> Void
     let onInvite: () -> Void
     let onJoin: (() -> Void)? // Optional join action
     
-    init(friend: Friend, activity: FriendActivity?, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil) {
+    init(friend: Friend, activity: FriendActivity?, unreadCount: Int = 0, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil) {
         self.friend = friend
         self.activity = activity
+        self.unreadCount = unreadCount
         self.onToggleFavorite = onToggleFavorite
         self.onRemove = onRemove
         self.onInvite = onInvite
@@ -379,6 +382,18 @@ struct FriendRow: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
+            }
+            
+            // Unread Badge
+            if unreadCount > 0 {
+                Text("\(unreadCount)")
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.red)
+                    .clipShape(Capsule())
             }
 
             Spacer()

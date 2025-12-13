@@ -267,7 +267,12 @@ class EventsConfigService {
         
         // 2. Determine where we are in the cycle relative to fixed epoch
         let now = TimeService.shared.now
-        let epoch = Date(timeIntervalSince1970: TimeInterval(config.epochTimestamp))
+        
+        // CRITICAL: Use the SAME fixed epoch as EventsView.swift to ensure the schedule matches!
+        // The config.epochTimestamp is set to the generation time, which shifts the cycle.
+        // EventsView uses 2024-01-01 (1704067200). We must match that.
+        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
+        
         let timeSinceEpoch = now.timeIntervalSince(epoch)
         let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
         

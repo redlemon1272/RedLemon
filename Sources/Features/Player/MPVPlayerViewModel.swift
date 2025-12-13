@@ -1772,15 +1772,15 @@ extension MPVPlayerViewModel {
         // DEBUG: Log ALL incoming messages before any filtering
         NSLog("🔍 DEBUG: Received sync message - type: \(message.type), sender: \(message.senderId ?? "unknown")")
 
-        // Host is authoritative for playback, but should still receive chat messages and READY signals
-        if isWatchPartyHost && message.type != .chat && message.type != .ready {
+        // Host is authoritative for playback, but should still receive chat messages, READY signals, and REACTIONS
+        if isWatchPartyHost && message.type != .chat && message.type != .ready && message.type != .reaction {
             NSLog("🚫 DEBUG: Host filtering out message type: \(message.type)")
             return
         }
 
         // Syncplay-inspired: Ignore remote updates if we just made a local action
-        // CRITICAL: NEVER ignore READY or CHAT messages - they must always be processed
-        if message.type != .ready && message.type != .chat && shouldIgnoreRemoteUpdate() {
+        // CRITICAL: NEVER ignore READY, CHAT, or REACTION messages - they must always be processed
+        if message.type != .ready && message.type != .chat && message.type != .reaction && shouldIgnoreRemoteUpdate() {
             NSLog("🚫 DEBUG: Filtering message due to recent local action - type: \(message.type)")
             return
         }

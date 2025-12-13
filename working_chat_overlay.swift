@@ -29,7 +29,7 @@ struct ChatOverlayView: View {
     @State private var chatMode: ChatMode = .friends // Default to friends (safe fallback)
 
     // Common emojis for quick access
-    private let emojis = ["\u{1F602}", "\u{1F60D}", "\u{1F525}", "\u{1F44D}", "\u{2764}\u{FE0F}", "\u{1F60E}", "\u{1F389}", "\u{1F4AF}", "\u{1F62D}", "\u{1F914}", "\u{1F440}", "\u{2728}", "\u{1F3AC}", "\u{1F37F}", "\u{1F631}", "\u{1F923}"]
+    private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
 
     // ✅ Performance limit
     private let maxVisibleMessages = 100
@@ -239,7 +239,6 @@ struct ChatOverlayView: View {
                             FriendRowButton(friend: friend, unreadCount: socialService.unreadCounts[friend.id] ?? 0) {
                                 openDM(friend)
                             }
-                            .id(friend.id + "-msg")
                         }
                     }
                     .padding(.bottom, 8)
@@ -253,7 +252,6 @@ struct ChatOverlayView: View {
                             FriendRowButton(friend: friend, unreadCount: 0) {
                                 openDM(friend)
                             }
-                            .id(friend.id + "-online")
                         }
                     }
                 }
@@ -264,7 +262,6 @@ struct ChatOverlayView: View {
                         FriendRowButton(friend: friend, unreadCount: 0) {
                             openDM(friend)
                         }
-                        .id(friend.id + "-all")
                     }
                 }
             }
@@ -461,20 +458,19 @@ struct ChatOverlayView: View {
 
     private func sendMessage() {
         guard !inputText.isEmpty else { return }
-        
-        let contentToSend = inputText
-        inputText = ""
 
         switch chatMode {
         case .event:
-            Task { await eventChatService.sendMessage(contentToSend) }
+            Task { await eventChatService.sendMessage(inputText) }
         case .room:
-            viewModel.sendMessage(contentToSend)
+            viewModel.sendMessage(inputText)
         case .friends:
             break
         case .dm(let friend):
-            Task { await socialService.sendMessage(to: friend.id, content: contentToSend) }
+            Task { await socialService.sendMessage(to: friend.id, content: inputText) }
         }
+
+        inputText = ""
     }
     
     private var totalUnreadCount: Int {

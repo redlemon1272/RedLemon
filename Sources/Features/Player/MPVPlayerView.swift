@@ -981,44 +981,33 @@ class MouseTrackingNSView: NSView {
         return false // Don't intercept clicks
     }
 
-    override func mouseDown(with event: NSEvent) {
-        // Enhanced hit testing - check if click is near UI controls
-        let location = convert(event.locationInWindow, from: nil)
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        // Convert point to view coordinates
+        let location = convert(point, from: nil)
         let viewBounds = bounds
 
-        // Define safe zones for UI controls:
-        // 1. Bottom 25% for controls
-        // 2. Top-left 25% for exit button
-        // 3. Right 25% for Chat Overlay (CRITICAL FIX)
+        // Define safe zones (Pass-through areas)
         let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
         let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
-        let rightChatZone = CGRect(x: viewBounds.width * 0.75, y: 0, width: viewBounds.width * 0.25, height: viewBounds.height)
+        let rightChatZone = CGRect(x: viewBounds.width * 0.60, y: 0, width: viewBounds.width * 0.40, height: viewBounds.height)
 
-        // If click is in UI control zones, don't handle it here - let SwiftUI/Window handle it
+        // If in safe zone, return nil to let event pass through to views behind/underneath
         if bottomZone.contains(location) || topExitZone.contains(location) || rightChatZone.contains(location) {
-            // Forward to window's first responder (likely SwiftUI)
-            window?.firstResponder?.mouseDown(with: event)
-            return
+            return nil
         }
 
-        // For clicks in video area, don't forward events - let video layer handle them naturally
+        // Otherwise, handle normally (will be blocked by mouseDown)
+        return super.hitTest(point)
+    }
+
+    override func mouseDown(with event: NSEvent) {
+        // Since hitTest returns nil for safe zones, this is only called for blocking zones.
+        NSLog("⛔️ Blocking click in video area")
         return
     }
 
     override func mouseUp(with event: NSEvent) {
-        // Use the same hit testing logic as mouseDown
-        let location = convert(event.locationInWindow, from: nil)
-        let viewBounds = bounds
-
-        let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
-        let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
-        let rightChatZone = CGRect(x: viewBounds.width * 0.75, y: 0, width: viewBounds.width * 0.25, height: viewBounds.height)
-
-        if bottomZone.contains(location) || topExitZone.contains(location) || rightChatZone.contains(location) {
-            window?.firstResponder?.mouseUp(with: event)
-            return
-        }
-
+        // Since hitTest returns nil for safe zones, this is only called for blocking zones.
         return
     }
 

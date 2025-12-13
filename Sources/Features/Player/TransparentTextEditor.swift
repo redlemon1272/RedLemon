@@ -28,7 +28,14 @@ struct TransparentTextEditor: NSViewRepresentable {
 
     func updateNSView(_ nsView: NSScrollView, context: Context) {
         if context.coordinator.textView.string != text {
-            context.coordinator.textView.string = text
+            // Use AttributedString to ensure font/color/emoji support is robust
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: NSFont.systemFont(ofSize: 13),
+                .foregroundColor: NSColor.white
+            ]
+            let attributedString = NSAttributedString(string: text, attributes: attributes)
+            context.coordinator.textView.textStorage?.setAttributedString(attributedString)
+            context.coordinator.textView.needsDisplay = true
         }
         
         if isFocused {
@@ -45,7 +52,8 @@ struct TransparentTextEditor: NSViewRepresentable {
         lazy var textView: NSTextView = {
             let tv = NSTextView()
             tv.drawsBackground = false
-            tv.isRichText = false
+            tv.isRichText = true // Allow emojis/rich content
+            tv.importsGraphics = true
             tv.isEditable = true
             tv.isSelectable = true
             tv.font = .systemFont(ofSize: 13) // Match existing style

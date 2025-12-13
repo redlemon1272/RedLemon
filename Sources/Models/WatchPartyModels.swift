@@ -243,6 +243,7 @@ enum SyncMessageType: String, Codable {
     case ready          // Guest reports they are buffered and ready to play
     case returnToLobby  // Host returning everyone to lobby
     case roomClosed     // Host has left and closed the room
+    case reaction       // Floating emoji reaction
 }
 
 /// Sync message for watch party coordination

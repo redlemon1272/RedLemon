@@ -236,9 +236,16 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var isSeeking: Bool = false
 
     // Chat state
-    @Published var showChat: Bool = false
+    @Published var showChat: Bool = true
+    @Published var showParticipantList: Bool = false
+    @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
+    
+    // Reactions
+    @Published var areReactionsEnabled: Bool = true
+    let reactionTriggers = PassthroughSubject<String, Never>()
+    private var reactionTimestamps: [Date] = []
 
     // Metadata
     @Published var title: String = ""
@@ -1075,6 +1082,51 @@ class MPVPlayerViewModel: ObservableObject {
                 }
             }
         }
+    }
+
+    func sendReaction(_ emoji: String) {
+        // Rate Limiting: Max 5 per 2 seconds, Min 0.15s gap
+        let now = Date()
+        
+        // 1. Minimum Gap Check
+        if let last = reactionTimestamps.last, now.timeIntervalSince(last) < 0.15 {
+             return
+        }
+        
+        // 2. Burst Check
+        // Clean up old timestamps (>2s ago)
+        reactionTimestamps = reactionTimestamps.filter { now.timeIntervalSince($0) < 2.0 }
+        
+        if reactionTimestamps.count >= 5 {
+             print("⚠️ Reaction limit reached (spam guard)")
+             return
+        }
+        
+        reactionTimestamps.append(now)
+
+        guard !isInWatchParty else {
+            // Watch Party Mode
+            let userId = appState?.currentUserId?.uuidString ?? UUID().uuidString
+            let syncMessage = SyncMessage(
+                type: .reaction,
+                timestamp: Date().timeIntervalSince1970, // Instant
+                isPlaying: nil,
+                senderId: userId,
+                chatText: emoji, // Store emoji in chatText
+                chatUsername: appState?.currentUsername
+            )
+
+            // Show locally immediately
+            reactionTriggers.send(emoji)
+
+            Task { [weak self] in
+                try? await self?.realtimeManager?.sendSyncMessage(syncMessage)
+            }
+            return
+        }
+        
+        // Solo/Local Mode (just show locally)
+        reactionTriggers.send(emoji)
     }
 
     // MARK: - Enhanced Timer Management
@@ -2076,6 +2128,18 @@ extension MPVPlayerViewModel {
                 await MainActor.run {
                     self.appState?.currentView = .watchPartyLobby
                 }
+            }
+        
+        case .reaction:
+            // Handle incoming reaction
+            // CRITICAL: Skip reactions from self (already shown locally when sent)
+            if message.senderId == currentUserId {
+                return
+            }
+
+            if let emoji = message.chatText {
+                 print("😂 Received reaction: \(emoji)")
+                 reactionTriggers.send(emoji)
             }
         }
     }

@@ -56,6 +56,7 @@ struct RedLemonApp: App {
             ContentView()
                 .environmentObject(appState)
                 .environmentObject(updateManager)
+                .environmentObject(SocialService.shared)
                 .task {
                     // Wiring up PlayerViewModel callbacks
                     appState.setupPlayerBindings()

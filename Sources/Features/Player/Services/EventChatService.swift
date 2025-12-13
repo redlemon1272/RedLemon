@@ -9,6 +9,10 @@ class EventChatService: ObservableObject {
     @Published var isConnected: Bool = false
     @Published var participantCount: Int = 0
     
+    // Reactions
+    let reactionTriggers = PassthroughSubject<String, Never>()
+    private var reactionTimestamps: [Date] = []
+    
     private var realtimeManager: RealtimeChannelManager?
     private var currentEventId: String?
     private var userId: String?
@@ -44,7 +48,11 @@ class EventChatService: ObservableObject {
                 username: username,
                 onSync: { [weak self] message in
                     Task { @MainActor [weak self] in
-                        self?.handleSyncMessage(message)
+                        if message.type == .reaction {
+                            self?.handleReaction(message)
+                        } else {
+                            self?.handleSyncMessage(message)
+                        }
                     }
                 }
             )
@@ -103,6 +111,37 @@ class EventChatService: ObservableObject {
         }
     }
     
+    func sendReaction(_ emoji: String) {
+         // Rate Limiting: Max 5 per 2 seconds, Min 0.15s gap
+         let now = Date()
+         
+         if let last = reactionTimestamps.last, now.timeIntervalSince(last) < 0.15 { return }
+         
+         reactionTimestamps = reactionTimestamps.filter { now.timeIntervalSince($0) < 2.0 }
+         if reactionTimestamps.count >= 5 { return }
+         
+         reactionTimestamps.append(now)
+
+         guard let userId = userId, let username = username else { return }
+
+         // Show locally immediately
+         reactionTriggers.send(emoji)
+
+         // Send via Realtime
+         let syncMsg = SyncMessage(
+             type: .reaction,
+             timestamp: Date().timeIntervalSince1970,
+             isPlaying: nil,
+             senderId: userId,
+             chatText: emoji, // Store emoji here
+             chatUsername: username
+         )
+
+         Task {
+             try? await realtimeManager?.sendSyncMessage(syncMsg)
+         }
+     }
+    
     private func handleSyncMessage(_ message: SyncMessage) {
         guard message.type == .chat,
               let text = message.chatText,
@@ -124,5 +163,10 @@ class EventChatService: ObservableObject {
         if self.messages.count > 100 {
             self.messages.removeFirst(self.messages.count - 100)
         }
+    }
+    
+    private func handleReaction(_ message: SyncMessage) {
+        guard let emoji = message.chatText, message.senderId != self.userId else { return }
+        reactionTriggers.send(emoji)
     }
 }

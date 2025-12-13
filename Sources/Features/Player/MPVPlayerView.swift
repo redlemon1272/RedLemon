@@ -54,6 +54,8 @@ class KeyCaptureView: NSView {
 struct MPVPlayerView: View {
     @StateObject private var viewModel = MPVPlayerViewModel()
     @EnvironmentObject var appState: AppState
+    // Needed for DM indicator
+    @EnvironmentObject var socialService: SocialService
 
     // Mouse tracking for UI elements
     @State private var mouseLocation: CGPoint = .zero
@@ -139,6 +141,10 @@ struct MPVPlayerView: View {
 
                     // Overlays (Loading, Waiting, Logo)
                     overlays
+                    
+                    // Floating Reactions (Always visible, even if chat is closed)
+                    ReactionOverlayView(viewModel: viewModel)
+                        .zIndex(90) // Below controls (99) but above video
 
                     // Exit Room button (top-left, appears independently)
                     if showExitButton {
@@ -913,14 +919,26 @@ struct MPVPlayerView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "bubble.left.and.bubble.right.fill")
                             .font(.system(size: 16))
-                        Text("Chat")
-                            .font(.system(size: 14, weight: .medium))
+                        
+                        if hasUnreadMessages {
+                            Text("Chat (\(totalUnreadCount))")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.red)
+                        } else {
+                            Text("Chat (⌘)")
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.white)
+                        }
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(hasUnreadMessages ? .white : .white)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 10)
-                    .background(.ultraThinMaterial)
+                    .background(hasUnreadMessages ? Color.red.opacity(0.15) : Color.black.opacity(0.6))
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .overlay(
+                         RoundedRectangle(cornerRadius: 20)
+                             .stroke(hasUnreadMessages ? Color.red.opacity(0.5) : Color.clear, lineWidth: 1)
+                     )
                     .shadow(color: .black.opacity(0.3), radius: 10)
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -931,6 +949,15 @@ struct MPVPlayerView: View {
 
             Spacer()
         }
+    }
+    
+    // Helper for unread count
+    private var totalUnreadCount: Int {
+        socialService.unreadCounts.values.reduce(0, +)
+    }
+    
+    private var hasUnreadMessages: Bool {
+        totalUnreadCount > 0
     }
 }
 

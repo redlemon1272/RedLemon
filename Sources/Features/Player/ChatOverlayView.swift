@@ -33,6 +33,9 @@ struct ChatOverlayView: View {
 
     // ✅ Performance limit
     private let maxVisibleMessages = 100
+    
+    // Quick Reactions
+    private let quickReactions = ["😂", "❤️", "🔥", "👏", "😮", "😢"]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -52,6 +55,7 @@ struct ChatOverlayView: View {
             if case .friends = chatMode {
                 // No input area for friend list
             } else {
+                reactionBar
                 inputArea
             }
         }
@@ -75,6 +79,16 @@ struct ChatOverlayView: View {
                     isInputFocused = true
                     manualFocus = true
                 }
+            }
+        }
+        .onChange(of: viewModel.isInWatchParty) { inWatchParty in
+            if inWatchParty {
+                chatMode = .room
+            }
+        }
+        .onChange(of: appState.isEventPlayback) { isEvent in
+            if isEvent {
+                chatMode = .event
             }
         }
     }
@@ -139,6 +153,23 @@ struct ChatOverlayView: View {
                     // No extra controls in DM header for now
                 } else {
                     Spacer()
+                    
+                    // Reaction Toggle
+                    Button(action: {
+                        withAnimation {
+                            viewModel.areReactionsEnabled.toggle()
+                        }
+                    }) {
+                        Image(systemName: viewModel.areReactionsEnabled ? "eye.fill" : "eye.slash.fill")
+                            .font(.system(size: 14))
+                            .foregroundColor(viewModel.areReactionsEnabled ? .white.opacity(0.8) : .white.opacity(0.4))
+                            .padding(6)
+                            .background(Color.white.opacity(0.1))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
+                    .help(viewModel.areReactionsEnabled ? "Hide Reactions" : "Show Reactions")
+                    .padding(.trailing, 4)
                     
                     // Close Button
                     Button(action: { viewModel.toggleChat() }) {
@@ -364,7 +395,7 @@ struct ChatOverlayView: View {
                 // Input Field
                 Group {
                     if #available(macOS 13.0, *) {
-                        TextField("Message...", text: $inputText, axis: .vertical)
+                        TextField("Chat (⌘)", text: $inputText, axis: .vertical)
                             .textFieldStyle(.plain)
                             .foregroundColor(.white)
                             .focused($isInputFocused)
@@ -374,7 +405,7 @@ struct ChatOverlayView: View {
                         // Fallback for macOS 12
                         ZStack(alignment: .topLeading) {
                             if inputText.isEmpty {
-                                Text("Message...")
+                                Text("Chat (⌘)")
                                     .foregroundColor(.white.opacity(0.5))
                                     .padding(.leading, 4) // Align with text cursor
                                     .padding(.top, 0)
@@ -479,6 +510,53 @@ struct ChatOverlayView: View {
     
     private var totalUnreadCount: Int {
         socialService.unreadCounts.values.reduce(0, +)
+    }
+
+    private var reactionBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(quickReactions, id: \.self) { emoji in
+                    Button(action: {
+                        sendReaction(emoji)
+                    }) {
+                        Text(emoji)
+                            .font(.system(size: 20))
+                            .frame(width: 36, height: 36)
+                            .background(Color.white.opacity(0.1))
+                            .clipShape(Circle())
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 24)
+        }
+        .padding(.vertical, 8)
+        .background(Color.black.opacity(0.3)) // Slight separation
+        // Ensure frame height is sufficient
+        .frame(height: 52)
+        .overlay(
+            HStack {
+                Spacer()
+                LinearGradient(
+                    gradient: Gradient(colors: [.clear, Color.black.opacity(0.8)]),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                .frame(width: 40)
+            }
+            .allowsHitTesting(false)
+        )
+    }
+    
+    private func sendReaction(_ emoji: String) {
+        switch chatMode {
+        case .event:
+            eventChatService.sendReaction(emoji)
+        case .room:
+            viewModel.sendReaction(emoji)
+        default:
+            break
+        }
     }
 
     private func tabButton(title: String, mode: ChatMode, badge: Int = 0) -> some View {

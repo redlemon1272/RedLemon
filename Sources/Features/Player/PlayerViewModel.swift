@@ -815,7 +815,8 @@ class PlayerViewModel: ObservableObject {
                             // Slot starts at liveEvent.startTime, which IS the Movie Start Time in EventsView logic.
                             // We do NOT subtract the buffer here, because startTime is already the content start.
                             let slotPosition = now.timeIntervalSince(liveEvent.startTime)
-                            position = max(0, slotPosition)
+                            // Apply 10s latency compensation to align with friend's likely buffered state
+                            position = max(0, slotPosition - 10.0)
                             
                             // CRITICAL FIX: Ensure the "Recalculating seek time" logic uses the deterministic start time
                             self.eventStartTime = liveEvent.startTime

@@ -129,7 +129,7 @@ struct EventsView: View {
 
         // 2. Determine where we are in the cycle relative to a fixed epoch
         // Use 2024-01-01 as epoch to keep numbers reasonable but consistent
-        let epoch = Date(timeIntervalSince1970: 1704067200) // 2024-01-01 00:00:00 UTC
+        let epoch = ScheduleConstants.Epoch
         let timeSinceEpoch = now.timeIntervalSince(epoch)
         let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
 

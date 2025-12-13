@@ -245,6 +245,51 @@ class EventsConfigService {
             print("⚠️ [EventsConfig] Failed to check for updates: \(error)")
         }
     }
+    // MARK: - Schedule Logic
+    
+    /// Calculate the currently live event based on the deterministic schedule
+    /// This ensures all clients agree on the EXACT start time, regardless of when the room was created
+    func calculateLiveEvent(config: EventsConfig) -> (startTime: Date, mediaItem: MediaItem)? {
+        guard !config.movies.isEmpty else { return nil }
+        
+        // 1. Calculate total duration of the cycle
+        var totalCycleDuration: TimeInterval = 0
+        var movieDurations: [TimeInterval] = []
+        
+        let buffer = Double(config.bufferBetweenMoviesSeconds)
+        
+        for movie in config.movies {
+            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60) + buffer
+            movieDurations.append(duration)
+            totalCycleDuration += duration
+        }
+        
+        // 2. Determine where we are in the cycle relative to fixed epoch
+        let now = TimeService.shared.now
+        let epoch = Date(timeIntervalSince1970: TimeInterval(config.epochTimestamp))
+        let timeSinceEpoch = now.timeIntervalSince(epoch)
+        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+        
+        // 3. Find the currently playing movie
+        var accumulatedTime: TimeInterval = 0
+        
+        for (index, duration) in movieDurations.enumerated() {
+            if accumulatedTime + duration > currentCycleTime {
+                // We found the current slot
+                let timeIntoCurrentMovie = currentCycleTime - accumulatedTime
+                
+                // Calculate absolute start time for this slot
+                // startTime = now - timeIntoSlot
+                let startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
+                
+                return (startTime, config.movies[index])
+            }
+            accumulatedTime += duration
+        }
+        
+        return nil
+    }
 }
 
 // MARK: - Models

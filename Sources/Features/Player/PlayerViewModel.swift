@@ -802,12 +802,28 @@ class PlayerViewModel: ObservableObject {
                         self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
                         
                         let now = Date()
-                        let lobbyBuffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
+                        var position: Double = 0
+                        let buffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
                         
-                        // Ensure we don't start with negative time if clocks are off, though max(0) handles it
-                        // NOTE: Events have a lobby buffer (default 10m/600s). The content starts at createdAt + buffer.
-                        // We must subtract this buffer to get the correct content timestamp.
-                        let position = max(0, now.timeIntervalSince(room.createdAt) - lobbyBuffer)
+                        // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
+                        // If we rely on room.createdAt, we inherit the delay of the first user who joined.
+                        if let config = eventsConfig,
+                           let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
+                           liveEvent.mediaItem.id == self.currentEventId {
+                                
+                            // Current time into the slot (Movie + Buffer)
+                            // Slot starts at liveEvent.startTime
+                            let slotPosition = now.timeIntervalSince(liveEvent.startTime)
+                            position = max(0, slotPosition - buffer)
+                            NSLog("✅ Using Deterministic Schedule! Start: \(liveEvent.startTime), SlotPos: \(slotPosition), MoviePos: \(position)")
+                            
+                        } else {
+                            // Fallback to room.createdAt if schedule mistmatch or config missing
+                            // NOTE: This might have drift if the room was created late
+                            position = max(0, now.timeIntervalSince(room.createdAt) - buffer)
+                            NSLog("⚠️ Using Room Creation Time (Fallback). Start: \(room.createdAt), Pos: \(position)")
+                        }
+                        
                         self.resumeFromTimestamp = position
                         
                         NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")

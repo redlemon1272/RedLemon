@@ -1,0 +1,1580 @@
+2025-12-13 11:59:06.612 RedLemon[4565:30568] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-13 11:59:06.612 RedLemon[4565:30568] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-13 11:59:06.819 RedLemon[4565:30568] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-13 11:59:06.821 RedLemon[4565:30671] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-13 11:59:06.866 RedLemon[4565:30568] ✅ Playback state reset complete - starting in browse view
+2025-12-13 11:59:06.866 RedLemon[4565:30568] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-13 11:59:06.866 RedLemon[4565:30568] 🧪 Testing Profile: debug
+2025-12-13 11:59:06.869 RedLemon[4565:30685] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-13 11:59:06.946 RedLemon[4565:30568] ✅ Keychain: Found stored username: ursinho
+2025-12-13 11:59:06.946 RedLemon[4565:30568] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-13 11:59:06.947 RedLemon[4565:30696] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-13 11:59:07.239 RedLemon[4565:30648] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-13 11:59:07.252 RedLemon[4565:30648] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-13 11:59:07.252 RedLemon[4565:30648] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-13 11:59:07.252 RedLemon[4565:30568] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-13 11:59:07.307 RedLemon[4565:30568] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-13 11:59:07.307 RedLemon[4565:30568] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:07.307 RedLemon[4565:30568] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:07.307 RedLemon[4565:30568] 🚀 RedLemon: Starting HTTP server...
+2025-12-13 11:59:07.307 RedLemon[4565:30568] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-13 11:59:07.332 RedLemon[4565:30568] ✅ RedLemon: HTTPServer instance created
+2025-12-13 11:59:07.332 RedLemon[4565:30646] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1218 with 420 movies
+✅ [EventsConfig] Using cached movie_events config (version 1218, 420 movies)
+✅ [EventsView] Loaded 420 movies from config version 1218
+   1. Pacific Rim
+   2. Harry Potter and the Sorcerer's Stone
+   3. Stigmata
+   4. Deadpool 2
+   5. Split
+🔌 SocialService: Connecting to global presence...
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Memento | Runtime: 113m | Duration: 7380s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime: 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+  2025-12-13 11:59:09.339 RedLemon[4565:30568] ✅ RedLemon: Server marked as ready
+2025-12-13 11:59:09.404 RedLemon[4565:30568] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-13 11:59:09.404 RedLemon[4565:30568] 🔍 Performing startup checks...
+2025-12-13 11:59:09.404 RedLemon[4565:30568] ✅ Username-based authentication ready
+2025-12-13 11:59:09.404 RedLemon[4565:30568] 🔍 Performing startup checks...
+2025-12-13 11:59:09.405 RedLemon[4565:30568] ✅ Username-based authentication ready
+2025-12-13 11:59:09.405 RedLemon[4565:30568] 🔄 Checking for app updates...
+2025-12-13 11:59:11.415 RedLemon[4565:30568] 🚪 Joining room: event_tt4589218
+2025-12-13 11:59:11.603 RedLemon[4565:30696] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2025-12-13 11:59:11.875 RedLemon[4565:30568] 🎬 Room is playing (or is Event) - joining playback
+2025-12-13 11:59:11.875 RedLemon[4565:30568] 🗓 Schedule Calc: Pacific Rim | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2025-12-13 11:59:11.875 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Sorcerer's Stone | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Stigmata | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Oldboy | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Goodfellas | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Anaconda | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Kraven the Hunter | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2025-12-13 11:59:11.876 RedLemon[4565:30568] 🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Indiana Jones and the Dial of Destiny | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Flubber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Black Water | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Shrek 5 | RuntimeStr: nil -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Apocalypse Now | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: White Chicks | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: Aliens | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.877 RedLemon[4565:30568] 🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Goblet of Fire | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Blind Fury | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.878 RedLemon[4565:30568] 🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 2 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Anaconda | RuntimeStr: nil -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Shrek the Third | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Memento | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Parasite | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Monster | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.879 RedLemon[4565:30568] 🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: American History X | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Dracula | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.880 RedLemon[4565:30568] 🗓 Schedule Calc: Scooby-Doo | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Get Carter | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Saltburn | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: 8MM | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Godzilla x Kong: The New Empire | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.881 RedLemon[4565:30568] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Alien³ | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Green Mile | RuntimeStr: 189 min -> 189m | Duration: 11940.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2025-12-13 11:59:11.882 RedLemon[4565:30568] 🗓 Schedule Calc: Waterworld | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Half-Blood Prince | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Shrek 2 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: 24: Redemption | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: 28 Days Later | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Four Brothers | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: The Hobbit: The Desolation of Smaug | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Psycho | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.883 RedLemon[4565:30568] 🗓 Schedule Calc: 2012 | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Chamber of Secrets | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: The Illusionist | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Predator: Badlands | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2025-12-13 11:59:11.884 RedLemon[4565:30568] 🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Alien | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: King Kong | RuntimeStr: 188 min -> 188m | Duration: 11880.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Thunderbolts* | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Godzilla: King of the Monsters | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.885 RedLemon[4565:30568] 🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: The Negotiator | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Between Worlds | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 1 | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: The Marvels | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.886 RedLemon[4565:30568] 🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Prisoner of Azkaban | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Shrek Forever After | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.887 RedLemon[4565:30568] 🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.888 RedLemon[4565:30568] 🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Girls Trip | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Harry Potter and the Order of the Phoenix | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.889 RedLemon[4565:30568] 🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: The Monkey | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+2025-12-13 11:59:11.890 RedLemon[4565:30568] 🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Godzilla | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.891 RedLemon[4565:30568] 🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Safe House | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Conan the Barbarian | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: The Medallion | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Predator | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Predators | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.892 RedLemon[4565:30568] 🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Wild Things | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Train to Busan | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Inside Out 2 | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Barbarian | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Taxi Driver | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: War | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2025-12-13 11:59:11.893 RedLemon[4565:30568] 🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Godfather | RuntimeStr: 175 min -> 175m | Duration: 11100.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2025-12-13 11:59:11.894 RedLemon[4565:30568] 🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: The Parent Trap | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Aliens vs. Predator: Requiem | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Baby Boy | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.895 RedLemon[4565:30568] 🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Evil Dead 2 | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+2025-12-13 11:59:11.896 RedLemon[4565:30568] 🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Contact | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+2025-12-13 11:59:11.897 RedLemon[4565:30568] 🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Together | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+2025-12-13 11:59:11.898 RedLemon[4565:30568] 🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Descendants 2 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: The Orphanage | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.899 RedLemon[4565:30568] 🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: The Prey | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Smokin' Aces | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+2025-12-13 11:59:11.900 RedLemon[4565:30568] 🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+2025-12-13 11:59:11.901 RedLemon[4565:30568] ✅ Using Deterministic Schedule! Start: 2025-12-13 16:18:00 +0000, Pos: 2461.95668053627
+2025-12-13 11:59:11.901 RedLemon[4565:30568] 🎉 Detected Event Room join! StartTime: 2025-12-13 16:19:22 +0000, Pos: 2461.95668053627s
+2025-12-13 11:59:11.966 RedLemon[4565:30568]    Quality: 1080p
+2025-12-13 11:59:11.967 RedLemon[4565:30568]    Mode: watchParty
+2025-12-13 11:59:11.967 RedLemon[4565:30568] 📡 Fetching metadata for tt4589218...
+ Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: Wild Things | Runtime: 108m | Duration: 7080s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Five Nights at Freddy's
+   Metadata runtime: 110 min
+   Calculated duration: 120 minutes
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📅 Schedule Updated:
+   Live: Five Nights at Freddy's
+   Progress: 2467s / 7200s
+📡 Joined channel: realtime:global-presence
+📨 Received: {"ref":"F58F9644-9761-47E9-9E05-6BE4CE9F79FE","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"01ffaa6c-d845-11f0-81d3-0a58a9feac02":{"metas":[{"phx_ref":"GIDU5l-iTwqeG6KH","phx_ref_prev":"GIDU5SlmNMueGyTK","last_seen":"2025-12-13T16:58:59Z","room_id":"event_tt4589218","started_at":"2025-12-13T16:58:59Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt4589218","watching_title":"Five Nights at Freddy's","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"09dc6b1c-d845-11f0-8724-0a58a9feac02":{"metas":[{"phx_ref":"GIDU6ELLcYRSzUDD","last_seen":"2025-12-13T16:59:07Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: [{"id":"event_tt4589218","name":"Five Nights at Freddy's","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"d2d94833474e5afe13b9b7e2fdcb6c5efa26bccb","imdb_id":"tt4589218","poster_url":"https://images.metahub.space/poster/small/tt4589218/img","backdrop_url":"https://images.metahub.space/background/medium/tt4589218/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-13T16:19:22.70024","last_activity":"2025-12-13T16:22:56.528346","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/ZZK2EIUFZN76443/Five.Nights.At.Freddys.2023.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:direct_messages
+📨 Received: {"ref":"6AA6062A-A53D-4CCE-AE17-B29FEE66977E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.081s (RTT: 61ms)
+   Local:  2025-12-13 16:59:09 +0000
+   Server: 2025-12-13 16:59:09 +0000
+🚀 Joining friend lemontom in room: event_tt4589218
+🔍 Supabase Response for /rooms: [{"id":"event_tt4589218","name":"Five Nights at Freddy's","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"d2d94833474e5afe13b9b7e2fdcb6c5efa26bccb","imdb_id":"tt4589218","poster_url":"https://images.metahub.space/poster/small/tt4589218/img","backdrop_url":"https://images.metahub.space/background/medium/tt4589218/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-13T16:19:22.70024","last_activity":"2025-12-13T16:22:56.528346","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/ZZK2EIUFZN76443/Five.Nights.At.Freddys.2023.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1218 with 420 movies
+✅ [EventsConfig] Using cached movie_events config (version 1218, 420 movies)
+🎬 PlayerVM: Starting playback for: Five Nights at Freddy's
+[ INFO ] GET /api/metadata/meta/movie/tt4589218 [request-id: B0A18528-0CDB-4070-A88F-D35434B05CC0]
+[ INFO ] GET /api/metadata/meta/movie/tt4589218 [request-id: BEC267A6-8B29-48B7-8242-6E8AD53F17B7]
+2025-12-13 11:59:12.173 RedLemon[4565:30671] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-13 11:59:12.174 RedLemon[4565:30739] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-13 11:59:12.183 RedLemon[4565:30568] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt4589218/img
+2025-12-13 11:59:12.184 RedLemon[4565:30568] ⏳ Background art loading...
+2025-12-13 11:59:12.184 RedLemon[4565:30568] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt4589218/img
+2025-12-13 11:59:12.184 RedLemon[4565:30568] ⏳ Logo loading...
+2025-12-13 11:59:12.251 RedLemon[4565:30568] ✅ Logo loaded successfully
+2025-12-13 11:59:12.253 RedLemon[4565:30696] ✅ StreamService: Using provided metadata: Five Nights at Freddy's
+2025-12-13 11:59:12.253 RedLemon[4565:30696] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-13 11:59:12.253 RedLemon[4565:30696] ⚡️ StreamResolver: Resolving streams for tt4589218 (S0E0)
+2025-12-13 11:59:12.253 RedLemon[4565:30696]    📅 Filtering by year: 2023
+2025-12-13 11:59:12.254 RedLemon[4565:30696] 🔍 ProviderManager: Fetching streams for tt4589218...
+2025-12-13 11:59:12.255 RedLemon[4565:30696] 🎬 Torrentio: Building URL for movie (no season/episode)
+2025-12-13 11:59:12.255 RedLemon[4565:30696] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/stream/movie/tt4589218.json
+2025-12-13 11:59:12.255 RedLemon[4565:30696] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/stream/movie/tt4589218.json
+2025-12-13 11:59:12.282 RedLemon[4565:30685] 🔍 Zilean: Searching for "Five Nights at Freddy's"
+2025-12-13 11:59:12.305 RedLemon[4565:30666] ✅ Zilean: Got 24 results
+2025-12-13 11:59:12.305 RedLemon[4565:30666] 🔍 Zilean: Filtered to 24 streams
+2025-12-13 11:59:12.317 RedLemon[4565:30568] ✅ Background art loaded successfully
+2025-12-13 11:59:13.015 RedLemon[4565:30648] ✅ ProviderManager: Fetched 76 raw, returning 71 unique streams
+2025-12-13 11:59:13.015 RedLemon[4565:30648] 📦 StreamResolver: Received 71 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt4589218]
+💾 Cache SET: Metadata[meta_movie_tt4589218]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒
+🎬 StreamService: Starting resolution for: Five Nights at Freddy's
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt4589218.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt4589218.json
+✅ Metadata fetched from Cinemeta for tt4589218: Five Nights at Freddy's (2023)
+✅ MediaFusion: Got 40 streams
+✅ Comet: Got 13 streams
+🔍 Comet: Parsing 13 streams...
+✅ Comet: Parsed 13 valid streams
+✅ Metadata cache hit for tt4589218: Five Nights at Freddy's
+🎯 Target title for matching: Five Nights at Freddy's
+   📅 Year filter (2023): 71 → 55 streams
+   🚫 RESOLVER BLOCKING AV1: Five Nights at Freddy's 2023 MULTi VFF 1080p BluRay TrueHD AV1-TiFou mkv
+   🚫 RESOLVER FILTERED AV1: 55 → 54 streams
+   🚫 RESOLVER BLOCKING non-English audio: Five Nights at Freddy's 2023 VOSTFR 1080p WEBRip x265-Elcrackito mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Five.Nights.at.Freddys.2023.SPANiSH.LATiNO.2160p.WEB-DL.DDP5.1.HDR10.H.265-dem3nt3
+👤 1 💾 11.96 GB ⚙️ TorrentGalaxy
+🇪🇸 / 🇲🇽 (Audio)
+   🎵 RESOLVER FILTERED audio language: 54 → 52 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt4589218 (movie)
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX] [EN] (score: 13)
+   [2] Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX] [EN] (score: 13)
+   [3] Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA [EN] (score: 5)
+   [4] Five.Nights.at.Freddy's.2023.1080p.10bit.BluRay.x265.Quickie4u [EN] (score: 5)
+   [5] Five.Nights.at.Freddys.2023.720p.PCOK.WEBRip.800MB.x264-GalaxyRG [EN] (score: 5)
+   [6] Five.Nights.at.Freddys.2023.720p.PCOK.WEBRip.800MB.x264-GalaxyRG [EN] (score: 5)
+   [7] Five.Nights.at.Freddy's.2023.WEBRip.Amazon [EN] (score: 0)
+   [8] FiveNightsatFreddy's [EN] (score: 0)
+   [9] Five.Nights.at.Freddys.2023.1080p.WEB.H264-HUZZAH [EN] (score: 0)
+   [10] FiveNightsatFreddy's [EN] (score: 0)
+   --- Processing Bucket: 2160p (Input: 18) ---
+   ✅ Bucket 2160p Final Count: 18
+   --- Processing Bucket: 1080p (Input: 25) ---
+   ✅ Bucket 1080p Final Count: 25
+   --- Processing Bucket: 720p (Input: 7) ---
+   ✅ Bucket 720p Final Count: 7
+   --- Processing Bucket: 480p (Input: 2) ---
+   ✅ Bucket 480p Final Count: 2
+📦 2160p Primary: Five Nights at Freddy's (2023) 2160p H265 10 bit DV HDR10+ ita eng AC3 5 1 sub ita eng Licdom mkv
+📦 1080p Primary: Five Nights at Freddy's (2023) 1080p H265 ita eng AC3 5 1 sub ita eng Licdom mkv
+📦 720p Primary: Five Nights at Freddy's 2023 720p BluRay
+👤 14 💾 1005.84 MB ⚙️ YTS
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: d2d94833474e5afe13b9b7e2fdcb6c5efa26bccb
+✅ StreamService: Found requested stream hash! Locking selection.
+📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+⚠️ StreamService: No 'Clean' English streams found. Falling back to 1 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Five Nights at Freddy's 2023 1080p WEBRip
+👤 225 💾 2.02 GB ⚙️ YTS
+🔓 StreamService: Unlocking with infoHash: d2d94833474e...
+[ INFO ] POST /api/streams/unlock [request-id: B322AE46-229E-4BAE-B854-A9FE55B9EB17]
+2025-12-13 11:59:13.581 RedLemon[4565:30671] 🔓 Unlock request: infoHash=d2d94833474e..., fileIdx=0
+2025-12-13 11:59:13.581 RedLemon[4565:30671] ✅ Token found, attempting unlock...
+2025-12-13 11:59:15.357 RedLemon[4565:30671] ✅ Unlocked successfully: Five.Nights.At.Freddys.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+2025-12-13 11:59:15.361 RedLemon[4565:30666] 📥 StreamService: Pre-downloading 3 subtitles...
+2025-12-13 11:59:15.362 RedLemon[4565:30666] 🔍 DEBUG: Processing subtitle URL: /subtitle/3219813-3236793.zip
+2025-12-13 11:59:15.362 RedLemon[4565:30666] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-13 11:59:15.363 RedLemon[4565:30696] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228503-3245813.zip
+2025-12-13 11:59:15.363 RedLemon[4565:30696] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-13 11:59:15.363 RedLemon[4565:30739] 🔍 DEBUG: Processing subtitle URL: /subtitle/3228475-3245778.zip
+2025-12-13 11:59:15.363 RedLemon[4565:30739] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-13 11:59:15.377 RedLemon[4565:30568] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Fi, subtitles: 3
+2025-12-13 11:59:15.452 RedLemon[4565:30568] ✅ Stream ready, starting playback...
+2025-12-13 11:59:15.452 RedLemon[4565:30568] 🖥️ WindowManager: enterFullscreen() called
+2025-12-13 11:59:15.452 RedLemon[4565:30568]    Window: <SwiftUI.SwiftUIWindow: 0x7ff38f0bfa20>
+2025-12-13 11:59:15.452 RedLemon[4565:30568]    Is fullscreen: 0
+2025-12-13 11:59:15.452 RedLemon[4565:30568]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-13 11:59:15.538 RedLemon[4565:30568] 🖼️ Setting up MPV with native macOS video output...
+2025-12-13 11:59:15.544 RedLemon[4565:30568] ✅ MPV initialized with native GPU rendering
+2025-12-13 11:59:15.554 RedLemon[4565:30568] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-13 11:59:15.554 RedLemon[4565:30568] 🎉 Starting watch party sync - Room: event_tt4589218, Host: NO
+2025-12-13 11:59:15.555 RedLemon[4565:30568] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-13 11:59:15.627 RedLemon[4565:30568] 🔍 MPV track-list/count: 0
+2025-12-13 11:59:15.627 RedLemon[4565:30568] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-13 11:59:15.627 RedLemon[4565:30568]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:15.639 RedLemon[4565:30648] 🔍 MPV track-list/count: 0
+2025-12-13 11:59:15.639 RedLemon[4565:30648] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-13 11:59:15.639 RedLemon[4565:30648]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:15.641 RedLemon[4565:30648] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2025-12-13 11:59:15.642 RedLemon[4565:30648]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:15.792 RedLemon[4565:30568] 🔄 Starting chat polling for room: event_tt4589218
+2025-12-13 11:59:15.792 RedLemon[4565:30568] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-13 11:59:15.792 RedLemon[4565:30568] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-13 11:59:15.792 RedLemon[4565:30568] 🎬🎬🎬 Subtitles: 3
+2025-12-13 11:59:15.793 RedLemon[4565:30568] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Five Nights at Freddy's
+2025-12-13 11:59:15.793 RedLemon[4565:30568] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Fi
+2025-12-13 11:59:15.793 RedLemon[4565:30568] 🎬🎬🎬 subtitles: 3
+2025-12-13 11:59:15.793 RedLemon[4565:30568] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-13 11:59:15.809 RedLemon[4565:30739] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Five.Nights.At.Freddys.2023.1080p.WEBRip.x, autoplay: true
+2025-12-13 11:59:15.809 RedLemon[4565:30739] 🎬 MPV executing command: loadfile "https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Five.Nights.At.Freddys.2023.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2025-12-13 11:59:15.809 RedLemon[4565:30739] 🎬 MPV loadfile result: 0
+2025-12-13 11:59:15.810 RedLemon[4565:30739] ✅ MPV loadfile succeeded, isPlaying set to true
+2025-12-13 11:59:15.999 RedLemon[4565:30568] 🔍 MPV track-list/count: 0
+2025-12-13 11:59:15.999 RedLemon[4565:30568] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-13 11:59:15.999 RedLemon[4565:30568]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:16.069 RedLemon[4565:30648] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-13 11:59:16.070 RedLemon[4565:30648] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMTk4MTMtMzIzNjc5My56aXA=
+✅ RD addMagnet: ZL7IXBQKE3SIC
+⚠️ Movie: No file matched title 'Five Nights at Freddy's', falling back to largest file
+🎬 Movie: Auto-selected largest video file: /Five.Nights.At.Freddys.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4 (ID: 1, size: 2167335171 bytes)
+📝 RD: Selecting file ID 1 for torrent ZL7IXBQKE3SIC
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/D4GSUOBF4FVBQF7C
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Five Nights at Freddy's 2023 1080p WEBRip
+👤 225 💾 2.02 GB ⚙️ YTS
+📊 Stream Size: 2.02 GB
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Fi
+   Display Title: Five Nights at Freddy's
+   Subtitle URLs: 3
+      [0] Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]
+      [1] Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA
+      [2] Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt4589218, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt4589218
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-13 16:18:00 +0000
+   Current time: 2025-12-13 16:59:15 +0000
+   Elapsed: 2475s
+   Seeking to: 2480s
+🎯 IMMEDIATE RESUME: Seeking to 2480s without delay
+📝 Started watch history tracking
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡️ PlaybackService: releasing sleep assertion
+📡 Joined channel: realtime:watch-party:event_tt4589218
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Five Nights at Freddy's
+   IMDB: tt4589218
+   URL: https://chi9-4.download.real-debrid.com/d/4QGBMI6BUMKZY43/Fi...
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+📡 Fetching metadata for tt4589218 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt4589218]
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📨 Received: {"ref":"F1F1F6CF-D5E6-494A-B750-74295A7D071D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"05178e90-d845-11f0-802b-0a58a9feac02":{"metas":[{"phx_ref":"GIDU5l6_j38gmwjF","is_host":false,"joined_at":1765645139.6492329,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0eab44ba-d845-11f0-a0ed-0a58a9feac02":{"metas":[{"phx_ref":"GIDU6hzFHzyB7fvH","is_host":false,"joined_at":1765645155.7911391,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt4589218"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"09dc6b1c-d845-11f0-8724-0a58a9feac02":{"metas":[{"phx_ref":"GIDU6h467SFSzZKP","phx_ref_prev":"GIDU6ELLcYRSzUDD","last_seen":"2025-12-13T16:59:15Z","room_id":"event_tt4589218","started_at":"2025-12-13T16:59:15Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt4589218","watching_title":"Five Nights at Freddy's","watching_type":"movie"}]}},"leaves":{"09dc6b1c-d845-11f0-8724-0a58a9feac02":{"metas":[{"phx_ref":"GIDU6ELLcYRSzUDD","last_seen":"2025-12-13T16:59:07Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+✅ Got background: https://images.metahub.space/background/medium/tt4589218/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt4589218/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt4589218/img...
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-13 16:18:00 +0000
+   Current time: 2025-12-13 16:59:16 +0000
+   Elapsed: 2475s
+   Seeking to: 2480s
+🎯 IMMEDIATE RESUME: Seeking to 2480s without delay
+📝 Started watch history tracking
+📡 SocialService: Updated status - Watching: Five Nights at Freddy's
+📝 Loading external subtitles (delayed execution)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMTk4MTMtMzIzNjc5My56aXA= [request-id: 9D22B37B-4FE2-481A-B8C3-0B51EED5391F]
+2025-12-13 11:59:16.252 RedLemon[4565:30568] 👥 MPVPlayer: Updated participants list via polling: 2
+caution: filename not matched:  Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX].srt
+2025-12-13 11:59:16.469 RedLemon[4565:30696] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0587BC03-CE4B-407F-A292-22CCC0C65C64.vtt
+2025-12-13 11:59:16.469 RedLemon[4565:30696] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0587BC03-CE4B-407F-A292-22C
+2025-12-13 11:59:16.485 RedLemon[4565:30696] ✅ External subtitle added to track list (not auto-selected)
+2025-12-13 11:59:16.485 RedLemon[4565:30696] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMjg1MDMtMzI0NTgxMy56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMyMTk4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3219813-3236793.zip
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⚠️ Video duration not available yet (0.0s), retrying...
+✅ Download complete: 39286 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMjg1MDMtMzI0NTgxMy56aXA= [request-id: FA1D665E-EB94-4745-8E4F-BDE11370B2FF]
+2025-12-13 11:59:16.695 RedLemon[4565:30646] 🔍 MPV track-list/count: 1
+2025-12-13 11:59:16.695 RedLemon[4565:30646] 🔍 Track 0 type: sub
+2025-12-13 11:59:16.696 RedLemon[4565:30646] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:16.696 RedLemon[4565:30646] 📊 Total subtitle tracks found: 2 (including Off if needed)
+2025-12-13 11:59:16.696 RedLemon[4565:30646]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:16.696 RedLemon[4565:30646]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:16.697 RedLemon[4565:30646] ✅ SubtitleService: Scanned 2 tracks (Attempt 2/5)
+2025-12-13 11:59:16.697 RedLemon[4565:30646]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:16.697 RedLemon[4565:30646]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+caution: filename not matched:  Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt
+2025-12-13 11:59:16.887 RedLemon[4565:30648] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A7682B39-907B-46B7-9CF5-0B6D6849284B.vtt
+2025-12-13 11:59:16.887 RedLemon[4565:30648] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A7682B39-907B-46B7-9CF5-0B6
+2025-12-13 11:59:16.892 RedLemon[4565:30648] ✅ External subtitle added to track list (not auto-selected)
+2025-12-13 11:59:16.893 RedLemon[4565:30648] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyMjg0NzUtMzI0NTc3OC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMyMjg1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3228503-3245813.zip
+⚠️ Video duration not available yet (0.0s), retrying...
+🎬 DisplayLink: reportSwap() (throttled)
+🎯 IMMEDIATE RESUME: Seeking to 2480s without delay
+✅ Download complete: 30959 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyMjg0NzUtMzI0NTc3OC56aXA= [request-id: 3F599443-35AE-4BF3-80B3-F9A3FC4E58FC]
+caution: filename not matched:  Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt
+2025-12-13 11:59:17.169 RedLemon[4565:30739] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CAAA7686-79D3-406C-9481-E7D2BEFECF9A.vtt
+2025-12-13 11:59:17.169 RedLemon[4565:30739] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CAAA7686-79D3-406C-9481-E7D
+2025-12-13 11:59:17.173 RedLemon[4565:30739] ✅ External subtitle added to track list (not auto-selected)
+2025-12-13 11:59:17.174 RedLemon[4565:30739] 🔍 MPV track-list/count: 3
+2025-12-13 11:59:17.174 RedLemon[4565:30739] 🔍 Track 0 type: sub
+2025-12-13 11:59:17.174 RedLemon[4565:30739] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:17.174 RedLemon[4565:30739] 🔍 Track 1 type: sub
+2025-12-13 11:59:17.175 RedLemon[4565:30739] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:17.175 RedLemon[4565:30739] 🔍 Track 2 type: sub
+2025-12-13 11:59:17.175 RedLemon[4565:30739] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:17.175 RedLemon[4565:30739] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-13 11:59:17.175 RedLemon[4565:30739]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:17.176 RedLemon[4565:30739]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:17.176 RedLemon[4565:30739]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:17.176 RedLemon[4565:30739]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:17.176 RedLemon[4565:30739] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-13 11:59:17.176 RedLemon[4565:30739]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:17.177 RedLemon[4565:30739]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:17.177 RedLemon[4565:30739]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:17.177 RedLemon[4565:30739]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:17.837 RedLemon[4565:30739] 🔍 MPV track-list/count: 5
+2025-12-13 11:59:17.914 RedLemon[4565:30739] 🔍 Track 0 type: sub
+2025-12-13 11:59:17.914 RedLemon[4565:30739] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:17.915 RedLemon[4565:30739] 🔍 Track 1 type: sub
+2025-12-13 11:59:17.915 RedLemon[4565:30739] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:17.915 RedLemon[4565:30739] 🔍 Track 2 type: sub
+2025-12-13 11:59:17.918 RedLemon[4565:30568] ⏱️ Watch Party: Duration available (6568.6s), triggering ready signal
+2025-12-13 11:59:17.918 RedLemon[4565:30568] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-13 11:59:17.918 RedLemon[4565:30739] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:17.918 RedLemon[4565:30739] 🔍 Track 3 type: video
+2025-12-13 11:59:17.918 RedLemon[4565:30739] 🔍 Track 4 type: audio
+2025-12-13 11:59:17.918 RedLemon[4565:30739] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-13 11:59:17.918 RedLemon[4565:30739]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:17.919 RedLemon[4565:30739]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:17.919 RedLemon[4565:30739]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:17.919 RedLemon[4565:30739]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:17.932 RedLemon[4565:30696] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:17.933 RedLemon[4565:30696]    Payload keys: type, isPlaying, timestamp, position, senderId
+2025-12-13 11:59:17.935 RedLemon[4565:30666] ✅ Realtime: Message broadcast complete
+2025-12-13 11:59:17.940 RedLemon[4565:30568] ✅ Watch Party: READY signal sent successfully
+2025-12-13 11:59:18.003 RedLemon[4565:30696] 📨 Realtime: Received broadcast message
+2025-12-13 11:59:18.003 RedLemon[4565:30696]    Payload keys: type, isPlaying, position, senderId, timestamp
+2025-12-13 11:59:18.004 RedLemon[4565:30696] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:18.004 RedLemon[4565:30696] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-13 11:59:18.004 RedLemon[4565:30696] ✅ Realtime: syncCallback invoked successfully
+2025-12-13 11:59:18.143 RedLemon[4565:30568] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:18.143 RedLemon[4565:30568] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-13 11:59:18.145 RedLemon[4565:30739] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2025-12-13 11:59:18.145 RedLemon[4565:30739]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:18.145 RedLemon[4565:30739]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:18.145 RedLemon[4565:30739]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:18.146 RedLemon[4565:30739]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:18.179 RedLemon[4565:30739] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:18.180 RedLemon[4565:30739] 🔍 Track 0 type: sub
+2025-12-13 11:59:18.180 RedLemon[4565:30739] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:18.180 RedLemon[4565:30739] 🔍 Track 1 type: sub
+2025-12-13 11:59:18.181 RedLemon[4565:30739] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:18.181 RedLemon[4565:30739] 🔍 Track 2 type: sub
+2025-12-13 11:59:18.181 RedLemon[4565:30739] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:18.181 RedLemon[4565:30739] 🔍 Track 3 type: video
+2025-12-13 11:59:18.181 RedLemon[4565:30739] 🔍 Track 4 type: audio
+2025-12-13 11:59:18.181 RedLemon[4565:30739] 🔍 Track 5 type: sub
+2025-12-13 11:59:18.182 RedLemon[4565:30739] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:18.182 RedLemon[4565:30739] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:18.182 RedLemon[4565:30739]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:18.182 RedLemon[4565:30739]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:18.182 RedLemon[4565:30739]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:18.183 RedLemon[4565:30739]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:18.183 RedLemon[4565:30739]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:18.183 RedLemon[4565:30739] ✅ SubtitleService: Scanned 5 tracks (Attempt 2/5)
+2025-12-13 11:59:18.184 RedLemon[4565:30739]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:18.184 RedLemon[4565:30739]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:18.184 RedLemon[4565:30739]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:18.185 RedLemon[4565:30739]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:18.185 RedLemon[4565:30739]    Track: ID=4, Title=Track 4, External=0
+2025-12-13 11:59:19.112 RedLemon[4565:30568] 🖱️ Mouse: x=1252/1366 y=455/768 | Exit: 0 Controls: 0 Chat: 1
+2025-12-13 11:59:19.147 RedLemon[4565:30696] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:19.148 RedLemon[4565:30696] 🔍 Track 0 type: sub
+2025-12-13 11:59:19.148 RedLemon[4565:30696] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:19.148 RedLemon[4565:30696] 🔍 Track 1 type: sub
+2025-12-13 11:59:19.148 RedLemon[4565:30696] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:19.148 RedLemon[4565:30696] 🔍 Track 2 type: sub
+2025-12-13 11:59:19.148 RedLemon[4565:30696] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:19.149 RedLemon[4565:30696] 🔍 Track 3 type: video
+2025-12-13 11:59:19.149 RedLemon[4565:30696] 🔍 Track 4 type: audio
+2025-12-13 11:59:19.149 RedLemon[4565:30696] 🔍 Track 5 type: sub
+2025-12-13 11:59:19.149 RedLemon[4565:30696] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:19.149 RedLemon[4565:30696] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:19.149 RedLemon[4565:30696]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:19.150 RedLemon[4565:30696]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:19.150 RedLemon[4565:30696]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:19.150 RedLemon[4565:30696]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:19.150 RedLemon[4565:30696]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:19.150 RedLemon[4565:30696] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2025-12-13 11:59:19.150 RedLemon[4565:30696]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:19.151 RedLemon[4565:30696]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:19.151 RedLemon[4565:30696]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:19.151 RedLemon[4565:30696]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:19.151 RedLemon[4565:30696]    Track: ID=4, Title=Track 4, External=0
+2025-12-13 11:59:19.189 RedLemon[4565:30685] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:19.189 RedLemon[4565:30685] 🔍 Track 0 type: sub
+2025-12-13 11:59:19.189 RedLemon[4565:30685] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:19.189 RedLemon[4565:30685] 🔍 Track 1 type: sub
+2025-12-13 11:59:19.189 RedLemon[4565:30685] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:19.189 RedLemon[4565:30685] 🔍 Track 2 type: sub
+2025-12-13 11:59:19.190 RedLemon[4565:30685] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:19.190 RedLemon[4565:30685] 🔍 Track 3 type: video
+2025-12-13 11:59:19.190 RedLemon[4565:30685] 🔍 Track 4 type: audio
+2025-12-13 11:59:19.191 RedLemon[4565:30685] 🔍 Track 5 type: sub
+2025-12-13 11:59:19.191 RedLemon[4565:30685] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:19.191 RedLemon[4565:30685] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:19.191 RedLemon[4565:30685]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:19.191 RedLemon[4565:30685]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:19.191 RedLemon[4565:30685]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:19.191 RedLemon[4565:30685]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:19.192 RedLemon[4565:30685]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:19.192 RedLemon[4565:30685] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2025-12-13 11:59:19.192 RedLemon[4565:30685]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:19.192 RedLemon[4565:30685]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:19.192 RedLemon[4565:30685]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:19.193 RedLemon[4565:30685]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:19.193 RedLemon[4565:30685]    Track: ID=4, Title=Track 4, External=0
+2025-12-13 11:59:20.177 RedLemon[4565:30696] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:20.177 RedLemon[4565:30696] 🔍 Track 0 type: sub
+2025-12-13 11:59:20.177 RedLemon[4565:30696] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:20.178 RedLemon[4565:30696] 🔍 Track 1 type: sub
+2025-12-13 11:59:20.179 RedLemon[4565:30696] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:20.179 RedLemon[4565:30696] 🔍 Track 2 type: sub
+2025-12-13 11:59:20.179 RedLemon[4565:30696] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:20.179 RedLemon[4565:30696] 🔍 Track 3 type: video
+2025-12-13 11:59:20.179 RedLemon[4565:30696] 🔍 Track 4 type: audio
+2025-12-13 11:59:20.180 RedLemon[4565:30696] 🔍 Track 5 type: sub
+2025-12-13 11:59:20.180 RedLemon[4565:30696] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:20.180 RedLemon[4565:30696] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:20.180 RedLemon[4565:30696]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:20.180 RedLemon[4565:30696]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:20.180 RedLemon[4565:30696]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:20.180 RedLemon[4565:30696]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:20.181 RedLemon[4565:30696]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:20.181 RedLemon[4565:30696] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2025-12-13 11:59:20.181 RedLemon[4565:30696]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:20.181 RedLemon[4565:30696]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:20.182 RedLemon[4565:30696]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:20.183 RedLemon[4565:30696]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:20.183 RedLemon[4565:30696]    Track: ID=4, Title=Track 4, External=0
+2025-12-13 11:59:20.207 RedLemon[4565:30739] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:20.208 RedLemon[4565:30739] 🔍 Track 0 type: sub
+2025-12-13 11:59:20.208 RedLemon[4565:30739] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:20.208 RedLemon[4565:30739] 🔍 Track 1 type: sub
+2025-12-13 11:59:20.208 RedLemon[4565:30739] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:20.209 RedLemon[4565:30739] 🔍 Track 2 type: sub
+2025-12-13 11:59:20.209 RedLemon[4565:30739] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:20.209 RedLemon[4565:30739] 🔍 Track 3 type: video
+2025-12-13 11:59:20.209 RedLemon[4565:30739] 🔍 Track 4 type: audio
+2025-12-13 11:59:20.209 RedLemon[4565:30739] 🔍 Track 5 type: sub
+2025-12-13 11:59:20.209 RedLemon[4565:30739] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:20.209 RedLemon[4565:30739] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:20.210 RedLemon[4565:30739] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2025-12-13 11:59:20.210 RedLemon[4565:30739]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:20.211 RedLemon[4565:30739]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:20.211 RedLemon[4565:30739]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:20.211 RedLemon[4565:30739]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:20.211 RedLemon[4565:30739]    Track: ID=4, Title=Track 4, External=0
+2025-12-13 11:59:21.219 RedLemon[4565:30739] 🔍 MPV track-list/count: 6
+2025-12-13 11:59:21.219 RedLemon[4565:30739] 🔍 Track 0 type: sub
+2025-12-13 11:59:21.220 RedLemon[4565:30739] ✅ Found subtitle track: ID=1, lang=en, title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], external=1
+2025-12-13 11:59:21.220 RedLemon[4565:30739] 🔍 Track 1 type: sub
+2025-12-13 11:59:21.220 RedLemon[4565:30739] ✅ Found subtitle track: ID=2, lang=en, title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, external=1
+2025-12-13 11:59:21.220 RedLemon[4565:30739] 🔍 Track 2 type: sub
+2025-12-13 11:59:21.221 RedLemon[4565:30739] ✅ Found subtitle track: ID=3, lang=en, title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], external=1
+2025-12-13 11:59:21.221 RedLemon[4565:30739] 🔍 Track 3 type: video
+2025-12-13 11:59:21.221 RedLemon[4565:30739] 🔍 Track 4 type: audio
+2025-12-13 11:59:21.221 RedLemon[4565:30739] 🔍 Track 5 type: sub
+2025-12-13 11:59:21.221 RedLemon[4565:30739] ✅ Found subtitle track: ID=4, lang=nil, title=nil, external=0
+2025-12-13 11:59:21.221 RedLemon[4565:30739] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-13 11:59:21.221 RedLemon[4565:30739]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-13 11:59:21.221 RedLemon[4565:30739]    Start[1]: ID=1, Title='Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:21.222 RedLemon[4565:30739]    Start[2]: ID=2, Title='Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-13 11:59:21.222 RedLemon[4565:30739]    Start[3]: ID=3, Title='Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-13 11:59:21.222 RedLemon[4565:30739]    Start[4]: ID=4, Title='nil', Lang='nil', Ext=0
+2025-12-13 11:59:21.222 RedLemon[4565:30739] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2025-12-13 11:59:21.222 RedLemon[4565:30739]    Track: ID=0, Title=Off, External=0
+2025-12-13 11:59:21.223 RedLemon[4565:30739]    Track: ID=1, Title=Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX], External=1
+2025-12-13 11:59:21.223 RedLemon[4565:30739]    Track: ID=2, Title=Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA, External=1
+2025-12-13 11:59:21.223 RedLemon[4565:30739]    Track: ID=3, Title=Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX], External=1
+2025-12-13 11:59:21.223 RedLemon[4565:30739]    Track: ID=4, Title=Track 4, External=0
+📄 Subtitle request: L3N1YnRpdGxlLzMyMjg0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3228475-3245778.zip
+🎯 IMMEDIATE RESUME: Seeking to 2480s without delay
+✅ Download complete: 40198 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚠️ Video duration not available yet (0.0s), retrying...
+[MPV] (+) Video --vid=1 (*) (h264 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]', forced: false, default: false
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA', forced: false, default: false
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]', forced: false, default: false
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'nil', title: 'nil', forced: false, default: true
+✅ Auto-selecting BEST English subtitle: Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX] (ID: 3) [External: true, Forced: false, Default: false]
+🎯 Executing immediate seek to 2480s...
+🎯 IMMEDIATE RESUME: Seeking to 2480s without delay
+ MPV Event: 18
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765645157.9183679,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt4589218"}
+ MPV Event: 17
+📊 Current subtitle track: 3
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 3
+[MPV] Using hardware decoding (videotoolbox).
+✅ Resumed playback after seek to 2480s
+⚠️ onVideoReady called again - ignoring to prevent loops
+ MPV Event: 20
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 (*) (eia_608)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 (*) (eia_608)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Five.Nights.At.Freddys.2023.720p.BluRay.x264.AAC-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Five.Nights.at.Freddy’s.2023.1080p.10bit.BluRay.8CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Five.Nights.At.Freddys.2023.1080p.BluRay.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 (*) (eia_608)
+[MPV] VO: [libmpv] 1920x960 videotoolbox[nv12]
+🎯 Executing immediate seek to 2480s...
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Resumed playback after seek to 2480s
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💾 Saved to watch history: Five Nights at Freddy's at 2506s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)

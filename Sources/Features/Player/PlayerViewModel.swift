@@ -800,7 +800,9 @@ class PlayerViewModel: ObservableObject {
                         
                         let now = Date()
                         // Ensure we don't start with negative time if clocks are off, though max(0) handles it
-                        let position = max(0, now.timeIntervalSince(room.createdAt))
+                        // NOTE: Events have a 5-minute (300s) lobby buffer. The content starts at createdAt + 300s.
+                        // We must subtract this buffer to get the correct content timestamp.
+                        let position = max(0, now.timeIntervalSince(room.createdAt) - 300)
                         self.resumeFromTimestamp = position
                         
                         NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")

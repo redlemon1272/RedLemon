@@ -28,6 +28,7 @@ struct ReactionOverlayView: View {
         }
         .allowsHitTesting(false) // Let interactions pass through to video
         .onReceive(viewModel.reactionTriggers) { emoji in
+            print("✨ ReactionOverlay: onReceive triggered with \(emoji)")
             addParticle(emoji)
         }
         .onReceive(eventChatService.reactionTriggers) { emoji in
@@ -37,7 +38,12 @@ struct ReactionOverlayView: View {
     
     private func addParticle(_ emoji: String) {
         // Respect global toggle
-        guard viewModel.areReactionsEnabled else { return }
+        guard viewModel.areReactionsEnabled else {
+            print("❌ ReactionOverlay: Reactions DISABLED")
+            return
+        }
+        
+        print("✨ ReactionOverlay: Adding particle for \(emoji)")
         
         let newParticle = ReactionParticleModel(
             emoji: emoji,

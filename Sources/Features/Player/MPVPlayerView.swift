@@ -144,7 +144,7 @@ struct MPVPlayerView: View {
                     
                     // Floating Reactions (Always visible, even if chat is closed)
                     ReactionOverlayView(viewModel: viewModel)
-                        .zIndex(90) // Below controls (99) but above video
+                        .zIndex(200) // Below controls (99) but above video
 
                     // Exit Room button (top-left, appears independently)
                     if showExitButton {

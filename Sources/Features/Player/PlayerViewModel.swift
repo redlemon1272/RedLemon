@@ -812,10 +812,11 @@ class PlayerViewModel: ObservableObject {
                            liveEvent.mediaItem.id == self.currentEventId {
                                 
                             // Current time into the slot (Movie + Buffer)
-                            // Slot starts at liveEvent.startTime
+                            // Slot starts at liveEvent.startTime, which IS the Movie Start Time in EventsView logic.
+                            // We do NOT subtract the buffer here, because startTime is already the content start.
                             let slotPosition = now.timeIntervalSince(liveEvent.startTime)
-                            position = max(0, slotPosition - buffer)
-                            NSLog("✅ Using Deterministic Schedule! Start: \(liveEvent.startTime), SlotPos: \(slotPosition), MoviePos: \(position)")
+                            position = max(0, slotPosition)
+                            NSLog("✅ Using Deterministic Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
                             
                         } else {
                             // Fallback to room.createdAt if schedule mistmatch or config missing

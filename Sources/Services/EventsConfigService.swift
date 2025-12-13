@@ -259,10 +259,14 @@ class EventsConfigService {
         let buffer = Double(config.bufferBetweenMoviesSeconds)
         
         for movie in config.movies {
-            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let runtimeString = movie.runtime?.components(separatedBy: " ").first ?? "120"
+            let runtimeMinutes = Int(runtimeString) ?? 120
             let duration = TimeInterval(runtimeMinutes * 60) + buffer
             movieDurations.append(duration)
             totalCycleDuration += duration
+            
+            // LOGGING for Drift Debugging
+            NSLog("🗓 Schedule Calc: \(movie.name) | RuntimeStr: \(movie.runtime ?? "nil") -> \(runtimeMinutes)m | Duration: \(duration)s")
         }
         
         // 2. Determine where we are in the cycle relative to fixed epoch

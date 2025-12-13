@@ -137,22 +137,29 @@ struct DMMessageRow: View {
     let friend: Friend
     
     var body: some View {
-        let isFriend = message.senderId.uuidString.lowercased() == friend.id.lowercased()
+        let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
         
         HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(isFriend ? friend.username : "Me")
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(isFriend ? .purple : .green)
+            if isMe { Spacer() }
+            
+            VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+                // Only show name for friend, or if we want to be explicit
+                if !isMe {
+                   Text(friend.username)
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(.purple)
+                }
+                
                 Text(message.content)
                     .font(.body)
                     .foregroundColor(.white)
+                    .padding(10)
+                    .background(isMe ? Color.blue : Color.white.opacity(0.1))
+                    .cornerRadius(12)
             }
-            .padding(8)
-            .background(Color.white.opacity(0.1))
-            .cornerRadius(8)
+            // Removed manual padding/bg wrap to let Text bubble handle it
             
-            Spacer()
+            if !isMe { Spacer() }
         }
     }
 }

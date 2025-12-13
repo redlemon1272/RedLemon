@@ -319,6 +319,11 @@ struct ChatOverlayView: View {
                             }
                             .id(message.id)
                         }
+                    } else {
+                        // Pending state or empty
+                        Text("Start a conversation")
+                            .foregroundColor(.gray)
+                            .padding(.top, 20)
                     }
                 }
                 .padding()

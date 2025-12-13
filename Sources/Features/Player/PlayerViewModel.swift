@@ -774,19 +774,37 @@ class PlayerViewModel: ObservableObject {
                 isPersistent: true,
                 playbackPosition: nil,
                 runtime: nil,
-                selectedStreamHash: nil,
-                selectedFileIdx: nil,
-                selectedQuality: nil,
-                unlockedStreamURL: nil
+                selectedStreamHash: room.streamHash,
+                selectedFileIdx: room.fileIdx,
+                selectedQuality: room.quality,
+                unlockedStreamURL: room.unlockedStreamUrl
             )
 
             await MainActor.run {
-                if room.isPlaying {
-                    NSLog("🎬 Room is already playing - joining playback")
+                if room.isPlaying || roomId.hasPrefix("event_") {
+                    NSLog("🎬 Room is playing (or is Event) - joining playback")
                     self.currentRoomId = roomId
                     self.currentWatchPartyRoom = watchPartyRoom
                     self.isWatchPartyHost = (room.hostUserId == appState.currentUserId)
                     self.currentWatchMode = .watchParty
+                    
+                    // NEW: Handle Event Rooms specifically
+                    if roomId.hasPrefix("event_") {
+                        self.isEventPlayback = true
+                        // Extract ID from roomId (event_tt12345) or use imdbId if available
+                        let rawId = roomId.replacingOccurrences(of: "event_", with: "")
+                        self.currentEventId = rawId
+                        
+                        // Set start time and resume position based on creation time (Schedule start)
+                        self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
+                        
+                        let now = Date()
+                        // Ensure we don't start with negative time if clocks are off, though max(0) handles it
+                        let position = max(0, now.timeIntervalSince(room.createdAt))
+                        self.resumeFromTimestamp = position
+                        
+                        NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")
+                    }
                     
                     if let imdbId = room.imdbId, !imdbId.isEmpty {
                         self.selectedMediaItem = watchPartyRoom.mediaItem // Use constructed one
@@ -801,7 +819,9 @@ class PlayerViewModel: ObservableObject {
                         self.selectedSeason = room.season
                         self.selectedEpisode = room.episode
                         self.selectedQuality = .fullHD
-                        self.resumeFromTimestamp = Double(room.playbackPosition)
+                        if !roomId.hasPrefix("event_") {
+                            self.resumeFromTimestamp = Double(room.playbackPosition)
+                        }
                         
                         // Play immediately
                         Task {

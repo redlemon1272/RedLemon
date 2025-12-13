@@ -20,6 +20,10 @@ struct FriendProfileView: View {
     // Chat state
     @State private var messageText = ""
     @FocusState private var isFocused: Bool
+    @State private var showEmojiPicker = false
+    
+    // Common emojis (same as player chat)
+    private let emojis = ["\u{1F602}", "\u{1F60D}", "\u{1F525}", "\u{1F44D}", "\u{2764}\u{FE0F}", "\u{1F60E}", "\u{1F389}", "\u{1F4AF}", "\u{1F62D}", "\u{1F914}", "\u{1F440}", "\u{2728}", "\u{1F3AC}", "\u{1F37F}", "\u{1F631}", "\u{1F923}"]
     
     var body: some View {
         VStack(spacing: 0) {
@@ -158,13 +162,35 @@ struct FriendProfileView: View {
             
             Divider()
             
+            // Emoji Picker (Slide up)
+            if showEmojiPicker {
+                emojiPicker
+                    .padding(8)
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                Divider()
+            }
+            
             // Input Area
-            HStack(spacing: 12) {
+            HStack(spacing: 8) {
+                // Emoji Button
+                Button(action: {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                        showEmojiPicker.toggle()
+                    }
+                }) {
+                    Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
+                        .font(.system(size: 18))
+                        .foregroundColor(showEmojiPicker ? .orange : .secondary)
+                        .frame(width: 24, height: 24)
+                }
+                .buttonStyle(.plain)
+
                 TextField("Message \(friend.username)...", text: $messageText)
                     .textFieldStyle(.plain)
                     .padding(10)
                     .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(20) // More rounded for "sleek" look
+                    .cornerRadius(20)
                     .overlay(
                         RoundedRectangle(cornerRadius: 20)
                             .stroke(Color.secondary.opacity(0.2), lineWidth: 1)
@@ -185,6 +211,42 @@ struct FriendProfileView: View {
             .padding()
             .background(Color(NSColor.windowBackgroundColor))
         }
+    }
+
+    private var emojiPicker: some View {
+        VStack(spacing: 8) {
+            // Header with Close
+             HStack {
+                 Text("Emojis")
+                     .font(.caption)
+                     .foregroundColor(.secondary)
+                 Spacer()
+                 Button(action: { withAnimation { showEmojiPicker = false } }) {
+                     Image(systemName: "xmark.circle.fill")
+                         .foregroundColor(.secondary)
+                 }
+                 .buttonStyle(.plain)
+             }
+             .padding(.horizontal, 4)
+             
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
+                ForEach(emojis, id: \.self) { emoji in
+                    Button(action: {
+                        messageText += emoji
+                        isFocused = true
+                    }) {
+                        Text(emoji)
+                            .font(.system(size: 24))
+                            .frame(width: 40, height: 40)
+                            .background(Color(NSColor.windowBackgroundColor))
+                            .cornerRadius(8)
+                            .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.1), lineWidth: 1))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+        .frame(maxHeight: 160)
     }
     
     private func sendMessage() {

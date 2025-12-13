@@ -904,9 +904,9 @@ struct MPVPlayerView: View {
             .zIndex(102)
         }
 
-        // Chat toggle button (appears on right side when mouse is there and chat is closed)
+        // Chat toggle button (appears on right side when mouse is there OR unread messages exist)
         // Only show in watch party mode
-        if showChatButton && !viewModel.showChat {
+        if (showChatButton || hasUnreadMessages) && !viewModel.showChat {
             chatToggleButton
                 .transition(.opacity.combined(with: .move(edge: .trailing)))
                 .zIndex(98)

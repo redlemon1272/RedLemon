@@ -780,6 +780,9 @@ class PlayerViewModel: ObservableObject {
                 unlockedStreamURL: room.unlockedStreamUrl
             )
 
+            // Fetch dynamic lobby duration from config (Async)
+            let eventsConfig = try? await EventsConfigService.shared.fetchMovieEventsConfig()
+
             await MainActor.run {
                 if room.isPlaying || roomId.hasPrefix("event_") {
                     NSLog("🎬 Room is playing (or is Event) - joining playback")
@@ -799,10 +802,12 @@ class PlayerViewModel: ObservableObject {
                         self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
                         
                         let now = Date()
+                        let lobbyBuffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
+                        
                         // Ensure we don't start with negative time if clocks are off, though max(0) handles it
-                        // NOTE: Events have a 5-minute (300s) lobby buffer. The content starts at createdAt + 300s.
+                        // NOTE: Events have a lobby buffer (default 10m/600s). The content starts at createdAt + buffer.
                         // We must subtract this buffer to get the correct content timestamp.
-                        let position = max(0, now.timeIntervalSince(room.createdAt) - 300)
+                        let position = max(0, now.timeIntervalSince(room.createdAt) - lobbyBuffer)
                         self.resumeFromTimestamp = position
                         
                         NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")

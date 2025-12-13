@@ -57,7 +57,7 @@ struct WatchPartyRoom: Identifiable {
     // MARK: - Playlist Support
     var playlist: [PlaylistItem]?
     var currentPlaylistIndex: Int
-    var lobbyDuration: TimeInterval  // Buffer between movies (default 5 min)
+    var lobbyDuration: TimeInterval  // Buffer between movies (default 10 min)
     var shouldLoop: Bool
     var isPersistent: Bool  // If true, room stays alive after movies
 

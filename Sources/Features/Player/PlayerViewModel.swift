@@ -801,7 +801,7 @@ class PlayerViewModel: ObservableObject {
                         // Set start time and resume position based on creation time (Schedule start)
                         self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
                         
-                        let now = Date()
+                        let now = TimeService.shared.now
                         var position: Double = 0
                         let buffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
                         
@@ -816,6 +816,10 @@ class PlayerViewModel: ObservableObject {
                             // We do NOT subtract the buffer here, because startTime is already the content start.
                             let slotPosition = now.timeIntervalSince(liveEvent.startTime)
                             position = max(0, slotPosition)
+                            
+                            // CRITICAL FIX: Ensure the "Recalculating seek time" logic uses the deterministic start time
+                            self.eventStartTime = liveEvent.startTime
+                            
                             NSLog("✅ Using Deterministic Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
                             
                         } else {

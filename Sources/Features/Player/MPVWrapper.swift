@@ -95,7 +95,7 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "loop", "no")  // Don't loop/restart
         mpv_set_option_string(handle, "input-default-bindings", "no")
         mpv_set_option_string(handle, "input-vo-keyboard", "no")
-        mpv_set_option_string(handle, "osc", "no")
+        mpv_set_option_string(handle, "osd-level", "0")
         mpv_set_option_string(handle, "border", "no")
         mpv_set_option_string(handle, "ontop", "no")
         mpv_set_option_string(handle, "keepaspect", "yes")

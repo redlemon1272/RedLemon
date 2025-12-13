@@ -40,7 +40,7 @@ struct ChatOverlayView: View {
     private let maxVisibleMessages = 100
     
     // Quick Reactions
-    private let quickReactions = ["😂", "❤️", "🔥", "👏", "😮", "😢", "😭", "🎉", "💯", "💀", "🤬", "🤮", "😴"]
+    private let quickReactions = ["😂", "❤️", "🔥", "👏", "😮", "😢", "😭", "🎉", "🤔", "👀", "💀", "🤬", "🤮", "😴"]
 
     var body: some View {
         VStack(spacing: 0) {

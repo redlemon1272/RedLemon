@@ -944,7 +944,9 @@ class MPVPlayerViewModel: ObservableObject {
                                title.contains("non-english") ||
                                title.contains("only")
             let isHI = title.contains(".hi") || title.contains(" hi")
-            return !isForeignOnly && !isHI
+            // Prioritize SDH/HI if embedded, otherwise treat normally.
+            // We only want to filter out "Foreign Only" tracks from being the default.
+            return !isForeignOnly
         }) ?? sortedEnglishSubs.first
 
         if let englishSub = preferredSub {
@@ -958,9 +960,7 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Update our state
             // Update our state
-            Task {
-                await subtitleService.scanEmbeddedTracks()
-            }
+
 
             // Analyze compatibility after selecting track
             analyzeSubtitleCompatibility()
@@ -977,9 +977,7 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Update our state
             // Update our state
-            Task {
-                await subtitleService.scanEmbeddedTracks()
-            }
+
 
             // Analyze compatibility after selecting track
             analyzeSubtitleCompatibility()

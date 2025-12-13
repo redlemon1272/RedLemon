@@ -68,7 +68,7 @@ struct DirectMessage: Codable, Identifiable {
     let senderId: UUID
     let receiverId: UUID
     let content: String
-    let isRead: Bool
+    var isRead: Bool
     let createdAt: Date
     
     enum CodingKeys: String, CodingKey {

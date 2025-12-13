@@ -363,15 +363,28 @@ class SocialService: ObservableObject {
         
         var currentMsgs = self.messages[normalizedFriendId] ?? []
         
-        // Check for duplicates (optimistic updates might cause this)
-        // Check for duplicates (optimistic updates might cause this)
-        if !currentMsgs.contains(where: { $0.id == id }) {
+        // Check for duplicates or updates
+        if let index = currentMsgs.firstIndex(where: { $0.id == id }) {
+            // Update existing message
+            var existing = currentMsgs[index]
+            
+            // If content is empty, preserve existing content (assume metadata update like is_read)
+            if content.isEmpty && !existing.content.isEmpty {
+                // Only update metadata
+                print("ℹ️ SocialService: Updating metadata for message \(id)")
+                existing.isRead = newRecord["is_read"] as? Bool ?? existing.isRead
+            } else {
+                // Full update including content
+                existing = message
+            }
+            
+            currentMsgs[index] = existing
+            self.messages[normalizedFriendId] = currentMsgs
+        } else {
+            // New message logic
             // Deduplicate optimistic message from self
-            // When Supabase echoes back the message I just sent, it has a real ID.
-            // My local optimistic message has a temp ID. I need to remove the temp one to avoid "Double Message" effect.
             if senderIdStr == currentUserId {
                 // Look for a message with same content and diff ID (assumed to be the temp one)
-                // We search from the end since it's likely the last one
                 if let idx = currentMsgs.lastIndex(where: { 
                     $0.senderId.uuidString.lowercased() == currentUserId &&
                     $0.content == content &&
@@ -386,7 +399,6 @@ class SocialService: ObservableObject {
             self.messages[normalizedFriendId] = currentMsgs
             
             // Increment unread count if it's an incoming message (not from me)
-            // Note: We use the raw string ID comparison here
             if senderIdStr != currentUserId {
                 self.unreadCounts[normalizedFriendId, default: 0] += 1
             }

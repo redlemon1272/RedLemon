@@ -213,9 +213,35 @@ actor StreamService: StreamResolving {
             throw APIError.noStreamsFound
         }
 
+        // Step 3.6: Language Purity Filter
+        // Goal: Deprioritize streams with localized/dual audio tags (e.g. "Ita", "Multi") unless no other option exists
+        let localizedKeywords = ["ita", "fre", "ger", "latino", "rus", "dual", "multi", "french", "german", "italian", "russian", "spanish", "truefrench", "vff", "vfq"]
+        
+        var cleanStreams: [Stream] = []
+        var deprioritizedStreams: [Stream] = []
+        
+        for stream in keywordFiltered {
+            let titleLower = stream.title.lowercased()
+            if localizedKeywords.contains(where: { titleLower.contains($0) }) {
+                deprioritizedStreams.append(stream)
+            } else {
+                cleanStreams.append(stream)
+            }
+        }
+        
+        var languageFilteredStreams = keywordFiltered
+        
+        if !cleanStreams.isEmpty {
+            print("✅ StreamService: Found \(cleanStreams.count) 'Clean' English streams. Deprioritizing \(deprioritizedStreams.count) localized/dual streams.")
+            languageFilteredStreams = cleanStreams
+        } else if !deprioritizedStreams.isEmpty {
+             print("⚠️ StreamService: No 'Clean' English streams found. Falling back to \(deprioritizedStreams.count) localized/dual streams.")
+             languageFilteredStreams = deprioritizedStreams
+        }
+
         // Step 4: Apply File Size Limit (Max 12GB) for 1080p
         // Older hardware (2015 Macs) struggles with large files, especially H.264 Remuxes (30GB+)
-        var finalStreams = keywordFiltered
+        var finalStreams = languageFilteredStreams
         
         // Force bypass filters if we have a locked stream
         if let match = forcedStream {

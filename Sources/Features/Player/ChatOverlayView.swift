@@ -26,7 +26,12 @@ struct ChatOverlayView: View {
         case friends
         case dm(Friend)
     }
-    @State private var chatMode: ChatMode = .friends // Default to friends (safe fallback)
+    @State private var chatMode: ChatMode
+
+    init(viewModel: MPVPlayerViewModel, initialChatMode: ChatMode = .friends) {
+        self.viewModel = viewModel
+        self._chatMode = State(initialValue: initialChatMode)
+    }
 
     // Common emojis for quick access
     private let emojis = ["\u{1F602}", "\u{1F60D}", "\u{1F525}", "\u{1F44D}", "\u{2764}\u{FE0F}", "\u{1F60E}", "\u{1F389}", "\u{1F4AF}", "\u{1F62D}", "\u{1F914}", "\u{1F440}", "\u{2728}", "\u{1F3AC}", "\u{1F37F}", "\u{1F631}", "\u{1F923}"]
@@ -35,7 +40,7 @@ struct ChatOverlayView: View {
     private let maxVisibleMessages = 100
     
     // Quick Reactions
-    private let quickReactions = ["😂", "❤️", "🔥", "👏", "😮", "😢"]
+    private let quickReactions = ["😂", "❤️", "🔥", "👏", "😮", "😢", "😭", "🎉", "💯", "💀", "🤬", "🤮", "😴"]
 
     var body: some View {
         VStack(spacing: 0) {
@@ -248,55 +253,45 @@ struct ChatOverlayView: View {
     private var friendsList: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
+                // Consolidated list with custom sorting
+                // 1. Unread Messages (High Priority) or Online
+                // 2. Offline
                 
-                // MESSAGES SECTION (New)
-                let activeDMs = socialService.friends.filter { friend in
-                    (socialService.unreadCounts[friend.id] ?? 0) > 0 ||
-                    (socialService.messages[friend.id]?.isEmpty == false)
-                }.sorted { f1, f2 in
-                    // Sort by unread first, then by last message time
+                let sortedFriends = socialService.friends.sorted { f1, f2 in
+                    // Priority 1: Unread Messages
                     let u1 = socialService.unreadCounts[f1.id] ?? 0
                     let u2 = socialService.unreadCounts[f2.id] ?? 0
-                    if u1 != u2 { return u1 > u2 }
+                    if (u1 > 0) != (u2 > 0) {
+                        return u1 > 0 // Friends with unread messages go first
+                    }
+                    if u1 != u2 {
+                         // internal sort for unread
+                        return u1 > u2 
+                    }
                     
+                    // Priority 2: Online Status
+                    let online1 = socialService.onlineUserIds.contains(f1.id)
+                    let online2 = socialService.onlineUserIds.contains(f2.id)
+                    if online1 != online2 {
+                        return online1 // Online friends go first (after unread check)
+                    }
+
+                    // Priority 3: Last Message Time (Recency)
                     let t1 = socialService.messages[f1.id]?.last?.createdAt ?? Date.distantPast
                     let t2 = socialService.messages[f2.id]?.last?.createdAt ?? Date.distantPast
-                    return t1 > t2
-                }
-                
-                if !activeDMs.isEmpty {
-                    Section(header: Text("MESSAGES").font(.caption).fontWeight(.bold).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
-                        ForEach(activeDMs) { friend in
-                            FriendRowButton(friend: friend, unreadCount: socialService.unreadCounts[friend.id] ?? 0) {
-                                openDM(friend)
-                            }
-                            .id(friend.id + "-msg")
-                        }
+                    if t1 != t2 {
+                         return t1 > t2
                     }
-                    .padding(.bottom, 8)
+                    
+                    // Priority 4: Alphabetical
+                    return f1.displayName < f2.displayName
                 }
 
-                // Online Friends (excluding those already active in Messages to avoid dupe, or keep them?)
-                // Let's keep them but maybe filter? For now, simple list is better.
-                if !socialService.onlineUserIds.isEmpty {
-                    Section(header: Text("ONLINE").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
-                        ForEach(socialService.friends.filter { socialService.onlineUserIds.contains($0.id) }) { friend in
-                            FriendRowButton(friend: friend, unreadCount: 0) {
-                                openDM(friend)
-                            }
-                            .id(friend.id + "-online")
-                        }
+                ForEach(sortedFriends) { friend in
+                    FriendRowButton(friend: friend, unreadCount: socialService.unreadCounts[friend.id] ?? 0) {
+                        openDM(friend)
                     }
-                }
-
-                // All Friends
-                Section(header: Text("ALL FRIENDS").font(.caption).foregroundColor(.secondary).frame(maxWidth: .infinity, alignment: .leading)) {
-                    ForEach(socialService.friends) { friend in
-                        FriendRowButton(friend: friend, unreadCount: 0) {
-                            openDM(friend)
-                        }
-                        .id(friend.id + "-all")
-                    }
+                    .id(friend.id) // Simple ID, no duplicates possible
                 }
             }
             .padding()

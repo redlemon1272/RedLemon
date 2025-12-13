@@ -236,7 +236,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var isSeeking: Bool = false
 
     // Chat state
-    @Published var showChat: Bool = true
+    @Published var showChat: Bool = false
     @Published var showParticipantList: Bool = false
     @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
@@ -349,6 +349,8 @@ class MPVPlayerViewModel: ObservableObject {
             }
             // Events don't use waitingForGuests
             showWaitingForGuests = false
+            // Auto-open chat for events
+            Task { @MainActor in self.showChat = true }
 
         } else if !isInWatchParty {
             print("👤 SOLO MODE: Autoplaying")
@@ -379,6 +381,8 @@ class MPVPlayerViewModel: ObservableObject {
                 await playbackService.loadVideo(url: streamURL, autoplay: false)
             }
             showWaitingForGuests = true
+            // Auto-open chat for watch parties
+            Task { @MainActor in self.showChat = true }
         }
 
 

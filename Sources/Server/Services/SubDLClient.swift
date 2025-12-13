@@ -27,7 +27,7 @@ struct SubDLSubtitle: Content {
 
 struct SubDLResponse: Codable {
     let status: Bool
-    let subtitles: [SubDLSubtitle]
+    let subtitles: [SubDLSubtitle]?
 }
 
 final class SubDLClient {
@@ -93,11 +93,12 @@ final class SubDLClient {
         }
 
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
+        let subtitles = result.subtitles ?? []
 
-        print("✅ Found \(result.subtitles.count) subtitles from SubDL")
+        print("✅ Found \(subtitles.count) subtitles from SubDL")
 
         // Sort subtitles by release quality and compatibility
-        let sortedSubtitles = sortSubtitlesByCompatibility(result.subtitles, season: season, episode: episode)
+        let sortedSubtitles = sortSubtitlesByCompatibility(subtitles, season: season, episode: episode)
 
         // Log each subtitle's release name for debugging
         if let season = season, let episode = episode {

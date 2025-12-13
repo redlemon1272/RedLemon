@@ -98,7 +98,14 @@ actor StreamService: StreamResolving {
                 }
             }
             if forcedStream == nil {
-                print("⚠️ StreamService: Requested hash not found in resolved streams. Falling back to standard selection.")
+                print("⚠️ StreamService: Requested hash not found in resolved streams. Attempting forced direct resolve.")
+                // Attempt to force resolve the hash directly via Debrid (Unlocker)
+                // We construct a synthetic stream object with the required Hash
+                forcedStream = Stream(
+                    title: "Shared Stream (Exact Match)",
+                    provider: "direct",
+                    infoHash: targetHash
+                )
             }
         }
 

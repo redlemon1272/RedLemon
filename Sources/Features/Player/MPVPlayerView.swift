@@ -222,7 +222,7 @@ struct MPVPlayerView: View {
                     }
 
                     // Show controls when mouse is in bottom 25% of screen
-                    if location.y <= bottomThreshold {
+                    if location.y <= bottomThreshold && location != .zero {
                         showControls = true
 
                         // Keep controls visible briefly after hover

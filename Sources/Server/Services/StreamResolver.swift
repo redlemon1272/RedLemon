@@ -331,13 +331,15 @@ actor StreamResolver {
                  return lang == "en" || lang == "eng" || lang.contains("english")
              }
              
-             // Simple mapping
+             // Map streams to attach the BEST matching subtitles for THAT specific stream
              return streams.map { stream in
-                 // Return stream with best subtitles (using simplified logic for refactor brevity)
-                 // In production, full logic from StreamRoutes is better, but this suffices for a direct port
-                 // Logic here: If stream has no subs, attach top 3 english ones
                  if stream.subtitles == nil || stream.subtitles!.isEmpty {
-                     let mappedSubs = englishSubtitles.prefix(3).map { sub in
+                     
+                     // Rank subtitles specifically for this stream's filename/title
+                     let rankedSubs = rankSubtitlesForStream(englishSubtitles, streamTitle: stream.title)
+                     
+                     // Select top 3 matches
+                     let mappedSubs = rankedSubs.prefix(3).map { sub in
                         Subtitle(
                             id: Data((sub.url).utf8).base64EncodedString(),
                             url: sub.url,
@@ -348,6 +350,13 @@ actor StreamResolver {
                             provider: "SubDL"
                         )
                      }
+                     
+                     if !mappedSubs.isEmpty {
+                        // Log the match for debugging
+                        let bestMatch = mappedSubs.first?.label ?? "Unknown"
+                        print("✅ StreamResolver: Attached best sub for '\(stream.title.prefix(30))...': \(bestMatch.prefix(30))...")
+                     }
+
                      var newStream = stream
                      newStream.subtitles = Array(mappedSubs)
                      return newStream
@@ -358,6 +367,60 @@ actor StreamResolver {
              print("❌ StreamResolver: Subtitle error: \(error)")
              return streams
          }
+    }
+    
+    /// Rank subtitles based on how well they match the stream's Release Type
+    /// Returns sorted list (Best match first)
+    private func rankSubtitlesForStream(_ subtitles: [SubDLSubtitle], streamTitle: String) -> [SubDLSubtitle] {
+        let streamLower = streamTitle.lowercased()
+        
+        return subtitles.sorted { sub1, sub2 in
+            let score1 = calculateStreamMatchScore(streamTitle: streamLower, subtitle: sub1)
+            let score2 = calculateStreamMatchScore(streamTitle: streamLower, subtitle: sub2)
+            return score1 > score2
+        }
+    }
+    
+    private func calculateStreamMatchScore(streamTitle: String, subtitle: SubDLSubtitle) -> Int {
+        guard let releaseName = subtitle.releaseName?.lowercased() else { return 0 }
+        var score = 0
+        
+        // Tokens to check for matching
+        let sourceTokens = ["webrip", "web-dl", "web", "bluray", "brrip", "bdrip", "dvdrip", "hdrip", "cam", "ts", "tc", "scr", "remux"]
+        let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
+        let groupTokens = ["yts", "rarbg", "galaxy", "psa", "qxr", "tgx"]
+        
+        // 1. Source Match (Critical: +500)
+        // If stream is WEBRip, we want WEBRip subs.
+        for token in sourceTokens {
+            if streamTitle.contains(token) && releaseName.contains(token) {
+                score += 500
+            } else if streamTitle.contains(token) && !releaseName.contains(token) {
+                // If mismatch, check if subtitle has a CONFLICTING source
+                // e.g. Stream=WEBRip, Sub=BluRay -> Match failed
+                for other in sourceTokens where other != token {
+                    if releaseName.contains(other) {
+                        score -= 200 // Penalty for explicit mismatch
+                    }
+                }
+            }
+        }
+        
+        // 2. Quality Match (+100)
+        for token in qualityTokens {
+            if streamTitle.contains(token) && releaseName.contains(token) {
+                score += 100
+            }
+        }
+        
+        // 3. Group Match (+50)
+        for token in groupTokens {
+            if streamTitle.contains(token) && releaseName.contains(token) {
+                score += 50
+            }
+        }
+        
+        return score
     }
 
     // MARK: - Helpers (Copied from StreamRoutes)

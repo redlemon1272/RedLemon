@@ -134,8 +134,8 @@ class MPVPlayerViewModel: ObservableObject {
                          if self.isSwitchingTracks {
                              // Snap-Seek Event: Switching completed, now seek to sync
                              self.completeTrackSwitch()
-                         } else if self.hasVideoReadyTriggered {
-                            print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner)")
+                         } else if self.hasVideoReadyTriggered && self.mpvWrapper.isFileLoaded {
+                            print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
                             self.isBuffering = false
                             self.isLoading = false
                         }
@@ -559,31 +559,24 @@ class MPVPlayerViewModel: ObservableObject {
             guard let self = self else { return }
 
             // Enhanced validation before seeking
-            guard self.duration > 0 else {
-                print("⚠️ Video duration not available yet (\(self.duration)s), retrying...")
-                // Retry after another short delay
-                Task { @MainActor [weak self] in
-                    try? await Task.sleep(nanoseconds: 500_000_000)
-                    self?.attemptImmediateResume(resumeTime: resumeTime)
+            // CRITICAL FIX: Don't block indefinitely if duration is 0.
+            // MPV might report 0 duration until playback/seeking starts, especially if loaded in paused state.
+            if self.duration > 0 {
+                guard resumeTime < self.duration else {
+                    print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s). Event is effectively finished for this file.")
+                    let nearEnd = max(0, self.duration - 1.0)
+                    Task { @MainActor in
+                        await playbackService.seek(to: nearEnd)
+                        await playbackService.play()
+                    }
+                    self.isPlaying = true
+                    
+                    self.appState?.player.resumeFromTimestamp = nil
+                    self.appState?.player.eventStartTime = nil
+                    return
                 }
-                return
-            }
-
-            guard resumeTime < self.duration else {
-                print("⚠️ Resume time (\(Int(resumeTime))s) exceeds video duration (\(Int(self.duration))s). Event is effectively finished for this file.")
-                // Seek to near the end to trigger natural completion and transition to lobby
-                // This ensures the user enters the "Waiting" state for the next event, maintaining sync
-                let nearEnd = max(0, self.duration - 1.0)
-                Task { @MainActor in
-                    await playbackService.seek(to: nearEnd)
-                    await playbackService.play()
-                }
-                self.isPlaying = true
-
-                // Clear state
-                self.appState?.player.resumeFromTimestamp = nil
-                self.appState?.player.eventStartTime = nil
-                return
+            } else {
+                 print("⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to \(Int(resumeTime))s...")
             }
 
             // Execute seek immediately

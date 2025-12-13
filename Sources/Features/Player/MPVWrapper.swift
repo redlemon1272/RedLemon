@@ -21,6 +21,9 @@ class MPVWrapper: ObservableObject {
     @Published var volume: Int = 100
     @Published var playbackFinished = false
     @Published var isFileLoaded = false
+    
+    // Track the current video filename for subtitle matching
+    private var currentVideoFilename: String = ""
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -227,6 +230,14 @@ class MPVWrapper: ObservableObject {
             // Auto-select English audio and subtitles BEFORE playback starts (no stutter)
             autoSelectEnglishAudio()
             autoSelectEnglishSubtitles()
+            
+            // Execute pending seek if any
+            if let targetTime = self.pendingSeekTime {
+                NSLog("🔄 MPV: Executing PENDING SEEK to %.1fs after FILE_LOADED", targetTime)
+                // Use robust seek command with retry (calling self.seek again is safe now that isFileLoaded=true)
+                self.seek(to: targetTime)
+                self.pendingSeekTime = nil
+            }
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
             // Don't blindly set isPlaying = true here.
@@ -344,6 +355,14 @@ class MPVWrapper: ObservableObject {
     // MARK: - Public Controls
 
     func loadVideo(url: String, autoplay: Bool = true) {
+        // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
+        if let urlObj = URL(string: url) {
+            self.currentVideoFilename = urlObj.lastPathComponent
+            NSLog("🎬 MPV: Current video filename set to: %@", self.currentVideoFilename)
+        } else {
+            self.currentVideoFilename = url
+        }
+
         NSLog("🎬 MPV loadVideo called with URL: %@, autoplay: %@", String(url.prefix(100)), autoplay ? "true" : "false")
         if !isInitialized {
             NSLog("⚠️ MPV not initialized yet, waiting 500ms and retrying...")
@@ -460,12 +479,48 @@ class MPVWrapper: ObservableObject {
 
     func togglePlayPause() { isPlaying ? pause() : play() }
 
+    // State for pending seeks (before FILE_LOADED)
+    private var pendingSeekTime: Double?
+
+    // ... (existing properties)
+
     func seek(to seconds: Double) {
         guard let handle = mpvHandle, isInitialized else { return }
-        var t = seconds
-        mpv_set_property(handle, "time-pos", MPV_FORMAT_DOUBLE, &t)
-
-        // Natural cleanup point during seek
+        
+        // If file isn't loaded yet, queue the seek
+        if !isFileLoaded {
+            NSLog("⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to %.1fs", seconds)
+            pendingSeekTime = seconds
+            return
+        }
+        
+        let command = "seek \(seconds) absolute"
+        
+        // Try immediately
+        let result = mpv_command_string(handle, command)
+        
+        if result >= 0 {
+            // Update local state immediately for UI responsiveness
+            currentTime = seconds
+            // Clear any pending seek since we succeeded
+            pendingSeekTime = nil
+        } else {
+            NSLog("⚠️ MPV seek failed: \(result). Retrying in 200ms...")
+            
+            // Retry once after a short delay (still useful for transient errors)
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 200_000_000)
+                guard let handle = self.mpvHandle else { return }
+                
+                let retryResult = mpv_command_string(handle, command)
+                if retryResult >= 0 {
+                    NSLog("✅ MPV seek retry succeeded")
+                    self.currentTime = seconds
+                } else {
+                    NSLog("❌ MPV seek retry failed: \(retryResult)")
+                }
+            }
+        }
     }
 
     func seekRelative(seconds: Double) {
@@ -817,9 +872,9 @@ class MPVWrapper: ObservableObject {
             }
         }
 
-        // Select best candidate
         // Scoring:
-        // +100 for Embedded (vs External)
+        // +1000 for Embedded (vs External) - Keep favoring embedded as they are perfectly synced
+        // +500 for Release Match (WEBRip vs BluRay) - Critical for external sync
         // +50 for SDH/CC
         // -50 for Forced (unless it's the only one)
         // -10 for Default (often foreign default in dual audio)
@@ -829,23 +884,27 @@ class MPVWrapper: ObservableObject {
             var scoreA = 0
             var scoreB = 0
 
-            // Prefer Embedded
-            if !a.isExternal { scoreA += 100 }
-            if !b.isExternal { scoreB += 100 }
+            // 1. Prefer Embedded (+1000)
+            if !a.isExternal { scoreA += 1000 }
+            if !b.isExternal { scoreB += 1000 }
+            
+            // 2. Release Match (+500 range)
+            scoreA += calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
+            scoreB += calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: b.title)
 
-            // Prefer SDH/CC
+            // 3. Prefer SDH/CC
             if a.title.contains("sdh") || a.title.contains("cc") { scoreA += 50 }
             if b.title.contains("sdh") || b.title.contains("cc") { scoreB += 50 }
 
-            // Avoid Forced
+            // 4. Avoid Forced
             if a.isForced { scoreA -= 50 }
             if b.isForced { scoreB -= 50 }
 
-            // Avoid Default (in dual audio, default is often the foreign one)
+            // 5. Avoid Default (in dual audio, default is often the foreign one)
             if a.isDefault { scoreA -= 10 }
             if b.isDefault { scoreB -= 10 }
 
-            // Tie-breaker: Prefer later tracks (often better/fixed)
+            // 6. Tie-breaker: Prefer later tracks (often better/fixed)
             if a.id > b.id { scoreA += 1 }
             if b.id > a.id { scoreB += 1 }
 
@@ -854,6 +913,11 @@ class MPVWrapper: ObservableObject {
 
         if let best = bestCandidate {
             print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault)]")
+            
+            // Calculate detailed score for logging
+            let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
+            print("   Match Score: \(matchScore) (Video: \(currentVideoFilename))")
+
             var trackId = Int64(best.id)
             mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
 
@@ -863,6 +927,59 @@ class MPVWrapper: ObservableObject {
         } else {
             print("ℹ️ No suitable English subtitles found")
         }
+    }
+    
+    /// Calculate a matching score between video filename and subtitle name
+    /// High score means good release match (e.g. WEBRip to WEBRip)
+    private func calculateReleaseMatchScore(videoName: String, subtitleName: String) -> Int {
+        let video = videoName.lowercased()
+        let sub = subtitleName.lowercased()
+        var score = 0
+        
+        // Tokens to check for matching
+        let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
+        let sourceTokens = ["webrip", "web-dl", "web", "bluray", "brrip", "bdrip", "dvdrip", "hdrip", "cam", "ts", "tc", "scr", "remux"]
+        let codecTokens = ["x264", "h264", "x265", "h265", "hevc", "av1"]
+        let groupTokens = ["yts", "rarbg", "galaxy", "psa", "qxr", "tgx"]
+        
+        // 1. Source Match (Critical for sync) - +500
+        for token in sourceTokens {
+            if video.contains(token) && sub.contains(token) {
+                score += 500
+            } else if video.contains(token) && !sub.contains(token) {
+                 // Optimization: If video has a source but sub doesn't match it, check if sub has a *conflicting* source
+                 // e.g. Video is WEBRip, Sub is BluRay -> Penalty
+                 for otherToken in sourceTokens where otherToken != token {
+                     if sub.contains(otherToken) {
+                         // WEBRip vs BluRay mismatch is bad
+                         score -= 200
+                     }
+                 }
+            }
+        }
+        
+        // 2. Quality Match - +100
+        for token in qualityTokens {
+            if video.contains(token) && sub.contains(token) {
+                score += 100
+            }
+        }
+        
+        // 3. Codec Match - +50
+        for token in codecTokens {
+            if video.contains(token) && sub.contains(token) {
+                score += 50
+            }
+        }
+        
+        // 4. Release Group Match - +50
+        for token in groupTokens {
+            if video.contains(token) && sub.contains(token) {
+                score += 50
+            }
+        }
+        
+        return score
     }
 
     func cycleSubtitles() {

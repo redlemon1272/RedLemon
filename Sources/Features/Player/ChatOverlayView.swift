@@ -544,13 +544,14 @@ struct ChatOverlayView: View {
     }
     
     private func sendReaction(_ emoji: String) {
-        switch chatMode {
-        case .event:
+        // Route reaction based on Playback Context, not UI Tab
+        if appState.isEventPlayback {
             eventChatService.sendReaction(emoji)
-        case .room:
+        } else if viewModel.isInWatchParty {
             viewModel.sendReaction(emoji)
-        default:
-            break
+        } else {
+            // Solo playback or unknown: Default to PlayerViewModel for local display
+            viewModel.sendReaction(emoji)
         }
     }
 

@@ -311,6 +311,10 @@ class MPVPlayerViewModel: ObservableObject {
                 imdbId: imdbId,
                 roomId: self.currentRoomId
             )
+            // Fix: Refresh upcoming events list to remove the previous one
+            await MainActor.run {
+                self.appState?.refreshEvents()
+            }
         }
         self.subtitles = subtitles
         self.isLoading = true

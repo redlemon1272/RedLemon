@@ -139,6 +139,23 @@ class AppState: ObservableObject {
     }
 
     // MARK: - Helper Functions
+    
+    /// Refresh the events list to filter out past events
+    /// Called when an event ends or when transitioning to a new event
+    func refreshEvents() {
+        let now = Date()
+        // Filter: Keep events that are currently active (live) OR start in the future
+        // We add a small buffer (e.g. 5 mins) to 'isLive' logic elsewhere, but here we just check if it's finished.
+        // Assuming metadataProvider.fetchEvents() would return fresh data, but we can also filter the local list:
+        
+        self.eventsSchedule = self.eventsSchedule.filter { event in
+            // Keep if event is NOT finished
+            // Or if start time is in the future
+            return !event.isFinished || event.startTime > now
+        }.sorted(by: { $0.startTime < $1.startTime }) // Keep sorted
+        
+        print("🔄 Refreshed events schedule: \(self.eventsSchedule.count) remaining")
+    }
 
 
 }

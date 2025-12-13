@@ -35,6 +35,7 @@ struct ReactionOverlayView: View {
         }
     }
     
+    private func addParticle(_ emoji: String) {
         // Respect global toggle
         guard viewModel.areReactionsEnabled else { return }
         
@@ -70,9 +71,11 @@ struct ReactionParticleView: View {
     var body: some View {
         Text(model.emoji)
             .font(.system(size: 40))
-            .shadow(color: .black.opacity(0.5), radius: 2, x: 0, y: 1)
+            // .shadow(...) removed for performance
             .scaleEffect(scale)
             .opacity(opacity)
+            // Use drawingGroup to rasterize via Metal, improving frame rate over video
+            .drawingGroup()
             .position(
                 x: containerSize.width * model.startX + xOffset,
                 y: containerSize.height * 0.85 + yOffset

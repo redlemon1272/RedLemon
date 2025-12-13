@@ -533,6 +533,7 @@ struct EventsView: View {
 
         if event.isLive {
             // For live events, set resume position and go directly to player
+            appState.player.eventStartTime = event.startTime // Opt-in to robust MPV sync logic
             appState.player.resumeFromTimestamp = max(0, position)
             print("   Setting resumeFromTimestamp to: \(appState.player.resumeFromTimestamp!)")
             print("🎬 Live event - starting playback immediately (no lobby)")

@@ -481,8 +481,8 @@ class MPVPlayerViewModel: ObservableObject {
         // This compensates for all loading delays and ensures tight sync across devices
         if let eventStartTime = appState?.player.eventStartTime {
             let elapsed = Date().timeIntervalSince(eventStartTime)
-            // Add 5.0s compensation for seek/buffer latency to ensure we start "live"
-            let seekTime = max(0, elapsed + 5.0)
+            // Seek to exact live edge (no artificial delay, rely on load times)
+            let seekTime = max(0, elapsed)
 
             print("🎉 EVENT: Recalculating seek time at video ready")
             print("   Event started at: \(eventStartTime)")

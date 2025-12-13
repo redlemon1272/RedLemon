@@ -29,6 +29,10 @@ struct WatchPartyLobbyView: View {
         case chat
         case friends
     }
+    
+    private var totalUnreadCount: Int {
+        socialService.unreadCounts.values.reduce(0, +)
+    }
 
     var body: some View {
         GeometryReader { geometry in
@@ -387,9 +391,19 @@ struct WatchPartyLobbyView: View {
                             
                             Button(action: { sidebarTab = .friends }) {
                                 VStack(spacing: 4) {
-                                    HStack {
+                                    HStack(spacing: 4) {
                                         Image(systemName: "person.2.fill")
                                         Text("Friends")
+                                        
+                                        if totalUnreadCount > 0 {
+                                            Text("\(totalUnreadCount)")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(.white)
+                                                .padding(.horizontal, 4)
+                                                .padding(.vertical, 2)
+                                                .background(Color.red)
+                                                .cornerRadius(8)
+                                        }
                                     }
                                     .foregroundColor(sidebarTab == .friends ? .white : .white.opacity(0.6))
                                     
@@ -412,10 +426,7 @@ struct WatchPartyLobbyView: View {
                         // Direct Message View (Embedded)
                         ChatView(friend: friend)
                             .cornerRadius(12)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                            )
+                            // Removed stroke overlay to eliminate white border
                     } else if sidebarTab == .friends {
                         // Friends List
                         ScrollView {
@@ -431,14 +442,24 @@ struct WatchPartyLobbyView: View {
                                         }) {
                                             HStack {
                                                 // Avatar
-                                                Circle()
-                                                    .fill(Constants.avatarColor(for: friend.username))
-                                                    .frame(width: 32, height: 32)
-                                                    .overlay(
-                                                        Text(friend.username.prefix(1).uppercased())
-                                                            .font(.caption.bold())
-                                                            .foregroundColor(.white)
-                                                    )
+                                                ZStack(alignment: .topTrailing) {
+                                                    Circle()
+                                                        .fill(Constants.avatarColor(for: friend.username))
+                                                        .frame(width: 32, height: 32)
+                                                        .overlay(
+                                                            Text(friend.username.prefix(1).uppercased())
+                                                                .font(.caption.bold())
+                                                                .foregroundColor(.white)
+                                                        )
+                                                    
+                                                    if let count = socialService.unreadCounts[friend.id], count > 0 {
+                                                        Circle()
+                                                            .fill(Color.red)
+                                                            .frame(width: 12, height: 12)
+                                                            .overlay(Text("\(count)").font(.system(size: 8)).foregroundColor(.white))
+                                                            .offset(x: 2, y: -2)
+                                                    }
+                                                }
                                                 
                                                 VStack(alignment: .leading) {
                                                     Text(friend.displayName)

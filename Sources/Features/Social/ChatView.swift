@@ -13,86 +13,111 @@ struct ChatView: View {
     @State private var messageText = ""
     @FocusState private var isFocused: Bool
     
+    @State private var showEmojiPicker = false
+    private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
+
     var body: some View {
-        VStack(spacing: 0) {
-            // Header
-            HStack {
-                Text(friend.displayName)
-                    .font(.headline)
-                
-                if let activity = socialService.friendActivity[friend.id],
-                   let watching = activity.currentlyWatching {
-                    Text("• Watching \(watching.mediaTitle)")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                } else if socialService.onlineUserIds.contains(friend.id) {
-                    Text("• Online")
-                        .font(.caption)
-                        .foregroundColor(.green)
-                }
-                
-                Spacer()
-            }
-            .padding()
-            .background(Color(nsColor: .windowBackgroundColor))
-            
-            Divider()
-            
+        VStack(spacing: 8) { // Matches Lobby styling
             // Messages List
             ScrollViewReader { proxy in
                 ScrollView {
-                    LazyVStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 8) { // Matches Lobby styling
                         let messages = socialService.messages[friend.id] ?? []
                         
                         if messages.isEmpty {
                             Text("No messages yet")
                                 .foregroundColor(.secondary)
                                 .padding(.top, 40)
+                                .frame(maxWidth: .infinity, alignment: .center)
                         } else {
                             ForEach(messages) { message in
-                                MessageBubble(message: message, isMe: message.senderId.uuidString != friend.id)
+                                DMMessageRow(message: message, friend: friend)
                                     .id(message.id)
                             }
                         }
+                        
+                        Color.clear
+                            .frame(height: 1)
+                            .id("BOTTOM")
                     }
                     .padding()
                 }
                 .onChange(of: socialService.messages[friend.id]?.count) { _ in
                     if let lastId = socialService.messages[friend.id]?.last?.id {
-                        withAnimation {
-                            proxy.scrollTo(lastId, anchor: .bottom)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            withAnimation {
+                                proxy.scrollTo("BOTTOM", anchor: .bottom)
+                            }
                         }
                     }
-                }
-            }
-            
-            Divider()
-            
-            // Input Area
-            HStack(spacing: 12) {
-                TextField("Message...", text: $messageText)
-                    .textFieldStyle(.plain)
-                    .padding(10)
-                    .background(Color(nsColor: .controlBackgroundColor))
-                    .cornerRadius(8)
-                    .focused($isFocused)
-                    .onSubmit {
-                        sendMessage()
+                    Task {
+                        socialService.clearUnread(friendId: friend.id)
                     }
-                
-                Button(action: sendMessage) {
-                    Image(systemName: "arrow.up.circle.fill")
-                        .font(.title2)
-                        .foregroundColor(messageText.isEmpty ? .secondary : .accentColor)
                 }
-                .buttonStyle(.plain)
-                .disabled(messageText.isEmpty)
+                .onAppear {
+                    // Scroll to bottom on appear
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                         proxy.scrollTo("BOTTOM", anchor: .bottom)
+                    }
+                    // Mark as read when new messages arrive while viewing
+                    Task {
+                        socialService.clearUnread(friendId: friend.id)
+                    }
+                }
             }
-            .padding()
-            .background(Color(nsColor: .windowBackgroundColor))
+            .background(Color.black.opacity(0.3)) // Matches Lobby Chat
+            .cornerRadius(8)
+            
+            // Input Area (Reuse Lobby Layout)
+            VStack(spacing: 0) {
+                if showEmojiPicker {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 8) {
+                        ForEach(emojis, id: \.self) { emoji in
+                            Button(action: {
+                                messageText += emoji
+                                showEmojiPicker = false
+                            }) {
+                                Text(emoji)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(8)
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(8)
+                    .padding(.bottom, 8)
+                }
+                
+                HStack {
+                    Button(action: { showEmojiPicker.toggle() }) {
+                        Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
+                            .foregroundColor(.white.opacity(0.7))
+                    }
+                    .buttonStyle(.plain)
+                    
+                    TextField("Send a message...", text: $messageText)
+                        .textFieldStyle(.plain)
+                        .padding(8)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .foregroundColor(.white)
+                        .focused($isFocused)
+                        .onSubmit(sendMessage)
+                    
+                    Button(action: sendMessage) {
+                        Image(systemName: "paperplane.fill")
+                            .foregroundColor(.accentColor)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(messageText.isEmpty)
+                }
+            }
         }
+        .padding(.horizontal, 24) // Matches Lobby padding
+        .padding(.bottom, 16)     // Matches Lobby padding
         .task {
             await socialService.loadMessages(friendId: friend.id)
+            socialService.clearUnread(friendId: friend.id)
         }
     }
     
@@ -107,29 +132,27 @@ struct ChatView: View {
     }
 }
 
-struct MessageBubble: View {
+struct DMMessageRow: View {
     let message: DirectMessage
-    let isMe: Bool
+    let friend: Friend
     
     var body: some View {
+        let isFriend = message.senderId.uuidString.lowercased() == friend.id.lowercased()
+        
         HStack {
-            if isMe { Spacer() }
-            
-            VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(isFriend ? friend.username : "Me")
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(isFriend ? .purple : .green)
                 Text(message.content)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
-                    .background(isMe ? Color.accentColor : Color(nsColor: .controlBackgroundColor))
-                    .foregroundColor(isMe ? .white : .primary)
-                    .cornerRadius(12)
-                
-                Text(message.createdAt.formatted(date: .omitted, time: .standard))
-
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
+                    .font(.body)
+                    .foregroundColor(.white)
             }
+            .padding(8)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(8)
             
-            if !isMe { Spacer() }
+            Spacer()
         }
     }
 }

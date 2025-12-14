@@ -1,0 +1,1011 @@
+2025-12-14 11:23:22.928 RedLemon[3769:17707] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-14 11:23:22.928 RedLemon[3769:17707] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-14 11:23:23.009 RedLemon[3769:17763] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-14 11:23:23.010 RedLemon[3769:17707] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-14 11:23:23.091 RedLemon[3769:17707] ✅ Playback state reset complete - starting in browse view
+2025-12-14 11:23:23.091 RedLemon[3769:17707] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-14 11:23:23.091 RedLemon[3769:17707] 🧪 Testing Profile: debug
+2025-12-14 11:23:23.091 RedLemon[3769:17798] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-14 11:23:23.091 RedLemon[3769:17707] ✅ Keychain: Found stored username: ursinho
+2025-12-14 11:23:23.091 RedLemon[3769:17707] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-14 11:23:23.092 RedLemon[3769:17798] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-14 11:23:23.293 RedLemon[3769:17761] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-14 11:23:23.297 RedLemon[3769:17761] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-14 11:23:23.298 RedLemon[3769:17761] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-14 11:23:23.331 RedLemon[3769:17707] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-14 11:23:23.331 RedLemon[3769:17707] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:23.332 RedLemon[3769:17707] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:23.332 RedLemon[3769:17707] 🚀 RedLemon: Starting HTTP server...
+2025-12-14 11:23:23.332 RedLemon[3769:17707] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-14 11:23:23.351 RedLemon[3769:17707] ✅ RedLemon: HTTPServer instance created
+2025-12-14 11:23:23.351 RedLemon[3769:17707] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-14 11:23:23.351 RedLemon[3769:17763] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1230 with 429 movies
+✅ [EventsConfig] Using cached movie_events config (version 1230, 429 movies)
+✅ [EventsView] Loaded 429 movies from config version 1230
+   1. Pacific Rim
+   2. Harry Potter and the Sorcerer's Stone
+   3. Stigmata
+   4. Deadpool 2
+   5. Split
+   Movie: Pacific Rim | Runtime: 131m | Duration: 8460s
+   Movie: Harry Potter and the Sorcerer's Stone | Runtime: 152m | Duration: 9720s
+   Movie: Stigmata | Runtime: 103m | Duration: 6780s
+   Movie: Deadpool 2 | Runtime: 120m | Duration: 7800s
+   Movie: Split | Runtime: 117m | Duration: 7620s
+   Movie: Oldboy | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: The Curse of the Black Pearl | Runtime: 143m | Duration: 9180s
+   Movie: Goodfellas | Runtime: 145m | Duration: 9300s
+   Movie: The Expendables 4 | Runtime: 103m | Duration: 6780s
+   Movie: Captain America: Civil War | Runtime: 147m | Duration: 9420s
+   Movie: Avengers: Age of Ultron | Runtime: 141m | Duration: 9060s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Doctor Strange in the Multiverse of Madness | Runtime: 126m | Duration: 8160s
+   Movie: Anaconda | Runtime: 84m | Duration: 5640s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Kraven the Hunter | Runtime: 127m | Duration: 8220s
+   Movie: Thor: Ragnarok | Runtime: 131m | Duration: 8460s
+   Movie: Se7en | Runtime: 127m | Duration: 8220s
+   Movie: xXx: Return of Xander Cage | Runtime: 107m | Duration: 7020s
+   Movie: The Expendables 3 | Runtime: 126m | Duration: 8160s
+   Movie: Indiana Jones and the Dial of Destiny | Runtime: 155m | Duration: 9900s
+   Movie: Flubber | Runtime: 93m | Duration: 6180s
+   Movie: The Simpsons Movie | Runtime: 87m | Duration: 5820s
+   Movie: Black Water | Runtime: 105m | Duration: 6900s
+   Movie: Shrek 5 | Runtime: 120m | Duration: 7800s
+   Movie: Apocalypse Now | Runtime: 147m | Duration: 9420s
+   Movie: Tron: Legacy | Runtime: 126m | Duration: 8160s
+   Movie: White Chicks | Runtime: 109m | Duration: 7140s
+   Movie: The Mummy Returns | Runtime: 130m | Duration: 8400s
+   Movie: Cast Away | Runtime: 143m | Duration: 9180s
+   Movie: The Sixth Sense | Runtime: 107m | Duration: 7020s
+   Movie: Lucy | Runtime: 89m | Duration: 5940s
+   Movie: Aliens | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: The Ballad of Songbirds & Snakes | Runtime: 157m | Duration: 10020s
+   Movie: Jurassic World: Fallen Kingdom | Runtime: 129m | Duration: 8340s
+   Movie: Death Race | Runtime: 105m | Duration: 6900s
+   Movie: Silent Hill | Runtime: 125m | Duration: 8100s
+   Movie: Monsters, Inc. | Runtime: 92m | Duration: 6120s
+   Movie: Bad Boys II | Runtime: 146m | Duration: 9360s
+   Movie: The Conjuring 2 | Runtime: 134m | Duration: 8640s
+   Movie: Nope | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Goblet of Fire | Runtime: 157m | Duration: 10020s
+   Movie: Blind Fury | Runtime: 86m | Duration: 5760s
+   Movie: Thor | Runtime: 115m | Duration: 7500s
+   Movie: 28 Years Later | Runtime: 115m | Duration: 7500s
+   Movie: Despicable Me | Runtime: 95m | Duration: 6300s
+   Movie: Black Swan | Runtime: 109m | Duration: 7140s
+   Movie: Iron Man 2 | Runtime: 124m | Duration: 8040s
+   Movie: Bullet Train | Runtime: 126m | Duration: 8160s
+   Movie: The Pacifier | Runtime: 95m | Duration: 6300s
+   Movie: Avengers: Endgame | Runtime: 181m | Duration: 11460s
+   Movie: Harry Potter and the Deathly Hallows: Part 2 | Runtime: 130m | Duration: 8400s
+   Movie: Weapons | Runtime: 129m | Duration: 8340s
+   Movie: Anaconda | Runtime: 120m | Duration: 7800s
+   Movie: 300: Rise of an Empire | Runtime: 102m | Duration: 6720s
+   Movie: V for Vendetta | Runtime: 132m | Duration: 8520s
+   Movie: Shrek the Third | Runtime: 93m | Duration: 6180s
+   Movie: The Mummy: Tomb of the Dragon Emperor | Runtime: 112m | Duration: 7320s
+   Movie: Parasite | Runtime: 133m | Duration: 8580s
+   Movie: Hereditary | Runtime: 128m | Duration: 8280s
+   Movie: The Amazing Spider-Man 2 | Runtime: 141m | Duration: 9060s
+   Movie: Monster | Runtime: 125m | Duration: 8100s
+   Movie: Apocalypto | Runtime: 139m | Duration: 8940s
+   Movie: Face/Off | Runtime: 139m | Duration: 8940s
+   Movie: Jurassic World: Rebirth | Runtime: 134m | Duration: 8640s
+   Movie: Top Gun | Runtime: 110m | Duration: 7200s
+   Movie: The Menu | Runtime: 107m | Duration: 7020s
+   Movie: Terminator Salvation | Runtime: 115m | Duration: 7500s
+   Movie: Scouts Guide to the Zombie Apocalypse | Runtime: 93m | Duration: 6180s
+   Movie: Civil War | Runtime: 109m | Duration: 7140s
+   Movie: American History X | Runtime: 119m | Duration: 7740s
+   Movie: We're the Millers | Runtime: 110m | Duration: 7200s
+   Movie: Renfield | Runtime: 93m | Duration: 6180s
+   Movie: Dracula | Runtime: 130m | Duration: 8400s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Kung Fu Hustle | Runtime: 99m | Duration: 6540s
+   Movie: Colombiana | Runtime: 108m | Duration: 7080s
+   Movie: Night at the Museum | Runtime: 108m | Duration: 7080s
+   Movie: MaXXXine | Runtime: 103m | Duration: 6780s
+   Movie: Scooby-Doo | Runtime: 87m | Duration: 5820s
+   Movie: Get Carter | Runtime: 102m | Duration: 6720s
+   Movie: Saltburn | Runtime: 131m | Duration: 8460s
+   Movie: Dune: Part Two | Runtime: 167m | Duration: 10620s
+   Movie: Spider-Man 3 | Runtime: 139m | Duration: 8940s
+   Movie: Terminator Genisys | Runtime: 126m | Duration: 8160s
+   Movie: John Wick: Chapter 2 | Runtime: 122m | Duration: 7920s
+   Movie: 8MM | Runtime: 123m | Duration: 7980s
+   Movie: Godzilla x Kong: The New Empire | Runtime: 115m | Duration: 7500s
+   Movie: Final Destination: Bloodlines | Runtime: 110m | Duration: 7200s
+   Movie: Pirates of the Caribbean: Dead Men Tell No Tales | Runtime: 129m | Duration: 8340s
+   Movie: Prey | Runtime: 100m | Duration: 6600s
+   Movie: It: Chapter Two | Runtime: 169m | Duration: 10740s
+   Movie: Shrek | Runtime: 90m | Duration: 6000s
+   Movie: Now You See Me | Runtime: 116m | Duration: 7560s
+   Movie: Jurassic World | Runtime: 124m | Duration: 8040s
+   Movie: Drive | Runtime: 100m | Duration: 6600s
+   Movie: The Emperor's New Groove | Runtime: 78m | Duration: 5280s
+   Movie: Venom | Runtime: 112m | Duration: 7320s
+   Movie: Transformers: Age of Extinction | Runtime: 165m | Duration: 10500s
+   Movie: Shaft | Runtime: 99m | Duration: 6540s
+   Movie: A Quiet Place: Day One | Runtime: 100m | Duration: 6600s
+   Movie: The Hunger Games: Mockingjay - Part 1 | Runtime: 123m | Duration: 7980s
+   Movie: Black Hawk Down | Runtime: 145m | Duration: 9300s
+   Movie: Alien³ | Runtime: 114m | Duration: 7440s
+   Movie: The Strangers: Chapter 2 | Runtime: 98m | Duration: 6480s
+   Movie: The Hunger Games: Mockingjay - Part 2 | Runtime: 137m | Duration: 8820s
+   Movie: Fury | Runtime: 135m | Duration: 8700s
+   Movie: Rush Hour 3 | Runtime: 90m | Duration: 6000s
+   Movie: Avatar | Runtime: 162m | Duration: 10320s
+   Movie: Jumanji: The Next Level | Runtime: 123m | Duration: 7980s
+   Movie: The Matrix Reloaded | Runtime: 138m | Duration: 8880s
+   Movie: Hostel | Runtime: 94m | Duration: 6240s
+   Movie: The Green Mile | Runtime: 189m | Duration: 11940s
+   Movie: Gladiator II | Runtime: 148m | Duration: 9480s
+   Movie: The Nun II | Runtime: 110m | Duration: 7200s
+   Movie: The Conjuring: Last Rites | Runtime: 136m | Duration: 8760s
+   Movie: Blade Runner 2049 | Runtime: 164m | Duration: 10440s
+   Movie: Deadpool | Runtime: 108m | Duration: 7080s
+   Movie: The Lord of the Rings: The Return of the King | Runtime: 201m | Duration: 12660s
+   Movie: RED | Runtime: 111m | Duration: 7260s
+   Movie: Elf | Runtime: 97m | Duration: 6420s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: X | Runtime: 106m | Duration: 6960s
+   Movie: The Martian | Runtime: 141m | Duration: 9060s
+   Movie: Ready Player One | Runtime: 140m | Duration: 9000s
+   Movie: Waterworld | Runtime: 135m | Duration: 8700s
+   Movie: Blue Streak | Runtime: 93m | Duration: 6180s
+   Movie: The Lord of the Rings: The Fellowship of the Ring | Runtime: 179m | Duration: 11340s
+   Movie: Insidious | Runtime: 102m | Duration: 6720s
+   Movie: Harry Potter and the Half-Blood Prince | Runtime: 153m | Duration: 9780s
+   Movie: Troy | Runtime: 163m | Duration: 10380s
+   Movie: Fargo | Runtime: 98m | Duration: 6480s
+   Movie: Final Destination 3 | Runtime: 92m | Duration: 6120s
+   Movie: Now You See Me 2 | Runtime: 129m | Duration: 8340s
+   Movie: Ninja Assassin | Runtime: 99m | Duration: 6540s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Scarface | Runtime: 170m | Duration: 10800s
+   Movie: Shrek 2 | Runtime: 92m | Duration: 6120s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: 24: Redemption | Runtime: 102m | Duration: 6720s
+   Movie: Die Hard 2 | Runtime: 124m | Duration: 8040s
+   Movie: 28 Days Later | Runtime: 113m | Duration: 7380s
+   Movie: Four Brothers | Runtime: 109m | Duration: 7140s
+   Movie: Real Steel | Runtime: 127m | Duration: 8220s
+   Movie: The Hobbit: The Desolation of Smaug | Runtime: 161m | Duration: 10260s
+   Movie: The Terminator | Runtime: 108m | Duration: 7080s
+   Movie: Psycho | Runtime: 109m | Duration: 7140s
+   Movie: Baghead | Runtime: 95m | Duration: 6300s
+   Movie: Carry-On | Runtime: 120m | Duration: 7800s
+   Movie: The Suicide Squad | Runtime: 132m | Duration: 8520s
+   Movie: 2012 | Runtime: 158m | Duration: 10080s
+   Movie: Shutter Island | Runtime: 138m | Duration: 8880s
+   Movie: Iron Man | Runtime: 126m | Duration: 8160s
+   Movie: Pirates of the Caribbean: At World's End | Runtime: 169m | Duration: 10740s
+   Movie: Black Phone 2 | Runtime: 114m | Duration: 7440s
+   Movie: District 9 | Runtime: 112m | Duration: 7320s
+   Movie: Kingdom of the Planet of the Apes | Runtime: 145m | Duration: 9300s
+   Movie: Nobody | Runtime: 91m | Duration: 6060s
+   Movie: Edge of Tomorrow | Runtime: 114m | Duration: 7440s
+   Movie: Karate Kid: Legends | Runtime: 94m | Duration: 6240s
+   Movie: The Fall Guy | Runtime: 127m | Duration: 8220s
+   Movie: Harry Potter and the Chamber of Secrets | Runtime: 161m | Duration: 10260s
+   Movie: Venom: The Last Dance | Runtime: 109m | Duration: 7140s
+   Movie: The Illusionist | Runtime: 110m | Duration: 7200s
+   Movie: Transformers One | Runtime: 104m | Duration: 6840s
+   Movie: The Mummy | Runtime: 124m | Duration: 8040s
+   Movie: Predator: Badlands | Runtime: 107m | Duration: 7020s
+   Movie: Paranormal Activity | Runtime: 86m | Duration: 5760s
+   Movie: F1: The Movie | Runtime: 156m | Duration: 9960s
+   Movie: John Wick: Chapter 4 | Runtime: 170m | Duration: 10800s
+   Movie: Mickey 17 | Runtime: 137m | Duration: 8820s
+   Movie: Despicable Me 2 | Runtime: 98m | Duration: 6480s
+   Movie: Madagascar: Escape 2 Africa | Runtime: 89m | Duration: 5940s
+   Movie: Frankenstein | Runtime: 150m | Duration: 9600s
+   Movie: Gattaca | Runtime: 107m | Duration: 7020s
+   Movie: The Amazing Spider-Man | Runtime: 136m | Duration: 8760s
+   Movie: Furiosa: A Mad Max Saga | Runtime: 149m | Duration: 9540s
+   Movie: Nobody 2 | Runtime: 89m | Duration: 5940s
+   Movie: Everything Everywhere All at Once | Runtime: 140m | Duration: 9000s
+   Movie: The Shining | Runtime: 144m | Duration: 9240s
+   Movie: The Hobbit: An Unexpected Journey | Runtime: 169m | Duration: 10740s
+   Movie: Inside Man | Runtime: 129m | Duration: 8340s
+   Movie: The Batman | Runtime: 177m | Duration: 11220s
+   Movie: Eyes Wide Shut | Runtime: 159m | Duration: 10140s
+   Movie: Sinners | Runtime: 138m | Duration: 8880s
+   Movie: Alien | Runtime: 117m | Duration: 7620s
+   Movie: Mystery Men | Runtime: 121m | Duration: 7860s
+   Movie: King Kong | Runtime: 188m | Duration: 11880s
+   Movie: Kung Fu Panda 2 | Runtime: 91m | Duration: 6060s
+   Movie: Mission: Impossible - Fallout | Runtime: 147m | Duration: 9420s
+   Movie: Incredibles 2 | Runtime: 118m | Duration: 7680s
+   Movie: The Equalizer 3 | Runtime: 109m | Duration: 7140s
+   Movie: Thunderbolts* | Runtime: 127m | Duration: 8220s
+   Movie: Get Out | Runtime: 104m | Duration: 6840s
+   Movie: Godzilla: King of the Monsters | Runtime: 132m | Duration: 8520s
+   Movie: Tron: Ares | Runtime: 119m | Duration: 7740s
+   Movie: Jurassic World: Dominion | Runtime: 147m | Duration: 9420s
+   Movie: The Negotiator | Runtime: 140m | Duration: 9000s
+   Movie: Gladiator | Runtime: 155m | Duration: 9900s
+   Movie: Between Worlds | Runtime: 90m | Duration: 6000s
+   Movie: Training Day | Runtime: 122m | Duration: 7920s
+   Movie: Harry Potter and the Deathly Hallows: Part 1 | Runtime: 146m | Duration: 9360s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Constantine | Runtime: 121m | Duration: 7860s
+   Movie: Annabelle Comes Home | Runtime: 106m | Duration: 6960s
+   Movie: Kill Bill: The Whole Bloody Affair | Runtime: 247m | Duration: 15420s
+   Movie: The Marvels | Runtime: 105m | Duration: 6900s
+   Movie: The Usual Suspects | Runtime: 106m | Duration: 6960s
+   Movie: Mission: Impossible - Dead Reckoning Part One | Runtime: 164m | Duration: 10440s
+   Movie: Candyman | Runtime: 91m | Duration: 6060s
+   Movie: Thor: Love and Thunder | Runtime: 119m | Duration: 7740s
+   Movie: Night at the Museum: Secret of the Tomb | Runtime: 98m | Duration: 6480s
+   Movie: Dawn of the Planet of the Apes | Runtime: 130m | Duration: 8400s
+   Movie: Harry Potter and the Prisoner of Azkaban | Runtime: 141m | Duration: 9060s
+   Movie: Johnny English | Runtime: 87m | Duration: 5820s
+   Movie: Scream | Runtime: 112m | Duration: 7320s
+   Movie: Little Man | Runtime: 98m | Duration: 6480s
+   Movie: Furious 7 | Runtime: 139m | Duration: 8940s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: Dune: Part One | Runtime: 155m | Duration: 9900s
+   Movie: The Incredible Hulk | Runtime: 114m | Duration: 7440s
+   Movie: Batman Begins | Runtime: 140m | Duration: 9000s
+   Movie: Man of Steel | Runtime: 143m | Duration: 9180s
+   Movie: The Conjuring | Runtime: 112m | Duration: 7320s
+   Movie: Five Nights at Freddy's | Runtime: 110m | Duration: 7200s
+   Movie: Shrek Forever After | Runtime: 93m | Duration: 6180s
+   Movie: M3GAN 2.0 | Runtime: 120m | Duration: 7800s
+   Movie: Underworld | Runtime: 122m | Duration: 7920s
+   Movie: Pirates of the Caribbean: Dead Man's Chest | Runtime: 151m | Duration: 9660s
+   Movie: Iron Man 3 | Runtime: 130m | Duration: 8400s
+   Movie: The Departed | Runtime: 151m | Duration: 9660s
+   Movie: Mission: Impossible - The Final Reckoning | Runtime: 170m | Duration: 10800s
+   Movie: Annabelle | Runtime: 99m | Duration: 6540s
+   Movie: Him | Runtime: 96m | Duration: 6360s
+   Movie: Van Helsing | Runtime: 132m | Duration: 8520s
+   Movie: The Conjuring: The Devil Made Me Do It | Runtime: 111m | Duration: 7260s
+   Movie: The Fan | Runtime: 116m | Duration: 7560s
+   Movie: Napoleon | Runtime: 158m | Duration: 10080s
+   Movie: Wild Hogs | Runtime: 100m | Duration: 6600s
+   Movie: 1917 | Runtime: 119m | Duration: 7740s
+   Movie: I Am Legend | Runtime: 101m | Duration: 6660s
+   Movie: Arrival | Runtime: 116m | Duration: 7560s
+   Movie: Joker: Folie à Deux | Runtime: 138m | Duration: 8880s
+   Movie: Back to the Future Part II | Runtime: 108m | Duration: 7080s
+   Movie: Old | Runtime: 108m | Duration: 7080s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: The Wolf of Wall Street | Runtime: 180m | Duration: 11400s
+   Movie: Surrogates | Runtime: 89m | Duration: 5940s
+   Movie: The Fifth Element | Runtime: 126m | Duration: 8160s
+   Movie: Girls Trip | Runtime: 122m | Duration: 7920s
+   Movie: World War Z | Runtime: 116m | Duration: 7560s
+   Movie: Heretic | Runtime: 111m | Duration: 7260s
+   Movie: Inglourious Basterds | Runtime: 153m | Duration: 9780s
+   Movie: Logan | Runtime: 137m | Duration: 8820s
+   Movie: Man on Fire | Runtime: 146m | Duration: 9360s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Evil Dead Rise | Runtime: 96m | Duration: 6360s
+   Movie: Harry Potter and the Order of the Phoenix | Runtime: 138m | Duration: 8880s
+   Movie: Predator 2 | Runtime: 108m | Duration: 7080s
+   Movie: Saw | Runtime: 103m | Duration: 6780s
+   Movie: Abigail | Runtime: 109m | Duration: 7140s
+   Movie: Interstellar | Runtime: 169m | Duration: 10740s
+   Movie: Taken | Runtime:2025-12-14 11:23:24.992 RedLemon[3769:17830] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2025-12-14 11:23:25.037 RedLemon[3769:17707]    Quality: 1080p
+2025-12-14 11:23:25.038 RedLemon[3769:17707]    Mode: watchParty
+2025-12-14 11:23:25.038 RedLemon[3769:17707] 📡 Fetching metadata for tt0267913...
+ 94m | Duration: 6240s
+   Movie: The Drop | Runtime: 106m | Duration: 6960s
+   Movie: Aquaman | Runtime: 143m | Duration: 9180s
+   Movie: The Monkey | Runtime: 97m | Duration: 6420s
+   Movie: The Faculty | Runtime: 104m | Duration: 6840s
+   Movie: Home Alone 2: Lost in New York | Runtime: 120m | Duration: 7800s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: Cloud Atlas | Runtime: 172m | Duration: 10920s
+   Movie: Avengers: Infinity War | Runtime: 149m | Duration: 9540s
+   Movie: Scary Movie 2 | Runtime: 82m | Duration: 5520s
+   Movie: Chronicle | Runtime: 84m | Duration: 5640s
+   Movie: Back to the Future | Runtime: 116m | Duration: 7560s
+   Movie: The Black Phone | Runtime: 103m | Duration: 6780s
+   Movie: The Mask | Runtime: 101m | Duration: 6660s
+   Movie: Meet the Robinsons | Runtime: 95m | Duration: 6300s
+   Movie: Orphan | Runtime: 122m | Duration: 7920s
+   Movie: Terminator 2: Judgment Day | Runtime: 137m | Duration: 8820s
+   Movie: Bad Boys | Runtime: 119m | Duration: 7740s
+   Movie: Fast X | Runtime: 142m | Duration: 9120s
+   Movie: The Matrix | Runtime: 136m | Duration: 8760s
+   Movie: Nosferatu | Runtime: 133m | Duration: 8580s
+   Movie: Transformers: Rise of the Beasts | Runtime: 127m | Duration: 8220s
+   Movie: It Follows | Runtime: 101m | Duration: 6660s
+   Movie: Godzilla | Runtime: 139m | Duration: 8940s
+   Movie: Fight Club | Runtime: 139m | Duration: 8940s
+   Movie: Jingle All the Way | Runtime: 89m | Duration: 5940s
+   Movie: The Super Mario Bros. Movie | Runtime: 93m | Duration: 6180s
+   Movie: Candyman | Runtime: 100m | Duration: 6600s
+   Movie: A Minecraft Movie | Runtime: 120m | Duration: 7800s
+   Movie: The Substance | Runtime: 141m | Duration: 9060s
+   Movie: Smile | Runtime: 115m | Duration: 7500s
+   Movie: Safe House | Runtime: 90m | Duration: 6000s
+   Movie: War of the Worlds | Runtime: 91m | Duration: 6060s
+   Movie: Companion | Runtime: 97m | Duration: 6420s
+   Movie: Spider-Man | Runtime: 121m | Duration: 7860s
+   Movie: Taken 3 | Runtime: 109m | Duration: 7140s
+   Movie: Conan the Barbarian | Runtime: 130m | Duration: 8400s
+   Movie: Mr. & Mrs. Smith | Runtime: 120m | Duration: 7800s
+   Movie: The Maze Runner | Runtime: 113m | Duration: 7380s
+   Movie: The Medallion | Runtime: 88m | Duration: 5880s
+   Movie: Predator | Runtime: 107m | Duration: 7020s
+   Movie: Ballerina | Runtime: 125m | Duration: 8100s
+   Movie: Predators | Runtime: 107m | Duration: 7020s
+   Movie: Hot Fuzz | Runtime: 121m | Duration: 7860s
+   Movie: The Nun | Runtime: 96m | Duration: 6360s
+   Movie: Cobweb | Runtime: 88m | Duration: 5880s
+   Movie: The Matrix Resurrections | Runtime: 147m | Duration: 9420s
+   Movie: Riddick | Runtime: 119m | Duration: 7740s
+   Movie: Train to Busan | Runtime: 118m | Duration: 7680s
+   Movie: War 2 | Runtime: 173m | Duration: 10980s
+   Movie: The Big Lebowski | Runtime: 117m | Duration: 7620s
+   Movie: The Lord of the Rings: The Two Towers | Runtime: 179m | Duration: 11340s
+   Movie: Resident Evil: Red Falls | Runtime: 53m | Duration: 3780s
+   Movie: Inside Out 2 | Runtime: 97m | Duration: 6420s
+   Movie: Signs | Runtime: 106m | Duration: 6960s
+   Movie: The Barbarian | Runtime: 83m | Duration: 5580s
+   Movie: The Karate Kid | Runtime: 140m | Duration: 9000s
+   Movie: Taxi Driver | Runtime: 114m | Duration: 7440s
+   Movie: Inception | Runtime: 148m | Duration: 9480s
+   Movie: War | Runtime: 103m | Duration: 6780s
+   Movie: Avatar: The Way of Water | Runtime: 192m | Duration: 12120s
+   Movie: Code 3 | Runtime: 100m | Duration: 6600s
+   Movie: The Hobbit: The Battle of the Five Armies | Runtime: 144m | Duration: 9240s
+   Movie: Captain America: Brave New World | Runtime: 119m | Duration: 7740s
+   Movie: Exit Wounds | Runtime: 101m | Duration: 6660s
+   Movie: Snatch | Runtime: 103m | Duration: 6780s
+   Movie: Triangle | Runtime: 98m | Duration: 6480s
+   Movie: The Godfather Part III | Runtime: 162m | Duration: 10320s
+   Movie: Creed | Runtime: 133m | Duration: 8580s
+   Movie: The Godfather Part II | Runtime: 202m | Duration: 12720s
+   Movie: Longlegs | Runtime: 101m | Duration: 6660s
+   Movie: The Godfather | Runtime: 175m | Duration: 11100s
+   Movie: The Last Samurai | Runtime: 154m | Duration: 9840s
+   Movie: The Dark Knight | Runtime: 152m | Duration: 9720s
+   Movie: Guardians of the Galaxy Vol. 3 | Runtime: 150m | Duration: 9600s
+   Movie: The Equalizer | Runtime: 132m | Duration: 8520s
+   Movie: The Imitation Game | Runtime: 113m | Duration: 7380s
+   Movie: Joe Dirt | Runtime: 91m | Duration: 6060s
+   Movie: X-Men: Days of Future Past | Runtime: 132m | Duration: 8520s
+   Movie: Rush Hour | Runtime: 97m | Duration: 6420s
+   Movie: Guardians of the Galaxy Vol. 2 | Runtime: 137m | Duration: 8820s
+   Movie: The Hunger Games: Catching Fire | Runtime: 146m | Duration: 9360s
+   Movie: The Parent Trap | Runtime: 128m | Duration: 8280s
+   Movie: The Accountant 2 | Runtime: 133m | Duration: 8580s
+   Movie: xXx | Runtime: 124m | Duration: 8040s
+   Movie: A Haunted House 2 | Runtime: 87m | Duration: 5820s
+   Movie: Aliens vs. Predator: Requiem | Runtime: 94m | Duration: 6240s
+   Movie: Blade Runner | Runtime: 118m | Duration: 7680s
+   Movie: Baby Boy | Runtime: 130m | Duration: 8400s
+   Movie: 2001: A Space Odyssey | Runtime: 149m | Duration: 9540s
+   Movie: Léon: The Professional | Runtime: 111m | Duration: 7260s
+   Movie: The Long Walk | Runtime: 108m | Duration: 7080s
+   Movie: Stuber | Runtime: 93m | Duration: 6180s
+   Movie: Sinister | Runtime: 110m | Duration: 7200s
+   Movie: A.I. Artificial Intelligence | Runtime: 146m | Duration: 9360s
+   Movie: Alien: Romulus | Runtime: 119m | Duration: 7740s
+   Movie: The Woman in Cabin 10 | Runtime: 95m | Duration: 6300s
+   Movie: Wanted | Runtime: 110m | Duration: 7200s
+   Movie: Ocean's Eight | Runtime: 111m | Duration: 7260s
+   Movie: Joker | Runtime: 122m | Duration: 7920s
+   Movie: Catch Me If You Can | Runtime: 141m | Duration: 9060s
+   Movie: Evil Dead 2 | Runtime: 96m | Duration: 6360s
+   Movie: Cargo | Runtime: 105m | Duration: 6900s
+   Movie: Barbie | Runtime: 114m | Duration: 7440s
+   Movie: Mad Max: Fury Road | Runtime: 121m | Duration: 7860s
+   Movie: Batman Returns | Runtime: 126m | Duration: 8160s
+   Movie: The Naked Gun | Runtime: 85m | Duration: 5700s
+   Movie: Cool Runnings | Runtime: 98m | Duration: 6480s
+   Movie: Fractured | Runtime: 101m | Duration: 6660s
+   Movie: Bugonia | Runtime: 119m | Duration: 7740s
+   Movie: Shooter | Runtime: 124m | Duration: 8040s
+   Movie: Contact | Runtime: 150m | Duration: 9600s
+   Movie: Road House | Runtime: 121m | Duration: 7860s
+   Movie: Deja Vu | Runtime: 126m | Duration: 8160s
+   Movie: Southpaw | Runtime: 123m | Duration: 7980s
+   Movie: Silent Night | Runtime: 104m | Duration: 6840s
+   Movie: Casino Royale | Runtime: 144m | Duration: 9240s
+   Movie: The Running Man | Runtime: 133m | Duration: 8580s
+   Movie: The Covenant | Runtime: 123m | Duration: 7980s
+   Movie: Bad Boys for Life | Runtime: 124m | Duration: 8040s
+   Movie: Blade: Trinity | Runtime: 123m | Duration: 7980s
+   Movie: Freaky Tales | Runtime: 107m | Duration: 7020s
+   Movie: The Fantastic Four: First Steps | Runtime: 115m | Duration: 7500s
+   Movie: Together | Runtime: 102m | Duration: 6720s
+   Movie: Fast & Furious Presents: Hobbs & Shaw | Runtime: 137m | Duration: 8820s
+   Movie: No Country for Old Men | Runtime: 122m | Duration: 7920s
+   Movie: Top Gun: Maverick | Runtime: 131m | Duration: 8460s
+   Movie: No Escape | Runtime: 103m | Duration: 6780s
+   Movie: The Exorcist | Runtime: 122m | Duration: 7920s
+   Movie: Die Hard | Runtime: 132m | Duration: 8520s
+   Movie: The Smashing Machine | Runtime: 123m | Duration: 7980s
+   Movie: Fruitvale Station | Runtime: 82m | Duration: 5520s
+   Movie: Playdate | Runtime: 93m | Duration: 6180s
+   Movie: Presence | Runtime: 84m | Duration: 5640s
+   Movie: Fracture | Runtime: 113m | Duration: 7380s
+   Movie: Plane | Runtime: 107m | Duration: 7020s
+   Movie: Venom: Let There Be Carnage | Runtime: 97m | Duration: 6420s
+   Movie: Pulp Fiction | Runtime: 154m | Duration: 9840s
+   Movie: Men in Black | Runtime: 98m | Duration: 6480s
+   Movie: Batman v Superman: Dawn of Justice | Runtime: 152m | Duration: 9720s
+   Movie: Thir13en Ghosts | Runtime: 91m | Duration: 6060s
+   Movie: Ma | Runtime: 99m | Duration: 6540s
+   Movie: Descendants 2 | Runtime: 111m | Duration: 7260s
+   Movie: The Orphanage | Runtime: 105m | Duration: 6900s
+   Movie: It | Runtime: 135m | Duration: 8700s
+   Movie: The Prestige | Runtime: 130m | Duration: 8400s
+   Movie: Bring Her Back | Runtime: 104m | Duration: 6840s
+   Movie: Tower Heist | Runtime: 104m | Duration: 6840s
+   Movie: Pirates of the Caribbean: On Stranger Tides | Runtime: 136m | Duration: 8760s
+   Movie: The Dark Knight Rises | Runtime: 165m | Duration: 10500s
+   Movie: Escape Room | Runtime: 99m | Duration: 6540s
+   Movie: A Bronx Tale | Runtime: 121m | Duration: 7860s
+   Movie: Kill Bill: Vol. 1 | Runtime: 111m | Duration: 7260s
+   Movie: Wonder Woman | Runtime: 141m | Duration: 9060s
+   Movie: Her | Runtime: 126m | Duration: 8160s
+   Movie: Deadpool & Wolverine | Runtime: 128m | Duration: 8280s
+   Movie: The Prey | Runtime: 102m | Duration: 6720s
+   Movie: Smokin' Aces | Runtime: 109m | Duration: 7140s
+   Movie: Central Intelligence | Runtime: 107m | Duration: 7020s
+   Movie: War of the Worlds | Runtime: 117m | Duration: 7620s
+   Movie: The Avengers | Runtime: 143m | Duration: 9180s
+   Movie: Borderlands | Runtime: 101m | Duration: 6660s
+   Movie: Smile 2 | Runtime: 127m | Duration: 8220s
+   Movie: The Jacket | Runtime: 103m | Duration: 6780s
+   Movie: John Wick: Chapter 3 - Parabellum | Runtime: 131m | Duration: 8460s
+   Movie: Gone Girl | Runtime: 149m | Duration: 9540s
+   Movie: Taken 2 | Runtime: 91m | Duration: 6060s
+🎬 Live Event: Scooby-Doo
+   Metadata runtime: 87 min
+   Calculated duration: 97 minutes
+📅 Schedule Updated:
+   Live: Scooby-Doo
+   Progress: 443s / 5820s
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt0267913","name":"Scooby-Doo","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"caa385c23ba160de57a3e4051f4b4990cc9887c4","imdb_id":"tt0267913","poster_url":"https://images.metahub.space/poster/small/tt0267913/img","backdrop_url":"https://images.metahub.space/background/medium/tt0267913/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-14T16:21:46.620738","last_activity":"2025-12-14T16:22:07.037963","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Scooby-Doo.2002.1080p.BluRay.x264-%5BYTS.AM%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"22751365-87C3-46CC-B891-0951CC15113F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhhlza0bV7hwVM","phx_ref_prev":"GIEhhGq9JfJ7hzeG","last_seen":"2025-12-14T16:23:09Z","started_at":"2025-12-14T16:23:09Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1160419","watching_title":"Dune: Part One","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3675fd18-d909-11f0-aa4f-0a58a9feac02":{"metas":[{"phx_ref":"GIEhicKyD0isNOQQ","last_seen":"2025-12-14T16:23:24Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"EF55CAC8-2088-4AA2-86FF-33B51C245FBF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+[2025-12-14T16:23:24Z] [INFO] [EventsView.swift:327] 🎟️ Joining event: Scooby-Doo (Live: true)
+   Event start time: 2025-12-14 16:16:00 +0000
+   Event duration: 5820.0s
+   Current time: 2025-12-14 16:23:24 +0000
+   Is Live: true
+   Is In Lobby: false
+🔍 Supabase Response for /rooms: [{"id":"event_tt0267913","name":"Scooby-Doo","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"caa385c23ba160de57a3e4051f4b4990cc9887c4","imdb_id":"tt0267913","poster_url":"https://images.metahub.space/poster/small/tt0267913/img","backdrop_url":"https://images.metahub.space/background/medium/tt0267913/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-14T16:21:46.620738","last_activity":"2025-12-14T16:22:07.037963","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Scooby-Doo.2002.1080p.BluRay.x264-%5BYTS.AM%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+✅ Event room already exists: event_tt0267913
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi7-4.downl...
+   Hash: caa385c23ba160de57a3e4051f4b4990cc9887c4
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: caa385c23ba160de57a3e4051f4b4990cc9887c4
+
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🎬 Live event - calculating position: 444.99285101890564 seconds
+   Event start time: 2025-12-14 16:16:00 +0000
+   Current time: 2025-12-14 16:23:24 +0000
+   Room createdAt: 2025-12-14 16:16:00 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 444.99285101890564
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Scooby-Doo
+[ INFO ] GET /api/metadata/meta/movie/tt0267913 [request-id: D7C83DC0-BF65-47E1-864F-EF65E6DD24E5]
+2025-12-14 11:23:25.195 RedLemon[3769:17787] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-14 11:23:25.199 RedLemon[3769:17707] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0267913/img
+2025-12-14 11:23:25.199 RedLemon[3769:17707] ⏳ Background art loading...
+2025-12-14 11:23:25.199 RedLemon[3769:17707] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0267913/img
+2025-12-14 11:23:25.200 RedLemon[3769:17707] ⏳ Logo loading...
+2025-12-14 11:23:25.280 RedLemon[3769:17798] ✅ StreamService: Using provided metadata: Scooby-Doo
+2025-12-14 11:23:25.280 RedLemon[3769:17798] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-14 11:23:25.281 RedLemon[3769:17798] ⚡️ StreamResolver: Resolving streams for tt0267913 (S0E0)
+2025-12-14 11:23:25.281 RedLemon[3769:17798]    📅 Filtering by year: 2002
+2025-12-14 11:23:25.281 RedLemon[3769:17798] 🔍 ProviderManager: Fetching streams for tt0267913...
+2025-12-14 11:23:25.283 RedLemon[3769:17831] 🎬 Torrentio: Building URL for movie (no season/episode)
+2025-12-14 11:23:25.283 RedLemon[3769:17831] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-14 11:23:25.284 RedLemon[3769:17831] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/stream/movie/tt0267913.json
+2025-12-14 11:23:25.298 RedLemon[3769:17831] 🔍 Zilean: Searching for "Scooby-Doo"
+2025-12-14 11:23:25.313 RedLemon[3769:17707] ✅ Logo loaded successfully
+2025-12-14 11:23:25.313 RedLemon[3769:17787] ✅ Zilean: Got 30 results
+2025-12-14 11:23:25.313 RedLemon[3769:17787] 🔍 Zilean: Filtered to 30 streams
+2025-12-14 11:23:25.356 RedLemon[3769:17707] ✅ RedLemon: Server marked as ready
+2025-12-14 11:23:25.395 RedLemon[3769:17707] ✅ Background art loaded successfully
+2025-12-14 11:23:25.439 RedLemon[3769:17707] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-14 11:23:25.439 RedLemon[3769:17707] 🔍 Performing startup checks...
+2025-12-14 11:23:25.439 RedLemon[3769:17707] ✅ Username-based authentication ready
+2025-12-14 11:23:25.440 RedLemon[3769:17707] 🔍 Performing startup checks...
+2025-12-14 11:23:25.440 RedLemon[3769:17707] ✅ Username-based authentication ready
+2025-12-14 11:23:25.440 RedLemon[3769:17707] 🔄 Checking for app updates...
+2025-12-14 11:23:25.821 RedLemon[3769:17787] ✅ ProviderManager: Fetched 69 raw, returning 57 unique streams
+2025-12-14 11:23:25.821 RedLemon[3769:17787] 📦 StreamResolver: Received 57 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt0267913]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒
+[2025-12-14T16:23:25Z] [INFO] [StreamService.swift:27] 🎬 StreamService: Starting resolution for: Scooby-Doo
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0267913.json
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0267913.json
+✅ Metadata fetched from Cinemeta for tt0267913: Scooby-Doo (2002)
+✅ MediaFusion: Got 31 streams
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.134s (RTT: 69ms)
+   Local:  2025-12-14 16:23:25 +0000
+   Server: 2025-12-14 16:23:25 +0000
+✅ Comet: Got 14 streams
+🔍 Comet: Parsing 14 streams...
+✅ Comet: Parsed 14 valid streams
+✅ Metadata cache hit for tt0267913: Scooby-Doo
+🎯 Target title for matching: Scooby-Doo
+   📅 Year filter (2002): 57 → 36 streams
+   🚫 RESOLVER BLOCKING non-English audio: Scooby Doo (2002) BluRay 720p Dublado
+👤 1 💾 714.31 MB ⚙️ ThePirateBay
+🇵🇹 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Scooby-Doo 2002 MULTi VFF 1080p BluRay MHD x264 AC3-BK mkv (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Scooby Doo 2002 Multi VFF 1080p Bluray Remux VC-1 AC3 5 1-Ki0squ3 mkv (Audio)
+   🎵 RESOLVER FILTERED audio language: 36 → 33 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0267913 (movie)
+✅ Found 0 subtitles from SubDL
+📝 SubDL results for movie:
+   --- Processing Bucket: 2160p (Input: 2) ---
+   ✅ Bucket 2160p Final Count: 2
+   --- Processing Bucket: 1080p (Input: 22) ---
+   ✅ Bucket 1080p Final Count: 22
+   --- Processing Bucket: 720p (Input: 4) ---
+   ✅ Bucket 720p Final Count: 4
+   --- Processing Bucket: 480p (Input: 5) ---
+   ✅ Bucket 480p Final Count: 5
+📦 2160p Primary: Scooby-Doo 2002 Upscaled BluRay 2160p HDR10 HEVC DD 5.1 x265-E
+👤 73 💾 11.79 GB ⚙️ 1337x
+📦 1080p Primary: Scooby Doo 2002 1080p BluRay H264 AAC-RARBG mp4
+📦 720p Primary: Scooby-Doo 2002 720p BluRay
+👤 14 💾 737.25 MB ⚙️ YTS
+✅ StreamResolver: Quality buckets ready
+🔗 StreamService: Attempting to resolve specific stream hash: caa385c23ba160de57a3e4051f4b4990cc9887c4
+✅ StreamService: Found requested stream hash! Locking selection.
+[2025-12-14T16:23:26Z] [INFO] [StreamService.swift:140] 📦 StreamService: Found 1 total streams to try (across all qualities)
+✅ StreamService: Found 1 H.264 streams (Tier 1)
+✅ StreamService: Found 1 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+🔒 StreamService: Bypassing filters for enforced stream
+🔄 StreamService: Trying stream 1/1: Scooby-Doo 2002 1080p BluRay
+👤 153 💾 1.39 GB ⚙️ YTS
+🔓 StreamService: Unlocking with infoHash: caa385c23ba1...
+[ INFO ] POST /api/streams/unlock [request-id: 78C99E88-F646-46B4-B1E4-5757C82F06C9]
+2025-12-14 11:23:26.087 RedLemon[3769:17784] 🔓 Unlock request: infoHash=caa385c23ba1..., fileIdx=0
+2025-12-14 11:23:26.087 RedLemon[3769:17784] ✅ Token found, attempting unlock...
+2025-12-14 11:23:27.767 RedLemon[3769:17784] ✅ Unlocked successfully: Scooby-Doo.2002.1080p.BluRay.x264-[YTS.AM].mp4
+2025-12-14 11:23:27.801 RedLemon[3769:17707] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Sc, subtitles: 0
+2025-12-14 11:23:27.862 RedLemon[3769:17707] ✅ Stream ready, starting playback...
+2025-12-14 11:23:27.863 RedLemon[3769:17707] 🖥️ WindowManager: enterFullscreen() called
+2025-12-14 11:23:27.863 RedLemon[3769:17707]    Window: <SwiftUI.SwiftUIWindow: 0x7ff223ff7df0>
+2025-12-14 11:23:27.863 RedLemon[3769:17707]    Is fullscreen: 0
+2025-12-14 11:23:27.863 RedLemon[3769:17707]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-14 11:23:27.941 RedLemon[3769:17707] 🖼️ Setting up MPV with native macOS video output...
+2025-12-14 11:23:27.948 RedLemon[3769:17707] ✅ MPV initialized with native GPU rendering
+2025-12-14 11:23:27.967 RedLemon[3769:17707] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-14 11:23:27.967 RedLemon[3769:17707] 🎉 Starting watch party sync - Room: event_tt0267913, Host: NO
+2025-12-14 11:23:27.972 RedLemon[3769:17707] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-14 11:23:28.042 RedLemon[3769:17707] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:28.042 RedLemon[3769:17707] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:28.042 RedLemon[3769:17707]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:28.044 RedLemon[3769:17787] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:28.044 RedLemon[3769:17787] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:28.045 RedLemon[3769:17787]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:28.045 RedLemon[3769:17787] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2025-12-14 11:23:28.045 RedLemon[3769:17787]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:28.190 RedLemon[3769:17707] 🔄 Starting chat polling for room: event_tt0267913
+2025-12-14 11:23:28.190 RedLemon[3769:17707] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-14 11:23:28.190 RedLemon[3769:17707] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-14 11:23:28.190 RedLemon[3769:17707] 🎬🎬🎬 Subtitles: 0
+2025-12-14 11:23:28.190 RedLemon[3769:17707] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Scooby-Doo
+2025-12-14 11:23:28.190 RedLemon[3769:17707] 🎬🎬🎬 streamURL: https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Sc
+2025-12-14 11:23:28.191 RedLemon[3769:17707] 🎬🎬🎬 subtitles: 0
+2025-12-14 11:23:28.191 RedLemon[3769:17707] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-14 11:23:28.198 RedLemon[3769:17787] 🎬 MPV: Current video filename set to: Scooby-Doo.2002.1080p.BluRay.x264-[YTS.AM].mp4
+2025-12-14 11:23:28.199 RedLemon[3769:17787] 🎬 MPV loadVideo called with URL: https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Scooby-Doo.2002.1080p.BluRay.x264-%5BYTS.A, autoplay: true
+2025-12-14 11:23:28.199 RedLemon[3769:17787] 🎬 MPV executing command: loadfile "https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Scooby-Doo.2002.1080p.BluRay.x264-%5BYTS.AM%5D.mp4"
+2025-12-14 11:23:28.200 RedLemon[3769:17787] 🎬 MPV loadfile result: 0
+2025-12-14 11:23:28.200 RedLemon[3769:17787] ✅ MPV loadfile succeeded, isPlaying set to true
+2025-12-14 11:23:28.349 RedLemon[3769:17707] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:28.349 RedLemon[3769:17707] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:28.349 RedLemon[3769:17707]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:28.431 RedLemon[3769:17784] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:28.431 RedLemon[3769:17784] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:28.431 RedLemon[3769:17784]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:28.431 RedLemon[3769:17784] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2025-12-14 11:23:28.431 RedLemon[3769:17784]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:28.564 RedLemon[3769:17798] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 448.0s
+2025-12-14 11:23:28.629 RedLemon[3769:17707] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-14 11:23:28.869 RedLemon[3769:17763] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 448.3s
+2025-12-14 11:23:29.068 RedLemon[3769:17763] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:29.068 RedLemon[3769:17763] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:29.069 RedLemon[3769:17763]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:29.069 RedLemon[3769:17763] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2025-12-14 11:23:29.070 RedLemon[3769:17763]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:29.431 RedLemon[3769:17763] 🔍 MPV track-list/count: 0
+2025-12-14 11:23:29.432 RedLemon[3769:17763] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:29.432 RedLemon[3769:17763]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:29.432 RedLemon[3769:17763] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2025-12-14 11:23:29.433 RedLemon[3769:17763]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:30.233 RedLemon[3769:17830] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:30.239 RedLemon[3769:17707] 🔄 MPV: Executing PENDING SEEK to 448.3s after FILE_LOADED
+2025-12-14 11:23:30.240 RedLemon[3769:17707] ⏱️ Watch Party: Duration available (5194.8s), triggering ready signal
+2025-12-14 11:23:30.240 RedLemon[3769:17707] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-14 11:23:30.239 RedLemon[3769:17830] 🔍 Track 0 type: video
+2025-12-14 11:23:30.240 RedLemon[3769:17830] 🔍 Track 1 type: audio
+2025-12-14 11:23:30.241 RedLemon[3769:17830] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:30.241 RedLemon[3769:17830]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:30.245 RedLemon[3769:17830] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2025-12-14 11:23:30.245 RedLemon[3769:17830]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:30.326 RedLemon[3769:17830] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:30.327 RedLemon[3769:17830]    Payload keys: position, type, senderId, isPlaying, timestamp
+2025-12-14 11:23:30.329 RedLemon[3769:17787] ✅ Realtime: Message broadcast complete
+2025-12-14 11:23:30.338 RedLemon[3769:17707] ✅ Watch Party: READY signal sent successfully
+2025-12-14 11:23:30.375 RedLemon[3769:17761] 📨 Realtime: Received broadcast message
+2025-12-14 11:23:30.375 RedLemon[3769:17761]    Payload keys: type, senderId, isPlaying, timestamp, position
+2025-12-14 11:23:30.376 RedLemon[3769:17761] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:30.376 RedLemon[3769:17761] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-14 11:23:30.376 RedLemon[3769:17761] ✅ Realtime: syncCallback invoked successfully
+2025-12-14 11:23:30.376 RedLemon[3769:17707] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:30.376 RedLemon[3769:17707] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-14 11:23:30.433 RedLemon[3769:17761] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:30.434 RedLemon[3769:17761] 🔍 Track 0 type: video
+2025-12-14 11:23:30.434 RedLemon[3769:17761] 🔍 Track 1 type: audio
+2025-12-14 11:23:30.434 RedLemon[3769:17761] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:30.434 RedLemon[3769:17761]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:30.434 RedLemon[3769:17761] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2025-12-14 11:23:30.435 RedLemon[3769:17761]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:31.364 RedLemon[3769:17798] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:31.364 RedLemon[3769:17798] 🔍 Track 0 type: video
+2025-12-14 11:23:31.369 RedLemon[3769:17798] 🔍 Track 1 type: audio
+2025-12-14 11:23:31.370 RedLemon[3769:17798] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:31.370 RedLemon[3769:17798]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:31.375 RedLemon[3769:17798] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2025-12-14 11:23:31.375 RedLemon[3769:17798]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:31.435 RedLemon[3769:17798] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:31.435 RedLemon[3769:17798] 🔍 Track 0 type: video
+2025-12-14 11:23:31.435 RedLemon[3769:17798] 🔍 Track 1 type: audio
+2025-12-14 11:23:31.435 RedLemon[3769:17798] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:31.435 RedLemon[3769:17798]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:31.436 RedLemon[3769:17798] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2025-12-14 11:23:31.436 RedLemon[3769:17798]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:32.470 RedLemon[3769:17787] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:32.470 RedLemon[3769:17787] 🔍 Track 0 type: video
+2025-12-14 11:23:32.470 RedLemon[3769:17787] 🔍 Track 1 type: audio
+2025-12-14 11:23:32.470 RedLemon[3769:17787] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:32.470 RedLemon[3769:17787]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:32.471 RedLemon[3769:17787] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2025-12-14 11:23:32.471 RedLemon[3769:17787]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:32.471 RedLemon[3769:17787] 🔍 MPV track-list/count: 2
+2025-12-14 11:23:32.471 RedLemon[3769:17787] 🔍 Track 0 type: video
+2025-12-14 11:23:32.471 RedLemon[3769:17787] 🔍 Track 1 type: audio
+2025-12-14 11:23:32.471 RedLemon[3769:17787] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-14 11:23:32.472 RedLemon[3769:17787]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-14 11:23:32.472 RedLemon[3769:17787] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2025-12-14 11:23:32.472 RedLemon[3769:17787]    Track: ID=0, Title=Off, External=0
+2025-12-14 11:23:41.087 RedLemon[3769:17798] 📨 Realtime: Received broadcast message
+2025-12-14 11:23:41.087 RedLemon[3769:17798]    Payload keys: isPlaying, senderId, position, timestamp, type
+2025-12-14 11:23:41.088 RedLemon[3769:17798] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-14 11:23:41.088 RedLemon[3769:17798] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-14 11:23:41.088 RedLemon[3769:17798] ✅ Realtime: syncCallback invoked successfully
+2025-12-14 11:23:41.116 RedLemon[3769:17707] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-14 11:23:41.116 RedLemon[3769:17707] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-14 11:23:41.116 RedLemon[3769:17707] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-14 11:23:48.581 RedLemon[3769:17707] 👥 MPVPlayer: Updated participants list via polling: 2
+✅ RD addMagnet: GETUF4L7XHZTW
+🎬 Movie: Found matching file for title 'Scooby-Doo': /Scooby-Doo.2002.1080p.BluRay.x264-[YTS.AM].mp4
+📝 RD: Selecting file ID 1 for torrent GETUF4L7XHZTW
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/FLXRDKASSOMIGDF1
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Selected stream: Scooby-Doo 2002 1080p BluRay
+👤 153 💾 1.39 GB ⚙️ YTS
+📊 Stream Size: 1.39 GB
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Sc
+   Display Title: Scooby-Doo
+   Subtitle URLs: 0
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0267913, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0267913
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-14 16:16:00 +0000
+   Current time: 2025-12-14 16:23:28 +0000
+   Elapsed: 448s
+   Seeking to: 448s
+🎯 IMMEDIATE RESUME: Seeking to 448s without delay
+📝 Started watch history tracking
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡️ PlaybackService: releasing sleep assertion
+📡 Joined channel: realtime:watch-party:event_tt0267913
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Scooby-Doo
+   IMDB: tt0267913
+   URL: https://chi2-4.download.real-debrid.com/d/KLTTTEI6GTPAI41/Sc...
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+📡 Fetching metadata for tt0267913 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0267913]
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📨 Received: {"ref":"8C2A279D-D3D6-4A00-9456-DC8A94D9CA09","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"390a7112-d909-11f0-b71a-0a58a9feac02":{"metas":[{"phx_ref":"GIEhiqmcnL8v9LRP","is_host":false,"joined_at":1765729408.189835,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0267913"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"3675fd18-d909-11f0-aa4f-0a58a9feac02":{"metas":[{"phx_ref":"GIEhiqpa9N-sND3D","phx_ref_prev":"GIEhicKyD0isNOQQ","last_seen":"2025-12-14T16:23:28Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:28Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"3675fd18-d909-11f0-aa4f-0a58a9feac02":{"metas":[{"phx_ref":"GIEhicKyD0isNOQQ","last_seen":"2025-12-14T16:23:24Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+✅ Got background: https://images.metahub.space/background/medium/tt0267913/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0267913/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0267913/img...
+📡 SocialService: Updated status - Watching: Scooby-Doo
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-14 16:16:00 +0000
+   Current time: 2025-12-14 16:23:28 +0000
+   Elapsed: 448s
+   Seeking to: 448s
+🎯 IMMEDIATE RESUME: Seeking to 448s without delay
+📝 Started watch history tracking
+🔄 Refreshed events schedule: 4 remaining
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡️ PlaybackService: releasing sleep assertion
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 448s...
+🎯 Executing immediate seek to 448s...
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 448s
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 448s...
+🎯 Executing immediate seek to 448s...
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Resumed playback after seek to 448s
+⚠️ onVideoReady called again - ignoring to prevent loops
+[MPV] (+) Video --vid=1 (*) (h264 1904x1072 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 2ch 48000Hz)
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 2ch | English: false | Commentary: false -> Score: 25
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 25)
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event
+🔍 AUTO-SELECT: Found 2 total tracks
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+ℹ️ No suitable English subtitles found
+📊 Current subtitle track: disabled (string: no)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+ MPV Event: 20
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+[MPV] Using hardware decoding (videotoolbox).
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1904x1072 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 2ch 48000Hz)
+[MPV] VO: [libmpv] 1904x1072 videotoolbox[nv12]
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765729410.240532,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0267913"}
+📊 Current subtitle track: disabled (string: no)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+📊 Current subtitle track: disabled (string: no)
+📊 Current subtitle track: disabled (string: no)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: disabled (string: no)
+📊 Current subtitle track: disabled (string: no)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjQyW4yd7h_vM","phx_ref_prev":"GIEhhlza0bV7hwVM","last_seen":"2025-12-14T16:23:38Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhhlza0bV7hwVM","phx_ref_prev":"GIEhhGq9JfJ7hzeG","last_seen":"2025-12-14T16:23:09Z","started_at":"2025-12-14T16:23:09Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1160419","watching_title":"Dune: Part One","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjSDVZUV7h5_G","phx_ref_prev":"GIEhjQyW4yd7h_vM","last_seen":"2025-12-14T16:23:38Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:38Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjQyW4yd7h_vM","phx_ref_prev":"GIEhhlza0bV7hwVM","last_seen":"2025-12-14T16:23:38Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765729421.049094,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0267913"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjZ2KduZ7h9DO","phx_ref_prev":"GIEhjSDVZUV7h5_G","last_seen":"2025-12-14T16:23:40Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:40Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjSDVZUV7h5_G","phx_ref_prev":"GIEhjQyW4yd7h_vM","last_seen":"2025-12-14T16:23:38Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:38Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"409749dc-d909-11f0-bc9b-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjZzCJL8wNQsN","is_host":false,"joined_at":1765729420.886352,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0267913"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"409749dc-d909-11f0-bc9b-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjZzCJL8wNQsN","is_host":false,"joined_at":1765729420.886352,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt0267913"}
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjz9Ku8d7h9TG","phx_ref_prev":"GIEhjZ2KduZ7h9DO","last_seen":"2025-12-14T16:23:47Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjZ2KduZ7h9DO","phx_ref_prev":"GIEhjSDVZUV7h5_G","last_seen":"2025-12-14T16:23:40Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:40Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhkTHQUVx7hw-I","phx_ref_prev":"GIEhjz9Ku8d7h9TG","last_seen":"2025-12-14T16:23:56Z","room_id":"event_tt0267913","started_at":"2025-12-14T16:23:56Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0267913","watching_title":"Scooby-Doo","watching_type":"movie"}]}},"leaves":{"2902e54c-d909-11f0-be17-0a58a9feac02":{"metas":[{"phx_ref":"GIEhjz9Ku8d7h9TG","phx_ref_prev":"GIEhjZ2KduZ7h9DO","last_seen":"2025-12-14T16:23:47Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realt2025-12-14 11:23:58.060 RedLemon[3769:17830] 📨 Realtime: Received broadcast message
+2025-12-14 11:23:58.060 RedLemon[3769:17830]    Payload keys: timestamp, position, senderId, isPlaying, type
+2025-12-14 11:23:58.061 RedLemon[3769:17830] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-14 11:23:58.061 RedLemon[3769:17830] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-14 11:23:58.061 RedLemon[3769:17830] ✅ Realtime: syncCallback invoked successfully
+2025-12-14 11:23:58.089 RedLemon[3769:17707] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-14 11:23:58.089 RedLemon[3769:17707] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+ime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"49c2275c-d909-11f0-ae83-0a58a9feac02":{"metas":[{"phx_ref":"GIEhkTFia3kwNS4G","is_host":false,"joined_at":1765729436.259534,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0267913"}
+🔄 User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e reconnected within grace period - cancelling leave
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765729437.963206,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0267913"}
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Scooby-Doo at 475s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

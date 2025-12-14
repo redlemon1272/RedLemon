@@ -111,6 +111,7 @@ struct PlayerControlsView: View {
                                     .shadow(color: .black.opacity(0.3), radius: 3)
                                     .offset(x: progressWidth(in: geometry.size.width) - 5)
                             }
+                            .contentShape(Rectangle()) // Hit test the entire expanded area
                             .gesture(
                                 DragGesture(minimumDistance: 0)
                                     .onChanged { value in
@@ -120,7 +121,7 @@ struct PlayerControlsView: View {
                                     }
                             )
                         }
-                        .frame(height: 8)
+                        .frame(height: 20) // Increased hit area
                         .padding(.horizontal, 10)
                     } else {
                         // Guest view - show progress bar without interaction
@@ -137,7 +138,7 @@ struct PlayerControlsView: View {
                                     .frame(width: progressWidth(in: geometry.size.width), height: 3)
                             }
                         }
-                        .frame(height: 8)
+                        .frame(height: 20)
                         .padding(.horizontal, 10)
                     }
 

@@ -338,8 +338,8 @@ actor StreamResolver {
                      // Rank subtitles specifically for this stream's filename/title
                      let rankedSubs = rankSubtitlesForStream(englishSubtitles, streamTitle: stream.title)
                      
-                     // Select top 3 matches
-                     let mappedSubs = rankedSubs.prefix(3).map { sub in
+                     // Select top 20 matches (effectively "all" relevant ones)
+                     let mappedSubs = rankedSubs.prefix(20).map { sub in
                         Subtitle(
                             id: Data((sub.url).utf8).base64EncodedString(),
                             url: sub.url,
@@ -417,6 +417,16 @@ actor StreamResolver {
         for token in groupTokens {
             if streamTitle.contains(token) && releaseName.contains(token) {
                 score += 50
+            }
+        }
+
+        // 4. Penalty for "Ai-Enhanced" / "60fps" if stream is standard
+        // These are often modified versions with different timing
+        let nicheTokens = ["60fps", "ai-enhanced", "upscaled", "interpolated"]
+        for token in nicheTokens {
+            if releaseName.contains(token) && !streamTitle.contains(token) {
+                score -= 1000 // Huge penalty - push to bottom
+                print("   📉 Penalizing niche subtitle: \(releaseName) (Stream is standard)")
             }
         }
         
@@ -521,9 +531,10 @@ actor StreamResolver {
                 }
                 
                 // 4. Reputable Scene Groups (Boost)
-                let goodGroups = ["ntb", "flux", "galaxyrg", "rarbg", "yts", "mx", "qxr", "mzabi"]
+                // Includes high-quality P2P groups (LoRD, DON, Wiki) known for reliable embedded subs
+                let goodGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "ntb", "flux", "galaxyrg", "rarbg", "yts", "mx", "qxr", "mzabi"]
                 if goodGroups.contains(where: { title.contains($0) }) {
-                    score += 15
+                    score += 25 // Increased boost for quality groups
                 }
                 
                 // 5. "MULTi" Handling

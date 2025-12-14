@@ -273,6 +273,17 @@ actor StreamService: StreamResolving {
 
                 if sizeInBytes > maxSizeBytes {
                     let sizeGB = sizeInBytes / 1_073_741_824.0
+                    
+                    // 🌟 Smart Limit: Allow larger files (up to 30GB) for trusted "Elite" groups
+                    // These groups (LoRD, DON, Wiki) produce high-quality encodes that justify the size
+                    let trustedHeavyGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "flux", "ntb"]
+                    let isTrusted = trustedHeavyGroups.contains { stream.title.lowercased().contains($0) }
+                    
+                    if isTrusted && sizeInBytes < (30 * 1024 * 1024 * 1024) {
+                        print("✨ StreamService: Allowing large file (\(String(format: "%.2f", sizeGB)) GB) from trusted group: \(stream.title)")
+                        return stream
+                    }
+                    
                     print("⚠️ StreamService: Skipping large file (1080p limit): \(stream.title) (\(String(format: "%.2f", sizeGB)) GB)")
                     return nil
                 }

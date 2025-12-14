@@ -756,7 +756,8 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         var score = 0
 
         // Prefer well-known reliable release groups (removed YIFY/YTS - poor quality)
-        let goodGroups = ["RARBG", "PSA", "TIGOLE", "ION10", "SPARKS", "FGT", "QXR", "UTR"]
+        // Prefer well-known reliable release groups (removed YIFY/YTS - poor quality)
+        let goodGroups = ["LORD", "DON", "WIKI", "TAYTO", "SARTRE", "CTRLHD", "RARBG", "PSA", "TIGOLE", "ION10", "SPARKS", "FGT", "QXR", "UTR"]
         for group in goodGroups {
             if title.contains(group) {
                 score += 20
@@ -798,6 +799,35 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         // Prefer H.264 over H.265 for reliability (H.265 more problematic on older macOS)
         if title.contains("H.264") || title.contains("X264") || title.contains("AVC") {
             score += 5
+        }
+
+        // 🌟 Size "Sweet Spot" Logic
+        // Bonus for files that are high quality but not huge (2GB - 12GB)
+        // Penalty for very large files (>15GB) if 1080p to prevent buffering
+        let lowerTitle = title.lowercased()
+        if let sizeStr = stream.size {
+             let sizeUpper = sizeStr.uppercased()
+             var sizeGB: Double = 0.0
+             
+             if sizeUpper.contains("GB") {
+                 let numStr = sizeUpper.replacingOccurrences(of: " GB", with: "").trimmingCharacters(in: .whitespaces)
+                 sizeGB = Double(numStr) ?? 0.0
+             } else if sizeUpper.contains("MB") {
+                 let numStr = sizeUpper.replacingOccurrences(of: " MB", with: "").trimmingCharacters(in: .whitespaces)
+                 sizeGB = (Double(numStr) ?? 0.0) / 1024.0
+             }
+             
+             // Sweet Spot Bonus (High quality rips, manageable size)
+             if sizeGB >= 2.5 && sizeGB <= 12.0 {
+                 score += 15
+             }
+             
+             // "Heavy" Penalty (Only for 1080p)
+             // If 4K, 15GB+ is normal, so don't penalize
+             let is4K = lowerTitle.contains("2160p") || lowerTitle.contains("4k")
+             if !is4K && sizeGB > 15.0 {
+                 score -= 10 // Mild penalty - lets it play but prefers smaller efficient encodes if available
+             }
         }
 
         // Boost by seeders (capped at 50 to not override other factors)

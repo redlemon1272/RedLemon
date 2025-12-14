@@ -244,6 +244,7 @@ enum SyncMessageType: String, Codable {
     case returnToLobby  // Host returning everyone to lobby
     case roomClosed     // Host has left and closed the room
     case reaction       // Floating emoji reaction
+    case hostAnnouncement // Floating host announcement
 }
 
 /// Sync message for watch party coordination

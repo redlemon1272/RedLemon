@@ -245,6 +245,7 @@ class MPVPlayerViewModel: ObservableObject {
     // Reactions
     @Published var areReactionsEnabled: Bool = true
     let reactionTriggers = PassthroughSubject<String, Never>()
+    let announcementTriggers = PassthroughSubject<String, Never>()
     private var reactionTimestamps: [Date] = []
 
     // Metadata
@@ -1126,6 +1127,42 @@ class MPVPlayerViewModel: ObservableObject {
         
         // Solo/Local Mode (just show locally)
         reactionTriggers.send(emoji)
+    }
+
+    /// Send a floating announcement to all participants (Host Only)
+    func sendAnnouncement(_ text: String) {
+        guard isWatchPartyHost else { return }
+        print("📢 Host sending announcement: \(text)")
+
+        // 1. Show locally immediately (floating + chat)
+        announcementTriggers.send(text)
+
+        let localMessage = ChatMessage(
+            id: UUID().uuidString,
+            username: appState?.currentUsername ?? "Host",
+            text: text,
+            timestamp: Date()
+        )
+        messages.append(localMessage)
+        trimChatMessages()
+
+        // 2. Broadcast via Realtime
+        let userInfo = appState?.currentUsername
+        let userId = currentUserId
+        
+        let syncMessage = SyncMessage(
+            type: .hostAnnouncement,
+            timestamp: Date().timeIntervalSince1970, // Use current time
+            position: currentTime,
+            isPlaying: isPlaying,
+            senderId: userId,
+            chatText: text,
+            chatUsername: userInfo ?? "Host"
+        )
+
+        Task { [weak self] in
+            try? await self?.realtimeManager?.sendSyncMessage(syncMessage)
+        }
     }
 
     // MARK: - Enhanced Timer Management
@@ -2139,6 +2176,35 @@ extension MPVPlayerViewModel {
             if let emoji = message.chatText {
                  print("😂 Received reaction: \(emoji)")
                  reactionTriggers.send(emoji)
+            }
+
+        case .hostAnnouncement:
+            // Handle floating host announcement
+            if let text = message.chatText {
+                print("📢 Received announcement: \(text)")
+                // 1. Trigger floating overlay
+                announcementTriggers.send(text)
+                
+                // 2. ALSO add to chat history (as requested)
+                // Use slightly different username display or handle in ChatOverlay logic if needed,
+                // but for now, treating it as a standard chat message in the log is fine.
+                // Or we can add a visual indicator?
+                // The ChatOverlay handles styling based on content, but here we just need to ensure data flows.
+                
+                if let username = message.chatUsername {
+                     let chatMessage = ChatMessage(
+                        id: UUID().uuidString,
+                        username: username,
+                        text: text, // Maybe prefix with "📢 " if we want it in the log too? Let's leave clear.
+                        timestamp: Date(timeIntervalSince1970: message.timestamp)
+                    )
+                    
+                    await MainActor.run {
+                        // Append directly to avoid the bulk flush logic delay for announcements (they are rare)
+                        self.messages.append(chatMessage)
+                        self.trimChatMessages()
+                    }
+                }
             }
         }
     }

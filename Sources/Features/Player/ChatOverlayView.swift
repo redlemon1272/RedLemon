@@ -18,6 +18,7 @@ struct ChatOverlayView: View {
     @State private var showEmojiPicker: Bool = false
     @State private var manualFocus: Bool = false
     @State private var showParticipantsList: Bool = false
+    @State private var isAnnouncementMode: Bool = false // Host Announcement Mode
 
     // Chat Modes
     enum ChatMode: Equatable {
@@ -392,6 +393,21 @@ struct ChatOverlayView: View {
                 }
                 .buttonStyle(.plain)
 
+                // Host Announcement Toggle (Megaphone)
+                if viewModel.isWatchPartyHost && chatMode == .room {
+                    Button(action: {
+                        withAnimation { isAnnouncementMode.toggle() }
+                    }) {
+                        Image(systemName: isAnnouncementMode ? "megaphone.fill" : "megaphone")
+                            .font(.system(size: 16))
+                            .foregroundColor(isAnnouncementMode ? .yellow : .white.opacity(0.5))
+                            .frame(width: 22, height: 22)
+                            .padding(.bottom, 5)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Broadcast Announcement")
+                }
+
                 // Input Field
                 Group {
                     if #available(macOS 13.0, *) {
@@ -432,11 +448,12 @@ struct ChatOverlayView: View {
                 .padding(.bottom, 2)
             }
             .padding(.horizontal, 8)
-            .background(Color.white.opacity(0.1))
+            .padding(.horizontal, 8)
+            .background(isAnnouncementMode ? Color.yellow.opacity(0.2) : Color.white.opacity(0.1))
             .cornerRadius(20)
             .overlay(
                 RoundedRectangle(cornerRadius: 20)
-                    .stroke(Color.white.opacity(0.1), lineWidth: 0.5)
+                    .stroke(isAnnouncementMode ? Color.yellow.opacity(0.8) : Color.white.opacity(0.1), lineWidth: isAnnouncementMode ? 1.0 : 0.5)
             )
             .padding(.horizontal, 16)
             .padding(.horizontal, 16)
@@ -500,7 +517,13 @@ struct ChatOverlayView: View {
         case .event:
             Task { await eventChatService.sendMessage(contentToSend) }
         case .room:
-            viewModel.sendMessage(contentToSend)
+            if isAnnouncementMode && viewModel.isWatchPartyHost {
+                viewModel.sendAnnouncement(contentToSend)
+                // Auto-disable after sending to prevent spam? 
+                // Let's keep it enabled for multi-message flows, user can toggle off.
+            } else {
+                viewModel.sendMessage(contentToSend)
+            }
         case .friends:
             break
         case .dm(let friend):

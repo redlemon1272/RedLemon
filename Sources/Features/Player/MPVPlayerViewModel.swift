@@ -1134,17 +1134,8 @@ class MPVPlayerViewModel: ObservableObject {
         guard isWatchPartyHost else { return }
         print("📢 Host sending announcement: \(text)")
 
-        // 1. Show locally immediately (floating + chat)
+        // 1. Show locally immediately (floating only)
         announcementTriggers.send(text)
-
-        let localMessage = ChatMessage(
-            id: UUID().uuidString,
-            username: appState?.currentUsername ?? "Host",
-            text: text,
-            timestamp: Date()
-        )
-        messages.append(localMessage)
-        trimChatMessages()
 
         // 2. Broadcast via Realtime
         let userInfo = appState?.currentUsername
@@ -2185,26 +2176,8 @@ extension MPVPlayerViewModel {
                 // 1. Trigger floating overlay
                 announcementTriggers.send(text)
                 
-                // 2. ALSO add to chat history (as requested)
-                // Use slightly different username display or handle in ChatOverlay logic if needed,
-                // but for now, treating it as a standard chat message in the log is fine.
-                // Or we can add a visual indicator?
-                // The ChatOverlay handles styling based on content, but here we just need to ensure data flows.
-                
-                if let username = message.chatUsername {
-                     let chatMessage = ChatMessage(
-                        id: UUID().uuidString,
-                        username: username,
-                        text: text, // Maybe prefix with "📢 " if we want it in the log too? Let's leave clear.
-                        timestamp: Date(timeIntervalSince1970: message.timestamp)
-                    )
-                    
-                    await MainActor.run {
-                        // Append directly to avoid the bulk flush logic delay for announcements (they are rare)
-                        self.messages.append(chatMessage)
-                        self.trimChatMessages()
-                    }
-                }
+                // 2. Chat history update REMOVED (per request)
+                // Announcements are visual-only now.
             }
         }
     }

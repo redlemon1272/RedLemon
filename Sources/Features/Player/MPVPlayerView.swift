@@ -222,7 +222,11 @@ struct MPVPlayerView: View {
                     }
 
                     // Show controls when mouse is in bottom 25% of screen
-                    if location.y <= bottomThreshold && location != .zero {
+                    // 🚫 Fix: Ignore if mouse is in the chat area (Right 20%) when chat is open
+                    let chatThreshold = windowWidth * 0.8
+                    let isMouseInChat = viewModel.showChat && location.x > chatThreshold
+                    
+                    if location.y <= bottomThreshold && location != .zero && !isMouseInChat {
                         showControls = true
 
                         // Keep controls visible briefly after hover

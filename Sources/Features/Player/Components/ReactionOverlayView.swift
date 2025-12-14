@@ -53,7 +53,7 @@ struct ReactionOverlayView: View {
         let newParticle = ReactionParticleModel(
             content: content,
             isText: isText,
-            startX: isText ? 0.5 : CGFloat.random(in: 0.85...0.95) // Center text, random emojis
+            startX: isText ? 0.9 : CGFloat.random(in: 0.85...0.95) // Right side for both
         )
         particles.append(newParticle)
         
@@ -105,7 +105,7 @@ struct ReactionParticleView: View {
         // Use drawingGroup to rasterize via Metal, improving frame rate over video
         .drawingGroup()
         .position(
-            x: model.isText ? containerSize.width * 0.5 : (containerSize.width * model.startX + xOffset), // Force text to center, emojis drift
+            x: containerSize.width * model.startX + xOffset, // Use startX for everything
             y: containerSize.height * 0.85 + yOffset
         )
         .onAppear {

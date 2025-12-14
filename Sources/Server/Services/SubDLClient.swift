@@ -181,6 +181,10 @@ final class SubDLClient {
             srtText = text
         }
 
+        // Clean up SRT text (strip BOM and normalize line endings)
+        srtText = srtText.replacingOccurrences(of: "\u{FEFF}", with: "")
+        srtText = srtText.replacingOccurrences(of: "\r\n", with: "\n")
+
         // Apply time offset if provided
         if offset != 0 {
             print("⏱️ Applying subtitle offset: \(offset)ms")

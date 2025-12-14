@@ -59,12 +59,91 @@ struct EventsView: View {
             } else {
                 isLoading = false
             }
+            
+            // Check for auto-join immediately on appear (e.g. returning from player)
+            if appState.shouldAutoJoinLobby {
+                attemptAutoJoin()
+            }
         }
         .onChange(of: timeService.isSynced) { isSynced in
             if isSynced {
                 print("⏰ Time synced with server! AppState should automatically recalculate.")
                 // appState.calculateDeterministicSchedule() happens internally or via timer
             }
+        }
+        // CRITICAL: Watch for flag change (e.g. if set while view is already visible)
+        .onChange(of: appState.shouldAutoJoinLobby) { shouldJoin in
+            if shouldJoin {
+                attemptAutoJoin()
+            }
+        }
+        // CRITICAL: Watch for schedule updates (race condition: flag set before schedule ready)
+        .onChange(of: appState.eventsSchedule) { _ in
+            if appState.shouldAutoJoinLobby {
+                attemptAutoJoin()
+            }
+        }
+    }
+
+    private func attemptAutoJoin() {
+        print("🔄 EventsView: Attempting Auto-Join...")
+        
+        let scheduledEvents = appState.eventsSchedule
+        guard !scheduledEvents.isEmpty else {
+            print("⚠️ Auto-Join skipped: No events scheduled yet")
+            return
+        }
+
+        // Find the NEXT event (not the finished one)
+        // Priority: Lobby event that is NOT finished
+        if let lobbyEvent = scheduledEvents.first(where: { event in
+            // ✅ Must not be in finished events list
+            guard !appState.player.finishedEventIds.contains(event.id) else {
+                return false
+            }
+
+            // ✅ Must not be marked as finished
+            guard !event.isFinished else {
+                return false
+            }
+
+            // ✅ Must be in lobby OR be the next event (index == 1)
+            // We check index 1 specifically because index 0 might be the "Just Finished" event if schedule hasn't rotated yet
+            let isInLobby = event.isInLobby
+            let isNextEvent = event.index == 1
+
+            return isInLobby || isNextEvent
+        }) {
+            print("🚀 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
+            
+            // Reset flag immediately to prevent loops
+            appState.shouldAutoJoinLobby = false
+            
+            Task {
+                // Determine wait time if needed (optional polish, but immediate is fine for lobby)
+                await self.joinEvent(lobbyEvent)
+            }
+        } 
+        // Fallback: Check if there is a LIVE event that we haven't finished yet
+        // (e.g. User joined late and previous event finished, but next one is already live)
+        else if let liveEvent = scheduledEvents.first(where: {
+            $0.isLive && !$0.isFinished && !appState.player.finishedEventIds.contains($0.id)
+        }) {
+            print("🚀 Auto-joining LIVE event: \(liveEvent.mediaItem.name)")
+            
+            // Reset flag
+            appState.shouldAutoJoinLobby = false
+            
+            Task {
+                await self.joinEvent(liveEvent)
+            }
+        } else {
+            print("⚠️ Auto-Join failed: No eligible event found to join.")
+            // Do NOT reset flag here? Or should we? 
+            // Better to leave it for a moment in case schedule is about to update.
+            // But to be safe against infinite retries, we might want to reset if we are sure.
+            // For now, let's leave it true and let the .onChange(eventsSchedule) retry it.
+            // But add a safety timeout?
         }
     }
 

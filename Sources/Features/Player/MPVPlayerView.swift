@@ -312,6 +312,10 @@ struct MPVPlayerView: View {
             // This ensures isInWatchParty is set when video loads, activating the ready gate
             if appState.player.currentWatchMode == .watchParty, let roomId = appState.player.currentRoomId {
                 NSLog("🎉 Starting watch party sync - Room: %@, Host: %@", roomId, appState.player.isWatchPartyHost ? "YES" : "NO")
+                
+                // NEW: Inject Solo Mode intent
+                viewModel.forceSoloStart = appState.player.forceSoloStart
+                
                 do {
                     try await viewModel.startWatchPartySync(roomId: roomId, isHost: appState.player.isWatchPartyHost)
                     NSLog("✅ Watch party sync started successfully - isInWatchParty is now TRUE")

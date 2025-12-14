@@ -23,6 +23,7 @@ class PlayerViewModel: ObservableObject {
     @Published var currentRoomId: String?
     @Published var isWatchPartyHost: Bool = false
     @Published var currentWatchPartyRoom: WatchPartyRoom? // Current lobby/room
+    @Published var forceSoloStart: Bool = false // Host override to bypass ready gate
     
     // Event specific state
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
@@ -495,6 +496,7 @@ class PlayerViewModel: ObservableObject {
             currentWatchPartyRoom = nil // Clear stale room state
             currentWatchMode = .solo
             isWatchPartyHost = false
+            forceSoloStart = false
         }
         
         // Capture event state before resetting

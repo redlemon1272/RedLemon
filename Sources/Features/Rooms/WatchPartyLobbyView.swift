@@ -600,6 +600,15 @@ struct WatchPartyLobbyView: View {
                 // Action buttons - Fixed at bottom
                 VStack(spacing: 12) {
                     if isHost {
+                        // NEW: Solo Launch Toggle
+                        Toggle(isOn: $viewModel.forceSoloStart) {
+                            Text("Launch Solo (Don't wait for guests)")
+                                .font(.caption)
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        .toggleStyle(.checkbox)
+                        .padding(.bottom, 4)
+                        
                         // Host controls
                         Button(action: {
                             if licenseManager.canHost {

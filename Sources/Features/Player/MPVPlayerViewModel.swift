@@ -238,6 +238,9 @@ class MPVPlayerViewModel: ObservableObject {
     // Chat state
     @Published var showChat: Bool = false
     @Published var showParticipantList: Bool = false
+
+    // Watch Party State
+    @Published var forceSoloStart: Bool = false // Bypass guest check
     @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
@@ -2255,11 +2258,29 @@ extension MPVPlayerViewModel {
         NSLog("🔍 DEBUG: hasSentReadySignal = %@", hasSentReadySignal ? "true" : "false")
         NSLog("🔍 DEBUG: connectedGuestIds = %@", Array(connectedGuestIds).joined(separator: ", "))
         NSLog("🔍 DEBUG: readyGuestIds = %@", Array(readyGuestIds).joined(separator: ", "))
+        NSLog("🔍 DEBUG: forceSoloStart = %@", forceSoloStart ? "true" : "false")
 
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
             NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)
             return
+        }
+        
+        // NEW: Solo Mode Bypass
+        if forceSoloStart {
+             NSLog("🚀 SOLO MODE ACTIVE: Bypassing guest checks and starting playback!")
+             
+             // Stop the ready loop since we're starting
+             readyLoopTimer?.invalidate()
+             readyLoopTimer = nil
+             
+             // Start immediate playback
+             Task { @MainActor [weak self] in
+                 // Small buffer to ensure everything is set (and avoid race with ready loop invalidation)
+                 try? await Task.sleep(nanoseconds: 500_000_000)
+                 self?.startSynchronizedPlayback()
+             }
+             return
         }
 
         // CRITICAL FIX: Ensure we have at least one guest before starting

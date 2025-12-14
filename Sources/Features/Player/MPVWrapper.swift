@@ -1008,7 +1008,12 @@ class MPVWrapper: ObservableObject {
                 // Enable specific subtitle track
                 var trackId = Int64(id)
                 mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)
-                print("📝 Set subtitle track to: \(id) (async)")
+                
+                // Explicitly enable visibility (in case it was disabled)
+                var visFlag: Int32 = 1
+                mpv_set_property(handle, "sub-visibility", MPV_FORMAT_FLAG, &visFlag)
+                
+                print("📝 Set subtitle track to: \(id) (async, visibility enabled)")
             }
 
             // Notify completion on main thread

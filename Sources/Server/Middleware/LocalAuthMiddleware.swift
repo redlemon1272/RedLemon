@@ -7,6 +7,11 @@ struct LocalAuthMiddleware: AsyncMiddleware {
              return try await next.respond(to: request)
         }
 
+        // Exempt subtitle proxy (accessed by MPV which cannot natively handle auth headers easily)
+        if request.url.path.hasPrefix("/subtitles") {
+            return try await next.respond(to: request)
+        }
+
         // Allow OPTIONS requests for CORS preflight (if CORS middleware is after this? actually CORS usually handles this first)
         // Vapor's CORSMiddleware should be sufficient, but we must ensure we don't block OPTIONS if this middleware runs.
         // However, middleware order matters. We will register this on a route group.

@@ -90,6 +90,7 @@ class PlayerViewModel: ObservableObject {
             
             // GUEST OPTIMIZATION
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+               (roomId == nil || watchPartyRoom.id == roomId), // Ensure we matched the correct room
                let hostStreamHash = watchPartyRoom.selectedStreamHash,
                let hostQuality = watchPartyRoom.selectedQuality,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
@@ -132,6 +133,7 @@ class PlayerViewModel: ObservableObject {
                 resolvedStream = hostStream
                 
             } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
+                      (roomId == nil || watchPartyRoom.id == roomId),
                       let hostStreamHash = watchPartyRoom.selectedStreamHash {
                  
                  // PARTIAL LOCK (Hash only)
@@ -485,6 +487,7 @@ class PlayerViewModel: ObservableObject {
         
         if !keepRoomState {
             currentRoomId = nil
+            currentWatchPartyRoom = nil // Clear stale room state
             currentWatchMode = .solo
             isWatchPartyHost = false
         }

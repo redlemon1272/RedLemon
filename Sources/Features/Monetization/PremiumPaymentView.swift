@@ -225,7 +225,7 @@ struct PremiumPaymentView: View {
         do {
             let isPremium = try await SupabaseClient.shared.checkPaymentStatus()
             if isPremium {
-                print("✅ Payment Confirmed!")
+                LogManager.shared.info("✅ Payment Confirmed!")
                 stopPolling()
                 licenseManager.activateLicense() // Local state update
                 withAnimation {
@@ -233,10 +233,10 @@ struct PremiumPaymentView: View {
                 }
             } else if manual {
                  // Creating a simple alert via state or just log
-                 print("⚠️ Not confirmed yet")
+                 LogManager.shared.warning("⚠️ Manual payment check: Not confirmed yet")
             }
         } catch {
-            print("❌ Check payment failed: \(error)")
+            LogManager.shared.error("❌ Check payment failed", error: error)
         }
         
         isCheckingPayment = false

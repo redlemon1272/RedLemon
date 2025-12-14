@@ -24,7 +24,7 @@ actor StreamService: StreamResolving {
 
 
     func resolveStream(item: MediaItem, quality: VideoQuality, season: Int?, episode: Int?, metadata: MediaMetadata? = nil, preferredInfoHash: String? = nil, filterExtended: Bool = false) async throws -> StreamResolutionResult {
-        print("🎬 StreamService: Starting resolution for: \(item.name)")
+        LogManager.shared.info("🎬 StreamService: Starting resolution for: \(item.name)")
 
         // Step 1: Load metadata
         let finalMetadata: MediaMetadata
@@ -43,7 +43,7 @@ actor StreamService: StreamResolving {
         let finalEpisode = isMovie ? nil : episode
 
         if isMovie && (season != nil || episode != nil) {
-            print("⚠️ StreamService: Corrected movie request - removed season/episode")
+            LogManager.shared.warning("⚠️ StreamService: Corrected movie request - removed season/episode")
         }
 
         // Step 2: Continue with regular stream resolution (trusted pack filtering happens server-side)
@@ -137,7 +137,7 @@ actor StreamService: StreamResolving {
             throw APIError.noStreamsFound
         }
         
-        print("📦 StreamService: Found \(streamsToTry.count) total streams to try (across all qualities)")
+        LogManager.shared.info("📦 StreamService: Found \(streamsToTry.count) total streams to try (across all qualities)")
 
         // Step 3: Apply Tiered Codec Safety Filter
         // Goal: Prioritize H.264 (best compat), then 8-bit x265 (okay), then anything (last resort)
@@ -185,7 +185,7 @@ actor StreamService: StreamResolving {
         }
         
         guard !filteredStreams.isEmpty else {
-            print("❌ StreamService: No streams available even after Tier 3 fallback")
+            LogManager.shared.error("❌ StreamService: No streams available even after Tier 3 fallback")
             throw APIError.noStreamsFound
         }
 
@@ -209,7 +209,7 @@ actor StreamService: StreamResolving {
         }
 
         guard !keywordFiltered.isEmpty else {
-            print("❌ StreamService: No streams available after keyword filter")
+            LogManager.shared.error("❌ StreamService: No streams available after keyword filter")
             
             // Fallback: If we filtered everything because of "extended" but we have no other choice,
             // we should probably fail rather than play the wrong runtime event?
@@ -318,7 +318,7 @@ actor StreamService: StreamResolving {
                 }
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata)
             } catch {
-                print("❌ StreamService: Unlock failed: \(error.localizedDescription)")
+                LogManager.shared.warning("❌ StreamService: Unlock failed for \(stream.title): \(error.localizedDescription)")
                 lastError = error
                 continue
             }

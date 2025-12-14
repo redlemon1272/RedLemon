@@ -8,6 +8,7 @@ class LogManager {
     private let fileManager = FileManager.default
     private let logFileName = "app_logs.txt"
     private var logFileURL: URL?
+    private let sessionId = UUID().uuidString
     
     private init() {
         setupLogFile()
@@ -49,6 +50,9 @@ class LogManager {
         
         // Capture immutable copy for Task
         let messageForUpload = fullMessage
+        let uploadedSessionId = self.sessionId
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let buildNumber = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
         
         // Queue for Supabase upload
         Task {
@@ -63,7 +67,12 @@ class LogManager {
                         "file": (file as NSString).lastPathComponent,
                         "function": function,
                         "line": line,
-                        "error_description": error?.localizedDescription ?? "nil"
+                        "error_description": error?.localizedDescription ?? "nil",
+                        "os_version": ProcessInfo.processInfo.operatingSystemVersionString,
+                        "host_name": ProcessInfo.processInfo.hostName,
+                        "session_id": uploadedSessionId,
+                        "app_version": appVersion,
+                        "build": buildNumber
                     ]
                 )
             } catch {

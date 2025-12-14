@@ -434,13 +434,17 @@ class PlayerViewModel: ObservableObject {
                 
                 // Persist to Supabase
                 Task {
-                    try? await roomManager.updateRoomStream(
-                        roomId: roomId,
-                        streamHash: unlockedStream.infoHash,
-                        fileIdx: unlockedStream.fileIdx,
-                        quality: unlockedStream.quality,
-                        unlockedUrl: unlockedStream.url
-                    )
+                    do {
+                        try await roomManager.updateRoomStream(
+                            roomId: roomId,
+                            streamHash: unlockedStream.infoHash,
+                            fileIdx: unlockedStream.fileIdx,
+                            quality: unlockedStream.quality,
+                            unlockedUrl: unlockedStream.url
+                        )
+                    } catch {
+                        LogManager.shared.error("❌ Failed to persist stream selection to room \(roomId)", error: error)
+                    }
                 }
             }
 

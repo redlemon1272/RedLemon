@@ -324,7 +324,7 @@ struct EventsView: View {
     }
 
     private func joinEvent(_ event: EventItem) async {
-        print("🎟️ Joining event: \(event.mediaItem.name)")
+        LogManager.shared.info("🎟️ Joining event: \(event.mediaItem.name) (Live: \(event.isLive))")
         print("   Event start time: \(event.startTime)")
         print("   Event duration: \(event.duration)s")
         print("   Current time: \(TimeService.shared.now)")
@@ -438,7 +438,7 @@ struct EventsView: View {
                 
                 // 1. Fetch the room that was just created by the winner
                 if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                    print("✅ Recovered from race condition! Joining existing room.")
+                    LogManager.shared.info("✅ Recovered from race condition! Joining existing room.")
                     
                     // 2. Join it
                     try? await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId)
@@ -457,6 +457,7 @@ struct EventsView: View {
             }
 
             print("❌ Failed to create/join event room: \(error)")
+            LogManager.shared.error("❌ Failed to create/join event room", error: error)
             // Fall back to local-only room (no chat sync)
             createLocalEventRoom(event: event, roomId: roomId)
         }

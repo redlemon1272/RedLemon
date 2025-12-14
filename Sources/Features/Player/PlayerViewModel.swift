@@ -65,6 +65,7 @@ class PlayerViewModel: ObservableObject {
             
             // Update UI immediately so background art shows
             await MainActor.run {
+                selectedStream = nil // Clear previous stream to prevent stale playback
                 selectedMetadata = metadata
                 selectedMediaItem = item
                 isResolvingStream = true

@@ -54,6 +54,21 @@ class PlayerViewModel: ObservableObject {
     func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         streamError = nil
         
+        // Step 0: Clear state IMMEDIATELY to prevent stale UI
+        await MainActor.run {
+            selectedStream = nil // Clear previous stream to prevent stale playback
+            isResolvingStream = true
+            currentWatchMode = watchMode
+            isWatchPartyHost = isHost
+            selectedQuality = quality
+            
+            // Show player immediately
+            showPlayer = true
+            if let appState = appState {
+                appState.currentView = .player
+            }
+        }
+        
         do {
             print("🎬 PlayerVM: Starting playback for: \(item.name)")
             NSLog("   Quality: \(quality.rawValue)")
@@ -65,19 +80,8 @@ class PlayerViewModel: ObservableObject {
             
             // Update UI immediately so background art shows
             await MainActor.run {
-                selectedStream = nil // Clear previous stream to prevent stale playback
                 selectedMetadata = metadata
                 selectedMediaItem = item
-                isResolvingStream = true
-                currentWatchMode = watchMode
-                isWatchPartyHost = isHost
-                selectedQuality = quality
-                
-                // Show player immediately
-                showPlayer = true
-                if let appState = appState {
-                    appState.currentView = .player
-                }
             }
             
             // Only pass season/episode for TV series
@@ -92,8 +96,9 @@ class PlayerViewModel: ObservableObject {
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId), // Ensure we matched the correct room
                let hostStreamHash = watchPartyRoom.selectedStreamHash,
-               let hostQuality = watchPartyRoom.selectedQuality,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+                
+                let hostQuality = watchPartyRoom.selectedQuality ?? "Unknown" // Relaxed check
                 
                 print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
                 NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")

@@ -11,8 +11,11 @@ struct LocalAuthMiddleware: AsyncMiddleware {
         // Vapor's CORSMiddleware should be sufficient, but we must ensure we don't block OPTIONS if this middleware runs.
         // However, middleware order matters. We will register this on a route group.
         
-        // Check for X-RedLemon-Auth header
-        guard let token = request.headers.first(name: "X-RedLemon-Auth") else {
+        // Check for X-RedLemon-Auth header OR 'token' query parameter
+        let headerToken = request.headers.first(name: "X-RedLemon-Auth")
+        let queryToken = request.query[String.self, at: "token"]
+        
+        guard let token = headerToken ?? queryToken else {
             throw Abort(.unauthorized, reason: "Missing authentication token")
         }
         

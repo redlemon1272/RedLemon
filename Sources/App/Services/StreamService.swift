@@ -461,14 +461,33 @@ actor StreamService: StreamResolving {
                     // Raw API URLs: /subtitle/... (need to convert to proxy URL)
                     if subtitle.url.contains("/subtitles/subdl/") {
                         NSLog("✅ DEBUG: SubDL proxy URL detected, skipping download")
-                        return subtitle // Already a proxy URL, return as-is
+                        if !subtitle.url.contains("token=") {
+                            // Append token if missing
+                            var newUrl = subtitle.url
+                            if newUrl.contains("?") {
+                                newUrl += "&token=\(Config.localAuthToken)"
+                            } else {
+                                newUrl += "?token=\(Config.localAuthToken)"
+                            }
+                            // Create copy with new URL
+                            return Subtitle(
+                                id: subtitle.id,
+                                url: newUrl,
+                                lang: subtitle.lang,
+                                label: subtitle.label,
+                                srclang: subtitle.srclang,
+                                kind: subtitle.kind,
+                                provider: subtitle.provider
+                            )
+                        }
+                        return subtitle // Already has token, return as-is
                     }
                     
                     if subtitle.url.hasPrefix("/subtitle/") {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
                         // Convert raw SubDL URL to proxy URL
                         let encodedPath = Data(subtitle.url.utf8).base64EncodedString()
-                        let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
+                        let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)?token=\(Config.localAuthToken)"
                         
                         // Create new subtitle with proxy URL
                         return Subtitle(

@@ -10,13 +10,31 @@ struct ScheduleManagementView: View {
     @State private var errorMessage: String?
     @State private var isLoading = false
     
+    // Search & Filter
+    @State private var searchQuery = ""
+    
+    // Add Movie
+    @State private var isShowingAddMovie = false
+    @State private var addMovieQuery = ""
+    @State private var addMovieResults: [MediaItem] = []
+    @State private var isSearchingAddMovie = false
+    
+    var filteredMovies: [(index: Int, movie: MediaItem)] {
+        let enumerated = Array(eventConfigMovies.enumerated())
+        if searchQuery.isEmpty {
+            return enumerated.map { (index: $0.offset, movie: $0.element) }
+        } else {
+            return enumerated.filter { $0.element.name.localizedCaseInsensitiveContains(searchQuery) }
+                .map { (index: $0.offset, movie: $0.element) }
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             // Header
             HStack {
                 Text("Manage Schedule")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                    .font(.title2.weight(.bold))
                 
                 Spacer()
                 
@@ -24,7 +42,7 @@ struct ScheduleManagementView: View {
                     isPresented = false
                 }) {
                     Text("Done")
-                        .fontWeight(.semibold)
+                        .font(.body.weight(.semibold))
                         .foregroundColor(.white)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
@@ -38,59 +56,88 @@ struct ScheduleManagementView: View {
             .background(Color(NSColor.controlBackgroundColor))
             
             // Controls & Stats
-            HStack {
-                VStack(alignment: .leading) {
-                    if let version = eventConfigVersion {
-                        Text("Version: \(version)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+            VStack(spacing: 12) {
+                HStack {
+                    VStack(alignment: .leading) {
+                        if let version = eventConfigVersion {
+                            Text("Version: \(version)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        if let count = eventConfigMovieCount {
+                            Text("Movies: \(count)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
                     }
-                    if let count = eventConfigMovieCount {
-                        Text("Movies: \(count)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                    
+                    Spacer()
+                    
+                    if isGeneratingSchedule {
+                        ProgressView()
+                            .scaleEffect(0.8)
+                    } else {
+                        HStack {
+                            Button(action: {
+                                isShowingExclusions = true
+                            }) {
+                                Text("Restore Movies")
+                                    .font(.body.weight(.medium))
+                                    .foregroundColor(.primary)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(6)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Button(action: {
+                                isShowingAddMovie = true
+                            }) {
+                                Label("Add Movie", systemImage: "plus")
+                                    .font(.body.weight(.medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.green)
+                                    .cornerRadius(6)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Button(action: {
+                                generateSchedule()
+                            }) {
+                                Label("Regenerate", systemImage: "arrow.triangle.2.circlepath")
+                                    .font(.body.weight(.medium))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 6)
+                                    .background(Color.orange)
+                                    .cornerRadius(6)
+                            }
+                            .buttonStyle(.plain)
+                        }
                     }
                 }
                 
-                Spacer()
-                
-                if isGeneratingSchedule {
-                    ProgressView()
-                        .scaleEffect(0.8)
-                } else {
-                    HStack {
-                        Button(action: {
-                            isShowingExclusions = true
-                        }) {
-                            Text("Restore Movies")
-                                .fontWeight(.medium)
-                                .foregroundColor(.primary)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(6)
-                        }
-                        .buttonStyle(.plain)
-                        
-                        Button(action: {
-                            generateSchedule()
-                        }) {
-                            Text("Regenerate Schedule")
-                                .fontWeight(.medium)
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 6)
-                                .background(Color.orange)
-                                .cornerRadius(6)
-                        }
-                        .buttonStyle(.plain)
-                    }
+                // Search Bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.secondary)
+                    TextField("Search schedule...", text: $searchQuery)
+                        .textFieldStyle(PlainTextFieldStyle())
                 }
+                .padding(8)
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(8)
             }
             .padding()
             .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
             .sheet(isPresented: $isShowingExclusions) {
                 ExclusionManagementView(isPresented: $isShowingExclusions)
+            }
+            .sheet(isPresented: $isShowingAddMovie) {
+                addMovieSheet
             }
             
             if let error = errorMessage {
@@ -114,17 +161,17 @@ struct ScheduleManagementView: View {
                             .foregroundColor(.secondary)
                             .padding()
                     } else {
-                        ForEach(Array(eventConfigMovies.enumerated()), id: \.element.id) { index, movie in
-                            HStack {
-                                Text("\(index + 1)")
+                        ForEach(filteredMovies, id: \.index) { item in
+                             HStack {
+                                Text("\(item.index + 1)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                     .frame(width: 30, alignment: .trailing)
                                 
                                 VStack(alignment: .leading) {
-                                    Text(movie.name)
+                                    Text(item.movie.name)
                                         .font(.body)
-                                    if let genres = movie.genres {
+                                    if let genres = item.movie.genres {
                                         Text(genres.joined(separator: ", "))
                                             .font(.caption2)
                                             .foregroundColor(.secondary)
@@ -133,14 +180,29 @@ struct ScheduleManagementView: View {
                                 
                                 Spacer()
                                 
-                                if let rating = movie.imdbRating {
+                                if let rating = item.movie.imdbRating {
                                     Text("★ \(rating)")
                                         .font(.caption)
                                         .foregroundColor(.orange)
                                 }
                                 
+                                // Boost Button
                                 Button(action: {
-                                    deleteMovie(movie: movie)
+                                    boostMovie(item.movie)
+                                }) {
+                                    Text("Boost") // Just text, no icon for simplicity
+                                        .font(.caption.weight(.bold))
+                                        .foregroundColor(.blue)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(Color.blue.opacity(0.1))
+                                        .cornerRadius(4)
+                                }
+                                .buttonStyle(.plain)
+                                .help("Add another copy of this movie to increase frequency")
+                                
+                                Button(action: {
+                                    deleteMovie(at: item.index)
                                 }) {
                                     Image(systemName: "trash")
                                         .foregroundColor(.red)
@@ -151,7 +213,7 @@ struct ScheduleManagementView: View {
                             }
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
-                            .background(index % 2 == 0 ? Color.white.opacity(0.05) : Color.clear)
+                            .background(item.index % 2 == 0 ? Color.white.opacity(0.05) : Color.clear)
                             
                             Divider()
                         }
@@ -166,6 +228,88 @@ struct ScheduleManagementView: View {
             refreshData()
         }
     }
+    
+    private var addMovieSheet: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("Add Movie to Schedule")
+                    .font(.headline)
+                Spacer()
+                Button("Close") { isShowingAddMovie = false }
+                    .buttonStyle(.plain)
+            }
+            .padding()
+            .background(Color(NSColor.controlBackgroundColor))
+            
+            HStack {
+                TextField("Search IMDb...", text: $addMovieQuery)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .onSubmit {
+                        performAddMovieSearch()
+                    }
+                
+                Button("Search") {
+                    performAddMovieSearch()
+                }
+                .disabled(addMovieQuery.isEmpty || isSearchingAddMovie)
+            }
+            .padding()
+            
+            if isSearchingAddMovie {
+                ProgressView()
+                    .padding()
+            }
+            
+            List(addMovieResults) { movie in
+                HStack {
+                    AsyncImage(url: URL(string: movie.poster ?? "")) { image in
+                        image.resizable().aspectRatio(contentMode: .fit)
+                    } placeholder: {
+                        Color.gray
+                    }
+                    .frame(width: 30, height: 45)
+                    .cornerRadius(4)
+                    
+                    VStack(alignment: .leading) {
+                        Text(movie.name)
+                            .font(.body.weight(.medium))
+                        Text(movie.year ?? "")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                    
+                    Button("Add") {
+                        addMovieToSchedule(movie)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            }
+        }
+        .frame(width: 500, height: 400)
+    }
+    
+    private func performAddMovieSearch() {
+        guard !addMovieQuery.isEmpty else { return }
+        isSearchingAddMovie = true
+        Task {
+            do {
+                let results = try await LocalAPIClient.shared.searchMedia(query: addMovieQuery, type: "movie")
+                await MainActor.run {
+                    self.addMovieResults = results
+                    self.isSearchingAddMovie = false
+                }
+            } catch {
+                print("Search failed: \(error)")
+                await MainActor.run {
+                    self.isSearchingAddMovie = false
+                }
+            }
+        }
+    }
+    
+    // Logic Methods
     
     private func refreshData() {
         isLoading = true
@@ -206,51 +350,75 @@ struct ScheduleManagementView: View {
         }
     }
     
-    private func deleteMovie(movie: MediaItem) {
-        guard let index = eventConfigMovies.firstIndex(of: movie) else { return }
-        let movieToDelete = movie
+    private func deleteMovie(at index: Int) {
+        // Need to find the actual movie in the source array, not filtered
+        // But since we pass 'at: item.index' from the view which maps directly to the enumerated offset, this IS the correct index in eventConfigMovies
+        guard index < eventConfigMovies.count else { return }
         
         // Optimistically update UI
         var updatedMovies = eventConfigMovies
+        let movieToDelete = updatedMovies[index]
         updatedMovies.remove(at: index)
-        eventConfigMovies = updatedMovies
-        eventConfigMovieCount = updatedMovies.count
         
-        // Capture immutable copy for async task
-        let moviesToUpload = updatedMovies
-        let deletedMovieId = movieToDelete.id
+        updateSchedule(newMovies: updatedMovies, excludedMovieId: movieToDelete.id)
+    }
+    
+    private func addMovieToSchedule(_ movie: MediaItem) {
+        var updatedMovies = eventConfigMovies
+        updatedMovies.insert(movie, at: 0) // Add to top
+        
+        updateSchedule(newMovies: updatedMovies)
+        isShowingAddMovie = false
+        addMovieQuery = ""
+        addMovieResults = []
+    }
+    
+    private func boostMovie(_ movie: MediaItem) {
+        var updatedMovies = eventConfigMovies
+        
+        // Insert a duplicate at a random position to spread them out
+        let randomIndices = (0...updatedMovies.count).map { $0 }
+        let insertIndex = randomIndices.randomElement() ?? 0
+        
+        updatedMovies.insert(movie, at: insertIndex)
+        
+        updateSchedule(newMovies: updatedMovies)
+    }
+    
+    private func updateSchedule(newMovies: [MediaItem], excludedMovieId: String? = nil) {
+        // Update local state immediately
+        eventConfigMovies = newMovies
+        eventConfigMovieCount = newMovies.count
         
         Task {
             do {
-                print("🗑️ [Admin] Removing movie from schedule...")
+                print("📤 [Admin] Updating schedule with \(newMovies.count) movies...")
                 
-                // Get current exclusions - FORCE REFRESH to be safe
+                // Get current exclusions to persist/update them
                 let currentConfig = try await EventsConfigService.shared.refreshConfig(type: "movie_events")
                 var excludedIds = currentConfig.excludedMovieIds ?? []
                 
-                NSLog("📝 [Admin] Current exclusions: \(excludedIds.count)")
-                if !excludedIds.contains(deletedMovieId) {
-                    excludedIds.append(deletedMovieId)
-                    NSLog("➕ [Admin] Added to exclusions: \(deletedMovieId)")
-                } else {
-                    NSLog("⚠️ [Admin] Movie already in exclusions: \(deletedMovieId)")
+                if let newExclusion = excludedMovieId {
+                    if !excludedIds.contains(newExclusion) {
+                        excludedIds.append(newExclusion)
+                    }
                 }
                 
-                NSLog("📤 [Admin] Uploading config with \(excludedIds.count) exclusions")
-                
-                // Upload to Supabase with updated exclusions
                 let newVersion = try await EventsConfigService.shared.uploadNewConfig(
-                    movies: moviesToUpload,
+                    movies: newMovies,
                     excludedMovieIds: excludedIds
                 )
                 
-                // Update version in UI
-                eventConfigVersion = newVersion
-                print("✅ [Admin] Schedule updated (Movie removed & excluded)")
-                
+                await MainActor.run {
+                    self.eventConfigVersion = newVersion
+                    self.errorMessage = nil
+                }
+                print("✅ [Admin] Schedule synced successfully!")
             } catch {
-                errorMessage = "Failed to remove movie: \(error.localizedDescription)"
-                refreshData()
+                await MainActor.run {
+                    self.errorMessage = "Sync failed: \(error.localizedDescription)"
+                    refreshData() // Revert on failure
+                }
             }
         }
     }

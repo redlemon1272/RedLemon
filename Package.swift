@@ -59,7 +59,7 @@ let package = Package(
                 .unsafeFlags([
                     "-L", "Frameworks",
                     "-lmpv.2",
-                    "-Xlinker", "-rpath", "-Xlinker", "/Users/danielnoble/Desktop/RedLemon-Native/Frameworks"
+                    "-Xlinker", "-rpath", "-Xlinker", "@executable_path/../Frameworks"
                 ])
             ]
         )

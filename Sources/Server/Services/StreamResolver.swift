@@ -503,26 +503,38 @@ actor StreamResolver {
                 
                 // 1. Explicit English (Highest Priority)
                 let englishIndicators = ["english", ".eng.", " eng ", "-eng-"]
-                if englishIndicators.contains(where: { title.contains($0) }) {
+                let hasEnglish = englishIndicators.contains(where: { title.contains($0) })
+                if hasEnglish {
                     score += 20
                 }
                 
-                // 2. Reputable Scene Groups (Boost)
-                let goodGroups = ["ntb", "flux", "galaxyrg", "rarbg", "yts", "mx"]
+                // 2. Web Sources (High probability of embedded subs)
+                let webSources = ["hulu", "netflix", "nf", "amazon", "amzn", "dsnp", "disney", "hbo", "max"]
+                if webSources.contains(where: { title.contains($0) }) {
+                   score += 15
+                }
+                
+                // 3. Subtitle Indicators (Explicit embedded subs)
+                let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed", "multisub", "multi-sub", "softcoded"]
+                if subIndicators.contains(where: { title.contains($0) }) {
+                    score += 40 // Major boost
+                }
+                
+                // 4. Reputable Scene Groups (Boost)
+                let goodGroups = ["ntb", "flux", "galaxyrg", "rarbg", "yts", "mx", "qxr", "mzabi"]
                 if goodGroups.contains(where: { title.contains($0) }) {
-                    score += 10
+                    score += 15
                 }
                 
-                // 3. Penalize "MULTi" (Often defaults to foreign audio or has poor subs)
+                // 5. "MULTi" Handling
+                // Only penalize if we don't have explicit English indication
                 if title.contains("multi") {
-                    score -= 10
-                }
-                
-                // 4. Secondary priority for embedded subs (Movies)
-                if preferMultiSubMovies {
-                    let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed"]
-                    if subIndicators.contains(where: { title.contains($0) }) {
-                        score += 5
+                    if hasEnglish {
+                        // Multi + English usually means good quality release with multiple audio/subs
+                        score += 5 
+                    } else {
+                         // Multi without explicit English might default to foreign audio
+                        score -= 10
                     }
                 }
                 

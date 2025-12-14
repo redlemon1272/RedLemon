@@ -19,6 +19,10 @@ struct Config {
     static let supabaseURL = "https://nhvsojszwfvcinkyvzmf.supabase.co"
     static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NjE5MTYsImV4cCI6MjA3ODEzNzkxNn0.1u8C04lu1r_Jsy7m8bdGD-dT33Ml1EautcPNib93bWw"
 
+    // Local Server Security
+    // Ephemeral token generated per-launch to secure local API
+    static let localAuthToken = UUID().uuidString
+
     // Metadata endpoints
     static func metadataMovieURL(imdbId: String) -> URL? {
         URL(string: "\(serverURL)/api/metadata/meta/movie/\(imdbId)")

@@ -24,13 +24,19 @@ class HTTPServer {
         app.http.server.configuration.port = port
 
         // Enable CORS for web UI
+        // Enable CORS - Restricted to local access
+        // We allow specific local origins just in case a WebView is used, plus custom auth header
         let corsConfiguration = CORSMiddleware.Configuration(
-            allowedOrigin: .all,
+            allowedOrigin: .any(["http://localhost", "http://127.0.0.1", "redlemon://app"]),
             allowedMethods: [.GET, .POST, .PUT, .PATCH, .DELETE, .OPTIONS],
-            allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin])
+            allowedHeaders: [.accept, .authorization, .contentType, .origin, .xRequestedWith, .userAgent, .accessControlAllowOrigin, "X-RedLemon-Auth"]
+        )
 
         let cors = CORSMiddleware(configuration: corsConfiguration)
         app.middleware.use(cors, at: .beginning)
+        
+        // Secure API with Token Authentication
+        app.middleware.use(LocalAuthMiddleware())
 
         // Register routes
         try routes(app)

@@ -378,6 +378,7 @@ actor StreamService: StreamResolving {
         var request = URLRequest(url: unlockURL)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(Config.localAuthToken, forHTTPHeaderField: "X-RedLemon-Auth")
 
         var unlockBody: [String: Any] = [
             "infoHash": infoHash,
@@ -467,7 +468,7 @@ actor StreamService: StreamResolving {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
                         // Convert raw SubDL URL to proxy URL
                         let encodedPath = Data(subtitle.url.utf8).base64EncodedString()
-                        let proxyURL = "http://127.0.0.1:47253/subtitles/subdl/\(encodedPath)"
+                        let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
                         
                         // Create new subtitle with proxy URL
                         return Subtitle(
@@ -488,7 +489,13 @@ actor StreamService: StreamResolving {
                     }
 
                     do {
-                        let (data, response) = try await session.data(from: url)
+                        var request = URLRequest(url: url)
+                        // Add auth token if requesting from local server
+                        if url.absoluteString.contains("127.0.0.1") || url.absoluteString.contains("localhost") {
+                            request.setValue(Config.localAuthToken, forHTTPHeaderField: "X-RedLemon-Auth")
+                        }
+                        
+                        let (data, response) = try await session.data(for: request)
 
                         let isZip = subtitle.url.lowercased().hasSuffix(".zip") ||
                                    (response as? HTTPURLResponse)?.allHeaderFields["Content-Type"] as? String == "application/zip"

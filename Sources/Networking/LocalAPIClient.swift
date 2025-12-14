@@ -27,6 +27,12 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         self.session = URLSession(configuration: config)
     }
 
+    private func makeAuthorizedRequest(url: URL) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.setValue(Config.localAuthToken, forHTTPHeaderField: "X-RedLemon-Auth")
+        return request
+    }
+
     // MARK: - Metadata (Cinemeta)
 
     func fetchPopularMovies() async throws -> [MediaItem] {
@@ -39,7 +45,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/movie/popular")!
-        let (data, _) = try await session.data(from: url)
+        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
         let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
         // Apply fixed catalog size (conservative for all devices)
@@ -66,7 +72,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         let url = URL(string: "\(baseURL)/api/metadata/catalog/series/popular")!
-        let (data, _) = try await session.data(from: url)
+        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
         let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
 
         // Apply fixed catalog size (conservative for all devices)
@@ -131,7 +137,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             
             do {
                 print("   [Admin] Fetching page \(page + 1) (skip=\(currentSkip))...")
-                let (data, _) = try await session.data(from: url)
+                let (data, _) = try await session.data(for: makeAuthorizedRequest(url: url))
                 let response = try JSONDecoder().decode(CinemetaSearchResponse.self, from: data)
                 
                 let pageItems = response.metas.map { MediaItem(from: $0) }
@@ -434,7 +440,9 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
                     print("🔍 [DEBUG] Network attempt \(attempt)/\(maxRetries) for \(url.lastPathComponent)")
                 }
 
-                let (data, response) = try await session.data(from: url)
+                
+                let request = makeAuthorizedRequest(url: url)
+                let (data, response) = try await session.data(for: request)
 
                 // Check for 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout, or 429 Too Many Requests
                 if let httpResponse = response as? HTTPURLResponse {
@@ -637,8 +645,8 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
 
         components.queryItems = queryItems
-
-        let request = URLRequest(url: components.url!)
+        
+        var request = makeAuthorizedRequest(url: components.url!)
         let (data, _) = try await session.data(for: request)
         let response = try JSONDecoder().decode(AllStreamsResponse.self, from: data)
 
@@ -669,7 +677,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         components.queryItems = queryItems
 
-        let request = URLRequest(url: components.url!)
+        var request = makeAuthorizedRequest(url: components.url!)
         let (data, _) = try await session.data(for: request)
         let response = try JSONDecoder().decode(QualityBucketsResponse.self, from: data)
 
@@ -689,7 +697,8 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
             URLQueryItem(name: "languages", value: "en")
         ]
 
-        let (data, _) = try await session.data(from: components.url!)
+        
+        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: components.url!))
         let subtitles = try JSONDecoder().decode([SubDLSubtitle].self, from: data)
         return subtitles
     }

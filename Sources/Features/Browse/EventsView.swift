@@ -8,21 +8,13 @@ struct EventsView: View {
 
 
     // Movie events
-    @State private var events: [EventItem] = []
-    @State private var allMovies: [MediaItem] = []  // Store all fetched movies
+    // Local events state replaced by appState.eventsSchedule
     @State private var currentOffset = 0  // Track which set of 4 we're showing
-
-
 
     // Common state
     @State private var isLoading = true
-    @State private var timer: Timer?
+    // Timer removed - AppState handles schedule updates
     @State private var lastUpdate = Date() // Force view refresh when needed
-
-    // MARK: - Constants
-    private let bufferBetweenMovies: TimeInterval = 600 // 10 minutes
-
-
 
     var body: some View {
         ZStack {
@@ -36,16 +28,16 @@ struct EventsView: View {
 
                         // Header removed as requested
 
-                        if events.isEmpty {
+                        if appState.eventsSchedule.isEmpty {
                             emptyStateView(icon: "film", message: "No movie events scheduled right now.")
                         } else {
                             // Movie Events List
                             VStack(spacing: 20) {
-                                ForEach(events) { event in
+                                ForEach(appState.eventsSchedule) { event in
                                     // Check if previous event is finished (either by time OR by user completion)
                                     // We use lastUpdate here to ensure this recalculates when state changes
                                     let _ = lastUpdate
-                                    let isLobbyOverride = (event.index == 1 && (events.first?.isFinished == true || appState.player.finishedEventIds.contains(events.first?.id ?? "")))
+                                    let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
 
                                     HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
                                         await joinEvent(event)
@@ -61,33 +53,19 @@ struct EventsView: View {
         }
         .onAppear {
             print("📅 EventsView appeared")
-            // Force refresh schedule on appear to ensure status is up to date
-            if !allMovies.isEmpty {
-                print("🔄 Recalculating schedule on appear...")
-                calculateDeterministicSchedule()
-            } else {
+            // Load events if AppState doesn't have them yet
+            if appState.allMovies.isEmpty {
                 loadEvents()
-            }
-            startTimer()
-
-            // CRITICAL: If returning from finished event, recalculate immediately
-            if appState.shouldAutoJoinLobby {
-                print("🔄 Returned from finished event - forcing immediate schedule update")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.calculateDeterministicSchedule()
-                }
+            } else {
+                isLoading = false
             }
         }
         .onChange(of: timeService.isSynced) { isSynced in
             if isSynced {
-                print("⏰ Time synced with server! Recalculating schedule...")
-                calculateDeterministicSchedule()
+                print("⏰ Time synced with server! AppState should automatically recalculate.")
+                // appState.calculateDeterministicSchedule() happens internally or via timer
             }
         }
-        .onDisappear {
-            stopTimer()
-        }
-
     }
 
     private func loadEvents() {
@@ -96,232 +74,22 @@ struct EventsView: View {
             do {
                 let movies = try await apiClient.fetchTopMoviesForEvents()
                 // Use the daily shuffled order from the API
-                allMovies = movies
-
-                calculateDeterministicSchedule()
-                isLoading = false
-
-                // Start timer to check for event completion
-                startTimer()
+                // Submit to AppState to begin scheduling
+                await MainActor.run {
+                    appState.updateEventMovies(movies)
+                    isLoading = false
+                }
             } catch {
                 print("❌ Failed to load movie events: \(error)")
-                isLoading = false
-            }
-        }
-    }
-
-    private func calculateDeterministicSchedule() {
-        guard !allMovies.isEmpty else { return }
-
-        let now = TimeService.shared.now
-
-        // 1. Calculate total duration of the entire playlist cycle
-        var totalCycleDuration: TimeInterval = 0
-        var movieDurations: [TimeInterval] = []
-
-        for movie in allMovies {
-            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
-            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies
-            movieDurations.append(duration)
-            totalCycleDuration += duration
-            print("   Movie: \(movie.name) | Runtime: \(runtimeMinutes)m | Duration: \(Int(duration))s")
-        }
-
-        // 2. Determine where we are in the cycle relative to a fixed epoch
-        // Use 2024-01-01 as epoch to keep numbers reasonable but consistent
-        let epoch = ScheduleConstants.Epoch
-        let timeSinceEpoch = now.timeIntervalSince(epoch)
-        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
-
-        // 3. Find the currently playing movie
-        var accumulatedTime: TimeInterval = 0
-        var currentMovieIndex = 0
-        var timeIntoCurrentMovie: TimeInterval = 0
-
-        for (index, duration) in movieDurations.enumerated() {
-            if accumulatedTime + duration > currentCycleTime {
-                currentMovieIndex = index
-                timeIntoCurrentMovie = currentCycleTime - accumulatedTime
-                break
-            }
-            accumulatedTime += duration
-        }
-
-        // 4. Build the schedule starting from the current movie
-        var scheduledEvents: [EventItem] = []
-
-        // Limit to available movies or 4, whichever is smaller
-        let count = min(4, allMovies.count)
-
-        for i in 0..<count {
-            let index = (currentMovieIndex + i) % allMovies.count
-            let movie = allMovies[index]
-
-            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
-            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies  // Event slot includes buffer
-
-            let startTime: Date
-            if i == 0 {
-                // Live movie: Start time is in the past
-                startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
-            } else {
-                // Upcoming movies: Start time is based on previous movie's end + buffer
-                let prevEvent = scheduledEvents.last!
-                // Start time is previous event start + duration (which includes buffer)
-                // FIX: Do NOT add bufferBetweenMovies again, as it's already in duration
-                startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration)
-            }
-
-            // Debug: Log runtime for troubleshooting
-            if i == 0 {
-                print("🎬 Live Event: \(movie.name)")
-                print("   Metadata runtime: \(movie.runtime ?? "unknown")")
-                print("   Calculated duration: \(Int(duration / 60)) minutes")
-            }
-
-            scheduledEvents.append(EventItem(
-                id: movie.id,  // Use IMDB ID for consistent tracking
-                mediaItem: movie,
-                startTime: startTime,
-                duration: duration,
-                actualMovieDuration: TimeInterval(runtimeMinutes * 60),
-                index: i
-            ))
-        }
-
-        DispatchQueue.main.async {
-            self.events = scheduledEvents
-            self.appState.eventsSchedule = scheduledEvents // Sync to AppState for player access
-
-            // Fetch participant counts for each event
-            Task {
-                await self.updateParticipantCounts()
-            }
-
-            // Debug log
-            if let live = scheduledEvents.first {
-                print("📅 Schedule Updated:")
-                print("   Live: \(live.mediaItem.name)")
-                print("   Progress: \(Int(timeIntoCurrentMovie))s / \(Int(live.duration))s")
-            }
-
-            // Check for auto-join (Seamless Transition from finished movie)
-            if self.appState.shouldAutoJoinLobby {
-                print("🔄 Checking for auto-join... Finished IDs: \(self.appState.player.finishedEventIds)")
-                if let firstEvent = scheduledEvents.first {
-                    print("   First event: \(firstEvent.mediaItem.name) (ID: \(firstEvent.id))")
-                    print("   Is Finished: \(firstEvent.isFinished)")
-                    print("   Is in FinishedIDs: \(self.appState.player.finishedEventIds.contains(firstEvent.id))")
-                }
-
-                // Find the NEXT event (not the finished one)
-                // Priority: Lobby event that is NOT finished
-                if let lobbyEvent = scheduledEvents.first(where: { event in
-                    // ✅ Must not be in finished events list
-                    guard !appState.player.finishedEventIds.contains(event.id) else {
-                        print("⏭️ Skipping finished event: \(event.mediaItem.name)")
-                        return false
-                    }
-
-                    // ✅ Must not be marked as finished
-                    guard !event.isFinished else {
-                        print("⏭️ Skipping finished event: \(event.mediaItem.name)")
-                        return false
-                    }
-
-                    // ✅ Must be in lobby OR be the next event (index == 1) with previous event finished
-                    let isInLobby = event.isInLobby
-                    let isNextEventAfterFinished = event.index == 1 &&
-                                                   (scheduledEvents.first?.isFinished == true ||
-                                                    appState.player.finishedEventIds.contains(scheduledEvents.first?.id ?? ""))
-
-                    print("   Checking event: \(event.mediaItem.name) (Index: \(event.index))")
-                    print("     isInLobby: \(isInLobby)")
-                    print("     isNextEventAfterFinished: \(isNextEventAfterFinished)")
-
-                    return isInLobby || isNextEventAfterFinished
-                }) {
-                    print("🔄 Auto-joining NEXT event lobby: \(lobbyEvent.mediaItem.name) (index: \(lobbyEvent.index))")
-                    Task {
-                        await self.joinEvent(lobbyEvent)
-                    }
-                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
-                } else if let liveEvent = scheduledEvents.first(where: {
-                    $0.isLive && !$0.isFinished && !appState.player.finishedEventIds.contains($0.id)
-                }) {
-                    print("🔄 Auto-joining Live event: \(liveEvent.mediaItem.name)")
-                    Task {
-                        await self.joinEvent(liveEvent)
-                    }
-                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag after joining
-                } else {
-                    print("⚠️ No eligible event found for auto-join")
-                    self.appState.shouldAutoJoinLobby = false  // ✅ Reset flag even if no event found
+                await MainActor.run {
+                    isLoading = false
                 }
             }
         }
     }
+    
+    // Legacy calculation logic and timers removed - all handled by AppState now
 
-    @MainActor
-    private func updateParticipantCounts() async {
-        let currentEvents = events
-
-        // Fetch in background task to avoid blocking main thread
-        let fetchedCounts = await Task.detached {
-            var newCounts: [String: Int] = [:]
-
-            // Fetch for Movie Events
-            for event in currentEvents {
-                let roomId = "event_\(event.id)"
-                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
-                    newCounts[event.id] = roomState.participantsCount
-                }
-            }
-
-            return newCounts
-        }.value
-
-        // Update Movie Events state on main actor
-        for i in 0..<events.count {
-            if let count = fetchedCounts[events[i].id] {
-                events[i].participantCount = count
-            }
-        }
-    }
-
-    // Legacy method kept for reference but unused
-    private func showNextBatch() {
-        calculateDeterministicSchedule()
-    }
-
-    private func startTimer() {
-        // Check every 2 seconds for event status changes (immediate UI updates)
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
-            Task { @MainActor in
-                self.checkEventStatus()
-            }
-        }
-    }
-
-    private func checkEventStatus() {
-        guard let liveEvent = events.first else { return }
-
-        // If live event is finished, cycle to next batch
-        if TimeService.shared.now >= liveEvent.endTime {
-            print("🔄 Live event finished: \(liveEvent.mediaItem.name). Cycling to next batch.")
-            calculateDeterministicSchedule()
-        } else if liveEvent.isFinished {
-            // Force UI refresh if the live event is finished (but not yet cycled out)
-            // This ensures the "Lobby Open" status appears for the next event
-            lastUpdate = Date()
-        }
-    }
-
-    private func stopTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
 
     private func joinEvent(_ event: EventItem) async {
         LogManager.shared.info("🎟️ Joining event: \(event.mediaItem.name) (Live: \(event.isLive))")

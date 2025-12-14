@@ -143,18 +143,200 @@ class AppState: ObservableObject {
     /// Refresh the events list to filter out past events
     /// Called when an event ends or when transitioning to a new event
     func refreshEvents() {
-        let now = Date()
-        // Filter: Keep events that are currently active (live) OR start in the future
-        // We add a small buffer (e.g. 5 mins) to 'isLive' logic elsewhere, but here we just check if it's finished.
-        // Assuming metadataProvider.fetchEvents() would return fresh data, but we can also filter the local list:
+        // Now delegates to the deterministic calculator for full refresh
+        calculateDeterministicSchedule()
+    }
+    
+    // Source of truth for all available event movies (shuffled daily order)
+    @Published var allMovies: [MediaItem] = []
+    private var scheduleTimer: Timer?
+    private var participantCounts: [String: Int] = [:] // Local cache of counts
+    private var lastCountFetch: Date = .distantPast
+
+    /// Update the source list of movies and start scheduling
+    func updateEventMovies(_ movies: [MediaItem]) {
+        guard !movies.isEmpty else { return }
+        self.allMovies = movies
+        print("🎬 AppState: Updated event movie list (\(movies.count) items)")
         
-        self.eventsSchedule = self.eventsSchedule.filter { event in
-            // Keep if event is NOT finished
-            // Or if start time is in the future
-            return !event.isFinished || event.startTime > now
-        }.sorted(by: { $0.startTime < $1.startTime }) // Keep sorted
+        // Initial calculation
+        calculateDeterministicSchedule()
         
-        print("🔄 Refreshed events schedule: \(self.eventsSchedule.count) remaining")
+        // Start recurring updates if not already running
+        startScheduleTimer()
+        
+        // Initial fetch of participant counts
+        Task {
+            await fetchParticipantCounts()
+        }
+    }
+    
+    private func startScheduleTimer() {
+        stopScheduleTimer()
+        
+        // Calculate when the NEXT schedule change will happen
+        // This is usually when the live event finishes, or when the next upcoming event starts
+        guard let liveEvent = eventsSchedule.first else {
+            // Fallback if no events: check in 60s
+             print("⏰ AppState: No events found, scheduling check in 60s")
+            scheduleTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: false) { [weak self] _ in
+                Task { @MainActor [weak self] in self?.calculateDeterministicSchedule() }
+            }
+            return
+        }
+        
+        let now = TimeService.shared.now
+        
+        // Determine the next critical moment
+        let nextUpdateDate: Date
+        
+        if liveEvent.isLive && !liveEvent.isFinished {
+            // Case 1: Live event is playing. Next update is when it finishes.
+            nextUpdateDate = liveEvent.endTime
+             print("⏰ AppState: Next schedule update set for Event End: \(nextUpdateDate)")
+        } else {
+            // Case 2: In Lobby (or between events). Next update is when the NEXT event starts.
+            // (Or if current is finished, we want to update immediately, effectively handled by 0 delay)
+             if let nextEvent = eventsSchedule.dropFirst().first {
+                 nextUpdateDate = nextEvent.startTime
+                 print("⏰ AppState: Next schedule update set for Next Event Start: \(nextUpdateDate)")
+             } else {
+                 // Fallback: 60s
+                 nextUpdateDate = now.addingTimeInterval(60)
+             }
+        }
+        
+        let interval = nextUpdateDate.timeIntervalSince(now)
+        // Ensure we don't schedule negative or zero intervals (which cause loops)
+        // Add 1.0s buffer to ensure we land safely *after* the change
+        let delay = max(1.0, interval + 1.0)
+        
+        print("⏰ AppState: Scheduling update in \(Int(delay)) seconds")
+        
+        scheduleTimer = Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                self?.calculateDeterministicSchedule()
+            }
+        }
+    }
+    
+    private func stopScheduleTimer() {
+        scheduleTimer?.invalidate()
+        scheduleTimer = nil
+    }
+    
+    /// Deterministically calculates the current and upcoming events based on the epoch
+    /// This ensures all clients see the same schedule at the same time.
+    func calculateDeterministicSchedule() {
+        guard !allMovies.isEmpty else { return }
+        
+        let now = TimeService.shared.now
+        let bufferBetweenMovies = ScheduleConstants.DefaultBuffer
+        
+        // 1. Calculate total duration of the entire playlist cycle
+        var totalCycleDuration: TimeInterval = 0
+        var movieDurations: [TimeInterval] = []
+        
+        for movie in allMovies {
+            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies
+            movieDurations.append(duration)
+            totalCycleDuration += duration
+        }
+        
+        // 2. Determine where we are in the cycle relative to a fixed epoch
+        let epoch = ScheduleConstants.Epoch
+        let timeSinceEpoch = now.timeIntervalSince(epoch)
+        let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+        
+        // 3. Find the currently playing movie
+        var accumulatedTime: TimeInterval = 0
+        var currentMovieIndex = 0
+        var timeIntoCurrentMovie: TimeInterval = 0
+        
+        for (index, duration) in movieDurations.enumerated() {
+            if accumulatedTime + duration > currentCycleTime {
+                currentMovieIndex = index
+                timeIntoCurrentMovie = currentCycleTime - accumulatedTime
+                break
+            }
+            accumulatedTime += duration
+        }
+        
+        // 4. Build the schedule starting from the current movie
+        var scheduledEvents: [EventItem] = []
+        let count = min(4, allMovies.count)
+        
+        for i in 0..<count {
+            let index = (currentMovieIndex + i) % allMovies.count
+            let movie = allMovies[index]
+            
+            let runtimeMinutes = Int(movie.runtime?.components(separatedBy: " ").first ?? "120") ?? 120
+            let duration = TimeInterval(runtimeMinutes * 60) + bufferBetweenMovies
+            
+            let startTime: Date
+            if i == 0 {
+                // Live movie: Start time is in the past
+                startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
+            } else {
+                // Upcoming movies: Start time is based on previous movie's end of slot
+                let prevEvent = scheduledEvents.last!
+                startTime = prevEvent.startTime.addingTimeInterval(prevEvent.duration)
+            }
+            
+            var event = EventItem(
+                id: movie.id,
+                mediaItem: movie,
+                startTime: startTime,
+                duration: duration,
+                actualMovieDuration: TimeInterval(runtimeMinutes * 60),
+                index: i
+            )
+            // Inject cached participant count
+            event.participantCount = self.participantCounts[movie.id] ?? 0
+            
+            scheduledEvents.append(event)
+        }
+        
+        // Update published state
+        if self.eventsSchedule != scheduledEvents {
+            self.eventsSchedule = scheduledEvents
+            // print("🔄 AppState: Schedule updated. Live: \(scheduledEvents.first?.mediaItem.name ?? "None")")
+        }
+        
+        // Check if we need to refresh participant counts (every 30 seconds)
+        if Date().timeIntervalSince(lastCountFetch) > 30 {
+            Task { await fetchParticipantCounts() }
+        }
+        
+        // Check for finished live event to trigger player/lobby logic if needed
+        // (Logic delegated to views/viewmodels based on specific needs)
+        
+        // RECURSION: Schedule the next update based on the new state
+        startScheduleTimer()
+    }
+    
+    @MainActor
+    private func fetchParticipantCounts() async {
+        guard !eventsSchedule.isEmpty else { return }
+        lastCountFetch = Date()
+        
+        let currentIds = eventsSchedule.map { $0.id }
+        
+        let newCounts = await Task.detached {
+            var counts: [String: Int] = [:]
+            for id in currentIds {
+                let roomId = "event_\(id)"
+                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    counts[id] = roomState.participantsCount
+                }
+            }
+            return counts
+        }.value
+        
+        self.participantCounts = newCounts
+        // Triggers update via calculateDeterministicSchedule on next tick or immediate if we want
+        // But next tick is fine (max 2s delay)
     }
 
 

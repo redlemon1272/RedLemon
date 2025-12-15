@@ -1431,11 +1431,12 @@ extension MPVPlayerViewModel {
                     switch action {
                     case .join:
                         // Cancel any pending leave for this user
+                        // Cancel any pending leave for this user
                         if let existingTask = self.pendingLeaveTasks[actualUserId] {
                             print("🔄 User \(actualUserId) reconnected within grace period - cancelling leave")
                             existingTask.cancel()
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                            return // Skip re-adding since they never technically left our model
+                            // Do NOT return here - we must proceed to update the phx_ref!
                         }
 
 

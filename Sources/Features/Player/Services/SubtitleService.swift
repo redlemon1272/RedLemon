@@ -25,6 +25,9 @@ protocol SubtitleService: Actor {
 
     /// Stream of current track for UI binding
     var currentTrackPublisher: AnyPublisher<SubtitleTrack?, Never> { get }
+
+    /// Stream of offset for UI binding
+    var offsetPublisher: AnyPublisher<Double, Never> { get }
 }
 
 /// Actor-based implementation of SubtitleService
@@ -44,6 +47,10 @@ actor MPVSubtitleService: SubtitleService {
 
     var currentTrackPublisher: AnyPublisher<SubtitleTrack?, Never> {
         $currentTrack.eraseToAnyPublisher()
+    }
+
+    var offsetPublisher: AnyPublisher<Double, Never> {
+        $offset.eraseToAnyPublisher()
     }
 
     // MARK: - Dependencies

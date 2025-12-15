@@ -64,6 +64,11 @@ class MPVPlayerViewModel: ObservableObject {
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$currentSubtitleTrack)
 
+            let offsetPublisher = await subtitleService.offsetPublisher
+            offsetPublisher
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$subtitleOffset)
+
             // Playback Bindings
             let isPlayingPub = await playbackService.isPlayingPublisher
             let playbackFinishedPub = await playbackService.playbackFinishedPublisher
@@ -751,12 +756,24 @@ class MPVPlayerViewModel: ObservableObject {
         Task {
             await subtitleService.setOffset(offsetMs)
         }
+        
+        // Save to UserDefaults
+        if !imdbId.isEmpty {
+            UserDefaults.standard.set(offsetMs, forKey: "subtitleOffset_\(imdbId)")
+            print("💾 Saved subtitle offset: \(offsetMs)ms for \(imdbId)")
+        }
     }
 
     /// Reset subtitle timing to default
     func resetSubtitleTiming() {
         Task {
             await subtitleService.setOffset(0.0)
+        }
+        
+        // Remove from UserDefaults
+        if !imdbId.isEmpty {
+            UserDefaults.standard.removeObject(forKey: "subtitleOffset_\(imdbId)")
+            print("💾 Cleared subtitle offset for \(imdbId)")
         }
     }
 
@@ -895,6 +912,14 @@ class MPVPlayerViewModel: ObservableObject {
     @discardableResult
     private func selectEnglishDefaults() -> Bool {
         print("🌐 Selecting English audio and subtitle tracks...")
+
+        // 1. Restore Subtitle Offset if exists
+        if !imdbId.isEmpty {
+             if let savedOffset = UserDefaults.standard.object(forKey: "subtitleOffset_\(imdbId)") as? Double {
+                 print("💾 Restoring saved subtitle offset: \(savedOffset)ms")
+                 self.adjustSubtitleOffset(savedOffset)
+             }
+        }
 
         // Try to find and select English audio
         let audioTracks = mpvWrapper.getAudioTracks()

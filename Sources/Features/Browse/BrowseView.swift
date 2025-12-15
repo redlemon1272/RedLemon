@@ -457,7 +457,7 @@ struct BrowseView: View {
 
         // Enhanced deduplication: Remove duplicates based on media ID and episode info
         let deduplicatedHistory = removeDuplicates(from: history)
-        recentlyWatched = Array(deduplicatedHistory.prefix(10)) // Show last 10 unique items
+        recentlyWatched = Array(deduplicatedHistory.prefix(20)) // Show last 20 unique items
     }
 
     /// Remove duplicate watch history items, keeping most recent watch progress for each unique media

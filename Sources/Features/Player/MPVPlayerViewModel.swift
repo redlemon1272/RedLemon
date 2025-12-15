@@ -1488,7 +1488,15 @@ extension MPVPlayerViewModel {
                                 print("⚠️ Self (\(currentId)) was missing from list - restoring.")
                                 // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
                                 // Otherwise, use nil (we don't know our own ref from someone else's join).
-                                let selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
+                                var selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
+                                
+                                // Last Ditch: Check if we have a stale ref for self in the OLD list
+                                if selfRef == nil {
+                                    if let oldSelf = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == currentId }) {
+                                        selfRef = oldSelf.phxRef
+                                        print("♻️ Restored stale phx_ref for Self: \(selfRef ?? "nil")")
+                                    }
+                                }
                                 
                                 let selfParticipant = Participant(
                                     id: currentId,

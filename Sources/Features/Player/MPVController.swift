@@ -19,6 +19,7 @@ protocol MPVController: AnyObject {
     func getCurrentSubtitleTrack() async -> Int
     func setSubtitleTrack(_ id: Int)
     func setSubtitleOffset(_ offsetMs: Double)
+    func refreshSubtitleSelection()
     
     // Publishers
     var isPlayingPublisher: AnyPublisher<Bool, Never> { get }

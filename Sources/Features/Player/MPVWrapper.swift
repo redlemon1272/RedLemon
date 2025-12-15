@@ -229,7 +229,8 @@ class MPVWrapper: ObservableObject {
             isFileLoaded = true
             // Auto-select English audio and subtitles BEFORE playback starts (no stutter)
             autoSelectEnglishAudio()
-            autoSelectEnglishSubtitles()
+            autoSelectEnglishAudio()
+            refreshSubtitleSelection()
             
             // Execute pending seek if any
             if let targetTime = self.pendingSeekTime {
@@ -439,7 +440,7 @@ class MPVWrapper: ObservableObject {
         var args: [UnsafePointer<CChar>?] = [
             UnsafePointer(strdup("sub-add")),
             UnsafePointer(strdup(url)),
-            UnsafePointer(strdup("auto")),    // Add to list but don't auto-select (use "auto" flag)
+            UnsafePointer(strdup("cached")),  // Add to list but don't auto-select (use "cached" flag)
             UnsafePointer(strdup(title)),     // Title (release name)
             UnsafePointer(strdup("en")),      // Language
             nil
@@ -769,11 +770,12 @@ class MPVWrapper: ObservableObject {
         }
     }
 
-    /// Auto-select first English embedded subtitle track (called on FILE_LOADED event)
-    private func autoSelectEnglishSubtitles() {
+    /// Refresh subtitle selection logic (called on file load and after loading external subs)
+    /// Public to allow Service to trigger re-evaluation after asynchronous external sub load.
+    func refreshSubtitleSelection() {
         guard let handle = mpvHandle, isInitialized else { return }
 
-        print("🔍 AUTO-SELECT: Starting subtitle scan during FILE_LOADED event")
+        print("🔍 AUTO-SELECT: Starting subtitle scan & selection refresh")
 
         var trackCount: Int64 = 0
         mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
@@ -786,6 +788,7 @@ class MPVWrapper: ObservableObject {
             let isForced: Bool
             let isDefault: Bool
             let title: String
+            let isHearingImpaired: Bool
         }
 
         var candidates: [SubCandidate] = []
@@ -825,6 +828,12 @@ class MPVWrapper: ObservableObject {
             var isDefaultVal: Int64 = 0
             let _ = mpv_get_property(handle, defaultKey, MPV_FORMAT_FLAG, &isDefaultVal)
             let isDefault = isDefaultVal != 0
+            
+            // NEW: Check hearing-impaired flag
+            let hiKey = "track-list/\(i)/hearing-impaired"
+            var isHIVal: Int64 = 0
+            let _ = mpv_get_property(handle, hiKey, MPV_FORMAT_FLAG, &isHIVal)
+            let isHI = isHIVal != 0
 
             // Get language & title
             let langKey = "track-list/\(i)/lang"
@@ -846,10 +855,9 @@ class MPVWrapper: ObservableObject {
             let titleLower = title?.lowercased() ?? ""
             let isEnglish = langLower.hasPrefix("en") || langLower.contains("eng") || titleLower.contains("english")
 
-            print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault)")
-
             if isEnglish {
                 let displayName = title ?? lang ?? "Track \(trackId)"
+                print("🔍 AUTO-SELECT: Track \(i) - ID: \(trackId), lang: '\(lang ?? "nil")', title: '\(title ?? "nil")', forced: \(isForced), default: \(isDefault), HI: \(isHI), Ext: \(isExternal)")
 
                 // Filter out known bad patterns
                 let isPartialSub = titleLower.contains("valyrian") ||
@@ -864,7 +872,8 @@ class MPVWrapper: ObservableObject {
                         isExternal: isExternal,
                         isForced: isForced,
                         isDefault: isDefault,
-                        title: titleLower
+                        title: titleLower,
+                        isHearingImpaired: isHI
                     ))
                 } else {
                     print("⚠️ Ignoring partial/commentary subtitle: \(displayName)")
@@ -873,50 +882,72 @@ class MPVWrapper: ObservableObject {
         }
 
         // Scoring:
-        // +1000 for Embedded (vs External) - Keep favoring embedded as they are perfectly synced
-        // +500 for Release Match (WEBRip vs BluRay) - Critical for external sync
-        // +50 for SDH/CC
-        // -50 for Forced (unless it's the only one)
-        // -10 for Default (often foreign default in dual audio)
-        // +1 for Higher ID (often later tracks are better/fixed)
+        // +1000 for Embedded (vs External)
+        // +500 for Release Match (WEBRip vs BluRay)
+        // +250 for SDH/CC/HI (Increased to beat Forced/Default penalties and slight release match disadvantage)
+        // +600 for CLEAN TITLE if short (<20) and matching lang (SDH/English) -> Neutralizes Release Match bias against clean titles
+        // -50 for Forced
+        // -10 for Default
+        // +1 for Higher ID
 
         let bestCandidate = candidates.max { a, b in
             var scoreA = 0
             var scoreB = 0
+            
+            // Helper for logging
+            func logScore(_ candidate: SubCandidate, _ score: Int) {
+                // We verify logic correctness via logs
+            }
 
             // 1. Prefer Embedded (+1000)
             if !a.isExternal { scoreA += 1000 }
             if !b.isExternal { scoreB += 1000 }
             
             // 2. Release Match (+500 range)
-            scoreA += calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
-            scoreB += calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: b.title)
+            let releaseScoreA = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
+            let releaseScoreB = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: b.title)
+            scoreA += releaseScoreA
+            scoreB += releaseScoreB
+            
+            // 3. Clean Title Bonus (+600)
+            // Fixes issue where "SDH" (Clean) loses to "Nightcrawler... SDH" (Release Match)
+            if a.title.count < 20 && (a.title.contains("sdh") || a.title.contains("english") || a.title.contains("en")) { scoreA += 600 }
+            if b.title.count < 20 && (b.title.contains("sdh") || b.title.contains("english") || b.title.contains("en")) { scoreB += 600 }
 
-            // 3. Prefer SDH/CC
-            if a.title.contains("sdh") || a.title.contains("cc") { scoreA += 50 }
-            if b.title.contains("sdh") || b.title.contains("cc") { scoreB += 50 }
+            // 4. Prefer SDH/CC/HI (+250)
+            if a.isHearingImpaired || a.title.contains("sdh") || a.title.contains("cc") { scoreA += 250 }
+            if b.isHearingImpaired || b.title.contains("sdh") || b.title.contains("cc") { scoreB += 250 }
 
-            // 4. Avoid Forced
+            // 5. Avoid Forced
             if a.isForced { scoreA -= 50 }
             if b.isForced { scoreB -= 50 }
 
-            // 5. Avoid Default (in dual audio, default is often the foreign one)
+            // 6. Avoid Default
             if a.isDefault { scoreA -= 10 }
             if b.isDefault { scoreB -= 10 }
 
-            // 6. Tie-breaker: Prefer later tracks (often better/fixed)
+            // 7. Tie-breaker: Prefer later tracks
             if a.id > b.id { scoreA += 1 }
             if b.id > a.id { scoreB += 1 }
+            
+            // Detailed Logging (only printed when comparing)
+            // print("🆚 Compare: [\(a.id)] Score: \(scoreA) vs [\(b.id)] Score: \(scoreB)")
 
             return scoreA < scoreB
         }
 
         if let best = bestCandidate {
-            print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault)]")
+            print("✅ Auto-selecting BEST English subtitle: \(best.name) (ID: \(best.id)) [External: \(best.isExternal), Forced: \(best.isForced), Default: \(best.isDefault), HI: \(best.isHearingImpaired)]")
             
-            // Calculate detailed score for logging
+            // Log final winning logic
             let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
-            print("   Match Score: \(matchScore) (Video: \(currentVideoFilename))")
+            let isClean = best.title.count < 20 && (best.title.contains("sdh") || best.title.contains("english") || best.title.contains("en"))
+            let isSDH = best.isHearingImpaired || best.title.contains("sdh") || best.title.contains("cc")
+            var finalScore = (best.isExternal ? 0 : 1000) + matchScore + (isClean ? 600 : 0) + (isSDH ? 250 : 0)
+            if best.isForced { finalScore -= 50 }
+            if best.isDefault { finalScore -= 10 }
+            
+            print("   🏆 Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 1000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
 
             var trackId = Int64(best.id)
             mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)

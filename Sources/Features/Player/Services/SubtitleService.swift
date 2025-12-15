@@ -98,6 +98,8 @@ actor MPVSubtitleService: SubtitleService {
 
                 // Update tracks after loading all
                 await scanEmbeddedTracks()
+                // Ensure we re-evaluate best subtitle after adding new ones
+                await mpv.refreshSubtitleSelection()
             } else {
                  // Standard URL loading (MPV can handle many http urls directly, but safer to download)
                  // For now, assuming direct load for non-SubDL or falling back to download logic
@@ -109,6 +111,8 @@ actor MPVSubtitleService: SubtitleService {
                     }
                 }
                 await scanEmbeddedTracks()
+                // Ensure we re-evaluate best subtitle after adding new ones
+                await mpv.refreshSubtitleSelection()
             }
         }
     }

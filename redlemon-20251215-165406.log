@@ -1,0 +1,113 @@
+2025-12-15 16:54:13.196 RedLemon[22779:174729] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-15 16:54:13.196 RedLemon[22779:174729] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-15 16:54:13.285 RedLemon[22779:174779] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 16:54:13.285 RedLemon[22779:174729] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-15 16:54:13.352 RedLemon[22779:174729] ✅ Playback state reset complete - starting in browse view
+2025-12-15 16:54:13.352 RedLemon[22779:174729] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-15 16:54:13.352 RedLemon[22779:174729] 🧪 Testing Profile: debug
+2025-12-15 16:54:13.352 RedLemon[22779:174780] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 16:54:13.352 RedLemon[22779:174729] ✅ Keychain: Found stored username: ursinho
+2025-12-15 16:54:13.352 RedLemon[22779:174729] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-15 16:54:13.352 RedLemon[22779:174780] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-15 16:54:13.447 RedLemon[22779:174799] 📡 SupabaseClient: User lookup response received (261 bytes)
+2025-12-15 16:54:13.449 RedLemon[22779:174729] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 16:54:13.450 RedLemon[22779:174799] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-15 16:54:13.450 RedLemon[22779:174799] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 16:54:13.516 RedLemon[22779:174729] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 16:54:13.516 RedLemon[22779:174729] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 16:54:13.516 RedLemon[22779:174729] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 16:54:13.516 RedLemon[22779:174729] 🚀 RedLemon: Starting HTTP server...
+2025-12-15 16:54:13.516 RedLemon[22779:174729] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-15 16:54:13.569 RedLemon[22779:174729] ✅ RedLemon: HTTPServer instance created
+2025-12-15 16:54:13.569 RedLemon[22779:174781] 📡 RedLemon: Server starting on port 47253...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📨 Received: {"ref":"B29247A9-0C0B-4116-91EF-CFE7AE7882E9","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Unable to subscribe to changes with given parameters. Please check Realtime is enabled for the given connect parameters: [schema: public, table: events_config, filters: [{\"config_type\", \"eq\", \"movie_events\"}]]","status":"error","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+✅ [EventsConfig] Fetched movie_events version 1343 with 453 movies
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-15 16:54:15.753 RedLemon[22779:174729] ✅ RedLemon: Server marked as ready
+2025-12-15 16:54:15.803 RedLemon[22779:174729] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-15 16:54:15.803 RedLemon[22779:174729] 🔍 Performing startup checks...
+2025-12-15 16:54:15.803 RedLemon[22779:174729] ✅ Username-based authentication ready
+2025-12-15 16:54:15.803 RedLemon[22779:174729] 🔍 Performing startup checks...
+2025-12-15 16:54:15.803 RedLemon[22779:174729] ✅ Username-based authentication ready
+2025-12-15 16:54:15.803 RedLemon[22779:174729] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Using cached movie_events config (version 1343, 453 movies)
+✅ [EventsView] Loaded 453 movies from config version 1343
+🗓 AppState: Updated schedule epoch to 2025-12-15 15:50:05 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-15 22:14:05 +0000
+⏰ AppState: Scheduling update in 1192 seconds
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T20:19:33.378674","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: [{"id":"event_tt1663662","name":"Pacific Rim","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"0d41e65140462dacede11bb87629d52b3c512088","imdb_id":"tt1663662","poster_url":"https://images.metahub.space/poster/small/tt1663662/img","backdrop_url":"https://images.metahub.space/background/medium/tt1663662/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T20:57:05.924194","last_activity":"2025-12-15T20:57:06.000476","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/Y3RJLEDF233JE112/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:global-presence
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"D3423AF4-2FC8-4A67-AF3C-63033AAB86F9","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"35fd5938-da00-11f0-b754-0a58a9feac02":{"metas":[{"phx_ref":"GIGCDcO-d9x7hxfC","phx_ref_prev":"GIGCDcM6mVp7h1EL","last_seen":"2025-12-15T21:52:04Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"99233cda-da00-11f0-bc75-0a58a9feac02":{"metas":[{"phx_ref":"GIGCLDsTHlB7h3CF","last_seen":"2025-12-15T21:54:14Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"A4D437E2-119E-49CD-9DF5-1EDDE7CA763E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 1.194s (RTT: 62ms)
+   Local:  2025-12-15 21:54:15 +0000
+   Server: 2025-12-15 21:54:17 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"35fd5938-da00-11f0-b754-0a58a9feac02":{"metas":[{"phx_ref":"GIGCDcO-d9x7hxfC","phx_ref_prev":"GIGCDcM6mVp7h1EL","last_seen":"2025-12-15T21:52:04Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}

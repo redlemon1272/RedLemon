@@ -314,7 +314,7 @@ struct ChatOverlayView: View {
                                         .font(.body)
                                         .foregroundColor(.white)
                                         .padding(10)
-                                        .background(isMe ? Color.blue : Color.white.opacity(0.2))
+                                        .background(isMe ? Color.blue : Color(white: 0.2))
                                         .cornerRadius(12)
                                 }
                                 if !isMe { Spacer() }

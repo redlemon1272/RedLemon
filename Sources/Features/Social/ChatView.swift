@@ -115,6 +115,7 @@ struct ChatView: View {
         }
         .padding(.horizontal, 24) // Matches Lobby padding
         .padding(.bottom, 16)     // Matches Lobby padding
+        .background(Color.black) // Ensure dark background for visibility
         .task {
             await socialService.loadMessages(friendId: friend.id)
             socialService.clearUnread(friendId: friend.id)
@@ -154,7 +155,7 @@ struct DMMessageRow: View {
                     .font(.body)
                     .foregroundColor(.white)
                     .padding(10)
-                    .background(isMe ? Color.blue : Color.white.opacity(0.1))
+                    .background(isMe ? Color.blue : Color(white: 0.2)) // Safer dark grey than opacity
                     .cornerRadius(12)
             }
             // Removed manual padding/bg wrap to let Text bubble handle it

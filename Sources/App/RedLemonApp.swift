@@ -80,6 +80,7 @@ struct RedLemonApp: App {
                 .onOpenURL { url in
                     handleURL(url)
                 }
+                .preferredColorScheme(.dark) // Enforce Night Mode permanently
         }
         .windowStyle(.hiddenTitleBar)
         .commands {

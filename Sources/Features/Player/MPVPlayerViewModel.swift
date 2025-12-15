@@ -1543,25 +1543,27 @@ extension MPVPlayerViewModel {
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
 
-                                    // MAGIC BULLET: Grace Period Check
+                                    // Grace check: Ignore leaves during initial connection ramp-up (10s) to prevent 'self-leave' on room entry
                                     if Date().timeIntervalSince(self.initializationTime) < 10.0 {
-                                        print("🛡️ Grace Period: Ignoring LEAVE for \(actualUserId) (Session too young)")
+                                        print("🛡️ Ignoring LEAVE during initialization grace period: \(actualUserId)")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
-
-                                    // PREFERRED: Check specific Connection ID (phx_ref) mismatch
-                                    if let leavingRef = leavingPhxRef, let currentRef = existingParticipant.phxRef {
+                                    
+                                    // Check for stale leave (Ref Mismatch)
+                                    // If we have a phx_ref for this user, and the leaving ref doesn't match, it's an old connection dropping.
+                                    if let leavingRef = leavingPhxRef,
+                                       let currentRef = existingParticipant.phxRef {
+                                        
+                                        print("🔍 Comparing refs for \(actualUserId): Current: \(currentRef), Leaving: \(leavingRef)")
                                         if currentRef != leavingRef {
-                                             print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref Mismatch: \(leavingRef) != Current: \(currentRef))")
-                                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                             return
+                                            print("🚫 Ignoring stale LEAVE event for \(actualUserId). Current: \(currentRef) vs Leaving: \(leavingRef)")
+                                            self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                            return
                                         } else {
-                                             print("✅ LEAVE confirmed: Ref match \(leavingRef) == \(currentRef)")
+                                             print("✅ LEAVE MATCHED refs: \(currentRef) == \(leavingRef)")
                                         }
                                     } else {
-                                        // Debug info for missing refs
-                                        print("⚠️ LEAVE event check: Missing refs? Leaving: \(leavingPhxRef ?? "nil"), Current: \(existingParticipant.phxRef ?? "nil")")
                                         
                                         // FALLBACK: If we have NO refs, we must assume it's valid? 
                                         // Or rely on Timestamp?

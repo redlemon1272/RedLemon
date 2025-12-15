@@ -1,0 +1,878 @@
+2025-12-15 17:29:12.260 RedLemon[24842:190127] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-15 17:29:12.260 RedLemon[24842:190127] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-15 17:29:12.332 RedLemon[24842:190127] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-15 17:29:12.336 RedLemon[24842:190200] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 17:29:12.371 RedLemon[24842:190127] ✅ Playback state reset complete - starting in browse view
+2025-12-15 17:29:12.371 RedLemon[24842:190127] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-15 17:29:12.372 RedLemon[24842:190127] 🧪 Testing Profile: debug
+2025-12-15 17:29:12.372 RedLemon[24842:190199] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 17:29:12.406 RedLemon[24842:190127] ✅ Keychain: Found stored username: ursinho
+2025-12-15 17:29:12.406 RedLemon[24842:190127] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-15 17:29:12.407 RedLemon[24842:190174] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-15 17:29:12.476 RedLemon[24842:190127] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 17:29:12.485 RedLemon[24842:190174] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-15 17:29:12.487 RedLemon[24842:190174] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-15 17:29:12.487 RedLemon[24842:190174] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 17:29:12.538 RedLemon[24842:190127] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 17:29:12.538 RedLemon[24842:190127] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:12.538 RedLemon[24842:190127] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:12.538 RedLemon[24842:190127] 🚀 RedLemon: Starting HTTP server...
+2025-12-15 17:29:12.538 RedLemon[24842:190127] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-15 17:29:12.562 RedLemon[24842:190127] ✅ RedLemon: HTTPServer instance created
+2025-12-15 17:29:12.562 RedLemon[24842:190199] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"76453876-04D2-4233-B74F-314135EC7E96","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-15 17:29:14.706 RedLemon[24842:190127] ✅ RedLemon: Server marked as ready
+2025-12-15 17:29:14.761 RedLemon[24842:190127] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-15 17:29:14.761 RedLemon[24842:190127] 🔍 Performing startup checks...
+2025-12-15 17:29:14.761 RedLemon[24842:190127] ✅ Username-based authentication ready
+2025-12-15 17:29:14.761 RedLemon[24842:190127] 🔍 Performing startup checks...
+2025-12-15 17:29:14.761 RedLemon[24842:190127] ✅ Username-based authentication ready
+2025-12-15 17:29:14.761 RedLemon[24842:190127] 🔄 Checking for app updates...
+2025-12-15 17:29:18.615 RedLemon[24842:190127]    Quality: 1080p
+2025-12-15 17:29:18.615 RedLemon[24842:190127]    Mode: watchParty
+2025-12-15 17:29:18.615 RedLemon[24842:190127] 📡 Fetching metadata for tt29268110...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1348 with 453 movies
+✅ [EventsConfig] Using cached movie_events config (version 1348, 453 movies)
+✅ [EventsView] Loaded 453 movies from config version 1348
+🗓 AppState: Updated schedule epoch to 2025-11-04 23:52:07 +0000
+⏰ AppState: Next schedule update set for Event End: 2025-12-16 00:45:07 +0000
+⏰ AppState: Scheduling update in 8155 seconds
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt29268110","name":"Smile 2","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"e9c6725c74e4549b7bb4dc722419459814615c5a","imdb_id":"tt29268110","poster_url":"https://images.metahub.space/poster/small/tt29268110/img","backdrop_url":"https://images.metahub.space/background/medium/tt29268110/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T22:29:02.514621","last_activity":"2025-12-15T22:29:02.606594","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":"36DB135B-0CD5-425C-80F3-ECA2AEE305F7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"641744b4-da05-11f0-853e-0a58a9feac02":{"metas":[{"phx_ref":"GIGEEoM5_aovCDtD","phx_ref_prev":"GIGEC3qg41AvCEFF","last_seen":"2025-12-15T22:29:03Z","room_id":"event_tt29268110","started_at":"2025-12-15T22:29:03Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c31d92e-da05-11f0-b04b-0a58a9feac02":{"metas":[{"phx_ref":"GIGEFOZKdKZULvzE","last_seen":"2025-12-15T22:29:12Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"C192013F-6554-412F-9774-4EC963813348","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 1.220s (RTT: 75ms)
+   Local:  2025-12-15 22:29:14 +0000
+   Server: 2025-12-15 22:29:16 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+[2025-12-15T22:29:18Z] [INFO] [EventsView.swift:188] 🎟️ Joining event: Smile 2 (Live: true)
+   Event start time: 2025-12-15 22:28:07 +0000
+   Event duration: 8220.0s
+   Current time: 2025-12-15 22:29:19 +0000
+   Is Live: true
+   Is In Lobby: false
+🔍 Supabase Response for /rooms: [{"id":"event_tt29268110","name":"Smile 2","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"e9c6725c74e4549b7bb4dc722419459814615c5a","imdb_id":"tt29268110","poster_url":"https://images.metahub.space/poster/small/tt29268110/img","backdrop_url":"https://images.metahub.space/background/medium/tt29268110/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T22:29:02.514621","last_activity":"2025-12-15T22:29:02.606594","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv","description":null,"current_playlist_index":0,"playlist":[]}]
+✅ Event room already exists: event_tt29268110
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi1-4.downl...
+   Hash: e9c6725c74e4549b7bb4dc722419459814615c5a
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: e9c6725c74e4549b7bb4dc722419459814615c5a
+
+🎬 Live event - calculating position: 72.70902192592621 seconds
+   Event start time: 2025-12-15 22:28:07 +0000
+   Current time: 2025-12-15 22:29:19 +0000
+   Room createdAt: 2025-12-15 22:28:07 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 72.70902192592621
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Smile 2
+[ INFO ] GET /api/metadata/meta/movie/tt29268110 [request-id: F001E93C-7901-4C77-9C58-5C89CB82EFAD]
+2025-12-15 17:29:18.803 RedLemon[24842:190175] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 17:29:18.806 RedLemon[24842:190127] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt29268110/img
+2025-12-15 17:29:18.807 RedLemon[24842:190127] ⏳ Background art loading...
+2025-12-15 17:29:18.807 RedLemon[24842:190127] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt29268110/img
+2025-12-15 17:29:18.808 RedLemon[24842:190127] ⏳ Logo loading...
+2025-12-15 17:29:18.849 RedLemon[24842:190127] ✅ Logo loaded successfully
+2025-12-15 17:29:18.857 RedLemon[24842:190127] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-15 17:29:18.857 RedLemon[24842:190127] 🎬 GUEST: Fetching subtitles for shared stream...
+💾 Cache SET: Metadata[meta_movie_tt29268110]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: B422E746-9A9E-44F0-A003-EFA86D01764B]
+2025-12-15 17:29:18.888 RedLemon[24842:190127] ✅ Background art loaded successfully
+2025-12-15 17:29:19.096 RedLemon[24842:190127] ✅ GUEST: Found 6 subtitles
+2025-12-15 17:29:19.107 RedLemon[24842:190127] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Sm, subtitles: 6
+2025-12-15 17:29:19.189 RedLemon[24842:190127] ✅ Stream ready, starting playback...
+2025-12-15 17:29:19.189 RedLemon[24842:190127] 🖥️ WindowManager: enterFullscreen() called
+2025-12-15 17:29:19.189 RedLemon[24842:190127]    Window: <SwiftUI.SwiftUIWindow: 0x7fee2ca470a0>
+2025-12-15 17:29:19.189 RedLemon[24842:190127]    Is fullscreen: 0
+2025-12-15 17:29:19.190 RedLemon[24842:190127]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-15 17:29:19.269 RedLemon[24842:190127] 🖼️ Setting up MPV with native macOS video output...
+2025-12-15 17:29:19.276 RedLemon[24842:190127] ✅ MPV initialized with native GPU rendering
+2025-12-15 17:29:19.287 RedLemon[24842:190127] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-15 17:29:19.287 RedLemon[24842:190127] 🎉 Starting watch party sync - Room: event_tt29268110, Host: NO
+2025-12-15 17:29:19.288 RedLemon[24842:190127] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-15 17:29:19.354 RedLemon[24842:190127] 🔄 Starting chat polling for room: event_tt29268110
+2025-12-15 17:29:19.355 RedLemon[24842:190127] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-15 17:29:19.355 RedLemon[24842:190127] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-15 17:29:19.355 RedLemon[24842:190127] 🎬🎬🎬 Subtitles: 6
+2025-12-15 17:29:19.356 RedLemon[24842:190127] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Smile 2
+2025-12-15 17:29:19.356 RedLemon[24842:190127] 🎬🎬🎬 streamURL: https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Sm
+2025-12-15 17:29:19.356 RedLemon[24842:190127] 🎬🎬🎬 subtitles: 6
+2025-12-15 17:29:19.357 RedLemon[24842:190127] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-15 17:29:19.372 RedLemon[24842:190178] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-15 17:29:19.372 RedLemon[24842:190175] 🎬 MPV: Current video filename set to: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv
+2025-12-15 17:29:19.372 RedLemon[24842:190178] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDMtODM0Mjg1NS56aXA=
+2025-12-15 17:29:19.373 RedLemon[24842:190175] 🎬 MPV loadVideo called with URL: https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmo, autoplay: true
+2025-12-15 17:29:19.373 RedLemon[24842:190175] 🎬 MPV executing command: loadfile "https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv"
+2025-12-15 17:29:19.373 RedLemon[24842:190175] 🎬 MPV loadfile result: 0
+2025-12-15 17:29:19.374 RedLemon[24842:190175] ✅ MPV loadfile succeeded, isPlaying set to true
+🔍 Subtitle search request: tt29268110 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt29268110 (movie)
+✅ Found 6 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH) [EN] (score: 20)
+   [2] Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 [EN] (score: 20)
+   [3] Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX] [EN] (score: 13)
+   [4] Smile.2.2024.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX] [EN] (score: 13)
+   [5] Smile 2 - US 4k - English - Hearing Impaired - UPC 191329261934 [EN] (score: 10)
+   [6] Smile 2 - US 4k - English - UPC 191329261934 [EN] (score: 10)
+✅ Subtitle search returned 6 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Sm
+   Display Title: Smile 2
+   Subtitle URLs: 6
+      [0] Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)
+      [1] Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264
+      [2] Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]
+      [3] Smile.2.2024.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX]
+      [4] Smile 2 - US 4k - English - Hearing Impaired - UPC 191329261934
+      [5] Smile 2 - US 4k - English - UPC 191329261934
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt29268110, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt29268110
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt29268110
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Smile 2
+   IMDB: tt29268110
+   URL: https://chi1-4.download.real-debrid.com/d/PGV6RTYVGBOQW22/Sm...
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📝 Pre-loading external subtitles (Top 3)...
+📡 Fetching metadata for tt29268110 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt29268110]
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDMtODM0Mjg1NS56aXA= [request-id: 9DD38AB3-5D50-422F-A8E2-FA963FA8A6A0]
+2025-12-15 17:29:19.660 RedLemon[24842:190127] 🔍 MPV track-list/count: 0
+2025-12-15 17:29:19.661 RedLemon[24842:190127] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-15 17:29:19.661 RedLemon[24842:190127]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:19.804 RedLemon[24842:190127] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-15 17:29:19.958 RedLemon[24842:190290] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C1E92571-2A27-465C-9935-B8C7D584113E.vtt
+2025-12-15 17:29:19.958 RedLemon[24842:190290] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_C1E92571-2A27-465C-9935-B8C
+2025-12-15 17:29:19.981 RedLemon[24842:190290] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 17:29:19.982 RedLemon[24842:190290] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDItODM0Mjg1NC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzM0MTkz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3419343-8342855.zip
+📨 Received: {"ref":"A6F4FD2B-394B-4002-ADB8-60EF07C6D792","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt29268110"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"7616d562-da05-11f0-ae49-0a58a9feac02":{"metas":[{"phx_ref":"GIGEEoLGj8S7urdE","is_host":false,"joined_at":1765837743.8758621,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt29268110"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8001cfbe-da05-11f0-a426-0a58a9feac02":{"metas":[{"phx_ref":"GIGEFmKCx3hvhU5C","is_host":false,"joined_at":1765837759.346867,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt29268110"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt29268110"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c31d92e-da05-11f0-b04b-0a58a9feac02":{"metas":[{"phx_ref":"GIGEFmQrCBpULq2K","phx_ref_prev":"GIGEFOZKdKZULvzE","last_seen":"2025-12-15T22:29:19Z","room_id":"event_tt29268110","started_at":"2025-12-15T22:29:19Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt29268110","watching_title":"Smile 2","watching_type":"movie"}]}},"leaves":{"7c31d92e-da05-11f0-b04b-0a58a9feac02":{"metas":[{"phx_ref":"GIGEFOZKdKZULvzE","last_seen":"2025-12-15T22:29:12Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt29268110/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt29268110/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt29268110/img...
+📡 SocialService: Updated status - online: Smile 2
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIGEEoLGj8S7urdE)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIGEFmKCx3hvhU5C
+⏰ AppState: Next schedule update set for Event End: 2025-12-16 00:45:07 +0000
+⏰ AppState: Scheduling update in 8147 seconds
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-15 22:28:07 +0000
+   Current time: 2025-12-15 22:29:19 +0000
+   Elapsed: 72s
+   Seeking to: 72s
+🎯 IMMEDIATE RESUME: Seeking to 72s without delay
+📝 Started watch history tracking
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⚡️ PlaybackService: releasing sleep assertion
+✅ Download complete: 41598 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH).srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MTkzNDItODM0Mjg1NC56aXA= [request-id: 4927A727-605C-4CD5-81E9-D13DCAACBB04]
+2025-12-15 17:29:20.194 RedLemon[24842:190178] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 72.7s
+2025-12-15 17:29:20.405 RedLemon[24842:190178] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_339A039E-539E-4DBB-BFD7-18C1B08D6321.vtt
+2025-12-15 17:29:20.405 RedLemon[24842:190178] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_339A039E-539E-4DBB-BFD7-18C
+2025-12-15 17:29:20.414 RedLemon[24842:190178] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 17:29:20.415 RedLemon[24842:190178] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0MzMwNTItODM1Njc3OC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzM0MTkz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3419342-8342854.zip
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 72s...
+🎯 Executing immediate seek to 72s...
+✅ Download complete: 33138 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264.srt
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 72s
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0MzMwNTItODM1Njc3OC56aXA= [request-id: 229792A6-4C83-415F-83D4-BD7F2F5848CF]
+2025-12-15 17:29:21.395 RedLemon[24842:190290] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5E8A880F-D512-4B91-9A4D-6DB4B4594737.vtt
+2025-12-15 17:29:21.396 RedLemon[24842:190290] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5E8A880F-D512-4B91-9A4D-6DB
+2025-12-15 17:29:21.404 RedLemon[24842:190290] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 17:29:21.405 RedLemon[24842:190290] 🔍 MPV track-list/count: 3
+2025-12-15 17:29:21.405 RedLemon[24842:190290] 🔍 Track 0 type: sub
+2025-12-15 17:29:21.405 RedLemon[24842:190290] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:21.405 RedLemon[24842:190290] 🔍 Track 1 type: sub
+2025-12-15 17:29:21.405 RedLemon[24842:190290] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:21.405 RedLemon[24842:190290] 🔍 Track 2 type: sub
+2025-12-15 17:29:21.405 RedLemon[24842:190290] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:21.406 RedLemon[24842:190290] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-15 17:29:21.406 RedLemon[24842:190290]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:21.406 RedLemon[24842:190290]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:21.406 RedLemon[24842:190290]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:21.406 RedLemon[24842:190290]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:21.406 RedLemon[24842:190127] 🔍 MPV track-list/count: 3
+2025-12-15 17:29:21.406 RedLemon[24842:190127] 🔍 Track 0 type: sub
+2025-12-15 17:29:21.406 RedLemon[24842:190290] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-15 17:29:21.407 RedLemon[24842:190127] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127] 🔍 Track 1 type: sub
+2025-12-15 17:29:21.407 RedLemon[24842:190290]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:21.407 RedLemon[24842:190127] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127] 🔍 Track 2 type: sub
+2025-12-15 17:29:21.407 RedLemon[24842:190290]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-15 17:29:21.407 RedLemon[24842:190290]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:21.407 RedLemon[24842:190127]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:21.407 RedLemon[24842:190290]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:21.407 RedLemon[24842:190127]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:21.416 RedLemon[24842:190291] 🔍 MPV track-list/count: 3
+2025-12-15 17:29:21.417 RedLemon[24842:190291] 🔍 Track 0 type: sub
+2025-12-15 17:29:21.417 RedLemon[24842:190291] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:21.417 RedLemon[24842:190291] 🔍 Track 1 type: sub
+2025-12-15 17:29:21.417 RedLemon[24842:190291] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:21.417 RedLemon[24842:190291] 🔍 Track 2 type: sub
+2025-12-15 17:29:21.417 RedLemon[24842:190291] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:21.417 RedLemon[24842:190291] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-15 17:29:21.417 RedLemon[24842:190291]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:21.417 RedLemon[24842:190291]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:21.417 RedLemon[24842:190291]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:21.417 RedLemon[24842:190291]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:21.418 RedLemon[24842:190291] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-15 17:29:21.418 RedLemon[24842:190291]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:21.418 RedLemon[24842:190291]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:21.418 RedLemon[24842:190291]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:21.418 RedLemon[24842:190291]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:22.251 RedLemon[24842:190127] 🔄 MPV: Executing PENDING SEEK to 72.7s after FILE_LOADED
+2025-12-15 17:29:22.253 RedLemon[24842:190127] ⏱️ Watch Party: Duration available (7758.3s), triggering ready signal
+2025-12-15 17:29:22.253 RedLemon[24842:190127] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-15 17:29:22.261 RedLemon[24842:190291] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:22.261 RedLemon[24842:190291]    Payload keys: type, senderId, timestamp, position, isPlaying
+2025-12-15 17:29:22.262 RedLemon[24842:190290] ✅ Realtime: Message broadcast complete
+2025-12-15 17:29:22.308 RedLemon[24842:190290] 📨 Realtime: Received broadcast message
+2025-12-15 17:29:22.308 RedLemon[24842:190290]    Payload keys: isPlaying, position, senderId, type, timestamp
+2025-12-15 17:29:22.309 RedLemon[24842:190290] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:22.309 RedLemon[24842:190290] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 17:29:22.309 RedLemon[24842:190290] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 17:29:22.367 RedLemon[24842:190127] ✅ Watch Party: READY signal sent successfully
+2025-12-15 17:29:22.367 RedLemon[24842:190127] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:22.367 RedLemon[24842:190127] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 Track 0 type: sub
+2025-12-15 17:29:22.408 RedLemon[24842:190199] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 Track 1 type: sub
+2025-12-15 17:29:22.408 RedLemon[24842:190199] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 Track 2 type: sub
+2025-12-15 17:29:22.408 RedLemon[24842:190199] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 Track 3 type: video
+2025-12-15 17:29:22.408 RedLemon[24842:190199] 🔍 Track 4 type: audio
+2025-12-15 17:29:22.409 RedLemon[24842:190199] 🔍 Track 5 type: sub
+2025-12-15 17:29:22.409 RedLemon[24842:190199] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:22.409 RedLemon[24842:190199] 🔍 Track 6 type: sub
+2025-12-15 17:29:22.409 RedLemon[24842:190199] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:22.409 RedLemon[24842:190199] 🔍 Track 7 type: sub
+2025-12-15 17:29:22.409 RedLemon[24842:190199] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:22.409 RedLemon[24842:190199] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:22.409 RedLemon[24842:190199]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:22.409 RedLemon[24842:190199]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:22.409 RedLemon[24842:190199]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:22.409 RedLemon[24842:190199]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:22.410 RedLemon[24842:190199] ✅ SubtitleService: Scanned 7 tracks (Attempt 2/5)
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:22.410 RedLemon[24842:190199]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:22.411 RedLemon[24842:190199]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:22.411 RedLemon[24842:190199]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:22.411 RedLemon[24842:190199]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:22.411 RedLemon[24842:190199]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 0 type: sub
+2025-12-15 17:29:22.419 RedLemon[24842:190199] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 1 type: sub
+2025-12-15 17:29:22.419 RedLemon[24842:190199] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 2 type: sub
+2025-12-15 17:29:22.419 RedLemon[24842:190199] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 3 type: video
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 4 type: audio
+2025-12-15 17:29:22.419 RedLemon[24842:190199] 🔍 Track 5 type: sub
+2025-12-15 17:29:22.419 RedLemon[24842:190199] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199] 🔍 Track 6 type: sub
+2025-12-15 17:29:22.420 RedLemon[24842:190199] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199] 🔍 Track 7 type: sub
+2025-12-15 17:29:22.420 RedLemon[24842:190199] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:22.420 RedLemon[24842:190199]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:22.421 RedLemon[24842:190199] ✅ SubtitleService: Scanned 7 tracks (Attempt 2/5)
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:22.421 RedLemon[24842:190199]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:22.422 RedLemon[24842:190199]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:23.504 RedLemon[24842:190199] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:23.504 RedLemon[24842:190199] 🔍 Track 0 type: sub
+2025-12-15 17:29:23.504 RedLemon[24842:190199] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:23.505 RedLemon[24842:190199] 🔍 Track 1 type: sub
+2025-12-15 17:29:23.505 RedLemon[24842:190199] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:23.505 RedLemon[24842:190199] 🔍 Track 2 type: sub
+2025-12-15 17:29:23.506 RedLemon[24842:190199] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:23.506 RedLemon[24842:190199] 🔍 Track 3 type: video
+2025-12-15 17:29:23.506 RedLemon[24842:190199] 🔍 Track 4 type: audio
+2025-12-15 17:29:23.506 RedLemon[24842:190199] 🔍 Track 5 type: sub
+2025-12-15 17:29:23.506 RedLemon[24842:190199] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:23.506 RedLemon[24842:190199] 🔍 Track 6 type: sub
+2025-12-15 17:29:23.507 RedLemon[24842:190199] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:23.507 RedLemon[24842:190199] 🔍 Track 7 type: sub
+2025-12-15 17:29:23.507 RedLemon[24842:190199] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:23.507 RedLemon[24842:190199] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:23.507 RedLemon[24842:190199]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:23.508 RedLemon[24842:190199]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:23.508 RedLemon[24842:190199]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:23.508 RedLemon[24842:190199]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:23.508 RedLemon[24842:190199]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:23.508 RedLemon[24842:190199]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:23.509 RedLemon[24842:190199]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:23.509 RedLemon[24842:190199] ✅ SubtitleService: Scanned 7 tracks (Attempt 3/5)
+2025-12-15 17:29:23.509 RedLemon[24842:190199]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:23.514 RedLemon[24842:190199]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:23.516 RedLemon[24842:190199]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:23.517 RedLemon[24842:190199]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:23.517 RedLemon[24842:190199]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:23.517 RedLemon[24842:190199]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:23.518 RedLemon[24842:190199]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:23.518 RedLemon[24842:190290] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:23.518 RedLemon[24842:190290] 🔍 Track 0 type: sub
+2025-12-15 17:29:23.520 RedLemon[24842:190290] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:23.520 RedLemon[24842:190290] 🔍 Track 1 type: sub
+2025-12-15 17:29:23.520 RedLemon[24842:190290] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:23.520 RedLemon[24842:190290] 🔍 Track 2 type: sub
+2025-12-15 17:29:23.520 RedLemon[24842:190290] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:23.520 RedLemon[24842:190290] 🔍 Track 3 type: video
+2025-12-15 17:29:23.520 RedLemon[24842:190290] 🔍 Track 4 type: audio
+2025-12-15 17:29:23.521 RedLemon[24842:190290] 🔍 Track 5 type: sub
+2025-12-15 17:29:23.521 RedLemon[24842:190290] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:23.521 RedLemon[24842:190290] 🔍 Track 6 type: sub
+2025-12-15 17:29:23.521 RedLemon[24842:190290] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:23.521 RedLemon[24842:190290] 🔍 Track 7 type: sub
+2025-12-15 17:29:23.521 RedLemon[24842:190290] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:23.521 RedLemon[24842:190290] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:23.521 RedLemon[24842:190290]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:23.522 RedLemon[24842:190290] ✅ SubtitleService: Scanned 7 tracks (Attempt 3/5)
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:23.522 RedLemon[24842:190290]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:23.523 RedLemon[24842:190290]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:23.523 RedLemon[24842:190290]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:24.524 RedLemon[24842:190178] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:24.524 RedLemon[24842:190178] 🔍 Track 0 type: sub
+2025-12-15 17:29:24.525 RedLemon[24842:190178] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:24.525 RedLemon[24842:190178] 🔍 Track 1 type: sub
+2025-12-15 17:29:24.525 RedLemon[24842:190178] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:24.525 RedLemon[24842:190178] 🔍 Track 2 type: sub
+2025-12-15 17:29:24.525 RedLemon[24842:190178] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:24.526 RedLemon[24842:190178] 🔍 Track 3 type: video
+2025-12-15 17:29:24.526 RedLemon[24842:190178] 🔍 Track 4 type: audio
+2025-12-15 17:29:24.526 RedLemon[24842:190178] 🔍 Track 5 type: sub
+2025-12-15 17:29:24.526 RedLemon[24842:190178] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:24.526 RedLemon[24842:190178] 🔍 Track 6 type: sub
+2025-12-15 17:29:24.526 RedLemon[24842:190178] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:24.526 RedLemon[24842:190178] 🔍 Track 7 type: sub
+2025-12-15 17:29:24.527 RedLemon[24842:190178] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178] ✅ SubtitleService: Scanned 7 tracks (Attempt 4/5)
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:24.527 RedLemon[24842:190178]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:24.528 RedLemon[24842:190178]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:24.528 RedLemon[24842:190178]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:24.528 RedLemon[24842:190178]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:24.528 RedLemon[24842:190178]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:24.528 RedLemon[24842:190178]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:24.528 RedLemon[24842:190291] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:24.529 RedLemon[24842:190291] 🔍 Track 0 type: sub
+2025-12-15 17:29:24.529 RedLemon[24842:190291] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:24.530 RedLemon[24842:190291] 🔍 Track 1 type: sub
+2025-12-15 17:29:24.530 RedLemon[24842:190291] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:24.531 RedLemon[24842:190291] 🔍 Track 2 type: sub
+2025-12-15 17:29:24.531 RedLemon[24842:190291] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:24.531 RedLemon[24842:190291] 🔍 Track 3 type: video
+2025-12-15 17:29:24.531 RedLemon[24842:190291] 🔍 Track 4 type: audio
+2025-12-15 17:29:24.531 RedLemon[24842:190291] 🔍 Track 5 type: sub
+2025-12-15 17:29:24.531 RedLemon[24842:190291] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:24.532 RedLemon[24842:190291] 🔍 Track 6 type: sub
+2025-12-15 17:29:24.532 RedLemon[24842:190291] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:24.533 RedLemon[24842:190291] 🔍 Track 7 type: sub
+2025-12-15 17:29:24.534 RedLemon[24842:190291] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:24.534 RedLemon[24842:190291] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:24.534 RedLemon[24842:190291]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:24.535 RedLemon[24842:190291]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:24.535 RedLemon[24842:190291]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:24.535 RedLemon[24842:190291]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:24.535 RedLemon[24842:190291]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:24.536 RedLemon[24842:190291]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:24.536 RedLemon[24842:190291]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:24.541 RedLemon[24842:190291] ✅ SubtitleService: Scanned 7 tracks (Attempt 4/5)
+2025-12-15 17:29:24.542 RedLemon[24842:190291]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:24.542 RedLemon[24842:190291]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:24.543 RedLemon[24842:190291]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:24.543 RedLemon[24842:190291]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:24.543 RedLemon[24842:190291]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:24.544 RedLemon[24842:190291]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:24.544 RedLemon[24842:190291]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:25.553 RedLemon[24842:190174] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:25.553 RedLemon[24842:190174] 🔍 Track 0 type: sub
+2025-12-15 17:29:25.553 RedLemon[24842:190174] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:25.553 RedLemon[24842:190174] 🔍 Track 1 type: sub
+2025-12-15 17:29:25.553 RedLemon[24842:190174] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:25.554 RedLemon[24842:190174] 🔍 Track 2 type: sub
+2025-12-15 17:29:25.554 RedLemon[24842:190174] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:25.554 RedLemon[24842:190174] 🔍 Track 3 type: video
+2025-12-15 17:29:25.554 RedLemon[24842:190174] 🔍 Track 4 type: audio
+2025-12-15 17:29:25.554 RedLemon[24842:190174] 🔍 Track 5 type: sub
+2025-12-15 17:29:25.554 RedLemon[24842:190174] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:25.555 RedLemon[24842:190174] 🔍 Track 6 type: sub
+2025-12-15 17:29:25.573 RedLemon[24842:190174] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:25.573 RedLemon[24842:190174] 🔍 Track 7 type: sub
+2025-12-15 17:29:25.573 RedLemon[24842:190174] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:25.574 RedLemon[24842:190174] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:25.574 RedLemon[24842:190174]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:25.574 RedLemon[24842:190174] ✅ SubtitleService: Scanned 7 tracks (Attempt 5/5)
+2025-12-15 17:29:25.575 RedLemon[24842:190174]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:25.575 RedLemon[24842:190174]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:25.575 RedLemon[24842:190174]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:25.575 RedLemon[24842:190174]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:25.575 RedLemon[24842:190174]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:25.576 RedLemon[24842:190174]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:25.576 RedLemon[24842:190174]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:25.576 RedLemon[24842:190174] 🔍 MPV track-list/count: 8
+2025-12-15 17:29:25.576 RedLemon[24842:190174] 🔍 Track 0 type: sub
+2025-12-15 17:29:25.576 RedLemon[24842:190174] ✅ Found subtitle track: ID=1, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), external=1
+2025-12-15 17:29:25.577 RedLemon[24842:190174] 🔍 Track 1 type: sub
+2025-12-15 17:29:25.577 RedLemon[24842:190174] ✅ Found subtitle track: ID=2, lang=en, title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, external=1
+2025-12-15 17:29:25.577 RedLemon[24842:190174] 🔍 Track 2 type: sub
+2025-12-15 17:29:25.577 RedLemon[24842:190174] ✅ Found subtitle track: ID=3, lang=en, title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], external=1
+2025-12-15 17:29:25.577 RedLemon[24842:190174] 🔍 Track 3 type: video
+2025-12-15 17:29:25.577 RedLemon[24842:190174] 🔍 Track 4 type: audio
+2025-12-15 17:29:25.578 RedLemon[24842:190174] 🔍 Track 5 type: sub
+2025-12-15 17:29:25.578 RedLemon[24842:190174] ✅ Found subtitle track: ID=4, lang=en-US, title=nil, external=0
+2025-12-15 17:29:25.578 RedLemon[24842:190174] 🔍 Track 6 type: sub
+2025-12-15 17:29:25.579 RedLemon[24842:190174] ✅ Found subtitle track: ID=5, lang=en-US, title=SDH, external=0
+2025-12-15 17:29:25.579 RedLemon[24842:190174] 🔍 Track 7 type: sub
+2025-12-15 17:29:25.580 RedLemon[24842:190174] ✅ Found subtitle track: ID=6, lang=fr-CA, title=Canadian, external=0
+2025-12-15 17:29:25.580 RedLemon[24842:190174] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[1]: ID=1, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', Lang='en', Ext=1
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[2]: ID=2, Title='Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', Lang='en', Ext=1
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[3]: ID=3, Title='Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', Lang='en', Ext=1
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[4]: ID=4, Title='nil', Lang='en-US', Ext=0
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[5]: ID=5, Title='SDH', Lang='en-US', Ext=0
+2025-12-15 17:29:25.580 RedLemon[24842:190174]    Start[6]: ID=6, Title='Canadian', Lang='fr-CA', Ext=0
+2025-12-15 17:29:25.581 RedLemon[24842:190174] ✅ SubtitleService: Scanned 7 tracks (Attempt 5/5)
+2025-12-15 17:29:25.581 RedLemon[24842:190174]    Track: ID=0, Title=Off, External=0
+2025-12-15 17:29:25.581 RedLemon[24842:190174]    Track: ID=1, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH), External=1
+2025-12-15 17:29:25.581 RedLemon[24842:190174]    Track: ID=2, Title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264, External=1
+2025-12-15 17:29:25.581 RedLemon[24842:190174]    Track: ID=3, Title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX], External=1
+2025-12-15 17:29:25.582 RedLemon[24842:190174]    Track: ID=4, Title=Track 4, External=0
+2025-12-15 17:29:25.582 RedLemon[24842:190174]    Track: ID=5, Title=SDH, External=0
+2025-12-15 17:29:25.582 RedLemon[24842:190174]    Track: ID=6, Title=Canadian, External=0
+2025-12-15 17:29:46.541 RedLemon[24842:190127] 🖱️ Mouse: x=307/1366 y=448/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 17:30:10.981 RedLemon[24842:190127] 🖱️ Mouse: x=73/1366 y=40/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 17:30:19.200 RedLemon[24842:190127] 🖱️ Mouse: x=560/1366 y=114/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 17:30:19.864 RedLemon[24842:190127] 🖱️ Mouse: x=643/1366 y=102/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 17:30:20.409 RedLemon[24842:190127] 🖱️ Mouse: x=743/1366 y=0/768 | Exit: 0 Controls: 1 Chat: 0
+📄 Subtitle request: L3N1YnRpdGxlLzM0MzMw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3433052-8356778.zip
+⚠️ onVideoReady called again - ignoring to prevent loops
+✅ Download complete: 75907 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Smile 2 SDH.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡ MPVPlayerViewModel: Tracks populated, triggering delayed auto-selection
+🌐 Selecting English audio and subtitle tracks...
+📊 Current subtitle track: 3
+📊 Found 0 audio tracks
+📊 Found 4 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+   Subtitle: ID=1 lang=en title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)
+   Subtitle: ID=2 lang=en title=Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264
+   Subtitle: ID=3 lang=en title=Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]
+📊 After filtering: 3 actual subtitle tracks
+📊 Current subtitle track: 3
+✅ Found English subtitle track: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH) (ID: 1)
+🔍 Analyzing subtitle compatibility...
+✅ Good version match: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)
+✅ Good version match: Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264
+✅ Good version match: Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]
+✅ Good version match: Smile.2.2024.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX]
+✅ Good version match: Smile 2 - US 4k - English - Hearing Impaired - UPC 191329261934
+📝 Set subtitle track to: 1 (async, visibility enabled)
+✅ Good version match: Smile 2 - US 4k - English - UPC 191329261934
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 1
+[MPV] (+) Video --vid=1 (*) (h264 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en-US (*) (eac3 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en-US (subrip)
+[MPV] Subs  --sid=5 --slang=en-US 'SDH' (subrip)
+[MPV] Subs  --sid=6 --slang=fr-CA 'Canadian' (subrip)
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🔍 Track 1: en-US | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en-US (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: en-US | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: en-US (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 8 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en-US', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 6 - ID: 5, lang: 'en-US', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 5) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 1850 (Embedded: 1000, Match: 0, Clean: 600, SDH: 250)
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+ MPV Event: 20
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765837762.253158,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt29268110"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x960 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en-US (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en-US (subrip)
+[MPV] Subs  --sid=5 --slang=en-US 'SDH' (subrip)
+[MPV] Subs  --sid=6 --slang=fr-CA 'Canadian' (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x960 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=en-US (*) (eac3 [Dolby Digital Plus + Dolby Atmos] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en-US (subrip)
+[MPV] (+) Subs  --sid=5 --slang=en-US 'SDH' (subrip)
+[MPV] Subs  --sid=6 --slang=fr-CA 'Canadian' (subrip)
+📊 Current subtitle track: 5
+📊 Current subtitle track: 5
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 5
+📊 Current subtitle track: 5
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 5
+📊 Current subtitle track: 5
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 5
+📊 Current subtitle track: 5
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 8 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264 (SDH)', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Smile.2.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Smile.2.2024.720p.WEBRip.x264.AAC5.1-[YTS.MX]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en-US', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 6 - ID: 5, lang: 'en-US', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 5) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 1850 (Embedded: 1000, Match: 0, Clean: 600, SDH: 250)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Smile 2 at 98s
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ [EventsConfig] Fetched movie_events version 1348 with 453 movies
+✅ [EventsConfig] Using cached movie_events config (version 1348, 453 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

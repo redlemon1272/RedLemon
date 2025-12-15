@@ -290,14 +290,37 @@ struct ScheduleManagementView: View {
         .task {
             refreshData()
         }
-        .alert("Move Movie", isPresented: $isShowingMoveDialog) {
-            TextField("Target Position (1-\(eventConfigMovies.count))", text: $moveTargetIndex)
-            Button("Cancel", role: .cancel) { }
-            Button("Move") {
-                performMoveToPosition()
+        .sheet(isPresented: $isShowingMoveDialog) {
+            VStack(spacing: 20) {
+                Text("Move Movie to Position")
+                    .font(.headline)
+                
+                Text("Enter the new position number (1-\(eventConfigMovies.count)):")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                TextField("Position", text: $moveTargetIndex)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(width: 100)
+                    .onSubmit {
+                        performMoveToPosition()
+                    }
+                
+                HStack {
+                    Button("Cancel") {
+                        isShowingMoveDialog = false
+                    }
+                    .keyboardShortcut(.cancelAction)
+                    
+                    Button("Move") {
+                        performMoveToPosition()
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .buttonStyle(.borderedProminent)
+                }
             }
-        } message: {
-            Text("Enter the new position number for this movie.")
+            .padding()
+            .frame(width: 300, height: 200)
         }
     }
     

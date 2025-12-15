@@ -168,7 +168,7 @@ struct ScheduleManagementView: View {
                             .padding()
                     } else {
                         ForEach(filteredMovies, id: \.index) { item in
-                             HStack {
+                            HStack(alignment: .center, spacing: 12) {
                                 Text("\(item.index + 1)")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
@@ -186,6 +186,63 @@ struct ScheduleManagementView: View {
                                 
                                 Spacer()
                                 
+                                // Reordering Controls
+                                VStack(spacing: 2) {
+                                    Button(action: {
+                                        moveMovie(from: item.index, to: item.index - 1)
+                                    }) {
+                                        Image(systemName: "chevron.up")
+                                            .font(.system(size: 10, weight: .bold))
+                                            .foregroundColor(item.index > 0 ? .white : .gray.opacity(0.3))
+                                            .padding(4)
+                                            .background(Color.black.opacity(0.4))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(.plain)
+                                    .disabled(item.index == 0)
+                                    
+                                    Button(action: {
+                                        moveMovie(from: item.index, to: item.index + 1)
+                                    }) {
+                                        Image(systemName: "chevron.down")
+                                            .font(.system(size: 10, weight: .bold))
+                                            .foregroundColor(item.index < filteredMovies.count - 1 ? .white : .gray.opacity(0.3))
+                                            .padding(4)
+                                            .background(Color.black.opacity(0.4))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(.plain)
+                                    .disabled(item.index >= filteredMovies.count - 1)
+                                }
+                                
+                                Button(action: {
+                                    movieToMoveIndex = item.index
+                                    moveTargetIndex = "" // Reset
+                                    isShowingMoveDialog = true
+                                }) {
+                                    Image(systemName: "arrow.turn.down.right")
+                                        .font(.system(size: 10, weight: .bold))
+                                        .foregroundColor(.white)
+                                        .padding(4)
+                                        .background(Color.blue.opacity(0.8))
+                                        .clipShape(Circle())
+                                }
+                                .buttonStyle(.plain)
+                                .help("Move to specific position")
+                                
+                                Button(action: {
+                                    playNow(movieIndex: item.index)
+                                }) {
+                                    Image(systemName: "play.circle.fill")
+                                        .font(.system(size: 14))
+                                        .foregroundColor(.green)
+                                        .padding(4)
+                                        .background(Color.white.opacity(0.1))
+                                        .clipShape(Circle())
+                                }
+                                .buttonStyle(.plain)
+                                .help("Play Now (Force Schedule Start)")
+
                                 if let rating = item.movie.imdbRating {
                                     Text("★ \(rating)")
                                         .font(.caption)
@@ -196,7 +253,7 @@ struct ScheduleManagementView: View {
                                 Button(action: {
                                     boostMovie(item.movie)
                                 }) {
-                                    Text("Boost") // Just text, no icon for simplicity
+                                    Text("Boost")
                                         .font(.caption.weight(.bold))
                                         .foregroundColor(.blue)
                                         .padding(.horizontal, 8)
@@ -215,74 +272,10 @@ struct ScheduleManagementView: View {
                                         .padding(4)
                                 }
                                 .buttonStyle(.plain)
-                                .padding(.leading, 8)
                             }
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
                             .background(item.index % 2 == 0 ? Color.white.opacity(0.05) : Color.clear)
-                            .overlay(
-                                // Edit Mode Controls (Reordering)
-                                HStack {
-                                    Spacer()
-                                    VStack(spacing: 2) {
-                                        Button(action: {
-                                            moveMovie(from: item.index, to: item.index - 1)
-                                        }) {
-                                            Image(systemName: "chevron.up")
-                                                .font(.system(size: 10, weight: .bold))
-                                                .foregroundColor(item.index > 0 ? .white : .gray.opacity(0.3))
-                                                .padding(4)
-                                                .background(Color.black.opacity(0.4))
-                                                .clipShape(Circle())
-                                        }
-                                        .buttonStyle(.plain)
-                                        .disabled(item.index == 0)
-                                        
-                                        Button(action: {
-                                            moveMovie(from: item.index, to: item.index + 1)
-                                        }) {
-                                            Image(systemName: "chevron.down")
-                                                .font(.system(size: 10, weight: .bold))
-                                                .foregroundColor(item.index < filteredMovies.count - 1 ? .white : .gray.opacity(0.3))
-                                                .padding(4)
-                                                .background(Color.black.opacity(0.4))
-                                                .clipShape(Circle())
-                                        }
-                                        .buttonStyle(.plain)
-                                        .disabled(item.index >= filteredMovies.count - 1)
-                                    }
-                                    .padding(.trailing, 40) // Make space for delete button
-                                    
-                                    Button(action: {
-                                        movieToMoveIndex = item.index
-                                        moveTargetIndex = "" // Reset
-                                        isShowingMoveDialog = true
-                                    }) {
-                                        Image(systemName: "arrow.turn.down.right")
-                                            .font(.system(size: 10, weight: .bold))
-                                            .foregroundColor(.white)
-                                            .padding(4)
-                                            .background(Color.blue.opacity(0.8))
-                                            .clipShape(Circle())
-                                    }
-                                    .buttonStyle(.plain)
-                                    .help("Move to specific position")
-                                    .padding(.trailing, 4)
-                                    
-                                    Button(action: {
-                                        playNow(movieIndex: item.index)
-                                    }) {
-                                        Image(systemName: "play.circle.fill")
-                                            .font(.system(size: 14))
-                                            .foregroundColor(.green)
-                                            .padding(4)
-                                            .background(Color.white.opacity(0.1))
-                                            .clipShape(Circle())
-                                    }
-                                    .buttonStyle(.plain)
-                                    .help("Play Now (Force Schedule Start)")
-                                }
-                            )
                             
                             Divider()
                         }

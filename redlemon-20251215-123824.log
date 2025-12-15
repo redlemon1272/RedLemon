@@ -1,0 +1,1068 @@
+2025-12-15 12:38:31.582 RedLemon[11492:71602] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-15 12:38:31.582 RedLemon[11492:71602] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-15 12:38:31.668 RedLemon[11492:71689] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 12:38:31.671 RedLemon[11492:71602] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-15 12:38:31.739 RedLemon[11492:71602] ✅ Playback state reset complete - starting in browse view
+2025-12-15 12:38:31.739 RedLemon[11492:71602] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-15 12:38:31.739 RedLemon[11492:71602] 🧪 Testing Profile: debug
+2025-12-15 12:38:31.739 RedLemon[11492:71689] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 12:38:31.740 RedLemon[11492:71602] ✅ Keychain: Found stored username: ursinho
+2025-12-15 12:38:31.740 RedLemon[11492:71602] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-15 12:38:31.740 RedLemon[11492:71689] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-15 12:38:31.997 RedLemon[11492:71703] 📡 SupabaseClient: User lookup response received (261 bytes)
+2025-12-15 12:38:32.002 RedLemon[11492:71703] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-15 12:38:32.002 RedLemon[11492:71703] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:38:32.003 RedLemon[11492:71602] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:38:32.034 RedLemon[11492:71602] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:38:32.034 RedLemon[11492:71602] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:32.034 RedLemon[11492:71602] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:32.035 RedLemon[11492:71602] 🚀 RedLemon: Starting HTTP server...
+2025-12-15 12:38:32.035 RedLemon[11492:71602] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-15 12:38:32.055 RedLemon[11492:71602] ✅ RedLemon: HTTPServer instance created
+2025-12-15 12:38:32.055 RedLemon[11492:71703] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-15 12:38:34.055 RedLemon[11492:71602] ✅ RedLemon: Server marked as ready
+2025-12-15 12:38:34.098 RedLemon[11492:71602] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-15 12:38:34.098 RedLemon[11492:71602] 🔍 Performing startup checks...
+2025-12-15 12:38:34.098 RedLemon[11492:71602] ✅ Username-based authentication ready
+2025-12-15 12:38:34.098 RedLemon[11492:71602] 🔍 Performing startup checks...
+2025-12-15 12:38:34.098 RedLemon[11492:71602] ✅ Username-based authentication ready
+2025-12-15 12:38:34.098 RedLemon[11492:71602] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1340 with 456 movies
+✅ [EventsConfig] Using cached movie_events config (version 1340, 456 movies)
+✅ [EventsView] Loaded 456 movies from config version 1340
+🗓 AppState: Updated schedule epoch to 2025-12-15 15:50:05 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-15 17:45:05 +0000
+⏰ AppState: Scheduling update in 393 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt0480687","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"60e4639cb41e57e23df8252e767be794a3e475a3","imdb_id":"tt0480687","poster_url":"https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:25:13.329237","last_activity":"2025-12-15T16:24:17.607525","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/FRERVZQZXHFAO43/Hall.Pass.2011.1080p.BluRay.x264.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: [{"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T15:38:39.902848","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"FAC8415C-C8D2-46F8-933F-45ECA4FCB7CD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"d97a4a4a-d9dc-11f0-b350-0a58a9feac02":{"metas":[{"phx_ref":"GIF0NVVVJ7DS1L_N","last_seen":"2025-12-15T17:38:21Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e09c1308-d9dc-11f0-9591-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OB_75OF7hwjG","last_seen":"2025-12-15T17:38:32Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+📨 Received: {"ref":"496906A3-C72F-4161-87A5-B4C9F304E59D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.671s (RTT: 71ms)
+   Local:  2025-12-15 17:38:34 +0000
+   Server: 2025-12-15 17:38:34 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20)...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:30","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}, 
+ {"id":"3A58","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:32:22.613537","last_activity":"2025-12-15T17:32:35","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/66V7363DQ4JPA45/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "D9099C29-2A75-4DA3-B812-A47117D66DBD", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}, 
+ {"id":"G4CQ","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:25:22.776228","last_activity":"2025-12-15T17:25:37","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/ARIYOWGO6ABKC125/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "126C7995-76C8-4D48-AB82-3A2F33BFE2A6", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"9TKL","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:20:38.067564","last_activity":"2025-12-15T17:21:29","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/IPVNSQOBGNAYC111/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "FFC80C1B-74CB-412F-A493-EFD97B947C7A", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"UPP8","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:04:21.545615","last_activity":"2025-12-15T17:04:59","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/Z66XAV3I3LTDI71/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "24E1B68F-E9D6-414A-8FEC-3B357C8B5A01", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"9MML","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:57:41.090986","last_activity":"2025-12-15T16:57:55","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/RN5XN3IQGPPDI74/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "10D1C25C-D6D4-402D-AA44-981B8BD13374", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"UAAM","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:47:49.363405","last_activity":"2025-12-15T16:49:04","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/TVBJYACKNBJWA115/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "EEC58588-3DF7-466C-B678-E274C20E51DA", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"KCUN","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:29:51.946723","last_activity":"2025-12-15T16:30:02","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/HTCZQBQBJTOMI96/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "3FDCA438-EC8C-4A4B-99F0-7D945F4762A1", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"event_tt0480687","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"60e4639cb41e57e23df8252e767be794a3e475a3","imdb_id":"tt0480687","poster_url":"https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:25:13.329237","last_activity":"2025-12-15T16:24:17.607525","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/FRERVZQZXHFAO43/Hall.Pass.2011.1080p.BluRay.x264.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt0134273","name":"8MM","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"b6b6541f5ac91aadcbf394bd723a3d9bee28e510","imdb_id":"tt0134273","poster_url":"https://images.metahub.space/poster/small/tt0134273/img","backdrop_url":"https://images.metahub.space/background/medium/tt0134273/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:45:23.781511","last_activity":"2025-12-15T15:45:23.884338","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/WLPCNG2VKVENE21/8MM.1999.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T15:38:39.902848","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt22048412","name":"MaXXXine","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"0a2746873b386c4949669dc39bf57ad2c7672a0b","imdb_id":"tt22048412","poster_url":"https://images.metahub.space/poster/small/tt22048412/img","backdrop_url":"https://images.metahub.space/background/medium/tt22048412/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:00:04.570524","last_activity":"2025-12-15T15:04:21.758571","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/3WQNREVAUFELW21/MaXXXine.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt0417741","name":"Harry Potter and the Half-Blood Prince","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ab26661d77c28607893c7c2ebcc524da73f6cef7","imdb_id":"tt0417741","poster_url":"https://images.metahub.space/poster/small/tt0417741/img","backdrop_url":"https://images.metahub.space/background/medium/tt0417741/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T14:54:22.985395","last_activity":"2025-12-15T14:54:23.071199","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/5DNXQMKJNFSQI70/Harry.Potter.and.the.Half.Blood.Prince.2009.1080p.BluRay.DTS.x264-WiKi.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt2692250","name":"Night at the Museum: Secret of the Tomb","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"6cd0604ab2adb0a3e72d5f643b8ad33e39c80057","imdb_id":"tt2692250","poster_url":"https://images.metahub.space/poster/small/tt2692250/img","backdrop_url":"https://images.metahub.space/background/medium/tt2692250/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:39:13.076369","last_activity":"2025-12-15T07:39:13.137487","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CMPUWECMBYXQQ124/Night.at.the.Museum.Secret.of.the.Tomb.2014.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt10838180","name":"The Matrix Resurrections","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"364bc1d0f36f7cc2d72eea8c7ecfcf11cfb23374","imdb_id":"tt10838180","poster_url":"https://images.metahub.space/poster/small/tt10838180/img","backdrop_url":"https://images.metahub.space/background/medium/tt10838180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T05:09:14.377953","last_activity":"2025-12-15T05:23:25.167996","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/QNKXVWFRSOQY274/The.Matrix.Resurrections.2021.1080p.BluRay.1600MB.DD2.0.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_pt-BR_tt10838180","name":"The Matrix Resurrections","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"2f518c85c5a2435dc5b42913db1b539bace4647b","imdb_id":"tt10838180","poster_url":"https://images.metahub.space/poster/small/tt10838180/img","backdrop_url":"https://images.metahub.space/background/medium/tt10838180/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T05:23:09.664289","last_activity":"2025-12-15T05:23:09.742134","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/K64QV4B3XXODA45/The.Matrix.Resurrections.2021.1080p.WEBRip.Dublado.mkv","description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"7B7BBC33-C435-4C36-89E1-E09D40466DCA","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+✅ Loaded 9 rooms (total: 9)
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 070873E2-117F-4546-91FA-1C4B1C4A9358]
+[ INFO ] GET /api/metadata/meta/movie/tt0480687 [request-id: 2993F9AB-1CCF-40AF-9D0D-4E36C55BD562]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 96E7B3EC-25C5-4F9A-8DB3-7401656B6E90]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: A8FA2869-F2D7-4386-AF9F-667B20E662F2]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 7D0FC43B-53A6-455F-9466-B765770328BA]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 153E8D34-312A-4511-8CAB-1690F94E3E6E]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 1B2CEEB6-F67A-4590-ACF9-9C5DB6C61E07]
+2025-12-15 12:38:36.855 RedLemon[11492:71703] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:38:36.857 RedLemon[11492:71739] 📦 Decoded CinemetaMeta - videos count: -1
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 1E6AD595-7DCC-4B51-98CA-A52F5A8035F0]
+2025-12-15 12:38:36.867 RedLemon[11492:71724] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-15 12:38:36.868 RedLemon[11492:71724] 📦 Decoded CinemetaMeta - videos count: -1
+💾 Cache SET: Metadata[meta_movie_tt0480687]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+[ INFO ] GET /api/metadata/meta/movie/tt0480687 [request-id: 88024D62-9DCA-4B65-8A90-AC0DCCCFAA88]
+2025-12-15 12:38:36.871 RedLemon[11492:71703] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:38:36.892 RedLemon[11492:71724] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:38:36.893 RedLemon[11492:71686] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:38:36.896 RedLemon[11492:71703] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:38:36.897 RedLemon[11492:71689] 📦 Decoded CinemetaMeta - videos count: 0
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt0480687]
+🚪 Joining room: VBWL
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room VBWL...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+🔌 Setting up Realtime channel: watch-party:VBWL
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+[ INFO ] GET /api/metadata/meta/movie/tt0480687 [request-id: F871EC45-3C04-4576-B079-BB6F15AA526F]
+2025-12-15 12:38:38.376 RedLemon[11492:71602] ✅ Guest joined room VBWL in database
+2025-12-15 12:38:38.480 RedLemon[11492:71671] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-15 12:38:38.480 RedLemon[11492:71671]    Payload keys: chatText, position, chatUsername, senderId, type, timestamp
+2025-12-15 12:38:38.481 RedLemon[11492:71724] ✅ Realtime: Message broadcast complete
+2025-12-15 12:38:38.517 RedLemon[11492:71739] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:38.517 RedLemon[11492:71739]    Payload keys: type, senderId, chatText, position, chatUsername, timestamp
+2025-12-15 12:38:38.517 RedLemon[11492:71739] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-15 12:38:38.517 RedLemon[11492:71739] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-15 12:38:38.517 RedLemon[11492:71739] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:38.540 RedLemon[11492:71602] 👋 Received: Guest 'ursinho' joined room VBWL
+2025-12-15 12:38:43.612 RedLemon[11492:71689] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:43.612 RedLemon[11492:71689]    Payload keys: timestamp, senderId, chatUsername, type, chatText, position
+2025-12-15 12:38:43.612 RedLemon[11492:71689] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2025-12-15 12:38:43.612 RedLemon[11492:71689] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-15 12:38:43.613 RedLemon[11492:71689] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:43.613 RedLemon[11492:71602] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-15 12:38:43.625 RedLemon[11492:71602] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2025-12-15 12:38:43.647 RedLemon[11492:71602] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:38:43.647 RedLemon[11492:71602] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:38:43.662 RedLemon[11492:71602] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:38:43.662 RedLemon[11492:71602] 📨 Lobby: Received Room UPDATE from Realtime
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt0480687
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Hall Pass
+🔍 [DEBUG] Successfully created MediaItem from meta: Hall Pass
+✅ Lobby: Loaded metadata for Hall Pass
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:30","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+📡 Joined channel: realtime:watch-party:VBWL
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:38.962662","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+✅ Lobby: Refreshed room state. isPlaying: false
+🔌 Setting up Realtime channel: watch-party:VBWL
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:VBWL, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"23482AE3-E815-4412-AAA2-351CD03C413D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":109454548,"event":"*","filter":"id=eq.VBWL","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:VBWL"},"topic":"realtime:watch-party:VBWL"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{"df4de38c-d9dc-11f0-a3a1-0a58a9feac02":{"metas":[{"phx_ref":"GIF0N6qJfo4pk-9C","phx_ref_prev":"GIF0N6qHBZspkwaK","is_host":true,"joined_at":1765820310.9173021,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e41a286c-d9dc-11f0-a89e-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OXxdvRTdYV7N","is_host":false,"joined_at":1765820318.45197,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e41a286c-d9dc-11f0-a89e-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OXxpVozdYUJJ","phx_ref_prev":"GIF0OXxdvRTdYV7N","is_host":false,"joined_at":1765820318.462881,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"e41a286c-d9dc-11f0-a89e-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OXxdvRTdYV7N","is_host":false,"joined_at":1765820318.45197,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:38.962662","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:38.962662","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:38.962662","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "VBWL", "name": "Hall Pass", "season": null, "episode": null, "imdb_id": "tt0480687", "playlist": [{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}], "is_public": true, "created_at": "2025-12-15T17:38:30.635409", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0480687/img", "description": null, "stream_hash": "8def6e7d4180dab0cb77174bca8868c67adc08e8", "backdrop_url": "https://images.metahub.space/background/medium/tt0480687/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-15T17:38:43", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-15T17:38:44.192Z","old_record":{"id": "VBWL"}},"ids":[109454548]},"topic":"realtime:watch-party:VBWL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "VBWL", "name": "Hall Pass", "season": null, "episode": null, "imdb_id": "tt0480687", "playlist": [{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}], "is_public": true, "created_at": "2025-12-15T17:38:30.635409", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt0480687/img", "description": null, "stream_hash": "8def6e7d4180dab0cb77174bca8868c67adc08e8", "backdrop_url": "https://images.metahub.space/background/medium/tt0480687/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-15T17:38:44", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-15T17:38:44.290Z","old_record":{"id": "VBWL"}},"ids":[109454548]},"topic":"realtime:watch-party:VBWL"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T172025-12-15 12:38:43.714 RedLemon[11492:71602] ✅ Guest: Synced stream details from host (Hash: 8def6e7d)
+2025-12-15 12:38:43.715 RedLemon[11492:71602] 🎬 Guest: Fetch took 0.089s, waiting 3.161s
+2025-12-15 12:38:47.126 RedLemon[11492:71602] 🎬 Guest: Starting playback after countdown
+2025-12-15 12:38:47.126 RedLemon[11492:71602] 🎬 Guest: Launching player for Hall Pass
+2025-12-15 12:38:47.240 RedLemon[11492:71602]    Quality: 1080p
+2025-12-15 12:38:47.240 RedLemon[11492:71602]    Mode: watchParty
+2025-12-15 12:38:47.240 RedLemon[11492:71602] 📡 Fetching metadata for tt0480687...
+2025-12-15 12:38:47.243 RedLemon[11492:71602] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0480687/img
+2025-12-15 12:38:47.243 RedLemon[11492:71602] ⏳ Background art loading...
+2025-12-15 12:38:47.243 RedLemon[11492:71602] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0480687/img
+2025-12-15 12:38:47.244 RedLemon[11492:71602] ⏳ Logo loading...
+2025-12-15 12:38:47.292 RedLemon[11492:71602] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-15 12:38:47.293 RedLemon[11492:71602] 🎬 GUEST: Fetching subtitles for shared stream...
+:38:44","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:44","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:44","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:44","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"VBWL","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"8def6e7d4180dab0cb77174bca8868c67adc08e8","imdb_id":"tt0480687","poster_url":"https://images.metahub.space/poster/small/tt0480687/img","backdrop_url":"https://images.metahub.space/background/medium/tt0480687/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:38:30.635409","last_activity":"2025-12-15T17:38:44","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "692B3A51-48B3-41FA-AF77-8B2F2895CF75", "mediaItem": {"id": "tt0480687", "logo": "https://images.metahub.space/logo/medium/tt0480687/img", "name": "Hall Pass", "type": "movie", "year": "2011", "genres": ["Comedy", "Romance"], "poster": "https://images.metahub.space/poster/small/tt0480687/img", "runtime": "105 min", "background": "https://images.metahub.space/background/medium/tt0480687/img", "imdbRating": "5.9", "description": "Rick and Fred, two husbands who are having difficulty in their marriages, are given a Hall Pass by their wives: for one week, they can do whatever they want.", "releaseInfo": "2011"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🎬 PlayerVM: Starting playback for: Hall Pass
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"d97a4a4a-d9dc-11f0-b350-0a58a9feac02":{"metas":[{"phx_ref":"GIF0O23LjNnS1PBD","phx_ref_prev":"GIF0NVVVJ7DS1L_N","last_seen":"2025-12-15T17:38:47Z","room_id":"VBWL","started_at":"2025-12-15T17:38:47Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"d97a4a4a-d9dc-11f0-b350-0a58a9feac02":{"metas":[{"phx_ref":"GIF0NVVVJ7DS1L_N","last_seen":"2025-12-15T17:38:21Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 8AF20489-A744-4156-83AD-F150CBE5E4AB]
+2025-12-15 12:38:47.296 RedLemon[11492:71602] ✅ Logo loaded successfully
+2025-12-15 12:38:47.350 RedLemon[11492:71602] ✅ Background art loaded successfully
+2025-12-15 12:38:47.546 RedLemon[11492:71602] ✅ GUEST: Found 10 subtitles
+2025-12-15 12:38:47.558 RedLemon[11492:71602] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Ha, subtitles: 10
+2025-12-15 12:38:47.628 RedLemon[11492:71602] ✅ Stream ready, starting playback...
+2025-12-15 12:38:47.628 RedLemon[11492:71602] 🖥️ WindowManager: enterFullscreen() called
+2025-12-15 12:38:47.629 RedLemon[11492:71602]    Window: <SwiftUI.SwiftUIWindow: 0x7fdd318a4850>
+2025-12-15 12:38:47.629 RedLemon[11492:71602]    Is fullscreen: 0
+2025-12-15 12:38:47.629 RedLemon[11492:71602]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-15 12:38:47.702 RedLemon[11492:71602] 🖼️ Setting up MPV with native macOS video output...
+2025-12-15 12:38:47.711 RedLemon[11492:71602] ✅ MPV initialized with native GPU rendering
+2025-12-15 12:38:47.730 RedLemon[11492:71602] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-15 12:38:47.730 RedLemon[11492:71602] 🎉 Starting watch party sync - Room: VBWL, Host: NO
+2025-12-15 12:38:47.730 RedLemon[11492:71602] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-15 12:38:47.796 RedLemon[11492:71602] 🔄 Starting chat polling for room: VBWL
+2025-12-15 12:38:47.796 RedLemon[11492:71602] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-15 12:38:47.796 RedLemon[11492:71602] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-15 12:38:47.796 RedLemon[11492:71602] 🎬🎬🎬 Subtitles: 10
+2025-12-15 12:38:47.797 RedLemon[11492:71602] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Hall Pass
+2025-12-15 12:38:47.797 RedLemon[11492:71602] 🎬🎬🎬 streamURL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Ha
+2025-12-15 12:38:47.797 RedLemon[11492:71602] 🎬🎬🎬 subtitles: 10
+2025-12-15 12:38:47.798 RedLemon[11492:71602] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-15 12:38:47.824 RedLemon[11492:71686] 🎬 MPV: Current video filename set to: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+2025-12-15 12:38:47.824 RedLemon[11492:71686] 🎬 MPV loadVideo called with URL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H, autoplay: false
+2025-12-15 12:38:47.824 RedLemon[11492:71686] ⏸️ Loading in paused mode (watch party)
+2025-12-15 12:38:47.825 RedLemon[11492:71686] 🔗 URL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+2025-12-15 12:38:47.825 RedLemon[11492:71686] 🎬 MPV executing: loadfile "https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4"
+2025-12-15 12:38:47.825 RedLemon[11492:71686] 🎬 MPV loadfile result: 0
+2025-12-15 12:38:47.825 RedLemon[11492:71686] ✅ MPV loadfile succeeded (started paused)
+2025-12-15 12:38:48.185 RedLemon[11492:71602] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-15 12:38:48.846 RedLemon[11492:71689] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:48.846 RedLemon[11492:71689]    Payload keys: position, type, isPlaying, timestamp, senderId
+2025-12-15 12:38:48.846 RedLemon[11492:71689] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:48.847 RedLemon[11492:71689] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:48.847 RedLemon[11492:71689] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:48.847 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:49.406 RedLemon[11492:71670] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:49.406 RedLemon[11492:71670]    Payload keys: timestamp, isPlaying, type, senderId, position
+2025-12-15 12:38:49.406 RedLemon[11492:71670] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:49.407 RedLemon[11492:71670] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 12:38:49.407 RedLemon[11492:71670] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:49.407 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:49.407 RedLemon[11492:71602] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:49.408 RedLemon[11492:71602] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-15 12:38:49.935 RedLemon[11492:71602] ⏱️ Watch Party: Duration available (6694.8s), triggering ready signal
+2025-12-15 12:38:49.935 RedLemon[11492:71602] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-15 12:38:49.943 RedLemon[11492:71670] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:49.944 RedLemon[11492:71670]    Payload keys: position, senderId, timestamp, isPlaying, type
+2025-12-15 12:38:49.945 RedLemon[11492:71797] ✅ Realtime: Message broadcast complete
+2025-12-15 12:38:49.947 RedLemon[11492:71602] ✅ Watch Party: READY signal sent successfully
+2025-12-15 12:38:49.981 RedLemon[11492:71821] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:49.981 RedLemon[11492:71821]    Payload keys: senderId, timestamp, type, position, isPlaying
+2025-12-15 12:38:49.982 RedLemon[11492:71821] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:49.982 RedLemon[11492:71821] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 12:38:49.982 RedLemon[11492:71821] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:49.982 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:49.982 RedLemon[11492:71602] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:38:50.847 RedLemon[11492:71821] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:50.847 RedLemon[11492:71821]    Payload keys: type, senderId, position, isPlaying, timestamp
+2025-12-15 12:38:50.848 RedLemon[11492:71821] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:50.848 RedLemon[11492:71821] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:50.848 RedLemon[11492:71821] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:50.848 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:51.071 RedLemon[11492:71689] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:51.071 RedLemon[11492:71689]    Payload keys: position, senderId, type, timestamp, isPlaying
+2025-12-15 12:38:51.072 RedLemon[11492:71689] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:51.072 RedLemon[11492:71689] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-15 12:38:51.072 RedLemon[11492:71689] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:51.073 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:51.205 RedLemon[11492:71602] 🔍 MPV track-list/count: 2
+2025-12-15 12:38:51.205 RedLemon[11492:71602] 🔍 Track 0 type: video
+2025-12-15 12:38:51.205 RedLemon[11492:71602] 🔍 Track 1 type: audio
+2025-12-15 12:38:51.205 RedLemon[11492:71602] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-15 12:38:51.205 RedLemon[11492:71602]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:38:51.222 RedLemon[11492:71797] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-15 12:38:51.222 RedLemon[11492:71797] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw
+🔍 Subtitle search request: tt0480687 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0480687 (movie)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"df4de38c-d9dc-11f0-a3a1-0a58a9feac02":{"metas":[{"phx_ref":"GIF0O2zpyOopk7tK","phx_ref_prev":"GIF0N6qJfo4pk-9C","is_host":true,"joined_at":1765820327.307982,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"df4de38c-d9dc-11f0-a3a1-0a58a9feac02":{"metas":[{"phx_ref":"GIF0N6qJfo4pk-9C","phx_ref_prev":"GIF0N6qHBZspkwaK","is_host":true,"joined_at":1765820310.9173021,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:VBWL"}
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Hall Pass 1080p BluRay x264 [EN] (score: 20)
+   [2] Hall.Pass.2011.720p.BluRay.x264-Felony [EN] (score: 20)
+   [3] Hall.Pass.2011.BrRip.720p.x264.YIFY [EN] (score: 18)
+   [4] hall.pass.2011.extended.complete.bluray-tapas [EN] (score: 15)
+   [5] Hall.Pass.DVDRip.XviD-DEFACED [EN] (score: 5)
+   [6] Hall.Pass.DVDRip.XviD-DEFACED [EN] (score: 5)
+   [7] Hall.Pass.2011.720p.Bluray.x264.DTS.Felony [EN] (score: 5)
+   [8] Hall.Pass.2011.BRRip.XviD.AC3-SANTi [EN] (score: 5)
+   [9] Hall Pass 2011 DVDRip XviD-MAXSPEED [EN] (score: 5)
+   [10] f-hallpass720 [EN] (score: 5)
+✅ Subtitle search returned 10 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Ha
+   Display Title: Hall Pass
+   Subtitle URLs: 10
+      [0] Hall Pass 1080p BluRay x264
+      [1] Hall.Pass.2011.720p.BluRay.x264-Felony
+      [2] Hall.Pass.2011.BrRip.720p.x264.YIFY
+      [3] hall.pass.2011.extended.complete.bluray-tapas
+      [4] Hall.Pass.DVDRip.XviD-DEFACED
+      [5] Hall.Pass.DVDRip.XviD-DEFACED
+      [6] Hall.Pass.2011.720p.Bluray.x264.DTS.Felony
+      [7] Hall.Pass.2011.BRRip.XviD.AC3-SANTi
+      [8] Hall Pass 2011 DVDRip XviD-MAXSPEED
+      [9] f-hallpass720
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=VBWL, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:VBWL
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:VBWL, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Hall Pass
+   IMDB: tt0480687
+   URL: https://chi3-4.download.real-debrid.com/d/CS2STHZFAGQJK23/Ha...
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+📡 Fetching metadata for tt0480687 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e41a286c-d9dc-11f0-a89e-0a58a9feac02":{"metas":[{"phx_ref":"GIF0O6hiGBHdYSVB","phx_ref_prev":"GIF0OXxpVozdYUJJ","is_host":false,"joined_at":1765820327.789751,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"e41a286c-d9dc-11f0-a89e-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OXxpVozdYUJJ","phx_ref_prev":"GIF0OXxdvRTdYV7N","is_host":false,"joined_at":1765820318.462881,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e09c1308-d9dc-11f0-9591-0a58a9feac02":{"metas":[{"phx_ref":"GIF0O6uElFl7h5qK","phx_ref_prev":"GIF0OB_75OF7hwjG","last_seen":"2025-12-15T17:38:47Z","room_id":"VBWL","started_at":"2025-12-15T17:38:47Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"e09c1308-d9dc-11f0-9591-0a58a9feac02":{"metas":[{"phx_ref":"GIF0OB_75OF7hwjG","last_seen":"2025-12-15T17:38:32Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0480687/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0480687/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0480687/img...
+📡 SocialService: Updated status - Watching: Hall Pass
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIF0O6hiGBHdYSVB)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-15 17:45:05 +0000
+⏰ AppState: Scheduling update in 377 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"VBWL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765820329.86017,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] File tags:
+[MPV] Comment: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 2 total tracks
+ℹ️ No suitable English subtitles found
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765820329.935247,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x798 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"VBWL","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+⚡ Ultra-gentle sync: 1.005x to fix 140ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765820331.509736,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 1 audio tracks
+   Audio: ID=1 lang=eng title=nil
+✅ Found English audio track: English
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+📝 Started watch history tracking
+📝 Loading external subtitles (delayed execution)...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw [request-id: AE71F740-ABB8-42AD-81A9-85B1C5D5E5AE]
+2025-12-15 12:38:51.965 RedLemon[11492:71724] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2A4860A6-A08C-49D8-A66C-78983D7E8F50.vtt
+2025-12-15 12:38:51.965 RedLemon[11492:71724] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_2A4860A6-A08C-49D8-A66C-789
+2025-12-15 12:38:51.973 RedLemon[11492:71724] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:51.974 RedLemon[11492:71724] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYwNi00NDE5MjUuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628616-547834.zip
+✅ Download complete: 68030 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall Pass 1080p BluRay x264.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYwNi00NDE5MjUuemlw [request-id: 9C0882CB-DCFF-4F01-9828-AEC6368B0134]
+caution: filename not matched:  Hall.Pass.2011.720p.BluRay.x264-Felony-[ subtitle-English ][ www.napisy.jcom.pl ].srt
+2025-12-15 12:38:52.788 RedLemon[11492:71689] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A8CAE6AE-E57B-40EF-9033-A74F6A97F869.vtt
+2025-12-15 12:38:52.788 RedLemon[11492:71689] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A8CAE6AE-E57B-40EF-9033-A74
+2025-12-15 12:38:52.805 RedLemon[11492:71689] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:52.805 RedLemon[11492:71689] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxMi02MTUwNTQuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628606-441925.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+✅ Download complete: 63169 bytes
+📦 Detected ZIP archive, extracting...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+⚠️ No specific episode match found, using first file: Hall.Pass.2011.720p.BluRay.x264-Felony-[ subtitle-English ][ www.napisy.jcom.pl ].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxMi02MTUwNTQuemlw [request-id: 01B905DC-0FA2-4C35-B67F-8AC1301C2991]
+2025-12-15 12:38:52.969 RedLemon[11492:71689] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:52.970 RedLemon[11492:71689]    Payload keys: isPlaying, senderId, timestamp, type, position
+2025-12-15 12:38:52.971 RedLemon[11492:71689] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:52.971 RedLemon[11492:71689] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:52.971 RedLemon[11492:71689] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:52.996 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:53.333 RedLemon[11492:71797] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_13BB36DB-6E85-4E69-A4C7-DB6FE52D0922.vtt
+2025-12-15 12:38:53.333 RedLemon[11492:71797] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_13BB36DB-6E85-4E69-A4C7-DB6
+2025-12-15 12:38:53.372 RedLemon[11492:71797] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:53.373 RedLemon[11492:71797] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxNy0xNDYwOTQwLnppcA==
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628612-615054.zip
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":1.5015015015015016,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+[MPV] (+) Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+⚡ Ultra-gentle sync: 1.005x to fix 195ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+✅ Download complete: 57355 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall.Pass.2011.BrRip.720p.x264.YIFY.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNy0xNDYwOTQwLnppcA== [request-id: BDFDE4DE-DAE3-4FCB-83F1-047DAEDF4B43]
+2025-12-15 12:38:53.967 RedLemon[11492:71686] ✅ Subtitle 4 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_666E54E1-EC5A-4992-9DD6-4F8692646939.vtt
+2025-12-15 12:38:53.967 RedLemon[11492:71686] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_666E54E1-EC5A-4992-9DD6-4F8
+2025-12-15 12:38:54.015 RedLemon[11492:71686] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:54.016 RedLemon[11492:71686] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYyMC00NDE2MjMuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628617-1460940.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+✅ Download complete: 58560 bytes
+📦 Detected ZIP archive, extracting...
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⚠️ No specific episode match found, using first file: EN Ori (SDH Removed).srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYyMC00NDE2MjMuemlw [request-id: DD863A6A-7511-4E79-8F7A-F956D2CB8D31]
+2025-12-15 12:38:54.432 RedLemon[11492:71686] ✅ Subtitle 5 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4B4AE739-2AE0-4C10-AF55-D142CDC613F1.vtt
+2025-12-15 12:38:54.432 RedLemon[11492:71686] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4B4AE739-2AE0-4C10-AF55-D14
+2025-12-15 12:38:54.457 RedLemon[11492:71686] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:54.457 RedLemon[11492:71686] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxOC00NDE3Njcuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628620-441623.zip
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+✅ Download complete: 60481 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall Pass (2011) CD1.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxOC00NDE3Njcuemlw [request-id: 2F7C0D20-A408-48D6-BFC0-3457F02606C8]
+2025-12-15 12:38:54.946 RedLemon[11492:71689] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:54.946 RedLemon[11492:71689]    Payload keys: senderId, position, timestamp, type, isPlaying
+2025-12-15 12:38:54.947 RedLemon[11492:71689] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:54.947 RedLemon[11492:71689] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:54.947 RedLemon[11492:71689] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:54.960 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:55.184 RedLemon[11492:71670] ✅ Subtitle 6 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BBFF55EB-8666-419F-ADB6-F6D102A23C29.vtt
+2025-12-15 12:38:55.184 RedLemon[11492:71670] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BBFF55EB-8666-419F-ADB6-F6D
+2025-12-15 12:38:55.207 RedLemon[11492:71670] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:55.207 RedLemon[11492:71670] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxMC00NDE4MTMuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628618-441767.zip
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+[MPV] (+) Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":3.5452118785452122,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+⚡ Ultra-gentle sync: 1.005x to fix 249ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+✅ Download complete: 57640 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: defaced-hallpass-a.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxMC00NDE4MTMuemlw [request-id: C989ADF0-E701-4EFD-B955-CBF3A040A537]
+2025-12-15 12:38:55.867 RedLemon[11492:71670] ✅ Subtitle 7 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B9C31F87-EBEA-4E1F-B979-684DEAAFA351.vtt
+2025-12-15 12:38:55.867 RedLemon[11492:71670] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B9C31F87-EBEA-4E1F-B979-684
+2025-12-15 12:38:55.917 RedLemon[11492:71670] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:55.917 RedLemon[11492:71670] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYwOC00NDIwNDEuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628610-441813.zip
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] (+) Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+✅ Download complete: 57329 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall.Pass.2011.720p.Bluray.x264.DTS.Felony.srt
+✅ Extraction successful
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYwOC00NDIwNDEuemlw [request-id: 0CD91FBD-BAEE-49DD-A6DD-1AD28E555523]
+caution: filename not matched:  Hall.Pass.2011.BRRip.XviD.AC3-SANTi-[ subtitle-English ][ www.napisy.jcom.pl ].srt
+2025-12-15 12:38:56.690 RedLemon[11492:71724] ✅ Subtitle 8 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_86BFA95F-B1D3-4541-A314-352A7A636432.vtt
+2025-12-15 12:38:56.690 RedLemon[11492:71724] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_86BFA95F-B1D3-4541-A314-352
+2025-12-15 12:38:56.699 RedLemon[11492:71724] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:56.699 RedLemon[11492:71724] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYwNS00NDE5ODIuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628608-442041.zip
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] (+) Subs  --sid=7 --slang=en 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony' (webvtt) (external)
+✅ Download complete: 63163 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall.Pass.2011.BRRip.XviD.AC3-SANTi-[ subtitle-English ][ www.napisy.jcom.pl ].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYwNS00NDE5ODIuemlw [request-id: 32E0433C-FA22-4178-B650-246875ABEAB2]
+2025-12-15 12:38:56.973 RedLemon[11492:71686] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:56.973 RedLemon[11492:71686]    Payload keys: position, senderId, type, isPlaying, timestamp
+2025-12-15 12:38:56.974 RedLemon[11492:71686] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:56.974 RedLemon[11492:71686] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:56.974 RedLemon[11492:71686] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:57.009 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:57.334 RedLemon[11492:71670] ✅ Subtitle 9 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_DA402DF4-3517-4080-A558-4AA3555AD6D9.vtt
+2025-12-15 12:38:57.335 RedLemon[11492:71670] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_DA402DF4-3517-4080-A558-4AA
+2025-12-15 12:38:57.386 RedLemon[11492:71670] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:57.386 RedLemon[11492:71670] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYwMy00NDIyNzUuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628605-441982.zip
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":5.588922255588923,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+⚡ Ultra-gentle sync: 1.005x to fix 274ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+[MPV] Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+✅ Download complete: 62923 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=7 --slang=en 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony' (webvtt) (external)
+⚠️ No specific episode match found, using first file: Hall Pass (2011) DVDRip XviD-MAXSPEED.srt
+✅ Extraction successful
+[MPV] (+) Subs  --sid=8 --slang=en 'Hall.Pass.2011.BRRip.XviD.AC3-SANTi' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYwMy00NDIyNzUuemlw [request-id: 0795825E-6C3C-40B7-A6F9-B7B9550C57E0]
+2025-12-15 12:38:57.914 RedLemon[11492:71797] ✅ Subtitle 10 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9D469302-77F1-4084-891A-82D1BED8EA1C.vtt
+2025-12-15 12:38:57.914 RedLemon[11492:71797] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9D469302-77F1-4084-891A-82D
+2025-12-15 12:38:57.964 RedLemon[11492:71797] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:38:57.965 RedLemon[11492:71797] 🔍 MPV track-list/count: 12
+2025-12-15 12:38:57.980 RedLemon[11492:71797] 🔍 Track 0 type: video
+2025-12-15 12:38:57.980 RedLemon[11492:71797] 🔍 Track 1 type: audio
+2025-12-15 12:38:57.980 RedLemon[11492:71797] 🔍 Track 2 type: sub
+2025-12-15 12:38:57.981 RedLemon[11492:71797] ✅ Found subtitle track: ID=1, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2025-12-15 12:38:57.981 RedLemon[11492:71797] 🔍 Track 3 type: sub
+2025-12-15 12:38:57.981 RedLemon[11492:71797] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.720p.BluRay.x264-Felony, external=1
+2025-12-15 12:38:57.982 RedLemon[11492:71797] 🔍 Track 4 type: sub
+2025-12-15 12:38:57.982 RedLemon[11492:71797] ✅ Found subtitle track: ID=3, lang=en, title=Hall.Pass.2011.BrRip.720p.x264.YIFY, external=1
+2025-12-15 12:38:57.982 RedLemon[11492:71797] 🔍 Track 5 type: sub
+2025-12-15 12:38:57.982 RedLemon[11492:71797] ✅ Found subtitle track: ID=4, lang=en, title=hall.pass.2011.extended.complete.bluray-tapas, external=1
+2025-12-15 12:38:57.982 RedLemon[11492:71797] 🔍 Track 6 type: sub
+2025-12-15 12:38:57.983 RedLemon[11492:71797] ✅ Found subtitle track: ID=5, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:38:57.983 RedLemon[11492:71797] 🔍 Track 7 type: sub
+2025-12-15 12:38:57.983 RedLemon[11492:71797] ✅ Found subtitle track: ID=6, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:38:57.983 RedLemon[11492:71797] 🔍 Track 8 type: sub
+2025-12-15 12:38:57.984 RedLemon[11492:71797] ✅ Found subtitle track: ID=7, lang=en, title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, external=1
+2025-12-15 12:38:57.984 RedLemon[11492:71797] 🔍 Track 9 type: sub
+2025-12-15 12:38:57.984 RedLemon[11492:71797] ✅ Found subtitle track: ID=8, lang=en, title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, external=1
+2025-12-15 12:38:57.984 RedLemon[11492:71797] 🔍 Track 10 type: sub
+2025-12-15 12:38:57.984 RedLemon[11492:71797] ✅ Found subtitle track: ID=9, lang=en, title=Hall Pass 2011 DVDRip XviD-MAXSPEED, external=1
+2025-12-15 12:38:57.984 RedLemon[11492:71797] 🔍 Track 11 type: sub
+2025-12-15 12:38:57.984 RedLemon[11492:71797] ✅ Found subtitle track: ID=10, lang=en, title=f-hallpass720, external=1
+2025-12-15 12:38:57.984 RedLemon[11492:71797] 📊 Total subtitle tracks found: 11 (including Off if needed)
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[1]: ID=1, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[2]: ID=2, Title='Hall.Pass.2011.720p.BluRay.x264-Felony', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[3]: ID=3, Title='Hall.Pass.2011.BrRip.720p.x264.YIFY', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[4]: ID=4, Title='hall.pass.2011.extended.complete.bluray-tapas', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[5]: ID=5, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[6]: ID=6, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[7]: ID=7, Title='Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', Lang='en', Ext=1
+2025-12-15 12:38:57.985 RedLemon[11492:71797]    Start[8]: ID=8, Title='Hall.Pass.2011.BRRip.XviD.AC3-SANTi', Lang='en', Ext=1
+2025-12-15 12:38:57.986 RedLemon[11492:71797]    Start[9]: ID=9, Title='Hall Pass 2011 DVDRip XviD-MAXSPEED', Lang='en', Ext=1
+2025-12-15 12:38:57.986 RedLemon[11492:71797]    Start[10]: ID=10, Title='f-hallpass720', Lang='en', Ext=1
+2025-12-15 12:38:57.988 RedLemon[11492:71797] ✅ SubtitleService: Scanned 11 tracks (Attempt 1/5)
+2025-12-15 12:38:57.988 RedLemon[11492:71797]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:38:57.988 RedLemon[11492:71797]    Track: ID=1, Title=Hall Pass 1080p BluRay x264, External=1
+2025-12-15 12:38:57.989 RedLemon[11492:71797]    Track: ID=2, Title=Hall.Pass.2011.720p.BluRay.x264-Felony, External=1
+2025-12-15 12:38:57.989 RedLemon[11492:71797]    Track: ID=3, Title=Hall.Pass.2011.BrRip.720p.x264.YIFY, External=1
+2025-12-15 12:38:57.989 RedLemon[11492:71797]    Track: ID=4, Title=hall.pass.2011.extended.complete.bluray-tapas, External=1
+2025-12-15 12:38:57.989 RedLemon[11492:71797]    Track: ID=5, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:38:57.990 RedLemon[11492:71797]    Track: ID=6, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:38:57.990 RedLemon[11492:71797]    Track: ID=7, Title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, External=1
+2025-12-15 12:38:57.991 RedLemon[11492:71797]    Track: ID=8, Title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, External=1
+2025-12-15 12:38:57.991 RedLemon[11492:71797]    Track: ID=9, Title=Hall Pass 2011 DVDRip XviD-MAXSPEED, External=1
+2025-12-15 12:38:57.991 RedLemon[11492:71797]    Track: ID=10, Title=f-hallpass720, External=1
+2025-12-15 12:38:59.002 RedLemon[11492:71797] 🔍 MPV track-list/count: 12
+2025-12-15 12:38:59.002 RedLemon[11492:71797] 🔍 Track 0 type: video
+2025-12-15 12:38:59.002 RedLemon[11492:71797] 🔍 Track 1 type: audio
+2025-12-15 12:38:59.002 RedLemon[11492:71797] 🔍 Track 2 type: sub
+2025-12-15 12:38:59.004 RedLemon[11492:71797] ✅ Found subtitle track: ID=1, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2025-12-15 12:38:59.005 RedLemon[11492:71797] 🔍 Track 3 type: sub
+2025-12-15 12:38:59.005 RedLemon[11492:71797] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.720p.BluRay.x264-Felony, external=1
+2025-12-15 12:38:59.006 RedLemon[11492:71797] 🔍 Track 4 type: sub
+2025-12-15 12:38:59.006 RedLemon[11492:71797] ✅ Found subtitle track: ID=3, lang=en, title=Hall.Pass.2011.BrRip.720p.x264.YIFY, external=1
+2025-12-15 12:38:59.006 RedLemon[11492:71797] 🔍 Track 5 type: sub
+2025-12-15 12:38:59.006 RedLemon[11492:71797] ✅ Found subtitle track: ID=4, lang=en, title=hall.pass.2011.extended.complete.bluray-tapas, external=1
+2025-12-15 12:38:59.006 RedLemon[11492:71797] 🔍 Track 6 type: sub
+2025-12-15 12:38:59.007 RedLemon[11492:71797] ✅ Found subtitle track: ID=5, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:38:59.007 RedLemon[11492:71797] 🔍 Track 7 type: sub
+2025-12-15 12:38:59.007 RedLemon[11492:71797] ✅ Found subtitle track: ID=6, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:38:59.007 RedLemon[11492:71797] 🔍 Track 8 type: sub
+2025-12-15 12:38:59.008 RedLemon[11492:71797] ✅ Found subtitle track: ID=7, lang=en, title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, external=1
+2025-12-15 12:38:59.008 RedLemon[11492:71797] 🔍 Track 9 type: sub
+2025-12-15 12:38:59.008 RedLemon[11492:71797] ✅ Found subtitle track: ID=8, lang=en, title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, external=1
+2025-12-15 12:38:59.008 RedLemon[11492:71797] 🔍 Track 10 type: sub
+2025-12-15 12:38:59.008 RedLemon[11492:71797] ✅ Found subtitle track: ID=9, lang=en, title=Hall Pass 2011 DVDRip XviD-MAXSPEED, external=1
+2025-12-15 12:38:59.008 RedLemon[11492:71797] 🔍 Track 11 type: sub
+2025-12-15 12:38:59.009 RedLemon[11492:71670] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:59.009 RedLemon[11492:71797] ✅ Found subtitle track: ID=10, lang=en, title=f-hallpass720, external=1
+2025-12-15 12:38:59.009 RedLemon[11492:71670]    Payload keys: timestamp, type, position, senderId, isPlaying
+2025-12-15 12:38:59.009 RedLemon[11492:71797] 📊 Total subtitle tracks found: 11 (including Off if needed)
+2025-12-15 12:38:59.009 RedLemon[11492:71797]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:38:59.009 RedLemon[11492:71797]    Start[1]: ID=1, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2025-12-15 12:38:59.009 RedLemon[11492:71797]    Start[2]: ID=2, Title='Hall.Pass.2011.720p.BluRay.x264-Felony', Lang='en', Ext=1
+2025-12-15 12:38:59.010 RedLemon[11492:71797]    Start[3]: ID=3, Title='Hall.Pass.2011.BrRip.720p.x264.YIFY', Lang='en', Ext=1
+2025-12-15 12:38:59.010 RedLemon[11492:71797]    Start[4]: ID=4, Title='hall.pass.2011.extended.complete.bluray-tapas', Lang='en', Ext=1
+2025-12-15 12:38:59.010 RedLemon[11492:71670] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:38:59.010 RedLemon[11492:71797]    Start[5]: ID=5, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:38:59.010 RedLemon[11492:71670] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:38:59.010 RedLemon[11492:71797]    Start[6]: ID=6, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:38:59.010 RedLemon[11492:71670] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:59.010 RedLemon[11492:71797]    Start[7]: ID=7, Title='Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', Lang='en', Ext=1
+2025-12-15 12:38:59.011 RedLemon[11492:71797]    Start[8]: ID=8, Title='Hall.Pass.2011.BRRip.XviD.AC3-SANTi', Lang='en', Ext=1
+2025-12-15 12:38:59.011 RedLemon[11492:71797]    Start[9]: ID=9, Title='Hall Pass 2011 DVDRip XviD-MAXSPEED', Lang='en', Ext=1
+2025-12-15 12:38:59.011 RedLemon[11492:71797]    Start[10]: ID=10, Title='f-hallpass720', Lang='en', Ext=1
+2025-12-15 12:38:59.012 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:38:59.013 RedLemon[11492:71797] ✅ SubtitleService: Scanned 11 tracks (Attempt 2/5)
+2025-12-15 12:38:59.013 RedLemon[11492:71797]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:38:59.014 RedLemon[11492:71797]    Track: ID=1, Title=Hall Pass 1080p BluRay x264, External=1
+2025-12-15 12:38:59.014 RedLemon[11492:71797]    Track: ID=2, Title=Hall.Pass.2011.720p.BluRay.x264-Felony, External=1
+2025-12-15 12:38:59.014 RedLemon[11492:71797]    Track: ID=3, Title=Hall.Pass.2011.BrRip.720p.x264.YIFY, External=1
+2025-12-15 12:38:59.015 RedLemon[11492:71797]    Track: ID=4, Title=hall.pass.2011.extended.complete.bluray-tapas, External=1
+2025-12-15 12:38:59.018 RedLemon[11492:71797]    Track: ID=5, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:38:59.021 RedLemon[11492:71797]    Track: ID=6, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:38:59.021 RedLemon[11492:71797]    Track: ID=7, Title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, External=1
+2025-12-15 12:38:59.022 RedLemon[11492:71797]    Track: ID=8, Title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, External=1
+2025-12-15 12:38:59.022 RedLemon[11492:71797]    Track: ID=9, Title=Hall Pass 2011 DVDRip XviD-MAXSPEED, External=1
+2025-12-15 12:38:59.022 RedLemon[11492:71797]    Track: ID=10, Title=f-hallpass720, External=1
+2025-12-15 12:38:59.358 RedLemon[11492:71686] 📨 Realtime: Received broadcast message
+2025-12-15 12:38:59.358 RedLemon[11492:71686]    Payload keys: isPlaying, position, timestamp, senderId, type
+2025-12-15 12:38:59.359 RedLemon[11492:71686] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:38:59.359 RedLemon[11492:71686] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-15 12:38:59.359 RedLemon[11492:71686] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:38:59.386 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:39:00.025 RedLemon[11492:71686] 🔍 MPV track-list/count: 12
+2025-12-15 12:39:00.025 RedLemon[11492:71686] 🔍 Track 0 type: video
+2025-12-15 12:39:00.025 RedLemon[11492:71686] 🔍 Track 1 type: audio
+2025-12-15 12:39:00.025 RedLemon[11492:71686] 🔍 Track 2 type: sub
+2025-12-15 12:39:00.025 RedLemon[11492:71686] ✅ Found subtitle track: ID=1, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2025-12-15 12:39:00.025 RedLemon[11492:71686] 🔍 Track 3 type: sub
+2025-12-15 12:39:00.026 RedLemon[11492:71686] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.720p.BluRay.x264-Felony, external=1
+2025-12-15 12:39:00.026 RedLemon[11492:71686] 🔍 Track 4 type: sub
+2025-12-15 12:39:00.026 RedLemon[11492:71686] ✅ Found subtitle track: ID=3, lang=en, title=Hall.Pass.2011.BrRip.720p.x264.YIFY, external=1
+2025-12-15 12:39:00.026 RedLemon[11492:71686] 🔍 Track 5 type: sub
+2025-12-15 12:39:00.026 RedLemon[11492:71686] ✅ Found subtitle track: ID=4, lang=en, title=hall.pass.2011.extended.complete.bluray-tapas, external=1
+2025-12-15 12:39:00.026 RedLemon[11492:71686] 🔍 Track 6 type: sub
+2025-12-15 12:39:00.027 RedLemon[11492:71686] ✅ Found subtitle track: ID=5, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:00.027 RedLemon[11492:71686] 🔍 Track 7 type: sub
+2025-12-15 12:39:00.027 RedLemon[11492:71686] ✅ Found subtitle track: ID=6, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:00.027 RedLemon[11492:71686] 🔍 Track 8 type: sub
+2025-12-15 12:39:00.027 RedLemon[11492:71686] ✅ Found subtitle track: ID=7, lang=en, title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, external=1
+2025-12-15 12:39:00.027 RedLemon[11492:71686] 🔍 Track 9 type: sub
+2025-12-15 12:39:00.027 RedLemon[11492:71686] ✅ Found subtitle track: ID=8, lang=en, title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, external=1
+2025-12-15 12:39:00.027 RedLemon[11492:71686] 🔍 Track 10 type: sub
+2025-12-15 12:39:00.027 RedLemon[11492:71686] ✅ Found subtitle track: ID=9, lang=en, title=Hall Pass 2011 DVDRip XviD-MAXSPEED, external=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686] 🔍 Track 11 type: sub
+2025-12-15 12:39:00.028 RedLemon[11492:71686] ✅ Found subtitle track: ID=10, lang=en, title=f-hallpass720, external=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686] 📊 Total subtitle tracks found: 11 (including Off if needed)
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[1]: ID=1, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[2]: ID=2, Title='Hall.Pass.2011.720p.BluRay.x264-Felony', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[3]: ID=3, Title='Hall.Pass.2011.BrRip.720p.x264.YIFY', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[4]: ID=4, Title='hall.pass.2011.extended.complete.bluray-tapas', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[5]: ID=5, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[6]: ID=6, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[7]: ID=7, Title='Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', Lang='en', Ext=1
+2025-12-15 12:39:00.028 RedLemon[11492:71686]    Start[8]: ID=8, Title='Hall.Pass.2011.BRRip.XviD.AC3-SANTi', Lang='en', Ext=1
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Start[9]: ID=9, Title='Hall Pass 2011 DVDRip XviD-MAXSPEED', Lang='en', Ext=1
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Start[10]: ID=10, Title='f-hallpass720', Lang='en', Ext=1
+2025-12-15 12:39:00.029 RedLemon[11492:71686] ✅ SubtitleService: Scanned 11 tracks (Attempt 3/5)
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Track: ID=1, Title=Hall Pass 1080p BluRay x264, External=1
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Track: ID=2, Title=Hall.Pass.2011.720p.BluRay.x264-Felony, External=1
+2025-12-15 12:39:00.029 RedLemon[11492:71686]    Track: ID=3, Title=Hall.Pass.2011.BrRip.720p.x264.YIFY, External=1
+2025-12-15 12:39:00.030 RedLemon[11492:71686]    Track: ID=4, Title=hall.pass.2011.extended.complete.bluray-tapas, External=1
+2025-12-15 12:39:00.030 RedLemon[11492:71686]    Track: ID=5, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:00.030 RedLemon[11492:71686]    Track: ID=6, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:00.030 RedLemon[11492:71686]    Track: ID=7, Title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, External=1
+2025-12-15 12:39:00.031 RedLemon[11492:71686]    Track: ID=8, Title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, External=1
+2025-12-15 12:39:00.031 RedLemon[11492:71686]    Track: ID=9, Title=Hall Pass 2011 DVDRip XviD-MAXSPEED, External=1
+2025-12-15 12:39:00.031 RedLemon[11492:71686]    Track: ID=10, Title=f-hallpass720, External=1
+2025-12-15 12:39:00.852 RedLemon[11492:71670] 📨 Realtime: Received broadcast message
+2025-12-15 12:39:00.853 RedLemon[11492:71670]    Payload keys: timestamp, senderId, type, isPlaying, position
+2025-12-15 12:39:00.855 RedLemon[11492:71670] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:39:00.856 RedLemon[11492:71670] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:39:00.856 RedLemon[11492:71670] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:39:00.888 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:39:01.125 RedLemon[11492:71686] 🔍 MPV track-list/count: 12
+2025-12-15 12:39:01.125 RedLemon[11492:71686] 🔍 Track 0 type: video
+2025-12-15 12:39:01.125 RedLemon[11492:71686] 🔍 Track 1 type: audio
+2025-12-15 12:39:01.126 RedLemon[11492:71686] 🔍 Track 2 type: sub
+2025-12-15 12:39:01.126 RedLemon[11492:71686] ✅ Found subtitle track: ID=1, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2025-12-15 12:39:01.126 RedLemon[11492:71686] 🔍 Track 3 type: sub
+2025-12-15 12:39:01.127 RedLemon[11492:71686] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.720p.BluRay.x264-Felony, external=1
+2025-12-15 12:39:01.127 RedLemon[11492:71686] 🔍 Track 4 type: sub
+2025-12-15 12:39:01.127 RedLemon[11492:71686] ✅ Found subtitle track: ID=3, lang=en, title=Hall.Pass.2011.BrRip.720p.x264.YIFY, external=1
+2025-12-15 12:39:01.127 RedLemon[11492:71686] 🔍 Track 5 type: sub
+2025-12-15 12:39:01.127 RedLemon[11492:71686] ✅ Found subtitle track: ID=4, lang=en, title=hall.pass.2011.extended.complete.bluray-tapas, external=1
+2025-12-15 12:39:01.128 RedLemon[11492:71686] 🔍 Track 6 type: sub
+2025-12-15 12:39:01.128 RedLemon[11492:71686] ✅ Found subtitle track: ID=5, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:01.128 RedLemon[11492:71686] 🔍 Track 7 type: sub
+2025-12-15 12:39:01.128 RedLemon[11492:71686] ✅ Found subtitle track: ID=6, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:01.128 RedLemon[11492:71686] 🔍 Track 8 type: sub
+2025-12-15 12:39:01.129 RedLemon[11492:71686] ✅ Found subtitle track: ID=7, lang=en, title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, external=1
+2025-12-15 12:39:01.129 RedLemon[11492:71686] 🔍 Track 9 type: sub
+2025-12-15 12:39:01.129 RedLemon[11492:71686] ✅ Found subtitle track: ID=8, lang=en, title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, external=1
+2025-12-15 12:39:01.129 RedLemon[11492:71686] 🔍 Track 10 type: sub
+2025-12-15 12:39:01.129 RedLemon[11492:71686] ✅ Found subtitle track: ID=9, lang=en, title=Hall Pass 2011 DVDRip XviD-MAXSPEED, external=1
+2025-12-15 12:39:01.130 RedLemon[11492:71686] 🔍 Track 11 type: sub
+2025-12-15 12:39:01.130 RedLemon[11492:71686] ✅ Found subtitle track: ID=10, lang=en, title=f-hallpass720, external=1
+2025-12-15 12:39:01.130 RedLemon[11492:71686] 📊 Total subtitle tracks found: 11 (including Off if needed)
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[1]: ID=1, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[2]: ID=2, Title='Hall.Pass.2011.720p.BluRay.x264-Felony', Lang='en', Ext=1
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[3]: ID=3, Title='Hall.Pass.2011.BrRip.720p.x264.YIFY', Lang='en', Ext=1
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[4]: ID=4, Title='hall.pass.2011.extended.complete.bluray-tapas', Lang='en', Ext=1
+2025-12-15 12:39:01.131 RedLemon[11492:71686]    Start[5]: ID=5, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:01.132 RedLemon[11492:71686]    Start[6]: ID=6, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:01.132 RedLemon[11492:71686]    Start[7]: ID=7, Title='Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', Lang='en', Ext=1
+2025-12-15 12:39:01.132 RedLemon[11492:71686]    Start[8]: ID=8, Title='Hall.Pass.2011.BRRip.XviD.AC3-SANTi', Lang='en', Ext=1
+2025-12-15 12:39:01.132 RedLemon[11492:71686]    Start[9]: ID=9, Title='Hall Pass 2011 DVDRip XviD-MAXSPEED', Lang='en', Ext=1
+2025-12-15 12:39:01.132 RedLemon[11492:71686]    Start[10]: ID=10, Title='f-hallpass720', Lang='en', Ext=1
+2025-12-15 12:39:01.133 RedLemon[11492:71686] ✅ SubtitleService: Scanned 11 tracks (Attempt 4/5)
+2025-12-15 12:39:01.133 RedLemon[11492:71686]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:39:01.133 RedLemon[11492:71686]    Track: ID=1, Title=Hall Pass 1080p BluRay x264, External=1
+2025-12-15 12:39:01.133 RedLemon[11492:71686]    Track: ID=2, Title=Hall.Pass.2011.720p.BluRay.x264-Felony, External=1
+2025-12-15 12:39:01.133 RedLemon[11492:71686]    Track: ID=3, Title=Hall.Pass.2011.BrRip.720p.x264.YIFY, External=1
+2025-12-15 12:39:01.133 RedLemon[11492:71686]    Track: ID=4, Title=hall.pass.2011.extended.complete.bluray-tapas, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=5, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=6, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=7, Title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=8, Title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=9, Title=Hall Pass 2011 DVDRip XviD-MAXSPEED, External=1
+2025-12-15 12:39:01.134 RedLemon[11492:71686]    Track: ID=10, Title=f-hallpass720, External=1
+2025-12-15 12:39:02.151 RedLemon[11492:71689] 🔍 MPV track-list/count: 12
+2025-12-15 12:39:02.151 RedLemon[11492:71689] 🔍 Track 0 type: video
+2025-12-15 12:39:02.153 RedLemon[11492:71689] 🔍 Track 1 type: audio
+2025-12-15 12:39:02.153 RedLemon[11492:71689] 🔍 Track 2 type: sub
+2025-12-15 12:39:02.153 RedLemon[11492:71689] ✅ Found subtitle track: ID=1, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2025-12-15 12:39:02.154 RedLemon[11492:71689] 🔍 Track 3 type: sub
+2025-12-15 12:39:02.154 RedLemon[11492:71689] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.720p.BluRay.x264-Felony, external=1
+2025-12-15 12:39:02.154 RedLemon[11492:71689] 🔍 Track 4 type: sub
+2025-12-15 12:39:02.154 RedLemon[11492:71689] ✅ Found subtitle track: ID=3, lang=en, title=Hall.Pass.2011.BrRip.720p.x264.YIFY, external=1
+2025-12-15 12:39:02.155 RedLemon[11492:71689] 🔍 Track 5 type: sub
+2025-12-15 12:39:02.155 RedLemon[11492:71689] ✅ Found subtitle track: ID=4, lang=en, title=hall.pass.2011.extended.complete.bluray-tapas, external=1
+2025-12-15 12:39:02.155 RedLemon[11492:71689] 🔍 Track 6 type: sub
+2025-12-15 12:39:02.156 RedLemon[11492:71689] ✅ Found subtitle track: ID=5, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:02.156 RedLemon[11492:71689] 🔍 Track 7 type: sub
+2025-12-15 12:39:02.156 RedLemon[11492:71689] ✅ Found subtitle track: ID=6, lang=en, title=Hall.Pass.DVDRip.XviD-DEFACED, external=1
+2025-12-15 12:39:02.156 RedLemon[11492:71689] 🔍 Track 8 type: sub
+2025-12-15 12:39:02.156 RedLemon[11492:71689] ✅ Found subtitle track: ID=7, lang=en, title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, external=1
+2025-12-15 12:39:02.157 RedLemon[11492:71689] 🔍 Track 9 type: sub
+2025-12-15 12:39:02.157 RedLemon[11492:71689] ✅ Found subtitle track: ID=8, lang=en, title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, external=1
+2025-12-15 12:39:02.157 RedLemon[11492:71689] 🔍 Track 10 type: sub
+2025-12-15 12:39:02.157 RedLemon[11492:71689] ✅ Found subtitle track: ID=9, lang=en, title=Hall Pass 2011 DVDRip XviD-MAXSPEED, external=1
+2025-12-15 12:39:02.157 RedLemon[11492:71689] 🔍 Track 11 type: sub
+2025-12-15 12:39:02.158 RedLemon[11492:71689] ✅ Found subtitle track: ID=10, lang=en, title=f-hallpass720, external=1
+2025-12-15 12:39:02.158 RedLemon[11492:71689] 📊 Total subtitle tracks found: 11 (including Off if needed)
+2025-12-15 12:39:02.158 RedLemon[11492:71689]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:39:02.161 RedLemon[11492:71689]    Start[1]: ID=1, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2025-12-15 12:39:02.161 RedLemon[11492:71689]    Start[2]: ID=2, Title='Hall.Pass.2011.720p.BluRay.x264-Felony', Lang='en', Ext=1
+2025-12-15 12:39:02.161 RedLemon[11492:71689]    Start[3]: ID=3, Title='Hall.Pass.2011.BrRip.720p.x264.YIFY', Lang='en', Ext=1
+2025-12-15 12:39:02.162 RedLemon[11492:71689]    Start[4]: ID=4, Title='hall.pass.2011.extended.complete.bluray-tapas', Lang='en', Ext=1
+2025-12-15 12:39:02.162 RedLemon[11492:71689]    Start[5]: ID=5, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:02.162 RedLemon[11492:71689]    Start[6]: ID=6, Title='Hall.Pass.DVDRip.XviD-DEFACED', Lang='en', Ext=1
+2025-12-15 12:39:02.162 RedLemon[11492:71689]    Start[7]: ID=7, Title='Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', Lang='en', Ext=1
+2025-12-15 12:39:02.163 RedLemon[11492:71689]    Start[8]: ID=8, Title='Hall.Pass.2011.BRRip.XviD.AC3-SANTi', Lang='en', Ext=1
+2025-12-15 12:39:02.163 RedLemon[11492:71689]    Start[9]: ID=9, Title='Hall Pass 2011 DVDRip XviD-MAXSPEED', Lang='en', Ext=1
+2025-12-15 12:39:02.163 RedLemon[11492:71689]    Start[10]: ID=10, Title='f-hallpass720', Lang='en', Ext=1
+2025-12-15 12:39:02.163 RedLemon[11492:71689] ✅ SubtitleService: Scanned 11 tracks (Attempt 5/5)
+2025-12-15 12:39:02.163 RedLemon[11492:71689]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:39:02.164 RedLemon[11492:71689]    Track: ID=1, Title=Hall Pass 1080p BluRay x264, External=1
+2025-12-15 12:39:02.164 RedLemon[11492:71689]    Track: ID=2, Title=Hall.Pass.2011.720p.BluRay.x264-Felony, External=1
+2025-12-15 12:39:02.164 RedLemon[11492:71689]    Track: ID=3, Title=Hall.Pass.2011.BrRip.720p.x264.YIFY, External=1
+2025-12-15 12:39:02.164 RedLemon[11492:71689]    Track: ID=4, Title=hall.pass.2011.extended.complete.bluray-tapas, External=1
+2025-12-15 12:39:02.165 RedLemon[11492:71689]    Track: ID=5, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:02.165 RedLemon[11492:71689]    Track: ID=6, Title=Hall.Pass.DVDRip.XviD-DEFACED, External=1
+2025-12-15 12:39:02.165 RedLemon[11492:71689]    Track: ID=7, Title=Hall.Pass.2011.720p.Bluray.x264.DTS.Felony, External=1
+2025-12-15 12:39:02.165 RedLemon[11492:71689]    Track: ID=8, Title=Hall.Pass.2011.BRRip.XviD.AC3-SANTi, External=1
+2025-12-15 12:39:02.166 RedLemon[11492:71689]    Track: ID=9, Title=Hall Pass 2011 DVDRip XviD-MAXSPEED, External=1
+2025-12-15 12:39:02.166 RedLemon[11492:71689]    Track: ID=10, Title=f-hallpass720, External=1
+2025-12-15 12:39:02.896 RedLemon[11492:71670] 📨 Realtime: Received broadcast message
+2025-12-15 12:39:02.897 RedLemon[11492:71670]    Payload keys: position, type, timestamp, senderId, isPlaying
+2025-12-15 12:39:02.899 RedLemon[11492:71670] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:39:02.899 RedLemon[11492:71670] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:39:02.899 RedLemon[11492:71670] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:39:02.935 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+2025-12-15 12:39:04.856 RedLemon[11492:71724] 📨 Realtime: Received broadcast message
+2025-12-15 12:39:04.856 RedLemon[11492:71724]    Payload keys: timestamp, isPlaying, senderId, position, type
+2025-12-15 12:39:04.857 RedLemon[11492:71724] ✅ Realtime: Decoded message type: playbackState, sender: VBWL
+2025-12-15 12:39:04.857 RedLemon[11492:71724] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:39:04.857 RedLemon[11492:71724] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:39:04.888 RedLemon[11492:71602] 🔍 DEBUG: Received sync message - type: playbackState, sender: VBWL
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628603-442275.zip
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+✅ Download complete: 66339 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+⚠️ No specific episode match found, using first file: f-hallpass720.srt
+✅ Extraction successful
+[MPV] Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Hall.Pass.2011.BRRip.XviD.AC3-SANTi' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Subs  --sid=9 --slang=en 'Hall Pass 2011 DVDRip XviD-MAXSPEED' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] Track added:
+📊 Current subtitle track: 10
+👋 Participant left (confirmed): 656daa91-33b4-4688-9135-c982ea52d7c9
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Hall.Pass.2011.BRRip.XviD.AC3-SANTi' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Hall Pass 2011 DVDRip XviD-MAXSPEED' (webvtt) (external)
+[MPV] (+) Subs  --sid=10 --slang=en 'f-hallpass720' (webvtt) (external)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":7.674341007674341,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+⚡ Ultra-gentle sync: 1.005x to fix 348ms drift
+📊 Current subtitle track: 10
+⚡ Playback speed adjusted to 1.00x for sync
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":7.9662996329663,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765820339.780323,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 10
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":9.426092759426092,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+🎬 DisplayLink: reportSwap() (throttled)
+⚡ Ultra-gentle sync: 1.005x to fix 385ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+📊 Current subtitle track: 10
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 10
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 12 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'en', title: 'Hall Pass 1080p BluRay x264', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Hall.Pass.2011.720p.BluRay.x264-Felony', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Hall.Pass.2011.BrRip.720p.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en', title: 'hall.pass.2011.extended.complete.bluray-tapas', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 6 - ID: 5, lang: 'en', title: 'Hall.Pass.DVDRip.XviD-DEFACED', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 7 - ID: 6, lang: 'en', title: 'Hall.Pass.DVDRip.XviD-DEFACED', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 8 - ID: 7, lang: 'en', title: 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 9 - ID: 8, lang: 'en', title: 'Hall.Pass.2011.BRRip.XviD.AC3-SANTi', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 10 - ID: 9, lang: 'en', title: 'Hall Pass 2011 DVDRip XviD-MAXSPEED', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 11 - ID: 10, lang: 'en', title: 'f-hallpass720', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Hall Pass 1080p BluRay x264 (ID: 1) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 600 (Embedded: 0, Match: 600, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.720p.BluRay.x264-Felony' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall.Pass.2011.BrRip.720p.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'hall.pass.2011.extended.complete.bluray-tapas' (webvtt) (external)
+[MPV] Subs  --sid=5 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=6 --slang=en 'Hall.Pass.DVDRip.XviD-DEFACED' (webvtt) (external)
+[MPV] Subs  --sid=7 --slang=en 'Hall.Pass.2011.720p.Bluray.x264.DTS.Felony' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Hall.Pass.2011.BRRip.XviD.AC3-SANTi' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Hall Pass 2011 DVDRip XviD-MAXSPEED' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'f-hallpass720' (webvtt) (external)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":11.469803136469803,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+⚡ Ultra-gentle sync: 1.005x to fix 399ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"VBWL","timestamp":13.596930263596931,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:VBWL"}
+⚡ Gentle speed sync: 1.01x to fix 408ms drift
+🎬 DisplayLink: reportSwap() (throttled)
+⚡ Playback speed adjusted to 1.01x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

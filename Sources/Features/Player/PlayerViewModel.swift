@@ -104,9 +104,12 @@ class PlayerViewModel: ObservableObject {
                 print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
                 NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
                 
+                // Extract filename from URL for better metadata
+                let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
+                
                 var hostStream = Stream(
                     url: hostUnlockedURL,
-                    title: "Host Stream (\(hostQuality))",
+                    title: filename, // Use actual filename for badge detection
                     quality: hostQuality,
                     seeders: nil,
                     size: nil,
@@ -248,9 +251,12 @@ class PlayerViewModel: ObservableObject {
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
 
                 NSLog("🎬 GUEST: Using host's stream selection for preload")
+                // Extract filename from URL for better metadata
+                let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
+
                 var hostStream = Stream(
                     url: hostUnlockedURL,
-                    title: "Host Stream (\(hostQuality))",
+                    title: filename, // Use actual filename
                     quality: hostQuality,
                     seeders: nil,
                     size: nil,

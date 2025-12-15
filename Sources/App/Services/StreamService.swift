@@ -431,7 +431,7 @@ actor StreamService: StreamResolving {
         // Create unlocked stream
         var unlockedStream = Stream(
             url: unlockResult.url,
-            title: stream.title,
+            title: unlockResult.filename.isEmpty ? stream.title : unlockResult.filename, // Fix: Use returned filename
             quality: stream.quality,
             seeders: stream.seeders,
             size: stream.size,

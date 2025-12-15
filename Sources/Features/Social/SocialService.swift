@@ -151,10 +151,10 @@ class SocialService: ObservableObject {
         
         // 3. Update Activity
         var activity = FriendActivity(
-            userId: normalizedUserId,
-            isOnline: true,
-            lastSeen: Date(),
+            id: normalizedUserId,
+            username: metadata?["username"] as? String ?? "Unknown",
             currentlyWatching: nil,
+            lastSeen: Date(),
             customStatus: nil
         )
         
@@ -162,12 +162,12 @@ class SocialService: ObservableObject {
         if let metadata = metadata {
             // Check for specific watching status
             if let mediaTitle = metadata["watching_title"] as? String {
-                 activity.currentlyWatching = WatchingStatus(
+                 activity.currentlyWatching = FriendActivity.WatchingInfo(
                     mediaTitle: mediaTitle,
                     mediaType: metadata["watching_type"] as? String ?? "movie",
-                    imdbId: metadata["watching_id"] as? String,
-                    roomId: metadata["room_id"] as? String,
-                    startedAt: Date() // Simplistic
+                    imdbId: metadata["watching_id"] as? String ?? "",
+                    startedAt: Date(), // Simplistic
+                    roomId: metadata["room_id"] as? String
                 )
             }
             // Check for custom status

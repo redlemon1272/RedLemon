@@ -20,6 +20,7 @@ class SocialService: ObservableObject {
     // MARK: - Internal
     private let client = SupabaseClient.shared
     private var presenceClient: SupabaseRealtimeClient?
+    private var userPresenceRefs: [String: Set<String>] = [:] // Track active tabs/connections per user
     private var dmClient: SupabaseRealtimeClient?
     private var currentUserId: String?
     private var currentUsername: String?
@@ -80,7 +81,7 @@ class SocialService: ObservableObject {
                 if action == .join {
                     self?.handlePresenceJoin(userId: userId, metadata: metadata)
                 } else {
-                    self?.handlePresenceLeave(userId: userId)
+                    self?.handlePresenceLeave(userId: userId, metadata: metadata)
                 }
             }
         }
@@ -134,49 +135,65 @@ class SocialService: ObservableObject {
     
     // MARK: - Presence Handlers
     
-    // MARK: - Presence Handlers
-    
     private func handlePresenceJoin(userId: String, metadata: [String: Any]?) {
-        // Normalize ID to lowercase to match friend list format
         let normalizedUserId = userId.lowercased()
         
-        // Ignore myself
-        if normalizedUserId == currentUserId?.lowercased() { return }
+        // 1. Track specific connection ref
+        if let phxRef = metadata?["phx_ref"] as? String {
+            if userPresenceRefs[normalizedUserId] == nil {
+                userPresenceRefs[normalizedUserId] = []
+            }
+            userPresenceRefs[normalizedUserId]?.insert(phxRef)
+        }
         
+        // 2. Mark online
         onlineUserIds.insert(normalizedUserId)
         
-        // Parse activity from metadata
-        if let meta = metadata {
-            var watchingInfo: FriendActivity.WatchingInfo?
-            let status = meta["status"] as? String ?? "online"
-            
-            if let title = meta["watching_title"] as? String {
-                watchingInfo = FriendActivity.WatchingInfo(
-                    mediaTitle: title,
-                    mediaType: meta["watching_type"] as? String ?? "movie",
-                    imdbId: meta["watching_id"] as? String ?? "",
-                    startedAt: Date(), // Simplified
-                    roomId: meta["room_id"] as? String
+        // 3. Update Activity
+        var activity = FriendActivity(
+            userId: normalizedUserId,
+            isOnline: true,
+            lastSeen: Date(),
+            currentlyWatching: nil,
+            customStatus: nil
+        )
+        
+        // Parse metadata
+        if let metadata = metadata {
+            // Check for specific watching status
+            if let mediaTitle = metadata["watching_title"] as? String {
+                 activity.currentlyWatching = WatchingStatus(
+                    mediaTitle: mediaTitle,
+                    mediaType: metadata["watching_type"] as? String ?? "movie",
+                    imdbId: metadata["watching_id"] as? String,
+                    roomId: metadata["room_id"] as? String,
+                    startedAt: Date() // Simplistic
                 )
             }
-            
-            // If explicit status is "Browsing" or "In Lobby", store it
-            let customStatus = (watchingInfo == nil && status != "online") ? status : nil
-            
-             let activity = FriendActivity(
-                id: normalizedUserId,
-                username: meta["username"] as? String ?? "Unknown",
-                currentlyWatching: watchingInfo,
-                lastSeen: Date(),
-                customStatus: customStatus
-            )
-            
-            friendActivity[normalizedUserId] = activity
+            // Check for custom status
+            if let status = metadata["status"] as? String {
+                activity.customStatus = status
+            }
         }
+        
+        friendActivity[normalizedUserId] = activity
     }
     
-    private func handlePresenceLeave(userId: String) {
+    private func handlePresenceLeave(userId: String, metadata: [String: Any]?) {
         let normalizedUserId = userId.lowercased()
+        
+        // 1. Remove specific connection ref
+        if let phxRef = metadata?["phx_ref"] as? String {
+            userPresenceRefs[normalizedUserId]?.remove(phxRef)
+        }
+        
+        // 2. Only mark offline if NO active refs remain
+        if let refs = userPresenceRefs[normalizedUserId], !refs.isEmpty {
+            // User still has other active connections (e.g. just switched metadata/tabs)
+            return
+        }
+        
+        // 3. Actually Offline
         onlineUserIds.remove(normalizedUserId)
         friendActivity.removeValue(forKey: normalizedUserId)
     }

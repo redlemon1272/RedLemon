@@ -25,6 +25,59 @@ class EventsConfigService {
         return try await fetchConfig(type: "movie_events")
     }
     
+    /// Start listening for real-time schedule updates
+    func startRealtimeSubscription() {
+        Task {
+            let client = SupabaseClient.shared.realtimeClient
+            
+            // Define the Postgres change filter
+            let changes: [[String: Any]] = [
+                [
+                    "event": "INSERT",
+                    "schema": "public",
+                    "table": "events_config",
+                    "filter": "config_type=eq.movie_events"
+                ]
+            ]
+            
+            do {
+                if await !client.isJoined(to: "events_config_updates") {
+                    try await client.connect()
+                    try await client.joinChannel("events_config_updates", postgresChanges: changes)
+                    
+                    await client.onPostgresChange { [weak self] payload in
+                        self?.handleRealtimeUpdate(payload)
+                    }
+                    print("✅ [EventsConfig] Subscribed to realtime schedule updates")
+                }
+            } catch {
+                print("⚠️ [EventsConfig] Failed to subscribe to realtime updates: \(error)")
+            }
+        }
+    }
+    
+    private func handleRealtimeUpdate(_ payload: [String: Any]) {
+        // Payload structure for INSERT:
+        // { "new": { "version": 12, ... }, "eventType": "INSERT", ... }
+        
+        guard let newRecord = payload["new"] as? [String: Any],
+              let newVersion = newRecord["version"] as? Int else {
+            return
+        }
+        
+        // Check against current cached version
+        let currentVersion = UserDefaults.standard.integer(forKey: "\(versionKey)_movie_events")
+        
+        if newVersion > currentVersion {
+            print("🔔 [EventsConfig] Realtime notification: New schedule version \(newVersion) available (current: \(currentVersion))")
+            
+            // Post notification on main thread
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: Notification.Name("ScheduleDidUpdate"), object: nil)
+            }
+        }
+    }
+    
 
     
     /// Force refresh config from server (bypasses cache)

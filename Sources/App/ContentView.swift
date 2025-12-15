@@ -178,6 +178,11 @@ struct ContentView: View {
             
             // Fullscreen lobby overlay (covers sidebar)
             lobbyOverlay
+            
+            // Schedule Update Overlay (Topmost)
+            if appState.showScheduleUpdatePrompt {
+                scheduleUpdateOverlay
+            }
         }
         .sheet(isPresented: $appState.showUsernameSetup) {
             UsernameSetupView()
@@ -235,17 +240,62 @@ struct ContentView: View {
                         .environmentObject(appState)
                 } else if appState.isLoadingRoom {
                     ProgressView("Loading room...")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.black)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black)
                 } else {
                     Text("No room found")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.black)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color.black)
                 }
             }
             .transition(.opacity)
             .ignoresSafeArea() // Ensure it covers the sidebar
         }
+    }
+    
+    @ViewBuilder
+    private var scheduleUpdateOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.8)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 24) {
+                Image(systemName: "calendar.badge.exclamationmark")
+                    .font(.system(size: 60))
+                    .foregroundColor(.yellow)
+                
+                VStack(spacing: 8) {
+                    Text("Schedule Updated")
+                        .font(.title.bold())
+                        .foregroundColor(.white)
+                    
+                    Text("A new event schedule has been published.\nPlease restart RedLemon to sync with the new times.")
+                        .font(.body)
+                        .foregroundColor(.gray)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+                }
+                
+                Button(action: {
+                    appState.restartApplication()
+                }) {
+                    Text("Restart Now")
+                        .font(.headline.weight(.semibold))
+                        .foregroundColor(.black)
+                        .frame(width: 200, height: 44)
+                        .background(Color.yellow)
+                        .cornerRadius(12)
+                }
+                .buttonStyle(.plain)
+            }
+            .padding(40)
+            .background(Color(NSColor.windowBackgroundColor))
+            .cornerRadius(20)
+            .shadow(radius: 20)
+            .frame(maxWidth: 400)
+        }
+        .transition(.opacity)
+        .zIndex(100)
     }
 }
 

@@ -18,6 +18,9 @@ class AppState: ObservableObject {
         let message: String
     }
     @Published var activeAlert: AppAlert?
+    
+    // Schedule Update State
+    @Published var showScheduleUpdatePrompt: Bool = false
 
     // Sub-ViewModels
     let player: PlayerViewModel
@@ -33,13 +36,24 @@ class AppState: ObservableObject {
         self.streamResolver = streamResolver
         self.roomManager = roomManager
         self.userManager = userManager
-
+        
         // Initialize PlayerViewModel with same dependencies
         self.player = PlayerViewModel(
             metadataProvider: metadataProvider,
             streamResolver: streamResolver,
             roomManager: roomManager
         )
+        
+        // Start listening for schedule updates
+        EventsConfigService.shared.startRealtimeSubscription()
+        
+        // Subscribe to schedule update notifications
+        NotificationCenter.default.publisher(for: Notification.Name("ScheduleDidUpdate"))
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                self?.showScheduleUpdatePrompt = true
+            }
+            .store(in: &cancellables)
         
         // Forward PlayerViewModel changes to AppState
         self.player.objectWillChange
@@ -48,6 +62,15 @@ class AppState: ObservableObject {
                 self?.objectWillChange.send()
             }
             .store(in: &cancellables)
+    }
+    
+    func restartApplication() {
+        NSLog("🔄 [AppState] User requested restart due to schedule update")
+        // Relaunching is complex, but standardized behavior for "Restart to apply updates" on macOS
+        // often involves just terminating, or using a helper.
+        // For simplicity and safety, we will just terminate, and the user can re-open.
+        // We could also try to relaunch via Process, but sandbox might block it.
+        NSApplication.shared.terminate(nil)
     }
 
     // Wiring up PlayerViewModel callbacks

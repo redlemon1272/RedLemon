@@ -1584,16 +1584,7 @@ extension MPVPlayerViewModel {
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
-                                    // FALLBACK: Timestamp check (original fix)
-                                    let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
-                                    let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
 
-                                    // Allow 1s tolerance for clock skew/processing time
-                                    if leaveJoinedAt < (existingJoinedAt - 1.0) {
-                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Time: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
-                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                        return
-                                    }
 
                                 // Find username before removing for the message
                                 let defaultsName = metadata?["username"] as? String ?? "User"

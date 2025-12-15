@@ -104,12 +104,12 @@ class SocialService: ObservableObject {
         }
     }
     
-    func updateWatchingStatus(mediaTitle: String?, mediaType: String?, imdbId: String?, roomId: String?) async {
+    func updateWatchingStatus(mediaTitle: String?, mediaType: String?, imdbId: String?, roomId: String?, status: String? = nil) async {
         guard let client = presenceClient, let userId = currentUserId, let username = currentUsername else { return }
         
         var metadata: [String: Any] = [
             "username": username,
-            "status": "online",
+            "status": status ?? "online",
             "last_seen": ISO8601DateFormatter().string(from: Date())
         ]
         
@@ -119,11 +119,14 @@ class SocialService: ObservableObject {
             metadata["watching_id"] = imdbId
             metadata["room_id"] = roomId
             metadata["started_at"] = ISO8601DateFormatter().string(from: Date())
+        } else if status == nil {
+             // If no specific status and no media, default to "Browsing"
+             metadata["status"] = "Browsing"
         }
         
         do {
             try await client.track(userId: userId, metadata: metadata)
-            print("📡 SocialService: Updated status - Watching: \(mediaTitle ?? "Nothing")")
+            print("📡 SocialService: Updated status - \(metadata["status"] as? String ?? "Unknown"): \(mediaTitle ?? "")")
         } catch {
             print("❌ SocialService: Failed to update status: \(error)")
         }
@@ -145,6 +148,7 @@ class SocialService: ObservableObject {
         // Parse activity from metadata
         if let meta = metadata {
             var watchingInfo: FriendActivity.WatchingInfo?
+            let status = meta["status"] as? String ?? "online"
             
             if let title = meta["watching_title"] as? String {
                 watchingInfo = FriendActivity.WatchingInfo(
@@ -156,11 +160,15 @@ class SocialService: ObservableObject {
                 )
             }
             
-            let activity = FriendActivity(
+            // If explicit status is "Browsing" or "In Lobby", store it
+            let customStatus = (watchingInfo == nil && status != "online") ? status : nil
+            
+             let activity = FriendActivity(
                 id: normalizedUserId,
                 username: meta["username"] as? String ?? "Unknown",
                 currentlyWatching: watchingInfo,
-                lastSeen: Date()
+                lastSeen: Date(),
+                customStatus: customStatus
             )
             
             friendActivity[normalizedUserId] = activity

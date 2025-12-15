@@ -178,6 +178,10 @@ struct BrowseView: View {
         }
         .onAppear {
             setupMemoryCleanupTimer()
+            // Broadcast "Browsing Library" status
+            Task {
+                await SocialService.shared.updateWatchingStatus(mediaTitle: nil, mediaType: nil, imdbId: nil, roomId: nil, status: "Browsing Library")
+            }
         }
         .onDisappear {
             memoryCleanupTimer?.invalidate()

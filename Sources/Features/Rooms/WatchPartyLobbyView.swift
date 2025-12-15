@@ -56,6 +56,18 @@ struct WatchPartyLobbyView: View {
         .onAppear {
             viewModel.appState = appState  // Set weak reference
             viewModel.connect()
+            
+            // Broadcast "In Lobby" status
+            Task {
+                let movieName = room.mediaItem?.name ?? "Event"
+                await SocialService.shared.updateWatchingStatus(
+                    mediaTitle: movieName, 
+                    mediaType: room.mediaItem?.type, 
+                    imdbId: room.mediaItem?.id, 
+                    roomId: room.id, 
+                    status: "In Lobby: \(movieName)"
+                )
+            }
 
             if appState.shouldAutoJoinLobby {
                 // CRITICAL FIX: Late Joiners should skip the 8s safety delay
@@ -436,7 +448,29 @@ struct WatchPartyLobbyView: View {
                                         .foregroundColor(.secondary)
                                         .padding(.top, 20)
                                 } else {
-                                    ForEach(socialService.friends.filter { $0.status == .accepted }) { friend in
+                                    // Sort: Unread > Online > Alphabetical
+                                    let sortedFriends = socialService.friends
+                                        .filter { $0.status == .accepted }
+                                        .sorted { f1, f2 in
+                                            // Priority 1: Unread Messages
+                                            let u1 = socialService.unreadCounts[f1.id] ?? 0
+                                            let u2 = socialService.unreadCounts[f2.id] ?? 0
+                                            if (u1 > 0) != (u2 > 0) {
+                                                return u1 > 0
+                                            }
+                                            
+                                            // Priority 2: Online Status
+                                            let online1 = socialService.onlineUserIds.contains(f1.id)
+                                            let online2 = socialService.onlineUserIds.contains(f2.id)
+                                            if online1 != online2 {
+                                                return online1
+                                            }
+                                            
+                                            // Priority 3: Alphabetical
+                                            return f1.displayName < f2.displayName
+                                        }
+                                        
+                                    ForEach(sortedFriends) { friend in
                                         Button(action: {
                                             withAnimation { selectedFriend = friend }
                                         }) {

@@ -53,6 +53,11 @@ struct EventsView: View {
         }
         .onAppear {
             print("📅 EventsView appeared")
+            // Broadcast "Browsing Events" status
+            Task {
+                await SocialService.shared.updateWatchingStatus(mediaTitle: nil, mediaType: nil, imdbId: nil, roomId: nil, status: "Browsing Events")
+            }
+            
             // Load events if AppState doesn't have them yet
             if appState.allMovies.isEmpty {
                 loadEvents()

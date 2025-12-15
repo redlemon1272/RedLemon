@@ -48,13 +48,17 @@ struct FriendRequest: Codable, Identifiable {
     }
 }
 
-struct FriendActivity: Codable, Identifiable {
-    let id: String // Friend's principal
+struct FriendActivity: Identifiable, Codable {
+    let id: String // User ID
     let username: String
     var currentlyWatching: WatchingInfo?
-    var lastSeen: Date?
-
-    struct WatchingInfo: Codable {
+    var lastSeen: Date
+    // New: Custom status string (e.g. "Browsing", "In Lobby")
+    // If currentlyWatching is set, that takes precedence usually.
+    // If currentlyWatching is nil, this string is shown.
+    var customStatus: String? = nil
+    
+    struct WatchingInfo: Codable, Equatable {
         let mediaTitle: String
         let mediaType: String // "movie" or "series"
         let imdbId: String

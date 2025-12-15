@@ -646,20 +646,33 @@ struct FriendRowButton: View {
                             .font(.body)
 
                         // Activity Status
-                        if let activity = SocialService.shared.friendActivity[friend.id],
-                           let watching = activity.currentlyWatching {
-                            Text("Watching \(watching.mediaTitle)")
-                                .font(.caption)
-                                .foregroundColor(.accentColor)
+                        if let activity = SocialService.shared.friendActivity[friend.id] {
+                            if let watching = activity.currentlyWatching {
+                                Text("Watching \(watching.mediaTitle)")
+                                    .font(.caption)
+                                    .foregroundColor(.accentColor)
+                            } else if let status = activity.customStatus {
+                                Text(status)
+                                    .font(.caption)
+                                    .foregroundColor(.white.opacity(0.8))
+                            } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                                Text("Online")
+                                    .font(.caption)
+                                    .foregroundColor(.green)
+                            } else {
+                                Text("Offline")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                         } else if SocialService.shared.onlineUserIds.contains(friend.id) {
-                            Text("Online")
-                                .font(.caption)
-                                .foregroundColor(.green)
-                        } else {
-                            Text("Offline")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
+                             Text("Online")
+                                 .font(.caption)
+                                 .foregroundColor(.green)
+                         } else {
+                             Text("Offline")
+                                 .font(.caption)
+                                 .foregroundColor(.secondary)
+                         }
                     }
                     
                     Spacer()

@@ -61,7 +61,20 @@ class MPVPlayerViewModel: ObservableObject {
             let tracksPublisher = await subtitleService.availableTracksPublisher
             tracksPublisher
                 .receive(on: DispatchQueue.main)
-                .assign(to: &$availableSubtitleTracks)
+                .sink { [weak self] tracks in
+                    guard let self = self else { return }
+                    self.availableSubtitleTracks = tracks
+                    
+                    // Reactively select defaults once tracks are populated
+                    // This fixes the race condition where tracks appear AFTER onVideoReady
+                    if !tracks.isEmpty && !self.hasAutoSelectedSubtitles && self.hasVideoReadyTriggered {
+                        print("⚡ MPVPlayerViewModel: Tracks populated, triggering delayed auto-selection")
+                        if self.selectEnglishDefaults() {
+                            self.hasAutoSelectedSubtitles = true
+                        }
+                    }
+                }
+                .store(in: &serviceCancellables)
 
             let currentTrackPublisher = await subtitleService.currentTrackPublisher
             currentTrackPublisher
@@ -198,6 +211,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Resume state tracking
     private var hasVideoReadyTriggered: Bool = false
+    private var hasAutoSelectedSubtitles: Bool = false // NEW: Track if we've run initial auto-selection
 
     // Watch party state
     @Published var isInWatchParty: Bool = false  // Track if currently in watch party mode
@@ -335,6 +349,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Reset resume handling flag for new video loads
         self.hasVideoReadyTriggered = false
+        self.hasAutoSelectedSubtitles = false // Reset auto-selection flag
 
         // Add mock chat messages for testing UI
         self.messages = [
@@ -351,9 +366,16 @@ class MPVPlayerViewModel: ObservableObject {
 
         // NEW: Scan for embedded tracks IMMEDIATELY when loading starts
         // This ensures they are ready before playback begins, preventing hiccups
+        // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
+        // This ensures they are ready before playback begins, preventing hiccups
         Task {
-            print("📝 Pre-scanning embedded subtitles...")
-            await self.subtitleService.scanEmbeddedTracks()
+            if !subtitles.isEmpty {
+                print("📝 Pre-loading external subtitles...")
+                await self.subtitleService.loadExternalSubtitles(subtitles)
+            } else {
+                print("📝 Pre-scanning embedded subtitles...")
+                await self.subtitleService.scanEmbeddedTracks()
+            }
         }
 
         // Check if we should resume from a specific timestamp
@@ -486,13 +508,8 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Load external subtitles if present (delayed to prevent race conditions with embedded tracks)
-        Task {
-            if !self.subtitles.isEmpty {
-                print("📝 Loading external subtitles (delayed execution)...")
-                await self.subtitleService.loadExternalSubtitles(self.subtitles)
-            }
-            // Note: Embedded tracks are now pre-scanned in loadStream()
-        }
+        // Note: Subtitles (External & Embedded) are now pre-loaded in loadStream()
+        // This prevents the "hiccup" caused by downloading/scanning during playback start.
 
         // Update tracks (Audio only - subtitle scan handled above or in loadExternalSubtitles)
         self.updateAudioTracks()    // Scan audio tracks

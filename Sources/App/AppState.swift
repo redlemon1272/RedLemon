@@ -171,6 +171,18 @@ class AppState: ObservableObject {
         }
     }
     
+    /// Update a single movie in the source list (e.g. lazy hydration)
+    func updateSingleMovie(_ enrichedMovie: MediaItem) {
+        guard let index = allMovies.firstIndex(where: { $0.id == enrichedMovie.id }) else { return }
+        
+        print("💧 AppState: Hydrating metadata for: \(enrichedMovie.name)")
+        allMovies[index] = enrichedMovie
+        
+        // Recalculate schedule to reflect changes (e.g. runtime might have changed, though unlikely)
+        // This ensures the EventItem in the schedule gets the new metadata (images, etc.)
+        calculateDeterministicSchedule()
+    }
+    
     private func startScheduleTimer() {
         stopScheduleTimer()
         

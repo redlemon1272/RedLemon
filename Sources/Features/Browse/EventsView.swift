@@ -427,6 +427,7 @@ struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
     let onJoin: () async -> Void
+    @EnvironmentObject var appState: AppState
 
     @State private var currentTime = TimeService.shared.now
     @State private var timer: Timer?
@@ -479,6 +480,25 @@ struct HeroEventCard: View {
         .onDisappear {
             timer?.invalidate()
             timer = nil
+        }
+        .task {
+            // Lazy Hydration: Check if we have background art
+            if event.mediaItem.background == nil && !event.mediaItem.id.isEmpty {
+                 print("💧 HeroEventCard: Missing background for \(event.mediaItem.name) (\(event.mediaItem.id)). Attempting lazy hydration...")
+                 
+                 do {
+                     let enriched = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: event.mediaItem.id, type: "movie")
+                     
+                     if enriched.background != nil {
+                         print("✅ HeroEventCard: Hydrated metadata for \(enriched.name). Updating AppState...")
+                         await MainActor.run {
+                             appState.updateSingleMovie(enriched)
+                         }
+                     }
+                 } catch {
+                     print("⚠️ HeroEventCard: Failed to hydrate metadata: \(error)")
+                 }
+            }
         }
     }
 }

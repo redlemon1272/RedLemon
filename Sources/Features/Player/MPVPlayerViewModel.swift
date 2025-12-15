@@ -40,6 +40,10 @@ class MPVPlayerViewModel: ObservableObject {
     private let subtitleService: SubtitleService
     private let playbackService: PlaybackService
     private var serviceCancellables = Set<AnyCancellable>()
+    
+    // Track connection IDs (phx_ref) independently of the participants list
+    // This protects against "Ghost Leaves" (stale refs) AND "True Leaves" where the user is wiped from the list by DB polling before the Leave event processes.
+    private var activeConnectionRefs: [String: String] = [:]
 
     init(mpvWrapper: MPVWrapper = MPVWrapper(),
          subtitleService: SubtitleService? = nil,
@@ -1446,12 +1450,14 @@ extension MPVPlayerViewModel {
                             updatedParticipants[index].joinedAt = Date()
 
                             // Prefer phx_ref from metadata.
-                            // CRITICAL FIX: Do NOT fallback to userId. If phx_ref is missing, keep existing or nil.
                             if let newPhxRef = metadata?["phx_ref"] as? String {
                                 updatedParticipants[index].phxRef = newPhxRef
+                                self.activeConnectionRefs[actualUserId] = newPhxRef // Track officially
                                 print("🔄 Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
                             } else {
                                 print("⚠️ Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
+                                // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`? 
+                                // Yes, assume same session.
                             }
 
                             if let name = metaUsername {
@@ -1459,11 +1465,15 @@ extension MPVPlayerViewModel {
                             }
                         } else {
                             // New user - create with actualUserId
+                            let phxRefVal = metadata?["phx_ref"] as? String
+                            if let ref = phxRefVal {
+                                self.activeConnectionRefs[actualUserId] = ref
+                            }
+                            
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
-                            // CRITICAL FIX: Do NOT fallback to userId for phxRef
-                            let phxRefVal = metadata?["phx_ref"] as? String
+
 
                             let newParticipant = Participant(
                                 id: actualUserId, // Use stable ID
@@ -1539,59 +1549,40 @@ extension MPVPlayerViewModel {
                                 // Fetch FRESH list to avoid stale data race
                                 guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
 
-                                // Check if this is an old session leavning (stale ref)
-                                // If the user is physically present with a NEWER joinedAt, ignore this leave
-                                guard let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) else {
-                                     print("⚠️ Join/Leave Race: Participant \(actualUserId) not found in list during LEAVE processing. Likely already removed or never added.")
-                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                     return
-                                }
-
-                                // Grace check: Ignore leaves during initial connection ramp-up (10s) to prevent 'self-leave' on room entry
-                                if Date().timeIntervalSince(self.initializationTime) < 10.0 {
-                                    print("🛡️ Ignoring LEAVE during initialization grace period: \(actualUserId)")
-                                    self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                    return
-                                }
-                                    
-                                    // Check for stale leave (Ref Mismatch)
-                                    // If we have a phx_ref for this user, and the leaving ref doesn't match, it's an old connection dropping.
-                                    if let leavingRef = leavingPhxRef,
-                                       let currentRef = existingParticipant.phxRef {
-                                        
-                                        print("🔍 Comparing refs for \(actualUserId): Current: \(currentRef), Leaving: \(leavingRef)")
-                                        if currentRef != leavingRef {
-                                            print("🚫 Ignoring stale LEAVE event for \(actualUserId). Current: \(currentRef) vs Leaving: \(leavingRef)")
-                                            self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                            return
-                                        } else {
-                                             print("✅ LEAVE MATCHED refs: \(currentRef) == \(leavingRef)")
-                                        }
-                                    } else {
-                                        
-                                        // FALLBACK: If we have NO refs, we must assume it's valid? 
-                                        // Or rely on Timestamp?
-                                        // Let's rely on Timestamp fallout below.
+                                // Check against our authoritative Ref Map
+                                // If we have a record of this user's Active Ref, it must match the Leaving Ref.
+                                if let trackedRef = self.activeConnectionRefs[actualUserId] {
+                                    if let leavingRef = leavingPhxRef {
+                                         if trackedRef != leavingRef {
+                                             print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
+                                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                             return
+                                         } else {
+                                             print("✅ LEAVE MATCHED tracked ref: \(trackedRef)")
+                                         }
                                     }
-
-                                    // FALLBACK: Timestamp check (original fix)
-                                    let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
-                                    let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
-
-                                    // Allow 1s tolerance for clock skew/processing time
-                                    if leaveJoinedAt < (existingJoinedAt - 1.0) {
-                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Time: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
-                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                        return
-                                    }
-
+                                } else {
+                                     // We have NO record of this user's ref.
+                                     // This likely means they are already gone (removed by DB poll?).
+                                     // If we assume "True Leave", we should announce it.
+                                     // But if it's "Ghost Leave" (rotation), we should have the NEW ref in the map (from Join).
+                                     // So if map is empty, it means they are NOT currently connected with ANY ref.
+                                     // So it's safe to process the leave.
+                                     print("⚠️ Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
+                                }
+                                
+                                // Clean up ref map
+                                self.activeConnectionRefs.removeValue(forKey: actualUserId)
 
                                 // Find username before removing for the message
                                 let defaultsName = metadata?["username"] as? String ?? "User"
-                                let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
+                                let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
 
-                                // Remove using actualUserId
-                                currentParticipants.removeAll(where: { $0.id == actualUserId })
+                                // Remove using actualUserId (Force remove even if not in list, just in case)
+                                if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
+                                    currentParticipants.removeAll(where: { $0.id == actualUserId })
+                                    self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
+                                }
 
                                 // 💬 System Message: Leave
                                 if actualUserId != self.currentUserId {
@@ -1607,9 +1598,7 @@ extension MPVPlayerViewModel {
                                         self.checkIfAllGuestsReady()
                                     }
                                 }
-
-                                // Update room state with fresh list
-                                self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
+                                
                                 self.appState?.objectWillChange.send() // Force UI update
                                 self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                             }

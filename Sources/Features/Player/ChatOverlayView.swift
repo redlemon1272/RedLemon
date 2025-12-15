@@ -79,8 +79,9 @@ struct ChatOverlayView: View {
                 }
             }
             
-            // Auto-focus the input field ONLY if explicitly toggled (prevents stealing focus on load)
-            if viewModel.isAnimatingChatToggle && chatMode != .friends {
+            // Auto-focus the input field if chat is open (whether animated or pre-loaded)
+            if viewModel.showChat && chatMode != .friends {
+                print("⌨️ ChatOverlayView: Triggering input focus (showChat=true)")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     isInputFocused = true
                     manualFocus = true

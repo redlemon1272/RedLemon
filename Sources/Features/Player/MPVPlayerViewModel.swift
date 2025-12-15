@@ -1525,16 +1525,23 @@ extension MPVPlayerViewModel {
                                     // PREFERRED: Check specific Connection ID (phx_ref) mismatch
                                     // If the user's current connection ID is different from the leaving one,
                                     // it means they have already reconnected (Join processed before Leave task).
-                                    // Use phx_ref from metadata if available, otherwise fallback to userId
-                                    let leavingPhxRef = metadata?["phx_ref"] as? String ?? userId
+                                    // Use phx_ref from metadata if available. Do NOT fallback to userId for comparison,
+                                    // as that defeats the purpose of checking if it's a *different* session.
+                                    let leavingPhxRef = metadata?["phx_ref"] as? String
 
-                                    // Strict check: Only remove if phxRef matches (or we have no ref tracked yet)
+                                    // Strict check: Only remove if phxRef matches (or if we have no ref tracked yet)
                                     // This prevents removing the "active" session if a stale one disconnects
-
-                                    if let currentRef = existingParticipant.phxRef, currentRef != leavingPhxRef {
-                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref: \(leavingPhxRef) != Current: \(currentRef))")
-                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                        return
+                                    if let leavingRef = leavingPhxRef, let currentRef = existingParticipant.phxRef {
+                                        if currentRef != leavingRef {
+                                             print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref Mismatch: \(leavingRef) != Current: \(currentRef))")
+                                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                             return
+                                        }
+                                    } else {
+                                        // Logging for debugging "ghost" leaves
+                                        if leavingPhxRef == nil {
+                                            print("⚠️ LEAVE event missing phx_ref for \(actualUserId) - falling back to timestamp check")
+                                        }
                                     }
 
                                     // FALLBACK: Timestamp check (original fix)

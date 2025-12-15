@@ -1441,12 +1441,17 @@ extension MPVPlayerViewModel {
 
                         // Check if already exists using actualUserId (stable ID)
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
-                            // User exists - update their timestamp and name
+                            // User exists - update their timestamp
                             updatedParticipants[index].joinedAt = Date()
 
-                            // Prefer phx_ref from metadata (rotates on update), fallback to userId (stable key)
-                            let newPhxRef = metadata?["phx_ref"] as? String ?? userId
-                            updatedParticipants[index].phxRef = newPhxRef
+                            // Prefer phx_ref from metadata.
+                            // CRITICAL FIX: Do NOT fallback to userId. If phx_ref is missing, keep existing or nil.
+                            if let newPhxRef = metadata?["phx_ref"] as? String {
+                                updatedParticipants[index].phxRef = newPhxRef
+                                print("🔄 Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
+                            } else {
+                                print("⚠️ Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
+                            }
 
                             if let name = metaUsername {
                                 updatedParticipants[index].name = name
@@ -1456,7 +1461,8 @@ extension MPVPlayerViewModel {
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
-                            let phxRefVal = metadata?["phx_ref"] as? String ?? userId
+                            // CRITICAL FIX: Do NOT fallback to userId for phxRef
+                            let phxRefVal = metadata?["phx_ref"] as? String
 
                             let newParticipant = Participant(
                                 id: actualUserId, // Use stable ID
@@ -1464,12 +1470,12 @@ extension MPVPlayerViewModel {
                                 isHost: isHostVal,
                                 isReady: false,
                                 joinedAt: Date(timeIntervalSince1970: joinedAtVal),
-                                phxRef: phxRefVal // Store Connection ID
+                                phxRef: phxRefVal
                             )
                             updatedParticipants.append(newParticipant)
+                            print("➕ Added new participant \(actualUserId) (Ref: \(phxRefVal ?? "nil"))")
 
                             // 💬 System Message: Join
-                            // Only show for others, not self (unless we want "You joined") -> User asked for "ursinho joined"
                             if actualUserId != self.currentUserId {
                                 self.addSystemMessage("\(username) joined")
                             }
@@ -1479,13 +1485,18 @@ extension MPVPlayerViewModel {
                         if let currentId = localCurrentUserId?.lowercased() {
                             let isSelfPresent = updatedParticipants.contains(where: { (p: Participant) in p.id == currentId })
                             if !isSelfPresent {
+                                print("⚠️ Self (\(currentId)) was missing from list - restoring.")
+                                // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
+                                // Otherwise, use nil (we don't know our own ref from someone else's join).
+                                let selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
+                                
                                 let selfParticipant = Participant(
                                     id: currentId,
                                     name: self.appState?.currentUsername ?? "Me",
                                     isHost: self.isWatchPartyHost,
                                     isReady: true,
                                     joinedAt: Date(),
-                                    phxRef: userId // Store current connection ID if this join triggered it
+                                    phxRef: selfRef
                                 )
                                 updatedParticipants.append(selfParticipant)
                             }
@@ -1494,15 +1505,22 @@ extension MPVPlayerViewModel {
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions
                         print("⏳ Participant leaving (grace period started): \(actualUserId)")
+                        
+                        // Extract ref immediately for closure capture
+                        let leavingPhxRef = metadata?["phx_ref"] as? String
 
-                        let task: Task<Void, Never> = Task { [weak self] in
-                            // Wait 10 seconds (nano)
+                        let task: Task<Void, Never> = Task { [weak self, actualUserId, leavingPhxRef] in
+                            // Wait 5 seconds (nano) - 10s might be too long for valid leaves to register visually?
+                            // Keeping 10s for safety as requested by user ("ursinho still present")
                             try? await Task.sleep(nanoseconds: 10_000_000_000)
 
                             guard let self = self else { return }
 
                             // Check for cancellation
-                            if Task.isCancelled { return }
+                            if Task.isCancelled { 
+                                print("⏹️ Leave task cancelled for \(actualUserId)")
+                                return 
+                            }
 
                             await MainActor.run {
                                 // Fetch FRESH list to avoid stale data race
@@ -1513,9 +1531,6 @@ extension MPVPlayerViewModel {
                                 if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
 
                                     // MAGIC BULLET: Grace Period Check
-                                    // Ignore ALL "User Left" events in the first 10 seconds of the session.
-                                    // This filters out transition noise (Lobby -> Player) and "Ghost" session cleanups.
-                                    // Extended to 10s to account for slower network/transition delays in rooms.
                                     if Date().timeIntervalSince(self.initializationTime) < 10.0 {
                                         print("🛡️ Grace Period: Ignoring LEAVE for \(actualUserId) (Session too young)")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
@@ -1523,25 +1538,21 @@ extension MPVPlayerViewModel {
                                     }
 
                                     // PREFERRED: Check specific Connection ID (phx_ref) mismatch
-                                    // If the user's current connection ID is different from the leaving one,
-                                    // it means they have already reconnected (Join processed before Leave task).
-                                    // Use phx_ref from metadata if available. Do NOT fallback to userId for comparison,
-                                    // as that defeats the purpose of checking if it's a *different* session.
-                                    let leavingPhxRef = metadata?["phx_ref"] as? String
-
-                                    // Strict check: Only remove if phxRef matches (or if we have no ref tracked yet)
-                                    // This prevents removing the "active" session if a stale one disconnects
                                     if let leavingRef = leavingPhxRef, let currentRef = existingParticipant.phxRef {
                                         if currentRef != leavingRef {
                                              print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Ref Mismatch: \(leavingRef) != Current: \(currentRef))")
                                              self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                              return
+                                        } else {
+                                             print("✅ LEAVE confirmed: Ref match \(leavingRef) == \(currentRef)")
                                         }
                                     } else {
-                                        // Logging for debugging "ghost" leaves
-                                        if leavingPhxRef == nil {
-                                            print("⚠️ LEAVE event missing phx_ref for \(actualUserId) - falling back to timestamp check")
-                                        }
+                                        // Debug info for missing refs
+                                        print("⚠️ LEAVE event check: Missing refs? Leaving: \(leavingPhxRef ?? "nil"), Current: \(existingParticipant.phxRef ?? "nil")")
+                                        
+                                        // FALLBACK: If we have NO refs, we must assume it's valid? 
+                                        // Or rely on Timestamp?
+                                        // Let's rely on Timestamp fallout below.
                                     }
 
                                     // FALLBACK: Timestamp check (original fix)
@@ -1550,13 +1561,12 @@ extension MPVPlayerViewModel {
 
                                     // Allow 1s tolerance for clock skew/processing time
                                     if leaveJoinedAt < (existingJoinedAt - 1.0) {
-                                        // print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Leave: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
+                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Time: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
                                 }
 
-                                // Find username before removing for the message
                                 // Find username before removing for the message
                                 let defaultsName = metadata?["username"] as? String ?? "User"
                                 let username = currentParticipants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
@@ -1568,7 +1578,7 @@ extension MPVPlayerViewModel {
                                 if actualUserId != self.currentUserId {
                                     self.addSystemMessage("\(username) left")
                                 }
-                                print("👋 Participant left (confirmed): \(userId)")
+                                print("👋 Participant left (confirmed): \(actualUserId)")
 
                                 // Post-Load Gate Logic
                                 if actualUserId != self.currentUserId {

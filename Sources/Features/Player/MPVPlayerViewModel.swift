@@ -1532,7 +1532,7 @@ extension MPVPlayerViewModel {
                         // Extract ref immediately for closure capture
                         let leavingPhxRef = metadata?["phx_ref"] as? String
 
-                        let task: Task<Void, Never> = Task { [weak self, actualUserId, leavingPhxRef] in
+                        let task: Task<Void, Never> = Task { @MainActor [weak self, actualUserId, leavingPhxRef] in
                             // Wait 5 seconds (nano) - 10s might be too long for valid leaves to register visually?
                             // Keeping 10s for safety as requested by user ("ursinho still present")
                             try? await Task.sleep(nanoseconds: 10_000_000_000)
@@ -1545,63 +1545,61 @@ extension MPVPlayerViewModel {
                                 return 
                             }
 
-                            await MainActor.run {
-                                // Fetch FRESH list to avoid stale data race
-                                guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
+                            // Fetch FRESH list to avoid stale data race
+                            guard var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants else { return }
 
-                                // Check against our authoritative Ref Map
-                                // If we have a record of this user's Active Ref, it must match the Leaving Ref.
-                                if let trackedRef = self.activeConnectionRefs[actualUserId] {
-                                    if let leavingRef = leavingPhxRef {
-                                         if trackedRef != leavingRef {
-                                             print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
-                                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                             return
-                                         } else {
-                                             print("✅ LEAVE MATCHED tracked ref: \(trackedRef)")
-                                         }
-                                    }
-                                } else {
-                                     // We have NO record of this user's ref.
-                                     // This likely means they are already gone (removed by DB poll?).
-                                     // If we assume "True Leave", we should announce it.
-                                     // But if it's "Ghost Leave" (rotation), we should have the NEW ref in the map (from Join).
-                                     // So if map is empty, it means they are NOT currently connected with ANY ref.
-                                     // So it's safe to process the leave.
-                                     print("⚠️ Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
+                            // Check against our authoritative Ref Map
+                            // If we have a record of this user's Active Ref, it must match the Leaving Ref.
+                            if let trackedRef = self.activeConnectionRefs[actualUserId] {
+                                if let leavingRef = leavingPhxRef {
+                                     if trackedRef != leavingRef {
+                                         print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Tracked: \(trackedRef) != Leaving: \(leavingRef))")
+                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                         return
+                                     } else {
+                                         print("✅ LEAVE MATCHED tracked ref: \(trackedRef)")
+                                     }
                                 }
-                                
-                                // Clean up ref map
-                                self.activeConnectionRefs.removeValue(forKey: actualUserId)
-
-                                // Find username before removing for the message
-                                let defaultsName = metadata?["username"] as? String ?? "User"
-                                let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
-
-                                // Remove using actualUserId (Force remove even if not in list, just in case)
-                                if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
-                                    currentParticipants.removeAll(where: { $0.id == actualUserId })
-                                    self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
-                                }
-
-                                // 💬 System Message: Leave
-                                if actualUserId != self.currentUserId {
-                                    self.addSystemMessage("\(username) left")
-                                }
-                                print("👋 Participant left (confirmed): \(actualUserId)")
-
-                                // Post-Load Gate Logic
-                                if actualUserId != self.currentUserId {
-                                    self.connectedGuestIds.remove(actualUserId)
-                                    self.readyGuestIds.remove(actualUserId)
-                                    if self.isWatchPartyHost {
-                                        self.checkIfAllGuestsReady()
-                                    }
-                                }
-                                
-                                self.appState?.objectWillChange.send() // Force UI update
-                                self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                            } else {
+                                 // We have NO record of this user's ref.
+                                 // This likely means they are already gone (removed by DB poll?).
+                                 // If we assume "True Leave", we should announce it.
+                                 // But if it's "Ghost Leave" (rotation), we should have the NEW ref in the map (from Join).
+                                 // So if map is empty, it means they are NOT currently connected with ANY ref.
+                                 // So it's safe to process the leave.
+                                 print("⚠️ Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
                             }
+                            
+                            // Clean up ref map
+                            self.activeConnectionRefs.removeValue(forKey: actualUserId)
+
+                            // Find username before removing for the message
+                            let defaultsName = metadata?["username"] as? String ?? "User"
+                            let username = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == actualUserId })?.name ?? defaultsName
+
+                            // Remove using actualUserId (Force remove even if not in list, just in case)
+                            if var currentParticipants = self.appState?.player.currentWatchPartyRoom?.participants {
+                                currentParticipants.removeAll(where: { $0.id == actualUserId })
+                                self.appState?.player.currentWatchPartyRoom?.participants = currentParticipants
+                            }
+
+                            // 💬 System Message: Leave
+                            if actualUserId != self.currentUserId {
+                                self.addSystemMessage("\(username) left")
+                            }
+                            print("👋 Participant left (confirmed): \(actualUserId)")
+
+                            // Post-Load Gate Logic
+                            if actualUserId != self.currentUserId {
+                                self.connectedGuestIds.remove(actualUserId)
+                                self.readyGuestIds.remove(actualUserId)
+                                if self.isWatchPartyHost {
+                                    self.checkIfAllGuestsReady()
+                                }
+                            }
+                            
+                            self.appState?.objectWillChange.send() // Force UI update
+                            self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                         }
 
                         self.pendingLeaveTasks[actualUserId] = task

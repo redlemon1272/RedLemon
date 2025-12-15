@@ -286,8 +286,18 @@ struct ScheduleManagementView: View {
         }
         .frame(minWidth: 600, minHeight: 500)
         .background(Color(NSColor.windowBackgroundColor))
+
         .task {
             refreshData()
+        }
+        .alert("Move Movie", isPresented: $isShowingMoveDialog) {
+            TextField("Target Position (1-\(eventConfigMovies.count))", text: $moveTargetIndex)
+            Button("Cancel", role: .cancel) { }
+            Button("Move") {
+                performMoveToPosition()
+            }
+        } message: {
+            Text("Enter the new position number for this movie.")
         }
     }
     

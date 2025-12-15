@@ -85,7 +85,13 @@ class AppState: ObservableObject {
     // isResolvingStream, streamError, currentWatchMode, currentRoomId
     // isWatchPartyHost, currentWatchPartyRoom, isPreloading
     // Event specific state
-    @Published var eventsSchedule: [EventItem] = [] // Shared schedule for player access
+    @Published var eventsSchedule: [EventItem] = []
+    
+    // Dynamic Schedule
+    @Published var scheduleEpoch: Date = ScheduleConstants.Epoch
+    
+    // Config Management
+    @Published var eventsConfigVersion: Int = 0
     @Published var isEventPlayback: Bool = false // Track if this is a public event playback
     @Published var currentEventId: String? = nil // Track ID of current event
 
@@ -172,6 +178,20 @@ class AppState: ObservableObject {
     }
     
     /// Update a single movie in the source list (e.g. lazy hydration)
+    func updateEventConfig(_ config: EventsConfig) {
+        self.allMovies = config.movies
+        self.eventsConfigVersion = config.version
+        
+        // Update epoch if present (backward compatibility)
+        if config.epochTimestamp > 0 {
+             self.scheduleEpoch = Date(timeIntervalSince1970: TimeInterval(config.epochTimestamp))
+             print("🗓 AppState: Updated schedule epoch to \(self.scheduleEpoch)")
+        }
+        
+        // Recalculate immediately with new data
+        calculateDeterministicSchedule()
+    }
+    
     func updateSingleMovie(_ enrichedMovie: MediaItem) {
         guard let index = allMovies.firstIndex(where: { $0.id == enrichedMovie.id }) else { return }
         
@@ -256,8 +276,10 @@ class AppState: ObservableObject {
             totalCycleDuration += duration
         }
         
-        // 2. Determine where we are in the cycle relative to a fixed epoch
-        let epoch = ScheduleConstants.Epoch
+        // 2. Determine where we are in the cycle relative to fixed epoch
+        // CRITICAL: Use the stored dynamic epoch (which defaults to the constant if not updated)
+        let epoch = self.scheduleEpoch
+        
         let timeSinceEpoch = now.timeIntervalSince(epoch)
         let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
         

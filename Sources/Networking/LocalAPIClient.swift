@@ -87,26 +87,18 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         return items
     }
 
-    func fetchTopMoviesForEvents() async throws -> [MediaItem] {
+    func fetchTopMoviesForEvents() async throws -> EventsConfig {
         print("🎬 [EventsView] Fetching movie events from centralized config...")
         
         // Fetch centralized config from Supabase
         // This ensures ALL RedLemon instances show identical movie lists
-        // The list is pre-generated, filtered, and shuffled by the Admin Generator
         do {
             let config = try await EventsConfigService.shared.fetchMovieEventsConfig()
             print("✅ [EventsView] Loaded \(config.movies.count) movies from config version \(config.version)")
-            
-            // Log first few movies for verification
-            for (index, movie) in config.movies.prefix(5).enumerated() {
-                print("   \(index + 1). \(movie.name)")
-            }
-            
-            return config.movies
+            return config
         } catch {
             print("❌ [EventsView] Failed to fetch events config: \(error)")
-            
-            // Fallback: Return empty array and show error to user
+            // Fallback: Throw error to user
             throw APIError.networkError(error)
         }
     }

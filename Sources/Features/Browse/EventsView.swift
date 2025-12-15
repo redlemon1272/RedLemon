@@ -151,11 +151,10 @@ struct EventsView: View {
         Task {
             // Load movie events
             do {
-                let movies = try await apiClient.fetchTopMoviesForEvents()
-                // Use the daily shuffled order from the API
+                let config = try await apiClient.fetchTopMoviesForEvents()
                 // Submit to AppState to begin scheduling
                 await MainActor.run {
-                    appState.updateEventMovies(movies)
+                    appState.updateEventConfig(config)
                     isLoading = false
                 }
             } catch {

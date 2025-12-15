@@ -20,6 +20,11 @@ struct ScheduleManagementView: View {
     @State private var isSearchingAddMovie = false
     @State private var isAddingMovie = false // New loading state for adding
     
+    // Move To Position State
+    @State private var isShowingMoveDialog = false
+    @State private var moveTargetIndex = ""
+    @State private var movieToMoveIndex: Int? = nil
+    
     var filteredMovies: [(index: Int, movie: MediaItem)] {
         let enumerated = Array(eventConfigMovies.enumerated())
         if searchQuery.isEmpty {
@@ -247,6 +252,35 @@ struct ScheduleManagementView: View {
                                         .disabled(item.index >= filteredMovies.count - 1)
                                     }
                                     .padding(.trailing, 40) // Make space for delete button
+                                    
+                                    Button(action: {
+                                        movieToMoveIndex = item.index
+                                        moveTargetIndex = "" // Reset
+                                        isShowingMoveDialog = true
+                                    }) {
+                                        Image(systemName: "arrow.turn.down.right")
+                                            .font(.system(size: 10, weight: .bold))
+                                            .foregroundColor(.white)
+                                            .padding(4)
+                                            .background(Color.blue.opacity(0.8))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(.plain)
+                                    .help("Move to specific position")
+                                    .padding(.trailing, 4)
+                                    
+                                    Button(action: {
+                                        playNow(movieIndex: item.index)
+                                    }) {
+                                        Image(systemName: "play.circle.fill")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.green)
+                                            .padding(4)
+                                            .background(Color.white.opacity(0.1))
+                                            .clipShape(Circle())
+                                    }
+                                    .buttonStyle(.plain)
+                                    .help("Play Now (Force Schedule Start)")
                                 }
                             )
                             
@@ -339,6 +373,43 @@ struct ScheduleManagementView: View {
                 }
             }
         )
+        .sheet(isPresented: $isShowingMoveDialog) {
+            VStack(spacing: 20) {
+                Text("Move Movie")
+                    .font(.headline)
+                
+                if let index = movieToMoveIndex, index < eventConfigMovies.count {
+                    Text("Moving: \(eventConfigMovies[index].name)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                
+                HStack {
+                    Text("To Position:")
+                    TextField("Index (1-\(eventConfigMovies.count))", text: $moveTargetIndex)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: 80)
+                        .onSubmit {
+                            performMoveToPosition()
+                        }
+                }
+                
+                HStack {
+                    Button("Cancel") {
+                        isShowingMoveDialog = false
+                    }
+                    .keyboardShortcut(.cancelAction)
+                    
+                    Button("Move") {
+                        performMoveToPosition()
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(moveTargetIndex.isEmpty)
+                }
+            }
+            .padding()
+            .frame(width: 300)
+        }
     }
     
     private func performAddMovieSearch() {
@@ -477,6 +548,70 @@ struct ScheduleManagementView: View {
         updateSchedule(newMovies: updatedMovies)
     }
     
+    private func performMoveToPosition() {
+        guard let fromIndex = movieToMoveIndex,
+              let targetPos = Int(moveTargetIndex) else { return }
+        
+        // Convert 1-based input to 0-based index
+        let toIndex = max(0, min(eventConfigMovies.count - 1, targetPos - 1))
+        
+        // Don't reorder if it's the same index
+        if fromIndex == toIndex {
+            isShowingMoveDialog = false
+            return
+        }
+        
+        var updatedMovies = eventConfigMovies
+        let movie = updatedMovies.remove(at: fromIndex)
+        updatedMovies.insert(movie, at: toIndex)
+        
+        eventConfigMovies = updatedMovies
+        updateSchedule(newMovies: updatedMovies)
+        
+        isShowingMoveDialog = false
+    }
+    
+    private func playNow(movieIndex: Int) {
+        // "Play Now" means we shift the Schedule Epoch so that the selected movie starts EXACTLY NOW.
+        // Logic:
+        // 1. Calculate the total duration of all movies BEFORE this one.
+        // 2. Set Epoch = Now - (Sum of previous durations).
+        // 3. This effectively places the scheduler cursor at the start of this movie.
+        
+        let movies = eventConfigMovies
+        guard movieIndex < movies.count else { return }
+        
+        // Calculate offset
+        var accumulatedOffset: TimeInterval = 0
+        let buffer = 600.0 // Default buffer from ScheduleConstants/Config (hardcoded here for admin calculation, strictly should fetch)
+        
+        for i in 0..<movieIndex {
+            let movie = movies[i]
+            let runtimeString = movie.runtime?.components(separatedBy: " ").first ?? "120"
+            let runtimeMinutes = Double(runtimeString) ?? 120.0
+            let duration = (runtimeMinutes * 60.0) + buffer
+            accumulatedOffset += duration
+        }
+        
+        // Epoch Calculation
+        // If we want the movie to start NOW:
+        // CurrentTimeSinceEpoch = accumulatedOffset
+        // Now - Epoch = accumulatedOffset
+        // Epoch = Now - accumulatedOffset
+        
+        // Add a tiny buffer (e.g. 10s) to "Now" so users have a moment to breathe before it starts?
+        // Or just exact. Let's do exact.
+        let newEpochDate = Date().addingTimeInterval(-accumulatedOffset)
+        let newEpochTimestamp = Int(newEpochDate.timeIntervalSince1970)
+        
+        print("▶️ [Admin] Play Now for '\(movies[movieIndex].name)' (Index: \(movieIndex))")
+        print("   accumulatedOffset: \(accumulatedOffset)s")
+        print("   newEpoch: \(newEpochTimestamp)")
+        
+        // Upload new config with SAME movies but NEW epoch
+        updateSchedule(newMovies: movies, newEpoch: newEpochTimestamp)
+    }
+    
     private func boostMovie(_ movie: MediaItem) {
         var updatedMovies = eventConfigMovies
         
@@ -489,7 +624,7 @@ struct ScheduleManagementView: View {
         updateSchedule(newMovies: updatedMovies)
     }
     
-    private func updateSchedule(newMovies: [MediaItem], excludedMovieId: String? = nil) {
+    private func updateSchedule(newMovies: [MediaItem], excludedMovieId: String? = nil, newEpoch: Int? = nil) {
         // Update local state immediately
         eventConfigMovies = newMovies
         eventConfigMovieCount = newMovies.count
@@ -510,7 +645,8 @@ struct ScheduleManagementView: View {
                 
                 let newVersion = try await EventsConfigService.shared.uploadNewConfig(
                     movies: newMovies,
-                    excludedMovieIds: excludedIds
+                    excludedMovieIds: excludedIds,
+                    epochTimestamp: newEpoch
                 )
                 
                 await MainActor.run {

@@ -36,10 +36,9 @@ class EventsConfigService {
     }
     
     /// Upload a new configuration to Supabase (Admin only)
-    func uploadNewConfig(type: String = "movie_events", movies: [MediaItem], excludedMovieIds: [String]? = nil) async throws -> Int {
+    func uploadNewConfig(type: String = "movie_events", movies: [MediaItem], excludedMovieIds: [String]? = nil, epochTimestamp: Int? = nil) async throws -> Int {
         print("📤 [EventsConfig] Uploading new \(type) config with \(movies.count) movies...")
         
-        // 1. Get current version to increment
         // 1. Get current version to increment
         var currentVersion = 0
         var currentConfig: EventsConfig?
@@ -54,11 +53,21 @@ class EventsConfigService {
         let newVersion = currentVersion + 1
         
         // 2. Prepare data
+        // Use provided epoch, or keep existing epoch (to prevent drift on unrelated edits), or fallback to Now (absolute reset)
+        let resolvedEpoch: Int
+        if let specificEpoch = epochTimestamp {
+            resolvedEpoch = specificEpoch // Explicit override (e.g. "Play Now")
+        } else if let current = currentConfig?.epochTimestamp {
+            resolvedEpoch = current // Preserve existing epoch to maintain schedule continuity
+        } else {
+            resolvedEpoch = Int(Date().timeIntervalSince1970) // Fallback for fresh config
+        }
+        
         let configData = EventsConfigData(
             movies: movies,
             cycle_duration_hours: currentConfig?.cycleDurationHours ?? 24,
             buffer_between_movies_seconds: currentConfig?.bufferBetweenMoviesSeconds ?? 600,
-            epoch_timestamp: Int(Date().timeIntervalSince1970),
+            epoch_timestamp: resolvedEpoch,
             generated_at: ISO8601DateFormatter().string(from: Date()),
             excluded_movie_ids: excludedMovieIds ?? currentConfig?.excludedMovieIds
         )

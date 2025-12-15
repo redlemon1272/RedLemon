@@ -107,10 +107,17 @@ class PlayerViewModel: ObservableObject {
                 // Extract filename from URL for better metadata
                 let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
                 
+                // Fallback: Detect quality from filename if room state is missing it
+                var finalQuality = hostQuality
+                if hostQuality == "Unknown" || hostQuality.isEmpty {
+                    finalQuality = Stream.detectVideoQuality(from: filename)
+                    NSLog("⚠️ GUEST: Detected quality from filename: \(finalQuality)")
+                }
+                
                 var hostStream = Stream(
                     url: hostUnlockedURL,
                     title: filename, // Use actual filename for badge detection
-                    quality: hostQuality,
+                    quality: finalQuality,
                     seeders: nil,
                     size: nil,
                     provider: "realdebrid",
@@ -254,10 +261,17 @@ class PlayerViewModel: ObservableObject {
                 // Extract filename from URL for better metadata
                 let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
 
+                // Fallback: Detect quality from filename if room state is missing it
+                var finalQuality = hostQuality
+                // Use relaxed check for "Unknown" since hostQuality is non-optional string here (derived from optional room prop)
+                if hostQuality == "Unknown" || hostQuality.isEmpty {
+                     finalQuality = Stream.detectVideoQuality(from: filename)
+                }
+
                 var hostStream = Stream(
                     url: hostUnlockedURL,
                     title: filename, // Use actual filename
-                    quality: hostQuality,
+                    quality: finalQuality,
                     seeders: nil,
                     size: nil,
                     provider: "realdebrid",

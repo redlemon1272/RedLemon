@@ -18,6 +18,7 @@ struct ScheduleManagementView: View {
     @State private var addMovieQuery = ""
     @State private var addMovieResults: [MediaItem] = []
     @State private var isSearchingAddMovie = false
+    @State private var isAddingMovie = false // New loading state for adding
     
     var filteredMovies: [(index: Int, movie: MediaItem)] {
         let enumerated = Array(eventConfigMovies.enumerated())
@@ -214,6 +215,40 @@ struct ScheduleManagementView: View {
                             .padding(.vertical, 4)
                             .padding(.horizontal, 8)
                             .background(item.index % 2 == 0 ? Color.white.opacity(0.05) : Color.clear)
+                            .overlay(
+                                // Edit Mode Controls (Reordering)
+                                HStack {
+                                    Spacer()
+                                    VStack(spacing: 2) {
+                                        Button(action: {
+                                            moveMovie(from: item.index, to: item.index - 1)
+                                        }) {
+                                            Image(systemName: "chevron.up")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(item.index > 0 ? .white : .gray.opacity(0.3))
+                                                .padding(4)
+                                                .background(Color.black.opacity(0.4))
+                                                .clipShape(Circle())
+                                        }
+                                        .buttonStyle(.plain)
+                                        .disabled(item.index == 0)
+                                        
+                                        Button(action: {
+                                            moveMovie(from: item.index, to: item.index + 1)
+                                        }) {
+                                            Image(systemName: "chevron.down")
+                                                .font(.system(size: 10, weight: .bold))
+                                                .foregroundColor(item.index < filteredMovies.count - 1 ? .white : .gray.opacity(0.3))
+                                                .padding(4)
+                                                .background(Color.black.opacity(0.4))
+                                                .clipShape(Circle())
+                                        }
+                                        .buttonStyle(.plain)
+                                        .disabled(item.index >= filteredMovies.count - 1)
+                                    }
+                                    .padding(.trailing, 40) // Make space for delete button
+                                }
+                            )
                             
                             Divider()
                         }
@@ -288,6 +323,22 @@ struct ScheduleManagementView: View {
             }
         }
         .frame(width: 500, height: 400)
+        .overlay(
+            Group {
+                if isAddingMovie {
+                    ZStack {
+                        Color.black.opacity(0.6)
+                        VStack(spacing: 12) {
+                            ProgressView()
+                                .scaleEffect(1.2)
+                            Text("Fetching full metadata...")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+            }
+        )
     }
     
     private func performAddMovieSearch() {
@@ -364,13 +415,66 @@ struct ScheduleManagementView: View {
     }
     
     private func addMovieToSchedule(_ movie: MediaItem) {
-        var updatedMovies = eventConfigMovies
-        updatedMovies.insert(movie, at: 0) // Add to top
+        // Prevent double adds
+        guard !isAddingMovie else { return }
+        isAddingMovie = true
         
+        Task {
+            var movieToAdd = movie
+            
+            // Hydrate metadata if needed
+            // Check if we have essential metadata (background, logo, rating)
+            let needsHydration = movie.background == nil || movie.logo == nil || movie.imdbRating == nil
+            
+            if needsHydration {
+                print("💧 [Admin] Fetching full metadata for: \(movie.name)")
+                do {
+                    // Fetch full details
+                    let fullItem = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: movie.id, type: "movie")
+                    movieToAdd = fullItem
+                    print("✅ [Admin] Hydrated metadata: \(movieToAdd.name) (Background: \(movieToAdd.background != nil), Rating: \(movieToAdd.imdbRating ?? "N/A"))")
+                } catch {
+                    print("⚠️ [Admin] Failed to hydrate metadata: \(error)")
+                    // Fallback to original item, but maybe try to at least get it into the schedule
+                }
+            }
+            
+            let finalMovieToAdd = movieToAdd
+            
+            await MainActor.run {
+                var updatedMovies = eventConfigMovies
+                updatedMovies.insert(finalMovieToAdd, at: 0) // Add to top
+                
+                updateSchedule(newMovies: updatedMovies)
+                
+                isAddingMovie = false
+                isShowingAddMovie = false
+                addMovieQuery = ""
+                addMovieResults = []
+            }
+        }
+    }
+    
+    private func moveMovie(from fromIndex: Int, to toIndex: Int) {
+        guard !searchQuery.isEmpty == false else {
+            // Cannot reorder while searching
+            return
+        }
+        
+        var updatedMovies = eventConfigMovies
+        guard fromIndex >= 0, fromIndex < updatedMovies.count,
+              toIndex >= 0, toIndex < updatedMovies.count else { return }
+        
+        // Swap or move logic?
+        // Let's do a simple move
+        let movie = updatedMovies.remove(at: fromIndex)
+        updatedMovies.insert(movie, at: toIndex)
+        
+        // Optimistic update
+        eventConfigMovies = updatedMovies
+        
+        // Persist
         updateSchedule(newMovies: updatedMovies)
-        isShowingAddMovie = false
-        addMovieQuery = ""
-        addMovieResults = []
     }
     
     private func boostMovie(_ movie: MediaItem) {

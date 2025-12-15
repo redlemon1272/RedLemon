@@ -1,0 +1,1906 @@
+2025-12-15 12:10:39.434 RedLemon[7904:54069] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-15 12:10:39.434 RedLemon[7904:54069] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-15 12:10:39.520 RedLemon[7904:54126] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 12:10:39.520 RedLemon[7904:54069] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-15 12:10:39.591 RedLemon[7904:54069] ✅ Playback state reset complete - starting in browse view
+2025-12-15 12:10:39.591 RedLemon[7904:54069] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-15 12:10:39.591 RedLemon[7904:54069] 🧪 Testing Profile: debug
+2025-12-15 12:10:39.592 RedLemon[7904:54145] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-15 12:10:39.592 RedLemon[7904:54069] ✅ Keychain: Found stored username: ursinho
+2025-12-15 12:10:39.592 RedLemon[7904:54069] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-15 12:10:39.592 RedLemon[7904:54145] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-15 12:10:39.943 RedLemon[7904:54145] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-15 12:10:39.953 RedLemon[7904:54145] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-15 12:10:39.953 RedLemon[7904:54145] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:10:39.981 RedLemon[7904:54069] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:10:39.981 RedLemon[7904:54069] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-15 12:10:39.981 RedLemon[7904:54069] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:10:39.981 RedLemon[7904:54069] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:10:39.982 RedLemon[7904:54069] 🚀 RedLemon: Starting HTTP server...
+2025-12-15 12:10:39.982 RedLemon[7904:54069] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-15 12:10:40.001 RedLemon[7904:54069] ✅ RedLemon: HTTPServer instance created
+2025-12-15 12:10:40.002 RedLemon[7904:54159] 📡 RedLemon: Server starting on port 47253...
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-15 12:10:42.197 RedLemon[7904:54069] ✅ RedLemon: Server marked as ready
+2025-12-15 12:10:42.231 RedLemon[7904:54069] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-15 12:10:42.231 RedLemon[7904:54069] 🔍 Performing startup checks...
+2025-12-15 12:10:42.231 RedLemon[7904:54069] ✅ Username-based authentication ready
+2025-12-15 12:10:42.231 RedLemon[7904:54069] 🔍 Performing startup checks...
+2025-12-15 12:10:42.232 RedLemon[7904:54069] ✅ Username-based authentication ready
+2025-12-15 12:10:42.232 RedLemon[7904:54069] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1340 with 456 movies
+✅ [EventsConfig] Using cached movie_events config (version 1340, 456 movies)
+✅ [EventsView] Loaded 456 movies from config version 1340
+🗓 AppState: Updated schedule epoch to 2025-12-15 15:50:05 +0000
+⏰ AppState: Next schedule update set for Event End: 2025-12-15 17:45:05 +0000
+⏰ AppState: Scheduling update in 2065 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt0480687","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"60e4639cb41e57e23df8252e767be794a3e475a3","imdb_id":"tt0480687","poster_url":"https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:25:13.329237","last_activity":"2025-12-15T16:24:17.607525","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/FRERVZQZXHFAO43/Hall.Pass.2011.1080p.BluRay.x264.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: [{"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T15:38:39.902848","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"E546F948-FDFD-4D8B-82EA-C047C71E33DF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"f6cb9544-d9d8-11f0-afd5-0a58a9feac02":{"metas":[{"phx_ref":"GIFysNBnOeN3dUeC","last_seen":"2025-12-15T17:10:32Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fb9aa830-d9d8-11f0-a7ac-0a58a9feac02":{"metas":[{"phx_ref":"GIFysqqSTSB7h8-N","last_seen":"2025-12-15T17:10:40Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+📨 Received: {"ref":"B5A5725D-5E7D-48A5-9979-5C71933194E7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+✅ SocialService: Connected to DM channel
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.017s (RTT: 61ms)
+   Local:  2025-12-15 17:10:42 +0000
+   Server: 2025-12-15 17:10:42 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+💓 Heartbeat sent
+💓 Heartbeat sent
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20)...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:08","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"UPP8","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:04:21.545615","last_activity":"2025-12-15T17:04:59","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/Z66XAV3I3LTDI71/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "24E1B68F-E9D6-414A-8FEC-3B357C8B5A01", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"9MML","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:57:41.090986","last_activity":"2025-12-15T16:57:55","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/RN5XN3IQGPPDI74/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "10D1C25C-D6D4-402D-AA44-981B8BD13374", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"UAAM","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:47:49.363405","last_activity":"2025-12-15T16:49:04","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/TVBJYACKNBJWA115/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "EEC58588-3DF7-466C-B678-E274C20E51DA", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"KCUN","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T16:29:51.946723","last_activity":"2025-12-15T16:30:02","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/HTCZQBQBJTOMI96/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "3FDCA438-EC8C-4A4B-99F0-7D945F4762A1", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}, 
+ {"id":"event_tt0480687","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"60e4639cb41e57e23df8252e767be794a3e475a3","imdb_id":"tt0480687","poster_url":"https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:25:13.329237","last_activity":"2025-12-15T16:24:17.607525","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/FRERVZQZXHFAO43/Hall.Pass.2011.1080p.BluRay.x264.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt0134273","name":"8MM","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"b6b6541f5ac91aadcbf394bd723a3d9bee28e510","imdb_id":"tt0134273","poster_url":"https://images.metahub.space/poster/small/tt0134273/img","backdrop_url":"https://images.metahub.space/background/medium/tt0134273/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:45:23.781511","last_activity":"2025-12-15T15:45:23.884338","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/WLPCNG2VKVENE21/8MM.1999.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T15:38:39.902848","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt22048412","name":"MaXXXine","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"0a2746873b386c4949669dc39bf57ad2c7672a0b","imdb_id":"tt22048412","poster_url":"https://images.metahub.space/poster/small/tt22048412/img","backdrop_url":"https://images.metahub.space/background/medium/tt22048412/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:00:04.570524","last_activity":"2025-12-15T15:04:21.758571","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/3WQNREVAUFELW21/MaXXXine.2024.1080p.AMZN.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt0417741","name":"Harry Potter and the Half-Blood Prince","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ab26661d77c28607893c7c2ebcc524da73f6cef7","imdb_id":"tt0417741","poster_url":"https://images.metahub.space/poster/small/tt0417741/img","backdrop_url":"https://images.metahub.space/background/medium/tt0417741/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T14:54:22.985395","last_activity":"2025-12-15T14:54:23.071199","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/5DNXQMKJNFSQI70/Harry.Potter.and.the.Half.Blood.Prince.2009.1080p.BluRay.DTS.x264-WiKi.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt2692250","name":"Night at the Museum: Secret of the Tomb","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"6cd0604ab2adb0a3e72d5f643b8ad33e39c80057","imdb_id":"tt2692250","poster_url":"https://images.metahub.space/poster/small/tt2692250/img","backdrop_url":"https://images.metahub.space/background/medium/tt2692250/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:39:13.076369","last_activity":"2025-12-15T07:39:13.137487","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/CMPUWECMBYXQQ124/Night.at.the.Museum.Secret.of.the.Tomb.2014.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_tt10838180","name":"The Matrix Resurrections","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"364bc1d0f36f7cc2d72eea8c7ecfcf11cfb23374","imdb_id":"tt10838180","poster_url":"https://images.metahub.space/poster/small/tt10838180/img","backdrop_url":"https://images.metahub.space/background/medium/tt10838180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T05:09:14.377953","last_activity":"2025-12-15T05:23:25.167996","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/QNKXVWFRSOQY274/The.Matrix.Resurrections.2021.1080p.BluRay.1600MB.DD2.0.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[]}, 
+ {"id":"event_pt-BR_tt10838180","name":"The Matrix Resurrections","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"2f518c85c5a2435dc5b42913db1b539bace4647b","imdb_id":"tt10838180","poster_url":"https://images.metahub.space/poster/small/tt10838180/img","backdrop_url":"https://images.metahub.space/background/medium/tt10838180/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T05:23:09.664289","last_activity":"2025-12-15T05:23:09.742134","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/K64QV4B3XXODA45/The.Matrix.Resurrections.2021.1080p.WEBRip.Dublado.mkv","description":null,"current_playlist_index":0,"playlist":[]}]
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"4763BED2-A543-488B-8299-70E63AACA642","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+✅ Loaded 5 rooms (total: 5)
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: CCF589E8-8116-47E9-AC63-3E9F19D1B10E]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: E2C95F4F-DB4B-4876-A8BB-21773A0BAF94]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 386D91BD-492F-4437-B2FF-A9A7A9EBA8C0]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 69FF0FC5-1BB9-4F4E-A339-6D91D6A9D03E]
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: 41D00405-16CF-4366-9F83-1F0795EA53CE]
+2025-12-15 12:11:11.903 RedLemon[7904:54299] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:11:11.903 RedLemon[7904:54443] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:11:11.904 RedLemon[7904:54452] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:11:11.913 RedLemon[7904:54452] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-15 12:11:11.935 RedLemon[7904:54443] 📦 Decoded CinemetaMeta - videos count: -1
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+💾 Cache SET: Metadata[meta_movie_tt2872718]
+🚪 Joining room: RVUF
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room RVUF...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+[ INFO ] GET /api/metadata/meta/movie/tt2872718 [request-id: BC6A8CC2-36CA-4F4A-8104-F0C06869652F]
+2025-12-15 12:11:13.002 RedLemon[7904:54069] ✅ Guest joined room RVUF in database
+2025-12-15 12:11:13.098 RedLemon[7904:54123] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-15 12:11:13.098 RedLemon[7904:54123]    Payload keys: chatUsername, type, senderId, position, chatText, timestamp
+2025-12-15 12:11:13.099 RedLemon[7904:54123] ✅ Realtime: Message broadcast complete
+2025-12-15 12:11:13.299 RedLemon[7904:54454] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:13.299 RedLemon[7904:54454]    Payload keys: type, chatText, timestamp, chatUsername, senderId, position
+2025-12-15 12:11:13.300 RedLemon[7904:54454] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-15 12:11:13.300 RedLemon[7904:54454] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-15 12:11:13.300 RedLemon[7904:54454] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:13.333 RedLemon[7904:54069] 👋 Received: Guest 'ursinho' joined room RVUF
+2025-12-15 12:11:17.573 RedLemon[7904:54069] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:11:17.574 RedLemon[7904:54069] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:11:17.574 RedLemon[7904:54442] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:17.574 RedLemon[7904:54442]    Payload keys: type, chatText, chatUsername, position, timestamp, senderId
+2025-12-15 12:11:17.575 RedLemon[7904:54442] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2025-12-15 12:11:17.575 RedLemon[7904:54442] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-15 12:11:17.576 RedLemon[7904:54069] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-15 12:11:17.576 RedLemon[7904:54442] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:17.589 RedLemon[7904:54069] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2025-12-15 12:11:17.638 RedLemon[7904:54069] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-15 12:11:17.638 RedLemon[7904:54069] 📨 Lobby: Received Room UPDATE from Realtime
+🔌 Setting up Realtime channel: watch-party:RVUF
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📡 Connection state: connected
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt2872718
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Nightcrawler
+🔍 [DEBUG] Successfully created MediaItem from meta: Nightcrawler
+✅ Lobby: Loaded metadata for Nightcrawler
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:08","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+📡 Joined channel: realtime:watch-party:RVUF
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"C6193061-90DF-40A9-BB98-25E6906F21A3","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":125228439,"event":"*","filter":"id=eq.RVUF","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:RVUF"}
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:12.904601","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+✅ Lobby: Refreshed room state. isPlaying: false
+🔌 Setting up Realtime channel: watch-party:RVUF
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:RVUF, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:12.904601","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:RVUF"},"topic":"realtime:watch-party:RVUF"}
+📨 Unknown event: system
+📨 Received: {"ref":null,"event":"presence_state","payload":{"0caca394-d9d9-11f0-80aa-0a58a9feac02":{"metas":[{"phx_ref":"GIFyuWTSoZQ6TZNB","phx_ref_prev":"GIFyuWTQnBY6TebL","is_host":true,"joined_at":1765818668.807982,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0ef33802-d9d9-11f0-a487-0a58a9feac02":{"metas":[{"phx_ref":"GIFyukegqrrA_7cP","is_host":false,"joined_at":1765818672.997525,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0ef33802-d9d9-11f0-a487-0a58a9feac02":{"metas":[{"phx_ref":"GIFyukek5-PA_zJK","phx_ref_prev":"GIFyukegqrrA_7cP","is_host":false,"joined_at":1765818673.0705209,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0ef33802-d9d9-11f0-a487-0a58a9feac02":{"metas":[{"phx_ref":"GIFyukegqrrA_7cP","is_host":false,"joined_at":1765818672.997525,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:12.904601","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "RVUF", "name": "Nightcrawler", "season": null, "episode": null, "imdb_id": "tt2872718", "playlist": [{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}], "is_public": true, "created_at": "2025-12-15T17:11:08.199468", "is_playing": false, "poster_url": "https://images.justwatch.com/poster/51204426/s332/img", "description": null, "stream_hash": "4679a925a6c5df93aa71376b31f13c6f59386ee2", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-15T17:11:17", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-15T17:11:17.432Z","old_record":{"id": "RVUF"}},"ids":[125228439]},"topic":"realtime:watch-party:RVUF"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "RVUF", "name": "Nightcrawler", "season": null, "episode": null, "imdb_id": "tt2872718", "playlist": [{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}], "is_public": true, "created_at": "2025-12-15T17:11:08.199468", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/51204426/s332/img", "description": null, "stream_hash": "4679a925a6c5df93aa71376b31f13c6f59386ee2", "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "host_username": "lemontom", "last_activity": "2025-12-15T17:11:17", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-15T17:11:17.524Z","old_record":{"id": "RVUF"}},"ids":[125228439]},"topic":"realtime:watch-party:RVUF"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.c2025-12-15 12:11:17.705 RedLemon[7904:54069] ✅ Guest: Synced stream details from host (Hash: 4679a925)
+2025-12-15 12:11:17.705 RedLemon[7904:54069] 🎬 Guest: Fetch took 0.115s, waiting 3.135s
+2025-12-15 12:11:20.847 RedLemon[7904:54069] 🎬 Guest: Starting playback after countdown
+2025-12-15 12:11:20.847 RedLemon[7904:54069] 🎬 Guest: Launching player for Nightcrawler
+2025-12-15 12:11:20.952 RedLemon[7904:54069]    Quality: 1080p
+2025-12-15 12:11:20.952 RedLemon[7904:54069]    Mode: watchParty
+2025-12-15 12:11:20.952 RedLemon[7904:54069] 📡 Fetching metadata for tt2872718...
+2025-12-15 12:11:20.977 RedLemon[7904:54069] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt2872718/img
+2025-12-15 12:11:20.978 RedLemon[7904:54069] ⏳ Background art loading...
+2025-12-15 12:11:20.978 RedLemon[7904:54069] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt2872718/img
+2025-12-15 12:11:20.978 RedLemon[7904:54069] ⏳ Logo loading...
+2025-12-15 12:11:21.004 RedLemon[7904:54069] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-15 12:11:21.006 RedLemon[7904:54069] 🎬 GUEST: Fetching subtitles for shared stream...
+om/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+🔍 Supabase Response for /rooms: [{"id":"RVUF","name":"Nightcrawler","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4679a925a6c5df93aa71376b31f13c6f59386ee2","imdb_id":"tt2872718","poster_url":"https://images.justwatch.com/poster/51204426/s332/img","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T17:11:08.199468","last_activity":"2025-12-15T17:11:17","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "DBF44D1F-8D71-4ACE-8C4B-680B10E8FC60", "mediaItem": {"id": "tt2872718", "name": "Nightcrawler", "type": "movie", "year": "2014", "poster": "https://images.justwatch.com/poster/51204426/s332/img", "imdbRating": "7.8", "releaseInfo": "2014"}}]}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🎬 PlayerVM: Starting playback for: Nightcrawler
+✅ Cache HIT: Metadata[meta_movie_tt2872718]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 5559B3DB-5357-4AC8-81C5-0820E5CD965B]
+2025-12-15 12:11:21.018 RedLemon[7904:54069] ✅ Logo loaded successfully
+2025-12-15 12:11:21.020 RedLemon[7904:54069] ✅ Background art loaded successfully
+2025-12-15 12:11:21.247 RedLemon[7904:54069] ✅ GUEST: Found 10 subtitles
+2025-12-15 12:11:21.279 RedLemon[7904:54069] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Ni, subtitles: 10
+2025-12-15 12:11:21.328 RedLemon[7904:54069] ✅ Stream ready, starting playback...
+2025-12-15 12:11:21.328 RedLemon[7904:54069] 🖥️ WindowManager: enterFullscreen() called
+2025-12-15 12:11:21.331 RedLemon[7904:54069]    Window: <SwiftUI.SwiftUIWindow: 0x7f98dffd7bb0>
+2025-12-15 12:11:21.331 RedLemon[7904:54069]    Is fullscreen: 0
+2025-12-15 12:11:21.331 RedLemon[7904:54069]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-15 12:11:21.407 RedLemon[7904:54069] 🖼️ Setting up MPV with native macOS video output...
+2025-12-15 12:11:21.415 RedLemon[7904:54069] ✅ MPV initialized with native GPU rendering
+2025-12-15 12:11:21.428 RedLemon[7904:54069] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-15 12:11:21.428 RedLemon[7904:54069] 🎉 Starting watch party sync - Room: RVUF, Host: NO
+2025-12-15 12:11:21.429 RedLemon[7904:54069] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-15 12:11:21.486 RedLemon[7904:54069] 🔄 Starting chat polling for room: RVUF
+2025-12-15 12:11:21.486 RedLemon[7904:54069] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-15 12:11:21.486 RedLemon[7904:54069] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-15 12:11:21.486 RedLemon[7904:54069] 🎬🎬🎬 Subtitles: 10
+2025-12-15 12:11:21.487 RedLemon[7904:54069] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Nightcrawler
+2025-12-15 12:11:21.487 RedLemon[7904:54069] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Ni
+2025-12-15 12:11:21.487 RedLemon[7904:54069] 🎬🎬🎬 subtitles: 10
+2025-12-15 12:11:21.488 RedLemon[7904:54069] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-15 12:11:21.522 RedLemon[7904:54454] 🎬 MPV: Current video filename set to: Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv
+2025-12-15 12:11:21.522 RedLemon[7904:54454] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5, autoplay: false
+2025-12-15 12:11:21.522 RedLemon[7904:54454] ⏸️ Loading in paused mode (watch party)
+2025-12-15 12:11:21.522 RedLemon[7904:54454] 🔗 URL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv
+2025-12-15 12:11:21.522 RedLemon[7904:54454] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Nightcrawler.REPACK.2014.1080p.BluRay.DD.5.1.x264-DON.mkv"
+2025-12-15 12:11:21.522 RedLemon[7904:54454] 🎬 MPV loadfile result: 0
+2025-12-15 12:11:21.523 RedLemon[7904:54454] ✅ MPV loadfile succeeded (started paused)
+2025-12-15 12:11:21.856 RedLemon[7904:54069] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-15 12:11:22.723 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:22.723 RedLemon[7904:54545]    Payload keys: senderId, isPlaying, timestamp, type, position
+2025-12-15 12:11:22.724 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:22.724 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:22.724 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:22.725 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:24.206 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:24.206 RedLemon[7904:54299]    Payload keys: type, position, isPlaying, senderId, timestamp
+2025-12-15 12:11:24.207 RedLemon[7904:54299] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:24.208 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 12:11:24.208 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:24.208 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:24.208 RedLemon[7904:54069] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:24.208 RedLemon[7904:54069] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-15 12:11:24.735 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:24.735 RedLemon[7904:54545]    Payload keys: type, position, timestamp, isPlaying, senderId
+2025-12-15 12:11:24.736 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:24.736 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:24.736 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:24.736 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:25.538 RedLemon[7904:54069] ⏱️ Watch Party: Duration available (7054.6s), triggering ready signal
+2025-12-15 12:11:25.538 RedLemon[7904:54069] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-15 12:11:25.649 RedLemon[7904:54123] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:11:25.650 RedLemon[7904:54123]    Payload keys: isPlaying, timestamp, position, type, senderId
+2025-12-15 12:11:25.653 RedLemon[7904:54123] ✅ Realtime: Message broadcast complete
+2025-12-15 12:11:25.655 RedLemon[7904:54069] ✅ Watch Party: READY signal sent successfully
+2025-12-15 12:11:25.690 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:25.690 RedLemon[7904:54545]    Payload keys: position, timestamp, isPlaying, senderId, type
+2025-12-15 12:11:25.692 RedLemon[7904:54545] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:11:25.692 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 12:11:25.692 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:11:25.692 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:25.692 RedLemon[7904:54069] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:11:26.136 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:26.136 RedLemon[7904:54299]    Payload keys: position, type, isPlaying, senderId, timestamp
+2025-12-15 12:11:26.136 RedLemon[7904:54299] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:26.137 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-15 12:11:26.137 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:26.137 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:26.137 RedLemon[7904:54069] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:26.742 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:26.742 RedLemon[7904:54545]    Payload keys: timestamp, type, position, isPlaying, senderId
+2025-12-15 12:11:26.742 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:26.743 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:26.743 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:26.743 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:26.906 RedLemon[7904:54123] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:26.906 RedLemon[7904:54123]    Payload keys: timestamp, position, type, isPlaying, senderId
+2025-12-15 12:11:26.907 RedLemon[7904:54123] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:26.907 RedLemon[7904:54123] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-15 12:11:26.908 RedLemon[7904:54123] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:26.908 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:27.059 RedLemon[7904:54069] 🔍 MPV track-list/count: 9
+2025-12-15 12:11:27.059 RedLemon[7904:54069] 🔍 Track 0 type: video
+2025-12-15 12:11:27.059 RedLemon[7904:54069] 🔍 Track 1 type: audio
+2025-12-15 12:11:27.059 RedLemon[7904:54069] 🔍 Track 2 type: audio
+2025-12-15 12:11:27.059 RedLemon[7904:54069] 🔍 Track 3 type: sub
+2025-12-15 12:11:27.060 RedLemon[7904:54069] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:27.060 RedLemon[7904:54069] 🔍 Track 4 type: sub
+2025-12-15 12:11:27.060 RedLemon[7904:54069] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:27.060 RedLemon[7904:54069] 🔍 Track 5 type: sub
+2025-12-15 12:11:27.060 RedLemon[7904:54069] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:27.060 RedLemon[7904:54069] 🔍 Track 6 type: sub
+2025-12-15 12:11:27.061 RedLemon[7904:54069] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069] 🔍 Track 7 type: sub
+2025-12-15 12:11:27.061 RedLemon[7904:54069] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069] 🔍 Track 8 type: sub
+2025-12-15 12:11:27.061 RedLemon[7904:54069] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 12:11:27.061 RedLemon[7904:54069]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:27.061 RedLemon[7904:54069]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:27.062 RedLemon[7904:54069]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:27.062 RedLemon[7904:54069]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:27.083 RedLemon[7904:54428] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-15 12:11:27.083 RedLemon[7904:54428] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNDk3LTEwNTQ3NDMuemlw
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0caca394-d9d9-11f0-80aa-0a58a9feac02":{"metas":[{"phx_ref":"GIFyvAG2I006TYtQ","phx_ref_prev":"GIFyuWTSoZQ6TZNB","is_host":true,"joined_at":1765818680.494897,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"0caca394-d9d9-11f0-80aa-0a58a9feac02":{"metas":[{"phx_ref":"GIFyuWTSoZQ6TZNB","phx_ref_prev":"GIFyuWTQnBY6TebL","is_host":true,"joined_at":1765818668.807982,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:RVUF"}
+🔍 Subtitle search request: tt2872718 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt2872718 (movie)
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Nightcrawler.2014.BDRip.x264-SPARKS [EN] (score: 8)
+   [2] Nightcrawler.2014.1080p.BluRay.x265-RARBG.en [EN] (score: 5)
+   [3] Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH [EN] (score: 5)
+   [4] Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng [EN] (score: 5)
+   [5] Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS [EN] (score: 5)
+   [6] Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE [EN] (score: 0)
+   [7] Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD [EN] (score: 0)
+   [8] Nightcrawler 2014 BRRip XViD-juggs[ETRG] [EN] (score: 0)
+   [9] Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess [EN] (score: 0)
+   [10] Nightcrawler 23.976 FPS Blu-ray [EN] (score: 0)
+✅ Subtitle search returned 10 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Ni
+   Display Title: Nightcrawler
+   Subtitle URLs: 10
+      [0] Nightcrawler.2014.BDRip.x264-SPARKS
+      [1] Nightcrawler.2014.1080p.BluRay.x265-RARBG.en
+      [2] Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [3] Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng
+      [4] Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS
+      [5] Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE
+      [6] Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD
+      [7] Nightcrawler 2014 BRRip XViD-juggs[ETRG]
+      [8] Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess
+      [9] Nightcrawler 23.976 FPS Blu-ray
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=RVUF, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:RVUF
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:RVUF, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Nightcrawler
+   IMDB: tt2872718
+   URL: https://chi4-4.download.real-debrid.com/d/2NU2DKZ3SMQLS72/Ni...
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt2872718 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt2872718]
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0ef33802-d9d9-11f0-a487-0a58a9feac02":{"metas":[{"phx_ref":"GIFyvDGEkrvA_7OE","phx_ref_prev":"GIFyukek5-PA_zJK","is_host":false,"joined_at":1765818681.4788752,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"0ef33802-d9d9-11f0-a487-0a58a9feac02":{"metas":[{"phx_ref":"GIFyukek5-PA_zJK","phx_ref_prev":"GIFyukegqrrA_7cP","is_host":false,"joined_at":1765818673.0705209,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fb9aa830-d9d8-11f0-a7ac-0a58a9feac02":{"metas":[{"phx_ref":"GIFyvDRPXDN7hysM","phx_ref_prev":"GIFysqqSTSB7h8-N","last_seen":"2025-12-15T17:11:21Z","room_id":"RVUF","started_at":"2025-12-15T17:11:21Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt2872718","watching_title":"Nightcrawler","watching_type":"movie"}]}},"leaves":{"fb9aa830-d9d8-11f0-a7ac-0a58a9feac02":{"metas":[{"phx_ref":"GIFysqqSTSB7h8-N","last_seen":"2025-12-15T17:10:40Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt2872718/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt2872718/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt2872718/img...
+📡 SocialService: Updated status - Watching: Nightcrawler
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIFyvDGEkrvA_7OE)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+⏰ AppState: Next schedule update set for Event End: 2025-12-15 17:45:05 +0000
+⏰ AppState: Scheduling update in 2024 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🔍 Supabase Response for /rooms: [{"id":"event_tt0480687","name":"Hall Pass","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"60e4639cb41e57e23df8252e767be794a3e475a3","imdb_id":"tt0480687","poster_url":"https://m.media-amazon.com/images/M/MV5BMTc4MzIxNTYwNl5BMl5BanBnXkFtZTcwNzE4MjE0NA@@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-15T07:25:13.329237","last_activity":"2025-12-15T16:24:17.607525","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/FRERVZQZXHFAO43/Hall.Pass.2011.1080p.BluRay.x264.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: [{"id":"event_tt1396484","name":"It","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"ad1ba686c1b2028858b0aefd835e995d76707d44","imdb_id":"tt1396484","poster_url":"https://images.metahub.space/poster/small/tt1396484/img","backdrop_url":"https://images.metahub.space/background/medium/tt1396484/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-15T15:38:39.80417","last_activity":"2025-12-15T15:38:39.902848","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/ZDRRYZHMAZRQS117/It.2017.1080p.BluRay.x264-%5BYTS.AG%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"f6cb9544-d9d8-11f0-afd5-0a58a9feac02":{"metas":[{"phx_ref":"GIFyvATTPI93dT_P","phx_ref_prev":"GIFysNBnOeN3dUeC","last_seen":"2025-12-15T17:11:20Z","room_id":"RVUF","started_at":"2025-12-15T17:11:20Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt2872718","watching_title":"Nightcrawler","watching_type":"movie"}]}},"leaves":{"f6cb9544-d9d8-11f0-afd5-0a58a9feac02":{"metas":[{"phx_ref":"GIFysNBnOeN3dUeC","last_seen":"2025-12-15T17:10:32Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"RVUF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765818683.9165711,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"RVUF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Ultra-gentle sync: 1.005x to fix 140ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] File tags:
+[MPV] Title: Nightcrawler (2014) - DON
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🔍 Track 2: Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy | 2ch | English: true | Commentary: true -> Score: -8980
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🔍 Track 2: Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy | 2ch | English: true | Commentary: true -> Score: -8980
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 9 total tracks
+🔍 AUTO-SELECT: Track 3 - ID: 1, lang: 'eng', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 4 - ID: 2, lang: 'eng', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 2) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 1850 (Embedded: 1000, Match: 0, Clean: 600, SDH: 250)
+ MPV Event: 18
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x800 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] (+) Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818685.538691,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765818685.917855,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"RVUF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Ultra-gentle sync: 1.005x to fix 218ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765818686.608202,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 2 audio tracks
+   Audio: ID=1 lang=eng title=nil
+   Audio: ID=2 lang=eng title=Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy
+✅ Found English audio track: English
+📊 Found 7 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+   Subtitle: ID=1 lang=eng title=nil
+   Subtitle: ID=2 lang=eng title=SDH
+   Subtitle: ID=3 lang=dan title=nil
+   Subtitle: ID=4 lang=fre title=nil
+   Subtitle: ID=5 lang=rus title=nil
+   Subtitle: ID=6 lang=spa title=nil
+📊 After filtering: 6 actual subtitle tracks
+📊 Current subtitle track: 2
+✅ Found English subtitle track: English (ID: 1)
+🔍 Analyzing subtitle compatibility...
+✅ Good version match: Nightcrawler.2014.BDRip.x264-SPARKS
+✅ Good version match: Nightcrawler.2014.1080p.BluRay.x265-RARBG.en
+✅ Good version match: Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH
+✅ Good version match: Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng
+✅ Good version match: Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS
+✅ Good version match: Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE
+✅ Good version match: Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD
+✅ Good version match: Nightcrawler 2014 BRRip XViD-juggs[ETRG]
+✅ Good version match: Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess
+✅ Good version match: Nightcrawler 23.976 FPS Blu-ray
+📝 Started watch history tracking
+📝 Set subtitle track to: 1 (async, visibility enabled)
+📝 Loading external subtitles (delayed execution)...
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=eng (subrip)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MP2025-12-15 12:11:27.083 RedLemon[7904:54123] 🔍 MPV track-list/count: 9
+2025-12-15 12:11:27.083 RedLemon[7904:54123] 🔍 Track 0 type: video
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 1 type: audio
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 2 type: audio
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 3 type: sub
+2025-12-15 12:11:27.084 RedLemon[7904:54123] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 4 type: sub
+2025-12-15 12:11:27.084 RedLemon[7904:54123] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 5 type: sub
+2025-12-15 12:11:27.084 RedLemon[7904:54123] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:27.084 RedLemon[7904:54123] 🔍 Track 6 type: sub
+2025-12-15 12:11:27.085 RedLemon[7904:54123] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:27.085 RedLemon[7904:54123] 🔍 Track 7 type: sub
+2025-12-15 12:11:27.085 RedLemon[7904:54123] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:27.085 RedLemon[7904:54123] 🔍 Track 8 type: sub
+2025-12-15 12:11:27.085 RedLemon[7904:54123] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:27.085 RedLemon[7904:54123] 📊 Total subtitle tracks found: 7 (including Off if needed)
+2025-12-15 12:11:27.085 RedLemon[7904:54123]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:27.086 RedLemon[7904:54123]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:27.087 RedLemon[7904:54123] ✅ SubtitleService: Scanned 7 tracks (Attempt 1/5)
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:27.095 RedLemon[7904:54123]    Track: ID=6, Title=Spanish, External=0
+V] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+📊 Current subtitle track: 1
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNDk3LTEwNTQ3NDMuemlw [request-id: D0062B71-0086-4826-963F-A0A16BD58615]
+2025-12-15 12:11:27.214 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:27.215 RedLemon[7904:54545]    Payload keys: senderId, position, timestamp, isPlaying, type
+2025-12-15 12:11:27.215 RedLemon[7904:54545] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:27.215 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-15 12:11:27.215 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:27.223 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:27.746 RedLemon[7904:54544] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9C4E392B-7963-4B47-A4C5-ACDF2952507D.vtt
+2025-12-15 12:11:27.746 RedLemon[7904:54544] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9C4E392B-7963-4B47-A4C5-ACD
+2025-12-15 12:11:27.794 RedLemon[7904:54544] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:27.794 RedLemon[7904:54544] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTEyOTUtODQzMzg0OS56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzIzNDk3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23497-1054743.zip
+⏳ MPV: Buffering state changed: true (paused-for-cache)
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765818686.984427,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 56871 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Nightcrawler.2014.1080p.BluRay.x264-SPARKS.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTEyOTUtODQzMzg0OS56aXA= [request-id: B60959EE-5DA3-4102-AD8B-51FF4A403F35]
+2025-12-15 12:11:28.181 RedLemon[7904:54299] 🔍 MPV track-list/count: 10
+2025-12-15 12:11:28.181 RedLemon[7904:54299] 🔍 Track 0 type: video
+2025-12-15 12:11:28.181 RedLemon[7904:54299] 🔍 Track 1 type: audio
+2025-12-15 12:11:28.182 RedLemon[7904:54299] 🔍 Track 2 type: audio
+2025-12-15 12:11:28.182 RedLemon[7904:54299] 🔍 Track 3 type: sub
+2025-12-15 12:11:28.182 RedLemon[7904:54299] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:28.182 RedLemon[7904:54299] 🔍 Track 4 type: sub
+2025-12-15 12:11:28.183 RedLemon[7904:54299] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:28.183 RedLemon[7904:54299] 🔍 Track 5 type: sub
+2025-12-15 12:11:28.183 RedLemon[7904:54299] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:28.184 RedLemon[7904:54299] 🔍 Track 6 type: sub
+2025-12-15 12:11:28.184 RedLemon[7904:54299] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:28.184 RedLemon[7904:54299] 🔍 Track 7 type: sub
+2025-12-15 12:11:28.185 RedLemon[7904:54299] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:28.185 RedLemon[7904:54299] 🔍 Track 8 type: sub
+2025-12-15 12:11:28.185 RedLemon[7904:54299] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:28.185 RedLemon[7904:54299] 🔍 Track 9 type: sub
+2025-12-15 12:11:28.186 RedLemon[7904:54299] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:28.186 RedLemon[7904:54299] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2025-12-15 12:11:28.186 RedLemon[7904:54299]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:28.187 RedLemon[7904:54299]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:28.187 RedLemon[7904:54299]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:28.188 RedLemon[7904:54299]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:28.188 RedLemon[7904:54299]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:28.188 RedLemon[7904:54299]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:28.188 RedLemon[7904:54299]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:28.189 RedLemon[7904:54299]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:28.191 RedLemon[7904:54299] ✅ SubtitleService: Scanned 8 tracks (Attempt 2/5)
+2025-12-15 12:11:28.191 RedLemon[7904:54299]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:28.191 RedLemon[7904:54299]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:28.191 RedLemon[7904:54299]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:28.192 RedLemon[7904:54299]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:28.192 RedLemon[7904:54299]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:28.192 RedLemon[7904:54299]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:28.195 RedLemon[7904:54299]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:28.196 RedLemon[7904:54299]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:28.771 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:28.771 RedLemon[7904:54299]    Payload keys: type, isPlaying, senderId, position, timestamp
+2025-12-15 12:11:28.771 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:28.771 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:28.772 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:28.778 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:29.261 RedLemon[7904:54123] 🔍 MPV track-list/count: 10
+2025-12-15 12:11:29.261 RedLemon[7904:54123] 🔍 Track 0 type: video
+2025-12-15 12:11:29.261 RedLemon[7904:54123] 🔍 Track 1 type: audio
+2025-12-15 12:11:29.261 RedLemon[7904:54123] 🔍 Track 2 type: audio
+2025-12-15 12:11:29.261 RedLemon[7904:54123] 🔍 Track 3 type: sub
+2025-12-15 12:11:29.262 RedLemon[7904:54123] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:29.262 RedLemon[7904:54123] 🔍 Track 4 type: sub
+2025-12-15 12:11:29.262 RedLemon[7904:54123] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:29.262 RedLemon[7904:54123] 🔍 Track 5 type: sub
+2025-12-15 12:11:29.262 RedLemon[7904:54123] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:29.262 RedLemon[7904:54123] 🔍 Track 6 type: sub
+2025-12-15 12:11:29.262 RedLemon[7904:54123] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:29.262 RedLemon[7904:54123] 🔍 Track 7 type: sub
+2025-12-15 12:11:29.263 RedLemon[7904:54123] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:29.263 RedLemon[7904:54123] 🔍 Track 8 type: sub
+2025-12-15 12:11:29.263 RedLemon[7904:54123] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:29.263 RedLemon[7904:54123] 🔍 Track 9 type: sub
+2025-12-15 12:11:29.264 RedLemon[7904:54123] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:29.264 RedLemon[7904:54123] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:29.264 RedLemon[7904:54123]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:29.265 RedLemon[7904:54123] ✅ SubtitleService: Scanned 8 tracks (Attempt 3/5)
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:29.265 RedLemon[7904:54123]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:29.266 RedLemon[7904:54123]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:29.266 RedLemon[7904:54123]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:29.266 RedLemon[7904:54123]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:29.639 RedLemon[7904:54299] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_50070BE7-46AB-4DDC-98AD-6372AEA7D00E.vtt
+2025-12-15 12:11:29.639 RedLemon[7904:54299] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_50070BE7-46AB-4DDC-98AD-637
+2025-12-15 12:11:29.753 RedLemon[7904:54299] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:29.753 RedLemon[7904:54299] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0Njg4OTgtODM5MTk4OC56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTEy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3511295-8433849.zip
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] (+) Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+📊 Current subtitle track: 7
+🎬 DisplayLink: reportSwap() (throttled)
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Ultra-gentle sync: 1.005x to fix 256ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+✅ Download complete: 56607 bytes
+📦 Detected ZIP archive, extracting...
+📊 Current subtitle track: 7
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+⚠️ No specific episode match found, using first file: Nightcrawler.2014.1080p.BluRay.x265-RARBG.en.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] (+) Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0Njg4OTgtODM5MTk4OC56aXA= [request-id: 05B54596-9A0B-4802-8C47-A9DC26113BDA]
+2025-12-15 12:11:30.277 RedLemon[7904:54299] 🔍 MPV track-list/count: 11
+2025-12-15 12:11:30.277 RedLemon[7904:54299] 🔍 Track 0 type: video
+2025-12-15 12:11:30.277 RedLemon[7904:54299] 🔍 Track 1 type: audio
+2025-12-15 12:11:30.277 RedLemon[7904:54299] 🔍 Track 2 type: audio
+2025-12-15 12:11:30.278 RedLemon[7904:54299] 🔍 Track 3 type: sub
+2025-12-15 12:11:30.278 RedLemon[7904:54299] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:30.278 RedLemon[7904:54299] 🔍 Track 4 type: sub
+2025-12-15 12:11:30.278 RedLemon[7904:54299] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:30.278 RedLemon[7904:54299] 🔍 Track 5 type: sub
+2025-12-15 12:11:30.278 RedLemon[7904:54299] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:30.278 RedLemon[7904:54299] 🔍 Track 6 type: sub
+2025-12-15 12:11:30.279 RedLemon[7904:54299] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:30.279 RedLemon[7904:54299] 🔍 Track 7 type: sub
+2025-12-15 12:11:30.280 RedLemon[7904:54299] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:30.280 RedLemon[7904:54299] 🔍 Track 8 type: sub
+2025-12-15 12:11:30.280 RedLemon[7904:54299] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:30.280 RedLemon[7904:54299] 🔍 Track 9 type: sub
+2025-12-15 12:11:30.280 RedLemon[7904:54299] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:30.280 RedLemon[7904:54299] 🔍 Track 10 type: sub
+2025-12-15 12:11:30.280 RedLemon[7904:54299] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:30.280 RedLemon[7904:54299] 📊 Total subtitle tracks found: 9 (including Off if needed)
+2025-12-15 12:11:30.280 RedLemon[7904:54299]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:30.280 RedLemon[7904:54299]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:30.281 RedLemon[7904:54299] ✅ SubtitleService: Scanned 9 tracks (Attempt 4/5)
+2025-12-15 12:11:30.281 RedLemon[7904:54299]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:30.282 RedLemon[7904:54299]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:30.282 RedLemon[7904:54299]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:30.282 RedLemon[7904:54299]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:30.282 RedLemon[7904:54299]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:30.282 RedLemon[7904:54299]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:30.283 RedLemon[7904:54299]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:30.283 RedLemon[7904:54299]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:30.283 RedLemon[7904:54299]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:30.912 RedLemon[7904:54544] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_83DFBA8D-FD67-423B-A41D-1059E412EDAE.vtt
+2025-12-15 12:11:30.912 RedLemon[7904:54544] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_83DFBA8D-FD67-423B-A41D-105
+2025-12-15 12:11:30.933 RedLemon[7904:54656] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:30.933 RedLemon[7904:54656]    Payload keys: position, type, timestamp, senderId, isPlaying
+2025-12-15 12:11:30.933 RedLemon[7904:54656] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:30.933 RedLemon[7904:54656] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:30.934 RedLemon[7904:54656] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:30.960 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:30.981 RedLemon[7904:54544] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:30.981 RedLemon[7904:54544] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0Njg4OTctODM5MTk4Ny56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzM0Njg4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3468898-8391988.zip
+📊 Current subtitle track: 8
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ Download complete: 59844 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":0.751,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0Njg4OTctODM5MTk4Ny56aXA= [request-id: 55098728-CCC0-469F-B78B-3CFA8EAFEA50]
+2025-12-15 12:11:31.314 RedLemon[7904:54545] 🔍 MPV track-list/count: 12
+2025-12-15 12:11:31.315 RedLemon[7904:54545] 🔍 Track 0 type: video
+2025-12-15 12:11:31.315 RedLemon[7904:54545] 🔍 Track 1 type: audio
+2025-12-15 12:11:31.315 RedLemon[7904:54545] 🔍 Track 2 type: audio
+2025-12-15 12:11:31.315 RedLemon[7904:54545] 🔍 Track 3 type: sub
+2025-12-15 12:11:31.315 RedLemon[7904:54545] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:31.315 RedLemon[7904:54545] 🔍 Track 4 type: sub
+2025-12-15 12:11:31.315 RedLemon[7904:54545] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:31.316 RedLemon[7904:54545] 🔍 Track 5 type: sub
+2025-12-15 12:11:31.316 RedLemon[7904:54545] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:31.316 RedLemon[7904:54545] 🔍 Track 6 type: sub
+2025-12-15 12:11:31.316 RedLemon[7904:54545] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:31.316 RedLemon[7904:54545] 🔍 Track 7 type: sub
+2025-12-15 12:11:31.317 RedLemon[7904:54545] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:31.317 RedLemon[7904:54545] 🔍 Track 8 type: sub
+2025-12-15 12:11:31.317 RedLemon[7904:54545] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:31.317 RedLemon[7904:54545] 🔍 Track 9 type: sub
+2025-12-15 12:11:31.317 RedLemon[7904:54545] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:31.317 RedLemon[7904:54545] 🔍 Track 10 type: sub
+2025-12-15 12:11:31.317 RedLemon[7904:54545] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:31.317 RedLemon[7904:54545] 🔍 Track 11 type: sub
+2025-12-15 12:11:31.318 RedLemon[7904:54545] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:31.318 RedLemon[7904:54545] 📊 Total subtitle tracks found: 10 (including Off if needed)
+2025-12-15 12:11:31.318 RedLemon[7904:54545]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:31.318 RedLemon[7904:54545]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:31.318 RedLemon[7904:54545]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:31.318 RedLemon[7904:54545]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:31.319 RedLemon[7904:54545]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:31.319 RedLemon[7904:54545]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:31.319 RedLemon[7904:54545]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:31.319 RedLemon[7904:54545]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:31.320 RedLemon[7904:54545]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:31.320 RedLemon[7904:54545]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:31.320 RedLemon[7904:54545] ✅ SubtitleService: Scanned 10 tracks (Attempt 5/5)
+2025-12-15 12:11:31.321 RedLemon[7904:54545]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:31.321 RedLemon[7904:54545]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:31.321 RedLemon[7904:54545]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:31.321 RedLemon[7904:54545]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:31.322 RedLemon[7904:54545]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:31.322 RedLemon[7904:54545]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:31.322 RedLemon[7904:54545]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:31.322 RedLemon[7904:54545]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:31.323 RedLemon[7904:54545]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:31.323 RedLemon[7904:54545]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:32.273 RedLemon[7904:54545] ✅ Subtitle 4 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E34E5580-F060-455E-BE13-11CAAC5806A1.vtt
+2025-12-15 12:11:32.273 RedLemon[7904:54545] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E34E5580-F060-455E-BE13-11C
+2025-12-15 12:11:32.332 RedLemon[7904:54545] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:32.332 RedLemon[7904:54545] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNTAzLTEwNTMyMTEuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzM0Njg4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3468897-8391987.zip
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] (+) Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+📊 Current subtitle track: 9
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+👋 Participant left (confirmed): 656daa91-33b4-4688-9135-c982ea52d7c9
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Download complete: 54174 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNTAzLTEwNTMyMTEuemlw [request-id: 62B27891-5A36-448E-8D95-AB142433F9D1]
+2025-12-15 12:11:32.812 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:32.813 RedLemon[7904:54545]    Payload keys: timestamp, type, senderId, isPlaying, position
+2025-12-15 12:11:32.814 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:32.814 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:32.814 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:32.884 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:32.925 RedLemon[7904:54429] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:32.925 RedLemon[7904:54429]    Payload keys: senderId, timestamp, position, isPlaying, type
+2025-12-15 12:11:32.925 RedLemon[7904:54429] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:32.925 RedLemon[7904:54429] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-15 12:11:32.926 RedLemon[7904:54429] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:32.928 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-15 12:11:33.118 RedLemon[7904:54545] ✅ Subtitle 5 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5C5606A3-56B5-4172-846F-0360FA953071.vtt
+2025-12-15 12:11:33.119 RedLemon[7904:54545] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5C5606A3-56B5-4172-846F-036
+2025-12-15 12:11:33.169 RedLemon[7904:54545] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:33.169 RedLemon[7904:54545] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNTA0LTEwNzY0NTQuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzIzNTAz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23503-1053211.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+✅ Download complete: 62382 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":2.544,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚠️ No specific episode match found, using first file: English.srt
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+⚡ Ultra-gentle sync: 0.995x to fix 163ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+✅ Extraction successful
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":2.836,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1765818692.663436,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+[MPV] (+) Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNTA0LTEwNzY0NTQuemlw [request-id: 546FADBD-D487-4B11-89D6-0A82624030A3]
+2025-12-15 12:11:33.701 RedLemon[7904:54299] ✅ Subtitle 6 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_01494FA7-4897-48E6-B775-FB38144482C6.vtt
+2025-12-15 12:11:33.701 RedLemon[7904:54299] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_01494FA7-4897-48E6-B775-FB3
+2025-12-15 12:11:33.759 RedLemon[7904:54299] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:33.760 RedLemon[7904:54299] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNTAxLTEyMjA5NjYuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzIzNTA0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23504-1076454.zip
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+✅ Download complete: 60000 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+⚠️ No specific episode match found, using first file: Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE.English.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNTAxLTEyMjA5NjYuemlw [request-id: 4400B905-D3CA-47BC-BFF6-AD30DBA1531F]
+2025-12-15 12:11:34.444 RedLemon[7904:54544] ✅ Subtitle 7 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_937E7EB3-8801-4F58-A468-D41840BA7F80.vtt
+2025-12-15 12:11:34.445 RedLemon[7904:54544] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_937E7EB3-8801-4F58-A468-D41
+2025-12-15 12:11:34.488 RedLemon[7904:54544] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:34.488 RedLemon[7904:54544] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNDg5LTEwNTQ3OTEuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzIzNTAx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23501-1220966.zip
+[MPV] (+) Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+✅ Download complete: 47408 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+⚠️ No specific episode match found, using first file: Nightcrawler_(2014)_NOR_BDRX_en.srt
+✅ Extraction successful
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] (+) Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNDg5LTEwNTQ3OTEuemlw [request-id: B8B743BB-6CD4-4265-910B-264AFDA16BE5]
+2025-12-15 12:11:34.738 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:34.739 RedLemon[7904:54545]    Payload keys: position, type, senderId, timestamp, isPlaying
+2025-12-15 12:11:34.739 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:34.739 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:34.740 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:34.766 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:35.118 RedLemon[7904:54545] ✅ Subtitle 8 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FB87167A-4FF5-4984-914A-509042DA3403.vtt
+2025-12-15 12:11:35.118 RedLemon[7904:54545] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FB87167A-4FF5-4984-914A-509
+2025-12-15 12:11:35.157 RedLemon[7904:54545] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:35.158 RedLemon[7904:54545] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNDgyLTEwNTg0NjYuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzIzNDg5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23489-1054791.zip
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":4.545999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+⚡ Ultra-gentle sync: 0.995x to fix 393ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] (+) Subs  --sid=13 --slang=en 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD' (webvtt) (external)
+✅ Download complete: 51577 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Nightcrawler (2014) 720p BrRip x264 - YIFY.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNDgyLTEwNTg0NjYuemlw [request-id: E60DBC6B-9DE9-4803-86DE-3EC828F1B485]
+2025-12-15 12:11:35.714 RedLemon[7904:54429] ✅ Subtitle 9 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_101D5E6B-4D80-44BE-BD44-D7E3B129AE38.vtt
+2025-12-15 12:11:35.714 RedLemon[7904:54429] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_101D5E6B-4D80-44BE-BD44-D7E
+2025-12-15 12:11:35.762 RedLemon[7904:54429] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:35.762 RedLemon[7904:54429] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNDgwLTEwNDI0MTQuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzIzNDgy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23482-1058466.zip
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+✅ Download complete: 59315 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+⚠️ No specific episode match found, using first file: EN-SDH Ori.srt
+✅ Extraction successful
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] Subs  --sid=13 --slang=en 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD' (webvtt) (external)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzIzNDgwLTEwNDI0MTQuemlw [request-id: D45444FE-EC07-4F1B-904A-D06CB0ABC207]
+2025-12-15 12:11:36.482 RedLemon[7904:54545] ✅ Subtitle 10 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0F532358-D37D-40B1-8B19-CBEE0854ED22.vtt
+2025-12-15 12:11:36.482 RedLemon[7904:54545] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0F532358-D37D-40B1-8B19-CBE
+2025-12-15 12:11:36.518 RedLemon[7904:54545] ✅ External subtitle added to track list (not auto-selected)
+2025-12-15 12:11:36.519 RedLemon[7904:54545] 🔍 MPV track-list/count: 19
+2025-12-15 12:11:36.547 RedLemon[7904:54545] 🔍 Track 0 type: video
+2025-12-15 12:11:36.552 RedLemon[7904:54545] 🔍 Track 1 type: audio
+2025-12-15 12:11:36.552 RedLemon[7904:54545] 🔍 Track 2 type: audio
+2025-12-15 12:11:36.552 RedLemon[7904:54545] 🔍 Track 3 type: sub
+2025-12-15 12:11:36.552 RedLemon[7904:54545] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:36.552 RedLemon[7904:54545] 🔍 Track 4 type: sub
+2025-12-15 12:11:36.552 RedLemon[7904:54545] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:36.553 RedLemon[7904:54545] 🔍 Track 5 type: sub
+2025-12-15 12:11:36.553 RedLemon[7904:54545] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:36.553 RedLemon[7904:54545] 🔍 Track 6 type: sub
+2025-12-15 12:11:36.553 RedLemon[7904:54545] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:36.553 RedLemon[7904:54545] 🔍 Track 7 type: sub
+2025-12-15 12:11:36.553 RedLemon[7904:54545] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:36.554 RedLemon[7904:54545] 🔍 Track 8 type: sub
+2025-12-15 12:11:36.554 RedLemon[7904:54545] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:36.554 RedLemon[7904:54545] 🔍 Track 9 type: sub
+2025-12-15 12:11:36.554 RedLemon[7904:54545] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:36.554 RedLemon[7904:54545] 🔍 Track 10 type: sub
+2025-12-15 12:11:36.554 RedLemon[7904:54545] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:36.554 RedLemon[7904:54545] 🔍 Track 11 type: sub
+2025-12-15 12:11:36.555 RedLemon[7904:54545] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:36.555 RedLemon[7904:54545] 🔍 Track 12 type: sub
+2025-12-15 12:11:36.555 RedLemon[7904:54545] ✅ Found subtitle track: ID=10, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2025-12-15 12:11:36.555 RedLemon[7904:54545] 🔍 Track 13 type: sub
+2025-12-15 12:11:36.555 RedLemon[7904:54545] ✅ Found subtitle track: ID=11, lang=en, title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, external=1
+2025-12-15 12:11:36.555 RedLemon[7904:54545] 🔍 Track 14 type: sub
+2025-12-15 12:11:36.555 RedLemon[7904:54545] ✅ Found subtitle track: ID=12, lang=en, title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, external=1
+2025-12-15 12:11:36.555 RedLemon[7904:54545] 🔍 Track 15 type: sub
+2025-12-15 12:11:36.555 RedLemon[7904:54545] ✅ Found subtitle track: ID=13, lang=en, title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, external=1
+2025-12-15 12:11:36.556 RedLemon[7904:54545] 🔍 Track 16 type: sub
+2025-12-15 12:11:36.556 RedLemon[7904:54545] ✅ Found subtitle track: ID=14, lang=en, title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], external=1
+2025-12-15 12:11:36.556 RedLemon[7904:54545] 🔍 Track 17 type: sub
+2025-12-15 12:11:36.556 RedLemon[7904:54545] ✅ Found subtitle track: ID=15, lang=en, title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, external=1
+2025-12-15 12:11:36.556 RedLemon[7904:54545] 🔍 Track 18 type: sub
+2025-12-15 12:11:36.556 RedLemon[7904:54545] ✅ Found subtitle track: ID=16, lang=en, title=Nightcrawler 23.976 FPS Blu-ray, external=1
+2025-12-15 12:11:36.556 RedLemon[7904:54545] 📊 Total subtitle tracks found: 17 (including Off if needed)
+2025-12-15 12:11:36.556 RedLemon[7904:54545]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:36.556 RedLemon[7904:54545]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:36.557 RedLemon[7904:54545]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:36.559 RedLemon[7904:54545]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:36.560 RedLemon[7904:54545]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:36.560 RedLemon[7904:54545]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:36.560 RedLemon[7904:54545]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:36.560 RedLemon[7904:54545]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[10]: ID=10, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[11]: ID=11, Title='Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[12]: ID=12, Title='Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[13]: ID=13, Title='Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[14]: ID=14, Title='Nightcrawler 2014 BRRip XViD-juggs[ETRG]', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[15]: ID=15, Title='Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', Lang='en', Ext=1
+2025-12-15 12:11:36.561 RedLemon[7904:54545]    Start[16]: ID=16, Title='Nightcrawler 23.976 FPS Blu-ray', Lang='en', Ext=1
+2025-12-15 12:11:36.562 RedLemon[7904:54545] ✅ SubtitleService: Scanned 17 tracks (Attempt 1/5)
+2025-12-15 12:11:36.562 RedLemon[7904:54545]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:36.562 RedLemon[7904:54545]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:36.563 RedLemon[7904:54545]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:36.563 RedLemon[7904:54545]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:36.564 RedLemon[7904:54545]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:36.566 RedLemon[7904:54545]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:36.567 RedLemon[7904:54545]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:36.567 RedLemon[7904:54545]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=10, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=11, Title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=12, Title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=13, Title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, External=1
+2025-12-15 12:11:36.568 RedLemon[7904:54545]    Track: ID=14, Title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], External=1
+2025-12-15 12:11:36.569 RedLemon[7904:54545]    Track: ID=15, Title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, External=1
+2025-12-15 12:11:36.569 RedLemon[7904:54545]    Track: ID=16, Title=Nightcrawler 23.976 FPS Blu-ray, External=1
+2025-12-15 12:11:36.802 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:36.803 RedLemon[7904:54299]    Payload keys: isPlaying, position, senderId, timestamp, type
+2025-12-15 12:11:36.803 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:36.803 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:36.803 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:36.805 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:37.569 RedLemon[7904:54656] 🔍 MPV track-list/count: 19
+2025-12-15 12:11:37.569 RedLemon[7904:54656] 🔍 Track 0 type: video
+2025-12-15 12:11:37.569 RedLemon[7904:54656] 🔍 Track 1 type: audio
+2025-12-15 12:11:37.569 RedLemon[7904:54656] 🔍 Track 2 type: audio
+2025-12-15 12:11:37.569 RedLemon[7904:54656] 🔍 Track 3 type: sub
+2025-12-15 12:11:37.570 RedLemon[7904:54656] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:37.570 RedLemon[7904:54656] 🔍 Track 4 type: sub
+2025-12-15 12:11:37.570 RedLemon[7904:54656] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:37.570 RedLemon[7904:54656] 🔍 Track 5 type: sub
+2025-12-15 12:11:37.571 RedLemon[7904:54656] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:37.571 RedLemon[7904:54656] 🔍 Track 6 type: sub
+2025-12-15 12:11:37.571 RedLemon[7904:54656] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:37.571 RedLemon[7904:54656] 🔍 Track 7 type: sub
+2025-12-15 12:11:37.571 RedLemon[7904:54656] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:37.571 RedLemon[7904:54656] 🔍 Track 8 type: sub
+2025-12-15 12:11:37.571 RedLemon[7904:54656] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:37.571 RedLemon[7904:54656] 🔍 Track 9 type: sub
+2025-12-15 12:11:37.572 RedLemon[7904:54656] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:37.572 RedLemon[7904:54656] 🔍 Track 10 type: sub
+2025-12-15 12:11:37.572 RedLemon[7904:54656] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:37.572 RedLemon[7904:54656] 🔍 Track 11 type: sub
+2025-12-15 12:11:37.572 RedLemon[7904:54656] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:37.572 RedLemon[7904:54656] 🔍 Track 12 type: sub
+2025-12-15 12:11:37.572 RedLemon[7904:54656] ✅ Found subtitle track: ID=10, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2025-12-15 12:11:37.573 RedLemon[7904:54656] 🔍 Track 13 type: sub
+2025-12-15 12:11:37.573 RedLemon[7904:54656] ✅ Found subtitle track: ID=11, lang=en, title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, external=1
+2025-12-15 12:11:37.573 RedLemon[7904:54656] 🔍 Track 14 type: sub
+2025-12-15 12:11:37.573 RedLemon[7904:54656] ✅ Found subtitle track: ID=12, lang=en, title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, external=1
+2025-12-15 12:11:37.573 RedLemon[7904:54656] 🔍 Track 15 type: sub
+2025-12-15 12:11:37.573 RedLemon[7904:54656] ✅ Found subtitle track: ID=13, lang=en, title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, external=1
+2025-12-15 12:11:37.573 RedLemon[7904:54656] 🔍 Track 16 type: sub
+2025-12-15 12:11:37.573 RedLemon[7904:54656] ✅ Found subtitle track: ID=14, lang=en, title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], external=1
+2025-12-15 12:11:37.574 RedLemon[7904:54656] 🔍 Track 17 type: sub
+2025-12-15 12:11:37.574 RedLemon[7904:54656] ✅ Found subtitle track: ID=15, lang=en, title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, external=1
+2025-12-15 12:11:37.574 RedLemon[7904:54656] 🔍 Track 18 type: sub
+2025-12-15 12:11:37.574 RedLemon[7904:54656] ✅ Found subtitle track: ID=16, lang=en, title=Nightcrawler 23.976 FPS Blu-ray, external=1
+2025-12-15 12:11:37.574 RedLemon[7904:54656] 📊 Total subtitle tracks found: 17 (including Off if needed)
+2025-12-15 12:11:37.574 RedLemon[7904:54656]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:37.574 RedLemon[7904:54656]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:37.574 RedLemon[7904:54656]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:37.574 RedLemon[7904:54656]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[10]: ID=10, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[11]: ID=11, Title='Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[12]: ID=12, Title='Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[13]: ID=13, Title='Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', Lang='en', Ext=1
+2025-12-15 12:11:37.575 RedLemon[7904:54656]    Start[14]: ID=14, Title='Nightcrawler 2014 BRRip XViD-juggs[ETRG]', Lang='en', Ext=1
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Start[15]: ID=15, Title='Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', Lang='en', Ext=1
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Start[16]: ID=16, Title='Nightcrawler 23.976 FPS Blu-ray', Lang='en', Ext=1
+2025-12-15 12:11:37.576 RedLemon[7904:54656] ✅ SubtitleService: Scanned 17 tracks (Attempt 2/5)
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:37.576 RedLemon[7904:54656]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=10, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=11, Title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=12, Title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, External=1
+2025-12-15 12:11:37.577 RedLemon[7904:54656]    Track: ID=13, Title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, External=1
+2025-12-15 12:11:37.578 RedLemon[7904:54656]    Track: ID=14, Title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], External=1
+2025-12-15 12:11:37.578 RedLemon[7904:54656]    Track: ID=15, Title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, External=1
+2025-12-15 12:11:37.578 RedLemon[7904:54656]    Track: ID=16, Title=Nightcrawler 23.976 FPS Blu-ray, External=1
+2025-12-15 12:11:38.578 RedLemon[7904:54656] 🔍 MPV track-list/count: 19
+2025-12-15 12:11:38.578 RedLemon[7904:54656] 🔍 Track 0 type: video
+2025-12-15 12:11:38.579 RedLemon[7904:54656] 🔍 Track 1 type: audio
+2025-12-15 12:11:38.579 RedLemon[7904:54656] 🔍 Track 2 type: audio
+2025-12-15 12:11:38.579 RedLemon[7904:54656] 🔍 Track 3 type: sub
+2025-12-15 12:11:38.579 RedLemon[7904:54656] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:38.579 RedLemon[7904:54656] 🔍 Track 4 type: sub
+2025-12-15 12:11:38.580 RedLemon[7904:54656] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:38.580 RedLemon[7904:54656] 🔍 Track 5 type: sub
+2025-12-15 12:11:38.580 RedLemon[7904:54656] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:38.581 RedLemon[7904:54656] 🔍 Track 6 type: sub
+2025-12-15 12:11:38.581 RedLemon[7904:54656] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:38.581 RedLemon[7904:54656] 🔍 Track 7 type: sub
+2025-12-15 12:11:38.581 RedLemon[7904:54656] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:38.582 RedLemon[7904:54656] 🔍 Track 8 type: sub
+2025-12-15 12:11:38.582 RedLemon[7904:54656] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:38.582 RedLemon[7904:54656] 🔍 Track 9 type: sub
+2025-12-15 12:11:38.582 RedLemon[7904:54656] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:38.582 RedLemon[7904:54656] 🔍 Track 10 type: sub
+2025-12-15 12:11:38.582 RedLemon[7904:54656] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:38.583 RedLemon[7904:54656] 🔍 Track 11 type: sub
+2025-12-15 12:11:38.583 RedLemon[7904:54656] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:38.583 RedLemon[7904:54656] 🔍 Track 12 type: sub
+2025-12-15 12:11:38.583 RedLemon[7904:54656] ✅ Found subtitle track: ID=10, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2025-12-15 12:11:38.583 RedLemon[7904:54656] 🔍 Track 13 type: sub
+2025-12-15 12:11:38.584 RedLemon[7904:54656] ✅ Found subtitle track: ID=11, lang=en, title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, external=1
+2025-12-15 12:11:38.584 RedLemon[7904:54656] 🔍 Track 14 type: sub
+2025-12-15 12:11:38.585 RedLemon[7904:54656] ✅ Found subtitle track: ID=12, lang=en, title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, external=1
+2025-12-15 12:11:38.585 RedLemon[7904:54656] 🔍 Track 15 type: sub
+2025-12-15 12:11:38.585 RedLemon[7904:54656] ✅ Found subtitle track: ID=13, lang=en, title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, external=1
+2025-12-15 12:11:38.586 RedLemon[7904:54656] 🔍 Track 16 type: sub
+2025-12-15 12:11:38.586 RedLemon[7904:54656] ✅ Found subtitle track: ID=14, lang=en, title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], external=1
+2025-12-15 12:11:38.586 RedLemon[7904:54656] 🔍 Track 17 type: sub
+2025-12-15 12:11:38.586 RedLemon[7904:54656] ✅ Found subtitle track: ID=15, lang=en, title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, external=1
+2025-12-15 12:11:38.586 RedLemon[7904:54656] 🔍 Track 18 type: sub
+2025-12-15 12:11:38.586 RedLemon[7904:54656] ✅ Found subtitle track: ID=16, lang=en, title=Nightcrawler 23.976 FPS Blu-ray, external=1
+2025-12-15 12:11:38.587 RedLemon[7904:54656] 📊 Total subtitle tracks found: 17 (including Off if needed)
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:38.587 RedLemon[7904:54656]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[10]: ID=10, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[11]: ID=11, Title='Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[12]: ID=12, Title='Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[13]: ID=13, Title='Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[14]: ID=14, Title='Nightcrawler 2014 BRRip XViD-juggs[ETRG]', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[15]: ID=15, Title='Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', Lang='en', Ext=1
+2025-12-15 12:11:38.588 RedLemon[7904:54656]    Start[16]: ID=16, Title='Nightcrawler 23.976 FPS Blu-ray', Lang='en', Ext=1
+2025-12-15 12:11:38.589 RedLemon[7904:54656] ✅ SubtitleService: Scanned 17 tracks (Attempt 3/5)
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:38.589 RedLemon[7904:54656]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:38.590 RedLemon[7904:54656]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:38.590 RedLemon[7904:54656]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:38.590 RedLemon[7904:54656]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:38.591 RedLemon[7904:54656]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:38.591 RedLemon[7904:54656]    Track: ID=10, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2025-12-15 12:11:38.592 RedLemon[7904:54656]    Track: ID=11, Title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, External=1
+2025-12-15 12:11:38.592 RedLemon[7904:54656]    Track: ID=12, Title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, External=1
+2025-12-15 12:11:38.592 RedLemon[7904:54656]    Track: ID=13, Title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, External=1
+2025-12-15 12:11:38.593 RedLemon[7904:54656]    Track: ID=14, Title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], External=1
+2025-12-15 12:11:38.593 RedLemon[7904:54656]    Track: ID=15, Title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, External=1
+2025-12-15 12:11:38.593 RedLemon[7904:54656]    Track: ID=16, Title=Nightcrawler 23.976 FPS Blu-ray, External=1
+2025-12-15 12:11:38.771 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:38.772 RedLemon[7904:54299]    Payload keys: isPlaying, type, position, timestamp, senderId
+2025-12-15 12:11:38.772 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:38.772 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:38.772 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:38.775 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:39.683 RedLemon[7904:54429] 🔍 MPV track-list/count: 19
+2025-12-15 12:11:39.683 RedLemon[7904:54429] 🔍 Track 0 type: video
+2025-12-15 12:11:39.684 RedLemon[7904:54429] 🔍 Track 1 type: audio
+2025-12-15 12:11:39.705 RedLemon[7904:54429] 🔍 Track 2 type: audio
+2025-12-15 12:11:39.705 RedLemon[7904:54429] 🔍 Track 3 type: sub
+2025-12-15 12:11:39.705 RedLemon[7904:54429] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:39.705 RedLemon[7904:54429] 🔍 Track 4 type: sub
+2025-12-15 12:11:39.706 RedLemon[7904:54429] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:39.706 RedLemon[7904:54429] 🔍 Track 5 type: sub
+2025-12-15 12:11:39.706 RedLemon[7904:54429] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:39.706 RedLemon[7904:54429] 🔍 Track 6 type: sub
+2025-12-15 12:11:39.706 RedLemon[7904:54429] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:39.706 RedLemon[7904:54429] 🔍 Track 7 type: sub
+2025-12-15 12:11:39.706 RedLemon[7904:54429] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:39.706 RedLemon[7904:54429] 🔍 Track 8 type: sub
+2025-12-15 12:11:39.707 RedLemon[7904:54429] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:39.707 RedLemon[7904:54429] 🔍 Track 9 type: sub
+2025-12-15 12:11:39.707 RedLemon[7904:54429] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:39.708 RedLemon[7904:54429] 🔍 Track 10 type: sub
+2025-12-15 12:11:39.708 RedLemon[7904:54429] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:39.708 RedLemon[7904:54429] 🔍 Track 11 type: sub
+2025-12-15 12:11:39.708 RedLemon[7904:54429] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:39.708 RedLemon[7904:54429] 🔍 Track 12 type: sub
+2025-12-15 12:11:39.708 RedLemon[7904:54429] ✅ Found subtitle track: ID=10, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2025-12-15 12:11:39.708 RedLemon[7904:54429] 🔍 Track 13 type: sub
+2025-12-15 12:11:39.708 RedLemon[7904:54429] ✅ Found subtitle track: ID=11, lang=en, title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, external=1
+2025-12-15 12:11:39.709 RedLemon[7904:54429] 🔍 Track 14 type: sub
+2025-12-15 12:11:39.709 RedLemon[7904:54429] ✅ Found subtitle track: ID=12, lang=en, title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, external=1
+2025-12-15 12:11:39.709 RedLemon[7904:54429] 🔍 Track 15 type: sub
+2025-12-15 12:11:39.709 RedLemon[7904:54429] ✅ Found subtitle track: ID=13, lang=en, title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, external=1
+2025-12-15 12:11:39.709 RedLemon[7904:54429] 🔍 Track 16 type: sub
+2025-12-15 12:11:39.709 RedLemon[7904:54429] ✅ Found subtitle track: ID=14, lang=en, title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], external=1
+2025-12-15 12:11:39.709 RedLemon[7904:54429] 🔍 Track 17 type: sub
+2025-12-15 12:11:39.709 RedLemon[7904:54429] ✅ Found subtitle track: ID=15, lang=en, title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, external=1
+2025-12-15 12:11:39.710 RedLemon[7904:54429] 🔍 Track 18 type: sub
+2025-12-15 12:11:39.710 RedLemon[7904:54429] ✅ Found subtitle track: ID=16, lang=en, title=Nightcrawler 23.976 FPS Blu-ray, external=1
+2025-12-15 12:11:39.710 RedLemon[7904:54429] 📊 Total subtitle tracks found: 17 (including Off if needed)
+2025-12-15 12:11:39.710 RedLemon[7904:54429]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:39.711 RedLemon[7904:54429]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[10]: ID=10, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[11]: ID=11, Title='Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[12]: ID=12, Title='Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[13]: ID=13, Title='Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[14]: ID=14, Title='Nightcrawler 2014 BRRip XViD-juggs[ETRG]', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[15]: ID=15, Title='Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', Lang='en', Ext=1
+2025-12-15 12:11:39.712 RedLemon[7904:54429]    Start[16]: ID=16, Title='Nightcrawler 23.976 FPS Blu-ray', Lang='en', Ext=1
+2025-12-15 12:11:39.713 RedLemon[7904:54429] ✅ SubtitleService: Scanned 17 tracks (Attempt 4/5)
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:39.713 RedLemon[7904:54429]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:39.714 RedLemon[7904:54429]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:39.714 RedLemon[7904:54429]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:39.714 RedLemon[7904:54429]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:39.715 RedLemon[7904:54429]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:39.716 RedLemon[7904:54429]    Track: ID=10, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2025-12-15 12:11:39.716 RedLemon[7904:54429]    Track: ID=11, Title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, External=1
+2025-12-15 12:11:39.716 RedLemon[7904:54429]    Track: ID=12, Title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, External=1
+2025-12-15 12:11:39.717 RedLemon[7904:54429]    Track: ID=13, Title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, External=1
+2025-12-15 12:11:39.717 RedLemon[7904:54429]    Track: ID=14, Title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], External=1
+2025-12-15 12:11:39.717 RedLemon[7904:54429]    Track: ID=15, Title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, External=1
+2025-12-15 12:11:39.717 RedLemon[7904:54429]    Track: ID=16, Title=Nightcrawler 23.976 FPS Blu-ray, External=1
+2025-12-15 12:11:40.528 RedLemon[7904:54069] 🖱️ Mouse: x=906/1366 y=0/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 12:11:40.726 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:40.726 RedLemon[7904:54545]    Payload keys: position, isPlaying, type, senderId, timestamp
+2025-12-15 12:11:40.727 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:40.728 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:40.729 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:40.740 RedLemon[7904:54545] 🔍 MPV track-list/count: 19
+2025-12-15 12:11:40.740 RedLemon[7904:54545] 🔍 Track 0 type: video
+2025-12-15 12:11:40.740 RedLemon[7904:54545] 🔍 Track 1 type: audio
+2025-12-15 12:11:40.740 RedLemon[7904:54545] 🔍 Track 2 type: audio
+2025-12-15 12:11:40.740 RedLemon[7904:54545] 🔍 Track 3 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=1, lang=eng, title=nil, external=0
+2025-12-15 12:11:40.741 RedLemon[7904:54545] 🔍 Track 4 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=2, lang=eng, title=SDH, external=0
+2025-12-15 12:11:40.741 RedLemon[7904:54545] 🔍 Track 5 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=3, lang=dan, title=nil, external=0
+2025-12-15 12:11:40.741 RedLemon[7904:54545] 🔍 Track 6 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=4, lang=fre, title=nil, external=0
+2025-12-15 12:11:40.741 RedLemon[7904:54545] 🔍 Track 7 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=5, lang=rus, title=nil, external=0
+2025-12-15 12:11:40.741 RedLemon[7904:54545] 🔍 Track 8 type: sub
+2025-12-15 12:11:40.741 RedLemon[7904:54545] ✅ Found subtitle track: ID=6, lang=spa, title=nil, external=0
+2025-12-15 12:11:40.742 RedLemon[7904:54545] 🔍 Track 9 type: sub
+2025-12-15 12:11:40.742 RedLemon[7904:54545] ✅ Found subtitle track: ID=7, lang=en, title=Nightcrawler.2014.BDRip.x264-SPARKS, external=1
+2025-12-15 12:11:40.742 RedLemon[7904:54545] 🔍 Track 10 type: sub
+2025-12-15 12:11:40.742 RedLemon[7904:54545] ✅ Found subtitle track: ID=8, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, external=1
+2025-12-15 12:11:40.742 RedLemon[7904:54545] 🔍 Track 11 type: sub
+2025-12-15 12:11:40.742 RedLemon[7904:54545] ✅ Found subtitle track: ID=9, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2025-12-15 12:11:40.742 RedLemon[7904:54545] 🔍 Track 12 type: sub
+2025-12-15 12:11:40.743 RedLemon[7904:54545] ✅ Found subtitle track: ID=10, lang=en, title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2025-12-15 12:11:40.743 RedLemon[7904:54545] 🔍 Track 13 type: sub
+2025-12-15 12:11:40.743 RedLemon[7904:54545] ✅ Found subtitle track: ID=11, lang=en, title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, external=1
+2025-12-15 12:11:40.743 RedLemon[7904:54545] 🔍 Track 14 type: sub
+2025-12-15 12:11:40.743 RedLemon[7904:54545] ✅ Found subtitle track: ID=12, lang=en, title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, external=1
+2025-12-15 12:11:40.743 RedLemon[7904:54545] 🔍 Track 15 type: sub
+2025-12-15 12:11:40.744 RedLemon[7904:54545] ✅ Found subtitle track: ID=13, lang=en, title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, external=1
+2025-12-15 12:11:40.744 RedLemon[7904:54545] 🔍 Track 16 type: sub
+2025-12-15 12:11:40.744 RedLemon[7904:54545] ✅ Found subtitle track: ID=14, lang=en, title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], external=1
+2025-12-15 12:11:40.745 RedLemon[7904:54545] 🔍 Track 17 type: sub
+2025-12-15 12:11:40.745 RedLemon[7904:54545] ✅ Found subtitle track: ID=15, lang=en, title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, external=1
+2025-12-15 12:11:40.745 RedLemon[7904:54545] 🔍 Track 18 type: sub
+2025-12-15 12:11:40.745 RedLemon[7904:54545] ✅ Found subtitle track: ID=16, lang=en, title=Nightcrawler 23.976 FPS Blu-ray, external=1
+2025-12-15 12:11:40.746 RedLemon[7904:54545] 📊 Total subtitle tracks found: 17 (including Off if needed)
+2025-12-15 12:11:40.746 RedLemon[7904:54545]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-15 12:11:40.746 RedLemon[7904:54545]    Start[1]: ID=1, Title='nil', Lang='eng', Ext=0
+2025-12-15 12:11:40.746 RedLemon[7904:54545]    Start[2]: ID=2, Title='SDH', Lang='eng', Ext=0
+2025-12-15 12:11:40.746 RedLemon[7904:54545]    Start[3]: ID=3, Title='nil', Lang='dan', Ext=0
+2025-12-15 12:11:40.747 RedLemon[7904:54545]    Start[4]: ID=4, Title='nil', Lang='fre', Ext=0
+2025-12-15 12:11:40.747 RedLemon[7904:54545]    Start[5]: ID=5, Title='nil', Lang='rus', Ext=0
+2025-12-15 12:11:40.747 RedLemon[7904:54545]    Start[6]: ID=6, Title='nil', Lang='spa', Ext=0
+2025-12-15 12:11:40.747 RedLemon[7904:54545]    Start[7]: ID=7, Title='Nightcrawler.2014.BDRip.x264-SPARKS', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[8]: ID=8, Title='Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[9]: ID=9, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[10]: ID=10, Title='Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[11]: ID=11, Title='Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[12]: ID=12, Title='Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[13]: ID=13, Title='Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[14]: ID=14, Title='Nightcrawler 2014 BRRip XViD-juggs[ETRG]', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[15]: ID=15, Title='Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', Lang='en', Ext=1
+2025-12-15 12:11:40.748 RedLemon[7904:54545]    Start[16]: ID=16, Title='Nightcrawler 23.976 FPS Blu-ray', Lang='en', Ext=1
+2025-12-15 12:11:40.749 RedLemon[7904:54545] ✅ SubtitleService: Scanned 17 tracks (Attempt 5/5)
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=0, Title=Off, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=1, Title=English, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=2, Title=SDH, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=3, Title=Track 3, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=4, Title=French, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=5, Title=Russian, External=0
+2025-12-15 12:11:40.749 RedLemon[7904:54545]    Track: ID=6, Title=Spanish, External=0
+2025-12-15 12:11:40.750 RedLemon[7904:54545]    Track: ID=7, Title=Nightcrawler.2014.BDRip.x264-SPARKS, External=1
+2025-12-15 12:11:40.750 RedLemon[7904:54545]    Track: ID=8, Title=Nightcrawler.2014.1080p.BluRay.x265-RARBG.en, External=1
+2025-12-15 12:11:40.750 RedLemon[7904:54545]    Track: ID=9, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2025-12-15 12:11:40.750 RedLemon[7904:54545]    Track: ID=10, Title=Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2025-12-15 12:11:40.751 RedLemon[7904:54545]    Track: ID=11, Title=Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS, External=1
+2025-12-15 12:11:40.751 RedLemon[7904:54545]    Track: ID=12, Title=Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE, External=1
+2025-12-15 12:11:40.751 RedLemon[7904:54545]    Track: ID=13, Title=Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD, External=1
+2025-12-15 12:11:40.751 RedLemon[7904:54545]    Track: ID=14, Title=Nightcrawler 2014 BRRip XViD-juggs[ETRG], External=1
+2025-12-15 12:11:40.751 RedLemon[7904:54545]    Track: ID=15, Title=Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess, External=1
+2025-12-15 12:11:40.752 RedLemon[7904:54545]    Track: ID=16, Title=Nightcrawler 23.976 FPS Blu-ray, External=1
+2025-12-15 12:11:40.771 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:42.908 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:42.908 RedLemon[7904:54428]    Payload keys: senderId, position, timestamp, isPlaying, type
+2025-12-15 12:11:42.909 RedLemon[7904:54428] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:42.909 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:42.909 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:42.920 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:44.824 RedLemon[7904:54656] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:44.824 RedLemon[7904:54656]    Payload keys: isPlaying, position, senderId, timestamp, type
+2025-12-15 12:11:44.824 RedLemon[7904:54656] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:44.825 RedLemon[7904:54656] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:44.825 RedLemon[7904:54656] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:44.848 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:46.809 RedLemon[7904:54656] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:46.810 RedLemon[7904:54656]    Payload keys: isPlaying, type, timestamp, position, senderId
+2025-12-15 12:11:46.811 RedLemon[7904:54656] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:46.811 RedLemon[7904:54656] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:46.811 RedLemon[7904:54656] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:46.841 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:48.848 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:48.849 RedLemon[7904:54545]    Payload keys: position, isPlaying, timestamp, type, senderId
+2025-12-15 12:11:48.849 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:48.849 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:48.849 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:48.884 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:50.769 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:50.770 RedLemon[7904:54545]    Payload keys: type, timestamp, position, senderId, isPlaying
+2025-12-15 12:11:50.771 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:50.771 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:50.771 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:50.803 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:52.774 RedLemon[7904:54545] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:52.774 RedLemon[7904:54545]    Payload keys: position, senderId, timestamp, isPlaying, type
+2025-12-15 12:11:52.775 RedLemon[7904:54545] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:52.776 RedLemon[7904:54545] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:52.776 RedLemon[7904:54545] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:52.806 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:54.779 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:54.779 RedLemon[7904:54299]    Payload keys: senderId, timestamp, isPlaying, type, position
+2025-12-15 12:11:54.780 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:54.780 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:54.780 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:54.808 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:56.778 RedLemon[7904:54656] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:56.778 RedLemon[7904:54656]    Payload keys: position, isPlaying, timestamp, senderId, type
+2025-12-15 12:11:56.779 RedLemon[7904:54656] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:56.779 RedLemon[7904:54656] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:56.780 RedLemon[7904:54656] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:56.809 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:11:58.784 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:11:58.784 RedLemon[7904:54544]    Payload keys: senderId, position, type, timestamp, isPlaying
+2025-12-15 12:11:58.785 RedLemon[7904:54544] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:11:58.785 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:11:58.785 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:11:58.813 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:00.910 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:00.911 RedLemon[7904:54428]    Payload keys: position, isPlaying, senderId, timestamp, type
+2025-12-15 12:12:00.911 RedLemon[7904:54428] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:00.911 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:00.911 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:00.939 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:02.785 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:02.786 RedLemon[7904:54428]    Payload keys: timestamp, position, isPlaying, type, senderId
+2025-12-15 12:12:02.786 RedLemon[7904:54428] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:02.786 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:02.786 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:02.788 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:02.826 RedLemon[7904:54069] 🖱️ Mouse: x=1132/1366 y=58/768 | Exit: 0 Controls: 1 Chat: 1
+2025-12-15 12:12:03.273 RedLemon[7904:54656] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:03.273 RedLemon[7904:54656]    Payload keys: chatUsername, type, senderId, chatText, timestamp, position
+2025-12-15 12:12:03.274 RedLemon[7904:54299] ✅ Realtime: Message broadcast complete
+2025-12-15 12:12:03.329 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:03.329 RedLemon[7904:54428]    Payload keys: timestamp, chatText, chatUsername, position, type, senderId
+2025-12-15 12:12:03.329 RedLemon[7904:54428] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:03.329 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:03.330 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:03.378 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:03.679 RedLemon[7904:54299] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:03.680 RedLemon[7904:54299]    Payload keys: type, chatText, timestamp, position, chatUsername, senderId
+2025-12-15 12:12:03.681 RedLemon[7904:54123] ✅ Realtime: Message broadcast complete
+📄 Subtitle request: L3N1YnRpdGxlLzIzNDgw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/23480-1042414.zip
+[MPV] (+) Subs  --sid=14 --slang=en 'Nightcrawler 2014 BRRip XViD-juggs[ETRG]' (webvtt) (external)
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+✅ Download complete: 46477 bytes
+📦 Detected ZIP archive, extracting...
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+⚠️ No specific episode match found, using first file: Nightcrawler.srt
+✅ Extraction successful
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] Subs  --sid=13 --slang=en 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD' (webvtt) (external)
+[MPV] Subs  --sid=14 --slang=en 'Nightcrawler 2014 BRRip XViD-juggs[ETRG]' (webvtt) (external)
+[MPV] (+) Subs  --sid=15 --slang=en 'Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess' (webvtt) (external)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] Subs  --sid=2 --slang=eng 'SDH' (subrip)
+📊 Current subtitle track: 16
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":6.59,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+⚡ Gentle speed sync: 0.99x to fix 652ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] Subs  --sid=13 --slang=en 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD' (webvtt) (external)
+[MPV] Subs  --sid=14 --slang=en 'Nightcrawler 2014 BRRip XViD-juggs[ETRG]' (webvtt) (external)
+[MPV] Subs  --sid=15 --slang=en 'Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess' (webvtt) (external)
+[MPV] (+) Subs  --sid=16 --slang=en 'Nightcrawler 23.976 FPS Blu-ray' (webvtt) (external)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 16
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 16
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":8.634,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 917ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 16
+💓 Heartbeat sent
+💓 Heartbeat sent
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":10.093,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+📊 Current subtitle track: 16
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 19 total tracks
+🔍 AUTO-SELECT: Track 3 - ID: 1, lang: 'eng', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 4 - ID: 2, lang: 'eng', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 9 - ID: 7, lang: 'en', title: 'Nightcrawler.2014.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 10 - ID: 8, lang: 'en', title: 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 11 - ID: 9, lang: 'en', title: 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 12 - ID: 10, lang: 'en', title: 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 13 - ID: 11, lang: 'en', title: 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 14 - ID: 12, lang: 'en', title: 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 15 - ID: 13, lang: 'en', title: 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 16 - ID: 14, lang: 'en', title: 'Nightcrawler 2014 BRRip XViD-juggs[ETRG]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 17 - ID: 15, lang: 'en', title: 'Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 18 - ID: 16, lang: 'en', title: 'Nightcrawler 23.976 FPS Blu-ray', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: SDH (ID: 2) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 1850 (Embedded: 1000, Match: 0, Clean: 600, SDH: 250)
+⚡ Gentle speed sync: 0.99x to fix 984ms drift
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'momosas @ 20453.97 kbps' (h264 [High] 1920x800 23.976fps)
+⚡ Playback speed adjusted to 0.99x for sync
+[MPV] (+) Audio --aid=1 --alang=eng (*) (ac3 6ch 48000Hz)
+[MPV] Audio --aid=2 --alang=eng 'Feature commentary with Writer/Director Dan Gilroy, Producer Tony Gilroy and Editor John Gilroy' (ac3 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (subrip)
+[MPV] (+) Subs  --sid=2 --slang=eng 'SDH' (subrip)
+[MPV] Subs  --sid=3 --slang=dan (subrip)
+[MPV] Subs  --sid=4 --slang=fre (subrip)
+[MPV] Subs  --sid=5 --slang=rus (subrip)
+[MPV] Subs  --sid=6 --slang=spa (subrip)
+[MPV] Subs  --sid=7 --slang=en 'Nightcrawler.2014.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=8 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-RARBG.en' (webvtt) (external)
+[MPV] Subs  --sid=9 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=10 --slang=en 'Nightcrawler.2014.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=11 --slang=en 'Nightcrawler 2014 1080p WEB-DL DD5 1 H264-S4NS' (webvtt) (external)
+[MPV] Subs  --sid=12 --slang=en 'Nightcrawler.2014.1080p.BluRay.x264.DTS-HD_MA_5.1-NoHaTE' (webvtt) (external)
+[MPV] Subs  --sid=13 --slang=en 'Nightcrawler 2014 Blu-ray NOR 1080p AVC DTS-HD MA 5.1-LoRD' (webvtt) (external)
+[MPV] Subs  --sid=14 --slang=en 'Nightcrawler 2014 BRRip XViD-juggs[ETRG]' (webvtt) (external)
+[MPV] Subs  --sid=15 --slang=en 'Nightcrawler.2014.1080p.REMUX.BluRay.AVC.DTS.HD.MA.5.1-HDAccess' (webvtt) (external)
+[MPV] Subs  --sid=16 --slang=en 'Nightcrawler 23.976 FPS Blu-ray' (webvtt) (external)
+⏳ MPV: Buffering state changed: true (paused-for-cache)
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":11.219999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 959ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":13.263,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 926ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":15.306999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 893ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":17.351,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 859ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":19.394,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 709ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":21.146,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 718ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":23.189999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+⚡ Gentle speed sync: 0.99x to fix 726ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":25.233999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+⚡ Gentle speed sync: 0.99x to fix 742ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+💾 Saved to watch history: Nightcrawler at 26s
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":27.276999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 692ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":29.320999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 759ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":31.365,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 709ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818723.257518,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982E2025-12-15 12:12:03.727 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:03.728 RedLemon[7904:54544]    Payload keys: chatUsername, senderId, position, chatText, type, timestamp
+2025-12-15 12:12:03.728 RedLemon[7904:54544] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:03.728 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:03.728 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:03.802 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.104 RedLemon[7904:54123] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.105 RedLemon[7904:54123]    Payload keys: timestamp, chatText, position, type, chatUsername, senderId
+2025-12-15 12:12:04.105 RedLemon[7904:54123] ✅ Realtime: Message broadcast complete
+2025-12-15 12:12:04.178 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:04.179 RedLemon[7904:54544]    Payload keys: position, chatUsername, chatText, type, timestamp, senderId
+2025-12-15 12:12:04.179 RedLemon[7904:54544] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.179 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:04.180 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:04.270 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.270 RedLemon[7904:54428] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.271 RedLemon[7904:54428]    Payload keys: chatUsername, timestamp, chatText, type, senderId, position
+2025-12-15 12:12:04.271 RedLemon[7904:54428] ✅ Realtime: Message broadcast complete
+2025-12-15 12:12:04.327 RedLemon[7904:54656] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:04.327 RedLemon[7904:54656]    Payload keys: position, chatUsername, type, senderId, timestamp, chatText
+2025-12-15 12:12:04.328 RedLemon[7904:54656] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.328 RedLemon[7904:54656] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:04.328 RedLemon[7904:54656] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:04.336 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:04.976 RedLemon[7904:54123] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:04.976 RedLemon[7904:54123]    Payload keys: type, timestamp, senderId, isPlaying, position
+2025-12-15 12:12:04.976 RedLemon[7904:54123] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:04.977 RedLemon[7904:54123] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:04.977 RedLemon[7904:54123] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:05.014 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:05.015 RedLemon[7904:54656] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:05.016 RedLemon[7904:54656]    Payload keys: chatText, type, senderId, timestamp, chatUsername, position
+2025-12-15 12:12:05.017 RedLemon[7904:54428] ✅ Realtime: Message broadcast complete
+2025-12-15 12:12:05.060 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:05.060 RedLemon[7904:54544]    Payload keys: chatUsername, timestamp, chatText, position, senderId, type
+2025-12-15 12:12:05.060 RedLemon[7904:54544] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:05.061 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:05.061 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:05.115 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:05.420 RedLemon[7904:54544] 📤 Realtime: Sending message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:05.420 RedLemon[7904:54544]    Payload keys: position, senderId, timestamp, chatText, chatUsername, type
+2025-12-15 12:12:05.421 RedLemon[7904:54544] ✅ Realtime: Message broadcast complete
+2025-12-15 12:12:05.472 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:05.472 RedLemon[7904:54544]    Payload keys: chatText, chatUsername, type, timestamp, senderId, position
+2025-12-15 12:12:05.472 RedLemon[7904:54544] ✅ Realtime: Decoded message type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:05.473 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: reaction
+2025-12-15 12:12:05.473 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:05.494 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: reaction, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-15 12:12:06.790 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:06.790 RedLemon[7904:54299]    Payload keys: type, senderId, timestamp, isPlaying, position
+2025-12-15 12:12:06.791 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:06.791 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:06.791 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:06.799 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:08.542 RedLemon[7904:54069] 🖱️ Mouse: x=1018/1366 y=104/768 | Exit: 0 Controls: 1 Chat: 1
+2025-12-15 12:12:08.864 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:08.864 RedLemon[7904:54544]    Payload keys: position, isPlaying, timestamp, senderId, type
+2025-12-15 12:12:08.864 RedLemon[7904:54544] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:08.865 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:08.865 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:08.892 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:10.617 RedLemon[7904:54069] 🖱️ Mouse: x=1008/1366 y=114/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 12:12:10.795 RedLemon[7904:54299] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:10.795 RedLemon[7904:54299]    Payload keys: position, type, isPlaying, timestamp, senderId
+2025-12-15 12:12:10.795 RedLemon[7904:54299] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:10.795 RedLemon[7904:54299] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:10.795 RedLemon[7904:54299] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:10.819 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:12.834 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:12.835 RedLemon[7904:54544]    Payload keys: type, isPlaying, senderId, position, timestamp
+2025-12-15 12:12:12.835 RedLemon[7904:54544] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:12.835 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:12.835 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:12.855 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:13.441 RedLemon[7904:54069] 🖱️ Mouse: x=1015/1366 y=88/768 | Exit: 0 Controls: 1 Chat: 0
+2025-12-15 12:12:14.799 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:14.799 RedLemon[7904:54544]    Payload keys: isPlaying, type, position, timestamp, senderId
+2025-12-15 12:12:14.799 RedLemon[7904:54544] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:14.799 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:14.799 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:14.817 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:16.843 RedLemon[7904:54544] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:16.843 RedLemon[7904:54544]    Payload keys: type, senderId, position, isPlaying, timestamp
+2025-12-15 12:12:16.843 RedLemon[7904:54544] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:16.843 RedLemon[7904:54544] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:16.843 RedLemon[7904:54544] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:16.859 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:18.795 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:18.795 RedLemon[7904:54428]    Payload keys: type, position, senderId, timestamp, isPlaying
+2025-12-15 12:12:18.795 RedLemon[7904:54428] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:18.796 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:18.796 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:18.819 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+2025-12-15 12:12:20.772 RedLemon[7904:54428] 📨 Realtime: Received broadcast message
+2025-12-15 12:12:20.772 RedLemon[7904:54428]    Payload keys: isPlaying, senderId, timestamp, position, type
+2025-12-15 12:12:20.773 RedLemon[7904:54428] ✅ Realtime: Decoded message type: playbackState, sender: RVUF
+2025-12-15 12:12:20.773 RedLemon[7904:54428] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-15 12:12:20.773 RedLemon[7904:54428] ✅ Realtime: syncCallback invoked successfully
+2025-12-15 12:12:20.781 RedLemon[7904:54069] 🔍 DEBUG: Received sync message - type: playbackState, sender: RVUF
+A52D7C9","timestamp":1765818723.667879,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818724.0832849,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818724.268358,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":33.158,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 726ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818725.008381,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"😂","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765818725.412159,"type":"reaction"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":35.327,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 676ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":37.412,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 709ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":39.164,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 684ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":41.208,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 726ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":43.251999999999995,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 709ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":45.294999999999995,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 759ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":47.339,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 726ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"RVUF","timestamp":49.382999999999996,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:RVUF"}
+⚡ Gentle speed sync: 0.99x to fix 692ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)

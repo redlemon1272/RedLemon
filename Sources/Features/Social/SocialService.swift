@@ -131,11 +131,16 @@ class SocialService: ObservableObject {
     
     // MARK: - Presence Handlers
     
+    // MARK: - Presence Handlers
+    
     private func handlePresenceJoin(userId: String, metadata: [String: Any]?) {
-        // Ignore myself
-        if userId == currentUserId { return }
+        // Normalize ID to lowercase to match friend list format
+        let normalizedUserId = userId.lowercased()
         
-        onlineUserIds.insert(userId)
+        // Ignore myself
+        if normalizedUserId == currentUserId?.lowercased() { return }
+        
+        onlineUserIds.insert(normalizedUserId)
         
         // Parse activity from metadata
         if let meta = metadata {
@@ -152,19 +157,20 @@ class SocialService: ObservableObject {
             }
             
             let activity = FriendActivity(
-                id: userId,
+                id: normalizedUserId,
                 username: meta["username"] as? String ?? "Unknown",
                 currentlyWatching: watchingInfo,
                 lastSeen: Date()
             )
             
-            friendActivity[userId] = activity
+            friendActivity[normalizedUserId] = activity
         }
     }
     
     private func handlePresenceLeave(userId: String) {
-        onlineUserIds.remove(userId)
-        friendActivity.removeValue(forKey: userId)
+        let normalizedUserId = userId.lowercased()
+        onlineUserIds.remove(normalizedUserId)
+        friendActivity.removeValue(forKey: normalizedUserId)
     }
     
     // MARK: - Data Loading (Friends)

@@ -1423,6 +1423,8 @@ extension MPVPlayerViewModel {
 
                     // Define actualUserId ONCE before switch, using consistent logic
                     // Prioritize user_id from metadata, then username, then fallback to passed userId
+                    let metaUserId = metadata?["user_id"] as? String
+                    let metaUsername = metadata?["username"] as? String
                     // CRITICAL FIX: Normalize UUIDs to lowercase to prevent mismatched keys (Supabase inconsistency)
                     let actualUserId = (metaUserId ?? metaUsername ?? userId).lowercased()
 

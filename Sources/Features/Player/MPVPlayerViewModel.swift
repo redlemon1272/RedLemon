@@ -1541,14 +1541,18 @@ extension MPVPlayerViewModel {
 
                                 // Check if this is an old session leavning (stale ref)
                                 // If the user is physically present with a NEWER joinedAt, ignore this leave
-                                if let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) {
+                                guard let existingParticipant = currentParticipants.first(where: { $0.id == actualUserId }) else {
+                                     print("⚠️ Join/Leave Race: Participant \(actualUserId) not found in list during LEAVE processing. Likely already removed or never added.")
+                                     self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                     return
+                                }
 
-                                    // Grace check: Ignore leaves during initial connection ramp-up (10s) to prevent 'self-leave' on room entry
-                                    if Date().timeIntervalSince(self.initializationTime) < 10.0 {
-                                        print("🛡️ Ignoring LEAVE during initialization grace period: \(actualUserId)")
-                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
-                                        return
-                                    }
+                                // Grace check: Ignore leaves during initial connection ramp-up (10s) to prevent 'self-leave' on room entry
+                                if Date().timeIntervalSince(self.initializationTime) < 10.0 {
+                                    print("🛡️ Ignoring LEAVE during initialization grace period: \(actualUserId)")
+                                    self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                    return
+                                }
                                     
                                     // Check for stale leave (Ref Mismatch)
                                     // If we have a phx_ref for this user, and the leaving ref doesn't match, it's an old connection dropping.
@@ -1580,7 +1584,16 @@ extension MPVPlayerViewModel {
                                         self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                                         return
                                     }
-                                }
+                                    // FALLBACK: Timestamp check (original fix)
+                                    let leaveJoinedAt = metadata?["joined_at"] as? TimeInterval ?? 0
+                                    let existingJoinedAt = existingParticipant.joinedAt.timeIntervalSince1970
+
+                                    // Allow 1s tolerance for clock skew/processing time
+                                    if leaveJoinedAt < (existingJoinedAt - 1.0) {
+                                        print("🚫 Ignoring stale LEAVE event for \(actualUserId) (Time: \(leaveJoinedAt) < Current: \(existingJoinedAt))")
+                                        self.pendingLeaveTasks.removeValue(forKey: actualUserId)
+                                        return
+                                    }
 
                                 // Find username before removing for the message
                                 let defaultsName = metadata?["username"] as? String ?? "User"

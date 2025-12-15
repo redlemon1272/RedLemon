@@ -368,14 +368,14 @@ class MPVPlayerViewModel: ObservableObject {
         // This ensures they are ready before playback begins, preventing hiccups
         // NEW: Load/Scan subtitles IMMEDIATELY when loading starts
         // This ensures they are ready before playback begins, preventing hiccups
-        Task {
-            if !subtitles.isEmpty {
-                print("📝 Pre-loading external subtitles...")
-                await self.subtitleService.loadExternalSubtitles(subtitles)
-            } else {
-                print("📝 Pre-scanning embedded subtitles...")
-                await self.subtitleService.scanEmbeddedTracks()
-            }
+        // NEW: Load/Scan subtitles BEFORE loading the video
+        // This keeps the loading spinner up until subtitles are ready, preventing race conditions
+        if !subtitles.isEmpty {
+            print("📝 Pre-loading external subtitles (blocking video load)...")
+            await self.subtitleService.loadExternalSubtitles(subtitles)
+        } else {
+            print("📝 Pre-scanning embedded subtitles (blocking video load)...")
+            await self.subtitleService.scanEmbeddedTracks()
         }
 
         // Check if we should resume from a specific timestamp

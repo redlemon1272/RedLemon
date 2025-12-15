@@ -822,27 +822,37 @@ class PlayerViewModel: ObservableObject {
                         
                         // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
                         // If we rely on room.createdAt, we inherit the delay of the first user who joined.
+                        // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
+                        // 1. Try "Global Live" event first
                         if let config = eventsConfig,
                            let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                            liveEvent.mediaItem.id == self.currentEventId {
                                 
-                            // Current time into the slot (Movie + Buffer)
-                            // Slot starts at liveEvent.startTime, which IS the Movie Start Time in EventsView logic.
-                            // We do NOT subtract the buffer here, because startTime is already the content start.
                             let slotPosition = now.timeIntervalSince(liveEvent.startTime)
-                            // No manual compensation here - let MPVPlayerViewModel handle exact seek based on eventStartTime
                             position = max(0, slotPosition)
-                            
-                            // CRITICAL FIX: Ensure the "Recalculating seek time" logic uses the deterministic start time
                             self.eventStartTime = liveEvent.startTime
                             
-                            NSLog("✅ Using Deterministic Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
+                            NSLog("✅ Using Global Live Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
                             
-                        } else {
-                            // Fallback to room.createdAt if schedule mistmatch or config missing
-                            // NOTE: This might have drift if the room was created late
-                            position = max(0, now.timeIntervalSince(room.createdAt) - buffer)
-                            NSLog("⚠️ Using Room Creation Time (Fallback). Start: \(room.createdAt), Pos: \(position)")
+                        } 
+                        // 2. Try matching ANY scheduled event (e.g. if we are joining a friend in a previous/overlapping slot)
+                        else if let scheduledEvent = appState.eventsSchedule.first(where: { $0.mediaItem.id == self.currentEventId }) {
+                             let slotPosition = now.timeIntervalSince(scheduledEvent.startTime)
+                             position = max(0, slotPosition)
+                             self.eventStartTime = scheduledEvent.startTime
+                             
+                             NSLog("✅ Using Specific Schedule Item! Start: \(scheduledEvent.startTime), Pos: \(position)")
+                        }
+                        else {
+                            // 3. Fallback: Trust Room DB Position if available (Sync to Host)
+                            if room.playbackPosition > 0 {
+                                position = Double(room.playbackPosition)
+                                NSLog("⚠️ Event Schedule Mismatch - Using Room DB Position: \(position)s")
+                            } else {
+                                // 4. Last resort: Room Creation Time (High risk of staleness for persistent rooms)
+                                position = max(0, now.timeIntervalSince(room.createdAt) - buffer)
+                                NSLog("⚠️ Using Room Creation Time (Fallback). Start: \(room.createdAt), Pos: \(position)")
+                            }
                         }
                         
                         self.resumeFromTimestamp = position

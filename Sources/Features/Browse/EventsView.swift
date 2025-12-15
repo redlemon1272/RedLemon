@@ -60,10 +60,20 @@ struct EventsView: View {
                 isLoading = false
             }
             
-            // Check for auto-join immediately on appear (e.g. returning from player)
             if appState.shouldAutoJoinLobby {
                 attemptAutoJoin()
             }
+        }
+        .task {
+             // Fix for Event Transition Regression:
+             // Force view refresh every 10 seconds to check if events have finished/started
+             // Capable of updating 'Lobby Open' status without full reload
+             while !Task.isCancelled {
+                 try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
+                 await MainActor.run {
+                     lastUpdate = Date()
+                 }
+             }
         }
         .onChange(of: timeService.isSynced) { isSynced in
             if isSynced {

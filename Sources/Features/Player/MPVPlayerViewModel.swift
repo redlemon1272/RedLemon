@@ -1502,6 +1502,10 @@ extension MPVPlayerViewModel {
                             }
                         }
 
+                        // ✅ Update room state with fresh list
+                        self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
+                        self.appState?.objectWillChange.send() // Force UI update
+
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions
                         print("⏳ Participant leaving (grace period started): \(actualUserId)")

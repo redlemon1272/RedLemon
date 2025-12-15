@@ -343,6 +343,15 @@ actor SupabaseRealtimeClient {
                     handler(payload)
                 }
             }
+            
+        case "system":
+            if let payload = json["payload"] as? [String: Any],
+               let status = payload["status"] as? String,
+               status == "error" {
+                let msg = payload["message"] as? String ?? "Unknown error"
+                print("❌ Realtime System Error: \(msg)")
+                // We could broadcast this error if needed, but for now just logging it clearly is enough
+            }
 
         default:
             print("📨 Unknown event: \(event)")

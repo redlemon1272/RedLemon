@@ -54,6 +54,47 @@ class EventsConfigService {
                 print("⚠️ [EventsConfig] Failed to subscribe to realtime updates: \(error)")
             }
         }
+        
+        // Also start polling as a fallback (and for cases where Realtime is disabled on the table)
+        startPolling()
+    }
+    
+    // MARK: - Polling Fallback
+    
+    private var pollingTimer: Timer?
+    
+    private func startPolling() {
+        stopPolling()
+        print("⏲️ [EventsConfig] Starting polling fallback (every 60s)")
+        
+        // Poll every 60 seconds
+        DispatchQueue.main.async { [weak self] in
+            self?.pollingTimer = Timer.scheduledTimer(withTimeInterval: 60, repeats: true) { _ in
+                Task { [weak self] in
+                    await self?.checkForUpdates()
+                }
+            }
+        }
+    }
+    
+    private func stopPolling() {
+        pollingTimer?.invalidate()
+        pollingTimer = nil
+    }
+    
+    private func checkForUpdates() async {
+        let currentVersion = UserDefaults.standard.integer(forKey: "\(versionKey)_movie_events")
+        do {
+            let serverConfig = try await fetchConfig(type: "movie_events")
+            if serverConfig.version > currentVersion {
+                print("🔔 [EventsConfig] Polling found new version \(serverConfig.version) (current: \(currentVersion))")
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("ScheduleDidUpdate"), object: nil)
+                }
+            }
+        } catch {
+            // makeRequest inside fetchConfig logs errors, so we can be silent here to avoid spam
+        }
     }
     
     private func handleRealtimeUpdate(_ payload: [String: Any]) {

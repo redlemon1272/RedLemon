@@ -85,7 +85,7 @@ struct ExitButton: View {
                     .font(.system(size: 14))
                 // Note: User requested "Back to Lobby" for hosts, "Exit Room" for guests.
                 // Events logic remains "Exit Room" (or Event)
-                Text((!isEvent && isHost) ? "Back to Lobby" : "Exit Room")
+                Text(isEvent ? "Exit Event" : (isHost ? "Back to Lobby" : "Exit Room"))
                     .font(.system(size: 13, weight: .medium))
             }
             .foregroundColor(.white)

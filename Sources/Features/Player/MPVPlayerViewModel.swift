@@ -344,8 +344,16 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Fetch metadata for background art
         // Fetch metadata for background art (parallel, don't block video load)
+        // Fetch metadata for background art (parallel, don't block video load)
         Task {
             await fetchMetadata(imdbId: imdbId, mediaType: isSeries ? "series" : "movie")
+        }
+
+        // NEW: Scan for embedded tracks IMMEDIATELY when loading starts
+        // This ensures they are ready before playback begins, preventing hiccups
+        Task {
+            print("📝 Pre-scanning embedded subtitles...")
+            await self.subtitleService.scanEmbeddedTracks()
         }
 
         // Check if we should resume from a specific timestamp
@@ -482,10 +490,8 @@ class MPVPlayerViewModel: ObservableObject {
             if !self.subtitles.isEmpty {
                 print("📝 Loading external subtitles (delayed execution)...")
                 await self.subtitleService.loadExternalSubtitles(self.subtitles)
-            } else {
-                // If no external subs, just scan for embedded ones
-                await self.subtitleService.scanEmbeddedTracks()
             }
+            // Note: Embedded tracks are now pre-scanned in loadStream()
         }
 
         // Update tracks (Audio only - subtitle scan handled above or in loadExternalSubtitles)
@@ -965,24 +971,32 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Prioritize embedded tracks (isExternal == false)
         // We want embedded tracks to appear FIRST in our candidate list
+        // Prioritize: Embedded SDH > Embedded Standard > External
         let sortedEnglishSubs = englishSubs.sorted { (track1, track2) -> Bool in
-            // atomic: if track1 is embedded and track2 is external, track1 comes first
+            let t1 = (track1.title ?? "").lowercased() + " " + (track1.lang ?? "").lowercased()
+            let t2 = (track2.title ?? "").lowercased() + " " + (track2.lang ?? "").lowercased()
+            
+            let isSDH1 = t1.contains("sdh") || t1.contains("cc") || t1.contains("hi")
+            let isSDH2 = t2.contains("sdh") || t2.contains("cc") || t2.contains("hi")
+            
+            // 1. Embedded vs External
             if !track1.isExternal && track2.isExternal { return true }
             if track1.isExternal && !track2.isExternal { return false }
-            return false // Keep original order otherwise
+            
+            // 2. (If both Embedded or both External) SDH vs Standard
+            if isSDH1 && !isSDH2 { return true }
+            if !isSDH1 && isSDH2 { return false }
+            
+            return false
         }
 
-        // Prioritize full subtitles over foreign-parts-only subtitles
-        // First, try to find non-foreign, non-HI subtitles (ideal)
+        // Select the first valid candidate (filtering out only 'Foreign Parts' tracks)
         let preferredSub = sortedEnglishSubs.first(where: { track in
             let title = track.title?.lowercased() ?? ""
             let isForeignOnly = title.contains("foreign") ||
                                title.contains("forced") ||
                                title.contains("non-english") ||
                                title.contains("only")
-            let isHI = title.contains(".hi") || title.contains(" hi")
-            // Prioritize SDH/HI if embedded, otherwise treat normally.
-            // We only want to filter out "Foreign Only" tracks from being the default.
             return !isForeignOnly
         }) ?? sortedEnglishSubs.first
 

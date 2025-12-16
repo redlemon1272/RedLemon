@@ -385,11 +385,37 @@ struct LogEntryRow: View {
                         .foregroundColor(.secondary)
                         .monospacedDigit()
                 }
+                
+                // Action Buttons
+                HStack(spacing: 12) {
+                    Button(action: {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(log.message, forType: .string)
+                    }) {
+                        Image(systemName: "doc.on.doc")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Copy Message")
+                    
+                    Button(action: {
+                        Task {
+                            await SupabaseClient.shared.deleteAppLog(id: log.id)
+                        }
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Delete Log")
+                }
+                .padding(.leading, 8)
             }
 
             Text(log.message)
                 .font(.body)
                 .lineLimit(3)
+                .textSelection(.enabled) // Allow text selection
 
             if let metadata = log.metadata, !metadata.isEmpty {
                 Text(metadataDescription(metadata))

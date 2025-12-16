@@ -368,7 +368,14 @@ actor StreamService: StreamResolving {
                 }
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata)
             } catch {
-                LogManager.shared.warning("❌ StreamService: [Attempt \(index + 1)/\(finalStreams.count)] Unlock failed for \(stream.title): \(error.localizedDescription)")
+                // Auto-Report Server Errors (5xx) to Admin Dashboard
+                let errorMsg = error.localizedDescription
+                if errorMsg.contains("HTTP 5") {
+                    LogManager.shared.error("🚨 StreamService: [Server Fail] Unlock failed for \(stream.title): \(errorMsg)", error: error) 
+                } else {
+                    LogManager.shared.warning("❌ StreamService: [Attempt \(index + 1)/\(finalStreams.count)] Unlock failed for \(stream.title): \(errorMsg)")
+                }
+                
                 lastError = error
                 continue
             }

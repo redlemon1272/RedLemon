@@ -753,6 +753,20 @@ class SupabaseClient: RoomManager, UserManager {
         return try jsonDecoder.decode([AppLog].self, from: data)
     }
 
+    /// Delete an app log (Admin)
+    func deleteAppLog(id: UUID) async {
+        do {
+            _ = try await makeRequest(
+                path: "/app_logs",
+                method: "DELETE",
+                query: ["id": "eq.\(id.uuidString)"]
+            )
+            print("🗑️ Deleted app log: \(id)")
+        } catch {
+            print("❌ Failed to delete app log: \(error)")
+        }
+    }
+
     /// Get total user count
     func getUserCount() async throws -> Int {
         // Workaround: Just fetch all IDs (small payload)

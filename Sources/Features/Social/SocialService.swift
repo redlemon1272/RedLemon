@@ -84,6 +84,9 @@ class SocialService: ObservableObject {
         )
         self.presenceClient = client
         
+        // Setup connection monitoring
+        setupConnectionMonitoring(for: client, isPresence: true)
+        
         // Subscribe to presence events
         await client.onPresence { [weak self] action, userId, metadata in
             Task { @MainActor [weak self] in
@@ -249,16 +252,100 @@ class SocialService: ObservableObject {
     
     private func startHeartbeat() {
         stopHeartbeat()
-        heartbeatTimer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+        // Reduced to 20.0 to prevent timeouts (server often times out at 60s)
+        let timer = Timer(timeInterval: 20.0, repeats: true) { [weak self] _ in
             Task { @MainActor [weak self] in
                 await self?.sendHeartbeat()
             }
         }
+        // Use .common mode so scrolling/resizing doesn't block the heartbeat
+        RunLoop.main.add(timer, forMode: .common)
+        heartbeatTimer = timer
     }
     
     private func stopHeartbeat() {
         heartbeatTimer?.invalidate()
         heartbeatTimer = nil
+    }
+
+    // MARK: - Reconnection Logic
+
+    private func setupConnectionMonitoring(for client: SupabaseRealtimeClient, isPresence: Bool) {
+        client.onConnectionChange { [weak self] isConnected in
+            Task { @MainActor [weak self] in
+                guard let self = self else { return }
+                
+                if isConnected {
+                    if isPresence {
+                        print("✅ SocialService: Presence connected")
+                        self.isConnected = true
+                        self.startHeartbeat()
+                    } else {
+                        print("✅ SocialService: DM channel connected")
+                    }
+                } else {
+                    print("⚠️ SocialService: \(isPresence ? "Presence" : "DM") disconnected")
+                    if isPresence {
+                        self.isConnected = false
+                        self.stopHeartbeat()
+                    }
+                    
+                    // Attempt Reconnect if we expect to be connected
+                    if self.currentUserId != nil {
+                         self.scheduleReconnect()
+                    }
+                }
+            }
+        }
+    }
+
+    private var reconnectTask: Task<Void, Never>?
+    
+    private func scheduleReconnect() {
+        guard reconnectTask == nil else { return }
+        
+        print("🔄 SocialService: Scheduling reconnection in 5s...")
+        reconnectTask = Task {
+            try? await Task.sleep(nanoseconds: 5 * 1_000_000_000) // 5s delay
+            
+            if !Task.isCancelled {
+                await self.reconnect()
+            }
+            self.reconnectTask = nil
+        }
+    }
+    
+    private func reconnect() async {
+        guard let userId = currentUserId, let username = currentUsername else { return }
+        print("🔄 SocialService: Attempting to reconnect...")
+        
+        // Re-establish Presence
+        if let client = presenceClient {
+            if !await client.isJoined(to: "global-presence") {
+                 do {
+                     try await client.connect()
+                     try await client.joinChannel("global-presence")
+                     try await client.track(userId: userId, metadata: currentMetadata)
+                     print("✅ SocialService: Reconnected to presence")
+                 } catch {
+                     print("❌ SocialService: Presence reconnection failed: \(error)")
+                 }
+            }
+        } else {
+             await setupPresenceChannel(userId: userId, username: username)
+        }
+        
+        // Re-establish DMs
+        if let client = dmClient {
+             // Basic check if connected, otherwise try to connect
+             // Currently SupabaseRealtimeClient doesn't expose strict "isJoined" for generic channels easily without tracking topic
+             // But we can try connect() which is idempotent-ish
+             try? await client.connect()
+             // We'd need to re-join if the socket completely died.
+             // For now, simpler to just re-run setup if needed, but let's try connect first.
+        } else {
+             await setupDMChannel(userId: userId)
+        }
     }
     
     private func sendHeartbeat() async {
@@ -386,6 +473,9 @@ class SocialService: ObservableObject {
             apiKey: Config.supabaseAnonKey
         )
         self.dmClient = client
+        
+        // Setup monitoring
+        setupConnectionMonitoring(for: client, isPresence: false)
         
         // Subscribe to Postgres Changes on direct_messages table
         await client.onPostgresChange { [weak self] payload in

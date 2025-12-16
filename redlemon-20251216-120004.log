@@ -1,0 +1,1092 @@
+2025-12-16 12:00:12.929 RedLemon[4267:50055] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-16 12:00:12.929 RedLemon[4267:50055] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-16 12:00:13.009 RedLemon[4267:50121] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-16 12:00:13.009 RedLemon[4267:50055] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-16 12:00:13.043 RedLemon[4267:50055] ✅ Playback state reset complete - starting in browse view
+2025-12-16 12:00:13.043 RedLemon[4267:50055] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-16 12:00:13.043 RedLemon[4267:50055] 🧪 Testing Profile: debug
+2025-12-16 12:00:13.043 RedLemon[4267:50124] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-16 12:00:13.044 RedLemon[4267:50055] ✅ Keychain: Found stored username: ursinho
+2025-12-16 12:00:13.044 RedLemon[4267:50055] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-16 12:00:13.044 RedLemon[4267:50124] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-16 12:00:13.223 RedLemon[4267:50143] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-16 12:00:13.233 RedLemon[4267:50143] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-16 12:00:13.234 RedLemon[4267:50143] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 12:00:13.289 RedLemon[4267:50055] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 12:00:13.289 RedLemon[4267:50055] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:13.289 RedLemon[4267:50055] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:13.289 RedLemon[4267:50055] 🚀 RedLemon: Starting HTTP server...
+2025-12-16 12:00:13.290 RedLemon[4267:50055] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-16 12:00:13.369 RedLemon[4267:50055] ✅ RedLemon: HTTPServer instance created
+2025-12-16 12:00:13.369 RedLemon[4267:50055] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 12:00:13.370 RedLemon[4267:50141] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"45890ADC-E2EF-4649-ADF5-A749B531EA0D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-16 12:00:15.400 RedLemon[4267:50055] ✅ RedLemon: Server marked as ready
+2025-12-16 12:00:15.446 RedLemon[4267:50055] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-16 12:00:15.446 RedLemon[4267:50055] 🔍 Performing startup checks...
+2025-12-16 12:00:15.446 RedLemon[4267:50055] ✅ Username-based authentication ready
+2025-12-16 12:00:15.446 RedLemon[4267:50055] 🔍 Performing startup checks...
+2025-12-16 12:00:15.446 RedLemon[4267:50055] ✅ Username-based authentication ready
+2025-12-16 12:00:15.446 RedLemon[4267:50055] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1350 with 453 movies
+✅ [EventsConfig] Using cached movie_events config (version 1350, 453 movies)
+✅ [EventsView] Loaded 453 movies from config version 1350
+🗓 AppState: Updated schedule epoch to 2025-11-05 00:07:55 +0000
+⏰ AppState: Next schedule update set for Event End: 2025-12-16 18:19:55 +0000
+⏰ AppState: Scheduling update in 4782 seconds
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt1663662","name":"Pacific Rim","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"0d41e65140462dacede11bb87629d52b3c512088","imdb_id":"tt1663662","poster_url":"https://images.metahub.space/poster/small/tt1663662/img","backdrop_url":"https://images.metahub.space/background/medium/tt1663662/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-16T16:58:43.134682","last_activity":"2025-12-16T16:58:43.231906","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔍 Supabase Response for /rooms: []
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"272AB2EA-30E1-4B9F-B16B-287719CEA9C0","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAtVfCGCAqbOBN","last_seen":"2025-12-16T17:00:13Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"0B3699AB-E07B-4178-9E2D-D4F0E0A2766D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.060s (RTT: 71ms)
+   Local:  2025-12-16 17:00:15 +0000
+   Server: 2025-12-16 17:00:15 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📡 SocialService: Updated status - Browsing Library: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 03EFF29C-E393-4BD2-9D9B-63FF944D7342]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_cru.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAtf4VPHEqbJSI","phx_ref_prev":"GIHAtVfCGCAqbOBN","last_seen":"2025-12-16T17:00:16Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAtVfCGCAqbOBN","last_seen":"2025-12-16T17:00:13Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for crunchyroll
+🔍 Starting catalog fetch for crunchyroll from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/cru.json
+🔄 Attempt 1/3 for crunchyroll
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29232158
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Troll 2
+🔍 [DEBUG] Successfully created MediaItem: Troll 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14107334
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Running Man
+🔍 [DEBUG] Successfully created MediaItem: The Running Man
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt6604188
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Tron: Ares
+🔍 [DEBUG] Successfully created MediaItem: Tron: Ares
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26439764
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Kantara A Legend: Chapter 1
+🔍 [DEBUG] Successfully created MediaItem: Kantara A Legend: Chapter 1
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32537226
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Hunting Season
+🔍 [DEBUG] Successfully created MediaItem: Hunting Season
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27829510
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: High Rollers
+🔍 [DEBUG] Successfully created MediaItem: High Rollers
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30472557
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Chainsaw Man - The Movie: Reze Arc
+🔍 [DEBUG] Successfully created MediaItem: Chainsaw Man - The Movie: Reze Arc
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14364480
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Successfully created MediaItem: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1343712
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: First Squad: The Moment of Truth
+🔍 [DEBUG] Successfully created MediaItem: First Squad: The Moment of Truth
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31434030
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Dracula
+🔍 [DEBUG] Successfully created MediaItem: Dracula
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt36153493
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wildcat
+🔍 [DEBUG] Successfully created MediaItem: Wildcat
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10210064
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bureau 749
+🔍 [DEBUG] Successfully created MediaItem: Bureau 749
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_cru.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+✅ Loaded 15 movies
+🧹 Deduplication: 50 → 50 items
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for crunchyroll
+✅ Successfully fetched 15 items for crunchyroll from primary service
+📦 Full batch loaded: 15 items for crunchyroll
+✅ Progressive loading completed for crunchyroll
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32537226/img (34074 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14107334/img (29621 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26439764/img (47523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt6604188/img (24052 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29232158/img (38828 bytes)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+⏭️ Skipping load for crunchyroll - already loaded 15 items
+⏭️ Skipping load for showtime - already loaded 15 items
+⏭️ Skipping load for starz - already loaded 15 items
+⏭️ Skipping load for peacock - already loaded 15 items
+⏭️ Skipping load for hulu - already loaded 15 items
+⏭️ Skipping load for paramount - already loaded 15 items
+⏭️ Skipping load for appleTv - already loaded 15 items
+⏭️ Skipping load for hbo - already loaded 15 items
+⏭️ Skipping load for disney - already loaded 15 items
+⏭️ Skipping load for prime - already loaded 15 items
+⏭️ Skipping load for netflix - already loaded 15 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327345760/s332/img (47132 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334021051/s332/img (90236 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181188381/s332/img (76877 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/239922303/s332/img (41748 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176260460/s332/img (77708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325207161/s332/img (38083 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/178635023/s332/img (62162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176910854/s332/img (58293 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330535890/s332/img (69017 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322412111/s332/img (57515 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/250757744/s332/img (35420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/195351229/s332/img (37492 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/49738196/s332/img (45872 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322709571/s332/img (58026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/206714476/s332/img (52991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/31887184/s332/img (40203 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/35006170/s332/img (61678 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/190225928/s332/img (32368 bytes)
+🖼️ [CACHE] Cached image data for key: https2025-12-16 12:00:23.562 RedLemon[4267:50055] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1663662/img
+2025-12-16 12:00:23.563 RedLemon[4267:50055] ⏳ Background art loading...
+2025-12-16 12:00:23.563 RedLemon[4267:50055] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1663662/img
+2025-12-16 12:00:23.564 RedLemon[4267:50055] ⏳ Logo loading...
+2025-12-16 12:00:23.613 RedLemon[4267:50055] ✅ Logo loaded successfully
+2025-12-16 12:00:23.627 RedLemon[4267:50055]    Quality: 1080p
+2025-12-16 12:00:23.628 RedLemon[4267:50055]    Mode: watchParty
+2025-12-16 12:00:23.628 RedLemon[4267:50055] 📡 Fetching metadata for tt1663662...
+://images.justwatch.com/poster/206714476/s332/img (52991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/238965112/s332/img (63309 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/31887184/s332/img (40203 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/271349733/s332/img (77031 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/129198929/s332/img (60050 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301809868/s332/img (51535 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/57711426/s332/img (36912 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334757007/s332/img (41483 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/246982332/s332/img (44686 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336952619/s332/img (50991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/168085879/s332/img (36913 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336662820/s332/img (50316 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/188181053/s332/img (48517 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301298992/s332/img (50065 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/87608067/s332/img (61832 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/166095369/s332/img (9321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/76385127/s332/img (66768 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/180263360/s332/img (51887 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/240241908/s332/img (80230 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8671419/s332/img (69026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338574691/s332/img (40150 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/21653281/s332/img (35111 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241678740/s332/img (52095 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336393313/s332/img (35742 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309896363/s332/img (42659 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14107334/img (29621 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt16311594/img (10204 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1312221/img (31560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt8946378/img (39978 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30446847/img (17100 bytes)
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt0wbfp4qbMLM","phx_ref_prev":"GIHAtf4VPHEqbJSI","last_seen":"2025-12-16T17:00:22Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAtf4VPHEqbJSI","phx_ref_prev":"GIHAtVfCGCAqbOBN","last_seen":"2025-12-16T17:00:16Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2025-12-16T17:00:23Z] [INFO] [EventsView.swift:188] 🎟️ Joining event: Pacific Rim (Live: true)
+   Event start time: 2025-12-16 15:58:55 +0000
+   Event duration: 8460.0s
+   Current time: 2025-12-16 17:00:23 +0000
+   Is Live: true
+   Is In Lobby: false
+🔍 Supabase Response for /rooms: [{"id":"event_tt1663662","name":"Pacific Rim","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"0d41e65140462dacede11bb87629d52b3c512088","imdb_id":"tt1663662","poster_url":"https://images.metahub.space/poster/small/tt1663662/img","backdrop_url":"https://images.metahub.space/background/medium/tt1663662/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-16T16:58:43.134682","last_activity":"2025-12-16T16:58:43.231906","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+✅ Event room already exists: event_tt1663662
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi6-4.downl...
+   Hash: 0d41e65140462dacede11bb87629d52b3c512088
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 0d41e65140462dacede11bb87629d52b3c512088
+
+🎬 Live event - calculating position: 3688.5255625247955 seconds
+   Event start time: 2025-12-16 15:58:55 +0000
+   Current time: 2025-12-16 17:00:23 +0000
+   Room createdAt: 2025-12-16 15:58:55 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 3688.5255625247955
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Pacific Rim
+[ INFO ] GET /api/metadata/meta/movie/tt1663662 [request-id: D3C72E74-0C64-4248-A5FC-C4D8D7EC72A0]
+2025-12-16 12:00:23.649 RedLemon[4267:50055] ✅ Background art loaded successfully
+2025-12-16 12:00:23.692 RedLemon[4267:50125] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-16 12:00:23.746 RedLemon[4267:50055] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-16 12:00:23.746 RedLemon[4267:50055] ⚠️ GUEST: Detected quality from filename: 1080p
+2025-12-16 12:00:23.746 RedLemon[4267:50055] 🎬 GUEST: Fetching subtitles for shared stream...
+💾 Cache SET: Metadata[meta_movie_tt1663662]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 8B4A7005-7507-4844-A213-7E3FCF1B5644]
+2025-12-16 12:00:24.017 RedLemon[4267:50055] ✅ GUEST: Found 10 subtitles
+2025-12-16 12:00:24.028 RedLemon[4267:50055] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pa, subtitles: 10
+2025-12-16 12:00:24.104 RedLemon[4267:50055] ✅ Stream ready, starting playback...
+2025-12-16 12:00:24.104 RedLemon[4267:50055] 🖥️ WindowManager: enterFullscreen() called
+2025-12-16 12:00:24.105 RedLemon[4267:50055]    Window: <SwiftUI.SwiftUIWindow: 0x7faddc312c10>
+2025-12-16 12:00:24.105 RedLemon[4267:50055]    Is fullscreen: 0
+2025-12-16 12:00:24.105 RedLemon[4267:50055]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-16 12:00:24.189 RedLemon[4267:50055] 🖼️ Setting up MPV with native macOS video output...
+2025-12-16 12:00:24.204 RedLemon[4267:50055] ✅ MPV initialized with native GPU rendering
+2025-12-16 12:00:24.213 RedLemon[4267:50055] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-16 12:00:24.213 RedLemon[4267:50055] 🎉 Starting watch party sync - Room: event_tt1663662, Host: NO
+2025-12-16 12:00:24.213 RedLemon[4267:50055] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-16 12:00:24.278 RedLemon[4267:50055] 🔄 Starting chat polling for room: event_tt1663662
+2025-12-16 12:00:24.279 RedLemon[4267:50055] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-16 12:00:24.279 RedLemon[4267:50055] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-16 12:00:24.279 RedLemon[4267:50055] 🎬🎬🎬 Subtitles: 10
+2025-12-16 12:00:24.280 RedLemon[4267:50055] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Pacific Rim
+2025-12-16 12:00:24.280 RedLemon[4267:50055] 🎬🎬🎬 streamURL: https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pa
+2025-12-16 12:00:24.280 RedLemon[4267:50055] 🎬🎬🎬 subtitles: 10
+2025-12-16 12:00:24.281 RedLemon[4267:50055] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-16 12:00:24.293 RedLemon[4267:50141] 🎬 MPV: Current video filename set to: Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4
+2025-12-16 12:00:24.293 RedLemon[4267:50197] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-16 12:00:24.294 RedLemon[4267:50141] 🎬 MPV loadVideo called with URL: https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RAR, autoplay: true
+2025-12-16 12:00:24.294 RedLemon[4267:50197] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA=
+2025-12-16 12:00:24.294 RedLemon[4267:50141] 🎬 MPV executing command: loadfile "https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4"
+2025-12-16 12:00:24.294 RedLemon[4267:50141] 🎬 MPV loadfile result: 0
+2025-12-16 12:00:24.295 RedLemon[4267:50141] ✅ MPV loadfile succeeded, isPlaying set to true
+🔍 Subtitle search request: tt1663662 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1663662 (movie)
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Pacific.Rim.2013.720p.Bluray.X264.Yify [EN] (score: 28)
+   [2] Pacific.Rim.2013.720p.BluRay.x264.YIFY [EN] (score: 28)
+   [3] Pacific.Rim.2013.720p.BluRay.x264.YIFY [EN] (score: 28)
+   [4] Pacific Rim.2013.Bluray-1080p-RMXTRAS.en [EN] (score: 20)
+   [5] Pacific Rim (2013) [EN] (score: 5)
+   [6] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi [EN] (score: 5)
+   [7] Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD [EN] (score: 5)
+   [8] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi [EN] (score: 5)
+   [9] Pacific.Rim.2013.HDRip.XviD-AQOS [EN] (score: 5)
+   [10] --->TRAILER<--- Pacific.Rim.2013.Main.Trailer [EN] (score: 5)
+✅ Subtitle search returned 10 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pa
+   Display Title: Pacific Rim
+   Subtitle URLs: 10
+      [0] Pacific.Rim.2013.720p.Bluray.X264.Yify
+      [1] Pacific.Rim.2013.720p.BluRay.x264.YIFY
+      [2] Pacific.Rim.2013.720p.BluRay.x264.YIFY
+      [3] Pacific Rim.2013.Bluray-1080p-RMXTRAS.en
+      [4] Pacific Rim (2013)
+      [5] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+      [6] Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD
+      [7] Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+      [8] Pacific.Rim.2013.HDRip.XviD-AQOS
+      [9] --->TRAILER<--- Pacific.Rim.2013.Main.Trailer
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1663662, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1663662
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1663662
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Pacific Rim
+   IMDB: tt1663662
+   URL: https://chi6-4.download.real-debrid.com/d/Y7VMMGQHHLLMW72/Pa...
+   Hash: 0d41e651...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+📡 Fetching metadata for tt1663662 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1663662]
+📝 Pre-loading external subtitles (Top 3)...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA= [request-id: 871C72C5-A22D-435B-9431-63894CF23923]
+2025-12-16 12:00:24.730 RedLemon[4267:50055] 🔍 MPV track-list/count: 0
+2025-12-16 12:00:24.730 RedLemon[4267:50055] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-16 12:00:24.730 RedLemon[4267:50055]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:24.794 RedLemon[4267:50055] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-16 12:00:24.814 RedLemon[4267:50143] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E2ABC796-F942-4705-B537-D10B9E862647.vtt
+2025-12-16 12:00:24.814 RedLemon[4267:50143] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E2ABC796-F942-4705-B537-D10
+2025-12-16 12:00:24.845 RedLemon[4267:50143] ✅ External subtitle added to track list (not auto-selected)
+2025-12-16 12:00:24.845 RedLemon[4267:50143] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODYyLTExNjU5NjUuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzQ0ODc3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/44877-794705.zip
+📨 Received: {"ref":"F13F1B9D-2A23-4733-B8B8-EFAC77678F18","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b6b8468c-daa0-11f0-92a9-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt8HQhuq3KTiN","is_host":false,"joined_at":1765904424.27431,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt8KHNoQqbKnI","phx_ref_prev":"GIHAt0wbfp4qbMLM","last_seen":"2025-12-16T17:00:24Z","room_id":"event_tt1663662","started_at":"2025-12-16T17:00:24Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}},"leaves":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt0wbfp4qbMLM","phx_ref_prev":"GIHAtf4VPHEqbJSI","last_seen":"2025-12-16T17:00:22Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt1663662/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1663662/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1663662/img...
+📡 SocialService: Updated status - online: Pacific Rim
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIHAt8HQhuq3KTiN)
+⏰ AppState: Next schedule update set for Event End: 2025-12-16 18:19:55 +0000
+⏰ AppState: Scheduling update in 4771 seconds
+✅ Download complete: 43537 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Pacific.Rim.2013.720p.BluRay.x264.YIFY.srt
+✅ Extraction successful
+✅ Video ready - hiding poster
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Found 1 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+📊 After filtering: 0 actual subtitle tracks
+ℹ️ No subtitle tracks found in video yet
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-16 15:58:55 +0000
+   Current time: 2025-12-16 17:00:24 +0000
+   Elapsed: 3689s
+   Seeking to: 3689s
+🎯 IMMEDIATE RESUME: Seeking to 3689s without delay
+📝 Started watch history tracking
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⚡️ PlaybackService: releasing sleep assertion
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzQ0ODYyLTExNjU5NjUuemlw [request-id: 18ADB11F-08AE-487A-99C3-73035ED58F3C]
+2025-12-16 12:00:25.235 RedLemon[4267:50125] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 3689.7s
+2025-12-16 12:00:25.313 RedLemon[4267:50141] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5B8D627F-0107-4D10-9DCA-D1B504BEC22F.vtt
+2025-12-16 12:00:25.313 RedLemon[4267:50141] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_5B8D627F-0107-4D10-9DCA-D1B
+2025-12-16 12:00:25.323 RedLemon[4267:50141] ✅ External subtitle added to track list (not auto-selected)
+2025-12-16 12:00:25.324 RedLemon[4267:50141] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODQ2LTc5ODA0MS56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzQ0ODYy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/44862-1165965.zip
+✅ Download complete: 43483 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Pacific.Rim.2013.720p.BluRay.x264.YIFY.srt
+✅ Extraction successful
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 3689s...
+🎯 Executing immediate seek to 3689s...
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzQ0ODQ2LTc5ODA0MS56aXA= [request-id: 5B1213A1-5957-4CDF-AED6-B1813FEC1A9C]
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/7BDE6914-5FCF-499B-AB15-9F95BE52008E.zip or
+        /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/7BDE6914-5FCF-499B-AB15-9F95BE52008E.zip.zip, and cannot find /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/7BDE6914-5FCF-499B-AB15-9F95BE52008E.zip.ZIP, period.
+📄 Subtitle request: L3N1YnRpdGxlLzQ0ODQ2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/44846-798041.zip
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 3689s
+⚠️ onVideoReady called again - ignoring to prevent loops
+✅ Download complete: 46660 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No subtitle files found in zip list output:
+Archive:  /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/7BDE6914-5FCF-499B-AB15-9F95BE52008E.zip
+
+[ WARNING ] Abort.404: No subtitle files found in zip [request-id: 5B1213A1-5957-4CDF-AED6-B1813FEC1A9C]
+2025-12-16 12:00:25.680 RedLemon[4267:50141] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7B521F67-6455-40F7-AF48-F2A73C770E60.vtt
+2025-12-16 12:00:25.680 RedLemon[4267:50141] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7B521F67-6455-40F7-AF48-F2A
+2025-12-16 12:00:25.686 RedLemon[4267:50141] ✅ External subtitle added to track list (not auto-selected)
+2025-12-16 12:00:25.686 RedLemon[4267:50141] 🔍 MPV track-list/count: 3
+2025-12-16 12:00:25.686 RedLemon[4267:50141] 🔍 Track 0 type: sub
+2025-12-16 12:00:25.687 RedLemon[4267:50141] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:25.687 RedLemon[4267:50141] 🔍 Track 1 type: sub
+2025-12-16 12:00:25.687 RedLemon[4267:50141] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.687 RedLemon[4267:50141] 🔍 Track 2 type: sub
+2025-12-16 12:00:25.687 RedLemon[4267:50141] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.687 RedLemon[4267:50141] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:25.687 RedLemon[4267:50141]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:25.687 RedLemon[4267:50141]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:25.687 RedLemon[4267:50141]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.687 RedLemon[4267:50141]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055] 🔍 MPV track-list/count: 3
+2025-12-16 12:00:25.688 RedLemon[4267:50055] 🔍 Track 0 type: sub
+2025-12-16 12:00:25.688 RedLemon[4267:50141] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-16 12:00:25.688 RedLemon[4267:50055] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055] 🔍 Track 1 type: sub
+2025-12-16 12:00:25.688 RedLemon[4267:50055] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055] 🔍 Track 2 type: sub
+2025-12-16 12:00:25.688 RedLemon[4267:50055] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:25.688 RedLemon[4267:50141]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:25.688 RedLemon[4267:50055]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:25.688 RedLemon[4267:50055]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.688 RedLemon[4267:50141]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:25.688 RedLemon[4267:50055]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.688 RedLemon[4267:50141]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:25.689 RedLemon[4267:50141]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:25.696 RedLemon[4267:50121] 🔍 MPV track-list/count: 3
+2025-12-16 12:00:25.696 RedLemon[4267:50121] 🔍 Track 0 type: sub
+2025-12-16 12:00:25.696 RedLemon[4267:50121] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:25.696 RedLemon[4267:50121] 🔍 Track 1 type: sub
+2025-12-16 12:00:25.696 RedLemon[4267:50121] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.697 RedLemon[4267:50121] 🔍 Track 2 type: sub
+2025-12-16 12:00:25.697 RedLemon[4267:50121] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:25.697 RedLemon[4267:50121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:25.697 RedLemon[4267:50121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:25.697 RedLemon[4267:50121]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:25.697 RedLemon[4267:50121]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.697 RedLemon[4267:50121]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:25.697 RedLemon[4267:50121] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-16 12:00:25.698 RedLemon[4267:50121]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:25.698 RedLemon[4267:50121]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:25.698 RedLemon[4267:50121]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:25.698 RedLemon[4267:50121]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:26.453 RedLemon[4267:50055] 🔄 MPV: Executing PENDING SEEK to 3689.7s after FILE_LOADED
+2025-12-16 12:00:26.454 RedLemon[4267:50055] ⏱️ Watch Party: Duration available (7877.9s), triggering ready signal
+2025-12-16 12:00:26.454 RedLemon[4267:50055] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-16 12:00:26.461 RedLemon[4267:50125] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:26.464 RedLemon[4267:50125]    Payload keys: type, position, timestamp, senderId, isPlaying
+2025-12-16 12:00:26.465 RedLemon[4267:50125] ✅ Realtime: Message broadcast complete
+2025-12-16 12:00:26.467 RedLemon[4267:50055] ✅ Watch Party: READY signal sent successfully
+2025-12-16 12:00:26.533 RedLemon[4267:50141] 📨 Realtime: Received broadcast message
+2025-12-16 12:00:26.533 RedLemon[4267:50141]    Payload keys: isPlaying, type, timestamp, senderId, position
+2025-12-16 12:00:26.534 RedLemon[4267:50141] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:26.534 RedLemon[4267:50141] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-16 12:00:26.534 RedLemon[4267:50141] ✅ Realtime: syncCallback invoked successfully
+2025-12-16 12:00:26.534 RedLemon[4267:50055] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:26.535 RedLemon[4267:50055] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 12:00:26.719 RedLemon[4267:50141] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:26.719 RedLemon[4267:50141] 🔍 Track 0 type: sub
+2025-12-16 12:00:26.720 RedLemon[4267:50141] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:26.720 RedLemon[4267:50141] 🔍 Track 1 type: sub
+2025-12-16 12:00:26.720 RedLemon[4267:50141] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:26.720 RedLemon[4267:50141] 🔍 Track 2 type: sub
+2025-12-16 12:00:26.721 RedLemon[4267:50141] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:26.722 RedLemon[4267:50141] 🔍 Track 3 type: video
+2025-12-16 12:00:26.723 RedLemon[4267:50141] 🔍 Track 4 type: audio
+2025-12-16 12:00:26.723 RedLemon[4267:50141] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:26.723 RedLemon[4267:50141]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:26.723 RedLemon[4267:50141]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:26.724 RedLemon[4267:50141]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:26.724 RedLemon[4267:50141]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:26.724 RedLemon[4267:50141] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2025-12-16 12:00:26.724 RedLemon[4267:50141]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:26.725 RedLemon[4267:50141]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:26.725 RedLemon[4267:50141]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:26.725 RedLemon[4267:50141]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:26.726 RedLemon[4267:50141] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:26.726 RedLemon[4267:50141] 🔍 Track 0 type: sub
+2025-12-16 12:00:26.726 RedLemon[4267:50141] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:26.727 RedLemon[4267:50141] 🔍 Track 1 type: sub
+2025-12-16 12:00:26.727 RedLemon[4267:50141] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:26.728 RedLemon[4267:50141] 🔍 Track 2 type: sub
+2025-12-16 12:00:26.728 RedLemon[4267:50141] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:26.728 RedLemon[4267:50141] 🔍 Track 3 type: video
+2025-12-16 12:00:26.728 RedLemon[4267:50141] 🔍 Track 4 type: audio
+2025-12-16 12:00:26.728 RedLemon[4267:50141] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:26.728 RedLemon[4267:50141]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:26.729 RedLemon[4267:50141]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:26.729 RedLemon[4267:50141]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:26.729 RedLemon[4267:50141]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:26.729 RedLemon[4267:50141] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2025-12-16 12:00:26.729 RedLemon[4267:50141]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:26.729 RedLemon[4267:50141]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:26.730 RedLemon[4267:50141]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:26.730 RedLemon[4267:50141]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:27.761 RedLemon[4267:50121] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:27.761 RedLemon[4267:50121] 🔍 Track 0 type: sub
+2025-12-16 12:00:27.761 RedLemon[4267:50121] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:27.762 RedLemon[4267:50121] 🔍 Track 1 type: sub
+2025-12-16 12:00:27.762 RedLemon[4267:50121] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:27.762 RedLemon[4267:50121] 🔍 Track 2 type: sub
+2025-12-16 12:00:27.762 RedLemon[4267:50121] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:27.762 RedLemon[4267:50121] 🔍 Track 3 type: video
+2025-12-16 12:00:27.763 RedLemon[4267:50121] 🔍 Track 4 type: audio
+2025-12-16 12:00:27.763 RedLemon[4267:50121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:27.763 RedLemon[4267:50121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:27.763 RedLemon[4267:50121]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:27.763 RedLemon[4267:50121]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:27.763 RedLemon[4267:50121]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:27.764 RedLemon[4267:50121] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2025-12-16 12:00:27.764 RedLemon[4267:50121]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:27.764 RedLemon[4267:50121]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:27.765 RedLemon[4267:50121]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:27.765 RedLemon[4267:50121]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:27.765 RedLemon[4267:50121] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:27.766 RedLemon[4267:50121] 🔍 Track 0 type: sub
+2025-12-16 12:00:27.766 RedLemon[4267:50121] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:27.767 RedLemon[4267:50121] 🔍 Track 1 type: sub
+2025-12-16 12:00:27.767 RedLemon[4267:50121] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:27.768 RedLemon[4267:50121] 🔍 Track 2 type: sub
+2025-12-16 12:00:27.768 RedLemon[4267:50121] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:27.768 RedLemon[4267:50121] 🔍 Track 3 type: video
+2025-12-16 12:00:27.768 RedLemon[4267:50121] 🔍 Track 4 type: audio
+2025-12-16 12:00:27.768 RedLemon[4267:50121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:27.768 RedLemon[4267:50121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:27.768 RedLemon[4267:50121]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:27.769 RedLemon[4267:50121]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:27.769 RedLemon[4267:50121]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:27.769 RedLemon[4267:50121] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2025-12-16 12:00:27.769 RedLemon[4267:50121]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:27.769 RedLemon[4267:50121]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:27.770 RedLemon[4267:50121]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:27.770 RedLemon[4267:50121]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:28.809 RedLemon[4267:50141] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:28.809 RedLemon[4267:50141] 🔍 Track 0 type: sub
+2025-12-16 12:00:28.810 RedLemon[4267:50141] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:28.810 RedLemon[4267:50141] 🔍 Track 1 type: sub
+2025-12-16 12:00:28.810 RedLemon[4267:50141] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:28.810 RedLemon[4267:50141] 🔍 Track 2 type: sub
+2025-12-16 12:00:28.810 RedLemon[4267:50141] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:28.811 RedLemon[4267:50141] 🔍 Track 3 type: video
+2025-12-16 12:00:28.811 RedLemon[4267:50141] 🔍 Track 4 type: audio
+2025-12-16 12:00:28.811 RedLemon[4267:50141] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:28.811 RedLemon[4267:50141]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:28.811 RedLemon[4267:50141]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:28.811 RedLemon[4267:50141]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:28.812 RedLemon[4267:50141]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:28.812 RedLemon[4267:50141] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2025-12-16 12:00:28.812 RedLemon[4267:50141]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:28.812 RedLemon[4267:50141]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:28.813 RedLemon[4267:50141]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:28.813 RedLemon[4267:50141]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:28.813 RedLemon[4267:50141] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:28.814 RedLemon[4267:50141] 🔍 Track 0 type: sub
+2025-12-16 12:00:28.814 RedLemon[4267:50141] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:28.814 RedLemon[4267:50141] 🔍 Track 1 type: sub
+2025-12-16 12:00:28.815 RedLemon[4267:50141] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:28.815 RedLemon[4267:50141] 🔍 Track 2 type: sub
+2025-12-16 12:00:28.815 RedLemon[4267:50141] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:28.816 RedLemon[4267:50141] 🔍 Track 3 type: video
+2025-12-16 12:00:28.816 RedLemon[4267:50141] 🔍 Track 4 type: audio
+2025-12-16 12:00:28.816 RedLemon[4267:50141] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:28.816 RedLemon[4267:50141]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:28.816 RedLemon[4267:50141]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:28.817 RedLemon[4267:50141]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:28.817 RedLemon[4267:50141]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:28.825 RedLemon[4267:50141] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2025-12-16 12:00:28.825 RedLemon[4267:50141]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:28.825 RedLemon[4267:50141]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:28.826 RedLemon[4267:50141]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:28.826 RedLemon[4267:50141]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:29.911 RedLemon[4267:50124] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:29.911 RedLemon[4267:50124] 🔍 Track 0 type: sub
+2025-12-16 12:00:29.911 RedLemon[4267:50124] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:29.912 RedLemon[4267:50124] 🔍 Track 1 type: sub
+2025-12-16 12:00:29.912 RedLemon[4267:50124] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:29.913 RedLemon[4267:50124] 🔍 Track 2 type: sub
+2025-12-16 12:00:29.913 RedLemon[4267:50124] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:29.913 RedLemon[4267:50124] 🔍 Track 3 type: video
+2025-12-16 12:00:29.913 RedLemon[4267:50124] 🔍 Track 4 type: audio
+2025-12-16 12:00:29.914 RedLemon[4267:50124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:29.914 RedLemon[4267:50124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:29.914 RedLemon[4267:50124]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:29.914 RedLemon[4267:50124]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:29.914 RedLemon[4267:50124]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:29.914 RedLemon[4267:50124] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2025-12-16 12:00:29.915 RedLemon[4267:50124]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:29.915 RedLemon[4267:50124]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:29.915 RedLemon[4267:50124]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:29.915 RedLemon[4267:50124]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:29.918 RedLemon[4267:50124] 🔍 MPV track-list/count: 5
+2025-12-16 12:00:29.918 RedLemon[4267:50124] 🔍 Track 0 type: sub
+2025-12-16 12:00:29.918 RedLemon[4267:50124] ✅ Found subtitle track: ID=1, lang=en, title=Pacific.Rim.2013.720p.Bluray.X264.Yify, external=1
+2025-12-16 12:00:29.919 RedLemon[4267:50124] 🔍 Track 1 type: sub
+2025-12-16 12:00:29.919 RedLemon[4267:50124] ✅ Found subtitle track: ID=2, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:29.919 RedLemon[4267:50124] 🔍 Track 2 type: sub
+2025-12-16 12:00:29.919 RedLemon[4267:50124] ✅ Found subtitle track: ID=3, lang=en, title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, external=1
+2025-12-16 12:00:29.920 RedLemon[4267:50124] 🔍 Track 3 type: video
+2025-12-16 12:00:29.920 RedLemon[4267:50124] 🔍 Track 4 type: audio
+2025-12-16 12:00:29.920 RedLemon[4267:50124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-16 12:00:29.920 RedLemon[4267:50124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-16 12:00:29.920 RedLemon[4267:50124]    Start[1]: ID=1, Title='Pacific.Rim.2013.720p.Bluray.X264.Yify', Lang='en', Ext=1
+2025-12-16 12:00:29.920 RedLemon[4267:50124]    Start[2]: ID=2, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:29.920 RedLemon[4267:50124]    Start[3]: ID=3, Title='Pacific.Rim.2013.720p.BluRay.x264.YIFY', Lang='en', Ext=1
+2025-12-16 12:00:29.921 RedLemon[4267:50124] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2025-12-16 12:00:29.921 RedLemon[4267:50124]    Track: ID=0, Title=Off, External=0
+2025-12-16 12:00:29.921 RedLemon[4267:50124]    Track: ID=1, Title=Pacific.Rim.2013.720p.Bluray.X264.Yify, External=1
+2025-12-16 12:00:29.922 RedLemon[4267:50124]    Track: ID=2, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:29.922 RedLemon[4267:50124]    Track: ID=3, Title=Pacific.Rim.2013.720p.BluRay.x264.YIFY, External=1
+2025-12-16 12:00:36.244 RedLemon[4267:50055] ✅ Exit button triggered! x=164 <= 342, y=585 >= 576
+2025-12-16 12:00:36.259 RedLemon[4267:50055] ✅ Exit button triggered! x=163 <= 342, y=607 >= 576
+2025-12-16 12:00:36.273 RedLemon[4267:50055] ✅ Exit button triggered! x=163 <= 342, y=611 >= 576
+2025-12-16 12:00:36.275 RedLemon[4267:50055] ✅ Exit button triggered! x=162 <= 342, y=619 >= 576
+2025-12-16 12:00:36.358 RedLemon[4267:50055] ✅ Exit button triggered! x=161 <= 342, y=630 >= 576
+2025-12-16 12:00:36.567 RedLemon[4267:50055] ✅ Exit button triggered! x=147 <= 342, y=633 >= 576
+2025-12-16 12:00:36.606 RedLemon[4267:50055] ✅ Exit button triggered! x=142 <= 342, y=636 >= 576
+2025-12-16 12:00:36.607 RedLemon[4267:50055] ✅ Exit button triggered! x=121 <= 342, y=649 >= 576
+2025-12-16 12:00:36.610 RedLemon[4267:50055] ✅ Exit button triggered! x=116 <= 342, y=653 >= 576
+2025-12-16 12:00:36.691 RedLemon[4267:50055] ✅ Exit button triggered! x=104 <= 342, y=667 >= 576
+2025-12-16 12:00:36.857 RedLemon[4267:50055] ✅ Exit button triggered! x=104 <= 342, y=668 >= 576
+2025-12-16 12:00:36.866 RedLemon[4267:50055] ✅ Exit button triggered! x=104 <= 342, y=671 >= 576
+2025-12-16 12:00:36.871 RedLemon[4267:50055] ✅ Exit button triggered! x=103 <= 342, y=674 >= 576
+2025-12-16 12:00:36.874 RedLemon[4267:50055] ✅ Exit button triggered! x=103 <= 342, y=677 >= 576
+2025-12-16 12:00:36.898 RedLemon[4267:50055] ✅ Exit button triggered! x=102 <= 342, y=680 >= 576
+2025-12-16 12:00:36.900 RedLemon[4267:50055] ✅ Exit button triggered! x=102 <= 342, y=683 >= 576
+2025-12-16 12:00:36.903 RedLemon[4267:50055] ✅ Exit button triggered! x=102 <= 342, y=685 >= 576
+2025-12-16 12:00:36.909 RedLemon[4267:50055] ✅ Exit button triggered! x=101 <= 342, y=687 >= 576
+2025-12-16 12:00:36.982 RedLemon[4267:50055] ✅ Exit button triggered! x=99 <= 342, y=697 >= 576
+2025-12-16 12:00:37.023 RedLemon[4267:50055] ✅ Exit button triggered! x=99 <= 342, y=697 >= 576
+2025-12-16 12:00:37.200 RedLemon[4267:50055] ✅ Exit button triggered! x=98 <= 342, y=701 >= 576
+2025-12-16 12:00:37.206 RedLemon[4267:50055] ✅ Exit button triggered! x=95 <= 342, y=704 >= 576
+2025-12-16 12:00:37.210 RedLemon[4267:50055] ✅ Exit button triggered! x=94 <= 342, y=705 >= 576
+2025-12-16 12:00:37.233 RedLemon[4267:50055] ✅ Exit button triggered! x=90 <= 342, y=711 >= 576
+2025-12-16 12:00:37.275 RedLemon[4267:50055] ✅ Exit button triggered! x=84 <= 342, y=719 >= 576
+2025-12-16 12:00:37.279 RedLemon[4267:50055] ✅ Exit button triggered! x=83 <= 342, y=720 >= 576
+2025-12-16 12:00:37.288 RedLemon[4267:50055] ✅ Exit button triggered! x=83 <= 342, y=721 >= 576
+2025-12-16 12:00:37.291 RedLemon[4267:50055] ✅ Exit button triggered! x=82 <= 342, y=722 >= 576
+2025-12-16 12:00:37.316 RedLemon[4267:50055] ✅ Exit button triggered! x=82 <= 342, y=722 >= 576
+2025-12-16 12:00:37.318 RedLemon[4267:50055] ✅ Exit button triggered! x=82 <= 342, y=722 >= 576
+2025-12-16 12:00:37.327 RedLemon[4267:50055] ✅ Exit button triggered! x=82 <= 342, y=723 >= 576
+2025-12-16 12:00:37.565 RedLemon[4267:50055] ✅ Exit button triggered! x=80 <= 342, y=726 >= 576
+2025-12-16 12:00:37.607 RedLemon[4267:50055] ✅ Exit button triggered! x=73 <= 342, y=733 >= 576
+2025-12-16 12:00:37.648 RedLemon[4267:50055] ✅ Exit button triggered! x=70 <= 342, y=735 >= 576
+2025-12-16 12:00:37.651 RedLemon[4267:50055] ✅ Exit button triggered! x=68 <= 342, y=738 >= 576
+2025-12-16 12:00:37.652 RedLemon[4267:50055] ✅ Exit button triggered! x=68 <= 342, y=738 >= 576
+2025-12-16 12:00:37.661 RedLemon[4267:50055] ✅ Exit button triggered! x=67 <= 342, y=738 >= 576
+2025-12-16 12:00:37.733 RedLemon[4267:50055] ✅ Exit button triggered! x=66 <= 342, y=739 >= 576
+2025-12-16 12:00:38.024 RedLemon[4267:50055] ✅ Exit button triggered! x=66 <= 342, y=739 >= 576
+2025-12-16 12:00:38.110 RedLemon[4267:50055] ✅ Exit button triggered! x=66 <= 342, y=739 >= 576
+2025-12-16 12:00:38.192 RedLemon[4267:50055] ✅ Exit button triggered! x=66 <= 342, y=740 >= 576
+2025-12-16 12:00:38.361 RedLemon[4267:50055] 🖥️ WindowManager: exitFullscreen() called
+2025-12-16 12:00:38.361 RedLemon[4267:50055]    ✅ WindowManager: Toggling fullscreen OFF
+2025-12-16 12:00:38.448 RedLemon[4267:50055] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2025-12-16 12:00:38.448 RedLemon[4267:50055]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2025-12-16 12:00:38.802 RedLemon[4267:50055]    ✅ WindowManager: Window restored to expanded size
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+⚡ MPVPlayerViewModel: Tracks populated, triggering delayed auto-selection
+🌐 Selecting English audio and subtitle tracks...
+📊 Found 0 audio tracks
+📊 Current subtitle track: 3
+📊 Found 4 subtitle tracks (including 'Off')
+   Subtitle: ID=0 lang=nil title=Off
+   Subtitle: ID=1 lang=en title=Pacific.Rim.2013.720p.Bluray.X264.Yify
+   Subtitle: ID=2 lang=en title=Pacific.Rim.2013.720p.BluRay.x264.YIFY
+   Subtitle: ID=3 lang=en title=Pacific.Rim.2013.720p.BluRay.x264.YIFY
+📊 After filtering: 3 actual subtitle tracks
+📊 Current subtitle track: 3
+✅ Found English subtitle track: Pacific.Rim.2013.720p.Bluray.X264.Yify (ID: 1)
+🔍 Analyzing subtitle compatibility...
+✅ Good version match: Pacific.Rim.2013.720p.Bluray.X264.Yify
+✅ Good version match: Pacific.Rim.2013.720p.BluRay.x264.YIFY
+✅ Good version match: Pacific.Rim.2013.720p.BluRay.x264.YIFY
+✅ Good version match: Pacific Rim.2013.Bluray-1080p-RMXTRAS.en
+✅ Good version match: Pacific Rim (2013)
+📝 Set subtitle track to: 1 (async, visibility enabled)
+✅ Good version match: Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+✅ Good version match: Pacific.Rim.2013.3D.BluRay.1080p.AVC.DTS-HD.MA7.1-CHD
+✅ Good version match: Pacific.Rim.2013.BRRip.XviD.AC3-SANTi
+✅ Good version match: Pacific.Rim.2013.HDRip.XviD-AQOS
+✅ Good version match: --->TRAILER<--- Pacific.Rim.2013.Main.Trailer
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Pacific.Rim.2013.720p.Bluray.X264.Yify' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Pacific.Rim.2013.720p.Bluray.X264.Yify', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Pacific.Rim.2013.720p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Pacific.Rim.2013.720p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Pacific.Rim.2013.720p.BluRay.x264.YIFY (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 500 (Embedded: 0, Match: 500, Clean: 0, SDH: 0)
+ MPV Event: 20
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Pacific.Rim.2013.720p.Bluray.X264.Yify' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Pacific.Rim.2013.720p.Bluray.X264.Yify' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Pacific.Rim.2013.720p.BluRay.x264.YIFY' (webvtt) (external)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1765904426.454113,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt1663662"}
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Pacific.Rim.2013.720p.Bluray.X264.Yify', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Pacific.Rim.2013.720p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Pacific.Rim.2013.720p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Pacific.Rim.2013.720p.BluRay.x264.YIFY (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 500 (Embedded: 0, Match: 500, Clean: 0, SDH: 0)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+👋 Leaving room: event_tt1663662
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+ MPV Event: 17
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt1663662
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAuzkL7SQqbDZC","phx_ref_prev":"GIHAt8KHNoQqbKnI","last_seen":"2025-12-16T17:00:39Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt8KHNoQqbKnI","phx_ref_prev":"GIHAt0wbfp4qbMLM","last_seen":"2025-12-16T17:00:24Z","room_id":"event_tt1663662","started_at":"2025-12-16T17:00:24Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1663662","watching_title":"Pacific Rim","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"b6b8468c-daa0-11f0-92a9-0a58a9feac02":{"metas":[{"phx_ref":"GIHAt8HQhuq3KTiN","is_host":false,"joined_at":1765904424.27431,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAuzlYsKYqbD5D","phx_ref_prev":"GIHAuzkL7SQqbDZC","last_seen":"2025-12-16T17:00:39Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"b08660dc-daa0-11f0-a4fb-0a58a9feac02":{"metas":[{"phx_ref":"GIHAuzkL7SQqbDZC","phx_ref_prev":"GIHAt8KHNoQqbKnI","last_seen":"2025-12-16T17:00:39Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt1663662"}
+📨 Unknown event: phx_close
+✅ MPV stop completed with clean event loop exit
+✅ MPV instance destroyed
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c14800ec-daa0-11f0-a840-0a58a9feac02":{"metas":[{"phx_ref":"GIHAu-L1icpxE0vK","last_seen":"2025-12-16T17:00:42Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📋 Session Log uploaded successfully: 9B262A10-EC84-4342-BAD3-EDA62E5DCCF9
+📝 Feedback sent successfully
+🗑️ MPVViewLayer deinit
+📡 [EventsConfig] Checking server for movie_events config version...
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ [EventsConfig] Fetched movie_events version 1350 with 453 movies
+✅ [EventsConfig] Using cached movie_events config (version 1350, 453 movies)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"c14800ec-daa0-11f0-a840-0a58a9feac02":{"metas":[{"phx_ref":"GIHAu-L1icpxE0vK","last_seen":"2025-12-16T17:00:42Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}

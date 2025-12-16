@@ -101,6 +101,7 @@ struct ReportStreamView: View {
         .background(VisualEffectView(material: .hudWindow, blendingMode: .behindWindow))
         .cornerRadius(20)
         .frame(width: 400)
+        .preferredColorScheme(.dark)
     }
     
     func submitReport() {

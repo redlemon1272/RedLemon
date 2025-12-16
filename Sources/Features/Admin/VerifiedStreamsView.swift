@@ -520,6 +520,7 @@ struct SessionLogRow: View {
     let log: SessionLog
     let isHighlighted: Bool
     let onDelete: (() -> Void)?
+    @State private var isCopied = false
     @State private var isExpanded = false
     
     init(log: SessionLog, isHighlighted: Bool = false, onDelete: (() -> Void)? = nil) {
@@ -537,10 +538,11 @@ struct SessionLogRow: View {
                     Spacer()
                     Button(action: copyToClipboard) {
                         HStack(spacing: 4) {
-                            Image(systemName: "doc.on.doc")
-                            Text("Copy Log")
+                            Image(systemName: isCopied ? "checkmark" : "doc.on.doc")
+                            Text(isCopied ? "Copied!" : "Copy Log")
                         }
                         .font(.caption)
+                        .foregroundColor(isCopied ? .green : .primary)
                     }
                     .buttonStyle(.plain)
                     
@@ -597,9 +599,22 @@ struct SessionLogRow: View {
     }
     
     private func copyToClipboard() {
-        let text = log.events.map { "[\($0.timestamp)] [\($0.category)] \($0.message) \($0.metadata?.description ?? "")" }.joined(separator: "\n")
+        let text = log.events.map { "[\($0.timestamp)] [\($0.category.rawValue)] \($0.message) \($0.metadata?.description ?? "")" }.joined(separator: "\n")
         NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(text, forType: .string)
+        let success = NSPasteboard.general.setString(text, forType: .string)
+        print("📋 Copy to clipboard result: \(success). Text length: \(text.count)")
+        
+        if success {
+            withAnimation {
+                isCopied = true
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                withAnimation {
+                    isCopied = false
+                }
+            }
+        }
     }
 }
 

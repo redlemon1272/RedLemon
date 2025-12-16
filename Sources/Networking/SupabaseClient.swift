@@ -46,6 +46,42 @@ protocol UserManager {
 
 class SupabaseClient: RoomManager, UserManager {
     static let shared = SupabaseClient()
+    
+    // Performance: Cache formatters to avoid expensive initialization
+    private static let isoFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        return formatter
+    }()
+    
+    // Cache decoders for the custom decoding strategy
+    private static let decodingFormatters: [DateFormatter] = [
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+            f.locale = Locale(identifier: "en_US_POSIX")
+            f.timeZone = TimeZone(secondsFromGMT: 0)
+            return f
+        }(),
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+            f.locale = Locale(identifier: "en_US_POSIX")
+            f.timeZone = TimeZone(secondsFromGMT: 0)
+            return f
+        }(),
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            f.locale = Locale(identifier: "en_US_POSIX")
+            return f
+        }(),
+        {
+            let f = DateFormatter()
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            f.locale = Locale(identifier: "en_US_POSIX")
+            return f
+        }()
+    ]
 
     private let baseURL: String
     private let apiKey: String
@@ -74,40 +110,15 @@ class SupabaseClient: RoomManager, UserManager {
             let dateString = try container.decode(String.self)
 
             // Try different formats that Supabase might return
-            let formatters: [DateFormatter] = [
-                {
-                    let f = DateFormatter()
-                    f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
-                    f.locale = Locale(identifier: "en_US_POSIX")
-                    f.timeZone = TimeZone(secondsFromGMT: 0)
-                    return f
-                }(),
-                {
-                    let f = DateFormatter()
-                    f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-                    f.locale = Locale(identifier: "en_US_POSIX")
-                    f.timeZone = TimeZone(secondsFromGMT: 0)
-                    return f
-                }(),
-                {
-                    let f = DateFormatter()
-                    f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                    f.locale = Locale(identifier: "en_US_POSIX")
-                    return f
-                }(),
-                {
-                    let f = DateFormatter()
-                    f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-                    f.locale = Locale(identifier: "en_US_POSIX")
-                    return f
-                }()
-            ]
-
-            for formatter in formatters {
+            // Try different formats that Supabase might return
+            // Use cached formatters
+            for formatter in SupabaseClient.decodingFormatters {
                 if let date = formatter.date(from: dateString) {
                     return date
                 }
             }
+
+
 
             // If all formatters fail, log the actual format we received
             NSLog("❌ Failed to decode date string: '\(dateString)'")
@@ -710,7 +721,7 @@ class SupabaseClient: RoomManager, UserManager {
         var body: [String: Any] = [
             "level": level,
             "message": message,
-            "created_at": ISO8601DateFormatter().string(from: Date())
+            "created_at": SupabaseClient.isoFormatter.string(from: Date())
         ]
         
         if let metadata = metadata {
@@ -1006,7 +1017,7 @@ struct ReportedStream: Identifiable, Codable {
                 "episode": episode,
                 "quality": quality,
                 "stream_hash": streamHash,
-                "last_verified_at": ISO8601DateFormatter().string(from: Date())
+                "last_verified_at": SupabaseClient.isoFormatter.string(from: Date())
             ]
             
             if let title = movieTitle {
@@ -1197,6 +1208,13 @@ struct ReportedStream: Identifiable, Codable {
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
             // Handle ISO8601 with fractional seconds
+            // Use cached formatter, but here we need specific options
+            // Note: isoFormatter is standard. If we need specialized options for decoding this specific field, 
+            // likely it matches standard ISO8601. 
+            // If SupabaseClient.isoFormatter uses default options, it handles internet date time.
+            if let date = SupabaseClient.isoFormatter.date(from: dateStr) { return date }
+            
+            // Fallback to manual if cached fails (unlikely if standard ISO)
             let formatter = ISO8601DateFormatter()
             formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
             if let date = formatter.date(from: dateStr) { return date }
@@ -1227,7 +1245,7 @@ struct ReportedStream: Identifiable, Codable {
             "episode": episode,
             "progress": item.progress,
             "poster_url": item.mediaItem.poster as Any,
-            "last_watched": ISO8601DateFormatter().string(from: item.lastWatched)
+            "last_watched": SupabaseClient.isoFormatter.string(from: item.lastWatched)
         ]
         
         // Remove nils (like poster_url if missing), but keep season/episode (-1)

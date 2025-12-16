@@ -14,6 +14,13 @@ class LogManager {
         setupLogFile()
     }
     
+    // Performance: Cache formatter to avoid expensive initialization on every log
+    private static let isoFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        // No special options needed for standard ISO8601, but explicit is fine
+        return formatter
+    }()
+    
     private func setupLogFile() {
         guard let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         logFileURL = documentsPath.appendingPathComponent(logFileName)
@@ -86,7 +93,7 @@ class LogManager {
     
     private func log(level: String, message: String, file: String, function: String, line: Int) {
         let fileName = (file as NSString).lastPathComponent
-        let timestamp = ISO8601DateFormatter().string(from: Date())
+        let timestamp = LogManager.isoFormatter.string(from: Date())
         let logEntry = "[\(timestamp)] [\(level)] [\(fileName):\(line)] \(message)\n"
         
         // Print to console (Xcode)

@@ -936,6 +936,23 @@ struct ReportedStream: Identifiable, Codable {
         print("🗑️ Deleted verified stream with hash: \(streamHash)")
     }
     
+    /// Update title for an existing verified stream (Legacy migration)
+    func updateVerifiedStreamTitle(imdbId: String, title: String) async {
+        do {
+            _ = try await makeRequest(
+                path: "/verified_streams",
+                method: "PATCH",
+                body: ["movie_title": title],
+                query: [
+                    "imdb_id": "eq.\(imdbId)"
+                ]
+            )
+            print("Title updated for \(imdbId)")
+        } catch {
+            print("Failed to update title: \(error)")
+        }
+    }
+    
     /// Vote for a successful stream (Upsert logic via RPC or Client)
     func voteStreamSuccess(imdbId: String, season: Int = -1, episode: Int = -1, quality: String, streamHash: String, magnetLink: String? = nil, movieTitle: String? = nil) async {
         // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 

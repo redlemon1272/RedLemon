@@ -58,6 +58,29 @@ class PlayerViewModel: ObservableObject {
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
         await MainActor.run {
             selectedStream = nil // Clear previous stream to prevent stale playback
+            
+            // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
+            // This ensures the generic background (from Browse) is shown while fetching full details
+            selectedMetadata = MediaMetadata(
+                id: item.id,
+                type: item.type,
+                title: item.name,
+                year: item.year,
+                posterURL: item.poster,
+                backgroundURL: item.background,
+                logoURL: item.logo,
+                description: item.description,
+                director: nil,
+                cast: [],
+                genres: item.genres ?? [],
+                runtime: item.runtime,
+                imdbRating: Double(item.imdbRating ?? ""),
+                releaseInfo: item.releaseInfo,
+                trailerURL: nil,
+                videos: []
+            )
+            selectedMediaItem = item // Ensure item is set
+            
             isResolvingStream = true
             currentWatchMode = watchMode
             isWatchPartyHost = isHost

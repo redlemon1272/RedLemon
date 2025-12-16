@@ -366,6 +366,11 @@ class MPVPlayerViewModel: ObservableObject {
         self.subtitles = subtitles
         self.isLoading = true
         self.showPoster = true
+        
+        // Fix: Reset background/poster URLs to prevent flashing previous image if ViewModel is reused
+        self.backgroundURL = nil
+        self.posterURL = nil
+        self.logoURL = nil
 
         // Reset resume handling flag for new video loads
         self.hasVideoReadyTriggered = false

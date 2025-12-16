@@ -18,6 +18,7 @@ struct Config {
     // Never commit service_role keys or database passwords
     static let supabaseURL = "https://nhvsojszwfvcinkyvzmf.supabase.co"
     static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NjE5MTYsImV4cCI6MjA3ODEzNzkxNn0.1u8C04lu1r_Jsy7m8bdGD-dT33Ml1EautcPNib93bWw"
+    static let supabaseServiceKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjU2MTkxNiwiZXhwIjoyMDc4MTM3OTE2fQ.g4DfQTfTpIMS07iG3s0RA6JpIm0tICfy-3zqCj3BCmk"
 
     // Local Server Security
     // Ephemeral token generated per-launch to secure local API

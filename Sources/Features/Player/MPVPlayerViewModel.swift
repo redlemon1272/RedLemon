@@ -1317,6 +1317,16 @@ class MPVPlayerViewModel: ObservableObject {
             imdbId: nil,
             roomId: nil
         )
+        
+        // ✅ STEP 1.5: Clear UI state to prevent re-use flash
+        await MainActor.run {
+             self.backgroundURL = nil
+             self.posterURL = nil
+             self.logoURL = nil
+             self.showPoster = true 
+             self.isLoading = true
+             self.hasCleanedUp = true // Ensure flag is set on MainActor
+        }
 
         // ✅ STEP 2: Stop timers to prevent further updates
         invalidateAllTimers()

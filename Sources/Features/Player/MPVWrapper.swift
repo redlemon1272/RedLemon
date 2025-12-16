@@ -235,10 +235,12 @@ class MPVWrapper: ObservableObject {
             // Execute pending seek if any
             if let targetTime = self.pendingSeekTime {
                 NSLog("🔄 MPV: Executing PENDING SEEK to %.1fs after FILE_LOADED", targetTime)
+                Task { await SessionRecorder.shared.log(category: .player, message: "Executing Pending Seek", metadata: ["target": "\(targetTime)"]) }
                 // Use robust seek command with retry (calling self.seek again is safe now that isFileLoaded=true)
                 self.seek(to: targetTime)
                 self.pendingSeekTime = nil
             }
+            Task { await SessionRecorder.shared.log(category: .player, message: "File Loaded", metadata: ["duration": "\(self.duration)"]) }
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
             // Don't blindly set isPlaying = true here.
@@ -257,11 +259,14 @@ class MPVWrapper: ObservableObject {
                     print("🏁 MPV: Setting playbackFinished = true")
                     playbackFinished = true
                     print("🏁 MPV: playbackFinished is now \(playbackFinished)")
+                    Task { await SessionRecorder.shared.log(category: .player, message: "Playback Finished (EOF)") }
                 } else {
                     print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
+                    Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended", metadata: ["reason": "\(reason.rawValue)"]) }
                 }
             } else {
                 print("⚠️ MPV: END_FILE event but no event data available")
+                Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended (Unknown Reason)") }
             }
         case MPV_EVENT_IDLE:
             isBuffering = false
@@ -283,6 +288,7 @@ class MPVWrapper: ObservableObject {
                     if self.isPlaying == isPaused {
                         self.isPlaying = !isPaused
                         print("⏯️ MPV: Pause state changed to \(isPaused) -> isPlaying = \(self.isPlaying)")
+                        Task { await SessionRecorder.shared.log(category: .player, message: isPaused ? "Paused" : "Resumed") }
                     }
                 }
             } else if nameStr == "paused-for-cache" {
@@ -292,6 +298,7 @@ class MPVWrapper: ObservableObject {
                      if self.isBuffering != isBufferingNow {
                          self.isBuffering = isBufferingNow
                          print("⏳ MPV: Buffering state changed: \(isBufferingNow) (paused-for-cache)")
+                         Task { await SessionRecorder.shared.log(category: .player, message: "Buffering State", metadata: ["buffering": "\(isBufferingNow)"]) }
                      }
                  }
             }
@@ -302,6 +309,14 @@ class MPVWrapper: ObservableObject {
             let message = String(cString: text).trimmingCharacters(in: .whitespacesAndNewlines)
             // Filter out noisy logs if needed, but keeping "info" level is good for diagnostics
             print("[MPV] \(message)")
+            
+            // Capture errors/warnings in Session Log
+            let lower = message.lowercased()
+            if lower.contains("error") || lower.contains("failed") || lower.contains("panic") {
+                 Task { await SessionRecorder.shared.log(category: .error, message: "MPV Internal Error", metadata: ["details": message]) }
+            } else if lower.contains("warn") {
+                 Task { await SessionRecorder.shared.log(category: .player, message: "MPV Internal Warning", metadata: ["details": message]) }
+            }
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {
                 print(" MPV Event: \(eventId.rawValue)")
@@ -402,11 +417,13 @@ class MPVWrapper: ObservableObject {
             if loadResult >= 0 {
                 isPlaying = false
                 NSLog("✅ MPV loadfile succeeded (started paused)")
+                Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Paused)", metadata: ["url": url]) }
             } else {
                 NSLog("❌ MPV loadfile failed with code: %d", loadResult)
                 NSLog("❌ Failed URL was: %@", url)
                 // Revert pause state if load failed
                 mpv_set_property_string(handle, "pause", "no")
+                Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(loadResult)"]) }
             }
         } else {
             // Normal autoplay mode
@@ -420,9 +437,11 @@ class MPVWrapper: ObservableObject {
             if result >= 0 {
                 isPlaying = true
                 NSLog("✅ MPV loadfile succeeded, isPlaying set to true")
+                Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Autoplay)", metadata: ["url": url]) }
             } else {
                 NSLog("❌ MPV loadfile failed with code: %d", result)
                 NSLog("❌ Failed URL was: %@", url)
+                Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(result)"]) }
             }
         }
     }

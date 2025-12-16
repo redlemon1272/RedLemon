@@ -106,6 +106,16 @@ class LogManager {
                 }
             }
         }
+        
+        // Forward to SessionRecorder
+        Task {
+            let category: SessionEventCategory = level == "ERROR" ? .error : .app
+            await SessionRecorder.shared.log(
+                category: category,
+                message: message,
+                metadata: ["file": fileName, "line": String(line), "level": level]
+            )
+        }
     }
     
     /// Retrieve recent logs for Admin Dashboard

@@ -63,28 +63,20 @@ actor StreamResolver {
                 infoHash: verified.hash
             )
             
-            // Check cache status quickly via RealDebrid (unlock) or just return it if we are confident?
-            // Safer to return it and let StreamService handle the unlocking/fallback if it fails.
-            // But to return it "instantly" we need to put it in a bucket.
+            // OPTIMIZATION: Attach subtitles for verified stream
+            let streamsWithSubtitles = await attachSubtitles(
+                to: [candidateStream],
+                imdbId: imdbId,
+                type: type,
+                season: season,
+                episode: episode
+            )
             
-            let bucket = QualityBucket(primary: candidateStream, alternates: [])
+            let finalStream = streamsWithSubtitles.first ?? candidateStream
+            
+            let bucket = QualityBucket(primary: finalStream, alternates: [])
             
             // If satisfied, we can return early!
-            // But we requested "buckets", so verify if we need to return ALL buckets or just the best one?
-            // The caller (StreamService) will pick the requested quality.
-            // If we only return 1080p, and user wants 4K, we might fail?
-            // For now, let's ONLY short circuit if we match the likely requested quality.
-            
-            // Actually, let's just return this in the 1080p bucket and empty the others.
-            // If the user wants 4K, they will be disappointed if we return empty 4K bucket.
-            // So we should probably CONTINUE to scrape if we can't fulfill the user's dream?
-            // BUT the whole point is "Faster". 
-            
-            // Compromise: If we found a verified 1080p stream, we return it as the 1080p primary.
-            // We still scrape, or skip? 
-            // The prompt says "drastically speed up".
-            // So we should RETURN immediately.
-            
             print("⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.")
             return QualityBucketsResponse(buckets: QualityBuckets(
                 uhd4k: QualityBucket(primary: nil, alternates: nil),

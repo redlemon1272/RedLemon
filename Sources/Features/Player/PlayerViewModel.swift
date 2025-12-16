@@ -567,6 +567,22 @@ class PlayerViewModel: ObservableObject {
     func handleMovieFinished() async {
         print("🎬 PlayerVM.handleMovieFinished() called")
         
+        // Auto-play next episode logic
+        if let item = selectedMediaItem, item.type == "series", 
+           let meta = selectedMetadata, let videos = meta.videos {
+            
+            // Check if we have a next episode available
+            let (targetS, targetE) = findNextEpisode(currentS: selectedSeason ?? 1, currentE: selectedEpisode ?? 1, videos: videos)
+            
+            if let s = targetS, let e = targetE {
+                print("⏭️ Series playback finished, auto-playing next episode: S\(s)E\(e)")
+                // Add a small delay for better UX
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                await playNextEpisode()
+                return
+            }
+        }
+        
         let wasEventPlayback = isEventPlayback
         let isPlaylistRoom = currentWatchPartyRoom?.hasPlaylist ?? false
         let isPersistentRoom = currentWatchPartyRoom?.isPersistent ?? false
@@ -598,6 +614,60 @@ class PlayerViewModel: ObservableObject {
             }
             return
         }
+    }
+    
+    // Check if next episode exists
+    func hasNextEpisode() -> Bool {
+        guard let item = selectedMediaItem, item.type == "series",
+              let meta = selectedMetadata, let videos = meta.videos,
+              let currentS = selectedSeason, let currentE = selectedEpisode else {
+            return false
+        }
+        
+        let (targetS, targetE) = findNextEpisode(currentS: currentS, currentE: currentE, videos: videos)
+        return targetS != nil && targetE != nil
+    }
+    
+    // Play next episode
+    func playNextEpisode() async {
+        guard let item = selectedMediaItem, item.type == "series",
+              let meta = selectedMetadata, let videos = meta.videos,
+              let currentS = selectedSeason, let currentE = selectedEpisode else {
+            return
+        }
+        
+        let (targetS, targetE) = findNextEpisode(currentS: currentS, currentE: currentE, videos: videos)
+        
+        guard let s = targetS, let e = targetE else {
+            print("🚫 No next episode found")
+            return
+        }
+        
+        print("⏭️ Playing Next Episode: S\(s)E\(e)")
+        
+        await MainActor.run {
+             selectedSeason = s
+             selectedEpisode = e
+        }
+        
+        // Use the same watch mode and host status
+        await playMedia(item, quality: selectedQuality, watchMode: currentWatchMode, roomId: currentRoomId, isHost: isWatchPartyHost)
+    }
+    
+    private func findNextEpisode(currentS: Int, currentE: Int, videos: [VideoEpisode]) -> (Int?, Int?) {
+        // 1. Try next episode in current season
+        let nextE = currentE + 1
+        if videos.contains(where: { $0.season == currentS && $0.episode == nextE }) {
+            return (currentS, nextE)
+        }
+        
+        // 2. Try first episode of next season
+        let nextS = currentS + 1
+        if videos.contains(where: { $0.season == nextS && $0.episode == 1 }) {
+            return (nextS, 1)
+        }
+        
+        return (nil, nil)
     }
     
     private func handlePlaylistTransition(room: WatchPartyRoom) async {

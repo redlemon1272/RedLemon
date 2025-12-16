@@ -486,6 +486,22 @@ struct MPVPlayerView: View {
              WaitingGateView(isHost: viewModel.isWatchPartyHost)
                 .zIndex(100)
         }
+        
+        // Next Episode Prompt
+        if viewModel.showNextEpisodePrompt, let info = viewModel.nextEpisodeInfo {
+            NextEpisodeOverlay(
+                info: info, 
+                thumbnail: viewModel.nextEpisodeThumbnail,
+                onCancel: { viewModel.showNextEpisodePrompt = false },
+                onPlay: {
+                    Task {
+                        await appState.player.playNextEpisode()
+                    }
+                }
+            )
+            .transition(.move(edge: .bottom).combined(with: .opacity))
+            .zIndex(150)
+        }
 
 
     }
@@ -798,6 +814,112 @@ struct MPVPlayerView: View {
         .cornerRadius(16)
         .shadow(radius: 20)
     }
+}
+
+struct NextEpisodeOverlay: View {
+    let info: String
+    let thumbnail: String?
+    let onCancel: () -> Void
+    let onPlay: () -> Void
+    
+    @State private var remainingSeconds = 10
+    @State private var timer: Timer?
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            
+            HStack(alignment: .bottom) {
+                Spacer()
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        Text("Up Next in \(remainingSeconds)s")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        
+                        Spacer()
+                        
+                        Button(action: onCancel) {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title2)
+                                .foregroundColor(.white.opacity(0.8))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    
+                    HStack(spacing: 16) {
+                        if let thumbnail = thumbnail, let url = URL(string: thumbnail) {
+                            AsyncImage(url: url) { image in
+                                image.resizable()
+                                     .aspectRatio(contentMode: .fill)
+                            } placeholder: {
+                                Rectangle().fill(Color.gray.opacity(0.3))
+                            }
+                            .frame(width: 160, height: 90)
+                            .cornerRadius(8)
+                        } else {
+                             // Fallback placeholder
+                             Rectangle()
+                                 .fill(Color.gray.opacity(0.3))
+                                 .frame(width: 160, height: 90)
+                                 .cornerRadius(8)
+                                 .overlay(Image(systemName: "play.tv.fill").foregroundColor(.white.opacity(0.5)))
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(info)
+                                .font(.subheadline.weight(.semibold))
+                                .foregroundColor(.white)
+                                .lineLimit(2)
+                            
+                            Button(action: onPlay) {
+                                HStack {
+                                    Image(systemName: "play.fill")
+                                    Text("Play Now")
+                                }
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(.black)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 8)
+                                .background(Color.white)
+                                .cornerRadius(20)
+                            }
+                            .buttonStyle(.plain)
+                            .padding(.top, 8)
+                        }
+                    }
+                }
+                .padding(20)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.black.opacity(0.85))
+                        .shadow(radius: 20)
+                )
+                .padding(40)
+                .padding(.bottom, 80) // Above controls
+                .frame(maxWidth: 500)
+            }
+        }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            timer?.invalidate()
+        }
+    }
+    
+    private func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            if remainingSeconds > 0 {
+                remainingSeconds -= 1
+            } else {
+                timer?.invalidate()
+                onPlay()
+            }
+        }
+    }
+}
 
 
 

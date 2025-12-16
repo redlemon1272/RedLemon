@@ -119,6 +119,7 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] time in
                     guard let self = self else { return }
                     self.currentTime = time
+                    self.checkForNextEpisode()
                 }
                 .store(in: &serviceCancellables)
 
@@ -249,7 +250,13 @@ class MPVPlayerViewModel: ObservableObject {
     // Visual state
     @Published var posterURL: String?
     @Published var backgroundURL: String?
-    @Published var logoURL: String? = nil
+    @Published var logoURL: String?
+    
+    // Play Next Episode State
+    @Published var fullMetadata: MediaMetadata?
+    @Published var showNextEpisodePrompt: Bool = false
+    @Published var nextEpisodeInfo: String?
+    @Published var nextEpisodeThumbnail: String? = nil
     @Published var showPoster: Bool = true  // Show during loading
     @Published var isVideoTitleVisible: Bool = false
 
@@ -469,6 +476,52 @@ class MPVPlayerViewModel: ObservableObject {
         // Monitor MPV state changes - Handled by PlaybackService bindings
     }
 
+    private func checkForNextEpisode() {
+        // Only valid for series where we have appState access
+        guard let appState = appState,
+              appState.player.selectedMediaItem?.type == "series",
+              self.duration > 0,
+              self.currentTime > 0 else {
+            return
+        }
+        
+        // Show prompt if within last 90 seconds (longer window for credits)
+        let remaining = self.duration - self.currentTime
+        if remaining < 90 && remaining > 2 { 
+             
+             // Check if already showing
+             if showNextEpisodePrompt { return }
+             
+             // Check if there IS a next episode
+             if let meta = self.fullMetadata,
+                let videos = meta.videos,
+                let currentS = appState.player.selectedSeason,
+                let currentE = appState.player.selectedEpisode {
+                 
+                 let nextE = currentE + 1
+                 if let video = videos.first(where: { $0.season == currentS && $0.episode == nextE }) {
+                     self.nextEpisodeInfo = "Up Next: \(video.title)"
+                     self.nextEpisodeThumbnail = video.thumbnail
+                     self.showNextEpisodePrompt = true
+                     return
+                 }
+                 
+                 let nextS = currentS + 1
+                 if let video = videos.first(where: { $0.season == nextS && $0.episode == 1 }) {
+                     self.nextEpisodeInfo = "Up Next: S\(nextS)E1 - \(video.title)"
+                     self.nextEpisodeThumbnail = video.thumbnail
+                     self.showNextEpisodePrompt = true
+                     return
+                 }
+             }
+        } else {
+            // Hide if we scrubbed back or finished
+            if showNextEpisodePrompt && remaining > 95 {
+                showNextEpisodePrompt = false
+            }
+        }
+    }
+
     // MARK: - Metadata Fetching
 
     private func fetchMetadata(imdbId: String, mediaType: String) async {
@@ -477,6 +530,7 @@ class MPVPlayerViewModel: ObservableObject {
         do {
             // Use LocalAPIClient which correctly handles both movies and series
             let metadata = try await LocalAPIClient.shared.fetchMetadata(type: mediaType, id: imdbId)
+            self.fullMetadata = metadata
 
             // Prefer background (widescreen) over poster
             if let background = metadata.backgroundURL {

@@ -194,7 +194,30 @@ struct PlayerControlsView: View {
                                     .foregroundColor(.white)
                             }
                         }
+                    }
                         .buttonStyle(.plain)
+                    }
+
+                    // Next Episode Button
+                    if let appState = viewModel.appState, 
+                       appState.player.selectedMediaItem?.type == "series" {
+                        Button(action: {
+                            Task {
+                                await appState.player.playNextEpisode()
+                            }
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.white.opacity(0.2))
+                                    .frame(width: 40, height: 40)
+                                
+                                Image(systemName: "forward.end.fill")
+                                    .font(.system(size: 16, weight: .semibold))
+                                    .foregroundColor(.white)
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .help("Next Episode")
                     }
 
                     // Volume control

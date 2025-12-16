@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct VerifiedStreamsView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var streams: [SupabaseClient.VerifiedStream] = []
+    @State private var titles: [String: String] = [:]
     @State private var isLoading = false
     @State private var errorMessage: String?
 
@@ -12,12 +14,10 @@ struct VerifiedStreamsView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
-                Button(action: {
-                    Task { await loadStreams() }
-                }) {
-                    Image(systemName: "arrow.clockwise")
+                Button("Done") {
+                    presentationMode.wrappedValue.dismiss()
                 }
-                .disabled(isLoading)
+                .keyboardShortcut(.escape, modifiers: [])
             }
             .padding()
 
@@ -36,9 +36,15 @@ struct VerifiedStreamsView: View {
                 List(streams, id: \.streamHash) { stream in
                     VStack(alignment: .leading, spacing: 5) {
                         HStack {
-                            Text(stream.imdbId)
-                                .font(.system(.headline, design: .monospaced))
-                                .foregroundColor(.blue)
+                            Text(titles[stream.imdbId] ?? stream.imdbId)
+                                .font(.system(.headline, design: .rounded))
+                                .foregroundColor(.primary)
+                            
+                            if titles[stream.imdbId] == nil {
+                                Text(stream.imdbId)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
                             
                             Spacer()
                             
@@ -69,6 +75,11 @@ struct VerifiedStreamsView: View {
                         .font(.caption)
                     }
                     .padding(.vertical, 4)
+                    .task {
+                        if titles[stream.imdbId] == nil {
+                            await fetchTitle(for: stream.imdbId)
+                        }
+                    }
                 }
             }
         }
@@ -87,4 +98,30 @@ struct VerifiedStreamsView: View {
         }
         isLoading = false
     }
+    
+    private func fetchTitle(for imdbId: String) async {
+        // Simple Cinemeta lookup
+        guard let url = URL(string: "https://v3-cinemeta.strem.io/meta/movie/\(imdbId).json") else { return }
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let response = try JSONDecoder().decode(CinemetaResponse.self, from: data)
+            if let title = response.meta.name {
+                await MainActor.run {
+                    titles[imdbId] = title
+                }
+            }
+        } catch {
+            print("Failed to fetch title for \(imdbId): \(error)")
+        }
+    }
+}
+
+// Minimal decodables for title fetching
+struct CinemetaResponse: Codable {
+    let meta: CinemetaMeta
+}
+
+struct CinemetaMeta: Codable {
+    let name: String?
 }

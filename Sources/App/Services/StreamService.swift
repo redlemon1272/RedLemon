@@ -283,8 +283,13 @@ actor StreamService: StreamResolving {
             finalStreams = [match]
         } else {
 
-        if quality == .fullHD {
+        if quality == .fullHD || quality == .uhd4k {
             let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes
+            
+            // MIN SIZE RULE: 1080p/4K movies should not be tiny (filters out fake files/samples)
+            // Movies: Min 600MB for 1080p
+            // Series: Min 150MB for 1080p (allows short anime/cartoons)
+            let minSizeBytes: Double = (item.type == "movie") ? (600 * 1024 * 1024) : (150 * 1024 * 1024)
 
             let sizeFiltered = finalStreams.compactMap { stream -> Stream? in
                 let sizeInBytes = self.parseSizeToBytes(stream.size)
@@ -293,8 +298,15 @@ actor StreamService: StreamResolving {
                 if sizeInBytes == Double.greatestFiniteMagnitude {
                     return stream 
                 }
+                
+                // Check Minimum Size
+                if sizeInBytes < minSizeBytes {
+                   let sizeMB = sizeInBytes / 1_048_576.0
+                   print("⚠️ StreamService: Skipping tiny file (Possible fake/sample): \(stream.title) (\(String(format: "%.0f", sizeMB)) MB < \(Int(minSizeBytes/1048576)) MB)")
+                   return nil
+                }
 
-                if sizeInBytes > maxSizeBytes {
+                if quality == .fullHD && sizeInBytes > maxSizeBytes {
                     let sizeGB = sizeInBytes / 1_073_741_824.0
                     
                     // 🌟 Smart Limit: Allow larger files (up to 30GB) for trusted "Elite" groups
@@ -317,17 +329,21 @@ actor StreamService: StreamResolving {
                 finalStreams = sizeFiltered
                 print("📦 StreamService: \(finalStreams.count) streams remain after size filter")
             } else {
-                print("⚠️ StreamService: Size filter removed all streams, falling back to smallest available")
-                // Find smallest by parsing all sizes
-                if let smallest = filteredStreams.min(by: { stream1, stream2 in
+                print("⚠️ StreamService: Size filter removed all streams, falling back to largest available (likely best quality)")
+                // Fallback to LARGEST available if we filtered everything out (e.g. all were small or all were too big)
+                // Prefer largest as it usually means better quality / actual movie
+                if let largest = filteredStreams.max(by: { stream1, stream2 in
                     let size1 = parseSizeToBytes(stream1.size)
                     let size2 = parseSizeToBytes(stream2.size)
-                    return size1 < size2
+                    // Treat infinity as 0 for comparison to prioritize known sizes
+                    let s1 = size1 == Double.greatestFiniteMagnitude ? 0 : size1
+                    let s2 = size2 == Double.greatestFiniteMagnitude ? 0 : size2
+                    return s1 < s2
                 }) {
-                    finalStreams = [smallest]
+                    finalStreams = [largest]
                 }
             }
-            }
+        }
         }
 
         // Step 5: Try to unlock streams

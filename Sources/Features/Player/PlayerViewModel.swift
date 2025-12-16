@@ -646,8 +646,13 @@ class PlayerViewModel: ObservableObject {
         print("⏭️ Playing Next Episode: S\(s)E\(e)")
         
         await MainActor.run {
-             selectedSeason = s
-             selectedEpisode = e
+             if let appState = appState {
+                 appState.selectedSeason = s
+                 appState.selectedEpisode = e
+             } else {
+                 selectedSeason = s
+                 selectedEpisode = e
+             }
         }
         
         // Use the same watch mode and host status

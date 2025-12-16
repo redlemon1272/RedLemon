@@ -27,7 +27,7 @@ actor StreamResolver {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
         await SessionRecorder.shared.startNewSession(imdbId: imdbId)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
-        
+
         if let year = year {
 
             NSLog("   📅 Filtering by year: \(year)")
@@ -37,7 +37,7 @@ actor StreamResolver {
         // Note: ProviderManager is a singleton, accessible here
 
         // MARK: - Verified Stream Short-Circuit
-        
+
         var verifiedStream: SupabaseClient.VerifiedStream?
         if !ignoreVerified {
              // Pass season/episode (defaulting to -1 if nil, to match DB default)
@@ -45,32 +45,35 @@ actor StreamResolver {
              let e = episode ?? -1
              verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: imdbId, season: s, episode: e, quality: "1080p")
         }
-        
+
         if let verified = verifiedStream, let hash = verified.hash as String?, !hash.isEmpty {
-            
+
             // Check Guardrail: Soft Decay
             let isStale: Bool
             let daysSince = Date().timeIntervalSince(verified.lastVerifiedAt) / 86400
             isStale = daysSince > 30
-            
+
             if isStale {
                 print("⚠️ StreamResolver: Verified stream is STALE (>30 days). Will verify cache status strictly.")
+                await SessionRecorder.shared.log(category: .resolver, message: "Verified Stream Stale", metadata: ["days_since": String(daysSince)])
             } else {
                 print("⚡️ StreamResolver: Found Community Verified stream with \(verified.voteCount) votes!")
+                print("   ℹ️ Hash: \(hash)")
+                print("   ℹ️ Last Verified: \(verified.lastVerifiedAt)")
                 await SessionRecorder.shared.log(category: .resolver, message: "Found Verified Stream", metadata: ["vote_count": "\(verified.voteCount)", "hash": hash])
             }
-            
+
             // Reconstruct a strict stream object
             let candidateStream = Stream(
                 url: verified.magnetLink,
-                title: "Community Verified Stream (1080p)", 
-                quality: "1080p", 
-                seeders: 9999, 
+                title: "Community Verified Stream (1080p)",
+                quality: "1080p",
+                seeders: 9999,
                 size: "0 GB", // Unknown, but trusted
-                provider: "verified", 
+                provider: "verified",
                 infoHash: verified.hash
             )
-            
+
             // OPTIMIZATION: Attach subtitles for verified stream
             let streamsWithSubtitles = await attachSubtitles(
                 to: [candidateStream],
@@ -79,11 +82,11 @@ actor StreamResolver {
                 season: season,
                 episode: episode
             )
-            
+
             let finalStream = streamsWithSubtitles.first ?? candidateStream
-            
+
             let bucket = QualityBucket(primary: finalStream, alternates: [])
-            
+
             // If satisfied, we can return early!
             print("⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.")
             return QualityBucketsResponse(buckets: QualityBuckets(
@@ -103,7 +106,7 @@ actor StreamResolver {
             season: season,
             episode: episode
         )
-        
+
         NSLog("📦 StreamResolver: Received \(streams.count) raw streams, bucketing...")
 
         // For movies only, pull canonical title to prioritize correct matches
@@ -145,6 +148,8 @@ actor StreamResolver {
                     let hasAllowedYear = yearsInTitle.contains { allowedYears.contains($0) }
                     if !hasAllowedYear {
                         print("   🚫 RESOLVER BLOCKING wrong-year series stream: \(stream.title) (years: \(yearsInTitle.joined(separator: ",")))")
+                    } else {
+                        print("   ✅ RESOLVER KEEPING correct-year series stream: \(stream.title)")
                     }
                     return hasAllowedYear
                 }
@@ -222,16 +227,16 @@ actor StreamResolver {
         // Use stricter patterns for 3D detection to avoid false positives (like "Sp33dy94")
         // "3d" is the most dangerous one, so we check it with delimiters
         let threeDFormats = ["sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
-        
+
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = stream.title.lowercased()
-            
+
             // Check implicit 3D ("3d" surrounded by delimiters)
             if titleLower.contains(".3d.") || titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(".3d") || titleLower.hasSuffix(" 3d") {
                  print("   🚫 RESOLVER BLOCKING 3D (Strict): \(stream.title)")
                  return false
             }
-            
+
             let is3D = threeDFormats.contains { format in
                 titleLower.contains(format)
             }
@@ -261,7 +266,7 @@ actor StreamResolver {
         // CRITICAL: Filter by episode pattern for TV shows
         if type == "series" && season != nil && episode != nil {
             let beforeEpisodeFilter = filteredStreams.count
-            
+
             let episodePatterns = [
                 String(format: "s%02de%02d", season!, episode!),  // s01e01
                 String(format: "s%de%d", season!, episode!),      // s1e1
@@ -281,7 +286,7 @@ actor StreamResolver {
 
             filteredStreams = filteredStreams.filter { stream in
                 let titleLower = stream.title.lowercased()
-                
+
                 // Allow trusted Comet cached streams
                 let isCometCached = stream.provider.lowercased() == "comet" &&
                                   (stream.title.contains("[RD⚡]") || stream.title.contains("⚡"))
@@ -292,14 +297,14 @@ actor StreamResolver {
                 }
 
                 let matchesEpisode = episodePatterns.contains { titleLower.contains($0) }
-                
+
                 let matchesSeasonPack = seasonOnlyPatterns.contains { pattern in
                     titleLower.contains(pattern)
                 } || titleLower.contains("s01-s") || titleLower.range(of: "s\\d{2}-s\\d{2}", options: [.regularExpression]) != nil
-                
+
                 return matchesEpisode || matchesSeasonPack || isCometCached
             }
-            
+
             print("   📺 Episode filter: \(beforeEpisodeFilter) → \(filteredStreams.count) streams")
         }
 
@@ -319,7 +324,7 @@ actor StreamResolver {
              func promoteBestPack(_ input: [Stream]) -> [Stream] {
                 // Simplified for brevity, reusing core logic
                 guard !input.isEmpty else { return input }
-                
+
                 // Helper to score packs
                 func packScore(_ stream: Stream) -> Int {
                     guard stream.isPack else { return 0 }
@@ -335,13 +340,13 @@ actor StreamResolver {
                 guard !packs.isEmpty else { return input }
                 let scoredPacks = packs.map { ($0, packScore($0)) }.sorted { $0.1 > $1.1 }
                 guard let best = scoredPacks.first, best.1 >= 80 else { return input }
-                
+
                 var reordered = [best.0]
                 reordered.append(contentsOf: input.filter { $0.id != best.0.id })
                 print("👑 Auto-promoting season pack: \(best.0.title)")
                 return reordered
             }
-            
+
             buckets["2160p"] = buckets["2160p"].map(promoteBestPack)
             buckets["1080p"] = buckets["1080p"].map(promoteBestPack)
             buckets["720p"] = buckets["720p"].map(promoteBestPack)
@@ -376,15 +381,15 @@ actor StreamResolver {
             sd: sdBucket
         ))
     }
-    
+
     // MARK: - Subtitle Attachment Copy
     // Note: Copied from StreamRoutes logic to be standalone
-    
+
     private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil) async -> [Stream] {
          guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
              return streams
          }
-         
+
          do {
              let subtitles = try await SubDLClient.shared.search(
                  imdbId: imdbId,
@@ -394,22 +399,22 @@ actor StreamResolver {
                  languages: "en",
                  apiKey: subdlKey
              )
-             
+
              guard !subtitles.isEmpty else { return streams }
-             
+
              // Simplistic filtering for speed
              let englishSubtitles = subtitles.filter {
                  let lang = ($0.language ?? "").lowercased()
                  return lang == "en" || lang == "eng" || lang.contains("english")
              }
-             
+
              // Map streams to attach the BEST matching subtitles for THAT specific stream
              return streams.map { stream in
                  if stream.subtitles == nil || stream.subtitles!.isEmpty {
-                     
+
                      // Rank subtitles specifically for this stream's filename/title
                      let rankedSubs = rankSubtitlesForStream(englishSubtitles, streamTitle: stream.title)
-                     
+
                      // Select top 20 matches (effectively "all" relevant ones)
                      let mappedSubs = rankedSubs.prefix(20).map { sub in
                         Subtitle(
@@ -422,7 +427,7 @@ actor StreamResolver {
                             provider: "SubDL"
                         )
                      }
-                     
+
                      if !mappedSubs.isEmpty {
                         // Log the match for debugging
                         let bestMatch = mappedSubs.first?.label ?? "Unknown"
@@ -440,28 +445,28 @@ actor StreamResolver {
              return streams
          }
     }
-    
+
     /// Rank subtitles based on how well they match the stream's Release Type
     /// Returns sorted list (Best match first)
     private func rankSubtitlesForStream(_ subtitles: [SubDLSubtitle], streamTitle: String) -> [SubDLSubtitle] {
         let streamLower = streamTitle.lowercased()
-        
+
         return subtitles.sorted { sub1, sub2 in
             let score1 = calculateStreamMatchScore(streamTitle: streamLower, subtitle: sub1)
             let score2 = calculateStreamMatchScore(streamTitle: streamLower, subtitle: sub2)
             return score1 > score2
         }
     }
-    
+
     private func calculateStreamMatchScore(streamTitle: String, subtitle: SubDLSubtitle) -> Int {
         guard let releaseName = subtitle.releaseName?.lowercased() else { return 0 }
         var score = 0
-        
+
         // Tokens to check for matching
         let sourceTokens = ["webrip", "web-dl", "web", "bluray", "brrip", "bdrip", "dvdrip", "hdrip", "cam", "ts", "tc", "scr", "remux"]
         let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
         let groupTokens = ["yts", "rarbg", "galaxy", "psa", "qxr", "tgx"]
-        
+
         // 1. Source Match (Critical: +500)
         // If stream is WEBRip, we want WEBRip subs.
         for token in sourceTokens {
@@ -477,14 +482,14 @@ actor StreamResolver {
                 }
             }
         }
-        
+
         // 2. Quality Match (+100)
         for token in qualityTokens {
             if streamTitle.contains(token) && releaseName.contains(token) {
                 score += 100
             }
         }
-        
+
         // 3. Group Match (+50)
         for token in groupTokens {
             if streamTitle.contains(token) && releaseName.contains(token) {
@@ -501,7 +506,7 @@ actor StreamResolver {
                 print("   📉 Penalizing niche subtitle: \(releaseName) (Stream is standard)")
             }
         }
-        
+
         return score
     }
 
@@ -524,19 +529,19 @@ actor StreamResolver {
         preferMultiSubPacksFirst: Bool,
         preferMultiSubMovies: Bool
     ) -> QualityBucket {
-        
+
         print("   --- Processing Bucket: \(quality) (Input: \(streams.count)) ---")
-        
+
         // Filter out bad patterns (redundant but safe)
         // Note: Removed x265/hevc from here to allow StreamService to decide
-        
+
         // FIX: Use stricter matching for bad patterns to avoid frequent false positives
         // e.g. "ts" matching "Nigh(ts)" or "iso" matching "Pr(iso)ner"
         let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener"]
-        
+
         var filtered = streams.filter { stream in
              let titleLower = stream.title.lowercased()
-             
+
              // Check against bad terms
              for pattern in badPatterns {
                  if titleLower.contains(pattern) {
@@ -550,12 +555,12 @@ actor StreamResolver {
                          }
                          continue // Contains "cam" but not as a word, so it's safe (e.g. "came")
                      }
-                     
+
                      print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern: \(stream.title)")
                      return false
                  }
              }
-             
+
              // Special check for ISO files (word boundary or file extension only)
              // This prevents false positives like "Pr(iso)ner"
              let isoRegex = try? NSRegularExpression(pattern: "\\biso\\b|\\.iso$")
@@ -564,7 +569,7 @@ actor StreamResolver {
                   print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (ISO): \(stream.title)")
                   return false
              }
-             
+
              // Special check for TS files (word boundary or file extension only)
              // This prevents false positives like "Nigh(ts) at Freddy's"
              let tsRegex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$")
@@ -572,71 +577,71 @@ actor StreamResolver {
                   print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (TS): \(stream.title)")
                   return false
              }
-             
+
             return true
         }
-        
+
         // Sort
         // Sort
         filtered.sort { s1, s2 in
             func getScore(_ stream: Stream) -> Int {
                 var score = 0
                 let title = stream.title.lowercased()
-                
+
                 // 1. Explicit English (Highest Priority)
                 let englishIndicators = ["english", ".eng.", " eng ", "-eng-"]
                 let hasEnglish = englishIndicators.contains(where: { title.contains($0) })
                 if hasEnglish {
                     score += 20
                 }
-                
+
                 // 2. Web Sources (High probability of embedded subs)
                 let webSources = ["hulu", "netflix", "nf", "amazon", "amzn", "dsnp", "disney", "hbo", "max"]
                 if webSources.contains(where: { title.contains($0) }) {
                    score += 15
                 }
-                
+
                 // 3. Subtitle Indicators (Explicit embedded subs)
                 let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed", "multisub", "multi-sub", "softcoded"]
                 if subIndicators.contains(where: { title.contains($0) }) {
                     score += 40 // Major boost
                 }
-                
+
                 // 4. Reputable Scene Groups (Boost)
                 // Includes high-quality P2P groups (LoRD, DON, Wiki) known for reliable embedded subs
                 let goodGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "ntb", "flux", "galaxyrg", "rarbg", "yts", "mx", "qxr", "mzabi"]
                 if goodGroups.contains(where: { title.contains($0) }) {
                     score += 25 // Increased boost for quality groups
                 }
-                
+
                 // 5. "MULTi" Handling
                 // Only penalize if we don't have explicit English indication
                 if title.contains("multi") {
                     if hasEnglish {
                         // Multi + English usually means good quality release with multiple audio/subs
-                        score += 5 
+                        score += 5
                     } else {
                          // Multi without explicit English might default to foreign audio
                         score -= 10
                     }
                 }
-                
+
                 return score
             }
-            
+
             let score1 = getScore(s1)
             let score2 = getScore(s2)
-            
+
             if score1 != score2 {
                 return score1 > score2
             }
-            
+
             // Fallback to Seeders
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
             return seeders1 > seeders2
         }
-        
+
         // Seeder filter (skipped for cached)
         filtered = filtered.filter { stream in
             if stream.title.contains("⚡") { return true }
@@ -646,15 +651,15 @@ actor StreamResolver {
             }
             return hasSeeders
         }
-        
+
         print("   ✅ Bucket \(quality) Final Count: \(filtered.count)")
-        
+
         if filtered.isEmpty { return QualityBucket(primary: nil, alternates: nil) }
-        
+
         // Select primary
         let primary = filtered.first
         let alternates = Array(filtered.dropFirst().prefix(10))
-        
+
         return QualityBucket(primary: primary, alternates: alternates)
     }
 
@@ -663,7 +668,7 @@ actor StreamResolver {
         if let year = Int(yearString) { return ["\(year)"] }
         return []
     }
-    
+
     private func extractYearsFromTitle(_ title: String) -> [String] {
         // Simplified
         let regex = try? NSRegularExpression(pattern: "(19|20)\\d{2}")
@@ -681,34 +686,34 @@ actor StreamResolver {
 
     private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
         let lower = title.lowercased()
-        
+
         // 1. Check if explicitly marked as English FIRST
         // Use strict matching for short codes to avoid false positives (e.g. "Fr-en-ch" matching "en")
-        let hasEnglish = lower.contains("english") || 
+        let hasEnglish = lower.contains("english") ||
                         lower.contains(".eng.") || lower.contains(" eng ") || lower.contains("-eng-") || lower.hasSuffix(".eng") ||
                         lower.contains(".en.") || lower.contains(" en ") || lower.contains("-en-") || lower.hasSuffix(".en")
         if hasEnglish { return true }
-        
+
         // 2. Explicit foreign language indicators (primary audio is NOT English)
-        let isForeign = lower.contains("french") || 
-                       lower.contains("german") || 
-                       lower.contains("spanish") || 
-                       lower.contains("italian") || 
-                       lower.contains("portuguese") || 
+        let isForeign = lower.contains("french") ||
+                       lower.contains("german") ||
+                       lower.contains("spanish") ||
+                       lower.contains("italian") ||
+                       lower.contains("portuguese") ||
                        lower.contains("dublado") ||  // Portuguese: dubbed
                        lower.contains("doblado") ||  // Spanish: dubbed (masculine)
                        lower.contains("doblada") ||  // Spanish: dubbed (feminine)
                        lower.contains("doppiato") || // Italian: dubbed
                        lower.contains("doublé") ||   // French: doubled/dubbed
                        lower.contains("dablyazh") || // Russian: dubbing (romanized)
-                       lower.contains("russian") || 
-                       lower.contains("japanese") || 
-                       lower.contains("korean") || 
-                       lower.contains("chinese") || 
+                       lower.contains("russian") ||
+                       lower.contains("japanese") ||
+                       lower.contains("korean") ||
+                       lower.contains("chinese") ||
                        lower.contains("国粤") || // Mandarin/Cantonese
                        lower.contains("中文字幕") || // Chinese Subs
                        lower.contains("韓文") // Korean
-        
+
         // 3. French-specific audio indicators (VF = Version Française)
         let frenchAudioIndicators = [
             " vf ", ".vf.", "-vf-", "_vf_",  // Version Française
@@ -721,26 +726,26 @@ actor StreamResolver {
             "fidelio"                             // Known French release group
         ]
         let hasFrenchAudio = frenchAudioIndicators.contains { lower.contains($0) }
-        
+
         // If it has French audio indicators, block it
         if hasFrenchAudio { return false }
-        
+
         // Block explicit foreign languages next
         if isForeign { return false }
-        
+
         // 4. THEN allow Multi/Dual if it wasn't already blocked as foreign
         let isMulti = lower.contains("multi") || lower.contains("dual")
         if isMulti { return true }
-        
+
         // Block "DUB" releases if they aren't marked as English/Multi
-        // "DUB" usually implies dubbing into a non-English language (for English movies) 
+        // "DUB" usually implies dubbing into a non-English language (for English movies)
         // or just "Dubbed" without specifying English (risky)
         let isDubbed = lower.contains(".dub.") || lower.contains(" dub ") || lower.contains("-dub-") || lower.hasSuffix("-dub") || lower.hasSuffix(".dub")
         if isDubbed { return false }
-        
+
         return true // Default to true if unknown
     }
-    
+
     private func getAudioLanguageDescription(_ title: String) -> String {
         return "Audio" // Simplified
     }

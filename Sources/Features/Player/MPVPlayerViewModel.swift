@@ -40,7 +40,7 @@ class MPVPlayerViewModel: ObservableObject {
     private let subtitleService: SubtitleService
     private let playbackService: PlaybackService
     private var serviceCancellables = Set<AnyCancellable>()
-    
+
     // Track connection IDs (phx_ref) independently of the participants list
     // This protects against "Ghost Leaves" (stale refs) AND "True Leaves" where the user is wiped from the list by DB polling before the Leave event processes.
     private var activeConnectionRefs: [String: String] = [:]
@@ -64,7 +64,7 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] tracks in
                     guard let self = self else { return }
                     self.availableSubtitleTracks = tracks
-                    
+
                     // Reactively select defaults once tracks are populated
                     // This fixes the race condition where tracks appear AFTER onVideoReady
                     if !tracks.isEmpty && !self.hasAutoSelectedSubtitles && self.hasVideoReadyTriggered {
@@ -267,7 +267,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
-    
+
     // Reactions
     @Published var areReactionsEnabled: Bool = true
     let reactionTriggers = PassthroughSubject<String, Never>()
@@ -303,7 +303,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var currentStreamQuality: String?
     private var currentSourceQuality: String? // NEW: Track source type (CAM, WEB-DL, etc.)
     private var hasVotedForStream: Bool = false
-    
+
     // Accumulator for ACTUAL playback time (to prevent seek abuse)
     private var accumulatedPlaybackTime: TimeInterval = 0
     private var continuousPlaybackTime: TimeInterval = 0 // New: Track continuous segment for TV verification
@@ -344,7 +344,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.imdbId = imdbId
         self.streamTitle = cleanStreamTitle
         self.title = cleanStreamTitle // Default title until metadata is loaded
-        
+
         // Store Verified Stream info
         self.currentStreamHash = streamHash
         self.currentStreamQuality = quality
@@ -367,7 +367,7 @@ class MPVPlayerViewModel: ObservableObject {
         self.subtitles = subtitles
         self.isLoading = true
         self.showPoster = true
-        
+
         // Fix: Reset background/poster URLs to prevent flashing previous image if ViewModel is reused
         self.backgroundURL = nil
         self.posterURL = nil
@@ -647,7 +647,7 @@ class MPVPlayerViewModel: ObservableObject {
                         await playbackService.play()
                     }
                     self.isPlaying = true
-                    
+
                     self.appState?.player.resumeFromTimestamp = nil
                     self.appState?.player.eventStartTime = nil
                     return
@@ -820,7 +820,7 @@ class MPVPlayerViewModel: ObservableObject {
         Task {
             await subtitleService.setOffset(offsetMs)
         }
-        
+
         // Save to UserDefaults
         if !imdbId.isEmpty {
             UserDefaults.standard.set(offsetMs, forKey: "subtitleOffset_\(imdbId)")
@@ -833,7 +833,7 @@ class MPVPlayerViewModel: ObservableObject {
         Task {
             await subtitleService.setOffset(0.0)
         }
-        
+
         // Remove from UserDefaults
         if !imdbId.isEmpty {
             UserDefaults.standard.removeObject(forKey: "subtitleOffset_\(imdbId)")
@@ -1029,18 +1029,18 @@ class MPVPlayerViewModel: ObservableObject {
         let sortedEnglishSubs = englishSubs.sorted { (track1, track2) -> Bool in
             let t1 = (track1.title ?? "").lowercased() + " " + (track1.lang ?? "").lowercased()
             let t2 = (track2.title ?? "").lowercased() + " " + (track2.lang ?? "").lowercased()
-            
+
             let isSDH1 = t1.contains("sdh") || t1.contains("cc") || t1.contains("hi")
             let isSDH2 = t2.contains("sdh") || t2.contains("cc") || t2.contains("hi")
-            
+
             // 1. Embedded vs External
             if !track1.isExternal && track2.isExternal { return true }
             if track1.isExternal && !track2.isExternal { return false }
-            
+
             // 2. (If both Embedded or both External) SDH vs Standard
             if isSDH1 && !isSDH2 { return true }
             if !isSDH1 && isSDH2 { return false }
-            
+
             return false
         }
 
@@ -1187,21 +1187,21 @@ class MPVPlayerViewModel: ObservableObject {
     func sendReaction(_ emoji: String) {
         // Rate Limiting: Max 5 per 2 seconds, Min 0.15s gap
         let now = Date()
-        
+
         // 1. Minimum Gap Check
         if let last = reactionTimestamps.last, now.timeIntervalSince(last) < 0.15 {
              return
         }
-        
+
         // 2. Burst Check
         // Clean up old timestamps (>2s ago)
         reactionTimestamps = reactionTimestamps.filter { now.timeIntervalSince($0) < 2.0 }
-        
+
         if reactionTimestamps.count >= 5 {
              print("⚠️ Reaction limit reached (spam guard)")
              return
         }
-        
+
         reactionTimestamps.append(now)
 
         guard !isInWatchParty else {
@@ -1224,7 +1224,7 @@ class MPVPlayerViewModel: ObservableObject {
             }
             return
         }
-        
+
         // Solo/Local Mode (just show locally)
         reactionTriggers.send(emoji)
     }
@@ -1240,7 +1240,7 @@ class MPVPlayerViewModel: ObservableObject {
         // 2. Broadcast via Realtime
         let userInfo = appState?.currentUsername
         let userId = currentUserId
-        
+
         let syncMessage = SyncMessage(
             type: .hostAnnouncement,
             timestamp: Date().timeIntervalSince1970, // Use current time
@@ -1319,13 +1319,13 @@ class MPVPlayerViewModel: ObservableObject {
             imdbId: nil,
             roomId: nil
         )
-        
+
         // ✅ STEP 1.5: Clear UI state to prevent re-use flash
         await MainActor.run {
              self.backgroundURL = nil
              self.posterURL = nil
              self.logoURL = nil
-             self.showPoster = true 
+             self.showPoster = true
              self.isLoading = true
              self.hasCleanedUp = true // Ensure flag is set on MainActor
         }
@@ -1534,7 +1534,7 @@ extension MPVPlayerViewModel {
                                 print("🔄 Updated existing participant \(actualUserId) with Ref: \(newPhxRef)")
                             } else {
                                 print("⚠️ Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
-                                // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`? 
+                                // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`?
                                 // Yes, assume same session.
                             }
 
@@ -1547,7 +1547,7 @@ extension MPVPlayerViewModel {
                             if let ref = phxRefVal {
                                 self.activeConnectionRefs[actualUserId] = ref
                             }
-                            
+
                             let username = metaUsername ?? "User"
                             let isHostVal = metadata?["is_host"] as? Bool ?? false
                             let joinedAtVal = metadata?["joined_at"] as? TimeInterval ?? Date().timeIntervalSince1970
@@ -1578,7 +1578,7 @@ extension MPVPlayerViewModel {
                                 // CRITICAL FIX: Only use 'userId' (closure arg) as phxRef if this event was FOR SELF.
                                 // Otherwise, use nil (we don't know our own ref from someone else's join).
                                 var selfRef = (actualUserId == currentId) ? (metadata?["phx_ref"] as? String) : nil
-                                
+
                                 // Last Ditch: Check if we have a stale ref for self in the OLD list
                                 if selfRef == nil {
                                     if let oldSelf = self.appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == currentId }) {
@@ -1586,7 +1586,7 @@ extension MPVPlayerViewModel {
                                         print("♻️ Restored stale phx_ref for Self: \(selfRef ?? "nil")")
                                     }
                                 }
-                                
+
                                 let selfParticipant = Participant(
                                     id: currentId,
                                     name: self.appState?.currentUsername ?? "Me",
@@ -1606,7 +1606,7 @@ extension MPVPlayerViewModel {
                     case .leave:
                         // This handles flaky connections and Lobby->Player transitions
                         print("⏳ Participant leaving (grace period started): \(actualUserId)")
-                        
+
                         // Extract ref immediately for closure capture
                         let leavingPhxRef = metadata?["phx_ref"] as? String
 
@@ -1618,9 +1618,9 @@ extension MPVPlayerViewModel {
                             guard let self = self else { return }
 
                             // Check for cancellation
-                            if Task.isCancelled { 
+                            if Task.isCancelled {
                                 print("⏹️ Leave task cancelled for \(actualUserId)")
-                                return 
+                                return
                             }
 
                             // Fetch FRESH list to avoid stale data race
@@ -1647,7 +1647,7 @@ extension MPVPlayerViewModel {
                                  // So it's safe to process the leave.
                                  print("⚠️ Participant \(actualUserId) not in Ref Map. Assuming valid leave (or already processed).")
                             }
-                            
+
                             // Clean up ref map
                             self.activeConnectionRefs.removeValue(forKey: actualUserId)
 
@@ -1675,7 +1675,7 @@ extension MPVPlayerViewModel {
                                     self.checkIfAllGuestsReady()
                                 }
                             }
-                            
+
                             self.appState?.objectWillChange.send() // Force UI update
                             self.pendingLeaveTasks.removeValue(forKey: actualUserId)
                         }
@@ -2285,7 +2285,7 @@ extension MPVPlayerViewModel {
                     self.appState?.currentView = .watchPartyLobby
                 }
             }
-        
+
         case .reaction:
             // Handle incoming reaction
             // CRITICAL: Skip reactions from self (already shown locally when sent)
@@ -2304,7 +2304,7 @@ extension MPVPlayerViewModel {
                 print("📢 Received announcement: \(text)")
                 // 1. Trigger floating overlay
                 announcementTriggers.send(text)
-                
+
                 // 2. Chat history update REMOVED (per request)
                 // Announcements are visual-only now.
             }
@@ -2391,15 +2391,15 @@ extension MPVPlayerViewModel {
             NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)
             return
         }
-        
+
         // NEW: Solo Mode Bypass
         if forceSoloStart {
              NSLog("🚀 SOLO MODE ACTIVE: Bypassing guest checks and starting playback!")
-             
+
              // Stop the ready loop since we're starting
              readyLoopTimer?.invalidate()
              readyLoopTimer = nil
-             
+
              // Start immediate playback
              Task { @MainActor [weak self] in
                  // Small buffer to ensure everything is set (and avoid race with ready loop invalidation)
@@ -2616,9 +2616,9 @@ extension MPVPlayerViewModel {
 
     private func saveWatchHistory(force: Bool = false) {
         guard !imdbId.isEmpty, currentTime > 0, duration > 0 else { return }
-        
+
         let progress = currentTime / duration
-        
+
         // Update accumulator if playing
         if isPlaying && !isBuffering && !isSeeking {
              let now = Date()
@@ -2642,60 +2642,66 @@ extension MPVPlayerViewModel {
         // Trigger Vote: Hybrid Logic
         if !hasVotedForStream {
              let isMovie = appState?.player.selectedMetadata?.type == "movie"
-             
+
              // Rule 1: Movies -> Legacy 20 mins accumulated
              let movieRuleMet = isMovie && accumulatedPlaybackTime > 1200
-             
+
              // Rule 2: TV Shows -> 30% Duration AND 8 mins (480s) Continuous
              // Note: duration > 0 check is already in guard
              let percentWatched = duration > 0 ? (currentTime / duration) : 0
              let tvRuleMet = !isMovie && percentWatched >= 0.30 && continuousPlaybackTime >= 480
-             
+
              if movieRuleMet || tvRuleMet {
+                 print("📊 MPVPlayerViewModel: Vote Trigger Condition Met!")
+                 print("   ℹ️ Type: \(isMovie ? "Movie" : "TV")")
+                 print("   ℹ️ Accumulated: \(Int(accumulatedPlaybackTime))s")
+                 print("   ℹ️ Continuous: \(Int(continuousPlaybackTime))s")
+                 print("   ℹ️ Percent: \(Int(percentWatched * 100))%")
+
                  if let hash = currentStreamHash, let quality = currentStreamQuality {
-                     
+
                      // QUALITY GATE: Block CAM and TS sources
                      let badSources = ["CAM", "TS", "HDCAM", "HDTS", "TELESYNC", "SCREENER"]
                      let source = currentSourceQuality ?? ""
                      let isLowQuality = badSources.contains { source.localizedCaseInsensitiveContains($0) }
-                     
+
                      if isLowQuality {
                          print("🚫 MPVPlayerViewModel: Skipping Community Vote - Low Quality Source detected (\(source))")
                          hasVotedForStream = true // Mark as "handled"
                          return
                      }
-                     
+
                      // Helper for logs
                      let logPrefix = isMovie ? "🎥 Movie (>20m)" : "📺 TV (>30% + 8m cont)"
                      print("✅ MPVPlayerViewModel: Triggering Community Vote (\(logPrefix))")
-                     
+
                      // Extract Season/Episode correctly
                      var seasonVal = -1
                      var episodeVal = -1
-                     
+
                      // Try to grab from AppState if we can
                      if let player = appState?.player {
                          if let s = player.selectedSeason { seasonVal = s }
                          if let e = player.selectedEpisode { episodeVal = e }
-                     } 
+                     }
                      // Fallback check: 'selectedMediaItem' might be the episode?
                      // If 'type' is series, we need S/E.
-                     
+
                      Task {
                          // We defer this lookup to MainActor block inside Task if needed
                          // Actually, we can just pass what we have.
                          // If we are missing S/E, we verify as -1/-1 (Series Level verify? No that's bad).
                          // We'll trust the logic for now and fix S/E piping if broken.
-                         
+
                          // Fix: Using -1/-1 as "Unknown" is better than crashing or blocking.
                          // Ideally we should inject S/E into MPVPlayerViewModel via `loadStream` method.
                          // But for now, let's ship the Logic update.
-                         
+
                          await SupabaseClient.shared.voteStreamSuccess(
-                             imdbId: imdbId, 
-                             season: seasonVal, 
-                             episode: episodeVal, 
-                             quality: quality, 
+                             imdbId: imdbId,
+                             season: seasonVal,
+                             episode: episodeVal,
+                             quality: quality,
                              streamHash: hash,
                              movieTitle: self.streamTitle
                          )

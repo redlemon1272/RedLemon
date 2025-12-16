@@ -19,6 +19,7 @@ struct VerifiedStreamsView: View {
     @State private var sessionLogs: [SessionLog] = []
     @State private var isLoading = false
     @State private var highlightedLogId: UUID?
+    @State private var searchText = ""
     
     var body: some View {
         VStack(spacing: 0) {
@@ -78,7 +79,7 @@ struct VerifiedStreamsView: View {
         do {
             switch selectedTab {
             case "streams":
-                verifiedStreams = [] // Placeholder
+                verifiedStreams = try await SupabaseClient.shared.getAllVerifiedStreams()
                 
             case "reported":
                  reportedStreams = try await SupabaseClient.shared.getReportedStreams()
@@ -99,12 +100,48 @@ struct VerifiedStreamsView: View {
     
     // MARK: - Views
     
+    // MARK: - Views
+    
+    private var filteredStreams: [SupabaseClient.VerifiedStream] {
+        if searchText.isEmpty {
+            return verifiedStreams
+        } else {
+            return verifiedStreams.filter { stream in
+                stream.imdbId.localizedCaseInsensitiveContains(searchText) ||
+                (stream.movieTitle?.localizedCaseInsensitiveContains(searchText) ?? false)
+            }
+        }
+    }
+
     private var streamsList: some View {
         VStack {
-            Text("Verified Streams Management")
-                .font(.headline)
-            Text("Search functionality to be added.")
-                .foregroundColor(.secondary)
+            // Search Bar
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                TextField("Search by IMDB ID or Title", text: $searchText)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+            }
+            .padding()
+            
+            List {
+                ForEach(filteredStreams) { stream in
+                    VerifiedStreamRow(stream: stream) {
+                        deleteStream(stream: stream)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func deleteStream(stream: SupabaseClient.VerifiedStream) {
+        Task {
+            do {
+                try await SupabaseClient.shared.deleteVerifiedStream(streamHash: stream.hash)
+                await loadData() // Reload list
+            } catch {
+                print("Failed to delete stream: \(error)")
+            }
         }
     }
     
@@ -331,5 +368,63 @@ struct LogEventRow: View {
                 .foregroundColor(.secondary)
                 .padding(.leading, 160)
         }
+    }
+}
+
+struct VerifiedStreamRow: View {
+    let stream: SupabaseClient.VerifiedStream
+    let onDelete: () -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(stream.movieTitle ?? stream.imdbId)
+                        .font(.headline)
+                    if let _ = stream.movieTitle {
+                        Text(stream.imdbId)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                HStack {
+                    Text(stream.quality)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(4)
+                        .font(.caption.bold())
+                    
+                    if stream.season != -1 {
+                        Text("S\(stream.season) E\(stream.episode)")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    } else {
+                        Text("Movie")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Text("Votes: \(stream.voteCount)")
+                        .font(.caption)
+                        .foregroundColor(.green)
+                }
+                
+                Text(stream.hash)
+                    .font(.caption2.monospaced())
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+            
+            Spacer()
+            
+            Button(action: onDelete) {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.vertical, 4)
     }
 }

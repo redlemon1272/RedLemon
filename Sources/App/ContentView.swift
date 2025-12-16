@@ -378,13 +378,16 @@ struct StablePlayerContainer: View, Equatable {
     var body: some View {
         // Build display title with episode info if available
         let displayTitle: String = {
-            if let season = selectedSeason, let episode = selectedEpisode,
-               let videos = metadata.videos {
-                // Find the episode title
-                if let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
-                    return "\(metadata.title) - S\(String(format: "%02d", season))E\(String(format: "%02d", episode)): \(videoEpisode.title)"
+            if let season = selectedSeason, let episode = selectedEpisode {
+                var title = "\(metadata.title) - S\(String(format: "%02d", season))E\(String(format: "%02d", episode))"
+                
+                // Append episode title if available
+                if let videos = metadata.videos,
+                   let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
+                    title += ": \(videoEpisode.title)"
                 }
-                return "\(metadata.title) - S\(String(format: "%02d", season))E\(String(format: "%02d", episode))"
+                
+                return title
             }
             return metadata.title
         }()

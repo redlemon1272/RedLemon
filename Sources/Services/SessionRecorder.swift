@@ -41,6 +41,17 @@ struct SessionLog: Codable, Identifiable {
     let streamHash: String?
     let events: [SessionEvent]
     let createdAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case sessionId = "session_id"
+        case platform
+        case appVersion = "app_version"
+        case imdbId = "imdb_id"
+        case streamHash = "stream_hash"
+        case events
+        case createdAt = "created_at"
+    }
 }
 
 /// thread-safe in-memory logger

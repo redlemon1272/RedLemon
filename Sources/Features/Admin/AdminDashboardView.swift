@@ -14,6 +14,7 @@ struct AdminDashboardView: View {
     @State private var eventConfigVersion: Int?
     @State private var eventConfigMovieCount: Int?
     @State private var isShowingScheduleManagement = false
+    @State private var isShowingVerifiedStreams = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -73,6 +74,35 @@ struct AdminDashboardView: View {
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 6)
                                 .background(Color.blue)
+                                .cornerRadius(6)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.vertical, 4)
+                }
+
+                // Verified Streams Section
+                Section(header: Text("Verified Streams")) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Community Verification")
+                                .font(.headline)
+                            Text("Manage verified stream cache")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            isShowingVerifiedStreams = true
+                        }) {
+                            Text("View List")
+                                .fontWeight(.medium)
+                                .foregroundColor(.white)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color.green)
                                 .cornerRadius(6)
                         }
                         .buttonStyle(.plain)
@@ -243,6 +273,10 @@ struct AdminDashboardView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .sheet(isPresented: $isShowingScheduleManagement) {
             ScheduleManagementView(isPresented: $isShowingScheduleManagement)
+        }
+        .sheet(isPresented: $isShowingVerifiedStreams) {
+            VerifiedStreamsView()
+                .frame(minWidth: 600, minHeight: 400)
         }
         .task {
             refreshData()

@@ -835,6 +835,19 @@ class SupabaseClient: RoomManager, UserManager {
         let streams = try jsonDecoder.decode([VerifiedStream].self, from: data)
         return streams.first
     }
+
+    /// Get all verified streams (Admin)
+    func getAllVerifiedStreams(limit: Int = 50) async throws -> [VerifiedStream] {
+        let data = try await makeRequest(
+            path: "/verified_streams",
+            query: [
+                "select": "*",
+                "order": "last_verified_at.desc,vote_count.desc",
+                "limit": String(limit)
+            ]
+        )
+        return try jsonDecoder.decode([VerifiedStream].self, from: data)
+    }
     
     /// Vote for a successful stream (Upsert logic via RPC or Client)
     func voteStreamSuccess(imdbId: String, quality: String, streamHash: String, magnetLink: String? = nil) async {

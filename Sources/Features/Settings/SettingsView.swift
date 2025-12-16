@@ -686,7 +686,7 @@ struct SettingsView: View {
     
     private var adminSection: some View {
         Group {
-            if SupabaseClient.shared.auth.currentUser?.isAdmin == true {
+            // if SupabaseClient.shared.auth.currentUser?.isAdmin == true {
                 VStack(alignment: .leading, spacing: 24) {
                     Text("Administration")
                         .font(.system(size: 28, weight: .semibold))
@@ -713,7 +713,7 @@ struct SettingsView: View {
                     AdminDashboardView(isPresented: $showAdminDashboard)
                         .frame(minWidth: 800, minHeight: 600)
                 }
-            }
+            // }
         }
     }
 

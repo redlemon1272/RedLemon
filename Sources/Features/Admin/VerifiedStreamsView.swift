@@ -151,22 +151,20 @@ struct VerifiedStreamsView: View {
     
     // MARK: - Legacy Data Migration
     
+    @State private var failedResolutionIds: Set<String> = []
+
     private func resolveMissingTitles() async {
-        // Find streams with missing titles
-        let missing = verifiedStreams.filter { $0.movieTitle == nil }
+        // Find streams with missing titles, excluding known failures
+        let missing = verifiedStreams.filter { $0.movieTitle == nil && !failedResolutionIds.contains($0.imdbId) }
         guard !missing.isEmpty else { return }
         
         print("🔍 Found \(missing.count) streams with missing titles. Resolving...")
         
-        // Group by IMDB ID to avoid duplicate lookups
         let uniqueImdbIds = Set(missing.map { $0.imdbId })
+        var updateOccurred = false
         
         for imdbId in uniqueImdbIds {
             do {
-                // Try fetching as movie first (most common for verified high-quality rips)
-                // If it fails, could try series, but LocalAPIClient usually handles it if id is robust.
-                // However, VerifiedStreams table doesn't track type strictly other than S/E.
-                // Let's guess based on S/E:
                 let isSeries = verifiedStreams.first(where: { $0.imdbId == imdbId })?.season != -1
                 let type = isSeries ? "series" : "movie"
                 
@@ -175,75 +173,54 @@ struct VerifiedStreamsView: View {
                 
                 print("✅ Resolved \(imdbId) -> \(title)")
                 
-                // Update Local State
-                if let index = verifiedStreams.firstIndex(where: { $0.imdbId == imdbId }) {
-                    // Update all entries with this IMDB ID locally
-                    for i in 0..<verifiedStreams.count {
-                        if verifiedStreams[i].imdbId == imdbId {
-                            // Struct copy update (VerifiedStream is let constants, so we need to recreate or just use parallel array?
-                            // VerifiedStream is Codable struct. We can't mutate 'let'.
-                            // We need to re-fetch or effectively patch it.
-                            // Actually, let's just update the DB and then re-fetch.
-                        }
-                    }
-                }
-                
-                // Persist to DB (Heal the data)
-                // We'll use a lightweight update since voteStreamSuccess is for voting.
-                // We need a specific 'updateTitle' method on SupabaseClient or just re-vote?
-                // Re-voting might increment vote count which is bad.
-                // Let's just create a quick SQL function or just ignore persistence and only show in UI?
-                // User said "We have the imdb id right there". They expect UI to show it.
-                // If we don't persist, we hit the API every time.
-                // Let's persist using a raw update query if possible, or just use `voteStreamSuccess` with same vote count?
-                // `voteStreamSuccess` forces increment or set to 1.
-                // Let's add `updateVerifiedStreamTitle` to SupabaseClient.
                 await SupabaseClient.shared.updateVerifiedStreamTitle(imdbId: imdbId, title: title)
+                updateOccurred = true
                 
             } catch {
                 print("⚠️ Failed to resolve title for \(imdbId): \(error)")
+                failedResolutionIds.insert(imdbId)
             }
         }
         
-        // Reload to show new titles
-        try? await loadData()
+        if updateOccurred {
+            try? await loadData()
+        }
     }
     
     private func resolveMissingReportedTitles() async {
-        // Find streams with missing titles
-        let missing = reportedStreams.filter { $0.movieTitle == nil }
+        // Find streams with missing titles, excluding known failures
+        let missing = reportedStreams.filter { $0.movieTitle == nil && !failedResolutionIds.contains($0.imdbId) }
         guard !missing.isEmpty else { return }
         
         print("🔍 Found \(missing.count) reported streams with missing titles. Resolving...")
         
-        // Group by IMDB ID to avoid duplicate lookups
         let uniqueImdbIds = Set(missing.map { $0.imdbId })
+        var updateOccurred = false
         
         for imdbId in uniqueImdbIds {
             do {
-                // Try fetching as movie first
                 let details = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: imdbId, type: "movie")
                 let title = details.name
                 
                 print("✅ Resolved Report \(imdbId) -> \(title)")
                 
-                // Update Local State (Optional optimization, but Reload handles it)
-                
                 // Persist to DB
-                // We need to update specific entries. Since we don't know the ID easily without iterating,
-                // we'll iterate through the missing list
                 let reportsToUpdate = missing.filter { $0.imdbId == imdbId }
                 for report in reportsToUpdate {
                     await SupabaseClient.shared.updateReportedStreamTitle(id: report.id, title: title)
                 }
+                updateOccurred = true
                 
             } catch {
                 print("⚠️ Failed to resolve title for report \(imdbId): \(error)")
+                failedResolutionIds.insert(imdbId)
             }
         }
         
-        // Reload to show new titles
-        try? await loadData()
+        // Only reload if we actually changed something to prevent infinite loops
+        if updateOccurred {
+            try? await loadData()
+        }
     }
     
     private var reportedList: some View {

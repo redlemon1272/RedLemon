@@ -849,6 +849,18 @@ class SupabaseClient: RoomManager, UserManager {
         return try jsonDecoder.decode([VerifiedStream].self, from: data)
     }
     
+    /// Delete a verified stream (Admin) - Unlocks the stream for normal resolver
+    func deleteVerifiedStream(streamHash: String) async throws {
+        _ = try await makeRequest(
+            path: "/verified_streams",
+            method: "DELETE",
+            query: [
+                "stream_hash": "eq.\(streamHash)"
+            ]
+        )
+        print("🗑️ Deleted verified stream with hash: \(streamHash)")
+    }
+    
     /// Vote for a successful stream (Upsert logic via RPC or Client)
     func voteStreamSuccess(imdbId: String, quality: String, streamHash: String, magnetLink: String? = nil) async {
         // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 

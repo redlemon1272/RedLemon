@@ -368,7 +368,7 @@ actor StreamService: StreamResolving {
                 }
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata)
             } catch {
-                LogManager.shared.warning("❌ StreamService: Unlock failed for \(stream.title): \(error.localizedDescription)")
+                LogManager.shared.warning("❌ StreamService: [Attempt \(index + 1)/\(finalStreams.count)] Unlock failed for \(stream.title): \(error.localizedDescription)")
                 lastError = error
                 continue
             }
@@ -454,7 +454,8 @@ actor StreamService: StreamResolving {
         }
 
         if httpResponse.statusCode != 200 {
-            let errorMessage = String(data: data, encoding: .utf8) ?? "HTTP \(httpResponse.statusCode)"
+            let responseBody = String(data: data, encoding: .utf8) ?? "No body"
+            let errorMessage = "HTTP \(httpResponse.statusCode): \(responseBody)"
             throw APIError.networkError(NSError(domain: "UnlockError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage]))
         }
 

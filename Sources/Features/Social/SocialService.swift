@@ -24,6 +24,7 @@ class SocialService: ObservableObject {
     private var dmClient: SupabaseRealtimeClient?
     private var currentUserId: String?
     private var currentUsername: String?
+    private var currentMetadata: [String: Any] = [:]
     
     private init() {}
     
@@ -50,6 +51,7 @@ class SocialService: ObservableObject {
     }
     
     func disconnect() async {
+        stopHeartbeat()
         if let client = presenceClient {
             await client.disconnect()
             presenceClient = nil
@@ -91,13 +93,16 @@ class SocialService: ObservableObject {
             try await client.joinChannel("global-presence")
             
             // Track my initial status
-            try await client.track(userId: userId, metadata: [
+            let initialMeta: [String: Any] = [
                 "username": username,
                 "status": "online",
                 "last_seen": ISO8601DateFormatter().string(from: Date())
-            ])
+            ]
+            self.currentMetadata = initialMeta
+            try await client.track(userId: userId, metadata: initialMeta)
             
             isConnected = true
+            startHeartbeat()
             print("✅ SocialService: Connected to global presence")
         } catch {
             print("❌ SocialService: Failed to subscribe: \(error)")
@@ -126,12 +131,20 @@ class SocialService: ObservableObject {
         }
         
         do {
+            self.currentMetadata = metadata
             try await client.track(userId: userId, metadata: metadata)
             print("📡 SocialService: Updated status - \(metadata["status"] as? String ?? "Unknown"): \(mediaTitle ?? "")")
         } catch {
             print("❌ SocialService: Failed to update status: \(error)")
         }
     }
+    
+    // MARK: - Presence Handlers
+    
+    private var heartbeatTimer: Timer?
+
+    // ... (inside setupPresenceChannel or connect)
+    // We will start heartbeat in connect() and stop in disconnect()
     
     // MARK: - Presence Handlers
     
@@ -166,18 +179,31 @@ class SocialService: ObservableObject {
         let normalizedUserId = userId.lowercased()
         guard let refs = userPresenceRefs[normalizedUserId], !refs.isEmpty else {
             // No active refs -> User is Offline
-            onlineUserIds.remove(normalizedUserId)
-            friendActivity.removeValue(forKey: normalizedUserId)
+            if onlineUserIds.contains(normalizedUserId) {
+                print("📉 SocialService: User \(normalizedUserId) went offline (No active refs)")
+                onlineUserIds.remove(normalizedUserId)
+                friendActivity.removeValue(forKey: normalizedUserId)
+            }
             return
         }
         
         // User is Online -> Find the most recent session
-        onlineUserIds.insert(normalizedUserId)
+        if !onlineUserIds.contains(normalizedUserId) {
+            print("📈 SocialService: User \(normalizedUserId) came online")
+            onlineUserIds.insert(normalizedUserId)
+        }
+        
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let fallbackFormatter = ISO8601DateFormatter() // Default
         
         // Sort refs by 'last_seen' or 'started_at' to find the newest
         let sortedRefs = refs.values.sorted { (m1, m2) -> Bool in
-            let date1 = ISO8601DateFormatter().date(from: m1["last_seen"] as? String ?? "") ?? Date.distantPast
-            let date2 = ISO8601DateFormatter().date(from: m2["last_seen"] as? String ?? "") ?? Date.distantPast
+            let dateString1 = m1["last_seen"] as? String ?? ""
+            let dateString2 = m2["last_seen"] as? String ?? ""
+            
+            let date1 = formatter.date(from: dateString1) ?? fallbackFormatter.date(from: dateString1) ?? Date.distantPast
+            let date2 = formatter.date(from: dateString2) ?? fallbackFormatter.date(from: dateString2) ?? Date.distantPast
             return date1 < date2 // Ascending order, last is newest
         }
         
@@ -209,6 +235,38 @@ class SocialService: ObservableObject {
         }
         
         friendActivity[normalizedUserId] = activity
+    }
+
+    // MARK: - Heartbeat
+    
+    private func startHeartbeat() {
+        stopHeartbeat()
+        heartbeatTimer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+            Task { @MainActor [weak self] in
+                await self?.sendHeartbeat()
+            }
+        }
+    }
+    
+    private func stopHeartbeat() {
+        heartbeatTimer?.invalidate()
+        heartbeatTimer = nil
+    }
+    
+    private func sendHeartbeat() async {
+        guard isConnected, let client = presenceClient, let userId = currentUserId else { return }
+        
+        // Refresh timestamp
+        var metadata = currentMetadata
+        metadata["last_seen"] = ISO8601DateFormatter().string(from: Date())
+        currentMetadata = metadata
+        
+        do {
+            // print("💓 SocialService: Sending heartbeat...") (Silent unless debug)
+            try await client.track(userId: userId, metadata: metadata)
+        } catch {
+            print("❌ SocialService: Heartbeat failed: \(error)")
+        }
     }
     
     // MARK: - Data Loading (Friends)

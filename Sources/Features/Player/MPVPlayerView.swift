@@ -803,6 +803,14 @@ struct MPVPlayerView: View {
 
     @ViewBuilder
     private var menus: some View {
+        menuShields
+        menuOverlays
+        reportOverlay
+        chatButtonOverlay
+    }
+
+    @ViewBuilder
+    private var menuShields: some View {
         // Tap shield to close subtitle menu when open
         if showSubtitleMenu {
             Color.black.opacity(0.001)
@@ -862,7 +870,10 @@ struct MPVPlayerView: View {
                      }
                  }
         }
+    }
 
+    @ViewBuilder
+    private var menuOverlays: some View {
         // Subtitle Menu (Bottom Left)
         if showSubtitleMenu {
             VStack {
@@ -930,7 +941,10 @@ struct MPVPlayerView: View {
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
         }
+    }
 
+    @ViewBuilder
+    private var reportOverlay: some View {
         // Report Stream Modal (Center)
         if showReportSheet {
             VStack {
@@ -941,7 +955,11 @@ struct MPVPlayerView: View {
                          imdbId: imdbId,
                          quality: streamQuality,
                          streamHash: streamHash ?? "",
-                         showSuccess: $showReportSheet
+                         onDismiss: {
+                             withAnimation(.easeInOut(duration: 0.15)) {
+                                 showReportSheet = false
+                             }
+                         }
                      )
                      Spacer()
                  }
@@ -950,7 +968,10 @@ struct MPVPlayerView: View {
             .transition(.opacity.combined(with: .scale))
             .zIndex(103)
         }
+    }
 
+    @ViewBuilder
+    private var chatButtonOverlay: some View {
         // Chat toggle button (appears on right side when mouse is there OR unread messages exist)
         // Only show in watch party mode
         if (showChatButton || hasUnreadMessages) && !viewModel.showChat {

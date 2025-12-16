@@ -81,13 +81,13 @@ struct AdminDashboardView: View {
                     .padding(.vertical, 4)
                 }
 
-                // Verified Streams Section
-                Section(header: Text("Verified Streams")) {
+                // Content & Feedback Section
+                Section(header: Text("Content & Feedback")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Community Verification")
+                            Text("Content Manager")
                                 .font(.headline)
-                            Text("Manage verified stream cache")
+                            Text("Verified Streams, Feedback & Logs")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                         }

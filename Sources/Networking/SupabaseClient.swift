@@ -1005,6 +1005,7 @@ struct ReportedStream: Identifiable, Codable {
         let type: String
         let message: String
         let contactEmail: String?
+        let sessionLogId: UUID?
         let createdAt: Date
         
         enum CodingKeys: String, CodingKey {
@@ -1012,12 +1013,13 @@ struct ReportedStream: Identifiable, Codable {
             case type
             case message
             case contactEmail = "contact_email"
+            case sessionLogId = "session_log_id"
             case createdAt = "created_at"
         }
     }
     
     /// Send user feedback
-    func sendFeedback(type: String, message: String, email: String? = nil) async {
+    func sendFeedback(type: String, message: String, email: String? = nil, sessionLogId: UUID? = nil) async {
         do {
             var body: [String: Any] = [
                 "type": type,
@@ -1027,6 +1029,9 @@ struct ReportedStream: Identifiable, Codable {
             ]
             if let email = email, !email.isEmpty {
                 body["contact_email"] = email
+            }
+            if let logId = sessionLogId {
+                body["session_log_id"] = logId.uuidString
             }
             
             _ = try await makeRequest(
@@ -1050,6 +1055,7 @@ struct ReportedStream: Identifiable, Codable {
             
             // Map to DB columns
             let body: [String: Any] = [
+                "id": log.id.uuidString,
                 "session_id": log.sessionId.uuidString,
                 "platform": log.platform,
                 "app_version": log.appVersion,

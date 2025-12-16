@@ -18,6 +18,7 @@ struct VerifiedStreamsView: View {
     @State private var feedbackReports: [SupabaseClient.FeedbackReport] = []
     @State private var sessionLogs: [SessionLog] = []
     @State private var isLoading = false
+    @State private var highlightedLogId: UUID?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -118,15 +119,35 @@ struct VerifiedStreamsView: View {
     private var feedbackList: some View {
         List {
             ForEach(feedbackReports) { feedback in
-                FeedbackRow(feedback: feedback)
+                FeedbackRow(feedback: feedback, onViewLog: { logId in
+                    highlightedLogId = logId
+                    selectedTab = "logs"
+                })
             }
         }
     }
     
     private var logsList: some View {
-        List {
-            ForEach(sessionLogs) { log in
-                SessionLogRow(log: log)
+        ScrollViewReader { proxy in
+            List {
+                ForEach(sessionLogs) { log in
+                    SessionLogRow(log: log, isHighlighted: log.id == highlightedLogId)
+                        .id(log.id)
+                }
+            }
+            .onChange(of: highlightedLogId) { id in
+                if let id = id {
+                    withAnimation {
+                        proxy.scrollTo(id, anchor: .top)
+                    }
+                }
+            }
+            .onAppear {
+                 if let id = highlightedLogId {
+                     withAnimation {
+                         proxy.scrollTo(id, anchor: .top)
+                     }
+                 }
             }
         }
     }
@@ -174,6 +195,7 @@ struct Badge: View {
 
 struct FeedbackRow: View {
     let feedback: SupabaseClient.FeedbackReport
+    var onViewLog: ((UUID) -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -195,13 +217,29 @@ struct FeedbackRow: View {
                 .background(Color(NSColor.controlBackgroundColor))
                 .cornerRadius(8)
             
-            if let email = feedback.contactEmail {
-                HStack {
-                    Image(systemName: "envelope")
-                    Text(email)
+            HStack {
+                if let email = feedback.contactEmail {
+                    HStack {
+                        Image(systemName: "envelope")
+                        Text(email)
+                    }
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                 }
-                .font(.caption)
-                .foregroundColor(.secondary)
+                
+                Spacer()
+                
+                if let sessionLogId = feedback.sessionLogId {
+                    Button(action: { onViewLog?(sessionLogId) }) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "doc.text")
+                            Text("View Log")
+                        }
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
         .padding(.vertical, 8)
@@ -219,7 +257,14 @@ struct FeedbackRow: View {
 
 struct SessionLogRow: View {
     let log: SessionLog
+    let isHighlighted: Bool
     @State private var isExpanded = false
+    
+    init(log: SessionLog, isHighlighted: Bool = false) {
+        self.log = log
+        self.isHighlighted = isHighlighted
+        _isExpanded = State(initialValue: isHighlighted)
+    }
     
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded) {
@@ -241,10 +286,24 @@ struct SessionLogRow: View {
                         .foregroundColor(.secondary)
                 }
                 Spacer()
+                
+                if isHighlighted {
+                   Text("LINKED LOG")
+                       .font(.caption.bold())
+                       .foregroundColor(.white)
+                       .padding(.horizontal, 6)
+                       .padding(.vertical, 2)
+                       .background(Color.blue)
+                       .cornerRadius(4)
+                }
+                
                 Text(log.createdAt, style: .time)
                     .font(.caption)
             }
         }
+        .padding(4)
+        .background(isHighlighted ? Color.blue.opacity(0.1) : Color.clear)
+        .cornerRadius(8)
     }
 }
 

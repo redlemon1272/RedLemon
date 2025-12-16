@@ -749,41 +749,10 @@ struct SettingsView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 
-                // Send Session Log Button
-                Button(action: {
-                    Task {
-                        await uploadSessionLog()
-                    }
-                }) {
-                    HStack {
-                        Image(systemName: "doc.text.fill")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Send Session Log")
-                                .font(.title3.weight(.semibold))
-                                .foregroundColor(.primary)
-                            Text("Send anonymous log of the last session")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        Spacer()
-                        if isLoading {
-                            ProgressView().scaleEffect(0.8)
-                        } else {
-                            Image(systemName: "paperplane.fill")
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    .padding(24)
-                    .background(Color(NSColor.controlBackgroundColor))
-                    .cornerRadius(16)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .disabled(isLoading)
             }
         }
     }
+
     
     private func uploadSessionLog() async {
         isLoading = true
@@ -810,6 +779,7 @@ struct SettingsView: View {
         @State private var category = "Bug"
         @State private var message = ""
         @State private var email = ""
+        @State private var includeLog = false
         @State private var isSending = false
         
         let categories = ["Bug", "Stream Issue", "Feature Request", "Other"]
@@ -836,6 +806,10 @@ struct SettingsView: View {
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3)))
                 
+                Toggle("Attach anonymous session log", isOn: $includeLog)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
                 HStack {
                     Button("Cancel") { isPresented = false }
                         .keyboardShortcut(.cancelAction)
@@ -845,10 +819,19 @@ struct SettingsView: View {
                     Button("Send") {
                         isSending = true
                         Task {
+                            var logId: UUID? = nil
+                            
+                            if includeLog {
+                                let log = await SessionRecorder.shared.getSanitizedLog()
+                                await SupabaseClient.shared.uploadSessionLog(log: log)
+                                logId = log.id
+                            }
+                            
                             await SupabaseClient.shared.sendFeedback(
                                 type: category,
                                 message: message,
-                                email: email
+                                email: email,
+                                sessionLogId: logId
                             )
                             isPresented = false
                             isSending = false

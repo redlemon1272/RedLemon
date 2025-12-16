@@ -1147,6 +1147,34 @@ struct ReportedStream: Identifiable, Codable {
         return try jsonDecoder.decode([FeedbackReport].self, from: data)
     }
     
+    /// Delete a feedback report (Admin)
+    func deleteFeedback(id: UUID) async {
+        do {
+            _ = try await makeRequest(
+                path: "/feedback_reports",
+                method: "DELETE",
+                query: ["id": "eq.\(id.uuidString)"]
+            )
+            print("🗑️ Deleted feedback: \(id)")
+        } catch {
+            print("❌ Failed to delete feedback: \(error)")
+        }
+    }
+    
+    /// Delete a session log (Admin)
+    func deleteSessionLog(id: UUID) async {
+        do {
+            _ = try await makeRequest(
+                path: "/session_logs",
+                method: "DELETE",
+                query: ["id": "eq.\(id.uuidString)"]
+            )
+            print("🗑️ Deleted session log: \(id)")
+        } catch {
+            print("❌ Failed to delete session log: \(error)")
+        }
+    }
+    
     /// Get session logs (Admin)
     func getSessionLogs(limit: Int = 20) async throws -> [SessionLog] {
         let data = try await makeRequest(

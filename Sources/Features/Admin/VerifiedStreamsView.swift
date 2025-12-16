@@ -290,12 +290,28 @@ struct VerifiedStreamsView: View {
         }
     }
     
+    private func deleteFeedback(id: UUID) {
+        Task {
+            await SupabaseClient.shared.deleteFeedback(id: id)
+            await loadData()
+        }
+    }
+    
+    private func deleteSessionLog(id: UUID) {
+        Task {
+            await SupabaseClient.shared.deleteSessionLog(id: id)
+            await loadData()
+        }
+    }
+    
     private var feedbackList: some View {
         List {
             ForEach(feedbackReports) { feedback in
                 FeedbackRow(feedback: feedback, onViewLog: { logId in
                     highlightedLogId = logId
                     selectedTab = "logs"
+                }, onDelete: {
+                    deleteFeedback(id: feedback.id)
                 })
             }
         }
@@ -305,8 +321,10 @@ struct VerifiedStreamsView: View {
         ScrollViewReader { proxy in
             List {
                 ForEach(sessionLogs) { log in
-                    SessionLogRow(log: log, isHighlighted: log.id == highlightedLogId)
-                        .id(log.id)
+                    SessionLogRow(log: log, isHighlighted: log.id == highlightedLogId, onDelete: {
+                        deleteSessionLog(id: log.id)
+                    })
+                    .id(log.id)
                 }
             }
             .onChange(of: highlightedLogId) { id in
@@ -427,6 +445,7 @@ struct Badge: View {
 struct FeedbackRow: View {
     let feedback: SupabaseClient.FeedbackReport
     var onViewLog: ((UUID) -> Void)?
+    var onDelete: (() -> Void)?
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -460,6 +479,17 @@ struct FeedbackRow: View {
                 
                 Spacer()
                 
+                // Delete Button
+                if let onDelete = onDelete {
+                    Button(action: onDelete) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Delete Feedback")
+                    .padding(.trailing, 8)
+                }
+                
                 if let sessionLogId = feedback.sessionLogId {
                     Button(action: { onViewLog?(sessionLogId) }) {
                         HStack(spacing: 4) {
@@ -489,17 +519,46 @@ struct FeedbackRow: View {
 struct SessionLogRow: View {
     let log: SessionLog
     let isHighlighted: Bool
+    let onDelete: (() -> Void)?
     @State private var isExpanded = false
     
-    init(log: SessionLog, isHighlighted: Bool = false) {
+    init(log: SessionLog, isHighlighted: Bool = false, onDelete: (() -> Void)? = nil) {
         self.log = log
         self.isHighlighted = isHighlighted
+        self.onDelete = onDelete
         _isExpanded = State(initialValue: isHighlighted)
     }
     
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded) {
             VStack(alignment: .leading, spacing: 4) {
+                // Action Bar inside expanded view
+                HStack {
+                    Spacer()
+                    Button(action: copyToClipboard) {
+                        HStack(spacing: 4) {
+                            Image(systemName: "doc.on.doc")
+                            Text("Copy Log")
+                        }
+                        .font(.caption)
+                    }
+                    .buttonStyle(.plain)
+                    
+                    if let onDelete = onDelete {
+                        Button(action: onDelete) {
+                            HStack(spacing: 4) {
+                                Image(systemName: "trash")
+                                Text("Delete")
+                            }
+                            .font(.caption)
+                            .foregroundColor(.red)
+                        }
+                        .buttonStyle(.plain)
+                        .padding(.leading, 8)
+                    }
+                }
+                .padding(.bottom, 4)
+                
                 ForEach(log.events, id: \.timestamp) { event in
                     LogEventRow(event: event)
                 }
@@ -536,7 +595,15 @@ struct SessionLogRow: View {
         .background(isHighlighted ? Color.blue.opacity(0.1) : Color.clear)
         .cornerRadius(8)
     }
+    
+    private func copyToClipboard() {
+        let text = log.events.map { "[\($0.timestamp)] [\($0.category)] \($0.message) \($0.metadata?.description ?? "")" }.joined(separator: "\n")
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+    }
 }
+
+// ... LogEventRow and VerifiedStreamRow ...
 
 struct LogEventRow: View {
     let event: SessionEvent

@@ -937,7 +937,7 @@ struct ReportedStream: Identifiable, Codable {
     }
     
     /// Vote for a successful stream (Upsert logic via RPC or Client)
-    func voteStreamSuccess(imdbId: String, season: Int = -1, episode: Int = -1, quality: String, streamHash: String, magnetLink: String? = nil) async {
+    func voteStreamSuccess(imdbId: String, season: Int = -1, episode: Int = -1, quality: String, streamHash: String, magnetLink: String? = nil, movieTitle: String? = nil) async {
         // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 
         // OR standard upsert if we want to keep it simple client-side for V1.
         
@@ -953,6 +953,10 @@ struct ReportedStream: Identifiable, Codable {
                 "stream_hash": streamHash,
                 "last_verified_at": ISO8601DateFormatter().string(from: Date())
             ]
+            
+            if let title = movieTitle {
+                body["movie_title"] = title
+            }
             
             if let magnet = magnetLink {
                 body["magnet_link"] = magnet

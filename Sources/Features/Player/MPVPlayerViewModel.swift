@@ -2696,7 +2696,8 @@ extension MPVPlayerViewModel {
                              season: seasonVal, 
                              episode: episodeVal, 
                              quality: quality, 
-                             streamHash: hash
+                             streamHash: hash,
+                             movieTitle: self.streamTitle
                          )
                      }
                      hasVotedForStream = true

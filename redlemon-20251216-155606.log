@@ -1,0 +1,561 @@
+2025-12-16 15:56:14.240 RedLemon[14211:139013] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-16 15:56:14.240 RedLemon[14211:139013] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-16 15:56:14.315 RedLemon[14211:139013] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-16 15:56:14.315 RedLemon[14211:139117] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-16 15:56:14.369 RedLemon[14211:139013] ✅ Playback state reset complete - starting in browse view
+2025-12-16 15:56:14.369 RedLemon[14211:139013] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-16 15:56:14.369 RedLemon[14211:139013] 🧪 Testing Profile: debug
+2025-12-16 15:56:14.369 RedLemon[14211:139095] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-16 15:56:14.369 RedLemon[14211:139013] ✅ Keychain: Found stored username: ursinho
+2025-12-16 15:56:14.369 RedLemon[14211:139013] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-16 15:56:14.369 RedLemon[14211:139095] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-16 15:56:14.673 RedLemon[14211:139118] 📡 SupabaseClient: User lookup response received (262 bytes)
+2025-12-16 15:56:14.679 RedLemon[14211:139118] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-16 15:56:14.680 RedLemon[14211:139118] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 15:56:14.681 RedLemon[14211:139013] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 15:56:14.729 RedLemon[14211:139013] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-16 15:56:14.729 RedLemon[14211:139013] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 15:56:14.729 RedLemon[14211:139013] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-16 15:56:14.729 RedLemon[14211:139013] 🚀 RedLemon: Starting HTTP server...
+2025-12-16 15:56:14.730 RedLemon[14211:139013] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-16 15:56:14.748 RedLemon[14211:139013] ✅ RedLemon: HTTPServer instance created
+2025-12-16 15:56:14.749 RedLemon[14211:139094] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"E26EAEAF-44E3-4403-8C61-59582D041939","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-16 15:56:16.933 RedLemon[14211:139013] ✅ RedLemon: Server marked as ready
+2025-12-16 15:56:16.974 RedLemon[14211:139013] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-16 15:56:16.974 RedLemon[14211:139013] 🔍 Performing startup checks...
+2025-12-16 15:56:16.974 RedLemon[14211:139013] ✅ Username-based authentication ready
+2025-12-16 15:56:16.974 RedLemon[14211:139013] 🔍 Performing startup checks...
+2025-12-16 15:56:16.974 RedLemon[14211:139013] ✅ Username-based authentication ready
+2025-12-16 15:56:16.974 RedLemon[14211:139013] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1350 with 453 movies
+✅ [EventsConfig] Using cached movie_events config (version 1350, 453 movies)
+✅ [EventsView] Loaded 453 movies from config version 1350
+🗓 AppState: Updated schedule epoch to 2025-11-05 00:07:55 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-16 21:01:55 +0000
+⏰ AppState: Scheduling update in 341 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt0241527","name":"Harry Potter and the Sorcerer's Stone","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"8c5a4004a6f67bfd373b179fcb7633d9a2e9de26","imdb_id":"tt0241527","poster_url":"https://images.metahub.space/poster/small/tt0241527/img","backdrop_url":"https://images.metahub.space/background/medium/tt0241527/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-16T18:19:32.436366","last_activity":"2025-12-16T18:19:32.523428","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi1-4.download.real-debrid.com/d/AQ4WBMVZXCXKQ109/Harry.Potter.And.The.Sorcerers.Stone.2001.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[]}]
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+📨 Received: {"ref":"0D1180E9-AFE1-4FE9-9078-3169FA58FB49","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNkv1s9gWa22pI","phx_ref_prev":"GIHNjlRijXGa27tM","last_seen":"2025-12-16T20:55:59.912Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: []
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNlpzSQUCGV3rQ","last_seen":"2025-12-16T20:56:15.359Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"593A06FA-A67C-4B95-A9E9-6ACB9E5C6FB1","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.102s (RTT: 69ms)
+   Local:  2025-12-16 20:56:17 +0000
+   Server: 2025-12-16 20:56:17 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNl6QeGZ-a2_cC","phx_ref_prev":"GIHNkv1s9gWa22pI","last_seen":"2025-12-16T20:56:19.912Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNkv1s9gWa22pI","phx_ref_prev":"GIHNjlRijXGa27tM","last_seen":"2025-12-16T20:55:59.912Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📡 SocialService: Updated status - Browsing Library: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 2803C7BA-02CD-4C42-8545-252ED08A7CCE]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNmAjuqYaGVw5O","phx_ref_prev":"GIHNlpzSQUCGV3rQ","last_seen":"2025-12-16T20:56:21.640Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNlpzSQUCGV3rQ","last_seen":"2025-12-16T20:56:15.359Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[quick_movie_cru.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for crunchyroll
+🔍 Starting catalog fetch for crunchyroll from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/cru.json
+🔄 Attempt 1/3 for crunchyroll
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for trending
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29232158
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Troll 2
+🔍 [DEBUG] Successfully created MediaItem: Troll 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14107334
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Running Man
+🔍 [DEBUG] Successfully created MediaItem: The Running Man
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt6604188
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Tron: Ares
+🔍 [DEBUG] Successfully created MediaItem: Tron: Ares
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26439764
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Kantara A Legend: Chapter 1
+🔍 [DEBUG] Successfully created MediaItem: Kantara A Legend: Chapter 1
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32537226
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Hunting Season
+🔍 [DEBUG] Successfully created MediaItem: Hunting Season
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27829510
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: High Rollers
+🔍 [DEBUG] Successfully created MediaItem: High Rollers
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30472557
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Chainsaw Man - The Movie: Reze Arc
+🔍 [DEBUG] Successfully created MediaItem: Chainsaw Man - The Movie: Reze Arc
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14364480
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Successfully created MediaItem: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1343712
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: First Squad: The Moment of Truth
+🔍 [DEBUG] Successfully created MediaItem: First Squad: The Moment of Truth
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31434030
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Dracula
+🔍 [DEBUG] Successfully created MediaItem: Dracula
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt36153493
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wildcat
+🔍 [DEBUG] Successfully created MediaItem: Wildcat
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10210064
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bureau 749
+🔍 [DEBUG] Successfully created MediaItem: Bureau 749
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 50 → 50 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26439764/img (47523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt6604188/img (24052 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (43534 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32537226/img (34074 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14107334/img (29621 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29232158/img (38828 bytes)
+💾 Cache SET: Catalog[catalog_movie_cru.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for crunchyroll
+✅ Successfully fetched 15 items for crunchyroll from primary service
+📦 Full batch loaded: 15 items for crunchyroll
+✅ Progressive loading completed for crunchyroll
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181188381/s332/img (76877 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176260460/s332/img (77708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/168085879/s332/img (36913 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327345760/s332/img (47132 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/239922303/s332/img (41748 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/317457812/s332/img (53432 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322412111/s332/img (57515 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325207161/s332/img (38083 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330535890/s332/img (69017 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/178635023/s332/img (62162 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/195351229/s332/img (37492 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181836574/s332/img (40679 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334021051/s332/img (90236 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322709571/s332/img (58026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/250757744/s332/img (35420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/31887184/s332/img (40203 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/206714476/s332/img (52991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/35006170/s332/img (61678 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/206714476/s332/img (52991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/238965112/s332/img (63309 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/31887184/s332/img (40203 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/271349733/s332/img (77031 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301809868/s332/img (51535 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/57711426/s332/img (36912 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334757007/s332/img (41483 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/129198929/s332/img (60050 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336952619/s332/img (50991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/246982332/s332/img (44686 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/188181053/s332/img (48517 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336662820/s332/img (50316 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/87608067/s332/img (61832 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/166095369/s332/img (9321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/76385127/s332/img (66768 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/190225928/s332/img (32368 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/180263360/s332/img (51887 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/240241908/s332/img (80230 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8671419/s332/img (69026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/21653281/s332/img (35111 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338574691/s332/img (40150 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/241678740/s332/img (52095 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336393313/s332/img (35742 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309896363/s332/img (42659 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301298992/s332/img (50065 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1312221/img (31560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt16311594/img (10204 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (35849 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt8946378/img (39978 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30446847/img (17100 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (27701 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🔍 Loading metadata for: Zootopia 2 (type: movie, id: tt26443597)
+[ INFO ] GET /api/metadata/meta/movie/tt26443597 [request-id: AE19577B-6D80-4C15-80B9-76F6FD5AD11D]
+2025-12-16 15:56:23.770 RedLemon[14211:139095] 📦 Decoded CinemetaMeta - videos count: -1
+2025-12-16 15:56:23.771 RedLemon[14211:139013] ✅ Metadata loaded successfully
+2025-12-16 15:56:23.771 RedLemon[14211:139013]    Type: movie
+2025-12-16 15:56:23.771 RedLemon[14211:139013]    Background URL: https://images.metahub.space/background/medium/tt26443597/img
+2025-12-16 15:56:23.771 RedLemon[14211:139013]    Poster URL: https://images.metahub.space/poster/small/tt26443597/img
+2025-12-16 15:56:23.771 RedLemon[14211:139013]    Videos array: 0 episodes
+2025-12-16 15:56:27.713 RedLemon[14211:139013] ⚠️ No backdrop URL provided
+2025-12-16 15:56:27.768 RedLemon[14211:139013]    Quality: 1080p
+2025-12-16 15:56:27.769 RedLemon[14211:139013]    Mode: solo
+2025-12-16 15:56:27.769 RedLemon[14211:139013] 📡 Fetching metadata for tt26443597...
+2025-12-16 15:56:27.771 RedLemon[14211:139013] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt26443597/img
+2025-12-16 15:56:27.771 RedLemon[14211:139013] ⏳ Background art loading...
+2025-12-16 15:56:27.771 RedLemon[14211:139013] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt26443597/img
+2025-12-16 15:56:27.772 RedLemon[14211:139013] ⏳ Logo loading...
+2025-12-16 15:56:28.074 RedLemon[14211:139013] ✅ Logo loaded successfully
+2025-12-16 15:56:28.082 RedLemon[14211:139098] ✅ StreamService: Using provided metadata: Zootopia 2
+2025-12-16 15:56:28.082 RedLemon[14211:139098] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-16 15:56:28.083 RedLemon[14211:139098] ⚡️ StreamResolver: Resolving streams for tt26443597 (S0E0)
+2025-12-16 15:56:28.084 RedLemon[14211:139098]    📅 Filtering by year: 2025
+2025-12-16 15:56:28.116 RedLemon[14211:139013] ✅ Background art loaded successfully
+2025-12-16 15:56:28.159 RedLemon[14211:139240] 📦 StreamResolver: Fetching streams from ProviderManager...
+2025-12-16 15:56:28.159 RedLemon[14211:139240] 🔍 ProviderManager: Fetching streams for tt26443597...
+2025-12-16 15:56:28.161 RedLemon[14211:139098] 🎬 Torrentio: Building URL for movie (no season/episode)
+2025-12-16 15:56:28.161 RedLemon[14211:139098] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/stream/movie/tt26443597.json
+2025-12-16 15:56:28.161 RedLemon[14211:139098] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/stream/movie/tt26443597.json
+2025-12-16 15:56:28.164 RedLemon[14211:139118] 🔍 Zilean: Searching for "Zootopia 2"
+2025-12-16 15:56:28.168 RedLemon[14211:139240] ✅ Zilean: Got 0 results
+2025-12-16 15:56:28.168 RedLemon[14211:139240] 🔍 Zilean: Filtered to 0 streams
+2025-12-16 15:56:33.224 RedLemon[14211:139094] ❌ Provider comet failed: Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2102, NSUnderlyingError=0x7f805362fc40 {Error Domain=kCFErrorDomainCFNetwork Code=-1001 "(null)" UserInfo={_kCFStreamErrorCodeKey=-2102, _kCFStreamErrorDomainKey=4}}, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <89B2C21C-B74A-4926-A053-F53D01F79FC9>.<147>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <89B2C21C-B74A-4926-A053-F53D01F79FC9>.<147>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJyaWRBcGlLZXkiOiJLNjdKVjJWNEZUVUE3UllONlQzNEJGSVVCUlVaRVJCTzQ1QTZVTDNPN1RFNVpIRkRRUVNBIiwibGFuZ3VhZ2VzIjp7ImV4Y2x1ZGUiOltdLCJwcmVmZXJyZWQiOlsiZW4iXX0sIm9wdGlvbnMiOnsicmVtb3ZlX3Vua25vd25fbGFuZ3VhZ2VzIjpmYWxzZSwiYWxsb3dfZW5nbGlzaF9pbl9sYW5ndWFnZXMiOmZhbHNlLCJyZW1vdmVfcmFua3NfdW5kZXIiOi0xMDAwMDAwMDAwMH0sImNhY2hlZE9ubHkiOnRydWUsInJlc29sdXRpb25zIjp7fSwiZGVicmlkU3RyZWFtUHJveHlQYXNzd29yZCI6IiIsIm1heFJlc3VsdHNQZXJSZXNvbHV0aW9uIjowLCJyZXN1bHRGb3JtYXQiOlsiYWxsIl0sIm1heFNpemUiOjB9/stream/movie/tt26443597.json, NSErrorFailingURLKey=https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJyaWRBcGlLZXkiOiJLNjdKVjJWNEZUVUE3UllONlQzNEJGSVVCUlVaRVJCTzQ1QTZVTDNPN1RFNVpIRkRRUVNBIiwibGFuZ3VhZ2VzIjp7ImV4Y2x1ZGUiOltdLCJwcmVmZXJyZWQiOlsiZW4iXX0sIm9wdGlvbnMiOnsicmVtb3ZlX3Vua25vd25fbGFuZ3VhZ2VzIjpmYWxzZSwiYWxsb3dfZW5nbGlzaF9pbl9sYW5ndWFnZXMiOmZhbHNlLCJyZW1vdmVfcmFua3NfdW5kZXIiOi0xMDAwMDAwMDAwMH0sImNhY2hlZE9ubHkiOnRydWUsInJlc29sdXRpb25zIjp7fSwiZGVicmlkU3RyZWFtUHJveHlQYXNzd29yZCI6IiIsIm1heFJlc3VsdHNQZXJSZXNvbHV0aW9uIjowLCJyZXN1bHRGb3JtYXQiOlsiYWxsIl0sIm1heFNpemUiOjB9/stream/movie/tt26443597.json, _kCFStreamErrorDomainKey=4}
+2025-12-16 15:56:33.224 RedLemon[14211:139094] ✅ ProviderManager: Fetched 14 raw, returning 14 unique streams
+2025-12-16 15:56:33.225 RedLemon[14211:139094] 📦 StreamResolver: Received 14 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt26443597]
+🎬 PlayerVM: Starting playback for: Zootopia 2
+✅ Cache HIT: Metadata[meta_movie_tt26443597]
+[2025-12-16T20:56:28Z] [INFO] [StreamService.swift:27] 🎬 StreamService: Starting resolution for: Zootopia 2
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt26443597.json
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt26443597.json
+✅ Metadata fetched from Cinemeta for tt26443597: Zootopia 2 (2025)
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt26443597: Zootopia 2
+🎯 Target title for matching: Zootopia 2
+   📅 Year filter (2025): 14 → 12 streams
+   🚫 RESOLVER BLOCKING non-English audio: Zootopia.2.2025.1080p.CAMRip.LAT.DUB.1XBET.mp4
+👤 16 💾 1.93 GB ⚙️ Cinecalidad
+🇲🇽 (Audio)
+   🚫 RESOLVER BLOCKING non-English audio: Zootopia.2.2025.1080p.CAMRip.Dublado.mkv
+👤 3 💾 1.96 GB ⚙️ Comando
+🇵🇹 (Audio)
+   🎵 RESOLVER FILTERED audio language: 12 → 10 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt26443597 (movie)
+✅ Found 2 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Zootopia.2.2025.1080p.TELESYNC.HEVC-UltraPirate [EN] (score: 10)
+   [2] Zootopia 2 2025 1080p TS EN-RGB [EN] (score: 0)
+✅ StreamResolver: Attached best sub for 'Zootopia 2 2025 1080p EN
+dat/v...': Zootopia.2.2025.1080p.TELESYNC...
+✅ StreamResolver: Attached best sub for 'Zwierzogród 2 - (2025) Napisy_...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia 2 2025 1080p TS EN-RG...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia 2 2025 1080p HDTS V2 ...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia 2 2025 1080p TS x264-...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia.2.2025.1080p.TELESYNC...': Zootopia.2.2025.1080p.TELESYNC...
+✅ StreamResolver: Attached best sub for 'Zootopia 2 [2025] 1080p HDCAM ...': Zootopia.2.2025.1080p.TELESYNC...
+✅ StreamResolver: Attached best sub for 'Zootopia 2 2025 1080p TS x264-...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia.2.2025.1080p.HDTS.X26...': Zootopia 2 2025 1080p TS EN-RG...
+✅ StreamResolver: Attached best sub for 'Zootopia.2.2025.1080p.CAMRip.L...': Zootopia.2.2025.1080p.TELESYNC...
+   --- Processing Bucket: 2160p (Input: 0) ---
+   ✅ Bucket 2160p Final Count: 0
+   --- Processing Bucket: 1080p (Input: 9) ---
+   🚫 RESOLVER DROP (1080p): Bad Pattern (TS): Zootopia 2 2025 1080p TS EN-RGB
+👤 1888 💾 4.56 GB ⚙️ ThePirateBay
+   🚫 RESOLVER DROP (1080p): Bad Pattern (TS): Zootopia 2 2025 1080p TS x264-RGB
+👤 102 💾 4.56 GB ⚙️ ThePirateBay
+   🚫 RESOLVER DROP (1080p): Bad Pattern: Zootopia.2.2025.1080p.TELESYNC.x264-SyncUP
+👤 93 💾 6.57 GB ⚙️ ThePirateBay
+   🚫 RESOLVER DROP (1080p): Bad Pattern: Zootopia 2 [2025] 1080p HDCAM x264 AC3 (UKB)
+👤 92 💾 2.2 GB ⚙️ 1337x
+   🚫 RESOLVER DROP (1080p): Bad Pattern (TS): Zootopia 2 2025 1080p TS x264-LOL
+👤 28 💾 1.48 GB ⚙️ ThePirateBay
+   ✅ Bucket 1080p Final Count: 4
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 1) ---
+   ✅ Bucket 480p Final Count: 1
+📦 1080p Primary: Zootopia 2 2025 1080p EN
+dat/video.mkv
+👤 198 💾 232 MB ⚙️ ThePirateBay
+✅ StreamResolver: Quality buckets ready
+[2025-12-16T20:56:33Z] [INFO] [StreamService.swift:163] 📦 StreamService: Found 4 total streams to try (across all qualities)
+✅ StreamService: Found 3 H.264 streams (Tier 1)
+✅ StreamService: Found 2 'Clean' English streams. Deprioritizing 1 localized/dual streams.
+⚠️ StreamService: Skipping tiny file (Possible fake/sample): Zootopia 2 2025 1080p EN
+dat/video.mkv
+👤 198 💾 232 MB ⚙️ ThePirateBay (232 MB < 600 MB)
+📦 StreamService: 1 streams remain after size filter
+🔄 StreamService: Trying stream 1/1: Zootopia.2.2025.1080p.CAMRip.LAT.SUB.1XBET.mp4
+👤 1 💾 1.96 GB ⚙️ Cinecalidad
+🇲🇽
+🔓 StreamService: Unlocking with infoHash: ed7b7aab7051...
+[ INFO ] POST /api/streams/unlock [request-id: 94011760-17F0-4A31-AABC-22490E19C493]
+2025-12-16 15:56:33.483 RedLemon[14211:139095] 🔓 Unlock request: infoHash=ed7b7aab7051..., fileIdx=0
+2025-12-16 15:56:33.483 RedLemon[14211:139095] ✅ Token found, attempting unlock...
+2025-12-16 15:56:36.643 RedLemon[14211:139095] ❌ RealDebrid: timeout - treating as not cached to try next stream
+✅ RD addMagnet: 7JRY5M2SDIAGK
+⚠️ Movie: No file matched title 'Zootopia 2', falling back to largest file
+⚠️ No video files found, using provided fileIdx: 1
+⏩ RD: Torrent status is 'magnet_error', skipping file selection (already active)
+📊 RD poll 1/2: status=magnet_error, links=0
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNmzr73uyGV4HM","phx_ref_prev":"GIHNmAjuqYaGVw5O","last_seen":"2025-12-16T20:56:35.366Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNmAjuqYaGVw5O","phx_ref_prev":"GIHNlpzSQUCGV3rQ","last_seen":"2025-12-16T20:56:21.640Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📊 RD poll 2/2: status=magnet_error, links=0
+[ WARNING ] Abort.502: RealDebrid timeout - trying next stream [request-id: 94011760-17F0-4A31-AABC-22490E19C493]
+2025-12-16 15:56:57.842 RedLemon[14211:139013] ✅ Metadata loaded successfully
+2025-12-16 15:56:57.842 RedLemon[14211:139013]    Type: movie
+2025-12-16 15:56:57.842 RedLemon[14211:139013]    Background URL: https://images.metahub.space/background/medium/tt26443597/img
+2025-12-16 15:56:57.842 RedLemon[14211:139013]    Poster URL: https://images.metahub.space/poster/small/tt26443597/img
+2025-12-16 15:56:57.842 RedLemon[14211:139013]    Videos array: 0 episodes
+[2025-12-16T20:56:36Z] [ERROR] [StreamService.swift:374] 🚨 StreamService: [Server Fail] Unlock failed for Zootopia.2.2025.1080p.CAMRip.LAT.SUB.1XBET.mp4
+👤 1 💾 1.96 GB ⚙️ Cinecalidad
+🇲🇽: Network error: HTTP 502: {"error":true,"reason":"RealDebrid timeout - trying next stream"} | Error: Network error: HTTP 502: {"error":true,"reason":"RealDebrid timeout - trying next stream"}
+❌ Playback error: networkError(Error Domain=UnlockError Code=502 "HTTP 502: {"error":true,"reason":"RealDebrid timeout - trying next stream"}" UserInfo={NSLocalizedDescription=HTTP 502: {"error":true,"reason":"RealDebrid timeout - trying next stream"}})
+❌ Supabase error (400): {"code":"PGRST204","details":null,"hint":null,"message":"Could not find the 'metadata' column of 'app_logs' in the schema cache"}
+❌ LogManager: Failed to upload error log: httpError(400, "{\"code\":\"PGRST204\",\"details\":null,\"hint\":null,\"message\":\"Could not find the \'metadata\' column of \'app_logs\' in the schema cache\"}")
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNnExUmlWa24dN","phx_ref_prev":"GIHNl6QeGZ-a2_cC","last_seen":"2025-12-16T20:56:39.913Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNl6QeGZ-a2_cC","phx_ref_prev":"GIHNkv1s9gWa22pI","last_seen":"2025-12-16T20:56:19.912Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNn-LSYUyGV4DD","phx_ref_prev":"GIHNmzr73uyGV4HM","last_seen":"2025-12-16T20:56:55.367Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a96d6a72-dac1-11f0-9f06-0a58a9feac02":{"metas":[{"phx_ref":"GIHNmzr73uyGV4HM","phx_ref_prev":"GIHNmAjuqYaGVw5O","last_seen":"2025-12-16T20:56:35.366Z","status":"Browsing Library","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+🔍 Loading metadata for: Zootopia 2 (type: movie, id: tt26443597)
+✅ Cache HIT: Metadata[meta_movie_tt26443597]
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNoPdk24ea2-7J","phx_ref_prev":"GIHNnExUmlWa24dN","last_seen":"2025-12-16T20:56:59.913Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"1118334c-dac1-11f0-99ea-0a58a9feac02":{"metas":[{"phx_ref":"GIHNnExUmlWa24dN","phx_ref_prev":"GIHNl6QeGZ-a2_cC","last_seen":"2025-12-16T20:56:39.913Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}

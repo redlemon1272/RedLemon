@@ -176,15 +176,15 @@ struct VerifiedStreamsView: View {
                 verifiedStreams = verifiedStreams.map { stream in
                     if stream.imdbId == imdbId {
                         return SupabaseClient.VerifiedStream(
+                            hash: stream.hash,
                             imdbId: stream.imdbId,
+                            quality: stream.quality,
                             season: stream.season,
                             episode: stream.episode,
-                            quality: stream.quality,
-                            hash: stream.hash, // Correct property name check needed
                             magnetLink: stream.magnetLink,
+                            movieTitle: title, // set title
                             voteCount: stream.voteCount,
-                            lastVerifiedAt: stream.lastVerifiedAt,
-                            movieTitle: title // set title
+                            lastVerifiedAt: stream.lastVerifiedAt
                         )
                     } else {
                         return stream

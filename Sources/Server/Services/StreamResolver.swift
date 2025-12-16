@@ -39,16 +39,12 @@ actor StreamResolver {
              verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: imdbId, quality: "1080p")
         }
         
-        if let verified = verifiedStream, let hash = verified.streamHash as String?, !hash.isEmpty {
+        if let verified = verifiedStream, let hash = verified.hash as String?, !hash.isEmpty {
             
             // Check Guardrail: Soft Decay
             let isStale: Bool
-            if let lastVerified = verified.lastVerifiedAt {
-                let daysSince = Date().timeIntervalSince(lastVerified) / 86400
-                isStale = daysSince > 30
-            } else {
-                isStale = false
-            }
+            let daysSince = Date().timeIntervalSince(verified.lastVerifiedAt) / 86400
+            isStale = daysSince > 30
             
             if isStale {
                 print("⚠️ StreamResolver: Verified stream is STALE (>30 days). Will verify cache status strictly.")
@@ -64,7 +60,7 @@ actor StreamResolver {
                 seeders: 9999, 
                 size: "0 GB", // Unknown, but trusted
                 provider: "verified", 
-                infoHash: verified.streamHash
+                infoHash: verified.hash
             )
             
             // Check cache status quickly via RealDebrid (unlock) or just return it if we are confident?

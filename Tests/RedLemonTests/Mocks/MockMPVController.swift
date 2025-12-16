@@ -100,4 +100,8 @@ class MockMPVController: MPVController {
     func setSubtitleOffset(_ offsetMs: Double) {
         setSubtitleOffsetCalls.append(offsetMs)
     }
+    
+    func refreshSubtitleSelection() {
+        // No-op for mock
+    }
 }

@@ -74,6 +74,7 @@ struct MPVPlayerView: View {
     @State private var showSubtitleMenu = false
     @State private var showPlaylistMenu = false
     @State private var showEventListMenu = false
+    @State private var showReportSheet = false
     @State private var volume: Double = 1.0
     @State private var subtitleMenuExpanded = false
 

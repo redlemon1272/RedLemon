@@ -802,23 +802,46 @@ class SupabaseClient: RoomManager, UserManager {
     
     // MARK: - Verified Streams (Community Caching)
     
-    struct VerifiedStream: Decodable {
-         let imdbId: String
-         let quality: String
-         let streamHash: String
-         let magnetLink: String?
-         let voteCount: Int
-         let lastVerifiedAt: Date?
-        
-         enum CodingKeys: String, CodingKey {
-             case imdbId = "imdb_id"
-             case quality
-             case streamHash = "stream_hash"
-             case magnetLink = "magnet_link"
-             case voteCount = "vote_count"
-             case lastVerifiedAt = "last_verified_at"
-         }
+    struct VerifiedStream: Identifiable, Codable {
+    let hash: String
+    let imdbId: String
+    let quality: String
+    let magnetLink: String?
+    let movieTitle: String? // Optional as it might not be joined yet
+    let voteCount: Int
+    let lastVerifiedAt: Date
+    
+    // Custom coding keys to match DB Snake Case
+    enum CodingKeys: String, CodingKey {
+        case hash = "stream_hash"
+        case imdbId = "imdb_id"
+        case quality
+        case magnetLink = "magnet_link"
+        case movieTitle = "movie_title"
+        case voteCount = "vote_count"
+        case lastVerifiedAt = "last_verified_at"
     }
+    
+    var id: String { hash }
+}
+
+struct ReportedStream: Identifiable, Codable {
+    let id: UUID
+    let imdbId: String
+    let quality: String
+    let streamHash: String
+    let reason: String
+    let createdAt: Date
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case imdbId = "imdb_id"
+        case quality
+        case streamHash = "stream_hash"
+        case reason
+        case createdAt = "created_at"
+    }
+}
     
     /// Get a strict verified stream for instant playback
     func getVerifiedStream(imdbId: String, quality: String) async throws -> VerifiedStream? {
@@ -847,6 +870,52 @@ class SupabaseClient: RoomManager, UserManager {
             ]
         )
         return try jsonDecoder.decode([VerifiedStream].self, from: data)
+    }
+
+    /// Report a bad stream (Community)
+    func reportStream(imdbId: String, quality: String, streamHash: String, reason: String) async {
+        do {
+            let body: [String: Any] = [
+                "imdb_id": imdbId,
+                "quality": quality,
+                "stream_hash": streamHash,
+                "reason": reason
+            ]
+            
+            _ = try await makeRequest(
+                path: "/reported_streams",
+                method: "POST",
+                body: body
+            )
+            print("🚨 Reported stream: \(streamHash) Reason: \(reason)")
+        } catch {
+            print("Failed to report stream: \(error)")
+        }
+    }
+    
+    /// Get all reported streams (Admin)
+    func getReportedStreams(limit: Int = 50) async throws -> [ReportedStream] {
+        let data = try await makeRequest(
+            path: "/reported_streams",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": String(limit)
+            ]
+        )
+        return try jsonDecoder.decode([ReportedStream].self, from: data)
+    }
+    
+    /// Delete a reported stream entry (Admin)
+    func deleteReportedStream(id: String) async throws {
+        _ = try await makeRequest(
+            path: "/reported_streams",
+            method: "DELETE",
+            query: [
+                "id": "eq.\(id)"
+            ]
+        )
+        print("🗑️ Deleted reported stream entry: \(id)")
     }
     
     /// Delete a verified stream (Admin) - Unlocks the stream for normal resolver
@@ -895,7 +964,7 @@ class SupabaseClient: RoomManager, UserManager {
             // If the user successfully watched THIS hash, we should promote THIS hash.
             
             if let existing = existing {
-                if existing.streamHash == streamHash {
+                if existing.hash == streamHash {
                     // Same hash -> Increment vote
                     body["vote_count"] = existing.voteCount + 1
                 } else {

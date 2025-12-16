@@ -36,7 +36,10 @@ actor StreamResolver {
         
         var verifiedStream: SupabaseClient.VerifiedStream?
         if !ignoreVerified {
-             verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: imdbId, quality: "1080p")
+             // Pass season/episode (defaulting to -1 if nil, to match DB default)
+             let s = season ?? -1
+             let e = episode ?? -1
+             verifiedStream = try? await SupabaseClient.shared.getVerifiedStream(imdbId: imdbId, season: s, episode: e, quality: "1080p")
         }
         
         if let verified = verifiedStream, let hash = verified.hash as String?, !hash.isEmpty {

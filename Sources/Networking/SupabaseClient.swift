@@ -803,27 +803,31 @@ class SupabaseClient: RoomManager, UserManager {
     // MARK: - Verified Streams (Community Caching)
     
     struct VerifiedStream: Identifiable, Codable {
-    let hash: String
-    let imdbId: String
-    let quality: String
-    let magnetLink: String?
-    let movieTitle: String? // Optional as it might not be joined yet
-    let voteCount: Int
-    let lastVerifiedAt: Date
-    
-    // Custom coding keys to match DB Snake Case
-    enum CodingKeys: String, CodingKey {
-        case hash = "stream_hash"
-        case imdbId = "imdb_id"
-        case quality
-        case magnetLink = "magnet_link"
-        case movieTitle = "movie_title"
-        case voteCount = "vote_count"
-        case lastVerifiedAt = "last_verified_at"
+        let hash: String
+        let imdbId: String
+        let quality: String
+        let season: Int
+        let episode: Int
+        let magnetLink: String?
+        let movieTitle: String? // Optional as it might not be joined yet
+        let voteCount: Int
+        let lastVerifiedAt: Date
+        
+        // Custom coding keys to match DB Snake Case
+        enum CodingKeys: String, CodingKey {
+            case hash = "stream_hash"
+            case imdbId = "imdb_id"
+            case quality
+            case season
+            case episode
+            case magnetLink = "magnet_link"
+            case movieTitle = "movie_title"
+            case voteCount = "vote_count"
+            case lastVerifiedAt = "last_verified_at"
+        }
+        
+        var id: String { hash }
     }
-    
-    var id: String { hash }
-}
 
 struct ReportedStream: Identifiable, Codable {
     let id: UUID
@@ -844,11 +848,13 @@ struct ReportedStream: Identifiable, Codable {
 }
     
     /// Get a strict verified stream for instant playback
-    func getVerifiedStream(imdbId: String, quality: String) async throws -> VerifiedStream? {
+    func getVerifiedStream(imdbId: String, season: Int = -1, episode: Int = -1, quality: String) async throws -> VerifiedStream? {
         let data = try await makeRequest(
             path: "/verified_streams",
             query: [
                 "imdb_id": "eq.\(imdbId)",
+                "season": "eq.\(season)",
+                "episode": "eq.\(episode)",
                 "quality": "eq.\(quality)",
                 "order": "vote_count.desc", // Get highest voted if duplicates exist (shouldn't due to PK)
                 "limit": "1"
@@ -931,24 +937,18 @@ struct ReportedStream: Identifiable, Codable {
     }
     
     /// Vote for a successful stream (Upsert logic via RPC or Client)
-    func voteStreamSuccess(imdbId: String, quality: String, streamHash: String, magnetLink: String? = nil) async {
+    func voteStreamSuccess(imdbId: String, season: Int = -1, episode: Int = -1, quality: String, streamHash: String, magnetLink: String? = nil) async {
         // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 
         // OR standard upsert if we want to keep it simple client-side for V1.
-        // Let's use a standard Upsert with On Conflict for now.
-        // NOTE: Standard upsert replaces the row. To increment, we ideally need a function.
-        // For V1, let's just Upsert. It resets the vote count if we aren't careful?
-        // Actually, simplest V1: Just insert. If it exists, we update 'last_verified_at'.
-        // We can't easily do "vote_count = vote_count + 1" via standard REST upsert without fetching first.
-        
-        // Strategy: Fetch first, then Update or Insert.
-        // This is not atomic but fine for this scale.
         
         do {
-            // 1. Check if exists
-            let existing = try await getVerifiedStream(imdbId: imdbId, quality: quality)
+            // 1. Check if exists (Using new season/episode aware lookup)
+            let existing = try await getVerifiedStream(imdbId: imdbId, season: season, episode: episode, quality: quality)
             
             var body: [String: Any] = [
                 "imdb_id": imdbId,
+                "season": season,
+                "episode": episode,
                 "quality": quality,
                 "stream_hash": streamHash,
                 "last_verified_at": ISO8601DateFormatter().string(from: Date())
@@ -960,9 +960,6 @@ struct ReportedStream: Identifiable, Codable {
             
             // 2. Logic: If exists AND hash matches, increment vote.
             // If exists AND hash differs, only overwrite if new vote count > old vote count? 
-            // OR simpler: Just overwrite if "Success" is reported? 
-            // If the user successfully watched THIS hash, we should promote THIS hash.
-            
             if let existing = existing {
                 if existing.hash == streamHash {
                     // Same hash -> Increment vote
@@ -970,7 +967,6 @@ struct ReportedStream: Identifiable, Codable {
                 } else {
                     // Different hash -> Conflict.
                     // For now, let's NOT overwrite if the existing one is popular (e.g. votes > 5)
-                    // unless our new one is somehow "better"? No, just keep the incumbent.
                     if existing.voteCount > 5 {
                         print("⚠️ Verified Stream: Keeping incumbent hash (Votes: \(existing.voteCount)) vs new candidate.")
                         return 
@@ -989,7 +985,7 @@ struct ReportedStream: Identifiable, Codable {
                 body: body,
                 headers: ["Prefer": "resolution=merge-duplicates"]
             )
-            print("✅ Verified Stream: Voted for \(imdbId) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
+            print("✅ Verified Stream: Voted for \(imdbId) S\(season)E\(episode) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
             
         } catch {
             print("❌ Failed to vote for stream: \(error)")

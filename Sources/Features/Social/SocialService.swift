@@ -20,7 +20,7 @@ class SocialService: ObservableObject {
     // MARK: - Internal
     private let client = SupabaseClient.shared
     private var presenceClient: SupabaseRealtimeClient?
-    private var userPresenceRefs: [String: Set<String>] = [:] // Track active tabs/connections per user
+    private var userPresenceRefs: [String: [String: [String: Any]]] = [:] // Key: UserID -> [Ref: Metadata]
     private var dmClient: SupabaseRealtimeClient?
     private var currentUserId: String?
     private var currentUsername: String?
@@ -138,45 +138,16 @@ class SocialService: ObservableObject {
     private func handlePresenceJoin(userId: String, metadata: [String: Any]?) {
         let normalizedUserId = userId.lowercased()
         
-        // 1. Track specific connection ref
-        if let phxRef = metadata?["phx_ref"] as? String {
+        // 1. Track specific connection ref with its metadata
+        if let phxRef = metadata?["phx_ref"] as? String, let meta = metadata {
             if userPresenceRefs[normalizedUserId] == nil {
-                userPresenceRefs[normalizedUserId] = []
+                userPresenceRefs[normalizedUserId] = [:]
             }
-            userPresenceRefs[normalizedUserId]?.insert(phxRef)
+            userPresenceRefs[normalizedUserId]?[phxRef] = meta
         }
         
-        // 2. Mark online
-        onlineUserIds.insert(normalizedUserId)
-        
-        // 3. Update Activity
-        var activity = FriendActivity(
-            id: normalizedUserId,
-            username: metadata?["username"] as? String ?? "Unknown",
-            currentlyWatching: nil,
-            lastSeen: Date(),
-            customStatus: nil
-        )
-        
-        // Parse metadata
-        if let metadata = metadata {
-            // Check for specific watching status
-            if let mediaTitle = metadata["watching_title"] as? String {
-                 activity.currentlyWatching = FriendActivity.WatchingInfo(
-                    mediaTitle: mediaTitle,
-                    mediaType: metadata["watching_type"] as? String ?? "movie",
-                    imdbId: metadata["watching_id"] as? String ?? "",
-                    startedAt: Date(), // Simplistic
-                    roomId: metadata["room_id"] as? String
-                )
-            }
-            // Check for custom status
-            if let status = metadata["status"] as? String {
-                activity.customStatus = status
-            }
-        }
-        
-        friendActivity[normalizedUserId] = activity
+        // 2. Recalculate best state based on most recent timestamp
+        recalculateUserActivity(userId: normalizedUserId)
     }
     
     private func handlePresenceLeave(userId: String, metadata: [String: Any]?) {
@@ -184,18 +155,60 @@ class SocialService: ObservableObject {
         
         // 1. Remove specific connection ref
         if let phxRef = metadata?["phx_ref"] as? String {
-            userPresenceRefs[normalizedUserId]?.remove(phxRef)
+            userPresenceRefs[normalizedUserId]?.removeValue(forKey: phxRef)
         }
         
-        // 2. Only mark offline if NO active refs remain
-        if let refs = userPresenceRefs[normalizedUserId], !refs.isEmpty {
-            // User still has other active connections (e.g. just switched metadata/tabs)
+        // 2. Recalculate or mark offline
+        recalculateUserActivity(userId: normalizedUserId)
+    }
+    
+    private func recalculateUserActivity(userId: String) {
+        let normalizedUserId = userId.lowercased()
+        guard let refs = userPresenceRefs[normalizedUserId], !refs.isEmpty else {
+            // No active refs -> User is Offline
+            onlineUserIds.remove(normalizedUserId)
+            friendActivity.removeValue(forKey: normalizedUserId)
             return
         }
         
-        // 3. Actually Offline
-        onlineUserIds.remove(normalizedUserId)
-        friendActivity.removeValue(forKey: normalizedUserId)
+        // User is Online -> Find the most recent session
+        onlineUserIds.insert(normalizedUserId)
+        
+        // Sort refs by 'last_seen' or 'started_at' to find the newest
+        let sortedRefs = refs.values.sorted { (m1, m2) -> Bool in
+            let date1 = ISO8601DateFormatter().date(from: m1["last_seen"] as? String ?? "") ?? Date.distantPast
+            let date2 = ISO8601DateFormatter().date(from: m2["last_seen"] as? String ?? "") ?? Date.distantPast
+            return date1 < date2 // Ascending order, last is newest
+        }
+        
+        guard let newestMetadata = sortedRefs.last else { return } // Should not happen if refs is not empty
+        
+        // Create activity from the newest metadata
+        var activity = FriendActivity(
+            id: normalizedUserId,
+            username: newestMetadata["username"] as? String ?? "Unknown",
+            currentlyWatching: nil,
+            lastSeen: Date(),
+            customStatus: nil
+        )
+        
+        // Parse metadata
+        // Check for specific watching status
+        if let mediaTitle = newestMetadata["watching_title"] as? String {
+             activity.currentlyWatching = FriendActivity.WatchingInfo(
+                mediaTitle: mediaTitle,
+                mediaType: newestMetadata["watching_type"] as? String ?? "movie",
+                imdbId: newestMetadata["watching_id"] as? String ?? "",
+                startedAt: Date(), // Simplistic
+                roomId: newestMetadata["room_id"] as? String
+            )
+        }
+        // Check for custom status
+        if let status = newestMetadata["status"] as? String {
+            activity.customStatus = status
+        }
+        
+        friendActivity[normalizedUserId] = activity
     }
     
     // MARK: - Data Loading (Friends)

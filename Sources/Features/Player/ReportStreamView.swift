@@ -11,6 +11,7 @@ struct ReportStreamView: View {
     let imdbId: String
     let quality: String
     let streamHash: String
+    let movieTitle: String? // Added to capture title for admin visibility
     let onDismiss: () -> Void
     
     @State private var selectedReason: String?
@@ -132,7 +133,8 @@ struct ReportStreamView: View {
                 imdbId: imdbId,
                 quality: quality,
                 streamHash: streamHash,
-                reason: finalReason
+                reason: finalReason,
+                movieTitle: movieTitle
             )
             withAnimation {
                 showSuccess = true

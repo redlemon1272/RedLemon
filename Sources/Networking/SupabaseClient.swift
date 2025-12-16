@@ -836,6 +836,7 @@ struct ReportedStream: Identifiable, Codable {
     let streamHash: String
     let reason: String
     let createdAt: Date
+    let movieTitle: String? // Added for better display
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -844,6 +845,7 @@ struct ReportedStream: Identifiable, Codable {
         case streamHash = "stream_hash"
         case reason
         case createdAt = "created_at"
+        case movieTitle = "movie_title"
     }
 }
     
@@ -878,15 +880,36 @@ struct ReportedStream: Identifiable, Codable {
         return try jsonDecoder.decode([VerifiedStream].self, from: data)
     }
 
-    /// Report a bad stream (Community)
-    func reportStream(imdbId: String, quality: String, streamHash: String, reason: String) async {
+    /// Update title for an existing reported stream (Legacy migration)
+    func updateReportedStreamTitle(id: UUID, title: String) async {
         do {
-            let body: [String: Any] = [
+            _ = try await makeRequest(
+                path: "/reported_streams",
+                method: "PATCH",
+                body: ["movie_title": title],
+                query: [
+                    "id": "eq.\(id.uuidString)"
+                ]
+            )
+            print("Title updated for report \(id.uuidString)")
+        } catch {
+            print("Failed to update report title: \(error)")
+        }
+    }
+    
+    /// Report a bad stream (Community)
+    func reportStream(imdbId: String, quality: String, streamHash: String, reason: String, movieTitle: String? = nil) async {
+        do {
+            var body: [String: Any] = [
                 "imdb_id": imdbId,
                 "quality": quality,
                 "stream_hash": streamHash,
                 "reason": reason
             ]
+            
+            if let title = movieTitle {
+                body["movie_title"] = title
+            }
             
             _ = try await makeRequest(
                 path: "/reported_streams",

@@ -85,6 +85,8 @@ struct VerifiedStreamsView: View {
                 
             case "reported":
                  reportedStreams = try await SupabaseClient.shared.getReportedStreams()
+                 // Trigger title resolution for legacy reports
+                 Task { await resolveMissingReportedTitles() }
                 
             case "feedback":
                 feedbackReports = try await SupabaseClient.shared.getFeedback()
@@ -207,6 +209,43 @@ struct VerifiedStreamsView: View {
         try? await loadData()
     }
     
+    private func resolveMissingReportedTitles() async {
+        // Find streams with missing titles
+        let missing = reportedStreams.filter { $0.movieTitle == nil }
+        guard !missing.isEmpty else { return }
+        
+        print("🔍 Found \(missing.count) reported streams with missing titles. Resolving...")
+        
+        // Group by IMDB ID to avoid duplicate lookups
+        let uniqueImdbIds = Set(missing.map { $0.imdbId })
+        
+        for imdbId in uniqueImdbIds {
+            do {
+                // Try fetching as movie first
+                let details = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: imdbId, type: "movie")
+                let title = details.name
+                
+                print("✅ Resolved Report \(imdbId) -> \(title)")
+                
+                // Update Local State (Optional optimization, but Reload handles it)
+                
+                // Persist to DB
+                // We need to update specific entries. Since we don't know the ID easily without iterating,
+                // we'll iterate through the missing list
+                let reportsToUpdate = missing.filter { $0.imdbId == imdbId }
+                for report in reportsToUpdate {
+                    await SupabaseClient.shared.updateReportedStreamTitle(id: report.id, title: title)
+                }
+                
+            } catch {
+                print("⚠️ Failed to resolve title for report \(imdbId): \(error)")
+            }
+        }
+        
+        // Reload to show new titles
+        try? await loadData()
+    }
+    
     private var reportedList: some View {
         List {
             ForEach(reportedStreams) { report in
@@ -260,16 +299,38 @@ struct ReportedStreamRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text(report.reason.capitalized)
+                Text(report.movieTitle ?? "IMDB: \(report.imdbId)")
                     .font(.headline)
-                    .foregroundColor(.red)
+                    .foregroundColor(report.movieTitle == nil ? .primary : .primary)
+                
+                if let _ = report.movieTitle {
+                    Text(report.imdbId)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
                 Spacer()
                 Text(report.createdAt, style: .date)
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-            Text("IMDB: \(report.imdbId) | Hash: \(String(report.streamHash.prefix(8)))")
-                .font(.caption.monospaced())
+            
+            HStack {
+                Text(report.reason.capitalized)
+                    .font(.caption.bold())
+                    .foregroundColor(.red)
+                
+                Text("|")
+                    .foregroundColor(.secondary)
+                
+                Text(report.quality)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            
+            Text("Hash: \(String(report.streamHash.prefix(8)))")
+                .font(.caption2.monospaced())
+                .foregroundColor(.secondary)
             
 
         }

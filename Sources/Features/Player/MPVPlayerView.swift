@@ -955,6 +955,7 @@ struct MPVPlayerView: View {
                          imdbId: imdbId,
                          quality: streamQuality,
                          streamHash: streamHash ?? "",
+                         movieTitle: streamTitle, // Pass title for admin visibility
                          onDismiss: {
                              withAnimation(.easeInOut(duration: 0.15)) {
                                  showReportSheet = false

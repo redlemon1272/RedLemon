@@ -753,12 +753,17 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Fetch recent logs for Admin Dashboard
     func getAppLogs(limit: Int = 50) async throws -> [AppLog] {
+        // USE SERVICE KEY to bypass RLS (admin needs to see ALL logs)
         let data = try await makeRequest(
             path: "/app_logs",
             query: [
                 "select": "*",
                 "order": "created_at.desc",
                 "limit": String(limit)
+            ],
+            headers: [
+                "Authorization": "Bearer \(Config.supabaseServiceKey)",
+                "apikey": Config.supabaseServiceKey
             ]
         )
         return try jsonDecoder.decode([AppLog].self, from: data)
@@ -767,10 +772,15 @@ class SupabaseClient: RoomManager, UserManager {
     /// Delete an app log (Admin)
     func deleteAppLog(id: UUID) async {
         do {
+            // USE SERVICE KEY to bypass RLS (admin needs to delete ANY log)
             _ = try await makeRequest(
                 path: "/app_logs",
                 method: "DELETE",
-                query: ["id": "eq.\(id.uuidString)"]
+                query: ["id": "eq.\(id.uuidString)"],
+                headers: [
+                    "Authorization": "Bearer \(Config.supabaseServiceKey)",
+                    "apikey": Config.supabaseServiceKey
+                ]
             )
             print("🗑️ Deleted app log: \(id)")
         } catch {

@@ -161,7 +161,6 @@ struct VerifiedStreamsView: View {
         print("🔍 Found \(missing.count) streams with missing titles. Resolving...")
         
         let uniqueImdbIds = Set(missing.map { $0.imdbId })
-        var updateOccurred = false
         
         for imdbId in uniqueImdbIds {
             do {
@@ -173,17 +172,34 @@ struct VerifiedStreamsView: View {
                 
                 print("✅ Resolved \(imdbId) -> \(title)")
                 
-                await SupabaseClient.shared.updateVerifiedStreamTitle(imdbId: imdbId, title: title)
-                updateOccurred = true
+                // 1. Optimistic Update (Update UI Immediately)
+                verifiedStreams = verifiedStreams.map { stream in
+                    if stream.imdbId == imdbId {
+                        return SupabaseClient.VerifiedStream(
+                            imdbId: stream.imdbId,
+                            season: stream.season,
+                            episode: stream.episode,
+                            quality: stream.quality,
+                            hash: stream.hash, // Correct property name check needed
+                            magnetLink: stream.magnetLink,
+                            voteCount: stream.voteCount,
+                            lastVerifiedAt: stream.lastVerifiedAt,
+                            movieTitle: title // set title
+                        )
+                    } else {
+                        return stream
+                    }
+                }
+                
+                // 2. Persist to DB (Fire and forget)
+                Task {
+                    await SupabaseClient.shared.updateVerifiedStreamTitle(imdbId: imdbId, title: title)
+                }
                 
             } catch {
                 print("⚠️ Failed to resolve title for \(imdbId): \(error)")
                 failedResolutionIds.insert(imdbId)
             }
-        }
-        
-        if updateOccurred {
-            try? await loadData()
         }
     }
     
@@ -195,31 +211,45 @@ struct VerifiedStreamsView: View {
         print("🔍 Found \(missing.count) reported streams with missing titles. Resolving...")
         
         let uniqueImdbIds = Set(missing.map { $0.imdbId })
-        var updateOccurred = false
         
         for imdbId in uniqueImdbIds {
             do {
+                // Try fetching as movie first
                 let details = try await LocalAPIClient.shared.fetchMediaDetails(imdbId: imdbId, type: "movie")
                 let title = details.name
                 
                 print("✅ Resolved Report \(imdbId) -> \(title)")
                 
-                // Persist to DB
-                let reportsToUpdate = missing.filter { $0.imdbId == imdbId }
-                for report in reportsToUpdate {
-                    await SupabaseClient.shared.updateReportedStreamTitle(id: report.id, title: title)
+                // 1. Optimistic Update (Update UI Immediately)
+                reportedStreams = reportedStreams.map { report in
+                    if report.imdbId == imdbId {
+                        return SupabaseClient.ReportedStream(
+                            id: report.id,
+                            imdbId: report.imdbId,
+                            quality: report.quality,
+                            streamHash: report.streamHash,
+                            reason: report.reason,
+                            createdAt: report.createdAt,
+                            movieTitle: title // set title
+                        )
+                    } else {
+                        return report
+                    }
                 }
-                updateOccurred = true
+                
+                // 2. Persist to DB
+                // We need to update specific entries
+                let reportsToUpdate = missing.filter { $0.imdbId == imdbId }
+                Task {
+                    for report in reportsToUpdate {
+                        await SupabaseClient.shared.updateReportedStreamTitle(id: report.id, title: title)
+                    }
+                }
                 
             } catch {
                 print("⚠️ Failed to resolve title for report \(imdbId): \(error)")
                 failedResolutionIds.insert(imdbId)
             }
-        }
-        
-        // Only reload if we actually changed something to prevent infinite loops
-        if updateOccurred {
-            try? await loadData()
         }
     }
     

@@ -800,6 +800,108 @@ class SupabaseClient: RoomManager, UserManager {
         return address
     }
     
+    // MARK: - Verified Streams (Community Caching)
+    
+    struct VerifiedStream: Decodable {
+         let imdbId: String
+         let quality: String
+         let streamHash: String
+         let magnetLink: String?
+         let voteCount: Int
+         let lastVerifiedAt: Date?
+        
+         enum CodingKeys: String, CodingKey {
+             case imdbId = "imdb_id"
+             case quality
+             case streamHash = "stream_hash"
+             case magnetLink = "magnet_link"
+             case voteCount = "vote_count"
+             case lastVerifiedAt = "last_verified_at"
+         }
+    }
+    
+    /// Get a strict verified stream for instant playback
+    func getVerifiedStream(imdbId: String, quality: String) async throws -> VerifiedStream? {
+        let data = try await makeRequest(
+            path: "/verified_streams",
+            query: [
+                "imdb_id": "eq.\(imdbId)",
+                "quality": "eq.\(quality)",
+                "order": "vote_count.desc", // Get highest voted if duplicates exist (shouldn't due to PK)
+                "limit": "1"
+            ]
+        )
+        
+        let streams = try jsonDecoder.decode([VerifiedStream].self, from: data)
+        return streams.first
+    }
+    
+    /// Vote for a successful stream (Upsert logic via RPC or Client)
+    func voteStreamSuccess(imdbId: String, quality: String, streamHash: String, magnetLink: String? = nil) async {
+        // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 
+        // OR standard upsert if we want to keep it simple client-side for V1.
+        // Let's use a standard Upsert with On Conflict for now.
+        // NOTE: Standard upsert replaces the row. To increment, we ideally need a function.
+        // For V1, let's just Upsert. It resets the vote count if we aren't careful?
+        // Actually, simplest V1: Just insert. If it exists, we update 'last_verified_at'.
+        // We can't easily do "vote_count = vote_count + 1" via standard REST upsert without fetching first.
+        
+        // Strategy: Fetch first, then Update or Insert.
+        // This is not atomic but fine for this scale.
+        
+        do {
+            // 1. Check if exists
+            let existing = try await getVerifiedStream(imdbId: imdbId, quality: quality)
+            
+            var body: [String: Any] = [
+                "imdb_id": imdbId,
+                "quality": quality,
+                "stream_hash": streamHash,
+                "last_verified_at": ISO8601DateFormatter().string(from: Date())
+            ]
+            
+            if let magnet = magnetLink {
+                body["magnet_link"] = magnet
+            }
+            
+            // 2. Logic: If exists AND hash matches, increment vote.
+            // If exists AND hash differs, only overwrite if new vote count > old vote count? 
+            // OR simpler: Just overwrite if "Success" is reported? 
+            // If the user successfully watched THIS hash, we should promote THIS hash.
+            
+            if let existing = existing {
+                if existing.streamHash == streamHash {
+                    // Same hash -> Increment vote
+                    body["vote_count"] = existing.voteCount + 1
+                } else {
+                    // Different hash -> Conflict.
+                    // For now, let's NOT overwrite if the existing one is popular (e.g. votes > 5)
+                    // unless our new one is somehow "better"? No, just keep the incumbent.
+                    if existing.voteCount > 5 {
+                        print("⚠️ Verified Stream: Keeping incumbent hash (Votes: \(existing.voteCount)) vs new candidate.")
+                        return 
+                    }
+                    // Else overwrite (incubment was weak)
+                    body["vote_count"] = 1
+                }
+            } else {
+                // New -> Vote = 1
+                body["vote_count"] = 1
+            }
+            
+            _ = try await makeRequest(
+                path: "/verified_streams",
+                method: "POST", // POST with Prefer: resolution=merge-duplicates is UPSERT
+                body: body,
+                headers: ["Prefer": "resolution=merge-duplicates"]
+            )
+            print("✅ Verified Stream: Voted for \(imdbId) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
+            
+        } catch {
+            print("❌ Failed to vote for stream: \(error)")
+        }
+    }
+    
     /// Check payment status
     func checkPaymentStatus() async throws -> Bool {
         let response = try await functions.invoke(

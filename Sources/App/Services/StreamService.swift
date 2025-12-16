@@ -52,13 +52,36 @@ actor StreamService: StreamResolving {
         // Step 3: Get Stream Bucket (Direct Resolver Call)
         NSLog("⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...")
 
-        let bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
+        var bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
             imdbId: item.id,
             type: item.type,
             season: finalSeason,
             episode: finalEpisode,
-            year: finalMetadata.year
+            year: finalMetadata.year,
+            ignoreVerified: false
         )
+
+        // Robustness Check: If we got a Verified Stream, test it immediately.
+        // If it works, return successfully. If it fails, force a full scrape.
+        if let primary = bucketsResponse.buckets.fullHD?.primary, primary.provider == "verified" {
+            print("⚡️ StreamService: Testing verified stream viability...")
+            do {
+                let unlocked = try await unlockStream(stream: primary, item: item, season: finalSeason, episode: finalEpisode)
+                print("✅ StreamService: Verified stream is VIABLE. Returning immediately.")
+                return StreamResolutionResult(stream: unlocked, metadata: finalMetadata)
+            } catch {
+                print("❌ StreamService: Verified stream FAILED to unlock. Falling back to full scrape.")
+                // Retry with verification ignored
+                bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
+                    imdbId: item.id,
+                    type: item.type,
+                    season: finalSeason,
+                    episode: finalEpisode,
+                    year: finalMetadata.year,
+                    ignoreVerified: true
+                )
+            }
+        }
 
         let buckets = bucketsResponse.buckets
         let rawBucket: QualityBucket?

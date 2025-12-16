@@ -85,9 +85,10 @@ struct MPVPlayerView: View {
     let streamQuality: String
     let sourceQuality: String
     let isSeries: Bool
+    let streamHash: String?
     var onPlaybackFinished: (() -> Void)? = nil
 
-    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "", isSeries: Bool = false, onPlaybackFinished: (() -> Void)? = nil) {
+    init(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], streamQuality: String = "", sourceQuality: String = "", isSeries: Bool = false, streamHash: String? = nil, onPlaybackFinished: (() -> Void)? = nil) {
         self.streamURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = streamTitle
@@ -95,6 +96,7 @@ struct MPVPlayerView: View {
         self.streamQuality = streamQuality
         self.sourceQuality = sourceQuality
         self.isSeries = isSeries
+        self.streamHash = streamHash
         self.onPlaybackFinished = onPlaybackFinished
         NSLog("🎬🎬🎬 MPVPlayerView INIT called - streamURL: %@, subtitles: %d", streamURL.prefix(60) as CVarArg, subtitles.count)
     }
@@ -336,7 +338,9 @@ struct MPVPlayerView: View {
                 streamTitle: streamTitle,
                 subtitles: subtitles,
                 isSeries: isSeries,
-                isEvent: appState.player.isEventPlayback
+                isEvent: appState.player.isEventPlayback,
+                streamHash: streamHash,
+                quality: streamQuality.isEmpty ? nil : streamQuality
             )
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")

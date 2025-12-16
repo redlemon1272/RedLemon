@@ -290,12 +290,22 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var availableAudioTracks: [AudioTrack] = []
     @Published var currentAudioTrack: AudioTrack?
 
+
     // MARK: - Post-Load Ready Gate
     @Published var showWaitingForGuests: Bool = false    // Presence Management
     @Published var connectedGuestIds: Set<String> = []
     @Published var readyGuestIds: Set<String> = []
     private var pendingLeaveTasks: [String: Task<Void, Never>] = [:] // Debounce map for leaving guests
     private var hasSentReadySignal: Bool = false
+
+    // MARK: - Verified Stream Logic
+    private var currentStreamHash: String?
+    private var currentStreamQuality: String?
+    private var hasVotedForStream: Bool = false
+    
+    // Accumulator for ACTUAL playback time (to prevent seek abuse)
+    private var accumulatedPlaybackTime: TimeInterval = 0
+    private var lastAccumulatorUpdate: Date = Date()
 
     // MARK: - Phantom Sync & Snap-Seek State
     private var isSwitchingTracks: Bool = false
@@ -305,7 +315,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool) async {
+    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool, streamHash: String? = nil, quality: String? = nil) async {
         // For movies, strip any accidental episode markers in stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
             guard !isSeries else { return title }
@@ -325,10 +335,14 @@ class MPVPlayerViewModel: ObservableObject {
         print("🎬 Loading stream: \(cleanStreamTitle)")
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
+        if let h = streamHash { print("   Hash: \(h.prefix(8))...") }
 
         self.videoURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = cleanStreamTitle
+        self.currentStreamHash = streamHash
+        self.currentStreamQuality = quality
+        self.hasVotedForStream = false // Reset vote flag for new stream
 
         // Broadcast watching status
         Task {
@@ -573,7 +587,13 @@ class MPVPlayerViewModel: ObservableObject {
             // Then seek immediately after brief pause
             Task { @MainActor [weak self] in
                 try? await Task.sleep(nanoseconds: 200_000_000)
-                self?.attemptImmediateResume(resumeTime: resumeTime)
+                guard let self = self else { return }
+
+                // Reset accumulator for new session
+                self.accumulatedPlaybackTime = 0
+                self.lastAccumulatorUpdate = Date()
+
+                self.attemptImmediateResume(resumeTime: resumeTime)
             }
         } else if !isInWatchParty {
             // Only auto-play if NOT in watch party (Watch Party waits for Ready Gate)
@@ -2572,8 +2592,38 @@ extension MPVPlayerViewModel {
     }
 
     private func saveWatchHistory(force: Bool = false) {
-        guard currentTime > 0 && duration > 0 else { return }
-        appState?.player.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
+        guard !imdbId.isEmpty, currentTime > 0, duration > 0 else { return }
+        
+        let progress = currentTime / duration
+        
+        // Update accumulator if playing
+        if isPlaying && !isBuffering && !isSeeking {
+             let now = Date()
+             let timeSinceLast = now.timeIntervalSince(lastAccumulatorUpdate)
+             // Cap delta at 5 seconds to prevent huge jumps from backgrounding/suspension
+             if timeSinceLast < 5.0 {
+                 accumulatedPlaybackTime += timeSinceLast
+             }
+             lastAccumulatorUpdate = now
+        } else {
+             lastAccumulatorUpdate = Date()
+        }
+
+        // Trigger Vote: If actual playback > 20 mins (1200s) AND hasn't voted yet
+        if !hasVotedForStream && accumulatedPlaybackTime > 1200 {
+             if let hash = currentStreamHash, let quality = currentStreamQuality {
+                 print("✅ MPVPlayerViewModel: Triggering Community Vote for Verified Stream (Played > 20 mins)")
+                 Task {
+                     await SupabaseClient.shared.voteStreamSuccess(imdbId: imdbId, quality: quality, streamHash: hash)
+                 }
+                 hasVotedForStream = true
+             }
+        }
+
+        Task {
+            appState?.player.saveToWatchHistory(timestamp: currentTime, duration: duration, force: force)
+            // Calculate remaining time
+        }
     }
 
     func stopWatchHistorySaving() {

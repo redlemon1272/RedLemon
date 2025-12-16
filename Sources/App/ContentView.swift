@@ -334,6 +334,7 @@ struct PlayerLoadingView: View {
                     sourceQuality: stream.sourceQuality,
                     selectedSeason: appState.selectedSeason,
                     selectedEpisode: appState.selectedEpisode,
+                    streamHash: stream.infoHash, // Pass infoHash
                     onPlaybackFinished: {
                         Task {
                             await appState.player.handleMovieFinished()
@@ -371,6 +372,7 @@ struct StablePlayerContainer: View, Equatable {
     let sourceQuality: String
     let selectedSeason: Int?
     let selectedEpisode: Int?
+    let streamHash: String?
     var onPlaybackFinished: (() -> Void)? = nil
 
     var body: some View {
@@ -405,6 +407,7 @@ struct StablePlayerContainer: View, Equatable {
             streamQuality: quality,
             sourceQuality: sourceQuality,
             isSeries: metadata.type == "series",
+            streamHash: streamHash,
             onPlaybackFinished: onPlaybackFinished
         )
     }

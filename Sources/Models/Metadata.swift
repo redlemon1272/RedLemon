@@ -97,4 +97,45 @@ struct CinemetaSearchResult: Codable {
     let type: String
     let year: String?
     let poster: String?
+    let released: String?
+}
+
+struct MetadataUtils {
+    static func shouldHide(released: String?, bufferDays: Int = 14) -> Bool {
+        guard let released = released, !released.isEmpty else {
+            // If no release date, assume it's released/safe to show
+            return false
+        }
+
+        // Parse ISO 8601 date (e.g., "2025-12-12T00:00:00.000Z")
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        // Try with fractional seconds first
+        var date = formatter.date(from: released)
+        
+        // If failed, try without fractional seconds
+        if date == nil {
+            formatter.formatOptions = [.withInternetDateTime]
+            date = formatter.date(from: released)
+        }
+        
+        guard let releaseDate = date else {
+            // Failed to parse, safe default to show
+            return false
+        }
+        
+        // Calculate cutoff date: Today + buffer
+        let cutoffDate = Calendar.current.date(byAdding: .day, value: bufferDays, to: Date()) ?? Date()
+        
+        // If release date is AFTER cutoff date, HIDE it
+        // Example: Release = Dec 25, Now = Dec 1, Buffer = 14 -> Cutoff = Dec 15. Dec 25 > Dec 15 -> Hide.
+        // Example: Release = Dec 10, Now = Dec 1, Buffer = 14 -> Cutoff = Dec 15. Dec 10 < Dec 15 -> Show.
+        if releaseDate > cutoffDate {
+            print("🚫 Hiding unreleased item: Released \(released) (Cutoff: \(cutoffDate))")
+            return true
+        }
+        
+        return false
+    }
 }

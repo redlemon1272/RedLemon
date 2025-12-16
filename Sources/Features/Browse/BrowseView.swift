@@ -644,8 +644,10 @@ struct BrowseView: View {
             let (data, _) = try await URLSession.shared.data(from: url)
             let response = try JSONDecoder().decode(StremioMetaResponse.self, from: data)
 
-            let items = response.metas.prefix(limit).compactMap { meta in
-                MediaItem(
+            let items = response.metas.prefix(limit).compactMap { meta -> MediaItem? in
+                // Only include if it has a poster
+                guard meta.poster != nil else { return nil }
+                return MediaItem(
                     id: meta.id,
                     type: meta.type,
                     name: meta.name,
@@ -1518,6 +1520,7 @@ struct StremioMeta: Codable {
     let background: String?
     let logo: String?
     let releaseInfo: String?
+    let released: String?
     let imdbRating: String?
     let genre: [String]?
     let runtime: String?

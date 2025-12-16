@@ -538,8 +538,18 @@ func registerStreamRoutes(_ app: Application) {
             print("   🏷️  TITLE DEDUP: Removed \(removedByTitle) duplicate titles")
         }
 
-        // NOW sort final deduplicated streams by seeders
+        // NOW sort final deduplicated streams by seeders, BUT penalize CAM/TS heavily
         let sortedStreams = finalStreams.sorted { s1, s2 in
+            // Identify low quality sources
+            let s1LowQuality = isLowQuality(s1.title)
+            let s2LowQuality = isLowQuality(s2.title)
+            
+            // 1. If one is low quality and the other isn't, prefer the high quality one
+            if s1LowQuality != s2LowQuality {
+                return !s1LowQuality // If s1 is NOT low quality, it comes first
+            }
+            
+            // 2. Otherwise sort by seeders
             let seeders1 = s1.seeders ?? 0
             let seeders2 = s2.seeders ?? 0
             return seeders1 > seeders2
@@ -1811,8 +1821,19 @@ private func extractReleaseInfo(_ title: String) -> String {
     return info
 }
 
+// MARK: - Quality Helpers
+
+private func isLowQuality(_ title: String) -> Bool {
+    let regex = try? NSRegularExpression(pattern: "(CAM|HDCAM|TS|HDTS|TELESYNC|SCREENER)\\b", options: [.caseInsensitive])
+    let range = NSRange(location: 0, length: title.utf16.count)
+    return regex?.firstMatch(in: title, range: range) != nil
+}
+
 // Helper function to extract season and episode numbers from file path
-func extractSeasonEpisode(from pathLower: String) -> (season: Int, episode: Int)? {
+// Helper function to extract season and episode numbers from file path
+func extractSeasonEpisode(from filename: String) -> (season: Int, episode: Int)? {
+    let pathLower = filename.lowercased()
+    
     // Pattern 1: S##E## (case-insensitive)
     if let regex = try? NSRegularExpression(pattern: "s(\\d{1,2})e(\\d{1,2})", options: []) {
         let nsString = pathLower as NSString

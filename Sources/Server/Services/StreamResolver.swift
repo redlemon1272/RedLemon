@@ -536,30 +536,11 @@ actor StreamResolver {
         // Note: Removed x265/hevc from here to allow StreamService to decide
 
         // FIX: Use stricter matching for bad patterns to avoid frequent false positives
-        // e.g. "ts" matching "Nigh(ts)" or "iso" matching "Pr(iso)ner"
-        let badPatterns = ["cam", "telesync", "hdcam", "hdtc", "dvdscr", "screener"]
-
+        // REMOVED: Hard filtering of 'bad patterns' (CAM, TS, etc.)
+        // We now allow these as last resorts but penalize them heavily in sorting logic below.
+        
         var filtered = streams.filter { stream in
              let titleLower = stream.title.lowercased()
-
-             // Check against bad terms
-             for pattern in badPatterns {
-                 if titleLower.contains(pattern) {
-                     // Extra check for "cam" to avoid matching "webcam" or "camera"
-                     if pattern == "cam" {
-                         let regex = try? NSRegularExpression(pattern: "\\bcam\\b")
-                         let range = NSRange(location: 0, length: titleLower.utf16.count)
-                         if let match = regex?.firstMatch(in: titleLower, options: [], range: range) {
-                             print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (Strict): \(stream.title)")
-                             return false
-                         }
-                         continue // Contains "cam" but not as a word, so it's safe (e.g. "came")
-                     }
-
-                     print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern: \(stream.title)")
-                     return false
-                 }
-             }
 
              // Special check for ISO files (word boundary or file extension only)
              // This prevents false positives like "Pr(iso)ner"
@@ -567,14 +548,6 @@ actor StreamResolver {
              let range = NSRange(location: 0, length: titleLower.utf16.count)
              if let match = isoRegex?.firstMatch(in: titleLower, options: [], range: range) {
                   print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (ISO): \(stream.title)")
-                  return false
-             }
-
-             // Special check for TS files (word boundary or file extension only)
-             // This prevents false positives like "Nigh(ts) at Freddy's"
-             let tsRegex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$")
-             if let match = tsRegex?.firstMatch(in: titleLower, options: [], range: range) {
-                  print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (TS): \(stream.title)")
                   return false
              }
 
@@ -624,6 +597,25 @@ actor StreamResolver {
                          // Multi without explicit English might default to foreign audio
                         score -= 10
                     }
+                }
+                
+                // 6. CAM / TS Penalty (Last Resort)
+                // We want these allowed but ALWAYS at the bottom
+                // Use strict regex for CAM/TS to avoid false positives
+                let badPatterns = ["telesync", "hdcam", "hdtc", "dvdscr", "screener"]
+                if badPatterns.contains(where: { title.contains($0) }) {
+                     score -= 5000 // Massive penalty
+                } else {
+                     // Regex checks for tricky ones
+                     let camRegex = try? NSRegularExpression(pattern: "\\bcam\\b")
+                     let tsRegex = try? NSRegularExpression(pattern: "\\bts\\b|\\.ts$")
+                     let range = NSRange(location: 0, length: title.utf16.count)
+                     
+                     if camRegex?.firstMatch(in: title, options: [], range: range) != nil {
+                         score -= 5000
+                     } else if tsRegex?.firstMatch(in: title, options: [], range: range) != nil {
+                         score -= 5000
+                     }
                 }
 
                 return score

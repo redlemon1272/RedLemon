@@ -718,15 +718,21 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Upload log entry to Supabase
     func insertLog(level: String, message: String, metadata: [String: Any]? = nil) async throws {
+        var finalMessage = message
+        
+        // Serialize metadata into the message body (DB has no metadata column)
+        if let metadata = metadata {
+            if let jsonData = try? JSONSerialization.data(withJSONObject: metadata, options: .prettyPrinted),
+               let jsonString = String(data: jsonData, encoding: .utf8) {
+                finalMessage += "\n\n[Metadata]\n\(jsonString)"
+            }
+        }
+
         var body: [String: Any] = [
             "level": level,
-            "message": message,
+            "message": finalMessage,
             "created_at": SupabaseClient.isoFormatter.string(from: Date())
         ]
-        
-        if let metadata = metadata {
-            body["metadata"] = metadata
-        }
         
         if let userId = auth.currentUser?.id {
             body["user_id"] = userId.uuidString

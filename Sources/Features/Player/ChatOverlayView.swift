@@ -334,13 +334,13 @@ struct ChatOverlayView: View {
                 if case .dm(let friend) = chatMode {
                     scrollToBottom(proxy: proxy, lastId: socialService.messages[friend.id]?.last?.id)
                     // Mark as read
-                    Task { await socialService.clearUnread(friendId: friend.id) }
+                    Task { socialService.clearUnread(friendId: friend.id) }
                 }
             }
             .onAppear {
                 if case .dm(let friend) = chatMode {
                     scrollToBottom(proxy: proxy, lastId: socialService.messages[friend.id]?.last?.id)
-                    Task { await socialService.clearUnread(friendId: friend.id) }
+                    Task { socialService.clearUnread(friendId: friend.id) }
                 }
             }
         }

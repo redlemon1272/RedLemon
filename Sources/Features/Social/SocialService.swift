@@ -85,7 +85,7 @@ class SocialService: ObservableObject {
         self.presenceClient = client
         
         // Setup connection monitoring
-        setupConnectionMonitoring(for: client, isPresence: true)
+        await setupConnectionMonitoring(for: client, isPresence: true)
         
         // Subscribe to presence events
         await client.onPresence { [weak self] action, userId, metadata in
@@ -270,8 +270,8 @@ class SocialService: ObservableObject {
 
     // MARK: - Reconnection Logic
 
-    private func setupConnectionMonitoring(for client: SupabaseRealtimeClient, isPresence: Bool) {
-        client.onConnectionChange { [weak self] isConnected in
+    private func setupConnectionMonitoring(for client: SupabaseRealtimeClient, isPresence: Bool) async {
+        await client.onConnectionChange { [weak self] isConnected in
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
                 
@@ -321,7 +321,8 @@ class SocialService: ObservableObject {
         
         // Re-establish Presence
         if let client = presenceClient {
-            if !await client.isJoined(to: "global-presence") {
+            let isJoined = await client.isJoined(to: "global-presence")
+            if !isJoined {
                  do {
                      try await client.connect()
                      try await client.joinChannel("global-presence")
@@ -475,7 +476,7 @@ class SocialService: ObservableObject {
         self.dmClient = client
         
         // Setup monitoring
-        setupConnectionMonitoring(for: client, isPresence: false)
+        await setupConnectionMonitoring(for: client, isPresence: false)
         
         // Subscribe to Postgres Changes on direct_messages table
         await client.onPostgresChange { [weak self] payload in

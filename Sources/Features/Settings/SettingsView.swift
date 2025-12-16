@@ -53,6 +53,9 @@ struct SettingsView: View {
     
     // Admin State
     @State private var showAdminDashboard = false
+    
+    // Feedback State
+    @State private var showFeedbackSheet = false
 
     enum MessageType {
         case success
@@ -80,10 +83,12 @@ struct SettingsView: View {
                 resetSection
 
                 adminSection
+                
+                supportSection
 
                 aboutSection
 
-                Spacer(minLength: 40)
+                // Color.clear.frame(height: 40)
             }
             .padding(60)
             .frame(maxWidth: 1200)
@@ -121,6 +126,9 @@ struct SettingsView: View {
         }
         .sheet(isPresented: $showPaymentGate) {
             PremiumPaymentView()
+        }
+        .sheet(isPresented: $showFeedbackSheet) {
+            FeedbackView(isPresented: $showFeedbackSheet)
         }
     }
 
@@ -713,7 +721,146 @@ struct SettingsView: View {
                     AdminDashboardView(isPresented: $showAdminDashboard)
                         .frame(minWidth: 800, minHeight: 600)
                 }
-            // }
+        }
+    }
+    
+    private var supportSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Support & Feedback")
+                .font(.system(size: 28, weight: .semibold))
+            
+            VStack(alignment: .leading, spacing: 12) {
+                // Send Feedback Button
+                Button(action: { showFeedbackSheet = true }) {
+                    HStack {
+                        Image(systemName: "envelope.fill")
+                            .font(.title2)
+                            .foregroundColor(.blue)
+                        Text("Send Feedback")
+                            .font(.title3.weight(.semibold))
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(24)
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(16)
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                // Send Session Log Button
+                Button(action: {
+                    Task {
+                        await uploadSessionLog()
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "doc.text.fill")
+                            .font(.title2)
+                            .foregroundColor(.green)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Send Session Log")
+                                .font(.title3.weight(.semibold))
+                                .foregroundColor(.primary)
+                            Text("Send anonymous log of the last session")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                        Spacer()
+                        if isLoading {
+                            ProgressView().scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "paperplane.fill")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(24)
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(16)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .disabled(isLoading)
+            }
+        }
+    }
+    
+    private func uploadSessionLog() async {
+        isLoading = true
+        let log = await SessionRecorder.shared.getSanitizedLog()
+        await SupabaseClient.shared.uploadSessionLog(log: log)
+        
+        await MainActor.run {
+            isLoading = false
+            saveMessage = "Session log sent! Thank you." // Reuse message state or add new
+            messageType = .success
+            
+            // Clear message after delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                if saveMessage == "Session log sent! Thank you." {
+                    saveMessage = nil
+                }
+            }
+        }
+    }
+    
+    // MARK: - Feedback View
+    struct FeedbackView: View {
+        @Binding var isPresented: Bool
+        @State private var category = "Bug"
+        @State private var message = ""
+        @State private var email = ""
+        @State private var isSending = false
+        
+        let categories = ["Bug", "Stream Issue", "Feature Request", "Other"]
+        
+        var body: some View {
+            VStack(spacing: 20) {
+                Text("Send Feedback")
+                    .font(.title2.bold())
+                
+                Picker("Category", selection: $category) {
+                    ForEach(categories, id: \.self) { cat in
+                        Text(cat)
+                    }
+                }
+                
+                TextField("Email (Optional)", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                
+                TextEditor(text: $message)
+                    .font(.body)
+                    .frame(height: 150)
+                    .padding(4)
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(8)
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.gray.opacity(0.3)))
+                
+                HStack {
+                    Button("Cancel") { isPresented = false }
+                        .keyboardShortcut(.cancelAction)
+                    
+                    Spacer()
+                    
+                    Button("Send") {
+                        isSending = true
+                        Task {
+                            await SupabaseClient.shared.sendFeedback(
+                                type: category,
+                                message: message,
+                                email: email
+                            )
+                            isPresented = false
+                            isSending = false
+                        }
+                    }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(message.isEmpty || isSending)
+                }
+            }
+            .padding(30)
+            .frame(width: 500)
+            .background(Color(NSColor.windowBackgroundColor))
         }
     }
 

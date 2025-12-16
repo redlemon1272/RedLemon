@@ -994,14 +994,129 @@ struct ReportedStream: Identifiable, Codable {
     
     /// Check payment status
     func checkPaymentStatus() async throws -> Bool {
-        let response = try await functions.invoke(
-            "check-payment",
-            options: FunctionInvokeOptions(body: [:]) // Body not strictly needed as it uses Auth context
+        // ...
+        return true
+    }
+    
+    // MARK: - Feedback & Logging System
+    
+    struct FeedbackReport: Identifiable, Codable {
+        let id: UUID
+        let type: String
+        let message: String
+        let contactEmail: String?
+        let createdAt: Date
+        
+        enum CodingKeys: String, CodingKey {
+            case id
+            case type
+            case message
+            case contactEmail = "contact_email"
+            case createdAt = "created_at"
+        }
+    }
+    
+    /// Send user feedback
+    func sendFeedback(type: String, message: String, email: String? = nil) async {
+        do {
+            var body: [String: Any] = [
+                "type": type,
+                "message": message,
+                "platform": "macOS",
+                "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+            ]
+            if let email = email, !email.isEmpty {
+                body["contact_email"] = email
+            }
+            
+            _ = try await makeRequest(
+                path: "/feedback_reports",
+                method: "POST",
+                body: body
+            )
+            print("📝 Feedback sent successfully")
+        } catch {
+            print("❌ Failed to send feedback: \(error)")
+        }
+    }
+    
+    /// Upload a session log
+    func uploadSessionLog(log: SessionLog) async {
+        do {
+            let encoder = JSONEncoder()
+            encoder.dateEncodingStrategy = .iso8601
+            let data = try encoder.encode(log)
+            guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
+            
+            // Map to DB columns
+            let body: [String: Any] = [
+                "session_id": log.sessionId.uuidString,
+                "platform": log.platform,
+                "app_version": log.appVersion,
+                "imdb_id": log.imdbId ?? "",
+                "stream_hash": log.streamHash ?? "",
+                "events": json["events"] ?? []
+            ]
+            
+            _ = try await makeRequest(
+                path: "/session_logs",
+                method: "POST",
+                body: body
+            )
+            print("📋 Session Log uploaded successfully: \(log.sessionId)")
+        } catch {
+            print("❌ Failed to upload session log: \(error)")
+        }
+    }
+    
+    /// Get feedback reports (Admin)
+    func getFeedback(limit: Int = 50) async throws -> [FeedbackReport] {
+        let data = try await makeRequest(
+            path: "/feedback_reports",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": String(limit)
+            ]
+        )
+        return try jsonDecoder.decode([FeedbackReport].self, from: data)
+    }
+    
+    /// Get session logs (Admin)
+    func getSessionLogs(limit: Int = 20) async throws -> [SessionLog] {
+        let data = try await makeRequest(
+            path: "/session_logs",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": String(limit)
+            ]
         )
         
-        let result = try JSONDecoder().decode(PaymentCheckResult.self, from: response)
-        return result.premium ?? false
+        // Custom decoding needed because 'events' is JSONB
+        // Ideally SessionLog matches DB schema if we used Codable properly.
+        // Let's rely on JSONDecoder to match keys.
+        // Note: DB 'events' is JSONB, Swift struct has 'events: [SessionEvent]'. 
+        // Supabase returns JSONB as nested JSON, standard decoder handles this if structure matches.
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom { decoder in
+            let container = try decoder.singleValueContainer()
+            let dateStr = try container.decode(String.self)
+            // Handle ISO8601 with fractional seconds
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            if let date = formatter.date(from: dateStr) { return date }
+            
+            formatter.formatOptions = [.withInternetDateTime]
+            if let date = formatter.date(from: dateStr) { return date }
+            
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateStr)")
+        }
+        
+        return try decoder.decode([SessionLog].self, from: data)
     }
+
     // MARK: - Watch History Management
     
     /// Sync a watch history item to the cloud

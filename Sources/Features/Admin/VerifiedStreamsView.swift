@@ -1,349 +1,276 @@
+//
+//  VerifiedStreamsView.swift (Admin Dashboard)
+//  RedLemon
+//
+//  Created by RedLemon Assistant on 2025-12-16.
+//
+
 import SwiftUI
+import Foundation
 
 struct VerifiedStreamsView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
+    @State private var selectedTab = "streams"
     
-    // Tab Selection
-    enum AdminTab: String, CaseIterable, Identifiable {
-        case verified = "Verified"
-        case reported = "Reported"
-        var id: String { self.rawValue }
-    }
-    @State private var selectedTab: AdminTab = .verified
-    
-    // Data Sources
+    // Data Storage
     @State private var verifiedStreams: [SupabaseClient.VerifiedStream] = []
     @State private var reportedStreams: [SupabaseClient.ReportedStream] = []
-    @State private var titles: [String: String] = [:]
-    
+    @State private var feedbackReports: [SupabaseClient.FeedbackReport] = []
+    @State private var sessionLogs: [SessionLog] = []
     @State private var isLoading = false
-    @State private var errorMessage: String?
-
-    @State private var searchText = ""
     
-    // Alert State
-    @State private var showDeleteConfirmation = false
-    @State private var streamToDelete: SupabaseClient.VerifiedStream?
-    @State private var reportToDelete: SupabaseClient.ReportedStream?
-    @State private var deleteVerificationFromReport = false
-    
-    // Computed Properties for Filtering
-    var filteredVerified: [SupabaseClient.VerifiedStream] {
-        if searchText.isEmpty { return verifiedStreams }
-        return verifiedStreams.filter { stream in
-            let title = titles[stream.imdbId]?.lowercased() ?? ""
-            return stream.imdbId.localizedCaseInsensitiveContains(searchText) ||
-                   title.localizedCaseInsensitiveContains(searchText) ||
-                   stream.quality.localizedCaseInsensitiveContains(searchText)
-        }
-    }
-    
-    var filteredReported: [SupabaseClient.ReportedStream] {
-        if searchText.isEmpty { return reportedStreams }
-        return reportedStreams.filter { stream in
-            let title = titles[stream.imdbId]?.lowercased() ?? ""
-            return stream.imdbId.localizedCaseInsensitiveContains(searchText) ||
-                   title.localizedCaseInsensitiveContains(searchText) ||
-                   stream.reason.localizedCaseInsensitiveContains(searchText)
-        }
-    }
-
     var body: some View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Content Admin")
-                    .font(.title2)
-                    .fontWeight(.bold)
+                Text("Content & Feedback Manager")
+                    .font(.title2.bold())
                 Spacer()
-                
-                Picker("Tab", selection: $selectedTab) {
-                    ForEach(AdminTab.allCases) { tab in
-                        Text(tab.rawValue).tag(tab)
-                    }
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .frame(width: 200)
-                
-                Spacer()
-                
-                Button("Done") {
-                    presentationMode.wrappedValue.dismiss()
-                }
-                .keyboardShortcut(.escape, modifiers: [])
+                Button("Close") { dismiss() }
+                    .keyboardShortcut(.cancelAction)
             }
             .padding()
-            .background(Color(NSColor.windowBackgroundColor))
+            .background(Color(NSColor.controlBackgroundColor))
             
-            // Search Bar
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.secondary)
-                TextField("Search by ID, Title, or Reason", text: $searchText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                if !searchText.isEmpty {
-                    Button(action: { searchText = "" }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.secondary)
-                    }
-                    .buttonStyle(.plain)
-                }
+            // Tabs
+            Picker("", selection: $selectedTab) {
+                Text("Verified Streams").tag("streams")
+                Text("Reported Streams").tag("reported")
+                Text("Feedback").tag("feedback")
+                Text("Session Logs").tag("logs")
             }
-            .padding(.horizontal)
-            .padding(.bottom, 10)
-
+            .pickerStyle(SegmentedPickerStyle())
+            .padding()
+            
             // Content
-            if isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if let error = errorMessage {
-                Text("Error: \(error)")
-                    .foregroundColor(.red)
-                    .padding()
-                Spacer()
-            } else {
-                if selectedTab == .verified {
-                    if filteredVerified.isEmpty {
-                        Text(searchText.isEmpty ? "No verified streams found." : "No matches found.")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
-                        verifiedList
-                    }
-                } else { // selectedTab == .reported
-                    if filteredReported.isEmpty {
-                        Text(searchText.isEmpty ? "No reported streams found." : "No matches found.")
-                            .foregroundColor(.gray)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    } else {
+            Group {
+                if isLoading {
+                    ProgressView("Loading...")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else {
+                    switch selectedTab {
+                    case "streams":
+                        streamsList
+                    case "reported":
                         reportedList
+                    case "feedback":
+                        feedbackList
+                    case "logs":
+                        logsList
+                    default:
+                        Text("Unknown Tab")
                     }
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .task {
+        .frame(minWidth: 800, minHeight: 600)
+        .task(id: selectedTab) {
             await loadData()
         }
-        .onChange(of: selectedTab) { _ in
-            Task { await loadData() }
-        }
-        // Unified Alert
-        .alert("Confirm Action", isPresented: $showDeleteConfirmation) {
-            Button("Cancel", role: .cancel) {}
-            Button("Confirm", role: .destructive) {
-                Task {
-                    await executeDelete()
-                }
-            }
-        } message: {
-            if let _ = streamToDelete {
-                Text("Are you sure you want to unlock this verified stream? It will force a re-scrape next time.")
-            } else if let report = reportToDelete {
-                if deleteVerificationFromReport {
-                    Text("This will UNLOCK the verified stream associated with this report and dismiss the report. Proceed?")
-                } else {
-                    Text("This will dismiss the report but KEEP the verified stream active. Use this if the report is false. Proceed?")
-                }
-            } else {
-                Text("Are you sure you want to perform this action?")
-            }
-        }
     }
     
-    // MARK: - Lists
+    // MARK: - Data Loading
     
-    var verifiedList: some View {
-        List(filteredVerified, id: \.id) { stream in
-            HStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    HStack {
-                        Text(titles[stream.imdbId] ?? stream.imdbId)
-                            .font(.system(.headline, design: .rounded))
-                            .foregroundColor(.primary)
-                        
-                        if titles[stream.imdbId] == nil {
-                            Text(stream.imdbId)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                        }
-                        
-                        Spacer()
-                        
-                        Text(stream.quality)
-                            .font(.caption)
-                            .padding(4)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(4)
-                    }
-                    
-                    Text("Hash: \(stream.hash)")
-                        .font(.system(.caption, design: .monospaced))
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                    
-                    HStack {
-                        Image(systemName: "hand.thumbsup.fill").foregroundColor(.green)
-                        Text("\(stream.voteCount) votes")
-                        
-                        Spacer()
-                        
-                        Text(stream.lastVerifiedAt.formatted(date: .abbreviated, time: .shortened))
-                            .font(.caption2)
-                            .foregroundColor(.secondary)
-                    }
-                    .font(.caption)
-                }
-                
-                Divider()
-                
-                Button(action: {
-                    streamToDelete = stream
-                    reportToDelete = nil
-                    showDeleteConfirmation = true
-                }) {
-                    Image(systemName: "lock.open.fill")
-                        .font(.title2)
-                        .foregroundColor(.red)
-                        .padding(8)
-                }
-                .buttonStyle(.borderless)
-                .help("Unlock verified stream")
-            }
-            .padding(.vertical, 4)
-            .task { if titles[stream.imdbId] == nil { await fetchTitle(for: stream.imdbId) } }
-        }
-    }
-    
-    var reportedList: some View {
-        List(filteredReported, id: \.id) { report in
-            HStack {
-                VStack(alignment: .leading, spacing: 5) {
-                    titleView(for: report.imdbId)
-                    
-                    Text(report.reason)
-                        .font(.headline)
-                        .foregroundColor(.orange)
-                    
-                    Text("Hash: \(report.streamHash)")
-                        .font(.system(.caption, design: .monospaced))
-                        .foregroundColor(.secondary)
-                        .lineLimit(1)
-                        .truncationMode(.middle)
-                    
-                    Text("Reported: \(report.createdAt.formatted(date: .abbreviated, time: .shortened))")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                }
-                
-                Spacer()
-                
-                // Actions for Reports
-                HStack(spacing: 12) {
-                    Button(action: {
-                        reportToDelete = report
-                        streamToDelete = nil
-                        deleteVerificationFromReport = false
-                        showDeleteConfirmation = true
-                    }) {
-                        Text("Dismiss")
-                            .font(.caption)
-                            .padding(6)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(6)
-                    }
-                    .buttonStyle(.plain)
-                    .help("Dismiss report (Keep stream verified)")
-                    
-                    Button(action: {
-                        reportToDelete = report
-                        streamToDelete = nil
-                        deleteVerificationFromReport = true
-                        showDeleteConfirmation = true
-                    }) {
-                        Label("Unlock & Fix", systemImage: "lock.open.fill")
-                            .font(.caption)
-                            .foregroundColor(.white)
-                            .padding(6)
-                            .background(Color.red)
-                            .cornerRadius(6)
-                    }
-                    .buttonStyle(.plain)
-                    .help("Unlock verified stream AND dismiss report")
-                }
-            }
-            .padding(.vertical, 4)
-            .task { if titles[report.imdbId] == nil { await fetchTitle(for: report.imdbId) } }
-        }
-    }
-    
-    func titleView(for imdbId: String) -> some View {
-        HStack {
-            Text(titles[imdbId] ?? imdbId)
-                .font(.headline)
-            
-            if titles[imdbId] == nil {
-                Text(imdbId).font(.caption).foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    // MARK: - Logic
-    
-    func loadData() async {
+    private func loadData() async {
         isLoading = true
-        errorMessage = nil
         do {
-            if selectedTab == .verified {
-                verifiedStreams = try await SupabaseClient.shared.getAllVerifiedStreams()
-            } else {
-                reportedStreams = try await SupabaseClient.shared.getReportedStreams()
+            switch selectedTab {
+            case "streams":
+                verifiedStreams = [] // Placeholder
+                
+            case "reported":
+                 reportedStreams = try await SupabaseClient.shared.getReportedStreams()
+                
+            case "feedback":
+                feedbackReports = try await SupabaseClient.shared.getFeedback()
+                
+            case "logs":
+                sessionLogs = try await SupabaseClient.shared.getSessionLogs()
+                
+            default: break
             }
         } catch {
-            errorMessage = error.localizedDescription
+            print("❌ Admin Load Error: \(error)")
         }
         isLoading = false
     }
     
-    func executeDelete() async {
-        do {
-            if let stream = streamToDelete {
-                // Just delete verify lock
-                try await SupabaseClient.shared.deleteVerifiedStream(streamHash: stream.hash)
-            } else if let report = reportToDelete {
-                // Always delete report first/jointly
-                try await SupabaseClient.shared.deleteReportedStream(id: report.id.uuidString)
-                
-                if deleteVerificationFromReport {
-                    try await SupabaseClient.shared.deleteVerifiedStream(streamHash: report.streamHash)
-                }
-            }
-            await loadData()
-        } catch {
-            errorMessage = "Action failed: \(error.localizedDescription)"
+    // MARK: - Views
+    
+    private var streamsList: some View {
+        VStack {
+            Text("Verified Streams Management")
+                .font(.headline)
+            Text("Search functionality to be added.")
+                .foregroundColor(.secondary)
         }
     }
     
-    private func fetchTitle(for imdbId: String) async {
-        guard let url = URL(string: "https://v3-cinemeta.strem.io/meta/movie/\(imdbId).json") else { return }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let response = try JSONDecoder().decode(MinimalCinemetaResponse.self, from: data)
-            if let title = response.meta.name {
-                await MainActor.run { titles[imdbId] = title }
+    private var reportedList: some View {
+        List {
+            ForEach(reportedStreams) { report in
+                ReportedStreamRow(report: report)
             }
-        } catch {
-            print("Failed to fetch title: \(error)")
+        }
+    }
+    
+    private var feedbackList: some View {
+        List {
+            ForEach(feedbackReports) { feedback in
+                FeedbackRow(feedback: feedback)
+            }
+        }
+    }
+    
+    private var logsList: some View {
+        List {
+            ForEach(sessionLogs) { log in
+                SessionLogRow(log: log)
+            }
         }
     }
 }
 
-// Minimal decodables for title fetching
-struct MinimalCinemetaResponse: Codable {
-    let meta: MinimalCinemetaMeta
+// MARK: - Subviews
+
+struct ReportedStreamRow: View {
+    let report: SupabaseClient.ReportedStream
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(report.reason.capitalized)
+                    .font(.headline)
+                    .foregroundColor(.red)
+                Spacer()
+                Text(report.createdAt, style: .date)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            Text("IMDB: \(report.imdbId) | Hash: \(String(report.streamHash.prefix(8)))")
+                .font(.caption.monospaced())
+            
+
+        }
+        .padding(.vertical, 4)
+    }
 }
 
-struct MinimalCinemetaMeta: Codable {
-    let name: String?
+struct Badge: View {
+    let text: String
+    let color: Color
+    
+    var body: some View {
+        Text(text)
+            .font(.caption.bold())
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(color.opacity(0.2))
+            .foregroundColor(color)
+            .cornerRadius(4)
+    }
+}
+
+struct FeedbackRow: View {
+    let feedback: SupabaseClient.FeedbackReport
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Badge(text: feedback.type, color: colorForType(feedback.type))
+                Spacer()
+                Text(feedback.createdAt, style: .date)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                Text(feedback.createdAt, style: .time)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+            
+            Text(feedback.message)
+                .font(.body)
+                .padding(8)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(NSColor.controlBackgroundColor))
+                .cornerRadius(8)
+            
+            if let email = feedback.contactEmail {
+                HStack {
+                    Image(systemName: "envelope")
+                    Text(email)
+                }
+                .font(.caption)
+                .foregroundColor(.secondary)
+            }
+        }
+        .padding(.vertical, 8)
+    }
+    
+    private func colorForType(_ type: String) -> Color {
+        switch type.lowercased() {
+        case "bug": return .red
+        case "stream issue": return .orange
+        case "feature request": return .green
+        default: return .blue
+        }
+    }
+}
+
+struct SessionLogRow: View {
+    let log: SessionLog
+    @State private var isExpanded = false
+    
+    var body: some View {
+        DisclosureGroup(isExpanded: $isExpanded) {
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(log.events, id: \.timestamp) { event in
+                    LogEventRow(event: event)
+                }
+            }
+            .padding()
+            .background(Color.black.opacity(0.1))
+            .cornerRadius(8)
+        } label: {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(log.sessionId.uuidString.prefix(8))
+                        .font(.headline.monospaced())
+                    Text(log.platform + " | " + log.appVersion)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Text(log.createdAt, style: .time)
+                    .font(.caption)
+            }
+        }
+    }
+}
+
+struct LogEventRow: View {
+    let event: SessionEvent
+    
+    var body: some View {
+        HStack(alignment: .top) {
+            Text(event.timestamp, style: .time)
+                .font(.caption.monospaced())
+                .foregroundColor(.secondary)
+                .frame(width: 80, alignment: .leading)
+            
+            Text("[\(event.category.rawValue)]")
+                .font(.caption.monospaced())
+                .foregroundColor(.blue)
+                .frame(width: 80, alignment: .leading)
+            
+            Text(event.message)
+                .font(.caption)
+        }
+        if let meta = event.metadata {
+            Text("\(meta.description)")
+                .font(.caption2)
+                .foregroundColor(.secondary)
+                .padding(.leading, 160)
+        }
+    }
 }

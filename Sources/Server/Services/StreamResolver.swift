@@ -25,7 +25,11 @@ actor StreamResolver {
         ignoreVerified: Bool = false
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
+        await SessionRecorder.shared.startNewSession(imdbId: imdbId)
+        await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
+        
         if let year = year {
+
             NSLog("   📅 Filtering by year: \(year)")
         }
 
@@ -53,6 +57,7 @@ actor StreamResolver {
                 print("⚠️ StreamResolver: Verified stream is STALE (>30 days). Will verify cache status strictly.")
             } else {
                 print("⚡️ StreamResolver: Found Community Verified stream with \(verified.voteCount) votes!")
+                await SessionRecorder.shared.log(category: .resolver, message: "Found Verified Stream", metadata: ["vote_count": "\(verified.voteCount)", "hash": hash])
             }
             
             // Reconstruct a strict stream object
@@ -357,6 +362,12 @@ actor StreamResolver {
         if let primary = hdBucket.primary { print("📦 720p Primary: \(primary.title)") }
 
         print("✅ StreamResolver: Quality buckets ready")
+
+        await SessionRecorder.shared.log(category: .resolver, message: "Resolution Complete", metadata: [
+            "2160p": "\(uhd4kBucket.primary != nil ? "1" : "0")",
+            "1080p": "\(fullHDBucket.primary != nil ? "1" : "0")",
+            "720p": "\(hdBucket.primary != nil ? "1" : "0")"
+        ])
 
         return QualityBucketsResponse(buckets: QualityBuckets(
             uhd4k: uhd4kBucket,

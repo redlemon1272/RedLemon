@@ -26,6 +26,13 @@ class SocialService: ObservableObject {
     private var currentUsername: String?
     private var currentMetadata: [String: Any] = [:]
     
+    // Performance: Cache formatter to avoid expensive initialization on main thread
+    private static let isoFormatter: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
+    
     private init() {}
     
     // MARK: - Setup
@@ -96,7 +103,7 @@ class SocialService: ObservableObject {
             let initialMeta: [String: Any] = [
                 "username": username,
                 "status": "online",
-                "last_seen": ISO8601DateFormatter().string(from: Date())
+                "last_seen": SocialService.isoFormatter.string(from: Date())
             ]
             self.currentMetadata = initialMeta
             try await client.track(userId: userId, metadata: initialMeta)
@@ -116,7 +123,7 @@ class SocialService: ObservableObject {
         var metadata: [String: Any] = [
             "username": username,
             "status": status ?? "online",
-            "last_seen": ISO8601DateFormatter().string(from: Date())
+            "last_seen": SocialService.isoFormatter.string(from: Date())
         ]
         
         if let title = mediaTitle {
@@ -124,7 +131,7 @@ class SocialService: ObservableObject {
             metadata["watching_type"] = mediaType
             metadata["watching_id"] = imdbId
             metadata["room_id"] = roomId
-            metadata["started_at"] = ISO8601DateFormatter().string(from: Date())
+            metadata["started_at"] = SocialService.isoFormatter.string(from: Date())
         } else if status == nil {
              // If no specific status and no media, default to "Browsing"
              metadata["status"] = "Browsing"
@@ -202,8 +209,9 @@ class SocialService: ObservableObject {
             let dateString1 = m1["last_seen"] as? String ?? ""
             let dateString2 = m2["last_seen"] as? String ?? ""
             
-            let date1 = formatter.date(from: dateString1) ?? fallbackFormatter.date(from: dateString1) ?? Date.distantPast
-            let date2 = formatter.date(from: dateString2) ?? fallbackFormatter.date(from: dateString2) ?? Date.distantPast
+            // Use cached formatter, fallback only if needed (e.g. legacy format)
+            let date1 = SocialService.isoFormatter.date(from: dateString1) ?? Date.distantPast
+            let date2 = SocialService.isoFormatter.date(from: dateString2) ?? Date.distantPast
             return date1 < date2 // Ascending order, last is newest
         }
         
@@ -258,7 +266,7 @@ class SocialService: ObservableObject {
         
         // Refresh timestamp
         var metadata = currentMetadata
-        metadata["last_seen"] = ISO8601DateFormatter().string(from: Date())
+        metadata["last_seen"] = SocialService.isoFormatter.string(from: Date())
         currentMetadata = metadata
         
         do {

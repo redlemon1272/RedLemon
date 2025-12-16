@@ -340,7 +340,8 @@ struct MPVPlayerView: View {
                 isSeries: isSeries,
                 isEvent: appState.player.isEventPlayback,
                 streamHash: streamHash,
-                quality: streamQuality.isEmpty ? nil : streamQuality
+                quality: streamQuality.isEmpty ? nil : streamQuality,
+                sourceQuality: sourceQuality.isEmpty ? nil : sourceQuality
             )
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")

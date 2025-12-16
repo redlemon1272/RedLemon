@@ -301,6 +301,7 @@ class MPVPlayerViewModel: ObservableObject {
     // MARK: - Verified Stream Logic
     private var currentStreamHash: String?
     private var currentStreamQuality: String?
+    private var currentSourceQuality: String? // NEW: Track source type (CAM, WEB-DL, etc.)
     private var hasVotedForStream: Bool = false
     
     // Accumulator for ACTUAL playback time (to prevent seek abuse)
@@ -315,7 +316,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool, streamHash: String? = nil, quality: String? = nil) async {
+    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool, streamHash: String? = nil, quality: String? = nil, sourceQuality: String? = nil) async {
         // For movies, strip any accidental episode markers in stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
             guard !isSeries else { return title }
@@ -336,13 +337,18 @@ class MPVPlayerViewModel: ObservableObject {
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
         if let h = streamHash { print("   Hash: \(h.prefix(8))...") }
+        if let sq = sourceQuality { print("   Source: \(sq)") }
 
         self.videoURL = streamURL
         self.imdbId = imdbId
         self.streamTitle = cleanStreamTitle
+        self.title = cleanStreamTitle // Default title until metadata is loaded
+        
+        // Store Verified Stream info
         self.currentStreamHash = streamHash
         self.currentStreamQuality = quality
-        self.hasVotedForStream = false // Reset vote flag for new stream
+        self.currentSourceQuality = sourceQuality
+        self.hasVotedForStream = false // Reset vote state for new stream
 
         // Broadcast watching status
         Task {
@@ -2600,8 +2606,8 @@ extension MPVPlayerViewModel {
         if isPlaying && !isBuffering && !isSeeking {
              let now = Date()
              let timeSinceLast = now.timeIntervalSince(lastAccumulatorUpdate)
-             // Cap delta at 5 seconds to prevent huge jumps from backgrounding/suspension
-             if timeSinceLast < 5.0 {
+             // Cap delta at 45 seconds to prevent huge jumps from backgrounding/suspension
+             if timeSinceLast < 45.0 {
                  accumulatedPlaybackTime += timeSinceLast
              }
              lastAccumulatorUpdate = now
@@ -2612,6 +2618,19 @@ extension MPVPlayerViewModel {
         // Trigger Vote: If actual playback > 20 mins (1200s) AND hasn't voted yet
         if !hasVotedForStream && accumulatedPlaybackTime > 1200 {
              if let hash = currentStreamHash, let quality = currentStreamQuality {
+                 
+                 // QUALITY GATE: Block CAM and TS sources
+                 // We only want to verify "clean" sources (WEB-DL, BluRay, HDTV, WEBRip)
+                 let badSources = ["CAM", "TS", "HDCAM", "HDTS", "TELESYNC", "SCREENER"]
+                 let source = currentSourceQuality ?? ""
+                 let isLowQuality = badSources.contains { source.localizedCaseInsensitiveContains($0) }
+                 
+                 if isLowQuality {
+                     print("🚫 MPVPlayerViewModel: Skipping Community Vote - Low Quality Source detected (\(source))")
+                     hasVotedForStream = true // Mark as "handled" so we don't keep checking
+                     return
+                 }
+                 
                  print("✅ MPVPlayerViewModel: Triggering Community Vote for Verified Stream (Played > 20 mins)")
                  Task {
                      await SupabaseClient.shared.voteStreamSuccess(imdbId: imdbId, quality: quality, streamHash: hash)

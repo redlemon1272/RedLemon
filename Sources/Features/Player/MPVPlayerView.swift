@@ -172,6 +172,7 @@ struct MPVPlayerView: View {
                             showAudioMenu: $showAudioMenu,
                             showPlaylistMenu: $showPlaylistMenu,
                             showEventListMenu: $showEventListMenu,
+                            showReportSheet: $showReportSheet,
                             showControls: showControls
                         )
                         .zIndex(99)
@@ -850,6 +851,18 @@ struct MPVPlayerView: View {
                 }
         }
 
+        // Tap shield to close report sheet
+        if showReportSheet {
+             Color.black.opacity(0.5)
+                 .ignoresSafeArea()
+                 .zIndex(101)
+                 .onTapGesture {
+                     withAnimation(.easeInOut(duration: 0.15)) {
+                         showReportSheet = false
+                     }
+                 }
+        }
+
         // Subtitle Menu (Bottom Left)
         if showSubtitleMenu {
             VStack {
@@ -916,6 +929,26 @@ struct MPVPlayerView: View {
             }
             .transition(.opacity.combined(with: .move(edge: .bottom)))
             .zIndex(102)
+        }
+
+        // Report Stream Modal (Center)
+        if showReportSheet {
+            VStack {
+                 Spacer()
+                 HStack {
+                     Spacer()
+                     ReportStreamView(
+                         imdbId: imdbId,
+                         quality: streamQuality,
+                         streamHash: streamHash ?? "",
+                         showSuccess: $showReportSheet
+                     )
+                     Spacer()
+                 }
+                 Spacer()
+            }
+            .transition(.opacity.combined(with: .scale))
+            .zIndex(103)
         }
 
         // Chat toggle button (appears on right side when mouse is there OR unread messages exist)

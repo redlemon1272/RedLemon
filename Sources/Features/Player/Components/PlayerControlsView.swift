@@ -19,6 +19,7 @@ struct PlayerControlsView: View {
     @Binding var showAudioMenu: Bool
     @Binding var showPlaylistMenu: Bool
     @Binding var showEventListMenu: Bool
+    @Binding var showReportSheet: Bool
 
     // State for animation
     let showControls: Bool
@@ -262,6 +263,25 @@ struct PlayerControlsView: View {
 
                     // Event List Button (Movies)
                     EventListButton(showEventListMenu: $showEventListMenu)
+                    
+                    // Report Stream Button
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            showReportSheet.toggle()
+                        }
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(showReportSheet ? Color.red.opacity(0.3) : Color.white.opacity(0.2))
+                                .frame(width: 40, height: 40)
+                            
+                            Image(systemName: "exclamationmark.triangle.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(showReportSheet ? .red : .white)
+                        }
+                    }
+                    .buttonStyle(.plain)
+                    .help("Report Stream")
 
                     Spacer()
                 }

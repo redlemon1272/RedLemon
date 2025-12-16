@@ -50,18 +50,7 @@ struct VerifiedStreamsView: View {
                     ProgressView("Loading...")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    switch selectedTab {
-                    case "streams":
-                        streamsList
-                    case "reported":
-                        reportedList
-                    case "feedback":
-                        feedbackList
-                    case "logs":
-                        logsList
-                    default:
-                        Text("Unknown Tab")
-                    }
+                    currentContent
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -69,6 +58,22 @@ struct VerifiedStreamsView: View {
         .frame(minWidth: 800, minHeight: 600)
         .task(id: selectedTab) {
             await loadData()
+        }
+    }
+    
+    @ViewBuilder
+    private var currentContent: some View {
+        switch selectedTab {
+        case "streams":
+            streamsList
+        case "reported":
+            reportedList
+        case "feedback":
+            feedbackList
+        case "logs":
+            logsList
+        default:
+            Text("Unknown Tab")
         }
     }
     
@@ -256,8 +261,32 @@ struct VerifiedStreamsView: View {
     private var reportedList: some View {
         List {
             ForEach(reportedStreams) { report in
-                ReportedStreamRow(report: report)
+                ReportedStreamRow(report: report, onBan: {
+                    banStream(hash: report.streamHash, reportId: report.id)
+                }, onDismiss: {
+                    dismissReport(id: report.id)
+                })
             }
+        }
+    }
+    
+    private func banStream(hash: String, reportId: UUID) {
+        Task {
+            do {
+                print("🚫 Banning stream hash: \(hash)")
+                try await SupabaseClient.shared.deleteVerifiedStream(streamHash: hash)
+                await SupabaseClient.shared.deleteReport(id: reportId) // Auto-dismiss report after ban
+                await loadData()
+            } catch {
+                print("❌ Failed to ban stream: \(error)")
+            }
+        }
+    }
+    
+    private func dismissReport(id: UUID) {
+        Task {
+            await SupabaseClient.shared.deleteReport(id: id)
+            await loadData()
         }
     }
     
@@ -302,44 +331,79 @@ struct VerifiedStreamsView: View {
 
 struct ReportedStreamRow: View {
     let report: SupabaseClient.ReportedStream
+    let onBan: () -> Void
+    let onDismiss: () -> Void
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            HStack {
-                Text(report.movieTitle ?? "IMDB: \(report.imdbId)")
-                    .font(.headline)
-                    .foregroundColor(report.movieTitle == nil ? .primary : .primary)
-                
-                if let _ = report.movieTitle {
-                    Text(report.imdbId)
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text(report.movieTitle ?? "IMDB: \(report.imdbId)")
+                        .font(.headline)
+                        .foregroundColor(report.movieTitle == nil ? .primary : .primary)
+                    
+                    if let _ = report.movieTitle {
+                        Text(report.imdbId)
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+                    
+                    Spacer()
+                    Text(report.createdAt, style: .date)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
                 
-                Spacer()
-                Text(report.createdAt, style: .date)
-                    .font(.caption)
+                HStack {
+                    Text(report.reason.capitalized)
+                        .font(.caption.bold())
+                        .foregroundColor(.red)
+                    
+                    Text("|")
+                        .foregroundColor(.secondary)
+                    
+                    Text(report.quality)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                Text("Hash: \(String(report.streamHash.prefix(8)))")
+                    .font(.caption2.monospaced())
                     .foregroundColor(.secondary)
             }
             
-            HStack {
-                Text(report.reason.capitalized)
-                    .font(.caption.bold())
-                    .foregroundColor(.red)
+            Spacer()
+            
+            HStack(spacing: 12) {
+                // Ban Button
+                Button(action: onBan) {
+                    VStack(spacing: 2) {
+                        Image(systemName: "xmark.octagon.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.red)
+                        Text("Ban")
+                            .font(.caption2)
+                            .foregroundColor(.red)
+                    }
+                }
+                .buttonStyle(.plain)
+                .help("Delete verified stream (Ban)")
                 
-                Text("|")
-                    .foregroundColor(.secondary)
-                
-                Text(report.quality)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // Dismiss Button
+                Button(action: onDismiss) {
+                    VStack(spacing: 2) {
+                        Image(systemName: "trash")
+                            .font(.system(size: 16))
+                            .foregroundColor(.secondary)
+                        Text("Dismiss")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                }
+                .buttonStyle(.plain)
+                .help("Dismiss report (Keep stream)")
             }
-            
-            Text("Hash: \(String(report.streamHash.prefix(8)))")
-                .font(.caption2.monospaced())
-                .foregroundColor(.secondary)
-            
-
+            .padding(.leading, 8)
         }
         .padding(.vertical, 4)
     }
@@ -558,3 +622,4 @@ struct VerifiedStreamRow: View {
         .padding(.vertical, 4)
     }
 }
+

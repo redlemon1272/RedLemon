@@ -911,6 +911,7 @@ struct ReportedStream: Identifiable, Codable {
                 body["movie_title"] = title
             }
             
+            
             _ = try await makeRequest(
                 path: "/reported_streams",
                 method: "POST",
@@ -919,6 +920,20 @@ struct ReportedStream: Identifiable, Codable {
             print("🚨 Reported stream: \(streamHash) Reason: \(reason)")
         } catch {
             print("Failed to report stream: \(error)")
+        }
+    }
+    
+    /// Delete a report (Admin Action - Dismiss)
+    func deleteReport(id: UUID) async {
+        do {
+            _ = try await makeRequest(
+                path: "/reported_streams",
+                method: "DELETE",
+                query: ["id": "eq.\(id.uuidString)"]
+            )
+            print("✅ Report dismissed: \(id)")
+        } catch {
+            print("❌ Failed to dismiss report: \(error)")
         }
     }
     

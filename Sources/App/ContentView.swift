@@ -377,14 +377,21 @@ struct StablePlayerContainer: View, Equatable {
 
     var body: some View {
         // Build display title with episode info if available
+        // Build display title with episode info if available
         let displayTitle: String = {
             if let season = selectedSeason, let episode = selectedEpisode {
                 var title = "\(metadata.title) - S\(String(format: "%02d", season))E\(String(format: "%02d", episode))"
                 
                 // Append episode title if available
-                if let videos = metadata.videos,
-                   let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
-                    title += ": \(videoEpisode.title)"
+                if let videos = metadata.videos {
+                   if let videoEpisode = videos.first(where: { $0.season == season && $0.episode == episode }) {
+                       title += ": \(videoEpisode.title)"
+                       print("✨ StablePlayerContainer: Found episode title: \(videoEpisode.title)")
+                   } else {
+                       print("⚠️ StablePlayerContainer: No matching video found for S\(season)E\(episode) in \(videos.count) videos")
+                   }
+                } else {
+                    print("⚠️ StablePlayerContainer: metadata.videos is NIL")
                 }
                 
                 return title
@@ -415,9 +422,16 @@ struct StablePlayerContainer: View, Equatable {
         )
     }
 
-    // Equatable implementation - only recreate if URL changes
+    // Equatable implementation - only recreate if URL changes OR metadata changes (season/episode)
     static func == (lhs: StablePlayerContainer, rhs: StablePlayerContainer) -> Bool {
-        return lhs.streamURL == rhs.streamURL
+        let titleChanged = lhs.selectedSeason != rhs.selectedSeason || lhs.selectedEpisode != rhs.selectedEpisode
+        let urlChanged = lhs.streamURL != rhs.streamURL
+        
+        if titleChanged {
+             print("♻️ StablePlayerContainer: Recreating due to Season/Episode change (S\(lhs.selectedSeason ?? -1)E\(lhs.selectedEpisode ?? -1) -> S\(rhs.selectedSeason ?? -1)E\(rhs.selectedEpisode ?? -1))")
+        }
+        
+        return !urlChanged && !titleChanged
     }
 }
 

@@ -1022,9 +1022,9 @@ struct WatchModeSelectionView: View {
 
             // Set season/episode if it's a TV show
             if let season = historyItem.season, let episode = historyItem.episode {
-                appState.player.selectedSeason = season
-                appState.player.selectedEpisode = episode
-                print("✅ Set season \(season) episode \(episode)")
+                appState.selectedSeason = season
+                appState.selectedEpisode = episode
+                print("✅ BrowseView: Set season \(season) episode \(episode) (via AppState)")
             }
         }
 

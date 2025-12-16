@@ -194,7 +194,6 @@ struct PlayerControlsView: View {
                                     .foregroundColor(.white)
                             }
                         }
-                    }
                         .buttonStyle(.plain)
                     }
 

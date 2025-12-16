@@ -83,15 +83,32 @@ struct ReportStreamView: View {
                 }
                 
                 HStack(spacing: 16) {
-                    Button("Cancel") {
+                    Button(action: {
                         onDismiss()
+                    }) {
+                        Text("Cancel")
+                            .foregroundColor(.white.opacity(0.7))
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(8)
                     }
+                    .buttonStyle(PlainButtonStyle())
                     .keyboardShortcut(.cancelAction)
                     
-                    Button("Submit Report") {
+                    Button(action: {
                         submitReport()
+                    }) {
+                        Text(isSubmitting ? "Submitting..." : "Submit Report")
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Color.accentColor)
+                            .cornerRadius(8)
+                            .opacity((selectedReason == nil || (selectedReason == "Other" && otherReasonText.isEmpty) || isSubmitting) ? 0.5 : 1.0)
                     }
-                    .buttonStyle(BorderedProminentButtonStyle())
+                    .buttonStyle(PlainButtonStyle())
                     .disabled(selectedReason == nil || (selectedReason == "Other" && otherReasonText.isEmpty) || isSubmitting)
                 }
                 .padding(.top, 10)

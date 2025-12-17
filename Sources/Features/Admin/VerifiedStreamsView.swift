@@ -87,13 +87,16 @@ struct VerifiedStreamsView: View {
                 let rawStreams = try await SupabaseClient.shared.getAllVerifiedStreams(limit: 100)
                 
                 // Deduplicate by hash
-                var seenHashes = Set<String>()
+                // Deduplicate by Hash + Season + Episode
+                // (Files in season packs share the same hash but are distinct verified entries)
+                var seenKeys = Set<String>()
                 verifiedStreams = rawStreams.filter { stream in
-                    let isNew = !seenHashes.contains(stream.hash)
+                    let compositeKey = "\(stream.hash)_\(stream.season)_\(stream.episode)"
+                    let isNew = !seenKeys.contains(compositeKey)
                     if isNew {
-                        seenHashes.insert(stream.hash)
+                        seenKeys.insert(compositeKey)
                     } else {
-                        print("⚠️ Admin: Filtered duplicate stream hash: \(stream.hash)")
+                        print("⚠️ Admin: Filtered duplicate stream entry: \(compositeKey)")
                     }
                     return isNew
                 }

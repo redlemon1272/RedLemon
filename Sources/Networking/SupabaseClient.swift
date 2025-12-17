@@ -872,7 +872,7 @@ class SupabaseClient: RoomManager, UserManager {
             case lastVerifiedAt = "last_verified_at"
         }
         
-        var id: String { hash }
+        var id: String { "\(hash)_\(season)_\(episode)" }
     }
 
 struct ReportedStream: Identifiable, Codable {

@@ -506,9 +506,9 @@ struct BrowseView: View {
     /// Get streaming service keys based on current tab
     private func getStreamingServiceKeys() -> [String] {
         if selectedTab == .movies {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "crunchyroll"]
+            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime"]
         } else {
-            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "discovery", "crunchyroll"]
+            return ["netflix", "prime", "disney", "hbo", "appleTv", "paramount", "hulu", "peacock", "starz", "showtime", "discovery"]
         }
     }
 
@@ -526,7 +526,6 @@ struct BrowseView: View {
         case "starz": return "Starz"
         case "showtime": return "Showtime"
         case "discovery": return "Discovery+"
-        case "crunchyroll": return "Crunchyroll"
         default: return key.capitalized
         }
     }

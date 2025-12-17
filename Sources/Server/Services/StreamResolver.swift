@@ -22,6 +22,7 @@ actor StreamResolver {
         season: Int? = nil,
         episode: Int? = nil,
         year: String? = nil,
+        excludedHashes: Set<String> = [],
         ignoreVerified: Bool = false
     ) async throws -> QualityBucketsResponse {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
@@ -356,10 +357,10 @@ actor StreamResolver {
         let preferPackPrimary = (type == "series")
         let preferMultiSubMovies = (type == "movie")
 
-        let uhd4kBucket = processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
-        let fullHDBucket = processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
-        let hdBucket = processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
-        let sdBucket = processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies)
+        let uhd4kBucket = processBucket(buckets["2160p"] ?? [], minSeeders: 1, quality: "2160p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
+        let fullHDBucket = processBucket(buckets["1080p"] ?? [], minSeeders: 1, quality: "1080p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
+        let hdBucket = processBucket(buckets["720p"] ?? [], minSeeders: 1, quality: "720p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
+        let sdBucket = processBucket(buckets["480p"] ?? [], minSeeders: 1, quality: "480p", year: year, targetTitle: targetTitle, preferMultiSubPacksFirst: preferPackPrimary, preferMultiSubMovies: preferMultiSubMovies, excludedHashes: excludedHashes)
 
         // Log final primary selections
         if let primary = uhd4kBucket.primary { print("📦 2160p Primary: \(primary.title)") }
@@ -527,7 +528,8 @@ actor StreamResolver {
         year: String?,
         targetTitle: String?,
         preferMultiSubPacksFirst: Bool,
-        preferMultiSubMovies: Bool
+        preferMultiSubMovies: Bool,
+        excludedHashes: Set<String>
     ) -> QualityBucket {
 
         print("   --- Processing Bucket: \(quality) (Input: \(streams.count)) ---")
@@ -540,6 +542,12 @@ actor StreamResolver {
         // We now allow these as last resorts but penalize them heavily in sorting logic below.
         
         var filtered = streams.filter { stream in
+             // Check EXCLUDED hashes (Smart Retry)
+             if let hash = stream.infoHash, excludedHashes.contains(hash) {
+                 print("   🧠 RESOLVER DROP (\(quality)): Previously Attempted: \(stream.title)")
+                 return false
+             }
+
              let titleLower = stream.title.lowercased()
 
              // Special check for ISO files (word boundary or file extension only)

@@ -531,25 +531,77 @@ struct StreamErrorView: View {
     @ObservedObject var appState: AppState
 
     var body: some View {
-        VStack(spacing: 20) {
-            Image(systemName: "exclamationmark.triangle")
-                .font(.system(size: 60))
+        VStack(spacing: 24) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 72))
                 .foregroundColor(.red)
+                .shadow(color: .red.opacity(0.3), radius: 10)
 
-            Text("Stream Error")
-                .font(.title)
-                .foregroundColor(.white)
+            VStack(spacing: 8) {
+                Text("Stream Error")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
 
-            Text(error)
-                .font(.body)
-                .foregroundColor(.white.opacity(0.8))
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 40)
+                Text(error)
+                    .font(.body)
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 40)
+            }
 
-            Button("Back") {
+            VStack(spacing: 16) {
+                Button(action: {
+                    retryPlayback()
+                }) {
+                    HStack {
+                        Image(systemName: "arrow.clockwise")
+                        Text("Retry Connection")
+                    }
+                    .font(.headline.weight(.semibold))
+                    .foregroundColor(.black)
+                    .frame(width: 220, height: 50)
+                    .background(Color.yellow)
+                    .cornerRadius(12)
+                }
+                .buttonStyle(.plain)
+                .shadow(radius: 5)
+                
+                Text("Hint: reattempting can improve stream reliability")
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.5))
+            }
+            .padding(.top, 10)
+
+            Button("Go Back") {
                 appState.currentView = .mediaDetail
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.plain)
+            .foregroundColor(.white.opacity(0.7))
+            .padding(.top, 10)
+        }
+        .padding(40)
+        .background(Color.black.opacity(0.8))
+        .cornerRadius(20)
+    }
+
+    private func retryPlayback() {
+        guard let item = appState.player.selectedMediaItem else { return }
+        
+        Task {
+            // Re-trigger playback
+            // Use stored state from PlayerViewModel
+            let quality = appState.player.selectedQuality
+            let mode = appState.player.currentWatchMode
+            let roomId = appState.player.currentRoomId
+            let isHost = appState.player.isWatchPartyHost
+            
+            await appState.player.playMedia(
+                item,
+                quality: quality,
+                watchMode: mode,
+                roomId: roomId,
+                isHost: isHost
+            )
         }
     }
 }

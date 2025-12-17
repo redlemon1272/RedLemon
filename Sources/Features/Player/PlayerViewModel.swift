@@ -211,6 +211,14 @@ class PlayerViewModel: ObservableObject {
             // Step 3: Update UI
             await MainActor.run {
                 selectedStream = finalStream
+                
+                // Smart Retry: Mark this hash as attempted for this session
+                if let hash = finalStream.infoHash {
+                    Task {
+                        await StreamService.shared.markStreamAsAttempted(imdbId: item.id, hash: hash)
+                    }
+                }
+
                 if let meta = resolvedMetadata {
                     selectedMetadata = meta
                 }

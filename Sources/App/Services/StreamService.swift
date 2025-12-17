@@ -20,6 +20,25 @@ actor StreamService: StreamResolving {
     
     private init() {}
 
+    // MARK: - Smart Retry State
+    /// Tracks attempted infoHashes per IMDB ID for the current session
+    /// [IMDB_ID: Set<InfoHash>]
+    private var attemptedHashes: [String: Set<String>] = [:]
+    
+    /// Mark a stream hash as attempted for a specific item
+    func markStreamAsAttempted(imdbId: String, hash: String) {
+        if attemptedHashes[imdbId] == nil {
+            attemptedHashes[imdbId] = []
+        }
+        attemptedHashes[imdbId]?.insert(hash)
+        print("🧠 StreamService: Marked hash \(hash.prefix(8)) as attempted for \(imdbId)")
+    }
+    
+    /// Get list of hashes to exclude for a specific item
+    func getAttemptedHashes(for imdbId: String) -> Set<String> {
+        return attemptedHashes[imdbId] ?? []
+    }
+
     // MARK: - Stream Resolution
 
 
@@ -52,12 +71,19 @@ actor StreamService: StreamResolving {
         // Step 3: Get Stream Bucket (Direct Resolver Call)
         NSLog("⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...")
 
+        // Get exclusion list for this item (Smart Retry)
+        let excludedHashes = getAttemptedHashes(for: item.id)
+        if !excludedHashes.isEmpty {
+            print("🧠 StreamService: Exclusion list has \(excludedHashes.count) previous attempts for \(item.id)")
+        }
+
         var bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
             imdbId: item.id,
             type: item.type,
             season: finalSeason,
             episode: finalEpisode,
             year: finalMetadata.year,
+            excludedHashes: excludedHashes,
             ignoreVerified: false
         )
 
@@ -72,12 +98,14 @@ actor StreamService: StreamResolving {
             } catch {
                 print("❌ StreamService: Verified stream FAILED to unlock. Falling back to full scrape.")
                 // Retry with verification ignored
+                // Retry with verification ignored
                 bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
                     imdbId: item.id,
                     type: item.type,
                     season: finalSeason,
                     episode: finalEpisode,
                     year: finalMetadata.year,
+                    excludedHashes: excludedHashes,
                     ignoreVerified: true
                 )
             }

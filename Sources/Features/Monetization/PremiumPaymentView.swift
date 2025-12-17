@@ -26,7 +26,7 @@ struct PremiumPaymentView: View {
         var displayName: String {
             switch self {
             case .btc: return "Bitcoin (BTC)"
-            case .evm: return "Ethereum / Base (ETH, USDC)"
+            case .evm: return "Ethereum / Base / Arb (ETH, USDC)"
 
             }
         }

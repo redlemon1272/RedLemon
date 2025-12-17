@@ -18,7 +18,7 @@ struct PremiumPaymentView: View {
     enum Chain: String, CaseIterable, Identifiable {
         case btc = "btc"
         case evm = "evm"
-        case sol = "sol"
+
         
         var id: String { rawValue }
         
@@ -26,7 +26,7 @@ struct PremiumPaymentView: View {
             switch self {
             case .btc: return "Bitcoin (BTC)"
             case .evm: return "Ethereum / Base (ETH, USDC)"
-            case .sol: return "Solana (SOL, USDC)"
+
             }
         }
         
@@ -34,7 +34,7 @@ struct PremiumPaymentView: View {
             switch self {
             case .btc: return "bitcoinsign.circle.fill"
             case .evm: return "diamond.circle.fill" // SF Symbol approximation
-            case .sol: return "s.circle.fill"
+
             }
         }
         
@@ -42,7 +42,7 @@ struct PremiumPaymentView: View {
             switch self {
             case .btc: return .orange
             case .evm: return .blue
-            case .sol: return .purple
+
             }
         }
     }

@@ -84,7 +84,7 @@ struct VerifiedStreamsView: View {
         do {
             switch selectedTab {
             case "streams":
-                let rawStreams = try await SupabaseClient.shared.getAllVerifiedStreams()
+                let rawStreams = try await SupabaseClient.shared.getAllVerifiedStreams(limit: 100)
                 
                 // Deduplicate by hash
                 var seenHashes = Set<String>()

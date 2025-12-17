@@ -111,9 +111,16 @@ actor StreamService: StreamResolving {
             }
         }
 
+        // NEW: Enforce 1080p Max for Events
+        var effectiveQuality = quality
+        if filterExtended && quality == .uhd4k {
+            print("🚫 StreamService: Event Mode detected. Downgrading requested 2160p to 1080p.")
+            effectiveQuality = .fullHD
+        }
+
         let buckets = bucketsResponse.buckets
         let rawBucket: QualityBucket?
-        switch quality {
+        switch effectiveQuality {
         case .uhd4k: rawBucket = buckets.uhd4k
         case .fullHD: rawBucket = buckets.fullHD
         case .hd: rawBucket = buckets.hd
@@ -168,7 +175,7 @@ actor StreamService: StreamResolving {
             streamsToTry.append(contentsOf: extractStreams(from: rawBucket))
         }
 
-        if forcedStream == nil && quality == .fullHD {
+        if forcedStream == nil && effectiveQuality == .fullHD {
             // 2. Fallback: 720p (Safe for older hardware)
             let hdStreams = extractStreams(from: buckets.hd)
              if !hdStreams.isEmpty {
@@ -177,10 +184,15 @@ actor StreamService: StreamResolving {
             }
 
             // 3. Fallback: 4K (Last Resort - may lag on old hardware)
-            let uhdStreams = extractStreams(from: buckets.uhd4k)
-            if !uhdStreams.isEmpty {
-                print("   ➕ Added \(uhdStreams.count) 4K streams as 'Hail Mary' backup")
-                streamsToTry.append(contentsOf: uhdStreams)
+            // RESTRICTION: Never add 4K backup for Events (filterExtended)
+            if !filterExtended {
+                let uhdStreams = extractStreams(from: buckets.uhd4k)
+                if !uhdStreams.isEmpty {
+                    print("   ➕ Added \(uhdStreams.count) 4K streams as 'Hail Mary' backup")
+                    streamsToTry.append(contentsOf: uhdStreams)
+                }
+            } else {
+                print("   🚫 StreamService: Skipping 4K backup streams (Event/WatchParty Mode Restriction)")
             }
         }
 

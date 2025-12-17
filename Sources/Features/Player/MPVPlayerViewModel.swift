@@ -2700,17 +2700,18 @@ extension MPVPlayerViewModel {
              // Rule 1: Movies -> Legacy 20 mins accumulated
              let movieRuleMet = isMovie && accumulatedPlaybackTime > 1200
 
-             // Rule 2: TV Shows -> 30% Duration AND 8 mins (480s) Continuous
+             // Rule 2: TV Shows -> 30% Accumulated Duration (Robust to pauses/seeking)
              // Note: duration > 0 check is already in guard
-             let percentWatched = duration > 0 ? (currentTime / duration) : 0
-             let tvRuleMet = !isMovie && percentWatched >= 0.30 && continuousPlaybackTime >= 480
+             let accumulatedPercent = duration > 0 ? (accumulatedPlaybackTime / duration) : 0
+             // Require 30% of actual Runtime watched (OR 15 mins for long episodes)
+             let tvRuleMet = !isMovie && (accumulatedPercent >= 0.30 || accumulatedPlaybackTime > 900)
 
              if movieRuleMet || tvRuleMet {
                  print("📊 MPVPlayerViewModel: Vote Trigger Condition Met!")
                  print("   ℹ️ Type: \(isMovie ? "Movie" : "TV")")
                  print("   ℹ️ Accumulated: \(Int(accumulatedPlaybackTime))s")
                  print("   ℹ️ Continuous: \(Int(continuousPlaybackTime))s")
-                 print("   ℹ️ Percent: \(Int(percentWatched * 100))%")
+                 print("   ℹ️ Percent: \(Int(accumulatedPercent * 100))%")
 
                  if let hash = currentStreamHash, let quality = currentStreamQuality {
 

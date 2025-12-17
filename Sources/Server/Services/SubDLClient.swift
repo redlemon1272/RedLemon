@@ -25,9 +25,17 @@ struct SubDLSubtitle: Content {
     }
 }
 
+struct SubDLResult: Codable {
+    let sd_id: Int
+    let name: String
+    let imdb_id: String?
+    let tmdb_id: Int?
+}
+
 struct SubDLResponse: Codable {
     let status: Bool
     let subtitles: [SubDLSubtitle]?
+    let results: [SubDLResult]?
     let error: String?
 }
 
@@ -86,15 +94,21 @@ final class SubDLClient {
 
         var request = URLRequest(url: url)
         request.timeoutInterval = 5 // 5s timeout for search
-        
+
         let (data, response) = try await URLSession.shared.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw Abort(.serviceUnavailable, reason: "SubDL API request failed")
         }
 
+        if let responseString = String(data: data, encoding: .utf8) {
+            print("📝 SubDL Raw Response: \(responseString)")
+        } else {
+             print("❌ SubDL Raw Response: Unable to decode data as UTF8")
+        }
+
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
-        
+
         if result.status == false {
             if let errorMsg = result.error {
                 print("❌ SubDL API Error: \(errorMsg)")
@@ -103,8 +117,67 @@ final class SubDLClient {
             }
             return []
         }
-        
+
         let subtitles = result.subtitles ?? []
+
+        if subtitles.isEmpty, let results = result.results, !results.isEmpty {
+            let firstResult = results[0]
+            print("⚠️ Subtitles empty for IMDB ID, testing fallbacks for: \(firstResult.name)")
+
+            var fallbackComponents = URLComponents(string: "\(baseURL)/subtitles")!
+            var fallbackQueryItems = [
+                URLQueryItem(name: "api_key", value: apiKey),
+                URLQueryItem(name: "languages", value: languages),
+                URLQueryItem(name: "type", value: subdlType)
+            ]
+
+            // Prioritize TMDB ID if available, otherwise try film_id
+            if let tmdbId = firstResult.tmdb_id {
+                print("⚠️ Retrying with TMDB ID: \(tmdbId)")
+                fallbackQueryItems.append(URLQueryItem(name: "tmdb_id", value: "\(tmdbId)"))
+            } else {
+                 print("⚠️ Retrying with film_id (sd_id): \(firstResult.sd_id)")
+                 fallbackQueryItems.append(URLQueryItem(name: "film_id", value: "\(firstResult.sd_id)"))
+            }
+
+            if let season = season {
+                fallbackQueryItems.append(URLQueryItem(name: "season_number", value: "\(season)"))
+            }
+            if let episode = episode {
+                fallbackQueryItems.append(URLQueryItem(name: "episode_number", value: "\(episode)"))
+            }
+
+            fallbackComponents.queryItems = fallbackQueryItems
+
+            if let fallbackURL = fallbackComponents.url {
+                print("🔍 Retrying SubDL request: \(fallbackURL.absoluteString.replacingOccurrences(of: apiKey, with: "APIKEY"))")
+                var fallbackRequest = URLRequest(url: fallbackURL)
+                fallbackRequest.timeoutInterval = 5
+
+                if let (fallbackData, _) = try? await URLSession.shared.data(for: fallbackRequest) {
+                    if let fallbackResponseString = String(data: fallbackData, encoding: .utf8) {
+                        print("📝 SubDL Fallback Raw Response: \(fallbackResponseString)")
+                    }
+
+                    if let fallbackResult = try? JSONDecoder().decode(SubDLResponse.self, from: fallbackData) {
+                        let fallbackSubtitles = fallbackResult.subtitles ?? []
+                        print("✅ Found \(fallbackSubtitles.count) subtitles from SubDL (Fallback)")
+
+                        if !fallbackSubtitles.isEmpty {
+                             let sortedFallback = sortSubtitlesByCompatibility(fallbackSubtitles, season: season, episode: episode)
+
+                             // Log fallback results
+                             print("📝 SubDL Fallback results:")
+                             for (idx, sub) in sortedFallback.enumerated() {
+                                 let score = calculateCompatibilityScore(sub, season: season, episode: episode)
+                                 print("   [\(idx + 1)] \(sub.releaseName ?? "NO RELEASE NAME") [\(sub.language ?? "unknown")] (score: \(score))")
+                             }
+                             return sortedFallback
+                        }
+                    }
+                }
+            }
+        }
 
         print("✅ Found \(subtitles.count) subtitles from SubDL")
 
@@ -148,20 +221,20 @@ final class SubDLClient {
 
         var request = URLRequest(url: url)
         request.timeoutInterval = 5 // Explicitly set request timeout
-        
+
         // request.timeoutInterval is sometimes ignored by shared session, so we use a custom config
-        
+
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 5 // 5s timeout for download (fail fast)
         config.timeoutIntervalForResource = 5
         let session = URLSession(configuration: config)
-        
+
         let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw Abort(.serviceUnavailable, reason: "SubDL download failed")
         }
-        
+
         print("✅ Download complete: \(data.count) bytes")
 
         let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") ?? ""
@@ -173,9 +246,9 @@ final class SubDLClient {
             // Save zip to temp file
             let tempDir = FileManager.default.temporaryDirectory
             let zipURL = tempDir.appendingPathComponent(UUID().uuidString + ".zip")
-            
+
             try data.write(to: zipURL)
-            
+
             do {
                 srtText = try extractSRTFromZip(zipURL: zipURL, season: season, episode: episode)
                 print("✅ Extraction successful")
@@ -216,22 +289,22 @@ final class SubDLClient {
         // 1. List files in zip
         let listProcess = Process()
         let listPipe = Pipe()
-        
+
         listProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         listProcess.arguments = ["-l", zipURL.path]
         listProcess.standardOutput = listPipe
-        
+
         try listProcess.run()
         let listData = listPipe.fileHandleForReading.readDataToEndOfFile()
         listProcess.waitUntilExit()
         guard let listOutput = String(data: listData, encoding: .utf8) else {
             throw Abort(.internalServerError, reason: "Failed to list zip contents")
         }
-        
+
         // Parse output to find best matching file
         let lines = listOutput.components(separatedBy: .newlines)
         var bestMatch: String?
-        
+
         // Patterns to look for if we have season/episode info
         var searchPatterns: [String] = []
         if let s = season, let e = episode {
@@ -242,7 +315,7 @@ final class SubDLClient {
                 String(format: "%d%02d", s, e)       // 515
             ]
         }
-        
+
         // Filter for subtitle files
         let subtitleFiles = lines.compactMap { line -> String? in
             // unzip -l output format: Length  Date  Time  Name
@@ -250,22 +323,22 @@ final class SubDLClient {
             let parts = line.split(separator: " ", maxSplits: 3, omittingEmptySubsequences: true)
             guard parts.count == 4 else { return nil }
             let filename = String(parts[3]).trimmingCharacters(in: .whitespacesAndNewlines)
-            
+
             let lower = filename.lowercased()
             if lower.hasSuffix(".srt") || lower.hasSuffix(".vtt") {
                 return filename
             }
             return nil
         }
-        
+
         if subtitleFiles.isEmpty {
             print("⚠️ No subtitle files found in zip list output:")
             print(listOutput)
         }
-        
+
         if let s = season, let e = episode {
             print("🔍 Looking for S%02dE%02d in zip (%d files)...", s, e, subtitleFiles.count)
-            
+
             // Try to find exact match
             for pattern in searchPatterns {
                 if let match = subtitleFiles.first(where: { $0.lowercased().contains(pattern) }) {
@@ -275,7 +348,7 @@ final class SubDLClient {
                 }
             }
         }
-        
+
         // Fallback: Use first subtitle file if no specific match found
         if bestMatch == nil {
             bestMatch = subtitleFiles.first
@@ -283,23 +356,23 @@ final class SubDLClient {
                 print("⚠️ No specific episode match found, using first file: \(match)")
             }
         }
-        
+
         guard let targetFile = bestMatch else {
             throw Abort(.notFound, reason: "No subtitle files found in zip")
         }
-        
+
         // 2. Extract specific file to stdout
         let extractProcess = Process()
         let extractPipe = Pipe()
-        
+
         extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
         extractProcess.arguments = ["-p", zipURL.path, targetFile]
         extractProcess.standardOutput = extractPipe
-        
+
         try extractProcess.run()
         let extractedData = extractPipe.fileHandleForReading.readDataToEndOfFile()
         extractProcess.waitUntilExit()
-        
+
         // Try decoding with UTF-8 first, then ISO-8859-1 (common for subs)
         if let text = String(data: extractedData, encoding: .utf8) {
             return text

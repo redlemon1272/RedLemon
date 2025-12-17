@@ -15,6 +15,7 @@ struct PremiumPaymentView: View {
     @State private var paymentTimer: Timer?
     @State private var showSuccess = false
     @State private var selectedPlan: String = "$4"
+    @State private var exchangeRates: (btc: Double, eth: Double)?
 
     enum Chain: String, CaseIterable, Identifiable {
         case btc = "btc"
@@ -68,15 +69,27 @@ struct PremiumPaymentView: View {
 
                         // Pricing Tiers
                         HStack(spacing: 16) {
-                            PricingBadge(price: "$4", duration: "30 Days", isSelected: selectedPlan == "$4") {
-                                selectedPlan = "$4"
-                            }
-                            PricingBadge(price: "$7", duration: "60 Days", isSelected: selectedPlan == "$7") {
-                                selectedPlan = "$7"
-                            }
-                            PricingBadge(price: "$10", duration: "90 Days", isSelected: selectedPlan == "$10") {
-                                selectedPlan = "$10"
-                            }
+                            PricingBadge(
+                                price: "$4",
+                                duration: "30 Days",
+                                isSelected: selectedPlan == "$4",
+                                cryptoAmount: calculateCryptoAmount(usd: 4),
+                                action: { selectedPlan = "$4" }
+                            )
+                            PricingBadge(
+                                price: "$7",
+                                duration: "60 Days",
+                                isSelected: selectedPlan == "$7",
+                                cryptoAmount: calculateCryptoAmount(usd: 7),
+                                action: { selectedPlan = "$7" }
+                            )
+                            PricingBadge(
+                                price: "$10",
+                                duration: "90 Days",
+                                isSelected: selectedPlan == "$10",
+                                cryptoAmount: calculateCryptoAmount(usd: 10),
+                                action: { selectedPlan = "$10" }
+                            )
                         }
                         .padding(.top, 4)
                     }
@@ -223,7 +236,10 @@ struct PremiumPaymentView: View {
             , alignment: .topTrailing
         )
         .onAppear {
-            Task { await loadAddress() }
+            Task {
+                await loadAddress()
+                await fetchRates()
+            }
         }
         .onDisappear {
             stopPolling()
@@ -287,6 +303,27 @@ struct PremiumPaymentView: View {
         isCheckingPayment = false
     }
 
+    private func fetchRates() async {
+        do {
+            exchangeRates = try await SupabaseClient.shared.fetchCryptoRates()
+        } catch {
+            LogManager.shared.error("❌ Failed to fetch crypto rates", error: error)
+        }
+    }
+
+    private func calculateCryptoAmount(usd: Double) -> String? {
+        guard let rates = exchangeRates else { return nil }
+
+        if selectedChain == .btc {
+            let amount = usd / rates.btc
+            return String(format: "%.5f BTC", amount)
+        } else {
+            // EVM (ETH)
+            let amount = usd / rates.eth
+            return String(format: "%.4f ETH", amount)
+        }
+    }
+
     private func generateQRCode(from string: String) -> NSImage {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
@@ -336,6 +373,7 @@ struct PricingBadge: View {
     let price: String
     let duration: String
     let isSelected: Bool
+    var cryptoAmount: String? = nil
     let action: () -> Void
 
     var body: some View {
@@ -344,6 +382,13 @@ struct PricingBadge: View {
                 Text(price)
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(isSelected ? .white : .secondary)
+
+                if let crypto = cryptoAmount {
+                    Text(crypto)
+                        .font(.system(size: 10, weight: .medium, design: .monospaced))
+                        .foregroundColor(isSelected ? .white.opacity(0.8) : .secondary.opacity(0.6))
+                }
+
                 Text(duration)
                     .font(.caption)
                     .foregroundColor(isSelected ? .white.opacity(0.9) : .secondary.opacity(0.7))

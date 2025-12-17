@@ -872,6 +872,36 @@ class SupabaseClient: RoomManager, UserManager {
         return try jsonDecoder.decode([ContentPopularityStat].self, from: data)
     }
 
+    // MARK: - Crypto Rates
+
+    /// Fetch current crypto rates (matches Edge Function logic)
+    func fetchCryptoRates() async throws -> (btc: Double, eth: Double) {
+        struct CoinbaseResponse: Decodable {
+            struct Data: Decodable {
+                let amount: String
+            }
+            let data: Data
+        }
+
+        struct MempoolResponse: Decodable {
+            let USD: Double
+        }
+
+        async let ethRequest = URLSession.shared.data(from: URL(string: "https://api.coinbase.com/v2/prices/ETH-USD/spot")!)
+        async let btcRequest = URLSession.shared.data(from: URL(string: "https://mempool.space/api/v1/prices")!)
+
+        let (ethData, _) = try await ethRequest
+        let (btcData, _) = try await btcRequest
+
+        let ethResponse = try JSONDecoder().decode(CoinbaseResponse.self, from: ethData)
+        let btcResponse = try JSONDecoder().decode(MempoolResponse.self, from: btcData)
+
+        let ethPrice = Double(ethResponse.data.amount) ?? 0.0
+        let btcPrice = btcResponse.USD
+
+        return (btc: btcPrice, eth: ethPrice)
+    }
+
     // MARK: - Payments (Edge Functions)
 
     /// Assign a payment address for the user

@@ -84,7 +84,19 @@ struct VerifiedStreamsView: View {
         do {
             switch selectedTab {
             case "streams":
-                verifiedStreams = try await SupabaseClient.shared.getAllVerifiedStreams()
+                let rawStreams = try await SupabaseClient.shared.getAllVerifiedStreams()
+                
+                // Deduplicate by hash
+                var seenHashes = Set<String>()
+                verifiedStreams = rawStreams.filter { stream in
+                    let isNew = !seenHashes.contains(stream.hash)
+                    if isNew {
+                        seenHashes.insert(stream.hash)
+                    } else {
+                        print("⚠️ Admin: Filtered duplicate stream hash: \(stream.hash)")
+                    }
+                    return isNew
+                }
                 // Trigger title resolution for legacy data
                 Task { await resolveMissingTitles() }
                 

@@ -28,6 +28,7 @@ struct SubDLSubtitle: Content {
 struct SubDLResponse: Codable {
     let status: Bool
     let subtitles: [SubDLSubtitle]?
+    let error: String?
 }
 
 final class SubDLClient {
@@ -93,6 +94,16 @@ final class SubDLClient {
         }
 
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
+        
+        if result.status == false {
+            if let errorMsg = result.error {
+                print("❌ SubDL API Error: \(errorMsg)")
+            } else {
+                print("❌ SubDL API returned failure status without error message")
+            }
+            return []
+        }
+        
         let subtitles = result.subtitles ?? []
 
         print("✅ Found \(subtitles.count) subtitles from SubDL")

@@ -94,22 +94,37 @@ struct PremiumPaymentView: View {
                     }
 
                     // 1. Select Chain
-                    Picker("Select Cryptocurrency", selection: $selectedChain) {
+                    // 1. Select Chain (Custom Segmented Control)
+                    HStack(spacing: 12) {
                         ForEach(Chain.allCases) { chain in
-                            HStack {
-                                Image(systemName: chain.icon)
-                                    .foregroundColor(chain.color)
-                                Text(chain.displayName)
+                            Button(action: {
+                                LogManager.shared.info("🔘 User switched chain to: \(chain.rawValue)")
+                                selectedChain = chain
+                                Task { await loadAddress() }
+                            }) {
+                                HStack {
+                                    Image(systemName: chain.icon)
+                                        .foregroundColor(selectedChain == chain ? .white : chain.color)
+                                    Text(chain.displayName)
+                                        .fontWeight(selectedChain == chain ? .medium : .regular)
+                                }
+                                .padding(.vertical, 10)
+                                .padding(.horizontal, 16)
+                                .frame(maxWidth: .infinity)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(selectedChain == chain ? Color.blue : Color.white.opacity(0.1))
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .stroke(selectedChain == chain ? Color.blue : Color.white.opacity(0.2), lineWidth: 1)
+                                )
+                                .foregroundColor(selectedChain == chain ? .white : .primary)
                             }
-                            .tag(chain)
+                            .buttonStyle(.plain)
                         }
                     }
-                    .pickerStyle(.segmented)
-                    .fixedSize()
                     .padding(.horizontal)
-                    .onChange(of: selectedChain) { _ in
-                        Task { await loadAddress() }
-                    }
 
                     // 2. Address & QR
                     VStack(spacing: 20) {
@@ -224,9 +239,11 @@ struct PremiumPaymentView: View {
 
         do {
             let address = try await SupabaseClient.shared.assignPaymentAddress(chain: selectedChain.rawValue)
+            LogManager.shared.info("✅ Address assigned for \(selectedChain.rawValue): \(address)")
             assignedAddress = address
             startPolling()
         } catch {
+            LogManager.shared.error("❌ Failed to get address for \(selectedChain.rawValue)", error: error)
             errorMessage = "Failed to get address: \(error.localizedDescription)"
         }
 

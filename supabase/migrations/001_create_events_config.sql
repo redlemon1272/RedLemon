@@ -26,6 +26,8 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+DROP TRIGGER IF EXISTS update_events_config_updated_at ON events_config;
+
 CREATE TRIGGER update_events_config_updated_at 
 BEFORE UPDATE ON events_config 
 FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
@@ -50,6 +52,7 @@ ON CONFLICT (config_type, version) DO NOTHING;
 ALTER TABLE events_config ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Anyone can read active configs (public data)
+DROP POLICY IF EXISTS "Public read access to active configs" ON events_config;
 CREATE POLICY "Public read access to active configs"
 ON events_config
 FOR SELECT
@@ -57,6 +60,7 @@ USING (is_active = true);
 
 -- Policy: Only authenticated users can insert/update (for admin script)
 -- Note: You may want to restrict this further to specific admin users
+DROP POLICY IF EXISTS "Authenticated users can manage configs" ON events_config;
 CREATE POLICY "Authenticated users can manage configs"
 ON events_config
 FOR ALL

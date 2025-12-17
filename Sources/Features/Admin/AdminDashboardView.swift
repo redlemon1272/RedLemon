@@ -15,6 +15,12 @@ struct AdminDashboardView: View {
     @State private var eventConfigMovieCount: Int?
     @State private var isShowingScheduleManagement = false
     @State private var isShowingVerifiedStreams = false
+    
+    // Grant Premium State
+    @State private var grantUsername: String = ""
+    @State private var grantDays: Int = 30
+    @State private var isGranting = false
+    @State private var grantMessage: String?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -158,6 +164,59 @@ struct AdminDashboardView: View {
                             .padding(.vertical, 4)
                         }
                     }
+                }
+                
+                // Grant Premium Section
+                Section(header: Text("Grant Premium")) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: "crown.fill")
+                                .foregroundColor(.yellow)
+                            Text("Grant Premium Status")
+                                .font(.headline)
+                        }
+                        
+                        Text("Grant unlimited hosting capabilities to a specific user.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        HStack {
+                            TextField("Username", text: $grantUsername)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .frame(width: 150)
+                            
+                            Picker("Duration", selection: $grantDays) {
+                                Text("30 Days").tag(30)
+                                Text("90 Days").tag(90)
+                                Text("1 Year").tag(365)
+                                Text("Lifetime (100y)").tag(36500)
+                            }
+                            .frame(width: 120)
+                            
+                            if isGranting {
+                                ProgressView()
+                                    .scaleEffect(0.7)
+                            } else {
+                                Button(action: grantPremium) {
+                                    Text("Grant")
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 6)
+                                        .background(grantUsername.isEmpty ? Color.gray : Color.yellow)
+                                        .cornerRadius(6)
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(grantUsername.isEmpty)
+                            }
+                        }
+                        
+                        if let msg = grantMessage {
+                            Text(msg)
+                                .font(.caption)
+                                .foregroundColor(msg.contains("Error") ? .red : .green)
+                        }
+                    }
+                    .padding(.vertical, 8)
                 }
 
                 // User Management Section
@@ -318,6 +377,24 @@ struct AdminDashboardView: View {
                 errorMessage = error.localizedDescription
             }
             isLoading = false
+        }
+    }
+    
+    private func grantPremium() {
+        guard !grantUsername.isEmpty else { return }
+        isGranting = true
+        grantMessage = nil
+        
+        Task {
+            do {
+                let message = try await SupabaseClient.shared.grantPremium(username: grantUsername, days: grantDays)
+                grantMessage = "Success: \(message)"
+                grantUsername = "" // Clear input on success
+                refreshData() // Refresh user list to see update
+            } catch {
+                grantMessage = "Error: \(error.localizedDescription)"
+            }
+            isGranting = false
         }
     }
 }

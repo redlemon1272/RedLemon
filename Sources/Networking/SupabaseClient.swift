@@ -48,7 +48,7 @@ class SupabaseClient: RoomManager, UserManager {
     static let shared = SupabaseClient()
     
     // Performance: Cache formatters to avoid expensive initialization
-    private static let isoFormatter: ISO8601DateFormatter = {
+    static let isoFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         return formatter
     }()
@@ -326,6 +326,31 @@ class SupabaseClient: RoomManager, UserManager {
             ]
         )
         return try jsonDecoder.decode([SupabaseUser].self, from: data)
+    }
+
+    /// Grant Premium Status (Admin Only)
+    func grantPremium(username: String, days: Int) async throws -> String {
+        let params: [String: Any] = [
+            "target_username": username,
+            "days_to_add": days
+        ]
+        
+        let response = try await functions.invoke("admin_grant_premium", options: FunctionInvokeOptions(
+            body: params
+        ))
+        
+        struct GrantResponse: Decodable {
+            let success: Bool
+            let message: String
+        }
+        
+        let result = try JSONDecoder().decode(GrantResponse.self, from: response)
+        
+        if result.success {
+            return result.message
+        } else {
+            throw NSError(domain: "SupabaseClient", code: 403, userInfo: [NSLocalizedDescriptionKey: result.message])
+        }
     }
 
     /// Alias for getUser (more descriptive)
@@ -1097,10 +1122,29 @@ struct ReportedStream: Identifiable, Codable {
         }
     }
     
-    /// Check payment status
-    func checkPaymentStatus() async throws -> Bool {
-        // ...
-        return true
+    /// Check payment status via Edge Function
+    func checkPaymentStatus() async throws -> (Bool, Date?) {
+        let response = try await functions.invoke("check-payment")
+        
+        struct PaymentResponse: Decodable {
+            let success: Bool
+            let premium: Bool?
+            let new_expiry: String? // ISO8601 string
+        }
+        
+        // Log raw response for debugging
+        if let string = String(data: response, encoding: .utf8) {
+            print("💰 Check Payment Response: \(string)")
+        }
+
+        let result = try JSONDecoder().decode(PaymentResponse.self, from: response)
+        
+        if let expiryString = result.new_expiry, 
+           let date = SupabaseClient.isoFormatter.date(from: expiryString) {
+            return (result.premium ?? false, date)
+        }
+        
+        return (result.premium ?? false, nil)
     }
     
     // MARK: - Feedback & Logging System

@@ -6,6 +6,7 @@ DROP POLICY IF EXISTS "Authenticated users can manage configs" ON events_config;
 
 -- Create a more permissive policy for INSERT/UPDATE
 -- Allow anon role to insert/update (needed for generation script)
+DROP POLICY IF EXISTS "Allow anon to manage configs" ON events_config;
 CREATE POLICY "Allow anon to manage configs"
 ON events_config
 FOR ALL

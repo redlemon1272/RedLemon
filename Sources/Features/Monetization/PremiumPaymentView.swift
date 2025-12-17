@@ -64,6 +64,14 @@ struct PremiumPaymentView: View {
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
+                        
+                        // Pricing Tiers
+                        HStack(spacing: 16) {
+                            PricingBadge(price: "$4", duration: "30 Days")
+                            PricingBadge(price: "$7", duration: "60 Days")
+                            PricingBadge(price: "$10", duration: "90 Days")
+                        }
+                        .padding(.top, 4)
                     }
                     
                     // Chain Failure Message
@@ -117,7 +125,7 @@ struct PremiumPaymentView: View {
                             
                             // Address Text & Copy
                             VStack(spacing: 8) {
-                                Text("Send any amount to:")
+                                Text("Send any amount (USDC, ETH, BTC) to:")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 
@@ -179,7 +187,7 @@ struct PremiumPaymentView: View {
                 .padding(40)
             }
         }
-        .frame(width: 500, height: 650)
+        .frame(width: 500, height: 680)
         .onAppear {
             Task { await loadAddress() }
         }
@@ -223,11 +231,12 @@ struct PremiumPaymentView: View {
         isCheckingPayment = true
         
         do {
-            let isPremium = try await SupabaseClient.shared.checkPaymentStatus()
+            let (isPremium, newExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
+            
             if isPremium {
-                LogManager.shared.info("✅ Payment Confirmed!")
+                LogManager.shared.info("✅ Payment Confirmed! Expires: \(String(describing: newExpiry))")
                 stopPolling()
-                licenseManager.activateLicense() // Local state update
+                licenseManager.refreshLicense(premium: true, expiresAt: newExpiry)
                 withAnimation {
                     showSuccess = true
                 }
@@ -284,5 +293,30 @@ struct SuccessView: View {
         }
         .padding()
         .transition(.scale)
+    }
+}
+
+// Helper View for Pricing Tiers
+struct PricingBadge: View {
+    let price: String
+    let duration: String
+    
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(price)
+                .font(.system(size: 18, weight: .bold))
+                .foregroundColor(.white)
+            Text(duration)
+                .font(.caption)
+                .foregroundColor(.secondary)
+        }
+        .padding(.vertical, 8)
+        .padding(.horizontal, 16)
+        .background(Color.white.opacity(0.1))
+        .cornerRadius(12)
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.white.opacity(0.2), lineWidth: 1)
+        )
     }
 }

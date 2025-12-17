@@ -45,12 +45,14 @@ CREATE TABLE IF NOT EXISTS payment_transactions (
 -- Users can read ONLY their assigned address
 ALTER TABLE payment_pools ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their assigned address" ON payment_pools;
 CREATE POLICY "Users can view their assigned address" 
 ON payment_pools FOR SELECT 
 TO authenticated 
 USING (assigned_to_user_id = auth.uid());
 
 -- Service Role (Admin/Edge Function) has full access
+DROP POLICY IF EXISTS "Service role has full access to pools" ON payment_pools;
 CREATE POLICY "Service role has full access to pools" 
 ON payment_pools FOR ALL 
 TO service_role 
@@ -61,6 +63,7 @@ USING (true);
 -- Users can view their own transaction history
 ALTER TABLE payment_transactions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their own transactions" ON payment_transactions;
 CREATE POLICY "Users can view their own transactions" 
 ON payment_transactions FOR SELECT 
 TO authenticated 

@@ -63,7 +63,8 @@
 - **Identity**: `UsernameSetupView.swift` manages the initial username creation.
 ### 7. Monetization & Licensing
 - **Files**: `LicenseManager.swift`, `PaymentGateView.swift`
-- **Logic**: Uses a local boolean `isHostLicenseActive` in `AppStorage`.
+- **Logic**: Uses a local timestamp (`subscriptionExpiresAt`) in `AppStorage`. `isPremium` is calculated dynamically against `Date()`.
+- **Payment System**: Uses `Crypto Payments` (HD Wallet). Checks `payment_transactions` on Supabase to extend expiry.
 - **Warning**: There is a `#if DEBUG` flag in `LicenseManager`. If you are debugging IAP/Payment issues, check if you are running in Release or Debug mode as behavior differs.
 - **Recovery**: Uses a custom BIP39-style phrase generated in `RecoveryPhraseManager`. Do not confuse with crypto wallets; it's just a hashed seed for the Supabase backend.
 

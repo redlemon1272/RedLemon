@@ -645,13 +645,9 @@ struct WatchPartyLobbyView: View {
                             .padding(.bottom, 4)
                         }
                         
-                        // Host controls
+                            // Host controls
                         Button(action: {
-                            if licenseManager.canHost {
-                                startMovie()
-                            } else {
-                                showPaymentGate = true
-                            }
+                            startMovie()
                         }) {
                             HStack {
                                 Image(systemName: "play.fill")

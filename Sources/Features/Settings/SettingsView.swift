@@ -326,11 +326,11 @@ struct SettingsView: View {
                     // Status indicator
                     HStack(spacing: 6) {
                         Circle()
-                            .fill(licenseManager.canHost ? Color.green : Color.orange)
+                            .fill(licenseManager.isPremium ? Color.green : Color.orange)
                             .frame(width: 10, height: 10)
-                        Text(licenseManager.canHost ? "Active" : "Inactive")
+                        Text(licenseManager.isPremium ? "Active" : "Inactive")
                             .font(.body)
-                            .foregroundColor(licenseManager.canHost ? .green : .orange)
+                            .foregroundColor(licenseManager.isPremium ? .green : .orange)
                     }
                 }
 
@@ -353,7 +353,7 @@ struct SettingsView: View {
                 .cornerRadius(8)
 
                 // Purchase button (if license is inactive)
-                if !licenseManager.canHost {
+                if !licenseManager.isPremium {
                     VStack(alignment: .leading, spacing: 12) {
                         Divider()
                             .padding(.vertical, 4)

@@ -65,13 +65,19 @@ RESOURCES="$CONTENTS/Resources"
 echo "📁 Ensuring .app bundle structure exists..."
 mkdir -p "$MACOS" "$FRAMEWORKS" "$RESOURCES"
 
-# Build debug executable
+# Build the project
 echo "📦 Building Swift executable (debug)..."
-if [[ -n "$SWIFT_BUILD_FLAGS" ]]; then
-    echo "🔧 Using architecture-specific flags: $SWIFT_BUILD_FLAGS"
-    swift build $SWIFT_BUILD_FLAGS
+CONFIG_FLAGS="-c debug -Xswiftc -DDEBUG"
+if [ "$ARCH_NAME" == "arm64" ]; then
+    echo "🔧 Using architecture-specific flags: --arch arm64"
+    swift build $CONFIG_FLAGS --arch arm64
+elif [ "$ARCH_NAME" == "x86_64" ]; then
+    echo "🔧 Using architecture-specific flags: --arch x86_64"
+    swift build $CONFIG_FLAGS --arch x86_64
 else
-    swift build
+    # Universal build not supported by swift build directly easily without lipo
+    # Fallback to current arch
+    swift build $CONFIG_FLAGS
 fi
 
 # Copy executable (debug) - ALWAYS overwrite

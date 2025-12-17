@@ -8,9 +8,9 @@ class LicenseManager: ObservableObject {
     // MARK: - Feature Flag
     // ⚠️ MASTER SWITCH: Set to true to enable the payment wall
     #if DEBUG
-    @Published var isMonetizationEnabled: Bool = false
+    @Published var isMonetizationEnabled: Bool = true
     #else
-    @Published var isMonetizationEnabled: Bool = false // Keep false for Beta launch
+    @Published var isMonetizationEnabled: Bool = true // Enabled for Beta testing
     #endif
     
     // MARK: - License State

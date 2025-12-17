@@ -502,8 +502,10 @@ actor StreamService: StreamResolving {
             // Still process subtitles
             var finalStream = stream
              if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
-                NSLog("📥 StreamService: Pre-downloading %d subtitles for direct stream...", subtitles.count)
-                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: subtitles)
+                // Optimize: Cap at 5 subtitles to prevent blocking playback start
+                let limitedSubtitles = Array(subtitles.prefix(5))
+                NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles for direct stream...", limitedSubtitles.count, subtitles.count)
+                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles)
                 finalStream.subtitles = downloadedSubs
             }
             return finalStream
@@ -577,8 +579,10 @@ actor StreamService: StreamResolving {
 
         // Download subtitles if available
         if let subtitles = unlockedStream.subtitles, !subtitles.isEmpty {
-            NSLog("📥 StreamService: Pre-downloading %d subtitles...", subtitles.count)
-            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: subtitles)
+            // Optimize: Cap at 5 subtitles to prevent blocking playback start
+            let limitedSubtitles = Array(subtitles.prefix(5))
+            NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles...", limitedSubtitles.count, subtitles.count)
+            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles)
             unlockedStream.subtitles = downloadedSubs
         }
 

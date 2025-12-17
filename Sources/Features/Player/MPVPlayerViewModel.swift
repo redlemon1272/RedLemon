@@ -67,19 +67,24 @@ class MPVPlayerViewModel: ObservableObject {
 
                     // Reactively select defaults once tracks are populated
                     // This fixes the race condition where tracks appear AFTER onVideoReady
-                    // Fix: Allow re-selection if we currently have an External track but Embedded ones just arrived
-                    let currentIsExternal = self.currentSubtitleTrack?.isExternal ?? true
-                    let hasEmbedded = tracks.contains(where: { !$0.isExternal })
-                    let shouldRetry = !self.hasAutoSelectedSubtitles || (currentIsExternal && hasEmbedded)
+                    
+                    // Fix: Check for REAL embedded tracks (excluding 'Off' / ID 0)
+                    let hasEmbedded = tracks.contains(where: { $0.id != 0 && !$0.isExternal })
+                    
+                    // Fix: Run auto-select ONLY if we haven't done it yet.
+                    // Removed '|| (currentIsExternal && hasEmbedded)' because it overrides manual user selection.
+                    // If the user manually picks an external track, we must NOT force them back to embedded.
+                    let shouldRetry = !self.hasAutoSelectedSubtitles
+                    
+                    // Check if we have actual tracks (more than just "Off")
+                    let hasRealTracks = tracks.contains(where: { $0.id != 0 })
 
-                    if !tracks.isEmpty && shouldRetry && self.hasVideoReadyTriggered {
+                    if hasRealTracks && shouldRetry && self.hasVideoReadyTriggered {
                         print("⚡ MPVPlayerViewModel: Tracks populated (Embedded: \(hasEmbedded)), triggering auto-selection")
                         if self.selectEnglishDefaults() {
-                            // Only mark as "done" if we selected an EMBEDDED track (or if no embedded exist)
-                            // This ensures we keep trying until we get the best quality sub
-                            if hasEmbedded {
-                                self.hasAutoSelectedSubtitles = true
-                            }
+                            // Mark as done immediately once we've successfully selected a default.
+                            // This ensures we respect any future manual changes by the user.
+                            self.hasAutoSelectedSubtitles = true
                         }
                     }
                 }

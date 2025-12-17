@@ -918,9 +918,9 @@ class MPVWrapper: ObservableObject {
                 // We verify logic correctness via logs
             }
 
-            // 1. Prefer Embedded (+1000)
-            if !a.isExternal { scoreA += 1000 }
-            if !b.isExternal { scoreB += 1000 }
+            // 1. Prefer Embedded (+3000)
+            if !a.isExternal { scoreA += 3000 }
+            if !b.isExternal { scoreB += 3000 }
             
             // 2. Release Match (+500 range)
             let releaseScoreA = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: a.title)
@@ -962,11 +962,11 @@ class MPVWrapper: ObservableObject {
             let matchScore = calculateReleaseMatchScore(videoName: currentVideoFilename, subtitleName: best.title)
             let isClean = best.title.count < 20 && (best.title.contains("sdh") || best.title.contains("english") || best.title.contains("en"))
             let isSDH = best.isHearingImpaired || best.title.contains("sdh") || best.title.contains("cc")
-            var finalScore = (best.isExternal ? 0 : 1000) + matchScore + (isClean ? 600 : 0) + (isSDH ? 250 : 0)
+            var finalScore = (best.isExternal ? 0 : 3000) + matchScore + (isClean ? 600 : 0) + (isSDH ? 250 : 0)
             if best.isForced { finalScore -= 50 }
             if best.isDefault { finalScore -= 10 }
             
-            print("   🏆 Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 1000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
+            print("   🏆 Final Score: \(finalScore) (Embedded: \(best.isExternal ? 0 : 3000), Match: \(matchScore), Clean: \(isClean ? 600 : 0), SDH: \(isSDH ? 250 : 0))")
 
             var trackId = Int64(best.id)
             mpv_set_property(handle, "sid", MPV_FORMAT_INT64, &trackId)

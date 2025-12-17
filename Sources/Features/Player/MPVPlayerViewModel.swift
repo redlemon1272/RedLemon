@@ -67,10 +67,19 @@ class MPVPlayerViewModel: ObservableObject {
 
                     // Reactively select defaults once tracks are populated
                     // This fixes the race condition where tracks appear AFTER onVideoReady
-                    if !tracks.isEmpty && !self.hasAutoSelectedSubtitles && self.hasVideoReadyTriggered {
-                        print("⚡ MPVPlayerViewModel: Tracks populated, triggering delayed auto-selection")
+                    // Fix: Allow re-selection if we currently have an External track but Embedded ones just arrived
+                    let currentIsExternal = self.currentSubtitleTrack?.isExternal ?? true
+                    let hasEmbedded = tracks.contains(where: { !$0.isExternal })
+                    let shouldRetry = !self.hasAutoSelectedSubtitles || (currentIsExternal && hasEmbedded)
+
+                    if !tracks.isEmpty && shouldRetry && self.hasVideoReadyTriggered {
+                        print("⚡ MPVPlayerViewModel: Tracks populated (Embedded: \(hasEmbedded)), triggering auto-selection")
                         if self.selectEnglishDefaults() {
-                            self.hasAutoSelectedSubtitles = true
+                            // Only mark as "done" if we selected an EMBEDDED track (or if no embedded exist)
+                            // This ensures we keep trying until we get the best quality sub
+                            if hasEmbedded {
+                                self.hasAutoSelectedSubtitles = true
+                            }
                         }
                     }
                 }
@@ -251,7 +260,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var posterURL: String?
     @Published var backgroundURL: String?
     @Published var logoURL: String?
-    
+
     // Play Next Episode State
     @Published var fullMetadata: MediaMetadata?
     @Published var showNextEpisodePrompt: Bool = false
@@ -484,20 +493,20 @@ class MPVPlayerViewModel: ObservableObject {
               self.currentTime > 0 else {
             return
         }
-        
+
         // Show prompt if within last 90 seconds (longer window for credits)
         let remaining = self.duration - self.currentTime
-        if remaining < 90 && remaining > 2 { 
-             
+        if remaining < 90 && remaining > 2 {
+
              // Check if already showing
              if showNextEpisodePrompt { return }
-             
+
              // Check if there IS a next episode
              if let meta = self.fullMetadata,
                 let videos = meta.videos,
                 let currentS = appState.player.selectedSeason,
                 let currentE = appState.player.selectedEpisode {
-                 
+
                  let nextE = currentE + 1
                  if let video = videos.first(where: { $0.season == currentS && $0.episode == nextE }) {
                      self.nextEpisodeInfo = "Up Next: \(video.title)"
@@ -505,7 +514,7 @@ class MPVPlayerViewModel: ObservableObject {
                      self.showNextEpisodePrompt = true
                      return
                  }
-                 
+
                  let nextS = currentS + 1
                  if let video = videos.first(where: { $0.season == nextS && $0.episode == 1 }) {
                      self.nextEpisodeInfo = "Up Next: S\(nextS)E1 - \(video.title)"

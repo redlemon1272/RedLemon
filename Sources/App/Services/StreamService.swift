@@ -17,14 +17,14 @@ protocol StreamResolving {
 /// Manages stream resolution, unlocking, and subtitle downloading
 actor StreamService: StreamResolving {
     static let shared = StreamService()
-    
+
     private init() {}
 
     // MARK: - Smart Retry State
     /// Tracks attempted infoHashes per IMDB ID for the current session
     /// [IMDB_ID: Set<InfoHash>]
     private var attemptedHashes: [String: Set<String>] = [:]
-    
+
     /// Mark a stream hash as attempted for a specific item
     func markStreamAsAttempted(imdbId: String, hash: String) {
         if attemptedHashes[imdbId] == nil {
@@ -33,7 +33,7 @@ actor StreamService: StreamResolving {
         attemptedHashes[imdbId]?.insert(hash)
         print("🧠 StreamService: Marked hash \(hash.prefix(8)) as attempted for \(imdbId)")
     }
-    
+
     /// Get list of hashes to exclude for a specific item
     func getAttemptedHashes(for imdbId: String) -> Set<String> {
         return attemptedHashes[imdbId] ?? []
@@ -123,10 +123,10 @@ actor StreamService: StreamResolving {
         // Build list of streams to try with Cross-Quality Fallback
         // Priority: Requested (1080p) -> 720p -> 4K (Hail Mary)
         var streamsToTry: [Stream] = []
-        
-        
+
+
         var forcedStream: Stream? = nil
-        
+
         // Helper to extract streams from a bucket
         func extractStreams(from bucket: QualityBucket?) -> [Stream] {
             var extracted: [Stream] = []
@@ -134,7 +134,7 @@ actor StreamService: StreamResolving {
             if let alternates = bucket?.alternates { extracted.append(contentsOf: alternates) }
             return extracted
         }
-        
+
         // NEW: Check for preferred hash (Synchronization Logic)
         if let targetHash = preferredInfoHash {
             print("🔗 StreamService: Attempting to resolve specific stream hash: \(targetHash)")
@@ -167,7 +167,7 @@ actor StreamService: StreamResolving {
             // 1. Requested Quality (usually 1080p)
             streamsToTry.append(contentsOf: extractStreams(from: rawBucket))
         }
-        
+
         if forcedStream == nil && quality == .fullHD {
             // 2. Fallback: 720p (Safe for older hardware)
             let hdStreams = extractStreams(from: buckets.hd)
@@ -175,7 +175,7 @@ actor StreamService: StreamResolving {
                 print("   ➕ Added \(hdStreams.count) 720p streams as backup")
                 streamsToTry.append(contentsOf: hdStreams)
             }
-            
+
             // 3. Fallback: 4K (Last Resort - may lag on old hardware)
             let uhdStreams = extractStreams(from: buckets.uhd4k)
             if !uhdStreams.isEmpty {
@@ -183,19 +183,19 @@ actor StreamService: StreamResolving {
                 streamsToTry.append(contentsOf: uhdStreams)
             }
         }
-        
+
         guard !streamsToTry.isEmpty else {
             throw APIError.noStreamsFound
         }
-        
+
         LogManager.shared.info("📦 StreamService: Found \(streamsToTry.count) total streams to try (across all qualities)")
 
         // Step 3: Apply Tiered Codec Safety Filter
         // Goal: Prioritize H.264 (best compat), then 8-bit x265 (okay), then anything (last resort)
-        
+
         let badCodecs = ["x265", "hevc", "h.265", "h265", "x.265"]
         let tenBitKeywords = ["10bit", "10-bit", "10 bit"]
-        
+
         // Tier 1: Strict H.264 Preference (Original Behavior)
         // Completely removes anything looking like x265
         let tier1Streams = streamsToTry.compactMap { stream -> Stream? in
@@ -203,14 +203,14 @@ actor StreamService: StreamResolving {
             let hasBadCodec = badCodecs.contains { titleLower.contains($0) }
             return hasBadCodec ? nil : stream
         }
-        
+
         var filteredStreams: [Stream] = tier1Streams
-        
+
         if !filteredStreams.isEmpty {
             print("✅ StreamService: Found \(filteredStreams.count) H.264 streams (Tier 1)")
         } else {
             print("⚠️ StreamService: No H.264 streams found. Attempting Tier 2 (x265 8-bit)...")
-            
+
             // Tier 2: Allow x265 but BLOCK 10-bit (causes performance issues on old hardware)
             let tier2Streams = streamsToTry.compactMap { stream -> Stream? in
                 let titleLower = stream.title.lowercased()
@@ -220,21 +220,21 @@ actor StreamService: StreamResolving {
                 }
                 return stream // allow 8-bit x265 (and any other codec)
             }
-            
+
             filteredStreams = tier2Streams
-            
+
             if !filteredStreams.isEmpty {
                 print("⚠️ StreamService: Fallback to Tier 2 (x265 8-bit). Found \(filteredStreams.count) streams.")
             } else {
                 print("⚠️ StreamService: No 8-bit streams found. Attempting Tier 3 (Everything)...")
-                
+
                 // Tier 3: "Hail Mary" - Use whatever we have
                 // Better to play with lag than not play at all
                 filteredStreams = streamsToTry
                 print("⚠️ StreamService: Fallback to Tier 3 (All Codecs). Found \(filteredStreams.count) streams.")
             }
         }
-        
+
         guard !filteredStreams.isEmpty else {
             LogManager.shared.error("❌ StreamService: No streams available even after Tier 3 fallback")
             throw APIError.noStreamsFound
@@ -243,7 +243,7 @@ actor StreamService: StreamResolving {
         // Step 3.5: Apply Keyword Safety Filter (Remux, etc) AND Extended Cut Filter
         // User reported performance issues (spinning beach ball) with Remux files
         var blockedKeywords = ["remux"]
-        
+
         // NEW: Filter extended cuts if requested (for events)
         if filterExtended {
             print("🚫 StreamService: Applying Extended Cut Filter (Event Mode)")
@@ -261,11 +261,11 @@ actor StreamService: StreamResolving {
 
         guard !keywordFiltered.isEmpty else {
             LogManager.shared.error("❌ StreamService: No streams available after keyword filter")
-            
+
             // Fallback: If we filtered everything because of "extended" but we have no other choice,
             // we should probably fail rather than play the wrong runtime event?
             // User requested explicit filtering for schedule accuracy.
-            
+
             // However, if it's just REMUX blocking that caused empty, maybe we relax?
             // For now, let's strict fail to respect the user's intent to avoid issues.
             throw APIError.noStreamsFound
@@ -273,22 +273,53 @@ actor StreamService: StreamResolving {
 
         // Step 3.6: Language Purity Filter
         // Goal: Deprioritize streams with localized/dual audio tags (e.g. "Ita", "Multi") unless no other option exists
-        let localizedKeywords = ["ita", "fre", "ger", "latino", "rus", "dual", "multi", "french", "german", "italian", "russian", "spanish", "truefrench", "vff", "vfq"]
-        
+
+        // Safe keywords (unlikely to be part of a normal English word)
+        let safeLocalizedKeywords = ["german", "french", "italian", "russian", "spanish", "truefrench", "multi", "dual", "dubbed", "dublado", "doblado"]
+
+        // Risky keywords (must be surrounded by delimiters to avoid false positives like "Stranger" -> "ger")
+        let riskyLocalizedKeywords = ["ger", "fre", "ita", "rus", "latino", "vff", "vfq"]
+
         var cleanStreams: [Stream] = []
         var deprioritizedStreams: [Stream] = []
-        
+
         for stream in keywordFiltered {
             let titleLower = stream.title.lowercased()
-            if localizedKeywords.contains(where: { titleLower.contains($0) }) {
+            var isLocalized = false
+
+            // 1. Check safe keywords (loose match)
+            if safeLocalizedKeywords.contains(where: { titleLower.contains($0) }) {
+                isLocalized = true
+            }
+
+            // 2. Check risky keywords (strict delimiter match)
+            if !isLocalized {
+                for keyword in riskyLocalizedKeywords {
+                    // Check common delimiter patterns
+                    if titleLower.contains(" \(keyword) ") ||
+                       titleLower.contains(".\(keyword).") ||
+                       titleLower.contains("-\(keyword)-") ||
+                       titleLower.contains("_\(keyword)_") ||
+                       titleLower.contains("(\(keyword))") ||
+                       titleLower.contains("[\(keyword)]") ||
+                       titleLower.hasSuffix("-\(keyword)") ||
+                       titleLower.hasSuffix(".\(keyword)") ||
+                       titleLower.hasSuffix(" \(keyword)") {
+                        isLocalized = true
+                        break
+                    }
+                }
+            }
+
+            if isLocalized {
                 deprioritizedStreams.append(stream)
             } else {
                 cleanStreams.append(stream)
             }
         }
-        
+
         var languageFilteredStreams = keywordFiltered
-        
+
         if !cleanStreams.isEmpty {
             print("✅ StreamService: Found \(cleanStreams.count) 'Clean' English streams. Deprioritizing \(deprioritizedStreams.count) localized/dual streams.")
             languageFilteredStreams = cleanStreams
@@ -300,12 +331,12 @@ actor StreamService: StreamResolving {
         // Step 4: Apply File Size Limit (Max 12GB) for 1080p
         // Older hardware (2015 Macs) struggles with large files, especially H.264 Remuxes (30GB+)
         var finalStreams = languageFilteredStreams
-        
+
         // Force bypass filters if we have a locked stream
         if let match = forcedStream {
             print("🔒 StreamService: Bypassing filters for enforced stream")
-            // Ensure the forced stream is the only one in finalStreams. 
-            // Note: keywordFiltered might have removed it? 
+            // Ensure the forced stream is the only one in finalStreams.
+            // Note: keywordFiltered might have removed it?
             // We should ideally assume 'match' is valid if the host played it, but let's check keyword safety?
             // Actually, for sync, we should force it even if it has a 'bad' keyword locally if the user is joining a party.
             finalStreams = [match]
@@ -313,7 +344,7 @@ actor StreamService: StreamResolving {
 
         if quality == .fullHD || quality == .uhd4k {
             let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes
-            
+
             // MIN SIZE RULE: 1080p/4K movies should not be tiny (filters out fake files/samples)
             // Movies: Min 600MB for 1080p
             // Series: Min 150MB for 1080p (allows short anime/cartoons)
@@ -321,12 +352,12 @@ actor StreamService: StreamResolving {
 
             let sizeFiltered = finalStreams.compactMap { stream -> Stream? in
                 let sizeInBytes = self.parseSizeToBytes(stream.size)
-                
+
                 // If parsing failed (returns infinity), we keep the stream to be safe
                 if sizeInBytes == Double.greatestFiniteMagnitude {
-                    return stream 
+                    return stream
                 }
-                
+
                 // Check Minimum Size
                 if sizeInBytes < minSizeBytes {
                    let sizeMB = sizeInBytes / 1_048_576.0
@@ -336,17 +367,17 @@ actor StreamService: StreamResolving {
 
                 if quality == .fullHD && sizeInBytes > maxSizeBytes {
                     let sizeGB = sizeInBytes / 1_073_741_824.0
-                    
+
                     // 🌟 Smart Limit: Allow larger files (up to 30GB) for trusted "Elite" groups
                     // These groups (LoRD, DON, Wiki) produce high-quality encodes that justify the size
                     let trustedHeavyGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "flux", "ntb"]
                     let isTrusted = trustedHeavyGroups.contains { stream.title.lowercased().contains($0) }
-                    
+
                     if isTrusted && sizeInBytes < (30 * 1024 * 1024 * 1024) {
                         print("✨ StreamService: Allowing large file (\(String(format: "%.2f", sizeGB)) GB) from trusted group: \(stream.title)")
                         return stream
                     }
-                    
+
                     print("⚠️ StreamService: Skipping large file (1080p limit): \(stream.title) (\(String(format: "%.2f", sizeGB)) GB)")
                     return nil
                 }
@@ -399,11 +430,11 @@ actor StreamService: StreamResolving {
                 // Auto-Report Server Errors (5xx) to Admin Dashboard
                 let errorMsg = error.localizedDescription
                 if errorMsg.contains("HTTP 5") {
-                    LogManager.shared.error("🚨 StreamService: [Server Fail] Unlock failed for \(stream.title): \(errorMsg)", error: error) 
+                    LogManager.shared.error("🚨 StreamService: [Server Fail] Unlock failed for \(stream.title): \(errorMsg)", error: error)
                 } else {
                     LogManager.shared.warning("❌ StreamService: [Attempt \(index + 1)/\(finalStreams.count)] Unlock failed for \(stream.title): \(errorMsg)")
                 }
-                
+
                 lastError = error
                 continue
             }
@@ -420,7 +451,7 @@ actor StreamService: StreamResolving {
 
         // Sanitize
         let sanitized = sizeString.replacingOccurrences(of: ",", with: "")
-        
+
         // Extract numeric part
         let components = sanitized.components(separatedBy: CharacterSet.decimalDigits.union(CharacterSet(charactersIn: ".")).inverted)
         let numbers = components.filter { !$0.isEmpty }
@@ -430,7 +461,7 @@ actor StreamService: StreamResolving {
         }
 
         let upperSize = sizeString.uppercased()
-        
+
         // Check units
         if upperSize.contains("GB") || upperSize.contains("GIB") {
             return number * 1_073_741_824.0
@@ -439,7 +470,7 @@ actor StreamService: StreamResolving {
         } else if upperSize.contains("KB") || upperSize.contains("KIB") {
             return number * 1024.0
         }
-        
+
         // If no units found, assume it's raw bytes if it looks like a whole number
         // This handles cases where providers send raw byte counts (e.g. "24421538041")
         if !upperSize.contains("B") { // No "B" unit found
@@ -452,12 +483,26 @@ actor StreamService: StreamResolving {
     // MARK: - Stream Unlocking
 
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream {
+        // Check for direct HTTP URL (Pre-unlocked)
+        if let url = stream.url, (url.hasPrefix("http://") || url.hasPrefix("https://")) {
+            print("⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.")
+
+            // Still process subtitles
+            var finalStream = stream
+             if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
+                NSLog("📥 StreamService: Pre-downloading %d subtitles for direct stream...", subtitles.count)
+                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: subtitles)
+                finalStream.subtitles = downloadedSubs
+            }
+            return finalStream
+        }
+
         guard let infoHash = stream.infoHash else {
             throw APIError.noStreamsFound
         }
 
         print("🔓 StreamService: Unlocking with infoHash: \(infoHash.prefix(12))...")
-        
+
         // CRITICAL FIX: Don't default to 0 if fileIdx is nil (Pack support)
         let unlockURL = URL(string: "\(Config.serverURL)/api/streams/unlock")!
         var request = URLRequest(url: unlockURL)
@@ -470,7 +515,7 @@ actor StreamService: StreamResolving {
             "service": "realdebrid",
             "title": item.name
         ]
-        
+
         if let fileIdx = stream.fileIdx {
             unlockBody["fileIdx"] = fileIdx
         }
@@ -541,7 +586,7 @@ actor StreamService: StreamResolving {
             for subtitle in subtitles {
                 group.addTask { () -> Subtitle? in
                     NSLog("🔍 DEBUG: Processing subtitle URL: %@", subtitle.url)
-                    
+
                     // Handle SubDL subtitles (both proxy URLs and raw API paths)
                     // Proxy URLs: http://127.0.0.1:47253/subtitles/subdl/... (already converted, skip download)
                     // Raw API URLs: /subtitle/... (need to convert to proxy URL)
@@ -568,13 +613,13 @@ actor StreamService: StreamResolving {
                         }
                         return subtitle // Already has token, return as-is
                     }
-                    
+
                     if subtitle.url.hasPrefix("/subtitle/") {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
                         // Convert raw SubDL URL to proxy URL
                         let encodedPath = Data(subtitle.url.utf8).base64EncodedString()
                         let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)?token=\(Config.localAuthToken)"
-                        
+
                         // Create new subtitle with proxy URL
                         return Subtitle(
                             id: subtitle.id,
@@ -586,11 +631,11 @@ actor StreamService: StreamResolving {
                             provider: subtitle.provider
                         )
                     }
-                    
+
                     NSLog("⚠️ DEBUG: Not a SubDL URL, attempting download")
-                    guard let url = URL(string: subtitle.url) else { 
+                    guard let url = URL(string: subtitle.url) else {
                         NSLog("❌ StreamService: Failed to download subtitle: unsupported URL")
-                        return nil 
+                        return nil
                     }
 
                     do {
@@ -599,7 +644,7 @@ actor StreamService: StreamResolving {
                         if url.absoluteString.contains("127.0.0.1") || url.absoluteString.contains("localhost") {
                             request.setValue(Config.localAuthToken, forHTTPHeaderField: "X-RedLemon-Auth")
                         }
-                        
+
                         let (data, response) = try await session.data(for: request)
 
                         let isZip = subtitle.url.lowercased().hasSuffix(".zip") ||

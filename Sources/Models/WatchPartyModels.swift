@@ -70,6 +70,7 @@ struct WatchPartyRoom: Identifiable {
     var selectedFileIdx: Int? // Host's selected file index
     var selectedQuality: String? // Host's selected quality
     var unlockedStreamURL: String? // Host's unlocked stream URL
+    var subtitleUrl: String? = nil // Host's selected subtitle URL
 
     enum RoomState: String {
         case lobby // Waiting for host to start

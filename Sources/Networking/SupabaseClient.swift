@@ -438,7 +438,8 @@ class SupabaseClient: RoomManager, UserManager {
         isPublic: Bool = false,
         unlockedStreamUrl: String? = nil,
         description: String? = nil,
-        playlist: [PlaylistItem]? = nil
+        playlist: [PlaylistItem]? = nil,
+        subtitleUrl: String? = nil
     ) async throws -> SupabaseRoom {
         var roomData: [String: Any] = [
             "id": id,
@@ -457,6 +458,7 @@ class SupabaseClient: RoomManager, UserManager {
         if let season = season { roomData["season"] = season }
         if let episode = episode { roomData["episode"] = episode }
         if let unlockedStreamUrl = unlockedStreamUrl { roomData["unlocked_stream_url"] = unlockedStreamUrl }
+        if let subtitleUrl = subtitleUrl { roomData["subtitle_url"] = subtitleUrl }
 
         if let playlist = playlist {
             // Serialize playlist items to dictionaries for JSONB column
@@ -1546,6 +1548,7 @@ struct SupabaseRoom: Codable {
     let playlist: [PlaylistItem]? // List of items to play
     let currentPlaylistIndex: Int? // Current index in playlist
     let description: String? // Room description
+    let subtitleUrl: String? // Selected subtitle URL
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -1570,6 +1573,7 @@ struct SupabaseRoom: Codable {
         case playlist
         case currentPlaylistIndex = "current_playlist_index"
         case description
+        case subtitleUrl = "subtitle_url"
     }
 }
 

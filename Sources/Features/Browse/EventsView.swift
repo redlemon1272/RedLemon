@@ -240,6 +240,8 @@ struct EventsView: View {
                 // This ensures the room is "seeded" with a valid stream for everyone
                 var initialStreamHash: String? = nil
                 var initialUnlockedUrl: String? = nil
+                var initialSubtitleUrl: String? = nil
+
                 do {
                     print("⚡️ Resolving stream for system event creation...")
                     // System events default to FullHD
@@ -253,6 +255,18 @@ struct EventsView: View {
                     )
                     initialStreamHash = result.stream.infoHash
                     initialUnlockedUrl = result.stream.url
+                    
+                    // NEW: Pick the first best subtitle to seed the room
+                    if let subs = result.stream.subtitles, !subs.isEmpty {
+                        // Prefer English if available, otherwise first
+                        if let bestSub = subs.first(where: { $0.lang.lowercased().contains("en") == true }) {
+                            initialSubtitleUrl = bestSub.url
+                        } else {
+                            initialSubtitleUrl = subs.first?.url
+                        }
+                        print("✅ Selected seed subtitle: \(initialSubtitleUrl ?? "nil")")
+                    }
+
                     print("✅ Stream resolved for system event: \(result.stream.title)")
                     print("   Hash: \(initialStreamHash ?? "nil")")
                     print("   URL: \(initialUnlockedUrl?.prefix(30) ?? "nil")...")
@@ -263,6 +277,10 @@ struct EventsView: View {
                 
                 // Use the resolved hash for our local state too
                 selectedStreamHash = initialStreamHash
+                // Also capture subtitle URL for local playback if valid
+                if initialSubtitleUrl != nil {
+                     // We don't have a local var for it yet, but we will pass it to createRoom
+                }
 
                 _ = try await SupabaseClient.shared.createRoom(
                     id: roomId,
@@ -276,10 +294,17 @@ struct EventsView: View {
                     season: nil,
                     episode: nil,
                     isPublic: true,
-                    unlockedStreamUrl: initialUnlockedUrl
+                    unlockedStreamUrl: initialUnlockedUrl,
+                    subtitleUrl: initialSubtitleUrl
                 )
                 // Join the room we just created
                 try await SupabaseClient.shared.joinRoom(roomId: roomId, userId: userId, isHost: false)
+            }
+            
+            // If we are joining an existing room, we need to fetch the subtitle URL from it if we didn't just create it
+            var finalSubtitleUrl: String? = nil
+            if let existing = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                 finalSubtitleUrl = existing.subtitleUrl
             }
 
             createLocalEventRoom(
@@ -288,7 +313,8 @@ struct EventsView: View {
                 streamHash: selectedStreamHash, 
                 unlockedStreamUrl: selectedUnlockedURL,
                 quality: selectedQuality,
-                fileIdx: selectedFileIdx
+                fileIdx: selectedFileIdx,
+                subtitleUrl: finalSubtitleUrl
             )
         } catch {
             let errorString = String(describing: error)
@@ -331,7 +357,8 @@ struct EventsView: View {
         streamHash: String? = nil,
         unlockedStreamUrl: String? = nil,
         quality: String? = nil,
-        fileIdx: Int? = nil
+        fileIdx: Int? = nil,
+        subtitleUrl: String? = nil
     ) {
         // Calculate current position for live events
         let now = TimeService.shared.now
@@ -379,7 +406,8 @@ struct EventsView: View {
             selectedStreamHash: streamHash,
             selectedFileIdx: fileIdx,
             selectedQuality: quality,
-            unlockedStreamURL: unlockedStreamUrl
+            unlockedStreamURL: unlockedStreamUrl,
+            subtitleUrl: subtitleUrl
         )
 
         print("   Room createdAt: \(room.createdAt)")

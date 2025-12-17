@@ -152,7 +152,17 @@ struct PremiumPaymentView: View {
                                     .frame(width: 180, height: 180)
                                     .shadow(radius: 4)
 
-                                Image(nsImage: generateQRCode(from: address))
+
+                                let usdAmount: Double = {
+                                    switch selectedPlan {
+                                    case "$4": return 4.0
+                                    case "$7": return 7.0
+                                    case "$10": return 10.0
+                                    default: return 4.0
+                                    }
+                                }()
+
+                                Image(nsImage: generateQRCode(for: address, amountUSD: usdAmount))
                                     .interpolation(.none)
                                     .resizable()
                                     .scaledToFit()
@@ -324,10 +334,13 @@ struct PremiumPaymentView: View {
         }
     }
 
-    private func generateQRCode(from string: String) -> NSImage {
+    private func generateQRCode(for address: String, amountUSD: Double) -> NSImage {
+        let uri = formatPaymentURI(address: address, amountUSD: amountUSD)
+        LogManager.shared.debug("📱 Generating QR for URI: \(uri)")
+
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
-        filter.message = Data(string.utf8)
+        filter.message = Data(uri.utf8)
 
         if let outputImage = filter.outputImage {
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
@@ -335,6 +348,22 @@ struct PremiumPaymentView: View {
             }
         }
         return NSImage(systemSymbolName: "xmark.circle", accessibilityDescription: nil) ?? NSImage()
+    }
+
+    private func formatPaymentURI(address: String, amountUSD: Double) -> String {
+        guard let rates = exchangeRates else { return address }
+
+        if selectedChain == .btc {
+            let amountBTC = amountUSD / rates.btc
+            // BIP21: bitcoin:<address>?amount=<BTC>
+            return String(format: "bitcoin:%@?amount=%.8f", address, amountBTC)
+        } else {
+            // EIP-681: ethereum:<address>?value=<WEI>
+            // standard ETH decimal is 18
+            let amountETH = amountUSD / rates.eth
+            let wei = amountETH * 1_000_000_000_000_000_000
+            return String(format: "ethereum:%@?value=%.0f", address, wei)
+        }
     }
 }
 

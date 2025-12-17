@@ -5,7 +5,7 @@ import CoreImage.CIFilterBuiltins
 struct PremiumPaymentView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var licenseManager = LicenseManager.shared
-    
+
     // State
     @State private var selectedChain: Chain = .btc
     @State private var assignedAddress: String?
@@ -14,14 +14,15 @@ struct PremiumPaymentView: View {
     @State private var isCheckingPayment = false
     @State private var paymentTimer: Timer?
     @State private var showSuccess = false
-    
+    @State private var selectedPlan: String = "$4"
+
     enum Chain: String, CaseIterable, Identifiable {
         case btc = "btc"
         case evm = "evm"
 
-        
+
         var id: String { rawValue }
-        
+
         var displayName: String {
             switch self {
             case .btc: return "Bitcoin (BTC)"
@@ -29,7 +30,7 @@ struct PremiumPaymentView: View {
 
             }
         }
-        
+
         var icon: String {
             switch self {
             case .btc: return "bitcoinsign.circle.fill"
@@ -37,7 +38,7 @@ struct PremiumPaymentView: View {
 
             }
         }
-        
+
         var color: Color {
             switch self {
             case .btc: return .orange
@@ -46,34 +47,40 @@ struct PremiumPaymentView: View {
             }
         }
     }
-    
+
     var body: some View {
         ZStack {
             Color(NSColor.windowBackgroundColor).edgesIgnoringSafeArea(.all)
-            
+
             if showSuccess {
                 SuccessView(dismiss: { dismiss() })
             } else {
-                VStack(spacing: 30) {
+                VStack(spacing: 20) {
                     // Header
-                    VStack(spacing: 12) {
+                    VStack(spacing: 8) {
                         Text("Unlock Premium Hosting")
-                            .font(.system(size: 32, weight: .bold))
-                        
+                            .font(.system(size: 28, weight: .bold))
+
                         Text("Host unlimited watch parties forever with a one-time contribution.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
-                        
+
                         // Pricing Tiers
                         HStack(spacing: 16) {
-                            PricingBadge(price: "$4", duration: "30 Days")
-                            PricingBadge(price: "$7", duration: "60 Days")
-                            PricingBadge(price: "$10", duration: "90 Days")
+                            PricingBadge(price: "$4", duration: "30 Days", isSelected: selectedPlan == "$4") {
+                                selectedPlan = "$4"
+                            }
+                            PricingBadge(price: "$7", duration: "60 Days", isSelected: selectedPlan == "$7") {
+                                selectedPlan = "$7"
+                            }
+                            PricingBadge(price: "$10", duration: "90 Days", isSelected: selectedPlan == "$10") {
+                                selectedPlan = "$10"
+                            }
                         }
                         .padding(.top, 4)
                     }
-                    
+
                     // Chain Failure Message
                     if let error = errorMessage {
                         HStack {
@@ -98,11 +105,12 @@ struct PremiumPaymentView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .fixedSize()
                     .padding(.horizontal)
                     .onChange(of: selectedChain) { _ in
                         Task { await loadAddress() }
                     }
-                    
+
                     // 2. Address & QR
                     VStack(spacing: 20) {
                         if isLoadingAddress {
@@ -113,29 +121,29 @@ struct PremiumPaymentView: View {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 16)
                                     .fill(Color.white)
-                                    .frame(width: 220, height: 220)
+                                    .frame(width: 180, height: 180)
                                     .shadow(radius: 4)
-                                
+
                                 Image(nsImage: generateQRCode(from: address))
                                     .interpolation(.none)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 200, height: 200)
+                                    .frame(width: 160, height: 160)
                             }
-                            
+
                             // Address Text & Copy
                             VStack(spacing: 8) {
                                 Text("Send any amount (USDC, ETH, BTC) to:")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
-                                
+
                                 HStack {
                                     Text(address)
                                         .font(.system(.body, design: .monospaced))
                                         .lineLimit(1)
                                         .truncationMode(.middle)
                                         .frame(maxWidth: 250)
-                                    
+
                                     Button(action: {
                                         NSPasteboard.general.clearContents()
                                         NSPasteboard.general.setString(address, forType: .string)
@@ -150,7 +158,7 @@ struct PremiumPaymentView: View {
                             }
                         }
                     }
-                    
+
                     if assignedAddress != nil {
                          HStack(spacing: 8) {
                             if isCheckingPayment {
@@ -162,9 +170,9 @@ struct PremiumPaymentView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    
+
                     Spacer()
-                    
+
                     // Footer Buttons
                     HStack {
                         Button("Cancel") {
@@ -172,9 +180,9 @@ struct PremiumPaymentView: View {
                             dismiss()
                         }
                         .keyboardShortcut(.cancelAction)
-                        
+
                         Spacer()
-                        
+
                         Button("I Have Paid") {
                             Task {
                                 await checkPayment(manual: true)
@@ -184,10 +192,21 @@ struct PremiumPaymentView: View {
                         .disabled(assignedAddress == nil || isLoadingAddress)
                     }
                 }
-                .padding(40)
+                .padding(30)
             }
         }
-        .frame(width: 500, height: 680)
+        .frame(width: 480, height: 580)
+        .overlay(
+            Button(action: { dismiss() }) {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 24))
+                    .foregroundColor(.secondary.opacity(0.8))
+            }
+            .buttonStyle(.plain)
+            .padding(16)
+            .keyboardShortcut(.cancelAction)
+            , alignment: .topTrailing
+        )
         .onAppear {
             Task { await loadAddress() }
         }
@@ -195,14 +214,14 @@ struct PremiumPaymentView: View {
             stopPolling()
         }
     }
-    
+
     // MARK: - Logic
-    
+
     private func loadAddress() async {
         isLoadingAddress = true
         errorMessage = nil
         stopPolling()
-        
+
         do {
             let address = try await SupabaseClient.shared.assignPaymentAddress(chain: selectedChain.rawValue)
             assignedAddress = address
@@ -210,29 +229,29 @@ struct PremiumPaymentView: View {
         } catch {
             errorMessage = "Failed to get address: \(error.localizedDescription)"
         }
-        
+
         isLoadingAddress = false
     }
-    
+
     private func startPolling() {
         stopPolling()
         paymentTimer = Timer.scheduledTimer(withTimeInterval: 10.0, repeats: true) { _ in
             Task { await checkPayment() }
         }
     }
-    
+
     private func stopPolling() {
         paymentTimer?.invalidate()
         paymentTimer = nil
     }
-    
+
     private func checkPayment(manual: Bool = false) async {
         if isCheckingPayment { return }
         isCheckingPayment = true
-        
+
         do {
             let (isPremium, newExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
-            
+
             if isPremium {
                 LogManager.shared.info("✅ Payment Confirmed! Expires: \(String(describing: newExpiry))")
                 stopPolling()
@@ -247,15 +266,15 @@ struct PremiumPaymentView: View {
         } catch {
             LogManager.shared.error("❌ Check payment failed", error: error)
         }
-        
+
         isCheckingPayment = false
     }
-    
+
     private func generateQRCode(from string: String) -> NSImage {
         let context = CIContext()
         let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(string.utf8)
-        
+
         if let outputImage = filter.outputImage {
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
                 return NSImage(cgImage: cgimg, size: NSSize(width: cgimg.width, height: cgimg.height))
@@ -267,23 +286,23 @@ struct PremiumPaymentView: View {
 
 struct SuccessView: View {
     let dismiss: () -> Void
-    
+
     var body: some View {
         VStack(spacing: 24) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 80))
                 .foregroundColor(.green)
                 .padding()
-            
+
             Text("Premium Unlocked!")
                 .font(.largeTitle)
                 .bold()
-            
+
             Text("Thank you for supporting RedLemon.\nYou can now host unlimited watch parties.")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.secondary)
-            
+
             Button("Done") {
                 dismiss()
             }
@@ -296,27 +315,31 @@ struct SuccessView: View {
     }
 }
 
-// Helper View for Pricing Tiers
 struct PricingBadge: View {
     let price: String
     let duration: String
-    
+    let isSelected: Bool
+    let action: () -> Void
+
     var body: some View {
-        VStack(spacing: 4) {
-            Text(price)
-                .font(.system(size: 18, weight: .bold))
-                .foregroundColor(.white)
-            Text(duration)
-                .font(.caption)
-                .foregroundColor(.secondary)
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Text(price)
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundColor(isSelected ? .white : .secondary)
+                Text(duration)
+                    .font(.caption)
+                    .foregroundColor(isSelected ? .white.opacity(0.9) : .secondary.opacity(0.7))
+            }
+            .padding(.vertical, 8)
+            .padding(.horizontal, 16)
+            .background(isSelected ? Color.blue.opacity(0.3) : Color.white.opacity(0.05))
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(isSelected ? Color.blue : Color.white.opacity(0.1), lineWidth: 2)
+            )
         }
-        .padding(.vertical, 8)
-        .padding(.horizontal, 16)
-        .background(Color.white.opacity(0.1))
-        .cornerRadius(12)
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-        )
+        .buttonStyle(.plain)
     }
 }

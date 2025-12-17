@@ -30,12 +30,13 @@ serve(async (req) => {
         Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // 2. Auth Check
-    const { data: { user } } = await supabaseClient.auth.getUser()
-    if (!user) throw new Error('Unauthorized')
-
     // 3. Parse Request
-    const { chain } = await req.json()
+    const { chain, user_id } = await req.json()
+
+    // Auth Check (Client-provided ID for this app architecture)
+    if (!user_id) throw new Error('Unauthorized: Missing user_id')
+    const user = { id: user_id }
+
     // Sol is deprecated per user conversation, but leaving guard for safety
     if (!['btc', 'evm'].includes(chain)) {
         throw new Error('Invalid chain. Only BTC and EVM supported.')
@@ -51,8 +52,8 @@ serve(async (req) => {
         .single()
 
     if (existing) {
-        return new Response(JSON.stringify({ 
-            success: true, 
+        return new Response(JSON.stringify({
+            success: true,
             address: existing.address,
             message: 'Existing assignment found'
         }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
@@ -64,20 +65,20 @@ serve(async (req) => {
         .select('next_index')
         .eq('chain', chain)
         .single()
-        
+
     const nextIndex = (current?.next_index ?? 0) + 1
-    
+
     await supabaseAdmin
         .from('key_derivation_indices')
         .update({ next_index: nextIndex })
         .eq('chain', chain)
 
     let derivedAddress = ''
-    
+
     if (chain === 'evm') {
         const xpub = Deno.env.get('XPUB_EVM')
         if (!xpub) throw new Error('Missing XPUB_EVM')
-        
+
         try {
             // Ethers.js handles HD Wallet derivation and Checksum Address generation automatically
             const root = ethers.HDNodeWallet.fromExtendedKey(xpub)
@@ -87,27 +88,27 @@ serve(async (req) => {
              console.error("EVM Derivation failed", e)
              throw new Error('Failed to derive EVM address. Check XPub format.')
         }
-    } 
+    }
     else if (chain === 'btc') {
          const xpub = Deno.env.get('XPUB_BTC')
          if (!xpub) throw new Error('Missing XPUB_BTC')
-         
+
          try {
              // 1. Derive PubKey with scure-bip32
              const node = HDKey.fromExtendedKey(xpub)
              const child = node.deriveChild(0).deriveChild(nextIndex) // m/0/index
              if (!child.publicKey) throw new Error('No public key derived')
-             
+
              // 2. Hash: RIPEM160(SHA256(PubKey))
              const pubKey = child.publicKey
              const hash = ripemd160(sha256(pubKey))
-             
+
              // 3. Convert to Bech32 (Segwit Native P2WPKH: bc1q...)
              // Witness version 0, data is the 20-byte hash
              const words = bech32.toWords(hash)
              words.unshift(0) // Version 0
              derivedAddress = bech32.encode('bc', words)
-             
+
          } catch (e) {
              console.error("BTC Derivation failed", e)
              throw new Error('Failed to derive BTC address. Check XPub format (must be zpub/xpub specific?).')
@@ -128,8 +129,8 @@ serve(async (req) => {
 
     if (insertError) throw insertError
 
-    return new Response(JSON.stringify({ 
-        success: true, 
+    return new Response(JSON.stringify({
+        success: true,
         address: derivedAddress,
         expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000)
     }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } })

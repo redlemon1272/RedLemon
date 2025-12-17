@@ -3,7 +3,7 @@ import Foundation
 /// Supabase REST API client for RedLemon backend operations
 /// Uses direct HTTP requests to Supabase PostgREST API
 
-enum SupabaseError: Error {
+enum SupabaseError: Error, LocalizedError {
     case httpError(Int, String)
     case decodingError(Error)
     case encodingError
@@ -13,6 +13,29 @@ enum SupabaseError: Error {
     case invalidResponse
     case userCreationFailed
     case serverError(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .httpError(let code, let message):
+            return "Server Error (\(code)): \(message)"
+        case .decodingError(let error):
+            return "Failed to process server response: \(error.localizedDescription)"
+        case .encodingError:
+            return "Failed to encode data."
+        case .roomCreationFailed:
+            return "Failed to create room."
+        case .userNotFound:
+            return "User not found."
+        case .invalidURL:
+            return "Invalid URL."
+        case .invalidResponse:
+            return "Invalid response from server."
+        case .userCreationFailed:
+            return "Failed to create user."
+        case .serverError(let message):
+            return "Server Error: \(message)"
+        }
+    }
 }
 
 /// Protocol for managing watch party rooms
@@ -33,7 +56,7 @@ protocol RoomManager {
         description: String?,
         playlist: [PlaylistItem]?
     ) async throws -> SupabaseRoom
-    
+
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
     func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?) async throws
     func getRoomState(roomId: String) async throws -> SupabaseRoom?
@@ -46,13 +69,13 @@ protocol UserManager {
 
 class SupabaseClient: RoomManager, UserManager {
     static let shared = SupabaseClient()
-    
+
     // Performance: Cache formatters to avoid expensive initialization
     static let isoFormatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         return formatter
     }()
-    
+
     // Cache decoders for the custom decoding strategy
     private static let decodingFormatters: [DateFormatter] = [
         {
@@ -134,7 +157,7 @@ class SupabaseClient: RoomManager, UserManager {
     private init() {
         self.baseURL = Config.supabaseURL
         self.apiKey = Config.supabaseAnonKey
-        
+
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
@@ -173,17 +196,17 @@ class SupabaseClient: RoomManager, UserManager {
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+
         // Default Preference
         var requestHeaders = ["Prefer": "return=representation"]
-        
+
         // Merge custom headers (overwriting defaults if key exists)
         if let customHeaders = headers {
             for (key, value) in customHeaders {
                 requestHeaders[key] = value
             }
         }
-        
+
         // Apply headers to request
         for (key, value) in requestHeaders {
             request.setValue(value, forHTTPHeaderField: key)
@@ -222,27 +245,27 @@ class SupabaseClient: RoomManager, UserManager {
             path: "/rpc/get_server_time",
             method: "POST"
         )
-        
+
         // RPC returns a string like "2023-10-27T10:00:00.123456+00:00"
         // It might be wrapped in quotes if it's a JSON string
         guard let dateString = String(data: data, encoding: .utf8)?.trimmingCharacters(in: CharacterSet(charactersIn: "\"")) else {
             throw SupabaseError.invalidResponse
         }
-        
+
         // Use our flexible date decoder logic (or just a formatter here)
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
+
         if let date = formatter.date(from: dateString) {
             return date
         }
-        
+
         // Fallback for standard ISO8601
         let fallbackFormatter = ISO8601DateFormatter()
         if let date = fallbackFormatter.date(from: dateString) {
             return date
         }
-        
+
         throw SupabaseError.invalidResponse
     }
 
@@ -334,18 +357,18 @@ class SupabaseClient: RoomManager, UserManager {
             "target_username": username,
             "days_to_add": days
         ]
-        
+
         let response = try await functions.invoke("admin_grant_premium", options: FunctionInvokeOptions(
             body: params
         ))
-        
+
         struct GrantResponse: Decodable {
             let success: Bool
             let message: String
         }
-        
+
         let result = try JSONDecoder().decode(GrantResponse.self, from: response)
-        
+
         if result.success {
             return result.message
         } else {
@@ -559,7 +582,7 @@ class SupabaseClient: RoomManager, UserManager {
         let rooms = try jsonDecoder.decode([SupabaseRoom].self, from: data)
         return rooms.first
     }
-    
+
     /// Update room stream selection (Host only)
     func updateRoomStream(
         roomId: String,
@@ -571,19 +594,19 @@ class SupabaseClient: RoomManager, UserManager {
         var body: [String: Any] = [
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-        
+
         if let streamHash = streamHash { body["stream_hash"] = streamHash }
         if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }
         if let quality = quality { body["selected_quality"] = quality }
         if let unlockedUrl = unlockedUrl { body["unlocked_stream_url"] = unlockedUrl }
-        
+
         _ = try await makeRequest(
             path: "/rooms",
             method: "PATCH",
             body: body,
             query: ["id": "eq.\(roomId)"]
         )
-        
+
         NSLog("✅ Persisted stream selection to room \(roomId)")
     }
 
@@ -594,7 +617,7 @@ class SupabaseClient: RoomManager, UserManager {
         currentIndex: Int
     ) async throws {
         NSLog("📡 SupabaseClient: updateRoomPlaylist called for room \(roomId) with \(playlist.count) items, index: \(currentIndex)")
-        
+
         do {
             // Serialize playlist items to dictionaries for JSONB column
             let playlistData = try playlist.map { item -> [String: Any] in
@@ -617,7 +640,7 @@ class SupabaseClient: RoomManager, UserManager {
             NSLog("✅ SupabaseClient: Playlist updated successfully")
         } catch SupabaseError.httpError(let code, let message) where code == 400 && message.contains("current_playlist_index") {
             NSLog("⚠️ SupabaseClient: Backend schema missing 'current_playlist_index'. Retrying without index...")
-            
+
             // RETRY: Update ONLY the playlist array
             // Serialize playlist items AGAIN (since they were consumed/scoped above)
             let playlistData = try playlist.map { item -> [String: Any] in
@@ -627,7 +650,7 @@ class SupabaseClient: RoomManager, UserManager {
                 }
                 return dict
             }
-            
+
             _ = try await makeRequest(
                 path: "/rooms",
                 method: "PATCH",
@@ -635,7 +658,7 @@ class SupabaseClient: RoomManager, UserManager {
                 query: ["id": "eq.\(roomId)"]
             )
             NSLog("✅ SupabaseClient: Playlist updated (Fallback mode: No Index persisted)")
-            
+
         } catch {
              NSLog("❌ SupabaseClient: Failed to update playlist: \(error)")
              throw error
@@ -656,16 +679,16 @@ class SupabaseClient: RoomManager, UserManager {
             "name": name,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-        
+
         if let imdbId = imdbId { body["imdb_id"] = imdbId }
         if let season = season { body["season"] = season }
         if let episode = episode { body["episode"] = episode }
         if let posterUrl = posterUrl { body["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { body["backdrop_url"] = backdropUrl }
-        
+
         // Update last_activity to keep room visible/fresh
         body["last_activity"] = ISO8601DateFormatter().string(from: Date())
-        
+
         _ = try await makeRequest(
             path: "/rooms",
             method: "PATCH",
@@ -744,7 +767,7 @@ class SupabaseClient: RoomManager, UserManager {
     /// Upload log entry to Supabase
     func insertLog(level: String, message: String, metadata: [String: Any]? = nil) async throws {
         var finalMessage = message
-        
+
         // Serialize metadata into the message body (DB has no metadata column)
         if let metadata = metadata {
             if let jsonData = try? JSONSerialization.data(withJSONObject: metadata, options: .prettyPrinted),
@@ -758,11 +781,11 @@ class SupabaseClient: RoomManager, UserManager {
             "message": finalMessage,
             "created_at": SupabaseClient.isoFormatter.string(from: Date())
         ]
-        
+
         if let userId = auth.currentUser?.id {
             body["user_id"] = userId.uuidString
         }
-        
+
         // Fire and forget - don't wait for response to avoid blocking
         // USE SERVICE KEY to bypass RLS (since regular users can't write to app_logs)
         _ = try await makeRequest(
@@ -823,16 +846,16 @@ class SupabaseClient: RoomManager, UserManager {
         let ids = try jsonDecoder.decode([SupabaseUserID].self, from: idsData)
         return ids.count
     }
-    
+
     /// Check system health (latency)
     func checkHealth() async throws -> Double {
         let start = Date()
         _ = try await getServerTime()
         return Date().timeIntervalSince(start) * 1000 // ms
     }
-    
+
     // MARK: - Analytics
-    
+
     func getAppVersionStats() async throws -> [AppVersionStat] {
         let data = try await makeRequest(
             path: "/rpc/get_app_version_stats",
@@ -840,7 +863,7 @@ class SupabaseClient: RoomManager, UserManager {
         )
         return try jsonDecoder.decode([AppVersionStat].self, from: data)
     }
-    
+
     func getContentPopularity() async throws -> [ContentPopularityStat] {
         let data = try await makeRequest(
             path: "/rpc/get_content_popularity",
@@ -853,26 +876,33 @@ class SupabaseClient: RoomManager, UserManager {
 
     /// Assign a payment address for the user
     func assignPaymentAddress(chain: String) async throws -> String {
+        guard let userId = auth.currentUser?.id else {
+            throw SupabaseError.userNotFound
+        }
+
         let response = try await functions.invoke(
             "assign-address",
-            options: FunctionInvokeOptions(body: ["chain": chain])
+            options: FunctionInvokeOptions(body: [
+                "chain": chain,
+                "user_id": userId.uuidString
+            ])
         )
-        
+
         let result = try JSONDecoder().decode(PaymentAssignment.self, from: response)
-        
+
         if let error = result.error {
             throw SupabaseError.serverError(error)
         }
-        
+
         guard let address = result.address else {
             throw SupabaseError.serverError("No address returned")
         }
-        
+
         return address
     }
-    
+
     // MARK: - Verified Streams (Community Caching)
-    
+
     struct VerifiedStream: Identifiable, Codable {
         let hash: String
         let imdbId: String
@@ -883,7 +913,7 @@ class SupabaseClient: RoomManager, UserManager {
         let movieTitle: String? // Optional as it might not be joined yet
         let voteCount: Int
         let lastVerifiedAt: Date
-        
+
         // Custom coding keys to match DB Snake Case
         enum CodingKeys: String, CodingKey {
             case hash = "stream_hash"
@@ -896,7 +926,7 @@ class SupabaseClient: RoomManager, UserManager {
             case voteCount = "vote_count"
             case lastVerifiedAt = "last_verified_at"
         }
-        
+
         var id: String { "\(hash)_\(season)_\(episode)" }
     }
 
@@ -908,7 +938,7 @@ struct ReportedStream: Identifiable, Codable {
     let reason: String
     let createdAt: Date
     let movieTitle: String? // Added for better display
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case imdbId = "imdb_id"
@@ -919,7 +949,7 @@ struct ReportedStream: Identifiable, Codable {
         case movieTitle = "movie_title"
     }
 }
-    
+
     /// Get a strict verified stream for instant playback
     func getVerifiedStream(imdbId: String, season: Int = -1, episode: Int = -1, quality: String) async throws -> VerifiedStream? {
         let data = try await makeRequest(
@@ -933,7 +963,7 @@ struct ReportedStream: Identifiable, Codable {
                 "limit": "1"
             ]
         )
-        
+
         let streams = try jsonDecoder.decode([VerifiedStream].self, from: data)
         return streams.first
     }
@@ -967,7 +997,7 @@ struct ReportedStream: Identifiable, Codable {
             print("Failed to update report title: \(error)")
         }
     }
-    
+
     /// Report a bad stream (Community)
     func reportStream(imdbId: String, quality: String, streamHash: String, reason: String, movieTitle: String? = nil) async {
         do {
@@ -977,12 +1007,12 @@ struct ReportedStream: Identifiable, Codable {
                 "stream_hash": streamHash,
                 "reason": reason
             ]
-            
+
             if let title = movieTitle {
                 body["movie_title"] = title
             }
-            
-            
+
+
             _ = try await makeRequest(
                 path: "/reported_streams",
                 method: "POST",
@@ -993,7 +1023,7 @@ struct ReportedStream: Identifiable, Codable {
             print("Failed to report stream: \(error)")
         }
     }
-    
+
     /// Delete a report (Admin Action - Dismiss)
     func deleteReport(id: UUID) async {
         do {
@@ -1007,7 +1037,7 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to dismiss report: \(error)")
         }
     }
-    
+
     /// Get all reported streams (Admin)
     func getReportedStreams(limit: Int = 50) async throws -> [ReportedStream] {
         let data = try await makeRequest(
@@ -1020,7 +1050,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         return try jsonDecoder.decode([ReportedStream].self, from: data)
     }
-    
+
     /// Delete a reported stream entry (Admin)
     func deleteReportedStream(id: String) async throws {
         _ = try await makeRequest(
@@ -1032,7 +1062,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         print("🗑️ Deleted reported stream entry: \(id)")
     }
-    
+
     /// Delete a verified stream (Admin) - Unlocks the stream for normal resolver
     func deleteVerifiedStream(streamHash: String) async throws {
         _ = try await makeRequest(
@@ -1044,7 +1074,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         print("🗑️ Deleted verified stream with hash: \(streamHash)")
     }
-    
+
     /// Update title for an existing verified stream (Legacy migration)
     func updateVerifiedStreamTitle(imdbId: String, title: String) async {
         do {
@@ -1061,16 +1091,16 @@ struct ReportedStream: Identifiable, Codable {
             print("Failed to update title: \(error)")
         }
     }
-    
+
     /// Vote for a successful stream (Upsert logic via RPC or Client)
     func voteStreamSuccess(imdbId: String, season: Int = -1, episode: Int = -1, quality: String, streamHash: String, magnetLink: String? = nil, movieTitle: String? = nil) async {
-        // We use an RPC 'vote_for_stream' if available to handle the atomic increment, 
+        // We use an RPC 'vote_for_stream' if available to handle the atomic increment,
         // OR standard upsert if we want to keep it simple client-side for V1.
-        
+
         do {
             // 1. Check if exists (Using new season/episode aware lookup)
             let existing = try await getVerifiedStream(imdbId: imdbId, season: season, episode: episode, quality: quality)
-            
+
             var body: [String: Any] = [
                 "imdb_id": imdbId,
                 "season": season,
@@ -1079,17 +1109,17 @@ struct ReportedStream: Identifiable, Codable {
                 "stream_hash": streamHash,
                 "last_verified_at": SupabaseClient.isoFormatter.string(from: Date())
             ]
-            
+
             if let title = movieTitle {
                 body["movie_title"] = title
             }
-            
+
             if let magnet = magnetLink {
                 body["magnet_link"] = magnet
             }
-            
+
             // 2. Logic: If exists AND hash matches, increment vote.
-            // If exists AND hash differs, only overwrite if new vote count > old vote count? 
+            // If exists AND hash differs, only overwrite if new vote count > old vote count?
             if let existing = existing {
                 if existing.hash == streamHash {
                     // Same hash -> Increment vote
@@ -1099,7 +1129,7 @@ struct ReportedStream: Identifiable, Codable {
                     // For now, let's NOT overwrite if the existing one is popular (e.g. votes > 5)
                     if existing.voteCount > 5 {
                         print("⚠️ Verified Stream: Keeping incumbent hash (Votes: \(existing.voteCount)) vs new candidate.")
-                        return 
+                        return
                     }
                     // Else overwrite (incubment was weak)
                     body["vote_count"] = 1
@@ -1108,7 +1138,7 @@ struct ReportedStream: Identifiable, Codable {
                 // New -> Vote = 1
                 body["vote_count"] = 1
             }
-            
+
             _ = try await makeRequest(
                 path: "/verified_streams",
                 method: "POST", // POST with Prefer: resolution=merge-duplicates is UPSERT
@@ -1116,39 +1146,39 @@ struct ReportedStream: Identifiable, Codable {
                 headers: ["Prefer": "resolution=merge-duplicates"]
             )
             print("✅ Verified Stream: Voted for \(imdbId) S\(season)E\(episode) (\(quality)) [Hash: \(streamHash.prefix(8))...]")
-            
+
         } catch {
             print("❌ Failed to vote for stream: \(error)")
         }
     }
-    
+
     /// Check payment status via Edge Function
     func checkPaymentStatus() async throws -> (Bool, Date?) {
         let response = try await functions.invoke("check-payment")
-        
+
         struct PaymentResponse: Decodable {
             let success: Bool
             let premium: Bool?
             let new_expiry: String? // ISO8601 string
         }
-        
+
         // Log raw response for debugging
         if let string = String(data: response, encoding: .utf8) {
             print("💰 Check Payment Response: \(string)")
         }
 
         let result = try JSONDecoder().decode(PaymentResponse.self, from: response)
-        
-        if let expiryString = result.new_expiry, 
+
+        if let expiryString = result.new_expiry,
            let date = SupabaseClient.isoFormatter.date(from: expiryString) {
             return (result.premium ?? false, date)
         }
-        
+
         return (result.premium ?? false, nil)
     }
-    
+
     // MARK: - Feedback & Logging System
-    
+
     struct FeedbackReport: Identifiable, Codable {
         let id: UUID
         let type: String
@@ -1156,7 +1186,7 @@ struct ReportedStream: Identifiable, Codable {
         let contactEmail: String?
         let sessionLogId: UUID?
         let createdAt: Date
-        
+
         enum CodingKeys: String, CodingKey {
             case id
             case type
@@ -1166,7 +1196,7 @@ struct ReportedStream: Identifiable, Codable {
             case createdAt = "created_at"
         }
     }
-    
+
     /// Send user feedback
     func sendFeedback(type: String, message: String, email: String? = nil, sessionLogId: UUID? = nil) async {
         do {
@@ -1182,7 +1212,7 @@ struct ReportedStream: Identifiable, Codable {
             if let logId = sessionLogId {
                 body["session_log_id"] = logId.uuidString
             }
-            
+
             _ = try await makeRequest(
                 path: "/feedback_reports",
                 method: "POST",
@@ -1193,7 +1223,7 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to send feedback: \(error)")
         }
     }
-    
+
     /// Upload a session log
     func uploadSessionLog(log: SessionLog) async {
         do {
@@ -1201,7 +1231,7 @@ struct ReportedStream: Identifiable, Codable {
             encoder.dateEncodingStrategy = .iso8601
             let data = try encoder.encode(log)
             guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any] else { return }
-            
+
             // Map to DB columns
             let body: [String: Any] = [
                 "id": log.id.uuidString,
@@ -1212,7 +1242,7 @@ struct ReportedStream: Identifiable, Codable {
                 "stream_hash": log.streamHash ?? "",
                 "events": json["events"] ?? []
             ]
-            
+
             _ = try await makeRequest(
                 path: "/session_logs",
                 method: "POST",
@@ -1223,7 +1253,7 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to upload session log: \(error)")
         }
     }
-    
+
     /// Get feedback reports (Admin)
     func getFeedback(limit: Int = 50) async throws -> [FeedbackReport] {
         let data = try await makeRequest(
@@ -1236,7 +1266,7 @@ struct ReportedStream: Identifiable, Codable {
         )
         return try jsonDecoder.decode([FeedbackReport].self, from: data)
     }
-    
+
     /// Delete a feedback report (Admin)
     func deleteFeedback(id: UUID) async {
         do {
@@ -1250,7 +1280,7 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to delete feedback: \(error)")
         }
     }
-    
+
     /// Delete a session log (Admin)
     func deleteSessionLog(id: UUID) async {
         do {
@@ -1264,7 +1294,7 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to delete session log: \(error)")
         }
     }
-    
+
     /// Get session logs (Admin)
     func getSessionLogs(limit: Int = 20) async throws -> [SessionLog] {
         let data = try await makeRequest(
@@ -1275,46 +1305,46 @@ struct ReportedStream: Identifiable, Codable {
                 "limit": String(limit)
             ]
         )
-        
+
         // Custom decoding needed because 'events' is JSONB
         // Ideally SessionLog matches DB schema if we used Codable properly.
         // Let's rely on JSONDecoder to match keys.
-        // Note: DB 'events' is JSONB, Swift struct has 'events: [SessionEvent]'. 
+        // Note: DB 'events' is JSONB, Swift struct has 'events: [SessionEvent]'.
         // Supabase returns JSONB as nested JSON, standard decoder handles this if structure matches.
-        
+
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .custom { decoder in
             let container = try decoder.singleValueContainer()
             let dateStr = try container.decode(String.self)
             // Handle ISO8601 with fractional seconds
             // Use cached formatter, but here we need specific options
-            // Note: isoFormatter is standard. If we need specialized options for decoding this specific field, 
-            // likely it matches standard ISO8601. 
+            // Note: isoFormatter is standard. If we need specialized options for decoding this specific field,
+            // likely it matches standard ISO8601.
             // If SupabaseClient.isoFormatter uses default options, it handles internet date time.
             if let date = SupabaseClient.isoFormatter.date(from: dateStr) { return date }
-            
+
             // Fallback to manual if cached fails (unlikely if standard ISO)
             let formatter = ISO8601DateFormatter()
             formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
             if let date = formatter.date(from: dateStr) { return date }
-            
+
             formatter.formatOptions = [.withInternetDateTime]
             if let date = formatter.date(from: dateStr) { return date }
-            
+
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateStr)")
         }
-        
+
         return try decoder.decode([SessionLog].self, from: data)
     }
 
     // MARK: - Watch History Management
-    
+
     /// Sync a watch history item to the cloud
     func upsertWatchHistory(item: WatchHistoryItem, userId: UUID) async throws {
         // Use -1 for movies (where season/episode is nil) to satisfy UNIQUE constraint compatibility
         let season = item.season ?? -1
         let episode = item.episode ?? -1
-        
+
         let payload: [String: Any] = [
             "user_id": userId.uuidString,
             "media_id": item.mediaItem.id,
@@ -1326,10 +1356,10 @@ struct ReportedStream: Identifiable, Codable {
             "poster_url": item.mediaItem.poster as Any,
             "last_watched": SupabaseClient.isoFormatter.string(from: item.lastWatched)
         ]
-        
+
         // Remove nils (like poster_url if missing), but keep season/episode (-1)
         let cleanPayload = payload.compactMapValues { $0 }
-        
+
         _ = try await makeRequest(
             path: "/user_watch_history",
             method: "POST",
@@ -1338,7 +1368,7 @@ struct ReportedStream: Identifiable, Codable {
             headers: ["Prefer": "resolution=merge-duplicates, return=representation"]
         )
     }
-    
+
     /// Get watch history for a user (e.g. self or friend)
     func getWatchHistory(userId: UUID) async throws -> [SupabaseWatchHistoryEntry] {
         let data = try await makeRequest(
@@ -1365,7 +1395,7 @@ struct SupabaseWatchHistoryEntry: Codable, Identifiable {
     let progress: Double
     let posterUrl: String?
     let lastWatched: Date
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
@@ -1441,7 +1471,7 @@ struct AppLog: Codable, Identifiable {
     let timestamp: Date
     let userId: UUID?
     let metadata: [String: AnyCodable]?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, level, message, metadata
         case timestamp = "created_at"
@@ -1459,11 +1489,11 @@ struct AppLog: Codable, Identifiable {
 /// For system-scheduled content, see `EventsConfig` in `EventsConfigService`.
 struct SupabaseRoom: Codable {
     let id: String
-    
+
     var type: RoomType {
         id.hasPrefix("event_") ? .event : .userRoom
     }
-    
+
     let name: String
     let hostUserId: UUID
     let hostUsername: String

@@ -950,9 +950,11 @@ class MPVPlayerViewModel: ObservableObject {
         }
 
         // Update available tracks
-        Task {
-            await subtitleService.scanEmbeddedTracks()
-        }
+        // REMOVED: Calling scanEmbeddedTracks here causes infinite recursion loop
+        // (Scan -> Updates Tracks -> Triggers Observer -> AutoSelect -> Analyze -> Scan)
+        // Task {
+        //    await subtitleService.scanEmbeddedTracks()
+        // }
     }    // MARK: - Phantom Sync / Snap-Seek Logic
 
     private func completeTrackSwitch() {

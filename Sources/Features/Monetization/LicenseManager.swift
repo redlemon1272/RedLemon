@@ -30,6 +30,8 @@ class LicenseManager: ObservableObject {
     /// Refresh license status from server
     func refreshLicense(premium: Bool, expiresAt: Date?) {
         DispatchQueue.main.async {
+            self.objectWillChange.send() // Force UI update
+            
             if let date = expiresAt {
                 self.subscriptionExpiresAt = date.timeIntervalSince1970
                 print("🎉 Subscription updated! Expires: \(date)")
@@ -37,7 +39,15 @@ class LicenseManager: ObservableObject {
                  // Fallback if no date returned but premium is true (Legacy/Safety)
                  // Give 30 days if undefined? Or just set far future?
                  // Let's set 30 days to be safe/generous for now
-                 self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
+                 // Only update if current expiry is in the past, to avoid overwriting a longer valid sub
+                 if self.subscriptionExpiresAt < Date().timeIntervalSince1970 {
+                     self.subscriptionExpiresAt = Date().addingTimeInterval(30 * 24 * 3600).timeIntervalSince1970
+                 }
+            } else {
+                // Premium is FALSE and no date provided -> Revoke/Expire
+                // Set expiry to 0 (1970) to ensure isPremium returns false
+                self.subscriptionExpiresAt = 0
+                print("🚫 Subscription revoked or inactive.")
             }
         }
     }
@@ -83,6 +93,57 @@ class LicenseManager: ObservableObject {
     var isPremium: Bool {
         if !isMonetizationEnabled { return true }
         return Date().timeIntervalSince1970 < subscriptionExpiresAt
+    }
+    
+    // MARK: - Hosting Limit
+    @Published var timeUntilNextFreeRoom: TimeInterval = 0
+    
+    func checkHostingLimit() async {
+        guard let userId = SupabaseClient.shared.auth.currentUser?.id else { return }
+        
+        // Premium users have no limit
+        if isPremium {
+            await MainActor.run { self.timeUntilNextFreeRoom = 0 }
+            return
+        }
+        
+        do {
+            if let lastCreated = try await SupabaseClient.shared.getLastRoomCreatedAt(userId: userId) {
+                 // Use trusted server time from TimeService
+                 let now = TimeService.shared.now
+                 
+                 let diff = now.timeIntervalSince(lastCreated)
+                 let cooldown: TimeInterval = 72 * 3600
+                 let remaining = cooldown - diff
+                 
+                 await MainActor.run {
+                     self.timeUntilNextFreeRoom = max(0, remaining)
+                 }
+            } else {
+                 await MainActor.run { self.timeUntilNextFreeRoom = 0 }
+            }
+        } catch {
+            print("Error checking hosting limit: \(error)")
+        }
+    }
+    
+    var formattedCooldownTime: String {
+        if timeUntilNextFreeRoom <= 0 { return "Ready" }
+        
+        let hours = Int(timeUntilNextFreeRoom) / 3600
+        let minutes = Int(timeUntilNextFreeRoom) / 60 % 60
+        
+        if hours > 24 {
+             let days = hours / 24
+             let remHours = hours % 24
+             return "\(days)d \(remHours)h"
+        }
+        
+        if hours > 0 {
+            return "\(hours)h \(minutes)m"
+        } else {
+            return "\(minutes)m"
+        }
     }
     
     /// Check if user can host (Everyone can host now, but with limits. This checks NON-limited hosting)

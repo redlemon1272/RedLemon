@@ -11,6 +11,7 @@ struct QualitySelectionView: View {
     @State private var roomDescription: String = ""
     @State private var isPublicRoom: Bool = true
     @State private var showPremiumSheet: Bool = false
+    @StateObject private var licenseManager = LicenseManager.shared
 
     var body: some View {
         VStack(spacing: 0) {
@@ -228,7 +229,11 @@ struct QualitySelectionView: View {
             }
             Button("Cancel", role: .cancel) { }
         } message: {
-            Text("Free users can only host one watch party every 72 hours. Upgrade now for unlimited hosting!")
+            if licenseManager.timeUntilNextFreeRoom > 0 {
+                Text("You have reached the free hosting limit (1 room / 72h). Next available slot: \(licenseManager.formattedCooldownTime). Upgrade to Premium for unlimited hosting!")
+            } else {
+                Text("Free users can only host one watch party every 72 hours. Upgrade now for unlimited hosting!")
+            }
         }
         .onAppear {
             // Sync with global state (e.g. if coming from "Resume Watch Party")

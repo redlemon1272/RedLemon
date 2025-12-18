@@ -97,6 +97,8 @@ struct SettingsView: View {
         .background(Color(NSColor.windowBackgroundColor))
         .task {
             await loadCredentials()
+            await licenseManager.checkHostingLimit()
+            await syncLicenseStatus()
             // Load username from UserDefaults and sync with AppState
             if let username = UserDefaults.standard.string(forKey: "redlemon.username") {
                 currentUsername = username
@@ -124,7 +126,11 @@ struct SettingsView: View {
         .sheet(isPresented: $showRestoreAccount) {
             RestoreAccountView()
         }
-        .sheet(isPresented: $showPaymentGate) {
+        .sheet(isPresented: $showPaymentGate, onDismiss: {
+            Task {
+                await syncLicenseStatus()
+            }
+        }) {
             PremiumPaymentView()
         }
         .sheet(isPresented: $showFeedbackSheet) {
@@ -358,7 +364,30 @@ struct SettingsView: View {
                         Divider()
                             .padding(.vertical, 4)
 
-                        Text("Unlock hosting capabilities with a one-time payment")
+                        // Free Tier Status
+                        HStack(spacing: 8) {
+                             if licenseManager.timeUntilNextFreeRoom > 0 {
+                                 Image(systemName: "clock.arrow.circlepath")
+                                     .font(.caption)
+                                     .foregroundColor(.orange)
+                                 Text("Next free host available in: \(licenseManager.formattedCooldownTime)")
+                                     .font(.caption.weight(.medium))
+                                     .foregroundColor(.orange)
+                             } else {
+                                 Image(systemName: "checkmark.seal.fill")
+                                     .font(.caption)
+                                     .foregroundColor(.green)
+                                 Text("1 free watch party available now")
+                                     .font(.caption.weight(.medium))
+                                     .foregroundColor(.green)
+                             }
+                        }
+                        .padding(8)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color(NSColor.controlBackgroundColor).opacity(0.5))
+                        .cornerRadius(8)
+
+                        Text("Or unlock unlimited hosting with a one-time payment")
                             .font(.caption)
                             .foregroundColor(.secondary)
 
@@ -379,13 +408,27 @@ struct SettingsView: View {
                     }
                 } else {
                     // License active message
-                    HStack(spacing: 8) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .font(.caption)
-                            .foregroundColor(.green)
-                        Text("You can host unlimited watch parties!")
-                            .font(.caption)
-                            .foregroundColor(.green)
+                    VStack(alignment: .leading, spacing: 6) {
+                        HStack(spacing: 8) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                            Text("You can host unlimited watch parties!")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                        }
+                        
+                        // Show premium expiration
+                        let expiryDate = Date(timeIntervalSince1970: licenseManager.subscriptionExpiresAt)
+                        let daysLeft = Calendar.current.dateComponents([.day], from: Date(), to: expiryDate).day ?? 0
+                        
+                        // Show expiration if it's not unreasonably far in the future (> 10 years means likely lifetime/permanent)
+                        if daysLeft < 3650 {
+                             Text("License valid until: \(expiryDate.formatted(date: .long, time: .omitted)) (\(daysLeft) days left)")
+                                .font(.caption2)
+                                .foregroundColor(.secondary)
+                                .padding(.leading, 24)
+                        }
                     }
                     .padding(.top, 4)
                 }
@@ -1001,6 +1044,21 @@ struct SettingsView: View {
                 rdUserInfo = nil
                 rdInfoLoading = false
             }
+        }
+    }
+
+    private func syncLicenseStatus() async {
+        guard let userId = appState.currentUserId else { return }
+        do {
+            if let user = try await SupabaseClient.shared.getUser(id: userId) {
+                // Update LicenseManager with authoritative data from Backend
+                LicenseManager.shared.refreshLicense(
+                    premium: user.isPremium ?? false,
+                    expiresAt: user.subscriptionExpiresAt
+                )
+            }
+        } catch {
+            print("Failed to sync license status: \(error)")
         }
     }
 

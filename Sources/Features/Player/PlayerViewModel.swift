@@ -857,6 +857,9 @@ class PlayerViewModel: ObservableObject {
             NSLog("❌ Failed to create room: \(error)")
             let msg = "\(error)"
             if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
+                // Refresh limit status so UI shows correct time
+                await LicenseManager.shared.checkHostingLimit()
+                
                 await MainActor.run {
                     appState.isLoadingRoom = false
                     self.showPremiumLimitAlert = true

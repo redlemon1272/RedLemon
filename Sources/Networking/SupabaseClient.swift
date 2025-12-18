@@ -699,6 +699,26 @@ class SupabaseClient: RoomManager, UserManager {
         return rooms.first
     }
 
+    /// Get the creation time of the last room hosted by the user
+    func getLastRoomCreatedAt(userId: UUID) async throws -> Date? {
+        let data = try await makeRequest(
+            path: "/rooms",
+            query: [
+                "host_user_id": "eq.\(userId.uuidString)",
+                "select": "created_at",
+                "order": "created_at.desc",
+                "limit": "1"
+            ]
+        )
+        
+        struct RoomDate: Decodable {
+            let created_at: Date
+        }
+        
+        let result = try jsonDecoder.decode([RoomDate].self, from: data)
+        return result.first?.created_at
+    }
+
     /// Update room stream selection (Host only)
     func updateRoomStream(
         roomId: String,

@@ -74,9 +74,10 @@ BEGIN
         new_expiry := NOW() + (days_to_add || ' days')::INTERVAL;
     END IF;
     
-    -- Update the user's premium expiry
+    -- Update the user's premium expiry and status
     UPDATE users 
-    SET subscription_expires_at = new_expiry
+    SET subscription_expires_at = new_expiry,
+        is_premium = true
     WHERE id = target_user_id;
     
     -- Return success result

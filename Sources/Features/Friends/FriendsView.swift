@@ -303,8 +303,17 @@ struct FriendsView: View {
     }
 
     private func inviteToWatchParty(_ friend: Friend) {
-        print("📨 Inviting \(friend.username) to watch party")
-        // FUTURE: Send push notification or in-app invite via Supabase
+        // Check if we are hosting or in a room
+        if let room = appState.player.currentWatchPartyRoom {
+            let roomName = room.mediaItem?.name ?? "Watch Party"
+            print("📨 Inviting \(friend.username) to room: \(room.id)")
+            Task {
+                await socialService.sendInvite(to: friend.id, roomId: room.id, roomName: roomName)
+            }
+        } else {
+             // Future: Prompt to create a room?
+             print("⚠️ Cannot invite: Not in a room")
+        }
     }
     
     private func joinFriend(_ friend: Friend) {

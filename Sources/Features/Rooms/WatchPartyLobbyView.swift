@@ -471,62 +471,81 @@ struct WatchPartyLobbyView: View {
                                         }
                                         
                                     ForEach(sortedFriends) { friend in
-                                        Button(action: {
-                                            withAnimation { selectedFriend = friend }
-                                        }) {
-                                            HStack {
-                                                // Avatar
-                                                ZStack(alignment: .topTrailing) {
-                                                    Circle()
-                                                        .fill(Constants.avatarColor(for: friend.username))
-                                                        .frame(width: 32, height: 32)
-                                                        .overlay(
-                                                            Text(friend.username.prefix(1).uppercased())
-                                                                .font(.caption.bold())
-                                                                .foregroundColor(.white)
-                                                        )
-                                                    
-                                                    if let count = socialService.unreadCounts[friend.id], count > 0 {
+                                            Button(action: {
+                                                withAnimation { selectedFriend = friend }
+                                            }) {
+                                                HStack {
+                                                    // Avatar (Existing)
+                                                    ZStack(alignment: .topTrailing) {
                                                         Circle()
-                                                            .fill(Color.red)
-                                                            .frame(width: 12, height: 12)
-                                                            .overlay(Text("\(count)").font(.system(size: 8)).foregroundColor(.white))
-                                                            .offset(x: 2, y: -2)
+                                                            .fill(Constants.avatarColor(for: friend.username))
+                                                            .frame(width: 32, height: 32)
+                                                            .overlay(
+                                                                Text(friend.username.prefix(1).uppercased())
+                                                                    .font(.caption.bold())
+                                                                    .foregroundColor(.white)
+                                                            )
+                                                        
+                                                        if let count = socialService.unreadCounts[friend.id], count > 0 {
+                                                            Circle()
+                                                                .fill(Color.red)
+                                                                .frame(width: 12, height: 12)
+                                                                .overlay(Text("\(count)").font(.system(size: 8)).foregroundColor(.white))
+                                                                .offset(x: 2, y: -2)
+                                                        }
                                                     }
-                                                }
-                                                
-                                                VStack(alignment: .leading) {
-                                                    Text(friend.displayName)
-                                                        .foregroundColor(.white)
-                                                        .font(.callout)
                                                     
-                                                    // Status
-                                                    if let activity = socialService.friendActivity[friend.id],
-                                                       let watching = activity.currentlyWatching {
-                                                        Text("Watching \(watching.mediaTitle)")
-                                                            .font(.caption2)
-                                                            .foregroundColor(.accentColor)
-                                                    } else if socialService.onlineUserIds.contains(friend.id) {
-                                                        Text("Online")
-                                                            .font(.caption2)
-                                                            .foregroundColor(.green)
-                                                    } else {
-                                                        Text("Offline")
-                                                            .font(.caption2)
-                                                            .foregroundColor(.gray)
+                                                    VStack(alignment: .leading) {
+                                                        Text(friend.displayName)
+                                                            .foregroundColor(.white)
+                                                            .font(.callout)
+                                                        
+                                                        // Status (Existing)
+                                                        if let activity = socialService.friendActivity[friend.id],
+                                                           let watching = activity.currentlyWatching {
+                                                            Text("Watching \(watching.mediaTitle)")
+                                                                .font(.caption2)
+                                                                .foregroundColor(.accentColor)
+                                                        } else if socialService.onlineUserIds.contains(friend.id) {
+                                                            Text("Online")
+                                                                .font(.caption2)
+                                                                .foregroundColor(.green)
+                                                        } else {
+                                                            Text("Offline")
+                                                                .font(.caption2)
+                                                                .foregroundColor(.gray)
+                                                        }
                                                     }
+                                                    
+                                                    Spacer()
+                                                    
+                                                    // Invite Button (Only show if room exists)
+                                                    if isHost || room.type == .userRoom {
+                                                        Button(action: {
+                                                            let roomName = room.mediaItem?.name ?? "Watch Party"
+                                                            Task {
+                                                                await socialService.sendInvite(to: friend.id, roomId: room.id, roomName: roomName)
+                                                            }
+                                                        }) {
+                                                            Label("Invite", systemImage: "envelope.fill")
+                                                                .font(.caption2)
+                                                                .padding(.horizontal, 8)
+                                                                .padding(.vertical, 4)
+                                                                .background(Color.white.opacity(0.1))
+                                                                .foregroundColor(.white)
+                                                                .cornerRadius(6)
+                                                        }
+                                                        .buttonStyle(.plain)
+                                                    }
+                                                    
+                                                    Image(systemName: "chevron.right")
+                                                        .foregroundColor(.white.opacity(0.3))
+                                                        .font(.caption)
                                                 }
-                                                
-                                                Spacer()
-                                                
-                                                Image(systemName: "chevron.right")
-                                                    .foregroundColor(.white.opacity(0.3))
-                                                    .font(.caption)
+                                                .padding(10)
+                                                .background(Color.white.opacity(0.05))
+                                                .cornerRadius(8)
                                             }
-                                            .padding(10)
-                                            .background(Color.white.opacity(0.05))
-                                            .cornerRadius(8)
-                                        }
                                         .buttonStyle(.plain)
                                     }
                                 }

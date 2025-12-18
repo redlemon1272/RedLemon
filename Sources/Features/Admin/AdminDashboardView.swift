@@ -229,6 +229,58 @@ struct AdminDashboardView: View {
                     }
                     .padding(.vertical, 8)
                 }
+                
+                // Premium Users List
+                Section(header: Text("Premium Users")) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: "crown.fill")
+                                .foregroundColor(.yellow)
+                            Text("Active Premium Users")
+                                .font(.headline)
+                        }
+                        
+                        let premiumUsers = allUsers.filter { $0.isPremium == true }
+                        
+                        if premiumUsers.isEmpty {
+                            Text("No premium users")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                                .padding(.vertical, 4)
+                        } else {
+                            ForEach(premiumUsers, id: \.id) { user in
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(user.username)
+                                            .font(.system(size: 12, weight: .medium))
+                                        if let expiry = fetchSubscriptionExpiry(for: user.username) {
+                                            Text("Expires: \(formattedDate(expiry))")
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        revokePremium(username: user.username)
+                                    }) {
+                                        Text("Revoke")
+                                            .font(.system(size: 11))
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
+                                            .background(Color.red)
+                                            .cornerRadius(4)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                                .padding(.vertical, 4)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
 
                 // User Management Section
                 if !allUsers.isEmpty {
@@ -425,6 +477,37 @@ struct AdminDashboardView: View {
         case 36500: return "Lifetime (100y)"
         default: return "\\(days) Days"
         }
+    }
+    
+    private func revokePremium(username: String) {
+        guard let currentUserId = appState.currentUserId else {
+            grantMessage = "Error: You must be logged in"
+            return
+        }
+        
+        Task {
+            do {
+                let message = try await SupabaseClient.shared.revokePremium(
+                    callerUserId: currentUserId,
+                    username: username
+                )
+                grantMessage = "Success: \(message)"
+                refreshData()
+            } catch {
+                grantMessage = "Error: \(error.localizedDescription)"
+            }
+        }
+    }
+    
+    private func fetchSubscriptionExpiry(for username: String) -> Date? {
+        return allUsers.first(where: { $0.username == username })?.subscriptionExpiresAt
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
     }
 }
 

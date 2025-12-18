@@ -718,6 +718,12 @@ class SocialService: ObservableObject {
             errorMessage = "Failed to send message"
         }
     }
+    
+    func sendInvite(to friendId: String, roomId: String, roomName: String) async {
+        let inviteContent = "INVITE|\(roomId)|\(roomName)"
+        await sendMessage(to: friendId, content: inviteContent)
+    }
+
     // MARK: - Watch History Sync
     
     private func syncLocalHistory() async {

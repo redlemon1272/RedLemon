@@ -136,6 +136,7 @@ struct ChatView: View {
 struct DMMessageRow: View {
     let message: DirectMessage
     let friend: Friend
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
@@ -144,21 +145,76 @@ struct DMMessageRow: View {
             if isMe { Spacer() }
             
             VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
-                // Only show name for friend, or if we want to be explicit
+                // Only show name for friend if not me
                 if !isMe {
                    Text(friend.username)
                         .font(.caption.weight(.semibold))
                         .foregroundColor(.purple)
                 }
                 
-                Text(message.content)
-                    .font(.body)
-                    .foregroundColor(.white)
-                    .padding(10)
-                    .background(isMe ? Color.blue : Color(white: 0.2)) // Safer dark grey than opacity
-                    .cornerRadius(12)
+                if message.content.hasPrefix("INVITE|") {
+                    // Render Invite Card
+                    let components = message.content.split(separator: "|")
+                    if components.count >= 3 {
+                        let roomId = String(components[1])
+                        let roomName = String(components[2])
+                        
+                        VStack(spacing: 8) {
+                            Text("🎬 Watch Party Invite")
+                                .font(.caption)
+                                .fontWeight(.bold)
+                                .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
+                            
+                            Text(roomName)
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .lineLimit(1)
+                            
+                            if !isMe {
+                                Button(action: {
+                                    Task {
+                                        await appState.player.joinRoom(roomId: roomId)
+                                    }
+                                }) {
+                                    Text("Join Party")
+                                        .fontWeight(.semibold)
+                                        .padding(.horizontal, 16)
+                                        .padding(.vertical, 8)
+                                        .background(Color.green)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(8)
+                                }
+                                .buttonStyle(.plain)
+                            } else {
+                                Text("Invite Sent")
+                                    .font(.caption)
+                                    .italic()
+                                    .foregroundColor(.white.opacity(0.7))
+                            }
+                        }
+                        .padding(12)
+                        .background(isMe ? Color.blue.opacity(0.8) : Color.white.opacity(0.1))
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.white.opacity(0.15), lineWidth: 1)
+                        )
+                    } else {
+                         // Malformed Invite fallback
+                         Text("Invalid Invite")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                    }
+                } else {
+                    // Standard Text Message
+                    Text(message.content)
+                        .font(.body)
+                        .foregroundColor(.white)
+                        .padding(10)
+                        .background(isMe ? Color.blue : Color(white: 0.2)) // Safer dark grey than opacity
+                        .cornerRadius(12)
+                }
             }
-            // Removed manual padding/bg wrap to let Text bubble handle it
             
             if !isMe { Spacer() }
         }

@@ -428,6 +428,62 @@ class SupabaseClient: RoomManager, UserManager {
             throw NSError(domain: "SupabaseClient", code: 403, userInfo: [NSLocalizedDescriptionKey: result.message])
         }
     }
+    
+    /// Revoke Premium Status (Admin Only)
+    func revokePremium(callerUserId: UUID, username: String) async throws -> String {
+        struct RevokeParams: Encodable {
+            let caller_user_id: String
+            let target_username: String
+        }
+        
+        struct RevokeResponse: Decodable {
+            let success: Bool
+            let message: String
+        }
+        
+        let params = RevokeParams(
+            caller_user_id: callerUserId.uuidString,
+            target_username: username
+        )
+        
+        guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_revoke_premium") else {
+            throw SupabaseError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        request.httpBody = try encoder.encode(params)
+        
+        let (data, httpResponse) = try await session.data(for: request)
+        
+        guard let response = httpResponse as? HTTPURLResponse else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        if response.statusCode >= 400 {
+            if let errorMessage = String(data: data, encoding: .utf8) {
+                throw SupabaseError.httpError(response.statusCode, errorMessage)
+            } else {
+                throw SupabaseError.httpError(response.statusCode, "Unknown error")
+            }
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let result = try decoder.decode(RevokeResponse.self, from: data)
+        
+        if result.success {
+            return result.message
+        } else {
+            throw NSError(domain: "SupabaseClient", code: 403, userInfo: [NSLocalizedDescriptionKey: result.message])
+        }
+    }
 
     /// Alias for getUser (more descriptive)
     func getUserById(userId: UUID) async throws -> SupabaseUser? {
@@ -1527,6 +1583,7 @@ struct SupabaseUser: Codable {
     let lastSeen: Date
     let isAdmin: Bool?
     let isPremium: Bool?
+    let subscriptionExpiresAt: Date?
 
     enum CodingKeys: String, CodingKey {
         case id, username
@@ -1536,6 +1593,7 @@ struct SupabaseUser: Codable {
         case lastSeen = "last_seen"
         case isAdmin = "is_admin"
         case isPremium = "is_premium"
+        case subscriptionExpiresAt = "subscription_expires_at"
     }
 }
 

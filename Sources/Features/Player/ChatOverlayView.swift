@@ -300,6 +300,8 @@ struct ChatOverlayView: View {
         }
     }
 
+// ... (existing code)
+
     private func dmMessagesList(friend: Friend) -> some View {
         ScrollViewReader { proxy in
             ScrollView {
@@ -309,7 +311,10 @@ struct ChatOverlayView: View {
                             let isMe = message.senderId.uuidString.lowercased() != friend.id.lowercased()
                             HStack {
                                 if isMe { Spacer() }
-                                VStack(alignment: isMe ? .trailing : .leading, spacing: 4) {
+                                
+                                if message.content.hasPrefix("INVITE|") {
+                                    InviteMessageView(message: message, isMe: isMe)
+                                } else {
                                     Text(message.content)
                                         .font(.body)
                                         .foregroundColor(.white)
@@ -317,6 +322,7 @@ struct ChatOverlayView: View {
                                         .background(isMe ? Color.blue : Color(white: 0.2))
                                         .cornerRadius(12)
                                 }
+                                
                                 if !isMe { Spacer() }
                             }
                             .id(message.id)
@@ -612,6 +618,55 @@ struct ChatOverlayView: View {
     }
 }
 
+struct InviteMessageView: View {
+    let message: DirectMessage
+    let isMe: Bool
+    @EnvironmentObject var appState: AppState
+    
+    var body: some View {
+        let components = message.content.split(separator: "|")
+        if components.count >= 3 {
+            let roomId = String(components[1])
+            let roomName = String(components[2])
+            
+            VStack(spacing: 4) {
+                Text("🎬 Watch Party Invite")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundColor(isMe ? .white.opacity(0.8) : .secondary)
+                
+                Text(roomName)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                
+                if !isMe {
+                    Button(action: {
+                        Task {
+                            await appState.player.joinRoom(roomId: roomId)
+                        }
+                    }) {
+                        Text("Join")
+                            .font(.caption2.weight(.bold))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 4)
+                            .background(Color.green)
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(8)
+            .background(isMe ? Color.blue.opacity(0.8) : Color.white.opacity(0.1))
+            .cornerRadius(8)
+        } else {
+            EmptyView()
+        }
+    }
+}
+
 struct FriendRowButton: View {
     let friend: Friend
     let unreadCount: Int
@@ -687,7 +742,7 @@ struct FriendRowButton: View {
                 isHovering = hovering
             }
 
-            // Join Button (if friend is in a room)
+                // Join Button (if friend is in a room)
             if let activity = SocialService.shared.friendActivity[friend.id],
                let watching = activity.currentlyWatching,
                let roomId = watching.roomId {
@@ -701,6 +756,28 @@ struct FriendRowButton: View {
                 }
                 .buttonStyle(.plain)
                 .help("Join \(friend.displayName)")
+            } else if appState.player.currentWatchPartyRoom != nil { // FIXED: Use currentWatchPartyRoom check
+                // INVITE Capability (if I am in a room)
+                Button(action: {
+                   let room = appState.player.currentWatchPartyRoom
+                   let roomName = room?.mediaItem?.name ?? "Watch Party"
+                   let roomId = room?.id ?? ""
+                   
+                   if !roomId.isEmpty {
+                       Task {
+                           await SocialService.shared.sendInvite(to: friend.id, roomId: roomId, roomName: roomName)
+                       }
+                   }
+               }) {
+                   Image(systemName: "envelope.fill")
+                       .foregroundColor(.white.opacity(0.8))
+                       .font(.system(size: 16))
+                       .padding(6)
+                       .background(Color.white.opacity(0.1))
+                       .clipShape(Circle())
+               }
+               .buttonStyle(.plain)
+               .help("Invite to Room")
             } else if SocialService.shared.onlineUserIds.contains(friend.id) {
                 // Online indicator
                  Circle()

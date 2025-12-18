@@ -2133,7 +2133,10 @@ extension MPVPlayerViewModel {
                     currentSpeedAdjustment = 1.0
                     print("✅ Perfect sync achieved: \(Int(absSmoothedDrift * 1000))ms - resetting to 1.0x")
                 }
-            } else if absSmoothedDrift < 5.0 && !isEvent {
+            } else if absSmoothedDrift < 5.0 {
+                // Rate Sync (Enabled for ALL session types, including Events)
+                // This ensures that "User Rooms with Event IDs" still get smooth sync.
+                // Large drifts (>5s) will still fall through to the Seek block below.
                 // Small/Medium drift (100ms-5s) - Use ultra-smooth speed adjustment
                 // Hysteresis: Only adjust if enough time has passed since last adjustment
                 let timeSinceLastAdjustment = lastSpeedAdjustmentTime.map { Date().timeIntervalSince($0) } ?? 1.0

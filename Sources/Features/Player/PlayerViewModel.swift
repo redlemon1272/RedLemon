@@ -155,39 +155,23 @@ class PlayerViewModel: ObservableObject {
                     subtitles: []
                 )
                 
-                // NEW: Use Host's Selected Subtitle if available
-                if let subtitleUrl = watchPartyRoom.subtitleUrl, !subtitleUrl.isEmpty, let _ = URL(string: subtitleUrl) {
-                    NSLog("🎬 GUEST: Using host's selected subtitle: \(subtitleUrl)")
-                    let sharedSub = Subtitle(
-                        id: UUID().uuidString,
-                        url: subtitleUrl,
-                        lang: "en",
-                        label: "Shared Subtitle",
-                        srclang: "en",
-                        kind: "subtitles",
-                        provider: "Host"
-                    )
-                    // Mark as auto-selected so player picks it up immediately
-                    hasAutoSelectedSubtitles = true 
-                    hostStream.subtitles = [sharedSub]
-                } else {
-                    // Fallback: Fetch subtitles locally if none provided by host
-                    NSLog("🎬 GUEST: Fetching subtitles for shared stream (Fallback)...")
-                    if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(imdbId: item.id, type: item.type) {
-                         NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
-                         let internalSubtitles = subDLSubtitles.map { sub in
-                             Subtitle(
-                                 id: UUID().uuidString,
-                                 url: LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url),
-                                 lang: sub.language ?? "en",
-                                 label: sub.releaseName ?? (sub.language ?? "Unknown"),
-                                 srclang: sub.language ?? "en",
-                                 kind: "subtitles",
-                                 provider: "SubDL"
-                             )
-                         }
-                         hostStream.subtitles = internalSubtitles
-                    }
+                // Standard Behavior: Search for subtitles locally (SubDL)
+                // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
+                NSLog("🎬 GUEST: Searching for subtitles locally...")
+                if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(imdbId: item.id, type: item.type) {
+                     NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
+                     let internalSubtitles = subDLSubtitles.map { sub in
+                         Subtitle(
+                             id: UUID().uuidString,
+                             url: LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url),
+                             lang: sub.language ?? "en",
+                             label: sub.releaseName ?? (sub.language ?? "Unknown"),
+                             srclang: sub.language ?? "en",
+                             kind: "subtitles",
+                             provider: "SubDL"
+                         )
+                     }
+                     hostStream.subtitles = internalSubtitles
                 }
                 
                 resolvedStream = hostStream

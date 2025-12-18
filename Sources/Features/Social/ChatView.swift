@@ -15,6 +15,10 @@ struct ChatView: View {
     
     @State private var showEmojiPicker = false
     private let emojis = ["😂", "😍", "🔥", "👍", "❤️", "😎", "🎉", "💯", "😭", "🤔", "👀", "✨", "🎬", "🍿", "😱", "🤣"]
+    
+    @State private var showDeleteConfirmation = false
+    @State private var isDeleting = false
+    @State private var deleteError: String?
 
     var body: some View {
         VStack(spacing: 8) { // Matches Lobby styling
@@ -67,6 +71,21 @@ struct ChatView: View {
             }
             .background(Color.black.opacity(0.3)) // Matches Lobby Chat
             .cornerRadius(8)
+            .toolbar {
+                ToolbarItem(placement: .automatic) {
+                    Menu {
+                        Button(role: .destructive, action: {
+                            showDeleteConfirmation = true
+                        }) {
+                            Label("Delete All Messages", systemImage: "trash")
+                        }
+                        .disabled(socialService.messages[friend.id]?.isEmpty ?? true)
+                    } label: {
+                        Image(systemName: "ellipsis.circle")
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
             
             // Input Area (Reuse Lobby Layout)
             VStack(spacing: 0) {
@@ -116,6 +135,27 @@ struct ChatView: View {
         .padding(.horizontal, 24) // Matches Lobby padding
         .padding(.bottom, 16)     // Matches Lobby padding
         .background(Color.black) // Ensure dark background for visibility
+        .confirmationDialog(
+            "Delete All Messages?",
+            isPresented: $showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete All Messages", role: .destructive) {
+                Task {
+                    await deleteAllMessages()
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently delete all messages with \(friend.username). This action cannot be undone.")
+        }
+        .alert("Error", isPresented: .constant(deleteError != nil)) {
+            Button("OK") {
+                deleteError = nil
+            }
+        } message: {
+            Text(deleteError ?? "")
+        }
         .task {
             await socialService.loadMessages(friendId: friend.id)
             socialService.clearUnread(friendId: friend.id)
@@ -130,6 +170,16 @@ struct ChatView: View {
         Task {
             await socialService.sendMessage(to: friend.id, content: content)
         }
+    }
+    
+    private func deleteAllMessages() async {
+        isDeleting = true
+        do {
+            try await socialService.deleteAllMessages(friendId: friend.id)
+        } catch {
+            deleteError = error.localizedDescription
+        }
+        isDeleting = false
     }
 }
 

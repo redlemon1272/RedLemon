@@ -25,6 +25,10 @@ struct FriendProfileView: View {
     // Common emojis (same as player chat)
     private let emojis = ["\u{1F602}", "\u{1F60D}", "\u{1F525}", "\u{1F44D}", "\u{2764}\u{FE0F}", "\u{1F60E}", "\u{1F389}", "\u{1F4AF}", "\u{1F62D}", "\u{1F914}", "\u{1F440}", "\u{2728}", "\u{1F3AC}", "\u{1F37F}", "\u{1F631}", "\u{1F923}"]
     
+    @State private var showDeleteConfirmation = false
+    @State private var isDeleting = false
+    @State private var deleteError: String?
+    
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -45,7 +49,42 @@ struct FriendProfileView: View {
                     .background(Color(NSColor.controlBackgroundColor))
             }
         }
-        .frame(minWidth: 900, minHeight: 600) // Force larger window/modal size
+        .frame(minWidth: 900, minHeight: 500) // Compact modal size
+        .toolbar {
+            ToolbarItem(placement: .automatic) {
+                Menu {
+                    Button(role: .destructive, action: {
+                        showDeleteConfirmation = true
+                    }) {
+                        Label("Delete All Messages", systemImage: "trash")
+                    }
+                    .disabled(socialService.messages[friend.id]?.isEmpty ?? true)
+                } label: {
+                    Image(systemName: "ellipsis.circle")
+                }
+            }
+        }
+        .confirmationDialog(
+            "Delete All Messages?",
+            isPresented: $showDeleteConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Delete All Messages", role: .destructive) {
+                Task {
+                    await deleteAllMessages()
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently delete all messages with \(friend.username). This action cannot be undone.")
+        }
+        .alert("Error", isPresented: .constant(deleteError != nil)) {
+            Button("OK") {
+                deleteError = nil
+            }
+        } message: {
+            Text(deleteError ?? "")
+        }
         .task {
             // Load messages
             await socialService.loadMessages(friendId: friend.id)
@@ -267,6 +306,16 @@ struct FriendProfileView: View {
         Task {
             await socialService.sendMessage(to: friend.id, content: content)
         }
+    }
+    
+    private func deleteAllMessages() async {
+        isDeleting = true
+        do {
+            try await socialService.deleteAllMessages(friendId: friend.id)
+        } catch {
+            deleteError = error.localizedDescription
+        }
+        isDeleting = false
     }
     
     // MARK: - Profile Sidebar (History)

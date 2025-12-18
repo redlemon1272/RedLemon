@@ -723,6 +723,30 @@ class SocialService: ObservableObject {
         let inviteContent = "INVITE|\(roomId)|\(roomName)"
         await sendMessage(to: friendId, content: inviteContent)
     }
+    
+    /// Delete all messages with a friend
+    func deleteAllMessages(friendId: String) async throws {
+        let friendId = friendId.lowercased()
+        guard let userIdStr = currentUserId,
+              let userId = UUID(uuidString: userIdStr),
+              let friendUUID = UUID(uuidString: friendId) else {
+            throw NSError(domain: "SocialService", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid user or friend ID"])
+        }
+        
+        do {
+            try await client.deleteAllDirectMessages(userId: userId, friendId: friendUUID)
+            
+            // Clear local cache
+            self.messages[friendId] = []
+            self.unreadCounts[friendId] = 0
+            
+            print("✅ SocialService: Deleted all messages with \(friendId)")
+        } catch {
+            print("❌ SocialService: Failed to delete messages: \(error)")
+            throw error
+        }
+    }
+
 
     // MARK: - Watch History Sync
     

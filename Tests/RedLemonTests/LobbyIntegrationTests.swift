@@ -77,7 +77,8 @@ class LobbyIntegrationTests: XCTestCase {
             unlockedStreamUrl: nil,
             playlist: [],
             currentPlaylistIndex: 0,
-            description: nil
+            description: nil,
+            subtitleUrl: nil
         )
         
         // 5. Initialize ViewModel

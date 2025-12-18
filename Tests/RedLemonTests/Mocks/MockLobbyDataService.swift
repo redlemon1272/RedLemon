@@ -54,7 +54,8 @@ class MockLobbyDataService: LobbyDataService {
         isPublic: Bool,
         unlockedStreamUrl: String?,
         description: String?,
-        playlist: [PlaylistItem]?
+        playlist: [PlaylistItem]?,
+        subtitleUrl: String?
     ) async throws -> SupabaseRoom {
         createRoomCallCount += 1
         return SupabaseRoom(
@@ -80,7 +81,8 @@ class MockLobbyDataService: LobbyDataService {
             unlockedStreamUrl: unlockedStreamUrl,
             playlist: playlist,
             currentPlaylistIndex: 0,
-            description: description
+            description: description,
+            subtitleUrl: subtitleUrl
         )
     }
     

@@ -54,7 +54,8 @@ protocol RoomManager {
         isPublic: Bool,
         unlockedStreamUrl: String?,
         description: String?,
-        playlist: [PlaylistItem]?
+        playlist: [PlaylistItem]?,
+        subtitleUrl: String?
     ) async throws -> SupabaseRoom
 
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
@@ -2038,8 +2039,20 @@ extension SupabaseClient {
         ]
 
         _ = try await makeRequest(path: path, method: "POST", body: body)
-
-
+    }
+    
+    /// Delete all direct messages between two users
+    func deleteAllDirectMessages(userId: UUID, friendId: UUID) async throws {
+        // Delete messages where either:
+        // 1. user is sender AND friend is receiver
+        // 2. friend is sender AND user is receiver
+        _ = try await makeRequest(
+            path: "/direct_messages",
+            method: "DELETE",
+            query: [
+                "or": "(and(sender_id.eq.\(userId.uuidString),receiver_id.eq.\(friendId.uuidString)),and(sender_id.eq.\(friendId.uuidString),receiver_id.eq.\(userId.uuidString)))"
+            ]
+        )
     }
 }
 

@@ -166,8 +166,9 @@ struct QualitySelectionView: View {
                 VStack(spacing: 12) {
                     if appState.player.isResolvingStream || appState.isLoadingRoom {
                         ProgressView(appState.isLoadingRoom ? "Creating room..." : "Finding best stream...")
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, minHeight: 50)
                             .padding()
+                            .id("loading-progress") // Force stable identity
                     } else {
                         Button(action: startPlayback) {
                             HStack {

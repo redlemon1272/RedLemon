@@ -765,40 +765,26 @@ class PlayerViewModel: ObservableObject {
             // Keeping the retry logic from original for safety
             var room: SupabaseRoom!
             do {
-                room = try await roomManager.createRoom(
-                    id: roomId,
-                    name: roomName,
-                    hostUserId: userId,
-                    hostUsername: appState.currentUsername,
-                    streamHash: nil,
-                    imdbId: mediaItem.id,
-                    posterUrl: mediaItem.poster,
-                    backdropUrl: mediaItem.background,
-                    season: finalSeason,
-                    episode: finalEpisode,
-                    isPublic: isPublic,
-                    unlockedStreamUrl: nil,
-                    description: description,
-                    playlist: nil
-                )
+            // Capture dependencies to avoid MainActor isolation violations
+            let roomManager = self.roomManager
+            let hostUsername = appState.currentUsername
+            
+             // nonisolated helper to run off MainActor
+            room = try await performRoomCreation(
+                roomManager: roomManager,
+                roomId: roomId,
+                roomName: roomName,
+                userId: userId,
+                hostUsername: hostUsername,
+                mediaItem: mediaItem,
+                finalSeason: finalSeason,
+                finalEpisode: finalEpisode,
+                isPublic: isPublic,
+                description: description
+            )
              } catch {
-                // Retry without new fields
-                room = try await roomManager.createRoom(
-                    id: roomId,
-                    name: roomName,
-                    hostUserId: userId,
-                    hostUsername: appState.currentUsername,
-                    streamHash: nil,
-                    imdbId: mediaItem.id,
-                    posterUrl: mediaItem.poster,
-                    backdropUrl: mediaItem.background,
-                    season: finalSeason,
-                    episode: finalEpisode,
-                    isPublic: false,
-                    unlockedStreamUrl: nil,
-                    description: nil,
-                    playlist: nil
-                )
+                NSLog("❌ Creation failed or timed out: \(error)")
+                throw error
              }
 
             // Host join DB
@@ -1119,5 +1105,92 @@ class PlayerViewModel: ObservableObject {
     
     private func exitFullscreen() {
         WindowManager.shared.exitFullscreen()
+    }
+    
+    // MARK: - Non-Isolated Helpers
+    
+    /// Performs room creation off the Main Actor to prevent UI blocking issues
+    nonisolated private func performRoomCreation(
+        roomManager: RoomManager,
+        roomId: String,
+        roomName: String,
+        userId: UUID,
+        hostUsername: String,
+        mediaItem: MediaItem,
+        finalSeason: Int?,
+        finalEpisode: Int?,
+        isPublic: Bool,
+        description: String?
+    ) async throws -> SupabaseRoom {
+        NSLog("Background: ⏳ Starting room creation (Unstructured Race)...")
+        
+        // We use a continuation to allow returning *before* the network task completes/cancels
+        return try await withCheckedThrowingContinuation { continuation in
+            let continuationWrapper = ContinuationWrapper(continuation)
+            
+            // 1. The Network Task (Detached to avoid ANY context inheritance)
+            Task.detached(priority: .userInitiated) {
+                do {
+                    NSLog("Background: ▶️ createRoom task started (Direct Singleton Access)")
+                    // Bypass protocol witness table and capture - use Singleton directly
+                    let r = try await SupabaseClient.shared.createRoom(
+                        id: roomId,
+                        name: roomName,
+                        hostUserId: userId,
+                        hostUsername: hostUsername,
+                        streamHash: nil,
+                        imdbId: mediaItem.id,
+                        posterUrl: mediaItem.poster,
+                        backdropUrl: mediaItem.background,
+                        season: finalSeason,
+                        episode: finalEpisode,
+                        isPublic: isPublic,
+                        unlockedStreamUrl: nil,
+                        description: description,
+                        playlist: nil
+                    )
+                    NSLog("Background: ✅ createRoom task finished")
+                    continuationWrapper.resume(returning: r)
+                } catch {
+                     NSLog("Background: ❌ createRoom task failed: \(error)")
+                     continuationWrapper.resume(throwing: error)
+                }
+            }
+            
+            // 2. The Timeout Task
+            Task {
+                try? await Task.sleep(nanoseconds: 8_000_000_000) // 8 seconds
+                NSLog("Background: ⏰ Timeout fired! Attempting to fail continuation...")
+                continuationWrapper.resume(throwing: NSError(domain: "PlayerViewModel", code: -2, userInfo: [NSLocalizedDescriptionKey: "Room creation timed out"]))
+            }
+        }
+    }
+    
+    // Thread-safe wrapper to ensure continuation is resumed exactly once
+    private class ContinuationWrapper {
+        private var continuation: CheckedContinuation<SupabaseRoom, Error>?
+        private let lock = NSLock()
+        
+        init(_ continuation: CheckedContinuation<SupabaseRoom, Error>) {
+            self.continuation = continuation
+        }
+        
+        func resume(returning value: SupabaseRoom) {
+            lock.lock()
+            defer { lock.unlock() }
+            if let c = continuation {
+                c.resume(returning: value)
+                continuation = nil
+            }
+        }
+        
+        func resume(throwing error: Error) {
+            lock.lock()
+            defer { lock.unlock() }
+            if let c = continuation {
+                c.resume(throwing: error)
+                continuation = nil
+            }
+        }
     }
 }

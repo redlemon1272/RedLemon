@@ -161,6 +161,8 @@ class SupabaseClient: RoomManager, UserManager {
         let config = URLSessionConfiguration.default
         config.requestCachePolicy = .reloadIgnoringLocalCacheData
         config.urlCache = nil
+        config.timeoutIntervalForRequest = 15.0 // FAIL FAST: Prevent infinite hanging on bad connections/backend
+        config.timeoutIntervalForResource = 30.0
         self.session = URLSession(configuration: config)
     }
 
@@ -178,7 +180,8 @@ class SupabaseClient: RoomManager, UserManager {
         method: String = "GET",
         body: [String: Any]? = nil,
         query: [String: String]? = nil,
-        headers: [String: String]? = nil
+        headers: [String: String]? = nil,
+        useEphemeralSession: Bool = false
     ) async throws -> Data {
         var urlString = "\(baseURL)/rest/v1\(path)"
 
@@ -216,7 +219,18 @@ class SupabaseClient: RoomManager, UserManager {
             request.httpBody = try JSONSerialization.data(withJSONObject: body)
         }
 
-        let (data, response) = try await session.data(for: request)
+        // Use ephemeral session if requested to bypass shared session queue (critical for room creation)
+        let sessionToUse: URLSession
+        if useEphemeralSession {
+            let config = URLSessionConfiguration.ephemeral
+            config.timeoutIntervalForRequest = 10.0
+            config.timeoutIntervalForResource = 30.0
+            sessionToUse = URLSession(configuration: config)
+        } else {
+            sessionToUse = self.session
+        }
+
+        let (data, response) = try await sessionToUse.data(for: request)
 
         // DEBUG: Print raw JSON for room requests to verify season/episode
         if path.contains("/rooms") {
@@ -441,6 +455,7 @@ class SupabaseClient: RoomManager, UserManager {
         playlist: [PlaylistItem]? = nil,
         subtitleUrl: String? = nil
     ) async throws -> SupabaseRoom {
+        NSLog("🎬 SupabaseClient: createRoom called for id: \(id) - ENTRY")
         var roomData: [String: Any] = [
             "id": id,
             "name": name,
@@ -477,11 +492,15 @@ class SupabaseClient: RoomManager, UserManager {
             }
         }
 
+        NSLog("🎬 SupabaseClient: Creating room '\(id)' for host '\(hostUsername)'...")
         let data = try await makeRequest(
             path: "/rooms",
             method: "POST",
-            body: roomData
+            body: roomData,
+            headers: ["Prefer": "return=representation"],
+            useEphemeralSession: true
         )
+        NSLog("✅ SupabaseClient: Room creation request completed (received response)")
 
         let rooms = try jsonDecoder.decode([SupabaseRoom].self, from: data)
         guard let room = rooms.first else {
@@ -1377,7 +1396,7 @@ struct ReportedStream: Identifiable, Codable {
         let season = item.season ?? -1
         let episode = item.episode ?? -1
 
-        let payload: [String: Any] = [
+        var payload: [String: Any] = [
             "user_id": userId.uuidString,
             "media_id": item.mediaItem.id,
             "media_type": item.mediaItem.type,
@@ -1385,17 +1404,17 @@ struct ReportedStream: Identifiable, Codable {
             "season": season,
             "episode": episode,
             "progress": item.progress,
-            "poster_url": item.mediaItem.poster as Any,
             "last_watched": SupabaseClient.isoFormatter.string(from: item.lastWatched)
         ]
-
-        // Remove nils (like poster_url if missing), but keep season/episode (-1)
-        let cleanPayload = payload.compactMapValues { $0 }
+        
+        if let poster = item.mediaItem.poster {
+            payload["poster_url"] = poster
+        }
 
         _ = try await makeRequest(
             path: "/user_watch_history",
             method: "POST",
-            body: cleanPayload,
+            body: payload,
             query: ["on_conflict": "user_id,media_id,season,episode"],
             headers: ["Prefer": "resolution=merge-duplicates, return=representation"]
         )

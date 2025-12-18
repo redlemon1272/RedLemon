@@ -727,10 +727,21 @@ class SocialService: ObservableObject {
         
         print("🔄 SocialService: Syncing \(history.count) items to cloud...")
         
-        for item in history {
-            // Fire and forget individually to avoid blocking
-            Task {
-                try? await client.upsertWatchHistory(item: item, userId: userId)
+        // Sort by lastWatched (newest first) to prioritize recent history
+        let sortedHistory = history.sorted { $0.lastWatched > $1.lastWatched }
+        let batch = Array(sortedHistory.prefix(50)) // Limit to 50 items to prevent overload
+        
+        print("🔄 SocialService: Syncing \(batch.count) items to cloud (serial)...")
+        
+        Task {
+            for item in batch {
+                do {
+                    try await client.upsertWatchHistory(item: item, userId: userId)
+                    // Small yield to allow other tasks to process if needed
+                    try await Task.sleep(nanoseconds: 10_000_000) // 10ms
+                } catch {
+                    print("⚠️ SocialService: Failed to sync item \(item.mediaItem.name): \(error)")
+                }
             }
         }
     }

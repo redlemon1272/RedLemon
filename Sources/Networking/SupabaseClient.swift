@@ -371,23 +371,57 @@ class SupabaseClient: RoomManager, UserManager {
     }
 
     /// Grant Premium Status (Admin Only)
-    func grantPremium(username: String, days: Int) async throws -> String {
-        let params: [String: Any] = [
-            "target_username": username,
-            "days_to_add": days
-        ]
-
-        let response = try await functions.invoke("admin_grant_premium", options: FunctionInvokeOptions(
-            body: params
-        ))
-
+    func grantPremium(callerUserId: UUID, username: String, days: Int) async throws -> String {
+        struct GrantParams: Encodable {
+            let caller_user_id: String  // UUID as string for JSON
+            let target_username: String
+            let days_to_add: Int
+        }
+        
         struct GrantResponse: Decodable {
             let success: Bool
             let message: String
         }
-
-        let result = try JSONDecoder().decode(GrantResponse.self, from: response)
-
+        
+        let params = GrantParams(
+            caller_user_id: callerUserId.uuidString,
+            target_username: username,
+            days_to_add: days
+        )
+        
+        // Call the PostgreSQL function via RPC endpoint
+        guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_grant_premium") else {
+            throw SupabaseError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiKey, forHTTPHeaderField: "apikey")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        request.httpBody = try encoder.encode(params)
+        
+        let (data, httpResponse) = try await session.data(for: request)
+        
+        guard let response = httpResponse as? HTTPURLResponse else {
+            throw SupabaseError.invalidResponse
+        }
+        
+        if response.statusCode >= 400 {
+            if let errorMessage = String(data: data, encoding: .utf8) {
+                throw SupabaseError.httpError(response.statusCode, errorMessage)
+            } else {
+                throw SupabaseError.httpError(response.statusCode, "Unknown error")
+            }
+        }
+        
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let result = try decoder.decode(GrantResponse.self, from: data)
+        
         if result.success {
             return result.message
         } else {

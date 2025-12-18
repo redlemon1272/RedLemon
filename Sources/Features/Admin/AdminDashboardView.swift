@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AdminDashboardView: View {
     @Binding var isPresented: Bool
+    @EnvironmentObject var appState: AppState
     @State private var logs: [AppLog] = []
     @State private var activeRooms: [SupabaseRoom] = []
     @State private var allUsers: [SupabaseUser] = []
@@ -185,13 +186,23 @@ struct AdminDashboardView: View {
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                                 .frame(width: 150)
                             
-                            Picker("Duration", selection: $grantDays) {
-                                Text("30 Days").tag(30)
-                                Text("90 Days").tag(90)
-                                Text("1 Year").tag(365)
-                                Text("Lifetime (100y)").tag(36500)
+                            Menu {
+                                Button("30 Days") { grantDays = 30 }
+                                Button("90 Days") { grantDays = 90 }
+                                Button("1 Year") { grantDays = 365 }
+                                Button("Lifetime (100y)") { grantDays = 36500 }
+                            } label: {
+                                HStack {
+                                    Text(durationLabel(for: grantDays))
+                                    Image(systemName: "chevron.down")
+                                        .font(.caption)
+                                }
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.gray.opacity(0.15))
+                                .cornerRadius(4)
                             }
-                            .frame(width: 120)
+                            .buttonStyle(.plain)
                             
                             if isGranting {
                                 ProgressView()
@@ -382,12 +393,20 @@ struct AdminDashboardView: View {
     
     private func grantPremium() {
         guard !grantUsername.isEmpty else { return }
+        guard let currentUserId = appState.currentUserId else {
+            grantMessage = "Error: You must be logged in"
+            return
+        }
         isGranting = true
         grantMessage = nil
         
         Task {
             do {
-                let message = try await SupabaseClient.shared.grantPremium(username: grantUsername, days: grantDays)
+                let message = try await SupabaseClient.shared.grantPremium(
+                    callerUserId: currentUserId,
+                    username: grantUsername,
+                    days: grantDays
+                )
                 grantMessage = "Success: \(message)"
                 grantUsername = "" // Clear input on success
                 refreshData() // Refresh user list to see update
@@ -395,6 +414,16 @@ struct AdminDashboardView: View {
                 grantMessage = "Error: \(error.localizedDescription)"
             }
             isGranting = false
+        }
+    }
+    
+    private func durationLabel(for days: Int) -> String {
+        switch days {
+        case 30: return "30 Days"
+        case 90: return "90 Days"
+        case 365: return "1 Year"
+        case 36500: return "Lifetime (100y)"
+        default: return "\\(days) Days"
         }
     }
 }

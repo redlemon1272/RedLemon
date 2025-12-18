@@ -746,6 +746,26 @@ class SupabaseClient: RoomManager, UserManager {
         NSLog("✅ Persisted stream selection to room \(roomId)")
     }
 
+    /// Reset room stream selection (Admin/Debug)
+    func resetRoomStream(roomId: String) async throws {
+        let body: [String: Any] = [
+            "stream_hash": NSNull(),
+            "selected_file_idx": NSNull(),
+            "selected_quality": NSNull(),
+            "unlocked_stream_url": NSNull(),
+            "last_activity": ISO8601DateFormatter().string(from: Date())
+        ]
+
+        _ = try await makeRequest(
+            path: "/rooms",
+            method: "PATCH",
+            body: body,
+            query: ["id": "eq.\(roomId)"]
+        )
+        
+        NSLog("✅ Reset/Cleared stream selection for room \(roomId)")
+    }
+
     /// Update room playlist (Host only)
     func updateRoomPlaylist(
         roomId: String,

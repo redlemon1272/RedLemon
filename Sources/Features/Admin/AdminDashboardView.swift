@@ -23,6 +23,13 @@ struct AdminDashboardView: View {
     @State private var isGranting = false
     @State private var grantMessage: String?
 
+    // Event Debug State
+    @State private var debugEventId: String = "tt2494362" // Default to 'Now You See Me' for convenience
+    @State private var isResettingStream: Bool = false
+    @State private var resetMessage: String?
+    @State private var currentSeededEvent: MediaItem?
+    @State private var activeDbEventRoom: SupabaseRoom? = nil // The actual room in DB (e.g. event_tt123)
+
     var body: some View {
         VStack(spacing: 0) {
             // Custom Window Header
@@ -84,6 +91,27 @@ struct AdminDashboardView: View {
                                 .cornerRadius(6)
                         }
                         .buttonStyle(.plain)
+                        
+                        Button(action: {
+                            Task {
+                                isLoading = true
+                                do {
+                                    _ = try await EventsConfigService.shared.refreshConfig(type: "movie_events")
+                                    refreshData()
+                                } catch {
+                                    errorMessage = "Failed to refresh: \(error.localizedDescription)"
+                                }
+                                isLoading = false
+                            }
+                        }) {
+                            Image(systemName: "arrow.clockwise")
+                                .foregroundColor(.secondary)
+                                .padding(6)
+                                .background(Color.gray.opacity(0.1))
+                                .cornerRadius(6)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Force Refresh Schedule")
                     }
                     .padding(.vertical, 4)
                 }
@@ -222,6 +250,162 @@ struct AdminDashboardView: View {
                         }
                         
                         if let msg = grantMessage {
+                            Text(msg)
+                                .font(.caption)
+                                .foregroundColor(msg.contains("Error") ? .red : .green)
+                        }
+                    }
+                    .padding(.vertical, 8)
+                }
+
+                // Event Debug Section
+                Section(header: Text("Event Management")) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            Image(systemName: "exclamationmark.arrow.triangle.2.circlepath")
+                                .foregroundColor(.orange)
+                            Text("Reset Event Stream")
+                                .font(.headline)
+                        }
+                        
+                        Text("Clear locked stream for an event (forces re-resolution).")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        
+                        // Auto-detected current event
+                        if let currentEvent = currentSeededEvent {
+                            VStack(alignment: .leading, spacing: 6) {
+                                Text("Current Seeding Event:")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                
+                                HStack {
+                                    Text("\(currentEvent.name)")
+                                        .fontWeight(.medium)
+                                        .font(.system(size: 13))
+                                    
+                                    Text("(\(currentEvent.id))")
+                                        .font(.caption)
+                                        .foregroundColor(.secondary)
+                                        .monospacedDigit()
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        debugEventId = currentEvent.id
+                                        resetEventStream()
+                                    }) {
+                                        ZStack {
+                                            Text("Reset This Event")
+                                                .fontWeight(.medium)
+                                                .opacity(isResettingStream ? 0 : 1)
+                                            
+                                            if isResettingStream {
+                                                ProgressView()
+                                                    .scaleEffect(0.5)
+                                                    .frame(width: 16, height: 16)
+                                            }
+                                        }
+                                        .font(.caption)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 8)
+                                        .padding(.vertical, 4)
+                                        .background(Color.red.opacity(0.9))
+                                        .cornerRadius(4)
+                                    }
+                                    .buttonStyle(.plain)
+                                    .disabled(isResettingStream)
+                                }
+                                .padding(8)
+                                .background(Color.primary.opacity(0.05))
+                                .cornerRadius(6)
+                            }
+                        } else {
+                            Text("No active event detected in schedule.")
+                                .font(.caption)
+                                .italic()
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Divider()
+                            .padding(.vertical, 4)
+                            
+                        // Actual Database Room Status
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack {
+                                Text("Active Database Room:")
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                                
+                                if let dbRoom = activeDbEventRoom {
+                                    if let seeded = currentSeededEvent, dbRoom.id == "event_\(seeded.id)" {
+                                        Text("MATCH")
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.green)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.green.opacity(0.1))
+                                            .cornerRadius(4)
+                                    } else {
+                                        Text("MISMATCH")
+                                            .font(.caption2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.orange)
+                                            .cornerRadius(4)
+                                    }
+                                }
+                            }
+                            
+                            if let dbRoom = activeDbEventRoom {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(dbRoom.name)
+                                            .fontWeight(.medium)
+                                            .font(.system(size: 13))
+                                        Text("\(dbRoom.id) • \(dbRoom.participantsCount) Active")
+                                            .font(.caption)
+                                            .foregroundColor(.secondary)
+                                            .monospacedDigit()
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {
+                                        debugEventId = dbRoom.id
+                                        resetEventStream()
+                                    }) {
+                                        Text("Force Reset Room")
+                                            .font(.caption)
+                                            .fontWeight(.medium)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 4)
+                                            .background(Color.orange)
+                                            .cornerRadius(4)
+                                    }
+                                    .buttonStyle(.plain)
+                                    .disabled(isResettingStream)
+                                }
+                                .padding(8)
+                                .background(Color.orange.opacity(0.05))
+                                .cornerRadius(6)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 6)
+                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                                )
+                            } else {
+                                Text("No active event room found in database.")
+                                    .font(.caption)
+                                    .italic()
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                        
+                        if let msg = resetMessage {
                             Text(msg)
                                 .font(.caption)
                                 .foregroundColor(msg.contains("Error") ? .red : .green)
@@ -435,6 +619,19 @@ struct AdminDashboardView: View {
                 let config = try await eventConfig
                 eventConfigVersion = config.version
                 eventConfigMovieCount = config.movies.count
+                
+                // Calculate currently live event
+                if let (startTime, mediaItem) = EventsConfigService.shared.calculateLiveEvent(config: config) {
+                    currentSeededEvent = mediaItem
+                    print("Admin: Identified current event as \(mediaItem.name)")
+                } else {
+                    currentSeededEvent = nil
+                }
+
+                // Fetch actual active rooms to find "Zombie" event rooms
+                // "event_" prefix is used for event rooms
+                let allRooms = try await SupabaseClient.shared.getAllRooms(limit: 50)
+                activeDbEventRoom = allRooms.first(where: { $0.id.starts(with: "event_") })
 
             } catch {
                 errorMessage = error.localizedDescription
@@ -496,6 +693,45 @@ struct AdminDashboardView: View {
             } catch {
                 grantMessage = "Error: \(error.localizedDescription)"
             }
+        }
+    }
+    
+    private func resetEventStream() {
+        guard !debugEventId.isEmpty else { return }
+        isResettingStream = true
+        resetMessage = nil
+        
+        Task { @MainActor in
+            // Construct Room ID based on Event ID format: event_<imdb_id>
+            let roomId = debugEventId.starts(with: "event_") ? debugEventId : "event_\(debugEventId)"
+            let simpleId = roomId.replacingOccurrences(of: "event_", with: "")
+
+            do {
+                // 1. Fetch Event Name for better feedback
+                var eventName = "Unknown Event"
+                
+                // Try from room state first (fastest if room exists)
+                if let room = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    eventName = room.name
+                } else {
+                    // Fallback: Fetch metadata from LocalAPIClient
+                    // Assuming it's a movie since events are mostly movies, but could be series.
+                    // We'll try "movie" default.
+                    if let metadata = try? await LocalAPIClient.shared.fetchMetadata(type: "movie", id: simpleId) {
+                        eventName = metadata.title
+                    }
+                }
+                
+                // 2. Reset Stream
+                try await SupabaseClient.shared.resetRoomStream(roomId: roomId)
+                
+                // 3. Success Message
+                resetMessage = "Success: Stream cleared for '\(eventName)' (\(roomId))."
+                debugEventId = "" // Clear input on success
+            } catch {
+                resetMessage = "Error: \(error.localizedDescription)"
+            }
+            isResettingStream = false
         }
     }
     

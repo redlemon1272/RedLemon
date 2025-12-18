@@ -177,10 +177,15 @@ actor StreamService: StreamResolving {
 
         if forcedStream == nil && effectiveQuality == .fullHD {
             // 2. Fallback: 720p (Safe for older hardware)
-            let hdStreams = extractStreams(from: buckets.hd)
-             if !hdStreams.isEmpty {
-                print("   ➕ Added \(hdStreams.count) 720p streams as backup")
-                streamsToTry.append(contentsOf: hdStreams)
+            // RESTRICTION: Disable 720p fallback for Events (Strict 1080p)
+            if !filterExtended {
+                let hdStreams = extractStreams(from: buckets.hd)
+                 if !hdStreams.isEmpty {
+                    print("   ➕ Added \(hdStreams.count) 720p streams as backup")
+                    streamsToTry.append(contentsOf: hdStreams)
+                }
+            } else {
+                print("   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)")
             }
 
             // 3. Fallback: 4K (Last Resort - may lag on old hardware)

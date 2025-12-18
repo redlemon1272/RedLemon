@@ -372,6 +372,9 @@ class EventsConfigService {
             NSLog("🗓 Schedule Calc: \(movie.name) | RuntimeStr: \(movie.runtime ?? "nil") -> \(runtimeMinutes)m | Duration: \(duration)s")
         }
         
+        
+        print("🗓 Schedule Calc: Total Cycle Duration: \(totalCycleDuration)s")
+        
         // 2. Determine where we are in the cycle relative to fixed epoch
         let now = TimeService.shared.now
         
@@ -381,6 +384,8 @@ class EventsConfigService {
         
         let timeSinceEpoch = now.timeIntervalSince(epoch)
         let currentCycleTime = timeSinceEpoch.truncatingRemainder(dividingBy: totalCycleDuration)
+        
+        print("🗓 Schedule Calc: Time Since Epoch: \(timeSinceEpoch)s | Cycle Pos: \(currentCycleTime)s")
         
         // 3. Find the currently playing movie
         var accumulatedTime: TimeInterval = 0
@@ -394,11 +399,14 @@ class EventsConfigService {
                 // startTime = now - timeIntoSlot
                 let startTime = now.addingTimeInterval(-timeIntoCurrentMovie)
                 
-                return (startTime, config.movies[index])
+                let movie = config.movies[index]
+                print("🗓 Schedule Calc: FOUND -> \(movie.name) (\(movie.id)) starting at \(startTime)")
+                return (startTime, movie)
             }
             accumulatedTime += duration
         }
         
+        print("🗓 Schedule Calc: No event found for current time slot.")
         return nil
     }
 }

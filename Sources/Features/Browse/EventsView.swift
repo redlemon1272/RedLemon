@@ -323,8 +323,20 @@ struct EventsView: View {
             if errorString.contains("409") || errorString.contains("duplicate key") {
                 print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
                 
-                // 1. Fetch the room that was just created by the winner
-                if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                print("⚠️ Race condition detected: Room created by another user while joining. Retrying as guest...")
+                
+                // 1. Fetch the room that was just created by the winner (with retries for consistency lag)
+                var roomState: SupabaseRoom? = nil
+                for i in 1...3 {
+                    if let state = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                        roomState = state
+                        break
+                    }
+                    print("⏳ Retry \(i)/3: Room not visible yet, waiting...")
+                    try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s delay
+                }
+
+                if let roomState = roomState {
                     LogManager.shared.info("✅ Recovered from race condition! Joining existing room.")
                     
                     // 2. Join it
@@ -340,6 +352,8 @@ struct EventsView: View {
                         fileIdx: roomState.fileIdx
                     )
                     return
+                } else {
+                    print("❌ Failed to recover from race condition: Room still not visible after retries.")
                 }
             }
 

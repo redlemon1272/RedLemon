@@ -1862,7 +1862,7 @@ extension MPVPlayerViewModel {
             try? await self.realtimeManager?.sendSyncMessage(message)
 
             // Wait briefly for message to send, then clean up locally
-            try? await Task.sleep(nanoseconds: 200_000_000) // 200ms
+            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
 
             await MainActor.run {
                 // Host cleanup and navigation

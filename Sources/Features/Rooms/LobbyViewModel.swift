@@ -569,7 +569,7 @@ class LobbyViewModel: ObservableObject {
                 )
                 try? await self.realtimeManager?.sendSyncMessage(syncMsg)
                 // Short wait to ensure message delivery
-                try? await Task.sleep(nanoseconds: 200_000_000)
+                try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
                 await MainActor.run {
                     self.disconnect()
                 }

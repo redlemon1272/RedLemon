@@ -27,7 +27,7 @@ struct PremiumPaymentView: View {
         var displayName: String {
             switch self {
             case .btc: return "Bitcoin (BTC)"
-            case .evm: return "Ethereum / Base / Arb (ETH, USDC)"
+            case .evm: return "Ethereum & L2s (Base, Arb, Op, Poly)"
 
             }
         }
@@ -56,13 +56,14 @@ struct PremiumPaymentView: View {
             if showSuccess {
                 SuccessView(dismiss: { dismiss() })
             } else {
-                VStack(spacing: 20) {
-                    // Header
+                VStack(spacing: 0) {
+                    ScrollView {
+                        VStack(spacing: 20) {
                     VStack(spacing: 8) {
-                        Text("Unlock Premium Hosting")
+                        Text("Premium Subscription")
                             .font(.system(size: 28, weight: .bold))
 
-                        Text("Host unlimited watch parties forever with a one-time contribution.")
+                        Text("Subscribe to host unlimited watch parties. Choose a plan that suits you.")
                             .font(.body)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -138,6 +139,29 @@ struct PremiumPaymentView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    // EVM Clarity Note
+                    // EVM Clarity Note
+                    if selectedChain == .evm {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("✅ Single Address Support")
+                                .font(.caption.bold())
+                                .foregroundColor(.green)
+                            
+                            Text("You can send **ETH**, **USDC**, or **USDT** on any of these networks to this single address:")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                            
+                            Text("• Ethereum Mainnet\n• Base\n• Arbitrum One\n• Optimism\n• Polygon PoS")
+                                .font(.caption)
+                                .foregroundColor(.primary)
+                                .fontWeight(.medium)
+                        }
+                        .padding(12)
+                        .background(Color.green.opacity(0.1))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                    }
 
                     // 2. Address & QR
                     VStack(spacing: 20) {
@@ -171,9 +195,37 @@ struct PremiumPaymentView: View {
 
                             // Address Text & Copy
                             VStack(spacing: 8) {
-                                Text("Send any amount (USDC, ETH, BTC) to:")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                                let usdVal: Double = {
+                                    switch selectedPlan {
+                                    case "$4": return 4.0
+                                    case "$7": return 7.0
+                                    case "$10": return 10.0
+                                    default: return 4.0
+                                    }
+                                }()
+
+                                if let cryptoAmount = calculateCryptoAmount(usd: usdVal) {
+                                    VStack(spacing: 4) {
+                                        if selectedChain == .evm {
+                                            Text("Send exactly **\(cryptoAmount)**")
+                                                .font(.headline)
+                                            Text("OR **$\(String(format: "%.2f", usdVal))** USDC/USDT")
+                                                .font(.subheadline)
+                                                .foregroundColor(.secondary)
+                                        } else {
+                                            Text("Send exactly **\(cryptoAmount)**")
+                                                .font(.headline)
+                                            Text("(approx. $\(String(format: "%.2f", usdVal)) USD)")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                    .multilineTextAlignment(.center)
+                                } else {
+                                    Text("Send exactly $\(String(format: "%.2f", usdVal)) USD equivalent")
+                                        .font(.headline)
+                                        .foregroundColor(.secondary)
+                                }
 
                                 HStack {
                                     Text(address)
@@ -208,30 +260,35 @@ struct PremiumPaymentView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-
-                    Spacer()
-
-                    // Footer Buttons
-                    HStack {
-                        Button("Cancel") {
-                            stopPolling()
-                            dismiss()
-                        }
-                        .keyboardShortcut(.cancelAction)
-
-                        Spacer()
-
-                        Button("I Have Paid") {
-                            Task {
-                                await checkPayment(manual: true)
-                            }
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(assignedAddress == nil || isLoadingAddress)
-                    }
                 }
                 .padding(30)
             }
+            
+            // Footer (Pinned)
+            VStack(spacing: 0) {
+                Divider()
+                HStack {
+                    Button("Cancel") {
+                        stopPolling()
+                        dismiss()
+                    }
+                    .keyboardShortcut(.cancelAction)
+
+                    Spacer()
+
+                    Button("I Have Paid") {
+                        Task {
+                            await checkPayment(manual: true)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .disabled(assignedAddress == nil || isLoadingAddress)
+                }
+                .padding(20)
+                .background(Color(NSColor.windowBackgroundColor))
+            }
+        }
+    }
         }
         .frame(width: 480, height: 580)
         .overlay(
@@ -362,7 +419,12 @@ struct PremiumPaymentView: View {
             // standard ETH decimal is 18
             let amountETH = amountUSD / rates.eth
             let wei = amountETH * 1_000_000_000_000_000_000
-            return String(format: "ethereum:%@?value=%.0f", address, wei)
+            
+            // Compatibility: Some wallets look for "amount" (decimal) instead of "value" (wei)
+            // We provide BOTH to maximize success rate.
+            // value = integer string of wei (%.0f)
+            // amount = decimal string of eth (%.8f)
+            return String(format: "ethereum:%@?value=%.0f&amount=%.8f", address, wei, amountETH)
         }
     }
 }

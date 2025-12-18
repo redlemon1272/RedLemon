@@ -24,6 +24,7 @@ class PlayerViewModel: ObservableObject {
     @Published var isWatchPartyHost: Bool = false
     @Published var currentWatchPartyRoom: WatchPartyRoom? // Current lobby/room
     @Published var forceSoloStart: Bool = false // Host override to bypass ready gate
+    @Published var showPremiumLimitAlert: Bool = false // Alert for free user limit logic
     
     // Event specific state
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
@@ -604,6 +605,15 @@ class PlayerViewModel: ObservableObject {
             
             if let s = targetS, let e = targetE {
                 print("⏭️ Series playback finished, auto-playing next episode: S\(s)E\(e)")
+                
+                // Binge Blocking: Free hosts cannot auto-play next episode in Watch Parties
+                let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
+                if isWatchPartyHost && !isPremium {
+                    print("🚫 Auto-play blocked (Free Tier Host)")
+                    await exitPlayer(keepRoomState: false)
+                    return
+                }
+
                 // Add a small delay for better UX
                 try? await Task.sleep(nanoseconds: 1_000_000_000)
                 await playNextEpisode()
@@ -672,6 +682,17 @@ class PlayerViewModel: ObservableObject {
         }
         
         print("⏭️ Playing Next Episode: S\(s)E\(e)")
+        
+        // Binge Blocking: Free Hosts cannot play next episode in same room
+        let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
+        if isWatchPartyHost && !isPremium {
+            print("🚫 Binge Blocked (Watch Party): User is not premium")
+            await MainActor.run {
+                streamError = "Upgrade to Premium to binge watch with friends!"
+                showPlayer = false
+            }
+            return
+        }
         
         await MainActor.run {
              if let appState = appState {
@@ -850,7 +871,15 @@ class PlayerViewModel: ObservableObject {
 
         } catch {
             NSLog("❌ Failed to create room: \(error)")
-            await MainActor.run { appState.isLoadingRoom = false }
+            let msg = "\(error)"
+            if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
+                await MainActor.run {
+                    appState.isLoadingRoom = false
+                    self.showPremiumLimitAlert = true
+                }
+            } else {
+                await MainActor.run { appState.isLoadingRoom = false }
+            }
         }
     }
     

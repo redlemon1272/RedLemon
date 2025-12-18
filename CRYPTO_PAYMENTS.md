@@ -9,8 +9,8 @@ It replaces legacy 3rd-party services (like LNBits) with a custom **HD Wallet** 
 
 ### Key Features
 - **Non-Custodial**: Private keys never touch the server. Funds go directly to the owner's hardware/software wallet.
-- **Multi-Chain**: Supports Bitcoin (BTC) and EVM Chains (Ethereum, Base, Arbitrum).
-- **Multi-Asset**: Detects payments in Native ETH, USDC, and USDT.
+- **Multi-Chain**: Supports Bitcoin (BTC) and EVM Chains (Ethereum, Base, Arbitrum, Optimism, Polygon).
+- **Multi-Asset**: Detects payments in Native ETH, USDC (Native), and USDT (Bridged).
 - **Automated**: Derives unique addresses for every user to track payments automatically.
 
 ---
@@ -44,7 +44,7 @@ The server uses **Extended Public Keys** (xPubs) to generate millions of unique 
     1.  Retrieves the User's assigned address.
     2.  **Scans Blockchains**:
         *   **BTC**: Queries Mempool.space API.
-        *   **EVM**: Queries RPCs for **Ethereum**, **Base**, and **Arbitrum** in parallel.
+        *   **EVM**: Queries RPCs for **Ethereum**, **Base**, **Arbitrum**, **Optimism**, and **Polygon** in parallel.
         *   **Tokens**: Checks `balanceOf` for **USDC** and **USDT** on all EVM chains.
     3.  **Calculates Value**: Fetches real-time prices (Coinbase API) to convert total detected funds to USD.
     4.  **Grants Access**:

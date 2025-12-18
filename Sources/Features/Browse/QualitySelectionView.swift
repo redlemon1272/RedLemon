@@ -10,6 +10,7 @@ struct QualitySelectionView: View {
     @State private var showingStreamSelection = false
     @State private var roomDescription: String = ""
     @State private var isPublicRoom: Bool = true
+    @State private var showPremiumSheet: Bool = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -214,6 +215,20 @@ struct QualitySelectionView: View {
                     showingStreamSelection = false
                 }
             )
+        }
+        .sheet(isPresented: $showPremiumSheet) {
+            PremiumPaymentView()
+        }
+        .alert("Hosting Limit Reached", isPresented: Binding(
+            get: { appState.player.showPremiumLimitAlert },
+            set: { appState.player.showPremiumLimitAlert = $0 }
+        )) {
+            Button("Upgrade to Premium") {
+                showPremiumSheet = true
+            }
+            Button("Cancel", role: .cancel) { }
+        } message: {
+            Text("Free users can only host one watch party every 72 hours. Upgrade now for unlimited hosting!")
         }
         .onAppear {
             // Sync with global state (e.g. if coming from "Resume Watch Party")

@@ -337,7 +337,12 @@ class SupabaseClient: RoomManager, UserManager {
         }
 
         // Set auth context
-        auth.currentUser = AuthUser(id: user.id, username: user.username, isAdmin: user.isAdmin ?? false)
+        auth.currentUser = AuthUser(
+            id: user.id,
+            username: user.username,
+            isAdmin: user.isAdmin ?? false,
+            isPremium: user.isPremium ?? false
+        )
 
         return user
     }
@@ -1922,6 +1927,7 @@ struct AuthUser {
     let id: UUID
     let username: String
     let isAdmin: Bool
+    let isPremium: Bool
 }
 
 // MARK: - Edge Functions API

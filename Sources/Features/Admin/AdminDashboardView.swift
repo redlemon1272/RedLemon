@@ -27,7 +27,6 @@ struct AdminDashboardView: View {
     @State private var debugEventId: String = "tt2494362" // Default to 'Now You See Me' for convenience
     @State private var isResettingStream: Bool = false
     @State private var resetMessage: String?
-    @State private var currentSeededEvent: MediaItem?
     @State private var activeDbEventRoom: SupabaseRoom? = nil // The actual room in DB (e.g. event_tt123)
 
     var body: some View {
@@ -272,61 +271,6 @@ struct AdminDashboardView: View {
                             .font(.caption)
                             .foregroundColor(.secondary)
                         
-                        // Auto-detected current event
-                        if let currentEvent = currentSeededEvent {
-                            VStack(alignment: .leading, spacing: 6) {
-                                Text("Current Seeding Event:")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                
-                                HStack {
-                                    Text("\(currentEvent.name)")
-                                        .fontWeight(.medium)
-                                        .font(.system(size: 13))
-                                    
-                                    Text("(\(currentEvent.id))")
-                                        .font(.caption)
-                                        .foregroundColor(.secondary)
-                                        .monospacedDigit()
-                                    
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        debugEventId = currentEvent.id
-                                        resetEventStream()
-                                    }) {
-                                        ZStack {
-                                            Text("Reset This Event")
-                                                .fontWeight(.medium)
-                                                .opacity(isResettingStream ? 0 : 1)
-                                            
-                                            if isResettingStream {
-                                                ProgressView()
-                                                    .scaleEffect(0.5)
-                                                    .frame(width: 16, height: 16)
-                                            }
-                                        }
-                                        .font(.caption)
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 8)
-                                        .padding(.vertical, 4)
-                                        .background(Color.red.opacity(0.9))
-                                        .cornerRadius(4)
-                                    }
-                                    .buttonStyle(.plain)
-                                    .disabled(isResettingStream)
-                                }
-                                .padding(8)
-                                .background(Color.primary.opacity(0.05))
-                                .cornerRadius(6)
-                            }
-                        } else {
-                            Text("No active event detected in schedule.")
-                                .font(.caption)
-                                .italic()
-                                .foregroundColor(.secondary)
-                        }
-                        
                         Divider()
                             .padding(.vertical, 4)
                             
@@ -336,28 +280,6 @@ struct AdminDashboardView: View {
                                 Text("Active Database Room:")
                                     .font(.caption)
                                     .foregroundColor(.secondary)
-                                
-                                if let dbRoom = activeDbEventRoom {
-                                    if let seeded = currentSeededEvent, dbRoom.id == "event_\(seeded.id)" {
-                                        Text("MATCH")
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.green)
-                                            .padding(.horizontal, 4)
-                                            .padding(.vertical, 2)
-                                            .background(Color.green.opacity(0.1))
-                                            .cornerRadius(4)
-                                    } else {
-                                        Text("MISMATCH")
-                                            .font(.caption2)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.white)
-                                            .padding(.horizontal, 4)
-                                            .padding(.vertical, 2)
-                                            .background(Color.orange)
-                                            .cornerRadius(4)
-                                    }
-                                }
                             }
                             
                             if let dbRoom = activeDbEventRoom {
@@ -620,14 +542,7 @@ struct AdminDashboardView: View {
                 eventConfigVersion = config.version
                 eventConfigMovieCount = config.movies.count
                 
-                // Calculate currently live event
-                if let (startTime, mediaItem) = EventsConfigService.shared.calculateLiveEvent(config: config) {
-                    currentSeededEvent = mediaItem
-                    print("Admin: Identified current event as \(mediaItem.name)")
-                } else {
-                    currentSeededEvent = nil
-                }
-
+                
                 // Fetch actual active rooms to find "Zombie" event rooms
                 // "event_" prefix is used for event rooms
                 let allRooms = try await SupabaseClient.shared.getAllRooms(limit: 50)

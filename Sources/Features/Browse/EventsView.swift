@@ -228,6 +228,36 @@ struct EventsView: View {
                     print("   Quality: \(selectedQuality ?? "nil")")
                     print("   FileIdx: \(selectedFileIdx ?? -1)")
                     print("   🔗 Locking to server-provided stream hash: \(hash)\n")
+                } else {
+                    // REPAIR: Room exists but has no stream_hash - resolve and persist
+                    print("⚠️ Room exists but has no stream_hash - repairing...")
+                    do {
+                        let result = try await StreamService.shared.resolveStream(
+                            item: event.mediaItem,
+                            quality: .fullHD, // Enforce 1080p for events
+                            season: nil,
+                            episode: nil,
+                            preferredInfoHash: nil,
+                            filterExtended: true
+                        )
+                        selectedStreamHash = result.stream.infoHash
+                        selectedUnlockedURL = result.stream.url
+                        selectedQuality = "1080p"
+                        selectedFileIdx = result.stream.fileIdx
+                        
+                        // Persist to database
+                        try await SupabaseClient.shared.updateRoomStream(
+                            roomId: roomId,
+                            streamHash: selectedStreamHash,
+                            fileIdx: selectedFileIdx,
+                            quality: selectedQuality,
+                            unlockedUrl: selectedUnlockedURL
+                        )
+                        print("✅ Room repaired with stream_hash: \(selectedStreamHash ?? "nil")")
+                    } catch {
+                        print("❌ Failed to repair room stream: \(error)")
+                        // Continue anyway - client will resolve locally as fallback
+                    }
                 }
 
                 // Join the existing room

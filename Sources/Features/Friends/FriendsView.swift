@@ -395,12 +395,28 @@ struct FriendRow: View {
                     }
                 }
 
-                if let activity = activity, let watching = activity.currentlyWatching {
-                    HStack(spacing: 4) {
-                        Image(systemName: "play.circle.fill")
-                            .font(.caption)
-                            .foregroundColor(.green)
-                        Text("Watching \(watching.mediaTitle)")
+                if let activity = activity {
+                    // Check for custom status first (e.g., "In Lobby: Movie Name")
+                    if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                        HStack(spacing: 4) {
+                            Image(systemName: "hourglass")
+                                .font(.caption)
+                                .foregroundColor(.orange)
+                            Text(status)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    } else if let watching = activity.currentlyWatching {
+                        HStack(spacing: 4) {
+                            Image(systemName: "play.circle.fill")
+                                .font(.caption)
+                                .foregroundColor(.green)
+                            Text("Watching \(watching.mediaTitle)")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    } else {
+                        Text(friend.truncatedPrincipal)
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }

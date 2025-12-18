@@ -720,14 +720,15 @@ struct FriendRowButton: View {
 
                         // Activity Status
                         if let activity = activity {
-                            if let watching = activity.currentlyWatching {
+                            // Priority 1: Custom status (e.g., "In Lobby: Movie Name")
+                            if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                                Text(status)
+                                    .font(.caption)
+                                    .foregroundColor(.accentColor)
+                            } else if let watching = activity.currentlyWatching {
                                 Text("Watching \(watching.mediaTitle)")
                                     .font(.caption)
                                     .foregroundColor(.accentColor)
-                            } else if let status = activity.customStatus {
-                                Text(status)
-                                    .font(.caption)
-                                    .foregroundColor(.white.opacity(0.8))
                             } else if isOnline {
                                 Text("Online")
                                     .font(.caption)

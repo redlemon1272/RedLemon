@@ -373,11 +373,21 @@ struct WatchPartyLobbyView: View {
                             Spacer()
                             
                             // Online/Watching Status Indicator
-                            if let activity = socialService.friendActivity[friend.id],
-                               let watching = activity.currentlyWatching {
-                                Image(systemName: "film.fill")
-                                    .foregroundColor(.accentColor)
-                                    .help("Watching \(watching.mediaTitle)")
+                            if let activity = socialService.friendActivity[friend.id] {
+                                // Check for custom status first (e.g., "In Lobby")
+                                if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                                    Image(systemName: "hourglass")
+                                        .foregroundColor(.orange)
+                                        .help(status)
+                                } else if let watching = activity.currentlyWatching {
+                                    Image(systemName: "film.fill")
+                                        .foregroundColor(.accentColor)
+                                        .help("Watching \(watching.mediaTitle)")
+                                } else if socialService.onlineUserIds.contains(friend.id) {
+                                    Circle()
+                                        .fill(Color.green)
+                                        .frame(width: 8, height: 8)
+                                }
                             } else if socialService.onlineUserIds.contains(friend.id) {
                                 Circle()
                                     .fill(Color.green)
@@ -500,12 +510,25 @@ struct WatchPartyLobbyView: View {
                                                             .foregroundColor(.white)
                                                             .font(.callout)
                                                         
-                                                        // Status (Existing)
-                                                        if let activity = socialService.friendActivity[friend.id],
-                                                           let watching = activity.currentlyWatching {
-                                                            Text("Watching \(watching.mediaTitle)")
-                                                                .font(.caption2)
-                                                                .foregroundColor(.accentColor)
+                                                        // Status (Check custom status first)
+                                                        if let activity = socialService.friendActivity[friend.id] {
+                                                            if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                                                                Text(status)
+                                                                    .font(.caption2)
+                                                                    .foregroundColor(.orange)
+                                                            } else if let watching = activity.currentlyWatching {
+                                                                Text("Watching \(watching.mediaTitle)")
+                                                                    .font(.caption2)
+                                                                    .foregroundColor(.accentColor)
+                                                            } else if socialService.onlineUserIds.contains(friend.id) {
+                                                                Text("Online")
+                                                                    .font(.caption2)
+                                                                    .foregroundColor(.green)
+                                                            } else {
+                                                                Text("Offline")
+                                                                    .font(.caption2)
+                                                                    .foregroundColor(.gray)
+                                                            }
                                                         } else if socialService.onlineUserIds.contains(friend.id) {
                                                             Text("Online")
                                                                 .font(.caption2)

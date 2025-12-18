@@ -86,11 +86,21 @@ struct FriendProfileView: View {
                 Text(friend.username)
                     .font(.headline)
                 
-                if let activity = socialService.friendActivity[friend.id],
-                   let watching = activity.currentlyWatching {
-                    Text("Watching \(watching.mediaTitle)")
-                        .font(.caption)
-                        .foregroundColor(.green)
+                if let activity = socialService.friendActivity[friend.id] {
+                    // Check for custom status first (e.g., "In Lobby")
+                    if let status = activity.customStatus, !status.isEmpty, status != "online" {
+                        Text(status)
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    } else if let watching = activity.currentlyWatching {
+                        Text("Watching \(watching.mediaTitle)")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    } else if isOnline {
+                        Text("Online")
+                            .font(.caption)
+                            .foregroundColor(.green)
+                    }
                 } else if isOnline {
                     Text("Online")
                         .font(.caption)

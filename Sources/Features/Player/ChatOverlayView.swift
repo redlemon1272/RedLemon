@@ -675,7 +675,25 @@ struct FriendRowButton: View {
     @State private var isHovering: Bool = false
 
     var body: some View {
-        HStack(spacing: 8) {
+        let isOnline = SocialService.shared.onlineUserIds.contains(friend.id)
+        let activity = SocialService.shared.friendActivity[friend.id]
+        
+        // Determine Room contexts
+        let myRoomId = appState.player.currentWatchPartyRoom?.id
+        let friendRoomId = activity?.currentlyWatching?.roomId
+        
+        // Check if we are in the same room
+        let isSameRoom = (myRoomId != nil && friendRoomId != nil && myRoomId == friendRoomId)
+        
+        // Logic for Buttons
+        // Show Join if friend is in a room AND NOT in same room (regardless of premium/free)
+        let canJoin = (friendRoomId != nil) && !isSameRoom
+        
+        // Show Invite if I am in a room AND friend is online AND NOT in same room
+        // User request: "only have envelopes ... for users that are online"
+        let canInvite = (myRoomId != nil) && isOnline && !isSameRoom
+
+        return HStack(spacing: 8) {
             // Main Row Action (Open DM) - Wrapper Button
             Button(action: action) {
                 HStack {
@@ -701,7 +719,7 @@ struct FriendRowButton: View {
                             .font(.body)
 
                         // Activity Status
-                        if let activity = SocialService.shared.friendActivity[friend.id] {
+                        if let activity = activity {
                             if let watching = activity.currentlyWatching {
                                 Text("Watching \(watching.mediaTitle)")
                                     .font(.caption)
@@ -710,7 +728,7 @@ struct FriendRowButton: View {
                                 Text(status)
                                     .font(.caption)
                                     .foregroundColor(.white.opacity(0.8))
-                            } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                            } else if isOnline {
                                 Text("Online")
                                     .font(.caption)
                                     .foregroundColor(.green)
@@ -719,7 +737,7 @@ struct FriendRowButton: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                             }
-                        } else if SocialService.shared.onlineUserIds.contains(friend.id) {
+                        } else if isOnline {
                              Text("Online")
                                  .font(.caption)
                                  .foregroundColor(.green)
@@ -742,47 +760,55 @@ struct FriendRowButton: View {
                 isHovering = hovering
             }
 
-                // Join Button (if friend is in a room)
-            if let activity = SocialService.shared.friendActivity[friend.id],
-               let watching = activity.currentlyWatching,
-               let roomId = watching.roomId {
-                
-                Button(action: {
-                    Task { await appState.player.joinRoom(roomId: roomId) }
-                }) {
-                    Image(systemName: "arrow.right.circle.fill")
-                        .foregroundColor(.green)
-                        .font(.title2)
+            // Action Buttons Group
+            HStack(spacing: 4) {
+                // Online Indicator (Requested: "green online indicator beside the envelope")
+                // We show it for any online user, even if buttons are also shown.
+                // If they are offline, no indicator.
+                if isOnline {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 8, height: 8)
+                        .help("Online")
+                        .padding(.trailing, 4)
                 }
-                .buttonStyle(.plain)
-                .help("Join \(friend.displayName)")
-            } else if appState.player.currentWatchPartyRoom != nil { // FIXED: Use currentWatchPartyRoom check
-                // INVITE Capability (if I am in a room)
-                Button(action: {
-                   let room = appState.player.currentWatchPartyRoom
-                   let roomName = room?.mediaItem?.name ?? "Watch Party"
-                   let roomId = room?.id ?? ""
-                   
-                   if !roomId.isEmpty {
-                       Task {
-                           await SocialService.shared.sendInvite(to: friend.id, roomId: roomId, roomName: roomName)
+                
+                // Invite Button
+                if canInvite {
+                   Button(action: {
+                       let room = appState.player.currentWatchPartyRoom
+                       let roomName = room?.mediaItem?.name ?? "Watch Party"
+                       let rId = room?.id ?? ""
+                       
+                       if !rId.isEmpty {
+                           Task {
+                               await SocialService.shared.sendInvite(to: friend.id, roomId: rId, roomName: roomName)
+                           }
                        }
+                   }) {
+                       Image(systemName: "envelope.fill")
+                           .foregroundColor(.white.opacity(0.8))
+                           .font(.system(size: 16))
+                           .padding(6)
+                           .background(Color.white.opacity(0.1))
+                           .clipShape(Circle())
                    }
-               }) {
-                   Image(systemName: "envelope.fill")
-                       .foregroundColor(.white.opacity(0.8))
-                       .font(.system(size: 16))
-                       .padding(6)
-                       .background(Color.white.opacity(0.1))
-                       .clipShape(Circle())
-               }
-               .buttonStyle(.plain)
-               .help("Invite to Room")
-            } else if SocialService.shared.onlineUserIds.contains(friend.id) {
-                // Online indicator
-                 Circle()
-                    .fill(Color.green)
-                    .frame(width: 8, height: 8)
+                   .buttonStyle(.plain)
+                   .help("Invite to Room")
+                }
+                
+                // Join Button
+                if canJoin, let rId = friendRoomId {
+                    Button(action: {
+                        Task { await appState.player.joinRoom(roomId: rId) }
+                    }) {
+                        Image(systemName: "arrow.right.circle.fill")
+                            .foregroundColor(.green)
+                            .font(.title2)
+                    }
+                    .buttonStyle(.plain)
+                    .help("Join \(friend.displayName)")
+                }
             }
         }
         .padding(0) // Inner padding handles it

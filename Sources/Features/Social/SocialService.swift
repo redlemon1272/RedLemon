@@ -375,12 +375,23 @@ class SocialService: ObservableObject {
             // 1. Get Friends
             let supabaseFriends = try await client.getFriends(userId: userId)
             self.friends = supabaseFriends.map { user in
-                Friend(
+                // Check if premium (either isPremium flag or valid subscription)
+                let hasPremium: Bool
+                if let isPremium = user.isPremium, isPremium {
+                    hasPremium = true
+                } else if let expiresAt = user.subscriptionExpiresAt, expiresAt > Date() {
+                    hasPremium = true
+                } else {
+                    hasPremium = false
+                }
+                
+                return Friend(
                     id: user.id.uuidString.lowercased(),
                     username: user.username,
                     addedDate: Date(),
                     isFavorite: self.isFavorite(user.id.uuidString.lowercased()),
-                    status: .accepted
+                    status: .accepted,
+                    isPremium: hasPremium
                 )
             }
             

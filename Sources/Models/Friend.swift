@@ -13,6 +13,7 @@ struct Friend: Codable, Identifiable, Equatable {
     let addedDate: Date
     var isFavorite: Bool
     var status: FriendStatus
+    var isPremium: Bool? // Premium hosting status (nil = unknown, true = has hosting, false = free user)
 
     enum FriendStatus: String, Codable {
         case pending // Friend request sent, awaiting acceptance

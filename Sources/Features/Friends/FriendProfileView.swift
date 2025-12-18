@@ -122,8 +122,17 @@ struct FriendProfileView: View {
             }
             
             VStack(alignment: .leading, spacing: 2) {
-                Text(friend.username)
-                    .font(.headline)
+                HStack(spacing: 4) {
+                    Text(friend.username)
+                        .font(.headline)
+                    
+                    // Premium Host Badge
+                    if friend.isPremium == true {
+                        Text("👑")
+                            .font(.system(size: 12))
+                            .help("Premium Host")
+                    }
+                }
                 
                 if let activity = socialService.friendActivity[friend.id] {
                     // Check for custom status first (e.g., "In Lobby")

@@ -714,9 +714,18 @@ struct FriendRowButton: View {
                     }
 
                     VStack(alignment: .leading, spacing: 2) {
-                        Text(friend.displayName)
-                            .foregroundColor(.white)
-                            .font(.body)
+                        HStack(spacing: 4) {
+                            Text(friend.displayName)
+                                .foregroundColor(.white)
+                                .font(.body)
+                            
+                            // Premium Host Badge
+                            if friend.isPremium == true {
+                                Text("👑")
+                                    .font(.system(size: 12))
+                                    .help("Premium Host")
+                            }
+                        }
 
                         // Activity Status
                         if let activity = activity {

@@ -388,6 +388,12 @@ struct FriendRow: View {
                     Text(friend.username)
                         .font(.headline)
 
+                    if friend.isPremium == true {
+                        Text("👑")
+                            .font(.system(size: 12))
+                            .help("Premium Host")
+                    }
+
                     if friend.isFavorite {
                         Image(systemName: "star.fill")
                             .font(.caption)

@@ -1,552 +1,1344 @@
-default	17:05:52.414340-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "frontmost:25877" ID:173-140-1900 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"RoleUserInteractiveFocal" sourceEnvironment:"(null)">
-	]>
-default	17:05:52.414702-0500	runningboardd	Assertion 173-140-1900 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:52.442131-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:52.448240-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:52.450562-0500	runningboardd	[anon<RedLemon>(501):25877] Set darwin role to: UserInteractiveFocal
-default	17:05:52.450634-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:52.453823-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.coreservices.launchservicesd>:140] with description <RBSAssertionDescriptor| "notification:25877" ID:173-140-1901 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.launchservicesd" name:"LSNotification" sourceEnvironment:"(null)">
-	]>
-default	17:05:52.454271-0500	runningboardd	Assertion 173-140-1901 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:52.458292-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:52.458345-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:52.459124-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:52.529503-0500	RedLemon	tcp_input [C7.1:3] flags=[FP.] seq=4153057677, ack=903846104, win=501 state=ESTABLISHED rcv_nxt=4153057677, snd_una=903846104
-default	17:05:52.529741-0500	RedLemon	nw_protocol_tcp_log_summary [C7.1:3]
-	[D57A2B08-D4FC-44DE-BB1D-3F9FCFCF03AD <private>:56539<-><private>:443]
-	Init: 1, Conn_Time: 113.338ms, SYNs: 1, WR_T: 0/0, RD_T: 0/0, TFO: 0/0/0, ECN: 0/0/0, TS: 0
-	rtt_cache: kernel, rtt_upd: 4, rtt: 127.343ms, rtt_var: 20.687ms rtt_nc: 120.968ms, rtt_var_nc: 36.937ms base rtt: 100ms
-	ACKs-compressed: 0, ACKs delayed: 0 delayed ACKs sent: 0
-default	17:05:52.533503-0500	RedLemon	Connection 7: read-side closed
-default	17:05:52.533555-0500	RedLemon	Connection 7: read-side closed
-default	17:05:52.533591-0500	RedLemon	Connection 7: read-side closed
-default	17:05:52.533868-0500	RedLemon	Connection 7: cleaning up
-default	17:05:52.533963-0500	RedLemon	[C7 63913BE5-8047-475A-AE06-4F1D6CE01ADC Hostname#1feeda98:443 tcp, url hash: ef3a82c0, tls, definite, attribution: developer] cancel
-default	17:05:52.535357-0500	RedLemon	[C7 63913BE5-8047-475A-AE06-4F1D6CE01ADC Hostname#1feeda98:443 tcp, url hash: ef3a82c0, tls, definite, attribution: developer] cancelled
-	[C7.1 42088266-1034-4B0E-9986-E1C0F3103449 2607:fea8:995b:fd00:a093:c093:802e:3add.56539<->IPv6#47c3fd32.443]
-	Connected Path: satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns
-	Privacy Stance: Not Eligible
-	Duration: 5.538s, DNS @0.000s took 0.027s, TCP @0.028s took 0.114s, TLS 1.3 took 0.130s
-	bytes in/out: 5727/994, packets in/out: 11/15, rtt: 0.127s, retransmitted bytes: 0, out-of-order bytes: 0
-default	17:05:52.538434-0500	RedLemon	nw_flow_disconnected [C7.1 IPv6#47c3fd32.443 cancelled channel-flow ((null))] Output protocol disconnected
-default	17:05:52.539664-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C7] reporting state cancelled
-default	17:05:52.540055-0500	RedLemon	tcp_output [C7.1:3] flags=[F.] seq=903846167, ack=4153057702, win=4096 state=LAST_ACK rcv_nxt=4153057702, snd_una=903846104
-default	17:05:52.650949-0500	RedLemon	tcp_output [C7.1:3] flags=[FP.] seq=903846104, ack=4153057702, win=4096 state=LAST_ACK rcv_nxt=4153057702, snd_una=903846104
-default	17:05:53.060403-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:05:53.060931-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [32D2A680-9A0C-4D87-AFB0-33C0664192FF] (reporting strategy default)> on Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> was not selected for reporting
-default	17:05:53.062052-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:53.062350-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> now using Connection 2
-default	17:05:53.062798-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> sent request, body N 0
-default	17:05:53.131381-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> received response, status 200 content U
-default	17:05:53.131731-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> done using Connection 2
-default	17:05:53.132782-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> response ended
-default	17:05:53.133037-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> summary for task success {transaction_duration_ms=71, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=227, response_bytes=888, cache_hit=false}
-default	17:05:53.133394-0500	RedLemon	Task <2B7C516A-5BE7-4BFB-B21F-428670E0F329>.<63> finished successfully
-default	17:05:53.135413-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:05:53.136360-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [39988E40-F4F2-497E-97D4-28C034F124BE] (reporting strategy default)> on Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> was not selected for reporting
-default	17:05:53.137280-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:53.137573-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> now using Connection 2
-default	17:05:53.140089-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> sent request, body S 94
-default	17:05:53.233896-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> received response, status 409 content U
-default	17:05:53.234136-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> done using Connection 2
-default	17:05:53.235096-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> response ended
-default	17:05:53.235330-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> summary for task success {transaction_duration_ms=98, response_status=409, connection=2, reused=1, request_start_ms=1, request_duration_ms=1, response_start_ms=96, response_duration_ms=1, request_bytes=320, response_bytes=476, cache_hit=false}
-default	17:05:53.235778-0500	RedLemon	Task <DCB9D77D-F9EB-4270-85CD-AA1AFFB91E4E>.<64> finished successfully
-default	17:05:53.236279-0500	RedLemon	⚠️ SupabaseClient: User already in room (409), proceeding...
-default	17:05:53.361601-0500	RedLemon	🖼️ Loading background art: https://images.metahub.space/background/medium/tt0413300/img
-default	17:05:53.362417-0500	RedLemon	⏳ Background art loading...
-default	17:05:53.362775-0500	RedLemon	🎨 Loading logo: https://images.metahub.space/logo/medium/tt0413300/img
-default	17:05:53.363396-0500	RedLemon	⏳ Logo loading...
-default	17:05:53.372178-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	17:05:53.373347-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2977467F-7667-4F8D-83B2-29FE11178331] (reporting strategy default)> on Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> was not selected for reporting
-default	17:05:53.374264-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	17:05:53.374424-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:53.374934-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> now using Connection 4
-default	17:05:53.375236-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [83F6C8C4-DA9D-4F95-A30E-B785D1296093] (reporting strategy default)> on Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> was not selected for reporting
-default	17:05:53.375914-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> sent request, body N 0
-default	17:05:53.376600-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:53.378089-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> now using Connection 4
-default	17:05:53.380386-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> sent request, body N 0
-default	17:05:53.389456-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> received response, status 200 content K
-default	17:05:53.390616-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> done using Connection 4
-default	17:05:53.391017-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> response ended
-default	17:05:53.391624-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> received response, status 200 content K
-default	17:05:53.392493-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> summary for task success {transaction_duration_ms=18, response_status=200, connection=4, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=15, response_duration_ms=1, request_bytes=37, response_bytes=51963, cache_hit=false}
-default	17:05:53.392957-0500	RedLemon	Task <C1AB2C28-F308-46BC-8E08-5F8630EEF81A>.<20> finished successfully
-default	17:05:53.414263-0500	RedLemon	✅ Logo loaded successfully
-default	17:05:53.416410-0500	RedLemon	   Quality: 1080p
-default	17:05:53.417097-0500	RedLemon	   Mode: watchParty
-default	17:05:53.417227-0500	RedLemon	📡 Fetching metadata for tt0413300...
-default	17:05:53.418565-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> resuming, timeouts(60.0, 300.0) QOS(0x19) Voucher (null)
-default	17:05:53.419151-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [AF32C3A4-4652-4BBE-97C0-FC7650166F33] (reporting strategy default)> on Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> was not selected for reporting
-default	17:05:53.435472-0500	RedLemon	Connection 8: starting, TC(0x0)
-default	17:05:53.435652-0500	RedLemon	[C8 79EABEBD-98D5-4275-B340-61795FDB137C 127.0.0.1:47253 tcp, url hash: 2a12ec71, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{37D592E4-4AB1-4306-845E-1D61F5F2152A}{(null)}{Y}{2} (private), proc: B4432D13-77F8-3DF2-847A-B04DA02DB95B] start
-default	17:05:53.435765-0500	RedLemon	[C8 127.0.0.1:47253 initial path ((null))] event: path:start @0.000s
-default	17:05:53.436192-0500	RedLemon	[C8 127.0.0.1:47253 waiting path (satisfied (Path is satisfied), interface: lo0)] event: path:satisfied @0.000s, uuid: C128D93A-9A8A-46FC-A378-66AA6D3B8F23
-default	17:05:53.436834-0500	RedLemon	[C8 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), interface: lo0)] event: flow:start_connect @0.001s
-default	17:05:53.436876-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C8] reporting state preparing
-default	17:05:53.437086-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> setting up Connection 8
-default	17:05:53.437298-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> done using Connection 4
-default	17:05:53.437629-0500	RedLemon	nw_socket_handle_socket_event [C8:2] Socket received CONNECTED event
-default	17:05:53.437817-0500	RedLemon	nw_flow_connected [C8 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Transport protocol connected (socket)
-default	17:05:53.438215-0500	RedLemon	[C8 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_transport @0.002s
-default	17:05:53.438301-0500	RedLemon	nw_flow_connected [C8 127.0.0.1:47253 in_progress socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] Output protocol connected (CFNetworkConnection-3232369669)
-default	17:05:53.439291-0500	RedLemon	[C8 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:finish_connect @0.003s
-default	17:05:53.439574-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C8] reporting state ready
-default	17:05:53.439675-0500	RedLemon	[C8 127.0.0.1:47253 ready socket-flow (satisfied (Path is satisfied), viable, interface: lo0)] event: flow:changed_viability @0.003s
-default	17:05:53.439749-0500	RedLemon	Connection 8: connected successfully
-default	17:05:53.440033-0500	RedLemon	Connection 8: ready C(N) E(N)
-default	17:05:53.441452-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> now using Connection 8
-default	17:05:53.442878-0500	RedLemon	Connection 8: received viability advisory(Y)
-default	17:05:53.444829-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> sent request, body N 0
-default	17:05:53.445349-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> response ended
-default	17:05:53.446686-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> summary for task success {transaction_duration_ms=71, response_status=200, connection=4, reused=1, request_start_ms=4, request_duration_ms=0, response_start_ms=15, response_duration_ms=54, request_bytes=41, response_bytes=1014397, cache_hit=false}
-default	17:05:53.446840-0500	RedLemon	Task <4F9A3612-8894-4D4E-BDD9-2CD08E0428E5>.<21> finished successfully
-default	17:05:53.449999-0500	RedLemon	✅ Background art loaded successfully
-default	17:05:53.468993-0500	mDNSResponder	[R4216] DNSServiceCreateConnection START PID[25877](RedLemon)
-default	17:05:53.469196-0500	RedLemon	<private>
-default	17:05:53.469331-0500	RedLemon	<private>
-default	17:05:53.469638-0500	mDNSResponder	[R4217] DNSServiceQueryRecord(1D000, 0, <mask.hash: '/tfdZSgHcBatFx7YOuCljw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:53.469432-0500	RedLemon	<private>
-default	17:05:53.469536-0500	RedLemon	<private>
-default	17:05:53.470654-0500	mDNSResponder	[R4218] DNSServiceQueryRecord(1D000, 0, <mask.hash: '/tfdZSgHcBatFx7YOuCljw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:53.491255-0500	mDNSResponder	[R4217] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'sj84HI6Ls+vhIwof6Ees1Q=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:53.491349-0500	mDNSResponder	[R4218] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'sj84HI6Ls+vhIwof6Ees1Q=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:53.602684-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> received response, status 200 content K
-default	17:05:53.603053-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> response ended
-default	17:05:53.603152-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> done using Connection 8
-default	17:05:53.603338-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> summary for task success {transaction_duration_ms=183, response_status=200, connection=8, protocol="http/1.1", domain_lookup_duration_ms=0, connect_duration_ms=2, secure_connection_duration_ms=0, private_relay=false, request_start_ms=24, request_duration_ms=0, response_start_ms=182, response_duration_ms=0, request_bytes=299, response_bytes=2703, cache_hit=false}
-default	17:05:53.603600-0500	RedLemon	Task <2F9CFB0F-C471-42F3-86E1-6F37AD137522>.<1> finished successfully
-default	17:05:53.605952-0500	RedLemon	📦 Decoded CinemetaMeta - videos count: -1
-default	17:05:53.650830-0500	RedLemon	🎬 GUEST: Using host's stream selection (skipping resolution)
-default	17:05:53.651065-0500	RedLemon	⚠️ GUEST: Detected quality from filename: 4K
-default	17:05:53.651175-0500	RedLemon	🎬 GUEST: Fetching subtitles for shared stream...
-default	17:05:53.651766-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> resuming, timeouts(60.0, 300.0) QOS(0x19) Voucher (null)
-default	17:05:53.652134-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [D4CADFD9-5219-40B4-8D16-B8EACC1E0E0F] (reporting strategy default)> on Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> was not selected for reporting
-default	17:05:53.652811-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> now using Connection 8
-default	17:05:53.653172-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> sent request, body N 0
-default	17:05:53.655816-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> resuming, timeouts(5.0, 604800.0) QOS(0x15) Voucher (null)
-default	17:05:53.656328-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [36991ECE-ABD3-4631-A990-617C8007383E] (reporting strategy default)> on Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> was not selected for reporting
-default	17:05:53.664525-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:53.665024-0500	RedLemon	Connection 9: enabling TLS
-default	17:05:53.665049-0500	RedLemon	Connection 9: starting, TC(0x0)
-default	17:05:53.665081-0500	RedLemon	[C9 0786C1BF-63CD-46FB-8E1E-A9E7737CE182 Hostname#38445e48:443 tcp, url hash: 008aa370, tls, definite, attribution: developer, context: com.apple.CFNetwork.NSURLSession.{935D24CC-D049-4D03-9D51-70F13158B1CC}{(null)}{Y}{2} (private), proc: B4432D13-77F8-3DF2-847A-B04DA02DB95B] start
-default	17:05:53.665158-0500	RedLemon	[C9 Hostname#38445e48:443 initial path ((null))] event: path:start @0.000s
-default	17:05:53.665460-0500	RedLemon	[C9 Hostname#38445e48:443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.000s, uuid: 927CAEA8-67F5-474F-BC5A-A81CEABA99D8
-default	17:05:53.665596-0500	RedLemon	[C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:start_dns @0.000s
-default	17:05:53.665853-0500	mDNSResponder	[R4219] getaddrinfo start -- flags: 0xC000D000, ifindex: 0, protocols: 0, hostname: <mask.hash: '5Jaur2vW6gXr0hnyjhT/Ig=='>, options: 0x8 {use-failover}, client pid: 25877 (RedLemon)
-default	17:05:53.665622-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C9] reporting state preparing
-default	17:05:53.665783-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> setting up Connection 9
-default	17:05:53.668962-0500	RedLemon	[C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.003s
-default	17:05:53.669151-0500	RedLemon	nw_endpoint_resolver_update [C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv6#b359ef86.443
-default	17:05:53.669255-0500	RedLemon	nw_endpoint_resolver_update [C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] Adding endpoint handler for IPv4#03906bbc:443
-default	17:05:53.669373-0500	RedLemon	[C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_dns @0.004s
-default	17:05:53.669588-0500	RedLemon	[C9.1 IPv6#b359ef86.443 initial path ((null))] event: path:start @0.004s
-default	17:05:53.669975-0500	RedLemon	[C9.1 IPv6#b359ef86.443 waiting path (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: path:satisfied @0.004s, uuid: 339DDB56-3B1E-4F3B-84F6-0D3E94848C27
-default	17:05:53.670118-0500	RedLemon	[C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:start_nexus @0.004s
-default	17:05:53.670659-0500	RedLemon	[C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:receive_nexus @0.005s
-default	17:05:53.671525-0500	RedLemon	[C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:start_connect @0.006s
-default	17:05:53.671852-0500	RedLemon	tcp_output [C9.1:3] flags=[S] seq=2515245273, ack=0, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2515245273
-default	17:05:53.681313-0500	RedLemon	tcp_input [C9.1:3] flags=[S.] seq=1947832142, ack=2515245274, win=65535 state=SYN_SENT rcv_nxt=0, snd_una=2515245273
-default	17:05:53.681452-0500	RedLemon	nw_flow_connected [C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Transport protocol connected (tcp)
-default	17:05:53.681622-0500	RedLemon	[C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.016s
-default	17:05:53.681674-0500	RedLemon	[C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_transport @0.016s
-default	17:05:53.682044-0500	RedLemon	boringssl_session_apply_protocol_options_for_transport_block_invoke(1745) [C9.1:2][0x7fa10c0b4b80] TLS configured [min_version(0x0301) max_version(0x0304) name(<private>) tickets(false) false_start(false) enforce_ev(false) enforce_ats(false) ech(false)]
-default	17:05:53.682145-0500	RedLemon	boringssl_context_info_handler(2028) [C9.1:2][0x7fa10c0b4b80] Client handshake started
-default	17:05:53.682284-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS client enter_early_data
-default	17:05:53.682589-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS client read_server_hello
-default	17:05:53.692487-0500	mDNSResponder	[R4219] getaddrinfo stop -- hostname: <mask.hash: '5Jaur2vW6gXr0hnyjhT/Ig=='>, client pid: 25877 (RedLemon)
-default	17:05:53.692980-0500	RedLemon	[C9 Hostname#38445e48:443 in_progress resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: resolver:receive_alternative @0.027s
-default	17:05:53.703670-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_hello_retry_request
-default	17:05:53.703852-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_server_hello
-default	17:05:53.704438-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_encrypted_extensions
-default	17:05:53.706478-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_certificate_request
-default	17:05:53.706736-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_server_certificate
-default	17:05:53.706939-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_server_certificate_verify
-default	17:05:53.708864-0500	RedLemon	boringssl_context_evaluate_trust_async(1631) [C9.1:2][0x7fa10c0b4b80] Performing external trust evaluation
-default	17:05:53.709587-0500	RedLemon	boringssl_context_evaluate_trust_async_external(1616) [C9.1:2][0x7fa10c0b4b80] Asyncing for external verify block
-default	17:05:53.710664-0500	RedLemon	Connection 9: asked to evaluate TLS Trust
-default	17:05:53.711287-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> auth completion disp=1 cred=0x0
-default	17:05:53.718909-0500	RedLemon	Connection 9: TLS Trust result 0
-default	17:05:53.718982-0500	RedLemon	boringssl_context_evaluate_trust_async_external_block_invoke_3(1572) [C9.1:2][0x7fa10c0b4b80] Returning from external verify block with result: true
-default	17:05:53.719037-0500	RedLemon	boringssl_context_certificate_verify_callback(1793) [C9.1:2][0x7fa10c0b4b80] Certificate verification result: OK
-default	17:05:53.719489-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client read_server_finished
-default	17:05:53.719593-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client send_end_of_early_data
-default	17:05:53.719616-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client send_client_encrypted_extensions
-default	17:05:53.719636-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client send_client_certificate
-default	17:05:53.719655-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client complete_second_flight
-default	17:05:53.719732-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS 1.3 client done
-default	17:05:53.719940-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS client finish_client_handshake
-default	17:05:53.719974-0500	RedLemon	boringssl_context_info_handler(2045) [C9.1:2][0x7fa10c0b4b80] Client handshake state: TLS client done
-default	17:05:53.720002-0500	RedLemon	boringssl_context_info_handler(2034) [C9.1:2][0x7fa10c0b4b80] Client handshake done
-default	17:05:53.720683-0500	RedLemon	nw_protocol_boringssl_signal_connected(724) [C9.1:2][0x7fa10c0b4b80] TLS connected [version(0x0304) ciphersuite(TLS_AES_128_GCM_SHA256) group(0x001d) signature_alg(0x0403) alpn(h2) resumed(0) offered_ticket(0) false_started(0) ocsp_received(1) sct_received(0) connect_time(38ms) flight_time(24ms) rtt(21ms) write_stalls(0) read_stalls(7)]
-default	17:05:53.720896-0500	RedLemon	nw_flow_connected [C9.1 IPv6#b359ef86.443 in_progress channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] Output protocol connected (CFNetworkConnection-3232369669)
-default	17:05:53.721308-0500	RedLemon	[C9.1 IPv6#b359ef86.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.056s
-default	17:05:53.721719-0500	RedLemon	nw_connection_report_state_with_handler_on_nw_queue [C9] reporting state ready
-default	17:05:53.721843-0500	RedLemon	[C9 Hostname#38445e48:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:finish_connect @0.056s
-default	17:05:53.722090-0500	RedLemon	[C9.1 IPv6#b359ef86.443 ready channel-flow (satisfied (Path is satisfied), viable, interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.056s
-default	17:05:53.722234-0500	RedLemon	[C9 Hostname#38445e48:443 ready resolver (satisfied (Path is satisfied), interface: en0, ipv4, ipv6, dns)] event: flow:changed_viability @0.057s
-default	17:05:53.722393-0500	RedLemon	Connection 9: connected successfully
-default	17:05:53.722450-0500	RedLemon	Connection 9: TLS handshake complete
-default	17:05:53.722835-0500	RedLemon	Connection 9: ready C(N) E(N)
-default	17:05:53.723431-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> now using Connection 9
-default	17:05:53.723551-0500	RedLemon	Connection 9: received viability advisory(Y)
-default	17:05:53.723754-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> sent request, body N 0
-default	17:05:54.168143-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> received response, status 200 content U
-default	17:05:54.168478-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> done using Connection 9
-default	17:05:54.169137-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> response ended
-default	17:05:54.169509-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> summary for task success {transaction_duration_ms=506, response_status=200, connection=9, protocol="h2", domain_lookup_duration_ms=4, connect_duration_ms=50, secure_connection_duration_ms=38, private_relay=false, request_start_ms=60, request_duration_ms=0, response_start_ms=505, response_duration_ms=1, request_bytes=175, response_bytes=1092, cache_hit=true}
-default	17:05:54.170001-0500	RedLemon	Task <6DA91012-1D5B-487A-A87A-CC28484999D5>.<22> finished successfully
-default	17:05:54.171120-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [anon<RedLemon>(501):25877] with description <RBSAssertionDescriptor| "com.apple.CFNetwork.StorageDB" ID:173-25877-1905 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.common" name:"FinishTaskUninterruptable" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	17:05:54.171572-0500	runningboardd	Assertion 173-25877-1905 (target:[anon<RedLemon>(501):25877]) will be created as active as no start-time-defining assertions exist
-default	17:05:54.172230-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> resuming, timeouts(5.0, 604800.0) QOS(0x15) Voucher (null)
-default	17:05:54.173031-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [2613F3C6-25F1-411E-B2D4-435AFC233314] (reporting strategy default)> on Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> was not selected for reporting
-default	17:05:54.175218-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:54.175517-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> now using Connection 9
-default	17:05:54.175870-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> sent request, body N 0
-default	17:05:54.177022-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:54.177093-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:54.177160-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:54.180691-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1906 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	17:05:54.180888-0500	runningboardd	Assertion 173-114-1906 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:54.182262-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:54.182311-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:54.182357-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:54.474673-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> received response, status 200 content U
-default	17:05:54.474911-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> done using Connection 9
-default	17:05:54.475671-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> response ended
-default	17:05:54.475955-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> summary for task success {transaction_duration_ms=301, response_status=200, connection=9, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=300, response_duration_ms=1, request_bytes=92, response_bytes=302, cache_hit=false}
-default	17:05:54.476392-0500	RedLemon	Task <0183842A-1BA4-49F2-BF17-10B440EAAAF2>.<23> finished successfully
-default	17:05:54.479940-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> received response, status 200 content K
-default	17:05:54.480285-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> response ended
-default	17:05:54.480395-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> done using Connection 8
-default	17:05:54.480634-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> summary for task success {transaction_duration_ms=828, response_status=200, connection=8, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=827, response_duration_ms=0, request_bytes=323, response_bytes=148, cache_hit=false}
-default	17:05:54.481086-0500	RedLemon	Task <20D16322-38D0-4F64-9381-07D1DCC3C2FB>.<2> finished successfully
-default	17:05:54.481549-0500	RedLemon	✅ GUEST: Found 0 subtitles
-default	17:05:54.517121-0500	RedLemon	🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/Z4ISYGLKCDEX2107/S, subtitles: 0
-default	17:05:54.572429-0500	RedLemon	✅ Stream ready, starting playback...
-default	17:05:54.572695-0500	RedLemon	🖥️ WindowManager: enterFullscreen() called
-default	17:05:54.575963-0500	RedLemon	   Window: <SwiftUI.SwiftUIWindow: 0x7fa10c06a570>
-default	17:05:54.576224-0500	RedLemon	   Is fullscreen: 0
-default	17:05:54.576555-0500	RedLemon	   ✅ WindowManager: Toggling fullscreen ON
-default	17:05:54.668149-0500	RedLemon	🖼️ Setting up MPV with native macOS video output...
-default	17:05:54.674896-0500	RedLemon	✅ MPV initialized with native GPU rendering
-default	17:05:54.702672-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task starting
-default	17:05:54.703097-0500	RedLemon	🎉 Starting watch party sync - Room: event_tt0413300, Host: NO
-default	17:05:54.703588-0500	RedLemon	🎉 Watch Party Mode ENABLED. isInWatchParty = YES
-default	17:05:54.780504-0500	runningboardd	Invalidating assertion 173-171-1884 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	17:05:54.781053-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-1912 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	17:05:54.781215-0500	runningboardd	Assertion 173-171-1912 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:54.790117-0500	RedLemon	🔄 Starting chat polling for room: event_tt0413300
-default	17:05:54.790600-0500	RedLemon	✅ Watch party sync started successfully - isInWatchParty is now TRUE
-default	17:05:54.790847-0500	RedLemon	🎬🎬🎬 About to call loadStream - isInWatchParty: YES
-default	17:05:54.791181-0500	RedLemon	🎬🎬🎬 Subtitles: 0
-default	17:05:54.791965-0500	RedLemon	🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Spider-Man 3
-default	17:05:54.792614-0500	RedLemon	🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/Z4ISYGLKCDEX2107/S
-default	17:05:54.792885-0500	RedLemon	🎬🎬🎬 subtitles: 0
-default	17:05:54.796639-0500	RedLemon	🎬🎬🎬 MPVPlayerView .task completed
-default	17:05:54.815052-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:05:54.815830-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [B770038D-9AD7-40C3-AA82-A13BC1090A74] (reporting strategy default)> on Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> was not selected for reporting
-default	17:05:54.816262-0500	RedLemon	🎬 MPV: Current video filename set to: Spider-Man 3 2007 1080p UHD BluRay DD+7.1 x264-LoRD.mkv
-default	17:05:54.816355-0500	RedLemon	🔍 MPV track-list/count: 0
-default	17:05:54.816556-0500	RedLemon	🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/Z4ISYGLKCDEX2107/Spider-Man%203%202007%201080p%20UHD%20Blu, autoplay: true
-default	17:05:54.816903-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:54.817044-0500	RedLemon	📊 Total subtitle tracks found: 1 (including Off if needed)
-default	17:05:54.817173-0500	RedLemon	🎬 MPV executing command: loadfile "https://chi9-4.download.real-debrid.com/d/Z4ISYGLKCDEX2107/Spider-Man%203%202007%201080p%20UHD%20BluRay%20DD%2B7.1%20x264-LoRD.mkv"
-default	17:05:54.817370-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> now using Connection 2
-default	17:05:54.817569-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:54.817591-0500	RedLemon	🎬 MPV loadfile result: 0
-default	17:05:54.818042-0500	RedLemon	✅ MPV loadfile succeeded, isPlaying set to true
-default	17:05:54.818389-0500	RedLemon	✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
-default	17:05:54.818444-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> sent request, body N 0
-default	17:05:54.818955-0500	RedLemon	   Track: ID=0, Title=Off, External=0
-default	17:05:54.822101-0500	mDNSResponder	[R4220] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:54.825891-0500	mDNSResponder	[R4221] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:54.829066-0500	mDNSResponder	[R4220] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:54.831209-0500	mDNSResponder	[R4221] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:54.909614-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> received response, status 200 content K
-default	17:05:54.909909-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> done using Connection 2
-default	17:05:54.912390-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> response ended
-default	17:05:54.912554-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> summary for task success {transaction_duration_ms=95, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=92, response_duration_ms=2, request_bytes=256, response_bytes=401, cache_hit=false}
-default	17:05:54.912791-0500	RedLemon	Task <59CF2CBA-CC74-4A7C-A712-AC45E91E63FC>.<65> finished successfully
-default	17:05:54.998155-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:05:54.998575-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [32C6FA53-A5DF-4BBF-BBFE-35F47411E044] (reporting strategy default)> on Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> was not selected for reporting
-default	17:05:54.999219-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:54.999479-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> now using Connection 2
-default	17:05:55.999938-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> sent request, body N 0
-default	17:05:55.033042-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	17:05:55.033493-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [CEB27846-D09F-475A-ABA0-62638B1EBCF2] (reporting strategy default)> on Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> was not selected for reporting
-default	17:05:55.034172-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:55.034384-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> now using Connection 4
-default	17:05:55.034626-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> sent request, body N 0
-default	17:05:55.047208-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> received response, status 200 content K
-default	17:05:55.089550-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> received response, status 200 content U
-default	17:05:55.098263-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> done using Connection 4
-default	17:05:55.098596-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> response ended
-default	17:05:55.099493-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> done using Connection 2
-default	17:05:55.100447-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> summary for task success {transaction_duration_ms=66, response_status=200, connection=4, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=13, response_duration_ms=51, request_bytes=41, response_bytes=1014452, cache_hit=false}
-default	17:05:55.099626-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> response ended
-default	17:05:55.100728-0500	RedLemon	Task <B72D9F33-E57C-428A-8EA4-75A4466F48AC>.<24> finished successfully
-default	17:05:55.101260-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> summary for task success {transaction_duration_ms=102, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=90, response_duration_ms=11, request_bytes=238, response_bytes=522, cache_hit=false}
-default	17:05:55.102099-0500	RedLemon	Task <13B97B15-A302-4370-BF71-7C176855D255>.<66> finished successfully
-default	17:05:55.179554-0500	RedLemon	<private>
-default	17:05:55.179692-0500	RedLemon	<private>
-default	17:05:55.179805-0500	RedLemon	<private>
-default	17:05:55.179914-0500	RedLemon	<private>
-default	17:05:55.182717-0500	runningboardd	Invalidating assertion 173-25877-1905 (target:[anon<RedLemon>(501):25877]) from originator [anon<RedLemon>(501):25877]
-default	17:05:55.219870-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:05:55.220421-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [63F4C021-85EE-4BD4-B1D0-1537A94DC810] (reporting strategy default)> on Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> was not selected for reporting
-default	17:05:55.221132-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:55.221517-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> now using Connection 2
-default	17:05:55.221951-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> sent request, body N 0
-default	17:05:55.246536-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:55.247253-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:55.248091-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:55.263895-0500	RedLemon	🔍 MPV track-list/count: 0
-default	17:05:55.264043-0500	RedLemon	📊 Total subtitle tracks found: 1 (including Off if needed)
-default	17:05:55.264439-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:55.281994-0500	runningboardd	Invalidating assertion 173-114-1906 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.powerd>:114]
-default	17:05:55.298702-0500	runningboardd	Invalidating assertion 173-171-1912 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	17:05:55.299529-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> received response, status 200 content U
-default	17:05:55.299776-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> done using Connection 2
-default	17:05:55.300376-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> response ended
-default	17:05:55.300484-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> summary for task success {transaction_duration_ms=79, response_status=200, connection=2, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=78, response_duration_ms=1, request_bytes=244, response_bytes=585, cache_hit=false}
-default	17:05:55.300714-0500	RedLemon	Task <9917BC48-D4DB-4A55-9955-8A1A175581D5>.<67> finished successfully
-default	17:05:55.305262-0500	RedLemon	👥 MPVPlayer: Updated participants list via polling: 1
-default	17:05:55.313514-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.WindowServer(88)>:171] with description <RBSAssertionDescriptor| "AppVisible" ID:173-171-1915 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"AppVisible" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	17:05:55.313677-0500	runningboardd	Assertion 173-171-1915 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:55.398437-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:55.398731-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:55.399056-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:55.603328-0500	mDNSResponder	[R4222] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:55.604976-0500	mDNSResponder	[R4223] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:55.606820-0500	mDNSResponder	[R4222] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:55.607059-0500	mDNSResponder	[R4223] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:55.772491-0500	RedLemon	⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 7093.3s
-default	17:05:55.825289-0500	RedLemon	🔍 MPV track-list/count: 0
-default	17:05:55.825592-0500	RedLemon	📊 Total subtitle tracks found: 1 (including Off if needed)
-default	17:05:55.825848-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:55.826216-0500	RedLemon	✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
-default	17:05:55.826770-0500	RedLemon	   Track: ID=0, Title=Off, External=0
-default	17:05:55.982136-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.powerd>:114] with description <RBSAssertionDescriptor| "App is holding power assertion" ID:173-114-1916 target:25877 attributes:[
-	<RBSDomainAttribute| domain:"com.apple.appnap" name:"PowerAssertion" sourceEnvironment:"(null)">,
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>
-	]>
-default	17:05:55.982465-0500	runningboardd	Assertion 173-114-1916 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:05:55.983916-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:55.984019-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:55.984828-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:56.559015-0500	mDNSResponder	[R4224] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:56.559514-0500	mDNSResponder	[R4225] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:56.560972-0500	mDNSResponder	[R4224] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:56.561085-0500	mDNSResponder	[R4225] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:56.905355-0500	RedLemon	🔍 MPV track-list/count: 0
-default	17:05:56.905549-0500	RedLemon	📊 Total subtitle tracks found: 1 (including Off if needed)
-default	17:05:56.905680-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:56.905878-0500	RedLemon	✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
-default	17:05:56.906074-0500	RedLemon	   Track: ID=0, Title=Off, External=0
-default	17:05:57.454966-0500	runningboardd	Assertion did invalidate due to timeout: 173-140-1901 (target:[anon<RedLemon>(501):25877])
-default	17:05:57.563386-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:05:57.563460-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:05:57.563575-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:05:57.820219-0500	RedLemon	 HALPlugInManagement::RegisterPlugIns: skipping in-process plug-ins
-error	17:05:57.820302-0500	RedLemon	AddInstanceForFactory: No factory registered for id <CFUUID 0x7fa109bfe120> F8BB1C28-BAE8-11D6-9C31-00039315CD46
-default	17:05:57.872380-0500	RedLemon	                AUHAL.cpp:386   AUHAL: (0x7fa10934a840) Listening to HAL system property 1682929012
-default	17:05:57.872574-0500	RedLemon	                AUHAL.cpp:397   AUHAL: (0x7fa10934a840) Selecting device 49 from constructor
-default	17:05:57.872669-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7fa10934a840)
-default	17:05:57.872720-0500	RedLemon	                AUHAL.cpp:627   SelectDevice: (0x7fa10934a840) not already running
-default	17:05:57.872757-0500	RedLemon	                AUHAL.cpp:702   SelectDevice: (0x7fa10934a840) nothing to teardown
-default	17:05:57.872792-0500	RedLemon	                AUHAL.cpp:706   SelectDevice: (0x7fa10934a840) connecting device 49
-default	17:05:57.873097-0500	RedLemon	                AUHAL.cpp:3107  IsDeviceUsable: (0x7fa10934a840) Device ID: 49 (Input:No | Output:Yes): true
-default	17:05:57.873414-0500	RedLemon	                AUHAL.cpp:716   SelectDevice: (0x7fa10934a840) created ioproc 0xa for device 49
-default	17:05:57.873457-0500	RedLemon	                AUHAL.cpp:1452  UpdateStreamFormats: -> (0x7fa10934a840)
-default	17:05:57.873682-0500	RedLemon	                AUHAL.cpp:1516  UpdateStreamFormats:
-  output stream 0 [0x32]:  2 ch,  44100 Hz, Float32, interleaved
-default	17:05:57.873737-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 1 output streams; not all mono
-default	17:05:57.873781-0500	RedLemon	                AUHAL.cpp:1537  UpdateStreamFormats:
-  Output render format:  2 ch,  44100 Hz, Float32, interleaved
-default	17:05:57.873836-0500	RedLemon	                AUHAL.cpp:1527  UpdateStreamFormats: 0 input streams; not all mono
-default	17:05:57.874139-0500	RedLemon	                AUHAL.cpp:1602  UpdateStreamFormats: AUHAL(0x7fa10934a840) Calling PropertyChanged() for kAudioUnitProperty_StreamFormat, Scope:Output, Bus:Output
-default	17:05:57.874192-0500	RedLemon	                AUHAL.cpp:1615  UpdateStreamFormats: <-
-default	17:05:57.875328-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7fa10934a840) removing 0 device listeners from device 0
-default	17:05:57.875353-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7fa10934a840) adding 6 device listeners to device 49
-default	17:05:57.876028-0500	RedLemon	                AUHAL.cpp:820   SelectDevice: (0x7fa10934a840) removing 0 device delegate listeners from device 0
-default	17:05:57.876075-0500	RedLemon	                AUHAL.cpp:829   SelectDevice: (0x7fa10934a840) adding 0 device delegate listeners to device 49
-default	17:05:57.876137-0500	RedLemon	                AUHAL.cpp:842   SelectDevice: <- (0x7fa10934a840)
-default	17:05:57.876750-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	17:05:57.879076-0500	RedLemon	Registered notify signal com.apple.caulk.alloc.audiodump (0)
-default	17:05:57.880108-0500	RedLemon	                AUHAL.cpp:1711  SetStreamUsage: Output stream enables: Stream 0 is ENABLED
-default	17:05:57.880327-0500	RedLemon	                AUHAL.cpp:2060  SetProperty: (0x7fa10934a840) caller requesting device change from 49 to 49
-default	17:05:57.880387-0500	RedLemon	                AUHAL.cpp:570   SelectDevice: -> (0x7fa10934a840)
-default	17:05:57.880443-0500	RedLemon	                AUHAL.cpp:613   SelectDevice: <- (0x7fa10934a840) exiting with nothing to do
-default	17:05:58.092072-0500	RedLemon	🔍 MPV track-list/count: 7
-default	17:05:58.113603-0500	RedLemon	🔍 Track 0 type: video
-default	17:05:58.113866-0500	RedLemon	🔍 Track 1 type: audio
-default	17:05:58.144370-0500	CAReportingService	    CAReportingService.mm:465   sessions for client 197 : (
-    "reporterID=846108557317,serviceName=audiodeviceusage,ownerPid=197,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0",
-    "reporterID=846108557313,serviceName=audiodeviceusage,ownerPid=197,clientProcessName=(null),HostApplicationDisplayID=com.google.antigravity.helper,started=0,singleMessageSession=0"
-)
-default	17:05:58.144613-0500	CAReportingService	    CAReportingService.mm:577   1 active reporting session(s) (
-    "reporterID=846108557317,serviceName=audiodeviceusage,ownerPid=197,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=1,singleMessageSession=0"
-)
-default	17:05:58.234873-0500	RedLemon	🔍 Track 2 type: audio
-default	17:05:58.235163-0500	RedLemon	🔍 Track 3 type: audio
-default	17:05:58.235320-0500	RedLemon	🔍 Track 4 type: sub
-default	17:05:58.235522-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=nil, external=0
-default	17:05:58.235836-0500	RedLemon	🔍 Track 5 type: sub
-default	17:05:58.236056-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=SDH, external=0
-default	17:05:58.236247-0500	RedLemon	🔍 Track 6 type: sub
-default	17:05:58.236547-0500	RedLemon	✅ Found subtitle track: ID=3, lang=tr, title=nil, external=0
-default	17:05:58.236701-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
-default	17:05:58.236955-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:58.237271-0500	RedLemon	   Start[1]: ID=1, Title='nil', Lang='en', Ext=0
-default	17:05:58.237596-0500	RedLemon	   Start[2]: ID=2, Title='SDH', Lang='en', Ext=0
-default	17:05:58.237870-0500	RedLemon	   Start[3]: ID=3, Title='nil', Lang='tr', Ext=0
-default	17:05:58.241082-0500	mDNSResponder	[R4226] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:58.242760-0500	mDNSResponder	[R4227] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:58.243797-0500	RedLemon	🔄 MPV: Executing PENDING SEEK to 7093.3s after FILE_LOADED
-default	17:05:58.243818-0500	RedLemon	✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
-default	17:05:58.244076-0500	RedLemon	   Track: ID=0, Title=Off, External=0
-default	17:05:58.244218-0500	RedLemon	   Track: ID=1, Title=English, External=0
-default	17:05:58.244386-0500	RedLemon	   Track: ID=2, Title=SDH, External=0
-default	17:05:58.244505-0500	RedLemon	   Track: ID=3, Title=Track 3, External=0
-default	17:05:58.248339-0500	RedLemon	⏱️ Watch Party: Duration available (8351.3s), triggering ready signal
-default	17:05:58.248538-0500	RedLemon	👋 Watch Party: Sending INITIAL READY signal and starting loop
-default	17:05:58.249907-0500	mDNSResponder	[R4226] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:58.250435-0500	mDNSResponder	[R4227] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:58.252592-0500	RedLemon	🔍 MPV track-list/count: 7
-default	17:05:58.252793-0500	RedLemon	🔍 Track 0 type: video
-default	17:05:58.253002-0500	RedLemon	🔍 Track 1 type: audio
-default	17:05:58.253182-0500	RedLemon	🔍 Track 2 type: audio
-default	17:05:58.253374-0500	RedLemon	🔍 Track 3 type: audio
-default	17:05:58.253524-0500	RedLemon	🔍 Track 4 type: sub
-default	17:05:58.253684-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=nil, external=0
-default	17:05:58.253822-0500	RedLemon	🔍 Track 5 type: sub
-default	17:05:58.254030-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=SDH, external=0
-default	17:05:58.254259-0500	RedLemon	🔍 Track 6 type: sub
-default	17:05:58.254498-0500	RedLemon	✅ Found subtitle track: ID=3, lang=tr, title=nil, external=0
-default	17:05:58.254673-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
-default	17:05:58.254869-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:58.254990-0500	RedLemon	   Start[1]: ID=1, Title='nil', Lang='en', Ext=0
-default	17:05:58.255274-0500	RedLemon	   Start[2]: ID=2, Title='SDH', Lang='en', Ext=0
-default	17:05:58.255539-0500	RedLemon	   Start[3]: ID=3, Title='nil', Lang='tr', Ext=0
-default	17:05:58.349605-0500	RedLemon	📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	17:05:58.351012-0500	RedLemon	   Payload keys: senderId, timestamp, position, isPlaying, type
-default	17:05:58.353156-0500	RedLemon	✅ Realtime: Message broadcast complete
-default	17:05:58.385138-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	17:05:58.385433-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [421CF97C-4FE0-4CDE-A9AC-673F1FE53C2F] (reporting strategy default)> on Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> was not selected for reporting
-default	17:05:58.386168-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:05:58.386385-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> now using Connection 4
-default	17:05:58.386856-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> sent request, body N 0
-default	17:05:58.394361-0500	RedLemon	📨 Realtime: Received broadcast message
-default	17:05:58.394649-0500	RedLemon	   Payload keys: position, isPlaying, type, timestamp, senderId
-default	17:05:58.395348-0500	RedLemon	✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	17:05:58.395613-0500	RedLemon	📞 Realtime: Invoking syncCallback for message type: ready
-default	17:05:58.395838-0500	RedLemon	✅ Realtime: syncCallback invoked successfully
-default	17:05:58.402003-0500	RedLemon	✅ Watch Party: READY signal sent successfully
-default	17:05:58.402266-0500	RedLemon	🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	17:05:58.402425-0500	RedLemon	✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
-default	17:05:58.405340-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> received response, status 200 content K
-default	17:05:58.406718-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> done using Connection 4
-default	17:05:58.406917-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> response ended
-default	17:05:58.407893-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> summary for task success {transaction_duration_ms=22, response_status=200, connection=4, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=19, response_duration_ms=1, request_bytes=37, response_bytes=46603, cache_hit=false}
-default	17:05:58.408030-0500	RedLemon	Task <BF4C79BD-24F5-4E35-9A03-08E002689CD0>.<25> finished successfully
-default	17:05:58.682290-0500	mDNSResponder	[R4228] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, Addr) START PID[25877](RedLemon)
-default	17:05:58.683336-0500	mDNSResponder	[R4229] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'oVvBqWNuQEwN9KeEY7wdzw=='>, AAAA) START PID[25877](RedLemon)
-default	17:05:58.685849-0500	mDNSResponder	[R4228] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, Addr) STOP PID[25877](RedLemon)
-default	17:05:58.686031-0500	mDNSResponder	[R4229] DNSServiceQueryRecord(1D000, 0, <mask.hash: 'OQKQHxoD0QODflCO7KUpvQ=='>, AAAA) STOP PID[25877](RedLemon)
-default	17:05:59.324213-0500	RedLemon	🔍 MPV track-list/count: 7
-default	17:05:59.324562-0500	RedLemon	🔍 Track 0 type: video
-default	17:05:59.325331-0500	RedLemon	🔍 Track 1 type: audio
-default	17:05:59.325663-0500	RedLemon	🔍 Track 2 type: audio
-default	17:05:59.325917-0500	RedLemon	🔍 Track 3 type: audio
-default	17:05:59.326160-0500	RedLemon	🔍 Track 4 type: sub
-default	17:05:59.326471-0500	RedLemon	✅ Found subtitle track: ID=1, lang=en, title=nil, external=0
-default	17:05:59.326735-0500	RedLemon	🔍 Track 5 type: sub
-default	17:05:59.327019-0500	RedLemon	✅ Found subtitle track: ID=2, lang=en, title=SDH, external=0
-default	17:05:59.327292-0500	RedLemon	🔍 Track 6 type: sub
-default	17:05:59.327687-0500	RedLemon	✅ Found subtitle track: ID=3, lang=tr, title=nil, external=0
-default	17:05:59.327941-0500	RedLemon	📊 Total subtitle tracks found: 4 (including Off if needed)
-default	17:05:59.328186-0500	RedLemon	   Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
-default	17:05:59.328422-0500	RedLemon	   Start[1]: ID=1, Title='nil', Lang='en', Ext=0
-default	17:05:59.328634-0500	RedLemon	   Start[2]: ID=2, Title='SDH', Lang='en', Ext=0
-default	17:05:59.328851-0500	RedLemon	   Start[3]: ID=3, Title='nil', Lang='tr', Ext=0
-default	17:05:59.329206-0500	RedLemon	✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
-default	17:05:59.329482-0500	RedLemon	   Track: ID=0, Title=Off, External=0
-default	17:05:59.331573-0500	RedLemon	   Track: ID=1, Title=English, External=0
-default	17:05:59.332283-0500	RedLemon	   Track: ID=2, Title=SDH, External=0
-default	17:05:59.332514-0500	RedLemon	   Track: ID=3, Title=Track 3, External=0
-default	17:05:59.947978-0500	RedLemon	CoreAnimation: warning, deleted thread with uncommitted CATransaction; set CA_DEBUG_TRANSACTIONS=1 in environment to log backtraces, or set CA_ASSERT_MAIN_THREAD_TRANSACTIONS=1 to abort when an implicit transaction isn't created on a main thread.
-default	17:06:04.974385-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:06:04.976099-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C3734F06-055D-4DF6-988A-E1784E7CAC72] (reporting strategy default)> on Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> was not selected for reporting
-default	17:06:04.978642-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:06:04.979058-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> now using Connection 2
-default	17:06:04.979640-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> sent request, body N 0
-default	17:06:05.064424-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> received response, status 200 content K
-default	17:06:05.066241-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> done using Connection 2
-default	17:06:05.066472-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> response ended
-default	17:06:05.066625-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> summary for task success {transaction_duration_ms=88, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=86, response_duration_ms=2, request_bytes=256, response_bytes=555, cache_hit=false}
-default	17:06:05.066905-0500	RedLemon	Task <F5DE3C6C-51AF-4C95-8DC7-E1300353A686>.<68> finished successfully
-default	17:06:05.095088-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> resuming, timeouts(60.0, 604800.0) QOS(0x19) Voucher (null)
-default	17:06:05.095964-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [C8E3D180-9F60-4FE0-82D8-834962DB2AD7] (reporting strategy default)> on Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> was not selected for reporting
-default	17:06:05.097238-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:06:05.097707-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> now using Connection 2
-default	17:06:05.098782-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> sent request, body N 0
-default	17:06:05.166407-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> received response, status 200 content U
-default	17:06:05.166719-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> done using Connection 2
-default	17:06:05.168025-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> response ended
-default	17:06:05.168226-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> summary for task success {transaction_duration_ms=71, response_status=200, connection=2, reused=1, request_start_ms=1, request_duration_ms=0, response_start_ms=69, response_duration_ms=1, request_bytes=238, response_bytes=480, cache_hit=false}
-default	17:06:05.168461-0500	RedLemon	Task <8210FAF2-D457-4F98-8C38-C0D7026259CC>.<69> finished successfully
-default	17:06:05.667593-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> resuming, timeouts(60.0, 604800.0) QOS(0x21) Voucher (null)
-default	17:06:05.667973-0500	RedLemon	[Telemetry]: Activity <nw_activity 12:2 [EB568A00-29BB-4E79-BA6E-185ED7F8CE7E] (reporting strategy default)> on Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> was not selected for reporting
-default	17:06:05.668678-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> {strength 0, tls 4, ct 0, sub 0, sig 1, ciphers 0, bundle 0, builtin 0}
-default	17:06:05.668874-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> now using Connection 4
-default	17:06:05.669188-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> sent request, body N 0
-default	17:06:05.684324-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> received response, status 200 content K
-default	17:06:05.687813-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> done using Connection 4
-default	17:06:05.688899-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> response ended
-default	17:06:05.689723-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> summary for task success {transaction_duration_ms=21, response_status=200, connection=4, reused=1, request_start_ms=0, request_duration_ms=0, response_start_ms=15, response_duration_ms=4, request_bytes=37, response_bytes=46291, cache_hit=false}
-default	17:06:05.689861-0500	RedLemon	Task <27B8981B-5256-4D8D-9130-B4CF286D4DAA>.<26> finished successfully
-default	17:06:07.208857-0500	runningboardd	Acquiring assertion targeting [anon<RedLemon>(501):25877] from originator [daemon<com.apple.Dock.agent(501)>:395] with description <RBSAssertionDescriptor| "com.apple.dock:CopyMenu}" ID:173-395-1918 target:25877 attributes:[
-	<RBSAcquisitionCompletionAttribute| policy:AfterApplication>,
-	<RBSDomainAttribute| domain:"com.apple.dock" name:"CopyMenu" sourceEnvironment:"(null)">
-	]>
-default	17:06:07.209062-0500	runningboardd	Assertion 173-395-1918 (target:[anon<RedLemon>(501):25877]) will be created as active
-default	17:06:07.210097-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:06:07.210143-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:06:07.210190-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:06:07.223212-0500	runningboardd	Invalidating assertion 173-395-1918 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.Dock.agent(501)>:395]
-default	17:06:07.334182-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring jetsam update because this process is not memory-managed
-default	17:06:07.334347-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring suspend because this process is not lifecycle managed
-default	17:06:07.334517-0500	runningboardd	[anon<RedLemon>(501):25877] Ignoring GPU update because this process is not GPU managed
-default	17:06:08.996777-0500	runningboardd	Invalidating assertion 173-171-1915 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.WindowServer(88)>:171]
-default	17:06:09.001699-0500	RedLemon	Entering exit handler.
-default	17:06:09.001746-0500	RedLemon	Exiting exit handler.
-default	17:06:09.053689-0500	runningboardd	XPC connection invalidated: [anon<RedLemon>(501):25877]
-default	17:06:09.043508-0500	CAReportingService	    CAReportingService.mm:465   sessions for client 197 : (
-    "reporterID=846108557317,serviceName=audiodeviceusage,ownerPid=197,clientProcessName=(null),HostApplicationDisplayID=com.redlemon.app,started=0,singleMessageSession=0",
-    "reporterID=846108557313,serviceName=audiodeviceusage,ownerPid=197,clientProcessName=(null),HostApplicationDisplayID=com.google.antigravity.helper,started=0,singleMessageSession=0"
-)
-default	17:06:09.084686-0500	mDNSResponder	[R4216] DNSServiceCreateConnection STOP PID[25877](RedLemon)
-default	17:06:09.092741-0500	runningboardd	[anon<RedLemon>(501):25877] termination reported by proc_exit
-default	17:06:09.095710-0500	runningboardd	Invalidating assertion 173-140-1900 (target:[anon<RedLemon>(501):25877]) from originator [daemon<com.apple.coreservices.launchservicesd>:140]
-default	17:06:09.199920-0500	runningboardd	Removing process: [anon<RedLemon>(501):25877]
-default	17:06:09.200546-0500	runningboardd	removeJobWithInstance called for identity without existing job [anon<RedLemon>(501):25877]
-default	17:06:09.200711-0500	runningboardd	Removing assertions for terminated process: [anon<RedLemon>(501):25877]
-error	17:06:09.262224-0500	runningboardd	RBSStateCapture remove item called for untracked item 173-140-1900 (target:[anon<RedLemon>(501):25877])
-default	17:06:09.185333-0500	loginwindow	-[PersistentAppsSupport applicationQuit:] | for app:RedLemon, _appTrackingState = 2
-default	17:06:09.186469-0500	loginwindow	-[PersistentAppsSupport applicationQuit:] | App: RedLemon, quit, updating active tracking timer
+default	13:47:19.546653-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.546827-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.546977-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.547106-0500	RedLemon	🗓 Schedule Calc: Pacific Rim | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:19.547235-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Sorcerer's Stone | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:19.547430-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.547580-0500	RedLemon	🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:19.547699-0500	RedLemon	🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:19.547832-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:19.547955-0500	RedLemon	🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.548096-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.548217-0500	RedLemon	🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:19.548336-0500	RedLemon	🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.548450-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.548568-0500	RedLemon	🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.548683-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:19.548798-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.548916-0500	RedLemon	🗓 Schedule Calc: Kraven the Hunter | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.549031-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.549141-0500	RedLemon	🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:19.549253-0500	RedLemon	🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.549367-0500	RedLemon	🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.549479-0500	RedLemon	🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.549592-0500	RedLemon	🗓 Schedule Calc: Indiana Jones and the Dial of Destiny | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:19.549705-0500	RedLemon	🗓 Schedule Calc: Flubber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.549820-0500	RedLemon	🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:19.550065-0500	RedLemon	🗓 Schedule Calc: Black Water | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.550173-0500	RedLemon	🗓 Schedule Calc: Shrek 5 | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:19.550291-0500	RedLemon	🗓 Schedule Calc: Apocalypse Now | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:19.550404-0500	RedLemon	🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.550512-0500	RedLemon	🗓 Schedule Calc: White Chicks | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.550621-0500	RedLemon	🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.550776-0500	RedLemon	🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:19.550951-0500	RedLemon	🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.551089-0500	RedLemon	🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:19.551208-0500	RedLemon	🗓 Schedule Calc: Aliens | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.551323-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:19.551445-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.551706-0500	RedLemon	🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.552862-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.553114-0500	RedLemon	🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:19.553294-0500	RedLemon	🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:19.553644-0500	RedLemon	🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:19.553852-0500	RedLemon	🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:19.554344-0500	RedLemon	🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.554547-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Goblet of Fire | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:19.554671-0500	RedLemon	🗓 Schedule Calc: Blind Fury | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:19.554781-0500	RedLemon	🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.554888-0500	RedLemon	🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.554991-0500	RedLemon	🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:19.555092-0500	RedLemon	🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.555200-0500	RedLemon	🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.555305-0500	RedLemon	🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.555403-0500	RedLemon	🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:19.555506-0500	RedLemon	🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+default	13:47:19.555617-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 2 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.555721-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.555820-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.555907-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:19.556066-0500	RedLemon	🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.556184-0500	RedLemon	🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.556282-0500	RedLemon	🗓 Schedule Calc: Shrek the Third | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.556381-0500	RedLemon	🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:19.556478-0500	RedLemon	🗓 Schedule Calc: Parasite | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:19.556633-0500	RedLemon	🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:19.556863-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.557095-0500	RedLemon	🗓 Schedule Calc: Monster | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:19.557210-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.557317-0500	RedLemon	🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.557420-0500	RedLemon	🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.557523-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:19.557635-0500	RedLemon	🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.557743-0500	RedLemon	🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.557852-0500	RedLemon	🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.557971-0500	RedLemon	🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.558084-0500	RedLemon	🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.558196-0500	RedLemon	🗓 Schedule Calc: American History X | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.558306-0500	RedLemon	🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.558418-0500	RedLemon	🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.558526-0500	RedLemon	🗓 Schedule Calc: Dracula | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.558624-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.558727-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.558830-0500	RedLemon	🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.558940-0500	RedLemon	🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.559046-0500	RedLemon	🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.559145-0500	RedLemon	🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.559246-0500	RedLemon	🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+default	13:47:19.559353-0500	RedLemon	🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.559458-0500	RedLemon	🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.559559-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.559658-0500	RedLemon	🗓 Schedule Calc: Godzilla x Kong: The New Empire | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.559762-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.559870-0500	RedLemon	🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.559972-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.560069-0500	RedLemon	🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.560173-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.560587-0500	RedLemon	🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:19.560722-0500	RedLemon	🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:19.560837-0500	RedLemon	🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.560945-0500	RedLemon	🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.561053-0500	RedLemon	🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+default	13:47:19.561960-0500	RedLemon	🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:19.562144-0500	RedLemon	🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:19.564165-0500	RedLemon	🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.564702-0500	RedLemon	🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.564800-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.565150-0500	RedLemon	🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:19.565326-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.565627-0500	RedLemon	🗓 Schedule Calc: Alien³ | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.565859-0500	RedLemon	🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.566198-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.566427-0500	RedLemon	🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.566546-0500	RedLemon	🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:19.566653-0500	RedLemon	🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:19.566756-0500	RedLemon	🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.566858-0500	RedLemon	🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:19.566960-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.567060-0500	RedLemon	🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:19.567163-0500	RedLemon	🗓 Schedule Calc: The Green Mile | RuntimeStr: 189 min -> 189m | Duration: 11940.0s
+default	13:47:19.567265-0500	RedLemon	🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:19.567373-0500	RedLemon	🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.567478-0500	RedLemon	🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:19.567583-0500	RedLemon	🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:19.567692-0500	RedLemon	🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.567878-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+default	13:47:19.567998-0500	RedLemon	🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.568150-0500	RedLemon	🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.568279-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.568389-0500	RedLemon	🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:19.568496-0500	RedLemon	🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.568604-0500	RedLemon	🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:19.568716-0500	RedLemon	🗓 Schedule Calc: Waterworld | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.568882-0500	RedLemon	🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.569000-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:19.569092-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.569190-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Half-Blood Prince | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:19.569293-0500	RedLemon	🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+default	13:47:19.569411-0500	RedLemon	🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.569988-0500	RedLemon	🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:19.570167-0500	RedLemon	🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.570297-0500	RedLemon	🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.570420-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.570533-0500	RedLemon	🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:19.570704-0500	RedLemon	🗓 Schedule Calc: Shrek 2 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:19.571288-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.571440-0500	RedLemon	🗓 Schedule Calc: 24: Redemption | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.572213-0500	RedLemon	🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.572357-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.572968-0500	RedLemon	🗓 Schedule Calc: 28 Days Later | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:19.573204-0500	RedLemon	🗓 Schedule Calc: Four Brothers | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.573343-0500	RedLemon	🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.573477-0500	RedLemon	🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.573591-0500	RedLemon	🗓 Schedule Calc: Psycho | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.573718-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.573918-0500	RedLemon	🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:19.574071-0500	RedLemon	🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:19.574209-0500	RedLemon	🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.574337-0500	RedLemon	🗓 Schedule Calc: 2012 | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:19.574467-0500	RedLemon	🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:19.574594-0500	RedLemon	🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.574714-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:19.574839-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.574955-0500	RedLemon	🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:19.575077-0500	RedLemon	🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:19.575191-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.575304-0500	RedLemon	🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.575417-0500	RedLemon	🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.575534-0500	RedLemon	🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:19.575648-0500	RedLemon	🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.575763-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Chamber of Secrets | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+default	13:47:19.575886-0500	RedLemon	🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.575998-0500	RedLemon	🗓 Schedule Calc: The Illusionist | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.576108-0500	RedLemon	🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.576216-0500	RedLemon	🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.576330-0500	RedLemon	🗓 Schedule Calc: Predator: Badlands | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.576549-0500	RedLemon	🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:19.576673-0500	RedLemon	🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+default	13:47:19.576936-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:19.577050-0500	RedLemon	🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.577146-0500	RedLemon	🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.577235-0500	RedLemon	🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:19.578165-0500	RedLemon	🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:19.578572-0500	RedLemon	🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.578916-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:19.579058-0500	RedLemon	🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:19.579183-0500	RedLemon	🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:19.579308-0500	RedLemon	🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:19.579433-0500	RedLemon	🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:19.579595-0500	RedLemon	🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:19.579749-0500	RedLemon	🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.579881-0500	RedLemon	🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+default	13:47:19.580002-0500	RedLemon	🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+default	13:47:19.580122-0500	RedLemon	🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:19.580244-0500	RedLemon	🗓 Schedule Calc: Alien | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:19.580363-0500	RedLemon	🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.580478-0500	RedLemon	🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.580594-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:19.580710-0500	RedLemon	🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:19.580828-0500	RedLemon	🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.580941-0500	RedLemon	🗓 Schedule Calc: Thunderbolts* | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.581052-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.581163-0500	RedLemon	🗓 Schedule Calc: Godzilla: King of the Monsters | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.581280-0500	RedLemon	🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.581396-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:19.581505-0500	RedLemon	🗓 Schedule Calc: The Negotiator | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:19.581614-0500	RedLemon	🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:19.581726-0500	RedLemon	🗓 Schedule Calc: Between Worlds | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:19.581836-0500	RedLemon	🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.581948-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 1 | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:19.582067-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.582181-0500	RedLemon	🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.582294-0500	RedLemon	🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:19.582406-0500	RedLemon	🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+default	13:47:19.582518-0500	RedLemon	🗓 Schedule Calc: The Marvels | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.582632-0500	RedLemon	🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:19.582745-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:19.582854-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.583007-0500	RedLemon	🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.583151-0500	RedLemon	🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.583271-0500	RedLemon	🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.583416-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Prisoner of Azkaban | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.583547-0500	RedLemon	🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:19.583983-0500	RedLemon	🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:19.584146-0500	RedLemon	🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.584264-0500	RedLemon	🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.584379-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.584491-0500	RedLemon	🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:19.584597-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.588579-0500	RedLemon	🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.590029-0500	RedLemon	🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:19.591648-0500	RedLemon	🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:19.592353-0500	RedLemon	🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:19.592516-0500	RedLemon	🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.592658-0500	RedLemon	🗓 Schedule Calc: Shrek Forever After | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.592818-0500	RedLemon	🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:19.592947-0500	RedLemon	🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.593410-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:19.594435-0500	RedLemon	🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.595119-0500	RedLemon	🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:19.595448-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:19.595717-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.595828-0500	RedLemon	🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.596065-0500	RedLemon	🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:19.597173-0500	RedLemon	🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.597537-0500	RedLemon	🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.597678-0500	RedLemon	🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:19.597799-0500	RedLemon	🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:19.597918-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.598040-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:19.598149-0500	RedLemon	🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.598253-0500	RedLemon	🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.598366-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.598463-0500	RedLemon	🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:19.598566-0500	RedLemon	🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:19.598671-0500	RedLemon	🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.598772-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.598867-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.598965-0500	RedLemon	🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.599070-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.599173-0500	RedLemon	🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+default	13:47:19.599271-0500	RedLemon	🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:19.599366-0500	RedLemon	🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.599467-0500	RedLemon	🗓 Schedule Calc: Girls Trip | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.599574-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.599674-0500	RedLemon	🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:19.600193-0500	RedLemon	🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.600537-0500	RedLemon	🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:19.600750-0500	RedLemon	🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.600838-0500	RedLemon	🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:19.600898-0500	RedLemon	🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:19.600955-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Order of the Phoenix | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:19.601015-0500	RedLemon	🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.601357-0500	RedLemon	🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.601572-0500	RedLemon	🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.601763-0500	RedLemon	🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:19.602915-0500	RedLemon	🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:19.603210-0500	RedLemon	🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:19.603468-0500	RedLemon	🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:19.603626-0500	RedLemon	🗓 Schedule Calc: The Monkey | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.604026-0500	RedLemon	🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.604321-0500	RedLemon	🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:19.605314-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.605545-0500	RedLemon	🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+default	13:47:19.605699-0500	RedLemon	🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:19.605858-0500	RedLemon	🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:19.606933-0500	RedLemon	🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:19.607625-0500	RedLemon	🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:19.607853-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.608352-0500	RedLemon	🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.608535-0500	RedLemon	🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:19.608685-0500	RedLemon	🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.609014-0500	RedLemon	🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.609143-0500	RedLemon	🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.609256-0500	RedLemon	🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+default	13:47:19.609359-0500	RedLemon	🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:19.609453-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.609539-0500	RedLemon	🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:19.609627-0500	RedLemon	🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.609740-0500	RedLemon	🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.609852-0500	RedLemon	🗓 Schedule Calc: Godzilla | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.609957-0500	RedLemon	🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:19.610063-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.610229-0500	RedLemon	🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:19.610359-0500	RedLemon	🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.610480-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.610687-0500	RedLemon	🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:19.610816-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.610927-0500	RedLemon	🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.611031-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.611140-0500	RedLemon	🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.611243-0500	RedLemon	🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.611351-0500	RedLemon	🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:19.611454-0500	RedLemon	🗓 Schedule Calc: Conan the Barbarian | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.611563-0500	RedLemon	🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:19.611670-0500	RedLemon	🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:19.611772-0500	RedLemon	🗓 Schedule Calc: The Medallion | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:19.611880-0500	RedLemon	🗓 Schedule Calc: Predator | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.611994-0500	RedLemon	🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:19.612102-0500	RedLemon	🗓 Schedule Calc: Predators | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.612209-0500	RedLemon	🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.612318-0500	RedLemon	🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:19.612426-0500	RedLemon	🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:19.612538-0500	RedLemon	🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:19.612648-0500	RedLemon	🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.612752-0500	RedLemon	🗓 Schedule Calc: Train to Busan | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:19.612854-0500	RedLemon	🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+default	13:47:19.612957-0500	RedLemon	🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:19.613060-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:19.613167-0500	RedLemon	🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+default	13:47:19.613270-0500	RedLemon	🗓 Schedule Calc: Inside Out 2 | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.613385-0500	RedLemon	🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:19.613513-0500	RedLemon	🗓 Schedule Calc: The Barbarian | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+default	13:47:19.614212-0500	RedLemon	🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:19.614392-0500	RedLemon	🗓 Schedule Calc: Taxi Driver | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.614538-0500	RedLemon	🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:19.614681-0500	RedLemon	🗓 Schedule Calc: War | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.614814-0500	RedLemon	🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+default	13:47:19.614940-0500	RedLemon	🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:19.615614-0500	RedLemon	🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:19.615921-0500	RedLemon	🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.616198-0500	RedLemon	🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.616426-0500	RedLemon	🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.616552-0500	RedLemon	🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.616672-0500	RedLemon	🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:19.617242-0500	RedLemon	🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:19.620100-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.620640-0500	RedLemon	🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+default	13:47:19.621232-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.621411-0500	RedLemon	🗓 Schedule Calc: The Godfather | RuntimeStr: 175 min -> 175m | Duration: 11100.0s
+default	13:47:19.621531-0500	RedLemon	🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:19.621639-0500	RedLemon	🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:19.622128-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:19.622210-0500	RedLemon	🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.622277-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.622551-0500	RedLemon	🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:19.622632-0500	RedLemon	🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.622694-0500	RedLemon	🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.622843-0500	RedLemon	🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.623029-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.623246-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.623447-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:19.623554-0500	RedLemon	🗓 Schedule Calc: The Parent Trap | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:19.623656-0500	RedLemon	🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:19.623765-0500	RedLemon	🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.623868-0500	RedLemon	🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:19.623971-0500	RedLemon	🗓 Schedule Calc: Aliens vs. Predator: Requiem | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:19.624073-0500	RedLemon	🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:19.624175-0500	RedLemon	🗓 Schedule Calc: Baby Boy | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.624274-0500	RedLemon	🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:19.624380-0500	RedLemon	🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.624490-0500	RedLemon	🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:19.624596-0500	RedLemon	🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.624700-0500	RedLemon	🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.624800-0500	RedLemon	🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:19.624910-0500	RedLemon	🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.625020-0500	RedLemon	🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:19.625125-0500	RedLemon	🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:19.625228-0500	RedLemon	🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.625328-0500	RedLemon	🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.625432-0500	RedLemon	🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.625544-0500	RedLemon	🗓 Schedule Calc: Evil Dead 2 | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:19.625642-0500	RedLemon	🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.625725-0500	RedLemon	🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:19.625808-0500	RedLemon	🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.625890-0500	RedLemon	🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.626533-0500	RedLemon	🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+default	13:47:19.626688-0500	RedLemon	🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.627078-0500	RedLemon	🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.627249-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:19.627389-0500	RedLemon	🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.627976-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:19.628118-0500	RedLemon	🗓 Schedule Calc: Contact | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:19.628249-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.628372-0500	RedLemon	🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.628493-0500	RedLemon	🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.628612-0500	RedLemon	🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.629277-0500	RedLemon	🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.631165-0500	RedLemon	🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:19.631253-0500	RedLemon	🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:19.631469-0500	RedLemon	🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.631679-0500	RedLemon	🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:19.631863-0500	RedLemon	🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.632193-0500	RedLemon	🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.632379-0500	RedLemon	🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:19.632576-0500	RedLemon	🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:19.632755-0500	RedLemon	🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.632970-0500	RedLemon	🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:19.633171-0500	RedLemon	🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.633359-0500	RedLemon	🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:19.633505-0500	RedLemon	🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:19.633636-0500	RedLemon	🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:19.633805-0500	RedLemon	🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:19.633977-0500	RedLemon	🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:19.634181-0500	RedLemon	🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:19.634382-0500	RedLemon	🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:19.634510-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:19.634825-0500	RedLemon	🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.634952-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:19.635056-0500	RedLemon	🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:19.635159-0500	RedLemon	🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:19.635260-0500	RedLemon	🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:19.635360-0500	RedLemon	🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:19.635626-0500	RedLemon	🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:19.636774-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.637177-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.637749-0500	RedLemon	🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.637972-0500	RedLemon	🗓 Schedule Calc: The Orphanage | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:19.638104-0500	RedLemon	🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:19.638230-0500	RedLemon	🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.638693-0500	RedLemon	🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:19.638906-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:19.639046-0500	RedLemon	🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:19.639168-0500	RedLemon	🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:19.639622-0500	RedLemon	🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:19.639802-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:19.639894-0500	RedLemon	🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:19.639959-0500	RedLemon	🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:19.640019-0500	RedLemon	🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:19.640079-0500	RedLemon	🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:19.641105-0500	RedLemon	🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:19.641444-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:19.641720-0500	RedLemon	🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:19.641933-0500	RedLemon	🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:19.642153-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:19.642368-0500	RedLemon	🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:19.642596-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:19.642811-0500	RedLemon	🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:19.642921-0500	RedLemon	🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:26.942578-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.942686-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:26.942779-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.942888-0500	RedLemon	🗓 Schedule Calc: Pacific Rim | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:26.942995-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Sorcerer's Stone | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:26.943100-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.943201-0500	RedLemon	🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:26.943305-0500	RedLemon	🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:26.943411-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:26.943520-0500	RedLemon	🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:26.943622-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.943720-0500	RedLemon	🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:26.943825-0500	RedLemon	🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:26.943931-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.944039-0500	RedLemon	🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.944147-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:26.944252-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.944355-0500	RedLemon	🗓 Schedule Calc: Kraven the Hunter | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.944458-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:26.944565-0500	RedLemon	🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:26.944670-0500	RedLemon	🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.944776-0500	RedLemon	🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.944880-0500	RedLemon	🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.944983-0500	RedLemon	🗓 Schedule Calc: Indiana Jones and the Dial of Destiny | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:26.945091-0500	RedLemon	🗓 Schedule Calc: Flubber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.945198-0500	RedLemon	🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:26.945302-0500	RedLemon	🗓 Schedule Calc: Black Water | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.945394-0500	RedLemon	🗓 Schedule Calc: Shrek 5 | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:26.945511-0500	RedLemon	🗓 Schedule Calc: Apocalypse Now | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:26.945626-0500	RedLemon	🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.945734-0500	RedLemon	🗓 Schedule Calc: White Chicks | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.945842-0500	RedLemon	🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.945956-0500	RedLemon	🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:26.946067-0500	RedLemon	🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.946180-0500	RedLemon	🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:26.946290-0500	RedLemon	🗓 Schedule Calc: Aliens | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:26.946407-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:26.946523-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.946635-0500	RedLemon	🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.946751-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.946863-0500	RedLemon	🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:26.946980-0500	RedLemon	🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:26.947092-0500	RedLemon	🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:26.947206-0500	RedLemon	🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:26.947313-0500	RedLemon	🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.947421-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Goblet of Fire | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:26.947530-0500	RedLemon	🗓 Schedule Calc: Blind Fury | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:26.947638-0500	RedLemon	🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.947755-0500	RedLemon	🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.947864-0500	RedLemon	🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:26.947962-0500	RedLemon	🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.948031-0500	RedLemon	🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:26.948095-0500	RedLemon	🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.948156-0500	RedLemon	🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:26.948362-0500	RedLemon	🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+default	13:47:26.948559-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 2 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.949115-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.949201-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.949265-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:26.949335-0500	RedLemon	🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:26.949489-0500	RedLemon	🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:26.949676-0500	RedLemon	🗓 Schedule Calc: Shrek the Third | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.950489-0500	RedLemon	🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:26.950587-0500	RedLemon	🗓 Schedule Calc: Parasite | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:26.950681-0500	RedLemon	🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:26.950757-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:26.950826-0500	RedLemon	🗓 Schedule Calc: Monster | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:26.950892-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.951030-0500	RedLemon	🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.951466-0500	RedLemon	🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.951543-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:26.951649-0500	RedLemon	🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.951710-0500	RedLemon	🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.951769-0500	RedLemon	🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.951828-0500	RedLemon	🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.951936-0500	RedLemon	🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.952092-0500	RedLemon	🗓 Schedule Calc: American History X | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.952233-0500	RedLemon	🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.952384-0500	RedLemon	🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.952521-0500	RedLemon	🗓 Schedule Calc: Dracula | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.952657-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.952796-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.952934-0500	RedLemon	🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:26.953068-0500	RedLemon	🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.953203-0500	RedLemon	🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.953337-0500	RedLemon	🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:26.953469-0500	RedLemon	🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+default	13:47:26.953597-0500	RedLemon	🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.953723-0500	RedLemon	🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.953847-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:26.953973-0500	RedLemon	🗓 Schedule Calc: Godzilla x Kong: The New Empire | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.954097-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.954221-0500	RedLemon	🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.954355-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.954483-0500	RedLemon	🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.954607-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.954730-0500	RedLemon	🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:26.954852-0500	RedLemon	🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:26.954973-0500	RedLemon	🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:26.955106-0500	RedLemon	🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.955230-0500	RedLemon	🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+default	13:47:26.955353-0500	RedLemon	🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:26.955571-0500	RedLemon	🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:26.955741-0500	RedLemon	🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:26.955877-0500	RedLemon	🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.956005-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:26.956134-0500	RedLemon	🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:26.956264-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.956743-0500	RedLemon	🗓 Schedule Calc: Alien³ | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:26.956922-0500	RedLemon	🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:26.957089-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:26.957247-0500	RedLemon	🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.957472-0500	RedLemon	🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:26.957684-0500	RedLemon	🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:26.957885-0500	RedLemon	🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:26.958214-0500	RedLemon	🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:26.958287-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.958352-0500	RedLemon	🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:26.958513-0500	RedLemon	🗓 Schedule Calc: The Green Mile | RuntimeStr: 189 min -> 189m | Duration: 11940.0s
+default	13:47:26.958735-0500	RedLemon	🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:26.958914-0500	RedLemon	🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.959027-0500	RedLemon	🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:26.959136-0500	RedLemon	🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:26.959244-0500	RedLemon	🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.959359-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+default	13:47:26.959573-0500	RedLemon	🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:26.959678-0500	RedLemon	🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:26.959781-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.959884-0500	RedLemon	🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:26.959994-0500	RedLemon	🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:26.960108-0500	RedLemon	🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:26.960221-0500	RedLemon	🗓 Schedule Calc: Waterworld | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.960365-0500	RedLemon	🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.960505-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:26.960625-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:26.960748-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Half-Blood Prince | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:26.960870-0500	RedLemon	🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+default	13:47:26.960993-0500	RedLemon	🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:26.961112-0500	RedLemon	🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:26.961230-0500	RedLemon	🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.961345-0500	RedLemon	🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:26.961460-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.961581-0500	RedLemon	🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:26.961692-0500	RedLemon	🗓 Schedule Calc: Shrek 2 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:26.961802-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.961910-0500	RedLemon	🗓 Schedule Calc: 24: Redemption | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:26.962023-0500	RedLemon	🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:26.962133-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.962245-0500	RedLemon	🗓 Schedule Calc: 28 Days Later | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:26.962358-0500	RedLemon	🗓 Schedule Calc: Four Brothers | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.962471-0500	RedLemon	🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.962580-0500	RedLemon	🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.962697-0500	RedLemon	🗓 Schedule Calc: Psycho | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.962811-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:26.962927-0500	RedLemon	🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:26.963035-0500	RedLemon	🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:26.963109-0500	RedLemon	🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:26.963190-0500	RedLemon	🗓 Schedule Calc: 2012 | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:26.963382-0500	RedLemon	🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:26.963572-0500	RedLemon	🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.963732-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:26.963893-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.964065-0500	RedLemon	🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:26.964212-0500	RedLemon	🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:26.964344-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.964472-0500	RedLemon	🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:26.964601-0500	RedLemon	🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:26.964735-0500	RedLemon	🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:26.964922-0500	RedLemon	🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.965116-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Chamber of Secrets | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+default	13:47:26.965621-0500	RedLemon	🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.965774-0500	RedLemon	🗓 Schedule Calc: The Illusionist | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.965915-0500	RedLemon	🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.966027-0500	RedLemon	🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:26.966104-0500	RedLemon	🗓 Schedule Calc: Predator: Badlands | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.966175-0500	RedLemon	🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:26.966315-0500	RedLemon	🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+default	13:47:26.966505-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:26.966695-0500	RedLemon	🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:26.966897-0500	RedLemon	🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:26.967133-0500	RedLemon	🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:26.967365-0500	RedLemon	🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:26.967601-0500	RedLemon	🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.967834-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:26.967957-0500	RedLemon	🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:26.968071-0500	RedLemon	🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:26.968184-0500	RedLemon	🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:26.968296-0500	RedLemon	🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:26.968414-0500	RedLemon	🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:26.968540-0500	RedLemon	🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:26.968650-0500	RedLemon	🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+default	13:47:26.968751-0500	RedLemon	🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+default	13:47:26.968858-0500	RedLemon	🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:26.968959-0500	RedLemon	🗓 Schedule Calc: Alien | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:26.969059-0500	RedLemon	🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:26.969158-0500	RedLemon	🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:26.969259-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:26.969372-0500	RedLemon	🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:26.969480-0500	RedLemon	🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.969620-0500	RedLemon	🗓 Schedule Calc: Thunderbolts* | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.969758-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.969887-0500	RedLemon	🗓 Schedule Calc: Godzilla: King of the Monsters | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:26.970005-0500	RedLemon	🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.970118-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:26.970232-0500	RedLemon	🗓 Schedule Calc: The Negotiator | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:26.970381-0500	RedLemon	🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:26.970519-0500	RedLemon	🗓 Schedule Calc: Between Worlds | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:26.970638-0500	RedLemon	🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:26.970766-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 1 | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:26.970880-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.970994-0500	RedLemon	🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:26.971113-0500	RedLemon	🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:26.971225-0500	RedLemon	🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+default	13:47:26.971339-0500	RedLemon	🗓 Schedule Calc: The Marvels | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.971460-0500	RedLemon	🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:26.971585-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:26.971697-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:26.971816-0500	RedLemon	🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.971940-0500	RedLemon	🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:26.972059-0500	RedLemon	🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.972191-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Prisoner of Azkaban | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:26.972306-0500	RedLemon	🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:26.972418-0500	RedLemon	🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:26.972528-0500	RedLemon	🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:26.972645-0500	RedLemon	🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.972755-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.972862-0500	RedLemon	🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:26.972945-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:26.973010-0500	RedLemon	🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:26.973184-0500	RedLemon	🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:26.974225-0500	RedLemon	🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:26.974402-0500	RedLemon	🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:26.974565-0500	RedLemon	🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:26.974697-0500	RedLemon	🗓 Schedule Calc: Shrek Forever After | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.974818-0500	RedLemon	🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:26.974934-0500	RedLemon	🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:26.976322-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:26.976711-0500	RedLemon	🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.977260-0500	RedLemon	🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:26.977751-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:26.978087-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.978207-0500	RedLemon	🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:26.980043-0500	RedLemon	🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:26.980218-0500	RedLemon	🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:26.980362-0500	RedLemon	🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:26.980485-0500	RedLemon	🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:26.980601-0500	RedLemon	🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:26.980734-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.982183-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:26.982750-0500	RedLemon	🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.983045-0500	RedLemon	🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.983280-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.983846-0500	RedLemon	🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:26.983987-0500	RedLemon	🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:26.984059-0500	RedLemon	🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.984119-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.984730-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.984802-0500	RedLemon	🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.984863-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.984924-0500	RedLemon	🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+default	13:47:26.984983-0500	RedLemon	🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:26.985042-0500	RedLemon	🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:26.985167-0500	RedLemon	🗓 Schedule Calc: Girls Trip | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:26.986243-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:26.986371-0500	RedLemon	🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:26.986480-0500	RedLemon	🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:26.986644-0500	RedLemon	🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:26.986716-0500	RedLemon	🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:26.986777-0500	RedLemon	🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:26.986893-0500	RedLemon	🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:26.987049-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Order of the Phoenix | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:26.987184-0500	RedLemon	🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:26.987317-0500	RedLemon	🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:26.987478-0500	RedLemon	🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.987633-0500	RedLemon	🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:26.987814-0500	RedLemon	🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:26.988014-0500	RedLemon	🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:26.988198-0500	RedLemon	🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:26.988379-0500	RedLemon	🗓 Schedule Calc: The Monkey | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:26.988497-0500	RedLemon	🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:26.988681-0500	RedLemon	🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:26.988789-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.988890-0500	RedLemon	🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+default	13:47:26.988989-0500	RedLemon	🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:26.989105-0500	RedLemon	🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:26.989209-0500	RedLemon	🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:26.989310-0500	RedLemon	🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:26.989464-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:26.989593-0500	RedLemon	🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.989710-0500	RedLemon	🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:26.989824-0500	RedLemon	🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:26.989938-0500	RedLemon	🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:26.990052-0500	RedLemon	🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.990165-0500	RedLemon	🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+default	13:47:26.990278-0500	RedLemon	🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:26.990395-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:26.990504-0500	RedLemon	🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:26.990617-0500	RedLemon	🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:26.990761-0500	RedLemon	🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.990923-0500	RedLemon	🗓 Schedule Calc: Godzilla | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.991010-0500	RedLemon	🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:26.991075-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:26.991142-0500	RedLemon	🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:26.991203-0500	RedLemon	🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:26.991264-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:26.991314-0500	RedLemon	🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:26.991509-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:26.992568-0500	RedLemon	🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:26.992816-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:26.993014-0500	RedLemon	🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:26.993633-0500	RedLemon	🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:26.994086-0500	RedLemon	🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:26.994322-0500	RedLemon	🗓 Schedule Calc: Conan the Barbarian | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:26.994530-0500	RedLemon	🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:26.994791-0500	RedLemon	🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:26.995059-0500	RedLemon	🗓 Schedule Calc: The Medallion | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:26.995389-0500	RedLemon	🗓 Schedule Calc: Predator | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.996181-0500	RedLemon	🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:26.996762-0500	RedLemon	🗓 Schedule Calc: Predators | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:26.996989-0500	RedLemon	🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:26.997560-0500	RedLemon	🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:26.997761-0500	RedLemon	🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:26.997957-0500	RedLemon	🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:26.998116-0500	RedLemon	🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:26.998205-0500	RedLemon	🗓 Schedule Calc: Train to Busan | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:26.998275-0500	RedLemon	🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+default	13:47:26.998425-0500	RedLemon	🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:26.998718-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:26.998967-0500	RedLemon	🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+default	13:47:26.999217-0500	RedLemon	🗓 Schedule Calc: Inside Out 2 | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:26.999458-0500	RedLemon	🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:27.999771-0500	RedLemon	🗓 Schedule Calc: The Barbarian | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+default	13:47:27.000003-0500	RedLemon	🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:27.000235-0500	RedLemon	🗓 Schedule Calc: Taxi Driver | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:27.000638-0500	RedLemon	🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:27.000758-0500	RedLemon	🗓 Schedule Calc: War | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:27.000871-0500	RedLemon	🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+default	13:47:27.000989-0500	RedLemon	🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:27.001101-0500	RedLemon	🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:27.001209-0500	RedLemon	🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:27.001321-0500	RedLemon	🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:27.001430-0500	RedLemon	🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:27.001547-0500	RedLemon	🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:27.001660-0500	RedLemon	🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:27.001774-0500	RedLemon	🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:27.001885-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:27.001996-0500	RedLemon	🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+default	13:47:27.002099-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:27.002204-0500	RedLemon	🗓 Schedule Calc: The Godfather | RuntimeStr: 175 min -> 175m | Duration: 11100.0s
+default	13:47:27.002315-0500	RedLemon	🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:27.002435-0500	RedLemon	🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:27.002537-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:27.002633-0500	RedLemon	🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:27.002723-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:27.002813-0500	RedLemon	🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:27.002904-0500	RedLemon	🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:27.002990-0500	RedLemon	🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:27.003081-0500	RedLemon	🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:27.003170-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:27.003257-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:27.003345-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:27.003432-0500	RedLemon	🗓 Schedule Calc: The Parent Trap | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:27.003669-0500	RedLemon	🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:27.004080-0500	RedLemon	🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:27.004409-0500	RedLemon	🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:27.004633-0500	RedLemon	🗓 Schedule Calc: Aliens vs. Predator: Requiem | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:27.004756-0500	RedLemon	🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:27.004834-0500	RedLemon	🗓 Schedule Calc: Baby Boy | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:27.004901-0500	RedLemon	🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:27.005085-0500	RedLemon	🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:27.005398-0500	RedLemon	🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:27.007086-0500	RedLemon	🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:27.009263-0500	RedLemon	🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:27.011487-0500	RedLemon	🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:27.011596-0500	RedLemon	🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:27.011673-0500	RedLemon	🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:27.011737-0500	RedLemon	🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:27.011797-0500	RedLemon	🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:27.011898-0500	RedLemon	🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:27.012054-0500	RedLemon	🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:27.012260-0500	RedLemon	🗓 Schedule Calc: Evil Dead 2 | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:27.012482-0500	RedLemon	🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:27.012716-0500	RedLemon	🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:27.012937-0500	RedLemon	🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:27.013047-0500	RedLemon	🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:27.013148-0500	RedLemon	🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+default	13:47:27.013245-0500	RedLemon	🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:27.013341-0500	RedLemon	🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:27.013437-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:27.013550-0500	RedLemon	🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:27.013655-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:27.013756-0500	RedLemon	🗓 Schedule Calc: Contact | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:27.013856-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:27.013962-0500	RedLemon	🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:27.014065-0500	RedLemon	🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:27.014163-0500	RedLemon	🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:27.014260-0500	RedLemon	🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:27.014359-0500	RedLemon	🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:27.014461-0500	RedLemon	🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:27.014563-0500	RedLemon	🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:27.014659-0500	RedLemon	🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:27.014758-0500	RedLemon	🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:27.014858-0500	RedLemon	🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:27.014959-0500	RedLemon	🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:27.015060-0500	RedLemon	🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:27.015160-0500	RedLemon	🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:27.015256-0500	RedLemon	🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:27.015352-0500	RedLemon	🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:27.015454-0500	RedLemon	🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:27.015556-0500	RedLemon	🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:27.015655-0500	RedLemon	🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:27.015755-0500	RedLemon	🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:27.016300-0500	RedLemon	🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:27.016433-0500	RedLemon	🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:27.016565-0500	RedLemon	🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:27.016968-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:27.017095-0500	RedLemon	🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:27.017213-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:27.017592-0500	RedLemon	🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:27.018095-0500	RedLemon	🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:27.018409-0500	RedLemon	🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:27.019099-0500	RedLemon	🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:27.019357-0500	RedLemon	🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:27.019655-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:27.019992-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:27.020384-0500	RedLemon	🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:27.020772-0500	RedLemon	🗓 Schedule Calc: The Orphanage | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:27.021322-0500	RedLemon	🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:27.021524-0500	RedLemon	🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:27.021717-0500	RedLemon	🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:27.021884-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:27.022203-0500	RedLemon	🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:27.022454-0500	RedLemon	🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:27.022716-0500	RedLemon	🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:27.023094-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:27.023804-0500	RedLemon	🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:27.024177-0500	RedLemon	🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:27.024411-0500	RedLemon	🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:27.024692-0500	RedLemon	🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:27.025114-0500	RedLemon	🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:27.025789-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:27.025948-0500	RedLemon	🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:27.026062-0500	RedLemon	🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:27.026778-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:27.027112-0500	RedLemon	🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:27.027400-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:27.028024-0500	RedLemon	🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:27.028214-0500	RedLemon	🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.192676-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.192790-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.192894-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.193015-0500	RedLemon	🗓 Schedule Calc: Pacific Rim | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:28.193130-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Sorcerer's Stone | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:28.193245-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.193362-0500	RedLemon	🗓 Schedule Calc: Deadpool 2 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:28.193471-0500	RedLemon	🗓 Schedule Calc: Split | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:28.193581-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: The Curse of the Black Pearl | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:28.193682-0500	RedLemon	🗓 Schedule Calc: The Expendables 4 | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.193837-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.193958-0500	RedLemon	🗓 Schedule Calc: Captain America: Civil War | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:28.194083-0500	RedLemon	🗓 Schedule Calc: Avengers: Age of Ultron | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.194247-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.194389-0500	RedLemon	🗓 Schedule Calc: Doctor Strange in the Multiverse of Madness | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.194509-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:28.194626-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.194746-0500	RedLemon	🗓 Schedule Calc: Kraven the Hunter | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.194859-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.194969-0500	RedLemon	🗓 Schedule Calc: Thor: Ragnarok | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:28.195077-0500	RedLemon	🗓 Schedule Calc: Se7en | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.195188-0500	RedLemon	🗓 Schedule Calc: xXx: Return of Xander Cage | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.195303-0500	RedLemon	🗓 Schedule Calc: The Expendables 3 | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.195420-0500	RedLemon	🗓 Schedule Calc: Indiana Jones and the Dial of Destiny | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:28.195530-0500	RedLemon	🗓 Schedule Calc: Flubber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.195672-0500	RedLemon	🗓 Schedule Calc: The Simpsons Movie | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:28.195775-0500	RedLemon	🗓 Schedule Calc: Black Water | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.195863-0500	RedLemon	🗓 Schedule Calc: Shrek 5 | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:28.195959-0500	RedLemon	🗓 Schedule Calc: Apocalypse Now | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:28.196055-0500	RedLemon	🗓 Schedule Calc: Tron: Legacy | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.196152-0500	RedLemon	🗓 Schedule Calc: White Chicks | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.196248-0500	RedLemon	🗓 Schedule Calc: The Mummy Returns | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.196343-0500	RedLemon	🗓 Schedule Calc: Cast Away | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:28.196440-0500	RedLemon	🗓 Schedule Calc: The Sixth Sense | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.196541-0500	RedLemon	🗓 Schedule Calc: Lucy | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:28.196679-0500	RedLemon	🗓 Schedule Calc: Aliens | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.196821-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: The Ballad of Songbirds & Snakes | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:28.196945-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Fallen Kingdom | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.197062-0500	RedLemon	🗓 Schedule Calc: Death Race | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.197206-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.197324-0500	RedLemon	🗓 Schedule Calc: Silent Hill | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:28.197432-0500	RedLemon	🗓 Schedule Calc: Monsters, Inc. | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:28.197537-0500	RedLemon	🗓 Schedule Calc: Bad Boys II | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:28.197696-0500	RedLemon	🗓 Schedule Calc: The Conjuring 2 | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:28.197779-0500	RedLemon	🗓 Schedule Calc: Nope | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.197912-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Goblet of Fire | RuntimeStr: 157 min -> 157m | Duration: 10020.0s
+default	13:47:28.198246-0500	RedLemon	🗓 Schedule Calc: Blind Fury | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:28.198438-0500	RedLemon	🗓 Schedule Calc: Thor | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.198705-0500	RedLemon	🗓 Schedule Calc: 28 Years Later | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.198961-0500	RedLemon	🗓 Schedule Calc: Despicable Me | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:28.199266-0500	RedLemon	🗓 Schedule Calc: Black Swan | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.199934-0500	RedLemon	🗓 Schedule Calc: Iron Man 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.200051-0500	RedLemon	🗓 Schedule Calc: Bullet Train | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.200133-0500	RedLemon	🗓 Schedule Calc: The Pacifier | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:28.200210-0500	RedLemon	🗓 Schedule Calc: Avengers: Endgame | RuntimeStr: 181 min -> 181m | Duration: 11460.0s
+default	13:47:28.200283-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 2 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.200350-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.200488-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.200649-0500	RedLemon	🗓 Schedule Calc: Anaconda | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:28.200834-0500	RedLemon	🗓 Schedule Calc: 300: Rise of an Empire | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.201622-0500	RedLemon	🗓 Schedule Calc: V for Vendetta | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.201725-0500	RedLemon	🗓 Schedule Calc: Shrek the Third | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.201803-0500	RedLemon	🗓 Schedule Calc: The Mummy: Tomb of the Dragon Emperor | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:28.201884-0500	RedLemon	🗓 Schedule Calc: Parasite | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:28.201955-0500	RedLemon	🗓 Schedule Calc: Hereditary | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:28.202018-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man 2 | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.202166-0500	RedLemon	🗓 Schedule Calc: Monster | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:28.202373-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.202512-0500	RedLemon	🗓 Schedule Calc: Apocalypto | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.202657-0500	RedLemon	🗓 Schedule Calc: Face/Off | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.202792-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Rebirth | RuntimeStr: 134 min -> 134m | Duration: 8640.0s
+default	13:47:28.202924-0500	RedLemon	🗓 Schedule Calc: Top Gun | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.203062-0500	RedLemon	🗓 Schedule Calc: The Menu | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.203195-0500	RedLemon	🗓 Schedule Calc: Terminator Salvation | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.203337-0500	RedLemon	🗓 Schedule Calc: Scouts Guide to the Zombie Apocalypse | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.203469-0500	RedLemon	🗓 Schedule Calc: Civil War | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.203608-0500	RedLemon	🗓 Schedule Calc: American History X | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.203736-0500	RedLemon	🗓 Schedule Calc: We're the Millers | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.203876-0500	RedLemon	🗓 Schedule Calc: Renfield | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.204005-0500	RedLemon	🗓 Schedule Calc: Dracula | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.204133-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.204262-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.204390-0500	RedLemon	🗓 Schedule Calc: Kung Fu Hustle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.204514-0500	RedLemon	🗓 Schedule Calc: Colombiana | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.204639-0500	RedLemon	🗓 Schedule Calc: Night at the Museum | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.204766-0500	RedLemon	🗓 Schedule Calc: MaXXXine | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.204900-0500	RedLemon	🗓 Schedule Calc: Dune: Part Two | RuntimeStr: 167 min -> 167m | Duration: 10620.0s
+default	13:47:28.205025-0500	RedLemon	🗓 Schedule Calc: Spider-Man 3 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.205152-0500	RedLemon	🗓 Schedule Calc: Terminator Genisys | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.205353-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 2 | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.205533-0500	RedLemon	🗓 Schedule Calc: Godzilla x Kong: The New Empire | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.205749-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.205940-0500	RedLemon	🗓 Schedule Calc: Final Destination: Bloodlines | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.206392-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Men Tell No Tales | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.206521-0500	RedLemon	🗓 Schedule Calc: Prey | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.206659-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.206789-0500	RedLemon	🗓 Schedule Calc: Shrek | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:28.206916-0500	RedLemon	🗓 Schedule Calc: Now You See Me | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:28.207053-0500	RedLemon	🗓 Schedule Calc: Jurassic World | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.207180-0500	RedLemon	🗓 Schedule Calc: Drive | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.207307-0500	RedLemon	🗓 Schedule Calc: The Emperor's New Groove | RuntimeStr: 78 min -> 78m | Duration: 5280.0s
+default	13:47:28.207434-0500	RedLemon	🗓 Schedule Calc: Venom | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:28.208146-0500	RedLemon	🗓 Schedule Calc: Transformers: Age of Extinction | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:28.208218-0500	RedLemon	🗓 Schedule Calc: Shaft | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.208277-0500	RedLemon	🗓 Schedule Calc: A Quiet Place: Day One | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.208336-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 1 | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.208394-0500	RedLemon	🗓 Schedule Calc: Black Hawk Down | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:28.208451-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.208596-0500	RedLemon	🗓 Schedule Calc: Alien³ | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.208781-0500	RedLemon	🗓 Schedule Calc: The Strangers: Chapter 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.208945-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Mockingjay - Part 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.209088-0500	RedLemon	🗓 Schedule Calc: Fury | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.209300-0500	RedLemon	🗓 Schedule Calc: Rush Hour 3 | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:28.209599-0500	RedLemon	🗓 Schedule Calc: Avatar | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:28.210144-0500	RedLemon	🗓 Schedule Calc: Jumanji: The Next Level | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.210416-0500	RedLemon	🗓 Schedule Calc: The Matrix Reloaded | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:28.210964-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.211277-0500	RedLemon	🗓 Schedule Calc: Hostel | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:28.211522-0500	RedLemon	🗓 Schedule Calc: The Green Mile | RuntimeStr: 189 min -> 189m | Duration: 11940.0s
+default	13:47:28.211802-0500	RedLemon	🗓 Schedule Calc: Gladiator II | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:28.212141-0500	RedLemon	🗓 Schedule Calc: The Nun II | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.212332-0500	RedLemon	🗓 Schedule Calc: The Conjuring: Last Rites | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:28.212479-0500	RedLemon	🗓 Schedule Calc: Blade Runner 2049 | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:28.212599-0500	RedLemon	🗓 Schedule Calc: Deadpool | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.212867-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Return of the King | RuntimeStr: 201 min -> 201m | Duration: 12660.0s
+default	13:47:28.213107-0500	RedLemon	🗓 Schedule Calc: RED | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.213321-0500	RedLemon	🗓 Schedule Calc: Elf | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.213565-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.214417-0500	RedLemon	🗓 Schedule Calc: X | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:28.214596-0500	RedLemon	🗓 Schedule Calc: The Martian | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.214755-0500	RedLemon	🗓 Schedule Calc: Ready Player One | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:28.214895-0500	RedLemon	🗓 Schedule Calc: Waterworld | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.215032-0500	RedLemon	🗓 Schedule Calc: Blue Streak | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.215157-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Fellowship of the Ring | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:28.215282-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.215409-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Half-Blood Prince | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:28.215542-0500	RedLemon	🗓 Schedule Calc: Troy | RuntimeStr: 163 min -> 163m | Duration: 10380.0s
+default	13:47:28.215665-0500	RedLemon	🗓 Schedule Calc: Fargo | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.215794-0500	RedLemon	🗓 Schedule Calc: Final Destination 3 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:28.215923-0500	RedLemon	🗓 Schedule Calc: Now You See Me 2 | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.216224-0500	RedLemon	🗓 Schedule Calc: Ninja Assassin | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.216356-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.216542-0500	RedLemon	🗓 Schedule Calc: Scarface | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:28.216861-0500	RedLemon	🗓 Schedule Calc: Shrek 2 | RuntimeStr: 92 min -> 92m | Duration: 6120.0s
+default	13:47:28.217113-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.218147-0500	RedLemon	🗓 Schedule Calc: 24: Redemption | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.218296-0500	RedLemon	🗓 Schedule Calc: Die Hard 2 | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.218421-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.218544-0500	RedLemon	🗓 Schedule Calc: 28 Days Later | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:28.218662-0500	RedLemon	🗓 Schedule Calc: Four Brothers | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.218754-0500	RedLemon	🗓 Schedule Calc: Real Steel | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.219338-0500	RedLemon	🗓 Schedule Calc: The Terminator | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.219711-0500	RedLemon	🗓 Schedule Calc: Psycho | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.220117-0500	RedLemon	🗓 Schedule Calc: Black Phone 2 | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.220514-0500	RedLemon	🗓 Schedule Calc: Baghead | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:28.220907-0500	RedLemon	🗓 Schedule Calc: Carry-On | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:28.221292-0500	RedLemon	🗓 Schedule Calc: The Suicide Squad | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.221993-0500	RedLemon	🗓 Schedule Calc: 2012 | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:28.222103-0500	RedLemon	🗓 Schedule Calc: Shutter Island | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:28.222249-0500	RedLemon	🗓 Schedule Calc: Iron Man | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.222755-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: At World's End | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:28.222956-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.223496-0500	RedLemon	🗓 Schedule Calc: District 9 | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:28.223659-0500	RedLemon	🗓 Schedule Calc: Kingdom of the Planet of the Apes | RuntimeStr: 145 min -> 145m | Duration: 9300.0s
+default	13:47:28.223797-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.223939-0500	RedLemon	🗓 Schedule Calc: Nobody | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.224131-0500	RedLemon	🗓 Schedule Calc: Edge of Tomorrow | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.224265-0500	RedLemon	🗓 Schedule Calc: Karate Kid: Legends | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:28.224421-0500	RedLemon	🗓 Schedule Calc: The Fall Guy | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.224606-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Chamber of Secrets | RuntimeStr: 161 min -> 161m | Duration: 10260.0s
+default	13:47:28.224775-0500	RedLemon	🗓 Schedule Calc: Venom: The Last Dance | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.224944-0500	RedLemon	🗓 Schedule Calc: The Illusionist | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.225119-0500	RedLemon	🗓 Schedule Calc: Transformers One | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.225270-0500	RedLemon	🗓 Schedule Calc: The Mummy | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.225408-0500	RedLemon	🗓 Schedule Calc: Predator: Badlands | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.225542-0500	RedLemon	🗓 Schedule Calc: Paranormal Activity | RuntimeStr: 86 min -> 86m | Duration: 5760.0s
+default	13:47:28.225706-0500	RedLemon	🗓 Schedule Calc: F1: The Movie | RuntimeStr: 156 min -> 156m | Duration: 9960.0s
+default	13:47:28.225861-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 4 | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:28.225999-0500	RedLemon	🗓 Schedule Calc: Mickey 17 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.226147-0500	RedLemon	🗓 Schedule Calc: Despicable Me 2 | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.226311-0500	RedLemon	🗓 Schedule Calc: Madagascar: Escape 2 Africa | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:28.226461-0500	RedLemon	🗓 Schedule Calc: Frankenstein | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:28.226596-0500	RedLemon	🗓 Schedule Calc: Gattaca | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.226747-0500	RedLemon	🗓 Schedule Calc: The Amazing Spider-Man | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:28.226914-0500	RedLemon	🗓 Schedule Calc: Furiosa: A Mad Max Saga | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:28.227061-0500	RedLemon	🗓 Schedule Calc: Nobody 2 | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:28.227219-0500	RedLemon	🗓 Schedule Calc: Everything Everywhere All at Once | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:28.227390-0500	RedLemon	🗓 Schedule Calc: The Shining | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:28.227550-0500	RedLemon	🗓 Schedule Calc: The Hobbit: An Unexpected Journey | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:28.227710-0500	RedLemon	🗓 Schedule Calc: Inside Man | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.227853-0500	RedLemon	🗓 Schedule Calc: The Batman | RuntimeStr: 177 min -> 177m | Duration: 11220.0s
+default	13:47:28.227978-0500	RedLemon	🗓 Schedule Calc: Eyes Wide Shut | RuntimeStr: 159 min -> 159m | Duration: 10140.0s
+default	13:47:28.228128-0500	RedLemon	🗓 Schedule Calc: Sinners | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:28.228262-0500	RedLemon	🗓 Schedule Calc: Alien | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:28.228404-0500	RedLemon	🗓 Schedule Calc: Mystery Men | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.228660-0500	RedLemon	🗓 Schedule Calc: Kung Fu Panda 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.228816-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Fallout | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:28.228995-0500	RedLemon	🗓 Schedule Calc: Incredibles 2 | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:28.229250-0500	RedLemon	🗓 Schedule Calc: The Equalizer 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.229496-0500	RedLemon	🗓 Schedule Calc: Thunderbolts* | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.229742-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.230815-0500	RedLemon	🗓 Schedule Calc: Godzilla: King of the Monsters | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.231010-0500	RedLemon	🗓 Schedule Calc: Tron: Ares | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.231209-0500	RedLemon	🗓 Schedule Calc: Jurassic World: Dominion | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:28.231385-0500	RedLemon	🗓 Schedule Calc: The Negotiator | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:28.231528-0500	RedLemon	🗓 Schedule Calc: Gladiator | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:28.231704-0500	RedLemon	🗓 Schedule Calc: Between Worlds | RuntimeStr: 90 min -> 90m | Duration: 6000.0s
+default	13:47:28.232310-0500	RedLemon	🗓 Schedule Calc: Training Day | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.233124-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Deathly Hallows: Part 1 | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:28.233584-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.233890-0500	RedLemon	🗓 Schedule Calc: Constantine | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.234270-0500	RedLemon	🗓 Schedule Calc: Annabelle Comes Home | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:28.234678-0500	RedLemon	🗓 Schedule Calc: Kill Bill: The Whole Bloody Affair | RuntimeStr: 247 min -> 247m | Duration: 15420.0s
+default	13:47:28.235039-0500	RedLemon	🗓 Schedule Calc: The Marvels | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.235436-0500	RedLemon	🗓 Schedule Calc: The Usual Suspects | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:28.235575-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - Dead Reckoning Part One | RuntimeStr: 164 min -> 164m | Duration: 10440.0s
+default	13:47:28.236666-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.237090-0500	RedLemon	🗓 Schedule Calc: Thor: Love and Thunder | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.237257-0500	RedLemon	🗓 Schedule Calc: Night at the Museum: Secret of the Tomb | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.237366-0500	RedLemon	🗓 Schedule Calc: Dawn of the Planet of the Apes | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.237637-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Prisoner of Azkaban | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.237828-0500	RedLemon	🗓 Schedule Calc: Johnny English | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:28.239032-0500	RedLemon	🗓 Schedule Calc: Scream | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:28.239173-0500	RedLemon	🗓 Schedule Calc: Little Man | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.239578-0500	RedLemon	🗓 Schedule Calc: Furious 7 | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.239936-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.240221-0500	RedLemon	🗓 Schedule Calc: Dune: Part One | RuntimeStr: 155 min -> 155m | Duration: 9900.0s
+default	13:47:28.240346-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.240458-0500	RedLemon	🗓 Schedule Calc: The Incredible Hulk | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.240746-0500	RedLemon	🗓 Schedule Calc: Batman Begins | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:28.240870-0500	RedLemon	🗓 Schedule Calc: Man of Steel | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:28.240988-0500	RedLemon	🗓 Schedule Calc: The Conjuring | RuntimeStr: 112 min -> 112m | Duration: 7320.0s
+default	13:47:28.241154-0500	RedLemon	🗓 Schedule Calc: Five Nights at Freddy's | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.241368-0500	RedLemon	🗓 Schedule Calc: Shrek Forever After | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.241583-0500	RedLemon	🗓 Schedule Calc: M3GAN 2.0 | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:28.241704-0500	RedLemon	🗓 Schedule Calc: Underworld | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.241978-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: Dead Man's Chest | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:28.242110-0500	RedLemon	🗓 Schedule Calc: Iron Man 3 | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.242225-0500	RedLemon	🗓 Schedule Calc: The Departed | RuntimeStr: 151 min -> 151m | Duration: 9660.0s
+default	13:47:28.242333-0500	RedLemon	🗓 Schedule Calc: Mission: Impossible - The Final Reckoning | RuntimeStr: 170 min -> 170m | Duration: 10800.0s
+default	13:47:28.242439-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.242542-0500	RedLemon	🗓 Schedule Calc: Annabelle | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.242645-0500	RedLemon	🗓 Schedule Calc: Him | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:28.242750-0500	RedLemon	🗓 Schedule Calc: Van Helsing | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.242854-0500	RedLemon	🗓 Schedule Calc: The Conjuring: The Devil Made Me Do It | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.242959-0500	RedLemon	🗓 Schedule Calc: The Fan | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:28.243066-0500	RedLemon	🗓 Schedule Calc: Napoleon | RuntimeStr: 158 min -> 158m | Duration: 10080.0s
+default	13:47:28.243170-0500	RedLemon	🗓 Schedule Calc: Wild Hogs | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.243280-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:28.243387-0500	RedLemon	🗓 Schedule Calc: 1917 | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.243494-0500	RedLemon	🗓 Schedule Calc: I Am Legend | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.243602-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.243712-0500	RedLemon	🗓 Schedule Calc: Arrival | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:28.243820-0500	RedLemon	🗓 Schedule Calc: Joker: Folie à Deux | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:28.243932-0500	RedLemon	🗓 Schedule Calc: Back to the Future Part II | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.244043-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.244153-0500	RedLemon	🗓 Schedule Calc: Get Out | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.244263-0500	RedLemon	🗓 Schedule Calc: Old | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.244370-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.244483-0500	RedLemon	🗓 Schedule Calc: The Wolf of Wall Street | RuntimeStr: 180 min -> 180m | Duration: 11400.0s
+default	13:47:28.244595-0500	RedLemon	🗓 Schedule Calc: Surrogates | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:28.244709-0500	RedLemon	🗓 Schedule Calc: The Fifth Element | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.244821-0500	RedLemon	🗓 Schedule Calc: Girls Trip | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.244930-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.245044-0500	RedLemon	🗓 Schedule Calc: World War Z | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:28.245237-0500	RedLemon	🗓 Schedule Calc: Heretic | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.245393-0500	RedLemon	🗓 Schedule Calc: Inglourious Basterds | RuntimeStr: 153 min -> 153m | Duration: 9780.0s
+default	13:47:28.245544-0500	RedLemon	🗓 Schedule Calc: Logan | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.245711-0500	RedLemon	🗓 Schedule Calc: Man on Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:28.245821-0500	RedLemon	🗓 Schedule Calc: Evil Dead Rise | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:28.245918-0500	RedLemon	🗓 Schedule Calc: Harry Potter and the Order of the Phoenix | RuntimeStr: 138 min -> 138m | Duration: 8880.0s
+default	13:47:28.246012-0500	RedLemon	🗓 Schedule Calc: Predator 2 | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.246109-0500	RedLemon	🗓 Schedule Calc: Saw | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.246735-0500	RedLemon	🗓 Schedule Calc: Abigail | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.246992-0500	RedLemon	🗓 Schedule Calc: Interstellar | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:28.247262-0500	RedLemon	🗓 Schedule Calc: Taken | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:28.247517-0500	RedLemon	🗓 Schedule Calc: The Drop | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:28.247739-0500	RedLemon	🗓 Schedule Calc: Aquaman | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:28.247946-0500	RedLemon	🗓 Schedule Calc: The Monkey | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.248174-0500	RedLemon	🗓 Schedule Calc: The Faculty | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.250194-0500	RedLemon	🗓 Schedule Calc: Home Alone 2: Lost in New York | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:28.250325-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.250477-0500	RedLemon	🗓 Schedule Calc: Cloud Atlas | RuntimeStr: 172 min -> 172m | Duration: 10920.0s
+default	13:47:28.250610-0500	RedLemon	🗓 Schedule Calc: Avengers: Infinity War | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:28.250909-0500	RedLemon	🗓 Schedule Calc: Scary Movie 2 | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:28.251193-0500	RedLemon	🗓 Schedule Calc: Chronicle | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:28.251449-0500	RedLemon	🗓 Schedule Calc: Back to the Future | RuntimeStr: 116 min -> 116m | Duration: 7560.0s
+default	13:47:28.251966-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.252371-0500	RedLemon	🗓 Schedule Calc: The Mask | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.252732-0500	RedLemon	🗓 Schedule Calc: Meet the Robinsons | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:28.253129-0500	RedLemon	🗓 Schedule Calc: Orphan | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.253359-0500	RedLemon	🗓 Schedule Calc: Terminator 2: Judgment Day | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.253871-0500	RedLemon	🗓 Schedule Calc: Bad Boys | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.253997-0500	RedLemon	🗓 Schedule Calc: Fast X | RuntimeStr: 142 min -> 142m | Duration: 9120.0s
+default	13:47:28.254089-0500	RedLemon	🗓 Schedule Calc: The Matrix | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:28.254169-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.254424-0500	RedLemon	🗓 Schedule Calc: Nosferatu | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:28.254532-0500	RedLemon	🗓 Schedule Calc: Transformers: Rise of the Beasts | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.254873-0500	RedLemon	🗓 Schedule Calc: It Follows | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.254966-0500	RedLemon	🗓 Schedule Calc: Godzilla | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.255120-0500	RedLemon	🗓 Schedule Calc: Fight Club | RuntimeStr: 139 min -> 139m | Duration: 8940.0s
+default	13:47:28.255285-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.255435-0500	RedLemon	🗓 Schedule Calc: Jingle All the Way | RuntimeStr: 89 min -> 89m | Duration: 5940.0s
+default	13:47:28.255585-0500	RedLemon	🗓 Schedule Calc: The Super Mario Bros. Movie | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.255819-0500	RedLemon	🗓 Schedule Calc: Candyman | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.255959-0500	RedLemon	🗓 Schedule Calc: A Minecraft Movie | RuntimeStr: nil -> 120m | Duration: 7800.0s
+default	13:47:28.256100-0500	RedLemon	🗓 Schedule Calc: Smile | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.256238-0500	RedLemon	🗓 Schedule Calc: The Substance | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.256376-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.256515-0500	RedLemon	🗓 Schedule Calc: Companion | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.256689-0500	RedLemon	🗓 Schedule Calc: Spider-Man | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.256829-0500	RedLemon	🗓 Schedule Calc: Taken 3 | RuntimeStr: 109 min -> 109m | Duration: 7140.0s
+default	13:47:28.256963-0500	RedLemon	🗓 Schedule Calc: Conan the Barbarian | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.257097-0500	RedLemon	🗓 Schedule Calc: Mr. & Mrs. Smith | RuntimeStr: 120 min -> 120m | Duration: 7800.0s
+default	13:47:28.257229-0500	RedLemon	🗓 Schedule Calc: The Maze Runner | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:28.257361-0500	RedLemon	🗓 Schedule Calc: The Medallion | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:28.257496-0500	RedLemon	🗓 Schedule Calc: Predator | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.257627-0500	RedLemon	🗓 Schedule Calc: Ballerina | RuntimeStr: 125 min -> 125m | Duration: 8100.0s
+default	13:47:28.257757-0500	RedLemon	🗓 Schedule Calc: Predators | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.257901-0500	RedLemon	🗓 Schedule Calc: Hot Fuzz | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.258038-0500	RedLemon	🗓 Schedule Calc: The Nun | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:28.258172-0500	RedLemon	🗓 Schedule Calc: Cobweb | RuntimeStr: 88 min -> 88m | Duration: 5880.0s
+default	13:47:28.258331-0500	RedLemon	🗓 Schedule Calc: The Matrix Resurrections | RuntimeStr: 147 min -> 147m | Duration: 9420.0s
+default	13:47:28.258467-0500	RedLemon	🗓 Schedule Calc: Riddick | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.258601-0500	RedLemon	🗓 Schedule Calc: Train to Busan | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:28.258733-0500	RedLemon	🗓 Schedule Calc: War 2 | RuntimeStr: 173 min -> 173m | Duration: 10980.0s
+default	13:47:28.258863-0500	RedLemon	🗓 Schedule Calc: The Big Lebowski | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:28.258991-0500	RedLemon	🗓 Schedule Calc: The Lord of the Rings: The Two Towers | RuntimeStr: 179 min -> 179m | Duration: 11340.0s
+default	13:47:28.259119-0500	RedLemon	🗓 Schedule Calc: Resident Evil: Red Falls | RuntimeStr: 53 min -> 53m | Duration: 3780.0s
+default	13:47:28.259251-0500	RedLemon	🗓 Schedule Calc: Inside Out 2 | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.259382-0500	RedLemon	🗓 Schedule Calc: Signs | RuntimeStr: 106 min -> 106m | Duration: 6960.0s
+default	13:47:28.259510-0500	RedLemon	🗓 Schedule Calc: The Barbarian | RuntimeStr: 83 min -> 83m | Duration: 5580.0s
+default	13:47:28.259644-0500	RedLemon	🗓 Schedule Calc: The Karate Kid | RuntimeStr: 140 min -> 140m | Duration: 9000.0s
+default	13:47:28.259774-0500	RedLemon	🗓 Schedule Calc: Taxi Driver | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.259903-0500	RedLemon	🗓 Schedule Calc: Inception | RuntimeStr: 148 min -> 148m | Duration: 9480.0s
+default	13:47:28.260034-0500	RedLemon	🗓 Schedule Calc: War | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.260163-0500	RedLemon	🗓 Schedule Calc: Avatar: The Way of Water | RuntimeStr: 192 min -> 192m | Duration: 12120.0s
+default	13:47:28.260292-0500	RedLemon	🗓 Schedule Calc: Code 3 | RuntimeStr: 100 min -> 100m | Duration: 6600.0s
+default	13:47:28.260421-0500	RedLemon	🗓 Schedule Calc: The Hobbit: The Battle of the Five Armies | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:28.260546-0500	RedLemon	🗓 Schedule Calc: Captain America: Brave New World | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.260670-0500	RedLemon	🗓 Schedule Calc: Exit Wounds | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.260795-0500	RedLemon	🗓 Schedule Calc: Snatch | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.260920-0500	RedLemon	🗓 Schedule Calc: Triangle | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.261044-0500	RedLemon	🗓 Schedule Calc: The Godfather Part III | RuntimeStr: 162 min -> 162m | Duration: 10320.0s
+default	13:47:28.261171-0500	RedLemon	🗓 Schedule Calc: Creed | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:28.261296-0500	RedLemon	🗓 Schedule Calc: The Black Phone | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.261426-0500	RedLemon	🗓 Schedule Calc: The Godfather Part II | RuntimeStr: 202 min -> 202m | Duration: 12720.0s
+default	13:47:28.261554-0500	RedLemon	🗓 Schedule Calc: Longlegs | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.261684-0500	RedLemon	🗓 Schedule Calc: The Godfather | RuntimeStr: 175 min -> 175m | Duration: 11100.0s
+default	13:47:28.262458-0500	RedLemon	🗓 Schedule Calc: The Last Samurai | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:28.262618-0500	RedLemon	🗓 Schedule Calc: The Dark Knight | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:28.262715-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 3 | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:28.262917-0500	RedLemon	🗓 Schedule Calc: The Equalizer | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.263117-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.263310-0500	RedLemon	🗓 Schedule Calc: The Imitation Game | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:28.263467-0500	RedLemon	🗓 Schedule Calc: Joe Dirt | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.263621-0500	RedLemon	🗓 Schedule Calc: X-Men: Days of Future Past | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.263773-0500	RedLemon	🗓 Schedule Calc: Rush Hour | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.263950-0500	RedLemon	🗓 Schedule Calc: Guardians of the Galaxy Vol. 2 | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.264298-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.264766-0500	RedLemon	🗓 Schedule Calc: The Hunger Games: Catching Fire | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:28.265147-0500	RedLemon	🗓 Schedule Calc: The Parent Trap | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:28.265708-0500	RedLemon	🗓 Schedule Calc: The Accountant 2 | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:28.266115-0500	RedLemon	🗓 Schedule Calc: xXx | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.267062-0500	RedLemon	🗓 Schedule Calc: A Haunted House 2 | RuntimeStr: 87 min -> 87m | Duration: 5820.0s
+default	13:47:28.267425-0500	RedLemon	🗓 Schedule Calc: Aliens vs. Predator: Requiem | RuntimeStr: 94 min -> 94m | Duration: 6240.0s
+default	13:47:28.267568-0500	RedLemon	🗓 Schedule Calc: Blade Runner | RuntimeStr: 118 min -> 118m | Duration: 7680.0s
+default	13:47:28.267697-0500	RedLemon	🗓 Schedule Calc: Baby Boy | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.267813-0500	RedLemon	🗓 Schedule Calc: 2001: A Space Odyssey | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:28.267930-0500	RedLemon	🗓 Schedule Calc: Léon: The Professional | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.268039-0500	RedLemon	🗓 Schedule Calc: The Long Walk | RuntimeStr: 108 min -> 108m | Duration: 7080.0s
+default	13:47:28.268146-0500	RedLemon	🗓 Schedule Calc: Stuber | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.268253-0500	RedLemon	🗓 Schedule Calc: Sinister | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.268357-0500	RedLemon	🗓 Schedule Calc: A.I. Artificial Intelligence | RuntimeStr: 146 min -> 146m | Duration: 9360.0s
+default	13:47:28.268467-0500	RedLemon	🗓 Schedule Calc: Alien: Romulus | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.268584-0500	RedLemon	🗓 Schedule Calc: The Woman in Cabin 10 | RuntimeStr: 95 min -> 95m | Duration: 6300.0s
+default	13:47:28.268699-0500	RedLemon	🗓 Schedule Calc: Wanted | RuntimeStr: 110 min -> 110m | Duration: 7200.0s
+default	13:47:28.268817-0500	RedLemon	🗓 Schedule Calc: Ocean's Eight | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.268932-0500	RedLemon	🗓 Schedule Calc: Joker | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.269043-0500	RedLemon	🗓 Schedule Calc: Catch Me If You Can | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.269154-0500	RedLemon	🗓 Schedule Calc: Evil Dead 2 | RuntimeStr: 96 min -> 96m | Duration: 6360.0s
+default	13:47:28.269256-0500	RedLemon	🗓 Schedule Calc: Cargo | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.269361-0500	RedLemon	🗓 Schedule Calc: Barbie | RuntimeStr: 114 min -> 114m | Duration: 7440.0s
+default	13:47:28.269467-0500	RedLemon	🗓 Schedule Calc: Mad Max: Fury Road | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.269582-0500	RedLemon	🗓 Schedule Calc: Batman Returns | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.269695-0500	RedLemon	🗓 Schedule Calc: The Naked Gun | RuntimeStr: 85 min -> 85m | Duration: 5700.0s
+default	13:47:28.269792-0500	RedLemon	🗓 Schedule Calc: Cool Runnings | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.269882-0500	RedLemon	🗓 Schedule Calc: Fractured | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.269970-0500	RedLemon	🗓 Schedule Calc: Bugonia | RuntimeStr: 119 min -> 119m | Duration: 7740.0s
+default	13:47:28.270057-0500	RedLemon	🗓 Schedule Calc: Shooter | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.270160-0500	RedLemon	🗓 Schedule Calc: Weapons | RuntimeStr: 129 min -> 129m | Duration: 8340.0s
+default	13:47:28.270261-0500	RedLemon	🗓 Schedule Calc: Contact | RuntimeStr: 150 min -> 150m | Duration: 9600.0s
+default	13:47:28.270359-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.270459-0500	RedLemon	🗓 Schedule Calc: Road House | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.270560-0500	RedLemon	🗓 Schedule Calc: Deja Vu | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.270673-0500	RedLemon	🗓 Schedule Calc: Southpaw | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.270785-0500	RedLemon	🗓 Schedule Calc: Silent Night | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.270910-0500	RedLemon	🗓 Schedule Calc: Casino Royale | RuntimeStr: 144 min -> 144m | Duration: 9240.0s
+default	13:47:28.271024-0500	RedLemon	🗓 Schedule Calc: The Running Man | RuntimeStr: 133 min -> 133m | Duration: 8580.0s
+default	13:47:28.272478-0500	RedLemon	🗓 Schedule Calc: The Covenant | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.272705-0500	RedLemon	🗓 Schedule Calc: Bad Boys for Life | RuntimeStr: 124 min -> 124m | Duration: 8040.0s
+default	13:47:28.273252-0500	RedLemon	🗓 Schedule Calc: Blade: Trinity | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.273364-0500	RedLemon	🗓 Schedule Calc: Freaky Tales | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.273433-0500	RedLemon	🗓 Schedule Calc: The Fantastic Four: First Steps | RuntimeStr: 115 min -> 115m | Duration: 7500.0s
+default	13:47:28.273499-0500	RedLemon	🗓 Schedule Calc: Fast & Furious Presents: Hobbs & Shaw | RuntimeStr: 137 min -> 137m | Duration: 8820.0s
+default	13:47:28.274086-0500	RedLemon	🗓 Schedule Calc: No Country for Old Men | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.275295-0500	RedLemon	🗓 Schedule Calc: Top Gun: Maverick | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:28.275444-0500	RedLemon	🗓 Schedule Calc: No Escape | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.275576-0500	RedLemon	🗓 Schedule Calc: The Exorcist | RuntimeStr: 122 min -> 122m | Duration: 7920.0s
+default	13:47:28.275762-0500	RedLemon	🗓 Schedule Calc: Die Hard | RuntimeStr: 132 min -> 132m | Duration: 8520.0s
+default	13:47:28.276004-0500	RedLemon	🗓 Schedule Calc: The Smashing Machine | RuntimeStr: 123 min -> 123m | Duration: 7980.0s
+default	13:47:28.276226-0500	RedLemon	🗓 Schedule Calc: Fruitvale Station | RuntimeStr: 82 min -> 82m | Duration: 5520.0s
+default	13:47:28.276458-0500	RedLemon	🗓 Schedule Calc: Playdate | RuntimeStr: 93 min -> 93m | Duration: 6180.0s
+default	13:47:28.276595-0500	RedLemon	🗓 Schedule Calc: Presence | RuntimeStr: 84 min -> 84m | Duration: 5640.0s
+default	13:47:28.276806-0500	RedLemon	🗓 Schedule Calc: Fracture | RuntimeStr: 113 min -> 113m | Duration: 7380.0s
+default	13:47:28.276990-0500	RedLemon	🗓 Schedule Calc: Insidious | RuntimeStr: 102 min -> 102m | Duration: 6720.0s
+default	13:47:28.277120-0500	RedLemon	🗓 Schedule Calc: Plane | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.277296-0500	RedLemon	🗓 Schedule Calc: It | RuntimeStr: 135 min -> 135m | Duration: 8700.0s
+default	13:47:28.277419-0500	RedLemon	🗓 Schedule Calc: Venom: Let There Be Carnage | RuntimeStr: 97 min -> 97m | Duration: 6420.0s
+default	13:47:28.277609-0500	RedLemon	🗓 Schedule Calc: Pulp Fiction | RuntimeStr: 154 min -> 154m | Duration: 9840.0s
+default	13:47:28.277736-0500	RedLemon	🗓 Schedule Calc: Men in Black | RuntimeStr: 98 min -> 98m | Duration: 6480.0s
+default	13:47:28.277966-0500	RedLemon	🗓 Schedule Calc: Batman v Superman: Dawn of Justice | RuntimeStr: 152 min -> 152m | Duration: 9720.0s
+default	13:47:28.278211-0500	RedLemon	🗓 Schedule Calc: Thir13en Ghosts | RuntimeStr: 91 min -> 91m | Duration: 6060.0s
+default	13:47:28.278451-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.278723-0500	RedLemon	🗓 Schedule Calc: Hall Pass | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.278923-0500	RedLemon	🗓 Schedule Calc: Ma | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.279182-0500	RedLemon	🗓 Schedule Calc: The Orphanage | RuntimeStr: 105 min -> 105m | Duration: 6900.0s
+default	13:47:28.279608-0500	RedLemon	🗓 Schedule Calc: The Prestige | RuntimeStr: 130 min -> 130m | Duration: 8400.0s
+default	13:47:28.279896-0500	RedLemon	🗓 Schedule Calc: Bring Her Back | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.280190-0500	RedLemon	🗓 Schedule Calc: Tower Heist | RuntimeStr: 104 min -> 104m | Duration: 6840.0s
+default	13:47:28.280468-0500	RedLemon	🗓 Schedule Calc: Pirates of the Caribbean: On Stranger Tides | RuntimeStr: 136 min -> 136m | Duration: 8760.0s
+default	13:47:28.283623-0500	RedLemon	🗓 Schedule Calc: The Dark Knight Rises | RuntimeStr: 165 min -> 165m | Duration: 10500.0s
+default	13:47:28.283812-0500	RedLemon	🗓 Schedule Calc: Escape Room | RuntimeStr: 99 min -> 99m | Duration: 6540.0s
+default	13:47:28.283997-0500	RedLemon	🗓 Schedule Calc: A Bronx Tale | RuntimeStr: 121 min -> 121m | Duration: 7860.0s
+default	13:47:28.284686-0500	RedLemon	🗓 Schedule Calc: It: Chapter Two | RuntimeStr: 169 min -> 169m | Duration: 10740.0s
+default	13:47:28.284920-0500	RedLemon	🗓 Schedule Calc: Kill Bill: Vol. 1 | RuntimeStr: 111 min -> 111m | Duration: 7260.0s
+default	13:47:28.285094-0500	RedLemon	🗓 Schedule Calc: Wonder Woman | RuntimeStr: 141 min -> 141m | Duration: 9060.0s
+default	13:47:28.285617-0500	RedLemon	🗓 Schedule Calc: Her | RuntimeStr: 126 min -> 126m | Duration: 8160.0s
+default	13:47:28.286530-0500	RedLemon	🗓 Schedule Calc: Deadpool & Wolverine | RuntimeStr: 128 min -> 128m | Duration: 8280.0s
+default	13:47:28.286715-0500	RedLemon	🗓 Schedule Calc: Central Intelligence | RuntimeStr: 107 min -> 107m | Duration: 7020.0s
+default	13:47:28.286829-0500	RedLemon	🗓 Schedule Calc: War of the Worlds | RuntimeStr: 117 min -> 117m | Duration: 7620.0s
+default	13:47:28.286933-0500	RedLemon	🗓 Schedule Calc: The Avengers | RuntimeStr: 143 min -> 143m | Duration: 9180.0s
+default	13:47:28.287043-0500	RedLemon	🗓 Schedule Calc: Borderlands | RuntimeStr: 101 min -> 101m | Duration: 6660.0s
+default	13:47:28.287149-0500	RedLemon	🗓 Schedule Calc: Smile 2 | RuntimeStr: 127 min -> 127m | Duration: 8220.0s
+default	13:47:28.287635-0500	RedLemon	🗓 Schedule Calc: The Jacket | RuntimeStr: 103 min -> 103m | Duration: 6780.0s
+default	13:47:28.288054-0500	RedLemon	🗓 Schedule Calc: John Wick: Chapter 3 - Parabellum | RuntimeStr: 131 min -> 131m | Duration: 8460.0s
+default	13:47:28.288270-0500	RedLemon	🗓 Schedule Calc: Gone Girl | RuntimeStr: 149 min -> 149m | Duration: 9540.0s
+default	13:47:28.288486-0500	RedLemon	🗓 Schedule Calc: Taken 2 | RuntimeStr: 91 min -> 91m | Duration: 6060.0s

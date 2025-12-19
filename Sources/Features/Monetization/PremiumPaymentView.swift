@@ -422,10 +422,13 @@ struct SuccessView: View {
             Button("Done") {
                 dismiss()
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .foregroundColor(.white) // Fix for invisible text
+            .padding(.vertical, 12)
+            .padding(.horizontal, 24)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
             .padding(.top, 20)
+            .buttonStyle(.plain) // Remove system styles completely
         }
         .padding()
         .transition(.scale)

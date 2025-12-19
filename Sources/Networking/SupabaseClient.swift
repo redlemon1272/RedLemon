@@ -957,14 +957,15 @@ class SupabaseClient: RoomManager, UserManager {
     }
 
     /// Fetch recent logs for Admin Dashboard
-    func getAppLogs(limit: Int = 50) async throws -> [AppLog] {
+    func getAppLogs(limit: Int = 50, offset: Int = 0) async throws -> [AppLog] {
         // USE SERVICE KEY to bypass RLS (admin needs to see ALL logs)
         let data = try await makeRequest(
             path: "/app_logs",
             query: [
                 "select": "*",
                 "order": "created_at.desc",
-                "limit": String(limit)
+                "limit": String(limit),
+                "offset": String(offset)
             ],
             headers: [
                 "Authorization": "Bearer \(Config.supabaseServiceKey)",

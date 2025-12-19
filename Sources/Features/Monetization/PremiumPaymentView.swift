@@ -7,7 +7,7 @@ struct PremiumPaymentView: View {
     @StateObject private var licenseManager = LicenseManager.shared
 
     // State
-    @State private var selectedChain: Chain = .btc
+    @State private var selectedChain: Chain = .evm
     @State private var assignedAddress: String?
     @State private var isLoadingAddress = false
     @State private var errorMessage: String?
@@ -18,33 +18,25 @@ struct PremiumPaymentView: View {
     @State private var exchangeRates: (btc: Double, eth: Double)?
 
     enum Chain: String, CaseIterable, Identifiable {
-        case btc = "btc"
         case evm = "evm"
-
 
         var id: String { rawValue }
 
         var displayName: String {
             switch self {
-            case .btc: return "Bitcoin (BTC)"
             case .evm: return "Ethereum & L2s (Base, Arb, Op, Poly)"
-
             }
         }
 
         var icon: String {
             switch self {
-            case .btc: return "bitcoinsign.circle.fill"
             case .evm: return "diamond.circle.fill" // SF Symbol approximation
-
             }
         }
 
         var color: Color {
             switch self {
-            case .btc: return .orange
             case .evm: return .blue
-
             }
         }
     }
@@ -107,7 +99,6 @@ struct PremiumPaymentView: View {
                         .cornerRadius(8)
                     }
 
-                    // 1. Select Chain
                     // 1. Select Chain (Custom Segmented Control)
                     HStack(spacing: 12) {
                         ForEach(Chain.allCases) { chain in
@@ -140,7 +131,6 @@ struct PremiumPaymentView: View {
                     }
                     .padding(.horizontal)
                     
-                    // EVM Clarity Note
                     // EVM Clarity Note
                     if selectedChain == .evm {
                         VStack(alignment: .leading, spacing: 6) {
@@ -206,19 +196,11 @@ struct PremiumPaymentView: View {
 
                                 if let cryptoAmount = calculateCryptoAmount(usd: usdVal) {
                                     VStack(spacing: 4) {
-                                        if selectedChain == .evm {
-                                            Text("Send exactly **\(cryptoAmount)**")
-                                                .font(.headline)
-                                            Text("OR **$\(String(format: "%.2f", usdVal))** USDC/USDT")
-                                                .font(.subheadline)
-                                                .foregroundColor(.secondary)
-                                        } else {
-                                            Text("Send exactly **\(cryptoAmount)**")
-                                                .font(.headline)
-                                            Text("(approx. $\(String(format: "%.2f", usdVal)) USD)")
-                                                .font(.caption)
-                                                .foregroundColor(.secondary)
-                                        }
+                                        Text("Send exactly **\(cryptoAmount)**")
+                                            .font(.headline)
+                                        Text("OR **$\(String(format: "%.2f", usdVal))** USDC/USDT")
+                                            .font(.subheadline)
+                                            .foregroundColor(.secondary)
                                     }
                                     .multilineTextAlignment(.center)
                                 } else {
@@ -294,8 +276,8 @@ struct PremiumPaymentView: View {
         .overlay(
             Button(action: { dismiss() }) {
                 Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 24))
-                    .foregroundColor(.secondary.opacity(0.8))
+                .font(.system(size: 24))
+                .foregroundColor(.secondary.opacity(0.8))
             }
             .buttonStyle(.plain)
             .padding(16)
@@ -381,14 +363,9 @@ struct PremiumPaymentView: View {
     private func calculateCryptoAmount(usd: Double) -> String? {
         guard let rates = exchangeRates else { return nil }
 
-        if selectedChain == .btc {
-            let amount = usd / rates.btc
-            return String(format: "%.5f BTC", amount)
-        } else {
-            // EVM (ETH)
-            let amount = usd / rates.eth
-            return String(format: "%.4f ETH", amount)
-        }
+        // EVM (ETH) Only
+        let amount = usd / rates.eth
+        return String(format: "%.4f ETH", amount)
     }
 
     private func generateQRCode(for address: String, amountUSD: Double) -> NSImage {
@@ -409,23 +386,17 @@ struct PremiumPaymentView: View {
 
     private func formatPaymentURI(address: String, amountUSD: Double) -> String {
         guard let rates = exchangeRates else { return address }
-
-        if selectedChain == .btc {
-            let amountBTC = amountUSD / rates.btc
-            // BIP21: bitcoin:<address>?amount=<BTC>
-            return String(format: "bitcoin:%@?amount=%.8f", address, amountBTC)
-        } else {
-            // EIP-681: ethereum:<address>?value=<WEI>
-            // standard ETH decimal is 18
-            let amountETH = amountUSD / rates.eth
-            let wei = amountETH * 1_000_000_000_000_000_000
-            
-            // Compatibility: Some wallets look for "amount" (decimal) instead of "value" (wei)
-            // We provide BOTH to maximize success rate.
-            // value = integer string of wei (%.0f)
-            // amount = decimal string of eth (%.8f)
-            return String(format: "ethereum:%@?value=%.0f&amount=%.8f", address, wei, amountETH)
-        }
+        
+        // EIP-681: ethereum:<address>?value=<WEI>
+        // standard ETH decimal is 18
+        let amountETH = amountUSD / rates.eth
+        let wei = amountETH * 1_000_000_000_000_000_000
+        
+        // Compatibility: Some wallets look for "amount" (decimal) instead of "value" (wei)
+        // We provide BOTH to maximize success rate.
+        // value = integer string of wei (%.0f)
+        // amount = decimal string of eth (%.8f)
+        return String(format: "ethereum:%@?value=%.0f&amount=%.8f", address, wei, amountETH)
     }
 }
 
@@ -453,6 +424,7 @@ struct SuccessView: View {
             }
             .buttonStyle(.borderedProminent)
             .controlSize(.large)
+            .foregroundColor(.white) // Fix for invisible text
             .padding(.top, 20)
         }
         .padding()

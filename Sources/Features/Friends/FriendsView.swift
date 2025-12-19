@@ -530,17 +530,6 @@ struct FriendRow: View {
 
             // Menu
             Menu {
-                Button(action: { Task { await onToggleFavorite() } }) {
-                    Label(friend.isFavorite ? "Remove from Favorites" : "Add to Favorites",
-                          systemImage: friend.isFavorite ? "star.slash" : "star")
-                }
-
-                Button(action: onInvite) {
-                    Label("Invite to Watch Party", systemImage: "envelope")
-                }
-
-                Divider()
-
                 Button(role: .destructive, action: { Task { await onRemove() } }) {
                     Label("Remove Friend", systemImage: "person.crop.circle.badge.minus")
                 }

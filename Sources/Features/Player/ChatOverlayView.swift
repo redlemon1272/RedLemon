@@ -232,26 +232,39 @@ struct ChatOverlayView: View {
             )
         }
         
+        let uid = userId ?? ""
+        let isMe = uid == appState.currentUserId?.uuidString
+        let isFriend = socialService.friends.contains(where: { $0.id == uid })
+        
+        // If it's me, or if it's a friend and I'm not the host (so no kick/block), 
+        // there are no actions to take. Show plain text.
+        if isMe || (isFriend && !isHost) {
+            return AnyView(
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.blue)
+            )
+        }
+        
         return AnyView(
             Menu {
                 Text(username) // Header
 
-                if let uid = userId, uid != appState.currentUserId?.uuidString {
-                     let isFriend = socialService.friends.contains(where: { $0.id == uid })
-                     
+                if !isMe {
                      if !isFriend {
                          Button(action: {
                              Task { _ = await socialService.sendRequest(toUserId: uid) }
                          }) {
                              Label("Add Friend", systemImage: "person.badge.plus")
                          }
-                     }
-
-                     Button(action: {
-                         viewModel.toggleMute(userId: uid)
-                     }) {
-                         Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
-                               systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
+                         
+                         // Only allow muting non-friends (as per user request)
+                         Button(action: {
+                             viewModel.toggleMute(userId: uid)
+                         }) {
+                             Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
+                                   systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
+                         }
                      }
                      
                      // Host Options (Verify context)

@@ -464,7 +464,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         // Add mock chat messages for testing UI
         self.messages = [
-            ChatMessage(id: UUID().uuidString, username: "System", text: "Press ⌘ (Cmd) to toggle chat.", timestamp: Date())
+            ChatMessage(id: UUID().uuidString, username: "System", text: "Press ⌘ (Cmd) to toggle chat.", timestamp: Date(), isSystem: true)
         ]
         print("💬 Added mock chat messages for testing")
 
@@ -2730,7 +2730,8 @@ extension MPVPlayerViewModel {
             id: UUID().uuidString,
             username: "System",
             text: "👋 Left watch party",
-            timestamp: Date()
+            timestamp: Date(),
+            isSystem: true
         ))
         trimChatMessages()
 

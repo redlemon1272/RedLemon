@@ -349,7 +349,7 @@ struct SettingsView: View {
                     Image(systemName: "bolt.fill")
                         .font(.caption)
                         .foregroundColor(.yellow)
-                    Text("Crypto (BTC, ETH, USDC)")
+                    Text("Crypto (Ethereum, Base, Arbitrum, Optimism, Polygon, USDC, USDT)")
                         .font(.caption.weight(.medium))
                         .foregroundColor(.secondary)
                 }

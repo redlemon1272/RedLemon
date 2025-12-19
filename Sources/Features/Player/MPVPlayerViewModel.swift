@@ -1281,7 +1281,8 @@ class MPVPlayerViewModel: ObservableObject {
             id: UUID().uuidString,
             username: username,
             text: text,
-            timestamp: Date()
+            timestamp: Date(),
+            senderId: userId.uuidString
         )
 
         messages.append(message)

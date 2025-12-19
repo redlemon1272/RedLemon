@@ -237,6 +237,11 @@ struct ChatOverlayView: View {
         let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
         let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
         
+        // Debug Interaction
+        if username == "lemontom" || username == "ursinho" { // Debug specifics
+             print("[DEBUG MENU] User: \(username) | UID: '\(uid)' | MyID: '\(myId)' | isMe: \(isMe) | isFriend: \(isFriend)")
+        }
+        
         // If it's me, or if it's a friend and I'm not the host (so no kick/block), 
         // there are no actions to take. Show plain text.
         if isMe || (isFriend && !isHost) {

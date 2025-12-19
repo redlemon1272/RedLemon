@@ -24,6 +24,9 @@ class MPVWrapper: ObservableObject {
     
     // Track the current video filename for subtitle matching
     private var currentVideoFilename: String = ""
+    
+    // Track if we should resume playback after loading (Smart Paused Load)
+    private var shouldResumeAfterLoad: Bool = false
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -194,6 +197,68 @@ class MPVWrapper: ObservableObject {
         CGLUnlockContext(context)
     }
 
+    // MARK: - Smart Paused Load Implementation
+
+    /// Polls for subtitle tracks to appear, selects default, then resumes if needed
+    private func pollForTracksAndResume() async {
+        guard let handle = mpvHandle else { return }
+        
+        print("🔍 SMART-LOAD: Starting track polling loop...")
+        
+        // Timeout: 2.0 seconds max wait
+        let timeout = Date().addingTimeInterval(2.0)
+        var tracksFound = false
+        
+        // 1. Poll loop
+        while Date() < timeout {
+            var trackCount: Int64 = 0
+            mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
+            
+            // Check if we have strictly more than 0 tracks (or specific subtitle tracks if feasible, but ANY track count > video+audio usually implies success)
+            if trackCount > 2 { // Usually 1 video + 1 audio + N subs
+                tracksFound = true
+                break
+            }
+            
+            try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+        }
+        
+        if tracksFound {
+            print("✅ SMART-LOAD: Tracks found! Proceeding to selection.")
+        } else {
+            print("⚠️ SMART-LOAD: Timed out waiting for tracks. Proceeding anyway.")
+        }
+        
+        // 2. Select Tracks
+        await MainActor.run {
+             self.autoSelectEnglishAudio()
+             // Run it twice just to be safe (idempotent)
+             self.autoSelectEnglishAudio()
+             self.refreshSubtitleSelection()
+        }
+        
+        // 3. Execute Pending Seek (moved here to happen AFTER tracks ready)
+        if let targetTime = self.pendingSeekTime {
+             await MainActor.run {
+                 NSLog("🔄 MPV: Executing PENDING SEEK to %.1fs (Smart Load)", targetTime)
+                 Task { await SessionRecorder.shared.log(category: .player, message: "Executing Pending Seek", metadata: ["target": "\(targetTime)"]) }
+                 self.seek(to: targetTime)
+                 self.pendingSeekTime = nil
+             }
+        }
+        
+        // 4. Resume Playback if Autoplay was requested
+        if self.shouldResumeAfterLoad {
+            print("▶️ SMART-LOAD: Resuming playback (Autoplay requested)")
+             await MainActor.run {
+                 mpv_set_property_string(handle, "pause", "no")
+                 self.isPlaying = true
+             }
+        } else {
+             print("⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)")
+        }
+    }
+
     // MARK: - Smart Event Polling (Playback-Aware)
 
     private func pollEvents() async {
@@ -227,19 +292,17 @@ class MPVWrapper: ObservableObject {
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
             isFileLoaded = true
-            // Auto-select English audio and subtitles BEFORE playback starts (no stutter)
-            autoSelectEnglishAudio()
-            autoSelectEnglishAudio()
-            refreshSubtitleSelection()
             
-            // Execute pending seek if any
-            if let targetTime = self.pendingSeekTime {
-                NSLog("🔄 MPV: Executing PENDING SEEK to %.1fs after FILE_LOADED", targetTime)
-                Task { await SessionRecorder.shared.log(category: .player, message: "Executing Pending Seek", metadata: ["target": "\(targetTime)"]) }
-                // Use robust seek command with retry (calling self.seek again is safe now that isFileLoaded=true)
-                self.seek(to: targetTime)
-                self.pendingSeekTime = nil
+            // Smart Paused Load Strategy:
+            // 1. We are currently PAUSED (set by loadVideo).
+            // 2. We POLL until tracks appear (handling race condition).
+            // 3. We auto-select the best track.
+            // 4. We RESUME if requested.
+            
+            Task {
+                await self.pollForTracksAndResume()
             }
+            
             Task { await SessionRecorder.shared.log(category: .player, message: "File Loaded", metadata: ["duration": "\(self.duration)"]) }
         case MPV_EVENT_PLAYBACK_RESTART:
             isBuffering = false
@@ -396,53 +459,30 @@ class MPVWrapper: ObservableObject {
             return
         }
 
-        // CRITICAL FIX: For paused loads (watch party), we load normally then immediately pause
-        // Using 'loadfile "URL" pause' was failing with error -4
-        // Instead, we load the file and set pause=yes immediately after
-        if !autoplay {
-            NSLog("⏸️ Loading in paused mode (watch party)")
-            NSLog("🔗 URL: %@", url)
+        // SMART PAUSED LOAD:
+        // Always load PAUSED initially.
+        // If autoplay=true, we set a flag to unpause AFTER tracks are found (in pollForTracksAndResume).
+        
+        self.shouldResumeAfterLoad = autoplay
+        
+        // CRITICAL: Always set pause=yes BEFORE loading
+        mpv_set_property_string(handle, "pause", "yes")
 
-            // CRITICAL FIX: Set pause=yes BEFORE loading the file
-            // This ensures MPV initializes the file (firing FILE_LOADED and updating duration)
-            // but starts in a paused state.
-            mpv_set_property_string(handle, "pause", "yes")
-
-            // Load the file normally
-            let loadCommand = "loadfile \"\(url)\""
-            NSLog("🎬 MPV executing: %@", loadCommand)
-            let loadResult = mpv_command_string(handle, loadCommand)
-            NSLog("🎬 MPV loadfile result: %d", loadResult)
-
-            if loadResult >= 0 {
-                isPlaying = false
-                NSLog("✅ MPV loadfile succeeded (started paused)")
-                Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Paused)", metadata: ["url": url]) }
-            } else {
-                NSLog("❌ MPV loadfile failed with code: %d", loadResult)
-                NSLog("❌ Failed URL was: %@", url)
-                // Revert pause state if load failed
-                mpv_set_property_string(handle, "pause", "no")
-                Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(loadResult)"]) }
-            }
+        let command = "loadfile \"\(url)\""
+        NSLog("🎬 MPV executing: %@", command)
+        let result = mpv_command_string(handle, command)
+        
+        if result >= 0 {
+            // Update local state (we are technically paused right now)
+             isPlaying = false
+             NSLog("✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)")
+             Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Smart)", metadata: ["url": url]) }
         } else {
-            // Normal autoplay mode
-            // CRITICAL FIX: Explicitly set pause=no to ensure we don't inherit paused state from previous session
-            mpv_set_property_string(handle, "pause", "no")
-
-            let command = "loadfile \"\(url)\""
-            NSLog("🎬 MPV executing command: %@", command)
-            let result = mpv_command_string(handle, command)
-            NSLog("🎬 MPV loadfile result: %d", result)
-            if result >= 0 {
-                isPlaying = true
-                NSLog("✅ MPV loadfile succeeded, isPlaying set to true")
-                Task { await SessionRecorder.shared.log(category: .player, message: "Load Video (Autoplay)", metadata: ["url": url]) }
-            } else {
-                NSLog("❌ MPV loadfile failed with code: %d", result)
-                NSLog("❌ Failed URL was: %@", url)
-                Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(result)"]) }
-            }
+            NSLog("❌ MPV loadfile failed with code: %d", result)
+             // Clean up
+             self.shouldResumeAfterLoad = false
+             mpv_set_property_string(handle, "pause", "no")
+            Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(result)"]) }
         }
     }
 

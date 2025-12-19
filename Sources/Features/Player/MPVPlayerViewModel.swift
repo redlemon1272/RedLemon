@@ -63,37 +63,11 @@ class MPVPlayerViewModel: ObservableObject {
     private func setupServiceBindings() {
         Task { @MainActor in
             // Subtitle Bindings
+            // Subtitle Bindings
             let tracksPublisher = await subtitleService.availableTracksPublisher
             tracksPublisher
                 .receive(on: DispatchQueue.main)
-                .sink { [weak self] tracks in
-                    guard let self = self else { return }
-                    self.availableSubtitleTracks = tracks
-
-                    // Reactively select defaults once tracks are populated
-                    // This fixes the race condition where tracks appear AFTER onVideoReady
-                    
-                    // Fix: Check for REAL embedded tracks (excluding 'Off' / ID 0)
-                    let hasEmbedded = tracks.contains(where: { $0.id != 0 && !$0.isExternal })
-                    
-                    // Fix: Run auto-select ONLY if we haven't done it yet.
-                    // Removed '|| (currentIsExternal && hasEmbedded)' because it overrides manual user selection.
-                    // If the user manually picks an external track, we must NOT force them back to embedded.
-                    let shouldRetry = !self.hasAutoSelectedSubtitles
-                    
-                    // Check if we have actual tracks (more than just "Off")
-                    let hasRealTracks = tracks.contains(where: { $0.id != 0 })
-
-                    if hasRealTracks && shouldRetry && self.hasVideoReadyTriggered {
-                        print("⚡ MPVPlayerViewModel: Tracks populated (Embedded: \(hasEmbedded)), triggering auto-selection")
-                        if self.selectEnglishDefaults() {
-                            // Mark as done immediately once we've successfully selected a default.
-                            // This ensures we respect any future manual changes by the user.
-                            self.hasAutoSelectedSubtitles = true
-                        }
-                    }
-                }
-                .store(in: &serviceCancellables)
+                .assign(to: &$availableSubtitleTracks)
 
             let currentTrackPublisher = await subtitleService.currentTrackPublisher
             currentTrackPublisher
@@ -677,7 +651,8 @@ class MPVPlayerViewModel: ObservableObject {
         self.updateAudioTracks()    // Scan audio tracks
 
         // Restore subtitle/audio prioritization logic
-        self.selectEnglishDefaults()
+        // NOTE: Redundant - handled by MPVWrapper Smart Paused Load
+        // self.selectEnglishDefaults()
 
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices

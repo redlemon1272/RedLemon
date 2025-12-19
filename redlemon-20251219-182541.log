@@ -1,0 +1,1535 @@
+2025-12-19 18:25:48.549 RedLemon[21865:191250] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-19 18:25:48.549 RedLemon[21865:191250] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-19 18:25:48.575 RedLemon[21865:191272] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-19 18:25:48.576 RedLemon[21865:191250] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-19 18:25:48.631 RedLemon[21865:191250] ✅ Playback state reset complete - starting in browse view
+2025-12-19 18:25:48.632 RedLemon[21865:191250] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-19 18:25:48.632 RedLemon[21865:191250] 🧪 Testing Profile: debug
+2025-12-19 18:25:48.632 RedLemon[21865:191293] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-19 18:25:48.632 RedLemon[21865:191250] ✅ Keychain: Found stored username: ursinho
+2025-12-19 18:25:48.632 RedLemon[21865:191250] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-19 18:25:48.632 RedLemon[21865:191293] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-19 18:25:48.709 RedLemon[21865:191293] 📡 SupabaseClient: User lookup response received (340 bytes)
+2025-12-19 18:25:48.716 RedLemon[21865:191293] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-19 18:25:48.716 RedLemon[21865:191293] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:25:48.716 RedLemon[21865:191250] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:25:48.759 RedLemon[21865:191250] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:25:48.759 RedLemon[21865:191250] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:25:48.759 RedLemon[21865:191250] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:25:48.759 RedLemon[21865:191250] 🚀 RedLemon: Starting HTTP server...
+2025-12-19 18:25:48.759 RedLemon[21865:191250] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-19 18:25:48.772 RedLemon[21865:191250] ✅ RedLemon: HTTPServer instance created
+2025-12-19 18:25:48.772 RedLemon[21865:191275] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"80A8F5AD-25B4-400B-B56F-EABB9D468697","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-19 18:25:50.830 RedLemon[21865:191250] ✅ RedLemon: Server marked as ready
+2025-12-19 18:25:50.857 RedLemon[21865:191250] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-19 18:25:50.857 RedLemon[21865:191250] 🔍 Performing startup checks...
+2025-12-19 18:25:50.857 RedLemon[21865:191250] ✅ Username-based authentication ready
+2025-12-19 18:25:52.371 RedLemon[21865:191250] 🔍 Performing startup checks...
+2025-12-19 18:25:52.371 RedLemon[21865:191250] ✅ Username-based authentication ready
+2025-12-19 18:25:53.101 RedLemon[21865:191250] 🔄 Checking for app updates...
+2025-12-19 18:26:17.400 RedLemon[21865:191407] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2025-12-19 18:26:17.567 RedLemon[21865:191250] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0499549/img
+2025-12-19 18:26:17.567 RedLemon[21865:191250] ⏳ Background art loading...
+2025-12-19 18:26:17.567 RedLemon[21865:191250] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0499549/img
+2025-12-19 18:26:17.568 RedLemon[21865:191250] ⏳ Logo loading...
+2025-12-19 18:26:17.599 RedLemon[21865:191250]    Quality: 1080p
+2025-12-19 18:26:17.599 RedLemon[21865:191250]    Mode: watchParty
+2025-12-19 18:26:17.599 RedLemon[21865:191250] 📡 Fetching metadata for tt0499549...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+✅ [EventsView] Loaded 444 movies from config version 1360
+🗓 AppState: Updated schedule epoch to 2025-12-09 22:44:42 +0000
+⏰ AppState: Next schedule update set for Event End: 2025-12-20 01:18:42 +0000
+⏰ AppState: Scheduling update in 6774 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}]
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+🔍 Supabase Response for /rooms: []
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔍 Supabase Response for /rooms: []
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+🔍 Supabase Response for /rooms: []
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"2E550727-420D-4855-B3BA-D30DF8CF9877","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBe_ZawpPhCsDM","phx_ref_prev":"GILBe8XTSvThCu3G","last_seen":"2025-12-19T23:25:41.887Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBfbw3zIOEIsyG","last_seen":"2025-12-19T23:25:49.446Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"47F23AFE-15CC-4CE5-B0A6-FA58A61F5DFF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":88249,"eth":2985.34},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":88249,"eth":2985.34},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.194s (RTT: 62ms)
+   Local:  2025-12-19 23:25:53 +0000
+   Server: 2025-12-19 23:25:53 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBgKEOpuPhChwD","phx_ref_prev":"GILBe_ZawpPhCsDM","last_seen":"2025-12-19T23:26:01.949Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBe_ZawpPhCsDM","phx_ref_prev":"GILBe8XTSvThCu3G","last_seen":"2025-12-19T23:25:41.887Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBgmSNbSqEIqMB","phx_ref_prev":"GILBfbw3zIOEIsyG","last_seen":"2025-12-19T23:26:09.449Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBfbw3zIOEIsyG","last_seen":"2025-12-19T23:25:49.446Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2025-12-19T23:26:17Z] [INFO] [EventsView.swift:188] 🎟️ Joining event: Avatar (Live: true)
+   Event start time: 2025-12-19 22:26:42 +0000
+   Event duration: 10320.0s
+   Current time: 2025-12-19 23:26:17 +0000
+   Is Live: true
+   Is In Lobby: false
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}]
+✅ Event room already exists: event_tt0499549
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi5-4.downl...
+   Hash: bcc4c81254b7d8ed525f7365d8a75aafb4d220b9
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: bcc4c81254b7d8ed525f7365d8a75aafb4d220b9
+
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}]
+🎬 Live event - calculating position: 3575.675554394722 seconds
+   Event start time: 2025-12-19 22:26:42 +0000
+   Current time: 2025-12-19 23:26:17 +0000
+   Room createdAt: 2025-12-19 22:26:42 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 3575.675554394722
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Avatar
+[ INFO ] GET /api/metadata/meta/movie/tt0499549 [request-id: 8748A10D-4B40-4626-A545-D58AF1889BA7]
+2025-12-19 18:26:17.745 RedLemon[21865:191250] ✅ Background art loaded successfully
+2025-12-19 18:26:17.746 RedLemon[21865:191250] ✅ Logo loaded successfully
+2025-12-19 18:26:17.776 RedLemon[21865:191407] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-19 18:26:17.804 RedLemon[21865:191250] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-19 18:26:17.804 RedLemon[21865:191250] ⚠️ GUEST: Detected quality from filename: 1080p
+2025-12-19 18:26:17.804 RedLemon[21865:191250] 🎬 GUEST: Searching for subtitles locally...
+💾 Cache SET: Metadata[meta_movie_tt0499549]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 89F388B2-50CA-47B7-A03E-1F0A57138A0B]
+2025-12-19 18:26:18.069 RedLemon[21865:191250] ✅ GUEST: Found 10 subtitles
+2025-12-19 18:26:18.090 RedLemon[21865:191250] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Av, subtitles: 10
+2025-12-19 18:26:18.132 RedLemon[21865:191250] ✅ Stream ready, starting playback...
+2025-12-19 18:26:18.132 RedLemon[21865:191250] 🖥️ WindowManager: enterFullscreen() called
+2025-12-19 18:26:18.132 RedLemon[21865:191250]    Window: <SwiftUI.SwiftUIWindow: 0x7fadf1859bd0>
+2025-12-19 18:26:18.133 RedLemon[21865:191250]    Is fullscreen: 1
+2025-12-19 18:26:18.133 RedLemon[21865:191250]    ⚠️ WindowManager: Already in fullscreen
+2025-12-19 18:26:18.172 RedLemon[21865:191250] 🖼️ Setting up MPV with native macOS video output...
+2025-12-19 18:26:18.177 RedLemon[21865:191250] ✅ MPV initialized with native GPU rendering
+2025-12-19 18:26:18.184 RedLemon[21865:191250] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-19 18:26:18.185 RedLemon[21865:191250] 🎉 Starting watch party sync - Room: event_tt0499549, Host: NO
+2025-12-19 18:26:18.185 RedLemon[21865:191250] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-19 18:26:18.191 RedLemon[21865:191250] 🔄 Starting chat polling for room: event_tt0499549
+2025-12-19 18:26:18.191 RedLemon[21865:191250] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-19 18:26:18.191 RedLemon[21865:191250] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-19 18:26:18.192 RedLemon[21865:191250] 🎬🎬🎬 Subtitles: 10
+2025-12-19 18:26:18.192 RedLemon[21865:191250] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Avatar
+2025-12-19 18:26:18.192 RedLemon[21865:191250] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Av
+2025-12-19 18:26:18.192 RedLemon[21865:191250] 🎬🎬🎬 subtitles: 10
+2025-12-19 18:26:18.192 RedLemon[21865:191250] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-19 18:26:18.196 RedLemon[21865:191408] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-19 18:26:18.196 RedLemon[21865:191408] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyODQzOTgtMzMwNjM4My56aXA=
+2025-12-19 18:26:18.196 RedLemon[21865:191407] 🎬 MPV: Current video filename set to: Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-[YTS.MX].mp4
+2025-12-19 18:26:18.196 RedLemon[21865:191407] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x, autoplay: true
+2025-12-19 18:26:18.197 RedLemon[21865:191407] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2025-12-19 18:26:18.197 RedLemon[21865:191407] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Subtitle search request: tt0499549 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0499549 (movie)
+📝 SubDL Raw Response: {"status":true,"results":[{"sd_id":20442,"type":"movie","name":"Avatar","imdb_id":"tt0499549","tmdb_id":19995,"first_air_date":null,"release_date":"2009-12-10T00:00:00.000Z","year":2009}],"subtitles":[{"release_name":"Avatar 2009 Extended Collectors Forced","name":"Avatar 2009 Extended english forced.zip","lang":"English","author":"jesterr","url":"/subtitle/3397352-8320591.zip","subtitlePage":"/s/info/Ukgtib7VsE","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR","name":"SUBDL::avatar-english-3306383.zip","lang":"english","author":"Madhalo","url":"/subtitle/3284398-3306383.zip","subtitlePage":"/s/info/rZ8pgB9Ddx","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA","name":"SUBDL::avatar-english-3261056.zip","lang":"english","author":"milksteaksubs","url":"/subtitle/3243160-3261056.zip","subtitlePage":"/s/info/mUUDBobCh1","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG","name":"SUBDL::avatar-english-3055697.zip","lang":"english","author":"Blue-Bird","url":"/subtitle/3048341-3055697.zip","subtitlePage":"/s/info/hCO5LirLBp","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar(2009)UHD4KUpscaledx264DTSSoup","name":"SUBDL::avatar-english-3050355.zip","lang":"english","author":"tahernabil","url":"/subtitle/3043878-3050355.zip","subtitlePage":"/s/info/cyU9r5QJng","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG","name":"SUBDL::avatar-english-2999531.zip","lang":"english","author":"Blue-Bird","url":"/subtitle/3001480-2999531.zip","subtitlePage":"/s/info/Wjncl2ucmC","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG","name":"SUBDL::avatar-english-2951107.zip","lang":"english","author":"Ratcatcher","url":"/subtitle/2956939-2951107.zip","subtitlePage":"/s/info/mRwvs5CDSO","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar Extended Collectors Edition 2010 BluRay CEE 1080p AVC DTS-HDMA 5 1","name":"SUBDL::avatar-english-2897478.zip","lang":"english","author":"sealtan","url":"/subtitle/2913212-2897478.zip","subtitlePage":"/s/info/H535jThYpd","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.Extended.720p.BluRay.x264.ESubs-MkvHub","name":"SUBDL::avatar-english-2891811.zip","lang":"english","author":"lesaigneur","url":"/subtitle/2908212-2891811.zip","subtitlePage":"/s/info/ojDlA5Cbv6","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Avatar.2009.Extended.Re-Grade.2160p.BluRay.HDR.4000nit.DTS-HD.MA-ExKinoRay","name":"SUBDL::avatar-english-2891805.zip","lang":"english","author":"lesaigneur","url":"/subtitle/2908161-2891805.zip","subtitlePage":"/s/info/DvuabLb3wA","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false}],"totalPages":21,"currentPage":1}
+💓 Heartbeat sent
+✅ Found 10 subtitles from SubDL
+📝 SubDL results for movie:
+   [1] Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR [EN] (score: 20)
+   [2] Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA [EN] (score: 20)
+   [3] Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG [EN] (score: 20)
+   [4] Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG [EN] (score: 20)
+   [5] Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG [EN] (score: 20)
+   [6] Avatar.2009.Extended.720p.BluRay.x264.ESubs-MkvHub [EN] (score: 20)
+   [7] Avatar Extended Collectors Edition 2010 BluRay CEE 1080p AVC DTS-HDMA 5 1 [EN] (score: 5)
+   [8] Avatar.2009.Extended.Re-Grade.2160p.BluRay.HDR.4000nit.DTS-HD.MA-ExKinoRay [EN] (score: 5)
+   [9] Avatar 2009 Extended Collectors Forced [EN] (score: 0)
+   [10] Avatar(2009)UHD4KUpscaledx264DTSSoup [EN] (score: 0)
+✅ Subtitle search returned 10 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Av
+   Display Title: Avatar
+   Subtitle URLs: 10
+      [0] Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR
+      [1] Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA
+      [2] Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG
+      [3] Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG
+      [4] Avatar.2009.EXTENDED.1080p.BluRay.x265-RARBG
+      [5] Avatar.2009.Extended.720p.BluRay.x264.ESubs-MkvHub
+      [6] Avatar Extended Collectors Edition 2010 BluRay CEE 1080p AVC DTS-HDMA 5 1
+      [7] Avatar.2009.Extended.Re-Grade.2160p.BluRay.HDR.4000nit.DTS-HD.MA-ExKinoRay
+      [8] Avatar 2009 Extended Collectors Forced
+      [9] Avatar(2009)UHD4KUpscaledx264DTSSoup
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash bcc4c812 as attempted for tt0499549
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0499549, isHost=false
+🔌 Setting up Realtime channel: watch-party:event_tt0499549
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0499549
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Avatar
+   IMDB: tt0499549
+   URL: https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Av...
+   Hash: bcc4c812...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt0499549 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0499549]
+📝 Pre-loading external subtitles (Top 3)...
+🎬 DisplayLink: reportSwap() (throttled)
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyODQzOTgtMzMwNjM4My56aXA= [request-id: 7854BEC6-CF3D-41B4-80AF-7F527FB7BC13]
+2025-12-19 18:26:18.612 RedLemon[21865:191273] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_17404E23-11CA-4EDB-8DB4-A886C5C08729.vtt
+2025-12-19 18:26:18.612 RedLemon[21865:191273] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_17404E23-11CA-4EDB-8DB4-A88
+2025-12-19 18:26:18.625 RedLemon[21865:191250] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-19 18:26:18.632 RedLemon[21865:191273] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:26:18.632 RedLemon[21865:191273] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMyNDMxNjAtMzI2MTA1Ni56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMyODQz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3284398-3306383.zip
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBhG28nrKEIr7K","phx_ref_prev":"GILBgmSNbSqEIqMB","last_seen":"2025-12-19T23:26:18.195Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBgmSNbSqEIqMB","phx_ref_prev":"GILBfbw3zIOEIsyG","last_seen":"2025-12-19T23:26:09.449Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"974D2DE7-B0C0-40C3-AEC5-797D8667D9AF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"08aeaee8-dd32-11f0-b083-0a58a9feac02":{"metas":[{"phx_ref":"GILBe8XFehQ_CMqE","is_host":false,"joined_at":1766186741.0740361,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"1ed85f48-dd32-11f0-9b07-0a58a9feac02":{"metas":[{"phx_ref":"GILBhG4OdBAoBJPM","is_host":false,"joined_at":1766186778.1901689,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0499549"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0499549/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0499549/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0499549/img...
+📡 SocialService: Updated status - online: Avatar
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GILBe8XFehQ_CMqE)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GILBhG4OdBAoBJPM
+⏰ AppState: Next schedule update set for Event End: 2025-12-20 01:18:42 +0000
+⏰ AppState: Scheduling update in 6744 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 36947 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMyNDMxNjAtMzI2MTA1Ni56aXA= [request-id: B9047326-6016-457C-B521-9558F108E536]
+2025-12-19 18:26:19.139 RedLemon[21865:191460] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9F1A3292-F988-431D-B99A-33DA6437A09D.vtt
+2025-12-19 18:26:19.139 RedLemon[21865:191460] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_9F1A3292-F988-431D-B99A-33D
+2025-12-19 18:26:19.147 RedLemon[21865:191460] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:26:19.147 RedLemon[21865:191460] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwNDgzNDEtMzA1NTY5Ny56aXA=
+📄 Subtitle request: L3N1YnRpdGxlLzMyNDMx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3243160-3261056.zip
+✅ Download complete: 45155 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwNDgzNDEtMzA1NTY5Ny56aXA= [request-id: 1BAEE065-2C24-4174-89AD-572E71D5BCED]
+2025-12-19 18:26:19.644 RedLemon[21865:191482] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0BBD2C68-300C-46DF-9F5E-05031079633C.vtt
+2025-12-19 18:26:19.644 RedLemon[21865:191482] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0BBD2C68-300C-46DF-9F5E-050
+2025-12-19 18:26:19.653 RedLemon[21865:191482] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:26:19.654 RedLemon[21865:191482] 🔍 MPV track-list/count: 3
+2025-12-19 18:26:19.654 RedLemon[21865:191482] 🔍 Track 0 type: sub
+2025-12-19 18:26:19.654 RedLemon[21865:191482] ✅ Found subtitle track: ID=1, lang=en, title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2025-12-19 18:26:19.655 RedLemon[21865:191482] 🔍 Track 1 type: sub
+2025-12-19 18:26:19.655 RedLemon[21865:191482] ✅ Found subtitle track: ID=2, lang=en, title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, external=1
+2025-12-19 18:26:19.655 RedLemon[21865:191482] 🔍 Track 2 type: sub
+2025-12-19 18:26:19.655 RedLemon[21865:191482] ✅ Found subtitle track: ID=3, lang=en, title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-19 18:26:19.655 RedLemon[21865:191482] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:26:19.655 RedLemon[21865:191482]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:26:19.655 RedLemon[21865:191482]    Start[1]: ID=1, Title='Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2025-12-19 18:26:19.656 RedLemon[21865:191482]    Start[2]: ID=2, Title='Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-19 18:26:19.656 RedLemon[21865:191482]    Start[3]: ID=3, Title='Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2025-12-19 18:26:19.656 RedLemon[21865:191482] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-19 18:26:19.657 RedLemon[21865:191482]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:26:19.658 RedLemon[21865:191482]    Track: ID=1, Title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2025-12-19 18:26:19.658 RedLemon[21865:191482]    Track: ID=2, Title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, External=1
+2025-12-19 18:26:19.658 RedLemon[21865:191482]    Track: ID=3, Title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, External=1
+2025-12-19 18:26:19.945 RedLemon[21865:191250] ⏱️ Watch Party: Duration available (10689.5s), triggering ready signal
+2025-12-19 18:26:19.945 RedLemon[21865:191250] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-19 18:26:20.200 RedLemon[21865:191407] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:26:20.201 RedLemon[21865:191407]    Payload keys: isPlaying, senderId, position, timestamp, type
+2025-12-19 18:26:20.202 RedLemon[21865:191408] ✅ Realtime: Message broadcast complete
+2025-12-19 18:26:20.249 RedLemon[21865:191407] 📨 Realtime: Received broadcast message
+2025-12-19 18:26:20.249 RedLemon[21865:191407]    Payload keys: position, type, senderId, timestamp, isPlaying
+2025-12-19 18:26:20.249 RedLemon[21865:191407] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:26:20.250 RedLemon[21865:191407] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-19 18:26:20.250 RedLemon[21865:191407] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:26:20.496 RedLemon[21865:191250] ✅ Watch Party: READY signal sent successfully
+2025-12-19 18:26:20.496 RedLemon[21865:191250] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:26:20.496 RedLemon[21865:191250] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:26:20.726 RedLemon[21865:191482] 🔍 MPV track-list/count: 5
+2025-12-19 18:26:20.726 RedLemon[21865:191482] 🔍 Track 0 type: sub
+2025-12-19 18:26:20.727 RedLemon[21865:191482] ✅ Found subtitle track: ID=1, lang=en, title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2025-12-19 18:26:20.727 RedLemon[21865:191482] 🔍 Track 1 type: sub
+2025-12-19 18:26:20.727 RedLemon[21865:191482] ✅ Found subtitle track: ID=2, lang=en, title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, external=1
+2025-12-19 18:26:20.727 RedLemon[21865:191482] 🔍 Track 2 type: sub
+2025-12-19 18:26:20.727 RedLemon[21865:191482] ✅ Found subtitle track: ID=3, lang=en, title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-19 18:26:20.727 RedLemon[21865:191482] 🔍 Track 3 type: video
+2025-12-19 18:26:20.727 RedLemon[21865:191482] 🔍 Track 4 type: audio
+2025-12-19 18:26:20.727 RedLemon[21865:191482] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:26:20.727 RedLemon[21865:191482]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Start[1]: ID=1, Title='Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Start[2]: ID=2, Title='Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Start[3]: ID=3, Title='Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2025-12-19 18:26:20.728 RedLemon[21865:191482] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Track: ID=1, Title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Track: ID=2, Title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, External=1
+2025-12-19 18:26:20.728 RedLemon[21865:191482]    Track: ID=3, Title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, External=1
+2025-12-19 18:26:21.743 RedLemon[21865:191407] 🔍 MPV track-list/count: 5
+2025-12-19 18:26:21.743 RedLemon[21865:191407] 🔍 Track 0 type: sub
+2025-12-19 18:26:21.743 RedLemon[21865:191407] ✅ Found subtitle track: ID=1, lang=en, title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2025-12-19 18:26:21.743 RedLemon[21865:191407] 🔍 Track 1 type: sub
+2025-12-19 18:26:21.744 RedLemon[21865:191407] ✅ Found subtitle track: ID=2, lang=en, title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, external=1
+2025-12-19 18:26:21.744 RedLemon[21865:191407] 🔍 Track 2 type: sub
+2025-12-19 18:26:21.744 RedLemon[21865:191407] ✅ Found subtitle track: ID=3, lang=en, title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-19 18:26:21.744 RedLemon[21865:191407] 🔍 Track 3 type: video
+2025-12-19 18:26:21.744 RedLemon[21865:191407] 🔍 Track 4 type: audio
+2025-12-19 18:26:21.745 RedLemon[21865:191407] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:26:21.745 RedLemon[21865:191407]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:26:21.745 RedLemon[21865:191407]    Start[1]: ID=1, Title='Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2025-12-19 18:26:21.745 RedLemon[21865:191407]    Start[2]: ID=2, Title='Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-19 18:26:21.745 RedLemon[21865:191407]    Start[3]: ID=3, Title='Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2025-12-19 18:26:21.745 RedLemon[21865:191407] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2025-12-19 18:26:21.745 RedLemon[21865:191407]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:26:21.746 RedLemon[21865:191407]    Track: ID=1, Title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2025-12-19 18:26:21.746 RedLemon[21865:191407]    Track: ID=2, Title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, External=1
+2025-12-19 18:26:21.747 RedLemon[21865:191407]    Track: ID=3, Title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, External=1
+2025-12-19 18:26:22.850 RedLemon[21865:191482] 🔍 MPV track-list/count: 5
+2025-12-19 18:26:22.850 RedLemon[21865:191482] 🔍 Track 0 type: sub
+2025-12-19 18:26:22.850 RedLemon[21865:191482] ✅ Found subtitle track: ID=1, lang=en, title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2025-12-19 18:26:22.851 RedLemon[21865:191482] 🔍 Track 1 type: sub
+2025-12-19 18:26:22.851 RedLemon[21865:191482] ✅ Found subtitle track: ID=2, lang=en, title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, external=1
+2025-12-19 18:26:22.851 RedLemon[21865:191482] 🔍 Track 2 type: sub
+2025-12-19 18:26:22.851 RedLemon[21865:191482] ✅ Found subtitle track: ID=3, lang=en, title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-19 18:26:22.851 RedLemon[21865:191482] 🔍 Track 3 type: video
+2025-12-19 18:26:22.851 RedLemon[21865:191482] 🔍 Track 4 type: audio
+2025-12-19 18:26:22.851 RedLemon[21865:191482] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:26:22.851 RedLemon[21865:191482]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:26:22.851 RedLemon[21865:191482]    Start[1]: ID=1, Title='Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Start[2]: ID=2, Title='Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Start[3]: ID=3, Title='Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2025-12-19 18:26:22.852 RedLemon[21865:191482] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Track: ID=1, Title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Track: ID=2, Title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, External=1
+2025-12-19 18:26:22.852 RedLemon[21865:191482]    Track: ID=3, Title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, External=1
+2025-12-19 18:26:23.949 RedLemon[21865:191482] 🔍 MPV track-list/count: 5
+2025-12-19 18:26:23.949 RedLemon[21865:191482] 🔍 Track 0 type: sub
+2025-12-19 18:26:23.949 RedLemon[21865:191482] ✅ Found subtitle track: ID=1, lang=en, title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2025-12-19 18:26:23.950 RedLemon[21865:191482] 🔍 Track 1 type: sub
+2025-12-19 18:26:23.950 RedLemon[21865:191482] ✅ Found subtitle track: ID=2, lang=en, title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, external=1
+2025-12-19 18:26:23.950 RedLemon[21865:191482] 🔍 Track 2 type: sub
+2025-12-19 18:26:23.950 RedLemon[21865:191482] ✅ Found subtitle track: ID=3, lang=en, title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, external=1
+2025-12-19 18:26:23.950 RedLemon[21865:191482] 🔍 Track 3 type: video
+2025-12-19 18:26:23.951 RedLemon[21865:191482] 🔍 Track 4 type: audio
+2025-12-19 18:26:23.951 RedLemon[21865:191482] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:26:23.951 RedLemon[21865:191482]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:26:23.951 RedLemon[21865:191482]    Start[1]: ID=1, Title='Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2025-12-19 18:26:23.951 RedLemon[21865:191482]    Start[2]: ID=2, Title='Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', Lang='en', Ext=1
+2025-12-19 18:26:23.951 RedLemon[21865:191482]    Start[3]: ID=3, Title='Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2025-12-19 18:26:23.951 RedLemon[21865:191482] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2025-12-19 18:26:23.951 RedLemon[21865:191482]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:26:23.952 RedLemon[21865:191482]    Track: ID=1, Title=Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2025-12-19 18:26:23.952 RedLemon[21865:191482]    Track: ID=2, Title=Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA, External=1
+2025-12-19 18:26:23.952 RedLemon[21865:191482]    Track: ID=3, Title=Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG, External=1
+📄 Subtitle request: L3N1YnRpdGxlLzMwNDgz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3048341-3055697.zip
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+✅ Download complete: 84574 bytes
+📦 Detected ZIP archive, extracting...
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⚠️ No specific episode match found, using first file: Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG.srt
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (h264 1916x1078 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+✅ SMART-LOAD: Tracks found! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1766186779.946048,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0499549"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 400 (Embedded: 0, Match: 400, Clean: 0, SDH: 0)
+▶️ SMART-LOAD: Resuming playback (Autoplay requested)
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 18
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Recalculating seek time at video ready
+   Event started at: 2025-12-19 22:26:42 +0000
+   Current time: 2025-12-19 23:26:20 +0000
+   Elapsed: 3578s
+   Seeking to: 3578s
+🎯 IMMEDIATE RESUME: Seeking to 3578s without delay
+📝 Started watch history tracking
+ MPV Event: 17
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 17
+⚡️ PlaybackService: releasing sleep assertion
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+📊 Current subtitle track: 3
+[MPV] VO: [libmpv] 1916x1078 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1916x1078 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+🎯 Executing immediate seek to 3578s...
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 3578s
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBhU_wFI_hCsWJ","phx_ref_prev":"GILBgKEOpuPhChwD","last_seen":"2025-12-19T23:26:21.890Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBgKEOpuPhChwD","phx_ref_prev":"GILBe_ZawpPhCsDM","last_seen":"2025-12-19T23:26:01.949Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Avatar.2009.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Avatar.2009.EXTENDED.IMAX.1080p.10bit.BluRay.6CH.x265.HEVC-PSA', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Avatar.2009.EXTENDED.1080p.BluRay.H264.AAC-RARBG (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 400 (Embedded: 0, Match: 400, Clean: 0, SDH: 0)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBhxEDJMyEIgWJ","phx_ref_prev":"GILBhG28nrKEIr7K","last_seen":"2025-12-19T23:26:29.509Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBhG28nrKEIr7K","phx_ref_prev":"GILBgmSNbSqEIqMB","last_seen":"2025-12-19T23:26:18.195Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBifPCQ23hCnOD","phx_ref_prev":"GILBhU_wFI_hCsWJ","last_seen":"2025-12-19T23:26:41.991Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBhU_wFI_hCsWJ","phx_ref_prev":"GILBgKEOpuPhChwD","last_seen":"2025-12-19T23:26:21.890Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBi7lQEP2EIv0M","phx_ref_prev":"GILBhxEDJMyEIgWJ","last_seen":"2025-12-19T23:26:49.530Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBhxEDJMyEIgWJ","phx_ref_prev":"GILBhG28nrKEIr7K","last_seen":"2025-12-19T23:26:29.509Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+💾 Saved to watch history: Avatar at 3606s
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBjqJiOpzhChML","phx_ref_prev":"GILBifPCQ23hCnOD","last_seen":"2025-12-19T23:27:01.929Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBifPCQ23hCnOD","phx_ref_prev":"GILBhU_wFI_hCsWJ","last_seen":"2025-12-19T23:26:41.991Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBkGKRWqCEItwL","phx_ref_prev":"GILBi7lQEP2EIv0M","last_seen":"2025-12-19T23:27:09.549Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBi7lQEP2EIv0M","phx_ref_prev":"GILBhxEDJMyEIgWJ","last_seen":"2025-12-19T23:26:49.530Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBk0GG7lvhCnDL","phx_ref_prev":"GILBjqJiOpzhChML","last_seen":"2025-12-19T23:27:21.950Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBjqJiOpzhChML","phx_ref_prev":"GILBifPCQ23hCnOD","last_seen":"2025-12-19T23:27:01.929Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBlQeiu4yEIv6D","phx_ref_prev":"GILBkGKRWqCEItwL","last_seen":"2025-12-19T23:27:29.489Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBkGKRWqCEItwL","phx_ref_prev":"GILBi7lQEP2EIv0M","last_seen":"2025-12-19T23:27:09.549Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBl-2EQ4bhCmLB","phx_ref_prev":"GILBk0GG7lvhCnDL","last_seen":"2025-12-19T23:27:42.023Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBk0GG7lvhCnDL","phx_ref_prev":"GILBjqJiOpzhChML","last_seen":"2025-12-19T23:27:21.950Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBma4ma0eEIsII","phx_ref_prev":"GILBlQeiu4yEIv6D","last_seen":"2025-12-19T23:27:49.465Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBlQeiu4yEIv6D","phx_ref_prev":"GILBkGKRWqCEItwL","last_seen":"2025-12-19T23:27:29.489Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBnI8cwnvhCpbC","phx_ref_prev":"GILBl-2EQ4bhCmLB","last_seen":"2025-12-19T23:28:01.923Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBl-2EQ4bhCmLB","phx_ref_prev":"GILBk0GG7lvhCnDL","last_seen":"2025-12-19T23:27:42.023Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBnleUgDWEIh8O","phx_ref_prev":"GILBma4ma0eEIsII","last_seen":"2025-12-19T23:28:09.486Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBma4ma0eEIsII","phx_ref_prev":"GILBlQeiu4yEIv6D","last_seen":"2025-12-19T23:27:49.465Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Avatar at 3696s
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBoTyavlrhCiDI","phx_ref_prev":"GILBnI8cwnvhCpbC","last_seen":"2025-12-19T23:28:21.915Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBnI8cwnvhCpbC","phx_ref_prev":"GILBl-2EQ4bhCmLB","last_seen":"2025-12-19T23:28:01.923Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBowCR-36EIp6J","phx_ref_prev":"GILBnleUgDWEIh8O","last_seen":"2025-12-19T23:28:29.505Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBnleUgDWEIh8O","phx_ref_prev":"GILBma4ma0eEIsII","last_seen":"2025-12-19T23:28:09.486Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBpeJCsXPhCjkJ","phx_ref_prev":"GILBoTyavlrhCiDI","last_seen":"2025-12-19T23:28:41.966Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBoTyavlrhCiDI","phx_ref_prev":"GILBnI8cwnvhCpbC","last_seen":"2025-12-19T23:28:21.915Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBp6fGa5SEIi8E","phx_ref_prev":"GILBowCR-36EIp6J","last_seen":"2025-12-19T23:28:49.483Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBowCR-36EIp6J","phx_ref_prev":"GILBnleUgDWEIh8O","last_seen":"2025-12-19T23:28:29.505Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBqouhVSLhCoSG","phx_ref_prev":"GILBpeJCsXPhCjkJ","last_seen":"2025-12-19T23:29:01.986Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBpeJCsXPhCjkJ","phx_ref_prev":"GILBoTyavlrhCiDI","last_seen":"2025-12-19T23:28:41.966Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"18","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBrFFnwHyEIpFC","phx_ref_prev":"GILBp6fGa5SEIi8E","last_seen":"2025-12-19T23:29:09.504Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBp6fGa5SEIi8E","phx_ref_prev":"GILBowCR-36EIp6J","last_seen":"2025-12-19T23:28:49.483Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"19","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💾 Saved to watch history: Avatar at 3756s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBry-cXCHhCkwO","phx_ref_prev":"GILBqouhVSLhCoSG","last_seen":"2025-12-19T23:29:21.922Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBqouhVSLhCoSG","phx_ref_prev":"GILBpeJCsXPhCjkJ","last_seen":"2025-12-19T23:29:01.986Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"20","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBsP9hsaCEIk7C","phx_ref_prev":"GILBrFFnwHyEIpFC","last_seen":"2025-12-19T23:29:29.607Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBrFFnwHyEIpFC","phx_ref_prev":"GILBp6fGa5SEIi8E","last_seen":"2025-12-19T23:29:09.504Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBs9t20cPhCnPJ","phx_ref_prev":"GILBry-cXCHhCkwO","last_seen":"2025-12-19T23:29:41.985Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBry-cXCHhCkwO","phx_ref_prev":"GILBqouhVSLhCoSG","last_seen":"2025-12-19T23:29:21.922Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"21","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBtaHSoGKEIisK","phx_ref_prev":"GILBsP9hsaCEIk7C","last_seen":"2025-12-19T23:29:49.506Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBsP9hsaCEIk7C","phx_ref_prev":"GILBrFFnwHyEIpFC","last_seen":"2025-12-19T23:29:29.607Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"22","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBtmFGJvbhCiGO","phx_ref_prev":"GILBtmE7XsfhCiFO","last_seen":"2025-12-19T23:29:52.811Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBs9t20cPhCnPJ","phx_ref_prev":"GILBry-cXCHhCkwO","last_seen":"2025-12-19T23:29:41.985Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:25:41.084Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"08aeaee8-dd32-11f0-b083-0a58a9feac02":{"metas":[{"phx_ref":"GILBe8XFehQ_CMqE","is_host":false,"joined_at":1766186741.0740361,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:event_tt0499549"}
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBt9bCuwjhCnrP","phx_ref_prev":"GILBtmFGJvbhCiGO","last_seen":"2025-12-19T23:29:59.075Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBtmFGJvbhCiGO","phx_ref_prev":"GILBtmE7XsfhCiFO","last_seen":"2025-12-19T23:29:52.811Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBuJbVLBLhCuME","phx_ref_prev":"GILBt9bCuwjhCnrP","last_seen":"2025-12-19T23:30:02.304Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBt9bCuwjhCnrP","phx_ref_prev":"GILBtmFGJvbhCiGO","last_seen":"2025-12-19T23:29:59.075Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ LEAVE MATCHED tracked ref: GILBe8XFehQ_CMqE
+👋 Participant left (confirmed): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"23","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBukoFSGiEIpvB","phx_ref_prev":"GILBtaHSoGKEIisK","last_seen":"2025-12-19T23:30:09.529Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBtaHSoGKEIisK","phx_ref_prev":"GILBsP9hsaCEIk7C","last_seen":"2025-12-19T23:29:49.506Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"24","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBvS3dUE7hCjZF","phx_ref_prev":"GILBuJbVLBLhCuME","last_seen":"2025-12-19T23:30:21.914Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBuJbVLBLhCuME","phx_ref_prev":"GILBt9bCuwjhCnrP","last_seen":"2025-12-19T23:30:02.304Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"25","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBvvFvUQeEImpP","phx_ref_prev":"GILBukoFSGiEIpvB","last_seen":"2025-12-19T23:30:29.508Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBukoFSGiEIpvB","phx_ref_prev":"GILBtaHSoGKEIisK","last_seen":"2025-12-19T23:30:09.529Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBwdAZjxvhCi7K","phx_ref_prev":"GILBvS3dUE7hCjZF","last_seen":"2025-12-19T23:30:41.915Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBvS3dUE7hCjZF","phx_ref_prev":"GILBuJbVLBLhCuME","last_seen":"2025-12-19T23:30:21.914Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"26","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBw5q2OW6EIsBD","phx_ref_prev":"GILBvvFvUQeEImpP","last_seen":"2025-12-19T23:30:49.529Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBvvFvUQeEImpP","phx_ref_prev":"GILBukoFSGiEIpvB","last_seen":"2025-12-19T23:30:29.508Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"27","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Avatar at 3846s
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBxngdHE7hCpcC","phx_ref_prev":"GILBwdAZjxvhCi7K","last_seen":"2025-12-19T23:31:01.915Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBwdAZjxvhCi7K","phx_ref_prev":"GILBvS3dUE7hCjZF","last_seen":"2025-12-19T23:30:41.915Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"28","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILByD_nWLSEIvTO","phx_ref_prev":"GILBw5q2OW6EIsBD","last_seen":"2025-12-19T23:31:09.480Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBw5q2OW6EIsBD","phx_ref_prev":"GILBvvFvUQeEImpP","last_seen":"2025-12-19T23:30:49.529Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"29","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILByyDRDB_hCoLF","phx_ref_prev":"GILByxCduF7hCmqH","last_seen":"2025-12-19T23:31:21.934Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBxngdHE7hCpcC","phx_ref_prev":"GILBwdAZjxvhCi7K","last_seen":"2025-12-19T23:31:01.915Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBzB-pMQvhCiaJ","phx_ref_prev":"GILByyDRDB_hCoLF","last_seen":"2025-12-19T23:31:26.206Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILByyDRDB_hCoLF","phx_ref_prev":"GILByxCduF7hCmqH","last_seen":"2025-12-19T23:31:21.934Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"30","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBzOrXqsqEIitQ","phx_ref_prev":"GILByD_nWLSEIvTO","last_seen":"2025-12-19T23:31:29.527Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILByD_nWLSEIvTO","phx_ref_prev":"GILBw5q2OW6EIsBD","last_seen":"2025-12-19T23:31:09.480Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBzpFUuMbhCu-I","phx_ref_prev":"GILBzB-pMQvhCiaJ","last_seen":"2025-12-19T23:31:36.514Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBzB-pMQvhCiaJ","phx_ref_prev":"GILByyDRDB_hCoLF","last_seen":"2025-12-19T23:31:26.206Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBz8gHxkjhChBP","phx_ref_prev":"GILBzpFUuMbhCu-I","last_seen":"2025-12-19T23:31:41.916Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBzpFUuMbhCu-I","phx_ref_prev"2025-12-19 18:31:44.503 RedLemon[21865:191250] ✅ Exit button triggered! x=318 <= 342, y=737 >= 576
+2025-12-19 18:31:44.517 RedLemon[21865:191250] ✅ Exit button triggered! x=278 <= 342, y=764 >= 576
+2025-12-19 18:31:44.526 RedLemon[21865:191250] ✅ Exit button triggered! x=237 <= 342, y=768 >= 576
+2025-12-19 18:31:44.584 RedLemon[21865:191250] ✅ Exit button triggered! x=217 <= 342, y=768 >= 576
+2025-12-19 18:31:44.793 RedLemon[21865:191250] ✅ Exit button triggered! x=193 <= 342, y=768 >= 576
+2025-12-19 18:31:45.253 RedLemon[21865:191250] ✅ Exit button triggered! x=81 <= 342, y=696 >= 576
+2025-12-19 18:31:45.294 RedLemon[21865:191250] ✅ Exit button triggered! x=80 <= 342, y=671 >= 576
+2025-12-19 18:31:45.337 RedLemon[21865:191250] ✅ Exit button triggered! x=81 <= 342, y=666 >= 576
+2025-12-19 18:31:45.502 RedLemon[21865:191250] ✅ Exit button triggered! x=79 <= 342, y=666 >= 576
+2025-12-19 18:31:45.544 RedLemon[21865:191250] ✅ Exit button triggered! x=49 <= 342, y=667 >= 576
+2025-12-19 18:31:45.585 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=674 >= 576
+2025-12-19 18:31:45.590 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=675 >= 576
+2025-12-19 18:31:45.597 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=676 >= 576
+2025-12-19 18:31:45.669 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=694 >= 576
+2025-12-19 18:31:45.671 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=695 >= 576
+2025-12-19 18:31:45.684 RedLemon[21865:191250] ✅ Exit button triggered! x=0 <= 342, y=697 >= 576
+2025-12-19 18:31:45.712 RedLemon[21865:191250] ✅ Exit button triggered! x=7 <= 342, y=703 >= 576
+2025-12-19 18:31:45.879 RedLemon[21865:191250] ✅ Exit button triggered! x=53 <= 342, y=697 >= 576
+2025-12-19 18:31:45.919 RedLemon[21865:191250] ✅ Exit button triggered! x=60 <= 342, y=693 >= 576
+2025-12-19 18:31:45.964 RedLemon[21865:191250] ✅ Exit button triggered! x=66 <= 342, y=688 >= 576
+2025-12-19 18:31:46.003 RedLemon[21865:191250] ✅ Exit button triggered! x=70 <= 342, y=685 >= 576
+2025-12-19 18:31:46.016 RedLemon[21865:191250] ✅ Exit button triggered! x=70 <= 342, y=685 >= 576
+2025-12-19 18:31:46.044 RedLemon[21865:191250] ✅ Exit button triggered! x=71 <= 342, y=685 >= 576
+2025-12-19 18:31:46.047 RedLemon[21865:191250] ✅ Exit button triggered! x=73 <= 342, y=684 >= 576
+2025-12-19 18:31:46.056 RedLemon[21865:191250] ✅ Exit button triggered! x=74 <= 342, y=684 >= 576
+2025-12-19 18:31:46.060 RedLemon[21865:191250] ✅ Exit button triggered! x=75 <= 342, y=684 >= 576
+2025-12-19 18:31:46.294 RedLemon[21865:191250] ✅ Exit button triggered! x=82 <= 342, y=661 >= 576
+2025-12-19 18:31:46.335 RedLemon[21865:191250] ✅ Exit button triggered! x=95 <= 342, y=635 >= 576
+2025-12-19 18:31:46.337 RedLemon[21865:191250] ✅ Exit button triggered! x=113 <= 342, y=604 >= 576
+2025-12-19 18:31:46.343 RedLemon[21865:191250] ✅ Exit button triggered! x=120 <= 342, y=593 >= 576
+2025-12-19 18:31:46.381 RedLemon[21865:191250] ✅ Exit button triggered! x=128 <= 342, y=584 >= 576
+2025-12-19 18:31:46.681 RedLemon[21865:191250] 🖱️ Mouse: x=142/1366 y=579/768 | Exit: 1 Controls: 0 Chat: 0
+2025-12-19 18:31:46.682 RedLemon[21865:191250] ✅ Exit button triggered! x=142 <= 342, y=579 >= 576
+2025-12-19 18:31:46.711 RedLemon[21865:191250] ✅ Exit button triggered! x=126 <= 342, y=618 >= 576
+2025-12-19 18:31:46.755 RedLemon[21865:191250] 🖱️ Mouse: x=104/1366 y=698/768 | Exit: 1 Controls: 0 Chat: 0
+2025-12-19 18:31:46.756 RedLemon[21865:191250] ✅ Exit button triggered! x=104 <= 342, y=698 >= 576
+2025-12-19 18:31:46.758 RedLemon[21865:191250] ✅ Exit button triggered! x=100 <= 342, y=714 >= 576
+2025-12-19 18:31:46.838 RedLemon[21865:191250] ✅ Exit button triggered! x=90 <= 342, y=758 >= 576
+2025-12-19 18:31:47.086 RedLemon[21865:191250] ✅ Exit button triggered! x=89 <= 342, y=756 >= 576
+2025-12-19 18:31:47.090 RedLemon[21865:191250] ✅ Exit button triggered! x=89 <= 342, y=755 >= 576
+2025-12-19 18:31:47.096 RedLemon[21865:191250] ✅ Exit button triggered! x=88 <= 342, y=754 >= 576
+2025-12-19 18:31:47.171 RedLemon[21865:191250] ✅ Exit button triggered! x=86 <= 342, y=749 >= 576
+2025-12-19 18:31:47.212 RedLemon[21865:191250] ✅ Exit button triggered! x=86 <= 342, y=748 >= 576
+2025-12-19 18:31:47.215 RedLemon[21865:191250] ✅ Exit button triggered! x=85 <= 342, y=745 >= 576
+2025-12-19 18:31:47.224 RedLemon[21865:191250] ✅ Exit button triggered! x=85 <= 342, y=744 >= 576
+2025-12-19 18:31:47.231 RedLemon[21865:191250] ✅ Exit button triggered! x=85 <= 342, y=743 >= 576
+2025-12-19 18:31:47.296 RedLemon[21865:191250] ✅ Exit button triggered! x=84 <= 342, y=739 >= 576
+2025-12-19 18:31:47.298 RedLemon[21865:191250] ✅ Exit button triggered! x=84 <= 342, y=739 >= 576
+2025-12-19 18:31:47.338 RedLemon[21865:191250] ✅ Exit button triggered! x=84 <= 342, y=738 >= 576
+2025-12-19 18:31:47.632 RedLemon[21865:191250] 🖥️ WindowManager: exitFullscreen() called
+2025-12-19 18:31:47.632 RedLemon[21865:191250]    ✅ WindowManager: Toggling fullscreen OFF
+2025-12-19 18:31:47.734 RedLemon[21865:191250] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2025-12-19 18:31:47.735 RedLemon[21865:191250]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2025-12-19 18:31:47.994 RedLemon[21865:191250]    ✅ WindowManager: Window restored to expanded size
+:"GILBzB-pMQvhCiaJ","last_seen":"2025-12-19T23:31:36.514Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+👋 Leaving room: event_tt0499549
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+ MPV Event: 17
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt0499549
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":"31","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0T07TPGEIpCM","phx_ref_prev":"GILBzOrXqsqEIitQ","last_seen":"2025-12-19T23:31:48.098Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILBzOrXqsqEIitQ","phx_ref_prev":"GILByD_nWLSEIvTO","last_seen":"2025-12-19T23:31:29.527Z","room_id":"event_tt0499549","started_at":"2025-12-19T23:26:18.196Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"32","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0T2WxGKEIrTI","phx_ref_prev":"GILB0T07TPGEIpCM","last_seen":"2025-12-19T23:31:48.099Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0T07TPGEIpCM","phx_ref_prev":"GILBzOrXqsqEIitQ","last_seen":"2025-12-19T23:31:48.098Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt0499549"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"1ed85f48-dd32-11f0-9b07-0a58a9feac02":{"metas":[{"phx_ref":"GILBhG4OdBAoBJPM","is_host":false,"joined_at":1766186778.1901689,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt0499549"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+✅ MPV stop completed with clean event loop exit
+✅ MPV instance destroyed
+📡 [EventsConfig] Checking server for movie_events config version...
+💓 Heartbeat sent
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+📨 Received: {"ref":"33","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0Zgs_QiEIv_C","phx_ref_prev":"GILB0T2WxGKEIrTI","last_seen":"2025-12-19T23:31:49.622Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0T2WxGKEIrTI","phx_ref_prev":"GILB0T07TPGEIpCM","last_seen":"2025-12-19T23:31:48.099Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}, 
+ {"id":"event_tt0293564","name":"Rush Hour 3","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T20:36:35.361762","last_activity":"2025-12-19T21:34:29.591139","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/XXL2ELMVZLQAQ88/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE1OS01ODgzNTYuemlw?token=F1435170-909E-4AAB-B719-35CEE1CCA7EE"}, 
+ {"id":"event_tt2713180","name":"Fury","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2f335f14cefd735a7687cf7f31ba42a0db15a217","imdb_id":"tt2713180","poster_url":"https://images.metahub.space/poster/small/tt2713180/img","backdrop_url":"https://images.metahub.space/background/medium/tt2713180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T18:36:53.334187","last_activity":"2025-12-19T19:17:58","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/6ZUSKHWKA3DBW125/Fury.2014.1080p.BluRay.x264.YIFY.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzEzMzE1LTEwNDQ2MTguemlw?token=B407DCED-855D-4065-BD53-37D960BC2341"}, 
+ {"id":"event_tt0103644","name":"Alien³","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2b23bc82460149251d032e3bfe7882b97ff59fdf","imdb_id":"tt0103644","poster_url":"https://images.metahub.space/poster/small/tt0103644/img","backdrop_url":"https://images.metahub.space/background/medium/tt0103644/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T16:23:02.276982","last_activity":"2025-12-19T17:02:02.879296","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/IZG36JMXCOP4G44/Alien.3.1992.Special.Edition.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NTc5NDktODM4MDgxMi56aXA=?token=CCA5F544-3A83-49E4-A1BD-7FEF95B4C88B"}, 
+ {"id":"event_tt23468450","name":"Longlegs","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"815051d0ae49167ea1af3abbf482cabe9f66fca3","imdb_id":"tt23468450","poster_url":"https://images.metahub.space/poster/small/tt23468450/img","backdrop_url":"https://images.metahub.space/background/medium/tt23468450/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T15:33:53.826375","last_activity":"2025-12-19T15:34:49.277293","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/XZFGEKEE6ONI621/Longlegs.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzOTk0NDctODMyMjcxMC56aXA=?token=04B7FF0C-EE4B-434B-85F7-CCA36E2962F5"}]
+✅ Loaded 0 rooms (total: 0)
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}, 
+ {"id":"event_tt0293564","name":"Rush Hour 3","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T20:36:35.361762","last_activity":"2025-12-19T21:34:29.591139","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/XXL2ELMVZLQAQ88/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE1OS01ODgzNTYuemlw?token=F1435170-909E-4AAB-B719-35CEE1CCA7EE"}, 
+ {"id":"event_tt2713180","name":"Fury","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2f335f14cefd735a7687cf7f31ba42a0db15a217","imdb_id":"tt2713180","poster_url":"https://images.metahub.space/poster/small/tt2713180/img","backdrop_url":"https://images.metahub.space/background/medium/tt2713180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T18:36:53.334187","last_activity":"2025-12-19T19:17:58","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/6ZUSKHWKA3DBW125/Fury.2014.1080p.BluRay.x264.YIFY.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzEzMzE1LTEwNDQ2MTguemlw?token=B407DCED-855D-4065-BD53-37D960BC2341"}, 
+ {"id":"event_tt0103644","name":"Alien³","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2b23bc82460149251d032e3bfe7882b97ff59fdf","imdb_id":"tt0103644","poster_url":"https://images.metahub.space/poster/small/tt0103644/img","backdrop_url":"https://images.metahub.space/background/medium/tt0103644/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T16:23:02.276982","last_activity":"2025-12-19T17:02:02.879296","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/IZG36JMXCOP4G44/Alien.3.1992.Special.Edition.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NTc5NDktODM4MDgxMi56aXA=?token=CCA5F544-3A83-49E4-A1BD-7FEF95B4C88B"}, 
+ {"id":"event_tt23468450","name":"Longlegs","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"815051d0ae49167ea1af3abbf482cabe9f66fca3","imdb_id":"tt23468450","poster_url":"https://images.metahub.space/poster/small/tt23468450/img","backdrop_url":"https://images.metahub.space/background/medium/tt23468450/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T15:33:53.826375","last_activity":"2025-12-19T15:34:49.277293","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/XZFGEKEE6ONI621/Longlegs.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzOTk0NDctODMyMjcxMC56aXA=?token=04B7FF0C-EE4B-434B-85F7-CCA36E2962F5"}]
+✅ Loaded 0 rooms (total: 0)
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"D9F03D20-5A77-4C39-83E9-EF5E5FB0488F","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"34","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB1HAju0zhCgjQ","phx_ref_prev":"GILBz8gHxkjhChBP","last_seen":"2025-12-19T23:32:01.917Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILBz8gHxkjhChBP","phx_ref_prev":"GILBzpFUuMbhCu-I","last_seen":"2025-12-19T23:31:41.916Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🚪 Joining room by code: 7K4A
+❌ Room not found: 7K4A
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB1jePD12EIvoC","phx_ref_prev":"GILB0Zgs_QiEIv_C","last_seen":"2025-12-19T23:32:09.458Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB0Zgs_QiEIv_C","phx_ref_prev":"GILB0T2WxGKEIrTI","last_seen":"2025-12-19T23:31:49.622Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"35","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+🚪 Joining room by code: 7K4A
+❌ Room not found: 7K4A
+🗑️ MPVViewLayer deinit
+💓 Heartbeat sent
+💓 Heartbeat sent
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"36","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB2RhLBafhCvIL","phx_ref_prev":"GILB1HAju0zhCgjQ","last_seen":"2025-12-19T23:32:21.918Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB1HAju0zhCgjQ","phx_ref_prev":"GILBz8gHxkjhChBP","last_seen":"2025-12-19T23:32:01.917Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🚪 Joining room by code: 7K4A
+❌ Room not found: 7K4A
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB2rgaYR7hCnbF","phx_ref_prev":"GILB2RhLBafhCvIL","last_seen":"2025-12-19T23:32:28.898Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB2RhLBafhCvIL","phx_ref_prev":"GILB1HAju0zhCgjQ","last_seen":"2025-12-19T23:32:21.918Z","room_id":"7K4A","started_at":"2025-12-19T23:31:36.514Z","status":"In Lobby: Avatar","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0499549","watching_title":"Avatar","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"37","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB2t7TQDaEIjgC","phx_ref_prev":"GILB1jePD12EIvoC","last_seen":"2025-12-19T23:32:29.458Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"0db3ea5c-dd32-11f0-91f7-0a58a9feac02":{"metas":[{"phx_ref":"GILB1jePD12EIvoC","phx_ref_prev":"GILB0Zgs_QiEIv_C","last_seen":"2025-12-19T23:32:09.458Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"DELETE","columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-19T23:32:30.327Z","old_record":{"id": "7K4A"}},"ids":[60402389]},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"fd3d6c70-dd31-11f0-91dd-0a58a9feac02":{"metas":[{"phx_ref":"GILB2rgaYR7hCnbF","phx_ref_prev":"GILB2RhLBafhCvIL","last_seen":"2025-12-19T23:32:28.898Z","status":"Browsing Library","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)

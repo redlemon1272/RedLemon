@@ -1996,8 +1996,16 @@ extension SupabaseClient {
         // Delete the row
         let path = "/friendships?id=eq.\(requestId)"
         _ = try await makeRequest(path: path, method: "DELETE")
+    }
 
-
+    func deleteFriend(userId: UUID, friendId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/friendships",
+            method: "DELETE",
+            query: [
+                "or": "(and(user_id_1.eq.\(userId.uuidString),user_id_2.eq.\(friendId.uuidString)),and(user_id_1.eq.\(friendId.uuidString),user_id_2.eq.\(userId.uuidString)))"
+            ]
+        )
     }
 
     // Removed duplicate searchUsers (already exists in SupabaseClient)

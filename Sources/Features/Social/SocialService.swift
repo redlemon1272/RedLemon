@@ -446,6 +446,25 @@ class SocialService: ObservableObject {
         }
     }
 
+    func removeFriend(friendId: String) async {
+        let friendId = friendId.lowercased()
+        guard let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr),
+              let friendUUID = UUID(uuidString: friendId) else { return }
+        
+        do {
+            try await client.deleteFriend(userId: userId, friendId: friendUUID)
+            
+            await MainActor.run {
+                friends.removeAll { $0.id == friendId }
+                friendActivity.removeValue(forKey: friendId)
+                messages.removeValue(forKey: friendId)
+            }
+            print("✅ SocialService: Removed friend \(friendId)")
+        } catch {
+            print("❌ SocialService: Failed to remove friend: \(error)")
+        }
+    }
+
     func blockUser(userId targetId: String) async {
          guard let myIdStr = currentUserId, let myId = UUID(uuidString: myIdStr),
                let targetUUID = UUID(uuidString: targetId) else { return }

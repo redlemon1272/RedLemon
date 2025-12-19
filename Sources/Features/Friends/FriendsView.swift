@@ -348,7 +348,7 @@ struct FriendsView: View {
 
     private func removeFriend(_ friend: Friend) async {
         print("🗑️ Removing friend \(friend.username)")
-        // FUTURE: Remove from Supabase friendships table
+        await socialService.removeFriend(friendId: friend.id)
     }
 
     private func inviteToWatchParty(_ friend: Friend) {

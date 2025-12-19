@@ -1,0 +1,10 @@
+{
+  "deno.enable": true,
+  "deno.enablePaths": [
+    "supabase/functions"
+  ],
+  "deno.unstable": true,
+  "deno.path": "/Users/danielnoble/.deno/bin/deno",
+  "deno.config": "./supabase/functions/deno.json",
+  "typescript.validate.enable": false
+}

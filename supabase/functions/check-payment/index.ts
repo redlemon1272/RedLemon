@@ -12,7 +12,7 @@ const MEMPOOL_API = 'https://mempool.space/api/address'
 const ETH_RPC = 'https://rpc.ankr.com/eth'
 const SOL_RPC = 'https://api.mainnet-beta.solana.com'
 
-serve(async (req) => {
+serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders })
   }
@@ -171,8 +171,8 @@ serve(async (req) => {
     for (const asset of currentAssets) {
         // Find sum of previous logs for this specific Chain+Currency
         const prevSum = txs
-            ?.filter(t => t.chain === asset.chain && t.currency === asset.currency)
-            .reduce((sum, t) => sum + Number(t.amount), 0) || 0
+            ?.filter((t: any) => t.chain === asset.chain && t.currency === asset.currency)
+            .reduce((sum: number, t: any) => sum + Number(t.amount), 0) || 0
 
         const newAmount = asset.amountFloat - prevSum // Compare Floats logic.
         // Note: storing Floats in 'amount' column (Numeric) is fine.
@@ -255,7 +255,7 @@ serve(async (req) => {
     })
 
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 400,
     })

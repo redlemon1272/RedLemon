@@ -73,7 +73,9 @@ ENV/
 
 # Editor configs
 .vscode/
+!.vscode/settings.json
 .idea/
 
 *.dylib
 .modulecache/
+*.bak

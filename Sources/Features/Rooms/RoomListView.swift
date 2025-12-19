@@ -654,6 +654,11 @@ struct JoinRoomDialog: View {
                 .textFieldStyle(.roundedBorder)
                 .textCase(.uppercase)
                 .padding(.horizontal)
+                .onSubmit {
+                    if !roomCodeInput.isEmpty {
+                        onJoin(roomCodeInput.uppercased())
+                    }
+                }
 
             HStack(spacing: 12) {
                 Button("Cancel") {

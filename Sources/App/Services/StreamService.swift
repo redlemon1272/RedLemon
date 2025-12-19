@@ -360,7 +360,7 @@ actor StreamService: StreamResolving {
         } else {
 
         if quality == .fullHD || quality == .uhd4k {
-            let maxSizeBytes: Double = 12 * 1024 * 1024 * 1024 // 12 GB in bytes
+            let maxSizeBytes: Double = 22 * 1024 * 1024 * 1024 // 22 GB in bytes
 
             // MIN SIZE RULE: 1080p/4K movies should not be tiny (filters out fake files/samples)
             // Movies: Min 600MB for 1080p

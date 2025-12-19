@@ -858,6 +858,9 @@ extension WatchPartyLobbyView {
 // MARK: - Participant Row
 
 struct ParticipantRow: View {
+    @EnvironmentObject var appState: AppState
+    @ObservedObject private var socialService = SocialService.shared
+    
     let participant: Participant
     let canKick: Bool
     let canBlock: Bool
@@ -898,39 +901,46 @@ struct ParticipantRow: View {
                     .foregroundColor(.green)
             }
 
-            // Always show menu for social options
-            Menu {
-                if canAddFriend {
-                     Button(action: onAddFriend) {
-                        Label("Add Friend", systemImage: "person.badge.plus")
+            // Only show menu for strangers (not self, not friends)
+            // Check if this participant is the current user or a friend
+            let isCurrentUser = participant.id.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") == .orderedSame
+            let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(participant.id) == .orderedSame })
+            
+            // Only show menu if it's a stranger AND (we can add friend OR mute OR kick OR block)
+            if !isCurrentUser && !isFriend && (canAddFriend || canKick || canBlock) {
+                Menu {
+                    if canAddFriend {
+                         Button(action: onAddFriend) {
+                            Label("Add Friend", systemImage: "person.badge.plus")
+                        }
                     }
-                }
-                
-                Button(action: onMute) {
-                    Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
-                }
-
-                if canKick {
-                    Divider()
                     
-                    Button(role: .destructive, action: onKick) {
-                        Label("Kick Participant", systemImage: "xmark.circle")
+                    Button(action: onMute) {
+                        Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
                     }
-                }
-                
-                if canBlock {
-                    Button(role: .destructive, action: onBlock) {
-                        Label("Block User", systemImage: "slash.circle")
-                    }
-                }
 
-            } label: {
-                Image(systemName: "ellipsis.circle.fill")
-                    .foregroundColor(.white.opacity(0.6))
-                    .font(.system(size: 20))
+                    if canKick {
+                        Divider()
+                        
+                        Button(role: .destructive, action: onKick) {
+                            Label("Kick Participant", systemImage: "xmark.circle")
+                        }
+                    }
+                    
+                    if canBlock {
+                        Button(role: .destructive, action: onBlock) {
+                            Label("Block User", systemImage: "slash.circle")
+                        }
+                    }
+
+                } label: {
+                    Image(systemName: "ellipsis.circle.fill")
+                        .foregroundColor(.white.opacity(0.6))
+                        .font(.system(size: 20))
+                }
+                .menuStyle(BorderlessButtonMenuStyle())
+                .frame(width: 24, height: 24)
             }
-            .menuStyle(BorderlessButtonMenuStyle())
-            .frame(width: 24, height: 24)
         }
         .padding(8)
         .background(Color.white.opacity(0.05))

@@ -52,6 +52,11 @@ class MPVPlayerViewModel: ObservableObject {
         self.subtitleService = subtitleService ?? MPVSubtitleService(mpvController: mpvWrapper)
         self.playbackService = playbackService ?? MPVPlaybackService(mpvController: mpvWrapper)
 
+        // Load persisted mutes
+        if let savedMutes = UserDefaults.standard.array(forKey: mutedUsersKey) as? [String] {
+             self.mutedUserIds = Set(savedMutes)
+        }
+
         setupServiceBindings()
     }
 
@@ -282,7 +287,9 @@ class MPVPlayerViewModel: ObservableObject {
     // Chat state
     @Published var showChat: Bool = false
     @Published var showParticipantList: Bool = false
+    @Published var showParticipantList: Bool = false
     @Published var mutedUserIds: Set<String> = []
+    private let mutedUsersKey = "redlemon_muted_users"
 
     func toggleMute(userId: String) {
         if mutedUserIds.contains(userId) {
@@ -290,6 +297,8 @@ class MPVPlayerViewModel: ObservableObject {
         } else {
             mutedUserIds.insert(userId)
         }
+        // Persist
+        UserDefaults.standard.set(Array(mutedUserIds), forKey: mutedUsersKey)
     }
 
     // Watch Party State

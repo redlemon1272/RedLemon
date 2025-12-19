@@ -248,25 +248,41 @@ struct FriendsView: View {
 
     private var emptyState: some View {
         VStack(spacing: 20) {
-            Image(systemName: "person.2")
-                .font(.system(size: 64))
-                .foregroundColor(.secondary)
+            
+            if selectedTab == .online {
+                Image(systemName: "moon.zzz")
+                    .font(.system(size: 64))
+                    .foregroundColor(.secondary)
 
-            Text("No friends yet")
-                .font(.title2)
-                .fontWeight(.semibold)
+                Text("No friends online")
+                    .font(.title2)
+                    .fontWeight(.semibold)
 
-            Text("Add friends to watch together and see what they're watching")
-                .font(.body)
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: 400)
+                Text("None of your friends are currently online.")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+            } else {
+                Image(systemName: "person.2")
+                    .font(.system(size: 64))
+                    .foregroundColor(.secondary)
 
-            Button(action: { showingAddFriend = true }) {
-                Label("Add Your First Friend", systemImage: "person.badge.plus")
+                Text("No friends yet")
+                    .font(.title2)
+                    .fontWeight(.semibold)
+
+                Text("Add friends to watch together and see what they're watching")
+                    .font(.body)
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 400)
+
+                Button(action: { showingAddFriend = true }) {
+                    Label("Add Your First Friend", systemImage: "person.badge.plus")
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
             }
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(40)

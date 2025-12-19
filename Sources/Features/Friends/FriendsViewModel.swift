@@ -34,9 +34,23 @@ class FriendsViewModel: ObservableObject {
             .map { requests in requests.filter { $0.status == .pending }.count }
             .assign(to: &$requestCount)
             
-        socialService.$onlineUserIds
-            .map { $0.count }
-            .assign(to: &$onlineCount)
+        // Calculate Online Count (accepted friends only)
+        Publishers.CombineLatest3(
+            socialService.$friends,
+            socialService.$onlineUserIds,
+            socialService.$friendActivity
+        )
+        .map { friends, onlineIds, activityMap in
+            friends.filter { friend in
+                guard friend.status == .accepted else { return false }
+                // Online if in onlineIds OR has active watching status
+                if let activity = activityMap[friend.id], activity.currentlyWatching != nil {
+                    return true
+                }
+                return onlineIds.contains(friend.id)
+            }.count
+        }
+        .assign(to: &$onlineCount)
 
         socialService.$blockedUsers
             .map { $0.count }

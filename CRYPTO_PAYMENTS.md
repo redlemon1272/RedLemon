@@ -1,10 +1,10 @@
 # Crypto Payment System - Source of Truth
 
-**Last Updated:** December 2025  
+**Last Updated:** December 2025
 **Status:** Live on Supabase (Project: `nhvsojszwfvcinkyvzmf`)
 
 ## 1. Overview
-This system provides a serverless, non-custodial **Crypto Payment Gateway** for RedLemon.  
+This system provides a serverless, non-custodial **Crypto Payment Gateway** for RedLemon.
 It replaces legacy 3rd-party services (like LNBits) with a custom **HD Wallet** architecture hosted on Supabase Edge Functions.
 
 ### Key Features
@@ -42,16 +42,21 @@ The server uses **Extended Public Keys** (xPubs) to generate millions of unique 
 - **Trigger**: Called by the User's App (polling) to check if they paid.
 - **Logic**:
     1.  Retrieves the User's assigned address.
-    2.  **Scans Blockchains**:
+    2.  **Authentication**:
+        *   Primary: Supabase Auth Token (JWT).
+        *   Fallback: Accepts `user_id` in request body (for clients without valid session tokens).
+    3.  **Scans Blockchains**:
+        *   **Multi-Pool**: Iterates through ALL active assigned addresses (BTC, EVM) for the user simultaneously.
         *   **BTC**: Queries Mempool.space API.
         *   **EVM**: Queries RPCs for **Ethereum**, **Base**, **Arbitrum**, **Optimism**, and **Polygon** in parallel.
         *   **Tokens**: Checks `balanceOf` for **USDC** and **USDT** on all EVM chains.
-    3.  **Calculates Value**: Fetches real-time prices (Coinbase API) to convert total detected funds to USD.
-    4.  **Grants Access**:
+        *   **Debug**: Returns detailed RPC logs in the JSON response for debugging.
+    4.  **Calculates Value**: Fetches real-time prices (Coinbase API) to convert total detected funds to USD.
+    5.  **Grants Access**:
         *   $4.00+ = 30 Days
         *   $7.00+ = 60 Days
         *   $10.00+ = 90 Days
-    5.  Updates `users.subscription_expires_at`.
+    6.  Updates `users.subscription_expires_at`.
 
 ---
 
@@ -112,6 +117,11 @@ If a payment is not detected:
 2.  Look for `Check-Payment Scan` logs to see what balances the server sees.
     *   *Example Log*: `[{ chain: 'base', native: 0.002, usdc: 0, ... }]`
 3.  Verify the address on a block explorer (e.g., [basescan.org](https://basescan.org)).
+
+### User Can't See Funds? (Trust Wallet / MetaMask)
+If a user sends funds but claims "it's not in my wallet":
+1.  **Explain**: The system generates a **derived** address (`m/44'/60'/0'/0/index`). It is NOT the user's main wallet (`index 0`).
+2.  **Solution**: To view the funds, they must import their Seed Phrase into a wallet that supports **Multiple Accounts** (like MetaMask) and click "Add Account" until the derived address (Index 1, 2, etc.) appears. Trust Wallet often only scans Index 0 by default.
 
 ---
 

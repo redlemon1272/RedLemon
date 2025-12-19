@@ -27,7 +27,7 @@ struct AdminDashboardView: View {
     @State private var debugEventId: String = "tt2494362" // Default to 'Now You See Me' for convenience
     @State private var isResettingStream: Bool = false
     @State private var resetMessage: String?
-    @State private var activeDbEventRoom: SupabaseRoom? = nil // The actual room in DB (e.g. event_tt123)
+    @State private var activeEventRooms: [SupabaseRoom] = [] // All active rooms starting with event_
 
     var body: some View {
         VStack(spacing: 0) {
@@ -282,48 +282,55 @@ struct AdminDashboardView: View {
                                     .foregroundColor(.secondary)
                             }
                             
-                            if let dbRoom = activeDbEventRoom {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(dbRoom.name)
-                                            .fontWeight(.medium)
-                                            .font(.system(size: 13))
-                                        Text("\(dbRoom.id) • \(dbRoom.participantsCount) Active")
-                                            .font(.caption)
-                                            .foregroundColor(.secondary)
-                                            .monospacedDigit()
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Button(action: {
-                                        debugEventId = dbRoom.id
-                                        resetEventStream()
-                                    }) {
-                                        Text("Force Reset Room")
-                                            .font(.caption)
-                                            .fontWeight(.medium)
-                                            .foregroundColor(.white)
-                                            .padding(.horizontal, 8)
-                                            .padding(.vertical, 4)
-                                            .background(Color.orange)
-                                            .cornerRadius(4)
-                                    }
-                                    .buttonStyle(.plain)
-                                    .disabled(isResettingStream)
-                                }
-                                .padding(8)
-                                .background(Color.orange.opacity(0.05))
-                                .cornerRadius(6)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 6)
-                                        .stroke(Color.orange.opacity(0.3), lineWidth: 1)
-                                )
-                            } else {
-                                Text("No active event room found in database.")
+                            if activeEventRooms.isEmpty {
+                                Text("No active event rooms found.")
                                     .font(.caption)
                                     .italic()
                                     .foregroundColor(.secondary)
+                            } else {
+                                ForEach(activeEventRooms, id: \.id) { dbRoom in
+                                    HStack {
+                                        VStack(alignment: .leading) {
+                                            Text(dbRoom.name)
+                                                .fontWeight(.medium)
+                                                .font(.system(size: 13))
+                                            Text("\(dbRoom.id) • \(dbRoom.participantsCount) Active")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                                .monospacedDigit()
+                                            
+                                            Text("\(dbRoom.id) • \(dbRoom.participantsCount) Active")
+                                                .font(.caption)
+                                                .foregroundColor(.secondary)
+                                                .monospacedDigit()
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                        Button(action: {
+                                            debugEventId = dbRoom.id.replacingOccurrences(of: "event_", with: "") // populate input
+                                            resetEventStream()
+                                        }) {
+                                            Text("Reset Stream")
+                                                .font(.caption)
+                                                .fontWeight(.medium)
+                                                .foregroundColor(.white)
+                                                .padding(.horizontal, 8)
+                                                .padding(.vertical, 4)
+                                                .background(Color.orange)
+                                                .cornerRadius(4)
+                                        }
+                                        .buttonStyle(.plain)
+                                        .disabled(isResettingStream)
+                                    }
+                                    .padding(8)
+                                    .background(Color.orange.opacity(0.05))
+                                    .cornerRadius(6)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 6)
+                                            .stroke(Color.orange.opacity(0.3), lineWidth: 1)
+                                    )
+                                }
                             }
                         }
                         
@@ -473,7 +480,22 @@ struct AdminDashboardView: View {
                 }
 
                 // Logs List
-                Section(header: Text("Recent Logs")) {
+                Section(header: HStack {
+                    Text("Recent Logs")
+                    Spacer()
+                    Button(action: {
+                        Task {
+                            try? await SupabaseClient.shared.deleteAllAppLogs()
+                            refreshData()
+                        }
+                    }) {
+                        Label("Delete All", systemImage: "trash")
+                            .font(.caption)
+                            .foregroundColor(.red)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(logs.isEmpty)
+                }) {
                     if let error = errorMessage {
                         Text("Error: \(error)")
                             .foregroundColor(.red)
@@ -542,11 +564,19 @@ struct AdminDashboardView: View {
                 eventConfigVersion = config.version
                 eventConfigMovieCount = config.movies.count
                 
-                
-                // Fetch actual active rooms to find "Zombie" event rooms
-                // "event_" prefix is used for event rooms
+                // Fetch actual active rooms
                 let allRooms = try await SupabaseClient.shared.getAllRooms(limit: 50)
-                activeDbEventRoom = allRooms.first(where: { $0.id.starts(with: "event_") })
+                
+                // Identify Current Live Event
+                if let (_, mediaItem) = EventsConfigService.shared.calculateLiveEvent(config: config) {
+                    
+                    // PRE-FILL the input with the CORRECT current event ID
+                    debugEventId = mediaItem.id
+                }
+                
+                // Show ALL active event rooms (any room starting with "event_")
+                // This allows the admin to see if old/stale rooms (like "Fury") are still running
+                activeEventRooms = allRooms.filter { $0.id.starts(with: "event_") }
 
             } catch {
                 errorMessage = error.localizedDescription

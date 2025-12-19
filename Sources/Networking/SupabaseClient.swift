@@ -992,6 +992,21 @@ class SupabaseClient: RoomManager, UserManager {
             print("❌ Failed to delete app log: \(error)")
         }
     }
+    
+    /// Delete all app logs (Admin)
+    func deleteAllAppLogs() async throws {
+        // USE SERVICE KEY to bypass RLS (admin needs to delete ALL logs)
+        _ = try await makeRequest(
+            path: "/app_logs",
+            method: "DELETE",
+            query: ["id": "neq.00000000-0000-0000-0000-000000000000"], // Delete all (UUID not nil)
+            headers: [
+                "Authorization": "Bearer \(Config.supabaseServiceKey)",
+                "apikey": Config.supabaseServiceKey
+            ]
+        )
+        print("🗑️ Deleted all app logs.")
+    }
 
     /// Get total user count
     func getUserCount() async throws -> Int {
@@ -1472,6 +1487,8 @@ struct ReportedStream: Identifiable, Codable {
             print("❌ Failed to delete feedback: \(error)")
         }
     }
+
+
 
     /// Delete a session log (Admin)
     func deleteSessionLog(id: UUID) async {

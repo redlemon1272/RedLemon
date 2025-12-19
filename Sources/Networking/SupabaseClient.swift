@@ -505,17 +505,23 @@ class SupabaseClient: RoomManager, UserManager {
     // MARK: - Room Management
 
     /// Get all public rooms
-    /// Get all public rooms with pagination
-    func getAllRooms(limit: Int = 20, offset: Int = 0) async throws -> [SupabaseRoom] {
+    /// Get all public rooms with pagination and optional search
+    func getAllRooms(limit: Int = 20, offset: Int = 0, searchQuery: String? = nil) async throws -> [SupabaseRoom] {
+        var queryParams: [String: String] = [
+            "is_public": "eq.true",
+            "select": "*",
+            "order": "last_activity.desc",
+            "limit": String(limit),
+            "offset": String(offset)
+        ]
+        
+        if let search = searchQuery, !search.isEmpty {
+            queryParams["name"] = "ilike.%\(search)%"
+        }
+        
         let data = try await makeRequest(
             path: "/rooms",
-            query: [
-                "is_public": "eq.true",
-                "select": "*",
-                "order": "last_activity.desc",
-                "limit": String(limit),
-                "offset": String(offset)
-            ]
+            query: queryParams
         )
         return try jsonDecoder.decode([SupabaseRoom].self, from: data)
     }

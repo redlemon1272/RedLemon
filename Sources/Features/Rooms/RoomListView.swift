@@ -11,10 +11,31 @@ struct RoomListView: View {
     @State private var offset = 0
     @State private var hasMore = true
     @State private var isLoadingMore = false
+    @State private var searchText = ""
     private let pageSize = 20
 
     var body: some View {
         VStack {
+            // Search Bar
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(.secondary)
+                TextField("Search rooms...", text: $searchText)
+                    .textFieldStyle(.plain)
+                if !searchText.isEmpty {
+                    Button(action: { searchText = "" }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(10)
+            .background(Color(NSColor.controlBackgroundColor))
+            .cornerRadius(8)
+            .padding(.horizontal)
+            .padding(.top, 10)
+
             if isLoading && appState.activeRooms.isEmpty {
                 ProgressView("Loading rooms...")
                     .padding()
@@ -32,16 +53,27 @@ struct RoomListView: View {
                 }
             } else if appState.activeRooms.isEmpty {
                 VStack(spacing: 20) {
-                    Image(systemName: "person.3.slash")
-                        .font(.system(size: 60))
-                        .foregroundColor(.secondary)
-                    Text("No Active Rooms")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                    Text("Be the first to start a watch party!")
-                        .foregroundColor(.secondary)
-                    Button("Refresh") {
-                        loadRooms(reset: true)
+                    if !searchText.isEmpty {
+                        Image(systemName: "magnifyingglass")
+                            .font(.system(size: 60))
+                            .foregroundColor(.secondary)
+                        Text("No rooms found")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text("Try a different search term")
+                            .foregroundColor(.secondary)
+                    } else {
+                        Image(systemName: "person.3.slash")
+                            .font(.system(size: 60))
+                            .foregroundColor(.secondary)
+                        Text("No Active Rooms")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Text("Be the first to start a watch party!")
+                            .foregroundColor(.secondary)
+                        Button("Refresh") {
+                            loadRooms(reset: true)
+                        }
                     }
                 }
                 .padding()
@@ -55,25 +87,19 @@ struct RoomListView: View {
                             }
                         }
 
+                        // Infinite Scroll Trigger
                         if hasMore {
-                            Button(action: {
-                                loadRooms(reset: false)
-                            }) {
-                                HStack {
-                                    if isLoadingMore {
-                                        ProgressView()
-                                            .controlSize(.small)
+                            Color.clear
+                                .frame(height: 50)
+                                .onAppear {
+                                    if !isLoading && !isLoadingMore {
+                                        loadRooms(reset: false)
                                     }
-                                    Text(isLoadingMore ? "Loading..." : "Load More")
-                                        .fontWeight(.semibold)
                                 }
-                                .frame(maxWidth: .infinity)
+                            
+                            ProgressView()
+                                .scaleEffect(0.8)
                                 .padding()
-                                .background(Color.gray.opacity(0.1))
-                                .cornerRadius(8)
-                            }
-                            .disabled(isLoadingMore)
-                            .padding(.top, 8)
                         }
                     }
                     .padding()
@@ -116,6 +142,16 @@ struct RoomListView: View {
                 await disconnectRealtime()
             }
         }
+        .task(id: searchText) {
+            // Debounce search
+            if searchText.isEmpty {
+                 loadRooms(reset: true)
+                 return
+            }
+            
+            try? await Task.sleep(nanoseconds: 500_000_000) // 500ms debounce
+            loadRooms(reset: true)
+        }
     }
 
     private func loadRooms(reset: Bool = false) {
@@ -128,11 +164,13 @@ struct RoomListView: View {
             isLoadingMore = true
         }
 
+        let currentSearch = searchText // Capture for task
+
         Task {
             do {
                 // Fetch rooms from Supabase backend with pagination
-                print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize))...")
-                let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset)
+                print("📋 Fetching rooms from Supabase backend (offset: \(offset), limit: \(pageSize), search: '\(currentSearch)')...")
+                let backendRooms = try await SupabaseClient.shared.getAllRooms(limit: pageSize, offset: offset, searchQuery: currentSearch)
 
                 if backendRooms.count < pageSize {
                     await MainActor.run { hasMore = false }

@@ -12,6 +12,7 @@ struct ChatOverlayView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject private var socialService = SocialService.shared
     @ObservedObject private var eventChatService = EventChatService.shared
+    @StateObject private var friendsVM = FriendsViewModel()
     
     @FocusState private var isInputFocused: Bool
     @State private var inputText: String = ""
@@ -353,45 +354,25 @@ struct ChatOverlayView: View {
     private var friendsList: some View {
         ScrollView {
             LazyVStack(spacing: 8) {
-                // Consolidated list with custom sorting
-                // 1. Unread Messages (High Priority) or Online
-                // 2. Offline
-                
-                let sortedFriends = socialService.friends.sorted { f1, f2 in
-                    // Priority 1: Unread Messages
-                    let u1 = socialService.unreadCounts[f1.id] ?? 0
-                    let u2 = socialService.unreadCounts[f2.id] ?? 0
-                    if (u1 > 0) != (u2 > 0) {
-                        return u1 > 0 // Friends with unread messages go first
-                    }
-                    if u1 != u2 {
-                         // internal sort for unread
-                        return u1 > u2 
-                    }
-                    
-                    // Priority 2: Online Status
-                    let online1 = socialService.onlineUserIds.contains(f1.id)
-                    let online2 = socialService.onlineUserIds.contains(f2.id)
-                    if online1 != online2 {
-                        return online1 // Online friends go first (after unread check)
-                    }
-
-                    // Priority 3: Last Message Time (Recency)
-                    let t1 = socialService.messages[f1.id]?.last?.createdAt ?? Date.distantPast
-                    let t2 = socialService.messages[f2.id]?.last?.createdAt ?? Date.distantPast
-                    if t1 != t2 {
-                         return t1 > t2
-                    }
-                    
-                    // Priority 4: Alphabetical
-                    return f1.displayName < f2.displayName
+                // Large List Prompt in Overlay
+                if friendsVM.isLargeListMode && friendsVM.searchText.isEmpty {
+                     Text("Showing online & recent")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.5))
+                        .padding(.vertical, 4)
                 }
 
-                ForEach(sortedFriends) { friend in
+                ForEach(friendsVM.displayedFriends) { friend in
                     FriendRowButton(friend: friend, unreadCount: socialService.unreadCounts[friend.id] ?? 0) {
                         openDM(friend)
                     }
-                    .id(friend.id) // Simple ID, no duplicates possible
+                    .id(friend.id)
+                }
+                
+                if friendsVM.displayedFriends.isEmpty {
+                    Text("No friends found")
+                        .foregroundColor(.gray)
+                        .padding(.top, 20)
                 }
             }
             .padding()
@@ -483,74 +464,94 @@ struct ChatOverlayView: View {
 
             // Unified Input Bar (Sleek)
             HStack(alignment: .bottom, spacing: 6) {
-                // Emoji button
-                Button(action: {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
-                        showEmojiPicker.toggle()
-                    }
-                }) {
-                    Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
-                        .font(.system(size: 18))
-                        .foregroundColor(showEmojiPicker ? .yellow : .white.opacity(0.7))
-                        .frame(width: 22, height: 22)
-                        // Align visually with text center (approx)
-                        .padding(.bottom, 5)
-                }
-                .buttonStyle(.plain)
-
-                // Host Announcement Toggle (Megaphone)
-                if viewModel.isWatchPartyHost && chatMode == .room {
+                
+                if chatMode != .friends {
+                    // Emoji button (Hide in search mode)
                     Button(action: {
-                        withAnimation { isAnnouncementMode.toggle() }
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            showEmojiPicker.toggle()
+                        }
                     }) {
-                        Image(systemName: isAnnouncementMode ? "megaphone.fill" : "megaphone")
-                            .font(.system(size: 16))
-                            .foregroundColor(isAnnouncementMode ? .yellow : .white.opacity(0.5))
+                        Image(systemName: showEmojiPicker ? "face.smiling.inverse" : "face.smiling")
+                            .font(.system(size: 18))
+                            .foregroundColor(showEmojiPicker ? .yellow : .white.opacity(0.7))
                             .frame(width: 22, height: 22)
+                            // Align visually with text center (approx)
                             .padding(.bottom, 5)
                     }
                     .buttonStyle(.plain)
-                    .help("Broadcast Announcement")
+
+                    // Host Announcement Toggle (Megaphone)
+                    if viewModel.isWatchPartyHost && chatMode == .room {
+                        Button(action: {
+                            withAnimation { isAnnouncementMode.toggle() }
+                        }) {
+                            Image(systemName: isAnnouncementMode ? "megaphone.fill" : "megaphone")
+                                .font(.system(size: 16))
+                                .foregroundColor(isAnnouncementMode ? .yellow : .white.opacity(0.5))
+                                .frame(width: 22, height: 22)
+                                .padding(.bottom, 5)
+                        }
+                        .buttonStyle(.plain)
+                        .help("Broadcast Announcement")
+                    }
+                } else {
+                     // Search Icon for Friends mode
+                     Image(systemName: "magnifyingglass")
+                        .font(.system(size: 16))
+                        .foregroundColor(.white.opacity(0.5))
+                        .frame(width: 22, height: 22)
+                        .padding(.bottom, 5)
                 }
 
                 // Input Field
                 Group {
                     if #available(macOS 13.0, *) {
-                        TextField("Chat (⌘)", text: $inputText, axis: .vertical)
+                        TextField(inputPlaceholder, text: (chatMode == .friends) ? $friendsVM.searchText : $inputText, axis: .vertical)
                             .textFieldStyle(.plain)
                             .foregroundColor(.white)
                             .focused($isInputFocused)
                             .lineLimit(1...5)
-                            .onSubmit { sendMessage() }
+                            .onSubmit { 
+                                if chatMode != .friends { sendMessage() }
+                            }
                     } else {
                         // Fallback for macOS 12
                         ZStack(alignment: .topLeading) {
-                            if inputText.isEmpty {
-                                Text("Chat (⌘)")
+                            if (chatMode == .friends ? friendsVM.searchText : inputText).isEmpty {
+                                Text(inputPlaceholder)
                                     .foregroundColor(.white.opacity(0.5))
                                     .padding(.leading, 4) // Align with text cursor
                                     .padding(.top, 0)
                                     .allowsHitTesting(false)
                             }
                             
-                            TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
-                                .frame(minHeight: 20, maxHeight: 100)
+                            if chatMode == .friends {
+                                TextField("", text: $friendsVM.searchText)
+                                    .textFieldStyle(.plain)
+                                    .foregroundColor(.white)
+                            } else {
+                                TransparentTextEditor(text: $inputText, onCommit: sendMessage, isFocused: manualFocus)
+                                    .frame(minHeight: 20, maxHeight: 100)
+                            }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 4)
                     }
                 }
-
-                // Send Button
-                Button(action: sendMessage) {
-                    Image(systemName: "arrow.up.circle.fill")
-                        .font(.system(size: 20))
-                        .symbolRenderingMode(.hierarchical)
-                        .foregroundColor(inputText.isEmpty ? .gray : .blue)
+                
+                if chatMode != .friends {
+                    // Send Button
+                    Button(action: sendMessage) {
+                        Image(systemName: "arrow.up.circle.fill")
+                            .font(.system(size: 20))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(inputText.isEmpty ? .gray : .blue)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(inputText.isEmpty)
+                    .padding(.bottom, 2)
                 }
-                .buttonStyle(.plain)
-                .disabled(inputText.isEmpty)
-                .padding(.bottom, 2)
             }
             .padding(.horizontal, 8)
             .padding(.horizontal, 8)
@@ -564,6 +565,15 @@ struct ChatOverlayView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 8)
             .frame(height: 32)
+        }
+    }
+    
+    private var inputPlaceholder: String {
+        switch chatMode {
+        case .friends: return "Search friends..."
+        case .room: return isAnnouncementMode ? "Broadcast to Room..." : "Message Room..."
+        case .event: return "Message Event..."
+        case .dm: return "Message..."
         }
     }
 

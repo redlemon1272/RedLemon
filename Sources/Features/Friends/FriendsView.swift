@@ -10,19 +10,13 @@ import SwiftUI
 struct FriendsView: View {
     @EnvironmentObject var appState: AppState
     @ObservedObject var socialService = SocialService.shared
+    @StateObject private var viewModel = FriendsViewModel()
     
     @State private var showingAddFriend = false
-    @State private var searchText = ""
-    @State private var selectedTab: FriendTab = .all
     @State private var selectedFriend: Friend?
 
-    enum FriendTab {
-        case all
-        case online
-        case requests
-        case blocked // New Tab
-    }
-
+    // Tabs are now just for view logic, handled by VM
+    
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -40,12 +34,14 @@ struct FriendsView: View {
                     if socialService.isLoading && socialService.friends.isEmpty {
                         ProgressView()
                             .padding(40)
-                    } else if filteredFriends.isEmpty && selectedTab != .requests && selectedTab != .blocked {
-                        emptyState
                     } else {
-                        switch selectedTab {
+                        switch viewModel.selectedTab {
                         case .all, .online:
-                            friendsList
+                            if viewModel.displayedFriends.isEmpty {
+                                emptyState
+                            } else {
+                                friendsList
+                            }
                         case .requests:
                             requestsList
                         case .blocked:
@@ -80,7 +76,7 @@ struct FriendsView: View {
                 Text("Friends")
                     .font(.system(size: 32, weight: .bold))
 
-                Text("\(socialService.friends.filter { $0.status == .accepted }.count) friends")
+                Text("\(viewModel.friendsCount) friends")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
             }
@@ -102,11 +98,11 @@ struct FriendsView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.secondary)
 
-            TextField("Search friends...", text: $searchText)
+            TextField("Search friends...", text: $viewModel.searchText)
                 .textFieldStyle(.plain)
 
-            if !searchText.isEmpty {
-                Button(action: { searchText = "" }) {
+            if !viewModel.searchText.isEmpty {
+                Button(action: { viewModel.searchText = "" }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.secondary)
                 }
@@ -123,16 +119,16 @@ struct FriendsView: View {
 
     private var tabSelector: some View {
         HStack(spacing: 4) {
-            tabButton(title: "All", count: socialService.friends.filter { $0.status == .accepted }.count, tab: .all)
-            tabButton(title: "Online", count: onlineFriends.count, tab: .online)
-            tabButton(title: "Requests", count: socialService.friendRequests.filter { $0.status == .pending }.count, tab: .requests)
-             tabButton(title: "Blocked", count: socialService.blockedUsers.count, tab: .blocked)
+            tabButton(title: "All", count: viewModel.friendsCount, tab: .all)
+            tabButton(title: "Online", count: viewModel.onlineCount, tab: .online)
+            tabButton(title: "Requests", count: viewModel.requestCount, tab: .requests)
+             tabButton(title: "Blocked", count: viewModel.blockedCount, tab: .blocked)
         }
         .padding()
     }
 
-    private func tabButton(title: String, count: Int, tab: FriendTab) -> some View {
-        Button(action: { selectedTab = tab }) {
+    private func tabButton(title: String, count: Int, tab: FriendsView.FriendTab) -> some View {
+        Button(action: { viewModel.selectedTab = tab }) {
             HStack {
                 Text(title)
                 if count > 0 {
@@ -140,14 +136,14 @@ struct FriendsView: View {
                         .font(.caption)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(selectedTab == tab ? Color.white.opacity(0.3) : Color.secondary.opacity(0.2))
+                        .background(viewModel.selectedTab == tab ? Color.white.opacity(0.3) : Color.secondary.opacity(0.2))
                         .cornerRadius(10)
                 }
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
-            .background(selectedTab == tab ? Color.blue : Color.clear)
-            .foregroundColor(selectedTab == tab ? .white : .primary)
+            .background(viewModel.selectedTab == tab ? Color.blue : Color.clear)
+            .foregroundColor(viewModel.selectedTab == tab ? .white : .primary)
             .cornerRadius(8)
         }
         .buttonStyle(.plain)
@@ -156,28 +152,63 @@ struct FriendsView: View {
     // MARK: - Friends List
 
     private var friendsList: some View {
-        ForEach(filteredFriends) { friend in
-            Button(action: {
-                selectedFriend = friend
-            }) {
-                FriendRow(
-                    friend: friend,
-                    activity: socialService.friendActivity[friend.id],
-                    unreadCount: socialService.unreadCounts[friend.id] ?? 0,
-                    onToggleFavorite: { await toggleFavorite(friend) },
-                    onRemove: { await removeFriend(friend) },
-                    onInvite: { inviteToWatchParty(friend) },
-                    onJoin: { joinFriend(friend) }
-                )
+        Group {
+            if viewModel.isLargeListMode && viewModel.selectedTab == .all && viewModel.searchText.isEmpty {
+                // Large List Prompt (Only for 'All' tab when not searching)
+                VStack(spacing: 12) {
+                    Text("Showing online & favorite friends")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .padding(.bottom, 4)
+                        
+                    ForEach(viewModel.displayedFriends) { friend in
+                        friendRow(for: friend)
+                    }
+                    
+                    if viewModel.displayedFriends.isEmpty {
+                        Text("All quiet right now.")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                            .padding(.top, 20)
+                    }
+                    
+                    Divider()
+                        .padding(.vertical, 8)
+                        
+                    Text("Search to find offline friends")
+                        .font(.caption)
+                        .italic()
+                        .foregroundColor(.secondary)
+                }
+            } else {
+                // Standard List
+                ForEach(viewModel.displayedFriends) { friend in
+                    friendRow(for: friend)
+                }
             }
-            .buttonStyle(.plain)
         }
+    }
+    
+    private func friendRow(for friend: Friend) -> some View {
+        Button(action: {
+            selectedFriend = friend
+        }) {
+            FriendRow(
+                friend: friend,
+                activity: socialService.friendActivity[friend.id],
+                unreadCount: socialService.unreadCounts[friend.id] ?? 0,
+                onToggleFavorite: { await toggleFavorite(friend) },
+                onRemove: { await removeFriend(friend) },
+                onInvite: { inviteToWatchParty(friend) },
+                onJoin: { joinFriend(friend) }
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Requests List
 
     private var requestsList: some View {
-
         Group {
             if socialService.friendRequests.filter({ $0.status == .pending }).isEmpty {
                 VStack(spacing: 12) {
@@ -249,7 +280,7 @@ struct FriendsView: View {
     private var emptyState: some View {
         VStack(spacing: 20) {
             
-            if selectedTab == .online {
+            if viewModel.selectedTab == .online {
                 Image(systemName: "moon.zzz")
                     .font(.system(size: 64))
                     .foregroundColor(.secondary)
@@ -262,6 +293,21 @@ struct FriendsView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
+            } else if viewModel.isLargeListMode && viewModel.selectedTab == .all {
+                 // Large List Empty State (Search Prompt)
+                 Image(systemName: "person.crop.circle.badge.questionmark")
+                     .font(.system(size: 64))
+                     .foregroundColor(.secondary)
+                     
+                 Text("Find a Friend")
+                     .font(.title2)
+                     .fontWeight(.semibold)
+                     
+                 Text("You have many friends! Use the search bar to find someone specific.")
+                     .font(.body)
+                     .foregroundColor(.secondary)
+                     .multilineTextAlignment(.center)
+                     .padding(.horizontal)
             } else {
                 Image(systemName: "person.2")
                     .font(.system(size: 64))
@@ -287,68 +333,10 @@ struct FriendsView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(40)
     }
-
-    // MARK: - Filtered Friends
-
-    private var filteredFriends: [Friend] {
-        var result = socialService.friends.filter { $0.status == .accepted }
-
-        // Filter by tab
-        switch selectedTab {
-        case .all:
-            break
-        case .online:
-            result = result.filter { friend in
-                if let activity = socialService.friendActivity[friend.id] {
-                    return activity.currentlyWatching != nil || socialService.onlineUserIds.contains(friend.id)
-                }
-                return socialService.onlineUserIds.contains(friend.id)
-            }
-        case .requests:
-            return [] // Handled separately
-        case .blocked:
-            return [] // Handled separately
-        }
-
-        // Filter by search
-        if !searchText.isEmpty {
-            result = result.filter { friend in
-                friend.username.localizedCaseInsensitiveContains(searchText) ||
-                friend.id.localizedCaseInsensitiveContains(searchText)
-            }
-        }
-
-        // Sort: Unread -> Favorites -> Last Message -> Username
-        return result.sorted { lhs, rhs in
-            // 1. Unread messages (High priority)
-            let unreadLhs = socialService.unreadCounts[lhs.id] ?? 0
-            let unreadRhs = socialService.unreadCounts[rhs.id] ?? 0
-            if unreadLhs != unreadRhs {
-                return unreadLhs > unreadRhs
-            }
-            
-            // 2. Favorites
-            if lhs.isFavorite != rhs.isFavorite {
-                return lhs.isFavorite
-            }
-            
-            // 3. Last Message Time (Recent conversations first)
-            // Note: messages might be empty if not loaded, treating as distantPast
-            let lastMsgLhs = socialService.messages[lhs.id]?.last?.createdAt ?? Date.distantPast
-            let lastMsgRhs = socialService.messages[rhs.id]?.last?.createdAt ?? Date.distantPast
-            if lastMsgLhs != lastMsgRhs {
-                 return lastMsgLhs > lastMsgRhs
-            }
-            
-            // 4. Alphabetical
-            return lhs.username.localizedCaseInsensitiveCompare(rhs.username) == .orderedAscending
-        }
-    }
-
-    private var onlineFriends: [Friend] {
-        socialService.friends.filter { friend in
-            socialService.onlineUserIds.contains(friend.id)
-        }
+    
+    // MARK: - Legacy FriendTab for View State (kept for compatibility)
+    enum FriendTab {
+       case all, online, requests, blocked
     }
 
     // MARK: - Actions
@@ -390,6 +378,9 @@ struct FriendsView: View {
         }
     }
 }
+
+// ... Rest of the file (FriendRow, etc...) code kept below as helper structs
+
 
 // MARK: - Friend Row
 

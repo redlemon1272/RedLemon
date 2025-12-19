@@ -223,45 +223,55 @@ struct ChatOverlayView: View {
     
     // MARK: - List Views
     
-    private func userMenu(username: String, userId: String?, isHost: Bool) -> some View {
-        Menu {
-            Text(username) // Header
-
-            if let uid = userId, uid != appState.currentUserId?.uuidString {
-                 let isFriend = socialService.friends.contains(where: { $0.id == uid })
-                 
-                 if !isFriend {
-                     Button(action: {
-                         Task { _ = await socialService.sendRequest(toUserId: uid) }
-                     }) {
-                         Label("Add Friend", systemImage: "person.badge.plus")
-                     }
-                 }
-
-                 Button(action: {
-                     viewModel.toggleMute(userId: uid)
-                 }) {
-                     Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
-                           systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
-                 }
-                 
-                 // Host Options (Verify context)
-                 if isHost {
-                     Divider()
-                     Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
-                         Label("Kick User", systemImage: "xmark.circle")
-                     }
-                      Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
-                         Label("Block User", systemImage: "slash.circle")
-                     }
-                 }
-            }
-        } label: {
-            Text(username)
-                .font(.caption.weight(.semibold))
-                .foregroundColor(.blue)
+    private func userMenu(username: String, userId: String?, isSystem: Bool, isHost: Bool) -> some View {
+        if isSystem {
+            return AnyView(
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.blue)
+            )
         }
-        .menuStyle(.borderlessButton)
+        
+        return AnyView(
+            Menu {
+                Text(username) // Header
+
+                if let uid = userId, uid != appState.currentUserId?.uuidString {
+                     let isFriend = socialService.friends.contains(where: { $0.id == uid })
+                     
+                     if !isFriend {
+                         Button(action: {
+                             Task { _ = await socialService.sendRequest(toUserId: uid) }
+                         }) {
+                             Label("Add Friend", systemImage: "person.badge.plus")
+                         }
+                     }
+
+                     Button(action: {
+                         viewModel.toggleMute(userId: uid)
+                     }) {
+                         Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
+                               systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
+                     }
+                     
+                     // Host Options (Verify context)
+                     if isHost {
+                         Divider()
+                         Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
+                             Label("Kick User", systemImage: "xmark.circle")
+                         }
+                          Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
+                             Label("Block User", systemImage: "slash.circle")
+                         }
+                     }
+                }
+            } label: {
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.blue)
+            }
+            .menuStyle(.borderlessButton)
+        )
     }
 
     private var eventChatList: some View {
@@ -271,7 +281,7 @@ struct ChatOverlayView: View {
                     ForEach(eventChatService.messages.suffix(maxVisibleMessages), id: \.id) { message in
                         if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
                             VStack(alignment: .leading, spacing: 4) {
-                                userMenu(username: message.username, userId: message.senderId, isHost: false) // Event chat has no host moderation
+                                userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false) // Event chat has no host moderation
                                 Text(message.text)
                                     .font(.body)
                                     .foregroundColor(.white)
@@ -301,7 +311,7 @@ struct ChatOverlayView: View {
                 ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)).reversed(), id: \.id) { message in
                     if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
                         VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isHost: viewModel.isWatchPartyHost)
+                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost)
                             Text(message.text)
                                 .font(.body)
                                 .foregroundColor(.white)

@@ -12,6 +12,7 @@ class FriendsViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var selectedTab: FriendsView.FriendTab = .all
     @Published var isLargeListMode: Bool = false
+    @Published var isReady: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     private let socialService = SocialService.shared
@@ -77,6 +78,10 @@ class FriendsViewModel: ObservableObject {
                 search: search,
                 tab: tab
             )
+            
+            if !self.isReady {
+                self.isReady = true
+            }
         }
         .store(in: &cancellables)
     }

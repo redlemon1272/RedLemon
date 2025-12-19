@@ -369,9 +369,15 @@ struct ChatOverlayView: View {
                     .id(friend.id)
                 }
                 
-                if friendsVM.displayedFriends.isEmpty {
-                    Text("No friends found")
-                        .foregroundColor(.gray)
+                if friendsVM.isReady {
+                    if friendsVM.displayedFriends.isEmpty {
+                        Text("No friends found")
+                            .foregroundColor(.gray)
+                            .padding(.top, 20)
+                    }
+                } else {
+                    ProgressView()
+                        .scaleEffect(0.8)
                         .padding(.top, 20)
                 }
             }

@@ -1,0 +1,1346 @@
+2025-12-19 18:50:50.214 RedLemon[24326:202588] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-19 18:50:50.214 RedLemon[24326:202588] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-19 18:50:50.303 RedLemon[24326:202588] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-19 18:50:50.304 RedLemon[24326:202653] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-19 18:50:50.338 RedLemon[24326:202588] ✅ Playback state reset complete - starting in browse view
+2025-12-19 18:50:50.338 RedLemon[24326:202588] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-19 18:50:50.338 RedLemon[24326:202588] 🧪 Testing Profile: debug
+2025-12-19 18:50:50.339 RedLemon[24326:202635] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-19 18:50:50.383 RedLemon[24326:202588] ✅ Keychain: Found stored username: ursinho
+2025-12-19 18:50:50.383 RedLemon[24326:202588] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-19 18:50:50.383 RedLemon[24326:202636] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-19 18:50:50.450 RedLemon[24326:202637] 📡 SupabaseClient: User lookup response received (339 bytes)
+2025-12-19 18:50:50.460 RedLemon[24326:202637] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-19 18:50:50.460 RedLemon[24326:202637] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:50:50.490 RedLemon[24326:202588] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:50:50.490 RedLemon[24326:202588] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:50:50.490 RedLemon[24326:202588] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:50:50.490 RedLemon[24326:202588] 🚀 RedLemon: Starting HTTP server...
+2025-12-19 18:50:50.491 RedLemon[24326:202588] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-19 18:50:50.508 RedLemon[24326:202588] ✅ RedLemon: HTTPServer instance created
+2025-12-19 18:50:50.509 RedLemon[24326:202637] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"FB17D4D4-C506-4DD1-BF10-CCD2C33DA49C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-19 18:50:50.814 RedLemon[24326:202588] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-19 18:50:52.554 RedLemon[24326:202588] ✅ RedLemon: Server marked as ready
+2025-12-19 18:50:52.602 RedLemon[24326:202588] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-19 18:50:52.602 RedLemon[24326:202588] 🔍 Performing startup checks...
+2025-12-19 18:50:52.602 RedLemon[24326:202588] ✅ Username-based authentication ready
+2025-12-19 18:50:54.152 RedLemon[24326:202588] 🔍 Performing startup checks...
+2025-12-19 18:50:54.152 RedLemon[24326:202588] ✅ Username-based authentication ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+✅ [EventsView] Loaded 444 movies from config version 1360
+🗓 AppState: Updated schedule epoch to 2025-12-09 22:44:42 +0000
+⏰ AppState: Next schedule update set for Event End: 2025-12-20 01:18:42 +0000
+⏰ AppState: Scheduling update in 5272 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}]
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"1B92D210-6527-4298-9899-CB7BA18DE4F1","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC2O2MhUeB5_SP","phx_ref_prev":"GILC1OX5t6aB52iB","last_seen":"2025-12-19T23:50:40.733Z","room_id":"FVCS","started_at":"2025-12-19T23:50:23.423Z","status":"In Lobby: Rush Hour 3","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC24SXhHwrgUmM","last_seen":"2025-12-19T23:50:51.852Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"15AF4DCA-C5A8-422F-A446-6584FA2BB7A9","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":102443684,"event":"INSERT","filter":"receiver_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"},{"id":49850706,"event":"INSERT","filter":"sender_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":88182,"eth":2978.105},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","opt eth_getBalance: undefined","eth eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}, 
+ {"id":"event_tt0293564","name":"Rush Hour 3","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T20:36:35.361762","last_activity":"2025-12-19T21:34:29.591139","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/XXL2ELMVZLQAQ88/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE1OS01ODgzNTYuemlw?token=F1435170-909E-4AAB-B719-35CEE1CCA7EE"}, 
+ {"id":"event_tt2713180","name":"Fury","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2f335f14cefd735a7687cf7f31ba42a0db15a217","imdb_id":"tt2713180","poster_url":"https://images.metahub.space/poster/small/tt2713180/img","backdrop_url":"https://images.metahub.space/background/medium/tt2713180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T18:36:53.334187","last_activity":"2025-12-19T19:17:58","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/6ZUSKHWKA3DBW125/Fury.2014.1080p.BluRay.x264.YIFY.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzEzMzE1LTEwNDQ2MTguemlw?token=B407DCED-855D-4065-BD53-37D960BC2341"}, 
+ {"id":"event_tt0103644","name":"Alien³","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2b23bc82460149251d032e3bfe7882b97ff59fdf","imdb_id":"tt0103644","poster_url":"https://images.metahub.space/poster/small/tt0103644/img","backdrop_url":"https://images.metahub.space/background/medium/tt0103644/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T16:23:02.276982","last_activity":"2025-12-19T17:02:02.879296","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/IZG36JMXCOP4G44/Alien.3.1992.Special.Edition.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NTc5NDktODM4MDgxMi56aXA=?token=CCA5F544-3A83-49E4-A1BD-7FEF95B4C88B"}, 
+ {"id":"event_tt23468450","name":"Longlegs","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"815051d0ae49167ea1af3abbf482cabe9f66fca3","imdb_id":"tt23468450","poster_url":"https://images.metahub.space/poster/small/tt23468450/img","backdrop_url":"https://images.metahub.space/background/medium/tt23468450/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T15:33:53.826375","last_activity":"2025-12-19T15:34:49.277293","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/XZFGEKEE6ONI621/Longlegs.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzOTk0NDctODMyMjcxMC56aXA=?token=04B7FF0C-EE4B-434B-85F7-CCA36E2962F5"}]
+✅ Loaded 0 rooms (total: 0)
+🔍 Supabase Response for /rooms: [{"id":"event_tt0499549","name":"Avatar","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"bcc4c81254b7d8ed525f7365d8a75aafb4d220b9","imdb_id":"tt0499549","poster_url":"https://images.metahub.space/poster/small/tt0499549/img","backdrop_url":"https://images.metahub.space/background/medium/tt0499549/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T22:28:38.270646","last_activity":"2025-12-19T22:29:41.734984","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/2QEHN46COSUWI41/Avatar.2009.EXTENDED.REPACK.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5MTMyMTItMjg5NzQ3OC56aXA=?token=2EA61F70-D424-42EA-931A-CD7C20C9499B"}, 
+ {"id":"event_tt0293564","name":"Rush Hour 3","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T20:36:35.361762","last_activity":"2025-12-19T21:34:29.591139","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/XXL2ELMVZLQAQ88/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE1OS01ODgzNTYuemlw?token=F1435170-909E-4AAB-B719-35CEE1CCA7EE"}, 
+ {"id":"event_tt2713180","name":"Fury","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2f335f14cefd735a7687cf7f31ba42a0db15a217","imdb_id":"tt2713180","poster_url":"https://images.metahub.space/poster/small/tt2713180/img","backdrop_url":"https://images.metahub.space/background/medium/tt2713180/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T18:36:53.334187","last_activity":"2025-12-19T19:17:58","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/6ZUSKHWKA3DBW125/Fury.2014.1080p.BluRay.x264.YIFY.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzEzMzE1LTEwNDQ2MTguemlw?token=B407DCED-855D-4065-BD53-37D960BC2341"}, 
+ {"id":"event_tt0103644","name":"Alien³","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"2b23bc82460149251d032e3bfe7882b97ff59fdf","imdb_id":"tt0103644","poster_url":"https://images.metahub.space/poster/small/tt0103644/img","backdrop_url":"https://images.metahub.space/background/medium/tt0103644/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T16:23:02.276982","last_activity":"2025-12-19T17:02:02.879296","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/IZG36JMXCOP4G44/Alien.3.1992.Special.Edition.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0NTc5NDktODM4MDgxMi56aXA=?token=CCA5F544-3A83-49E4-A1BD-7FEF95B4C88B"}, 
+ {"id":"event_tt23468450","name":"Longlegs","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":"815051d0ae49167ea1af3abbf482cabe9f66fca3","imdb_id":"tt23468450","poster_url":"https://images.metahub.space/poster/small/tt23468450/img","backdrop_url":"https://images.metahub.space/background/medium/tt23468450/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-19T15:33:53.826375","last_activity":"2025-12-19T15:34:49.277293","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/XZFGEKEE6ONI621/Longlegs.2024.1080p.AMZN.WEBRip.1400MB.DD5.1.x264-GalaxyRG.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzOTk0NDctODMyMjcxMC56aXA=?token=04B7FF0C-EE4B-434B-85F7-CCA36E2962F5"}]
+📡 Joined channel: realtime:rooms_updates
+✅ Loaded 0 rooms (total: 0)
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"5C2025-12-19 18:50:55.345 RedLemon[24326:202588] 🔄 Checking for app updates...
+9F25CD-3BDD-44F4-85C9-B0E0A2139EBD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":88182,"eth":2978.105},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.085s (RTT: 92ms)
+   Local:  2025-12-19 23:50:55 +0000
+   Server: 2025-12-19 23:50:55 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC3ZZwL3-B56cK","phx_ref_prev":"GILC2O2MhUeB5_SP","last_seen":"2025-12-19T23:51:00.733Z","room_id":"FVCS","started_at":"2025-12-19T23:50:23.423Z","status":"In Lobby: Rush Hour 3","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC2O2MhUeB5_SP","phx_ref_prev":"GILC1OX5t6aB52iB","last_seen":"2025-12-19T23:50:40.733Z","room_id":"FVCS","started_at":"2025-12-19T23:50:23.423Z","status":"In Lobby: Rush Hour 3","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🚪 Joining room by code: FVCS
+🔍 Looking up room by code on Supabase: FVCS
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:50:23","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🚪 Joining room: FVCS
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room FVCS...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+🔌 Setting up Realtime channel: watch-party:FVCS
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 SocialService: Updated status - In Lobby: Rush Hour 3: Rush Hour 3
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:FVCS
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+[ INFO ] GET /api/metadata/meta/movie/tt0293564 [request-id: DF930313-028D-42C5-9540-1CDFD84D30A8]
+2025-12-19 18:51:04.022 RedLemon[24326:202588] ✅ Guest joined room FVCS in database
+2025-12-19 18:51:04.149 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:04.149 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:04.156 RedLemon[24326:202740] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-19 18:51:04.157 RedLemon[24326:202740]    Payload keys: type, timestamp, chatText, chatUsername, position, senderId
+2025-12-19 18:51:04.158 RedLemon[24326:202740] ✅ Realtime: Message broadcast complete
+2025-12-19 18:51:04.204 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:04.205 RedLemon[24326:202787]    Payload keys: chatText, timestamp, type, senderId, position, chatUsername
+2025-12-19 18:51:04.205 RedLemon[24326:202787] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-19 18:51:04.205 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-19 18:51:04.205 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:04.209 RedLemon[24326:202588] 👋 Received: Guest 'ursinho' joined room FVCS
+📨 Received: {"ref":"1BB97986-4A5A-4E04-8AF6-5F754CC0912A","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":91357404,"event":"*","filter":"id=eq.FVCS","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC3lFzHmMrgbuD","phx_ref_prev":"GILC24SXhHwrgUmM","last_seen":"2025-12-19T23:51:03.879Z","room_id":"FVCS","started_at":"2025-12-19T23:51:03.879Z","status":"In Lobby: Rush Hour 3","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC24SXhHwrgUmM","last_seen":"2025-12-19T23:50:51.852Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:FVCS"},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"7c35d622-dd35-11f0-97cf-0a58a9feac02":{"metas":[{"phx_ref":"GILC1PadeO_3I7JI","phx_ref_prev":"GILC1Paa_PL3I77B","is_host":true,"joined_at":1766188223.589066,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"9451ca04-dd35-11f0-860a-0a58a9feac02":{"metas":[{"phx_ref":"GILC3lJhfGqK_FQO","is_host":false,"joined_at":1766188263.884639,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:FVCS"}
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:50:23","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt0293564
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Rush Hour 3
+🔍 [DEBUG] Successfully created MediaItem from meta: Rush Hour 3
+✅ Lobby: Loaded metadata for Rush Hour 3
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Refreshed room state. isPlaying: false
+🔌 Setting up Realtime channel: watch-party:FVCS
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:FVCS, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "FVCS", "name": "Rush Hour 3", "season": null, "episode": null, "imdb_id": "tt0293564", "playlist": [{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}], "is_public": false, "created_at": "2025-12-19T23:50:23.036587", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0293564/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0293564/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2025-12-19T23:51:04.04248", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-19T23:51:04.051Z","old_record":{"id": "FVCS"}},"ids":[91357404]},"topic":"realtime:watch-party:FVCS"}
+🚦 Lobby State: connected
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"9451ca04-dd35-11f0-860a-0a58a9feac02":{"metas":[{"phx_ref":"GILC3mBtsSOK_DLD","phx_ref_prev":"GILC3lJhfGqK_FQO","is_host":false,"joined_at":1766188264.092376,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"9451ca04-dd35-11f0-860a-0a58a9feac02":{"metas":[{"phx_ref":"GILC3lJhfGqK_FQO","is_host":false,"joined_at":1766188263.884639,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a22025-12-19 18:51:15.162 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:15.162 RedLemon[24326:202787]    Payload keys: position, timestamp, type, senderId, chatUsername, chatText
+2025-12-19 18:51:15.163 RedLemon[24326:202787] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2025-12-19 18:51:15.164 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-19 18:51:15.164 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:15.164 RedLemon[24326:202588] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2025-12-19 18:51:15.175 RedLemon[24326:202588] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2025-12-19 18:51:15.208 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:15.209 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:15.210 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:15.210 RedLemon[24326:202588] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-19 18:51:15.245 RedLemon[24326:202588] ✅ Guest: Synced stream details from host (Hash: 70819fe4)
+2025-12-19 18:51:15.246 RedLemon[24326:202588] 🎬 Guest: Fetch took 0.071s, waiting 3.179s
+9a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC4CxaApgrgSYH","phx_ref_prev":"GILC3lFzHmMrgbuD","last_seen":"2025-12-19T23:51:11.854Z","room_id":"FVCS","started_at":"2025-12-19T23:51:03.879Z","status":"In Lobby: Rush Hour 3","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC3lFzHmMrgbuD","phx_ref_prev":"GILC24SXhHwrgUmM","last_seen":"2025-12-19T23:51:03.879Z","room_id":"FVCS","started_at":"2025-12-19T23:51:03.879Z","status":"In Lobby: Rush Hour 3","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:04.04248","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "FVCS", "name": "Rush Hour 3", "season": null, "episode": null, "imdb_id": "tt0293564", "playlist": [{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}], "is_public": false, "created_at": "2025-12-19T23:50:23.036587", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0293564/img", "description": null, "stream_hash": "70819fe4c56b12b936461953292868e847862690", "backdrop_url": "https://images.metahub.space/background/medium/tt0293564/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2025-12-19T23:51:15", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-19T23:51:15.139Z","old_record":{"id": "FVCS"}},"ids":[91357404]},"topic":"realtime:watch-party:FVCS"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "FVCS", "name": "Rush Hour 3", "season": null, "episode": null, "imdb_id": "tt0293564", "playlist": [{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}], "is_public": false, "created_at": "2025-12-19T23:50:23.036587", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt0293564/img", "description": null, "stream_hash": "70819fe4c56b12b936461953292868e847862690", "backdrop_url": "https://images.metahub.space/background/medium/tt0293564/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2025-12-19T23:51:15", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-19T23:51:15.225Z","old_record":{"id": "FVCS"}},"ids":[91357404]},"topic":"realtime:watch-party:FVCS"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:15","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:15","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:15","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://images.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:15","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🔍 Supabase Response for /rooms: [{"id":"FVCS","name":"Rush Hour 3","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"70819fe4c56b12b936461953292868e847862690","imdb_id":"tt0293564","poster_url":"https://im2025-12-19 18:51:18.712 RedLemon[24326:202588] 🎬 Guest: Starting playback after countdown
+2025-12-19 18:51:18.712 RedLemon[24326:202588] 🎬 Guest: Launching player for Rush Hour 3
+2025-12-19 18:51:18.757 RedLemon[24326:202588] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0293564/img
+2025-12-19 18:51:18.757 RedLemon[24326:202588] ⏳ Background art loading...
+2025-12-19 18:51:18.839 RedLemon[24326:202588] ✅ Background art loaded successfully
+2025-12-19 18:51:18.841 RedLemon[24326:202588]    Quality: 1080p
+2025-12-19 18:51:18.841 RedLemon[24326:202588]    Mode: watchParty
+2025-12-19 18:51:18.841 RedLemon[24326:202588] 📡 Fetching metadata for tt0293564...
+ages.metahub.space/poster/small/tt0293564/img","backdrop_url":"https://images.metahub.space/background/medium/tt0293564/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":false,"created_at":"2025-12-19T23:50:23.036587","last_activity":"2025-12-19T23:51:15","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "9DFED2F6-C5B9-49D4-80B3-8DBE0E08BCE3", "mediaItem": {"id": "tt0293564", "logo": "https://images.metahub.space/logo/medium/tt0293564/img", "name": "Rush Hour 3", "type": "movie", "year": "2007", "genres": ["Action", "Comedy", "Crime"], "poster": "https://images.metahub.space/poster/small/tt0293564/img", "runtime": "90 min", "background": "https://images.metahub.space/background/medium/tt0293564/img", "imdbRating": "6.2", "description": "After an attempted assassination on Ambassador Han, Lee and Carter head to Paris to protect a French woman with knowledge of the Triads' secret leaders.", "releaseInfo": "2007"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+🎬 PlayerVM: Starting playback for: Rush Hour 3
+[ INFO ] GET /api/metadata/meta/movie/tt0293564 [request-id: 1F54AC4F-0B50-474A-83AF-5567EBA6406C]
+2025-12-19 18:51:18.900 RedLemon[24326:202786] 📦 Decoded CinemetaMeta - videos count: 0
+2025-12-19 18:51:18.902 RedLemon[24326:202588] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0293564/img
+2025-12-19 18:51:18.903 RedLemon[24326:202588] ⏳ Logo loading...
+2025-12-19 18:51:18.943 RedLemon[24326:202588] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2025-12-19 18:51:18.943 RedLemon[24326:202588] 🎬 GUEST: Searching for subtitles locally...
+💾 Cache SET: Metadata[meta_movie_tt0293564]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 9F67B88C-0ADB-4833-B3B9-7C9699FD2B56]
+2025-12-19 18:51:18.963 RedLemon[24326:202588] ✅ Logo loaded successfully
+2025-12-19 18:51:19.215 RedLemon[24326:202588] ✅ GUEST: Found 10 subtitles
+2025-12-19 18:51:19.224 RedLemon[24326:202588] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Ru, subtitles: 10
+2025-12-19 18:51:19.300 RedLemon[24326:202588] ✅ Stream ready, starting playback...
+2025-12-19 18:51:19.300 RedLemon[24326:202588] 🖥️ WindowManager: enterFullscreen() called
+2025-12-19 18:51:19.300 RedLemon[24326:202588]    Window: <SwiftUI.SwiftUIWindow: 0x7fe73a34aee0>
+2025-12-19 18:51:19.300 RedLemon[24326:202588]    Is fullscreen: 0
+2025-12-19 18:51:19.300 RedLemon[24326:202588]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-19 18:51:19.439 RedLemon[24326:202588] 🖼️ Setting up MPV with native macOS video output...
+2025-12-19 18:51:19.445 RedLemon[24326:202588] ✅ MPV initialized with native GPU rendering
+2025-12-19 18:51:19.460 RedLemon[24326:202588] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-19 18:51:19.460 RedLemon[24326:202588] 🎉 Starting watch party sync - Room: FVCS, Host: NO
+2025-12-19 18:51:19.460 RedLemon[24326:202588] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-19 18:51:19.523 RedLemon[24326:202588] 🔄 Starting chat polling for room: FVCS
+2025-12-19 18:51:19.523 RedLemon[24326:202588] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-19 18:51:19.523 RedLemon[24326:202588] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-19 18:51:19.523 RedLemon[24326:202588] 🎬🎬🎬 Subtitles: 10
+2025-12-19 18:51:19.524 RedLemon[24326:202588] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Rush Hour 3
+2025-12-19 18:51:19.524 RedLemon[24326:202588] 🎬🎬🎬 streamURL: https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Ru
+2025-12-19 18:51:19.524 RedLemon[24326:202588] 🎬🎬🎬 subtitles: 10
+2025-12-19 18:51:19.524 RedLemon[24326:202588] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-19 18:51:19.551 RedLemon[24326:202844] 🎬 MPV: Current video filename set to: Rush Hour 3 (2007) 1080p English AMZN WEBRip x264 AAC.mp4
+2025-12-19 18:51:19.551 RedLemon[24326:202844] 🎬 MPV loadVideo called with URL: https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20Eng, autoplay: false
+2025-12-19 18:51:19.551 RedLemon[24326:202844] 🎬 MPV executing: loadfile "https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Rush%20Hour%203%20%282007%29%201080p%20English%20AMZN%20WEBRip%20x264%20AAC.mp4"
+2025-12-19 18:51:19.551 RedLemon[24326:202844] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2025-12-19 18:51:19.552 RedLemon[24326:202636] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-19 18:51:19.552 RedLemon[24326:202636] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI5NDI3MDUtMjkzNjI0OS56aXA=
+🔍 Subtitle search request: tt0293564 (movie)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0293564 (movie)
+📝 SubDL Raw Response: {"status":true,"results":[{"sd_id":213955,"type":"movie","name":"Rush Hour 3","imdb_id":"tt0293564","tmdb_id":5174,"first_air_date":null,"release_date":"2007-08-08T00:00:00.000Z","year":2007}],"subtitles":[{"release_name":"Rush.Hour.3.2007.1080p.BluRay.x265-RARBG","name":"SUBDL::rush-hour-3-english-2936249.zip","lang":"english","author":"vtn54","url":"/subtitle/2942705-2936249.zip","subtitlePage":"/s/info/KCW8emtGj3","season":0,"episode":null,"language":"EN","hi":false,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]","name":"SUBDL.com::_rush-hour-3_english_380640.zip","lang":"english","author":"bdlnaredi","url":"/subtitle/816177-380640.zip","subtitlePage":"/s/info/mcAtPNyLLu","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Subtitels for FXG","name":"SUBDL.com::_rush-hour-3_english_118209.zip","lang":"english","author":"rajeevkvssp","url":"/subtitle/816175-118209.rar","subtitlePage":"/s/info/z59JmWFKin","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush Hour 3[2007]DvDrip AC3[Eng]-FXG - non-english subs only","name":"SUBDL.com::_rush-hour-3_english_118611.zip","lang":"english","author":"saron","url":"/subtitle/816173-118611.zip","subtitlePage":"/s/info/rVyi0TH9x9","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush.Hour.Trilogy DvDrip-aXXo","name":"SUBDL.com::rush.hour.3477936.zip","lang":"english","author":"NihPat95","url":"/subtitle/816162-477936.zip","subtitlePage":"/s/info/O3Z4EvzZnb","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Camera version","name":"SUBDL.com::_rush-hour-3_english_99571.zip","lang":"english","author":"clting","url":"/subtitle/816160-99571.zip","subtitlePage":"/s/info/qonAzqxuNv","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush Hour trilogy -IZON- Kingdom Release","name":"SUBDL.com::_rush-hour-3_english_588356.zip","lang":"english","author":"favzemz","url":"/subtitle/816159-588356.zip","subtitlePage":"/s/info/zIuEQdy7Sr","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush Hour 3English SDH","name":"SUBDL::rush-hour-3-124241.zip","lang":"english","author":"freak_racer03","url":"/subtitle/816157-124241.zip","subtitlePage":"/s/info/7Io4AN8L5y","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush Hour 3 DVDRiP.x264 and DVDRip.NeDiVx","name":"SUBDL.com::_rush-hour-3_english_118157.zip","lang":"english","author":"chapnextdoor","url":"/subtitle/816156-118157.zip","subtitlePage":"/s/info/bAjuePtcHQ","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false},{"release_name":"Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~","name":"SUBDL.com::rush.hour.3699019.zip","lang":"english","author":"aliyeehaa","url":"/subtitle/816152-699019.zip","subtitlePage":"/s/info/Zo0RljzSpW","season":0,"episode":null,"language":"EN","hi":true,"episode_from":null,"episode_end":0,"full_season":false}],"totalPages":4,"currentPage":1}
+✅ Found 10 subtitles from SubDL
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c35d622-dd35-11f0-97cf-0a58a9feac02":{"metas":[{"phx_ref":"GILC4a6JNV_3IzkI","phx_ref_prev":"GILC1PadeO_3I7JI","is_host":true,"joined_at":1766188278.3302078,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"7c35d622-dd35-11f0-97cf-0a58a9feac02":{"metas":[{"phx_ref":"GILC1PadeO_3I7JI","phx_ref_prev":"GILC1Paa_PL3I77B","is_host":true,"joined_at":1766188223.589066,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:FVCS"}
+📝 SubDL results for movie:
+   [1] Rush.Hour.3.2007.1080p.BluRay.x265-RARBG [EN] (score: 20)
+   [2] Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~ [EN] (score: 18)
+   [3] Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi] [EN] (score: 5)
+   [4] Subtitels for FXG [EN] (score: 5)
+   [5] Rush.Hour.Trilogy DvDrip-aXXo [EN] (score: 5)
+   [6] Rush Hour trilogy -IZON- Kingdom Release [EN] (score: 5)
+   [7] Rush Hour 3English SDH [EN] (score: 5)
+   [8] Rush Hour 3 DVDRiP.x264 and DVDRip.NeDiVx [EN] (score: 5)
+   [9] Rush Hour 3[2007]DvDrip AC3[Eng]-FXG - non-english subs only [EN] (score: 0)
+   [10] Camera version [EN] (score: 0)
+✅ Subtitle search returned 10 results
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Ru
+   Display Title: Rush Hour 3
+   Subtitle URLs: 10
+      [0] Rush.Hour.3.2007.1080p.BluRay.x265-RARBG
+      [1] Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~
+      [2] Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]
+      [3] Subtitels for FXG
+      [4] Rush.Hour.Trilogy DvDrip-aXXo
+      [5] Rush Hour trilogy -IZON- Kingdom Release
+      [6] Rush Hour 3English SDH
+      [7] Rush Hour 3 DVDRiP.x264 and DVDRip.NeDiVx
+      [8] Rush Hour 3[2007]DvDrip AC3[Eng]-FXG - non-english subs only
+      [9] Camera version
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🧠 StreamService: Marked hash 70819fe4 as attempted for tt0293564
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=FVCS, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:FVCS
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:FVCS, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC4bDso3qB58dG","phx_ref_prev":"GILC3ZZwL3-B56cK","last_seen":"2025-12-19T23:51:18.361Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC3ZZwL3-B56cK","phx_ref_prev":"GILC2O2MhUeB5_SP","last_seen":"2025-12-19T23:51:00.733Z","room_id":"FVCS","started_at":"2025-12-19T23:50:23.423Z","status":"In Lobby: Rush Hour 3","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Rush Hour 3
+   IMDB: tt0293564
+   URL: https://chi8-4.download.real-debrid.com/d/KEURVUUSEMGEC90/Ru...
+   Hash: 70819fe4...
+   Source: WEBRip
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+📡 Fetching metadata for tt0293564 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0293564]
+📝 Pre-loading external subtitles (Top 3)...
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:FVCS"}
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI5NDI3MDUtMjkzNjI0OS56aXA= [request-id: 77D90C02-CCC7-4BE2-B53A-E2C474FCA804]
+2025-12-19 18:51:20.017 RedLemon[24326:202588] 👥 MPVPlayer: Updated participants list via polling: 2
+2025-12-19 18:51:20.038 RedLemon[24326:202635] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_AAC8D5E9-F0DD-47C4-9D11-C911C36A8545.vtt
+2025-12-19 18:51:20.038 RedLemon[24326:202635] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_AAC8D5E9-F0DD-47C4-9D11-C91
+2025-12-19 18:51:20.067 RedLemon[24326:202635] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:51:20.067 RedLemon[24326:202635] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE1Mi02OTkwMTkuemlw
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"9451ca04-dd35-11f0-860a-0a58a9feac02":{"metas":[{"phx_ref":"GILC4fVA4qGK_K7M","phx_ref_prev":"GILC3mBtsSOK_DLD","is_host":false,"joined_at":1766188279.5153708,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"9451ca04-dd35-11f0-860a-0a58a9feac02":{"metas":[{"phx_ref":"GILC3mBtsSOK_DLD","phx_ref_prev":"GILC3lJhfGqK_FQO","is_host":false,"joined_at":1766188264.092376,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:FVCS"}
+📄 Subtitle request: L3N1YnRpdGxlLzI5NDI3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2942705-2936249.zip
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC4fejY7ArgSPP","phx_ref_prev":"GILC4CxaApgrgSYH","last_seen":"2025-12-19T23:51:19.551Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC4CxaApgrgSYH","phx_ref_prev":"GILC3lFzHmMrgbuD","last_seen":"2025-12-19T23:51:11.854Z","room_id":"FVCS","started_at":"2025-12-19T23:51:03.879Z","status":"In Lobby: Rush Hour 3","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0293564/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0293564/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0293564/img...
+📡 SocialService: Updated status - online: Rush Hour 3
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GILC4fVA4qGK_K7M)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+💓 Heartbeat sent
+⏰ AppState: Next schedule update set for Event End: 2025-12-20 01:18:42 +0000
+⏰ AppState: Scheduling update in 5243 seconds
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Download complete: 32840 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Rush.Hour.3.2007.1080p.BluRay.x265-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzgxNjE1Mi02OTkwMTkuemlw [request-id: F1B2F0FC-2A02-40E5-BD83-B258FAD38DB9]
+2025-12-19 18:51:20.380 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:20.380 RedLemon[24326:202786]    Payload keys: position, isPlaying, type, timestamp, senderId
+2025-12-19 18:51:20.380 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:20.380 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:20.381 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:20.381 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:20.491 RedLemon[24326:202844] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A5EF718C-2DC2-4302-9F46-AB254A32C8CF.vtt
+2025-12-19 18:51:20.491 RedLemon[24326:202844] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A5EF718C-2DC2-4302-9F46-AB2
+2025-12-19 18:51:20.498 RedLemon[24326:202844] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:51:20.498 RedLemon[24326:202844] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzgxNjE3Ny0zODA2NDAuemlw
+📄 Subtitle request: L3N1YnRpdGxlLzgxNjE1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/816152-699019.zip
+✅ Download complete: 26081 bytes
+📦 Detected ZIP archive, extracting...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚠️ No specific episode match found, using first file: Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzgxNjE3Ny0zODA2NDAuemlw [request-id: 7C90C6E1-AF5D-43C3-A3E1-350C37130606]
+caution: filename not matched:  Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi].srt
+2025-12-19 18:51:20.881 RedLemon[24326:202899] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BE7161E3-B4F5-4121-BC1A-89B91AB90B78.vtt
+2025-12-19 18:51:20.881 RedLemon[24326:202899] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_BE7161E3-B4F5-4121-BC1A-89B
+2025-12-19 18:51:20.887 RedLemon[24326:202899] ✅ External subtitle added to track list (not auto-selected)
+2025-12-19 18:51:20.888 RedLemon[24326:202899] 🔍 MPV track-list/count: 3
+2025-12-19 18:51:20.889 RedLemon[24326:202899] 🔍 Track 0 type: sub
+2025-12-19 18:51:20.889 RedLemon[24326:202899] ✅ Found subtitle track: ID=1, lang=en, title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, external=1
+2025-12-19 18:51:20.889 RedLemon[24326:202899] 🔍 Track 1 type: sub
+2025-12-19 18:51:20.890 RedLemon[24326:202899] ✅ Found subtitle track: ID=2, lang=en, title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, external=1
+2025-12-19 18:51:20.890 RedLemon[24326:202899] 🔍 Track 2 type: sub
+2025-12-19 18:51:20.890 RedLemon[24326:202899] ✅ Found subtitle track: ID=3, lang=en, title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], external=1
+2025-12-19 18:51:20.890 RedLemon[24326:202899] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:51:20.890 RedLemon[24326:202899]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:51:20.890 RedLemon[24326:202899]    Start[1]: ID=1, Title='Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2025-12-19 18:51:20.890 RedLemon[24326:202899]    Start[2]: ID=2, Title='Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', Lang='en', Ext=1
+2025-12-19 18:51:20.890 RedLemon[24326:202899]    Start[3]: ID=3, Title='Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', Lang='en', Ext=1
+2025-12-19 18:51:20.891 RedLemon[24326:202899] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2025-12-19 18:51:20.891 RedLemon[24326:202899]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:51:20.891 RedLemon[24326:202899]    Track: ID=1, Title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, External=1
+2025-12-19 18:51:20.892 RedLemon[24326:202899]    Track: ID=2, Title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, External=1
+2025-12-19 18:51:20.892 RedLemon[24326:202899]    Track: ID=3, Title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], External=1
+2025-12-19 18:51:21.960 RedLemon[24326:202635] 🔍 MPV track-list/count: 3
+2025-12-19 18:51:21.960 RedLemon[24326:202635] 🔍 Track 0 type: sub
+2025-12-19 18:51:21.960 RedLemon[24326:202635] ✅ Found subtitle track: ID=1, lang=en, title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, external=1
+2025-12-19 18:51:21.960 RedLemon[24326:202635] 🔍 Track 1 type: sub
+2025-12-19 18:51:21.961 RedLemon[24326:202635] ✅ Found subtitle track: ID=2, lang=en, title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, external=1
+2025-12-19 18:51:21.961 RedLemon[24326:202635] 🔍 Track 2 type: sub
+2025-12-19 18:51:21.961 RedLemon[24326:202635] ✅ Found subtitle track: ID=3, lang=en, title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], external=1
+2025-12-19 18:51:21.961 RedLemon[24326:202635] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:51:21.961 RedLemon[24326:202635]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:51:21.961 RedLemon[24326:202635]    Start[1]: ID=1, Title='Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2025-12-19 18:51:21.961 RedLemon[24326:202635]    Start[2]: ID=2, Title='Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', Lang='en', Ext=1
+2025-12-19 18:51:21.962 RedLemon[24326:202635]    Start[3]: ID=3, Title='Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', Lang='en', Ext=1
+2025-12-19 18:51:21.962 RedLemon[24326:202635] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2025-12-19 18:51:21.962 RedLemon[24326:202635]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:51:21.962 RedLemon[24326:202635]    Track: ID=1, Title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, External=1
+2025-12-19 18:51:21.962 RedLemon[24326:202635]    Track: ID=2, Title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, External=1
+2025-12-19 18:51:21.962 RedLemon[24326:202635]    Track: ID=3, Title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], External=1
+2025-12-19 18:51:22.379 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:22.379 RedLemon[24326:202786]    Payload keys: timestamp, type, position, senderId, isPlaying
+2025-12-19 18:51:22.380 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:22.380 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:22.380 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:22.380 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:23.050 RedLemon[24326:202636] 🔍 MPV track-list/count: 3
+2025-12-19 18:51:23.050 RedLemon[24326:202636] 🔍 Track 0 type: sub
+2025-12-19 18:51:23.050 RedLemon[24326:202636] ✅ Found subtitle track: ID=1, lang=en, title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, external=1
+2025-12-19 18:51:23.051 RedLemon[24326:202636] 🔍 Track 1 type: sub
+2025-12-19 18:51:23.051 RedLemon[24326:202636] ✅ Found subtitle track: ID=2, lang=en, title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, external=1
+2025-12-19 18:51:23.051 RedLemon[24326:202636] 🔍 Track 2 type: sub
+2025-12-19 18:51:23.051 RedLemon[24326:202636] ✅ Found subtitle track: ID=3, lang=en, title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], external=1
+2025-12-19 18:51:23.051 RedLemon[24326:202636] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2025-12-19 18:51:23.051 RedLemon[24326:202636]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:51:23.051 RedLemon[24326:202636]    Start[1]: ID=1, Title='Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2025-12-19 18:51:23.052 RedLemon[24326:202636]    Start[2]: ID=2, Title='Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', Lang='en', Ext=1
+2025-12-19 18:51:23.052 RedLemon[24326:202636]    Start[3]: ID=3, Title='Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', Lang='en', Ext=1
+2025-12-19 18:51:23.052 RedLemon[24326:202636] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2025-12-19 18:51:23.052 RedLemon[24326:202636]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:51:23.053 RedLemon[24326:202636]    Track: ID=1, Title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, External=1
+2025-12-19 18:51:23.053 RedLemon[24326:202636]    Track: ID=2, Title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, External=1
+2025-12-19 18:51:23.053 RedLemon[24326:202636]    Track: ID=3, Title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], External=1
+2025-12-19 18:51:23.325 RedLemon[24326:202588] ⏱️ Watch Party: Duration available (5447.2s), triggering ready signal
+2025-12-19 18:51:23.325 RedLemon[24326:202588] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-19 18:51:23.338 RedLemon[24326:202637] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:51:23.339 RedLemon[24326:202637]    Payload keys: type, timestamp, isPlaying, senderId, position
+2025-12-19 18:51:23.339 RedLemon[24326:202786] ✅ Realtime: Message broadcast complete
+2025-12-19 18:51:23.344 RedLemon[24326:202588] ✅ Watch Party: READY signal sent successfully
+2025-12-19 18:51:23.375 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:23.375 RedLemon[24326:202635]    Payload keys: isPlaying, senderId, timestamp, position, type
+2025-12-19 18:51:23.376 RedLemon[24326:202635] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:51:23.376 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-19 18:51:23.377 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:51:23.377 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:23.377 RedLemon[24326:202588] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-19 18:51:23.664 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:23.664 RedLemon[24326:202635]    Payload keys: timestamp, position, senderId, type, isPlaying
+2025-12-19 18:51:23.665 RedLemon[24326:202635] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:23.665 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-19 18:51:23.665 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:23.665 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:23.666 RedLemon[24326:202588] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:23.666 RedLemon[24326:202588] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2025-12-19 18:51:24.053 RedLemon[24326:202637] 🔍 MPV track-list/count: 7
+2025-12-19 18:51:24.054 RedLemon[24326:202637] 🔍 Track 0 type: sub
+2025-12-19 18:51:24.054 RedLemon[24326:202637] ✅ Found subtitle track: ID=1, lang=en, title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, external=1
+2025-12-19 18:51:24.054 RedLemon[24326:202637] 🔍 Track 1 type: sub
+2025-12-19 18:51:24.054 RedLemon[24326:202637] ✅ Found subtitle track: ID=2, lang=en, title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, external=1
+2025-12-19 18:51:24.054 RedLemon[24326:202637] 🔍 Track 2 type: sub
+2025-12-19 18:51:24.054 RedLemon[24326:202637] ✅ Found subtitle track: ID=3, lang=en, title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], external=1
+2025-12-19 18:51:24.055 RedLemon[24326:202637] 🔍 Track 3 type: video
+2025-12-19 18:51:24.055 RedLemon[24326:202637] 🔍 Track 4 type: audio
+2025-12-19 18:51:24.055 RedLemon[24326:202637] 🔍 Track 5 type: sub
+2025-12-19 18:51:24.055 RedLemon[24326:202637] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2025-12-19 18:51:24.055 RedLemon[24326:202637] 🔍 Track 6 type: video
+2025-12-19 18:51:24.055 RedLemon[24326:202637] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Start[1]: ID=1, Title='Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Start[2]: ID=2, Title='Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', Lang='en', Ext=1
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Start[3]: ID=3, Title='Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', Lang='en', Ext=1
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2025-12-19 18:51:24.056 RedLemon[24326:202637] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2025-12-19 18:51:24.056 RedLemon[24326:202637]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:51:24.057 RedLemon[24326:202637]    Track: ID=1, Title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, External=1
+2025-12-19 18:51:24.057 RedLemon[24326:202637]    Track: ID=2, Title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, External=1
+2025-12-19 18:51:24.057 RedLemon[24326:202637]    Track: ID=3, Title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], External=1
+2025-12-19 18:51:24.057 RedLemon[24326:202637]    Track: ID=4, Title=English, External=0
+2025-12-19 18:51:24.378 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:24.378 RedLemon[24326:202636]    Payload keys: senderId, type, isPlaying, position, timestamp
+2025-12-19 18:51:24.378 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:24.378 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:24.379 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:24.379 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:24.684 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:24.684 RedLemon[24326:202637]    Payload keys: senderId, type, timestamp, isPlaying, position
+2025-12-19 18:51:24.685 RedLemon[24326:202637] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:24.685 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-19 18:51:24.685 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:24.716 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:24.716 RedLemon[24326:202786]    Payload keys: type, isPlaying, position, timestamp, senderId
+2025-12-19 18:51:24.717 RedLemon[24326:202786] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:24.717 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: play
+2025-12-19 18:51:24.717 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:24.815 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:24.815 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2025-12-19 18:51:25.077 RedLemon[24326:202900] 🔍 MPV track-list/count: 7
+2025-12-19 18:51:25.077 RedLemon[24326:202900] 🔍 Track 0 type: sub
+2025-12-19 18:51:25.077 RedLemon[24326:202900] ✅ Found subtitle track: ID=1, lang=en, title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, external=1
+2025-12-19 18:51:25.077 RedLemon[24326:202900] 🔍 Track 1 type: sub
+2025-12-19 18:51:25.078 RedLemon[24326:202900] ✅ Found subtitle track: ID=2, lang=en, title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, external=1
+2025-12-19 18:51:25.078 RedLemon[24326:202900] 🔍 Track 2 type: sub
+2025-12-19 18:51:25.078 RedLemon[24326:202900] ✅ Found subtitle track: ID=3, lang=en, title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], external=1
+2025-12-19 18:51:25.079 RedLemon[24326:202900] 🔍 Track 3 type: video
+2025-12-19 18:51:25.079 RedLemon[24326:202900] 🔍 Track 4 type: audio
+2025-12-19 18:51:25.079 RedLemon[24326:202900] 🔍 Track 5 type: sub
+2025-12-19 18:51:25.079 RedLemon[24326:202900] ✅ Found subtitle track: ID=4, lang=eng, title=nil, external=0
+2025-12-19 18:51:25.079 RedLemon[24326:202900] 🔍 Track 6 type: video
+2025-12-19 18:51:25.079 RedLemon[24326:202900] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2025-12-19 18:51:25.079 RedLemon[24326:202900]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-19 18:51:25.080 RedLemon[24326:202900]    Start[1]: ID=1, Title='Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', Lang='en', Ext=1
+2025-12-19 18:51:25.080 RedLemon[24326:202900]    Start[2]: ID=2, Title='Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', Lang='en', Ext=1
+2025-12-19 18:51:25.080 RedLemon[24326:202900]    Start[3]: ID=3, Title='Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', Lang='en', Ext=1
+2025-12-19 18:51:25.080 RedLemon[24326:202900]    Start[4]: ID=4, Title='nil', Lang='eng', Ext=0
+2025-12-19 18:51:25.080 RedLemon[24326:202900] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2025-12-19 18:51:25.080 RedLemon[24326:202900]    Track: ID=0, Title=Off, External=0
+2025-12-19 18:51:25.081 RedLemon[24326:202900]    Track: ID=1, Title=Rush.Hour.3.2007.1080p.BluRay.x265-RARBG, External=1
+2025-12-19 18:51:25.081 RedLemon[24326:202900]    Track: ID=2, Title=Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~, External=1
+2025-12-19 18:51:25.081 RedLemon[24326:202900]    Track: ID=3, Title=Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi], External=1
+2025-12-19 18:51:25.081 RedLemon[24326:202900]    Track: ID=4, Title=English, External=0
+2025-12-19 18:51:26.498 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:26.499 RedLemon[24326:202635]    Payload keys: type, position, isPlaying, timestamp, senderId
+2025-12-19 18:51:26.501 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:26.501 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:26.501 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:26.534 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:28.468 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:28.468 RedLemon[24326:202786]    Payload keys: type, timestamp, isPlaying, senderId, position
+2025-12-19 18:51:28.468 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:28.468 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:28.468 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:28.494 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:30.442 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:30.442 RedLemon[24326:202635]    Payload keys: position, type, isPlaying, senderId, timestamp
+2025-12-19 18:51:30.442 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:30.442 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:30.443 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:30.461 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:32.436 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:32.436 RedLemon[24326:202900]    Payload keys: senderId, isPlaying, type, timestamp, position
+2025-12-19 18:51:32.436 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:32.437 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:32.437 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:32.457 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:34.466 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:34.467 RedLemon[24326:202637]    Payload keys: senderId, type, isPlaying, position, timestamp
+2025-12-19 18:51:34.468 RedLemon[24326:202637] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:34.468 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:34.468 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:34.512 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:36.435 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:36.435 RedLemon[24326:202636]    Payload keys: timestamp, position, isPlaying, senderId, type
+2025-12-19 18:51:36.436 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:36.436 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:36.436 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:36.463 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:38.477 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:38.477 RedLemon[24326:202637]    Payload keys: position, senderId, timestamp, isPlaying, type
+2025-12-19 18:51:38.478 RedLemon[24326:202637] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:38.478 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:38.478 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:38.506 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:40.444 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:40.444 RedLemon[24326:202786]    Payload keys: senderId, isPlaying, position, timestamp, type
+2025-12-19 18:51:40.445 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:40.445 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:40.445 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:40.474 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:42.533 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:42.533 RedLemon[24326:202900]    Payload keys: timestamp, position, senderId, isPlaying, type
+2025-12-19 18:51:42.534 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:42.534 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:42.534 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:42.553 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:44.460 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:44.461 RedLemon[24326:202636]    Payload keys: isPlaying, timestamp, senderId, type, position
+2025-12-19 18:51:44.461 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:44.461 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:44.461 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:44.472 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+📄 Subtitle request: L3N1YnRpdGxlLzgxNjE3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/816177-380640.zip
+✅ Download complete: 26098 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC4j27tzCB5zJH","phx_ref_prev":"GILC4bDso3qB58dG","last_seen":"2025-12-19T23:51:20.733Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC4bDso3qB58dG","phx_ref_prev":"GILC3ZZwL3-B56cK","last_seen":"2025-12-19T23:51:18.361Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 3
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Ultra-gentle sync: 1.005x to fix 139ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+[MPV] mov,mp4,m4a,3gp,3g2,mj2: stream 0, timescale not set
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] Video --vid=2 [P] (mjpeg 1.000fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Rush.Hour.3.2007.1080p.BluRay.x265-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) (mov_text)
+[MPV] File tags:
+[MPV] Date: 2007
+[MPV] Description: Rush Hour films have become pop culture classics. From dazzling Parisian nightclubs to the city's high-fashion runways, Rush Hour 3 promises more action, comedy and hilarious adventure.
+[MPV] Title: Rush Hour 3 (2007) 1080p English AMZN WEBRip x264 AAC
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+✅ SMART-LOAD: Tracks found! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 2ch | English: true | Commentary: false -> Score: 1025
+🏆 Selected best audio track: eng (ID: 1, Score: 1025)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 2ch | English: true | Commentary: false -> Score: 1025
+🏆 Selected best audio track: eng (ID: 1, Score: 1025)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 7 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'nil', forced: false, default: true, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: eng (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 2990 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] Video --vid=2 [P] (mjpeg 1.000fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Rush.Hour.3.2007.1080p.BluRay.x265-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) (mov_text)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x800 23.976fps)
+[MPV] Video --vid=2 [P] (mjpeg 1.000fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 2ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Rush.Hour.3.2007.1080p.BluRay.x265-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=eng (*) (mov_text)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1766188283.325479,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1766188283.610506,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+📊 Current subtitle track: 4
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Ultra-gentle sync: 1.005x to fix 217ms drift
+[MPV] Using hardware decoding (videotoolbox).
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x800 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1766188284.6274061,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1766188284.660171,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+▶️ Sync: Playing
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+📝 Started watch history tracking
+📊 Current subtitle track: 4
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 7 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Rush.Hour.3.2007.1080p.BluRay.x265-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Rush.Hour.3.2007.BRRiP.720p.x264~YIFY~', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Rush Hour 3[2007]DvDrip AC3[Eng][bdlnaredi]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'nil', forced: false, default: true, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: eng (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 2990 (Embedded: 3000, Match: 0, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":0.20854166666666665,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":2.25225,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Ultra-gentle sync: 0.995x to fix 119ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🚫 Ignoring stale LEAVE event for 656daa91-33b4-4688-9135-c982ea52d7c9 (Tracked: GILC4fVA4qGK_K7M != Leaving: GILC3mBtsSOK_DLD)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":4.295958333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Ultra-gentle sync: 0.995x to fix 254ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC5NVkfP0rgRbN","phx_ref_prev":"GILC4fejY7ArgSPP","last_seen":"2025-12-19T23:51:31.874Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC4fejY7ArgSPP","phx_ref_prev":"GILC4CxaApgrgSYH","last_seen":"2025-12-19T23:51:19.551Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":6.339666666666666,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 426ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":8.383375,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 567ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":10.427083333333332,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 509ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":12.470791666666667,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 450ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":14.222541666666666,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 450ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC5uiGvmmB51tK","phx_ref_prev":"GILC4j27tzCB5zJH","last_seen":"2025-12-19T23:51:40.772Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC4j27tzCB5zJH","phx_ref_prev":"GILC4bDso3qB58dG","last_seen":"2025-12-19T23:51:20.733Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":16.26625,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 450ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":18.309958333333334,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 509ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":20.353666666666665,"type":"playbackState"},"type":"broadcast2025-12-19 18:51:46.415 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:46.416 RedLemon[24326:202637]    Payload keys: isPlaying, type, senderId, position, timestamp
+2025-12-19 18:51:46.416 RedLemon[24326:202637] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:46.416 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:46.416 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:46.433 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:48.536 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:48.536 RedLemon[24326:202900]    Payload keys: senderId, timestamp, position, isPlaying, type
+2025-12-19 18:51:48.536 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:48.537 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:48.537 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:48.558 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:50.452 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:50.453 RedLemon[24326:202900]    Payload keys: position, senderId, type, timestamp, isPlaying
+2025-12-19 18:51:50.454 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:50.454 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:50.455 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:50.488 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:52.546 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:52.546 RedLemon[24326:202900]    Payload keys: timestamp, type, isPlaying, position, senderId
+2025-12-19 18:51:52.547 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:52.547 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:52.547 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:52.557 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:54.465 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:54.466 RedLemon[24326:202786]    Payload keys: isPlaying, type, position, senderId, timestamp
+2025-12-19 18:51:54.466 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:54.466 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:54.466 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:54.475 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:56.501 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:56.502 RedLemon[24326:202635]    Payload keys: position, type, senderId, timestamp, isPlaying
+2025-12-19 18:51:56.502 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:56.502 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:56.502 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:56.520 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:51:58.036 RedLemon[24326:202588] ✅ Exit button triggered! x=73 <= 342, y=691 >= 576
+2025-12-19 18:51:58.060 RedLemon[24326:202588] ✅ Exit button triggered! x=49 <= 342, y=682 >= 576
+2025-12-19 18:51:58.061 RedLemon[24326:202588] ✅ Exit button triggered! x=43 <= 342, y=678 >= 576
+2025-12-19 18:51:58.105 RedLemon[24326:202588] ✅ Exit button triggered! x=0 <= 342, y=614 >= 576
+2025-12-19 18:51:58.108 RedLemon[24326:202588] ✅ Exit button triggered! x=0 <= 342, y=600 >= 576
+2025-12-19 18:51:58.408 RedLemon[24326:202588] 🖱️ Mouse: x=86/1366 y=326/768 | Exit: 1 Controls: 0 Chat: 0
+2025-12-19 18:51:58.470 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:51:58.470 RedLemon[24326:202635]    Payload keys: senderId, timestamp, position, type, isPlaying
+2025-12-19 18:51:58.471 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:51:58.471 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:51:58.471 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:51:58.480 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:00.431 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:00.431 RedLemon[24326:202786]    Payload keys: timestamp, type, position, isPlaying, senderId
+2025-12-19 18:52:00.431 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:00.431 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:00.431 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:00.452 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:02.433 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:02.433 RedLemon[24326:202787]    Payload keys: isPlaying, position, type, timestamp, senderId
+2025-12-19 18:52:02.434 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:02.434 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:02.434 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:02.443 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:04.426 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:04.426 RedLemon[24326:202787]    Payload keys: position, type, senderId, isPlaying, timestamp
+2025-12-19 18:52:04.427 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:04.427 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:04.427 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:04.445 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:06.498 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:06.499 RedLemon[24326:202786]    Payload keys: position, senderId, timestamp, type, isPlaying
+2025-12-19 18:52:06.500 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:06.500 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:06.500 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:06.530 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:08.432 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:08.433 RedLemon[24326:202637]    Payload keys: senderId, position, isPlaying, timestamp, type
+2025-12-19 18:52:08.433 RedLemon[24326:202637] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:08.433 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:08.433 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:08.461 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:10.486 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:10.486 RedLemon[24326:202636]    Payload keys: senderId, type, position, isPlaying, timestamp
+2025-12-19 18:52:10.487 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:10.487 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:10.487 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:10.504 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:12.431 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:12.432 RedLemon[24326:202900]    Payload keys: position, timestamp, type, isPlaying, senderId
+2025-12-19 18:52:12.432 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:12.433 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:12.433 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:12.462 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:14.482 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:14.482 RedLemon[24326:202636]    Payload keys: timestamp, position, type, senderId, isPlaying
+2025-12-19 18:52:14.482 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:14.483 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:14.483 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:14.505 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:16.439 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:16.439 RedLemon[24326:202636]    Payload keys: senderId, isPlaying, timestamp, type, position
+2025-12-19 18:52:16.439 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:16.439 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:16.439 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:16.465 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:18.447 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:18.447 RedLemon[24326:202787]    Payload keys: timestamp, isPlaying, position, senderId, type
+2025-12-19 18:52:18.447 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:18.448 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:18.448 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:18.468 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:20.565 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:20.565 RedLemon[24326:202635]    Payload keys: type, senderId, position, isPlaying, timestamp
+2025-12-19 18:52:20.566 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:20.566 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:20.566 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:20.595 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:22.441 RedLemon[24326:202900] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:22.441 RedLemon[24326:202900]    Payload keys: position, type, timestamp, isPlaying, senderId
+2025-12-19 18:52:22.443 RedLemon[24326:202900] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:22.444 RedLemon[24326:202900] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:22.445 RedLemon[24326:202900] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:22.480 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:24.532 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:24.532 RedLemon[24326:202635]    Payload keys: type, position, isPlaying, senderId, timestamp
+2025-12-19 18:52:24.533 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:24.533 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:24.534 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:24.565 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:26.385 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:26.385 RedLemon[24326:202787]    Payload keys: timestamp, type, position, isPlaying, senderId
+2025-12-19 18:52:26.386 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:26.386 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:26.386 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:26.409 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 509ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":22.355666666666664,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 576ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":24.357666666666667,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 534ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC6X8pdDMrgV6E","phx_ref_prev":"GILC5NVkfP0rgRbN","last_seen":"2025-12-19T23:51:51.890Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC5NVkfP0rgRbN","phx_ref_prev":"GILC4fejY7ArgSPP","last_seen":"2025-12-19T23:51:31.874Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":26.359666666666666,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 500ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":28.403375,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 467ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💾 Saved to watch history: Rush Hour 3 at 29s
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":30.44708333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 492ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":32.19883333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 500ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":34.24254166666667,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 500ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC65dDdwKB5w6J","phx_ref_prev":"GILC5uiGvmmB51tK","last_seen":"2025-12-19T23:52:00.878Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC5uiGvmmB51tK","phx_ref_prev":"GILC4j27tzCB5zJH","last_seen":"2025-12-19T23:51:40.772Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":36.286249999999995,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 492ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":38.32995833333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 492ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":40.373666666666665,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 501ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":42.417375,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 459ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":44.461083333333335,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 475ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC7ilaK8wrgYjE","phx_ref_prev":"GILC6X8pdDMrgV6E","last_seen":"2025-12-19T23:52:11.920Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC6X8pdDMrgV6E","phx_ref_prev":"GILC5NVkfP0rgRbN","last_seen":"2025-12-19T23:51:51.890Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":46.21283333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 492ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":48.256541666666664,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 501ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":50.30025,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 501ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":52.34395833333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 509ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":54.38766666666667,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 517ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC8DtFa6yB503M","phx_ref_prev":"GILC65dDdwKB5w6J","last_seen":"2025-12-19T23:52:20.814Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC65dDdwKB5w6J","phx_ref_prev":"GILC5uiGvmmB51tK","last_seen":"2025-12-19T23:52:00.878Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":56.431374999999996,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 467ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":58.47508333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 475ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":60.22683333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 484ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throt2025-12-19 18:52:28.387 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:28.387 RedLemon[24326:202787]    Payload keys: position, type, senderId, timestamp, isPlaying
+2025-12-19 18:52:28.387 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:28.387 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:28.387 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:28.406 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:30.423 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:30.423 RedLemon[24326:202786]    Payload keys: type, position, isPlaying, senderId, timestamp
+2025-12-19 18:52:30.424 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:30.424 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:30.424 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:30.424 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:32.495 RedLemon[24326:202635] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:32.495 RedLemon[24326:202635]    Payload keys: position, type, senderId, isPlaying, timestamp
+2025-12-19 18:52:32.496 RedLemon[24326:202635] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:32.496 RedLemon[24326:202635] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:32.496 RedLemon[24326:202635] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:32.496 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:34.576 RedLemon[24326:202637] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:34.576 RedLemon[24326:202637]    Payload keys: position, timestamp, isPlaying, senderId, type
+2025-12-19 18:52:34.577 RedLemon[24326:202637] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:34.577 RedLemon[24326:202637] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:34.577 RedLemon[24326:202637] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:34.583 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:36.435 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:36.435 RedLemon[24326:202787]    Payload keys: position, timestamp, isPlaying, senderId, type
+2025-12-19 18:52:36.436 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:36.436 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:36.436 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:36.460 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:38.471 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:38.471 RedLemon[24326:202787]    Payload keys: senderId, timestamp, position, type, isPlaying
+2025-12-19 18:52:38.472 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:38.472 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:38.473 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:38.511 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:40.401 RedLemon[24326:202636] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:40.401 RedLemon[24326:202636]    Payload keys: timestamp, type, position, senderId, isPlaying
+2025-12-19 18:52:40.401 RedLemon[24326:202636] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:40.401 RedLemon[24326:202636] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:40.401 RedLemon[24326:202636] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:40.419 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:42.377 RedLemon[24326:202787] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:42.378 RedLemon[24326:202787]    Payload keys: senderId, timestamp, isPlaying, position, type
+2025-12-19 18:52:42.378 RedLemon[24326:202787] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:42.378 RedLemon[24326:202787] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:42.379 RedLemon[24326:202787] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:42.396 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:44.475 RedLemon[24326:202786] 📨 Realtime: Received broadcast message
+2025-12-19 18:52:44.475 RedLemon[24326:202786]    Payload keys: senderId, type, timestamp, isPlaying, position
+2025-12-19 18:52:44.475 RedLemon[24326:202786] ✅ Realtime: Decoded message type: playbackState, sender: FVCS
+2025-12-19 18:52:44.476 RedLemon[24326:202786] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2025-12-19 18:52:44.476 RedLemon[24326:202786] ✅ Realtime: syncCallback invoked successfully
+2025-12-19 18:52:44.476 RedLemon[24326:202588] 🔍 DEBUG: Received sync message - type: playbackState, sender: FVCS
+2025-12-19 18:52:49.283 RedLemon[24326:202588] 👋 lemontom synced from database
+2025-12-19 18:53:22.877 RedLemon[24326:202588] ✅ Exit button triggered! x=7 <= 342, y=589 >= 576
+2025-12-19 18:53:22.889 RedLemon[24326:202588] ✅ Exit button triggered! x=9 <= 342, y=603 >= 576
+2025-12-19 18:53:22.892 RedLemon[24326:202588] ✅ Exit button triggered! x=11 <= 342, y=612 >= 576
+2025-12-19 18:53:22.900 RedLemon[24326:202588] ✅ Exit button triggered! x=13 <= 342, y=618 >= 576
+2025-12-19 18:53:22.908 RedLemon[24326:202588] ✅ Exit button triggered! x=15 <= 342, y=630 >= 576
+2025-12-19 18:53:22.916 RedLemon[24326:202588] ✅ Exit button triggered! x=18 <= 342, y=643 >= 576
+2025-12-19 18:53:22.924 RedLemon[24326:202588] ✅ Exit button triggered! x=18 <= 342, y=644 >= 576
+2025-12-19 18:53:23.085 RedLemon[24326:202588] ✅ Exit button triggered! x=18 <= 342, y=644 >= 576
+2025-12-19 18:53:23.093 RedLemon[24326:202588] ✅ Exit button triggered! x=16 <= 342, y=648 >= 576
+2025-12-19 18:53:23.101 RedLemon[24326:202588] ✅ Exit button triggered! x=15 <= 342, y=651 >= 576
+2025-12-19 18:53:23.109 RedLemon[24326:202588] ✅ Exit button triggered! x=14 <= 342, y=653 >= 576
+2025-12-19 18:53:23.117 RedLemon[24326:202588] ✅ Exit button triggered! x=14 <= 342, y=654 >= 576
+2025-12-19 18:53:23.125 RedLemon[24326:202588] ✅ Exit button triggered! x=14 <= 342, y=654 >= 576
+2025-12-19 18:53:23.132 RedLemon[24326:202588] ✅ Exit button triggered! x=14 <= 342, y=654 >= 576
+2025-12-19 18:53:23.157 RedLemon[24326:202588] ✅ Exit button triggered! x=15 <= 342, y=653 >= 576
+2025-12-19 18:53:23.165 RedLemon[24326:202588] ✅ Exit button triggered! x=20 <= 342, y=646 >= 576
+2025-12-19 18:53:23.173 RedLemon[24326:202588] ✅ Exit button triggered! x=26 <= 342, y=640 >= 576
+2025-12-19 18:53:23.182 RedLemon[24326:202588] ✅ Exit button triggered! x=34 <= 342, y=630 >= 576
+2025-12-19 18:53:23.189 RedLemon[24326:202588] ✅ Exit button triggered! x=46 <= 342, y=619 >= 576
+2025-12-19 18:53:23.198 RedLemon[24326:202588] ✅ Exit button triggered! x=59 <= 342, y=607 >= 576
+2025-12-19 18:53:23.207 RedLemon[24326:202588] ✅ Exit button triggered! x=74 <= 342, y=593 >= 576
+2025-12-19 18:53:23.213 RedLemon[24326:202588] ✅ Exit button triggered! x=90 <= 342, y=579 >= 576
+2025-12-19 18:53:23.814 RedLemon[24326:202588] 🖱️ Mouse: x=832/1366 y=0/768 | Exit: 1 Controls: 1 Chat: 0
+2025-12-19 18:53:23.917 RedLemon[24326:202588] 🖱️ Mouse: x=842/1366 y=0/768 | Exit: 1 Controls: 1 Chat: 0
+tled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":60.518791666666665,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 834ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+⏸️ Sync: Pausing playback to match Host
+⚡️ PlaybackService: releasing sleep assertion
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":60.518791666666665,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Adaptive speed sync: 0.976x to fix 1.2s drift
+⚡ Playback speed adjusted to 0.98x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC8s2UsSQrgQLQ","phx_ref_prev":"GILC7ilaK8wrgYjE","last_seen":"2025-12-19T23:52:31.855Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC7ilaK8wrgYjE","phx_ref_prev":"GILC6X8pdDMrgV6E","last_seen":"2025-12-19T23:52:11.920Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":62.35395833333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Adaptive speed sync: 0.975x to fix 1.2s drift
+⚡ Playback speed adjusted to 0.98x for sync
+▶️ Sync: Resuming playback to match Host
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":64.39766666666667,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Adaptive speed sync: 0.976x to fix 1.2s drift
+⚡ Playback speed adjusted to 0.98x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":66.441375,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Adaptive speed sync: 0.978x to fix 1.1s drift
+⚡ Playback speed adjusted to 0.98x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":68.48508333333334,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 684ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"FVCS","timestamp":70.23683333333334,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Ultra-gentle sync: 0.995x to fix 309ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC9N7CEyeB5xEJ","phx_ref_prev":"GILC8DtFa6yB503M","last_seen":"2025-12-19T23:52:40.735Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC8DtFa6yB503M","phx_ref_prev":"GILC65dDdwKB5w6J","last_seen":"2025-12-19T23:52:20.814Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":70.82075,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 534ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+⏸️ Sync: Pausing playback to match Host
+⚡️ PlaybackService: releasing sleep assertion
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"FVCS","timestamp":70.82075,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:FVCS"}
+⚡ Gentle speed sync: 0.99x to fix 826ms drift
+⚡ Playback speed adjusted to 0.99x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC9h-8sg-B53aF","phx_ref_prev":"GILC9N7CEyeB5xEJ","last_seen":"2025-12-19T23:52:46.125Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC9N7CEyeB5xEJ","phx_ref_prev":"GILC8DtFa6yB503M","last_seen":"2025-12-19T23:52:40.735Z","room_id":"FVCS","started_at":"2025-12-19T23:51:18.361Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"7c35d622-dd35-11f0-97cf-0a58a9feac02":{"metas":[{"phx_ref":"GILC4a6JNV_3IzkI","phx_ref_prev":"GILC1PadeO_3I7JI","is_host":true,"joined_at":1766188278.3302078,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:watch-party:FVCS"}
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1360 with 444 movies
+✅ [EventsConfig] Using cached movie_events config (version 1360, 444 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC93VizVgrgQgP","phx_ref_prev":"GILC8s2UsSQrgQLQ","last_seen":"2025-12-19T23:52:51.855Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC8s2UsSQrgQLQ","phx_ref_prev":"GILC7ilaK8wrgYjE","last_seen":"2025-12-19T23:52:31.855Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+⚠️ Participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e not in Ref Map. Assuming valid leave (or already processed).
+👋 Participant left (confirmed): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"4aea684e-dd35-11f0-b368-0a58a9feac02":{"metas":[{"phx_ref":"GILC9h-8sg-B53aF","phx_ref_prev":"GILC9N7CEyeB5xEJ","last_seen":"2025-12-19T23:52:46.125Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC_CgcvT0rgV7F","phx_ref_prev":"GILC93VizVgrgQgP","last_seen":"2025-12-19T23:53:11.854Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}},"leaves":{"8d267b9e-dd35-11f0-8537-0a58a9feac02":{"metas":[{"phx_ref":"GILC93VizVgrgQgP","phx_ref_prev":"GILC8s2UsSQrgQLQ","last_seen":"2025-12-19T23:52:51.855Z","room_id":"FVCS","started_at":"2025-12-19T23:51:19.551Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0293564","watching_title":"Rush Hour 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💾 Saved to watch history: Rush Hour 3 at 73s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

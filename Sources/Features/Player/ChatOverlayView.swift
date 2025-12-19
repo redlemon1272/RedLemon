@@ -139,6 +139,9 @@ struct ChatOverlayView: View {
                     HStack(spacing: 2) {
                         if appState.isEventPlayback {
                             tabButton(title: "Event", mode: .event)
+                        } else if !viewModel.isInWatchParty {
+                            // Only show mute list directly in single event mode? 
+                            // Actually better to have it always accessible if someone is muted
                         }
                         
                         // Show "Room" if we are in a legit room (Watch Party) OR we are in an event (which is also a room)
@@ -160,6 +163,31 @@ struct ChatOverlayView: View {
                     // No extra controls in DM header for now
                 } else {
                     Spacer()
+                    
+                    // Muted Users Menu
+                    if !viewModel.mutedUserIds.isEmpty {
+                        Menu {
+                            Text("Muted Users")
+                            Divider()
+                            ForEach(Array(viewModel.mutedUserIds), id: \.self) { userId in
+                                Button(action: {
+                                    viewModel.toggleMute(userId: userId)
+                                }) {
+                                    Label("Unmute \(resolveUsername(userId: userId))", systemImage: "speaker.wave.2")
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "speaker.slash.circle.fill")
+                                .font(.system(size: 14))
+                                .foregroundColor(.red.opacity(0.8))
+                                .padding(6)
+                                .background(Color.white.opacity(0.1))
+                                .clipShape(Circle())
+                        }
+                        .menuStyle(.borderlessButton)
+                        .padding(.trailing, 4)
+                        .help("Manage Muted Users")
+                    }
                     
                     // Reaction Toggle
                     Button(action: {
@@ -657,6 +685,26 @@ struct ChatOverlayView: View {
         }
         .buttonStyle(.plain)
     }
+
+
+    private func resolveUsername(userId: String) -> String {
+        // 1. Check Friends
+        if let friend = socialService.friends.first(where: { $0.id == userId }) {
+            return friend.username
+        }
+        
+        // 2. Check Room Messages
+        if let msg = viewModel.messages.first(where: { $0.senderId == userId }) {
+            return msg.username
+        }
+        
+        // 3. Check Event Messages
+        if let msg = eventChatService.messages.first(where: { $0.senderId == userId }) {
+            return msg.username
+        }
+        
+        return "Unknown User"
+    }
 }
 
 struct InviteMessageView: View {
@@ -871,4 +919,5 @@ struct FriendRowButton: View {
         }
         .padding(0) // Inner padding handles it
     }
+
 }

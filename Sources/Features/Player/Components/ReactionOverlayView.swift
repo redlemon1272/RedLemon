@@ -46,7 +46,9 @@ struct ReactionOverlayView: View {
         // If the user turned off reactions, they probably don't want floating stuff. 
         // BUT Announcements are "important". 
         // Let's respect the toggle for now to be safe.
-        guard viewModel.areReactionsEnabled else { return }
+        // Allow announcements (isText) even if reactions are disabled
+        // Announcements are critical host communications and should not be suppressed by the "Hide Reactions" toggle
+        guard viewModel.areReactionsEnabled || isText else { return }
         
         // print("✨ ReactionOverlay: Adding particle for \(content)")
         

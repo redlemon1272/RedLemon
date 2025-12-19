@@ -378,39 +378,39 @@ class SupabaseClient: RoomManager, UserManager {
             let target_username: String
             let days_to_add: Int
         }
-        
+
         struct GrantResponse: Decodable {
             let success: Bool
             let message: String
         }
-        
+
         let params = GrantParams(
             caller_user_id: callerUserId.uuidString,
             target_username: username,
             days_to_add: days
         )
-        
+
         // Call the PostgreSQL function via RPC endpoint
         guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_grant_premium") else {
             throw SupabaseError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         request.httpBody = try encoder.encode(params)
-        
+
         let (data, httpResponse) = try await session.data(for: request)
-        
+
         guard let response = httpResponse as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse
         }
-        
+
         if response.statusCode >= 400 {
             if let errorMessage = String(data: data, encoding: .utf8) {
                 throw SupabaseError.httpError(response.statusCode, errorMessage)
@@ -418,55 +418,55 @@ class SupabaseClient: RoomManager, UserManager {
                 throw SupabaseError.httpError(response.statusCode, "Unknown error")
             }
         }
-        
+
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let result = try decoder.decode(GrantResponse.self, from: data)
-        
+
         if result.success {
             return result.message
         } else {
             throw NSError(domain: "SupabaseClient", code: 403, userInfo: [NSLocalizedDescriptionKey: result.message])
         }
     }
-    
+
     /// Revoke Premium Status (Admin Only)
     func revokePremium(callerUserId: UUID, username: String) async throws -> String {
         struct RevokeParams: Encodable {
             let caller_user_id: String
             let target_username: String
         }
-        
+
         struct RevokeResponse: Decodable {
             let success: Bool
             let message: String
         }
-        
+
         let params = RevokeParams(
             caller_user_id: callerUserId.uuidString,
             target_username: username
         )
-        
+
         guard let url = URL(string: "\(baseURL)/rest/v1/rpc/admin_revoke_premium") else {
             throw SupabaseError.invalidURL
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
-        
+
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         request.httpBody = try encoder.encode(params)
-        
+
         let (data, httpResponse) = try await session.data(for: request)
-        
+
         guard let response = httpResponse as? HTTPURLResponse else {
             throw SupabaseError.invalidResponse
         }
-        
+
         if response.statusCode >= 400 {
             if let errorMessage = String(data: data, encoding: .utf8) {
                 throw SupabaseError.httpError(response.statusCode, errorMessage)
@@ -474,11 +474,11 @@ class SupabaseClient: RoomManager, UserManager {
                 throw SupabaseError.httpError(response.statusCode, "Unknown error")
             }
         }
-        
+
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let result = try decoder.decode(RevokeResponse.self, from: data)
-        
+
         if result.success {
             return result.message
         } else {
@@ -711,11 +711,11 @@ class SupabaseClient: RoomManager, UserManager {
                 "limit": "1"
             ]
         )
-        
+
         struct RoomDate: Decodable {
             let created_at: Date
         }
-        
+
         let result = try jsonDecoder.decode([RoomDate].self, from: data)
         return result.first?.created_at
     }
@@ -763,7 +763,7 @@ class SupabaseClient: RoomManager, UserManager {
             body: body,
             query: ["id": "eq.\(roomId)"]
         )
-        
+
         NSLog("✅ Reset/Cleared stream selection for room \(roomId)")
     }
 
@@ -1340,8 +1340,13 @@ struct ReportedStream: Identifiable, Codable {
     }
 
     /// Check payment status via Edge Function
+    /// Check payment status via Edge Function
     func checkPaymentStatus() async throws -> (Bool, Date?) {
-        let response = try await functions.invoke("check-payment")
+        // Fix: Client uses custom auth, so we must pass user_id explicitly since we have no JWT
+        let userId = auth.currentUser?.id.uuidString ?? ""
+        let body = ["user_id": userId]
+
+        let response = try await functions.invoke("check-payment", options: .init(body: body))
 
         struct PaymentResponse: Decodable {
             let success: Bool
@@ -1542,7 +1547,7 @@ struct ReportedStream: Identifiable, Codable {
             "progress": item.progress,
             "last_watched": SupabaseClient.isoFormatter.string(from: item.lastWatched)
         ]
-        
+
         if let poster = item.mediaItem.poster {
             payload["poster_url"] = poster
         }
@@ -2006,17 +2011,17 @@ extension SupabaseClient {
         struct BlockRecord: Decodable {
             let blocked_id: UUID
         }
-        
+
         let data = try await makeRequest(path: path, method: "GET")
         let blocks = try jsonDecoder.decode([BlockRecord].self, from: data)
-        
+
         if blocks.isEmpty { return [] }
-        
+
         // 2. Fetch profiles for blocked IDs
         let idsString = blocks.map { $0.blocked_id.uuidString }.joined(separator: ",")
         let usersPath = "/users?id=in.(\(idsString))"
         let usersData = try await makeRequest(path: usersPath, method: "GET") // Reusing makeRequest
-        
+
         return try jsonDecoder.decode([SupabaseUser].self, from: usersData)
     }
 
@@ -2085,7 +2090,7 @@ extension SupabaseClient {
 
         _ = try await makeRequest(path: path, method: "POST", body: body)
     }
-    
+
     /// Delete all direct messages between two users
     func deleteAllDirectMessages(userId: UUID, friendId: UUID) async throws {
         // Delete messages where either:
@@ -2133,7 +2138,7 @@ class EdgeFunctionsAPI {
     }
 
     /// Invoke an edge function
-    func invoke(_ functionName: String, options: FunctionInvokeOptions? = nil) async throws -> Data {
+    func invoke(_ functionName: String, token: String? = nil, options: FunctionInvokeOptions? = nil) async throws -> Data {
         let urlString = "\(baseURL)/functions/v1/\(functionName)"
 
         guard let url = URL(string: urlString) else {
@@ -2143,7 +2148,13 @@ class EdgeFunctionsAPI {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue(apiKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+        // Fix: Use the provided User Token if available, otherwise fall back to Anon Key
+        if let token = token {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        }
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
         if let body = options?.body {

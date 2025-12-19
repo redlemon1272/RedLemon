@@ -627,6 +627,20 @@ class LobbyViewModel: ObservableObject {
         presenceManager.kickParticipant(participant)
     }
 
+    func blockParticipant(_ participant: Participant) {
+        // First kick, then block
+        kickParticipant(participant)
+        Task {
+            await SocialService.shared.blockUser(userId: participant.id)
+        }
+    }
+
+    func addFriend(participantId: String) {
+        Task {
+            _ = await SocialService.shared.sendRequest(toUserId: participantId)
+        }
+    }
+
     func startMovie(appState: AppState) async {
         guard isHost else { return }
         guard let mediaItem = room.mediaItem else {

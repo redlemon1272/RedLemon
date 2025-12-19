@@ -12,6 +12,7 @@ class SocialService: ObservableObject {
     @Published var onlineUserIds: Set<String> = []
     @Published var messages: [String: [DirectMessage]] = [:] // Key: FriendID (Principal)
     @Published var unreadCounts: [String: Int] = [:] // Key: FriendID
+    @Published var blockedUsers: [SupabaseUser] = [] // New: Blocked users list for management
     
     @Published var isConnected: Bool = false
     @Published var isLoading: Bool = false
@@ -41,8 +42,9 @@ class SocialService: ObservableObject {
         self.currentUserId = userId.lowercased()
         self.currentUsername = username
         
-        // 1. Load initial friend list
+        // 1. Load initial friend list and blocked users
         await loadFriends()
+        await loadBlockedUsers()
         
         // 2. Connect to Global Presence Channel
         await setupPresenceChannel(userId: userId, username: username)
@@ -408,6 +410,8 @@ class SocialService: ObservableObject {
                     status: .pending
                 )
             }
+            // Refresh blocked list
+            await loadBlockedUsers()
             
         } catch {
             print("❌ SocialService: Failed to load friends: \(error)")
@@ -426,6 +430,65 @@ class SocialService: ObservableObject {
             return nil
         } catch {
             return error.localizedDescription
+        }
+    }
+
+    func sendRequest(toUserId targetId: String) async -> String? {
+        guard let userIdStr = currentUserId, let userId = UUID(uuidString: userIdStr),
+              let targetUUID = UUID(uuidString: targetId) else { return "Invalid IDs" }
+        
+        do {
+            try await client.sendFriendRequest(from: userId, to: targetUUID)
+            await loadFriends()
+            return nil
+        } catch {
+            return error.localizedDescription
+        }
+    }
+
+    func blockUser(userId targetId: String) async {
+         guard let myIdStr = currentUserId, let myId = UUID(uuidString: myIdStr),
+               let targetUUID = UUID(uuidString: targetId) else { return }
+         
+         do {
+             try await client.blockUser(blockerId: myId, blockedId: targetUUID)
+             // Remove from friends list locally
+             friends.removeAll { $0.id == targetId.lowercased() }
+             friendActivity.removeValue(forKey: targetId.lowercased())
+             messages.removeValue(forKey: targetId.lowercased())
+             print("✅ SocialService: Blocked user \(targetId)")
+         } catch {
+             // If table doesn't exist, this fails. We log it.
+             print("❌ SocialService: Failed to block user: \(error)")
+         }
+    }
+    
+    func unblockUser(userId: String) async {
+         guard let currentId = SupabaseClient.shared.auth.currentUser?.id,
+               let targetUuid = UUID(uuidString: userId) else { return }
+
+         do {
+             try await SupabaseClient.shared.unblockUser(blockerId: currentId, blockedId: targetUuid)
+             print("✅ Unblocked user: \(userId)")
+             
+             // Update local list
+             await MainActor.run {
+                 blockedUsers.removeAll { $0.id.uuidString == userId }
+             }
+         } catch {
+             print("❌ Failed to unblock user: \(error)")
+         }
+    }
+    
+    func loadBlockedUsers() async {
+        guard let currentId = SupabaseClient.shared.auth.currentUser?.id else { return }
+        do {
+            let users = try await SupabaseClient.shared.getBlockedUsers(userId: currentId)
+            await MainActor.run {
+                self.blockedUsers = users
+            }
+        } catch {
+            print("⚠️ Failed to load blocked users: \(error)")
         }
     }
     

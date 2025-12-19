@@ -19,8 +19,8 @@ struct FriendsView: View {
     enum FriendTab {
         case all
         case online
-        case favorites
         case requests
+        case blocked // New Tab
     }
 
     var body: some View {
@@ -40,14 +40,16 @@ struct FriendsView: View {
                     if socialService.isLoading && socialService.friends.isEmpty {
                         ProgressView()
                             .padding(40)
-                    } else if filteredFriends.isEmpty && selectedTab != .requests {
+                    } else if filteredFriends.isEmpty && selectedTab != .requests && selectedTab != .blocked {
                         emptyState
                     } else {
                         switch selectedTab {
-                        case .all, .online, .favorites:
+                        case .all, .online:
                             friendsList
                         case .requests:
                             requestsList
+                        case .blocked:
+                            blockedList
                         }
                     }
                 }
@@ -65,7 +67,8 @@ struct FriendsView: View {
         }
         .task {
             // Refresh friends on view appear
-            await socialService.loadFriends()
+            await SocialService.shared.loadFriends()
+            await SocialService.shared.loadBlockedUsers()
         }
     }
 
@@ -122,8 +125,8 @@ struct FriendsView: View {
         HStack(spacing: 4) {
             tabButton(title: "All", count: socialService.friends.filter { $0.status == .accepted }.count, tab: .all)
             tabButton(title: "Online", count: onlineFriends.count, tab: .online)
-            tabButton(title: "Favorites", count: socialService.friends.filter { $0.isFavorite }.count, tab: .favorites)
             tabButton(title: "Requests", count: socialService.friendRequests.filter { $0.status == .pending }.count, tab: .requests)
+             tabButton(title: "Blocked", count: socialService.blockedUsers.count, tab: .blocked)
         }
         .padding()
     }
@@ -199,6 +202,48 @@ struct FriendsView: View {
         }
     }
 
+    // MARK: - Blocked List
+
+    private var blockedList: some View {
+        Group {
+            if socialService.blockedUsers.isEmpty {
+                VStack(spacing: 12) {
+                    Image(systemName: "shield")
+                        .font(.system(size: 50))
+                        .foregroundColor(.secondary)
+                    Text("No blocked users")
+                        .font(.title3)
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(40)
+            } else {
+                ForEach(socialService.blockedUsers, id: \.id) { user in
+                    HStack {
+                         VStack(alignment: .leading) {
+                             Text(user.username)
+                                 .font(.headline)
+                             Text("Blocked")
+                                 .font(.caption)
+                                 .foregroundColor(.secondary)
+                         }
+                         Spacer()
+                         Button(action: {
+                             Task { await socialService.unblockUser(userId: user.id.uuidString) }
+                         }) {
+                             Label("Unblock", systemImage: "lock.open")
+                         }
+                         .buttonStyle(.bordered)
+                         .controlSize(.small)
+                    }
+                    .padding()
+                    .background(Color(NSColor.controlBackgroundColor))
+                    .cornerRadius(8)
+                }
+            }
+        }
+    }
+
     // MARK: - Empty State
 
     private var emptyState: some View {
@@ -243,9 +288,9 @@ struct FriendsView: View {
                 }
                 return socialService.onlineUserIds.contains(friend.id)
             }
-        case .favorites:
-            result = result.filter { $0.isFavorite }
         case .requests:
+            return [] // Handled separately
+        case .blocked:
             return [] // Handled separately
         }
 

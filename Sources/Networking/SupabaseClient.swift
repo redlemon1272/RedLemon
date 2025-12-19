@@ -1975,6 +1975,51 @@ extension SupabaseClient {
 
     // Internal helpers
 
+    // MARK: - Blocking
+
+    func blockUser(blockerId: UUID, blockedId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/user_blocks",
+            method: "POST",
+            body: [
+                "blocker_id": blockerId.uuidString,
+                "blocked_id": blockedId.uuidString
+            ]
+        )
+    }
+
+    func unblockUser(blockerId: UUID, blockedId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/user_blocks",
+            method: "DELETE",
+            query: [
+                "blocker_id": "eq.\(blockerId.uuidString)",
+                "blocked_id": "eq.\(blockedId.uuidString)"
+            ]
+        )
+    }
+
+    /// Get list of blocked users
+    func getBlockedUsers(userId: UUID) async throws -> [SupabaseUser] {
+        // 1. Get block records where user is blocker
+        let path = "/user_blocks?blocker_id=eq.\(userId.uuidString)&select=*"
+        struct BlockRecord: Decodable {
+            let blocked_id: UUID
+        }
+        
+        let data = try await makeRequest(path: path, method: "GET")
+        let blocks = try jsonDecoder.decode([BlockRecord].self, from: data)
+        
+        if blocks.isEmpty { return [] }
+        
+        // 2. Fetch profiles for blocked IDs
+        let idsString = blocks.map { $0.blocked_id.uuidString }.joined(separator: ",")
+        let usersPath = "/users?id=in.(\(idsString))"
+        let usersData = try await makeRequest(path: usersPath, method: "GET") // Reusing makeRequest
+        
+        return try jsonDecoder.decode([SupabaseUser].self, from: usersData)
+    }
+
     func sendFriendRequest(from senderId: UUID, to receiverId: UUID) async throws {
         let path = "/friendships"
         let body: [String: Any] = [

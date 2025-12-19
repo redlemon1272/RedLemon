@@ -89,7 +89,8 @@ class EventChatService: ObservableObject {
             id: tempId,
             username: username,
             text: text,
-            timestamp: Date()
+            timestamp: Date(),
+            senderId: userId
         )
         self.messages.append(message)
         
@@ -155,7 +156,8 @@ class EventChatService: ObservableObject {
             id: UUID().uuidString,
             username: username,
             text: text,
-            timestamp: Date(timeIntervalSince1970: message.timestamp)
+            timestamp: Date(timeIntervalSince1970: message.timestamp),
+            senderId: message.senderId
         )
         self.messages.append(chatMessage)
         

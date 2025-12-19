@@ -282,6 +282,15 @@ class MPVPlayerViewModel: ObservableObject {
     // Chat state
     @Published var showChat: Bool = false
     @Published var showParticipantList: Bool = false
+    @Published var mutedUserIds: Set<String> = []
+
+    func toggleMute(userId: String) {
+        if mutedUserIds.contains(userId) {
+            mutedUserIds.remove(userId)
+        } else {
+            mutedUserIds.insert(userId)
+        }
+    }
 
     // Watch Party State
     @Published var forceSoloStart: Bool = false // Bypass guest check
@@ -335,6 +344,52 @@ class MPVPlayerViewModel: ObservableObject {
     private var trackSwitchStartTime: Date?
     private var trackSwitchStartPos: Double = 0
 
+
+    // MARK: - Moderation
+
+    func kickUser(_ participantId: String) {
+        guard isWatchPartyHost else { return }
+        
+        // 1. Send Kick command via Realtime
+        let kickCmd = SyncMessage(
+            type: .chat,
+            timestamp: 0,
+            isPlaying: nil,
+            senderId: currentUserId,
+            chatText: "LOBBY_KICK:\(participantId)",
+            chatUsername: "Host"
+        )
+
+        Task {
+            try? await realtimeManager?.sendSyncMessage(kickCmd)
+
+            // 2. Remove from DB (leaveRoom)
+             try? await SupabaseClient.shared.leaveRoom(
+                roomId: currentRoomId ?? "",
+                userId: UUID(uuidString: participantId) ?? UUID()
+            )
+            
+            // 3. Remove from local presence lists
+            await MainActor.run {
+                connectedGuestIds.remove(participantId)
+                readyGuestIds.remove(participantId)
+                appState?.player.currentWatchPartyRoom?.participants.removeAll { $0.id == participantId }
+            }
+        }
+    }
+
+    func blockUser(_ participantId: String) {
+        kickUser(participantId)
+        Task {
+            await SocialService.shared.blockUser(userId: participantId)
+        }
+    }
+
+    func addFriend(_ participantId: String) {
+        Task {
+             _ = await SocialService.shared.sendRequest(toUserId: participantId)
+        }
+    }
 
     // MARK: - Initialization
 
@@ -1450,6 +1505,7 @@ struct ChatMessage: Identifiable {
     let text: String
     let timestamp: Date
     var isSystem: Bool = false
+    var senderId: String? = nil
 }
 
 
@@ -1975,7 +2031,8 @@ extension MPVPlayerViewModel {
                     id: msg.id.uuidString,
                     username: msg.username,
                     text: msg.message,
-                    timestamp: msg.createdAt
+                    timestamp: msg.createdAt,
+                    senderId: msg.userId.uuidString
                 )
                 messages.append(chatMsg)
                 trimChatMessages()
@@ -2243,7 +2300,8 @@ extension MPVPlayerViewModel {
                     id: UUID().uuidString,
                     username: username,
                     text: displayText,
-                    timestamp: Date(timeIntervalSince1970: message.timestamp)
+                    timestamp: Date(timeIntervalSince1970: message.timestamp),
+                    senderId: message.senderId
                 )
                 // Batch chat updates to avoid UI thrashing
                 await MainActor.run {

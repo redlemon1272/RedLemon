@@ -195,23 +195,64 @@ struct ChatOverlayView: View {
     
     // MARK: - List Views
     
+    private func userMenu(username: String, userId: String?, isHost: Bool) -> some View {
+        Menu {
+            Text(username) // Header
+
+            if let uid = userId, uid != appState.currentUserId?.uuidString {
+                 let isFriend = socialService.friends.contains(where: { $0.id == uid })
+                 
+                 if !isFriend {
+                     Button(action: {
+                         Task { _ = await socialService.sendRequest(toUserId: uid) }
+                     }) {
+                         Label("Add Friend", systemImage: "person.badge.plus")
+                     }
+                 }
+
+                 Button(action: {
+                     viewModel.toggleMute(userId: uid)
+                 }) {
+                     Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
+                           systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
+                 }
+                 
+                 // Host Options (Verify context)
+                 if isHost {
+                     Divider()
+                     Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
+                         Label("Kick User", systemImage: "xmark.circle")
+                     }
+                      Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
+                         Label("Block User", systemImage: "slash.circle")
+                     }
+                 }
+            }
+        } label: {
+            Text(username)
+                .font(.caption.weight(.semibold))
+                .foregroundColor(.blue)
+        }
+        .menuStyle(.borderlessButton)
+    }
+
     private var eventChatList: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     ForEach(eventChatService.messages.suffix(maxVisibleMessages), id: \.id) { message in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(message.username)
-                                .font(.caption.weight(.semibold))
-                                .foregroundColor(.purple) // Events get purple
-                            Text(message.text)
-                                .font(.body)
-                                .foregroundColor(.white)
+                        if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
+                            VStack(alignment: .leading, spacing: 4) {
+                                userMenu(username: message.username, userId: message.senderId, isHost: false) // Event chat has no host moderation
+                                Text(message.text)
+                                    .font(.body)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(12)
+                            .background(Color.white.opacity(0.1))
+                            .cornerRadius(8)
+                            .id(message.id)
                         }
-                        .padding(12)
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(8)
-                        .id(message.id)
                     }
                 }
                 .padding()
@@ -230,20 +271,20 @@ struct ChatOverlayView: View {
                 // ✅ Show only most recent messages for performance
                 // Reversed for inverted list (bottom-up)
                 ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)).reversed(), id: \.id) { message in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(message.username)
-                            .font(.caption.weight(.semibold))
-                            .foregroundColor(.blue)
-                        Text(message.text)
-                            .font(.body)
-                            .foregroundColor(.white)
+                    if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
+                        VStack(alignment: .leading, spacing: 4) {
+                            userMenu(username: message.username, userId: message.senderId, isHost: viewModel.isWatchPartyHost)
+                            Text(message.text)
+                                .font(.body)
+                                .foregroundColor(.white)
+                        }
+                        .padding(12)
+                        .background(Color.black.opacity(0.2))
+                        .cornerRadius(8)
+                        .id(message.id)
+                        .rotationEffect(.degrees(180)) // Correct text orientation
+                        .scaleEffect(x: -1, y: 1, anchor: .center)
                     }
-                    .padding(12)
-                    .background(Color.black.opacity(0.2))
-                    .cornerRadius(8)
-                    .id(message.id)
-                    .rotationEffect(.degrees(180)) // Correct text orientation
-                    .scaleEffect(x: -1, y: 1, anchor: .center)
                 }
             }
             .padding()
@@ -766,6 +807,13 @@ struct FriendRowButton: View {
             .buttonStyle(.plain)
             .background(isHovering ? Color.white.opacity(0.2) : Color.clear)
             .cornerRadius(8)
+            .contextMenu {
+                Button(role: .destructive, action: {
+                    Task { await SocialService.shared.blockUser(userId: friend.id) }
+                }) {
+                    Label("Block User", systemImage: "slash.circle")
+                }
+            }
             .onHover { hovering in
                 isHovering = hovering
             }

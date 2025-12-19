@@ -278,11 +278,15 @@ struct WatchPartyLobbyView: View {
                             if room.type == .userRoom {
                                 VStack(spacing: 6) {
                                     ForEach(viewModel.participants) { participant in
-                                        ParticipantRow(
+                                    ParticipantRow(
                                             participant: participant,
                                             canKick: isHost && !participant.isHost,
+                                            canBlock: isHost && !participant.isHost,
+                                            canAddFriend: participant.id != (appState.currentUserId?.uuidString.lowercased() ?? "") && !socialService.friends.contains(where: { $0.id == participant.id }),
                                             onKick: { viewModel.kickParticipant(participant) },
+                                            onBlock: { viewModel.blockParticipant(participant) },
                                             onMute: { viewModel.toggleMute(participantId: participant.id) },
+                                            onAddFriend: { viewModel.addFriend(participantId: participant.id) },
                                             isMuted: viewModel.mutedUserIds.contains(participant.id)
                                         )
                                     }
@@ -856,8 +860,12 @@ extension WatchPartyLobbyView {
 struct ParticipantRow: View {
     let participant: Participant
     let canKick: Bool
+    let canBlock: Bool
+    let canAddFriend: Bool
     let onKick: () -> Void
+    let onBlock: () -> Void
     let onMute: () -> Void
+    let onAddFriend: () -> Void
     let isMuted: Bool
 
     var body: some View {
@@ -890,23 +898,39 @@ struct ParticipantRow: View {
                     .foregroundColor(.green)
             }
 
-            if canKick {
-                Menu {
+            // Always show menu for social options
+            Menu {
+                if canAddFriend {
+                     Button(action: onAddFriend) {
+                        Label("Add Friend", systemImage: "person.badge.plus")
+                    }
+                }
+                
+                Button(action: onMute) {
+                    Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
+                }
+
+                if canKick {
+                    Divider()
+                    
                     Button(role: .destructive, action: onKick) {
                         Label("Kick Participant", systemImage: "xmark.circle")
                     }
-
-                    Button(action: onMute) {
-                        Label(isMuted ? "Unmute" : "Mute", systemImage: isMuted ? "speaker.wave.2" : "speaker.slash")
-                    }
-                } label: {
-                    Image(systemName: "ellipsis.circle.fill")
-                        .foregroundColor(.white.opacity(0.6))
-                        .font(.system(size: 20))
                 }
-                .menuStyle(BorderlessButtonMenuStyle())
-                .frame(width: 24, height: 24)
+                
+                if canBlock {
+                    Button(role: .destructive, action: onBlock) {
+                        Label("Block User", systemImage: "slash.circle")
+                    }
+                }
+
+            } label: {
+                Image(systemName: "ellipsis.circle.fill")
+                    .foregroundColor(.white.opacity(0.6))
+                    .font(.system(size: 20))
             }
+            .menuStyle(BorderlessButtonMenuStyle())
+            .frame(width: 24, height: 24)
         }
         .padding(8)
         .background(Color.white.opacity(0.05))

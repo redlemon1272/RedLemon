@@ -60,6 +60,17 @@ class LicenseManager: ObservableObject {
         }
     }
     
+    /// Trigger a background check for crypto payments (Run on app start)
+    func refreshSubscription() async {
+        do {
+            print("💰 LicenseManager: Checking for background crypto payments...")
+            let (isPremium, newExpiry) = try await SupabaseClient.shared.checkPaymentStatus()
+            refreshLicense(premium: isPremium, expiresAt: newExpiry)
+        } catch {
+            print("⚠️ LicenseManager: Background payment check failed: \(error)")
+        }
+    }
+    
     /// Recover account using mnemonic phrase
     func recoverAccount(phrase: String) async throws -> Bool {
         let hash = RecoveryPhraseManager.shared.hashPhrase(phrase)

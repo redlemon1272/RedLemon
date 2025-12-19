@@ -210,6 +210,9 @@ struct RedLemonApp: App {
     func performStartupChecks() async {
         NSLog("🔍 Performing startup checks...")
         NSLog("✅ Username-based authentication ready")
+        
+        // Check for crypto payments in background
+        await LicenseManager.shared.refreshSubscription()
     }
 
     func checkForUpdates() async {

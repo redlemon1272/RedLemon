@@ -204,9 +204,9 @@ serve(async (req) => {
 
         // Calculate Tiers
         let daysToAdd = 0
-        if (totalNewUsdValue >= 10) daysToAdd = 90
-        else if (totalNewUsdValue >= 7) daysToAdd = 60
-        else if (totalNewUsdValue >= 4) daysToAdd = 30
+        if (totalNewUsdValue >= 9.80) daysToAdd = 90
+        else if (totalNewUsdValue >= 6.80) daysToAdd = 60
+        else if (totalNewUsdValue >= 3.80) daysToAdd = 30
 
         if (daysToAdd > 0) {
              const { data: userData } = await supabaseAdmin

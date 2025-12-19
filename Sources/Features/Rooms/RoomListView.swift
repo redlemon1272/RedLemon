@@ -180,118 +180,13 @@ struct RoomListView: View {
                 var newRooms: [WatchPartyRoom] = []
                 for room in backendRooms {
                     // FILTER: Exclude system-run events ("RedLemon Events") from the public rooms list
-                    // Events are distinct and shouldn't appear as user-hosted rooms
                     if room.hostUsername == "RedLemon Events" || room.type == .event {
                         continue
                     }
 
-                    // Determine media type based on season/episode
-                    let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
-
-                    // Create a MediaItem from the room data
-                    let mediaItem = MediaItem(
-                        id: room.imdbId ?? "unknown",
-                        type: mediaType,
-                        name: room.name,
-                        poster: room.posterUrl,
-                        background: room.backdropUrl,
-                        logo: nil,
-                        description: nil,
-                        releaseInfo: nil,
-                        year: nil,
-                        imdbRating: nil,
-                        genres: nil,
-                        runtime: nil
-                    )
-
-                    // Fetch actual participants from room_participants table first to verify Host presence
-                    var guests: [Participant] = []
-                    var host: Participant?
-                    
-                    do {
-                        let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-                        
-                        // ZOMBIE CHECK: Verify host is in the participant list
-                        guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
-                            print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Cleaning up...")
-                            Task {
-                                try? await SupabaseClient.shared.deleteRoom(roomId: room.id)
-                                print("🧹 Distributed Cleanup: Deleted zombie room \(room.id)")
-                            }
-                            continue
-                        }
-                        
-                        // Create host participant from REAL data
-                        host = Participant(
-                            id: room.hostUserId.uuidString,
-                            name: room.hostUsername,
-                            isHost: true,
-                            isReady: true,
-                            joinedAt: hostData.joinedAt
-                        )
-
-                        // Convert guests
-                        for participant in roomParticipants {
-                            if participant.userId.uuidString == room.hostUserId.uuidString { continue }
-
-                            if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
-                                let guest = Participant(
-                                    id: participant.userId.uuidString,
-                                    name: user.username,
-                                    isHost: participant.isHost,
-                                    isReady: false,
-                                    joinedAt: participant.joinedAt
-                                )
-                                guests.append(guest)
-                            } else {
-                                let guest = Participant(
-                                    id: participant.userId.uuidString,
-                                    name: "Unknown User",
-                                    isHost: participant.isHost,
-                                    isReady: false,
-                                    joinedAt: participant.joinedAt
-                                )
-                                guests.append(guest)
-                            }
-                        }
-                    } catch {
-                        print("⚠️ Failed to fetch participants for room \(room.id): \(error)")
-                        // If we can't verify participants, skip to avoid showing invalid rooms
-                        continue
+                    if let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(room) {
+                        newRooms.append(watchPartyRoom)
                     }
-                    
-                    guard let validatedHost = host else { continue }
-
-                    let watchPartyRoom = WatchPartyRoom(
-                        id: room.id,
-                        hostId: validatedHost.id,
-                        hostName: room.hostUsername,
-                        mediaItem: mediaItem,
-                        season: nil,
-                        episode: nil,
-                        episodeTitle: nil,
-                        quality: .fullHD,
-                        sourceQuality: nil,
-
-                        description: room.description,
-                        posterURL: room.posterUrl,
-                        participants: [validatedHost] + guests,
-                        state: room.isPlaying ? .playing : .lobby,
-                        createdAt: room.createdAt,
-                        lastActivity: room.lastActivity,
-                        playlist: room.playlist,
-                        currentPlaylistIndex: room.currentPlaylistIndex ?? 0,
-                        lobbyDuration: 300,
-                        shouldLoop: false,
-                        isPersistent: true,
-                        playbackPosition: TimeInterval(room.playbackPosition),
-                        runtime: nil,
-                        selectedStreamHash: nil,
-                        selectedFileIdx: nil,
-                        selectedQuality: nil,
-                        unlockedStreamURL: nil
-                    )
-                    newRooms.append(watchPartyRoom)
                 }
 
                 await MainActor.run {
@@ -323,6 +218,115 @@ struct RoomListView: View {
                 }
             }
         }
+    }
+
+    private func convertSupabaseRoomToWatchPartyRoom(_ room: SupabaseRoom) async -> WatchPartyRoom? {
+        // Determine media type based on season/episode
+        let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
+
+        // Create a MediaItem from the room data
+        let mediaItem = MediaItem(
+            id: room.imdbId ?? "unknown",
+            type: mediaType,
+            name: room.name,
+            poster: room.posterUrl,
+            background: room.backdropUrl,
+            logo: nil,
+            description: nil,
+            releaseInfo: nil,
+            year: nil,
+            imdbRating: nil,
+            genres: nil,
+            runtime: nil
+        )
+
+        // Fetch actual participants from room_participants table first to verify Host presence
+        var guests: [Participant] = []
+        var host: Participant?
+        
+        do {
+            let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
+            
+            // ZOMBIE CHECK: Verify host is in the participant list
+            guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
+                print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Cleaning up...")
+                Task {
+                    try? await SupabaseClient.shared.deleteRoom(roomId: room.id)
+                    print("🧹 Distributed Cleanup: Deleted zombie room \(room.id)")
+                }
+                return nil
+            }
+            
+            // Create host participant from REAL data
+            host = Participant(
+                id: room.hostUserId.uuidString,
+                name: room.hostUsername,
+                isHost: true,
+                isReady: true,
+                joinedAt: hostData.joinedAt
+            )
+
+            // Convert guests
+            for participant in roomParticipants {
+                if participant.userId.uuidString == room.hostUserId.uuidString { continue }
+
+                if let user = try? await SupabaseClient.shared.getUserById(userId: participant.userId) {
+                    let guest = Participant(
+                        id: participant.userId.uuidString,
+                        name: user.username,
+                        isHost: participant.isHost,
+                        isReady: false,
+                        joinedAt: participant.joinedAt
+                    )
+                    guests.append(guest)
+                } else {
+                    let guest = Participant(
+                        id: participant.userId.uuidString,
+                        name: "Unknown User",
+                        isHost: participant.isHost,
+                        isReady: false,
+                        joinedAt: participant.joinedAt
+                    )
+                    guests.append(guest)
+                }
+            }
+        } catch {
+            print("⚠️ Failed to fetch participants for room \(room.id): \(error)")
+            // If we can't verify participants, skip to avoid showing invalid rooms
+            return nil
+        }
+        
+        guard let validatedHost = host else { return nil }
+
+        return WatchPartyRoom(
+            id: room.id,
+            hostId: validatedHost.id,
+            hostName: room.hostUsername,
+            mediaItem: mediaItem,
+            season: nil,
+            episode: nil,
+            episodeTitle: nil,
+            quality: .fullHD,
+            sourceQuality: nil,
+
+            description: room.description,
+            posterURL: room.posterUrl,
+            participants: [validatedHost] + guests,
+            state: room.isPlaying ? .playing : .lobby,
+            createdAt: room.createdAt,
+            lastActivity: room.lastActivity,
+            playlist: room.playlist,
+            currentPlaylistIndex: room.currentPlaylistIndex ?? 0,
+            lobbyDuration: 300,
+            shouldLoop: false,
+            isPersistent: true,
+            playbackPosition: TimeInterval(room.playbackPosition),
+            runtime: nil,
+            selectedStreamHash: nil,
+            selectedFileIdx: nil,
+            selectedQuality: nil,
+            unlockedStreamURL: nil
+        )
     }
 
     private func fetchPostersForRooms(rooms: [WatchPartyRoom]? = nil) async {
@@ -443,12 +447,40 @@ struct RoomListView: View {
 
     private func joinRoomByCode(code: String) {
         print("🚪 Joining room by code: \(code)")
-        // Try to find room in active rooms
+        let code = code.trimmingCharacters(in: .whitespacesAndNewlines)
+        if code.isEmpty { return }
+
+        // 1. Try local list first (fast path)
         if let room = appState.activeRooms.first(where: { $0.id == code }) {
             joinRoom(room: room)
-        } else {
-            // Room not found - could fetch from backend in the future
-            print("❌ Room not found: \(code)")
+            return
+        }
+
+        // 2. Fetch from server (fallback for private rooms)
+        isLoading = true
+        Task {
+            do {
+                print("🔍 Looking up room by code on Supabase: \(code)")
+                if let supabaseRoom = try await SupabaseClient.shared.getRoomState(roomId: code) {
+                    // Convert to WatchPartyRoom
+                    if let watchPartyRoom = await convertSupabaseRoomToWatchPartyRoom(supabaseRoom) {
+                        await MainActor.run {
+                            isLoading = false
+                            joinRoom(room: watchPartyRoom)
+                        }
+                    } else {
+                        throw NSError(domain: "RoomListView", code: 404, userInfo: [NSLocalizedDescriptionKey: "Room exists but could not be processed (possibly invalid host or empty)"])
+                    }
+                } else {
+                    throw NSError(domain: "RoomListView", code: 404, userInfo: [NSLocalizedDescriptionKey: "Room not found. Check the code and try again."])
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    print("❌ Failed to join room by code: \(error)")
+                    NSAlert.showAlert(title: "Join Failed", message: error.localizedDescription, style: .critical)
+                }
+            }
         }
     }
 

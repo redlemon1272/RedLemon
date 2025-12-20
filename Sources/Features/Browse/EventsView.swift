@@ -645,8 +645,9 @@ struct HeroEventCardContent: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 320)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 1600) // Constrain max width to reduce zoom on ultra-wide
                     .clipped()
+                    .cornerRadius(12) // Round corners since it's now padded
             } placeholder: {
                 Rectangle().fill(
                     LinearGradient(
@@ -655,8 +656,11 @@ struct HeroEventCardContent: View {
                         endPoint: .bottomTrailing
                     )
                 )
+                .cornerRadius(12)
             }
             .allowsHitTesting(false)
+            .padding(.horizontal, 32) // Add requested padding
+            .frame(maxWidth: .infinity) // Center the constrained image
 
             // LAYER 2: Gradients
             ZStack {
@@ -671,6 +675,10 @@ struct HeroEventCardContent: View {
                     endPoint: .trailing
                 )
             }
+            .frame(maxWidth: 1600) // Match image constraint
+            .cornerRadius(12)
+            .padding(.horizontal, 32)
+            .frame(maxWidth: .infinity)
 
             // LAYER 3: Content
             VStack(alignment: .leading, spacing: 0) {

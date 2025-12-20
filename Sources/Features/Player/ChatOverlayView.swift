@@ -62,7 +62,10 @@ struct ChatOverlayView: View {
             if case .friends = chatMode {
                 // No input area for friend list
             } else {
-                reactionBar
+                // Only show reactions in social contexts (Room/Event)
+                if appState.isEventPlayback || viewModel.isInWatchParty {
+                    reactionBar
+                }
                 inputArea
             }
         }

@@ -383,7 +383,9 @@ class MPVPlayerViewModel: ObservableObject {
             let moviePattern = try? NSRegularExpression(pattern: "s\\d{1,2}e\\d{1,2}", options: [.caseInsensitive])
             let range = NSRange(location: 0, length: title.utf16.count)
             if let regex = moviePattern, regex.firstMatch(in: title, options: [], range: range) != nil {
-                return regex.stringByReplacingMatches(in: title, options: [], range: range, withTemplate: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                let clean = regex.stringByReplacingMatches(in: title, options: [], range: range, withTemplate: "").trimmingCharacters(in: .whitespacesAndNewlines)
+                // Fix: Remove trailing dash if it exists (e.g., "Movie Name -")
+                return clean.hasSuffix("-") ? String(clean.dropLast()).trimmingCharacters(in: .whitespacesAndNewlines) : clean
             }
             return title
         }

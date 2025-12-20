@@ -63,17 +63,19 @@ struct Stream: Codable, Identifiable {
     /// Helper to detect video quality from title (for fallback scenarios)
     static func detectVideoQuality(from title: String) -> String {
         let titleUpper = title.uppercased()
-        
-        if titleUpper.contains("4K") || titleUpper.contains("2160P") || titleUpper.contains("UHD") {
+
+        if titleUpper.contains("2160P") {
             return "4K"
         } else if titleUpper.contains("1080P") {
             return "1080p"
+        } else if titleUpper.contains("4K") || titleUpper.contains("UHD") {
+            return "4K"
         } else if titleUpper.contains("720P") {
             return "720p"
         } else if titleUpper.contains("480P") {
             return "480p"
         }
-        
+
         return "Unknown"
     }
 

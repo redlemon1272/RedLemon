@@ -1101,69 +1101,23 @@ class MouseTrackingNSView: NSView {
         return false // Don't intercept clicks
     }
 
-    override func hitTest(_ point: NSPoint) -> NSView? {
-        // Convert point to view coordinates
-        let location = convert(point, from: nil)
-        let viewBounds = bounds
-
-        // Define safe zones (Pass-through areas)
-        let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
-        let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
-        let rightChatZone = CGRect(x: viewBounds.width * 0.60, y: 0, width: viewBounds.width * 0.40, height: viewBounds.height)
-
-        // If in safe zone, return nil to let event pass through to views behind/underneath
-        if bottomZone.contains(location) || topExitZone.contains(location) || rightChatZone.contains(location) {
-            return nil
-        }
-
-        // Otherwise, handle normally (will be blocked by mouseDown)
-        return super.hitTest(point)
-    }
-
     override func mouseDown(with event: NSEvent) {
-        // Since hitTest returns nil for safe zones, this is only called for blocking zones.
-        NSLog("⛔️ Blocking click in video area")
+        // Block clicks in the background
         return
     }
 
     override func mouseUp(with event: NSEvent) {
-        // Since hitTest returns nil for safe zones, this is only called for blocking zones.
+        // Block clicks in the background
         return
     }
 
     override func rightMouseDown(with event: NSEvent) {
-        // Use the same hit testing logic for right-click
-        let location = convert(event.locationInWindow, from: nil)
-        let viewBounds = bounds
-
-        let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
-        let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
-
-        if bottomZone.contains(location) || topExitZone.contains(location) {
-            window?.firstResponder?.rightMouseDown(with: event)
-            return
-        }
-
-        // For clicks in video area, don't forward events - let video layer handle them naturally
-        // This prevents crashes in the main video viewing area
+        // Block right-clicks in the background
         return
     }
 
     override func rightMouseUp(with event: NSEvent) {
-        // Use the same hit testing logic for right-click
-        let location = convert(event.locationInWindow, from: nil)
-        let viewBounds = bounds
-
-        let bottomZone = CGRect(x: 0, y: 0, width: viewBounds.width, height: viewBounds.height * 0.25)
-        let topExitZone = CGRect(x: 0, y: viewBounds.height * 0.75, width: viewBounds.width * 0.25, height: viewBounds.height * 0.25)
-
-        if bottomZone.contains(location) || topExitZone.contains(location) {
-            window?.firstResponder?.rightMouseUp(with: event)
-            return
-        }
-
-        // For clicks in video area, don't forward events - let video layer handle them naturally
-        // This prevents crashes in the main video viewing area
+        // Block right-clicks in the background
         return
     }
 }

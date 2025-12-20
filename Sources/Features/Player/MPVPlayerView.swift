@@ -1101,13 +1101,32 @@ class MouseTrackingNSView: NSView {
         return false // Don't intercept clicks
     }
 
+    override func hitTest(_ point: NSPoint) -> NSView? {
+        // Convert point to view coordinates
+        let location = convert(point, from: nil)
+        let viewBounds = bounds
+
+        // Define "Right Chat Zone" (Right 40%) - SAFE to pass through (no sidebar behind it)
+        // This restores interactivity for the Chat Overlay and Reaction buttons
+        let rightChatZone = CGRect(x: viewBounds.width * 0.60, y: 0, width: viewBounds.width * 0.40, height: viewBounds.height)
+
+        // If in safe zone, return nil to let event pass through to views behind/underneath (Chat Overlay)
+        if rightChatZone.contains(location) {
+            return nil
+        }
+
+        // Otherwise, handle normally (will be blocked by mouseDown below)
+        // This BLOCKS clicks in the Bottom/Left zones, preventing the Sidebar crash
+        return super.hitTest(point)
+    }
+
     override func mouseDown(with event: NSEvent) {
-        // Block clicks in the background
+        // Block clicks in the background (if hitTest returned self)
         return
     }
 
     override func mouseUp(with event: NSEvent) {
-        // Block clicks in the background
+        // Block clicks in the background (if hitTest returned self)
         return
     }
 

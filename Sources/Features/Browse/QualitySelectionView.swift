@@ -7,7 +7,6 @@ struct QualitySelectionView: View {
 
     @State private var selectedQuality: VideoQuality = .fullHD
     @State private var watchMode: WatchMode = .solo
-    @State private var showingStreamSelection = false
     @State private var roomDescription: String = ""
     @State private var isPublicRoom: Bool = true
     @State private var showPremiumSheet: Bool = false
@@ -57,59 +56,15 @@ struct QualitySelectionView: View {
 
                 Spacer()
 
-                // Main content - Horizontal layout
-                HStack(alignment: .center, spacing: 40) {
-                    // Quality Selection
-                    VStack(alignment: .leading, spacing: 16) {
-                        Text("Video Quality")
-                            .font(.headline)
-                            .foregroundColor(.primary)
-
-                        VStack(spacing: 8) {
-                            ForEach(VideoQuality.allCases.filter { $0 != .sd }) { quality in
-                                Button(action: {
-                                    selectedQuality = quality
-                                }) {
-                                    QualityOption(
-                                        quality: quality,
-                                        isSelected: selectedQuality == quality
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                        .frame(width: 280)
-
-                        // Show All Streams button
-                        Button(action: {
-                            showingStreamSelection = true
-                        }) {
-                            HStack {
-                                Image(systemName: "list.bullet")
-                                    .font(.system(size: 12))
-                                Text("Show All Streams")
-                                    .font(.system(size: 12, weight: .medium))
-                            }
-                            .foregroundColor(.accentColor)
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 6)
-                            .background(Color.accentColor.opacity(0.1))
-                            .cornerRadius(6)
-                        }
-                        .buttonStyle(.plain)
-                        .padding(.top, 8)
-                    }
-
-                    Divider()
-                        .frame(height: 240)
-
+                // Main content - Centered Watch Mode
+                VStack(alignment: .center, spacing: 24) {
                     // Watch Mode Selection
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .center, spacing: 16) {
                         Text("Watch Mode")
                             .font(.headline)
                             .foregroundColor(.primary)
 
-                        HStack(spacing: 16) {
+                        HStack(spacing: 24) {
                             Button(action: {
                                 watchMode = .solo
                             }) {
@@ -122,9 +77,8 @@ struct QualitySelectionView: View {
                             }
                             .buttonStyle(.plain)
                             .frame(width: 180, height: 120)
-                        }
 
-                        Button(action: {
+                            Button(action: {
                                 watchMode = .watchParty
                             }) {
                                 WatchModeButton(
@@ -137,10 +91,10 @@ struct QualitySelectionView: View {
                             .buttonStyle(.plain)
                             .frame(width: 180, height: 120)
                         }
-                        
+
                         // NEW: Room Settings (Only for Watch Party)
                         if watchMode == .watchParty {
-                            VStack(alignment: .leading, spacing: 12) {
+                            VStack(alignment: .center, spacing: 12) {
                                 Text("Room Settings")
                                     .font(.headline)
                                     .foregroundColor(.primary)
@@ -148,15 +102,17 @@ struct QualitySelectionView: View {
                                 
                                 TextField("Room Description (optional)", text: $roomDescription)
                                     .textFieldStyle(PlainTextFieldStyle())
+                                    .multilineTextAlignment(.center)
                                     .padding(8)
                                     .background(Color.secondary.opacity(0.1))
                                     .cornerRadius(8)
-                                    .frame(width: 380)
+                                    .frame(width: 300)
                                 
                                 Toggle("Public Room (Visible in Browse)", isOn: $isPublicRoom)
                                     .toggleStyle(SwitchToggleStyle(tint: .accentColor))
                             }
                             .transition(.opacity)
+                            .padding(.top, 8)
                         }
                     }
                 }
@@ -203,20 +159,7 @@ struct QualitySelectionView: View {
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
             }
-            .sheet(isPresented: $showingStreamSelection) {
-            StreamSelectionView(
-                mediaItem: mediaItem,
-                selectedQuality: selectedQuality,
-                watchMode: watchMode,
-                onStreamSelected: { stream in
-                    // Handle manual stream selection
-                    Task {
-                        await appState.player.playSelectedStream(stream, watchMode: watchMode)
-                    }
-                    showingStreamSelection = false
-                }
-            )
-        }
+
         .sheet(isPresented: $showPremiumSheet) {
             PremiumPaymentView()
         }
@@ -242,6 +185,7 @@ struct QualitySelectionView: View {
             }
         }
     }
+    }
 
     private func startPlayback() {
         if watchMode == .watchParty {
@@ -265,41 +209,7 @@ struct QualitySelectionView: View {
     }
 }
 
-struct QualityOption: View {
-    let quality: VideoQuality
-    let isSelected: Bool
 
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text(quality.rawValue)
-                    .font(.headline)
-                Text(quality.displayName)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-            }
-
-            Spacer()
-
-            if isSelected {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.accentColor)
-                    .font(.title3)
-            } else {
-                Image(systemName: "circle")
-                    .foregroundColor(.secondary)
-                    .font(.title3)
-            }
-        }
-        .padding()
-        .background(isSelected ? Color.accentColor.opacity(0.1) : Color.clear)
-        .cornerRadius(10)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(isSelected ? Color.accentColor : Color.secondary.opacity(0.3), lineWidth: 2)
-        )
-    }
-}
 
 struct WatchModeButton: View {
     let title: String

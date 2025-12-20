@@ -14,7 +14,7 @@ protocol PlaybackService: Actor {
     var isFileLoaded: Bool { get }
     
     // Actions
-    func loadVideo(url: String, autoplay: Bool) async
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int) async
     func play() async
     func pause() async
     func togglePlayPause() async
@@ -79,9 +79,9 @@ actor MPVPlaybackService: PlaybackService {
     
     // MARK: - Protocol Implementation
     
-    func loadVideo(url: String, autoplay: Bool) async {
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int) async {
         self.videoURL = url
-        mpvController?.loadVideo(url: url, autoplay: autoplay)
+        mpvController?.loadVideo(url: url, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount)
     }
     
     func play() async {

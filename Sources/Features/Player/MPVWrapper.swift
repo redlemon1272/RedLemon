@@ -27,6 +27,9 @@ class MPVWrapper: ObservableObject {
     
     // Track if we should resume playback after loading (Smart Paused Load)
     private var shouldResumeAfterLoad: Bool = false
+    
+    // Race Condition Fix: Track expected external subtitles to prevent premature resumption
+    private var expectedExternalSubtitles: Int = 0
 
     internal var mpvHandle: OpaquePointer?
     internal var renderContext: OpaquePointer?  // MPV render context (thread-safe per MPV docs)
@@ -204,29 +207,65 @@ class MPVWrapper: ObservableObject {
         guard let handle = mpvHandle else { return }
         
         print("🔍 SMART-LOAD: Starting track polling loop...")
+        print("🔍 SMART-LOAD: Expecting \(self.expectedExternalSubtitles) external subtitles to prevent race condition")
         
-        // Timeout: 2.0 seconds max wait
-        let timeout = Date().addingTimeInterval(2.0)
+        // Timeout: 8.0 seconds max wait (allow time for slow downloads)
+        let timeout = Date().addingTimeInterval(8.0)
         var tracksFound = false
+        var allExpectedSubsLoaded = false
         
         // 1. Poll loop
         while Date() < timeout {
             var trackCount: Int64 = 0
             mpv_get_property(handle, "track-list/count", MPV_FORMAT_INT64, &trackCount)
             
-            // Check if we have strictly more than 0 tracks (or specific subtitle tracks if feasible, but ANY track count > video+audio usually implies success)
-            if trackCount > 2 { // Usually 1 video + 1 audio + N subs
+            // Count external subtitles
+            var externalSubCount = 0
+            for i in 0..<Int(trackCount) {
+                let typeKey = "track-list/\(i)/type"
+                var typeStr: UnsafeMutablePointer<CChar>?
+                mpv_get_property(handle, typeKey, MPV_FORMAT_STRING, &typeStr)
+                let type = typeStr.map({ String(cString: $0) })
+                mpv_free(typeStr)
+                
+                if type == "sub" {
+                    let externalKey = "track-list/\(i)/external"
+                    var isExternal: Int32 = 0
+                    mpv_get_property(handle, externalKey, MPV_FORMAT_FLAG, &isExternal)
+                    if isExternal != 0 {
+                        externalSubCount += 1
+                    }
+                }
+            }
+            
+            // Check if we have enough tracks
+            // Condition 1: Basic tracks exist (>2 implies Video + Audio + at least 1 sub/other)
+            let basicTracksExist = trackCount > 2
+            
+            // Condition 2: External subtitles match expectation
+            let subsReady = externalSubCount >= self.expectedExternalSubtitles
+            
+            if basicTracksExist && subsReady {
                 tracksFound = true
+                allExpectedSubsLoaded = true
+                print("✅ SMART-LOAD: Found \(trackCount) tracks including \(externalSubCount)/\(self.expectedExternalSubtitles) external subs.")
                 break
+            }
+            
+            if basicTracksExist && !subsReady {
+                 // Log occasionally
+                 if Int(Date().timeIntervalSince1970 * 10) % 10 == 0 {
+                     print("⏳ SMART-LOAD: Waiting for subtitles... (Found \(externalSubCount)/\(self.expectedExternalSubtitles))")
+                 }
             }
             
             try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
         }
         
-        if tracksFound {
-            print("✅ SMART-LOAD: Tracks found! Proceeding to selection.")
+        if allExpectedSubsLoaded {
+            print("✅ SMART-LOAD: All tracks ready! Proceeding to selection.")
         } else {
-            print("⚠️ SMART-LOAD: Timed out waiting for tracks. Proceeding anyway.")
+            print("⚠️ SMART-LOAD: Timed out waiting for tracks. Proceeding best-effort.")
         }
         
         // 2. Select Tracks
@@ -236,6 +275,9 @@ class MPVWrapper: ObservableObject {
              self.autoSelectEnglishAudio()
              self.refreshSubtitleSelection()
         }
+        
+        // Final stabilization delay (short) just to be safe
+         try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
         
         // 3. Execute Pending Seek (moved here to happen AFTER tracks ready)
         if let targetTime = self.pendingSeekTime {
@@ -433,7 +475,7 @@ class MPVWrapper: ObservableObject {
 
     // MARK: - Public Controls
 
-    func loadVideo(url: String, autoplay: Bool = true) {
+    func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0) {
         // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
         if let urlObj = URL(string: url) {
             self.currentVideoFilename = urlObj.lastPathComponent
@@ -442,10 +484,13 @@ class MPVWrapper: ObservableObject {
             self.currentVideoFilename = url
         }
 
-        NSLog("🎬 MPV loadVideo called with URL: %@, autoplay: %@", String(url.prefix(100)), autoplay ? "true" : "false")
+        NSLog("🎬 MPV loadVideo called with URL: %@, autoplay: %@, expectedSubs: %d", String(url.prefix(100)), autoplay ? "true" : "false", expectedSubtitleCount)
+        
+        self.expectedExternalSubtitles = expectedSubtitleCount
+        
         if !isInitialized {
             NSLog("⚠️ MPV not initialized yet, waiting 500ms and retrying...")
-            Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: url, autoplay: autoplay) } }
+            Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: url, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount) } }
             return
         }
 

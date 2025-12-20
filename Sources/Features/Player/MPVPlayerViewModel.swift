@@ -481,7 +481,10 @@ class MPVPlayerViewModel: ObservableObject {
         if isEvent {
             print("🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)")
             Task { @MainActor in
-                await playbackService.loadVideo(url: streamURL, autoplay: true)
+                // Fix: Only expect the number of subtitles we ACTUALLY loaded (limited to 3)
+                // Otherwise we wait for 8s timeout looking for ghosts.
+                let expectedCount = min(subtitles.count, 3)
+                await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
             }
             // Events don't use waitingForGuests
             showWaitingForGuests = false
@@ -494,11 +497,13 @@ class MPVPlayerViewModel: ObservableObject {
                 print("   With resume from \(Int(resumeTime))s")
                 // Load with autoplay=true, onVideoReady will handle the seek
                 Task { @MainActor in
-                    await playbackService.loadVideo(url: streamURL, autoplay: true)
+                    let expectedCount = min(subtitles.count, 3)
+                    await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
                 }
             } else {
                 Task { @MainActor in
-                    await playbackService.loadVideo(url: streamURL, autoplay: true)
+                    let expectedCount = min(subtitles.count, 3)
+                    await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
                 }
             }
             showWaitingForGuests = false
@@ -514,7 +519,8 @@ class MPVPlayerViewModel: ObservableObject {
 
             // Always load paused for watch party
             Task { @MainActor in
-                await playbackService.loadVideo(url: streamURL, autoplay: false)
+                let expectedCount = min(subtitles.count, 3)
+                await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
             }
             showWaitingForGuests = true
             // Auto-open chat for watch parties

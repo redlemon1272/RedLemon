@@ -31,7 +31,15 @@ class KeyCaptureView: NSView {
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
         // Become first responder when added to window
-        window?.makeFirstResponder(self)
+        if let window = window {
+            window.makeFirstResponder(self)
+            
+            // Critical: Ensure window comes to front and becomes key
+            DispatchQueue.main.async {
+                NSApp.activate(ignoringOtherApps: true)
+                window.makeKeyAndOrderFront(nil)
+            }
+        }
     }
 
     override func keyDown(with event: NSEvent) {
@@ -307,6 +315,14 @@ struct MPVPlayerView: View {
                 // }
 
                 return event // Pass through if not handled
+            }
+
+            
+            // FORCE FOCUS: Ensure player window becomes Key immediately
+            // This fixes the issue where user has to click to see UI
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                NSApp.activate(ignoringOtherApps: true)
+                NSApp.windows.first { $0.isVisible }?.makeKeyAndOrderFront(nil)
             }
         }
         .task {

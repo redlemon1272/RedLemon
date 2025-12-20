@@ -4,7 +4,7 @@ import Combine
 /// Protocol abstracting MPVWrapper interactions for testability
 protocol MPVController: AnyObject {
     // Actions
-    func loadVideo(url: String, autoplay: Bool)
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int)
     func play()
     func pause()
     func togglePlayPause()

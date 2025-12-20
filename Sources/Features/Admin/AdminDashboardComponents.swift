@@ -413,6 +413,10 @@ struct AdminEventsView: View {
     @State private var isResettingStream: Bool = false
     @State private var resetMessage: String?
     
+    // Deletion State
+    @State private var isDeletingRoom: Bool = false
+    @State private var deleteMessage: String?
+    
     // Schedule Management
     @State private var isShowingScheduleManagement = false
     @State private var isShowingVerifiedStreams = false
@@ -524,6 +528,12 @@ struct AdminEventsView: View {
                     Text("Active Event Rooms")
                         .font(.headline)
                     
+                    if let msg = deleteMessage {
+                        Text(msg)
+                            .font(.caption)
+                            .foregroundColor(msg.contains("Error") ? .red : .green)
+                    }
+                    
                     if activeEventRooms.isEmpty {
                         Text("No active event rooms.")
                             .foregroundColor(.secondary)
@@ -554,6 +564,13 @@ struct AdminEventsView: View {
                                     resetEventStream()
                                 }
                                 .font(.caption)
+                                
+                                Button("Delete") {
+                                    deleteEventRoom(roomId: room.id)
+                                }
+                                .font(.caption)
+                                .foregroundColor(.red)
+                                .disabled(isDeletingRoom)
                             }
                             .padding()
                             .background(Color(NSColor.controlBackgroundColor))
@@ -621,6 +638,23 @@ struct AdminEventsView: View {
                 resetMessage = "Error: \(error.localizedDescription)"
             }
             isResettingStream = false
+        }
+    }
+    
+    private func deleteEventRoom(roomId: String) {
+        isDeletingRoom = true
+        deleteMessage = nil
+        
+        Task { @MainActor in
+            do {
+                try await SupabaseClient.shared.deleteRoom(roomId: roomId)
+                deleteMessage = "Success: Deleted room \(roomId)"
+                // Remove locally to update UI immediately
+                activeEventRooms.removeAll(where: { $0.id == roomId })
+            } catch {
+                deleteMessage = "Error deleting: \(error.localizedDescription)"
+            }
+            isDeletingRoom = false
         }
     }
 }

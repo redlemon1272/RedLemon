@@ -587,7 +587,7 @@ actor StreamService: StreamResolving {
             // Optimize: Cap at 5 subtitles to prevent blocking playback start
             let limitedSubtitles = Array(subtitles.prefix(5))
             NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles...", limitedSubtitles.count, subtitles.count)
-            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles)
+            let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode)
             unlockedStream.subtitles = downloadedSubs
         }
 
@@ -596,7 +596,7 @@ actor StreamService: StreamResolving {
 
     // MARK: - Subtitle Downloading
 
-    func downloadSubtitlesInParallel(subtitles: [Subtitle]) async -> [Subtitle] {
+    func downloadSubtitlesInParallel(subtitles: [Subtitle], season: Int? = nil, episode: Int? = nil) async -> [Subtitle] {
         // Use a custom session with short timeout to avoid blocking playback
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 3.0 // 3 seconds max per subtitle
@@ -642,9 +642,14 @@ actor StreamService: StreamResolving {
                         let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)?token=\(Config.localAuthToken)"
 
                         // Create new subtitle with proxy URL
+                        // Append season/episode context for better matching
+                        var finalProxyURL = proxyURL
+                        if let s = season { finalProxyURL += "&season=\(s)" }
+                        if let e = episode { finalProxyURL += "&episode=\(e)" }
+
                         return Subtitle(
                             id: subtitle.id,
-                            url: proxyURL,
+                            url: finalProxyURL,
                             lang: subtitle.lang,
                             label: subtitle.label,
                             srclang: subtitle.srclang,

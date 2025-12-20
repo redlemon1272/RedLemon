@@ -250,7 +250,7 @@ final class SubDLClient {
             try data.write(to: zipURL)
 
             do {
-                srtText = try extractSRTFromZip(zipURL: zipURL, season: season, episode: episode)
+                srtText = try extractSubtitleFromZip(zipURL: zipURL, season: season, episode: episode)
                 print("✅ Extraction successful")
                 try FileManager.default.removeItem(at: zipURL)
             } catch {
@@ -269,6 +269,12 @@ final class SubDLClient {
         srtText = srtText.replacingOccurrences(of: "\u{FEFF}", with: "")
         srtText = srtText.replacingOccurrences(of: "\r\n", with: "\n")
 
+        // Check if ASS format
+        if srtText.contains("[Script Info]") || downloadPath.lowercased().hasSuffix(".ass") {
+            print("✅ Detected ASS subtitle format - returning raw content")
+            return srtText
+        }
+
         // Apply time offset if provided
         if offset != 0 {
             print("⏱️ Applying subtitle offset: \(offset)ms")
@@ -285,7 +291,7 @@ final class SubDLClient {
 
     // MARK: - Helper Methods
 
-    private func extractSRTFromZip(zipURL: URL, season: Int?, episode: Int?) throws -> String {
+    private func extractSubtitleFromZip(zipURL: URL, season: Int?, episode: Int?) throws -> String {
         // 1. List files in zip
         let listProcess = Process()
         let listPipe = Pipe()
@@ -325,7 +331,7 @@ final class SubDLClient {
             let filename = String(parts[3]).trimmingCharacters(in: .whitespacesAndNewlines)
 
             let lower = filename.lowercased()
-            if lower.hasSuffix(".srt") || lower.hasSuffix(".vtt") {
+            if lower.hasSuffix(".srt") || lower.hasSuffix(".vtt") || lower.hasSuffix(".ass") {
                 return filename
             }
             return nil
@@ -339,12 +345,52 @@ final class SubDLClient {
         if let s = season, let e = episode {
             print("🔍 Looking for S%02dE%02d in zip (%d files)...", s, e, subtitleFiles.count)
 
-            // Try to find exact match
+            // Strategy 1: Strict SxxExx matching (High confidence)
             for pattern in searchPatterns {
                 if let match = subtitleFiles.first(where: { $0.lowercased().contains(pattern) }) {
-                    print("✅ Found matching file in zip: \(match)")
+                    print("✅ Found matching file in zip (Strategy 1 - Strict): \(match)")
                     bestMatch = match
                     break
+                }
+            }
+
+            // Strategy 2: Relaxed matching (Medium confidence)
+            // Look for "14" surrounded by non-digits if episode is 14
+            if bestMatch == nil {
+                let episodePatterns = [
+                    "e\(e)", "e\(String(format: "%02d", e))", // e14, e05
+                    "episode \(e)", "episode \(String(format: "%02d", e))", // episode 14
+                    " \(e) ", " \(String(format: "%02d", e)) " // " 14 "
+                ]
+                
+                // Helper to check if a string contains the episode number as a distinct token
+                func containsEpisodeToken(_ filename: String, episode: Int) -> Bool {
+                    let cleaned = filename.replacingOccurrences(of: ".", with: " ")
+                        .replacingOccurrences(of: "_", with: " ")
+                        .replacingOccurrences(of: "-", with: " ")
+                        .replacingOccurrences(of: "[", with: " ")
+                        .replacingOccurrences(of: "]", with: " ")
+                    
+                    let tokens = cleaned.split(separator: " ")
+                    return tokens.contains { String($0) == String(episode) || String($0) == String(format: "%02d", episode) }
+                }
+
+                for file in subtitleFiles {
+                    let lower = file.lowercased()
+                    
+                    // check specific patterns first
+                    if episodePatterns.contains(where: { lower.contains($0) }) {
+                         print("✅ Found matching file in zip (Strategy 2 - Relaxed): \(file)")
+                         bestMatch = file
+                         break
+                    }
+                    
+                    // check token match as fallback
+                    if containsEpisodeToken(lower, episode: e) {
+                        print("✅ Found matching file in zip (Strategy 3 - Token): \(file)")
+                        bestMatch = file
+                        break
+                    }
                 }
             }
         }
@@ -366,7 +412,15 @@ final class SubDLClient {
         let extractPipe = Pipe()
 
         extractProcess.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        extractProcess.arguments = ["-p", zipURL.path, targetFile]
+        
+        // Escape special characters for unzip command
+        // unzip treats [] as wildcards, so we must escape them to match literal filenames
+        let escapedTargetFile = targetFile
+            .replacingOccurrences(of: "[", with: "\\[")
+            .replacingOccurrences(of: "]", with: "\\]")
+            
+        print("📦 Extracting specific file: \(escapedTargetFile)")
+        extractProcess.arguments = ["-p", zipURL.path, escapedTargetFile]
         extractProcess.standardOutput = extractPipe
 
         try extractProcess.run()

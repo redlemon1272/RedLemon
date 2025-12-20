@@ -202,6 +202,11 @@ actor MPVSubtitleService: SubtitleService {
                 subtitleText = text
             }
 
+            // Check for ASS format
+            if subtitleText.contains("[Script Info]") {
+                return try saveSubtitleLocally(content: subtitleText, extension: "ass")
+            }
+
             // Convert to VTT if needed (MPV likes VTT)
             if !subtitleText.hasPrefix("WEBVTT") {
                  subtitleText = convertSRTToVTT(srt: subtitleText)

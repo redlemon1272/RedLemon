@@ -364,6 +364,15 @@ struct MPVPlayerView: View {
 
             NSLog("🎬🎬🎬 MPVPlayerView .task completed")
         }
+        .onChange(of: viewModel.isLoading) { isLoading in
+            if !isLoading {
+                // Focus when loading finishes (playback starts)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    NSApp.activate(ignoringOtherApps: true)
+                    NSApp.windows.first { $0.isVisible }?.makeKeyAndOrderFront(nil)
+                }
+            }
+        }
         .onChange(of: viewModel.playbackFinished) { finished in
             print("🎬 MPVPlayerView: onChange triggered - playbackFinished = \(finished)")
             if finished {

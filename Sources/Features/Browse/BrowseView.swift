@@ -1262,7 +1262,7 @@ struct StreamingServiceRow: View {
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 16) {
-                        ForEach(Array(items.prefix(7))) { item in
+                        ForEach(items) { item in
                             MediaCard(item: item)
                                 .onTapGesture {
                                     Task {
@@ -1313,54 +1313,19 @@ struct LazyStreamingServiceRow: View {
                 .padding(.horizontal)
                 .frame(height: 240)
             } else if !items.isEmpty {
-                if isPerformanceMode {
-                    // Best Performance: 1 row of 7 items
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            ForEach(Array(items.prefix(7))) { item in
-                                OptimizedMediaCard(item: item)
-                                    .onTapGesture {
-                                        Task {
-                                            await onTap(item)
-                                        }
+                // Single row horizontal scroll for all available items
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 16) {
+                        ForEach(items) { item in
+                            OptimizedMediaCard(item: item)
+                                .onTapGesture {
+                                    Task {
+                                        await onTap(item)
                                     }
-                            }
-                        }
-                        .padding(.horizontal, 8)
-                    }
-                } else {
-                    // Best Quality: 2 rows of 14 items
-                    // First row - 7 items
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 16) {
-                            ForEach(Array(items.prefix(7))) { item in
-                                OptimizedMediaCard(item: item)
-                                    .onTapGesture {
-                                        Task {
-                                            await onTap(item)
-                                        }
-                                    }
-                            }
-                        }
-                        .padding(.horizontal, 8)
-                    }
-
-                    // Second row - 7 items
-                    if items.count > 7 {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 16) {
-                                ForEach(Array(items.dropFirst(7).prefix(7))) { item in
-                                    OptimizedMediaCard(item: item)
-                                        .onTapGesture {
-                                            Task {
-                                                await onTap(item)
-                                            }
-                                        }
                                 }
-                            }
-                            .padding(.horizontal, 8)
                         }
                     }
+                    .padding(.horizontal, 8)
                 }
             }
         }

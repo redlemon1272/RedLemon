@@ -45,6 +45,8 @@ struct EventsView: View {
                                 }
                             }
                             .padding(.horizontal)
+                            .frame(maxWidth: 1200) // Constrain heavy horizontal stretch on large displays
+                            .frame(maxWidth: .infinity) // Center the constrained content
                             .padding(.bottom, 40)
                         }
                     }

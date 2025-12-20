@@ -712,7 +712,13 @@ actor StreamResolver {
                        lower.contains("chinese") ||
                        lower.contains("国粤") || // Mandarin/Cantonese
                        lower.contains("中文字幕") || // Chinese Subs
-                       lower.contains("韓文") // Korean
+                       lower.contains("韓文") || // Korean
+                       lower.contains("polish") ||
+                       lower.contains("lektor") || // Polish voiceover
+                       lower.contains("polski") ||
+                       lower.contains(" pl ") || // Polish flag (spaces)
+                       lower.contains("-pl-") ||
+                       lower.contains(".pl.")
 
         // 3. French-specific audio indicators (VF = Version Française)
         let frenchAudioIndicators = [
@@ -742,6 +748,15 @@ actor StreamResolver {
         // or just "Dubbed" without specifying English (risky)
         let isDubbed = lower.contains(".dub.") || lower.contains(" dub ") || lower.contains("-dub-") || lower.hasSuffix("-dub") || lower.hasSuffix(".dub")
         if isDubbed { return false }
+
+        // 5. Block Hardcoded Foreign Subtitles
+        // These are streams with burned-in subtitles for other languages
+        let isHardcodedForeign = lower.contains("plsubbed") || // Polish Subbed
+                                lower.contains("korsub") ||   // Korean Subbed
+                                lower.contains("hcsub") ||    // Hardcoded Sub (Generic)
+                                lower.contains("hc") && (lower.contains("kor") || lower.contains("chi") || lower.contains("vie")) // Hardcoded specific
+
+        if isHardcodedForeign { return false }
 
         return true // Default to true if unknown
     }

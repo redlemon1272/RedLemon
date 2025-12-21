@@ -29,61 +29,84 @@ struct EventsView: View {
                 ProgressView()
                     .scaleEffect(1.5)
             } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 24) {
+                GeometryReader { geometry in
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 24) {
 
+                            // Dynamic Layout Calculations
+                            let totalWidth = geometry.size.width
+                            let horizontalPadding: CGFloat = 32 // Approximate system padding (16*2)
+                           
+                            // Hero Card Height: Cinematic ratio (approx 2.4:1) or min 550
+                            // On 2560px screen: ~1066px height (fills space nicely)
+                            // On 1440px screen: 600px height
+                            let heroHeight = max(550, totalWidth / 2.4)
+                            
+                            // Grid Item Height Calculation
+                            // mimic LazyVGrid's adaptive logic to find item width
+                            let minItemWidth: CGFloat = 500
+                            let spacing: CGFloat = 20
+                            let availableGridWidth = totalWidth - horizontalPadding
+                            
+                            // Calculate column count (at least 1)
+                            let columnCount = max(1, floor((availableGridWidth + spacing) / (minItemWidth + spacing)))
+                            
+                            // Calculate actual item width
+                            let itemWidth = (availableGridWidth - (spacing * (columnCount - 1))) / columnCount
+                            
+                            // Target 2:1 aspect ratio for grid items
+                            let gridItemHeight = itemWidth / 2.0
 
-                        // Header removed as requested
-
-                        if appState.eventsSchedule.isEmpty {
-                            emptyStateView(icon: "film", message: "No movie events scheduled right now.")
-                        } else {
-                            // Movie Events List
-                            VStack(spacing: 32) {
-                                // 1. Hero Event (First item)
-                                if let heroEvent = appState.eventsSchedule.first {
-                                    VStack(alignment: .leading, spacing: 16) {
-                                        // Hero Card Phase
-                                        let _ = lastUpdate
-                                        let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-                                        
-                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 550) {
-                                            await joinEvent(heroEvent)
+                            if appState.eventsSchedule.isEmpty {
+                                emptyStateView(icon: "film", message: "No movie events scheduled right now.")
+                            } else {
+                                // Movie Events List
+                                VStack(spacing: 32) {
+                                    // 1. Hero Event (First item)
+                                    if let heroEvent = appState.eventsSchedule.first {
+                                        VStack(alignment: .leading, spacing: 16) {
+                                            // Hero Card Phase
+                                            let _ = lastUpdate
+                                            let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
+                                            
+                                            HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: heroHeight) {
+                                                await joinEvent(heroEvent)
+                                            }
+                                            .drawingGroup() // GPU Acceleration
+                                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                                            .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                         }
-                                        .drawingGroup() // GPU Acceleration
-                                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
-                                        .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                     }
-                                }
-                                
-                                // 2. Upcoming Events Grid
-                                if appState.eventsSchedule.count > 1 {
-                                    VStack(alignment: .leading, spacing: 16) {
-                                        Text("Upcoming Events")
-                                            .font(.title2)
-                                            .fontWeight(.bold)
-                                            .foregroundColor(.primary)
-                                            .padding(.horizontal, 4)
-                                        
-                                        // Increased minimum to 500 to ensure items fill the row on large screens (prevents empty 5th column gap)
-                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 500), spacing: 20)], spacing: 20) {
-                                            ForEach(appState.eventsSchedule.dropFirst()) { event in
-                                                let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-                                                
-                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 280) {
-                                                    await joinEvent(event)
+                                    
+                                    // 2. Upcoming Events Grid
+                                    if appState.eventsSchedule.count > 1 {
+                                        VStack(alignment: .leading, spacing: 16) {
+                                            Text("Upcoming Events")
+                                                .font(.title2)
+                                                .fontWeight(.bold)
+                                                .foregroundColor(.primary)
+                                                .padding(.horizontal, 4)
+                                            
+                                            // Increased minimum to 500 to ensure items fill the row on large screens (prevents empty 5th column gap)
+                                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 500), spacing: 20)], spacing: 20) {
+                                                ForEach(appState.eventsSchedule.dropFirst()) { event in
+                                                    let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
+                                                    
+                                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: gridItemHeight) {
+                                                        await joinEvent(event)
+                                                    }
+                                                    .drawingGroup() // GPU Acceleration
+                                                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
                                                 }
-                                                .drawingGroup() // GPU Acceleration
-                                                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
                                             }
                                         }
                                     }
                                 }
+                                // Removed max width constraint to allow stretching to edges
+                                .frame(maxWidth: .infinity)
+                                .padding(.horizontal)
+                                .padding(.bottom, 40)
                             }
-                            // Removed max width constraint to allow stretching to edges
-                            .frame(maxWidth: .infinity)
-                            .padding(.horizontal)
-                            .padding(.bottom, 40)
                         }
                     }
                 }

@@ -322,7 +322,7 @@ class AppState: ObservableObject {
         
         // 4. Build the schedule starting from the current movie
         var scheduledEvents: [EventItem] = []
-        let count = min(13, allMovies.count)
+        let count = min(5, allMovies.count)
         
         for i in 0..<count {
             let index = (currentMovieIndex + i) % allMovies.count

@@ -3,6 +3,11 @@ import AppKit
 
 struct EventsView: View {
     @EnvironmentObject var appState: AppState
+
+    // Simple in-memory cache for decoded images to prevent flicker in LazyVGrid
+    class EventImageCache {
+        static let shared = NSCache<NSString, NSImage>()
+    }
     @ObservedObject private var timeService = TimeService.shared
     @StateObject internal var apiClient = LocalAPIClient()
 
@@ -16,6 +21,7 @@ struct EventsView: View {
     @State private var isLoading = true
     // Timer removed - AppState handles schedule updates
     @State private var lastUpdate = Date() // Force view refresh when needed
+    @State private var currentTime = TimeService.shared.now // Shared timer for all cards
 
     var body: some View {
         ZStack {
@@ -41,9 +47,10 @@ struct EventsView: View {
                                         let _ = lastUpdate
                                         let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                         
-                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, height: 400) {
+                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 400) {
                                             await joinEvent(heroEvent)
                                         }
+                                        .drawingGroup() // GPU Acceleration
                                         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
                                     }
                                 }
@@ -57,21 +64,22 @@ struct EventsView: View {
                                             .foregroundColor(.primary)
                                             .padding(.horizontal, 4)
                                         
-                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 380, maximum: 600), spacing: 20)], spacing: 20) {
+                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 400), spacing: 20)], spacing: 20) {
                                             ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                 let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                                 
-                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, height: 220) {
+                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 220) {
                                                     await joinEvent(event)
                                                 }
+                                                .drawingGroup() // GPU Acceleration
                                                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
                                             }
                                         }
                                     }
                                 }
                             }
-                            .frame(maxWidth: 1600) // Constrain max width for very large screens
-                            .frame(maxWidth: .infinity) // Ensure it centers in the scroll view which usually has max width .infinity
+                            // Removed max width constraint to allow stretching to edges
+                            .frame(maxWidth: .infinity)
                             .padding(.horizontal)
                             .padding(.bottom, 40)
                         }
@@ -101,10 +109,19 @@ struct EventsView: View {
              // Fix for Event Transition Regression:
              // Force view refresh every 10 seconds to check if events have finished/started
              // Capable of updating 'Lobby Open' status without full reload
+             
+             // Combined Timer: Updates 'currentTime' every second for countdowns
+             // AND 'lastUpdate' every 10s for logic checks
              while !Task.isCancelled {
-                 try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
+                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
                  await MainActor.run {
-                     lastUpdate = Date()
+                     currentTime = TimeService.shared.now
+                     
+                     // Run the logic check every ~10s (using modulus on time interval or just a counter could work, 
+                     // but a simple modulo check on current time is robust enough)
+                     if Int(Date().timeIntervalSince1970) % 10 == 0 {
+                          lastUpdate = Date()
+                     }
                  }
              }
         }
@@ -540,12 +557,11 @@ struct EventsView: View {
 struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
+    var currentTime: Date // Passed from parent
     var height: CGFloat = 360 // Default height
     let onJoin: () async -> Void
     @EnvironmentObject var appState: AppState
 
-    @State private var currentTime = TimeService.shared.now
-    @State private var timer: Timer?
     @State private var isJoining = false
 
     var body: some View {
@@ -585,18 +601,9 @@ struct HeroEventCard: View {
         }
         .buttonStyle(PlainButtonStyle())
         .opacity(event.isFinished ? 0.6 : 1.0)
-        .onAppear {
-            if event.isLive || event.isInLobby || isLobbyOverride || event.index == 1 {
-                currentTime = TimeService.shared.now
-                timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                    currentTime = TimeService.shared.now
-                }
-            }
-        }
-        .onDisappear {
-            timer?.invalidate()
-            timer = nil
-        }
+        // Timer removed - relying on parent passing currentTime
+        // Timer removed - relying on parent passing currentTime
+        // Sync cache check moved to HeroEventCardContent to fix build error
         .task {
             // Lazy Hydration: Check if we have background art
             if event.mediaItem.background == nil && !event.mediaItem.id.isEmpty {
@@ -662,9 +669,12 @@ struct HeroEventCardContent: View {
          return formatter.string(from: interval) ?? "0:00"
      }
 
-    @State private var imageData: Data?
+    @State private var cachedImage: NSImage?
 
     private func loadImage() async {
+        // Optimization: If already loaded synchronously by onAppear, skip async work
+        if cachedImage != nil { return }
+
         let url = event.mediaItem.backgroundURL ?? event.mediaItem.posterURL
         guard let imageURL = url else { return }
 
@@ -672,8 +682,14 @@ struct HeroEventCardContent: View {
 
         // Check cache first
         if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
-            await MainActor.run {
-                self.imageData = cachedData
+            // Decode OFF the main thread
+            if let img = NSImage(data: cachedData) {
+                // Populate fast cache
+                EventsView.EventImageCache.shared.setObject(img, forKey: cacheKey as NSString)
+                
+                await MainActor.run {
+                    self.cachedImage = img
+                }
             }
             return
         }
@@ -683,9 +699,15 @@ struct HeroEventCardContent: View {
             let (data, _) = try await URLSession.shared.data(from: imageURL)
             // Cache
             await CacheManager.shared.setImageData(key: cacheKey, value: data)
-            // Update UI
-            await MainActor.run {
-                self.imageData = data
+            
+            // Decode newly fetched data
+            if let img = NSImage(data: data) {
+                // Populate fast cache
+                EventsView.EventImageCache.shared.setObject(img, forKey: cacheKey as NSString)
+
+                await MainActor.run {
+                    self.cachedImage = img
+                }
             }
         } catch {
             print("❌ Failed to load hero image: \(error)")
@@ -715,7 +737,7 @@ struct HeroEventCardContent: View {
                 .frame(maxWidth: .infinity)
                 
                 // Overlay: Image (Appears on top when loaded)
-                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                if let nsImage = cachedImage {
                     Image(nsImage: nsImage)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -727,6 +749,18 @@ struct HeroEventCardContent: View {
             .allowsHitTesting(false)
             .task {
                 await loadImage()
+            }
+            .onAppear {
+                // SYNC CHECK: Check memory cache immediately to prevent flickers in LazyVGrid
+                if cachedImage == nil {
+                    let url = event.mediaItem.backgroundURL ?? event.mediaItem.posterURL
+                    if let url = url {
+                        let key = url.absoluteString as NSString
+                        if let cached = EventsView.EventImageCache.shared.object(forKey: key) {
+                            self.cachedImage = cached
+                        }
+                    }
+                }
             }
 
             // LAYER 2: Gradients
@@ -897,9 +931,21 @@ struct HeroEventCardContent: View {
                      // Progress Bar (if live)
                      if event.isLive {
                          VStack(alignment: .leading, spacing: 6) {
-                             ProgressView(value: progress, total: 1.0)
-                                 .progressViewStyle(LinearProgressViewStyle(tint: .red))
-                                 .scaleEffect(x: 1, y: 1.5, anchor: .center)
+                             // Custom Progress Bar (GPU Compatible)
+                             GeometryReader { geo in
+                                 ZStack(alignment: .leading) {
+                                     Rectangle()
+                                         .fill(Color.gray.opacity(0.3))
+                                         .frame(height: 4)
+                                         .cornerRadius(2)
+                                     
+                                     Rectangle()
+                                         .fill(Color.red)
+                                         .frame(width: geo.size.width * CGFloat(progress), height: 4)
+                                         .cornerRadius(2)
+                                 }
+                             }
+                             .frame(height: 4)
 
                              HStack {
                                  Text(formatEventTime(elapsedTime))

@@ -32,18 +32,45 @@ struct EventsView: View {
                             emptyStateView(icon: "film", message: "No movie events scheduled right now.")
                         } else {
                             // Movie Events List
-                            VStack(spacing: 20) {
-                                ForEach(appState.eventsSchedule) { event in
-                                    // Check if previous event is finished (either by time OR by user completion)
-                                    // We use lastUpdate here to ensure this recalculates when state changes
-                                    let _ = lastUpdate
-                                    let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
-
-                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride) {
-                                        await joinEvent(event)
+                            VStack(spacing: 32) {
+                                // 1. Hero Event (First item)
+                                if let heroEvent = appState.eventsSchedule.first {
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        // Hero Card Phase
+                                        let _ = lastUpdate
+                                        let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
+                                        
+                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, height: 400) {
+                                            await joinEvent(heroEvent)
+                                        }
+                                        .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                                    }
+                                }
+                                
+                                // 2. Upcoming Events Grid
+                                if appState.eventsSchedule.count > 1 {
+                                    VStack(alignment: .leading, spacing: 16) {
+                                        Text("Upcoming Events")
+                                            .font(.title2)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.primary)
+                                            .padding(.horizontal, 4)
+                                        
+                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 380, maximum: 600), spacing: 20)], spacing: 20) {
+                                            ForEach(appState.eventsSchedule.dropFirst()) { event in
+                                                let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
+                                                
+                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, height: 220) {
+                                                    await joinEvent(event)
+                                                }
+                                                .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+                                            }
+                                        }
                                     }
                                 }
                             }
+                            .frame(maxWidth: 1600) // Constrain max width for very large screens
+                            .frame(maxWidth: .infinity) // Ensure it centers in the scroll view which usually has max width .infinity
                             .padding(.horizontal)
                             .padding(.bottom, 40)
                         }
@@ -512,6 +539,7 @@ struct EventsView: View {
 struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
+    var height: CGFloat = 360 // Default height
     let onJoin: () async -> Void
     @EnvironmentObject var appState: AppState
 
@@ -550,7 +578,8 @@ struct HeroEventCard: View {
                 event: event,
                 isLobbyOverride: isLobbyOverride,
                 isJoining: isJoining,
-                currentTime: currentTime
+                currentTime: currentTime,
+                height: height
             )
         }
         .buttonStyle(PlainButtonStyle())
@@ -595,6 +624,7 @@ struct HeroEventCardContent: View {
     let isLobbyOverride: Bool
     let isJoining: Bool
     let currentTime: Date
+    let height: CGFloat
     // Helper to calculate progress for live events
     var progress: Double {
         let elapsed = currentTime.timeIntervalSince(event.startTime)
@@ -636,7 +666,7 @@ struct HeroEventCardContent: View {
             // LAYER 0: Sizing Anchor (Stable Layout)
             Rectangle()
                 .fill(Color.gray.opacity(0.1))
-                .frame(height: 320)
+                .frame(height: height)
                 .frame(maxWidth: .infinity)
 
             // LAYER 1: Background Image
@@ -644,7 +674,7 @@ struct HeroEventCardContent: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 320)
+                    .frame(height: height)
                     .frame(maxWidth: .infinity)
                     .clipped()
             } placeholder: {

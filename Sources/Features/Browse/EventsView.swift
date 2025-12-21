@@ -47,11 +47,12 @@ struct EventsView: View {
                                         let _ = lastUpdate
                                         let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                         
-                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 400) {
+                                        HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 550) {
                                             await joinEvent(heroEvent)
                                         }
                                         .drawingGroup() // GPU Acceleration
                                         .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                                        .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                     }
                                 }
                                 
@@ -64,11 +65,12 @@ struct EventsView: View {
                                             .foregroundColor(.primary)
                                             .padding(.horizontal, 4)
                                         
-                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 400), spacing: 20)], spacing: 20) {
+                                        // Increased minimum to 500 to ensure items fill the row on large screens (prevents empty 5th column gap)
+                                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 500), spacing: 20)], spacing: 20) {
                                             ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                 let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                                 
-                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 220) {
+                                                HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: 280) {
                                                     await joinEvent(event)
                                                 }
                                                 .drawingGroup() // GPU Acceleration

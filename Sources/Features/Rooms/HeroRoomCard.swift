@@ -25,9 +25,13 @@ struct HeroRoomCard: View {
 }
 
 // Helper view for the room card content
+// Helper view for the room card content
 struct HeroRoomCardContent: View {
     let room: WatchPartyRoom
     let isJoining: Bool
+    
+    @State private var imageData: Data?
+    @State private var loadTask: Task<Void, Never>?
 
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -37,22 +41,26 @@ struct HeroRoomCardContent: View {
                 .frame(height: 280)
                 .frame(maxWidth: .infinity)
 
-            // LAYER 1: Background Image
-            AsyncImage(url: URL(string: room.mediaItem?.background ?? room.mediaItem?.poster ?? room.posterURL ?? "")) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+            // LAYER 1: Background Image (Cached)
+            Group {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: 280)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                } else {
+                    Rectangle().fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
                     .frame(height: 280)
                     .frame(maxWidth: .infinity)
-                    .clipped()
-            } placeholder: {
-                Rectangle().fill(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
+                }
             }
             .allowsHitTesting(false)
 
@@ -223,5 +231,48 @@ struct HeroRoomCardContent: View {
         .frame(maxWidth: .infinity)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
+        .task(id: room.mediaItem?.background ?? room.mediaItem?.poster ?? room.posterURL) {
+            await loadBackground()
+        }
+        .onDisappear {
+            loadTask?.cancel()
+        }
+    }
+    
+    private func loadBackground() async {
+        // Prioritize: background -> poster -> room.posterURL
+        let possibleUrls = [
+            room.mediaItem?.background,
+            room.mediaItem?.poster,
+            room.posterURL
+        ].compactMap { $0 }.filter { !$0.isEmpty }
+        
+        guard let urlString = possibleUrls.first, let url = URL(string: urlString) else { return }
+        let cacheKey = url.absoluteString
+        
+        // 1. Check Cache
+        if let cached = await CacheManager.shared.getImageData(key: cacheKey) {
+            await MainActor.run {
+                self.imageData = cached
+            }
+            return
+        }
+        
+        // 2. Fetch
+        loadTask = Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                await CacheManager.shared.setImageData(key: cacheKey, value: data)
+                
+                if !Task.isCancelled {
+                    await MainActor.run {
+                        self.imageData = data
+                    }
+                }
+            } catch {
+                print("❌ Failed to load room card image: \(error)")
+            }
+        }
+        await loadTask?.value
     }
 }

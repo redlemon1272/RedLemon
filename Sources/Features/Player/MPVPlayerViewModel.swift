@@ -524,7 +524,8 @@ class MPVPlayerViewModel: ObservableObject {
                 let expectedCount = min(subtitles.count, 3)
                 await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
             }
-            showWaitingForGuests = true
+            // Fix: Don't show "Waiting for guests" if we are force-launching solo
+            showWaitingForGuests = !forceSoloStart
             // Auto-open chat for watch parties
             Task { @MainActor in self.showChat = true }
         }

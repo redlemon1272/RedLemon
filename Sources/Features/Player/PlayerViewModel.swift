@@ -157,21 +157,47 @@ class PlayerViewModel: ObservableObject {
                 
                 // Standard Behavior: Search for subtitles locally (SubDL)
                 // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
-                NSLog("🎬 GUEST: Searching for subtitles locally...")
-                if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(imdbId: item.id, type: item.type) {
+                // Fetch subtitles from SubDL via local server
+                if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
+                    imdbId: item.id,
+                    type: item.type,
+                    season: watchPartyRoom.season,
+                    episode: watchPartyRoom.episode,
+                    name: item.name,
+                    year: item.year.flatMap { Int($0) }
+                ) {
                      NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
-                     let internalSubtitles = subDLSubtitles.map { sub in
-                         Subtitle(
-                             id: UUID().uuidString,
-                             url: LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url),
-                             lang: sub.language ?? "en",
-                             label: sub.releaseName ?? (sub.language ?? "Unknown"),
-                             srclang: sub.language ?? "en",
-                             kind: "subtitles",
-                             provider: "SubDL"
+                     
+                     // Convert to Subtitle objects
+                     // Convert to Subtitle objects
+                     let externalSubs = subDLSubtitles.enumerated().map { (index, sub) -> Subtitle in
+                         let encodedPath = Data(sub.url.utf8).base64EncodedString()
+                         
+                         // Route through local server proxy to handle zip extraction and VTT conversion
+                         // This is CRITICAL for MPV to be able to read the files, as it cannot handle
+                         // raw relative paths or zip files directly without this proxy.
+                         var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
+                         var queryItems: [String] = []
+                         
+                         if let s = watchPartyRoom.season { queryItems.append("season=\(s)") }
+                         if let e = watchPartyRoom.episode { queryItems.append("episode=\(e)") }
+                         
+                         if !queryItems.isEmpty {
+                             proxyURL += "?" + queryItems.joined(separator: "&")
+                         }
+                         
+                         return Subtitle(
+                            id: encodedPath,
+                            url: proxyURL,
+                            lang: sub.language ?? "en",
+                            label: sub.releaseName ?? "English",
+                            srclang: sub.language ?? "en",
+                            kind: "subtitles",
+                            provider: "SubDL"
                          )
                      }
-                     hostStream.subtitles = internalSubtitles
+                     
+                     hostStream.subtitles = (hostStream.subtitles ?? []) + externalSubs
                 }
                 
                 resolvedStream = hostStream

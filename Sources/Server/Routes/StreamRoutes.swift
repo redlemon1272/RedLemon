@@ -214,12 +214,14 @@ func registerStreamRoutes(_ app: Application) {
         let season = req.query[Int.self, at: "season"]
         let episode = req.query[Int.self, at: "episode"]
         let year = req.query[String.self, at: "year"]
+        let name = req.query[String.self, at: "name"]
 
         let bucketsResponse = try await StreamResolver.shared.resolveStreamsByQuality(
             imdbId: imdbId,
             type: type,
             season: season,
             episode: episode,
+            name: name,
             year: year
         )
         
@@ -248,6 +250,7 @@ func registerStreamRoutes(_ app: Application) {
         let season = req.query[Int.self, at: "season"]
         let episode = req.query[Int.self, at: "episode"]
         let year = req.query[String.self, at: "year"] // e.g., "2025"
+        let name = req.query[String.self, at: "name"]
 
         print("🔍 Resolving ALL streams for: \(imdbId) (\(quality)) (S\(season ?? 0)E\(episode ?? 0))")
         if let year = year {
@@ -272,7 +275,7 @@ func registerStreamRoutes(_ app: Application) {
         }
 
         // Attach subtitles to all streams
-        var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode)
+        var streamsWithSubtitles = await attachSubtitles(to: streams, imdbId: imdbId, type: type, season: season, episode: episode, name: name, year: year != nil ? Int(year!) : nil)
 
         // CRITICAL DEBUG: Log after subtitle attachment
         print("🔍 DEBUG: Streams after subtitle attachment: \(streamsWithSubtitles.count)")
@@ -586,7 +589,7 @@ func registerStreamRoutes(_ app: Application) {
 
 // MARK: - Subtitle Attachment
 
-private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil) async -> [Stream] {
+private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil) async -> [Stream] {
 
     // CRITICAL DEBUG: Log input to attachSubtitles
     NSLog("🔍 DEBUG: attachSubtitles INPUT - streams.count: \(streams.count)")
@@ -614,6 +617,8 @@ private func attachSubtitles(to streams: [Stream], imdbId: String, type: String,
             season: season,
             episode: episode,
             languages: "en",
+            name: name,
+            year: year,
             apiKey: subdlKey
         )
 

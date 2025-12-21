@@ -61,7 +61,7 @@ final class SubDLClient {
     ///   - episode: Episode number (for TV shows)
     ///   - languages: Comma-separated language codes (default: "en")
     ///   - apiKey: SubDL API key
-    func search(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, languages: String = "en", apiKey: String) async throws -> [SubDLSubtitle] {
+    func search(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, languages: String = "en", name: String? = nil, year: Int? = nil, apiKey: String) async throws -> [SubDLSubtitle] {
         // Ensure imdbId has "tt" prefix
         let imdbWithPrefix = imdbId.starts(with: "tt") ? imdbId : "tt\(imdbId)"
 
@@ -95,6 +95,10 @@ final class SubDLClient {
         } else {
             print("🔍 Searching SubDL: \(imdbWithPrefix) (\(subdlType))")
         }
+        
+        if let name = name {
+            print("   ℹ️ Fallback Name: \(name) (\(year != nil ? "\(year!)" : "No Year"))")
+        }
 
         var request = URLRequest(url: url)
         request.timeoutInterval = 5 // 5s timeout for search
@@ -106,116 +110,162 @@ final class SubDLClient {
         }
 
         if let responseString = String(data: data, encoding: .utf8) {
-            print("📝 SubDL Raw Response: \(responseString)")
-        } else {
-             print("❌ SubDL Raw Response: Unable to decode data as UTF8")
+            // print("📝 SubDL Raw Response: \(responseString)")
         }
 
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
-
-        if result.status == false {
+        var subtitles = result.subtitles ?? []
+        
+        // CHECK FOR FAILURE -> TRIGGER FALLBACK
+        if result.status == false || subtitles.isEmpty {
             if let errorMsg = result.error {
                 print("❌ SubDL API Error: \(errorMsg)")
-            } else {
-                print("❌ SubDL API returned failure status without error message")
+            } else if subtitles.isEmpty {
+                print("⚠️ SubDL API returned empty subtitles list")
             }
-            return []
-        }
-
-        let subtitles = result.subtitles ?? []
-
-        if subtitles.isEmpty, let results = result.results, !results.isEmpty {
-            let firstResult = results[0]
-            print("⚠️ Subtitles empty for IMDB ID, testing fallbacks for: \(firstResult.name)")
-
-            var fallbackComponents = URLComponents(string: "\(baseURL)/subtitles")!
-            var fallbackQueryItems = [
-                URLQueryItem(name: "api_key", value: apiKey),
-                URLQueryItem(name: "languages", value: languages),
-                URLQueryItem(name: "type", value: subdlType)
-            ]
-
-            // Prioritize TMDB ID if available, otherwise try film_id
-            if let tmdbId = firstResult.tmdb_id {
-                print("⚠️ Retrying with TMDB ID: \(tmdbId)")
-                fallbackQueryItems.append(URLQueryItem(name: "tmdb_id", value: "\(tmdbId)"))
-            } else {
-                 print("⚠️ Retrying with film_id (sd_id): \(firstResult.sd_id)")
-                 fallbackQueryItems.append(URLQueryItem(name: "film_id", value: "\(firstResult.sd_id)"))
-            }
-
-            if let season = season {
-                fallbackQueryItems.append(URLQueryItem(name: "season_number", value: "\(season)"))
-            }
-            if let episode = episode {
-                fallbackQueryItems.append(URLQueryItem(name: "episode_number", value: "\(episode)"))
-            }
-
-            fallbackComponents.queryItems = fallbackQueryItems
-
-            if let fallbackURL = fallbackComponents.url {
-                print("🔍 Retrying SubDL request: \(fallbackURL.absoluteString.replacingOccurrences(of: apiKey, with: "APIKEY"))")
-                var fallbackRequest = URLRequest(url: fallbackURL)
-                fallbackRequest.timeoutInterval = 5
-
-                if let (fallbackData, _) = try? await URLSession.shared.data(for: fallbackRequest) {
-                    if let fallbackResponseString = String(data: fallbackData, encoding: .utf8) {
-                        print("📝 SubDL Fallback Raw Response: \(fallbackResponseString)")
+            
+            // Try standard API fallback (results list)
+            if let results = result.results, !results.isEmpty {
+                let firstResult = results[0]
+                print("⚠️ Testing API-provided fallback for: \(firstResult.name)")
+                // ... (Existing API Fallback Logic could go here, but we will use the improved shared helper below)
+                // Actually, let's just create a helper to query by ID to keep this clean
+                subtitles = try await fetchByInternalId(sdId: firstResult.sd_id, tmdbId: firstResult.tmdb_id, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+            } 
+            // NEW: Try Scraping Fallback if API totally failed (e.g. "can't find movie") AND we have a name
+            else if let name = name {
+                print("🕸️ Attempting Web Scraping Fallback for '\(name)'...")
+                if let scrapedId = try await searchByWebScraping(name: name, year: year, type: subdlType) {
+                    print("✅ Scraping found SubDL ID: \(scrapedId). Fetching subtitles...")
+                    // We treat the scraped ID as an 'sd_id' (film_id)
+                    // Extract numeric part if it has 'sd' prefix (API usually expects just the number, but let's be safe)
+                    let cleanId = Int(scrapedId.replacingOccurrences(of: "sd", with: ""))
+                    if let fid = cleanId {
+                         subtitles = try await fetchByInternalId(sdId: fid, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
                     }
-
-                    if let fallbackResult = try? JSONDecoder().decode(SubDLResponse.self, from: fallbackData) {
-                        let fallbackSubtitles = fallbackResult.subtitles ?? []
-                        print("✅ Found \(fallbackSubtitles.count) subtitles from SubDL (Fallback)")
-
-                        if !fallbackSubtitles.isEmpty {
-                            // CRITICAL FIX: Strict filter for fallback results too
-                            let filteredFallback = filterSubtitlesByEpisode(fallbackSubtitles, season: season, episode: episode)
-                            
-                             let sortedFallback = sortSubtitlesByCompatibility(filteredFallback, season: season, episode: episode)
-
-                             // Log fallback results
-                             print("📝 SubDL Fallback results:")
-                             for (idx, sub) in sortedFallback.enumerated() {
-                                 let score = calculateCompatibilityScore(sub, season: season, episode: episode)
-                                 print("   [\(idx + 1)] \(sub.releaseName ?? "NO RELEASE NAME") [\(sub.language ?? "unknown")] (score: \(score))")
-                             }
-                             return sortedFallback
-                        }
-                    }
+                } else {
+                    print("❌ Scraping found no matches.")
                 }
             }
         }
 
-        print("✅ Found \(subtitles.count) subtitles from SubDL")
+        // Post-Processing (Filtering & Sorting)
+        print("✅ Found \(subtitles.count) subtitles from SubDL (Final)")
         
-        // CRITICAL FIX: Filter out mismatched episodes (Strict Filtering)
-        // SubDL API sometimes returns a "Season Pack" list mixed with single episodes
-        // We must strip out any subtitle that EXPLICITLY specifies a different season/episode
         let filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
         
         if filteredSubtitles.count < subtitles.count {
-            print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes from SubDL response")
+            print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes")
         }
 
-        // Sort subtitles by release quality and compatibility
         let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode)
 
-        // Log each subtitle's release name for debugging
-        if let season = season, let episode = episode {
-            print("📝 SubDL results for S\(String(format: "%02d", season))E\(String(format: "%02d", episode)):")
-            for (idx, sub) in sortedSubtitles.enumerated() {
-                let score = calculateCompatibilityScore(sub, season: season, episode: episode)
-                print("   [\(idx + 1)] \(sub.releaseName ?? "NO RELEASE NAME") [\(sub.language ?? "unknown")] (score: \(score))")
-            }
+        return sortedSubtitles
+    }
+    
+    // MARK: - Private Fallback Methods
+    
+    private func fetchByInternalId(sdId: Int, tmdbId: Int?, type: String, season: Int?, episode: Int?, languages: String, apiKey: String) async throws -> [SubDLSubtitle] {
+        var components = URLComponents(string: "\(baseURL)/subtitles")!
+        var queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "languages", value: languages),
+            URLQueryItem(name: "type", value: type)
+        ]
+        
+        // Prioritize TMDB ID if available
+        if let tmdbId = tmdbId {
+            print("⚠️ Retrying with TMDB ID: \(tmdbId)")
+            queryItems.append(URLQueryItem(name: "tmdb_id", value: "\(tmdbId)"))
         } else {
-            print("📝 SubDL results for movie:")
-            for (idx, sub) in sortedSubtitles.enumerated() {
-                let score = calculateCompatibilityScore(sub, season: season, episode: episode)
-                print("   [\(idx + 1)] \(sub.releaseName ?? "NO RELEASE NAME") [\(sub.language ?? "unknown")] (score: \(score))")
-            }
+             print("⚠️ Retrying with sd_id: \(sdId)")
+             queryItems.append(URLQueryItem(name: "sd_id", value: "\(sdId)"))
         }
 
-        return sortedSubtitles
+        if let season = season {
+            queryItems.append(URLQueryItem(name: "season_number", value: "\(season)"))
+        }
+        if let episode = episode {
+            queryItems.append(URLQueryItem(name: "episode_number", value: "\(episode)"))
+        }
+
+        components.queryItems = queryItems
+        
+        guard let url = components.url else { return [] }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 5
+        
+        // print("🔍 Retrying URL: \(url)")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
+        return result.subtitles ?? []
+    }
+    
+    private func searchByWebScraping(name: String, year: Int?, type: String) async throws -> String? {
+        // Construct search URL: https://subdl.com/search/Name
+        guard let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return nil }
+        let searchURLStr = "https://subdl.com/search/\(encodedName)"
+        guard let url = URL(string: searchURLStr) else { return nil }
+        
+        print("🕸️ Scraping: \(searchURLStr)")
+        
+        var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15", forHTTPHeaderField: "User-Agent")
+        
+        let (data, _) = try await URLSession.shared.data(for: request)
+        guard let html = String(data: data, encoding: .utf8) else { return nil }
+        
+        // Regex to find links: <a href="https://subdl.com/subtitle/sd12345/slug">Title (Year)</a>
+        // Or relative: <a href="/subtitle/sd12345/slug">
+        // We look for the 'sd' ID pattern
+        
+        // Pattern: href=".*?\/subtitle\/(sd\d+)\/.*?".*?>(.*?)<\/a>
+        // We need to match the name/year in the text to be safe
+        
+        let linkPattern = "href=[\"'](?:https://subdl\\.com)?/subtitle/(sd\\d+)/[^\"']+[\"'][^>]*>(.*?)</a>"
+        
+        let regex = try NSRegularExpression(pattern: linkPattern, options: [.caseInsensitive])
+        let nsString = html as NSString
+        let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
+        
+        print("🕸️ Found \(matches.count) potential matches on search page")
+        
+        for match in matches {
+            if match.numberOfRanges >= 3 {
+                let sdId = nsString.substring(with: match.range(at: 1))
+                let linkText = nsString.substring(with: match.range(at: 2)) // e.g. "Joker (2019)" or "<h3>Joker (2019)</h3>"
+                
+                // Clean link text (remove tags if any)
+                let cleanText = linkText.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
+                
+                print("   Candidate: ID=\(sdId) | Text='\(cleanText)'")
+                
+                // 1. Check Year Match (Strongest Signal)
+                if let year = year {
+                    if cleanText.contains("\(year)") {
+                        print("   ✅ Year Match (\(year))! Selected ID: \(sdId)")
+                        return sdId
+                    }
+                }
+                
+                // 2. Check Exact Name Match (if year missing or failed)
+                // Normalize names
+                if cleanText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == name.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {
+                     print("   ✅ Exact Name Match! Selected ID: \(sdId)")
+                     return sdId
+                }
+            }
+        }
+        
+        // Fallback: If we have results but no perfect match, return the first one IF likely relevant
+        if let first = matches.first, matches.count > 0 {
+             let sdId = nsString.substring(with: first.range(at: 1))
+             print("⚠️ No exact match found, using first result: \(sdId)")
+             return sdId
+        }
+        
+        return nil
     }
     
     // MARK: - Private Filtering Logic
@@ -244,7 +294,7 @@ final class SubDLClient {
             }
             
             // Fallback to name parsing if metadata is missing (Safety)
-            if let name = sub.releaseName?.lowercased() {
+            if sub.releaseName?.lowercased() != nil {
                 // If it explicitly says S04E02 but we want S04E01, block it.
                 // But be careful not to block "S04" packs.
                 

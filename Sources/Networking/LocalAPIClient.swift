@@ -220,10 +220,6 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         
         // Debug counters
         var totalProcessed = 0
-        var droppedExclusions = 0
-        var droppedTitles = 0
-        var droppedMetadataFail = 0
-        var droppedGenreMismatch = 0
         var kept = 0
         
         for (batchIndex, batch) in batches.enumerated() {
@@ -638,7 +634,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         components.queryItems = queryItems
         
-        var request = makeAuthorizedRequest(url: components.url!)
+        let request = makeAuthorizedRequest(url: components.url!)
         let (data, _) = try await session.data(for: request)
         let response = try JSONDecoder().decode(AllStreamsResponse.self, from: data)
 
@@ -669,7 +665,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
         components.queryItems = queryItems
 
-        var request = makeAuthorizedRequest(url: components.url!)
+        let request = makeAuthorizedRequest(url: components.url!)
         let (data, _) = try await session.data(for: request)
         let response = try JSONDecoder().decode(QualityBucketsResponse.self, from: data)
 
@@ -681,16 +677,50 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
     // MARK: - Subtitles (SubDL)
 
-    func searchSubtitles(imdbId: String, type: String) async throws -> [SubDLSubtitle] {
+    func searchSubtitles(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil) async throws -> [SubDLSubtitle] {
         var components = URLComponents(string: "\(baseURL)/subtitles/search")!
-        components.queryItems = [
+        var queryItems = [
             URLQueryItem(name: "imdbId", value: imdbId),
             URLQueryItem(name: "type", value: type),
             URLQueryItem(name: "languages", value: "en")
         ]
-
         
-        let (data, _) = try await session.data(for: makeAuthorizedRequest(url: components.url!))
+        if let season = season {
+             queryItems.append(URLQueryItem(name: "season", value: "\(season)"))
+        }
+        if let episode = episode {
+             queryItems.append(URLQueryItem(name: "episode", value: "\(episode)"))
+        }
+        if let name = name {
+            queryItems.append(URLQueryItem(name: "name", value: name))
+        }
+        if let year = year {
+            queryItems.append(URLQueryItem(name: "year", value: "\(year)"))
+        }
+        
+        components.queryItems = queryItems
+        
+        guard let url = components.url else {
+            throw APIError.invalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 10 
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+             throw APIError.invalidResponse
+        }
+        
+        if httpResponse.statusCode != 200 {
+            // Try to read error from body
+            if let errorMsg = String(data: data, encoding: .utf8) {
+                print("❌ Subtitle search failed: \(errorMsg)")
+            }
+             throw APIError.serverError(statusCode: httpResponse.statusCode)
+        }
+        
         let subtitles = try JSONDecoder().decode([SubDLSubtitle].self, from: data)
         return subtitles
     }
@@ -1186,6 +1216,8 @@ enum VideoQuality: String, CaseIterable, Identifiable {
 enum APIError: LocalizedError {
     case noStreamsFound
     case invalidResponse
+    case invalidURL
+    case serverError(statusCode: Int)
     case networkError(Error)
 
     var errorDescription: String? {
@@ -1194,6 +1226,10 @@ enum APIError: LocalizedError {
             return "No streams found for this quality"
         case .invalidResponse:
             return "Invalid response from server"
+        case .invalidURL:
+            return "Invalid URL"
+        case .serverError(let statusCode):
+            return "Server error with status code: \(statusCode)"
         case .networkError(let error):
             return "Network error: \(error.localizedDescription)"
         }

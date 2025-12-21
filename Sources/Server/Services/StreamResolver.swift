@@ -21,6 +21,7 @@ actor StreamResolver {
         type: String,
         season: Int? = nil,
         episode: Int? = nil,
+        name: String? = nil,
         year: String? = nil,
         excludedHashes: Set<String> = [],
         ignoreVerified: Bool = false
@@ -310,7 +311,7 @@ actor StreamResolver {
         }
 
         // OPTIMIZATION: Attach subtitles
-        let streamsWithSubtitles = await attachSubtitles(to: filteredStreams, imdbId: imdbId, type: type, season: season, episode: episode)
+        let streamsWithSubtitles = await attachSubtitles(to: filteredStreams, imdbId: imdbId, type: type, season: season, episode: episode, name: targetTitle ?? name, year: year != nil ? Int(year!) : nil)
 
         // Partition into quality buckets
         var buckets: [String: [Stream]] = ["2160p": [], "1080p": [], "720p": [], "480p": []]
@@ -386,7 +387,7 @@ actor StreamResolver {
     // MARK: - Subtitle Attachment Copy
     // Note: Copied from StreamRoutes logic to be standalone
 
-    private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil) async -> [Stream] {
+    private func attachSubtitles(to streams: [Stream], imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil) async -> [Stream] {
          guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
              return streams
          }
@@ -398,6 +399,8 @@ actor StreamResolver {
                  season: season,
                  episode: episode,
                  languages: "en",
+                 name: name,
+                 year: year,
                  apiKey: subdlKey
              )
 

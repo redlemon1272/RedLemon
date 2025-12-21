@@ -17,34 +17,32 @@ func registerSubtitleRoutes(_ app: Application) {
         guard let imdbId: String = req.query["imdbId"] else {
             throw Abort(.badRequest, reason: "Missing imdbId parameter")
         }
-
         guard let type: String = req.query["type"] else {
             throw Abort(.badRequest, reason: "Missing type parameter")
         }
-
+        let season: Int? = req.query["season"]
+        let episode: Int? = req.query["episode"]
         let languages: String = req.query["languages"] ?? "en"
-
-        print("🔍 Subtitle search request: \(imdbId) (\(type))")
+        let name: String? = req.query["name"]
+        let year: Int? = req.query["year"]
 
         // Get SubDL API key from Keychain
         guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
-            print("⚠️ No SubDL API key found - cannot search subtitles")
-            return []
+            throw Abort(.custom(code: 503, reasonPhrase: "SubDL API key not configured"), reason: "SubDL API key missing")
         }
 
-        do {
-            let subtitles = try await SubDLClient.shared.search(
-                imdbId: imdbId,
-                type: type,
-                languages: languages,
-                apiKey: subdlKey
-            )
-            print("✅ Subtitle search returned \(subtitles.count) results")
-            return subtitles
-        } catch {
-            print("❌ Subtitle search failed: \(error.localizedDescription)")
-            return []
-        }
+        let subtitles = try await SubDLClient.shared.search(
+            imdbId: imdbId,
+            type: type,
+            season: season,
+            episode: episode,
+            languages: languages,
+            name: name,
+            year: year,
+            apiKey: subdlKey
+        )
+
+        return subtitles
     }
 
     // GET /subtitles/subdl/:encodedPath

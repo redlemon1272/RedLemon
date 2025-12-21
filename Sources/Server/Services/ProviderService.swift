@@ -134,7 +134,6 @@ actor ProviderManager {
                 try await Task.sleep(nanoseconds: 15 * 1_000_000_000)
                 // Throw specific timeout error
                 throw URLError(.timedOut)
-                return [] // Dead code to satisfy type inference
             }
             
             // Process whichever finishes first

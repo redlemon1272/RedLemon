@@ -22,6 +22,18 @@ class FriendsViewModel: ObservableObject {
     private let displayLimit = 100 // Only show top 100 loaded friends in list
     
     init() {
+        // 1. Initial Synchronous Load (Fix for Flash)
+        self.refreshList(
+            friends: socialService.friends,
+            onlineIds: socialService.onlineUserIds,
+            unread: socialService.unreadCounts,
+            messages: socialService.messages,
+            search: searchText,
+            tab: selectedTab
+        )
+        self.isReady = true
+        
+        // 2. Setup Reactive Bindings
         setupBindings()
     }
     
@@ -70,7 +82,7 @@ class FriendsViewModel: ObservableObject {
             guard let self = self else { return }
             let (friends, onlineIds, unread, messages) = tuple
             
-            self.updateList(
+            self.refreshList(
                 friends: friends,
                 onlineIds: onlineIds,
                 unread: unread,
@@ -86,7 +98,7 @@ class FriendsViewModel: ObservableObject {
         .store(in: &cancellables)
     }
     
-    private func updateList(
+    private func refreshList(
         friends: [Friend],
         onlineIds: Set<String>,
         unread: [String: Int],

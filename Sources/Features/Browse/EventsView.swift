@@ -867,10 +867,8 @@ struct HeroEventCardContent: View {
                     lineWidth: 2
                 )
         }
-        .frame(maxWidth: 1600) // Constrain heavy horizontal stretch
         .cornerRadius(12) // Round the entire card
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
-        .padding(.horizontal, 32) // Add the requested padding
         .frame(maxWidth: .infinity) // Center the constrained card
     }
 }

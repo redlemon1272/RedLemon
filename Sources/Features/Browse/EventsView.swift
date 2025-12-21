@@ -661,6 +661,36 @@ struct HeroEventCardContent: View {
          return formatter.string(from: interval) ?? "0:00"
      }
 
+    @State private var imageData: Data?
+
+    private func loadImage() async {
+        let url = event.mediaItem.backgroundURL ?? event.mediaItem.posterURL
+        guard let imageURL = url else { return }
+
+        let cacheKey = imageURL.absoluteString
+
+        // Check cache first
+        if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+            await MainActor.run {
+                self.imageData = cachedData
+            }
+            return
+        }
+
+        // Fetch
+        do {
+            let (data, _) = try await URLSession.shared.data(from: imageURL)
+            // Cache
+            await CacheManager.shared.setImageData(key: cacheKey, value: data)
+            // Update UI
+            await MainActor.run {
+                self.imageData = data
+            }
+        } catch {
+            print("❌ Failed to load hero image: \(error)")
+        }
+    }
+
     var body: some View {
         ZStack(alignment: .topLeading) {
             // LAYER 0: Sizing Anchor (Stable Layout)
@@ -670,23 +700,28 @@ struct HeroEventCardContent: View {
                 .frame(maxWidth: .infinity)
 
             // LAYER 1: Background Image
-            AsyncImage(url: event.mediaItem.backgroundURL ?? event.mediaItem.posterURL) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: height)
-                    .frame(maxWidth: .infinity)
-                    .clipped()
-            } placeholder: {
-                Rectangle().fill(
-                    LinearGradient(
-                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
+            Group {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(height: height)
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                } else {
+                    Rectangle().fill(
+                        LinearGradient(
+                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                     )
-                )
+                }
             }
             .allowsHitTesting(false)
+            .task {
+                await loadImage()
+            }
 
             // LAYER 2: Gradients
             ZStack {

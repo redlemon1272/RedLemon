@@ -280,47 +280,30 @@ struct CatalogMeta: Codable {
 // MARK: - Card Component
 struct DiscoverMediaCard: View {
     let item: MediaItem
+    @State private var imageData: Data?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let posterURL = item.poster {
-                AsyncImage(url: URL(string: posterURL)) { phase in
-                    switch phase {
-                    case .empty:
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .overlay(
-                                ProgressView()
-                            )
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .clipped()
-                    case .failure:
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.3))
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .overlay(
-                                Image(systemName: "photo")
-                                    .foregroundColor(.gray)
-                            )
-                    @unknown default:
-                        EmptyView()
-                    }
+            Group {
+                if let imageData = imageData, let nsImage = NSImage(data: imageData) {
+                    Image(nsImage: nsImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .clipped()
+                        .cornerRadius(8)
+                } else {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.3))
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .cornerRadius(8)
+                        .overlay(
+                            ProgressView()
+                        )
                 }
-                .cornerRadius(8)
-            } else {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-                    .aspectRatio(2/3, contentMode: .fit)
-                    .cornerRadius(8)
-                    .overlay(
-                        Image(systemName: "photo")
-                            .foregroundColor(.gray)
-                    )
+            }
+            .task {
+                await loadPoster()
             }
 
             Text(item.name)
@@ -336,5 +319,31 @@ struct DiscoverMediaCard: View {
             }
         }
         .frame(width: 150)
+    }
+
+    private func loadPoster() async {
+        guard let posterURL = item.poster else { return }
+        
+        // Check cache first
+        if let cachedData = await CacheManager.shared.getImageData(key: posterURL) {
+            await MainActor.run {
+                self.imageData = cachedData
+            }
+            return
+        }
+
+        guard let url = URL(string: posterURL) else { return }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            // Cache
+            await CacheManager.shared.setImageData(key: posterURL, value: data)
+            
+            await MainActor.run {
+                self.imageData = data
+            }
+        } catch {
+            // Silently fail or log debug
+        }
     }
 }

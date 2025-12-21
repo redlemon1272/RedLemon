@@ -1144,10 +1144,24 @@ struct RecentlyWatchedCard: View {
 
     private func loadPoster() async {
         guard let posterURL = historyItem.mediaItem.posterURL else { return }
+        let cacheKey = posterURL.absoluteString
+
+        // Check cache first
+        if let cachedData = await CacheManager.shared.getImageData(key: cacheKey) {
+            await MainActor.run {
+                self.imageData = cachedData
+            }
+            return
+        }
 
         do {
             let (data, _) = try await URLSession.shared.data(from: posterURL)
-            imageData = data
+            // Cache
+            await CacheManager.shared.setImageData(key: cacheKey, value: data)
+            // Update UI
+            await MainActor.run {
+                self.imageData = data
+            }
         } catch {
             print("Failed to load poster: \(error)")
         }

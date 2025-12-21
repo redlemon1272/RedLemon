@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct EventsView: View {
     @EnvironmentObject var appState: AppState
@@ -700,7 +701,20 @@ struct HeroEventCardContent: View {
                 .frame(maxWidth: .infinity)
 
             // LAYER 1: Background Image
-            Group {
+            // LAYER 1: Background Image
+            ZStack {
+                // Base: Placeholder (Always visible to maintain layout stability)
+                Rectangle().fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(height: height)
+                .frame(maxWidth: .infinity)
+                
+                // Overlay: Image (Appears on top when loaded)
                 if let imageData = imageData, let nsImage = NSImage(data: imageData) {
                     Image(nsImage: nsImage)
                         .resizable()
@@ -708,14 +722,6 @@ struct HeroEventCardContent: View {
                         .frame(height: height)
                         .frame(maxWidth: .infinity)
                         .clipped()
-                } else {
-                    Rectangle().fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
                 }
             }
             .allowsHitTesting(false)

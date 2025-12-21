@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct HeroRoomCard: View {
     let room: WatchPartyRoom
@@ -42,7 +43,19 @@ struct HeroRoomCardContent: View {
                 .frame(maxWidth: .infinity)
 
             // LAYER 1: Background Image (Cached)
-            Group {
+            ZStack {
+                // Base: Placeholder (Always visible to maintain layout stability)
+                Rectangle().fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .frame(height: 280)
+                .frame(maxWidth: .infinity)
+                
+                // Overlay: Image (Appears on top when loaded)
                 if let imageData = imageData, let nsImage = NSImage(data: imageData) {
                     Image(nsImage: nsImage)
                         .resizable()
@@ -50,16 +63,6 @@ struct HeroRoomCardContent: View {
                         .frame(height: 280)
                         .frame(maxWidth: .infinity)
                         .clipped()
-                } else {
-                    Rectangle().fill(
-                        LinearGradient(
-                            gradient: Gradient(colors: [Color.gray.opacity(0.3), Color.gray.opacity(0.1)]),
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
-                    .frame(height: 280)
-                    .frame(maxWidth: .infinity)
                 }
             }
             .allowsHitTesting(false)
@@ -228,14 +231,12 @@ struct HeroRoomCardContent: View {
                 .cornerRadius(16)
             }
         }
+        .frame(height: 280)
         .frame(maxWidth: .infinity)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.3), radius: 10, x: 0, y: 5)
         .task(id: room.mediaItem?.background ?? room.mediaItem?.poster ?? room.posterURL) {
             await loadBackground()
-        }
-        .onDisappear {
-            loadTask?.cancel()
         }
     }
     
@@ -259,20 +260,19 @@ struct HeroRoomCardContent: View {
         }
         
         // 2. Fetch
-        loadTask = Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                await CacheManager.shared.setImageData(key: cacheKey, value: data)
-                
-                if !Task.isCancelled {
-                    await MainActor.run {
-                        self.imageData = data
-                    }
-                }
-            } catch {
-                print("❌ Failed to load room card image: \(error)")
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            
+            // Check cancellation before updating state
+            try Task.checkCancellation()
+            
+            await CacheManager.shared.setImageData(key: cacheKey, value: data)
+            
+            await MainActor.run {
+                self.imageData = data
             }
+        } catch {
+            print("❌ Failed to load room card image for \(room.id): \(error)")
         }
-        await loadTask?.value
     }
 }

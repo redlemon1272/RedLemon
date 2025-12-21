@@ -188,26 +188,25 @@ struct RoomListView: View {
                         newRooms.append(watchPartyRoom)
                     }
                 }
+                
+                // ENRICHMENT: Fetch metadata concurrently BEFORE updating state to prevent UI flash
+                // This ensures we have the high-res background art ready for the first render
+                let enrichedRooms = await RoomListView.enrichRoomsWithMetadata(newRooms)
 
                 await MainActor.run {
                     if reset {
-                        appState.activeRooms = newRooms
+                        appState.activeRooms = enrichedRooms
                     } else {
                         // Append new rooms, avoiding duplicates
                         let existingIds = Set(appState.activeRooms.map { $0.id })
-                        let uniqueNewRooms = newRooms.filter { !existingIds.contains($0.id) }
+                        let uniqueNewRooms = enrichedRooms.filter { !existingIds.contains($0.id) }
                         appState.activeRooms.append(contentsOf: uniqueNewRooms)
                     }
 
                     offset += pageSize
                     isLoading = false
                     isLoadingMore = false
-                    print("✅ Loaded \(newRooms.count) rooms (total: \(appState.activeRooms.count))")
-                }
-
-                // Fetch poster URLs from Cinemeta for new rooms
-                Task {
-                    await fetchPostersForRooms(rooms: newRooms)
+                    print("✅ Loaded \(enrichedRooms.count) rooms (total: \(appState.activeRooms.count))")
                 }
             } catch {
                 await MainActor.run {
@@ -218,6 +217,32 @@ struct RoomListView: View {
                 }
             }
         }
+    }
+
+    private static func enrichRoomsWithMetadata(_ rooms: [WatchPartyRoom]) async -> [WatchPartyRoom] {
+        if rooms.isEmpty { return [] }
+        
+        var enrichedRooms = rooms
+        
+        await withTaskGroup(of: (Int, WatchPartyRoom).self) { group in
+            for (index, room) in rooms.enumerated() {
+                group.addTask {
+                    // Reuse existing fetch logic
+                    let (_, updatedRoom) = await RoomListView.fetchPosterForRoom(room: room)
+                    // If updatedRoom is nil (failed), keep original. If not, use enriched.
+                    return (index, updatedRoom ?? room)
+                }
+            }
+            
+            // Collect results safely
+            for await (index, enrichedRoom) in group {
+                if index < enrichedRooms.count {
+                    enrichedRooms[index] = enrichedRoom
+                }
+            }
+        }
+        
+        return enrichedRooms
     }
 
     private func convertSupabaseRoomToWatchPartyRoom(_ room: SupabaseRoom) async -> WatchPartyRoom? {
@@ -337,7 +362,7 @@ struct RoomListView: View {
         await withTaskGroup(of: (String, WatchPartyRoom?).self) { group in
             for room in targetRooms {
                 group.addTask {
-                    await self.fetchPosterForRoom(room: room)
+                    await RoomListView.fetchPosterForRoom(room: room)
                 }
             }
 
@@ -362,7 +387,7 @@ struct RoomListView: View {
         }
     }
 
-    private func fetchPosterForRoom(room: WatchPartyRoom) async -> (String, WatchPartyRoom?) {
+    private static func fetchPosterForRoom(room: WatchPartyRoom) async -> (String, WatchPartyRoom?) {
         var room = room
 
         guard let imdbId = room.mediaItem?.id, imdbId != "unknown" else {

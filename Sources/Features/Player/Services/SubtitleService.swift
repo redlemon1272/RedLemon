@@ -257,13 +257,43 @@ actor MPVSubtitleService: SubtitleService {
     }
 
     nonisolated private func convertSRTToVTT(srt: String) -> String {
+        // Fix 1: Normalize newlines for Windows (CRLF) support
+        let normalized = srt.replacingOccurrences(of: "\r\n", with: "\n")
+                            .replacingOccurrences(of: "\r", with: "\n")
+
         var vtt = "WEBVTT\n\n"
-        let cues = srt.components(separatedBy: "\n\n")
+        let cues = normalized.components(separatedBy: "\n\n")
+        
         for cue in cues {
             let trimmed = cue.trimmingCharacters(in: .whitespacesAndNewlines)
             if trimmed.isEmpty { continue }
-            let converted = trimmed.replacingOccurrences(of: ",", with: ".")
-            vtt += converted + "\n\n"
+            
+            // Fix 2: Only replace commas in timestamps, not dialogue
+            var lines = trimmed.components(separatedBy: "\n")
+            
+            // Basic SRT heuristic:
+            // Line 0: ID (Optional)
+            // Line 1: Timestamp (00:00:00,000 --> ...)
+            
+            if lines.count >= 2 {
+                // If line 0 matches "-->", it's the timestamp (ID omitted)
+                if lines[0].contains("-->") {
+                    lines[0] = lines[0].replacingOccurrences(of: ",", with: ".")
+                } 
+                // If line 1 matches "-->", line 0 is likely ID
+                else if lines[1].contains("-->") {
+                    lines[1] = lines[1].replacingOccurrences(of: ",", with: ".")
+                }
+                // Fallback: If neither matches clearly, rely on old behavior but safer? 
+                // Actually the old behavior was replace all commas. 
+                // If we can't find the timestamp, we might default to no replacement or full replacement.
+                // Given SRT strictness, one of the first two lines MUST be the timestamp.
+            } else if lines.count == 1 && lines[0].contains("-->") {
+                 lines[0] = lines[0].replacingOccurrences(of: ",", with: ".")
+            }
+            
+            let convertedChunk = lines.joined(separator: "\n")
+            vtt += convertedChunk + "\n\n"
         }
         return vtt
     }

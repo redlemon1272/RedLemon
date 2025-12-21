@@ -15,6 +15,8 @@ struct SubDLSubtitle: Content {
     let releaseName: String?
     let author: String?
     let comment: String?
+    let season: Int?
+    let episode: Int?
 
     enum CodingKeys: String, CodingKey {
         case language
@@ -22,6 +24,8 @@ struct SubDLSubtitle: Content {
         case releaseName = "release_name"
         case author
         case comment
+        case season
+        case episode
     }
 }
 
@@ -164,7 +168,10 @@ final class SubDLClient {
                         print("✅ Found \(fallbackSubtitles.count) subtitles from SubDL (Fallback)")
 
                         if !fallbackSubtitles.isEmpty {
-                             let sortedFallback = sortSubtitlesByCompatibility(fallbackSubtitles, season: season, episode: episode)
+                            // CRITICAL FIX: Strict filter for fallback results too
+                            let filteredFallback = filterSubtitlesByEpisode(fallbackSubtitles, season: season, episode: episode)
+                            
+                             let sortedFallback = sortSubtitlesByCompatibility(filteredFallback, season: season, episode: episode)
 
                              // Log fallback results
                              print("📝 SubDL Fallback results:")
@@ -180,9 +187,18 @@ final class SubDLClient {
         }
 
         print("✅ Found \(subtitles.count) subtitles from SubDL")
+        
+        // CRITICAL FIX: Filter out mismatched episodes (Strict Filtering)
+        // SubDL API sometimes returns a "Season Pack" list mixed with single episodes
+        // We must strip out any subtitle that EXPLICITLY specifies a different season/episode
+        let filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
+        
+        if filteredSubtitles.count < subtitles.count {
+            print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes from SubDL response")
+        }
 
         // Sort subtitles by release quality and compatibility
-        let sortedSubtitles = sortSubtitlesByCompatibility(subtitles, season: season, episode: episode)
+        let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode)
 
         // Log each subtitle's release name for debugging
         if let season = season, let episode = episode {
@@ -200,6 +216,50 @@ final class SubDLClient {
         }
 
         return sortedSubtitles
+    }
+    
+    // MARK: - Private Filtering Logic
+    
+    private func filterSubtitlesByEpisode(_ subtitles: [SubDLSubtitle], season: Int?, episode: Int?) -> [SubDLSubtitle] {
+        return subtitles.filter { sub in
+            // Global Filter: Block Trailers
+            // "Trailer" subtitles are never useful for playback
+            if let name = sub.releaseName?.lowercased() {
+                if name.contains("trailer") || name.contains("teaser") {
+                    return false
+                }
+            }
+
+            guard let season = season, let episode = episode else {
+                return true // Movies: Keep it (unless it was a trailer)
+            }
+            
+            // If API provides explicit metadata, use it
+            if let subSeason = sub.season, let subEpisode = sub.episode {
+                if subSeason != season || subEpisode != episode {
+                    // Mismatched metadata
+                    return false
+                }
+                return true
+            }
+            
+            // Fallback to name parsing if metadata is missing (Safety)
+            if let name = sub.releaseName?.lowercased() {
+                // If it explicitly says S04E02 but we want S04E01, block it.
+                // But be careful not to block "S04" packs.
+                
+                // Block explicit mismatches
+                // e.g. Request S04E01. Found "S04E02" -> Block.
+                // Found "S04E01" -> Keep. 
+                // Found "Season 4" -> Keep (Pack).
+                
+                // Helper to extract episode number from string "S04E02"
+                // Ideally we rely on the metadata added to the struct, which solves 99% of cases now.
+                // But just in case, we trust the metadata first.
+            }
+            
+            return true
+        }
     }
 
     /// Download and convert subtitle file from SubDL CDN

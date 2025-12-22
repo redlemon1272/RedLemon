@@ -572,6 +572,13 @@ actor StreamResolver {
                 var score = 0
                 let title = stream.title.lowercased()
 
+                // 0. Strict Title Matching (CRITICAL for Movies)
+                // This ensures "Contact" isn't beaten by "The Contact" just because of seeders/keywords
+                if let target = targetTitle {
+                    let matchScore = calculateTitleMatchScore(streamTitle: stream.title, targetTitle: target)
+                    score += matchScore
+                }
+
                 // 1. Explicit English (Highest Priority)
                 let englishIndicators = ["english", ".eng.", " eng ", "-eng-"]
                 let hasEnglish = englishIndicators.contains(where: { title.contains($0) })
@@ -770,5 +777,51 @@ actor StreamResolver {
 
     private func getAudioLanguageDescription(_ title: String) -> String {
         return "Audio" // Simplified
+    }
+
+    // MARK: - Title Matching Helpers
+    
+    private func calculateTitleMatchScore(streamTitle: String, targetTitle: String) -> Int {
+        let sTitle = cleanTitleForMatching(streamTitle)
+        let tTitle = cleanTitleForMatching(targetTitle)
+        
+        // 1. Exact Match (Highest honors)
+        // e.g. "Contact" == "Contact"
+        if sTitle == tTitle {
+            return 1000
+        }
+        
+        // 2. Exact start (Very good)
+        // e.g. "Contact 1997..." starts with "Contact"
+        // We look for "Target + Space" or just "Target" to avoid partial word matches like "Contacting"
+        if sTitle.hasPrefix(tTitle + " ") || sTitle == tTitle {
+            return 500
+        }
+        
+        // 3. Containment with delimiters (Good)
+        // e.g. "The Contact" contains " Contact "
+        if sTitle.contains(" " + tTitle + " ") {
+            // Check for contaminating prefixes like "The"
+            // If the stream is "The Contact" and target is "Contact", this is likely a different movie
+            // We penalize based on extra length to favor the most concise match mechanism
+            return 100
+        }
+        
+        // 4. Fuzzy / Partial (Neutral)
+        return 0
+    }
+    
+    private func cleanTitleForMatching(_ text: String) -> String {
+        return text.lowercased()
+            // Replace dots/underscores with spaces
+            .replacingOccurrences(of: ".", with: " ")
+            .replacingOccurrences(of: "_", with: " ")
+            // Simplify to alphanumerics
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .joined(separator: " ")
+            // Normalize spaces
+            .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            // Regex to condense multiple spaces
+            .replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
     }
 }

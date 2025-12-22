@@ -20,7 +20,7 @@ class MockMPVController: MPVController {
     var isFileLoadedPublisher: AnyPublisher<Bool, Never> { $isFileLoaded.eraseToAnyPublisher() }
     
     // MARK: - Spies
-    var loadVideoCalls: [(url: String, autoplay: Bool)] = []
+    var loadVideoCalls: [(url: String, autoplay: Bool, expectedSubtitleCount: Int)] = []
     var seekCalls: [Double] = []
     var setVolumeCalls: [Int] = []
     var setSpeedCalls: [Double] = []
@@ -39,8 +39,8 @@ class MockMPVController: MPVController {
     
     // MARK: - Implementation
     
-    func loadVideo(url: String, autoplay: Bool) {
-        loadVideoCalls.append((url, autoplay))
+    func loadVideo(url: String, autoplay: Bool, expectedSubtitleCount: Int) {
+        loadVideoCalls.append((url, autoplay, expectedSubtitleCount))
         // Auto-simulate load success for ease of testing
         isFileLoaded = true
         if autoplay { isPlaying = true }

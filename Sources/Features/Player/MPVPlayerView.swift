@@ -82,7 +82,9 @@ struct MPVPlayerView: View {
     @State private var showSubtitleMenu = false
     @State private var showPlaylistMenu = false
     @State private var showEventListMenu = false
+
     @State private var showReportSheet = false
+    @State private var showStreamInfoSheet = false
     @State private var volume: Double = 1.0
     @State private var subtitleMenuExpanded = false
 
@@ -184,7 +186,9 @@ struct MPVPlayerView: View {
                             showAudioMenu: $showAudioMenu,
                             showPlaylistMenu: $showPlaylistMenu,
                             showEventListMenu: $showEventListMenu,
+
                             showReportSheet: $showReportSheet,
+                            showStreamInfoSheet: $showStreamInfoSheet,
                             showControls: showControls
                         )
                         .zIndex(99)
@@ -759,6 +763,30 @@ struct MPVPlayerView: View {
         .shadow(radius: 20)
     }
 
+    @ViewBuilder
+    private var streamInfoOverlay: some View {
+        if showStreamInfoSheet {
+            VStack {
+                Spacer()
+                HStack {
+                    Spacer()
+                    StreamInfoView(
+                        streamTitle: viewModel.streamTitle,
+                        url: viewModel.videoURL,
+                        quality: streamQuality,
+                        source: sourceQuality,
+                        hash: streamHash ?? "N/A",
+                        isPresented: $showStreamInfoSheet
+                    )
+                    Spacer()
+                }
+                Spacer()
+            }
+            .transition(.opacity.combined(with: .scale))
+            .zIndex(103)
+        }
+    }
+
     private var fullAudioMenu: some View {
         VStack(spacing: 16) {
             // Header
@@ -862,6 +890,7 @@ struct MPVPlayerView: View {
         menuShields
         menuOverlays
         reportOverlay
+        streamInfoOverlay
         chatButtonOverlay
     }
 
@@ -899,6 +928,18 @@ struct MPVPlayerView: View {
                 .onTapGesture {
                     withAnimation(.easeInOut(duration: 0.15)) {
                         showPlaylistMenu = false
+                    }
+                }
+        }
+
+        // Tap shield to close Stream Info
+        if showStreamInfoSheet {
+            Color.black.opacity(0.5)
+                .ignoresSafeArea()
+                .zIndex(101)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        showStreamInfoSheet = false
                     }
                 }
         }

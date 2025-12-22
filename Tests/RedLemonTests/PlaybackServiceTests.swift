@@ -21,7 +21,7 @@ final class PlaybackServiceTests: XCTestCase {
     }
     
     func testLoadVideo() async {
-        await service.loadVideo(url: "http://example.com/video.mp4", autoplay: true)
+        await service.loadVideo(url: "http://example.com/video.mp4", autoplay: true, expectedSubtitleCount: 0)
         
         XCTAssertEqual(mockController.loadVideoCalls.count, 1)
         XCTAssertEqual(mockController.loadVideoCalls.first?.url, "http://example.com/video.mp4")

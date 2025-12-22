@@ -217,6 +217,8 @@ actor StreamService: StreamResolving {
         // Completely removes anything looking like x265
         let tier1Streams = streamsToTry.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
+            // Whitelist DebridSearch (User Cloud)
+            if stream.provider == "debridsearch" { return stream }
             let hasBadCodec = badCodecs.contains { titleLower.contains($0) }
             return hasBadCodec ? nil : stream
         }
@@ -270,6 +272,11 @@ actor StreamService: StreamResolving {
         let keywordFiltered = filteredStreams.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
             if blockedKeywords.contains(where: { titleLower.contains($0) }) {
+                // Whitelist DebridSearch (User Cloud)
+                if stream.provider == "debridsearch" {
+                    print("🛡️ StreamService: Allowing restricted keyword for DebridSearch: \(stream.title)")
+                    return stream
+                }
                 print("🚫 StreamService: Blocking stream with restricted keyword: \(stream.title)")
                 return nil
             }
@@ -307,6 +314,11 @@ actor StreamService: StreamResolving {
             // 1. Check safe keywords (loose match)
             if safeLocalizedKeywords.contains(where: { titleLower.contains($0) }) {
                 isLocalized = true
+            }
+            
+            // Whitelist DebridSearch from language deprioritization
+            if stream.provider == "debridsearch" {
+                isLocalized = false
             }
 
             // 2. Check risky keywords (strict delimiter match)
@@ -389,6 +401,18 @@ actor StreamService: StreamResolving {
                     // These groups (LoRD, DON, Wiki) produce high-quality encodes that justify the size
                     let trustedHeavyGroups = ["lord", "don", "wiki", "tayto", "sartre", "ctrlhd", "flux", "ntb"]
                     let isTrusted = trustedHeavyGroups.contains { stream.title.lowercased().contains($0) }
+
+                    // 📦 Season Pack Exception: Allow massive files (up to 300GB) if it's a pack
+                    if stream.isPack {
+                        let maxPackBytes: Double = 300 * 1024 * 1024 * 1024
+                        if sizeInBytes < maxPackBytes {
+                            print("📦 StreamService: Allowing massive Season Pack (\(String(format: "%.2f", sizeGB)) GB): \(stream.title)")
+                            return stream
+                        } else {
+                            print("⚠️ StreamService: Skipping Season Pack (Too Large >300GB): \(stream.title) (\(String(format: "%.2f", sizeGB)) GB)")
+                            return nil
+                        }
+                    }
 
                     if isTrusted && sizeInBytes < (30 * 1024 * 1024 * 1024) {
                         print("✨ StreamService: Allowing large file (\(String(format: "%.2f", sizeGB)) GB) from trusted group: \(stream.title)")

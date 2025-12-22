@@ -572,11 +572,15 @@ actor StreamResolver {
                 var score = 0
                 let title = stream.title.lowercased()
 
-                // 0. Strict Title Matching (CRITICAL for Movies)
-                // This ensures "Contact" isn't beaten by "The Contact" just because of seeders/keywords
                 if let target = targetTitle {
                     let matchScore = calculateTitleMatchScore(streamTitle: stream.title, targetTitle: target)
                     score += matchScore
+                }
+
+                // 0.5. Direct URL Boost (Instant Playback)
+                // Prioritize DebridSearch/Direct streams over Torrents that need unlocking
+                if let url = stream.url, (url.hasPrefix("http") || url.hasPrefix("https")) {
+                    score += 100
                 }
 
                 // 1. Explicit English (Highest Priority)

@@ -49,6 +49,7 @@ struct ProviderConfig {
     let zilean: ZileanConfig?
     let jackettio: JackettioConfig?
     let mediafusion: MediaFusionConfig?
+    let debridsearch: DebridSearchConfig?
     
     struct TorrentioConfig {
         let rdConfig: String  // "realdebrid" or empty
@@ -72,6 +73,11 @@ struct ProviderConfig {
     
     struct MediaFusionConfig {
         let config: String  // Encrypted config string
+    }
+    
+    struct DebridSearchConfig {
+        let debridProvider: String  // "RealDebrid", "AllDebrid", "DebridLink", "Premiumize", "TorBox"
+        let debridApiKey: String
     }
 }
 

@@ -235,6 +235,7 @@ struct Stream: Codable, Identifiable {
         case "comet": return "☄️"
         case "zilean": return "📡"
         case "jackettio": return "🧥"
+        case "debridsearch": return "☁️"
         default: return "📡"
         }
     }

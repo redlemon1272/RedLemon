@@ -534,7 +534,7 @@ actor StreamService: StreamResolving {
                 // Optimize: Cap at 5 subtitles to prevent blocking playback start
                 let limitedSubtitles = Array(subtitles.prefix(5))
                 NSLog("📥 StreamService: Pre-downloading %d (capped from %d) subtitles for direct stream...", limitedSubtitles.count, subtitles.count)
-                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles)
+                let downloadedSubs = await downloadSubtitlesInParallel(subtitles: limitedSubtitles, season: season, episode: episode)
                 finalStream.subtitles = downloadedSubs
             }
             return finalStream
@@ -621,6 +621,7 @@ actor StreamService: StreamResolving {
     // MARK: - Subtitle Downloading
 
     func downloadSubtitlesInParallel(subtitles: [Subtitle], season: Int? = nil, episode: Int? = nil) async -> [Subtitle] {
+        NSLog("🐛 StreamService: downloadSubtitlesInParallel called. Season: \(String(describing: season)), Episode: \(String(describing: episode)), Count: \(subtitles.count)")
         // Use a custom session with short timeout to avoid blocking playback
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 3.0 // 3 seconds max per subtitle
@@ -662,14 +663,11 @@ actor StreamService: StreamResolving {
                     if subtitle.url.hasPrefix("/subtitle/") {
                         NSLog("✅ DEBUG: Raw SubDL URL detected, converting to proxy URL")
                         // Convert raw SubDL URL to proxy URL
-                        let encodedPath = Data(subtitle.url.utf8).base64EncodedString()
-                        let proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)?token=\(Config.localAuthToken)"
-
-                        // Create new subtitle with proxy URL
-                        // Append season/episode context for better matching
-                        var finalProxyURL = proxyURL
-                        if let s = season { finalProxyURL += "&season=\(s)" }
-                        if let e = episode { finalProxyURL += "&episode=\(e)" }
+                        // Use shared helper for robust URL construction (handles encoding & params)
+                        let url = LocalAPIClient.shared.getSubtitleURL(downloadPath: subtitle.url, season: season, episode: episode)
+                        let finalProxyURL = url + (url.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
+                        
+                        NSLog("🐛 StreamService: Constructed Proxy URL: %@", finalProxyURL)
 
                         return Subtitle(
                             id: subtitle.id,

@@ -455,52 +455,137 @@ final class SubDLClient {
         if let s = season, let e = episode {
             print("🔍 Looking for S%02dE%02d in zip (%d files)...", s, e, subtitleFiles.count)
 
-            // Strategy 1: Strict SxxExx matching (High confidence)
-            for pattern in searchPatterns {
-                if let match = subtitleFiles.first(where: { $0.lowercased().contains(pattern) }) {
-                    print("✅ Found matching file in zip (Strategy 1 - Strict): \(match)")
-                    bestMatch = match
+            // Normalize filename helper
+            func normalize(_ name: String) -> String {
+                return name.lowercased()
+                    .replacingOccurrences(of: ".", with: " ")
+                    .replacingOccurrences(of: "_", with: " ")
+                    .replacingOccurrences(of: "-", with: " ")
+                    .replacingOccurrences(of: "[", with: " ")
+                    .replacingOccurrences(of: "]", with: " ")
+            }
+
+            // Regex patterns for episode matching
+            let patterns = [
+                // S09E24, S9E24, s09e24
+                "s\(String(format: "%02d", s))e\(String(format: "%02d", e))",
+                "s\(s)e\(e)",
+                // 9x24, 09x24
+                "\(s)x\(e)",
+                "\(String(format: "%02d", s))x\(String(format: "%02d", e))",
+                // E24 (with boundary check done via regex later)
+            ]
+            
+            // Helper to check for multi-episode ranges (e.g. E23-24, E23-E24)
+            func isMultiEpisodeMatch(_ filename: String, targetEpisode: Int) -> Bool {
+                // Look for patterns like "E23-24", "E23-E24", "Episodes 23-24"
+                // Regex: (?:e|episode|ep)\s*(\d+)\s*(?:-|to|thru)\s*(?:e|episode|ep)?\s*(\d+)
+                let rangePattern = "(?:e|episode|ep|\\s)\\s*(\\d+)\\s*(?:-|to|thru)\\s*(?:e|episode|ep)?\\s*(\\d+)"
+                
+                guard let regex = try? NSRegularExpression(pattern: rangePattern, options: .caseInsensitive) else { return false }
+                let nsString = filename as NSString
+                let matches = regex.matches(in: filename, options: [], range: NSRange(location: 0, length: nsString.length))
+                
+                for match in matches {
+                    if match.numberOfRanges >= 3 {
+                        let startStr = nsString.substring(with: match.range(at: 1))
+                        let endStr = nsString.substring(with: match.range(at: 2))
+                        
+                        if let start = Int(startStr), let end = Int(endStr) {
+                            if targetEpisode >= start && targetEpisode <= end {
+                                return true
+                            }
+                        }
+                    }
+                }
+                return false
+            }
+
+            // Strategy 1: Multi-episode Check (Highest Priority)
+            for file in subtitleFiles {
+                if isMultiEpisodeMatch(file, targetEpisode: e) {
+                    print("✅ Found matching file in zip (Strategy 1 - Multi-Episode): \(file)")
+                    bestMatch = file
                     break
                 }
             }
-
-            // Strategy 2: Relaxed matching (Medium confidence)
-            // Look for "14" surrounded by non-digits if episode is 14
+            
+            // Strategy 2: Specific Patterns (SxxExx)
             if bestMatch == nil {
-                let episodePatterns = [
-                    "e\(e)", "e\(String(format: "%02d", e))", // e14, e05
-                    "episode \(e)", "episode \(String(format: "%02d", e))", // episode 14
-                    " \(e) ", " \(String(format: "%02d", e)) " // " 14 "
-                ]
-                
-                // Helper to check if a string contains the episode number as a distinct token
-                func containsEpisodeToken(_ filename: String, episode: Int) -> Bool {
-                    let cleaned = filename.replacingOccurrences(of: ".", with: " ")
-                        .replacingOccurrences(of: "_", with: " ")
-                        .replacingOccurrences(of: "-", with: " ")
-                        .replacingOccurrences(of: "[", with: " ")
-                        .replacingOccurrences(of: "]", with: " ")
-                    
-                    let tokens = cleaned.split(separator: " ")
-                    return tokens.contains { String($0) == String(episode) || String($0) == String(format: "%02d", episode) }
-                }
-
                 for file in subtitleFiles {
                     let lower = file.lowercased()
-                    
-                    // check specific patterns first
-                    if episodePatterns.contains(where: { lower.contains($0) }) {
-                         print("✅ Found matching file in zip (Strategy 2 - Relaxed): \(file)")
-                         bestMatch = file
-                         break
+                    // Check standard patterns
+                    for pattern in patterns {
+                        if lower.contains(pattern.lowercased()) {
+                            print("✅ Found matching file in zip (Strategy 2 - Pattern \(pattern)): \(file)")
+                            bestMatch = file
+                            break
+                        }
                     }
+                    if bestMatch != nil { break }
+                }
+            }
+
+            // Strategy 3: Loose "Episode XX" matching with boundary checks
+            if bestMatch == nil {
+                // Regex for "E24", "Episode 24", " 24 " ensuring distinct numbers
+                // checks for "e24" surrounded by non-digits, or start/end of string
+                // or just "24" surrounded by non-digits
+                let episodeNum = String(e)
+                let paddedNum = String(format: "%02d", e)
+                
+                let loosePatterns = [
+                    "(?:^|[^\\d])e\(episodeNum)(?:[^\\d]|$)",        // e24
+                    "(?:^|[^\\d])e\(paddedNum)(?:[^\\d]|$)",      // e05
+                    "(?:^|[^\\d])episode\\s*\(episodeNum)(?:[^\\d]|$)", // episode 24
+                    "(?:^|[^\\d])\(episodeNum)(?:[^\\d]|$)",          // 24 (risky, but useful for plain numbers)
+                    "(?:^|[^\\d])\(paddedNum)(?:[^\\d]|$)"        // 05
+                ]
+                
+                for file in subtitleFiles {
+                    let norm = normalize(file)
+                    // If we are looking for loose match, we should verify Season if possible
+                    // If file contains S09, and we want S09, that's good.
+                    // If file contains S08, we should skip it.
                     
-                    // check token match as fallback
-                    if containsEpisodeToken(lower, episode: e) {
-                        print("✅ Found matching file in zip (Strategy 3 - Token): \(file)")
-                        bestMatch = file
-                        break
+                    let seasonStr = String(s)
+                    let paddedSeason = String(format: "%02d", s)
+                    
+                    // Simple negative check: if it explicitly says a DIFFERENT season, skip it
+                    // Regex for Sxx where xx != season
+                    let otherSeasonPattern = "s(\\d+)"
+                    if let sRegex = try? NSRegularExpression(pattern: otherSeasonPattern, options: .caseInsensitive) {
+                         let checkStr = norm.replacingOccurrences(of: " ", with: "")
+                         let matches = sRegex.matches(in: checkStr, options: [], range: NSRange(location: 0, length: checkStr.utf16.count))
+                         var hasWrongSeason = false
+                         for m in matches {
+                             let foundS = (checkStr as NSString).substring(with: m.range(at: 1))
+                             if let sInt = Int(foundS), sInt != s {
+                                 hasWrongSeason = true
+                                 break
+                             }
+                         }
+                         if hasWrongSeason { continue }
                     }
+
+                    // Check for loose episode match
+                    for pattern in loosePatterns {
+                        if file.range(of: pattern, options: [.regularExpression, .caseInsensitive]) != nil {
+                            // Boost confidence if it also matches season explicitly
+                            if norm.contains("s\(seasonStr)") || norm.contains("s\(paddedSeason)") || norm.contains("season \(seasonStr)") {
+                                print("✅ Found matching file in zip (Strategy 3 - Loose w/ Season): \(file)")
+                                bestMatch = file
+                                break
+                            }
+                            
+                            // If no season info, we accept it as Candidate but keep looking for a better one? 
+                            // For now, accept it. Use first loose match.
+                             print("✅ Found matching file in zip (Strategy 3 - Loose): \(file)")
+                             bestMatch = file
+                             break
+                        }
+                    }
+                    if bestMatch != nil { break }
                 }
             }
         }

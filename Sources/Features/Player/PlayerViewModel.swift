@@ -176,15 +176,20 @@ class PlayerViewModel: ObservableObject {
                          // Route through local server proxy to handle zip extraction and VTT conversion
                          // This is CRITICAL for MPV to be able to read the files, as it cannot handle
                          // raw relative paths or zip files directly without this proxy.
-                         var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
-                         var queryItems: [String] = []
+                         let pUrl = LocalAPIClient.shared.getSubtitleURL(downloadPath: sub.url, season: watchPartyRoom.season, episode: watchPartyRoom.episode)
+                         // Add token manually or let getSubtitleURL handle it? getSubtitleURL does NOT add token currently, so we add it here?
+                         // Wait, StreamService adds token. PlayerViewModel logic I saw earlier did NOT add token?
+                         // Line 179: var proxyURL = "\(Config.serverURL)/subtitles/subdl/\(encodedPath)"
+                         // It did NOT add token! Is token optional for local requests?
+                         // Server middleware might require it.
+                         // Let's add it to be safe if StreamService adds it.
+                         // But if I add it, I need access to Config.localAuthToken.
+                         // PlayerViewModel imports... checking if Config is available. `Config.serverURL` is used so Config is available.
+                         // But `Config.localAuthToken`?
                          
-                         if let s = watchPartyRoom.season { queryItems.append("season=\(s)") }
-                         if let e = watchPartyRoom.episode { queryItems.append("episode=\(e)") }
-                         
-                         if !queryItems.isEmpty {
-                             proxyURL += "?" + queryItems.joined(separator: "&")
-                         }
+                         var proxyURL = pUrl
+                         // Safe append
+                         proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
                          
                          return Subtitle(
                             id: encodedPath,

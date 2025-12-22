@@ -725,10 +725,24 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         return subtitles
     }
 
-    func getSubtitleURL(downloadPath: String) -> String {
+    func getSubtitleURL(downloadPath: String, season: Int? = nil, episode: Int? = nil) -> String {
         // Encode download path as base64
-        let encodedPath = Data(downloadPath.utf8).base64EncodedString()
-        return "\(baseURL)/subtitles/subdl/\(encodedPath)"
+        let base64 = Data(downloadPath.utf8).base64EncodedString()
+        
+        // Percent encode the base64 string to ensure it doesn't break path routing (e.g. '/' or '+')
+        let encodedPath = base64.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? base64
+        
+        var url = "\(baseURL)/subtitles/subdl/\(encodedPath)"
+        
+        var queryItems: [String] = []
+        if let s = season { queryItems.append("season=\(s)") }
+        if let e = episode { queryItems.append("episode=\(e)") }
+        
+        if !queryItems.isEmpty {
+            url += "?" + queryItems.joined(separator: "&")
+        }
+        
+        return url
     }
 
     // MARK: - Stream Quality Filtering (MPV - Universal Codec Support)

@@ -81,8 +81,11 @@ class HTTPServer {
         if let custom = customTorrentioConfig, !custom.isEmpty {
              NSLog("🔧 Using User-Defined Torrentio Config")
              torrentioConfig = custom
+        } else if let key = rdApiKey {
+             NSLog("✨ Using Auto-Generated Torrentio Config (realdebrid/KEY)")
+             torrentioConfig = "realdebrid/\(key)"
         } else {
-             torrentioConfig = rdApiKey != nil ? "realdebrid" : ""
+             torrentioConfig = ""
         }
 
         let torrentio = TorrentioService(rdConfig: torrentioConfig)

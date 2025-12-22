@@ -25,7 +25,6 @@ struct SettingsView: View {
         return "Unknown"
     }
     @State private var realDebridToken: String = ""
-    @State private var torrentioConfig: String = ""
     @State private var subDLApiKey: String = ""
     @State private var isLoading = false
     @State private var saveMessage: String?
@@ -236,49 +235,6 @@ struct SettingsView: View {
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
 
-            // Torrentio Configuration (Advanced)
-            // Allows users to use custom Stremio configurations
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    Image(systemName: "gear.badge.checkmark")
-                        .font(.title2)
-                        .foregroundColor(.blue)
-                    Text("Torrentio Configuration")
-                        .font(.title3.weight(.semibold))
-
-                    Spacer()
-
-                    // Status indicator
-                    HStack(spacing: 6) {
-                        Circle()
-                            .fill(torrentioConfig.isEmpty ? Color.gray : Color.blue)
-                            .frame(width: 10, height: 10)
-                        Text(torrentioConfig.isEmpty ? "Default" : "Custom")
-                            .font(.body)
-                            .foregroundColor(torrentioConfig.isEmpty ? .secondary : .blue)
-                    }
-                }
-
-                Text("Optional: Paste your custom Torrentio configuration string to find more streams.")
-                    .font(.body)
-                    .foregroundColor(.secondary)
-
-                TextField("realdebrid/...", text: $torrentioConfig)
-                    .textFieldStyle(.roundedBorder)
-                    .font(.system(.title3, design: .monospaced))
-                    .disableAutocorrection(true)
-                
-                // Helper Link
-                Link(destination: URL(string: "https://torrentio.strem.fun/configure")!) {
-                    HStack(spacing: 4) {
-                        Text("Configure Torrentio & Get String")
-                        Image(systemName: "arrow.up.right.square")
-                    }
-                    .font(.callout)
-                    .foregroundColor(.blue)
-                }
-                .padding(.top, 4)
-            }
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
@@ -1009,9 +965,7 @@ struct SettingsView: View {
             subDLApiKey = subdlKey
         }
         
-        if let tConfig = await KeychainManager.shared.getTorrentioConfig() {
-            torrentioConfig = tConfig
-        }
+
 
         // Load RD user info if token exists
         if !realDebridToken.isEmpty {
@@ -1048,8 +1002,7 @@ struct SettingsView: View {
                     )
                 }
                 
-                // Save Torrentio Config
-                await KeychainManager.shared.saveTorrentioConfig(torrentioConfig.trimmingCharacters(in: .whitespacesAndNewlines))
+
 
                 await MainActor.run {
                     messageType = .success

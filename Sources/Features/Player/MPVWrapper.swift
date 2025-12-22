@@ -335,6 +335,13 @@ class MPVWrapper: ObservableObject {
             updateDuration()
             isFileLoaded = true
             
+            // Check true buffering state immediately (prevents stuck spinner if start_file set it true)
+            if let handle = mpvHandle {
+                var isBufferingNow: Int32 = 0
+                mpv_get_property(handle, "paused-for-cache", MPV_FORMAT_FLAG, &isBufferingNow)
+                self.isBuffering = (isBufferingNow != 0)
+            }
+            
             // Smart Paused Load Strategy:
             // 1. We are currently PAUSED (set by loadVideo).
             // 2. We POLL until tracks appear (handling race condition).

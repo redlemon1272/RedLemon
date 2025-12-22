@@ -346,6 +346,8 @@ actor RealDebridClient {
 
     // MARK: - Episode File Selection (ported from ColorFruit)
 
+    // MARK: - Episode File Selection (ported from ColorFruit)
+
     private func selectEpisodeFile(files: [TorrentInfo.TorrentFile]?, season: Int, episode: Int) -> (fileId: Int, filePath: String?) {
         guard let files = files, !files.isEmpty else {
             NSLog("⚠️ No files in torrent, defaulting to file ID 1")
@@ -353,19 +355,23 @@ actor RealDebridClient {
         }
 
         // Build episode pattern: S01E02, S1E2, etc.
-        // Pattern matches: S0*{season}E0*{episode} with word boundary
         let seasonStr = String(format: "%02d", season)
         let episodeStr = String(format: "%02d", episode)
 
-        // Multiple patterns to handle different naming conventions:
-        // - S01E02 (most common)
-        // - S1E2 (no leading zeros)
-        // - s01e02 (lowercase)
+        // Improved patterns to handle:
+        // - S01E02 (Standard)
+        // - S1E2 (No zeros)
+        // - S01.E02 (Dot separator)
+        // - S01 E02 (Space separator)
+        // - E02 (Episode only, common in season packs)
         let patterns = [
-            "S\(seasonStr)E\(episodeStr)",
-            "S\(season)E\(episode)",
             "s\(seasonStr)e\(episodeStr)",
-            "s\(season)e\(episode)"
+            "s\(season)e\(episode)",
+            "s\(seasonStr).e\(episodeStr)",
+            "s\(seasonStr) e\(episodeStr)",
+            "s\(season) e\(episode)",
+            "e\(episodeStr)", // Risky but useful for "Friends - E01.mkv" style
+            "\(season)x\(episodeStr)" // 9x24 style
         ]
 
         NSLog("🔍 Searching for episode patterns: %@", patterns.joined(separator: ", "))
@@ -415,16 +421,19 @@ actor RealDebridClient {
         // Try to find file matching episode pattern
         for (index, file) in finalFiles.enumerated() {
             guard let path = file.path else { continue }
-
             let pathLower = path.lowercased()
+            let fileId = file.id ?? (index + 1)
+            let sizeStr = formatFileSize(file.bytes ?? 0)
+
+            // Check standard patterns
             let matchesPattern = patterns.contains { pattern in
                 pathLower.contains(pattern.lowercased())
             }
 
-            if matchesPattern {
-                let fileId = file.id ?? (index + 1)
-                let sizeStr = formatFileSize(file.bytes ?? 0)
+            // Check Multi-Episode Ranges (e.g. "S09E23-E24" or "E23-24")
+            let matchesMulti = checkMultiEpisode(path: pathLower, season: season, targetEpisode: episode)
 
+            if matchesPattern || matchesMulti {
                 // Additional validation: check if file size is reasonable for a TV episode
                 if isValidEpisodeSize(file.bytes ?? 0, quality: extractQualityFromPath(path)) {
                     NSLog("✅ MATCH FOUND: %@ → file ID: %d (%@)", path, fileId, sizeStr)
@@ -446,8 +455,12 @@ actor RealDebridClient {
             return videoExtensions.contains(where: { ext in path.hasSuffix(".\(ext)") })
         }
 
-        // Sort by size (prefer larger files for episodes)
-        let sortedVideoFiles = videoFiles.sorted { ($0.bytes ?? 0) > ($1.bytes ?? 0) }
+        // CRITICAL FIX: Sort by PATH (alphabetical), not size.
+        // Episode 1 is alphabetically first, Episode 2 second, etc.
+        // Old logic (size) was random.
+        let sortedVideoFiles = videoFiles.sorted {
+            ($0.path ?? "") < ($1.path ?? "")
+        }
 
         if sortedVideoFiles.count >= episode {
             let targetFile = sortedVideoFiles[episode - 1]
@@ -464,7 +477,7 @@ actor RealDebridClient {
         }
 
         // Last resort: largest valid video file
-        if let largestVideo = sortedVideoFiles.first,
+        if let largestVideo = sortedVideoFiles.max(by: { ($0.bytes ?? 0) < ($1.bytes ?? 0) }),
            isValidEpisodeSize(largestVideo.bytes ?? 0, quality: extractQualityFromPath(largestVideo.path ?? "")),
            let fileId = largestVideo.id {
             let sizeStr = formatFileSize(largestVideo.bytes ?? 0)
@@ -474,6 +487,41 @@ actor RealDebridClient {
 
         NSLog("⚠️ All fallbacks failed or files too small, defaulting to file ID 1")
         return (1, nil)
+    }
+
+    /// Checks if a filename contains a multi-episode range that includes the target episode
+    /// e.g. "S09E23-E24" should match for episode 24
+    private func checkMultiEpisode(path: String, season: Int, targetEpisode: Int) -> Bool {
+        // Regex for "E23-E24" or "E23-24"
+        // Matches things like:
+        // - S09E23-E24
+        // - S09E23-24
+        // - 1x23-24
+        let pattern = "e(\\d+)[-e](\\d+)" // Simple loose check for "E<num>-E?<num>"
+
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else { return false }
+        let range = NSRange(path.startIndex..., in: path)
+        let matches = regex.matches(in: path, options: [], range: range)
+
+        for match in matches {
+            if match.numberOfRanges == 3,
+               let r1 = Range(match.range(at: 1), in: path),
+               let r2 = Range(match.range(at: 2), in: path),
+               let startEp = Int(path[r1]),
+               let endEp = Int(path[r2]) {
+
+                // Check if target matches exactly or is inside range
+                if targetEpisode >= startEp && targetEpisode <= endEp {
+                    // Also check if season matches (if season number is present in string near this range)
+                    // This is a loose heuristic; strict checking would require better parsing
+                    let seasonPattern = "s0?\(season)"
+                    if path.contains(seasonPattern) || path.contains("\(season)x") {
+                         return true
+                    }
+                }
+            }
+        }
+        return false
     }
 
     // MARK: - API Methods

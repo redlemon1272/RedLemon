@@ -418,6 +418,8 @@ struct StablePlayerContainer: View, Equatable {
             sourceQuality: sourceQuality,
             isSeries: metadata.type == "series",
             streamHash: streamHash,
+            season: selectedSeason,
+            episode: selectedEpisode,
             onPlaybackFinished: onPlaybackFinished
         )
     }

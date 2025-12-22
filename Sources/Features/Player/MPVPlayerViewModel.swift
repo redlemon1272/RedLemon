@@ -315,6 +315,8 @@ class MPVPlayerViewModel: ObservableObject {
     private var currentStreamHash: String?
     private var currentStreamQuality: String?
     private var currentSourceQuality: String? // NEW: Track source type (CAM, WEB-DL, etc.)
+    private var currentSeason: Int? // NEW: Explicitly track season
+    private var currentEpisode: Int? // NEW: Explicitly track episode
     private var hasVotedForStream: Bool = false
 
     // Accumulator for ACTUAL playback time (to prevent seek abuse)
@@ -376,7 +378,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Initialization
 
-    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool, streamHash: String? = nil, quality: String? = nil, sourceQuality: String? = nil) async {
+    func loadStream(streamURL: String, imdbId: String, streamTitle: String, subtitles: [(url: String, label: String)], isSeries: Bool, isEvent: Bool, streamHash: String? = nil, quality: String? = nil, sourceQuality: String? = nil, season: Int? = nil, episode: Int? = nil) async {
         // For movies, strip any accidental episode markers in stream title (e.g., "S01E01")
         func sanitizedTitle(_ title: String) -> String {
             guard !isSeries else { return title }
@@ -410,6 +412,8 @@ class MPVPlayerViewModel: ObservableObject {
         self.currentStreamHash = streamHash
         self.currentStreamQuality = quality
         self.currentSourceQuality = sourceQuality
+        self.currentSeason = season
+        self.currentEpisode = episode
         self.hasVotedForStream = false // Reset vote state for new stream
 
         // Broadcast watching status
@@ -2776,15 +2780,13 @@ extension MPVPlayerViewModel {
              // Note: duration > 0 check is already in guard
              let accumulatedPercent = duration > 0 ? (accumulatedPlaybackTime / duration) : 0
              // Require 30% of actual Runtime watched (OR 15 mins for long episodes)
-             let tvRuleMet = !isMovie && (accumulatedPercent >= 0.30 || accumulatedPlaybackTime > 900)
+             // AND Require 8 minutes of CONTINUOUS playback to prevent scrub-to-verify
+             let tvRuleMet = !isMovie && 
+                            (accumulatedPercent >= 0.30 || accumulatedPlaybackTime > 900) &&
+                            continuousPlaybackTime > 480
+
 
              if movieRuleMet || tvRuleMet {
-                 print("📊 MPVPlayerViewModel: Vote Trigger Condition Met!")
-                 print("   ℹ️ Type: \(isMovie ? "Movie" : "TV")")
-                 print("   ℹ️ Accumulated: \(Int(accumulatedPlaybackTime))s")
-                 print("   ℹ️ Continuous: \(Int(continuousPlaybackTime))s")
-                 print("   ℹ️ Percent: \(Int(accumulatedPercent * 100))%")
-
                  if let hash = currentStreamHash, let quality = currentStreamQuality {
 
                      // QUALITY GATE: Block CAM and TS sources
@@ -2798,19 +2800,17 @@ extension MPVPlayerViewModel {
                          return
                      }
 
-                     // Helper for logs
-                     let logPrefix = isMovie ? "🎥 Movie (>20m)" : "📺 TV (>30% + 8m cont)"
-                     print("✅ MPVPlayerViewModel: Triggering Community Vote (\(logPrefix))")
-
                      // Extract Season/Episode correctly
                      var seasonVal = -1
                      var episodeVal = -1
 
-                     // Try to grab from AppState if we can
-                     if let player = appState?.player {
-                         if let s = player.selectedSeason { seasonVal = s }
-                         if let e = player.selectedEpisode { episodeVal = e }
-                     }
+                     // Use explicit values if available (Fixed 2025-12-22)
+                     if let s = self.currentSeason { seasonVal = s }
+                     else if let player = appState?.player, let s = player.selectedSeason { seasonVal = s }
+                     
+                     if let e = self.currentEpisode { episodeVal = e }
+                     else if let player = appState?.player, let e = player.selectedEpisode { episodeVal = e }
+
                      // Fallback check: 'selectedMediaItem' might be the episode?
                      // If 'type' is series, we need S/E.
 

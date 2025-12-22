@@ -690,6 +690,10 @@ actor StreamResolver {
     private func hasAcceptableAudioLanguage(_ title: String) -> Bool {
         let lower = title.lowercased()
 
+        // 0. Explicit Whitelist for known Multi-Audio groups
+        // 'Alusia' releases always include original audio + local dub
+        if lower.contains("alusia") { return true }
+
         // 1. Check if explicitly marked as English FIRST
         // Use strict matching for short codes to avoid false positives (e.g. "Fr-en-ch" matching "en")
         let hasEnglish = lower.contains("english") ||

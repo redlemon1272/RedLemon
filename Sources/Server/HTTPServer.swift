@@ -75,7 +75,17 @@ class HTTPServer {
         }
 
         // Register all providers with proper configuration
-        let torrentio = TorrentioService(rdConfig: rdApiKey != nil ? "realdebrid" : "")
+        let customTorrentioConfig = await KeychainManager.shared.getTorrentioConfig()
+        let torrentioConfig: String
+        
+        if let custom = customTorrentioConfig, !custom.isEmpty {
+             NSLog("🔧 Using User-Defined Torrentio Config")
+             torrentioConfig = custom
+        } else {
+             torrentioConfig = rdApiKey != nil ? "realdebrid" : ""
+        }
+
+        let torrentio = TorrentioService(rdConfig: torrentioConfig)
         let comet = CometService(debridApiKey: rdApiKey)
         let zilean = ZileanService()
         let mediafusion = MediaFusionService()

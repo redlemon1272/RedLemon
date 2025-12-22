@@ -142,13 +142,39 @@ actor KeychainManager {
         return username
     }
 
-    /// Delete username
+
     func deleteUsername() async throws {
         NSLog("🗑️ KeychainManager: Deleting username from UserDefaults")
         UserDefaults.standard.removeObject(forKey: "redlemon.username")
         NSUbiquitousKeyValueStore.default.removeObject(forKey: "redlemon.username")
         NSUbiquitousKeyValueStore.default.synchronize()
         NSLog("✅ KeychainManager: Username deleted successfully")
+    }
+
+    // MARK: - Provider Configuration
+
+    /// Save custom Torrentio configuration
+    func saveTorrentioConfig(_ config: String) async {
+        NSLog("💾 KeychainManager: Saving custom Torrentio config")
+        // Use standard UserDefaults as this is a configuration preference
+        UserDefaults.standard.set(config, forKey: "redlemon.torrentio.config")
+        NSUbiquitousKeyValueStore.default.set(config, forKey: "redlemon.torrentio.config")
+        NSUbiquitousKeyValueStore.default.synchronize()
+    }
+
+    /// Get custom Torrentio configuration
+    func getTorrentioConfig() async -> String? {
+        if let iCloudConfig = NSUbiquitousKeyValueStore.default.string(forKey: "redlemon.torrentio.config") {
+            return iCloudConfig
+        }
+        return UserDefaults.standard.string(forKey: "redlemon.torrentio.config")
+    }
+    
+    /// Delete custom Torrentio configuration
+    func deleteTorrentioConfig() async {
+        UserDefaults.standard.removeObject(forKey: "redlemon.torrentio.config")
+        NSUbiquitousKeyValueStore.default.removeObject(forKey: "redlemon.torrentio.config")
+        NSUbiquitousKeyValueStore.default.synchronize()
     }
 
     // MARK: - Keychain Operations

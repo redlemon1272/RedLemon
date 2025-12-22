@@ -546,9 +546,9 @@ class MPVPlayerViewModel: ObservableObject {
             return
         }
 
-        // Show prompt if within last 90 seconds (longer window for credits)
+        // Show prompt if within last 10 seconds (aligned with UI countdown)
         let remaining = self.duration - self.currentTime
-        if remaining < 90 && remaining > 2 {
+        if remaining < 10 && remaining > 0 {
 
              // Check if already showing
              if showNextEpisodePrompt { return }
@@ -577,7 +577,7 @@ class MPVPlayerViewModel: ObservableObject {
              }
         } else {
             // Hide if we scrubbed back or finished
-            if showNextEpisodePrompt && remaining > 95 {
+            if showNextEpisodePrompt && remaining > 15 {
                 showNextEpisodePrompt = false
             }
         }

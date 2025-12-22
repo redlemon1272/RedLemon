@@ -6,6 +6,7 @@ import Combine
 struct StreamResolutionResult {
     let stream: Stream
     let metadata: MediaMetadata
+    var candidateStreams: [Stream] = []
 }
 
 /// Protocol for resolving and unlocking streams
@@ -94,7 +95,7 @@ actor StreamService: StreamResolving {
             do {
                 let unlocked = try await unlockStream(stream: primary, item: item, season: finalSeason, episode: finalEpisode)
                 print("✅ StreamService: Verified stream is VIABLE. Returning immediately.")
-                return StreamResolutionResult(stream: unlocked, metadata: finalMetadata)
+                return StreamResolutionResult(stream: unlocked, metadata: finalMetadata, candidateStreams: [])
             } catch {
                 print("❌ StreamService: Verified stream FAILED to unlock. Falling back to full scrape.")
                 // Retry with verification ignored
@@ -466,7 +467,25 @@ actor StreamService: StreamResolving {
                 } else {
                     print("📊 Stream Size: Unknown")
                 }
-                return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata)
+                
+                // Return selected stream AND remaining candidates
+                // We use finalStreams (all valid streams) and remove the one we just unlocked/selected
+                // NOTE: We do NOT remove previous failed attempts because they failed for a reason (unlock error),
+                // but technically they are still 'candidates' if we wanted to retry them later?
+                // No, if they failed unlock loop here, they are dead.
+                // The loop continues on failure. So 'index' is the current successful one.
+                // The streams AFTER index are candidates.
+                // The streams BEFORE index failed unlock.
+                
+                // However, for robustness, let's just return ALL streams except the current one?
+                // Or just the subsequent ones?
+                // If the previous ones failed "Unlock" (HTTP error), retrying them is probably futile.
+                // So let's return streams from index + 1 onwards.
+                
+                let candidateStreams = Array(finalStreams.dropFirst(index + 1))
+                print("📦 StreamService: Returning \(candidateStreams.count) candidate streams for fallback")
+                
+                return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)
             } catch {
                 // Auto-Report Server Errors (5xx) to Admin Dashboard
                 let errorMsg = error.localizedDescription

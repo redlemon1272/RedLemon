@@ -534,6 +534,8 @@ class MPVWrapper: ObservableObject {
              // Clean up
              self.shouldResumeAfterLoad = false
              mpv_set_property_string(handle, "pause", "no")
+             // CRITICAL: Ensure buffering is reset so ViewModel detects the error
+             self.isBuffering = false
             Task { await SessionRecorder.shared.log(category: .error, message: "Load Video Failed", metadata: ["url": url, "code": "\(result)"]) }
         }
     }

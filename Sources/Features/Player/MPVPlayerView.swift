@@ -388,10 +388,18 @@ struct MPVPlayerView: View {
                 print("🎬 MPVPlayerView: Callback invoked")
             }
         }
+        .onReceive(viewModel.playbackErrorTrigger) { error in
+             print("❌ MPVPlayerView: Playback error detected: \(error). Triggering fallback...")
+             Task {
+                 // Attempt to play the next stream in the queue
+                 // This will handle the UI state update (loading -> new stream OR error)
+                 await appState.player.tryNextStream()
+             }
+        }
         .onDisappear {
             // Stop watch history tracking
             viewModel.stopWatchHistorySaving()
-
+            
             // Stop playback when view disappears - use Task for async
             Task {
                 await viewModel.cleanup()

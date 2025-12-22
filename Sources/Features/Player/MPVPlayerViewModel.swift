@@ -154,6 +154,14 @@ class MPVPlayerViewModel: ObservableObject {
                             print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
                             self.isBuffering = false
                             self.isLoading = false
+                        } else if !self.mpvWrapper.isFileLoaded {
+                            // NEW: Safety check - If buffering stops but file NOT loaded, it meant error/stop
+                            print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
+                            self.isBuffering = false
+                            self.isLoading = false
+                            
+                            // Trigger Error Feedback to View
+                            self.playbackErrorTrigger.send("Playback Failed")
                         }
                     }
                 }
@@ -239,6 +247,9 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var currentTime: Double = 0
     @Published var duration: Double = 0
     @Published var volume: Double = 100
+    // Error Feedback
+    // Changed to PassthroughSubject to avoid UI flash during auto-retry
+    let playbackErrorTrigger = PassthroughSubject<String, Never>()
 
     // Visual state
     @Published var posterURL: String?

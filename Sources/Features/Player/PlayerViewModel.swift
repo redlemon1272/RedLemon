@@ -19,6 +19,7 @@ class PlayerViewModel: ObservableObject {
     @Published var selectedQuality: VideoQuality = .fullHD
     @Published var isResolvingStream = false
     @Published var streamError: String?
+    var streamQueue: [Stream] = [] // Fallback queue for auto-retry logic
     @Published var currentWatchMode: WatchMode = .solo
     @Published var currentRoomId: String?
     @Published var isWatchPartyHost: Bool = false
@@ -62,6 +63,7 @@ class PlayerViewModel: ObservableObject {
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
         await MainActor.run {
             selectedStream = nil // Clear previous stream to prevent stale playback
+            streamQueue = [] // Clear stream queue
             
             // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
             // This ensures the generic background (from Browse) is shown while fetching full details
@@ -225,6 +227,7 @@ class PlayerViewModel: ObservableObject {
                  )
                  resolvedStream = result.stream
                  resolvedMetadata = result.metadata
+                 Task { @MainActor in self.streamQueue = result.candidateStreams }
             } else {
                 // Standard resolution
                 let result = try await streamResolver.resolveStream(
@@ -238,6 +241,7 @@ class PlayerViewModel: ObservableObject {
                 )
                 resolvedStream = result.stream
                 resolvedMetadata = result.metadata
+                Task { @MainActor in self.streamQueue = result.candidateStreams }
             }
             
             guard let finalStream = resolvedStream else {
@@ -551,6 +555,53 @@ class PlayerViewModel: ObservableObject {
             await MainActor.run {
                 streamError = error.localizedDescription
                 isResolvingStream = false
+            }
+        }
+    }
+    
+    func tryNextStream() {
+        guard !streamQueue.isEmpty else {
+            print("🚫 PlayerVM: No more streams in queue. Playback failed.")
+            self.streamError = "Playback Failed: No working streams found."
+            return
+        }
+        
+        let nextStream = streamQueue.removeFirst()
+        print("⏭️ PlayerVM: Falling back to next stream: \(nextStream.title)")
+        
+        
+        DispatchQueue.main.async {
+             // RedLemon: Silent retry (no UI flash)
+             // self.streamError = "Stream failed. Retrying... (\(self.streamQueue.count + 1) left)"
+             print("🔄 Silently retrying next stream (\(self.streamQueue.count + 1) left)")
+        }
+        
+        Task {
+            do {
+                // Step 1: Unlock the stream
+                let season = selectedMediaItem?.type == "series" ? selectedSeason : nil
+                let episode = selectedMediaItem?.type == "series" ? selectedEpisode : nil
+                
+                guard let item = selectedMediaItem else { return }
+                
+                let unlockedStream = try await streamResolver.unlockStream(
+                    stream: nextStream,
+                    item: item,
+                    season: season,
+                    episode: episode
+                )
+                
+                // Step 2: Update Selected Stream (Triggers Player Reload)
+                await MainActor.run {
+                    self.selectedStream = unlockedStream
+                    self.streamError = nil // Clear error if unlock succeeded
+                    // Note: MPVPlayerView should react to this change if the parent view passes the new binding/data
+                }
+                
+            } catch {
+                print("❌ PlayerVM: Fallback stream failed to unlock: \(error.localizedDescription)")
+                // Recursive retry if unlock fails immediately
+                tryNextStream()
             }
         }
     }

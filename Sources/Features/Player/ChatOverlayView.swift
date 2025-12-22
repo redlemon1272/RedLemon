@@ -580,9 +580,9 @@ struct ChatOverlayView: View {
     private var inputPlaceholder: String {
         switch chatMode {
         case .friends: return "Search friends..."
-        case .room: return isAnnouncementMode ? "Broadcast to Room..." : "Message Room..."
-        case .event: return "Message Event..."
-        case .dm: return "Message..."
+        case .room: return isAnnouncementMode ? "Broadcast to Room..." : "Chat (⌘)"
+        case .event: return "Chat (⌘)"
+        case .dm: return "Chat (⌘)"
         }
     }
 

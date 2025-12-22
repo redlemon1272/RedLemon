@@ -1275,7 +1275,7 @@ struct StreamingServiceRow: View {
                     .padding(.horizontal)
 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
+                    LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             MediaCard(item: item)
                                 .onTapGesture {
@@ -1329,7 +1329,7 @@ struct LazyStreamingServiceRow: View {
             } else if !items.isEmpty {
                 // Single row horizontal scroll for all available items
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 16) {
+                    LazyHStack(spacing: 16) {
                         ForEach(items) { item in
                             OptimizedMediaCard(item: item)
                                 .onTapGesture {

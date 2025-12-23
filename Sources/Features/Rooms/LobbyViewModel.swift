@@ -963,24 +963,7 @@ class LobbyViewModel: ObservableObject {
                 self.room.playlist = freshRoom.playlist
                 self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
 
-                // Update AppState to keep it in sync
-                if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
-                    currentRoomParam.playlist = freshRoom.playlist
-                    currentRoomParam.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
-
-                    // CRITICAL FIX: Sync verified stream properties
-                    // This ensures Guest Optimization works (Play from Host Stream) without re-resolving
-                    currentRoomParam.selectedStreamHash = freshRoom.streamHash
-                    currentRoomParam.selectedFileIdx = freshRoom.fileIdx
-                    currentRoomParam.selectedQuality = freshRoom.quality
-                    currentRoomParam.unlockedStreamURL = freshRoom.unlockedStreamUrl
-                    currentRoomParam.subtitleUrl = freshRoom.subtitleUrl
-
-                    self.appState?.player.currentWatchPartyRoom = currentRoomParam
-                    print("✅ Lobby: Synced stream info & playlist to AppState")
-                }
-
-                // Update local room state
+                // Update local room state first (Raw sync)
                 self.room.playlist = freshRoom.playlist
                 self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
                 self.room.selectedStreamHash = freshRoom.streamHash
@@ -988,6 +971,8 @@ class LobbyViewModel: ObservableObject {
                 self.room.selectedQuality = freshRoom.quality
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.subtitleUrl = freshRoom.subtitleUrl
+
+                // NOTE: AppState update moved to AFTER type inference to prevent stale data sync
 
                 // CRITICAL FIX: Syn Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties
@@ -1053,6 +1038,30 @@ class LobbyViewModel: ObservableObject {
                             self.loadMetadata()
                         }
                     }
+                }
+
+                // CRITICAL FIX: Update AppState with CORRECTED room data (Clean Sync)
+                // This must run AFTER the season/episode correction logic above
+                if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
+                    currentRoomParam.playlist = self.room.playlist
+                    currentRoomParam.currentPlaylistIndex = self.room.currentPlaylistIndex
+                    
+                    // Sync corrected season/episode
+                    currentRoomParam.season = self.room.season
+                    currentRoomParam.episode = self.room.episode
+                    
+                    // Sync verified stream properties (ensuring correct hash/fileIdx)
+                    currentRoomParam.selectedStreamHash = self.room.selectedStreamHash
+                    currentRoomParam.selectedFileIdx = self.room.selectedFileIdx
+                    currentRoomParam.selectedQuality = self.room.selectedQuality
+                    currentRoomParam.unlockedStreamURL = self.room.unlockedStreamURL
+                    currentRoomParam.subtitleUrl = self.room.subtitleUrl
+                    
+                    // Sync verified media item
+                    currentRoomParam.mediaItem = self.room.mediaItem
+
+                    self.appState?.player.currentWatchPartyRoom = currentRoomParam
+                    print("✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState")
                 }
 
                 // CRITICAL FIX: Ensure initial item is in playlist (for Host)
@@ -1258,10 +1267,18 @@ class LobbyViewModel: ObservableObject {
                         self.room.episode = nil
                     }
 
-                    // Also update poster/backdrop
                     self.posterURL = mediaItem.posterURL?.absoluteString
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString
                     self.logoURL = mediaItem.logo
+                    
+                    // CRITICAL FIX: Update AppState with changes
+                    if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
+                         currentRoomParam.mediaItem = self.room.mediaItem
+                         currentRoomParam.season = self.room.season
+                         currentRoomParam.episode = self.room.episode
+                         self.appState?.player.currentWatchPartyRoom = currentRoomParam
+                         NSLog("✅ Guest: Synced media change to AppState")
+                    }
                 }
 
                 NSLog("✅ Guest: Updated media item to \(mediaItem.name) (\(expectedType))")

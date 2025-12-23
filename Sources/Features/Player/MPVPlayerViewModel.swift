@@ -2598,6 +2598,13 @@ extension MPVPlayerViewModel {
         NSLog("🔍 DEBUG: readyGuestIds = %@", Array(readyGuestIds).joined(separator: ", "))
         NSLog("🔍 DEBUG: forceSoloStart = %@", forceSoloStart ? "true" : "false")
 
+        let missingIds = connectedGuestIds.subtracting(readyGuestIds)
+        if !missingIds.isEmpty {
+             NSLog("⏳ Waiting for guests: %@", missingIds.joined(separator: ", "))
+        } else {
+             NSLog("✅ All guests reported READY")
+        }
+
         // Ensure Host is ready (video loaded)
         guard hasSentReadySignal else {
             NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)

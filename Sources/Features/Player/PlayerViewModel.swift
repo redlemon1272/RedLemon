@@ -420,8 +420,8 @@ class PlayerViewModel: ObservableObject {
 
         let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
 
-        let targetSeason = season ?? (mediaItem.type == "series" ? selectedSeason : nil)
-        let targetEpisode = episode ?? (mediaItem.type == "series" ? selectedEpisode : nil)
+        let targetSeason = (mediaItem.type == "series") ? (season ?? selectedSeason) : nil
+        let targetEpisode = (mediaItem.type == "series") ? (episode ?? selectedEpisode) : nil
 
         var unlockedStream: Stream?
         var lastError: Error?
@@ -458,7 +458,7 @@ class PlayerViewModel: ObservableObject {
 
                 // Build retry queue: Primary + Candidates
                 let streamsToTry = [result.stream] + result.candidateStreams
-                
+
                 if streamsToTry.isEmpty {
                     throw APIError.noStreamsFound
                 }
@@ -489,12 +489,12 @@ class PlayerViewModel: ObservableObject {
                         continue // Try next candidate
                     }
                 }
-                
+
                 // If we found a stream, break the retry loop
                 if unlockedStream != nil {
                     break
                 }
-                
+
             } catch {
                 print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
                 lastError = error
@@ -664,11 +664,11 @@ class PlayerViewModel: ObservableObject {
                     self.selectedStream = unlockedStream
                     self.streamError = nil // Clear error if unlock succeeded
                     // Note: MPVPlayerView should react to this change if the parent view passes the new binding/data
-                    
+
                     // CRITICAL: If Host, persist new stream selection to Room so guests follow
                     if self.isWatchPartyHost, let room = self.currentWatchPartyRoom, let roomId = self.currentRoomId {
                         print("📡 Watch Party Failover: Persisting new stream to room \(roomId)...")
-                        
+
                         // Update local room object
                         var updatedRoom = room
                         updatedRoom.selectedStreamHash = unlockedStream.infoHash
@@ -676,7 +676,7 @@ class PlayerViewModel: ObservableObject {
                         updatedRoom.selectedQuality = unlockedStream.quality
                         updatedRoom.unlockedStreamURL = unlockedStream.url
                         self.currentWatchPartyRoom = updatedRoom
-                        
+
                         // Persist to Supabase
                         Task {
                             do {
@@ -936,7 +936,7 @@ class PlayerViewModel: ObservableObject {
             // CRITICAL: Ensure movies NEVER have season/episode set, even if passed in (e.g. stale state)
             var finalSeason: Int? = nil
             var finalEpisode: Int? = nil
-            
+
             if mediaItem.type == "series" {
                 finalSeason = season ?? 1
                 finalEpisode = episode ?? 1

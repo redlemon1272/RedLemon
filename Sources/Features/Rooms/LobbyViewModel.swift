@@ -412,12 +412,12 @@ class LobbyViewModel: ObservableObject {
                     // This prevents stale auto-start loops when returning to lobby
                     if let freshRoom = try? await self.dataService.getRoomState(roomId: room.id) {
                         print("✅ Lobby: Refreshed room state. isPlaying: \(freshRoom.isPlaying)")
-                        
+
                         // CRITICAL FIX: Update local media item from fresh room state BEFORE starting playback
                         // This prevents utilizing stale 'room.mediaItem' from a previous session
                         print("🛡️ Lobby: Ensuring local media state is fresh before auto-start check...")
                         await self.updateMediaItemFromRoomState(freshRoom)
-                        
+
                         // Also sync season/episode explicitly just in case updateMediaItemFromRoomState didn't cover it (it does metadata mostly)
                         if let s = freshRoom.season, let e = freshRoom.episode {
                              self.room.season = s
@@ -655,18 +655,18 @@ class LobbyViewModel: ObservableObject {
 
     func startMovie(appState: AppState) async {
         guard isHost else { return }
-        
+
         // CRITICAL FIX: Prevent re-entrancy / race conditions
         // If user clicks start multiple times, or if resolution hangs, ignore subsequent clicks
         guard !isResolvingStream else {
             NSLog("⚠️ Host: startMovie ignored - already resolving stream")
             return
         }
-        
+
         // CRITICAL FIX: Explicitly reset event playback flag
         // This prevents the "Exit Event" button from appearing in User Rooms
         appState.player.isEventPlayback = (room.type == .event)
-        
+
         guard let mediaItem = room.mediaItem else {
             NSLog("❌ Host: Cannot start playback - no media selected")
             return
@@ -675,7 +675,7 @@ class LobbyViewModel: ObservableObject {
         NSLog("🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
-        
+
         // Smart Start Message
         var startMsg = "Host is starting the media"
         if let type = Optional(mediaItem.type.lowercased()) {
@@ -690,12 +690,12 @@ class LobbyViewModel: ObservableObject {
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
         // This ensures guests don't fetch nil stream details
         isResolvingStream = true
-        
+
         // Ensure we reset this flag even if resolution throws
         defer {
              isResolvingStream = false
         }
-        
+
         var preResolvedStream: Stream?
         do {
             preResolvedStream = try await appState.player.resolveAndPersistForWatchParty(
@@ -967,7 +967,7 @@ class LobbyViewModel: ObservableObject {
                 if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
                     currentRoomParam.playlist = freshRoom.playlist
                     currentRoomParam.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
-                    
+
                     // CRITICAL FIX: Sync verified stream properties
                     // This ensures Guest Optimization works (Play from Host Stream) without re-resolving
                     currentRoomParam.selectedStreamHash = freshRoom.streamHash
@@ -975,7 +975,7 @@ class LobbyViewModel: ObservableObject {
                     currentRoomParam.selectedQuality = freshRoom.quality
                     currentRoomParam.unlockedStreamURL = freshRoom.unlockedStreamUrl
                     currentRoomParam.subtitleUrl = freshRoom.subtitleUrl
-                    
+
                     self.appState?.player.currentWatchPartyRoom = currentRoomParam
                     print("✅ Lobby: Synced stream info & playlist to AppState")
                 }
@@ -1350,12 +1350,12 @@ class LobbyViewModel: ObservableObject {
         // CRITICAL FIX: Clear season/episode for movies to prevent type mismatch in API calls
         // If we're switching from a series to a movie, stale season/episode values
         // will cause the resolver to incorrectly try /api/metadata/meta/series/...
-        if item.mediaItem.type.lowercased() == "movie" {
-            self.room.season = nil
-            self.room.episode = nil
-        } else {
+        if item.mediaItem.type.lowercased() == "series" {
             self.room.season = item.season
             self.room.episode = item.episode
+        } else {
+            self.room.season = nil
+            self.room.episode = nil
         }
         self.room.currentPlaylistIndex = index
 

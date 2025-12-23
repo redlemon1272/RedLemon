@@ -156,6 +156,15 @@ class MPVPlayerViewModel: ObservableObject {
                             self.isLoading = false
                         } else if !self.mpvWrapper.isFileLoaded {
                             // NEW: Safety check - If buffering stops but file NOT loaded, it meant error/stop
+
+                            // CRITICAL EXCEPTION: Event Blind Seek
+                            // If we are in an event and duration is 0, we are likely in the middle of a blind seek
+                            // where buffering might toggle briefly before metadata loads.
+                            if self.appState?.player.eventStartTime != nil && self.duration == 0 {
+                                print("⚠️ MPVPlayerViewModel: Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger")
+                                return
+                            }
+
                             print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
                             self.isLoading = false

@@ -135,14 +135,14 @@ class LobbyEventRouter: ObservableObject {
 
         if let senderId = syncMessage.senderId,
            let index = viewModel.participants.firstIndex(where: { $0.id == senderId }) {
-            
+
             // Fix: Duplicate messages (Echo check)
             // If sender is ME, I already updated my local state and added a system message.
             // So we only process logic for OTHERS.
             if senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
-                return 
+                return
             }
-            
+
             let username = viewModel.participants[index].name
             viewModel.participants[index].isReady = isReady
             let recipientRole = viewModel.isHost ? "Host" : "Guest"
@@ -198,20 +198,9 @@ class LobbyEventRouter: ObservableObject {
             viewModel.isStarting = true
             // viewModel.transitionState.isStarting = true // Access control issue likely, check if needed
             viewModel.countdown = Int(syncMessage.timestamp)
-            
-            // Context-aware start message
-            let isEpisode = viewModel.room.mediaItem?.type == "series"
-            
-            // Note: If we don't have a specific .hostStartingEpisode enum case yet, we can use Generic with custom data,
-            // or just rely on .hostStarting if we updated the SystemMessageType definition.
-            // Assuming we only have .hostStarting which maps to "Host is starting the movie", 
-            // we should probably suppress this local message if the Host already sent a System Message.
-            // But to be safe and ensure Guest sees immediate feedback:
-            if isEpisode {
-                 viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is starting the episode..."])
-            } else {
-                 viewModel.chatManager.addSystemMessage(.hostStarting, userName: "Host", data: [:])
-            }
+
+            // Start message is now handled in handleGuestStartLogic after state sync
+            // to ensure correct media type (Episode vs Movie) is displayed.
 
             // Guest automatically starts playback after countdown
             // We delegate this complex logic back to ViewModel or handle locally using VM public methods
@@ -301,6 +290,16 @@ class LobbyEventRouter: ObservableObject {
         // Also ensure currentRoomId is set so PlayerVM knows we are in a room
         viewModel.appState?.player.currentRoomId = viewModel.room.id
 
+        // Show start message to Guest (now that we have valid media type)
+        let type = viewModel.room.mediaItem?.type.lowercased() ?? "movie"
+        var msg = "Host is starting the media..."
+        if type == "series" {
+            msg = "Host is starting the episode..."
+        } else if type == "movie" {
+            msg = "Host is starting the movie..."
+        }
+        viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": msg])
+
         if let season = season, let episode = episode {
             await MainActor.run {
                 viewModel.appState?.selectedSeason = season
@@ -320,15 +319,15 @@ class LobbyEventRouter: ObservableObject {
 
         // NOW wait for countdown
         let fetchDuration = Date().timeIntervalSince(fetchStartTime)
-        // Adjust wait time based on countdown timestamp relative to now if possible, 
+        // Adjust wait time based on countdown timestamp relative to now if possible,
         // but here we just rely on the '3' from the message minus fetch time.
         // We add a visual countdown loop here.
-        
+
         let totalWaitTime = max(0, 3.25 - fetchDuration)
-        
+
         // Visual Countdown Loop
         let startCount = 3
-        
+
         Task { @MainActor in
             viewModel.countdown = startCount
             viewModel.isStarting = true // Ensure UI shows it
@@ -338,14 +337,14 @@ class LobbyEventRouter: ObservableObject {
         for i in 0..<startCount {
              let remaining = startCount - i
              await MainActor.run { viewModel.countdown = remaining }
-             
+
              // Sleep 1s (or partial for last frame)
              try? await Task.sleep(nanoseconds: 1_000_000_000)
         }
-        
+
         // Final sync wait if needed (though loop is approx 3s)
         // We just proceed now.
-        
+
         NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, finished countdown loop")
 
         NSLog("🎬 Guest: Starting playback after countdown")

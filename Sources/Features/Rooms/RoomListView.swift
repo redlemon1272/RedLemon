@@ -96,7 +96,7 @@ struct RoomListView: View {
                                         loadRooms(reset: false)
                                     }
                                 }
-                            
+
                             ProgressView()
                                 .scaleEffect(0.8)
                                 .padding()
@@ -148,7 +148,7 @@ struct RoomListView: View {
                  loadRooms(reset: true)
                  return
             }
-            
+
             try? await Task.sleep(nanoseconds: 500_000_000) // 500ms debounce
             loadRooms(reset: true)
         }
@@ -188,7 +188,7 @@ struct RoomListView: View {
                         newRooms.append(watchPartyRoom)
                     }
                 }
-                
+
                 // ENRICHMENT: Fetch metadata concurrently BEFORE updating state to prevent UI flash
                 // This ensures we have the high-res background art ready for the first render
                 let enrichedRooms = await RoomListView.enrichRoomsWithMetadata(newRooms)
@@ -221,9 +221,9 @@ struct RoomListView: View {
 
     private static func enrichRoomsWithMetadata(_ rooms: [WatchPartyRoom]) async -> [WatchPartyRoom] {
         if rooms.isEmpty { return [] }
-        
+
         var enrichedRooms = rooms
-        
+
         await withTaskGroup(of: (Int, WatchPartyRoom).self) { group in
             for (index, room) in rooms.enumerated() {
                 group.addTask {
@@ -233,7 +233,7 @@ struct RoomListView: View {
                     return (index, updatedRoom ?? room)
                 }
             }
-            
+
             // Collect results safely
             for await (index, enrichedRoom) in group {
                 if index < enrichedRooms.count {
@@ -241,13 +241,24 @@ struct RoomListView: View {
                 }
             }
         }
-        
+
         return enrichedRooms
     }
 
     private func convertSupabaseRoomToWatchPartyRoom(_ room: SupabaseRoom) async -> WatchPartyRoom? {
-        // Determine media type based on season/episode
-        let mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
+        // Determine media type: Check Playlist first to prevent stale "series" inference
+        var mediaType = (room.season != nil || room.episode != nil) ? "series" : "movie"
+
+        // CRITICAL FIX: Check Playlist first to override stale inference from DB
+        if let playlist = room.playlist,
+           let index = room.currentPlaylistIndex,
+           index >= 0, index < playlist.count {
+            let playlistItem = playlist[index]
+            // Only trust playlist type if IDs match (or if checking against raw room data)
+             if playlistItem.mediaItem.id == room.imdbId {
+                mediaType = playlistItem.mediaItem.type
+            }
+        }
 
         // Create a MediaItem from the room data
         let mediaItem = MediaItem(
@@ -268,10 +279,10 @@ struct RoomListView: View {
         // Fetch actual participants from room_participants table first to verify Host presence
         var guests: [Participant] = []
         var host: Participant?
-        
+
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
-            
+
             // ZOMBIE CHECK: Verify host is in the participant list
             guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
                 print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Cleaning up...")
@@ -281,7 +292,7 @@ struct RoomListView: View {
                 }
                 return nil
             }
-            
+
             // Create host participant from REAL data
             host = Participant(
                 id: room.hostUserId.uuidString,
@@ -320,7 +331,7 @@ struct RoomListView: View {
             // If we can't verify participants, skip to avoid showing invalid rooms
             return nil
         }
-        
+
         guard let validatedHost = host else { return nil }
 
         return WatchPartyRoom(
@@ -328,8 +339,8 @@ struct RoomListView: View {
             hostId: validatedHost.id,
             hostName: room.hostUsername,
             mediaItem: mediaItem,
-            season: room.season,
-            episode: room.episode,
+            season: (mediaType == "series") ? room.season : nil,
+            episode: (mediaType == "series") ? room.episode : nil,
             episodeTitle: nil,
             quality: .fullHD,
             sourceQuality: nil,
@@ -562,9 +573,9 @@ struct RoomListView: View {
     private func handleRoomUpdate(_ payload: [String: Any]) async {
         // Log payload for debugging
         // print("📦 Room Update Payload: \(payload)")
-        
+
         let eventType = payload["eventType"] as? String ?? ""
-        
+
         // CASE 1: DELETE (Room Closed)
         if eventType == "DELETE" {
             guard let oldRecord = payload["old"] as? [String: Any],
@@ -583,7 +594,7 @@ struct RoomListView: View {
               let roomId = newRecord["id"] as? String else {
             return
         }
-        
+
         // CHECK: If room became private (Soft Close), remove it
         if let isPublic = newRecord["is_public"] as? Bool, !isPublic {
             print("🙈 RoomListView: Room \(roomId) is now private (Soft Closed) - Removing from list")
@@ -617,7 +628,7 @@ struct RoomListView: View {
                 room.lastActivity = lastActivity
             }
         }
-        
+
         // NEW: Update media info (for playlist progression)
         if let mediaItemData = newRecord["media_item"] as? [String: Any] {
             // Parse MediaItem from JSON
@@ -630,13 +641,20 @@ struct RoomListView: View {
                 }
             }
         }
-        
-        // Update Season/Episode
-        if let season = newRecord["season"] as? Int {
-             room.season = season
-        }
-        if let episode = newRecord["episode"] as? Int {
-             room.episode = episode
+
+        // Update Season/Episode (Only if Series)
+        // Verify against the *current* media item type (updated above)
+        if let type = room.mediaItem?.type, type == "series" {
+            if let season = newRecord["season"] as? Int {
+                 room.season = season
+            }
+            if let episode = newRecord["episode"] as? Int {
+                 room.episode = episode
+            }
+        } else {
+            // For movies, ensure these are cleared if the update payload implies a change (or just to be safe)
+            room.season = nil
+            room.episode = nil
         }
         // If episode changed, we might need to fetch the episode title again
         // But for now, just having the number is good

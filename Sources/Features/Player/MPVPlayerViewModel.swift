@@ -2521,6 +2521,13 @@ extension MPVPlayerViewModel {
     private func sendReadySignal() {
         guard !hasSentReadySignal else { return }
 
+        // CRITICAL FIX: Ensure file is ACTUALLY loaded before sending ready signal
+        // This prevents premature signals (e.g. from durationPub) that race with buffering/loading
+        guard mpvWrapper.isFileLoaded else {
+             NSLog("⚠️ Watch Party: sendReadySignal blocked - File not loaded yet")
+             return
+        }
+
         // Optimistically set true to prevent rapid-fire calls
         hasSentReadySignal = true
 

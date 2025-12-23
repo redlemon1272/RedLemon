@@ -120,6 +120,13 @@ class DebridSearchService: ProviderService {
             guard let title = debridStream.title else {
                 return nil
             }
+
+            // FILTER: Malformed URLs from addon (ending in /undefined)
+            // This happens when the addon fails to resolve the source link
+            if let url = debridStream.url, url.hasSuffix("/undefined") {
+                NSLog("⚠️ DebridSearch: Dropping stream with malformed URL (undefined): \(title)")
+                return nil
+            }
             
             // Parse quality from title (e.g., "1080p", "2160p", "720p")
             let quality = extractQuality(from: title)

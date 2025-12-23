@@ -174,6 +174,14 @@ class MPVPlayerViewModel: ObservableObject {
                                 return
                             }
 
+                            // CRITICAL EXCEPTION: Watch Party Ready Gate
+                            // In Watch Party, we load paused. Buffering might flicker before file is fully loaded.
+                            // If we haven't sent the ready signal (or are at the gate), ignore this.
+                            if self.isInWatchParty && !self.hasSentReadySignal {
+                                print("⚠️ MPVPlayerViewModel: Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger")
+                                return
+                            }
+
                             print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
                             // self.isLoading = false // Keep loading overlay visible during retry fallbacks

@@ -110,6 +110,9 @@ class MPVWrapper: ObservableObject {
         mpv_set_option_string(handle, "alang", "eng,en,english")
         mpv_set_option_string(handle, "slang", "eng,en,english")
 
+        // Network: Fail faster on bad streams (default is often too long)
+        mpv_set_option_string(handle, "network-timeout", "15")
+
         let initResult = mpv_initialize(handle)
         guard initResult >= 0 else {
             NSLog("❌ MPV initialization failed: \(initResult)")

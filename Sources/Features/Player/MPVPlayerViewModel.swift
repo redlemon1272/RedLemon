@@ -244,6 +244,7 @@ class MPVPlayerViewModel: ObservableObject {
     // Startup synchronization: Give guest time to spin up video pipeline
     private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
     private var pendingPlayTask: Task<Void, Never>?
+    private var playbackTimeoutTask: Task<Void, Never>? // NEW: Soft timeout for loading
 
     // Ready Loop: Periodically resend READY signal until playback starts
     private var readyLoopTimer: Timer?
@@ -414,6 +415,10 @@ class MPVPlayerViewModel: ObservableObject {
 
         let cleanStreamTitle = sanitizedTitle(streamTitle)
 
+        // Cancel any pending timeout from previous stream
+        self.playbackTimeoutTask?.cancel()
+        self.playbackTimeoutTask = nil
+
         NSLog("🎬🎬🎬 LOADSTREAM CALLED - streamTitle: %@", cleanStreamTitle)
         NSLog("🎬🎬🎬 streamURL: %@", streamURL.prefix(60) as CVarArg)
         NSLog("🎬🎬🎬 subtitles: %d", subtitles.count)
@@ -461,6 +466,18 @@ class MPVPlayerViewModel: ObservableObject {
         // Reset resume handling flag for new video loads
         self.hasVideoReadyTriggered = false
         self.hasAutoSelectedSubtitles = false // Reset auto-selection flag
+
+        // SOFT TIMEOUT: If video doesn't load in 10s, trigger fallback (faster than MPV 40s)
+        self.playbackTimeoutTask = Task { @MainActor in
+             try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
+             if !Task.isCancelled {
+                 // Check if we are still loading and NO file is loaded
+                 if self.isLoading && !self.mpvWrapper.isFileLoaded {
+                     print("⏱️ Soft Timeout: MPV failed to load file in 10s - triggering fallback")
+                     self.playbackErrorTrigger.send("Playback Timeout")
+                 }
+             }
+        }
 
         // Add mock chat messages for testing UI
         self.messages = [
@@ -667,6 +684,10 @@ class MPVPlayerViewModel: ObservableObject {
             return
         }
         hasVideoReadyTriggered = true
+        
+        // Success! Cancel the soft timeout
+        self.playbackTimeoutTask?.cancel()
+        self.playbackTimeoutTask = nil
 
         print("✅ Video ready - hiding poster")
 

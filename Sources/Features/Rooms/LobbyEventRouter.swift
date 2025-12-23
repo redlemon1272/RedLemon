@@ -7,11 +7,11 @@ import SwiftUI
 @MainActor
 class LobbyEventRouter: ObservableObject {
     private weak var viewModel: LobbyViewModel?
-    
+
     init(viewModel: LobbyViewModel) {
         self.viewModel = viewModel
     }
-    
+
     func handle(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
         guard let chatText = syncMessage.chatText else {
@@ -20,9 +20,9 @@ class LobbyEventRouter: ObservableObject {
         }
 
         // MUTE CHECK: Ignore chat if user is muted
-        if let senderId = syncMessage.senderId, 
-           viewModel.mutedUserIds.contains(senderId), 
-           syncMessage.type == .chat, 
+        if let senderId = syncMessage.senderId,
+           viewModel.mutedUserIds.contains(senderId),
+           syncMessage.type == .chat,
            !chatText.starts(with: "LOBBY_") {
              // System messages (LOBBY_*) are never muted
              return
@@ -39,10 +39,10 @@ class LobbyEventRouter: ObservableObject {
             handleRegularChatMessage(chatText, syncMessage: syncMessage)
         }
     }
-    
+
     private func handleRegularChatMessage(_ chatText: String, syncMessage: SyncMessage) {
         guard let viewModel = viewModel else { return }
-        
+
         viewModel.chatManager.handleIncomingChat(
             chatText: chatText,
             senderId: syncMessage.senderId,
@@ -52,12 +52,12 @@ class LobbyEventRouter: ObservableObject {
             mutedUserIds: viewModel.mutedUserIds
         )
     }
-    
+
     private func handleRoomClosed() async {
         guard let viewModel = viewModel else { return }
-        
+
         NSLog("🔒 Received Room Closed signal from Host")
-        
+
         // FIX: Ignore room closed messages for event rooms (they are persistent)
         if viewModel.room.type == .event {
              NSLog("⚠️ Ignoring Room Closed signal for event room: \(viewModel.room.id)")
@@ -65,7 +65,7 @@ class LobbyEventRouter: ObservableObject {
         }
 
         viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host has left the room"])
-        
+
         // FIX: Don't show alert for the host who initiated the leave
         if !viewModel.isHost {
             // Global Alert + Immediate Exit
@@ -73,16 +73,16 @@ class LobbyEventRouter: ObservableObject {
                  title: "Room Closed",
                  message: "The host has left the room."
             )
-            
+
             viewModel.disconnect()
             viewModel.appState?.currentView = .browse
             viewModel.appState?.restoreWindowFromLobby()
         }
     }
-    
+
     private func handleLobbyCommand(_ chatText: String, syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
-        
+
         if chatText == "LOBBY_JOIN" {
             await handleLobbyJoin(syncMessage)
         } else if chatText == "LOBBY_READY" {
@@ -99,10 +99,10 @@ class LobbyEventRouter: ObservableObject {
              NSLog("⚠️ Unknown lobby command received: '\(chatText)' from \(senderInfo)")
         }
     }
-    
+
     private func handleLobbyJoin(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
-        
+
         if viewModel.isHost {
              let guestUsername = syncMessage.chatUsername ?? "Guest"
              let guestId = syncMessage.senderId ?? UUID().uuidString
@@ -129,17 +129,17 @@ class LobbyEventRouter: ObservableObject {
              NSLog("👋 Received: Guest '\(guestUsername)' joined room \(viewModel.room.id)")
          }
     }
-    
+
     private func handleLobbyReadyChange(_ syncMessage: SyncMessage, isReady: Bool) {
         guard let viewModel = viewModel else { return }
-        
+
         if let senderId = syncMessage.senderId,
            let index = viewModel.participants.firstIndex(where: { $0.id == senderId }) {
             let username = viewModel.participants[index].name
             viewModel.participants[index].isReady = isReady
             let recipientRole = viewModel.isHost ? "Host" : "Guest"
             let stateStr = isReady ? "READY" : "NOT READY"
-            
+
             NSLog("📡 \(recipientRole) received: '\(username)' marked as \(stateStr) via Realtime")
             NSLog("   Sender ID: \(senderId), Room: \(viewModel.room.id)")
 
@@ -154,14 +154,14 @@ class LobbyEventRouter: ObservableObject {
             NSLog("⚠️ Received \(stateStr) from unknown participant: \(syncMessage.senderId ?? "unknown")")
         }
     }
-    
+
     private func handleLobbyKick(_ chatText: String) async {
         guard let viewModel = viewModel else { return }
-        
+
         // Robust parsing: Remove prefix then trim whitespace
         let kickedIdRaw = chatText.replacingOccurrences(of: "LOBBY_KICK:", with: "")
         let kickedId = kickedIdRaw.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+
         // Case-insensitive comparison to prevent mismatches
         if viewModel.participantId.caseInsensitiveCompare(kickedId) == .orderedSame {
             // We were kicked - disconnect and return to browse
@@ -173,7 +173,7 @@ class LobbyEventRouter: ObservableObject {
                     title: "Kicked",
                     message: "You have been kicked from the room."
                 )
-                
+
                 // Trigger disconnect and return to browse
                 viewModel.disconnect()
                 viewModel.appState?.currentView = .browse
@@ -181,10 +181,10 @@ class LobbyEventRouter: ObservableObject {
             }
         }
     }
-    
+
     private func handleLobbyStartCountdown(_ syncMessage: SyncMessage) async {
         guard let viewModel = viewModel else { return }
-        
+
         if !viewModel.isHost {
             NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal")
             viewModel.isStarting = true
@@ -195,15 +195,15 @@ class LobbyEventRouter: ObservableObject {
             // Guest automatically starts playback after countdown
             // We delegate this complex logic back to ViewModel or handle locally using VM public methods
             // For now, delegating back to VM's logic via a new public method or replicate logic here using exposed properties
-            
+
             // Replicating logic here requires access to many VM properties
             await handleGuestStartLogic(timestamp: syncMessage.timestamp)
         }
     }
-    
+
     private func handleGuestStartLogic(timestamp: Double) async {
         guard let viewModel = viewModel else { return }
-        
+
         NSLog("🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing")
 
         // CRITICAL FIX: Update lastRoomPlayingState to prevent DB polling from triggering double-start
@@ -259,19 +259,26 @@ class LobbyEventRouter: ObservableObject {
         let season = roomState.season ?? viewModel.room.season
         let episode = roomState.episode ?? viewModel.room.episode
 
-        if var currentRoom = viewModel.appState?.player.currentWatchPartyRoom {
-            currentRoom.season = season ?? currentRoom.season
-            currentRoom.episode = episode ?? currentRoom.episode
+        // Guarantee we have a room object to update
+        var targetRoom = viewModel.appState?.player.currentWatchPartyRoom ?? viewModel.room
 
-            // IMPORTANT: Copy stream details
-            currentRoom.selectedStreamHash = roomState.streamHash
-            currentRoom.selectedFileIdx = roomState.fileIdx
-            currentRoom.selectedQuality = roomState.quality
-            currentRoom.unlockedStreamURL = roomState.unlockedStreamUrl
+        targetRoom.season = season ?? targetRoom.season
+        targetRoom.episode = episode ?? targetRoom.episode
 
-            viewModel.appState?.player.currentWatchPartyRoom = currentRoom
-            NSLog("✅ Guest: Synced stream details from host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
-        }
+        // CRITICAL SYNC: Enforce host's stream details onto the guest's session
+        // This ensures the Guest's PlayerViewModel sees the specific file/hash the host selected
+        targetRoom.selectedStreamHash = roomState.streamHash
+        targetRoom.selectedFileIdx = roomState.fileIdx
+        targetRoom.selectedQuality = roomState.quality
+        targetRoom.unlockedStreamURL = roomState.unlockedStreamUrl
+
+        // Push update to AppState
+        viewModel.appState?.player.currentWatchPartyRoom = targetRoom
+
+        NSLog("✅ Guest: Forced stream sync from Host (Hash: \(roomState.streamHash?.prefix(8) ?? "nil"))")
+
+        // Also ensure currentRoomId is set so PlayerVM knows we are in a room
+        viewModel.appState?.player.currentRoomId = viewModel.room.id
 
         if let season = season, let episode = episode {
             await MainActor.run {

@@ -228,7 +228,7 @@ class MPVPlayerViewModel: ObservableObject {
     private let driftHistorySize = 5  // Number of samples to average
     private var lastSpeedAdjustmentTime: Date?
     private var currentSpeedAdjustment: Double = 1.0
-    private var networkLatency: Double = 0.05  // Estimated one-way latency (50ms default)
+    var networkLatency: Double = 0.05  // Estimated one-way latency (50ms default)
     private var lastSyncMessageTime: Date?
     private var isCurrentlyAdjustingSpeed: Bool = false
 

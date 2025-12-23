@@ -776,6 +776,8 @@ struct MPVPlayerView: View {
                         quality: streamQuality,
                         source: sourceQuality,
                         hash: streamHash ?? "N/A",
+                        bufferPercent: viewModel.mpvWrapper.getCacheBufferingPercent(),
+                        networkLatency: viewModel.isInWatchParty ? viewModel.networkLatency : nil,
                         isPresented: $showStreamInfoSheet
                     )
                     Spacer()

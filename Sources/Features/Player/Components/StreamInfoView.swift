@@ -13,6 +13,8 @@ struct StreamInfoView: View {
     let quality: String
     let source: String
     let hash: String
+    let bufferPercent: Double
+    let networkLatency: Double?
     
     // Binding to close the view
     @Binding var isPresented: Bool
@@ -50,16 +52,42 @@ struct StreamInfoView: View {
             }
             .padding(.horizontal, 24)
             
+            Divider()
+                .padding(.horizontal, 24)
+            
+            // Network Info Section
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Network Statistics")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 24)
+                
+                StreamInfoRow(label: "Buffer", value: String(format: "%.1f%%", bufferPercent))
+                
+                if let latency = networkLatency {
+                    StreamInfoRow(label: "Network Latency", value: String(format: "%.0f ms", latency * 1000))
+                }
+            }
+            .padding(.horizontal, 24)
+            
             // Copy Debug Info Button
             Button(action: {
-                let debugString = """
+                var debugString = """
                 Stream Info:
                 Title: \(streamTitle)
                 Quality: \(quality)
                 Source: \(source)
                 URL: \(url)
                 Hash: \(hash)
+                
+                Network Stats:
+                Buffer: \(String(format: "%.1f%%", bufferPercent))
                 """
+                
+                if let latency = networkLatency {
+                    debugString += "\nLatency: \(String(format: "%.0f ms", latency * 1000))"
+                }
+                
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString(debugString, forType: .string)
             }) {

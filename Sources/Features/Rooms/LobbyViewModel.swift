@@ -1347,8 +1347,16 @@ class LobbyViewModel: ObservableObject {
 
         // 2. Update local state immediately with what we have
         self.room.mediaItem = item.mediaItem
-        self.room.season = item.season
-        self.room.episode = item.episode
+        // CRITICAL FIX: Clear season/episode for movies to prevent type mismatch in API calls
+        // If we're switching from a series to a movie, stale season/episode values
+        // will cause the resolver to incorrectly try /api/metadata/meta/series/...
+        if item.mediaItem.type.lowercased() == "movie" {
+            self.room.season = nil
+            self.room.episode = nil
+        } else {
+            self.room.season = item.season
+            self.room.episode = item.episode
+        }
         self.room.currentPlaylistIndex = index
 
         // Sync to AppState so MPVPlayerView sees it immediately if active

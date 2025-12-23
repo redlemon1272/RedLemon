@@ -1,0 +1,1346 @@
+2025-12-23 13:55:01.163 RedLemon[12449:139773] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2025-12-23 13:55:01.163 RedLemon[12449:139773] ✅ Cache cleanup timer started (runs every 30 minutes)
+2025-12-23 13:55:01.287 RedLemon[12449:139842] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-23 13:55:01.290 RedLemon[12449:139773] 🔄 Resetting playback state to prevent auto-selection...
+2025-12-23 13:55:01.369 RedLemon[12449:139773] ✅ Playback state reset complete - starting in browse view
+2025-12-23 13:55:01.369 RedLemon[12449:139773] 🔐 APP STARTUP: Loading stored user credentials...
+2025-12-23 13:55:01.369 RedLemon[12449:139773] 🧪 Testing Profile: debug
+2025-12-23 13:55:01.369 RedLemon[12449:139837] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2025-12-23 13:55:01.371 RedLemon[12449:139773] ✅ Keychain: Found stored username: ursinho
+2025-12-23 13:55:01.371 RedLemon[12449:139773] 🔍 Supabase: Looking up user 'ursinho' in database...
+2025-12-23 13:55:01.371 RedLemon[12449:139842] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2025-12-23 13:55:01.508 RedLemon[12449:139839] 📡 SupabaseClient: User lookup response received (340 bytes)
+2025-12-23 13:55:01.526 RedLemon[12449:139839] ✅ SupabaseClient: Decoded 1 users from response
+2025-12-23 13:55:01.526 RedLemon[12449:139839] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-23 13:55:01.527 RedLemon[12449:139773] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-23 13:55:01.575 RedLemon[12449:139773] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2025-12-23 13:55:01.575 RedLemon[12449:139773] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:01.575 RedLemon[12449:139773] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:01.575 RedLemon[12449:139773] 🚀 RedLemon: Starting HTTP server...
+2025-12-23 13:55:01.576 RedLemon[12449:139773] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2025-12-23 13:55:01.598 RedLemon[12449:139773] ✅ RedLemon: HTTPServer instance created
+2025-12-23 13:55:01.599 RedLemon[12449:139839] 📡 RedLemon: Server starting on port 47253...
+2025-12-23 13:55:01.599 RedLemon[12449:139839] ✨ Using Auto-Generated Torrentio Config (realdebrid/KEY)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"DC751CEB-41CD-4A3B-92CF-947D5B2D76D6","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2025-12-23 13:55:03.637 RedLemon[12449:139773] ✅ RedLemon: Server marked as ready
+2025-12-23 13:55:03.672 RedLemon[12449:139773] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2025-12-23 13:55:03.673 RedLemon[12449:139773] 🔍 Performing startup checks...
+2025-12-23 13:55:03.673 RedLemon[12449:139773] ✅ Username-based authentication ready
+2025-12-23 13:55:05.072 RedLemon[12449:139773] 🔍 Performing startup checks...
+2025-12-23 13:55:05.072 RedLemon[12449:139773] ✅ Username-based authentication ready
+2025-12-23 13:55:06.402 RedLemon[12449:139773] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1432 with 445 movies
+✅ [EventsConfig] Using cached movie_events config (version 1432, 445 movies)
+✅ [EventsView] Loaded 445 movies from config version 1432
+🗓 AppState: Updated schedule epoch to 2025-12-23 06:43:55 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-23 18:56:55 +0000
+⏰ AppState: Scheduling update in 114 seconds
+🔍 Supabase Response for /rooms: [{"id":"event_tt1663662","name":"Pacific Rim","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"0d41e65140462dacede11bb87629d52b3c512088","imdb_id":"tt1663662","poster_url":"https://images.metahub.space/poster/small/tt1663662/img","backdrop_url":"https://images.metahub.space/background/medium/tt1663662/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T16:56:29.200956","last_activity":"2025-12-23T16:56:30.763966","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/MV4KBP42Q64KE124/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA=?token=FD14A4CF-1F2E-4AE4-A598-4C490441E8AA"}]
+🔍 Supabase Response for /rooms: []
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1663662/img (784642 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔍 Supabase Response for /rooms: []
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"251DAEB7-9A6B-451D-9FFE-A9FF02FD948A","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtBsX8FYKEInwF","phx_ref_prev":"GIPtAh4nuBCEIspQ","last_seen":"2025-12-23T18:54:52.110Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtCS_46ewM10FB","last_seen":"2025-12-23T18:55:02.432Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"87CBDA96-09E3-4D08-BB24-A003C6C5C6AD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":87958,"eth":2945.195},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":87958,"eth":2945.095},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0","opt eth_getBalance: undefined","eth eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.123s (RTT: 61ms)
+   Local:  2025-12-23 18:55:06 +0000
+   Server: 2025-12-23 18:55:06 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📡 SocialService: Updated status - Browsing: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: 71F1AE34-5801-438E-AB88-890E24977553]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtCoKrpcYM1y-E","phx_ref_prev":"GIPtCS_46ewM10FB","last_seen":"2025-12-23T18:55:08.118Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtCS_46ewM10FB","last_seen":"2025-12-23T18:55:02.432Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for trending
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31844586
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Sisu: Road to Revenge
+🔍 [DEBUG] Successfully created MediaItem: Sisu: Road to Revenge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14107334
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Running Man
+🔍 [DEBUG] Successfully created MediaItem: The Running Man
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14264694
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: World-Breaker
+🔍 [DEBUG] Successfully created MediaItem: World-Breaker
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt14364480
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Successfully created MediaItem: Wake Up Dead Man: A Knives Out Mystery
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27829510
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: High Rollers
+🔍 [DEBUG] Successfully created MediaItem: High Rollers
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32537226
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Hunting Season
+🔍 [DEBUG] Successfully created MediaItem: Hunting Season
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt6604188
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Tron: Ares
+🔍 [DEBUG] Successfully created MediaItem: Tron: Ares
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt37961727
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: La hora de los valientes
+🔍 [DEBUG] Successfully created MediaItem: La hora de los valientes
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34434461
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Dímelo bajito
+🔍 [DEBUG] Successfully created MediaItem: Dímelo bajito
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 50 → 49 items
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3359350/img (25156 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0453467/img (36318 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1798684/img (24844 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt15474916/img (21836 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381061/img (17232 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt16311594/img (19209 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2709692/img (19768 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/66901085/s332/img (47457 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1276104/img (29862 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt15799866/img (31998 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1396484/img (14825 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0195714/img (15790 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14107334/img (28784 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (34496 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4712810/img (37396 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31844586/img (59423 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1663662/img (35899 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (38642 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14264694/img (28879 bytes)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+⏭️ Skipping load for starz - already loaded 15 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302976085/s332/img (50443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322709571/s332/img (58026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181836574/s332/img (40679 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/250757744/s332/img (35420 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309925724/s332/img (65104 bytes)
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322412111/s332/img (57515 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330535890/s332/img (69017 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334220721/s332/img (40321 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/34041780/s332/img (42193 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/35006170/s332/img (61678 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/178152676/s332/img (52860 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/190111218/s332/img (57062 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/238965112/s332/img (63309 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/271349733/s332/img (77031 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181716130/s332/img (52865 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/129198929/s332/img (60050 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/323056248/s332/img (64256 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340363965/s332/img (50506 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/181559139/s332/img (56578 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331474196/s332/img (49409 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/57711426/s332/img (36912 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330575949/s332/img (33224 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301298992/s332/img (50065 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309772554/s332/img (75756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/87608067/s332/img (61832 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/30730782/s332/img (52234 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/76385127/s332/img (66768 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/206714476/s332/img (52991 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/263107555/s332/img (59835 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/240241908/s332/img (80230 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8671419/s332/img (69026 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/21653281/s332/img (35111 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/107996333/s332/img (40620 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/57711426/s332/img (36912 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/82774854/s332/img (70010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/101462527/s332/img (48777 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/90379677/s332/img (56639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340369492/s332/img (63536 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309896363/s332/img (42659 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/215523604/s332/img (61037 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1630029/img (28025 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (19894 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0314331/img (25810 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4712810/img (37396 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32916440/img (14872 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (16512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0499549/img (23095 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0773262/img (33914 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0903747/img (35371 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4574334/img (39579 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0773262/img (33914 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0773262/img (33914 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0903747/img (35371 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0903747/img (35371 bytes)
+💾 Cache SET: Catalog[quick_series_dpe.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for discovery
+🔍 Starting catalog fetch for discovery from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/dpe.json
+🔄 Attempt 1/3 for discovery
+💾 Cache SET: Catalog[catalog_series_dpe.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for discovery
+✅ Successfully fetched 15 items for discovery from primary service
+📦 Full batch loaded: 15 items for discovery
+✅ Progressive loading completed for discovery
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338521628/s332/img (57689 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/311621194/s332/img (41661 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320519859/s332/img (56856 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/143524209/s332/img (20727 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/323204958/s332/img (51833 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312664141/s332/img (62927 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/161482449/s332/img (60890 bytes)
+🔍 BrowseView: Loading content for tab: TV Shows
+🗑️ Cleared all streaming catalogs
+📺 Fetching popular shows...
+[ INFO ] GET /api/metadata/catalog/series/popular [request-id: 91736746-F482-47A8-8185-6146FA922E63]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/series/popular.json
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4574334
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Stranger Things
+🔍 [DEBUG] Successfully created MediaItem: Stranger Things
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10394706
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Deathstroke: Knights & Dragons
+🔍 [DEBUG] Successfully created MediaItem: Deathstroke: Knights & Dragons
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19244304
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: IT: Welcome to Derry
+🔍 [DEBUG] Successfully created MediaItem: IT: Welcome to Derry
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt12637874
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Fallout
+🔍 [DEBUG] Successfully created MediaItem: Fallout
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0460681
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Supernatural
+🔍 [DEBUG] Successfully created MediaItem: Supernatural
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0413573
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Grey's Anatomy
+🔍 [DEBUG] Successfully created MediaItem: Grey's Anatomy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0903747
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Breaking Bad
+🔍 [DEBUG] Successfully created MediaItem: Breaking Bad
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29921437
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Spartacus: House of Ashur
+🔍 [DEBUG] Successfully created MediaItem: Spartacus: House of Ashur
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0096697
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: The Simpsons
+🔍 [DEBUG] Successfully created MediaItem: The Simpsons
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0118933
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: David
+🔍 [DEBUG] Successfully created MediaItem: David
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0203259
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Law & Order: Special Victims Unit
+🔍 [DEBUG] Successfully created MediaItem: Law & Order: Special Victims Unit
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt2565520
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Dragon Ball Absalon
+🔍 [DEBUG] Successfully created MediaItem: Dragon Ball Absalon
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt7587890
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: The Rookie
+🔍 [DEBUG] Successfully created MediaItem: The Rookie
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt0412142
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: House
+🔍 [DEBUG] Successfully created MediaItem: House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt22202452
+🔍 [DEBUG] result.type: series
+🔍 [DEBUG] result.name: Pluribus
+🔍 [DEBUG] Successfully created MediaItem: Pluribus
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_shows_fixed] (15 items)
+✅ Loaded 15 shows
+🧠 Smart reload checking streaming services for tab: TV Shows
+🔄 netflix needs reload
+🔄 prime needs reload
+🔄 disney needs reload
+🔄 hbo needs reload
+🔄 appleTv needs reload
+🔄 paramount needs reload
+🔄 hulu needs reload
+🔄 peacock needs reload
+🔄 starz needs reload
+🔄 showtime needs reload
+🔄 discovery needs reload
+🔄 Smart reloading 11 services: netflix, prime, disney, hbo, appleTv, paramount, hulu, peacock, starz, showtime, discovery
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt19244304/img (26249 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10394706/img (32633 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0413573/img (29264 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12637874/img (25872 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0460681/img (26806 bytes)
+✅ Cache HIT: Catalog[quick_series_dpe.json_7]
+🚀 Quick batch loaded: 7 items for discovery
+🔍 Starting catalog fetch for discovery from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/dpe.json
+🔄 Attempt 1/3 for discovery
+✅ Cache HIT: Catalog[catalog_series_dpe.json]
+✅ Attempt 1 successful for discovery
+✅ Successfully fetched 15 items for discovery from primary service
+📦 Full batch loaded: 15 items for discovery
+✅ Progressive loading completed for discovery
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_series_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_stz.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_hbm.json_7] (7 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_series_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_series_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/series/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_series_pcp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_series_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_hlu.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_series_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_series_nfx.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_series_top.json] (15 items)
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/259327319/s332/img (56599 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/326902644/s332/img (24964 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336772986/s332/img (46193 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338958118/s332/img (55678 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338473116/s332/img (57174 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335509310/s332/img (42276 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335648278/s332/img (32406 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/253355386/s332/img (40400 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/304408237/s332/img (62352 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/306867311/s332/img (42884 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338378015/s332/img (56397 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321537502/s332/img (37499 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176075761/s332/img (55435 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336772986/s332/img (46193 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338975332/s332/img (49045 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336789164/s332/img (34421 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327435051/s332/img (46694 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/177879598/s332/img (48521 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301432214/s332/img (56997 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301988362/s332/img (46214 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336576552/s332/img (49934 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320893741/s332/img (36785 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334446203/s332/img (35852 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/151579076/s332/img (40392 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309999241/s332/img (49875 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/311327470/s332/img (39175 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/134630249/s332/img (60512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320215987/s332/img (43344 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338958118/s332/img (55678 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338092074/s332/img (38217 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321593477/s332/img (49675 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/311327470/s332/img (39175 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/337956403/s332/img (48842 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312155183/s332/img (72190 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336692513/s332/img (32563 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/339014630/s332/img (36290 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322704040/s332/img (31597 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338542807/s332/img (51731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338428328/s332/img (54148 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/337637518/s332/img (50290 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/337328350/s332/img (49236 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176049752/s332/img (33637 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/162759783/s332/img (46109 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307709934/s332/img (31284 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/306986191/s332/img (41759 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243933917/s332/img (33882 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/177294807/s332/img (48851 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/177971916/s332/img (60808 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322602297/s332/img (33251 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335563570/s332/img (58012 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/20119645/s332/img (65966 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176952715/s332/img (44100 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335510962/s332/img (62199 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307016151/s332/img (56678 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301432214/s332/img (56997 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309999241/s332/img (49875 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340331087/s332/img (56044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338092074/s332/img (38217 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/199750248/s332/img (71385 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/177668283/s332/img (35765 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/313866771/s332/img (63131 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/339834760/s332/img (42669 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/247944420/s332/img (47785 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338229669/s332/img (65920 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333986989/s332/img (39860 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334848715/s332/img (40783 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285361370/s332/img (43469 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/340313716/s332/img (55259 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/244244939/s332/img (57862 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334446203/s332/img (35852 bytes)
+⏭️ Skipping load for hbo - already loaded 15 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt8962124/img (37781 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14186672/img (26538 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4574334/img (39579 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt35495073/img (35960 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt22202452/img (22451 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt19244304/img (26249 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12637874/img (25872 bytes)
+⏭️ Skipping load for appleTv - already loaded 15 items
+⏭️ Skipping load for paramount - already loaded 15 items
+⏭️ Skipping load for hulu - already loaded 15 items
+⏭️ Skipping load for peacock - already loaded 15 items
+⏭️ Skipping load for starz - already loaded 15 items
+⏭️ Skipping load for showtime - already loaded 15 items
+⏭️ Skipping load for discovery - already loaded 15 items
+✅ Smart reload completed
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtC24sHiiEInfP","phx_ref_prev":"GIPtBsX8FYKEInwF","last_seen":"2025-12-23T18:55:12.116Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtBsX8FYKEInwF","phx_ref_prev":"GIPtAh4nuBCEIspQ","last_seen":"2025-12-23T18:54:52.110Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🔍 Loading metadata for: Dexter (type: series, id: tt0773262)
+[ INFO ] GET /api/metadata/meta/series/tt0773262 [request-id: 298EAD72-EED1-4326-9040-A07E11C0DB07]
+2025-12-23 13:55:14.230 RedLemon[12449:139979] 📦 Decoded CinemetaMeta - videos count: 125
+2025-12-23 13:55:14.230 RedLemon[12449:139773] ✅ Metadata loaded successfully
+2025-12-23 13:55:14.230 RedLemon[12449:139773]    Type: series
+2025-12-23 13:55:14.230 RedLemon[12449:139773]    Background URL: https://images.metahub.space/background/medium/tt0773262/img
+2025-12-23 13:55:14.230 RedLemon[12449:139773]    Poster URL: https://images.metahub.space/poster/small/tt0773262/img
+2025-12-23 13:55:14.230 RedLemon[12449:139773]    Videos array: 125 episodes
+2025-12-23 13:55:14.231 RedLemon[12449:139773]    - S1E1: Dexter
+2025-12-23 13:55:14.231 RedLemon[12449:139773]    - S1E2: Crocodile
+2025-12-23 13:55:14.231 RedLemon[12449:139773]    - S1E3: Popping Cherry
+2025-12-23 13:55:14.231 RedLemon[12449:139773]    - S1E4: Let's Give the Boy a Hand
+2025-12-23 13:55:14.231 RedLemon[12449:139773]    - S1E5: Love American Style
+2025-12-23 13:55:14.232 RedLemon[12449:139773] 📺 Found 8 seasons with 125 total episodes
+2025-12-23 13:55:18.548 RedLemon[12449:139773] 🎬 Creating Watch Party for: Dexter
+2025-12-23 13:55:18.548 RedLemon[12449:139839] Background: ⏳ Starting room creation (Unstructured Race)...
+2025-12-23 13:55:18.548 RedLemon[12449:139839] Background: ▶️ createRoom task started (Direct Singleton Access)
+2025-12-23 13:55:18.549 RedLemon[12449:139839] 🎬 SupabaseClient: createRoom called for id: TDHH - ENTRY
+2025-12-23 13:55:18.550 RedLemon[12449:139839] 🎬 SupabaseClient: Creating room 'TDHH' for host 'ursinho'...
+2025-12-23 13:55:18.722 RedLemon[12449:139839] ✅ SupabaseClient: Room creation request completed (received response)
+2025-12-23 13:55:18.723 RedLemon[12449:139839] Background: ✅ createRoom task finished
+💾 Cache SET: Metadata[meta_series_tt0773262]
+📺 Season 1 has 12 episodes
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":null}]
+🎭 Lobby: Connecting to room TDHH...
+🚦 Lobby State: connecting
+✅ Cache HIT: Metadata[meta_series_tt0773262]
+🔄 Lobby: Fetching fresh room state from Supabase...
+🛑 Lobby: Host explicitly clearing playback state in DB to prevent autoplay loop
+[ INFO ] GET /api/metadata/meta/series/tt0773262 [request-id: 02A08E32-3085-4135-BE59-F014B808B538]
+2025-12-23 13:55:19.023 RedLemon[12449:139981] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2025-12-23 13:55:19.033 RedLemon[12449:139773] ✅ Host re-joined room TDHH in database (refreshing presence)
+2025-12-23 13:55:19.116 RedLemon[12449:139982] 📡 SupabaseClient: updateRoomPlaylist called for room TDHH with 1 items, index: 0
+2025-12-23 13:55:19.178 RedLemon[12449:139979] ✅ SupabaseClient: Playlist updated successfully
+2025-12-23 13:55:19.313 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:19.313 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:25.928 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:25.928 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+📡 SocialService: Updated status - In Lobby: Dexter: Dexter
+🔌 Setting up Realtime channel: watch-party:TDHH
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:TDHH
+📡 Connection state: connected
+✅ Realtime channel setup complete
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt0773262
+🔍 [DEBUG] meta.type: series
+🔍 [DEBUG] meta.name: Dexter
+🔍 [DEBUG] Successfully created MediaItem from meta: Dexter
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDQmFGr0M15yN","phx_ref_prev":"GIPtCoKrpcYM1y-E","last_seen":"2025-12-23T18:55:18.961Z","room_id":"TDHH","started_at":"2025-12-23T18:55:18.962Z","status":"In Lobby: Dexter","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtCoKrpcYM1y-E","phx_ref_prev":"GIPtCS_46ewM10FB","last_seen":"2025-12-23T18:55:08.118Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Connected to Realtime
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18.883435","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":null}]
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":null}]
+📨 Received: {"ref":"5693925F-8D87-4790-B31A-F0C3A63E5746","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":12321834,"event":"*","filter":"id=eq.TDHH","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:TDHH"}
+✅ Lobby: Loaded metadata for Dexter
+✅ Lobby: Synced playlist with 0 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🆕 Lobby: Auto-adding initial item to playlist: Dexter
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:TDHH"},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDQx6LOUfw6xN","is_host":true,"joined_at":1766516119.001089,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:TDHH"}
+🔌 Setting up Realtime channel: watch-party:TDHH
+   Role: Host
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:TDHH, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Connected to Realtime
+✅ Lobby: Persisted initial playlist item
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDRWbXM0fw-zG","phx_ref_prev":"GIPtDQx6LOUfw6xN","is_host":true,"joined_at":1766516119.170543,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDQx6LOUfw6xN","is_host":true,"joined_at":1766516119.001089,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "TDHH", "name": "Dexter", "season": 1, "episode": 1, "imdb_id": "tt0773262", "playlist": [{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}], "is_public": true, "created_at": "2025-12-23T18:55:18.808428", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0773262/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0773262/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2025-12-23T18:55:18", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 1, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-23T18:55:19.276Z","old_record":{"id": "TDHH"}},"ids":[12321834]},"topic":"realtime:watch-party:TDHH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:18","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDdhCCJgM16gK","phx_ref_prev":"GIPtDQmFGr0M15yN","last_seen":"2025-12-23T18:55:22.435Z","room_id":"TDHH","started_at":"2025-12-23T18:55:18.962Z","status":"In Lobby: Dexter","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDQmFGr0M15yN","phx_ref_prev":"GIPtCoKrpcYM1y-E","last_seen":"2025-12-23T18:55:18.961Z","room_id":"TDHH","started_at":"2025-12-23T18:55:18.962Z","status":"In Lobby: Dexter","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "TDHH", "name": "Dexter", "season": 1, "episode": 1, "imdb_id": "tt0773262", "playlist": [{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}], "is_public": true, "created_at": "2025-12-23T18:55:18.808428", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0773262/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt0773262/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2025-12-23T18:55:25.895431", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-23T18:55:25.899Z","old_record":{"id": "TDHH"}},"ids":[12321834]},"topic":"realtime:watch-party:TDHH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_u2025-12-23 13:55:26.045 RedLemon[12449:139980] 📨 Realtime: Received broadcast message
+2025-12-23 13:55:26.046 RedLemon[12449:139980]    Payload keys: timestamp, chatUsername, type, senderId, chatText, position
+2025-12-23 13:55:26.047 RedLemon[12449:139980] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2025-12-23 13:55:26.047 RedLemon[12449:139980] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-23 13:55:26.047 RedLemon[12449:139980] ✅ Realtime: syncCallback invoked successfully
+2025-12-23 13:55:26.080 RedLemon[12449:139773] 👋 Host received: Guest 'lemontom' joined room TDHH
+2025-12-23 13:55:26.080 RedLemon[12449:139773]    Guest ID: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e, Total participants: 3
+2025-12-23 13:55:26.080 RedLemon[12449:139773] 👥 Room status after join: 3 participants, 0 ready
+2025-12-23 13:55:27.184 RedLemon[12449:139980] Background: ⏰ Timeout fired! Attempting to fail continuation...
+2025-12-23 13:55:27.940 RedLemon[12449:139773] 🎬 Host: Starting movie for 3 participants
+2025-12-23 13:55:28.064 RedLemon[12449:139979] ✅ StreamService: Using provided metadata: Dexter
+2025-12-23 13:55:28.064 RedLemon[12449:139979] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2025-12-23 13:55:28.064 RedLemon[12449:139979] ⚡️ StreamResolver: Resolving streams for tt0773262 (S1E1)
+2025-12-23 13:55:28.065 RedLemon[12449:139982]    📅 Filtering by year: 2006–2013
+ser_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:25.895431","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":null,"imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:25.895431","season":1,"episode":1,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"f13c9cf0-e030-11f0-9fef-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDqmMPFIbf2YM","phx_ref_prev":"GIPtDp3DR68bf7iO","is_host":false,"joined_at":1766516125.996187,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"lemontom","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:TDHH"}
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+ForEach<Array<Participant>, String, ParticipantRow>: the ID 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e occurs multiple times within the collection, this will give undefined results!
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDp29zA6EIlTE","phx_ref_prev":"GIPtC24sHiiEInfP","last_seen":"2025-12-23T18:55:25.783Z","room_id":"TDHH","started_at":"2025-12-23T18:55:25.783Z","status":"In Lobby: Dexter","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}},"leaves":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtC24sHiiEInfP","phx_ref_prev":"GIPtBsX8FYKEInwF","last_seen":"2025-12-23T18:55:12.116Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🎬 Resolving & Persisting stream for Watch Party Room: TDHH
+✅ Cache HIT: Metadata[meta_series_tt0773262]
+[2025-12-23T18:55:28Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Dexter
+🎬 StreamService: Resolving series - trusted pack filtering will be applied server-side
+⚡️ StreamResolver: Found Community Verified stream with 1 votes!
+   ℹ️ Hash: fa27234d7b2456a0d82a4e17a8047ab0a267b823
+   ℹ️ Last Verified: 2025-12-22 19:53:30 +0000
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0773262 (tv) S01E01
+✅ Found 10 subtitles from SubDL (Final)
+🧹 Filtered out 7 mismatched episodes
+✅ StreamResolver: Attached best sub for 'Community Verified Stream (108...': Dexter.S01E01-12.HDTV.eng...
+⚡️ StreamResolver: SHORT CIRCUIT - Returning verified stream immediately.
+⚡️ StreamService: Testing verified stream viability...
+🔓 StreamService: Unlocking with infoHash: fa27234d7b24...
+[ INFO ] POST /api/streams/unlock [request-id: EA193426-F203-4474-A3D6-7C7F4A65F32E]
+2025-12-23 13:55:28.371 RedLemon[12449:139979] 🔓 Unlock request: infoHash=fa27234d7b24..., fileIdx=0
+2025-12-23 13:55:28.371 RedLemon[12449:139979]    📺 TV Show: S1E1
+2025-12-23 13:55:28.372 RedLemon[12449:139979] ✅ Token found, attempting unlock...
+2025-12-23 13:55:29.246 RedLemon[12449:139980] 🔍 Searching for episode patterns: s01e01, s1e1, s01.e01, s01 e01, s1 e1, e01, 1x01
+2025-12-23 13:55:29.246 RedLemon[12449:139980] 📁 Torrent has 96 files:
+2025-12-23 13:55:29.270 RedLemon[12449:139980] ✅ MATCH FOUND: /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv → file ID: 1 (11.6 GB)
+2025-12-23 13:55:30.300 RedLemon[12449:139981] ✅ Unlocked successfully: Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv
+2025-12-23 13:55:30.305 RedLemon[12449:139980] 📥 StreamService: Pre-downloading 3 (capped from 3) subtitles...
+2025-12-23 13:55:30.305 RedLemon[12449:139980] 🐛 StreamService: downloadSubtitlesInParallel called. Season: Optional(1), Episode: Optional(1), Count: 3
+2025-12-23 13:55:30.307 RedLemon[12449:139982] 🔍 DEBUG: Processing subtitle URL: /subtitle/2499104-223225.zip
+2025-12-23 13:55:30.307 RedLemon[12449:139980] 🔍 DEBUG: Processing subtitle URL: /subtitle/2499100-74086.zip
+2025-12-23 13:55:30.307 RedLemon[12449:139981] 🔍 DEBUG: Processing subtitle URL: /subtitle/2499102-91589.zip
+2025-12-23 13:55:30.307 RedLemon[12449:139980] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-23 13:55:30.307 RedLemon[12449:139981] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-23 13:55:30.307 RedLemon[12449:139982] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2025-12-23 13:55:30.309 RedLemon[12449:139981] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDItOTE1ODkuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.309 RedLemon[12449:139980] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDAtNzQwODYuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.309 RedLemon[12449:139982] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDQtMjIzMjI1LnppcA==?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.311 RedLemon[12449:139982] 📥 StreamService: Pre-downloading 3 (capped from 3) subtitles for direct stream...
+2025-12-23 13:55:30.311 RedLemon[12449:139982] 🐛 StreamService: downloadSubtitlesInParallel called. Season: Optional(1), Episode: Optional(1), Count: 3
+2025-12-23 13:55:30.311 RedLemon[12449:139979] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDQtMjIzMjI1LnppcA==?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.311 RedLemon[12449:139982] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDAtNzQwODYuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.311 RedLemon[12449:139980] 🔍 DEBUG: Processing subtitle URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDItOTE1ODkuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:30.311 RedLemon[12449:139979] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2025-12-23 13:55:30.311 RedLemon[12449:139982] ✅ DEBUG: SubDL proxy URL detected, skipping download
+2025-12-23 13:55:30.311 RedLemon[12449:139980] ✅ DEBUG: SubDL proxy URL detected, skipping download
+✅ RD addMagnet: GWPAPPKZVE6Q6
+   [1] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.6 GB)
+   [2] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E02.Crocodile.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.92 GB)
+   [3] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E03.Popping.Cherry.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.15 GB)
+   [4] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E04.Let's.Give.the.Boy.a.Hand.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.16 GB)
+   [5] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E05.Love.American.Style.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.63 GB)
+   [6] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E06.Return.to.Sender.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.18 GB)
+   [7] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E07.Circle.of.Friends.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.03 GB)
+   [8] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E08.Shrink.Wrap.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.32 GB)
+   [9] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E09.Father.Knows.Best.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.71 GB)
+   [10] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E10.Seeing.Red.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.06 GB)
+   [11] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E11.Truth.Be.Told.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.56 GB)
+   [12] /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E12.Born.Free.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.19 GB)
+   [13] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E01.It's.Alive!.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.72 GB)
+   [14] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E02.Waiting.to.Exhale.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.11 GB)
+   [15] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E03.An.Inconvenient.Lie.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.37 GB)
+   [16] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E04.See-Through.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.1 GB)
+   [17] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E05.The.Dark.Defender.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.77 GB)
+   [18] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E06.Dex.Lies.and.Videotape.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.31 GB)
+   [19] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E07.That.Night.a.Forest.Grew.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.06 GB)
+   [20] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E08.Morning.Comes.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.77 GB)
+   [21] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E09.Resistance.Is.Futile.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.02 GB)
+   [22] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E10.There's.Something.About.Harry.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.84 GB)
+   [23] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E11.Left.Turn.Ahead.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.98 GB)
+   [24] /Dexter.S02.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S02E12.The.British.Invasion.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.01 GB)
+   [25] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E01.Our.Father.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.71 GB)
+   [26] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E02.Finding.Freebo.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.85 GB)
+   [27] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E03.The.Lion.Sleeps.Tonight.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.79 GB)
+   [28] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E04.All.in.the.Family.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.88 GB)
+   [29] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E05.Turning.Biminese.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.7 GB)
+   [30] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E06.Si.se.puede.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.7 GB)
+   [31] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E07.Easy.as.Pie.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.6 GB)
+   [32] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E08.The.Damage.a.Man.Can.Do.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12 GB)
+   [33] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E09.About.Last.Night.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.05 GB)
+   [34] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E10.Go.Your.Own.Way.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.95 GB)
+   [35] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E11.I.Had.a.Dream.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.1 GB)
+   [36] /Dexter.S03.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S03E12.Do.You.Take.Dexter.Morgan.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.26 GB)
+   [37] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E01.Living.the.Dream.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.8 GB)
+   [38] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E02.Remains.to.Be.Seen.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.99 GB)
+   [39] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E03.Blinded.by.the.Light.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.36 GB)
+   [40] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E04.Dex.Takes.a.Holiday.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.92 GB)
+   [41] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E05.Dirty.Harry.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.82 GB)
+   [42] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E06.If.I.Had.a.Hammer.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.09 GB)
+   [43] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E07.Slack.Tide.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.47 GB)
+   [44] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E08.Road.Kill.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.96 GB)
+   [45] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E09.Hungry.Man.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.21 GB)
+   [46] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E10.Lost.Boys.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.4 GB)
+   [47] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E11.Hello.Dexter.Morgan.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.21 GB)
+   [48] /Dexter.S04.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S04E12.The.Getaway.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.29 GB)
+   [49] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E01.My.Bad.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.02 GB)
+   [50] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E02.Hello.Bandit.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.12 GB)
+   [51] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E03.Practically.Perfect.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10 GB)
+   [52] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E04.Beauty.and.the.Beast.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.33 GB)
+   [53] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E05.First.Blood.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.39 GB)
+   [54] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E06.Everything.Is.Illumenated.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.33 GB)
+   [55] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E07.Circle.Us.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.84 GB)
+   [56] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E08.Take.It.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.75 GB)
+   [57] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E09.Teenage.Wasteland.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.24 GB)
+   [58] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E10.In.the.Beginning.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11 GB)
+   [59] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E11.Hop.a.Freighter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.67 GB)
+   [60] /Dexter.S05.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S05E12.The.Big.One.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.38 GB)
+   [61] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E01.Those.Kinds.of.Things.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.43 GB)
+   [62] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E02.Once.Upon.a.Time.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.17 GB)
+   [63] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E03.Smokey.and.the.Bandit.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.61 GB)
+   [64] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E04.A.Horse.of.a.Different.Color.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.93 GB)
+   [65] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E05.The.Angel.of.Death.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.69 GB)
+   [66] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E06.Just.Let.Go.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.34 GB)
+   [67] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E07.Nebraska.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.25 GB)
+   [68] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E08.Sin.of.Omission.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.35 GB)
+   [69] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E09.Get.Gellar.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.9 GB)
+   [70] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E10.Ricochet.Rabbit.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.71 GB)
+   [71] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E11.Talk.to.the.Hand.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (10.44 GB)
+   [72] /Dexter.S06.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S06E12.This.Is.the.Way.the.World.Ends.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.15 GB)
+   [73] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E01.Are.You.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.04 GB)
+   [74] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E02.Sunshine.and.Frosty.Swirl.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.72 GB)
+   [75] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E03.Buck.the.System.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.38 GB)
+   [76] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E04.Run.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.71 GB)
+   [77] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E05.Swim.Deep.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.49 GB)
+   [78] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E06.Do.the.Wrong.Thing.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.87 GB)
+   [79] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E07.Chemistry.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.6 GB)
+   [80] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E08.Argentina.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.45 GB)
+   [81] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E09.Helter.Skelter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.32 GB)
+   [82] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E10.The.Dark.Whatever.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (11.66 GB)
+   [83] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E11.Do.You.See.What.I.See.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.41 GB)
+   [84] /Dexter.S07.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S07E12.Surprise.Motherfucker.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (12.13 GB)
+   [85] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E01.A.Beautiful.Day.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.27 GB)
+   [86] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E02.Every.Silver.Lining.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.85 GB)
+   [87] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E03.What's.Eating.Dexter.Morgan.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (7.55 GB)
+   [88] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E04.Scar.Tissue.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (7.55 GB)
+   [89] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E05.This.Little.Piggy.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.21 GB)
+   [90] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E06.A.Little.Reflection.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.33 GB)
+   [91] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E07.Dress.Code.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.95 GB)
+   [92] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E08.Are.We.There.Yet.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.85 GB)
+   [93] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E09.Make.Your.Own.Kind.of.Music.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.35 GB)
+   [94] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E10.Goodbye.Miami.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.97 GB)
+   [95] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E11.Monkey.in.a.Box.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (8.93 GB)
+   [96] /Dexter.S08.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S08E12.Remember.the.Monsters.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv (9.64 GB)
+📺 TV Show: Selected episode S01E01 → file ID: 1, path: /Dexter.S01.BluRay.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv
+📝 RD: Selecting file ID 1 for torrent GWPAPPKZVE6Q6
+📊 RD poll 1/2: status=downloaded, links=1
+🔗 Unrestricting link: https://real-debrid.com/d/ONE2GFA4UUQ5ICBE
+💓 Heartbeat sent
+✅ StreamService: Stream unlocked successfully!
+✅ StreamService: Verified stream is VIABLE. Returning immediately.
+📊 Watch Party Queue: Loaded 0 candidate streams for failover
+🎬 Stream Resolution (Attempt 1): Found 1 streams to attempt unlock...
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ Successfully unlocked stream on attempt 1 (Candidate #0)
+📡 Persisting resolved stream to room TDHH...
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart2025-12-23 13:55:30.416 RedLemon[12449:139980] ✅ Persisted stream selection to room TDHH
+2025-12-23 13:55:30.417 RedLemon[12449:139773] ✅ Host: Stream resolved and persisted OK
+2025-12-23 13:55:30.442 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:30.442 RedLemon[12449:139982] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-23 13:55:30.442 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:30.445 RedLemon[12449:139982]    Payload keys: position, chatUsername, chatText, type, senderId, timestamp
+2025-12-23 13:55:30.446 RedLemon[12449:139981] ✅ Realtime: Message broadcast complete
+2025-12-23 13:55:30.482 RedLemon[12449:139981] 📨 Realtime: Received broadcast message
+2025-12-23 13:55:30.482 RedLemon[12449:139981]    Payload keys: timestamp, chatUsername, type, senderId, position, chatText
+2025-12-23 13:55:30.482 RedLemon[12449:139981] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2025-12-23 13:55:30.482 RedLemon[12449:139981] 📞 Realtime: Invoking syncCallback for message type: chat
+2025-12-23 13:55:30.483 RedLemon[12449:139981] ✅ Realtime: syncCallback invoked successfully
+2025-12-23 13:55:30.497 RedLemon[12449:139773] ✅ Host: Successfully broadcast LOBBY_START_COUNTDOWN via Realtime
+2025-12-23 13:55:30.497 RedLemon[12449:139773] 📡 Realtime delivery confirmed for 2 guests
+2025-12-23 13:55:30.516 RedLemon[12449:139773] ✅ Host: Set room playback state in database as fallback
+2025-12-23 13:55:30.561 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:30.561 RedLemon[12449:139773] 📨 Lobby: Received Room UPDATE from Realtime
+2025-12-23 13:55:33.459 RedLemon[12449:139773] 🎬 Host: Launching player for Dexter
+2025-12-23 13:55:33.459 RedLemon[12449:139773] 🖥️ WindowManager: enterFullscreen() called
+2025-12-23 13:55:33.460 RedLemon[12449:139773]    Window: <SwiftUI.SwiftUIWindow: 0x7fd4b1da68a0>
+2025-12-23 13:55:33.460 RedLemon[12449:139773]    Is fullscreen: 0
+2025-12-23 13:55:33.460 RedLemon[12449:139773]    ✅ WindowManager: Toggling fullscreen ON
+2025-12-23 13:55:33.526 RedLemon[12449:139773] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/De, subtitles: 3
+. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Stream persisted! Hash: fa27234d7b2456a0d82a4e17a8047ab0a267b823
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "TDHH", "name": "Dexter", "season": 1, "episode": 1, "imdb_id": "tt0773262", "playlist": [{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}], "is_public": true, "created_at": "2025-12-23T18:55:18.808428", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt0773262/img", "description": null, "stream_hash": "fa27234d7b2456a0d82a4e17a8047ab0a267b823", "backdrop_url": "https://images.metahub.space/background/medium/tt0773262/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2025-12-23T18:55:30", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-23T18:55:30.514Z","old_record":{"id": "TDHH"}},"ids":[12321834]},"topic":"realtime:watch-party:TDHH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:TDHH"}
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "TDHH", "name": "Dexter", "season": 1, "episode": 1, "imdb_id": "tt0773262", "playlist": [{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}], "is_public": true, "created_at": "2025-12-23T18:55:18.808428", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt0773262/img", "description": null, "stream_hash": "fa27234d7b2456a0d82a4e17a8047ab0a267b823", "backdrop_url": "https://images.metahub.space/background/medium/tt0773262/img", "host_user_id": "656daa91-33b4-4688-9135-c982ea52d7c9", "subtitle_url": null, "host_username": "ursinho", "last_activity": "2025-12-23T18:55:30", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2025-12-23T18:55:30.606Z","old_record":{"id": "TDHH"}},"ids":[12321834]},"topic":"realtime:watch-party:TDHH"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"TDHH","name":"Dexter","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"ursinho","stream_hash":"fa27234d7b2456a0d82a4e17a8047ab0a267b823","imdb_id":"tt0773262","poster_url":"https://images.metahub.space/poster/small/tt0773262/img","backdrop_url":"https://images.metahub.space/background/medium/tt0773262/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T18:55:18.808428","last_activity":"2025-12-23T18:55:30","season":1,"episode":1,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "44D90B20-2985-4A04-9304-01435DDCFD7E", "season": 1, "episode": 1, "mediaItem": {"id": "tt0773262", "logo": "https://images.metahub.space/logo/medium/tt0773262/img", "name": "Dexter", "type": "series", "year": "2006–2013", "genres": ["Crime", "Drama", "Mystery"], "poster": "https://images.metahub.space/poster/small/tt0773262/img", "runtime": "53 min", "background": "https://images.metahub.space/background/medium/tt0773262/img", "imdbRating": "8.6", "description": "He's smart. He's lovable. He's Dexter Morgan, America's favorite serial killer, who spends his days solving crimes and his nights committing them.", "releaseInfo": "2006–2013"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced stream info & playlist to AppState
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEBdagRCEIqsB","phx_ref_prev":"GIPtDp29zA6EIlTE","last_seen":"2025-12-23T18:55:32.117Z","room_id":"TDHH","started_at":"2025-12-23T18:55:25.783Z","status":"In Lobby: Dexter","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}},"leaves":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDp29zA6EIlTE","phx_ref_prev":"GIPtC24sHiiEInfP","last_seen":"2025-12-23T18:55:25.783Z","room_id":"TDHH","started_at":"2025-12-23T18:55:25.783Z","status":"In Lobby: Dexter","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+✅ Host: Updated AppState selection to S1E1
+✅ Host: Synced playlist state to AppState (Index: 0)
+✨ StablePlayerContainer: Found episode title: Dexter
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/De
+   Display Title: Dexter - S01E01: Dexter
+   Subtitle URLs: 3
+      [0] Dexter.S01E01-12.HDTV.eng
+      [1] dexter.101.hdtv-lol
+      [2] Dexter. Season.1.720p.HDTV.X264
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.22025-12-23 13:55:33.885 RedLemon[12449:139773] 🖼️ Setting up MPV with native macOS video output...
+2025-12-23 13:55:33.895 RedLemon[12449:139773] ✅ MPV initialized with native GPU rendering
+2025-12-23 13:55:33.911 RedLemon[12449:139773] 🎬🎬🎬 MPVPlayerView .task starting
+2025-12-23 13:55:33.911 RedLemon[12449:139773] 🎉 Starting watch party sync - Room: TDHH, Host: YES
+2025-12-23 13:55:33.911 RedLemon[12449:139773] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2025-12-23 13:55:33.953 RedLemon[12449:139773] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2025-12-23 13:55:33.954 RedLemon[12449:139773] 🔍 DEBUG: checkIfAllGuestsReady called
+2025-12-23 13:55:33.954 RedLemon[12449:139773] 🔍 DEBUG: hasSentReadySignal = true
+2025-12-23 13:55:33.954 RedLemon[12449:139773] 🔍 DEBUG: connectedGuestIds = 
+2025-12-23 13:55:33.954 RedLemon[12449:139773] 🔍 DEBUG: readyGuestIds = 
+2025-12-23 13:55:33.954 RedLemon[12449:139773] 🔍 DEBUG: forceSoloStart = false
+2025-12-23 13:55:33.954 RedLemon[12449:139773] ⏳ No guests connected yet (waiting for presence updates)
+2025-12-23 13:55:33.960 RedLemon[12449:139773] 🔄 Starting chat polling for room: TDHH
+2025-12-23 13:55:33.960 RedLemon[12449:139773] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2025-12-23 13:55:33.960 RedLemon[12449:139773] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2025-12-23 13:55:33.961 RedLemon[12449:139773] 🎬🎬🎬 Subtitles: 3
+2025-12-23 13:55:33.961 RedLemon[12449:139773] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Dexter - S01E01: Dexter
+2025-12-23 13:55:33.961 RedLemon[12449:139773] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/De
+2025-12-23 13:55:33.961 RedLemon[12449:139773] 🎬🎬🎬 subtitles: 3
+2025-12-23 13:55:33.962 RedLemon[12449:139773] 🎬🎬🎬 MPVPlayerView .task completed
+2025-12-23 13:55:33.962 RedLemon[12449:139981] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:33.962 RedLemon[12449:139981]    Payload keys: type, senderId, timestamp, isPlaying, position
+2025-12-23 13:55:33.963 RedLemon[12449:139979] ✅ Realtime: Message broadcast complete
+2025-12-23 13:55:33.964 RedLemon[12449:139773] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0773262/img
+2025-12-23 13:55:33.964 RedLemon[12449:139773] ⏳ Background art loading...
+2025-12-23 13:55:33.965 RedLemon[12449:139773] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0773262/img
+2025-12-23 13:55:33.965 RedLemon[12449:139773] ⏳ Logo loading...
+2025-12-23 13:55:34.002 RedLemon[12449:139979] 📨 Realtime: Received broadcast message
+2025-12-23 13:55:34.002 RedLemon[12449:139979]    Payload keys: senderId, position, type, timestamp, isPlaying
+2025-12-23 13:55:34.003 RedLemon[12449:139979] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:34.003 RedLemon[12449:139979] 📞 Realtime: Invoking syncCallback for message type: ready
+2025-12-23 13:55:34.003 RedLemon[12449:139979] ✅ Realtime: syncCallback invoked successfully
+2025-12-23 13:55:34.044 RedLemon[12449:139773] ✅ Logo loaded successfully
+2025-12-23 13:55:34.047 RedLemon[12449:139773] ✅ Watch Party: READY signal sent successfully
+2025-12-23 13:55:34.047 RedLemon[12449:139979] 🎬 MPV: Current video filename set to: Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv
+2025-12-23 13:55:34.048 RedLemon[12449:139980] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2025-12-23 13:55:34.048 RedLemon[12449:139979] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC., autoplay: false, expectedSubs: 3
+2025-12-23 13:55:34.048 RedLemon[12449:139980] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDItOTE1ODkuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+2025-12-23 13:55:34.048 RedLemon[12449:139979] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/Dexter.S01E01.Dexter.1080p.TrueHD.5.1.AVC.REMUX-FraMeSToR.mkv"
+2025-12-23 13:55:34.048 RedLemon[12449:139979] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:34.049 RedLemon[12449:139773] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: checkIfAllGuestsReady called
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: hasSentReadySignal = true
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: connectedGuestIds = 
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: readyGuestIds = 656DAA91-33B4-4688-9135-C982EA52D7C9
+2025-12-23 13:55:34.049 RedLemon[12449:139773] 🔍 DEBUG: forceSoloStart = false
+2025-12-23 13:55:34.049 RedLemon[12449:139773] ⏳ No guests connected yet (waiting for presence updates)
+)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=TDHH, isHost=true
+🔌 Setting up Realtime channel: watch-party:TDHH
+   Role: Host
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:TDHH, skipping join
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+📡 Connection state: connected
+✅ Realtime channel setup complete
+👋 Watch Party: Video ready (playing), sending READY signal as fallback
+📝 Started watch history tracking
+⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State
+❌ MPVPlayerView: Playback error detected: Playback Failed. Triggering fallback...
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Dexter - S01E01: Dexter
+   IMDB: tt0773262
+   URL: https://chi5-4.download.real-debrid.com/d/YC6VTTZLA5IJU44/De...
+   Hash: fa27234d...
+   Source: Unknown
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+🚫 PlayerVM: No more streams in queue. Playback failed.
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIX5n20fw-jC","phx_ref_prev":"GIPtDRWbXM0fw-zG","is_host":true,"joined_at":1766516133.934123,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDRWbXM0fw-zG","phx_ref_prev":"GIPtDQx6LOUfw6xN","is_host":true,"joined_at":1766516119.170543,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1766516133.953864,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:TDHH"}
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+📡 Fetching metadata for tt0773262 as series...
+📝 Pre-loading external subtitles (Top 3)...
+⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State
+✅ Cache HIT: Metadata[meta_series_tt0773262]
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIPtEIX5n20fw-jC)
+⚡️ PlaybackService: releasing sleep assertion
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+🧹 Cleaning up MPV player...
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDItOTE1ODkuemlw [request-id: C5753EA2-A24D-403E-AE38-F49CE3DE9A02]
+2025-12-23 13:55:34.101 RedLemon[12449:139773] ✅ Background art loaded successfully
+2025-12-23 13:55:34.436 RedLemon[12449:139773] 👥 MPVPlayer: Updated participants list via polling: 2
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/C3028AE9-5480-42D9-8C04-3A4690F8F344.zip or
+        /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/C3028AE9-5480-42D9-8C04-3A4690F8F344.zip.zip, and cannot find /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/C3028AE9-5480-42D9-8C04-3A4690F8F344.zip.ZIP, period.
+📄 Subtitle request: L3N1YnRpdGxlLzI0OTkx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2499102-91589.zip
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIyBQbIM18CG","phx_ref_prev":"GIPtDdhCCJgM16gK","last_seen":"2025-12-23T18:55:34.047Z","room_id":"TDHH","started_at":"2025-12-23T18:55:34.047Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter - S01E01: Dexter","watching_type":"series"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtDdhCCJgM16gK","phx_ref_prev":"GIPtDQmFGr0M15yN","last_seen":"2025-12-23T18:55:22.435Z","room_id":"TDHH","started_at":"2025-12-23T18:55:18.962Z","status":"In Lobby: Dexter","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIyD34MM18JF","phx_ref_prev":"GIPtEIyBQbIM18CG","last_seen":"2025-12-23T18:55:34.050Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIyBQbIM18CG","phx_ref_prev":"GIPtDdhCCJgM16gK","last_seen":"2025-12-23T18:55:34.047Z","room_id":"TDHH","started_at":"2025-12-23T18:55:34.047Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0773262","watching_title":"Dexter - S01E01: Dexter","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt0773262/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0773262/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0773262/img...
+📡 SocialService: Updated status - online: Dexter - S01E01: Dexter
+📡 SocialService: Updated status - Browsing: 
+⏰ AppState: Next schedule update set for Next Event Start: 2025-12-23 18:56:55 +0000
+⏰ AppState: Scheduling update in 81 seconds
+🗑️ Invalidated all active timers
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🧹 Cleaning up Realtime channel for room: TDHH
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🛑 Event polling task cancelled cleanly
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"ed389b18-e030-11f0-8f1b-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIX5n20fw-jC","phx_ref_prev":"GIPtDRWbXM0fw-zG","is_host":true,"joined_at":1766516133.934123,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:TDHH"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:TDHH"}
+📨 Unknown event: phx_close
+🔍 Supabase Response for /rooms: [{"id":"event_tt1663662","name":"Pacific Rim","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":"0d41e65140462dacede11bb87629d52b3c512088","imdb_id":"tt1663662","poster_url":"https://images.metahub.space/poster/small/tt1663662/img","backdrop_url":"https://images.metahub.space/background/medium/tt1663662/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2025-12-23T16:56:29.200956","last_activity":"2025-12-23T16:56:30.763966","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://chi3-4.download.real-debrid.com/d/MV4KBP42Q64KE124/Pacific.Rim.2013.1080p.BluRay.H264.AAC-RARBG.mp4","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzQ0ODc3LTc5NDcwNS56aXA=?token=FD14A4CF-1F2E-4AE4-A598-4C490441E8AA"}]
+✅ MPV stop completed with clean event loop exit
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEKaRGqSEIgmC","phx_ref_prev":"GIPtEBdagRCEIqsB","last_seen":"2025-12-23T18:55:34.537Z","room_id":"TDHH","started_at":"2025-12-23T18:55:34.537Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0773262","watching_title":"Dexter - S01E01: Dexter","watching_type":"series"}]}},"leaves":{"a18e7728-e030-11f0-8cae-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEBdagRCEIqsB","phx_ref_prev":"GIPtDp29zA6EIlTE","last_seen":"2025-12-23T18:55:32.117Z","room_id":"TDHH","started_at":"2025-12-23T18:55:25.783Z","status":"In Lobby: Dexter","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0773262","watching_title":"Dexter","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 270150 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No subtitle files found in zip list output:
+Archive:  /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/C3028AE9-5480-42D9-8C04-3A4690F8F344.zip
+
+🔍 Looking for S%02dE%02d in zip (%d files)... 1 1 0
+[ WARNING ] Abort.404: No subtitle files found in zip [request-id: C5753EA2-A24D-403E-AE38-F49CE3DE9A02]
+2025-12-23 13:55:35.095 RedLemon[12449:140049] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CD0568F2-88DF-450D-ACB7-E96D0D79EF82.vtt
+2025-12-23 13:55:35.095 RedLemon[12449:140049] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CD0568F2-88DF-450D-ACB7-E96
+2025-12-23 13:55:35.095 RedLemon[12449:140049] ❌ Failed to load subtitle, MPV error code: -12
+2025-12-23 13:55:35.095 RedLemon[12449:140049] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDAtNzQwODYuemlw?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDAtNzQwODYuemlw [request-id: D1A264A1-EE6B-4D1A-95FA-88A3AFE726CA]
+2025-12-23 13:55:35.528 RedLemon[12449:140049] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_30A1F9BB-F256-4374-BB06-9300773167BE.vtt
+2025-12-23 13:55:35.528 RedLemon[12449:140049] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_30A1F9BB-F256-4374-BB06-930
+2025-12-23 13:55:35.528 RedLemon[12449:140049] ❌ Failed to load subtitle, MPV error code: -12
+2025-12-23 13:55:35.528 RedLemon[12449:140049] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDQtMjIzMjI1LnppcA==?season=1&episode=1&token=4EDBFF97-73C6-43D1-A3EA-9D7B82218EB8
+📄 Subtitle request: L3N1YnRpdGxlLzI0OTkx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2499100-74086.zip
+✅ Download complete: 19031 bytes
+📦 Detected ZIP archive, extracting...
+🗑️ MPVViewLayer deinit
+🔍 Looking for S%02dE%02d in zip (%d files)... 1 1 1
+⚠️ No specific episode match found, using first file: dexter.101.hdtv-lol.srt
+📦 Extracting specific file: dexter.101.hdtv-lol.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzI0OTkxMDQtMjIzMjI1LnppcA== [request-id: A1124D06-8198-40DD-9831-6ED8E72CCA4D]
+  End-of-central-directory signature not found.  Either this file is not
+  a zipfile, or it constitutes one disk of a multi-part archive.  In the
+  latter case the central directory and zipfile comment will be found on
+  the last disk(s) of this archive.
+unzip:  cannot find zipfile directory in one of /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/A75CCB9A-801C-48D6-A0EB-3D4FEE274174.zip or
+        /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/A75CCB9A-801C-48D6-A0EB-3D4FEE274174.zip.zip, and cannot find /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/A75CCB9A-801C-48D6-A0EB-3D4FEE274174.zip.ZIP, period.
+📄 Subtitle request: L3N1YnRpdGxlLzI0OTkx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/2499104-223225.zip
+✅ Download complete: 268524 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No subtitle files found in zip list output:
+Archive:  /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/A75CCB9A-801C-48D6-A0EB-3D4FEE274174.zip
+
+🔍 Looking for S%02dE%02d in zip (%d files)... 1 1 0
+[ WARNING ] Abort.404: No subtitle files found in zip [request-id: A1124D06-8198-40DD-9831-6ED8E72CCA4D]
+2025-12-23 13:55:35.906 RedLemon[12449:139980] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_04A88903-A2B1-4C24-839C-06A815AAC38B.vtt
+2025-12-23 13:55:35.906 RedLemon[12449:139980] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_04A88903-A2B1-4C24-839C-06A
+2025-12-23 13:55:35.906 RedLemon[12449:139980] ❌ Failed to load subtitle, MPV error code: -12
+2025-12-23 13:55:35.907 RedLemon[12449:139980] 🔍 MPV track-list/count: 0
+2025-12-23 13:55:35.907 RedLemon[12449:139980] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-23 13:55:35.907 RedLemon[12449:139980]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-23 13:55:35.909 RedLemon[12449:139980] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2025-12-23 13:55:35.909 RedLemon[12449:139980]    Track: ID=0, Title=Off, External=0
+2025-12-23 13:55:36.909 RedLemon[12449:139982] 🔍 MPV track-list/count: 0
+2025-12-23 13:55:36.910 RedLemon[12449:139982] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-23 13:55:36.910 RedLemon[12449:139982]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-23 13:55:36.910 RedLemon[12449:139982] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2025-12-23 13:55:36.910 RedLemon[12449:139982]    Track: ID=0, Title=Off, External=0
+2025-12-23 13:55:37.911 RedLemon[12449:139982] 🔍 MPV track-list/count: 0
+2025-12-23 13:55:37.911 RedLemon[12449:139982] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-23 13:55:37.911 RedLemon[12449:139982]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-23 13:55:37.912 RedLemon[12449:139982] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2025-12-23 13:55:37.912 RedLemon[12449:139982]    Track: ID=0, Title=Off, External=0
+2025-12-23 13:55:38.917 RedLemon[12449:139980] 🔍 MPV track-list/count: 0
+2025-12-23 13:55:38.918 RedLemon[12449:139980] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-23 13:55:38.918 RedLemon[12449:139980]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-23 13:55:38.918 RedLemon[12449:139980] ✅ SubtitleService: Scanned 1 tracks (Attempt 4/5)
+2025-12-23 13:55:38.918 RedLemon[12449:139980]    Track: ID=0, Title=Off, External=0
+2025-12-23 13:55:39.919 RedLemon[12449:139980] 🔍 MPV track-list/count: 0
+2025-12-23 13:55:39.919 RedLemon[12449:139980] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2025-12-23 13:55:39.919 RedLemon[12449:139980]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2025-12-23 13:55:39.919 RedLemon[12449:139980] ✅ SubtitleService: Scanned 1 tracks (Attempt 5/5)
+2025-12-23 13:55:39.920 RedLemon[12449:139980]    Track: ID=0, Title=Off, External=0
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 0 total tracks
+ℹ️ No suitable English subtitles found
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEn_2Y4EM19_O","phx_ref_prev":"GIPtEIyD34MM18JF","last_seen":"2025-12-23T18:55:42.436Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"e3582852-e030-11f0-b6e5-0a58a9feac02":{"metas":[{"phx_ref":"GIPtEIyD34MM18JF","phx_ref_prev":"GIPtEIyBQbIM18CG","last_seen":"2025-12-23T18:55:34.050Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⏱️ Soft Timeout: MPV failed to load file in 10s - triggering fallback
+🗑️ MPVPlayerViewModel deinit
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+✅ MPV instance destroyed

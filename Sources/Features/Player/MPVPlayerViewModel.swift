@@ -2108,8 +2108,8 @@ extension MPVPlayerViewModel {
         }
 
         // Syncplay-inspired: Ignore remote updates if we just made a local action
-        // CRITICAL: NEVER ignore READY, CHAT, or REACTION messages - they must always be processed
-        if message.type != .ready && message.type != .chat && message.type != .reaction && shouldIgnoreRemoteUpdate() {
+        // CRITICAL: NEVER ignore READY, CHAT, REACTION, or EXIT messages - they must always be processed
+        if message.type != .ready && message.type != .chat && message.type != .reaction && message.type != .returnToLobby && message.type != .roomClosed && shouldIgnoreRemoteUpdate() {
             NSLog("🚫 DEBUG: Filtering message due to recent local action - type: \(message.type)")
             return
         }
@@ -2447,12 +2447,19 @@ extension MPVPlayerViewModel {
 
         case .returnToLobby:
             print("🏠 Received Return to Lobby signal from Host")
+            
+            // Fix: Explicitly show "Returning to Lobby" overlay instead of generic loading
+            self.isExitingToLobby = true
 
             // Set message for Guest
             appState?.pendingLobbyMessage = "Host returned the group to the lobby."
             // Perform cleanup and navigate back to lobby
             Task { @MainActor [weak self] in
                 guard let self = self else { return }
+                
+                // Slight delay to allow overlay to be seen (optional, but good for UX)
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                
                 await self.cleanup()
                 await self.appState?.player.exitPlayer(keepRoomState: true)
                 await MainActor.run {

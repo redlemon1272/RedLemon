@@ -656,6 +656,13 @@ class LobbyViewModel: ObservableObject {
     func startMovie(appState: AppState) async {
         guard isHost else { return }
         
+        // CRITICAL FIX: Prevent re-entrancy / race conditions
+        // If user clicks start multiple times, or if resolution hangs, ignore subsequent clicks
+        guard !isResolvingStream else {
+            NSLog("⚠️ Host: startMovie ignored - already resolving stream")
+            return
+        }
+        
         // CRITICAL FIX: Explicitly reset event playback flag
         // This prevents the "Exit Event" button from appearing in User Rooms
         appState.player.isEventPlayback = (room.type == .event)
@@ -683,6 +690,12 @@ class LobbyViewModel: ObservableObject {
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
         // This ensures guests don't fetch nil stream details
         isResolvingStream = true
+        
+        // Ensure we reset this flag even if resolution throws
+        defer {
+             isResolvingStream = false
+        }
+        
         var preResolvedStream: Stream?
         do {
             preResolvedStream = try await appState.player.resolveAndPersistForWatchParty(

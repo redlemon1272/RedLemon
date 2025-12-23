@@ -423,52 +423,80 @@ class PlayerViewModel: ObservableObject {
         let targetSeason = season ?? (mediaItem.type == "series" ? selectedSeason : nil)
         let targetEpisode = episode ?? (mediaItem.type == "series" ? selectedEpisode : nil)
 
-        let result = try await streamResolver.resolveStream(
-            item: mediaItem,
-            quality: quality,
-            season: targetSeason,
-            episode: targetEpisode,
-            metadata: metadata,
-            preferredInfoHash: nil,
-            filterExtended: false
-        )
-
-        // Retry Logic: Try primary, then candidates
         var unlockedStream: Stream?
         var lastError: Error?
+        let maxRetries = 5
 
-        // Build retry queue: Primary + Candidates
-        var streamsToTry = [result.stream] + result.candidateStreams
-
-        print("🎬 Stream Resolution: Found \(streamsToTry.count) streams to attempt unlock...")
-
-        for (index, stream) in streamsToTry.enumerated() {
-            // Check for cancellation
+        // CRITICAL: Retry loop for Watch Party resolution (Task 14)
+        // This matches the robustness of standard playback (tryNextStream logic)
+        for attempt in 1...maxRetries {
+            // Check cancellation
             if Task.isCancelled { throw CancellationError() }
 
-            do {
-                if index > 0 {
-                    print("🔄 Retrying with candidate stream #\(index): \(stream.title)")
-                }
+            if attempt > 1 {
+                print("🔄 Watch Party Resolve: Retry attempt \(attempt)/\(maxRetries)...")
+                // Wait 1.5s between retries to let providers realize their mistake or network to settle
+                try? await Task.sleep(nanoseconds: 1_500_000_000)
+            }
 
-                unlockedStream = try await streamResolver.unlockStream(
-                    stream: stream,
+            do {
+                let result = try await streamResolver.resolveStream(
                     item: mediaItem,
+                    quality: quality,
                     season: targetSeason,
-                    episode: targetEpisode
+                    episode: targetEpisode,
+                    metadata: metadata,
+                    preferredInfoHash: nil,
+                    filterExtended: false
                 )
 
-                print("✅ Successfully unlocked stream on attempt #\(index + 1)")
-                break // Success!
+                // Build retry queue: Primary + Candidates
+                let streamsToTry = [result.stream] + result.candidateStreams
+                
+                if streamsToTry.isEmpty {
+                    throw APIError.noStreamsFound
+                }
+
+                print("🎬 Stream Resolution (Attempt \(attempt)): Found \(streamsToTry.count) streams to attempt unlock...")
+
+                // Try to unlock candidates
+                for (index, stream) in streamsToTry.enumerated() {
+                    if Task.isCancelled { throw CancellationError() }
+
+                    do {
+                        if index > 0 {
+                            print("   🔄 Candidate #\(index): \(stream.title)")
+                        }
+
+                        unlockedStream = try await streamResolver.unlockStream(
+                            stream: stream,
+                            item: mediaItem,
+                            season: targetSeason,
+                            episode: targetEpisode
+                        )
+
+                        print("✅ Successfully unlocked stream on attempt \(attempt) (Candidate #\(index))")
+                        break // Break unlock loop
+                    } catch {
+                        print("   ⚠️ Unlock failed for candidate #\(index): \(error.localizedDescription)")
+                        lastError = error
+                        continue // Try next candidate
+                    }
+                }
+                
+                // If we found a stream, break the retry loop
+                if unlockedStream != nil {
+                    break
+                }
+                
             } catch {
-                print("⚠️ Unlock failed for stream #\(index + 1): \(error.localizedDescription)")
+                print("⚠️ Resolution failed on attempt \(attempt): \(error.localizedDescription)")
                 lastError = error
-                continue // Try next
             }
         }
 
         guard let finalStream = unlockedStream else {
-            print("❌ All stream candidates failed to unlock.")
+            print("❌ All Watch Party resolution attempts failed.")
             throw lastError ?? APIError.noStreamsFound
         }
 

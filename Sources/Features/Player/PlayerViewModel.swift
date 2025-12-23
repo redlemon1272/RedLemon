@@ -164,8 +164,8 @@ class PlayerViewModel: ObservableObject {
                 if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
                     imdbId: item.id,
                     type: item.type,
-                    season: watchPartyRoom.season,
-                    episode: watchPartyRoom.episode,
+                    season: item.type == "series" ? watchPartyRoom.season : nil,
+                    episode: item.type == "series" ? watchPartyRoom.episode : nil,
                     name: item.name,
                     year: item.year.flatMap { Int($0) }
                 ) {

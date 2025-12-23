@@ -545,10 +545,42 @@ actor StreamService: StreamResolving {
     func unlockStream(stream: Stream, item: MediaItem, season: Int?, episode: Int?) async throws -> Stream {
         // Check for direct HTTP URL (Pre-unlocked)
         if let url = stream.url, (url.hasPrefix("http://") || url.hasPrefix("https://")) {
+            
+            // NEW: Resolve "resolve" URLs (Debrid Search) to final direct links
+            // These URLs are redirects (302) to the actual file. MPV fails on them, so we must resolve them now.
+            var finalURL = url
+            if url.contains("/resolve/") {
+                 print("🔍 StreamService: Resolving redirect URL: \(url)")
+                 if let resolved = await resolveRedirect(url: url) {
+                     print("✅ StreamService: Resolved to: \(resolved)")
+                     finalURL = resolved
+                 } else {
+                     print("⚠️ StreamService: Failed to resolve URL, using original.")
+                 }
+            }
+
             print("⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.")
 
             // Still process subtitles
             var finalStream = stream
+            
+            // Update URL if resolved
+            if finalURL != url {
+                finalStream = Stream(
+                     url: finalURL,
+                     title: stream.title,
+                     quality: stream.quality,
+                     seeders: stream.seeders,
+                     size: stream.size,
+                     provider: stream.provider,
+                     infoHash: stream.infoHash,
+                     fileIdx: stream.fileIdx,
+                     ext: stream.ext,
+                     behaviorHints: stream.behaviorHints,
+                     subtitles: stream.subtitles
+                 )
+            }
+            
              if let subtitles = finalStream.subtitles, !subtitles.isEmpty {
                 // Optimize: Cap at 5 subtitles to prevent blocking playback start
                 let limitedSubtitles = Array(subtitles.prefix(5))
@@ -779,5 +811,24 @@ actor StreamService: StreamResolving {
             kind: subtitle.kind,
             provider: subtitle.provider
         )
+    }
+
+    /// Helper to resolve HTTP redirects (e.g. for DebridSearch /resolve/ URLs)
+    private func resolveRedirect(url: String) async -> String? {
+        guard let urlObj = URL(string: url) else { return nil }
+        
+        var request = URLRequest(url: urlObj)
+        request.httpMethod = "HEAD" // Try HEAD first to be lightweight
+        
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse {
+                // URLSession follows redirects by default, so response.url is final
+                return httpResponse.url?.absoluteString
+            }
+        } catch {
+            print("❌ StreamService: Redirect resolution failed: \(error)")
+        }
+        return nil
     }
 }

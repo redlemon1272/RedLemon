@@ -450,6 +450,12 @@ class PlayerViewModel: ObservableObject {
                     filterExtended: false
                 )
 
+                // Populate failover queue for Host
+                await MainActor.run {
+                    self.streamQueue = result.candidateStreams
+                    print("📊 Watch Party Queue: Loaded \(result.candidateStreams.count) candidate streams for failover")
+                }
+
                 // Build retry queue: Primary + Candidates
                 let streamsToTry = [result.stream] + result.candidateStreams
                 
@@ -658,6 +664,35 @@ class PlayerViewModel: ObservableObject {
                     self.selectedStream = unlockedStream
                     self.streamError = nil // Clear error if unlock succeeded
                     // Note: MPVPlayerView should react to this change if the parent view passes the new binding/data
+                    
+                    // CRITICAL: If Host, persist new stream selection to Room so guests follow
+                    if self.isWatchPartyHost, let room = self.currentWatchPartyRoom, let roomId = self.currentRoomId {
+                        print("📡 Watch Party Failover: Persisting new stream to room \(roomId)...")
+                        
+                        // Update local room object
+                        var updatedRoom = room
+                        updatedRoom.selectedStreamHash = unlockedStream.infoHash
+                        updatedRoom.selectedFileIdx = unlockedStream.fileIdx
+                        updatedRoom.selectedQuality = unlockedStream.quality
+                        updatedRoom.unlockedStreamURL = unlockedStream.url
+                        self.currentWatchPartyRoom = updatedRoom
+                        
+                        // Persist to Supabase
+                        Task {
+                            do {
+                                try await self.roomManager.updateRoomStream(
+                                    roomId: roomId,
+                                    streamHash: unlockedStream.infoHash,
+                                    fileIdx: unlockedStream.fileIdx,
+                                    quality: unlockedStream.quality,
+                                    unlockedUrl: unlockedStream.url
+                                )
+                                print("✅ Watch Party Failover: Room updated successfully")
+                            } catch {
+                                print("❌ Watch Party Failover: Failed to update room: \(error)")
+                            }
+                        }
+                    }
                 }
 
             } catch {

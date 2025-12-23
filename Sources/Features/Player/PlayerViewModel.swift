@@ -125,8 +125,9 @@ class PlayerViewModel: ObservableObject {
             // GUEST OPTIMIZATION
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId), // Ensure we matched the correct room
-               let hostStreamHash = watchPartyRoom.selectedStreamHash,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+
+                let hostStreamHash = watchPartyRoom.selectedStreamHash
 
                 let hostQuality = watchPartyRoom.selectedQuality ?? "Unknown" // Relaxed check
 
@@ -324,9 +325,10 @@ class PlayerViewModel: ObservableObject {
             var resolvedStream: Stream?
 
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
-               let hostStreamHash = watchPartyRoom.selectedStreamHash,
                let hostQuality = watchPartyRoom.selectedQuality,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
+
+                let hostStreamHash = watchPartyRoom.selectedStreamHash
 
                 NSLog("🎬 GUEST: Using host's stream selection for preload")
                 // Extract filename from URL for better metadata

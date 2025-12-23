@@ -870,11 +870,13 @@ class PlayerViewModel: ObservableObject {
             }
 
             // Handle Series logic (default to S1E1 if missing)
-            var finalSeason = season
-            var finalEpisode = episode
-            if mediaItem.type == "series" && (season == nil || episode == nil) {
-                 finalSeason = 1
-                 finalEpisode = 1
+            // CRITICAL: Ensure movies NEVER have season/episode set, even if passed in (e.g. stale state)
+            var finalSeason: Int? = nil
+            var finalEpisode: Int? = nil
+            
+            if mediaItem.type == "series" {
+                finalSeason = season ?? 1
+                finalEpisode = episode ?? 1
             }
 
             NSLog("🎬 Creating Watch Party for: \(mediaItem.name)")

@@ -193,8 +193,8 @@ struct QualitySelectionView: View {
             Task {
                 await appState.player.createWatchPartyAndNavigate(
                     mediaItem: mediaItem,
-                    season: appState.selectedSeason,
-                    episode: appState.selectedEpisode,
+                    season: (mediaItem.type == "series" ? appState.selectedSeason : nil),
+                    episode: (mediaItem.type == "series" ? appState.selectedEpisode : nil),
                     quality: selectedQuality,
                     isPublic: isPublicRoom,
                     description: roomDescription.isEmpty ? nil : roomDescription

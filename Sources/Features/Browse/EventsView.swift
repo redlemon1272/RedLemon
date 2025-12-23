@@ -21,7 +21,7 @@ struct EventsView: View {
     @State private var isLoading = true
     // Timer removed - AppState handles schedule updates
     @State private var lastUpdate = Date() // Force view refresh when needed
-    @State private var currentTime = TimeService.shared.now // Shared timer for all cards
+
 
     var body: some View {
         ZStack {
@@ -66,14 +66,14 @@ struct EventsView: View {
                                     if let heroEvent = appState.eventsSchedule.first {
                                         VStack(alignment: .leading, spacing: 16) {
                                             // Hero Card Phase
+                                            // Hero Card Phase
                                             let _ = lastUpdate
                                             let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                             
-                                            HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: heroHeight) {
+                                            HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, height: heroHeight) {
                                                 await joinEvent(heroEvent)
                                             }
-                                            .drawingGroup() // GPU Acceleration
-                                            .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
+                                            // Removed drawingGroup() and shadow() to improve scrolling performance
                                             .id(heroEvent.id) // FORCE STATE RESET: Ensures background image updates when event changes
                                         }
                                     }
@@ -92,11 +92,10 @@ struct EventsView: View {
                                                 ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                     let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                                     
-                                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, currentTime: currentTime, height: gridItemHeight) {
+                                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, height: gridItemHeight) {
                                                         await joinEvent(event)
                                                     }
-                                                    .drawingGroup() // GPU Acceleration
-                                                    .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+                                                    // Removed drawingGroup() and shadow() to improve scrolling performance
                                                 }
                                             }
                                         }
@@ -137,16 +136,12 @@ struct EventsView: View {
              
              // Combined Timer: Updates 'currentTime' every second for countdowns
              // AND 'lastUpdate' every 10s for logic checks
+             // Combined Timer: Updates 'lastUpdate' every 10s for logic checks
+             // 'currentTime' updates have been moved to child components to prevent full view re-renders
              while !Task.isCancelled {
-                 try? await Task.sleep(nanoseconds: 1_000_000_000) // 1s
+                 try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
                  await MainActor.run {
-                     currentTime = TimeService.shared.now
-                     
-                     // Run the logic check every ~10s (using modulus on time interval or just a counter could work, 
-                     // but a simple modulo check on current time is robust enough)
-                     if Int(Date().timeIntervalSince1970) % 10 == 0 {
-                          lastUpdate = Date()
-                     }
+                     lastUpdate = Date()
                  }
              }
         }
@@ -582,7 +577,7 @@ struct EventsView: View {
 struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
-    var currentTime: Date // Passed from parent
+    // removed currentTime
     var height: CGFloat = 360 // Default height
     let onJoin: () async -> Void
     @EnvironmentObject var appState: AppState
@@ -620,7 +615,6 @@ struct HeroEventCard: View {
                 event: event,
                 isLobbyOverride: isLobbyOverride,
                 isJoining: isJoining,
-                currentTime: currentTime,
                 height: height
             )
         }
@@ -652,47 +646,13 @@ struct HeroEventCard: View {
 }
 
 // Helper view for the card content to keep the main body clean and flat
+// Helper view for the card content to keep the main body clean and flat
 struct HeroEventCardContent: View {
     let event: EventItem
     let isLobbyOverride: Bool
     let isJoining: Bool
-    let currentTime: Date
+    // removed currentTime
     let height: CGFloat
-    // Helper to calculate progress for live events
-    var progress: Double {
-        let elapsed = currentTime.timeIntervalSince(event.startTime)
-        return min(max(elapsed / event.duration, 0), 1)
-    }
-
-    var elapsedTime: TimeInterval {
-        return currentTime.timeIntervalSince(event.startTime)
-    }
-
-    var remainingTime: TimeInterval {
-        return event.duration - elapsedTime
-    }
-
-    // Helper formats
-    func formatDuration(_ interval: TimeInterval) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = .pad
-        return formatter.string(from: interval) ?? ""
-    }
-
-    func formatTime(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
-    }
-
-    func formatEventTime(_ interval: TimeInterval) -> String {
-         let formatter = DateComponentsFormatter()
-         formatter.allowedUnits = [.hour, .minute, .second]
-         formatter.zeroFormattingBehavior = .pad
-         return formatter.string(from: interval) ?? "0:00"
-     }
 
     @State private var cachedImage: NSImage?
 
@@ -824,34 +784,7 @@ struct HeroEventCardContent: View {
                          )
 
                      } else if event.isInLobby || isLobbyOverride {
-                         VStack(spacing: 4) {
-                             HStack(spacing: 6) {
-                                 Circle()
-                                     .fill(Color.yellow)
-                                     .frame(width: 8, height: 8)
-                                     .shadow(color: .yellow.opacity(0.6), radius: 4)
-                                 Text("Lobby Open")
-                                     .fontWeight(.bold)
-                                     .foregroundColor(.white)
-                             }
-
-                             // Add countdown timer
-                             if event.startTime.timeIntervalSince(currentTime) > 0 {
-                                 Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(currentTime)))")
-                                     .font(.system(size: 11))
-                                     .fontWeight(.semibold)
-                                     .foregroundColor(.white.opacity(0.9))
-                                     .monospacedDigit()
-                             }
-                         }
-                         .padding(.horizontal, 10)
-                         .padding(.vertical, 6)
-                         .background(Color.yellow.opacity(0.2))
-                         .cornerRadius(20)
-                         .overlay(
-                             RoundedRectangle(cornerRadius: 20)
-                                 .stroke(Color.yellow.opacity(0.3), lineWidth: 1)
-                         )
+                         EventLobbyStatusBadge(event: event)
                      } else if event.isLive {
                          HStack(spacing: 6) {
                              Circle()
@@ -872,7 +805,8 @@ struct HeroEventCardContent: View {
                          HStack(spacing: 6) {
                              Image(systemName: "clock.fill")
                                  .font(.system(size: 11))
-                             Text("STARTS \(formatTime(event.startTime))")
+                             // Static start time doesn't need constant updates
+                             Text("STARTS " + DateFormatter.shortTime.string(from: event.startTime))
                                  .font(.system(size: 12, weight: .semibold))
                          }
                          .foregroundColor(.white)
@@ -955,33 +889,7 @@ struct HeroEventCardContent: View {
 
                      // Progress Bar (if live)
                      if event.isLive {
-                         VStack(alignment: .leading, spacing: 6) {
-                             // Custom Progress Bar (GPU Compatible)
-                             GeometryReader { geo in
-                                 ZStack(alignment: .leading) {
-                                     Rectangle()
-                                         .fill(Color.gray.opacity(0.3))
-                                         .frame(height: 4)
-                                         .cornerRadius(2)
-                                     
-                                     Rectangle()
-                                         .fill(Color.red)
-                                         .frame(width: geo.size.width * CGFloat(progress), height: 4)
-                                         .cornerRadius(2)
-                                 }
-                             }
-                             .frame(height: 4)
-
-                             HStack {
-                                 Text(formatEventTime(elapsedTime))
-                                     .font(.system(size: 13, weight: .medium))
-                                 Spacer()
-                                 Text("-\(formatEventTime(remainingTime))")
-                                     .font(.system(size: 13, weight: .medium))
-                             }
-                             .foregroundColor(.white.opacity(0.8))
-                         }
-                         .padding(.top, 4)
+                        EventLiveProgressView(event: event)
                      }
                  }
                  .padding(24)
@@ -1013,6 +921,122 @@ struct HeroEventCardContent: View {
         .shadow(color: .black.opacity(0.3), radius: 12, x: 0, y: 6)
         .frame(maxWidth: .infinity) // Center the constrained card
     }
+}
+
+// Optimized component to isolate countdown timer updates
+struct EventLobbyStatusBadge: View {
+    let event: EventItem
+    @State private var now = Date()
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        VStack(spacing: 4) {
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(Color.yellow)
+                    .frame(width: 8, height: 8)
+                    .shadow(color: .yellow.opacity(0.6), radius: 4)
+                Text("Lobby Open")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+
+            // Add countdown timer
+            if event.startTime.timeIntervalSince(now) > 0 {
+                Text("Starts in \(formatDuration(event.startTime.timeIntervalSince(now)))")
+                    .font(.system(size: 11))
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white.opacity(0.9))
+                    .monospacedDigit()
+            }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background(Color.yellow.opacity(0.2))
+        .cornerRadius(20)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.yellow.opacity(0.3), lineWidth: 1)
+        )
+        .onReceive(timer) { input in
+            now = input
+        }
+    }
+    
+    func formatDuration(_ interval: TimeInterval) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        return formatter.string(from: interval) ?? ""
+    }
+}
+
+// Optimized component to isolate live progress bar updates
+struct EventLiveProgressView: View {
+    let event: EventItem
+    @State private var now = Date()
+    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    var elapsedTime: TimeInterval {
+        return now.timeIntervalSince(event.startTime)
+    }
+
+    var remainingTime: TimeInterval {
+        return event.duration - elapsedTime
+    }
+    
+    var progress: Double {
+        return min(max(elapsedTime / event.duration, 0), 1)
+    }
+    
+    func formatEventTime(_ interval: TimeInterval) -> String {
+         let formatter = DateComponentsFormatter()
+         formatter.allowedUnits = [.hour, .minute, .second]
+         formatter.zeroFormattingBehavior = .pad
+         return formatter.string(from: interval) ?? "0:00"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            // Custom Progress Bar (GPU Compatible)
+            GeometryReader { geo in
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.3))
+                        .frame(height: 4)
+                        .cornerRadius(2)
+                    
+                    Rectangle()
+                        .fill(Color.red)
+                        .frame(width: geo.size.width * CGFloat(progress), height: 4)
+                        .cornerRadius(2)
+                }
+            }
+            .frame(height: 4)
+
+            HStack {
+                Text(formatEventTime(elapsedTime))
+                    .font(.system(size: 13, weight: .medium))
+                Spacer()
+                Text("-\(formatEventTime(remainingTime))")
+                    .font(.system(size: 13, weight: .medium))
+            }
+            .foregroundColor(.white.opacity(0.8))
+        }
+        .padding(.top, 4)
+        .onReceive(timer) { input in
+            now = input
+        }
+    }
+}
+
+extension DateFormatter {
+    static let shortTime: DateFormatter = {
+        let f = DateFormatter()
+        f.timeStyle = .short
+        return f
+    }()
 }
 
 

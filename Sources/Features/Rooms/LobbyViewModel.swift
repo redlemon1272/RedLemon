@@ -412,6 +412,18 @@ class LobbyViewModel: ObservableObject {
                     // This prevents stale auto-start loops when returning to lobby
                     if let freshRoom = try? await self.dataService.getRoomState(roomId: room.id) {
                         print("✅ Lobby: Refreshed room state. isPlaying: \(freshRoom.isPlaying)")
+                        
+                        // CRITICAL FIX: Update local media item from fresh room state BEFORE starting playback
+                        // This prevents utilizing stale 'room.mediaItem' from a previous session
+                        print("🛡️ Lobby: Ensuring local media state is fresh before auto-start check...")
+                        await self.updateMediaItemFromRoomState(freshRoom)
+                        
+                        // Also sync season/episode explicitly just in case updateMediaItemFromRoomState didn't cover it (it does metadata mostly)
+                        if let s = freshRoom.season, let e = freshRoom.episode {
+                             self.room.season = s
+                             self.room.episode = e
+                             print("📺 Lobby: Synced season/episode: S\(s)E\(e)")
+                        }
 
                         // Auto-start for event rooms (always) or regular rooms that are already playing
                         if room.type == .event {
@@ -643,6 +655,11 @@ class LobbyViewModel: ObservableObject {
 
     func startMovie(appState: AppState) async {
         guard isHost else { return }
+        
+        // CRITICAL FIX: Explicitly reset event playback flag
+        // This prevents the "Exit Event" button from appearing in User Rooms
+        appState.player.isEventPlayback = (room.type == .event)
+        
         guard let mediaItem = room.mediaItem else {
             NSLog("❌ Host: Cannot start playback - no media selected")
             return

@@ -198,7 +198,20 @@ class LobbyEventRouter: ObservableObject {
             viewModel.isStarting = true
             // viewModel.transitionState.isStarting = true // Access control issue likely, check if needed
             viewModel.countdown = Int(syncMessage.timestamp)
-            viewModel.chatManager.addSystemMessage(.hostStarting, userName: "Host", data: [:])
+            
+            // Context-aware start message
+            let isEpisode = viewModel.room.mediaItem?.type == "series"
+            
+            // Note: If we don't have a specific .hostStartingEpisode enum case yet, we can use Generic with custom data,
+            // or just rely on .hostStarting if we updated the SystemMessageType definition.
+            // Assuming we only have .hostStarting which maps to "Host is starting the movie", 
+            // we should probably suppress this local message if the Host already sent a System Message.
+            // But to be safe and ensure Guest sees immediate feedback:
+            if isEpisode {
+                 viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Host is starting the episode..."])
+            } else {
+                 viewModel.chatManager.addSystemMessage(.hostStarting, userName: "Host", data: [:])
+            }
 
             // Guest automatically starts playback after countdown
             // We delegate this complex logic back to ViewModel or handle locally using VM public methods

@@ -3,12 +3,12 @@ import Combine
 
 @MainActor
 class PlayerViewModel: ObservableObject {
-    
+
     // Dependencies
     private let metadataProvider: MetadataProvider
     private let streamResolver: StreamResolving
     private let roomManager: RoomManager
-    
+
     // Playback State
     @Published var selectedStream: Stream?
     @Published var selectedMediaItem: MediaItem?
@@ -26,7 +26,7 @@ class PlayerViewModel: ObservableObject {
     @Published var currentWatchPartyRoom: WatchPartyRoom? // Current lobby/room
     @Published var forceSoloStart: Bool = false // Host override to bypass ready gate
     @Published var showPremiumLimitAlert: Bool = false // Alert for free user limit logic
-    
+
     // Event specific state
     @Published var isPreloading: Bool = false // Track if we are in preload phase (Watch Party)
     @Published var isEventPlayback: Bool = false // Track if this is a public event playback
@@ -34,17 +34,17 @@ class PlayerViewModel: ObservableObject {
     @Published var finishedEventIds: Set<String> = [] // Track IDs of finished events to prevent auto-rejoin
     @Published var resumeFromTimestamp: Double? = nil  // When resuming playback, seek to this position
     @Published var eventStartTime: Date? = nil  // For live events: absolute start time
-    
+
     // TV specific state
     @Published var selectedSeason: Int?
     @Published var selectedEpisode: Int?
-    
+
     // Subtitles
     @Published var hasAutoSelectedSubtitles: Bool = false
-    
+
     // Weak reference to AppState for navigation callbacks
     weak var appState: AppState?
-    
+
     init(
         metadataProvider: MetadataProvider = LocalAPIClient.shared,
         streamResolver: StreamResolving = StreamService.shared,
@@ -54,17 +54,17 @@ class PlayerViewModel: ObservableObject {
         self.streamResolver = streamResolver
         self.roomManager = roomManager
     }
-    
+
     // MARK: - Playback Logic
-    
+
     func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         streamError = nil
-        
+
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
         await MainActor.run {
             selectedStream = nil // Clear previous stream to prevent stale playback
             streamQueue = [] // Clear stream queue
-            
+
             // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
             // This ensures the generic background (from Browse) is shown while fetching full details
             selectedMetadata = MediaMetadata(
@@ -86,63 +86,63 @@ class PlayerViewModel: ObservableObject {
                 videos: []
             )
             selectedMediaItem = item // Ensure item is set
-            
+
             isResolvingStream = true
             currentWatchMode = watchMode
             isWatchPartyHost = isHost
             selectedQuality = quality
-            
+
             // Show player immediately
             showPlayer = true
             if let appState = appState {
                 appState.currentView = .player
             }
         }
-        
+
         do {
             print("🎬 PlayerVM: Starting playback for: \(item.name)")
             NSLog("   Quality: \(quality.rawValue)")
             NSLog("   Mode: \(watchMode)")
-            
+
             // Step 1: Fetch metadata immediately for UI feedback
             NSLog("📡 Fetching metadata for \(item.id)...")
             let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
-            
+
             // Update UI immediately so background art shows
             await MainActor.run {
                 selectedMetadata = metadata
                 selectedMediaItem = item
             }
-            
+
             // Only pass season/episode for TV series
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
-            
+
             // Step 2: Resolve stream (Optimized for Guest)
             var resolvedStream: Stream?
             var resolvedMetadata: MediaMetadata? = metadata
-            
+
             // GUEST OPTIMIZATION
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                (roomId == nil || watchPartyRoom.id == roomId), // Ensure we matched the correct room
                let hostStreamHash = watchPartyRoom.selectedStreamHash,
                let hostUnlockedURL = watchPartyRoom.unlockedStreamURL {
-                
+
                 let hostQuality = watchPartyRoom.selectedQuality ?? "Unknown" // Relaxed check
-                
+
                 print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒")
                 NSLog("🎬 GUEST: Using host's stream selection (skipping resolution)")
-                
+
                 // Extract filename from URL for better metadata
                 let filename = URL(string: hostUnlockedURL)?.lastPathComponent.removingPercentEncoding ?? "Host Stream"
-                
+
                 // Fallback: Detect quality from filename if room state is missing it
                 var finalQuality = hostQuality
                 if hostQuality == "Unknown" || hostQuality.isEmpty {
                     finalQuality = Stream.detectVideoQuality(from: filename)
                     NSLog("⚠️ GUEST: Detected quality from filename: \(finalQuality)")
                 }
-                
+
                 var hostStream = Stream(
                     url: hostUnlockedURL,
                     title: filename, // Use actual filename for badge detection
@@ -156,7 +156,7 @@ class PlayerViewModel: ObservableObject {
                     behaviorHints: nil,
                     subtitles: []
                 )
-                
+
                 // Standard Behavior: Search for subtitles locally (SubDL)
                 // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
                 // Fetch subtitles from SubDL via local server
@@ -169,12 +169,12 @@ class PlayerViewModel: ObservableObject {
                     year: item.year.flatMap { Int($0) }
                 ) {
                      NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
-                     
+
                      // Convert to Subtitle objects
                      // Convert to Subtitle objects
                      let externalSubs = subDLSubtitles.enumerated().map { (index, sub) -> Subtitle in
                          let encodedPath = Data(sub.url.utf8).base64EncodedString()
-                         
+
                          // Route through local server proxy to handle zip extraction and VTT conversion
                          // This is CRITICAL for MPV to be able to read the files, as it cannot handle
                          // raw relative paths or zip files directly without this proxy.
@@ -188,11 +188,11 @@ class PlayerViewModel: ObservableObject {
                          // But if I add it, I need access to Config.localAuthToken.
                          // PlayerViewModel imports... checking if Config is available. `Config.serverURL` is used so Config is available.
                          // But `Config.localAuthToken`?
-                         
+
                          var proxyURL = pUrl
                          // Safe append
                          proxyURL += (proxyURL.contains("?") ? "&" : "?") + "token=\(Config.localAuthToken)"
-                         
+
                          return Subtitle(
                             id: encodedPath,
                             url: proxyURL,
@@ -203,19 +203,19 @@ class PlayerViewModel: ObservableObject {
                             provider: "SubDL"
                          )
                      }
-                     
+
                      hostStream.subtitles = (hostStream.subtitles ?? []) + externalSubs
                 }
-                
+
                 resolvedStream = hostStream
-                
+
             } else if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                       (roomId == nil || watchPartyRoom.id == roomId),
                       let hostStreamHash = watchPartyRoom.selectedStreamHash {
-                 
+
                  // PARTIAL LOCK (Hash only)
                  print("\n\n✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (HASH ONLY) 🔒")
-                 
+
                  let result = try await streamResolver.resolveStream(
                      item: item,
                      quality: quality,
@@ -243,15 +243,15 @@ class PlayerViewModel: ObservableObject {
                 resolvedMetadata = result.metadata
                 Task { @MainActor in self.streamQueue = result.candidateStreams }
             }
-            
+
             guard let finalStream = resolvedStream else {
                 throw APIError.noStreamsFound
             }
-            
+
             // Step 3: Update UI
             await MainActor.run {
                 selectedStream = finalStream
-                
+
                 // Smart Retry: Mark this hash as attempted for this session
                 if let hash = finalStream.infoHash {
                     Task {
@@ -262,7 +262,7 @@ class PlayerViewModel: ObservableObject {
                 if let meta = resolvedMetadata {
                     selectedMetadata = meta
                 }
-                
+
                 // Set room ID logic
                 if let roomId = roomId {
                     currentRoomId = roomId
@@ -271,19 +271,19 @@ class PlayerViewModel: ObservableObject {
                 } else {
                     currentRoomId = nil
                 }
-                
+
                 isResolvingStream = false
             }
-            
+
             NSLog("✅ Stream ready, starting playback...")
             enterFullscreen()
-            
+
         } catch {
             print("❌ Playback error: \(error)")
             await MainActor.run {
                 streamError = error.localizedDescription
                 isResolvingStream = false
-                
+
                 if selectedMetadata == nil {
                     Task {
                         if let meta = try? await metadataProvider.fetchMetadata(type: item.type, id: item.id) {
@@ -294,13 +294,13 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     func preloadMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         streamError = nil
 
         do {
             print("🎬 PlayerVM: Preloading playback for: \(item.name)")
-            
+
             let metadata = try await metadataProvider.fetchMetadata(type: item.type, id: item.id)
 
             await MainActor.run {
@@ -311,18 +311,18 @@ class PlayerViewModel: ObservableObject {
                 isWatchPartyHost = isHost
                 selectedQuality = quality
                 isPreloading = true
-                
+
                 showPlayer = true
                 if let appState = appState {
                     appState.currentView = .player
                 }
             }
-            
+
             let season = item.type == "series" ? selectedSeason : nil
             let episode = item.type == "series" ? selectedEpisode : nil
-            
+
             var resolvedStream: Stream?
-            
+
             if !isHost, watchMode == .watchParty, let watchPartyRoom = currentWatchPartyRoom,
                let hostStreamHash = watchPartyRoom.selectedStreamHash,
                let hostQuality = watchPartyRoom.selectedQuality,
@@ -365,14 +365,14 @@ class PlayerViewModel: ObservableObject {
                 )
                 resolvedStream = result.stream
             }
-            
+
             guard let finalStream = resolvedStream else {
                 throw APIError.noStreamsFound
             }
-            
+
             await MainActor.run {
                 selectedStream = finalStream
-                
+
                 if let roomId = roomId {
                     currentRoomId = roomId
                 } else if watchMode == .watchParty {
@@ -380,13 +380,13 @@ class PlayerViewModel: ObservableObject {
                 } else {
                     currentRoomId = nil
                 }
-                
+
                 isResolvingStream = false
             }
-            
+
             NSLog("✅ Stream preloaded, waiting for play signal...")
             enterFullscreen()
-            
+
         } catch {
             print("❌ Preload error: \(error)")
             await MainActor.run {
@@ -396,31 +396,31 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     func startPreloadedPlayback() {
         guard isPreloading else { return }
         print("▶️ Starting preloaded playback")
         isPreloading = false
     }
-    
+
     // Resolve and persist stream BEFORE starting watch party
     func resolveAndPersistForWatchParty(mediaItem: MediaItem, quality: VideoQuality, roomId: String, season: Int? = nil, episode: Int? = nil) async throws -> Stream {
         print("🎬 Resolving & Persisting stream for Watch Party Room: \(roomId)")
-        
+
         await MainActor.run {
             self.isResolvingStream = true
             self.streamError = nil
         }
-        
+
         defer {
             Task { @MainActor in self.isResolvingStream = false }
         }
 
         let metadata = try await metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
-        
+
         let targetSeason = season ?? (mediaItem.type == "series" ? selectedSeason : nil)
         let targetEpisode = episode ?? (mediaItem.type == "series" ? selectedEpisode : nil)
-        
+
         let result = try await streamResolver.resolveStream(
             item: mediaItem,
             quality: quality,
@@ -430,41 +430,73 @@ class PlayerViewModel: ObservableObject {
             preferredInfoHash: nil,
             filterExtended: false
         )
-        
-        let unlockedStream = try await streamResolver.unlockStream(
-            stream: result.stream,
-            item: mediaItem,
-            season: targetSeason,
-            episode: targetEpisode
-        )
-        
+
+        // Retry Logic: Try primary, then candidates
+        var unlockedStream: Stream?
+        var lastError: Error?
+
+        // Build retry queue: Primary + Candidates
+        var streamsToTry = [result.stream] + result.candidateStreams
+
+        print("🎬 Stream Resolution: Found \(streamsToTry.count) streams to attempt unlock...")
+
+        for (index, stream) in streamsToTry.enumerated() {
+            // Check for cancellation
+            if Task.isCancelled { throw CancellationError() }
+
+            do {
+                if index > 0 {
+                    print("🔄 Retrying with candidate stream #\(index): \(stream.title)")
+                }
+
+                unlockedStream = try await streamResolver.unlockStream(
+                    stream: stream,
+                    item: mediaItem,
+                    season: targetSeason,
+                    episode: targetEpisode
+                )
+
+                print("✅ Successfully unlocked stream on attempt #\(index + 1)")
+                break // Success!
+            } catch {
+                print("⚠️ Unlock failed for stream #\(index + 1): \(error.localizedDescription)")
+                lastError = error
+                continue // Try next
+            }
+        }
+
+        guard let finalStream = unlockedStream else {
+            print("❌ All stream candidates failed to unlock.")
+            throw lastError ?? APIError.noStreamsFound
+        }
+
         // Persist
         print("📡 Persisting resolved stream to room \(roomId)...")
-        
+
         await MainActor.run {
             self.selectedMetadata = metadata
-            
+
             if var room = self.currentWatchPartyRoom {
-                room.selectedStreamHash = unlockedStream.infoHash
-                room.selectedFileIdx = unlockedStream.fileIdx
-                room.selectedQuality = unlockedStream.quality
-                room.unlockedStreamURL = unlockedStream.url
+                room.selectedStreamHash = finalStream.infoHash
+                room.selectedFileIdx = finalStream.fileIdx
+                room.selectedQuality = finalStream.quality
+                room.unlockedStreamURL = finalStream.url
                 self.currentWatchPartyRoom = room
             }
         }
-        
+
         try await roomManager.updateRoomStream(
             roomId: roomId,
-            streamHash: unlockedStream.infoHash,
-            fileIdx: unlockedStream.fileIdx,
-            quality: unlockedStream.quality,
-            unlockedUrl: unlockedStream.url
+            streamHash: finalStream.infoHash,
+            fileIdx: finalStream.fileIdx,
+            quality: finalStream.quality,
+            unlockedUrl: finalStream.url
         )
-        
-        print("✅ Stream persisted! Hash: \(unlockedStream.infoHash ?? "nil")")
-        return unlockedStream
+
+        print("✅ Stream persisted! Hash: \(finalStream.infoHash ?? "nil")")
+        return finalStream
     }
-    
+
     func playSelectedStream(_ stream: Stream, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
         guard let mediaItem = selectedMediaItem else {
             streamError = "No media item selected"
@@ -511,7 +543,7 @@ class PlayerViewModel: ObservableObject {
                 } else {
                     currentRoomId = nil
                 }
-                
+
                 showPlayer = true
                 if let appState = appState {
                     appState.currentView = .player
@@ -522,7 +554,7 @@ class PlayerViewModel: ObservableObject {
             // Step 4: If hosting Watch Party, persist stream selection to specific room
             if isHost, let roomId = currentRoomId, watchMode == .watchParty {
                 NSLog("📡 Persisting stream selection to room \(roomId)")
-                
+
                 // Update local room object
                 if var room = self.currentWatchPartyRoom {
                     room.selectedStreamHash = unlockedStream.infoHash
@@ -531,7 +563,7 @@ class PlayerViewModel: ObservableObject {
                     room.unlockedStreamURL = unlockedStream.url
                     self.currentWatchPartyRoom = room
                 }
-                
+
                 // Persist to Supabase
                 Task {
                     do {
@@ -558,46 +590,46 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     func tryNextStream() {
         guard !streamQueue.isEmpty else {
             print("🚫 PlayerVM: No more streams in queue. Playback failed.")
             self.streamError = "Playback Failed: No working streams found."
             return
         }
-        
+
         let nextStream = streamQueue.removeFirst()
         print("⏭️ PlayerVM: Falling back to next stream: \(nextStream.title)")
-        
-        
+
+
         DispatchQueue.main.async {
              // RedLemon: Silent retry (no UI flash)
              // self.streamError = "Stream failed. Retrying... (\(self.streamQueue.count + 1) left)"
              print("🔄 Silently retrying next stream (\(self.streamQueue.count + 1) left)")
         }
-        
+
         Task {
             do {
                 // Step 1: Unlock the stream
                 let season = selectedMediaItem?.type == "series" ? selectedSeason : nil
                 let episode = selectedMediaItem?.type == "series" ? selectedEpisode : nil
-                
+
                 guard let item = selectedMediaItem else { return }
-                
+
                 let unlockedStream = try await streamResolver.unlockStream(
                     stream: nextStream,
                     item: item,
                     season: season,
                     episode: episode
                 )
-                
+
                 // Step 2: Update Selected Stream (Triggers Player Reload)
                 await MainActor.run {
                     self.selectedStream = unlockedStream
                     self.streamError = nil // Clear error if unlock succeeded
                     // Note: MPVPlayerView should react to this change if the parent view passes the new binding/data
                 }
-                
+
             } catch {
                 print("❌ PlayerVM: Fallback stream failed to unlock: \(error.localizedDescription)")
                 // Recursive retry if unlock fails immediately
@@ -605,7 +637,7 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     func navigateToPlayer(stream: Stream) {
         selectedStream = stream
         showPlayer = true
@@ -614,21 +646,21 @@ class PlayerViewModel: ObservableObject {
         }
         enterFullscreen()
     }
-    
+
     func exitPlayer(keepRoomState: Bool = false) async {
         if !keepRoomState {
             if let roomId = currentRoomId {
                 print("👋 Leaving room: \(roomId)")
             }
         }
-        
+
         // Clean up player state
         showPlayer = false
         selectedStream = nil
         selectedMediaItem = nil
         // Note: We don't clear selectedMetadata immediately as it looks nice for transitions
-        
-        
+
+
         if !keepRoomState {
             currentRoomId = nil
             currentWatchPartyRoom = nil // Clear stale room state
@@ -636,13 +668,13 @@ class PlayerViewModel: ObservableObject {
             isWatchPartyHost = false
             forceSoloStart = false
         }
-        
+
         // Capture event state before resetting
         let wasEventPlayback = isEventPlayback
         isEventPlayback = false // Reset event flag
-        
+
         exitFullscreen()
-        
+
         // Navigate back
         if !keepRoomState {
             if wasEventPlayback {
@@ -655,23 +687,23 @@ class PlayerViewModel: ObservableObject {
                }
             }
         }
-        
+
         WindowManager.shared.restoreWindowSize()
     }
-    
+
     func handleMovieFinished() async {
         print("🎬 PlayerVM.handleMovieFinished() called")
-        
+
         // Auto-play next episode logic
-        if let item = selectedMediaItem, item.type == "series", 
+        if let item = selectedMediaItem, item.type == "series",
            let meta = selectedMetadata, let videos = meta.videos {
-            
+
             // Check if we have a next episode available
             let (targetS, targetE) = findNextEpisode(currentS: selectedSeason ?? 1, currentE: selectedEpisode ?? 1, videos: videos)
-            
+
             if let s = targetS, let e = targetE {
                 print("⏭️ Series playback finished, auto-playing next episode: S\(s)E\(e)")
-                
+
                 // Binge Blocking: Free hosts cannot auto-play next episode in Watch Parties
                 let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
                 if isWatchPartyHost && !isPremium {
@@ -686,15 +718,15 @@ class PlayerViewModel: ObservableObject {
                 return
             }
         }
-        
+
         let wasEventPlayback = isEventPlayback
         let isPlaylistRoom = currentWatchPartyRoom?.hasPlaylist ?? false
         let isPersistentRoom = currentWatchPartyRoom?.isPersistent ?? false
-        
+
         let shouldKeepRoomState = !wasEventPlayback && (isPlaylistRoom || isPersistentRoom)
-        
+
         await exitPlayer(keepRoomState: shouldKeepRoomState)
-        
+
         if wasEventPlayback {
             if let eventId = currentEventId {
                 finishedEventIds.insert(eventId)
@@ -706,12 +738,12 @@ class PlayerViewModel: ObservableObject {
             }
             return
         }
-        
+
         if isPlaylistRoom, let room = currentWatchPartyRoom {
             await handlePlaylistTransition(room: room)
             return
         }
-        
+
         if isPersistentRoom {
             if let appState = appState {
                 appState.currentView = .watchPartyLobby
@@ -719,7 +751,7 @@ class PlayerViewModel: ObservableObject {
             return
         }
     }
-    
+
     // Check if next episode exists
     func hasNextEpisode() -> Bool {
         guard let item = selectedMediaItem, item.type == "series",
@@ -727,11 +759,11 @@ class PlayerViewModel: ObservableObject {
               let currentS = selectedSeason, let currentE = selectedEpisode else {
             return false
         }
-        
+
         let (targetS, targetE) = findNextEpisode(currentS: currentS, currentE: currentE, videos: videos)
         return targetS != nil && targetE != nil
     }
-    
+
     // Play next episode
     func playNextEpisode() async {
         guard let item = selectedMediaItem, item.type == "series",
@@ -739,16 +771,16 @@ class PlayerViewModel: ObservableObject {
               let currentS = selectedSeason, let currentE = selectedEpisode else {
             return
         }
-        
+
         let (targetS, targetE) = findNextEpisode(currentS: currentS, currentE: currentE, videos: videos)
-        
+
         guard let s = targetS, let e = targetE else {
             print("🚫 No next episode found")
             return
         }
-        
+
         print("⏭️ Playing Next Episode: S\(s)E\(e)")
-        
+
         // Binge Blocking: Free Hosts cannot play next episode in same room
         let isPremium = SupabaseClient.shared.auth.currentUser?.isPremium ?? false
         if isWatchPartyHost && !isPremium {
@@ -759,7 +791,7 @@ class PlayerViewModel: ObservableObject {
             }
             return
         }
-        
+
         await MainActor.run {
              if let appState = appState {
                  appState.selectedSeason = s
@@ -769,53 +801,53 @@ class PlayerViewModel: ObservableObject {
                  selectedEpisode = e
              }
         }
-        
+
         // Use the same watch mode and host status
         await playMedia(item, quality: selectedQuality, watchMode: currentWatchMode, roomId: currentRoomId, isHost: isWatchPartyHost)
     }
-    
+
     private func findNextEpisode(currentS: Int, currentE: Int, videos: [VideoEpisode]) -> (Int?, Int?) {
         // 1. Try next episode in current season
         let nextE = currentE + 1
         if videos.contains(where: { $0.season == currentS && $0.episode == nextE }) {
             return (currentS, nextE)
         }
-        
+
         // 2. Try first episode of next season
         let nextS = currentS + 1
         if videos.contains(where: { $0.season == nextS && $0.episode == 1 }) {
             return (nextS, 1)
         }
-        
+
         return (nil, nil)
     }
-    
+
     private func handlePlaylistTransition(room: WatchPartyRoom) async {
         await MainActor.run {
             var updatedRoom = room
             updatedRoom.currentPlaylistIndex += 1
-            
+
             if updatedRoom.currentPlaylistIndex >= (updatedRoom.playlist?.count ?? 0) {
                 if updatedRoom.shouldLoop {
                     updatedRoom.currentPlaylistIndex = 0
                 }
             }
-            
+
             self.currentWatchPartyRoom = updatedRoom
             if let appState = appState {
                  appState.currentView = .watchPartyLobby
             }
         }
     }
-    
+
     // MARK: - Room Management
-    
+
     // Generate a short 4-character room code
     private func generateRoomCode() -> String {
         let chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789" // Exclude I, O, 1, 0 to avoid confusion
         return String((0..<4).map { _ in chars.randomElement()! })
     }
-    
+
     func createWatchPartyAndNavigate(
         mediaItem: MediaItem,
         season: Int? = nil,
@@ -825,16 +857,16 @@ class PlayerViewModel: ObservableObject {
         description: String? = nil
     ) async {
         guard let appState = appState else { return }
-        
+
         await MainActor.run {
              appState.isLoadingRoom = true // Update AppState UI
         }
-        
+
         do {
             guard let userId = appState.currentUserId, !appState.currentUsername.isEmpty else {
                 throw NSError(domain: "PlayerViewModel", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not authenticated"])
             }
-            
+
             // Handle Series logic (default to S1E1 if missing)
             var finalSeason = season
             var finalEpisode = episode
@@ -855,7 +887,7 @@ class PlayerViewModel: ObservableObject {
             // Capture dependencies to avoid MainActor isolation violations
             let roomManager = self.roomManager
             let hostUsername = appState.currentUsername
-            
+
              // nonisolated helper to run off MainActor
             room = try await performRoomCreation(
                 roomManager: roomManager,
@@ -876,7 +908,7 @@ class PlayerViewModel: ObservableObject {
 
             // Host join DB
             try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: true)
-            
+
             // Create Host Participant
             let hostParticipant = Participant(
                 id: userId.uuidString,
@@ -919,18 +951,18 @@ class PlayerViewModel: ObservableObject {
                 self.currentWatchPartyRoom = watchPartyRoom
                 self.isWatchPartyHost = true
                 self.currentWatchMode = .watchParty
-                
+
                 self.selectedMediaItem = mediaItem
                 self.selectedSeason = finalSeason
                 self.selectedEpisode = finalEpisode
                 self.selectedQuality = quality
-                
+
                 if self.selectedMetadata == nil || self.selectedMetadata?.id != mediaItem.id {
                     Task {
                         self.selectedMetadata = try? await self.metadataProvider.fetchMetadata(type: mediaItem.type, id: mediaItem.id)
                     }
                 }
-                
+
                 appState.currentView = .watchPartyLobby
                 appState.isLoadingRoom = false
             }
@@ -941,7 +973,7 @@ class PlayerViewModel: ObservableObject {
             if msg.contains("Limit Reached") || msg.contains("P0001") || msg.contains("one room every 72 hours") {
                 // Refresh limit status so UI shows correct time
                 await LicenseManager.shared.checkHostingLimit()
-                
+
                 await MainActor.run {
                     appState.isLoadingRoom = false
                     self.showPremiumLimitAlert = true
@@ -951,22 +983,22 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     func joinRoom(roomId: String) async {
         guard let appState = appState else { return }
         NSLog("🚪 Joining room: \(roomId)")
-        
+
         await MainActor.run { appState.isLoadingRoom = true }
 
         do {
             let roomState = try await roomManager.getRoomState(roomId: roomId)
-            
+
             guard let room = roomState else {
                 NSLog("❌ Room not found: \(roomId)")
                 await MainActor.run { appState.isLoadingRoom = false }
                 return
             }
-            
+
             if let userId = appState.currentUserId {
                 try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: false)
             }
@@ -1035,21 +1067,21 @@ class PlayerViewModel: ObservableObject {
                     self.currentWatchPartyRoom = watchPartyRoom
                     self.isWatchPartyHost = (room.hostUserId == appState.currentUserId)
                     self.currentWatchMode = .watchParty
-                    
+
                     // NEW: Handle Event Rooms specifically
                     if roomId.hasPrefix("event_") {
                         self.isEventPlayback = true
                         // Extract ID from roomId (event_tt12345) or use imdbId if available
                         let rawId = roomId.replacingOccurrences(of: "event_", with: "")
                         self.currentEventId = rawId
-                        
+
                         // Set start time and resume position based on creation time (Schedule start)
                         self.eventStartTime = room.createdAt // Crucial for MPVPlayerView sync
-                        
+
                         let now = TimeService.shared.now
                         var position: Double = 0
                         let buffer = Double(eventsConfig?.bufferBetweenMoviesSeconds ?? 600)
-                        
+
                         // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
                         // If we rely on room.createdAt, we inherit the delay of the first user who joined.
                         // CRITICAL: Use authoritative deterministic schedule if possible to avoid "Late Room Creation" drift.
@@ -1057,20 +1089,20 @@ class PlayerViewModel: ObservableObject {
                         if let config = eventsConfig,
                            let liveEvent = EventsConfigService.shared.calculateLiveEvent(config: config),
                            liveEvent.mediaItem.id == self.currentEventId {
-                                
+
                             let slotPosition = now.timeIntervalSince(liveEvent.startTime)
                             position = max(0, slotPosition)
                             self.eventStartTime = liveEvent.startTime
-                            
+
                             NSLog("✅ Using Global Live Schedule! Start: \(liveEvent.startTime), Pos: \(position)")
-                            
-                        } 
+
+                        }
                         // 2. Try matching ANY scheduled event (e.g. if we are joining a friend in a previous/overlapping slot)
                         else if let scheduledEvent = appState.eventsSchedule.first(where: { $0.mediaItem.id == self.currentEventId }) {
                              let slotPosition = now.timeIntervalSince(scheduledEvent.startTime)
                              position = max(0, slotPosition)
                              self.eventStartTime = scheduledEvent.startTime
-                             
+
                              NSLog("✅ Using Specific Schedule Item! Start: \(scheduledEvent.startTime), Pos: \(position)")
                         }
                         else {
@@ -1084,29 +1116,29 @@ class PlayerViewModel: ObservableObject {
                                 NSLog("⚠️ Using Room Creation Time (Fallback). Start: \(room.createdAt), Pos: \(position)")
                             }
                         }
-                        
+
                         self.resumeFromTimestamp = position
-                        
+
                         NSLog("🎉 Detected Event Room join! StartTime: \(room.createdAt), Pos: \(position)s")
                     }
-                    
+
                     if let imdbId = room.imdbId, !imdbId.isEmpty {
                         self.selectedMediaItem = watchPartyRoom.mediaItem // Use constructed one
-                        
+
                         Task {
                             self.selectedMetadata = try? await self.metadataProvider.fetchMetadata(
                                 type: room.season != nil ? "series" : "movie",
                                 id: imdbId
                             )
                         }
-                        
+
                         self.selectedSeason = room.season
                         self.selectedEpisode = room.episode
                         self.selectedQuality = .fullHD
                         if !roomId.hasPrefix("event_") {
                             self.resumeFromTimestamp = Double(room.playbackPosition)
                         }
-                        
+
                         // Play immediately
                         Task {
                             await self.playMedia(
@@ -1124,7 +1156,7 @@ class PlayerViewModel: ObservableObject {
                     self.currentWatchPartyRoom = watchPartyRoom
                     self.isWatchPartyHost = (room.hostUserId == appState.currentUserId)
                     self.currentWatchMode = .watchParty
-                    
+
                     if let imdbId = room.imdbId, !imdbId.isEmpty {
                         self.selectedMediaItem = watchPartyRoom.mediaItem
                          Task {
@@ -1134,7 +1166,7 @@ class PlayerViewModel: ObservableObject {
                             )
                         }
                     }
-                    
+
                     appState.currentView = .watchPartyLobby
                 }
                 appState.isLoadingRoom = false
@@ -1145,11 +1177,11 @@ class PlayerViewModel: ObservableObject {
             await MainActor.run { appState.isLoadingRoom = false }
         }
     }
-    
+
     // MARK: - Watch History
-    
+
     private var lastHistorySaveTime: Date = .distantPast
-    
+
     func saveToWatchHistory(timestamp: Double, duration: Double, force: Bool = false) {
         guard let mediaItem = selectedMediaItem else { return }
 
@@ -1194,19 +1226,19 @@ class PlayerViewModel: ObservableObject {
             print("💾 Saved to watch history: \(mediaItem.name) at \(Int(timestamp))s")
         }
     }
-    
+
     // MARK: - Window Management
-    
+
     private func enterFullscreen() {
         WindowManager.shared.enterFullscreen()
     }
-    
+
     private func exitFullscreen() {
         WindowManager.shared.exitFullscreen()
     }
-    
+
     // MARK: - Non-Isolated Helpers
-    
+
     /// Performs room creation off the Main Actor to prevent UI blocking issues
     nonisolated private func performRoomCreation(
         roomManager: RoomManager,
@@ -1221,11 +1253,11 @@ class PlayerViewModel: ObservableObject {
         description: String?
     ) async throws -> SupabaseRoom {
         NSLog("Background: ⏳ Starting room creation (Unstructured Race)...")
-        
+
         // We use a continuation to allow returning *before* the network task completes/cancels
         return try await withCheckedThrowingContinuation { continuation in
             let continuationWrapper = ContinuationWrapper(continuation)
-            
+
             // 1. The Network Task (Detached to avoid ANY context inheritance)
             Task.detached(priority: .userInitiated) {
                 do {
@@ -1254,7 +1286,7 @@ class PlayerViewModel: ObservableObject {
                      continuationWrapper.resume(throwing: error)
                 }
             }
-            
+
             // 2. The Timeout Task
             Task {
                 try? await Task.sleep(nanoseconds: 8_000_000_000) // 8 seconds
@@ -1263,16 +1295,16 @@ class PlayerViewModel: ObservableObject {
             }
         }
     }
-    
+
     // Thread-safe wrapper to ensure continuation is resumed exactly once
     private class ContinuationWrapper {
         private var continuation: CheckedContinuation<SupabaseRoom, Error>?
         private let lock = NSLock()
-        
+
         init(_ continuation: CheckedContinuation<SupabaseRoom, Error>) {
             self.continuation = continuation
         }
-        
+
         func resume(returning value: SupabaseRoom) {
             lock.lock()
             defer { lock.unlock() }
@@ -1281,7 +1313,7 @@ class PlayerViewModel: ObservableObject {
                 continuation = nil
             }
         }
-        
+
         func resume(throwing error: Error) {
             lock.lock()
             defer { lock.unlock() }

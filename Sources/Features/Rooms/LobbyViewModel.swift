@@ -924,8 +924,30 @@ class LobbyViewModel: ObservableObject {
                 self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
 
                 // Update AppState to keep it in sync
-                appState?.player.currentWatchPartyRoom?.playlist = freshRoom.playlist
-                appState?.player.currentWatchPartyRoom?.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+                if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
+                    currentRoomParam.playlist = freshRoom.playlist
+                    currentRoomParam.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+                    
+                    // CRITICAL FIX: Sync verified stream properties
+                    // This ensures Guest Optimization works (Play from Host Stream) without re-resolving
+                    currentRoomParam.selectedStreamHash = freshRoom.streamHash
+                    currentRoomParam.selectedFileIdx = freshRoom.fileIdx
+                    currentRoomParam.selectedQuality = freshRoom.quality
+                    currentRoomParam.unlockedStreamURL = freshRoom.unlockedStreamUrl
+                    currentRoomParam.subtitleUrl = freshRoom.subtitleUrl
+                    
+                    self.appState?.player.currentWatchPartyRoom = currentRoomParam
+                    print("✅ Lobby: Synced stream info & playlist to AppState")
+                }
+
+                // Update local room state
+                self.room.playlist = freshRoom.playlist
+                self.room.currentPlaylistIndex = freshRoom.currentPlaylistIndex ?? 0
+                self.room.selectedStreamHash = freshRoom.streamHash
+                self.room.selectedFileIdx = freshRoom.fileIdx
+                self.room.selectedQuality = freshRoom.quality
+                self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
+                self.room.subtitleUrl = freshRoom.subtitleUrl
 
                 // CRITICAL FIX: Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties

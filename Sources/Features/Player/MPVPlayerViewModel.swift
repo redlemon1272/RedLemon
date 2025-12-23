@@ -278,6 +278,7 @@ class MPVPlayerViewModel: ObservableObject {
     @Published var syncStatus: String? = nil
     @Published var isBuffering: Bool = false
     @Published var isSeeking: Bool = false
+    @Published var isExitingToLobby: Bool = false
 
     // Chat state
     @Published var showChat: Bool = false
@@ -1931,6 +1932,9 @@ extension MPVPlayerViewModel {
     func triggerReturnToLobby() {
         guard isWatchPartyHost else { return }
         print("🏠 Host triggering return to lobby...")
+        
+        // Show exit UI
+        self.isExitingToLobby = true
 
         // Set message for Host
         appState?.pendingLobbyMessage = "You returned the group to the lobby."

@@ -651,7 +651,17 @@ class LobbyViewModel: ObservableObject {
         NSLog("🎬 Host: Starting movie for \(participants.count) participants")
         isStarting = true
         transitionState.isStarting = true
-        addMessage(.hostStarting, userName: "Host")
+        
+        // Smart Start Message
+        var startMsg = "Host is starting the media"
+        if let type = Optional(mediaItem.type.lowercased()) {
+             if type == "series" {
+                 startMsg = "Host is starting the episode"
+             } else if type == "movie" {
+                 startMsg = "Host is starting the movie"
+             }
+        }
+        addMessage(.systemInfo, userName: "System", data: ["message": startMsg])
 
         // 1. Resolve and persist stream explicitly BEFORE broadcasting signal
         // This ensures guests don't fetch nil stream details

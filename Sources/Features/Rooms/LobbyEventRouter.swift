@@ -135,6 +135,14 @@ class LobbyEventRouter: ObservableObject {
 
         if let senderId = syncMessage.senderId,
            let index = viewModel.participants.firstIndex(where: { $0.id == senderId }) {
+            
+            // Fix: Duplicate messages (Echo check)
+            // If sender is ME, I already updated my local state and added a system message.
+            // So we only process logic for OTHERS.
+            if senderId.caseInsensitiveCompare(viewModel.participantId) == .orderedSame {
+                return 
+            }
+            
             let username = viewModel.participants[index].name
             viewModel.participants[index].isReady = isReady
             let recipientRole = viewModel.isHost ? "Host" : "Guest"
@@ -299,13 +307,33 @@ class LobbyEventRouter: ObservableObject {
 
         // NOW wait for countdown
         let fetchDuration = Date().timeIntervalSince(fetchStartTime)
-        let remainingWait = max(0, 3.25 - fetchDuration)
-
-        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, waiting \(String(format: "%.3f", remainingWait))s")
-
-        if remainingWait > 0 {
-            try? await Task.sleep(nanoseconds: UInt64(remainingWait * 1_000_000_000))
+        // Adjust wait time based on countdown timestamp relative to now if possible, 
+        // but here we just rely on the '3' from the message minus fetch time.
+        // We add a visual countdown loop here.
+        
+        let totalWaitTime = max(0, 3.25 - fetchDuration)
+        
+        // Visual Countdown Loop
+        let startCount = 3
+        
+        Task { @MainActor in
+            viewModel.countdown = startCount
+            viewModel.isStarting = true // Ensure UI shows it
         }
+
+        // Loop roughly every second to update UI
+        for i in 0..<startCount {
+             let remaining = startCount - i
+             await MainActor.run { viewModel.countdown = remaining }
+             
+             // Sleep 1s (or partial for last frame)
+             try? await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+        
+        // Final sync wait if needed (though loop is approx 3s)
+        // We just proceed now.
+        
+        NSLog("🎬 Guest: Fetch took \(String(format: "%.3f", fetchDuration))s, finished countdown loop")
 
         NSLog("🎬 Guest: Starting playback after countdown")
 

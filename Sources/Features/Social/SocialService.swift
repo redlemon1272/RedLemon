@@ -591,13 +591,13 @@ class SocialService: ObservableObject {
                     "event": "INSERT",
                     "schema": "public",
                     "table": "direct_messages",
-                    "filter": "receiver_id=eq.\(userId)"
+                    "filter": "receiver_id=eq.\(userId.lowercased())" // Force lowercase for DB match
                 ],
                 [
                     "event": "INSERT",
                     "schema": "public",
                     "table": "direct_messages",
-                    "filter": "sender_id=eq.\(userId)"
+                    "filter": "sender_id=eq.\(userId.lowercased())" // Force lowercase for DB match
                 ]
             ]
             
@@ -693,7 +693,8 @@ class SocialService: ObservableObject {
             self.messages[normalizedFriendId] = currentMsgs
             
             // Increment unread count if it's an incoming message (not from me)
-            if senderIdStr != currentUserId {
+            // Use case-insensitive comparison
+            if senderIdStr.caseInsensitiveCompare(currentUserId ?? "") != .orderedSame {
                 self.unreadCounts[normalizedFriendId, default: 0] += 1
             }
             

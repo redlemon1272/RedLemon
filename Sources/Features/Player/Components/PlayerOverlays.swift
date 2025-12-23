@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoadingOverlay: View {
     let streamTitle: String
+    var message: String = "Loading stream..."
 
     var body: some View {
         VStack(spacing: 20) {
@@ -18,7 +19,7 @@ struct LoadingOverlay: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 .scaleEffect(1.5)
 
-            Text("Loading stream...")
+            Text(message)
                 .font(.headline)
                 .foregroundColor(.white.opacity(0.8))
 

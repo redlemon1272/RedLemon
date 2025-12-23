@@ -45,7 +45,7 @@ struct WatchPartyLobbyView: View {
                         ProgressView()
                             .scaleEffect(1.5)
                             .tint(.white)
-                        Text("Joining Live Event...")
+                        Text(room.type == .userRoom ? "Joining Room..." : "Joining Live Event...")
                             .font(.title3)
                             .fontWeight(.medium)
                             .foregroundColor(.white)

@@ -520,7 +520,9 @@ struct MPVPlayerView: View {
         }
 
         // Loading overlay
-        if viewModel.isLoading {
+        if viewModel.isExitingToLobby {
+            LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
+        } else if viewModel.isLoading {
             LoadingOverlay(streamTitle: viewModel.streamTitle)
         }
 

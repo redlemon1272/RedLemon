@@ -176,7 +176,7 @@ class MPVPlayerViewModel: ObservableObject {
 
                             print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
-                            self.isLoading = false
+                            // self.isLoading = false // Keep loading overlay visible during retry fallbacks
                             
                             // Trigger Error Feedback to View
                             self.playbackErrorTrigger.send("Playback Failed")

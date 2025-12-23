@@ -1963,32 +1963,37 @@ extension MPVPlayerViewModel {
         // Set message for Host
         appState?.pendingLobbyMessage = "You returned the group to the lobby."
 
-        // 1. Clear DB State IMMEDIATELY (Prevent race condition for quick-returning guests)
-        Task {
-            if let roomId = appState?.player.currentRoomId {
+        // CRITICAL FIX: Use sequential awaits to prevent ViewModel deinit before message send
+        Task { [weak self] in
+            guard let self = self else { return }
+            
+            // 1. Clear DB State FIRST (Prevent race condition for quick-returning guests)
+            if let roomId = self.appState?.player.currentRoomId {
                 try? await SupabaseClient.shared.updateRoomPlayback(roomId: roomId, position: 0, isPlaying: false)
                 print("✅ Host cleared DB playback state before exit")
             }
-        }
-
-        // Send sync message to guests
-        let message = SyncMessage(
-            type: .returnToLobby,
-            timestamp: Date().timeIntervalSince1970,
-            position: 0,
-            isPlaying: false,
-            senderId: currentUserId
-        )
-
-        Task { [weak self] in
-            guard let self = self else { return }
-            try? await self.realtimeManager?.sendSyncMessage(message)
-
-            // Wait briefly for message to send, then clean up locally
-            try? await Task.sleep(nanoseconds: 1_000_000_000) // 1.0s
-
+            
+            // 2. Send sync message to guests and AWAIT completion
+            let message = SyncMessage(
+                type: .returnToLobby,
+                timestamp: Date().timeIntervalSince1970,
+                position: 0,
+                isPlaying: false,
+                senderId: self.currentUserId
+            )
+            
+            do {
+                try await self.realtimeManager?.sendSyncMessage(message)
+                print("✅ Host sent returnToLobby message to guests")
+            } catch {
+                print("⚠️ Host failed to send returnToLobby message: \(error)")
+            }
+            
+            // 3. Small delay to ensure message propagates through Realtime
+            try? await Task.sleep(nanoseconds: 500_000_000) // 0.5s
+            
+            // 4. ONLY NOW cleanup and navigate
             await MainActor.run {
-                // Host cleanup and navigation
                 Task { [weak self] in
                     guard let self = self else { return }
                     await self.cleanup()

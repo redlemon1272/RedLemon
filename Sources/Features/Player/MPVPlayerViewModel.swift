@@ -124,9 +124,18 @@ class MPVPlayerViewModel: ObservableObject {
                     self.duration = dur
 
                     // Watch Party Ready Gate
+                    // CRITICAL FIX: Only enter Ready Gate if room is NOT already playing.
+                    // If room is playing (late join), we skip this and let Sync Logic handle the jump.
+                    let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
+                    
                     if dur > 0 && self.isInWatchParty && !self.hasSentReadySignal {
-                        NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
-                        self.sendReadySignal()
+                        if isRoomPlaying {
+                             NSLog("⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)")
+                             self.hasSentReadySignal = true // Mark as sent to disable future triggers
+                        } else {
+                            NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
+                            self.sendReadySignal()
+                        }
                     }
                 }
                 .store(in: &serviceCancellables)
@@ -183,8 +192,15 @@ class MPVPlayerViewModel: ObservableObject {
                     guard let self = self else { return }
                     if loaded {
                         if self.isInWatchParty && !self.hasSentReadySignal {
-                            NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
-                            self.sendReadySignal()
+                            let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
+                            
+                            if isRoomPlaying {
+                                NSLog("⏩ Watch Party: File loaded (late join), skipping Ready Gate")
+                                self.hasSentReadySignal = true
+                            } else {
+                                NSLog("📂 Watch Party: File loaded signal received (fallback trigger), sending Ready signal")
+                                self.sendReadySignal()
+                            }
                         }
                     }
                 }

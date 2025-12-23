@@ -989,14 +989,27 @@ class LobbyViewModel: ObservableObject {
                 self.room.unlockedStreamURL = freshRoom.unlockedStreamUrl
                 self.room.subtitleUrl = freshRoom.subtitleUrl
 
-                // CRITICAL FIX: Sync UI Metadata on Init (Fixes Art Reversion)
+                // CRITICAL FIX: Syn Sync UI Metadata on Init (Fixes Art Reversion)
                 // Construct MediaItem from SupabaseRoom flat properties
                 var freshMedia: MediaItem? = nil
                 if let imdbId = freshRoom.imdbId {
-                    let type = (freshRoom.season != nil || freshRoom.episode != nil) ? "series" : "movie"
+                    // 1. Better Type Inference: Check Playlist first
+                    // This prevents stale season/episode data (from previous series) from forcing "series" type on a movie
+                    var expectedType = (freshRoom.season != nil || freshRoom.episode != nil) ? "series" : "movie"
+
+                    if let playlist = freshRoom.playlist,
+                       let index = freshRoom.currentPlaylistIndex,
+                       index >= 0, index < playlist.count {
+                        let playlistItem = playlist[index]
+                        // Only trust playlist type if IDs match
+                        if playlistItem.mediaItem.id == imdbId {
+                            expectedType = playlistItem.mediaItem.type
+                        }
+                    }
+
                     freshMedia = MediaItem(
                         id: imdbId,
-                        type: type,
+                        type: expectedType,
                         name: freshRoom.name,
                         poster: freshRoom.posterUrl,
                         background: freshRoom.backdropUrl,
@@ -1013,19 +1026,27 @@ class LobbyViewModel: ObservableObject {
                 if let mediaItem = freshMedia {
                     if self.room.mediaItem?.id != mediaItem.id ||
                        self.room.season != freshRoom.season ||
-                       self.room.episode != freshRoom.episode {
+                       self.room.episode != freshRoom.episode ||
+                       self.room.mediaItem?.type != mediaItem.type { // added type check
 
                         // Update local room state
                         self.room.mediaItem = mediaItem
-                        self.room.season = freshRoom.season
-                        self.room.episode = freshRoom.episode
+
+                        // CRITICAL: Force clear season/episode if type is movie (overriding stale DB values)
+                        if mediaItem.type == "series" {
+                            self.room.season = freshRoom.season
+                            self.room.episode = freshRoom.episode
+                        } else {
+                            self.room.season = nil
+                            self.room.episode = nil
+                        }
 
                         // Update UI Bindings
                         self.posterURL = mediaItem.poster
                         self.backdropURL = mediaItem.background
                         self.logoURL = mediaItem.logo // Reset logo (will be nil for DB state, triggering fetch)
 
-                        print("✅ Lobby: Synced Initial Metadata -> \(mediaItem.name)")
+                        print("✅ Lobby: Synced Initial Metadata -> \(mediaItem.name) (\(mediaItem.type))")
 
                         // Trigger metadata load if assets are missing
                         if self.logoURL == nil {
@@ -1195,7 +1216,17 @@ class LobbyViewModel: ObservableObject {
 
         // Infer expected type from season/episode presence
         // If season/episode are present, it MUST be a series
-        let expectedType = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+        var expectedType = (roomState.season != nil || roomState.episode != nil) ? "series" : "movie"
+
+        // CRITICAL FIX: Check Playlist first to override stale inference
+        if let playlist = roomState.playlist,
+           let index = roomState.currentPlaylistIndex,
+           index >= 0, index < playlist.count {
+            let playlistItem = playlist[index]
+            if playlistItem.mediaItem.id == newImdbId {
+                expectedType = playlistItem.mediaItem.type
+            }
+        }
 
         // Check for mismatch in either ID OR Type
         // This fixes the issue where ID is correct (e.g. Breaking Bad) but Type is wrong (Movie -> "Mirror")
@@ -1217,6 +1248,16 @@ class LobbyViewModel: ObservableObject {
 
                 await MainActor.run {
                     self.room.mediaItem = mediaItem
+
+                    // CRITICAL: Force clear season/episode if type is movie
+                    if expectedType == "series" {
+                        self.room.season = roomState.season
+                        self.room.episode = roomState.episode
+                    } else {
+                        self.room.season = nil
+                        self.room.episode = nil
+                    }
+
                     // Also update poster/backdrop
                     self.posterURL = mediaItem.posterURL?.absoluteString
                     self.backdropURL = mediaItem.backgroundURL?.absoluteString

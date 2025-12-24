@@ -1979,6 +1979,13 @@ extension MPVPlayerViewModel {
 
         // Set message for Host
         appState?.pendingLobbyMessage = "You returned the group to the lobby."
+        
+        // CRITICAL FIX: Stop the broadcast timer IMMEDIATELY to prevent race condition
+        // If we don't stop it here, the timer will continue sending playbackState messages
+        // AFTER we send returnToLobby, causing guests to ignore the lobby return signal.
+        syncBroadcastTimer?.invalidate()
+        syncBroadcastTimer = nil
+        print("🛑 Host stopped sync broadcast timer before returnToLobby")
 
         // CRITICAL FIX: Use sequential awaits to prevent ViewModel deinit before message send
         Task { [weak self] in

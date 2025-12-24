@@ -842,10 +842,17 @@ class SupabaseClient: RoomManager, UserManager {
             "name": name,
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
-
-        if let imdbId = imdbId { body["imdb_id"] = imdbId }
-        if let season = season { body["season"] = season }
-        if let episode = episode { body["episode"] = episode }
+        
+        // CRITICAL FIX: Explicitly clear fields when nil to remove stale values
+        // When changing from series to movie, we must NULL out season/episode
+        if let imdbId = imdbId {
+            body["imdb_id"] = imdbId
+        }
+        
+        // Always set season/episode (use NSNull() to clear if nil)
+        body["season"] = season != nil ? season! : NSNull()
+        body["episode"] = episode != nil ? episode! : NSNull()
+        
         if let posterUrl = posterUrl { body["poster_url"] = posterUrl }
         if let backdropUrl = backdropUrl { body["backdrop_url"] = backdropUrl }
 

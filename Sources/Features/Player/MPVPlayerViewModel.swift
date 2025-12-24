@@ -860,6 +860,23 @@ class MPVPlayerViewModel: ObservableObject {
                 self.appState?.player.eventStartTime = nil // Clear event start too if present
                 self.isResumingInWatchParty = false
 
+                // CRITICAL FIX: Broadcast seek to Watch Party guests
+                // attemptImmediateResume is often called after a scrub/reload, so we must tell guests to jump too.
+                if self.isWatchPartyHost {
+                    let syncMessage = SyncMessage(
+                        type: .seek,
+                        timestamp: Date().timeIntervalSince1970,
+                        position: resumeTime,
+                        isPlaying: true, // We are explicitly resuming
+                        senderId: self.currentUserId
+                    )
+                    
+                    Task {
+                        try? await self.realtimeManager?.sendSyncMessage(syncMessage)
+                    }
+                    print("📡 Host broadcasting immediate resume seek to \(Int(resumeTime))s")
+                }
+
                 print("✅ Resumed playback after seek to \(Int(resumeTime))s")
             }
         }

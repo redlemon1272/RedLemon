@@ -549,7 +549,8 @@ struct EventsView: View {
                     quality: .fullHD,
                     watchMode: .watchParty,
                     roomId: roomId,
-                    isHost: false
+                    isHost: false,
+                    isEvent: true
                 )
             }
         } else {

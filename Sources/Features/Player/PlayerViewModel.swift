@@ -57,7 +57,7 @@ class PlayerViewModel: ObservableObject {
 
     // MARK: - Playback Logic
 
-    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false) async {
+    func playMedia(_ item: MediaItem, quality: VideoQuality, watchMode: WatchMode, roomId: String? = nil, isHost: Bool = false, isEvent: Bool = false) async {
         streamError = nil
 
         // Step 0: Clear state IMMEDIATELY to prevent stale UI
@@ -91,6 +91,9 @@ class PlayerViewModel: ObservableObject {
             currentWatchMode = watchMode
             isWatchPartyHost = isHost
             selectedQuality = quality
+            
+            // CRITICAL FIX: Enforce event playback state to ensure UI correctness
+            isEventPlayback = isEvent
 
             // Show player immediately
             showPlayer = true

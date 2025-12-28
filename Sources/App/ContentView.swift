@@ -23,27 +23,22 @@ struct ContentView: View {
                         } else {
                             Image(systemName: "tv.circle.fill")
                                 .font(.system(size: 48))
-                                .foregroundStyle(
-                                    LinearGradient(
-                                        colors: [.yellow, .orange],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
+                                .foregroundStyle(DesignSystem.Colors.accent)
+                                .stitchGlow()
                         }
 
                         // Blockbuster-styled logo text
                         HStack(spacing: 0) {
                             Text("Red")
                                 .font(.system(size: 28, weight: .black, design: .default))
-                                .foregroundColor(Color(red: 1.0, green: 0.84, blue: 0.0)) // Yellow like Blockbuster
+                                .foregroundColor(DesignSystem.Colors.accent) 
                                 .italic()
                             Text("Lemon")
                                 .font(.system(size: 28, weight: .black, design: .default))
-                                .foregroundColor(Color(red: 0.9, green: 0.0, blue: 0.0)) // Bright red
+                                .foregroundColor(.red) 
                                 .italic()
                         }
-                        .shadow(color: .black.opacity(0.3), radius: 2, x: 0, y: 2)
+                        .shadow(color: DesignSystem.Colors.accent.opacity(0.3), radius: 10, x: 0, y: 0)
                     }
                     .padding(.top, 30)
                     .padding(.bottom, 40)
@@ -106,6 +101,7 @@ struct ContentView: View {
                     // Settings at bottom
                     VStack(spacing: 8) {
                         Divider()
+                            .background(DesignSystem.Colors.glassBorder)
                             .padding(.horizontal, 16)
                             .padding(.bottom, 8)
 
@@ -122,7 +118,15 @@ struct ContentView: View {
                     .padding(.bottom, 20)
                 }
                 .frame(width: 240)
-                .background(Color(NSColor.controlBackgroundColor))
+                .background(DesignSystem.Colors.glassSurface) // Glassmorphism base
+                .overlay(
+                    HStack {
+                         Spacer()
+                         Rectangle()
+                             .fill(DesignSystem.Colors.glassBorder)
+                             .frame(width: 1)
+                    }
+                )
                 } // End if !watchPartyLobby
 
                 // Main content area (excluding player)
@@ -627,62 +631,55 @@ struct SidebarButton: View {
                     Image(systemName: icon)
                         .font(.system(size: 18, weight: .medium))
                         .frame(width: 24)
+                        .foregroundColor(isSelected ? .white : (isHovered ? .white : DesignSystem.Colors.textSecondary))
 
                     if badgeCount > 0 {
                         Text("\(badgeCount)")
                             .font(.system(size: 9, weight: .bold))
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .padding(.horizontal, 4)
                             .frame(minWidth: 14, minHeight: 14)
-                            .background(Color.red)
+                            .background(DesignSystem.Colors.accent)
                             .clipShape(Capsule())
                             .offset(x: 10, y: -8)
                     } else if showBadge {
                         Circle()
-                            .fill(Color.red)
+                            .fill(DesignSystem.Colors.accent)
                             .frame(width: 10, height: 10)
                             .offset(x: 6, y: -6)
+                            .stitchGlow()
                     }
                 }
 
                 Text(title)
                     .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(isSelected ? .white : (isHovered ? .white : DesignSystem.Colors.textSecondary))
 
                 Spacer()
+                
+                // Active indicator dot
+                if isSelected {
+                    Circle()
+                        .fill(DesignSystem.Colors.accent)
+                        .frame(width: 6, height: 6)
+                        .stitchGlow(color: DesignSystem.Colors.accent, radius: 5)
+                }
             }
-            .foregroundColor(isSelected ? .white : .primary)
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(backgroundColor)
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(isSelected ? DesignSystem.Colors.accent.opacity(0.15) : (isHovered ? DesignSystem.Colors.glassSurface : Color.clear))
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .strokeBorder(borderColor, lineWidth: isSelected ? 2 : 0)
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(isSelected ? DesignSystem.Colors.accent.opacity(0.5) : Color.clear, lineWidth: 1)
             )
+            .animation(.easeInOut(duration: 0.2), value: isHovered)
         }
         .buttonStyle(PlainButtonStyle())
         .onHover { hovering in
             isHovered = hovering
-        }
-    }
-
-    private var backgroundColor: Color {
-        if isSelected {
-            return Color.accentColor
-        } else if isHovered {
-            return Color(NSColor.controlBackgroundColor).opacity(0.5)
-        } else {
-            return Color.clear
-        }
-    }
-
-    private var borderColor: Color {
-        if isSelected {
-            return Color.accentColor.opacity(0.5)
-        } else {
-            return Color.clear
         }
     }
 }

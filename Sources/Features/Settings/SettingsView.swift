@@ -94,7 +94,7 @@ struct SettingsView: View {
             .frame(maxWidth: 1200)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(NSColor.windowBackgroundColor))
+        .background(Color.clear)
         .task {
             await loadCredentials()
             await licenseManager.checkHostingLimit()

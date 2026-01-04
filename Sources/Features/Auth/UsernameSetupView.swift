@@ -12,30 +12,34 @@ struct UsernameSetupView: View {
     @State private var username: String = ""
     @State private var isCreating: Bool = false
     @State private var errorMessage: String?
+    @State private var showRestoreSheet = false
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         VStack(spacing: 20) {
             Spacer().frame(height: 30)
 
-            // Icon
-            Image(systemName: "person.circle.fill")
-                .font(.system(size: 70))
-                .foregroundColor(.blue)
+            // Header Group
+            VStack(spacing: 10) {
+                // Icon
+                Image(systemName: "person.circle.fill")
+                    .font(.system(size: 70))
+                    .foregroundColor(.blue)
 
-            // Title
-            Text("Welcome to RedLemon!")
-                .font(.system(size: 28, weight: .bold))
+                // Title
+                Text("Welcome to RedLemon!")
+                    .font(.system(size: 28, weight: .bold))
 
-            Text("Choose a unique username")
-                .font(.system(size: 16))
-                .foregroundColor(.secondary)
+                Text("Choose a unique username")
+                    .font(.system(size: 16))
+                    .foregroundColor(.secondary)
 
-            Text("Your username is permanent and lets friends find you")
-                .font(.system(size: 13))
-                .foregroundColor(.secondary)
-                .multilineTextAlignment(.center)
-                .frame(maxWidth: 380)
+                Text("Your username is permanent and lets friends find you")
+                    .font(.system(size: 13))
+                    .foregroundColor(.secondary)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 380)
+            }
 
             Spacer().frame(height: 10)
 
@@ -90,9 +94,29 @@ struct UsernameSetupView: View {
             .disabled(username.isEmpty || isCreating)
 
             Spacer()
+            
+            // Restore Account Link
+            Button(action: {
+                showRestoreSheet = true
+            }) {
+                Text("Already have an account? Restore from backup")
+                    .font(.caption)
+                    .foregroundColor(.blue)
+                    .underline()
+            }
+            .buttonStyle(PlainButtonStyle())
+            .padding(.bottom, 20)
         }
         .frame(width: 500, height: 500)
         .background(Color(NSColor.windowBackgroundColor))
+        .sheet(isPresented: $showRestoreSheet) {
+            RestoreAccountView()
+        }
+        .onChange(of: appState.currentUserId) { userId in
+            if userId != nil {
+                dismiss()
+            }
+        }
     }
 
     private func createUser() {
@@ -116,7 +140,7 @@ struct UsernameSetupView: View {
         Task {
             do {
                 // Check if username already exists
-                if let existingUser = try? await SupabaseClient.shared.getUserByUsername(username: trimmed) {
+                if let _ = try? await SupabaseClient.shared.getUserByUsername(username: trimmed) {
                     await MainActor.run {
                         errorMessage = "Username already taken. Please choose a different one."
                         isCreating = false

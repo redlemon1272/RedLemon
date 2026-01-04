@@ -9,6 +9,7 @@ struct RestoreAccountView: View {
     @State private var isRestoring = false
     @State private var errorMessage: String?
     @State private var successMessage: String?
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         ZStack {
@@ -116,6 +117,17 @@ struct RestoreAccountView: View {
                 
                 await MainActor.run {
                     successMessage = "✅ Restored account: \(account.username)"
+                    
+                    // Update AppState to trigger navigation changes (e.g. dismiss UsernameSetupView)
+                    appState.currentUsername = account.username
+                    if let uuid = UUID(uuidString: account.userId) {
+                        appState.currentUserId = uuid
+                        
+                        // Also connect to social service
+                        Task {
+                            await SocialService.shared.connect(userId: account.userId, username: account.username)
+                        }
+                    }
                     
                     // Trigger app state refresh if needed
                     // For now, just dismiss after delay

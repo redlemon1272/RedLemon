@@ -1853,6 +1853,9 @@ extension MPVPlayerViewModel {
                         // Check if already exists using actualUserId (stable ID)
                         if let index = updatedParticipants.firstIndex(where: { $0.id == actualUserId }) {
                             // User exists - update their timestamp
+                            // Capture offline state before update (True if phxRef was nil)
+                            let wasOffline = updatedParticipants[index].phxRef == nil
+                            
                             updatedParticipants[index].joinedAt = Date()
 
                             // Prefer phx_ref from metadata.
@@ -1864,6 +1867,13 @@ extension MPVPlayerViewModel {
                                 print("⚠️ Join event for \(actualUserId) missing phx_ref - preserving existing Ref: \(updatedParticipants[index].phxRef ?? "nil")")
                                 // If we don't have a new ref, do we keep the old one in `activeConnectionRefs`?
                                 // Yes, assume same session.
+                            }
+
+                            // If upgrading from DB-only (Offline) to Realtime (Online), announce it
+                            // This fixes the race condition where DB Polling adds them first (no Ref) 
+                            // and suppresses the Join message because they are "already in list".
+                            if wasOffline && actualUserId != self.currentUserId {
+                                self.addSystemMessage("\(updatedParticipants[index].name) joined")
                             }
 
                             if let name = metaUsername {

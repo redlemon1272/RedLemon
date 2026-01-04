@@ -2172,44 +2172,88 @@ extension MPVPlayerViewModel {
         do {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
 
-            var updatedParticipants: [Participant] = []
-
-            for p in roomParticipants {
-                var name = "User"
-                // Try to find existing participant to get name (avoid DB call if possible)
-                // or fetch if new.
-                // To be robust like Lobby, we should fetch, but caching is better.
-                // Let's reuse existing name if available to reduce latency.
-                if let existing = appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString }) {
-                    name = existing.name
-                } else if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
-                     name = user.username
+            // Current participants map (normalized ID -> Participant)
+            var currentMap: [String: Participant] = [:]
+            if let currentList = appState?.player.currentWatchPartyRoom?.participants {
+                for p in currentList {
+                    currentMap[p.id.lowercased()] = p
                 }
-
-                // Preserve ready state
-                let isReady = appState?.player.currentWatchPartyRoom?.participants.first(where: { $0.id == p.userId.uuidString })?.isReady ?? p.isHost
-
-                let participant = Participant(
-                    id: p.userId.uuidString,
-                    name: name,
-                    isHost: p.isHost,
-                    isReady: isReady,
-                    joinedAt: p.joinedAt
-                )
-                updatedParticipants.append(participant)
             }
 
-            // Only update if changed (basic check on count or IDs)
-            let currentIds = Set(appState?.player.currentWatchPartyRoom?.participants.map { $0.id } ?? [])
-            let newIds = Set(updatedParticipants.map { $0.id })
+            var mergedParticipants = Array(currentMap.values)
+            var hasChanges = false
 
-            if currentIds != newIds || appState?.player.currentWatchPartyRoom?.participants.count != updatedParticipants.count {
-                self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
-                NSLog("👥 MPVPlayer: Updated participants list via polling: \(updatedParticipants.count)")
-            } else {
-                 // Even if IDs are same, maybe name changed? Or specific properties?
-                 // But replacing array is safe.
-                 self.appState?.player.currentWatchPartyRoom?.participants = updatedParticipants
+            // 1. Process DB Participants (Updates & Adds)
+            var dbUserIds = Set<String>()
+            
+            for p in roomParticipants {
+                let pId = p.userId.uuidString.lowercased()
+                dbUserIds.insert(pId)
+
+                if let existing = currentMap[pId] {
+                    // Update existing (preserve phxRef and joinedAt if older)
+                    // If DB says host changed, update it.
+                    if existing.isHost != p.isHost {
+                        var updated = existing
+                        updated.isHost = p.isHost
+                        currentMap[pId] = updated
+                        hasChanges = true
+                    }
+                    // We knowingly encounter name mismatches (DB username vs Metadata username)
+                    // We trust Realtime metadata name more for active users, but DB for offline.
+                    // Let's keep existing name if possible.
+                } else {
+                    // New user from DB (likely persistent/offline or just joined)
+                    // Try to fetch username if not available
+                    var name = "User"
+                    if let user = try? await SupabaseClient.shared.getUserById(userId: p.userId) {
+                         name = user.username
+                    }
+
+                    let newParticipant = Participant(
+                        id: pId, // Normalized
+                        name: name,
+                        isHost: p.isHost,
+                        isReady: false, // Default to false for DB poll
+                        joinedAt: p.joinedAt,
+                        phxRef: nil // No ref from DB
+                    )
+                    currentMap[pId] = newParticipant
+                    hasChanges = true
+                }
+            }
+
+            // 2. Process Removals?
+            // CRITICAL: Do NOT remove users just because they are missing from DB poll immediately.
+            // Presence might be ahead of DB.
+            // However, if we have a user with NO phxRef (offline) and they are NOT in DB, they should be removed.
+            // If they HAVE phxRef (online), we KEEP them regardless of DB.
+            
+            let idsToRemove = currentMap.keys.filter { id in
+                let isOnline = currentMap[id]?.phxRef != nil
+                let isInDB = dbUserIds.contains(id)
+                
+                // If Online: Keep (Source of Truth is Realtime)
+                if isOnline { return false }
+                
+                // If Offline and Not in DB: Remove (Stale)
+                if !isInDB { return true }
+                
+                return false
+            }
+            
+            if !idsToRemove.isEmpty {
+                for id in idsToRemove {
+                    currentMap.removeValue(forKey: id)
+                }
+                hasChanges = true
+            }
+
+            // Only update if changed
+            if hasChanges {
+                let sortedList = currentMap.values.sorted { $0.joinedAt < $1.joinedAt }
+                self.appState?.player.currentWatchPartyRoom?.participants = sortedList
+                NSLog("👥 MPVPlayer: Merged participants list via polling (Count: \(sortedList.count))")
             }
 
         } catch {

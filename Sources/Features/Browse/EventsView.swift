@@ -70,7 +70,7 @@ struct EventsView: View {
                                             let _ = lastUpdate
                                             let isLobbyOverride = (heroEvent.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                             
-                                            HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, height: heroHeight) {
+                                            HeroEventCard(event: heroEvent, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: heroHeight) {
                                                 await joinEvent(heroEvent)
                                             }
                                             // Removed drawingGroup() and shadow() to improve scrolling performance
@@ -92,7 +92,7 @@ struct EventsView: View {
                                                 ForEach(appState.eventsSchedule.dropFirst()) { event in
                                                     let isLobbyOverride = (event.index == 1 && (appState.eventsSchedule.first?.isFinished == true || appState.player.finishedEventIds.contains(appState.eventsSchedule.first?.id ?? "")))
                                                     
-                                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, height: gridItemHeight) {
+                                                    HeroEventCard(event: event, isLobbyOverride: isLobbyOverride, lastUpdate: lastUpdate, height: gridItemHeight) {
                                                         await joinEvent(event)
                                                     }
                                                     // Removed drawingGroup() and shadow() to improve scrolling performance
@@ -579,6 +579,7 @@ struct HeroEventCard: View {
     let event: EventItem
     var isLobbyOverride: Bool = false // Allow forcing lobby open (e.g. when previous event finishes)
     // removed currentTime
+    var lastUpdate: Date // Force re-render on timer tick
     var height: CGFloat = 360 // Default height
     let onJoin: () async -> Void
     @EnvironmentObject var appState: AppState
@@ -616,6 +617,7 @@ struct HeroEventCard: View {
                 event: event,
                 isLobbyOverride: isLobbyOverride,
                 isJoining: isJoining,
+                lastUpdate: lastUpdate,
                 height: height
             )
         }
@@ -653,6 +655,7 @@ struct HeroEventCardContent: View {
     let isLobbyOverride: Bool
     let isJoining: Bool
     // removed currentTime
+    let lastUpdate: Date
     let height: CGFloat
 
     @State private var cachedImage: NSImage?

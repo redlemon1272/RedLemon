@@ -857,7 +857,7 @@ class MPVPlayerViewModel: ObservableObject {
 
                 // Clear state
                 self.appState?.player.resumeFromTimestamp = nil
-                self.appState?.player.eventStartTime = nil // Clear event start too if present
+                // self.appState?.player.eventStartTime = nil // REMOVED: Keep event start time for future track switches (Wall Clock Sync)
                 self.isResumingInWatchParty = false
 
                 // CRITICAL FIX: Broadcast seek to Watch Party guests
@@ -1120,6 +1120,19 @@ class MPVPlayerViewModel: ObservableObject {
 
         // 2. GUEST LOGIC: Snap-Seek Catch-up
         else if isInWatchParty {
+             // CRITICAL FIX: System Event (Live) - Sync to Wall Clock
+             // System events don't have a host broadcasting position, so getInterpolatedPosition() returns 0.
+             if let eventStart = appState?.player.eventStartTime {
+                 let elapsed = Date().timeIntervalSince(eventStart)
+                 print("⚡ Event Mode: Snap-Seek to Wall Clock time: \(elapsed)s (Switch Duration: \(Int(switchDuration * 1000))ms)")
+                 
+                 // Seek to exact live edge
+                 Task { @MainActor in
+                     await playbackService.seek(to: max(0, elapsed))
+                 }
+                 return
+             }
+
              // Calculate where the host is NOW
             if let manager = realtimeManager {
                 Task {
@@ -1200,7 +1213,8 @@ class MPVPlayerViewModel: ObservableObject {
         if let englishAudio = audioTracks.first(where: { track in
             let lang = track.lang?.lowercased() ?? ""
             let title = track.title?.lowercased() ?? ""
-            return lang.contains("eng") || lang == "en" || title.contains("english")
+            // Fix: Check for "eng" in title (e.g. "AC3 5.1 ENG") not just "english"
+            return lang.contains("eng") || lang == "en" || title.contains("english") || title.contains("eng")
         }) {
             print("✅ Found English audio track: \(englishAudio.displayName)")
             mpvWrapper.setAudioTrack(englishAudio.id)

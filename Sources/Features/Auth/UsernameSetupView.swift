@@ -139,23 +139,21 @@ struct UsernameSetupView: View {
 
         Task {
             do {
-                // Check if username already exists
-                if let _ = try? await SupabaseClient.shared.getUserByUsername(username: trimmed) {
-                    await MainActor.run {
-                        errorMessage = "Username already taken. Please choose a different one."
-                        isCreating = false
-                    }
-                    return
-                }
+                // 🔐 Generate Keys locally
+                let (privateKey, publicKey) = CryptoManager.shared.generateKeyPair()
 
-                // Create or login with existing username (now safe because we checked existence)
-                let user = try await SupabaseClient.shared.createOrGetUser(username: trimmed)
+                // Check if username exists (Pre-check to avoid generating keys for taken names? No, RPC handles valid username check)
+                
+                // Call Secure Registration
+                // This combines "Check Username", "Create User", and "Set Public Key"
+                let user = try await SupabaseClient.shared.registerUserSecure(username: trimmed, publicKey: publicKey)
 
-                // Save to keychain
+                // ✅ Success! Save keys to Keychain
+                try await KeychainManager.shared.saveKeyPair(privateKey: privateKey, publicKey: publicKey)
                 try await KeychainManager.shared.saveUsername(trimmed)
                 try await KeychainManager.shared.save(credential: user.id.uuidString, for: "user_id")
 
-                // Add lemontom as first friend (like Tom from MySpace!)
+                // Add lemontom as first friend
                 await addDefaultFriend(userId: user.id)
 
                 // Update app state
@@ -169,15 +167,15 @@ struct UsernameSetupView: View {
                 // Connect to Social Service (Presence)
                 await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
 
-                NSLog("✅ User created: \(trimmed) (ID: \(user.id))")
+                NSLog("✅ User created securely: \(trimmed) (ID: \(user.id))")
             } catch {
                 await MainActor.run {
                     // Parse error message
                     let errorMsg = error.localizedDescription
-                    if errorMsg.contains("unique") || errorMsg.contains("duplicate") {
-                        errorMessage = "Username already taken. Try another one."
+                    if errorMsg.contains("already taken") || errorMsg.contains("duplicate") {
+                        errorMessage = "Username already taken."
                     } else {
-                        errorMessage = "Failed to create user. Please try again."
+                        errorMessage = "Registration failed: \(error.localizedDescription)"
                     }
                     isCreating = false
                 }

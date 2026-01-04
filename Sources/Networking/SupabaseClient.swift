@@ -182,7 +182,8 @@ class SupabaseClient: RoomManager, UserManager {
         body: [String: Any]? = nil,
         query: [String: String]? = nil,
         headers: [String: String]? = nil,
-        useEphemeralSession: Bool = false
+        useEphemeralSession: Bool = false,
+        sign: Bool = false
     ) async throws -> Data {
         var urlString = "\(baseURL)/rest/v1\(path)"
 
@@ -216,9 +217,42 @@ class SupabaseClient: RoomManager, UserManager {
             request.setValue(value, forHTTPHeaderField: key)
         }
 
+        var bodyData: Data? = nil
         if let body = body {
-            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+            bodyData = try JSONSerialization.data(withJSONObject: body) // Default formatting
+            request.httpBody = bodyData
         }
+        
+        // --- 🔐 SIGNATURE GENERATION ---
+        if sign {
+            if let (privateKey, publicKey) = await KeychainManager.shared.getKeyPair() {
+                let timestamp = String(Int(Date().timeIntervalSince1970))
+                
+                // Payload: Timestamp + Method + Path + Body
+                var payload = "\(timestamp)\(method)\(path)"
+                if let bodyData = bodyData, let bodyString = String(data: bodyData, encoding: .utf8) {
+                    payload += bodyString
+                }
+                
+                do {
+                    let signature = try CryptoManager.shared.sign(message: payload, privateKeyBase64: privateKey)
+                    
+                    request.setValue(signature, forHTTPHeaderField: "x-signature")
+                    request.setValue(timestamp, forHTTPHeaderField: "x-timestamp")
+                    request.setValue(publicKey, forHTTPHeaderField: "x-public-key")
+                    
+                    NSLog("🔐 Signed request to \(path)")
+                } catch {
+                    NSLog("❌ Failed to sign request: \(error)")
+                    // We continue without signing? Or fail?
+                    // Fail safe:
+                    throw SupabaseError.serverError("Signing failed: \(error.localizedDescription)")
+                }
+            } else {
+                 NSLog("⚠️ Request requested signing but no keys found in Keychain")
+            }
+        }
+        // -----------------------------
 
         // Use ephemeral session if requested to bypass shared session queue (critical for room creation)
         let sessionToUse: URLSession
@@ -233,10 +267,14 @@ class SupabaseClient: RoomManager, UserManager {
 
         let (data, response) = try await sessionToUse.data(for: request)
 
+        return try handleResponse(data: data, response: response, path: path)
+    }
+    
+    private func handleResponse(data: Data, response: URLResponse, path: String) throws -> Data {
         // DEBUG: Print raw JSON for room requests to verify season/episode
         if path.contains("/rooms") {
             if let jsonString = String(data: data, encoding: .utf8) {
-                print("🔍 Supabase Response for \(path): \(jsonString)")
+               // print("🔍 Supabase Response for \(path): \(jsonString)")
             }
         }
 
@@ -323,7 +361,39 @@ class SupabaseClient: RoomManager, UserManager {
         }
     }
 
+    /// Secure Registration
+    func registerUserSecure(username: String, publicKey: String) async throws -> SupabaseUser {
+        let params: [String: Any] = [
+            "p_username": username,
+            "p_public_key": publicKey
+        ]
+        
+        let data = try await makeRequest(
+            path: "/rpc/register_user_secure",
+            method: "POST",
+            body: params
+        )
+        
+        // Response format: {"id": "...", "username": "...", "status": "..."}
+        // We can decode to SupabaseUser partially or create a custom struct
+        // For simplicity, let's reuse SupabaseUser decoder if fields match, or manual decode
+        
+        // The RPC returns a single object
+        let response = try jsonDecoder.decode(SupabaseUser.self, from: data)
+        
+        // Update auth context
+        auth.currentUser = AuthUser(
+            id: response.id,
+            username: response.username,
+            isAdmin: response.isAdmin ?? false,
+            isPremium: response.isPremium ?? false
+        )
+        
+        return response
+    }
+
     /// Create or login user (username is unique and persistent)
+    /// LEGACY: Kept for compatibility but should be replaced by registerUserSecure in UI
     func createOrGetUser(username: String) async throws -> SupabaseUser {
         // Use RPC for atomic login/registration (bypasses RLS issues)
         let data = try await makeRequest(
@@ -600,7 +670,8 @@ class SupabaseClient: RoomManager, UserManager {
             method: "POST",
             body: roomData,
             headers: ["Prefer": "return=representation"],
-            useEphemeralSession: true
+            useEphemeralSession: true,
+            sign: true // 🔐 Sign this request to prove identity and spend hosting days
         )
         NSLog("✅ SupabaseClient: Room creation request completed (received response)")
 

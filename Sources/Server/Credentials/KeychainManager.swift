@@ -151,6 +151,28 @@ actor KeychainManager {
         NSLog("✅ KeychainManager: Username deleted successfully")
     }
 
+    // MARK: - Cryptographic Keys
+
+    func saveKeyPair(privateKey: String, publicKey: String) async throws {
+        try await save(credential: privateKey, for: "private_key")
+        try await save(credential: publicKey, for: "public_key")
+        NSLog("🔐 KeychainManager: Key pair saved securely")
+    }
+
+    func getKeyPair() async -> (privateKey: String, publicKey: String)? {
+        guard let priv = await get(service: "private_key"),
+              let pub = await get(service: "public_key") else {
+            return nil
+        }
+        return (priv, pub)
+    }
+
+    func deleteKeyPair() async throws {
+        try await delete(service: "private_key")
+        try await delete(service: "public_key")
+        NSLog("🗑️ KeychainManager: Key pair deleted")
+    }
+
     // MARK: - Provider Configuration
 
     /// Save custom Torrentio configuration

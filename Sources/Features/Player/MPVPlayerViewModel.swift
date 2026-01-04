@@ -183,10 +183,7 @@ class MPVPlayerViewModel: ObservableObject {
                                 self.isBuffering = false
                                 self.isLoading = false
                             }
-                                print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
-                                self.isBuffering = false
-                                self.isLoading = false
-                            }
+
                         } else if !self.mpvWrapper.isFileLoaded {
                             // NEW: Safety check - If buffering stops but file NOT loaded, it meant error/stop
 
@@ -612,10 +609,7 @@ class MPVPlayerViewModel: ObservableObject {
 
         if isEvent {
             print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
-        if isEvent {
-            print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
             isRefiningInitialSeek = true // START: Hold loading state until seek is stable
-            Task { @MainActor in
             Task { @MainActor in
                 // Fix: Only expect the number of subtitles we ACTUALLY loaded (limited to 3)
                 // Otherwise we wait for 8s timeout looking for ghosts.

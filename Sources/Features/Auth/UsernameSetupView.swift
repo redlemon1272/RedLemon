@@ -115,7 +115,16 @@ struct UsernameSetupView: View {
 
         Task {
             do {
-                // Create or login with existing username
+                // Check if username already exists
+                if let existingUser = try? await SupabaseClient.shared.getUserByUsername(username: trimmed) {
+                    await MainActor.run {
+                        errorMessage = "Username already taken. Please safe a different one."
+                        isCreating = false
+                    }
+                    return
+                }
+
+                // Create or login with existing username (now safe because we checked existence)
                 let user = try await SupabaseClient.shared.createOrGetUser(username: trimmed)
 
                 // Save to keychain
@@ -136,7 +145,7 @@ struct UsernameSetupView: View {
                 // Connect to Social Service (Presence)
                 await SocialService.shared.connect(userId: user.id.uuidString, username: trimmed)
 
-                NSLog("✅ User logged in: \(trimmed) (ID: \(user.id))")
+                NSLog("✅ User created: \(trimmed) (ID: \(user.id))")
             } catch {
                 await MainActor.run {
                     // Parse error message

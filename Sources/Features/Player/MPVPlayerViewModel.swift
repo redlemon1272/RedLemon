@@ -456,6 +456,16 @@ class MPVPlayerViewModel: ObservableObject {
         if !isEvent {
             print("🧹 Clearing previous event state (Non-Event Load)")
             self.appState?.player.eventStartTime = nil
+            
+            // FIX: Also clear Watch Party state if we are not in a watch party
+            // This prevents "Camp Rock" (Watch Party) state from leaking into "Five Nights" (Solo)
+            // Fixes: Stale Invite Content and ability to send invites during solo playback
+            if !self.isInWatchParty {
+                 print("🧹 Clearing previous watch party state (Solo Load)")
+                 self.appState?.player.currentWatchPartyRoom = nil
+                 self.currentRoomId = nil
+                 self.isWatchPartyHost = false
+            }
         }
 
         if let h = streamHash { print("   Hash: \(h.prefix(8))...") }
@@ -1556,6 +1566,10 @@ class MPVPlayerViewModel: ObservableObject {
              self.showPoster = true
              self.isLoading = true
              self.appState?.player.eventStartTime = nil // FIX: Clear event state on exit
+             self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
+             self.currentRoomId = nil
+             self.isWatchPartyHost = false
+             self.isInWatchParty = false
              self.hasCleanedUp = true // Ensure flag is set on MainActor
         }
 

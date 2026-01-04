@@ -1540,7 +1540,7 @@ class MPVPlayerViewModel: ObservableObject {
 
     // MARK: - Cleanup
 
-    func cleanup() async {
+    func cleanup(returningToLobby: Bool = false) async {
         // Prevent double cleanup
         guard !hasCleanedUp else {
             print("⚠️ Cleanup already performed, skipping")
@@ -1551,12 +1551,14 @@ class MPVPlayerViewModel: ObservableObject {
         print("🧹 Cleaning up MPV player...")
 
         // ✅ STEP 1: Clear watching status immediately
-        await SocialService.shared.updateWatchingStatus(
-            mediaTitle: nil,
-            mediaType: nil,
-            imdbId: nil,
-            roomId: nil
-        )
+        if !returningToLobby {
+            await SocialService.shared.updateWatchingStatus(
+                mediaTitle: nil,
+                mediaType: nil,
+                imdbId: nil,
+                roomId: nil
+            )
+        }
 
         // ✅ STEP 1.5: Clear UI state to prevent re-use flash
         await MainActor.run {
@@ -1566,10 +1568,14 @@ class MPVPlayerViewModel: ObservableObject {
              self.showPoster = true
              self.isLoading = true
              self.appState?.player.eventStartTime = nil // FIX: Clear event state on exit
-             self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
-             self.currentRoomId = nil
-             self.isWatchPartyHost = false
-             self.isInWatchParty = false
+             
+             if !returningToLobby {
+                 self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
+                 self.currentRoomId = nil
+                 self.isWatchPartyHost = false
+                 self.isInWatchParty = false
+             }
+             
              self.hasCleanedUp = true // Ensure flag is set on MainActor
         }
 
@@ -2057,7 +2063,7 @@ extension MPVPlayerViewModel {
             await MainActor.run {
                 Task { [weak self] in
                     guard let self = self else { return }
-                    await self.cleanup()
+                    await self.cleanup(returningToLobby: true)
                     await self.appState?.player.exitPlayer(keepRoomState: true)
                     await MainActor.run {
                         self.appState?.currentView = .watchPartyLobby
@@ -2550,7 +2556,7 @@ extension MPVPlayerViewModel {
                 // Slight delay to allow overlay to be seen (optional, but good for UX)
                 try? await Task.sleep(nanoseconds: 500_000_000)
                 
-                await self.cleanup()
+                await self.cleanup(returningToLobby: true)
                 await self.appState?.player.exitPlayer(keepRoomState: true)
                 await MainActor.run {
                     self.appState?.currentView = .watchPartyLobby

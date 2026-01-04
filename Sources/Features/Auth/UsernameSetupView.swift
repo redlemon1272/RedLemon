@@ -118,7 +118,7 @@ struct UsernameSetupView: View {
                 // Check if username already exists
                 if let existingUser = try? await SupabaseClient.shared.getUserByUsername(username: trimmed) {
                     await MainActor.run {
-                        errorMessage = "Username already taken. Please safe a different one."
+                        errorMessage = "Username already taken. Please choose a different one."
                         isCreating = false
                     }
                     return

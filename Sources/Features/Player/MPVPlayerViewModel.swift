@@ -450,6 +450,14 @@ class MPVPlayerViewModel: ObservableObject {
         print("🎬 Loading stream: \(cleanStreamTitle)")
         print("   IMDB: \(imdbId)")
         print("   URL: \(streamURL.prefix(60))...")
+        
+        // FIX: Clear event state if this is NOT an event
+        // This prevents "Fargo" (Event) state from leaking into "Freaky Friday" (Watch Party)
+        if !isEvent {
+            print("🧹 Clearing previous event state (Non-Event Load)")
+            self.appState?.player.eventStartTime = nil
+        }
+
         if let h = streamHash { print("   Hash: \(h.prefix(8))...") }
         if let sq = sourceQuality { print("   Source: \(sq)") }
 
@@ -1547,6 +1555,7 @@ class MPVPlayerViewModel: ObservableObject {
              self.logoURL = nil
              self.showPoster = true
              self.isLoading = true
+             self.appState?.player.eventStartTime = nil // FIX: Clear event state on exit
              self.hasCleanedUp = true // Ensure flag is set on MainActor
         }
 

@@ -68,31 +68,15 @@ class HTTPServer {
     }
 
     private func initializeProviders() async {
-        // Get RealDebrid API key from keychain if available
-        let rdApiKey = await KeychainManager.shared.get(service: "realdebrid")
-        if rdApiKey == nil {
-            print("⚠️ No RealDebrid API key found - providers will use public mode")
-        }
-
-        // Register all providers with proper configuration
-        let customTorrentioConfig = await KeychainManager.shared.getTorrentioConfig()
-        let torrentioConfig: String
+        // Providers now fetch credentials dynamically from KeychainManager on each request.
+        // This ensures that if the user restores an account or updates keys,
+        // the providers pick up the changes immediately without restart.
         
-        if let custom = customTorrentioConfig, !custom.isEmpty {
-             NSLog("🔧 Using User-Defined Torrentio Config")
-             torrentioConfig = custom
-        } else if let key = rdApiKey {
-             NSLog("✨ Using Auto-Generated Torrentio Config (realdebrid/KEY)")
-             torrentioConfig = "realdebrid/\(key)"
-        } else {
-             torrentioConfig = ""
-        }
-
-        let torrentio = TorrentioService(rdConfig: torrentioConfig)
-        let comet = CometService(debridApiKey: rdApiKey)
+        let torrentio = TorrentioService()
+        let comet = CometService()
         let zilean = ZileanService()
         let mediafusion = MediaFusionService()
-        let debridSearch = DebridSearchService(debridProvider: "RealDebrid", debridApiKey: rdApiKey)
+        let debridSearch = DebridSearchService()
 
         await ProviderManager.shared.register(provider: torrentio)
         await ProviderManager.shared.register(provider: comet)

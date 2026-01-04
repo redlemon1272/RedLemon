@@ -12,11 +12,8 @@ import Vapor
 class TorrentioService: ProviderService {
     let name = "torrentio"
     private let baseUrl = "https://torrentio.strem.fun"
-    private let rdConfig: String
 
-    init(rdConfig: String = "realdebrid") {
-        self.rdConfig = rdConfig
-    }
+    init() {}
 
     func fetchStreams(
         imdbId: String,
@@ -24,7 +21,22 @@ class TorrentioService: ProviderService {
         season: Int? = nil,
         episode: Int? = nil
     ) async throws -> [Stream] {
-        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode)
+        // Dynamic Config Resolution
+        let customTorrentioConfig = await KeychainManager.shared.getTorrentioConfig()
+        let rdApiKey = await KeychainManager.shared.get(service: "realdebrid")
+        
+        let config: String
+        if let custom = customTorrentioConfig, !custom.isEmpty {
+             NSLog("🔧 Torrentio: Using User-Defined Config")
+             config = custom
+        } else if let key = rdApiKey, !key.isEmpty {
+             NSLog("✨ Torrentio: Using Auto-Generated Config (realdebrid/KEY)")
+             config = "realdebrid/\(key)"
+        } else {
+             config = ""
+        }
+        
+        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode, config: config)
 
         NSLog("🔍 Torrentio: Fetching \(url)")
 
@@ -44,8 +56,13 @@ class TorrentioService: ProviderService {
         return parseStreams(result.streams ?? [])
     }
 
-    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?) -> URL {
-        var path = "/\(rdConfig)/stream/\(type)/\(imdbId)"
+    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?, config: String) -> URL {
+        var path = ""
+        if !config.isEmpty {
+            path = "/\(config)/stream/\(type)/\(imdbId)"
+        } else {
+            path = "/stream/\(type)/\(imdbId)"
+        }
 
         if let season = season, let episode = episode {
             path += ":\(season):\(episode)"

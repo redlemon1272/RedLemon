@@ -38,45 +38,8 @@ private struct CometFullConfig: Codable {
 class CometService: ProviderService {
     let name = "comet"
     private let baseUrl = "https://comet.elfhosted.com"
-    private var config: String
 
-    init(debridApiKey: String? = nil) {
-        if let apiKey = debridApiKey {
-            let configData = CometFullConfig(
-                maxResultsPerResolution: 0,
-                maxSize: 0,
-                cachedOnly: true,
-                removeTrash: true,
-                resultFormat: ["all"],
-                debridService: "realdebrid",
-                debridApiKey: apiKey,
-                debridStreamProxyPassword: "",
-                languages: CometFullConfig.Languages(
-                    exclude: [],
-                    preferred: ["en"]
-                ),
-                options: CometFullConfig.Options(
-                    remove_ranks_under: -10000000000,
-                    allow_english_in_languages: false,
-                    remove_unknown_languages: false
-                ),
-                resolutions: [:]
-            )
-
-            guard let jsonData = try? JSONEncoder().encode(configData),
-                  let jsonString = String(data: jsonData, encoding: .utf8) else {
-                fatalError("Failed to encode Comet config")
-            }
-
-            let base64String = Data(jsonString.utf8).base64EncodedString()
-            self.config = base64String
-                .replacingOccurrences(of: "+", with: "-")
-                .replacingOccurrences(of: "/", with: "_")
-                .replacingOccurrences(of: "=", with: "")
-        } else {
-            self.config = ""
-        }
-    }
+    init() {}
 
     func fetchStreams(
         imdbId: String,
@@ -84,7 +47,11 @@ class CometService: ProviderService {
         season: Int? = nil,
         episode: Int? = nil
     ) async throws -> [Stream] {
-        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode)
+        // Fetch API Key Dynamically
+        let apiKey = await KeychainManager.shared.get(service: "realdebrid")
+        let config = buildConfig(apiKey: apiKey)
+        
+        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode, config: config)
 
         print("🔍 Comet: Fetching \(url.absoluteString.prefix(100))...")
 
@@ -106,8 +73,45 @@ class CometService: ProviderService {
 
         return parseStreams(result.streams ?? [])
     }
+    
+    private func buildConfig(apiKey: String?) -> String {
+        guard let apiKey = apiKey, !apiKey.isEmpty else { return "" }
+        
+        let configData = CometFullConfig(
+            maxResultsPerResolution: 0,
+            maxSize: 0,
+            cachedOnly: true,
+            removeTrash: true,
+            resultFormat: ["all"],
+            debridService: "realdebrid",
+            debridApiKey: apiKey,
+            debridStreamProxyPassword: "",
+            languages: CometFullConfig.Languages(
+                exclude: [],
+                preferred: ["en"]
+            ),
+            options: CometFullConfig.Options(
+                remove_ranks_under: -10000000000,
+                allow_english_in_languages: false,
+                remove_unknown_languages: false
+            ),
+            resolutions: [:]
+        )
 
-    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?) -> URL {
+        guard let jsonData = try? JSONEncoder().encode(configData),
+              let jsonString = String(data: jsonData, encoding: .utf8) else {
+            print("❌ Comet: Failed to encode config")
+            return ""
+        }
+
+        let base64String = Data(jsonString.utf8).base64EncodedString()
+        return base64String
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+    }
+
+    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?, config: String) -> URL {
         let streamPath: String
         if type == "series", let s = season, let e = episode {
             streamPath = "\(imdbId):\(s):\(e)"

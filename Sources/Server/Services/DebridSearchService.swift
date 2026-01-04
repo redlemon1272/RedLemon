@@ -14,11 +14,9 @@ class DebridSearchService: ProviderService {
     let name = "debridsearch"
     private let baseUrl = "https://68d69db7dc40-debrid-search.baby-beamup.club"
     private let debridProvider: String
-    private let debridApiKey: String?
     
-    init(debridProvider: String = "RealDebrid", debridApiKey: String? = nil) {
+    init(debridProvider: String = "RealDebrid") {
         self.debridProvider = debridProvider
-        self.debridApiKey = debridApiKey
     }
     
     func fetchStreams(
@@ -28,12 +26,15 @@ class DebridSearchService: ProviderService {
         episode: Int? = nil
     ) async throws -> [Stream] {
         // Debrid Search requires API key configuration
-        guard let apiKey = debridApiKey, !apiKey.isEmpty else {
+        // Fetch dynamically from Keychain to ensure fresh state (e.g. after restore)
+        let apiKey = await KeychainManager.shared.get(service: "realdebrid")
+        
+        guard let apiKey = apiKey, !apiKey.isEmpty else {
             NSLog("⚠️ DebridSearch: No API key configured, skipping")
             return []
         }
         
-        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode)
+        let url = buildUrl(imdbId: imdbId, type: type, season: season, episode: episode, apiKey: apiKey)
         
         NSLog("🔍 DebridSearch: Fetching \(url)")
         
@@ -64,13 +65,13 @@ class DebridSearchService: ProviderService {
         return streams
     }
     
-    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?) -> URL {
+    private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?, apiKey: String) -> URL {
         // Build config JSON object
         // The addon expects specific keys: DebridProvider and DebridApiKey
         // Code: https://github.com/MrMonkey42/stremio-addon-debrid-search/blob/main/addon.js
         let configDict: [String: String] = [
             "DebridProvider": debridProvider,
-            "DebridApiKey": debridApiKey ?? ""
+            "DebridApiKey": apiKey
         ]
         
         // Serialize to JSON
@@ -107,7 +108,7 @@ class DebridSearchService: ProviderService {
             return URL(string: baseUrl)!
         }
         
-        NSLog("🔗 DebridSearch URL: \(url.absoluteString.replacingOccurrences(of: debridApiKey ?? "", with: "***"))")
+        NSLog("🔗 DebridSearch URL: \(url.absoluteString.replacingOccurrences(of: apiKey, with: "***"))")
         return url
     }
     

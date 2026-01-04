@@ -1,0 +1,145 @@
+2026-01-04 15:18:28.174 RedLemon[10461:96970] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-04 15:18:28.174 RedLemon[10461:96970] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-04 15:18:28.242 RedLemon[10461:97013] 🔍 UserResetManager: Username setup flag is set
+2026-01-04 15:18:28.243 RedLemon[10461:96970] 🔄 Forced username setup detected, showing setup dialog
+2026-01-04 15:18:28.244 RedLemon[10461:97016] 🔍 KeychainManager: No username found in UserDefaults
+2026-01-04 15:18:28.717 RedLemon[10461:97017] 🧹 UserResetManager: Cleared force username setup flag
+2026-01-04 15:18:28.770 RedLemon[10461:96970] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-04 15:18:29.015 RedLemon[10461:96970] ✅ Playback state reset complete - starting in browse view
+2026-01-04 15:18:29.016 RedLemon[10461:96970] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-04 15:18:29.016 RedLemon[10461:96970] 🧪 Testing Profile: debug
+2026-01-04 15:18:29.016 RedLemon[10461:97012] 🔍 KeychainManager: No username found in UserDefaults
+2026-01-04 15:18:29.021 RedLemon[10461:96970] ℹ️  KEYCHAIN: No stored username found
+2026-01-04 15:18:29.021 RedLemon[10461:96970] ❌ NO FALLBACK: No UUID found in UserDefaults either
+2026-01-04 15:18:29.021 RedLemon[10461:96970]    User will need to create a new username
+2026-01-04 15:18:29.021 RedLemon[10461:96970] 🏁 AUTH COMPLETE: Final state - username=, userId=nil
+2026-01-04 15:18:29.022 RedLemon[10461:96970] 🚀 RedLemon: Starting HTTP server...
+2026-01-04 15:18:29.022 RedLemon[10461:96970] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-04 15:18:29.049 RedLemon[10461:96970] ✅ RedLemon: HTTPServer instance created
+2026-01-04 15:18:29.049 RedLemon[10461:97012] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 0 credential(s) from cache
+📨 Received: {"ref":"625C108F-AD1F-41A9-9F47-607F63825C55","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ [EventsConfig] Fetched movie_events version 1466 with 427 movies
+🆕 [EventsConfig] Server has newer version 1466 (cached: 0)
+💾 [EventsConfig] Cached new version 1466
+✅ [EventsView] Loaded 427 movies from config version 1466
+🗓 AppState: Updated schedule epoch to 2025-12-23 06:43:55 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-04 21:44:55 +0000
+⏰ AppState: Scheduling update in 5187 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1186367/img (373786 bytes)
+🔍 Supabase Response for /rooms: [{"id":"event_tt1186367","name":"Ninja Assassin","host_user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","host_username":"RedLemon Events","stream_hash":null,"imdb_id":"tt1186367","poster_url":"https://images.metahub.space/poster/small/tt1186367/img","backdrop_url":"https://images.metahub.space/background/medium/tt1186367/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2026-01-04T19:18:30.983947","last_activity":"2026-01-04T19:18:31.083836","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":"https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJyaWRBcGlLZXkiOiJLNjdKVjJWNEZUVUE3UllONlQzNEJGSVVCUlVaRVJCTzQ1QTZVTDNPN1RFNVpIRkRRUVNBIiwibGFuZ3VhZ2VzIjp7ImV4Y2x1ZGUiOltdLCJwcmVmZXJyZWQiOlsiZW4iXX0sIm9wdGlvbnMiOnsicmVtb3ZlX3Vua25vd25fbGFuZ3VhZ2VzIjpmYWxzZSwiYWxsb3dfZW5nbGlzaF9pbl9sYW5ndWFnZXMiOmZhbHNlLCJyZW1vdmVfcmFua3NfdW5kZXIiOi0xMDAwMDAwMDAwMH0sImNhY2hlZE9ubHkiOnRydWUsInJlc29sdXRpb25zIjp7fSwiZGVicmlkU3RyZWFtUHJveHlQYXNzd29yZCI6IiIsIm1heFJlc3VsdHNQZXJSZXNvbHV0aW9uIjowLCJyZXN1bHRGb3JtYXQiOlsiYWxsIl0sIm1heFNpemUiOjB9/playback/d075588d3fe98d956e135f334398c1dc54ece3ce/0/n/n/Ninja.Assassin.2009.1080p.BluRay.x265-RARBG.mp4?name=Ninja%20Assassin","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzIzNDM0NjItMjQyMjQwMy56aXA=?token=9DF28E41-B569-45F2-A599-EA20771F00B8"}]
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+🔍 Supabase Response for /rooms: []
+⚠️ No RealDebrid API key found - providers will use public mode
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-04 15:18:31.322 RedLemon[10461:96970] ✅ RedLemon: Server marked as ready
+2026-01-04 15:18:31.381 RedLemon[10461:96970] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-04 15:18:31.381 RedLemon[10461:96970] 🔍 Performing startup checks...
+2026-01-04 15:18:31.381 RedLemon[10461:96970] ✅ Username-based authentication ready
+2026-01-04 15:18:31.759 RedLemon[10461:96970] 🔍 Performing startup checks...
+2026-01-04 15:18:31.759 RedLemon[10461:96970] ✅ Username-based authentication ready
+2026-01-04 15:18:31.979 RedLemon[10461:96970] 🔄 Checking for app updates...
+2026-01-04 15:18:35.043 RedLemon[10461:97012] 💾 KeychainManager: Saving username 'lemontom' to UserDefaults
+2026-01-04 15:18:35.045 RedLemon[10461:97012] ✅ KeychainManager: Username saved successfully
+2026-01-04 15:18:35.129 RedLemon[10461:97012] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-04 15:18:35.200 RedLemon[10461:97059] 📡 SupabaseClient: User lookup response received (340 bytes)
+2026-01-04 15:18:35.202 RedLemon[10461:97059] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-04 15:18:35.202 RedLemon[10461:97059] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-04 15:18:35.281 RedLemon[10461:96970] ⚠️  Could not add lemontom as friend: httpError(400, "{\"code\":\"23514\",\"details\":null,\"hint\":null,\"message\":\"new row for relation \\\"friendships\\\" violates check constraint \\\"no_self_friendship\\\"\"}")
+2026-01-04 15:18:36.757 RedLemon[10461:96970] ✅ User logged in: lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+💰 LicenseManager: Checking for background crypto payments...
+⚠️ LicenseManager: Background payment check failed: httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+💰 LicenseManager: Checking for background crypto payments...
+⚠️ LicenseManager: Background payment check failed: httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.106s (RTT: 88ms)
+   Local:  2026-01-04 20:18:32 +0000
+   Server: 2026-01-04 20:18:32 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved user_id credential to cache
+❌ Supabase error (400): {"code":"23514","details":null,"hint":null,"message":"new row for relation \"friendships\" violates check constraint \"no_self_friendship\""}
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"F20DA70B-B87B-4D39-8BF7-69E0C4F9A3E7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"33600504-e9aa-11f0-a4d7-0a58a9feac02":{"metas":[{"phx_ref":"GIegjQxZ23KCiN1I","phx_ref_prev":"GIegiSbJGQ6CiAwG","last_seen":"2026-01-04T20:18:26.259Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8cd4d844-e9aa-11f0-9adb-0a58a9feac02":{"metas":[{"phx_ref":"GIegj2St2SnXyDyI","last_seen":"2026-01-04T20:18:36.369Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"1DE0259F-24A6-4BA5-B4D1-FBC1AE81EAD6","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":6798732,"event":"INSERT","filter":"receiver_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"},{"id":83853945,"event":"INSERT","filter":"sender_id=eq.96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔍 Supabase Response for /rooms: [{"created_at":"2026-01-04T19:23:17.664829"}]
+🎉 Subscription updated! Expires: 2026-01-18 17:23:32 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"33600504-e9aa-11f0-a4d7-0a58a9feac02":{"metas":[{"phx_ref":"GIegkbRSvFKCiIFB","phx_ref_prev":"GIegjQxZ23KCiN1I","last_seen":"2026-01-04T20:18:46.258Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"33600504-e9aa-11f0-a4d7-0a58a9feac02":{"metas":[{"phx_ref":"GIegjQxZ23KCiN1I","phx_ref_prev":"GIegiSbJGQ6CiAwG","last_seen":"2026-01-04T20:18:26.259Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8cd4d844-e9aa-11f0-9adb-0a58a9feac02":{"metas":[{"phx_ref":"GIeglAxc-9vXyJ5P","phx_ref_prev":"GIegj2St2SnXyDyI","last_seen":"2026-01-04T20:18:56.372Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"8cd4d844-e9aa-11f0-9adb-0a58a9feac02":{"metas":[{"phx_ref":"GIegj2St2SnXyDyI","last_seen":"2026-01-04T20:18:36.369Z","status":"online","user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"33600504-e9aa-11f0-a4d7-0a58a9feac02":{"metas":[{"phx_ref":"GIegllxaBYOCiC9I","phx_ref_prev":"GIegkbRSvFKCiIFB","last_seen":"2026-01-04T20:19:06.260Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"33600504-e9aa-11f0-a4d7-0a58a9feac02":{"metas":[{"phx_ref":"GIegkbRSvFKCiIFB","phx_ref_prev":"GIegjQxZ23KCiN1I","last_seen":"2026-01-04T20:18:46.258Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}

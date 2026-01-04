@@ -1,0 +1,826 @@
+2026-01-04 12:05:10.745 RedLemon[4068:29710] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-04 12:05:10.745 RedLemon[4068:29710] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-04 12:05:10.913 RedLemon[4068:29800] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-04 12:05:10.914 RedLemon[4068:29710] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-04 12:05:10.984 RedLemon[4068:29710] ✅ Playback state reset complete - starting in browse view
+2026-01-04 12:05:10.985 RedLemon[4068:29710] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-04 12:05:10.985 RedLemon[4068:29710] 🧪 Testing Profile: debug
+2026-01-04 12:05:10.985 RedLemon[4068:29780] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-04 12:05:10.985 RedLemon[4068:29710] ✅ Keychain: Found stored username: ursinho
+2026-01-04 12:05:10.985 RedLemon[4068:29710] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-04 12:05:10.985 RedLemon[4068:29780] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-04 12:05:11.158 RedLemon[4068:29779] 📡 SupabaseClient: User lookup response received (340 bytes)
+2026-01-04 12:05:11.167 RedLemon[4068:29779] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-04 12:05:11.167 RedLemon[4068:29779] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 12:05:11.194 RedLemon[4068:29710] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 12:05:11.194 RedLemon[4068:29710] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:11.194 RedLemon[4068:29710] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:11.195 RedLemon[4068:29710] 🚀 RedLemon: Starting HTTP server...
+2026-01-04 12:05:11.195 RedLemon[4068:29710] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-04 12:05:11.224 RedLemon[4068:29710] ✅ RedLemon: HTTPServer instance created
+2026-01-04 12:05:11.224 RedLemon[4068:29710] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 12:05:11.224 RedLemon[4068:29781] 📡 RedLemon: Server starting on port 47253...
+2026-01-04 12:05:11.224 RedLemon[4068:29781] ✨ Using Auto-Generated Torrentio Config (realdebrid/KEY)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"DFD493D8-0D90-4604-ADC1-AB2A5871CACB","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+📂 Loaded 3 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-04 12:05:13.254 RedLemon[4068:29710] ✅ RedLemon: Server marked as ready
+2026-01-04 12:05:13.290 RedLemon[4068:29710] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-04 12:05:13.290 RedLemon[4068:29710] 🔍 Performing startup checks...
+2026-01-04 12:05:13.290 RedLemon[4068:29710] ✅ Username-based authentication ready
+2026-01-04 12:05:14.662 RedLemon[4068:29710] 🔍 Performing startup checks...
+2026-01-04 12:05:14.662 RedLemon[4068:29710] ✅ Username-based authentication ready
+2026-01-04 12:05:15.803 RedLemon[4068:29710] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1437 with 440 movies
+✅ [EventsConfig] Using cached movie_events config (version 1437, 440 movies)
+✅ [EventsView] Loaded 440 movies from config version 1437
+🗓 AppState: Updated schedule epoch to 2025-12-23 06:43:55 +0000
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-04 17:17:55 +0000
+⏰ AppState: Scheduling update in 764 seconds
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔍 Supabase Response for /rooms: []
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0414982/img (727476 bytes)
+🔍 Supabase Response for /rooms: []
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+📨 Received: {"ref":"DB65918C-1A1F-4C92-899C-17B1CC913DBB","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeV_oMJSkGUUn1N","phx_ref_prev":"GIeV_a-IuD-UUk8G","last_seen":"2026-01-04T17:04:58.714Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAYg7nqyCiNzE","last_seen":"2026-01-04T17:05:12.000Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"BEA0F4E1-97E8-4F3A-B953-74ED03D9C428","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+🔄 SocialService: Syncing 50 items to cloud...
+🔄 SocialService: Syncing 50 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAiFLCiSUUmzQ","phx_ref_prev":"GIeV_oMJSkGUUn1N","last_seen":"2026-01-04T17:05:14.248Z","started_at":"2026-01-04T17:05:14.248Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeV_oMJSkGUUn1N","phx_ref_prev":"GIeV_a-IuD-UUk8G","last_seen":"2026-01-04T17:04:58.714Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91277,"eth":3138.75},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0","opt eth_getBalance: undefined","eth eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91277,"eth":3138.75},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.068s (RTT: 71ms)
+   Local:  2026-01-04 17:05:15 +0000
+   Server: 2026-01-04 17:05:15 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAyzQ3FWUUikO","phx_ref_prev":"GIeWAiFLCiSUUmzQ","last_seen":"2026-01-04T17:05:18.742Z","started_at":"2026-01-04T17:05:14.248Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAiFLCiSUUmzQ","phx_ref_prev":"GIeV_oMJSkGUUn1N","last_seen":"2026-01-04T17:05:14.248Z","started_at":"2026-01-04T17:05:14.248Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWA7f_Nh6UUhJM","phx_ref_prev":"GIeWAyzQ3FWUUikO","last_seen":"2026-01-04T17:05:21.069Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAyzQ3FWUUikO","phx_ref_prev":"GIeWAiFLCiSUUmzQ","last_seen":"2026-01-04T17:05:18.742Z","started_at":"2026-01-04T17:05:14.248Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBVB_aluUUt-F","phx_ref_prev":"GIeWA7f_Nh6UUhJM","last_seen":"2026-01-04T17:05:27.926Z","room_id":"AP6U","started_at":"2026-01-04T17:05:27.926Z","status":"In Lobby: Weapons","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWA7f_Nh6UUhJM","phx_ref_prev":"GIeWAyzQ3FWUUikO","last_seen":"2026-01-04T17:05:21.069Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBi_SWRqCiMrJ","phx_ref_prev":"GIeWAYg7nqyCiNzE","last_seen":"2026-01-04T17:05:32.003Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWAYg7nqyCiNzE","last_seen":"2026-01-04T17:05:12.000Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:27","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}, 
+ {"id":"event_tt0116282","name":"Fargo","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":null,"imdb_id":"tt0116282","poster_url":"https://images.metahub.space/poster/small/tt0116282/img","backdrop_url":"https://images.metahub.space/background/medium/tt0116282/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T14:28:49.29119","last_activity":"2026-01-04T15:15:48","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/UDPQV7QVF3VWM44/Fargo%20%281996%29%20AC3%205.1%20ITA.ENG%201080p%20H265%20sub%20ita.eng%20Sp33dy94-MIRCrew.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwNTEyMjItMzA1ODgxOS56aXA=?token=8B2517E2-6E5D-4159-9EA2-72EFD44FB155"}, 
+ {"id":"T8FH","name":"Freaky Friday","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0322330","poster_url":"https://m.media-amazon.com/images/M/MV5BOGNhNDAyZWUtNmU3My00ZWRlLTkwYTgtMzZiYmNjNmM0MzVkXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T14:52:13.979726","last_activity":"2026-01-04T14:52:48","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/VX4L6CKTIXR7Q122/Freaky%20Friday%20%282003%29%2015th%20Anniv%20%281080p%20x265%2010bit%20Tigole%29.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "E0F687BE-49D2-47DE-9C9D-8DC473A54F40", "mediaItem": {"id": "tt0322330", "name": "Freaky Friday", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BOGNhNDAyZWUtNmU3My00ZWRlLTkwYTgtMzZiYmNjNmM0MzVkXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:27","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}, 
+ {"id":"event_tt0116282","name":"Fargo","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"RedLemon Events","stream_hash":null,"imdb_id":"tt0116282","poster_url":"https://images.metahub.space/poster/small/tt0116282/img","backdrop_url":"https://images.metahub.space/background/medium/tt0116282/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T14:28:49.29119","last_activity":"2026-01-04T15:15:48","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi9-4.download.real-debrid.com/d/UDPQV7QVF3VWM44/Fargo%20%281996%29%20AC3%205.1%20ITA.ENG%201080p%20H265%20sub%20ita.eng%20Sp33dy94-MIRCrew.mkv","description":null,"current_playlist_index":0,"playlist":[],"subtitle_url":"http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwNTEyMjItMzA1ODgxOS56aXA=?token=8B2517E2-6E5D-4159-9EA2-72EFD44FB155"}, 
+ {"id":"T8FH","name":"Freaky Friday","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt0322330","poster_url":"https://m.media-amazon.com/images/M/MV5BOGNhNDAyZWUtNmU3My00ZWRlLTkwYTgtMzZiYmNjNmM0MzVkXkEyXkFqcGc@._V1_SX250.jpg","backdrop_url":null,"playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T14:52:13.979726","last_activity":"2026-01-04T14:52:48","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi7-4.download.real-debrid.com/d/VX4L6CKTIXR7Q122/Freaky%20Friday%20%282003%29%2015th%20Anniv%20%281080p%20x265%2010bit%20Tigole%29.mkv","description":null,"current_playlist_index":0,"playlist":[{"id": "E0F687BE-49D2-47DE-9C9D-8DC473A54F40", "mediaItem": {"id": "tt0322330", "name": "Freaky Friday", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BOGNhNDAyZWUtNmU3My00ZWRlLTkwYTgtMzZiYmNjNmM0MzVkXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"129DDC0F-BED1-4979-987C-C97E8DDC1DB3","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+[ INFO ] GET /api/metadata/meta/movie/tt0322330 [request-id: C4877F26-0D8F-47C0-AFF3-3BE17A78C2AA]
+[ INFO ] GET /api/metadata/meta/movie/tt26581740 [request-id: 40135857-B77F-4A85-A846-95F39EAE14E4]
+[ INFO ] GET /api/metadata/meta/movie/tt0322330 [request-id: 1BC21937-468A-45F0-A333-F5AFBF6DB66A]
+[ INFO ] GET /api/metadata/meta/movie/tt26581740 [request-id: 966A7543-E455-4075-9BE0-7EEFE15344B8]
+2026-01-04 12:05:33.717 RedLemon[4068:29800] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-04 12:05:33.717 RedLemon[4068:30018] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-04 12:05:33.935 RedLemon[4068:29778] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-04 12:05:33.939 RedLemon[4068:30018] 📦 Decoded CinemetaMeta - videos count: 0
+💾 Cache SET: Metadata[meta_movie_tt26581740]
+💾 Cache SET: Metadata[meta_movie_tt26581740]
+💾 Cache SET: Metadata[meta_movie_tt0322330]
+✅ Loaded 2 rooms (total: 2)
+💾 Cache SET: Metadata[meta_movie_tt0322330]
+✅ Loaded 2 rooms (total: 2)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt26581740/img (117146 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0322330/img (927310 bytes)
+🚪 Joining room: AP6U
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: lobby
+🎭 Lobby: Connecting to room AP6U...
+🚦 Lobby State: connecting
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+🔌 Setting up Realtime channel: watch-party:AP6U
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 SocialService: Updated status - In Lobby: Weapons: Weapons
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:AP6U
+📡 Connection state: connected
+✅ Realtime channel setup complete
+[ INFO ] GET /api/metadata/meta/movie/tt26581740 [request-id: 7117BE0E-5514-491D-BDE7-A915A52B7A44]
+2026-01-04 12:05:35.443 RedLemon[4068:29710] ✅ Guest joined room AP6U in database
+2026-01-04 12:05:35.443 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:35.587 RedLemon[4068:30019] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-04 12:05:35.588 RedLemon[4068:30019]    Payload keys: position, type, chatText, timestamp, chatUsername, senderId
+2026-01-04 12:05:35.588 RedLemon[4068:29782] ✅ Realtime: Message broadcast complete
+2026-01-04 12:05:35.623 RedLemon[4068:29780] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:35.624 RedLemon[4068:29780]    Payload keys: chatUsername, chatText, timestamp, position, type, senderId
+2026-01-04 12:05:35.625 RedLemon[4068:29780] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-04 12:05:35.625 RedLemon[4068:29780] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-04 12:05:35.626 RedLemon[4068:29780] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:35.629 RedLemon[4068:29710] 👋 Received: Guest 'ursinho' joined room AP6U
+✅ Lobby: Connected to Realtime
+📨 Received: {"ref":"07F6F507-FE8C-46AD-92FC-D941676E6C0A","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":98813445,"event":"*","filter":"id=eq.AP6U","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:AP6U"}
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt26581740
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Weapons
+🔍 [DEBUG] Successfully created MediaItem from meta: Weapons
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBvXiLuyCiL2O","phx_ref_prev":"GIeWBi_SWRqCiMrJ","last_seen":"2026-01-04T17:05:35.317Z","room_id":"AP6U","started_at":"2026-01-04T17:05:35.317Z","status":"In Lobby: Weapons","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBi_SWRqCiMrJ","phx_ref_prev":"GIeWAYg7nqyCiNzE","last_seen":"2026-01-04T17:05:32.003Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:AP6U"},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"91c032b0-e98f-11f0-ad9f-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBVlQkbN7j3ML","phx_ref_prev":"GIeWBVGPIV17j9mK","is_host":true,"joined_at":1767546328.0703049,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"95f6f3d2-e98f-11f0-b238-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBvaon8N5j4bL","is_host":false,"joined_at":1767546335.3212938,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:AP6U"}
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":1,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:27","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:05:35.42165", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:05:35.424Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+✅ Lobby: Loaded metadata for Weapons
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+🔌 Setting up Realtime channel: watch-party:AP6U
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:AP6U, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"95f6f3d2-e98f-11f0-b238-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBwRCaoJ5j7QP","phx_ref_prev":"GIeWBvaon8N5j4bL","is_host":false,"joined_at":1767546335.565227,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"95f6f3d2-e98f-11f0-b238-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBvaon8N5j4bL","is_host":false,"joined_at":1767546335.3212938,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWB90pp6-UUiVK","phx_ref_prev":"GIeWBVB_aluUUt-F","last_seen":"2026-01-04T17:05:38.713Z","room_id":"AP6U","started_at":"2026-01-04T17:05:27.926Z","status":"In Lobby: Weapons","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBVB_aluUUt-F","phx_ref_prev":"GIeWA7f_Nh6UUhJM","last_seen":"2026-01-04T17:05:27.926Z","room_id":"AP6U","started_at":"2026-01-04T17:05:27.926Z","status":"In Lobby: Weapons","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}],"subtitle_url":null}]
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:05:35.42165", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"},2026-01-04 12:05:42.624 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:42.624 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:47.657 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:47.657 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+ {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:05:42.576Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 2 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 2 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": null, "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:05:35.42165", "max_participants": 50, "selected_quality": null, "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": null, "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:05:47.684Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":null,"imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:35.42165","season":null,"episode":null,"selected_quality":null,"selected_file_idx":null,"unlocked_stream_url":null,"description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": "4dc447b080ffdfee04789e338e3e7435c894d27b", "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:05:50", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {2026-01-04 12:05:50.854 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:50.855 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:50.859 RedLemon[4068:30018] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:50.859 RedLemon[4068:30018]    Payload keys: senderId, type, chatText, position, chatUsername, timestamp
+2026-01-04 12:05:50.860 RedLemon[4068:30018] ✅ Realtime: Decoded message type: chat, sender: 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+2026-01-04 12:05:50.860 RedLemon[4068:30018] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-04 12:05:50.860 RedLemon[4068:30018] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:50.860 RedLemon[4068:29710] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal
+2026-01-04 12:05:50.860 RedLemon[4068:29710] 🎬 Guest: Received LOBBY_START_COUNTDOWN signal processing
+2026-01-04 12:05:51.024 RedLemon[4068:29710] ✅ Guest: Forced stream sync from Host (Hash: 4dc447b0)
+2026-01-04 12:05:51.025 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:51.025 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:05:54.331 RedLemon[4068:29710] 🎬 Guest: Fetch took 0.164s, finished countdown loop
+2026-01-04 12:05:54.331 RedLemon[4068:29710] 🎬 Guest: Starting playback after countdown
+2026-01-04 12:05:54.331 RedLemon[4068:29710] 🎬 Guest: Launching player for Weapons
+2026-01-04 12:05:54.374 RedLemon[4068:29710] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt26581740/img
+2026-01-04 12:05:54.375 RedLemon[4068:29710] ⏳ Background art loading...
+2026-01-04 12:05:54.375 RedLemon[4068:29710] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt26581740/img
+2026-01-04 12:05:54.376 RedLemon[4068:29710] ⏳ Logo loading...
+2026-01-04 12:05:54.460 RedLemon[4068:29710] ✅ Background art loaded successfully
+2026-01-04 12:05:54.462 RedLemon[4068:29710]    Quality: 1080p
+2026-01-04 12:05:54.463 RedLemon[4068:29710]    Mode: watchParty
+2026-01-04 12:05:54.463 RedLemon[4068:29710] 📡 Fetching metadata for tt26581740...
+2026-01-04 12:05:54.521 RedLemon[4068:29710] 🎬 GUEST: Using host's stream selection (skipping resolution)
+"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:05:50.819Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_START_COUNTDOWN","chatUsername":"Host","position":0,"senderId":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","timestamp":3,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": true, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": "4dc447b080ffdfee04789e338e3e7435c894d27b", "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:05:50", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:05:50.920Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":true,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:05:50","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWCt1kfoOCiLYN","phx_ref_prev":"GIeWBvXiLuyCiL2O","last_seen":"2026-01-04T17:05:52.003Z","room_id":"AP6U","started_at":"2026-01-04T17:05:35.317Z","status":"In Lobby: Weapons","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBvXiLuyCiL2O","phx_ref_prev":"GIeWBi_SWRqCiMrJ","last_seen":"2026-01-04T17:05:35.317Z","room_id":"AP6U","started_at":"2026-01-04T17:05:35.317Z","status":"In Lobby: Weapons","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 PlayerVM: Starting playback for: Weapons
+✅ Cache HIT: Metadata[meta_movie_tt26581740]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 747BEB45-A660-4E5A-9C0D-DCE4971F8D73]
+2026-01-04 12:05:54.573 RedLemon[4068:29710] ✅ Logo loaded successfully
+2026-01-04 12:05:54.800 RedLemon[4068:29710] ✅ GUEST: Found 10 subtitles
+2026-01-04 12:05:54.809 RedLemon[4068:29710] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/We, subtitles: 10
+2026-01-04 12:05:54.884 RedLemon[4068:29710] ✅ Stream ready, starting playback...
+2026-01-04 12:05:54.884 RedLemon[4068:29710] 🖥️ WindowManager: enterFullscreen() called
+2026-01-04 12:05:54.885 RedLemon[4068:29710]    Window: <SwiftUI.SwiftUIWindow: 0x7fc11244d690>
+2026-01-04 12:05:54.885 RedLemon[4068:29710]    Is fullscreen: 0
+2026-01-04 12:05:54.885 RedLemon[4068:29710]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-04 12:05:55.006 RedLemon[4068:29710] 🖼️ Setting up MPV with native macOS video output...
+2026-01-04 12:05:55.016 RedLemon[4068:29710] ✅ MPV initialized with native GPU rendering
+2026-01-04 12:05:55.035 RedLemon[4068:29710] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-04 12:05:55.036 RedLemon[4068:29710] 🎉 Starting watch party sync - Room: AP6U, Host: NO
+2026-01-04 12:05:55.036 RedLemon[4068:29710] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-04 12:05:55.142 RedLemon[4068:29710] 🔄 Starting chat polling for room: AP6U
+2026-01-04 12:05:55.143 RedLemon[4068:29710] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-04 12:05:55.143 RedLemon[4068:29710] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-04 12:05:55.143 RedLemon[4068:29710] 🎬🎬🎬 Subtitles: 10
+2026-01-04 12:05:55.143 RedLemon[4068:29710] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Weapons
+2026-01-04 12:05:55.144 RedLemon[4068:29710] 🎬🎬🎬 streamURL: https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/We
+2026-01-04 12:05:55.144 RedLemon[4068:29710] 🎬🎬🎬 subtitles: 10
+2026-01-04 12:05:55.145 RedLemon[4068:29710] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-04 12:05:55.196 RedLemon[4068:29780] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-04 12:05:55.196 RedLemon[4068:30018] 🎬 MPV: Current video filename set to: Weapons.2025.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4
+2026-01-04 12:05:55.196 RedLemon[4068:30018] 🎬 MPV loadVideo called with URL: https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BY, autoplay: false, expectedSubs: 3
+2026-01-04 12:05:55.196 RedLemon[4068:29780] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDM0MzctODQyNTkwNS56aXA=?token=C3C0511A-B3AC-497D-8B2B-6DE7C71582A2
+2026-01-04 12:05:55.196 RedLemon[4068:30018] 🎬 MPV executing: loadfile "https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2026-01-04 12:05:55.197 RedLemon[4068:30018] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt26581740 (movie)
+   ℹ️ Fallback Name: Weapons (2025)
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/We
+   Display Title: Weapons
+   Subtitle URLs: 10
+      [0] Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir
+      [1] Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng
+      [2] Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [3] Weapons.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264
+      [4] Weapons.2025.1080p.MA.WEB-DL.DDP5.1.Atmos.H.264 (SDH)
+      [5] Weapons.2025.2160p.UHD.Blu-ray.Remux.DV.HDR.HEVC.TrueHD.Atmos.7.1-CiNEPHiLES
+      [6] Weapons.(2025) eng
+      [7] Weapons.2025.iT.WEB.H264-ETHEL / [YTS.MX]
+      [8] Weapons.2025.HDTS.x264-RGB(ENG)
+      [9] Weapons.2025.HDTS.x264-RGB(ENG)
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🧠 StreamService: Marked hash 4dc447b0 as attempted for tt26581740
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=AP6U, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:AP6U
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:AP6U, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Weapons
+   IMDB: tt26581740
+   URL: https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/We...
+🧹 Clearing previous event state (Non-Event Load)
+   Hash: 4dc447b0...
+   Source: WEBRip
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"95f6f3d2-e98f-11f0-b238-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC5Ojlvt5jzOQ","phx_ref_prev":"GIeWBwRCaoJ5j7QP","is_host":false,"joined_at":1767546355.1364322,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"95f6f3d2-e98f-11f0-b238-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBwRCaoJ5j7QP","phx_ref_prev":"GIeWBvaon8N5j4bL","is_host":false,"joined_at":1767546335.565227,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:AP6U"}
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt26581740 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt26581740]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIeWC5Ojlvt5jzOQ)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDM0MzctODQyNTkwNS56aXA= [request-id: 99D70F91-449A-4577-B487-CED0F468E1E0]
+2026-01-04 12:05:55.621 RedLemon[4068:29800] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_D7C26EF3-4ACA-40AC-95B8-AF84F7A09147.vtt
+2026-01-04 12:05:55.622 RedLemon[4068:29800] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_D7C26EF3-4ACA-40AC-95B8-AF8
+2026-01-04 12:05:55.654 RedLemon[4068:29800] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 12:05:55.654 RedLemon[4068:29800] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTI2MDEtODQzNTE3MS56aXA=?token=C3C0511A-B3AC-497D-8B2B-6DE7C71582A2
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDM0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3503437-8425905.zip
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC5ZlUE6CiGnK","phx_ref_prev":"GIeWCt1kfoOCiLYN","last_seen":"2026-01-04T17:05:55.195Z","room_id":"AP6U","started_at":"2026-01-04T17:05:55.195Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWCt1kfoOCiLYN","phx_ref_prev":"GIeWBvXiLuyCiL2O","last_seen":"2026-01-04T17:05:52.003Z","room_id":"AP6U","started_at":"2026-01-04T17:05:35.317Z","status":"In Lobby: Weapons","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC1mahcGUUtRK","phx_ref_prev":"GIeWB90pp6-UUiVK","last_seen":"2026-01-04T17:05:53.824Z","room_id":"AP6U","started_at":"2026-01-04T17:05:53.824Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWB90pp6-UUiVK","phx_ref_prev":"GIeWBVB_aluUUt-F","last_seen":"2026-01-04T17:05:38.713Z","room_id":"AP6U","started_at":"2026-01-04T17:05:27.926Z","status":"In Lobby: Weapons","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"91c032b0-e98f-11f0-ad9f-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC1QOjvd7j53O","phx_ref_prev":"GIeWBVlQkbN7j3ML","is_host":true,"joined_at":1767546353.755752,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{"91c032b0-e98f-11f0-ad9f-0a58a9feac02":{"metas":[{"phx_ref":"GIeWBVlQkbN7j3ML","phx_ref_prev":"GIeWBVGPIV17j9mK","is_host":true,"joined_at":1767546328.0703049,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:watch-party:AP6U"}
+✅ Got background: https://images.metahub.space/background/medium/tt26581740/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt26581740/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt26581740/img...
+📡 SocialService: Updated status - online: Weapons
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIeWC1QOjvd7j53O)
+⏳ Participant leaving (grace period started): 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+✅ Download complete: 33371 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir.srt
+📦 Extracting specific file: Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir.srt
+✅ Extraction successful
+⏰ AppState: Next schedule update set for Next Event Start: 2026-01-04 17:17:55 +0000
+⏰ AppState: Scheduling update in 720 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTI2MDEtODQzNTE3MS56aXA= [request-id: 147840CB-293C-4FF6-80CC-1B319C1F55E7]
+2026-01-04 12:05:55.755 RedLemon[4068:29710] 👥 MPVPlayer: Updated participants list via polling: 2
+2026-01-04 12:05:56.115 RedLemon[4068:30019] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_783056F9-4794-467A-849C-AA7FCF95D4BE.vtt
+2026-01-04 12:05:56.115 RedLemon[4068:30019] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_783056F9-4794-467A-849C-AA7
+2026-01-04 12:05:56.128 RedLemon[4068:30019] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 12:05:56.128 RedLemon[4068:30019] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTI1OTktODQzNTE3MC56aXA=?token=C3C0511A-B3AC-497D-8B2B-6DE7C71582A2
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTI2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3512601-8435171.zip
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+🔍 Supabase Response for /rooms: []
+✅ Download complete: 36126 bytes
+📦 Detected ZIP archive, extracting...
+🔍 Supabase Response for /rooms: []
+⚠️ No specific episode match found, using first file: Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTI1OTktODQzNTE3MC56aXA= [request-id: AA6F71DB-C297-4260-B15C-9C55683C385D]
+2026-01-04 12:05:56.182 RedLemon[4068:29779] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:56.182 RedLemon[4068:29779]    Payload keys: timestamp, type, senderId, position, isPlaying
+2026-01-04 12:05:56.183 RedLemon[4068:29779] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:56.183 RedLemon[4068:29779] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-04 12:05:56.183 RedLemon[4068:29779] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:56.184 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:56.184 RedLemon[4068:29710] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:56.184 RedLemon[4068:29710] ⚠️ Adding 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E to connectedGuestIds (presence fallback)
+2026-01-04 12:05:56.269 RedLemon[4068:30019] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:56.269 RedLemon[4068:30019]    Payload keys: position, timestamp, isPlaying, senderId, type
+2026-01-04 12:05:56.270 RedLemon[4068:30019] ✅ Realtime: Decoded message type: playbackState, sender: AP6U
+2026-01-04 12:05:56.270 RedLemon[4068:30019] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-04 12:05:56.270 RedLemon[4068:30019] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:56.270 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: playbackState, sender: AP6U
+2026-01-04 12:05:56.671 RedLemon[4068:30214] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3EEB99F7-B3FD-4547-8AC3-B305E1FC4651.vtt
+2026-01-04 12:05:56.671 RedLemon[4068:30214] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_3EEB99F7-B3FD-4547-8AC3-B30
+2026-01-04 12:05:56.701 RedLemon[4068:30214] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 12:05:57.027 RedLemon[4068:30214] 🔍 MPV track-list/count: 5
+2026-01-04 12:05:57.028 RedLemon[4068:29710] ⏱️ Watch Party: Duration available (7709.6s), triggering ready signal
+2026-01-04 12:05:57.028 RedLemon[4068:29710] 👋 Watch Party: Sending INITIAL READY signal and starting loop
+2026-01-04 12:05:57.149 RedLemon[4068:30214] 🔍 Track 0 type: sub
+2026-01-04 12:05:57.160 RedLemon[4068:29780] 📤 Realtime: Sending message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:57.162 RedLemon[4068:29780]    Payload keys: isPlaying, position, type, senderId, timestamp
+2026-01-04 12:05:57.163 RedLemon[4068:30020] ✅ Realtime: Message broadcast complete
+2026-01-04 12:05:57.167 RedLemon[4068:29710] ✅ Watch Party: READY signal sent successfully
+2026-01-04 12:05:57.211 RedLemon[4068:29780] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:57.211 RedLemon[4068:29780]    Payload keys: type, position, isPlaying, senderId, timestamp
+2026-01-04 12:05:57.212 RedLemon[4068:29780] ✅ Realtime: Decoded message type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:57.212 RedLemon[4068:29780] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-04 12:05:57.212 RedLemon[4068:29780] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:57.214 RedLemon[4068:30214] ✅ Found subtitle track: ID=1, lang=en, title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, external=1
+2026-01-04 12:05:57.225 RedLemon[4068:30214] 🔍 Track 1 type: sub
+2026-01-04 12:05:57.228 RedLemon[4068:30214] ✅ Found subtitle track: ID=2, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-04 12:05:57.228 RedLemon[4068:30214] 🔍 Track 2 type: video
+2026-01-04 12:05:57.228 RedLemon[4068:30214] 🔍 Track 3 type: audio
+2026-01-04 12:05:57.228 RedLemon[4068:30214] 🔍 Track 4 type: sub
+2026-01-04 12:05:57.228 RedLemon[4068:30214] ✅ Found subtitle track: ID=3, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-04 12:05:57.229 RedLemon[4068:30214] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 12:05:57.229 RedLemon[4068:30214]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 12:05:57.229 RedLemon[4068:30214]    Start[1]: ID=1, Title='Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', Lang='en', Ext=1
+2026-01-04 12:05:57.229 RedLemon[4068:30214]    Start[2]: ID=2, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-04 12:05:57.229 RedLemon[4068:30214]    Start[3]: ID=3, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-04 12:05:57.230 RedLemon[4068:30214] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-04 12:05:57.232 RedLemon[4068:30214]    Track: ID=0, Title=Off, External=0
+2026-01-04 12:05:57.232 RedLemon[4068:30214]    Track: ID=1, Title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, External=1
+2026-01-04 12:05:57.232 RedLemon[4068:30214]    Track: ID=2, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-04 12:05:57.233 RedLemon[4068:30214]    Track: ID=3, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-04 12:05:57.476 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: ready, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:57.476 RedLemon[4068:29710] ✅ Received READY signal from 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 12:05:57.942 RedLemon[4068:30214] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:57.942 RedLemon[4068:30214]    Payload keys: isPlaying, senderId, position, timestamp, type
+2026-01-04 12:05:57.942 RedLemon[4068:30214] ✅ Realtime: Decoded message type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:57.942 RedLemon[4068:30214] 📞 Realtime: Invoking syncCallback for message type: ready
+2026-01-04 12:05:57.943 RedLemon[4068:30214] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:57.943 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: ready, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:57.943 RedLemon[4068:29710] ✅ Received READY signal from 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:58.134 RedLemon[4068:30214] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:58.134 RedLemon[4068:30214]    Payload keys: senderId, type, timestamp, position, isPlaying
+2026-01-04 12:05:58.135 RedLemon[4068:30214] ✅ Realtime: Decoded message type: playbackState, sender: AP6U
+2026-01-04 12:05:58.135 RedLemon[4068:30214] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-04 12:05:58.135 RedLemon[4068:30214] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:58.135 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: playbackState, sender: AP6U
+2026-01-04 12:05:58.233 RedLemon[4068:30020] 🔍 MPV track-list/count: 5
+2026-01-04 12:05:58.233 RedLemon[4068:30020] 🔍 Track 0 type: sub
+2026-01-04 12:05:58.234 RedLemon[4068:30020] ✅ Found subtitle track: ID=1, lang=en, title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, external=1
+2026-01-04 12:05:58.234 RedLemon[4068:30020] 🔍 Track 1 type: sub
+2026-01-04 12:05:58.234 RedLemon[4068:30020] ✅ Found subtitle track: ID=2, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-04 12:05:58.234 RedLemon[4068:30020] 🔍 Track 2 type: video
+2026-01-04 12:05:58.235 RedLemon[4068:30020] 🔍 Track 3 type: audio
+2026-01-04 12:05:58.235 RedLemon[4068:30020] 🔍 Track 4 type: sub
+2026-01-04 12:05:58.235 RedLemon[4068:30020] ✅ Found subtitle track: ID=3, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-04 12:05:58.235 RedLemon[4068:30020] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 12:05:58.235 RedLemon[4068:30020]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 12:05:58.235 RedLemon[4068:30020]    Start[1]: ID=1, Title='Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', Lang='en', Ext=1
+2026-01-04 12:05:58.235 RedLemon[4068:30020]    Start[2]: ID=2, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-04 12:05:58.235 RedLemon[4068:30020]    Start[3]: ID=3, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-04 12:05:58.236 RedLemon[4068:30020] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-04 12:05:58.236 RedLemon[4068:30020]    Track: ID=0, Title=Off, External=0
+2026-01-04 12:05:58.236 RedLemon[4068:30020]    Track: ID=1, Title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, External=1
+2026-01-04 12:05:58.237 RedLemon[4068:30020]    Track: ID=2, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-04 12:05:58.237 RedLemon[4068:30020]    Track: ID=3, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-04 12:05:58.430 RedLemon[4068:30214] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:58.430 RedLemon[4068:30214]    Payload keys: position, isPlaying, type, senderId, timestamp
+2026-01-04 12:05:58.431 RedLemon[4068:30214] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:58.431 RedLemon[4068:30214] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-04 12:05:58.431 RedLemon[4068:30214] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:58.431 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:59.051 RedLemon[4068:30019] 📨 Realtime: Received broadcast message
+2026-01-04 12:05:59.051 RedLemon[4068:30019]    Payload keys: position, isPlaying, timestamp, senderId, type
+2026-01-04 12:05:59.052 RedLemon[4068:30019] ✅ Realtime: Decoded message type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:59.052 RedLemon[4068:30019] 📞 Realtime: Invoking syncCallback for message type: play
+2026-01-04 12:05:59.052 RedLemon[4068:30019] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:05:59.079 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: play, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:05:59.331 RedLemon[4068:30018] 🔍 MPV track-list/count: 5
+2026-01-04 12:05:59.332 RedLemon[4068:30018] 🔍 Track 0 type: sub
+2026-01-04 12:05:59.332 RedLemon[4068:30018] ✅ Found subtitle track: ID=1, lang=en, title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, external=1
+2026-01-04 12:05:59.332 RedLemon[4068:30018] 🔍 Track 1 type: sub
+2026-01-04 12:05:59.333 RedLemon[4068:30018] ✅ Found subtitle track: ID=2, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-04 12:05:59.334 RedLemon[4068:30018] 🔍 Track 2 type: video
+2026-01-04 12:05:59.347 RedLemon[4068:30018] 🔍 Track 3 type: audio
+2026-01-04 12:05:59.347 RedLemon[4068:30018] 🔍 Track 4 type: sub
+2026-01-04 12:05:59.347 RedLemon[4068:30018] ✅ Found subtitle track: ID=3, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-04 12:05:59.347 RedLemon[4068:30018] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 12:05:59.347 RedLemon[4068:30018]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 12:05:59.347 RedLemon[4068:30018]    Start[1]: ID=1, Title='Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', Lang='en', Ext=1
+2026-01-04 12:05:59.347 RedLemon[4068:30018]    Start[2]: ID=2, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-04 12:05:59.347 RedLemon[4068:30018]    Start[3]: ID=3, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-04 12:05:59.348 RedLemon[4068:30018] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-04 12:05:59.348 RedLemon[4068:30018]    Track: ID=0, Title=Off, External=0
+2026-01-04 12:05:59.348 RedLemon[4068:30018]    Track: ID=1, Title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, External=1
+2026-01-04 12:05:59.348 RedLemon[4068:30018]    Track: ID=2, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-04 12:05:59.348 RedLemon[4068:30018]    Track: ID=3, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-04 12:06:00.260 RedLemon[4068:30018] 📨 Realtime: Received broadcast message
+2026-01-04 12:06:00.261 RedLemon[4068:30018]    Payload keys: senderId, isPlaying, type, timestamp, position
+2026-01-04 12:06:00.262 RedLemon[4068:30018] ✅ Realtime: Decoded message type: playbackState, sender: AP6U
+2026-01-04 12:06:00.262 RedLemon[4068:30018] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-04 12:06:00.262 RedLemon[4068:30018] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:06:00.296 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: playbackState, sender: AP6U
+2026-01-04 12:06:00.374 RedLemon[4068:30019] 🔍 MPV track-list/count: 5
+2026-01-04 12:06:00.374 RedLemon[4068:30019] 🔍 Track 0 type: sub
+2026-01-04 12:06:00.374 RedLemon[4068:30019] ✅ Found subtitle track: ID=1, lang=en, title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, external=1
+2026-01-04 12:06:00.374 RedLemon[4068:30019] 🔍 Track 1 type: sub
+2026-01-04 12:06:00.374 RedLemon[4068:30019] ✅ Found subtitle track: ID=2, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-04 12:06:00.374 RedLemon[4068:30019] 🔍 Track 2 type: video
+2026-01-04 12:06:00.374 RedLemon[4068:30019] 🔍 Track 3 type: audio
+2026-01-04 12:06:00.375 RedLemon[4068:30019] 🔍 Track 4 type: sub
+2026-01-04 12:06:00.375 RedLemon[4068:30019] ✅ Found subtitle track: ID=3, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-04 12:06:00.375 RedLemon[4068:30019] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 12:06:00.375 RedLemon[4068:30019]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 12:06:00.375 RedLemon[4068:30019]    Start[1]: ID=1, Title='Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', Lang='en', Ext=1
+2026-01-04 12:06:00.375 RedLemon[4068:30019]    Start[2]: ID=2, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-04 12:06:00.375 RedLemon[4068:30019]    Start[3]: ID=3, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-04 12:06:00.375 RedLemon[4068:30019] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-04 12:06:00.375 RedLemon[4068:30019]    Track: ID=0, Title=Off, External=0
+2026-01-04 12:06:00.376 RedLemon[4068:30019]    Track: ID=1, Title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, External=1
+2026-01-04 12:06:00.376 RedLemon[4068:30019]    Track: ID=2, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-04 12:06:00.376 RedLemon[4068:30019]    Track: ID=3, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-04 12:06:01.473 RedLemon[4068:30019] 🔍 MPV track-list/count: 5
+2026-01-04 12:06:01.475 RedLemon[4068:30019] 🔍 Track 0 type: sub
+2026-01-04 12:06:01.476 RedLemon[4068:30019] ✅ Found subtitle track: ID=1, lang=en, title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, external=1
+2026-01-04 12:06:01.476 RedLemon[4068:30019] 🔍 Track 1 type: sub
+2026-01-04 12:06:01.477 RedLemon[4068:30019] ✅ Found subtitle track: ID=2, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-04 12:06:01.477 RedLemon[4068:30019] 🔍 Track 2 type: video
+2026-01-04 12:06:01.477 RedLemon[4068:30019] 🔍 Track 3 type: audio
+2026-01-04 12:06:01.477 RedLemon[4068:30019] 🔍 Track 4 type: sub
+2026-01-04 12:06:01.478 RedLemon[4068:30019] ✅ Found subtitle track: ID=3, lang=en, title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-04 12:06:01.478 RedLemon[4068:30019] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 12:06:01.478 RedLemon[4068:30019]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 12:06:01.478 RedLemon[4068:30019]    Start[1]: ID=1, Title='Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', Lang='en', Ext=1
+2026-01-04 12:06:01.479 RedLemon[4068:30019]    Start[2]: ID=2, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-04 12:06:01.479 RedLemon[4068:30019]    Start[3]: ID=3, Title='Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-04 12:06:01.479 RedLemon[4068:30019] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-04 12:06:01.479 RedLemon[4068:30019]    Track: ID=0, Title=Off, External=0
+2026-01-04 12:06:01.480 RedLemon[4068:30019]    Track: ID=1, Title=Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir, External=1
+2026-01-04 12:06:01.480 RedLemon[4068:30019]    Track: ID=2, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-04 12:06:01.481 RedLemon[4068:30019]    Track: ID=3, Title=Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-04 12:06:02.213 RedLemon[4068:30018] 📨 Realtime: Received broadcast message
+2026-01-04 12:06:02.213 RedLemon[4068:30018]    Payload keys: position, type, timestamp, isPlaying, senderId
+2026-01-04 12:06:02.214 RedLemon[4068:30018] ✅ Realtime: Decoded message type: playbackState, sender: AP6U
+2026-01-04 12:06:02.214 RedLemon[4068:30018] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-04 12:06:02.214 RedLemon[4068:30018] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:06:02.218 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: playbackState, sender: AP6U
+2026-01-04 12:06:04.156 RedLemon[4068:29779] 📨 Realtime: Received broadcast message
+2026-01-04 12:06:04.156 RedLemon[4068:29779]    Payload keys: timestamp, isPlaying, senderId, position, type
+2026-01-04 12:06:04.157 RedLemon[4068:29779] ✅ Realtime: Decoded message type: playbackState, sender: AP6U
+2026-01-04 12:06:04.157 RedLemon[4068:29779] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-04 12:06:04.157 RedLemon[4068:29779] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:06:04.178 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: playbackState, sender: AP6U
+2026-01-04 12:06:05.086 RedLemon[4068:29800] 📨 Realtime: Received broadcast message
+2026-01-04 12:06:05.087 RedLemon[4068:29800]    Payload keys: timestamp, senderId, position, type, isPlaying
+2026-01-04 12:06:05.087 RedLemon[4068:29800] ✅ Realtime: Decoded message type: returnToLobby, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-04 12:06:05.087 RedLemon[4068:29800] 📞 Realtime: Invoking syncCallback for message type: returnToLobby
+2026-01-04 12:06:05.087 RedLemon[4068:29800] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 12:06:05.096 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:06:05.096 RedLemon[4068:29710] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-04 12:06:05.096 RedLemon[4068:29710] 🔍 DEBUG: Received sync message - type: returnToLobby, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTI1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3512599-8435170.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767546355.570121,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"AP6U","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+✅ Download complete: 42012 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+📦 Extracting specific file: Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] (+) Video --vid=1 (*) (h264 1920x804 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 1920x804 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x804 videotoolbox[nv12]
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767546357.02829,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📊 Current subtitle track: 3
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir (ID: 1) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 700 (Embedded: 0, Match: 700, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x804 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x804 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767546357.571041,"type":"ready"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"AP6U","timestamp":0,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+⚡ Ultra-gentle sync: 1.005x to fix 133ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+📊 Current subtitle track: 1
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767546357.968184,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+🎬 Received PLAY signal - All guests ready! Starting playback.
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Video ready - hiding poster
+📝 Started watch history tracking
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0.375375,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767546358.673424,"type":"play"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 1
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDILPnrmUUo1E","phx_ref_prev":"GIeWC1mahcGUUtRK","last_seen":"2026-01-04T17:05:58.840Z","room_id":"AP6U","started_at":"2026-01-04T17:05:53.824Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC1mahcGUUtRK","phx_ref_prev":"GIeWB90pp6-UUiVK","last_seen":"2026-01-04T17:05:53.824Z","room_id":"AP6U","started_at":"2026-01-04T17:05:53.824Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"AP6U","timestamp":1.5432083333333333,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+⚡ Ultra-gentle sync: 1.005x to fix 229ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 1
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Weapons.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Weapons.2025.1080p.DS4K.WEBRip.10Bit.DDP5.1.Atmos.x265-NeoNoir (ID: 1) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 700 (Embedded: 0, Match: 700, Clean: 0, SDH: 0)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"AP6U","timestamp":3.5869166666666668,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+⚡ Ultra-gentle sync: 1.005x to fix 303ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"AP6U","timestamp":5.630625,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+⚡ Ultra-gentle sync: 1.005x to fix 351ms drift
+⚡ Playback speed adjusted to 1.00x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":false,"position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767546364.644579,"type":"returnToLobby"},"type":"broadcast"},"topic":"realtime:watch-party:AP6U"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "AP6U", "name": "Weapons", "season": null, "episode": null, "imdb_id": "tt26581740", "playlist": [{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}], "is_public": true, "created_at": "2026-01-04T17:05:28.047236", "is_playing": false, "poster_url": "https://images.metahub.space/poster/small/tt26581740/img", "description": null, "stream_hash": "4dc447b080ffdfee04789e338e3e7435c894d27b", "backdrop_url": "https://images.metahub.space/background/medium/tt26581740/img", "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-04T17:06:04", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-04T17:06:04.965Z","old_record":{"id": "AP6U"}},"ids":[98813445]},"topic":"realtime:watch-party:AP6U"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔄 Lobby: Fetching fresh room state from Supabase...
+🏠 Received Return to Lobby signal from Host
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:06:04","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id": "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🔍 Supabase Response for /rooms: [{"id":"AP6U","name":"Weapons","host_user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","host_username":"lemontom","stream_hash":"4dc447b080ffdfee04789e338e3e7435c894d27b","imdb_id":"tt26581740","poster_url":"https://images.metahub.space/poster/small/tt26581740/img","backdrop_url":"https://images.metahub.space/background/medium/tt26581740/img","playback_position":0,"is_playing":false,"participants_count":2,"max_participants":50,"is_public":true,"created_at":"2026-01-04T17:05:28.047236","last_activity":"2026-01-04T17:06:04","season":null,"episode":null,"selected_quality":"1080p","selected_file_idx":null,"unlocked_stream_url":"https://chi2-4.download.real-debrid.com/d/2YHIZSFIAOSXC43/Weapons.2025.1080p.WEBRip.x264.AAC5.1-%5BYTS.MX%5D.mp4","description":null,"current_playlist_index":0,"playlist":[{"id": "E460D9B9-456F-4DBF-926E-3CEF55A277FA", "mediaItem": {"id": "tt26581740", "name": "Weapons", "type": "movie", "poster": "https://images.metahub.space/poster/small/tt26581740/img", "background": "https://images.metahub.space/background/medium/tt26581740/img"}}, {"id": "E06B4375-12BC-45A7-A458-DBFEB3A38351", "mediaItem": {"id": "tt27543632", "name": "The Housemaid", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMGU0ZThmMDUtYmZjMi00MDk5LWE2NTQtYzQ3NWZjNWZkZGE3XkEyXkFqcGc@._V1_SX250.jpg"}}, {"id": "AD5F4BB3-B7A5-4B02-B712-3B89608BD867", "mediaItem": {"id":2026-01-04 12:06:05.777 RedLemon[4068:29710] 🖥️ WindowManager: exitFullscreen() called
+2026-01-04 12:06:05.777 RedLemon[4068:29710]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-04 12:06:05.831 RedLemon[4068:29710] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-04 12:06:05.831 RedLemon[4068:29710]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-04 12:06:05.862 RedLemon[4068:29710]    ✅ WindowManager: Window restored to expanded size
+ "tt0111161", "name": "The Shawshank Redemption", "type": "movie", "poster": "https://m.media-amazon.com/images/M/MV5BMDAyY2FhYjctNDc5OS00MDNlLThiMGUtY2UxYWVkNGY2ZjljXkEyXkFqcGc@._V1_SX250.jpg"}}],"subtitle_url":null}]
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Synced playlist with 3 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🚫 Ignoring stale LEAVE event for 656daa91-33b4-4688-9135-c982ea52d7c9 (Tracked: GIeWC5Ojlvt5jzOQ != Leaving: GIeWBwRCaoJ5j7QP)
+🚫 Ignoring stale LEAVE event for 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Tracked: GIeWC1QOjvd7j53O != Leaving: GIeWBVlQkbN7j3ML)
+🧹 Cleaning up MPV player...
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDgZhkeSUUvEH","phx_ref_prev":"GIeWDILPnrmUUo1E","last_seen":"2026-01-04T17:06:05.314Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDILPnrmUUo1E","phx_ref_prev":"GIeWC1mahcGUUtRK","last_seen":"2026-01-04T17:05:58.840Z","room_id":"AP6U","started_at":"2026-01-04T17:05:53.824Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDgm37X2CiJWO","phx_ref_prev":"GIeWC5ZlUE6CiGnK","last_seen":"2026-01-04T17:06:05.723Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWC5ZlUE6CiGnK","phx_ref_prev":"GIeWCt1kfoOCiLYN","last_seen":"2026-01-04T17:05:55.195Z","room_id":"AP6U","started_at":"2026-01-04T17:05:55.195Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt26581740","watching_title":"Weapons","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🗑️ Invalidated all active timers
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+✅ MPV stop completed with clean event loop exit
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+⚠️ Cleanup already performed, skipping
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+🗑️ MPVPlayerViewModel deinit
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+✅ MPV instance destroyed
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1437 with 440 movies
+✅ [EventsConfig] Using cached movie_events config (version 1437, 440 movies)
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWD4A3NrOCiIKL","phx_ref_prev":"GIeWDgm37X2CiJWO","last_seen":"2026-01-04T17:06:12.003Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"88093b04-e98f-11f0-a836-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDgm37X2CiJWO","phx_ref_prev":"GIeWC5ZlUE6CiGnK","last_seen":"2026-01-04T17:06:05.723Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWESOAhJiUUhQC","phx_ref_prev":"GIeWDgZhkeSUUvEH","last_seen":"2026-01-04T17:06:18.714Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"746a1456-e98f-11f0-9e4b-0a58a9feac02":{"metas":[{"phx_ref":"GIeWDgZhkeSUUvEH","phx_ref_prev":"GIeWDILPnrmUUo1E","last_seen":"2026-01-04T17:06:05.314Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}

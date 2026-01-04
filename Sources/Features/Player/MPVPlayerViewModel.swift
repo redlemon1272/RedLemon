@@ -1663,7 +1663,7 @@ extension MPVPlayerViewModel {
 
                         // Basic host participant (others will populate via Realtime)
                         let host = Participant(
-                            id: fetchedSupabaseRoom.hostUserId.uuidString,
+                            id: fetchedSupabaseRoom.hostUserId.uuidString.lowercased(),
                             name: fetchedSupabaseRoom.hostUsername,
                             isHost: true,
                             isReady: true,

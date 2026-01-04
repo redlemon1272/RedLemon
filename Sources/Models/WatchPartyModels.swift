@@ -119,7 +119,7 @@ struct Participant: Identifiable {
 
     static func guest(number: Int) -> Participant {
         Participant(
-            id: UUID().uuidString,
+            id: UUID().uuidString.lowercased(),
             name: "Guest \(number)",
             isHost: false,
             isReady: false,
@@ -130,7 +130,7 @@ struct Participant: Identifiable {
 
     static func host() -> Participant {
         Participant(
-            id: UUID().uuidString,
+            id: UUID().uuidString.lowercased(),
             name: "Host",
             isHost: true,
             isReady: true, // Host is always ready

@@ -5,8 +5,11 @@ import UniformTypeIdentifiers
 struct AccountExportData: Codable {
     let userId: String
     let username: String
+    let realDebridToken: String?
+    let subdlApiKey: String?
+    let playbackHistory: [WatchHistoryItem]?
     let timestamp: Date
-    var version: String = "1.0"
+    var version: String = "1.1"
 }
 
 class AccountExportManager {
@@ -21,9 +24,23 @@ class AccountExportManager {
             throw NSError(domain: "AccountExport", code: 1, userInfo: [NSLocalizedDescriptionKey: "No active account found"])
         }
         
+        // Fetch API tokens (optional)
+        let rdToken = await KeychainManager.shared.get(service: "realdebrid")
+        let subdlKey = await KeychainManager.shared.get(service: "subdl")
+        
+        // Fetch Watch History
+        var history: [WatchHistoryItem]? = nil
+        if let data = UserDefaults.standard.data(forKey: "watchHistory"),
+           let decoded = try? JSONDecoder().decode([WatchHistoryItem].self, from: data) {
+            history = decoded
+        }
+        
         return AccountExportData(
             userId: userId,
             username: username,
+            realDebridToken: rdToken,
+            subdlApiKey: subdlKey,
+            playbackHistory: history,
             timestamp: Date()
         )
     }
@@ -60,6 +77,26 @@ class AccountExportManager {
         // Restore credentials
         try await KeychainManager.shared.save(credential: exportData.userId, for: "user_id")
         try await KeychainManager.shared.saveUsername(exportData.username)
+        
+        // Restore API Tokens
+        if let rdToken = exportData.realDebridToken, !rdToken.isEmpty {
+            try await KeychainManager.shared.save(credential: rdToken, for: "realdebrid")
+        }
+        
+        if let subdlKey = exportData.subdlApiKey, !subdlKey.isEmpty {
+            try await KeychainManager.shared.save(credential: subdlKey, for: "subdl")
+        }
+        
+        // Restore Watch History
+        if let history = exportData.playbackHistory, !history.isEmpty {
+            // Merge strategy: Overwrite or Merge?
+            // For restore, we usually assume the file is authoritative or we merge.
+            // Let's safe-merge: Add items that don't exist, keep newer ones.
+            // Simplified: Just restore what is in the backup for now, user likely wants the backup state.
+            if let encoded = try? JSONEncoder().encode(history) {
+                UserDefaults.standard.set(encoded, forKey: "watchHistory")
+            }
+        }
         
         return exportData
     }

@@ -565,19 +565,6 @@ struct SettingsView: View {
                         .font(.title3.weight(.semibold))
 
                     Spacer()
-
-                    // iCloud Status
-                    HStack(spacing: 6) {
-                        Image(systemName: "icloud.fill")
-                            .foregroundColor(.blue)
-                        Text("iCloud Sync Active")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(12)
                 }
 
                 Text("Your account is automatically synced to iCloud. You can also create a manual backup file.")

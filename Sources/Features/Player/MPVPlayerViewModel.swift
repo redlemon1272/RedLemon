@@ -160,20 +160,29 @@ class MPVPlayerViewModel: ObservableObject {
                              // Snap-Seek Event: Switching completed, now seek to sync
                              self.completeTrackSwitch()
                          } else if self.hasVideoReadyTriggered && self.mpvWrapper.isFileLoaded {
-                            if self.isRefiningEventSeek {
-                                print("⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
-                                // Delay hiding the spinner to ensure the sought frame is rendered
-                                Task { @MainActor in
-                                    try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
-                                    print("✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI")
-                                    self.isRefiningEventSeek = false
-                                    self.isBuffering = false
-                                    withAnimation(.easeOut(duration: 0.5)) {
-                                        self.isLoading = false
-                                        self.showPoster = false
+                            if self.isRefiningInitialSeek {
+                                if self.appState?.player.eventStartTime != nil {
+                                    print("⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
+                                    // Delay hiding the spinner to ensure the sought frame is rendered
+                                    Task { @MainActor in
+                                        try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
+                                        print("✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI")
+                                        self.isRefiningInitialSeek = false
+                                        self.isBuffering = false
+                                        withAnimation(.easeOut(duration: 0.5)) {
+                                            self.isLoading = false
+                                            self.showPoster = false
+                                        }
                                     }
+                                } else if self.isInWatchParty {
+                                    print("⏳ MPVPlayerViewModel: Buffering finished (Watch Party) - Keeping poster until Initial Sync Message...")
+                                    // Do NOT clear flag here; wait for handleSyncMessage
                                 }
                             } else {
+                                print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
+                                self.isBuffering = false
+                                self.isLoading = false
+                            }
                                 print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
                                 self.isBuffering = false
                                 self.isLoading = false
@@ -263,8 +272,8 @@ class MPVPlayerViewModel: ObservableObject {
     private var chatPollingTimer: Timer?
     private var lastChatMessageId: String?
     
-    // Flag to keep loading state active during event seek stabilization
-    private var isRefiningEventSeek = false
+    // Flag to keep loading state active during event seek stabilization or initial watch party sync
+    private var isRefiningInitialSeek = false
 
     // Throttling State
     private var lastTimeUpdate: Date = .distantPast
@@ -603,7 +612,10 @@ class MPVPlayerViewModel: ObservableObject {
 
         if isEvent {
             print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
-            isRefiningEventSeek = true // START: Hold loading state until seek is stable
+        if isEvent {
+            print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
+            isRefiningInitialSeek = true // START: Hold loading state until seek is stable
+            Task { @MainActor in
             Task { @MainActor in
                 // Fix: Only expect the number of subtitles we ACTUALLY loaded (limited to 3)
                 // Otherwise we wait for 8s timeout looking for ghosts.
@@ -636,6 +648,8 @@ class MPVPlayerViewModel: ObservableObject {
         } else {
             // Watch Party Mode (Non-Event)
             print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
+            // NEW: Hold poster until we get the first sync message to prevent 0:00 flash
+            isRefiningInitialSeek = true
 
             if shouldResume {
                 print("   With resume from \(Int(resumeTime))s")
@@ -774,14 +788,14 @@ class MPVPlayerViewModel: ObservableObject {
         print("✅ Video ready - hiding poster")
 
         // Fade out poster when video is ready
-        // NEW: For Events, delay hiding poster to prevent "Frame 0" flash if seek is still latching
-        if self.appState?.player.eventStartTime != nil {
+         // NEW: For Events/Watch Parties, delay hiding poster to prevent "Frame 0" flash
+        if self.isRefiningInitialSeek {
              // Redundant failsafe: If buffering logic fails to clear this flag after 5 seconds, force clear it.
              Task { @MainActor in 
                  try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s failsafe
-                 if self.isRefiningEventSeek {
-                     print("⚠️ EVENT Mode: Failsafe triggered - forcing UI release")
-                     self.isRefiningEventSeek = false
+                 if self.isRefiningInitialSeek {
+                     print("⚠️ EVENT/VP Mode: Failsafe triggered - forcing UI release")
+                     self.isRefiningInitialSeek = false
                      withAnimation(.easeOut(duration: 0.5)) {
                         self.showPoster = false
                         self.isLoading = false
@@ -2400,6 +2414,22 @@ extension MPVPlayerViewModel {
             // Predictive compensation: Account for network latency
             // By the time we receive this message, the host has moved forward
             let predictedHostPosition = hostTimestamp + networkLatency
+
+            // NEW: Initial Sync Logic (Prevent Flash of Frame 0)
+            if isRefiningInitialSeek && !self.isWatchPartyHost {
+                print("👀 Watch Party: Initial Sync - Blind Seeking to \(String(format: "%.2f", predictedHostPosition))s and revealing video")
+                Task { @MainActor in
+                     await playbackService.seek(to: predictedHostPosition)
+                     // Force update logic (bypass normal buffering release)
+                     self.isRefiningInitialSeek = false
+                     self.isBuffering = false
+                     withAnimation(.easeOut(duration: 0.5)) {
+                         self.isLoading = false
+                         self.showPoster = false
+                     }
+                }
+                return // Skip drift calculation for this tick
+            }
 
             // Calculate drift with latency compensation
             let rawDrift = currentTime - predictedHostPosition

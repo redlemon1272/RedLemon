@@ -160,9 +160,24 @@ class MPVPlayerViewModel: ObservableObject {
                              // Snap-Seek Event: Switching completed, now seek to sync
                              self.completeTrackSwitch()
                          } else if self.hasVideoReadyTriggered && self.mpvWrapper.isFileLoaded {
-                            print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
-                            self.isBuffering = false
-                            self.isLoading = false
+                            if self.isRefiningEventSeek {
+                                print("⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...")
+                                // Delay hiding the spinner to ensure the sought frame is rendered
+                                Task { @MainActor in
+                                    try? await Task.sleep(nanoseconds: 500_000_000) // 500ms
+                                    print("✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI")
+                                    self.isRefiningEventSeek = false
+                                    self.isBuffering = false
+                                    withAnimation(.easeOut(duration: 0.5)) {
+                                        self.isLoading = false
+                                        self.showPoster = false
+                                    }
+                                }
+                            } else {
+                                print("✅ MPVPlayerViewModel: Enhancing UI - Buffering finished (hide spinner) [File Loaded]")
+                                self.isBuffering = false
+                                self.isLoading = false
+                            }
                         } else if !self.mpvWrapper.isFileLoaded {
                             // NEW: Safety check - If buffering stops but file NOT loaded, it meant error/stop
 
@@ -199,6 +214,25 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] loaded in
                     guard let self = self else { return }
                     if loaded {
+                        // NEW: Event Playback Logic - Handle seek immediately on load
+                        if let eventStartTime = self.appState?.player.eventStartTime, self.duration > 0 {
+                            print("🎉 EVENT: File loaded, preparing to seek before playback...")
+                            let elapsed = Date().timeIntervalSince(eventStartTime)
+                            let seekTime = max(0, elapsed)
+                            
+                            // 1. Seek immediately while still paused
+                            print("   Seeking to live edge: \(Int(seekTime))s")
+                            Task { @MainActor in
+                                await self.playbackService.seek(to: seekTime)
+                                
+                                // 2. Wait briefly for seek to latch, then play
+                                // This prevents "frame 0" flash
+                                try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+                                await self.playbackService.play()
+                                self.isPlaying = true
+                            }
+                        }
+
                         if self.isInWatchParty && !self.hasSentReadySignal {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
                             
@@ -228,6 +262,9 @@ class MPVPlayerViewModel: ObservableObject {
     private var syncBroadcastTimer: Timer?
     private var chatPollingTimer: Timer?
     private var lastChatMessageId: String?
+    
+    // Flag to keep loading state active during event seek stabilization
+    private var isRefiningEventSeek = false
 
     // Throttling State
     private var lastTimeUpdate: Date = .distantPast
@@ -565,12 +602,14 @@ class MPVPlayerViewModel: ObservableObject {
         // Note: isEvent is now passed explicitly to avoid race conditions with appState injection
 
         if isEvent {
-            print("🎉 EVENT MODE: Autoplaying immediately (ignoring watch party gates)")
+            print("🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)")
+            isRefiningEventSeek = true // START: Hold loading state until seek is stable
             Task { @MainActor in
                 // Fix: Only expect the number of subtitles we ACTUALLY loaded (limited to 3)
                 // Otherwise we wait for 8s timeout looking for ghosts.
                 let expectedCount = min(subtitles.count, 3)
-                await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
+                // Disable autoplay so we can seek BEFORE showing the first frame
+                await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
             }
             // Events don't use waitingForGuests
             showWaitingForGuests = false
@@ -735,9 +774,26 @@ class MPVPlayerViewModel: ObservableObject {
         print("✅ Video ready - hiding poster")
 
         // Fade out poster when video is ready
-        withAnimation(.easeOut(duration: 0.5)) {
-            self.showPoster = false
-            self.isLoading = false
+        // NEW: For Events, delay hiding poster to prevent "Frame 0" flash if seek is still latching
+        if self.appState?.player.eventStartTime != nil {
+             // Redundant failsafe: If buffering logic fails to clear this flag after 5 seconds, force clear it.
+             Task { @MainActor in 
+                 try? await Task.sleep(nanoseconds: 5_000_000_000) // 5s failsafe
+                 if self.isRefiningEventSeek {
+                     print("⚠️ EVENT Mode: Failsafe triggered - forcing UI release")
+                     self.isRefiningEventSeek = false
+                     withAnimation(.easeOut(duration: 0.5)) {
+                        self.showPoster = false
+                        self.isLoading = false
+                     }
+                 }
+             }
+        } else {
+            // Normal behavior
+            withAnimation(.easeOut(duration: 0.5)) {
+                self.showPoster = false
+                self.isLoading = false
+            }
         }
 
         // Load external subtitles if present (delayed to prevent race conditions with embedded tracks)
@@ -754,11 +810,20 @@ class MPVPlayerViewModel: ObservableObject {
         // NEW: Event playback - recalculate seek time NOW (when video is actually ready)
         // This compensates for all loading delays and ensures tight sync across devices
         if let eventStartTime = appState?.player.eventStartTime {
+            // Optimization: If we already sought during File Loaded, we might not need to do this again
+            // causing a double-seek/stutter. However, seeking again aligns us perfectly with "Video Ready" wall clock.
+            // Let's check drift. If we are < 2s off, skip it.
             let elapsed = Date().timeIntervalSince(eventStartTime)
-            // Seek to exact live edge (no artificial delay, rely on load times)
             let seekTime = max(0, elapsed)
+            let drift = abs(self.currentTime - seekTime)
 
-            print("🎉 EVENT: Recalculating seek time at video ready")
+            if drift < 2.0 {
+                print("🎉 EVENT: Video ready, drift is small (\(String(format: "%.2f", drift))s), skipping redundant seek")
+                startWatchHistorySaving()
+                return
+            }
+
+            print("🎉 EVENT: Recalculating seek time at video ready (Drift: \(String(format: "%.2f", drift))s)")
             print("   Event started at: \(eventStartTime)")
             print("   Current time: \(Date())")
             print("   Elapsed: \(Int(elapsed))s")

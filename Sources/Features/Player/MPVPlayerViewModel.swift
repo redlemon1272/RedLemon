@@ -2218,8 +2218,12 @@ extension MPVPlayerViewModel {
         switch message.type {
         case .ready:
             // Handle Ready signal
-            if let senderId = message.senderId {
-                NSLog("✅ Received READY signal from \(senderId)")
+            if let rawSenderId = message.senderId {
+                // CRITICAL FIX: Normalize ID to lowercase to match Presence/DB casing
+                // This prevents deadlocks where "ABC" (ready) != "abc" (connected)
+                let senderId = rawSenderId.lowercased()
+                
+                NSLog("✅ Received READY signal from \(rawSenderId) (normalized: \(senderId))")
                 readyGuestIds.insert(senderId)
 
                 // PRESENCE FALLBACK: Ensure sender is in connectedGuestIds

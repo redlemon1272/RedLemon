@@ -1191,7 +1191,7 @@ class LobbyViewModel: ObservableObject {
                     watchMode: .watchParty,
                     roomId: self.room.id,
                     isHost: false, // System is host, user is guest
-                    isEvent: true
+                    isEvent: self.room.type == .event
                 )
             } else {
                 print("❌ Lobby: No media item to play!")

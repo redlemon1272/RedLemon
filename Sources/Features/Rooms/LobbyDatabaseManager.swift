@@ -284,7 +284,8 @@ class LobbyDatabaseManager: ObservableObject {
                 quality: .fullHD,
                 watchMode: .watchParty,
                 roomId: viewModel.room.id,
-                isHost: false
+                isHost: false,
+                isEvent: viewModel.room.type == .event
             )
         }
     }

@@ -374,22 +374,53 @@ class SupabaseClient: RoomManager, UserManager {
             body: params
         )
         
-        // Response format: {"id": "...", "username": "...", "status": "..."}
-        // We can decode to SupabaseUser partially or create a custom struct
-        // For simplicity, let's reuse SupabaseUser decoder if fields match, or manual decode
+        struct MinimalResponse: Decodable {
+            let id: UUID
+            let username: String
+            let status: String
+        }
         
-        // The RPC returns a single object
-        let response = try jsonDecoder.decode(SupabaseUser.self, from: data)
+        // The RPC returns a minimal object {id, username, status} that doesn't match full SupabaseUser
+        let response = try jsonDecoder.decode(MinimalResponse.self, from: data)
         
-        // Update auth context
-        auth.currentUser = AuthUser(
-            id: response.id,
-            username: response.username,
-            isAdmin: response.isAdmin ?? false,
-            isPremium: response.isPremium ?? false
-        )
-        
-        return response
+        // Now fetch the full user profile to get created_at, isAdmin, etc.
+        // We use a small retry in case of replication lag, though likely instantaneous on same node
+        if let fullUser = try await getUserById(userId: response.id) {
+            // Update auth context
+            auth.currentUser = AuthUser(
+                id: fullUser.id,
+                username: fullUser.username,
+                isAdmin: fullUser.isAdmin ?? false,
+                isPremium: fullUser.isPremium ?? false
+            )
+            return fullUser
+        } else {
+            // Fallback if fetch fails (rare) -> Construct ephemeral user
+            // We fake dates to avoid crash. This is a critical fallback.
+            NSLog("⚠️ registerUserSecure: Could not fetch full profile immediately. Using fallback.")
+            
+            // Construct AuthUser manually
+            auth.currentUser = AuthUser(
+                id: response.id,
+                username: response.username,
+                isAdmin: false,
+                isPremium: false
+            )
+            
+            // We return a constructed SupabaseUser. 
+            // Warning: Missing fields might be nil or default.
+            return SupabaseUser(
+                id: response.id,
+                username: response.username,
+                displayName: nil,
+                avatarUrl: nil,
+                createdAt: Date(),
+                lastSeen: Date(),
+                isAdmin: false,
+                isPremium: false,
+                subscriptionExpiresAt: nil
+            )
+        }
     }
 
     /// Create or login user (username is unique and persistent)

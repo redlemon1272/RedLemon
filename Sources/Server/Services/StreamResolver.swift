@@ -269,13 +269,22 @@ actor StreamResolver {
         if type == "series" && season != nil && episode != nil {
             let beforeEpisodeFilter = filteredStreams.count
 
-            let episodePatterns = [
+            var episodePatterns = [
                 String(format: "s%02de%02d", season!, episode!),  // s01e01
                 String(format: "s%de%d", season!, episode!),      // s1e1
                 String(format: "s%02d e%02d", season!, episode!), // s01 e01
                 String(format: "%dx%02d", season!, episode!),     // 1x01
                 String(format: "season %d episode %d", season!, episode!) // season 1 episode 1
             ]
+            
+            // FIX: Special handling for "Pilot" / "Unaired Pilot" often labeled as 1x00
+            // If we are looking for Season 0, Episode 1 (S00E01), allow searching for 1x00 (S01E00) patterns
+            if season == 0 && episode == 1 {
+                episodePatterns.append("s01e00")
+                episodePatterns.append("1x00")
+                episodePatterns.append("s1e0")
+                print("   ℹ️ StreamResolver: Added alias patterns for S00E01 -> [s01e00, 1x00, s1e0]")
+            }
 
             let seasonOnlyPatterns = [
                 String(format: " s%02d ", season!),    // " s01 "

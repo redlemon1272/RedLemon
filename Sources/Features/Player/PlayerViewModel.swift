@@ -20,6 +20,7 @@ class PlayerViewModel: ObservableObject {
     @Published var isResolvingStream = false
     @Published var streamError: String?
     var streamQueue: [Stream] = [] // Fallback queue for auto-retry logic
+    var playbackRetryCount: Int = 0 // Track retries for transient errors
     @Published var currentWatchMode: WatchMode = .solo
     @Published var currentRoomId: String?
     @Published var isWatchPartyHost: Bool = false
@@ -64,6 +65,7 @@ class PlayerViewModel: ObservableObject {
         await MainActor.run {
             selectedStream = nil // Clear previous stream to prevent stale playback
             streamQueue = [] // Clear stream queue
+            playbackRetryCount = 0 // Reset retry count
 
             // ✅ OPTIMISTIC UPDATE: Set metadata immediately to prevent background flash
             // This ensures the generic background (from Browse) is shown while fetching full details
@@ -543,6 +545,7 @@ class PlayerViewModel: ObservableObject {
         }
 
         streamError = nil
+        playbackRetryCount = 0 // Reset retry count for manual selections
 
         do {
             print("🎬 PlayerVM: Starting playback with selected stream: \(stream.title)")
@@ -628,6 +631,32 @@ class PlayerViewModel: ObservableObject {
                 isResolvingStream = false
             }
         }
+    }
+
+    func handlePlaybackError(_ error: String) {
+        print("⚠️ PlayerVM: Handling playback error: \(error)")
+
+        // Check for transient "Playback Timeout" error
+        if error.contains("Timeout") {
+            if playbackRetryCount < 1 && selectedStream != nil {
+                playbackRetryCount += 1
+                print("🔄 Transient Timeout detected. Retrying current stream (Attempt \(playbackRetryCount)/1)...")
+                
+                // Silent retry of the SAME stream
+                Task { @MainActor in
+                    if let stream = self.selectedStream {
+                         // Re-lock (refresh URL) and play
+                         await self.playSelectedStream(stream, watchMode: self.currentWatchMode, roomId: self.currentRoomId, isHost: self.isWatchPartyHost)
+                    }
+                }
+                return
+            } else {
+                 print("🚫 Timeout retry limit reached or no stream selected. Proceeding to fallback.")
+            }
+        }
+
+        // Default: Try next stream in queue
+        tryNextStream()
     }
 
     func tryNextStream() {

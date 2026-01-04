@@ -189,16 +189,15 @@ actor StreamService: StreamResolving {
                 print("   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)")
             }
 
-            // 3. Fallback: 4K (Last Resort - may lag on old hardware)
-            // RESTRICTION: Never add 4K backup for Events (filterExtended)
+            // 3. Fallback: 480p (SD) - Safe for all hardare
             if !filterExtended {
-                let uhdStreams = extractStreams(from: buckets.uhd4k)
-                if !uhdStreams.isEmpty {
-                    print("   ➕ Added \(uhdStreams.count) 4K streams as 'Hail Mary' backup")
-                    streamsToTry.append(contentsOf: uhdStreams)
-                }
+                 let sdStreams = extractStreams(from: buckets.sd)
+                 if !sdStreams.isEmpty {
+                    print("   ➕ Added \(sdStreams.count) 480p streams as backup")
+                    streamsToTry.append(contentsOf: sdStreams)
+                 }
             } else {
-                print("   🚫 StreamService: Skipping 4K backup streams (Event/WatchParty Mode Restriction)")
+                 print("   🚫 StreamService: Skipping 480p backup streams (Event Mode - Strict 1080p)")
             }
         }
 

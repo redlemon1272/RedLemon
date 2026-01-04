@@ -1245,7 +1245,8 @@ class PlayerViewModel: ObservableObject {
                                 quality: .fullHD,
                                 watchMode: .watchParty,
                                 roomId: roomId,
-                                isHost: false
+                                isHost: false,
+                                isEvent: roomId.hasPrefix("event_")
                             )
                         }
                     }

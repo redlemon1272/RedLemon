@@ -1550,6 +1550,10 @@ class MPVPlayerViewModel: ObservableObject {
 
         print("🧹 Cleaning up MPV player...")
 
+        // ✅ Capture state BEFORE clearing it (Fix for "User Left" bug)
+        // We need to know if we WERE in a watch party to trigger the leave signal.
+        let wasInWatchParty = self.isInWatchParty
+
         // ✅ STEP 1: Clear watching status immediately
         if !returningToLobby {
             await SocialService.shared.updateWatchingStatus(
@@ -1593,7 +1597,8 @@ class MPVPlayerViewModel: ObservableObject {
         readyLoopTimer = nil
 
         // ✅ STEP 4: Disconnect realtime FIRST and await completion
-        if isInWatchParty {
+        // Fix: Use captured state instead of potentially cleared 'isInWatchParty'
+        if wasInWatchParty {
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
             // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
             // Disconnecting the client kills the connection for the LobbyViewModel too.

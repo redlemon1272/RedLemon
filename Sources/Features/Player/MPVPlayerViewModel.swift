@@ -2594,6 +2594,12 @@ extension MPVPlayerViewModel {
                 print("💬 Skipping own message (already displayed locally)")
                 return
             }
+            
+            // Block Check
+            if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
+                print("🚫 Skipping chat from blocked user: \(senderId)")
+                return
+            }
 
             if let text = message.chatText, let username = message.chatUsername {
                 // Convert LOBBY_JOIN to a friendly join message, filter out other system messages
@@ -2740,6 +2746,12 @@ extension MPVPlayerViewModel {
             // Handle incoming reaction
             // CRITICAL: Skip reactions from self (already shown locally when sent)
             if message.senderId == currentUserId {
+                return
+            }
+            
+            // Block Check
+            if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
+                print("🚫 Skipping reaction from blocked user: \(senderId)")
                 return
             }
 

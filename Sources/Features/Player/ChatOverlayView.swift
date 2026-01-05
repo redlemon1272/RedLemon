@@ -241,14 +241,8 @@ struct ChatOverlayView: View {
         let isMe = uid.caseInsensitiveCompare(myId) == .orderedSame
         let isFriend = socialService.friends.contains(where: { $0.id.caseInsensitiveCompare(uid) == .orderedSame })
         
-        // Debug Interaction
-        if username == "lemontom" || username == "ursinho" { // Debug specifics
-             print("[DEBUG MENU] User: \(username) | UID: '\(uid)' | MyID: '\(myId)' | isMe: \(isMe) | isFriend: \(isFriend)")
-        }
-        
-        // If it's me, or if it's a friend and I'm not the host (so no kick/block), 
-        // there are no actions to take. Show plain text.
-        if isMe || (isFriend && !isHost) {
+        // If it's me, just show text (no actions)
+        if isMe {
             return AnyView(
                 Text(username)
                     .font(.caption.weight(.semibold))
@@ -260,38 +254,52 @@ struct ChatOverlayView: View {
             Menu {
                 Text(username) // Header
 
-                if !isMe {
-                     if !isFriend {
-                         Button(action: {
-                             Task { _ = await socialService.sendRequest(toUserId: uid) }
-                         }) {
-                             Label("Add Friend", systemImage: "person.badge.plus")
-                         }
-                         
-                         // Only allow muting non-friends (as per user request)
-                         Button(action: {
-                             viewModel.toggleMute(userId: uid)
-                         }) {
-                             Label(viewModel.mutedUserIds.contains(uid) ? "Unmute" : "Mute",
-                                   systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
-                         }
-                     }
-                     
-                     // Host Options (Verify context)
-                     if isHost {
-                         Divider()
-                         Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
-                             Label("Kick User", systemImage: "xmark.circle")
-                         }
-                          Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
-                             Label("Block User", systemImage: "slash.circle")
-                         }
-                     }
+                // Friend Actions
+                if isFriend {
+                    Button(action: {
+                        Task { await socialService.removeFriend(friendId: uid) }
+                    }) {
+                        Label("Remove Friend", systemImage: "person.badge.minus")
+                    }
+                } else {
+                    Button(action: {
+                        Task { _ = await socialService.sendRequest(toUserId: uid) }
+                    }) {
+                        Label("Add Friend", systemImage: "person.badge.plus")
+                    }
+                }
+                 
+                // Mute (Always available)
+                Button(action: {
+                    viewModel.toggleMute(userId: uid)
+                }) {
+                    Label(viewModel.mutedUserIds.contains(uid) ? "Unmute User" : "Mute User",
+                          systemImage: viewModel.mutedUserIds.contains(uid) ? "speaker.wave.2" : "speaker.slash")
+                }
+                
+                // Block (Always available)
+                 Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
+                    Label("Block User", systemImage: "slash.circle")
+                }
+                
+                // Kick (Host Only)
+                if isHost {
+                    Divider()
+                    Button(role: .destructive, action: { viewModel.kickUser(uid) }) {
+                        Label("Kick User", systemImage: "xmark.circle")
+                    }
                 }
             } label: {
-                Text(username)
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(.blue)
+                HStack(spacing: 4) {
+                    Text(username)
+                        .font(.caption.weight(.semibold))
+                        .foregroundColor(.blue)
+                    
+                    // Explicit Menu Button Indicator
+                    Image(systemName: "ellipsis.circle")
+                        .font(.caption)
+                        .foregroundColor(.white.opacity(0.5))
+                }
             }
             .menuStyle(.borderlessButton)
         )

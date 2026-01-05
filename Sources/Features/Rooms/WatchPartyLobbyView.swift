@@ -648,9 +648,14 @@ struct WatchPartyLobbyView: View {
                                                                             }
                                                                         }
                                                                     } label: {
-                                                                        Text(chatMsg.username)
-                                                                            .font(.caption.weight(.semibold))
-                                                                            .foregroundColor(.blue)
+                                                                        HStack(spacing: 4) {
+                                                                            Text(chatMsg.username)
+                                                                                .font(.caption.weight(.semibold))
+                                                                                .foregroundColor(.blue)
+                                                                            Image(systemName: "ellipsis.circle")
+                                                                                .font(.caption)
+                                                                                .foregroundColor(.white.opacity(0.5))
+                                                                        }
                                                                     }
                                                                     .menuStyle(BorderlessButtonMenuStyle())
                                                                     

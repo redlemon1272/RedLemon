@@ -2665,16 +2665,18 @@ extension MPVPlayerViewModel {
                         Task { @MainActor [weak self] in
                             guard let self = self else { return }
                             
-                            // Show GLOBAL alert
+                            // 1. Cleanup first (Await disconnection)
+                            await self.cleanup()
+                            await self.appState?.player.exitPlayer(keepRoomState: false)
+                            
+                            // 2. Switch View AND Show Alert on the destination screen
+                            self.appState?.currentView = .browse
+                            
+                            // Show GLOBAL alert (Now appears on Browse screen)
                             self.appState?.activeAlert = AppState.AppAlert(
                                 title: "Kicked",
                                 message: "You have been kicked from the room."
                             )
-
-                            // Trigger disconnect and return to browse
-                            await self.cleanup()
-                            await self.appState?.player.exitPlayer(keepRoomState: false)
-                            self.appState?.currentView = .browse
                         }
                         return
                     }

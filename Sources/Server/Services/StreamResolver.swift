@@ -195,6 +195,42 @@ actor StreamResolver {
             print("   🚫 RESOLVER FILTERED AV1: \(beforeAV1Filter) → \(afterAV1Filter) streams")
         }
 
+        // CRITICAL: Filter Samples, Trailers, and Extras
+        let beforeSampleFilter = filteredStreams.count
+        let sampleTerms = ["sample", "trailer", "featurette", "teaser", "bonus", "making of", "deleted scenes"]
+        filteredStreams = filteredStreams.filter { stream in
+            let titleLower = stream.title.lowercased()
+            
+            // Check for terms with delimiters to avoid false positives (e.g. "teasers" -> "teaser" is okay, but "sample" in "example" is not)
+            // Actually "example" doesn't contain "sample". 
+            // But strict delimiters are safer.
+            // Terms to check strictly: "sample", "trailer", "teaser", "bonus"
+            // Terms to check loosely: "featurette", "making of", "deleted scenes"
+            
+            let isSample = sampleTerms.contains { term in
+                if term == "featurette" || term == "making of" || term == "deleted scenes" {
+                    return titleLower.contains(term)
+                }
+                // For short words, use delimiters
+                return titleLower.contains(" \(term) ") || 
+                       titleLower.contains(".\(term).") || 
+                       titleLower.contains("-\(term)-") || 
+                       titleLower.hasSuffix("-\(term)") ||
+                       titleLower.hasSuffix(".\(term)") ||
+                       titleLower.hasSuffix(" \(term)") ||
+                       titleLower == term
+            }
+            
+            if isSample {
+                print("   🚫 RESOLVER BLOCKING Sample/Trailer: \(stream.title)")
+                return false
+            }
+            return true
+        }
+        if filteredStreams.count < beforeSampleFilter {
+            print("   🚫 RESOLVER FILTERED Samples/Trailers: \(beforeSampleFilter) → \(filteredStreams.count) streams")
+        }
+
         // CRITICAL: Filter "Bad Groups"
         let beforeBadGroupFilter = filteredStreams.count
         let badGroups = ["tamilmv", "1tamilmv", "tamilrockers"]

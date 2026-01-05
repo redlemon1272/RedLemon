@@ -101,6 +101,7 @@ final class SubDLClient {
         }
 
         var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 5 // 5s timeout for search
 
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -132,19 +133,26 @@ final class SubDLClient {
                 // Actually, let's just create a helper to query by ID to keep this clean
                 subtitles = try await fetchByInternalId(sdId: firstResult.sd_id, tmdbId: firstResult.tmdb_id, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
             } 
-            // NEW: Try Scraping Fallback if API totally failed (e.g. "can't find movie") AND we have a name
+            // NEW: Try API Name Search (Intermediate Fallback)
             else if let name = name {
-                print("🕸️ Attempting Web Scraping Fallback for '\(name)'...")
-                if let scrapedId = try await searchByWebScraping(name: name, year: year, type: subdlType) {
-                    print("✅ Scraping found SubDL ID: \(scrapedId). Fetching subtitles...")
-                    // We treat the scraped ID as an 'sd_id' (film_id)
-                    // Extract numeric part if it has 'sd' prefix (API usually expects just the number, but let's be safe)
-                    let cleanId = Int(scrapedId.replacingOccurrences(of: "sd", with: ""))
-                    if let fid = cleanId {
-                         subtitles = try await fetchByInternalId(sdId: fid, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                print("⚠️ IMDB ID failed. Attempting API Name Search for '\(name)'...")
+                if let apiId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
+                     print("✅ API Name Search found SubDL ID: \(apiId). Fetching subtitles...")
+                     subtitles = try await fetchByInternalId(sdId: apiId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                }
+                // If API Name Search ALSO fails, try Web Scraping (Last Resort)
+                else {
+                    print("🕸️ Attempting Web Scraping Fallback for '\(name)'...")
+                    if let scrapedId = try await searchByWebScraping(name: name, year: year, type: subdlType) {
+                        print("✅ Scraping found SubDL ID: \(scrapedId). Fetching subtitles...")
+                        
+                        let cleanId = Int(scrapedId.replacingOccurrences(of: "sd", with: ""))
+                        if let fid = cleanId {
+                             subtitles = try await fetchByInternalId(sdId: fid, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                        }
+                    } else {
+                        print("❌ Scraping found no matches.")
                     }
-                } else {
-                    print("❌ Scraping found no matches.")
                 }
             }
         }
@@ -193,6 +201,7 @@ final class SubDLClient {
         
         guard let url = components.url else { return [] }
         var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 5
         
         // print("🔍 Retrying URL: \(url)")
@@ -201,10 +210,100 @@ final class SubDLClient {
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         return result.subtitles ?? []
     }
+
+    private func searchByApiName(name: String, year: Int?, type: String, apiKey: String) async throws -> Int? {
+        // Sanitize name similar to scraper (remove colons which confuse search)
+        let sanitizedName = name
+            .replacingOccurrences(of: ":", with: " ")
+            .replacingOccurrences(of: " - ", with: " ")
+            .replacingOccurrences(of: "  ", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        var components = URLComponents(string: "\(baseURL)/subtitles")!
+        var queryItems = [
+            URLQueryItem(name: "api_key", value: apiKey),
+            URLQueryItem(name: "film_name", value: sanitizedName), // Use 'film_name' for text search
+            URLQueryItem(name: "type", value: type)
+        ]
+        
+        // Note: We don't send 'subs_per_page' or other filters, rely on filtering the 'results' array
+        
+        components.queryItems = queryItems
+        guard let url = components.url else { return nil }
+
+        print("🔍 Attempting API Name Search: \(sanitizedName)")
+
+        var request = URLRequest(url: url)
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 5
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+        
+        // Decode response - we expect 'results' array populated now
+        let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
+        
+        guard let results = result.results, !results.isEmpty else {
+            print("❌ API Name Search returned no results.")
+            return nil
+        }
+        
+        print("✅ API Name Search returned \(results.count) candidates.")
+        
+        // Filter candidates
+        for candidate in results {
+            // Check Year (Strongest Signal) - BUT API doesn't return year in 'SubDLResult' explicitly?
+            // Actually SubDLResult has name, sd_id, imdb_id, tmdb_id.
+            // Wait, does 'name' field in result contain the year? e.g. "Jumanji: The Next Level (2019)"
+            // Let's assume it might or might not.
+            
+            // 1. Check if candidate name matches our sanitized name (ignoring casing)
+            // Ideally we'd check IMDB ID if we had it, but we failed IMDB ID search.
+            
+            // Simple match:
+            let candidateName = candidate.name.lowercased()
+            let searchName = name.lowercased()
+            
+            // Check for Year in candidate name (e.g. "Movie Title (2019)")
+            var yearMatch = false
+            if let year = year {
+                if candidateName.contains("\(year)") {
+                    yearMatch = true
+                }
+            }
+            
+            // Similarity check
+            // If year matches, we are very confident.
+            if yearMatch {
+                print("   ✅ Candidate Year Match! ID: \(candidate.sd_id) Name: \(candidate.name)")
+                return candidate.sd_id
+            }
+            
+            // If no year in search but name is very close
+            if candidateName.contains(sanitizedName.lowercased()) {
+                 print("   ⚠️ Candidate Name Match (No Year verified): ID: \(candidate.sd_id) Name: \(candidate.name)")
+                 return candidate.sd_id
+            }
+        }
+        
+        // Fallback: Return first result if list not empty
+        if let first = results.first {
+             print("⚠️ No exact match logic passed, using first result: ID=\(first.sd_id) Name=\(first.name)")
+             return first.sd_id
+        }
+        
+        return nil
+    }
     
     private func searchByWebScraping(name: String, year: Int?, type: String) async throws -> String? {
+        // Sanitize name: remove colons and other special characters that confuse the search
+        let sanitizedName = name
+            .replacingOccurrences(of: ":", with: " ")
+            .replacingOccurrences(of: " - ", with: " ")
+            .replacingOccurrences(of: "  ", with: " ") // Collapse double spaces
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            
         // Construct search URL: https://subdl.com/search/Name
-        guard let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return nil }
+        guard let encodedName = sanitizedName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return nil }
         let searchURLStr = "https://subdl.com/search/\(encodedName)"
         guard let url = URL(string: searchURLStr) else { return nil }
         

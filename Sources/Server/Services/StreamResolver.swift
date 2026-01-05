@@ -612,7 +612,7 @@ actor StreamResolver {
                 }
 
                 // 3. Subtitle Indicators (Explicit embedded subs)
-                let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed", "multisub", "multi-sub", "softcoded"]
+                let subIndicators = ["sub eng", "eng sub", "sub english", "emb sub", "subbed", "multisub", "multi-sub", "softcoded", "msubs", "msub"]
                 if subIndicators.contains(where: { title.contains($0) }) {
                     score += 40 // Major boost
                 }

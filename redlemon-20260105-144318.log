@@ -1,0 +1,2042 @@
+2026-01-05 14:43:26.147 RedLemon[6542:56935] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-05 14:43:26.147 RedLemon[6542:56935] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-05 14:43:26.250 RedLemon[6542:56935] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-05 14:43:26.254 RedLemon[6542:57000] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-05 14:43:26.306 RedLemon[6542:56935] ✅ Playback state reset complete - starting in browse view
+2026-01-05 14:43:26.306 RedLemon[6542:56935] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-05 14:43:26.306 RedLemon[6542:56935] 🧪 Testing Profile: debug
+2026-01-05 14:43:26.312 RedLemon[6542:57001] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-05 14:43:26.352 RedLemon[6542:56935] ✅ Keychain: Found stored username: ursinho
+2026-01-05 14:43:26.352 RedLemon[6542:56935] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-05 14:43:26.352 RedLemon[6542:56999] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-05 14:43:26.642 RedLemon[6542:56999] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-05 14:43:26.651 RedLemon[6542:56999] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-05 14:43:26.651 RedLemon[6542:56999] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-05 14:43:26.682 RedLemon[6542:56935] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-05 14:43:26.682 RedLemon[6542:56935] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-05 14:43:26.682 RedLemon[6542:56935] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-05 14:43:26.682 RedLemon[6542:56935] 🚀 RedLemon: Starting HTTP server...
+2026-01-05 14:43:26.683 RedLemon[6542:56935] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-05 14:43:26.704 RedLemon[6542:56935] ✅ RedLemon: HTTPServer instance created
+2026-01-05 14:43:26.704 RedLemon[6542:56999] 📡 RedLemon: Server starting on port 47253...
+2026-01-05 14:43:26.704 RedLemon[6542:56935] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"0C3C08DE-4255-4E64-8C4F-A8F93ACD7CC8","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-05 14:43:28.778 RedLemon[6542:56935] ✅ RedLemon: Server marked as ready
+2026-01-05 14:43:28.810 RedLemon[6542:56935] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-05 14:43:28.810 RedLemon[6542:56935] 🔍 Performing startup checks...
+2026-01-05 14:43:28.810 RedLemon[6542:56935] ✅ Username-based authentication ready
+2026-01-05 14:43:30.425 RedLemon[6542:56935] 🔍 Performing startup checks...
+2026-01-05 14:43:30.425 RedLemon[6542:56935] ✅ Username-based authentication ready
+2026-01-05 14:43:31.654 RedLemon[6542:56935] 🔄 Checking for app updates...
+2026-01-05 14:45:17.857 RedLemon[6542:57419] ⚠️ SupabaseClient: User already in room (409), proceeding...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+✅ [EventsView] Loaded 428 movies from config version 1468
+🗓 AppState: Updated schedule epoch to 2025-12-28 18:59:27 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 20:58:27 +0000
+⏰ AppState: Scheduling update in 4501 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1340138/img (1014442 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"20659836-B1F9-4F7E-9361-F0428E5694CA","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftN8J-vbYM1z_I","phx_ref_prev":"GIftMxwLIbcM1_UJ","last_seen":"2026-01-05T19:43:22.396Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftOQbiLxaCiNSL","last_seen":"2026-01-05T19:43:27.898Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"A925F086-4DD2-4436-9041-E63E9A2B4B2C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 8 items to cloud...
+🔄 SocialService: Syncing 8 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":94212,"eth":3220.125},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","opt eth_getBalance: undefined","eth eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":94212,"eth":3220.125},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.019s (RTT: 69ms)
+   Local:  2026-01-05 19:43:31 +0000
+   Server: 2026-01-05 19:43:31 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftPHA-dpQM1y2B","phx_ref_prev":"GIftN8J-vbYM1z_I","last_seen":"2026-01-05T19:43:42.498Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftN8J-vbYM1z_I","phx_ref_prev":"GIftMxwLIbcM1_UJ","last_seen":"2026-01-05T19:43:22.396Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftPa5wldaCiGSK","phx_ref_prev":"GIftOQbiLxaCiNSL","last_seen":"2026-01-05T19:43:47.902Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftOQbiLxaCiNSL","last_seen":"2026-01-05T19:43:27.898Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftQRIzJOoM13FF","phx_ref_prev":"GIftPHA-dpQM1y2B","last_seen":"2026-01-05T19:44:02.394Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftPHA-dpQM1y2B","phx_ref_prev":"GIftN8J-vbYM1z_I","last_seen":"2026-01-05T19:43:42.498Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftQlZQlmyCiBNH","phx_ref_prev":"GIftPa5wldaCiGSK","last_seen":"2026-01-05T19:44:07.902Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftPa5wldaCiGSK","phx_ref_prev":"GIftOQbiLxaCiNSL","last_seen":"2026-01-05T19:43:47.902Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftRbuiL2sM19eO","phx_ref_prev":"GIftQRIzJOoM13FF","last_seen":"2026-01-05T19:44:22.414Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftQRIzJOoM13FF","phx_ref_prev":"GIftPHA-dpQM1y2B","last_seen":"2026-01-05T19:44:02.394Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftRv5t84-CiGbO","phx_ref_prev":"GIftQlZQlmyCiBNH","last_seen":"2026-01-05T19:44:27.903Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftQlZQlmyCiBNH","phx_ref_prev":"GIftPa5wldaCiGSK","last_seen":"2026-01-05T19:44:07.902Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftSmVARVcM1-bO","phx_ref_prev":"GIftRbuiL2sM19eO","last_seen":"2026-01-05T19:44:42.436Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftRbuiL2sM19eO","phx_ref_prev":"GIftQRIzJOoM13FF","last_seen":"2026-01-05T19:44:22.414Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftS6be7wyCiOGQ","phx_ref_prev":"GIftRv5t84-CiGbO","last_seen":"2026-01-05T19:44:47.904Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftRv5t84-CiGbO","phx_ref_prev":"GIftQlZQlmyCiBNH","last_seen":"2026-01-05T19:44:27.903Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftSmVARVcM1-bO","phx_ref_prev":"GIftRbuiL2sM19eO","last_seen":"2026-01-05T19:44:42.436Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftTxDd5ooM19PF","phx_ref_prev":"GIftSmVARVcM1-bO","last_seen":"2026-01-05T19:45:02.499Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftUE7jQDKCiFDE","phx_ref_prev":"GIftS6be7wyCiOGQ","last_seen":"2026-01-05T19:45:07.905Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftS6be7wyCiOGQ","phx_ref_prev":"GIftRv5t84-CiGbO","last_seen":"2026-01-05T19:44:47.904Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-05T19:45:17Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Terminator Genisys (Live: true)
+   Event start time: 2026-01-05 18:42:27 +0000
+   Event duration: 8160.0s
+   Current time: 2026-01-05 19:45:17 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt1340138
+
+✅ [SYNC VERIFICATION] FOUND SERVER URL (No Hash) 🔑
+   UnlockedURL: https://chi5-4.download.real-d...
+   Quality: 1080p
+   FileIdx: -1
+   🔗 Locking to server-provided unlocked URL
+
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🎬 Live event - calculating position: 3770.942517518997 seconds
+   Event start time:2026-01-05 14:45:18.024 RedLemon[6542:56935] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1340138/img
+2026-01-05 14:45:18.025 RedLemon[6542:56935] ⏳ Background art loading...
+2026-01-05 14:45:18.025 RedLemon[6542:56935] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1340138/img
+2026-01-05 14:45:18.026 RedLemon[6542:56935] ⏳ Logo loading...
+2026-01-05 14:45:18.089 RedLemon[6542:56935]    Quality: 1080p
+2026-01-05 14:45:18.089 RedLemon[6542:56935]    Mode: watchParty
+2026-01-05 14:45:18.089 RedLemon[6542:56935] 📡 Fetching metadata for tt1340138...
+ 2026-01-05 18:42:27 +0000
+   Current time: 2026-01-05 19:45:17 +0000
+   Room createdAt: 2026-01-05 18:42:27 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 3770.942517518997
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Terminator Genisys
+[ INFO ] GET /api/metadata/meta/movie/tt1340138 [request-id: A9166117-53FA-437F-AC2D-CC01A64EE226]
+2026-01-05 14:45:18.229 RedLemon[6542:56935] ✅ Logo loaded successfully
+2026-01-05 14:45:18.269 RedLemon[6542:57526] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-05 14:45:18.301 RedLemon[6542:56935] ✅ Background art loaded successfully
+2026-01-05 14:45:18.302 RedLemon[6542:56935] 🎬 GUEST: Using host's stream selection (skipping resolution)
+💾 Cache SET: Metadata[meta_movie_tt1340138]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 534BE54A-3FBB-48E9-AACA-CC3E35D73DF9]
+2026-01-05 14:45:18.558 RedLemon[6542:56935] ✅ GUEST: Found 10 subtitles
+2026-01-05 14:45:18.568 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Te, subtitles: 10
+2026-01-05 14:45:18.640 RedLemon[6542:56935] ✅ Stream ready, starting playback...
+2026-01-05 14:45:18.640 RedLemon[6542:56935] 🖥️ WindowManager: enterFullscreen() called
+2026-01-05 14:45:18.640 RedLemon[6542:56935]    Window: <SwiftUI.SwiftUIWindow: 0x7f91f626aaf0>
+2026-01-05 14:45:18.640 RedLemon[6542:56935]    Is fullscreen: 0
+2026-01-05 14:45:18.640 RedLemon[6542:56935]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-05 14:45:18.738 RedLemon[6542:56935] 🖼️ Setting up MPV with native macOS video output...
+2026-01-05 14:45:18.745 RedLemon[6542:56935] ✅ MPV initialized with native GPU rendering
+2026-01-05 14:45:18.760 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-05 14:45:18.760 RedLemon[6542:56935] 🎉 Starting watch party sync - Room: event_tt1340138, Host: NO
+2026-01-05 14:45:18.760 RedLemon[6542:56935] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-05 14:45:18.829 RedLemon[6542:56935] 🔄 Starting chat polling for room: event_tt1340138
+2026-01-05 14:45:18.830 RedLemon[6542:56935] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-05 14:45:18.830 RedLemon[6542:56935] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-05 14:45:18.830 RedLemon[6542:56935] 🎬🎬🎬 Subtitles: 10
+2026-01-05 14:45:18.831 RedLemon[6542:56935] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Terminator Genisys
+2026-01-05 14:45:18.831 RedLemon[6542:56935] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Te
+2026-01-05 14:45:18.831 RedLemon[6542:56935] 🎬🎬🎬 subtitles: 10
+2026-01-05 14:45:18.832 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-05 14:45:18.839 RedLemon[6542:57550] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-05 14:45:18.839 RedLemon[6542:57550] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE2ODA4My0xMjExNzgwLnppcA==?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+2026-01-05 14:45:18.841 RedLemon[6542:57526] 🎬 MPV: Current video filename set to: Terminator.Genisys.2015.1080p.BluRay.DTS.x264.D-Z0N3.mkv
+2026-01-05 14:45:18.841 RedLemon[6542:57526] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Terminator.Genisys.2015.1080p.BluRay.DTS.x, autoplay: false, expectedSubs: 3
+2026-01-05 14:45:18.841 RedLemon[6542:57526] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Terminator.Genisys.2015.1080p.BluRay.DTS.x264.D-Z0N3.mkv"
+2026-01-05 14:45:18.842 RedLemon[6542:57526] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1340138 (movie)
+   ℹ️ Fallback Name: Terminator Genisys (2015)
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Te
+   Display Title: Terminator Genisys
+   Subtitle URLs: 10
+      [0] Terminator.Genisys.2015.BDRip.x264-SPARKS
+      [1] Terminator.Genisys.2015.BDRip.x264-SPARKS
+      [2] Terminator.Genisys.2015.BDRip.x264-SPARKS
+      [3] Terminator.Genisys.2015.1080p.BluRay.H264.AAC-RARBG
+      [4] Terminator.Genisys.2015.2160p.UHD.BluRay.X265-IAMABLE
+      [5] Terminator.Genisys.2015.m720p.BluRay.x264-FreeHD
+      [6] Terminator.Genisys.2015.WEBRip.Amazon
+      [7] Terminator.Genisys.2015.720p.x264.Ganool.Video
+      [8] Terminator.Genisys.2015.HDRip.KORSUB. color text ( Run time 02:00:24)
+      [9] Terminator: Genisys (2015)
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+✅ Render context created successfully (IINA method)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1340138, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1340138
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1340138
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Terminator Genisys
+   IMDB: tt1340138
+   URL: https://chi5-4.download.real-debrid.com/d/TE3RN7WLJUYT420/Te...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt1340138 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt1340138]
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE2ODA4My0xMjExNzgwLnppcA== [request-id: 39AC9DA6-075A-45A8-A3C7-DEC5C0CD083A]
+2026-01-05 14:45:19.501 RedLemon[6542:57539] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FBB98F3E-0EA4-4E44-8574-61E4F86554F8.vtt
+2026-01-05 14:45:19.501 RedLemon[6542:57539] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FBB98F3E-0EA4-4E44-8574-61E
+2026-01-05 14:45:19.522 RedLemon[6542:57539] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:45:19.522 RedLemon[6542:57539] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE2ODA3Ni0xMTk0NDQ0LnppcA==?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+📄 Subtitle request: L3N1YnRpdGxlLzE2ODA4... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/168083-1211780.zip
+📨 Received: {"ref":"9ADF8A57-A7D4-4B8C-9A7F-C810BE40EB33","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"53b2f5ea-ea6e-11f0-b3cb-0a58a9feac02":{"metas":[{"phx_ref":"GIftCRONJZik6FkN","is_host":false,"joined_at":1767642001.8334842,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"108ff0be-ea6f-11f0-b1f6-0a58a9feac02":{"metas":[{"phx_ref":"GIftUtnCaY2K_IfH","is_host":false,"joined_at":1767642318.8242722,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftUtrBHl-CiNTH","phx_ref_prev":"GIftUE7jQDKCiFDE","last_seen":"2026-01-05T19:45:18.839Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:45:18.839Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftUE7jQDKCiFDE","phx_ref_prev":"GIftS6be7wyCiOGQ","last_seen":"2026-01-05T19:45:07.905Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt1340138/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1340138/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1340138/img...
+📡 SocialService: Updated status - online: Terminator Genisys
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIftCRONJZik6FkN)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIftUtnCaY2K_IfH
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 20:58:27 +0000
+⏰ AppState: Scheduling update in 4388 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 40850 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Terminator.Genisys.2015.720p.BluRay.x264-SPARKS-SDH.srt
+📦 Extracting specific file: Terminator.Genisys.2015.720p.BluRay.x264-SPARKS-SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE2ODA3Ni0xMTk0NDQ0LnppcA== [request-id: F8A8FD27-4436-4CFB-980F-90B4546F69FB]
+
+caution:  zipfile comment truncated
+error [/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/0CBA4182-C663-4999-AE66-BAD88D61CEE1.zip]:  missing 4022124970 bytes in zipfile
+  (attempting to process anyway)
+error [/var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/0CBA4182-C663-4999-AE66-BAD88D61CEE1.zip]:  start of central directory not found;
+  zipfile corrupt.
+  (please check that you have transferred or created the zipfile in the
+  appropriate BINARY mode and that you have compiled UnZip properly)
+📄 Subtitle request: L3N1YnRpdGxlLzE2ODA3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/168076-1194444.zip
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 65224 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No subtitle files found in zip list output:
+Archive:  /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/0CBA4182-C663-4999-AE66-BAD88D61CEE1.zip
+
+[ WARNING ] Abort.404: No subtitle files found in zip [request-id: F8A8FD27-4436-4CFB-980F-90B4546F69FB]
+2026-01-05 14:45:19.953 RedLemon[6542:57539] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FE6C2828-B20C-4B05-BA3A-674D4FC2D2F8.vtt
+2026-01-05 14:45:19.953 RedLemon[6542:57539] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_FE6C2828-B20C-4B05-BA3A-674
+2026-01-05 14:45:19.959 RedLemon[6542:57539] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:45:19.959 RedLemon[6542:57539] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE2ODAzOC0xMjAyMTI0LnppcA==?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE2ODAzOC0xMjAyMTI0LnppcA== [request-id: FB38C250-2E83-41AC-B4C2-4642D07B005D]
+2026-01-05 14:45:20.535 RedLemon[6542:57419] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F682BFBE-8A95-42A0-B0C4-5527B50097D0.vtt
+2026-01-05 14:45:20.535 RedLemon[6542:57419] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_F682BFBE-8A95-42A0-B0C4-552
+2026-01-05 14:45:20.543 RedLemon[6542:57419] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:45:20.544 RedLemon[6542:57419] 🔍 MPV track-list/count: 3
+2026-01-05 14:45:20.544 RedLemon[6542:57419] 🔍 Track 0 type: sub
+2026-01-05 14:45:20.544 RedLemon[6542:57419] ✅ Found subtitle track: ID=1, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:20.544 RedLemon[6542:57419] 🔍 Track 1 type: sub
+2026-01-05 14:45:20.544 RedLemon[6542:57419] ✅ Found subtitle track: ID=2, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:20.544 RedLemon[6542:57419] 🔍 Track 2 type: sub
+2026-01-05 14:45:20.544 RedLemon[6542:57419] ✅ Found subtitle track: ID=3, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:20.544 RedLemon[6542:57419] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-05 14:45:20.545 RedLemon[6542:57419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:45:20.545 RedLemon[6542:57419]    Start[1]: ID=1, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:20.545 RedLemon[6542:57419]    Start[2]: ID=2, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:20.545 RedLemon[6542:57419]    Start[3]: ID=3, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:20.545 RedLemon[6542:57419] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-05 14:45:20.546 RedLemon[6542:57419]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:45:20.546 RedLemon[6542:57419]    Track: ID=1, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:20.546 RedLemon[6542:57419]    Track: ID=2, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:20.546 RedLemon[6542:57419]    Track: ID=3, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:21.624 RedLemon[6542:57419] 🔍 MPV track-list/count: 10
+2026-01-05 14:45:21.721 RedLemon[6542:57419] 🔍 Track 0 type: sub
+2026-01-05 14:45:21.722 RedLemon[6542:56935] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-05 14:45:21.722 RedLemon[6542:57419] ✅ Found subtitle track: ID=1, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 1 type: sub
+2026-01-05 14:45:21.722 RedLemon[6542:57419] ✅ Found subtitle track: ID=2, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 2 type: sub
+2026-01-05 14:45:21.722 RedLemon[6542:57419] ✅ Found subtitle track: ID=3, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 3 type: video
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 4 type: audio
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 5 type: audio
+2026-01-05 14:45:21.722 RedLemon[6542:57419] 🔍 Track 6 type: sub
+2026-01-05 14:45:21.723 RedLemon[6542:57419] ✅ Found subtitle track: ID=4, lang=rus, title=Forced, iTunes, external=0
+2026-01-05 14:45:21.723 RedLemon[6542:57419] 🔍 Track 7 type: sub
+2026-01-05 14:45:21.723 RedLemon[6542:57419] ✅ Found subtitle track: ID=5, lang=rus, title=iTunes, external=0
+2026-01-05 14:45:21.723 RedLemon[6542:57419] 🔍 Track 8 type: sub
+2026-01-05 14:45:21.723 RedLemon[6542:57419] ✅ Found subtitle track: ID=6, lang=eng, title=nil, external=0
+2026-01-05 14:45:21.723 RedLemon[6542:57419] 🔍 Track 9 type: sub
+2026-01-05 14:45:21.723 RedLemon[6542:57419] ✅ Found subtitle track: ID=7, lang=eng, title=SDH, external=0
+2026-01-05 14:45:21.724 RedLemon[6542:57419] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[1]: ID=1, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[2]: ID=2, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[3]: ID=3, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[4]: ID=4, Title='Forced, iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[5]: ID=5, Title='iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[6]: ID=6, Title='nil', Lang='eng', Ext=0
+2026-01-05 14:45:21.724 RedLemon[6542:57419]    Start[7]: ID=7, Title='SDH', Lang='eng', Ext=0
+2026-01-05 14:45:21.957 RedLemon[6542:57419] ✅ SubtitleService: Scanned 8 tracks (Attempt 2/5)
+2026-01-05 14:45:21.957 RedLemon[6542:57419]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:45:21.957 RedLemon[6542:57419]    Track: ID=1, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:21.957 RedLemon[6542:57419]    Track: ID=2, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:21.958 RedLemon[6542:57419]    Track: ID=3, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:21.958 RedLemon[6542:57419]    Track: ID=4, Title=Forced, iTunes, External=0
+2026-01-05 14:45:21.958 RedLemon[6542:57419]    Track: ID=5, Title=iTunes, External=0
+2026-01-05 14:45:21.958 RedLemon[6542:57419]    Track: ID=6, Title=English, External=0
+2026-01-05 14:45:21.958 RedLemon[6542:57419]    Track: ID=7, Title=SDH, External=0
+2026-01-05 14:45:23.018 RedLemon[6542:57419] 🔍 MPV track-list/count: 10
+2026-01-05 14:45:23.018 RedLemon[6542:57419] 🔍 Track 0 type: sub
+2026-01-05 14:45:23.019 RedLemon[6542:57419] ✅ Found subtitle track: ID=1, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:23.019 RedLemon[6542:57419] 🔍 Track 1 type: sub
+2026-01-05 14:45:23.020 RedLemon[6542:57419] ✅ Found subtitle track: ID=2, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:23.020 RedLemon[6542:57419] 🔍 Track 2 type: sub
+2026-01-05 14:45:23.021 RedLemon[6542:57419] ✅ Found subtitle track: ID=3, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:23.021 RedLemon[6542:57419] 🔍 Track 3 type: video
+2026-01-05 14:45:23.021 RedLemon[6542:57419] 🔍 Track 4 type: audio
+2026-01-05 14:45:23.021 RedLemon[6542:57419] 🔍 Track 5 type: audio
+2026-01-05 14:45:23.022 RedLemon[6542:57419] 🔍 Track 6 type: sub
+2026-01-05 14:45:23.022 RedLemon[6542:57419] ✅ Found subtitle track: ID=4, lang=rus, title=Forced, iTunes, external=0
+2026-01-05 14:45:23.022 RedLemon[6542:57419] 🔍 Track 7 type: sub
+2026-01-05 14:45:23.023 RedLemon[6542:57419] ✅ Found subtitle track: ID=5, lang=rus, title=iTunes, external=0
+2026-01-05 14:45:23.023 RedLemon[6542:57419] 🔍 Track 8 type: sub
+2026-01-05 14:45:23.023 RedLemon[6542:57419] ✅ Found subtitle track: ID=6, lang=eng, title=nil, external=0
+2026-01-05 14:45:23.024 RedLemon[6542:57419] 🔍 Track 9 type: sub
+2026-01-05 14:45:23.025 RedLemon[6542:57419] ✅ Found subtitle track: ID=7, lang=eng, title=SDH, external=0
+2026-01-05 14:45:23.025 RedLemon[6542:57419] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2026-01-05 14:45:23.026 RedLemon[6542:57419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:45:23.026 RedLemon[6542:57419]    Start[1]: ID=1, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:23.026 RedLemon[6542:57419]    Start[2]: ID=2, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:23.027 RedLemon[6542:57419]    Start[3]: ID=3, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:23.027 RedLemon[6542:57419]    Start[4]: ID=4, Title='Forced, iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:23.027 RedLemon[6542:57419]    Start[5]: ID=5, Title='iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:23.027 RedLemon[6542:57419]    Start[6]: ID=6, Title='nil', Lang='eng', Ext=0
+2026-01-05 14:45:23.027 RedLemon[6542:57419]    Start[7]: ID=7, Title='SDH', Lang='eng', Ext=0
+2026-01-05 14:45:23.028 RedLemon[6542:57419] ✅ SubtitleService: Scanned 8 tracks (Attempt 3/5)
+2026-01-05 14:45:23.028 RedLemon[6542:57419]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:45:23.030 RedLemon[6542:57419]    Track: ID=1, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:23.030 RedLemon[6542:57419]    Track: ID=2, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:23.030 RedLemon[6542:57419]    Track: ID=3, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:23.030 RedLemon[6542:57419]    Track: ID=4, Title=Forced, iTunes, External=0
+2026-01-05 14:45:23.031 RedLemon[6542:57419]    Track: ID=5, Title=iTunes, External=0
+2026-01-05 14:45:23.031 RedLemon[6542:57419]    Track: ID=6, Title=English, External=0
+2026-01-05 14:45:23.032 RedLemon[6542:57419]    Track: ID=7, Title=SDH, External=0
+2026-01-05 14:45:24.032 RedLemon[6542:57419] 🔍 MPV track-list/count: 10
+2026-01-05 14:45:24.032 RedLemon[6542:57419] 🔍 Track 0 type: sub
+2026-01-05 14:45:24.032 RedLemon[6542:57419] ✅ Found subtitle track: ID=1, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:24.032 RedLemon[6542:57419] 🔍 Track 1 type: sub
+2026-01-05 14:45:24.032 RedLemon[6542:57419] ✅ Found subtitle track: ID=2, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:24.033 RedLemon[6542:57419] 🔍 Track 2 type: sub
+2026-01-05 14:45:24.033 RedLemon[6542:57419] ✅ Found subtitle track: ID=3, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:24.033 RedLemon[6542:57419] 🔍 Track 3 type: video
+2026-01-05 14:45:24.033 RedLemon[6542:57419] 🔍 Track 4 type: audio
+2026-01-05 14:45:24.034 RedLemon[6542:57419] 🔍 Track 5 type: audio
+2026-01-05 14:45:24.034 RedLemon[6542:57419] 🔍 Track 6 type: sub
+2026-01-05 14:45:24.034 RedLemon[6542:57419] ✅ Found subtitle track: ID=4, lang=rus, title=Forced, iTunes, external=0
+2026-01-05 14:45:24.034 RedLemon[6542:57419] 🔍 Track 7 type: sub
+2026-01-05 14:45:24.034 RedLemon[6542:57419] ✅ Found subtitle track: ID=5, lang=rus, title=iTunes, external=0
+2026-01-05 14:45:24.035 RedLemon[6542:57419] 🔍 Track 8 type: sub
+2026-01-05 14:45:24.035 RedLemon[6542:57419] ✅ Found subtitle track: ID=6, lang=eng, title=nil, external=0
+2026-01-05 14:45:24.035 RedLemon[6542:57419] 🔍 Track 9 type: sub
+2026-01-05 14:45:24.035 RedLemon[6542:57419] ✅ Found subtitle track: ID=7, lang=eng, title=SDH, external=0
+2026-01-05 14:45:24.035 RedLemon[6542:57419] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2026-01-05 14:45:24.035 RedLemon[6542:57419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:45:24.035 RedLemon[6542:57419]    Start[1]: ID=1, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[2]: ID=2, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[3]: ID=3, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[4]: ID=4, Title='Forced, iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[5]: ID=5, Title='iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[6]: ID=6, Title='nil', Lang='eng', Ext=0
+2026-01-05 14:45:24.036 RedLemon[6542:57419]    Start[7]: ID=7, Title='SDH', Lang='eng', Ext=0
+2026-01-05 14:45:24.036 RedLemon[6542:57419] ✅ SubtitleService: Scanned 8 tracks (Attempt 4/5)
+2026-01-05 14:45:24.037 RedLemon[6542:57419]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:45:24.037 RedLemon[6542:57419]    Track: ID=1, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:24.037 RedLemon[6542:57419]    Track: ID=2, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:24.038 RedLemon[6542:57419]    Track: ID=3, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:24.038 RedLemon[6542:57419]    Track: ID=4, Title=Forced, iTunes, External=0
+2026-01-05 14:45:24.039 RedLemon[6542:57419]    Track: ID=5, Title=iTunes, External=0
+2026-01-05 14:45:24.039 RedLemon[6542:57419]    Track: ID=6, Title=English, External=0
+2026-01-05 14:45:24.039 RedLemon[6542:57419]    Track: ID=7, Title=SDH, External=0
+2026-01-05 14:45:25.050 RedLemon[6542:57420] 🔍 MPV track-list/count: 10
+2026-01-05 14:45:25.051 RedLemon[6542:57420] 🔍 Track 0 type: sub
+2026-01-05 14:45:25.051 RedLemon[6542:57420] ✅ Found subtitle track: ID=1, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:25.051 RedLemon[6542:57420] 🔍 Track 1 type: sub
+2026-01-05 14:45:25.051 RedLemon[6542:57420] ✅ Found subtitle track: ID=2, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:25.051 RedLemon[6542:57420] 🔍 Track 2 type: sub
+2026-01-05 14:45:25.052 RedLemon[6542:57420] ✅ Found subtitle track: ID=3, lang=en, title=Terminator.Genisys.2015.BDRip.x264-SPARKS, external=1
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 3 type: video
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 4 type: audio
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 5 type: audio
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 6 type: sub
+2026-01-05 14:45:25.052 RedLemon[6542:57420] ✅ Found subtitle track: ID=4, lang=rus, title=Forced, iTunes, external=0
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 7 type: sub
+2026-01-05 14:45:25.052 RedLemon[6542:57420] ✅ Found subtitle track: ID=5, lang=rus, title=iTunes, external=0
+2026-01-05 14:45:25.052 RedLemon[6542:57420] 🔍 Track 8 type: sub
+2026-01-05 14:45:25.053 RedLemon[6542:57420] ✅ Found subtitle track: ID=6, lang=eng, title=nil, external=0
+2026-01-05 14:45:25.053 RedLemon[6542:57420] 🔍 Track 9 type: sub
+2026-01-05 14:45:25.053 RedLemon[6542:57420] ✅ Found subtitle track: ID=7, lang=eng, title=SDH, external=0
+2026-01-05 14:45:25.053 RedLemon[6542:57420] 📊 Total subtitle tracks found: 8 (including Off if needed)
+2026-01-05 14:45:25.053 RedLemon[6542:57420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[1]: ID=1, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[2]: ID=2, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[3]: ID=3, Title='Terminator.Genisys.2015.BDRip.x264-SPARKS', Lang='en', Ext=1
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[4]: ID=4, Title='Forced, iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[5]: ID=5, Title='iTunes', Lang='rus', Ext=0
+2026-01-05 14:45:25.054 RedLemon[6542:57420]    Start[6]: ID=6, Title='nil', Lang='eng', Ext=0
+2026-01-05 14:45:25.055 RedLemon[6542:57420]    Start[7]: ID=7, Title='SDH', Lang='eng', Ext=0
+2026-01-05 14:45:25.055 RedLemon[6542:57420] ✅ SubtitleService: Scanned 8 tracks (Attempt 5/5)
+2026-01-05 14:45:25.055 RedLemon[6542:57420]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:45:25.056 RedLemon[6542:57420]    Track: ID=1, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:25.057 RedLemon[6542:57420]    Track: ID=2, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:25.058 RedLemon[6542:57420]    Track: ID=3, Title=Terminator.Genisys.2015.BDRip.x264-SPARKS, External=1
+2026-01-05 14:45:25.058 RedLemon[6542:57420]    Track: ID=4, Title=Forced, iTunes, External=0
+2026-01-05 14:45:25.058 RedLemon[6542:57420]    Track: ID=5, Title=iTunes, External=0
+2026-01-05 14:45:25.058 RedLemon[6542:57420]    Track: ID=6, Title=English, External=0
+2026-01-05 14:45:25.058 RedLemon[6542:57420]    Track: ID=7, Title=SDH, External=0
+2026-01-05 14:45:30.774 RedLemon[6542:56935] 🖱️ Mouse: x=60/1366 y=415/768 | Exit: 0 Controls: 0 Chat: 0
+2026-01-05 14:45:31.091 RedLemon[6542:56935] ✅ Exit button triggered! x=5 <= 342, y=594 >= 576
+2026-01-05 14:45:31.111 RedLemon[6542:56935] ✅ Exit button triggered! x=12 <= 342, y=601 >= 576
+2026-01-05 14:45:31.112 RedLemon[6542:56935] ✅ Exit button triggered! x=16 <= 342, y=603 >= 576
+2026-01-05 14:45:31.259 RedLemon[6542:56935] ✅ Exit button triggered! x=16 <= 342, y=605 >= 576
+2026-01-05 14:45:31.308 RedLemon[6542:56935] ✅ Exit button triggered! x=24 <= 342, y=643 >= 576
+2026-01-05 14:45:31.310 RedLemon[6542:56935] ✅ Exit button triggered! x=27 <= 342, y=651 >= 576
+2026-01-05 14:45:31.311 RedLemon[6542:56935] ✅ Exit button triggered! x=32 <= 342, y=664 >= 576
+2026-01-05 14:45:31.322 RedLemon[6542:56935] ✅ Exit button triggered! x=35 <= 342, y=669 >= 576
+2026-01-05 14:45:31.383 RedLemon[6542:56935] ✅ Exit button triggered! x=41 <= 342, y=681 >= 576
+2026-01-05 14:45:31.385 RedLemon[6542:56935] ✅ Exit button triggered! x=54 <= 342, y=697 >= 576
+2026-01-05 14:45:31.549 RedLemon[6542:56935] ✅ Exit button triggered! x=54 <= 342, y=698 >= 576
+2026-01-05 14:45:31.552 RedLemon[6542:56935] ✅ Exit button triggered! x=54 <= 342, y=699 >= 576
+2026-01-05 14:45:31.560 RedLemon[6542:56935] ✅ Exit button triggered! x=54 <= 342, y=700 >= 576
+2026-01-05 14:45:31.632 RedLemon[6542:56935] ✅ Exit button triggered! x=56 <= 342, y=717 >= 576
+2026-01-05 14:45:31.633 RedLemon[6542:56935] ✅ Exit button triggered! x=57 <= 342, y=720 >= 576
+2026-01-05 14:45:31.644 RedLemon[6542:56935] ✅ Exit button triggered! x=57 <= 342, y=722 >= 576
+2026-01-05 14:45:31.675 RedLemon[6542:56935] ✅ Exit button triggered! x=60 <= 342, y=729 >= 576
+2026-01-05 14:45:31.759 RedLemon[6542:56935] ✅ Exit button triggered! x=60 <= 342, y=730 >= 576
+2026-01-05 14:45:31.764 RedLemon[6542:56935] ✅ Exit button triggered! x=60 <= 342, y=730 >= 576
+2026-01-05 14:45:31.775 RedLemon[6542:56935] ✅ Exit button triggered! x=61 <= 342, y=730 >= 576
+2026-01-05 14:45:31.841 RedLemon[6542:56935] ✅ Exit button triggered! x=61 <= 342, y=730 >= 576
+2026-01-05 14:45:31.846 RedLemon[6542:56935] ✅ Exit button triggered! x=61 <= 342, y=731 >= 576
+2026-01-05 14:45:31.882 RedLemon[6542:56935] ✅ Exit button triggered! x=61 <= 342, y=732 >= 576
+2026-01-05 14:45:31.925 RedLemon[6542:56935] ✅ Exit button triggered! x=63 <= 342, y=737 >= 576
+2026-01-05 14:45:31.968 RedLemon[6542:56935] ✅ Exit button triggered! x=63 <= 342, y=738 >= 576
+2026-01-05 14:45:31.970 RedLemon[6542:56935] ✅ Exit button triggered! x=64 <= 342, y=739 >= 576
+2026-01-05 14:45:32.007 RedLemon[6542:56935] ✅ Exit button triggered! x=64 <= 342, y=740 >= 576
+2026-01-05 14:45:32.009 RedLemon[6542:56935] ✅ Exit button triggered! x=65 <= 342, y=740 >= 576
+2026-01-05 14:45:32.018 RedLemon[6542:56935] ✅ Exit button triggered! x=65 <= 342, y=740 >= 576
+2026-01-05 14:45:32.025 RedLemon[6542:56935] ✅ Exit button triggered! x=65 <= 342, y=741 >= 576
+2026-01-05 14:45:32.092 RedLemon[6542:56935] ✅ Exit button triggered! x=65 <= 342, y=741 >= 576
+2026-01-05 14:45:32.345 RedLemon[6542:56935] 🖥️ WindowManager: exitFullscreen() called
+2026-01-05 14:45:32.345 RedLemon[6542:56935]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-05 14:45:32.422 RedLemon[6542:56935] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-05 14:45:32.422 RedLemon[6542:56935]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-05 14:45:32.762 RedLemon[6542:56935]    ✅ WindowManager: Window restored to expanded size
+📄 Subtitle request: L3N1YnRpdGxlLzE2ODAz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/168038-1202124.zip
+✅ Download complete: 36477 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Terminator.Genisys.2015.BDRip.x264-SPARKS.srt
+📦 Extracting specific file: Terminator.Genisys.2015.BDRip.x264-SPARKS.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) 'x264' (h264 1920x804 23.976fps)
+[MPV] Audio --aid=1 --alang=rus (*) 'Dub, Blu-ray CEE' (ac3 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Original' (dts 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=rus (*) 'Forced, iTunes' (subrip)
+[MPV] Subs  --sid=5 --slang=rus 'iTunes' (subrip)
+[MPV] Subs  --sid=6 --slang=eng (subrip)
+[MPV] Subs  --sid=7 --slang=eng 'SDH' (subrip)
+[MPV] File tags:
+[MPV] Title: Terminator Genisys (2015)
+ MPV Event: 18
+ MPV Event: 18
+🎉 EVENT: File loaded/Duration ready (7543.019s), preparing to seek...
+   Seeking to live edge: 3774s
+🎉 EVENT: File loaded/Duration ready (7543.019s), preparing to seek...
+   Seeking to live edge: 3774s
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+✅ SMART-LOAD: Found 10 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+ MPV Event: 18
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 3
+🔍 Track 1: Dub, Blu-ray CEE | 6ch | English: false | Commentary: false -> Score: 65
+🔍 Track 2: Original | 6ch | English: true | Commentary: false -> Score: 1060
+🏆 Selected best audio track: Original (ID: 2, Score: 1060)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Dub, Blu-ray CEE | 6ch | English: false | Commentary: false -> Score: 65
+🔍 Track 2: Original | 6ch | English: true | Commentary: false -> Score: 1060
+🏆 Selected best audio track: Original (ID: 2, Score: 1060)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 10 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 8 - ID: 6, lang: 'eng', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 9 - ID: 7, lang: 'eng', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 7) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3850 (Embedded: 3000, Match: 0, Clean: 600, SDH: 250)
+ MPV Event: 17
+ MPV Event: 17
+ MPV Event: 20
+🎉 EVENT: File loaded/Duration ready (7543.019s), preparing to seek...
+   Seeking to live edge: 3774s
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+[MPV] Using hardware decoding (videotoolbox).
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.40s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+[MPV] VO: [libmpv] 1920x804 videotoolbox[nv12]
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'x264' (h264 [High] 1920x804 23.976fps)
+[MPV] Audio --aid=1 --alang=rus (*) 'Dub, Blu-ray CEE' (ac3 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Original' (dts [DTS-ES] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=rus (*) 'Forced, iTunes' (subrip)
+[MPV] Subs  --sid=5 --slang=rus 'iTunes' (subrip)
+[MPV] Subs  --sid=6 --slang=eng (subrip)
+[MPV] Subs  --sid=7 --slang=eng 'SDH' (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'x264' (h264 [High] 1920x804 23.976fps)
+[MPV] Audio --aid=1 --alang=rus (*) 'Dub, Blu-ray CEE' (ac3 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=eng 'Original' (dts [DTS-ES] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Terminator.Genisys.2015.BDRip.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=rus (*) 'Forced, iTunes' (subrip)
+[MPV] Subs  --sid=5 --slang=rus 'iTunes' (subrip)
+[MPV] Subs  --sid=6 --slang=eng (subrip)
+[MPV] (+) Subs  --sid=7 --slang=eng 'SDH' (subrip)
+⚠️ onVideoReady called again - ignoring to prevent loops
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 7
+🎬 DisplayLink: reportSwap() (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftU7hUqDcM11sL","phx_ref_prev":"GIftTxDd5ooM19PF","last_seen":"2026-01-05T19:45:22.479Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftTxDd5ooM19PF","phx_ref_prev":"GIftSmVARVcM1-bO","last_seen":"2026-01-05T19:45:02.499Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 Current subtitle track: 7
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 7
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 10 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Terminator.Genisys.2015.BDRip.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 8 - ID: 6, lang: 'eng', title: 'nil', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 9 - ID: 7, lang: 'eng', title: 'SDH', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: SDH (ID: 7) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3850 (Embedded: 3000, Match: 0, Clean: 600, SDH: 250)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftVP-4tIKCiLwO","phx_ref_prev":"GIftUtrBHl-CiNTH","last_seen":"2026-01-05T19:45:28.047Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:45:18.839Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftUtrBHl-CiNTH","phx_ref_prev":"GIftUE7jQDKCiFDE","last_seen":"2026-01-05T19:45:18.839Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:45:18.839Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+👋 Leaving room: event_tt1340138
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt4425200/img (893928 bytes)
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt14539740/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt14539740/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <BF8E0197-E0E8-44CE-82FC-132E6B81939E>.<16>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <BF8E0197-E0E8-44CE-82FC-132E6B81939E>.<16>, NSLocalizedDescription=cancelled}
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+ MPV Event: 17
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftViAcsCyCiJKL","phx_ref_prev":"GIftVP-4tIKCiLwO","last_seen":"2026-01-05T19:45:32.892Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftVP-4tIKCiLwO","phx_ref_prev":"GIftUtrBHl-CiNTH","last_seen":"2026-01-05T19:45:28.047Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:45:18.839Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftViHqvrOCiEOB","phx_ref_prev":"GIftViAcsCyCiJKL","last_seen":"2026-01-05T19:45:32.892Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftViAcsCyCiJKL","phx_ref_prev":"GIftVP-4tIKCiLwO","last_seen":"2026-01-05T19:45:32.892Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt1340138
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"108ff0be-ea6f-11f0-b1f6-0a58a9feac02":{"metas":[{"phx_ref":"GIftUtnCaY2K_IfH","is_host":false,"joined_at":1767642318.8242722,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt1340138"}
+📨 Unknown event: phx_close
+✅ MPV stop completed with clean event loop exit
+✅ MPV instance destroyed
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftVrAYAqYM10YC","phx_ref_prev":"GIftVrAVhXIM10XC","last_seen":"2026-01-05T19:45:35.231Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftU7hUqDcM11sL","phx_ref_prev":"GIftTxDd5ooM19PF","last_seen":"2026-01-05T19:45:22.479Z","room_id":"event_tt1340138","started_at":"2026-01-05T19:40:01.845Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1340138","watching_title":"Terminator Genisys","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftVu8T8yYM1-uK","phx_ref_prev":"GIftVrAYAqYM10YC","last_seen":"2026-01-05T19:45:36.287Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftVrAYAqYM10YC","phx_ref_prev":"GIftVrAVhXIM10XC","last_seen":"2026-01-05T19:45:35.231Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftV9U8p9UM16JJ","phx_ref_prev":"GIftVu8T8yYM1-uK","last_seen":"2026-01-05T19:45:40.156Z","room_id":"UAEX","started_at":"2026-01-05T19:45:40.156Z","status":"In Lobby: Sinners","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftVu8T8yYM1-uK","phx_ref_prev":"GIftVrAYAqYM10YC","last_seen":"2026-01-05T19:45:36.287Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftWFp61BAM1wxF","phx_ref_prev":"GIftV9U8p9UM16JJ","last_seen":"2026-01-05T19:45:42.392Z","room_id":"UAEX","started_at":"2026-01-05T19:45:40.156Z","status":"In Lobby: Sinners","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftV9U8p9UM16JJ","phx_ref_prev":"GIftVu8T8yYM1-uK","last_seen":"2026-01-05T19:45:40.156Z","room_id":"UAEX","started_at":"2026-01-05T19:45:40.156Z","status":"In Lobby: Sinners","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"15","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftWZ9ODOmCiE8O","phx_ref_prev":"GIftViHqvrOCiEOB","last_seen":"2026-01-05T19:45:47.906Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftViHqvrOCiEOB","phx_ref_prev":"GIftViAcsCyCiJKL","last_seen":"2026-01-05T19:45:32.892Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftWi_uwqMM13XK","phx_ref_prev":"GIftWFp61BAM1wxF","last_seen":"2026-01-05T19:45:50.244Z","room_id":"UAEX","started_at":"2026-01-05T19:45:50.244Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftWFp61BAM1wxF","phx_ref_prev":"GIftV9U8p9UM16JJ","last_seen":"2026-01-05T19:45:42.392Z","room_id":"UAEX","started_at":"2026-01-05T19:45:40.156Z","status":"In Lobby: Sinners","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🗑️ MPVViewLayer deinit
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔌 RoomListView: Setting up realtime subscription for rooms...
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+❌ Failed to load RD user info: cancelled
+📋 Fetching rooms from Supabase backend (offset: 0, limit: 20, search: '')...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+Error checking hosting limit: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/rooms?select=created_at&host_user_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9&order=created_at.desc&limit=1, NSErrorFailingURLKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/rooms?select=created_at&host_user_id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9&order=created_at.desc&limit=1, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <13ACD9F3-077C-4D76-A7C2-BAF2EFCBBCE6>.<40>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <13ACD9F3-077C-4D76-A7C2-BAF2EFCBBCE6>.<40>, NSLocalizedDescription=cancelled}
+Failed to sync license status: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/users?id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9&select=*, NSErrorFailingURLKey=https://nhvsojszwfvcinkyvzmf.supabase.co/rest/v1/users?id=eq.656DAA91-33B4-4688-9135-C982EA52D7C9&select=*, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <FE4DFB3A-A670-4A7D-AD87-8FBEF6D7A2F6>.<41>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <FE4DFB3A-A670-4A7D-AD87-8FBEF6D7A2F6>.<41>, NSLocalizedDescription=cancelled}
+📡 Joined channel: realtime:rooms_updates
+✅ RoomListView: Connected to rooms realtime updates
+📨 Received: {"ref":"85A8A837-9FB1-49E0-BD9D-03C07044B5A9","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":60402389,"event":"*","schema":"public","table":"rooms"}]}},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"rooms_updates"},"topic":"realtime:rooms_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:rooms_updates"}
+[ INFO ] GET /api/metadata/meta/movie/tt31193180 [request-id: E3BBF6B7-7858-492E-9536-83359389F01D]
+[ INFO ] GET /api/metadata/meta/movie/tt31193180 [request-id: 601FD7A7-CAD3-41BF-A2C9-053074868C91]
+[ INFO ] GET /api/metadata/meta/movie/tt31193180 [request-id: F7F5ACB8-2717-4D8F-BBB0-D1194131CF2B]
+[ INFO ] GET /api/metadata/meta/movie/tt31193180 [request-id: 95613B31-8AE5-491E-AC06-283E3F753C30]
+2026-01-05 14:46:02.448 RedLemon[6542:57587] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-05 14:46:02.478 RedLemon[6542:57891] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-05 14:46:02.506 RedLemon[6542:57587] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-05 14:46:02.511 RedLemon[6542:57587] 📦 Decoded CinemetaMeta - videos count: -1
+💾 Cache SET: Metadata[meta_movie_tt31193180]
+💾 Cache SET: Metadata[meta_movie_tt31193180]
+✅ Loaded 2 rooms (total: 2)
+💾 Cache SET: Metadata[meta_movie_tt31193180]
+💾 Cache SET: Metadata[meta_movie_tt31193180]
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt31193180/img (921572 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt31193180/img (921572 bytes)
+✅ Loaded 2 rooms (total: 2)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftXQe7ipgM17nQ","phx_ref_prev":"GIftWi_uwqMM13XK","last_seen":"2026-01-05T19:46:02.472Z","room_id":"UAEX","started_at":"2026-01-05T19:45:50.244Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftWi_uwqMM13XK","phx_ref_prev":"GIftWFp61BAM1wxF","last_seen":"2026-01-05T19:45:50.244Z","room_id":"UAEX","started_at":"2026-01-05T19:45:50.244Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🚪 Joining room: UAEX
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+   Host ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+   Is host: false
+   Room state: playing
+🎬 Room is already playing - will auto-start from lobby
+🎭 Lobby: Connecting to room UAEX...
+🚦 Lobby State: connecting
+🚀 Lobby: Enabling INSTANT JOIN (Late Joiner detected)
+🔄 Lobby: Fetching fresh room state from Supabase...
+🔌 Disconnecting from Supabase Realtime
+✅ Disconnected from Supabase Realtime
+❌ Heartbeat failed: CancellationError()
+🔌 Setting up Realtime channel: watch-party:UAEX
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:UAEX
+📡 Connection state: connected
+✅ Realtime channel setup complete
+[ INFO ] GET /api/metadata/meta/movie/tt31193180 [request-id: F80C1771-AE11-40AD-A716-D67EBAA72F53]
+2026-01-05 14:46:04.100 RedLemon[6542:56935] ✅ Guest joined room UAEX in database
+2026-01-05 14:46:04.119 RedLemon[6542:56935] 📨 Lobby: Received Room UPDATE from Realtime
+2026-01-05 14:46:04.291 RedLemon[6542:57883] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-05 14:46:04.291 RedLemon[6542:57883]    Payload keys: chatText, timestamp, type, senderId, chatUsername, position
+2026-01-05 14:46:04.292 RedLemon[6542:57588] ✅ Realtime: Message broadcast complete
+2026-01-05 14:46:04.328 RedLemon[6542:57879] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:04.328 RedLemon[6542:57879]    Payload keys: type, senderId, position, chatText, timestamp, chatUsername
+2026-01-05 14:46:04.329 RedLemon[6542:57879] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-05 14:46:04.329 RedLemon[6542:57879] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 14:46:04.330 RedLemon[6542:57879] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:04.330 RedLemon[6542:56935] 👋 Received: Guest 'ursinho' joined room UAEX
+2026-01-05 14:46:04.379 RedLemon[6542:57879] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:04.380 RedLemon[6542:57879]    Payload keys: isPlaying, senderId, position, timestamp, type
+2026-01-05 14:46:04.380 RedLemon[6542:57879] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:04.380 RedLemon[6542:57879] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:04.380 RedLemon[6542:57879] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:04.383 RedLemon[6542:56935] ⚠️ Received Realtime message with no chat text
+2026-01-05 14:46:05.430 RedLemon[6542:56935] ✅ Updated local participant ready state for ursinho
+2026-01-05 14:46:05.442 RedLemon[6542:57588] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-05 14:46:05.442 RedLemon[6542:57588]    Payload keys: chatUsername, type, position, timestamp, senderId, chatText
+2026-01-05 14:46:05.443 RedLemon[6542:57881] ✅ Realtime: Message broadcast complete
+2026-01-05 14:46:05.443 RedLemon[6542:56935] 📡 Successfully broadcasted READY state via Realtime to room UAEX
+2026-01-05 14:46:05.443 RedLemon[6542:56935] 👥 Room ready status updated: 2/2 participants ready
+2026-01-05 14:46:05.486 RedLemon[6542:57588] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:05.486 RedLemon[6542:57588]    Payload keys: chatUsername, chatText, senderId, type, timestamp, position
+2026-01-05 14:46:05.487 RedLemon[6542:57588] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-05 14:46:05.487 RedLemon[6542:57588] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 14:46:05.487 RedLemon[6542:57588] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:05.771 RedLemon[6542:56935] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt31193180/img
+2026-01-05 14:46:05.771 RedLemon[6542:56935] ⏳ Background art loading...
+2026-01-05 14:46:05.771 RedLemon[6542:56935] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt31193180/img
+2026-01-05 14:46:05.771 RedLemon[6542:56935] ⏳ Logo loading...
+2026-01-05 14:46:05.843 RedLemon[6542:56935] ✅ Background art loaded successfully
+2026-01-05 14:46:05.843 RedLemon[6542:56935] ✅ Logo loaded successfully
+2026-01-05 14:46:05.845 RedLemon[6542:56935]    Quality: 1080p
+2026-01-05 14:46:05.846 RedLemon[6542:56935]    Mode: watchParty
+2026-01-05 14:46:05.846 RedLemon[6542:56935] 📡 Fetching metadata for tt31193180...
+2026-01-05 14:46:05.973 RedLemon[6542:56935] 🎬 GUEST: Using host's stream selection (skipping resolution)
+📡 SocialService: Updated status - In Lobby: Sinners: Sinners
+✅ Lobby: Connected to Realtime
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt31193180
+🔍 [DEBUG] meta.type: movie
+🔍 [DEBUG] meta.name: Sinners
+🔍 [DEBUG] Successfully created MediaItem from meta: Sinners
+📨 Received: {"ref":"16","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1A1501A4-90D1-4782-B37D-7FD37A411CAA","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":70539381,"event":"*","filter":"id=eq.UAEX","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXVlkFAmCiOpE","phx_ref_prev":"GIftWZ9ODOmCiE8O","last_seen":"2026-01-05T19:46:03.914Z","room_id":"UAEX","started_at":"2026-01-05T19:46:03.914Z","status":"In Lobby: Sinners","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftWZ9ODOmCiE8O","phx_ref_prev":"GIftViHqvrOCiEOB","last_seen":"2026-01-05T19:45:47.906Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Lobby: Loaded metadata for Sinners
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:UAEX"},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"1d540e48-ea6f-11f0-a3ac-0a58a9feac02":{"metas":[{"phx_ref":"GIftWir17wzRn0rI","phx_ref_prev":"GIftV-UExYLRn4_C","is_host":true,"joined_at":1767642350.174151,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2b71cd76-ea6f-11f0-a1a0-0a58a9feac02":{"metas":[{"phx_ref":"GIftXVq7nDvdx_UK","is_host":false,"joined_at":1767642363.919133,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"postgres_changes","payload":{"data":{"table":"rooms","type":"UPDATE","record":{"id": "UAEX", "name": "Sinners", "season": null, "episode": null, "imdb_id": "tt31193180", "playlist": [{"id": "B227D563-DF6E-4603-A3C3-B4A4F9971975", "mediaItem": {"id": "tt31193180", "name": "Sinners", "type": "movie", "year": "2025", "poster": "https://images.justwatch.com/poster/320977032/s332/img", "imdbRating": "7.6", "releaseInfo": "2025"}}], "is_public": true, "created_at": "2026-01-05T19:45:39.974484", "is_playing": true, "poster_url": "https://images.justwatch.com/poster/320977032/s332/img", "description": null, "stream_hash": null, "backdrop_url": null, "host_user_id": "96e01cdb-36c0-4228-a6e4-a29a3c66bc8e", "subtitle_url": null, "host_username": "lemontom", "last_activity": "2026-01-05T19:46:03.972527", "max_participants": 50, "selected_quality": "1080p", "playback_position": 0, "selected_file_idx": null, "participants_count": 2, "unlocked_stream_url": "https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/Sinners.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv", "current_playlist_index": 0},"columns":[{"name": "id", "type": "text"}, {"name": "name", "type": "text"}, {"name": "host_user_id", "type": "uuid"}, {"name": "host_username", "type": "text"}, {"name": "stream_hash", "type": "text"}, {"name": "imdb_id", "type": "text"}, {"name": "poster_url", "type": "text"}, {"name": "backdrop_url", "type": "text"}, {"name": "playback_position", "type": "int4"}, {"name": "is_playing", "type": "bool"}, {"name": "participants_count", "type": "int4"}, {"name": "max_participants", "type": "int4"}, {"name": "is_public", "type": "bool"}, {"name": "created_at", "type": "timestamp"}, {"name": "last_activity", "type": "timestamp"}, {"name": "season", "type": "int4"}, {"name": "episode", "type": "int4"}, {"name": "selected_quality", "type": "text"}, {"name": "selected_file_idx", "type": "int4"}, {"name": "unlocked_stream_url", "type": "text"}, {"name": "description", "type": "text"}, {"name": "current_playlist_index", "type": "int4"}, {"name": "playlist", "type": "jsonb"}, {"name": "subtitle_url", "type": "text"}],"errors":null,"schema":"public","commit_timestamp":"2026-01-05T19:46:03.975Z","old_record":{"id": "UAEX"}},"ids":[70539381]},"topic":"realtime:watch-party:UAEX"}
+🔄 Lobby: Fetching fresh room state from Supabase...
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+✅ Lobby: Refreshed room state. isPlaying: true
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+▶️ Room already playing - auto-starting playback
+🤖 Lobby: Checking auto-start for system event
+   Room ID: UAEX
+   Room createdAt: 2026-01-05 19:45:39 +0000
+   Current time: 2026-01-05 19:46:04 +0000
+   Time until start: -24.209622025489807s
+🤖 Lobby: Auto-starting system event now
+   Elapsed time: 24.209622025489807s
+   Media item: Sinners
+   Set eventStartTime to: 2026-01-05 19:45:39 +0000
+   Current elapsed would be: 24.209622025489807s (will recalculate on video ready)
+✅ Lobby: Synced playlist with 1 items
+✅ Lobby: Synced playlist index to 0
+✅ Lobby: Synced CLEAN stream info, metadata & playlist to AppState
+🔌 Setting up Realtime channel: watch-party:UAEX
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:UAEX, skipping join
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2b71cd76-ea6f-11f0-a1a0-0a58a9feac02":{"metas":[{"phx_ref":"GIftXW5H3VXdx5zC","phx_ref_prev":"GIftXVq7nDvdx_UK","is_host":false,"joined_at":1767642364.26755,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2b71cd76-ea6f-11f0-a1a0-0a58a9feac02":{"metas":[{"phx_ref":"GIftXVq7nDvdx_UK","is_host":false,"joined_at":1767642363.919133,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":9.363999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"17","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✓ Lobby: ursinho toggled ready to true
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_READY","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+🎬 Lobby: Calling playMedia for Sinners
+🛑 LobbyPresence: Polling stopped
+🛑 LobbyDatabase: Polling stopped
+🛑 Lobby: Polling stopped (chat via Realtime only)
+🎬 PlayerVM: Starting playback for: Sinners
+✅ Cache HIT: Metadata[meta_movie_tt31193180]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: C85F7BD1-3ECE-4BD4-8933-7A6F5C826B51]
+2026-01-05 14:46:06.193 RedLemon[6542:56935] ✅ GUEST: Found 10 subtitles
+2026-01-05 14:46:06.199 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/S, subtitles: 10
+2026-01-05 14:46:06.249 RedLemon[6542:56935] ✅ Stream ready, starting playback...
+2026-01-05 14:46:06.249 RedLemon[6542:56935] 🖥️ WindowManager: enterFullscreen() called
+2026-01-05 14:46:06.249 RedLemon[6542:56935]    Window: <SwiftUI.SwiftUIWindow: 0x7f91f626aaf0>
+2026-01-05 14:46:06.249 RedLemon[6542:56935]    Is fullscreen: 0
+2026-01-05 14:46:06.249 RedLemon[6542:56935]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-05 14:46:06.286 RedLemon[6542:56935] 🖼️ Setting up MPV with native macOS video output...
+2026-01-05 14:46:06.291 RedLemon[6542:56935] ✅ MPV initialized with native GPU rendering
+2026-01-05 14:46:06.294 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-05 14:46:06.294 RedLemon[6542:56935] 🎉 Starting watch party sync - Room: UAEX, Host: NO
+2026-01-05 14:46:06.294 RedLemon[6542:56935] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🔄 Starting chat polling for room: UAEX
+2026-01-05 14:46:06.372 RedLemon[6542:56935] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🎬🎬🎬 Subtitles: 10
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Sinners
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/S
+2026-01-05 14:46:06.372 RedLemon[6542:56935] 🎬🎬🎬 subtitles: 10
+2026-01-05 14:46:06.373 RedLemon[6542:56935] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-05 14:46:06.433 RedLemon[6542:57891] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-05 14:46:06.433 RedLemon[6542:57891] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTMtODQwNzQ4MC56aXA=?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+2026-01-05 14:46:06.433 RedLemon[6542:57881] 🎬 MPV: Current video filename set to: Sinners.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv
+2026-01-05 14:46:06.433 RedLemon[6542:57881] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/Sinners.2025.1080p.ITA-ENG.MULTI.WEBRip.x, autoplay: false, expectedSubs: 3
+2026-01-05 14:46:06.433 RedLemon[6542:57881] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/Sinners.2025.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv"
+2026-01-05 14:46:06.433 RedLemon[6542:57881] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Searching SubDL: tt31193180 (movie)
+   ℹ️ Fallback Name: Sinners (2025)
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/S
+   Display Title: Sinners
+   Subtitle URLs: 10
+      [0] Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng
+      [1] Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng
+      [2] Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [3] Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [4] Sinners.2025.720p.10bit.WEBRip.6CH.x265.HEVC-PSA
+      [5] Sinners.2025.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX].en.SDH
+      [6] Sinners.2025.1080p.WEBRip.x265.10bit.AAC5.1-[YTS.MX]
+      [7] Sinners.2025.720p.10bit.WEBRip.6CH.x265.HEVC-PSA-HI
+      [8] Sinners.2025.BluRay.x264.AAC5.1-[YTS.MX] / D3US
+      [9] Sinners (2025) eng
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=UAEX, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:UAEX
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+ℹ️ Already joined channel watch-party:UAEX, skipping join
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+📡 Connection state: connected
+✅ Realtime channel setup complete
+🎉 EVENT: Recalculating seek time at video ready (Drift: 26.40s)
+   Event started at: 2026-01-05 19:45:39 +0000
+   Current time: 2026-01-05 19:46:06 +0000
+   Elapsed: 26s
+   Seeking to: 26s
+🎯 IMMEDIATE RESUME: Seeking to 26s without delay
+📝 Started watch history tracking
+⏳ EVENT: Waiting for duration to start playback...
+⚠️ MPVPlayerViewModel: Buffering finished during Event Blind Seek (Duration 0) - Ignoring Error Trigger
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Sinners
+   IMDB: tt31193180
+   URL: https://chi9-4.download.real-debrid.com/d/NUNXZXQJLWIX2101/S...
+🧹 Clearing previous event state (Non-Event Load)
+   Source: WEBRip
+💬 Added mock chat messages for testing
+👥 WATCH PARTY MODE: Starting PAUSED for synchronization
+⚡️ PlaybackService: releasing sleep assertion
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2b71cd76-ea6f-11f0-a1a0-0a58a9feac02":{"metas":[{"phx_ref":"GIftXetCACLdx5KJ","phx_ref_prev":"GIftXW5H3VXdx5zC","is_host":false,"joined_at":1767642366.359344,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{"2b71cd76-ea6f-11f0-a1a0-0a58a9feac02":{"metas":[{"phx_ref":"GIftXW5H3VXdx5zC","phx_ref_prev":"GIftXVq7nDvdx_UK","is_host":false,"joined_at":1767642364.26755,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:UAEX"}
+📝 Pre-loading external subtitles (Top 3)...
+📡 Fetching metadata for tt31193180 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt31193180]
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIftXetCACLdx5KJ)
+⏳ Participant leaving (grace period started): 656daa91-33b4-4688-9135-c982ea52d7c9
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTMtODQwNzQ4MC56aXA= [request-id: E209DAD4-90B3-4AB2-A6E9-DE58B9D3173E]
+2026-01-05 14:46:06.474 RedLemon[6542:57880] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:06.474 RedLemon[6542:57880]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-05 14:46:06.474 RedLemon[6542:57880] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:06.474 RedLemon[6542:57880] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:06.474 RedLemon[6542:57880] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:06.538 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:06.576 RedLemon[6542:57879] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 11.7s
+2026-01-05 14:46:06.907 RedLemon[6542:57588] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 26.4s
+2026-01-05 14:46:07.291 RedLemon[6542:57881] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_DDB1A078-9FEF-45EE-BCFE-76991458137E.vtt
+2026-01-05 14:46:07.291 RedLemon[6542:57881] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_DDB1A078-9FEF-45EE-BCFE-769
+2026-01-05 14:46:07.309 RedLemon[6542:57881] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:46:07.309 RedLemon[6542:57881] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTItODQwNzQ4My56aXA=?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODQ0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3484453-8407480.zip
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":11.699,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+📨 Received: {"ref":"18","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXfAMg3iCiEHN","phx_ref_prev":"GIftXVlkFAmCiOpE","last_seen":"2026-01-05T19:46:06.433Z","room_id":"UAEX","started_at":"2026-01-05T19:46:06.433Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXVlkFAmCiOpE","phx_ref_prev":"GIftWZ9ODOmCiE8O","last_seen":"2026-01-05T19:46:03.914Z","room_id":"UAEX","started_at":"2026-01-05T19:46:03.914Z","status":"In Lobby: Sinners","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt31193180/im...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt31193180/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt31193180/img...
+📡 SocialService: Updated status - online: Sinners
+🎬 Received playback state (playing) - Dismissing waiting overlay
+👀 Watch Party: Initial Sync - Blind Seeking to 11.75s and revealing video
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 20:58:27 +0000
+⏰ AppState: Scheduling update in 4341 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⚠️ Video duration not available yet (0.0s), performing BLIND SEEK to 26s...
+🎯 Executing immediate seek to 26s...
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Resumed playback after seek to 26s
+✅ Download complete: 52494 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTItODQwNzQ4My56aXA= [request-id: 984C37B2-EDA1-4836-B22C-4C8CDC2B1969]
+2026-01-05 14:46:08.306 RedLemon[6542:57883] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_343DF802-5975-4A85-82F1-EB2C81780AB9.vtt
+2026-01-05 14:46:08.306 RedLemon[6542:57883] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_343DF802-5975-4A85-82F1-EB2
+2026-01-05 14:46:08.314 RedLemon[6542:57891] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:08.314 RedLemon[6542:57891]    Payload keys: isPlaying, position, senderId, timestamp, type
+2026-01-05 14:46:08.315 RedLemon[6542:57891] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:08.315 RedLemon[6542:57891] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:08.315 RedLemon[6542:57891] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:08.315 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:08.315 RedLemon[6542:57882] ⏳ MPV: File not fully loaded yet. Queueing PENDING SEEK to 14.9s
+2026-01-05 14:46:08.330 RedLemon[6542:57883] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:46:08.330 RedLemon[6542:57883] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTEtODQwNzQ4NC56aXA=?token=8AEDFE04-2B43-45CD-AB6A-2877673FE80E
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODQ0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3484452-8407483.zip
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"19","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXkedROiCiOTG","phx_ref_prev":"GIftXfAMg3iCiEHN","last_seen":"2026-01-05T19:46:07.907Z","room_id":"UAEX","started_at":"2026-01-05T19:46:06.433Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXfAMg3iCiEHN","phx_ref_prev":"GIftXVlkFAmCiOpE","last_seen":"2026-01-05T19:46:06.433Z","room_id":"UAEX","started_at":"2026-01-05T19:46:06.433Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 52494 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":13.450999999999999,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+🔄 Large drift (13.7s) - seeking to 14.9s (host at 13.7s + 1.2s offset)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODQ0NTEtODQwNzQ4NC56aXA= [request-id: 10F10A6E-57AF-443B-B5C1-ED8585AA6282]
+2026-01-05 14:46:08.883 RedLemon[6542:57883] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_EF823FEA-DC0D-436F-B22D-2D6604D71E43.vtt
+2026-01-05 14:46:08.883 RedLemon[6542:57883] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_EF823FEA-DC0D-436F-B22D-2D6
+2026-01-05 14:46:08.894 RedLemon[6542:57883] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 14:46:08.894 RedLemon[6542:57883] 🔍 MPV track-list/count: 3
+2026-01-05 14:46:08.894 RedLemon[6542:57883] 🔍 Track 0 type: sub
+2026-01-05 14:46:08.894 RedLemon[6542:57883] ✅ Found subtitle track: ID=1, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:08.894 RedLemon[6542:57883] 🔍 Track 1 type: sub
+2026-01-05 14:46:08.895 RedLemon[6542:57883] ✅ Found subtitle track: ID=2, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:08.895 RedLemon[6542:57883] 🔍 Track 2 type: sub
+2026-01-05 14:46:08.895 RedLemon[6542:57883] ✅ Found subtitle track: ID=3, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-05 14:46:08.895 RedLemon[6542:57883] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-05 14:46:08.895 RedLemon[6542:57883]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:46:08.895 RedLemon[6542:57883]    Start[1]: ID=1, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:08.895 RedLemon[6542:57883]    Start[2]: ID=2, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:08.895 RedLemon[6542:57883]    Start[3]: ID=3, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-05 14:46:08.895 RedLemon[6542:57883] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-05 14:46:08.895 RedLemon[6542:57883]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:46:08.896 RedLemon[6542:57883]    Track: ID=1, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:08.896 RedLemon[6542:57883]    Track: ID=2, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:08.896 RedLemon[6542:57883]    Track: ID=3, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-05 14:46:09.308 RedLemon[6542:56935] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-05 14:46:09.900 RedLemon[6542:57882] 🔍 MPV track-list/count: 39
+2026-01-05 14:46:09.900 RedLemon[6542:57882] 🔍 Track 0 type: sub
+2026-01-05 14:46:09.900 RedLemon[6542:57882] ✅ Found subtitle track: ID=1, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:09.901 RedLemon[6542:57882] 🔍 Track 1 type: sub
+2026-01-05 14:46:09.901 RedLemon[6542:57882] ✅ Found subtitle track: ID=2, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:09.901 RedLemon[6542:57882] 🔍 Track 2 type: sub
+2026-01-05 14:46:09.901 RedLemon[6542:57882] ✅ Found subtitle track: ID=3, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-05 14:46:09.901 RedLemon[6542:57882] 🔍 Track 3 type: video
+2026-01-05 14:46:09.901 RedLemon[6542:57882] 🔍 Track 4 type: audio
+2026-01-05 14:46:09.902 RedLemon[6542:57882] 🔍 Track 5 type: audio
+2026-01-05 14:46:09.902 RedLemon[6542:57882] 🔍 Track 6 type: sub
+2026-01-05 14:46:09.902 RedLemon[6542:57882] ✅ Found subtitle track: ID=4, lang=ar, title=Arabic, external=0
+2026-01-05 14:46:09.902 RedLemon[6542:57882] 🔍 Track 7 type: sub
+2026-01-05 14:46:09.902 RedLemon[6542:57882] ✅ Found subtitle track: ID=5, lang=bg, title=Bulgarian, external=0
+2026-01-05 14:46:09.902 RedLemon[6542:57882] 🔍 Track 8 type: sub
+2026-01-05 14:46:09.903 RedLemon[6542:57882] ✅ Found subtitle track: ID=6, lang=cs, title=Czech, external=0
+2026-01-05 14:46:09.903 RedLemon[6542:57882] 🔍 Track 9 type: sub
+2026-01-05 14:46:09.903 RedLemon[6542:57882] ✅ Found subtitle track: ID=7, lang=da, title=Danish, external=0
+2026-01-05 14:46:09.903 RedLemon[6542:57882] 🔍 Track 10 type: sub
+2026-01-05 14:46:09.903 RedLemon[6542:57882] ✅ Found subtitle track: ID=8, lang=de-DE, title=German, external=0
+2026-01-05 14:46:09.903 RedLemon[6542:57882] 🔍 Track 11 type: sub
+2026-01-05 14:46:09.903 RedLemon[6542:57882] ✅ Found subtitle track: ID=9, lang=el, title=Greek, external=0
+2026-01-05 14:46:09.904 RedLemon[6542:57882] 🔍 Track 12 type: sub
+2026-01-05 14:46:09.904 RedLemon[6542:57882] ✅ Found subtitle track: ID=10, lang=en, title=English, external=0
+2026-01-05 14:46:09.904 RedLemon[6542:57882] 🔍 Track 13 type: sub
+2026-01-05 14:46:09.904 RedLemon[6542:57882] ✅ Found subtitle track: ID=11, lang=en, title=English [SDH], external=0
+2026-01-05 14:46:09.904 RedLemon[6542:57882] 🔍 Track 14 type: sub
+2026-01-05 14:46:09.904 RedLemon[6542:57882] ✅ Found subtitle track: ID=12, lang=es-419, title=Spanish (Latin America), external=0
+2026-01-05 14:46:09.904 RedLemon[6542:57882] 🔍 Track 15 type: sub
+2026-01-05 14:46:09.904 RedLemon[6542:57882] ✅ Found subtitle track: ID=13, lang=es-ES, title=Spanish (Spain), external=0
+2026-01-05 14:46:09.905 RedLemon[6542:57882] 🔍 Track 16 type: sub
+2026-01-05 14:46:09.905 RedLemon[6542:57882] ✅ Found subtitle track: ID=14, lang=et, title=Estonian, external=0
+2026-01-05 14:46:09.905 RedLemon[6542:57882] 🔍 Track 17 type: sub
+2026-01-05 14:46:09.905 RedLemon[6542:57882] ✅ Found subtitle track: ID=15, lang=fi, title=Finnish, external=0
+2026-01-05 14:46:09.905 RedLemon[6542:57882] 🔍 Track 18 type: sub
+2026-01-05 14:46:09.905 RedLemon[6542:57882] ✅ Found subtitle track: ID=16, lang=fr-FR, title=French, external=0
+2026-01-05 14:46:09.905 RedLemon[6542:57882] 🔍 Track 19 type: sub
+2026-01-05 14:46:09.905 RedLemon[6542:57882] ✅ Found subtitle track: ID=17, lang=he, title=Hebrew, external=0
+2026-01-05 14:46:09.906 RedLemon[6542:57882] 🔍 Track 20 type: sub
+2026-01-05 14:46:09.906 RedLemon[6542:57882] ✅ Found subtitle track: ID=18, lang=hu, title=Hungarian, external=0
+2026-01-05 14:46:09.906 RedLemon[6542:57882] 🔍 Track 21 type: sub
+2026-01-05 14:46:09.906 RedLemon[6542:57882] ✅ Found subtitle track: ID=19, lang=it-IT, title=Italian, external=0
+2026-01-05 14:46:09.906 RedLemon[6542:57882] 🔍 Track 22 type: sub
+2026-01-05 14:46:09.906 RedLemon[6542:57882] ✅ Found subtitle track: ID=20, lang=it-IT, title=Italian [Forced], external=0
+2026-01-05 14:46:09.906 RedLemon[6542:57882] 🔍 Track 23 type: sub
+2026-01-05 14:46:09.907 RedLemon[6542:57882] ✅ Found subtitle track: ID=21, lang=it-IT, title=Italian [SDH], external=0
+2026-01-05 14:46:09.907 RedLemon[6542:57882] 🔍 Track 24 type: sub
+2026-01-05 14:46:09.907 RedLemon[6542:57882] ✅ Found subtitle track: ID=22, lang=lt, title=Lithuanian, external=0
+2026-01-05 14:46:09.907 RedLemon[6542:57882] 🔍 Track 25 type: sub
+2026-01-05 14:46:09.907 RedLemon[6542:57882] ✅ Found subtitle track: ID=23, lang=lv, title=Latvian, external=0
+2026-01-05 14:46:09.908 RedLemon[6542:57882] 🔍 Track 26 type: sub
+2026-01-05 14:46:09.908 RedLemon[6542:57882] ✅ Found subtitle track: ID=24, lang=nl, title=Dutch, external=0
+2026-01-05 14:46:09.908 RedLemon[6542:57882] 🔍 Track 27 type: sub
+2026-01-05 14:46:09.908 RedLemon[6542:57882] ✅ Found subtitle track: ID=25, lang=no, title=Norwegian, external=0
+2026-01-05 14:46:09.908 RedLemon[6542:57882] 🔍 Track 28 type: sub
+2026-01-05 14:46:09.909 RedLemon[6542:57882] ✅ Found subtitle track: ID=26, lang=pl, title=Polish, external=0
+2026-01-05 14:46:09.909 RedLemon[6542:57882] 🔍 Track 29 type: sub
+2026-01-05 14:46:09.909 RedLemon[6542:57882] ✅ Found subtitle track: ID=27, lang=pt-BR, title=Portuguese (Brazil), external=0
+2026-01-05 14:46:09.910 RedLemon[6542:57882] 🔍 Track 30 type: sub
+2026-01-05 14:46:09.910 RedLemon[6542:57882] ✅ Found subtitle track: ID=28, lang=pt-PT, title=Portuguese (Portugal), external=0
+2026-01-05 14:46:09.910 RedLemon[6542:57882] 🔍 Track 31 type: sub
+2026-01-05 14:46:09.910 RedLemon[6542:57882] ✅ Found subtitle track: ID=29, lang=sk, title=Slovak, external=0
+2026-01-05 14:46:09.910 RedLemon[6542:57882] 🔍 Track 32 type: sub
+2026-01-05 14:46:09.910 RedLemon[6542:57882] ✅ Found subtitle track: ID=30, lang=sl, title=Slovenian, external=0
+2026-01-05 14:46:09.910 RedLemon[6542:57882] 🔍 Track 33 type: sub
+2026-01-05 14:46:09.910 RedLemon[6542:57882] ✅ Found subtitle track: ID=31, lang=sv, title=Swedish, external=0
+2026-01-05 14:46:09.910 RedLemon[6542:57882] 🔍 Track 34 type: sub
+2026-01-05 14:46:09.911 RedLemon[6542:57882] ✅ Found subtitle track: ID=32, lang=th, title=Thai, external=0
+2026-01-05 14:46:09.911 RedLemon[6542:57882] 🔍 Track 35 type: sub
+2026-01-05 14:46:09.911 RedLemon[6542:57882] ✅ Found subtitle track: ID=33, lang=tr, title=Turkish, external=0
+2026-01-05 14:46:09.911 RedLemon[6542:57882] 🔍 Track 36 type: sub
+2026-01-05 14:46:09.912 RedLemon[6542:57882] ✅ Found subtitle track: ID=34, lang=uk, title=Ukrainian, external=0
+2026-01-05 14:46:09.912 RedLemon[6542:57882] 🔍 Track 37 type: sub
+2026-01-05 14:46:09.912 RedLemon[6542:57882] ✅ Found subtitle track: ID=35, lang=yue-Hant, title=Yue Chinese (Traditional), external=0
+2026-01-05 14:46:09.912 RedLemon[6542:57882] 🔍 Track 38 type: sub
+2026-01-05 14:46:09.912 RedLemon[6542:57882] ✅ Found subtitle track: ID=36, lang=zh-Hant, title=Chinese (Traditional), external=0
+2026-01-05 14:46:09.912 RedLemon[6542:57882] 📊 Total subtitle tracks found: 37 (including Off if needed)
+2026-01-05 14:46:09.912 RedLemon[6542:57882]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:46:09.912 RedLemon[6542:57882]    Start[1]: ID=1, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:09.915 RedLemon[6542:56935] 🔄 MPV: Executing PENDING SEEK to 14.9s (Smart Load)
+2026-01-05 14:46:09.917 RedLemon[6542:57882]    Start[2]: ID=2, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:09.917 RedLemon[6542:57882]    Start[3]: ID=3, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-05 14:46:09.917 RedLemon[6542:57882]    Start[4]: ID=4, Title='Arabic', Lang='ar', Ext=0
+2026-01-05 14:46:09.917 RedLemon[6542:57882]    Start[5]: ID=5, Title='Bulgarian', Lang='bg', Ext=0
+2026-01-05 14:46:09.918 RedLemon[6542:57882]    Start[6]: ID=6, Title='Czech', Lang='cs', Ext=0
+2026-01-05 14:46:09.918 RedLemon[6542:57882]    Start[7]: ID=7, Title='Danish', Lang='da', Ext=0
+2026-01-05 14:46:09.918 RedLemon[6542:57882]    Start[8]: ID=8, Title='German', Lang='de-DE', Ext=0
+2026-01-05 14:46:09.919 RedLemon[6542:57882]    Start[9]: ID=9, Title='Greek', Lang='el', Ext=0
+2026-01-05 14:46:09.919 RedLemon[6542:57882]    Start[10]: ID=10, Title='English', Lang='en', Ext=0
+2026-01-05 14:46:09.920 RedLemon[6542:57882]    Start[11]: ID=11, Title='English [SDH]', Lang='en', Ext=0
+2026-01-05 14:46:09.921 RedLemon[6542:57882]    Start[12]: ID=12, Title='Spanish (Latin America)', Lang='es-419', Ext=0
+2026-01-05 14:46:09.922 RedLemon[6542:57882]    Start[13]: ID=13, Title='Spanish (Spain)', Lang='es-ES', Ext=0
+2026-01-05 14:46:09.927 RedLemon[6542:57882]    Start[14]: ID=14, Title='Estonian', Lang='et', Ext=0
+2026-01-05 14:46:09.927 RedLemon[6542:57882]    Start[15]: ID=15, Title='Finnish', Lang='fi', Ext=0
+2026-01-05 14:46:09.927 RedLemon[6542:57882]    Start[16]: ID=16, Title='French', Lang='fr-FR', Ext=0
+2026-01-05 14:46:09.927 RedLemon[6542:57882]    Start[17]: ID=17, Title='Hebrew', Lang='he', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[18]: ID=18, Title='Hungarian', Lang='hu', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[19]: ID=19, Title='Italian', Lang='it-IT', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[20]: ID=20, Title='Italian [Forced]', Lang='it-IT', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[21]: ID=21, Title='Italian [SDH]', Lang='it-IT', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[22]: ID=22, Title='Lithuanian', Lang='lt', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[23]: ID=23, Title='Latvian', Lang='lv', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[24]: ID=24, Title='Dutch', Lang='nl', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[25]: ID=25, Title='Norwegian', Lang='no', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[26]: ID=26, Title='Polish', Lang='pl', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[27]: ID=27, Title='Portuguese (Brazil)', Lang='pt-BR', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[28]: ID=28, Title='Portuguese (Portugal)', Lang='pt-PT', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[29]: ID=29, Title='Slovak', Lang='sk', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[30]: ID=30, Title='Slovenian', Lang='sl', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[31]: ID=31, Title='Swedish', Lang='sv', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[32]: ID=32, Title='Thai', Lang='th', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[33]: ID=33, Title='Turkish', Lang='tr', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[34]: ID=34, Title='Ukrainian', Lang='uk', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[35]: ID=35, Title='Yue Chinese (Traditional)', Lang='yue-Hant', Ext=0
+2026-01-05 14:46:09.928 RedLemon[6542:57882]    Start[36]: ID=36, Title='Chinese (Traditional)', Lang='zh-Hant', Ext=0
+2026-01-05 14:46:09.929 RedLemon[6542:57882] ✅ SubtitleService: Scanned 37 tracks (Attempt 2/5)
+2026-01-05 14:46:09.929 RedLemon[6542:57882]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:46:09.929 RedLemon[6542:57882]    Track: ID=1, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:09.929 RedLemon[6542:57882]    Track: ID=2, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:09.929 RedLemon[6542:57882]    Track: ID=3, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-05 14:46:09.930 RedLemon[6542:57882]    Track: ID=4, Title=Arabic, External=0
+2026-01-05 14:46:09.930 RedLemon[6542:57882]    Track: ID=5, Title=Bulgarian, External=0
+2026-01-05 14:46:09.931 RedLemon[6542:57882]    Track: ID=6, Title=Czech, External=0
+2026-01-05 14:46:09.931 RedLemon[6542:57882]    Track: ID=7, Title=Danish, External=0
+2026-01-05 14:46:09.931 RedLemon[6542:57882]    Track: ID=8, Title=German, External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=9, Title=Greek, External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=10, Title=English, External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=11, Title=English [SDH], External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=12, Title=Spanish (Latin America), External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=13, Title=Spanish (Spain), External=0
+2026-01-05 14:46:09.932 RedLemon[6542:57882]    Track: ID=14, Title=Estonian, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=15, Title=Finnish, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=16, Title=French, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=17, Title=Hebrew, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=18, Title=Hungarian, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=19, Title=Italian, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=20, Title=Italian [Forced], External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=21, Title=Italian [SDH], External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=22, Title=Lithuanian, External=0
+2026-01-05 14:46:09.933 RedLemon[6542:57882]    Track: ID=23, Title=Latvian, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=24, Title=Dutch, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=25, Title=Norwegian, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=26, Title=Polish, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=27, Title=Portuguesee (Brazil), External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=28, Title=Portuguesee (Portugal), External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=29, Title=Slovak, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=30, Title=Slovenian, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=31, Title=Swedish, External=0
+2026-01-05 14:46:09.934 RedLemon[6542:57882]    Track: ID=32, Title=Thai, External=0
+2026-01-05 14:46:09.935 RedLemon[6542:57882]    Track: ID=33, Title=Turkish, External=0
+2026-01-05 14:46:09.935 RedLemon[6542:57882]    Track: ID=34, Title=Ukrainian, External=0
+2026-01-05 14:46:09.935 RedLemon[6542:57882]    Track: ID=35, Title=Yue Chinese (Traditional), External=0
+2026-01-05 14:46:09.935 RedLemon[6542:57882]    Track: ID=36, Title=Chinese (Traditional), External=0
+2026-01-05 14:46:10.411 RedLemon[6542:57883] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:10.411 RedLemon[6542:57883]    Payload keys: senderId, isPlaying, timestamp, position, type
+2026-01-05 14:46:10.412 RedLemon[6542:57883] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:10.412 RedLemon[6542:57883] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:10.412 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:10.412 RedLemon[6542:57883] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:11.003 RedLemon[6542:57882] 🔍 MPV track-list/count: 39
+2026-01-05 14:46:11.003 RedLemon[6542:57882] 🔍 Track 0 type: sub
+2026-01-05 14:46:11.004 RedLemon[6542:57882] ✅ Found subtitle track: ID=1, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:11.004 RedLemon[6542:57882] 🔍 Track 1 type: sub
+2026-01-05 14:46:11.004 RedLemon[6542:57882] ✅ Found subtitle track: ID=2, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:11.004 RedLemon[6542:57882] 🔍 Track 2 type: sub
+2026-01-05 14:46:11.005 RedLemon[6542:57882] ✅ Found subtitle track: ID=3, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-05 14:46:11.005 RedLemon[6542:57882] 🔍 Track 3 type: video
+2026-01-05 14:46:11.005 RedLemon[6542:57882] 🔍 Track 4 type: audio
+2026-01-05 14:46:11.005 RedLemon[6542:57882] 🔍 Track 5 type: audio
+2026-01-05 14:46:11.005 RedLemon[6542:57882] 🔍 Track 6 type: sub
+2026-01-05 14:46:11.006 RedLemon[6542:57882] ✅ Found subtitle track: ID=4, lang=ar, title=Arabic, external=0
+2026-01-05 14:46:11.006 RedLemon[6542:57882] 🔍 Track 7 type: sub
+2026-01-05 14:46:11.006 RedLemon[6542:57882] ✅ Found subtitle track: ID=5, lang=bg, title=Bulgarian, external=0
+2026-01-05 14:46:11.006 RedLemon[6542:57882] 🔍 Track 8 type: sub
+2026-01-05 14:46:11.007 RedLemon[6542:57882] ✅ Found subtitle track: ID=6, lang=cs, title=Czech, external=0
+2026-01-05 14:46:11.007 RedLemon[6542:57882] 🔍 Track 9 type: sub
+2026-01-05 14:46:11.007 RedLemon[6542:57882] ✅ Found subtitle track: ID=7, lang=da, title=Danish, external=0
+2026-01-05 14:46:11.007 RedLemon[6542:57882] 🔍 Track 10 type: sub
+2026-01-05 14:46:11.007 RedLemon[6542:57882] ✅ Found subtitle track: ID=8, lang=de-DE, title=German, external=0
+2026-01-05 14:46:11.008 RedLemon[6542:57882] 🔍 Track 11 type: sub
+2026-01-05 14:46:11.009 RedLemon[6542:57882] ✅ Found subtitle track: ID=9, lang=el, title=Greek, external=0
+2026-01-05 14:46:11.009 RedLemon[6542:57882] 🔍 Track 12 type: sub
+2026-01-05 14:46:11.009 RedLemon[6542:57882] ✅ Found subtitle track: ID=10, lang=en, title=English, external=0
+2026-01-05 14:46:11.010 RedLemon[6542:57882] 🔍 Track 13 type: sub
+2026-01-05 14:46:11.010 RedLemon[6542:57882] ✅ Found subtitle track: ID=11, lang=en, title=English [SDH], external=0
+2026-01-05 14:46:11.010 RedLemon[6542:57882] 🔍 Track 14 type: sub
+2026-01-05 14:46:11.010 RedLemon[6542:57882] ✅ Found subtitle track: ID=12, lang=es-419, title=Spanish (Latin America), external=0
+2026-01-05 14:46:11.010 RedLemon[6542:57882] 🔍 Track 15 type: sub
+2026-01-05 14:46:11.011 RedLemon[6542:57882] ✅ Found subtitle track: ID=13, lang=es-ES, title=Spanish (Spain), external=0
+2026-01-05 14:46:11.011 RedLemon[6542:57882] 🔍 Track 16 type: sub
+2026-01-05 14:46:11.011 RedLemon[6542:57882] ✅ Found subtitle track: ID=14, lang=et, title=Estonian, external=0
+2026-01-05 14:46:11.011 RedLemon[6542:57882] 🔍 Track 17 type: sub
+2026-01-05 14:46:11.011 RedLemon[6542:57882] ✅ Found subtitle track: ID=15, lang=fi, title=Finnish, external=0
+2026-01-05 14:46:11.011 RedLemon[6542:57882] 🔍 Track 18 type: sub
+2026-01-05 14:46:11.012 RedLemon[6542:57882] ✅ Found subtitle track: ID=16, lang=fr-FR, title=French, external=0
+2026-01-05 14:46:11.012 RedLemon[6542:57882] 🔍 Track 19 type: sub
+2026-01-05 14:46:11.012 RedLemon[6542:57882] ✅ Found subtitle track: ID=17, lang=he, title=Hebrew, external=0
+2026-01-05 14:46:11.012 RedLemon[6542:57882] 🔍 Track 20 type: sub
+2026-01-05 14:46:11.012 RedLemon[6542:57882] ✅ Found subtitle track: ID=18, lang=hu, title=Hungarian, external=0
+2026-01-05 14:46:11.012 RedLemon[6542:57882] 🔍 Track 21 type: sub
+2026-01-05 14:46:11.013 RedLemon[6542:57882] ✅ Found subtitle track: ID=19, lang=it-IT, title=Italian, external=0
+2026-01-05 14:46:11.013 RedLemon[6542:57882] 🔍 Track 22 type: sub
+2026-01-05 14:46:11.013 RedLemon[6542:57882] ✅ Found subtitle track: ID=20, lang=it-IT, title=Italian [Forced], external=0
+2026-01-05 14:46:11.013 RedLemon[6542:57882] 🔍 Track 23 type: sub
+2026-01-05 14:46:11.013 RedLemon[6542:57882] ✅ Found subtitle track: ID=21, lang=it-IT, title=Italian [SDH], external=0
+2026-01-05 14:46:11.014 RedLemon[6542:57882] 🔍 Track 24 type: sub
+2026-01-05 14:46:11.014 RedLemon[6542:57882] ✅ Found subtitle track: ID=22, lang=lt, title=Lithuanian, external=0
+2026-01-05 14:46:11.014 RedLemon[6542:57882] 🔍 Track 25 type: sub
+2026-01-05 14:46:11.014 RedLemon[6542:57882] ✅ Found subtitle track: ID=23, lang=lv, title=Latvian, external=0
+2026-01-05 14:46:11.015 RedLemon[6542:57882] 🔍 Track 26 type: sub
+2026-01-05 14:46:11.015 RedLemon[6542:57882] ✅ Found subtitle track: ID=24, lang=nl, title=Dutch, external=0
+2026-01-05 14:46:11.016 RedLemon[6542:57882] 🔍 Track 27 type: sub
+2026-01-05 14:46:11.016 RedLemon[6542:57882] ✅ Found subtitle track: ID=25, lang=no, title=Norwegian, external=0
+2026-01-05 14:46:11.016 RedLemon[6542:57882] 🔍 Track 28 type: sub
+2026-01-05 14:46:11.016 RedLemon[6542:57882] ✅ Found subtitle track: ID=26, lang=pl, title=Polish, external=0
+2026-01-05 14:46:11.017 RedLemon[6542:57882] 🔍 Track 29 type: sub
+2026-01-05 14:46:11.017 RedLemon[6542:57882] ✅ Found subtitle track: ID=27, lang=pt-BR, title=Portuguese (Brazil), external=0
+2026-01-05 14:46:11.017 RedLemon[6542:57882] 🔍 Track 30 type: sub
+2026-01-05 14:46:11.018 RedLemon[6542:57882] ✅ Found subtitle track: ID=28, lang=pt-PT, title=Portuguese (Portugal), external=0
+2026-01-05 14:46:11.018 RedLemon[6542:57882] 🔍 Track 31 type: sub
+2026-01-05 14:46:11.018 RedLemon[6542:57882] ✅ Found subtitle track: ID=29, lang=sk, title=Slovak, external=0
+2026-01-05 14:46:11.018 RedLemon[6542:57882] 🔍 Track 32 type: sub
+2026-01-05 14:46:11.018 RedLemon[6542:57882] ✅ Found subtitle track: ID=30, lang=sl, title=Slovenian, external=0
+2026-01-05 14:46:11.019 RedLemon[6542:57882] 🔍 Track 33 type: sub
+2026-01-05 14:46:11.019 RedLemon[6542:57882] ✅ Found subtitle track: ID=31, lang=sv, title=Swedish, external=0
+2026-01-05 14:46:11.020 RedLemon[6542:57882] 🔍 Track 34 type: sub
+2026-01-05 14:46:11.020 RedLemon[6542:57882] ✅ Found subtitle track: ID=32, lang=th, title=Thai, external=0
+2026-01-05 14:46:11.021 RedLemon[6542:57882] 🔍 Track 35 type: sub
+2026-01-05 14:46:11.021 RedLemon[6542:57882] ✅ Found subtitle track: ID=33, lang=tr, title=Turkish, external=0
+2026-01-05 14:46:11.021 RedLemon[6542:57882] 🔍 Track 36 type: sub
+2026-01-05 14:46:11.021 RedLemon[6542:57882] ✅ Found subtitle track: ID=34, lang=uk, title=Ukrainian, external=0
+2026-01-05 14:46:11.021 RedLemon[6542:57882] 🔍 Track 37 type: sub
+2026-01-05 14:46:11.021 RedLemon[6542:57882] ✅ Found subtitle track: ID=35, lang=yue-Hant, title=Yue Chinese (Traditional), external=0
+2026-01-05 14:46:11.022 RedLemon[6542:57882] 🔍 Track 38 type: sub
+2026-01-05 14:46:11.022 RedLemon[6542:57882] ✅ Found subtitle track: ID=36, lang=zh-Hant, title=Chinese (Traditional), external=0
+2026-01-05 14:46:11.022 RedLemon[6542:57882] 📊 Total subtitle tracks found: 37 (including Off if needed)
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[1]: ID=1, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[2]: ID=2, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[3]: ID=3, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[4]: ID=4, Title='Arabic', Lang='ar', Ext=0
+2026-01-05 14:46:11.022 RedLemon[6542:57882]    Start[5]: ID=5, Title='Bulgarian', Lang='bg', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[6]: ID=6, Title='Czech', Lang='cs', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[7]: ID=7, Title='Danish', Lang='da', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[8]: ID=8, Title='German', Lang='de-DE', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[9]: ID=9, Title='Greek', Lang='el', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[10]: ID=10, Title='English', Lang='en', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[11]: ID=11, Title='English [SDH]', Lang='en', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[12]: ID=12, Title='Spanish (Latin America)', Lang='es-419', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[13]: ID=13, Title='Spanish (Spain)', Lang='es-ES', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[14]: ID=14, Title='Estonian', Lang='et', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[15]: ID=15, Title='Finnish', Lang='fi', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[16]: ID=16, Title='French', Lang='fr-FR', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[17]: ID=17, Title='Hebrew', Lang='he', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[18]: ID=18, Title='Hungarian', Lang='hu', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[19]: ID=19, Title='Italian', Lang='it-IT', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[20]: ID=20, Title='Italian [Forced]', Lang='it-IT', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[21]: ID=21, Title='Italian [SDH]', Lang='it-IT', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[22]: ID=22, Title='Lithuanian', Lang='lt', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[23]: ID=23, Title='Latvian', Lang='lv', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[24]: ID=24, Title='Dutch', Lang='nl', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[25]: ID=25, Title='Norwegian', Lang='no', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[26]: ID=26, Title='Polish', Lang='pl', Ext=0
+2026-01-05 14:46:11.023 RedLemon[6542:57882]    Start[27]: ID=27, Title='Portuguese (Brazil)', Lang='pt-BR', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[28]: ID=28, Title='Portuguese (Portugal)', Lang='pt-PT', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[29]: ID=29, Title='Slovak', Lang='sk', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[30]: ID=30, Title='Slovenian', Lang='sl', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[31]: ID=31, Title='Swedish', Lang='sv', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[32]: ID=32, Title='Thai', Lang='th', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[33]: ID=33, Title='Turkish', Lang='tr', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[34]: ID=34, Title='Ukrainian', Lang='uk', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[35]: ID=35, Title='Yue Chinese (Traditional)', Lang='yue-Hant', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Start[36]: ID=36, Title='Chinese (Traditional)', Lang='zh-Hant', Ext=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882] ✅ SubtitleService: Scanned 37 tracks (Attempt 3/5)
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Track: ID=1, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:11.024 RedLemon[6542:57882]    Track: ID=2, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=3, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=4, Title=Arabic, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=5, Title=Bulgarian, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=6, Title=Czech, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=7, Title=Danish, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=8, Title=German, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=9, Title=Greek, External=0
+2026-01-05 14:46:11.025 RedLemon[6542:57882]    Track: ID=10, Title=English, External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=11, Title=English [SDH], External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=12, Title=Spanish (Latin America), External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=13, Title=Spanish (Spain), External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=14, Title=Estonian, External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=15, Title=Finnish, External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=16, Title=French, External=0
+2026-01-05 14:46:11.026 RedLemon[6542:57882]    Track: ID=17, Title=Hebrew, External=0
+2026-01-05 14:46:11.027 RedLemon[6542:57882]    Track: ID=18, Title=Hungarian, External=0
+2026-01-05 14:46:11.027 RedLemon[6542:57882]    Track: ID=19, Title=Italian, External=0
+2026-01-05 14:46:11.027 RedLemon[6542:57882]    Track: ID=20, Title=Italian [Forced], External=0
+2026-01-05 14:46:11.027 RedLemon[6542:57882]    Track: ID=21, Title=Italian [SDH], External=0
+2026-01-05 14:46:11.027 RedLemon[6542:57882]    Track: ID=22, Title=Lithuanian, External=0
+2026-01-05 14:46:11.031 RedLemon[6542:57882]    Track: ID=23, Title=Latvian, External=0
+2026-01-05 14:46:11.031 RedLemon[6542:57882]    Track: ID=24, Title=Dutch, External=0
+2026-01-05 14:46:11.032 RedLemon[6542:57882]    Track: ID=25, Title=Norwegian, External=0
+2026-01-05 14:46:11.037 RedLemon[6542:57882]    Track: ID=26, Title=Polish, External=0
+2026-01-05 14:46:11.037 RedLemon[6542:57882]    Track: ID=27, Title=Portuguesee (Brazil), External=0
+2026-01-05 14:46:11.037 RedLemon[6542:57882]    Track: ID=28, Title=Portuguesee (Portugal), External=0
+2026-01-05 14:46:11.037 RedLemon[6542:57882]    Track: ID=29, Title=Slovak, External=0
+2026-01-05 14:46:11.037 RedLemon[6542:57882]    Track: ID=30, Title=Slovenian, External=0
+2026-01-05 14:46:11.038 RedLemon[6542:57882]    Track: ID=31, Title=Swedish, External=0
+2026-01-05 14:46:11.038 RedLemon[6542:57882]    Track: ID=32, Title=Thai, External=0
+2026-01-05 14:46:11.038 RedLemon[6542:57882]    Track: ID=33, Title=Turkish, External=0
+2026-01-05 14:46:11.038 RedLemon[6542:57882]    Track: ID=34, Title=Ukrainian, External=0
+2026-01-05 14:46:11.038 RedLemon[6542:57882]    Track: ID=35, Title=Yue Chinese (Traditional), External=0
+2026-01-05 14:46:11.039 RedLemon[6542:57882]    Track: ID=36, Title=Chinese (Traditional), External=0
+2026-01-05 14:46:12.103 RedLemon[6542:57588] 🔍 MPV track-list/count: 39
+2026-01-05 14:46:12.103 RedLemon[6542:57588] 🔍 Track 0 type: sub
+2026-01-05 14:46:12.103 RedLemon[6542:57588] ✅ Found subtitle track: ID=1, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:12.103 RedLemon[6542:57588] 🔍 Track 1 type: sub
+2026-01-05 14:46:12.104 RedLemon[6542:57588] ✅ Found subtitle track: ID=2, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:12.104 RedLemon[6542:57588] 🔍 Track 2 type: sub
+2026-01-05 14:46:12.104 RedLemon[6542:57588] ✅ Found subtitle track: ID=3, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-05 14:46:12.104 RedLemon[6542:57588] 🔍 Track 3 type: video
+2026-01-05 14:46:12.104 RedLemon[6542:57588] 🔍 Track 4 type: audio
+2026-01-05 14:46:12.104 RedLemon[6542:57588] 🔍 Track 5 type: audio
+2026-01-05 14:46:12.105 RedLemon[6542:57588] 🔍 Track 6 type: sub
+2026-01-05 14:46:12.105 RedLemon[6542:57588] ✅ Found subtitle track: ID=4, lang=ar, title=Arabic, external=0
+2026-01-05 14:46:12.105 RedLemon[6542:57588] 🔍 Track 7 type: sub
+2026-01-05 14:46:12.105 RedLemon[6542:57588] ✅ Found subtitle track: ID=5, lang=bg, title=Bulgarian, external=0
+2026-01-05 14:46:12.106 RedLemon[6542:57588] 🔍 Track 8 type: sub
+2026-01-05 14:46:12.106 RedLemon[6542:57588] ✅ Found subtitle track: ID=6, lang=cs, title=Czech, external=0
+2026-01-05 14:46:12.106 RedLemon[6542:57588] 🔍 Track 9 type: sub
+2026-01-05 14:46:12.127 RedLemon[6542:57588] ✅ Found subtitle track: ID=7, lang=da, title=Danish, external=0
+2026-01-05 14:46:12.127 RedLemon[6542:57588] 🔍 Track 10 type: sub
+2026-01-05 14:46:12.127 RedLemon[6542:57588] ✅ Found subtitle track: ID=8, lang=de-DE, title=German, external=0
+2026-01-05 14:46:12.127 RedLemon[6542:57588] 🔍 Track 11 type: sub
+2026-01-05 14:46:12.128 RedLemon[6542:57588] ✅ Found subtitle track: ID=9, lang=el, title=Greek, external=0
+2026-01-05 14:46:12.128 RedLemon[6542:57588] 🔍 Track 12 type: sub
+2026-01-05 14:46:12.128 RedLemon[6542:57588] ✅ Found subtitle track: ID=10, lang=en, title=English, external=0
+2026-01-05 14:46:12.128 RedLemon[6542:57588] 🔍 Track 13 type: sub
+2026-01-05 14:46:12.128 RedLemon[6542:57588] ✅ Found subtitle track: ID=11, lang=en, title=English [SDH], external=0
+2026-01-05 14:46:12.128 RedLemon[6542:57588] 🔍 Track 14 type: sub
+2026-01-05 14:46:12.128 RedLemon[6542:57588] ✅ Found subtitle track: ID=12, lang=es-419, title=Spanish (Latin America), external=0
+2026-01-05 14:46:12.128 RedLemon[6542:57588] 🔍 Track 15 type: sub
+2026-01-05 14:46:12.129 RedLemon[6542:57588] ✅ Found subtitle track: ID=13, lang=es-ES, title=Spanish (Spain), external=0
+2026-01-05 14:46:12.129 RedLemon[6542:57588] 🔍 Track 16 type: sub
+2026-01-05 14:46:12.129 RedLemon[6542:57588] ✅ Found subtitle track: ID=14, lang=et, title=Estonian, external=0
+2026-01-05 14:46:12.129 RedLemon[6542:57588] 🔍 Track 17 type: sub
+2026-01-05 14:46:12.129 RedLemon[6542:57588] ✅ Found subtitle track: ID=15, lang=fi, title=Finnish, external=0
+2026-01-05 14:46:12.129 RedLemon[6542:57588] 🔍 Track 18 type: sub
+2026-01-05 14:46:12.130 RedLemon[6542:57588] ✅ Found subtitle track: ID=16, lang=fr-FR, title=French, external=0
+2026-01-05 14:46:12.130 RedLemon[6542:57588] 🔍 Track 19 type: sub
+2026-01-05 14:46:12.130 RedLemon[6542:57588] ✅ Found subtitle track: ID=17, lang=he, title=Hebrew, external=0
+2026-01-05 14:46:12.130 RedLemon[6542:57588] 🔍 Track 20 type: sub
+2026-01-05 14:46:12.130 RedLemon[6542:57588] ✅ Found subtitle track: ID=18, lang=hu, title=Hungarian, external=0
+2026-01-05 14:46:12.130 RedLemon[6542:57588] 🔍 Track 21 type: sub
+2026-01-05 14:46:12.130 RedLemon[6542:57588] ✅ Found subtitle track: ID=19, lang=it-IT, title=Italian, external=0
+2026-01-05 14:46:12.130 RedLemon[6542:57588] 🔍 Track 22 type: sub
+2026-01-05 14:46:12.131 RedLemon[6542:57588] ✅ Found subtitle track: ID=20, lang=it-IT, title=Italian [Forced], external=0
+2026-01-05 14:46:12.131 RedLemon[6542:57588] 🔍 Track 23 type: sub
+2026-01-05 14:46:12.131 RedLemon[6542:57588] ✅ Found subtitle track: ID=21, lang=it-IT, title=Italian [SDH], external=0
+2026-01-05 14:46:12.131 RedLemon[6542:57588] 🔍 Track 24 type: sub
+2026-01-05 14:46:12.131 RedLemon[6542:57588] ✅ Found subtitle track: ID=22, lang=lt, title=Lithuanian, external=0
+2026-01-05 14:46:12.131 RedLemon[6542:57588] 🔍 Track 25 type: sub
+2026-01-05 14:46:12.131 RedLemon[6542:57588] ✅ Found subtitle track: ID=23, lang=lv, title=Latvian, external=0
+2026-01-05 14:46:12.131 RedLemon[6542:57588] 🔍 Track 26 type: sub
+2026-01-05 14:46:12.132 RedLemon[6542:57588] ✅ Found subtitle track: ID=24, lang=nl, title=Dutch, external=0
+2026-01-05 14:46:12.132 RedLemon[6542:57588] 🔍 Track 27 type: sub
+2026-01-05 14:46:12.132 RedLemon[6542:57588] ✅ Found subtitle track: ID=25, lang=no, title=Norwegian, external=0
+2026-01-05 14:46:12.132 RedLemon[6542:57588] 🔍 Track 28 type: sub
+2026-01-05 14:46:12.133 RedLemon[6542:57588] ✅ Found subtitle track: ID=26, lang=pl, title=Polish, external=0
+2026-01-05 14:46:12.133 RedLemon[6542:57588] 🔍 Track 29 type: sub
+2026-01-05 14:46:12.133 RedLemon[6542:57588] ✅ Found subtitle track: ID=27, lang=pt-BR, title=Portuguese (Brazil), external=0
+2026-01-05 14:46:12.134 RedLemon[6542:57588] 🔍 Track 30 type: sub
+2026-01-05 14:46:12.134 RedLemon[6542:57588] ✅ Found subtitle track: ID=28, lang=pt-PT, title=Portuguese (Portugal), external=0
+2026-01-05 14:46:12.134 RedLemon[6542:57588] 🔍 Track 31 type: sub
+2026-01-05 14:46:12.135 RedLemon[6542:57588] ✅ Found subtitle track: ID=29, lang=sk, title=Slovak, external=0
+2026-01-05 14:46:12.135 RedLemon[6542:57588] 🔍 Track 32 type: sub
+2026-01-05 14:46:12.135 RedLemon[6542:57588] ✅ Found subtitle track: ID=30, lang=sl, title=Slovenian, external=0
+2026-01-05 14:46:12.135 RedLemon[6542:57588] 🔍 Track 33 type: sub
+2026-01-05 14:46:12.135 RedLemon[6542:57588] ✅ Found subtitle track: ID=31, lang=sv, title=Swedish, external=0
+2026-01-05 14:46:12.136 RedLemon[6542:57588] 🔍 Track 34 type: sub
+2026-01-05 14:46:12.136 RedLemon[6542:57588] ✅ Found subtitle track: ID=32, lang=th, title=Thai, external=0
+2026-01-05 14:46:12.136 RedLemon[6542:57588] 🔍 Track 35 type: sub
+2026-01-05 14:46:12.136 RedLemon[6542:57588] ✅ Found subtitle track: ID=33, lang=tr, title=Turkish, external=0
+2026-01-05 14:46:12.137 RedLemon[6542:57588] 🔍 Track 36 type: sub
+2026-01-05 14:46:12.137 RedLemon[6542:57588] ✅ Found subtitle track: ID=34, lang=uk, title=Ukrainian, external=0
+2026-01-05 14:46:12.137 RedLemon[6542:57588] 🔍 Track 37 type: sub
+2026-01-05 14:46:12.137 RedLemon[6542:57588] ✅ Found subtitle track: ID=35, lang=yue-Hant, title=Yue Chinese (Traditional), external=0
+2026-01-05 14:46:12.137 RedLemon[6542:57588] 🔍 Track 38 type: sub
+2026-01-05 14:46:12.138 RedLemon[6542:57588] ✅ Found subtitle track: ID=36, lang=zh-Hant, title=Chinese (Traditional), external=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588] 📊 Total subtitle tracks found: 37 (including Off if needed)
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[1]: ID=1, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[2]: ID=2, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[3]: ID=3, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[4]: ID=4, Title='Arabic', Lang='ar', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[5]: ID=5, Title='Bulgarian', Lang='bg', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[6]: ID=6, Title='Czech', Lang='cs', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[7]: ID=7, Title='Danish', Lang='da', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[8]: ID=8, Title='German', Lang='de-DE', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[9]: ID=9, Title='Greek', Lang='el', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[10]: ID=10, Title='English', Lang='en', Ext=0
+2026-01-05 14:46:12.138 RedLemon[6542:57588]    Start[11]: ID=11, Title='English [SDH]', Lang='en', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[12]: ID=12, Title='Spanish (Latin America)', Lang='es-419', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[13]: ID=13, Title='Spanish (Spain)', Lang='es-ES', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[14]: ID=14, Title='Estonian', Lang='et', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[15]: ID=15, Title='Finnish', Lang='fi', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[16]: ID=16, Title='French', Lang='fr-FR', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[17]: ID=17, Title='Hebrew', Lang='he', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[18]: ID=18, Title='Hungarian', Lang='hu', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[19]: ID=19, Title='Italian', Lang='it-IT', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[20]: ID=20, Title='Italian [Forced]', Lang='it-IT', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[21]: ID=21, Title='Italian [SDH]', Lang='it-IT', Ext=0
+2026-01-05 14:46:12.139 RedLemon[6542:57588]    Start[22]: ID=22, Title='Lithuanian', Lang='lt', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[23]: ID=23, Title='Latvian', Lang='lv', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[24]: ID=24, Title='Dutch', Lang='nl', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[25]: ID=25, Title='Norwegian', Lang='no', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[26]: ID=26, Title='Polish', Lang='pl', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[27]: ID=27, Title='Portuguese (Brazil)', Lang='pt-BR', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[28]: ID=28, Title='Portuguese (Portugal)', Lang='pt-PT', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[29]: ID=29, Title='Slovak', Lang='sk', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[30]: ID=30, Title='Slovenian', Lang='sl', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[31]: ID=31, Title='Swedish', Lang='sv', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[32]: ID=32, Title='Thai', Lang='th', Ext=0
+2026-01-05 14:46:12.140 RedLemon[6542:57588]    Start[33]: ID=33, Title='Turkish', Lang='tr', Ext=0
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Start[34]: ID=34, Title='Ukrainian', Lang='uk', Ext=0
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Start[35]: ID=35, Title='Yue Chinese (Traditional)', Lang='yue-Hant', Ext=0
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Start[36]: ID=36, Title='Chinese (Traditional)', Lang='zh-Hant', Ext=0
+2026-01-05 14:46:12.141 RedLemon[6542:57588] ✅ SubtitleService: Scanned 37 tracks (Attempt 4/5)
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Track: ID=1, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:12.141 RedLemon[6542:57588]    Track: ID=2, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=3, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=4, Title=Arabic, External=0
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=5, Title=Bulgarian, External=0
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=6, Title=Czech, External=0
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=7, Title=Danish, External=0
+2026-01-05 14:46:12.142 RedLemon[6542:57588]    Track: ID=8, Title=German, External=0
+2026-01-05 14:46:12.143 RedLemon[6542:57588]    Track: ID=9, Title=Greek, External=0
+2026-01-05 14:46:12.143 RedLemon[6542:57588]    Track: ID=10, Title=English, External=0
+2026-01-05 14:46:12.143 RedLemon[6542:57588]    Track: ID=11, Title=English [SDH], External=0
+2026-01-05 14:46:12.143 RedLemon[6542:57588]    Track: ID=12, Title=Spanish (Latin America), External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=13, Title=Spanish (Spain), External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=14, Title=Estonian, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=15, Title=Finnish, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=16, Title=French, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=17, Title=Hebrew, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=18, Title=Hungarian, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=19, Title=Italian, External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=20, Title=Italian [Forced], External=0
+2026-01-05 14:46:12.144 RedLemon[6542:57588]    Track: ID=21, Title=Italian [SDH], External=0
+2026-01-05 14:46:12.145 RedLemon[6542:57588]    Track: ID=22, Title=Lithuanian, External=0
+2026-01-05 14:46:12.145 RedLemon[6542:57588]    Track: ID=23, Title=Latvian, External=0
+2026-01-05 14:46:12.145 RedLemon[6542:57588]    Track: ID=24, Title=Dutch, External=0
+2026-01-05 14:46:12.145 RedLemon[6542:57588]    Track: ID=25, Title=Norwegian, External=0
+2026-01-05 14:46:12.145 RedLemon[6542:57588]    Track: ID=26, Title=Polish, External=0
+2026-01-05 14:46:12.146 RedLemon[6542:57588]    Track: ID=27, Title=Portuguesee (Brazil), External=0
+2026-01-05 14:46:12.146 RedLemon[6542:57588]    Track: ID=28, Title=Portuguesee (Portugal), External=0
+2026-01-05 14:46:12.146 RedLemon[6542:57588]    Track: ID=29, Title=Slovak, External=0
+2026-01-05 14:46:12.146 RedLemon[6542:57588]    Track: ID=30, Title=Slovenian, External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=31, Title=Swedish, External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=32, Title=Thai, External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=33, Title=Turkish, External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=34, Title=Ukrainian, External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=35, Title=Yue Chinese (Traditional), External=0
+2026-01-05 14:46:12.147 RedLemon[6542:57588]    Track: ID=36, Title=Chinese (Traditional), External=0
+2026-01-05 14:46:12.324 RedLemon[6542:57588] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:12.324 RedLemon[6542:57588]    Payload keys: position, timestamp, senderId, isPlaying, type
+2026-01-05 14:46:12.325 RedLemon[6542:57588] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:12.325 RedLemon[6542:57588] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:12.325 RedLemon[6542:57588] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:12.358 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:13.148 RedLemon[6542:57881] 🔍 MPV track-list/count: 39
+2026-01-05 14:46:13.148 RedLemon[6542:57881] 🔍 Track 0 type: sub
+2026-01-05 14:46:13.148 RedLemon[6542:57881] ✅ Found subtitle track: ID=1, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:13.148 RedLemon[6542:57881] 🔍 Track 1 type: sub
+2026-01-05 14:46:13.148 RedLemon[6542:57881] ✅ Found subtitle track: ID=2, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-05 14:46:13.148 RedLemon[6542:57881] 🔍 Track 2 type: sub
+2026-01-05 14:46:13.148 RedLemon[6542:57881] ✅ Found subtitle track: ID=3, lang=en, title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 3 type: video
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 4 type: audio
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 5 type: audio
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 6 type: sub
+2026-01-05 14:46:13.149 RedLemon[6542:57881] ✅ Found subtitle track: ID=4, lang=ar, title=Arabic, external=0
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 7 type: sub
+2026-01-05 14:46:13.149 RedLemon[6542:57881] ✅ Found subtitle track: ID=5, lang=bg, title=Bulgarian, external=0
+2026-01-05 14:46:13.149 RedLemon[6542:57881] 🔍 Track 8 type: sub
+2026-01-05 14:46:13.150 RedLemon[6542:57881] ✅ Found subtitle track: ID=6, lang=cs, title=Czech, external=0
+2026-01-05 14:46:13.150 RedLemon[6542:57881] 🔍 Track 9 type: sub
+2026-01-05 14:46:13.150 RedLemon[6542:57881] ✅ Found subtitle track: ID=7, lang=da, title=Danish, external=0
+2026-01-05 14:46:13.150 RedLemon[6542:57881] 🔍 Track 10 type: sub
+2026-01-05 14:46:13.150 RedLemon[6542:57881] ✅ Found subtitle track: ID=8, lang=de-DE, title=German, external=0
+2026-01-05 14:46:13.150 RedLemon[6542:57881] 🔍 Track 11 type: sub
+2026-01-05 14:46:13.150 RedLemon[6542:57881] ✅ Found subtitle track: ID=9, lang=el, title=Greek, external=0
+2026-01-05 14:46:13.150 RedLemon[6542:57881] 🔍 Track 12 type: sub
+2026-01-05 14:46:13.151 RedLemon[6542:57881] ✅ Found subtitle track: ID=10, lang=en, title=English, external=0
+2026-01-05 14:46:13.151 RedLemon[6542:57881] 🔍 Track 13 type: sub
+2026-01-05 14:46:13.151 RedLemon[6542:57881] ✅ Found subtitle track: ID=11, lang=en, title=English [SDH], external=0
+2026-01-05 14:46:13.151 RedLemon[6542:57881] 🔍 Track 14 type: sub
+2026-01-05 14:46:13.151 RedLemon[6542:57881] ✅ Found subtitle track: ID=12, lang=es-419, title=Spanish (Latin America), external=0
+2026-01-05 14:46:13.151 RedLemon[6542:57881] 🔍 Track 15 type: sub
+2026-01-05 14:46:13.152 RedLemon[6542:57881] ✅ Found subtitle track: ID=13, lang=es-ES, title=Spanish (Spain), external=0
+2026-01-05 14:46:13.152 RedLemon[6542:57881] 🔍 Track 16 type: sub
+2026-01-05 14:46:13.152 RedLemon[6542:57881] ✅ Found subtitle track: ID=14, lang=et, title=Estonian, external=0
+2026-01-05 14:46:13.152 RedLemon[6542:57881] 🔍 Track 17 type: sub
+2026-01-05 14:46:13.152 RedLemon[6542:57881] ✅ Found subtitle track: ID=15, lang=fi, title=Finnish, external=0
+2026-01-05 14:46:13.152 RedLemon[6542:57881] 🔍 Track 18 type: sub
+2026-01-05 14:46:13.153 RedLemon[6542:57881] ✅ Found subtitle track: ID=16, lang=fr-FR, title=French, external=0
+2026-01-05 14:46:13.153 RedLemon[6542:57881] 🔍 Track 19 type: sub
+2026-01-05 14:46:13.153 RedLemon[6542:57881] ✅ Found subtitle track: ID=17, lang=he, title=Hebrew, external=0
+2026-01-05 14:46:13.153 RedLemon[6542:57881] 🔍 Track 20 type: sub
+2026-01-05 14:46:13.153 RedLemon[6542:57881] ✅ Found subtitle track: ID=18, lang=hu, title=Hungarian, external=0
+2026-01-05 14:46:13.153 RedLemon[6542:57881] 🔍 Track 21 type: sub
+2026-01-05 14:46:13.153 RedLemon[6542:57881] ✅ Found subtitle track: ID=19, lang=it-IT, title=Italian, external=0
+2026-01-05 14:46:13.153 RedLemon[6542:57881] 🔍 Track 22 type: sub
+2026-01-05 14:46:13.154 RedLemon[6542:57881] ✅ Found subtitle track: ID=20, lang=it-IT, title=Italian [Forced], external=0
+2026-01-05 14:46:13.154 RedLemon[6542:57881] 🔍 Track 23 type: sub
+2026-01-05 14:46:13.154 RedLemon[6542:57881] ✅ Found subtitle track: ID=21, lang=it-IT, title=Italian [SDH], external=0
+2026-01-05 14:46:13.154 RedLemon[6542:57881] 🔍 Track 24 type: sub
+2026-01-05 14:46:13.154 RedLemon[6542:57881] ✅ Found subtitle track: ID=22, lang=lt, title=Lithuanian, external=0
+2026-01-05 14:46:13.154 RedLemon[6542:57881] 🔍 Track 25 type: sub
+2026-01-05 14:46:13.154 RedLemon[6542:57881] ✅ Found subtitle track: ID=23, lang=lv, title=Latvian, external=0
+2026-01-05 14:46:13.154 RedLemon[6542:57881] 🔍 Track 26 type: sub
+2026-01-05 14:46:13.155 RedLemon[6542:57881] ✅ Found subtitle track: ID=24, lang=nl, title=Dutch, external=0
+2026-01-05 14:46:13.155 RedLemon[6542:57881] 🔍 Track 27 type: sub
+2026-01-05 14:46:13.155 RedLemon[6542:57881] ✅ Found subtitle track: ID=25, lang=no, title=Norwegian, external=0
+2026-01-05 14:46:13.155 RedLemon[6542:57881] 🔍 Track 28 type: sub
+2026-01-05 14:46:13.155 RedLemon[6542:57881] ✅ Found subtitle track: ID=26, lang=pl, title=Polish, external=0
+2026-01-05 14:46:13.155 RedLemon[6542:57881] 🔍 Track 29 type: sub
+2026-01-05 14:46:13.155 RedLemon[6542:57881] ✅ Found subtitle track: ID=27, lang=pt-BR, title=Portuguese (Brazil), external=0
+2026-01-05 14:46:13.155 RedLemon[6542:57881] 🔍 Track 30 type: sub
+2026-01-05 14:46:13.155 RedLemon[6542:57881] ✅ Found subtitle track: ID=28, lang=pt-PT, title=Portuguese (Portugal), external=0
+2026-01-05 14:46:13.156 RedLemon[6542:57881] 🔍 Track 31 type: sub
+2026-01-05 14:46:13.156 RedLemon[6542:57881] ✅ Found subtitle track: ID=29, lang=sk, title=Slovak, external=0
+2026-01-05 14:46:13.156 RedLemon[6542:57881] 🔍 Track 32 type: sub
+2026-01-05 14:46:13.156 RedLemon[6542:57881] ✅ Found subtitle track: ID=30, lang=sl, title=Slovenian, external=0
+2026-01-05 14:46:13.156 RedLemon[6542:57881] 🔍 Track 33 type: sub
+2026-01-05 14:46:13.156 RedLemon[6542:57881] ✅ Found subtitle track: ID=31, lang=sv, title=Swedish, external=0
+2026-01-05 14:46:13.156 RedLemon[6542:57881] 🔍 Track 34 type: sub
+2026-01-05 14:46:13.156 RedLemon[6542:57881] ✅ Found subtitle track: ID=32, lang=th, title=Thai, external=0
+2026-01-05 14:46:13.156 RedLemon[6542:57881] 🔍 Track 35 type: sub
+2026-01-05 14:46:13.156 RedLemon[6542:57881] ✅ Found subtitle track: ID=33, lang=tr, title=Turkish, external=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881] 🔍 Track 36 type: sub
+2026-01-05 14:46:13.157 RedLemon[6542:57881] ✅ Found subtitle track: ID=34, lang=uk, title=Ukrainian, external=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881] 🔍 Track 37 type: sub
+2026-01-05 14:46:13.157 RedLemon[6542:57881] ✅ Found subtitle track: ID=35, lang=yue-Hant, title=Yue Chinese (Traditional), external=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881] 🔍 Track 38 type: sub
+2026-01-05 14:46:13.157 RedLemon[6542:57881] ✅ Found subtitle track: ID=36, lang=zh-Hant, title=Chinese (Traditional), external=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881] 📊 Total subtitle tracks found: 37 (including Off if needed)
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[1]: ID=1, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[2]: ID=2, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[3]: ID=3, Title='Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[4]: ID=4, Title='Arabic', Lang='ar', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[5]: ID=5, Title='Bulgarian', Lang='bg', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[6]: ID=6, Title='Czech', Lang='cs', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[7]: ID=7, Title='Danish', Lang='da', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[8]: ID=8, Title='German', Lang='de-DE', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[9]: ID=9, Title='Greek', Lang='el', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[10]: ID=10, Title='English', Lang='en', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[11]: ID=11, Title='English [SDH]', Lang='en', Ext=0
+2026-01-05 14:46:13.157 RedLemon[6542:57881]    Start[12]: ID=12, Title='Spanish (Latin America)', Lang='es-419', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[13]: ID=13, Title='Spanish (Spain)', Lang='es-ES', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[14]: ID=14, Title='Estonian', Lang='et', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[15]: ID=15, Title='Finnish', Lang='fi', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[16]: ID=16, Title='French', Lang='fr-FR', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[17]: ID=17, Title='Hebrew', Lang='he', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[18]: ID=18, Title='Hungarian', Lang='hu', Ext=0
+2026-01-05 14:46:13.158 RedLemon[6542:57881]    Start[19]: ID=19, Title='Italian', Lang='it-IT', Ext=0
+2026-01-05 14:46:13.159 RedLemon[6542:57881]    Start[20]: ID=20, Title='Italian [Forced]', Lang='it-IT', Ext=0
+2026-01-05 14:46:13.159 RedLemon[6542:57881]    Start[21]: ID=21, Title='Italian [SDH]', Lang='it-IT', Ext=0
+2026-01-05 14:46:13.159 RedLemon[6542:57881]    Start[22]: ID=22, Title='Lithuanian', Lang='lt', Ext=0
+2026-01-05 14:46:13.160 RedLemon[6542:57881]    Start[23]: ID=23, Title='Latvian', Lang='lv', Ext=0
+2026-01-05 14:46:13.160 RedLemon[6542:57881]    Start[24]: ID=24, Title='Dutch', Lang='nl', Ext=0
+2026-01-05 14:46:13.160 RedLemon[6542:57881]    Start[25]: ID=25, Title='Norwegian', Lang='no', Ext=0
+2026-01-05 14:46:13.160 RedLemon[6542:57881]    Start[26]: ID=26, Title='Polish', Lang='pl', Ext=0
+2026-01-05 14:46:13.160 RedLemon[6542:57881]    Start[27]: ID=27, Title='Portuguese (Brazil)', Lang='pt-BR', Ext=0
+2026-01-05 14:46:13.161 RedLemon[6542:57881]    Start[28]: ID=28, Title='Portuguese (Portugal)', Lang='pt-PT', Ext=0
+2026-01-05 14:46:13.161 RedLemon[6542:57881]    Start[29]: ID=29, Title='Slovak', Lang='sk', Ext=0
+2026-01-05 14:46:13.161 RedLemon[6542:57881]    Start[30]: ID=30, Title='Slovenian', Lang='sl', Ext=0
+2026-01-05 14:46:13.161 RedLemon[6542:57881]    Start[31]: ID=31, Title='Swedish', Lang='sv', Ext=0
+2026-01-05 14:46:13.162 RedLemon[6542:57881]    Start[32]: ID=32, Title='Thai', Lang='th', Ext=0
+2026-01-05 14:46:13.162 RedLemon[6542:57881]    Start[33]: ID=33, Title='Turkish', Lang='tr', Ext=0
+2026-01-05 14:46:13.162 RedLemon[6542:57881]    Start[34]: ID=34, Title='Ukrainian', Lang='uk', Ext=0
+2026-01-05 14:46:13.162 RedLemon[6542:57881]    Start[35]: ID=35, Title='Yue Chinese (Traditional)', Lang='yue-Hant', Ext=0
+2026-01-05 14:46:13.162 RedLemon[6542:57881]    Start[36]: ID=36, Title='Chinese (Traditional)', Lang='zh-Hant', Ext=0
+2026-01-05 14:46:13.163 RedLemon[6542:57881] ✅ SubtitleService: Scanned 37 tracks (Attempt 5/5)
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=0, Title=Off, External=0
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=1, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=2, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=3, Title=Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=4, Title=Arabic, External=0
+2026-01-05 14:46:13.163 RedLemon[6542:57881]    Track: ID=5, Title=Bulgarian, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=6, Title=Czech, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=7, Title=Danish, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=8, Title=German, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=9, Title=Greek, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=10, Title=English, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=11, Title=English [SDH], External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=12, Title=Spanish (Latin America), External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=13, Title=Spanish (Spain), External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=14, Title=Estonian, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=15, Title=Finnish, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=16, Title=French, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=17, Title=Hebrew, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=18, Title=Hungarian, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=19, Title=Italian, External=0
+2026-01-05 14:46:13.164 RedLemon[6542:57881]    Track: ID=20, Title=Italian [Forced], External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=21, Title=Italian [SDH], External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=22, Title=Lithuanian, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=23, Title=Latvian, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=24, Title=Dutch, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=25, Title=Norwegian, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=26, Title=Polish, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=27, Title=Portuguesee (Brazil), External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=28, Title=Portuguesee (Portugal), External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=29, Title=Slovak, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=30, Title=Slovenian, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=31, Title=Swedish, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=32, Title=Thai, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=33, Title=Turkish, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=34, Title=Ukrainian, External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=35, Title=Yue Chinese (Traditional), External=0
+2026-01-05 14:46:13.165 RedLemon[6542:57881]    Track: ID=36, Title=Chinese (Traditional), External=0
+2026-01-05 14:46:14.391 RedLemon[6542:57883] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:14.391 RedLemon[6542:57883]    Payload keys: position, isPlaying, senderId, timestamp, type
+2026-01-05 14:46:14.392 RedLemon[6542:57883] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:14.392 RedLemon[6542:57883] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:14.393 RedLemon[6542:57883] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:14.395 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:16.417 RedLemon[6542:57879] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:16.417 RedLemon[6542:57879]    Payload keys: isPlaying, timestamp, senderId, position, type
+2026-01-05 14:46:16.418 RedLemon[6542:57879] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:16.418 RedLemon[6542:57879] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:16.418 RedLemon[6542:57879] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:16.431 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:18.398 RedLemon[6542:57883] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:18.398 RedLemon[6542:57883]    Payload keys: isPlaying, position, type, timestamp, senderId
+2026-01-05 14:46:18.398 RedLemon[6542:57883] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:18.398 RedLemon[6542:57883] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:18.399 RedLemon[6542:57883] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:18.427 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:20.440 RedLemon[6542:57588] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:20.440 RedLemon[6542:57588]    Payload keys: senderId, timestamp, type, isPlaying, position
+2026-01-05 14:46:20.440 RedLemon[6542:57588] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:20.440 RedLemon[6542:57588] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:20.440 RedLemon[6542:57588] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:20.468 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:21.634 RedLemon[6542:56935] 🖱️ Mouse: x=518/1366 y=83/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-05 14:46:22.396 RedLemon[6542:57879] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:22.396 RedLemon[6542:57879]    Payload keys: isPlaying, type, timestamp, position, senderId
+2026-01-05 14:46:22.397 RedLemon[6542:57879] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:22.397 RedLemon[6542:57879] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:22.397 RedLemon[6542:57879] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:22.416 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODQ0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3484451-8407484.zip
+🎬 DisplayLink: reportSwap() (throttled)
+🚫 Ignoring stale LEAVE event for 656daa91-33b4-4688-9135-c982ea52d7c9 (Tracked: GIftXetCACLdx5KJ != Leaving: GIftXW5H3VXdx5zC)
+✅ Download complete: 60387 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+📦 Extracting specific file: Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Video --vid=1 (*) (hevc 1920x1080 23.976fps)
+[MPV] Audio --aid=1 --alang=it (*) 'Italian' (aac 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=en 'English' (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=ar 'Arabic' (subrip)
+[MPV] Subs  --sid=5 --slang=bg 'Bulgarian' (subrip)
+[MPV] Subs  --sid=6 --slang=cs 'Czech' (subrip)
+[MPV] Subs  --sid=7 --slang=da 'Danish' (subrip)
+[MPV] Subs  --sid=8 --slang=de-DE 'German' (subrip)
+[MPV] Subs  --sid=9 --slang=el 'Greek' (subrip)
+[MPV] Subs  --sid=10 --slang=en 'English' (subrip)
+[MPV] Subs  --sid=11 --slang=en 'English [SDH]' (subrip)
+[MPV] Subs  --sid=12 --slang=es-419 'Spanish (Latin America)' (subrip)
+[MPV] Subs  --sid=13 --slang=es-ES 'Spanish (Spain)' (subrip)
+[MPV] Subs  --sid=14 --slang=et 'Estonian' (subrip)
+[MPV] Subs  --sid=15 --slang=fi 'Finnish' (subrip)
+[MPV] Subs  --sid=16 --slang=fr-FR 'French' (subrip)
+[MPV] Subs  --sid=17 --slang=he 'Hebrew' (subrip)
+[MPV] Subs  --sid=18 --slang=hu 'Hungarian' (subrip)
+[MPV] Subs  --sid=19 --slang=it-IT 'Italian' (subrip)
+[MPV] Subs  --sid=20 --slang=it-IT (f) 'Italian [Forced]' (subrip)
+[MPV] Subs  --sid=21 --slang=it-IT 'Italian [SDH]' (subrip)
+[MPV] Subs  --sid=22 --slang=lt 'Lithuanian' (subrip)
+[MPV] Subs  --sid=23 --slang=lv 'Latvian' (subrip)
+[MPV] Subs  --sid=24 --slang=nl 'Dutch' (subrip)
+[MPV] Subs  --sid=25 --slang=no 'Norwegian' (subrip)
+[MPV] Subs  --sid=26 --slang=pl 'Polish' (subrip)
+[MPV] Subs  --sid=27 --slang=pt-BR 'Portuguese (Brazil)' (subrip)
+[MPV] Subs  --sid=28 --slang=pt-PT 'Portuguese (Portugal)' (subrip)
+[MPV] Subs  --sid=29 --slang=sk 'Slovak' (subrip)
+[MPV] Subs  --sid=30 --slang=sl 'Slovenian' (subrip)
+[MPV] Subs  --sid=31 --slang=sv 'Swedish' (subrip)
+[MPV] Subs  --sid=32 --slang=th 'Thai' (subrip)
+[MPV] Subs  --sid=33 --slang=tr 'Turkish' (subrip)
+[MPV] Subs  --sid=34 --slang=uk 'Ukrainian' (subrip)
+[MPV] Subs  --sid=35 --slang=yue-Hant 'Yue Chinese (Traditional)' (subrip)
+[MPV] Subs  --sid=36 --slang=zh-Hant 'Chinese (Traditional)' (subrip)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[p010]
+✅ SMART-LOAD: Found 39 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Italian | 6ch | English: false | Commentary: false -> Score: 65
+🔍 Track 2: English | 6ch | English: true | Commentary: false -> Score: 1060
+🏆 Selected best audio track: English (ID: 2, Score: 1060)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Italian | 6ch | English: false | Commentary: false -> Score: 65
+🔍 Track 2: English | 6ch | English: true | Commentary: false -> Score: 1060
+🏆 Selected best audio track: English (ID: 2, Score: 1060)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 39 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 12 - ID: 10, lang: 'en', title: 'English', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 13 - ID: 11, lang: 'en', title: 'English [SDH]', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: English [SDH] (ID: 11) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3850 (Embedded: 3000, Match: 0, Clean: 600, SDH: 250)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] Audio --aid=1 --alang=it (*) 'Italian' (aac 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=en 'English' (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=ar 'Arabic' (subrip)
+[MPV] Subs  --sid=5 --slang=bg 'Bulgarian' (subrip)
+[MPV] Subs  --sid=6 --slang=cs 'Czech' (subrip)
+[MPV] Subs  --sid=7 --slang=da 'Danish' (subrip)
+[MPV] Subs  --sid=8 --slang=de-DE 'German' (subrip)
+[MPV] Subs  --sid=9 --slang=el 'Greek' (subrip)
+[MPV] Subs  --sid=10 --slang=en 'English' (subrip)
+[MPV] Subs  --sid=11 --slang=en 'English [SDH]' (subrip)
+[MPV] Subs  --sid=12 --slang=es-419 'Spanish (Latin America)' (subrip)
+[MPV] Subs  --sid=13 --slang=es-ES 'Spanish (Spain)' (subrip)
+[MPV] Subs  --sid=14 --slang=et 'Estonian' (subrip)
+[MPV] Subs  --sid=15 --slang=fi 'Finnish' (subrip)
+[MPV] Subs  --sid=16 --slang=fr-FR 'French' (subrip)
+[MPV] Subs  --sid=17 --slang=he 'Hebrew' (subrip)
+[MPV] Subs  --sid=18 --slang=hu 'Hungarian' (subrip)
+[MPV] Subs  --sid=19 --slang=it-IT 'Italian' (subrip)
+[MPV] Subs  --sid=20 --slang=it-IT (f) 'Italian [Forced]' (subrip)
+[MPV] Subs  --sid=21 --slang=it-IT 'Italian [SDH]' (subrip)
+[MPV] Subs  --sid=22 --slang=lt 'Lithuanian' (subrip)
+[MPV] Subs  --sid=23 --slang=lv 'Latvian' (subrip)
+[MPV] Subs  --sid=24 --slang=nl 'Dutch' (subrip)
+[MPV] Subs  --sid=25 --slang=no 'Norwegian' (subrip)
+[MPV] Subs  --sid=26 --slang=pl 'Polish' (subrip)
+[MPV] Subs  --sid=27 --slang=pt-BR 'Portuguese (Brazil)' (subrip)
+[MPV] Subs  --sid=28 --slang=pt-PT 'Portuguese (Portugal)' (subrip)
+[MPV] Subs  --sid=29 --slang=sk 'Slovak' (subrip)
+[MPV] Subs  --sid=30 --slang=sl 'Slovenian' (subrip)
+[MPV] Subs  --sid=31 --slang=sv 'Swedish' (subrip)
+[MPV] Subs  --sid=32 --slang=th 'Thai' (subrip)
+[MPV] Subs  --sid=33 --slang=tr 'Turkish' (subrip)
+[MPV] Subs  --sid=34 --slang=uk 'Ukrainian' (subrip)
+[MPV] Subs  --sid=35 --slang=yue-Hant 'Yue Chinese (Traditional)' (subrip)
+[MPV] Subs  --sid=36 --slang=zh-Hant 'Chinese (Traditional)' (subrip)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] Audio --aid=1 --alang=it (*) 'Italian' (aac 6ch 48000Hz)
+[MPV] (+) Audio --aid=2 --alang=en 'English' (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=ar 'Arabic' (subrip)
+[MPV] Subs  --sid=5 --slang=bg 'Bulgarian' (subrip)
+[MPV] Subs  --sid=6 --slang=cs 'Czech' (subrip)
+[MPV] Subs  --sid=7 --slang=da 'Danish' (subrip)
+[MPV] Subs  --sid=8 --slang=de-DE 'German' (subrip)
+[MPV] Subs  --sid=9 --slang=el 'Greek' (subrip)
+[MPV] Subs  --sid=10 --slang=en 'English' (subrip)
+[MPV] (+) Subs  --sid=11 --slang=en 'English [SDH]' (subrip)
+[MPV] Subs  --sid=12 --slang=es-419 'Spanish (Latin America)' (subrip)
+[MPV] Subs  --sid=13 --slang=es-ES 'Spanish (Spain)' (subrip)
+[MPV] Subs  --sid=14 --slang=et 'Estonian' (subrip)
+[MPV] Subs  --sid=15 --slang=fi 'Finnish' (subrip)
+[MPV] Subs  --sid=16 --slang=fr-FR 'French' (subrip)
+[MPV] Subs  --sid=17 --slang=he 'Hebrew' (subrip)
+[MPV] Subs  --sid=18 --slang=hu 'Hungarian' (subrip)
+[MPV] Subs  --sid=19 --slang=it-IT 'Italian' (subrip)
+[MPV] Subs  --sid=20 --slang=it-IT (f) 'Italian [Forced]' (subrip)
+[MPV] Subs  --sid=21 --slang=it-IT 'Italian [SDH]' (subrip)
+[MPV] Subs  --sid=22 --slang=lt 'Lithuanian' (subrip)
+[MPV] Subs  --sid=23 --slang=lv 'Latvian' (subrip)
+[MPV] Subs  --sid=24 --slang=nl 'Dutch' (subrip)
+[MPV] Subs  --sid=25 --slang=no 'Norwegian' (subrip)
+[MPV] Subs  --sid=26 --slang=pl 'Polish' (subrip)
+[MPV] Subs  --sid=27 --slang=pt-BR 'Portuguese (Brazil)' (subrip)
+[MPV] Subs  --sid=28 --slang=pt-PT 'Portuguese (Portugal)' (subrip)
+[MPV] Subs  --sid=29 --slang=sk 'Slovak' (subrip)
+[MPV] Subs  --sid=30 --slang=sl 'Slovenian' (subrip)
+[MPV] Subs  --sid=31 --slang=sv 'Swedish' (subrip)
+[MPV] Subs  --sid=32 --slang=th 'Thai' (subrip)
+[MPV] Subs  --sid=33 --slang=tr 'Turkish' (subrip)
+[MPV] Subs  --sid=34 --slang=uk 'Ukrainian' (subrip)
+[MPV] Subs  --sid=35 --slang=yue-Hant 'Yue Chinese (Traditional)' (subrip)
+[MPV] Subs  --sid=36 --slang=zh-Hant 'Chinese (Traditional)' (subrip)
+⏳ MPV: Buffering state changed: true (paused-for-cache)
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+📊 Current subtitle track: 11
+ MPV Event: 20
+⏳ MPV: Buffering state changed: false (paused-for-cache)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":15.495,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.020x to fix 1.0s drift
+⚡ Playback speed adjusted to 1.02x for sync
+📊 Current subtitle track: 11
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.
+📊 Current subtitle track: 11
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":17.538999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.037x to fix 1.8s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 11
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 39 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Sinners.2025.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 12 - ID: 10, lang: 'en', title: 'English', forced: false, default: false, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 13 - ID: 11, lang: 'en', title: 'English [SDH]', forced: false, default: false, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: English [SDH] (ID: 11) [External: false, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 3850 (Embedded: 3000, Match: 0, Clean: 600, SDH: 250)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":19.582,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.042x to fix 2.1s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":21.625999999999998,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.045x to fix 2.2s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":23.378,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.045x to fix 2.2s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":25.712999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.050x to fix 2.5s drift
+⚡ Playback speed adjusted to 1.05x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":27.465,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.049x to fix 2.4s drift
+⚡ Playback speed adjusted to 1.05x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftYbO__MEM1_4K","phx_ref_prev":"GIftXQe7ipgM17nQ","last_seen":"2026-01-05T19:46:22.535Z","room_id":"UAEX","started_at":"2026-01-05T19:45:50.244Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ad16d904-ea6d-11f0-bfd9-0a58a9feac02":{"metas":[{"phx_ref":"GIftXQe7ipgM17nQ","phx_ref_prev":"GIftWi_uwqMM13XK","last_seen":"2026-01-05T19:46:02.472Z","room_id":"UAEX","started_at":"2026-01-05T19:45:50.244Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":29.509,"type":"playbackState2026-01-05 14:46:24.407 RedLemon[6542:57420] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:24.408 RedLemon[6542:57420]    Payload keys: isPlaying, type, timestamp, senderId, position
+2026-01-05 14:46:24.409 RedLemon[6542:57420] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:24.409 RedLemon[6542:57420] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:24.409 RedLemon[6542:57420] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:24.443 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:26.374 RedLemon[6542:57588] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:26.374 RedLemon[6542:57588]    Payload keys: senderId, timestamp, type, position, isPlaying
+2026-01-05 14:46:26.375 RedLemon[6542:57588] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:26.375 RedLemon[6542:57588] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:26.375 RedLemon[6542:57588] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:26.375 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:26.964 RedLemon[6542:56935] 🖱️ Mouse: x=575/1366 y=69/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-05 14:46:28.364 RedLemon[6542:57892] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:28.365 RedLemon[6542:57892]    Payload keys: position, type, timestamp, senderId, isPlaying
+2026-01-05 14:46:28.365 RedLemon[6542:57892] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:28.366 RedLemon[6542:57892] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:28.366 RedLemon[6542:57892] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:28.396 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:30.343 RedLemon[6542:57892] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:30.343 RedLemon[6542:57892]    Payload keys: position, timestamp, type, senderId, isPlaying
+2026-01-05 14:46:30.343 RedLemon[6542:57892] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:30.343 RedLemon[6542:57892] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:30.343 RedLemon[6542:57892] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:30.350 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+2026-01-05 14:46:32.392 RedLemon[6542:57588] 📨 Realtime: Received broadcast message
+2026-01-05 14:46:32.393 RedLemon[6542:57588]    Payload keys: isPlaying, timestamp, senderId, position, type
+2026-01-05 14:46:32.394 RedLemon[6542:57588] ✅ Realtime: Decoded message type: playbackState, sender: UAEX
+2026-01-05 14:46:32.394 RedLemon[6542:57588] 📞 Realtime: Invoking syncCallback for message type: playbackState
+2026-01-05 14:46:32.395 RedLemon[6542:57588] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 14:46:32.431 RedLemon[6542:56935] 🔍 DEBUG: Received sync message - type: playbackState, sender: UAEX
+"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.046x to fix 2.3s drift
+⚡ Playback speed adjusted to 1.05x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":31.552999999999997,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.044x to fix 2.2s drift
+⚡ Playback speed adjusted to 1.04x for sync
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"20","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftYvAHnVyCiMEM","phx_ref_prev":"GIftXkedROiCiOTG","last_seen":"2026-01-05T19:46:27.925Z","room_id":"UAEX","started_at":"2026-01-05T19:46:06.433Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}},"leaves":{"ce731120-ea6e-11f0-97eb-0a58a9feac02":{"metas":[{"phx_ref":"GIftXkedROiCiOTG","phx_ref_prev":"GIftXfAMg3iCiEHN","last_seen":"2026-01-05T19:46:07.907Z","room_id":"UAEX","started_at":"2026-01-05T19:46:06.433Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt31193180","watching_title":"Sinners","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":33.346,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.043x to fix 2.1s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":35.39,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.040x to fix 2.0s drift
+⚡ Playback speed adjusted to 1.04x for sync
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"14","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"isPlaying":true,"position":0,"senderId":"UAEX","timestamp":37.433,"type":"playbackState"},"type":"broadcast"},"topic":"realtime:watch-party:UAEX"}
+⚡ Adaptive speed sync: 1.037x to fix 1.9s drift
+⚡ Playback speed adjusted to 1.04x for sync

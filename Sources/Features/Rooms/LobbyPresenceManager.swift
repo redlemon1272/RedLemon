@@ -227,9 +227,11 @@ class LobbyPresenceManager: ObservableObject {
         guard let viewModel = viewModel else { return }
         
         if viewModel.mutedUserIds.contains(participantId) {
+            NSLog("🔊 Lobby: Unmuting participant \(participantId)")
             viewModel.mutedUserIds.remove(participantId)
             viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Unmuted participant"])
         } else {
+            NSLog("🔇 Lobby: Muting participant \(participantId)")
             viewModel.mutedUserIds.insert(participantId)
             viewModel.chatManager.addSystemMessage(.systemInfo, userName: "System", data: ["message": "Muted participant"])
         }

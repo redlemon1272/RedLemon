@@ -285,7 +285,12 @@ struct WatchPartyLobbyView: View {
                                             canAddFriend: participant.id != (appState.currentUserId?.uuidString.lowercased() ?? "") && !socialService.friends.contains(where: { $0.id == participant.id }),
                                             onKick: { viewModel.kickParticipant(participant) },
                                             onBlock: { viewModel.blockParticipant(participant) },
-                                            onMute: { viewModel.toggleMute(participantId: participant.id) },
+                                            onMute: { 
+                                                // Dispatch async to avoid Menu update conflicts during view rebuild
+                                                DispatchQueue.main.async {
+                                                    viewModel.toggleMute(participantId: participant.id)
+                                                }
+                                            },
                                             onAddFriend: { viewModel.addFriend(participantId: participant.id) },
                                             isMuted: viewModel.mutedUserIds.contains(participant.id)
                                         )
@@ -623,13 +628,17 @@ struct WatchPartyLobbyView: View {
                                                                             // Mute Toggle
                                                                             if isMuted {
                                                                                 Button {
-                                                                                    viewModel.toggleMute(participantId: senderId)
+                                                                                    DispatchQueue.main.async {
+                                                                                        viewModel.toggleMute(participantId: senderId)
+                                                                                    }
                                                                                 } label: {
                                                                                     Label("Unmute User", systemImage: "speaker.wave.2.fill")
                                                                                 }
                                                                             } else {
                                                                                 Button {
-                                                                                    viewModel.toggleMute(participantId: senderId)
+                                                                                    DispatchQueue.main.async {
+                                                                                        viewModel.toggleMute(participantId: senderId)
+                                                                                    }
                                                                                 } label: {
                                                                                     Label("Mute User", systemImage: "speaker.slash.fill")
                                                                                 }

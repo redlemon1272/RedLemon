@@ -113,6 +113,20 @@ class MPVPlayerViewModel: ObservableObject {
                     guard let self = self else { return }
                     self.currentTime = time
                     self.checkForNextEpisode()
+                    
+                    // CRITICAL FIX: Playback Progress Recovery
+                    // If time is advancing but UI thinks we are buffering, force clear the buffering state.
+                    // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
+                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying {
+                         print("🔓 MPVPlayerViewModel: Time advancing (time: \(time)) while buffering - Forcing UI unlock")
+                         self.isBuffering = false
+                         // Also clear the "Refining Initial Seek" lock if it's stuck
+                         self.isRefiningInitialSeek = false 
+                         withAnimation {
+                             self.isLoading = false
+                             self.showPoster = false
+                         }
+                    }
                 }
                 .store(in: &serviceCancellables)
 

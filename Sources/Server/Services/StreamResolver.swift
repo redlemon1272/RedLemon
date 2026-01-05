@@ -134,10 +134,9 @@ actor StreamResolver {
             } else {
                 let beforeCount = filteredStreams.count
                 filteredStreams = filteredStreams.filter { stream in
-                    // Movies: keep only streams whose titles include the exact year
+                    // Movies: keep only streams whose titles include the exact year (or Year + 1)
                     if type == "movie" {
-                        guard let targetYear = allowedYears.first else { return true }
-                        return streamTitleContainsYear(stream.title, targetYears: [targetYear])
+                        return streamTitleContainsYear(stream.title, targetYears: allowedYears)
                     }
 
                     // Series: drop streams that explicitly mention a conflicting year
@@ -694,8 +693,10 @@ actor StreamResolver {
     }
 
     private func parseAllowedYears(_ yearString: String) -> [String] {
-        // Simplified parser
-        if let year = Int(yearString) { return ["\(year)"] }
+        // Allow Year AND Year + 1 (for physical releases that come out later)
+        if let year = Int(yearString) {
+             return ["\(year)", "\(year + 1)"]
+        }
         return []
     }
 

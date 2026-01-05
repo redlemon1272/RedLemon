@@ -127,6 +127,19 @@ class MPVPlayerViewModel: ObservableObject {
                     // (Handles race condition where FileLoaded fires before Duration is known)
                     self.attemptEventPlaybackStart()
 
+                    // CRITICAL FIX: Watch Party Black Screen
+                    // If we were "Refining Initial Seek" (Holding UI lock) and buffering finished 
+                    // BEFORE duration was known (blind seek), we might be stuck.
+                    // If we now have duration, and file is loaded, and NOT buffering, release the lock.
+                    if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded {
+                         print("🔓 MPVPlayerViewModel: Duration arrived (%.1fs) - Releasing stuck UI lock (Recovery)", dur)
+                         self.isRefiningInitialSeek = false
+                         withAnimation(.easeOut(duration: 0.5)) {
+                             self.isLoading = false
+                             self.showPoster = false
+                         }
+                    }
+
                     // Watch Party Ready Gate
                     // CRITICAL FIX: Only enter Ready Gate if room is NOT already playing.
                     // If room is playing (late join), we skip this and let Sync Logic handle the jump.
@@ -206,6 +219,14 @@ class MPVPlayerViewModel: ObservableObject {
                                 print("⚠️ MPVPlayerViewModel: Buffering finished at Watch Party Ready Gate - Ignoring Error Trigger")
                                 return
                             }
+                            
+                            // NEW EXCEPTION: Late Join Watch Party Blind Seek
+                            // If we are refining seek (waiting for video ready), and duration is 0, ignore this.
+                            // This happens when checking buffering status before metadata is fully parsed.
+                            if self.isInWatchParty && self.isRefiningInitialSeek && self.duration == 0 {
+                                 print("⚠️ MPVPlayerViewModel: Buffering finished during VP Blind Seek (Duration 0) - Ignoring Error Trigger")
+                                 return
+                            }
 
                             print("⚠️ MPVPlayerViewModel: Buffering finished but file NOT loaded - Triggering Error State")
                             self.isBuffering = false
@@ -225,6 +246,18 @@ class MPVPlayerViewModel: ObservableObject {
                     if loaded {
                         // NEW: Event Playback Logic - Handle seek immediately on load
                         self.attemptEventPlaybackStart()
+                        
+                        // CRITICAL FIX: Watch Party Black Screen
+                        // If we were stuck because duration came BEFORE file loaded (rare but possible),
+                        // or if buffering finished early, re-check lock release.
+                        if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering {
+                             print("🔓 MPVPlayerViewModel: File loaded - Releasing stuck UI lock (Recovery)")
+                             self.isRefiningInitialSeek = false
+                             withAnimation(.easeOut(duration: 0.5)) {
+                                 self.isLoading = false
+                                 self.showPoster = false
+                             }
+                        }
 
                         if self.isInWatchParty && !self.hasSentReadySignal {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing

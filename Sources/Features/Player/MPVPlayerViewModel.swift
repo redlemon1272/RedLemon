@@ -122,6 +122,10 @@ class MPVPlayerViewModel: ObservableObject {
                 .sink { [weak self] dur in
                     guard let self = self else { return }
                     self.duration = dur
+                    
+                    // NEW: Retry Event Playback Start when duration becomes available
+                    // (Handles race condition where FileLoaded fires before Duration is known)
+                    self.attemptEventPlaybackStart()
 
                     // Watch Party Ready Gate
                     // CRITICAL FIX: Only enter Ready Gate if room is NOT already playing.
@@ -214,30 +218,13 @@ class MPVPlayerViewModel: ObservableObject {
                 }
                 .store(in: &serviceCancellables)
 
-            // IsFileLoaded: Fallback trigger for WatchParty
             isFileLoadedPub
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] loaded in
                     guard let self = self else { return }
                     if loaded {
                         // NEW: Event Playback Logic - Handle seek immediately on load
-                        if let eventStartTime = self.appState?.player.eventStartTime, self.duration > 0 {
-                            print("🎉 EVENT: File loaded, preparing to seek before playback...")
-                            let elapsed = Date().timeIntervalSince(eventStartTime)
-                            let seekTime = max(0, elapsed)
-                            
-                            // 1. Seek immediately while still paused
-                            print("   Seeking to live edge: \(Int(seekTime))s")
-                            Task { @MainActor in
-                                await self.playbackService.seek(to: seekTime)
-                                
-                                // 2. Wait briefly for seek to latch, then play
-                                // This prevents "frame 0" flash
-                                try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
-                                await self.playbackService.play()
-                                self.isPlaying = true
-                            }
-                        }
+                        self.attemptEventPlaybackStart()
 
                         if self.isInWatchParty && !self.hasSentReadySignal {
                             let isRoomPlaying = self.appState?.player.currentWatchPartyRoom?.state == .playing
@@ -253,6 +240,38 @@ class MPVPlayerViewModel: ObservableObject {
                     }
                 }
                 .store(in: &serviceCancellables)
+        }
+    }
+    
+    // Helper to robustly start event playback
+    private func attemptEventPlaybackStart() {
+        guard let eventStartTime = self.appState?.player.eventStartTime else { return }
+        
+        // Only run if we have a valid duration
+        if self.duration > 0 {
+             // Only run if we are holding the gate (isRefiningInitialSeek)
+             // This prevents re-triggering during normal playback
+             guard isRefiningInitialSeek else { return }
+             
+             // Debounce: Check if we already triggered (prevent race between duration update and file load)
+             if hasVideoReadyTriggered { return }
+             
+             print("🎉 EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
+             let elapsed = Date().timeIntervalSince(eventStartTime)
+             let seekTime = max(0, elapsed)
+             
+             // 1. Seek immediately while still paused
+             print("   Seeking to live edge: \(Int(seekTime))s")
+             Task { @MainActor in
+                 await self.playbackService.seek(to: seekTime)
+                 
+                 // 2. Wait briefly for seek to latch, then play
+                 try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+                 await self.playbackService.play()
+                 self.isPlaying = true
+             }
+        } else {
+             print("⏳ EVENT: Waiting for duration to start playback...")
         }
     }
 

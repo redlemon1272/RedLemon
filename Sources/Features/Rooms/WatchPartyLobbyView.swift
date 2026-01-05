@@ -603,7 +603,10 @@ struct WatchPartyLobbyView: View {
                                                             
                                                             VStack(alignment: .leading, spacing: 4) {
                                                                 HStack {
-                                                                    // Username Menu
+                                                                    // Username / Menu
+                                                                    Text(chatMsg.username)
+                                                                        .font(.caption.weight(.semibold))
+                                                                        .foregroundColor(.blue)
                                                                     Menu {
                                                                         if let senderId = chatMsg.senderId {
                                                                             // Add Friend
@@ -648,14 +651,9 @@ struct WatchPartyLobbyView: View {
                                                                             }
                                                                         }
                                                                     } label: {
-                                                                        HStack(spacing: 4) {
-                                                                            Text(chatMsg.username)
-                                                                                .font(.caption.weight(.semibold))
-                                                                                .foregroundColor(.blue)
-                                                                            Image(systemName: "ellipsis.circle")
-                                                                                .font(.caption)
-                                                                                .foregroundColor(.white.opacity(0.5))
-                                                                        }
+                                                                        Image(systemName: "ellipsis.circle")
+                                                                            .font(.caption)
+                                                                            .foregroundColor(.white.opacity(0.5))
                                                                     }
                                                                     .menuStyle(BorderlessButtonMenuStyle())
                                                                     

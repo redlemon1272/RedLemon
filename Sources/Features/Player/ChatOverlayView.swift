@@ -251,7 +251,12 @@ struct ChatOverlayView: View {
         }
         
         return AnyView(
-            Menu {
+            HStack(spacing: 4) {
+                Text(username)
+                    .font(.caption.weight(.semibold))
+                    .foregroundColor(.blue)
+                
+                Menu {
                 Text(username) // Header
 
                 // Friend Actions
@@ -290,18 +295,12 @@ struct ChatOverlayView: View {
                     }
                 }
             } label: {
-                HStack(spacing: 4) {
-                    Text(username)
-                        .font(.caption.weight(.semibold))
-                        .foregroundColor(.blue)
-                    
-                    // Explicit Menu Button Indicator
-                    Image(systemName: "ellipsis.circle")
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.5))
-                }
+                Image(systemName: "ellipsis.circle")
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.5))
             }
             .menuStyle(.borderlessButton)
+            }
         )
     }
 

@@ -295,9 +295,12 @@ struct ChatOverlayView: View {
                     }
                 }
             } label: {
-                Image(systemName: "ellipsis.circle")
-                    .font(.caption)
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
                     .foregroundColor(.white.opacity(0.5))
+                    .frame(width: 16, height: 16)
+                    .background(Color.white.opacity(0.1))
+                    .clipShape(Circle())
             }
             .menuStyle(.borderlessButton)
             }

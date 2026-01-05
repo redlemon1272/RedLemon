@@ -607,7 +607,9 @@ struct WatchPartyLobbyView: View {
                                                                     Text(chatMsg.username)
                                                                         .font(.caption.weight(.semibold))
                                                                         .foregroundColor(.blue)
-                                                                    Menu {
+
+                                                                    if let senderId = chatMsg.senderId, senderId.caseInsensitiveCompare(appState.currentUserId?.uuidString ?? "") != .orderedSame {
+                                                                        Menu {
                                                                         if let senderId = chatMsg.senderId {
                                                                             // Add Friend
                                                                             if !socialService.friends.contains(where: { $0.id == senderId }) && senderId != appState.currentUserId?.uuidString.lowercased() {
@@ -651,11 +653,15 @@ struct WatchPartyLobbyView: View {
                                                                             }
                                                                         }
                                                                     } label: {
-                                                                        Image(systemName: "ellipsis.circle")
-                                                                            .font(.caption)
-                                                                            .foregroundColor(.white.opacity(0.5))
+                                                                            Image(systemName: "chevron.down")
+                                                                                .font(.system(size: 10, weight: .bold))
+                                                                                .foregroundColor(.white.opacity(0.5))
+                                                                                .frame(width: 16, height: 16)
+                                                                                .background(Color.white.opacity(0.1))
+                                                                                .clipShape(Circle())
+                                                                        }
+                                                                        .menuStyle(.borderlessButton)
                                                                     }
-                                                                    .menuStyle(BorderlessButtonMenuStyle())
                                                                     
                                                                     Spacer()
                                                                     Text(chatMsg.timestamp, style: .time)

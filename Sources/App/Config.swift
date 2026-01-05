@@ -16,9 +16,9 @@ struct Config {
     // Supabase configuration
     // IMPORTANT: These are PUBLIC anon keys - safe to share
     // Never commit service_role keys or database passwords
-    static let supabaseURL = "https://nhvsojszwfvcinkyvzmf.supabase.co"
-    static let supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NjE5MTYsImV4cCI6MjA3ODEzNzkxNn0.1u8C04lu1r_Jsy7m8bdGD-dT33Ml1EautcPNib93bWw"
-    static let supabaseServiceKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5odnNvanN6d2Z2Y2lua3l2em1mIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MjU2MTkxNiwiZXhwIjoyMDc4MTM3OTE2fQ.g4DfQTfTpIMS07iG3s0RA6JpIm0tICfy-3zqCj3BCmk"
+    static let supabaseURL = "https://151.243.109.243.nip.io"
+    static let supabaseAnonKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus"
+    static let supabaseServiceKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogInNlcnZpY2Vfcm9sZSIsICJpc3MiOiAic3VwYWJhc2UiLCAiaWF0IjogMTc2NzY1MDAzMiwgImV4cCI6IDIwODMwMTAwMzJ9.E0sn2kRDP82qO1SV_CRZcNCT9Ho47sSuGaDxSKhoIT4"
 
     // Local Server Security
     // Ephemeral token generated per-launch to secure local API

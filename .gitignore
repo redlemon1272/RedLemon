@@ -79,3 +79,5 @@ ENV/
 *.dylib
 .modulecache/
 *.bak
+dump.sql
+functions.zip

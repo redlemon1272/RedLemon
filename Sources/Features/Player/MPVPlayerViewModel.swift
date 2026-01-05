@@ -2653,6 +2653,35 @@ extension MPVPlayerViewModel {
                 let displayText: String
                 if text == "LOBBY_JOIN" {
                     displayText = "joined! 👋"
+                } else if text.starts(with: "LOBBY_KICK:") {
+                    // Robust parsing
+                    let kickedIdRaw = text.replacingOccurrences(of: "LOBBY_KICK:", with: "")
+                    let kickedId = kickedIdRaw.trimmingCharacters(in: .whitespacesAndNewlines)
+
+                    // Check if *I* am the one being kicked
+                    if let myId = currentUserId, myId.caseInsensitiveCompare(kickedId) == .orderedSame {
+                        print("❌ WatchParty: Kicked by host (ID Match: \(kickedId))")
+
+                        Task { @MainActor [weak self] in
+                            guard let self = self else { return }
+                            
+                            // Show GLOBAL alert
+                            self.appState?.activeAlert = AppState.AppAlert(
+                                title: "Kicked",
+                                message: "You have been kicked from the room."
+                            )
+
+                            // Trigger disconnect and return to browse
+                            await self.cleanup()
+                            await self.appState?.player.exitPlayer(keepRoomState: false)
+                            self.appState?.currentView = .browse
+                        }
+                        return
+                    }
+                    
+                    // If it's a kick for someone else, we hide it from chat (it's a system message)
+                    return
+                    
                 } else if text.starts(with: "LOBBY_") {
                     // Filter out LOBBY_READY, LOBBY_UNREADY, etc.
                     print("💬 Skipping system message: \(text)")

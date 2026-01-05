@@ -661,6 +661,7 @@ struct WatchPartyLobbyView: View {
                                                                                 .clipShape(Circle())
                                                                         }
                                                                         .menuStyle(.borderlessButton)
+                                                                        .menuIndicator(.hidden)
                                                                     }
                                                                     
                                                                     Spacer()

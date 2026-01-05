@@ -303,6 +303,7 @@ struct ChatOverlayView: View {
                     .clipShape(Circle())
             }
             .menuStyle(.borderlessButton)
+            .menuIndicator(.hidden)
             }
         )
     }

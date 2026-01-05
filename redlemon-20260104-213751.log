@@ -1,0 +1,1148 @@
+2026-01-04 21:37:58.782 RedLemon[22485:226107] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-04 21:37:58.782 RedLemon[22485:226107] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-04 21:37:58.899 RedLemon[22485:226107] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-04 21:37:58.900 RedLemon[22485:226169] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-04 21:37:58.930 RedLemon[22485:226107] ✅ Playback state reset complete - starting in browse view
+2026-01-04 21:37:58.930 RedLemon[22485:226107] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-04 21:37:58.930 RedLemon[22485:226107] 🧪 Testing Profile: debug
+2026-01-04 21:37:58.930 RedLemon[22485:226169] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-04 21:37:58.961 RedLemon[22485:226107] ✅ Keychain: Found stored username: ursinho
+2026-01-04 21:37:58.961 RedLemon[22485:226107] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-04 21:37:58.961 RedLemon[22485:226170] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-04 21:37:59.073 RedLemon[22485:226170] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-04 21:37:59.090 RedLemon[22485:226170] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-04 21:37:59.090 RedLemon[22485:226170] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 21:37:59.116 RedLemon[22485:226107] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 21:37:59.116 RedLemon[22485:226107] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:37:59.116 RedLemon[22485:226107] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:37:59.116 RedLemon[22485:226107] 🚀 RedLemon: Starting HTTP server...
+2026-01-04 21:37:59.116 RedLemon[22485:226107] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-04 21:37:59.134 RedLemon[22485:226107] ✅ RedLemon: HTTPServer instance created
+2026-01-04 21:37:59.134 RedLemon[22485:226107] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-04 21:37:59.134 RedLemon[22485:226171] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"BBA94489-B3B8-4FF8-BB3C-33958B977F11","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 3 credential(s) from cache
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-04 21:38:01.148 RedLemon[22485:226107] ✅ RedLemon: Server marked as ready
+2026-01-04 21:38:01.182 RedLemon[22485:226107] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-04 21:38:01.182 RedLemon[22485:226107] 🔍 Performing startup checks...
+2026-01-04 21:38:01.182 RedLemon[22485:226107] ✅ Username-based authentication ready
+2026-01-04 21:38:02.668 RedLemon[22485:226107] 🔍 Performing startup checks...
+2026-01-04 21:38:02.668 RedLemon[22485:226107] ✅ Username-based authentication ready
+2026-01-04 21:38:03.997 RedLemon[22485:226107] 🔄 Checking for app updates...
+2026-01-04 21:38:22.841 RedLemon[22485:226168] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2026-01-04 21:38:22.992 RedLemon[22485:226107] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0480687/img
+2026-01-04 21:38:22.993 RedLemon[22485:226107] ⏳ Background art loading...
+2026-01-04 21:38:22.993 RedLemon[22485:226107] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0480687/img
+2026-01-04 21:38:22.993 RedLemon[22485:226107] ⏳ Logo loading...
+2026-01-04 21:38:23.052 RedLemon[22485:226107]    Quality: 1080p
+2026-01-04 21:38:23.054 RedLemon[22485:226107]    Mode: watchParty
+2026-01-04 21:38:23.054 RedLemon[22485:226107] 📡 Fetching metadata for tt0480687...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1467 with 427 movies
+✅ [EventsConfig] Using cached movie_events config (version 1467, 427 movies)
+✅ [EventsView] Loaded 427 movies from config version 1467
+🗓 AppState: Updated schedule epoch to 2025-12-28 18:59:27 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 03:44:27 +0000
+⏰ AppState: Scheduling update in 3988 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0480687/img (901283 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"D69BC816-5279-4AD5-B033-D3FF03CC9D4E","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1QmnUk4oQ-FxF","phx_ref_prev":"GIe1PcG_9gIQ-FWC","last_seen":"2026-01-05T02:37:55.476Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1Q2pyjb4l1-6E","last_seen":"2026-01-05T02:37:59.845Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"33227255-02EC-4701-AAE3-19AA2C9B8B9B","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 5 items to cloud...
+🔄 SocialService: Syncing 5 items to cloud (serial)...
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":92848,"eth":3188.5},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925","opt eth_getBalance: undefined","eth eth_getBalance: undefined","poly eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":92872,"eth":3188.5},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.051s (RTT: 86ms)
+   Local:  2026-01-05 02:38:04 +0000
+   Server: 2026-01-05 02:38:04 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1RoiaBsAQ-OhP","phx_ref_prev":"GIe1QmnUk4oQ-FxF","last_seen":"2026-01-05T02:38:13.176Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1QmnUk4oQ-FxF","phx_ref_prev":"GIe1PcG_9gIQ-FWC","last_seen":"2026-01-05T02:37:55.476Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1RxHLaZ4Q-D_M","phx_ref_prev":"GIe1RoiaBsAQ-OhP","last_seen":"2026-01-05T02:38:15.476Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1RoiaBsAQ-OhP","phx_ref_prev":"GIe1QmnUk4oQ-FxF","last_seen":"2026-01-05T02:38:13.176Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SBGgSqUl11PD","phx_ref_prev":"GIe1Q2pyjb4l1-6E","last_seen":"2026-01-05T02:38:19.848Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1Q2pyjb4l1-6E","last_seen":"2026-01-05T02:37:59.845Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SEicg7oQ-KeM","phx_ref_prev":"GIe1RxHLaZ4Q-D_M","last_seen":"2026-01-05T02:38:20.690Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1RxHLaZ4Q-D_M","phx_ref_prev":"GIe1RoiaBsAQ-OhP","last_seen":"2026-01-05T02:38:15.476Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+[2026-01-05T02:38:22Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Hall Pass (Live: true)
+   Event start time: 2026-01-05 01:49:27 +0000
+   Event duration: 6900.0s
+   Current time: 2026-01-05 02:38:22 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0480687
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi4-4.downl...
+   Hash: 8def6e7d4180dab0cb77174bca8868c67adc08e8
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 8def6e7d4180dab0cb77174bca8868c67adc08e8
+
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🎬 Live event - calculating position: 2935.961714029312 seconds
+   Event start time: 2026-01-05 01:49:27 +0000
+   Current time: 2026-01-05 02:38:22 +0000
+   Room createdAt: 2026-01-05 01:49:27 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 2935.961714029312
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Hall Pass
+[ INFO ] GET /api/metadata/meta/movie/tt0480687 [request-id: C584C59A-5FC7-4691-A0D9-1CF9E52EEE92]
+2026-01-04 21:38:23.286 RedLemon[22485:226107] ✅ Logo loaded successfully
+2026-01-04 21:38:23.334 RedLemon[22485:226107] ✅ Background art loaded successfully
+2026-01-04 21:38:23.391 RedLemon[22485:226168] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-04 21:38:23.426 RedLemon[22485:226107] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-04 21:38:23.426 RedLemon[22485:226107] ⚠️ GUEST: Detected quality from filename: 1080p
+💾 Cache SET: Metadata[meta_movie_tt0480687]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 8A5759A9-C8E0-4D65-B869-BAF336B9CC38]
+2026-01-04 21:38:23.671 RedLemon[22485:226107] ✅ GUEST: Found 10 subtitles
+2026-01-04 21:38:23.681 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha, subtitles: 10
+2026-01-04 21:38:23.752 RedLemon[22485:226107] ✅ Stream ready, starting playback...
+2026-01-04 21:38:23.752 RedLemon[22485:226107] 🖥️ WindowManager: enterFullscreen() called
+2026-01-04 21:38:23.752 RedLemon[22485:226107]    Window: <SwiftUI.SwiftUIWindow: 0x7f9d47a4fda0>
+2026-01-04 21:38:23.752 RedLemon[22485:226107]    Is fullscreen: 0
+2026-01-04 21:38:23.753 RedLemon[22485:226107]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-04 21:38:23.836 RedLemon[22485:226107] 🖼️ Setting up MPV with native macOS video output...
+2026-01-04 21:38:23.842 RedLemon[22485:226107] ✅ MPV initialized with native GPU rendering
+2026-01-04 21:38:23.854 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-04 21:38:23.854 RedLemon[22485:226107] 🎉 Starting watch party sync - Room: event_tt0480687, Host: NO
+2026-01-04 21:38:23.855 RedLemon[22485:226107] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-04 21:38:23.937 RedLemon[22485:226107] 🔄 Starting chat polling for room: event_tt0480687
+2026-01-04 21:38:23.937 RedLemon[22485:226107] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-04 21:38:23.937 RedLemon[22485:226107] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-04 21:38:23.937 RedLemon[22485:226107] 🎬🎬🎬 Subtitles: 10
+2026-01-04 21:38:23.938 RedLemon[22485:226107] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Hall Pass
+2026-01-04 21:38:23.938 RedLemon[22485:226107] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha
+2026-01-04 21:38:23.938 RedLemon[22485:226107] 🎬🎬🎬 subtitles: 10
+2026-01-04 21:38:23.939 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-04 21:38:23.945 RedLemon[22485:226379] 🎬 MPV: Current video filename set to: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+2026-01-04 21:38:23.946 RedLemon[22485:226171] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-04 21:38:23.946 RedLemon[22485:226379] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H, autoplay: false, expectedSubs: 3
+2026-01-04 21:38:23.946 RedLemon[22485:226171] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MjEtODQ1ODg0Ny56aXA=?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+2026-01-04 21:38:23.946 RedLemon[22485:226379] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-04 21:38:23.946 RedLemon[22485:226379] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0480687 (movie)
+   ℹ️ Fallback Name: Hall Pass (2011)
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha
+   Display Title: Hall Pass
+   Subtitle URLs: 10
+      [0] Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+      [1] Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+      [2] Hall Pass 1080p BluRay x264
+      [3] Hall.Pass.2011.720p.BluRay.x264-Felony
+      [4] Hall.Pass.2011.BrRip.720p.x264.YIFY
+      [5] hall.pass.2011.extended.complete.bluray-tapas
+      [6] Hall.Pass.DVDRip.XviD-DEFACED
+      [7] Hall.Pass.DVDRip.XviD-DEFACED
+      [8] Hall.Pass.2011.720p.Bluray.x264.DTS.Felony
+      [9] Hall.Pass.2011.BRRip.XviD.AC3-SANTi
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 8def6e7d as attempted for tt0480687
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0480687, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0480687
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0480687
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Hall Pass
+   IMDB: tt0480687
+   URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha...
+   Hash: 8def6e7d...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt0480687 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MjEtODQ1ODg0Ny56aXA= [request-id: 66838311-87D9-4BCF-9EB6-45A181CB3B97]
+2026-01-04 21:38:24.500 RedLemon[22485:226293] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_677469C7-21D2-45E1-9DED-1A6F899FC433.vtt
+2026-01-04 21:38:24.500 RedLemon[22485:226293] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_677469C7-21D2-45E1-9DED-1A6
+2026-01-04 21:38:24.531 RedLemon[22485:226293] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:24.531 RedLemon[22485:226293] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MTctODQ1ODg0Ni56aXA=?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzY5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3536921-8458847.zip
+📨 Received: {"ref":"86D8DA38-B458-4834-942D-1DEFB740FE83","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"995897f6-e9df-11f0-8a1e-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SEgvvpGLAqCF","is_host":false,"joined_at":1767580700.682323,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"9b3d7f32-e9df-11f0-85f3-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SQWbG_MwvU-H","is_host":false,"joined_at":1767580703.932127,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SQXm1ycl1xzE","phx_ref_prev":"GIe1SBGgSqUl11PD","last_seen":"2026-01-05T02:38:23.945Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:23.945Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SBGgSqUl11PD","phx_ref_prev":"GIe1Q2pyjb4l1-6E","last_seen":"2026-01-05T02:38:19.848Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0480687/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0480687/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0480687/img...
+📡 SocialService: Updated status - online: Hall Pass
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIe1SEgvvpGLAqCF)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIe1SQWbG_MwvU-H
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 03:44:27 +0000
+⏰ AppState: Scheduling update in 3963 seconds
+✅ Download complete: 59659 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MTctODQ1ODg0Ni56aXA= [request-id: 54B5165A-F58B-4A3E-BD9E-DCBCAC897A46]
+2026-01-04 21:38:25.076 RedLemon[22485:226379] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_79BB2444-2B2F-41CF-AAA9-ED42AE934CAA.vtt
+2026-01-04 21:38:25.076 RedLemon[22485:226379] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_79BB2444-2B2F-41CF-AAA9-ED4
+2026-01-04 21:38:25.090 RedLemon[22485:226379] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:25.090 RedLemon[22485:226379] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzY5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3536917-8458846.zip
+✅ Download complete: 65809 bytes
+📦 Detected ZIP archive, extracting...
+🎬 DisplayLink: reportSwap() (throttled)
+⚠️ No specific episode match found, using first file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b0ca5d7_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng_SDH.srt
+📦 Extracting specific file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b0ca5d7_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng_SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw [request-id: 48049CBA-91E0-43D6-9528-D7BE23D11386]
+2026-01-04 21:38:25.705 RedLemon[22485:226379] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_416B217B-95EC-430C-9F95-62F331B4B8CC.vtt
+2026-01-04 21:38:25.705 RedLemon[22485:226379] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_416B217B-95EC-430C-9F95-62F
+2026-01-04 21:38:25.708 RedLemon[22485:226379] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:25.709 RedLemon[22485:226379] 🔍 MPV track-list/count: 3
+2026-01-04 21:38:25.709 RedLemon[22485:226379] 🔍 Track 0 type: sub
+2026-01-04 21:38:25.710 RedLemon[22485:226379] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:25.710 RedLemon[22485:226379] 🔍 Track 1 type: sub
+2026-01-04 21:38:25.711 RedLemon[22485:226379] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:25.711 RedLemon[22485:226379] 🔍 Track 2 type: sub
+2026-01-04 21:38:25.711 RedLemon[22485:226379] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:25.711 RedLemon[22485:226379] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:25.711 RedLemon[22485:226379]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:25.711 RedLemon[22485:226379]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:25.711 RedLemon[22485:226379]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:25.712 RedLemon[22485:226379]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:25.713 RedLemon[22485:226379] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-04 21:38:25.713 RedLemon[22485:226379]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:25.713 RedLemon[22485:226379]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:25.714 RedLemon[22485:226379]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:25.714 RedLemon[22485:226379]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:26.157 RedLemon[22485:226107] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-04 21:38:26.797 RedLemon[22485:226434] 🔍 MPV track-list/count: 5
+2026-01-04 21:38:26.798 RedLemon[22485:226434] 🔍 Track 0 type: sub
+2026-01-04 21:38:26.798 RedLemon[22485:226434] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:26.798 RedLemon[22485:226434] 🔍 Track 1 type: sub
+2026-01-04 21:38:26.799 RedLemon[22485:226434] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:26.799 RedLemon[22485:226434] 🔍 Track 2 type: sub
+2026-01-04 21:38:26.799 RedLemon[22485:226434] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:26.800 RedLemon[22485:226434] 🔍 Track 3 type: video
+2026-01-04 21:38:26.800 RedLemon[22485:226434] 🔍 Track 4 type: audio
+2026-01-04 21:38:26.800 RedLemon[22485:226434] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:26.800 RedLemon[22485:226434]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:26.800 RedLemon[22485:226434]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:26.800 RedLemon[22485:226434]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:26.800 RedLemon[22485:226434]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:26.801 RedLemon[22485:226434] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-04 21:38:26.801 RedLemon[22485:226434]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:26.802 RedLemon[22485:226434]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:26.802 RedLemon[22485:226434]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:26.802 RedLemon[22485:226434]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:27.855 RedLemon[22485:226293] 🔍 MPV track-list/count: 5
+2026-01-04 21:38:27.855 RedLemon[22485:226293] 🔍 Track 0 type: sub
+2026-01-04 21:38:27.856 RedLemon[22485:226293] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:27.856 RedLemon[22485:226293] 🔍 Track 1 type: sub
+2026-01-04 21:38:27.856 RedLemon[22485:226293] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:27.856 RedLemon[22485:226293] 🔍 Track 2 type: sub
+2026-01-04 21:38:27.857 RedLemon[22485:226293] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:27.857 RedLemon[22485:226293] 🔍 Track 3 type: video
+2026-01-04 21:38:27.857 RedLemon[22485:226293] 🔍 Track 4 type: audio
+2026-01-04 21:38:27.857 RedLemon[22485:226293] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:27.857 RedLemon[22485:226293]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:27.857 RedLemon[22485:226293]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:27.857 RedLemon[22485:226293]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:27.857 RedLemon[22485:226293]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:27.858 RedLemon[22485:226293] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-04 21:38:27.858 RedLemon[22485:226293]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:27.859 RedLemon[22485:226293]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:27.859 RedLemon[22485:226293]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:27.859 RedLemon[22485:226293]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:28.912 RedLemon[22485:226171] 🔍 MPV track-list/count: 5
+2026-01-04 21:38:28.920 RedLemon[22485:226171] 🔍 Track 0 type: sub
+2026-01-04 21:38:28.945 RedLemon[22485:226171] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:28.950 RedLemon[22485:226171] 🔍 Track 1 type: sub
+2026-01-04 21:38:28.965 RedLemon[22485:226171] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:28.969 RedLemon[22485:226171] 🔍 Track 2 type: sub
+2026-01-04 21:38:28.980 RedLemon[22485:226171] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:28.985 RedLemon[22485:226171] 🔍 Track 3 type: video
+2026-01-04 21:38:28.991 RedLemon[22485:226171] 🔍 Track 4 type: audio
+2026-01-04 21:38:28.991 RedLemon[22485:226171] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:28.991 RedLemon[22485:226171]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:28.992 RedLemon[22485:226171]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:28.992 RedLemon[22485:226171]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:28.992 RedLemon[22485:226171]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:29.040 RedLemon[22485:226171] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-04 21:38:29.040 RedLemon[22485:226171]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:29.041 RedLemon[22485:226171]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:29.041 RedLemon[22485:226171]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:29.041 RedLemon[22485:226171]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:30.066 RedLemon[22485:226169] 🔍 MPV track-list/count: 5
+2026-01-04 21:38:30.066 RedLemon[22485:226169] 🔍 Track 0 type: sub
+2026-01-04 21:38:30.066 RedLemon[22485:226169] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:30.066 RedLemon[22485:226169] 🔍 Track 1 type: sub
+2026-01-04 21:38:30.066 RedLemon[22485:226169] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:30.067 RedLemon[22485:226169] 🔍 Track 2 type: sub
+2026-01-04 21:38:30.067 RedLemon[22485:226169] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:30.067 RedLemon[22485:226169] 🔍 Track 3 type: video
+2026-01-04 21:38:30.068 RedLemon[22485:226169] 🔍 Track 4 type: audio
+2026-01-04 21:38:30.068 RedLemon[22485:226169] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:30.068 RedLemon[22485:226169] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:30.068 RedLemon[22485:226169]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:30.069 RedLemon[22485:226169]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:30.069 RedLemon[22485:226169]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:32.424 RedLemon[22485:226379] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:38:32.425 RedLemon[22485:226379]    Payload keys: timestamp, chatText, chatUsername, type, position, senderId
+2026-01-04 21:38:32.425 RedLemon[22485:226171] ✅ Realtime: Message broadcast complete
+2026-01-04 21:38:32.464 RedLemon[22485:226171] 📨 Realtime: Received broadcast message
+2026-01-04 21:38:32.464 RedLemon[22485:226171]    Payload keys: chatText, type, senderId, position, chatUsername, timestamp
+2026-01-04 21:38:32.465 RedLemon[22485:226171] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:38:32.465 RedLemon[22485:226171] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-04 21:38:32.465 RedLemon[22485:226171] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 21:38:32.472 RedLemon[22485:226107] 🔍 DEBUG: Received sync message - type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628616-547834.zip
+✅ Download complete: 68030 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall Pass 1080p BluRay x264.srt
+📦 Extracting specific file: Hall Pass 1080p BluRay x264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded, preparing to seek before playback...
+   Seeking to live edge: 2939s
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Hall Pass 1080p BluRay x264', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt (ID: 2) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 850 (Embedded: 0, Match: 600, Clean: 0, SDH: 250)
+ MPV Event: 20
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.13s), skipping redundant seek
+📝 Started watch history tracking
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] VO: [libmpv] 1920x798 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 2
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 2
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Hall Pass 1080p BluRay x264', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt (ID: 2) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 850 (Embedded: 0, Match: 600, Clean: 0, SDH: 250)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💬 Sent: hi
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+✅ Chat message sent via Realtime
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767580712.424021,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0480687"}
+💬 Skipping own message (already displayed locally)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1S73rVqoQ-N8L","phx_ref_prev":"GIe1SEicg7oQ-KeM","last_seen":"2026-01-05T02:38:35.540Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SEicg7oQ-KeM","phx_ref_prev":"GIe1RxHLaZ4Q-D_M","last_seen":"2026-01-05T02:38:20.690Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1TL6oqpMl103F","phx_ref_prev":"GIe1SQXm1ycl1xzE","last_seen":"2026-01-05T02:38:39.932Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:23.945Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SQXm1ycl1xzE","phx_ref_prev":"GIe1SBGgSqUl11PD","last_seen":"2026-01-05T02:38:23.945Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:23.945Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled2026-01-04 21:38:45.909 RedLemon[22485:226107] ✅ Exit button triggered! x=128 <= 342, y=677 >= 576
+2026-01-04 21:38:45.927 RedLemon[22485:226107] ✅ Exit button triggered! x=120 <= 342, y=717 >= 576
+2026-01-04 21:38:45.946 RedLemon[22485:226107] ✅ Exit button triggered! x=120 <= 342, y=732 >= 576
+2026-01-04 21:38:46.189 RedLemon[22485:226107] ✅ Exit button triggered! x=104 <= 342, y=735 >= 576
+2026-01-04 21:38:46.195 RedLemon[22485:226107] ✅ Exit button triggered! x=84 <= 342, y=744 >= 576
+2026-01-04 21:38:46.197 RedLemon[22485:226107] ✅ Exit button triggered! x=82 <= 342, y=745 >= 576
+2026-01-04 21:38:46.229 RedLemon[22485:226107] ✅ Exit button triggered! x=81 <= 342, y=746 >= 576
+2026-01-04 21:38:46.231 RedLemon[22485:226107] ✅ Exit button triggered! x=75 <= 342, y=749 >= 576
+2026-01-04 21:38:46.272 RedLemon[22485:226107] ✅ Exit button triggered! x=71 <= 342, y=751 >= 576
+2026-01-04 21:38:46.277 RedLemon[22485:226107] ✅ Exit button triggered! x=71 <= 342, y=751 >= 576
+2026-01-04 21:38:46.355 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=751 >= 576
+2026-01-04 21:38:46.396 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=750 >= 576
+2026-01-04 21:38:46.437 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=746 >= 576
+2026-01-04 21:38:46.447 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=745 >= 576
+2026-01-04 21:38:46.522 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=742 >= 576
+2026-01-04 21:38:46.525 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=742 >= 576
+2026-01-04 21:38:46.565 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=741 >= 576
+2026-01-04 21:38:46.568 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=740 >= 576
+2026-01-04 21:38:46.574 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=740 >= 576
+2026-01-04 21:38:46.579 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=740 >= 576
+2026-01-04 21:38:46.604 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=739 >= 576
+2026-01-04 21:38:46.613 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=739 >= 576
+2026-01-04 21:38:46.688 RedLemon[22485:226107] ✅ Exit button triggered! x=70 <= 342, y=738 >= 576
+2026-01-04 21:38:46.857 RedLemon[22485:226107] 🖥️ WindowManager: exitFullscreen() called
+2026-01-04 21:38:46.857 RedLemon[22485:226107]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-04 21:38:46.939 RedLemon[22485:226107] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-04 21:38:46.939 RedLemon[22485:226107]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-04 21:38:47.266 RedLemon[22485:226107]    ✅ WindowManager: Window restored to expanded size
+2026-01-04 21:38:56.153 RedLemon[22485:226171] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2026-01-04 21:38:56.285 RedLemon[22485:226107] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0480687/img
+2026-01-04 21:38:56.286 RedLemon[22485:226107] ⏳ Background art loading...
+2026-01-04 21:38:56.286 RedLemon[22485:226107] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0480687/img
+2026-01-04 21:38:56.287 RedLemon[22485:226107] ⏳ Logo loading...
+2026-01-04 21:38:56.341 RedLemon[22485:226107] ✅ Logo loaded successfully
+2026-01-04 21:38:56.343 RedLemon[22485:226107]    Quality: 1080p
+2026-01-04 21:38:56.343 RedLemon[22485:226107]    Mode: watchParty
+2026-01-04 21:38:56.343 RedLemon[22485:226107] 📡 Fetching metadata for tt0480687...
+2026-01-04 21:38:56.395 RedLemon[22485:226107] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-04 21:38:56.396 RedLemon[22485:226107] ⚠️ GUEST: Detected quality from filename: 1080p
+)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+👋 Leaving room: event_tt0480687
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt1657507/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt1657507/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <D52F1192-BE59-48F1-92F8-C592136B7BB7>.<13>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <D52F1192-BE59-48F1-92F8-C592136B7BB7>.<13>, NSLocalizedDescription=cancelled}
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt0373074/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt0373074/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <1D158802-BF41-4639-BF40-EDB7C319C061>.<15>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <1D158802-BF41-4639-BF40-EDB7C319C061>.<15>, NSLocalizedDescription=cancelled}
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+ MPV Event: 17
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1Tn4C4hYl1-wQ","phx_ref_prev":"GIe1TL6oqpMl103F","last_seen":"2026-01-05T02:38:47.429Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1TL6oqpMl103F","phx_ref_prev":"GIe1SQXm1ycl1xzE","last_seen":"2026-01-05T02:38:39.932Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:23.945Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt0480687
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+⚡️ PlaybackService: releasing sleep assertion
+🗑️ MPVPlayerViewModel deinit
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1ToAJ-_0l11RF","phx_ref_prev":"GIe1Tn4C4hYl1-wQ","last_seen":"2026-01-05T02:38:47.429Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1Tn4C4hYl1-wQ","phx_ref_prev":"GIe1TL6oqpMl103F","last_seen":"2026-01-05T02:38:47.429Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"9b3d7f32-e9df-11f0-85f3-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SQWbG_MwvU-H","is_host":false,"joined_at":1767580703.932127,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Unknown event: phx_close
+✅ MPV stop completed with clean event loop exit
+✅ MPV instance destroyed
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🗑️ MPVViewLayer deinit
+🗑️ Removing friend lemontom
+✅ SocialService: Removed friend 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UE3ZCcUl18FI","phx_ref_prev":"GIe1ToAJ-_0l11RF","last_seen":"2026-01-05T02:38:55.212Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1ToAJ-_0l11RF","phx_ref_prev":"GIe1Tn4C4hYl1-wQ","last_seen":"2026-01-05T02:38:47.429Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-05T02:38:55Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Hall Pass (Live: true)
+   Event start time: 2026-01-05 01:49:27 +0000
+   Event duration: 6900.0s
+   Current time: 2026-01-05 02:38:56 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0480687
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi4-4.downl...
+   Hash: 8def6e7d4180dab0cb77174bca8868c67adc08e8
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 8def6e7d4180dab0cb77174bca8868c67adc08e8
+
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+🎬 Live event - calculating position: 2969.2635699510574 seconds
+   Event start time: 2026-01-05 01:49:27 +0000
+   Current time: 2026-01-05 02:38:56 +0000
+   Room createdAt: 2026-01-05 01:49:27 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 2969.2635699510574
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Hall Pass
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 95E50005-6168-4057-B65C-AF824BDD81EB]
+2026-01-04 21:38:56.412 RedLemon[22485:226107] ✅ Background art loaded successfully
+2026-01-04 21:38:56.577 RedLemon[22485:226107] ✅ GUEST: Found 10 subtitles
+2026-01-04 21:38:56.582 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha, subtitles: 10
+2026-01-04 21:38:56.627 RedLemon[22485:226107] ✅ Stream ready, starting playback...
+2026-01-04 21:38:56.627 RedLemon[22485:226107] 🖥️ WindowManager: enterFullscreen() called
+2026-01-04 21:38:56.627 RedLemon[22485:226107]    Window: <SwiftUI.SwiftUIWindow: 0x7f9d47a4fda0>
+2026-01-04 21:38:56.627 RedLemon[22485:226107]    Is fullscreen: 0
+2026-01-04 21:38:56.627 RedLemon[22485:226107]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-04 21:38:56.664 RedLemon[22485:226107] 🖼️ Setting up MPV with native macOS video output...
+2026-01-04 21:38:56.669 RedLemon[22485:226107] ✅ MPV initialized with native GPU rendering
+2026-01-04 21:38:56.672 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-04 21:38:56.672 RedLemon[22485:226107] 🎉 Starting watch party sync - Room: event_tt0480687, Host: NO
+2026-01-04 21:38:56.672 RedLemon[22485:226107] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🔄 Starting chat polling for room: event_tt0480687
+2026-01-04 21:38:56.729 RedLemon[22485:226107] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🎬🎬🎬 Subtitles: 10
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Hall Pass
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🎬🎬🎬 streamURL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha
+2026-01-04 21:38:56.729 RedLemon[22485:226107] 🎬🎬🎬 subtitles: 10
+2026-01-04 21:38:56.730 RedLemon[22485:226107] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-04 21:38:56.739 RedLemon[22485:226171] 🎬 MPV: Current video filename set to: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4
+2026-01-04 21:38:56.739 RedLemon[22485:226591] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-04 21:38:56.739 RedLemon[22485:226591] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MjEtODQ1ODg0Ny56aXA=?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+2026-01-04 21:38:56.739 RedLemon[22485:226171] 🎬 MPV loadVideo called with URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H, autoplay: false, expectedSubs: 3
+2026-01-04 21:38:56.740 RedLemon[22485:226171] 🎬 MPV executing: loadfile "https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-04 21:38:56.740 RedLemon[22485:226171] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Searching SubDL: tt0480687 (movie)
+   ℹ️ Fallback Name: Hall Pass (2011)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UGdN2VQQ-MQE","phx_ref_prev":"GIe1S73rVqoQ-N8L","last_seen":"2026-01-05T02:38:55.559Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1S73rVqoQ-N8L","phx_ref_prev":"GIe1SEicg7oQ-KeM","last_seen":"2026-01-05T02:38:35.540Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha
+   Display Title: Hall Pass
+   Subtitle URLs: 10
+      [0] Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+      [1] Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+      [2] Hall Pass 1080p BluRay x264
+      [3] Hall.Pass.2011.720p.BluRay.x264-Felony
+      [4] Hall.Pass.2011.BrRip.720p.x264.YIFY
+      [5] hall.pass.2011.extended.complete.bluray-tapas
+      [6] Hall.Pass.DVDRip.XviD-DEFACED
+      [7] Hall.Pass.DVDRip.XviD-DEFACED
+      [8] Hall.Pass.2011.720p.Bluray.x264.DTS.Felony
+      [9] Hall.Pass.2011.BRRip.XviD.AC3-SANTi
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 8def6e7d as attempted for tt0480687
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0480687, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0480687
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0480687
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Hall Pass
+   IMDB: tt0480687
+   URL: https://chi4-4.download.real-debrid.com/d/CZ5PGTNVL3NGQ45/Ha...
+   Hash: 8def6e7d...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt0480687 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0480687]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MjEtODQ1ODg0Ny56aXA= [request-id: F30A76A7-7480-4F0D-9000-FB6CD5D8853A]
+2026-01-04 21:38:57.280 RedLemon[22485:226648] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A2D1C78F-124A-4905-B1A2-3658CF515EE4.vtt
+2026-01-04 21:38:57.280 RedLemon[22485:226648] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A2D1C78F-124A-4905-B1A2-365
+2026-01-04 21:38:57.299 RedLemon[22485:226648] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:57.299 RedLemon[22485:226648] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MTctODQ1ODg0Ni56aXA=?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzY5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3536921-8458847.zip
+📨 Received: {"ref":"2F3D51FF-E353-458D-B4E9-B611B782DAC0","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"995897f6-e9df-11f0-8a1e-0a58a9feac02":{"metas":[{"phx_ref":"GIe1SEgvvpGLAqCF","is_host":false,"joined_at":1767580700.682323,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0480687"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"aec8764c-e9df-11f0-98d1-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UKfWuLUwvadO","is_host":false,"joined_at":1767580736.721465,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0480687"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UKjPEysl1_uD","phx_ref_prev":"GIe1UE3ZCcUl18FI","last_seen":"2026-01-05T02:38:56.739Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:56.739Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UE3ZCcUl18FI","phx_ref_prev":"GIe1ToAJ-_0l11RF","last_seen":"2026-01-05T02:38:55.212Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt0480687/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0480687/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0480687/img...
+📡 SocialService: Updated status - online: Hall Pass
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIe1SEgvvpGLAqCF)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIe1UKfWuLUwvadO
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 03:44:27 +0000
+⏰ AppState: Scheduling update in 3931 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 59659 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b121cc6_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MzY5MTctODQ1ODg0Ni56aXA= [request-id: EB1C9717-1C14-4BCC-B7BA-12C19C079BEA]
+2026-01-04 21:38:57.911 RedLemon[22485:226697] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_80AE564D-7F46-4BA2-A974-054EB6E4AECA.vtt
+2026-01-04 21:38:57.911 RedLemon[22485:226697] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_80AE564D-7F46-4BA2-A974-054
+2026-01-04 21:38:57.924 RedLemon[22485:226697] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:57.924 RedLemon[22485:226697] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw?token=F411F883-729C-49EA-BFB2-E0CE9E1D1865
+📄 Subtitle request: L3N1YnRpdGxlLzM1MzY5... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3536917-8458846.zip
+✅ Download complete: 65809 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b0ca5d7_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng_SDH.srt
+📦 Extracting specific file: D:/Server/htdocs/_subdl_tmp/sub_6949c9b0ca5d7_Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng_SDH.srt
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzYyODYxNi01NDc4MzQuemlw [request-id: 9F454E2E-74CF-4348-A1BB-E0A2A9E9A09F]
+2026-01-04 21:38:58.423 RedLemon[22485:226171] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E3175E47-215E-4052-A524-89135A10ADE6.vtt
+2026-01-04 21:38:58.423 RedLemon[22485:226171] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_E3175E47-215E-4052-A524-891
+2026-01-04 21:38:58.427 RedLemon[22485:226171] ✅ External subtitle added to track list (not auto-selected)
+2026-01-04 21:38:58.427 RedLemon[22485:226171] 🔍 MPV track-list/count: 3
+2026-01-04 21:38:58.427 RedLemon[22485:226171] 🔍 Track 0 type: sub
+2026-01-04 21:38:58.428 RedLemon[22485:226171] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:58.428 RedLemon[22485:226171] 🔍 Track 1 type: sub
+2026-01-04 21:38:58.428 RedLemon[22485:226171] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:58.428 RedLemon[22485:226171] 🔍 Track 2 type: sub
+2026-01-04 21:38:58.428 RedLemon[22485:226171] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:58.428 RedLemon[22485:226171] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:58.428 RedLemon[22485:226171]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:58.429 RedLemon[22485:226171] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:58.429 RedLemon[22485:226171]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:58.430 RedLemon[22485:226171]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:38:58.846 RedLemon[22485:226107] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-04 21:38:59.515 RedLemon[22485:226591] 🔍 MPV track-list/count: 5
+2026-01-04 21:38:59.515 RedLemon[22485:226591] 🔍 Track 0 type: sub
+2026-01-04 21:38:59.516 RedLemon[22485:226591] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:38:59.516 RedLemon[22485:226591] 🔍 Track 1 type: sub
+2026-01-04 21:38:59.517 RedLemon[22485:226591] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:38:59.517 RedLemon[22485:226591] 🔍 Track 2 type: sub
+2026-01-04 21:38:59.517 RedLemon[22485:226591] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:38:59.517 RedLemon[22485:226591] 🔍 Track 3 type: video
+2026-01-04 21:38:59.518 RedLemon[22485:226591] 🔍 Track 4 type: audio
+2026-01-04 21:38:59.518 RedLemon[22485:226591] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:38:59.518 RedLemon[22485:226591]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:38:59.518 RedLemon[22485:226591]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:38:59.518 RedLemon[22485:226591]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:38:59.518 RedLemon[22485:226591]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:38:59.519 RedLemon[22485:226591] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-04 21:38:59.519 RedLemon[22485:226591]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:38:59.520 RedLemon[22485:226591]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:38:59.520 RedLemon[22485:226591]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:38:59.521 RedLemon[22485:226591]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:39:00.806 RedLemon[22485:226171] 🔍 MPV track-list/count: 5
+2026-01-04 21:39:00.906 RedLemon[22485:226171] 🔍 Track 0 type: sub
+2026-01-04 21:39:00.927 RedLemon[22485:226171] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:39:00.927 RedLemon[22485:226171] 🔍 Track 1 type: sub
+2026-01-04 21:39:00.927 RedLemon[22485:226171] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:39:00.927 RedLemon[22485:226171] 🔍 Track 2 type: sub
+2026-01-04 21:39:00.927 RedLemon[22485:226171] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:39:00.928 RedLemon[22485:226171] 🔍 Track 3 type: video
+2026-01-04 21:39:00.928 RedLemon[22485:226171] 🔍 Track 4 type: audio
+2026-01-04 21:39:00.928 RedLemon[22485:226171] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:39:00.928 RedLemon[22485:226171]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:39:00.928 RedLemon[22485:226171]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:39:00.928 RedLemon[22485:226171]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:39:00.928 RedLemon[22485:226171]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:39:00.929 RedLemon[22485:226171] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-04 21:39:00.929 RedLemon[22485:226171]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:39:00.929 RedLemon[22485:226171]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:39:00.929 RedLemon[22485:226171]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:39:00.929 RedLemon[22485:226171]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:39:01.969 RedLemon[22485:226697] 🔍 MPV track-list/count: 5
+2026-01-04 21:39:01.970 RedLemon[22485:226697] 🔍 Track 0 type: sub
+2026-01-04 21:39:01.970 RedLemon[22485:226697] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:39:01.970 RedLemon[22485:226697] 🔍 Track 1 type: sub
+2026-01-04 21:39:01.970 RedLemon[22485:226697] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:39:01.970 RedLemon[22485:226697] 🔍 Track 2 type: sub
+2026-01-04 21:39:01.971 RedLemon[22485:226697] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:39:01.971 RedLemon[22485:226697] 🔍 Track 3 type: video
+2026-01-04 21:39:01.971 RedLemon[22485:226697] 🔍 Track 4 type: audio
+2026-01-04 21:39:01.971 RedLemon[22485:226697] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:39:01.971 RedLemon[22485:226697]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:39:01.971 RedLemon[22485:226697]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:39:01.971 RedLemon[22485:226697]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:39:01.971 RedLemon[22485:226697]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:39:01.972 RedLemon[22485:226697] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-04 21:39:01.972 RedLemon[22485:226697]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:39:01.972 RedLemon[22485:226697]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:39:01.973 RedLemon[22485:226697]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:39:01.973 RedLemon[22485:226697]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+2026-01-04 21:39:02.464 RedLemon[22485:226648] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:39:02.465 RedLemon[22485:226648]    Payload keys: chatText, position, type, timestamp, senderId, chatUsername
+2026-01-04 21:39:02.465 RedLemon[22485:226648] ✅ Realtime: Message broadcast complete
+2026-01-04 21:39:02.514 RedLemon[22485:226697] 📨 Realtime: Received broadcast message
+2026-01-04 21:39:02.515 RedLemon[22485:226697]    Payload keys: chatText, position, type, timestamp, senderId, chatUsername
+2026-01-04 21:39:02.515 RedLemon[22485:226697] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:39:02.515 RedLemon[22485:226697] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-04 21:39:02.516 RedLemon[22485:226697] ✅ Realtime: syncCallback invoked successfully
+2026-01-04 21:39:02.529 RedLemon[22485:226107] 🔍 DEBUG: Received sync message - type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-04 21:39:03.064 RedLemon[22485:226293] 🔍 MPV track-list/count: 5
+2026-01-04 21:39:03.064 RedLemon[22485:226293] 🔍 Track 0 type: sub
+2026-01-04 21:39:03.080 RedLemon[22485:226293] ✅ Found subtitle track: ID=1, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, external=1
+2026-01-04 21:39:03.080 RedLemon[22485:226293] 🔍 Track 1 type: sub
+2026-01-04 21:39:03.080 RedLemon[22485:226293] ✅ Found subtitle track: ID=2, lang=en, title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, external=1
+2026-01-04 21:39:03.081 RedLemon[22485:226293] 🔍 Track 2 type: sub
+2026-01-04 21:39:03.081 RedLemon[22485:226293] ✅ Found subtitle track: ID=3, lang=en, title=Hall Pass 1080p BluRay x264, external=1
+2026-01-04 21:39:03.081 RedLemon[22485:226293] 🔍 Track 3 type: video
+2026-01-04 21:39:03.082 RedLemon[22485:226293] 🔍 Track 4 type: audio
+2026-01-04 21:39:03.082 RedLemon[22485:226293] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-04 21:39:03.082 RedLemon[22485:226293]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-04 21:39:03.082 RedLemon[22485:226293]    Start[1]: ID=1, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', Lang='en', Ext=1
+2026-01-04 21:39:03.082 RedLemon[22485:226293]    Start[2]: ID=2, Title='Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', Lang='en', Ext=1
+2026-01-04 21:39:03.082 RedLemon[22485:226293]    Start[3]: ID=3, Title='Hall Pass 1080p BluRay x264', Lang='en', Ext=1
+2026-01-04 21:39:03.082 RedLemon[22485:226293] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-04 21:39:03.082 RedLemon[22485:226293]    Track: ID=0, Title=Off, External=0
+2026-01-04 21:39:03.083 RedLemon[22485:226293]    Track: ID=1, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt, External=1
+2026-01-04 21:39:03.084 RedLemon[22485:226293]    Track: ID=2, Title=Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt, External=1
+2026-01-04 21:39:03.084 RedLemon[22485:226293]    Track: ID=3, Title=Hall Pass 1080p BluRay x264, External=1
+📄 Subtitle request: L3N1YnRpdGxlLzYyODYx... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/628616-547834.zip
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ Download complete: 68030 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Hall Pass 1080p BluRay x264.srt
+📦 Extracting specific file: Hall Pass 1080p BluRay x264.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Hall.Pass.2011.EXTENDED.CUT.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🎉 EVENT: File loaded, preparing to seek before playback...
+   Seeking to live edge: 2971s
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Hall Pass 1080p BluRay x264', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt (ID: 2) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 850 (Embedded: 0, Match: 600, Clean: 0, SDH: 250)
+[MPV] Track switched:
+ MPV Event: 20
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x798 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Hall Pass 1080p BluRay x264' (webvtt) (external)
+📡 [EventsConfig] Checking server for movie_events config version...
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.14s), skipping redundant seek
+📝 Started watch history tracking
+✅ [EventsConfig] Fetched movie_events version 1467 with 427 movies
+✅ [EventsConfig] Using cached movie_events config (version 1467, 427 movies)
+📊 Current subtitle track: 2
+💓 Heartbeat sent
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UWHnXW0l1-vO","phx_ref_prev":"GIe1UKjPEysl1_uD","last_seen":"2026-01-05T02:38:59.849Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:56.739Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"8ce39976-e9df-11f0-8353-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UKjPEysl1_uD","phx_ref_prev":"GIe1UE3ZCcUl18FI","last_seen":"2026-01-05T02:38:56.739Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:56.739Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 17
+[MPV] VO: [libmpv] 1920x798 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 18
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+📊 Current subtitle track: 2
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+💬 Sent: yooo
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+✅ Chat message sent via Realtime
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"yooo","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767580742.464487,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0480687"}
+💬 Skipping own message (already displayed locally)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+📊 Current subtitle track: 2
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Hall Pass 1080p BluRay x264', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Hall.Pass.2011.EXTENDED.1080p.BluRay.x265-YAWNTiC_eng SDH.srt (ID: 2) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 850 (Embedded: 0, Match: 600, Clean: 0, SDH: 250)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1VQ6fj3oQ-COE","phx_ref_prev":"GIe1UGdN2VQQ-MQE","last_seen":"2026-01-05T02:39:15.547Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}},"leaves":{"bfa851f4-e9de-11f0-a119-0a58a9feac02":{"metas":[{"phx_ref":"GIe1UGdN2VQQ-MQE","phx_ref_prev":"GIe1S73rVqoQ-N8L","last_seen":"2026-01-05T02:38:55.559Z","room_id":"event_tt0480687","started_at":"2026-01-05T02:38:20.690Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0480687","watching_title":"Hall Pass","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false
+[DEBUG MENU] User: ursinho | UID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | MyID: '656DAA91-33B4-4688-9135-C982EA52D7C9' | isMe: true | isFriend: false

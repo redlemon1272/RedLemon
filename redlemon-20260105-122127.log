@@ -1,0 +1,1571 @@
+2026-01-05 12:21:34.583 RedLemon[2847:17684] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-05 12:21:34.583 RedLemon[2847:17684] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-05 12:21:34.648 RedLemon[2847:17749] 🔍 UserResetManager: Username setup flag is set
+2026-01-05 12:21:34.650 RedLemon[2847:17749] 🔍 KeychainManager: No username found in UserDefaults
+2026-01-05 12:21:34.653 RedLemon[2847:17684] 🔄 Forced username setup detected, showing setup dialog
+2026-01-05 12:21:35.159 RedLemon[2847:17754] 🧹 UserResetManager: Cleared force username setup flag
+2026-01-05 12:21:35.277 RedLemon[2847:17684] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-05 12:21:35.423 RedLemon[2847:17684] ✅ Playback state reset complete - starting in browse view
+2026-01-05 12:21:35.423 RedLemon[2847:17684] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-05 12:21:35.423 RedLemon[2847:17684] 🧪 Testing Profile: debug
+2026-01-05 12:21:35.423 RedLemon[2847:17748] 🔍 KeychainManager: No username found in UserDefaults
+2026-01-05 12:21:35.423 RedLemon[2847:17684] ℹ️  KEYCHAIN: No stored username found
+2026-01-05 12:21:35.423 RedLemon[2847:17684] ❌ NO FALLBACK: No UUID found in UserDefaults either
+2026-01-05 12:21:35.423 RedLemon[2847:17684]    User will need to create a new username
+2026-01-05 12:21:35.423 RedLemon[2847:17684] 🏁 AUTH COMPLETE: Final state - username=, userId=nil
+2026-01-05 12:21:35.424 RedLemon[2847:17684] 🚀 RedLemon: Starting HTTP server...
+2026-01-05 12:21:35.424 RedLemon[2847:17684] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-05 12:21:35.441 RedLemon[2847:17684] ✅ RedLemon: HTTPServer instance created
+2026-01-05 12:21:35.442 RedLemon[2847:17749] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"8A5F9107-DF79-425A-AD2B-D4FDA39848A5","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+📂 Loaded 0 credential(s) from cache
+🔍 Memory pressure monitoring enabled (safe mode)
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+🆕 [EventsConfig] Server has newer version 1468 (cached: 0)
+💾 [EventsConfig] Cached new version 1468
+✅ [EventsView] Loaded 428 movies from config version 1468
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+🗓 AppState: Updated schedule epoch to 2025-12-28 18:59:27 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 18:42:27 +0000
+⏰ AppState: Scheduling update in 4852 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0413300/img (809602 bytes)
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-05 12:21:37.618 RedLemon[2847:17684] ✅ RedLemon: Server marked as ready
+2026-01-05 12:21:37.683 RedLemon[2847:17684] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-05 12:21:37.683 RedLemon[2847:17684] 🔍 Performing startup checks...
+2026-01-05 12:21:37.683 RedLemon[2847:17684] ✅ Username-based authentication ready
+2026-01-05 12:21:38.130 RedLemon[2847:17684] 🔍 Performing startup checks...
+2026-01-05 12:21:38.130 RedLemon[2847:17684] ✅ Username-based authentication ready
+2026-01-05 12:21:38.257 RedLemon[2847:17684] 🔄 Checking for app updates...
+2026-01-05 12:21:43.835 RedLemon[2847:17749] 🔐 KeychainManager: Key pair saved securely
+2026-01-05 12:21:43.835 RedLemon[2847:17749] 💾 KeychainManager: Saving username 'max' to UserDefaults
+2026-01-05 12:21:43.837 RedLemon[2847:17749] ✅ KeychainManager: Username saved successfully
+2026-01-05 12:21:43.891 RedLemon[2847:17749] 🔍 SupabaseClient: Looking up user by username 'lemontom'
+2026-01-05 12:21:43.962 RedLemon[2847:17748] 📡 SupabaseClient: User lookup response received (400 bytes)
+2026-01-05 12:21:43.965 RedLemon[2847:17748] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-05 12:21:43.965 RedLemon[2847:17748] 👤 SupabaseClient: Found user - lemontom (ID: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E)
+2026-01-05 12:21:44.128 RedLemon[2847:17684] 🎉 lemontom is now your friend! (MySpace Tom style)
+2026-01-05 12:21:45.506 RedLemon[2847:17684] ✅ User created securely: max (ID: D8C8B0D4-1E8B-4612-89CD-42610101812E)
+2026-01-05 12:21:55.966 RedLemon[2847:17769] 📡 StreamService: Fetching metadata for tt0413300...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+💰 LicenseManager: Checking for background crypto payments...
+⚠️ LicenseManager: Background payment check failed: httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+💰 LicenseManager: Checking for background crypto payments...
+⚠️ LicenseManager: Background payment check failed: httpError(400, "{\"error\":\"Unauthorized: No Token or User ID provided\"}")
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.075s (RTT: 75ms)
+   Local:  2026-01-05 17:21:38 +0000
+   Server: 2026-01-05 17:21:38 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved private_key credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved public_key credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved user_id credential to cache
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"C0672D7F-4A8D-411D-8114-2F592A0B5C6C","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfleeQ1Ez7dTiTC","phx_ref_prev":"GIfldTx4CmvdTv7N","last_seen":"2026-01-05T17:21:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflfVswIkHkBPaN","last_seen":"2026-01-05T17:21:45.236Z","status":"online","user_id":"D8C8B0D4-1E8B-4612-89CD-42610101812E","username":"max"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User d8c8b0d4-1e8b-4612-89cd-42610101812e came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"3A0CB92C-FB53-423B-BAE2-9C3B767C82E3","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":129971747,"event":"INSERT","filter":"receiver_id=eq.d8c8b0d4-1e8b-4612-89cd-42610101812e","schema":"public","table":"direct_messages"},{"id":64408330,"event":"INSERT","filter":"sender_id=eq.d8c8b0d4-1e8b-4612-89cd-42610101812e","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🚫 Subscription revoked or inactive.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflfoyYKhndTqtI","phx_ref_prev":"GIfleeQ1Ez7dTiTC","last_seen":"2026-01-05T17:21:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfleeQ1Ez7dTiTC","phx_ref_prev":"GIfldTx4CmvdTv7N","last_seen":"2026-01-05T17:21:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflf6qUuk_kBH4G","phx_ref_prev":"GIflfVswIkHkBPaN","last_seen":"2026-01-05T17:21:55.132Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]}},"leaves":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflfVswIkHkBPaN","last_seen":"2026-01-05T17:21:45.236Z","status":"online","user_id":"D8C8B0D4-1E8B-4612-89CD-42610101812E","username":"max"}]}}},"topic":"realtime:global-presence"}
+[2026-01-05T17:21:55Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Spider-Man 3 (Live: true)
+   Event start time: 2026-01-05 16:13:27 +0000
+   Event duration: 8940.0s
+   Current time: 2026-01-05 17:21:55 +0000
+   Is Live: true
+   Is In Lobby: false
+📝 Creating new event room: event_tt0413300
+⚡️ Resolving stream for system event creation...
+[2026-01-05T17:21:55Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Spider-Man 3
+[ INFO ] GET /api/metadata/meta/movie/tt0413300 [request-id: B6DFDFE6-6AEB-48D9-A80D-1EE5BA15BE5D]
+2026-01-05 12:21:56.332 RedLemon[2847:17958] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-05 12:21:56.332 RedLemon[2847:17958] ✅ StreamService: Metadata loaded: Spider-Man 3
+2026-01-05 12:21:56.332 RedLemon[2847:17958] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-05 12:21:56.332 RedLemon[2847:17958] ⚡️ StreamResolver: Resolving streams for tt0413300 (S0E0)
+2026-01-05 12:21:56.333 RedLemon[2847:17958]    📅 Filtering by year: 2007
+2026-01-05 12:21:56.415 RedLemon[2847:17958] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-05 12:21:56.415 RedLemon[2847:17958] 🔍 ProviderManager: Fetching streams for tt0413300...
+2026-01-05 12:21:56.445 RedLemon[2847:17769] ⚠️ DebridSearch: No API key configured, skipping
+2026-01-05 12:21:56.447 RedLemon[2847:17748] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-05 12:21:56.447 RedLemon[2847:17748] 🔗 Torrentio URL: https://torrentio.strem.fun/stream/movie/tt0413300.json
+2026-01-05 12:21:56.447 RedLemon[2847:17748] 🔍 Torrentio: Fetching https://torrentio.strem.fun/stream/movie/tt0413300.json
+2026-01-05 12:21:56.548 RedLemon[2847:17858] 🔍 Zilean: Searching for "Spider-Man 3"
+2026-01-05 12:21:56.679 RedLemon[2847:17958] ❌ Provider comet failed: httpError(statusCode: 418)
+2026-01-05 12:21:57.110 RedLemon[2847:17858] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-05 12:21:57.111 RedLemon[2847:17958] ✅ ProviderManager: Fetched 50 raw, returning 50 unique streams
+2026-01-05 12:21:57.111 RedLemon[2847:17958] 📦 StreamResolver: Received 50 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt0413300]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0413300.json
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt0413300.json
+🔍 Comet: Fetching https://comet.elfhosted.com/stream/movie/tt0413300.json...
+✅ Metadata fetched from Cinemeta for tt0413300: Spider-Man 3 (2007)
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt0413300: Spider-Man 3
+🎯 Target title for matching: Spider-Man 3
+   📅 Year filter (2007): 50 → 49 streams
+   🚫 RESOLVER BLOCKING AV1: Spiderman Legacy Trilogy 1080p AV1 EN/FR/ES OPUS 5.1-UH
+Spider.Man.3.2007.Bluray.1080p.AV1.OPUS.5.1-UH.mkv
+👤 8 💾 7.34 GB ⚙️ ThePirateBay
+🇬🇧 / 🇪🇸 / 🇫🇷
+   🚫 RESOLVER BLOCKING AV1: Spider-Man 3.2007.Open-Matte.1080p.Opus 5.1.AV1.10bit-Zero00
+👤 3 💾 3.47 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER FILTERED AV1: 49 → 47 streams
+   🚫 RESOLVER BLOCKING non-English audio: Homem-Aranha.720p-RICKSZ
+Homem.Aranha.3.2007.720p.BluRay.H264.AC3.Dublado-RICKSZ.mp4
+👤 6 💾 2.09 GB ⚙️ Comando
+🇬🇧 / 🇵🇹 (Audio)
+   🎵 RESOLVER FILTERED audio language: 47 → 46 streams
+   --- Processing Bucket: 2160p (Input: 14) ---
+   ✅ Bucket 2160p Final Count: 14
+   --- Processing Bucket: 1080p (Input: 29) ---
+   ✅ Bucket 1080p Final Count: 29
+   --- Processing Bucket: 720p (Input: 1) ---
+   ✅ Bucket 720p Final Count: 1
+   --- Processing Bucket: 480p (Input: 2) ---
+   ✅ Bucket 480p Final Count: 2
+📦 2160p Primary: Spider-Man 3 2007 2160p BluRay
+👤 82 💾 6.72 GB ⚙️ YTS
+📦 1080p Primary: Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG
+📦 720p Primary: Spider-Man 3 2007 720p BluRay
+👤 8 💾 928.72 MB ⚙️ YTS
+✅ StreamResolver: Quality buckets ready
+   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)
+   🚫 StreamService: Skipping 480p backup streams (Event Mode - Strict 1080p)
+[2026-01-05T17:21:57Z] [INFO] [StreamService.swift:208] 📦 StreamService: Found 11 total streams to try (across all qualities)
+✅ StreamService: Found 7 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 7 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): Spider-Man.3.2007.Mastered.in.4K.1080p.BluRay.AVC.DTS-HD.MA.5.1-FGT
+👤 9 💾 45.02 GB ⚙️ RARBG (45.02 GB)
+📦 StreamService: 6 streams remain after size filter
+🔄 StreamService: Trying stream 1/6: Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG
+🔓 StreamService: Unlocking with infoHash: 9f04de751620...
+[ INFO ] POST /api/streams/unlock [request-id: FEE074AD-FA3D-4029-966B-4C055C3AFB34]
+2026-01-05 12:21:57.371 RedLemon[2847:17769] 🔓 Unlock request: infoHash=9f04de751620..., fileIdx=1
+2026-01-05 12:21:57.373 RedLemon[2847:17769] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: FEE074AD-FA3D-4029-966B-4C055C3AFB34]
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 1/6] Unlock failed for Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 2/6: Spider-Man 3 2007 Open Matte 1080p HULU WEB-DL DDP7 1 H 264-QOQ
+👤 6 💾 7.98 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 4a29509f3a76...
+[ INFO ] POST /api/streams/unlock [request-id: 3770BE92-C460-443A-A2D6-FE0ADB202D7A]
+2026-01-05 12:21:57.396 RedLemon[2847:17958] 🔓 Unlock request: infoHash=4a29509f3a76..., fileIdx=1
+2026-01-05 12:21:57.397 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 3770BE92-C460-443A-A2D6-FE0ADB202D7A]
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 2/6] Unlock failed for Spider-Man 3 2007 Open Matte 1080p HULU WEB-DL DDP7 1 H 264-QOQ
+👤 6 💾 7.98 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 3/6: Spider-Man 3 2007 1080p AMZN WEB-DL DDP5 1 H 264-GPRS
+👤 1 💾 9.93 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 2141fd25336c...
+[ INFO ] POST /api/streams/unlock [request-id: EF331CB7-9A68-4185-8820-EE798ECD1004]
+2026-01-05 12:21:57.405 RedLemon[2847:17958] 🔓 Unlock request: infoHash=2141fd25336c..., fileIdx=0
+2026-01-05 12:21:57.407 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: EF331CB7-9A68-4185-8820-EE798ECD1004]
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 3/6] Unlock failed for Spider-Man 3 2007 1080p AMZN WEB-DL DDP5 1 H 264-GPRS
+👤 1 💾 9.93 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 4/6: Spider-Man 3 (2007) 1080p BrRip x264 - YIFY
+👤 100 💾 2.05 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: fe56bf80229c...
+[ INFO ] POST /api/streams/unlock [request-id: 3FBD4AC0-A939-4DE4-B61C-DB2DDFD97690]
+2026-01-05 12:21:57.413 RedLemon[2847:17748] 🔓 Unlock request: infoHash=fe56bf80229c..., fileIdx=0
+2026-01-05 12:21:57.414 RedLemon[2847:17748] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 3FBD4AC0-A939-4DE4-B61C-DB2DDFD97690]
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 4/6] Unlock failed for Spider-Man 3 (2007) 1080p BrRip x264 - YIFY
+👤 100 💾 2.05 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 5/6: Spider Man 3 (2007)-Tobey Maguire-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 10 💾 2.6 GB ⚙️ 1337x
+🔓 StreamService: Unlocking with infoHash: e66b5eccaa9c...
+[ INFO ] POST /api/streams/unlock [request-id: 3306138F-3E08-40E4-8CFD-CCA7527E5AF7]
+2026-01-05 12:21:57.422 RedLemon[2847:17769] 🔓 Unlock request: infoHash=e66b5eccaa9c..., fileIdx=0
+2026-01-05 12:21:57.424 RedLemon[2847:17769] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 3306138F-3E08-40E4-8CFD-CCA7527E5AF7]
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 5/6] Unlock failed for Spider Man 3 (2007)-Tobey Maguire-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 10 💾 2.6 GB ⚙️ 1337x: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 6/6: Spider.Man.3.2007.Remastered.in.4K.Bluray.1080p.LPCM.DD-5.1.x264
+👤 7 💾 19.25 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 4016fd3e8982...
+[ INFO ] POST /api/streams/unlock [request-id: 39B1DA82-0645-49EB-AEBB-3852DAC447D2]
+2026-01-05 12:21:57.430 RedLemon[2847:17958] 🔓 Unlock request: infoHash=4016fd3e8982..., fileIdx=3
+2026-01-05 12:21:57.432 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 39B1DA82-0645-49EB-AEBB-3852DAC447D2]
+2026-01-05 12:21:57.435 RedLemon[2847:17958] 🎬 SupabaseClient: createRoom called for id: event_tt0413300 - ENTRY
+2026-01-05 12:21:57.438 RedLemon[2847:17958] 🎬 SupabaseClient: Creating room 'event_tt0413300' for host 'RedLemon Events'...
+2026-01-05 12:21:57.446 RedLemon[2847:17958] 🔐 Signed request to /rooms
+2026-01-05 12:21:57.577 RedLemon[2847:17769] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-05 12:21:57.833 RedLemon[2847:17684] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0413300/img
+2026-01-05 12:21:57.835 RedLemon[2847:17684] ⏳ Background art loading...
+2026-01-05 12:21:57.835 RedLemon[2847:17684] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0413300/img
+2026-01-05 12:21:57.835 RedLemon[2847:17684] ⏳ Logo loading...
+2026-01-05 12:21:57.874 RedLemon[2847:17684] ✅ Background art loaded successfully
+2026-01-05 12:21:57.874 RedLemon[2847:17684] ✅ Logo loaded successfully
+2026-01-05 12:21:57.876 RedLemon[2847:17684]    Quality: 1080p
+2026-01-05 12:21:57.876 RedLemon[2847:17684]    Mode: watchParty
+2026-01-05 12:21:57.876 RedLemon[2847:17684] 📡 Fetching metadata for tt0413300...
+2026-01-05 12:21:57.963 RedLemon[2847:17752] ✅ StreamService: Using provided metadata: Spider-Man 3
+2026-01-05 12:21:57.963 RedLemon[2847:17752] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-05 12:21:57.963 RedLemon[2847:17752] ⚡️ StreamResolver: Resolving streams for tt0413300 (S0E0)
+2026-01-05 12:21:57.963 RedLemon[2847:17752]    📅 Filtering by year: 2007
+2026-01-05 12:21:58.029 RedLemon[2847:17748] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-05 12:21:58.029 RedLemon[2847:17748] 🔍 ProviderManager: Fetching streams for tt0413300...
+2026-01-05 12:21:58.030 RedLemon[2847:17769] 🔍 Zilean: Searching for "Spider-Man 3"
+2026-01-05 12:21:58.033 RedLemon[2847:17748] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-05 12:21:58.037 RedLemon[2847:17752] ⚠️ DebridSearch: No API key configured, skipping
+2026-01-05 12:21:58.041 RedLemon[2847:17958] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-05 12:21:58.041 RedLemon[2847:17958] 🔗 Torrentio URL: https://torrentio.strem.fun/stream/movie/tt0413300.json
+2026-01-05 12:21:58.041 RedLemon[2847:17958] 🔍 Torrentio: Fetching https://torrentio.strem.fun/stream/movie/tt0413300.json
+2026-01-05 12:21:58.170 RedLemon[2847:17752] ❌ Provider comet failed: httpError(statusCode: 418)
+2026-01-05 12:21:58.170 RedLemon[2847:17752] ✅ ProviderManager: Fetched 50 raw, returning 50 unique streams
+2026-01-05 12:21:58.170 RedLemon[2847:17752] 📦 StreamResolver: Received 50 raw streams, bucketing...
+[2026-01-05T17:21:57Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 6/6] Unlock failed for Spider.Man.3.2007.Remastered.in.4K.Bluray.1080p.LPCM.DD-5.1.x264
+👤 7 💾 19.25 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+⚠️ Failed to resolve seed stream for system event: networkError(Error Domain=UnlockError Code=400 "HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}" UserInfo={NSLocalizedDescription=HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}})
+🎬 Live event - calculating position: 4110.816325306892 seconds
+   Event start time: 2026-01-05 16:13:27 +0000
+   Current time: 2026-01-05 17:21:57 +0000
+   Room createdAt: 2026-01-05 16:13:27 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 4110.816325306892
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Spider-Man 3
+✅ Cache HIT: Metadata[meta_movie_tt0413300]
+[2026-01-05T17:21:57Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Spider-Man 3
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0413300.json
+✅ Metadata cache hit for tt0413300: Spider-Man 3
+🔍 Comet: Fetching https://comet.elfhosted.com/stream/movie/tt0413300.json...
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt0413300: Spider-Man 3
+🎯 Target title for matching: Spider-Man 3
+   📅 Year filter (2007): 50 → 49 streams
+   🚫 RESOLVER BLOCKING AV1: Spiderman Legacy Trilogy 1080p AV1 EN/FR/ES OPUS 5.1-UH
+Spider.Man.3.2007.Bluray.1080p.AV1.OPUS.5.1-UH.mkv
+👤 8 💾 7.34 GB ⚙️ ThePirateBay
+🇬🇧 / 🇪🇸 / 🇫🇷
+   🚫 RESOLVER BLOCKING AV1: Spider-Man 3.2007.Open-Matte.1080p.Opus 5.1.AV1.10bit-Zero00
+👤 3 💾 3.47 GB ⚙️ TorrentGalaxy
+   🚫 RESOLVER FILTERED AV1: 49 → 47 streams
+   🚫 RESOLVER BLOCKING non-English audio: Homem-Aranha.720p-RICKSZ
+Homem.Aranha.3.2007.720p.BluRay.H264.AC3.Dublado-RICKSZ.mp4
+👤 6 💾 2.09 GB ⚙️ Comando
+🇬🇧 / 🇵🇹 (Audio)
+   🎵 RESOLVER FILTERED audio language: 47 → 46 streams
+   --- Processing Bucket: 2160p (Input: 14) ---
+   ✅ Bucket 2160p Final Count: 14
+   --- Processing Bucket: 1080p (Input: 29) ---
+   ✅ Bucket 1080p Final Count: 29
+   --- Processing Bucket: 720p (Input: 1) ---
+   ✅ Bucket 720p Final Count: 1
+   --- Processing Bucket: 480p (Input: 2) ---
+   ✅ Bucket 480p Final Count: 2
+📦 2160p Primary: Spider-Man 3 2007 2160p BluRay
+👤 82 💾 6.72 GB ⚙️ YTS
+📦 1080p Primary: Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG
+📦 720p Primary: Spider-Man 3 2007 720p BluRay
+👤 8 💾 928.72 MB ⚙️ YTS
+✅ StreamResolver: Quality buckets ready
+   ➕ Added 1 720p streams as backup
+   ➕ Added 2 480p streams as backup
+[2026-01-05T17:21:58Z] [INFO] [StreamService.swift:208] 📦 StreamService: Found 14 total streams to try (across all qualities)
+✅ StreamService: Found 10 H.264 streams (Tier 1)
+✅ StreamService: Found 9 'Clean' English streams. Deprioritizing 1 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): Spider-Man.3.2007.Mastered.in.4K.1080p.BluRay.AVC.DTS-HD.MA.5.1-FGT
+👤 9 💾 45.02 GB ⚙️ RARBG (45.02 GB)
+📦 StreamService: 8 streams remain after size filter
+🔄 StreamService: Trying stream 1/8: Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG
+🔓 StreamService: Unlocking with infoHash: 9f04de751620...
+[ INFO ] POST /api/streams/unlock [request-id: 0F9F0EEF-55F5-4342-A6F0-136EFD6C5BF5]
+2026-01-05 12:21:58.422 RedLemon[2847:17769] 🔓 Unlock request: infoHash=9f04de751620..., fileIdx=1
+2026-01-05 12:21:58.423 RedLemon[2847:17769] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 0F9F0EEF-55F5-4342-A6F0-136EFD6C5BF5]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 1/8] Unlock failed for Spider-Man.3.2007.1080p.BluRay.x264.TrueHD.7.1.Atmos-SWTYBLZ
+👤 11 💾 14.3 GB ⚙️ RARBG: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 2/8: Spider-Man 3 2007 Open Matte 1080p HULU WEB-DL DDP7 1 H 264-QOQ
+👤 6 💾 7.98 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 4a29509f3a76...
+[ INFO ] POST /api/streams/unlock [request-id: ECD6F518-C2ED-4AA4-B1E0-59CA9FE07AA1]
+2026-01-05 12:21:58.435 RedLemon[2847:17958] 🔓 Unlock request: infoHash=4a29509f3a76..., fileIdx=1
+2026-01-05 12:21:58.437 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: ECD6F518-C2ED-4AA4-B1E0-59CA9FE07AA1]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 2/8] Unlock failed for Spider-Man 3 2007 Open Matte 1080p HULU WEB-DL DDP7 1 H 264-QOQ
+👤 6 💾 7.98 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 3/8: Spider-Man 3 2007 1080p AMZN WEB-DL DDP5 1 H 264-GPRS
+👤 1 💾 9.93 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 2141fd25336c...
+[ INFO ] POST /api/streams/unlock [request-id: E3CD3709-2AA7-4C2E-A751-FE1FE4F1AC95]
+2026-01-05 12:21:58.443 RedLemon[2847:17958] 🔓 Unlock request: infoHash=2141fd25336c..., fileIdx=0
+2026-01-05 12:21:58.445 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: E3CD3709-2AA7-4C2E-A751-FE1FE4F1AC95]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 3/8] Unlock failed for Spider-Man 3 2007 1080p AMZN WEB-DL DDP5 1 H 264-GPRS
+👤 1 💾 9.93 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 4/8: Spider-Man 3 (2007) 1080p BrRip x264 - YIFY
+👤 100 💾 2.05 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: fe56bf80229c...
+[ INFO ] POST /api/streams/unlock [request-id: C87E0149-4937-4F16-9155-2AA6CE200691]
+2026-01-05 12:21:58.452 RedLemon[2847:17995] 🔓 Unlock request: infoHash=fe56bf80229c..., fileIdx=0
+2026-01-05 12:21:58.455 RedLemon[2847:17995] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: C87E0149-4937-4F16-9155-2AA6CE200691]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 4/8] Unlock failed for Spider-Man 3 (2007) 1080p BrRip x264 - YIFY
+👤 100 💾 2.05 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 5/8: Spider Man 3 (2007)-Tobey Maguire-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 10 💾 2.6 GB ⚙️ 1337x
+🔓 StreamService: Unlocking with infoHash: e66b5eccaa9c...
+[ INFO ] POST /api/streams/unlock [request-id: C1467B01-687B-45F6-8407-3275CD8A76C3]
+2026-01-05 12:21:58.463 RedLemon[2847:17752] 🔓 Unlock request: infoHash=e66b5eccaa9c..., fileIdx=0
+2026-01-05 12:21:58.464 RedLemon[2847:17752] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: C1467B01-687B-45F6-8407-3275CD8A76C3]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 5/8] Unlock failed for Spider Man 3 (2007)-Tobey Maguire-1080p-H264-AC 3 (DolbyDigital-5.1) & nickarad
+👤 10 💾 2.6 GB ⚙️ 1337x: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 6/8: Spider.Man.3.2007.Remastered.in.4K.Bluray.1080p.LPCM.DD-5.1.x264
+👤 7 💾 19.25 GB ⚙️ ThePirateBay
+🔓 StreamService: Unlocking with infoHash: 4016fd3e8982...
+[ INFO ] POST /api/streams/unlock [request-id: 5E020054-90EB-4204-9DEE-B00E7464802A]
+2026-01-05 12:21:58.473 RedLemon[2847:17958] 🔓 Unlock request: infoHash=4016fd3e8982..., fileIdx=3
+2026-01-05 12:21:58.474 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 5E020054-90EB-4204-9DEE-B00E7464802A]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 6/8] Unlock failed for Spider.Man.3.2007.Remastered.in.4K.Bluray.1080p.LPCM.DD-5.1.x264
+👤 7 💾 19.25 GB ⚙️ ThePirateBay: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 7/8: Spider-Man 3 2007 720p BluRay
+👤 8 💾 928.72 MB ⚙️ YTS
+🔓 StreamService: Unlocking with infoHash: d2ef4ed704f9...
+[ INFO ] POST /api/streams/unlock [request-id: C627F412-6610-46C8-81B9-2A4AC0440433]
+2026-01-05 12:21:58.480 RedLemon[2847:17958] 🔓 Unlock request: infoHash=d2ef4ed704f9..., fileIdx=0
+2026-01-05 12:21:58.481 RedLemon[2847:17958] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: C627F412-6610-46C8-81B9-2A4AC0440433]
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 7/8] Unlock failed for Spider-Man 3 2007 720p BluRay
+👤 8 💾 928.72 MB ⚙️ YTS: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+🔄 StreamService: Trying stream 8/8: Человек-Паук: Трилогия / Spider-Man: Trilogy (2002-2007) BDRip-AVC от DrVampir | D A
+Человек-паук 3 - Враг в отражении [Spider-Man 3, 2007].mkv
+👤 1 💾 2.18 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺
+🔓 StreamService: Unlocking with infoHash: 882e865cd6bf...
+[ INFO ] POST /api/streams/unlock [request-id: 906A70E2-6DC9-4207-8958-1B08AF8658C1]
+2026-01-05 12:21:58.490 RedLemon[2847:17995] 🔓 Unlock request: infoHash=882e865cd6bf..., fileIdx=1
+2026-01-05 12:21:58.491 RedLemon[2847:17995] ❌ No token for service: realdebrid
+[ WARNING ] Abort.400: No token stored for service: realdebrid [request-id: 906A70E2-6DC9-4207-8958-1B08AF8658C1]
+2026-01-05 12:22:20.926 RedLemon[2847:17684] ✅ Metadata loaded successfully
+2026-01-05 12:22:20.926 RedLemon[2847:17684]    Type: movie
+2026-01-05 12:22:20.926 RedLemon[2847:17684]    Background URL: https://images.metahub.space/background/medium/tt0413300/img
+2026-01-05 12:22:20.926 RedLemon[2847:17684]    Poster URL: https://images.metahub.space/poster/small/tt0413300/img
+2026-01-05 12:22:20.926 RedLemon[2847:17684]    Videos array: 0 episodes
+2026-01-05 12:22:37.024 RedLemon[2847:17995] 💾 KeychainManager: Saving username 'ursinho' to UserDefaults
+2026-01-05 12:22:37.025 RedLemon[2847:17995] ✅ KeychainManager: Username saved successfully
+[2026-01-05T17:21:58Z] [WARNING] [StreamService.swift:494] ❌ StreamService: [Attempt 8/8] Unlock failed for Человек-Паук: Трилогия / Spider-Man: Trilogy (2002-2007) BDRip-AVC от DrVampir | D A
+Человек-паук 3 - Враг в отражении [Spider-Man 3, 2007].mkv
+👤 1 💾 2.18 GB ⚙️ Rutor
+🇬🇧 / 🇷🇺: Network error: HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}
+❌ Playback error: networkError(Error Domain=UnlockError Code=400 "HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}" UserInfo={NSLocalizedDescription=HTTP 400: {"error":true,"reason":"No token stored for service: realdebrid"}})
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflggNjoeLkBEsG","phx_ref_prev":"GIflf6qUuk_kBH4G","last_seen":"2026-01-05T17:22:05.239Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]}},"leaves":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflf6qUuk_kBH4G","phx_ref_prev":"GIflfVswIkHkBPaN","last_seen":"2026-01-05T17:21:55.132Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflgz8VpOfdTpdI","phx_ref_prev":"GIflfoyYKhndTqtI","last_seen":"2026-01-05T17:22:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflfoyYKhndTqtI","phx_ref_prev":"GIfleeQ1Ez7dTiTC","last_seen":"2026-01-05T17:21:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🔍 Loading metadata for: Spider-Man 3 (type: movie, id: tt0413300)
+✅ Cache HIT: Metadata[meta_movie_tt0413300]
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflhqvF6HXkBNYF","phx_ref_prev":"GIflggNjoeLkBEsG","last_seen":"2026-01-05T17:22:25.240Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]}},"leaves":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflggNjoeLkBEsG","phx_ref_prev":"GIflf6qUuk_kBH4G","last_seen":"2026-01-05T17:22:05.239Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]}}},"topic":"realtime:global-presence"}
+🚫 Subscription revoked or inactive.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflh91uM57dToAF","phx_ref_prev":"GIflgz8VpOfdTpdI","last_seen":"2026-01-05T17:22:30.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflgz8VpOfdTpdI","phx_ref_prev":"GIflfoyYKhndTqtI","last_seen":"2026-01-05T17:22:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved user_id credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved realdebrid credential to cache
+⚠️ iCloud Keychain save failed, trying local: saveFailed(status: -34018)
+✅ Saved subdl credential to cache
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://nhvsojszwfvcinkyvzmf.supabase.co/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"ED76F5B5-1413-4138-AB13-5F471E48A2EC","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"027e8ea4-ea5b-11f0-b248-0a58a9feac02":{"metas":[{"phx_ref":"GIflhqvF6HXkBNYF","phx_ref_prev":"GIflggNjoeLkBEsG","last_seen":"2026-01-05T17:22:25.240Z","status":"Browsing Events","user_id":"d8c8b0d4-1e8b-4612-89cd-42610101812e","username":"max"}]},"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflh91uM57dToAF","phx_ref_prev":"GIflgz8VpOfdTpdI","last_seen":"2026-01-05T17:22:30.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:38.734Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"B3DEF986-13EE-4B44-B695-976870BC1921","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 6 items to cloud...
+🔄 SocialService: Syncing 6 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:38.734Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: D08DC7F8-8319-4361-8F3C-D622B9457703]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📡 SocialService: Updated status - Browsing: 
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfliwbHofHdTuKL","phx_ref_prev":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:43.942Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:38.734Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31844586
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Sisu: Road to Revenge
+🔍 [DEBUG] Successfully created MediaItem: Sisu: Road to Revenge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1630029
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: The Way of Water
+🔍 [DEBUG] Successfully created MediaItem: Avatar: The Way of Water
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+✅ Loaded 15 movies
+🧹 Deduplication: 6 → 6 items
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29268110/img (15710 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0480687/img (34336 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt15474916/img (21836 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26581740/img (17276 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0373074/img (31751 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (38642 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (34560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (61009 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (28972 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt4712810/img (37396 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfliwbHofHdTuKL","phx_ref_prev":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:43.942Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:38.734Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301999989/s332/img (65827 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335064153/s332/img (54685 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332277457/s332/img (66967 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335086284/s332/img (42569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334012283/s332/img (39979 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🗑️ Cache evicted 10 items
+�2026-01-05 12:22:55.719 RedLemon[2847:18383] 📡 StreamService: Fetching metadata for tt0413300...
+2026-01-05 12:22:55.719 RedLemon[2847:18383] ✅ StreamService: Metadata loaded: Spider-Man 3
+2026-01-05 12:22:55.719 RedLemon[2847:18383] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-05 12:22:55.720 RedLemon[2847:18383] ⚡️ StreamResolver: Resolving streams for tt0413300 (S0E0)
+2026-01-05 12:22:55.720 RedLemon[2847:18383]    📅 Filtering by year: 2007
+2026-01-05 12:22:55.826 RedLemon[2847:17995] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-05 12:22:55.826 RedLemon[2847:17995] 🔍 ProviderManager: Fetching streams for tt0413300...
+2026-01-05 12:22:55.826 RedLemon[2847:17995] ✨ Torrentio: Using Auto-Generated Config (realdebrid/KEY)
+2026-01-05 12:22:55.826 RedLemon[2847:18383] 🔍 Zilean: Searching for "Spider-Man 3"
+2026-01-05 12:22:55.826 RedLemon[2847:17995] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-05 12:22:55.826 RedLemon[2847:17995] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0413300.json
+2026-01-05 12:22:55.827 RedLemon[2847:17769] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-05 12:22:55.827 RedLemon[2847:17995] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt0413300.json
+2026-01-05 12:22:55.827 RedLemon[2847:17769] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt0413300.json
+2026-01-05 12:22:55.827 RedLemon[2847:17769] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt0413300.json
+2026-01-05 12:22:55.832 RedLemon[2847:17995] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-05 12:22:56.046 RedLemon[2847:18382] ❌ Provider torrentio failed: httpError(statusCode: 404)
+2026-01-05 12:22:58.713 RedLemon[2847:17769] ✅ DebridSearch: Parsed 0 streams
+2026-01-05 12:22:58.714 RedLemon[2847:17769] ✅ ProviderManager: Fetched 40 raw, returning 40 unique streams
+2026-01-05 12:22:58.714 RedLemon[2847:17769] 📦 StreamResolver: Received 40 raw streams, bucketing...
+�️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334757007/s332/img (41483 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/173938174/s332/img (31756 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334037963/s332/img (44500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330575949/s332/img (33224 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/87608067/s332/img (61832 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/294757469/s332/img (59978 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/250278441/s332/img (40293 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/338847390/s332/img (46101 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332101041/s332/img (37735 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336611434/s332/img (44231 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336393313/s332/img (35742 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/323675146/s332/img (52884 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/323675146/s332/img (52884 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (24381 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (16512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (27701 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (34560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎉 Subscription updated! Expires: 2026-01-18 22:26:33 +0000
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfljITEeovdTqJD","phx_ref_prev":"GIflh91uM57dToAF","last_seen":"2026-01-05T17:22:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflh91uM57dToAF","phx_ref_prev":"GIflgz8VpOfdTpdI","last_seen":"2026-01-05T17:22:30.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfljITEeovdTqJD","phx_ref_prev":"GIflh91uM57dToAF","last_seen":"2026-01-05T17:22:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflh91uM57dToAF","phx_ref_prev":"GIflgz8VpOfdTpdI","last_seen":"2026-01-05T17:22:30.369Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📅 EventsView appeared
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljPi8iM7dTnPJ","phx_ref_prev":"GIfliwbHofHdTuKL","last_seen":"2026-01-05T17:22:52.297Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfliwbHofHdTuKL","phx_ref_prev":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:43.942Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljPi8iM7dTnPJ","phx_ref_prev":"GIfliwbHofHdTuKL","last_seen":"2026-01-05T17:22:52.297Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfliwbHofHdTuKL","phx_ref_prev":"GIflidCW3JTdTqRP","last_seen":"2026-01-05T17:22:43.942Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-05T17:22:55Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Spider-Man 3 (Live: true)
+   Event start time: 2026-01-05 16:13:27 +0000
+   Event duration: 8940.0s
+   Current time: 2026-01-05 17:22:55 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0413300
+⚠️ Room exists but has no stream_hash - repairing...
+[2026-01-05T17:22:55Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Spider-Man 3
+✅ Cache HIT: Metadata[meta_movie_tt0413300]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt0413300.json
+✅ Metadata cache hit for tt0413300: Spider-Man 3
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+⚠️ MediaFusion: HTTP 418
+✅ Comet: Got 40 streams
+🔍 Comet: Parsing 40 streams...
+✅ Comet: Parsed 40 valid streams
+✅ Metadata cache hit for tt0413300: Spider-Man 3
+🎯 Target title for matching: Spider-Man 3
+   📅 Year filter (2007): 40 → 0 streams
+   ⚠️ Year filter too strict! Restoring 40 streams to attempt title matching.
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0413300 (movie)
+   ℹ️ Fallback Name: Spider-Man 3 (2007)
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljnhh7xTdTj7D","phx_ref_prev":"GIfljPi8iM7dTnPJ","last_seen":"2026-01-05T17:22:58.736Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljPi8iM7dTnPJ","phx_ref_prev":"GIfliwbHofHdTuKL","last_seen":"2026-01-05T17:22:52.297Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+⚠️ SubDL API returned empty subtitles list
+⚠️ Testing API-provided fallback for: Spider-Man 3
+⚠️ Retrying with TMDB ID: 559
+✅ Found 10 subtitles from SubDL (Final)
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Spider-Man.3.2007.REPACK.UHD.B...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet unknown...': Spider.Man.3.2007.1080p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet unknown...': Spider.Man.3.2007.1080p.BluRay...
+   --- Processing Bucket: 2160p (Input: 18) ---
+   ✅ Bucket 2160p Final Count: 18
+   --- Processing Bucket: 1080p (Input: 20) ---
+   ✅ Bucket 1080p Final Count: 20
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 2) ---
+   ✅ Bucket 480p Final Count: 2
+📦 2160p Primary: [RD⚡] Comet 2160p
+📦 1080p Primary: [RD⚡] Comet 1080p
+✅ StreamResolver: Quality buckets ready
+   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)
+   🚫 StreamService: Skipping 480p backup streams (Event Mode - Strict 1080p)
+[2026-01-05T17:22:59Z] [INFO] [StreamService.swift:208] 📦 StreamService: Found 11 total streams to try (across all qualities)
+✅ StreamService: Found 11 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 11 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (36.10 GB)
+⚠️ Str2026-01-05 12:22:59.596 RedLemon[2847:17996] 📥 StreamService: Pre-downloading 5 (capped from 10) subtitles for direct stream...
+2026-01-05 12:22:59.596 RedLemon[2847:17996] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-05 12:22:59.596 RedLemon[2847:18383] 🔍 DEBUG: Processing subtitle URL: /subtitle/3328321-3154938.zip
+2026-01-05 12:22:59.596 RedLemon[2847:17769] 🔍 DEBUG: Processing subtitle URL: /subtitle/992901-2627859.zip
+2026-01-05 12:22:59.596 RedLemon[2847:18382] 🔍 DEBUG: Processing subtitle URL: /subtitle/3359791-2917332.zip
+2026-01-05 12:22:59.596 RedLemon[2847:18383] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-05 12:22:59.596 RedLemon[2847:17769] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-05 12:22:59.596 RedLemon[2847:18382] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-05 12:22:59.597 RedLemon[2847:18382] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzNTk3OTEtMjkxNzMzMi56aXA=?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:22:59.597 RedLemon[2847:17769] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzk5MjkwMS0yNjI3ODU5LnppcA==?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:22:59.597 RedLemon[2847:18383] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzMjgzMjEtMzE1NDkzOC56aXA=?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:22:59.597 RedLemon[2847:18382] 🔍 DEBUG: Processing subtitle URL: /subtitle/3023426-3027313.zip
+2026-01-05 12:22:59.597 RedLemon[2847:18383] 🔍 DEBUG: Processing subtitle URL: /subtitle/992900-2660631.zip
+2026-01-05 12:22:59.597 RedLemon[2847:18382] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-05 12:22:59.597 RedLemon[2847:18383] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-05 12:22:59.597 RedLemon[2847:18382] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjM0MjYtMzAyNzMxMy56aXA=?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:22:59.597 RedLemon[2847:18383] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzk5MjkwMC0yNjYwNjMxLnppcA==?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:22:59.733 RedLemon[2847:17995] ✅ Persisted stream selection to room event_tt0413300
+2026-01-05 12:23:00.044 RedLemon[2847:17684] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0413300/img
+2026-01-05 12:23:00.044 RedLemon[2847:17684] ⏳ Background art loading...
+2026-01-05 12:23:00.044 RedLemon[2847:17684] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0413300/img
+2026-01-05 12:23:00.044 RedLemon[2847:17684] ⏳ Logo loading...
+2026-01-05 12:23:00.077 RedLemon[2847:17684]    Quality: 1080p
+2026-01-05 12:23:00.077 RedLemon[2847:17684]    Mode: watchParty
+2026-01-05 12:23:00.077 RedLemon[2847:17684] 📡 Fetching metadata for tt0413300...
+2026-01-05 12:23:00.117 RedLemon[2847:17684] ✅ Background art loaded successfully
+2026-01-05 12:23:00.117 RedLemon[2847:17684] ✅ Logo loaded successfully
+2026-01-05 12:23:00.119 RedLemon[2847:17684] 🎬 GUEST: Using host's stream selection (skipping resolution)
+eamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (27.10 GB)
+📦 StreamService: 9 streams remain after size filter
+🔄 StreamService: Trying stream 1/9: [RD⚡] Comet 1080p
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: [RD⚡] Comet 1080p
+📊 Stream Size: 4.40 GB
+📦 StreamService: Returning 8 candidate streams for fallback
+✅ Room repaired with stream_hash: nil
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljnhh7xTdTj7D","phx_ref_prev":"GIfljPi8iM7dTnPJ","last_seen":"2026-01-05T17:22:58.736Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljPi8iM7dTnPJ","phx_ref_prev":"GIfliwbHofHdTuKL","last_seen":"2026-01-05T17:22:52.297Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🎬 Live event - calculating position: 4173.022564291954 seconds
+   Event start time: 2026-01-05 16:13:27 +0000
+   Current time: 2026-01-05 17:23:00 +0000
+   Room createdAt: 2026-01-05 16:13:27 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 4173.022564291954
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Spider-Man 3
+✅ Cache HIT: Metadata[meta_movie_tt0413300]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: FCBD4F6C-4511-420F-A980-445791CED22E]
+2026-01-05 12:23:00.927 RedLemon[2847:17684] ✅ GUEST: Found 10 subtitles
+2026-01-05 12:23:00.938 RedLemon[2847:17684] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRl, subtitles: 10
+2026-01-05 12:23:01.018 RedLemon[2847:17684] ✅ Stream ready, starting playback...
+2026-01-05 12:23:01.018 RedLemon[2847:17684] 🖥️ WindowManager: enterFullscreen() called
+2026-01-05 12:23:01.018 RedLemon[2847:17684]    Window: <SwiftUI.SwiftUIWindow: 0x7fe2408ea5f0>
+2026-01-05 12:23:01.018 RedLemon[2847:17684]    Is fullscreen: 0
+2026-01-05 12:23:01.019 RedLemon[2847:17684]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-05 12:23:01.159 RedLemon[2847:17684] 🖼️ Setting up MPV with native macOS video output...
+2026-01-05 12:23:01.172 RedLemon[2847:17684] ✅ MPV initialized with native GPU rendering
+2026-01-05 12:23:01.188 RedLemon[2847:17684] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-05 12:23:01.188 RedLemon[2847:17684] 🎉 Starting watch party sync - Room: event_tt0413300, Host: NO
+2026-01-05 12:23:01.188 RedLemon[2847:17684] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-05 12:23:01.266 RedLemon[2847:17684] 🔄 Starting chat polling for room: event_tt0413300
+2026-01-05 12:23:01.266 RedLemon[2847:17684] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-05 12:23:01.266 RedLemon[2847:17684] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-05 12:23:01.266 RedLemon[2847:17684] 🎬🎬🎬 Subtitles: 10
+2026-01-05 12:23:01.267 RedLemon[2847:17684] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Spider-Man 3
+2026-01-05 12:23:01.267 RedLemon[2847:17684] 🎬🎬🎬 streamURL: https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRl
+2026-01-05 12:23:01.267 RedLemon[2847:17684] 🎬🎬🎬 subtitles: 10
+2026-01-05 12:23:01.267 RedLemon[2847:17684] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-05 12:23:01.272 RedLemon[2847:17995] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-05 12:23:01.272 RedLemon[2847:17995] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzk5MjkwMS0yNjI3ODU5LnppcA==?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+2026-01-05 12:23:01.272 RedLemon[2847:18383] 🎬 MPV: Current video filename set to: Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+2026-01-05 12:23:01.272 RedLemon[2847:18383] 🎬 MPV loadVideo called with URL: https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy, autoplay: false, expectedSubs: 3
+2026-01-05 12:23:01.272 RedLemon[2847:18383] 🎬 MPV executing: loadfile "https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJyaWRBcGlLZXkiOiJLNjdKVjJWNEZUVUE3UllONlQzNEJGSVVCUlVaRVJCTzQ1QTZVTDNPN1RFNVpIRkRRUVNBIiwibGFuZ3VhZ2VzIjp7ImV4Y2x1ZGUiOltdLCJwcmVmZXJyZWQiOlsiZW4iXX0sIm9wdGlvbnMiOnsicmVtb3ZlX3Vua25vd25fbGFuZ3VhZ2VzIjpmYWxzZSwiYWxsb3dfZW5nbGlzaF9pbl9sYW5ndWFnZXMiOmZhbHNlLCJyZW1vdmVfcmFua3NfdW5kZXIiOi0xMDAwMDAwMDAwMH0sImNhY2hlZE9ubHkiOnRydWUsInJlc29sdXRpb25zIjp7fSwiZGVicmlkU3RyZWFtUHJveHlQYXNzd29yZCI6IiIsIm1heFJlc3VsdHNQZXJSZXNvbHV0aW9uIjowLCJyZXN1bHRGb3JtYXQiOlsiYWxsIl0sIm1heFNpemUiOjB9/playback/1cd7923cbabbfade5bd387ab9bea14def48f7351/1/n/n/Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv?name=Spider-Man%203"
+2026-01-05 12:23:01.273 RedLemon[2847:18383] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+🔍 Searching SubDL: tt0413300 (movie)
+   ℹ️ Fallback Name: Spider-Man 3 (2007)
+⚠️ SubDL API returned empty subtitles list
+⚠️ Testing API-provided fallback for: Spider-Man 3
+⚠️ Retrying with TMDB ID: 559
+✅ Found 10 subtitles from SubDL (Final)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRl
+   Display Title: Spider-Man 3
+   Subtitle URLs: 10
+      [0] Spider.Man.3.2007.1080p.BluRay.x264.YIFY
+      [1] Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR
+      [2] Spider-Man3(2007)720pBluRay-[LRXSTORE]
+      [3] Spiderman.3.2007.720p.BluRay.H264.AAC-RARBG
+      [4] Spider-Man.3.2007.WEB-DL.TUBI
+      [5] Spider-Man.3.2007.WEB-DL.DSNP
+      [6] Spider-Man.3.2007.ALL.BluRay
+      [7] Spider-Man.3.2007.PROPER.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT_eng
+      [8] Spider-Man.3.2007.Editors.Cut.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1
+      [9] Spider-Man.3.2007.HYBRiD.2160p.BluRay.REMUX.HEVC.DV.TrueHD.Atmos.7.1-Flights
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0413300, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0413300
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0413300
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Spider-Man 3
+   IMDB: tt0413300
+   URL: https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRl...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt0413300 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0413300]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzk5MjkwMS0yNjI3ODU5LnppcA== [request-id: 3AB67DE9-839E-478F-B44E-2CBCCB0F6E90]
+2026-01-05 12:23:01.760 RedLemon[2847:17684] 👥 MPVPlayer: Merged participants list via polling (Count: 2)
+2026-01-05 12:23:01.903 RedLemon[2847:18104] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0A99341E-D1DF-4474-B249-8E504B2C9003.vtt
+2026-01-05 12:23:01.903 RedLemon[2847:18104] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0A99341E-D1DF-4474-B249-8E5
+2026-01-05 12:23:01.928 RedLemon[2847:18104] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 12:23:01.928 RedLemon[2847:18104] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMzNTk3OTEtMjkxNzMzMi56aXA=?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+📄 Subtitle request: L3N1YnRpdGxlLzk5Mjkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/992901-2627859.zip
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljw-0O3XdTlPC","phx_ref_prev":"GIfljnhh7xTdTj7D","last_seen":"2026-01-05T17:23:01.272Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljnhh7xTdTj7D","phx_ref_prev":"GIfljPi8iM7dTnPJ","last_seen":"2026-01-05T17:22:58.736Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"C11949E4-9E4F-420A-900E-135FAE15A8BD","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0413300"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt0413300"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0413300"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2fd20c50-ea5b-11f0-bfa7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljw_LDo6hf9FO","is_host":false,"joined_at":1767633781.264542,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0413300"}
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+✅ Got background: https://images.metahub.space/background/medium/tt0413300/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0413300/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0413300/img...
+📡 SocialService: Updated status - online: Spider-Man 3
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIfljw_LDo6hf9FO)
+⏰ AppState: Next schedule update set for Event End: 2026-01-05 18:42:27 +0000
+⏰ AppState: Scheduling update in 4766 seconds
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 32035 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Spider-Man 3 (2007) [1080p BluRay x265].srt
+📦 Extracting specific file: Spider-Man 3 (2007) \[1080p BluRay x265\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMzNTk3OTEtMjkxNzMzMi56aXA= [request-id: 60573D65-8BE5-48F5-8881-AC3FAF2E7629]
+2026-01-05 12:23:02.455 RedLemon[2847:18553] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4980ADA1-9117-4ACB-BC39-BF87C6C946EB.vtt
+2026-01-05 12:23:02.455 RedLemon[2847:18553] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_4980ADA1-9117-4ACB-BC39-BF8
+2026-01-05 12:23:02.462 RedLemon[2847:18553] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 12:23:02.462 RedLemon[2847:18553] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMwMjM0MjYtMzAyNzMxMy56aXA=?token=AFE02EFF-2E20-4B1A-8320-484A5083F510
+📄 Subtitle request: L3N1YnRpdGxlLzMzNTk3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3359791-2917332.zip
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Download complete: 31747 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR.srt
+📦 Extracting specific file: Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMwMjM0MjYtMzAyNzMxMy56aXA= [request-id: A9189DC9-BD1A-4E21-91B9-15D73B5C0EFE]
+2026-01-05 12:23:03.041 RedLemon[2847:18104] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_37C7211E-6E66-442C-9FEF-273BC1C7BE8D.vtt
+2026-01-05 12:23:03.041 RedLemon[2847:18104] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_37C7211E-6E66-442C-9FEF-273
+2026-01-05 12:23:03.049 RedLemon[2847:18104] ✅ External subtitle added to track list (not auto-selected)
+2026-01-05 12:23:03.050 RedLemon[2847:18104] 🔍 MPV track-list/count: 3
+2026-01-05 12:23:03.050 RedLemon[2847:18104] 🔍 Track 0 type: sub
+2026-01-05 12:23:03.050 RedLemon[2847:18104] ✅ Found subtitle track: ID=1, lang=en, title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, external=1
+2026-01-05 12:23:03.050 RedLemon[2847:18104] 🔍 Track 1 type: sub
+2026-01-05 12:23:03.050 RedLemon[2847:18104] ✅ Found subtitle track: ID=2, lang=en, title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, external=1
+2026-01-05 12:23:03.051 RedLemon[2847:18104] 🔍 Track 2 type: sub
+2026-01-05 12:23:03.051 RedLemon[2847:18104] ✅ Found subtitle track: ID=3, lang=en, title=Spider-Man3(2007)720pBluRay-[LRXSTORE], external=1
+2026-01-05 12:23:03.051 RedLemon[2847:18104] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-05 12:23:03.051 RedLemon[2847:18104]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 12:23:03.051 RedLemon[2847:18104]    Start[1]: ID=1, Title='Spider.Man.3.2007.1080p.BluRay.x264.YIFY', Lang='en', Ext=1
+2026-01-05 12:23:03.051 RedLemon[2847:18104]    Start[2]: ID=2, Title='Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-05 12:23:03.051 RedLemon[2847:18104]    Start[3]: ID=3, Title='Spider-Man3(2007)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-05 12:23:03.052 RedLemon[2847:18104] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-05 12:23:03.052 RedLemon[2847:18104]    Track: ID=0, Title=Off, External=0
+2026-01-05 12:23:03.052 RedLemon[2847:18104]    Track: ID=1, Title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, External=1
+2026-01-05 12:23:03.052 RedLemon[2847:18104]    Track: ID=2, Title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, External=1
+2026-01-05 12:23:03.052 RedLemon[2847:18104]    Track: ID=3, Title=Spider-Man3(2007)720pBluRay-[LRXSTORE], External=1
+2026-01-05 12:23:04.101 RedLemon[2847:17995] 🔍 MPV track-list/count: 3
+2026-01-05 12:23:04.101 RedLemon[2847:17995] 🔍 Track 0 type: sub
+2026-01-05 12:23:04.101 RedLemon[2847:17995] ✅ Found subtitle track: ID=1, lang=en, title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, external=1
+2026-01-05 12:23:04.101 RedLemon[2847:17995] 🔍 Track 1 type: sub
+2026-01-05 12:23:04.102 RedLemon[2847:17995] ✅ Found subtitle track: ID=2, lang=en, title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, external=1
+2026-01-05 12:23:04.102 RedLemon[2847:17995] 🔍 Track 2 type: sub
+2026-01-05 12:23:04.102 RedLemon[2847:17995] ✅ Found subtitle track: ID=3, lang=en, title=Spider-Man3(2007)720pBluRay-[LRXSTORE], external=1
+2026-01-05 12:23:04.102 RedLemon[2847:17995] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-05 12:23:04.102 RedLemon[2847:17995]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 12:23:04.102 RedLemon[2847:17995]    Start[1]: ID=1, Title='Spider.Man.3.2007.1080p.BluRay.x264.YIFY', Lang='en', Ext=1
+2026-01-05 12:23:04.102 RedLemon[2847:17995]    Start[2]: ID=2, Title='Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-05 12:23:04.103 RedLemon[2847:17995]    Start[3]: ID=3, Title='Spider-Man3(2007)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-05 12:23:04.103 RedLemon[2847:17995] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-05 12:23:04.103 RedLemon[2847:17995]    Track: ID=0, Title=Off, External=0
+2026-01-05 12:23:04.104 RedLemon[2847:17995]    Track: ID=1, Title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, External=1
+2026-01-05 12:23:04.104 RedLemon[2847:17995]    Track: ID=2, Title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, External=1
+2026-01-05 12:23:04.104 RedLemon[2847:17995]    Track: ID=3, Title=Spider-Man3(2007)720pBluRay-[LRXSTORE], External=1
+2026-01-05 12:23:04.592 RedLemon[2847:17684] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-05 12:23:05.200 RedLemon[2847:18455] 🔍 MPV track-list/count: 6
+2026-01-05 12:23:05.201 RedLemon[2847:18455] 🔍 Track 0 type: sub
+2026-01-05 12:23:05.201 RedLemon[2847:18455] ✅ Found subtitle track: ID=1, lang=en, title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, external=1
+2026-01-05 12:23:05.201 RedLemon[2847:18455] 🔍 Track 1 type: sub
+2026-01-05 12:23:05.201 RedLemon[2847:18455] ✅ Found subtitle track: ID=2, lang=en, title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, external=1
+2026-01-05 12:23:05.201 RedLemon[2847:18455] 🔍 Track 2 type: sub
+2026-01-05 12:23:05.201 RedLemon[2847:18455] ✅ Found subtitle track: ID=3, lang=en, title=Spider-Man3(2007)720pBluRay-[LRXSTORE], external=1
+2026-01-05 12:23:05.201 RedLemon[2847:18455] 🔍 Track 3 type: video
+2026-01-05 12:23:05.201 RedLemon[2847:18455] 🔍 Track 4 type: audio
+2026-01-05 12:23:05.202 RedLemon[2847:18455] 🔍 Track 5 type: sub
+2026-01-05 12:23:05.202 RedLemon[2847:18455] ✅ Found subtitle track: ID=4, lang=eng, title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-05 12:23:05.202 RedLemon[2847:18455] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-05 12:23:05.202 RedLemon[2847:18455]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 12:23:05.202 RedLemon[2847:18455]    Start[1]: ID=1, Title='Spider.Man.3.2007.1080p.BluRay.x264.YIFY', Lang='en', Ext=1
+2026-01-05 12:23:05.202 RedLemon[2847:18455]    Start[2]: ID=2, Title='Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-05 12:23:05.202 RedLemon[2847:18455]    Start[3]: ID=3, Title='Spider-Man3(2007)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-05 12:23:05.202 RedLemon[2847:18455]    Start[4]: ID=4, Title='GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-05 12:23:05.203 RedLemon[2847:18455] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-05 12:23:05.203 RedLemon[2847:18455]    Track: ID=0, Title=Off, External=0
+2026-01-05 12:23:05.203 RedLemon[2847:18455]    Track: ID=1, Title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, External=1
+2026-01-05 12:23:05.203 RedLemon[2847:18455]    Track: ID=2, Title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, External=1
+2026-01-05 12:23:05.203 RedLemon[2847:18455]    Track: ID=3, Title=Spider-Man3(2007)720pBluRay-[LRXSTORE], External=1
+2026-01-05 12:23:05.203 RedLemon[2847:18455]    Track: ID=4, Title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-05 12:23:06.286 RedLemon[2847:18104] 🔍 MPV track-list/count: 6
+2026-01-05 12:23:06.286 RedLemon[2847:18104] 🔍 Track 0 type: sub
+2026-01-05 12:23:06.287 RedLemon[2847:18104] ✅ Found subtitle track: ID=1, lang=en, title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, external=1
+2026-01-05 12:23:06.287 RedLemon[2847:18104] 🔍 Track 1 type: sub
+2026-01-05 12:23:06.287 RedLemon[2847:18104] ✅ Found subtitle track: ID=2, lang=en, title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, external=1
+2026-01-05 12:23:06.287 RedLemon[2847:18104] 🔍 Track 2 type: sub
+2026-01-05 12:23:06.287 RedLemon[2847:18104] ✅ Found subtitle track: ID=3, lang=en, title=Spider-Man3(2007)720pBluRay-[LRXSTORE], external=1
+2026-01-05 12:23:06.288 RedLemon[2847:18104] 🔍 Track 3 type: video
+2026-01-05 12:23:06.288 RedLemon[2847:18104] 🔍 Track 4 type: audio
+2026-01-05 12:23:06.288 RedLemon[2847:18104] 🔍 Track 5 type: sub
+2026-01-05 12:23:06.288 RedLemon[2847:18104] ✅ Found subtitle track: ID=4, lang=eng, title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-05 12:23:06.289 RedLemon[2847:18104] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-05 12:23:06.289 RedLemon[2847:18104]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 12:23:06.289 RedLemon[2847:18104]    Start[1]: ID=1, Title='Spider.Man.3.2007.1080p.BluRay.x264.YIFY', Lang='en', Ext=1
+2026-01-05 12:23:06.289 RedLemon[2847:18104]    Start[2]: ID=2, Title='Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-05 12:23:06.289 RedLemon[2847:18104]    Start[3]: ID=3, Title='Spider-Man3(2007)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-05 12:23:06.289 RedLemon[2847:18104]    Start[4]: ID=4, Title='GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-05 12:23:06.290 RedLemon[2847:18104] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-05 12:23:06.290 RedLemon[2847:18104]    Track: ID=0, Title=Off, External=0
+2026-01-05 12:23:06.290 RedLemon[2847:18104]    Track: ID=1, Title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, External=1
+2026-01-05 12:23:06.291 RedLemon[2847:18104]    Track: ID=2, Title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, External=1
+2026-01-05 12:23:06.291 RedLemon[2847:18104]    Track: ID=3, Title=Spider-Man3(2007)720pBluRay-[LRXSTORE], External=1
+2026-01-05 12:23:06.292 RedLemon[2847:18104]    Track: ID=4, Title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-05 12:23:07.297 RedLemon[2847:18455] 🔍 MPV track-list/count: 6
+2026-01-05 12:23:07.309 RedLemon[2847:18455] 🔍 Track 0 type: sub
+2026-01-05 12:23:07.309 RedLemon[2847:18455] ✅ Found subtitle track: ID=1, lang=en, title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, external=1
+2026-01-05 12:23:07.310 RedLemon[2847:18455] 🔍 Track 1 type: sub
+2026-01-05 12:23:07.310 RedLemon[2847:18455] ✅ Found subtitle track: ID=2, lang=en, title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, external=1
+2026-01-05 12:23:07.310 RedLemon[2847:18455] 🔍 Track 2 type: sub
+2026-01-05 12:23:07.310 RedLemon[2847:18455] ✅ Found subtitle track: ID=3, lang=en, title=Spider-Man3(2007)720pBluRay-[LRXSTORE], external=1
+2026-01-05 12:23:07.310 RedLemon[2847:18455] 🔍 Track 3 type: video
+2026-01-05 12:23:07.310 RedLemon[2847:18455] 🔍 Track 4 type: audio
+2026-01-05 12:23:07.310 RedLemon[2847:18455] 🔍 Track 5 type: sub
+2026-01-05 12:23:07.311 RedLemon[2847:18455] ✅ Found subtitle track: ID=4, lang=eng, title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-05 12:23:07.311 RedLemon[2847:18455] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-05 12:23:07.311 RedLemon[2847:18455]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-05 12:23:07.311 RedLemon[2847:18455]    Start[1]: ID=1, Title='Spider.Man.3.2007.1080p.BluRay.x264.YIFY', Lang='en', Ext=1
+2026-01-05 12:23:07.311 RedLemon[2847:18455]    Start[2]: ID=2, Title='Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-05 12:23:07.311 RedLemon[2847:18455]    Start[3]: ID=3, Title='Spider-Man3(2007)720pBluRay-[LRXSTORE]', Lang='en', Ext=1
+2026-01-05 12:23:07.311 RedLemon[2847:18455]    Start[4]: ID=4, Title='GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-05 12:23:07.311 RedLemon[2847:18455] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-05 12:23:07.312 RedLemon[2847:18455]    Track: ID=0, Title=Off, External=0
+2026-01-05 12:23:07.312 RedLemon[2847:18455]    Track: ID=1, Title=Spider.Man.3.2007.1080p.BluRay.x264.YIFY, External=1
+2026-01-05 12:23:07.312 RedLemon[2847:18455]    Track: ID=2, Title=Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR, External=1
+2026-01-05 12:23:07.312 RedLemon[2847:18455]    Track: ID=3, Title=Spider-Man3(2007)720pBluRay-[LRXSTORE], External=1
+2026-01-05 12:23:07.312 RedLemon[2847:18455]    Track: ID=4, Title=GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-05 12:23:21.332 RedLemon[2847:18104] 📤 Realtime: Sending message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-05 12:23:21.333 RedLemon[2847:18104]    Payload keys: chatUsername, type, timestamp, chatText, senderId, position
+2026-01-05 12:23:21.333 RedLemon[2847:18104] ✅ Realtime: Message broadcast complete
+2026-01-05 12:23:21.374 RedLemon[2847:18382] 📨 Realtime: Received broadcast message
+2026-01-05 12:23:21.375 RedLemon[2847:18382]    Payload keys: chatText, timestamp, type, senderId, chatUsername, position
+2026-01-05 12:23:21.375 RedLemon[2847:18382] ✅ Realtime: Decoded message type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-05 12:23:21.376 RedLemon[2847:18382] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 12:23:21.381 RedLemon[2847:18382] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 12:23:21.386 RedLemon[2847:17684] 🔍 DEBUG: Received sync message - type: chat, sender: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📄 Subtitle request: L3N1YnRpdGxlLzMwMjM0... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3023426-3027313.zip
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljw-0O3XdTlPC","phx_ref_prev":"GIfljnhh7xTdTj7D","last_seen":"2026-01-05T17:23:01.272Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljnhh7xTdTj7D","phx_ref_prev":"GIfljPi8iM7dTnPJ","last_seen":"2026-01-05T17:22:58.736Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Download complete: 33412 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Spider-Man_3_English-[LRXSTORE].srt
+📦 Extracting specific file: Spider-Man_3_English-\[LRXSTORE\].srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Spider.Man.3.2007.1080p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Spider-Man3(2007)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) 'GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] File tags:
+[MPV] Comment: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265
+[MPV] Title: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded, preparing to seek before playback...
+   Seeking to live edge: 4177s
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+ MPV Event: 18
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] VO: [libmpv] 1920x800 videotoolbox[p010]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ SMART-LOAD: Found 6 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+ MPV Event: 20
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Spider.Man.3.2007.1080p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Spider-Man3(2007)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', forced: false, default: true, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 3690 (Embedded: 3000, Match: 700, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Spider.Man.3.2007.1080p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Spider-Man3(2007)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=eng (*) 'GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x800 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Spider.Man.3.2007.1080p.BluRay.x264.YIFY' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Spider-Man3(2007)720pBluRay-[LRXSTORE]' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=eng (*) 'GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+🎉 EVENT: Video ready, drift is small (0.48s), skipping redundant seek
+📝 Started watch history tracking
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 4
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 4
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Spider.Man.3.2007.1080p.BluRay.x264.YIFY', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Spider-Man.3.2007.REPACK.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.HYBRID.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Spider-Man3(2007)720pBluRay-[LRXSTORE]', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'eng', title: 'GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', forced: false, default: true, HI: false, Ext: false
+✅ Auto-selecting BEST English subtitle: GalaxyRG256 - Spider-Man.3.2007.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 4) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 3690 (Embedded: 3000, Match: 700, Clean: 0, SDH: 0)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflkSzp5WfdTs5D","phx_ref_prev":"GIfljITEeovdTqJD","last_seen":"2026-01-05T17:23:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfljITEeovdTqJD","phx_ref_prev":"GIflh91uM57dToAF","last_seen":"2026-01-05T17:22:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📉 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e went offline (No active refs)
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflkSzp5WfdTs5D","phx_ref_prev":"GIfljITEeovdTqJD","last_seen":"2026-01-05T17:23:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfljITEeovdTqJD","phx_ref_prev":"GIflh91uM57dToAF","last_seen":"2026-01-05T17:22:50.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💬 Chat closed
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflkyIkDvfdTgHQ","phx_ref_prev":"GIfljw-0O3XdTlPC","last_seen":"2026-01-05T17:23:18.758Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljw-0O3XdTlPC","phx_ref_prev":"GIfljnhh7xTdTj7D","last_seen":"2026-01-05T17:23:01.272Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflkyIkDvfdTgHQ","phx_ref_prev":"GIfljw-0O3XdTlPC","last_seen":"2026-01-05T17:23:18.758Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfljw-0O3XdTlPC","phx_ref_prev":"GIfljnhh7xTdTj7D","last_seen":"2026-01-05T17:23:01.272Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💬 Chat opened
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Sent: yo
+✅ Chat message sent via Realtime
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"yo","chatUsername":"ursinho","position":0,"senderId":"656DAA91-33B4-4688-9135-C982EA52D7C9","timestamp":1767633801.330646,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0413300"}
+🎬 DisplayLink: reportSwap() (throttled)
+💬 Skipping own message (already displayed locally)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflldUg2EfdThQP","phx_ref_prev":"GIflkSzp5WfdTs5D","last_seen":"2026-01-05T17:23:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflkSzp5WfdTs5D","phx_ref_prev":"GIfljITEeovdTqJD","last_seen":"2026-01-05T17:23:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflldUg2EfdThQP","phx_ref_prev":"GIflkSzp5WfdTs5D","last_seen":"2026-01-05T17:23:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"met2026-01-05 12:23:42.696 RedLemon[2847:18104] 📨 Realtime: Received broadcast message
+2026-01-05 12:23:42.697 RedLemon[2847:18104]    Payload keys: chatUsername, chatText, senderId, timestamp, position, type
+2026-01-05 12:23:42.697 RedLemon[2847:18104] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:23:42.698 RedLemon[2847:18104] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 12:23:42.698 RedLemon[2847:18104] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 12:23:42.703 RedLemon[2847:17684] 🔍 DEBUG: Received sync message - type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:23:54.376 RedLemon[2847:18692] 📨 Realtime: Received broadcast message
+2026-01-05 12:23:54.376 RedLemon[2847:18692]    Payload keys: position, senderId, chatText, chatUsername, timestamp, type
+2026-01-05 12:23:54.378 RedLemon[2847:18692] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:23:54.378 RedLemon[2847:18692] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 12:23:54.378 RedLemon[2847:18692] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 12:23:54.419 RedLemon[2847:17684] 🔍 DEBUG: Received sync message - type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:23:56.928 RedLemon[2847:17684] 🖱️ Mouse: x=1207/1366 y=127/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-05 12:24:10.817 RedLemon[2847:18104] 📨 Realtime: Received broadcast message
+2026-01-05 12:24:10.818 RedLemon[2847:18104]    Payload keys: chatText, position, timestamp, type, chatUsername, senderId
+2026-01-05 12:24:10.819 RedLemon[2847:18104] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:24:10.819 RedLemon[2847:18104] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 12:24:10.819 RedLemon[2847:18104] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 12:24:10.853 RedLemon[2847:17684] 🔍 DEBUG: Received sync message - type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+as":[{"phx_ref":"GIflkSzp5WfdTs5D","phx_ref_prev":"GIfljITEeovdTqJD","last_seen":"2026-01-05T17:23:10.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfllsavfMPdTvFO","phx_ref_prev":"GIflldUg2EfdThQP","last_seen":"2026-01-05T17:23:34.419Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflldUg2EfdThQP","phx_ref_prev":"GIflkSzp5WfdTs5D","last_seen":"2026-01-05T17:23:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"43924444-ea5b-11f0-bf28-0a58a9feac02":{"metas":[{"phx_ref":"GIfllsatcUxZyBrN","is_host":false,"joined_at":1767633814.404686,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0413300"}
+📡 [EventsConfig] Checking server for movie_events config version...
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIfllsatcUxZyBrN)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+✅ [EventsConfig] Fetched movie_events version 1468 with 428 movies
+✅ [EventsConfig] Using cached movie_events config (version 1468, 428 movies)
+💾 Saved to watch history: Spider-Man 3 at 4204s
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfllsavfMPdTvFO","phx_ref_prev":"GIflldUg2EfdThQP","last_seen":"2026-01-05T17:23:34.419Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflldUg2EfdThQP","phx_ref_prev":"GIflkSzp5WfdTs5D","last_seen":"2026-01-05T17:23:30.365Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfll841ZpvdTiLF","phx_ref_prev":"GIflkyIkDvfdTgHQ","last_seen":"2026-01-05T17:23:38.822Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflkyIkDvfdTgHQ","phx_ref_prev":"GIfljw-0O3XdTlPC","last_seen":"2026-01-05T17:23:18.758Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfll841ZpvdTiLF","phx_ref_prev":"GIflkyIkDvfdTgHQ","last_seen":"2026-01-05T17:23:38.822Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflkyIkDvfdTgHQ","phx_ref_prev":"GIfljw-0O3XdTlPC","last_seen":"2026-01-05T17:23:18.758Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hey","chatUsername":"lemontom","position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767633822.591722,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0413300"}
+💬 Received chat from lemontom: hey
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflmoKnU3TdToiJ","phx_ref_prev":"GIfllsavfMPdTvFO","last_seen":"2026-01-05T17:23:50.444Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfllsavfMPdTvFO","phx_ref_prev":"GIflldUg2EfdThQP","last_seen":"2026-01-05T17:23:34.419Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+❌ SocialService: Failed to block user: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflmoKnU3TdToiJ","phx_ref_prev":"GIfllsavfMPdTvFO","last_seen":"2026-01-05T17:23:50.444Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIfllsavfMPdTvFO","phx_ref_prev":"GIflldUg2EfdThQP","last_seen":"2026-01-05T17:23:34.419Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"lemontom","position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767633834.3409882,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0413300"}
+💬 Received chat from lemontom: hi
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflnHUU_SPdThQP","phx_ref_prev":"GIfll841ZpvdTiLF","last_seen":"2026-01-05T17:23:58.799Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfll841ZpvdTiLF","phx_ref_prev":"GIflkyIkDvfdTgHQ","last_seen":"2026-01-05T17:23:38.822Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflnHUU_SPdThQP","phx_ref_prev":"GIfll841ZpvdTiLF","last_seen":"2026-01-05T17:23:58.799Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfll841ZpvdTiLF","phx_ref_prev":"GIflkyIkDvfdTgHQ","last_seen":"2026-01-05T17:23:38.822Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflnyahHa3dTpkM","phx_ref_prev":"GIflmoKnU3TdToiJ","last_seen":"2026-01-05T17:24:10.380Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflmoKnU3TdToiJ","phx_ref_prev":"GIfllsavfMPdTvFO","last_seen":"2026-01-05T17:23:50.444Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hey","chatUsername":"lemontom","position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767633850.7791219,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0413300"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+💬 Received chat from lemontom: hey
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":2026-01-05 12:24:16.527 RedLemon[2847:17684] 🖱️ Mouse: x=1211/1366 y=73/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-05 12:24:18.231 RedLemon[2847:18552] 📨 Realtime: Received broadcast message
+2026-01-05 12:24:18.231 RedLemon[2847:18552]    Payload keys: senderId, timestamp, chatText, type, chatUsername, position
+2026-01-05 12:24:18.232 RedLemon[2847:18552] ✅ Realtime: Decoded message type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+2026-01-05 12:24:18.232 RedLemon[2847:18552] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-05 12:24:18.232 RedLemon[2847:18552] ✅ Realtime: syncCallback invoked successfully
+2026-01-05 12:24:18.236 RedLemon[2847:17684] 🔍 DEBUG: Received sync message - type: chat, sender: 96E01CDB-36C0-4228-A6E4-A29A3C66BC8E
+null,"event":"presence_diff","payload":{"joins":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflnyahHa3dTpkM","phx_ref_prev":"GIflmoKnU3TdToiJ","last_seen":"2026-01-05T17:24:10.380Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"c9f2b40c-ea5a-11f0-b292-0a58a9feac02":{"metas":[{"phx_ref":"GIflmoKnU3TdToiJ","phx_ref_prev":"GIfllsavfMPdTvFO","last_seen":"2026-01-05T17:23:50.444Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:34.419Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"hi","chatUsername":"lemontom","position":0,"senderId":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","timestamp":1767633858.198287,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:event_tt0413300"}
+💬 Received chat from lemontom: hi
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfloR3c_XXdTlJJ","phx_ref_prev":"GIflnHUU_SPdThQP","last_seen":"2026-01-05T17:24:18.819Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflnHUU_SPdThQP","phx_ref_prev":"GIfll841ZpvdTiLF","last_seen":"2026-01-05T17:23:58.799Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIfloR3c_XXdTlJJ","phx_ref_prev":"GIflnHUU_SPdThQP","last_seen":"2026-01-05T17:24:18.819Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}},"leaves":{"2263f786-ea5b-11f0-a2a7-0a58a9feac02":{"metas":[{"phx_ref":"GIflnHUU_SPdThQP","phx_ref_prev":"GIfll841ZpvdTiLF","last_seen":"2026-01-05T17:23:58.799Z","room_id":"event_tt0413300","started_at":"2026-01-05T17:23:01.272Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0413300","watching_title":"Spider-Man 3","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)

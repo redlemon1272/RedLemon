@@ -638,12 +638,41 @@ class LobbyViewModel: ObservableObject {
     func kickParticipant(_ participant: Participant) {
         presenceManager.kickParticipant(participant)
     }
+    
+    /// Kick user by ID (Used by Context Menu)
+    func kickUser(userId: String) {
+        if let participant = participants.first(where: { $0.id == userId }) {
+            kickParticipant(participant)
+        } else {
+            // Create dummy for signaling (ID is what matters)
+            let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, joinedAt: Date(), phxRef: nil)
+            kickParticipant(dummy)
+        }
+    }
 
     func blockParticipant(_ participant: Participant) {
         // First kick, then block
         kickParticipant(participant)
         Task {
             await SocialService.shared.blockUser(userId: participant.id)
+        }
+    }
+    
+    /// Block user by ID (Used by Context Menu when participant might not be in the list)
+    func blockUser(userId: String) {
+        // Check if participant is in the list
+        if let participant = participants.first(where: { $0.id == userId }) {
+            blockParticipant(participant)
+        } else {
+            // Not in list (or event room), but still block via service
+            // If we are host, we can still try to send a kick command by ID
+            if isHost {
+                 let dummy = Participant(id: userId, name: "User", isHost: false, isReady: false, joinedAt: Date(), phxRef: nil)
+                 kickParticipant(dummy)
+            }
+            Task {
+                await SocialService.shared.blockUser(userId: userId)
+            }
         }
     }
 

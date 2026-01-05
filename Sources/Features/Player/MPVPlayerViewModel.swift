@@ -1645,6 +1645,8 @@ class MPVPlayerViewModel: ObservableObject {
              self.showPoster = true
              self.isLoading = true
              self.appState?.player.eventStartTime = nil // FIX: Clear event state on exit
+             self.appState?.player.resumeFromTimestamp = 0 // FIX: Clear stale resume state
+
              
              if !returningToLobby {
                  self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data

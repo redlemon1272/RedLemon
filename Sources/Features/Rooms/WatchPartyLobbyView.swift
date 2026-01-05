@@ -281,7 +281,7 @@ struct WatchPartyLobbyView: View {
                                     ParticipantRow(
                                             participant: participant,
                                             canKick: isHost && !participant.isHost,
-                                            canBlock: isHost && !participant.isHost,
+                                            canBlock: !participant.isHost, // Allow everyone to block others (except host blocking themselves handled by isSelf check)
                                             canAddFriend: participant.id != (appState.currentUserId?.uuidString.lowercased() ?? "") && !socialService.friends.contains(where: { $0.id == participant.id }),
                                             onKick: { viewModel.kickParticipant(participant) },
                                             onBlock: { viewModel.blockParticipant(participant) },
@@ -592,18 +592,89 @@ struct WatchPartyLobbyView: View {
                                                         LobbyMessageRow(message: message)
                                                             .id(item.id)
                                                     case .chat(let chatMsg):
-                                                        VStack(alignment: .leading, spacing: 4) {
-                                                            Text(chatMsg.username)
-                                                                .font(.caption.weight(.semibold))
-                                                                .foregroundColor(.blue)
-                                                            Text(chatMsg.text)
-                                                                .font(.body)
-                                                                .foregroundColor(.white)
+                                                        // 1. FILTER: Active Block Check
+                                                        // If socialService says blocked, do not show AT ALL
+                                                        if let senderId = chatMsg.senderId, 
+                                                           socialService.blockedUserIds.contains(senderId) {
+                                                            EmptyView()
+                                                        } else {
+                                                            // 2. MUTE CHECK: Local Mute from Lobby
+                                                            let isMuted = chatMsg.senderId.map { viewModel.mutedUserIds.contains($0) } ?? false
+                                                            
+                                                            VStack(alignment: .leading, spacing: 4) {
+                                                                HStack {
+                                                                    // Username Menu
+                                                                    Menu {
+                                                                        if let senderId = chatMsg.senderId {
+                                                                            // Add Friend
+                                                                            if !socialService.friends.contains(where: { $0.id == senderId }) && senderId != appState.currentUserId?.uuidString.lowercased() {
+                                                                                Button {
+                                                                                    viewModel.addFriend(participantId: senderId)
+                                                                                } label: {
+                                                                                    Label("Add Friend", systemImage: "person.badge.plus")
+                                                                                }
+                                                                            }
+
+                                                                            // Mute Toggle
+                                                                            if isMuted {
+                                                                                Button {
+                                                                                    viewModel.toggleMute(participantId: senderId)
+                                                                                } label: {
+                                                                                    Label("Unmute User", systemImage: "speaker.wave.2.fill")
+                                                                                }
+                                                                            } else {
+                                                                                Button {
+                                                                                    viewModel.toggleMute(participantId: senderId)
+                                                                                } label: {
+                                                                                    Label("Mute User", systemImage: "speaker.slash.fill")
+                                                                                }
+                                                                            }
+                                                                            
+                                                                            // Kick (Host Only)
+                                                                            if isHost {
+                                                                                Divider()
+                                                                                Button(role: .destructive) {
+                                                                                    viewModel.kickUser(userId: senderId)
+                                                                                } label: {
+                                                                                    Label("Kick User", systemImage: "xmark.circle")
+                                                                                }
+                                                                            }
+                                                                            
+                                                                            // Block (Always available for strangers)
+                                                                            Button(role: .destructive) {
+                                                                                viewModel.blockUser(userId: senderId)
+                                                                            } label: {
+                                                                                Label("Block User", systemImage: "slash.circle")
+                                                                            }
+                                                                        }
+                                                                    } label: {
+                                                                        Text(chatMsg.username)
+                                                                            .font(.caption.weight(.semibold))
+                                                                            .foregroundColor(.blue)
+                                                                    }
+                                                                    .menuStyle(BorderlessButtonMenuStyle())
+                                                                    
+                                                                    Spacer()
+                                                                    Text(chatMsg.timestamp, style: .time)
+                                                                        .font(.caption2)
+                                                                        .foregroundColor(.white.opacity(0.4))
+                                                                }
+                                                                
+                                                                if isMuted {
+                                                                    Text("(Message hidden - User muted)")
+                                                                        .font(.body.italic())
+                                                                        .foregroundColor(.white.opacity(0.5))
+                                                                } else {
+                                                                    Text(chatMsg.text)
+                                                                        .font(.body)
+                                                                        .foregroundColor(.white)
+                                                                }
+                                                            }
+                                                            .padding(8)
+                                                            .background(Color.white.opacity(0.1))
+                                                            .cornerRadius(8)
+                                                            .id(item.id)
                                                         }
-                                                        .padding(8)
-                                                        .background(Color.white.opacity(0.1))
-                                                        .cornerRadius(8)
-                                                        .id(item.id)
                                                     }
                                                 }
                                                 

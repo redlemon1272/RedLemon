@@ -14,6 +14,10 @@ class SocialService: ObservableObject {
     @Published var unreadCounts: [String: Int] = [:] // Key: FriendID
     @Published var blockedUsers: [SupabaseUser] = [] // New: Blocked users list for management
     
+    var blockedUserIds: Set<String> {
+        Set(blockedUsers.map { $0.id.uuidString.lowercased() })
+    }
+    
     @Published var isConnected: Bool = false
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?

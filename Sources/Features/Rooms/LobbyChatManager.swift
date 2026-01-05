@@ -67,7 +67,7 @@ class LobbyChatManager: ObservableObject {
         chatInput = ""
         
         // Add message locally for instant feedback (optimistic UI)
-        addLocalMessage(username: username, text: trimmed)
+        addLocalMessage(username: username, text: trimmed, senderId: senderId)
         
         // Construct SyncMessage
         let syncMsg = SyncMessage(
@@ -106,7 +106,9 @@ class LobbyChatManager: ObservableObject {
             id: UUID().uuidString,
             username: username ?? "Unknown",
             text: chatText,
-            timestamp: Date(timeIntervalSince1970: timestamp)
+            timestamp: Date(timeIntervalSince1970: timestamp),
+            isSystem: false,
+            senderId: validSenderId
         )
         
         addChatMessage(chatMessage)
@@ -142,12 +144,14 @@ class LobbyChatManager: ObservableObject {
     }
     
     // Helper to add a local optimistic message
-    public func addLocalMessage(username: String, text: String) {
+    public func addLocalMessage(username: String, text: String, senderId: String? = nil) {
         let msg = ChatMessage(
             id: UUID().uuidString,
             username: username,
             text: text,
-            timestamp: Date()
+            timestamp: Date(),
+            isSystem: false,
+            senderId: senderId
         )
         addChatMessage(msg)
     }

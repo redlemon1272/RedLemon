@@ -19,14 +19,8 @@ class LobbyEventRouter: ObservableObject {
             return
         }
 
-        // MUTE CHECK: Ignore chat if user is muted
-        if let senderId = syncMessage.senderId,
-           viewModel.mutedUserIds.contains(senderId),
-           syncMessage.type == .chat,
-           !chatText.starts(with: "LOBBY_") {
-             // System messages (LOBBY_*) are never muted
-             return
-        }
+        // REMOVED MUTE CHECK: We now allow muted messages to reach the UI (where they are masked)
+        // Block check is handled inside chatManager.handleIncomingChat
 
         // Handle special lobby commands
         if chatText.starts(with: "LOBBY_") {
@@ -49,7 +43,8 @@ class LobbyEventRouter: ObservableObject {
             username: syncMessage.chatUsername,
             timestamp: syncMessage.timestamp,
             currentUserId: viewModel.participantId,
-            mutedUserIds: viewModel.mutedUserIds
+            mutedUserIds: viewModel.mutedUserIds,
+            blockedUserIds: SocialService.shared.blockedUserIds
         )
     }
 

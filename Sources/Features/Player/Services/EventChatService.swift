@@ -152,6 +152,11 @@ class EventChatService: ObservableObject {
         // Filter system messages
         if text.starts(with: "LOBBY_") { return }
         
+        // Block check
+        if let senderId = message.senderId, SocialService.shared.blockedUserIds.contains(senderId.lowercased()) {
+             return
+        }
+        
         let chatMessage = ChatMessage(
             id: UUID().uuidString,
             username: username,

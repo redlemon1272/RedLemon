@@ -88,14 +88,15 @@ class LobbyChatManager: ObservableObject {
         }
     }
     
-    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>) {
+    func handleIncomingChat(chatText: String, senderId: String?, username: String?, timestamp: TimeInterval, currentUserId: String, mutedUserIds: Set<String>, blockedUserIds: Set<String>) {
         guard let validSenderId = senderId else { return }
         
-        // Mute check
-        if mutedUserIds.contains(validSenderId) {
-             // System messages (LOBBY_*) should be handled by Router before calling this
+        // Block check
+        if blockedUserIds.contains(validSenderId.lowercased()) {
              return
         }
+        
+        // Mute check - removed (handled by UI)
         
         // Skip own messages (optimistically added)
         if validSenderId == currentUserId {

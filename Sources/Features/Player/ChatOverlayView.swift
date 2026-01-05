@@ -313,18 +313,28 @@ struct ChatOverlayView: View {
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 12) {
                     ForEach(eventChatService.messages.suffix(maxVisibleMessages), id: \.id) { message in
-                        if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
-                            VStack(alignment: .leading, spacing: 4) {
-                                userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false) // Event chat has no host moderation
+                        let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
+                        
+                        // Show message (masked if muted)
+                        VStack(alignment: .leading, spacing: 4) {
+                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: false) 
+                            
+                            if isMuted {
+                                Text("Message muted")
+                                    .font(.caption)
+                                    .italic()
+                                    .foregroundColor(.white.opacity(0.5))
+                            } else {
                                 Text(message.text)
                                     .font(.body)
                                     .foregroundColor(.white)
                             }
-                            .padding(12)
-                            .background(Color.white.opacity(0.1))
-                            .cornerRadius(8)
-                            .id(message.id)
                         }
+                        .padding(12)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(8)
+                        .id(message.id)
+                        .opacity(isMuted ? 0.6 : 1.0)
                     }
                 }
                 .padding()
@@ -343,20 +353,29 @@ struct ChatOverlayView: View {
                 // ✅ Show only most recent messages for performance
                 // Reversed for inverted list (bottom-up)
                 ForEach(Array(viewModel.messages.suffix(maxVisibleMessages)).reversed(), id: \.id) { message in
-                    if !viewModel.mutedUserIds.contains(message.senderId ?? "") {
-                        VStack(alignment: .leading, spacing: 4) {
-                            userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost)
+                    let isMuted = viewModel.mutedUserIds.contains(message.senderId ?? "")
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        userMenu(username: message.username, userId: message.senderId, isSystem: message.isSystem, isHost: viewModel.isWatchPartyHost)
+                        
+                        if isMuted {
+                            Text("Message muted")
+                                .font(.caption)
+                                .italic()
+                                .foregroundColor(.white.opacity(0.5))
+                        } else {
                             Text(message.text)
                                 .font(.body)
                                 .foregroundColor(.white)
                         }
-                        .padding(12)
-                        .background(Color.black.opacity(0.2))
-                        .cornerRadius(8)
-                        .id(message.id)
-                        .rotationEffect(.degrees(180)) // Correct text orientation
-                        .scaleEffect(x: -1, y: 1, anchor: .center)
                     }
+                    .padding(12)
+                    .background(Color.black.opacity(0.2))
+                    .cornerRadius(8)
+                    .id(message.id)
+                    .rotationEffect(.degrees(180)) // Correct text orientation
+                    .scaleEffect(x: -1, y: 1, anchor: .center)
+                    .opacity(isMuted ? 0.6 : 1.0)
                 }
             }
             .padding()

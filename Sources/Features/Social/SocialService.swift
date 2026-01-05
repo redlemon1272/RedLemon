@@ -13,9 +13,11 @@ class SocialService: ObservableObject {
     @Published var messages: [String: [DirectMessage]] = [:] // Key: FriendID (Principal)
     @Published var unreadCounts: [String: Int] = [:] // Key: FriendID
     @Published var blockedUsers: [SupabaseUser] = [] // New: Blocked users list for management
+    @Published var localBlockedIds: Set<String> = [] // Fallback for session
     
     var blockedUserIds: Set<String> {
-        Set(blockedUsers.map { $0.id.uuidString.lowercased() })
+        let serverBlocked = Set(blockedUsers.map { $0.id.uuidString.lowercased() })
+        return serverBlocked.union(localBlockedIds)
     }
     
     @Published var isConnected: Bool = false
@@ -479,10 +481,36 @@ class SocialService: ObservableObject {
              friends.removeAll { $0.id == targetId.lowercased() }
              friendActivity.removeValue(forKey: targetId.lowercased())
              messages.removeValue(forKey: targetId.lowercased())
+             
+             // Optimistic update for blockedUsers
+             await MainActor.run {
+                 // Create a dummy user object if needed, or better yet, fetch checking structure
+                 // Since SupabaseUser might be complex, we check if we can easily create it.
+                 // Ideally we should just append to the list.
+                 // Assuming SupabaseUser is struct.
+                 // For now, we rely on loadBlockedUsers() usually, but if it fails we are stuck.
+                 // IMPORTANT: If we can't create SupabaseUser easily, we might need a separate 'localBlockedIds' set.
+                 // But looking at getBlockedUsers, it returns [SupabaseUser].
+                 // A safe way is to assume we can't easily fabricate SupabaseUser without more info.
+                 // However, we can just log success.
+                 // Actually, the best way to handle "server failed" is that `blockUser` logic in `LobbyViewModel` also maintains a local set if needed,
+                 // OR we assume `loadBlockedUsers` will eventually succeed.
+                 // Given the Logs show 404, we MUST handle it locally.
+                 // I will add a `localBlockedIds` set to SocialService to merge with `blockedUsers`.
+             }
              print("✅ SocialService: Blocked user \(targetId)")
          } catch {
              // If table doesn't exist, this fails. We log it.
-             print("❌ SocialService: Failed to block user: \(error)")
+             print("❌ SocialService: Failed to block user (Backend): \(error)")
+             
+             // FALLBACK: Block locally ensuring the UI works
+             print("⚠️ SocialService: Applying LOCAL block for session")
+             await MainActor.run {
+                 friends.removeAll { $0.id == targetId.lowercased() }
+                 friendActivity.removeValue(forKey: targetId.lowercased())
+                 messages.removeValue(forKey: targetId.lowercased())
+                 self.localBlockedIds.insert(targetId.lowercased())
+             }
          }
     }
     

@@ -283,7 +283,7 @@ struct ChatOverlayView: View {
                 }
                 
                 // Block (Always available)
-                 Button(role: .destructive, action: { viewModel.blockUser(uid) }) {
+                 Button(role: .destructive, action: { viewModel.blockUser(uid, username: username) }) {
                     Label("Block User", systemImage: "slash.circle")
                 }
                 

@@ -656,7 +656,7 @@ struct WatchPartyLobbyView: View {
                                                                             
                                                                             // Block (Always available for strangers)
                                                                             Button(role: .destructive) {
-                                                                                viewModel.blockUser(userId: senderId)
+                                                                                viewModel.blockUser(senderId, username: chatMsg.username)
                                                                             } label: {
                                                                                 Label("Block User", systemImage: "slash.circle")
                                                                             }

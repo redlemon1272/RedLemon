@@ -452,10 +452,10 @@ class MPVPlayerViewModel: ObservableObject {
         }
     }
 
-    func blockUser(_ participantId: String) {
+    func blockUser(_ participantId: String, username: String? = nil) {
         kickUser(participantId)
         Task {
-            await SocialService.shared.blockUser(userId: participantId)
+             await SocialService.shared.blockUser(userId: participantId, username: username)
         }
     }
 

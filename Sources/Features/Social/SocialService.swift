@@ -471,45 +471,44 @@ class SocialService: ObservableObject {
         }
     }
 
-    func blockUser(userId targetId: String) async {
+    func blockUser(userId targetId: String, username: String? = nil) async {
          guard let myIdStr = currentUserId, let myId = UUID(uuidString: myIdStr),
                let targetUUID = UUID(uuidString: targetId) else { return }
          
+         // 1. Backend Call (Attempt)
          do {
              try await client.blockUser(blockerId: myId, blockedId: targetUUID)
-             // Remove from friends list locally
+             print("✅ SocialService: Backend blocked user \(targetId)")
+         } catch {
+             print("❌ SocialService: Backend block failed: \(error). Using local fallback.")
+         }
+         
+         // 2. Local Update (Always apply)
+         await MainActor.run {
+             // Remove from friends/activity/messages
              friends.removeAll { $0.id == targetId.lowercased() }
              friendActivity.removeValue(forKey: targetId.lowercased())
              messages.removeValue(forKey: targetId.lowercased())
              
-             // Optimistic update for blockedUsers
-             await MainActor.run {
-                 // Create a dummy user object if needed, or better yet, fetch checking structure
-                 // Since SupabaseUser might be complex, we check if we can easily create it.
-                 // Ideally we should just append to the list.
-                 // Assuming SupabaseUser is struct.
-                 // For now, we rely on loadBlockedUsers() usually, but if it fails we are stuck.
-                 // IMPORTANT: If we can't create SupabaseUser easily, we might need a separate 'localBlockedIds' set.
-                 // But looking at getBlockedUsers, it returns [SupabaseUser].
-                 // A safe way is to assume we can't easily fabricate SupabaseUser without more info.
-                 // However, we can just log success.
-                 // Actually, the best way to handle "server failed" is that `blockUser` logic in `LobbyViewModel` also maintains a local set if needed,
-                 // OR we assume `loadBlockedUsers` will eventually succeed.
-                 // Given the Logs show 404, we MUST handle it locally.
-                 // I will add a `localBlockedIds` set to SocialService to merge with `blockedUsers`.
-             }
-             print("✅ SocialService: Blocked user \(targetId)")
-         } catch {
-             // If table doesn't exist, this fails. We log it.
-             print("❌ SocialService: Failed to block user (Backend): \(error)")
+             // Add to local block list
+             self.localBlockedIds.insert(targetId.lowercased())
              
-             // FALLBACK: Block locally ensuring the UI works
-             print("⚠️ SocialService: Applying LOCAL block for session")
-             await MainActor.run {
-                 friends.removeAll { $0.id == targetId.lowercased() }
-                 friendActivity.removeValue(forKey: targetId.lowercased())
-                 messages.removeValue(forKey: targetId.lowercased())
-                 self.localBlockedIds.insert(targetId.lowercased())
+             // Add to UI list (blockedUsers)
+             if !blockedUsers.contains(where: { $0.id.uuidString.lowercased() == targetId.lowercased() }) {
+                 let name = username ?? "Blocked User"
+                 // Construct a temporary SupabaseUser for UI display
+                 let blockedUser = SupabaseUser(
+                     id: targetUUID,
+                     username: name,
+                     displayName: nil,
+                     avatarUrl: nil,
+                     createdAt: Date(),
+                     lastSeen: Date(),
+                     isAdmin: false,
+                     isPremium: false,
+                     subscriptionExpiresAt: nil
+                 )
+                 self.blockedUsers.append(blockedUser)
              }
          }
     }
@@ -521,13 +520,14 @@ class SocialService: ObservableObject {
          do {
              try await SupabaseClient.shared.unblockUser(blockerId: currentId, blockedId: targetUuid)
              print("✅ Unblocked user: \(userId)")
-             
-             // Update local list
-             await MainActor.run {
-                 blockedUsers.removeAll { $0.id.uuidString == userId }
-             }
          } catch {
              print("❌ Failed to unblock user: \(error)")
+         }
+         
+         // Update local list regardless of backend success (optimistic / fallback)
+         await MainActor.run {
+             blockedUsers.removeAll { $0.id.uuidString.lowercased() == userId.lowercased() }
+             localBlockedIds.remove(userId.lowercased())
          }
     }
     

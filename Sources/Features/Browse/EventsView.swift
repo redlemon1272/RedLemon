@@ -293,8 +293,15 @@ struct EventsView: View {
                     print("   Quality: \(selectedQuality ?? "nil")")
                     print("   FileIdx: \(selectedFileIdx ?? -1)")
                     print("   🔗 Locking to server-provided stream hash: \(hash)\n")
+                } else if let url = selectedUnlockedURL, !url.isEmpty {
+                    // NEW: Trust the URL if it exists, even if hash is missing (e.g. Debrid direct links)
+                    print("\n✅ [SYNC VERIFICATION] FOUND SERVER URL (No Hash) 🔑")
+                    print("   UnlockedURL: \(url.prefix(30))...")
+                    print("   Quality: \(selectedQuality ?? "nil")")
+                    print("   FileIdx: \(selectedFileIdx ?? -1)")
+                    print("   🔗 Locking to server-provided unlocked URL\n")
                 } else {
-                    // REPAIR: Room exists but has no stream_hash - resolve and persist
+                    // REPAIR: Room exists but has no stream_hash OR URL - resolve and persist
                     print("⚠️ Room exists but has no stream_hash - repairing...")
                     do {
                         let result = try await StreamService.shared.resolveStream(

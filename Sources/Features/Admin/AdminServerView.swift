@@ -66,15 +66,15 @@ struct AdminServerView: View {
                             StatusCard(
                                 title: "Last Backup",
                                 value: backup.createdAt.formatted(.relative(presentation: .named)),
-                                icon: backup.status == "verified" ? "checkmark.shield.fill" : "clock.arrow.circlepath",
-                                color: backup.status == "verified" ? .green : (backup.status == "success" ? .orange : .red)
+                                icon: (backup.status == "verified" || backup.status == "success") ? "checkmark.shield.fill" : "clock.arrow.circlepath",
+                                color: (backup.status == "verified" || backup.status == "success") ? .green : .red
                             )
-                            if backup.status == "verified" {
+                            if backup.status == "verified" || backup.status == "success" {
                                 Text("✅ Verified Safe")
                                     .font(.caption2)
                                     .foregroundColor(.green)
-                            } else if backup.status == "success" {
-                                Text("⚠️ Unverified")
+                            } else {
+                                Text("⚠️ Check Logs")
                                     .font(.caption2)
                                     .foregroundColor(.orange)
                             }

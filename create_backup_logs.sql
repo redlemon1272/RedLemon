@@ -13,8 +13,14 @@ create policy "Admins can view backup logs"
     on public.backup_logs for select
     using ( public.is_admin() ); -- Assuming is_admin() exists, or we just rely on service_role for now if the client uses it.
 
+
 -- Actually, for simplicity ensuring the dashboard can read it:
 create policy "Allow read access for authenticated users"
     on public.backup_logs for select
     to authenticated
-    using ( true ); 
+    using ( true );
+
+create policy "Allow read access for anon users"
+    on public.backup_logs for select
+    to anon
+    using ( true );

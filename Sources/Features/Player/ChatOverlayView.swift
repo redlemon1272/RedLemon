@@ -840,6 +840,7 @@ struct FriendRowButton: View {
     let action: () -> Void
     @EnvironmentObject var appState: AppState
     @State private var isHovering: Bool = false
+    @State private var isJoining: Bool = false
 
     var body: some View {
         let isOnline = SocialService.shared.onlineUserIds.contains(friend.id)
@@ -984,13 +985,25 @@ struct FriendRowButton: View {
                 // Join Button
                 if canJoin, let rId = friendRoomId {
                     Button(action: {
-                        Task { await appState.player.joinRoom(roomId: rId) }
+                        isJoining = true
+                        Task {
+                            await appState.player.joinRoom(roomId: rId)
+                            await MainActor.run { isJoining = false }
+                        }
                     }) {
-                        Image(systemName: "arrow.right.circle.fill")
-                            .foregroundColor(.green)
-                            .font(.title2)
+                        if isJoining {
+                            ProgressView()
+                                .controlSize(.small)
+                                .scaleEffect(0.7)
+                                .frame(width: 20, height: 20)
+                        } else {
+                            Image(systemName: "arrow.right.circle.fill")
+                                .foregroundColor(.green)
+                                .font(.title2)
+                        }
                     }
                     .buttonStyle(.plain)
+                    .disabled(isJoining)
                     .help("Join \(friend.displayName)")
                 }
             }

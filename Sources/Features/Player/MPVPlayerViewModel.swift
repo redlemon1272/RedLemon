@@ -321,6 +321,17 @@ class MPVPlayerViewModel: ObservableObject {
              // Fallback for missing eventStartTime (Race condition workaround)
              print("⚠️ EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
              seekTime = appState.player.resumeFromTimestamp ?? 0
+             
+             // Double Fallback: If resumeFromTimestamp is 0 (missing?), try room creation time
+             if seekTime == 0, let room = appState.player.currentWatchPartyRoom, room.id.hasPrefix("event_") {
+                 let elapsed = Date().timeIntervalSince(room.createdAt)
+                 // Default buffer 10m (600s) - match PlayerViewModel logic
+                 let calculated = max(0, elapsed - 600)
+                 if calculated > 0 {
+                     seekTime = calculated
+                     print("⚠️ EVENT: resumeFromTimestamp was 0. Calculated from Room Creation: \(seekTime)s")
+                 }
+             }
         } else {
              // Not an event, and no start time -> Standard playback (handled elsewhere) or Watch Party sync will take over
              return

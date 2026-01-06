@@ -20,6 +20,14 @@ serve(async (req: Request) => {
     if (path.includes('create-invoice')) return createInvoice(req);
     if (path.includes('lnbits-webhook')) return lnbitsWebhook(req);
     if (path.includes('recover-account')) return recoverAccount(req);
+    if (path === '/system/status') {
+        return new Response(JSON.stringify({
+            status: 'online',
+            timestamp: new Date().toISOString(),
+            service: 'RedLemon Edge Router',
+            region: 'self-hosted'
+        }), { headers: { 'Content-Type': 'application/json' } })
+    }
     if (path.includes('hello')) return hello();
 
     return new Response("Function not found: " + path, { status: 404 });

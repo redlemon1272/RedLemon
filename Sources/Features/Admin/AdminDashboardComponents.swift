@@ -5,6 +5,7 @@ enum AdminCategory: String, CaseIterable, Identifiable {
     case overview = "Overview"
     case users = "Users"
     case events = "Events"
+    case server = "Server"
     case logs = "Logs"
     
     var id: String { rawValue }
@@ -14,6 +15,7 @@ enum AdminCategory: String, CaseIterable, Identifiable {
         case .overview: return "chart.bar.fill"
         case .users: return "person.2.fill"
         case .events: return "play.tv.fill"
+        case .server: return "server.rack"
         case .logs: return "list.bullet.rectangle.portrait"
         }
     }

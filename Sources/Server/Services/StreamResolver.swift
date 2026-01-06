@@ -200,7 +200,7 @@ actor StreamResolver {
         let beforeSampleFilter = filteredStreams.count
         let sampleTerms = ["sample", "trailer", "featurette", "teaser", "bonus", "making of", "deleted scenes"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
+            let titleLower = getExtendedSearchText(for: stream)
             
             // Check for terms with delimiters to avoid false positives (e.g. "teasers" -> "teaser" is okay, but "sample" in "example" is not)
             // Actually "example" doesn't contain "sample". 
@@ -236,7 +236,7 @@ actor StreamResolver {
         let beforeBadGroupFilter = filteredStreams.count
         let badGroups = ["tamilmv", "1tamilmv", "tamilrockers"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
+            let titleLower = getExtendedSearchText(for: stream)
             let isBadGroup = badGroups.contains { group in
                 titleLower.contains(group)
             }
@@ -253,7 +253,7 @@ actor StreamResolver {
         let beforeSpamFilter = filteredStreams.count
         let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
+            let titleLower = getExtendedSearchText(for: stream)
              // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")
             let isSpam = spamTerms.contains { term in
                 if term == "bet" {
@@ -274,7 +274,7 @@ actor StreamResolver {
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
+            let titleLower = getExtendedSearchText(for: stream)
             let isMpeg2 = mpeg2Terms.contains { term in
                 titleLower.contains(term)
             }
@@ -295,7 +295,7 @@ actor StreamResolver {
         let threeDFormats = ["sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
 
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
+            let titleLower = getExtendedSearchText(for: stream)
 
             // Check implicit 3D ("3d" surrounded by delimiters)
             if titleLower.contains(".3d.") || titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(".3d") || titleLower.hasSuffix(" 3d") {
@@ -318,7 +318,7 @@ actor StreamResolver {
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred
         let beforeAudioFilter = filteredStreams.count
         filteredStreams = filteredStreams.filter { stream in
-            let combinedText = stream.title + " " + (stream.behaviorHints?.filename ?? "")
+            let combinedText = getExtendedSearchText(for: stream)
             let hasAcceptableAudio = hasAcceptableAudioLanguage(combinedText)
             if !hasAcceptableAudio {
                 let audioDesc = getAudioLanguageDescription(combinedText)
@@ -772,6 +772,23 @@ actor StreamResolver {
 
     private func streamTitleContainsYear(_ title: String, targetYears: [String]) -> Bool {
         return targetYears.contains { title.contains($0) }
+    }
+
+    private func getExtendedSearchText(for stream: Stream) -> String {
+        var text = stream.title
+        
+        if let filename = stream.behaviorHints?.filename {
+            text += " " + filename
+        } else if let urlStr = stream.url, !urlStr.lowercased().hasPrefix("magnet:") {
+             // Fallback: Check URL for filename (e.g. Debrid links)
+             // Strip query parameters
+             let path = urlStr.components(separatedBy: "?").first ?? urlStr
+             if let urlFilename = path.components(separatedBy: "/").last {
+                text += " " + urlFilename
+             }
+        }
+        
+        return text.lowercased()
     }
 
     private func hasAcceptableAudioLanguage(_ title: String) -> Bool {

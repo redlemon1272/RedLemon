@@ -156,7 +156,7 @@ class CometService: ProviderService {
                 infoHash: infoHash?.lowercased(),  // Optional for RD streams
                 fileIdx: stream.fileIdx,
                 ext: nil,
-                behaviorHints: nil,
+                behaviorHints: stream.behaviorHints,
                 subtitles: nil
             )
         }

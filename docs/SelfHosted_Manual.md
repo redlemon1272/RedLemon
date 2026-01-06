@@ -104,9 +104,11 @@ docker exec -it supabase-db psql -U postgres
 ## 6. Automated Backups
 **Status:** ✅ Active (Daily at 9:00 AM UTC)
 
-*   **Script:** `/root/backup.sh`
+*   **Script:** `/root/backup.sh` (which calls `/root/verify_backup.sh`)
 *   **Destination:** `/root/backups/`
 *   **Retention:** 7 Days
+*   **Verification:** Automatically restores to a temp container to check data integrity. 
+    *   Status is logged to `public.backup_logs`: `verified` or `verification_failed`.
 
 **Manual Backup:**
 ```bash

@@ -18,11 +18,22 @@ if [ $? -eq 0 ]; then
   echo "✅ Backup successful: $BACKUP_DIR/$FILENAME"
   
   # Log to DB
-  docker exec -i supabase-db psql -U postgres postgres -c "INSERT INTO public.backup_logs (filename, size_bytes, status) VALUES ('$FILENAME', $FILESIZE, 'success');"
+  docker exec -i supabase-db psql -U postgres postgres -c "INSERT INTO public.backup_logs (filename, size_bytes, status) VALUES ('$FILENAME', $FILESIZE, 'pending_verification');"
 
   # Optional: Compress
-  gzip "$BACKUP_DIR/$FILENAME"
-  echo "✅ Compressed to: $BACKUP_DIR/$FILENAME.gz"
+  # Note: We verify BEFORE compression to avoid having to unzip
+  
+  # Trigger Verification
+  /root/verify_backup.sh "$FILENAME"
+  
+  # If Verification Succeeded, Compress
+  if [ $? -eq 0 ]; then
+      gzip "$BACKUP_DIR/$FILENAME"
+      echo "✅ Compressed to: $BACKUP_DIR/$FILENAME.gz"
+  else
+      echo "⚠️ Verification failed. Keeping uncompressed file for debugging."
+  fi
+
 else
   echo "❌ Backup failed!"
   # Log failure

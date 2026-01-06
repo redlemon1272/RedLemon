@@ -77,3 +77,4 @@
 - **Testing Profiles**: `RedLemonApp.swift` checks command line args for `-user-profile host` or `-user-profile guest`. This is critical for testing multiple instances on one machine.
 - **Environment**: `Config.swift` hardcodes Supabase keys.
     - **SECURITY NOTE**: The `supabaseServiceKey` has been removed from the client (Jan 2026 Audit). Admin operations now use signed RPCs.
+    - **Backup Verification**: `backup_server.sh` automatically calls `verify_backup.sh` to test data integrity in a temp container daily.

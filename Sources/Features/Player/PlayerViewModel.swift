@@ -818,11 +818,25 @@ class PlayerViewModel: ObservableObject {
             }
         }
 
+        // Dead room detection: If room was deleted (host left), go to browse instead of lobby
+        if let roomId = currentRoomId {
+            let roomExists = try? await roomManager.getRoomState(roomId: roomId)
+            if roomExists == nil {
+                print("👻 PlayerVM: Room \(roomId) no longer exists - returning to browse")
+                await exitPlayer(keepRoomState: false)
+                if let appState = appState {
+                    appState.currentView = .browse
+                }
+                return
+            }
+        }
+
         let wasEventPlayback = isEventPlayback
         let isPlaylistRoom = currentWatchPartyRoom?.hasPlaylist ?? false
         let isPersistentRoom = currentWatchPartyRoom?.isPersistent ?? false
 
         let shouldKeepRoomState = !wasEventPlayback && (isPlaylistRoom || isPersistentRoom)
+
 
         await exitPlayer(keepRoomState: shouldKeepRoomState)
 

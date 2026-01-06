@@ -249,6 +249,27 @@ actor StreamResolver {
             print("   🚫 RESOLVER FILTERED Bad Groups: \(beforeBadGroupFilter) → \(filteredStreams.count) streams")
         }
 
+        // CRITICAL: Filter Spam/Watermarked Streams (e.g. Gambling sites)
+        let beforeSpamFilter = filteredStreams.count
+        let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch"]
+        filteredStreams = filteredStreams.filter { stream in
+            let titleLower = stream.title.lowercased()
+             // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")
+            let isSpam = spamTerms.contains { term in
+                if term == "bet" {
+                     return titleLower.contains(".bet.") || titleLower.contains(" bet ") || titleLower.contains("-bet-")
+                }
+                return titleLower.contains(term)
+            }
+            if isSpam {
+                print("   🚫 RESOLVER BLOCKING Spam/Watermark: \(stream.title)")
+            }
+            return !isSpam
+        }
+        if filteredStreams.count < beforeSpamFilter {
+            print("   🚫 RESOLVER FILTERED Spam/Watermarks: \(beforeSpamFilter) → \(filteredStreams.count) streams")
+        }
+
         // CRITICAL: Filter MPEG-2 / REMUX streams
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
@@ -792,6 +813,19 @@ actor StreamResolver {
                        lower.contains("-pl-") ||
                        lower.contains(".pl.")
 
+        // Check for Multi/Dual audio
+        // Moved up to allow exceptions for Russian Multi releases
+        let isMulti = lower.contains("multi") || lower.contains("dual")
+
+        // Block "Rus" ONLY if it's NOT a Multi release
+        // (Many high quality P2P releases are Multi + include Rus)
+        let isRussian = lower.contains(" rus ") || lower.contains(".rus.") || lower.contains("-rus-") || lower.contains("rudub")
+        if isRussian && !isMulti {
+            return false
+        }
+        
+        if isForeign { return false }
+
         // 3. French-specific audio indicators (VF = Version Française)
         let frenchAudioIndicators = [
             " vf ", ".vf.", "-vf-", "_vf_",  // Version Française
@@ -812,7 +846,7 @@ actor StreamResolver {
         if isForeign { return false }
 
         // 4. THEN allow Multi/Dual if it wasn't already blocked as foreign
-        let isMulti = lower.contains("multi") || lower.contains("dual")
+        // (Calculated above: isMulti)
         if isMulti { return true }
 
         // Block "DUB" releases if they aren't marked as English/Multi

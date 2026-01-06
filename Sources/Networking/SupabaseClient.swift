@@ -800,6 +800,19 @@ class SupabaseClient: RoomManager, UserManager {
         return response
     }
 
+    /// Send heartbeat to keep presence alive
+    func sendHeartbeat(roomId: String, userId: UUID) async throws {
+        _ = try await makeRequest(
+            path: "/rpc/room_heartbeat",
+            method: "POST",
+            body: [
+                "p_room_id": roomId,
+                "p_user_id": userId.uuidString
+            ]
+        )
+    }
+
+
     /// Update room playback state
     func updateRoomPlayback(roomId: String, position: Int, isPlaying: Bool) async throws {
         _ = try await makeRequest(
@@ -1013,20 +1026,7 @@ class SupabaseClient: RoomManager, UserManager {
         )
     }
 
-    /// Send heartbeat to update last_seen for participant
-    func sendHeartbeat(roomId: String, userId: UUID) async throws {
-        _ = try await makeRequest(
-            path: "/room_participants",
-            method: "PATCH",
-            body: [
-                "last_seen": ISO8601DateFormatter().string(from: Date())
-            ],
-            query: [
-                "room_id": "eq.\(roomId)",
-                "user_id": "eq.\(userId.uuidString)"
-            ]
-        )
-    }
+
 
     /// Invoke cleanup for stale participants (RPC call)
     func cleanupStaleParticipants() async throws {

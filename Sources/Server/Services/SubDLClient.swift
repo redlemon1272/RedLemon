@@ -141,29 +141,47 @@ final class SubDLClient {
                      subtitles = try await fetchByInternalId(sdId: apiId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
                 }
                 // If API Name Search ALSO fails, try Web Scraping (Last Resort)
-                else {
-                    print("🕸️ Attempting Web Scraping Fallback for '\(name)'...")
-                    if let scrapedId = try await searchByWebScraping(name: name, year: year, type: subdlType) {
-                        print("✅ Scraping found SubDL ID: \(scrapedId). Fetching subtitles...")
-                        
-                        let cleanId = Int(scrapedId.replacingOccurrences(of: "sd", with: ""))
-                        if let fid = cleanId {
-                             subtitles = try await fetchByInternalId(sdId: fid, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
-                        }
-                    } else {
-                        print("❌ Scraping found no matches.")
-                    }
-                }
+
             }
         }
 
         // Post-Processing (Filtering & Sorting)
-        print("✅ Found \(subtitles.count) subtitles from SubDL (Final)")
+        print("✅ Found \(subtitles.count) subtitles from SubDL (Primary)")
         
-        let filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
+        var filteredSubtitles = filterSubtitlesByEpisode(subtitles, season: season, episode: episode)
         
-        if filteredSubtitles.count < subtitles.count {
-            print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes")
+        // SUPPLEMENTAL SEARCH LOGIC
+        // If we have few results (e.g. < 3), try to find the show by Name instead of IMDb ID
+        // This handles cases where SubDL has duplicate pages or unlinked content
+        if filteredSubtitles.count < 3, let name = name {
+            print("⚠️ Low subtitle count (\(filteredSubtitles.count)). Attempting supplemental Name Search for '\(name)'...")
+            
+            // Try identifying the show ID via text search
+            if let alternateId = try await searchByApiName(name: name, year: year, type: subdlType, apiKey: apiKey) {
+                print("✅ Supplemental Search found ID: \(alternateId). Fetching additional subtitles...")
+                
+                let extraSubtitles = try await fetchByInternalId(sdId: alternateId, tmdbId: nil, type: subdlType, season: season, episode: episode, languages: languages, apiKey: apiKey)
+                print("📦 Supplemental Fetch returned \(extraSubtitles.count) raw subtitles")
+                
+                let filteredExtras = filterSubtitlesByEpisode(extraSubtitles, season: season, episode: episode)
+                
+                // Merge uniqueness (by URL)
+                let existingUrls = Set(filteredSubtitles.map { $0.url })
+                var addedCount = 0
+                for sub in filteredExtras {
+                    if !existingUrls.contains(sub.url) {
+                        filteredSubtitles.append(sub)
+                        addedCount += 1
+                    }
+                }
+                print("🔗 Merged \(addedCount) unique subtitles from supplemental search.")
+            } else {
+                print("⚠️ Supplemental Name Search returned no match.")
+            }
+        } else {
+            if filteredSubtitles.count < subtitles.count {
+                print("🧹 Filtered out \(subtitles.count - filteredSubtitles.count) mismatched episodes")
+            }
         }
 
         let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode)
@@ -183,10 +201,10 @@ final class SubDLClient {
         
         // Prioritize TMDB ID if available
         if let tmdbId = tmdbId {
-            print("⚠️ Retrying with TMDB ID: \(tmdbId)")
+            // print("⚠️ Retrying with TMDB ID: \(tmdbId)")
             queryItems.append(URLQueryItem(name: "tmdb_id", value: "\(tmdbId)"))
         } else {
-             print("⚠️ Retrying with sd_id: \(sdId)")
+             // print("⚠️ Retrying with sd_id: \(sdId)")
              queryItems.append(URLQueryItem(name: "sd_id", value: "\(sdId)"))
         }
 
@@ -220,7 +238,7 @@ final class SubDLClient {
             .trimmingCharacters(in: .whitespacesAndNewlines)
 
         var components = URLComponents(string: "\(baseURL)/subtitles")!
-        var queryItems = [
+        let queryItems = [
             URLQueryItem(name: "api_key", value: apiKey),
             URLQueryItem(name: "film_name", value: sanitizedName), // Use 'film_name' for text search
             URLQueryItem(name: "type", value: type)
@@ -231,7 +249,7 @@ final class SubDLClient {
         components.queryItems = queryItems
         guard let url = components.url else { return nil }
 
-        print("🔍 Attempting API Name Search: \(sanitizedName)")
+        // print("🔍 Attempting API Name Search: \(sanitizedName)")
 
         var request = URLRequest(url: url)
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
@@ -243,11 +261,11 @@ final class SubDLClient {
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         
         guard let results = result.results, !results.isEmpty else {
-            print("❌ API Name Search returned no results.")
+            // print("❌ API Name Search returned no results.")
             return nil
         }
         
-        print("✅ API Name Search returned \(results.count) candidates.")
+        // print("✅ API Name Search returned \(results.count) candidates.")
         
         // Filter candidates
         for candidate in results {
@@ -261,7 +279,7 @@ final class SubDLClient {
             
             // Simple match:
             let candidateName = candidate.name.lowercased()
-            let searchName = name.lowercased()
+
             
             // Check for Year in candidate name (e.g. "Movie Title (2019)")
             var yearMatch = false
@@ -274,98 +292,33 @@ final class SubDLClient {
             // Similarity check
             // If year matches, we are very confident.
             if yearMatch {
-                print("   ✅ Candidate Year Match! ID: \(candidate.sd_id) Name: \(candidate.name)")
+                // print("   ✅ Candidate Year Match! ID: \(candidate.sd_id) Name: \(candidate.name)")
                 return candidate.sd_id
             }
             
             // If no year in search but name is very close
             if candidateName.contains(sanitizedName.lowercased()) {
-                 print("   ⚠️ Candidate Name Match (No Year verified): ID: \(candidate.sd_id) Name: \(candidate.name)")
+                 // print("   ⚠️ Candidate Name Match (No Year): ID: \(candidate.sd_id) Name: \(candidate.name)")
                  return candidate.sd_id
             }
         }
         
         // Fallback: Return first result if list not empty
         if let first = results.first {
-             print("⚠️ No exact match logic passed, using first result: ID=\(first.sd_id) Name=\(first.name)")
+             // print("⚠️ No exact match logic passed, using first result: ID=\(first.sd_id) Name=\(first.name)")
              return first.sd_id
         }
         
         return nil
     }
     
+    // We can remove searchByWebScraping if not used, or keep it. 
+    // For now I'll just comment it out to save space/complexity as API name search is safer.
+    /*
     private func searchByWebScraping(name: String, year: Int?, type: String) async throws -> String? {
-        // Sanitize name: remove colons and other special characters that confuse the search
-        let sanitizedName = name
-            .replacingOccurrences(of: ":", with: " ")
-            .replacingOccurrences(of: " - ", with: " ")
-            .replacingOccurrences(of: "  ", with: " ") // Collapse double spaces
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            
-        // Construct search URL: https://subdl.com/search/Name
-        guard let encodedName = sanitizedName.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return nil }
-        let searchURLStr = "https://subdl.com/search/\(encodedName)"
-        guard let url = URL(string: searchURLStr) else { return nil }
-        
-        print("🕸️ Scraping: \(searchURLStr)")
-        
-        var request = URLRequest(url: url)
-        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15", forHTTPHeaderField: "User-Agent")
-        
-        let (data, _) = try await URLSession.shared.data(for: request)
-        guard let html = String(data: data, encoding: .utf8) else { return nil }
-        
-        // Regex to find links: <a href="https://subdl.com/subtitle/sd12345/slug">Title (Year)</a>
-        // Or relative: <a href="/subtitle/sd12345/slug">
-        // We look for the 'sd' ID pattern
-        
-        // Pattern: href=".*?\/subtitle\/(sd\d+)\/.*?".*?>(.*?)<\/a>
-        // We need to match the name/year in the text to be safe
-        
-        let linkPattern = "href=[\"'](?:https://subdl\\.com)?/subtitle/(sd\\d+)/[^\"']+[\"'][^>]*>(.*?)</a>"
-        
-        let regex = try NSRegularExpression(pattern: linkPattern, options: [.caseInsensitive])
-        let nsString = html as NSString
-        let matches = regex.matches(in: html, options: [], range: NSRange(location: 0, length: nsString.length))
-        
-        print("🕸️ Found \(matches.count) potential matches on search page")
-        
-        for match in matches {
-            if match.numberOfRanges >= 3 {
-                let sdId = nsString.substring(with: match.range(at: 1))
-                let linkText = nsString.substring(with: match.range(at: 2)) // e.g. "Joker (2019)" or "<h3>Joker (2019)</h3>"
-                
-                // Clean link text (remove tags if any)
-                let cleanText = linkText.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
-                
-                print("   Candidate: ID=\(sdId) | Text='\(cleanText)'")
-                
-                // 1. Check Year Match (Strongest Signal)
-                if let year = year {
-                    if cleanText.contains("\(year)") {
-                        print("   ✅ Year Match (\(year))! Selected ID: \(sdId)")
-                        return sdId
-                    }
-                }
-                
-                // 2. Check Exact Name Match (if year missing or failed)
-                // Normalize names
-                if cleanText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) == name.lowercased().trimmingCharacters(in: .whitespacesAndNewlines) {
-                     print("   ✅ Exact Name Match! Selected ID: \(sdId)")
-                     return sdId
-                }
-            }
-        }
-        
-        // Fallback: If we have results but no perfect match, return the first one IF likely relevant
-        if let first = matches.first, matches.count > 0 {
-             let sdId = nsString.substring(with: first.range(at: 1))
-             print("⚠️ No exact match found, using first result: \(sdId)")
-             return sdId
-        }
-        
-        return nil
+       ...
     }
+    */
     
     // MARK: - Private Filtering Logic
     
@@ -387,24 +340,34 @@ final class SubDLClient {
             if let subSeason = sub.season, let subEpisode = sub.episode {
                 if subSeason != season || subEpisode != episode {
                     // Mismatched metadata
+                    print("   ⛔️ Dropped '\(sub.releaseName ?? "N/A")': Metadata mismatch (S\(subSeason)E\(subEpisode))")
                     return false
                 }
                 return true
             }
             
             // Fallback to name parsing if metadata is missing (Safety)
-            if sub.releaseName?.lowercased() != nil {
-                // If it explicitly says S04E02 but we want S04E01, block it.
-                // But be careful not to block "S04" packs.
+            if let releaseName = sub.releaseName {
+                let lowerName = releaseName.lowercased()
                 
-                // Block explicit mismatches
-                // e.g. Request S04E01. Found "S04E02" -> Block.
-                // Found "S04E01" -> Keep. 
-                // Found "Season 4" -> Keep (Pack).
-                
-                // Helper to extract episode number from string "S04E02"
-                // Ideally we rely on the metadata added to the struct, which solves 99% of cases now.
-                // But just in case, we trust the metadata first.
+                // e.g. "S01E03" when we want "S01E02" -> Block
+                // Regex for SxxExx
+                // Pattern: s(\d+)e(\d+)
+                let pattern = "s(\\d+)e(\\d+)"
+                if let regex = try? NSRegularExpression(pattern: pattern) {
+                    if let match = regex.firstMatch(in: lowerName, range: NSRange(lowerName.startIndex..., in: lowerName)) {
+                        
+                        let sStr = (lowerName as NSString).substring(with: match.range(at: 1))
+                        let eStr = (lowerName as NSString).substring(with: match.range(at: 2))
+                        
+                        if let sInt = Int(sStr), let eInt = Int(eStr) {
+                            if sInt != season || eInt != episode {
+                                print("   ⛔️ Dropped '\(releaseName)': Name mismatch (S\(sStr)E\(eStr))")
+                                return false
+                            }
+                        }
+                    }
+                }
             }
             
             return true
@@ -521,15 +484,7 @@ final class SubDLClient {
         var bestMatch: String?
 
         // Patterns to look for if we have season/episode info
-        var searchPatterns: [String] = []
-        if let s = season, let e = episode {
-            searchPatterns = [
-                String(format: "s%02de%02d", s, e),  // s05e15
-                String(format: "s%de%d", s, e),      // s5e15
-                String(format: "%dx%02d", s, e),     // 5x15
-                String(format: "%d%02d", s, e)       // 515
-            ]
-        }
+
 
         // Filter for subtitle files
         let subtitleFiles = lines.compactMap { line -> String? in

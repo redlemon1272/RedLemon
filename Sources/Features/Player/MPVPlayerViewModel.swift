@@ -1737,8 +1737,8 @@ class MPVPlayerViewModel: ObservableObject {
              self.logoURL = nil
              self.showPoster = true
              self.isLoading = true
-             self.appState?.player.eventStartTime = nil // FIX: Clear event state on exit
-             self.appState?.player.resumeFromTimestamp = 0 // FIX: Clear stale resume state
+             // self.appState?.player.eventStartTime = nil // REMOVED: Managed by PlayerViewModel.exitPlayer and loadStream to prevent race condition during room join
+             // self.appState?.player.resumeFromTimestamp = 0 // REMOVED: Managed by PlayerViewModel.exitPlayer and loadStream to prevent race condition during room join
 
              
              if !returningToLobby {

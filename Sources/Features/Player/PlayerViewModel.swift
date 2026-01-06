@@ -769,6 +769,8 @@ class PlayerViewModel: ObservableObject {
         // Capture event state before resetting
         let wasEventPlayback = isEventPlayback
         isEventPlayback = false // Reset event flag
+        eventStartTime = nil // FIX: Clear event start time on explicit exit
+        resumeFromTimestamp = nil // FIX: Clear resume timestamp
 
         exitFullscreen()
 

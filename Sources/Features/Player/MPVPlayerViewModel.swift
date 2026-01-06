@@ -405,6 +405,7 @@ class MPVPlayerViewModel: ObservableObject {
     private let hostStartupDelay: Double = 0.25  // 250ms delay for guest to prepare
     private var pendingPlayTask: Task<Void, Never>?
     private var playbackTimeoutTask: Task<Void, Never>? // NEW: Soft timeout for loading
+    private var playbackHeartbeatTask: Task<Void, Never>? // Heartbeat to keep host presence during playback
 
     // Ready Loop: Periodically resend READY signal until playback starts
     private var readyLoopTimer: Timer?
@@ -1760,6 +1761,9 @@ class MPVPlayerViewModel: ObservableObject {
         pendingPlayTask?.cancel()
         pendingPlayTask = nil
 
+        // Stop playback heartbeat
+        stopPlaybackHeartbeat()
+
         // Stop Ready Loop
         readyLoopTimer?.invalidate()
         readyLoopTimer = nil
@@ -2184,6 +2188,9 @@ extension MPVPlayerViewModel {
 
         // Start polling chat messages from database
         startChatPolling()
+        
+        // Start playback heartbeat to maintain presence in room_participants
+        startPlaybackHeartbeat()
 
         print("✅ Watch party sync initialized with Realtime")
 
@@ -2254,6 +2261,39 @@ extension MPVPlayerViewModel {
                 }
             }
         }
+    }
+
+    // MARK: - Playback Heartbeat (Room Presence)
+    
+    /// Start heartbeat loop to maintain presence in room_participants during playback
+    /// This prevents the zombie cleanup from removing the host while actively watching
+    private func startPlaybackHeartbeat() {
+        playbackHeartbeatTask?.cancel()
+        playbackHeartbeatTask = Task { [weak self] in
+            while !Task.isCancelled {
+                guard let self = self,
+                      let roomId = self.currentRoomId,
+                      let userId = self.appState?.currentUserId else { return }
+                
+                do {
+                    try await SupabaseClient.shared.sendHeartbeat(roomId: roomId, userId: userId)
+                    NSLog("💓 Playback heartbeat sent for room: \(roomId)")
+                } catch {
+                    NSLog("⚠️ Playback heartbeat failed: \(error)")
+                }
+                
+                // Wait 30 seconds before next heartbeat
+                try? await Task.sleep(nanoseconds: 30_000_000_000)
+            }
+        }
+        NSLog("💓 Started playback heartbeat loop")
+    }
+    
+    /// Stop the playback heartbeat loop
+    private func stopPlaybackHeartbeat() {
+        playbackHeartbeatTask?.cancel()
+        playbackHeartbeatTask = nil
+        NSLog("🛑 Stopped playback heartbeat loop")
     }
 
     /// Start polling chat messages from Supabase

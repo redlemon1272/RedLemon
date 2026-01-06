@@ -100,6 +100,27 @@ docker exec -it supabase-db psql -U postgres
 
 ---
 
+## 6. Automated Backups
+**Status:** ✅ Active (Daily at 9:00 AM UTC)
+
+*   **Script:** `/root/backup.sh`
+*   **Destination:** `/root/backups/`
+*   **Retention:** 7 Days
+
+**Manual Backup:**
+```bash
+/root/backup.sh
+```
+
+**Restore:**
+```bash
+# Unzip the backup
+gunzip /root/backups/backup_YYYYMMDD_HHMMSS.sql.gz
+
+# Restore to Postgres
+cat /root/backups/backup_YYYYMMDD_HHMMSS.sql | docker exec -i supabase-db psql -U postgres postgres
+```
+
 ## 5. Client Configuration
 
 Your **macOS App** (`Sources/App/Config.swift`) requires:

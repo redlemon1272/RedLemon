@@ -41,7 +41,8 @@ These keys are hardcoded in your app and server. If you change them, you must up
     `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus`
 
 *   **SERVICE_ROLE_KEY (Secret - Admin API):**
-    `eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogInNlcnZpY2Vfcm9sZSIsICJpc3MiOiAic3VwYWJhc2UiLCAiaWF0IjogMTc2NzY1MDAzMiwgImV4cCI6IDIwODMwMTAwMzJ9.E0sn2kRDP82qO1SV_CRZcNCT9Ho47sSuGaDxSKhoIT4`
+    `REMOVED (Security: Used on Server-Side Only)`
+
 
 *   **JWT Secret (For Token Generation):**
     `0c759034b5faeabea30200006df6cfed979ea6a95891a33080fb0d8677e671de`
@@ -128,8 +129,8 @@ Your **macOS App** (`Sources/App/Config.swift`) requires:
 ```swift
 static let supabaseURL = "https://151.243.109.243.nip.io"
 static let supabaseAnonKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9..."
-static let supabaseServiceKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9..."
 ```
+
 
 *(Already updated in your codebase)*.
 
@@ -165,3 +166,10 @@ docker exec -i supabase-db psql -U postgres postgres
 cat supabase/migrations/YOUR_MIGRATION.sql | ssh root@151.243.109.243 "docker exec -i supabase-db psql -U postgres postgres"
 ```
 
+
+
+### Security Migration (01/2026)
+To fix the Security Audit issues (Hardcoded Secrets), you must run the `database-migration-fix-logs-rls.sql` migration.
+This script sets up:
+1. Public RLS for App Logs (no credentials needed to report crashes).
+2. Secure Admin RPCs (`get_admin_logs`) that check your Public Key and Signature to allow viewing logs.

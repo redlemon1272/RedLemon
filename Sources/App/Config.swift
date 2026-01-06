@@ -18,7 +18,7 @@ struct Config {
     // Never commit service_role keys or database passwords
     static let supabaseURL = "https://151.243.109.243.nip.io"
     static let supabaseAnonKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogImFub24iLCAiaXNzIjogInN1cGFiYXNlIiwgImlhdCI6IDE3Njc2NTAwMzIsICJleHAiOiAyMDgzMDEwMDMyfQ.zY-FKTBjIi4dvhR7En5i5ULALx9QM_2O4QWMbedkBus"
-    static let supabaseServiceKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJyb2xlIjogInNlcnZpY2Vfcm9sZSIsICJpc3MiOiAic3VwYWJhc2UiLCAiaWF0IjogMTc2NzY1MDAzMiwgImV4cCI6IDIwODMwMTAwMzJ9.E0sn2kRDP82qO1SV_CRZcNCT9Ho47sSuGaDxSKhoIT4"
+
 
     // Local Server Security
     // Ephemeral token generated per-launch to secure local API

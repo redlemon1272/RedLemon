@@ -7,7 +7,6 @@
 - **What it does**: Everything. Video playback, UI state calls, Chat networking, Watch Party Sync, Subtitle logic.
 - **Danger**: Modifying one part (e.g., Chat) can break another (e.g., Playback).
 - **Rule**: When editing this file, TRIPLE CHECK that your change handles `DispatchQueue.main` correctly, as MPV callbacks often come from background threads.
-
 ### 2. Verified Streams Data Model
 - **File**: `SupabaseClient.swift` -> `struct VerifiedStream`
 - **Crucial Detail**: The `id` is a **COMPOSITE** of `hash + season + episode`.
@@ -77,4 +76,4 @@
 - **Local Server**: The app starts a local Vapor server on port `47253` (`Config.swift`). This handles metadata proxying.
 - **Testing Profiles**: `RedLemonApp.swift` checks command line args for `-user-profile host` or `-user-profile guest`. This is critical for testing multiple instances on one machine.
 - **Environment**: `Config.swift` hardcodes Supabase keys.
-    - **SECURITY WARNING**: The `supabaseServiceKey` is currently hardcoded in the client. Be extremely careful not to expose this in logs/UI.
+    - **SECURITY NOTE**: The `supabaseServiceKey` has been removed from the client (Jan 2026 Audit). Admin operations now use signed RPCs.

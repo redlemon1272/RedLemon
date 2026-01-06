@@ -1090,49 +1090,43 @@ class SupabaseClient: RoomManager, UserManager {
         }
 
         // Fire and forget - don't wait for response to avoid blocking
-        // USE SERVICE KEY to bypass RLS (since regular users can't write to app_logs)
-        _ = try await makeRequest(
-            path: "/app_logs",
-            method: "POST",
-            body: body,
-            headers: [
-                "Authorization": "Bearer \(Config.supabaseServiceKey)",
-                "apikey": Config.supabaseServiceKey
-            ]
-        )
+        // RLS allows public insertion for logs
+        do {
+            _ = try await makeRequest(
+                path: "/app_logs",
+                method: "POST",
+                body: body
+            )
+        } catch {
+            print("❌ Failed to upload log: \(error)")
+        }
     }
 
-    /// Fetch recent logs for Admin Dashboard
+    /// Fetch recent logs for Admin Dashboard (Secure RPC)
     func getAppLogs(limit: Int = 50, offset: Int = 0) async throws -> [AppLog] {
-        // USE SERVICE KEY to bypass RLS (admin needs to see ALL logs)
+        let params: [String: Any] = [
+            "p_limit": limit,
+            "p_offset": offset
+        ]
+        
+        // Use SIGNED request to prove Admin Identity via Public Key
         let data = try await makeRequest(
-            path: "/app_logs",
-            query: [
-                "select": "*",
-                "order": "created_at.desc",
-                "limit": String(limit),
-                "offset": String(offset)
-            ],
-            headers: [
-                "Authorization": "Bearer \(Config.supabaseServiceKey)",
-                "apikey": Config.supabaseServiceKey
-            ]
+            path: "/rpc/get_admin_logs",
+            method: "POST",
+            body: params,
+            sign: true
         )
         return try jsonDecoder.decode([AppLog].self, from: data)
     }
 
-    /// Delete an app log (Admin)
+    /// Delete an app log (Admin RPC)
     func deleteAppLog(id: UUID) async {
         do {
-            // USE SERVICE KEY to bypass RLS (admin needs to delete ANY log)
             _ = try await makeRequest(
-                path: "/app_logs",
-                method: "DELETE",
-                query: ["id": "eq.\(id.uuidString)"],
-                headers: [
-                    "Authorization": "Bearer \(Config.supabaseServiceKey)",
-                    "apikey": Config.supabaseServiceKey
-                ]
+                path: "/rpc/delete_admin_log",
+                method: "POST",
+                body: ["p_log_id": id.uuidString],
+                sign: true
             )
             print("🗑️ Deleted app log: \(id)")
         } catch {
@@ -1140,17 +1134,12 @@ class SupabaseClient: RoomManager, UserManager {
         }
     }
     
-    /// Delete all app logs (Admin)
+    /// Delete all app logs (Admin RPC)
     func deleteAllAppLogs() async throws {
-        // USE SERVICE KEY to bypass RLS (admin needs to delete ALL logs)
         _ = try await makeRequest(
-            path: "/app_logs",
-            method: "DELETE",
-            query: ["id": "neq.00000000-0000-0000-0000-000000000000"], // Delete all (UUID not nil)
-            headers: [
-                "Authorization": "Bearer \(Config.supabaseServiceKey)",
-                "apikey": Config.supabaseServiceKey
-            ]
+            path: "/rpc/delete_all_admin_logs",
+            method: "POST",
+            sign: true
         )
         print("🗑️ Deleted all app logs.")
     }

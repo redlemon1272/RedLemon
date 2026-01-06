@@ -162,21 +162,27 @@ actor RealtimeChannelManager: RealtimeService {
                 await self.handleConnectionChange(connected)
                 
                 // Auto-Reconnect Logic
-                if !connected && !self.isDisconnecting {
+                let isDisconnectingLocal = await self.isDisconnecting
+                
+                if !connected && !isDisconnectingLocal {
                     print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
-                    self.logError("Realtime connection lost unexpectedly. Reconnecting...")
+                    await self.logError("Realtime connection lost unexpectedly. Reconnecting...")
                     
                     try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
                     
                     // Double check we haven't started disconnecting in the meantime
-                    if !self.isDisconnecting && !self.isConnected {
+                    // We must re-fetch the actor state
+                    let isDisconnectingNow = await self.isDisconnecting
+                    let isConnectedNow = await self.isConnected
+                    
+                    if !isDisconnectingNow && !isConnectedNow {
                         print("🔄 Realtime: Reconnecting now...")
                         do {
                             try await self.realtimeClient.connect()
                             print("✅ Realtime: Rejoin requested")
                         } catch {
                             print("❌ Realtime: Reconnect failed: \(error)")
-                            self.logError("Auto-reconnect failed: \(error.localizedDescription)")
+                            await self.logError("Auto-reconnect failed: \(error.localizedDescription)")
                         }
                     }
                 }

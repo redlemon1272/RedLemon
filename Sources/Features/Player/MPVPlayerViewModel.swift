@@ -292,33 +292,49 @@ class MPVPlayerViewModel: ObservableObject {
     
     // Helper to robustly start event playback
     private func attemptEventPlaybackStart() {
-        guard let eventStartTime = self.appState?.player.eventStartTime else { return }
+        guard let appState = appState else { return }
+        let eventStartTime = appState.player.eventStartTime
+        let isEventPlayback = appState.player.isEventPlayback
         
-        // Only run if we have a valid duration
-        if self.duration > 0 {
-             // Only run if we are holding the gate (isRefiningInitialSeek)
-             // This prevents re-triggering during normal playback
-             guard isRefiningInitialSeek else { return }
-             
-             // Debounce: Check if we already triggered (prevent race between duration update and file load)
-             if hasVideoReadyTriggered { return }
-             
-             print("🎉 EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
-             let elapsed = Date().timeIntervalSince(eventStartTime)
-             let seekTime = max(0, elapsed)
-             
-             // 1. Seek immediately while still paused
-             print("   Seeking to live edge: \(Int(seekTime))s")
-             Task { @MainActor in
-                 await self.playbackService.seek(to: seekTime)
-                 
-                 // 2. Wait briefly for seek to latch, then play
-                 try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
-                 await self.playbackService.play()
-                 self.isPlaying = true
+        // 1. Guard: Duration must be known
+        if self.duration <= 0 {
+             if isRefiningInitialSeek {
+                 print("⏳ EVENT: Waiting for duration to start playback...")
              }
+             return
+        }
+        
+        // 2. Guard: Must be in refining state (holding the gate)
+        guard isRefiningInitialSeek else { return }
+        
+        // 3. Guard: Debounce
+        if hasVideoReadyTriggered { return }
+        
+        var seekTime: Double = 0
+        
+        // 4. Determine Seek Time
+        if let startTime = eventStartTime {
+             print("🎉 EVENT: File loaded/Duration ready (\(self.duration)s), preparing to seek...")
+             let elapsed = Date().timeIntervalSince(startTime)
+             seekTime = max(0, elapsed)
+        } else if isEventPlayback {
+             // Fallback for missing eventStartTime (Race condition workaround)
+             print("⚠️ EVENT: eventStartTime is nil but isEventPlayback is TRUE! Falling back to resumeFromTimestamp...")
+             seekTime = appState.player.resumeFromTimestamp ?? 0
         } else {
-             print("⏳ EVENT: Waiting for duration to start playback...")
+             // Not an event, and no start time -> Standard playback (handled elsewhere) or Watch Party sync will take over
+             return
+        }
+             
+        // 5. Execute Seek & Play
+        print("   Seeking to live edge: \(Int(seekTime))s")
+        Task { @MainActor in
+             await self.playbackService.seek(to: seekTime)
+             
+             // Wait briefly for seek to latch, then play
+             try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+             await self.playbackService.play()
+             self.isPlaying = true
         }
     }
 

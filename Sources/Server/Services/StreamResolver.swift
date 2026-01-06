@@ -158,9 +158,10 @@ actor StreamResolver {
                 if type == "movie" {
                     print("   📅 Year filter (\(year)): \(beforeCount) → \(afterCount) streams")
                     
-                    // FIX: If year filter removed EVERYTHING, it was likely too strict (e.g. stream missing year in title)
+                    // FIX: If year filter removed EVERYTHING or ALMOST EVERYTHING, it was likely too strict
+                    // (e.g. valid streams missing year in title).
                     // Restore streams and let title matching handle it.
-                    if afterCount == 0 && beforeCount > 0 {
+                    if (afterCount == 0 && beforeCount > 0) || (beforeCount > 20 && afterCount < 3) {
                         print("   ⚠️ Year filter too strict! Restoring \(beforeCount) streams to attempt title matching.")
                         filteredStreams = streams
                     }

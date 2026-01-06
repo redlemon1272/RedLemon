@@ -168,30 +168,7 @@ struct ChatOverlayView: View {
                 } else {
                     Spacer()
                     
-                    // Muted Users Menu
-                    if !viewModel.mutedUserIds.isEmpty {
-                        Menu {
-                            Text("Muted Users")
-                            Divider()
-                            ForEach(Array(viewModel.mutedUserIds), id: \.self) { userId in
-                                Button(action: {
-                                    viewModel.toggleMute(userId: userId)
-                                }) {
-                                    Label("Unmute \(resolveUsername(userId: userId))", systemImage: "speaker.wave.2")
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "speaker.slash.circle.fill")
-                                .font(.system(size: 14))
-                                .foregroundColor(.red.opacity(0.8))
-                                .padding(6)
-                                .background(Color.white.opacity(0.1))
-                                .clipShape(Circle())
-                        }
-                        .menuStyle(.borderlessButton)
-                        .padding(.trailing, 4)
-                        .help("Manage Muted Users")
-                    }
+
                     
                     // Reaction Toggle
                     Button(action: {

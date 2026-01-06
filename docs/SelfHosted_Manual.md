@@ -107,8 +107,9 @@ docker exec -it supabase-db psql -U postgres
 *   **Script:** `/root/backup.sh` (which calls `/root/verify_backup.sh`)
 *   **Destination:** `/root/backups/`
 *   **Retention:** 7 Days
-*   **Verification:** Automatically restores to a temp container to check data integrity. 
-    *   Status is logged to `public.backup_logs`: `verified` or `verification_failed`.
+*   **Verification:** Automatically restores to a temp container.
+    *   **Checks:** `users`, `rooms`, `payment_pools`, `payment_transactions`, `key_derivation_indices` (ensures rows > 0).
+    *   **Status:** Logged to `public.backup_logs` (`verified` or `verification_failed`).
 
 **Manual Backup:**
 ```bash

@@ -29,9 +29,21 @@ docker run -d --name "$TEMP_CONTAINER_NAME" \
   -e POSTGRES_PASSWORD=verify_temp_pass \
   postgres:15.1-alpine 
 
-# Wait for healthy
+# Wait for healthy (Polling)
 echo "$LOG_PREFIX ⏳ Waiting for DB to boot..."
-sleep 10
+MAX_TRIES=30
+for i in $(seq 1 $MAX_TRIES); do
+    if docker exec "$TEMP_CONTAINER_NAME" pg_isready -U postgres > /dev/null 2>&1; then
+        echo "$LOG_PREFIX ✅ DB is ready."
+        break
+    fi
+    if [ "$i" -eq "$MAX_TRIES" ]; then
+         echo "$LOG_PREFIX ❌ DB failed to boot in time."
+         docker rm -f "$TEMP_CONTAINER_NAME" > /dev/null
+         exit 1
+    fi
+    sleep 1
+done
 
 # 2. Copy Backup to Container
 echo "$LOG_PREFIX 📦 Copying backup..."
@@ -47,19 +59,35 @@ if [ $RESTORE_EXIT_CODE -ne 0 ]; then
     echo "$LOG_PREFIX ❌ Restore command failed (Exit Code: $RESTORE_EXIT_CODE)"
     STATUS="restore_failed"
 else
-    # 4. Data Integrity Check
-    echo "$LOG_PREFIX 🔍 Verifying data..."
-    # Check if users table has data
-    USER_COUNT=$(docker exec "$TEMP_CONTAINER_NAME" psql -U postgres -d postgres -t -c "SELECT count(*) FROM public.users;")
+    # 4. Data Integrity Check (Multi-Table)
+    echo "$LOG_PREFIX 🔍 Verifying consistency..."
     
-    # Trim whitespace
-    USER_COUNT=$(echo "$USER_COUNT" | xargs)
+    # Critical Tables to Check
+    TABLES=("users" "rooms" "payment_pools" "payment_transactions" "key_derivation_indices")
     
-    if [[ "$USER_COUNT" =~ ^[0-9]+$ ]] && [ "$USER_COUNT" -gt 0 ]; then
-        echo "$LOG_PREFIX ✅ Verification Successful! User Count: $USER_COUNT"
+    ALL_VALID=true
+    
+    for table in "${TABLES[@]}"; do
+        COUNT=$(docker exec "$TEMP_CONTAINER_NAME" psql -U postgres -d postgres -t -c "SELECT count(*) FROM public.$table;" 2>/dev/null)
+        # Trim whitespace
+        COUNT=$(echo "$COUNT" | xargs)
+        
+        if [[ "$COUNT" =~ ^[0-9]+$ ]]; then
+            echo "$LOG_PREFIX   - $table: $COUNT rows (OK)"
+        else
+            echo "$LOG_PREFIX   - $table: FAILED (Could not read)"
+            ALL_VALID=false
+        fi
+    done
+    
+    # We enforce that 'users' must have at least 1 row (admin/self)
+    USER_COUNT=$(docker exec "$TEMP_CONTAINER_NAME" psql -U postgres -d postgres -t -c "SELECT count(*) FROM public.users;" 2>/dev/null | xargs)
+
+    if [ "$ALL_VALID" = true ] && [ "$USER_COUNT" -gt 0 ]; then
+        echo "$LOG_PREFIX ✅ Verification Successful!"
         STATUS="verified"
     else
-        echo "$LOG_PREFIX ❌ Verification Failed: User count is invalid ($USER_COUNT)"
+        echo "$LOG_PREFIX ❌ Verification Failed: Data inconsistency found."
         STATUS="verification_failed"
     fi
 fi

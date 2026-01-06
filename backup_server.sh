@@ -41,6 +41,6 @@ else
   exit 1
 fi
 
-# Cleanup: Keep only last 7 days of backups
-find "$BACKUP_DIR" -type f -name "backup_*.gz" -mtime +7 -exec rm {} \;
+# Cleanup: Keep only last 7 days of backups (Clean both .gz and .sql)
+find "$BACKUP_DIR" -type f -name "backup_*" -mtime +7 -exec rm {} \;
 echo "🧹 Cleaned up old backups (kept last 7 days)"

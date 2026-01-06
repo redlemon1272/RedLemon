@@ -234,7 +234,7 @@ actor StreamResolver {
 
         // CRITICAL: Filter "Bad Groups"
         let beforeBadGroupFilter = filteredStreams.count
-        let badGroups = ["tamilmv", "1tamilmv", "tamilrockers"]
+        let badGroups = ["tamilmv", "1tamilmv", "tamilrockers", "le-production", "le production", "rgzsrutracker"]
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = getExtendedSearchText(for: stream)
             let isBadGroup = badGroups.contains { group in
@@ -251,7 +251,7 @@ actor StreamResolver {
 
         // CRITICAL: Filter Spam/Watermarked Streams (e.g. Gambling sites)
         let beforeSpamFilter = filteredStreams.count
-        let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch"]
+        let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch", "mostbet", "melbet"]
         filteredStreams = filteredStreams.filter { stream in
             let titleLower = getExtendedSearchText(for: stream)
              // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")

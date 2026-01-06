@@ -631,7 +631,7 @@ actor StreamResolver {
              // This prevents false positives like "Pr(iso)ner"
              let isoRegex = try? NSRegularExpression(pattern: "\\biso\\b|\\.iso$")
              let range = NSRange(location: 0, length: titleLower.utf16.count)
-             if let match = isoRegex?.firstMatch(in: titleLower, options: [], range: range) {
+             if isoRegex?.firstMatch(in: titleLower, options: [], range: range) != nil {
                   print("   🚫 RESOLVER DROP (\(quality)): Bad Pattern (ISO): \(stream.title)")
                   return false
              }

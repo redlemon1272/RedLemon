@@ -2664,7 +2664,10 @@ extension MPVPlayerViewModel {
         case .chat:
             // Receive chat message from other participants
             // CRITICAL: Skip messages from self (already added locally when sent)
-            if message.senderId == currentUserId {
+            // EXCEPTION: Allow LOBBY_JOIN to pass through so we see "You joined"
+            let isJoinMessage = message.chatText == "LOBBY_JOIN"
+            
+            if message.senderId == currentUserId && !isJoinMessage {
                 print("💬 Skipping own message (already displayed locally)")
                 return
             }
@@ -2677,9 +2680,15 @@ extension MPVPlayerViewModel {
 
             if let text = message.chatText, let username = message.chatUsername {
                 // Convert LOBBY_JOIN to a friendly join message, filter out other system messages
+                var displayUsername = username
                 let displayText: String
                 if text == "LOBBY_JOIN" {
-                    displayText = "joined! 👋"
+                    if message.senderId == currentUserId {
+                        displayUsername = "You"
+                        displayText = "joined the party! 👋"
+                    } else {
+                        displayText = "joined! 👋"
+                    }
                 } else if text.starts(with: "LOBBY_KICK:") {
                     // Robust parsing
                     let kickedIdRaw = text.replacingOccurrences(of: "LOBBY_KICK:", with: "")
@@ -2721,7 +2730,7 @@ extension MPVPlayerViewModel {
 
                 let chatMessage = ChatMessage(
                     id: UUID().uuidString,
-                    username: username,
+                    username: displayUsername,
                     text: displayText,
                     timestamp: Date(timeIntervalSince1970: message.timestamp),
                     senderId: message.senderId

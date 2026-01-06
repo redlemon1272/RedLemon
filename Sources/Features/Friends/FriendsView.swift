@@ -14,6 +14,7 @@ struct FriendsView: View {
     
     @State private var showingAddFriend = false
     @State private var selectedFriend: Friend?
+    @State private var joiningFriendId: String?
 
     // Tabs are now just for view logic, handled by VM
     
@@ -200,7 +201,9 @@ struct FriendsView: View {
                 onToggleFavorite: { await toggleFavorite(friend) },
                 onRemove: { await removeFriend(friend) },
                 onInvite: { inviteToWatchParty(friend) },
-                onJoin: { joinFriend(friend) }
+
+                onJoin: { joinFriend(friend) },
+                isJoining: joiningFriendId == friend.id
             )
         }
         .buttonStyle(.plain)
@@ -373,8 +376,11 @@ struct FriendsView: View {
         }
         
         print("🚀 Joining friend \(friend.username) in room: \(roomId)")
+        joiningFriendId = friend.id
+        
         Task {
             await appState.player.joinRoom(roomId: roomId)
+            joiningFriendId = nil
         }
     }
 }
@@ -392,8 +398,9 @@ struct FriendRow: View {
     let onRemove: () async -> Void
     let onInvite: () -> Void
     let onJoin: (() -> Void)? // Optional join action
+    let isJoining: Bool
     
-    init(friend: Friend, activity: FriendActivity?, unreadCount: Int = 0, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil) {
+    init(friend: Friend, activity: FriendActivity?, unreadCount: Int = 0, onToggleFavorite: @escaping () async -> Void, onRemove: @escaping () async -> Void, onInvite: @escaping () -> Void, onJoin: (() -> Void)? = nil, isJoining: Bool = false) {
         self.friend = friend
         self.activity = activity
         self.unreadCount = unreadCount
@@ -401,6 +408,7 @@ struct FriendRow: View {
         self.onRemove = onRemove
         self.onInvite = onInvite
         self.onJoin = onJoin
+        self.isJoining = isJoining
     }
 
     @State private var showingMenu = false
@@ -503,11 +511,18 @@ struct FriendRow: View {
             if let activity = activity, activity.currentlyWatching != nil {
                 if let onJoin = onJoin, activity.currentlyWatching?.roomId != nil {
                      Button(action: onJoin) {
-                         Label("Join", systemImage: "play.fill")
-                             .font(.caption)
+                         if isJoining {
+                             ProgressView()
+                                 .scaleEffect(0.5)
+                                 .frame(maxWidth: 40) // Match approximate width of label
+                         } else {
+                             Label("Join", systemImage: "play.fill")
+                                 .font(.caption)
+                         }
                      }
                      .buttonStyle(.borderedProminent)
                      .controlSize(.small)
+                     .disabled(isJoining)
                 } else {
                     Button(action: onInvite) {
                         Label("Join", systemImage: "play.fill")

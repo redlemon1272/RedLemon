@@ -147,6 +147,55 @@ actor RealtimeChannelManager: RealtimeService {
                await self?.handlePostgresChange(payload)
             }
         }
+        
+        // Start monitoring connection for auto-reconnect
+        await monitorConnection()
+    }
+    
+    /// Monitors connection state and attempts to reconnect if dropped unexpectedly
+    private func monitorConnection() async {
+        await realtimeClient.onConnectionChange { [weak self] connected in
+            guard let self = self else { return }
+            
+            Task {
+                // Update local state
+                await self.handleConnectionChange(connected)
+                
+                // Auto-Reconnect Logic
+                if !connected && !self.isDisconnecting {
+                    print("⚠️ Realtime: Connection lost. Attempting auto-reconnect in 2s...")
+                    self.logError("Realtime connection lost unexpectedly. Reconnecting...")
+                    
+                    try? await Task.sleep(nanoseconds: 2_000_000_000) // 2s
+                    
+                    // Double check we haven't started disconnecting in the meantime
+                    if !self.isDisconnecting && !self.isConnected {
+                        print("🔄 Realtime: Reconnecting now...")
+                        do {
+                            try await self.realtimeClient.connect()
+                            print("✅ Realtime: Rejoin requested")
+                        } catch {
+                            print("❌ Realtime: Reconnect failed: \(error)")
+                            self.logError("Auto-reconnect failed: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Telemetry
+    
+    private func logError(_ message: String) {
+        Task {
+            // Bridge to SupabaseClient for server-side logging
+            // We use 'error' level for these runtime failures
+            try? await SupabaseClient.shared.insertLog(
+                level: "error", 
+                message: "[Realtime] \(message)",
+                metadata: ["room_id": roomId ?? "unknown", "user_id": userId ?? "unknown"]
+            )
+        }
     }
     
     // New method to handle postgres changes
@@ -169,8 +218,10 @@ actor RealtimeChannelManager: RealtimeService {
             NSLog("✅ Realtime: Decoded message type: \(message.type), sender: \(message.senderId ?? "unknown")")
             handleSyncMessage(message)
         } catch {
-            NSLog("❌ Realtime: Failed to decode broadcast message: \(error)")
+            let errorMsg = "Failed to decode broadcast message: \(error)"
+            NSLog("❌ Realtime: \(errorMsg)")
             NSLog("   Payload: \(payload)")
+            logError(errorMsg + " Payload keys: \(payload.keys)")
         }
     }
 

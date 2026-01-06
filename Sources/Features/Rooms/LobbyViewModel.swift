@@ -175,7 +175,9 @@ class LobbyViewModel: ObservableObject {
         // Phase 5: Subscribe to State Machine updates
         stateMachine.$currentState
             .receive(on: RunLoop.main)
-            .assign(to: \.lobbyState, on: self)
+            .sink { [weak self] state in
+                self?.lobbyState = state
+            }
             .store(in: &cancellables)
 
         // Fetch fresh room state from Supabase to ensure playlist is synced
@@ -605,13 +607,7 @@ class LobbyViewModel: ObservableObject {
             await chatManager.send(senderId: participantId, username: username)
         }
 
-        // Subscribe to State Machine updates
-        stateMachine.$currentState
-            .receive(on: RunLoop.main)
-            .assign(to: \.lobbyState, on: self)
-            .store(in: &cancellables)
 
-        // Setup Chat Manager binding
     }
 
     // Extracted logic for network transmission (called by ChatManager callback)

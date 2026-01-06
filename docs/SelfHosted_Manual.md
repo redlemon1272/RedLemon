@@ -140,3 +140,28 @@ static let supabaseServiceKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9..."
 *   **Database Stats:** Real-time DB size and connection count.
 *   **Router Status:** Edge Function health check (`/system/status`).
 *   **Backups:** Displays the time and status of the last automated backup (read from `public.backup_logs`).
+
+---
+
+## 7. Database Migrations
+
+To apply new SQL migrations (e.g. from `supabase/migrations/`) to the production server:
+
+**Option 1: Via SSH (Recommended)**
+1.  Copy the SQL file to the server (or just copy the content).
+2.  Run the following command (pipes content to the database container):
+
+```bash
+# If file is local to the server:
+cat migration.sql | docker exec -i supabase-db psql -U postgres postgres
+
+# If pasting content directly:
+docker exec -i supabase-db psql -U postgres postgres
+# (Paste SQL content, then press Ctrl+D)
+```
+
+**Option 2: One-Liner from Local Machine**
+```bash
+cat supabase/migrations/YOUR_MIGRATION.sql | ssh root@151.243.109.243 "docker exec -i supabase-db psql -U postgres postgres"
+```
+

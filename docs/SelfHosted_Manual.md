@@ -132,3 +132,11 @@ static let supabaseServiceKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9..."
 ```
 
 *(Already updated in your codebase)*.
+
+## 6. Admin Dashboard (New)
+**Usage:** Press `Cmd+Shift+A` in the macOS app to open.
+
+**New Server Tab:**
+*   **Database Stats:** Real-time DB size and connection count.
+*   **Router Status:** Edge Function health check (`/system/status`).
+*   **Backups:** Displays the time and status of the last automated backup (read from `public.backup_logs`).

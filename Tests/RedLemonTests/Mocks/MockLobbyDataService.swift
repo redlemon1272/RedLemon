@@ -125,7 +125,8 @@ class MockLobbyDataService: LobbyDataService {
         streamHash: String?,
         fileIdx: Int?,
         quality: String?,
-        unlockedUrl: String?
+        unlockedUrl: String?,
+        resetPlayback: Bool
     ) async throws {
         updateRoomStreamCallCount += 1
     }

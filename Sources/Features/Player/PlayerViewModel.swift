@@ -531,7 +531,8 @@ class PlayerViewModel: ObservableObject {
             streamHash: finalStream.infoHash,
             fileIdx: finalStream.fileIdx,
             quality: finalStream.quality,
-            unlockedUrl: finalStream.url
+            unlockedUrl: finalStream.url,
+            resetPlayback: true // RESET STATE: Ensure room is paused/lobby for new media
         )
 
         print("✅ Stream persisted! Hash: \(finalStream.infoHash ?? "nil")")
@@ -614,7 +615,8 @@ class PlayerViewModel: ObservableObject {
                             streamHash: unlockedStream.infoHash,
                             fileIdx: unlockedStream.fileIdx,
                             quality: unlockedStream.quality,
-                            unlockedUrl: unlockedStream.url
+                            unlockedUrl: unlockedStream.url,
+                            resetPlayback: true // RESET STATE: Manual stream change implies new session start
                         )
                     } catch {
                         LogManager.shared.error("❌ Failed to persist stream selection to room \(roomId)", error: error)
@@ -717,7 +719,8 @@ class PlayerViewModel: ObservableObject {
                                     streamHash: unlockedStream.infoHash,
                                     fileIdx: unlockedStream.fileIdx,
                                     quality: unlockedStream.quality,
-                                    unlockedUrl: unlockedStream.url
+                                    unlockedUrl: unlockedStream.url,
+                                    resetPlayback: true // RESET STATE: Failover needs to sync guests to new file
                                 )
                                 print("✅ Watch Party Failover: Room updated successfully")
                             } catch {

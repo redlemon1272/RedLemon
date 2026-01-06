@@ -163,6 +163,9 @@ class MPVPlayerViewModel: ObservableObject {
                         if isRoomPlaying {
                              NSLog("⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)")
                              self.hasSentReadySignal = true // Mark as sent to disable future triggers
+                        } else if isRoomPlaying && self.isWatchPartyHost {
+                             NSLog("⏩ Watch Party: Room playing but I am HOST - Force sending ready signal (Recovery)")
+                             self.sendReadySignal()
                         } else {
                             NSLog("⏱️ Watch Party: Duration available (%.1fs), triggering ready signal", dur)
                             self.sendReadySignal()
@@ -735,22 +738,34 @@ class MPVPlayerViewModel: ObservableObject {
 
         } else {
             // Watch Party Mode (Non-Event)
-            print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
-            // NEW: Hold poster until we get the first sync message to prevent 0:00 flash
-            isRefiningInitialSeek = true
-
-            if shouldResume {
-                print("   With resume from \(Int(resumeTime))s")
-                // Still load paused!
+            
+            // Check for Solo Host Scenario
+            let participantCount = self.appState?.player.currentWatchPartyRoom?.participants.count ?? 0
+            // If we are host and nobody is with us (count <= 1), we should bypass the "Start Paused" logic
+            let isSoloHost = self.isWatchPartyHost && participantCount <= 1
+            
+            if isSoloHost {
+                print("👥 WATCH PARTY (SOLO HOST): Bypass Start Paused - Autoplaying")
+                isRefiningInitialSeek = false // Don't hold UI lock
+                
+                 Task { @MainActor in
+                    let expectedCount = min(subtitles.count, 3)
+                    await playbackService.loadVideo(url: streamURL, autoplay: true, expectedSubtitleCount: expectedCount)
+                }
+            } else {
+                print("👥 WATCH PARTY MODE: Starting PAUSED for synchronization")
+                // NEW: Hold poster until we get the first sync message to prevent 0:00 flash
+                isRefiningInitialSeek = true
+    
+                // Always load paused for watch party
+                Task { @MainActor in
+                    let expectedCount = min(subtitles.count, 3)
+                    await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
+                }
             }
 
-            // Always load paused for watch party
-            Task { @MainActor in
-                let expectedCount = min(subtitles.count, 3)
-                await playbackService.loadVideo(url: streamURL, autoplay: false, expectedSubtitleCount: expectedCount)
-            }
-            // Fix: Don't show "Waiting for guests" if we are force-launching solo
-            showWaitingForGuests = !forceSoloStart
+            // Fix: Don't show "Waiting for guests" if we are force-launching solo OR effectively solo
+            showWaitingForGuests = !forceSoloStart && !isSoloHost
             // Auto-open chat for watch parties
             Task { @MainActor in self.showChat = true }
         }

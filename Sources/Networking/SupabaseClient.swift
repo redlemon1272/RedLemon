@@ -59,7 +59,7 @@ protocol RoomManager {
     ) async throws -> SupabaseRoom
 
     func joinRoom(roomId: String, userId: UUID, isHost: Bool) async throws
-    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?) async throws
+    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, resetPlayback: Bool) async throws
     func getRoomState(roomId: String) async throws -> SupabaseRoom?
     func getRoomParticipants(roomId: String) async throws -> [RoomParticipant]
 }
@@ -878,11 +878,18 @@ class SupabaseClient: RoomManager, UserManager {
         streamHash: String?,
         fileIdx: Int?,
         quality: String?,
-        unlockedUrl: String?
+        unlockedUrl: String?,
+        resetPlayback: Bool = false
     ) async throws {
         var body: [String: Any] = [
             "last_activity": ISO8601DateFormatter().string(from: Date())
         ]
+
+        if resetPlayback {
+            body["is_playing"] = false
+            body["playback_position"] = 0
+            NSLog("🔄 SupabaseClient: Resetting playback state for room \(roomId)")
+        }
 
         if let streamHash = streamHash { body["stream_hash"] = streamHash }
         if let fileIdx = fileIdx { body["selected_file_idx"] = fileIdx }

@@ -49,7 +49,8 @@ protocol LobbyDataService {
         streamHash: String?,
         fileIdx: Int?,
         quality: String?,
-        unlockedUrl: String?
+        unlockedUrl: String?,
+        resetPlayback: Bool
     ) async throws
     
     // Participants & Presence

@@ -291,6 +291,23 @@ class SupabaseClient: RoomManager, UserManager {
         return data
     }
 
+    /// Remote Procedure Call (RPC)
+    func rpc<T: Decodable>(fn: String, params: [String: Any]? = nil) async throws -> T {
+        let data = try await makeRequest(
+            path: "/rpc/\(fn)",
+            method: "POST",
+            body: params
+        )
+        return try jsonDecoder.decode(T.self, from: data)
+    }
+
+    /// Invoke Edge Function
+    func invokeFunction<T: Decodable>(name: String, body: [String: Any]? = nil) async throws -> T {
+        // Use the existing functions API wrapper
+        let data = try await functions.invoke(name, options: FunctionInvokeOptions(body: body ?? [:]))
+        return try jsonDecoder.decode(T.self, from: data)
+    }
+
     /// Get trusted server time from Supabase (via HTTP Date header)
     /// Get trusted server time from Supabase (via RPC)
     func getServerTime() async throws -> Date {
@@ -470,6 +487,20 @@ class SupabaseClient: RoomManager, UserManager {
             ]
         )
         return try jsonDecoder.decode([SupabaseUser].self, from: data)
+    }
+
+    /// Get latest backup log
+    func getLatestBackupLog() async throws -> BackupLog? {
+        let data = try await makeRequest(
+            path: "/backup_logs",
+            query: [
+                "select": "*",
+                "order": "created_at.desc",
+                "limit": "1"
+            ]
+        )
+        let logs = try jsonDecoder.decode([BackupLog].self, from: data)
+        return logs.first
     }
 
     /// Grant Premium Status (Admin Only)

@@ -200,7 +200,7 @@ actor StreamResolver {
         let beforeSampleFilter = filteredStreams.count
         let sampleTerms = ["sample", "trailer", "featurette", "teaser", "bonus", "making of", "deleted scenes"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
+            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
             
             // Check for terms with delimiters to avoid false positives (e.g. "teasers" -> "teaser" is okay, but "sample" in "example" is not)
             // Actually "example" doesn't contain "sample". 
@@ -236,7 +236,7 @@ actor StreamResolver {
         let beforeBadGroupFilter = filteredStreams.count
         let badGroups = ["tamilmv", "1tamilmv", "tamilrockers"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
+            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
             let isBadGroup = badGroups.contains { group in
                 titleLower.contains(group)
             }
@@ -253,7 +253,7 @@ actor StreamResolver {
         let beforeSpamFilter = filteredStreams.count
         let spamTerms = ["1xbet", "casino", "winline", "azino", "bet", "vavada", "joycasino", "parimatch"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
+            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
              // Use strict delimiters for "bet" to avoid false positives (e.g. "Better call saul")
             let isSpam = spamTerms.contains { term in
                 if term == "bet" {
@@ -274,7 +274,7 @@ actor StreamResolver {
         let beforeMpeg2Filter = filteredStreams.count
         let mpeg2Terms = ["mpeg-2", "mpeg2", "dvd5", "dvd9"]
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
+            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
             let isMpeg2 = mpeg2Terms.contains { term in
                 titleLower.contains(term)
             }
@@ -295,7 +295,7 @@ actor StreamResolver {
         let threeDFormats = ["sbs", "hsbs", "h-sbs", "half-sbs", "tab", "htab", "half-tab"]
 
         filteredStreams = filteredStreams.filter { stream in
-            let titleLower = stream.title.lowercased()
+            let titleLower = (stream.title + " " + (stream.behaviorHints?.filename ?? "")).lowercased()
 
             // Check implicit 3D ("3d" surrounded by delimiters)
             if titleLower.contains(".3d.") || titleLower.contains(" 3d ") || titleLower.contains("-3d-") || titleLower.hasSuffix(".3d") || titleLower.hasSuffix(" 3d") {
@@ -318,9 +318,10 @@ actor StreamResolver {
         // CRITICAL: Filter by AUDIO LANGUAGE - English/Multi preferred
         let beforeAudioFilter = filteredStreams.count
         filteredStreams = filteredStreams.filter { stream in
-            let hasAcceptableAudio = hasAcceptableAudioLanguage(stream.title)
+            let combinedText = stream.title + " " + (stream.behaviorHints?.filename ?? "")
+            let hasAcceptableAudio = hasAcceptableAudioLanguage(combinedText)
             if !hasAcceptableAudio {
-                let audioDesc = getAudioLanguageDescription(stream.title)
+                let audioDesc = getAudioLanguageDescription(combinedText)
                 print("   🚫 RESOLVER BLOCKING non-English audio: \(stream.title) (\(audioDesc))")
             }
             return hasAcceptableAudio
@@ -815,7 +816,7 @@ actor StreamResolver {
 
         // Check for Multi/Dual audio
         // Moved up to allow exceptions for Russian Multi releases
-        let isMulti = lower.contains("multi") || lower.contains("dual")
+        let isMulti = lower.contains("multi") || lower.contains("dual") || lower.contains("latino")
 
         // Block "Rus" ONLY if it's NOT a Multi release
         // (Many high quality P2P releases are Multi + include Rus)
@@ -852,6 +853,7 @@ actor StreamResolver {
         // Block "DUB" releases if they aren't marked as English/Multi
         // "DUB" usually implies dubbing into a non-English language (for English movies)
         // or just "Dubbed" without specifying English (risky)
+        // EXCEPTION: "Dubbed" is sometimes used for English dubs of foreign content, but here we assume English content.
         let isDubbed = lower.contains(".dub.") || lower.contains(" dub ") || lower.contains("-dub-") || lower.hasSuffix("-dub") || lower.hasSuffix(".dub")
         if isDubbed { return false }
 

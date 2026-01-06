@@ -83,6 +83,7 @@ actor StreamService: StreamResolving {
             type: item.type,
             season: finalSeason,
             episode: finalEpisode,
+            name: item.name,
             year: finalMetadata.year,
             excludedHashes: excludedHashes,
             ignoreVerified: false
@@ -105,6 +106,7 @@ actor StreamService: StreamResolving {
                     type: item.type,
                     season: finalSeason,
                     episode: finalEpisode,
+                    name: item.name,
                     year: finalMetadata.year,
                     excludedHashes: excludedHashes,
                     ignoreVerified: true

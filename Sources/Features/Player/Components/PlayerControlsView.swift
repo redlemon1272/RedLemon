@@ -199,7 +199,8 @@ struct PlayerControlsView: View {
                     }
 
                     // Next Episode Button
-                    if let appState = viewModel.appState, 
+                    if !viewModel.isInWatchParty,
+                       let appState = viewModel.appState, 
                        appState.player.selectedMediaItem?.type == "series" {
                         Button(action: {
                             Task {

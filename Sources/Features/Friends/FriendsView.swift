@@ -509,7 +509,7 @@ struct FriendRow: View {
 
             // Action buttons
             if let activity = activity, activity.currentlyWatching != nil {
-                if let onJoin = onJoin, activity.currentlyWatching?.roomId != nil {
+                if let onJoin = onJoin, let watching = activity.currentlyWatching, watching.roomId != nil, watching.isJoinable {
                      Button(action: onJoin) {
                          if isJoining {
                              ProgressView()
@@ -530,9 +530,10 @@ struct FriendRow: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .controlSize(.small)
-                    .disabled(true) // Disable if we can't actually join (e.g. no room ID)
+                    .disabled(true) // Disable if we can't actually join (e.g. no room ID or unjoinable)
                 }
             }
+
 
             // Menu
             Menu {

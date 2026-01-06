@@ -65,6 +65,7 @@ struct FriendActivity: Identifiable, Codable {
         let imdbId: String
         let startedAt: Date
         let roomId: String? // If in a watch party
+        var isJoinable: Bool = true // False if room is dead (no host)
     }
 }
 

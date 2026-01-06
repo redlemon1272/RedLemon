@@ -240,13 +240,23 @@ class SocialService: ObservableObject {
         // Parse metadata
         // Check for specific watching status
         if let mediaTitle = newestMetadata["watching_title"] as? String {
-             activity.currentlyWatching = FriendActivity.WatchingInfo(
+            let roomId = newestMetadata["room_id"] as? String
+            
+            activity.currentlyWatching = FriendActivity.WatchingInfo(
                 mediaTitle: mediaTitle,
                 mediaType: newestMetadata["watching_type"] as? String ?? "movie",
                 imdbId: newestMetadata["watching_id"] as? String ?? "",
                 startedAt: Date(), // Simplistic
-                roomId: newestMetadata["room_id"] as? String
+                roomId: roomId,
+                isJoinable: true // Default to true, will validate async
             )
+            
+            // Async: Validate room exists if roomId is present
+            if let roomId = roomId {
+                Task { [weak self] in
+                    await self?.validateRoomJoinability(userId: normalizedUserId, roomId: roomId)
+                }
+            }
         }
         // Check for custom status
         if let status = newestMetadata["status"] as? String {
@@ -254,9 +264,49 @@ class SocialService: ObservableObject {
         }
         
         friendActivity[normalizedUserId] = activity
+
+    }
+    
+    /// Validates if a room is joinable by checking if it exists in the database with a valid host.
+    /// If the room doesn't exist or has no host, sets isJoinable = false for the friend's activity.
+    private func validateRoomJoinability(userId: String, roomId: String) async {
+        do {
+            // Check if room exists and has participants (including host)
+            let room = try await SupabaseClient.shared.getRoomState(roomId: roomId)
+            
+            if room == nil {
+                // Room doesn't exist - mark as not joinable
+                print("👻 SocialService: Room \(roomId) not found - marking \(userId) as unjoinable")
+                markUserAsUnjoinable(userId: userId)
+            } else {
+                // Room exists - check if it has a host by checking participants
+                let participants = try await SupabaseClient.shared.getRoomParticipants(roomId: roomId)
+                let hasHost = participants.contains { $0.userId.uuidString.lowercased() == room?.hostUserId.uuidString.lowercased() }
+                
+                if !hasHost {
+                    print("👻 SocialService: Room \(roomId) has no active host - marking \(userId) as unjoinable")
+                    markUserAsUnjoinable(userId: userId)
+                }
+            }
+        } catch {
+            print("⚠️ SocialService: Failed to validate room \(roomId): \(error)")
+            // On error, keep as joinable (fail open)
+        }
+    }
+    
+    /// Marks a user's currentlyWatching as not joinable
+    private func markUserAsUnjoinable(userId: String) {
+        let normalizedUserId = userId.lowercased()
+        guard var activity = friendActivity[normalizedUserId],
+              var watching = activity.currentlyWatching else { return }
+        
+        watching.isJoinable = false
+        activity.currentlyWatching = watching
+        friendActivity[normalizedUserId] = activity
     }
 
     // MARK: - Heartbeat
+
     
     private func startHeartbeat() {
         stopHeartbeat()

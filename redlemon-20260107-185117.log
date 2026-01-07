@@ -1,0 +1,1204 @@
+2026-01-07 18:51:24.444 RedLemon[18483:179441] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-07 18:51:24.444 RedLemon[18483:179441] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-07 18:51:24.524 RedLemon[18483:179441] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-07 18:51:24.535 RedLemon[18483:179491] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 18:51:24.559 RedLemon[18483:179441] ✅ Playback state reset complete - starting in browse view
+2026-01-07 18:51:24.559 RedLemon[18483:179441] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-07 18:51:24.560 RedLemon[18483:179441] 🧪 Testing Profile: debug
+2026-01-07 18:51:24.560 RedLemon[18483:179496] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 18:51:24.602 RedLemon[18483:179441] ✅ Keychain: Found stored username: ursinho
+2026-01-07 18:51:24.602 RedLemon[18483:179441] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-07 18:51:24.602 RedLemon[18483:179496] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-07 18:51:25.004 RedLemon[18483:179496] 📡 SupabaseClient: User lookup response received (356 bytes)
+2026-01-07 18:51:25.015 RedLemon[18483:179496] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-07 18:51:25.016 RedLemon[18483:179496] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 18:51:25.040 RedLemon[18483:179441] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 18:51:25.040 RedLemon[18483:179441] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 18:51:25.040 RedLemon[18483:179441] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 18:51:25.040 RedLemon[18483:179441] 🚀 RedLemon: Starting HTTP server...
+2026-01-07 18:51:25.040 RedLemon[18483:179441] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-07 18:51:25.057 RedLemon[18483:179441] ✅ RedLemon: HTTPServer instance created
+2026-01-07 18:51:25.058 RedLemon[18483:179493] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"3656CB92-4AE1-4904-A000-3D8634B06CC5","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-07 18:51:25.468 RedLemon[18483:179441] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 18:51:27.104 RedLemon[18483:179441] ✅ RedLemon: Server marked as ready
+2026-01-07 18:51:27.138 RedLemon[18483:179441] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-07 18:51:27.138 RedLemon[18483:179441] 🔍 Performing startup checks...
+2026-01-07 18:51:27.138 RedLemon[18483:179441] ✅ Username-based authentication ready
+2026-01-07 18:51:27.954 RedLemon[18483:179441] 🔍 Performing startup checks...
+2026-01-07 18:51:27.954 RedLemon[18483:179441] ✅ Username-based authentication ready
+2026-01-07 18:51:28.512 RedLemon[18483:179441] 🔄 Checking for app updates...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+✅ [EventsView] Loaded 411 movies from config version 1486
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 3425 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0162222/img (866194 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 3424 seconds
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"F1428676-0B04-41C3-9FB3-192B3D1E3475","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX6jdDdqc6AvJi","phx_ref_prev":"GIiX5Y2Grqg6AvDi","last_seen":"2026-01-07T23:51:25.815Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:50:54.390Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX6mlXEKo6AvNi","last_seen":"2026-01-07T23:51:26.572Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"D16EA0A1-24B0-43F8-989F-49C27539ABCF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Checking for background crypto payments...
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 36 items to cloud...
+🔄 SocialService: Syncing 36 items to cloud (serial)...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91125,"eth":3161.365},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91125,"eth":3161.365},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.152s (RTT: 136ms)
+   Local:  2026-01-07 23:51:28 +0000
+   Server: 2026-01-07 23:51:28 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX7tzEy806AvUC","phx_ref_prev":"GIiX6jdDdqc6AvJi","last_seen":"2026-01-07T23:51:45.775Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:50:54.390Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX6jdDdqc6AvJi","phx_ref_prev":"GIiX5Y2Grqg6AvDi","last_seen":"2026-01-07T23:51:25.815Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:50:54.390Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX7xGrzgo6AvVi","phx_ref_prev":"GIiX6mlXEKo6AvNi","last_seen":"2026-01-07T23:51:46.575Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX6mlXEKo6AvNi","last_seen":"2026-01-07T23:51:26.572Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX718Mcyw6AvWC","phx_ref_prev":"GIiX7tzEy806AvUC","last_seen":"2026-01-07T23:51:47.958Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX7tzEy806AvUC","phx_ref_prev":"GIiX6jdDdqc6AvJi","last_seen":"2026-01-07T23:51:45.775Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:50:54.390Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX719rhd06AvWi","phx_ref_prev":"GIiX718Mcyw6AvWC","last_seen":"2026-01-07T23:51:47.958Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX718Mcyw6AvWC","phx_ref_prev":"GIiX7tzEy806AvUC","last_seen":"2026-01-07T23:51:47.958Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+📡 SocialService: Updated status - Browsing: 
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: C49AD550-58E8-4F27-9557-7C5A5383371D]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8IqMFnU6AvYC","phx_ref_prev":"GIiX7xGrzgo6AvVi","last_seen":"2026-01-07T23:51:52.899Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX7xGrzgo6AvVi","phx_ref_prev":"GIiX6mlXEKo6AvNi","last_seen":"2026-01-07T23:51:46.575Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_dnp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_atp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_amp.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_nfx.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_stz.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+💾 Cache SET: Catalog[quick_movie_top.json_7] (7 items)
+✅ Loaded 15 movies
+🧹 Deduplication: 36 → 35 items
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+🚀 Quick batch loaded: 7 items for trending
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1591095/img (21702 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0413300/img (38864 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt3501632/img (41456 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0114369/img (13580 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0462538/img (39518 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt5622412/img (24188 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1104001/img (20748 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0209163/img (23358 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0381707/img (31688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt2333784/img (37786 bytes)
+🖼️ [CACHE] Cached image data for key: https://m.media-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SX250.jpg (25509 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt0162222/img (31442 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt26443597/img (34560 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt32820897/img (61009 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30274401/img (24809 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt1757678/img (38642 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30254719/img (28972 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt10799690/img (40967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301552189/s332/img (59500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/88761237/s332/img (60727 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/124172776/s332/img (56810 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327009156/s332/img (61426 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322032098/s332/img (56405 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29927663/img (36770 bytes)
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_dnp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_atp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_amp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_nfx.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_stz.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_top.json] (15 items)
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+📅 EventsView appeared
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+📊 Using fixed catalog size: 15 items
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💓 Heartbeat sent
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8M3T80s6AvYi","phx_ref_prev":"GIiX8IqMFnU6AvYC","last_seen":"2026-01-07T23:51:54.024Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8IqMFnU6AvYC","phx_ref_prev":"GIiX7xGrzgo6AvVi","last_seen":"2026-01-07T23:51:52.899Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+✅ BrowseView: Server is ready, loading content...
+🔍 BrowseView: Loading content for tab: Movies
+🗑️ Cleared all streaming catalogs
+📽️ Fetching popular movies...
+[ INFO ] GET /api/metadata/catalog/movie/popular [request-id: AEDB5E01-FB0E-4169-AE14-06577A8BB9FA]
+🔍 [Server] Proxying catalog request to: https://v3-cinemeta.strem.io/catalog/movie/popular.json
+📡 SocialService: Updated status - Browsing: 
+✅ Cache HIT: Catalog[quick_movie_stz.json_7]
+✅ Cache HIT: Catalog[quick_movie_atp.json_7]
+✅ Cache HIT: Catalog[quick_movie_dnp.json_7]
+✅ Cache HIT: Catalog[quick_movie_amp.json_7]
+✅ Cache HIT: Catalog[quick_movie_nfx.json_7]
+✅ Cache HIT: Catalog[quick_movie_top.json_7]
+🚀 Quick batch loaded: 7 items for starz
+🔍 Starting catalog fetch for starz from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/stz.json
+🔄 Attempt 1/3 for starz
+✅ Cache HIT: Catalog[catalog_movie_stz.json]
+🚀 Quick batch loaded: 7 items for appleTv
+🔍 Starting catalog fetch for appleTv from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/atp.json
+🔄 Attempt 1/3 for appleTv
+✅ Cache HIT: Catalog[catalog_movie_atp.json]
+🚀 Quick batch loaded: 7 items for disney
+🔍 Starting catalog fetch for disney from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/dnp.json
+🔄 Attempt 1/3 for disney
+🚀 Quick batch loaded: 7 items for prime
+🔍 Starting catalog fetch for prime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/amp.json
+🔄 Attempt 1/3 for prime
+🚀 Quick batch loaded: 7 items for netflix
+🔍 Starting catalog fetch for netflix from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/nfx.json
+🔄 Attempt 1/3 for netflix
+🚀 Quick batch loaded: 7 items for trending
+✅ Attempt 1 successful for starz
+✅ Successfully fetched 15 items for starz from primary service
+📦 Full batch loaded: 15 items for starz
+✅ Progressive loading completed for starz
+✅ Attempt 1 successful for appleTv
+✅ Successfully fetched 15 items for appleTv from primary service
+📦 Full batch loaded: 15 items for appleTv
+✅ Progressive loading completed for appleTv
+✅ Cache HIT: Catalog[catalog_movie_dnp.json]
+✅ Cache HIT: Catalog[catalog_movie_amp.json]
+✅ Cache HIT: Catalog[catalog_movie_nfx.json]
+✅ Cache HIT: Catalog[catalog_movie_top.json]
+💾 Cache SET: Catalog[quick_movie_hlu.json_7] (7 items)
+💾 Cache SET: Catalog[quick_movie_pcp.json_7] (7 items)
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8zbYZ8M6AvaC","phx_ref_prev":"GIiX8M3T80s6AvYi","last_seen":"2026-01-07T23:52:04.379Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8M3T80s6AvYi","phx_ref_prev":"GIiX8IqMFnU6AvYC","last_seen":"2026-01-07T23:51:54.024Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt1757678
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Avatar: Fire and Ash
+🔍 [DEBUG] Successfully created MediaItem: Avatar: Fire and Ash
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt26443597
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Zootopia 2
+🔍 [DEBUG] Successfully created MediaItem: Zootopia 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30274401
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Five Nights at Freddy's 2
+🔍 [DEBUG] Successfully created MediaItem: Five Nights at Freddy's 2
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32820897
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Successfully created MediaItem: Demon Slayer: Kimetsu no Yaiba Infinity Castle
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt10799690
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Trap House
+🔍 [DEBUG] Successfully created MediaItem: Trap House
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt30254719
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Successfully created MediaItem: Omniscient Reader: The Prophecy
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29927663
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Great Flood
+🔍 [DEBUG] Successfully created MediaItem: The Great Flood
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt4712810
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Now You See Me: Now You Don't
+🔍 [DEBUG] Successfully created MediaItem: Now You See Me: Now You Don't
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt32395062
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Muzzle: City of Wolves
+🔍 [DEBUG] Successfully created MediaItem: Muzzle: City of Wolves
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt13186306
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: War of the Worlds
+🔍 [DEBUG] Successfully created MediaItem: War of the Worlds
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt29538620
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Bang
+🔍 [DEBUG] Successfully created MediaItem: Bang
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt27543632
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Housemaid
+🔍 [DEBUG] Successfully created MediaItem: The Housemaid
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt34610311
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: The Shadow's Edge
+🔍 [DEBUG] Successfully created MediaItem: The Shadow's Edge
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt19847976
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Wicked: For Good
+🔍 [DEBUG] Successfully created MediaItem: Wicked: For Good
+🔍 [DEBUG] Creating MediaItem from CinemetaSearchResult
+🔍 [DEBUG] result.id: tt31227572
+🔍 [DEBUG] result.type: movie
+🔍 [DEBUG] result.name: Predator: Badlands
+🔍 [DEBUG] Successfully created MediaItem: Predator: Badlands
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[popular_movies_fixed] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[quick_movie_pmp.json_7] (7 items)
+✅ Attempt 1 successful for disney
+✅ Successfully fetched 15 items for disney from primary service
+💾 Cache SET: Catalog[quick_movie_hbm.json_7] (7 items)
+📦 Full batch loaded: 15 items for disney
+✅ Progressive loading completed for disney
+✅ Attempt 1 successful for prime
+✅ Successfully fetched 15 items for prime from primary service
+📦 Full batch loaded: 15 items for prime
+✅ Progressive loading completed for prime
+✅ Attempt 1 successful for netflix
+✅ Successfully fetched 15 items for netflix from primary service
+📦 Full batch loaded: 15 items for netflix
+✅ Progressive loading completed for netflix
+📦 Full batch loaded: 15 items for trending
+✅ Progressive loading completed for trending
+💾 Cache SET: Catalog[quick_movie_sst.json_7] (7 items)
+🚀 Quick batch loaded: 7 items for hulu
+🔍 Starting catalog fetch for hulu from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hlu.json
+🔄 Attempt 1/3 for hulu
+🚀 Quick batch loaded: 7 items for peacock
+🔍 Starting catalog fetch for peacock from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pcp.json
+🔄 Attempt 1/3 for peacock
+✅ Loaded 15 movies
+🧹 Deduplication: 36 → 35 items
+🚀 Quick batch loaded: 7 items for paramount
+🔍 Starting catalog fetch for paramount from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/pmp.json
+🔄 Attempt 1/3 for paramount
+🚀 Quick batch loaded: 7 items for hbo
+🔍 Starting catalog fetch for hbo from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/hbm.json
+🔄 Attempt 1/3 for hbo
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/15605912/s332/img (81082 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331126481/s332/img (53646 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/300177312/s332/img (74244 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315856885/s332/img (67350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331701827/s332/img (59722 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336243710/s332/img (29619 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336298604/s332/img (33569 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336295680/s332/img (36731 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330628021/s332/img (58302 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/333077339/s332/img (29437 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/307275790/s332/img (54708 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/322729101/s332/img (28143 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/256784897/s332/img (48660 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/301592778/s332/img (49084 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331244585/s332/img (35639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331148151/s332/img (28498 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/321552009/s332/img (34807 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/176275502/s332/img (71523 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331994893/s332/img (37258 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8730058/s332/img (44044 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332051109/s332/img (58936 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/320977032/s332/img (29350 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/154373248/s332/img (63627 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/331327178/s332/img (38639 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/39400453/s332/img (21618 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332101041/s332/img (37735 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336611434/s332/img (44231 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312291378/s332/img (26090 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330298309/s332/img (59242 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/336393313/s332/img (35742 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315672113/s332/img (80512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/328335894/s332/img (39916 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31193180/img (27098 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt29567915/img (28516 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt14364480/img (27701 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt30144839/img (16512 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335474178/s332/img (42733 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt12300742/img (24381 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/poster/small/tt31495504/img (34216 bytes)
+🚀 Quick batch loaded: 7 items for showtime
+🔍 Starting catalog fetch for showtime from: https://7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club/bmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxjcnUsZHBlLHN0eixzc3Q6OjoxNzYzMjQxMzc5ODky/catalog/movie/sst.json
+🔄 Attempt 1/3 for showtime
+⏭️ Skipping load for starz - already loaded 15 items
+⏭️ Skipping load for appleTv - already loaded 15 items
+⏭️ Skipping load for disney - already loaded 15 items
+⏭️ Skipping load for prime - already loaded 15 items
+⏭️ Skipping load for netflix - already loaded 15 items
+⏭️ Skipping load for trending - already loaded 15 items
+💾 Cache SET: Catalog[catalog_movie_hlu.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pcp.json] (15 items)
+💾 Cache SET: Catalog[catalog_movie_pmp.json] (15 items)
+🗑️ Cache evicted 6 items
+💾 Cache SET: Catalog[catalog_movie_hbm.json] (15 items)
+📊 Using fixed catalog size: 15 items
+💾 Cache SET: Catalog[catalog_movie_sst.json] (15 items)
+✅ Attempt 1 successful for hulu
+✅ Successfully fetched 15 items for hulu from primary service
+📦 Full batch loaded: 15 items for hulu
+✅ Progressive loading completed for hulu
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for peacock
+✅ Successfully fetched 15 items for peacock from primary service
+📦 Full batch loaded: 15 items for peacock
+✅ Progressive loading completed for peacock
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for paramount
+✅ Successfully fetched 15 items for paramount from primary service
+📦 Full batch loaded: 15 items for paramount
+✅ Progressive loading completed for paramount
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for hbo
+✅ Successfully fetched 15 items for hbo from primary service
+📦 Full batch loaded: 15 items for hbo
+✅ Progressive loading completed for hbo
+📊 Using fixed catalog size: 15 items
+✅ Attempt 1 successful for showtime
+✅ Successfully fetched 15 items for showtime from primary service
+📦 Full batch loaded: 15 items for showtime
+✅ Progressive loading completed for showtime
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/325538793/s332/img (44577 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/309786652/s332/img (45440 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335328239/s332/img (37688 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330980590/s332/img (58733 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatc2026-01-07 18:52:11.397 RedLemon[18483:179441] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt0162222/img
+2026-01-07 18:52:11.398 RedLemon[18483:179441] ⏳ Background art loading...
+2026-01-07 18:52:11.399 RedLemon[18483:179441] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt0162222/img
+2026-01-07 18:52:11.400 RedLemon[18483:179441] ⏳ Logo loading...
+2026-01-07 18:52:11.478 RedLemon[18483:179441] ✅ Background art loaded successfully
+2026-01-07 18:52:11.479 RedLemon[18483:179441] ✅ Logo loaded successfully
+2026-01-07 18:52:11.582 RedLemon[18483:179441]    Quality: 1080p
+2026-01-07 18:52:11.582 RedLemon[18483:179441]    Mode: watchParty
+2026-01-07 18:52:11.582 RedLemon[18483:179441] 📡 Fetching metadata for tt0162222...
+h.com/poster/332277457/s332/img (66967 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335063930/s332/img (28802 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/330798000/s332/img (54287 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/327223699/s332/img (31103 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/132935108/s332/img (72135 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/315638406/s332/img (49093 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/175817145/s332/img (34253 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/275806222/s332/img (48443 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/332527038/s332/img (28010 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/329121868/s332/img (53946 bytes)
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/334037963/s332/img (44500 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/449990/s332/img (60347 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/285598209/s332/img (63186 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/302449148/s332/img (66514 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/87608067/s332/img (61832 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/312811279/s332/img (48255 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/243656762/s332/img (42262 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/8731868/s332/img (56932 bytes)
+🖼️ [CACHE] Cached image data for key: https://images.justwatch.com/poster/335064153/s332/img (54685 bytes)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX84H3b-06Avai","phx_ref_prev":"GIiX719rhd06AvWi","last_seen":"2026-01-07T23:52:05.724Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX719rhd06AvWi","phx_ref_prev":"GIiX718Mcyw6AvWC","last_seen":"2026-01-07T23:51:47.958Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+📅 EventsView appeared
+🛑 BrowseView disappeared - cancelled all ongoing tasks
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0162222/img (866194 bytes)
+📡 SocialService: Updated status - Browsing Events: 
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX85jhn886AvbC","phx_ref_prev":"GIiX8zbYZ8M6AvaC","last_seen":"2026-01-07T23:52:06.026Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX8zbYZ8M6AvaC","phx_ref_prev":"GIiX8M3T80s6AvYi","last_seen":"2026-01-07T23:52:04.379Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"8","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX87nVbo86Avbi","phx_ref_prev":"GIiX85jhn886AvbC","last_seen":"2026-01-07T23:52:06.574Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX85jhn886AvbC","phx_ref_prev":"GIiX8zbYZ8M6AvaC","last_seen":"2026-01-07T23:52:06.026Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-07T23:52:10Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Cast Away (Live: true)
+   Event start time: 2026-01-07 22:15:30 +0000
+   Event duration: 9180.0s
+   Current time: 2026-01-07 23:52:11 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt0162222
+
+✅ [SYNC VERIFICATION] FOUND SERVER URL (No Hash) 🔑
+   UnlockedURL: https://chi5-4.download.real-d...
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided unlocked URL
+
+🎬 Live event - calculating position: 5801.467475056648 seconds
+   Event start time: 2026-01-07 22:15:30 +0000
+   Current time: 2026-01-07 23:52:11 +0000
+   Room createdAt: 2026-01-07 22:15:30 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 5801.467475056648
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Cast Away
+[ INFO ] GET /api/metadata/meta/movie/tt0162222 [request-id: A5743FC6-0683-4600-A88F-D9405D434F9C]
+2026-01-07 18:52:11.619 RedLemon[18483:179729] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-07 18:52:11.663 RedLemon[18483:179441] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-07 18:52:11.663 RedLemon[18483:179441] ⚠️ GUEST: Detected quality from filename: 1080p
+2026-01-07 18:52:11.663 RedLemon[18483:179441] 📝 GUEST: Extracted filename='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.mp4' (len=46), sourceQuality=nil, selectedQuality=nil
+💾 Cache SET: Metadata[meta_movie_tt0162222]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: 6E90F10B-6F2D-426E-B0DE-94DAF4332D4F]
+2026-01-07 18:52:11.920 RedLemon[18483:179441] ✅ GUEST: Found 10 subtitles
+2026-01-07 18:52:11.928 RedLemon[18483:179441] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C, subtitles: 10
+2026-01-07 18:52:12.024 RedLemon[18483:179441] ✅ Stream ready, starting playback...
+2026-01-07 18:52:12.024 RedLemon[18483:179441] 🖥️ WindowManager: enterFullscreen() called
+2026-01-07 18:52:12.024 RedLemon[18483:179441]    Window: <SwiftUI.SwiftUIWindow: 0x7f7ae4027110>
+2026-01-07 18:52:12.024 RedLemon[18483:179441]    Is fullscreen: 0
+2026-01-07 18:52:12.024 RedLemon[18483:179441]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-07 18:52:12.165 RedLemon[18483:179441] 🖼️ Setting up MPV with native macOS video output...
+2026-01-07 18:52:12.176 RedLemon[18483:179441] ✅ MPV initialized with native GPU rendering
+2026-01-07 18:52:12.199 RedLemon[18483:179441] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-07 18:52:12.200 RedLemon[18483:179441] 🎉 Starting watch party sync - Room: event_tt0162222, Host: NO
+2026-01-07 18:52:12.200 RedLemon[18483:179441] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-07 18:52:12.285 RedLemon[18483:179441] 🔄 Starting chat polling for room: event_tt0162222
+2026-01-07 18:52:12.285 RedLemon[18483:179441] 💓 Started playback heartbeat loop
+2026-01-07 18:52:12.286 RedLemon[18483:179441] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-07 18:52:12.286 RedLemon[18483:179441] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-07 18:52:12.286 RedLemon[18483:179441] 🎬🎬🎬 Subtitles: 10
+2026-01-07 18:52:12.287 RedLemon[18483:179441] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Cast Away
+2026-01-07 18:52:12.287 RedLemon[18483:179441] 🎬🎬🎬 streamURL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C
+2026-01-07 18:52:12.287 RedLemon[18483:179441] 🎬🎬🎬 subtitles: 10
+2026-01-07 18:52:12.288 RedLemon[18483:179441] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-07 18:52:12.299 RedLemon[18483:179496] 🎬 MPV: Current video filename set to: 
+2026-01-07 18:52:12.299 RedLemon[18483:179729] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-07 18:52:12.299 RedLemon[18483:179729] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA=?token=0455BFD1-904E-4A09-A49D-94276C5F23D7
+2026-01-07 18:52:12.299 RedLemon[18483:179496] 🎬 MPV loadVideo called with URL: https://chi5-4.download.real-debrid.com/d/NIK73QIK (Encoded: https://chi5-4.download.real-debrid.com/d/NIK73QIK), autoplay: false, expectedSubs: 3
+2026-01-07 18:52:12.299 RedLemon[18483:179496] 🎬 MPV executing: loadfile "https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.mp4"
+2026-01-07 18:52:12.299 RedLemon[18483:179496] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt0162222 (movie)
+   ℹ️ Fallback Name: Cast Away (2000)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C
+   Display Title: Cast Away
+   Subtitle URLs: 10
+      [0] Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+      [1] Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng
+      [2] Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH
+      [3] Cast.Away.2000.1080p.BluRay.x265 (Corrected, No HI)
+      [4] Cast.Away.2000.BluRay.1080p.REMUX.AVC.DTS-HD.MA.5.1-LEGi0N
+      [5] Cast.Away.2000.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi
+      [6] Cast.Away.2000.ALL BluRay_DvDRip
+      [7] Cast.Away.2000.iNTERNAL.BDRip.x264-MARS
+      [8] Cast.Away.2000.WEBRip.Amazon
+      [9] Cast Away 2000 DVDRip XviD-ViEW
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt0162222, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt0162222
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt0162222
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Cast Away
+   IMDB: tt0162222
+   URL: https://chi5-4.download.real-debrid.com/d/NIK73QIKILFY6106/C...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt0162222 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt0162222]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5Njg2MDgtMjIyNzg2My56aXA= [request-id: 220DA1B3-5429-4996-8118-E5922E97B95B]
+2026-01-07 18:52:12.455 RedLemon[18483:179441] 💓 Playback heartbeat sent for room: event_tt0162222
+2026-01-07 18:52:12.762 RedLemon[18483:179441] 👥 MPVPlayer: Merged participants list via polling (Count: 2)
+2026-01-07 18:52:12.841 RedLemon[18483:179729] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_1F30AAED-AE49-4B01-A0F9-D31AC0BBD645.vtt
+2026-01-07 18:52:12.841 RedLemon[18483:179729] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_1F30AAED-AE49-4B01-A0F9-D31
+2026-01-07 18:52:12.858 RedLemon[18483:179729] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 18:52:12.858 RedLemon[18483:179729] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA=?token=0455BFD1-904E-4A09-A49D-94276C5F23D7
+📄 Subtitle request: L3N1YnRpdGxlLzE5Njg2... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1968608-2227863.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"C375FF84-B19B-4B0F-A40D-7ABD8B79E8A4","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"e2ffc992-ec23-11f0-83fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9Q22vrXpQPei","is_host":false,"joined_at":1767829932.280851,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":"9","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9Q7lKTs6AvfC","phx_ref_prev":"GIiX87nVbo86Avbi","last_seen":"2026-01-07T23:52:12.297Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:52:12.297Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX87nVbo86Avbi","phx_ref_prev":"GIiX85jhn886AvbC","last_seen":"2026-01-07T23:52:06.574Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt0162222/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt0162222/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt0162222/img...
+📡 SocialService: Updated status - online: Cast Away
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIiX9Q22vrXpQPei)
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 3378 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 23708 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTktODQyMjYzOC56aXA= [request-id: 4B24E32D-A381-42F3-B3BE-EF421A50C2CC]
+2026-01-07 18:52:13.296 RedLemon[18483:179724] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_69187BEB-EA02-4200-AC30-7346D204D582.vtt
+2026-01-07 18:52:13.296 RedLemon[18483:179724] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_69187BEB-EA02-4200-AC30-734
+2026-01-07 18:52:13.303 RedLemon[18483:179724] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 18:52:13.304 RedLemon[18483:179724] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA=?token=0455BFD1-904E-4A09-A49D-94276C5F23D7
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDAy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3500219-8422638.zip
+✅ Download complete: 21235 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng.srt
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+⏰ AppState: Next schedule update set for Event End: 2026-01-08 00:48:30 +0000
+⏰ AppState: Scheduling update in 3377 seconds
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MDAyMTYtODQyMjYzNy56aXA= [request-id: 476AB660-8EA6-4C12-88C1-2C97DC8A94E1]
+2026-01-07 18:52:13.748 RedLemon[18483:179497] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_02073FCB-5FE1-48D5-AC98-F87959AA107B.vtt
+2026-01-07 18:52:13.748 RedLemon[18483:179497] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_02073FCB-5FE1-48D5-AC98-F87
+2026-01-07 18:52:13.756 RedLemon[18483:179497] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 18:52:13.757 RedLemon[18483:179497] 🔍 MPV track-list/count: 3
+2026-01-07 18:52:13.757 RedLemon[18483:179497] 🔍 Track 0 type: sub
+2026-01-07 18:52:13.758 RedLemon[18483:179497] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:13.758 RedLemon[18483:179497] 🔍 Track 1 type: sub
+2026-01-07 18:52:13.758 RedLemon[18483:179497] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:13.758 RedLemon[18483:179497] 🔍 Track 2 type: sub
+2026-01-07 18:52:13.758 RedLemon[18483:179497] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:13.758 RedLemon[18483:179497] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:13.759 RedLemon[18483:179497]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:13.759 RedLemon[18483:179497]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:13.759 RedLemon[18483:179497]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:13.759 RedLemon[18483:179497]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:13.759 RedLemon[18483:179497] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 18:52:13.760 RedLemon[18483:179497]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:13.760 RedLemon[18483:179497]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:13.760 RedLemon[18483:179497]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:13.760 RedLemon[18483:179497]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:14.465 RedLemon[18483:179441] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-07 18:52:14.474 RedLemon[18483:179791] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:14.474 RedLemon[18483:179791] 🔍 Track 0 type: sub
+2026-01-07 18:52:14.475 RedLemon[18483:179791] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:14.475 RedLemon[18483:179791] 🔍 Track 1 type: sub
+2026-01-07 18:52:14.475 RedLemon[18483:179791] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:14.475 RedLemon[18483:179791] 🔍 Track 2 type: sub
+2026-01-07 18:52:14.475 RedLemon[18483:179791] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:14.475 RedLemon[18483:179791] 🔍 Track 3 type: video
+2026-01-07 18:52:14.476 RedLemon[18483:179791] 🔍 Track 4 type: audio
+2026-01-07 18:52:14.476 RedLemon[18483:179791] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:14.476 RedLemon[18483:179791] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:14.476 RedLemon[18483:179791]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:14.477 RedLemon[18483:179791]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:14.477 RedLemon[18483:179791]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:14.769 RedLemon[18483:179791] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:14.769 RedLemon[18483:179791] 🔍 Track 0 type: sub
+2026-01-07 18:52:14.769 RedLemon[18483:179791] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:14.769 RedLemon[18483:179791] 🔍 Track 1 type: sub
+2026-01-07 18:52:14.770 RedLemon[18483:179791] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:14.770 RedLemon[18483:179791] 🔍 Track 2 type: sub
+2026-01-07 18:52:14.770 RedLemon[18483:179791] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:14.770 RedLemon[18483:179791] 🔍 Track 3 type: video
+2026-01-07 18:52:14.770 RedLemon[18483:179791] 🔍 Track 4 type: audio
+2026-01-07 18:52:14.770 RedLemon[18483:179791] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:14.771 RedLemon[18483:179791]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:14.771 RedLemon[18483:179791]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:14.771 RedLemon[18483:179791]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:14.771 RedLemon[18483:179791]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:14.771 RedLemon[18483:179791] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 18:52:14.772 RedLemon[18483:179791]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:14.772 RedLemon[18483:179791]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:14.772 RedLemon[18483:179791]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:14.773 RedLemon[18483:179791]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:15.577 RedLemon[18483:179497] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:15.577 RedLemon[18483:179497] 🔍 Track 0 type: sub
+2026-01-07 18:52:15.577 RedLemon[18483:179497] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:15.577 RedLemon[18483:179497] 🔍 Track 1 type: sub
+2026-01-07 18:52:15.578 RedLemon[18483:179497] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:15.578 RedLemon[18483:179497] 🔍 Track 2 type: sub
+2026-01-07 18:52:15.578 RedLemon[18483:179497] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:15.578 RedLemon[18483:179497] 🔍 Track 3 type: video
+2026-01-07 18:52:15.579 RedLemon[18483:179497] 🔍 Track 4 type: audio
+2026-01-07 18:52:15.579 RedLemon[18483:179497] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:15.579 RedLemon[18483:179497]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:15.579 RedLemon[18483:179497]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:15.579 RedLemon[18483:179497]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:15.580 RedLemon[18483:179497]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:15.580 RedLemon[18483:179497] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 18:52:15.580 RedLemon[18483:179497]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:15.581 RedLemon[18483:179497]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:15.581 RedLemon[18483:179497]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:15.581 RedLemon[18483:179497]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:15.773 RedLemon[18483:179791] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:15.774 RedLemon[18483:179791] 🔍 Track 0 type: sub
+2026-01-07 18:52:15.774 RedLemon[18483:179791] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:15.774 RedLemon[18483:179791] 🔍 Track 1 type: sub
+2026-01-07 18:52:15.775 RedLemon[18483:179791] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:15.775 RedLemon[18483:179791] 🔍 Track 2 type: sub
+2026-01-07 18:52:15.775 RedLemon[18483:179791] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:15.775 RedLemon[18483:179791] 🔍 Track 3 type: video
+2026-01-07 18:52:15.775 RedLemon[18483:179791] 🔍 Track 4 type: audio
+2026-01-07 18:52:15.775 RedLemon[18483:179791] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:15.776 RedLemon[18483:179791]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:15.776 RedLemon[18483:179791]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:15.776 RedLemon[18483:179791]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:15.776 RedLemon[18483:179791]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:15.776 RedLemon[18483:179791] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 18:52:15.777 RedLemon[18483:179791]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:15.777 RedLemon[18483:179791]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:15.779 RedLemon[18483:179791]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:15.781 RedLemon[18483:179791]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:16.680 RedLemon[18483:179497] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:16.685 RedLemon[18483:179497] 🔍 Track 0 type: sub
+2026-01-07 18:52:16.701 RedLemon[18483:179497] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:16.706 RedLemon[18483:179497] 🔍 Track 1 type: sub
+2026-01-07 18:52:16.712 RedLemon[18483:179497] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:16.717 RedLemon[18483:179497] 🔍 Track 2 type: sub
+2026-01-07 18:52:16.736 RedLemon[18483:179497] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:16.742 RedLemon[18483:179497] 🔍 Track 3 type: video
+2026-01-07 18:52:16.747 RedLemon[18483:179497] 🔍 Track 4 type: audio
+2026-01-07 18:52:16.747 RedLemon[18483:179497] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:16.747 RedLemon[18483:179497]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:16.747 RedLemon[18483:179497]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:16.748 RedLemon[18483:179497]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:16.748 RedLemon[18483:179497]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:16.753 RedLemon[18483:179497] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 18:52:16.753 RedLemon[18483:179497]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:16.754 RedLemon[18483:179497]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:16.754 RedLemon[18483:179497]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:16.754 RedLemon[18483:179497]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:16.790 RedLemon[18483:179496] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:16.795 RedLemon[18483:179496] 🔍 Track 0 type: sub
+2026-01-07 18:52:16.805 RedLemon[18483:179496] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:16.811 RedLemon[18483:179496] 🔍 Track 1 type: sub
+2026-01-07 18:52:16.822 RedLemon[18483:179496] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:16.826 RedLemon[18483:179496] 🔍 Track 2 type: sub
+2026-01-07 18:52:16.841 RedLemon[18483:179496] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:16.846 RedLemon[18483:179496] 🔍 Track 3 type: video
+2026-01-07 18:52:16.851 RedLemon[18483:179496] 🔍 Track 4 type: audio
+2026-01-07 18:52:16.851 RedLemon[18483:179496] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:16.851 RedLemon[18483:179496]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:16.851 RedLemon[18483:179496]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:16.851 RedLemon[18483:179496]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:16.852 RedLemon[18483:179496]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:16.861 RedLemon[18483:179496] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 18:52:16.861 RedLemon[18483:179496]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:16.862 RedLemon[18483:179496]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:16.862 RedLemon[18483:179496]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:16.862 RedLemon[18483:179496]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:17.823 RedLemon[18483:179724] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:17.823 RedLemon[18483:179724] 🔍 Track 0 type: sub
+2026-01-07 18:52:17.824 RedLemon[18483:179724] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:17.824 RedLemon[18483:179724] 🔍 Track 1 type: sub
+2026-01-07 18:52:17.824 RedLemon[18483:179724] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:17.824 RedLemon[18483:179724] 🔍 Track 2 type: sub
+2026-01-07 18:52:17.825 RedLemon[18483:179724] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:17.825 RedLemon[18483:179724] 🔍 Track 3 type: video
+2026-01-07 18:52:17.825 RedLemon[18483:179724] 🔍 Track 4 type: audio
+2026-01-07 18:52:17.825 RedLemon[18483:179724] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:17.825 RedLemon[18483:179724]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:17.825 RedLemon[18483:179724]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:17.826 RedLemon[18483:179724]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:17.826 RedLemon[18483:179724]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:17.826 RedLemon[18483:179724] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 18:52:17.826 RedLemon[18483:179724]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:17.826 RedLemon[18483:179724]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:17.827 RedLemon[18483:179724]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:17.827 RedLemon[18483:179724]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:17.864 RedLemon[18483:179497] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:17.864 RedLemon[18483:179497] 🔍 Track 0 type: sub
+2026-01-07 18:52:17.864 RedLemon[18483:179497] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:17.865 RedLemon[18483:179497] 🔍 Track 1 type: sub
+2026-01-07 18:52:17.865 RedLemon[18483:179497] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:17.865 RedLemon[18483:179497] 🔍 Track 2 type: sub
+2026-01-07 18:52:17.865 RedLemon[18483:179497] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:17.865 RedLemon[18483:179497] 🔍 Track 3 type: video
+2026-01-07 18:52:17.866 RedLemon[18483:179497] 🔍 Track 4 type: audio
+2026-01-07 18:52:17.866 RedLemon[18483:179497] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:17.866 RedLemon[18483:179497]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:17.866 RedLemon[18483:179497]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:17.866 RedLemon[18483:179497]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:17.866 RedLemon[18483:179497]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:17.867 RedLemon[18483:179497] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 18:52:17.867 RedLemon[18483:179497]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:17.868 RedLemon[18483:179497]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:17.868 RedLemon[18483:179497]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:17.868 RedLemon[18483:179497]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:18.920 RedLemon[18483:179724] 🔍 MPV track-list/count: 5
+2026-01-07 18:52:18.920 RedLemon[18483:179724] 🔍 Track 0 type: sub
+2026-01-07 18:52:18.921 RedLemon[18483:179724] ✅ Found subtitle track: ID=1, lang=en, title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, external=1
+2026-01-07 18:52:18.921 RedLemon[18483:179724] 🔍 Track 1 type: sub
+2026-01-07 18:52:18.921 RedLemon[18483:179724] ✅ Found subtitle track: ID=2, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, external=1
+2026-01-07 18:52:18.921 RedLemon[18483:179724] 🔍 Track 2 type: sub
+2026-01-07 18:52:18.921 RedLemon[18483:179724] ✅ Found subtitle track: ID=3, lang=en, title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, external=1
+2026-01-07 18:52:18.921 RedLemon[18483:179724] 🔍 Track 3 type: video
+2026-01-07 18:52:18.921 RedLemon[18483:179724] 🔍 Track 4 type: audio
+2026-01-07 18:52:18.921 RedLemon[18483:179724] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 18:52:18.921 RedLemon[18483:179724]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 18:52:18.921 RedLemon[18483:179724]    Start[1]: ID=1, Title='Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', Lang='en', Ext=1
+2026-01-07 18:52:18.921 RedLemon[18483:179724]    Start[2]: ID=2, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', Lang='en', Ext=1
+2026-01-07 18:52:18.922 RedLemon[18483:179724]    Start[3]: ID=3, Title='Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', Lang='en', Ext=1
+2026-01-07 18:52:18.922 RedLemon[18483:179724] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 18:52:18.922 RedLemon[18483:179724]    Track: ID=0, Title=Off, External=0
+2026-01-07 18:52:18.922 RedLemon[18483:179724]    Track: ID=1, Title=Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG, External=1
+2026-01-07 18:52:18.922 RedLemon[18483:179724]    Track: ID=2, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng, External=1
+2026-01-07 18:52:18.922 RedLemon[18483:179724]    Track: ID=3, Title=Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH, External=1
+2026-01-07 18:52:26.370 RedLemon[18483:179441] ✅ Exit button triggered! x=301 <= 342, y=635 >= 576
+2026-01-07 18:52:26.537 RedLemon[18483:179441] ✅ Exit button triggered! x=230 <= 342, y=646 >= 576
+2026-01-07 18:52:26.539 RedLemon[18483:179441] ✅ Exit button triggered! x=207 <= 342, y=653 >= 576
+2026-01-07 18:52:26.622 RedLemon[18483:179441] ✅ Exit button triggered! x=40 <= 342, y=701 >= 576
+2026-01-07 18:52:26.663 RedLemon[18483:179441] ✅ Exit button triggered! x=26 <= 342, y=709 >= 576
+2026-01-07 18:52:26.830 RedLemon[18483:179441] ✅ Exit button triggered! x=26 <= 342, y=711 >= 576
+2026-01-07 18:52:26.872 RedLemon[18483:179441] ✅ Exit button triggered! x=28 <= 342, y=717 >= 576
+2026-01-07 18:52:26.874 RedLemon[18483:179441] ✅ Exit button triggered! x=33 <= 342, y=724 >= 576
+2026-01-07 18:52:26.876 RedLemon[18483:179441] ✅ Exit button triggered! x=34 <= 342, y=726 >= 576
+2026-01-07 18:52:26.885 RedLemon[18483:179441] ✅ Exit button triggered! x=36 <= 342, y=727 >= 576
+2026-01-07 18:52:26.892 RedLemon[18483:179441] ✅ Exit button triggered! x=37 <= 342, y=728 >= 576
+2026-01-07 18:52:26.954 RedLemon[18483:179441] ✅ Exit button triggered! x=41 <= 342, y=733 >= 576
+2026-01-07 18:52:26.956 RedLemon[18483:179441] ✅ Exit button triggered! x=41 <= 342, y=733 >= 576
+2026-01-07 18:52:27.038 RedLemon[18483:179441] ✅ Exit button triggered! x=43 <= 342, y=734 >= 576
+2026-01-07 18:52:27.080 RedLemon[18483:179441] ✅ Exit button triggered! x=45 <= 342, y=736 >= 576
+2026-01-07 18:52:27.121 RedLemon[18483:179441] ✅ Exit button triggered! x=49 <= 342, y=739 >= 576
+2026-01-07 18:52:27.125 RedLemon[18483:179441] ✅ Exit button triggered! x=49 <= 342, y=739 >= 576
+2026-01-07 18:52:27.206 RedLemon[18483:179441] ✅ Exit button triggered! x=53 <= 342, y=743 >= 576
+2026-01-07 18:52:27.247 RedLemon[18483:179441] ✅ Exit button triggered! x=53 <= 342, y=743 >= 576
+2026-01-07 18:52:27.375 RedLemon[18483:179441] 🖥️ WindowManager: exitFullscreen() called
+2026-01-07 18:52:27.376 RedLemon[18483:179441]    ✅ WindowManager: Toggling fullscreen OFF
+2026-01-07 18:52:27.452 RedLemon[18483:179441] 🪟 WindowManager: restoreWindowSize() called - restoring to expanded size
+2026-01-07 18:52:27.452 RedLemon[18483:179441]    📐 WindowManager: Restoring to expanded size: (0.0, 0.0, 1366.0, 743.0)
+2026-01-07 18:52:27.787 RedLemon[18483:179441]    ✅ WindowManager: Window restored to expanded size
+2026-01-07 18:52:28.006 RedLemon[18483:179441] 🛑 Stopped playback heartbeat loop
+📄 Subtitle request: L3N1YnRpdGxlLzM1MDAy... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3500216-8422637.zip
+✅ Download complete: 23107 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+📦 Extracting specific file: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x1040 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+[MPV] File tags:
+[MPV] Comment: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+[MPV] Title: Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 5804s
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 5804s
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🎉 EVENT: File loaded/Duration ready (8626.613s), preparing to seek...
+   Seeking to live edge: 5804s
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: eng | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: eng (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+📊 Current subtitle track: 3
+✅ Auto-selecting BEST English subtitle: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 250 (Embedded: 0, Match: 0, Clean: 0, SDH: 250)
+ MPV Event: 20
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 1920x1040 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.13s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ onVideoReady called again - ignoring to prevent loops
+📊 Current subtitle track: 3
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+[MPV] Using hardware decoding (videotoolbox).
+ MPV Event: 17
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+[MPV] VO: [libmpv] 1920x1040 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+🎬 DisplayLink: reportSwap() (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.H264.AAC-RARBG', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Cast.Away.2000.1080p.BluRay.x265-YAWNTiC_eng SDH (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 250 (Embedded: 0, Match: 0, Clean: 0, SDH: 250)
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9u218vY6AvhC","phx_ref_prev":"GIiX84H3b-06Avai","last_seen":"2026-01-07T23:52:20.416Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX84H3b-06Avai","phx_ref_prev":"GIiX719rhd06AvWi","last_seen":"2026-01-07T23:52:05.724Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9zzmLqo6Avii","phx_ref_prev":"GIiX9u218vY6AvhC","last_seen":"2026-01-07T23:52:21.747Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9u218vY6AvhC","phx_ref_prev":"GIiX84H3b-06Avai","last_seen":"2026-01-07T23:52:20.416Z","status":"Browsing","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX98m12Y46AvjC","phx_ref_prev":"GIiX9zzmLqo6Avii","last_seen":"2026-01-07T23:52:24.111Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9zzmLqo6Avii","phx_ref_prev":"GIiX9u218vY6AvhC","last_seen":"2026-01-07T23:52:21.747Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📡 [EventsConfig] Checking server for movie_events config version...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1486 with 411 movies
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Using cached movie_events config (version 1486, 411 movies)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-CnwX906Avji","phx_ref_prev":"GIiX98m12Y46AvjC","last_seen":"2026-01-07T23:52:25.725Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"leaves":{"af5c5178-ec23-11f0-8736-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX98m12Y46AvjC","phx_ref_prev":"GIiX9zzmLqo6Avii","last_seen":"2026-01-07T23:52:24.111Z","status":"Browsing Events","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}}},"topic":"realtime:global-presence"}
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":"10","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-GcKRX46AvkC","phx_ref_prev":"GIiX9Q7lKTs6AvfC","last_seen":"2026-01-07T23:52:26.666Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:52:12.297Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9Q7lKTs6AvfC","phx_ref_prev":"GIiX87nVbo86Avbi","last_seen":"2026-01-07T23:52:12.297Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:52:12.297Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+💓 Heartbeat sent
+💓 Heartbeat sent
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📨 Received: {"ref":"11","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+👋 Leaving room: event_tt0162222
+❌ RedLemon: NOT showing MPVPlayerView
+   isResolvingStream: false
+   streamError: nil
+   selectedStream: NIL
+📅 EventsView appeared
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🗑️ Cache evicted 10 items
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt0167404/img (912485 bytes)
+❌ Failed to load hero image: Error Domain=NSURLErrorDomain Code=-999 "cancelled" UserInfo={NSErrorFailingURLStringKey=https://images.metahub.space/background/medium/tt2872732/img, NSErrorFailingURLKey=https://images.metahub.space/background/medium/tt2872732/img, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <EBA36A6C-D971-453F-886E-3B2C9D419849>.<135>"
+), _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <EBA36A6C-D971-453F-886E-3B2C9D419849>.<135>, NSLocalizedDescription=cancelled}
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - Browsing Events: 
+📡 SocialService: Updated status - Browsing: 
+ MPV Event: 17
+[MPV] Video: no video
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt0162222
+🔄 Untracking presence...
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":"12","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-LMnI_w6Avli","phx_ref_prev":"GIiX-GcKRX46AvkC","last_seen":"2026-01-07T23:52:27.943Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-GcKRX46AvkC","phx_ref_prev":"GIiX9Q7lKTs6AvfC","last_seen":"2026-01-07T23:52:26.666Z","room_id":"event_tt0162222","started_at":"2026-01-07T23:52:12.297Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt0162222","watching_title":"Cast Away","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"13","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-LMx6bg6AvmC","phx_ref_prev":"GIiX-LMnI_w6Avli","last_seen":"2026-01-07T23:52:27.944Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"c7c15ace-ec23-11f0-8f71-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX-LMnI_w6Avli","phx_ref_prev":"GIiX-GcKRX46AvkC","last_seen":"2026-01-07T23:52:27.943Z","status":"Browsing Events","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ MPV stop completed with clean event loop exit
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:event_tt0162222"}
+📨 Unknown event: phx_close
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"e2ffc992-ec23-11f0-83fc-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiX9Q22vrXpQPei","is_host":false,"joined_at":1767829932.280851,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:watch-party:event_tt0162222"}
+✅ MPV instance destroyed

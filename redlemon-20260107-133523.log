@@ -1,0 +1,1631 @@
+2026-01-07 13:35:30.676 RedLemon[4783:48058] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-07 13:35:30.677 RedLemon[4783:48058] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-07 13:35:30.749 RedLemon[4783:48129] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 13:35:30.749 RedLemon[4783:48058] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-07 13:35:30.813 RedLemon[4783:48058] ✅ Playback state reset complete - starting in browse view
+2026-01-07 13:35:30.813 RedLemon[4783:48058] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-07 13:35:30.813 RedLemon[4783:48058] 🧪 Testing Profile: debug
+2026-01-07 13:35:30.813 RedLemon[4783:48125] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 13:35:30.813 RedLemon[4783:48058] ✅ Keychain: Found stored username: ursinho
+2026-01-07 13:35:30.813 RedLemon[4783:48058] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-07 13:35:30.814 RedLemon[4783:48125] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-07 13:35:31.183 RedLemon[4783:48128] 📡 SupabaseClient: User lookup response received (357 bytes)
+2026-01-07 13:35:31.195 RedLemon[4783:48128] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-07 13:35:31.195 RedLemon[4783:48128] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 13:35:31.219 RedLemon[4783:48058] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 13:35:31.219 RedLemon[4783:48058] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 13:35:31.219 RedLemon[4783:48058] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 13:35:31.219 RedLemon[4783:48058] 🚀 RedLemon: Starting HTTP server...
+2026-01-07 13:35:31.220 RedLemon[4783:48058] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-07 13:35:31.238 RedLemon[4783:48058] ✅ RedLemon: HTTPServer instance created
+2026-01-07 13:35:31.238 RedLemon[4783:48124] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 5 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"798F2756-32DE-4B88-B00E-C9BCA5AE6DF2","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-07 13:35:31.430 RedLemon[4783:48058] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 13:35:33.281 RedLemon[4783:48058] ✅ RedLemon: Server marked as ready
+2026-01-07 13:35:33.316 RedLemon[4783:48058] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-07 13:35:33.316 RedLemon[4783:48058] 🔍 Performing startup checks...
+2026-01-07 13:35:33.316 RedLemon[4783:48058] ✅ Username-based authentication ready
+2026-01-07 13:35:34.117 RedLemon[4783:48058] 🔍 Performing startup checks...
+2026-01-07 13:35:34.117 RedLemon[4783:48058] ✅ Username-based authentication ready
+2026-01-07 13:35:34.641 RedLemon[4783:48058] 🔄 Checking for app updates...
+2026-01-07 13:35:54.119 RedLemon[4783:48058] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1104001/img
+2026-01-07 13:35:54.119 RedLemon[4783:48058] ⏳ Background art loading...
+2026-01-07 13:35:54.120 RedLemon[4783:48058] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1104001/img
+2026-01-07 13:35:54.120 RedLemon[4783:48058] ⏳ Logo loading...
+2026-01-07 13:35:54.179 RedLemon[4783:48058]    Quality: 1080p
+2026-01-07 13:35:54.180 RedLemon[4783:48058]    Mode: watchParty
+2026-01-07 13:35:54.180 RedLemon[4783:48058] 📡 Fetching metadata for tt1104001...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1485 with 412 movies
+🆕 [EventsConfig] Server has newer version 1485 (cached: 1482)
+💾 [EventsConfig] Cached new version 1485
+✅ [EventsView] Loaded 412 movies from config version 1485
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 19:55:30 +0000
+⏰ AppState: Scheduling update in 4799 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1104001/img (1015623 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"53113715-851B-4723-BE7B-E0429CE978EE","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGrMpfj8M6AgYD","phx_ref_prev":"GIiGqiE6Ehw6AgVD","last_seen":"2026-01-07T18:35:30.296Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGrVkb2-A6Agej","last_seen":"2026-01-07T18:35:32.585Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"D042C8ED-255A-4DF1-AC3C-88144DF3FCC7","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 32 items to cloud...
+🔄 SocialService: Syncing 32 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91207,"eth":3157.465},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":91207,"eth":3157.465},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.174s (RTT: 133ms)
+   Local:  2026-01-07 18:35:34 +0000
+   Server: 2026-01-07 18:35:34 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsW66VfE6AggD","phx_ref_prev":"GIiGrMpfj8M6AgYD","last_seen":"2026-01-07T18:35:50.234Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGrMpfj8M6AgYD","phx_ref_prev":"GIiGqiE6Ehw6AgVD","last_seen":"2026-01-07T18:35:30.296Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsgdmL5Y6Aghj","phx_ref_prev":"GIiGrVkb2-A6Agej","last_seen":"2026-01-07T18:35:52.689Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGrVkb2-A6Agej","last_seen":"2026-01-07T18:35:32.585Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+[2026-01-07T18:35:53Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Tron: Legacy (Live: true)
+   Event start time: 2026-01-07 17:39:30 +0000
+   Event duration: 8160.0s
+   Current time: 2026-01-07 18:35:53 +0000
+   Is Live: true
+   Is In Lobby: false
+✅ Event room already exists: event_tt1104001
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi6-4.downl...
+   Hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+
+🎬 Live event - calculating position: 3384.215218782425 seconds
+   Event start time: 2026-01-07 17:39:30 +0000
+   Current time: 2026-01-07 18:35:54 +0000
+   Room createdAt: 2026-01-07 17:39:30 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 3384.215218782425
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Tron: Legacy
+[ INFO ] GET /api/metadata/meta/movie/tt1104001 [request-id: 4643A520-0FDF-40C7-9444-3FA24082483C]
+2026-01-07 13:35:54.340 RedLemon[4783:48058] ✅ Logo loaded successfully
+2026-01-07 13:35:54.367 RedLemon[4783:48058] ✅ Background art loaded successfully
+2026-01-07 13:35:54.371 RedLemon[4783:48124] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-07 13:35:54.436 RedLemon[4783:48058] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-07 13:35:54.436 RedLemon[4783:48058] ⚠️ GUEST: Detected quality from filename: 1080p
+💾 Cache SET: Metadata[meta_movie_tt1104001]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: C1A06001-6978-4C49-B968-46E0405E38EE]
+2026-01-07 13:35:55.047 RedLemon[4783:48058] ✅ GUEST: Found 10 subtitles
+2026-01-07 13:35:55.056 RedLemon[4783:48058] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi6-4.download.real-debrid.com/d/GUUYXRPZG7GV443/TR, subtitles: 10
+2026-01-07 13:35:55.131 RedLemon[4783:48058] ✅ Stream ready, starting playback...
+2026-01-07 13:35:55.131 RedLemon[4783:48058] 🖥️ WindowManager: enterFullscreen() called
+2026-01-07 13:35:55.132 RedLemon[4783:48058]    Window: <SwiftUI.SwiftUIWindow: 0x7fad030e77d0>
+2026-01-07 13:35:55.132 RedLemon[4783:48058]    Is fullscreen: 0
+2026-01-07 13:35:55.132 RedLemon[4783:48058]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-07 13:35:55.214 RedLemon[4783:48058] 🖼️ Setting up MPV with native macOS video output...
+2026-01-07 13:35:55.220 RedLemon[4783:48058] ✅ MPV initialized with native GPU rendering
+2026-01-07 13:35:55.280 RedLemon[4783:48058] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-07 13:35:55.280 RedLemon[4783:48058] 🎉 Starting watch party sync - Room: event_tt1104001, Host: NO
+2026-01-07 13:35:55.280 RedLemon[4783:48058] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-07 13:35:55.336 RedLemon[4783:48058] 🔄 Starting chat polling for room: event_tt1104001
+2026-01-07 13:35:55.336 RedLemon[4783:48058] 💓 Started playback heartbeat loop
+2026-01-07 13:35:55.336 RedLemon[4783:48058] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-07 13:35:55.336 RedLemon[4783:48058] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-07 13:35:55.336 RedLemon[4783:48058] 🎬🎬🎬 Subtitles: 10
+2026-01-07 13:35:55.337 RedLemon[4783:48058] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Tron: Legacy
+2026-01-07 13:35:55.337 RedLemon[4783:48058] 🎬🎬🎬 streamURL: https://chi6-4.download.real-debrid.com/d/GUUYXRPZG7GV443/TR
+2026-01-07 13:35:55.337 RedLemon[4783:48058] 🎬🎬🎬 subtitles: 10
+2026-01-07 13:35:55.338 RedLemon[4783:48058] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-07 13:35:55.348 RedLemon[4783:48124] 🎬 MPV: Current video filename set to: 
+2026-01-07 13:35:55.348 RedLemon[4783:48124] 🎬 MPV loadVideo called with URL: https://chi6-4.download.real-debrid.com/d/GUUYXRPZ (Encoded: https://chi6-4.download.real-debrid.com/d/GUUYXRPZ), autoplay: false, expectedSubs: 3
+2026-01-07 13:35:55.348 RedLemon[4783:48355] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-07 13:35:55.348 RedLemon[4783:48124] 🎬 MPV executing: loadfile "https://chi6-4.download.real-debrid.com/d/GUUYXRPZG7GV443/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2026-01-07 13:35:55.348 RedLemon[4783:48355] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NzEtODQzNDEyNS56aXA=?token=DF218777-7AA1-4D0A-B556-78EA552E22AF
+2026-01-07 13:35:55.348 RedLemon[4783:48124] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1104001 (movie)
+   ℹ️ Fallback Name: Tron: Legacy (2010)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi6-4.download.real-debrid.com/d/GUUYXRPZG7GV443/TR
+   Display Title: Tron: Legacy
+   Subtitle URLs: 10
+      [0] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US
+      [1] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK
+      [2] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US
+      [3] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [4] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [5] Tron.Legacy.2010.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
+      [6] Tron.Legacy.2010.WEB-DL.DSNP
+      [7] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [8] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [9] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 38d7c635 as attempted for tt1104001
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1104001, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1104001
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1104001
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Tron: Legacy
+   IMDB: tt1104001
+   URL: https://chi6-4.download.real-debrid.com/d/GUUYXRPZG7GV443/TR...
+   Hash: 38d7c635...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+📡 Fetching metadata for tt1104001 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1104001]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NzEtODQzNDEyNS56aXA= [request-id: E93F594D-AC91-47FA-941F-566592A6FDD7]
+2026-01-07 13:35:55.533 RedLemon[4783:48058] 💓 Playback heartbeat sent for room: event_tt1104001
+2026-01-07 13:35:56.997 RedLemon[4783:48058] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-07 13:35:57.338 RedLemon[4783:48129] 🔍 MPV track-list/count: 2
+2026-01-07 13:35:57.412 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:35:57.412 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:35:57.412 RedLemon[4783:48129] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-07 13:35:57.412 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:35:57.413 RedLemon[4783:48129] ✅ SubtitleService: Scanned 1 tracks (Attempt 1/5)
+2026-01-07 13:35:57.414 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:35:58.457 RedLemon[4783:48419] 🔍 MPV track-list/count: 2
+2026-01-07 13:35:58.463 RedLemon[4783:48419] 🔍 Track 0 type: video
+2026-01-07 13:35:58.464 RedLemon[4783:48419] 🔍 Track 1 type: audio
+2026-01-07 13:35:58.464 RedLemon[4783:48419] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-07 13:35:58.465 RedLemon[4783:48419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:35:58.471 RedLemon[4783:48419] ✅ SubtitleService: Scanned 1 tracks (Attempt 2/5)
+2026-01-07 13:35:58.471 RedLemon[4783:48419]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:35:59.555 RedLemon[4783:48419] 🔍 MPV track-list/count: 2
+2026-01-07 13:35:59.555 RedLemon[4783:48419] 🔍 Track 0 type: video
+2026-01-07 13:35:59.555 RedLemon[4783:48419] 🔍 Track 1 type: audio
+2026-01-07 13:35:59.556 RedLemon[4783:48419] 📊 Total subtitle tracks found: 1 (including Off if needed)
+2026-01-07 13:35:59.556 RedLemon[4783:48419]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:35:59.556 RedLemon[4783:48419] ✅ SubtitleService: Scanned 1 tracks (Attempt 3/5)
+2026-01-07 13:35:59.556 RedLemon[4783:48419]    Track: ID=0, Title=Off, External=0
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTE1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3511571-8434125.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"92E65469-7D8F-4FE7-B4DE-3EB8AE9C8CE4","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"9e133070-ebf7-11f0-be28-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGqiFjk5E6AgVj","is_host":false,"joined_at":1767810918.8610811,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"b3dfd390-ebf7-11f0-a47b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsqU6wGU6AgkD","is_host":false,"joined_at":1767810955.333749,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsqWaz946Agkj","phx_ref_prev":"GIiGsgdmL5Y6Aghj","last_seen":"2026-01-07T18:35:55.347Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:55.348Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsgdmL5Y6Aghj","phx_ref_prev":"GIiGrVkb2-A6Agej","last_seen":"2026-01-07T18:35:52.689Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt1104001/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1104001/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1104001/img...
+📡 SocialService: Updated status - online: Tron: Legacy
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIiGqiFjk5E6AgVj)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIiGsqU6wGU6AgkD
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 19:55:30 +0000
+⏰ AppState: Scheduling update in 4775 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 3386s
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 3386s
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 3387s
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 20
+📊 Current subtitle track: disabled (string: no)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.46s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ onVideoReady called again - ignoring to prevent loops
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: disabled (string: no)
+[MPV] VO: [libmpv] 1920x816 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: disabled (string: no)
+💓 Heartbeat sent
+🎬 DisplayLink: reportSwap() (throttled)
+[ WARNING ] Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <92849007-FCA0-4522-8D07-63244D7ABF7B>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <92849007-FCA0-4522-8D07-63244D7ABF7B>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://dl.subdl.com/subtitle/3511571-8434125.zip, NSErrorFailingURLKey=https://dl.subdl.com/subtitle/3511571-8434125.zip, _kCFStreamErrorDomainKey=4} [request-id: E93F594D-AC91-47FA-941F-566592A6FDD7]
+2026-01-07 13:36:00.387 RedLemon[4783:48355] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0EE5C15D-EE4F-4E40-8119-106C783D3EDF.vtt
+2026-01-07 13:36:00.387 RedLemon[4783:48355] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_0EE5C15D-EE4F-4E40-8119-106
+2026-01-07 13:36:00.395 RedLemon[4783:48355] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 13:36:00.395 RedLemon[4783:48355] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NzAtODQzNDEyNi56aXA=?token=DF218777-7AA1-4D0A-B556-78EA552E22AF
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NzAtODQzNDEyNi56aXA= [request-id: 90B33E7E-4DD7-4042-8D30-180090AA33FF]
+2026-01-07 13:36:00.607 RedLemon[4783:48165] 🔍 MPV track-list/count: 3
+2026-01-07 13:36:00.607 RedLemon[4783:48165] 🔍 Track 0 type: video
+2026-01-07 13:36:00.607 RedLemon[4783:48165] 🔍 Track 1 type: audio
+2026-01-07 13:36:00.607 RedLemon[4783:48165] 🔍 Track 2 type: sub
+2026-01-07 13:36:00.608 RedLemon[4783:48165] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:00.608 RedLemon[4783:48165] 📊 Total subtitle tracks found: 2 (including Off if needed)
+2026-01-07 13:36:00.608 RedLemon[4783:48165]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:00.608 RedLemon[4783:48165]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:00.617 RedLemon[4783:48165] ✅ SubtitleService: Scanned 2 tracks (Attempt 4/5)
+2026-01-07 13:36:00.617 RedLemon[4783:48165]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:00.618 RedLemon[4783:48165]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:01.652 RedLemon[4783:48418] 🔍 MPV track-list/count: 3
+2026-01-07 13:36:01.652 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:01.653 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:01.654 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:01.663 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:01.664 RedLemon[4783:48418] 📊 Total subtitle tracks found: 2 (including Off if needed)
+2026-01-07 13:36:01.666 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:01.666 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:01.667 RedLemon[4783:48418] ✅ SubtitleService: Scanned 2 tracks (Attempt 5/5)
+2026-01-07 13:36:01.668 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:01.668 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTE1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3511570-8434126.zip
+[MPV] Track added:
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 1
+⏳ SMART-LOAD: Waiting for subtitles... (Found 1/3)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 1
+⏳ SMART-LOAD: Waiting for subtitles... (Found 1/3)
+💓 Heartbeat sent
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+⏳ SMART-LOAD: Waiting for subtitles... (Found 1/3)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+⏳ SMART-LOAD: Waiting for subtitles... (Found 1/3)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⚠️ SMART-LOAD: Timed out waiting for tracks. Proceeding best-effort.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 3 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'en', title: 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US (ID: 1) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+[ WARNING ] Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <904FC8BB-43EF-4F5D-81D8-39AF2FE97791>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <904FC8BB-43EF-4F5D-81D8-39AF2FE97791>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://dl.subdl.com/subtitle/3511570-8434126.zip, NSErrorFailingURLKey=https://dl.subdl.com/subtitle/3511570-8434126.zip, _kCFStreamErrorDomainKey=4} [request-id: 90B33E7E-4DD7-4042-8D30-180090AA33FF]
+2026-01-07 13:36:05.406 RedLemon[4783:48420] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_82FCCC04-FB51-45AB-ABD9-F077A9F42AC5.vtt
+2026-01-07 13:36:05.406 RedLemon[4783:48420] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_82FCCC04-FB51-45AB-ABD9-F07
+2026-01-07 13:36:05.424 RedLemon[4783:48420] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 13:36:05.424 RedLemon[4783:48420] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NjktODQzNDEyNC56aXA=?token=DF218777-7AA1-4D0A-B556-78EA552E22AF
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM1MTE1NjktODQzNDEyNC56aXA= [request-id: 88E3F254-A3E3-47AD-B33C-5624D7E7A091]
+📄 Subtitle request: L3N1YnRpdGxlLzM1MTE1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3511569-8434124.zip
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGthp8cPU6AgmD","phx_ref_prev":"GIiGsW66VfE6AggD","last_seen":"2026-01-07T18:36:10.294Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsW66VfE6AggD","phx_ref_prev":"GIiGrMpfj8M6AgYD","last_seen":"2026-01-07T18:35:50.234Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+[ WARNING ] Error Domain=NSURLErrorDomain Code=-1001 "The request timed out." UserInfo={_kCFStreamErrorCodeKey=-2103, _NSURLErrorFailingURLSessionTaskErrorKey=LocalDataTask <663DFA56-E0BA-43D1-9017-2D74B39DB994>.<1>, _NSURLErrorRelatedURLSessionTaskErrorKey=(
+    "LocalDataTask <663DFA56-E0BA-43D1-9017-2D74B39DB994>.<1>"
+), NSLocalizedDescription=The request timed out., NSErrorFailingURLStringKey=https://dl.subdl.com/subtitle/3511569-8434124.zip, NSErrorFailingURLKey=https://dl.subdl.com/subtitle/3511569-8434124.zip, _kCFStreamErrorDomainKey=4} [request-id: 88E3F254-A3E3-47AD-B33C-5624D7E7A091]
+2026-01-07 13:36:10.436 RedLemon[4783:48418] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7637BDAD-A41B-4B27-A1A6-F19B8473EAFA.vtt
+2026-01-07 13:36:10.436 RedLemon[4783:48418] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7637BDAD-A41B-4B27-A1A6-F19
+2026-01-07 13:36:10.444 RedLemon[4783:48418] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 13:36:10.444 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:10.444 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:10.444 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:10.445 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:10.445 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:10.445 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:10.445 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:10.445 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:10.445 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:10.445 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:10.446 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:10.446 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:10.447 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:11.544 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:11.545 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:11.546 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:11.546 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:11.547 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:11.547 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:11.547 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:11.548 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:11.548 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:11.548 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:11.548 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:11.548 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:11.548 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:11.549 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:11.549 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:11.550 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:11.551 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:11.553 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:11.554 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:12.650 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:12.651 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:12.651 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:12.651 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:12.651 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:12.651 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:12.652 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:12.652 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:12.652 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:12.652 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:12.652 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:12.653 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:12.653 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:12.653 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:12.653 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:12.653 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:12.653 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:12.654 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:12.654 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:13.766 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:13.766 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:13.766 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:13.767 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:13.767 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:13.767 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:13.767 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:13.768 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:13.768 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:13.768 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:13.768 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:13.768 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:13.768 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:13.768 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:13.769 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:13.769 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:13.769 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:13.770 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:13.770 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:14.819 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:14.819 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:14.820 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:14.820 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:14.820 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:14.820 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:14.820 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:14.821 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:14.821 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:14.821 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:14.821 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:14.821 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:14.821 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:14.821 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:14.822 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:14.822 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:14.823 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:14.823 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:14.824 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:15.017 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:15.017 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:15.018 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:15.018 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:15.018 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:15.018 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:15.018 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:15.019 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:15.019 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:15.019 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:15.019 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:15.019 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:15.019 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:15.020 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:15.020 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:15.020 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:15.021 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:15.021 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:15.021 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:16.118 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:16.118 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:16.118 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:16.118 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:16.118 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:16.118 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:16.119 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:16.119 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:16.120 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:16.120 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:16.120 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:16.120 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:16.120 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:16.121 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:16.121 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:16.121 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:16.121 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:16.122 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:16.122 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:17.145 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:17.145 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:17.145 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:17.145 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:17.145 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:17.145 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:17.146 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:17.146 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:17.146 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:17.146 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:17.146 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:17.146 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:17.146 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:17.146 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:17.146 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:17.147 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:17.147 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:17.147 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:17.147 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:17.353 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:17.353 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:17.353 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:17.353 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:17.354 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:17.354 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:17.354 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:17.354 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:17.355 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:17.355 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:17.355 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:17.355 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:17.355 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:17.355 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:17.356 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:17.356 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:17.356 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:17.357 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:17.358 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:18.173 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:18.173 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:18.173 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:18.173 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:18.173 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:18.174 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:18.175 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:18.188 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:18.188 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:18.189 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:18.189 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:18.189 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.189 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:18.189 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.190 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:18.190 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:18.190 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:18.190 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:18.191 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:18.451 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:18.451 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:18.452 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:18.452 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:18.452 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:18.453 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:18.453 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:18.453 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:18.454 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:18.454 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:18.454 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:18.454 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.454 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:18.454 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.455 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:18.455 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:18.455 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:18.456 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:18.456 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:18.896 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:18.897 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:18.898 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:18.898 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:18.898 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:18.898 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:18.898 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:18.899 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:18.899 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:18.899 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:18.899 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:18.899 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.900 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:18.900 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:18.900 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:18.900 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:18.901 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:18.901 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:18.901 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:19.287 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:19.287 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:19.288 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:19.288 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:19.288 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:19.289 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:19.289 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:19.290 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:19.290 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:19.290 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:19.290 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:19.290 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.290 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:19.290 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.291 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:19.291 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:19.291 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:19.292 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:19.292 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:19.462 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:19.462 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:19.462 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:19.462 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:19.462 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:19.463 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:19.463 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:19.464 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:19.479 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:19.480 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:19.480 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:19.480 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.481 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:19.481 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.481 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:19.481 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:19.482 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:19.482 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:19.482 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:19.902 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:19.902 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:19.902 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:19.902 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:19.902 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:19.902 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:19.903 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:19.903 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:19.904 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:19.904 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:19.904 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:19.904 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.904 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:19.904 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:19.904 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:19.905 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:19.905 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:19.905 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:19.906 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:20.104 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:20.104 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:20.104 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:20.104 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:20.105 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:20.106 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:20.106 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:20.106 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:20.106 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:20.107 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:20.107 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:20.107 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.107 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:20.107 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.107 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:20.107 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:20.108 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:20.108 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:20.109 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:20.576 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:20.576 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:20.576 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:20.577 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:20.577 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:20.578 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:20.578 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:20.578 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:20.578 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:20.579 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:20.579 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:20.579 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.579 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:20.579 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.579 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:20.580 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:20.580 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:20.580 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:20.581 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:20.765 RedLemon[4783:48058] 🖱️ Mouse: x=656/1366 y=331/768 | Exit: 0 Controls: 0 Chat: 0
+2026-01-07 13:36:20.925 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:20.925 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:20.925 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:20.926 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:20.939 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:20.939 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:20.940 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:20.940 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:20.941 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:20.941 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:20.941 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:20.941 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.941 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:20.941 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:20.942 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:20.942 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:20.942 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:20.942 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:20.942 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:21.204 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:21.204 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:21.205 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:21.205 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:21.205 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:21.205 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:21.205 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:21.205 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:21.206 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:21.206 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:21.206 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:21.206 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.206 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:21.206 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.207 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:21.207 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:21.207 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:21.207 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:21.208 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:21.679 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:21.679 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:21.680 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:21.680 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:21.681 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:21.681 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:21.681 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:21.682 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:21.682 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:21.682 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:21.682 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:21.683 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.683 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:21.684 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.685 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:21.685 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:21.686 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:21.688 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:21.689 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:21.943 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:21.943 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:21.943 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:21.944 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:21.944 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:21.944 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:21.944 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:21.944 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:21.945 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:21.945 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:21.945 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:21.945 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.945 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:21.946 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:21.946 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:21.946 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:21.947 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:21.947 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:21.948 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:22.306 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:22.307 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:22.307 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:22.309 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:22.310 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:22.311 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:22.312 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:22.314 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:22.314 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:22.314 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:22.314 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:22.314 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:22.314 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:22.314 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:22.315 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:22.315 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:22.315 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:22.315 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:22.315 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:22.956 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:22.956 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:22.957 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:22.957 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:22.959 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:22.959 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:22.959 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:22.960 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:22.960 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:22.960 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:22.960 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:22.960 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:22.961 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:22.961 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:22.961 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:22.962 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:22.962 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:22.963 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:22.965 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:23.414 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:23.414 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:23.414 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:23.414 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:23.415 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:23.415 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:23.415 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:23.415 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:23.415 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:23.415 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:23.416 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:23.416 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:23.416 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:23.416 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:23.416 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:23.417 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:23.417 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:23.417 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:23.417 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:24.425 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:24.425 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:24.425 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:24.425 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:24.425 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:24.426 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:24.426 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:24.426 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:24.426 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:24.427 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:24.427 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:24.427 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:24.427 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:24.427 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:24.427 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:24.427 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:24.428 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:24.428 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:24.428 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:25.805 RedLemon[4783:48058] 💓 Playback heartbeat sent for room: event_tt1104001
+2026-01-07 13:36:27.823 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:27.823 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:27.824 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:27.824 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:27.825 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:27.825 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:27.825 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:27.825 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:27.825 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:27.825 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:27.826 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:27.826 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:27.827 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:27.827 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:28.867 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:28.868 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:28.868 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:28.868 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:28.868 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:28.868 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:28.869 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:28.869 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:28.869 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:28.869 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:28.869 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:28.869 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:28.870 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:28.870 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:29.406 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:29.406 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:29.408 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:29.409 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:29.410 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:29.410 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:29.410 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:29.411 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:29.411 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:29.411 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:29.411 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:29.412 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:29.412 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:29.412 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:29.412 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:29.413 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:29.413 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:29.414 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:29.414 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:29.871 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:29.871 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:29.871 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:29.871 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:29.871 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:29.872 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:29.872 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:29.872 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:29.872 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:29.872 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:29.873 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:29.873 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:29.874 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:29.874 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:30.312 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:30.312 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:30.312 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:30.313 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:30.313 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:30.313 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:30.313 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:30.313 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:30.314 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:30.314 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:30.314 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:30.314 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.314 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:30.314 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.315 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:30.315 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:30.315 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:30.316 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:30.317 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:30.434 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:30.435 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:30.450 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:30.450 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:30.450 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:30.450 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:30.450 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:30.451 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:30.451 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:30.451 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:30.451 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:30.452 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.452 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:30.452 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.452 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:30.452 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:30.453 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:30.453 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:30.453 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:30.877 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:30.877 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:30.878 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:30.878 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:30.878 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:30.878 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:30.878 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:30.879 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:30.879 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:30.879 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:30.879 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:30.879 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.879 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:30.879 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:30.880 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:30.880 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:30.880 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:30.880 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:30.881 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:31.400 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:31.400 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:31.400 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:31.400 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:31.401 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:31.401 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:31.401 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:31.401 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:31.402 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:31.402 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:31.402 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:31.403 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.403 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:31.403 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.404 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:31.405 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:31.407 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:31.408 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:31.408 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:31.453 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:31.454 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:31.454 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:31.454 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:31.454 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:31.454 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:31.454 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:31.454 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:31.455 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:31.455 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:31.455 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:31.455 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.455 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:31.455 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.455 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:31.456 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:31.456 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:31.456 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:31.456 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:31.912 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:31.912 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:31.912 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:31.913 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:31.913 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:31.913 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:31.913 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:31.913 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:31.914 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:31.914 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:31.914 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:31.914 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.914 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:31.914 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:31.914 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:31.915 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:31.915 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:31.915 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:31.915 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:32.466 RedLemon[4783:48321] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:32.466 RedLemon[4783:48321] 🔍 Track 0 type: video
+2026-01-07 13:36:32.466 RedLemon[4783:48321] 🔍 Track 1 type: audio
+2026-01-07 13:36:32.467 RedLemon[4783:48321] 🔍 Track 2 type: sub
+2026-01-07 13:36:32.467 RedLemon[4783:48321] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:32.467 RedLemon[4783:48321] 🔍 Track 3 type: sub
+2026-01-07 13:36:32.467 RedLemon[4783:48321] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:32.468 RedLemon[4783:48321] 🔍 Track 4 type: sub
+2026-01-07 13:36:32.468 RedLemon[4783:48321] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:32.468 RedLemon[4783:48321] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:32.468 RedLemon[4783:48321]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:32.468 RedLemon[4783:48321]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:32.468 RedLemon[4783:48321]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:32.468 RedLemon[4783:48321]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:32.469 RedLemon[4783:48321] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:32.469 RedLemon[4783:48321]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:32.469 RedLemon[4783:48321]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:32.470 RedLemon[4783:48321]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:32.470 RedLemon[4783:48321]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:32.470 RedLemon[4783:48321] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:32.470 RedLemon[4783:48321] 🔍 Track 0 type: video
+2026-01-07 13:36:32.471 RedLemon[4783:48321] 🔍 Track 1 type: audio
+2026-01-07 13:36:32.471 RedLemon[4783:48321] 🔍 Track 2 type: sub
+2026-01-07 13:36:32.471 RedLemon[4783:48321] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:32.472 RedLemon[4783:48321] 🔍 Track 3 type: sub
+2026-01-07 13:36:32.472 RedLemon[4783:48321] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:32.472 RedLemon[4783:48321] 🔍 Track 4 type: sub
+2026-01-07 13:36:32.472 RedLemon[4783:48321] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:32.472 RedLemon[4783:48321] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:32.473 RedLemon[4783:48321]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:32.473 RedLemon[4783:48321]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:32.473 RedLemon[4783:48321]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:32.473 RedLemon[4783:48321]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:32.474 RedLemon[4783:48321] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:32.474 RedLemon[4783:48321]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:32.474 RedLemon[4783:48321]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:32.474 RedLemon[4783:48321]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:32.474 RedLemon[4783:48321]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:33.455 RedLemon[4783:48124] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:33.455 RedLemon[4783:48124] 🔍 Track 0 type: video
+2026-01-07 13:36:33.457 RedLemon[4783:48124] 🔍 Track 1 type: audio
+2026-01-07 13:36:33.457 RedLemon[4783:48124] 🔍 Track 2 type: sub
+2026-01-07 13:36:33.458 RedLemon[4783:48124] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:33.458 RedLemon[4783:48124] 🔍 Track 3 type: sub
+2026-01-07 13:36:33.459 RedLemon[4783:48124] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:33.459 RedLemon[4783:48124] 🔍 Track 4 type: sub
+2026-01-07 13:36:33.459 RedLemon[4783:48124] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:33.459 RedLemon[4783:48124] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:33.460 RedLemon[4783:48124]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:33.460 RedLemon[4783:48124]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.460 RedLemon[4783:48124]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:33.460 RedLemon[4783:48124]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.461 RedLemon[4783:48124] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:33.462 RedLemon[4783:48124]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:33.465 RedLemon[4783:48124]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:33.465 RedLemon[4783:48124]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:33.465 RedLemon[4783:48124]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:33.471 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:33.471 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:33.471 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:33.471 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:33.472 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.472 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:33.472 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:33.473 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:33.473 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:33.481 RedLemon[4783:48355] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:33.481 RedLemon[4783:48355] 🔍 Track 0 type: video
+2026-01-07 13:36:33.482 RedLemon[4783:48355] 🔍 Track 1 type: audio
+2026-01-07 13:36:33.482 RedLemon[4783:48355] 🔍 Track 2 type: sub
+2026-01-07 13:36:33.482 RedLemon[4783:48355] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:33.482 RedLemon[4783:48355] 🔍 Track 3 type: sub
+2026-01-07 13:36:33.482 RedLemon[4783:48355] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:33.482 RedLemon[4783:48355] 🔍 Track 4 type: sub
+2026-01-07 13:36:33.483 RedLemon[4783:48355] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:33.483 RedLemon[4783:48355] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:33.483 RedLemon[4783:48355] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:33.483 RedLemon[4783:48355]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:33.484 RedLemon[4783:48355]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:33.484 RedLemon[4783:48355]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:34.452 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:34.452 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:34.452 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:34.452 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:34.452 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:34.453 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:34.453 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:34.453 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:34.453 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:34.453 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:34.454 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:34.454 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.454 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:34.454 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.454 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 13:36:34.454 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:34.455 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:34.455 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:34.455 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:34.466 RedLemon[4783:48321] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:34.466 RedLemon[4783:48321] 🔍 Track 0 type: video
+2026-01-07 13:36:34.466 RedLemon[4783:48321] 🔍 Track 1 type: audio
+2026-01-07 13:36:34.466 RedLemon[4783:48321] 🔍 Track 2 type: sub
+2026-01-07 13:36:34.467 RedLemon[4783:48321] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:34.467 RedLemon[4783:48321] 🔍 Track 3 type: sub
+2026-01-07 13:36:34.467 RedLemon[4783:48321] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:34.467 RedLemon[4783:48321] 🔍 Track 4 type: sub
+2026-01-07 13:36:34.467 RedLemon[4783:48321] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:34.468 RedLemon[4783:48321] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:34.468 RedLemon[4783:48321]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:34.468 RedLemon[4783:48321]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.468 RedLemon[4783:48321]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:34.468 RedLemon[4783:48321]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.468 RedLemon[4783:48321] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:34.469 RedLemon[4783:48321]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:34.469 RedLemon[4783:48321]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:34.469 RedLemon[4783:48321]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:34.469 RedLemon[4783:48321]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:34.474 RedLemon[4783:48321] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:34.474 RedLemon[4783:48321] 🔍 Track 0 type: video
+2026-01-07 13:36:34.479 RedLemon[4783:48321] 🔍 Track 1 type: audio
+2026-01-07 13:36:34.479 RedLemon[4783:48321] 🔍 Track 2 type: sub
+2026-01-07 13:36:34.479 RedLemon[4783:48321] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:34.480 RedLemon[4783:48321] 🔍 Track 3 type: sub
+2026-01-07 13:36:34.480 RedLemon[4783:48321] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:34.480 RedLemon[4783:48321] 🔍 Track 4 type: sub
+2026-01-07 13:36:34.480 RedLemon[4783:48321] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:34.481 RedLemon[4783:48321] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:34.481 RedLemon[4783:48321] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:34.481 RedLemon[4783:48321]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:34.482 RedLemon[4783:48321]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:34.482 RedLemon[4783:48321]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:35.533 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:35.534 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:35.534 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:35.534 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:35.535 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:35.535 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:35.535 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:35.535 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:35.535 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:35.535 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:35.536 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:35.536 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:35.537 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:35.537 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:35.537 RedLemon[4783:48418] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:35.537 RedLemon[4783:48418] 🔍 Track 0 type: video
+2026-01-07 13:36:35.537 RedLemon[4783:48418] 🔍 Track 1 type: audio
+2026-01-07 13:36:35.537 RedLemon[4783:48418] 🔍 Track 2 type: sub
+2026-01-07 13:36:35.537 RedLemon[4783:48418] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:35.537 RedLemon[4783:48418] 🔍 Track 3 type: sub
+2026-01-07 13:36:35.538 RedLemon[4783:48418] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:35.538 RedLemon[4783:48418] 🔍 Track 4 type: sub
+2026-01-07 13:36:35.538 RedLemon[4783:48418] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:35.538 RedLemon[4783:48418] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:35.538 RedLemon[4783:48418]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:35.538 RedLemon[4783:48418]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:35.538 RedLemon[4783:48418]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:35.538 RedLemon[4783:48418]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:35.539 RedLemon[4783:48418] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:35.539 RedLemon[4783:48418]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:35.541 RedLemon[4783:48418]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:35.542 RedLemon[4783:48418]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:35.543 RedLemon[4783:48418]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:36.550 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:36.551 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:36.551 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:36.551 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:36.551 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:36.551 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:36.552 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:36.552 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:36.552 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:36.552 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:36.552 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:36.553 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:36.553 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:36.553 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:36.554 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 13:36:36.554 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:36.554 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:36.554 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:36.554 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:36.555 RedLemon[4783:48420] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:36.555 RedLemon[4783:48420] 🔍 Track 0 type: video
+2026-01-07 13:36:36.555 RedLemon[4783:48420] 🔍 Track 1 type: audio
+2026-01-07 13:36:36.555 RedLemon[4783:48420] 🔍 Track 2 type: sub
+2026-01-07 13:36:36.556 RedLemon[4783:48420] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:36.556 RedLemon[4783:48420] 🔍 Track 3 type: sub
+2026-01-07 13:36:36.557 RedLemon[4783:48420] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:36.558 RedLemon[4783:48420] 🔍 Track 4 type: sub
+2026-01-07 13:36:36.558 RedLemon[4783:48420] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:36.559 RedLemon[4783:48420] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:36.559 RedLemon[4783:48420]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:36.560 RedLemon[4783:48420]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:36.560 RedLemon[4783:48420]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:36.560 RedLemon[4783:48420]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:36.560 RedLemon[4783:48420] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:36.560 RedLemon[4783:48420]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:36.561 RedLemon[4783:48420]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:36.561 RedLemon[4783:48420]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:36.561 RedLemon[4783:48420]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:37.644 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:37.644 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:37.655 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:37.656 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:37.657 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:37.657 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:37.658 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:37.659 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:37.660 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:37.661 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:37.661 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:37.661 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:37.662 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:37.662 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:37.663 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:37.663 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:37.663 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:37.664 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:37.664 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:37.664 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:37.664 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:37.664 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:37.664 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:37.664 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:37.664 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:37.665 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:37.665 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:37.665 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:37.665 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:37.666 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:37.666 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:37.667 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+2026-01-07 13:36:38.754 RedLemon[4783:48129] 🔍 MPV track-list/count: 5
+2026-01-07 13:36:38.754 RedLemon[4783:48129] 🔍 Track 0 type: video
+2026-01-07 13:36:38.754 RedLemon[4783:48129] 🔍 Track 1 type: audio
+2026-01-07 13:36:38.754 RedLemon[4783:48129] 🔍 Track 2 type: sub
+2026-01-07 13:36:38.755 RedLemon[4783:48129] ✅ Found subtitle track: ID=1, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, external=1
+2026-01-07 13:36:38.755 RedLemon[4783:48129] 🔍 Track 3 type: sub
+2026-01-07 13:36:38.755 RedLemon[4783:48129] ✅ Found subtitle track: ID=2, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, external=1
+2026-01-07 13:36:38.755 RedLemon[4783:48129] 🔍 Track 4 type: sub
+2026-01-07 13:36:38.755 RedLemon[4783:48129] ✅ Found subtitle track: ID=3, lang=en, title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, external=1
+2026-01-07 13:36:38.756 RedLemon[4783:48129] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 13:36:38.756 RedLemon[4783:48129]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 13:36:38.756 RedLemon[4783:48129]    Start[1]: ID=1, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', Lang='en', Ext=1
+2026-01-07 13:36:38.756 RedLemon[4783:48129]    Start[2]: ID=2, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', Lang='en', Ext=1
+2026-01-07 13:36:38.756 RedLemon[4783:48129]    Start[3]: ID=3, Title='TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', Lang='en', Ext=1
+2026-01-07 13:36:38.758 RedLemon[4783:48129] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 13:36:38.758 RedLemon[4783:48129]    Track: ID=0, Title=Off, External=0
+2026-01-07 13:36:38.759 RedLemon[4783:48129]    Track: ID=1, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US, External=1
+2026-01-07 13:36:38.759 RedLemon[4783:48129]    Track: ID=2, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK, External=1
+2026-01-07 13:36:38.761 RedLemon[4783:48129]    Track: ID=3, Title=TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US, External=1
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] (+) Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGtqxb4O06Agmj","phx_ref_prev":"GIiGsqWaz946Agkj","last_seen":"2026-01-07T18:36:12.633Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:55.348Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGsqWaz946Agkj","phx_ref_prev":"GIiGsgdmL5Y6Aghj","last_seen":"2026-01-07T18:35:55.347Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:55.348Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'en', title: 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 250 (Embedded: 0, Match: 0, Clean: 0, SDH: 250)
+📝 Set subtitle track to: 2 (async, visibility enabled)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 2
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 2
+📝 Set subtitle track to: 3 (async, visibility enabled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 3
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📝 Set subtitle track to: 1 (async, visibility enabled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 1
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 1
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 1
+📝 Set subtitle track to: 2 (async, visibility enabled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 2
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 2
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+📊 Current subtitle track: 2
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 2
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💾 Saved to watch history: Tron: Legacy at 3415s
+🎬 DisplayLink: reportSwap() (throttled)
+📝 Set subtitle track to: 3 (async, visibility enabled)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📝 Set subtitle track to: 2 (async, visibility enabled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 2
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 2
+📝 Set subtitle track to: 1 (async, visibility enabled)
+[MPV] Track switched:
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGusFtQWw6AgoD","phx_ref_prev":"GIiGthp8cPU6AgmD","last_seen":"2026-01-07T18:36:30.273Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"98ec1f08-ebf7-11f0-980c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGthp8cPU6AgmD","phx_ref_prev":"GIiGsW66VfE6AggD","last_seen":"2026-01-07T18:36:10.294Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:18.867Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 1
+💓 Heartbeat sent
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 1
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+✅ [EventsConfig] Fetched movie_events version 1485 with 412 movies
+📊 Current subtitle track: 1
+✅ [EventsConfig] Using cached movie_events config (version 1485, 412 movies)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 1
+💓 Heartbeat sent
+📨 Received: {"ref":"6","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+💓 Heartbeat sent
+📨 Received: {"ref":"7","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGu1Vz4yc6Agoj","phx_ref_prev":"GIiGtqxb4O06Agmj","last_seen":"2026-01-07T18:36:32.655Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:55.348Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"a65078b0-ebf7-11f0-b04f-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiGtqxb4O06Agmj","phx_ref_prev":"GIiGsqWaz946Agkj","last_seen":"2026-01-07T18:36:12.633Z","room_id":"event_tt1104001","started_at":"2026-01-07T18:35:55.348Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"phoenix"}
+[MPV] Track switched:
+📝 Set subtitle track to: 2 (async, visibility enabled)
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+📊 Current subtitle track: 2
+📊 Current subtitle track: 2
+[MPV] Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+📊 Current subtitle track: 2
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📝 Set subtitle track to: 3 (async, visibility enabled)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK' (webvtt) (external)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+[MPV] (+) Subs  --sid=3 --slang=en 'TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)

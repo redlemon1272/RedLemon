@@ -174,7 +174,20 @@ class PlayerViewModel: ObservableObject {
 
                 // Standard Behavior: Search for subtitles locally (SubDL)
                 // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
-                // Fetch subtitles from SubDL via local server, passing stream filename for release-type matching
+                // Fetch subtitles from SubDL via local server, passing stream info for release-type matching
+                
+                // Build stream filename for subtitle matching
+                // Real-Debrid URLs are truncated (e.g., /d/xxx/TR), so use room's sourceQuality as hint
+                var streamHint = filename
+                if filename.count < 10 || filename == "Host Stream" {
+                    // URL filename is truncated, construct from room data
+                    let sourceQuality = watchPartyRoom.sourceQuality ?? ""
+                    let quality = watchPartyRoom.selectedQuality ?? ""
+                    // Build a release-like string: "Movie.Name.1080p.WEB-DL"
+                    streamHint = "\(item.name.replacingOccurrences(of: " ", with: ".")).\(quality).\(sourceQuality)".lowercased()
+                    NSLog("📝 GUEST: Using room sourceQuality for subtitle matching: \(streamHint)")
+                }
+                
                 if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
                     imdbId: item.id,
                     type: item.type,
@@ -182,7 +195,7 @@ class PlayerViewModel: ObservableObject {
                     episode: effectiveEpisode, // Use derived playlist metadata
                     name: item.name,
                     year: item.year.flatMap { Int($0) },
-                    streamFilename: filename // Pass stream filename for release-type matching
+                    streamFilename: streamHint // Pass stream hint for release-type matching
                 ) {
                      NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
 

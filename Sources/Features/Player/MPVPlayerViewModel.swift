@@ -923,6 +923,14 @@ class MPVPlayerViewModel: ObservableObject {
                      }
                  }
              }
+        } else if self.isInWatchParty && !self.hasSentReadySignal {
+            // CRITICAL FIX: Watch Party Ready Gate
+            // Video is ready locally, but we are waiting for Host/Sync.
+            // Keep the poster visible so we don't show a static frame 0.
+            print("✅ Video ready (Watch Party) - Keeping poster visible until Sync Message")
+            withAnimation {
+                self.isLoading = false // Hide spinner, but keep poster
+            }
         } else {
             // Normal behavior
             withAnimation(.easeOut(duration: 0.5)) {

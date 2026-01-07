@@ -1084,7 +1084,9 @@ class LobbyViewModel: ObservableObject {
 
                 // CRITICAL FIX: Update AppState with CORRECTED room data (Clean Sync)
                 // This must run AFTER the season/episode correction logic above
-                if var currentRoomParam = self.appState?.player.currentWatchPartyRoom {
+                // CRITICAL: Only sync if this lobby's room matches AppState's room to prevent stale lobby contamination
+                if var currentRoomParam = self.appState?.player.currentWatchPartyRoom,
+                   currentRoomParam.id == self.room.id {
                     currentRoomParam.playlist = self.room.playlist
                     currentRoomParam.currentPlaylistIndex = self.room.currentPlaylistIndex
                     

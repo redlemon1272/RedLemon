@@ -1867,6 +1867,15 @@ class MPVPlayerViewModel: ObservableObject {
         // ✅ STEP 4: Disconnect realtime FIRST and await completion
         // Fix: Use captured state instead of potentially cleared 'isInWatchParty'
         if wasInWatchParty {
+            // CRITICAL: Leave room in database BEFORE disconnecting realtime
+            // This ensures participants_count decrements correctly
+            if let roomId = self.currentRoomId, 
+               let userId = self.currentUserId, 
+               let userUUID = UUID(uuidString: userId) {
+                try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
+                print("✅ Left room in database: \(roomId)")
+            }
+            
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected
             // CRITICAL FIX: Do NOT disconnect the shared client, only leave the channel.
             // Disconnecting the client kills the connection for the LobbyViewModel too.

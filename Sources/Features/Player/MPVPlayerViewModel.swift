@@ -2669,7 +2669,14 @@ extension MPVPlayerViewModel {
             let predictedHostPosition = hostTimestamp + networkLatency
 
             // NEW: Initial Sync Logic (Prevent Flash of Frame 0)
+            // CRITICAL FIX: Only reveal video after guest has sent ready signal (video loaded)
+            // This prevents premature poster hiding at the ready gate
             if isRefiningInitialSeek && !self.isWatchPartyHost {
+                guard hasSentReadySignal else {
+                    print("⏳ Watch Party: Ignoring Initial Sync (video not ready yet)")
+                    return // Skip until video is loaded
+                }
+                
                 print("👀 Watch Party: Initial Sync - Blind Seeking to \(String(format: "%.2f", predictedHostPosition))s and revealing video")
                 Task { @MainActor in
                      await playbackService.seek(to: predictedHostPosition)

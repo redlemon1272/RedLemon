@@ -367,6 +367,14 @@ struct ReportedStreamRow: View {
     let onBan: () -> Void
     let onDismiss: () -> Void
     
+    // Helper to extract metadata
+    private var reasonParts: (main: String, metadata: [String]) {
+        let parts = report.reason.components(separatedBy: "\n")
+        let main = parts.first ?? "Unknown"
+        let meta = parts.dropFirst().filter { $0.hasPrefix("[") && $0.hasSuffix("]") }
+        return (main, Array(meta))
+    }
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -388,7 +396,7 @@ struct ReportedStreamRow: View {
                 }
                 
                 HStack {
-                    Text(report.reason.capitalized)
+                    Text(reasonParts.main.capitalized)
                         .font(.caption.bold())
                         .foregroundColor(.red)
                     
@@ -400,7 +408,18 @@ struct ReportedStreamRow: View {
                         .foregroundColor(.secondary)
                 }
                 
-                Text("Hash: \(String(report.streamHash.prefix(8)))")
+                // Display Metadata
+                if !reasonParts.metadata.isEmpty {
+                     VStack(alignment: .leading, spacing: 2) {
+                         ForEach(reasonParts.metadata, id: \.self) { meta in
+                             Text(meta)
+                                 .font(.caption2)
+                                 .foregroundColor(.secondary)
+                         }
+                     }
+                }
+                
+                Text( "Hash: \(String(report.streamHash.prefix(8)))")
                     .font(.caption2.monospaced())
                     .foregroundColor(.secondary)
             }

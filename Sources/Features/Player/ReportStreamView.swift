@@ -12,6 +12,8 @@ struct ReportStreamView: View {
     let quality: String
     let streamHash: String
     let movieTitle: String? // Added to capture title for admin visibility
+    let filename: String? // Captured from player
+    let provider: String? // Captured from metadata
     let onDismiss: () -> Void
     
     @State private var selectedReason: String?
@@ -134,7 +136,9 @@ struct ReportStreamView: View {
                 quality: quality,
                 streamHash: streamHash,
                 reason: finalReason,
-                movieTitle: movieTitle
+                movieTitle: movieTitle,
+                filename: filename,
+                provider: provider
             )
             withAnimation {
                 showSuccess = true

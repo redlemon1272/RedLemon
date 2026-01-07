@@ -1053,6 +1053,8 @@ struct MPVPlayerView: View {
                          quality: streamQuality,
                          streamHash: streamHash ?? "",
                          movieTitle: streamTitle, // Pass title for admin visibility
+                         filename: URL(string: viewModel.videoURL)?.lastPathComponent,
+                         provider: viewModel.streamTitle, // usually holds release name
                          onDismiss: {
                              withAnimation(.easeInOut(duration: 0.15)) {
                                  showReportSheet = false

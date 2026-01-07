@@ -1358,13 +1358,18 @@ struct ReportedStream: Identifiable, Codable {
     }
 
     /// Report a bad stream (Community)
-    func reportStream(imdbId: String, quality: String, streamHash: String, reason: String, movieTitle: String? = nil) async {
+    func reportStream(imdbId: String, quality: String, streamHash: String, reason: String, movieTitle: String? = nil, filename: String? = nil, provider: String? = nil) async {
         do {
+            // Pack metadata into reason field to avoid schema changes
+            var finalReason = reason
+            if let provider = provider { finalReason += "\n[Provider: \(provider)]" }
+            if let filename = filename { finalReason += "\n[File: \(filename)]" }
+
             var body: [String: Any] = [
                 "imdb_id": imdbId,
                 "quality": quality,
                 "stream_hash": streamHash,
-                "reason": reason
+                "reason": finalReason
             ]
 
             if let title = movieTitle {

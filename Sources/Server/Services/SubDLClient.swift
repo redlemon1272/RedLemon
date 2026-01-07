@@ -858,19 +858,32 @@ final class SubDLClient {
         if let streamFile = streamFilename?.lowercased() {
             let sourceTokens = ["webrip", "web-dl", "webdl", "bluray", "bdrip", "brrip", "dvdrip", "hdrip", "remux", "hdtv"]
             let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
+            let releaseGroups = ["yts", "yify", "fgt", "sparks", "rarbg", "tigole", "framestor", "cinema", "ntb", "axxo", "psa"]
             
-            // Source Match (Critical: +500 for match, -200 for explicit mismatch)
+            // Source Match (Critical: +500 for match, -200 for mismatch)
+            var hasSourceMatch = false
             for token in sourceTokens {
-                if streamFile.contains(token) && releaseName.contains(token) {
+                let streamHas = streamFile.contains(token)
+                let subHas = releaseName.contains(token)
+                
+                if streamHas && subHas {
                     score += 500 // Strong match
-                } else if streamFile.contains(token) {
-                    // Stream has this source, subtitle doesn't - check for conflicting source
-                    for other in sourceTokens where other != token {
-                        if releaseName.contains(other) {
-                            score -= 200 // Explicit mismatch (e.g. WEB-DL vs REMUX)
-                            break
-                        }
-                    }
+                    hasSourceMatch = true
+                } else if subHas && !streamHas {
+                    // Subtitle has this source, but stream doesn't - PENALTY
+                    // e.g., REMUX subtitle for non-REMUX stream
+                    score -= 300
+                } else if streamHas && !subHas {
+                    // Stream has this source, subtitle doesn't - mild penalty
+                    // (subtitle might just not mention it)
+                    score -= 50
+                }
+            }
+            
+            // Release Group Match (+300 bonus for matching release groups)
+            for group in releaseGroups {
+                if streamFile.contains(group) && releaseName.contains(group) {
+                    score += 300 // Strong release group match (e.g., both are YTS)
                 }
             }
             

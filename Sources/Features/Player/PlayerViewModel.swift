@@ -174,14 +174,15 @@ class PlayerViewModel: ObservableObject {
 
                 // Standard Behavior: Search for subtitles locally (SubDL)
                 // We no longer enforce "Shared Subtitles" from the host, allowing guests to pick their own.
-                // Fetch subtitles from SubDL via local server
+                // Fetch subtitles from SubDL via local server, passing stream filename for release-type matching
                 if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
                     imdbId: item.id,
                     type: item.type,
                     season: effectiveSeason, // Use derived playlist metadata
                     episode: effectiveEpisode, // Use derived playlist metadata
                     name: item.name,
-                    year: item.year.flatMap { Int($0) }
+                    year: item.year.flatMap { Int($0) },
+                    streamFilename: filename // Pass stream filename for release-type matching
                 ) {
                      NSLog("✅ GUEST: Found \(subDLSubtitles.count) subtitles")
 

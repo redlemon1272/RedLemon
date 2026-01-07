@@ -25,6 +25,7 @@ func registerSubtitleRoutes(_ app: Application) {
         let languages: String = req.query["languages"] ?? "en"
         let name: String? = req.query["name"]
         let year: Int? = req.query["year"]
+        let streamFilename: String? = req.query["filename"] // Stream filename for release-type matching
 
         // Get SubDL API key from Keychain
         guard let subdlKey = await KeychainManager.shared.get(service: "subdl") else {
@@ -39,11 +40,13 @@ func registerSubtitleRoutes(_ app: Application) {
             languages: languages,
             name: name,
             year: year,
+            streamFilename: streamFilename,
             apiKey: subdlKey
         )
 
         return subtitles
     }
+
 
     // GET /subtitles/subdl/:encodedPath
     // Downloads subtitle from SubDL CDN, converts to VTT, serves with optional offset

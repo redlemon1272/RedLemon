@@ -61,7 +61,7 @@ final class SubDLClient {
     ///   - episode: Episode number (for TV shows)
     ///   - languages: Comma-separated language codes (default: "en")
     ///   - apiKey: SubDL API key
-    func search(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, languages: String = "en", name: String? = nil, year: Int? = nil, apiKey: String) async throws -> [SubDLSubtitle] {
+    func search(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, languages: String = "en", name: String? = nil, year: Int? = nil, streamFilename: String? = nil, apiKey: String) async throws -> [SubDLSubtitle] {
         // Ensure imdbId has "tt" prefix
         let imdbWithPrefix = imdbId.starts(with: "tt") ? imdbId : "tt\(imdbId)"
 
@@ -184,7 +184,7 @@ final class SubDLClient {
             }
         }
 
-        let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode)
+        let sortedSubtitles = sortSubtitlesByCompatibility(filteredSubtitles, season: season, episode: episode, streamFilename: streamFilename)
 
         return sortedSubtitles
     }
@@ -782,7 +782,7 @@ final class SubDLClient {
 
     /// Calculate compatibility score for subtitle release
     /// Higher score = better match with typical video releases
-    private func calculateCompatibilityScore(_ subtitle: SubDLSubtitle, season: Int?, episode: Int?) -> Int {
+    private func calculateCompatibilityScore(_ subtitle: SubDLSubtitle, season: Int?, episode: Int?, streamFilename: String? = nil) -> Int {
         guard let releaseName = subtitle.releaseName?.lowercased() else { return 0 }
 
         var score = 0
@@ -853,15 +853,43 @@ final class SubDLClient {
         if let lang = subtitle.language?.lowercased(), lang.contains("en") {
             score += 5
         }
+        
+        // STREAM-MATCHED SCORING: If we know the stream's filename, match release types
+        if let streamFile = streamFilename?.lowercased() {
+            let sourceTokens = ["webrip", "web-dl", "webdl", "bluray", "bdrip", "brrip", "dvdrip", "hdrip", "remux", "hdtv"]
+            let qualityTokens = ["1080p", "720p", "2160p", "4k", "480p"]
+            
+            // Source Match (Critical: +500 for match, -200 for explicit mismatch)
+            for token in sourceTokens {
+                if streamFile.contains(token) && releaseName.contains(token) {
+                    score += 500 // Strong match
+                } else if streamFile.contains(token) {
+                    // Stream has this source, subtitle doesn't - check for conflicting source
+                    for other in sourceTokens where other != token {
+                        if releaseName.contains(other) {
+                            score -= 200 // Explicit mismatch (e.g. WEB-DL vs REMUX)
+                            break
+                        }
+                    }
+                }
+            }
+            
+            // Quality Match (+100)
+            for token in qualityTokens {
+                if streamFile.contains(token) && releaseName.contains(token) {
+                    score += 100
+                }
+            }
+        }
 
         return max(score, 0) // Ensure non-negative
     }
 
     /// Sort subtitles by compatibility score (highest first)
-    private func sortSubtitlesByCompatibility(_ subtitles: [SubDLSubtitle], season: Int?, episode: Int?) -> [SubDLSubtitle] {
+    private func sortSubtitlesByCompatibility(_ subtitles: [SubDLSubtitle], season: Int?, episode: Int?, streamFilename: String? = nil) -> [SubDLSubtitle] {
         return subtitles.sorted { sub1, sub2 in
-            let score1 = calculateCompatibilityScore(sub1, season: season, episode: episode)
-            let score2 = calculateCompatibilityScore(sub2, season: season, episode: episode)
+            let score1 = calculateCompatibilityScore(sub1, season: season, episode: episode, streamFilename: streamFilename)
+            let score2 = calculateCompatibilityScore(sub2, season: season, episode: episode, streamFilename: streamFilename)
             return score1 > score2
         }
     }

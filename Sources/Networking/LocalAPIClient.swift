@@ -677,7 +677,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
 
     // MARK: - Subtitles (SubDL)
 
-    func searchSubtitles(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil) async throws -> [SubDLSubtitle] {
+    func searchSubtitles(imdbId: String, type: String, season: Int? = nil, episode: Int? = nil, name: String? = nil, year: Int? = nil, streamFilename: String? = nil) async throws -> [SubDLSubtitle] {
         var components = URLComponents(string: "\(baseURL)/subtitles/search")!
         var queryItems = [
             URLQueryItem(name: "imdbId", value: imdbId),
@@ -696,6 +696,9 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         }
         if let year = year {
             queryItems.append(URLQueryItem(name: "year", value: "\(year)"))
+        }
+        if let streamFilename = streamFilename {
+            queryItems.append(URLQueryItem(name: "filename", value: streamFilename))
         }
         
         components.queryItems = queryItems
@@ -724,6 +727,7 @@ class LocalAPIClient: ObservableObject, MetadataProvider {
         let subtitles = try JSONDecoder().decode([SubDLSubtitle].self, from: data)
         return subtitles
     }
+
 
     func getSubtitleURL(downloadPath: String, season: Int? = nil, episode: Int? = nil) -> String {
         // Encode download path as base64

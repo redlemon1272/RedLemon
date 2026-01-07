@@ -119,9 +119,18 @@ class PlayerViewModel: ObservableObject {
                 selectedMediaItem = item
             }
 
-            // Only pass season/episode for TV series
-            let season = item.type == "series" ? selectedSeason : nil
-            let episode = item.type == "series" ? selectedEpisode : nil
+            // Determine effective Season/Episode
+            // Priority: Watch Party Playlist Item > Selected Season/Episode
+            var effectiveSeason = item.type == "series" ? selectedSeason : nil
+            var effectiveEpisode = item.type == "series" ? selectedEpisode : nil
+
+            if let room = currentWatchPartyRoom,
+               let playlistItem = room.currentPlaylistItem {
+                 // Use specific season/episode from playlist if available (Highest Priority)
+                 if let s = playlistItem.season { effectiveSeason = s }
+                 if let e = playlistItem.episode { effectiveEpisode = e }
+                 NSLog("🎬 PlayerVM: Using Playlist Metadata: S\(effectiveSeason ?? 0)E\(effectiveEpisode ?? 0)")
+            }
 
             // Step 2: Resolve stream (Optimized for Guest)
             var resolvedStream: Stream?
@@ -169,8 +178,8 @@ class PlayerViewModel: ObservableObject {
                 if let subDLSubtitles = try? await LocalAPIClient.shared.searchSubtitles(
                     imdbId: item.id,
                     type: item.type,
-                    season: item.type == "series" ? watchPartyRoom.season : nil,
-                    episode: item.type == "series" ? watchPartyRoom.episode : nil,
+                    season: effectiveSeason, // Use derived playlist metadata
+                    episode: effectiveEpisode, // Use derived playlist metadata
                     name: item.name,
                     year: item.year.flatMap { Int($0) }
                 ) {
@@ -225,8 +234,8 @@ class PlayerViewModel: ObservableObject {
                  let result = try await streamResolver.resolveStream(
                      item: item,
                      quality: quality,
-                     season: season,
-                     episode: episode,
+                     season: effectiveSeason, // Use effective variables
+                     episode: effectiveEpisode, // Use effective variables
                      metadata: metadata,
                      preferredInfoHash: hostStreamHash,
                      filterExtended: false
@@ -239,12 +248,13 @@ class PlayerViewModel: ObservableObject {
                 let result = try await streamResolver.resolveStream(
                     item: item,
                     quality: quality,
-                    season: season,
-                    episode: episode,
+                    season: effectiveSeason, // Use effective variables
+                    episode: effectiveEpisode, // Use effective variables
                     metadata: metadata,
                     preferredInfoHash: nil,
                     filterExtended: false
                 )
+
                 resolvedStream = result.stream
                 resolvedMetadata = result.metadata
                 Task { @MainActor in self.streamQueue = result.candidateStreams }

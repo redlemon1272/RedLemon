@@ -179,6 +179,7 @@ class PlayerViewModel: ObservableObject {
                 // Build stream filename for subtitle matching
                 // Real-Debrid URLs are truncated (e.g., /d/xxx/TR), so use room's sourceQuality as hint
                 var streamHint = filename
+                NSLog("📝 GUEST: Extracted filename='\(filename)' (len=\(filename.count)), sourceQuality=\(watchPartyRoom.sourceQuality ?? "nil"), selectedQuality=\(watchPartyRoom.selectedQuality ?? "nil")")
                 if filename.count < 10 || filename == "Host Stream" {
                     // URL filename is truncated, construct from room data
                     let sourceQuality = watchPartyRoom.sourceQuality ?? ""

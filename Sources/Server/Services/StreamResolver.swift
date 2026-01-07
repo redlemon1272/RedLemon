@@ -809,6 +809,8 @@ actor StreamResolver {
         let isForeign = lower.contains("french") ||
                        lower.contains("german") ||
                        lower.contains("spanish") ||
+                       lower.contains("latino") ||
+                       lower.contains("castellano") ||
                        lower.contains("italian") ||
                        lower.contains("portuguese") ||
                        lower.contains("dublado") ||  // Portuguese: dubbed
@@ -829,11 +831,12 @@ actor StreamResolver {
                        lower.contains("polski") ||
                        lower.contains(" pl ") || // Polish flag (spaces)
                        lower.contains("-pl-") ||
-                       lower.contains(".pl.")
+                       lower.contains(".pl.") ||
+                       lower.contains("swha") // Spanish release group/tag
 
         // Check for Multi/Dual audio
         // Moved up to allow exceptions for Russian Multi releases
-        let isMulti = lower.contains("multi") || lower.contains("dual") || lower.contains("latino")
+        let isMulti = lower.contains("multi") || lower.contains("dual")
 
         // Block "Rus" ONLY if it's NOT a Multi release
         // (Many high quality P2P releases are Multi + include Rus)

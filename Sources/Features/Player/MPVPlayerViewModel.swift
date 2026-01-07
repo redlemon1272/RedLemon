@@ -1758,7 +1758,20 @@ class MPVPlayerViewModel: ObservableObject {
 
              
              if !returningToLobby {
-                 self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
+                 // CRITICAL FIX: Only clear room state if we're still in the SAME room.
+                 // When transitioning to a DIFFERENT room (e.g., joining friend's room from player chat),
+                 // PlayerViewModel.joinRoom() has already set the new room ID/state BEFORE this cleanup runs.
+                 // Clearing it here would cause "No room found" error.
+                 let appRoomId = self.appState?.player.currentRoomId
+                 let shouldClearRoomState = (appRoomId == nil || appRoomId == self.currentRoomId)
+                 
+                 if shouldClearRoomState {
+                     self.appState?.player.currentWatchPartyRoom = nil // FIX: Clear stale room data
+                 } else {
+                     NSLog("🔒 Cleanup: Preserving room state (transitioning to different room: %@ → %@)", 
+                           self.currentRoomId ?? "nil", appRoomId ?? "nil")
+                 }
+                 
                  self.currentRoomId = nil
                  self.isWatchPartyHost = false
                  self.isInWatchParty = false

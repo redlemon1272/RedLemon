@@ -74,6 +74,8 @@ struct SettingsView: View {
 
                 credentialsSection
 
+                providerStatusSection
+
                 licenseSection
 
                 usernameSection
@@ -82,11 +84,13 @@ struct SettingsView: View {
 
                 resetSection
 
-                adminSection
-                
-                supportSection
+                Group {
+                    adminSection
+                    
+                    supportSection
 
-                aboutSection
+                    aboutSection
+                }
 
                 // Color.clear.frame(height: 40)
             }
@@ -235,9 +239,7 @@ struct SettingsView: View {
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
 
-            .padding(24)
-            .background(Color(NSColor.controlBackgroundColor))
-            .cornerRadius(16)
+
 
             // SubDL API Key
             VStack(alignment: .leading, spacing: 12) {
@@ -275,6 +277,8 @@ struct SettingsView: View {
             .padding(24)
             .background(Color(NSColor.controlBackgroundColor))
             .cornerRadius(16)
+            
+            // Provider Connectivity - Moved to separate section
 
             // Save Button
             HStack {
@@ -315,6 +319,15 @@ struct SettingsView: View {
                 .cornerRadius(12)
                 .transition(.move(edge: .top).combined(with: .opacity))
             }
+        }
+    }
+
+    private var providerStatusSection: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Network Status")
+                .font(.system(size: 28, weight: .semibold))
+            
+            ProviderHealthView()
         }
     }
 

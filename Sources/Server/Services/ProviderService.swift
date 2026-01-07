@@ -31,6 +31,10 @@ protocol ProviderService {
     /// - Parameter query: Search query
     /// - Returns: Array of Stream objects
     func search(query: String) async throws -> [Stream]
+    
+    /// Check if the provider is healthy/reachable
+    /// - Returns: True if healthy
+    func checkHealth() async -> Bool
 }
 
 /// Default implementation for search method
@@ -39,6 +43,11 @@ extension ProviderService {
         // Default implementation - providers should override this if they support search
         print("⚠️ Provider \(name) does not support search functionality")
         return []
+    }
+    
+    func checkHealth() async -> Bool {
+        // Default to true for local/simple providers
+        return true
     }
 }
 
@@ -202,5 +211,27 @@ actor ProviderManager {
         }
         
         return unique
+    }
+    
+    /// Check health of all registered providers
+    /// - Returns: Dictionary of ProviderName -> StatusString
+    func checkAllHealth() async -> [String: String] {
+        var results: [String: String] = [:]
+        
+        // We use a throwing task group to run checks in parallel
+        await withTaskGroup(of: (String, String).self) { group in
+            for (name, provider) in providers {
+                group.addTask {
+                    let isHealthy = await provider.checkHealth()
+                    return (name, isHealthy ? "Online" : "Offline")
+                }
+            }
+            
+            for await (name, status) in group {
+                results[name] = status
+            }
+        }
+        
+        return results
     }
 }

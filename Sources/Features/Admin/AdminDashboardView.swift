@@ -21,6 +21,8 @@ struct AdminDashboardView: View {
     @State private var systemLatency: Double = 0
     @State private var isLoadingOverview = false
     
+    // Provider Health state moved to component
+    
     var body: some View {
         HStack(spacing: 0) {
             // MARK: - Sidebar
@@ -67,13 +69,28 @@ struct AdminDashboardView: View {
             VStack(spacing: 0) {
                 switch selectedCategory {
                 case .overview:
-                    AdminOverviewView(
-                        userCount: userCount,
-                        systemLatency: systemLatency,
-                        versionStats: versionStats,
-                        contentStats: contentStats
-                    )
-                    .onAppear(perform: loadOverviewData)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text("Admin Dashboard")
+                                .font(.largeTitle)
+                                .fontWeight(.bold)
+                            
+                            // MARK: - Provider Health
+                            ProviderHealthView()
+                            
+                            AdminOverviewView(
+                                userCount: userCount,
+                                systemLatency: systemLatency,
+                                versionStats: versionStats,
+                                contentStats: contentStats
+                            )
+                            .onAppear(perform: loadOverviewData)
+                        }
+                        .padding()
+                    }
+                    .task {
+                        // Check health on load handled by component
+                    }
                 case .users:
                     AdminUsersView()
                 case .events:
@@ -109,6 +126,8 @@ struct AdminDashboardView: View {
             isLoadingOverview = false
         }
     }
+    
+
 }
 
 struct AdminSidebarRow: View {

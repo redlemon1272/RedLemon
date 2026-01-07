@@ -47,9 +47,15 @@ class ZileanService: ProviderService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.timeoutInterval = 8
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 10
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10
+        config.timeoutIntervalForResource = 10
+        let session = URLSession(configuration: config)
+
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
@@ -95,6 +101,36 @@ class ZileanService: ProviderService {
         NSLog("🔍 Zilean: Filtered to \(filtered.count) streams")
 
         return parseStreams(filtered)
+    }
+    
+    func checkHealth() async -> Bool {
+        // Try to reach the root endpoint or search for a Common title
+        // Note: The curl verification showed 404 for /dmm/search, so this might fail until the endpoint is corrected upstream or configured correctly.
+        // We will try a known query.
+        let encodedTitle = "The Matrix".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "The Matrix"
+        let urlString = "\(baseUrl)/dmm/search?query=\(encodedTitle)"
+        guard let url = URL(string: urlString) else { return false }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 5
+        
+        do {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 5
+            let session = URLSession(configuration: config)
+            let (_, response) = try await session.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse {
+                if httpResponse.statusCode == 200 {
+                    return true
+                }
+                print("⚠️ Zilean Health Check returned status: \(httpResponse.statusCode)")
+            }
+        } catch {
+            print("❌ Zilean Health Check Failed: \(error)")
+        }
+        return false
     }
 
     private func parseStreams(_ zileanResults: [ZileanResult]) -> [Stream] {

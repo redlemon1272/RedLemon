@@ -30,9 +30,16 @@ class MediaFusionService: ProviderService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        // Add User-Agent to bypass some bot protection (Teapot 418)
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 10
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 10
+        config.timeoutIntervalForResource = 10
+        let session = URLSession(configuration: config)
+
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
@@ -46,6 +53,39 @@ class MediaFusionService: ProviderService {
         print("✅ MediaFusion: Got \(streams.count) streams")
 
         return parseStreams(streams)
+    }
+    
+    func checkHealth() async -> Bool {
+        // Fetch manifest.json as a health check (more reliable than searching for a stream)
+        guard let url = URL(string: baseUrl + "/manifest.json") else { return false }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        // Use standard browser user-agent
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 5
+        
+        do {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 5
+            let session = URLSession(configuration: config)
+            let (_, response) = try await session.data(for: request)
+            
+            // Accept 200 or 405 (Method Not Allowed) as "Online" signals, 
+            // since 405 means the server is up and enforcing semantic rules, unlike 404/Timeout.
+            if let httpResponse = response as? HTTPURLResponse {
+                // MediaFusion sometimes returns 405 for HEAD, but we are sending GET.
+                // If it returns 200, we are golden.
+                if httpResponse.statusCode == 200 {
+                    return true
+                }
+                print("⚠️ MediaFusion Health Check returned status: \(httpResponse.statusCode)")
+            }
+        } catch {
+            print("❌ MediaFusion Health Check Failed: \(error)")
+        }
+        return false
     }
 
     private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?) -> URL {

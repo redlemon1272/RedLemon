@@ -44,10 +44,16 @@ class TorrentioService: ProviderService {
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.timeoutInterval = 8
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 10
 
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 10
+            config.timeoutIntervalForResource = 10
+            let session = URLSession(configuration: config)
+            
+            let (data, response) = try await session.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 NSLog("❌ Torrentio: No HTTP response")
@@ -72,6 +78,29 @@ class TorrentioService: ProviderService {
             NSLog("❌ Torrentio: Request failed - \(error.localizedDescription)")
             throw ProviderError.httpError(statusCode: 0)
         }
+    }
+    
+    func checkHealth() async -> Bool {
+        // Simple health check: try to build a URL for a known movie (The Matrix) without fetching full streams if possible,
+        // but Torrentio doesn't have a /health endpoint, so we do a quick fetch for a popular movie.
+        let url = buildUrl(imdbId: "tt0133093", type: "movie", season: nil, episode: nil, config: "")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
+        request.timeoutInterval = 5
+        
+        do {
+            let config = URLSessionConfiguration.default
+            config.timeoutIntervalForRequest = 5
+            let session = URLSession(configuration: config)
+            let (_, response) = try await session.data(for: request)
+            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                return true
+            }
+        } catch {
+            print("❌ Torrentio Health Check Failed: \(error)")
+        }
+        return false
     }
 
     private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?, config: String) -> URL {

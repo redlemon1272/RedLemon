@@ -509,6 +509,7 @@ struct EventsView: View {
             description: "Live Event",
             posterURL: event.mediaItem.poster,
             participants: [],
+            participantCount: event.participantCount,  // Pass through event's count
             state: event.isLive ? .playing : .lobby, // Live events start playing, upcoming go to lobby
             createdAt: event.startTime,
             lastActivity: event.startTime,

@@ -135,11 +135,10 @@ struct HeroRoomCardContent: View {
                     .background(Material.thinMaterial)
                     .clipShape(Capsule())
 
-                    // Participants Badge
                     HStack(spacing: 4) {
                         Image(systemName: "person.2.fill")
                             .font(.system(size: 10))
-                        Text("\(room.participants.count)")
+                        Text("\(room.participantCount)")
                             .font(.system(size: 11, weight: .bold))
                     }
                     .foregroundColor(.white)

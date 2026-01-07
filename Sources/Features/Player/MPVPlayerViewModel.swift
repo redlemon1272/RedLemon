@@ -2000,6 +2000,7 @@ extension MPVPlayerViewModel {
                             description: nil,
                             posterURL: fetchedSupabaseRoom.posterUrl,
                             participants: [host],
+                            participantCount: fetchedSupabaseRoom.participantsCount,  // Use DB-managed count
                             state: fetchedSupabaseRoom.isPlaying ? .playing : .lobby,
                             createdAt: fetchedSupabaseRoom.createdAt,
                             lastActivity: fetchedSupabaseRoom.lastActivity,

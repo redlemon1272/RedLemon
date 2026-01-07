@@ -361,8 +361,8 @@ class AppState: ObservableObject {
             // print("🔄 AppState: Schedule updated. Live: \(scheduledEvents.first?.mediaItem.name ?? "None")")
         }
         
-        // Check if we need to refresh participant counts (every 30 seconds)
-        if Date().timeIntervalSince(lastCountFetch) > 30 {
+        // Check if we need to refresh participant counts (every 10 seconds for responsiveness)
+        if Date().timeIntervalSince(lastCountFetch) > 10 {
             Task { await fetchParticipantCounts() }
         }
         

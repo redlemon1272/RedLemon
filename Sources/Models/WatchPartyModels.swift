@@ -50,6 +50,7 @@ struct WatchPartyRoom: Identifiable {
     var description: String? // Room description set by host
     var posterURL: String? // Poster art for the media
     var participants: [Participant]
+    var participantCount: Int  // DB-managed count (source of truth for display)
     var state: RoomState
     var createdAt: Date
     var lastActivity: Date

@@ -1130,6 +1130,7 @@ class PlayerViewModel: ObservableObject {
                 description: description,
                 posterURL: room.posterUrl,
                 participants: [hostParticipant],
+                participantCount: 1,  // Host only at creation
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,
@@ -1246,6 +1247,7 @@ class PlayerViewModel: ObservableObject {
                 description: room.description,
                 posterURL: room.posterUrl,
                 participants: participantList,
+                participantCount: room.participantsCount,  // Use DB-managed count
                 state: .lobby,
                 createdAt: room.createdAt,
                 lastActivity: room.createdAt,

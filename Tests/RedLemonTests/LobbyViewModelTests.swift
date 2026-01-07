@@ -18,6 +18,7 @@ final class LobbyViewModelTests: XCTestCase {
             mediaItem: nil,
             quality: .fullHD,
             participants: [host],
+            participantCount: 1,
             state: .lobby,
             createdAt: Date(),
             lastActivity: Date(),

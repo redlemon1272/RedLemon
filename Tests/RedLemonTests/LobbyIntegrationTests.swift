@@ -43,6 +43,7 @@ class LobbyIntegrationTests: XCTestCase {
             season: nil, episode: nil,
             quality: .fullHD, sourceQuality: nil, description: "Test Room", posterURL: nil,
             participants: [],
+            participantCount: 0,
             state: .lobby,
             createdAt: Date(),
             lastActivity: Date(),

@@ -352,6 +352,7 @@ struct RoomListView: View {
             description: room.description,
             posterURL: room.posterUrl,
             participants: [validatedHost] + guests,
+            participantCount: room.participantsCount,  // Use DB-managed count
             state: room.isPlaying ? .playing : .lobby,
             createdAt: room.createdAt,
             lastActivity: room.lastActivity,

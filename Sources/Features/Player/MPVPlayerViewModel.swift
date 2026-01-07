@@ -117,7 +117,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // CRITICAL FIX: Playback Progress Recovery
                     // If time is advancing but UI thinks we are buffering, force clear the buffering state.
                     // This handles cases where MPV misses the "buffering end" event (e.g. paused-for-cache glitch).
-                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying {
+                    if (self.isBuffering || self.isLoading) && self.mpvWrapper.isPlaying && !self.isInWatchParty {
                          print("🔓 MPVPlayerViewModel: Time advancing (time: \(time)) while buffering - Forcing UI unlock")
                          self.isBuffering = false
                          // Also clear the "Refining Initial Seek" lock if it's stuck
@@ -145,7 +145,7 @@ class MPVPlayerViewModel: ObservableObject {
                     // If we were "Refining Initial Seek" (Holding UI lock) and buffering finished 
                     // BEFORE duration was known (blind seek), we might be stuck.
                     // If we now have duration, and file is loaded, and NOT buffering, release the lock.
-                    if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded {
+                    if self.isRefiningInitialSeek && dur > 0 && !self.isBuffering && self.mpvWrapper.isFileLoaded && !self.isInWatchParty {
                          print("🔓 MPVPlayerViewModel: Duration arrived (%.1fs) - Releasing stuck UI lock (Recovery)", dur)
                          self.isRefiningInitialSeek = false
                          withAnimation(.easeOut(duration: 0.5)) {

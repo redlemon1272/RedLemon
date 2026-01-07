@@ -538,12 +538,6 @@ struct EventsView: View {
         appState.player.currentWatchPartyRoom = room
         appState.player.isWatchPartyHost = false // User is always guest in system events
         
-        // DEBUG: Verify DB state after a short delay
-        Task.detached {
-            try? await Task.sleep(nanoseconds: 2_000_000_000)
-            await SupabaseClient.shared.debugRoomState(roomId: roomId)
-        }
-
         if event.isLive {
             // For live events, set resume position and go directly to player
             appState.player.eventStartTime = event.startTime // Opt-in to robust MPV sync logic

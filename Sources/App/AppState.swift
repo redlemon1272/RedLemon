@@ -400,8 +400,10 @@ class AppState: ObservableObject {
         }
         
         self.participantCounts = newCounts
-        // Triggers update via calculateDeterministicSchedule on next tick or immediate if we want
-        // But next tick is fine (max 2s delay)
+        
+        // CRITICAL: Immediately recalculate schedule to inject new counts into eventsSchedule
+        // Without this, the UI won't update until the next timer tick
+        calculateDeterministicSchedule()
     }
 
 

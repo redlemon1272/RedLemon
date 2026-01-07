@@ -19,7 +19,7 @@ class LobbyViewModel: ObservableObject {
 
     @Published var isReady: Bool = false
     @Published var isStarting: Bool = false
-    @Published var forceSoloStart: Bool = false // Toggle for host to skip waiting for guests
+
     @Published var countdown: Int = 3
     @Published var didCopyRoomID: Bool = false
     @Published var posterURL: String?
@@ -845,8 +845,7 @@ class LobbyViewModel: ObservableObject {
             appState.player.isWatchPartyHost = true
             appState.player.currentWatchMode = .watchParty
             appState.player.currentRoomId = room.id
-            // NEW: Pass solo launch intent
-            appState.player.forceSoloStart = self.forceSoloStart
+
 
             // CRITICAL FIX: Update AppState season/episode so Player UI shows correct title
             if let mediaItem = room.mediaItem, mediaItem.type == "series" {

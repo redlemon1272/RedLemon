@@ -494,7 +494,7 @@ class MPVPlayerViewModel: ObservableObject {
     }
 
     // Watch Party State
-    @Published var forceSoloStart: Bool = false // Bypass guest check
+
     @Published var showSettings: Bool = false
     @Published var isAnimatingChatToggle: Bool = false
     @Published var messages: [ChatMessage] = []
@@ -806,8 +806,8 @@ class MPVPlayerViewModel: ObservableObject {
                 }
             }
 
-            // Fix: Don't show "Waiting for guests" if we are force-launching solo OR effectively solo
-            showWaitingForGuests = !forceSoloStart && !isSoloHost
+            // Don't show "Waiting for guests" if effectively solo
+            showWaitingForGuests = !isSoloHost
             // Auto-open chat for watch parties
             Task { @MainActor in self.showChat = true }
         }
@@ -3128,7 +3128,6 @@ extension MPVPlayerViewModel {
         NSLog("🔍 DEBUG: hasSentReadySignal = %@", hasSentReadySignal ? "true" : "false")
         NSLog("🔍 DEBUG: connectedGuestIds = %@", Array(connectedGuestIds).joined(separator: ", "))
         NSLog("🔍 DEBUG: readyGuestIds = %@", Array(readyGuestIds).joined(separator: ", "))
-        NSLog("🔍 DEBUG: forceSoloStart = %@", forceSoloStart ? "true" : "false")
 
         let missingIds = connectedGuestIds.subtracting(readyGuestIds)
         if !missingIds.isEmpty {
@@ -3141,23 +3140,6 @@ extension MPVPlayerViewModel {
         guard hasSentReadySignal else {
             NSLog("⏳ Host not ready yet (but %d guests are ready)", readyGuestIds.count)
             return
-        }
-
-        // NEW: Solo Mode Bypass
-        if forceSoloStart {
-             NSLog("🚀 SOLO MODE ACTIVE: Bypassing guest checks and starting playback!")
-
-             // Stop the ready loop since we're starting
-             readyLoopTimer?.invalidate()
-             readyLoopTimer = nil
-
-             // Start immediate playback
-             Task { @MainActor [weak self] in
-                 // Small buffer to ensure everything is set (and avoid race with ready loop invalidation)
-                 try? await Task.sleep(nanoseconds: 500_000_000)
-                 self?.startSynchronizedPlayback()
-             }
-             return
         }
 
         // CRITICAL FIX: Ensure we have at least one guest before starting

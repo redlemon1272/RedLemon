@@ -3172,6 +3172,19 @@ extension MPVPlayerViewModel {
     private func startSynchronizedPlayback() {
         NSLog("🎬 Host: Initiating synchronized start")
         showWaitingForGuests = false
+
+        // CRITICAL FIX: Host Background Art Linger
+        // Explicitly clear the initial lock for the Host immediately when starting playback.
+        // Guests rely on the incoming Sync Message to trigger this, but the Host ignores their own echo.
+        // Without this, the Host waits for the 5s failsafe timer to clear the poster.
+        if isRefiningInitialSeek {
+             print("🎬 Host: Releasing initial seek lock (Starting Playback)")
+             isRefiningInitialSeek = false
+             withAnimation(.easeOut(duration: 0.5)) {
+                 self.showPoster = false
+                 self.isLoading = false
+             }
+        }
         // mpvWrapper.play() - Removed
         Task { await playbackService.play() }
         isPlaying = true

@@ -1803,6 +1803,9 @@ class MPVPlayerViewModel: ObservableObject {
         // ✅ Capture state BEFORE clearing it (Fix for "User Left" bug)
         // We need to know if we WERE in a watch party to trigger the leave signal.
         let wasInWatchParty = self.isInWatchParty
+        // Also capture room/user IDs before MainActor block clears them
+        let capturedRoomId = self.currentRoomId
+        let capturedUserId = self.currentUserId
 
         // ✅ STEP 1: Clear watching status immediately
         if !returningToLobby {
@@ -1869,11 +1872,14 @@ class MPVPlayerViewModel: ObservableObject {
         if wasInWatchParty {
             // CRITICAL: Leave room in database BEFORE disconnecting realtime
             // This ensures participants_count decrements correctly
-            if let roomId = self.currentRoomId, 
-               let userId = self.currentUserId, 
+            // Use CAPTURED values since self.currentRoomId was already cleared in MainActor block
+            if let roomId = capturedRoomId, 
+               let userId = capturedUserId, 
                let userUUID = UUID(uuidString: userId) {
                 try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
                 print("✅ Left room in database: \(roomId)")
+            } else {
+                print("⚠️ Could not leave room - capturedRoomId: \(capturedRoomId ?? "nil"), capturedUserId: \(capturedUserId ?? "nil")")
             }
             
             // ✅ STEP 5: Stop MPV AFTER websocket fully disconnected

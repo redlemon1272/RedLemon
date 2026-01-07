@@ -743,6 +743,16 @@ class SupabaseClient: RoomManager, UserManager {
         }
 
         return room
+    }
+    
+    // Debug helper
+    func debugRoomState(roomId: String) async {
+        do {
+            let room = try await getRoomState(roomId: roomId)
+            print("🔍 DB State for \(roomId): Participants=\(room.participantsCount)")
+        } catch {
+            print("❌ DB State fetch failed for \(roomId): \(error)")
+        }
     }    /// Join a room
     func joinRoom(roomId: String, userId: UUID, isHost: Bool = false) async throws {
         do {
@@ -755,6 +765,7 @@ class SupabaseClient: RoomManager, UserManager {
                     "is_host": isHost
                 ]
             )
+            print("✅ SupabaseClient: Successfully joined room \(roomId) (Host: \(isHost))")
         } catch SupabaseError.httpError(let code, _) where code == 409 {
             // Error 409 means user is already in the room (duplicate key).
             // We can safely ignore this and proceed as if join was successful.

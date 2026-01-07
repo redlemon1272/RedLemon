@@ -385,11 +385,19 @@ class AppState: ObservableObject {
             for id in currentIds {
                 let roomId = "event_\(id)"
                 if let roomState = try? await SupabaseClient.shared.getRoomState(roomId: roomId) {
+                    // print("📊 Event \(id) count: \(roomState.participantsCount)")
                     counts[id] = roomState.participantsCount
+                } else {
+                    // print("⚠️ Failed to fetch state for event room: \(roomId)")
                 }
             }
             return counts
         }.value
+        
+        // Debug first item if relevant
+        if let first = currentIds.first, let count = newCounts[first] {
+             print("📊 AppState: Updated participant count for \(first): \(count)")
+        }
         
         self.participantCounts = newCounts
         // Triggers update via calculateDeterministicSchedule on next tick or immediate if we want

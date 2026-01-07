@@ -1,0 +1,909 @@
+2026-01-06 19:20:15.615 RedLemon[12970:164666] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-06 19:20:15.615 RedLemon[12970:164666] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-06 19:20:15.697 RedLemon[12970:164666] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-06 19:20:15.703 RedLemon[12970:164753] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-06 19:20:15.732 RedLemon[12970:164666] ✅ Playback state reset complete - starting in browse view
+2026-01-06 19:20:15.732 RedLemon[12970:164666] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-06 19:20:15.732 RedLemon[12970:164666] 🧪 Testing Profile: debug
+2026-01-06 19:20:15.733 RedLemon[12970:164753] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-06 19:20:15.768 RedLemon[12970:164666] ✅ Keychain: Found stored username: ursinho
+2026-01-06 19:20:15.768 RedLemon[12970:164666] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-06 19:20:15.768 RedLemon[12970:164753] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-06 19:20:16.095 RedLemon[12970:164772] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-06 19:20:16.105 RedLemon[12970:164772] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-06 19:20:16.106 RedLemon[12970:164772] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-06 19:20:16.106 RedLemon[12970:164666] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-06 19:20:16.157 RedLemon[12970:164666] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-06 19:20:16.157 RedLemon[12970:164666] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-06 19:20:16.157 RedLemon[12970:164666] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-06 19:20:16.157 RedLemon[12970:164666] 🚀 RedLemon: Starting HTTP server...
+2026-01-06 19:20:16.157 RedLemon[12970:164666] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-06 19:20:16.176 RedLemon[12970:164666] ✅ RedLemon: HTTPServer instance created
+2026-01-06 19:20:16.176 RedLemon[12970:164772] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Memory pressure monitoring enabled (safe mode)
+🔍 Silent update check (custom implementation)...
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📂 Loaded 5 credential(s) from cache
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"48F14948-3D8C-4866-A596-F8078AAE305D","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-06 19:20:18.273 RedLemon[12970:164666] ✅ RedLemon: Server marked as ready
+2026-01-06 19:20:18.318 RedLemon[12970:164666] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-06 19:20:18.319 RedLemon[12970:164666] 🔍 Performing startup checks...
+2026-01-06 19:20:18.319 RedLemon[12970:164666] ✅ Username-based authentication ready
+2026-01-06 19:20:18.610 RedLemon[12970:164770] 📡 StreamService: Fetching metadata for tt3501632...
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1472 with 424 movies
+✅ [EventsConfig] Using cached movie_events config (version 1472, 424 movies)
+✅ [EventsView] Loaded 424 movies from config version 1472
+🗓 AppState: Updated schedule epoch to 2026-01-04 19:58:49 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 01:21:49 +0000
+⏰ AppState: Scheduling update in 3693 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt3501632/img (956349 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+📨 Received: {"ref":"2EA63483-237C-4A8F-A5DE-59275F398266","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"75d7081e-eb5e-11f0-bcf4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK5GHYyUE6AhAD","phx_ref_prev":"GIhK4vDk9Zs6Ag7D","last_seen":"2026-01-07T00:19:58.380Z","room_id":"2664","started_at":"2026-01-07T00:19:52.189Z","status":"In Lobby: Pluribus","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6NJQh6w6ApqB","last_seen":"2026-01-07T00:20:17.418Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+📨 Received: {"ref":"067B4D98-E24E-4D13-8326-33BB94865606","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 24 items to cloud...
+🔄 SocialService: Syncing 24 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+💰 LicenseManager: Checking for background crypto payments...
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"75d7081e-eb5e-11f0-bcf4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6QnMWJo6AgHk","phx_ref_prev":"GIhK5GHYyUE6AhAD","last_seen":"2026-01-07T00:20:18.381Z","room_id":"2664","started_at":"2026-01-07T00:19:52.189Z","status":"In Lobby: Pluribus","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}},"leaves":{"75d7081e-eb5e-11f0-bcf4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK5GHYyUE6AhAD","phx_ref_prev":"GIhK4vDk9Zs6Ag7D","last_seen":"2026-01-07T00:19:58.380Z","room_id":"2664","started_at":"2026-01-07T00:19:52.189Z","status":"In Lobby: Pluribus","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+[2026-01-07T00:20:18Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Thor: Ragnarok (Live: true)
+   Event start time: 2026-01-06 23:00:49 +0000
+   Event duration: 8460.0s
+   Current time: 2026-01-07 00:20:18 +0000
+   Is Live: true
+   Is In Lobby: false
+📝 Creating new event room: event_tt3501632
+⚡️ Resolving stream for system event creation...
+[2026-01-07T00:20:18Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Thor: Ragnarok
+[ INFO ] GET /api/metadata/meta/movie/tt3501632 [request-id: AE234EB0-DF74-4E64-AC4A-60DD87F1D31C]
+2026-01-06 19:20:18.804 RedLemon[12970:164752] 📦 Decoded CinemetaMeta - videos count: -1
+2026-01-06 19:20:18.804 RedLemon[12970:164752] ✅ StreamService: Metadata loaded: Thor: Ragnarok
+2026-01-06 19:20:18.804 RedLemon[12970:164752] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-06 19:20:18.805 RedLemon[12970:164752] ⚡️ StreamResolver: Resolving streams for tt3501632 (S0E0)
+2026-01-06 19:20:18.805 RedLemon[12970:164752]    📅 Filtering by year: 2017
+2026-01-06 19:20:18.928 RedLemon[12970:164770] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-06 19:20:18.928 RedLemon[12970:164770] 🔍 ProviderManager: Fetching streams for tt3501632...
+2026-01-06 19:20:18.930 RedLemon[12970:164752] ✨ Torrentio: Using Auto-Generated Config (realdebrid/KEY)
+2026-01-06 19:20:18.930 RedLemon[12970:164772] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-06 19:20:18.931 RedLemon[12970:164752] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-06 19:20:18.931 RedLemon[12970:164772] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt3501632.json
+2026-01-06 19:20:18.931 RedLemon[12970:164752] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt3501632.json
+2026-01-06 19:20:18.931 RedLemon[12970:164772] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt3501632.json
+2026-01-06 19:20:18.931 RedLemon[12970:164752] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt3501632.json
+2026-01-06 19:20:18.942 RedLemon[12970:164772] 🔍 Zilean: Searching for "Thor: Ragnarok"
+2026-01-06 19:20:18.948 RedLemon[12970:164751] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-06 19:20:19.182 RedLemon[12970:164666] 🔍 Performing startup checks...
+2026-01-06 19:20:19.182 RedLemon[12970:164666] ✅ Username-based authentication ready
+2026-01-06 19:20:19.252 RedLemon[12970:164751] ❌ Provider torrentio failed: httpError(statusCode: 404)
+2026-01-06 19:20:19.710 RedLemon[12970:164666] 🔄 Checking for app updates...
+2026-01-06 19:20:21.532 RedLemon[12970:164750] ✅ DebridSearch: Parsed 1 streams
+2026-01-06 19:20:21.866 RedLemon[12970:164751] ✅ ProviderManager: Fetched 48 raw, returning 48 unique streams
+2026-01-06 19:20:21.866 RedLemon[12970:164751] 📦 StreamResolver: Received 48 raw streams, bucketing...
+2026-01-06 19:20:23.208 RedLemon[12970:164750] 📥 StreamService: Pre-downloading 5 (capped from 9) subtitles for direct stream...
+2026-01-06 19:20:23.209 RedLemon[12970:164750] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-06 19:20:23.209 RedLemon[12970:164753] 🔍 DEBUG: Processing subtitle URL: /subtitle/34853-2207678.zip
+2026-01-06 19:20:23.209 RedLemon[12970:164752] 🔍 DEBUG: Processing subtitle URL: /subtitle/34835-1799829.zip
+2026-01-06 19:20:23.209 RedLemon[12970:164772] 🔍 DEBUG: Processing subtitle URL: /subtitle/1974714-2526434.zip
+2026-01-06 19:20:23.209 RedLemon[12970:164753] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:23.209 RedLemon[12970:164750] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514576-8437189.zip
+2026-01-06 19:20:23.209 RedLemon[12970:164752] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:23.209 RedLemon[12970:164772] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:23.209 RedLemon[12970:164750] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:23.210 RedLemon[12970:164750] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTQ1NzYtODQzNzE4OS56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:23.210 RedLemon[12970:164772] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5NzQ3MTQtMjUyNjQzNC56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:23.210 RedLemon[12970:164752] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODM1LTE3OTk4Mjkuemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:23.210 RedLemon[12970:164753] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODUzLTIyMDc2Nzguemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:23.210 RedLemon[12970:164772] 🔍 DEBUG: Processing subtitle URL: /subtitle/34845-1704709.zip
+2026-01-06 19:20:23.210 RedLemon[12970:164772] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:23.211 RedLemon[12970:164772] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODQ1LTE3MDQ3MDkuemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:23.212 RedLemon[12970:164772] 🎬 SupabaseClient: createRoom called for id: event_tt3501632 - ENTRY
+2026-01-06 19:20:23.215 RedLemon[12970:164772] 🎬 SupabaseClient: Creating room 'event_tt3501632' for host 'RedLemon Events'...
+2026-01-06 19:20:23.216 RedLemon[12970:164772] 🔐 Signed request to /rooms
+2026-01-06 19:20:23.609 RedLemon[12970:164772] ✅ SupabaseClient: Room creation request completed (received response)
+2026-01-06 19:20:23.974 RedLemon[12970:164666] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt3501632/img
+2026-01-06 19:20:23.974 RedLemon[12970:164666] ⏳ Background art loading...
+2026-01-06 19:20:23.975 RedLemon[12970:164666] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt3501632/img
+2026-01-06 19:20:23.975 RedLemon[12970:164666] ⏳ Logo loading...
+2026-01-06 19:20:24.021 RedLemon[12970:164666] ✅ Background art loaded successfully
+2026-01-06 19:20:24.023 RedLemon[12970:164666]    Quality: 1080p
+2026-01-06 19:20:24.024 RedLemon[12970:164666]    Mode: watchParty
+2026-01-06 19:20:24.024 RedLemon[12970:164666] 📡 Fetching metadata for tt3501632...
+2026-01-06 19:20:24.109 RedLemon[12970:164666] ✅ Logo loaded successfully
+2026-01-06 19:20:24.113 RedLemon[12970:164752] ✅ StreamService: Using provided metadata: Thor: Ragnarok
+2026-01-06 19:20:24.113 RedLemon[12970:164752] ⚡️ StreamService: Resolving streams via StreamResolver (Bypassing HTTP)...
+2026-01-06 19:20:24.113 RedLemon[12970:164752] ⚡️ StreamResolver: Resolving streams for tt3501632 (S0E0)
+2026-01-06 19:20:24.113 RedLemon[12970:164752]    📅 Filtering by year: 2017
+2026-01-06 19:20:24.239 RedLemon[12970:164752] 📦 StreamResolver: Fetching streams from ProviderManager...
+2026-01-06 19:20:24.239 RedLemon[12970:164752] 🔍 ProviderManager: Fetching streams for tt3501632...
+2026-01-06 19:20:24.240 RedLemon[12970:164750] 🎬 DebridSearch: Building URL for movie (no season/episode)
+2026-01-06 19:20:24.240 RedLemon[12970:164753] 🔍 Zilean: Searching for "Thor: Ragnarok"
+2026-01-06 19:20:24.240 RedLemon[12970:164750] 🔗 DebridSearch URL: https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A222      0/stream/movie/tt3501632.json
+2026-01-06 19:20:24.240 RedLemon[12970:164750] 🔍 DebridSearch: Fetching https://68d69db7dc40-debrid-search.baby-beamup.club/7                     0ebridProvider23A2ealDebrid2                     0ebridApiKey23A267JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA27D/stream/movie/tt3501632.json
+2026-01-06 19:20:24.241 RedLemon[12970:164772] ✨ Torrentio: Using Auto-Generated Config (realdebrid/KEY)
+2026-01-06 19:20:24.241 RedLemon[12970:164772] 🎬 Torrentio: Building URL for movie (no season/episode)
+2026-01-06 19:20:24.241 RedLemon[12970:164772] 🔗 Torrentio URL: https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt3501632.json
+2026-01-06 19:20:24.241 RedLemon[12970:164772] 🔍 Torrentio: Fetching https://torrentio.strem.fun/realdebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/stream/movie/tt3501632.json
+2026-01-06 19:20:24.246 RedLemon[12970:164751] ❌ Provider zilean failed: httpError(statusCode: 404)
+2026-01-06 19:20:24.249 RedLemon[12970:164753] ✅ DebridSearch: Parsed 1 streams
+2026-01-06 19:20:24.501 RedLemon[12970:164752] ❌ Provider torrentio failed: httpError(statusCode: 404)
+2026-01-06 19:20:24.502 RedLemon[12970:164751] ✅ ProviderManager: Fetched 48 raw, returning 48 unique streams
+2026-01-06 19:20:24.502 RedLemon[12970:164751] 📦 StreamResolver: Received 48 raw streams, bucketing...
+💾 Cache SET: Metadata[meta_movie_tt3501632]
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ MetadataService initialized
+📡 Fetching metadata from Cinemeta: https://v3-cinemeta.strem.io/meta/movie/tt3501632.json
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt3501632.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+✅ Metadata fetched from Cinemeta for tt3501632: Thor: Ragnarok (2017)
+⚠️ MediaFusion: HTTP 418
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":93516,"eth":3284.225},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","base eth_getBalance: 0xf6957e925","poly eth_getBalance: undefined","eth eth_getBalance: undefined","opt eth_getBalance: undefined","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":93516,"eth":3284.225},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.081s (RTT: 125ms)
+   Local:  2026-01-07 00:20:19 +0000
+   Server: 2026-01-07 00:20:19 +0000
+⏰ Time synced with server! AppState should automatically recalculate.
+✅ Comet: Got 47 streams
+🔍 Comet: Parsing 47 streams...
+✅ Comet: Parsed 47 valid streams
+✅ Metadata cache hit for tt3501632: Thor: Ragnarok
+🎯 Target title for matching: Thor: Ragnarok
+   📅 Year filter (2017): 48 → 1 streams
+   ⚠️ Year filter too strict! Restoring 48 streams to attempt title matching.
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet unknown
+   🚫 RESOLVER FILTERED 3D: 48 → 44 streams
+   🚫 RESOLVER BLOCKING non-English audio: [RD⚡] Comet 2160p (Audio)
+   🎵 RESOLVER FILTERED audio language: 44 → 43 streams
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt3501632 (movie)
+   ℹ️ Fallback Name: Thor: Ragnarok (2017)
+⚠️ SubDL API returned empty subtitles list
+⚠️ Testing API-provided fallback for: Thor: Ragnarok
+✅ Found 10 subtitles from SubDL (Primary)
+🧹 Filtered out 1 mismatched episodes
+✅ StreamResolver: Attached best sub for 'Thor.Ragnarok.2017.1080p.BluRa...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+   --- Processing Bucket: 2160p (Input: 24) ---
+   ✅ Bucket 2160p Final Count: 24
+   --- Processing Bucket: 1080p (Input: 19) ---
+   ✅ Bucket 1080p Final Count: 19
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 2160p Primary: [RD⚡] Comet 2160p
+📦 1080p Primary: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+✅ StreamResolver: Quality buckets ready
+   🚫 StreamService: Skipping 720p backup streams (Event Mode - Strict 1080p)
+   🚫 StreamService: Skipping 480p backup streams (Event Mode - Strict 1080p)
+[2026-01-07T00:20:22Z] [INFO] [StreamService.swift:210] 📦 StreamService: Found 11 total streams to try (across all qualities)
+✅ StreamService: Found 11 H.264 streams (Tier 1)
+🚫 StreamService: Applying Extended Cut Filter (Event Mode)
+✅ StreamService: Found 11 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (23.20 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (32.50 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (29.90 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (26.70 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (26.70 GB)
+📦 StreamService: 6 streams remain after size filter
+🔄 StreamService: Trying stream 1/6: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/CYS23TTTKM5TG/https%3A%2F%2Freal-debrid.com%2Fd%2FPLMRAINDINS5CE1F
+✅ StreamService: Resolved to: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+📊 Stream Size: 2.98 GB
+📦 StreamService: Returning 5 candidate streams for fallback
+✅ Selected seed subtitle: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5NzQ3MTQtMjUyNjQzNC56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+✅ Stream resolved for system event: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+   Hash: nil
+   URL: https://chi9-4.download.real-d...
+🎬 Live event - calculating position: 4774.9528040885925 seconds
+   Event start time: 2026-01-06 23:00:49 +0000
+   Current time: 2026-01-07 00:20:23 +0000
+   Room createdAt: 2026-01-06 23:00:49 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 4774.9528040885925
+🎬 Live event - starting playback immediately (no lobby)
+🎬 PlayerVM: Starting playback for: Thor: Ragnarok
+✅ Cache HIT: Metadata[meta_movie_tt3501632]
+[2026-01-07T00:20:24Z] [INFO] [StreamService.swift:47] 🎬 StreamService: Starting resolution for: Thor: Ragnarok
+🎬 StreamService: Resolving movie - trusted pack filtering will be applied server-side
+✅ Metadata cache hit for tt3501632: Thor: Ragnarok
+🔍 MediaFusion: Fetching https://mediafusion.elfhosted.com/stream/movie/tt3501632.json
+🔍 Comet: Fetching https://comet.elfhosted.com/eyJkZWJyaWRTZXJ2aWNlIjoicmVhbGRlYnJpZCIsInJlbW92ZVRyYXNoIjp0cnVlLCJkZWJy...
+✅ Comet: Got 47 streams
+🔍 Comet: Parsing 47 streams...
+✅ Comet: Parsed 47 valid streams
+⚠️ MediaFusion: HTTP 418
+✅ Metadata cache hit for tt3501632: Thor: Ragnarok
+🎯 Target title for matching: Thor: Ragnarok
+   📅 Year filter (2017): 48 → 1 streams
+   ⚠️ Year filter too strict! Restoring 48 streams to attempt title matching.
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet 1080p
+   🚫 RESOLVER BLOCKING 3D (Strict): [RD⚡] Comet unknown
+   🚫 RESOLVER FILTERED 3D: 48 → 44 streams
+   🚫 RESOLVER BLOCKING non-English audio: [RD⚡] Comet 2160p (Audio)
+   🎵 RESOLVER FILTERED audio language: 44 → 43 streams
+🔍 Searching SubDL: tt3501632 (movie)
+   ℹ️ Fallback Name: Thor: Ragnarok (2017)
+⚠️ SubDL API returned empty subtitles list
+⚠️ Testing API-provided fallback for: Thor: Ragnarok
+✅ Found 10 subtitles from SubDL (Primary)
+🧹 Filtered out 1 mismatched episodes
+✅ StreamResolver: Attached best sub for 'Thor.Ragnarok.2017.1080p.BluRa...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 2160p...': Thor.Ragnarok.2017.UHD.BluRay....
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor.Ragnarok.2017.720p.BluRay...
+✅ StreamResolver: Attached best sub for '[RD⚡] Comet 1080p...': Thor2026-01-06 19:20:25.900 RedLemon[12970:164751] 📥 StreamService: Pre-downloading 5 (capped from 9) subtitles for direct stream...
+2026-01-06 19:20:25.900 RedLemon[12970:164751] 🐛 StreamService: downloadSubtitlesInParallel called. Season: nil, Episode: nil, Count: 5
+2026-01-06 19:20:25.900 RedLemon[12970:164751] 🔍 DEBUG: Processing subtitle URL: /subtitle/34835-1799829.zip
+2026-01-06 19:20:25.900 RedLemon[12970:164772] 🔍 DEBUG: Processing subtitle URL: /subtitle/34853-2207678.zip
+2026-01-06 19:20:25.900 RedLemon[12970:164751] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:25.900 RedLemon[12970:164772] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:25.900 RedLemon[12970:164753] 🔍 DEBUG: Processing subtitle URL: /subtitle/1974714-2526434.zip
+2026-01-06 19:20:25.900 RedLemon[12970:164752] 🔍 DEBUG: Processing subtitle URL: /subtitle/3514576-8437189.zip
+2026-01-06 19:20:25.900 RedLemon[12970:164752] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:25.900 RedLemon[12970:164753] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:25.901 RedLemon[12970:164751] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODM1LTE3OTk4Mjkuemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:25.901 RedLemon[12970:164772] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODUzLTIyMDc2Nzguemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:25.901 RedLemon[12970:164751] 🔍 DEBUG: Processing subtitle URL: /subtitle/34845-1704709.zip
+2026-01-06 19:20:25.901 RedLemon[12970:164752] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM1MTQ1NzYtODQzNzE4OS56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:25.901 RedLemon[12970:164753] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5NzQ3MTQtMjUyNjQzNC56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:25.901 RedLemon[12970:164751] ✅ DEBUG: Raw SubDL URL detected, converting to proxy URL
+2026-01-06 19:20:25.901 RedLemon[12970:164751] 🐛 StreamService: Constructed Proxy URL: http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODQ1LTE3MDQ3MDkuemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:25.913 RedLemon[12970:164666] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/T, subtitles: 5
+2026-01-06 19:20:25.999 RedLemon[12970:164666] ✅ Stream ready, starting playback...
+2026-01-06 19:20:25.999 RedLemon[12970:164666] 🖥️ WindowManager: enterFullscreen() called
+2026-01-06 19:20:25.999 RedLemon[12970:164666]    Window: <SwiftUI.SwiftUIWindow: 0x7fd493754410>
+2026-01-06 19:20:25.999 RedLemon[12970:164666]    Is fullscreen: 0
+2026-01-06 19:20:26.000 RedLemon[12970:164666]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-06 19:20:26.070 RedLemon[12970:164666] 🖼️ Setting up MPV with native macOS video output...
+2026-01-06 19:20:26.077 RedLemon[12970:164666] ✅ MPV initialized with native GPU rendering
+2026-01-06 19:20:26.093 RedLemon[12970:164666] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-06 19:20:26.093 RedLemon[12970:164666] 🎉 Starting watch party sync - Room: event_tt3501632, Host: NO
+2026-01-06 19:20:26.093 RedLemon[12970:164666] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-06 19:20:26.157 RedLemon[12970:164666] 🔄 Starting chat polling for room: event_tt3501632
+2026-01-06 19:20:26.157 RedLemon[12970:164666] 💓 Started playback heartbeat loop
+2026-01-06 19:20:26.158 RedLemon[12970:164666] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-06 19:20:26.158 RedLemon[12970:164666] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-06 19:20:26.158 RedLemon[12970:164666] 🎬🎬🎬 Subtitles: 5
+2026-01-06 19:20:26.158 RedLemon[12970:164666] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Thor: Ragnarok
+2026-01-06 19:20:26.158 RedLemon[12970:164666] 🎬🎬🎬 streamURL: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/T
+2026-01-06 19:20:26.158 RedLemon[12970:164666] 🎬🎬🎬 subtitles: 5
+2026-01-06 19:20:26.159 RedLemon[12970:164666] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-06 19:20:26.164 RedLemon[12970:164751] 🎬 MPV: Current video filename set to: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+2026-01-06 19:20:26.166 RedLemon[12970:164751] 🎬 MPV loadVideo called with URL: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x2, autoplay: false, expectedSubs: 3
+2026-01-06 19:20:26.166 RedLemon[12970:164751] 🎬 MPV executing: loadfile "https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv"
+2026-01-06 19:20:26.168 RedLemon[12970:164772] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-06 19:20:26.168 RedLemon[12970:164772] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODM1LTE3OTk4Mjkuemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+2026-01-06 19:20:26.169 RedLemon[12970:164751] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+.Ragnarok.2017.720p.BluRay...
+   --- Processing Bucket: 2160p (Input: 24) ---
+   ✅ Bucket 2160p Final Count: 24
+   --- Processing Bucket: 1080p (Input: 19) ---
+   ✅ Bucket 1080p Final Count: 19
+   --- Processing Bucket: 720p (Input: 0) ---
+   ✅ Bucket 720p Final Count: 0
+   --- Processing Bucket: 480p (Input: 0) ---
+   ✅ Bucket 480p Final Count: 0
+📦 2160p Primary: [RD⚡] Comet 2160p
+📦 1080p Primary: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+✅ StreamResolver: Quality buckets ready
+[2026-01-07T00:20:25Z] [INFO] [StreamService.swift:210] 📦 StreamService: Found 11 total streams to try (across all qualities)
+✅ StreamService: Found 11 H.264 streams (Tier 1)
+✅ StreamService: Found 11 'Clean' English streams. Deprioritizing 0 localized/dual streams.
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (23.20 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (32.50 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (29.90 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (26.70 GB)
+⚠️ StreamService: Skipping large file (1080p limit): [RD⚡] Comet 1080p (26.70 GB)
+📦 StreamService: 6 streams remain after size filter
+🔄 StreamService: Trying stream 1/6: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+🔍 StreamService: Resolving redirect URL: https://68d69db7dc40-debrid-search.baby-beamup.club/resolve/RealDebrid/K67JV2V4FTUA7RYN6T34BFIUBRUZERBO45A6UL3O7TE5ZHFDQQSA/CYS23TTTKM5TG/https%3A%2F%2Freal-debrid.com%2Fd%2FPLMRAINDINS5CE1F
+✅ StreamService: Resolved to: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+⚡️ StreamService: Stream is already a direct URL. Skipping backend unlock.
+✅ StreamService: Selected stream: Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265.mkv
+💾 2.98 GB
+📊 Stream Size: 2.98 GB
+📦 StreamService: Returning 5 candidate streams for fallback
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/T
+   Display Title: Thor: Ragnarok
+   Subtitle URLs: 5
+      [0] Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR
+      [1] Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS
+      [2] Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT
+      [3] Thor Ragnarok.2017.WEBDL-2160p-JARViS.en.hi
+      [4] Thor.Ragnarok.2017.HDRip.XviD.AC3-EVO
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt3501632, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt3501632
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt3501632
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Thor: Ragnarok
+   IMDB: tt3501632
+   URL: https://chi9-4.download.real-debrid.com/d/QINEFJ2Q2CPIM100/T...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+📡 Fetching metadata for tt3501632 as movie...
+📝 Pre-loading external subtitles (Top 3)...
+✅ Cache HIT: Metadata[meta_movie_tt3501632]
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODM1LTE3OTk4Mjkuemlw [request-id: ED3A3DC1-A524-431F-AE4B-CE949537A38B]
+2026-01-06 19:20:26.360 RedLemon[12970:164666] 💓 Playback heartbeat sent for room: event_tt3501632
+2026-01-06 19:20:26.762 RedLemon[12970:164752] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6D5577D1-67A5-4A81-874C-3F3ED281BD4C.vtt
+2026-01-06 19:20:26.762 RedLemon[12970:164752] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_6D5577D1-67A5-4A81-874C-3F3
+2026-01-06 19:20:26.995 RedLemon[12970:164666] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-06 19:20:27.059 RedLemon[12970:164752] ✅ External subtitle added to track list (not auto-selected)
+2026-01-06 19:20:27.059 RedLemon[12970:164752] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzM0ODUzLTIyMDc2Nzguemlw?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODM1... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/34835-1799829.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"C7F4AC4D-6A67-4620-8A63-E119186E6AC6","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt3501632"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:watch-party:event_tt3501632"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt3501632"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"aa2bcf1e-eb5e-11f0-b394-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6trF1lVF_QLE","is_host":false,"joined_at":1767745226.15453,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt3501632"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6tuYyzQ6AgLk","phx_ref_prev":"GIhK6NJQh6w6ApqB","last_seen":"2026-01-07T00:20:26.163Z","room_id":"event_tt3501632","started_at":"2026-01-07T00:20:26.164Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt3501632","watching_title":"Thor: Ragnarok","watching_type":"movie"}]}},"leaves":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6NJQh6w6ApqB","last_seen":"2026-01-07T00:20:17.418Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt3501632/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt3501632/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt3501632/img...
+📡 SocialService: Updated status - online: Thor: Ragnarok
+➕ Added new participant 656daa91-33b4-4688-9135-c982ea52d7c9 (Ref: GIhK6trF1lVF_QLE)
+📉 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 went offline (No active refs)
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 01:21:49 +0000
+⏰ AppState: Scheduling update in 3683 seconds
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+✅ Download complete: 45644 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR.srt
+📦 Extracting specific file: Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR.srt
+✅ Extraction successful
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] File tags:
+[MPV] Comment: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265
+[MPV] Title: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265
+ MPV Event: 18
+ MPV Event: 18
+✅ Subtitle downloaded and converted to VTT
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (7830.699s), preparing to seek...
+   Seeking to live edge: 4777s
+🎉 EVENT: File loaded/Duration ready (7830.699s), preparing to seek...
+   Seeking to live edge: 4777s
+🎉 EVENT: File loaded/Duration ready (7830.699s), preparing to seek...
+   Seeking to live edge: 4778s
+ MPV Event: 18
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzM0ODUzLTIyMDc2Nzguemlw [request-id: F77DA918-82E3-4E90-A2DB-D1E560FCA8E3]
+2026-01-06 19:20:27.731 RedLemon[12970:164751] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B038DD12-8686-47D3-9BA0-4F8658D4A2CB.vtt
+2026-01-06 19:20:27.731 RedLemon[12970:164751] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_B038DD12-8686-47D3-9BA0-4F8
+2026-01-06 19:20:27.745 RedLemon[12970:164751] ✅ External subtitle added to track list (not auto-selected)
+2026-01-06 19:20:27.745 RedLemon[12970:164751] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzE5NzQ3MTQtMjUyNjQzNC56aXA=?token=E4FC1DD8-F189-4EEA-9B3B-0AA4504D4223
+📄 Subtitle request: L3N1YnRpdGxlLzM0ODUz... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/34853-2207678.zip
+ MPV Event: 17
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] (+) Subs  --sid=2 --slang=en 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] VO: [libmpv] 1920x1080 videotoolbox[p010]
+ MPV Event: 17
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+ MPV Event: 20
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.25s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+✅ Download complete: 45542 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS.srt
+📦 Extracting specific file: Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS.srt
+✅ Extraction successful
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] Subs  --sid=2 --slang=en 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS' (webvtt) (external)
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzE5NzQ3MTQtMjUyNjQzNC56aXA= [request-id: 05D7E103-4AC4-4816-A585-124C02D4DA35]
+2026-01-06 19:20:28.274 RedLemon[12970:164770] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A2D84378-DCC1-4994-BCEA-C2B3497684F6.vtt
+2026-01-06 19:20:28.274 RedLemon[12970:164770] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_A2D84378-DCC1-4994-BCEA-C2B
+2026-01-06 19:20:28.289 RedLemon[12970:164770] ✅ External subtitle added to track list (not auto-selected)
+2026-01-06 19:20:28.290 RedLemon[12970:164770] 🔍 MPV track-list/count: 6
+2026-01-06 19:20:28.290 RedLemon[12970:164770] 🔍 Track 0 type: video
+2026-01-06 19:20:28.290 RedLemon[12970:164770] 🔍 Track 1 type: audio
+2026-01-06 19:20:28.290 RedLemon[12970:164770] 🔍 Track 2 type: sub
+2026-01-06 19:20:28.291 RedLemon[12970:164770] ✅ Found subtitle track: ID=1, lang=eng, title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-06 19:20:28.291 RedLemon[12970:164770] 🔍 Track 3 type: sub
+2026-01-06 19:20:28.291 RedLemon[12970:164770] ✅ Found subtitle track: ID=2, lang=en, title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2026-01-06 19:20:28.291 RedLemon[12970:164770] 🔍 Track 4 type: sub
+2026-01-06 19:20:28.291 RedLemon[12970:164770] ✅ Found subtitle track: ID=3, lang=en, title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, external=1
+2026-01-06 19:20:28.291 RedLemon[12970:164770] 🔍 Track 5 type: sub
+2026-01-06 19:20:28.291 RedLemon[12970:164770] ✅ Found subtitle track: ID=4, lang=en, title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, external=1
+2026-01-06 19:20:28.291 RedLemon[12970:164770] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-06 19:20:28.291 RedLemon[12970:164770]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-06 19:20:28.292 RedLemon[12970:164770]    Start[1]: ID=1, Title='GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-06 19:20:28.292 RedLemon[12970:164770]    Start[2]: ID=2, Title='Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-06 19:20:28.292 RedLemon[12970:164770]    Start[3]: ID=3, Title='Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', Lang='en', Ext=1
+2026-01-06 19:20:28.292 RedLemon[12970:164770]    Start[4]: ID=4, Title='Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', Lang='en', Ext=1
+2026-01-06 19:20:28.292 RedLemon[12970:164770] ✅ SubtitleService: Scanned 5 tracks (Attempt 1/5)
+2026-01-06 19:20:28.292 RedLemon[12970:164770]    Track: ID=0, Title=Off, External=0
+2026-01-06 19:20:28.293 RedLemon[12970:164770]    Track: ID=1, Title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-06 19:20:28.293 RedLemon[12970:164770]    Track: ID=2, Title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2026-01-06 19:20:28.293 RedLemon[12970:164770]    Track: ID=3, Title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, External=1
+2026-01-06 19:20:28.293 RedLemon[12970:164770]    Track: ID=4, Title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, External=1
+2026-01-06 19:20:28.726 RedLemon[12970:164666] 🖱️ Mouse: x=1202/1366 y=750/768 | Exit: 0 Controls: 0 Chat: 1
+2026-01-06 19:20:29.359 RedLemon[12970:164753] 🔍 MPV track-list/count: 6
+2026-01-06 19:20:29.371 RedLemon[12970:164753] 🔍 Track 0 type: video
+2026-01-06 19:20:29.387 RedLemon[12970:164753] 🔍 Track 1 type: audio
+2026-01-06 19:20:29.406 RedLemon[12970:164753] 🔍 Track 2 type: sub
+2026-01-06 19:20:29.568 RedLemon[12970:164753] ✅ Found subtitle track: ID=1, lang=eng, title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-06 19:20:29.581 RedLemon[12970:164753] 🔍 Track 3 type: sub
+2026-01-06 19:20:29.593 RedLemon[12970:164753] ✅ Found subtitle track: ID=2, lang=en, title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2026-01-06 19:20:29.593 RedLemon[12970:164753] 🔍 Track 4 type: sub
+2026-01-06 19:20:29.593 RedLemon[12970:164753] ✅ Found subtitle track: ID=3, lang=en, title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, external=1
+2026-01-06 19:20:29.593 RedLemon[12970:164753] 🔍 Track 5 type: sub
+2026-01-06 19:20:29.594 RedLemon[12970:164753] ✅ Found subtitle track: ID=4, lang=en, title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, external=1
+2026-01-06 19:20:29.594 RedLemon[12970:164753] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-06 19:20:29.594 RedLemon[12970:164753]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-06 19:20:29.594 RedLemon[12970:164753]    Start[1]: ID=1, Title='GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-06 19:20:29.594 RedLemon[12970:164753]    Start[2]: ID=2, Title='Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-06 19:20:29.594 RedLemon[12970:164753]    Start[3]: ID=3, Title='Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', Lang='en', Ext=1
+2026-01-06 19:20:29.594 RedLemon[12970:164753]    Start[4]: ID=4, Title='Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', Lang='en', Ext=1
+2026-01-06 19:20:29.595 RedLemon[12970:164753] ✅ SubtitleService: Scanned 5 tracks (Attempt 2/5)
+2026-01-06 19:20:29.595 RedLemon[12970:164753]    Track: ID=0, Title=Off, External=0
+2026-01-06 19:20:29.595 RedLemon[12970:164753]    Track: ID=1, Title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-06 19:20:29.596 RedLemon[12970:164753]    Track: ID=2, Title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2026-01-06 19:20:29.596 RedLemon[12970:164753]    Track: ID=3, Title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, External=1
+2026-01-06 19:20:29.596 RedLemon[12970:164753]    Track: ID=4, Title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, External=1
+2026-01-06 19:20:30.635 RedLemon[12970:164753] 🔍 MPV track-list/count: 6
+2026-01-06 19:20:30.635 RedLemon[12970:164753] 🔍 Track 0 type: video
+2026-01-06 19:20:30.635 RedLemon[12970:164753] 🔍 Track 1 type: audio
+2026-01-06 19:20:30.636 RedLemon[12970:164753] 🔍 Track 2 type: sub
+2026-01-06 19:20:30.655 RedLemon[12970:164753] ✅ Found subtitle track: ID=1, lang=eng, title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-06 19:20:30.656 RedLemon[12970:164753] 🔍 Track 3 type: sub
+2026-01-06 19:20:30.656 RedLemon[12970:164753] ✅ Found subtitle track: ID=2, lang=en, title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2026-01-06 19:20:30.656 RedLemon[12970:164753] 🔍 Track 4 type: sub
+2026-01-06 19:20:30.656 RedLemon[12970:164753] ✅ Found subtitle track: ID=3, lang=en, title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, external=1
+2026-01-06 19:20:30.656 RedLemon[12970:164753] 🔍 Track 5 type: sub
+2026-01-06 19:20:30.656 RedLemon[12970:164753] ✅ Found subtitle track: ID=4, lang=en, title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, external=1
+2026-01-06 19:20:30.656 RedLemon[12970:164753] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-06 19:20:30.656 RedLemon[12970:164753]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-06 19:20:30.656 RedLemon[12970:164753]    Start[1]: ID=1, Title='GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-06 19:20:30.657 RedLemon[12970:164753]    Start[2]: ID=2, Title='Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-06 19:20:30.657 RedLemon[12970:164753]    Start[3]: ID=3, Title='Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', Lang='en', Ext=1
+2026-01-06 19:20:30.657 RedLemon[12970:164753]    Start[4]: ID=4, Title='Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', Lang='en', Ext=1
+2026-01-06 19:20:30.657 RedLemon[12970:164753] ✅ SubtitleService: Scanned 5 tracks (Attempt 3/5)
+2026-01-06 19:20:30.657 RedLemon[12970:164753]    Track: ID=0, Title=Off, External=0
+2026-01-06 19:20:30.658 RedLemon[12970:164753]    Track: ID=1, Title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-06 19:20:30.658 RedLemon[12970:164753]    Track: ID=2, Title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2026-01-06 19:20:30.658 RedLemon[12970:164753]    Track: ID=3, Title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, External=1
+2026-01-06 19:20:30.658 RedLemon[12970:164753]    Track: ID=4, Title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, External=1
+2026-01-06 19:20:31.667 RedLemon[12970:164772] 🔍 MPV track-list/count: 6
+2026-01-06 19:20:31.667 RedLemon[12970:164772] 🔍 Track 0 type: video
+2026-01-06 19:20:31.667 RedLemon[12970:164772] 🔍 Track 1 type: audio
+2026-01-06 19:20:31.667 RedLemon[12970:164772] 🔍 Track 2 type: sub
+2026-01-06 19:20:31.668 RedLemon[12970:164772] ✅ Found subtitle track: ID=1, lang=eng, title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-06 19:20:31.668 RedLemon[12970:164772] 🔍 Track 3 type: sub
+2026-01-06 19:20:31.668 RedLemon[12970:164772] ✅ Found subtitle track: ID=2, lang=en, title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2026-01-06 19:20:31.668 RedLemon[12970:164772] 🔍 Track 4 type: sub
+2026-01-06 19:20:31.668 RedLemon[12970:164772] ✅ Found subtitle track: ID=3, lang=en, title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, external=1
+2026-01-06 19:20:31.668 RedLemon[12970:164772] 🔍 Track 5 type: sub
+2026-01-06 19:20:31.668 RedLemon[12970:164772] ✅ Found subtitle track: ID=4, lang=en, title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, external=1
+2026-01-06 19:20:31.668 RedLemon[12970:164772] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-06 19:20:31.668 RedLemon[12970:164772]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-06 19:20:31.668 RedLemon[12970:164772]    Start[1]: ID=1, Title='GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Start[2]: ID=2, Title='Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Start[3]: ID=3, Title='Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', Lang='en', Ext=1
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Start[4]: ID=4, Title='Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', Lang='en', Ext=1
+2026-01-06 19:20:31.669 RedLemon[12970:164772] ✅ SubtitleService: Scanned 5 tracks (Attempt 4/5)
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Track: ID=0, Title=Off, External=0
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Track: ID=1, Title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-06 19:20:31.669 RedLemon[12970:164772]    Track: ID=2, Title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2026-01-06 19:20:31.670 RedLemon[12970:164772]    Track: ID=3, Title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, External=1
+2026-01-06 19:20:31.670 RedLemon[12970:164772]    Track: ID=4, Title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, External=1
+2026-01-06 19:20:31.999 RedLemon[12970:164666] 🚪 Joining room: 2664
+2026-01-06 19:20:32.700 RedLemon[12970:164753] 🔍 MPV track-list/count: 6
+2026-01-06 19:20:32.700 RedLemon[12970:164753] 🔍 Track 0 type: video
+2026-01-06 19:20:32.700 RedLemon[12970:164753] 🔍 Track 1 type: audio
+2026-01-06 19:20:32.700 RedLemon[12970:164753] 🔍 Track 2 type: sub
+2026-01-06 19:20:32.700 RedLemon[12970:164753] ✅ Found subtitle track: ID=1, lang=eng, title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, external=0
+2026-01-06 19:20:32.700 RedLemon[12970:164753] 🔍 Track 3 type: sub
+2026-01-06 19:20:32.701 RedLemon[12970:164753] ✅ Found subtitle track: ID=2, lang=en, title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, external=1
+2026-01-06 19:20:32.701 RedLemon[12970:164753] 🔍 Track 4 type: sub
+2026-01-06 19:20:32.701 RedLemon[12970:164753] ✅ Found subtitle track: ID=3, lang=en, title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, external=1
+2026-01-06 19:20:32.701 RedLemon[12970:164753] 🔍 Track 5 type: sub
+2026-01-06 19:20:32.701 RedLemon[12970:164753] ✅ Found subtitle track: ID=4, lang=en, title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, external=1
+2026-01-06 19:20:32.701 RedLemon[12970:164753] 📊 Total subtitle tracks found: 5 (including Off if needed)
+2026-01-06 19:20:32.701 RedLemon[12970:164753]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-06 19:20:32.701 RedLemon[12970:164753]    Start[1]: ID=1, Title='GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', Lang='eng', Ext=0
+2026-01-06 19:20:32.701 RedLemon[12970:164753]    Start[2]: ID=2, Title='Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-06 19:20:32.701 RedLemon[12970:164753]    Start[3]: ID=3, Title='Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', Lang='en', Ext=1
+2026-01-06 19:20:32.701 RedLemon[12970:164753]    Start[4]: ID=4, Title='Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', Lang='en', Ext=1
+2026-01-06 19:20:32.702 RedLemon[12970:164753] ✅ SubtitleService: Scanned 5 tracks (Attempt 5/5)
+2026-01-06 19:20:32.702 RedLemon[12970:164753]    Track: ID=0, Title=Off, External=0
+2026-01-06 19:20:32.702 RedLemon[12970:164753]    Track: ID=1, Title=GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265, External=0
+2026-01-06 19:20:32.702 RedLemon[12970:164753]    Track: ID=2, Title=Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR, External=1
+2026-01-06 19:20:32.702 RedLemon[12970:164753]    Track: ID=3, Title=Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS, External=1
+2026-01-06 19:20:32.702 RedLemon[12970:164753]    Track: ID=4, Title=Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT, External=1
+2026-01-06 19:20:33.275 RedLemon[12970:164666] 🚪 Room is in lobby
+📄 Subtitle request: L3N1YnRpdGxlLzE5NzQ3... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/1974714-2526434.zip
+✅ Download complete: 53679 bytes
+📦 Detected ZIP archive, extracting...
+⚠️ No specific episode match found, using first file: Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT.English.srt
+📦 Extracting specific file: Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT.English.srt
+⏳ SMART-LOAD: Waiting for subtitles... (Found 2/3)
+✅ Extraction successful
+🎬 DisplayLink: reportSwap() (throttled)
+✅ Subtitle downloaded and converted to VTT
+[MPV] Track added:
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] Subs  --sid=2 --slang=en 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=en 'Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT' (webvtt) (external)
+📊 Current subtitle track: 4
+✅ SMART-LOAD: Found 6 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1, Score: 1065)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 | 6ch | English: true | Commentary: false -> Score: 1065
+🏆 Selected best audio track: GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1, Score: 1065)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'eng', title: 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', forced: false, default: true, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en', title: 'Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 3690 (Embedded: 3000, Match: 700, Clean: 0, SDH: 0)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] Subs  --sid=2 --slang=en 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS' (webvtt) (external)
+[MPV] (+) Subs  --sid=4 --slang=en 'Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT' (webvtt) (external)
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hevc [Main 10] 1920x1080 23.976fps)
+[MPV] (+) Audio --aid=1 --alang=eng (*) 'GalaxyRG265 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (eac3 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=eng (*) 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265' (hdmv_pgs_subtitle)
+[MPV] Subs  --sid=2 --slang=en 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS' (webvtt) (external)
+[MPV] Subs  --sid=4 --slang=en 'Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+📊 Current subtitle track: 1
+🔓 MPVPlayerViewModel: Time advancing (time: 4778.273999999999) while buffering - Forcing UI unlock
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 1
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📡 [EventsConfig] Checking server for movie_events config version...
+📊 Current subtitle track: 1
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 6 total tracks
+🔍 AUTO-SELECT: Track 2 - ID: 1, lang: 'eng', title: 'GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265', forced: false, default: true, HI: false, Ext: false
+🔍 AUTO-SELECT: Track 3 - ID: 2, lang: 'en', title: 'Thor.Ragnarok.2017.UHD.BluRay.2160p.TrueHD.Atmos.7.1.HEVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 4 - ID: 3, lang: 'en', title: 'Thor.Ragnarok.2017.720p.BluRay.x264-SPARKS', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 5 - ID: 4, lang: 'en', title: 'Thor.Ragnarok.2017.2160p.BluRay.REMUX.HEVC.DTS-HD.MA.TrueHD.7.1.Atmos-FGT', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: GalaxyRG256 - Thor.Ragnarok.2017.1080p.BluRay.DDP5.1.x265.10bit-GalaxyRG265 (ID: 1) [External: false, Forced: false, Default: true, HI: false]
+   🏆 Final Score: 3690 (Embedded: 3000, Match: 700, Clean: 0, SDH: 0)
+🎬 DisplayLink: reportSwap() (throttled)
+✅ [EventsConfig] Fetched movie_events version 1472 with 424 movies
+✅ [EventsConfig] Using cached movie_events config (version 1472, 424 movies)
+🎭 Lobby: Connecting to room 2664...
+🚦 Lobby State: connecting
+🎬 Stopping CVDisplayLink...
+🎬 CVDisplayLink stopped and released
+🎬 MPVViewLayer uniniting...
+🧹 Freeing render context on OpenGL thread...
+🎬 MPVViewLayer cleanup complete
+📝 Stopped watch history tracking
+⏱️ Invalidating all active timers
+🎬 MPVLayerHostView deinit
+🔄 Lobby: Fetching fresh room state from Supabase...
+ MPV Event: 17
+[ INFO ] GET /api/metadata/meta/series/tt22202452 [request-id: 629673F6-CFCA-49E3-BAC2-B9A2CC71B154]
+[ INFO ] GET /api/metadata/meta/series/tt22202452 [request-id: 063FDA1C-8F32-45B1-BEAB-9FE2F82D7C83]
+2026-01-06 19:20:33.671 RedLemon[12970:164753] 📦 Decoded CinemetaMeta - videos count: 9
+2026-01-06 19:20:33.737 RedLemon[12970:164666] 🛑 Stopped playback heartbeat loop
+2026-01-06 19:20:33.758 RedLemon[12970:164751] ⚠️ SupabaseClient: User already in room (409), proceeding...
+2026-01-06 19:20:33.763 RedLemon[12970:164666] ✅ Guest joined room 2664 in database
+2026-01-06 19:20:33.896 RedLemon[12970:164772] 📤 Realtime: Sending message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-06 19:20:33.896 RedLemon[12970:164772]    Payload keys: senderId, position, chatText, type, chatUsername, timestamp
+2026-01-06 19:20:33.897 RedLemon[12970:164772] ✅ Realtime: Message broadcast complete
+2026-01-06 19:20:34.025 RedLemon[12970:164751] 📨 Realtime: Received broadcast message
+2026-01-06 19:20:34.025 RedLemon[12970:164751]    Payload keys: chatUsername, chatText, timestamp, senderId, position, type
+2026-01-06 19:20:34.026 RedLemon[12970:164751] ✅ Realtime: Decoded message type: chat, sender: 656daa91-33b4-4688-9135-c982ea52d7c9
+2026-01-06 19:20:34.026 RedLemon[12970:164751] 📞 Realtime: Invoking syncCallback for message type: chat
+2026-01-06 19:20:34.026 RedLemon[12970:164751] ✅ Realtime: syncCallback invoked successfully
+💾 Saved to watch history: Pluribus at 4781s
+🧹 Cleaning up MPV player...
+ MPV Event: 17
+📡 SocialService: Updated status - In Lobby: Pluribus: Pluribus
+[MPV] Video: no video
+🔌 Setting up Realtime channel: watch-party:2664
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:2664
+📡 Connection state: connected
+✅ Realtime channel setup complete
+📡 SocialService: Updated status - Browsing: 
+✅ Lobby: Connected to Realtime
+💾 Cache SET: Metadata[meta_series_tt22202452]
+🔍 [DEBUG] Creating MediaItem from CinemetaMeta
+🔍 [DEBUG] meta.itemId: tt22202452
+🔍 [DEBUG] meta.type: series
+🔍 [DEBUG] meta.name: Pluribus
+🔍 [DEBUG] Successfully created MediaItem from meta: Pluribus
+🗑️ Invalidated all active timers
+🧹 Cleaning up Realtime channel for room: event_tt3501632
+🔄 Untracking presence...
+✅ Lobby: Loaded metadata for Pluribus
+✅ Presence untracked
+🔄 Leaving channel...
+✅ Channel left
+ℹ️ Keeping WebSocket connected (disconnectClient=false)
+✅ Realtime channel cleanup complete
+✅ Realtime manager channel left (client connection preserved)
+🛑 Stopping MPV playback...
+🛑 Stopping MPV playback...
+🗑️ MPVPlayerViewModel deinit
+⚡️ PlaybackService: releasing sleep assertion
+🛑 Event polling task cancelled cleanly
+🗑️ MPVWrapper deinit - cleaning up...
+✅ MPVWrapper cleanup complete
+🗑️ Terminating MPV instance (background)...
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7JhkShY6AprB","phx_ref_prev":"GIhK6tuYyzQ6AgLk","last_seen":"2026-01-07T00:20:33.629Z","room_id":"2664","started_at":"2026-01-07T00:20:33.629Z","status":"In Lobby: Pluribus","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}},"leaves":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6tuYyzQ6AgLk","phx_ref_prev":"GIhK6NJQh6w6ApqB","last_seen":"2026-01-07T00:20:26.163Z","room_id":"event_tt3501632","started_at":"2026-01-07T00:20:26.164Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt3501632","watching_title":"Thor: Ragnarok","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7Ji7Olo6AgNE","phx_ref_prev":"GIhK7JhkShY6AprB","last_seen":"2026-01-07T00:20:33.636Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7JhkShY6AprB","phx_ref_prev":"GIhK6tuYyzQ6AgLk","last_seen":"2026-01-07T00:20:33.629Z","room_id":"2664","started_at":"2026-01-07T00:20:33.629Z","status":"In Lobby: Pluribus","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+❌ Supabase error (409): {"code":"23505","details":null,"hint":null,"message":"duplicate key value violates unique constraint \"room_participants_pkey\""}
+✅ Lobby: Synced playlist with 9 items
+✅ Lobby: Synced playlist index to 0
+📨 Received: {"ref":"65CA146A-8C54-475A-A1E1-F725E2B47C26","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":42747272,"event":"*","filter":"id=eq.2664","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:2664"}
+✅ MPV instance destroyed
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:2664"},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"95eb0baa-eb5e-11f0-ad6d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK4v10FrymNw_D","phx_ref_prev":"GIhK4vHGk7KmNw-j","is_host":true,"joined_at":1767745192.4013572,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"aea35cf6-eb5e-11f0-866d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7JpftK-mN8eC","is_host":false,"joined_at":1767745233.638904,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:2664"}
+✅ MPV stop completed with clean event loop exit
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{},"leaves":{"aea35cf6-eb5e-11f0-866d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7JpftK-mN8eC","is_host":false,"joined_at":1767745233.638904,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":"4","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"phx_close","payload":{},"topic":"realtime:watch-party:2664"}
+📨 Unknown event: phx_close
+✅ Lobby: Refreshed room state. isPlaying: false
+🛡️ Lobby: Ensuring local media state is fresh before auto-start check...
+📺 Lobby: Synced season/episode: S1E1
+🔌 Setting up Realtime channel: watch-party:2664
+   Role: Guest
+   User ID: 656daa91-33b4-4688-9135-c982ea52d7c9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:2664
+📡 Connection state: connected
+✅ Realtime channel setup complete
+✅ Lobby: Connected to Realtime
+🚦 Lobby State: connected
+🔄 Lobby: Starting database polling for participants and room state...
+💓 Lobby: Starting heartbeat loop...
+🔄 LobbyDatabase: Starting room state polling for guests...
+☠️ LobbyViewModel deinit
+📨 Received: {"ref":"3138DB4F-86B2-41B2-859B-E0AA6EAD5909","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":42747272,"event":"*","filter":"id=eq.2664","schema":"public","table":"rooms"}]}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"watch-party:2664"},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"95eb0baa-eb5e-11f0-ad6d-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK4v10FrymNw_D","phx_ref_prev":"GIhK4vHGk7KmNw-j","is_host":true,"joined_at":1767745192.4013572,"user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom"}]}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"broadcast","payload":{"event":"sync","payload":{"chatText":"LOBBY_JOIN","chatUsername":"ursinho","position":0,"senderId":"656daa91-33b4-4688-9135-c982ea52d7c9","timestamp":0,"type":"chat"},"type":"broadcast"},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"aec98322-eb5e-11f0-a637-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7KjJoMWmNwTk","is_host":false,"joined_at":1767745233.894645,"user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:2664"}
+📨 Received: {"ref":"5","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7XpMvyM6AgVE","phx_ref_prev":"GIhK7Ji7Olo6AgNE","last_seen":"2026-01-07T00:20:37.420Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}},"leaves":{"a4f7b698-eb5e-11f0-9fc8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7Ji7Olo6AgNE","phx_ref_prev":"GIhK7JhkShY6AprB","last_seen":"2026-01-07T00:20:33.636Z","status":"Browsing","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"75d7081e-eb5e-11f0-bcf4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK7bJAHi06ApsB","phx_ref_prev":"GIhK6QnMWJo6AgHk","last_seen":"2026-01-07T00:20:38.382Z","room_id":"2664","started_at":"2026-01-07T00:19:52.189Z","status":"In Lobby: Pluribus","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}},"leaves":{"75d7081e-eb5e-11f0-bcf4-9ee62e3b7bba":{"metas":[{"phx_ref":"GIhK6QnMWJo6AgHk","phx_ref_prev":"GIhK5GHYyUE6AhAD","last_seen":"2026-01-07T00:20:18.381Z","room_id":"2664","started_at":"2026-01-07T00:19:52.189Z","status":"In Lobby: Pluribus","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt22202452","watching_title":"Pluribus","watching_type":"series"}]}}},"topic":"realtime:global-presence"}
+🛡️ Lobby: Auto-Join safety delay passed (8s). Enabled for late joiners.

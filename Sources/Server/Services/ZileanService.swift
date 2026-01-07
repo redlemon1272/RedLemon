@@ -38,8 +38,8 @@ class ZileanService: ProviderService {
             return []
         }
 
-        // Build URL: /dmm/filtered?Query={title}
-        let urlString = "\(baseUrl)/dmm/filtered?Query=\(encodedTitle)"
+        // Build URL: /dmm/search?query={title}
+        let urlString = "\(baseUrl)/dmm/search?query=\(encodedTitle)"
         guard let url = URL(string: urlString) else {
             return []
         }

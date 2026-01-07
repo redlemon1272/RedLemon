@@ -419,7 +419,13 @@ actor StreamResolver {
         // Partition into quality buckets
         var buckets: [String: [Stream]] = ["2160p": [], "1080p": [], "720p": [], "480p": []]
         for stream in streamsWithSubtitles {
-            let bucket = determineQualityBucket(stream.quality ?? "")
+            // First try to use the explicit quality, then fall back to parsing from title
+            let quality = stream.quality ?? ""
+            var bucket = determineQualityBucket(quality)
+            // If bucket defaulted to 480p but quality wasn't explicitly 480p, try parsing from title
+            if bucket == "480p" && !quality.contains("480p") {
+                bucket = determineQualityBucket(stream.title)
+            }
             buckets[bucket, default: []].append(stream)
         }
 
@@ -759,9 +765,11 @@ actor StreamResolver {
             return seeders1 > seeders2
         }
 
-        // Seeder filter (skipped for cached)
+        // Seeder filter (skipped for cached streams and RD direct URLs)
         filtered = filtered.filter { stream in
+            // Skip seeder check for cached streams (⚡) or streams with direct URLs (RD instant)
             if stream.title.contains("⚡") { return true }
+            if stream.url != nil { return true } // RD-cached streams have direct URLs, no seeder count
             let hasSeeders = (stream.seeders ?? 0) >= minSeeders
             if !hasSeeders {
                 print("   🚫 RESOLVER DROP (\(quality)): Low Seeders (\(stream.seeders ?? 0)): \(stream.title)")

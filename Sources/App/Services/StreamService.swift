@@ -181,7 +181,8 @@ actor StreamService: StreamResolving {
         if forcedStream == nil && effectiveQuality == .fullHD {
             // 2. Fallback: 720p (Safe for older hardware)
             // RESTRICTION: Disable 720p fallback for Events (Strict 1080p)
-            if !filterExtended {
+            // UNLESS we have no 1080p streams, then we must accept lower quality
+            if !filterExtended || streamsToTry.isEmpty {
                 let hdStreams = extractStreams(from: buckets.hd)
                  if !hdStreams.isEmpty {
                     print("   ➕ Added \(hdStreams.count) 720p streams as backup")
@@ -192,7 +193,7 @@ actor StreamService: StreamResolving {
             }
 
             // 3. Fallback: 480p (SD) - Safe for all hardare
-            if !filterExtended {
+            if !filterExtended || streamsToTry.isEmpty {
                  let sdStreams = extractStreams(from: buckets.sd)
                  if !sdStreams.isEmpty {
                     print("   ➕ Added \(sdStreams.count) 480p streams as backup")

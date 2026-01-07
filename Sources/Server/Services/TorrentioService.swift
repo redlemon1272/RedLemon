@@ -30,8 +30,10 @@ class TorrentioService: ProviderService {
              NSLog("🔧 Torrentio: Using User-Defined Config")
              config = custom
         } else if let key = rdApiKey, !key.isEmpty {
-             NSLog("✨ Torrentio: Using Auto-Generated Config (realdebrid/KEY)")
-             config = "realdebrid/\(key)"
+             NSLog("✨ Torrentio: Using Auto-Generated Config (RealDebrid)")
+             // Use minimal config - just RealDebrid key (Torrentio default providers are fine)
+             // Format: realdebrid=KEY (no need for providers or sort, Torrentio has good defaults)
+             config = "realdebrid=\(key)"
         } else {
              config = ""
         }
@@ -44,44 +46,120 @@ class TorrentioService: ProviderService {
         request.httpMethod = "GET"
         request.timeoutInterval = 8
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                NSLog("❌ Torrentio: No HTTP response")
+                throw ProviderError.httpError(statusCode: 0)
+            }
+            
+            NSLog("📡 Torrentio: HTTP \(httpResponse.statusCode), received \(data.count) bytes")
+            
+            guard httpResponse.statusCode == 200 else {
+                NSLog("❌ Torrentio: HTTP error \(httpResponse.statusCode)")
+                throw ProviderError.httpError(statusCode: httpResponse.statusCode)
+            }
 
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw ProviderError.httpError(statusCode: (response as? HTTPURLResponse)?.statusCode ?? 0)
+            let result = try JSONDecoder().decode(TorrentioResponse.self, from: data)
+            let streams = parseStreams(result.streams ?? [])
+            NSLog("✅ Torrentio: Parsed \(streams.count) streams from \(result.streams?.count ?? 0) raw")
+            
+            return streams
+        } catch let error as ProviderError {
+            throw error
+        } catch {
+            NSLog("❌ Torrentio: Request failed - \(error.localizedDescription)")
+            throw ProviderError.httpError(statusCode: 0)
         }
-
-        let result = try JSONDecoder().decode(TorrentioResponse.self, from: data)
-
-        return parseStreams(result.streams ?? [])
     }
 
     private func buildUrl(imdbId: String, type: String, season: Int?, episode: Int?, config: String) -> URL {
-        var path = ""
+        // Build the path components
+        var pathComponents: [String] = []
+        
         if !config.isEmpty {
-            path = "/\(config)/stream/\(type)/\(imdbId)"
-        } else {
-            path = "/stream/\(type)/\(imdbId)"
+            // Torrentio expects the config UNENCODED in the URL path
+            // e.g., /realdebrid=KEY/stream/movie/tt123.json (NOT /realdebrid%3DKEY/...)
+            // The config only contains alphanumerics and '=' which are safe in URL paths
+            pathComponents.append(config)
         }
-
+        
+        pathComponents.append("stream")
+        pathComponents.append(type)
+        
+        // Build the media ID part
+        var mediaId = imdbId
         if let season = season, let episode = episode {
-            path += ":\(season):\(episode)"
+            mediaId += ":\(season):\(episode)"
             NSLog("📺 Torrentio: Building URL for S\(String(format: "%02d", season))E\(String(format: "%02d", episode))")
         } else {
             NSLog("🎬 Torrentio: Building URL for movie (no season/episode)")
         }
-
-        path += ".json"
-
-        let url = URL(string: baseUrl + path)!
-        NSLog("🔗 Torrentio URL: \(url)")
+        mediaId += ".json"
+        pathComponents.append(mediaId)
+        
+        // Construct the full URL
+        let path = "/" + pathComponents.joined(separator: "/")
+        let fullUrl = baseUrl + path
+        
+        NSLog("🔗 Torrentio URL (length: \(fullUrl.count)): \(fullUrl.prefix(150))...")
+        
+        guard let url = URL(string: fullUrl) else {
+            NSLog("❌ Torrentio: Failed to create URL from: \(fullUrl)")
+            // Fallback to basic URL without config
+            let fallbackPath = "/stream/\(type)/\(imdbId).json"
+            return URL(string: baseUrl + fallbackPath)!
+        }
+        
         return url
     }
 
     private func parseStreams(_ torrentioStreams: [TorrentioStream]) -> [Stream] {
         return torrentioStreams.compactMap { torrentioStream -> Stream? in
-            guard let infoHash = torrentioStream.infoHash,
-                  let title = torrentioStream.title else {
+            guard let title = torrentioStream.title else {
+                return nil
+            }
+            
+            // Get infoHash either directly or by extracting from URL
+            // URL format: https://torrentio.strem.fun/resolve/realdebrid/{KEY}/{INFOHASH}/null/{IDX}/{FILENAME}
+            var infoHash: String? = torrentioStream.infoHash
+            if infoHash == nil, let url = torrentioStream.url {
+                // Extract infoHash from resolve URL
+                // Pattern: /resolve/realdebrid/{key}/{infohash}/
+                let components = url.components(separatedBy: "/")
+                if let keyIdx = components.firstIndex(of: "realdebrid"),
+                   keyIdx + 2 < components.count {
+                    let possibleHash = components[keyIdx + 2]
+                    // Validate it looks like a hash (40 hex chars)
+                    if possibleHash.count == 40, possibleHash.allSatisfy({ $0.isHexDigit }) {
+                        infoHash = possibleHash
+                    }
+                }
+            }
+            
+            guard let finalInfoHash = infoHash else {
+                // If we still have no infoHash but have a URL, use the URL directly
+                if torrentioStream.url != nil {
+                    // Parse quality from title (e.g., "1080p", "2160p", "720p")
+                    let quality = extractQuality(from: title)
+                    let seeders = extractSeeders(from: title)
+                    let size = extractSize(from: title)
+                    
+                    return Stream(
+                        url: torrentioStream.url,
+                        title: title,
+                        quality: quality,
+                        seeders: seeders,
+                        size: size,
+                        provider: name,
+                        infoHash: nil,
+                        fileIdx: torrentioStream.fileIdx,
+                        ext: nil,
+                        behaviorHints: torrentioStream.behaviorHints,
+                        subtitles: nil
+                    )
+                }
                 return nil
             }
 
@@ -95,13 +173,13 @@ class TorrentioService: ProviderService {
             let size = extractSize(from: title)
 
             return Stream(
-                url: nil,
+                url: torrentioStream.url,  // Use the resolve URL directly if available
                 title: title,
                 quality: quality,
                 seeders: seeders,
                 size: size,
                 provider: name,
-                infoHash: infoHash.lowercased(),
+                infoHash: finalInfoHash.lowercased(),
                 fileIdx: torrentioStream.fileIdx,
                 ext: nil,
                 behaviorHints: torrentioStream.behaviorHints,
@@ -152,13 +230,17 @@ struct TorrentioResponse: Codable {
 }
 
 struct TorrentioStream: Codable {
+    let name: String?
     let title: String?
+    let url: String?
     let infoHash: String?
     let fileIdx: Int?
     let behaviorHints: StreamBehaviorHints?
 
     enum CodingKeys: String, CodingKey {
+        case name
         case title
+        case url
         case infoHash
         case fileIdx
         case behaviorHints

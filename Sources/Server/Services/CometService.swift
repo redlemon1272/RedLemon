@@ -140,6 +140,18 @@ class CometService: ProviderService {
                 print("⚠️ Comet: Skipping stream with no infoHash or URL: \(stream.name ?? "unknown")")
                 return nil
             }
+            
+            // Validate URL is a playback URL, not an error/redirect page
+            // Comet returns Reddit URLs when streams aren't available
+            if let urlStr = url {
+                let invalidUrls = ["reddit.com", "github.com", "stremio.com/addon", "elfhosted.com/docs"]
+                for invalid in invalidUrls {
+                    if urlStr.contains(invalid) {
+                        print("⚠️ Comet: Skipping invalid redirect URL: \(urlStr.prefix(60))...")
+                        return nil
+                    }
+                }
+            }
 
             let title = stream.name ?? ""
             let quality = extractQuality(from: title) ?? extractQuality(from: stream.description ?? "")

@@ -87,6 +87,30 @@ class MPVPlayerViewModel: ObservableObject {
             let videoURLPub = await playbackService.videoURLPublisher
             let isBufferingPub = await playbackService.isBufferingPublisher
             let isFileLoadedPub = await playbackService.isFileLoadedPublisher
+            let mpvErrorPub = mpvWrapper.$mpvError
+
+            // MPV Critical Error Handling (Fast Failover)
+            mpvErrorPub
+                .receive(on: DispatchQueue.main)
+                .scan(nil) { (previous: String?, current: String?) -> String? in
+                    // De-duplication: Only fire if error CHANGED and is not nil
+                    if let current = current, current != previous {
+                        return current
+                    }
+                    return nil
+                }
+                .compactMap { $0 } // remove nils
+                .sink { [weak self] errorMsg in
+                    guard let self = self else { return }
+                    print("🚨 MPVPlayerViewModel: Critical MPV Error detected: \(errorMsg) - Triggering Failover")
+                    
+                    // Force clear buffering state so UI doesn't hang
+                    self.isBuffering = false
+                    
+                    // Trigger failover immediately
+                    self.playbackErrorTrigger.send(errorMsg)
+                }
+                .store(in: &serviceCancellables)
 
             // IsPlaying: Sync state and trigger VideoReady logic
             isPlayingPub

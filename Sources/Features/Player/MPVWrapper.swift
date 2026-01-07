@@ -21,6 +21,7 @@ class MPVWrapper: ObservableObject {
     @Published var volume: Int = 100
     @Published var playbackFinished = false
     @Published var isFileLoaded = false
+    @Published var mpvError: String? = nil // Expose critical errors to ViewModel
     
     // Track the current video filename for subtitle matching
     private var currentVideoFilename: String = ""
@@ -334,6 +335,7 @@ class MPVWrapper: ObservableObject {
             // Natural cleanup point - video starting
             // Reset finished state on new file start
             playbackFinished = false
+            mpvError = nil // Reset error state
         case MPV_EVENT_FILE_LOADED:
             updateDuration()
             isFileLoaded = true
@@ -378,6 +380,15 @@ class MPVWrapper: ObservableObject {
                 } else {
                     print("⚠️ MPV: END_FILE event but not EOF (reason: \(reason.rawValue))")
                     Task { await SessionRecorder.shared.log(category: .player, message: "Playback Ended", metadata: ["reason": "\(reason.rawValue)"]) }
+                    
+                    // CRITICAL: Expose error to ViewModel for immediate failover
+                    if reason.rawValue == MPV_END_FILE_REASON_ERROR.rawValue {
+                         self.mpvError = "Playback Error (Code: 4)"
+                    } else {
+                         // Treat other abnormal stops as errors too? Maybe.
+                         // For now, only explicit ERROR or STOP is concern if not EOF.
+                         self.mpvError = "Playback Stopped Abnormaly (Code: \(reason.rawValue))"
+                    }
                 }
             } else {
                 print("⚠️ MPV: END_FILE event but no event data available")
@@ -431,6 +442,15 @@ class MPVWrapper: ObservableObject {
                  Task { await SessionRecorder.shared.log(category: .error, message: "MPV Internal Error", metadata: ["details": message]) }
             } else if lower.contains("warn") {
                  Task { await SessionRecorder.shared.log(category: .player, message: "MPV Internal Warning", metadata: ["details": message]) }
+            }
+            
+            // CRITICAL: Catch specific fatal errors that don't trigger END_FILE immediately
+            if message.contains("Seek failed") {
+                self.mpvError = "Seek Failed"
+            } else if lower.contains("invalid data") {
+                self.mpvError = "Invalid Data"
+            } else if lower.contains("operation timed out") {
+                self.mpvError = "Connection Timed Out"
             }
         default:
             if eventId.rawValue != MPV_EVENT_LOG_MESSAGE.rawValue {

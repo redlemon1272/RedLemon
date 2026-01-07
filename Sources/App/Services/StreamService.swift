@@ -483,7 +483,21 @@ actor StreamService: StreamResolving {
                 // If the previous ones failed "Unlock" (HTTP error), retrying them is probably futile.
                 // So let's return streams from index + 1 onwards.
                 
-                let candidateStreams = Array(finalStreams.dropFirst(index + 1))
+                // Build candidate streams for failover:
+                // 1. Remaining streams from the same priority tier (finalStreams)
+                // 2. APPEND all other valid streams (including 10-bit) as "last resort" fallback
+                // This ensures if the CDN returns a broken file, we can try alternate codecs
+                var candidateStreams = Array(finalStreams.dropFirst(index + 1))
+                
+                // Append deprioritized streams (10-bit, etc.) that weren't in finalStreams
+                // These are from streamsToTry (pre-filter) minus what's already in candidateStreams
+                let alreadyIncluded = Set(candidateStreams.map { $0.id })
+                let fallbackStreams = streamsToTry.filter { !alreadyIncluded.contains($0.id) && $0.id != stream.id }
+                if !fallbackStreams.isEmpty {
+                    print("📦 StreamService: Appending \(fallbackStreams.count) fallback streams (alternate codecs)")
+                    candidateStreams.append(contentsOf: fallbackStreams)
+                }
+                
                 print("📦 StreamService: Returning \(candidateStreams.count) candidate streams for fallback")
                 
                 return StreamResolutionResult(stream: unlockedStream, metadata: finalMetadata, candidateStreams: candidateStreams)

@@ -3340,6 +3340,13 @@ extension MPVPlayerViewModel {
         await realtimeManager?.disconnect()
         realtimeManager = nil
 
+        // CRITICAL: Remove user from DB before clearing local state
+        // This ensures participants_count decrements correctly
+        if let roomId = currentRoomId, let userId = currentUserId, let userUUID = UUID(uuidString: userId) {
+            try? await SupabaseClient.shared.leaveRoom(roomId: roomId, userId: userUUID)
+            print("✅ Left room in database: \(roomId)")
+        }
+
         // Reset state
         currentRoomId = nil
         currentUserId = nil

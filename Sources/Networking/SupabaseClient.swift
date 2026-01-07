@@ -748,8 +748,11 @@ class SupabaseClient: RoomManager, UserManager {
     // Debug helper
     func debugRoomState(roomId: String) async {
         do {
-            let room = try await getRoomState(roomId: roomId)
-            print("🔍 DB State for \(roomId): Participants=\(room.participantsCount)")
+            if let room = try await getRoomState(roomId: roomId) {
+                print("🔍 DB State for \(roomId): Participants=\(room.participantsCount)")
+            } else {
+                print("🔍 DB State for \(roomId): Room NOT FOUND/NIL")
+            }
         } catch {
             print("❌ DB State fetch failed for \(roomId): \(error)")
         }

@@ -57,7 +57,6 @@ These keys are hardcoded in your app and server. If you change them, you must up
 *   **Verification:**
     *   `public.users`: 12 rows (transferred successfully).
     *   `auth.users`: 0 rows (Correct - App uses Custom Auth in `public.users` via `register_user_secure`).
-    *   `auth.users`: 0 rows (Correct - App uses Custom Auth in `public.users` via `register_user_secure`).
     *   **Cron Jobs:** 11 active jobs (e.g. `cleanup-rooms`) running successfully.
     *   **Blocked Streams:** 0 rows (New table `public.blocked_streams` deployed Jan 7, 2026).
 
@@ -103,7 +102,7 @@ docker exec -it supabase-db psql -U postgres
 
 ---
 
-## 6. Automated Backups
+## 5. Automated Backups
 **Status:** ✅ Active (Daily at 9:00 AM UTC)
 
 *   **Script:** `/root/backup.sh` (which calls `/root/verify_backup.sh`)
@@ -127,24 +126,14 @@ gunzip /root/backups/backup_YYYYMMDD_HHMMSS.sql.gz
 cat /root/backups/backup_YYYYMMDD_HHMMSS.sql | docker exec -i supabase-db psql -U postgres postgres
 ```
 
-## 5. Client Configuration
+---
 
-Your **macOS App** (`Sources/App/Config.swift`) requires:
-
-```swift
-static let supabaseURL = "https://151.243.109.243.nip.io"
-static let supabaseAnonKey = "eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9..."
-```
-
-
-*(Already updated in your codebase)*.
 
 ## 6. Admin Dashboard (New)
-**Usage:** Press `Cmd+Shift+A` in the macOS app to open.
+**Usage:** Open **Settings** in the macOS app → Scroll to **Administration** section (visible only to admins).
 
 **New Server Tab:**
 *   **Database Stats:** Real-time DB size and connection count.
-*   **Router Status:** Edge Function health check (`/system/status`).
 *   **Router Status:** Edge Function health check (`/system/status`).
 *   **Backups:** Displays the time and status of the last automated backup (read from `public.backup_logs`).
 *   **Blocked Streams:** New tab to view and unblock streams (Blacklist).
@@ -175,8 +164,6 @@ docker exec -i supabase-db psql -U postgres postgres
 ```
 
 **Option 2: One-Liner from Local Machine**
-```bash
-cat supabase/migrations/YOUR_MIGRATION.sql | ssh root@151.243.109.243 "docker exec -i supabase-db psql -U postgres postgres"
 ```bash
 cat supabase/migrations/YOUR_MIGRATION.sql | ssh root@151.243.109.243 "docker exec -i supabase-db psql -U postgres postgres"
 ```

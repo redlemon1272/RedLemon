@@ -1,0 +1,816 @@
+2026-01-07 14:02:57.650 RedLemon[5902:63059] 🪟 Set initial window to expanded size: (0.0, 150.0, 1366.0, 593.0)
+2026-01-07 14:02:57.650 RedLemon[5902:63059] ✅ Cache cleanup timer started (runs every 30 minutes)
+2026-01-07 14:02:57.719 RedLemon[5902:63121] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 14:02:57.723 RedLemon[5902:63059] 🔄 Resetting playback state to prevent auto-selection...
+2026-01-07 14:02:57.783 RedLemon[5902:63059] ✅ Playback state reset complete - starting in browse view
+2026-01-07 14:02:57.784 RedLemon[5902:63059] 🔐 APP STARTUP: Loading stored user credentials...
+2026-01-07 14:02:57.784 RedLemon[5902:63059] 🧪 Testing Profile: debug
+2026-01-07 14:02:57.784 RedLemon[5902:63122] 🔍 KeychainManager: Retrieved username 'ursinho' from UserDefaults
+2026-01-07 14:02:57.784 RedLemon[5902:63059] ✅ Keychain: Found stored username: ursinho
+2026-01-07 14:02:57.784 RedLemon[5902:63059] 🔍 Supabase: Looking up user 'ursinho' in database...
+2026-01-07 14:02:57.784 RedLemon[5902:63122] 🔍 SupabaseClient: Looking up user by username 'ursinho'
+2026-01-07 14:02:58.166 RedLemon[5902:63122] 📡 SupabaseClient: User lookup response received (358 bytes)
+2026-01-07 14:02:58.175 RedLemon[5902:63122] ✅ SupabaseClient: Decoded 1 users from response
+2026-01-07 14:02:58.175 RedLemon[5902:63122] 👤 SupabaseClient: Found user - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 14:02:58.202 RedLemon[5902:63059] ✅ AUTH SUCCESS: User authenticated - ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 14:02:58.202 RedLemon[5902:63059] 🎯 AppState: currentUsername=ursinho, currentUserId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 14:02:58.202 RedLemon[5902:63059] 🏁 AUTH COMPLETE: Final state - username=ursinho, userId=656DAA91-33B4-4688-9135-C982EA52D7C9
+2026-01-07 14:02:58.202 RedLemon[5902:63059] 🚀 RedLemon: Starting HTTP server...
+2026-01-07 14:02:58.202 RedLemon[5902:63059] 📋 RedLemon: Current directory: /Users/danielnoble/Desktop/Redlemon
+2026-01-07 14:02:58.218 RedLemon[5902:63059] ✅ RedLemon: HTTPServer instance created
+2026-01-07 14:02:58.218 RedLemon[5902:63142] 📡 RedLemon: Server starting on port 47253...
+⏲️ [EventsConfig] Starting polling fallback (every 60s)
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ Sparkle configured (manual only, no auto-checks)
+   Appcast URL: https://raw.githubusercontent.com/orangeapple1272/Redlemon/main/appcast.xml
+   Can check: false
+📅 EventsView appeared
+🎬 [EventsView] Fetching movie events from centralized config...
+📡 [EventsConfig] Checking server for movie_events config version...
+🔍 Silent update check (custom implementation)...
+🔍 Memory pressure monitoring enabled (safe mode)
+📂 Loaded 5 credential(s) from cache
+🖥️ CacheManager initialized with fixed conservative limits
+   Image cache limit: 30 items
+📡 Joined channel: realtime:events_config_updates
+✅ [EventsConfig] Subscribed to realtime schedule updates
+📨 Received: {"ref":"A97650A0-5266-40DA-A241-F5E579C69A97","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":53636278,"event":"INSERT","filter":"config_type=eq.movie_events","schema":"public","table":"events_config"}]}},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"events_config_updates"},"topic":"realtime:events_config_updates"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:events_config_updates"}
+✅ Token routes registered:
+   POST /tokens/save
+   POST /tokens/delete
+   GET  /tokens/list
+✅ Unlock routes registered:
+   POST /api/streams/unlock
+✅ Stream routes registered:
+   POST /api/streams/resolve
+   GET  /api/streams/resolveByQuality
+   GET  /api/streams/resolveAll
+✅ Proxy routes registered:
+   GET /play/rd/:infoHash/:fileIdx
+   GET /play/rd/:infoHash
+✅ Subtitle routes registered:
+   GET /subtitles/search?imdbId=&type=
+   GET /subtitles/subdl/:encodedPath
+✅ All routes registered
+✅ HTTP Server configured on http://127.0.0.1:47253
+🚀 Starting HTTP server...
+✅ Providers initialized: torrentio, comet, zilean, mediafusion, debridsearch
+[ NOTICE ] Server started on http://127.0.0.1:47253
+2026-01-07 14:02:58.529 RedLemon[5902:63059] ✅ Loaded user: ursinho (ID: 656DAA91-33B4-4688-9135-C982EA52D7C9)
+2026-01-07 14:03:00.242 RedLemon[5902:63059] 🖼️ Loading background art: https://images.metahub.space/background/medium/tt1104001/img
+2026-01-07 14:03:00.243 RedLemon[5902:63059] ⏳ Background art loading...
+2026-01-07 14:03:00.243 RedLemon[5902:63059] 🎨 Loading logo: https://images.metahub.space/logo/medium/tt1104001/img
+2026-01-07 14:03:00.243 RedLemon[5902:63059] ⏳ Logo loading...
+2026-01-07 14:03:00.283 RedLemon[5902:63059]    Quality: 1080p
+2026-01-07 14:03:00.284 RedLemon[5902:63059]    Mode: watchParty
+2026-01-07 14:03:00.284 RedLemon[5902:63059] 📡 Fetching metadata for tt1104001...
+2026-01-07 14:03:00.295 RedLemon[5902:63059] ✅ RedLemon: Server marked as ready
+✅ HTTP server running on http://127.0.0.1:47253
+
+🔗 Available endpoints:
+   http://127.0.0.1:47253/health
+   http://127.0.0.1:47253/status
+   http://127.0.0.1:47253/api/health
+
+✅ [EventsConfig] Fetched movie_events version 1485 with 412 movies
+✅ [EventsConfig] Using cached movie_events config (version 1485, 412 movies)
+✅ [EventsView] Loaded 412 movies from config version 1485
+🗓 AppState: Updated schedule epoch to 2026-01-04 23:43:30 +0000
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 19:55:30 +0000
+⏰ AppState: Scheduling update in 3152 seconds
+🖼️ [CACHE] Cached image data for key: https://images.metahub.space/background/medium/tt1104001/img (1015623 bytes)
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+❌ Supabase error (404): {"code":"PGRST205","details":null,"hint":"Perhaps you meant the table 'public.users'","message":"Could not find the table 'public.user_blocks' in the schema cache"}
+⚠️ Failed to load blocked users: httpError(404, "{\"code\":\"PGRST205\",\"details\":null,\"hint\":\"Perhaps you meant the table \'public.users\'\",\"message\":\"Could not find the table \'public.user_blocks\' in the schema cache\"}")
+🔌 SocialService: Connecting to global presence...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: Presence connected
+[2026-01-07T19:02:59Z] [INFO] [EventsView.swift:253] 🎟️ Joining event: Tron: Legacy (Live: true)
+   Event start time: 2026-01-07 17:39:30 +0000
+   Event duration: 8160.0s
+   Current time: 2026-01-07 19:02:59 +0000
+   Is Live: true
+   Is In Lobby: false
+📡 Joined channel: realtime:global-presence
+✅ SocialService: Connected to global presence
+🔌 SocialService: Connecting to DM channel...
+🔌 Connecting to Supabase Realtime: wss://151.243.109.243.nip.io/realtime/v1/websocket
+✅ Connected to Supabase Realtime
+✅ SocialService: DM channel connected
+✅ Event room already exists: event_tt1104001
+
+✅ [SYNC VERIFICATION] FOUND SERVER KEY 🔑
+   UnlockedURL: https://chi7-4.downl...
+   Hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+   Quality: nil
+   FileIdx: -1
+   🔗 Locking to server-provided stream hash: 38d7c6358c1bfb522b1c78125c5cf84931f79764
+
+📨 Received: {"ref":"B45218E6-441C-4D7D-9AF4-09625B053CF5","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"31592846-ebfb-11f0-812c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiIK5qUjP86AmUC","phx_ref_prev":"GIiIJvQSSeo6AmRi","last_seen":"2026-01-07T19:02:54.509Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:01:50.154Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e came online
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c12c694-ebfb-11f0-b0a8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiILNjh9ks6Amai","last_seen":"2026-01-07T19:02:59.736Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:global-presence"}
+📈 SocialService: User 656daa91-33b4-4688-9135-c982ea52d7c9 came online
+📡 Joined channel: realtime:direct_messages
+✅ SocialService: Connected to DM channel
+🎬 Live event - calculating position: 5010.144778013229 seconds
+   Event start time: 2026-01-07 17:39:30 +0000
+   Current time: 2026-01-07 19:03:00 +0000
+   Room createdAt: 2026-01-07 17:39:30 +0000
+   Room state: playing
+   Setting resumeFromTimestamp to: 5010.144778013229
+🎬 Live event - starting playback immediately (no lobby)
+📨 Received: {"ref":"412E4919-2646-45B6-B5E6-483A249A7703","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[{"id":44215242,"event":"INSERT","filter":"receiver_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"},{"id":13418599,"event":"INSERT","filter":"sender_id=eq.656daa91-33b4-4688-9135-c982ea52d7c9","schema":"public","table":"direct_messages"}]}},"topic":"realtime:direct_messages"}
+🎬 PlayerVM: Starting playback for: Tron: Legacy
+📬 SocialService: Fetched 0 unread messages
+🔄 SocialService: Syncing 32 items to cloud...
+🔄 SocialService: Syncing 32 items to cloud (serial)...
+📨 Received: {"ref":null,"event":"system","payload":{"message":"Subscribed to PostgreSQL","status":"ok","extension":"postgres_changes","channel":"direct_messages"},"topic":"realtime:direct_messages"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{},"topic":"realtime:direct_messages"}
+[ INFO ] GET /api/metadata/meta/movie/tt1104001 [request-id: A70620A4-C922-4754-9873-5BF58FF135C8]
+2026-01-07 14:03:00.346 RedLemon[5902:63059] ✅ Logo loaded successfully
+2026-01-07 14:03:00.359 RedLemon[5902:63059] ✅ RedLemon: Server should be running on http://127.0.0.1:47253
+2026-01-07 14:03:00.359 RedLemon[5902:63059] 🔍 Performing startup checks...
+2026-01-07 14:03:00.359 RedLemon[5902:63059] ✅ Username-based authentication ready
+2026-01-07 14:03:00.360 RedLemon[5902:63059] ✅ Background art loaded successfully
+2026-01-07 14:03:00.545 RedLemon[5902:63115] 📦 Decoded CinemetaMeta - videos count: 0
+2026-01-07 14:03:00.577 RedLemon[5902:63059] 🎬 GUEST: Using host's stream selection (skipping resolution)
+2026-01-07 14:03:00.577 RedLemon[5902:63059] ⚠️ GUEST: Detected quality from filename: 1080p
+💰 LicenseManager: Checking for background crypto payments...
+💾 Cache SET: Metadata[meta_movie_tt1104001]
+
+
+✅ [SYNC VERIFICATION] LOCKING TO SHARED STREAM (SYSTEM/HOST) 🔒
+[ INFO ] GET /subtitles/search [request-id: C2A69ABC-2366-446B-8B4D-1936707256CB]
+2026-01-07 14:03:00.831 RedLemon[5902:63059] ✅ GUEST: Found 10 subtitles
+2026-01-07 14:03:00.859 RedLemon[5902:63059] 🎬🎬🎬 MPVPlayerView INIT called - streamURL: https://chi7-4.download.real-debrid.com/d/SFL46MSMV425M44/TR, subtitles: 10
+2026-01-07 14:03:00.918 RedLemon[5902:63059] ✅ Stream ready, starting playback...
+2026-01-07 14:03:00.919 RedLemon[5902:63059] 🖥️ WindowManager: enterFullscreen() called
+2026-01-07 14:03:00.919 RedLemon[5902:63059]    Window: <SwiftUI.SwiftUIWindow: 0x7fc75a117370>
+2026-01-07 14:03:00.919 RedLemon[5902:63059]    Is fullscreen: 0
+2026-01-07 14:03:00.919 RedLemon[5902:63059]    ✅ WindowManager: Toggling fullscreen ON
+2026-01-07 14:03:01.006 RedLemon[5902:63059] 🖼️ Setting up MPV with native macOS video output...
+2026-01-07 14:03:01.013 RedLemon[5902:63059] ✅ MPV initialized with native GPU rendering
+2026-01-07 14:03:01.022 RedLemon[5902:63059] 🎬🎬🎬 MPVPlayerView .task starting
+2026-01-07 14:03:01.022 RedLemon[5902:63059] 🎉 Starting watch party sync - Room: event_tt1104001, Host: NO
+2026-01-07 14:03:01.022 RedLemon[5902:63059] 🎉 Watch Party Mode ENABLED. isInWatchParty = YES
+2026-01-07 14:03:01.093 RedLemon[5902:63059] 🔄 Starting chat polling for room: event_tt1104001
+2026-01-07 14:03:01.093 RedLemon[5902:63059] 💓 Started playback heartbeat loop
+2026-01-07 14:03:01.094 RedLemon[5902:63059] ✅ Watch party sync started successfully - isInWatchParty is now TRUE
+2026-01-07 14:03:01.094 RedLemon[5902:63059] 🎬🎬🎬 About to call loadStream - isInWatchParty: YES
+2026-01-07 14:03:01.094 RedLemon[5902:63059] 🎬🎬🎬 Subtitles: 10
+2026-01-07 14:03:01.094 RedLemon[5902:63059] 🎬🎬🎬 LOADSTREAM CALLED - streamTitle: Tron: Legacy
+2026-01-07 14:03:01.094 RedLemon[5902:63059] 🎬🎬🎬 streamURL: https://chi7-4.download.real-debrid.com/d/SFL46MSMV425M44/TR
+2026-01-07 14:03:01.095 RedLemon[5902:63059] 🎬🎬🎬 subtitles: 10
+2026-01-07 14:03:01.095 RedLemon[5902:63059] 🎬🎬🎬 MPVPlayerView .task completed
+2026-01-07 14:03:01.109 RedLemon[5902:63142] ℹ️ SubDL subtitles detected - downloading to local files in background...
+2026-01-07 14:03:01.109 RedLemon[5902:63115] 🎬 MPV: Current video filename set to: 
+2026-01-07 14:03:01.109 RedLemon[5902:63115] 🎬 MPV loadVideo called with URL: https://chi7-4.download.real-debrid.com/d/SFL46MSM (Encoded: https://chi7-4.download.real-debrid.com/d/SFL46MSM), autoplay: false, expectedSubs: 3
+2026-01-07 14:03:01.109 RedLemon[5902:63142] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA=?token=BFAC8298-F830-4554-8140-BE9314A42EE6
+2026-01-07 14:03:01.110 RedLemon[5902:63115] 🎬 MPV executing: loadfile "https://chi7-4.download.real-debrid.com/d/SFL46MSMV425M44/TRON.Legacy.2010.1080p.BluRay.x264.AAC5.1-%5BYTS.MX%5D.mp4"
+2026-01-07 14:03:01.110 RedLemon[5902:63115] ✅ MPV loadfile succeeded (Started Paused, waiting for Smart Load)
+✅ SubDLClient initialized
+🔍 Searching SubDL: tt1104001 (movie)
+   ℹ️ Fallback Name: Tron: Legacy (2010)
+✅ Found 10 subtitles from SubDL (Primary)
+🎬 RedLemon: Creating MPVPlayerView
+   Stream URL: https://chi7-4.download.real-debrid.com/d/SFL46MSMV425M44/TR
+   Display Title: Tron: Legacy
+   Subtitle URLs: 10
+      [0] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [1] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [2] Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR
+      [3] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-US
+      [4] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.en-UK
+      [5] TRON.Legacy.2010.UHD.BluRay.2160p.TrueHD.Atmos.7.1.DV.HEVC.REMUX-FraMeSToR.sdh.en-US
+      [6] Tron.Legacy.2010.2160p.4K.BluRay.x265.10bit.AAC5.1-[YTS.MX].en
+      [7] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [8] Tron.Legacy.2010.OPEN.MATTE.1080p.WEB-DL
+      [9] Tron.Legacy.2010.WEB-DL.DSNP
+🎬 MPVWrapper: Creating embedded MPV with render context...
+✅ MPV handle created
+🎬 MPVLayerHostView initialized
+🎬 Event playback detected - starting auto-exit monitor
+🧠 StreamService: Marked hash 38d7c635 as attempted for tt1104001
+🎬 Created CGL pixel format (Core Profile 3.2)
+🎬 Created CGL context with vsync enabled
+🎬 MPVViewLayer initialized with async rendering
+🎬 Video layer assigned to host view
+🎬 Creating MPV render context with OpenGL (IINA method)...
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+✅ Render context created successfully (IINA method)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 CVDisplayLink started
+🎉 Starting watch party: roomId=event_tt1104001, isHost=false
+🎬 DisplayLink: reportSwap() (throttled)
+🔌 Setting up Realtime channel: watch-party:event_tt1104001
+   Role: Guest
+   User ID: 656DAA91-33B4-4688-9135-C982EA52D7C9
+📡 Connection state: connecting
+📡 Joined channel: realtime:watch-party:event_tt1104001
+📡 Connection state: connected
+✅ Realtime channel setup complete
+⏯️ MPV: Pause state changed to false -> isPlaying = true
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Watch party sync initialized with Realtime
+🎬 Loading stream: Tron: Legacy
+   IMDB: tt1104001
+   URL: https://chi7-4.download.real-debrid.com/d/SFL46MSMV425M44/TR...
+   Hash: 38d7c635...
+   Source: BluRay
+💬 Added mock chat messages for testing
+🎉 EVENT MODE: Loading PAUSED to seek first (preventing flash)
+📡 Fetching metadata for tt1104001 as movie...
+✅ Cache HIT: Metadata[meta_movie_tt1104001]
+📝 Pre-loading external subtitles (Top 3)...
+⚡️ PlaybackService: releasing sleep assertion
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMTAtMzE2MzM2MC56aXA= [request-id: DB48F218-2E0C-4945-A8CD-DBE142590933]
+2026-01-07 14:03:01.303 RedLemon[5902:63059] 💓 Playback heartbeat sent for room: event_tt1104001
+📄 Subtitle request: L3N1YnRpdGxlLzMxNDkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3149010-3163360.zip
+👁️ ChatOverlayView appeared - UI UPDATE ROUND 6
+⌨️ ChatOverlayView: Triggering input focus (showChat=true)
+📨 Received: {"ref":"19B7B1DA-7199-491D-AB17-7EB4330A57DF","event":"phx_reply","payload":{"status":"ok","response":{"postgres_changes":[]}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":null,"event":"presence_state","payload":{"528691ca-ebfb-11f0-829c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiIHJ5NslI6AmMC","is_host":false,"joined_at":1767812510.122047,"user_id":"96E01CDB-36C0-4228-A6E4-A29A3C66BC8E","username":"lemontom"}]}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":"1","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7ce0fc80-ebfb-11f0-871b-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiILSmijLw6Amhi","is_host":false,"joined_at":1767812581.0914059,"user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}},"leaves":{}},"topic":"realtime:watch-party:event_tt1104001"}
+📨 Received: {"ref":"2","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c12c694-ebfb-11f0-b0a8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiILSp8MOE6AmiC","phx_ref_prev":"GIiILNjh9ks6Amai","last_seen":"2026-01-07T19:03:01.108Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:03:01.108Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"7c12c694-ebfb-11f0-b0a8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiILNjh9ks6Amai","last_seen":"2026-01-07T19:02:59.736Z","status":"online","user_id":"656DAA91-33B4-4688-9135-C982EA52D7C9","username":"ursinho"}]}}},"topic":"realtime:global-presence"}
+✅ Got background: https://images.metahub.space/background/medium/tt1104001/img...
+✅ Got poster URL: https://images.metahub.space/poster/small/tt1104001/img...
+✅ Got logo: https://images.metahub.space/logo/medium/tt1104001/img...
+📡 SocialService: Updated status - online: Tron: Legacy
+➕ Added new participant 96e01cdb-36c0-4228-a6e4-a29a3c66bc8e (Ref: GIiIHJ5NslI6AmMC)
+⚠️ Self (656daa91-33b4-4688-9135-c982ea52d7c9) was missing from list - restoring.
+🔄 Updated existing participant 656daa91-33b4-4688-9135-c982ea52d7c9 with Ref: GIiILSmijLw6Amhi
+⏰ AppState: Next schedule update set for Event End: 2026-01-07 19:55:30 +0000
+⏰ AppState: Scheduling update in 3149 seconds
+[ WARNING ] Abort.503: SubDL download failed [request-id: DB48F218-2E0C-4945-A8CD-DBE142590933]
+2026-01-07 14:03:01.373 RedLemon[5902:63142] ✅ Subtitle 1 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7DD814D2-7067-4E58-9F5F-A773BC0BE9BF.vtt
+2026-01-07 14:03:01.373 RedLemon[5902:63142] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_7DD814D2-7067-4E58-9F5F-A77
+2026-01-07 14:03:01.394 RedLemon[5902:63142] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 14:03:01.394 RedLemon[5902:63142] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDktMzE2MzM2MS56aXA=?token=BFAC8298-F830-4554-8140-BE9314A42EE6
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDktMzE2MzM2MS56aXA= [request-id: 1886DDB8-4FE3-4EAE-BB80-C4CBE83C33D6]
+📄 Subtitle request: L3N1YnRpdGxlLzMxNDkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3149009-3163361.zip
+⏳ EVENT: Waiting for duration to start playback...
+⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)
+[ WARNING ] Abort.503: SubDL download failed [request-id: 1886DDB8-4FE3-4EAE-BB80-C4CBE83C33D6]
+2026-01-07 14:03:01.645 RedLemon[5902:63142] ✅ Subtitle 2 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_55006030-85F8-448F-A93B-FDB16DEE3B03.vtt
+2026-01-07 14:03:01.645 RedLemon[5902:63142] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_55006030-85F8-448F-A93B-FDB
+2026-01-07 14:03:01.659 RedLemon[5902:63142] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 14:03:01.659 RedLemon[5902:63142] 🔍 SubtitleService: Downloading http://127.0.0.1:47253/subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDgtMzE2MzM2Mi56aXA=?token=BFAC8298-F830-4554-8140-BE9314A42EE6
+[ INFO ] GET /subtitles/subdl/L3N1YnRpdGxlLzMxNDkwMDgtMzE2MzM2Mi56aXA= [request-id: 98F1E261-F303-4D9E-B315-C45330DAC8B9]
+📄 Subtitle request: L3N1YnRpdGxlLzMxNDkw... (offset: 0ms)
+📥 Downloading subtitle from SubDL CDN: /subtitle/3149008-3163362.zip
+[ WARNING ] Abort.503: SubDL download failed [request-id: 98F1E261-F303-4D9E-B315-C45330DAC8B9]
+2026-01-07 14:03:01.962 RedLemon[5902:63204] ✅ Subtitle 3 downloaded to: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CBF6CD91-FA55-4BBD-B99C-268A64E35ADC.vtt
+2026-01-07 14:03:01.962 RedLemon[5902:63204] 📝 Loading subtitle from: /var/folders/3v/s3d75ntd4v90_pg0mb6rmlz40000gn/T/sub_CBF6CD91-FA55-4BBD-B99C-268
+2026-01-07 14:03:01.969 RedLemon[5902:63204] ✅ External subtitle added to track list (not auto-selected)
+2026-01-07 14:03:01.970 RedLemon[5902:63204] 🔍 MPV track-list/count: 3
+2026-01-07 14:03:01.970 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:01.971 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:01.971 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:01.971 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:01.972 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:01.972 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:01.972 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:01.972 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:01.972 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:01.973 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:01.973 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:01.973 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 14:03:01.974 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:01.975 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:01.975 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:01.975 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:02.731 RedLemon[5902:63059] ⏩ Watch Party: Room already playing, skipping Ready Gate (Late Join)
+2026-01-07 14:03:03.045 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:03.126 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:03.127 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.127 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:03.127 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.127 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:03.128 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.128 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:03.128 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:03.128 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:03.128 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:03.128 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.128 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.128 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.128 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 14:03:03.129 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:03.129 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:03.129 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:03.130 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:03.130 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:03.130 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:03.130 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.130 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:03.130 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.131 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:03.131 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:03.131 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:03.131 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:03.131 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:03.131 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:03.131 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.132 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.132 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:03.132 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 14:03:03.133 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:03.133 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:03.133 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:03.134 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.209 RedLemon[5902:63116] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:04.215 RedLemon[5902:63116] 🔍 Track 0 type: sub
+2026-01-07 14:03:04.230 RedLemon[5902:63116] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.235 RedLemon[5902:63116] 🔍 Track 1 type: sub
+2026-01-07 14:03:04.244 RedLemon[5902:63116] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.249 RedLemon[5902:63116] 🔍 Track 2 type: sub
+2026-01-07 14:03:04.258 RedLemon[5902:63116] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.263 RedLemon[5902:63116] 🔍 Track 3 type: video
+2026-01-07 14:03:04.267 RedLemon[5902:63116] 🔍 Track 4 type: audio
+2026-01-07 14:03:04.268 RedLemon[5902:63116] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:04.268 RedLemon[5902:63116]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:04.268 RedLemon[5902:63116]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.268 RedLemon[5902:63116]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.268 RedLemon[5902:63116]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.277 RedLemon[5902:63116] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 14:03:04.278 RedLemon[5902:63116]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:04.278 RedLemon[5902:63116]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.278 RedLemon[5902:63116]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.279 RedLemon[5902:63116]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.283 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:04.289 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:04.307 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.312 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:04.321 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.326 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:04.340 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:04.345 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:04.350 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:04.350 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:04.350 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:04.350 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.350 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.350 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:04.360 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 14:03:04.360 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:04.360 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.361 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:04.361 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.110 RedLemon[5902:63059] 🔍 Performing startup checks...
+2026-01-07 14:03:05.111 RedLemon[5902:63059] ✅ Username-based authentication ready
+2026-01-07 14:03:05.294 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:05.294 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:05.294 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.294 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:05.294 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.295 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:05.295 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.295 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:05.295 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:05.295 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:05.295 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:05.295 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.295 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.295 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.296 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 14:03:05.296 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:05.296 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.297 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.297 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.361 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:05.362 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:05.380 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.380 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:05.380 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.380 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:05.381 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:05.381 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:05.381 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:05.381 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:05.381 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:05.382 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.382 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.382 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:05.383 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 14:03:05.384 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:05.385 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.385 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.385 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:05.706 RedLemon[5902:63059] 🔄 Checking for app updates...
+2026-01-07 14:03:06.305 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:06.305 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:06.306 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.306 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:06.306 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.306 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:06.306 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.306 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:06.307 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:06.307 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:06.307 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:06.307 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.307 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.307 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.307 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 14:03:06.308 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:06.308 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:06.308 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:06.308 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:06.394 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:06.394 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:06.394 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.394 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:06.395 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.395 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:06.395 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:06.396 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:06.396 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:06.396 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:06.396 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:06.396 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.397 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.397 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:06.397 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 14:03:06.397 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:06.398 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:06.398 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:06.398 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:07.404 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:07.405 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:07.405 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:07.405 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:07.406 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:07.406 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:07.407 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:07.407 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:07.407 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:07.407 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:07.407 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:07.407 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:07.407 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:07.408 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:07.408 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 14:03:07.408 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:07.408 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:07.409 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:07.409 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:12.519 RedLemon[5902:63142] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:12.520 RedLemon[5902:63142] 🔍 Track 0 type: sub
+2026-01-07 14:03:12.520 RedLemon[5902:63142] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:12.520 RedLemon[5902:63142] 🔍 Track 1 type: sub
+2026-01-07 14:03:12.521 RedLemon[5902:63142] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:12.521 RedLemon[5902:63142] 🔍 Track 2 type: sub
+2026-01-07 14:03:12.521 RedLemon[5902:63142] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:12.522 RedLemon[5902:63142] 🔍 Track 3 type: video
+2026-01-07 14:03:12.522 RedLemon[5902:63142] 🔍 Track 4 type: audio
+2026-01-07 14:03:12.522 RedLemon[5902:63142] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:12.522 RedLemon[5902:63142]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:12.522 RedLemon[5902:63142]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:12.522 RedLemon[5902:63142]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:12.522 RedLemon[5902:63142]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:12.523 RedLemon[5902:63142] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 14:03:12.523 RedLemon[5902:63142]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:12.523 RedLemon[5902:63142]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:12.523 RedLemon[5902:63142]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:12.524 RedLemon[5902:63142]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.616 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:13.616 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:13.617 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.618 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:13.618 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.618 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:13.618 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.618 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:13.618 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:13.619 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:13.619 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:13.619 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.619 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.619 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.619 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 14:03:13.619 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:13.620 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.620 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.620 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.647 RedLemon[5902:63142] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:13.647 RedLemon[5902:63142] 🔍 Track 0 type: sub
+2026-01-07 14:03:13.647 RedLemon[5902:63142] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.647 RedLemon[5902:63142] 🔍 Track 1 type: sub
+2026-01-07 14:03:13.647 RedLemon[5902:63142] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.647 RedLemon[5902:63142] 🔍 Track 2 type: sub
+2026-01-07 14:03:13.648 RedLemon[5902:63142] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:13.648 RedLemon[5902:63142] 🔍 Track 3 type: video
+2026-01-07 14:03:13.648 RedLemon[5902:63142] 🔍 Track 4 type: audio
+2026-01-07 14:03:13.648 RedLemon[5902:63142] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:13.648 RedLemon[5902:63142]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:13.648 RedLemon[5902:63142]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.648 RedLemon[5902:63142]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.648 RedLemon[5902:63142]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:13.649 RedLemon[5902:63142] ✅ SubtitleService: Scanned 4 tracks (Attempt 1/5)
+2026-01-07 14:03:13.649 RedLemon[5902:63142]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:13.650 RedLemon[5902:63142]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.650 RedLemon[5902:63142]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:13.650 RedLemon[5902:63142]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.442 RedLemon[5902:63059] 🖱️ Mouse: x=713/1366 y=144/768 | Exit: 0 Controls: 1 Chat: 0
+2026-01-07 14:03:14.638 RedLemon[5902:63144] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:14.638 RedLemon[5902:63144] 🔍 Track 0 type: sub
+2026-01-07 14:03:14.638 RedLemon[5902:63144] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.638 RedLemon[5902:63144] 🔍 Track 1 type: sub
+2026-01-07 14:03:14.639 RedLemon[5902:63144] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.640 RedLemon[5902:63144] 🔍 Track 2 type: sub
+2026-01-07 14:03:14.641 RedLemon[5902:63144] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.641 RedLemon[5902:63144] 🔍 Track 3 type: video
+2026-01-07 14:03:14.642 RedLemon[5902:63144] 🔍 Track 4 type: audio
+2026-01-07 14:03:14.642 RedLemon[5902:63144] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:14.642 RedLemon[5902:63144]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:14.642 RedLemon[5902:63144]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.642 RedLemon[5902:63144]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.642 RedLemon[5902:63144]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.643 RedLemon[5902:63144] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 14:03:14.643 RedLemon[5902:63144]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:14.643 RedLemon[5902:63144]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.644 RedLemon[5902:63144]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.644 RedLemon[5902:63144]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.651 RedLemon[5902:63121] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:14.651 RedLemon[5902:63121] 🔍 Track 0 type: sub
+2026-01-07 14:03:14.651 RedLemon[5902:63121] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.651 RedLemon[5902:63121] 🔍 Track 1 type: sub
+2026-01-07 14:03:14.651 RedLemon[5902:63121] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.652 RedLemon[5902:63121] 🔍 Track 2 type: sub
+2026-01-07 14:03:14.652 RedLemon[5902:63121] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:14.652 RedLemon[5902:63121] 🔍 Track 3 type: video
+2026-01-07 14:03:14.652 RedLemon[5902:63121] 🔍 Track 4 type: audio
+2026-01-07 14:03:14.652 RedLemon[5902:63121] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:14.652 RedLemon[5902:63121]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:14.652 RedLemon[5902:63121]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.653 RedLemon[5902:63121]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.653 RedLemon[5902:63121]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:14.653 RedLemon[5902:63121] ✅ SubtitleService: Scanned 4 tracks (Attempt 2/5)
+2026-01-07 14:03:14.653 RedLemon[5902:63121]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:14.654 RedLemon[5902:63121]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.654 RedLemon[5902:63121]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:14.654 RedLemon[5902:63121]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.741 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:15.741 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:15.742 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.742 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:15.742 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.742 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:15.743 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.743 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:15.743 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:15.743 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:15.743 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:15.743 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.744 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.744 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.744 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 14:03:15.744 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:15.745 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.745 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.745 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.745 RedLemon[5902:63204] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:15.746 RedLemon[5902:63204] 🔍 Track 0 type: sub
+2026-01-07 14:03:15.746 RedLemon[5902:63204] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.746 RedLemon[5902:63204] 🔍 Track 1 type: sub
+2026-01-07 14:03:15.747 RedLemon[5902:63204] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.749 RedLemon[5902:63204] 🔍 Track 2 type: sub
+2026-01-07 14:03:15.750 RedLemon[5902:63204] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:15.750 RedLemon[5902:63204] 🔍 Track 3 type: video
+2026-01-07 14:03:15.750 RedLemon[5902:63204] 🔍 Track 4 type: audio
+2026-01-07 14:03:15.750 RedLemon[5902:63204] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:15.750 RedLemon[5902:63204]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:15.751 RedLemon[5902:63204]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.751 RedLemon[5902:63204]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.751 RedLemon[5902:63204]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:15.751 RedLemon[5902:63204] ✅ SubtitleService: Scanned 4 tracks (Attempt 3/5)
+2026-01-07 14:03:15.751 RedLemon[5902:63204]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:15.752 RedLemon[5902:63204]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.752 RedLemon[5902:63204]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:15.753 RedLemon[5902:63204]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.836 RedLemon[5902:63116] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:16.837 RedLemon[5902:63116] 🔍 Track 0 type: sub
+2026-01-07 14:03:16.837 RedLemon[5902:63116] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.837 RedLemon[5902:63116] 🔍 Track 1 type: sub
+2026-01-07 14:03:16.837 RedLemon[5902:63116] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.837 RedLemon[5902:63116] 🔍 Track 2 type: sub
+2026-01-07 14:03:16.838 RedLemon[5902:63116] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.838 RedLemon[5902:63116] 🔍 Track 3 type: video
+2026-01-07 14:03:16.838 RedLemon[5902:63116] 🔍 Track 4 type: audio
+2026-01-07 14:03:16.838 RedLemon[5902:63116] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:16.838 RedLemon[5902:63116]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:16.838 RedLemon[5902:63116]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.839 RedLemon[5902:63116]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.839 RedLemon[5902:63116]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.839 RedLemon[5902:63116] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 14:03:16.839 RedLemon[5902:63116]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:16.839 RedLemon[5902:63116]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.840 RedLemon[5902:63116]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.840 RedLemon[5902:63116]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.840 RedLemon[5902:63116] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:16.840 RedLemon[5902:63116] 🔍 Track 0 type: sub
+2026-01-07 14:03:16.841 RedLemon[5902:63116] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.841 RedLemon[5902:63116] 🔍 Track 1 type: sub
+2026-01-07 14:03:16.841 RedLemon[5902:63116] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.841 RedLemon[5902:63116] 🔍 Track 2 type: sub
+2026-01-07 14:03:16.841 RedLemon[5902:63116] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:16.841 RedLemon[5902:63116] 🔍 Track 3 type: video
+2026-01-07 14:03:16.842 RedLemon[5902:63116] 🔍 Track 4 type: audio
+2026-01-07 14:03:16.843 RedLemon[5902:63116] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:16.844 RedLemon[5902:63116]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:16.844 RedLemon[5902:63116]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.845 RedLemon[5902:63116]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.845 RedLemon[5902:63116]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:16.846 RedLemon[5902:63116] ✅ SubtitleService: Scanned 4 tracks (Attempt 4/5)
+2026-01-07 14:03:16.847 RedLemon[5902:63116]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:16.848 RedLemon[5902:63116]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.848 RedLemon[5902:63116]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:16.848 RedLemon[5902:63116]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:17.866 RedLemon[5902:63116] 🔍 MPV track-list/count: 5
+2026-01-07 14:03:17.867 RedLemon[5902:63116] 🔍 Track 0 type: sub
+2026-01-07 14:03:17.867 RedLemon[5902:63116] ✅ Found subtitle track: ID=1, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:17.867 RedLemon[5902:63116] 🔍 Track 1 type: sub
+2026-01-07 14:03:17.867 RedLemon[5902:63116] ✅ Found subtitle track: ID=2, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:17.868 RedLemon[5902:63116] 🔍 Track 2 type: sub
+2026-01-07 14:03:17.868 RedLemon[5902:63116] ✅ Found subtitle track: ID=3, lang=en, title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, external=1
+2026-01-07 14:03:17.868 RedLemon[5902:63116] 🔍 Track 3 type: video
+2026-01-07 14:03:17.868 RedLemon[5902:63116] 🔍 Track 4 type: audio
+2026-01-07 14:03:17.868 RedLemon[5902:63116] 📊 Total subtitle tracks found: 4 (including Off if needed)
+2026-01-07 14:03:17.868 RedLemon[5902:63116]    Start[0]: ID=0, Title='Off', Lang='nil', Ext=0
+2026-01-07 14:03:17.869 RedLemon[5902:63116]    Start[1]: ID=1, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:17.869 RedLemon[5902:63116]    Start[2]: ID=2, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:17.869 RedLemon[5902:63116]    Start[3]: ID=3, Title='Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', Lang='en', Ext=1
+2026-01-07 14:03:17.869 RedLemon[5902:63116] ✅ SubtitleService: Scanned 4 tracks (Attempt 5/5)
+2026-01-07 14:03:17.869 RedLemon[5902:63116]    Track: ID=0, Title=Off, External=0
+2026-01-07 14:03:17.870 RedLemon[5902:63116]    Track: ID=1, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:17.870 RedLemon[5902:63116]    Track: ID=2, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+2026-01-07 14:03:17.870 RedLemon[5902:63116]    Track: ID=3, Title=Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR, External=1
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+📊 Current subtitle track: 3
+🎬 DisplayLink: reportSwap() (throttled)
+[MPV] (+) Video --vid=1 (*) (h264 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+ MPV Event: 18
+ MPV Event: 18
+🔍 SMART-LOAD: Starting track polling loop...
+🔍 SMART-LOAD: Expecting 3 external subtitles to prevent race condition
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 5012s
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 5012s
+✅ SMART-LOAD: Found 5 tracks including 3/3 external subs.
+✅ SMART-LOAD: All tracks ready! Proceeding to selection.
+📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+🎉 EVENT: File loaded/Duration ready (7508.614550240537s), preparing to seek...
+   Seeking to live edge: 5012s
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🎬 DisplayLink: reportSwap() (throttled)
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUDIO AUTO-SELECT: Starting smart audio track scan
+🔍 Track 1: Track 1 | 6ch | English: false | Commentary: false -> Score: 65
+🏆 Selected best audio track: Track 1 (ID: 1, Score: 65)
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+ MPV Event: 18
+ MPV Event: 17
+ MPV Event: 20
+[MPV] Using hardware decoding (videotoolbox).
+[MPV] AO: [coreaudio] 48000Hz stereo 2ch floatp
+[MPV] Track switched:
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+⏸️ SMART-LOAD: Staying paused (Watch Party / User Request)
+⚡️ PlaybackService: creating sleep assertion (preventing idle sleep)
+✅ Video ready - hiding poster
+🎉 EVENT: Video ready, drift is small (0.53s), skipping redundant seek
+📝 Started watch history tracking
+⚠️ onVideoReady called again - ignoring to prevent loops
+⚠️ onVideoReady called again - ignoring to prevent loops
+ MPV Event: 20
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+[MPV] VO: [libmpv] 1920x816 videotoolbox[nv12]
+ MPV Event: 17
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+⏳ MPVPlayerViewModel: Buffering finished during Event Seek - Starting 500ms Render Stabilization Timer...
+🎬 DisplayLink: reportSwap() (throttled)
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":90861,"eth":3147.045},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","arb eth_getBalance: 0x0","base eth_getBalance: 0xf6957e925"]}}
+🚫 Subscription revoked or inactive.
+💰 LicenseManager: Checking for background crypto payments...
+✅ MPVPlayerViewModel: Render Stabilization Complete - Releasing UI
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+💰 Check Payment Response: {"success":false,"message":"No new payments detected","debug":{"checked_count":1,"assets_found":[{"chain":"base","currency":"ETH","amount":66191878437,"amountFloat":6.6191878437e-8}],"prices":{"btc":90861,"eth":3147.045},"logs":[],"rpc_logs":["Scanning evm address: 0xde969b58087D2B2C4C79C2234dE8A9E2A503E1FD","eth eth_getBalance: undefined","opt eth_getBalance: undefined","poly eth_getBalance: undefined","base eth_getBalance: 0xf6957e925","arb eth_getBalance: 0x0"]}}
+🚫 Subscription revoked or inactive.
+🔍 Manual update check requested...
+⏰ TimeService: Synchronizing clock with server...
+✅ TimeService: Synced! Offset: 0.133s (RTT: 137ms)
+   Local:  2026-01-07 19:03:05 +0000
+   Server: 2026-01-07 19:03:06 +0000
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+📊 Current subtitle track: 3
+🔍 AUTO-SELECT: Starting subtitle scan & selection refresh
+🔍 AUTO-SELECT: Found 5 total tracks
+🔍 AUTO-SELECT: Track 0 - ID: 1, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 1 - ID: 2, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+🔍 AUTO-SELECT: Track 2 - ID: 3, lang: 'en', title: 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR', forced: false, default: false, HI: false, Ext: true
+✅ Auto-selecting BEST English subtitle: Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR (ID: 3) [External: true, Forced: false, Default: false, HI: false]
+   🏆 Final Score: 0 (Embedded: 0, Match: 0, Clean: 0, SDH: 0)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 3
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+📝 Set subtitle track to: 2 (async, visibility enabled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+📊 Current subtitle track: 2
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] Subs  --sid=1 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] (+) Subs  --sid=2 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 2
+📝 Set subtitle track to: 1 (async, visibility enabled)
+[MPV] Track switched:
+🔍 SubtitleService: Starting embedded track scan (polling 5s)...
+[MPV] (+) Video --vid=1 (*) (h264 [High] 1920x816 23.976fps)
+[MPV] (+) Audio --aid=1 (*) (aac [LC] 6ch 48000Hz)
+[MPV] (+) Subs  --sid=1 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=2 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+[MPV] Subs  --sid=3 --slang=en 'Tron.Legacy.2010.REPACK.BluRay.1080p.DTS-HD.MA.7.1.AVC.REMUX-FraMeSToR' (webvtt) (external)
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"31592846-ebfb-11f0-812c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiIMER3y1M6Amki","phx_ref_prev":"GIiIK5qUjP86AmUC","last_seen":"2026-01-07T19:03:14.531Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:01:50.154Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"31592846-ebfb-11f0-812c-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiIK5qUjP86AmUC","phx_ref_prev":"GIiIJvQSSeo6AmRi","last_seen":"2026-01-07T19:02:54.509Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:01:50.154Z","status":"online","user_id":"96e01cdb-36c0-4228-a6e4-a29a3c66bc8e","username":"lemontom","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+📊 Current subtitle track: 1
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+📊 Current subtitle track: 1
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)
+🎬 canDraw() = true (forceDraw:false, hasFrame:true) (throttled)
+🎬 draw() - Rendering frame! (throttled)
+📨 Received: {"ref":"3","event":"phx_reply","payload":{"status":"ok","response":{}},"topic":"realtime:global-presence"}
+📨 Received: {"ref":null,"event":"presence_diff","payload":{"joins":{"7c12c694-ebfb-11f0-b0a8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiIMYKMaGk6AmmC","phx_ref_prev":"GIiILSp8MOE6AmiC","last_seen":"2026-01-07T19:03:19.766Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:03:01.108Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}},"leaves":{"7c12c694-ebfb-11f0-b0a8-9ee62e3b7bba":{"metas":[{"phx_ref":"GIiILSp8MOE6AmiC","phx_ref_prev":"GIiILNjh9ks6Amai","last_seen":"2026-01-07T19:03:01.108Z","room_id":"event_tt1104001","started_at":"2026-01-07T19:03:01.108Z","status":"online","user_id":"656daa91-33b4-4688-9135-c982ea52d7c9","username":"ursinho","watching_id":"tt1104001","watching_title":"Tron: Legacy","watching_type":"movie"}]}}},"topic":"realtime:global-presence"}
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 DisplayLink: reportSwap() (throttled)
+🎬 MPV: Frame ready! Calling layer.update() (throttled)
+🎬 Layer.update() called - forceDraw:false needsFlip:true (throttled)

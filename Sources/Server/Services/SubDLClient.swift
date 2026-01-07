@@ -104,7 +104,13 @@ final class SubDLClient {
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 5 // 5s timeout for search
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        // Use custom session to enforce timeout (URLSession.shared often ignores request.timeoutInterval)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForResource = 5
+        let session = URLSession(configuration: config)
+
+        let (data, response) = try await session.data(for: request)
 
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
             throw Abort(.serviceUnavailable, reason: "SubDL API request failed")
@@ -224,7 +230,13 @@ final class SubDLClient {
         
         // print("🔍 Retrying URL: \(url)")
         
-        let (data, _) = try await URLSession.shared.data(for: request)
+        // Use custom session to enforce timeout
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForResource = 5
+        let session = URLSession(configuration: config)
+        
+        let (data, _) = try await session.data(for: request)
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)
         return result.subtitles ?? []
     }
@@ -255,7 +267,12 @@ final class SubDLClient {
         request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 5
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 5
+        config.timeoutIntervalForResource = 5
+        let session = URLSession(configuration: config)
+
+        let (data, _) = try await session.data(for: request)
         
         // Decode response - we expect 'results' array populated now
         let result = try JSONDecoder().decode(SubDLResponse.self, from: data)

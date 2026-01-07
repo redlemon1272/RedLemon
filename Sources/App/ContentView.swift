@@ -241,6 +241,7 @@ struct ContentView: View {
             Group {
                 if let room = appState.player.currentWatchPartyRoom {
                     WatchPartyLobbyView(room: room, isHost: appState.player.isWatchPartyHost)
+                        .id("lobby-\(room.id)")  // CRITICAL: Stable identity prevents SwiftUI from recreating the view on AppState changes
                         .environmentObject(appState)
                 } else if appState.isLoadingRoom {
                     ProgressView("Loading room...")

@@ -759,9 +759,23 @@ class SupabaseClient: RoomManager, UserManager {
             // Error 409 means user is already in the room (duplicate key).
             // We can safely ignore this and proceed as if join was successful.
             NSLog("⚠️ SupabaseClient: User already in room (409), proceeding...")
+        } catch let error as SupabaseError {
+            // Check for specific Postgres error code 23505 (Unique Violation)
+            // Sometimes Supabase returns this as a generic server error with a code
+            if case .serverError(let msg) = error, msg.contains("23505") || msg.contains("duplicate key") {
+                 NSLog("⚠️ SupabaseClient: User already in room (Duplicate Key), proceeding...")
+            } else {
+                throw error
+            }
         } catch {
-            // Re-throw other errors
-            throw error
+            // Catch generic Swift errors that might wrap the Supabase error
+            let nsError = error as NSError
+            if nsError.description.contains("23505") || nsError.localizedDescription.contains("duplicate key") {
+                NSLog("⚠️ SupabaseClient: User already in room (Generic Duplicate Key), proceeding...")
+            } else {
+                // Re-throw other errors
+                throw error
+            }
         }
     }
 

@@ -368,8 +368,13 @@ class LobbyViewModel: ObservableObject {
                         try await self.dataService.joinRoom(roomId: room.id, userId: userId, isHost: false)
                         NSLog("✅ Guest joined room \(room.id) in database")
                     } catch {
-                        // If join failed, check if it's because we're already in the room or if the room is missing
-                        if room.type == .event {
+                        // If join failed, check if it's because we're already in the room
+                        let errorStr = String(describing: error)
+                        if errorStr.contains("409") || errorStr.contains("23505") || errorStr.contains("duplicate key") {
+                             NSLog("ℹ️ Lobby: Join failed with conflict (409/Duplicate) - assuming user already joined. Proceeding...")
+                             // Proceed as success
+                        } else if room.type == .event {
+                            // Event Fallback Logic (Keep existing logic for events)
                             // Check if room exists
                             let roomExists = (try? await self.dataService.getRoomState(roomId: self.room.id)) != nil
 
@@ -406,6 +411,7 @@ class LobbyViewModel: ObservableObject {
                                 }
                             }
                         } else {
+                            // Real error for non-event rooms
                             throw error
                         }
                     }

@@ -554,11 +554,21 @@ class LobbyViewModel: ObservableObject {
                     NSLog("❌ Failed to delete room: \(error)")
                 }
             } else if let userId = currentUserId {
-                do {
-                    try await self.dataService.leaveRoom(roomId: roomId, userId: userId)
-                    NSLog("✅ Left room \(roomId) (User: \(userId))")
-                } catch {
-                    NSLog("❌ Failed to leave room: \(error)")
+                // Guest / Event Host logic
+                
+                // CRITICAL FIX: Only leave room if EXPLICITLY leaving. 
+                // Implicit disconnects (backgrounding, view reload) should NOT remove user from DB.
+                // This prevents race conditions where the old view deletes the user 
+                // just as the new view is trying to join/sync.
+                if isLeavingExplicitly {
+                    do {
+                        try await self.dataService.leaveRoom(roomId: roomId, userId: userId)
+                        NSLog("✅ Left room \(roomId) (User: \(userId))")
+                    } catch {
+                        NSLog("❌ Failed to leave room: \(error)")
+                    }
+                } else {
+                     NSLog("⚠️ Implicit disconnect for \(userId) - Preserving DB presence")
                 }
             }
 

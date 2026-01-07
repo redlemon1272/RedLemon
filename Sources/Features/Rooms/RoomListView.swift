@@ -284,12 +284,16 @@ struct RoomListView: View {
             let roomParticipants = try await SupabaseClient.shared.getRoomParticipants(roomId: room.id)
 
             // ZOMBIE CHECK: Verify host is in the participant list
+            // ZOMBIE CHECK: Verify host is in the participant list
             guard let hostData = roomParticipants.first(where: { $0.userId.uuidString == room.hostUserId.uuidString }) else {
-                print("👻 Zombie Room detected: \(room.id) (Host \(room.hostUsername) missing). Cleaning up...")
+                print("👻 Room anomaly detected: \(room.id) (Host \(room.hostUsername) missing). Hiding from list but preserving.")
+                // SAFEGUARD: Disabled aggressive zombie cleanup to prevent accidental deletion of active rooms during network blips.
+                /*
                 Task {
                     try? await SupabaseClient.shared.deleteRoom(roomId: room.id)
                     print("🧹 Distributed Cleanup: Deleted zombie room \(room.id)")
                 }
+                */
                 return nil
             }
 

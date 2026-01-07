@@ -650,13 +650,23 @@ class MPVPlayerViewModel: ObservableObject {
         self.hasVideoReadyTriggered = false
         self.hasAutoSelectedSubtitles = false // Reset auto-selection flag
 
-        // SOFT TIMEOUT: If video doesn't load in 10s, trigger fallback (faster than MPV 40s)
+        // SOFT TIMEOUT: If video doesn't load, trigger fallback (faster than MPV 40s)
+        // Watch Parties get 25s to allow for large HDR file buffering; solo playback gets 10s
+        let timeoutSeconds: UInt64 = isInWatchParty ? 25_000_000_000 : 10_000_000_000
+        let timeoutLabel = isInWatchParty ? "25s (Watch Party)" : "10s"
         self.playbackTimeoutTask = Task { @MainActor in
-             try? await Task.sleep(nanoseconds: 10_000_000_000) // 10s
+             try? await Task.sleep(nanoseconds: timeoutSeconds)
              if !Task.isCancelled {
                  // Check if we are still loading and NO file is loaded
                  if self.isLoading && !self.mpvWrapper.isFileLoaded {
-                     print("⏱️ Soft Timeout: MPV failed to load file in 10s - triggering fallback")
+                     print("⏱️ Soft Timeout: MPV failed to load file in \(timeoutLabel) - triggering fallback")
+                     
+                     // CRITICAL: If Host in Watch Party, notify guests before exiting
+                     if self.isWatchPartyHost {
+                         print("📢 Host playback timeout - notifying guests to return to lobby")
+                         await self.notifyGuestsOfHostError()
+                     }
+                     
                      self.playbackErrorTrigger.send("Playback Timeout")
                  }
              }
@@ -2289,6 +2299,42 @@ extension MPVPlayerViewModel {
                 }
             }
         }
+    }
+
+    /// Notify guests that the host experienced a playback error
+    /// This prevents guests from being stuck at the ready gate when the host's video fails to load
+    private func notifyGuestsOfHostError() async {
+        guard isWatchPartyHost else { return }
+        
+        print("🚨 notifyGuestsOfHostError: Sending returnToLobby signal due to host error")
+        
+        // Stop broadcast timer to prevent conflicting messages
+        syncBroadcastTimer?.invalidate()
+        syncBroadcastTimer = nil
+        
+        // Set a message for the lobby
+        await MainActor.run {
+            self.appState?.pendingLobbyMessage = "Playback error occurred. Returning to lobby..."
+        }
+        
+        // Send returnToLobby signal to guests
+        let message = SyncMessage(
+            type: .returnToLobby,
+            timestamp: Date().timeIntervalSince1970,
+            position: 0,
+            isPlaying: false,
+            senderId: currentUserId
+        )
+        
+        do {
+            try await realtimeManager?.sendSyncMessage(message)
+            print("✅ Host sent returnToLobby message due to error")
+        } catch {
+            print("⚠️ Failed to notify guests of host error: \(error)")
+        }
+        
+        // Small delay to ensure message propagates
+        try? await Task.sleep(nanoseconds: 300_000_000) // 0.3s
     }
 
     // MARK: - Playback Heartbeat (Room Presence)

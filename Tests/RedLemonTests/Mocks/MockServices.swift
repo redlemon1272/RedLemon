@@ -215,7 +215,7 @@ class MockRoomManager: RoomManager, UserManager {
         joinRoomCalled = true
     }
     
-    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?) async throws {
+    func updateRoomStream(roomId: String, streamHash: String?, fileIdx: Int?, quality: String?, unlockedUrl: String?, resetPlayback: Bool) async throws {
         updateStreamCalled = true
     }
     

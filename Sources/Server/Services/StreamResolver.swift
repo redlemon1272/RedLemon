@@ -749,6 +749,15 @@ actor StreamResolver {
                      }
                 }
 
+                // 7. 10-bit Penalty (Compatibility mode)
+                // Deprioritize 10-bit streams to ensure better compatibility with older hardware
+                // unless explicitly preferred (which this resolver logic assumes general case)
+                let tenBitTerms = ["10bit", "10-bit", "10 bit", "hi10p"]
+                if tenBitTerms.contains(where: { title.contains($0) }) {
+                    score -= 2000 // Significant penalty (below normal streams, but above CAM)
+                } 
+
+
                 return score
             }
 

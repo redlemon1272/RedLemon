@@ -220,8 +220,8 @@ actor StreamService: StreamResolving {
         // Completely removes anything looking like x265
         let tier1Streams = streamsToTry.compactMap { stream -> Stream? in
             let titleLower = stream.title.lowercased()
-            // Whitelist DebridSearch (User Cloud)
-            if stream.provider == "debridsearch" { return stream }
+            // REMOVED: DebridSearch whitelist. We want Strict H.264 in Tier 1.
+            // x265 Debrid streams will fall to Tier 2 (8-bit) or Tier 3 (10-bit fallback).
             let hasBadCodec = badCodecs.contains { titleLower.contains($0) }
             return hasBadCodec ? nil : stream
         }
@@ -236,7 +236,9 @@ actor StreamService: StreamResolving {
             // Tier 2: Allow x265 but BLOCK 10-bit (causes performance issues on old hardware)
             let tier2Streams = streamsToTry.compactMap { stream -> Stream? in
                 let titleLower = stream.title.lowercased()
-                let isTenBit = tenBitKeywords.contains { titleLower.contains($0) }
+                // Add "Hi10P" to 10-bit keywords
+                let extendedTenBitKeywords = tenBitKeywords + ["hi10p"]
+                let isTenBit = extendedTenBitKeywords.contains { titleLower.contains($0) }
                 if isTenBit {
                     return nil // block 10-bit
                 }

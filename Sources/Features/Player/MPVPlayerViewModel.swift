@@ -263,6 +263,13 @@ class MPVPlayerViewModel: ObservableObject {
                     if loaded {
                         // NEW: Event Playback Logic - Handle seek immediately on load
                         self.attemptEventPlaybackStart()
+
+                        // NEW: Scan for embedded tracks now that file is loaded
+                        // This handles network streams where tracks appear after the initial scan timeout
+                        Task {
+                            print("📂 MPVPlayerViewModel: File Loaded - Re-scanning embedded tracks...")
+                            await self.subtitleService.scanEmbeddedTracks()
+                        }
                         
                         // CRITICAL FIX: Watch Party Black Screen
                         // If we were stuck because duration came BEFORE file loaded (rare but possible),

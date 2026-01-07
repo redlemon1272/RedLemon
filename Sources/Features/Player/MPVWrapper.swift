@@ -372,6 +372,15 @@ class MPVWrapper: ObservableObject {
                 let reason = data.pointee.reason
                 // MPV_END_FILE_REASON_EOF = 0 means natural end of file
                 if reason.rawValue == 0 {
+                    // FIX: Debrid streams sometimes report 10s placeholder duration during initial load
+                    // If duration is suspiciously short (< 60s) AND we're still buffering or file just loaded,
+                    // this is likely a false EOF - ignore it and the stream will continue buffering
+                    if duration < 60 && (isBuffering || !isFileLoaded) {
+                        print("⏳ MPV: Ignoring premature EOF - duration \(Int(duration))s is likely a placeholder (buffering: \(isBuffering), fileLoaded: \(isFileLoaded))")
+                        Task { await SessionRecorder.shared.log(category: .player, message: "Ignoring Placeholder EOF", metadata: ["duration": "\(duration)"]) }
+                        return // Don't trigger EOF handling
+                    }
+                    
                     print("🏁 MPV: Playback finished (EOF - reason: \(reason.rawValue))")
                     print("🏁 MPV: Setting playbackFinished = true")
                     playbackFinished = true

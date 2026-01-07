@@ -274,7 +274,8 @@ class MPVPlayerViewModel: ObservableObject {
                         // CRITICAL FIX: Watch Party Black Screen
                         // If we were stuck because duration came BEFORE file loaded (rare but possible),
                         // or if buffering finished early, re-check lock release.
-                        if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering {
+                        // NOTE: Skip this for Watch Party (unless host failure fallback?), let Sync Message handle it.
+                        if self.isRefiningInitialSeek && self.duration > 0 && !self.isBuffering && !self.isInWatchParty {
                              print("🔓 MPVPlayerViewModel: File loaded - Releasing stuck UI lock (Recovery)")
                              self.isRefiningInitialSeek = false
                              withAnimation(.easeOut(duration: 0.5)) {

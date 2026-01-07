@@ -192,7 +192,11 @@ struct AdminUsersView: View {
                     .frame(width: 120)
                 
                 Menu {
+                    Button("1 Day") { grantDays = 1 }
+                    Button("3 Days") { grantDays = 3 }
+                    Button("7 Days") { grantDays = 7 }
                     Button("30 Days") { grantDays = 30 }
+                    Button("60 Days") { grantDays = 60 }
                     Button("90 Days") { grantDays = 90 }
                     Button("1 Year") { grantDays = 365 }
                     Button("Lifetime (100y)") { grantDays = 36500 }
@@ -399,7 +403,11 @@ struct AdminUsersView: View {
     
     private func durationLabel(for days: Int) -> String {
         switch days {
+        case 1: return "1 Day"
+        case 3: return "3 Days"
+        case 7: return "7 Days"
         case 30: return "30 Days"
+        case 60: return "60 Days"
         case 90: return "90 Days"
         case 365: return "1 Year"
         case 36500: return "Lifetime"

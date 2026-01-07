@@ -1439,6 +1439,48 @@ struct ReportedStream: Identifiable, Codable {
         print("🗑️ Deleted verified stream with hash: \(streamHash)")
     }
 
+    // MARK: - Blocked Streams (Blacklist)
+
+    /// Get all blocked streams (Admin)
+    func getBlockedStreams() async throws -> [BlockedStream] {
+        let data = try await makeRequest(
+            path: "/blocked_streams",
+            query: [
+                "select": "*",
+                "order": "created_at.desc"
+            ]
+        )
+        return try jsonDecoder.decode([BlockedStream].self, from: data)
+    }
+
+    /// Block a stream (Admin)
+    func blockStream(hash: String, filename: String?, provider: String?, reason: String?) async throws {
+        var body: [String: Any] = [
+            "stream_hash": hash
+        ]
+        if let f = filename { body["filename"] = f }
+        if let p = provider { body["provider"] = p }
+        if let r = reason { body["reason"] = r }
+        if let uid = auth.currentUser?.id { body["blocked_by"] = uid.uuidString }
+
+        _ = try await makeRequest(
+            path: "/blocked_streams",
+            method: "POST",
+            body: body
+        )
+        print("🚫 Blocked stream: \(hash)")
+    }
+
+    /// Unblock a stream (Admin)
+    func unblockStream(hash: String) async throws {
+        _ = try await makeRequest(
+            path: "/blocked_streams",
+            method: "DELETE",
+            query: ["stream_hash": "eq.\(hash)"]
+        )
+        print("✅ Unblocked stream: \(hash)")
+    }
+
     /// Update title for an existing verified stream (Legacy migration)
     func updateVerifiedStreamTitle(imdbId: String, title: String) async {
         do {
@@ -1835,6 +1877,27 @@ struct PaymentCheckResult: Codable {
     let success: Bool
     let premium: Bool?
     let message: String?
+}
+
+extension SupabaseClient {
+    struct BlockedStream: Codable, Identifiable {
+        var id: String { streamHash } // Conformance to Identifiable
+        let streamHash: String
+        let filename: String?
+        let provider: String?
+        let reason: String?
+        let blockedBy: UUID?
+        let createdAt: Date
+        
+        enum CodingKeys: String, CodingKey {
+            case streamHash = "stream_hash"
+            case filename
+            case provider
+            case reason
+            case blockedBy = "blocked_by"
+            case createdAt = "created_at"
+        }
+    }
 }
 
 struct AppLog: Codable, Identifiable {

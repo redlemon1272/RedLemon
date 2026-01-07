@@ -81,7 +81,7 @@ class CometService: ProviderService {
             maxResultsPerResolution: 0,
             maxSize: 0,
             cachedOnly: true,
-            removeTrash: true,
+            removeTrash: false, // User req: Allow CAMs as fallback (sorted to bottom by Resolver)
             resultFormat: ["all"],
             debridService: "realdebrid",
             debridApiKey: apiKey,
@@ -146,6 +146,19 @@ class CometService: ProviderService {
             let seeders = extractSeeders(from: stream.description ?? "")
             let size = extractSize(from: stream.description ?? "")
 
+            var finalInfoHash = infoHash?.lowercased()
+            
+            // Fix: Comet RealDebrid streams don't provide infoHash in JSON, but it's in the URL
+            // URL format: .../playback/{infoHash}/{fileIdx}/...
+            if finalInfoHash == nil, let urlStr = url {
+                 if let regex = try? NSRegularExpression(pattern: "/playback/([a-fA-F0-9]{40})"),
+                    let match = regex.firstMatch(in: urlStr, range: NSRange(urlStr.startIndex..., in: urlStr)),
+                    let range = Range(match.range(at: 1), in: urlStr) {
+                     finalInfoHash = String(urlStr[range]).lowercased()
+                     // print("🔍 Comet: Extracted infoHash from URL: \(finalInfoHash!)")
+                 }
+            }
+
             return Stream(
                 url: url,  // Use direct URL if available (RD instant streams)
                 title: title,
@@ -153,7 +166,7 @@ class CometService: ProviderService {
                 seeders: seeders,
                 size: size,
                 provider: name,
-                infoHash: infoHash?.lowercased(),  // Optional for RD streams
+                infoHash: finalInfoHash,
                 fileIdx: stream.fileIdx,
                 ext: nil,
                 behaviorHints: stream.behaviorHints,

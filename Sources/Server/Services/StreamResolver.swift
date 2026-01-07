@@ -29,6 +29,14 @@ actor StreamResolver {
         NSLog("⚡️ StreamResolver: Resolving streams for \(imdbId) (S\(season ?? 0)E\(episode ?? 0))")
         await SessionRecorder.shared.startNewSession(imdbId: imdbId)
         await SessionRecorder.shared.log(category: .resolver, message: "Started Resolution", metadata: ["type": type, "season": "\(season ?? 0)", "episode": "\(episode ?? 0)"])
+        
+        // Fetch Blacklisted Streams (Parallel)
+        // We fetch this fresh every time to ensure blocks are immediate
+        var blockedHashes: Set<String> = []
+        if let blockedList = try? await SupabaseClient.shared.getBlockedStreams() {
+            blockedHashes = Set(blockedList.map { $0.streamHash })
+            print("🛡️ StreamResolver: Loaded \(blockedHashes.count) blocked streams from blacklist")
+        }
 
         if let year = year {
 
@@ -49,6 +57,10 @@ actor StreamResolver {
         }
 
         if let verified = verifiedStream, let hash = verified.hash as String?, !hash.isEmpty {
+             // CRITICAL: Ensure verified stream isn't blacklisted (e.g. if we banned it but cache persists)
+             if blockedHashes.contains(hash) {
+                 print("🛡️ StreamResolver: Verified stream is BLACKLISTED. Ignoring verification.")
+             } else {
 
             // Check Guardrail: Soft Decay
             let isStale: Bool
@@ -97,6 +109,7 @@ actor StreamResolver {
                 hd: QualityBucket(primary: nil, alternates: nil),
                 sd: QualityBucket(primary: nil, alternates: nil)
             ))
+            }
         }
 
 
@@ -125,6 +138,22 @@ actor StreamResolver {
 
         // OPTIMIZATION: Filter streams FIRST, then attach subtitles to the survivors
         var filteredStreams = streams
+
+        // CRITICAL: Filter Blocked Streams immediately
+        if !blockedHashes.isEmpty {
+            let beforeBlockFilter = filteredStreams.count
+            filteredStreams = filteredStreams.filter { stream in
+                guard let hash = stream.infoHash else { return true }
+                if blockedHashes.contains(hash) {
+                    print("   🛡️ RESOLVER BLOCKING blacklisted stream: \(stream.title) (Hash: \(hash))")
+                    return false
+                }
+                return true
+            }
+            if filteredStreams.count < beforeBlockFilter {
+                print("   🛡️ RESOLVER FILTERED Blocked Streams: \(beforeBlockFilter) → \(filteredStreams.count) streams")
+            }
+        }
 
         // Filter by year if provided
         if let year = year {
@@ -797,6 +826,16 @@ actor StreamResolver {
         // 0. Explicit Whitelist for known Multi-Audio groups
         // 'Alusia' releases always include original audio + local dub
         if lower.contains("alusia") { return true }
+        
+        // 0.1. Allow CAM/Screener streams (User request: last resort fallback, even if dubbed/foreign)
+        let camKeywords = ["camrip", "cam-rip", "cam rip", "hdcam", "hd-cam", "screener", "dvdscr", "telesync", "hdtc"]
+        // Check strict "cam" separately to avoid false positives
+        let isSimpleCam = lower.contains(".cam.") || lower.contains(" cam ") || lower.contains("-cam-") || lower.hasSuffix(".cam")
+        
+        if isSimpleCam || camKeywords.contains(where: { lower.contains($0) }) {
+            // It's a CAM! Allow it regardless of language.
+            return true
+        }
 
         // 1. Check if explicitly marked as English FIRST
         // Use strict matching for short codes to avoid false positives (e.g. "Fr-en-ch" matching "en")

@@ -15,6 +15,7 @@ struct VerifiedStreamsView: View {
     // Data Storage
     @State private var verifiedStreams: [SupabaseClient.VerifiedStream] = []
     @State private var reportedStreams: [SupabaseClient.ReportedStream] = []
+    @State private var blockedStreams: [SupabaseClient.BlockedStream] = [] // NEW
     @State private var feedbackReports: [SupabaseClient.FeedbackReport] = []
     @State private var sessionLogs: [SessionLog] = []
     @State private var isLoading = false
@@ -38,6 +39,7 @@ struct VerifiedStreamsView: View {
             Picker("", selection: $selectedTab) {
                 Text("Verified Streams").tag("streams")
                 Text("Reported Streams").tag("reported")
+                Text("Blocked Streams").tag("blocked") // NEW
                 Text("Feedback").tag("feedback")
                 Text("Session Logs").tag("logs")
             }
@@ -68,6 +70,8 @@ struct VerifiedStreamsView: View {
             streamsList
         case "reported":
             reportedList
+        case "blocked":
+            blockedList // NEW
         case "feedback":
             feedbackList
         case "logs":
@@ -108,6 +112,9 @@ struct VerifiedStreamsView: View {
                  // Trigger title resolution for legacy reports
                  Task { await resolveMissingReportedTitles() }
                 
+            case "blocked":
+                 blockedStreams = try await SupabaseClient.shared.getBlockedStreams()
+                 
             case "feedback":
                 feedbackReports = try await SupabaseClient.shared.getFeedback()
                 
@@ -278,6 +285,8 @@ struct VerifiedStreamsView: View {
             ForEach(reportedStreams) { report in
                 ReportedStreamRow(report: report, onBan: {
                     banStream(hash: report.streamHash, reportId: report.id)
+                }, onBlock: { // NEW
+                    blockStream(report: report)
                 }, onDismiss: {
                     dismissReport(id: report.id)
                 })
@@ -288,12 +297,68 @@ struct VerifiedStreamsView: View {
     private func banStream(hash: String, reportId: UUID) {
         Task {
             do {
-                print("🚫 Banning stream hash: \(hash)")
+                print("🚫 Banning stream hash: \(hash) (Un-verifying)")
                 try await SupabaseClient.shared.deleteVerifiedStream(streamHash: hash)
                 await SupabaseClient.shared.deleteReport(id: reportId) // Auto-dismiss report after ban
                 await loadData()
             } catch {
                 print("❌ Failed to ban stream: \(error)")
+            }
+        }
+    }
+    
+    private func blockStream(report: SupabaseClient.ReportedStream) {
+        Task {
+             do {
+                 print("🛑 BLOCKING stream hash: \(report.streamHash)")
+                // Parse reason for metadata
+                 let (mainReason, _, dict) = parseReason(report.reason)
+                 
+                 // 1. Add to Blocked List
+                 try await SupabaseClient.shared.blockStream(
+                     hash: report.streamHash,
+                     filename: dict["File"] ?? "Unknown File", 
+                     provider: dict["Provider"],
+                     reason: mainReason
+                 )
+                 
+                 // 2. Also Un-verify (Ban) just in case
+                 try? await SupabaseClient.shared.deleteVerifiedStream(streamHash: report.streamHash)
+                 
+                 // 3. Dismiss Report
+                 await SupabaseClient.shared.deleteReport(id: report.id)
+                 
+                 await loadData()
+             } catch {
+                 print("❌ Failed to block stream: \(error)")
+             }
+        }
+    }
+    
+    // NEW: Blocked Streams List
+    private var blockedList: some View {
+        List {
+            if blockedStreams.isEmpty {
+                Text("No blocked streams found.")
+                    .foregroundColor(.secondary)
+                    .padding()
+            } else {
+                ForEach(blockedStreams) { stream in
+                    BlockedStreamRow(stream: stream, onUnblock: {
+                        unblockStream(hash: stream.streamHash)
+                    })
+                }
+            }
+        }
+    }
+    
+    private func unblockStream(hash: String) {
+        Task {
+            do {
+                try await SupabaseClient.shared.unblockStream(hash: hash)
+                await loadData()
+            } catch {
+                print("❌ Failed to unblock: \(error)")
             }
         }
     }
@@ -365,14 +430,13 @@ struct VerifiedStreamsView: View {
 struct ReportedStreamRow: View {
     let report: SupabaseClient.ReportedStream
     let onBan: () -> Void
+    let onBlock: () -> Void // NEW
     let onDismiss: () -> Void
     
     // Helper to extract metadata
-    private var reasonParts: (main: String, metadata: [String]) {
-        let parts = report.reason.components(separatedBy: "\n")
-        let main = parts.first ?? "Unknown"
-        let meta = parts.dropFirst().filter { $0.hasPrefix("[") && $0.hasSuffix("]") }
-        return (main, Array(meta))
+    // Returns (MainReason, [Metadata Strings], [Metadata Key:Value])
+    private var reasonParts: (main: String, metadata: [String], dict: [String:String]) {
+        return parseReason(report.reason)
     }
     
     var body: some View {
@@ -427,19 +491,33 @@ struct ReportedStreamRow: View {
             Spacer()
             
             HStack(spacing: 12) {
-                // Ban Button
+                // Ban Button (Unverify)
                 Button(action: onBan) {
                     VStack(spacing: 2) {
-                        Image(systemName: "xmark.octagon.fill")
+                        Image(systemName: "flag.slash")
+                            .font(.system(size: 16))
+                            .foregroundColor(.orange)
+                        Text("Unverify")
+                            .font(.caption2)
+                            .foregroundColor(.orange)
+                    }
+                }
+                .buttonStyle(.plain)
+                .help("Remove 'Verified' status (Soft Ban)")
+                
+                // Block Button (Blacklist)
+                Button(action: onBlock) {
+                    VStack(spacing: 2) {
+                        Image(systemName: "hand.raised.fill")
                             .font(.system(size: 16))
                             .foregroundColor(.red)
-                        Text("Ban")
+                        Text("Block")
                             .font(.caption2)
                             .foregroundColor(.red)
                     }
                 }
                 .buttonStyle(.plain)
-                .help("Delete verified stream (Ban)")
+                .help("Permanently Block Stream (Blacklist)")
                 
                 // Dismiss Button
                 Button(action: onDismiss) {
@@ -737,5 +815,93 @@ struct VerifiedStreamRow: View {
         }
         .padding(.vertical, 4)
     }
+}
+
+struct BlockedStreamRow: View {
+    let stream: SupabaseClient.BlockedStream
+    let onUnblock: () -> Void
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+               
+                HStack {
+                    Text("BLOCKED STREAM")
+                        .font(.caption.bold())
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.red)
+                        .cornerRadius(4)
+                    
+                    Text(stream.createdAt, style: .date)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                if let reason = stream.reason {
+                    Text(reason)
+                        .font(.headline)
+                        .foregroundColor(.red)
+                }
+                
+                if let provider = stream.provider {
+                    Text("Provider: \(provider)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                
+                if let filename = stream.filename {
+                    Text("File: \(filename)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+                
+                Text("Hash: \(stream.streamHash)")
+                    .font(.caption2.monospaced())
+                    .foregroundColor(.secondary)
+            }
+            
+            Spacer()
+            
+            Button(action: onUnblock) {
+                VStack(spacing: 2) {
+                    Image(systemName: "lock.open.fill")
+                        .font(.system(size: 16))
+                        .foregroundColor(.green)
+                    Text("Unblock")
+                        .font(.caption2)
+                        .foregroundColor(.green)
+                }
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+// Helper function global to the file
+private func parseReason(_ reason: String) -> (main: String, metadata: [String], dict: [String:String]) {
+    let parts = reason.components(separatedBy: "\n")
+    let main = parts.first ?? "Unknown"
+    
+    var meta: [String] = []
+    var dict: [String:String] = [:]
+    
+    for part in parts.dropFirst() {
+        if part.hasPrefix("[") && part.hasSuffix("]") {
+            meta.append(part)
+            
+            // Try to extract key-value
+            let content = String(part.dropFirst().dropLast())
+            let kv = content.components(separatedBy: ": ")
+            if kv.count == 2 {
+                dict[kv[0]] = kv[1]
+            }
+        }
+    }
+    return (main, meta, dict)
 }
 

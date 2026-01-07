@@ -269,7 +269,14 @@ class SocialService: ObservableObject {
     
     /// Validates if a room is joinable by checking if it exists in the database with a valid host.
     /// If the room doesn't exist or has no host, sets isJoinable = false for the friend's activity.
+    /// Note: Live Events (room IDs starting with "event_") are always joinable.
     private func validateRoomJoinability(userId: String, roomId: String) async {
+        // Live Events are always joinable - they don't exist in the rooms table
+        // Event room IDs follow the pattern "event_{imdbId}" (e.g., "event_tt1293847")
+        if roomId.hasPrefix("event_") {
+            return // Event is joinable, no further validation needed
+        }
+        
         do {
             // Check if room exists and has participants (including host)
             let room = try await SupabaseClient.shared.getRoomState(roomId: roomId)

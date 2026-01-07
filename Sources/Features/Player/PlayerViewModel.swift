@@ -1117,8 +1117,13 @@ class PlayerViewModel: ObservableObject {
                 return
             }
 
-            if let userId = appState.currentUserId {
-                try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: false)
+            // CRITICAL FIX: Only join here for PLAYING rooms.
+            // For lobby rooms, LobbyViewModel.connect() will handle the database join.
+            // This prevents double-join race conditions and 409 errors.
+            if room.isPlaying || roomId.hasPrefix("event_") {
+                if let userId = appState.currentUserId {
+                    try await roomManager.joinRoom(roomId: roomId, userId: userId, isHost: false)
+                }
             }
 
             // Create local WatchPartyRoom object

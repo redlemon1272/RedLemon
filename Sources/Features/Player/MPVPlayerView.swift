@@ -520,7 +520,8 @@ struct MPVPlayerView: View {
         if viewModel.isExitingToLobby {
             LoadingOverlay(streamTitle: "", message: "Returning to Lobby...")
         } else if viewModel.isLoading {
-            LoadingOverlay(streamTitle: viewModel.streamTitle)
+            let message = (viewModel.isBuffering && viewModel.mpvWrapper.isFileLoaded) ? "Buffering..." : "Loading stream..."
+            LoadingOverlay(streamTitle: viewModel.streamTitle, message: message)
         }
 
         // Waiting for guests overlay (Post-Load Ready Gate)

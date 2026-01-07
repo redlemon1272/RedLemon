@@ -517,24 +517,29 @@ class MPVWrapper: ObservableObject {
     func loadVideo(url: String, autoplay: Bool = true, expectedSubtitleCount: Int = 0) {
         // Extract filename for subtitle matching (e.g. "Movie.2023.1080p.WEBRip.mp4")
         if let urlObj = URL(string: url) {
-            self.currentVideoFilename = urlObj.lastPathComponent
-            NSLog("🎬 MPV: Current video filename set to: %@", self.currentVideoFilename)
+        NSLog("🎬 MPV: Current video filename set to: %@", self.currentVideoFilename)
         } else {
             self.currentVideoFilename = url
         }
 
-        NSLog("🎬 MPV loadVideo called with URL: %@, autoplay: %@, expectedSubs: %d", String(url.prefix(100)), autoplay ? "true" : "false", expectedSubtitleCount)
+        // CRITICAL FIX: Ensure URL is properly encoded for MPV command string
+        // Spaces in URL paths (from Real-Debrid filenames) can break the command string parser
+        let encodedUrl = url.replacingOccurrences(of: " ", with: "%20")
+                            .replacingOccurrences(of: "\"", with: "%22") // Escape quotes just in case
+
+        NSLog("🎬 MPV loadVideo called with URL: %@ (Encoded: %@), autoplay: %@, expectedSubs: %d", 
+              String(url.prefix(50)), String(encodedUrl.prefix(50)), autoplay ? "true" : "false", expectedSubtitleCount)
         
         self.expectedExternalSubtitles = expectedSubtitleCount
         
         if !isInitialized {
             NSLog("⚠️ MPV not initialized yet, waiting 500ms and retrying...")
-            Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: url, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount) } }
+            Task { @MainActor in try? await Task.sleep(nanoseconds: 500_000_000); if isInitialized { loadVideo(url: encodedUrl, autoplay: autoplay, expectedSubtitleCount: expectedSubtitleCount) } }
             return
         }
 
-        // Execute load immediately
-        executeLoadVideo(url: url, autoplay: autoplay)
+        // Execute load immediately with ENCODED URL
+        executeLoadVideo(url: encodedUrl, autoplay: autoplay)
     }
 
     private func executeLoadVideo(url: String, autoplay: Bool) {

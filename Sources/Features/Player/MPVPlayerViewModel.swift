@@ -212,7 +212,16 @@ class MPVPlayerViewModel: ObservableObject {
                         print("⏳ MPVPlayerViewModel: Enhancing UI - Buffering started (show spinner)")
                         self.isBuffering = true
                         self.isLoading = true
+                        
+                        // NEW: Buffering Timeout (45s)
+                        // If we are stuck buffering for too long, assume connection is too slow for this stream
+                        self.bufferingTimer?.invalidate()
+                        self.bufferingTimer = Timer.scheduledTimer(withTimeInterval: 45.0, repeats: false) { [weak self] _ in
+                             print("🚨 MPVPlayerViewModel: Buffering Timeout (45s) - Connection too slow, triggering Failover")
+                             self?.playbackErrorTrigger.send("Connection Timeout")
+                        }
                     } else {
+                         self.bufferingTimer?.invalidate()
                          // Buffering finished
                          if self.isSwitchingTracks {
                              // Snap-Seek Event: Switching completed, now seek to sync
@@ -396,6 +405,7 @@ class MPVPlayerViewModel: ObservableObject {
     private var syncBroadcastTimer: Timer?
     private var chatPollingTimer: Timer?
     private var lastChatMessageId: String?
+    private var bufferingTimer: Timer? // Timeout for stuck buffering
     
     // Flag to keep loading state active during event seek stabilization or initial watch party sync
     private var isRefiningInitialSeek = false
@@ -407,6 +417,10 @@ class MPVPlayerViewModel: ObservableObject {
 
     // Watch history tracking
     private var watchHistoryTimer: Timer?
+    
+    // Cleanup helper
+    // Cleanup helper
+    // (Consolidated into invalidateAllTimers)
 
     // Enhanced timer management for performance
     private var activeTimers: [Timer] = []
@@ -1743,6 +1757,10 @@ class MPVPlayerViewModel: ObservableObject {
         syncBroadcastTimer = nil
         chatPollingTimer?.invalidate()
         chatPollingTimer = nil
+        readyLoopTimer?.invalidate()
+        readyLoopTimer = nil
+        bufferingTimer?.invalidate()
+        bufferingTimer = nil
         activeTimers.forEach { $0.invalidate() }
         activeTimers.removeAll()
         print("🗑️ Invalidated all active timers")
